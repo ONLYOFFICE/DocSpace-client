@@ -3,7 +3,7 @@
   "content": "Files removed.",
   "content_en_sha1_hash": "f2c2491c5788d8e6d37267425da3272d584c7b1c",
   "created_at": "2026-05-19T19:03:16.598Z",
-  "updated_at": "2026-06-09T09:43:10.872Z",
+  "updated_at": "2026-07-07T08:59:21.805Z",
   "comment": {
     "text": "Status message in the activity history feed that appears when files are deleted.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
-      "line_number": 98,
+      "line_number": 129,
       "context": "case FeedActionKeys.FileCreated:\n case FeedActionKeys.FileUploaded:\n return t(\"Common:FileCreatedNotify\");\n case FeedActionKeys.FileDeleted:\n case FeedActionKeys.FileMovedToTrash:\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");\n case FeedActionKeys.FolderCreated:\n return t(\"Common:FolderCreatedNotify\");\n case FeedActionKeys.FolderDeleted:",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 105,
+      "line_number": 140,
       "context": "case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"Common:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Common:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Common:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:",
       "module": "/packages/sdk"
     }

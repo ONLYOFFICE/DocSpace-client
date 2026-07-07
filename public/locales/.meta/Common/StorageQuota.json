@@ -3,7 +3,7 @@
   "content": "Storage quota",
   "content_en_sha1_hash": "fbd20573f984732d839815359efcd0afd938b995",
   "created_at": "2025-05-19T21:30:49.110Z",
-  "updated_at": "2026-07-04T11:30:21.802Z",
+  "updated_at": "2026-07-07T08:59:21.689Z",
   "comment": {
     "text": "This is a label for a setting related to storage limits, or a filter option to display items based on their storage quota. It appears in a form for managing room quotas and in a filter menu.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/room-quota/index.tsx",
-      "line_number": 66,
+      "line_number": 101,
       "context": "const defaultValue = useRef(roomParams.quota ?? 0);\n \n return (\n <QuotaForm\n label={t(\"Common:StorageQuota\", { defaultValue: \"Storage quota\" })}\n description={\n isAgent\n ? t(\"CreateEditRoomDialog:StorageDescriptionAgent\", {\n defaultValue:\n \"Set a storage quota for this agent. When the limit is reached, new files cannot be uploaded.\",",
       "module": "/packages/sdk"
     }

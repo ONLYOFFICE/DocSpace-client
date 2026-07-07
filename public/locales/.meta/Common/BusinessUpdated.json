@@ -3,7 +3,7 @@
   "content": "{{planName}} plan updated",
   "content_en_sha1_hash": "d072992aaddc06db95b3109b8a055ea6d40dc9e2",
   "created_at": "2026-04-10T13:53:42.147Z",
-  "updated_at": "2026-07-04T11:30:22.042Z",
+  "updated_at": "2026-07-07T08:59:22.043Z",
   "comment": {
     "text": "This is a toast message confirming that a user's subscription plan has been successfully updated. `{{planName}}` will be replaced with the name of the updated plan (e.g., \"Business\", \"Enterprise\").",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1432,
+      "line_number": 1454,
       "context": "this.fetchBalance(true),\n this.quotas.fetchPortalQuota(true),\n ]);\n \n toastr.success(\n t(\"BusinessUpdated\", { planName: this.quotas.currentTariffPlanTitle }),\n );\n \n return true;\n } catch (e) {\n console.error(e);",
       "module": "/libs/ui-kit"
     }

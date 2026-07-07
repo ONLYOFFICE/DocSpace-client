@@ -3,7 +3,7 @@
   "content": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
   "content_en_sha1_hash": "20ce08c09436c3c194cad585911b27acbc08353b",
   "created_at": "2025-05-19T21:30:56.918Z",
-  "updated_at": "2026-04-11T21:04:04.316Z",
+  "updated_at": "2026-07-07T08:59:21.716Z",
   "comment": {
     "text": "This is a dialog message informing the user that a guest will be promoted to an administrator. It explains the new permissions and access rights of the promoted user. `{{userName}}` is the guest's name, `{{membersSection}}` is the name of the section where members are listed, `{{secondType}}` is the new user type (Admin), `{{productName}}` is the application name, and `{{documentsSection}}` is the name of the section where documents are stored.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/getChangeTypeKey.ts",
-      "line_number": 26,
+      "line_number": 61,
       "context": "const values = userName ? { ...restValues, userName } : restValues;\n \n const translateKey: Record<TranslationType, Record<EmployeeType, string>> = {\n single: {\n [EmployeeType.RoomAdmin]: `${t(\"ChangeGuestsTypeToManager\", values)}`,\n [EmployeeType.Admin]: `${t(\"ChangeGuestsTypeToAdmin\", values)}`,\n [EmployeeType.User]: `${t(\"ChangeGuestsTypeMessage\", values)}`,\n [EmployeeType.Guest]: \"\",\n [EmployeeType.Owner]: \"\",\n },\n multiple: {",
       "module": "/packages/client"
     }

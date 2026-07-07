@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-07-04T11:30:21.805Z",
+  "updated_at": "2026-07-07T08:59:21.695Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -103,13 +103,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/index.tsx",
-      "line_number": 106,
+      "line_number": 141,
       "context": "isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\", {\n defaultValue: \"Advanced filter\",\n })}\n placeholder={t(\"Common:Search\", { defaultValue: \"Search\" })}\n view={t(\"Common:View\", { defaultValue: \"View\" })}\n filterTitle={t(\"Common:Filter\", { defaultValue: \"Filter\" })}\n sortByTitle={t(\"Common:SortBy\", { defaultValue: \"Sort by\" })}\n selectorLabel=\"\"\n isIndexing={false}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/index.tsx",
-      "line_number": 121,
+      "line_number": 152,
       "context": "isRecentFolder={!!config.isRecentFolder}\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\", {\n defaultValue: \"Advanced filter\",\n })}\n placeholder={t(\"Common:Search\", { defaultValue: \"Search\" })}\n view={t(\"Common:View\", { defaultValue: \"View\" })}\n filterTitle={t(\"Common:Filter\", { defaultValue: \"Filter\" })}\n sortByTitle={t(\"Common:SortBy\", { defaultValue: \"Sort by\" })}\n selectorLabel=\"\"\n isIndexing={false}",
       "module": "/packages/sdk"
     },
@@ -127,7 +127,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-filter/index.tsx",
-      "line_number": 55,
+      "line_number": 90,
       "context": "<SearchInput\n style={{ marginBottom: \"16px\" }}\n id=\"forms-filter_search-input\"\n size={InputSize.base}\n value={searchValue}\n placeholder={t(\"Common:Search\")}\n scale\n onChange={setSearchValue}\n onClearSearch={() => setSearchValue(\"\")}\n showMainButton={showMainButton}\n mainButtonProps={mainButtonProps}",
       "module": "/packages/sdk"
     },

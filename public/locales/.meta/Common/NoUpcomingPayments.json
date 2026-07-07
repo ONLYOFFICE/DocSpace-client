@@ -3,7 +3,7 @@
   "content": "No upcoming payments",
   "content_en_sha1_hash": "44d2c34db64573324af869b4a71ab0338b1bf683",
   "created_at": "2026-06-25T11:54:53.918Z",
-  "updated_at": "2026-06-25T12:03:37.705Z",
+  "updated_at": "2026-07-07T08:59:22.052Z",
   "comment": {
     "text": "Title for an empty state view in the billing wallet section, appearing when no scheduled payments are listed.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/UpcomingPayments.tsx",
+      "line_number": 76,
+      "context": "</Text>\n <Text fontSize=\"18px\" fontWeight={700}>\n {formatWalletCurrency(upcomingTotal, 2, walletCodeCurrency)}\n </Text>\n {upcomingPayments.length === 0 ? (\n <Text fontSize=\"12px\">{t(\"NoUpcomingPayments\")}</Text>\n ) : upcomingSummary ? (\n <Text fontSize=\"12px\" truncate>\n {upcomingSummary}\n </Text>\n ) : null}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/index.tsx",
       "line_number": 75,

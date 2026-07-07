@@ -3,7 +3,7 @@
   "content": "Add people by name or email",
   "content_en_sha1_hash": "8293f0c6e55cfbc44981432a63a2fcdf69e93014",
   "created_at": "2025-05-26T07:15:53.257Z",
-  "updated_at": "2026-06-15T19:31:56.020Z",
+  "updated_at": "2026-07-07T08:59:21.769Z",
   "comment": {
     "text": "This is a placeholder text for an input field. It appears when inviting users to a room, prompting them to enter names or email addresses.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteInput.tsx",
-      "line_number": 604,
+      "line_number": 639,
       "context": "className=\"invite-input\"\n scale\n onChange={onChange}\n placeholder={\n !allowInvitingGuests\n ? t(\"Common:InviteToRoomAddPlaceholder\")\n : t(\"Common:InviteToRoomSearchPlaceholder\")\n }\n value={inputValue}\n onKeyDown={onKeyDown}\n type={InputType.search}",
       "module": "/packages/sdk"
     }

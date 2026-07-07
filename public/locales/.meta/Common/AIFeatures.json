@@ -3,7 +3,7 @@
   "content": "AI features",
   "content_en_sha1_hash": "59f0c687f2560552c920af9e6c0850fc4715bf49",
   "created_at": "2026-06-03T11:45:29.424Z",
-  "updated_at": "2026-07-03T11:08:02.819Z",
+  "updated_at": "2026-07-07T08:59:21.698Z",
   "comment": {
     "text": "Menu item label in the context menu that contains AI-related sub-options.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 614,
+      "line_number": 615,
       "context": "{\n id: \"portal-settings_catalog-services-ai-services\",\n key: \"10-3-0\",\n icon: \"\",\n link: \"ai-services\",\n tKey: \"Common:AIFeatures\",\n },\n {\n id: \"portal-settings_catalog-services-backup\",\n key: \"10-3-1\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 587,
+      "line_number": 622,
       "context": "const getAIFeaturesItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_ai-features\",\n key: \"ai-features\",\n label: t(\"Common:AIFeatures\"),\n icon: AISvgUrl,\n items: [getAskAIItem(i)],\n };\n },\n [t, getAskAIItem],",
       "module": "/packages/sdk"
     }

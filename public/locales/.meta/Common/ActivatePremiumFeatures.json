@@ -3,7 +3,7 @@
   "content": "Activate premium features",
   "content_en_sha1_hash": "a09eeae51b787b62ab461e78c5da32c0d47afb85",
   "created_at": "2026-06-01T21:20:38.356Z",
-  "updated_at": "2026-06-01T21:47:45.399Z",
+  "updated_at": "2026-07-07T08:59:21.792Z",
   "comment": {
     "text": "Link label in the dashboard header that appears for users on a free plan to prompt an upgrade.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
-      "line_number": 77,
+      "line_number": 112,
       "context": "type={LinkType.action}\n onClick={() => navigate(\"/portal-settings/payments/portal-payments\")}\n isHovered\n >\n {isFreeTariff\n ? t(\"Common:ActivatePremiumFeatures\")\n : t(\"Common:CustomizeYourPlan\", {\n plan: t(\"Common:BusinessPlan\"),\n })}\n </Link>\n </div>",
       "module": "/packages/client"
     }

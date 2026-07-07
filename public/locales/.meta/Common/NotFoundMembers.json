@@ -3,7 +3,7 @@
   "content": "No members found",
   "content_en_sha1_hash": "2f9524453596c315ea26d2daec2af8d6792b16f1",
   "created_at": "2025-05-19T21:30:46.909Z",
-  "updated_at": "2026-07-04T11:30:21.844Z",
+  "updated_at": "2026-07-07T08:59:21.759Z",
   "comment": {
     "text": "This is an empty state header text displayed when no members are found after applying a filter or search in a people selector.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/members.tsx",
-      "line_number": 81,
+      "line_number": 112,
       "context": "}\n \n if (!members || members.length === 0) {\n return (\n <div className={styles.emptyState}>\n <Text fontSize=\"13px\">{t(\"Common:NotFoundMembers\")}</Text>\n </div>\n );\n }\n \n return (",
       "module": "/packages/sdk"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/change-room-owner-dialog/index.tsx",
-      "line_number": 151,
+      "line_number": 186,
       "context": "{...infoProps}\n withOutCurrentAuthorizedUser\n filterUserId={roomOwnerId}\n currentUserId={currentUserId}\n disableDisabledUsers\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={infoText}\n className={styles.changeOwnerPeopleSelector}\n data-test-id=\"change_owner_people_selector\"\n />\n </div>",
       "module": "/packages/sdk"
     },

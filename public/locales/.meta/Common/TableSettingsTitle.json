@@ -3,7 +3,7 @@
   "content": "Manage displayed columns",
   "content_en_sha1_hash": "edef33d6c30b6b2dbcd0652de4bbdd3b72cfe10e",
   "created_at": "2026-06-03T09:30:00.117Z",
-  "updated_at": "2026-06-09T09:43:10.882Z",
+  "updated_at": "2026-07-07T08:59:21.822Z",
   "comment": {
     "text": "Title of the settings panel or dialog used to configure column visibility in a table view.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-table-view/index.tsx",
-      "line_number": 214,
+      "line_number": 249,
       "context": "useReactWindow={!isSSR}\n sortBy={filterSortBy ?? undefined}\n sorted={filterSortOrder === \"descending\"}\n sortingVisible\n showSettings\n settingsTitle={t(\"Common:TableSettingsTitle\")}\n infoPanelVisible={infoPanelVisible}\n />\n <TableBody\n columnStorageName={COLUMN_STORAGE_NAME}\n columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}",
       "module": "/packages/sdk"
     }

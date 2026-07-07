@@ -3,7 +3,7 @@
   "content": "Disable quota for this room",
   "content_en_sha1_hash": "5436cd032d1bc297d0b70db7a712281ddfd02ce0",
   "created_at": "2025-05-19T21:30:56.795Z",
-  "updated_at": "2026-05-24T17:27:49.071Z",
+  "updated_at": "2026-07-07T08:59:21.689Z",
   "comment": {
     "text": "This is a checkbox label. It allows the user to disable the storage quota for a specific room.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/room-quota/index.tsx",
-      "line_number": 82,
+      "line_number": 117,
       "context": "checkboxLabel={\n isAgent\n ? t(\"CreateEditRoomDialog:DisableRoomQuotaAgent\", {\n defaultValue: \"Disable storage quota for this agent\",\n })\n : t(\"CreateEditRoomDialog:DisableRoomQuota\", {\n defaultValue: \"Disable storage quota\",\n })\n }\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n initialSize={isEdit ? defaultValue.current : (defaultQuota ?? 0)}",
       "module": "/packages/sdk"
     }

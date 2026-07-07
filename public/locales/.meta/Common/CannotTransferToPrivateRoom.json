@@ -3,7 +3,7 @@
   "content": "You can't move or copy items into a private room. Upload files directly to the room to keep them encrypted.",
   "content_en_sha1_hash": "291dbad0c890447f1a955d50dd6b3dfc9b69e5d6",
   "created_at": "2026-06-09T09:42:36.027Z",
-  "updated_at": "2026-07-04T11:30:21.792Z",
+  "updated_at": "2026-07-07T08:59:21.675Z",
   "comment": {
     "text": "Error toast message appearing when attempting to move or copy items from a non-private source into a private room.",
     "is_auto": true,
@@ -18,8 +18,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2451,
+      "file_path": "/packages/client/src/store/FilesActionsStore.ts",
+      "line_number": 2762,
       "context": "destFolderInfo?.rootFolderType === FolderType.Rooms;\n const isPrivateDestination =\n destFolderInfo?.private === true || isDestInsideSameRoom;\n \n if (isPrivateDestination && !sourceInPrivateRoom) {\n toastr.error(i18n.t(\"Common:CannotTransferToPrivateRoom\"));\n return;\n }\n \n if (!isPrivateDestination && sourceInPrivateRoom) {\n const { bufferSelection: dragBufferSelection } = this.filesStore;",
       "module": "/packages/client"
     },

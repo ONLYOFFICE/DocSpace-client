@@ -3,7 +3,7 @@
   "content": "The selected <strong>rooms ({{count}})</strong> will be permanently deleted. All data and user access will be lost.",
   "content_en_sha1_hash": "38a5fd65a97e8bf2123aff84be837e41f2905615",
   "created_at": "2026-04-03T21:51:39.679Z",
-  "updated_at": "2026-06-30T10:18:29.540Z",
+  "updated_at": "2026-07-07T08:59:21.740Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user attempts to delete multiple rooms. It informs the user that the selected rooms will be permanently deleted, along with all associated data and user access. The `{{count}}` variable represents the number of rooms selected for deletion.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/delete-room-dialog/index.tsx",
-      "line_number": 107,
+      "line_number": 142,
       "context": "/>\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"DeleteRooms\"\n values={{ count }}\n components={{ strong: <strong key=\"strong\" /> }}\n />\n )}\n </Text>",
       "module": "/packages/sdk"
     }

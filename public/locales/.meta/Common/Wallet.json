@@ -3,7 +3,7 @@
   "content": "Wallet",
   "content_en_sha1_hash": "b60862f4855a392f00cc9f27e0862c0b979075a6",
   "created_at": "2026-04-10T13:53:43.879Z",
-  "updated_at": "2026-06-30T10:18:29.599Z",
+  "updated_at": "2026-07-07T08:59:21.878Z",
   "comment": {
     "text": "This is a navigation item label in the portal settings, referring to the section where users manage their payment information and balance.",
     "is_auto": true,
@@ -18,14 +18,14 @@
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 135,
-      "context": "clearAbortControllerArr();\n },\n },\n {\n id: TAB_IDS.WALLET,\n name: t(\"Common:Wallet\"),\n content: (\n <Wallet\n onViewUsage={() => onSelect({ id: TAB_IDS.USAGE })}\n onAddonsClick={() => onSelect({ id: TAB_IDS.ADDONS })}\n />",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
+      "line_number": 47,
+      "context": "import ArrowPathReactSvgUrl from \"PUBLIC_DIR/images/arrow.path.react.svg?url\";\n \n import styles from \"./BillingHeader.module.scss\";\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/billing/wallet\")) return t(\"Common:Wallet\");\n if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 598,
+      "line_number": 599,
       "context": "{\n id: \"portal-settings_catalog-wallet\",\n key: \"10-2\",\n icon: \"\",\n link: \"wallet\",\n tKey: \"Common:Wallet\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-services\",\n key: \"10-3\",",
       "module": "/packages/client"
     }

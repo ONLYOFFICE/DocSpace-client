@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-07-03T11:08:02.793Z",
+  "updated_at": "2026-07-07T08:59:21.657Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 100,
+      "line_number": 135,
       "context": "openLabel: t(\"Common:Open\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {\n title: t(\"Common:Rooms\"),\n subtitle: t(\"Common:RoomsPromoSubtitle\"),\n description: t(\"Common:RoomsPromoDescription\"),\n features: [\n {\n Icon: CollaborationRoomIcon,",
       "module": "/packages/client"
     },
@@ -61,19 +61,19 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 331,
+      "line_number": 339,
       "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 331,
+      "line_number": 339,
       "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 331,
+      "line_number": 339,
       "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
@@ -97,20 +97,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 404,
+      "line_number": 439,
       "context": "<Checkbox\n dataTestId=\"applies_to_rooms_checkbox\"\n isChecked={applyToRooms}\n onChange={() => setApplyToRooms(!applyToRooms)}\n label={t(\"Settings:AppliesToRooms\", {\n rooms: t(\"Common:Rooms\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 404,
+      "line_number": 439,
       "context": "<Checkbox\n dataTestId=\"applies_to_rooms_checkbox\"\n isChecked={applyToRooms}\n onChange={() => setApplyToRooms(!applyToRooms)}\n label={t(\"Settings:AppliesToRooms\", {\n rooms: t(\"Common:Rooms\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
       "line_number": 82,
-      "context": "{\n label: t(\"Common:Files\"),\n key: FolderType.USER,\n },\n {\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:SharedWithMe\"),\n key: FolderType.SHARE,",
+      "context": "{\n label: t(\"Common:Files\"),\n key: FolderType.USER,\n },\n {\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,",
       "module": "/packages/client"
     },
     {
@@ -132,20 +132,20 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/TreeFoldersStore.js",
-      "line_number": 85,
+      "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
+      "line_number": 114,
       "context": "break;\n case FolderType.SHARE:\n folder.title = i18n.t(\"Common:SharedWithMe\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
-      "line_number": 119,
+      "line_number": 154,
       "context": "productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n defaultValue:\n \"Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.\",\n }),\n icon: <UploadPDFFormIcon />,\n onClick: onUploadFromDocSpace,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/empty-view/index.tsx",
-      "line_number": 121,
+      "line_number": 156,
       "context": "if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\", {\n productName: getBrandName(\"ProductName\"),\n });\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n };\n \n const getOptions = () => {\n if (isFiltered) return filterOptions;",
       "module": "/packages/sdk"
     },

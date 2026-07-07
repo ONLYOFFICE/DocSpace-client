@@ -3,7 +3,7 @@
   "content": "Files and folders uploaded by admins will appeared here.",
   "content_en_sha1_hash": "eccdca0f20c32ad17dffa7f5520072fef3017029",
   "created_at": "2025-05-19T21:30:49.465Z",
-  "updated_at": "2026-06-30T10:18:29.512Z",
+  "updated_at": "2026-07-07T08:59:21.665Z",
   "comment": {
     "text": "This text appears in an empty folder view for a regular user, indicating that files and folders uploaded by administrators will be displayed there.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
-      "line_number": 154,
+      "line_number": 189,
       "context": "defaultValue:\n \"Files generated in {{aiChat}} will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.\",\n aiChat: t(\"Common:AIChat\"),\n });\n default:\n return t(\"Common:UserEmptyDescription\");\n }\n };",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
-      "line_number": 123,
+      "line_number": 158,
       "context": ");\n }\n };\n \n export const getDescription = (t: TTranslation) => {\n return t(\"Common:UserEmptyDescription\");\n };",
       "module": "/packages/sdk"
     }

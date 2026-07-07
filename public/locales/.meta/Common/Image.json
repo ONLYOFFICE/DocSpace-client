@@ -3,7 +3,7 @@
   "content": "Image",
   "content_en_sha1_hash": "50e19fda0d5b4b74a4a1a1d584e56578693a4ea4",
   "created_at": "2025-05-19T21:30:45.827Z",
-  "updated_at": "2026-06-02T22:18:05.015Z",
+  "updated_at": "2026-07-07T08:59:21.738Z",
   "comment": {
     "text": "This is a label for the file type \"Image\" in various contexts, such as a radio button option for watermarks or a file type indicator in a table view.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 19,
+      "line_number": 54,
       "context": "case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Diagram:",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Create agent",
   "content_en_sha1_hash": "17cf5f17ee7582a32c8aafee5e97afab41b7280c",
   "created_at": "2025-11-17T07:51:13.979Z",
-  "updated_at": "2026-07-03T11:08:02.831Z",
+  "updated_at": "2026-07-07T08:59:21.724Z",
   "comment": {
     "text": "This is the title of a dialog window that appears when a user initiates the process of creating a new agent.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/index.tsx",
-      "line_number": 194,
+      "line_number": 229,
       "context": "initedSelectedServers={initSelectedServers}\n />\n </ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>{t(\"Common:CreateAgent\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetAgentParams\n tagHandler={tagHandler}\n agentParams={agentParams}",
       "module": "/packages/sdk"
     }

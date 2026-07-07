@@ -79,6 +79,9 @@ const PAYMENTS_URL = combineUrl(
   PROXY_HOMEPAGE_URL,
   "/portal-settings/payments/portal-payments",
 );
+// SaaS billing lands on the overview; standalone keeps the classic portal
+// tariff page (PAYMENTS_URL).
+const BILLING_OVERVIEW_URL = combineUrl(PROXY_HOMEPAGE_URL, "/billing/overview");
 
 // const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
 
@@ -213,11 +216,11 @@ class ProfileActionsStore {
     window.open(SPACES_URL, "_blank");
   };
 
-  onPaymentsClick = (obj) => {
-    if (openingNewTab(PAYMENTS_URL, obj.originalEvent)) return;
+  onPaymentsClick = (obj, url = PAYMENTS_URL) => {
+    if (openingNewTab(url, obj.originalEvent)) return;
 
     this.selectedFolderStore.setSelectedFolder(null);
-    window.DocSpace.navigate(PAYMENTS_URL);
+    window.DocSpace.navigate(url);
   };
 
   onHelpCenterClick = () => {
@@ -471,9 +474,13 @@ class ProfileActionsStore {
           key: "user-menu-payments",
           icon: PaymentsReactSvgUrl,
           label: standalone ? t("Common:PaymentsTitle") : t("Common:Billing"),
-          onClick: (obj) => this.onPaymentsClick(obj),
+          onClick: (obj) =>
+            this.onPaymentsClick(
+              obj,
+              standalone ? PAYMENTS_URL : BILLING_OVERVIEW_URL,
+            ),
           additionalElement: <TariffBar />,
-          url: PAYMENTS_URL,
+          url: standalone ? PAYMENTS_URL : BILLING_OVERVIEW_URL,
           preventNewTab: true,
         },
       !isNotPaidPeriod && {

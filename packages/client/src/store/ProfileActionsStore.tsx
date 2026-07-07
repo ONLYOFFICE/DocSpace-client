@@ -138,7 +138,10 @@ const PAYMENTS_URL = combineUrl(
 );
 // SaaS billing lands on the overview; standalone keeps the classic portal
 // tariff page (PAYMENTS_URL).
-const BILLING_OVERVIEW_URL = combineUrl(PROXY_HOMEPAGE_URL, "/billing/overview");
+const BILLING_OVERVIEW_URL = combineUrl(
+  PROXY_HOMEPAGE_URL,
+  "/billing/overview",
+);
 
 // const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
 
@@ -289,8 +292,8 @@ class ProfileActionsStore {
     window.open(SPACES_URL, "_blank");
   };
 
-  onPaymentsClick = (obj, url = PAYMENTS_URL) => {
-    if (openingNewTab(url, obj.originalEvent)) return;
+  onPaymentsClick = (obj: TContextMenuValueTypeOnClick, url = PAYMENTS_URL) => {
+    if (openingNewTab(url, (obj as TClickEventObj).originalEvent)) return;
 
     this.selectedFolderStore.setSelectedFolder(null);
     window.DocSpace.navigate(url);
@@ -677,3 +680,4 @@ class ProfileActionsStore {
 }
 
 export default ProfileActionsStore;
+

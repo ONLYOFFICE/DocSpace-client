@@ -194,6 +194,10 @@ import type {
 } from "./filesStore/types";
 import { buildFilesListItems } from "./filesStore/filesList.helpers";
 import { buildContextOptions } from "./filesStore/contextOptions.helpers";
+import {
+  isFileChecked,
+  filterFilesBySelected,
+} from "./filesStore/selection.helpers";
 
 export type { TItem, TItemSecurity } from "./filesStore/types";
 
@@ -1621,67 +1625,17 @@ class FilesStore {
     this.updateFolder(index, folder);
   };
 
-  getFilesChecked = (file: TItem, selected: string) => {
-    if (!file.parentId) {
-      if (this.activeFiles.find((elem) => elem.id === file.id)) return false;
-    } else if (this.activeFolders.find((elem) => elem.id === file.id))
-      return false;
-
-    const type = file.fileType;
-    const roomType = file.roomType;
-
-    switch (selected) {
-      case "all":
-        return true;
-      case FilterType.FoldersOnly.toString():
-        return file.parentId;
-      case FilterType.DocumentsOnly.toString():
-        return type === FileType.Document;
-      case FilterType.PresentationsOnly.toString():
-        return type === FileType.Presentation;
-      case FilterType.SpreadsheetsOnly.toString():
-        return type === FileType.Spreadsheet;
-      case FilterType.ImagesOnly.toString():
-        return type === FileType.Image;
-      case FilterType.MediaOnly.toString():
-        return type === FileType.Video || type === FileType.Audio;
-      case FilterType.ArchiveOnly.toString():
-        return type === FileType.Archive;
-      case FilterType.FilesOnly.toString():
-        return type || !file.parentId;
-      case `room-${(RoomsType as TRemovedRoomsTypes).FillingFormsRoom}`:
-        return roomType === (RoomsType as TRemovedRoomsTypes).FillingFormsRoom;
-      case `room-${RoomsType.CustomRoom}`:
-        return roomType === RoomsType.CustomRoom;
-      case `room-${RoomsType.AIRoom}`:
-        return roomType === RoomsType.AIRoom;
-      case `room-${RoomsType.EditingRoom}`:
-        return roomType === RoomsType.EditingRoom;
-      case `room-${(RoomsType as TRemovedRoomsTypes).ReviewRoom}`:
-        return roomType === (RoomsType as TRemovedRoomsTypes).ReviewRoom;
-      case `room-${(RoomsType as TRemovedRoomsTypes).ReadOnlyRoom}`:
-        return roomType === (RoomsType as TRemovedRoomsTypes).ReadOnlyRoom;
-      case `room-${RoomsType.FormRoom}`:
-        return roomType === RoomsType.FormRoom;
-      case `room-${RoomsType.PublicRoom}`:
-        return roomType === RoomsType.PublicRoom;
-      case `room-${RoomsType.VirtualDataRoom}`:
-        return roomType === RoomsType.VirtualDataRoom;
-      default:
-        return false;
-    }
-  };
-
-  getFilesBySelected = (files: TItem[], selected: string) => {
-    const newSelection: TItem[] = [];
-    files.forEach((file) => {
-      const checked = this.getFilesChecked(file, selected);
-
-      if (checked) newSelection.push(file);
+  getFilesChecked = (file: TItem, selected: string) =>
+    isFileChecked(file, selected, {
+      activeFiles: this.activeFiles,
+      activeFolders: this.activeFolders,
     });
 
-    return newSelection;
-  };
+  getFilesBySelected = (files: TItem[], selected: string) =>
+    filterFilesBySelected(files, selected, {
+      activeFiles: this.activeFiles,
+      activeFolders: this.activeFolders,
+    });
 
   setSelected = (selected: string, clearBuffer = true) => {
     if (selected === "close" || selected === "none") {

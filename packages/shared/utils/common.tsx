@@ -960,8 +960,11 @@ export const toUrlParams = (
 
     const item = obj[key];
 
-    // added for double employeetype or room type
-    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
+    // added for double employeetype, room type or folder type
+    if (
+      Array.isArray(item) &&
+      (key === "employeetypes" || key === "type" || key === "folderType")
+    ) {
       for (let i = 0; i < item.length; i += 1) {
         str += `${key}=${encodeURIComponent(item[i])}`;
         if (i !== item.length - 1) {

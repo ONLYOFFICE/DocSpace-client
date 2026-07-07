@@ -762,7 +762,9 @@ export const deleteNewAiAgent = async (id: TAgent["id"]) => {
   await request({ method: "DELETE", url: `${newAiBaseUrl}/${id}`, data: {} });
 };
 
-export const resetNewAiAgentQuota = async (roomIds: TAgent["id"]) => {
+export const resetNewAiAgentQuota = async (
+  roomIds: TAgent["id"] | TAgent["id"][],
+) => {
   return request({
     method: "put",
     url: `${newAiBaseUrl}/resetquota`,
@@ -770,7 +772,10 @@ export const resetNewAiAgentQuota = async (roomIds: TAgent["id"]) => {
   });
 };
 
-export const setNewAiAgentQuota = (roomIds: TAgent["id"], quota: number) => {
+export const setNewAiAgentQuota = (
+  roomIds: TAgent["id"] | TAgent["id"][],
+  quota: number,
+) => {
   return request({
     method: "put",
     url: `${newAiBaseUrl}/agentquota`,

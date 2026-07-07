@@ -35,6 +35,7 @@
 
 import { useMemo, useCallback, useRef } from "react";
 import { useNavigate, useLocation, LinkProps } from "react-router";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -99,6 +100,10 @@ export const useEmptyView = (
 ) => {
   const { isBase } = useTheme();
 
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const isAiReady = standalone ? hasAiProfiles : aiReady;
+
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
     isKnowledgeTab ||
@@ -120,7 +125,7 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
       isPayer,
@@ -141,7 +146,7 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
     );
@@ -176,7 +181,7 @@ export const useEmptyView = (
     isAIRoom,
     isKnowledgeTab,
     isResultsTab,
-    aiReady,
+    isAiReady,
     standalone,
     isPortalAdmin,
     isPayer,
@@ -252,6 +257,10 @@ export const useOptions = (
   );
   if (pathname.includes("/trash")) trashSectionRef.current = getTrashSection();
   const trashSection = trashSectionRef.current;
+
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const isAiReady = standalone ? hasAiProfiles : aiReady;
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -408,7 +417,14 @@ export const useOptions = (
       filterParam: FilesSelectorFilterTypes | FilterType | string,
       openRoot: boolean = true,
     ) => {
-      setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
+      // type-only cast — this hook's signature also accepts a
+      // plain string; every actual caller passes a FilesSelectorFilterTypes /
+      // FilterType value, which is what the store expects.
+      setSelectFileFormRoomDialogVisible?.(
+        true,
+        filterParam as FilesSelectorFilterTypes | FilterType,
+        openRoot,
+      );
     },
     [setSelectFileFormRoomDialogVisible],
   );
@@ -473,7 +489,15 @@ export const useOptions = (
   const createAndCopySharedLink = useCallback(() => {
     if (!selectedFolder) return;
 
-    onCreateAndCopySharedLink?.(selectedFolder, t);
+    // TSelectedFolder (id: number | null) is consumed by the
+    // ContextOptionsStore item view-model type — the cast keeps the original
+    // unchecked call from the .js era.
+    onCreateAndCopySharedLink?.(
+      selectedFolder as unknown as Parameters<
+        NonNullable<typeof onCreateAndCopySharedLink>
+      >[0],
+      t,
+    );
   }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
   const onOpenAccessSettings = () => {
@@ -523,7 +547,7 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
-        aiReady,
+        isAiReady,
         standalone,
         isPortalAdmin,
         trashSection,
@@ -565,7 +589,7 @@ export const useOptions = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
       isCardLinkedToPortal,

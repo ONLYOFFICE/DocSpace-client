@@ -639,8 +639,8 @@ const Shell = ({ page = "home", ...rest }) => {
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}
-          composerHeader={composerHeader}
-          composerDisabled={!isAIReady}
+          composerHeader={standalone ? undefined : composerHeader}
+          composerDisabled={standalone ? undefined : !isAIReady}
         >
           {layout}
         </AiAgentProviders>

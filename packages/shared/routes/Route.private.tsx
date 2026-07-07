@@ -259,7 +259,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
           replace
           to={combineUrl(
             window.ClientConfig?.proxy?.url,
-            "/portal-settings/payments/portal-payments",
+            standalone
+              ? "/portal-settings/payments/portal-payments"
+              : "/billing/tariff-plan",
           )}
         />
       );

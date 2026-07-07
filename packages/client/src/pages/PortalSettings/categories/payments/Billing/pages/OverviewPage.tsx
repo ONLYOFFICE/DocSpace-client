@@ -33,10 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import { BillingOverview } from "@docspace/ui-kit/billing";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
 
 import config from "PACKAGE_FILE";
 
@@ -50,14 +53,26 @@ const OverviewPage = () => {
       combineUrl(window.ClientConfig?.proxy?.url, config.homepage, route),
     );
 
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>(
+      ".section-sticky-container, .section-header",
+    );
+    elements.forEach((el) => (el.style.display = "none"));
+    return () => {
+      elements.forEach((el) => (el.style.display = ""));
+    };
+  }, []);
+
   return (
-    <BillingOverview
-      onEditPlan={() => navigateToRoute(PAYMENT_ROUTES.portalPayments)}
-      onViewUsage={() => navigateToRoute("/billing/usage")}
-      onManageAddons={() => navigateToRoute(PAYMENT_ROUTES.services)}
-      onManagePaymentMethod={() => navigateToRoute("/billing/payment-method")}
-      onUpcomingDetails={() => navigateToRoute("/billing/wallet")}
-    />
+    <ConfirmWrapper height="100%">
+      <BillingOverview
+        onEditPlan={() => navigateToRoute(PAYMENT_ROUTES.portalPayments)}
+        onViewUsage={() => navigateToRoute("/billing/usage")}
+        onManageAddons={() => navigateToRoute(PAYMENT_ROUTES.services)}
+        onManagePaymentMethod={() => navigateToRoute("/billing/payment-method")}
+        onUpcomingDetails={() => navigateToRoute("/billing/wallet")}
+      />
+    </ConfirmWrapper>
   );
 };
 

@@ -50,6 +50,12 @@ import {
   isHideBannerForUser,
 } from "@docspace/shared/utils/campaigns";
 
+import {
+  PersistenceKeys,
+  getPersistedString,
+  setPersistedString,
+} from "./utils/persistence";
+
 class CampaignsStore {
   settingsStore: SettingsStore = {} as SettingsStore;
 
@@ -65,7 +71,8 @@ class CampaignsStore {
 
   currentCampaign: string | unknown = null;
 
-  closedCampaignsLS = localStorage.getItem("closed_campaigns") || "[]";
+  closedCampaignsLS =
+    getPersistedString(PersistenceKeys.closedCampaigns) || "[]";
 
   constructor(settingsStore: SettingsStore, userStore: UserStore) {
     this.settingsStore = settingsStore;
@@ -76,7 +83,10 @@ class CampaignsStore {
   setClosedCampaigns = (campaign: string) => {
     const closedCampaigns = JSON.parse(this.closedCampaignsLS);
     closedCampaigns.push(campaign);
-    localStorage.setItem("closed_campaigns", JSON.stringify(closedCampaigns));
+    setPersistedString(
+      PersistenceKeys.closedCampaigns,
+      JSON.stringify(closedCampaigns),
+    );
     this.closedCampaignsLS = JSON.stringify(closedCampaigns);
   };
 
@@ -87,7 +97,7 @@ class CampaignsStore {
     const lng: string[] | string = getCookie(LANGUAGE) || "en";
     const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
 
-    let index = Number(localStorage.getItem("bannerIndex") || 0);
+    let index = Number(getPersistedString(PersistenceKeys.bannerIndex) || 0);
 
     if (this.campaigns.length === 0) {
       this.currentCampaign = null;
@@ -102,7 +112,7 @@ class CampaignsStore {
 
     const currentCampaign = this.campaigns[index];
 
-    localStorage.setItem("bannerIndex", String(index));
+    setPersistedString(PersistenceKeys.bannerIndex, String(index));
 
     const config = await getConfig(currentCampaign, standalone);
 

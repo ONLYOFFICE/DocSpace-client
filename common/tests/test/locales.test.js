@@ -264,8 +264,10 @@ beforeAll(() => {
     `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`,
   );
 
+  // `t(`, `t?.(`, and the TS non-null-assertion forms `t!(` / `i18n!.t!(`
+  // that appear in converted .ts stores.
   const pattern1 =
-    "[.{\\s\\(]t\\??\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
+    "[.{\\s\\(]t[!?]?\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
   const pattern2 = 'i18nKey="([a-zA-Z0-9_.:-]+)"';
   const pattern3 = 'tKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern4 = 'getTitle\\("([a-zA-Z0-9_.:-]+)"\\)';

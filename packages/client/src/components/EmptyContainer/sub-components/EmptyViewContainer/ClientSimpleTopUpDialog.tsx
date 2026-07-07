@@ -15,7 +15,7 @@
  * LV-1050, Latvia, European Union.
  *
  * The interactive user interfaces in modified versions of the Program
- * are required to display Appropriate Legal Notices, as required under
+ * are required to display Appropriate Legal Notices in accordance with
  * Section 5 of the GNU AGPL version 3.
  *
  * No trademark rights are granted under this License.
@@ -24,6 +24,11 @@
  * icon sets, and technical writing content, are licensed under the
  * Creative Commons Attribution-ShareAlike 4.0 International License:
  * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */

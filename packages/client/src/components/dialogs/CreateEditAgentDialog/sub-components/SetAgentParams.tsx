@@ -230,7 +230,9 @@ const setAgentParams = ({
 
   React.useEffect(() => {
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: previewTitle,
     });
   }, []);
@@ -271,7 +273,7 @@ const setAgentParams = ({
       iconWasUpdated: agentParams.iconWasUpdated,
     };
 
-    const uploadedFile = await uploadFile?.(t, e);
+    const uploadedFile = (await uploadFile?.(t, e)) as File | null;
 
     setAgentParams({
       ...agentParams,
@@ -315,7 +317,9 @@ const setAgentParams = ({
     }
 
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: newValue,
     });
 
@@ -588,7 +592,9 @@ export default inject(
       setCover,
     } = dialogsStore;
 
-    setCoverSelection(bufferSelection);
+    // bufferSelection is a FilesStore view-model item
+    // (TItem); erased cast adapts it to the raw-entity dialog param.
+    setCoverSelection(bufferSelection as Nullable<TRoom>);
 
     return {
       folderFormValidation,

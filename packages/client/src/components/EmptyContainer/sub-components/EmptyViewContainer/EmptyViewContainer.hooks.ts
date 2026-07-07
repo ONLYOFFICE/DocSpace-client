@@ -417,7 +417,14 @@ export const useOptions = (
       filterParam: FilesSelectorFilterTypes | FilterType | string,
       openRoot: boolean = true,
     ) => {
-      setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
+      // type-only cast — this hook's signature also accepts a
+      // plain string; every actual caller passes a FilesSelectorFilterTypes /
+      // FilterType value, which is what the store expects.
+      setSelectFileFormRoomDialogVisible?.(
+        true,
+        filterParam as FilesSelectorFilterTypes | FilterType,
+        openRoot,
+      );
     },
     [setSelectFileFormRoomDialogVisible],
   );
@@ -482,7 +489,15 @@ export const useOptions = (
   const createAndCopySharedLink = useCallback(() => {
     if (!selectedFolder) return;
 
-    onCreateAndCopySharedLink?.(selectedFolder, t);
+    // TSelectedFolder (id: number | null) is consumed by the
+    // ContextOptionsStore item view-model type — the cast keeps the original
+    // unchecked call from the .js era.
+    onCreateAndCopySharedLink?.(
+      selectedFolder as unknown as Parameters<
+        NonNullable<typeof onCreateAndCopySharedLink>
+      >[0],
+      t,
+    );
   }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
   const onOpenAccessSettings = () => {

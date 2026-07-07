@@ -180,7 +180,9 @@ const useFiles = ({
       playlist.length < 1
     ) {
       setTimeout(() => {
-        getFileInfo(id)
+        // `id` comes from the media-view URL and may be
+        // undefined; the erased cast keeps the old unchecked call.
+        getFileInfo(id as string)
           .then((data) => {
             const canOpenPlayer =
               data.viewAccessibility.ImageView ||
@@ -322,13 +324,19 @@ const useFiles = ({
 
         if (newFilter) {
           if (isAIAgents) {
-            return fetchAgents(null, newFilter, false, false);
+            return fetchAgents(null, newFilter as RoomsFilter, false, false);
           }
           if (isRooms) {
-            return fetchRooms(null, newFilter, undefined, undefined, false);
+            return fetchRooms(
+              null,
+              newFilter as RoomsFilter,
+              undefined,
+              undefined,
+              false,
+            );
           }
           const folderId = (newFilter as FilesFilter).folder;
-          return fetchFiles(folderId, newFilter)?.finally(() => {
+          return fetchFiles(folderId, newFilter as FilesFilter)?.finally(() => {
             const itemData = sessionStorage.getItem(CREATED_FORM_KEY);
             if (itemData) {
               wsCreatedPDFForm({

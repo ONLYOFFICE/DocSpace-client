@@ -136,12 +136,8 @@ export interface InjectedEmptyViewContainerProps
   socialAuthUser: TStore["userStore"]["user"];
   isGracePeriod: boolean;
   knowledgeId: number | null;
-  startUpload: (
-    uploadFiles: unknown,
-    folderId: number | null,
-    t: TTranslation,
-  ) => void;
-  createFoldersTree: (t: TTranslation, files: unknown) => Promise<unknown[]>;
+  startUpload: TStore["uploadDataStore"]["startUpload"];
+  createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

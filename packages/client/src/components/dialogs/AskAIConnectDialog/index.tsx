@@ -46,10 +46,12 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
 
+import { PersistenceKeys } from "SRC_DIR/store/utils/persistence";
+
 import type { AskAIConnectDialogProps } from "./AskAIConnectDialog.types";
 import styles from "./AskAIConnectDialog.module.scss";
 
-export const SKIP_AI_MODAL_KEY = "formRoom.skipAIConnectModal";
+export const SKIP_AI_MODAL_KEY = PersistenceKeys.skipAiModal;
 
 const AskAIConnectDialog = ({
   visible,

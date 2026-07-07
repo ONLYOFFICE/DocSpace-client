@@ -1,4 +1,3 @@
-import { editGroup } from "SRC_DIR/helpers/contacts";
 /*
  * Copyright (C) Ascensio System SIA, 2009-2026
  *
@@ -33,6 +32,8 @@ import { editGroup } from "SRC_DIR/helpers/contacts";
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+
+import { editGroup } from "SRC_DIR/helpers/contacts";
 
 import { makeAutoObservable } from "mobx";
 

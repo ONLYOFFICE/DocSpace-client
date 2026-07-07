@@ -249,9 +249,16 @@ test.describe("Keys management — edge cases", () => {
         configurable: true,
         get: () => "hidden",
       });
-      document.dispatchEvent(new Event("visibilitychange"));
     });
 
-    await expect(lockNowBtn).toBeHidden({ timeout: 5000 });
+    // The visibilitychange listener is (re)registered as auto-lock suspension
+    // clears, so a single dispatch can race that registration. Keep the tab
+    // "hidden" and re-dispatch until the auto-lock takes effect.
+    await expect(async () => {
+      await page.evaluate(() =>
+        document.dispatchEvent(new Event("visibilitychange")),
+      );
+      await expect(lockNowBtn).toBeHidden({ timeout: 1000 });
+    }).toPass({ timeout: 10000 });
   });
 });

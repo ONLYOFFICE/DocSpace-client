@@ -42,9 +42,13 @@ import {
   buyDocsConnectPlan,
   cancelDocsConnectPlan,
   cancelDocsConnectScheduledChange,
+  updateDocsConnectConfig,
   getDocsConnectReportUrl,
 } from "@docspace/shared/api/docs-connect";
-import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
+import type {
+  TDocsConnectInfo,
+  TDocsConnectConfigUpdate,
+} from "@docspace/shared/api/docs-connect/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
@@ -101,8 +105,9 @@ class DocsConnectStore {
   };
 
   fetchInfo = async () => {
+    const initialLoad = this.info == null;
     try {
-      this.setIsLoading(true);
+      if (initialLoad) this.setIsLoading(true);
       this.setError(null);
       const info = await getDocsConnectInfo();
       runInAction(() => {
@@ -114,7 +119,7 @@ class DocsConnectStore {
         this.error = error as Error;
       });
     } finally {
-      this.setIsLoading(false);
+      if (initialLoad) this.setIsLoading(false);
     }
   };
 
@@ -200,6 +205,15 @@ class DocsConnectStore {
       this.info = info;
     });
     this.refreshPortalState();
+  };
+
+  updateConfig = async (data: TDocsConnectConfigUpdate) => {
+    const config = await updateDocsConnectConfig(data);
+    runInAction(() => {
+      if (config && this.info) {
+        this.info = { ...this.info, config };
+      }
+    });
   };
 
   downloadReport = () => {

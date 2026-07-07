@@ -33,10 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+
+import config from "PACKAGE_FILE";
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
@@ -55,6 +59,7 @@ import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { getDocsConnectTrialState } from "../utils";
+import { DOCS_CONNECT_ROUTE } from "../constants";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
 
 import Statistics from "./Statistics";
@@ -78,7 +83,14 @@ const TenantPanel = ({
 }: TenantPanelProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const navigate = useNavigate();
-  const [selectedTab, setSelectedTab] = useState<string>("statistics");
+  const { tab } = useParams();
+  const tabFromUrl =
+    tab === "settings" || tab === "preview" ? tab : "statistics";
+  const [selectedTab, setSelectedTab] = useState<string>(tabFromUrl);
+
+  useEffect(() => {
+    setSelectedTab(tabFromUrl);
+  }, [tabFromUrl]);
 
   if (!info) return null;
 
@@ -182,7 +194,18 @@ const TenantPanel = ({
         withoutStickyIntend
         items={tabs}
         selectedItemId={selectedTab}
-        onSelect={(tab) => setSelectedTab(tab.id)}
+        onSelect={(item) => {
+          setSelectedTab(item.id);
+          window.history.replaceState(
+            "",
+            "",
+            combineUrl(
+              window.ClientConfig?.proxy?.url,
+              config.homepage,
+              `${DOCS_CONNECT_ROUTE}/${item.id}`,
+            ),
+          );
+        }}
       />
     </div>
   );

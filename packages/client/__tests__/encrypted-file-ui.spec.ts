@@ -184,6 +184,20 @@ test.describe("Encrypted file UI in private room", () => {
 
     const row = page.getByTestId("table-row-0");
     await expect(row).toBeVisible({ timeout: 10000 });
+
+    // Opening a private room prompts to unlock the device key; that modal
+    // overlays the page and would intercept clicks on the file row. Dismiss
+    // it — the encrypted-file context menu is available while still locked.
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    if (await passphrasePrompt.isVisible().catch(() => false)) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
     await row.getByTestId("context-menu-button").first().click();
 
     const downloadGroup = page.locator("#option_download");
@@ -221,6 +235,20 @@ test.describe("Encrypted file UI in private room", () => {
 
     const row = page.getByTestId("table-row-0");
     await expect(row).toBeVisible({ timeout: 10000 });
+
+    // Opening a private room prompts to unlock the device key; that modal
+    // overlays the page and would intercept clicks on the file row. Dismiss
+    // it — the encrypted-file context menu is available while still locked.
+    const passphrasePrompt = page
+      .getByRole("dialog")
+      .filter({ hasText: "Enter passphrase" });
+    if (await passphrasePrompt.isVisible().catch(() => false)) {
+      await passphrasePrompt
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(passphrasePrompt).toBeHidden();
+    }
+
     await row.getByTestId("context-menu-button").first().click();
 
     await expect(page.locator("#option_download")).toBeVisible({

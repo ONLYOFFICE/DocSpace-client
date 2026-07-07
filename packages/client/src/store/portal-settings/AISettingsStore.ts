@@ -77,9 +77,9 @@ import {
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
-type TSettingsStore = {
-  aiConfig?: { systemAiEnabled?: boolean };
-};
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+type TSettingsStore = Pick<SettingsStore, "aiConfig">;
 
 class AISettingsStore {
   settingsStore: TSettingsStore;

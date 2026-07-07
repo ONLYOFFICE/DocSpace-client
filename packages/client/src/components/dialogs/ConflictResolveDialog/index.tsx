@@ -155,7 +155,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     }
 
     updateActiveFiles(newActiveFiles);
-    updateActiveFolders(newActiveFiles);
+    updateActiveFolders(newActiveFolders);
     if (!newFolderIds.length && !newFileIds.length) {
       setSelected("none");
       onClosePanels();
@@ -183,7 +183,12 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     onClosePanels();
     try {
       if (fromShareCollectSelector) {
-        openFileAction(selectedFolder, t);
+        // type-only cast — openFileAction takes the .js
+        // view-model item type; TFolder is structurally compatible at runtime.
+        openFileAction(
+          selectedFolder as unknown as Parameters<typeof openFileAction>[0],
+          t,
+        );
       }
 
       sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);

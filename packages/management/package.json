@@ -1,6 +1,6 @@
 {
   "name": "@docspace/management",
-  "version": "3.7.1",
+  "version": "3.8.0",
   "private": true,
   "scripts": {
     "build:translations": "node scripts/buildTranslations.js",
@@ -36,8 +36,8 @@
     "date-and-time": "3.6.0",
     "i18next": "23.7.19",
     "lodash": "4.18.1",
-    "mobx": "6.13.5",
-    "mobx-react": "7.6.0",
+    "mobx": "6.16.1",
+    "mobx-react": "9.2.2",
     "nconf": "0.12.1",
     "next": "16.2.6",
     "react": "19.2.4",

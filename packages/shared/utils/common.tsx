@@ -594,7 +594,7 @@ export function convertLanguage(key: string) {
   }
 }
 
-export function convertToLanguage(key: string) {
+export function convertToLanguage(key?: string) {
   if (!key) return;
 
   const splittedKey = key.split("-");

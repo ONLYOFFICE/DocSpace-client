@@ -35,6 +35,7 @@
 
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 
 import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
@@ -99,6 +100,10 @@ export const useChatNoAccess = ({
 }: ChatNoAccessStoreProps) => {
   const navigate = useNavigate();
 
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const aiReady = standalone ? hasAiProfiles : !!isAIReady;
+
   const activation = useAIActivation({
     enableAIService,
     getAIConfig,
@@ -115,7 +120,7 @@ export const useChatNoAccess = ({
 
   const noAccessProps = useMemo(
     () => ({
-      aiReady: !!isAIReady,
+      aiReady,
       standalone: !!standalone,
       isPortalAdmin: !!isAdmin,
       isPayer,
@@ -128,7 +133,7 @@ export const useChatNoAccess = ({
       goToAISettings,
     }),
     [
-      isAIReady,
+      aiReady,
       standalone,
       isAdmin,
       isPayer,
@@ -159,7 +164,7 @@ export const useChatNoAccess = ({
     ],
   );
 
-  return { aiReady: !!isAIReady, activation, noAccessProps, topUpDialog };
+  return { aiReady, activation, noAccessProps, topUpDialog };
 };
 
 export default useChatNoAccess;

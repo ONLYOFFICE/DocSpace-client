@@ -305,7 +305,9 @@ export const getRootDescription = (
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
-  security: Nullable<TFolderSecurity>,
+  security: Nullable<
+    TFolderSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   standalone: boolean,
   aiReady: boolean,
   isPortalAdmin: boolean,
@@ -498,7 +500,9 @@ export const getFolderIcon = (
   isBaseTheme: boolean,
   access: AccessType,
   folderType: Nullable<FolderType>,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isResultsTab?: boolean,
 ) => {
   return match([roomType, folderType, access])
@@ -537,7 +541,9 @@ export const getRoomIcon = (
   type: RoomsType,
   isBaseTheme: boolean,
   access: AccessType,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isResultsTab?: boolean,
 ) => {
   return match([type, access])
@@ -779,7 +785,9 @@ export const getRootIcon = (
 
 export const helperOptions = (
   actions: OptionActions,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isFrame?: boolean,
 ) => {
   const createInviteOption = (title: string, description: string) => {

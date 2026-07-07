@@ -166,7 +166,10 @@ const Details = ({
         selection.fileType === FileType.Presentation ||
         selection.fileType === FileType.Document)
     ) {
-      await createThumbnail?.(selection.id);
+      // createThumbnail expects a TFile but has always been
+      // given the id here — its guards then bail out (file.id undefined);
+      // erased cast preserves that no-op behavior.
+      await createThumbnail?.(selection.id as unknown as TFile);
     }
   }, [selection]);
 

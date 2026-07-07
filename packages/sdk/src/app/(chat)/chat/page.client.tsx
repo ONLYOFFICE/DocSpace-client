@@ -1,5 +1,3 @@
-"use client";
-
 /*
  * Copyright (C) Ascensio System SIA, 2009-2026
  *
@@ -34,6 +32,8 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+
+"use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";

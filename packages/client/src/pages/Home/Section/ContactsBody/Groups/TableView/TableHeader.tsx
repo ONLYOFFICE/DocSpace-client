@@ -87,7 +87,7 @@ class GroupsTableHeader extends React.Component<
 
     const { getColumns } = props;
 
-    const defaultColumns = this.getDefaultColumns();
+    const defaultColumns = this.getDefaultColumns() as TableHeaderColumn[];
     const columns: TableHeaderColumn[] = getColumns!(defaultColumns);
 
     this.state = { columns };

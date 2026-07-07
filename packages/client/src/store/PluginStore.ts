@@ -861,9 +861,17 @@ class PluginStore {
 
   getContextMenuKeysByType = (
     type: PluginFileType,
-    fileExst?: string,
-    security?: TRoomSecurity | TFolderSecurity,
-    itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity,
+    fileExst?: string | null,
+    security?:
+      | TRoomSecurity
+      | TFolderSecurity
+      | Partial<TRoomSecurity & TFolderSecurity>
+      | null,
+    itemSecurity?:
+      | TFileSecurity
+      | TRoomSecurity
+      | TFolderSecurity
+      | Partial<TFileSecurity & TRoomSecurity & TFolderSecurity>,
     itemId?: number | string,
   ) => {
     if (this.contextMenuItems.size === 0) return;

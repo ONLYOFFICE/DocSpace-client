@@ -42,6 +42,13 @@ import {
   getStorageRegions,
 } from "@docspace/shared/api/settings";
 import { getBackupSchedule } from "@docspace/shared/api/portal";
+import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
+import type { TStorageBackup } from "@docspace/shared/api/settings/types";
+import type {
+  ConnectedThirdPartyAccountType,
+  Nullable,
+  StorageRegionsType,
+} from "@docspace/shared/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 import { isManagement } from "@docspace/shared/utils/common";
@@ -158,9 +165,11 @@ const useBackup = ({
       const [account, backupStorage, storageRegionsS3, backupsCount] =
         await Promise.all([...baseRequests, ...optionalRequests]);
 
-      setConnectedThirdPartyAccount?.(account ?? null);
-      setThirdPartyStorage?.(backupStorage);
-      setStorageRegions?.(storageRegionsS3);
+      setConnectedThirdPartyAccount?.(
+        (account ?? null) as Nullable<ConnectedThirdPartyAccountType>,
+      );
+      setThirdPartyStorage?.(backupStorage as TStorageBackup[]);
+      setStorageRegions?.(storageRegionsS3 as StorageRegionsType[]);
 
       if (isBackupPaid) {
         if (typeof backupsCount === "number") setBackupsCount?.(backupsCount);
@@ -238,11 +247,15 @@ const useBackup = ({
         backupsCount,
       ] = await Promise.all([...baseRequests, ...optionalRequests]);
 
-      if (account) setConnectedThirdPartyAccount?.(account);
-      if (backupStorage) setThirdPartyStorage?.(backupStorage);
+      if (account)
+        setConnectedThirdPartyAccount?.(
+          account as ConnectedThirdPartyAccountType,
+        );
+      if (backupStorage)
+        setThirdPartyStorage?.(backupStorage as TStorageBackup[]);
 
-      setBackupSchedule?.(backupSchedule);
-      setStorageRegions?.(newStorageRegions);
+      setBackupSchedule?.(backupSchedule as TBackupSchedule);
+      setStorageRegions?.(newStorageRegions as StorageRegionsType[]);
 
       setIsInited?.(true);
 
@@ -301,8 +314,8 @@ const useBackup = ({
       ]);
 
       if (account) setConnectedThirdPartyAccount?.(account);
-      setThirdPartyStorage?.(backupStorage);
-      setStorageRegions?.(resStorageRegions);
+      setThirdPartyStorage?.(backupStorage as TStorageBackup[]);
+      setStorageRegions?.(resStorageRegions as StorageRegionsType[]);
     } catch (error) {
       if (
         error instanceof Error &&

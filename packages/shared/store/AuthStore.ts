@@ -90,9 +90,14 @@ class AuthStore {
   isPortalInfoLoaded = false;
 
   constructor(
-    private userStore: UserStore,
+    /** Public: consumed as `authStore.userStore.user` by client stores
+     * (AccessRightsStore); was reached externally even while `private`. */
+    public userStore: UserStore,
     private currentTariffStatusStore: CurrentTariffStatusStore,
-    private currentQuotaStore: CurrentQuotasStore,
+    /** Public: consumed as `authStore.currentQuotaStore` by client stores
+     * (FilesStore quota getters). Visibility change only — the parameter
+     * property assignment is identical at runtime. */
+    public currentQuotaStore: CurrentQuotasStore,
     public settingsStore: SettingsStore,
   ) {
     makeAutoObservable(this);

@@ -69,6 +69,7 @@ import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import FilesStore from "./FilesStore";
+import type { TActionItem } from "./FilesActionsStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import DialogsStore from "./DialogsStore";
@@ -423,8 +424,8 @@ class CreateEditRoomStore {
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
-          color: (cover as { color: string }).color,
+          cover: cover.cover,
+          color: cover.color,
         }
       : logo
         ? {
@@ -593,8 +594,8 @@ class CreateEditRoomStore {
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
-          color: (cover as { color: string }).color,
+          cover: cover.cover,
+          color: cover.color,
         }
       : logo
         ? {
@@ -721,9 +722,14 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room.id, selections, room).catch(
-          (error) => console.error(error),
-        );
+        // selections are FilesStore view-model items (TItem);
+        // FilesActionsStore still types this input with its own minimal
+        // TActionItem — erased cast (type-only).
+        preparingDataForCopyingToRoom(
+          room.id,
+          selections as unknown as TActionItem[],
+          room,
+        ).catch((error) => console.error(error));
       }
 
       await this.onOpenNewRoom(room);

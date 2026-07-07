@@ -920,7 +920,12 @@ export async function moveToFolder(
   return res;
 }
 
-export async function getFileVersionInfo(fileId: number, shareKey?: string) {
+export async function getFileVersionInfo(
+  /** Callers pass both numeric and string ids (e.g. `${item.id}`); the id is
+   * only interpolated into the URL. */
+  fileId: number | string,
+  shareKey?: string,
+) {
   const res = (await request({
     method: "get",
     url: `/files/file/${fileId}/history`,
@@ -976,8 +981,8 @@ export async function getNewFolderFiles(folderId: number | string) {
 // TODO: update res type
 export async function convertFile(
   fileId: string | number | null,
-  outputType = null,
-  password = null,
+  outputType: string | null = null,
+  password: string | null = null,
   sync = false,
 ) {
   const data = { password, sync, outputType };
@@ -986,7 +991,13 @@ export async function convertFile(
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  })) as { result: { webUrl: string; title: string } }[];
+  })) as {
+    result: { webUrl: string; title: string };
+    /** Conversion progress percent (0-100). */
+    progress?: number;
+    /** Conversion error text; empty when the conversion succeeded. */
+    error?: string;
+  }[];
 
   return res;
 }

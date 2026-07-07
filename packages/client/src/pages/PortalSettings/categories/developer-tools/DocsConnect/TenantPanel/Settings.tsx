@@ -97,7 +97,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
   const [isSavingGeneral, setIsSavingGeneral] = useState(false);
 
   const [rules, setRules] = useState<TAccessRule[]>(() =>
-    (info?.config.ipFilter ?? []).map((rule, index) => ({
+    (info?.config.ipfilter?.rules ?? []).map((rule, index) => ({
       key: `${index}-${rule.address ?? ""}`,
       type: rule.allowed ? "allow" : "deny",
       value: rule.address ?? "",
@@ -105,7 +105,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
   );
   const [addRuleDialogVisible, setAddRuleDialogVisible] = useState(false);
   const [ipFilteringEnabled, setIpFilteringEnabled] = useState(
-    () => (info?.config.ipFilter ?? []).length > 0,
+    () => (info?.config.ipfilter?.rules ?? []).length > 0,
   );
 
   const [savedMaxDownload, setSavedMaxDownload] = useState(() =>
@@ -180,10 +180,12 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
     setIsSavingRules(true);
     try {
       await updateConfig?.({
-        ipFilter: next.map((rule) => ({
-          address: rule.value,
-          allowed: rule.type === "allow",
-        })),
+        ipfilter: {
+          rules: next.map((rule) => ({
+            address: rule.value,
+            allowed: rule.type === "allow",
+          })),
+        },
       });
     } catch (e) {
       setRules(prev);

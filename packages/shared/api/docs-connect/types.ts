@@ -45,12 +45,16 @@ export type TDocsConnectIpFilterRule = {
   allowed?: boolean;
 };
 
+export type TDocsConnectIpFilter = {
+  rules?: TDocsConnectIpFilterRule[] | null;
+};
+
 export type TDocsConnectConfig = {
   tenantName: string;
   security: { secret: string; header: string };
   server: { isAnonymousSupport: boolean; fileSizeLimit?: number };
   wopi?: { enable: boolean } | null;
-  ipFilter?: TDocsConnectIpFilterRule[] | null;
+  ipfilter?: TDocsConnectIpFilter | null;
 };
 
 export type TDocsConnectStat = {
@@ -117,5 +121,5 @@ export type TDocsConnectConfigUpdate = {
   wopi?: {
     enable?: boolean;
   };
-  ipFilter?: TDocsConnectIpFilterRule[];
+  ipfilter?: TDocsConnectIpFilter;
 };

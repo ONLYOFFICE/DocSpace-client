@@ -66,7 +66,9 @@ vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => {
 // a no-op. `resolveDisplayTitle` is identity so title-dependent code is stable.
 vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
   subscribeFilenameCache: vi.fn(),
-  resolveDisplayTitle: (title: string) => title,
+  // Real signature is `resolveDisplayTitle({ id, title, encrypted })` → string.
+  // Echo the plaintext title so title-dependent mapping stays deterministic.
+  resolveDisplayTitle: ({ title }: { title?: string }) => title,
 }));
 
 // Encryption/private-room services: only invoked from methods, never the
@@ -150,7 +152,10 @@ const defaultFakes = (): FakeStores => ({
     extsImagePreviewed: [],
     extsMediaPreviewed: [],
   },
-  thirdPartyStore: { providers: [] },
+  thirdPartyStore: {
+    providers: [],
+    getThirdPartyIcon: () => "third-party-icon.svg",
+  },
   accessRightsStore: {},
   clientLoadingStore: {
     isLoading: false,

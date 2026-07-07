@@ -52,7 +52,6 @@ import TagInput from "../../../TagInput";
 import InputParam from "../../../CreateEditDialogParams/InputParam";
 
 import ProfileSettings from "../sub-components/Profile";
-import ModelSaas from "../sub-components/ModelSaas";
 import InstructionsSettings from "../sub-components/Instructions";
 import MCPSettings from "../sub-components/MCP";
 import {
@@ -127,7 +126,7 @@ type setAgentParamsProps = {
   standalone?: SettingsStore["standalone"];
 };
 
-const setAgentParams = ({
+const SetAgentParams = ({
   agentParams,
   setAgentParams,
   tagHandler,
@@ -493,21 +492,11 @@ const setAgentParams = ({
         />
       ) : null}
 
-      {standalone ? (
-        <ProfileSettings
-          agentParams={agentParams}
-          setAgentParams={setAgentParams}
-        />
-      ) : (
-        <ModelSaas
-          agentParams={agentParams}
-          systemAiEnabled={systemAiEnabled}
-          recommendedModelForForms={recommendedModelForForms}
-          isAdmin={!!isUserAdmin}
-          openedFromChat={openContext === AgentDialogContext.Chat}
-          setAgentParams={setAgentParams}
-        />
-      )}
+      <ProfileSettings
+        agentParams={agentParams}
+        setAgentParams={setAgentParams}
+      />
+
       <InstructionsSettings
         agentParams={agentParams}
         setAgentParams={setAgentParams}
@@ -623,5 +612,4 @@ export default inject(
       standalone,
     };
   },
-)(observer(setAgentParams));
-
+)(observer(SetAgentParams));

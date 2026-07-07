@@ -38,6 +38,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
@@ -74,28 +75,27 @@ export type FolderIds = {
  * ArticleBodyContent.getLinkData so navigation lands on the correct folder
  * (with the `folder=<id>` query param) instead of the default personal view.
  *
- * My Documents sub-sections (Recent/Favorites/Trash) also carry `parentId` so
- * navigation stays scoped to My Documents, the same way the SDK embed does.
+ * My Documents sub-sections (Recent/Favorites/Trash) also carry
+ * `folderType=USER` so navigation stays scoped to My Documents content, the
+ * same way the SDK embed does.
  */
 export const buildFolderUrl = (
   folderId: number,
   rootFolderType: FolderRootType,
   userId?: string,
-  myFolderId?: number | null,
   // When true, the Recent/Favorites/Trash sections are routed under
   // /ai-agents/* (agent-scoped) instead of their global file paths, scoped to
-  // AI Agents content via agentsFolderId (Recent/Favorites) or folderType (Trash).
+  // AI-room content via folderType=AIAgent.
   agentScoped = false,
-  agentsFolderId?: number | null,
 ): string => {
   const fileParams = (
     categoryType: (typeof CategoryType)[keyof typeof CategoryType],
     filterKey: string,
-    folderType?: FolderType,
+    folderType?: FolderType[],
   ) => {
     const filter = FilesFilter.getDefault({ categoryType });
     filter.folder = String(folderId);
-    if (folderType != null) filter.folderType = folderType;
+    if (folderType) filter.folderType = folderType;
     if (userId) {
       const stored = getUserFilter(`${filterKey}=${userId}`);
       if (stored?.sortBy) filter.sortBy = stored.sortBy;
@@ -112,9 +112,9 @@ export const buildFolderUrl = (
     return filter.toUrlParams(userId, false);
   };
 
-  const scopeFolderId = agentScoped ? agentsFolderId : myFolderId;
-  const parentSuffix =
-    scopeFolderId != null ? `&parentId=${scopeFolderId}` : "";
+  // Scope of the Recent/Favorites/Trash aggregates: content of AI rooms in
+  // the agent-scoped sections, My Documents content otherwise.
+  const scopeTypes = agentScoped ? [FolderType.AIAgent] : [FolderType.USER];
 
   let path = "";
   let params = "";
@@ -124,7 +124,7 @@ export const buildFolderUrl = (
       path = agentScoped
         ? "/ai-agents/recent/filter"
         : getCategoryUrl(CategoryType.Recent);
-      params = fileParams(CategoryType.Recent, FILTER_RECENT) + parentSuffix;
+      params = fileParams(CategoryType.Recent, FILTER_RECENT, scopeTypes);
       break;
     case FolderType.USER:
       path = getCategoryUrl(CategoryType.Personal);
@@ -138,15 +138,13 @@ export const buildFolderUrl = (
       path = agentScoped
         ? "/ai-agents/favorites/filter"
         : getCategoryUrl(CategoryType.Favorite);
-      params = fileParams(CategoryType.Favorite, FILTER_FAVORITES) + parentSuffix;
+      params = fileParams(CategoryType.Favorite, FILTER_FAVORITES, scopeTypes);
       break;
     case FolderType.TRASH:
       path = agentScoped
         ? "/ai-agents/trash/filter"
         : getCategoryUrl(CategoryType.Trash);
-      params = agentScoped
-        ? fileParams(CategoryType.Trash, FILTER_TRASH, FolderType.AIAgents)
-        : fileParams(CategoryType.Trash, FILTER_TRASH, FolderType.USER);
+      params = fileParams(CategoryType.Trash, FILTER_TRASH, scopeTypes);
       break;
     case FolderType.Archive:
       path = getCategoryUrl(CategoryType.Archive);
@@ -172,14 +170,23 @@ export const buildFolderUrl = (
 
 export const getSectionTrashTarget = (
   pathname: string,
-): { path: string; folderType: FolderRootType } => {
+): { path: string; folderType: FolderType[] } => {
   if (pathname.startsWith("/forms"))
-    return { path: "/forms/trash/filter", folderType: FolderType.FormRoom };
+    return { path: "/forms/trash/filter", folderType: [FolderType.FormRoom] };
   if (pathname.startsWith("/ai-agents"))
-    return { path: "/ai-agents/trash/filter", folderType: FolderType.AIAgents };
+    return {
+      path: "/ai-agents/trash/filter",
+      folderType: [FolderType.AIAgent],
+    };
   if (pathname.startsWith("/rooms") && !pathname.startsWith("/rooms/personal"))
-    return { path: "/rooms/trash/filter", folderType: FolderType.Rooms };
-  return { path: getCategoryUrl(CategoryType.Trash), folderType: FolderType.USER };
+    return {
+      path: "/rooms/trash/filter",
+      folderType: ROOMS_SECTION_FOLDER_TYPES,
+    };
+  return {
+    path: getCategoryUrl(CategoryType.Trash),
+    folderType: [FolderType.USER],
+  };
 };
 
 /**

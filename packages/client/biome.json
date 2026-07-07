@@ -42,6 +42,18 @@
           }
         }
       }
+    },
+    {
+      "includes": [
+        "src/store/FilesStore.ts"
+      ],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "noMisusedPromises": "off"
+          }
+        }
+      }
     }
   ]
 }

@@ -75,6 +75,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import type { ValueOf } from "@docspace/shared/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
@@ -112,12 +113,9 @@ const ClientArticleSidebar = ({
   const location = useLocation();
   const navigate = useNavigate();
   const {
-    myFolderId,
-    roomsFolderId,
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
-    aiAgentsFolderId,
   } = folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
@@ -137,9 +135,9 @@ const ClientArticleSidebar = ({
   const goFolder = React.useCallback(
     (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) => () => {
       onFolderNavigateRef.current?.();
-      navigate(buildFolderUrl(folderId, rootFolderType, userId, myFolderId));
+      navigate(buildFolderUrl(folderId, rootFolderType, userId));
     },
-    [navigate, userId, myFolderId],
+    [navigate, userId],
   );
 
   // Agent-scoped Recent/Favorites/Trash: same alias data, routed under
@@ -147,58 +145,29 @@ const ClientArticleSidebar = ({
   const goFolderAgent = React.useCallback(
     (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) => () => {
       onFolderNavigateRef.current?.();
-      navigate(
-        buildFolderUrl(
-          folderId,
-          rootFolderType,
-          userId,
-          myFolderId,
-          true,
-          aiAgentsFolderId,
-        ),
-      );
+      navigate(buildFolderUrl(folderId, rootFolderType, userId, true));
     },
-    [navigate, userId, myFolderId, aiAgentsFolderId],
+    [navigate, userId],
   );
 
-  // Rooms-scoped Recent/Favorites: the same special recent/favorites files
-  // view, but constrained to room content via `parentId=<roomsFolderId>`.
-  // The recent/favorites folder ids are known up front (from the tree), so we
+  // Section-scoped Recent/Favorites/Trash: the same special files views,
+  // constrained to the section's content via the `folderType` scope filter
+  // (the folder types of the rooms/root the section is made of). The
+  // recent/favorites folder ids are known up front (from the tree), so we
   // navigate with the concrete `folder=<id>` instead of the "@recent"/
   // "@favorites" alias FilesFilter.getDefault would otherwise set.
-  const goRoomsScoped = React.useCallback(
+  const goScoped = React.useCallback(
     (
       categoryType: ValueOf<typeof CategoryType>,
       basePath: string,
-      folderId?: number | null,
+      folderId: number | null | undefined,
+      folderType: FolderType[],
     ) =>
       () => {
         onFolderNavigateRef.current?.();
         const filter = FilesFilter.getDefault({ categoryType });
         if (folderId != null) filter.folder = String(folderId);
-        if (categoryType === CategoryType.Trash) {
-          filter.folderType = FolderType.Rooms;
-          navigate(`${basePath}/filter?${filter.toUrlParams()}`);
-          return;
-        }
-        const parentSuffix =
-          roomsFolderId != null ? `&parentId=${roomsFolderId}` : "";
-        navigate(`${basePath}/filter?${filter.toUrlParams()}${parentSuffix}`);
-      },
-    [navigate, roomsFolderId],
-  );
-
-  const goFormsScoped = React.useCallback(
-    (
-      categoryType: ValueOf<typeof CategoryType>,
-      basePath: string,
-      folderId?: number | null,
-    ) =>
-      () => {
-        onFolderNavigateRef.current?.();
-        const filter = FilesFilter.getDefault({ categoryType });
-        if (folderId != null) filter.folder = String(folderId);
-        filter.folderType = FolderType.FormRoom;
+        filter.folderType = folderType;
         navigate(`${basePath}/filter?${filter.toUrlParams()}`);
       },
     [navigate],
@@ -297,25 +266,27 @@ const ClientArticleSidebar = ({
         ...navItem(roomsFolder),
         children: [
           // Recent/Favorites under Rooms reuse the @recent/@favorites files
-          // view, scoped to room content via parentId=roomsFolderId.
+          // view, scoped to room content via the room folder types.
           {
             id: "rooms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            onClick: goRoomsScoped(
+            onClick: goScoped(
               CategoryType.Recent,
               "/rooms/recent",
               recentFolderId,
+              ROOMS_SECTION_FOLDER_TYPES,
             ),
           },
           {
             id: "rooms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            onClick: goRoomsScoped(
+            onClick: goScoped(
               CategoryType.Favorite,
               "/rooms/favorite",
               favoritesFolderId,
+              ROOMS_SECTION_FOLDER_TYPES,
             ),
           },
           ...(canUseTemplates
@@ -335,10 +306,11 @@ const ClientArticleSidebar = ({
             id: "rooms-trash",
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
-            onClick: goRoomsScoped(
+            onClick: goScoped(
               CategoryType.Trash,
               "/rooms/trash",
               recycleBinFolderId,
+              ROOMS_SECTION_FOLDER_TYPES,
             ),
           },
         ],
@@ -363,20 +335,22 @@ const ClientArticleSidebar = ({
             id: "forms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            onClick: goFormsScoped(
+            onClick: goScoped(
               CategoryType.Recent,
               "/forms/recent",
               recentFolderId,
+              [FolderType.FormRoom],
             ),
           },
           {
             id: "forms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            onClick: goFormsScoped(
+            onClick: goScoped(
               CategoryType.Favorite,
               "/forms/favorites",
               favoritesFolderId,
+              [FolderType.FormRoom],
             ),
           },
           ...(canUseTemplates
@@ -393,10 +367,11 @@ const ClientArticleSidebar = ({
             id: "forms-trash",
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
-            onClick: goFormsScoped(
+            onClick: goScoped(
               CategoryType.Trash,
               "/forms/trash",
               recycleBinFolderId,
+              [FolderType.FormRoom],
             ),
             withTopSeparator: true,
           },
@@ -447,10 +422,9 @@ const ClientArticleSidebar = ({
     go,
     goFolder,
     goFolderAgent,
-    goRoomsScoped,
+    goScoped,
     goTemplates,
     goFormsTemplates,
-    goFormsScoped,
     treeFolders,
     isVisitor,
     canUseTemplates,

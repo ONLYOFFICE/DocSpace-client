@@ -51,6 +51,7 @@ const EXCLUDE_DIRS = [
   "node_modules",
   "dist",
   "coverage",
+  "reports",
   "storybook-static",
   "__mocks__",
   "__tests__",

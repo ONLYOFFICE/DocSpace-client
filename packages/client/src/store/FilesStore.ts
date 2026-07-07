@@ -198,6 +198,7 @@ import {
   isFileChecked,
   filterFilesBySelected,
 } from "./filesStore/selection.helpers";
+import { getItemUrl as buildItemUrl } from "./filesStore/itemUrl.helpers";
 
 export type { TItem, TItemSecurity } from "./filesStore/types";
 
@@ -3439,45 +3440,18 @@ class FilesStore {
     shareKey?: string,
     isAiRoom?: boolean,
   ) => {
-    const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
-
-    const url = getCategoryUrl(
-      isAiRoom ? CategoryType.Chat : this.categoryType,
+    return buildItemUrl(
       id,
+      isFolder,
+      needConvert,
+      canOpenPlayer,
+      {
+        categoryType: this.categoryType,
+        publicRoomStore: this.publicRoomStore,
+      },
+      shareKey,
+      isAiRoom,
     );
-
-    if (canOpenPlayer) {
-      if (this.publicRoomStore.isPublicRoom) {
-        const key = this.publicRoomStore.publicRoomKey;
-        const filterObj = FilesFilter.getFilter(window.location);
-
-        return `${combineUrl(
-          proxyURL,
-          config.homepage,
-          "/rooms/share",
-          MEDIA_VIEW_URL,
-          id,
-        )}?key=${key}&${filterObj.toUrlParams()}`;
-      }
-
-      return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
-    }
-
-    if (isFolder) {
-      const folderUrl = isFolder
-        ? combineUrl(proxyURL, config.homepage, `${url}?folder=${id}`)
-        : null;
-
-      return folderUrl;
-    }
-
-    const newUrl = combineUrl(
-      proxyURL,
-      config.homepage,
-      `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}${shareKey ? `&share=${shareKey}` : ""}`,
-    );
-
-    return newUrl;
   };
 
   getFilesListItems = (items: TItem[]): TItem[] =>

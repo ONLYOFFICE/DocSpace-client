@@ -114,6 +114,18 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 
 ## Code Quality
 
+### Language
+
+All files committed to the repository — source code, comments, docs, Markdown,
+commit messages, and planning notes — must be written in English. User-facing
+strings are the only exception and must go through the i18n system (see below),
+never hardcoded.
+
+### Commit messages
+
+Do not add `Co-Authored-By` trailers or any other AI-attribution lines to
+commit messages.
+
 ### Pre-push Hooks (Lefthook)
 
 Automatically runs before push:

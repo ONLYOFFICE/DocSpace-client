@@ -92,6 +92,13 @@ vi.mock(
   () => ({ backfillEncryptedFilesForRoomMembers: vi.fn(async () => {}) }),
 );
 
+// Info-panel helpers: fetch/socket paths poke the info panel; stub so tests
+// don't reach the real panel store.
+vi.mock("SRC_DIR/helpers/info-panel", () => ({
+  setInfoPanelSelectedRoom: vi.fn(),
+  refreshInfoPanel: vi.fn(),
+}));
+
 // Client i18n bootstrap: `src/i18n.js` builds a real i18next instance with an
 // HTTP backend at import time (pulled in transitively via helpers/filesUtils).
 // Replace it with an inert instance whose `t` echoes the key, so no network

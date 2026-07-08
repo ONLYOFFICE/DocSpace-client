@@ -71,26 +71,19 @@ vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
   resolveDisplayTitle: ({ title }: { title?: string }) => title,
 }));
 
-// Encryption/private-room services: only invoked from methods, never the
-// constructor. Stubbed so importing them never touches real crypto/storage.
-// `getCached` is the method the store actually calls; returning null makes the
-// encryption helpers early-return (no unlocked identity), which is the safe
-// default for tests that don't exercise the crypto path.
-vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
-  SecretStorage: { getCached: vi.fn(() => null) },
+// Encryption/private-room services are import-safe (no top-level side effects)
+// and only invoked from methods with an unlocked identity, so the harness does
+// not mock them: `SecretStorage.getCached` returns null in tests (no identity),
+// which makes the encryption helpers early-return. Tests that exercise the
+// crypto path (FilesStore.encryption.test.ts) mock these modules themselves so
+// a single mock instance is shared between the spec and the store.
+
+// Info-panel helpers: fetch/socket paths poke the info panel; stub so tests
+// don't reach the real panel store.
+vi.mock("SRC_DIR/helpers/info-panel", () => ({
+  setInfoPanelSelectedRoom: vi.fn(),
+  refreshInfoPanel: vi.fn(),
 }));
-// NB: this module lives under services/private-room, NOT services/encryption.
-vi.mock(
-  "@docspace/shared/services/private-room/encrypted-filename-recovery",
-  () => ({
-    ensureDecryptedFilename: vi.fn(async (f: unknown) => f),
-    recoverEncryptedFilenames: vi.fn(async () => {}),
-  }),
-);
-vi.mock(
-  "@docspace/shared/services/private-room/room-encryption",
-  () => ({ backfillEncryptedFilesForRoomMembers: vi.fn(async () => {}) }),
-);
 
 // Client i18n bootstrap: `src/i18n.js` builds a real i18next instance with an
 // HTTP backend at import time (pulled in transitively via helpers/filesUtils).
@@ -142,11 +135,23 @@ export type FakeStores = {
 
 const defaultFakes = (): FakeStores => ({
   authStore: { currentQuotaStore: {} },
-  selectedFolderStore: { id: 1, navigationPath: [], security: {} },
+  selectedFolderStore: {
+    id: 1,
+    navigationPath: [],
+    security: {},
+    isRoom: false,
+    isIndexedFolder: false,
+    filesCount: 0,
+    foldersCount: 0,
+    setSelectedFolder: vi.fn(),
+    setFilesCount: vi.fn(),
+    setFoldersCount: vi.fn(),
+  },
   treeFoldersStore: {
     treeFolders: [],
     fetchTreeFolders: vi.fn(),
     updateTreeFoldersItem: vi.fn(),
+    setSelectedNode: vi.fn(),
     isMy: () => false,
     isRecycleBinFolder: false,
     isArchiveFolder: false,
@@ -155,6 +160,11 @@ const defaultFakes = (): FakeStores => ({
     isPrivacyFolder: false,
     isAIAgentsFolder: false,
     sharedWithMeFolderId: undefined,
+    // Distinct sentinels: in production these are real folder ids, so keeping
+    // them non-undefined avoids `undefined === undefined` matches in handlers
+    // that compare socket payload ids against them.
+    recentFolderId: -101,
+    favoritesFolderId: -102,
   },
   filesSettingsStore: {
     getIcon: () => "icon.svg",
@@ -183,15 +193,25 @@ const defaultFakes = (): FakeStores => ({
     contextMenuItemsList: [],
     getContextMenuKeysByType: () => [],
   },
-  publicRoomStore: { isPublicRoom: false },
+  publicRoomStore: {
+    isPublicRoom: false,
+    getExternalLinks: vi.fn(async () => {}),
+  },
   userStore: {
     user: { id: "user-1", isAdmin: false },
     encryptionKeys: [],
   },
   currentTariffStatusStore: {},
   settingsStore: { enablePlugins: false, isFrame: false, isDesktopClient: false },
-  indexingStore: { isIndexEditingMode: false },
-  aiRoomStore: {},
+  indexingStore: {
+    isIndexEditingMode: false,
+    setIsIndexEditingMode: vi.fn(),
+  },
+  aiRoomStore: {
+    setKnowledgeId: vi.fn(),
+    setResultId: vi.fn(),
+    setCurrentTab: vi.fn(),
+  },
 });
 
 /**

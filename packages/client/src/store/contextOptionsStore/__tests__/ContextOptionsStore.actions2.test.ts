@@ -185,3 +185,71 @@ describe("ContextOptionsStore — action handler delegation (batch 4)", () => {
     );
   });
 });
+
+describe("ContextOptionsStore — action handler delegation (batch 5)", () => {
+  it("onClickUnsubscribe -> setUnsubscribe(true) + setDeleteDialogVisible(true)", () => {
+    const setUnsubscribe = vi.fn();
+    const setDeleteDialogVisible = vi.fn();
+    const store = createTestContextOptionsStore({
+      dialogsStore: { setUnsubscribe, setDeleteDialogVisible },
+    });
+    store.onClickUnsubscribe();
+    expect(setUnsubscribe).toHaveBeenCalledWith(true);
+    expect(setDeleteDialogVisible).toHaveBeenCalledWith(true);
+  });
+
+  it("onClickArchive('archive') -> dialogsStore.setArchiveDialogVisible(true)", () => {
+    const setArchiveDialogVisible = vi.fn();
+    const store = createTestContextOptionsStore({
+      dialogsStore: { setArchiveDialogVisible },
+    });
+    store.onClickArchive("archive" as never);
+    expect(setArchiveDialogVisible).toHaveBeenCalledWith(true);
+  });
+
+  it("onClickArchive('unarchive') warns when the rooms limit is reached", () => {
+    const setQuotaWarningDialogVisible = vi.fn();
+    const store = createTestContextOptionsStore({
+      currentQuotaStore: { isWarningRoomsDialog: true },
+      dialogsStore: { setQuotaWarningDialogVisible },
+    });
+    store.onClickArchive("unarchive" as never);
+    expect(setQuotaWarningDialogVisible).toHaveBeenCalledWith(true);
+  });
+
+  it("onCreateFormFromFile -> dialogsStore.setSelectFileDialogVisible(true)", () => {
+    const setSelectFileDialogVisible = vi.fn();
+    const store = createTestContextOptionsStore({
+      dialogsStore: { setSelectFileDialogVisible },
+    });
+    store.onCreateFormFromFile(t);
+    expect(setSelectFileDialogVisible).toHaveBeenCalledWith(true);
+  });
+
+  it("onOpenEmbeddingSettings -> dialogsStore.setEmbeddingPanelData", () => {
+    const setEmbeddingPanelData = vi.fn();
+    const store = createTestContextOptionsStore({
+      dialogsStore: { setEmbeddingPanelData, setLinkParams: vi.fn() },
+    });
+    store.onOpenEmbeddingSettings(item());
+    expect(setEmbeddingPanelData).toHaveBeenCalledWith(
+      expect.objectContaining({ visible: true }),
+    );
+  });
+
+  it("onCreateAgent dispatches the agent-create event", () => {
+    const dispatchEvent = vi.spyOn(window, "dispatchEvent");
+    const store = createTestContextOptionsStore();
+    store.onCreateAgent();
+    expect(dispatchEvent).toHaveBeenCalledTimes(1);
+    dispatchEvent.mockRestore();
+  });
+
+  it("onSaveAsTemplate dispatches the save-as-template event", () => {
+    const dispatchEvent = vi.spyOn(window, "dispatchEvent");
+    const store = createTestContextOptionsStore();
+    store.onSaveAsTemplate(item());
+    expect(dispatchEvent).toHaveBeenCalledTimes(1);
+    dispatchEvent.mockRestore();
+  });
+});

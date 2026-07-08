@@ -215,6 +215,12 @@ import {
   redirectToParentImpl,
 } from "./filesStore/socket.helpers";
 import { removeFilesImpl } from "./filesStore/mutations.helpers";
+import {
+  recoverEncryptedFilenamesForCurrentViewImpl,
+  ensureEncryptedFilenameForFileImpl,
+  syncEncryptedRoomImpl,
+  maybeBackfillEncryptedRoomImpl,
+} from "./filesStore/encryption.helpers";
 
 export type { TItem, TItemSecurity } from "./filesStore/types";
 
@@ -1677,118 +1683,18 @@ class FilesStore {
       .then((file) => this.setFile(file));
   };
 
-  recoverEncryptedFilenamesForCurrentView = () => {
-    const userId = this.userStore?.user?.id;
-    if (!userId) return;
-    const identity = SecretStorage.getCached(String(userId));
-    if (!identity) return;
-    const candidates = (this.files ?? [])
-      .filter((f) => f.encrypted && f.id && f.viewUrl)
-      .map((f) => ({ id: f.id, viewUrl: f.viewUrl }));
-    if (candidates.length === 0) return;
-    const roomId =
-      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
-      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
-    if (!roomId) return;
-    void recoverEncryptedFilenames(
-      candidates,
-      String(userId),
-      identity,
-      roomId,
-    );
-  };
+  recoverEncryptedFilenamesForCurrentView = () =>
+    recoverEncryptedFilenamesForCurrentViewImpl(this);
 
-  ensureEncryptedFilenameForFile = (file: TFile) => {
-    if (!file?.encrypted || !file.id || !file.viewUrl) return;
-    const userId = this.userStore?.user?.id;
-    if (!userId) return;
-    const identity = SecretStorage.getCached(String(userId));
-    if (!identity) return;
-    const roomId =
-      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
-      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
-    if (!roomId) return;
-    void ensureDecryptedFilename(
-      { id: file.id, viewUrl: file.viewUrl, encrypted: file.encrypted },
-      String(userId),
-      identity,
-      roomId,
-    );
-  };
+  ensureEncryptedFilenameForFile = (file: TFile) =>
+    ensureEncryptedFilenameForFileImpl(this, file);
 
-  syncEncryptedRoom = () => {
-    this.recoverEncryptedFilenamesForCurrentView();
-
-    const roomId =
-      this.selectedFolderStore.navigationPath.find((r) => r.isRoom)?.id ??
-      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
-    if (roomId) {
-      this.maybeBackfillEncryptedRoom(roomId, this.selectedFolderStore.security);
-    }
-  };
+  syncEncryptedRoom = () => syncEncryptedRoomImpl(this);
 
   maybeBackfillEncryptedRoom = (
     roomId: Nullable<number | string>,
     security?: Nullable<{ EditRoom?: boolean }>,
-  ) => {
-    if (!roomId) return;
-    // Only room managers/admins backfill — they're the likely "inviter" with
-    // unwrap access. Regular members may not even have the DEK to re-share.
-    if (!security?.EditRoom) {
-      console.info(
-        "[ENCRYPTION] Backfill skipped for room",
-        roomId,
-        "— no EditRoom permission",
-      );
-      return;
-    }
-
-    if (this._backfilledEncryptedRooms.has(roomId)) return;
-
-    const userId = this.userStore?.user?.id;
-    if (!userId) return;
-
-    const identity = SecretStorage.getCached(String(userId));
-    if (!identity) {
-      console.info(
-        "[ENCRYPTION] Backfill skipped for room",
-        roomId,
-        "— identity not unlocked yet (will retry on next entry)",
-      );
-      return;
-    }
-
-    this._backfilledEncryptedRooms.add(roomId);
-    console.info("[ENCRYPTION] Starting backfill sweep for room", roomId);
-
-    // backfillEncryptedFilesForRoomMembers is typed with a
-    // numeric roomId; string ids pass through unchanged at runtime.
-    void backfillEncryptedFilesForRoomMembers(roomId as number, {
-      currentUserId: String(userId),
-      identity,
-      // Background sweep: don't surprise the user with a TOFU prompt.
-      // Mismatches are skipped silently and re-considered next session.
-      onKeyChange: async () => "refuse",
-    })
-      .then(({ fileResults, skippedMembers }) => {
-        const wrappedFiles = fileResults.filter((r) => r.success).length;
-        const failedFiles = fileResults.filter((r) => !r.success).length;
-        console.info(
-          "[ENCRYPTION] Backfill done for room",
-          roomId,
-          "— files processed:",
-          wrappedFiles,
-          "failed:",
-          failedFiles,
-          "skipped members:",
-          skippedMembers.length,
-        );
-      })
-      .catch((error) => {
-        this._backfilledEncryptedRooms.delete(roomId);
-        console.error("[ENCRYPTION] Backfill failed for room", roomId, error);
-      });
-  };
+  ) => maybeBackfillEncryptedRoomImpl(this, roomId, security);
 
   renameFolder = (folderId: number | string, title: string) => {
     // api.files.renameFolder is typed with a numeric

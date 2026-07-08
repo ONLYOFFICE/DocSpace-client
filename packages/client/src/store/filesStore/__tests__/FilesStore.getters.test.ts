@@ -82,3 +82,35 @@ describe("FilesStore.isFiltered — characterization", () => {
     expect(store.isFiltered).toBeFalsy();
   });
 });
+
+describe("FilesStore.getFilesCount — regression", () => {
+  // Regression for the fixed string-coercion bug: the count must add
+  // this.folders.length (a number), not the folders array.
+  it("returns the folder's foldersCount when the view is empty", () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { filesCount: 0, foldersCount: 5 },
+    });
+    store.files = [];
+    store.folders = [];
+    expect(store.getFilesCount()).toBe(5);
+  });
+
+  it("returns the loaded folders length when items are present", () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { filesCount: 0, foldersCount: 5 },
+    });
+    store.files = [];
+    store.folders = [{ id: 1 } as TItem, { id: 2 } as TItem] as never;
+    expect(store.getFilesCount()).toBe(2);
+  });
+
+  it("counts loaded folders even when only files contribute to the total", () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { filesCount: 3, foldersCount: 5 },
+    });
+    store.files = [{ id: 1 } as TItem] as never;
+    store.folders = [];
+    // filesCount(3) + folders.length(0) > 0 → folders.length (0)
+    expect(store.getFilesCount()).toBe(0);
+  });
+});

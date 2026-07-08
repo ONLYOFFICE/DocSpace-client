@@ -1415,10 +1415,7 @@ class FilesStore {
 
   getFilesCount = () => {
     const { filesCount, foldersCount } = this.selectedFolderStore;
-    // the original expression `filesCount + this.folders`
-    // coerces the array to a string (always truthy) — preserved verbatim
-    // with an erased cast; candidate for a real fix.
-    return (filesCount + (this.folders as unknown as number))
+    return filesCount + this.folders.length > 0
       ? this.folders.length
       : foldersCount;
   };

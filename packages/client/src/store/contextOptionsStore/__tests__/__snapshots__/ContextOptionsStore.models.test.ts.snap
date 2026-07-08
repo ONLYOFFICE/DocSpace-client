@@ -1,0 +1,91 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContextOptionsStore.getFolderModel — characterization > builds the create model when Create is allowed 1`] = `
+[
+  {
+    "key": "new-document",
+    "label": "Common:NewDocument",
+  },
+  {
+    "key": "new-spreadsheet",
+    "label": "Common:NewSpreadsheet",
+  },
+  {
+    "key": "new-presentation",
+    "label": "Common:NewPresentation",
+  },
+  {
+    "items": [
+      {
+        "key": "new-form",
+        "label": "Translations:SubNewForm",
+      },
+      {
+        "key": "new-form-file",
+        "label": "Translations:SubNewFormFile",
+      },
+    ],
+    "key": "new-form-base",
+    "label": "Translations:NewForm",
+  },
+  {
+    "key": "new-folder",
+    "label": "Common:NewFolder",
+  },
+  {
+    "key": "separator",
+  },
+  {
+    "key": "upload-files",
+    "label": "Common:UploadFiles",
+  },
+  {
+    "key": "upload-folder",
+    "label": "Common:UploadFolder",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getGroupContextOptions — characterization > builds the group (multi-selection) model 1`] = `
+[
+  {
+    "key": "create-room",
+    "label": "Common:CreateRoom",
+  },
+  {
+    "key": "vectorization",
+    "label": "Common:Vectorization",
+  },
+  {
+    "key": "download",
+    "label": "Common:Download",
+  },
+  {
+    "key": "download-as",
+    "label": "Common:DownloadAs",
+  },
+  {
+    "key": "move-to",
+    "label": "Common:MoveTo",
+  },
+  {
+    "key": "copy-to",
+    "label": "Common:Copy",
+  },
+  {
+    "key": "restore",
+    "label": "Common:Restore",
+  },
+  {
+    "key": "separator1",
+  },
+  {
+    "key": "remove-from-recent",
+    "label": "Common:RemoveFromList",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+]
+`;

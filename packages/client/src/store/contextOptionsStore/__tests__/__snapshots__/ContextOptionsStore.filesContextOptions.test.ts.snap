@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContextOptionsStore.getFilesContextOptions — characterization > maps a folder option set 1`] = `
+[
+  {
+    "key": "open",
+    "label": "Common:Open",
+  },
+  {
+    "key": "rename",
+    "label": "Common:Rename",
+  },
+  {
+    "key": "separator1",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`ContextOptionsStore.getFilesContextOptions — characterization > maps a typical document option set to a stable menu shape 1`] = `
+[
+  {
+    "key": "select",
+    "label": "Common:SelectAction",
+  },
+  {
+    "key": "rename",
+    "label": "Common:Rename",
+  },
+  {
+    "key": "separator0",
+  },
+  {
+    "key": "delete",
+    "label": "Common:Delete",
+  },
+]
+`;

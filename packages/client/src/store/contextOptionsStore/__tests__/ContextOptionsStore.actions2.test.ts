@@ -132,3 +132,56 @@ describe("ContextOptionsStore — action handler delegation (batch 3)", () => {
     expect(setSelectFileFormRoomDialogVisible.mock.calls[0][0]).toBe(true);
   });
 });
+
+describe("ContextOptionsStore — action handler delegation (batch 4)", () => {
+  it("onMoveAction -> dialogsStore.setMoveToPanelVisible(true)", () => {
+    const setMoveToPanelVisible = vi.fn();
+    const store = createTestContextOptionsStore({
+      dialogsStore: { setMoveToPanelVisible, setIsFolderActions: vi.fn() },
+    });
+    store.onMoveAction(item());
+    expect(setMoveToPanelVisible).toHaveBeenCalledWith(true);
+  });
+
+  it("onCopyAction -> dialogsStore.setCopyPanelVisible(true)", () => {
+    const setCopyPanelVisible = vi.fn();
+    const store = createTestContextOptionsStore({
+      dialogsStore: { setCopyPanelVisible, setIsFolderActions: vi.fn() },
+    });
+    store.onCopyAction(item());
+    expect(setCopyPanelVisible).toHaveBeenCalledWith(true);
+  });
+
+  it("showVersionHistory -> versionHistoryStore.setIsVerHistoryPanel(true)", () => {
+    const setIsVerHistoryPanel = vi.fn();
+    const fetchFileVersions = vi.fn();
+    const store = createTestContextOptionsStore({
+      versionHistoryStore: { setIsVerHistoryPanel, fetchFileVersions },
+    });
+    store.showVersionHistory(1);
+    expect(fetchFileVersions).toHaveBeenCalledTimes(1);
+    expect(setIsVerHistoryPanel).toHaveBeenCalledWith(true);
+  });
+
+  it("onCreateRoom shows the quota warning when the rooms limit is reached", () => {
+    const setQuotaWarningDialogVisible = vi.fn();
+    const store = createTestContextOptionsStore({
+      currentQuotaStore: { isWarningRoomsDialog: true },
+      dialogsStore: { setQuotaWarningDialogVisible },
+    });
+    store.onCreateRoom();
+    expect(setQuotaWarningDialogVisible).toHaveBeenCalledWith(true);
+  });
+
+  it("onClickInviteUsers opens the invite panel outside a grace period", () => {
+    const setInvitePanelOptions = vi.fn();
+    const store = createTestContextOptionsStore({
+      currentTariffStatusStore: { isGracePeriod: false },
+      dialogsStore: { setInvitePanelOptions },
+    });
+    store.onClickInviteUsers(9, undefined);
+    expect(setInvitePanelOptions).toHaveBeenCalledWith(
+      expect.objectContaining({ visible: true, roomId: 9 }),
+    );
+  });
+});

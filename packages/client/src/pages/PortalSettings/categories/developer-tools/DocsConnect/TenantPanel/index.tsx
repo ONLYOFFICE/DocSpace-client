@@ -112,7 +112,7 @@ const TenantPanel = ({
       : ([
           {
             key: "edit-plan",
-            label: t("Common:EditPlan"),
+            label: t("Common:EditSubscription"),
             icon: SettingsReactSvgUrl,
             onClick: () => openBuyPlan?.("edit"),
           },
@@ -132,7 +132,7 @@ const TenantPanel = ({
           },
           {
             key: "cancel-plan",
-            label: t("Common:CancelPlan"),
+            label: t("Common:CancelSubscription"),
             icon: CircleCrossReactSvgUrl,
             onClick: () => openCancelPlanDialog?.(),
           },

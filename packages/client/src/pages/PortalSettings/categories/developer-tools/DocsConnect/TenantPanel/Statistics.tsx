@@ -49,6 +49,7 @@ import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
+import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -167,7 +168,9 @@ const Statistics = ({
             ) : (
               <>
                 <Text fontSize="13px" fontWeight={600}>
-                  {t("DocsConnect:TrialBannerTitle")}
+                  {t("DocsConnect:TrialBannerTitle", {
+                    organizationName: getBrandName("OrganizationName"),
+                  })}
                 </Text>
                 <Text fontSize="12px" className={styles.muted}>
                   {t("DocsConnect:TrialBannerDescription", {
@@ -184,7 +187,7 @@ const Statistics = ({
             primary
             className={styles.bannerButton}
             size={ButtonSize.small}
-            label={t("DocsConnect:BuyAPlan")}
+            label={t("DocsConnect:Upgrade")}
             onClick={() => openBuyPlan?.("trial")}
           />
         </div>
@@ -194,7 +197,7 @@ const Statistics = ({
         <StorageWarning
           title={
             isCancellation
-              ? t("Common:PlanCancellation")
+              ? t("Common:SubscriptionCancellation")
               : scheduledDevPackOff && scheduledUsersChanged
                 ? t("Common:TariffDevPackUserAdjustmentScheduled", {
                     fromCount: planUsers,
@@ -308,11 +311,11 @@ const Statistics = ({
                   fontWeight={700}
                   className={styles.deactivatedTitle}
                 >
-                  {t("Common:TariffPlanDeactivatedNonPayment")}
+                  {t("Common:SubscriptionDeactivated")}
                 </Text>
               ) : (
                 <Text fontSize="16px" fontWeight={700}>
-                  {t("Common:TariffPlan")}{" "}
+                  {t("DocsConnect:Subscription")}{" "}
                   <Text
                     as="span"
                     fontSize="16px"
@@ -368,7 +371,7 @@ const Statistics = ({
                   textDecoration="underline dashed"
                   onClick={() => openBuyPlan?.("edit")}
                 >
-                  {t("Common:EditPlan")}
+                  {t("Common:EditSubscription")}
                 </Link>
               )}
             </div>

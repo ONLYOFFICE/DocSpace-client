@@ -193,7 +193,9 @@ const BuyPlanPanel = ({
       isDoubleFooterLine={insufficientFunds}
     >
       <ModalDialog.Header>
-        {isEditActive ? t("Common:EditPlan") : t("DocsConnect:DocsConnect")}
+        {isEditActive
+          ? t("Common:EditSubscription")
+          : t("DocsConnect:DocsConnect")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.body}>

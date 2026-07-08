@@ -174,7 +174,7 @@ const DocsConnectPage = ({
     : [
         {
           key: "edit",
-          label: t("Common:EditPlan"),
+          label: t("Common:EditSubscription"),
           iconNode: <PencilIcon />,
           onClick: onEditPlan,
         },
@@ -190,7 +190,7 @@ const DocsConnectPage = ({
         },
         {
           key: "cancel",
-          label: t("Common:CancelPlan"),
+          label: t("Common:CancelSubscription"),
           iconNode: <CircleCrossIcon />,
           onClick: onCancelPlan,
         },
@@ -230,7 +230,7 @@ const DocsConnectPage = ({
         <StorageWarning
           title={
             isCancellation
-              ? t("Common:PlanCancellation")
+              ? t("Common:SubscriptionCancellation")
               : scheduledDevPackOff && scheduledUsersChanged
                 ? t("Common:TariffDevPackUserAdjustmentScheduled", {
                     fromCount: planUsers,
@@ -289,11 +289,11 @@ const DocsConnectPage = ({
       {isPaid && canceled ? (
         <>
           <Text className={styles.sectionTitle}>
-            {t("Common:CurrentTariffPlan")}
+            {t("Common:CurrentSubscription")}
           </Text>
           <div className={styles.noPlanCard}>
             <Text className={styles.noPlanTitle}>
-              {t("Common:NoActivePlan")}
+              {t("Common:NoActiveSubscription")}
             </Text>
             <Button
               primary
@@ -311,11 +311,11 @@ const DocsConnectPage = ({
               <Text
                 className={`${styles.sectionTitle} ${styles.sectionTitleError}`}
               >
-                {t("Common:TariffPlanDeactivatedNonPayment")}
+                {t("Common:SubscriptionDeactivated")}
               </Text>
             ) : (
               <Text className={styles.sectionTitle}>
-                {t("Common:CurrentTariffPlan")}
+                {t("Common:CurrentSubscription")}
               </Text>
             )}
             <IconButton
@@ -415,7 +415,7 @@ const DocsConnectPage = ({
               <Button
                 primary
                 size={ButtonSize.small}
-                label={t("Common:EditPlan")}
+                label={t("Common:EditSubscription")}
                 onClick={onEditPlan}
               />
               <Button
@@ -453,7 +453,7 @@ const DocsConnectPage = ({
               <Button
                 primary
                 size={ButtonSize.small}
-                label={t("DocsConnect:BuyAPlan")}
+                label={t("DocsConnect:Upgrade")}
                 onClick={onBuyPlan}
               />
             </div>
@@ -489,7 +489,7 @@ const DocsConnectPage = ({
               <Button
                 primary
                 size={ButtonSize.small}
-                label={t("DocsConnect:BuyAPlan")}
+                label={t("DocsConnect:Upgrade")}
                 onClick={onBuyPlan}
               />
               <Button

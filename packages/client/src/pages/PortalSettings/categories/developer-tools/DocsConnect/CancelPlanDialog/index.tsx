@@ -101,7 +101,7 @@ const CancelPlanDialog = ({
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("DocsConnect:TariffPlanCancellation")}
+        {t("Common:SubscriptionCancellation")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.body}>

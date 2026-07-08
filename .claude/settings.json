@@ -44,7 +44,10 @@
       "Bash(grep -v \"^\\\\.meta$\")",
       "Bash(grep -vE \"^  [a-z]|initCSR|loadUrl|originated|Unhandled|findIndex|i18next-http|^\\\\}|^ *$\")",
       "Bash(../../node_modules/.pnpm/node_modules/.bin/biome check *)",
-      "Bash(python3 /tmp/replace_method.py)"
+      "Bash(python3 /tmp/replace_method.py)",
+      "Bash(python3 /tmp/extract_group.py '{\"file\":\"contextOptionsStore/groupContextOptions.helpers.ts\",\"methods\":[{\"name\":\"getGroupContextOptions\",\"start\":2211,\"end\":2627}]}')",
+      "Bash(python3 /tmp/extract_all.py '[ *)",
+      "Bash(grep -vE \"^\\\\s*$\")"
     ]
   }
 }

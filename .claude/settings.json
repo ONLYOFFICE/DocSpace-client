@@ -42,7 +42,8 @@
       "Bash(node_modules/.bin/vitest run *)",
       "Bash(grep -v \"^en$\")",
       "Bash(grep -v \"^\\\\.meta$\")",
-      "Bash(grep -vE \"^\\\\s*$\")"
+      "Bash(grep -vE \"^\\\\s*$\")",
+      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.actions.test.ts)"
     ]
   }
 }

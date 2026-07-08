@@ -386,6 +386,8 @@ export function fetchFilesImpl(
           (item) => item.folderType !== FolderType.AIAgent,
         );
 
+        const currentFolderType: TItem["type"] = currentFolder.type;
+
         currentFolder = {
           ...aiRoom,
           security: {
@@ -409,7 +411,7 @@ export function fetchFilesImpl(
             UseChat: aiRoom.security!.UseChat,
           },
           isRoom: true,
-          type: currentFolder.type,
+          type: currentFolderType,
         };
       } else if (currentFolder.roomType === RoomsType.AIRoom) {
         isChatTab = true;

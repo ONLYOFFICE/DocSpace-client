@@ -42,19 +42,6 @@
           }
         }
       }
-    },
-    {
-      "includes": [
-        "src/store/FilesStore.ts",
-        "src/store/filesStore/fetch.helpers.ts"
-      ],
-      "linter": {
-        "rules": {
-          "nursery": {
-            "noMisusedPromises": "off"
-          }
-        }
-      }
     }
   ]
 }

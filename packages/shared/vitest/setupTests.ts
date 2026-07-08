@@ -123,6 +123,12 @@ vi.mock("react-i18next", () => ({
   Trans: ({ t, i18nKey, values }: TransProps) => {
     return t(i18nKey, { ...values });
   },
+  // Modules that bootstrap i18n at import time (e.g. client `src/i18n.js`,
+  // pulled in transitively by store modules) call `.use(initReactI18next)` and
+  // wrap trees in `<I18nextProvider>`. Provide inert stubs so those imports do
+  // not throw "No export is defined on the mock".
+  initReactI18next: { type: "3rdParty", init: () => {} },
+  I18nextProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 
 vi.mock("../utils/image-helpers", () => ({

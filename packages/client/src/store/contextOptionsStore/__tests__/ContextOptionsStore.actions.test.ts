@@ -163,3 +163,67 @@ describe("ContextOptionsStore — action handler delegation", () => {
     expect(setEmptyTrashDialogVisible).not.toHaveBeenCalled();
   });
 });
+
+describe("ContextOptionsStore — action handler delegation (batch 2)", () => {
+  it("onEditIndex -> indexingStore.setIsIndexEditingMode(true)", () => {
+    const setIsIndexEditingMode = vi.fn();
+    const store = createTestContextOptionsStore({
+      indexingStore: { setIsIndexEditingMode },
+    });
+    store.onEditIndex();
+    expect(setIsIndexEditingMode).toHaveBeenCalledWith(true);
+  });
+
+  it("onClickMute -> filesActionsStore.setMuteAction", () => {
+    const setMuteAction = vi.fn();
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { setMuteAction },
+    });
+    store.onClickMute("mute" as never, item(), t);
+    expect(setMuteAction.mock.calls[0][0]).toBe("mute");
+  });
+
+  it("onClickRemoveFromRecent -> filesActionsStore.removeFilesFromRecent", () => {
+    const removeFilesFromRecent = vi.fn();
+    const store = createTestContextOptionsStore({
+      filesActionsStore: { removeFilesFromRecent },
+    });
+    store.onClickRemoveFromRecent(item(), t);
+    expect(removeFilesFromRecent).toHaveBeenCalledWith([1], t);
+  });
+
+  it("onMediaFileClick -> mediaViewerDataStore.setMediaViewerData", () => {
+    const setMediaViewerData = vi.fn();
+    const changeUrl = vi.fn();
+    const store = createTestContextOptionsStore({
+      mediaViewerDataStore: { setMediaViewerData, changeUrl },
+    });
+    store.onMediaFileClick(5, item());
+    expect(setMediaViewerData).toHaveBeenCalledWith({ visible: true, id: 5 });
+  });
+
+  it("onAddRoomsToGroup -> dialogsStore.updateRoomGroup", async () => {
+    const updateRoomGroup = vi.fn(async () => {});
+    const store = createTestContextOptionsStore({
+      dialogsStore: { updateRoomGroup },
+    });
+    await store.onAddRoomsToGroup([1], "g1", t, "Group");
+    expect(updateRoomGroup).toHaveBeenCalledWith("g1", expect.anything());
+  });
+
+  it("onClickDeleteSelectedFolder opens the delete dialog when confirmDelete is on", () => {
+    const setDeleteDialogVisible = vi.fn();
+    const store = createTestContextOptionsStore({
+      dialogsStore: {
+        setDeleteDialogVisible,
+        setIsFolderActions: vi.fn(),
+        setIsRoomDelete: vi.fn(),
+      },
+      filesSettingsStore: { confirmDelete: true },
+      selectedFolderStore: { getSelectedFolder: () => ({}) },
+      filesStore: { setBufferSelection: vi.fn(), isThirdPartySelection: false },
+    });
+    store.onClickDeleteSelectedFolder(t, false);
+    expect(setDeleteDialogVisible).toHaveBeenCalledWith(true);
+  });
+});

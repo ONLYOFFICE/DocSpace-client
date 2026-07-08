@@ -140,3 +140,48 @@ describe("FilesStore.fetchMoreFiles — characterization", () => {
     expect(store.filesIsLoading).toBe(false);
   });
 });
+
+// A page past the last available one clamps to the last page and re-requests.
+const highTotalPayload = () => ({
+  total: 10,
+  folders: [room(1)],
+  files: [],
+  new: 0,
+  pathParts: [] as unknown[],
+  current: { id: 7, parentId: 0, rootFolderType: FolderType.Rooms, security: {} },
+});
+
+describe("FilesStore.fetchRooms / fetchAgents — last-page clamp", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("fetchRooms re-requests when the page is beyond the last page", async () => {
+    const store = createTestFilesStore();
+    const getRooms = vi
+      .spyOn(api.rooms, "getRooms")
+      .mockResolvedValue(highTotalPayload() as never);
+
+    const filter = store.roomsFilter.clone();
+    filter.page = 5;
+    filter.pageCount = 50; // custom count keeps page from being reset to 0
+
+    await store.fetchRooms(0, filter);
+
+    // once for the out-of-range page, once for the clamped page
+    expect(getRooms).toHaveBeenCalledTimes(2);
+  });
+
+  it("fetchAgents re-requests when the page is beyond the last page", async () => {
+    const store = createTestFilesStore();
+    const getAgents = vi
+      .spyOn(api.ai, "getNewAiAgents")
+      .mockResolvedValue(highTotalPayload() as never);
+
+    const filter = store.roomsFilter.clone();
+    filter.page = 5;
+    filter.pageCount = 50;
+
+    await store.fetchAgents(0, filter);
+
+    expect(getAgents).toHaveBeenCalledTimes(2);
+  });
+});

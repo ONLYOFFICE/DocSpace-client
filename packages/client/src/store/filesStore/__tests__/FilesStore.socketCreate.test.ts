@@ -118,3 +118,34 @@ describe("FilesStore.redirectToParent — characterization", () => {
     expect(navigate).not.toHaveBeenCalled();
   });
 });
+
+describe("FilesStore.wsModifyFolderCreate — deferred queue add", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
+  it("enqueues a getFileInfo lookup ~300ms after a new-file event", async () => {
+    vi.useFakeTimers();
+    const store = createTestFilesStore();
+    store.getFilesContextOptions = (() => []) as never;
+    store.files = [];
+    (window as unknown as { dataLayer: unknown[] }).dataLayer = [];
+    const getFileInfo = vi
+      .spyOn(api.files, "getFileInfo")
+      .mockResolvedValue({ id: 7, folderId: 1 } as never);
+
+    await store.wsModifyFolderCreate({
+      type: "file",
+      id: 7,
+      data: JSON.stringify({ id: 7, folderId: 1, title: "New.docx" }),
+    } as never);
+
+    // nothing fetched yet — the lookup is deferred behind a 300ms timer
+    expect(getFileInfo).not.toHaveBeenCalled();
+
+    await vi.advanceTimersByTimeAsync(500);
+
+    expect(getFileInfo).toHaveBeenCalledWith(7, undefined);
+  });
+});

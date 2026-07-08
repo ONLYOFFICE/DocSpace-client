@@ -43,7 +43,8 @@
       "Bash(grep -v \"^en$\")",
       "Bash(grep -v \"^\\\\.meta$\")",
       "Bash(grep -vE \"^  [a-z]|initCSR|loadUrl|originated|Unhandled|findIndex|i18next-http|^\\\\}|^ *$\")",
-      "Bash(../../node_modules/.pnpm/node_modules/.bin/biome check *)"
+      "Bash(../../node_modules/.pnpm/node_modules/.bin/biome check *)",
+      "Bash(python3 /tmp/replace_method.py)"
     ]
   }
 }

@@ -45,6 +45,7 @@ import type {
   TDocsConnectTariffState,
   TDocsConnectWallet,
   TDocsConnectConfigUpdate,
+  TDocsConnectDevPackCalculation,
 } from "./types";
 
 const BASE = "/settings/docscloud";
@@ -362,6 +363,8 @@ export const buyDocsConnectPlan = async (
     await saveDeposite(topUp, currency);
   }
 
+  const disablingDevPack = currentDevPackEnabled && !devPackEnabled;
+
   const product = devPackEnabled
     ? DOCS_CLOUD_DEVPACK_PRODUCT
     : DOCS_CLOUD_PRODUCT;
@@ -371,19 +374,59 @@ export const buyDocsConnectPlan = async (
   const currentUsers = sameProduct ? prevUsers : 0;
   const isDecrease = users < currentUsers;
 
+  const quantity = disablingDevPack
+    ? { [DOCS_CLOUD_DEVPACK_PRODUCT]: 0 }
+    : { [product]: isDecrease ? users : users - currentUsers };
+
+  const productQuantityType =
+    disablingDevPack || isDecrease ? QUANTITY_TYPE_SET : QUANTITY_TYPE_ADD;
+
   const ok = (await request({
     method: "put",
     url: "/portal/payment/updatewallet",
     data: {
-      quantity: {
-        [product]: isDecrease ? users : users - currentUsers,
-      },
-      productQuantityType: isDecrease ? QUANTITY_TYPE_SET : QUANTITY_TYPE_ADD,
+      quantity,
+      productQuantityType,
     },
   })) as boolean;
 
   if (ok === false) {
     throw new Error("Docs Connect plan purchase failed");
+  }
+
+  return getDocsConnectInfo(true);
+};
+
+export const calculateDocsConnectDevPack = async (
+  quantity: number,
+): Promise<TDocsConnectDevPackCalculation | null> =>
+  (await request({
+    method: "post",
+    url: `${BASE}/calculatedevpack`,
+    data: { quantity },
+  })) as TDocsConnectDevPackCalculation | null;
+
+export const switchDocsConnectToDevPack = async ({
+  quantity,
+  topUp,
+  currency,
+}: {
+  quantity: number;
+  topUp?: number;
+  currency: string;
+}): Promise<TDocsConnectInfo | null> => {
+  if (topUp && topUp > 0) {
+    await saveDeposite(topUp, currency);
+  }
+
+  const ok = (await request({
+    method: "post",
+    url: `${BASE}/switchtodevpack`,
+    data: { quantity },
+  })) as boolean;
+
+  if (ok === false) {
+    throw new Error("Docs Connect switch to Dev Pack failed");
   }
 
   return getDocsConnectInfo(true);

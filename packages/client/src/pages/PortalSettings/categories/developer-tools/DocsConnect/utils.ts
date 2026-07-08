@@ -43,6 +43,12 @@ const startOfDay = (ms: number): number => {
   return date.getTime();
 };
 
+const addMonths = (ms: number, months: number): number => {
+  const date = new Date(ms);
+  date.setMonth(date.getMonth() + months);
+  return date.getTime();
+};
+
 export const isDocsConnectPaid = (info: TDocsConnectInfo): boolean =>
   info.tenantInfo.license.trial === false;
 
@@ -105,6 +111,17 @@ export const getDocsConnectDaysLeft = (endDate: string): number => {
     Math.round((startOfDay(target) - startOfDay(Date.now())) / DAY_MS),
   );
 };
+
+export const getDocsConnectPeriodDays = (endDate: string): number => {
+  const end = new Date(endDate).getTime();
+  if (Number.isNaN(end)) return 0;
+
+  const start = addMonths(end, -1);
+  return Math.max(1, Math.round((startOfDay(end) - startOfDay(start)) / DAY_MS));
+};
+
+export const getDocsConnectNextBillingDate = (): string =>
+  new Date(addMonths(startOfDay(Date.now()), 1)).toISOString();
 
 export const isDocsConnectTrialExpired = (endDate: string): boolean => {
   const target = new Date(endDate).getTime();

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -44,6 +44,8 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import QuantityPicker from "@docspace/ui-kit/components/quantity-picker";
 import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
 import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
@@ -53,15 +55,25 @@ import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation
 import RebrandingSvg from "PUBLIC_DIR/images/icons/16/docs-connect.rebranding.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
+import type {
+  TDocsConnectInfo,
+  TDocsConnectDevPackCalculation,
+} from "@docspace/shared/api/docs-connect/types";
 
-import { getDocsConnectDaysLeft, isDocsConnectPaid } from "../utils";
+import {
+  getDocsConnectDaysLeft,
+  getDocsConnectNextBillingDate,
+  getDocsConnectPeriodDays,
+  isDocsConnectPaid,
+} from "../utils";
 
 import styles from "./BuyPlanPanel.module.scss";
 
 const MIN_USERS = 1;
 const DEVPACK_MIN_USERS = 10;
 const MAX_USERS = 999;
+const USERS_MINUS_TOOLTIP_ID = "docs_connect_users_minus_tooltip";
+const DEVPACK_CALC_DEBOUNCE_MS = 500;
 
 interface BuyPlanPanelProps {
   visible?: boolean;
@@ -71,6 +83,13 @@ interface BuyPlanPanelProps {
     devPack: boolean;
     topUp?: number;
   }) => Promise<void>;
+  calculateDevPack?: (
+    quantity: number,
+  ) => Promise<TDocsConnectDevPackCalculation | null>;
+  switchToDevPack?: (opts: {
+    quantity: number;
+    topUp?: number;
+  }) => Promise<void>;
   closeBuyPlan?: () => void;
 }
 
@@ -78,6 +97,8 @@ const BuyPlanPanel = ({
   visible,
   info,
   buyPlan,
+  calculateDevPack,
+  switchToDevPack,
   closeBuyPlan,
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
@@ -91,6 +112,42 @@ const BuyPlanPanel = ({
     info?.devPackEnabled ?? false,
   );
   const [submitting, setSubmitting] = useState(false);
+  const [devPackCalc, setDevPackCalc] =
+    useState<TDocsConnectDevPackCalculation | null>(null);
+  const [calcLoading, setCalcLoading] = useState(false);
+
+  useEffect(() => {
+    if (!info) return undefined;
+
+    const curUsers = info.deactivated
+      ? 0
+      : (info.tenant.payment?.quantity ?? 0);
+    const curDevPack = info.devPackEnabled ?? false;
+    const isUp = isDocsConnectPaid(info) && curUsers > 0 && devPack && !curDevPack;
+
+    if (!isUp) {
+      setDevPackCalc(null);
+      return undefined;
+    }
+
+    let cancelled = false;
+    setCalcLoading(true);
+    const timer = setTimeout(async () => {
+      try {
+        const res = await calculateDevPack?.(users);
+        if (!cancelled) setDevPackCalc(res ?? null);
+      } catch {
+        if (!cancelled) setDevPackCalc(null);
+      } finally {
+        if (!cancelled) setCalcLoading(false);
+      }
+    }, DEVPACK_CALC_DEBOUNCE_MS);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [users, devPack, info, calculateDevPack]);
 
   if (!info) return null;
 
@@ -99,12 +156,16 @@ const BuyPlanPanel = ({
   const pricePerUser = info.prices?.pricePerUser ?? 0;
   const devPackPrice = info.prices?.devPackPrice ?? 0;
 
-  const minUsers = devPack ? DEVPACK_MIN_USERS : MIN_USERS;
+  const currentUsers = info.deactivated
+    ? 0
+    : (info.tenant.payment?.quantity ?? 0);
+  const currentDevPack = info.devPackEnabled ?? false;
 
   const onToggleDevPack = () => {
     setDevPack((prev) => {
       const next = !prev;
       if (next && users < DEVPACK_MIN_USERS) setUsers(DEVPACK_MIN_USERS);
+      if (!next) setUsers(currentUsers);
       return next;
     });
   };
@@ -113,10 +174,6 @@ const BuyPlanPanel = ({
   const perUser = pricePerUser + devPackPerUser;
   const totalMonthly = users * perUser;
 
-  const currentUsers = info.deactivated
-    ? 0
-    : (info.tenant.payment?.quantity ?? 0);
-  const currentDevPack = info.devPackEnabled ?? false;
   const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
 
   const usersChanged = users !== currentUsers;
@@ -127,6 +184,13 @@ const BuyPlanPanel = ({
     isEditActive &&
     (devPackTurnedOff || (!devPackChanged && users < currentUsers));
   const isUpgrade = isEditActive && hasChanges && !isScheduled;
+  const isDevPackUpgrade = isEditActive && devPack && !currentDevPack;
+
+  const minUsers = isDevPackUpgrade
+    ? Math.max(currentUsers, DEVPACK_MIN_USERS)
+    : devPack
+      ? DEVPACK_MIN_USERS
+      : MIN_USERS;
 
   const periodEndDate = info.tenant.endDate ?? "";
   const periodEndDateLocalized = formatDateLocalized(
@@ -134,14 +198,32 @@ const BuyPlanPanel = ({
     "DATE_MED",
     { locale: i18n.language },
   );
+  const nextBillingDateLocalized = formatDateLocalized(
+    getDocsConnectNextBillingDate(),
+    "DATE_MED",
+    { locale: i18n.language },
+  );
   const remainingDays = getDocsConnectDaysLeft(periodEndDate);
-  const prorationFactor = Math.min(1, remainingDays / 30);
+  const periodDays = getDocsConnectPeriodDays(periodEndDate);
+  const prorationFactor =
+    periodDays > 0 ? Math.min(1, remainingDays / periodDays) : 0;
 
-  const addedUsers = devPackChanged ? users : Math.max(0, users - currentUsers);
+  const currentMonthly = currentUsers * pricePerUser;
+
+  const calcPending = isDevPackUpgrade && (calcLoading || devPackCalc === null);
+  const localCredit = Math.round(currentMonthly * prorationFactor * 100) / 100;
+  const devPackCharge = devPackCalc?.amount ?? 0;
+  const unusedCredit = isDevPackUpgrade
+    ? Math.max(0, Math.round((totalMonthly - devPackCharge) * 100) / 100)
+    : localCredit;
+
+  const addedUsers = Math.max(0, users - currentUsers);
   const chargeNow = isEditActive
-    ? isUpgrade
-      ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
-      : 0
+    ? isDevPackUpgrade
+      ? devPackCharge
+      : isUpgrade
+        ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
+        : 0
     : users * perUser;
 
   const remainingCredits = availableCredits - chargeNow;
@@ -151,15 +233,31 @@ const BuyPlanPanel = ({
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);
 
+  const priceLoader = (
+    <Loader
+      color=""
+      size="16px"
+      type={LoaderTypes.track}
+      style={{ height: "16px" }}
+    />
+  );
+
   const onBuy = async () => {
     if (submitting) return;
     setSubmitting(true);
     try {
-      await buyPlan?.({
-        users,
-        devPack,
-        topUp: insufficientFunds ? topUpRequired : 0,
-      });
+      if (isDevPackUpgrade) {
+        await switchToDevPack?.({
+          quantity: users,
+          topUp: insufficientFunds ? topUpRequired : 0,
+        });
+      } else {
+        await buyPlan?.({
+          users,
+          devPack,
+          topUp: insufficientFunds ? topUpRequired : 0,
+        });
+      }
       toastr.success(
         isScheduled
           ? t("DocsConnect:ChangeScheduled")
@@ -190,7 +288,7 @@ const BuyPlanPanel = ({
       onClose={() => closeBuyPlan?.()}
       withBodyScroll
       withFooterBorder
-      isDoubleFooterLine={insufficientFunds}
+      isDoubleFooterLine={insufficientFunds || isDevPackUpgrade}
     >
       <ModalDialog.Header>
         {isEditActive
@@ -198,7 +296,13 @@ const BuyPlanPanel = ({
           : t("DocsConnect:DocsConnect")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.body}>
+        <div
+          className={
+            devPackTurnedOff
+              ? `${styles.body} ${styles.bodyScheduled}`
+              : styles.body
+          }
+        >
           <div className={styles.walletCard}>
             <div className={styles.walletIcon} aria-hidden>
               <WalletSvg />
@@ -257,7 +361,20 @@ const BuyPlanPanel = ({
                 price: formatCurrency(pricePerUser),
               })}
               onChange={setUsers}
+              isDisabled={devPackTurnedOff}
+              minusDisabled={isDevPackUpgrade}
+              minusTooltipId={
+                isDevPackUpgrade ? USERS_MINUS_TOOLTIP_ID : undefined
+              }
             />
+            {isDevPackUpgrade ? (
+              <Tooltip
+                id={USERS_MINUS_TOOLTIP_ID}
+                place="bottom"
+                maxWidth="320px"
+                getContent={() => t("DocsConnect:DevPackUserReductionTooltip")}
+              />
+            ) : null}
           </div>
 
           <div className={styles.devPackCard}>
@@ -326,7 +443,16 @@ const BuyPlanPanel = ({
             </div>
           </div>
 
-          {isEditActive && !hasChanges ? null : (
+          {isEditActive && !hasChanges ? null : devPackTurnedOff ? (
+            <div className={styles.scheduledNote}>
+              <StorageWarning
+                body={t("DocsConnect:DevPackDisableScheduledNote", {
+                  date: periodEndDateLocalized,
+                  service: t("DocsConnect:DocsConnect"),
+                })}
+              />
+            </div>
+          ) : (
             <>
               <Text
                 fontSize="16px"
@@ -337,52 +463,41 @@ const BuyPlanPanel = ({
               </Text>
               <div className={styles.summaryCard}>
                 {isEditActive ? (
-                  <>
-                    {devPackTurnedOff
-                      ? summaryRow(
-                          t("DocsConnect:DevPackDisabledLabel"),
-                          t("DocsConnect:MinusPricePerUser", {
-                            price: formatCurrency(devPackPrice),
-                          }),
-                        )
-                      : null}
-                    {usersChanged
-                      ? summaryRow(
-                          t("DocsConnect:UserAdjustmentLabel"),
-                          `${currentUsers} → ${users}`,
-                        )
-                      : summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
-                    {usersChanged && users > currentUsers
-                      ? summaryRow(
-                          t("DocsConnect:AdditionalUsers"),
-                          `+${users - currentUsers}`,
-                        )
-                      : null}
-                    {usersChanged && users < currentUsers
-                      ? summaryRow(
-                          t("DocsConnect:ReducedUsers"),
-                          t("DocsConnect:MinusCount", {
-                            count: currentUsers - users,
-                          }),
-                        )
-                      : null}
-                    {summaryRow(
-                      t("DocsConnect:BasePricePerUser"),
-                      formatCurrency(pricePerUser),
-                    )}
-                    {devPack
-                      ? summaryRow(
-                          t("DocsConnect:DevPackPerUser"),
-                          formatCurrency(devPackPrice),
-                        )
-                      : null}
-                    {isUpgrade ? (
-                      summaryRow(
-                        t("Common:RemainingPeriod"),
-                        <>
-                          {t("DocsConnect:DaysCount", {
-                            count: remainingDays,
-                          })}{" "}
+                  isDevPackUpgrade ? (
+                    <>
+                      {usersChanged
+                        ? summaryRow(
+                            t("DocsConnect:UserAdjustmentLabel"),
+                            `${currentUsers} → ${users}`,
+                          )
+                        : summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
+                      {usersChanged && users > currentUsers
+                        ? summaryRow(
+                            t("DocsConnect:AdditionalUsers"),
+                            `+${users - currentUsers}`,
+                          )
+                        : null}
+                      {summaryRow(
+                        t("DocsConnect:BasePricePerUser"),
+                        formatCurrency(pricePerUser),
+                      )}
+                      {summaryRow(
+                        t("DocsConnect:DevPackPerUser"),
+                        formatCurrency(devPackPrice),
+                      )}
+                      {summaryRow(
+                        t("Common:NewMonthlyPrice"),
+                        formatCurrency(totalMonthly),
+                      )}
+                      <div className={styles.summaryRow}>
+                        <div className={styles.totalLabel}>
+                          <Text
+                            fontSize="14px"
+                            fontWeight={400}
+                            className={styles.summaryLabel}
+                          >
+                            {t("DocsConnect:UnusedSubscriptionCredit")}
+                          </Text>
                           <Text
                             as="span"
                             fontSize="14px"
@@ -395,23 +510,30 @@ const BuyPlanPanel = ({
                             })}
                             )
                           </Text>
-                        </>,
-                      )
-                    ) : (
-                      <>
-                        {summaryRow(
-                          t("Common:NewMonthlyPrice"),
-                          formatCurrency(totalMonthly),
+                          <HelpButton
+                            size={12}
+                            tooltipContent={t(
+                              "DocsConnect:UnusedSubscriptionCreditTooltip",
+                            )}
+                            tooltipMaxWidth="320px"
+                          />
+                        </div>
+                        {calcPending ? (
+                          priceLoader
+                        ) : (
+                          <Text
+                            fontSize="14px"
+                            fontWeight={600}
+                            className={styles.creditValue}
+                          >
+                            {t("DocsConnect:MinusAmount", {
+                              amount: formatCurrency(unusedCredit),
+                            })}
+                          </Text>
                         )}
-                        {summaryRow(
-                          t("Common:EffectiveDate"),
-                          periodEndDateLocalized,
-                        )}
-                      </>
-                    )}
-                    <hr className={styles.summaryDivider} />
-                    <div className={styles.summaryRow}>
-                      <div className={styles.totalLabel}>
+                      </div>
+                      <hr className={styles.summaryDivider} />
+                      <div className={styles.summaryRow}>
                         <Text
                           fontSize="14px"
                           fontWeight={600}
@@ -419,25 +541,122 @@ const BuyPlanPanel = ({
                         >
                           {t("Common:TotalDueToday")}
                         </Text>
-                        {isUpgrade ? (
-                          <HelpButton
-                            size={12}
-                            tooltipContent={t(
-                              "DocsConnect:TotalDueTodayTooltip",
-                            )}
-                            tooltipMaxWidth="320px"
-                          />
-                        ) : null}
+                        {calcPending ? (
+                          priceLoader
+                        ) : (
+                          <Text
+                            fontSize="14px"
+                            fontWeight={600}
+                            className={styles.summaryValue}
+                          >
+                            {formatCurrency(chargeNow)}
+                          </Text>
+                        )}
                       </div>
-                      <Text
-                        fontSize="14px"
-                        fontWeight={600}
-                        className={styles.summaryValue}
-                      >
-                        {formatCurrency(chargeNow)}
-                      </Text>
-                    </div>
-                  </>
+                    </>
+                  ) : (
+                    <>
+                      {devPackTurnedOff
+                        ? summaryRow(
+                            t("DocsConnect:DevPackDisabledLabel"),
+                            t("DocsConnect:MinusPricePerUser", {
+                              price: formatCurrency(devPackPrice),
+                            }),
+                          )
+                        : null}
+                      {usersChanged
+                        ? summaryRow(
+                            t("DocsConnect:UserAdjustmentLabel"),
+                            `${currentUsers} → ${users}`,
+                          )
+                        : summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
+                      {usersChanged && users > currentUsers
+                        ? summaryRow(
+                            t("DocsConnect:AdditionalUsers"),
+                            `+${users - currentUsers}`,
+                          )
+                        : null}
+                      {usersChanged && users < currentUsers
+                        ? summaryRow(
+                            t("DocsConnect:ReducedUsers"),
+                            t("DocsConnect:MinusCount", {
+                              count: currentUsers - users,
+                            }),
+                          )
+                        : null}
+                      {summaryRow(
+                        t("DocsConnect:BasePricePerUser"),
+                        formatCurrency(pricePerUser),
+                      )}
+                      {devPack
+                        ? summaryRow(
+                            t("DocsConnect:DevPackPerUser"),
+                            formatCurrency(devPackPrice),
+                          )
+                        : null}
+                      {isUpgrade ? (
+                        summaryRow(
+                          t("Common:RemainingPeriod"),
+                          <>
+                            {t("DocsConnect:DaysCount", {
+                              count: remainingDays,
+                            })}{" "}
+                            <Text
+                              as="span"
+                              fontSize="14px"
+                              fontWeight={400}
+                              className={styles.secondaryText}
+                            >
+                              (
+                              {t("Common:UntilDate", {
+                                date: periodEndDateLocalized,
+                              })}
+                              )
+                            </Text>
+                          </>,
+                        )
+                      ) : (
+                        <>
+                          {summaryRow(
+                            t("Common:NewMonthlyPrice"),
+                            formatCurrency(totalMonthly),
+                          )}
+                          {summaryRow(
+                            t("Common:EffectiveDate"),
+                            periodEndDateLocalized,
+                          )}
+                        </>
+                      )}
+                      <hr className={styles.summaryDivider} />
+                      <div className={styles.summaryRow}>
+                        <div className={styles.totalLabel}>
+                          <Text
+                            fontSize="14px"
+                            fontWeight={600}
+                            className={styles.summaryValue}
+                          >
+                            {t("Common:TotalDueToday")}
+                          </Text>
+                          {isUpgrade ? (
+                            <HelpButton
+                              size={12}
+                              tooltipContent={t(
+                                "DocsConnect:TotalDueTodayTooltip",
+                              )}
+                              tooltipMaxWidth="320px"
+                            />
+                          ) : null}
+                        </div>
+                        <Text
+                          fontSize="14px"
+                          fontWeight={600}
+                          className={styles.summaryValue}
+                        >
+                          {formatCurrency(chargeNow)}
+                        </Text>
+                      </div>
+                    </>
+                  )
                 ) : (
                   <>
                     {summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
@@ -514,6 +733,21 @@ const BuyPlanPanel = ({
               components={{ 1: <Text as="span" fontWeight={600} /> }}
             />
           </Text>
+        ) : isDevPackUpgrade ? (
+          <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+            <Trans
+              ns="DocsConnect"
+              i18nKey="BillingCycleRestartNote"
+              values={{
+                amount: formatCurrency(totalMonthly),
+                date: nextBillingDateLocalized,
+              }}
+              components={{
+                1: <Text as="span" fontWeight={600} />,
+                2: <Text as="span" fontWeight={600} />,
+              }}
+            />
+          </Text>
         ) : null}
         <div className={styles.footerButtons}>
           <Button
@@ -531,11 +765,13 @@ const BuyPlanPanel = ({
                   ? info.deactivated
                     ? t("Common:TopUpAndPay")
                     : t("DocsConnect:TopUpAndBuy")
-                  : t("DocsConnect:BuyAPlan")
+                  : t("DocsConnect:Upgrade")
             }
             onClick={onBuy}
             isLoading={submitting}
-            isDisabled={submitting || (isEditActive && !hasChanges)}
+            isDisabled={
+              submitting || calcPending || (isEditActive && !hasChanges)
+            }
           />
           <Button
             scale
@@ -554,5 +790,7 @@ export default inject(({ docsConnectStore }: TStore) => ({
   visible: docsConnectStore.buyPlanPanelVisible,
   info: docsConnectStore.info,
   buyPlan: docsConnectStore.buyPlan,
+  calculateDevPack: docsConnectStore.calculateDevPack,
+  switchToDevPack: docsConnectStore.switchToDevPack,
   closeBuyPlan: docsConnectStore.closeBuyPlan,
 }))(observer(BuyPlanPanel));

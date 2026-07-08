@@ -40,6 +40,8 @@ import {
   getDocsConnectInfo,
   startDocsConnectTrial,
   buyDocsConnectPlan,
+  calculateDocsConnectDevPack,
+  switchDocsConnectToDevPack,
   cancelDocsConnectPlan,
   cancelDocsConnectScheduledChange,
   updateDocsConnectConfig,
@@ -178,6 +180,28 @@ class DocsConnectStore {
       currentDevPackEnabled: isPaid
         ? (this.info?.devPackEnabled ?? false)
         : false,
+      currency: this.info?.wallet?.currency ?? "USD",
+    });
+    runInAction(() => {
+      this.info = info;
+    });
+    this.closeBuyPlan();
+    this.refreshPortalState();
+  };
+
+  calculateDevPack = async (quantity: number) =>
+    calculateDocsConnectDevPack(quantity);
+
+  switchToDevPack = async ({
+    quantity,
+    topUp,
+  }: {
+    quantity: number;
+    topUp?: number;
+  }) => {
+    const info = await switchDocsConnectToDevPack({
+      quantity,
+      topUp,
       currency: this.info?.wallet?.currency ?? "USD",
     });
     runInAction(() => {

@@ -86,6 +86,13 @@ export type TDocsConnectWallet = {
   currency: string;
 };
 
+export type TDocsConnectDevPackCalculation = {
+  operationId: number;
+  amount: number;
+  currency: string;
+  quantity: number;
+};
+
 export type TDocsConnectScheduledChange = {
   nextUsers: number;
   dueDate: string;

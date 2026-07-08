@@ -40,10 +40,20 @@
   gap: 16px;
   width: 100%;
   min-width: 0;
+  height: 100%;
   padding-bottom: 19px;
   overflow-x: clip;
   --payment-warning-color: var(--dev-tools-status-warning);
   --payment-backgroud-color-warning: var(--dev-tools-card-bg);
+}
+
+.scheduledNote {
+  margin-top: auto;
+  --text-size: 12px;
+}
+
+.bodyScheduled {
+  padding-bottom: 4px;
 }
 
 .footerHint {
@@ -206,6 +216,10 @@
 
 .summaryValue {
   color: var(--text-color);
+}
+
+.creditValue {
+  color: var(--dev-tools-status-positive);
 }
 
 .summaryDivider {

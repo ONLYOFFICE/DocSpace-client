@@ -299,7 +299,7 @@ const DocsConnectPage = ({
               primary
               scale
               size={ButtonSize.normal}
-              label={t("DocsConnect:BuyAPlan")}
+              label={t("DocsConnect:Upgrade")}
               onClick={onEditPlan}
             />
           </div>

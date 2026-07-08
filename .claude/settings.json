@@ -41,7 +41,9 @@
       "Bash(node -e ' *)",
       "Bash(node_modules/.bin/vitest run *)",
       "Bash(grep -v \"^en$\")",
-      "Bash(grep -v \"^\\\\.meta$\")"
+      "Bash(grep -v \"^\\\\.meta$\")",
+      "Bash(grep -vE \"^  [a-z]|initCSR|loadUrl|originated|Unhandled|findIndex|i18next-http|^\\\\}|^ *$\")",
+      "Bash(../../node_modules/.pnpm/node_modules/.bin/biome check *)"
     ]
   }
 }

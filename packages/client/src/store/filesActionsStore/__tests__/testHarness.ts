@@ -70,9 +70,10 @@ vi.mock("SRC_DIR/helpers/info-panel", () => ({
 }));
 
 // Toast helpers (export-room-index success toast) — inert.
-vi.mock("SRC_DIR/helpers/toast-helpers", () => ({
-  showSuccessExportRoomIndexToast: vi.fn(),
-}));
+// Note: SRC_DIR/helpers/toast-helpers is import-safe and only invoked from
+// onSuccessExportRoomIndex, so the harness does not mock it. The spec that
+// exercises that path mocks it in-file so a single mock instance is shared
+// between the spec and the store (two vi.mock for one path split-brain).
 
 // Client i18n bootstrap → inert instance whose t echoes the key.
 vi.mock("SRC_DIR/i18n", () => ({

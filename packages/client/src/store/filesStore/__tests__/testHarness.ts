@@ -142,8 +142,10 @@ const defaultFakes = (): FakeStores => ({
     isRoom: false,
     isIndexedFolder: false,
     filesCount: 0,
+    foldersCount: 0,
     setSelectedFolder: vi.fn(),
     setFilesCount: vi.fn(),
+    setFoldersCount: vi.fn(),
   },
   treeFoldersStore: {
     treeFolders: [],

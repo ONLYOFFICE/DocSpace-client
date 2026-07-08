@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { runInAction } from "mobx";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import {
   ensureDecryptedFilename,

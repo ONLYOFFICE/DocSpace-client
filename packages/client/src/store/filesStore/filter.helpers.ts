@@ -54,7 +54,6 @@ import {
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import type { Nullable } from "@docspace/shared/types";
 import type { default as TFilesFilter } from "@docspace/shared/api/files/filter";

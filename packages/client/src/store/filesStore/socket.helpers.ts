@@ -37,28 +37,19 @@ import { runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import {
   AnalyticsEvents,
-  FileStatus,
   FolderType,
-  RoomsType,
   RoomSearchArea,
 } from "@docspace/shared/enums";
 import {
   frameCallEvent,
-  getCategoryType,
   getFileExtension,
 } from "@docspace/shared/utils/common";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   CategoryType,
-  LOADER_TIMEOUT,
-  MEDIA_VIEW_URL,
 } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_DOCUMENTS } from "@docspace/shared/utils/filterConstants";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { getI18n } from "react-i18next";
-import config from "PACKAGE_FILE";
 
 import {
   getCategoryUrl,

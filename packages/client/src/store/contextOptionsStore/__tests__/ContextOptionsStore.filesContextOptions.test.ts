@@ -34,6 +34,7 @@
  */
 
 import { describe, it, expect } from "vitest";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 
 import {
   createTestContextOptionsStore,
@@ -128,5 +129,104 @@ describe("ContextOptionsStore.getFilesContextOptions — characterization", () =
     ).map((m) => m.key);
     expect(keys).not.toContain("select");
     expect(keys).not.toContain("show-info");
+  });
+});
+
+describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
+  const room = () => ({
+    id: 7,
+    title: "Team Room",
+    roomType: RoomsType.CustomRoom,
+    rootFolderType: FolderType.Rooms,
+    security: {},
+    viewAccessibility: {},
+    contextOptions: [
+      "room-info",
+      "edit-room",
+      "invite-users-to-room",
+      "archive-room",
+      "separator0",
+      "delete",
+    ],
+  });
+
+  it("maps a room option set", () => {
+    const store = createTestContextOptionsStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    expect(menuShape(store.getFilesContextOptions(room() as never, t))).toMatchSnapshot();
+  });
+
+  it("maps a recycle-bin item (restore/delete only)", () => {
+    const store = createTestContextOptionsStore({
+      treeFoldersStore: { isRecycleBinFolder: true },
+    });
+    const trashed = {
+      id: 1,
+      title: "Old.docx",
+      fileExst: ".docx",
+      rootFolderType: FolderType.TRASH,
+      security: {},
+      viewAccessibility: {},
+      contextOptions: ["restore", "delete"],
+    };
+    expect(menuShape(store.getFilesContextOptions(trashed as never, t))).toMatchSnapshot();
+  });
+
+  it("maps an archived room", () => {
+    const store = createTestContextOptionsStore({
+      treeFoldersStore: { isArchiveFolder: true },
+    });
+    store.dialogsStore = { roomGroups: [] } as never;
+    const archived = {
+      ...room(),
+      rootFolderType: FolderType.Archive,
+      contextOptions: ["room-info", "unarchive-room", "delete"],
+    };
+    expect(menuShape(store.getFilesContextOptions(archived as never, t))).toMatchSnapshot();
+  });
+
+  it("maps an encrypted file", () => {
+    const store = createTestContextOptionsStore();
+    const enc = {
+      id: 2,
+      title: "Secret.docx",
+      fileExst: ".docx",
+      encrypted: true,
+      rootFolderId: 5,
+      security: {},
+      viewAccessibility: {},
+      contextOptions: ["download", "rename", "delete"],
+    };
+    expect(menuShape(store.getFilesContextOptions(enc as never, t))).toMatchSnapshot();
+  });
+
+  it("maps an AI agent room", () => {
+    const store = createTestContextOptionsStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const agent = {
+      id: 4,
+      title: "Agent",
+      roomType: RoomsType.AIRoom,
+      rootFolderType: FolderType.AIAgents,
+      security: {},
+      viewAccessibility: {},
+      contextOptions: ["room-info", "edit-room", "delete"],
+    };
+    expect(menuShape(store.getFilesContextOptions(agent as never, t))).toMatchSnapshot();
+  });
+
+  it("maps a room template", () => {
+    const store = createTestContextOptionsStore();
+    store.dialogsStore = { roomGroups: [] } as never;
+    const template = {
+      id: 6,
+      title: "Template",
+      roomType: RoomsType.CustomRoom,
+      rootFolderType: FolderType.RoomTemplates,
+      security: {},
+      viewAccessibility: {},
+      contextOptions: ["room-info", "delete"],
+    };
+    expect(menuShape(store.getFilesContextOptions(template as never, t))).toMatchSnapshot();
   });
 });

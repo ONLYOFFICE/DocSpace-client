@@ -68,6 +68,10 @@ const defaultFakes = () => ({
   filesStore: {
     // Bypassed when item.contextOptions is provided; kept for safety.
     getFilesContextOptions: () => [],
+    selection: [],
+    bufferSelection: null,
+    roomsForDelete: [],
+    roomsForRestore: [],
   },
   mediaViewerDataStore: {},
   treeFoldersStore: {

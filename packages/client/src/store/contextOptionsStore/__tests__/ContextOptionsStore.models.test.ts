@@ -85,3 +85,24 @@ describe("ContextOptionsStore.getGroupContextOptions — characterization", () =
     expect(menuShape(model)).toMatchSnapshot();
   });
 });
+
+describe("ContextOptionsStore.getHeaderOptions — characterization", () => {
+  const item = () => ({ id: 1, security: { Download: true } });
+
+  it("builds header options for the default (non-public) view", () => {
+    const store = createTestContextOptionsStore();
+    const model = store.getHeaderOptions(t, item() as never);
+    expect(Array.isArray(model)).toBe(true);
+    expect(menuShape(model)).toMatchSnapshot();
+  });
+
+  it("builds the public-room header (copy link + download)", () => {
+    const store = createTestContextOptionsStore({
+      publicRoomStore: { isPublicRoom: true },
+    });
+    const keys = menuShape(store.getHeaderOptions(t, item() as never)).map(
+      (m) => m.key,
+    );
+    expect(keys).toContain("public-room_share");
+  });
+});

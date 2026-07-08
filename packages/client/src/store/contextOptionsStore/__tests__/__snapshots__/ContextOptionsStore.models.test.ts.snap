@@ -89,3 +89,5 @@ exports[`ContextOptionsStore.getGroupContextOptions — characterization > build
   },
 ]
 `;
+
+exports[`ContextOptionsStore.getHeaderOptions — characterization > builds header options for the default (non-public) view 1`] = `[]`;

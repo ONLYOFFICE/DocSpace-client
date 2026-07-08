@@ -38,6 +38,7 @@ import { runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import {
   FilterType,
+  FilterKeys,
   FolderType,
   RoomsType,
   RoomSearchArea,
@@ -49,7 +50,11 @@ import {
   isPublicRoom,
 } from "@docspace/shared/utils/common";
 import { isDesktop } from "@docspace/shared/utils";
-import { CategoryType, EMPTY_ARRAY } from "@docspace/shared/constants";
+import {
+  CategoryType,
+  EMPTY_ARRAY,
+  ROOMS_PROVIDER_TYPE_NAME,
+} from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_DOCUMENTS } from "@docspace/shared/utils/filterConstants";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -63,6 +68,7 @@ import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
 
 import type { Nullable, TPathParts } from "@docspace/shared/types";
 import type { default as TFilesFilter } from "@docspace/shared/api/files/filter";
+import type { default as TRoomsFilter } from "@docspace/shared/api/rooms/filter";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
@@ -634,3 +640,428 @@ export function fetchFilesImpl(
       }
     });
 }
+
+export function fetchRoomsImpl(
+  self: FilesStore,
+  folderId: Nullable<number | string>,
+  filter?: Nullable<TRoomsFilter>,
+  clearFilter = true,
+  withSubfolders = false,
+  clearSelection = true,
+): Promise<unknown> {
+  const { setSelectedNode } = self.treeFoldersStore;
+
+  const { setIsIndexEditingMode } = self.indexingStore;
+
+  setIsIndexEditingMode(false);
+
+  const filterData = filter
+    ? filter.clone()
+    : RoomsFilter.getDefault(self.userStore.user?.id);
+
+  const isCustomCountPage =
+    filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+  if (!isCustomCountPage) {
+    filterData.page = 0;
+    filterData.pageCount = 100;
+  }
+
+  if (folderId) setSelectedNode([`${folderId}`]);
+
+  const defaultFilter = RoomsFilter.getDefault();
+
+  const { provider, quotaFilter } = filterData;
+
+  // ROOMS_PROVIDER_TYPE_NAME is keyed by RoomsProviderType
+  // while RoomsFilter.provider is a nullable string; the erased cast keeps
+  // the original lookup.
+  if (
+    !(ROOMS_PROVIDER_TYPE_NAME as Record<string, string>)[provider as string]
+  )
+    filterData.provider = defaultFilter.provider;
+
+  if (
+    quotaFilter &&
+    quotaFilter !== FilterKeys.customQuota &&
+    quotaFilter !== FilterKeys.defaultQuota
+  )
+    filterData.quotaFilter = defaultFilter.quotaFilter;
+
+  self.filesController?.abort();
+  self.roomsController?.abort();
+  self.aiAgentsController?.abort();
+
+  self.roomsController = new AbortController();
+  self.filesController = null;
+  self.aiAgentsController = null;
+
+  self.aiRoomStore.setKnowledgeId(null);
+  self.aiRoomStore.setResultId(null);
+  self.aiRoomStore.setCurrentTab(null);
+
+  // The Rooms/Forms split is enforced server-side by the room's folder type:
+  // `searchArea=Active` never returns Form Filling Rooms, and the Forms
+  // section requests `searchArea=Forms`. The filter (carrying searchArea)
+  // maps directly to the request — no client-side room-type scoping needed.
+  const request = () =>
+    api.rooms
+      .getRooms(filterData, self.roomsController!.signal)
+      .then(async (data) => {
+        if (!folderId) setSelectedNode([`${data.current.id}`]);
+
+        filterData.total = data.total;
+
+        if (data.total > 0) {
+          const lastPage = filterData.getLastPage();
+
+          if (filterData.page > lastPage) {
+            filterData.page = lastPage;
+
+            return self.fetchRooms(
+              folderId,
+              filterData,
+              undefined,
+              undefined,
+              undefined,
+            );
+          }
+        }
+
+        runInAction(() => {
+          self.categoryType = getCategoryTypeByFolderType(
+            data.current.rootFolderType,
+            data.current.parentId,
+          );
+        });
+
+        self.setRoomsFilter(filterData);
+
+        runInAction(() => {
+          self.selectedFolderStore.setSelectedFolder({
+            folders: data.folders,
+            ...data.current,
+            pathParts: data.pathParts,
+            navigationPath: EMPTY_ARRAY,
+            ...{ new: data.new },
+          });
+
+          const isEmptyList = data.folders.length === 0;
+          if (filter && isEmptyList) {
+            const {
+              subjectId,
+              filterValue,
+              type,
+              withSubfolders: withRoomsSubfolders,
+              searchInContent: searchInContentRooms,
+              tags,
+              withoutTags,
+            } = filter;
+
+            const isFiltered =
+              subjectId ||
+              filter.subjectOwnerId ||
+              filterValue ||
+              type ||
+              filter.provider ||
+              withRoomsSubfolders ||
+              searchInContentRooms ||
+              tags ||
+              withoutTags ||
+              filter.quotaFilter;
+
+            if (isFiltered) {
+              self.setIsEmptyPage(false);
+            } else {
+              self.setIsEmptyPage(isEmptyList);
+            }
+          } else {
+            self.setIsEmptyPage(isEmptyList);
+          }
+
+          self.setFolders(data.folders);
+          self.setFiles(EMPTY_ARRAY);
+        });
+
+        if (clearFilter) {
+          if (clearSelection) {
+            self.setSelected("close");
+          }
+        }
+
+        setInfoPanelSelectedRoom(null);
+
+        const selectedFolder = {
+          selectedFolder: { ...self.selectedFolderStore },
+        };
+
+        if (self.createdItem) {
+          const newItem = self.filesList.find(
+            (item) => item.id === self.createdItem!.id,
+          );
+
+          if (newItem) {
+            self.setBufferSelection(newItem);
+            self.setScrollToItem({
+              id: newItem.id as number,
+              type: self.createdItem!.type,
+            });
+          }
+
+          self.setCreatedItem(null);
+        }
+
+        runInAction(() => {
+          self.roomsController = null;
+        });
+
+        self.setIsErrorRoomNotAvailable(false);
+        return Promise.resolve(selectedFolder);
+      })
+      .catch((err) => {
+        if (err?.response?.status === 402)
+          (
+            self.currentTariffStatusStore as unknown as {
+              setPortalTariff: () => void;
+            }
+          ).setPortalTariff();
+
+        if (axios.isCancel(err)) {
+          console.log("Request canceled", err.message);
+          throw err;
+        } else {
+          toastr.error(err);
+        }
+      })
+      .finally(() => {
+        self.clientLoadingStore.setIsSectionHeaderLoading(false);
+        self.clientLoadingStore.setIsSectionFilterLoading(false);
+      });
+
+  return request();
+}
+
+export function fetchAgentsImpl(
+  self: FilesStore,
+  folderId: Nullable<number | string>,
+  filter?: Nullable<TRoomsFilter>,
+  clearFilter = true,
+  clearSelection = true,
+): Promise<unknown> {
+  const { setSelectedNode } = self.treeFoldersStore;
+
+  const filterData = filter
+    ? filter.clone()
+    : RoomsFilter.getDefault(
+        self.userStore.user?.id,
+        RoomSearchArea.AIAgents,
+      );
+
+  const isCustomCountPage =
+    filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+  if (!isCustomCountPage) {
+    filterData.page = 0;
+    filterData.pageCount = 100;
+  }
+
+  if (folderId) setSelectedNode([`${folderId}`]);
+
+  self.filesController?.abort();
+  self.roomsController?.abort();
+  self.aiAgentsController?.abort();
+
+  self.roomsController = null;
+  self.filesController = null;
+  self.aiAgentsController = new AbortController();
+
+  self.aiRoomStore.setKnowledgeId(null);
+  self.aiRoomStore.setResultId(null);
+
+  self.aiRoomStore.setCurrentTab(null);
+
+  const request = () =>
+    api.ai
+      .getNewAiAgents(filterData, self.aiAgentsController!.signal)
+      .then(async (data) => {
+        if (!folderId) setSelectedNode([`${data.current.id}`]);
+
+        filterData.total = data.total;
+
+        if (data.total > 0) {
+          const lastPage = filterData.getLastPage();
+
+          if (filterData.page > lastPage) {
+            filterData.page = lastPage;
+
+            return self.fetchAgents(folderId, filterData);
+          }
+        }
+
+        runInAction(() => {
+          self.categoryType = getCategoryTypeByFolderType(
+            data.current.rootFolderType,
+            data.current.parentId,
+          );
+        });
+
+        self.setRoomsFilter(filterData);
+
+        runInAction(() => {
+          self.selectedFolderStore.setSelectedFolder({
+            folders: data.folders,
+            ...data.current,
+            pathParts: data.pathParts,
+            navigationPath: EMPTY_ARRAY,
+            ...{ new: data.new },
+            security: {
+              ...data.current.security,
+              Create:
+                data.current.security.Create &&
+                !self.settingsStore.aiConfig?.aiReadyNeedReset,
+            },
+          });
+
+          const isEmptyList = data.folders.length === 0;
+          if (filter && isEmptyList) {
+            const {
+              subjectId,
+              filterValue,
+              type,
+              withSubfolders: withRoomsSubfolders,
+              searchInContent: searchInContentRooms,
+              tags,
+              withoutTags,
+            } = filter;
+
+            const isFiltered =
+              subjectId ||
+              filter.subjectOwnerId ||
+              filterValue ||
+              type ||
+              filter.provider ||
+              withRoomsSubfolders ||
+              searchInContentRooms ||
+              tags ||
+              withoutTags ||
+              filter.quotaFilter;
+
+            if (isFiltered) {
+              self.setIsEmptyPage(false);
+            } else {
+              self.setIsEmptyPage(isEmptyList);
+            }
+          } else {
+            self.setIsEmptyPage(isEmptyList);
+          }
+
+          self.setFolders(data.folders);
+          self.setFiles(EMPTY_ARRAY);
+        });
+
+        if (clearFilter) {
+          if (clearSelection) {
+            self.setSelected("close");
+          }
+        }
+
+        setInfoPanelSelectedRoom(null);
+
+        const selectedFolder = {
+          selectedFolder: { ...self.selectedFolderStore },
+        };
+
+        if (self.createdItem) {
+          const newItem = self.filesList.find(
+            (item) => item.id === self.createdItem!.id,
+          );
+
+          if (newItem) {
+            self.setBufferSelection(newItem);
+            self.setScrollToItem({
+              id: newItem.id as number,
+              type: self.createdItem!.type,
+            });
+          }
+
+          self.setCreatedItem(null);
+        }
+
+        runInAction(() => {
+          self.roomsController = null;
+        });
+
+        self.setIsErrorAIAgentNotAvailable(false);
+        return Promise.resolve(selectedFolder);
+      })
+      .catch((err) => {
+        if (err?.response?.status === 402)
+          (
+            self.currentTariffStatusStore as unknown as {
+              setPortalTariff: () => void;
+            }
+          ).setPortalTariff();
+
+        if (axios.isCancel(err)) {
+          console.log("Request canceled", err.message);
+          throw err;
+        } else {
+          toastr.error(err);
+        }
+      })
+      .finally(() => {
+        self.clientLoadingStore.setIsSectionHeaderLoading(false);
+        self.clientLoadingStore.setIsSectionFilterLoading(false);
+      });
+
+  return request();
+}
+
+export async function fetchMoreFilesImpl(self: FilesStore) {
+  if (
+    !self.hasMoreFiles ||
+    self.filesIsLoading ||
+    self.clientLoadingStore.isLoading
+  )
+    return;
+
+  const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder, isFormsFolder } =
+    self.treeFoldersStore;
+
+  const isRooms = isRoomsFolder || isArchiveFolder || isFormsFolder;
+
+  self.setFilesIsLoading(true);
+  // console.log("fetchMoreFiles");
+
+  const newFilter =
+    isRooms || isAIAgentsFolder
+      ? self.roomsFilter.clone()
+      : self.filter.clone();
+  newFilter.page += 1;
+  if (isRooms || isAIAgentsFolder)
+    self.setRoomsFilter(newFilter as TRoomsFilter);
+  else self.setFilter(newFilter as TFilesFilter);
+
+  const newFilesData = isRooms
+    ? await api.rooms.getRooms(newFilter as TRoomsFilter)
+    : isAIAgentsFolder
+      ? await api.ai.getNewAiAgents(newFilter as TRoomsFilter)
+      : await api.files.getFolder(
+          (newFilter as TFilesFilter).folder,
+          newFilter as TFilesFilter,
+        );
+
+  const newFiles = [...self.files, ...newFilesData.files].filter(
+    (x, index, self) => index === self.findIndex((i) => i.id === x.id),
+  );
+  const newFolders = [...self.folders, ...newFilesData.folders].filter(
+    (x, index, self) => index === self.findIndex((i) => i.id === x.id),
+  );
+
+  runInAction(() => {
+    self.setFiles(newFiles);
+    self.setFolders(newFolders);
+    self.setFilesIsLoading(false);
+  });
+}
+

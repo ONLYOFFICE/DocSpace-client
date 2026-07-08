@@ -43,7 +43,6 @@ import config from "PACKAGE_FILE";
 
 import type { Nullable } from "@docspace/shared/types";
 import type { TFile, TGetFolder } from "@docspace/shared/api/files/types";
-import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { THUMBNAILS_CACHE } from "./constants";
 
@@ -58,20 +57,14 @@ export function initFilesImpl(self: FilesStore) {
   const { isAuthenticated } = self.authStore;
   const { getFilesSettings } = self.filesSettingsStore;
 
-  // SettingsStore renamed getEncryptionKeys to
-  // getLegacyEncryptionKeys — this destructured member is undefined at
-  // runtime, so the desktop-client branch below would throw when calling
-  // it (same as the old JS). Candidate for a real fix.
   const {
     getPortalCultures,
     getIsEncryptionSupport,
-    getEncryptionKeys,
+    getLegacyEncryptionKeys,
     // setModuleInfo,
     isDesktopClient,
     getInvitationSettings,
-  } = self.settingsStore as SettingsStore & {
-    getEncryptionKeys?: () => Promise<unknown>;
-  };
+  } = self.settingsStore;
 
   // setModuleInfo(config.homepage, config.id);
 
@@ -103,7 +96,7 @@ export function initFilesImpl(self: FilesStore) {
     );
 
     if (isDesktopClient) {
-      requests.push(getIsEncryptionSupport(), getEncryptionKeys!());
+      requests.push(getIsEncryptionSupport(), getLegacyEncryptionKeys());
     }
 
     if (self.userStore?.getEncryptionKeys) {

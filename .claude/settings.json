@@ -43,7 +43,8 @@
       "Bash(grep -v \"^en$\")",
       "Bash(grep -v \"^\\\\.meta$\")",
       "Bash(grep -vE \"^\\\\s*$\")",
-      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.actions.test.ts)"
+      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.actions.test.ts)",
+      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.empty.test.ts)"
     ]
   }
 }

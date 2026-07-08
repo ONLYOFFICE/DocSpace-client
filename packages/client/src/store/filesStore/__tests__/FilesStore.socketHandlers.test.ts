@@ -68,7 +68,7 @@ describe("FilesStore.onResolveNewFile — characterization", () => {
     store.getFilesContextOptions = (() => []) as never;
     store.files = [file(1)] as never;
 
-    store.onResolveNewFile({ fileInfo: file(99, 1) });
+    store.onResolveNewFile({ fileInfo: file(99, 1) as never });
 
     expect(store.files.map((f) => f.id)).toEqual([99, 1]);
   });
@@ -76,14 +76,14 @@ describe("FilesStore.onResolveNewFile — characterization", () => {
   it("ignores a file that already exists", () => {
     const store = createTestFilesStore();
     store.files = [file(99)] as never;
-    store.onResolveNewFile({ fileInfo: file(99, 1) });
+    store.onResolveNewFile({ fileInfo: file(99, 1) as never });
     expect(store.files).toHaveLength(1);
   });
 
   it("ignores a file for a different folder", () => {
     const store = createTestFilesStore();
     store.files = [file(1)] as never;
-    store.onResolveNewFile({ fileInfo: file(99, 999) });
+    store.onResolveNewFile({ fileInfo: file(99, 999) as never });
     expect(store.files.map((f) => f.id)).toEqual([1]);
   });
 

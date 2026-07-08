@@ -33,24 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import { isMobile } from "react-device-detect";
-import { Trans } from "react-i18next";
-import type { TFunction } from "i18next";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type {
   ContextMenuModel,
 } from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
-import type {
-  TFile,
-  TFileLink,
-  TFolder,
-} from "@docspace/shared/api/files/types";
+import type { TFile, TFileLink } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TOformFile } from "@docspace/shared/api/oforms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -65,18 +58,10 @@ import { isLockedSharedRoom } from "@docspace/shared/utils";
 import {
   getDefaultAccessUser,
 } from "@docspace/shared/utils/getDefaultAccessUser";
-import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
-import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import {
   getGuidanceConfig,
 } from "@docspace/shared/components/guidance/configs";
 import {
-  connectedCloudsTypeTitleTranslation,
-} from "SRC_DIR/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
-import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
-import {
-  AnalyticsEvents,
   RoomsType,
   Events,
   FolderType,
@@ -84,21 +69,9 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
   FileExtensions,
-  FormFillingManageAction,
 } from "@docspace/shared/enums";
 import {
-  formRoleMapping,
-  getFileLink,
-  getFolderLink,
-  manageFormFilling,
-  removeSharedFolderOrFile,
-} from "@docspace/shared/api/files";
-import { createLoader } from "@docspace/shared/utils/createLoader";
-import { FILLING_STATUS_ID } from "@docspace/shared/constants";
-import {
-  isFile as isFileUtil,
   isFolder,
-  isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
 import {
@@ -106,22 +79,11 @@ import {
   setInfoPanelMobileHidden,
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
-import { ShareLinkService } from "@docspace/shared/services/share-link.service";
-import {
-  XlsxUpdateService,
-} from "@docspace/shared/services/xlsx-update.service";
-import {
-  showCreatedPDFFormDialog,
-} from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
-import { PersistenceKeys, getPersisted } from "./utils/persistence";
 import {
   onClickEditRoom as onClickEditRoomHelper,
-  onEditRoomTemplate,
   onShowEditingToast,
   onShowInfoPanel as onShowInfoPanelHelper,
   onShowWaitOperationToast,
-  systemFolders,
 } from "./contextOptionsStore/helpers";
 import type {
   TContextItem,
@@ -149,6 +111,26 @@ import {
   onMultiLoadPluginsImpl,
   onLoadPluginsImpl,
 } from "./contextOptionsStore/plugins.helpers";
+import {
+  onClickReconnectStorageImpl,
+  onClickMakeFormImpl,
+  onCopyLinkImpl,
+  onOpenEmbeddingSettingsImpl,
+  onCreateAndCopySharedLinkImpl,
+  onRemoveSharedFilesOrFolderImpl,
+  startFillingInRoleBasedRoomImpl,
+  startFillingInFormRoomImpl,
+  onClickResetAndStartFillingImpl,
+  onClickDeleteSelectedFolderImpl,
+  onAddRoomsToGroupImpl,
+  onRemoveRoomsFromGroupImpl,
+  onCreateTemplateImpl,
+  onSyncXlsxDataImpl,
+  handleCopyPrimaryLinkImpl,
+  _resolveRoomImpl,
+  _syncInfoPanelRoomImpl,
+  askAIImpl,
+} from "./contextOptionsStore/actions.helpers";
 import type DialogsStore from "./DialogsStore";
 import type MediaViewerDataStore from "./MediaViewerDataStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
@@ -449,119 +431,9 @@ class ContextOptionsStore {
     return this.gotoDocEditor(item, false, null, false, !isFormRoom);
   };
 
-  onClickReconnectStorage = async (item: TContextItem, t: TTranslation) => {
-    const { thirdPartyStore } = this.filesSettingsStore;
+  onClickReconnectStorage = async (item: TContextItem, t: TTranslation)=> onClickReconnectStorageImpl(this, item, t);
 
-    const { openConnectWindow, connectItems } = thirdPartyStore;
-
-    const {
-      setRoomCreation,
-      setConnectItem,
-      setConnectDialogVisible,
-      setIsConnectDialogReconnect,
-      setSaveAfterReconnectOAuth,
-    } = this.dialogsStore;
-
-    setIsConnectDialogReconnect(true);
-
-    setRoomCreation(true);
-
-    // the original .js assumed the provider is always found
-    // (crashed otherwise) — the non-null assertion keeps that behavior.
-    const provider = connectItems.find(
-      (connectItem) => connectItem.providerName === item.providerKey,
-    )!;
-
-    const itemThirdParty = {
-      title: connectedCloudsTypeTitleTranslation(provider.providerName, t),
-      customer_title: "NOTITLE",
-      provider_key: provider.providerName,
-      link: provider.oauthHref,
-      provider_id: item.providerId,
-    };
-
-    if (provider.isOauth) {
-      const authModal = window.open(
-        "",
-        t("Common:Authorization"),
-        "height=600, width=1020",
-      );
-      await openConnectWindow(provider.providerName, authModal)
-        .then(getOAuthToken)
-        .then((token) => {
-          // the original .js assumed window.open succeeded
-          // (crashed on null) — the non-null assertion keeps that behavior.
-          authModal!.close();
-          setConnectItem({
-            ...itemThirdParty,
-            token,
-          });
-
-          setSaveAfterReconnectOAuth(true);
-        })
-        .catch((err: unknown) => {
-          if (!err) return;
-          toastr.error(err as string);
-        });
-    } else {
-      setConnectItem(itemThirdParty);
-      setConnectDialogVisible(true);
-    }
-  };
-
-  onClickMakeForm = (item: TContextItem, t: TTranslation) => {
-    const { setConvertPasswordDialogVisible, setFormCreationInfo } =
-      this.dialogsStore;
-    // the original .js assumed a file item (fileExst/folderId
-    // always present) — the cast keeps identical runtime behavior.
-    const { title, id, folderId, fileExst } = item as TContextItem & {
-      fileExst: string;
-      folderId: number;
-    };
-
-    const newTitle =
-      title.substring(0, title.length - fileExst.length) +
-      this.filesSettingsStore.extsWebRestrictedEditing[0];
-
-    // copyAsAction rejections are untyped (axios error or
-    // string) — the structural annotation mirrors the original .js handling.
-    type TCopyAsError =
-      | string
-      | {
-          response?: { data?: { error?: { message?: string } } };
-          statusText?: string;
-          message?: string;
-        };
-
-    this.uploadDataStore
-      .copyAsAction(id, newTitle, folderId)
-      .catch((err: TCopyAsError) => {
-        let errorMessage = "";
-        if (typeof err === "object") {
-          errorMessage =
-            err?.response?.data?.error?.message ||
-            err?.statusText ||
-            err?.message ||
-            "";
-        } else {
-          errorMessage = err;
-        }
-
-        if (errorMessage.indexOf("password") == -1) {
-          toastr.error(errorMessage, t("Common:Warning"));
-          return;
-        }
-
-        toastr.error(t("Translations:FileProtected"), t("Common:Warning"));
-        setFormCreationInfo({
-          newTitle,
-          fromExst: fileExst,
-          toExst: this.filesSettingsStore.extsWebRestrictedEditing[0],
-          fileInfo: item,
-        });
-        setConvertPasswordDialogVisible(true);
-      });
-  };
+  onClickMakeForm = (item: TContextItem, t: TTranslation)=> onClickMakeFormImpl(this, item, t);
 
   onClickSubmitToFormGallery = (item: TContextItem) => {
     if (item && !item.exst) {
@@ -663,161 +535,11 @@ class ContextOptionsStore {
       });
   };
 
-  onCopyLink = async (item: TContextItem, t: TTranslation) => {
-    const { shared, navigationPath } = this.selectedFolderStore;
+  onCopyLink = async (item: TContextItem, t: TTranslation)=> onCopyLinkImpl(this, item, t);
 
-    const isArchive = item.rootFolderType === FolderType.Archive;
+  onOpenEmbeddingSettings = async (item: TContextItem)=> onOpenEmbeddingSettingsImpl(this, item);
 
-    const { href } = item;
-
-    const sharedItem = navigationPath.find((r) => r.shared);
-
-    const isShared = shared || sharedItem || item.shared;
-
-    const isSystemFolder = systemFolders.includes(item.type as FolderType);
-
-    if (isShared && !isArchive && !isSystemFolder && item.canShare) {
-      try {
-        const itemLink = item.isFolder
-          ? await getFolderLink(item.id)
-          : await getFileLink(item.id);
-
-        if (
-          this.filesSettingsStore.isLinkBlockedByAdmin(
-            item as { rootFolderType: FolderType },
-            itemLink,
-          )
-        ) {
-          toastr.error(t("Common:LinkBlockedByAdminWarning"));
-          return;
-        }
-
-        copyToBuffer(itemLink.sharedTo.shareLink);
-
-        if (!item.isFolder && !item.isRoom) {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: AnalyticsEvents.FileShared,
-            id: item.id,
-            parentId: item.folderId,
-          });
-        }
-
-        item.customFilterEnabled
-          ? toastr.success(
-              <Trans
-                t={t as unknown as TFunction}
-                i18nKey="Common:LinkCopySuccessWithCustomFilter"
-              />,
-            )
-          : toastr.success(t("Common:LinkCopySuccess"));
-      } catch (error) {
-        toastr.error(error as string);
-      }
-      return;
-    }
-
-    if (item.shortWebUrl) {
-      copyToBuffer(item.shortWebUrl);
-      return toastr.success(t("Common:LinkCopySuccess"));
-    }
-
-    if (
-      (item.rootFolderType === FolderType.Recent ||
-        item.rootFolderType === FolderType.SHARE) &&
-      item.webUrl
-    ) {
-      copy(item.webUrl);
-      return toastr.success(t("Common:LinkCopySuccess"));
-    }
-
-    if (href) {
-      copy(href);
-
-      return toastr.success(t("Common:LinkCopySuccess"));
-    }
-
-    const { canConvert } = this.filesSettingsStore;
-
-    const { getItemUrl } = this.filesStore;
-
-    const needConvert = canConvert(item.fileExst as string);
-
-    const canOpenPlayer =
-      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
-
-    const url = getItemUrl(
-      item.id,
-      item.isRoom || item.isFolder,
-      needConvert,
-      canOpenPlayer,
-      "",
-      item.roomType === RoomsType.AIRoom,
-    );
-
-    copy(url);
-
-    toastr.success(t("Common:LinkCopySuccess"));
-  };
-
-  onOpenEmbeddingSettings = async (item: TContextItem) => {
-    const { setLinkParams, setEmbeddingPanelData } = this.dialogsStore;
-
-    // the original .js sets linkParams without the `link`
-    // field required by LinkParamsType — the cast keeps that runtime shape.
-    setLinkParams({
-      item,
-    } as unknown as Parameters<DialogsStore["setLinkParams"]>[0]);
-
-    setEmbeddingPanelData({ visible: true, item });
-  };
-
-  onCreateAndCopySharedLink = async (item: TContextItem, t: TTranslation) => {
-    const { isExpiredLinkAsync } = this.filesActionsStore;
-
-    if (
-      item.external &&
-      (item.isLinkExpired || (await isExpiredLinkAsync(item)))
-    )
-      return toastr.error(
-        t("Common:RoomLinkExpired"),
-        t("Common:RoomNotAvailable"),
-      );
-
-    const primaryLink = await this.filesStore.getPrimaryLink(item.id);
-
-    if (primaryLink) {
-      if (
-        this.filesSettingsStore.isLinkBlockedByAdmin(
-          item as { rootFolderType: FolderType },
-          primaryLink,
-        )
-      ) {
-        toastr.error(t("Common:LinkBlockedByAdminWarning"));
-        return;
-      }
-
-      copyShareLink(
-        item as TFile | TFolder | TRoom,
-        primaryLink,
-        t as unknown as TFunction,
-        this.getManageLinkOptions(item),
-      );
-
-      this.publicRoomStore.setExternalLink(primaryLink);
-
-      if (item.isRoom || !item.isFolder) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: item.isRoom
-            ? AnalyticsEvents.RoomShared
-            : AnalyticsEvents.FileShared,
-          id: item.id,
-          parentId: item.isRoom ? item.parentId : item.folderId,
-        });
-      }
-    }
-  };
+  onCreateAndCopySharedLink = async (item: TContextItem, t: TTranslation)=> onCreateAndCopySharedLinkImpl(this, item, t);
 
   /**
    * Confirm pausing form filling before editing
@@ -886,42 +608,7 @@ class ContextOptionsStore {
   //   );
   // };
 
-  onRemoveSharedFilesOrFolder = async (items: TContextItem[]) => {
-    if (!Array.isArray(items) || items.length === 0) return;
-
-    const { addActiveItems } = this.filesStore;
-    const { setGroupMenuBlocked } = this.filesActionsStore;
-    // const { clearActiveOperations } = this.uploadDataStore;
-
-    const { folderIds, fileIds } = items.reduce<{
-      folderIds: number[];
-      fileIds: number[];
-    }>(
-      (acc, item) => {
-        if (isFolderUtil(item) || isRoomUtil(item)) acc.folderIds.push(item.id);
-        else if (isFileUtil(item)) acc.fileIds.push(item.id);
-
-        return acc;
-      },
-      { folderIds: [], fileIds: [] },
-    );
-
-    try {
-      runInAction(() => {
-        setGroupMenuBlocked(true);
-        addActiveItems(fileIds, folderIds);
-      });
-
-      await removeSharedFolderOrFile(folderIds, fileIds);
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
-    } finally {
-      runInAction(() => {
-        setGroupMenuBlocked(false);
-      });
-    }
-  };
+  onRemoveSharedFilesOrFolder = async (items: TContextItem[])=> onRemoveSharedFilesOrFolderImpl(this, items);
 
   onClickDownload = (item: TContextItem, t: TTranslation) => {
     const { viewUrl, isFolder, encrypted } = item;
@@ -1001,32 +688,9 @@ class ContextOptionsStore {
     this.dialogsStore.setFillingStatusPanelVisible(true);
   };
 
-  startFillingInRoleBasedRoom = (item: TContextItem, t: TTranslation) => {
-    if (isMobile)
-      return toastr.info(t("Common:MobileStartFillingPdfNotAvailableInfo"));
+  startFillingInRoleBasedRoom = (item: TContextItem, t: TTranslation)=> startFillingInRoleBasedRoomImpl(this, item, t);
 
-    const refPage = this.filesStore.openDocEditor(
-      item.id,
-      false,
-      null,
-      true,
-      false,
-    );
-
-    if (refPage) refPage.sessionStorage.setItem(FILLING_STATUS_ID, "true");
-  };
-
-  startFillingInFormRoom = async (item: TContextItem) => {
-    try {
-      await manageFormFilling(item.id, FormFillingManageAction.Start);
-
-      // the original .js assumed a signed-in user and a file
-      // item here — the assertions/casts keep identical runtime behavior.
-      showCreatedPDFFormDialog(item as TFile, this.userStore.user!.id);
-    } catch (error) {
-      toastr.error(error as string);
-    }
-  };
+  startFillingInFormRoom = async (item: TContextItem)=> startFillingInFormRoomImpl(this, item);
 
   // the AssignRoles dialog calls this without `t` (only ever
   // for form-room items, where `t` is unused) — the optional parameter and
@@ -1042,37 +706,7 @@ class ContextOptionsStore {
     this.startFillingInRoleBasedRoom(item, t as TTranslation);
   };
 
-  onClickResetAndStartFilling = async (item: TContextItem) => {
-    const { addActiveItems } = this.filesStore;
-    const { clearActiveOperations } = this.uploadDataStore;
-    const { setGroupMenuBlocked } = this.filesActionsStore;
-
-    const { endLoader, startLoader } = createLoader();
-
-    try {
-      startLoader(() => {
-        runInAction(() => {
-          setGroupMenuBlocked(true);
-          addActiveItems([item.id], null);
-        });
-      });
-
-      await formRoleMapping({
-        formId: item.id,
-        roles: [],
-      });
-    } catch (error) {
-      toastr.error(error as string);
-      console.error(error);
-    } finally {
-      endLoader(() =>
-        runInAction(() => {
-          setGroupMenuBlocked(false);
-          clearActiveOperations([item.id]);
-        }),
-      );
-    }
-  };
+  onClickResetAndStartFilling = async (item: TContextItem)=> onClickResetAndStartFillingImpl(this, item);
 
   // when used as a context-menu onClick the first argument is
   // the ui-kit click payload (an object), otherwise a media file id.
@@ -1082,52 +716,7 @@ class ContextOptionsStore {
     this.mediaViewerDataStore.changeUrl(itemId);
   };
 
-  onClickDeleteSelectedFolder = (t: TTranslation, isRoom?: boolean) => {
-    const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
-      this.dialogsStore;
-    const { confirmDelete } = this.filesSettingsStore;
-    const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
-    const { id: selectedFolderId, getSelectedFolder } =
-      this.selectedFolderStore;
-    const { isThirdPartySelection, setBufferSelection } = this.filesStore;
-
-    const selectedFolder = getSelectedFolder();
-
-    setIsFolderActions(true);
-
-    if (confirmDelete || isThirdPartySelection) {
-      setBufferSelection(selectedFolder);
-      // the original .js passes `undefined` through here when
-      // the caller omits isRoom — the cast keeps the exact runtime value.
-      setIsRoomDelete(isRoom as boolean);
-      setDeleteDialogVisible(true);
-
-      return;
-    }
-
-    let translations: Record<string, string>;
-
-    if (isRoom) {
-      translations = {
-        successRemoveRoom: t("Common:RoomRemoved"),
-        successRemoveRooms: t("Common:RoomsRemoved"),
-      };
-
-      deleteRoomsAction([selectedFolderId], translations).catch(
-        (err: unknown) => toastr.error(err as string),
-      );
-    } else {
-      translations = {
-        deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
-          sectionName: t("Common:TrashSection"),
-        }),
-      };
-
-      deleteAction(translations, [selectedFolder], true).catch((err: unknown) =>
-        toastr.error(err as string),
-      );
-    }
-  };
+  onClickDeleteSelectedFolder = (t: TTranslation, isRoom?: boolean)=> onClickDeleteSelectedFolderImpl(this, t, isRoom);
 
   onClickDelete = (item: TContextItem, t: TTranslation) => {
     const { id, title, providerKey, isFolder, isRoom } = item;
@@ -1333,75 +922,9 @@ class ContextOptionsStore {
     groupId: string,
     t: TTranslation,
     groupName: string,
-  ) => {
-    try {
-      await this.dialogsStore.updateRoomGroup(groupId, {
-        roomsToAdd: roomIds,
-      });
-      await this.dialogsStore.getAllRoomGroups();
-      const transProps = {
-        t: t as unknown as TFunction,
-        values: { groupName },
-        components: { 1: React.createElement("strong") },
-      };
-      const keys = {
-        single: { tKey: "GroupingRooms:RoomAddedToGroup" },
-        multiple: { tKey: "GroupingRooms:RoomsAddedToGroup" },
-      };
-      const i18nKey =
-        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-      toastr.success(
-        React.createElement(Trans, {
-          i18nKey,
-          ...transProps,
-        }),
-      );
-    } catch (error) {
-      console.error("Error adding rooms to group:", error);
-      toastr.error(t("Common:Error"));
-    }
-  };
+  )=> onAddRoomsToGroupImpl(this, roomIds, groupId, t, groupName);
 
-  onRemoveRoomsFromGroup = async (roomIds: number[], t: TTranslation) => {
-    const currentGroupId = this.filesStore.roomsFilter?.groupId;
-    if (!currentGroupId) return;
-
-    const currentGroup = this.dialogsStore.roomGroups?.find(
-      (g) => String(g.id) === String(currentGroupId),
-    );
-    const groupName = currentGroup?.name || "";
-
-    try {
-      await this.dialogsStore.updateRoomGroup(currentGroupId, {
-        roomsToRemove: roomIds,
-      });
-      await this.dialogsStore.getAllRoomGroups();
-
-      // Remove the rooms from the current view
-      this.filesStore.removeFiles(null, roomIds);
-
-      const transProps = {
-        t: t as unknown as TFunction,
-        values: { groupName },
-        components: { 1: React.createElement("strong") },
-      };
-      const keys = {
-        single: { tKey: "GroupingRooms:RoomRemovedFromGroup" },
-        multiple: { tKey: "GroupingRooms:RoomsRemovedFromGroup" },
-      };
-      const i18nKey =
-        roomIds.length === 1 ? keys.single.tKey : keys.multiple.tKey;
-      toastr.success(
-        React.createElement(Trans, {
-          i18nKey,
-          ...transProps,
-        }),
-      );
-    } catch (error) {
-      console.error("Error removing rooms from group:", error);
-      toastr.error(t("Common:Error"));
-    }
-  };
+  onRemoveRoomsFromGroup = async (roomIds: number[], t: TTranslation)=> onRemoveRoomsFromGroupImpl(this, roomIds, t);
 
   onChangeRoomOwner = () => this.dialogsStore.setChangeRoomOwnerIsVisible(true);
 
@@ -1491,34 +1014,7 @@ class ContextOptionsStore {
   // some call sites pass `navigate` which the original .js
   // silently ignored — the optional parameter keeps those calls type-correct
   // without changing runtime behavior.
-  onCreateTemplate = async (_navigate?: unknown) => {
-    this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
-
-    const extension = this.oformsStore.currentExtensionGallery.replace(".", "");
-
-    const event: TStoreCustomEvent = new CustomEvent(Events.CREATE, {
-      detail: {
-        parentId: this.selectedFolderStore.id,
-        context: "template",
-        extension,
-      },
-    });
-
-    const payload = {
-      extension,
-      id: -1,
-      fromTemplate: true,
-      // the original .js assumed a selected gallery template
-      // here (crashed on null) — the non-null assertion keeps that behavior.
-      title: this.oformsStore.gallerySelected!.attributes.name_form,
-      openEditor: true,
-      edit: true,
-    };
-
-    event.payload = payload;
-
-    window.dispatchEvent(event);
-  };
+  onCreateTemplate = async (_navigate?: unknown)=> onCreateTemplateImpl(this, _navigate);
 
   onShowOformTemplateInfo = (item: TOformFile) => {
     showInfoPanel();
@@ -1596,164 +1092,22 @@ class ContextOptionsStore {
     );
   };
 
-  onSyncXlsxData = async (item: TContextItem, t: TTranslation) => {
-    const { clearSecondaryProgressData, setSecondaryProgressBarData } =
-      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
-
-    try {
-      const response = await XlsxUpdateService.start(item.id, isFolder(item));
-
-      if (!response) return;
-
-      const { form, task, isNewFile } = response;
-
-      if (task.isCompleted) {
-        XlsxUpdateService.assertTaskSucceeded(task);
-      } else {
-        const basePayload = {
-          operationId: task.id,
-          operation: OPERATIONS_NAME.other,
-        };
-
-        setSecondaryProgressBarData({ ...basePayload, percent: 0 });
-
-        await XlsxUpdateService.poll(form.id, task.id, (progress) => {
-          setSecondaryProgressBarData({
-            ...basePayload,
-            percent: progress?.percentage ?? 100,
-            completed: progress?.isCompleted ?? true,
-          });
-        }).catch((error) => {
-          clearSecondaryProgressData(task.id, OPERATIONS_NAME.other);
-          throw error;
-        });
-      }
-
-      const messageVar = { formName: form.title };
-
-      toastr.success(
-        isNewFile
-          ? t("Common:SpreadsheetGenerated", messageVar)
-          : t("Common:SpreadsheetUpdated", messageVar),
-      );
-    } catch (error) {
-      toastr.error(error as string);
-      console.error(error);
-    }
-  };
+  onSyncXlsxData = async (item: TContextItem, t: TTranslation)=> onSyncXlsxDataImpl(this, item, t);
 
   getHeaderOptions = (
     t: TTranslation,
     item: TContextItem,
   ): ContextMenuModel[]=> getHeaderOptionsImpl(this, t, item);
 
-  handleCopyPrimaryLink = async (item: TContextItem, t: TTranslation) => {
-    if (!item.canShare) return;
-
-    const primaryLink = await ShareLinkService.getPrimaryLink(
-      item as TFile | TFolder | TRoom,
-    );
-
-    if (primaryLink) {
-      if (primaryLink.sharedTo?.isExpired) {
-        toastr.error(t("Common:LinkExpired"));
-        return;
-      }
-
-      if (
-        this.filesSettingsStore.isLinkBlockedByAdmin(
-          item as { rootFolderType: FolderType },
-          primaryLink,
-        )
-      ) {
-        toastr.error(t("Common:LinkBlockedByAdminWarning"));
-        return;
-      }
-
-      copyShareLink(
-        item as TFile | TFolder | TRoom,
-        primaryLink,
-        t as unknown as TFunction,
-        this.getManageLinkOptions(item),
-      );
-      this.infoPanelStore?.setShareChanged(true);
-
-      if (item.isRoom || !item.isFolder) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: item.isRoom
-            ? AnalyticsEvents.RoomShared
-            : AnalyticsEvents.FileShared,
-          id: item.id,
-          parentId: item.isRoom ? item.parentId : item.folderId,
-        });
-      }
-    }
-  };
+  handleCopyPrimaryLink = async (item: TContextItem, t: TTranslation)=> handleCopyPrimaryLinkImpl(this, item, t);
 
   getManageLinkOptions = (item: TContextItem)=> getManageLinkOptionsImpl(this, item);
 
-  _resolveRoom = async (): Promise<TContextItem | null> => {
-    const { infoPanelRoom } = this.infoPanelStore;
-    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
+  _resolveRoom = async (): Promise<TContextItem | null>=> _resolveRoomImpl(this);
 
-    // rooms resolved here are TRoom/TSelectedFolder shapes
-    // consumed as .js view-models — the casts keep the original duck typing.
-    if (infoPanelRoom) return infoPanelRoom as unknown as TContextItem;
-    if (selectedFolder.isRoom) return selectedFolder as unknown as TContextItem;
+  _syncInfoPanelRoom = (newRoom: TRoom)=> _syncInfoPanelRoomImpl(this, newRoom);
 
-    const roomPath = selectedFolder.pathParts.find((path) => path.roomType);
-    if (!roomPath) return null;
-
-    const [room = null] = this.filesStore.getFilesListItems([
-      await getRoomInfo(roomPath.id),
-    ]);
-    return room;
-  };
-
-  _syncInfoPanelRoom = (newRoom: TRoom) => {
-    const { infoPanelStore } = this;
-    if (infoPanelStore.isVisible && infoPanelStore.isDetailsTabActive) {
-      infoPanelStore.setInfoPanelRoom(newRoom);
-    }
-  };
-
-  askAI = async (item: TContextItem) => {
-    const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
-
-    if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
-      this.filesActionsStore.askAIAction(item);
-      return;
-    }
-
-    const { addActiveItems } = this.filesStore;
-    const { clearActiveOperations } = this.uploadDataStore;
-    const { endLoader, startLoader } = createLoader();
-
-    try {
-      startLoader(() => addActiveItems([item.id], null));
-
-      const room = await this._resolveRoom();
-      if (!room) return;
-
-      if (room.sendFormToExternalDB || !room.security?.EditRoom) {
-        this.filesActionsStore.askAIAction(item);
-        return;
-      }
-
-      this.dialogsStore.setAskAIConnectDialogVisible(true, (action) => {
-        if (action === "connect") {
-          onEditRoomTemplate(room, this._syncInfoPanelRoom);
-        } else if (action === "continue") {
-          this.filesActionsStore.askAIAction(item);
-        }
-      });
-    } catch (error) {
-      toastr.error(error as string);
-    } finally {
-      endLoader(() => clearActiveOperations([item.id]));
-    }
-  };
+  askAI = async (item: TContextItem)=> askAIImpl(this, item);
 
   getFilesContextOptions = (
     item: TContextItem,

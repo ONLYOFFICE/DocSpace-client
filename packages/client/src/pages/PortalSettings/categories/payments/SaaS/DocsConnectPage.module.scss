@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 @use "@docspace/ui-kit/styles/mixins";
-@use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .container {
   display: flex;
@@ -107,7 +106,7 @@
 
 .creditsValue {
   font-weight: 600;
-  color: $light-second-main;
+  color: var(--color-scheme-main-buttons);
 }
 
 .sectionTitle {
@@ -255,7 +254,7 @@
   max-width: 660px;
   padding: 16px;
   border-radius: 8px;
-  background-color: $gray-light;
+  background-color: var(--dev-tools-card-bg);
 
   @include mixins.mobile {
     flex-direction: column;

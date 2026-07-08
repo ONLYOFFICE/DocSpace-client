@@ -125,11 +125,7 @@
   "RuleType": "Rule type",
   "RuleAddressPlaceholder": "Enter IP address, range, or host",
   "RuleAddressExamples": "Examples: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
-  "UseIpFiltering": "Use IP filtering for requests",
-  "UseIpFilteringDescription": "Enable IP filtering for incoming requests. When disabled, rules are ignored.",
   "FileSizeLimits": "File Size Limits",
   "FileSizeLimitsDescription": "Configure maximum file sizes and download limits for document processing",
-  "DownloadLimits": "Download Limits",
-  "MaxDownloadBytes": "Max Download Bytes",
   "MaxDownloadBytesDescription": "Maximum number of bytes that can be downloaded (e.g., 104857600 = 100MB)"
 }

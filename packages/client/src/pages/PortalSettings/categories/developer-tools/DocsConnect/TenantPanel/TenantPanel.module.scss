@@ -34,7 +34,6 @@
  */
 
 @use "@docspace/ui-kit/styles/mixins";
-@use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .panel {
   --payment-warning-color: var(--dev-tools-status-warning);
@@ -97,7 +96,7 @@
 }
 
 .muted {
-  color: $gray-text;
+  color: var(--dev-tools-text-tertiary);
 }
 
 .tariffNote {
@@ -127,7 +126,7 @@
 .settings {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
   max-width: 660px;
   padding-top: 20px;
@@ -166,7 +165,7 @@
   gap: 6px;
   padding: 16px;
   border-radius: 6px;
-  background-color: $gray-light;
+  background-color: var(--dev-tools-card-bg);
 }
 
 .toggleControl {
@@ -177,12 +176,12 @@
 
 .toggleDescription {
   margin-inline-start: 36px;
-  color: $black;
+  color: var(--dev-tools-text);
 }
 
 .radioHint {
   font-weight: 400;
-  color: $gray-text;
+  color: var(--dev-tools-text-secondary);
 }
 
 .radioGroup {
@@ -261,6 +260,7 @@
 
 .limitField {
   max-width: 320px;
+  margin-top: 10px;
 }
 
 .preview {
@@ -320,7 +320,7 @@
   max-width: 660px;
   padding: 16px;
   border-radius: 8px;
-  background-color: $gray-light;
+  background-color: var(--dev-tools-card-bg);
 
   @include mixins.mobile {
     flex-direction: column;
@@ -543,7 +543,7 @@
 }
 
 .integrationTileMore {
-  background-color: $gray-light;
+  background-color: var(--dev-tools-card-bg);
 }
 
 .integrationName {

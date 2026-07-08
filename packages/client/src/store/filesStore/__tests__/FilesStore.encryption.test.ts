@@ -169,3 +169,23 @@ describe("FilesStore.ensureEncryptedFilenameForFile — characterization", () =>
     expect(ensureDecryptedFilename).not.toHaveBeenCalled();
   });
 });
+
+describe("FilesStore.syncEncryptedRoom — characterization", () => {
+  it("recovers filenames and backfills the current room", () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: {
+        id: 1,
+        isRoom: true,
+        navigationPath: [],
+        security: { EditRoom: true },
+      },
+    });
+    vi.mocked(SecretStorage.getCached).mockReturnValue(IDENTITY as never);
+    store.files = [encFile(1)] as never;
+
+    store.syncEncryptedRoom();
+
+    expect(recoverEncryptedFilenames).toHaveBeenCalled();
+    expect(backfillEncryptedFilesForRoomMembers).toHaveBeenCalledTimes(1);
+  });
+});

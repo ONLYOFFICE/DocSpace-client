@@ -36,9 +36,11 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import api from "@docspace/shared/api";
 import { FileType } from "@docspace/shared/enums";
+import { thumbnailStatuses } from "@docspace/shared/constants";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
+import type { TFile } from "@docspace/shared/api/files/types";
 
 const file = (id: number): TItem =>
   ({
@@ -111,5 +113,57 @@ describe("FilesStore.updateSelection — characterization", () => {
     // (filesList is a computed that maps anew on each read, so compare by value)
     expect(store.selection[0]).not.toBe(stale);
     expect(store.selection[0]).toStrictEqual(store.filesList[0]);
+  });
+});
+
+describe("FilesStore.createThumbnails — characterization", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("requests thumbnails for WAITING files and caches them", async () => {
+    const store = createTestFilesStore();
+    const createThumbnails = vi
+      .spyOn(api.files, "createThumbnails")
+      .mockResolvedValue([] as never);
+
+    const waiting = {
+      id: 1,
+      versionGroup: 2,
+      thumbnailStatus: thumbnailStatuses.WAITING,
+    } as unknown as TFile;
+
+    await store.createThumbnails([waiting]);
+
+    expect(createThumbnails).toHaveBeenCalledWith([1]);
+    expect(store.thumbnails.has("1|2")).toBe(true);
+  });
+
+  it("no-ops in a non-tile view with no explicit files", async () => {
+    const store = createTestFilesStore(); // viewAs !== "tile"
+    const createThumbnails = vi.spyOn(api.files, "createThumbnails");
+    await store.createThumbnails();
+    expect(createThumbnails).not.toHaveBeenCalled();
+  });
+});
+
+describe("FilesStore.openDocEditor — characterization", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("opens the doceditor url for the file", () => {
+    const store = createTestFilesStore();
+    const open = vi.spyOn(window, "open").mockReturnValue(null);
+
+    store.openDocEditor(5);
+
+    expect(open).toHaveBeenCalledTimes(1);
+    expect(String(open.mock.calls[0][0])).toContain("fileId=5");
+  });
+
+  it("adds action=view for a preview open", () => {
+    const store = createTestFilesStore();
+    const open = vi.spyOn(window, "open").mockReturnValue(null);
+
+    store.openDocEditor(5, true);
+
+    expect(String(open.mock.calls[0][0])).toContain("action=view");
   });
 });

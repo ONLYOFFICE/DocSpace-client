@@ -142,11 +142,21 @@ export type FakeStores = {
 
 const defaultFakes = (): FakeStores => ({
   authStore: { currentQuotaStore: {} },
-  selectedFolderStore: { id: 1, navigationPath: [], security: {} },
+  selectedFolderStore: {
+    id: 1,
+    navigationPath: [],
+    security: {},
+    isRoom: false,
+    isIndexedFolder: false,
+    filesCount: 0,
+    setSelectedFolder: vi.fn(),
+    setFilesCount: vi.fn(),
+  },
   treeFoldersStore: {
     treeFolders: [],
     fetchTreeFolders: vi.fn(),
     updateTreeFoldersItem: vi.fn(),
+    setSelectedNode: vi.fn(),
     isMy: () => false,
     isRecycleBinFolder: false,
     isArchiveFolder: false,
@@ -155,6 +165,11 @@ const defaultFakes = (): FakeStores => ({
     isPrivacyFolder: false,
     isAIAgentsFolder: false,
     sharedWithMeFolderId: undefined,
+    // Distinct sentinels: in production these are real folder ids, so keeping
+    // them non-undefined avoids `undefined === undefined` matches in handlers
+    // that compare socket payload ids against them.
+    recentFolderId: -101,
+    favoritesFolderId: -102,
   },
   filesSettingsStore: {
     getIcon: () => "icon.svg",
@@ -183,15 +198,25 @@ const defaultFakes = (): FakeStores => ({
     contextMenuItemsList: [],
     getContextMenuKeysByType: () => [],
   },
-  publicRoomStore: { isPublicRoom: false },
+  publicRoomStore: {
+    isPublicRoom: false,
+    getExternalLinks: vi.fn(async () => {}),
+  },
   userStore: {
     user: { id: "user-1", isAdmin: false },
     encryptionKeys: [],
   },
   currentTariffStatusStore: {},
   settingsStore: { enablePlugins: false, isFrame: false, isDesktopClient: false },
-  indexingStore: { isIndexEditingMode: false },
-  aiRoomStore: {},
+  indexingStore: {
+    isIndexEditingMode: false,
+    setIsIndexEditingMode: vi.fn(),
+  },
+  aiRoomStore: {
+    setKnowledgeId: vi.fn(),
+    setResultId: vi.fn(),
+    setCurrentTab: vi.fn(),
+  },
 });
 
 /**

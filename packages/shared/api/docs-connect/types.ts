@@ -54,7 +54,7 @@ export type TDocsConnectConfig = {
   security: { secret: string; header: string };
   server: { isAnonymousSupport: boolean; fileSizeLimit?: number };
   wopi?: { enable: boolean } | null;
-  ipfilter?: TDocsConnectIpFilter | null;
+  ipFilter?: TDocsConnectIpFilter | null;
 };
 
 export type TDocsConnectStat = {
@@ -121,5 +121,5 @@ export type TDocsConnectConfigUpdate = {
   wopi?: {
     enable?: boolean;
   };
-  ipfilter?: TDocsConnectIpFilter;
+  ipFilter?: TDocsConnectIpFilter;
 };

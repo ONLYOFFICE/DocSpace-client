@@ -71,26 +71,12 @@ vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
   resolveDisplayTitle: ({ title }: { title?: string }) => title,
 }));
 
-// Encryption/private-room services: only invoked from methods, never the
-// constructor. Stubbed so importing them never touches real crypto/storage.
-// `getCached` is the method the store actually calls; returning null makes the
-// encryption helpers early-return (no unlocked identity), which is the safe
-// default for tests that don't exercise the crypto path.
-vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
-  SecretStorage: { getCached: vi.fn(() => null) },
-}));
-// NB: this module lives under services/private-room, NOT services/encryption.
-vi.mock(
-  "@docspace/shared/services/private-room/encrypted-filename-recovery",
-  () => ({
-    ensureDecryptedFilename: vi.fn(async (f: unknown) => f),
-    recoverEncryptedFilenames: vi.fn(async () => {}),
-  }),
-);
-vi.mock(
-  "@docspace/shared/services/private-room/room-encryption",
-  () => ({ backfillEncryptedFilesForRoomMembers: vi.fn(async () => {}) }),
-);
+// Encryption/private-room services are import-safe (no top-level side effects)
+// and only invoked from methods with an unlocked identity, so the harness does
+// not mock them: `SecretStorage.getCached` returns null in tests (no identity),
+// which makes the encryption helpers early-return. Tests that exercise the
+// crypto path (FilesStore.encryption.test.ts) mock these modules themselves so
+// a single mock instance is shared between the spec and the store.
 
 // Info-panel helpers: fetch/socket paths poke the info panel; stub so tests
 // don't reach the real panel store.

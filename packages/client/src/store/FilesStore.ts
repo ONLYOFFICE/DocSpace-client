@@ -33,23 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import axios from "axios";
-import { match } from "ts-pattern";
 import equal from "fast-deep-equal";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import {
-  AnalyticsEvents,
-  FileType,
   FilterType,
   FolderType,
   FileStatus,
   RoomsType,
-  RoomsProviderType,
-  FilterKeys,
   RoomSearchArea,
-  SearchArea,
 } from "@docspace/shared/enums";
 import SocketHelper, {
   SocketCommands,
@@ -57,44 +50,25 @@ import SocketHelper, {
 } from "@docspace/ui-kit/utils/socket";
 
 import {
-  isLockedSharedRoom,
   RoomsTypes,
   isDesktop,
-  isMobile,
-  isSystemFolder,
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
 
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
-  updateTempContent,
-  isPublicRoom,
-  getDaysRemaining,
-  frameCallEvent,
   getCategoryType,
-  getFileExtension,
 } from "@docspace/shared/utils/common";
 import {
-  resolveDisplayTitle,
   subscribeFilenameCache,
 } from "@docspace/shared/services/encryption/filename-cache";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import {
   ensureDecryptedFilename,
   recoverEncryptedFilenames,
 } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
-import { backfillEncryptedFilesForRoomMembers } from "@docspace/shared/services/private-room/room-encryption";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { getI18n } from "react-i18next";
-import config from "PACKAGE_FILE";
 import {
   LOADER_TIMEOUT,
-  MEDIA_VIEW_URL,
-  ROOMS_PROVIDER_TYPE_NAME,
-  thumbnailStatuses,
-  CategoryType,
   EMPTY_ARRAY,
 } from "@docspace/shared/constants";
 
@@ -102,19 +76,13 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
-import { refreshInfoPanel } from "SRC_DIR/helpers/info-panel";
 
-import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
 import debounce from "lodash.debounce";
 import Queue from "queue-promise";
 import {
   mappingActiveItems,
-  removeOptions,
-  removeSeparator,
 } from "SRC_DIR/helpers/filesUtils";
-import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import {
   getUserFilter,
   setUserFilter,
@@ -131,21 +99,16 @@ import {
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
-import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
-
-import type { Nullable, TViewAs, ValueOf } from "@docspace/shared/types";
+import type { Nullable, TViewAs } from "@docspace/shared/types";
 import type {
   TFile,
   TFolder,
-  TGetFolder,
 } from "@docspace/shared/api/files/types";
-import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TPathParts } from "@docspace/shared/types";
 import type { VectorizationStatus } from "@docspace/shared/enums";
 import type {
-  TEditFileData,
   TOptSocket,
   TUnmappedSocketListener,
 } from "@docspace/ui-kit/utils/socket";
@@ -157,7 +120,6 @@ import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
-import type { TNavigationPath } from "./SelectedFolderStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type FilesSettingsStore from "./FilesSettingsStore";
 import type { ThirdPartyStore } from "./ThirdPartyStore";
@@ -184,10 +146,8 @@ import {
 } from "./filesStore/constants";
 import type {
   TActiveItem,
-  TClientConfigWithPdfViewer,
   TCreatedItem,
   THighlightFile,
-  THighlightState,
   TItem,
   TRemovedRoomsTypes,
 } from "./filesStore/types";

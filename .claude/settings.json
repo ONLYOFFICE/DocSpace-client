@@ -47,7 +47,8 @@
       "Bash(python3 /tmp/replace_method.py)",
       "Bash(python3 /tmp/extract_group.py '{\"file\":\"contextOptionsStore/groupContextOptions.helpers.ts\",\"methods\":[{\"name\":\"getGroupContextOptions\",\"start\":2211,\"end\":2627}]}')",
       "Bash(python3 /tmp/extract_all.py '[ *)",
-      "Bash(grep -vE \"^\\\\s*$\")"
+      "Bash(grep -vE \"^\\\\s*$\")",
+      "Bash(python3 /tmp/prune_imports.py)"
     ]
   }
 }

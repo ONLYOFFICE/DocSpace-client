@@ -34,83 +34,17 @@
  */
 
 import React from "react";
-import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
-import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
-import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
-import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
-import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
-import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
-import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
-import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
-import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
-import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
-import FavoritesFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
-import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
-import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
-import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
-import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
-import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
-import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
-import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
-import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
-import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
-import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
-import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
-import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
-import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
-import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
-import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
-import EditIndexReactSvgUrl from "PUBLIC_DIR/images/edit.index.react.svg?url";
-import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
-import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
-import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
-import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
-import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
-import CatalogAIAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
-import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
-import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
-import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
-import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
-import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
-import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
-import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
-import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
-import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
-import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
-import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
-import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
-import spreadsheetUrl from "PUBLIC_DIR/images/icons/16/spreadsheet.svg?url";
-import DotsHorizontalUrl from "PUBLIC_DIR/images/icons/16/dots-horizontal.react.svg?url";
-
-import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
-import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
-import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
-import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
-import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
-
 import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
-import { isMobile, isTablet } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-
+import type {
+  ContextMenuModel,
+} from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type {
   TFile,
@@ -120,27 +54,24 @@ import type {
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TOformFile } from "@docspace/shared/api/oforms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import type {
+  CurrentQuotasStore,
+} from "@docspace/shared/store/CurrentQuotaStore";
+import type {
+  CurrentTariffStatusStore,
+} from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
-
+import { isLockedSharedRoom } from "@docspace/shared/utils";
 import {
-  isMobile as isMobileUtils,
-  isLockedSharedRoom,
-  trimSeparator,
-} from "@docspace/shared/utils";
-import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+  getDefaultAccessUser,
+} from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import {
-  canShowManageLink,
-  copyShareLink,
-} from "@docspace/shared/components/share/Share.helpers";
-
-import { getGuidanceConfig } from "@docspace/shared/components/guidance/configs";
-
+  getGuidanceConfig,
+} from "@docspace/shared/components/guidance/configs";
 import {
   connectedCloudsTypeTitleTranslation,
-  removeOptions,
 } from "SRC_DIR/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
@@ -153,10 +84,8 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
   FileExtensions,
-  ShareAccessRights,
   FormFillingManageAction,
 } from "@docspace/shared/enums";
-
 import {
   formRoleMapping,
   getFileLink,
@@ -164,58 +93,45 @@ import {
   manageFormFilling,
   removeSharedFolderOrFile,
 } from "@docspace/shared/api/files";
-
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
-import {
-  FILLING_STATUS_ID,
-  SHARED_WITH_ME_PATH,
-} from "@docspace/shared/constants";
+import { FILLING_STATUS_ID } from "@docspace/shared/constants";
 import {
   isFile as isFileUtil,
   isFolder,
   isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import {
-  getInfoPanelOpen,
-  openMembersTab,
   openShareTab,
   setInfoPanelMobileHidden,
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
-import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
-import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import {
+  XlsxUpdateService,
+} from "@docspace/shared/services/xlsx-update.service";
+import {
+  showCreatedPDFFormDialog,
+} from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
-import type { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
 import { PersistenceKeys, getPersisted } from "./utils/persistence";
 import {
-  createMenuGroup,
-  filterModel,
-  onClickEditAgent,
   onClickEditRoom as onClickEditRoomHelper,
-  onClickLinkForPortal,
   onEditRoomTemplate,
   onShowEditingToast,
   onShowInfoPanel as onShowInfoPanelHelper,
   onShowWaitOperationToast,
-  onSuggestOformChanges,
-  onUploadAction,
-  placePlugins,
   systemFolders,
 } from "./contextOptionsStore/helpers";
 import type {
   TContextItem,
   TContextItemSecurity,
   TContextOption,
-  TMenuGroupConfig,
   TStoreCustomEvent,
 } from "./contextOptionsStore/helpers";
-import { getFilesContextOptionsImpl } from "./contextOptionsStore/filesContextOptions.helpers";
+import {
+  getFilesContextOptionsImpl,
+} from "./contextOptionsStore/filesContextOptions.helpers";
 import {
   getGroupContextOptionsImpl,
 } from "./contextOptionsStore/groupContextOptions.helpers";

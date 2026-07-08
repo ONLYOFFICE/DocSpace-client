@@ -225,6 +225,12 @@ import {
   setFilesFilterImpl,
   setRoomsFilterImpl,
 } from "./filesStore/filter.helpers";
+import {
+  updateSelectionImpl,
+  setSelectionsImpl,
+  withCtrlSelectImpl,
+  withShiftSelectImpl,
+} from "./filesStore/selection.helpers";
 
 export type { TItem, TItemSecurity } from "./filesStore/types";
 
@@ -1172,28 +1178,7 @@ class FilesStore {
     this.setSelection(newSelection);
   };
 
-  updateSelection = (item: TItem) => {
-    const indexFileList = this.filesList.findIndex((file) =>
-      isSameEntity(file as TFile, item as TFile),
-    );
-    const indexSelectedRoom = this.selection.findIndex((selectionItem) =>
-      isSameEntity(selectionItem as TFile, item as TFile),
-    );
-
-    if (~indexFileList && ~indexSelectedRoom) {
-      this.selection[indexSelectedRoom] = this.filesList[indexFileList];
-    }
-
-    if (this.bufferSelection) {
-      const newBuffer = this.filesList.find((file) =>
-        isSameEntity(file as TFile, this.bufferSelection as TFile),
-      );
-
-      if (!newBuffer) return;
-
-      this.bufferSelection = newBuffer;
-    }
-  };
+  updateSelection = (item: TItem) => updateSelectionImpl(this, item);
 
   getFolderIndex = (id: number | string) => {
     const index = this.folders.findIndex((x) => x.id === id);
@@ -1259,97 +1244,8 @@ class FilesStore {
     return this.selection;
   };
 
-  setSelections = (added: Element[], removed: Element[], clear = false) => {
-    if (clear) {
-      this.setSelection(EMPTY_ARRAY);
-    }
-
-    let newSelections: TItem[] = JSON.parse(JSON.stringify(this.selection));
-
-    added.forEach((item) => {
-      if (!item) return;
-
-      const value =
-        this.viewAs === "tile"
-          ? item.getAttribute("value")
-          : item.getElementsByClassName("files-item")
-            ? item
-                .getElementsByClassName("files-item")[0]
-                ?.getAttribute("value")
-            : null;
-
-      if (!value) return;
-      const splitValue = (value && value.split("_")) as string[];
-
-      const fileType = splitValue[0];
-      const id = splitValue.slice(1, -3).join("_");
-
-      if (fileType === "file") {
-        if (this.activeFiles.findIndex((f) => f.id == id) === -1) {
-          const selectableFile = this.filesList.find(
-            (f) => f.id == id && !f.isFolder,
-          );
-
-          if (selectableFile) {
-            newSelections.push(selectableFile);
-          }
-        }
-      } else if (this.activeFolders.findIndex((f) => f.id == id) === -1) {
-        const selectableFolder = this.filesList.find(
-          (f) => f.id == id && f.isFolder,
-        );
-
-        if (selectableFolder) {
-          selectableFolder.isFolder = true;
-
-          newSelections.push(selectableFolder);
-        }
-      }
-    });
-
-    removed.forEach((item) => {
-      if (!item) return;
-
-      const value =
-        this.viewAs === "tile"
-          ? item.getAttribute("value")
-          : item.getElementsByClassName("files-item")
-            ? item
-                .getElementsByClassName("files-item")[0]
-                ?.getAttribute("value")
-            : null;
-
-      // unlike the `added` loop there is no `!value` guard
-      // here, so the old JS would throw on a null value; the erased cast
-      // keeps that behavior.
-      const splitValue = (value && value.split("_")) as string[];
-
-      const fileType = splitValue[0];
-      const id = splitValue.slice(1, -3).join("_");
-
-      if (fileType === "file") {
-        if (this.activeFiles.findIndex((f) => f.id == id) === -1) {
-          newSelections = newSelections.filter(
-            (f) => !(f.id == id && !f.isFolder),
-          );
-        }
-      } else if (this.activeFolders.findIndex((f) => f.id == id) === -1) {
-        newSelections = newSelections.filter(
-          (f) => !(f.id == id && f.isFolder),
-        );
-      }
-    });
-
-    const removeDuplicate = (items: TItem[]) => {
-      return items.filter(
-        (x, index, self) =>
-          index ===
-          self.findIndex((i) => i.id === x.id && i.isFolder === x.isFolder),
-      );
-    };
-
-    this.setSelection(removeDuplicate(newSelections));
-  };
+  setSelections = (added: Element[], removed: Element[], clear = false) =>
+    setSelectionsImpl(this, added, removed, clear);
 
   setBufferSelection = (bufferSelection: Nullable<TItem>) => {
     // console.log("setBufferSelection", bufferSelection);
@@ -2405,100 +2301,9 @@ class FilesStore {
 
   fetchMoreFiles = async () => fetchMoreFilesImpl(this);
 
-  withCtrlSelect = (item: TItem) => {
-    this.setHotkeyCaret(item);
-    this.setHotkeyCaretStart(item);
+  withCtrlSelect = (item: TItem) => withCtrlSelectImpl(this, item);
 
-    const fileIndex = this.selection.findIndex(
-      (f) => f.id === item.id && f.isFolder === item.isFolder,
-    );
-    if (fileIndex === -1) {
-      this.setSelection([...this.selection, item]);
-    } else {
-      this.deselectFile(item);
-    }
-  };
-
-  withShiftSelect = (item: TItem) => {
-    const caretStart = this.hotkeyCaretStart
-      ? this.hotkeyCaretStart
-      : this.filesList[0];
-    const caret = this.hotkeyCaret ? this.hotkeyCaret : caretStart;
-
-    if (!caret || !caretStart) return;
-
-    const startCaretIndex = this.filesList.findIndex(
-      (f) => f.id === caretStart.id && f.isFolder === caretStart.isFolder,
-    );
-
-    const caretIndex = this.filesList.findIndex(
-      (f) => f.id === caret.id && f.isFolder === caret.isFolder,
-    );
-
-    const itemIndex = this.filesList.findIndex(
-      (f) => f.id === item.id && f.isFolder === item.isFolder,
-    );
-
-    const isMoveDown = caretIndex < itemIndex;
-
-    let newSelection: TItem[] = JSON.parse(JSON.stringify(this.selection));
-    let index = caretIndex;
-    const newItemIndex = isMoveDown ? itemIndex + 1 : itemIndex - 1;
-
-    while (index !== newItemIndex) {
-      const filesItem = this.filesList[index];
-
-      const selectionIndex = newSelection.findIndex(
-        (f) => f.id === filesItem.id && f.isFolder === filesItem.isFolder,
-      );
-      if (selectionIndex === -1) {
-        newSelection.push(filesItem);
-      } else {
-        newSelection = newSelection.filter(
-          (_, fIndex) => selectionIndex !== fIndex,
-        );
-        newSelection.push(filesItem);
-      }
-
-      if (isMoveDown) {
-        index++;
-      } else {
-        index--;
-      }
-    }
-
-    const lastSelection = this.selection[this.selection.length - 1];
-    const indexOfLast = this.filesList.findIndex(
-      (f) =>
-        f.id === lastSelection?.id && f.isFolder === lastSelection?.isFolder,
-    );
-
-    newSelection = newSelection.filter((f) => {
-      const listIndex = this.filesList.findIndex(
-        (x) => x.id === f.id && x.isFolder === f.isFolder,
-      );
-
-      if (isMoveDown) {
-        const isSelect = listIndex < indexOfLast;
-        if (isSelect) return true;
-
-        if (listIndex >= startCaretIndex) {
-          return true;
-        }
-        return listIndex >= itemIndex;
-      }
-      const isSelect = listIndex > indexOfLast;
-      if (isSelect) return true;
-
-      if (listIndex <= startCaretIndex) {
-        return true;
-      }
-      return listIndex <= itemIndex;
-    });
-
-    this.setSelection(newSelection);
-    this.setHotkeyCaret(item);
-  };
+  withShiftSelect = (item: TItem) => withShiftSelectImpl(this, item);
 
   get disableDrag() {
     const {

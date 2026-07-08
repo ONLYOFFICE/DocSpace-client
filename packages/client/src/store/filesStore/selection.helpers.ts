@@ -25,8 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
+import { EMPTY_ARRAY } from "@docspace/shared/constants";
+import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
+
+import type { TFile } from "@docspace/shared/api/files/types";
 
 import type { TActiveItem, TItem, TRemovedRoomsTypes } from "./types";
+
+import type { default as FilesStore } from "../FilesStore";
 
 // Active items (files being moved/copied/etc.) suppress selection. Passed
 // explicitly so the check is a pure function of (file, selected, deps); the
@@ -108,3 +114,219 @@ export const filterFilesBySelected = (
 
   return newSelection;
 };
+
+
+export function updateSelectionImpl(self: FilesStore, item: TItem) {
+  const indexFileList = self.filesList.findIndex((file) =>
+    isSameEntity(file as TFile, item as TFile),
+  );
+  const indexSelectedRoom = self.selection.findIndex((selectionItem) =>
+    isSameEntity(selectionItem as TFile, item as TFile),
+  );
+
+  if (~indexFileList && ~indexSelectedRoom) {
+    self.selection[indexSelectedRoom] = self.filesList[indexFileList];
+  }
+
+  if (self.bufferSelection) {
+    const newBuffer = self.filesList.find((file) =>
+      isSameEntity(file as TFile, self.bufferSelection as TFile),
+    );
+
+    if (!newBuffer) return;
+
+    self.bufferSelection = newBuffer;
+  }
+}
+
+export function setSelectionsImpl(
+  self: FilesStore,
+  added: Element[],
+  removed: Element[],
+  clear = false,
+) {
+  if (clear) {
+    self.setSelection(EMPTY_ARRAY);
+  }
+
+  let newSelections: TItem[] = JSON.parse(JSON.stringify(self.selection));
+
+  added.forEach((item) => {
+    if (!item) return;
+
+    const value =
+      self.viewAs === "tile"
+        ? item.getAttribute("value")
+        : item.getElementsByClassName("files-item")
+          ? item
+              .getElementsByClassName("files-item")[0]
+              ?.getAttribute("value")
+          : null;
+
+    if (!value) return;
+    const splitValue = (value && value.split("_")) as string[];
+
+    const fileType = splitValue[0];
+    const id = splitValue.slice(1, -3).join("_");
+
+    if (fileType === "file") {
+      if (self.activeFiles.findIndex((f) => f.id == id) === -1) {
+        const selectableFile = self.filesList.find(
+          (f) => f.id == id && !f.isFolder,
+        );
+
+        if (selectableFile) {
+          newSelections.push(selectableFile);
+        }
+      }
+    } else if (self.activeFolders.findIndex((f) => f.id == id) === -1) {
+      const selectableFolder = self.filesList.find(
+        (f) => f.id == id && f.isFolder,
+      );
+
+      if (selectableFolder) {
+        selectableFolder.isFolder = true;
+
+        newSelections.push(selectableFolder);
+      }
+    }
+  });
+
+  removed.forEach((item) => {
+    if (!item) return;
+
+    const value =
+      self.viewAs === "tile"
+        ? item.getAttribute("value")
+        : item.getElementsByClassName("files-item")
+          ? item
+              .getElementsByClassName("files-item")[0]
+              ?.getAttribute("value")
+          : null;
+
+    // unlike the `added` loop there is no `!value` guard
+    // here, so the old JS would throw on a null value; the erased cast
+    // keeps that behavior.
+    const splitValue = (value && value.split("_")) as string[];
+
+    const fileType = splitValue[0];
+    const id = splitValue.slice(1, -3).join("_");
+
+    if (fileType === "file") {
+      if (self.activeFiles.findIndex((f) => f.id == id) === -1) {
+        newSelections = newSelections.filter(
+          (f) => !(f.id == id && !f.isFolder),
+        );
+      }
+    } else if (self.activeFolders.findIndex((f) => f.id == id) === -1) {
+      newSelections = newSelections.filter(
+        (f) => !(f.id == id && f.isFolder),
+      );
+    }
+  });
+
+  const removeDuplicate = (items: TItem[]) => {
+    return items.filter(
+      (x, index, self) =>
+        index ===
+        self.findIndex((i) => i.id === x.id && i.isFolder === x.isFolder),
+    );
+  };
+
+  self.setSelection(removeDuplicate(newSelections));
+}
+
+export function withCtrlSelectImpl(self: FilesStore, item: TItem) {
+  self.setHotkeyCaret(item);
+  self.setHotkeyCaretStart(item);
+
+  const fileIndex = self.selection.findIndex(
+    (f) => f.id === item.id && f.isFolder === item.isFolder,
+  );
+  if (fileIndex === -1) {
+    self.setSelection([...self.selection, item]);
+  } else {
+    self.deselectFile(item);
+  }
+}
+
+export function withShiftSelectImpl(self: FilesStore, item: TItem) {
+  const caretStart = self.hotkeyCaretStart
+    ? self.hotkeyCaretStart
+    : self.filesList[0];
+  const caret = self.hotkeyCaret ? self.hotkeyCaret : caretStart;
+
+  if (!caret || !caretStart) return;
+
+  const startCaretIndex = self.filesList.findIndex(
+    (f) => f.id === caretStart.id && f.isFolder === caretStart.isFolder,
+  );
+
+  const caretIndex = self.filesList.findIndex(
+    (f) => f.id === caret.id && f.isFolder === caret.isFolder,
+  );
+
+  const itemIndex = self.filesList.findIndex(
+    (f) => f.id === item.id && f.isFolder === item.isFolder,
+  );
+
+  const isMoveDown = caretIndex < itemIndex;
+
+  let newSelection: TItem[] = JSON.parse(JSON.stringify(self.selection));
+  let index = caretIndex;
+  const newItemIndex = isMoveDown ? itemIndex + 1 : itemIndex - 1;
+
+  while (index !== newItemIndex) {
+    const filesItem = self.filesList[index];
+
+    const selectionIndex = newSelection.findIndex(
+      (f) => f.id === filesItem.id && f.isFolder === filesItem.isFolder,
+    );
+    if (selectionIndex === -1) {
+      newSelection.push(filesItem);
+    } else {
+      newSelection = newSelection.filter(
+        (_, fIndex) => selectionIndex !== fIndex,
+      );
+      newSelection.push(filesItem);
+    }
+
+    if (isMoveDown) {
+      index++;
+    } else {
+      index--;
+    }
+  }
+
+  const lastSelection = self.selection[self.selection.length - 1];
+  const indexOfLast = self.filesList.findIndex(
+    (f) =>
+      f.id === lastSelection?.id && f.isFolder === lastSelection?.isFolder,
+  );
+
+  newSelection = newSelection.filter((f) => {
+    const listIndex = self.filesList.findIndex(
+      (x) => x.id === f.id && x.isFolder === f.isFolder,
+    );
+
+    if (isMoveDown) {
+      const isSelect = listIndex < indexOfLast;
+      if (isSelect) return true;
+
+      if (listIndex >= startCaretIndex) {
+        return true;
+      }
+      return listIndex >= itemIndex;
+    }
+    const isSelect = listIndex > indexOfLast;
+    if (isSelect) return true;
+
+    if (listIndex <= startCaretIndex) {
+      return true;
+    }
+    return listIndex <= itemIndex;
+  });
+
+  self.setSelection(newSelection);
+  self.setHotkeyCaret(item);
+}

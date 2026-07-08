@@ -1,0 +1,100 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getFilesContextOptions — encrypted file > strips sharing/link/version options and adds download-encrypted 1`] = `
+[
+  "select",
+  "separator0",
+  "show-info",
+  "separator1",
+  "move",
+  "move-to",
+  "copy-to",
+  "duplicate",
+  "separator5",
+  "delete",
+  "remove-from-recent",
+  "download-encrypted",
+]
+`;
+
+exports[`getFilesContextOptions — folder context > trash: no favorites/mark-read, offers restore+delete 1`] = `
+[
+  "select",
+  "edit",
+  "vectorization",
+  "separator0",
+  "sharing-settings",
+  "copy-shared-link",
+  "manage-links",
+  "create-room-separator",
+  "create-room",
+  "send-by-email",
+  "show-info",
+  "separator1",
+  "download",
+  "move",
+  "move-to",
+  "copy-to",
+  "duplicate",
+  "restore",
+  "rename",
+  "edit-index",
+  "separator5",
+  "delete",
+  "remove-from-recent",
+  "copy-general-link",
+]
+`;
+
+exports[`getFilesContextOptions — permission=false strips actions > drops every gated action when security is empty 1`] = `
+[
+  "select",
+  "vectorization",
+  "separator0",
+  "sharing-settings",
+  "copy-shared-link",
+  "manage-links",
+  "create-room-separator",
+  "create-room",
+  "send-by-email",
+  "show-info",
+  "separator1",
+  "mark-as-favorite",
+  "edit-index",
+  "separator5",
+  "remove-from-recent",
+  "copy-general-link",
+]
+`;
+
+exports[`getFilesContextOptions — room/folder with no permissions > plain folder with empty security drops move/copy/delete/rename 1`] = `
+[
+  "select",
+  "open",
+  "sharing-settings",
+  "copy-shared-link",
+  "manage-links",
+  "create-room-separator",
+  "create-room",
+  "link-for-room-members",
+  "show-info",
+  "separator1",
+  "mark-as-favorite",
+  "edit-index",
+]
+`;
+
+exports[`getFilesContextOptions — room/folder with no permissions > room with empty security keeps only ungated entries 1`] = `
+[
+  "select",
+  "open",
+  "separator0",
+  "link-for-room-members",
+  "external-link",
+  "edit-index",
+  "short-tour",
+  "export-room-index",
+  "separator1",
+  "leave-room",
+]
+`;

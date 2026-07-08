@@ -28,6 +28,8 @@ import path from "path";
 import { defineConfig, type Plugin } from "vitest/config";
 import svgr from "vite-plugin-svgr";
 
+import { jsxInJsPlugin } from "./config/plugins/jsx-in-js";
+
 // Mirror the shared vitest setup: same SVG handling, same jsdom env, same
 // global i18n + DOMRect mocks via shared/vitest/setupTests.ts. The aliases
 // below match config/resolve.ts so SRC_DIR/PACKAGE_FILE/@docspace/* imports
@@ -50,6 +52,10 @@ const mockSvgUrlPlugin = (): Plugin => ({
 
 export default defineConfig({
   plugins: [
+    // The client has many legacy .js files containing JSX (helpers, dialogs)
+    // that store modules import transitively. Mirror the app's vite config so
+    // vitest can parse them; without this, importing e.g. FilesStore fails.
+    jsxInJsPlugin(),
     mockSvgUrlPlugin(),
     svgr({
       svgrOptions: {

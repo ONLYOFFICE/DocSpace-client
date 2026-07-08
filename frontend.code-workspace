@@ -271,6 +271,16 @@
             "label": "Test unit:ui-kit",
             "task": "Test | Jest:unit:ui-kit",
             "tooltip": "🛠️ Start the \"Test | Jest:unit:ui-kit\" task"
+          },
+          {
+            "label": "Test vitest (client)",
+            "task": "Test | Vitest:client",
+            "tooltip": "🛠️ Run all @docspace/client vitest unit tests"
+          },
+          {
+            "label": "Test vitest (store)",
+            "task": "Test | Vitest:store",
+            "tooltip": "🛠️ Run @docspace/client store unit tests (src/store, incl. FilesStore)"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"

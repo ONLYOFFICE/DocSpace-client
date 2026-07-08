@@ -231,6 +231,15 @@ import {
   withCtrlSelectImpl,
   withShiftSelectImpl,
 } from "./filesStore/selection.helpers";
+import {
+  initFilesImpl,
+  openDocEditorImpl,
+  createThumbnailsImpl,
+  createThumbnailImpl,
+  fetchFavoritesFolderImpl,
+  scrollToTopImpl,
+  getIsEmptyTrashImpl,
+} from "./filesStore/actions.helpers";
 
 export type { TItem, TItemSecurity } from "./filesStore/types";
 
@@ -946,73 +955,7 @@ class FilesStore {
     };
   }
 
-  initFiles = () => {
-    if (this.isInit) return;
-
-    const { isAuthenticated } = this.authStore;
-    const { getFilesSettings } = this.filesSettingsStore;
-
-    // SettingsStore renamed getEncryptionKeys to
-    // getLegacyEncryptionKeys — this destructured member is undefined at
-    // runtime, so the desktop-client branch below would throw when calling
-    // it (same as the old JS). Candidate for a real fix.
-    const {
-      getPortalCultures,
-      getIsEncryptionSupport,
-      getEncryptionKeys,
-      // setModuleInfo,
-      isDesktopClient,
-      getInvitationSettings,
-    } = this.settingsStore as SettingsStore & {
-      getEncryptionKeys?: () => Promise<unknown>;
-    };
-
-    // setModuleInfo(config.homepage, config.id);
-
-    const requests = [];
-
-    updateTempContent();
-    if (!isAuthenticated) {
-      return this.clientLoadingStore.setIsLoaded(true);
-    }
-    updateTempContent(isAuthenticated);
-
-    if (!this.isEditor) {
-      requests.push(
-        getPortalCultures(),
-        getInvitationSettings(),
-        this.treeFoldersStore.fetchTreeFolders().then((treeFolders) => {
-          if (!treeFolders || !treeFolders.length) return;
-
-          const trashFolder = treeFolders.find(
-            (f) => f.rootFolderType == FolderType.TRASH,
-          );
-
-          if (!trashFolder) return;
-
-          const isEmpty = !trashFolder.foldersCount && !trashFolder.filesCount;
-
-          this.setTrashIsEmpty(isEmpty);
-        }),
-      );
-
-      if (isDesktopClient) {
-        requests.push(getIsEncryptionSupport(), getEncryptionKeys!());
-      }
-
-      if (this.userStore?.getEncryptionKeys) {
-        requests.push(this.userStore.getEncryptionKeys().catch(() => {}));
-      }
-    }
-    requests.push(getFilesSettings());
-
-    return Promise.all(requests).then(() => {
-      this.clientLoadingStore.setIsArticleLoading(false);
-      this.clientLoadingStore.setFirstLoad(false);
-
-      this.setIsInit(true);
-    });
-  };
+  initFiles = () => initFilesImpl(this);
 
   setIsInit = (isInit: boolean) => {
     this.isInit = isInit;
@@ -1474,15 +1417,7 @@ class FilesStore {
     this.folders[idx].pinned = !this.folders[idx].pinned;
   };
 
-  scrollToTop = () => {
-    if (this.selectedFolderStore.isIndexedFolder) return;
-
-    const scrollElm = isMobile()
-      ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
-      : document.querySelector("#sectionScroll > .scroll-wrapper > .scroller");
-
-    scrollElm && scrollElm.scrollTo(0, 0);
-  };
+  scrollToTop = () => scrollToTopImpl(this);
 
   removeFiles = (
     fileIds?: Nullable<(number | string)[]>,
@@ -2060,28 +1995,8 @@ class FilesStore {
     return false;
   }
 
-  fetchFavoritesFolder = async (folderId: number | string) => {
-    // api.files.getFolder is typed with a mandatory filter
-    // param but the old JS calls it with the folder id only; the erased
-    // function cast keeps the reduced call arity.
-    const favoritesFolder = await (
-      api.files.getFolder as unknown as (
-        folderIdParam: number | string,
-      ) => Promise<TGetFolder>
-    )(folderId);
-    this.setFolders(favoritesFolder.folders);
-    this.setFiles(favoritesFolder.files);
-
-    const newFilter = this.filter.clone();
-    newFilter.total = favoritesFolder.total;
-    this.setFilter(newFilter);
-
-    this.selectedFolderStore.setSelectedFolder({
-      folders: favoritesFolder.folders,
-      ...favoritesFolder.current,
-      pathParts: favoritesFolder.pathParts,
-    });
-  };
+  fetchFavoritesFolder = async (folderId: number | string) =>
+    fetchFavoritesFolderImpl(this, folderId);
 
   getFileInfo = async (
     id: number | string,
@@ -2106,106 +2021,12 @@ class FilesStore {
     shareKey: Nullable<string> = null,
     editForm = false,
     fillForm = false,
-  ) => {
-    const { openOnNewPage } = this.filesSettingsStore;
+  ) => openDocEditorImpl(this, id, preview, shareKey, editForm, fillForm);
 
-    const share = shareKey || this.publicRoomStore.publicRoomKey;
+  createThumbnails = async (files: Nullable<TFile[]> = null) =>
+    createThumbnailsImpl(this, files);
 
-    const folderType = this.selectedFolderStore.type;
-
-    const isFormRoom = this.selectedFolderStore.roomType === RoomsType.FormRoom;
-    const isPublic = this.publicRoomStore.isPublicRoom;
-
-    const { isFrame, frameConfig } = this.settingsStore;
-
-    const canShare =
-      share && (isPublic || !isFormRoom) && !isSystemFolder(folderType!);
-
-    const searchParams = new URLSearchParams();
-
-    // URLSearchParams.append is typed for strings while the
-    // old JS passes numeric ids / nullable share keys; erased casts keep
-    // the values (they are stringified by the browser API).
-    searchParams.append("fileId", id as string);
-    if (canShare) searchParams.append("share", share as string);
-    if (preview) searchParams.append("action", "view");
-    if (editForm) searchParams.append("action", "edit");
-    if (fillForm) searchParams.append("action", "fill");
-
-    const url = combineUrl(
-      window.ClientConfig?.proxy?.url,
-      config.homepage,
-      `/doceditor?${searchParams.toString()}`,
-    );
-
-    if (isFrame && frameConfig?.events?.onEditorOpen) {
-      const item = this.files.find((f) => f.id === id);
-
-      frameCallEvent({
-        event: "onEditorOpen",
-        data: {
-          ...item,
-          share,
-          action: preview ? "view" : fillForm ? "fill" : "edit",
-        },
-      });
-
-      return;
-    }
-
-    return window.open(url, openOnNewPage ? "_blank" : "_self");
-  };
-
-  createThumbnails = async (files: Nullable<TFile[]> = null) => {
-    if ((this.viewAs !== "tile" || !this.files) && !files) return;
-
-    const currentFiles = files || this.files;
-
-    const newFiles = currentFiles.filter((f) => {
-      return (
-        typeof f.id !== "string" &&
-        f?.thumbnailStatus === thumbnailStatuses.WAITING &&
-        !this.thumbnails.has(`${f.id}|${f.versionGroup}`)
-      );
-    });
-
-    if (!newFiles.length) return;
-
-    if (this.thumbnails.size > THUMBNAILS_CACHE) this.thumbnails.clear();
-
-    newFiles.forEach((f) => this.thumbnails.add(`${f.id}|${f.versionGroup}`));
-
-    console.log("thumbnails", this.thumbnails);
-
-    const fileIds = newFiles.map((f) => f.id);
-
-    const res = await api.files.createThumbnails(fileIds);
-
-    return res;
-  };
-
-  createThumbnail = async (file?: TFile) => {
-    if (
-      this.viewAs !== "tile" ||
-      !file ||
-      !file.id ||
-      typeof file.id === "string" ||
-      file.thumbnailStatus !== thumbnailStatuses.WAITING ||
-      this.thumbnails.has(`${file.id}|${file.versionGroup}`)
-    ) {
-      return;
-    }
-
-    if (this.thumbnails.size > THUMBNAILS_CACHE) this.thumbnails.clear();
-
-    this.thumbnails.add(`${file.id}|${file.versionGroup}`);
-
-    console.log("thumbnails", this.thumbnails);
-
-    const res = await api.files.createThumbnails([file.id]);
-
-    return res;
-  };
+  createThumbnail = async (file?: TFile) => createThumbnailImpl(this, file);
 
   setIsUpdatingRowItem = (updating: boolean) => {
     this.isUpdatingRowItem = updating;
@@ -2240,11 +2061,7 @@ class FilesStore {
     this.scrollToItem = item;
   };
 
-  getIsEmptyTrash = async () => {
-    const res = await api.files.getTrashFolderList();
-    const items = [...res.files, ...res.folders];
-    this.setTrashIsEmpty(items.length === 0);
-  };
+  getIsEmptyTrash = async () => getIsEmptyTrashImpl(this);
 
   setTrashIsEmpty = (isEmpty: boolean) => {
     this.trashIsEmpty = isEmpty;

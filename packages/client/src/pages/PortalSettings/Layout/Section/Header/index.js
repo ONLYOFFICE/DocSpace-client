@@ -67,8 +67,6 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 
 import classNames from "classnames";
 
-import { getDocsConnectTrialState } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
-
 import styles from "./Header.module.scss";
 
 export const HeaderContainer = ({ children, className = "", ...props }) => (
@@ -100,7 +98,6 @@ const SectionHeaderContent = (props) => {
     deviceType,
     isNotPaidPeriod,
     isBackupPaid,
-    docsConnectInfo,
   } = props;
 
   const navigate = useNavigate();
@@ -212,8 +209,7 @@ const SectionHeaderContent = (props) => {
       location.pathname.includes("/services/disk-storage") ||
       location.pathname.includes("/services/backup") ||
       location.pathname.includes("/services/ai-services") ||
-      location.pathname.includes("/services/ai-search") ||
-      location.pathname.includes("/services/docs-connect");
+      location.pathname.includes("/services/ai-search");
 
     if (isServicesSubPage && location.key === "default") {
       navigate("/portal-settings/payments/services");
@@ -307,17 +303,6 @@ const SectionHeaderContent = (props) => {
             aiServices: t("Common:AIServices"),
           });
 
-  const isDocsConnectServicePage = location.pathname.includes(
-    "/services/docs-connect",
-  );
-  const {
-    endDate: docsConnectEndDate,
-    isPaid: docsConnectPaid,
-    expired: docsConnectExpired,
-    daysLeft: docsConnectDaysLeft,
-  } = getDocsConnectTrialState(docsConnectInfo);
-  const docsConnectTrialLow = !docsConnectExpired && docsConnectDaysLeft <= 14;
-
   return (
     <StyledContainer>
       {isHeaderVisible ? (
@@ -342,7 +327,6 @@ const SectionHeaderContent = (props) => {
             window.location.href.indexOf("/javascript-sdk/") > -1 ||
             window.location.href.indexOf("/ai-services") > -1 ||
             window.location.href.indexOf("/services/backup") > -1 ||
-            window.location.href.indexOf("/services/docs-connect") > -1 ||
             window.location.href.indexOf("disk-storage") > -1) ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
@@ -356,20 +340,6 @@ const SectionHeaderContent = (props) => {
           <Heading type="content" truncate>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
-              {isDocsConnectServicePage &&
-              docsConnectEndDate &&
-              !docsConnectPaid ? (
-                <span
-                  className={classNames(styles.docsConnectTrialBadge, {
-                    [styles.docsConnectTrialBadgeWarning]: docsConnectTrialLow,
-                    [styles.docsConnectTrialBadgeExpired]: docsConnectExpired,
-                  })}
-                >
-                  {docsConnectExpired
-                    ? t("Common:TrialExpired")
-                    : t("Common:FreeDaysLeft", { count: docsConnectDaysLeft })}
-                </span>
-              ) : null}
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor={
@@ -423,7 +393,6 @@ export default inject(
     settingsStore,
     oauthStore,
     currentTariffStatusStore,
-    docsConnectStore,
   }) => {
     const {
       isCustomizationAvailable,
@@ -479,7 +448,6 @@ export default inject(
       deviceType,
       isNotPaidPeriod,
       isBackupPaid,
-      docsConnectInfo: docsConnectStore?.info,
     };
   },
 )(

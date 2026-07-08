@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallStepCheckRequirements",
+  "content": "Checking system requirements",
+  "content_en_sha1_hash": "f9a7759a325dce72d3e2f04d5b8ec67a1dce3fc3",
+  "created_at": "2026-05-24T17:27:23.283Z",
+  "updated_at": "2026-07-07T08:59:21.786Z",
+  "comment": {
+    "text": "Label for an installation step in the installation dialog, representing the phase where system requirements are being verified.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:19:20.179Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallDocsCloudDialog.tsx",
+      "line_number": 100,
+      "context": "const { isBase } = useTheme();\n \n const steps: InstallStep[] = [\n {\n id: \"check-requirements\",\n label: t(\"Common:DashboardInstallStepCheckRequirements\"),\n description: t(\"Common:DashboardInstallStepCheckRequirementsDescription\"),\n },\n {\n id: \"connect-cloud\",\n label: t(\"Common:DashboardInstallStepConnectCloud\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

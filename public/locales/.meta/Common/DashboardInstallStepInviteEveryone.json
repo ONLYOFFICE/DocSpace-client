@@ -3,7 +3,7 @@
   "content": "Inviting your team",
   "content_en_sha1_hash": "a833d81502d351af9067bf741d3d2c087f944a38",
   "created_at": "2026-05-19T19:03:13.975Z",
-  "updated_at": "2026-05-24T17:27:49.114Z",
+  "updated_at": "2026-07-07T08:59:21.783Z",
   "comment": {
     "text": "Step label in the module installation dialog indicating the current stage of the setup process.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
-      "line_number": 76,
+      "line_number": 111,
       "context": "const steps: InstallStep[] = React.useMemo(\n () =>\n AI_FORMS_INSTALL_STEPS.map((id) => {\n const labels: Record<AiFormsInstallStepId, string> = {\n \"create-room\": t(\"Common:DashboardInstallStepCreateRoom\"),\n \"invite-everyone\": t(\"Common:DashboardInstallStepInviteEveryone\"),\n \"create-blank-form\": t(\"Common:DashboardInstallStepCreateBlankForm\"),\n \"upload-library\": t(\"Common:DashboardInstallStepUploadLibrary\"),\n };\n const descriptions: Record<AiFormsInstallStepId, string> = {\n \"create-room\": t(\"Common:DashboardInstallStepCreateRoomDescription\"),",
       "module": "/packages/client"
     }

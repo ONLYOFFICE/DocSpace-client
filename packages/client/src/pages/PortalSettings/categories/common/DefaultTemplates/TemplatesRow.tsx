@@ -128,7 +128,9 @@ const TemplatesRow = ({
         {
           key: "preview",
           label: t("Common:Preview"),
-          onClick: () => openDocEditor?.(item.id, true),
+          // item.id may be null in the row model; the erased
+          // cast keeps the old unchecked call.
+          onClick: () => openDocEditor?.(item.id as number, true),
           disabled: false,
           icon: EyeIcon,
         },
@@ -190,7 +192,10 @@ const TemplatesRow = ({
         onReset={() => onResetFile()}
         onClose={() => setIsDialogVisible(false)}
       />
-      <ReactSVG src={icon} className={styles.icon} />
+      {/* type-only assertion — `icon` is undefined only when
+          the optional getFileIcon prop is not injected, and the original code
+          passed it to ReactSVG unchanged. */}
+      <ReactSVG src={icon!} className={styles.icon} />
       <div className={styles.rowContent}>
         <div className={styles.mainContent}>
           <Text fontWeight={600} fontSize="13px" truncate>

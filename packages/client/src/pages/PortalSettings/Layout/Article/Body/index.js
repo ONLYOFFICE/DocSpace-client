@@ -312,7 +312,10 @@ const ArticleBodyContent = (props) => {
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
-      const linkData = getLinkData(item.key);
+      const linkData =
+        !standalone && item.alternativeUrl
+          ? { path: item.alternativeUrl, state: {} }
+          : getLinkData(item.key);
 
       const style = {
         marginTop: `${item.key.includes(standalone ? 9 : 10) ? "16px" : "0"}`,

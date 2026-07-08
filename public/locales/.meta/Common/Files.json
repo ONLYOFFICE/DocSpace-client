@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-07-04T11:30:21.780Z",
+  "updated_at": "2026-07-07T08:59:21.661Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 68,
+      "line_number": 103,
       "context": "import type { AppPromoContentMap } from \"./AppPromoDialog.types\";\n \n export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({\n \"ai-files\": {\n title: t(\"Common:Files\"),\n subtitle: t(\"Common:FilesPromoSubtitle\"),\n description: t(\"Common:FilesPromoDescription\"),\n features: [\n {\n Icon: FilesManagementIcon,",
       "module": "/packages/client"
     },
@@ -73,37 +73,37 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 64,
+      "line_number": 96,
       "context": "<Text style={{ marginTop: \"16px\" }}>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"PersonalContentRemovalNotice\"\n values={{ sectionName: t(\"Common:Files\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </Text>\n <Text style={{ marginTop: \"16px\" }}>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 64,
+      "line_number": 96,
       "context": "<Text style={{ marginTop: \"16px\" }}>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"PersonalContentRemovalNotice\"\n values={{ sectionName: t(\"Common:Files\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </Text>\n <Text style={{ marginTop: \"16px\" }}>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 330,
+      "line_number": 338,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 330,
+      "line_number": 338,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 330,
+      "line_number": 338,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 330,
+      "line_number": 338,
       "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
@@ -115,7 +115,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useUploadToMyDocuments.tsx",
-      "line_number": 197,
+      "line_number": 232,
       "context": "if (uploaded > 0) {\n showSuccessToast(\n t as TFunction,\n uploaded,\n firstFileName,\n t(\"Common:Files\"),\n onOpenFiles,\n );\n }\n if (failed > 0) {\n toastr.error(t(\"Common:ErrorUploadingFiles\", { count: failed }));",
       "module": "/packages/client"
     },
@@ -193,13 +193,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 380,
+      "line_number": 415,
       "context": "<Checkbox\n dataTestId=\"applies_to_documents_checkbox\"\n isChecked={applyToDocuments}\n onChange={() => setApplyToDocuments(!applyToDocuments)}\n label={t(\"Settings:AppliesToDocuments\", {\n myDocuments: t(\"Common:Files\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 380,
+      "line_number": 415,
       "context": "<Checkbox\n dataTestId=\"applies_to_documents_checkbox\"\n isChecked={applyToDocuments}\n onChange={() => setApplyToDocuments(!applyToDocuments)}\n label={t(\"Settings:AppliesToDocuments\", {\n myDocuments: t(\"Common:Files\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
       "module": "/packages/client"
     },
@@ -240,32 +240,32 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1896,
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 2052,
       "context": "},\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:Files\"),\n }),\n onClick: this.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/TreeFoldersStore.js",
-      "line_number": 79,
+      "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
+      "line_number": 108,
       "context": "switch (folder.rootFolderType) {\n case FolderType.AIAgents:\n folder.title = i18n.t(\"Common:AIAgents\");\n break;\n case FolderType.USER:\n folder.title = i18n.t(\"Common:Files\");\n break;\n case FolderType.SHARE:\n folder.title = i18n.t(\"Common:SharedWithMe\");\n break;\n case FolderType.Rooms:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
-      "line_number": 227,
+      "line_number": 258,
       "context": "},\n {\n id: \"filter_type-files\",\n key: String(FilterType.FilesOnly),\n group: FilterGroups.filterType,\n label: t(\"Common:Files\", { defaultValue: \"Files\" }),\n },\n );\n }\n \n typeOptions.push(",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
-      "line_number": 227,
+      "line_number": 258,
       "context": "},\n {\n id: \"filter_type-files\",\n key: String(FilterType.FilesOnly),\n group: FilterGroups.filterType,\n label: t(\"Common:Files\", { defaultValue: \"Files\" }),\n },\n );\n }\n \n typeOptions.push(",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
-      "line_number": 118,
+      "line_number": 153,
       "context": "title: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n defaultValue:\n \"Pick files from {{sectionNameFirst}} or {{sectionNameSecond}}.\",\n }),\n icon: <UploadPDFFormIcon />,",
       "module": "/packages/sdk"
     },
@@ -277,31 +277,31 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/details.tsx",
-      "line_number": 73,
+      "line_number": 104,
       "context": "const culture = i18n.language || \"en\";\n \n const folders = agent.foldersCount ?? 0;\n const files = agent.filesCount ?? 0;\n const contentLabel = `${t(\"Common:Folders\", { defaultValue: \"Folders\" })}: ${folders} | ${t(\"Common:Files\", { defaultValue: \"Files\" })}: ${files}`;\n \n const storageLabel =\n agent.usedSpace !== undefined && agent.quotaLimit !== undefined\n ? `${formatBytes(agent.usedSpace)} / ${formatBytes(agent.quotaLimit)}`\n : formatBytes(agent.usedSpace);",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 195,
+      "line_number": 230,
       "context": "},\n {\n id: \"filter_type-all-files\",\n key: FilterType.FilesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Files\"),\n },\n {\n id: \"filter_type-documents\",\n key: FilterType.DocumentsOnly.toString(),\n group: FilterGroups.filterType,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 195,
+      "line_number": 230,
       "context": "},\n {\n id: \"filter_type-all-files\",\n key: FilterType.FilesOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Files\"),\n },\n {\n id: \"filter_type-documents\",\n key: FilterType.DocumentsOnly.toString(),\n group: FilterGroups.filterType,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 266,
+      "line_number": 301,
       "context": "private getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };\n \n private getItemSize = () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 334,
+      "line_number": 369,
       "context": "return t(\"Common:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"Common:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"Common:RoomIndexExportLocation\", {\n sectionName: t(\"Common:Files\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"Common:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"Common:StartedFillingItOut\");",
       "module": "/packages/sdk"
     },
@@ -319,7 +319,7 @@
     },
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 91,
+      "line_number": 126,
       "context": "{\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Files\"),\n }),\n key: \"form-filling-uploading\",\n placement: \"side\",\n position: [\n {",
       "module": "/packages/shared"
     },

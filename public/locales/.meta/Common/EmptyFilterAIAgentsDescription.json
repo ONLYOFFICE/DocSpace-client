@@ -3,7 +3,7 @@
   "content": "No agents match this filter. Try another or remove the filter to view all agents.",
   "content_en_sha1_hash": "1f984b6f0a28d510cd3adf971da3da265f65b614",
   "created_at": "2025-10-27T16:14:14.201Z",
-  "updated_at": "2026-05-24T17:27:49.053Z",
+  "updated_at": "2026-07-07T08:59:21.651Z",
   "comment": {
     "text": "This is an empty state message displayed when no AI agents are found after applying a filter. It suggests trying a different filter or removing the current one.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-filter/index.tsx",
-      "line_number": 87,
+      "line_number": 122,
       "context": "return (\n <EmptyView\n icon={icon}\n title={t(\"Common:NoFindingsFound\", { defaultValue: \"No results found\" })}\n description={t(\"Common:EmptyFilterAIAgentsDescription\", {\n defaultValue:\n \"No AI agents match the filter. Try a different search or clear the filter.\",\n })}\n options={options}\n />",
       "module": "/packages/sdk"
     }

@@ -223,6 +223,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
           },
           {
+            "label": "Test license headers (common)",
+            "task": "Test | Jest:license",
+            "tooltip": "🛠️ Start the \"Test | Jest:license\" task"
+          },
+          {
             "label": "Test translations (common)",
             "task": "Test | Jest:translations",
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"

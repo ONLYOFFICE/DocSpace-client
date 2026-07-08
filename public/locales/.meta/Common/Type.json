@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2026-07-04T11:30:21.871Z",
+  "updated_at": "2026-07-07T08:59:21.797Z",
   "comment": {
     "text": "This is a table column header or a filter option label. It refers to the kind or category of an item, such as a transaction or a file.",
     "is_auto": true,
@@ -157,19 +157,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 622,
+      "line_number": 623,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 622,
+      "line_number": 623,
       "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
-      "line_number": 207,
+      "line_number": 238,
       "context": "const typeOptions: TItem[] = [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.filterType,\n label: t(\"Common:Type\", { defaultValue: \"Type\" }),\n isHeader: true,\n isLast: true,\n },\n ];",
       "module": "/packages/sdk"
     },
@@ -181,13 +181,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
-      "line_number": 181,
+      "line_number": 216,
       "context": "const getFilterData = React.useCallback(async () => {\n const typeOptions = [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.filterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: true,\n },\n {\n id: \"filter_type-folders\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Details/Details.utils.tsx",
-      "line_number": 171,
+      "line_number": 206,
       "context": "private getPropertyTitle = (propertyId: string) => {\n switch (propertyId) {\n case \"Owner\":\n return this.t(\"Common:Owner\");\n case \"Type\":\n return this.t(\"Common:Type\");\n case \"File extension\":\n return this.t(\"Common:FileExtension\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Content\":",
       "module": "/packages/sdk"
     },

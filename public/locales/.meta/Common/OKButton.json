@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-07-03T11:08:02.819Z",
+  "updated_at": "2026-07-07T08:59:21.698Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 350,
+      "line_number": 355,
       "context": "headerLabel={t(\"Common:ActionRequired\")}\n isLoading={!ready}\n onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}",
       "module": "/packages/client"
     },
@@ -73,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
-      "line_number": 85,
+      "line_number": 120,
       "context": "/>\n <div className={styles.lifetimeButtons}>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onAcceptClick}\n testId=\"lifetime_dialog_ok_button\"",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 77,
+      "line_number": 109,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onCloseDialog}\n scale={currentDeviceType === DeviceType.mobile}\n />",
       "module": "/packages/client"
     },
@@ -163,7 +163,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/disable/index.tsx",
-      "line_number": 81,
+      "line_number": 116,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:OKButton\")}\n scale\n onClick={onSubmitAction}\n isLoading={loading}\n testId=\"disable-mcp-button\"\n />",
       "module": "/packages/sdk"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/move-to-archive-dialog/index.tsx",
-      "line_number": 93,
+      "line_number": 128,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"archive\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={handleConfirm}\n testId=\"move_to_archive_dialog_submit\"",
       "module": "/packages/sdk"
     },

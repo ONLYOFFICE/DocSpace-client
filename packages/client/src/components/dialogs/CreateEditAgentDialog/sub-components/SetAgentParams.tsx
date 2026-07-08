@@ -52,7 +52,6 @@ import TagInput from "../../../TagInput";
 import InputParam from "../../../CreateEditDialogParams/InputParam";
 
 import ProfileSettings from "../sub-components/Profile";
-import ModelSaas from "../sub-components/ModelSaas";
 import InstructionsSettings from "../sub-components/Instructions";
 import MCPSettings from "../sub-components/MCP";
 import {
@@ -127,7 +126,7 @@ type setAgentParamsProps = {
   standalone?: SettingsStore["standalone"];
 };
 
-const setAgentParams = ({
+const SetAgentParams = ({
   agentParams,
   setAgentParams,
   tagHandler,
@@ -230,7 +229,9 @@ const setAgentParams = ({
 
   React.useEffect(() => {
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: previewTitle,
     });
   }, []);
@@ -271,7 +272,7 @@ const setAgentParams = ({
       iconWasUpdated: agentParams.iconWasUpdated,
     };
 
-    const uploadedFile = await uploadFile?.(t, e);
+    const uploadedFile = (await uploadFile?.(t, e)) as File | null;
 
     setAgentParams({
       ...agentParams,
@@ -315,7 +316,9 @@ const setAgentParams = ({
     }
 
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: newValue,
     });
 
@@ -489,21 +492,11 @@ const setAgentParams = ({
         />
       ) : null}
 
-      {standalone ? (
-        <ProfileSettings
-          agentParams={agentParams}
-          setAgentParams={setAgentParams}
-        />
-      ) : (
-        <ModelSaas
-          agentParams={agentParams}
-          systemAiEnabled={systemAiEnabled}
-          recommendedModelForForms={recommendedModelForForms}
-          isAdmin={!!isUserAdmin}
-          openedFromChat={openContext === AgentDialogContext.Chat}
-          setAgentParams={setAgentParams}
-        />
-      )}
+      <ProfileSettings
+        agentParams={agentParams}
+        setAgentParams={setAgentParams}
+      />
+
       <InstructionsSettings
         agentParams={agentParams}
         setAgentParams={setAgentParams}
@@ -588,7 +581,9 @@ export default inject(
       setCover,
     } = dialogsStore;
 
-    setCoverSelection(bufferSelection);
+    // bufferSelection is a FilesStore view-model item
+    // (TItem); erased cast adapts it to the raw-entity dialog param.
+    setCoverSelection(bufferSelection as Nullable<TRoom>);
 
     return {
       folderFormValidation,
@@ -617,5 +612,4 @@ export default inject(
       standalone,
     };
   },
-)(observer(setAgentParams));
-
+)(observer(SetAgentParams));

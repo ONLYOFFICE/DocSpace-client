@@ -3,7 +3,7 @@
   "content": "AI search",
   "content_en_sha1_hash": "4721064b09cb588afefc0e9367f5b51c2b45a4dd",
   "created_at": "2026-07-04T11:29:48.469Z",
-  "updated_at": "2026-07-04T11:34:17.938Z",
+  "updated_at": "2026-07-07T08:59:21.878Z",
   "comment": {
     "text": "Label for a service toggle switch and a navigation link in portal settings, representing the name of the AI search feature.",
     "is_auto": true,
@@ -18,8 +18,14 @@
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
+      "line_number": 55,
+      "context": "return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))\n return t(\"Common:AIServices\");\n if (pathname.includes(\"/billing/addons/ai-search\"))\n return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");\n if (pathname.includes(\"/billing/addons\")) return t(\"Common:Addons\");\n return t(\"Common:Billing\");",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 635,
+      "line_number": 636,
       "context": "{\n id: \"portal-settings_catalog-services-ai-search\",\n key: \"10-3-3\",\n icon: \"\",\n link: \"ai-search\",\n tKey: \"Common:AISearch\",\n },\n ],\n },\n ],\n },",
       "module": "/packages/client"
     }

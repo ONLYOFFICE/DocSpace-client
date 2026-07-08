@@ -3,7 +3,7 @@
   "content": "Delete these rooms?",
   "content_en_sha1_hash": "c967f45320fc05a009dc2435460fcd31e741161b",
   "created_at": "2026-05-15T14:00:05.314Z",
-  "updated_at": "2026-06-03T09:30:05.031Z",
+  "updated_at": "2026-07-07T08:59:21.743Z",
   "comment": {
     "text": "Dialog title used for confirmation when multiple rooms are selected for deletion.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/delete-room-dialog/index.tsx",
-      "line_number": 91,
+      "line_number": 126,
       "context": "displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {isSingle\n ? t(\"Common:DeleteRoomTitle\")\n : t(\"Common:DeleteRoomsTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {isSingle ? (\n <Trans",
       "module": "/packages/sdk"
     }

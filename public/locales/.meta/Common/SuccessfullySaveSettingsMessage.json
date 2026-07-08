@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2026-06-02T22:18:05.057Z",
+  "updated_at": "2026-07-07T08:59:21.838Z",
   "comment": {
     "text": "This is a toast message confirming that settings have been successfully saved or updated. It appears briefly after a user makes changes to settings, such as the appearance theme.",
     "is_auto": true,
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 218,
+      "line_number": 253,
       "context": "await setAccessControlSettings(settings);\n \n saveToSessionStorage(STORAGE_KEY_DEFAULT, settings);\n saveToSessionStorage(STORAGE_KEY_CURRENT, settings);\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error: unknown) {\n toastr.error(error as TData);\n }\n setIsSaving(false);\n };",
       "module": "/packages/client"
     },
@@ -198,9 +198,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 478,
-      "context": "this.isSubmitLoading = true;\n \n try {\n await submitSsoForm(data);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n this.isSubmitLoading = false;\n this.load();\n } catch (err) {\n toastr.error(err);\n console.error(err);",
+      "file_path": "/packages/client/src/store/SsoFormStore.ts",
+      "line_number": 517,
+      "context": "this.isSubmitLoading = true;\n \n try {\n await submitSsoForm(data);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n this.isSubmitLoading = false;\n this.load();\n } catch (err) {\n toastr.error(err as string);\n console.error(err);",
       "module": "/packages/client"
     },
     {

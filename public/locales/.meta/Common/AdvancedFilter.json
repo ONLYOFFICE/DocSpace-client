@@ -3,7 +3,7 @@
   "content": "Search options",
   "content_en_sha1_hash": "5616c8722256385e28abb27ee4233728e13a8882",
   "created_at": "2025-05-19T21:30:42.953Z",
-  "updated_at": "2026-07-04T11:30:21.890Z",
+  "updated_at": "2026-07-07T08:59:21.828Z",
   "comment": {
     "text": "This is the title for the advanced filter section, appearing above search and filter options in file lists.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/index.tsx",
-      "line_number": 103,
+      "line_number": 138,
       "context": "viewSelectorVisible\n getFilterData={getFilterData}\n userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\", {\n defaultValue: \"Advanced filter\",\n })}\n placeholder={t(\"Common:Search\", { defaultValue: \"Search\" })}\n view={t(\"Common:View\", { defaultValue: \"View\" })}\n filterTitle={t(\"Common:Filter\", { defaultValue: \"Filter\" })}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/index.tsx",
-      "line_number": 118,
+      "line_number": 149,
       "context": "viewSelectorVisible\n getFilterData={getFilterData}\n userId=\"\"\n isRecentFolder={!!config.isRecentFolder}\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\", {\n defaultValue: \"Advanced filter\",\n })}\n placeholder={t(\"Common:Search\", { defaultValue: \"Search\" })}\n view={t(\"Common:View\", { defaultValue: \"View\" })}\n filterTitle={t(\"Common:Filter\", { defaultValue: \"Filter\" })}",
       "module": "/packages/sdk"
     },

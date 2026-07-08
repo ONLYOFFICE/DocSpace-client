@@ -325,14 +325,11 @@ class CreateEditRoomStore {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
-    const { tags, title, icon, logo, prompt, profileId, providerId, modelId, quota } =
-      agentParams;
+    const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;
 
-    const standalone = this.settingsStore?.standalone;
-
-    // Standalone binds the agent to a chat-lib profile (profileId); SaaS binds
-    // it to a provider/model. Either selection is mandatory before we create.
-    if (standalone ? !profileId : !modelId) {
+    // The agent is bound to a chat-lib profile (profileId), which is
+    // mandatory before we create.
+    if (!profileId) {
       toastr.error(t("Common:RequiredField"));
       return;
     }
@@ -373,23 +370,11 @@ class CreateEditRoomStore {
       }),
     };
 
-    const createAgentData: TCreateAgentWithProfileData | TCreateAgentData =
-      standalone
-        ? ({
-            ...baseAgentData,
-            profileId: profileId!,
-            prompt: prompt ?? "",
-          } satisfies TCreateAgentWithProfileData)
-        : ({
-            ...baseAgentData,
-            ...((prompt || providerId || modelId) && {
-              chatSettings: {
-                prompt,
-                providerId,
-                modelId,
-              } satisfies TChatSettings,
-            }),
-          } satisfies TCreateAgentData);
+    const createAgentData: TCreateAgentWithProfileData | TCreateAgentData = {
+      ...baseAgentData,
+      profileId: profileId!,
+      prompt: prompt ?? "",
+    } satisfies TCreateAgentWithProfileData;
 
     this.setIsLoading(true);
 
@@ -399,11 +384,10 @@ class CreateEditRoomStore {
         createAgentData.logo = agentLogo;
       }
 
-      const agent = standalone
-        ? await createAIAgentWithProfile(
-            createAgentData as TCreateAgentWithProfileData,
-          )
-        : await createAIAgent(createAgentData as TCreateAgentData);
+      const agent = await createAIAgentWithProfile(
+        createAgentData as TCreateAgentWithProfileData,
+      );
+
       if ((agent as unknown as { errorMsg: string }).errorMsg) {
         return toastr.error(
           (agent as unknown as { errorMsg: string }).errorMsg,
@@ -485,4 +469,3 @@ class CreateEditRoomStore {
 }
 
 export default CreateEditRoomStore;
-

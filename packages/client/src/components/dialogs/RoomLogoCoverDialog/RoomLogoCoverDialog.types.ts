@@ -53,7 +53,7 @@ export interface ILogoCover {
   cover: string;
 }
 
-interface IRoomCoverDialogProps {
+export interface IRoomCoverDialogProps {
   icon: string | null | ILogo;
   color: string | null;
   title: string | null;

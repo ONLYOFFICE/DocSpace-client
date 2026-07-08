@@ -1564,6 +1564,7 @@
   --payment-background-color: #{$gray-light};
   --payment-backgroud-color-warning: #{$gray-light};
   --payment-text-color: #{$light-gray-dark};
+  --payment-secondary-text-color: #{$gray};
   --payment-credit-color: #{$light-status-positive};
   --payment-card-background-color: #{$white};
   --payment-card-border-color: #{$light-gray-selected};
@@ -1596,6 +1597,7 @@
   --payment-background-color: #{$light-dark-gray-hover};
   --payment-backgroud-color-warning: #{$dark-gray-light};
   --payment-text-color: #{$dark-gray-dark};
+  --payment-secondary-text-color: #{$white};
   --payment-credit-color: #{$dark-status-positive};
   --payment-card-background-color: #{$black};
   --payment-card-border-color: #{$gray-dark-strong};

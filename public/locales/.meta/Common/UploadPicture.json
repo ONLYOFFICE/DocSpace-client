@@ -3,7 +3,7 @@
   "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
   "created_at": "2025-05-19T21:30:53.320Z",
-  "updated_at": "2026-06-09T09:43:10.936Z",
+  "updated_at": "2026-07-07T08:59:21.917Z",
   "comment": {
     "text": "This is the label for a button that allows users to upload an image, either for a profile avatar or a room logo/cover.",
     "is_auto": true,
@@ -18,20 +18,20 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 1082,
-      "context": "};\n \n getLogoCoverModel = (t, hasImage, onDelete) => {\n return [\n {\n label: t(\"Common:UploadPicture\"),\n icon: UploadSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n onClick: (ref) => ref.current.click(),\n },",
+      "file_path": "/packages/client/src/store/DialogsStore.ts",
+      "line_number": 1270,
+      "context": "hasImage: boolean | string | undefined,\n onDelete?: () => () => void,\n ): TModel[] => {\n return [\n {\n label: t(\"Common:UploadPicture\"),\n icon: UploadSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n // the original .js called `ref.current.click()`\n // without null guards; `!` keeps that runtime.\n onClick: (ref?: RefObject<Nullable<HTMLInputElement>>) =>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_store/AgentDialogsStore.tsx",
-      "line_number": 249,
+      "line_number": 284,
       "context": "hasImage: boolean,\n onDelete?: () => () => void,\n ): LogoCoverMenuItem[] => {\n return [\n {\n label: t(\"Common:UploadPicture\", {\n defaultValue: \"Upload picture\",\n }),\n icon: UploadSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n onClick: (ref?: React.RefObject<HTMLInputElement | null>) =>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 260,
+      "line_number": 295,
       "context": "};\n \n const items: (UploadItem | ActionItem)[] = [\n {\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n label: t(\"Common:UploadPicture\"),\n icon: UploadSvgUrl,\n onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) =>\n ref?.current?.click(),\n },\n ];",
       "module": "/packages/sdk"
     },

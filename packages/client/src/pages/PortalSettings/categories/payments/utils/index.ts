@@ -40,13 +40,13 @@ export const toAbsoluteUrl = (url: string): string =>
   url.startsWith("http") || url.startsWith("/") ? url : `/${url}`;
 
 export const PAYMENT_ROUTES = {
-  portalPayments: `/portal-settings/payments/portal-payments`,
-  services: `/portal-settings/payments/services`,
-  aiServices: `/portal-settings/payments/services/ai-services`,
-  aiSearch: `/portal-settings/payments/services/ai-search`,
-  backup: `/portal-settings/payments/services/backup`,
-  diskStorage: `/portal-settings/payments/services/disk-storage`,
-  docsConnect: `/portal-settings/payments/services/docs-connect`,
+  portalPayments: `/billing/tariff-plan`,
+  services: `/billing/addons`,
+  aiServices: `/billing/addons/ai-services`,
+  aiSearch: `/billing/addons/ai-search`,
+  backup: `/billing/addons/backup`,
+  diskStorage: `/billing/addons/disk-storage`,
+  docsConnect: `/billing/addons/docs-connect`,
   wallet: `/portal-settings/payments/wallet`,
   usage: `/portal-settings/payments/usage`,
 } as const;

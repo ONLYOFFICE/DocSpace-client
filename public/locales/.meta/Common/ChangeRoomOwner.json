@@ -3,7 +3,7 @@
   "content": "Change Room Owner",
   "content_en_sha1_hash": "cad0e5b2fd954532208a53537047b60125201513",
   "created_at": "2026-03-31T15:18:39.227Z",
-  "updated_at": "2026-06-15T19:31:56.146Z",
+  "updated_at": "2026-07-07T08:59:21.913Z",
   "comment": {
     "text": "This is a button label that, when clicked, allows the current room owner to transfer ownership of the room to another user.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2660,
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 2848,
       "context": "disabled: false,\n },\n {\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: t(\"Common:ChangeRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: this.onChangeRoomOwner,\n disabled: isAIAgent,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 269,
+      "line_number": 304,
       "context": "if (room.security?.ChangeOwner) {\n moreOptionsItems.push({ key: \"separator-owner\", isSeparator: true });\n moreOptionsItems.push({\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: t(\"Common:ChangeRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: () => onChangeOwner?.(room),\n });\n }",
       "module": "/packages/sdk"
     }

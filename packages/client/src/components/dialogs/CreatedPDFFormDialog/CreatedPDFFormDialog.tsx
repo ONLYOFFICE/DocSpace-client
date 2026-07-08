@@ -34,6 +34,7 @@
  */
 
 import React, { FC } from "react";
+import type { TFile } from "@docspace/shared/api/files/types";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
@@ -41,8 +42,8 @@ import HeaderIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.svg";
 import HeaderDarkIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.dark.svg";
 
 import {
-	ModalDialog,
-	ModalDialogType,
+  ModalDialog,
+  ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -54,100 +55,110 @@ import { getFileInfo } from "@docspace/shared/api/files";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import type {
-	CreatedPDFFormDialogProps,
-	InjectedCreatedPDFFormDialogProps,
+  CreatedPDFFormDialogProps,
+  InjectedCreatedPDFFormDialogProps,
 } from "./CreatedPDFFormDialog.types";
 import styles from "./CreatePDFForm.module.scss";
 
 const CreatedPDFFormDialogComponent = ({
-	file,
-	localKey,
-	onClose,
-	visible,
-	getItemUrl,
-	getManageLinkOptions,
-	getFilesListItems,
+  file,
+  localKey,
+  onClose,
+  visible,
+  getItemUrl,
+  getManageLinkOptions,
+  getFilesListItems,
 }: CreatedPDFFormDialogProps & InjectedCreatedPDFFormDialogProps) => {
-	const { t } = useTranslation(["PDFFormDialog", "Common"]);
-	const { isBase } = useTheme();
+  const { t } = useTranslation(["PDFFormDialog", "Common"]);
+  const { isBase } = useTheme();
 
-	const onSubmit = async () => {
-		try {
-			const currentFile = await getFileInfo(file.id);
+  const onSubmit = async () => {
+    try {
+      const currentFile = await getFileInfo(file.id);
 
-			const [fileItem] = getFilesListItems([currentFile]);
+      // getFilesListItems returns FilesStore view-model
+      // items (TItem); the erased casts adapt them to the raw-entity
+      // parameter types of the share helpers (type-only).
+      const [fileItem] = getFilesListItems([currentFile]);
 
-			const primaryLink = await ShareLinkService.getFilePrimaryLink(fileItem);
+      const primaryLink = await ShareLinkService.getFilePrimaryLink(
+        fileItem as TFile,
+      );
 
-			copyShareLink(fileItem, primaryLink, t, getManageLinkOptions(fileItem));
-		} catch (error) {
-			const url = getItemUrl(file.id, false, false, false);
-			if (url) {
-				clipboardCopy(url);
-				toastr.success(t("Common:LinkCopySuccess"));
-			}
+      copyShareLink(
+        fileItem as TFile,
+        primaryLink,
+        t,
+        getManageLinkOptions(fileItem as TFile),
+      );
+    } catch (error) {
+      const url = getItemUrl(file.id, false, false, false);
+      if (url) {
+        clipboardCopy(url);
+        toastr.success(t("Common:LinkCopySuccess"));
+      }
 
-			console.error(error);
-		} finally {
-			onClose();
-		}
-	};
+      console.error(error);
+    } finally {
+      onClose();
+    }
+  };
 
-	const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-		localStorage.setItem(localKey, event.target.checked.toString());
-	};
+  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    localStorage.setItem(localKey, event.target.checked.toString());
+  };
 
-	const description = t("PDFFormSuccessfullyCreatedDescription");
-	const primaryButtonLabel = t("Common:CopyPublicLink");
+  const description = t("PDFFormSuccessfullyCreatedDescription");
+  const primaryButtonLabel = t("Common:CopyPublicLink");
 
-	return (
-		<ModalDialog
-			autoMaxHeight
-			visible={visible}
-			onClose={onClose}
-			displayType={ModalDialogType.modal}
-		>
-			<ModalDialog.Header>{t("PDFform")}</ModalDialog.Header>
-			<ModalDialog.Body>
-				<div className={styles.wrapper}>
-					{isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
-					<span>{description}</span>
-					<Checkbox
-						className={styles.createdPdfCheckbox}
-						onChange={handleChangeCheckbox}
-						label={t("Common:DontShowAgain")}
-						dataTestId="created_pdf_form_dialog_dont_show_again"
-					/>
-				</div>
-			</ModalDialog.Body>
-			<ModalDialog.Footer>
-				<Button
-					scale
-					primary
-					tabIndex={0}
-					size={ButtonSize.normal}
-					label={primaryButtonLabel}
-					onClick={onSubmit}
-					testId="created_pdf_form_dialog_copy_public_link"
-				/>
-				<Button
-					tabIndex={0}
-					onClick={onClose}
-					size={ButtonSize.normal}
-					label={t("Common:Later")}
-					testId="created_pdf_form_dialog_later"
-				/>
-			</ModalDialog.Footer>
-		</ModalDialog>
-	);
+  return (
+    <ModalDialog
+      autoMaxHeight
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{t("PDFform")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <div className={styles.wrapper}>
+          {isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
+          <span>{description}</span>
+          <Checkbox
+            className={styles.createdPdfCheckbox}
+            onChange={handleChangeCheckbox}
+            label={t("Common:DontShowAgain")}
+            dataTestId="created_pdf_form_dialog_dont_show_again"
+          />
+        </div>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          scale
+          primary
+          tabIndex={0}
+          size={ButtonSize.normal}
+          label={primaryButtonLabel}
+          onClick={onSubmit}
+          testId="created_pdf_form_dialog_copy_public_link"
+        />
+        <Button
+          tabIndex={0}
+          onClick={onClose}
+          size={ButtonSize.normal}
+          label={t("Common:Later")}
+          testId="created_pdf_form_dialog_later"
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 export const CreatedPDFFormDialog = inject<
-	TStore,
-	CreatedPDFFormDialogProps,
-	InjectedCreatedPDFFormDialogProps
+  TStore,
+  CreatedPDFFormDialogProps,
+  InjectedCreatedPDFFormDialogProps
 >((store) => ({
-	getItemUrl: store.filesStore.getItemUrl,
-	getManageLinkOptions: store.contextOptionsStore.getManageLinkOptions,
-	getFilesListItems: store.filesStore.getFilesListItems,
+  getItemUrl: store.filesStore.getItemUrl,
+  getManageLinkOptions: store.contextOptionsStore.getManageLinkOptions,
+  getFilesListItems: store.filesStore.getFilesListItems,
 }))(observer(CreatedPDFFormDialogComponent as FC<CreatedPDFFormDialogProps>));

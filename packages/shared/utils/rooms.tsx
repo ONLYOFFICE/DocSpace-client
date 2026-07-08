@@ -37,7 +37,7 @@ import { TCreatedBy } from "../types";
 import { TRoom, TRoomLifetime, TWatermark } from "../api/rooms/types";
 import { TConnectingStorage } from "../api/files/types";
 
-import { RoomsType, RoomsTypePrivate } from "../enums";
+import { FolderType, RoomsType, RoomsTypePrivate } from "../enums";
 
 import { RoomsTypeValues } from "./common";
 
@@ -59,6 +59,20 @@ import { RoomsTypeValues } from "./common";
 export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
   (type) => type !== RoomsType.FormRoom && type !== RoomsTypePrivate,
 );
+
+/**
+ * `FolderType` values of the rooms that make up the "Rooms" section, for the
+ * `folderType` scope filter of the Recent/Favorites/Trash aggregates
+ * (`GET files/{folderId}?folderType=...`, bound to `List<FolderType>` on the
+ * server). Mirrors ROOMS_SECTION_TYPES: form-filling rooms belong to the
+ * "Forms" section and AI rooms to "AI Agents", so both are excluded here.
+ */
+export const ROOMS_SECTION_FOLDER_TYPES = [
+  FolderType.EditingRoom,
+  FolderType.CustomRoom,
+  FolderType.PublicRoom,
+  FolderType.VirtualDataRoom,
+];
 
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   const startRoomParams = {

@@ -3,7 +3,7 @@
   "content": "Weighted AI verdict",
   "content_en_sha1_hash": "1ddde4ad57d27de0823d335cdf665cf3e1156d24",
   "created_at": "2026-05-20T10:00:00.000Z",
-  "updated_at": "2026-05-24T17:27:49.114Z",
+  "updated_at": "2026-07-07T08:59:21.781Z",
   "comment": {
     "text": "Bullet-point title in the AI Arbiter install dialog: describes the weighted AI verdict feature (arbiter weighs expert answers by reasoning quality).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
-      "line_number": 95,
+      "line_number": 130,
       "context": "title: string;\n description: string;\n }[] = [\n {\n icon: CatalogAiArbiterIcon,\n title: t(\"Common:DashboardArbiterInstallBulletAI\"),\n description: t(\"Common:DashboardArbiterInstallBulletAIDescription\"),\n },\n ];\n \n const renderConfirmBody = () => (",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Owners",
   "content_en_sha1_hash": "4eaec4bc0f1df68ab2a7c896845068f9bba671b9",
   "created_at": "2026-03-31T15:18:18.114Z",
-  "updated_at": "2026-07-04T11:30:21.888Z",
+  "updated_at": "2026-07-07T08:59:21.827Z",
   "comment": {
     "text": "This is a label for a filter option in the Home section, allowing users to filter items by their owners.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
-      "line_number": 252,
+      "line_number": 287,
       "context": "const ownerOptions = [\n {\n key: FilterGroups.roomFilterOwner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:Owners\", { defaultValue: \"Owners\" }),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/sdk"
     },

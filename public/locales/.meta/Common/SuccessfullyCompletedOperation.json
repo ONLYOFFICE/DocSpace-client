@@ -3,7 +3,7 @@
   "content": "Operation has been successfully completed.",
   "content_en_sha1_hash": "849e11257114c8c8bbc65cf054d9b6da983bcb6d",
   "created_at": "2025-05-19T21:30:49.214Z",
-  "updated_at": "2026-07-04T11:30:21.923Z",
+  "updated_at": "2026-07-07T08:59:21.874Z",
   "comment": {
     "text": "This is a toast message indicating that an action or process has finished without issues. It appears briefly to confirm successful completion of various operations, such as saving settings or reordering items.",
     "is_auto": true,
@@ -18,21 +18,21 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 4091,
+      "file_path": "/packages/client/src/store/FilesActionsStore.ts",
+      "line_number": 4525,
       "context": "const { setIsIndexEditingMode } = this.indexingStore;\n \n try {\n const operationId = uniqueid(\"operation_\");\n await reorderIndex(id);\n toastr.success(t(\"Common:SuccessfullyCompletedOperation\"));\n setIsIndexEditingMode(false);\n this.updateCurrentFolder(true, operationId);\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Files:ErrorChangeIndex\"));",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/LdapFormStore.js",
-      "line_number": 584,
-      "context": "if (status.error) throw status.error;\n \n this.endProcess();\n \n this.progressStatus.status = t(\"Common:SuccessfullyCompletedOperation\");\n \n if (toDefault) {\n const response = await getCronLdap();\n this.mapCron(response?.cron);\n }",
+      "file_path": "/packages/client/src/store/LdapFormStore.ts",
+      "line_number": 764,
+      "context": "if (status.error) throw status.error;\n \n this.endProcess();\n \n this.progressStatus.status = t(\"Common:SuccessfullyCompletedOperation\");\n \n if (toDefault) {\n const response = (await getCronLdap()) as TLdapCron | undefined;\n this.mapCron(response?.cron);\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/LdapFormStore.js",
-      "line_number": 584,
-      "context": "if (status.error) throw status.error;\n \n this.endProcess();\n \n this.progressStatus.status = t(\"Common:SuccessfullyCompletedOperation\");\n \n if (toDefault) {\n const response = await getCronLdap();\n this.mapCron(response?.cron);\n }",
+      "file_path": "/packages/client/src/store/LdapFormStore.ts",
+      "line_number": 764,
+      "context": "if (status.error) throw status.error;\n \n this.endProcess();\n \n this.progressStatus.status = t(\"Common:SuccessfullyCompletedOperation\");\n \n if (toDefault) {\n const response = (await getCronLdap()) as TLdapCron | undefined;\n this.mapCron(response?.cron);\n }",
       "module": "/packages/client"
     }
   ],

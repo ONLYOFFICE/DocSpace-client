@@ -145,6 +145,8 @@ export type TPortal = {
   trustedDomainsType: number;
   version: number;
   versionChanged: Date;
+  /** Custom DNS name; present when a mapped domain is configured */
+  mappedDomain?: string;
 };
 
 export type TTariff = {

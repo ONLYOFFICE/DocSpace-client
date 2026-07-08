@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallDocsCloudBullet3",
+  "content": "Full format support",
+  "content_en_sha1_hash": "056c4e4cd3cc8444802920d2e9b0a4207872554f",
+  "created_at": "2026-05-24T17:27:23.144Z",
+  "updated_at": "2026-07-07T08:59:21.787Z",
+  "comment": {
+    "text": "Title of a bullet point in the DocsCloud installation dialog, highlighting a feature of the service.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:21:37.668Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallDocsCloudDialog.tsx",
+      "line_number": 145,
+      "context": "title: t(\"Common:DashboardInstallDocsCloudBullet2\"),\n description: t(\"Common:DashboardInstallDocsCloudBullet2Description\"),\n },\n {\n Icon: CatalogFolderIcon,\n title: t(\"Common:DashboardInstallDocsCloudBullet3\"),\n description: t(\"Common:DashboardInstallDocsCloudBullet3Description\"),\n },\n ];\n \n const confirmBody = (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

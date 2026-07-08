@@ -221,6 +221,10 @@ import {
   syncEncryptedRoomImpl,
   maybeBackfillEncryptedRoomImpl,
 } from "./filesStore/encryption.helpers";
+import {
+  setFilesFilterImpl,
+  setRoomsFilterImpl,
+} from "./filesStore/filter.helpers";
 
 export type { TItem, TItemSecurity } from "./filesStore/types";
 
@@ -1359,61 +1363,7 @@ class FilesStore {
   setFilesFilter = (
     filter: TFilesFilter,
     folderId: Nullable<number | string> = null,
-  ) => {
-    const key = match(this.categoryType)
-      .with(
-        CategoryType.Archive,
-        () => `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`,
-      )
-      .with(
-        CategoryType.SharedRoom,
-        CategoryType.Form,
-        () => `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`,
-      )
-      .with(
-        CategoryType.Recent,
-        () => `${FILTER_RECENT}=${this.userStore.user?.id}`,
-      )
-      .with(
-        CategoryType.SharedWithMe,
-        () => `${FILTER_SHARE}=${this.userStore.user?.id}`,
-      )
-      .with(
-        CategoryType.Favorite,
-        () => `${FILTER_FAVORITES}=${this.userStore.user?.id}`,
-      )
-      .when(
-        () =>
-          +(folderId as string) === this.treeFoldersStore.recycleBinFolderId,
-        () => `${FILTER_TRASH}=${this.userStore.user?.id}`,
-      )
-      .when(
-        () => !this.publicRoomStore.isPublicRoom,
-        () => `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`,
-      )
-      .otherwise(() => null);
-
-    if (key) {
-      setUserFilter(key, {
-        sortBy: filter.sortBy,
-        sortOrder: filter.sortOrder,
-      });
-    }
-
-    this.filter = filter;
-
-    runInAction(() => {
-      if (filter && this.isHidePagination) {
-        this.isHidePagination = false;
-      }
-    });
-
-    runInAction(() => {
-      if (filter && this.isLoadingFilesFind) {
-        this.isLoadingFilesFind = false;
-      }
-    });
-  };
+  ) => setFilesFilterImpl(this, filter, folderId);
 
   resetUrl = () => {
     // tempFilter may still be null here (old JS passed it
@@ -1421,39 +1371,7 @@ class FilesStore {
     this.setFilesFilter(this.tempFilter as TFilesFilter);
   };
 
-  setRoomsFilter = (filter: TRoomsFilter) => {
-    filter.pageCount = 100;
-
-    const isArchive = this.categoryType === CategoryType.Archive;
-    const isTemplate = filter.searchArea === RoomSearchArea.Templates;
-
-    const key = isArchive
-      ? `${FILTER_ARCHIVE_ROOM}=${this.userStore.user?.id}`
-      : isTemplate
-        ? `${FILTER_TEMPLATES_ROOM}=${this.userStore.user?.id}`
-        : `${FILTER_SHARED_ROOM}=${this.userStore.user?.id}`;
-
-    const sharedStorageFilter = getUserFilter(key);
-
-    sharedStorageFilter.sortBy = filter.sortBy;
-    sharedStorageFilter.sortOrder = filter.sortOrder;
-
-    setUserFilter(key, sharedStorageFilter);
-
-    this.roomsFilter = filter;
-
-    runInAction(() => {
-      if (filter && this.isHidePagination) {
-        this.isHidePagination = false;
-      }
-    });
-
-    runInAction(() => {
-      if (filter && this.isLoadingFilesFind) {
-        this.isLoadingFilesFind = false;
-      }
-    });
-  };
+  setRoomsFilter = (filter: TRoomsFilter) => setRoomsFilterImpl(this, filter);
 
   setFilter = (filter: TFilesFilter) => {
     filter.pageCount = 100;

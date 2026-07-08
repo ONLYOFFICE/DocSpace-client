@@ -54,7 +54,6 @@ import {
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
-
 import type { Nullable } from "@docspace/shared/types";
 import type { default as TFilesFilter } from "@docspace/shared/api/files/filter";
 import type { default as TRoomsFilter } from "@docspace/shared/api/rooms/filter";

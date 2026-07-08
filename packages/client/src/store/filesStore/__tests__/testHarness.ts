@@ -73,11 +73,15 @@ vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
 
 // Encryption/private-room services: only invoked from methods, never the
 // constructor. Stubbed so importing them never touches real crypto/storage.
+// `getCached` is the method the store actually calls; returning null makes the
+// encryption helpers early-return (no unlocked identity), which is the safe
+// default for tests that don't exercise the crypto path.
 vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
-  SecretStorage: { getKey: vi.fn(), hasKey: vi.fn(() => false) },
+  SecretStorage: { getCached: vi.fn(() => null) },
 }));
+// NB: this module lives under services/private-room, NOT services/encryption.
 vi.mock(
-  "@docspace/shared/services/encryption/private-room/encrypted-filename-recovery",
+  "@docspace/shared/services/private-room/encrypted-filename-recovery",
   () => ({
     ensureDecryptedFilename: vi.fn(async (f: unknown) => f),
     recoverEncryptedFilenames: vi.fn(async () => {}),

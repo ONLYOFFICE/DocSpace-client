@@ -100,8 +100,8 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
     store.finishUploadFiles(t);
 
     // §3.4.1: RefreshFolder exactly once, with the first file's folder id
-    expect(SocketHelper.emit).toHaveBeenCalledTimes(1);
-    expect(SocketHelper.emit).toHaveBeenCalledWith(
+    expect(SocketHelper!.emit).toHaveBeenCalledTimes(1);
+    expect(SocketHelper!.emit).toHaveBeenCalledWith(
       SocketCommands.RefreshFolder,
       { toFolderId: 7 },
     );
@@ -150,7 +150,7 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
 
     store.finishUploadFiles(t);
 
-    expect(SocketHelper.emit).not.toHaveBeenCalled();
+    expect(SocketHelper!.emit).not.toHaveBeenCalled();
   });
 
   it("is NOT latched itself: two direct synchronous calls run the full body twice", () => {
@@ -165,7 +165,7 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
     // set ONLY by the checkChunkUpload call sites; finishUploadFiles neither
     // reads nor writes it, so a direct double call double-emits and
     // double-toasts. The §3.4.1 "exactly once" guarantee holds one level up.
-    expect(SocketHelper.emit).toHaveBeenCalledTimes(2);
+    expect(SocketHelper!.emit).toHaveBeenCalledTimes(2);
     expect(toastr.success).toHaveBeenCalledTimes(2);
     expect(store.finishUploadFilesCalled).toBe(false);
 
@@ -182,7 +182,7 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
     store.finishUploadFiles(t, true);
 
     // the socket refresh and the success toast still happen...
-    expect(SocketHelper.emit).toHaveBeenCalledTimes(1);
+    expect(SocketHelper!.emit).toHaveBeenCalledTimes(1);
     expect(toastr.success).toHaveBeenCalledTimes(1);
     // ...but the progress bar is left running for the conversion phase
     expect(

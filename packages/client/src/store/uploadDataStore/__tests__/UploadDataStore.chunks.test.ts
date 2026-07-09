@@ -97,7 +97,7 @@ const callCheckChunkUpload = (
 // by assigning a vi.fn().
 const replaceAction = (
   store: UploadDataStore,
-  key: "startSessionFunc" | "refreshFiles",
+  key: "startSessionFunc" | "refreshFiles" | "finishUploadFiles",
 ) => {
   const fn = vi.fn().mockResolvedValue(undefined);
   (store as unknown as Record<string, unknown>)[key] = fn;
@@ -155,7 +155,7 @@ describe("UploadDataStore.checkChunkUpload — intermediate chunks", () => {
 
     // Monotonicity invariant (§3.4.1): reported percents never decrease.
     const percents = progress.mock.calls.map(
-      ([arg]: [{ percent: number }]) => arg.percent,
+      ([arg]) => (arg as { percent: number }).percent,
     );
     percents.forEach((p: number, i: number) => {
       if (i > 0) expect(p).toBeGreaterThanOrEqual(percents[i - 1]);
@@ -487,7 +487,7 @@ describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => 
     const percents = (
       fakes.primaryProgressDataStore
         .setPrimaryProgressBarData as ReturnType<typeof vi.fn>
-    ).mock.calls.map(([arg]: [{ percent: number }]) => arg.percent);
+    ).mock.calls.map(([arg]) => (arg as { percent: number }).percent);
     expect(percents).toHaveLength(4); // 3 data chunks + finalize
     percents.forEach((p: number, i: number) => {
       if (i > 0) expect(p).toBeGreaterThanOrEqual(percents[i - 1]);

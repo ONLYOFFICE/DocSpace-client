@@ -50,7 +50,8 @@
       "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore)",
       "Bash(grep -nE \"case|onSelectItem|withSelect|false|true|,\\\\s*$\")",
       "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.operations.test.ts)",
-      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.open.test.ts)"
+      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.open.test.ts)",
+      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.drag.test.ts)"
     ]
   }
 }

@@ -329,7 +329,6 @@ export function startUploadImpl(
   if (self.uploaded) {
     self.files = self.files.filter((f) => f.action !== "upload" || f.error);
     self.filesSize = 0;
-    self.uploadToFolder = null;
     self.percent = 0;
   }
   if (self.uploaded && self.converted) {

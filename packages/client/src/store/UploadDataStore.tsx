@@ -36,7 +36,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { ConflictResolveType } from "@docspace/shared/enums";
 import { resolveItemRoomContext } from "@docspace/shared/services/private-room/encrypted-upload";
-import { getFileInfo, uploadFile } from "@docspace/shared/api/files";
+import { getFileInfo } from "@docspace/shared/api/files";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
@@ -258,8 +258,6 @@ class UploadDataStore {
 
   userStore: UserStore;
 
-  encryptionEnabled = false;
-
   files: TUploadFile[] = [];
 
   uploadedFilesHistory: TUploadFile[] = [];
@@ -275,8 +273,6 @@ class UploadDataStore {
   activeConversionQueue: TConversionFile[] = []; // Queue for files being converted from files view
 
   convertFilesSize = 0;
-
-  uploadToFolder: number | string | null = null;
 
   uploadedFiles = 0;
 
@@ -299,8 +295,6 @@ class UploadDataStore {
   isUploading = false;
 
   isUploadingAndConversion = false;
-
-  isConvertSingleFile = false;
 
   currentUploadNumber = 0;
 
@@ -340,10 +334,6 @@ class UploadDataStore {
     this.aiRoomStore = aiRoomStore;
     this.userStore = userStore;
   }
-
-  setEncryptionEnabled = (enabled: boolean) => {
-    this.encryptionEnabled = enabled;
-  };
 
   wrapForSelfThenRoom = (
     fileId: number,

@@ -403,14 +403,4 @@ describe("UploadDataStore visibility and flag setters", () => {
     store.setConversionPanelVisible(false);
     expect(store.conversionVisible).toBe(false);
   });
-
-  it("setEncryptionEnabled writes encryptionEnabled", () => {
-    const { store } = createTestUploadDataStore();
-
-    store.setEncryptionEnabled(true);
-    expect(store.encryptionEnabled).toBe(true);
-
-    store.setEncryptionEnabled(false);
-    expect(store.encryptionEnabled).toBe(false);
-  });
 });

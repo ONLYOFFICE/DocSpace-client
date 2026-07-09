@@ -208,14 +208,11 @@ const BuyPlanPanel = ({
   const prorationFactor =
     periodDays > 0 ? Math.min(1, remainingDays / periodDays) : 0;
 
-  const currentMonthly = currentUsers * pricePerUser;
-
   const calcPending = isDevPackUpgrade && (calcLoading || devPackCalc === null);
-  const localCredit = Math.round(currentMonthly * prorationFactor * 100) / 100;
   const devPackCharge = devPackCalc?.amount ?? 0;
   const unusedCredit = isDevPackUpgrade
     ? Math.max(0, Math.round((totalMonthly - devPackCharge) * 100) / 100)
-    : localCredit;
+    : 0;
 
   const addedUsers = Math.max(0, users - currentUsers);
   const chargeNow = isEditActive

@@ -127,12 +127,6 @@ const Statistics = ({
   const scheduledChange = isTrial ? null : (info.scheduledChange ?? null);
   const isCancellation =
     scheduledChange != null && scheduledChange.nextUsers === 0;
-  const scheduledDevPackOff = scheduledChange?.devPackDisabled ?? false;
-  const scheduledUsersChanged =
-    scheduledChange != null && scheduledChange.nextUsers !== planUsers;
-  const scheduledPerUser = scheduledDevPackOff
-    ? (prices?.pricePerUser ?? 0)
-    : pricePerUser;
   const deactivated = !isTrial && (info.deactivated ?? false);
 
   const onCopy = (value: string) => copyToClipboard?.(value, t);
@@ -198,17 +192,10 @@ const Statistics = ({
           title={
             isCancellation
               ? t("Common:SubscriptionCancellation")
-              : scheduledDevPackOff && scheduledUsersChanged
-                ? t("Common:TariffDevPackUserAdjustmentScheduled", {
-                    fromCount: planUsers,
-                    toCount: scheduledChange.nextUsers,
-                  })
-                : scheduledDevPackOff
-                  ? t("Common:TariffDevPackDeactivationScheduled")
-                  : t("Common:TariffUserAdjustmentScheduled", {
-                      fromCount: planUsers,
-                      toCount: scheduledChange.nextUsers,
-                    })
+              : t("Common:TariffUserAdjustmentScheduled", {
+                  fromCount: planUsers,
+                  toCount: scheduledChange.nextUsers,
+                })
           }
           body={
             isCancellation
@@ -218,6 +205,7 @@ const Statistics = ({
                     "DATE_MED",
                     { locale: i18n.language },
                   ),
+                  service: t("DocsConnect:DocsConnect"),
                 })
               : t("Common:ScheduledChangeBillingPeriodNote", {
                   date: formatDateLocalized(
@@ -339,7 +327,7 @@ const Statistics = ({
                             ),
                             price: formatCurrencyValue(
                               i18n.language,
-                              scheduledChange.nextUsers * scheduledPerUser,
+                              scheduledChange.nextUsers * pricePerUser,
                               currency,
                               2,
                             ),

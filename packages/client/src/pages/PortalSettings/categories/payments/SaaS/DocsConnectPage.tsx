@@ -137,12 +137,6 @@ const DocsConnectPage = ({
   const scheduledChange = isPaid ? (info.scheduledChange ?? null) : null;
   const isCancellation =
     scheduledChange != null && scheduledChange.nextUsers === 0;
-  const scheduledDevPackOff = scheduledChange?.devPackDisabled ?? false;
-  const scheduledUsersChanged =
-    scheduledChange != null && scheduledChange.nextUsers !== planUsers;
-  const scheduledPerUser = scheduledDevPackOff
-    ? (info.prices?.pricePerUser ?? 0)
-    : pricePerUser;
   const deactivated = isPaid && (info.deactivated ?? false);
   const canceled = isDocsConnectCanceled(info);
 
@@ -213,14 +207,25 @@ const DocsConnectPage = ({
                 : onBuyPlan
         }
         title={t("DocsConnect:DocsConnect")}
-        priceText={t("DocsConnect:FromPricePerUserMonthNote", {
-          price: formatCurrencyValue(
-            i18n.language,
-            info.prices?.pricePerUser ?? 0,
-            currency,
-            0,
-          ),
-        })}
+        priceText={
+          info.devPackEnabled
+            ? t("DocsConnect:PricePerUserMonthDevPackNote", {
+                price: formatCurrencyValue(
+                  i18n.language,
+                  pricePerUser,
+                  currency,
+                  0,
+                ),
+              })
+            : t("DocsConnect:FromPricePerUserMonthNote", {
+                price: formatCurrencyValue(
+                  i18n.language,
+                  info.prices?.pricePerUser ?? 0,
+                  currency,
+                  0,
+                ),
+              })
+        }
         description={t("DocsConnect:ServiceToggleDescription", {
           productName: docsName,
         })}
@@ -231,17 +236,10 @@ const DocsConnectPage = ({
           title={
             isCancellation
               ? t("Common:SubscriptionCancellation")
-              : scheduledDevPackOff && scheduledUsersChanged
-                ? t("Common:TariffDevPackUserAdjustmentScheduled", {
-                    fromCount: planUsers,
-                    toCount: scheduledChange.nextUsers,
-                  })
-                : scheduledDevPackOff
-                  ? t("Common:TariffDevPackDeactivationScheduled")
-                  : t("Common:TariffUserAdjustmentScheduled", {
-                      fromCount: planUsers,
-                      toCount: scheduledChange.nextUsers,
-                    })
+              : t("Common:TariffUserAdjustmentScheduled", {
+                  fromCount: planUsers,
+                  toCount: scheduledChange.nextUsers,
+                })
           }
           body={
             isCancellation
@@ -251,6 +249,7 @@ const DocsConnectPage = ({
                     "DATE_MED",
                     { locale: i18n.language },
                   ),
+                  service: t("DocsConnect:DocsConnect"),
                 })
               : t("Common:ScheduledChangeBillingPeriodNote", {
                   date: formatDateLocalized(
@@ -400,7 +399,7 @@ const DocsConnectPage = ({
                     ),
                     price: formatCurrencyValue(
                       i18n.language,
-                      scheduledChange.nextUsers * scheduledPerUser,
+                      scheduledChange.nextUsers * pricePerUser,
                       currency,
                       2,
                     ),

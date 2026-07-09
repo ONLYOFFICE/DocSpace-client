@@ -55,6 +55,7 @@
   "PricePerUserDevPackShort": "{{price}} per user (incl. Dev Pack)",
   "TariffPlanAutoRenewed": "Tariff plan will be automatically renewed <1>on {{date}}</1>",
   "FromPricePerUserMonthNote": "from {{price}} per user / month",
+  "PricePerUserMonthDevPackNote": "{{price}} per user / month",
   "ServiceToggleDescription": "Embed {{productName}} editors into your app with cloud-hosted tenants and your own API keys.",
   "Build": "Build",
   "BuildType": "Type",

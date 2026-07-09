@@ -157,25 +157,6 @@ const fetchTariffState = async (
       return { scheduledChange: null, deactivated: true };
     }
 
-    if (devpackQuota?.nextQuantity === 0) {
-      const baseNext = baseQuota?.nextQuantity ?? null;
-      const switchUsers =
-        baseNext != null && baseNext > 0
-          ? baseNext
-          : (baseQuota?.quantity ?? 0);
-
-      if (switchUsers > 0) {
-        return {
-          scheduledChange: {
-            nextUsers: switchUsers,
-            dueDate: devpackQuota.dueDate ?? "",
-            devPackDisabled: true,
-          },
-          deactivated: false,
-        };
-      }
-    }
-
     const quotaWithChange = [devpackQuota, baseQuota].find(
       (q) => q && (q.nextQuantity ?? -1) >= 0,
     );
@@ -185,7 +166,6 @@ const fetchTariffState = async (
         scheduledChange: {
           nextUsers: quotaWithChange.nextQuantity ?? 0,
           dueDate: quotaWithChange.dueDate ?? "",
-          devPackDisabled: false,
         },
         deactivated: false,
       };

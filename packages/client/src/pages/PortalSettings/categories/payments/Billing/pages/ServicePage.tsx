@@ -174,6 +174,7 @@ const ServicePage = (props: ServicePageProps) => {
         <DocsConnectPage
           state={state}
           onTopUp={() => navigate(PAYMENT_ROUTES.wallet)}
+          onTopUpComplete={() => fetchDocsConnectInfo?.()}
           onViewUsage={() => navigate(PAYMENT_ROUTES.usage)}
           onBuyPlan={() => openBuyPlan?.("trial")}
           onEditPlan={() => openBuyPlan?.("edit")}

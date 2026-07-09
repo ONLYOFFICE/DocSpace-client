@@ -223,11 +223,14 @@ const fetchDevPackEnabled = async (refresh?: boolean): Promise<boolean> => {
 export const getDocsConnectInfo = async (
   refresh?: boolean,
 ): Promise<TDocsConnectInfo | null> => {
+  const refreshParams = refresh ? { refresh: true } : {};
+
   let tenant: TDocsConnectTenant | null = null;
   try {
     tenant = (await request({
       method: "get",
       url: `${BASE}/tenant`,
+      params: refreshParams,
     })) as TDocsConnectTenant | null;
   } catch {
     tenant = null;
@@ -239,7 +242,11 @@ export const getDocsConnectInfo = async (
 
   const [config, tenantInfo] = (await Promise.all([
     request({ method: "get", url: `${BASE}/tenant/config` }),
-    request({ method: "get", url: `${BASE}/tenant/info` }),
+    request({
+      method: "get",
+      url: `${BASE}/tenant/info`,
+      params: refreshParams,
+    }),
   ])) as [TDocsConnectConfig, TDocsConnectTenantInfo];
 
   const services = await fetchWalletServices();

@@ -38,10 +38,15 @@ import * as filesApi from "@docspace/shared/api/files";
 import type { TTranslation } from "@docspace/shared/types";
 
 import {
+  cancelConversionImpl,
+  cancelCurrentFileConversionImpl,
   convertFileFromFilesImpl,
+  convertFileImpl,
+  convertUploadedFilesImpl,
   retryConvertFilesImpl,
   setConversionPercentImpl,
   startConversionFromFilesImpl,
+  startConversionImpl,
 } from "../conversion.helpers";
 
 // Direct unit tests for the extracted Phase 3 conversion-from-files helpers
@@ -198,5 +203,128 @@ describe("retryConvertFilesImpl", () => {
     retryConvertFilesImpl(store, t, 999);
 
     expect(convertSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe("cancelConversionImpl", () => {
+  it("keeps converted/failed/in-flight files, drops the rest and finalizes", () => {
+    const { store } = createTestUploadDataStore();
+    store.files = [
+      makeUploadFile({ uniqueId: "keep", action: "converted" }),
+      makeUploadFile({ uniqueId: "drop", action: "upload" }),
+    ];
+    store.filesSize = 512;
+    store.uploadPanelVisible = true;
+
+    cancelConversionImpl(store);
+
+    expect(store.files.map((f) => f.uniqueId)).toEqual(["keep"]);
+    expect(store.filesToConversion).toEqual([]);
+    expect(store.uploaded).toBe(true);
+    expect(store.converted).toBe(true);
+    expect(store.percent).toBe(100);
+    expect(store.filesSize).toBe(512);
+    // a survivor remains -> the panel stays open
+    expect(store.uploadPanelVisible).toBe(true);
+  });
+
+  it("hides the panel when nothing survives", () => {
+    const { store } = createTestUploadDataStore();
+    store.files = [makeUploadFile({ action: "upload" })];
+    store.uploadPanelVisible = true;
+
+    cancelConversionImpl(store);
+
+    expect(store.files).toEqual([]);
+    expect(store.uploadPanelVisible).toBe(false);
+  });
+});
+
+describe("cancelCurrentFileConversionImpl", () => {
+  it("drops the file and its queue entry by stringified fileId", () => {
+    const { store } = createTestUploadDataStore();
+    store.files = [
+      makeUploadFile({ fileId: 42 }),
+      makeUploadFile({ fileId: 7 }),
+    ];
+    store.filesToConversion = [makeUploadFile({ fileId: 42 })];
+
+    cancelCurrentFileConversionImpl(store, "42");
+
+    expect(store.files.map((f) => f.fileId)).toEqual([7]);
+    expect(store.filesToConversion).toEqual([]);
+  });
+});
+
+describe("convertFileImpl", () => {
+  it("flags the history row for conversion and starts the loop on the first file", () => {
+    const { store } = createTestUploadDataStore();
+    store.uploadedFilesHistory = [
+      makeUploadFile({ fileId: 42, action: "uploaded" }),
+    ];
+    store.converted = true;
+    const startSpy = vi.fn().mockResolvedValue(undefined);
+    store.startConversion = startSpy as never;
+
+    convertFileImpl(store, makeUploadFile({ fileId: 42 }), t, true);
+
+    expect(store.uploadedFilesHistory[0].action).toBe("convert");
+    expect(store.filesToConversion).toHaveLength(1);
+    expect(startSpy).toHaveBeenCalledWith(t, true);
+  });
+});
+
+describe("startConversionImpl", () => {
+  it("converts a queued file at once and finishes the upload batch", async () => {
+    const { store } = createTestUploadDataStore();
+    store.converted = true;
+    store.uploaded = true;
+    store.files = [makeUploadFile({ fileId: 42, needConvert: true })];
+    store.uploadedFilesHistory = [makeUploadFile({ fileId: 42 })];
+    store.filesToConversion = [{ fileId: 42, format: ".docx" }] as never;
+
+    // immediate 100% => the inner getConversationProgress poll never runs
+    vi.mocked(filesApi.convertFile).mockResolvedValue([
+      { progress: 100, error: "" },
+    ] as never);
+    const finishSpy = vi.fn();
+    store.finishUploadFiles = finishSpy as never;
+
+    await startConversionImpl(store, t, false);
+
+    expect(store.files[0].action).toBe("converted");
+    expect(store.files[0].inConversion).toBe(false);
+    expect(finishSpy).toHaveBeenCalledWith(t, false);
+  });
+
+  it("bails out immediately when a conversion cycle is already running", async () => {
+    const { store } = createTestUploadDataStore();
+    store.converted = false; // guard: !converted -> return
+    store.filesToConversion = [{ fileId: 42, format: ".docx" }] as never;
+
+    await startConversionImpl(store, t, false);
+
+    expect(filesApi.convertFile).not.toHaveBeenCalled();
+  });
+});
+
+describe("convertUploadedFilesImpl", () => {
+  it("merges temp files and re-primes the uploader when already uploaded", () => {
+    const { store } = createTestUploadDataStore();
+    store.files = [makeUploadFile({ uniqueId: "a" })];
+    store.tempConversionFiles = [makeUploadFile({ uniqueId: "b" })];
+    store.uploaded = true;
+    store.convertFilesSize = 999;
+    const startUploadSpy = vi.fn();
+    store.startUploadFiles = startUploadSpy as never;
+
+    convertUploadedFilesImpl(store, t, true);
+
+    expect(store.files.map((f) => f.uniqueId)).toEqual(["a", "b"]);
+    expect(store.tempConversionFiles).toEqual([]);
+    // setUploadData copied convertFilesSize into filesSize and flipped uploaded
+    expect(store.filesSize).toBe(999);
+    expect(store.uploaded).toBe(false);
+    expect(startUploadSpy).toHaveBeenCalledWith(t, true);
   });
 });

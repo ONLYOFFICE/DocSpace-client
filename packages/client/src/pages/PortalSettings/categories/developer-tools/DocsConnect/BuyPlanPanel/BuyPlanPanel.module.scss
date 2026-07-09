@@ -40,8 +40,8 @@
   gap: 16px;
   width: 100%;
   min-width: 0;
-  height: 100%;
-  padding-bottom: 19px;
+  min-height: 100%;
+  padding-bottom: 18px;
   overflow-x: clip;
   --payment-warning-color: var(--dev-tools-status-warning);
   --payment-backgroud-color-warning: var(--dev-tools-card-bg);
@@ -234,4 +234,8 @@
   display: flex;
   gap: 8px;
   width: 100%;
+}
+
+.summaryHint {
+  margin-top: -12px;
 }

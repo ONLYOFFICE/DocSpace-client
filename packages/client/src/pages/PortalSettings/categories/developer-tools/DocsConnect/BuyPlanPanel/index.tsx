@@ -161,11 +161,13 @@ const BuyPlanPanel = ({
     : (info.tenant.payment?.quantity ?? 0);
   const currentDevPack = info.devPackEnabled ?? false;
 
+  const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
+
   const onToggleDevPack = () => {
     setDevPack((prev) => {
       const next = !prev;
       if (next && users < DEVPACK_MIN_USERS) setUsers(DEVPACK_MIN_USERS);
-      if (!next) setUsers(currentUsers);
+      if (!next && isEditActive) setUsers(currentUsers);
       return next;
     });
   };
@@ -174,12 +176,10 @@ const BuyPlanPanel = ({
   const perUser = pricePerUser + devPackPerUser;
   const totalMonthly = users * perUser;
 
-  const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
-
   const usersChanged = users !== currentUsers;
   const devPackChanged = devPack !== currentDevPack;
   const hasChanges = usersChanged || devPackChanged;
-  const devPackTurnedOff = currentDevPack && !devPack;
+  const devPackTurnedOff = isEditActive && currentDevPack && !devPack;
   const isScheduled =
     isEditActive &&
     (devPackTurnedOff || (!devPackChanged && users < currentUsers));
@@ -694,7 +694,7 @@ const BuyPlanPanel = ({
               ) : insufficientFunds ? (
                 <Text
                   fontSize="12px"
-                  className={styles.errorText}
+                  className={`${styles.errorText} ${styles.summaryHint}`}
                   textAlign="right"
                 >
                   {t("Common:WalletTopUpRequired", {
@@ -704,7 +704,7 @@ const BuyPlanPanel = ({
               ) : (
                 <Text
                   fontSize="12px"
-                  className={styles.secondaryText}
+                  className={`${styles.secondaryText} ${styles.summaryHint}`}
                   textAlign="right"
                 >
                   {isEditActive

@@ -232,6 +232,58 @@ import {
   moveDragItemsImpl,
   getPublicKeyImpl,
 } from "./filesActionsStore/copyMove.helpers";
+import {
+  moveToRoomsPageImpl,
+  moveToAIAgentsPageImpl,
+  moveToPublicRoomImpl,
+  openLocationActionImpl,
+  checkAndOpenLocationActionImpl,
+  closeMediaViewerAndRestoreUrlImpl,
+  onClickBackImpl,
+  backToParentFolderImpl,
+  openFileActionImpl,
+  openItemActionImpl,
+} from "./filesActionsStore/navigation.helpers";
+import {
+  setThirdpartyInfoImpl,
+  setFavoriteActionImpl,
+  setPinActionImpl,
+  setMuteActionImpl,
+  setArchiveActionImpl,
+  pinRoomsImpl,
+  unpinRoomsImpl,
+  archiveRoomsImpl,
+  changeRoomQuotaImpl,
+  disableRoomQuotaImpl,
+  resetRoomQuotaImpl,
+  changeAIAgentsQuotaImpl,
+  disableAIAgentQuotaImpl,
+  resetAIAgentQuotaImpl,
+  onClickCreateRoomImpl,
+  onCreateRoomFromTemplateImpl,
+  onLeaveRoomImpl,
+  changeRoomOwnerImpl,
+} from "./filesActionsStore/rooms.helpers";
+import {
+  updateCurrentFolderImpl,
+  createFolderTreeImpl,
+  createFoldersTreeImpl,
+  completeActionImpl,
+  onSelectItemImpl,
+  selectTagImpl,
+  selectOptionImpl,
+  selectRowActionImpl,
+  markAsReadImpl,
+  lockFileActionImpl,
+  finalizeVersionActionImpl,
+  setSelectedItemsImpl,
+  isExpiredLinkAsyncImpl,
+  retryVectorizationImpl,
+  onClickRemoveFromRecentImpl,
+  removeFilesFromRecentImpl,
+  askAIActionImpl,
+  runOperationsImpl,
+} from "./filesActionsStore/selection.helpers";
 import type UploadDataStore from "./UploadDataStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
@@ -564,205 +616,25 @@ class FilesActionStore {
   updateCurrentFolder = async (
     clearSelection?: boolean | null,
     operationId?: string,
-    // some callers (onLeaveRoom, reorderIndexOfFiles) omit
-    // `operation`; the old JS forwarded undefined into the progress-bar
-    // payload, the cast below keeps that behavior.
+    
+    
+    
     operation?: TOperationName,
     skipFetch = false,
-  ) => {
-    const { setSecondaryProgressBarData } =
-      this.uploadDataStore.secondaryProgressDataStore;
-
-    const {
-      fetchFiles,
-      fetchRooms,
-      fetchAgents,
-      filter,
-      roomsFilter,
-      scrollToTop,
-    } = this.filesStore;
-
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isArchiveFolderRoot,
-      isTemplatesFolder,
-      isAIAgentsFolder,
-      isFormsFolder,
-    } = this.treeFoldersStore;
-
-    let newFilter: undefined;
-
-    let updatedFolder = this.selectedFolderStore.id;
-
-    if (this.dialogsStore.isFolderActions) {
-      updatedFolder = this.selectedFolderStore.parentId;
-    }
-
-    try {
-      if (skipFetch) return;
-
-      if (isAIAgentsFolder) {
-        fetchAgents(
-          updatedFolder,
-          newFilter || roomsFilter.clone(),
-          false,
-          false,
-        );
-      } else if (
-        isRoomsFolder ||
-        isArchiveFolder ||
-        isArchiveFolderRoot ||
-        isTemplatesFolder ||
-        isFormsFolder
-      ) {
-        await fetchRooms(
-          updatedFolder,
-          newFilter || roomsFilter.clone(),
-          undefined,
-          undefined,
-          undefined,
-        );
-      } else {
-        await fetchFiles(
-          updatedFolder,
-          newFilter || filter,
-          true,
-          true,
-          clearSelection,
-        );
-      }
-    } finally {
-      scrollToTop();
-      this.dialogsStore.setIsFolderActions(false);
-
-      setSecondaryProgressBarData({
-        operation: operation as TOperationName,
-        completed: true,
-        operationId,
-      });
-    }
-  };
+  )=> updateCurrentFolderImpl(this, clearSelection, operationId, operation, skipFetch);
 
   createFolderTree = async (
     treeList: TTreeNode[],
     parentFolderId: number | string,
     filesList: TUploadTreeFile[],
-  ): Promise<TTreeNode[] | undefined> => {
-    if (!treeList || !treeList.length) return;
-
-    for (let i = 0; i < treeList.length; i++) {
-      const treeNode = treeList[i];
-      const isFile = treeList[i].isFile;
-
-      // console.log(
-      //   `createFolderTree parent id = ${parentFolderId} name '${treeNode.name}': `,
-      //   treeNode.children
-      // );
-
-      if (isFile) {
-        treeList[i].file.parentFolderId = parentFolderId;
-        filesList.push(treeList[i].file);
-        continue;
-      }
-
-      const folder = await createFolder(
-        parentFolderId,
-        treeNode.name.trimEnd(),
-      );
-      const parentId = folder.id;
-
-      if (treeNode.children.length == 0) continue;
-
-      await this.createFolderTree(treeNode.children, parentId, filesList);
-    }
-
-    return treeList;
-  };
+  ): Promise<TTreeNode[] | undefined>=> createFolderTreeImpl(this, treeList, parentFolderId, filesList);
 
   createFoldersTree = async (
     t: TTranslation,
     files: TUploadTreeFile[] | Record<string, TUploadTreeFile>,
     folderId?: number | string | null,
     dragged?: boolean,
-  ) => {
-    //  console.log("createFoldersTree", files, folderId);
-    const { uploaded, percent } = this.uploadDataStore;
-
-    const { isAIAgentsFolderRoot } = this.treeFoldersStore;
-    const { setPrimaryProgressBarData } =
-      this.uploadDataStore.primaryProgressDataStore;
-
-    const roomFolder =
-      this.selectedFolderStore.navigationPath.find((r) => r.isRoom) ??
-      this.selectedFolderStore.getSelectedFolder();
-
-    const withoutHiddenFiles = Object.values(files).filter((f) => {
-      const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);
-
-      return !isHidden;
-    });
-
-    const operationId = uniqueid("operation_");
-
-    const pbData = {
-      operation: OPERATIONS_NAME.upload,
-      completed: false,
-      percent,
-      dragged: dragged ? operationId : null,
-    };
-
-    if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
-      // usedSpace is optional on the folder snapshot; the old
-      // JS did unchecked arithmetic here.
-      const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace!;
-
-      const filesSize = withoutHiddenFiles.reduce((acc, file) => {
-        return acc + file.size;
-      }, 0);
-
-      if (filesSize > freeSpace) {
-        setPrimaryProgressBarData({
-          ...pbData,
-          completed: uploaded,
-          alert: true,
-        });
-
-        const size = getConvertedSize(t, roomFolder.quotaLimit);
-
-        const error = isAIAgentsFolderRoot
-          ? t("Common:AIAgentSpaceQuotaExceeded", {
-              aiAgent: t("Common:AIAgent"),
-              size,
-            })
-          : t("Common:RoomSpaceQuotaExceeded", {
-              size,
-            });
-        throw new Error(error);
-      }
-    }
-
-    const toFolderId = folderId || this.selectedFolderStore.id;
-
-    if (withoutHiddenFiles.length) {
-      setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
-    }
-
-    const tree = convertToTree(withoutHiddenFiles);
-
-    const filesList: TUploadTreeFile[] = [];
-    await this.createFolderTree(tree, toFolderId as number | string, filesList);
-
-    if (withoutHiddenFiles.length) {
-      setPrimaryProgressBarData({ ...pbData, completed: uploaded });
-    }
-
-    if (filesList.length) {
-      setPrimaryProgressBarData({ ...pbData });
-    }
-
-    return filesList;
-  };
+  )=> createFoldersTreeImpl(this, t, files, folderId, dragged);
 
   updateFilesAfterDelete = (operationId: string, operationName: TOperationName)=> updateFilesAfterDeleteImpl(this, operationId, operationName);
 
@@ -771,12 +643,7 @@ class FilesActionStore {
     newSelection: Nullable<TActionItem[]> = null,
   )=> deleteActionImpl(this, translations, newSelection);
 
-  askAIAction = (item: TActionItem) => {
-    this.dialogsStore.setAiAgentSelectorDialogProps(
-      true,
-      item as unknown as TFile,
-    );
-  };
+  askAIAction = (item: TActionItem)=> askAIActionImpl(this, item);
 
   emptyTrash = async (translations: TSuccessTranslations)=> emptyTrashImpl(this, translations);
 
@@ -804,85 +671,14 @@ class FilesActionStore {
   completeAction = async (
     selectedItem: { id: number; isFolder?: boolean },
     type?: FileAction,
-  ) => {
-    switch (type) {
-      case FileAction.Rename:
-        this.onSelectItem(
-          {
-            id: selectedItem.id,
-            isFolder: selectedItem.isFolder,
-          },
-          false,
-          false,
-        );
-        break;
-      case FileAction.RestoreVersion:
-        this.onSelectItem(
-          {
-            id: selectedItem.id,
-            isFolder: false,
-          },
-          false,
-          false,
-        );
-        break;
-      default:
-        break;
-    }
-  };
+  )=> completeActionImpl(this, selectedItem, type);
 
   onSelectItem = (
-    { id, isFolder }: { id?: number; isFolder?: boolean },
+    item: { id?: number; isFolder?: boolean },
     withSelect = true,
     isContextItem = true,
     isSingleMenu = false,
-  ) => {
-    const {
-      setBufferSelection,
-      setSelected,
-      selection,
-      setSelection,
-      setHotkeyCaretStart,
-      setHotkeyCaret,
-      setEnabledHotkeys,
-    } = this.filesStore;
-
-    if (!id) return;
-
-    const item = this.filesStore.filesList.find(
-      (elm) => elm.id === id && elm.isFolder === isFolder,
-    );
-
-    if (item) {
-      const isSelected =
-        selection.findIndex((f) => f.id === id && f.isFolder === isFolder) !==
-        -1;
-
-      if (withSelect) {
-        // TODO: fix double event on context-menu click
-        if (isSelected && selection.length === 1 && !isContextItem) {
-          setSelected("none");
-        } else {
-          setSelection([item]);
-          setHotkeyCaret(null);
-          setHotkeyCaretStart(item);
-        }
-      } else if (
-        isSelected &&
-        selection.length > 1 &&
-        !isContextItem &&
-        !isSingleMenu
-      ) {
-        setHotkeyCaret(null);
-        setHotkeyCaretStart(item);
-      } else {
-        setSelected("none");
-        setBufferSelection(item);
-      }
-
-      isContextItem && setEnabledHotkeys(false);
-    }
-  };
+  ) => onSelectItemImpl(this, item, withSelect, isContextItem, isSingleMenu);
 
   deleteItemAction = async (
     itemId: number | number[],
@@ -902,40 +698,9 @@ class FilesActionStore {
     operation: TOperationName,
   )=> deleteItemOperationImpl(this, isFile, itemId, translations, isRoom, operationId, operation);
 
-  lockFileAction = async (id: number, locked: boolean) => {
-    const { setFile } = this.filesStore;
-    try {
-      const res = await lockFile(id, locked);
-      setFile(res);
-    } catch (err) {
-      throw new Error(
-        ((err as { response?: { data?: { error?: { message?: string } } } })
-          ?.response?.data?.error?.message ?? err) as string,
-      );
-    }
-  };
+  lockFileAction = async (id: number, locked: boolean)=> lockFileActionImpl(this, id, locked);
 
-  finalizeVersionAction = async (id: number) => {
-    let timer: ReturnType<typeof setTimeout> | null = null;
-    const { setFile } = this.filesStore;
-    try {
-      timer = setTimeout(() => {
-        this.filesStore.setActiveFiles([id]);
-      }, 200);
-      await (finalizeVersion(id, 0, false) as Promise<TFile[] | undefined>).then(
-        (res) => {
-          if (res && res[0]) {
-            setFile(res[0]);
-            this.filesStore.setActiveFiles([]);
-          }
-        },
-      );
-    } catch (err) {
-      toastr.error(err as string);
-    } finally {
-      clearTimeout(timer!);
-    }
-  };
+  finalizeVersionAction = async (id: number)=> finalizeVersionActionImpl(this, id);
 
   changeCustomFilter = async (item: TActionItem, t: TTranslation) => {
     return changeCustomFilterHelper(item, t);
@@ -957,413 +722,33 @@ class FilesActionStore {
 
   getItemsInfo = (items: TActionItem[])=> getItemsInfoImpl(this, items);
 
-  setFavoriteAction = (action: string, items: TActionItem[]) => {
-    const { fetchFavoritesFolder, setSelected } = this.filesStore;
-    const { fileIds, folderIds } = splitFileAndFolderIds(
-      items as unknown as TFile[],
-    );
-
-    switch (action) {
-      case "mark":
-        return api.files
-          .markAsFavorite(fileIds as number[], folderIds as number[])
-          .then(() => this.getItemsInfo(items))
-          .then(() => setSelected("close"));
-
-      case "remove":
-        return api.files
-          .removeFromFavorite(fileIds as number[], folderIds as number[])
-          .then(() => {
-            return this.treeFoldersStore.isFavoritesFolder
-              ? fetchFavoritesFolder(this.selectedFolderStore.id as number)
-              : this.getItemsInfo(items);
-          })
-          .then(() => setSelected("close"));
-      default:
-    }
-  };
+  setFavoriteAction = (action: string, items: TActionItem[])=> setFavoriteActionImpl(this, action, items);
 
   setPinAction = async (
     action: string,
     id: number | number[],
     t: TTranslation,
     isAIAgent = false,
-  ) => {
-    return setPinActionHelper(action, id, t, isAIAgent);
-  };
+  )=> setPinActionImpl(this, action, id, t, isAIAgent);
 
-  setMuteAction = (action: string, item: TActionItem, t: TTranslation) => {
-    const { id, new: newCount, rootFolderId, isAIAgent } = item;
-    const { treeFolders } = this.treeFoldersStore;
-    const { folders, updateRoomMute } = this.filesStore;
-
-    const muteStatus = action === "mute";
-
-    const folderIndex = id && folders.findIndex((x) => x.id == id);
-    if (folderIndex > -1) updateRoomMute(folderIndex, muteStatus);
-
-    const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
-    const count = treeFolders[treeIndex].newItems;
-    if (treeIndex) {
-      // `new`/`newItems` are optional on the view-models; the
-      // old JS did unchecked arithmetic (NaN when missing), the erased casts
-      // keep that behavior.
-      if (muteStatus) {
-        treeFolders[treeIndex].newItems =
-          (newCount as number) >= 0
-            ? (count as number) - (newCount as number)
-            : 0;
-      } else
-        treeFolders[treeIndex].newItems =
-          (count as number) + (newCount as number);
-    }
-
-    let notificationsDisabled = t("Common:RoomNotificationsDisabled");
-    let notificationsEnabled = t("Common:RoomNotificationsEnabled");
-
-    if (isAIAgent) {
-      notificationsDisabled = t("Common:AIAgentNotificationsDisabled", {
-        aiAgent: t("Common:AIAgent"),
-      });
-      notificationsEnabled = t("Common:AIAgentNotificationsEnabled", {
-        aiAgent: t("Common:AIAgent"),
-      });
-    }
-
-    (muteRoomNotification(id, muteStatus) as Promise<unknown>)
-      .then(() =>
-        toastr.success(
-          muteStatus ? notificationsDisabled : notificationsEnabled,
-        ),
-      )
-      .catch((e) => toastr.error(e as string));
-  };
+  setMuteAction = (action: string, item: TActionItem, t: TTranslation)=> setMuteActionImpl(this, action, item, t);
 
   setArchiveAction = async (
     action: string,
     folders: TActionItem | TActionItem[],
     t: TTranslation,
-  ) => {
-    const { addActiveItems, setSelected } = this.filesStore;
-
-    const { archiveRoomsId, myRoomsId } = this.treeFoldersStore;
-
-    const { secondaryProgressDataStore, clearActiveOperations } =
-      this.uploadDataStore;
-
-    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
-
-    if (!myRoomsId || !archiveRoomsId) {
-      console.error("Default categories not found");
-      return;
-    }
-
-    const operationId = uniqueid("operation_");
-
-    // still-.js callers pass rooms or plain ids; the erased
-    // cast mirrors the old JS.
-    const items = (
-      Array.isArray(folders)
-        ? folders.map((x) => (x?.id ? x.id : x))
-        : [folders.id]
-    ) as number[];
-    const archiveParentId = Array.isArray(folders)
-      ? folders[0]?.parentId
-      : folders?.parentId;
-
-    const operation = OPERATIONS_NAME.move;
-
-    setSecondaryProgressBarData({
-      operation,
-      percent: 0,
-      operationId,
-    });
-
-    const destFolder = action === "archive" ? archiveRoomsId : myRoomsId;
-
-    addActiveItems(null, items, destFolder);
-    const pbData = {
-      operation,
-      operationId,
-    };
-
-    switch (action) {
-      case "archive":
-        this.setGroupMenuBlocked(true);
-        // the shared moveToFolder declares
-        // fileIds/conflictResolveType/deleteAfter as required, but the old JS
-        // always called it with two args (undefined is sent as-is at
-        // runtime); the erased cast keeps the call arity unchanged.
-        return (
-          moveToFolder as unknown as (
-            destFolderId: number | string | undefined,
-            folderIds: number[],
-          ) => Promise<TOperation[]>
-        )(archiveRoomsId, items)
-          .then(async (res) => {
-            const result = res[0];
-
-            if (result?.error) return Promise.reject(result.error);
-
-            const data = result ?? null;
-
-            const operationData =
-              await this.uploadDataStore.loopFilesOperations(data, pbData);
-
-            const isCanceled =
-              operationData?.status === FileOperationStatus.Canceled;
-
-            if (
-              !isCanceled &&
-              (!operationData || operationData.error || !operationData.finished)
-            ) {
-              return Promise.reject(
-                operationData?.error ? operationData.error : "",
-              );
-            }
-
-            // Will be redirected via the socket
-            // if (!isRoomsFolder) {
-            //   // setSelectedFolder(roomsFolder);
-            //   window.DocSpace.navigate("/");
-            // }
-
-            this.dialogsStore.setIsFolderActions(false);
-
-            setSecondaryProgressBarData({
-              completed: true,
-              ...pbData,
-            });
-          })
-
-          .then(() => {
-            const successTranslation =
-              (folders as TActionItem[]).length !== 1 && Array.isArray(folders)
-                ? t("Common:ArchivedRoomsAction")
-                : Array.isArray(folders)
-                  ? t("Common:ArchivedRoomAction", { name: folders[0].title })
-                  : t("Common:ArchivedRoomAction", { name: folders.title });
-
-            toastr.success(successTranslation);
-
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-              event: AnalyticsEvents.RoomArchived,
-              ids: items,
-              parentId: archiveParentId,
-            });
-          })
-          .then(() => {
-            const clearBuffer =
-              !this.dialogsStore.archiveDialogVisible &&
-              !this.dialogsStore.restoreRoomDialogVisible;
-            setSelected("close", clearBuffer);
-          })
-          .catch((err) => {
-            clearActiveOperations(null, items);
-
-            setSecondaryProgressBarData({
-              completed: true,
-              alert: true,
-              ...pbData,
-            });
-
-            return toastr.error(
-              (err as Error).message
-                ? (err as Error).message
-                : (err as { error?: string }).error
-                  ? (err as { error?: string }).error
-                  : (err as string),
-              null,
-              0,
-              true,
-            );
-          })
-          .finally(() => {
-            clearActiveOperations(null, items);
-            this.setGroupMenuBlocked(false);
-          });
-      case "unarchive":
-        this.setGroupMenuBlocked(true);
-        // same reduced call arity as the "archive" case above.
-        return (
-          moveToFolder as unknown as (
-            destFolderId: number | string | undefined,
-            folderIds: number[],
-          ) => Promise<TOperation[]>
-        )(myRoomsId, items)
-          .then(async (res) => {
-            const result = res[0];
-
-            if (result?.error) return Promise.reject(result.error);
-
-            const data = result ?? null;
-
-            // pbData never had a label; the old JS logged
-            // undefined here.
-            console.log((pbData as { label?: string }).label, { data, res });
-
-            await this.uploadDataStore.loopFilesOperations(data, pbData);
-
-            this.dialogsStore.setIsFolderActions(false);
-
-            setSecondaryProgressBarData({
-              completed: true,
-              ...pbData,
-            });
-          })
-
-          .then(() => {
-            const successTranslation =
-              (folders as TActionItem[]).length !== 1 && Array.isArray(folders)
-                ? t("Common:UnarchivedRoomsAction")
-                : Array.isArray(folders)
-                  ? t("Common:UnarchivedRoomAction", { name: folders[0].title })
-                  : t("Common:UnarchivedRoomAction", { name: folders.title });
-
-            toastr.success(successTranslation);
-          })
-          .then(() => setSelected("close"))
-          .then(() => this.moveToRoomsPage())
-          .catch((err) => {
-            clearActiveOperations(null, items);
-            setSecondaryProgressBarData({
-              completed: true,
-              alert: true,
-              ...pbData,
-            });
-
-            return toastr.error(
-              (err as Error).message
-                ? (err as Error).message
-                : (err as { error?: string }).error
-                  ? (err as { error?: string }).error
-                  : (err as string),
-              null,
-              0,
-              true,
-            );
-          })
-          .finally(() => {
-            clearActiveOperations(null, items);
-            this.setGroupMenuBlocked(false);
-          });
-      default:
-    }
-  };
+  )=> setArchiveActionImpl(this, action, folders, t);
 
   selectTag = (tag: {
     label: string;
     roomType?: number;
     providerType?: number;
-  }) => {
-    const { roomsFilter } = this.filesStore;
+  })=> selectTagImpl(this, tag);
 
-    const { setIsSectionBodyLoading } = this.clientLoadingStore;
+  selectOption = (params: { option: string; value: string }) =>
+    selectOptionImpl(this, params);
 
-    const categoryType = getCategoryType(window.DocSpace.location);
-
-    const setIsLoading = (param: boolean) => {
-      setIsSectionBodyLoading(param);
-    };
-
-    const newFilter = roomsFilter.clone();
-
-    if (tag.label !== "no-tag") {
-      const tags = newFilter.tags ? [...(newFilter.tags as string[])] : [];
-
-      if (tags.length > 0) {
-        const idx = tags.findIndex((item) => item === tag.label);
-
-        if (idx > -1) {
-          // TODO: remove tag here if already selected
-          return;
-        }
-      }
-
-      // RoomsFilter declares type/provider as strings but the
-      // old JS assigns the numeric tag ids directly; the erased casts keep
-      // that behavior.
-      if (tag.roomType) {
-        if (newFilter.type && +newFilter.type === tag.roomType) return;
-        newFilter.type = tag.roomType as unknown as string;
-      } else if (tag.providerType) {
-        if (newFilter.provider && +newFilter.provider === tag.providerType)
-          return;
-        newFilter.provider = tag.providerType as unknown as string;
-      } else {
-        tags.push(tag.label);
-        newFilter.tags = [...tags];
-      }
-
-      newFilter.withoutTags = false;
-    } else {
-      newFilter.withoutTags = true;
-    }
-
-    let pathName = window.DocSpace.location.pathname;
-
-    if (
-      categoryType === CategoryType.Chat ||
-      categoryType === CategoryType.AIAgent
-    ) {
-      pathName = getCategoryUrl(CategoryType.AIAgents);
-    }
-
-    setIsLoading(true);
-    window.DocSpace.navigate(
-      `${pathName}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
-    );
-  };
-
-  selectOption = ({ option, value }: { option: string; value: string }) => {
-    const { roomsFilter } = this.filesStore;
-
-    const { setIsSectionBodyLoading } = this.clientLoadingStore;
-
-    const setIsLoading = (param: boolean) => {
-      setIsSectionBodyLoading(param);
-    };
-
-    const newFilter = roomsFilter.clone();
-    const tags = newFilter.tags ? [...(newFilter.tags as string[])] : [];
-    newFilter.tags = [...tags];
-
-    if (option === "defaultTypeRoom") {
-      newFilter.type = value;
-    }
-
-    if (option === "typeProvider") {
-      newFilter.provider = value;
-    }
-
-    setIsLoading(true);
-    window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
-    );
-  };
-
-  selectRowAction = (checked: boolean, file: TActionItem) => {
-    const {
-      // selected,
-      // setSelected,
-      selectFile,
-      deselectFile,
-      setBufferSelection,
-      setHotkeyCaret,
-      setHotkeyCaretStart,
-    } = this.filesStore;
-    // selected === "close" && setSelected("none");
-    setBufferSelection(null);
-    setHotkeyCaret(null);
-    setHotkeyCaretStart(file);
-
-    if (checked) {
-      selectFile(file);
-    } else {
-      deselectFile(file);
-    }
-  };
+  selectRowAction = (checked: boolean, file: TActionItem)=> selectRowActionImpl(this, checked, file);
 
   openLocationAction = async (item: {
     id: number | string;
@@ -1372,41 +757,7 @@ class FilesActionStore {
     isAIAgent?: boolean;
     title?: string;
     rootFolderType?: FolderType;
-  }) => {
-    if (this.publicRoomStore.isPublicRoom)
-      return this.moveToPublicRoom(item.id);
-
-    const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType } = item;
-
-    const categoryType = isAIAgent
-      ? CategoryType.Chat
-      : getCategoryTypeByFolderType(rootFolderType, id);
-
-    const state = { title, rootFolderType, isRoot: false, isRoom };
-    const filter = FilesFilter.getDefault();
-
-    // FilesFilter.folder is declared as a string but the old
-    // JS assigns raw numeric ids; toUrlParams only serializes it.
-    filter.folder = id as string;
-
-    if (!isAIAgent && (isRoom || isTemplate)) {
-      if (this.userStore.user?.id) {
-        const key =
-          categoryType === CategoryType.Archive
-            ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
-            : `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`;
-
-        const filterSharedRoomObj = getUserFilter(key);
-
-        filter.sortBy = filterSharedRoomObj.sortBy;
-        filter.sortOrder = filterSharedRoomObj.sortOrder;
-      }
-    }
-
-    const url = getCategoryUrl(categoryType, id);
-
-    window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
-  };
+  })=> openLocationActionImpl(this, item);
 
   nameWithoutExtension = (title?: string) => {
     return nameWithoutExtensionHelper(title);
@@ -1416,110 +767,9 @@ class FilesActionStore {
   // duck typing).
   checkAndOpenLocationAction = async (
     item: Partial<Omit<TActionItem, "id">> & { id?: number | string },
-  ) => {
-    const {
-      myRoomsId,
-      myFolderId,
-      archiveRoomsId,
-      recycleBinFolderId,
-      sharedWithMeFolderId,
-    } = this.treeFoldersStore;
-    const { setIsSectionBodyLoading } = this.clientLoadingStore;
-    const { rootFolderType } = this.selectedFolderStore;
+  )=> checkAndOpenLocationActionImpl(this, item);
 
-    const setIsLoading = (param: boolean) => {
-      setIsSectionBodyLoading(param);
-    };
-
-    const { title, fileExst, rootFolderType: rootFolderTypeItem } = item;
-    const parentId =
-      item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
-    const parentTitle = item.parentTitle || item.toFolderTitle;
-
-    const isTrashDestination =
-      parentId === recycleBinFolderId || item.parentType === FolderType.TRASH;
-
-    const isRoot = [
-      myRoomsId,
-      myFolderId,
-      archiveRoomsId,
-      recycleBinFolderId,
-      sharedWithMeFolderId,
-    ].includes(parentId);
-
-    const state = {
-      title: parentTitle,
-      isRoot,
-      fileExst,
-      highlightFileId: item.id,
-      isFileHasExst: !item.fileExst,
-      rootFolderType,
-    };
-
-    const newFilter = FilesFilter.getDefault();
-
-    // FilesFilter.folder is declared as a string but the old
-    // JS assigns raw numeric ids; toUrlParams only serializes it.
-    newFilter.search = title as string;
-    newFilter.folder = parentId as unknown as string;
-
-    let url;
-    if (isTrashDestination) {
-      const trashTarget = getSectionTrashTarget(
-        window.DocSpace.location.pathname,
-      );
-      // FilesFilter.folderType is a narrower literal union
-      // than the article-navigation targets; the value is only serialized.
-      newFilter.folderType =
-        trashTarget.folderType as unknown as typeof newFilter.folderType;
-      url = trashTarget.path;
-    } else {
-      const destinationFolderType = SECTION_ROOT_FOLDER_TYPES.includes(
-        item.parentType as FolderType,
-      )
-        ? item.parentType
-        : (rootFolderTypeItem ?? rootFolderType);
-
-      let categoryType: TCategoryType = getCategoryTypeByFolderType(
-        destinationFolderType,
-        parentId,
-      );
-
-      if (
-        window.DocSpace.location.pathname.startsWith("/forms") &&
-        categoryType === CategoryType.SharedRoom
-      ) {
-        categoryType = CategoryType.Form;
-      }
-
-      url = getCategoryUrl(categoryType, parentId);
-    }
-
-    setIsLoading(
-      window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
-        url !== window.DocSpace.location.pathname,
-    );
-
-    if (!isDesktop()) hideInfoPanel();
-
-    window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
-  };
-
-  setThirdpartyInfo = (providerKey?: string) => {
-    const { setConnectDialogVisible, setConnectItem } = this.dialogsStore;
-    const { providers, capabilities } = this.filesSettingsStore.thirdPartyStore;
-    const provider = providers.find((x) => x.provider_key === providerKey);
-    const capabilityItem = capabilities.find((x) => x[0] === providerKey);
-    const capability = {
-      // the old JS reads customer_title unchecked when no
-      // capability entry matched (crash when the provider is missing too).
-      title: capabilityItem ? capabilityItem[0] : provider!.customer_title,
-      link: capabilityItem ? capabilityItem[1] : " ",
-    };
-
-    setConnectDialogVisible(true);
-    setConnectItem({ ...provider, ...capability });
-  };
+  setThirdpartyInfo = (providerKey?: string)=> setThirdpartyInfoImpl(this, providerKey);
 
   // setNewBadgeCount = (item) => {
   //   const { getRootFolder, updateRootBadge } = this.treeFoldersStore;
@@ -1536,48 +786,11 @@ class FilesActionStore {
 
   markAsRead = (
     folderIds: (number | string)[],
-    // NewFilesBadge calls this with folderIds only; the old
-    // JS forwarded undefined to the API payload.
+    
+    
     fileIds?: (number | string)[],
     item?: TActionItem,
-  ) => {
-    const { setSecondaryProgressBarData } =
-      this.uploadDataStore.secondaryProgressDataStore;
-
-    const operationId = uniqueid("operation_");
-    const pbData = { operation: OPERATIONS_NAME.markAsRead, operationId };
-
-    setSecondaryProgressBarData({
-      percent: 0,
-      ...pbData,
-    });
-
-    // onMarkAsRead passes stringified file ids; the shared
-    // markAsRead declares number[] but only serializes them.
-    return markAsRead(folderIds as number[], fileIds as number[])
-      .then(async (res) => {
-        const data = res[0] ?? null;
-
-        await this.uploadDataStore.loopFilesOperations(data, pbData);
-      })
-      .then(() => {
-        if (!item) return;
-
-        // this.setNewBadgeCount(item);
-        const { getFileIndex, updateFileStatus } = this.filesStore;
-
-        const index = getFileIndex(item.id);
-        updateFileStatus(index, (item.fileStatus as number) & ~FileStatus.IsNew);
-      })
-      .catch((err) => toastr.error(err as string, null, 0, true))
-      .finally(() =>
-        setSecondaryProgressBarData({
-          operation: OPERATIONS_NAME.markAsRead,
-          completed: true,
-          operationId,
-        }),
-      );
-  };
+  )=> markAsReadImpl(this, folderIds, fileIds, item);
 
   moveDragItems = (
     destFolderId: number | string,
@@ -1599,72 +812,17 @@ class FilesActionStore {
     operationData: TOperationDataPayload,
   )=> setConflictDialogDataImpl(this, conflicts, operationData);
 
-  setSelectedItems = (title?: string, length?: number) => {
-    const selectionLength = length || this.filesStore.selection.length;
-    const selectionTitle = title || this.filesStore.selectionTitle;
-
-    if (selectionLength !== undefined && selectionTitle) {
-      this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionLength(
-        selectionLength,
-      );
-      this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
-        selectionTitle,
-      );
-    }
-  };
+  setSelectedItems = (title?: string, length?: number)=> setSelectedItemsImpl(this, title, length);
 
   checkOperationConflict = async (operationData: TOperationDataPayload)=> checkOperationConflictImpl(this, operationData);
 
   isAvailableOption = (option: string)=> isAvailableOptionImpl(this, option);
 
-  pinRooms = (t: TTranslation) => {
-    const { selection } = this.filesStore;
+  pinRooms = (t: TTranslation)=> pinRoomsImpl(this, t);
 
-    const items: number[] = [];
+  unpinRooms = (t: TTranslation)=> unpinRoomsImpl(this, t);
 
-    const isAIAgent = selection.some((s) => s.isAIAgent);
-
-    selection.forEach((item) => {
-      if (!item.pinned) items.push(item.id);
-    });
-
-    this.setPinAction("pin", items, t, isAIAgent);
-  };
-
-  unpinRooms = (t: TTranslation) => {
-    const { selection } = this.filesStore;
-
-    const items: number[] = [];
-
-    const isAIAgent = selection.some((s) => s.isAIAgent);
-
-    selection.forEach((item) => {
-      if (item.pinned) items.push(item.id);
-    });
-
-    this.setPinAction("unpin", items, t, isAIAgent);
-  };
-
-  archiveRooms = (action: string) => {
-    const {
-      setArchiveDialogVisible,
-      setQuotaWarningDialogVisible,
-      setRestoreRoomDialogVisible,
-    } = this.dialogsStore;
-
-    const { isWarningRoomsDialog } = this.currentQuotaStore;
-
-    if (action === "unarchive" && isWarningRoomsDialog) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
-    if (action === "archive") {
-      setArchiveDialogVisible(true);
-    } else {
-      setRestoreRoomDialogVisible(true);
-    }
-  };
+  archiveRooms = (action: string)=> archiveRoomsImpl(this, action);
 
   deleteRooms = (t: TTranslation)=> deleteRoomsImpl(this, t);
 
@@ -1677,136 +835,33 @@ class FilesActionStore {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
 
-  onClickCreateRoom = (item?: TActionItem, context = "sidebar") => {
-    this.setProcessCreatingRoomFromData(true);
-    const event = new CustomEvent(Events.ROOM_CREATE, {
-      detail: { parentId: this.selectedFolderStore.id, context },
-    });
-    if (item && item.isFolder) {
-      // the still-.js GlobalEvents component reads this extra
-      // field off the dispatched CustomEvent.
-      (event as CustomEvent & { title?: string }).title = item.title;
-    }
-    window.dispatchEvent(event);
-  };
+  onClickCreateRoom = (item?: TActionItem, context = "sidebar")=> onClickCreateRoomImpl(this, item, context);
 
   changeRoomQuota = (
     items: (TActionItem | number)[],
     successCallback?: (...args: unknown[]) => unknown,
     abortCallback?: (...args: unknown[]) => unknown,
-  ) => {
-    const event = new Event(Events.CHANGE_QUOTA);
-
-    const itemsIDs = items.map((item) => {
-      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-    });
-
-    const payload = {
-      visible: true,
-      type: "room",
-      ids: itemsIDs,
-      successCallback,
-      abortCallback,
-    };
-
-    // the still-.js GlobalEvents component reads this extra
-    // field off the dispatched Event.
-    (event as Event & { payload?: typeof payload }).payload = payload;
-
-    window.dispatchEvent(event);
-  };
+  )=> changeRoomQuotaImpl(this, items, successCallback);
 
   changeAIAgentsQuota = (
     items: (TActionItem | number)[],
     successCallback?: (...args: unknown[]) => unknown,
     abortCallback?: (...args: unknown[]) => unknown,
-  ) => {
-    const event = new Event(Events.CHANGE_QUOTA);
+  )=> changeAIAgentsQuotaImpl(this, items, successCallback);
 
-    const itemsIDs = items.map((item) => {
-      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-    });
-
-    const payload = {
-      visible: true,
-      type: "agent",
-      ids: itemsIDs,
-      successCallback,
-      abortCallback,
-    };
-
-    // the still-.js GlobalEvents component reads this extra
-    // field off the dispatched Event.
-    (event as Event & { payload?: typeof payload }).payload = payload;
-
-    window.dispatchEvent(event);
-  };
-
-  disableRoomQuota = async (items: (TActionItem | number)[], t: TTranslation) => {
-    const { setCustomRoomQuota } = this.filesStore;
-
-    const userIDs = items.map((item) => {
-      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-    }) as number[];
-
-    try {
-      await setCustomRoomQuota(userIDs, -1);
-      toastr.success(t("Common:StorageQuotaDisabled"));
-    } catch (e) {
-      toastr.error(e as string);
-    }
-  };
+  disableRoomQuota = async (items: (TActionItem | number)[], t: TTranslation)=> disableRoomQuotaImpl(this, items, t);
 
   disableAIAgentQuota = async (
     items: (TActionItem | number)[],
     t: TTranslation,
-  ) => {
-    const { setCustomAIAgentQuota } = this.filesStore;
+  )=> disableAIAgentQuotaImpl(this, items, t);
 
-    const agentIDs = items.map((item) => {
-      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-    }) as number[];
-
-    try {
-      await setCustomAIAgentQuota(agentIDs, -1);
-      toastr.success(t("Common:StorageQuotaDisabled"));
-    } catch (e) {
-      toastr.error(e as string);
-    }
-  };
-
-  resetRoomQuota = async (items: (TActionItem | number)[], t: TTranslation) => {
-    const { resetRoomQuota } = this.filesStore;
-
-    const userIDs = items.map((item) => {
-      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-    }) as number[];
-
-    try {
-      await resetRoomQuota(userIDs);
-      toastr.success(t("Common:StorageQuotaReset"));
-    } catch (e) {
-      toastr.error(e as string);
-    }
-  };
+  resetRoomQuota = async (items: (TActionItem | number)[], t: TTranslation)=> resetRoomQuotaImpl(this, items, t);
 
   resetAIAgentQuota = async (
     items: (TActionItem | number)[],
     t: TTranslation,
-  ) => {
-    const { resetAIAgentQuota } = this.filesStore;
-
-    const userIDs = items.map((item) => {
-      return (item as TActionItem)?.id ? (item as TActionItem).id : item;
-    }) as number[];
-
-    try {
-      await resetAIAgentQuota(userIDs);
-      toastr.success(t("Common:StorageQuotaReset"));
-    } catch (e) {
-      toastr.error(e as string);
-    }
-  };
+  )=> resetAIAgentQuotaImpl(this, items, t);
 
   getOption = (option: string, t: TTranslation)=> getOptionImpl(this, option, t);
 
@@ -1834,542 +889,33 @@ class FilesActionStore {
 
   onMarkAsRead = (item: TActionItem) => this.markAsRead([], [`${item.id}`], item);
 
-  isExpiredLinkAsync = async (item: TActionItem, withLoader = false) => {
-    if (item.isLinkExpired) return true;
-    if (!item.external || !item.requestToken) return false;
-
-    const { clearActiveOperations } = this.uploadDataStore;
-    const { addActiveItems } = this.filesStore;
-
-    const { endLoader, startLoader } = createLoader();
-
-    try {
-      if (withLoader)
-        startLoader(() =>
-          runInAction(() => {
-            this.setGroupMenuBlocked(true);
-            addActiveItems(null, [item.id]);
-          }),
-        );
-
-      // request() is typed as Promise<T> | undefined; the old
-      // JS read `.status` unchecked.
-      const response = (await api.rooms.validatePublicRoomKey(
-        item.requestToken,
-      ))!;
-
-      const isExpired = response.status === ValidationStatus.Expired;
-
-      if (isExpired) {
-        const items = isFileCheck(item)
-          ? this.filesStore.files
-          : this.filesStore.folders;
-
-        const foundItem = items.find((i) => i.id === item.id);
-
-        if (foundItem && !foundItem.isLinkExpired) {
-          foundItem.isLinkExpired = true;
-        }
-
-        const { selection, bufferSelection } = this.filesStore;
-
-        const selectedItem =
-          selection && selection.length === 1
-            ? selection[0]
-            : bufferSelection
-              ? bufferSelection
-              : null;
-
-        if (
-          selectedItem &&
-          selectedItem.id === item.id &&
-          !selectedItem.isLinkExpired
-        ) {
-          selectedItem.isLinkExpired = isExpired;
-        }
-      }
-
-      return isExpired;
-    } catch (error) {
-      console.log(error);
-      return false;
-    } finally {
-      if (withLoader)
-        endLoader(() =>
-          runInAction(() => {
-            this.setGroupMenuBlocked(false);
-            clearActiveOperations([], [item.id]);
-          }),
-        );
-    }
-  };
+  isExpiredLinkAsync = async (item: TActionItem, withLoader = false)=> isExpiredLinkAsyncImpl(this, item, withLoader);
 
   openFileAction = async (
     item: TActionItem,
     t: TTranslation,
     e?: Parameters<typeof openingNewTab>[1],
-  ) => {
-    if (
-      item.external &&
-      (item.isLinkExpired || (await this.isExpiredLinkAsync(item, true)))
-    ) {
-      const isFile = isFileCheck(item);
-      const isFolder = isFolderCheck(item);
-
-      const description = isFile
-        ? t("Common:FileLinkExpired")
-        : isFolder
-          ? t("Common:FolderLinkExpired")
-          : t("Common:RoomLinkExpired");
-
-      const title = isFile
-        ? t("Common:FileNotAvailable")
-        : isFolder
-          ? t("Common:FolderNotAvailable")
-          : t("Common:RoomNotAvailable");
-
-      return toastr.error(description, title);
-    }
-
-    if (isLockedSharedRoom(item as unknown as TRoom))
-      return this.dialogsStore.setPasswordEntryDialog(
-        true,
-        item as unknown as TRoom,
-      );
-
-    this.openItemAction(item, t, e);
-  };
+  )=> openFileActionImpl(this, item, t, e);
 
   openItemAction = async (
     item: TActionItem,
-    // NewFilesBadge/history callers invoke this with the item
-    // only; the old JS crashed on t() in the restricted-download branch.
+    
+    
     t?: TTranslation,
     e?: Parameters<typeof openingNewTab>[1],
-  ) => {
-    const { openDocEditor, setSelection, categoryType } = this.filesStore;
-    const { currentDeviceType, frameConfig, isFrame } = this.settingsStore;
-    const { fileItemsList } = this.pluginStore;
-    const { enablePlugins } = this.settingsStore;
+  )=> openItemActionImpl(this, item, t, e);
 
-    const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
-    const { isRecycleBinFolder } = this.treeFoldersStore;
-    const { setMediaViewerData, getUrl } = this.mediaViewerDataStore;
-    const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
-      this.dialogsStore;
+  closeMediaViewerAndRestoreUrl = async ()=> closeMediaViewerAndRestoreUrlImpl(this);
 
-    const { roomType, title: currentTitle } = this.selectedFolderStore;
+  onClickBack = (fromHotkeys = true)=> onClickBackImpl(this, fromHotkeys);
 
-    if (this.publicRoomStore.isPublicRoom && item.isFolder) {
-      setSelection([]);
-      return this.moveToPublicRoom(item.id);
-    }
+  moveToRoomsPage = ()=> moveToRoomsPageImpl(this);
 
-    const setIsLoading = (param: boolean) => {
-      setIsSectionBodyLoading(param);
-    };
+  moveToAIAgentsPage = ()=> moveToAIAgentsPageImpl(this);
 
-    const isMediaOrImage =
-      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
-    const canConvert =
-      item.viewAccessibility?.MustConvert && item.security?.Convert;
-    const canWebEdit = item.viewAccessibility?.WebEdit;
-    const canViewedDocs = item.viewAccessibility?.WebView;
+  moveToPublicRoom = (folderId?: number | string)=> moveToPublicRoomImpl(this, folderId);
 
-    const { id, viewUrl, fileStatus, isFolder, webUrl, isRoom } = item;
-    if (isRecycleBinFolder || isLoading) return;
-
-    if (isFolder || isRoom) {
-      const { url, state } = await createFolderNavigation(
-        item,
-        categoryType,
-        this.userStore.user?.id,
-        roomType,
-        currentTitle,
-      );
-
-      if (openingNewTab(url, e)) return;
-
-      setIsLoading(true);
-      setSelection([]);
-
-      window.DocSpace.navigate(url, { state });
-    } else {
-      if (isFrame && frameConfig?.events?.onFileManagerClick) {
-        frameCallEvent({ event: "onFileManagerClick", data: item });
-        return;
-      }
-
-      if (!isAIAgents() && fileItemsList && enablePlugins) {
-        // TS cannot track the assignment inside the forEach
-        // callback; the erased casts keep the old unchecked reads.
-        let currPluginItem: Nullable<TPluginFileItem> = null;
-
-        fileItemsList.forEach((i) => {
-          if (i.key === item.fileExst) currPluginItem = i.value;
-        });
-
-        if (currPluginItem) {
-          const correctDevice = (currPluginItem as TPluginFileItem).devices
-            ? (
-                (currPluginItem as TPluginFileItem).devices as unknown as string[]
-              ).includes(currentDeviceType)
-            : true;
-          if (correctDevice)
-            return (currPluginItem as TPluginFileItem).onClick(
-              item as unknown as TFile,
-            );
-        }
-      }
-
-      if (canConvert) {
-        setConvertItem({ ...item, isOpen: true });
-        setConvertDialogData({
-          files: item,
-        });
-        setConvertDialogVisible(true);
-        return;
-      }
-
-      if (((fileStatus as number) & FileStatus.IsNew) === FileStatus.IsNew)
-        await this.onMarkAsRead(item);
-
-      if (canWebEdit || canViewedDocs) {
-        let shareKey = item.requestToken;
-
-        if (webUrl) {
-          const shareWebUrl = new URL(webUrl);
-          // getObjectByLocation expects a router Location but
-          // only reads `.search`, which URL also provides (old JS behavior).
-          shareKey = getObjectByLocation(
-            shareWebUrl as unknown as Parameters<typeof getObjectByLocation>[0],
-          )?.share as string | undefined;
-        }
-
-        const isPDF = item.fileExst === ".pdf";
-
-        const { isPersonalRoom } = this.treeFoldersStore;
-
-        const canEditForm = isPersonalRoom
-          ? item.isPDFForm
-          : isPDF &&
-            item.isPDFForm &&
-            item.security?.EditForm &&
-            !item.startFilling;
-
-        return openDocEditor(id, false, shareKey, canEditForm);
-      }
-
-      if (isMediaOrImage) {
-        setMediaViewerData({ visible: true, id });
-
-        const url = getUrl(id);
-
-        window.history.pushState("", "", url);
-
-        return;
-      }
-
-      if (!item.security!.Download) {
-        toastr.error(t!("Files:FileDownloadingIsRestricted"));
-        return;
-      }
-
-      if (item.encrypted) {
-        return this.downloadEncryptedFile(item).catch((err) =>
-          toastr.error(err as string),
-        );
-      }
-
-      return window.open(viewUrl, "_self");
-    }
-  };
-
-  closeMediaViewerAndRestoreUrl = async () => {
-    const { getFirstUrl, setMediaViewerData } = this.mediaViewerDataStore;
-
-    setMediaViewerData({ visible: false, id: null });
-
-    try {
-      const url = await getFirstUrl();
-      if (!url) return;
-      window.history.pushState("", "", url);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  onClickBack = (fromHotkeys = true) => {
-    const { roomType } = this.selectedFolderStore;
-    const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles, setBufferSelection, setSelection } = this.filesStore;
-    // groupsStore is created in the PeopleStore constructor
-    // but typed as nullable; the old JS destructured it unchecked.
-    const { insideGroupBackUrl } = this.peopleStore.groupsStore!;
-    const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
-    if (isLoading) return;
-
-    if (this.mediaViewerDataStore.visible) {
-      return this.closeMediaViewerAndRestoreUrl();
-    }
-
-    setBufferSelection(null);
-    setSelection([]);
-
-    const categoryType = getCategoryType(window.DocSpace.location);
-
-    const isRoom = !!roomType;
-
-    const urlFilter = getObjectByLocation(
-      window.DocSpace.location as unknown as Parameters<
-        typeof getObjectByLocation
-      >[0],
-    );
-
-    const isArchivedRoom = !!(
-      CategoryType.Trash !== (categoryType as TCategoryType) && urlFilter?.folder
-    );
-
-    if (
-      roomType === RoomsType.AIRoom ||
-      categoryType === CategoryType.Chat ||
-      categoryType === CategoryType.AIAgent ||
-      categoryType === CategoryType.AIAgents
-    ) {
-      return this.moveToAIAgentsPage();
-    }
-
-    if (this.publicRoomStore.isPublicRoom) {
-      return this.backToParentFolder();
-    }
-
-    if (
-      categoryType === CategoryType.SharedRoom ||
-      categoryType === CategoryType.Form ||
-      isArchivedRoom
-    ) {
-      if (isRoom) {
-        return this.moveToRoomsPage();
-      }
-
-      return this.backToParentFolder();
-    }
-
-    if (
-      categoryType === CategoryType.Shared ||
-      categoryType === CategoryType.Archive
-    ) {
-      return this.moveToRoomsPage();
-    }
-
-    if (categoryType === CategoryType.Trash) {
-      return;
-    }
-
-    if (categoryType === CategoryType.Personal) {
-      return this.backToParentFolder();
-    }
-
-    if (categoryType === CategoryType.Settings) {
-      clearFiles();
-
-      const path = getCategoryUrl(CategoryType.Settings);
-
-      setSelectedNode(["common"]);
-
-      return window.DocSpace.navigate(path, { replace: true });
-    }
-
-    if (categoryType === CategoryType.Accounts) {
-      const contactsTab = getContactsView();
-
-      if (insideGroupBackUrl) {
-        setIsSectionBodyLoading(true, false);
-
-        window.DocSpace.navigate(insideGroupBackUrl);
-
-        return;
-      }
-
-      const filter =
-        contactsTab === "groups"
-          ? GroupsFilter.getDefault()
-          : UsersFilter.getDefault();
-      const params = filter.toUrlParams();
-      const path = getCategoryUrl(CategoryType.Accounts);
-
-      clearFiles();
-
-      if (window.location.search.includes("group")) {
-        setIsSectionBodyLoading(true, false);
-
-        setSelectedNode(["accounts", "groups", "filter"]);
-
-        return window.DocSpace.navigate(`accounts/groups/filter?${params}`, {
-          replace: true,
-        });
-      }
-
-      setSelectedNode(["accounts", "people", "filter"]);
-
-      if (fromHotkeys) return;
-      return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
-    }
-  };
-
-  moveToRoomsPage = () => {
-    const categoryType = getCategoryType(
-      window.DocSpace.location,
-    ) as TCategoryType;
-
-    const filter = RoomsFilter.getDefault();
-
-    const correctCategoryType =
-      categoryType === CategoryType.SharedRoom ||
-      categoryType === CategoryType.Chat
-        ? CategoryType.Shared
-        : categoryType === CategoryType.Form
-          ? CategoryType.Forms
-          : CategoryType.ArchivedRoom === categoryType
-            ? CategoryType.Archive
-            : categoryType;
-
-    const path = getCategoryUrl(correctCategoryType);
-
-    const state = {
-      title:
-        (this.selectedFolderStore?.navigationPath &&
-          this.selectedFolderStore?.navigationPath.length > 0 &&
-          this.selectedFolderStore?.navigationPath[
-            this.selectedFolderStore.navigationPath.length - 1
-          ]?.title) ||
-        "",
-      isRoot: true,
-      rootFolderType: this.selectedFolderStore.rootFolderType,
-    };
-
-    if ((categoryType as TCategoryType) == CategoryType.Archive) {
-      filter.searchArea = RoomSearchArea.Archive;
-    }
-
-    if (correctCategoryType === CategoryType.Forms) {
-      filter.searchArea = RoomSearchArea.Forms;
-    }
-
-    if (
-      this.selectedFolderStore?.navigationPath &&
-      this.selectedFolderStore?.navigationPath.length > 0 &&
-      this.selectedFolderStore?.navigationPath[
-        this.selectedFolderStore.navigationPath.length - 1
-      ]?.isTemplatesFolder
-    ) {
-      filter.searchArea = RoomSearchArea.Templates;
-    }
-
-    if (categoryType === CategoryType.Chat) {
-      this.clientLoadingStore.setIsSectionBodyLoading(true, false);
-    }
-
-    window.DocSpace.navigate(
-      `${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`,
-      {
-        state,
-        replace: true,
-      },
-    );
-  };
-
-  moveToAIAgentsPage = () => {
-    const categoryType = getCategoryType(window.DocSpace.location);
-
-    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AIAgents);
-
-    const path = getCategoryUrl(CategoryType.AIAgents);
-
-    const state = {
-      title:
-        (this.selectedFolderStore?.navigationPath &&
-          this.selectedFolderStore?.navigationPath.length > 0 &&
-          this.selectedFolderStore?.navigationPath[
-            this.selectedFolderStore.navigationPath.length - 1
-          ]?.title) ||
-        "",
-      isRoot: true,
-      isPublicRoomType: false,
-      rootFolderType: this.selectedFolderStore.rootFolderType,
-    };
-
-    if (categoryType === CategoryType.Chat) {
-      this.clientLoadingStore.setIsSectionBodyLoading(true, false);
-    }
-
-    window.DocSpace.navigate(
-      `${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`,
-      {
-        state,
-        replace: true,
-      },
-    );
-  };
-
-  moveToPublicRoom = (folderId?: number | string) => {
-    const { navigationPath, rootFolderType } = this.selectedFolderStore;
-    const { publicRoomKey } = this.publicRoomStore;
-
-    const id = folderId || this.selectedFolderStore.parentId;
-    const path = getCategoryUrl(CategoryType.PublicRoom);
-    const filter = FilesFilter.getDefault();
-    filter.folder = id as string;
-
-    const state = {
-      title: navigationPath[0]?.title || "",
-      isRoot: navigationPath.length === 1,
-      rootFolderType,
-    };
-
-    window.DocSpace.navigate(
-      `${path}?key=${publicRoomKey}&${filter.toUrlParams()}`,
-      { state },
-    );
-  };
-
-  backToParentFolder = async () => {
-    if (this.publicRoomStore.isPublicRoom) return this.moveToPublicRoom();
-
-    const id = this.selectedFolderStore.parentId;
-
-    const { navigationPath, rootFolderType } = this.selectedFolderStore;
-
-    const filter = FilesFilter.getDefault();
-
-    const filterObj = FilesFilter.getFilter(window.location);
-
-    filter.sortBy = filterObj.sortBy;
-    filter.sortOrder = filterObj.sortOrder;
-
-    filter.folder = id as unknown as string;
-
-    const categoryType = getCategoryType(window.DocSpace.location);
-    const path = getCategoryUrl(categoryType, id);
-
-    const isRoot = navigationPath.length === 1;
-
-    const state = {
-      title: (navigationPath && navigationPath[0]?.title) || "",
-      isRoom: navigationPath[0]?.isRoom,
-      isRoot,
-      rootFolderType,
-      isPublicRoomType: navigationPath[0]?.isRoom
-        ? navigationPath[0]?.roomType === RoomsType.PublicRoom
-        : false,
-      rootRoomTitle: "",
-    };
-
-    window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
-      state,
-      replace: true,
-    });
-  };
+  backToParentFolder = async ()=> backToParentFolderImpl(this);
 
   setGroupMenuBlocked = (blocked: boolean) => {
     this.isGroupMenuBlocked = blocked;
@@ -2381,137 +927,15 @@ class FilesActionStore {
     destFolderInfo?: TFolder | TRoom,
   )=> preparingDataForCopyingToRoomImpl(this, destFolderId, selections, destFolderInfo);
 
-  onLeaveRoom = (t: TTranslation, isOwner = false, force = false) => {
-    const { selection, setSelected, bufferSelection } = this.filesStore;
-    const { user } = this.userStore;
+  onLeaveRoom = (t: TTranslation, isOwner = false, force = false)=> onLeaveRoomImpl(this, t, isOwner, force);
 
-    // the fallback is the selected-folder store snapshot; only
-    // id/isAIAgent are read from it, matching the old JS duck typing.
-    const room = (
-      selection.length
-        ? selection[0]
-        : bufferSelection
-          ? bufferSelection
-          : this.selectedFolderStore
-    ) as TActionItem;
+  changeRoomOwner = (t: TTranslation, userId: string, isLeaveChecked = false)=> changeRoomOwnerImpl(this, t, userId, isLeaveChecked);
 
-    const roomId = room.id;
-    const isAIAgent = room.isAIAgent;
+  onClickRemoveFromRecent = (selection: TActionItem[], t: TTranslation)=> onClickRemoveFromRecentImpl(this, selection, t);
 
-    // user is nullable on UserStore; the old JS read the
-    // flags unchecked (crash when logged out), the `!` keeps that behavior.
-    const isAdmin = user!.isOwner || user!.isAdmin;
-    const isRoot = this.selectedFolderStore.isRootFolder;
+  removeFilesFromRecent = async (fileIds: number[], t: TTranslation)=> removeFilesFromRecentImpl(this, fileIds, t);
 
-    const roomSuccessText = isOwner
-      ? t("Common:LeftAndAppointNewOwner")
-      : t("Common:YouLeftTheRoom");
-    const agentSuccessText = isOwner
-      ? t("Common:LeftAgentAndAppointNewOwner")
-      : t("Files:YouLeftTheAgent");
-    const successText = isAIAgent ? agentSuccessText : roomSuccessText;
-
-    return (
-      api.rooms.updateRoomMemberRole(roomId, {
-        invitations: [{ id: user?.id, access: ShareAccessRights.None }],
-        force,
-      }) as Promise<unknown>
-    )
-      .then(() => {
-        if (!isAdmin) {
-          if (!isRoot) {
-            const filter = RoomsFilter.getDefault();
-            window.DocSpace.navigate(
-              `rooms/shared/filter?${filter.toUrlParams()}`,
-            );
-          } else {
-            this.filesStore.removeFiles(null, [roomId]);
-          }
-        } else if (!isRoot) {
-          this.selectedFolderStore.setInRoom(false);
-
-          const operationId = uniqueid("operation_");
-          this.updateCurrentFolder(null, operationId);
-        } else {
-          this.filesStore.setInRoomFolder(roomId, false);
-        }
-
-        toastr.success(successText);
-      })
-      .finally(() => {
-        setSelected("none");
-      });
-  };
-
-  changeRoomOwner = (t: TTranslation, userId: string, isLeaveChecked = false) => {
-    const { setFolder, setSelected, selection, bufferSelection } =
-      this.filesStore;
-    const {
-      isRootFolder,
-      setCreatedBy,
-      id,
-      setInRoom,
-      setSecurity,
-      setAccess,
-    } = this.selectedFolderStore;
-
-    const roomId = selection.length
-      ? selection[0].id
-      : bufferSelection
-        ? bufferSelection.id
-        : id;
-
-    return api.files
-      .setFileOwner(userId, [roomId] as number[])
-      .then(async (res) => {
-        if (isRootFolder) {
-          setFolder(res[0]);
-        } else {
-          setCreatedBy(res[0].createdBy);
-          setSecurity(res[0].security);
-          setAccess(res[0].access);
-
-          // user is nullable on UserStore; the old JS read
-          // `.id` unchecked, the `!` keeps that behavior.
-          const isMe = userId === this.userStore.user!.id;
-          if (isMe) setInRoom(true);
-        }
-
-        if (isLeaveChecked) await this.onLeaveRoom(t);
-        else toastr.success(t("Common:AppointNewOwner"));
-      })
-      .catch((e) => toastr.error(e as string))
-      .finally(() => {
-        setSelected("none");
-      });
-  };
-
-  onClickRemoveFromRecent = (selection: TActionItem[], t: TTranslation) => {
-    const { setSelected } = this.filesStore;
-    const ids = selection.map((item) => item.id);
-    this.removeFilesFromRecent(ids, t);
-    setSelected("none");
-  };
-
-  removeFilesFromRecent = async (fileIds: number[], t: TTranslation) => {
-    const { refreshFiles } = this.filesStore;
-
-    await deleteFilesFromRecent(fileIds);
-    await refreshFiles();
-    toastr.success(t("Files:RemovedFromRecent"));
-  };
-
-  onCreateRoomFromTemplate = (item: TActionItem, addSelection?: boolean) => {
-    const event = new CustomEvent(Events.ROOM_CREATE, {
-      detail: { parentId: this.selectedFolderStore.id, context: "template" },
-    });
-    // the still-.js GlobalEvents component reads this extra
-    // field off the dispatched CustomEvent.
-    (event as CustomEvent & { item?: TActionItem }).item = item;
-    window.dispatchEvent(event);
-
-    if (addSelection) this.filesStore.setBufferSelection(item);
-  };
+  onCreateRoomFromTemplate = (item: TActionItem, addSelection?: boolean)=> onCreateRoomFromTemplateImpl(this, item, addSelection);
 
   copyFromTemplateForm = async (fileInfo: TFile)=> copyFromTemplateFormImpl(this, fileInfo);
 
@@ -2557,239 +981,9 @@ class FilesActionStore {
 
   onDeleteVersionFile = async (fileId: number, versions: number[])=> onDeleteVersionFileImpl(this, fileId, versions);
 
-  runOperations = (operations: string[] = []) => {
-    const { files, folders, activeFiles, activeFolders, addActiveItems } =
-      this.filesStore;
+  runOperations = (operations: string[] = [])=> runOperationsImpl(this, operations);
 
-    const { itemOperationToFolder, clearActiveOperations } =
-      this.uploadDataStore;
-    if (!operations || operations.length === 0) {
-      return "No operations specified";
-    }
-
-    // Count operations that need files (all except emptyTrash)
-    const fileOperations = ["delete", "duplicate", "copy", "move"];
-
-    const totalFilesNeeded =
-      operations.filter((op) => fileOperations.includes(op)).length +
-      (operations.includes("download") ? 2 : 0);
-
-    const needsFolder =
-      operations.includes("copy") || operations.includes("move");
-
-    if (totalFilesNeeded > 0 && (!files || files.length < totalFilesNeeded)) {
-      return `Need at least ${totalFilesNeeded} files`;
-    }
-
-    if (needsFolder && (!folders || folders.length < 1)) {
-      return "Need at least 1 folder for copy and move operations";
-    }
-
-    const availableFiles = files
-      ? files.filter(
-          (file) => !activeFiles.some((active) => active.id === file.id),
-        )
-      : [];
-
-    const availableFolders = folders
-      ? folders.filter(
-          (folder) => !activeFolders.some((active) => active.id === folder.id),
-        )
-      : [];
-
-    if (totalFilesNeeded > 0 && availableFiles.length < totalFilesNeeded) {
-      return `Need ${totalFilesNeeded} available files. Found only ${availableFiles.length} files that are not in active operations`;
-    }
-
-    if (needsFolder && availableFolders.length < 1) {
-      return "Need at least 1 available folder. Found no folders that are not in active operations";
-    }
-
-    let currentFileIndex = 0;
-    const operationResults: string[] = [];
-    let errorMessage: string | null = null;
-
-    operations.forEach((op) => {
-      if (errorMessage) return;
-
-      const filesToProcess =
-        op === "download"
-          ? availableFiles.slice(currentFileIndex, currentFileIndex + 2)
-          : availableFiles.slice(currentFileIndex, currentFileIndex + 1);
-
-      switch (op) {
-        case "delete": {
-          const hasDeletePermissions = filesToProcess.every(
-            (file) => file.security?.Delete,
-          );
-
-          if (!hasDeletePermissions) {
-            errorMessage = "No delete permission for one or more files";
-            return;
-          }
-
-          this.deleteAction(null, filesToProcess)
-            .then(() => {
-              console.log(
-                `Delete operation started for file: ${filesToProcess[0].title}`,
-              );
-            })
-            .catch((err) => {
-              console.log(
-                `Error deleting file ${filesToProcess[0].title}: ${err}`,
-              );
-            });
-
-          currentFileIndex += 1;
-          operationResults.push(`deleting file: ${filesToProcess[0].title}`);
-          break;
-        }
-        case "download": {
-          const translations = {
-            error: "Downloading error",
-          };
-
-          this.downloadFiles(
-            filesToProcess.map((file) => file.id),
-            [],
-            translations,
-          )
-            .then(() => {
-              console.log(
-                `Download started for files: ${filesToProcess
-                  .map((file) => file.title)
-                  .join(", ")}`,
-              );
-            })
-            .catch((err) => {
-              console.log(
-                `Error downloading files ${filesToProcess
-                  .map((file) => file.title)
-                  .join(", ")}: ${err}`,
-              );
-            });
-
-          currentFileIndex += 2;
-          operationResults.push(
-            `downloading files: ${filesToProcess
-              .map((file) => file.title)
-              .join(", ")}`,
-          );
-          break;
-        }
-        case "duplicate": {
-          const fileToDuplicate = filesToProcess[0];
-
-          this.duplicateAction(fileToDuplicate)
-            .then(() => {
-              console.log(
-                `Duplication started for file: ${fileToDuplicate.title}`,
-              );
-            })
-            .catch((err) => {
-              console.log(
-                `Error duplicating file ${fileToDuplicate.title}: ${err}`,
-              );
-            });
-
-          currentFileIndex += 1;
-          operationResults.push(`duplicating file: ${fileToDuplicate.title}`);
-          break;
-        }
-        case "copy":
-        case "move": {
-          const fileToProcess = filesToProcess[0];
-          const targetFolder = availableFolders[0];
-
-          const operationData = {
-            destFolderId: targetFolder.id,
-            // same TFolder-vs-view-model mismatch as above.
-            destFolderInfo: targetFolder as unknown as TFolder,
-            fileIds: [fileToProcess.id],
-            folderIds: [],
-            deleteAfter: false,
-            isCopy: op === "copy",
-            content: false,
-            itemsCount: 1,
-            title: fileToProcess.title,
-          };
-
-          addActiveItems(
-            operationData.fileIds,
-            operationData.folderIds,
-            operationData.destFolderId,
-          );
-
-          itemOperationToFolder(operationData)
-            .then(() => {
-              console.log(
-                `${op === "copy" ? "Copy" : "Move"} operation initiated for file: ${fileToProcess.title} to folder: ${targetFolder.title}`,
-              );
-            })
-            .catch((err) => {
-              clearActiveOperations(
-                operationData.fileIds,
-                operationData.folderIds,
-              );
-              console.log(
-                `Error ${op === "copy" ? "copying" : "moving"} file ${fileToProcess.title}: ${err}`,
-              );
-            });
-
-          currentFileIndex += 1;
-          operationResults.push(
-            `${op === "copy" ? "copying" : "moving"} file: ${fileToProcess.title} to folder: ${targetFolder.title}`,
-          );
-          break;
-        }
-        case "emptyTrash": {
-          const translations = {
-            successOperation: "Trash emptied",
-          };
-
-          this.emptyTrash(translations)
-            .then(() => {
-              console.log("Empty trash operation started");
-            })
-            .catch((err) => {
-              console.log(`Error in empty trash operation: ${err}`);
-            });
-
-          operationResults.push("emptying trash");
-          break;
-        }
-        default:
-          errorMessage = `Unknown operation: ${op}`;
-      }
-    });
-
-    return errorMessage || `Started ${operationResults.join(" and ")}`;
-  };
-
-  retryVectorization = async (files: TActionItem[]) => {
-    const { updateFileVectorizationStatus } = this.filesStore;
-
-    const filteredFiles = files.filter((file) => file.security?.Vectorization);
-
-    if (!filteredFiles.length) return;
-
-    const fileIds = filteredFiles.map((file) => file.id);
-
-    try {
-      fileIds.forEach((fileId) =>
-        updateFileVectorizationStatus(fileId, VectorizationStatus.InProgress),
-      );
-
-      await api.ai.retryVectorization(fileIds);
-    } catch (e) {
-      fileIds.forEach((fileId) =>
-        updateFileVectorizationStatus(fileId, VectorizationStatus.Failed),
-      );
-
-      toastr.error(e as string);
-      console.error(e);
-    }
-  };
+  retryVectorization = async (files: TActionItem[])=> retryVectorizationImpl(this, files);
 }
 
 export default FilesActionStore;

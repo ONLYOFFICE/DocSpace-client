@@ -15,7 +15,9 @@ beforeEach(() => {
 describe("FilesActionsStore — tree/order/open (batch 17)", () => {
   it("createFolderTree returns early for an empty tree list", async () => {
     const store = createTestFilesActionsStore();
-    await expect(store.createFolderTree([] as never, 1)).resolves.toBeUndefined();
+    await expect(
+      store.createFolderTree([] as never, 1, [] as never),
+    ).resolves.toBeUndefined();
   });
 
   it("setFilesOrder snapshots the current list before reordering", () => {

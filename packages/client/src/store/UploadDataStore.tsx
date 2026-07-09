@@ -37,7 +37,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { getI18n, Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
-import uniqueid from "lodash/uniqueId";
 import {
   AnalyticsEvents,
   ConflictResolveType,
@@ -50,13 +49,11 @@ import {
 } from "@docspace/shared/services/private-room/encrypted-upload";
 import {
   getFileInfo,
-  getFolderInfo,
   uploadFile,
   startUploadSession,
   uploadChunkSequential,
   uploadChunkParallel,
   finalizeUploadSession,
-  checkIsFileExist,
 } from "@docspace/shared/api/files";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
@@ -82,7 +79,6 @@ import {
   acquireUploadAutoLockSuspension,
   hasFileDek,
   releaseUploadAutoLockSuspension,
-  removeDuplicate,
   setFileDek,
   takeFileDek,
 } from "./uploadDataStore/helpers";
@@ -128,6 +124,18 @@ import {
   prepareFileForEncryptedUploadImpl,
   wrapForSelfThenRoomImpl,
 } from "./uploadDataStore/encryption.helpers";
+import {
+  cancelUploadActionImpl,
+  cancelUploadImpl,
+  cancelCurrentUploadImpl,
+  handleFilesUploadImpl,
+  handleUploadAndOptionalConversionImpl,
+  handleUploadConflictsImpl,
+  retryQuotaFailedFilesImpl,
+  retryUploadFilesImpl,
+  setConflictDialogDataImpl,
+  startUploadImpl,
+} from "./uploadDataStore/start.helpers";
 
 import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
@@ -174,7 +182,7 @@ type TUploadData = {
   conversionFiles?: TUploadFile[];
 };
 
-type TStartUploadData = TUploadData & {
+export type TStartUploadData = TUploadData & {
   files: TUploadFile[];
   filesSize: number;
   uploadedFilesHistory: TUploadFile[];
@@ -238,7 +246,7 @@ export type TItemOperationData = {
   translations?: { [key: string]: string };
 };
 
-type TAxiosLikeError = {
+export type TAxiosLikeError = {
   response?: { data?: { error?: { message?: string } }; status?: number };
   statusText?: string;
   message?: string;
@@ -501,60 +509,7 @@ class UploadDataStore {
   getUploadedFile = (id: string) =>
     getUploadedFileImpl(id, { files: this.files });
 
-  cancelUpload = () => {
-    this.finishUploadFilesCalled = false;
-
-    const newUploadData = {
-      filesSize: this.filesSize,
-      uploadedFiles: this.uploadedFiles,
-      percent: 100,
-      uploaded: true,
-      converted: true,
-      currentUploadNumber: 0,
-    };
-
-    const newHistory = this.uploadedFilesHistory.filter(
-      (el) =>
-        el.action === "uploaded" ||
-        el.action === "converted" ||
-        (el.action === "upload" && el.error) ||
-        (el.action === "convert" && el.error) ||
-        (el.action === "convert" && el.inConversion),
-    );
-    this.filesToConversion = this.filesToConversion.filter(
-      (el) => el.inConversion,
-    );
-
-    const shouldCancelFile = (file: TUploadFile) => {
-      return (
-        file.action === "upload" ||
-        (file.action === "convert" && !file.inConversion)
-      );
-    };
-
-    this.files = this.files.map((file) =>
-      shouldCancelFile(file) ? { ...file, cancel: true } : file,
-    );
-
-    this.setUploadData(newUploadData);
-    this.uploadedFilesHistory = newHistory;
-    this.quotaErrorRaised = false;
-
-    // the original .js referenced the bare global `i18n`
-    // (window.i18n populated by SRC_DIR/i18n.js); `window.i18n!.t!` keeps the
-    // exact runtime resolution.
-    this.primaryProgressDataStore.setPrimaryProgressBarData({
-      operation: OPERATIONS_NAME.upload,
-      completed: true,
-      canceled: true,
-      alert: true,
-      label: window.i18n!.t!("Common:CanceledOperation", {
-        operationName: window.i18n!.t!("Common:Uploading"),
-      }),
-    });
-
-    toastr.info(window.i18n!.t!("Common:CancelUpload"));
-  };
+  cancelUpload = () => cancelUploadImpl(this);
 
   cancelConversion = () => cancelConversionImpl(this);
 
@@ -564,30 +519,8 @@ class UploadDataStore {
     this.convertedFromFiles = true;
   };
 
-  cancelCurrentUpload = (id: string, t: TTranslation) => {
-    runInAction(() => {
-      const uploadedFilesHistory = this.uploadedFilesHistory.filter(
-        (el) => el.uniqueId !== id,
-      );
-
-      // the original .js assumed the canceled file is always
-      // found (would throw on undefined); the non-null assertion keeps that.
-      const canceledFile = this.files.find((f) => f.uniqueId === id)!;
-      const newPercent = this.getFilesPercent(); // canceledFile.file.size
-      canceledFile.cancel = true;
-      canceledFile.percent = 100;
-      canceledFile.action = "uploaded";
-
-      this.currentUploadNumber -= 1;
-      this.uploadedFilesHistory = uploadedFilesHistory;
-      this.percent = newPercent;
-      const nextFileIndex = this.files.findIndex((f) => !f.inAction);
-
-      if (nextFileIndex !== -1) {
-        this.startSessionFunc(nextFileIndex, t);
-      }
-    });
-  };
+  cancelCurrentUpload = (id: string, t: TTranslation) =>
+    cancelCurrentUploadImpl(this, id, t);
 
   cancelCurrentFileConversion = (fileId: string) =>
     cancelCurrentFileConversionImpl(this, fileId);
@@ -651,100 +584,31 @@ class UploadDataStore {
   convertUploadedFiles = (t: TTranslation, createNewIfExist = true) =>
     convertUploadedFilesImpl(this, t, createNewIfExist);
 
-  cancelUploadAction = (items?: { uniqueId: string }[]) => {
-    // the original .js read conflictResolveDialogData (and its
-    // allNewFiles) without a null guard — it is always set when the upload
-    // conflict dialog invokes this action.
-    const files =
-      items ??
-      this.dialogsStore.conflictResolveDialogData!.newUploadData.allNewFiles!;
-
-    let i = files.length;
-
-    while (i !== 0) {
-      this.uploadedFilesHistory = this.uploadedFilesHistory.filter(
-        (f) => f.uniqueId !== files[i - 1].uniqueId,
-      );
-      this.files = this.files.filter(
-        (f) => f.uniqueId !== files[i - 1].uniqueId,
-      );
-      this.tempConversionFiles = this.tempConversionFiles.filter(
-        (f) => f.uniqueId !== files[i - 1].uniqueId,
-      );
-      i--;
-    }
-
-    if (this.uploaded) {
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: OPERATIONS_NAME.upload,
-        completed: true,
-        withoutStatus: this.uploadedFilesHistory.length === 0,
-        ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
-      });
-    }
-  };
+  cancelUploadAction = (items?: { uniqueId: string }[]) =>
+    cancelUploadActionImpl(this, items);
 
   setConflictDialogData = (
     conflicts: unknown[],
     operationData: Partial<TConflictResolveDialogData>,
-  ) => {
-    this.dialogsStore.setConflictResolveDialogItems(conflicts);
-    // upload conflicts fill only a subset of
-    // TConflictResolveDialogData (no folderIds/fileIds/translations/…); the
-    // cast keeps the original .js payload as-is.
-    this.dialogsStore.setConflictResolveDialogData(
-      operationData as TConflictResolveDialogData,
-    );
-    this.dialogsStore.setConflictResolveDialogVisible(true);
-  };
+  ) => setConflictDialogDataImpl(this, conflicts, operationData);
 
   handleFilesUpload = (
     newUploadData: TStartUploadData,
     t: TTranslation,
     createNewIfExist = true,
-  ) => {
-    this.uploadedFilesHistory = newUploadData.uploadedFilesHistory;
-
-    this.setUploadData(newUploadData);
-    this.startUploadFiles(t, createNewIfExist);
-  };
+  ) => handleFilesUploadImpl(this, newUploadData, t, createNewIfExist);
 
   handleUploadAndOptionalConversion = (
     uploadData: TStartUploadData,
     t: TTranslation,
     createNewIfExist?: boolean,
-  ) => {
-    const newUploadData = { ...uploadData };
-    // newUploadData.files = newUploadData.filesWithoutConversion;
-
-    const onlyConversion =
-      !!this.tempConversionFiles.length &&
-      newUploadData.newFilesWithoutConversion.length === 0;
-
-    if (!onlyConversion) {
-      this.handleFilesUpload(newUploadData, t, createNewIfExist);
-    } else {
-      if (this.uploaded) {
-        newUploadData.uploaded = true;
-        this.asyncUploadObj = {};
-      }
-      this.uploadedFilesHistory = newUploadData.uploadedFilesHistory;
-      // this.setUploadData(newUploadData);
-    }
-
-    if (this.tempConversionFiles.length) {
-      if (this.filesSettingsStore.hideConfirmConvertSave) {
-        this.convertUploadedFiles(t, createNewIfExist);
-      } else {
-        this.dialogsStore.setConvertDialogVisible(true);
-        this.dialogsStore.setConvertDialogData({
-          createNewIfExist,
-          isUploadAction: true,
-          files: uploadData.conversionFiles,
-        });
-      }
-    }
-  };
+  ) =>
+    handleUploadAndOptionalConversionImpl(
+      this,
+      uploadData,
+      t,
+      createNewIfExist,
+    );
 
   conflictDialogUploadHandler = (
     uploadData: TStartUploadData,
@@ -754,182 +618,17 @@ class UploadDataStore {
     this.handleUploadAndOptionalConversion(uploadData, t, createNewIfExist);
   };
 
-  handleUploadConflicts = async (
+  handleUploadConflicts = (
     t: TTranslation,
     toFolderId: number | string | null,
     uploadData: TStartUploadData,
-  ) => {
-    const { isAIRoom } = this.selectedFolderStore;
-    const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
-
-    const checkConflicts =
-      uploadData.files.findIndex((f) => f.toFolderId === toFolderId) > -1;
-
-    try {
-      let conflicts: (string | { title: string; isFile: boolean })[] =
-        isAIRoom || !checkConflicts
-          ? []
-          : ((await checkIsFileExist(
-              toFolderId as number,
-              filesArray,
-            )) as string[]);
-      const folderInfo = await getFolderInfo(toFolderId!);
-
-      conflicts = conflicts.map((fileTitle) => ({
-        title: fileTitle as string,
-        isFile: true,
-      }));
-
-      if (conflicts.length > 0) {
-        this.setConflictDialogData(conflicts, {
-          isUploadConflict: true,
-          newUploadData: uploadData,
-          folderTitle: folderInfo.title,
-        });
-      } else {
-        this.handleUploadAndOptionalConversion(uploadData, t, true);
-      }
-    } catch (err) {
-      let errorMessage = "";
-
-      if (typeof err === "object") {
-        const axiosErr = err as TAxiosLikeError;
-        errorMessage =
-          axiosErr?.response?.data?.error?.message ||
-          axiosErr?.statusText ||
-          axiosErr?.message ||
-          "";
-      } else {
-        errorMessage = err as string;
-      }
-
-      toastr.error(errorMessage, null, 0, true);
-
-      if (this.uploaded) {
-        this.primaryProgressDataStore.setPrimaryProgressBarData({
-          operation: OPERATIONS_NAME.upload,
-          completed: this.uploaded,
-          alert: this.uploadedFilesHistory.length === 0,
-          ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
-        });
-      }
-    }
-  };
+  ) => handleUploadConflictsImpl(this, t, toFolderId, uploadData);
 
   startUpload = (
     uploadFiles: Record<string, TUploadBrowserFile> | unknown[],
     folderId: number | string | null,
     t: TTranslation,
-  ) => {
-    const { canConvert } = this.filesSettingsStore;
-
-    const { isAIRoom } = this.selectedFolderStore;
-
-    const { knowledgeId } = this.aiRoomStore;
-
-    const toFolderId = folderId || this.selectedFolderStore.id;
-
-    const encryptionRoomId =
-      this.selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
-      (this.selectedFolderStore.isRoom ? this.selectedFolderStore.id : null);
-
-    const isPrivateUpload = this.treeFoldersStore.isPrivacyFolder;
-
-    if (this.uploaded) {
-      this.files = this.files.filter((f) => f.action !== "upload" || f.error);
-      this.filesSize = 0;
-      this.uploadToFolder = null;
-      this.percent = 0;
-    }
-    if (this.uploaded && this.converted) {
-      this.files = this.files.filter((f) => f.error);
-      this.filesToConversion = [];
-      this.uploadedFilesSize = 0;
-      this.asyncUploadObj = {};
-    }
-
-    const newFiles: TUploadFile[] = []; // this.files;
-    const allFiles: TUploadFile[] = [];
-    let filesSize = 0;
-    let convertSize = 0;
-
-    const uploadFilesArray = Object.keys(uploadFiles);
-
-    uploadFilesArray.forEach((index) => {
-      const file = (uploadFiles as Record<string, TUploadBrowserFile>)[index];
-
-      const parts = file.name.split(".");
-      const ext = parts.length > 1 ? `.${parts.pop()}` : "";
-      const needConvert = !isPrivateUpload && canConvert(ext);
-
-      const newFile: TUploadFile = {
-        file,
-        uniqueId: uniqueid("download_row-key_"),
-        fileId: null,
-        // toFolderId,
-        toFolderId: isAIRoom ? knowledgeId : file.parentFolderId,
-        action: "upload",
-        error: null,
-        fileInfo: null,
-        cancel: false,
-        needConvert,
-        encrypted: file.encrypted,
-        encryptionRoomId,
-        percent: 0,
-      };
-
-      if (needConvert) {
-        this.tempConversionFiles.push(newFile);
-      } else {
-        newFiles.push(newFile);
-      }
-
-      allFiles.push(newFile);
-
-      filesSize += file.size;
-      convertSize += file.size;
-    });
-
-    const filesWithoutConversion = removeDuplicate([
-      ...this.files,
-      ...newFiles,
-    ]);
-
-    const countUploadingFiles = filesWithoutConversion.length;
-    const countConversionFiles = this.tempConversionFiles.length;
-
-    if (countUploadingFiles && !countConversionFiles) {
-      this.isUploading = true;
-    } else {
-      this.isUploadingAndConversion = true;
-    }
-    this.convertFilesSize = convertSize;
-
-    const clearArray = removeDuplicate([
-      ...this.uploadedFilesHistory,
-      ...allFiles,
-    ]);
-
-    // this.uploadedFilesHistory = clearArray;
-
-    const newUploadData = {
-      // filesWithoutConversion,
-      newFilesWithoutConversion: newFiles,
-      allNewFiles: allFiles,
-      conversionFiles: removeDuplicate(this.tempConversionFiles),
-      files: [...filesWithoutConversion],
-      filesSize: filesSize + this.filesSize,
-      uploadedFiles: this.uploadedFiles,
-      percent: this.percent,
-      uploaded: false,
-      uploadedFilesHistory: clearArray,
-      // converted: !!this.tempConversionFiles.length,
-    };
-
-    if (countUploadingFiles || countConversionFiles) {
-      this.handleUploadConflicts(t, toFolderId, newUploadData);
-    }
-  };
+  ) => startUploadImpl(this, uploadFiles, folderId, t);
 
   refreshFiles = async (currentFile?: TUploadFile) => {
     const { files, setFiles, folders, setFolders, filter, setFilter } =
@@ -1388,109 +1087,11 @@ class UploadDataStore {
   retryConvertFiles = (t: TTranslation, fileId: number) =>
     retryConvertFilesImpl(this, t, fileId);
 
-  retryUploadFiles = (t: TTranslation, uniqueId: string) => {
-    const fileIndex = this.files.findIndex((f) => f.uniqueId === uniqueId);
-    const fileUploadedIndex = this.uploadedFilesHistory.findIndex(
-      (f) => f.uniqueId === uniqueId,
-    );
-    const retryFile = this.files[fileIndex];
-    const retryFileUploaded = this.uploadedFilesHistory[fileUploadedIndex];
+  retryUploadFiles = (t: TTranslation, uniqueId: string) =>
+    retryUploadFilesImpl(this, t, uniqueId);
 
-    if (retryFileUploaded.action === "convert") {
-      retryFileUploaded.inConversion = false;
-      retryFile.inConversion = false;
-      this.convertFile(retryFileUploaded, t);
-      return;
-    }
-
-    retryFile.action = "upload";
-    retryFile.error = "";
-    retryFile.isQuotaError = false;
-    retryFile.inAction = false;
-    retryFile.percent = 0;
-
-    retryFileUploaded.action = "upload";
-    retryFileUploaded.error = "";
-    retryFileUploaded.isQuotaError = false;
-    retryFileUploaded.inAction = false;
-    retryFileUploaded.errorShown = false;
-    retryFileUploaded.percent = 0;
-
-    this.quotaErrorRaised = false;
-
-    if (this.uploaded) {
-      const newUploadData = {
-        filesSize: this.convertFilesSize,
-        uploadedFiles: this.uploadedFiles,
-        percent: this.percent,
-        uploaded: false,
-      };
-
-      this.setUploadData(newUploadData);
-      const progressData = {
-        completed: false,
-        percent: this.percent,
-        operation: OPERATIONS_NAME.upload,
-        alert: false,
-        showPanel: this.setUploadPanelVisible,
-      };
-
-      this.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
-    }
-
-    this.parallelUploading([retryFile], t);
-  };
-
-  retryQuotaFailedFiles = (t: TTranslation) => {
-    const failed = this.files.filter((f) => f.isQuotaError);
-    if (failed.length === 0) return;
-
-    this.quotaErrorRaised = false;
-    failed.forEach((retryFile) => {
-      const fileIndex = this.files.findIndex(
-        (f) => f.uniqueId === retryFile.uniqueId,
-      );
-      const historyIndex = this.uploadedFilesHistory.findIndex(
-        (f) => f.uniqueId === retryFile.uniqueId,
-      );
-      if (fileIndex === -1) return;
-      this.files[fileIndex].action = "upload";
-      this.files[fileIndex].error = "";
-      this.files[fileIndex].isQuotaError = false;
-      this.files[fileIndex].inAction = false;
-      this.files[fileIndex].percent = 0;
-      if (historyIndex > -1) {
-        this.uploadedFilesHistory[historyIndex].action = "upload";
-        this.uploadedFilesHistory[historyIndex].error = "";
-        this.uploadedFilesHistory[historyIndex].isQuotaError = false;
-        this.uploadedFilesHistory[historyIndex].inAction = false;
-        this.uploadedFilesHistory[historyIndex].errorShown = false;
-        this.uploadedFilesHistory[historyIndex].percent = 0;
-      }
-    });
-
-    if (this.uploaded) {
-      const newUploadData = {
-        filesSize: this.convertFilesSize,
-        uploadedFiles: this.uploadedFiles,
-        percent: this.percent,
-        uploaded: false,
-      };
-      this.setUploadData(newUploadData);
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        completed: false,
-        percent: this.percent,
-        operation: OPERATIONS_NAME.upload,
-        alert: false,
-        showPanel: this.setUploadPanelVisible,
-      });
-    }
-
-    const retryFiles = this.files.filter((f) =>
-      failed.some((rf) => rf.uniqueId === f.uniqueId),
-    );
-    this.parallelUploading(retryFiles, t);
-  };
+  retryQuotaFailedFiles = (t: TTranslation) =>
+    retryQuotaFailedFilesImpl(this, t);
 
   startUploadFiles = async (t: TTranslation, createNewIfExist = true) => {
     this.finishUploadFilesCalled = false;

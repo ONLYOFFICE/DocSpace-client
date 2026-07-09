@@ -58,9 +58,6 @@ import {
   uploadChunkSequential,
   uploadChunkParallel,
   finalizeUploadSession,
-  copyToFolder,
-  moveToFolder,
-  fileCopyAs,
   checkIsFileExist,
   setFileEncryptionKeys,
   getFileEncryptionAccess,
@@ -74,17 +71,10 @@ import {
   resolveDisplayTitle,
 } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
-import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";
-import {
-  getCategoryTypeByFolderType,
-  getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { FileOperationStatus } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
 
 import type {
@@ -123,6 +113,16 @@ import {
   shouldEncryptCurrentUploadImpl,
   willEncryptItemImpl,
 } from "./uploadDataStore/selectors.helpers";
+import {
+  clearActiveOperationsImpl,
+  copyAsActionImpl,
+  copyToActionImpl,
+  itemOperationToFolderImpl,
+  loopFilesOperationsImpl,
+  moveToActionImpl,
+  moveToCopyToImpl,
+  navigateToNewFolderLocationImpl,
+} from "./uploadDataStore/operations.helpers";
 
 import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
@@ -212,12 +212,12 @@ type TCheckChunkUpload = {
   createNewIfExist?: boolean;
 };
 
-type TPbData = {
+export type TPbData = {
   operation: TOperationName;
   operationId: string;
 };
 
-type TItemOperationData = {
+export type TItemOperationData = {
   destFolderId: number | string | null | undefined;
   destFolderInfo?: TFolder;
   folderIds: number[];
@@ -2779,62 +2779,18 @@ class UploadDataStore {
     operationId: string,
     content?: boolean,
     toFillOut?: boolean,
-  ) => {
-    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
-
-    const pbData: TPbData = {
-      operation: OPERATIONS_NAME.copy,
-      operationId,
-    };
-
-    return copyToFolder(
-      destFolderId as number,
+  ) =>
+    copyToActionImpl(
+      this,
+      destFolderId,
       folderIds,
       fileIds,
       conflictResolveType,
       deleteAfter,
+      operationId,
       content,
       toFillOut,
-    )
-      .then((res) => {
-        let data: TOperation | null = null;
-        const operation = res[0];
-
-        if (operation) {
-          if (operation?.error) {
-            return Promise.reject(operation);
-          }
-
-          data = operation ?? null;
-        }
-
-        if (!data) {
-          return Promise.reject();
-        }
-        return this.loopFilesOperations(data, pbData)
-          .then((result) => {
-            this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds);
-            return result;
-          })
-          .finally(async () => {
-            // to update the status of trashIsEmpty filesStore
-            if (this.treeFoldersStore.isRecycleBinFolder)
-              await this.filesStore.getIsEmptyTrash();
-          });
-      })
-      .catch((err: unknown) => {
-        setSecondaryProgressBarData({
-          completed: true,
-          alert: true,
-          operationId,
-          operation: pbData.operation,
-          error: err as string,
-        });
-        this.clearActiveOperations(fileIds, folderIds);
-
-        return Promise.reject(err);
-      });
-  };
+    );
 
   moveToAction = (
     destFolderId: number | string | null | undefined,
@@ -2844,57 +2800,17 @@ class UploadDataStore {
     deleteAfter: boolean,
     operationId: string,
     toFillOut?: boolean,
-  ) => {
-    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
-    const pbData: TPbData = { operation: OPERATIONS_NAME.move, operationId };
-    return moveToFolder(
-      destFolderId as number,
+  ) =>
+    moveToActionImpl(
+      this,
+      destFolderId,
       folderIds,
       fileIds,
       conflictResolveType,
       deleteAfter,
+      operationId,
       toFillOut,
-    )
-      .then((res) => {
-        let data: TOperation | null = null;
-
-        const operation = res[0];
-        if (operation) {
-          if (operation?.error) {
-            return Promise.reject(operation);
-          }
-
-          data = operation ?? null;
-        }
-
-        if (!data) {
-          return Promise.reject();
-        }
-
-        return this.loopFilesOperations(data, pbData)
-          .then((result) => {
-            this.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds);
-            return result;
-          })
-          .finally(async () => {
-            // to update the status of trashIsEmpty filesStore
-            if (this.treeFoldersStore.isRecycleBinFolder)
-              await this.filesStore.getIsEmptyTrash();
-          });
-      })
-      .catch((err: unknown) => {
-        setSecondaryProgressBarData({
-          completed: true,
-          alert: true,
-          operationId,
-          operation: pbData.operation,
-          error: err as string,
-        });
-        this.clearActiveOperations(fileIds, folderIds);
-
-        return Promise.reject(err);
-      });
-  };
+    );
 
   copyAsAction = (
     fileId: number,
@@ -2902,215 +2818,20 @@ class UploadDataStore {
     folderId: number,
     enableExternalExt?: boolean,
     password?: string,
-  ) => {
-    const { fetchFiles, filter } = this.filesStore;
+  ) =>
+    copyAsActionImpl(this, fileId, title, folderId, enableExternalExt, password);
 
-    // fileCopyAs declares enableExternalExt/password as
-    // required, but the original .js callers may omit them (undefined is
-    // sent as-is at runtime).
-    return fileCopyAs(
-      fileId,
-      title,
-      folderId,
-      enableExternalExt as boolean,
-      password as string,
-    )
-      .then(() => fetchFiles(folderId, filter, true, true))
-      .catch((err: unknown) => {
-        return Promise.reject(err);
-      });
-  };
+  itemOperationToFolder = (data: TItemOperationData) =>
+    itemOperationToFolderImpl(this, data);
 
-  itemOperationToFolder = (data: TItemOperationData) => {
-    const {
-      destFolderId,
-      destFolderInfo,
-      folderIds,
-      fileIds,
-      deleteAfter,
-      isCopy,
-      content,
-      title,
-      itemsCount,
-      isFolder,
-      toFillOut,
-    } = data;
-    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
-
-    const conflictResolveType = data.conflictResolveType
-      ? data.conflictResolveType
-      : ConflictResolveType.Duplicate;
-
-    const operationId = uniqueid("operation_");
-
-    const operation = isCopy ? OPERATIONS_NAME.copy : OPERATIONS_NAME.move;
-
-    setSecondaryProgressBarData({
-      operation,
-      percent: 0,
-      operationId,
-      title,
-      itemsCount,
-      operationIds: [...folderIds],
-      destFolderInfo,
-      isFolder,
-    });
-
-    return isCopy
-      ? this.copyToAction(
-          destFolderId,
-          folderIds,
-          fileIds,
-          conflictResolveType,
-          deleteAfter,
-          operationId,
-          content,
-          toFillOut,
-        )
-      : this.moveToAction(
-          destFolderId,
-          folderIds,
-          fileIds,
-          conflictResolveType,
-          deleteAfter,
-          operationId,
-          toFillOut,
-        );
-  };
-
-  loopFilesOperations = async (
-    /** Callers (FilesActionsStore) pass `result ?? null`; the falsy case is
-     * handled right below. */
+  loopFilesOperations = (
     data: TOperation | null,
     pbData: TPbData,
-  ): Promise<TOperation | undefined> => {
-    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
+  ): Promise<TOperation | undefined> =>
+    loopFilesOperationsImpl(this, data, pbData);
 
-    if (!data) {
-      setSecondaryProgressBarData({
-        operation: pbData.operation,
-        alert: false,
-        completed: true,
-        operationId: pbData.operationId,
-      });
-
-      return;
-    }
-
-    setSecondaryProgressBarData({
-      operation: pbData.operation,
-      alert: false,
-      operationId: pbData.operationId,
-      serverOperationId: data.id,
-    });
-
-    // let progress = data.progress;
-
-    let operationItem: TOperation | undefined = data;
-    let finished = data.finished;
-
-    while (!finished) {
-      const currentOperation =
-        this.secondaryProgressDataStore.secondaryOperationsArray.find(
-          (op) => op.operation === pbData.operation,
-        );
-      const currentItem = currentOperation?.items.find(
-        (item) => item.operationId === pbData.operationId,
-      );
-
-      if (currentItem?.completed) {
-        return operationItem;
-      }
-
-      try {
-        const item = await getOperationProgress(
-          data.id,
-          getUnexpectedErrorText(),
-          true,
-        );
-
-        if (item?.status === FileOperationStatus.Canceled) {
-          setSecondaryProgressBarData({
-            operation: pbData.operation,
-            operationId: pbData.operationId,
-            completed: true,
-            alert: false,
-          });
-          return { ...item, finished: true, error: "" };
-        }
-
-        operationItem = item;
-
-        // progress = item ? item.progress : 100;
-        finished = item ? item.finished : true;
-
-        setSecondaryProgressBarData({
-          operation: pbData.operation,
-          //  percent: progress,
-          alert: false,
-          currentFile: item,
-          operationId: pbData.operationId,
-          serverOperationId: data.id,
-        });
-      } catch (error) {
-        const updatedOperation =
-          this.secondaryProgressDataStore.secondaryOperationsArray.find(
-            (op) => op.operation === pbData.operation,
-          );
-        const updatedItem = updatedOperation?.items.find(
-          (item) => item.operationId === pbData.operationId,
-        );
-
-        const isOperationCancelled =
-          updatedItem?.completed && updatedItem?.skipToast;
-
-        if (isOperationCancelled) {
-          return operationItem;
-        }
-
-        const hasStatusCanceled =
-          operationItem?.status === FileOperationStatus.Canceled ||
-          (error as { status?: FileOperationStatus })?.status ===
-            FileOperationStatus.Canceled;
-
-        if (hasStatusCanceled) {
-          return operationItem;
-        }
-
-        const isOperationNotFound = !updatedOperation || !updatedItem;
-
-        if (isOperationNotFound) {
-          return operationItem;
-        }
-
-        throw error;
-      }
-    }
-
-    return operationItem;
-  };
-
-  navigateToNewFolderLocation = async (folderId: number | string | null) => {
-    const { filter } = this.filesStore;
-
-    // FilesFilter.folder is declared as string, but the
-    // original .js also assigns numeric folder ids here.
-    filter.folder = folderId as string;
-
-    try {
-      const { rootFolderType, parentId } = await getFolderInfo(folderId!);
-      const path = getCategoryUrl(
-        getCategoryTypeByFolderType(rootFolderType, parentId),
-        folderId,
-      );
-
-      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
-        replace: true,
-      });
-    } catch (e) {
-      console.error("[UploadDataStore] navigate failed:", e);
-    }
-  };
+  navigateToNewFolderLocation = (folderId: number | string | null) =>
+    navigateToNewFolderLocationImpl(this, folderId);
 
   moveToCopyTo = (
     destFolderId: number | string | null | undefined,
@@ -3118,51 +2839,12 @@ class UploadDataStore {
     isCopy: boolean,
     fileIds?: number[],
     folderIds?: number[],
-  ) => {
-    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
-    const isMovingSelectedFolder =
-      !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
-
-    if (!isCopy || destFolderId === this.selectedFolderStore.id) {
-      this.clearActiveOperations(fileIds, folderIds);
-
-      if (!isCopy) {
-        this.filesStore.removeFiles(fileIds, folderIds, null, destFolderId);
-      }
-
-      isMovingSelectedFolder &&
-        this.navigateToNewFolderLocation(this.selectedFolderStore.id);
-      this.dialogsStore.setIsFolderActions(false);
-    } else {
-      this.clearActiveOperations(fileIds, folderIds);
-    }
-
-    setSecondaryProgressBarData({
-      operation: pbData.operation,
-      percent: 100,
-      completed: true,
-      operationId: pbData.operationId,
-    });
-  };
+  ) => moveToCopyToImpl(this, destFolderId, pbData, isCopy, fileIds, folderIds);
 
   clearActiveOperations = (
-    /** FilesActionsStore passes null for the unaffected side. */
     fileIds: Nullable<number[]> = [],
     folderIds: Nullable<number[]> = [],
-  ) => {
-    const { activeFiles, activeFolders, setActiveFiles, setActiveFolders } =
-      this.filesStore;
-
-    const newActiveFiles = activeFiles.filter(
-      (el) => !fileIds?.includes(el.id as number),
-    );
-    const newActiveFolders = activeFolders.filter(
-      (el) => !folderIds?.includes(el.id as number),
-    );
-
-    setActiveFiles(newActiveFiles);
-    setActiveFolders(newActiveFolders);
-  };
+  ) => clearActiveOperationsImpl(this, fileIds, folderIds);
 }
 
 export default UploadDataStore;

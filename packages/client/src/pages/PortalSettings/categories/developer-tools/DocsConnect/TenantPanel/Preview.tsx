@@ -43,7 +43,7 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
 
-import FileReactSvgUrl from "PUBLIC_DIR/images/icons/16/file.react.svg?url";
+import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copyTo.react.svg";
 
@@ -137,7 +137,7 @@ const Preview = ({ info, user, copyToClipboard }: PreviewProps) => {
           {
             id: "editor",
             name: t("Common:Editor"),
-            iconName: FileReactSvgUrl,
+            iconName: DocumentsReactSvgUrl,
             content: null,
           },
           {

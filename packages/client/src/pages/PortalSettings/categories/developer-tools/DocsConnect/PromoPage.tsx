@@ -125,8 +125,9 @@ const PromoPage = ({
           <Button
             primary
             size={ButtonSize.small}
-            label={t("DocsConnect:Upgrade")}
+            label={t("DocsConnect:Buy")}
             onClick={() => openBuyPlan?.("edit")}
+            className={styles.buyButton}
           />
         ) : (
           <Button

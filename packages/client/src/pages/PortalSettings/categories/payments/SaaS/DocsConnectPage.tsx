@@ -291,14 +291,18 @@ const DocsConnectPage = ({
             {t("Common:CurrentSubscription")}
           </Text>
           <div className={styles.noPlanCard}>
-            <Text className={styles.noPlanTitle}>
+            <Text
+              fontSize="13px"
+              fontWeight={600}
+              className={styles.noPlanTitle}
+            >
               {t("Common:NoActiveSubscription")}
             </Text>
             <Button
               primary
               scale
-              size={ButtonSize.normal}
-              label={t("DocsConnect:Upgrade")}
+              size={ButtonSize.small}
+              label={t("DocsConnect:Buy")}
               onClick={onEditPlan}
             />
           </div>
@@ -530,4 +534,3 @@ export default inject(({ docsConnectStore }: TStore) => ({
   openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
   cancelScheduledChange: docsConnectStore.cancelScheduledChange,
 }))(observer(DocsConnectPage));
-

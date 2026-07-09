@@ -76,16 +76,18 @@ const UsageBlock = ({
       <Text fontSize="16px" fontWeight={700}>
         {title}
       </Text>
-      <Text fontSize="12px" className={styles.muted}>
+      <Text fontSize="13px" className={styles.muted}>
         {subtitle}
       </Text>
       <div className={styles.usageBarRow}>
-        <Text fontSize="13px">{usageLabel}</Text>
+        <Text fontSize="14px" fontWeight={600}>
+          {usageLabel}
+        </Text>
         <Text fontSize="13px" fontWeight={600}>
           {`${usage.active} / ${limit}`}
         </Text>
       </div>
-      <ProgressBar percent={percent} />
+      <ProgressBar percent={percent} className={styles.usageProgress} />
       <div className={styles.statRow}>
         <StatColumn value={usage.active} label={t("Common:Active")} />
         <StatColumn value={usage.internal} label={t("DocsConnect:Internal")} />

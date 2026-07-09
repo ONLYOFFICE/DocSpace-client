@@ -117,6 +117,7 @@
 }
 
 .sectionTitleError {
+  font-size: 14px;
   color: var(--payment-error-color);
 }
 
@@ -167,19 +168,21 @@
 
 .cardCaption {
   font-size: 12px;
+  font-weight: 400;
   line-height: 16px;
 }
 
 .noPlanCard {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 28px;
   box-sizing: border-box;
   max-width: 446px;
   padding: 16px;
   border-radius: 6px;
   border: var(--dev-tools-card-border);
   background-color: var(--background-color);
+  max-width: 320px;
 }
 
 .noPlanTitle {

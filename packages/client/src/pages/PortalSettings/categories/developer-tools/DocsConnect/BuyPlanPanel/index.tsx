@@ -285,7 +285,7 @@ const BuyPlanPanel = ({
       onClose={() => closeBuyPlan?.()}
       withBodyScroll
       withFooterBorder
-      isDoubleFooterLine={insufficientFunds || isDevPackUpgrade}
+      isDoubleFooterLine={insufficientFunds || isDevPackUpgrade || isUpgrade}
     >
       <ModalDialog.Header>
         {isEditActive
@@ -735,6 +735,21 @@ const BuyPlanPanel = ({
             <Trans
               ns="DocsConnect"
               i18nKey="BillingCycleRestartNote"
+              values={{
+                amount: formatCurrency(totalMonthly),
+                date: nextBillingDateLocalized,
+              }}
+              components={{
+                1: <Text as="span" fontWeight={600} />,
+                2: <Text as="span" fontWeight={600} />,
+              }}
+            />
+          </Text>
+        ) : isUpgrade ? (
+          <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+            <Trans
+              ns="DocsConnect"
+              i18nKey="NextMonthlyBillNote"
               values={{
                 amount: formatCurrency(totalMonthly),
                 date: nextBillingDateLocalized,

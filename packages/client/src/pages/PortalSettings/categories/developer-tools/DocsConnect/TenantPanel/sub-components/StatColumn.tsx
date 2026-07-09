@@ -54,7 +54,7 @@ const StatColumn = ({
     >
       {value}
     </Text>
-    <Text fontSize="12px" className={styles.muted}>
+    <Text fontSize="13px" fontWeight={400} className={styles.muted}>
       {label}
     </Text>
   </div>

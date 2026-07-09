@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -192,9 +192,15 @@ const Statistics = ({
           title={
             isCancellation
               ? t("Common:SubscriptionCancellation")
-              : t("Common:TariffUserAdjustmentScheduled", {
+              : t("Common:TariffUserAdjustmentScheduledWithPrice", {
                   fromCount: planUsers,
                   toCount: scheduledChange.nextUsers,
+                  price: formatCurrencyValue(
+                    i18n.language,
+                    scheduledChange.nextUsers * pricePerUser,
+                    currency,
+                    2,
+                  ),
                 })
           }
           body={
@@ -333,9 +339,9 @@ const Statistics = ({
                             ),
                             count: scheduledChange.nextUsers,
                           })
-                      : `(${t("Common:RenewsOnDate", {
+                      : t("Common:RenewsOnDate", {
                           date: formatDocsConnectDate(tenant.endDate),
-                        })})`}
+                        })}
                   </Text>
                 </Text>
               )}
@@ -359,7 +365,7 @@ const Statistics = ({
                   textDecoration="underline dashed"
                   onClick={() => openBuyPlan?.("edit")}
                 >
-                  {t("Common:EditSubscription")}
+                  {t("Common:EditButton")}
                 </Link>
               )}
             </div>
@@ -373,23 +379,30 @@ const Statistics = ({
               <div className={styles.detailRow}>
                 <Text className={styles.muted}>{t("DocsConnect:Price")}</Text>
                 <Text fontWeight={600}>
-                  {devPackEnabled
-                    ? t("DocsConnect:PricePerUserDevPackShort", {
+                  {devPackEnabled ? (
+                    <Trans
+                      t={t}
+                      i18nKey="DocsConnect:PricePerUserDevPackShortRich"
+                      values={{
                         price: formatCurrencyValue(
                           i18n.language,
                           pricePerUser,
                           currency,
                           2,
                         ),
-                      })
-                    : t("DocsConnect:PricePerUserShort", {
-                        price: formatCurrencyValue(
-                          i18n.language,
-                          pricePerUser,
-                          currency,
-                          2,
-                        ),
-                      })}
+                      }}
+                      components={{ 1: <Text as="span" fontWeight={400} /> }}
+                    />
+                  ) : (
+                    t("DocsConnect:PricePerUserShort", {
+                      price: formatCurrencyValue(
+                        i18n.language,
+                        pricePerUser,
+                        currency,
+                        2,
+                      ),
+                    })
+                  )}
                 </Text>
               </div>
               <div className={styles.detailRow}>
@@ -445,7 +458,7 @@ const Statistics = ({
         >
           {t("DocsConnect:ActivityForPeriod")}
         </Heading>
-        <Text fontSize="12px" className={styles.muted}>
+        <Text fontSize="13px" className={styles.muted}>
           {t("DocsConnect:UserActivitySubtitle")}
         </Text>
       </div>

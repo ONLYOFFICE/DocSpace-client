@@ -3,7 +3,7 @@
   "content": "Favorites",
   "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-07-04T11:30:21.773Z",
+  "updated_at": "2026-07-07T08:59:21.650Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -19,55 +19,49 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 278,
+      "line_number": 313,
       "context": "recentFolderId,\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n onClick: goRoomsScoped(\n CategoryType.Favorite,\n \"/rooms/favorite\",\n favoritesFolderId,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 278,
+      "line_number": 313,
       "context": "recentFolderId,\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n onClick: goRoomsScoped(\n CategoryType.Favorite,\n \"/rooms/favorite\",\n favoritesFolderId,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 278,
+      "line_number": 313,
       "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 278,
+      "line_number": 313,
       "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 278,
+      "line_number": 313,
       "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 278,
+      "line_number": 313,
       "context": "icon: CatalogRestoreReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=recent\"),\n },\n {\n id: \"ai-files-favorites\",\n label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n onClick: () => navigate(\"/ai-files?section=favorites\"),\n },\n {\n id: \"ai-files-trash\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 90,
-      "context": "{\n label: t(\"Common:SharedWithMe\"),\n key: FolderType.SHARE,\n },\n {\n label: t(\"Common:Favorites\"),\n key: FolderType.Favorites,\n },\n {\n label: t(\"Common:Recent\"),\n key: FolderType.Recent,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/TreeFoldersStore.js",
-      "line_number": 94,
+      "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
+      "line_number": 123,
       "context": "break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n case FolderType.Favorites:\n folder.title = i18n.t(\"Common:Favorites\");\n break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 118,
+      "line_number": 149,
       "context": "if (route === \"recent\") {\n return <AgentsHeader title={t(\"Common:Recent\")} isEmptyList={isEmpty} />;\n }\n if (route === \"favorites\") {\n return <AgentsHeader title={t(\"Common:Favorites\")} isEmptyList={isEmpty} />;\n }\n if (route === \"root\") {\n return (\n <AgentsHeader\n title={t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" })}",
       "module": "/packages/sdk"
     },

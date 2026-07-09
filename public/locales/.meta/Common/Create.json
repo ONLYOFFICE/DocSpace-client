@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2026-07-03T11:08:02.807Z",
+  "updated_at": "2026-07-07T08:59:21.678Z",
   "comment": {
     "text": "This is a dialog title for creating various entities like agents, groups, or rooms. It appears at the top of the respective creation dialogs.",
     "is_auto": true,
@@ -60,9 +60,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1549,
-      "context": "getFormGalleryContextOptions = (item, t, navigate) => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => this.onCreateTemplate(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 1766,
+      "context": "navigate?: unknown,\n ): ContextMenuModel[] => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => this.onCreateTemplate(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
       "module": "/packages/client"
     },
     {
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/index.tsx",
-      "line_number": 221,
+      "line_number": 256,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"shared_create-agent-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n primary\n scale\n isDisabled={isAgentTitleChanged || isWrongTitle || !isProfileSelected}\n isLoading={isLoading}\n type=\"submit\"",
       "module": "/packages/sdk"
     },
@@ -97,7 +97,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 587,
+      "line_number": 622,
       "context": "</div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n isLoading={isLoading}\n onClick={canStartKeySetup ? onRequestCreateKeys : onSave}",
       "module": "/packages/sdk"
     },

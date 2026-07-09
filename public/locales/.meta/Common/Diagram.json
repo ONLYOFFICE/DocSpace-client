@@ -3,7 +3,7 @@
   "content": "Diagram",
   "content_en_sha1_hash": "df5415960cfe95d2038cf9f52aaf8f174457596d",
   "created_at": "2025-07-01T15:57:10.981Z",
-  "updated_at": "2026-06-02T22:18:05.046Z",
+  "updated_at": "2026-07-07T08:59:21.823Z",
   "comment": {
     "text": "This is a noun, used as a file type label. It identifies a diagram file in lists or displays.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 25,
+      "line_number": 60,
       "context": "case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:\n case FileType.PDF:\n return t(\"Common:Document\");",
       "module": "/packages/shared"
     }

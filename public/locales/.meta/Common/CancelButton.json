@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-07-04T11:30:21.796Z",
+  "updated_at": "2026-07-07T08:59:21.680Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -283,7 +283,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 349,
+      "line_number": 354,
       "context": "visible={visible}\n headerLabel={t(\"Common:ActionRequired\")}\n isLoading={!ready}\n onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}",
       "module": "/packages/client"
     },
@@ -463,7 +463,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
-      "line_number": 95,
+      "line_number": 130,
       "context": "testId=\"lifetime_dialog_ok_button\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n testId=\"lifetime_dialog_cancel_button\"\n />",
       "module": "/packages/client"
     },
@@ -649,19 +649,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
-      "line_number": 177,
+      "line_number": 212,
       "context": "isDisabled={isPending}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n isDisabled={isPending}\n />\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
-      "line_number": 226,
+      "line_number": 261,
       "context": "onClick={handleInstallClick}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n />\n </>\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
-      "line_number": 226,
+      "line_number": 261,
       "context": "onClick={handleInstallClick}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n />\n </>\n );\n }",
       "module": "/packages/client"
     },
@@ -745,7 +745,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 354,
+      "line_number": 356,
       "context": "/>\n <div className=\"cancelUploadButton\">\n <Button\n size={isTablet() ? ButtonSize.medium : ButtonSize.small}\n className=\"cancel-btn\"\n label={t(\"Common:CancelButton\")}\n onClick={onCancel}\n scale={isMobile()}\n data-test-id=\"cancel_upload_backup_button\"\n />\n </div>",
       "module": "/packages/client"
     },
@@ -865,7 +865,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 459,
+      "line_number": 494,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"access_control_save_button\"\n cancelButtonDataTestId=\"access_control_cancel_button\"",
       "module": "/packages/client"
     },
@@ -931,7 +931,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/RevokeDialog.tsx",
-      "line_number": 123,
+      "line_number": 158,
       "context": "isLoading={isRequestRunning}\n onClick={onRevokeAction}\n testId=\"dialog_revoke_consent_button\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n scale={isMobile}\n size={ButtonSize.normal}\n isDisabled={isRequestRunning}\n onClick={onCloseAction}\n testId=\"dialog_revoke_consent_cancel_button\"",
       "module": "/packages/client"
     },
@@ -1051,97 +1051,97 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/dialogs/reset/index.tsx",
-      "line_number": 95,
+      "line_number": 130,
       "context": "isLoading={loading}\n testId=\"reset-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/DefaultProvider.tsx",
-      "line_number": 447,
+      "line_number": 482,
       "context": "isDisabled={isDisabled || isSaveDisabled}\n testId=\"default-provider-save-button\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:CancelButton\")}\n scale={false}\n onClick={onCancel}\n isDisabled={isDisabled || isCancelDisabled}\n testId=\"default-provider-cancel-button\"\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 612,
+      "line_number": 647,
       "context": "isDisabled={!canSubmit}\n testId=\"provider-save-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={isRequestRunning}\n testId=\"provider-cancel-button\"\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/ModelSettingsPanel.tsx",
-      "line_number": 168,
+      "line_number": 203,
       "context": "isDisabled={!hasChanges || displayName.trim().length === 0}\n testId=\"model-settings-save-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n testId=\"model-settings-cancel-button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/delete/index.tsx",
-      "line_number": 125,
+      "line_number": 160,
       "context": "isLoading={loading}\n testId=\"delete-provider-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 102,
+      "line_number": 137,
       "context": "isLoading={loading}\n testId=\"reset-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/add/index.tsx",
-      "line_number": 171,
+      "line_number": 206,
       "context": "isDisabled={baseParamsError ? true : !hasChanges}\n testId=\"mcp-save-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/delete/index.tsx",
-      "line_number": 83,
+      "line_number": 118,
       "context": "isLoading={loading}\n testId=\"delete-mcp-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/disable/index.tsx",
-      "line_number": 89,
+      "line_number": 124,
       "context": "isLoading={loading}\n testId=\"disable-mcp-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/edit/index.tsx",
-      "line_number": 195,
+      "line_number": 230,
       "context": "isDisabled={!hasChanges}\n testId=\"mcp-save-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={loading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/avatar-editor-dialog/index.tsx",
-      "line_number": 182,
+      "line_number": 217,
       "context": "testId=\"avatar_editor_save_button\"\n />\n <Button\n className=\"cancel-button\"\n key=\"AvatarEditorCloseBtn\"\n label={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n size={ButtonSize.normal}\n scale\n onClick={onCloseModal}\n testId=\"avatar_editor_cancel_button\"\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/EditAgentDialog.tsx",
-      "line_number": 240,
+      "line_number": 275,
       "context": "}\n isLoading={isLoading}\n />\n <Button\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onCloseAction}\n isDisabled={isLoading}\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/index.tsx",
-      "line_number": 233,
+      "line_number": 268,
       "context": "testId=\"create_agent_dialog_save\"\n />\n <Button\n id=\"shared_create-agent-modal_cancel\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n scale\n isDisabled={isLoading}\n onClick={onCloseDialog}\n testId=\"create_agent_dialog_cancel\"\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/delete-agent-dialog/index.tsx",
-      "line_number": 85,
+      "line_number": 120,
       "context": "onClick={onConfirm}\n testId=\"delete-agent-modal_submit\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n testId=\"delete-agent-modal_cancel\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/knowledge-upload-selector-dialog/index.tsx",
-      "line_number": 165,
+      "line_number": 196,
       "context": "// FilesSelectorFilterTypes is a `const enum` and the SDK runs with\n // `isolatedModules`, so SWC can't inline its value — passing the\n // string literal directly avoids a runtime import failure.\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SelectAction\", { defaultValue: \"Select\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n getFilesArchiveError={() => \"\"}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/leave-agent-dialog/index.tsx",
-      "line_number": 89,
+      "line_number": 124,
       "context": "onClick={onConfirm}\n testId=\"leave-agent-modal_submit\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n testId=\"leave-agent-modal_cancel\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/sdk"
     },
@@ -1267,19 +1267,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 599,
+      "line_number": 634,
       "context": "isLoading ||\n (canStartKeySetup ? false : !name.trim() || isKeySetupMode)\n }\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/delete-room-dialog/index.tsx",
-      "line_number": 134,
+      "line_number": 169,
       "context": "isDisabled={!isChecked}\n testId=\"delete_room_dialog_submit\"\n />\n <Button\n key=\"cancel\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"delete_room_dialog_cancel\"\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 1035,
+      "line_number": 1070,
       "context": "<Button\n className=\"cancel-button\"\n scale\n size={ButtonSize.normal}\n onClick={handleClose}\n label={t(\"Common:CancelButton\")}\n isDisabled={isLoading}\n testId=\"invite_panel_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/sdk"
     },
@@ -1291,13 +1291,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/link-settings-panel/index.tsx",
-      "line_number": 340,
+      "line_number": 375,
       "context": "<Button\n className=\"cancel-button\"\n scale\n size={ButtonSize.normal}\n onClick={onBackClick}\n label={t(\"Common:CancelButton\")}\n testId=\"link-settings_modal_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/move-to-archive-dialog/index.tsx",
-      "line_number": 102,
+      "line_number": 137,
       "context": "onClick={handleConfirm}\n testId=\"move_to_archive_dialog_submit\"\n />\n <Button\n key=\"cancel\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"move_to_archive_dialog_cancel\"\n />",
       "module": "/packages/sdk"
     },
@@ -1309,7 +1309,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/restore-room-dialog/index.tsx",
-      "line_number": 105,
+      "line_number": 140,
       "context": "onClick={handleConfirm}\n testId=\"restore_room_dialog_submit\"\n />\n <Button\n key=\"cancel\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"restore_room_dialog_cancel\"\n />",
       "module": "/packages/sdk"
     },

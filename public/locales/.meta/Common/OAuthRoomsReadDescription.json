@@ -3,7 +3,7 @@
   "content": "View all rooms",
   "content_en_sha1_hash": "591754375f09aba76e3a8dcea7c5fcb1e4f2fdfe",
   "created_at": "2025-05-19T21:30:47.074Z",
-  "updated_at": "2026-04-12T05:42:51.153Z",
+  "updated_at": "2026-07-07T08:59:21.999Z",
   "comment": {
     "text": "This is a description of an OAuth permission scope. It informs the user that an application is requesting permission to view all rooms within DocSpace.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/oauth/index.ts",
-      "line_number": 127,
+      "line_number": 162,
       "context": "case ScopeGroup.profiles:\n if (type === ScopeType.read)\n return t(\"Common:OAuthProfilesReadDescription\");\n return t(\"Common:OAuthProfilesWriteDescription\");\n case ScopeGroup.rooms:\n if (type === ScopeType.read) return t(\"Common:OAuthRoomsReadDescription\");\n return t(\"Common:OAuthRoomsWriteDescription\");\n case ScopeGroup.openid:\n return t(\"Common:OAuthOpenidOpenidDescription\");\n default:\n return \"\";",
       "module": "/packages/shared"
     }

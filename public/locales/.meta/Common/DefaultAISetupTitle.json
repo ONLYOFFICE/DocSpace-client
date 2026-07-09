@@ -3,7 +3,7 @@
   "content": "Default AI setup",
   "content_en_sha1_hash": "b517427029201e8904190b59c2a94b146cc3a267",
   "created_at": "2026-07-03T11:07:28.280Z",
-  "updated_at": "2026-07-03T11:11:37.720Z",
+  "updated_at": "2026-07-07T08:59:21.835Z",
   "comment": {
     "text": "Section heading in the AI settings menu that introduces the configuration for the default AI model setup.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/settings/model-assignment/index.tsx",
+      "line_number": 54,
+      "context": "fontWeight={700}\n fontSize=\"16px\"\n lineHeight=\"22px\"\n className={styles.defaultSetupTitle}\n >\n {t(\"Common:DefaultAISetupTitle\")}\n </Heading>\n <Text lineHeight=\"20px\" className={styles.defaultSetupDescription}>\n {t(\"Common:DefaultAISetupDescription\")}\n </Text>\n </>",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/model-assignment/ModelAssignmentSaas.tsx",
       "line_number": 233,

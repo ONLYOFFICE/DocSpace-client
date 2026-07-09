@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2025-05-19T21:30:54.976Z",
-  "updated_at": "2026-06-01T21:20:44.441Z",
+  "updated_at": "2026-07-07T08:59:21.802Z",
   "comment": {
     "text": "This is a label for a section or category. It appears in the InfoPanel to categorize members, and in Portal Settings for data import options, referring to the users of the DocSpace platform.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
-      "line_number": 119,
+      "line_number": 120,
       "context": "label: t(\"Common:Groups\"),\n list: groups,\n },\n {\n key: TInfoPanelMemberType.users,\n label: t(\"InfoPanel:Users\"),\n list: users,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"Common:Guests\"),",
       "module": "/packages/client"
     },

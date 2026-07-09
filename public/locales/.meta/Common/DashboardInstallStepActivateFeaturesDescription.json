@@ -3,7 +3,7 @@
   "content": "Enabling document editing capabilities",
   "content_en_sha1_hash": "9c197c72bc66fe4b9d3ce6a7994e819421fd1586",
   "created_at": "2026-05-24T17:27:23.270Z",
-  "updated_at": "2026-05-24T18:19:55.992Z",
+  "updated_at": "2026-07-07T08:59:21.787Z",
   "comment": {
     "text": "Description text for a step in the installation wizard, explaining the purpose of the feature activation stage.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallDocsCloudDialog.tsx",
-      "line_number": 81,
+      "line_number": 116,
       "context": "description: t(\"Common:DashboardInstallStepConfigureEditorDescription\"),\n },\n {\n id: \"activate-features\",\n label: t(\"Common:DashboardInstallStepActivateFeatures\"),\n description: t(\"Common:DashboardInstallStepActivateFeaturesDescription\"),\n },\n ];\n \n const handleInstall = React.useCallback(\n async (onStep: (id: string) => void, signal: AbortSignal) => {",
       "module": "/packages/client"
     }

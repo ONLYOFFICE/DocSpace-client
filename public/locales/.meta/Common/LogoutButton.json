@@ -3,7 +3,7 @@
   "content": "Sign out",
   "content_en_sha1_hash": "dc1649a16c1496db3e4073be6a73faf5121aeae7",
   "created_at": "2025-05-19T21:30:46.319Z",
-  "updated_at": "2026-05-15T15:37:40.199Z",
+  "updated_at": "2026-07-07T08:59:21.752Z",
   "comment": {
     "text": "This is a button label that allows a user to end their current session. It appears in a dialog for logging out of all sessions, on a portal unavailable page, and in a user menu.",
     "is_auto": true,
@@ -24,8 +24,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 527,
+      "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
+      "line_number": 616,
       "context": "if (showFrameSignOut) {\n actions.push({\n key: \"user-menu-logout\",\n icon: LogoutReactSvgUrl,\n label: t(\"Common:LogoutButton\"),\n onClick: () => this.onLogoutClick(t),\n isButton: true,\n });\n }",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "The agent <1>\"{{agentName}}\"</1> will be permanently deleted. All data and user accesses will be lost.",
   "content_en_sha1_hash": "33c2e980bc6260bd79c8768b0f141e3c68b6509a",
   "created_at": "2026-06-02T22:17:37.877Z",
-  "updated_at": "2026-06-30T10:18:29.540Z",
+  "updated_at": "2026-07-07T08:59:21.740Z",
   "comment": {
     "text": "Body text in a confirmation dialog for deleting an AI agent, warning of permanent data loss. The `agentName` variable is wrapped in a tag for bold formatting.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/delete-agent-dialog/index.tsx",
-      "line_number": 66,
+      "line_number": 101,
       "context": "<ModalDialog.Header>{t(\"Common:DeleteAIAgentTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans\n t={t}\n i18nKey=\"DeleteAIAgentDescription\"\n ns=\"Common\"\n values={{ agentName }}\n components={{ 1: <strong /> }}\n />{\" \"}\n {t(\"Common:WantToContinue\")}",
       "module": "/packages/sdk"
     }

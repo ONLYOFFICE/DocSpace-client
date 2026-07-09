@@ -3,7 +3,7 @@
   "content": "Failed to decrypt: {{fileNames}}",
   "content_en_sha1_hash": "745a9188ac06761ccb61228d2d824b9b7e6feb5a",
   "created_at": "2026-05-24T17:27:47.385Z",
-  "updated_at": "2026-07-04T11:30:21.949Z",
+  "updated_at": "2026-07-07T08:59:21.919Z",
   "comment": {
     "text": "Warning toast message appearing when a decryption operation fails for some files. The {{fileNames}} variable contains a comma-separated list of the names of the files that could not be decrypted.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1293,
+      "file_path": "/packages/client/src/store/FilesActionsStore.ts",
+      "line_number": 1584,
       "context": "operationId,\n });\n \n if (failures.length > 0) {\n toastr.warning(\n i18n.t(\"Files:DecryptPartialFailed\", {\n fileNames: failures.join(\", \"),\n }),\n null,\n 0,\n true,",
       "module": "/packages/client"
     }

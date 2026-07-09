@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2026-07-04T11:30:21.772Z",
+  "updated_at": "2026-07-07T08:59:21.648Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new room. It appears in various contexts where a user can initiate the creation of a new collaborative space.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3927,
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 4152,
       "context": "? isFlowsFolder\n ? []\n : [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: this.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : isPrivacyFolder",
       "module": "/packages/client"
     },
@@ -73,19 +73,19 @@
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 295,
+      "line_number": 296,
       "context": "}),\n ...(isSaveFormAsXLSXChanged && {\n saveFormAsXLSX,\n }),\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 295,
+      "line_number": 296,
       "context": "}),\n ...(isSaveFormAsXLSXChanged && {\n saveFormAsXLSX,\n }),\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_store/CreateEditAgentStore.tsx",
-      "line_number": 212,
+      "line_number": 247,
       "context": "const isTagsChanged = !isEqual(prevTags, currTags);\n \n const tags = newParams.tags.map((tag) => tag.name);\n \n const editAgentParams: TEditAgentData = {\n ...(isTitleChanged && { title: title || t(\"Common:NewRoom\") }),\n ...(isTagsChanged && { tags }),\n ...(isDefaultAIAgentsQuotaSet &&\n isQuotaChanged && { quota: Number(quotaLimit) }),\n ...(dialogsStore.cover && {\n cover: dialogsStore.cover.cover,",
       "module": "/packages/sdk"
     },

@@ -3,7 +3,7 @@
   "content": "Vectorization",
   "content_en_sha1_hash": "7931aa02a8abd743ba5a4eb62663710441cb75ec",
   "created_at": "2025-10-27T16:14:30.919Z",
-  "updated_at": "2026-07-03T11:08:02.866Z",
+  "updated_at": "2026-07-07T08:59:21.833Z",
   "comment": {
     "text": "This is a button label in the file context menu and header, allowing users to retry the vectorization process for a selected file.",
     "is_auto": true,
@@ -18,26 +18,26 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2304,
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 2486,
       "context": "disabled: false,\n },\n {\n id: \"option_vectorization\",\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => this.filesActionsStore.retryVectorization([item]),\n disabled: !item.security?.Vectorization,\n },\n {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2304,
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 2486,
       "context": "disabled: false,\n },\n {\n id: \"option_vectorization\",\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => this.filesActionsStore.retryVectorization([item]),\n disabled: !item.security?.Vectorization,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 490,
+      "line_number": 510,
       "context": "};\n case \"vectorization\":\n if (!this.isAvailableOption(\"vectorization\")) return null;\n return {\n id: \"menu-vectorization\",\n label: t(\"Common:Vectorization\"),\n iconUrl: RefreshReactSvgUrl,\n onClick: this.retryVectorization,\n };\n default:\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 557,
+      "line_number": 592,
       "context": "const getVectorizationItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_vectorization\",\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => onRetryVectorization?.(i),\n disabled: !onRetryVectorization || !i.security?.Vectorization,\n };\n },",
       "module": "/packages/sdk"
     }

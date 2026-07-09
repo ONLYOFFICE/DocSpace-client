@@ -3,7 +3,7 @@
   "content": "Archiving data",
   "content_en_sha1_hash": "0b71d55f4a461ddcbdf534bd0d205365234b8127",
   "created_at": "2025-05-19T21:30:43.080Z",
-  "updated_at": "2026-06-03T09:30:05.103Z",
+  "updated_at": "2026-07-07T08:59:21.903Z",
   "comment": {
     "text": "This text appears as a temporary message (e.g., in a toast notification or status bar) while files or folders are being prepared for download. It indicates that the system is compressing or packaging the data.",
     "is_auto": true,
@@ -12,32 +12,32 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 771,
-      "context": "if (isFile && encrypted) {\n downloadAction(\"\", item).catch((err) => toastr.error(err));\n } else if (isFile) {\n openUrl(viewUrl, UrlActionType.Download);\n } else {\n downloadAction(t(\"Common:ArchivingData\"), item).catch((err) =>\n toastr.error(err),\n );\n }\n };",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 1015,
+      "context": "} else if (isFile) {\n // the original .js passed viewUrl through unchecked\n // (files always carry it) — the non-null assertion keeps that behavior.\n openUrl(viewUrl!, UrlActionType.Download);\n } else {\n downloadAction(t(\"Common:ArchivingData\"), item).catch((err: unknown) =>\n toastr.error(err as string),\n );\n }\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 771,
-      "context": "if (isFile && encrypted) {\n downloadAction(\"\", item).catch((err) => toastr.error(err));\n } else if (isFile) {\n openUrl(viewUrl, UrlActionType.Download);\n } else {\n downloadAction(t(\"Common:ArchivingData\"), item).catch((err) =>\n toastr.error(err),\n );\n }\n };",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 1015,
+      "context": "} else if (isFile) {\n // the original .js passed viewUrl through unchecked\n // (files always carry it) — the non-null assertion keeps that behavior.\n openUrl(viewUrl!, UrlActionType.Download);\n } else {\n downloadAction(t(\"Common:ArchivingData\"), item).catch((err: unknown) =>\n toastr.error(err as string),\n );\n }\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 771,
-      "context": "if (isFile && encrypted) {\n downloadAction(\"\", item).catch((err) => toastr.error(err));\n } else if (isFile) {\n openUrl(viewUrl, UrlActionType.Download);\n } else {\n downloadAction(t(\"Common:ArchivingData\"), item).catch((err) =>\n toastr.error(err),\n );\n }\n };",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 1015,
+      "context": "} else if (isFile) {\n // the original .js passed viewUrl through unchecked\n // (files always carry it) — the non-null assertion keeps that behavior.\n openUrl(viewUrl!, UrlActionType.Download);\n } else {\n downloadAction(t(\"Common:ArchivingData\"), item).catch((err: unknown) =>\n toastr.error(err as string),\n );\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 94,
+      "line_number": 95,
       "context": "private openCopyPanel = () => this.dialogsStore.setCopyPanelVisible(true);\n \n private downloadHandle = () =>\n this.filesActionsStore\n .downloadAction(this.t(\"Common:ArchivingData\"))\n ?.catch((err) => toastr.error(err));\n \n private downloadAsHandle = () =>\n this.dialogsStore.setDownloadDialogVisible(true);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
-      "line_number": 97,
+      "line_number": 132,
       "context": "label: t(\"Common:Download\", { defaultValue: \"Download\" }),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n void listStore.downloadAgent(agent);\n toastr.success(\n t(\"Common:ArchivingData\", { defaultValue: \"Archiving data\" }),\n );\n },\n });\n }",
       "module": "/packages/sdk"
     },

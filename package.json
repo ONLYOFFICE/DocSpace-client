@@ -24,6 +24,8 @@
     "storybook-build": "pnpm nx storybook-build @docspace/shared",
     "storybook-serve": "pnpm nx storybook-serve @docspace/shared",
     "test": "pnpm nx test @docspace/shared",
+    "test:client": "pnpm nx test @docspace/client",
+    "test:store": "pnpm --filter @docspace/client exec vitest run src/store",
     "wipe": "pnpm nx reset && shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
     "translation-stats": "node common/scripts/translation-stats.js",
     "verify-translations": "node common/translation-app/backend/src/scripts/verify-translations-spell-check.js",

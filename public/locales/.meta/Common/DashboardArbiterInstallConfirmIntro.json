@@ -3,7 +3,7 @@
   "content": "Ask the same question to multiple AI experts and let the arbiter weigh their answers — then get a single, well-reasoned verdict. We’ll set everything up in a moment.",
   "content_en_sha1_hash": "e3ef338d0300d95e2b7259f34c5182808d01a167",
   "created_at": "2026-05-24T17:27:22.953Z",
-  "updated_at": "2026-05-24T18:23:21.545Z",
+  "updated_at": "2026-07-07T08:59:21.782Z",
   "comment": {
     "text": "Introductory text in the AI Arbiter installation confirmation dialog that explains how the feature synthesizes multiple AI expert answers into a single verdict.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
-      "line_number": 111,
+      "line_number": 146,
       "context": "<AiAgentsDarkIllustration />\n )}\n </div>\n \n <Text as=\"p\" className={styles.confirmText}>\n {t(\"Common:DashboardArbiterInstallConfirmIntro\")}\n </Text>\n \n <ul className={styles.bulletList}>\n {confirmBullets.map(({ icon: Icon, title, description }) => (\n <li key={title} className={styles.bulletItem}>",
       "module": "/packages/client"
     }

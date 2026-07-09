@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-07-04T11:30:21.804Z",
+  "updated_at": "2026-07-07T08:59:21.694Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useContacts.ts",
-      "line_number": 91,
-      "context": "const isGroups = contactsView === \"groups\";\n \n const node = isInsideGroup || isGuests ? \"people\" : contactsView;\n setSelectedNode([\"accounts\", node, \"filter\"]);\n \n setDocumentTitle(t(\"Common:Contacts\"));\n \n const getList = async () => {\n if (isGroups) {\n const newFilter = GroupsFilter.getFilter(location)!;",
+      "line_number": 93,
+      "context": "const node = isInsideGroup || isGuests ? \"people\" : contactsView;\n // getContactsView can return `false`, which the pre-TS code passed\n // through unchanged; the cast keeps that legacy runtime behavior.\n setSelectedNode([\"accounts\", node as string, \"filter\"]);\n \n setDocumentTitle(t(\"Common:Contacts\"));\n \n const getList = async () => {\n if (isGroups) {\n const newFilter = GroupsFilter.getFilter(location)!;",
       "module": "/packages/client"
     },
     {
@@ -84,9 +84,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 440,
-      "context": "const accounts =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
+      "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
+      "line_number": 525,
+      "context": "const accounts: TProfileActionType | null =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
       "module": "/packages/client"
     },
     {
@@ -97,31 +97,31 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
-      "line_number": 220,
+      "line_number": 255,
       "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:Contacts\", { defaultValue: \"Contacts\" }),\n isHeader: true,\n isLast: !tags?.length,\n withMultiItems: true,\n },\n {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/index.tsx",
-      "line_number": 57,
+      "line_number": 88,
       "context": "if (!currentAgent) return null;\n \n const tabItems = [\n {\n id: \"members\" as AgentInfoPanelView,\n name: t(\"Common:Contacts\", { defaultValue: \"Contacts\" }),\n content: null,\n onClick: () => setView(\"members\"),\n },\n {\n id: \"history\" as AgentInfoPanelView,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/Header.tsx",
-      "line_number": 72,
+      "line_number": 107,
       "context": "}, [selectedTabId, fileView, setView]);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 941,
+      "line_number": 976,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
-      "line_number": 941,
+      "line_number": 976,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/sdk"
     },

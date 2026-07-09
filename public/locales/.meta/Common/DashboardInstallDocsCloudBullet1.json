@@ -3,7 +3,7 @@
   "content": "Edit in your browser",
   "content_en_sha1_hash": "0862bd4eeab8f50fc81aa67f0f00dff3d67d6e7c",
   "created_at": "2026-05-24T17:27:23.090Z",
-  "updated_at": "2026-05-24T18:23:00.441Z",
+  "updated_at": "2026-07-07T08:59:21.787Z",
   "comment": {
     "text": "Title of a bullet point in the InstallDocsCloud installation dialog, describing a feature of the service.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallDocsCloudDialog.tsx",
-      "line_number": 100,
+      "line_number": 135,
       "context": "}, [uninstallDocsCloud]);\n \n const bullets = [\n {\n Icon: CatalogDocumentsIcon,\n title: t(\"Common:DashboardInstallDocsCloudBullet1\"),\n description: t(\"Common:DashboardInstallDocsCloudBullet1Description\"),\n },\n {\n Icon: PeopleIcon,\n title: t(\"Common:DashboardInstallDocsCloudBullet2\"),",
       "module": "/packages/client"
     }

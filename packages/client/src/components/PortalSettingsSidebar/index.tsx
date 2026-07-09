@@ -170,7 +170,7 @@ const PortalSettingsSidebar = ({
     if (isNotPaidPeriod) {
       resultTree = resultTree.filter(
         (e) =>
-          e.tKey === "Backup" ||
+          e.tKey === "Common:Backup" ||
           e.tKey === "Common:PaymentsTitle" ||
           (isOwner && e.tKey === "PortalDeletion"),
       );
@@ -195,7 +195,12 @@ const PortalSettingsSidebar = ({
     }
 
     const items: NavMenuItem[] = resultTree.map((item) => {
-      const path = `/portal-settings${getSelectedLinkByKey(`${item.key}-0`, settingsTree)}`;
+      // SaaS billing lives under its own /billing article; standalone keeps
+      // the enterprise payments page under /portal-settings/payments.
+      const path =
+        item.tKey === "Common:PaymentsTitle" && !standalone
+          ? "/billing"
+          : `/portal-settings${getSelectedLinkByKey(`${item.key}-0`, settingsTree)}`;
       return {
         id: String(item.key),
         label: mapLabel(item.tKey),
@@ -226,6 +231,7 @@ const PortalSettingsSidebar = ({
       activeId={activeId}
       variant="secondary"
       isNavLoading={isNavLoading}
+      hideBack={isNotPaidPeriod}
     />
   );
 };

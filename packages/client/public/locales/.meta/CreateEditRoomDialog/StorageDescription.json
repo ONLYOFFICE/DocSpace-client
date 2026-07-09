@@ -3,7 +3,7 @@
   "content": "Storage quota set per room. You can change this value or turn off storage limit.",
   "content_en_sha1_hash": "028c2307b0c0d07b470ccffd77f244eff388b098",
   "created_at": "2025-05-19T21:30:56.836Z",
-  "updated_at": "2026-05-24T17:27:49.071Z",
+  "updated_at": "2026-07-07T08:59:21.689Z",
   "comment": {
     "text": "This is a description displayed below the storage quota input field in room settings. It explains that the storage quota is set per room and can be changed or disabled.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/room-quota/index.tsx",
-      "line_number": 73,
+      "line_number": 108,
       "context": "isAgent\n ? t(\"CreateEditRoomDialog:StorageDescriptionAgent\", {\n defaultValue:\n \"Set a storage quota for this agent. When the limit is reached, new files cannot be uploaded.\",\n })\n : t(\"CreateEditRoomDialog:StorageDescription\", {\n defaultValue: \"Set a storage quota for this room.\",\n })\n }\n checkboxLabel={\n isAgent",
       "module": "/packages/sdk"
     }

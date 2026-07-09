@@ -3,7 +3,7 @@
   "content": "Choose which model will be used by default in chats and agents.",
   "content_en_sha1_hash": "55ede6370e10e2d2a9e926668e0e53565eedbcef",
   "created_at": "2026-07-03T11:07:28.263Z",
-  "updated_at": "2026-07-03T11:11:54.121Z",
+  "updated_at": "2026-07-07T08:59:21.835Z",
   "comment": {
     "text": "Subtext for a setting heading in the AI configuration panel, explaining how to select a default model for chats and agents.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/settings/model-assignment/index.tsx",
+      "line_number": 57,
+      "context": "className={styles.defaultSetupTitle}\n >\n {t(\"Common:DefaultAISetupTitle\")}\n </Heading>\n <Text lineHeight=\"20px\" className={styles.defaultSetupDescription}>\n {t(\"Common:DefaultAISetupDescription\")}\n </Text>\n </>\n }\n />\n );",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/model-assignment/ModelAssignmentSaas.tsx",
       "line_number": 236,

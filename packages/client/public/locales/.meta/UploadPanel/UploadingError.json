@@ -3,7 +3,7 @@
   "content": "Uploading error",
   "content_en_sha1_hash": "74bbf25ed71d73b3e82807956ea28f7ff3789dd6",
   "created_at": "2025-05-19T21:30:49.954Z",
-  "updated_at": "2026-06-09T09:43:10.810Z",
+  "updated_at": "2026-07-07T08:59:21.686Z",
   "comment": {
     "text": "This is an error message displayed in a tooltip when a file upload fails, or as a toast notification when multiple files fail to upload.",
     "is_auto": true,
@@ -18,9 +18,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 2553,
-      "context": ");\n return;\n }\n \n if (totalErrorsCount > 1) {\n toastr.error(t(\"UploadPanel:UploadingError\"));\n return;\n }\n \n const errorItem = filesWithErrors[0];\n const passwordErrorIndex = errorItem.error.indexOf(\"password\");",
+      "file_path": "/packages/client/src/store/UploadDataStore.tsx",
+      "line_number": 2740,
+      "context": ");\n return;\n }\n \n if (totalErrorsCount > 1) {\n toastr.error(t(\"UploadPanel:UploadingError\"));\n return;\n }\n \n const errorItem = filesWithErrors[0];\n // the original .js called error.indexOf without a guard —",
       "module": "/packages/client"
     }
   ],

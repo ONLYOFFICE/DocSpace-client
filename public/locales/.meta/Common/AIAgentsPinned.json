@@ -3,7 +3,7 @@
   "content": "{{aiAgents}} pinned",
   "content_en_sha1_hash": "eb082fefead670be95a56c7f27e16e6830f2bcff",
   "created_at": "2025-12-19T13:03:48.272Z",
-  "updated_at": "2026-07-04T11:30:21.950Z",
+  "updated_at": "2026-07-07T08:59:21.933Z",
   "comment": {
     "text": "Toast message indicating that multiple AI agents have been pinned. `{{aiAgents}}` is a plural noun for \"AI agents\".",
     "is_auto": true,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1849,
+      "file_path": "/packages/client/src/store/filesActionsStore/helpers.ts",
+      "line_number": 144,
       "context": "if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"Common:AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"Common:AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"Common:AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"Common:AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin\n ? t(\"Common:RoomPinned\")\n : t(\"Common:RoomUnpinned\");",
       "module": "/packages/client"
     }

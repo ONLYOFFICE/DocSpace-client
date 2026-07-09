@@ -682,6 +682,36 @@
       }
     },
     {
+      "label": "Test | Vitest:client",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:store",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:store",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | E2E All - Build",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml build e2e-tests",

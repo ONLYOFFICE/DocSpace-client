@@ -3,7 +3,7 @@
   "content": "Folder",
   "content_en_sha1_hash": "30baa24967e08965d1594408031f0324ae11ccac",
   "created_at": "2025-05-19T21:30:45.416Z",
-  "updated_at": "2026-07-03T11:08:02.786Z",
+  "updated_at": "2026-07-07T08:59:21.646Z",
   "comment": {
     "text": "This is a button label for creating a new folder or uploading an existing folder. It appears in menus related to adding new content.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 495,
+      "line_number": 503,
       "context": "icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",\n label: t(\"Common:Folder\"),\n icon: FolderReactSvgUrl,\n onClick: () => actions.onUploadAction(\"folder\"),\n },\n ],\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 495,
+      "line_number": 503,
       "context": "icon: FormBlankIcon,\n onClick: () => actions.onUploadAction(\"file\"),\n },\n {\n key: \"upload-folder\",\n label: t(\"Common:Folder\"),\n icon: FolderReactSvgUrl,\n onClick: () => actions.onUploadAction(\"folder\"),\n },\n ],\n };",
       "module": "/packages/client"
     },
@@ -55,19 +55,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 104,
+      "line_number": 139,
       "context": "onClick: () => openCreateDialog(\"pdf\"),\n },\n {\n id: \"actions_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:Folder\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => openCreateDialog(\"folder\"),\n },\n {\n key: \"separator-1\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_hooks/useDocsMenuModels.tsx",
-      "line_number": 104,
+      "line_number": 139,
       "context": "onClick: () => openCreateDialog(\"pdf\"),\n },\n {\n id: \"actions_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:Folder\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => openCreateDialog(\"folder\"),\n },\n {\n key: \"separator-1\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 32,
+      "line_number": 67,
       "context": "case FileType.OFormTemplate:\n case FileType.OForm:\n case FileType.PDF:\n return t(\"Common:Document\");\n default:\n return t(\"Common:Folder\");\n }\n };",
       "module": "/packages/shared"
     }

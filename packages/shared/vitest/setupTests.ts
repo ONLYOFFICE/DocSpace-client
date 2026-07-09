@@ -129,6 +129,14 @@ vi.mock("react-i18next", () => ({
   // not throw "No export is defined on the mock".
   initReactI18next: { type: "3rdParty", init: () => {} },
   I18nextProvider: ({ children }: { children: React.ReactNode }) => children,
+  // Store code outside React components (e.g. UploadDataStore encryption
+  // paths) resolves translations via getI18n().t — echo the key, matching
+  // the useTranslation stub above.
+  getI18n: () => ({
+    t: (key: string) => key,
+    language: "en",
+    changeLanguage: () => Promise.resolve(),
+  }),
 }));
 
 vi.mock("../utils/image-helpers", () => ({

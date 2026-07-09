@@ -33,145 +33,54 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
-import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-
 import {
   checkFileConflicts,
-  deleteFile,
-  deleteFolder,
   downloadFiles,
   emptyTrash,
-  finalizeVersion,
-  lockFile,
   markAsRead,
   removeFiles,
-  createFolder,
-  moveToFolder,
-  duplicate,
-  getFolder,
-  deleteFilesFromRecent,
   changeIndex,
-  reorderIndex,
-  deleteVersionFile,
-  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
-import { loadRoomMemberKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import {
-  AnalyticsEvents,
-  Events,
-  ExportRoomIndexTaskStatus,
   FileAction,
   FileStatus,
   FolderType,
   RoomsType,
-  ShareAccessRights,
-  ValidationStatus,
   VDRIndexingAction,
-  RoomSearchArea,
-  UrlActionType,
   VectorizationStatus,
 } from "@docspace/shared/enums";
-import { makeAutoObservable, runInAction } from "mobx";
-
-import { toastr } from "@docspace/ui-kit/components/toast";
-import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
-import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
-import {
-  isFile as isFileCheck,
-  isFolder as isFolderCheck,
-} from "@docspace/shared/utils/typeGuards";
-
-import {
-  FILTER_ARCHIVE_DOCUMENTS,
-  FILTER_ROOM_DOCUMENTS,
-} from "@docspace/shared/utils/filterConstants";
-
-import {
-  downloadAndDecryptFile,
-  downloadAndDecryptFileToBuffer,
-  createZipFromBuffers,
-  deduplicateFileNames,
-  triggerFileDownload,
-} from "@docspace/shared/services/private-room/encrypted-download";
-import {
-  decryptEncryptedItemToFile,
-  addCopySuffix,
-  tagFileForCopy,
-} from "@docspace/shared/services/private-room/encrypted-copy";
-import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
-import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
-
-import {
-  getCategoryTypeByFolderType,
-  getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
-import { getSectionTrashTarget } from "SRC_DIR/helpers/articleNavigation";
-import { muteRoomNotification } from "@docspace/shared/api/settings";
+import { makeAutoObservable } from "mobx";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import UsersFilter from "@docspace/shared/api/people/filter";
-import GroupsFilter from "@docspace/shared/api/groups/filter";
-import {
-  frameCallEvent,
-  getConvertedSize,
-  getObjectByLocation,
-  getCategoryType,
-  splitFileAndFolderIds,
-} from "@docspace/shared/utils/common";
-import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { createLoader } from "@docspace/shared/utils/createLoader";
-
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
-import {
-  getEmptyPersonalProgress,
-  startEmptyPersonal,
-} from "@docspace/shared/api/people";
-import api from "@docspace/shared/api";
-import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
-import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
-import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
-
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
-import { FileOperationStatus } from "@docspace/shared/enums";
-
 import type { Nullable, TTranslation } from "@docspace/shared/types";
-import type { TFileConvertId } from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
+import type {
+  TFileConvertId,
+} from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
 import type {
   TFile,
   TFileSecurity,
   TFileViewAccessibility,
   TFolder,
   TFolderSecurity,
-  TGetFolder,
-  TIndexItems,
-  TOperation,
 } from "@docspace/shared/api/files/types";
 import type { TExportRoomIndexTask } from "@docspace/shared/api/rooms/types";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
-import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
-import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-
-import i18n from "../i18n";
+import type {
+  CurrentTariffStatusStore,
+} from "@docspace/shared/store/CurrentTariffStatusStore";
+import type {
+  CurrentQuotasStore,
+} from "@docspace/shared/store/CurrentQuotaStore";
 import FilesHeaderOptionStore from "./FilesHeaderOptionStore";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import {
-  SECTION_ROOT_FOLDER_TYPES,
   changeCustomFilter as changeCustomFilterHelper,
-  checkExportRoomIndexProgress,
-  convertToArray,
-  convertToTree,
   nameWithoutExtension as nameWithoutExtensionHelper,
-  setPinAction as setPinActionHelper,
 } from "./filesActionsStore/helpers";
 import type { TTreeNode, TUploadTreeFile } from "./filesActionsStore/helpers";
-
 import {
   isAvailableOptionImpl,
   getOptionImpl,

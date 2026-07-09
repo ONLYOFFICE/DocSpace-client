@@ -72,7 +72,6 @@ import {
 } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -123,6 +122,12 @@ import {
   moveToCopyToImpl,
   navigateToNewFolderLocationImpl,
 } from "./uploadDataStore/operations.helpers";
+import {
+  convertFileFromFilesImpl,
+  retryConvertFilesImpl,
+  setConversionPercentImpl,
+  startConversionFromFilesImpl,
+} from "./uploadDataStore/conversion.helpers";
 
 import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
@@ -137,7 +142,7 @@ export type { TUploadFile } from "./uploadDataStore/helpers";
 
 type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
 
-type TConversionFile = {
+export type TConversionFile = {
   fileId: number | null;
   fileInfo: TFile | null;
   uniqueId?: string;
@@ -784,57 +789,7 @@ class UploadDataStore {
     file: TConversionFile,
     t: TTranslation,
     isOpen?: boolean,
-  ) => {
-    this.dialogsStore.setConvertItem(null);
-    const fileIndex =
-      file.index ??
-      this.displayedConversionFiles.findIndex(
-        (el) => el.fileId === file.fileId,
-      );
-
-    if (fileIndex > -1 && this.displayedConversionFiles[fileIndex].inConversion)
-      return;
-
-    const secondConvertingWithPassword =
-      hasOwnProperty(file, "password") || fileIndex > -1;
-    const conversionPositionIndex =
-      hasOwnProperty(file, "index") || fileIndex > -1;
-
-    this.primaryProgressDataStore.setPrimaryProgressBarData({
-      operation: OPERATIONS_NAME.convert,
-      alert: false,
-      // the original .js expression `!length === 0` compares a
-      // boolean to a number and therefore always evaluates to false; the cast
-      // keeps the expression (and its result) unchanged.
-      completed: (!this.activeConversionQueue.length as unknown) === 0,
-      showPanel: this.setConversionPanelVisible,
-      withoutProgress: true,
-    });
-
-    const isFirstConversion = !this.activeConversionQueue.length;
-    this.activeConversionQueue.push(file);
-
-    const shouldUpdateExistingFile =
-      secondConvertingWithPassword && conversionPositionIndex;
-
-    if (shouldUpdateExistingFile) {
-      const updatedFile = this.displayedConversionFiles[fileIndex];
-
-      // the original .js assumed fileInfo is set on both items
-      // in the "second conversion with password" flow (would throw otherwise).
-      updatedFile.fileInfo!.fileExst = file.fileInfo!.fileExst;
-
-      this.displayedConversionFiles[fileIndex].action = "convert";
-      this.displayedConversionFiles[fileIndex].error = null;
-      this.displayedConversionFiles[fileIndex].errorShown = false;
-    } else {
-      this.displayedConversionFiles.push(file);
-    }
-
-    if (isFirstConversion) {
-      this.startConversionFromFiles(t, isOpen);
-    }
-  };
+  ) => convertFileFromFilesImpl(this, file, t, isOpen);
 
   convertFile = (file: TUploadFile, t: TTranslation, isOpen?: boolean) => {
     this.dialogsStore.setConvertItem(null);
@@ -883,157 +838,14 @@ class UploadDataStore {
   getFilesPercent = () =>
     getFilesPercentImpl({ uploadedFilesHistory: this.uploadedFilesHistory });
 
-  setConversionPercent = (percent: number, alert?: boolean) => {
-    const data = {
-      operation: OPERATIONS_NAME.upload,
-      percent,
-      completed: false,
-    };
-
-    if (this.uploaded) {
-      this.primaryProgressDataStore.setPrimaryProgressBarData(
-        alert ? { ...data, ...{ alert } } : data,
-      );
-    }
-  };
+  setConversionPercent = (percent: number, alert?: boolean) =>
+    setConversionPercentImpl(this, percent, alert);
 
   getConversationPercent = (fileIndex: number) =>
     getConversationPercentImpl(fileIndex, { files: this.files });
 
-  startConversionFromFiles = async (t: TTranslation, isOpen = false) => {
-    const operationName = OPERATIONS_NAME.convert;
-
-    runInAction(() => (this.convertedFromFiles = false));
-
-    let index = 0;
-    this.activeConversionQueue = removeDuplicate(this.activeConversionQueue);
-    const filesToConversion = this.activeConversionQueue;
-
-    while (index < filesToConversion.length) {
-      const conversionItem = filesToConversion[index];
-      const { fileId, password, format } = conversionItem;
-      const itemPassword = password || null;
-
-      // `find` and `findIndex` use the same predicate on the
-      // same array, so after the `fileIndex === -1` break the original .js
-      // relied on historyFile being defined; the non-null assertions keep it.
-      const historyFile = this.displayedConversionFiles.find(
-        (f) => f.fileId === fileId,
-      );
-      const fileIndex = this.displayedConversionFiles.findIndex(
-        (f) => f.fileId === fileId,
-      );
-
-      if (fileIndex === -1) break;
-
-      runInAction(() => (historyFile!.inConversion = true));
-
-      const res = convertFile(fileId, format, itemPassword).catch(() => {
-        const error = t("Common:FailedToConvert");
-
-        runInAction(() => {
-          historyFile!.error = error;
-        });
-
-        if (this.convertedFromFiles) {
-          this.primaryProgressDataStore.setPrimaryProgressBarData({
-            operation: operationName,
-            alert: true,
-          });
-        }
-
-        return null;
-      });
-
-      const data = await res;
-      if (!data || !data[0]) {
-        index++;
-        break;
-      }
-
-      let progress: number | undefined = data[0].progress;
-      let fileInfo: TFile | "password" | null | undefined = null;
-      let error: string | null | undefined = null;
-
-      // `(progress ?? 100) < 100` is runtime-identical to the
-      // original `progress < 100` (undefined < 100 is false, as is 100 < 100).
-      while ((progress ?? 100) < 100) {
-        const response = await getConversationProgress(fileId);
-        progress = response?.[0]?.progress;
-        fileInfo = response?.[0]?.result;
-
-        historyFile!.convertProgress = progress;
-
-        error = response && response[0] && response[0].error;
-
-        if (error?.length) {
-          this.primaryProgressDataStore.setPrimaryProgressBarData({
-            operation: operationName,
-            alert: true,
-          });
-
-          runInAction(() => {
-            historyFile!.error = error;
-            historyFile!.inConversion = false;
-            historyFile!.needPassword = fileInfo === "password";
-          });
-
-          break;
-        }
-      }
-
-      if (progress === 100) {
-        if (!error) error = data[0].error;
-
-        if (!error && isOpen && data && data[0]) {
-          // the original .js read fileInfo.id without a guard
-          // (fileInfo is the conversion result; would throw on null).
-          this.filesStore.openDocEditor((fileInfo as TFile).id);
-        }
-
-        runInAction(() => {
-          historyFile!.error = error;
-          historyFile!.convertProgress = progress;
-          historyFile!.inConversion = false;
-
-          // the original .js called error.indexOf without a
-          // guard (would throw when the conversion result has no error text).
-          if (error!.indexOf("password") !== -1) {
-            historyFile!.needPassword = true;
-          } else historyFile!.action = "converted";
-
-          if (fileInfo && fileInfo !== "password") {
-            historyFile!.fileInfo = fileInfo;
-          }
-        });
-
-        if (
-          !historyFile?.error &&
-          (historyFile?.fileInfo?.version ?? 0) > 2
-        ) {
-          this.filesStore.setHighlightFile({
-            highlightFileId: historyFile!.fileInfo!.id,
-            isFileHasExst: !historyFile!.fileInfo!.fileExst,
-          });
-        }
-      }
-
-      index++;
-    }
-
-    this.primaryProgressDataStore.setPrimaryProgressBarData({
-      operation: operationName,
-      completed: true,
-    });
-
-    runInAction(() => {
-      this.convertedFromFiles = true;
-
-      if (this.convertedFromFiles) {
-        this.activeConversionQueue = [];
-      }
-    });
-  };
+  startConversionFromFiles = (t: TTranslation, isOpen = false) =>
+    startConversionFromFilesImpl(this, t, isOpen);
 
   startConversion = async (t: TTranslation, isOpen = false) => {
     const { isRecentFolder, isFavoritesFolder, isSharedWithMeFolder } =
@@ -2093,26 +1905,8 @@ class UploadDataStore {
     }
   };
 
-  retryConvertFiles = (t: TTranslation, fileId: number) => {
-    const fileIndex = this.files.findIndex((f) => f.fileId === fileId);
-    const fileConversionInxex = this.displayedConversionFiles.findIndex(
-      (f) => f.fileId === fileId,
-    );
-
-    if (fileIndex > -1) {
-      const retryFile = this.files[fileIndex];
-      retryFile.inConversion = false;
-    }
-
-    if (fileConversionInxex === -1) return;
-
-    const retryFileConversion =
-      this.displayedConversionFiles[fileConversionInxex];
-
-    retryFileConversion.inConversion = false;
-
-    this.convertFileFromFiles(retryFileConversion, t);
-  };
+  retryConvertFiles = (t: TTranslation, fileId: number) =>
+    retryConvertFilesImpl(this, t, fileId);
 
   retryUploadFiles = (t: TTranslation, uniqueId: string) => {
     const fileIndex = this.files.findIndex((f) => f.uniqueId === uniqueId);

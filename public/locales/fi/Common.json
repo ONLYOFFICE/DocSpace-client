@@ -596,7 +596,6 @@
   "CurrentMonthToDateSpend": "Kuluvan kuukauden kulutus tähän mennessä",
   "CurrentPassphrase": "Nykyinen salauslause",
   "CurrentPassphraseRequired": "Nykyinen salauslause vaaditaan",
-  "CurrentPaymentMonth": "Nykyinen maksu: {{price}}/kk ({{size}})",
   "CurrentPlan": "Nykyinen tilaus",
   "CurrentSubscription": "Nykyinen tilaus",
   "Custom": "Mukautettu",

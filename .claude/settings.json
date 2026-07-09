@@ -53,7 +53,8 @@
       "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.open.test.ts)",
       "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.drag.test.ts)",
       "Bash(pnpm --filter @docspace/client exec tsc)",
-      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.tree.test.ts)"
+      "Bash(pnpm --filter @docspace/client exec vitest run src/store/filesActionsStore/__tests__/FilesActionsStore.tree.test.ts)",
+      "Bash(python3 /tmp/fa_extract.py '[ *)"
     ]
   }
 }

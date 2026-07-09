@@ -172,6 +172,33 @@ import {
 } from "./filesActionsStore/helpers";
 import type { TTreeNode, TUploadTreeFile } from "./filesActionsStore/helpers";
 
+import {
+  isAvailableOptionImpl,
+  getOptionImpl,
+  getRecycleBinFolderOptionsImpl,
+  getFavoritesFolderOptionsImpl,
+  getPrivacyFolderOptionImpl,
+  getShareFolderOptionsImpl,
+  getRecentFolderOptionsImpl,
+  getArchiveRoomsFolderOptionsImpl,
+  getRoomsFolderOptionsImpl,
+  getTemplatesFolderOptionsImpl,
+  getAIAgentsFolderOptionsImpl,
+  getAnotherFolderOptionsImpl,
+  getHeaderMenuImpl,
+} from "./filesActionsStore/menu.helpers";
+import {
+  setListOrderImpl,
+  setFilesOrderImpl,
+  revokeFilesOrderImpl,
+  changeIndexImpl,
+  saveIndexOfFilesImpl,
+  reorderIndexOfFilesImpl,
+  checkPreviousExportRoomIndexInProgressImpl,
+  loopExportRoomIndexStatusCheckingImpl,
+  onSuccessExportRoomIndexImpl,
+  exportRoomIndexImpl,
+} from "./filesActionsStore/indexing.helpers";
 import type UploadDataStore from "./UploadDataStore";
 import type TreeFoldersStore from "./TreeFoldersStore";
 import type SelectedFolderStore from "./SelectedFolderStore";
@@ -187,9 +214,9 @@ import type IndexingStore from "./IndexingStore";
 import type VersionHistoryStore from "./VersionHistoryStore";
 import type AiRoomStore from "./AiRoomStore";
 
-type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
+export type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
 
-type TItemSecurity = Partial<TFileSecurity & TFolderSecurity & TRoomSecurity>;
+export type TItemSecurity = Partial<TFileSecurity & TFolderSecurity & TRoomSecurity>;
 
 export type TActionItem = {
   id: number;
@@ -232,40 +259,40 @@ export type TActionItem = {
   webUrl?: string;
 };
 
-type TDeleteTranslations = { deleteFromTrash: string };
-type TSuccessTranslations = { successOperation: string };
-type TDownloadTranslations = {
+export type TDeleteTranslations = { deleteFromTrash: string };
+export type TSuccessTranslations = { successOperation: string };
+export type TDownloadTranslations = {
   label?: string;
   error?: string;
   passwordError?: string;
 };
-type TRemoveTranslations = {
+export type TRemoveTranslations = {
   successRemoveTemplate?: string;
   successRemoveRoom?: string;
   successRemoveRooms?: string;
 };
 
-type TEmptyPersonalProgress = {
+export type TEmptyPersonalProgress = {
   error?: unknown;
   percentage?: number;
   isCompleted?: boolean;
 };
 
-type TCategoryType = (typeof CategoryType)[keyof typeof CategoryType];
+export type TCategoryType = (typeof CategoryType)[keyof typeof CategoryType];
 
-type TPluginFileItem = NonNullable<
+export type TPluginFileItem = NonNullable<
   PluginStore["fileItemsList"]
 >[number]["value"];
 
-type THeaderMenuOption = ReturnType<FilesHeaderOptionStore["getOption"]>;
+export type THeaderMenuOption = ReturnType<FilesHeaderOptionStore["getOption"]>;
 
-type TItemsCollection = Map<string, THeaderMenuOption | object>;
+export type TItemsCollection = Map<string, THeaderMenuOption | object>;
 
 // the operation payload forwarded to
 // UploadDataStore.itemOperationToFolder; folderTitle/isAI are extra fields
 // carried along for still-.js consumers (ConflictResolveDialog reads them
 // from dialogsStore).
-type TOperationDataPayload = {
+export type TOperationDataPayload = {
   destFolderId: number | string | null | undefined;
   destFolderInfo?: TFolder;
   folderIds: number[];
@@ -2905,123 +2932,7 @@ class FilesActionStore {
     }
   };
 
-  isAvailableOption = (option: string) => {
-    const {
-      canConvertSelected,
-      hasSelection,
-      allFilesIsEditing,
-      selection,
-      hasRoomsToResetQuota,
-      hasRoomsToDisableQuota,
-      hasRoomsToChangeQuota,
-      hasAIAgentsToChangeQuota,
-      hasAIAgentsToDisableQuota,
-      hasAIAgentsToResetQuota,
-    } = this.filesStore;
-
-    const { rootFolderType } = this.selectedFolderStore;
-    const canDownload = selection.every((s) => s.security?.Download);
-
-    switch (option) {
-      case "copy": {
-        const canCopy = selection.every((s) => s.security?.Copy);
-
-        return hasSelection && canCopy;
-      }
-      case "showInfo":
-      case "download":
-        return hasSelection && canDownload;
-      case "downloadAs":
-        return canDownload && canConvertSelected;
-      case "moveTo": {
-        const canMove = selection.every((s) => s.security?.Move);
-
-        return (
-          hasSelection &&
-          !allFilesIsEditing &&
-          canMove &&
-          rootFolderType !== FolderType.TRASH
-        );
-      }
-      case "archive": {
-        const canArchive = selection.every((s) => s.security?.Move);
-
-        return hasSelection && canArchive;
-      }
-      case "unarchive": {
-        const canUnArchive = selection.some((s) => s.security?.Move);
-
-        return canUnArchive;
-      }
-      case "delete-room": {
-        const canDelete = selection.some((s) => s.security?.Delete);
-
-        return canDelete;
-      }
-      case "delete-agent": {
-        const canRemove =
-          selection.length === 1 && selection[0]?.security?.Delete;
-
-        return canRemove;
-      }
-      case "delete": {
-        const canDelete = selection.some((s) => s.security?.Delete);
-
-        return !allFilesIsEditing && canDelete && hasSelection;
-      }
-      case "create-room": {
-        const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
-        return canCreateRoom;
-      }
-      case "create-group": {
-        const { organizeRoomsGrouping } = this.filesSettingsStore;
-        const { isRoomsFolder } = this.treeFoldersStore;
-        return organizeRoomsGrouping && isRoomsFolder && hasSelection;
-      }
-      case "add-to-group": {
-        const { organizeRoomsGrouping } = this.filesSettingsStore;
-        const { isRoomsFolder } = this.treeFoldersStore;
-        const { roomGroups } = this.dialogsStore;
-        return (
-          organizeRoomsGrouping &&
-          isRoomsFolder &&
-          hasSelection &&
-          roomGroups &&
-          roomGroups.length > 0
-        );
-      }
-      case "remove-from-group": {
-        const { organizeRoomsGrouping } = this.filesSettingsStore;
-        const { isRoomsFolder } = this.treeFoldersStore;
-        const { roomGroups } = this.dialogsStore;
-        const currentGroupId = this.filesStore.roomsFilter?.groupId;
-        return (
-          organizeRoomsGrouping &&
-          isRoomsFolder &&
-          hasSelection &&
-          roomGroups &&
-          roomGroups.length > 0 &&
-          !!currentGroupId
-        );
-      }
-      case "change-quota":
-        return hasRoomsToChangeQuota;
-      case "change-agent-quota":
-        return hasAIAgentsToChangeQuota;
-      case "disable-quota":
-        return hasRoomsToDisableQuota;
-      case "disable-agent-quota":
-        return hasAIAgentsToDisableQuota;
-      case "default-quota":
-        return hasRoomsToResetQuota;
-      case "default-agent-quota":
-        return hasAIAgentsToResetQuota;
-      case "vectorization":
-        return selection.some((s) => s.security?.Vectorization);
-      default:
-        return false;
-    }
-  };
+  isAvailableOption = (option: string)=> isAvailableOptionImpl(this, option);
 
   pinRooms = (t: TTranslation) => {
     const { selection } = this.filesStore;
@@ -3270,272 +3181,29 @@ class FilesActionStore {
     }
   };
 
-  getOption = (option: string, t: TTranslation) => {
-    // FilesHeaderOptionStore types `t` as the branded i18next
-    // TFunction; this store receives plain translation callbacks from
-    // still-.js callers, hence the erased cast.
-    return this.filesHeaderOptionStore.getOption(
-      option,
-      t as unknown as Parameters<FilesHeaderOptionStore["getOption"]>[1],
-    );
-  };
+  getOption = (option: string, t: TTranslation)=> getOptionImpl(this, option, t);
 
-  getRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    let pinName = "unpin";
-    const { selection } = this.filesStore;
+  getRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getRoomsFolderOptionsImpl(this, itemsCollection, t);
 
-    const hasFormRoom = selection.some(
-      (item) => item.roomType === RoomsType.FormRoom,
-    );
+  getAIAgentsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getAIAgentsFolderOptionsImpl(this, itemsCollection, t);
 
-    selection.forEach((item) => {
-      if (!item.pinned) pinName = "pin";
-    });
+  getArchiveRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getArchiveRoomsFolderOptionsImpl(this, itemsCollection, t);
 
-    const pin = this.getOption(pinName, t);
-    const createGroup = this.getOption("create-group", t);
-    const addToGroup = this.getOption("add-to-group", t);
-    const removeFromGroup = this.getOption("remove-from-group", t);
-    const changeQuota = this.getOption("change-quota", t);
-    const disableQuota = this.getOption("disable-quota", t);
-    const defaultQuota = this.getOption("default-quota", t);
-    const deleteOption = this.getOption("delete-room", t);
+  getTemplatesFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getTemplatesFolderOptionsImpl(this, itemsCollection, t);
 
-    itemsCollection
-      .set(pinName, pin)
-      .set("create-group", createGroup)
-      .set("add-to-group", addToGroup)
-      .set("remove-from-group", removeFromGroup);
+  getAnotherFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getAnotherFolderOptionsImpl(this, itemsCollection, t);
 
-    if (!hasFormRoom) itemsCollection.set("archive", this.getOption("archive", t));
+  getRecentFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getRecentFolderOptionsImpl(this, itemsCollection, t);
 
-    itemsCollection
-      .set("change-quota", changeQuota)
-      .set("default-quota", defaultQuota)
-      .set("disable-quota", disableQuota)
-      .set("delete", deleteOption);
+  getShareFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getShareFolderOptionsImpl(this, itemsCollection, t);
 
-    return convertToArray(itemsCollection);
-  };
+  getPrivacyFolderOption = (itemsCollection: TItemsCollection, t: TTranslation)=> getPrivacyFolderOptionImpl(this, itemsCollection, t);
 
-  getAIAgentsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    let pinName = "unpin";
-    const { selection } = this.filesStore;
+  getFavoritesFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getFavoritesFolderOptionsImpl(this, itemsCollection, t);
 
-    selection.forEach((item) => {
-      if (!item.pinned) pinName = "pin";
-    });
+  getRecycleBinFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation)=> getRecycleBinFolderOptionsImpl(this, itemsCollection, t);
 
-    const pin = this.getOption(pinName, t);
-    const changeQuota = this.getOption("change-agent-quota", t);
-    const disableQuota = this.getOption("disable-agent-quota", t);
-    const defaultQuota = this.getOption("default-agent-quota", t);
-    const deleteOption = this.getOption("delete-room", t);
-
-    itemsCollection
-      .set(pinName, pin)
-      .set("change-agent-quota", changeQuota)
-      .set("default-agent-quota", defaultQuota)
-      .set("disable-agent-quota", disableQuota)
-      .set("delete", deleteOption);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getArchiveRoomsFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    const archive = this.getOption("unarchive", t);
-    const deleteOption = this.getOption("delete-room", t);
-    const showOption = this.getOption("show-info", t);
-
-    itemsCollection
-      .set("unarchive", archive)
-      .set("show-info", showOption)
-      .set("delete", deleteOption);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getTemplatesFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    const deleteOption = this.getOption("delete", t);
-
-    itemsCollection.set("delete", deleteOption);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getAnotherFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    const createRoom = this.getOption("create-room", t);
-    const download = this.getOption("download", t);
-    const downloadAs = this.getOption("downloadAs", t);
-    const moveTo = this.getOption("moveTo", t);
-    const copy = this.getOption("copy", t);
-    const deleteOption = this.getOption("delete", t);
-    const showInfo = this.getOption("showInfo", t);
-    const vectorization = this.getOption("vectorization", t);
-
-    itemsCollection
-      .set("vectorization", vectorization)
-      .set("createRoom", createRoom)
-      .set("download", download)
-      .set("downloadAs", downloadAs)
-      .set("moveTo", moveTo)
-      .set("copy", copy)
-      .set("delete", deleteOption)
-      .set("showInfo", showInfo);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getRecentFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    const download = this.getOption("download", t);
-    const downloadAs = this.getOption("downloadAs", t);
-    const showInfo = this.getOption("show-info", t);
-    const removeFromRecent = this.getOption("remove-from-recent", t);
-
-    itemsCollection
-      .set("download", download)
-      .set("downloadAs", downloadAs)
-      .set("showInfo", showInfo)
-      .set("removeFromRecent", removeFromRecent);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getShareFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    const { setDeleteDialogVisible, setUnsubscribe } = this.dialogsStore;
-
-    const download = this.getOption("download", t);
-    const downloadAs = this.getOption("downloadAs", t);
-    const copy = this.getOption("copy", t);
-    const showInfo = this.getOption("showInfo", t);
-
-    itemsCollection
-
-      .set("download", download)
-      .set("downloadAs", downloadAs)
-      .set("copy", copy)
-      .set("delete", {
-        id: "menu-remove-from-shared-with-me",
-        key: "remove-from-shared-with-me",
-        label: t("Common:RemoveFromList"),
-        onClick: () => {
-          setUnsubscribe(true);
-          setDeleteDialogVisible(true);
-        },
-        iconUrl: RemoveOutlineSvgUrl,
-      })
-      .set("showInfo", showInfo);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getPrivacyFolderOption = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    const moveTo = this.getOption("moveTo", t);
-    const deleteOption = this.getOption("delete", t);
-    const download = this.getOption("download", t);
-    const showInfo = this.getOption("showInfo", t);
-
-    itemsCollection
-      .set("download", download)
-      .set("moveTo", moveTo)
-      .set("delete", deleteOption)
-      .set("showInfo", showInfo);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getFavoritesFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    // const { selection } = this.filesStore;
-    const download = this.getOption("download", t);
-    const downloadAs = this.getOption("downloadAs", t);
-    const copy = this.getOption("copy", t);
-    const showInfo = this.getOption("showInfo", t);
-
-    itemsCollection
-      .set("download", download)
-      .set("downloadAs", downloadAs)
-      .set("copy", copy)
-      /* .set("delete", {
-        label: t("Common:RemoveFromFavorites"),
-        alt: t("Common:RemoveFromFavorites"),
-        iconUrl: FavoritesFillReactSvgUrl,
-        onClick: () => {
-          this.setFavoriteAction("remove", selection)
-            .then(() => toastr.success(t("Common:RemovedFromFavorites")))
-            .catch((err) => toastr.error(err));
-        },
-      }) */
-      .set("showInfo", showInfo);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getRecycleBinFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
-    const { setRestorePanelVisible } = this.dialogsStore;
-
-    const download = this.getOption("download", t);
-    const downloadAs = this.getOption("downloadAs", t);
-    const deleteOption = this.getOption("delete", t);
-    const showInfo = this.getOption("showInfo", t);
-
-    itemsCollection
-      .set("download", download)
-      .set("downloadAs", downloadAs)
-      .set("restore", {
-        id: "menu-restore",
-        label: t("Common:Restore"),
-        onClick: () => setRestorePanelVisible(true),
-        iconUrl: MoveReactSvgUrl,
-      })
-      .set("delete", deleteOption)
-      .set("showInfo", showInfo);
-
-    return convertToArray(itemsCollection);
-  };
-
-  getHeaderMenu = (t: TTranslation) => {
-    const {
-      isFavoritesFolder,
-      isRecycleBinFolder,
-      isPrivacyFolder,
-      isSharedWithMeFolder,
-      isRoomsFolder,
-      isArchiveFolder,
-      isRecentFolder,
-      isTemplatesFolder,
-      isAIAgentsFolder,
-      isFormsFolder,
-    } = this.treeFoldersStore;
-
-    const itemsCollection = new Map();
-
-    if (isRecycleBinFolder)
-      return this.getRecycleBinFolderOptions(itemsCollection, t);
-
-    if (isFavoritesFolder)
-      return this.getFavoritesFolderOptions(itemsCollection, t);
-
-    if (isPrivacyFolder) return this.getPrivacyFolderOption(itemsCollection, t);
-
-    if (isSharedWithMeFolder)
-      return this.getShareFolderOptions(itemsCollection, t);
-
-    if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
-
-    if (isArchiveFolder)
-      return this.getArchiveRoomsFolderOptions(itemsCollection, t);
-
-    if (isRoomsFolder || isFormsFolder)
-      return this.getRoomsFolderOptions(itemsCollection, t);
-
-    if (isTemplatesFolder)
-      return this.getTemplatesFolderOptions(itemsCollection, t);
-
-    if (isAIAgentsFolder)
-      return this.getAIAgentsFolderOptions(itemsCollection, t);
-
-    return this.getAnotherFolderOptions(itemsCollection, t);
-  };
+  getHeaderMenu = (t: TTranslation)=> getHeaderMenuImpl(this, t);
 
   onMarkAsRead = (item: TActionItem) => this.markAsRead([], [`${item.id}`], item);
 
@@ -4334,317 +4002,37 @@ class FilesActionStore {
     startIndex: number,
     finalIndex: number,
     indexMovedFromBottom = false,
-  ) => {
-    const { setUpdateSelection } = this.indexingStore;
-    // in the indexing view every list item carries an order
-    // string; the old JS relied on that unchecked.
-    const newFilesList = JSON.parse(
-      JSON.stringify(this.filesStore.filesList),
-    ) as (TActionItem & { order: string })[];
+  )=> setListOrderImpl(this, startIndex, finalIndex, indexMovedFromBottom);
 
-    let i = startIndex;
-    while (i !== finalIndex) {
-      if (newFilesList[i].order.includes(".")) {
-        const splitItem = newFilesList[i].order.split(".");
-
-        // the old JS stores numbers into the string[] before
-        // join(); the erased casts keep that behavior.
-        if (indexMovedFromBottom) {
-          splitItem[splitItem.length - 1] = (+splitItem.at(-1)! +
-            1) as unknown as string;
-        } else {
-          splitItem[splitItem.length - 1] = (+splitItem.at(-1)! -
-            1) as unknown as string;
-        }
-
-        newFilesList[i].order = splitItem.join(".");
-      } else if (indexMovedFromBottom) {
-        newFilesList[i].order = `${+newFilesList[i].order + 1}`;
-      } else {
-        newFilesList[i].order = `${+newFilesList[i].order - 1}`;
-      }
-      setUpdateSelection([newFilesList[i]]);
-      i++;
-    }
-
-    return newFilesList;
-  };
-
-  revokeFilesOrder = () => {
-    const { setFiles, setFolders } = this.filesStore;
-    const { previousFilesList } = this.indexingStore;
-
-    if (!previousFilesList.length) return;
-
-    const newFolders = previousFilesList.filter((f) => f.isFolder);
-    const newFiles = previousFilesList.filter((f) => !f.isFolder);
-
-    // previousFilesList holds the same .js filesList
-    // view-models this store works with; IndexingStore types them minimally.
-    setFiles(newFiles as unknown as TActionItem[]);
-    setFolders(newFolders as unknown as TActionItem[]);
-  };
+  revokeFilesOrder = ()=> revokeFilesOrderImpl(this);
 
   setFilesOrder = (
     currentItem: TActionItem,
     replaceableItem: TActionItem,
     indexMovedFromBottom?: boolean,
-  ) => {
-    const { filesList, setFiles, setFolders } = this.filesStore;
-    const { setPreviousFilesList, updateSelection, setUpdateSelection } =
-      this.indexingStore;
-
-    if (updateSelection.length === 0) {
-      setPreviousFilesList(filesList);
-    }
-
-    const currentIndex = filesList.findIndex(
-      (f) => f.order === currentItem.order,
-    );
-    const replaceableIndex = filesList.findIndex(
-      (f) => f.order === replaceableItem.order,
-    );
-
-    let newFilesList: ReturnType<typeof this.setListOrder>;
-    if (indexMovedFromBottom) {
-      newFilesList = this.setListOrder(
-        replaceableIndex,
-        currentIndex,
-        indexMovedFromBottom,
-      );
-      newFilesList[currentIndex].order = replaceableItem.order!;
-    } else {
-      newFilesList = this.setListOrder(currentIndex, replaceableIndex + 1);
-      newFilesList[currentIndex].order = filesList[replaceableIndex].order!;
-    }
-    setUpdateSelection([newFilesList[currentIndex]]);
-
-    const newFolders = newFilesList.filter((f) => f.isFolder);
-    const newFiles = newFilesList.filter((f) => !f.isFolder);
-
-    setFiles(newFiles);
-    setFolders(newFolders);
-  };
+  )=> setFilesOrderImpl(this, currentItem, replaceableItem, indexMovedFromBottom);
 
   changeIndex = async (
     action: VDRIndexingAction,
     item: TActionItem,
     t: TTranslation,
     isLastItem = true,
-  ) => {
-    const { filesList, bufferSelection } = this.filesStore;
+  )=> changeIndexImpl(this, action, item, t, isLastItem);
 
-    const index = filesList.findIndex(
-      (elem) => elem.id === item?.id && elem.fileExst === item?.fileExst,
-    );
+  saveIndexOfFiles = async (t: TTranslation)=> saveIndexOfFilesImpl(this, t);
 
-    if (
-      (action === VDRIndexingAction.HigherIndex && index === 0) ||
-      (action === VDRIndexingAction.LowerIndex &&
-        index === filesList.length - 1)
-    )
-      return;
-
-    // with no selection the old JS worked on [null] and
-    // crashed below; the erased cast keeps that behavior.
-    const selection = (
-      this.filesStore.selection.length
-        ? this.filesStore.selection
-        : [bufferSelection]
-    ) as TActionItem[];
-
-    let replaceable: TActionItem | undefined;
-    let current = item;
-
-    switch (action) {
-      case VDRIndexingAction.HigherIndex:
-        replaceable = filesList[index - 1];
-        break;
-
-      case VDRIndexingAction.LowerIndex:
-        replaceable = filesList[index + 1];
-        break;
-
-      default:
-        current = selection[0];
-        replaceable = item;
-        break;
-    }
-
-    if (!replaceable || current.order === replaceable.order) return;
-
-    try {
-      let indexMovedFromBottom = +current.order! > +replaceable.order!;
-      if (current.order!.includes(".")) {
-        indexMovedFromBottom =
-          +current.order!.split(".").at(-1)! >
-          +replaceable.order!.split(".").at(-1)!;
-      }
-
-      const newRepIndex = filesList.findIndex(
-        (f) => f.id === replaceable.id && f.isFolder === replaceable.isFolder,
-      );
-
-      const newReplaceable =
-        indexMovedFromBottom || isLastItem
-          ? replaceable
-          : filesList[newRepIndex - 1];
-
-      this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);
-      this.filesStore.setSelected("none");
-    } catch (e) {
-      console.error(e);
-      toastr.error(t("Files:ErrorChangeIndex"));
-    }
-  };
-
-  saveIndexOfFiles = async (t: TTranslation) => {
-    const { getIndexingArray } = this.indexingStore;
-
-    try {
-      const items = getIndexingArray();
-
-      if (items.length > 0) {
-        // the shared TIndexItems declares order as a string,
-        // but IndexingStore collects the raw (number|string) orders; the API
-        // only serializes them (old JS behavior).
-        await changeIndex(items as unknown as TIndexItems[]);
-      }
-    } catch (e) {
-      console.error(e);
-      toastr.error(t("Files:ErrorChangeIndex"));
-    }
-  };
-
-  reorderIndexOfFiles = async (id: number, t: TTranslation) => {
-    const { setIsIndexEditingMode } = this.indexingStore;
-
-    try {
-      const operationId = uniqueid("operation_");
-      await reorderIndex(id);
-      toastr.success(t("Common:SuccessfullyCompletedOperation"));
-      setIsIndexEditingMode(false);
-      this.updateCurrentFolder(true, operationId);
-    } catch (e) {
-      console.error(e);
-      toastr.error(t("Files:ErrorChangeIndex"));
-    }
-  };
+  reorderIndexOfFiles = async (id: number, t: TTranslation)=> reorderIndexOfFilesImpl(this, id, t);
 
   loopExportRoomIndexStatusChecking = async (pbData: {
     operation: TOperationName;
     operationId: string;
-  }): Promise<TExportRoomIndexTask> => {
-    const { setSecondaryProgressBarData } =
-      this.uploadDataStore.secondaryProgressDataStore;
+  }): Promise<TExportRoomIndexTask>=> loopExportRoomIndexStatusCheckingImpl(this, pbData);
 
-    let isCompleted = false;
-    let res: TExportRoomIndexTask | undefined;
+  checkPreviousExportRoomIndexInProgress = async ()=> checkPreviousExportRoomIndexInProgressImpl(this);
 
-    while (!isCompleted) {
-      res = await checkExportRoomIndexProgress();
+  onSuccessExportRoomIndex = (t: TTranslation, fileName: string, fileUrl: string)=> onSuccessExportRoomIndexImpl(this, t, fileName, fileUrl);
 
-      if (res?.isCompleted) {
-        isCompleted = true;
-      }
-
-      if (res?.percentage) {
-        setSecondaryProgressBarData({
-          operation: pbData.operation,
-          percent: res.percentage,
-          alert: false,
-          operationId: pbData.operationId,
-        });
-      }
-    }
-
-    // the loop only exits once a progress response arrived;
-    // the `!` keeps the old unchecked return.
-    return res!;
-  };
-
-  checkPreviousExportRoomIndexInProgress = async () => {
-    try {
-      if (this.alreadyExportingRoomIndex) {
-        return true;
-      }
-
-      const previousExport = await api.rooms.getExportRoomIndexProgress();
-
-      return previousExport && !previousExport.isCompleted;
-    } catch (e) {
-      toastr.error(e as string);
-    }
-  };
-
-  onSuccessExportRoomIndex = (t: TTranslation, fileName: string, fileUrl: string) => {
-    const { openOnNewPage } = this.filesSettingsStore;
-    const urlWithProxy = combineUrl(window.ClientConfig?.proxy?.url, fileUrl);
-
-    showSuccessExportRoomIndexToast(t, fileName, urlWithProxy, openOnNewPage);
-  };
-
-  exportRoomIndex = async (t: TTranslation, roomId: number) => {
-    const previousExportInProgress =
-      await this.checkPreviousExportRoomIndexInProgress();
-
-    if (previousExportInProgress) {
-      return toastr.error(t("Files:ExportRoomIndexAlreadyInProgressError"));
-    }
-
-    const { setSecondaryProgressBarData } =
-      this.uploadDataStore.secondaryProgressDataStore;
-
-    const operationName = OPERATIONS_NAME.exportIndex;
-
-    const pbData = {
-      operation: operationName,
-      operationId: uniqueid("operation_"),
-    };
-
-    setSecondaryProgressBarData({
-      operation: pbData.operation,
-      operationId: pbData.operationId,
-      percent: 0,
-    });
-
-    this.alreadyExportingRoomIndex = true;
-
-    try {
-      let res: TExportRoomIndexTask = await api.rooms.exportRoomIndex(roomId);
-
-      if (!res.isCompleted) {
-        res = await this.loopExportRoomIndexStatusChecking(pbData);
-      }
-
-      if (res.error || res.status === ExportRoomIndexTaskStatus.Failed) {
-        toastr.error(res.error);
-
-        setSecondaryProgressBarData({
-          operation: pbData.operation,
-          completed: true,
-          alert: true,
-          operationId: pbData.operationId,
-        });
-
-        return;
-      }
-
-      if (res.status === ExportRoomIndexTaskStatus.Completed) {
-        this.onSuccessExportRoomIndex(t, res.resultFileName, res.resultFileUrl);
-      }
-
-      setSecondaryProgressBarData({
-        operation: pbData.operation,
-        completed: true,
-        operationId: pbData.operationId,
-      });
-    } catch (e) {
-      toastr.error(e as string, null, 0, true);
-    } finally {
-      this.alreadyExportingRoomIndex = false;
-    }
-  };
+  exportRoomIndex = async (t: TTranslation, roomId: number)=> exportRoomIndexImpl(this, t, roomId);
 
   getPublicKey = async (folder: TActionItem | TFolder) => {
     if (folder.shared) {

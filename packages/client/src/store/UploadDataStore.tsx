@@ -38,7 +38,6 @@ import { getI18n, Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
-import sumBy from "lodash/sumBy";
 import {
   AnalyticsEvents,
   ConflictResolveType,
@@ -49,7 +48,6 @@ import {
   prepareEncryptedUpload,
   shouldEncryptUpload,
   resolveItemRoomContext,
-  willEncryptUploadItem,
 } from "@docspace/shared/services/private-room/encrypted-upload";
 import {
   getFileInfo,
@@ -72,10 +70,6 @@ import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import {
-  getActiveKeyId,
-  selectActiveKey,
-} from "@docspace/shared/services/encryption/active-key-preference";
-import {
   rememberEncryptedFilename,
   resolveDisplayTitle,
 } from "@docspace/shared/services/encryption/filename-cache";
@@ -88,10 +82,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import {
-  countActiveUploadsForRoom,
-  isQuotaError,
-} from "@docspace/shared/utils/uploadErrors";
+import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -122,6 +113,16 @@ import type {
   TUploadBrowserFile,
   TUploadFile,
 } from "./uploadDataStore/helpers";
+import {
+  getActiveUploadCountForRoomImpl,
+  getConversationPercentImpl,
+  getFilesPercentImpl,
+  getNewPercentImpl,
+  getUploadedFileImpl,
+  getUserEncryptionKeysImpl,
+  shouldEncryptCurrentUploadImpl,
+  willEncryptItemImpl,
+} from "./uploadDataStore/selectors.helpers";
 
 import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
@@ -470,46 +471,9 @@ class UploadDataStore {
     }
   };
 
-  getUserEncryptionKeys = (): {
-    publicKey: string | null;
-    userId: string | null;
-    publicKeyId: string | null;
-  } => {
-    const keys = this.userStore?.encryptionKeys;
-    const userId = this.userStore?.user?.id;
+  getUserEncryptionKeys = () => getUserEncryptionKeysImpl(this);
 
-    if (!Array.isArray(keys) || keys.length === 0 || !userId) {
-      return { publicKey: null, userId: null, publicKeyId: null };
-    }
-
-    const userIdStr = String(userId);
-    const activeKey = selectActiveKey(keys, getActiveKeyId(userIdStr));
-    if (!activeKey) {
-      return { publicKey: null, userId: null, publicKeyId: null };
-    }
-
-    return {
-      publicKey: activeKey.publicKey || null,
-      userId: userIdStr,
-      publicKeyId: activeKey.id || null,
-    };
-  };
-
-  shouldEncryptCurrentUpload = () => {
-    const isPrivate = this.treeFoldersStore.isPrivacyFolder;
-    const roomType = isPrivate
-      ? RoomsType.CustomRoom
-      : this.selectedFolderStore.roomType;
-    const { publicKey, userId } = this.getUserEncryptionKeys();
-    // shouldEncryptUpload declares roomType: RoomsType, but the
-    // original .js passed selectedFolderStore.roomType which can be null
-    // (isEncryptableRoomType(null) is simply false at runtime).
-    return (
-      shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
-      !!publicKey &&
-      !!userId
-    );
-  };
+  shouldEncryptCurrentUpload = () => shouldEncryptCurrentUploadImpl(this);
 
   getUploadFolderContext = () => ({
     isPrivacyFolder: this.treeFoldersStore.isPrivacyFolder,
@@ -523,19 +487,8 @@ class UploadDataStore {
     );
   };
 
-  willEncryptItem = (item: TUploadFile | null | undefined) => {
-    if (!item) return false;
-    const { publicKey, userId } = this.getUserEncryptionKeys();
-    return willEncryptUploadItem(
-      {
-        uploadContext: item.file?.uploadContext,
-        alreadyEncrypted: item.encrypted,
-        publicKey,
-        userId,
-      },
-      this.getUploadFolderContext(),
-    );
-  };
+  willEncryptItem = (item: TUploadFile | null | undefined) =>
+    willEncryptItemImpl(this, item);
 
   ensureEncryptionUnlockedForBatch = async () => {
     const { userId } = this.getUserEncryptionKeys();
@@ -624,9 +577,7 @@ class UploadDataStore {
 
   getActiveUploadCountForRoom = (
     roomId: string | number | null | undefined,
-  ) => {
-    return countActiveUploadsForRoom(this.files, roomId);
-  };
+  ) => getActiveUploadCountForRoomImpl(roomId, { files: this.files });
 
   selectUploadedFile = (file: TUploadFile[]) => {
     this.selectedUploadFile = file;
@@ -696,9 +647,8 @@ class UploadDataStore {
     this.setUploadData(uploadData);
   };
 
-  getUploadedFile = (id: string) => {
-    return this.files.filter((f) => f.uniqueId === id);
-  };
+  getUploadedFile = (id: string) =>
+    getUploadedFileImpl(id, { files: this.files });
 
   cancelUpload = () => {
     this.finishUploadFilesCalled = false;
@@ -924,37 +874,14 @@ class UploadDataStore {
     }
   };
 
-  getNewPercent = (uploadedSize: number, indexOfFile: number) => {
-    const newTotalSize = sumBy(this.files, (f) =>
-      f.file && !this.uploaded ? f.file.size : 0,
-    );
-    const totalUploadedFiles = this.files.filter((_, i) => i < indexOfFile);
-    const totalUploadedSize = sumBy(totalUploadedFiles, (f) =>
-      f.file && !this.uploaded ? f.file.size : 0,
-    );
-    const newPercent =
-      ((uploadedSize + totalUploadedSize) / newTotalSize) * 100;
+  getNewPercent = (uploadedSize: number, indexOfFile: number) =>
+    getNewPercentImpl(uploadedSize, indexOfFile, {
+      files: this.files,
+      uploaded: this.uploaded,
+    });
 
-    return newPercent;
-  };
-
-  getFilesPercent = () => {
-    // const newTotalSize = sumBy(this.files, (f) =>
-    //   !f.isCalculated && f.file && !this.uploaded ? f.file.size : 0,
-    // );
-
-    // const newPercent = (newSize / newTotalSize) * 100;
-
-    const percentCurrentFileHistory = sumBy(
-      this.uploadedFilesHistory,
-      (f) => f.percent,
-    );
-
-    const commonPercent = this.uploadedFilesHistory.length * 100;
-    const newPercent = (percentCurrentFileHistory / commonPercent) * 100;
-
-    return newPercent;
-  };
+  getFilesPercent = () =>
+    getFilesPercentImpl({ uploadedFilesHistory: this.uploadedFilesHistory });
 
   setConversionPercent = (percent: number, alert?: boolean) => {
     const data = {
@@ -970,10 +897,8 @@ class UploadDataStore {
     }
   };
 
-  getConversationPercent = (fileIndex: number) => {
-    const length = this.files.filter((f) => f.needConvert).length;
-    return (fileIndex / length) * 100;
-  };
+  getConversationPercent = (fileIndex: number) =>
+    getConversationPercentImpl(fileIndex, { files: this.files });
 
   startConversionFromFiles = async (t: TTranslation, isOpen = false) => {
     const operationName = OPERATIONS_NAME.convert;

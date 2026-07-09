@@ -33,80 +33,26 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import {
-  checkFileConflicts,
-  deleteFile,
-  deleteFolder,
-  downloadFiles,
-  emptyTrash,
-  finalizeVersion,
-  lockFile,
-  markAsRead,
-  removeFiles,
-  createFolder,
-  moveToFolder,
-  duplicate,
-  getFolder,
-  deleteFilesFromRecent,
-  changeIndex,
-  reorderIndex,
-  deleteVersionFile,
-  getFileEncryptionAccess,
-} from "@docspace/shared/api/files";
+import { removeFiles, moveToFolder } from "@docspace/shared/api/files";
 import {
   AnalyticsEvents,
   Events,
-  ExportRoomIndexTaskStatus,
-  FileAction,
-  FileStatus,
-  FolderType,
-  RoomsType,
   ShareAccessRights,
-  ValidationStatus,
-  VDRIndexingAction,
-  RoomSearchArea,
-  UrlActionType,
-  VectorizationStatus,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import {
-  frameCallEvent,
-  getConvertedSize,
-  getObjectByLocation,
-  getCategoryType,
-  splitFileAndFolderIds,
-} from "@docspace/shared/utils/common";
+import { splitFileAndFolderIds } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
-import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
-import type { Nullable, TTranslation } from "@docspace/shared/types";
-import type {
-  TFile,
-  TFileSecurity,
-  TFileViewAccessibility,
-  TFolder,
-  TFolderSecurity,
-  TGetFolder,
-  TIndexItems,
-  TOperation,
-} from "@docspace/shared/api/files/types";
+import type { TTranslation } from "@docspace/shared/types";
+import type { TFile, TOperation } from "@docspace/shared/api/files/types";
 import type { UserStore } from "@docspace/shared/store/UserStore";
-import {
-  SECTION_ROOT_FOLDER_TYPES,
-  changeCustomFilter as changeCustomFilterHelper,
-  checkExportRoomIndexProgress,
-  convertToArray,
-  convertToTree,
-  nameWithoutExtension as nameWithoutExtensionHelper,
-  setPinAction as setPinActionHelper,
-} from "./helpers";
+import { setPinAction as setPinActionHelper } from "./helpers";
 import type FilesActionStore from "../FilesActionsStore";
-import type {
-  TActionItem,
-} from "../FilesActionsStore";
+import type { TActionItem } from "../FilesActionsStore";
 
 export const setThirdpartyInfoImpl = (
 self: FilesActionStore,providerKey?: string

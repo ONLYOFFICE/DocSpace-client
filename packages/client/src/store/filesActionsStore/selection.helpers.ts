@@ -34,88 +34,40 @@
  */
 
 import {
-  checkFileConflicts,
-  deleteFile,
-  deleteFolder,
   downloadFiles,
   emptyTrash,
   finalizeVersion,
   lockFile,
   markAsRead,
-  removeFiles,
   createFolder,
-  moveToFolder,
   duplicate,
-  getFolder,
   deleteFilesFromRecent,
-  changeIndex,
-  reorderIndex,
-  deleteVersionFile,
-  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
 import {
-  AnalyticsEvents,
-  Events,
-  ExportRoomIndexTaskStatus,
   FileAction,
   FileStatus,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
   ValidationStatus,
-  VDRIndexingAction,
-  RoomSearchArea,
-  UrlActionType,
   VectorizationStatus,
 } from "@docspace/shared/enums";
-import { makeAutoObservable, runInAction } from "mobx";
+import { runInAction } from "mobx";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import {
-  isFile as isFileCheck,
-  isFolder as isFolderCheck,
-} from "@docspace/shared/utils/typeGuards";
-import {
-  getCategoryTypeByFolderType,
-  getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
+import { isFile as isFileCheck } from "@docspace/shared/utils/typeGuards";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {
-  frameCallEvent,
   getConvertedSize,
-  getObjectByLocation,
   getCategoryType,
-  splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import api from "@docspace/shared/api";
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
-import type { Nullable, TTranslation } from "@docspace/shared/types";
-import type {
-  TFile,
-  TFileSecurity,
-  TFileViewAccessibility,
-  TFolder,
-  TFolderSecurity,
-  TGetFolder,
-  TIndexItems,
-  TOperation,
-} from "@docspace/shared/api/files/types";
-import {
-  SECTION_ROOT_FOLDER_TYPES,
-  changeCustomFilter as changeCustomFilterHelper,
-  checkExportRoomIndexProgress,
-  convertToArray,
-  convertToTree,
-  nameWithoutExtension as nameWithoutExtensionHelper,
-  setPinAction as setPinActionHelper,
-} from "./helpers";
+import type { TTranslation } from "@docspace/shared/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { convertToTree } from "./helpers";
 import type { TTreeNode, TUploadTreeFile } from "./helpers";
 import type FilesActionStore from "../FilesActionsStore";
-import type {
-  TActionItem,
-  TOperationName,
-} from "../FilesActionsStore";
+import type { TActionItem, TOperationName } from "../FilesActionsStore";
 
 export const updateCurrentFolderImpl = async (
 self: FilesActionStore,

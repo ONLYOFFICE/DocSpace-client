@@ -35,37 +35,13 @@
 
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-import {
-  AnalyticsEvents,
-  Events,
-  ExportRoomIndexTaskStatus,
-  FileAction,
-  FileStatus,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-  ValidationStatus,
-  VDRIndexingAction,
-  RoomSearchArea,
-  UrlActionType,
-  VectorizationStatus,
-} from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type { Nullable, TTranslation } from "@docspace/shared/types";
+import type { TTranslation } from "@docspace/shared/types";
 import FilesHeaderOptionStore from "../FilesHeaderOptionStore";
-import {
-  SECTION_ROOT_FOLDER_TYPES,
-  changeCustomFilter as changeCustomFilterHelper,
-  checkExportRoomIndexProgress,
-  convertToArray,
-  convertToTree,
-  nameWithoutExtension as nameWithoutExtensionHelper,
-  setPinAction as setPinActionHelper,
-} from "./helpers";
+import { convertToArray } from "./helpers";
 import type FilesActionStore from "../FilesActionsStore";
-import type {
-  TItemsCollection,
-} from "../FilesActionsStore";
+import type { TItemsCollection } from "../FilesActionsStore";
 
 export const isAvailableOptionImpl = (
 self: FilesActionStore,option: string

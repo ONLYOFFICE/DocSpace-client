@@ -34,41 +34,13 @@
  */
 
 import {
-  checkFileConflicts,
-  deleteFile,
-  deleteFolder,
   downloadFiles,
-  emptyTrash,
-  finalizeVersion,
-  lockFile,
-  markAsRead,
-  removeFiles,
-  createFolder,
-  moveToFolder,
-  duplicate,
-  getFolder,
-  deleteFilesFromRecent,
-  changeIndex,
-  reorderIndex,
-  deleteVersionFile,
   getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
-import { loadRoomMemberKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import {
-  AnalyticsEvents,
-  Events,
-  ExportRoomIndexTaskStatus,
-  FileAction,
-  FileStatus,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-  ValidationStatus,
-  VDRIndexingAction,
-  RoomSearchArea,
-  UrlActionType,
-  VectorizationStatus,
-} from "@docspace/shared/enums";
+  loadRoomMemberKeysSafe,
+} from "@docspace/shared/services/private-room/room-member-keys";
+import { AnalyticsEvents, UrlActionType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   downloadAndDecryptFile,
@@ -77,28 +49,20 @@ import {
   deduplicateFileNames,
   triggerFileDownload,
 } from "@docspace/shared/services/private-room/encrypted-download";
-import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import {
+  requireUnlock,
+} from "@docspace/shared/services/encryption/secret-storage";
 import uniqueid from "lodash/uniqueId";
-import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
-import type { Nullable, TTranslation } from "@docspace/shared/types";
-import type { TFileConvertId } from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
+import type { Nullable } from "@docspace/shared/types";
 import type {
-  TFile,
-  TFileSecurity,
-  TFileViewAccessibility,
-  TFolder,
-  TFolderSecurity,
-  TGetFolder,
-  TIndexItems,
-  TOperation,
-} from "@docspace/shared/api/files/types";
+  TFileConvertId,
+} from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
+import type { TOperation } from "@docspace/shared/api/files/types";
 import i18n from "../../i18n";
 import type FilesActionStore from "../FilesActionsStore";
-import type {
-  TActionItem,
-  TDownloadTranslations,
-} from "../FilesActionsStore";
+import type { TActionItem, TDownloadTranslations } from "../FilesActionsStore";
 
 export const downloadFilesImpl = async (
 self: FilesActionStore,

@@ -34,65 +34,28 @@
  */
 
 import {
-  checkFileConflicts,
   deleteFile,
   deleteFolder,
-  downloadFiles,
   emptyTrash,
-  finalizeVersion,
-  lockFile,
-  markAsRead,
   removeFiles,
-  createFolder,
-  moveToFolder,
-  duplicate,
-  getFolder,
-  deleteFilesFromRecent,
-  changeIndex,
-  reorderIndex,
   deleteVersionFile,
-  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
-import {
-  AnalyticsEvents,
-  Events,
-  ExportRoomIndexTaskStatus,
-  FileAction,
-  FileStatus,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-  ValidationStatus,
-  VDRIndexingAction,
-  RoomSearchArea,
-  UrlActionType,
-  VectorizationStatus,
-} from "@docspace/shared/enums";
+import { AnalyticsEvents } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
-import { forgetEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import {
-  getCategoryTypeByFolderType,
-  getCategoryUrl,
-} from "SRC_DIR/helpers/utils";
+  forgetEncryptedFilename,
+} from "@docspace/shared/services/encryption/filename-cache";
+import { getCategoryTypeByFolderType } from "SRC_DIR/helpers/utils";
 import uniqueid from "lodash/uniqueId";
-import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
+import SocketHelper, {SocketCommands} from "@docspace/ui-kit/utils/socket";
 import {
   getEmptyPersonalProgress,
   startEmptyPersonal,
 } from "@docspace/shared/api/people";
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
-import type {
-  TFile,
-  TFileSecurity,
-  TFileViewAccessibility,
-  TFolder,
-  TFolderSecurity,
-  TGetFolder,
-  TIndexItems,
-  TOperation,
-} from "@docspace/shared/api/files/types";
+import type { TOperation } from "@docspace/shared/api/files/types";
 import type FilesActionStore from "../FilesActionsStore";
 import type {
   TActionItem,

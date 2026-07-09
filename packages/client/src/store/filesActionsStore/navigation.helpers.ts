@@ -34,19 +34,10 @@
  */
 
 import {
-  AnalyticsEvents,
-  Events,
-  ExportRoomIndexTaskStatus,
-  FileAction,
   FileStatus,
   FolderType,
   RoomsType,
-  ShareAccessRights,
-  ValidationStatus,
-  VDRIndexingAction,
   RoomSearchArea,
-  UrlActionType,
-  VectorizationStatus,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
@@ -69,39 +60,20 @@ import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 import {
   frameCallEvent,
-  getConvertedSize,
   getObjectByLocation,
   getCategoryType,
-  splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
-import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
+import { CategoryType } from "@docspace/shared/constants";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
-import type {
-  TFile,
-  TFileSecurity,
-  TFileViewAccessibility,
-  TFolder,
-  TFolderSecurity,
-  TGetFolder,
-  TIndexItems,
-  TOperation,
-} from "@docspace/shared/api/files/types";
-import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
-import {
-  SECTION_ROOT_FOLDER_TYPES,
-  changeCustomFilter as changeCustomFilterHelper,
-  checkExportRoomIndexProgress,
-  convertToArray,
-  convertToTree,
-  nameWithoutExtension as nameWithoutExtensionHelper,
-  setPinAction as setPinActionHelper,
-} from "./helpers";
+import { SECTION_ROOT_FOLDER_TYPES } from "./helpers";
 import type FilesActionStore from "../FilesActionsStore";
 import type {
   TActionItem,

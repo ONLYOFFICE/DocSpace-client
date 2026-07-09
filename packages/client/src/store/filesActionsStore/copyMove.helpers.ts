@@ -35,39 +35,10 @@
 
 import {
   checkFileConflicts,
-  deleteFile,
-  deleteFolder,
-  downloadFiles,
-  emptyTrash,
-  finalizeVersion,
-  lockFile,
-  markAsRead,
-  removeFiles,
-  createFolder,
-  moveToFolder,
   duplicate,
   getFolder,
-  deleteFilesFromRecent,
-  changeIndex,
-  reorderIndex,
-  deleteVersionFile,
-  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
-import {
-  AnalyticsEvents,
-  Events,
-  ExportRoomIndexTaskStatus,
-  FileAction,
-  FileStatus,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-  ValidationStatus,
-  VDRIndexingAction,
-  RoomSearchArea,
-  UrlActionType,
-  VectorizationStatus,
-} from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   isFile as isFileCheck,
@@ -78,30 +49,24 @@ import {
   addCopySuffix,
   tagFileForCopy,
 } from "@docspace/shared/services/private-room/encrypted-copy";
-import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
+import {
+  requireUnlock,
+} from "@docspace/shared/services/encryption/secret-storage";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { FileOperationStatus } from "@docspace/shared/enums";
-import type { Nullable, TTranslation } from "@docspace/shared/types";
+import type { Nullable } from "@docspace/shared/types";
 import type {
   TFile,
-  TFileSecurity,
-  TFileViewAccessibility,
   TFolder,
-  TFolderSecurity,
   TGetFolder,
-  TIndexItems,
-  TOperation,
 } from "@docspace/shared/api/files/types";
-import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 import i18n from "../../i18n";
 import type FilesActionStore from "../FilesActionsStore";
 import type DialogsStore from "../DialogsStore";
-import type {
-  TActionItem,
-  TOperationDataPayload,
-} from "../FilesActionsStore";
+import type { TActionItem, TOperationDataPayload } from "../FilesActionsStore";
 
 export const duplicateActionImpl = async (
 self: FilesActionStore,item: TActionItem

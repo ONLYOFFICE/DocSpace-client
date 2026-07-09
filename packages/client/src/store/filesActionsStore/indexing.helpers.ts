@@ -33,74 +33,24 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { changeIndex, reorderIndex } from "@docspace/shared/api/files";
 import {
-  checkFileConflicts,
-  deleteFile,
-  deleteFolder,
-  downloadFiles,
-  emptyTrash,
-  finalizeVersion,
-  lockFile,
-  markAsRead,
-  removeFiles,
-  createFolder,
-  moveToFolder,
-  duplicate,
-  getFolder,
-  deleteFilesFromRecent,
-  changeIndex,
-  reorderIndex,
-  deleteVersionFile,
-  getFileEncryptionAccess,
-} from "@docspace/shared/api/files";
-import {
-  AnalyticsEvents,
-  Events,
   ExportRoomIndexTaskStatus,
-  FileAction,
-  FileStatus,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-  ValidationStatus,
   VDRIndexingAction,
-  RoomSearchArea,
-  UrlActionType,
-  VectorizationStatus,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
-import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
-import type { Nullable, TTranslation } from "@docspace/shared/types";
-import type {
-  TFile,
-  TFileSecurity,
-  TFileViewAccessibility,
-  TFolder,
-  TFolderSecurity,
-  TGetFolder,
-  TIndexItems,
-  TOperation,
-} from "@docspace/shared/api/files/types";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import type { TTranslation } from "@docspace/shared/types";
+import type { TIndexItems } from "@docspace/shared/api/files/types";
 import type { TExportRoomIndexTask } from "@docspace/shared/api/rooms/types";
-import {
-  SECTION_ROOT_FOLDER_TYPES,
-  changeCustomFilter as changeCustomFilterHelper,
-  checkExportRoomIndexProgress,
-  convertToArray,
-  convertToTree,
-  nameWithoutExtension as nameWithoutExtensionHelper,
-  setPinAction as setPinActionHelper,
-} from "./helpers";
+import { checkExportRoomIndexProgress } from "./helpers";
 import type IndexingStore from "../IndexingStore";
 import type FilesActionStore from "../FilesActionsStore";
-import type {
-  TActionItem,
-  TOperationName,
-} from "../FilesActionsStore";
+import type { TActionItem, TOperationName } from "../FilesActionsStore";
 
 export const setListOrderImpl = (
 self: FilesActionStore,

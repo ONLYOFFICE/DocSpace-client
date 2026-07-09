@@ -45,7 +45,6 @@ import {
 } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
-  prepareEncryptedUpload,
   shouldEncryptUpload,
   resolveItemRoomContext,
 } from "@docspace/shared/services/private-room/encrypted-upload";
@@ -58,13 +57,8 @@ import {
   uploadChunkParallel,
   finalizeUploadSession,
   checkIsFileExist,
-  setFileEncryptionKeys,
-  getFileEncryptionAccess,
 } from "@docspace/shared/api/files";
-import { getRoomEncryptionKeys } from "@docspace/shared/api/privacy";
-import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
-import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -127,6 +121,13 @@ import {
   startConversionFromFilesImpl,
   startConversionImpl,
 } from "./uploadDataStore/conversion.helpers";
+import {
+  cancelEncryptedBatchUploadImpl,
+  encryptKeysForRoomMembersImpl,
+  ensureEncryptionUnlockedForBatchImpl,
+  prepareFileForEncryptedUploadImpl,
+  wrapForSelfThenRoomImpl,
+} from "./uploadDataStore/encryption.helpers";
 
 import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
@@ -353,127 +354,39 @@ class UploadDataStore {
     this.encryptionEnabled = enabled;
   };
 
-  wrapForSelfThenRoom = async (
+  wrapForSelfThenRoom = (
     fileId: number,
     currentUserId: string,
     publicKeyBase64: string,
     publicKeyId: string,
     dek: Uint8Array,
     roomId: number | string | null,
-  ) => {
-    try {
-      const identity = await requireUnlock(currentUserId);
-      if (!identity) {
-        throw new Error(
-          "Encryption identity is locked — cannot wrap DEK for upload",
-        );
-      }
-      const ownWraps = await wrapDekForRecipients({
-        dek,
-        senderIdentity: identity,
-        senderUserId: currentUserId,
-        recipients: [
-          {
-            userId: currentUserId,
-            publicKey: publicKeyBase64,
-            publicKeyId,
-          },
-        ],
-        fileId,
-      });
-      await setFileEncryptionKeys(fileId, ownWraps);
-      await this.encryptKeysForRoomMembers(
-        fileId,
-        currentUserId,
-        roomId,
-        dek,
-        identity,
-      );
-    } finally {
-      wipeDek(dek);
-    }
-  };
+  ) =>
+    wrapForSelfThenRoomImpl(
+      this,
+      fileId,
+      currentUserId,
+      publicKeyBase64,
+      publicKeyId,
+      dek,
+      roomId,
+    );
 
-  encryptKeysForRoomMembers = async (
+  encryptKeysForRoomMembers = (
     fileId: number,
     currentUserId: string,
     roomId: number | string | null,
     dek: Uint8Array,
     identity: IdentityKeyPair,
-  ) => {
-    try {
-      if (!roomId) {
-        console.error(
-          "[ENCRYPTION] encryptKeysForRoomMembers called without roomId",
-        );
-        return;
-      }
-      if (!dek || !identity) {
-        console.error(
-          "[ENCRYPTION] encryptKeysForRoomMembers called without dek/identity",
-        );
-        return;
-      }
-      const [publicKeys, encryptionInfo] = await Promise.all([
-        getRoomEncryptionKeys(roomId),
-        getFileEncryptionAccess(fileId),
-      ]);
-
-      const existingFileKeys = encryptionInfo.fileKeys ?? [];
-      const existingKeyPairs = new Set(
-        existingFileKeys.map(
-          (k) => `${String(k.userId)}:${k.publicKeyId || ""}`,
-        ),
-      );
-
-      const recipients: {
-        userId: string;
-        publicKey: string;
-        publicKeyId: string;
-      }[] = [];
-      if (Array.isArray(publicKeys)) {
-        for (const pk of publicKeys) {
-          if (!pk.publicKey || !pk.userId) continue;
-          const uid = String(pk.userId);
-          if (uid === String(currentUserId)) continue;
-          const pairKey = `${uid}:${pk.id || ""}`;
-          if (existingKeyPairs.has(pairKey)) continue;
-
-          recipients.push({
-            userId: uid,
-            publicKey: pk.publicKey,
-            publicKeyId: pk.id || "",
-          });
-        }
-      }
-      if (recipients.length === 0) return;
-
-      const newKeys = await wrapDekForRecipients({
-        dek,
-        senderIdentity: identity,
-        senderUserId: String(currentUserId),
-        recipients,
-        fileId,
-      });
-
-      if (newKeys.length > 0) {
-        const allKeys = [
-          ...existingFileKeys.map((k) => ({
-            userId: k.userId,
-            publicKeyId: k.publicKeyId || "",
-            privateKeyEnc: k.privateKeyEnc,
-          })),
-          ...newKeys,
-        ];
-        await setFileEncryptionKeys(fileId, allKeys);
-      }
-    } catch (error) {
-      console.error(
-        "[ENCRYPTION] Failed to encrypt keys for room members:",
-        error,
-      );
-    }
-  };
+  ) =>
+    encryptKeysForRoomMembersImpl(
+      this,
+      fileId,
+      currentUserId,
+      roomId,
+      dek,
+      identity,
+    );
 
   getUserEncryptionKeys = () => getUserEncryptionKeysImpl(this);
 
@@ -494,82 +407,16 @@ class UploadDataStore {
   willEncryptItem = (item: TUploadFile | null | undefined) =>
     willEncryptItemImpl(this, item);
 
-  ensureEncryptionUnlockedForBatch = async () => {
-    const { userId } = this.getUserEncryptionKeys();
-    if (!userId) return true;
+  ensureEncryptionUnlockedForBatch = () =>
+    ensureEncryptionUnlockedForBatchImpl(this);
 
-    const needsUnlock = this.files.some(
-      (item) =>
-        !item.inAction &&
-        !item.error &&
-        !item.cancel &&
-        item.action === "upload" &&
-        this.willEncryptItem(item),
-    );
+  cancelEncryptedBatchUpload = () => cancelEncryptedBatchUploadImpl(this);
 
-    if (!needsUnlock) return true;
-
-    const identity = await requireUnlock(String(userId));
-    return !!identity;
-  };
-
-  cancelEncryptedBatchUpload = () => {
-    runInAction(() => {
-      this.files.forEach((item) => {
-        if (
-          item.inAction ||
-          item.error ||
-          item.cancel ||
-          item.action !== "upload" ||
-          !this.willEncryptItem(item)
-        )
-          return;
-
-        item.cancel = true;
-        item.action = "uploaded";
-        item.percent = 100;
-        this.uploadedFilesHistory = this.uploadedFilesHistory.filter(
-          (f) => f.uniqueId !== item.uniqueId,
-        );
-      });
-
-      this.percent = this.getFilesPercent();
-    });
-
-    try {
-      toastr.info(getI18n().t("Common:EncryptionUploadCancelled"));
-    } catch {
-      //
-    }
-  };
-
-  prepareFileForEncryptedUpload = async (
+  prepareFileForEncryptedUpload = (
     file: TUploadBrowserFile,
     folderId: number | string | null | undefined,
     onProgress?: (progress: number) => void,
-  ) => {
-    const overrideCtx = file?.uploadContext;
-    const ancestorIsPrivate = this.treeFoldersStore.isPrivacyFolder;
-    const roomType =
-      overrideCtx?.roomType ??
-      (ancestorIsPrivate
-        ? RoomsType.CustomRoom
-        : this.selectedFolderStore.roomType);
-    const isPrivate =
-      overrideCtx && "isPrivate" in overrideCtx
-        ? overrideCtx.isPrivate
-        : ancestorIsPrivate;
-    return prepareEncryptedUpload({
-      file,
-      // UploadConfig.folderId is declared as number, but the
-      // original .js forwarded toFolderId which may be a string/null for
-      // third-party folders.
-      folderId: folderId as number,
-      roomType: roomType || RoomsType.CustomRoom,
-      isPrivate: isPrivate || false,
-      onProgress,
-    });
-  };
+  ) => prepareFileForEncryptedUploadImpl(this, file, folderId, onProgress);
 
   removeFiles = (fileIds: number[]) => {
     fileIds.forEach((id) => {

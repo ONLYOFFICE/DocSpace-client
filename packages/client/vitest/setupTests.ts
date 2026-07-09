@@ -63,3 +63,20 @@
 // react-i18next, polyfills TextEncoder, and stubs DOMRect / SVGSVGElement.
 // Keeping both packages on the same base means changes propagate uniformly.
 import "../../shared/vitest/setupTests";
+
+// jsdom does not implement matchMedia. Several client stores read the system
+// theme at module-eval time (SettingsStore → getSystemTheme), so provide an
+// inert stub before any store module is imported by a test.
+if (typeof window !== "undefined" && !window.matchMedia) {
+  window.matchMedia = (query: string) =>
+    ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false,
+    }) as unknown as MediaQueryList;
+}

@@ -115,16 +115,11 @@ import {
 } from "./helpers";
 import type {
   TContextItem,
-  TContextItemSecurity,
   TContextOption,
   TMenuGroupConfig,
 } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
-
-type TSelectionItem = TContextItem & {
-  contextOptions: string[];
-  security: TContextItemSecurity;
-};
+import type { TSelectionItem } from "./types";
 
 export const getFilesContextOptionsImpl = (
   self: ContextOptionsStore,

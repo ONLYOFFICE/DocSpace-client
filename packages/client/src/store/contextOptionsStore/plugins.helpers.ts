@@ -40,17 +40,9 @@ import {
 } from "@docspace/shared/utils/typeGuards";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import type { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
-import type {
-  TContextItem,
-  TContextItemSecurity,
-  TContextOption,
-} from "./helpers";
+import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
-
-type TSelectionItem = TContextItem & {
-  contextOptions: string[];
-  security: TContextItemSecurity;
-};
+import type { TSelectionItem } from "./types";
 
 type TPluginGroupItem = {
   id: number | string;

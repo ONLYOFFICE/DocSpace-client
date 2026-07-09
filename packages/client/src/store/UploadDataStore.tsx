@@ -34,32 +34,15 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
-import { getI18n, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
-import {
-  AnalyticsEvents,
-  ConflictResolveType,
-  RoomsType,
-} from "@docspace/shared/enums";
+import { ConflictResolveType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
-import {
-  shouldEncryptUpload,
-  resolveItemRoomContext,
-} from "@docspace/shared/services/private-room/encrypted-upload";
-import {
-  getFileInfo,
-  uploadFile,
-  startUploadSession,
-  uploadChunkSequential,
-  uploadChunkParallel,
-  finalizeUploadSession,
-} from "@docspace/shared/api/files";
-import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
-import { rememberEncryptedFilename } from "@docspace/shared/services/encryption/filename-cache";
+import { resolveItemRoomContext } from "@docspace/shared/services/private-room/encrypted-upload";
+import { getFileInfo, uploadFile } from "@docspace/shared/api/files";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { Link } from "@docspace/ui-kit/components/link";
 
@@ -75,13 +58,7 @@ import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
 
-import {
-  acquireUploadAutoLockSuspension,
-  hasFileDek,
-  releaseUploadAutoLockSuspension,
-  setFileDek,
-  takeFileDek,
-} from "./uploadDataStore/helpers";
+import { releaseUploadAutoLockSuspension } from "./uploadDataStore/helpers";
 import type {
   TUploadBrowserFile,
   TUploadFile,
@@ -136,6 +113,14 @@ import {
   setConflictDialogDataImpl,
   startUploadImpl,
 } from "./uploadDataStore/start.helpers";
+import {
+  asyncUploadImpl,
+  checkChunkUploadImpl,
+  parallelUploadingImpl,
+  startSessionFuncImpl,
+  startUploadFilesImpl,
+  uploadFileChunksImpl,
+} from "./uploadDataStore/chunkUpload.helpers";
 
 import type AiRoomStore from "./AiRoomStore";
 import type DialogsStore from "./DialogsStore";
@@ -190,20 +175,20 @@ export type TStartUploadData = TUploadData & {
   allNewFiles: TUploadFile[];
 };
 
-type TChunkUploadResponse = {
+export type TChunkUploadResponse = {
   uploaded: boolean;
   id: number;
   file: TFile;
 };
 
-type TUploadChunk = {
+export type TUploadChunk = {
   isActive: boolean;
   isFinished: boolean;
   isFinalize: boolean;
   onUpload: () => Promise<unknown>;
 };
 
-type TChunkData = {
+export type TChunkData = {
   operationId: string;
   file: TUploadBrowserFile;
   fileSize?: number;
@@ -212,9 +197,9 @@ type TChunkData = {
   length: number;
 };
 
-type TResolve = (value?: unknown) => void;
+export type TResolve = (value?: unknown) => void;
 
-type TCheckChunkUpload = {
+export type TCheckChunkUpload = {
   t: TTranslation;
   res: TChunkUploadResponse;
   index: number;
@@ -559,27 +544,7 @@ class UploadDataStore {
     notUploadedFiles: TUploadFile[],
     t: TTranslation,
     createNewIfExist?: boolean,
-  ) => {
-    const { maxUploadFilesCount } = this.filesSettingsStore;
-
-    const countFiles =
-      notUploadedFiles.length >= maxUploadFilesCount
-        ? maxUploadFilesCount
-        : notUploadedFiles.length;
-
-    for (let i = 0; i < countFiles; i++) {
-      if (this.currentUploadNumber <= maxUploadFilesCount) {
-        const fileIndex = this.files.findIndex(
-          (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
-        );
-
-        if (fileIndex !== -1) {
-          this.currentUploadNumber += 1;
-          this.startSessionFunc(fileIndex, t, createNewIfExist);
-        }
-      }
-    }
-  };
+  ) => parallelUploadingImpl(this, notUploadedFiles, t, createNewIfExist);
 
   convertUploadedFiles = (t: TTranslation, createNewIfExist = true) =>
     convertUploadedFilesImpl(this, t, createNewIfExist);
@@ -716,282 +681,18 @@ class UploadDataStore {
     }
   };
 
-  checkChunkUpload = (chunkUploadObj: TCheckChunkUpload) => {
-    const {
-      t,
-      res, // file response data
-      index, // chunk index
-      indexOfFile, // file index in the list
-      path, // file path
-      chunksLength, // length of file chunks
-      resolve, // resolve cb
-      //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
-      createNewIfExist,
-    } = chunkUploadObj;
+  checkChunkUpload = (chunkUploadObj: TCheckChunkUpload) =>
+    checkChunkUploadImpl(this, chunkUploadObj);
 
-    const { uploaded, id: fileId, file: fileInfo } = res;
-
-    // let uploadedSize;
-
-    // if (!uploaded && !allChunkUploaded) {
-    //   uploadedSize =
-    //     fileSize <= this.filesSettingsStore.chunkUploadSize
-    //       ? fileSize
-    //       : this.filesSettingsStore.chunkUploadSize;
-    // } else {
-    //   uploadedSize = isFinalize
-    //     ? 0
-    //     : fileSize <= this.filesSettingsStore.chunkUploadSize
-    //       ? fileSize
-    //       : fileSize - index * this.filesSettingsStore.chunkUploadSize;
-    // }
-
-    const percentCurrentFile = (index / chunksLength) * 100;
-
-    const fileIndex = this.uploadedFilesHistory.findIndex(
-      (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
-    );
-
-    if (fileIndex > -1) {
-      if (this.uploadedFilesHistory[fileIndex].percent < percentCurrentFile)
-        this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
-    }
-
-    const newPercent = this.getFilesPercent();
-
-    this.percent = newPercent;
-
-    this.primaryProgressDataStore.setPrimaryProgressBarData({
-      operation: OPERATIONS_NAME.upload,
-      percent: newPercent,
-    });
-
-    if (uploaded) {
-      runInAction(() => {
-        this.files[indexOfFile].action = "uploaded";
-        this.files[indexOfFile].fileId = fileId;
-        this.files[indexOfFile].fileInfo = fileInfo;
-
-        this.uploadedFilesHistory[fileIndex].action = "uploaded";
-        this.uploadedFilesHistory[fileIndex].fileId = fileId;
-        this.uploadedFilesHistory[fileIndex].fileInfo = fileInfo;
-
-        this.currentUploadNumber -= 1;
-
-        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
-
-        if (nextFileIndex !== -1) {
-          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
-        }
-      });
-
-      const currentFileData = this.files[indexOfFile];
-      if (currentFileData?.encrypted && hasFileDek(currentFileData)) {
-        if (currentFileData.file?.name) {
-          rememberEncryptedFilename(fileId, currentFileData.file.name);
-        }
-
-        const { publicKey, userId, publicKeyId } = this.getUserEncryptionKeys();
-        if (!userId || !publicKey) {
-          console.error(
-            "[ENCRYPTION] Cannot wrap DEK: encryption keys missing for current user",
-          );
-          const orphanDek = takeFileDek(currentFileData);
-          if (orphanDek) wipeDek(orphanDek);
-        } else {
-          const dekForWrap = takeFileDek(currentFileData);
-          const roomIdForWrap = currentFileData?.encryptionRoomId ?? null;
-          this.wrapForSelfThenRoom(
-            fileId,
-            String(userId),
-            publicKey,
-            publicKeyId || "",
-            // hasFileDek() above guarantees a DEK is stored for this entry.
-            dekForWrap!,
-            roomIdForWrap,
-          ).catch((error: TAxiosLikeError) => {
-            const wrapMessage = getI18n().t(
-              "Common:EncryptionUploadWrapFailed",
-            );
-            console.error("[ENCRYPTION] Failed to set file encryption keys", {
-              fileId,
-              status: error?.response?.status,
-              message: error?.message,
-            });
-            runInAction(() => {
-              if (this.files[indexOfFile]) {
-                this.files[indexOfFile].error = wrapMessage;
-              }
-              const historyIndex = this.uploadedFilesHistory.findIndex(
-                (f) => f.uniqueId === this.files[indexOfFile]?.uniqueId,
-              );
-              if (historyIndex > -1) {
-                this.uploadedFilesHistory[historyIndex].error = wrapMessage;
-              }
-            });
-            try {
-              toastr.error(wrapMessage);
-            } catch {
-              //
-            }
-          });
-        }
-      }
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: AnalyticsEvents.FileUploaded,
-        id: fileInfo.id,
-        parentId: fileInfo.folderId,
-      });
-
-      if (fileInfo.version > 2) {
-        this.filesStore.setHighlightFile({
-          highlightFileId: fileInfo.id,
-          isFileHasExst: !fileInfo.fileExst,
-        });
-      }
-    }
-
-    // All chuncks are uploaded
-
-    const currentFile = this.files[indexOfFile];
-
-    if (!currentFile) return resolve();
-
-    if (!currentFile.fileId) return;
-
-    currentFile.path = path;
-
-    const { needConvert } = currentFile;
-
-    const isXML = currentFile.fileInfo?.fileExst?.includes(".xml");
-
-    if (isXML) return resolve();
-
-    if (needConvert) {
-      runInAction(() => {
-        currentFile.action = "convert";
-
-        if (fileIndex > -1) {
-          this.uploadedFilesHistory[fileIndex].action = "convert";
-        }
-      });
-
-      if (!this.filesToConversion.length || this.converted) {
-        this.filesToConversion.push(currentFile);
-        this.startConversion(t);
-      } else {
-        this.filesToConversion.push(currentFile);
-      }
-      return resolve();
-    }
-
-    if (currentFile.action === "uploaded") {
-      this.refreshFiles(currentFile);
-    }
-
-    return resolve();
-  };
-
-  asyncUpload = async (
+  asyncUpload = (
     t: TTranslation,
     chunkData: TChunkData,
     resolve: TResolve,
     reject: (reason?: unknown) => void,
     createNewIfExist?: boolean,
-  ) => {
-    const { operationId, file, indexOfFile, path, length } = chunkData;
+  ) => asyncUploadImpl(this, t, chunkData, resolve, reject, createNewIfExist);
 
-    if (
-      this.uploaded ||
-      !this.files.some((f) => f.file === file) ||
-      this.files[indexOfFile].cancel
-    ) {
-      return resolve();
-    }
-
-    if (!this.asyncUploadObj[operationId]) {
-      return reject();
-    }
-    const chunkObjIndex = this.asyncUploadObj[
-      operationId
-    ].chunksArray.findIndex((x) => !x.isActive && !x.isFinalize);
-
-    if (chunkObjIndex !== -1) {
-      this.asyncUploadObj[operationId].chunksArray[chunkObjIndex].isActive =
-        true;
-
-      try {
-        const res =
-          await this.asyncUploadObj[operationId].chunksArray[
-            chunkObjIndex
-          ].onUpload();
-
-        if (this.asyncUploadObj[operationId]) {
-          this.asyncUploadObj[operationId].chunksArray[
-            chunkObjIndex
-          ].isFinished = true;
-        }
-
-        this.asyncUpload(t, chunkData, resolve, reject, createNewIfExist);
-
-        const activeLength = this.asyncUploadObj[operationId]
-          ? this.asyncUploadObj[operationId].chunksArray.filter(
-              (x) => x.isActive,
-            ).length - 1
-          : 0;
-
-        this.checkChunkUpload({
-          t,
-          res: res as TChunkUploadResponse,
-          index: activeLength,
-          indexOfFile,
-          path,
-          chunksLength: length,
-          resolve,
-          createNewIfExist,
-        });
-
-        let finalizeChunk = -1;
-        if (this.asyncUploadObj[operationId]) {
-          finalizeChunk = this.asyncUploadObj[
-            operationId
-          ].chunksArray.findIndex((x) => !x.isFinished && !x.isFinalize);
-        }
-
-        if (finalizeChunk === -1) {
-          const finalizeChunkIndex = this.asyncUploadObj[
-            operationId
-          ].chunksArray.findIndex((x) => x.isFinalize);
-
-          if (finalizeChunkIndex > -1) {
-            const finalizeIndex =
-              this.asyncUploadObj[operationId].chunksArray.length - 1;
-
-            const finalizeRes =
-              await this.asyncUploadObj[operationId].chunksArray[
-                finalizeChunkIndex
-              ].onUpload();
-
-            this.checkChunkUpload({
-              t,
-              res: finalizeRes as TChunkUploadResponse,
-              index: finalizeIndex,
-              indexOfFile,
-              path,
-              chunksLength: length,
-              resolve,
-              createNewIfExist,
-            });
-          }
-        }
-      } catch (error) {
-        return reject(error);
-      }
-    }
-  };
-
-  uploadFileChunks = async (
+  uploadFileChunks = (
     sessionId: string,
     folderId: number | string,
     requestsDataArray: FormData[],
@@ -1003,86 +704,21 @@ class UploadDataStore {
     operationId: string,
     toFolderId: number | string | null | undefined,
     createNewIfExist?: boolean,
-  ) => {
-    const { uploadThreadCount } = this.filesSettingsStore;
-    const length = requestsDataArray.length;
-
-    const isThirdPartyFolder = typeof toFolderId === "string";
-    if (!isThirdPartyFolder) {
-      const chunksArray: TUploadChunk[] = [];
-      for (let index = 0; index < length; index++) {
-        chunksArray.push({
-          isActive: false,
-          isFinished: false,
-          isFinalize: false,
-          onUpload: () =>
-            uploadChunkParallel(
-              folderId,
-              sessionId,
-              index + 1,
-              requestsDataArray[index],
-            ),
-        });
-      }
-      chunksArray.push({
-        isActive: false,
-        isFinished: false,
-        isFinalize: true,
-        onUpload: () => finalizeUploadSession(folderId, sessionId),
-      });
-
-      if (!this.asyncUploadObj[operationId]) {
-        this.asyncUploadObj[operationId] = { chunksArray: [] };
-        this.asyncUploadObj[operationId].chunksArray = chunksArray;
-      }
-
-      const promise = new Promise<unknown>((resolve, reject) => {
-        let i = length <= uploadThreadCount ? length : uploadThreadCount;
-        while (i !== 0) {
-          this.asyncUpload(
-            t,
-            { operationId, file, fileSize, indexOfFile, path, length },
-            resolve,
-            reject,
-            createNewIfExist,
-          );
-          i--;
-        }
-      });
-
-      await promise;
-    } else {
-      for (let index = 0; index < length; index++) {
-        if (
-          this.uploaded ||
-          !this.files.some((f) => f.file === file) ||
-          this.files[indexOfFile].cancel
-        ) {
-          return Promise.resolve();
-        }
-
-        const res = await uploadChunkSequential(
-          folderId,
-          sessionId,
-          requestsDataArray[index],
-        );
-        const resolve = (r?: unknown) => Promise.resolve(r);
-
-        this.checkChunkUpload({
-          t,
-          res: res as TChunkUploadResponse,
-          index,
-          indexOfFile,
-          path,
-          chunksLength: length,
-          resolve,
-          createNewIfExist,
-        });
-
-        // console.log(`Uploaded chunk ${index}/${length}`, res);
-      }
-    }
-  };
+  ) =>
+    uploadFileChunksImpl(
+      this,
+      sessionId,
+      folderId,
+      requestsDataArray,
+      fileSize,
+      indexOfFile,
+      file,
+      path,
+      t,
+      operationId,
+      toFolderId,
+      createNewIfExist,
+    );
 
   retryConvertFiles = (t: TTranslation, fileId: number) =>
     retryConvertFilesImpl(this, t, fileId);
@@ -1093,391 +729,14 @@ class UploadDataStore {
   retryQuotaFailedFiles = (t: TTranslation) =>
     retryQuotaFailedFilesImpl(this, t);
 
-  startUploadFiles = async (t: TTranslation, createNewIfExist = true) => {
-    this.finishUploadFilesCalled = false;
+  startUploadFiles = (t: TTranslation, createNewIfExist = true) =>
+    startUploadFilesImpl(this, t, createNewIfExist);
 
-    const files = this.files;
-
-    if (files.length === 0) {
-      return this.finishUploadFiles(t);
-    }
-
-    const canProceed = await this.ensureEncryptionUnlockedForBatch();
-    if (!canProceed) {
-      this.cancelEncryptedBatchUpload();
-    }
-
-    const notUploadedFiles = this.files.filter(
-      (f) => !f.inAction && !f.cancel && !f.error,
-    );
-
-    if (notUploadedFiles.length === 0) {
-      runInAction(() => {
-        this.uploaded = true;
-        this.converted = true;
-      });
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: OPERATIONS_NAME.upload,
-        completed: true,
-        withoutStatus: this.uploadedFilesHistory.length === 0,
-        ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
-      });
-      return;
-    }
-
-    const progressData = {
-      completed: false,
-      percent: this.percent,
-      operation: OPERATIONS_NAME.upload,
-      alert: false,
-      canceled: false,
-      showPanel: this.setUploadPanelVisible,
-    };
-
-    this.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
-
-    if (notUploadedFiles.some((f) => this.willEncryptItem(f))) {
-      acquireUploadAutoLockSuspension();
-    }
-
-    this.parallelUploading(notUploadedFiles, t, createNewIfExist);
-  };
-
-  startSessionFunc = async (
+  startSessionFunc = (
     indexOfFile: number,
     t: TTranslation,
     createNewIfExist = true,
-  ) => {
-    const { isAIRoom } = this.selectedFolderStore;
-    const { knowledgeId } = this.aiRoomStore;
-    if (!this.uploaded && this.files.length === 0) {
-      this.uploaded = true;
-      this.asyncUploadObj = {};
-      // setUploadData(uploadData);
-      return;
-    }
-
-    const item = this.files[indexOfFile];
-
-    this.files[indexOfFile].inAction = true;
-
-    if (!item) {
-      console.error("Empty files");
-      return Promise.resolve();
-    }
-
-    if (
-      item.action === "uploaded" ||
-      item.action === "convert" ||
-      item.action === "converted"
-    ) {
-      return Promise.resolve();
-    }
-
-    if (item.error) {
-      return Promise.resolve();
-    }
-
-    const { chunkUploadSize } = this.filesSettingsStore;
-    const { roomType, isPrivate } = this.getUploadEncryptionContext(item);
-
-    const { file, toFolderId /* , action */ } = item;
-    let fileToUpload = file;
-    // Replaced with the obfuscated upload name for encrypted uploads.
-    let fileName = file.name;
-
-    const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
-
-    let uploadDEK: Uint8Array | null = null; // raw DEK for wrapping after upload
-    let isEncrypted = file.encrypted || false;
-
-    const { publicKey, userId } = this.getUserEncryptionKeys();
-    // shouldEncryptUpload declares roomType: RoomsType, but
-    // resolveItemRoomContext may return null/undefined (falsy at runtime).
-    const shouldEncrypt =
-      shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
-      !!publicKey &&
-      !!userId;
-
-    if (shouldEncrypt && !isEncrypted) {
-      try {
-        const prepared = await this.prepareFileForEncryptedUpload(
-          file,
-          toFolderId,
-          (progress) => {
-            const fileIndex = this.uploadedFilesHistory.findIndex(
-              (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
-            );
-            if (fileIndex > -1) {
-              this.uploadedFilesHistory[fileIndex].percent = Math.floor(
-                progress * 20,
-              );
-            }
-            const newPercent = this.getFilesPercent();
-            this.percent = newPercent;
-            this.primaryProgressDataStore.setPrimaryProgressBarData({
-              operation: OPERATIONS_NAME.upload,
-              percent: newPercent,
-              label: getI18n().t("Files:Encrypting"),
-            });
-          },
-        );
-
-        if (prepared.encrypted) {
-          fileName = prepared.uploadFileName;
-          fileToUpload = new File([prepared.data], prepared.uploadFileName, {
-            type: "application/octet-stream",
-            lastModified: file.lastModified,
-          });
-          uploadDEK = prepared.dek;
-          isEncrypted = true;
-
-          setFileDek(this.files[indexOfFile], uploadDEK);
-          this.files[indexOfFile].encrypted = true;
-        }
-      } catch (error) {
-        console.error("[ENCRYPTION] prepareFileForEncryptedUpload failed", {
-          uniqueId: this.files[indexOfFile]?.uniqueId,
-          message: (error as Error)?.message,
-        });
-        const orphanDek = takeFileDek(this.files[indexOfFile]);
-        if (orphanDek) wipeDek(orphanDek);
-        const errorMessage = getI18n().t("Common:EncryptionPrepareFailed");
-        runInAction(() => {
-          if (this.files[indexOfFile]) {
-            this.files[indexOfFile].error = errorMessage;
-            this.files[indexOfFile].percent = 0;
-          }
-          const historyIndex = this.uploadedFilesHistory.findIndex(
-            (f) => f.uniqueId === this.files[indexOfFile]?.uniqueId,
-          );
-          if (historyIndex > -1) {
-            this.uploadedFilesHistory[historyIndex].error = errorMessage;
-            this.uploadedFilesHistory[historyIndex].percent = 0;
-          }
-        });
-        try {
-          toastr.error(errorMessage);
-        } catch {
-          //
-        }
-        const newPercent = this.getFilesPercent();
-        this.percent = newPercent;
-        this.primaryProgressDataStore.setPrimaryProgressBarData({
-          operation: OPERATIONS_NAME.upload,
-          percent: newPercent,
-          alert: true,
-        });
-        this.currentUploadNumber -= 1;
-        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
-        if (nextFileIndex !== -1) {
-          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
-        } else {
-          const allFilesIsUploaded =
-            this.files.findIndex(
-              (f) =>
-                f.action !== "uploaded" &&
-                f.action !== "convert" &&
-                f.action !== "converted" &&
-                !f.error &&
-                !f.cancel,
-            ) === -1;
-          if (allFilesIsUploaded && !this.finishUploadFilesCalled) {
-            this.finishUploadFilesCalled = true;
-            if (!this.filesToConversion.length) {
-              this.finishUploadFiles(t, !!this.tempConversionFiles?.length);
-            }
-          }
-        }
-        return;
-      }
-    }
-
-    const fileSize = fileToUpload.size;
-    // the original .js passed a (silently ignored) second
-    // argument to Math.ceil; dropped because it has no runtime effect.
-    const chunks = fileSize === 0 ? 1 : Math.ceil(fileSize / chunkUploadSize);
-
-    return startUploadSession(
-      // the original .js could pass null here when an AI room
-      // has no knowledgeId yet; the assertion keeps that runtime unchanged.
-      actualFolderId!,
-      fileName,
-      fileSize,
-      "", // relativePath,
-      isEncrypted,
-      file.lastModifiedDate,
-      createNewIfExist,
-    )
-      .then((res) => {
-        const sessionId = res.id;
-        const path = res.path;
-        const operationId = res.id;
-        const requestsDataArray = [];
-
-        let chunk = 0;
-
-        while (chunk < chunks) {
-          const offset = chunk * chunkUploadSize;
-          const formData = new FormData();
-          formData.append(
-            "file",
-            fileToUpload.slice(offset, offset + chunkUploadSize),
-          );
-          requestsDataArray.push(formData);
-          chunk++;
-        }
-
-        return {
-          sessionId,
-          folderId: actualFolderId,
-          requestsDataArray,
-          path,
-          operationId,
-        };
-      })
-      .then(({ sessionId, folderId, requestsDataArray, path, operationId }) => {
-        const fileIndex = this.uploadedFilesHistory.findIndex(
-          (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
-        );
-        if (fileIndex > -1)
-          this.uploadedFilesHistory[fileIndex].percent = chunks < 2 ? 50 : 0;
-
-        return this.uploadFileChunks(
-          sessionId,
-          folderId!,
-          requestsDataArray,
-          fileSize,
-          indexOfFile,
-          file,
-          path,
-          t,
-          operationId,
-          toFolderId,
-          createNewIfExist,
-        );
-      })
-      .catch((error: unknown) => {
-        const orphanDek = takeFileDek(this.files[indexOfFile]);
-        if (orphanDek) wipeDek(orphanDek);
-
-        if (this.files[indexOfFile] === undefined) {
-          this.primaryProgressDataStore.setPrimaryProgressBarData({
-            operation: OPERATIONS_NAME.upload,
-            completed: true,
-            alert: true,
-          });
-          return Promise.resolve();
-        }
-        let errorMessage = "";
-        if (typeof error === "object") {
-          const axiosErr = error as TAxiosLikeError;
-          errorMessage =
-            axiosErr?.response?.data?.error?.message ||
-            axiosErr?.statusText ||
-            axiosErr?.message ||
-            "";
-        } else {
-          errorMessage = error as string;
-        }
-
-        const isQuota = isQuotaError(error);
-
-        runInAction(() => {
-          this.files[indexOfFile].error = errorMessage;
-          this.files[indexOfFile].isQuotaError = isQuota;
-          const fileIndex = this.uploadedFilesHistory.findIndex(
-            (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
-          );
-          if (fileIndex > -1) {
-            this.uploadedFilesHistory[fileIndex].error = errorMessage;
-            this.uploadedFilesHistory[fileIndex].isQuotaError = isQuota;
-          }
-
-          if (isQuota && !this.quotaErrorRaised) {
-            this.quotaErrorRaised = true;
-            const currentUniqueId = this.files[indexOfFile].uniqueId;
-            this.files.forEach((queued, idx) => {
-              if (
-                queued.uniqueId === currentUniqueId ||
-                queued.inAction ||
-                queued.error ||
-                queued.cancel ||
-                queued.action !== "upload"
-              )
-                return;
-
-              this.files[idx].error = errorMessage;
-              this.files[idx].isQuotaError = true;
-              this.files[idx].inAction = true;
-              const historyIndex = this.uploadedFilesHistory.findIndex(
-                (h) => h.uniqueId === queued.uniqueId,
-              );
-              if (historyIndex > -1) {
-                this.uploadedFilesHistory[historyIndex].error = errorMessage;
-                this.uploadedFilesHistory[historyIndex].isQuotaError = true;
-              }
-            });
-          }
-        });
-
-        const newPercent = this.getFilesPercent();
-        this.percent = newPercent;
-
-        const allFilesIsUploaded =
-          this.files.findIndex(
-            (f) =>
-              f.action !== "uploaded" &&
-              f.action !== "convert" &&
-              f.action !== "converted" &&
-              !f.error &&
-              !f.cancel,
-          ) === -1;
-
-        this.primaryProgressDataStore.setPrimaryProgressBarData({
-          operation: OPERATIONS_NAME.upload,
-          percent: newPercent,
-          completed: allFilesIsUploaded,
-          alert: true,
-        });
-
-        this.currentUploadNumber -= 1;
-
-        if (!this.quotaErrorRaised) {
-          const nextFileIndex = this.files.findIndex((f) => !f.inAction);
-
-          if (nextFileIndex !== -1) {
-            this.startSessionFunc(nextFileIndex, t, createNewIfExist);
-          }
-        }
-
-        return Promise.resolve();
-      })
-      .finally(() => {
-        const allFilesIsUploaded =
-          this.files.findIndex(
-            (f) =>
-              f.action !== "uploaded" &&
-              f.action !== "convert" &&
-              f.action !== "converted" &&
-              !f.error &&
-              !f.cancel,
-          ) === -1;
-
-        if (allFilesIsUploaded && !this.finishUploadFilesCalled) {
-          this.finishUploadFilesCalled = true;
-
-          if (!this.filesToConversion.length) {
-            this.finishUploadFiles(t, !!this.tempConversionFiles.length);
-          } else {
-            runInAction(() => {
-              this.uploaded = true;
-              this.asyncUploadObj = {};
-            });
-          }
-        }
-      });
-  };
+  ) => startSessionFuncImpl(this, indexOfFile, t, createNewIfExist);
 
   showFinishUploadToastr = (
     t: TTranslation,

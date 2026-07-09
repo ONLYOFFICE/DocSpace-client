@@ -50,30 +50,12 @@ import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import copy from "copy-to-clipboard";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import type { TTranslation } from "@docspace/shared/types";
-import {
-  createMenuGroup,
-  filterModel,
-  onClickEditAgent,
-  onClickEditRoom as onClickEditRoomHelper,
-  onClickLinkForPortal,
-  onEditRoomTemplate,
-  onShowEditingToast,
-  onShowInfoPanel as onShowInfoPanelHelper,
-  onShowWaitOperationToast,
-  onSuggestOformChanges,
-  onUploadAction,
-  placePlugins,
-  systemFolders,
-} from "./helpers";
 import type {
-  TContextItem,
-  TContextItemSecurity,
-  TContextOption,
-  TMenuGroupConfig,
-  TStoreCustomEvent,
-} from "./helpers";
+  ContextMenuModel,
+} from "@docspace/ui-kit/components/context-menu";
+import type { TTranslation } from "@docspace/shared/types";
+import { onShowEditingToast } from "./helpers";
+import type { TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 
 export const getGroupContextOptionsImpl = (

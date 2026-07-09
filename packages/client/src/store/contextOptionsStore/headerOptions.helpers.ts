@@ -39,37 +39,21 @@ import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import copy from "copy-to-clipboard";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import type { TTranslation } from "@docspace/shared/types";
 import type {
-  TFile,
-  TFileLink,
-  TFolder,
-} from "@docspace/shared/api/files/types";
+  ContextMenuModel,
+} from "@docspace/ui-kit/components/context-menu";
+import type { TTranslation } from "@docspace/shared/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {
   canShowManageLink,
-  copyShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
-import {
-  isFile as isFileUtil,
-  isFolder,
-  isFolder as isFolderUtil,
-  isRoom as isRoomUtil,
-} from "@docspace/shared/utils/typeGuards";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 import {
   getInfoPanelOpen,
   openMembersTab,
   openShareTab,
-  setInfoPanelMobileHidden,
-  showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
-import type {
-  TContextItem,
-  TContextItemSecurity,
-  TContextOption,
-  TMenuGroupConfig,
-  TStoreCustomEvent,
-} from "./helpers";
+import type { TContextItem } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 
 export const getHeaderOptionsImpl = (

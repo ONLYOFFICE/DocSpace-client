@@ -51,53 +51,19 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 import { isMobile, isTablet } from "react-device-detect";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type {
+  ContextMenuModel,
+} from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TOformFile } from "@docspace/shared/api/oforms/types";
-import {
-  AnalyticsEvents,
-  RoomsType,
-  Events,
-  FolderType,
-  UrlActionType,
-  FilesSelectorFilterTypes,
-  FilterType,
-  FileExtensions,
-  ShareAccessRights,
-  FormFillingManageAction,
-} from "@docspace/shared/enums";
+import { RoomsType, FolderType, FilterType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import {
-  isFile as isFileUtil,
-  isFolder,
-  isFolder as isFolderUtil,
-  isRoom as isRoomUtil,
-} from "@docspace/shared/utils/typeGuards";
+import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import {
-  createMenuGroup,
-  filterModel,
-  onClickEditAgent,
-  onClickEditRoom as onClickEditRoomHelper,
-  onClickLinkForPortal,
-  onEditRoomTemplate,
-  onShowEditingToast,
-  onShowInfoPanel as onShowInfoPanelHelper,
-  onShowWaitOperationToast,
-  onSuggestOformChanges,
-  onUploadAction,
-  placePlugins,
-  systemFolders,
-} from "./helpers";
-import type {
-  TContextItem,
-  TContextItemSecurity,
-  TContextOption,
-  TMenuGroupConfig,
-  TStoreCustomEvent,
-} from "./helpers";
+import { onSuggestOformChanges, onUploadAction } from "./helpers";
+import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 
 export const getFormGalleryContextOptionsImpl = (

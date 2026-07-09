@@ -34,18 +34,14 @@
  */
 
 import React from "react";
-import { makeAutoObservable, runInAction } from "mobx";
+import { runInAction } from "mobx";
 import copy from "copy-to-clipboard";
 import { isMobile } from "react-device-detect";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type { TTranslation } from "@docspace/shared/types";
-import type {
-  TFile,
-  TFileLink,
-  TFolder,
-} from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
@@ -59,10 +55,6 @@ import {
   RoomsType,
   Events,
   FolderType,
-  UrlActionType,
-  FilesSelectorFilterTypes,
-  FilterType,
-  FileExtensions,
   FormFillingManageAction,
 } from "@docspace/shared/enums";
 import {
@@ -89,20 +81,8 @@ import {
 } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { PersistenceKeys, getPersisted } from "../utils/persistence";
-import {
-  onClickEditRoom as onClickEditRoomHelper,
-  onEditRoomTemplate,
-  onShowEditingToast,
-  onShowInfoPanel as onShowInfoPanelHelper,
-  onShowWaitOperationToast,
-  systemFolders,
-} from "./helpers";
-import type {
-  TContextItem,
-  TContextItemSecurity,
-  TContextOption,
-  TStoreCustomEvent,
-} from "./helpers";
+import { onEditRoomTemplate, systemFolders } from "./helpers";
+import type { TContextItem, TStoreCustomEvent } from "./helpers";
 import type DialogsStore from "../DialogsStore";
 import type ContextOptionsStore from "../ContextOptionsStore";
 

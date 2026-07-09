@@ -35,7 +35,6 @@
 
 import {
   isFile as isFileUtil,
-  isFolder,
   isFolder as isFolderUtil,
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
@@ -45,8 +44,6 @@ import type {
   TContextItem,
   TContextItemSecurity,
   TContextOption,
-  TMenuGroupConfig,
-  TStoreCustomEvent,
 } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 

@@ -83,9 +83,11 @@ import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import CreateGroupReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import AddToGroupReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import copy from "copy-to-clipboard";
-import { isMobile, isTablet } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type {
+  ContextMenuModel,
+} from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import {
@@ -93,54 +95,29 @@ import {
   isLockedSharedRoom,
   trimSeparator,
 } from "@docspace/shared/utils";
+import { removeOptions } from "SRC_DIR/helpers/filesUtils";
 import {
-  connectedCloudsTypeTitleTranslation,
-  removeOptions,
-} from "SRC_DIR/helpers/filesUtils";
-import {
-  AnalyticsEvents,
   RoomsType,
-  Events,
   FolderType,
-  UrlActionType,
-  FilesSelectorFilterTypes,
-  FilterType,
-  FileExtensions,
   ShareAccessRights,
-  FormFillingManageAction,
 } from "@docspace/shared/enums";
-import {
-  FILLING_STATUS_ID,
-  SHARED_WITH_ME_PATH,
-} from "@docspace/shared/constants";
-import {
-  isFile as isFileUtil,
-  isFolder,
-  isFolder as isFolderUtil,
-  isRoom as isRoomUtil,
-} from "@docspace/shared/utils/typeGuards";
+import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
+import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import {
   createMenuGroup,
   filterModel,
   onClickEditAgent,
-  onClickEditRoom as onClickEditRoomHelper,
   onClickLinkForPortal,
   onEditRoomTemplate,
   onShowEditingToast,
-  onShowInfoPanel as onShowInfoPanelHelper,
-  onShowWaitOperationToast,
-  onSuggestOformChanges,
-  onUploadAction,
   placePlugins,
-  systemFolders,
 } from "./helpers";
 import type {
   TContextItem,
   TContextItemSecurity,
   TContextOption,
   TMenuGroupConfig,
-  TStoreCustomEvent,
 } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 

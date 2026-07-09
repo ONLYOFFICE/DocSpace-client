@@ -86,11 +86,6 @@ const AddonsPage = (props: AddonsPageProps) => {
 
   const onDocsConnectClick = () => {
     if (docsConnectInfo) {
-      const { isTrial, expired } = getDocsConnectTrialState(docsConnectInfo);
-      if (isTrial && expired) {
-        openBuyPlan?.("trial");
-        return;
-      }
       navigateToRoute(PAYMENT_ROUTES.docsConnect);
       return;
     }

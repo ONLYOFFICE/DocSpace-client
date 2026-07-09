@@ -92,7 +92,6 @@
   "TopUpAndBuy": "Top up & Buy",
   "TopUpHint": "Your wallet will be topped up by <1>{{amount}}</1> and the selected subscription will be purchased automatically. Top-up amounts are rounded up to the next whole dollar.",
   "PlanPurchased": "Your plan has been purchased",
-  "Upgrade": "Upgrade",
   "Buy": "Buy",
   "MinUsersNote": "(min users: {{count}})",
   "UserAdjustmentLabel": "User adjustment",

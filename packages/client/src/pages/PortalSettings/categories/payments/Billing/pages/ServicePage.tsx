@@ -35,35 +35,76 @@
 
 import { inject, observer } from "mobx-react";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { default as AiPage } from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
 import { default as AiSearchPage } from "@docspace/ui-kit/billing/services/pages/ai-search/AiSearchPage";
 import { default as BackupPage } from "@docspace/ui-kit/billing/services/pages/backup/BackupPage";
 import { default as AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
+import { default as DocsConnectPage } from "@docspace/ui-kit/billing/services/pages/docs-connect/DocsConnectPage";
+import { default as BackupPageLoader } from "@docspace/ui-kit/billing/services/pages/backup/BackupPageLoader";
+import type { TDocsConnectPageState } from "@docspace/ui-kit/billing/types";
 
 import config from "PACKAGE_FILE";
 
-import DocsConnectPage from "../../SaaS/DocsConnectPage";
+import {
+  getDocsConnectTrialState,
+  isDocsConnectCanceled,
+} from "../../../developer-tools/DocsConnect/utils";
+import { DOCS_CONNECT_ROUTE } from "../../../developer-tools/DocsConnect/constants";
+import BuyPlanPanel from "../../../developer-tools/DocsConnect/BuyPlanPanel";
+import CancelPlanDialog from "../../../developer-tools/DocsConnect/CancelPlanDialog";
+import PromoPage from "../../../developer-tools/DocsConnect/PromoPage";
+import { PAYMENT_ROUTES } from "../../utils";
 
 interface ServicePageProps {
   getAIConfig?: () => Promise<void>;
   fetchPayerInfo?: () => Promise<void>;
+  docsConnectInfo?: TDocsConnectInfo | null;
+  docsConnectLoading?: boolean;
+  buyPlanPanelVisible?: boolean;
+  cancelPlanDialogVisible?: boolean;
+  fetchDocsConnectInfo?: () => void;
+  openBuyPlan?: (mode: "trial" | "edit") => void;
+  openCancelPlanDialog?: () => void;
+  cancelScheduledChange?: () => Promise<void>;
 }
 
 // Renders a single add-on service detail page based on the current route.
 // The BillingRoot provider is supplied by the parent Billing wrapper, so this
 // page must not create its own.
 const ServicePage = (props: ServicePageProps) => {
-  const { getAIConfig, fetchPayerInfo } = props;
+  const {
+    getAIConfig,
+    fetchPayerInfo,
+    docsConnectInfo,
+    docsConnectLoading,
+    buyPlanPanelVisible,
+    cancelPlanDialogVisible,
+    fetchDocsConnectInfo,
+    openBuyPlan,
+    openCancelPlanDialog,
+    cancelScheduledChange,
+  } = props;
+  useTranslation(["DocsConnect", "Common"]);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const { pathname } = location;
+  const isDocsConnect = pathname.includes("docs-connect");
 
   useEffect(() => {
     fetchPayerInfo?.();
   }, [fetchPayerInfo]);
+
+  useEffect(() => {
+    if (isDocsConnect && !docsConnectInfo) fetchDocsConnectInfo?.();
+  }, [isDocsConnect, docsConnectInfo, fetchDocsConnectInfo]);
 
   const navigateToRoute = (route: string) =>
     navigate(
@@ -72,7 +113,79 @@ const ServicePage = (props: ServicePageProps) => {
 
   const onViewUsage = () => navigateToRoute("/billing/usage");
 
-  const { pathname } = location;
+  const renderDocsConnect = () => {
+    if (docsConnectLoading) return <BackupPageLoader />;
+
+    if (!docsConnectInfo) return <PromoPage />;
+
+    const {
+      endDate,
+      daysLeft,
+      totalDays,
+      percent: spentPercent,
+      isPaid,
+      expired,
+    } = getDocsConnectTrialState(docsConnectInfo);
+
+    const planUsers = docsConnectInfo.tenant?.payment?.quantity ?? 0;
+    const pricePerUser =
+      (docsConnectInfo.prices?.pricePerUser ?? 0) +
+      (docsConnectInfo.devPackEnabled
+        ? (docsConnectInfo.prices?.devPackPrice ?? 0)
+        : 0);
+    const scheduledChange = isPaid
+      ? (docsConnectInfo.scheduledChange ?? null)
+      : null;
+
+    const state: TDocsConnectPageState = {
+      isPaid,
+      expired,
+      daysLeft,
+      totalDays,
+      spentPercent,
+      endDate,
+      currency: docsConnectInfo.wallet?.currency ?? "USD",
+      credits: docsConnectInfo.wallet?.availableCredits ?? 0,
+      planUsers,
+      pricePerUser,
+      basePricePerUser: docsConnectInfo.prices?.pricePerUser ?? 0,
+      devPackEnabled: docsConnectInfo.devPackEnabled ?? false,
+      monthlyCharge: planUsers * pricePerUser,
+      scheduledChange: scheduledChange
+        ? {
+            nextUsers: scheduledChange.nextUsers,
+            dueDate: scheduledChange.dueDate,
+          }
+        : null,
+      deactivated: isPaid && (docsConnectInfo.deactivated ?? false),
+      canceled: isDocsConnectCanceled(docsConnectInfo),
+    };
+
+    const onCancelChange = async () => {
+      try {
+        await cancelScheduledChange?.();
+      } catch (e) {
+        toastr.error(e as Error);
+      }
+    };
+
+    return (
+      <>
+        <DocsConnectPage
+          state={state}
+          onTopUp={() => navigate(PAYMENT_ROUTES.wallet)}
+          onViewUsage={() => navigate(PAYMENT_ROUTES.usage)}
+          onBuyPlan={() => openBuyPlan?.("trial")}
+          onEditPlan={() => openBuyPlan?.("edit")}
+          onGoToTenant={() => navigate(DOCS_CONNECT_ROUTE)}
+          onCancelPlan={() => openCancelPlanDialog?.()}
+          onCancelChange={onCancelChange}
+        />
+        {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
+        {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
+      </>
+    );
+  };
 
   return (
     <>
@@ -99,19 +212,27 @@ const ServicePage = (props: ServicePageProps) => {
       {pathname.includes("disk-storage") ? (
         <AdditionalStoragePage withBottomMargin />
       ) : null}
-      {pathname.includes("docs-connect") ? <DocsConnectPage /> : null}
+      {isDocsConnect ? renderDocsConnect() : null}
     </>
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, currentTariffStatusStore }: TStore) => {
+  ({ settingsStore, currentTariffStatusStore, docsConnectStore }: TStore) => {
     const { getAIConfig } = settingsStore;
     const { fetchPayerInfo } = currentTariffStatusStore;
 
     return {
       getAIConfig,
       fetchPayerInfo,
+      docsConnectInfo: docsConnectStore.info,
+      docsConnectLoading: docsConnectStore.isLoading,
+      buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
+      cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
+      fetchDocsConnectInfo: docsConnectStore.fetchInfo,
+      openBuyPlan: docsConnectStore.openBuyPlan,
+      openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
+      cancelScheduledChange: docsConnectStore.cancelScheduledChange,
     };
   },
 )(observer(ServicePage));

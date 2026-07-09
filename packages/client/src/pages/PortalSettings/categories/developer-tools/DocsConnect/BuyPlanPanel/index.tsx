@@ -772,12 +772,12 @@ const BuyPlanPanel = ({
                   ? t("Common:ScheduleChange")
                   : insufficientFunds
                     ? t("DocsConnect:TopUpAndBuy")
-                    : t("DocsConnect:Upgrade")
+                    : t("Common:Upgrade")
                 : insufficientFunds
                   ? info.deactivated
                     ? t("Common:TopUpAndPay")
                     : t("DocsConnect:TopUpAndBuy")
-                  : t("DocsConnect:Upgrade")
+                  : t("Common:Upgrade")
             }
             onClick={onBuy}
             isLoading={submitting}

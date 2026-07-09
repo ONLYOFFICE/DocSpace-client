@@ -181,7 +181,7 @@ const Statistics = ({
             primary
             className={styles.bannerButton}
             size={ButtonSize.small}
-            label={t("DocsConnect:Upgrade")}
+            label={t("Common:Upgrade")}
             onClick={() => openBuyPlan?.("trial")}
           />
         </div>

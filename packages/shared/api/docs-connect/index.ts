@@ -33,9 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { request, getApiBaseUrl } from "../client";
+import { request } from "../client";
 import { saveDeposite } from "../portal";
-import { combineUrl } from "../../utils/combineUrl";
 import type {
   TDocsConnectInfo,
   TDocsConnectTenant,
@@ -284,9 +283,6 @@ export const updateDocsConnectConfig = async (
     data,
   })) as TDocsConnectConfig | null;
 };
-
-export const getDocsConnectReportUrl = (): string =>
-  combineUrl(getApiBaseUrl(), `${BASE}/tenant/quota/download`);
 
 export const cancelDocsConnectPlan = async (
   devPackEnabled: boolean,

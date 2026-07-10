@@ -2201,7 +2201,7 @@
   "SubscriptionDeactivatedNonPayment": "Subscription deactivated — non-payment",
   "TariffSuccessDetails": "Storage: {{storage}} | {{price}} per month",
   "TariffUserAdjustmentScheduled": "Change scheduled: User adjustment, {{fromCount}} → {{toCount}}",
-  "TariffUserAdjustmentScheduledWithPrice": "Change scheduled: User adjustment, {{fromCount}} → {{toCount}} | New subscription — {{price}}/month (Users: {{toCount}})",
+  "TariffUserAdjustmentScheduledWithPrice": "Change scheduled: Users {{fromCount}} → {{toCount}}  |  {{price}}/month",
   "TemplateGallery": "Template gallery",
   "Templates": "Templates",
   "TemporaryStorage": "Temporary storage",

@@ -623,6 +623,16 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const composerHeader = useMemo(() => <AIActivationBanner />, []);
 
+  // AI chat host callbacks. Web Search settings save on an explicit button
+  // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
+  const aiChatCallbacks = useMemo(
+    () => ({
+      onWebSearchSaved: () =>
+        toastr.success(t("Common:ChangesSavedSuccessfully")),
+    }),
+    [t],
+  );
+
   // Defer mounting AiAgentProviders until authStore is loaded — otherwise
   // `standalone` flips after the first render, the providers' useMemo
   // rebuilds the chat stores, and StoresHydrator refires every fetch
@@ -635,6 +645,7 @@ const Shell = ({ page = "home", ...rest }) => {
           theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
           isStandalone={standalone}
           isAvailable={isAiChatAvailable}
+          callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}

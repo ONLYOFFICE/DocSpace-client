@@ -123,7 +123,8 @@ const BuyPlanPanel = ({
       ? 0
       : (info.tenant.payment?.quantity ?? 0);
     const curDevPack = info.devPackEnabled ?? false;
-    const isUp = isDocsConnectPaid(info) && curUsers > 0 && devPack && !curDevPack;
+    const isUp =
+      isDocsConnectPaid(info) && curUsers > 0 && devPack && !curDevPack;
 
     if (!isUp) {
       setDevPackCalc(null);

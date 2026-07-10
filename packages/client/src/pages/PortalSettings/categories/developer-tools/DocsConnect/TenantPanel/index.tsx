@@ -50,10 +50,11 @@ import {
 } from "@docspace/ui-kit/components/context-menu-button";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import KeyReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import CircleCrossReactSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
+import PaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/price.react.svg?url";
 
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
@@ -100,11 +101,32 @@ const TenantPanel = ({
 
   const hasScheduledChange = info.scheduledChange != null;
 
+  const getTrialContextMenuItems = (): ContextMenuModel[] => [
+    {
+      key: "copy-secret-key",
+      label: t("DocsConnect:CopySecretKey"),
+      icon: KeyReactSvgUrl,
+      onClick: () => copySecretKey?.(t),
+    },
+    {
+      key: "upgrade-subscription",
+      label: t("Common:UpgradeSubscription"),
+      icon: PaymentReactSvgUrl,
+      onClick: () => openBuyPlan?.("trial"),
+    },
+    {
+      key: "transaction-history",
+      label: t("Common:TransactionHistory"),
+      icon: HistoryReactSvgUrl,
+      onClick: () => navigate(PAYMENT_ROUTES.docsConnect),
+    },
+  ];
+
   const getContextMenuItems = (): ContextMenuModel[] => [
     {
       key: "copy-secret-key",
       label: t("DocsConnect:CopySecretKey"),
-      icon: CopyReactSvgUrl,
+      icon: KeyReactSvgUrl,
       onClick: () => copySecretKey?.(t),
     },
     ...(hasScheduledChange
@@ -165,19 +187,28 @@ const TenantPanel = ({
             {t("DocsConnect:DocsConnect")}
           </Text>
           {isTrial ? (
-            <span
-              className={`${styles.trialBadge} ${
-                expired
-                  ? styles.trialBadgeExpired
-                  : trialLow
-                    ? styles.trialBadgeWarning
-                    : ""
-              }`}
-            >
-              {expired
-                ? t("Common:TrialExpired")
-                : t("Common:FreeDaysLeft", { count: daysLeft })}
-            </span>
+            <>
+              <ContextMenuButton
+                displayType={ContextMenuButtonDisplayType.dropdown}
+                getData={getTrialContextMenuItems}
+                size={16}
+                directionX="right"
+                testId="docs_connect_context_menu_button"
+              />
+              <span
+                className={`${styles.trialBadge} ${
+                  expired
+                    ? styles.trialBadgeExpired
+                    : trialLow
+                      ? styles.trialBadgeWarning
+                      : ""
+                }`}
+              >
+                {expired
+                  ? t("Common:TrialExpired")
+                  : t("Common:FreeDaysLeft", { count: daysLeft })}
+              </span>
+            </>
           ) : (
             <ContextMenuButton
               displayType={ContextMenuButtonDisplayType.dropdown}

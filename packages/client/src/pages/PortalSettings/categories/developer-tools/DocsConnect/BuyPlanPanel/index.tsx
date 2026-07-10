@@ -390,7 +390,7 @@ const BuyPlanPanel = ({
                   </Text>
                 </Text>
                 <Text fontSize="13px">
-                  {t("DocsConnect:PerUserPerMonth", {
+                  {t("DocsConnect:PlusPerUserPerMonth", {
                     price: formatCurrency(devPackPrice),
                   })}{" "}
                   <Text

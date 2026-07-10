@@ -78,6 +78,7 @@
   "CalculateYourPlan": "Calculate your subscription",
   "NumberOfUsers": "Number of users",
   "PerUserPerMonth": "{{price}} per user/month",
+  "PlusPerUserPerMonth": "+{{price}} per user/month",
   "DevPack": "Dev Pack",
   "OptionalAddOn": "Optional add-on",
   "AutomationApi": "Automation API",

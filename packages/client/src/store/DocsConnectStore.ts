@@ -52,6 +52,12 @@ import type {
   TDocsConnectConfigUpdate,
 } from "@docspace/shared/api/docs-connect/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import {
+  openStripeCheckout,
+  pollUntil,
+} from "@docspace/ui-kit/billing/utils/stripe-flow";
+import type { TStripeCheckoutDeps } from "@docspace/ui-kit/billing/utils/stripe-flow";
+import { DOCS_CONNECT } from "@docspace/ui-kit/billing/constants";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
@@ -187,6 +193,74 @@ class DocsConnectStore {
     });
     this.closeBuyPlan();
     this.refreshPortalState();
+  };
+
+  buyPlanViaStripe = async ({
+    users,
+    devPack,
+    topUp,
+    totalMonthly,
+    language,
+    fetchCardLinked,
+    signal,
+  }: {
+    users: number;
+    devPack: boolean;
+    topUp: number;
+    totalMonthly: number;
+    language: string;
+    fetchCardLinked: TStripeCheckoutDeps["fetchCardLinked"];
+    signal: AbortSignal;
+  }) => {
+    const isPaid = this.info ? isDocsConnectPaid(this.info) : false;
+    const currentUsers =
+      !isPaid || this.info?.deactivated
+        ? 0
+        : (this.info?.tenant.payment?.quantity ?? 0);
+    const addUsers = Math.max(0, users - currentUsers);
+
+    await openStripeCheckout(
+      {
+        walletCodeCurrency: this.info?.wallet?.currency ?? "USD",
+        language,
+        fetchCardLinked,
+      },
+      String(topUp),
+      DOCS_CONNECT,
+      {
+        users: String(users),
+        add: String(addUsers),
+        price: String(totalMonthly),
+        ...(devPack ? { devpack: "1" } : {}),
+      },
+    );
+
+    await pollUntil(async () => {
+      const payer = await this.currentTariffStatusStore?.fetchPayerInfo(true);
+      return !!payer?.email;
+    }, signal);
+
+    await pollUntil(async () => {
+      const info = await getDocsConnectInfo(true);
+      const activated =
+        !!info &&
+        isDocsConnectPaid(info) &&
+        !info.deactivated &&
+        (info.tenant.payment?.quantity ?? 0) >= users &&
+        (!devPack || info.devPackEnabled === true);
+      if (activated) {
+        runInAction(() => {
+          this.info = info;
+        });
+      }
+      return activated;
+    }, signal);
+
+    if (signal.aborted) return false;
+
+    this.closeBuyPlan();
+    this.refreshPortalState();
+    return true;
   };
 
   calculateDevPack = async (quantity: number) =>

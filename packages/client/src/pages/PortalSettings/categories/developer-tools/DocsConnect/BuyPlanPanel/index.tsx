@@ -33,9 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+
+import { useApi } from "@docspace/ui-kit/providers/api";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
@@ -59,6 +61,8 @@ import type {
   TDocsConnectInfo,
   TDocsConnectDevPackCalculation,
 } from "@docspace/shared/api/docs-connect/types";
+
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 
 import {
   getDocsConnectDaysLeft,
@@ -90,6 +94,21 @@ interface BuyPlanPanelProps {
     quantity: number;
     topUp?: number;
   }) => Promise<void>;
+  buyPlanViaStripe?: (opts: {
+    users: number;
+    devPack: boolean;
+    topUp: number;
+    totalMonthly: number;
+    language: string;
+    fetchCardLinked: (
+      backUrl?: string,
+      successUrl?: string,
+    ) => Promise<string | null | undefined>;
+    signal: AbortSignal;
+  }) => Promise<boolean>;
+  isCardMissingOrInactive?: boolean;
+  fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
+  fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
   closeBuyPlan?: () => void;
 }
 
@@ -99,9 +118,14 @@ const BuyPlanPanel = ({
   buyPlan,
   calculateDevPack,
   switchToDevPack,
+  buyPlanViaStripe,
+  isCardMissingOrInactive,
+  fetchPayerInfo,
+  fetchWalletBalance,
   closeBuyPlan,
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
+  const { paymentApi } = useApi();
 
   const [users, setUsers] = useState<number>(() => {
     const initial = info?.tenant.payment?.quantity ?? 50;
@@ -112,9 +136,25 @@ const BuyPlanPanel = ({
     info?.devPackEnabled ?? false,
   );
   const [submitting, setSubmitting] = useState(false);
+  const [waitingPayment, setWaitingPayment] = useState(false);
+  const [topUpDialogVisible, setTopUpDialogVisible] = useState(false);
   const [devPackCalc, setDevPackCalc] =
     useState<TDocsConnectDevPackCalculation | null>(null);
   const [calcLoading, setCalcLoading] = useState(false);
+
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    return () => {
+      abortControllerRef.current?.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    fetchPayerInfo?.()?.catch(() => {});
+    fetchWalletBalance?.()?.catch(() => {});
+  }, [visible, fetchPayerInfo, fetchWalletBalance]);
 
   useEffect(() => {
     if (!info) return undefined;
@@ -240,15 +280,56 @@ const BuyPlanPanel = ({
     />
   );
 
+  const fetchCardLinked = async (backUrl?: string, successUrl?: string) => {
+    const res = await paymentApi.getCheckoutSetupUrl(
+      { backUrl: backUrl ?? window.location.href },
+      { params: { successUrl } } as never,
+    );
+    return res?.data?.response as string | undefined;
+  };
+
+  const onClose = () => {
+    abortControllerRef.current?.abort();
+    closeBuyPlan?.();
+  };
+
+  const onTopUpConfirm = async () => {
+    await switchToDevPack?.({ quantity: users, topUp: 0 });
+    toastr.success(t("DocsConnect:PlanPurchased"));
+  };
+
   const onBuy = async () => {
     if (submitting) return;
+
+    if (isDevPackUpgrade && insufficientFunds && isCardMissingOrInactive) {
+      setTopUpDialogVisible(true);
+      return;
+    }
+
+    const isStripePurchase =
+      !isDevPackUpgrade && insufficientFunds && !!isCardMissingOrInactive;
+    const controller = isStripePurchase ? new AbortController() : null;
+    if (controller) abortControllerRef.current = controller;
+
     setSubmitting(true);
+    if (isStripePurchase) setWaitingPayment(true);
     try {
       if (isDevPackUpgrade) {
         await switchToDevPack?.({
           quantity: users,
           topUp: insufficientFunds ? topUpRequired : 0,
         });
+      } else if (controller) {
+        const done = await buyPlanViaStripe?.({
+          users,
+          devPack,
+          topUp: topUpRequired,
+          totalMonthly,
+          language: i18n.language,
+          fetchCardLinked,
+          signal: controller.signal,
+        });
+        if (!done) return;
       } else {
         await buyPlan?.({
           users,
@@ -262,8 +343,9 @@ const BuyPlanPanel = ({
           : t("DocsConnect:PlanPurchased"),
       );
     } catch (error) {
-      toastr.error(error as Error);
+      if (!controller?.signal.aborted) toastr.error(error as Error);
     } finally {
+      setWaitingPayment(false);
       setSubmitting(false);
     }
   };
@@ -280,10 +362,11 @@ const BuyPlanPanel = ({
   );
 
   return (
-    <ModalDialog
-      visible={visible}
-      displayType={ModalDialogType.aside}
-      onClose={() => closeBuyPlan?.()}
+    <>
+      <ModalDialog
+        visible={visible}
+        displayType={ModalDialogType.aside}
+        onClose={onClose}
       withBodyScroll
       withFooterBorder
       isDoubleFooterLine={insufficientFunds || isDevPackUpgrade || isUpgrade}
@@ -790,20 +873,37 @@ const BuyPlanPanel = ({
             scale
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
-            onClick={() => closeBuyPlan?.()}
-            isDisabled={submitting}
+            onClick={onClose}
+            isDisabled={submitting && !waitingPayment}
           />
         </div>
       </ModalDialog.Footer>
-    </ModalDialog>
+      </ModalDialog>
+      {topUpDialogVisible ? (
+        <ClientSimpleTopUpDialog
+          visible={topUpDialogVisible}
+          onClose={() => setTopUpDialogVisible(false)}
+          onConfirm={onTopUpConfirm}
+          language={i18n.language}
+          service=""
+          minValue={String(topUpRequired)}
+        />
+      ) : null}
+    </>
   );
 };
 
-export default inject(({ docsConnectStore }: TStore) => ({
-  visible: docsConnectStore.buyPlanPanelVisible,
-  info: docsConnectStore.info,
-  buyPlan: docsConnectStore.buyPlan,
-  calculateDevPack: docsConnectStore.calculateDevPack,
-  switchToDevPack: docsConnectStore.switchToDevPack,
-  closeBuyPlan: docsConnectStore.closeBuyPlan,
-}))(observer(BuyPlanPanel));
+export default inject(
+  ({ docsConnectStore, paymentStore, currentTariffStatusStore }: TStore) => ({
+    visible: docsConnectStore.buyPlanPanelVisible,
+    info: docsConnectStore.info,
+    buyPlan: docsConnectStore.buyPlan,
+    calculateDevPack: docsConnectStore.calculateDevPack,
+    switchToDevPack: docsConnectStore.switchToDevPack,
+    buyPlanViaStripe: docsConnectStore.buyPlanViaStripe,
+    isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,
+    fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
+    fetchWalletBalance: paymentStore.fetchWalletBalance,
+    closeBuyPlan: docsConnectStore.closeBuyPlan,
+  }),
+)(observer(BuyPlanPanel));

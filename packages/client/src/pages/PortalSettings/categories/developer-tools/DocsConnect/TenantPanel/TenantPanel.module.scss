@@ -338,6 +338,68 @@
   flex-shrink: 0;
 }
 
+.deactivatedBanner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  max-width: 660px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--dev-tools-card-bg);
+}
+
+.deactivatedBannerHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deactivatedBannerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg path {
+    fill: var(--dev-tools-status-negative);
+  }
+}
+
+.deactivatedBannerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.deactivatedBannerDivider {
+  color: var(--dev-tools-text-tertiary);
+}
+
+.subscriptionTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inactiveBadge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 16px;
+  color: var(--dev-tools-status-negative);
+  background-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-negative) 12%,
+    transparent
+  );
+}
+
 .overviewGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

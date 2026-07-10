@@ -50,6 +50,7 @@ import PromoPage from "./PromoPage";
 import TenantPanel from "./TenantPanel";
 import BuyPlanPanel from "./BuyPlanPanel";
 import CancelPlanDialog from "./CancelPlanDialog";
+import RemoveSubscriptionDialog from "./RemoveSubscriptionDialog";
 import TenantPanelLoader from "./TenantPanel/Loader";
 import { isDocsConnectCanceled } from "./utils";
 
@@ -59,6 +60,7 @@ interface DocsConnectProps {
   error?: Error | null;
   buyPlanPanelVisible?: boolean;
   cancelPlanDialogVisible?: boolean;
+  removeSubscriptionDialogVisible?: boolean;
   fetchInfo?: () => void;
   language?: string;
   logoText?: string;
@@ -72,6 +74,7 @@ const DocsConnect = ({
   error,
   buyPlanPanelVisible,
   cancelPlanDialogVisible,
+  removeSubscriptionDialogVisible,
   fetchInfo,
   language = "en",
   logoText,
@@ -137,6 +140,7 @@ const DocsConnect = ({
       <TenantPanel />
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
       {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
+      {removeSubscriptionDialogVisible ? <RemoveSubscriptionDialog /> : null}
     </BillingRoot>
   );
 };
@@ -157,6 +161,8 @@ export default inject(
       error: docsConnectStore.error,
       buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
       cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
+      removeSubscriptionDialogVisible:
+        docsConnectStore.removeSubscriptionDialogVisible,
       fetchInfo: docsConnectStore.fetchInfo,
       language: authStore.language,
       logoText: settingsStore.logoText,

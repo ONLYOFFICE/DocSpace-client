@@ -59,6 +59,7 @@ import {
 import { DOCS_CONNECT_ROUTE } from "../../../developer-tools/DocsConnect/constants";
 import BuyPlanPanel from "../../../developer-tools/DocsConnect/BuyPlanPanel";
 import CancelPlanDialog from "../../../developer-tools/DocsConnect/CancelPlanDialog";
+import RemoveSubscriptionDialog from "../../../developer-tools/DocsConnect/RemoveSubscriptionDialog";
 import PromoPage from "../../../developer-tools/DocsConnect/PromoPage";
 import { PAYMENT_ROUTES } from "../../utils";
 
@@ -69,9 +70,11 @@ interface ServicePageProps {
   docsConnectLoading?: boolean;
   buyPlanPanelVisible?: boolean;
   cancelPlanDialogVisible?: boolean;
+  removeSubscriptionDialogVisible?: boolean;
   fetchDocsConnectInfo?: () => void;
   openBuyPlan?: (mode: "trial" | "edit") => void;
   openCancelPlanDialog?: () => void;
+  openRemoveSubscriptionDialog?: () => void;
   cancelScheduledChange?: () => Promise<void>;
 }
 
@@ -86,9 +89,11 @@ const ServicePage = (props: ServicePageProps) => {
     docsConnectLoading,
     buyPlanPanelVisible,
     cancelPlanDialogVisible,
+    removeSubscriptionDialogVisible,
     fetchDocsConnectInfo,
     openBuyPlan,
     openCancelPlanDialog,
+    openRemoveSubscriptionDialog,
     cancelScheduledChange,
   } = props;
   useTranslation(["DocsConnect", "Common"]);
@@ -180,10 +185,12 @@ const ServicePage = (props: ServicePageProps) => {
           onEditPlan={() => openBuyPlan?.("edit")}
           onGoToTenant={() => navigate(DOCS_CONNECT_ROUTE)}
           onCancelPlan={() => openCancelPlanDialog?.()}
+          onRemovePlan={() => openRemoveSubscriptionDialog?.()}
           onCancelChange={onCancelChange}
         />
         {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
         {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
+        {removeSubscriptionDialogVisible ? <RemoveSubscriptionDialog /> : null}
       </>
     );
   };
@@ -230,9 +237,13 @@ export const Component = inject(
       docsConnectLoading: docsConnectStore.isLoading,
       buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
       cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
+      removeSubscriptionDialogVisible:
+        docsConnectStore.removeSubscriptionDialogVisible,
       fetchDocsConnectInfo: docsConnectStore.fetchInfo,
       openBuyPlan: docsConnectStore.openBuyPlan,
       openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
+      openRemoveSubscriptionDialog:
+        docsConnectStore.openRemoveSubscriptionDialog,
       cancelScheduledChange: docsConnectStore.cancelScheduledChange,
     };
   },

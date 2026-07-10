@@ -284,6 +284,13 @@ export const updateDocsConnectConfig = async (
   })) as TDocsConnectConfig | null;
 };
 
+export const getDocsConnectReport = async (): Promise<string> => {
+  return (await request({
+    method: "post",
+    url: `${BASE}/tenant/quota/report`,
+  })) as string;
+};
+
 export const cancelDocsConnectPlan = async (
   devPackEnabled: boolean,
 ): Promise<TDocsConnectInfo | null> => {

@@ -88,6 +88,8 @@ class DocsConnectStore {
 
   cancelPlanDialogVisible: boolean = false;
 
+  removeSubscriptionDialogVisible: boolean = false;
+
   constructor(
     settingsStore: SettingsStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -146,6 +148,14 @@ class DocsConnectStore {
 
   closeCancelPlanDialog = () => {
     this.cancelPlanDialogVisible = false;
+  };
+
+  openRemoveSubscriptionDialog = () => {
+    this.removeSubscriptionDialogVisible = true;
+  };
+
+  closeRemoveSubscriptionDialog = () => {
+    this.removeSubscriptionDialogVisible = false;
   };
 
   openGetStarted = () => {

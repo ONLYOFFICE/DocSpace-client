@@ -47,6 +47,7 @@ import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-
 import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
+import AlertIcon from "@docspace/ui-kit/assets/plugin.incompatible.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { getBrandName } from "@docspace/shared/constants/brands";
@@ -65,6 +66,7 @@ type Connector = { key: string; label: string; url?: string };
 interface StatisticsProps {
   info?: TDocsConnectInfo;
   openBuyPlan?: (mode: "trial" | "edit") => void;
+  openRemoveSubscriptionDialog?: () => void;
   cancelScheduledChange?: () => Promise<void>;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   downloadReport?: () => void;
@@ -80,6 +82,7 @@ interface StatisticsProps {
 const Statistics = ({
   info,
   openBuyPlan,
+  openRemoveSubscriptionDialog,
   cancelScheduledChange,
   copyToClipboard,
   downloadReport,
@@ -143,6 +146,53 @@ const Statistics = ({
 
   return (
     <div className={styles.statistics}>
+      {deactivated ? (
+        <div className={styles.deactivatedBanner}>
+          <div className={styles.deactivatedBannerHeader}>
+            <span className={styles.deactivatedBannerIcon} aria-hidden="true">
+              <AlertIcon />
+            </span>
+            <Text
+              fontSize="13px"
+              fontWeight={600}
+              className={styles.deactivatedTitle}
+            >
+              {t("Common:SubscriptionDeactivated")}
+            </Text>
+          </div>
+          <Text fontSize="12px" className={styles.muted}>
+            {t("Common:SubscriptionDeactivatedDescription")}
+          </Text>
+          <div className={styles.deactivatedBannerActions}>
+            <Link
+              type={LinkType.action}
+              color="accent"
+              fontSize="13px"
+              fontWeight={600}
+              textDecoration="underline dashed"
+              onClick={onTopUpAndPay}
+            >
+              {t("Common:TopUpAndRenew")}
+            </Link>
+            <span
+              className={styles.deactivatedBannerDivider}
+              aria-hidden="true"
+            >
+              |
+            </span>
+            <Link
+              type={LinkType.action}
+              fontSize="13px"
+              fontWeight={600}
+              textDecoration="underline dashed"
+              onClick={openRemoveSubscriptionDialog}
+            >
+              {t("Common:Remove")}
+            </Link>
+          </div>
+        </div>
+      ) : null}
+
       {isTrial ? (
         <div className={styles.trialBanner}>
           <div className={styles.trialBannerText}>
@@ -300,13 +350,14 @@ const Statistics = ({
           <div className={styles.detailCard}>
             <div className={styles.detailCardHeader}>
               {deactivated ? (
-                <Text
-                  fontSize="16px"
-                  fontWeight={700}
-                  className={styles.deactivatedTitle}
-                >
-                  {t("Common:SubscriptionDeactivated")}
-                </Text>
+                <div className={styles.subscriptionTitleRow}>
+                  <Text fontSize="16px" fontWeight={700}>
+                    {t("Common:PreviousSubscription")}
+                  </Text>
+                  <span className={styles.inactiveBadge}>
+                    {t("Common:Inactive")}
+                  </span>
+                </div>
               ) : (
                 <Text fontSize="16px" fontWeight={700}>
                   {t("DocsConnect:Subscription")}{" "}
@@ -345,18 +396,7 @@ const Statistics = ({
                   </Text>
                 </Text>
               )}
-              {deactivated ? (
-                <Link
-                  type={LinkType.action}
-                  color="accent"
-                  fontSize="13px"
-                  fontWeight={600}
-                  textDecoration="underline dashed"
-                  onClick={onTopUpAndPay}
-                >
-                  {t("Common:TopUpAndPay")}
-                </Link>
-              ) : scheduledChange ? null : (
+              {deactivated ? null : scheduledChange ? null : (
                 <Link
                   type={LinkType.action}
                   color="accent"
@@ -536,6 +576,7 @@ const Statistics = ({
 export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
+  openRemoveSubscriptionDialog: docsConnectStore.openRemoveSubscriptionDialog,
   cancelScheduledChange: docsConnectStore.cancelScheduledChange,
   copyToClipboard: docsConnectStore.copyToClipboard,
   downloadReport: docsConnectStore.downloadReport,

@@ -45,8 +45,8 @@ import {
   cancelDocsConnectPlan,
   cancelDocsConnectScheduledChange,
   updateDocsConnectConfig,
+  getDocsConnectReport,
 } from "@docspace/shared/api/docs-connect";
-import { getAuditTrailReport } from "@docspace/shared/api/settings";
 import type {
   TDocsConnectInfo,
   TDocsConnectConfigUpdate,
@@ -316,7 +316,7 @@ class DocsConnectStore {
 
   downloadReport = async () => {
     try {
-      const res = (await getAuditTrailReport()) as string;
+      const res = await getDocsConnectReport();
       setTimeout(() => window.open(res, "_blank"), 100); // hack for ios
     } catch (error) {
       toastr.error(error as Error);

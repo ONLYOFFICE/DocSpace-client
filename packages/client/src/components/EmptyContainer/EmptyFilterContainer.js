@@ -72,6 +72,7 @@ const EmptyFilterContainer = ({
   userId,
   isInsideKnowledge,
   isInsideResultStorage,
+  folderType,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -126,6 +127,12 @@ const EmptyFilterContainer = ({
       const newFilter = FilesFilter.getDefault({ isRecentFolder });
 
       newFilter.folder = selectedFolderId;
+
+      // Preserve the section scope (Recent/Favorites/Trash are aggregate
+      // roots scoped to a set of FolderTypes). Without this, clearing the
+      // filter drops the scope and leaks entries from other sections
+      // (e.g. room files showing up under Favorites).
+      newFilter.folderType = folderType;
 
       if (isInsideResultStorage) {
         newFilter.searchArea = SearchArea.ResultStorage;
@@ -197,6 +204,7 @@ export default inject(
       userId: user?.id,
       isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       isInsideResultStorage: selectedFolderStore.isInsideResultStorage,
+      folderType: filesStore.filter.folderType,
 
       isPublicRoom,
       publicRoomKey,

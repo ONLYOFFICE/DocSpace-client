@@ -33,14 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
+import { BillingRoot } from "@docspace/ui-kit/billing";
+import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
+
+import { PAYMENT_ROUTES } from "../../payments/utils";
 
 import PromoPage from "./PromoPage";
 import TenantPanel from "./TenantPanel";
@@ -56,6 +60,10 @@ interface DocsConnectProps {
   buyPlanPanelVisible?: boolean;
   cancelPlanDialogVisible?: boolean;
   fetchInfo?: () => void;
+  language?: string;
+  logoText?: string;
+  user?: TPaymentUser;
+  openOnNewPage?: boolean;
 }
 
 const DocsConnect = ({
@@ -65,8 +73,23 @@ const DocsConnect = ({
   buyPlanPanelVisible,
   cancelPlanDialogVisible,
   fetchInfo,
+  language = "en",
+  logoText,
+  user,
+  openOnNewPage,
 }: DocsConnectProps) => {
   const { t, ready } = useTranslation(["DocsConnect", "Common"]);
+
+  const paymentConfig = useMemo(
+    () => ({
+      language,
+      logoText,
+      user,
+      openOnNewPage,
+      routes: PAYMENT_ROUTES,
+    }),
+    [language, logoText, user, openOnNewPage],
+  );
 
   useEffect(() => {
     fetchInfo?.();
@@ -110,19 +133,41 @@ const DocsConnect = ({
   }
 
   return (
-    <>
+    <BillingRoot config={paymentConfig}>
       <TenantPanel />
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
       {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
-    </>
+    </BillingRoot>
   );
 };
 
-export default inject(({ docsConnectStore }: TStore) => ({
-  info: docsConnectStore.info,
-  isLoading: docsConnectStore.isLoading,
-  error: docsConnectStore.error,
-  buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
-  cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
-  fetchInfo: docsConnectStore.fetchInfo,
-}))(observer(DocsConnect));
+export default inject(
+  ({
+    docsConnectStore,
+    authStore,
+    settingsStore,
+    userStore,
+    filesSettingsStore,
+  }: TStore) => {
+    const { user } = userStore;
+
+    return {
+      info: docsConnectStore.info,
+      isLoading: docsConnectStore.isLoading,
+      error: docsConnectStore.error,
+      buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
+      cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
+      fetchInfo: docsConnectStore.fetchInfo,
+      language: authStore.language,
+      logoText: settingsStore.logoText,
+      openOnNewPage: filesSettingsStore.openOnNewPage,
+      user: user
+        ? {
+            id: user.id,
+            email: user.email,
+            isOwner: user.isOwner,
+          }
+        : undefined,
+    };
+  },
+)(observer(DocsConnect));

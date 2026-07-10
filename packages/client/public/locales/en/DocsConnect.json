@@ -42,7 +42,6 @@
   "FreeTrialTitle": "Free trial",
   "DaysLeft": "Days left",
   "OfDays": "of {{count}} days",
-  "GoToTenant": "Go to tenant",
   "TrialEndsOn": "Your trial ends on {{date}}. Upgrade to keep your tenant and data.",
   "TrialDaysRemaining": "~ {{count}} days remaining",
   "TrialDaysRemainingExpired": "{{count}} days remaining",

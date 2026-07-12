@@ -64,6 +64,8 @@ const EmptyFilterContainer = ({
   isArchiveFolder,
   isRoomsFolder,
   isAIAgentsFolder,
+  isFormsFolder,
+  isTemplatesFolder,
   isRecentFolder,
   setClearSearch,
   theme,
@@ -73,6 +75,7 @@ const EmptyFilterContainer = ({
   isInsideKnowledge,
   isInsideResultStorage,
   folderType,
+  roomsFilterSearchArea,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -119,8 +122,14 @@ const EmptyFilterContainer = ({
       setClearSearch(true);
       return;
     }
-    if (isRoomsFolder || isAIAgentsFolder) {
+    if (
+      isRoomsFolder ||
+      isAIAgentsFolder ||
+      isFormsFolder ||
+      isTemplatesFolder
+    ) {
       const newFilter = RoomsFilter.clean();
+      newFilter.searchArea = roomsFilterSearchArea;
 
       navigate(`${location.pathname}?${newFilter.toUrlParams(userId)}`);
     } else {
@@ -184,10 +193,17 @@ export default inject(
     publicRoomStore,
     userStore,
   }) => {
-    const { isRoomsFolder, isArchiveFolder, isRecentFolder, isAIAgentsFolder } =
-      treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isRecentFolder,
+      isAIAgentsFolder,
+      isFormsFolder,
+      isTemplatesFolder,
+    } = treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isFormsFolder || isTemplatesFolder;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
     const { user } = userStore;
 
@@ -198,6 +214,8 @@ export default inject(
       isArchiveFolder,
       isAIAgentsFolder,
       isRoomsFolder,
+      isFormsFolder,
+      isTemplatesFolder,
       isRecentFolder,
       setClearSearch: filesStore.setClearSearch,
       theme: settingsStore.theme,
@@ -205,6 +223,7 @@ export default inject(
       isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
       isInsideResultStorage: selectedFolderStore.isInsideResultStorage,
       folderType: filesStore.filter.folderType,
+      roomsFilterSearchArea: filesStore.roomsFilter.searchArea,
 
       isPublicRoom,
       publicRoomKey,

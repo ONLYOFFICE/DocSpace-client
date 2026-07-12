@@ -3389,13 +3389,15 @@ class FilesActionStore {
   getRecentFolderOptions = (itemsCollection: TItemsCollection, t: TTranslation) => {
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
-    const showInfo = this.getOption("show-info", t);
+    const moveTo = this.getOption("moveTo", t);
+    const copy = this.getOption("copy", t);
     const removeFromRecent = this.getOption("remove-from-recent", t);
 
     itemsCollection
       .set("download", download)
       .set("downloadAs", downloadAs)
-      .set("showInfo", showInfo)
+      .set("moveTo", moveTo)
+      .set("copy", copy)
       .set("removeFromRecent", removeFromRecent);
 
     return convertToArray(itemsCollection);
@@ -3448,14 +3450,15 @@ class FilesActionStore {
     // const { selection } = this.filesStore;
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
+    const moveTo = this.getOption("moveTo", t);
     const copy = this.getOption("copy", t);
-    const showInfo = this.getOption("showInfo", t);
 
     itemsCollection
       .set("download", download)
       .set("downloadAs", downloadAs)
-      .set("copy", copy)
-      /* .set("delete", {
+      .set("moveTo", moveTo)
+      .set("copy", copy);
+    /* .set("delete", {
         label: t("Common:RemoveFromFavorites"),
         alt: t("Common:RemoveFromFavorites"),
         iconUrl: FavoritesFillReactSvgUrl,
@@ -3465,7 +3468,6 @@ class FilesActionStore {
             .catch((err) => toastr.error(err));
         },
       }) */
-      .set("showInfo", showInfo);
 
     return convertToArray(itemsCollection);
   };

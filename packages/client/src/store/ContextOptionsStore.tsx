@@ -3740,6 +3740,20 @@ class ContextOptionsStore {
           this.filesActionsStore.onClickRemoveFromRecent(selection, t),
         disabled: !this.treeFoldersStore.isRecentFolder,
       },
+      {
+        key: "remove-shared-folder-or-file",
+        label: t("Common:RemoveFromList"),
+        icon: CircleCrossSvgUrl,
+        onClick: () => {
+          this.dialogsStore.setUnsubscribe(true);
+          this.dialogsStore.setDeleteDialogVisible(true);
+        },
+        disabled:
+          // FIXME: temporary hack — backend should expose a flag to disable this
+          typeof window !== "undefined"
+            ? !window?.location?.pathname.includes(SHARED_WITH_ME_PATH)
+            : false,
+      },
       /* {
         key: "remove-from-favorites",
         label: t("Common:RemoveFromFavorites"),

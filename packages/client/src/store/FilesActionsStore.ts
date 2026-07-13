@@ -750,13 +750,13 @@ class FilesActionStore {
     items: (TActionItem | number)[],
     successCallback?: (...args: unknown[]) => unknown,
     abortCallback?: (...args: unknown[]) => unknown,
-  )=> changeRoomQuotaImpl(this, items, successCallback);
+  )=> changeRoomQuotaImpl(this, items, successCallback, abortCallback);
 
   changeAIAgentsQuota = (
     items: (TActionItem | number)[],
     successCallback?: (...args: unknown[]) => unknown,
     abortCallback?: (...args: unknown[]) => unknown,
-  )=> changeAIAgentsQuotaImpl(this, items, successCallback);
+  )=> changeAIAgentsQuotaImpl(this, items, successCallback, abortCallback);
 
   disableRoomQuota = async (items: (TActionItem | number)[], t: TTranslation)=> disableRoomQuotaImpl(this, items, t);
 

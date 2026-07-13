@@ -80,12 +80,41 @@ describe("FilesActionsStore — room operations (batch 5)", () => {
     expect(setRestoreRoomDialogVisible).toHaveBeenCalledWith(true);
   });
 
-  it("changeRoomQuota / changeAIAgentsQuota dispatch a CHANGE_QUOTA event", () => {
+  it("changeRoomQuota / changeAIAgentsQuota dispatch a CHANGE_QUOTA event carrying both callbacks", () => {
     const dispatchEvent = vi.spyOn(window, "dispatchEvent");
     const store = createTestFilesActionsStore();
-    store.changeRoomQuota([{ id: 1 }] as never);
-    store.changeAIAgentsQuota([2] as never);
+
+    const roomSuccess = vi.fn();
+    const roomAbort = vi.fn();
+    const agentSuccess = vi.fn();
+    const agentAbort = vi.fn();
+
+    store.changeRoomQuota([{ id: 1 }] as never, roomSuccess, roomAbort);
+    store.changeAIAgentsQuota([2] as never, agentSuccess, agentAbort);
+
     expect(dispatchEvent).toHaveBeenCalledTimes(2);
+
+    // the still-.js GlobalEvents/ChangeQuotaEvent consumer reads successCallback
+    // AND abortCallback off the dispatched event's payload; both must survive
+    // the facade delegator (regression guard: abortCallback was dropped).
+    const roomPayload = (
+      dispatchEvent.mock.calls[0][0] as unknown as {
+        payload: Record<string, unknown>;
+      }
+    ).payload;
+    expect(roomPayload).toMatchObject({ type: "room", ids: [1] });
+    expect(roomPayload.successCallback).toBe(roomSuccess);
+    expect(roomPayload.abortCallback).toBe(roomAbort);
+
+    const agentPayload = (
+      dispatchEvent.mock.calls[1][0] as unknown as {
+        payload: Record<string, unknown>;
+      }
+    ).payload;
+    expect(agentPayload).toMatchObject({ type: "agent", ids: [2] });
+    expect(agentPayload.successCallback).toBe(agentSuccess);
+    expect(agentPayload.abortCallback).toBe(agentAbort);
+
     dispatchEvent.mockRestore();
   });
 

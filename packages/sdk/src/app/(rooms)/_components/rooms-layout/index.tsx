@@ -305,7 +305,6 @@ const RoomsLayout = observer(
                   headerOffset={headerOffset}
                   isInfoPanelVisible={infoPanelStore.isVisible}
                   onToggleInfoPanel={infoPanelStore.toggle}
-                  aiChatButton={ai?.chatButton}
                 />
               }
               stickyTableHeader

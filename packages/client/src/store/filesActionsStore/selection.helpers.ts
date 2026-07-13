@@ -34,13 +34,10 @@
  */
 
 import {
-  downloadFiles,
-  emptyTrash,
   finalizeVersion,
   lockFile,
   markAsRead,
   createFolder,
-  duplicate,
   deleteFilesFromRecent,
 } from "@docspace/shared/api/files";
 import {
@@ -53,7 +50,6 @@ import { runInAction } from "mobx";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isFile as isFileCheck } from "@docspace/shared/utils/typeGuards";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {
   getConvertedSize,
   getCategoryType,

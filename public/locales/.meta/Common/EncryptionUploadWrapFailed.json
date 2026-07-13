@@ -3,7 +3,7 @@
   "content": "Encryption sealing failed for the uploaded file. It may not be openable; please remove it and re-upload.",
   "content_en_sha1_hash": "919d8dc4ecf3817fe7dad6bc0acf21f2c0ae6767",
   "created_at": "2026-05-24T17:27:26.755Z",
-  "updated_at": "2026-06-09T09:43:10.944Z",
+  "updated_at": "2026-07-07T08:59:21.929Z",
   "comment": {
     "text": "Error message appearing in a notification or alert when the encryption process for an uploaded file fails, advising the user to remove and re-upload the file.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 1727,
-      "context": "publicKeyId || \"\",\n dekForWrap,\n roomIdForWrap,\n ).catch((error) => {\n const wrapMessage = getI18n().t(\n \"Common:EncryptionUploadWrapFailed\",\n );\n console.error(\"[ENCRYPTION] Failed to set file encryption keys\", {\n fileId,\n status: error?.response?.status,\n message: error?.message,",
+      "file_path": "/packages/client/src/store/UploadDataStore.tsx",
+      "line_number": 1898,
+      "context": "// hasFileDek() above guarantees a DEK is stored for this entry.\n dekForWrap!,\n roomIdForWrap,\n ).catch((error: TAxiosLikeError) => {\n const wrapMessage = getI18n().t(\n \"Common:EncryptionUploadWrapFailed\",\n );\n console.error(\"[ENCRYPTION] Failed to set file encryption keys\", {\n fileId,\n status: error?.response?.status,\n message: error?.message,",
       "module": "/packages/client"
     }
   ],

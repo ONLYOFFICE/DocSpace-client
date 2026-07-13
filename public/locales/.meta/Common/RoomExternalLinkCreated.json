@@ -3,7 +3,7 @@
   "content": "Link created.",
   "content_en_sha1_hash": "2c21fcb17481109dbc9b9cdcccd0ada3c185acb9",
   "created_at": "2025-05-19T21:30:54.912Z",
-  "updated_at": "2026-06-09T11:32:15.292Z",
+  "updated_at": "2026-07-07T08:59:21.810Z",
   "comment": {
     "text": "This is a toast message indicating that a new external link for a room has been successfully generated.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 256,
+      "line_number": 291,
       "context": "case FeedActionKeys.RoomInviteResend:\n return t(\"Common:RoomInviteResend\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"Common:RoomGroupRemove\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"Common:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed: {\n const title = (feed.data as TFeedData).title;\n const oldTitle = (feed.data as TFeedData).oldTitle;\n return (\n <Trans",
       "module": "/packages/sdk"
     }

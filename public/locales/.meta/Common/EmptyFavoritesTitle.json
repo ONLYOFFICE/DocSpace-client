@@ -3,7 +3,7 @@
   "content": "No favorites yet",
   "content_en_sha1_hash": "95bc68017dfed8ed0ded21e039540b341d9e4f0c",
   "created_at": "2025-08-29T14:33:36.166Z",
-  "updated_at": "2026-07-04T11:30:21.789Z",
+  "updated_at": "2026-07-07T08:59:21.671Z",
   "comment": {
     "text": "This is the title displayed when the \"Favorites\" section is empty, indicating that no items have been marked as favorites yet.",
     "is_auto": true,
@@ -13,31 +13,31 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 489,
+      "line_number": 491,
       "context": ")\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.SHARE, P._], () => t(\"Common:EmptyShareTitle\"))\n .with([FolderType.Favorites, P._], () => t(\"Common:EmptyFavoritesTitle\"))\n .with([FolderType.Recent, P._], () => t(\"Common:NoRecentFilesHereYet\"))\n .with([FolderType.Archive, P._], () => t(\"Common:ArchiveEmptyScreenHeader\"))\n .with([FolderType.TRASH, P._], () => t(\"Common:EmptyScreenFolder\"))\n .otherwise(() => \"\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-section-empty-view/index.tsx",
-      "line_number": 97,
+      "line_number": 132,
       "context": "<EmptyFavoritesDarkIcon />\n );\n return (\n <EmptyView\n icon={icon}\n title={t(\"Common:EmptyFavoritesTitle\", {\n defaultValue: \"No favorites yet\",\n })}\n description={t(\"Common:EmptyFavoritesDescription\", {\n defaultValue:\n \"Star agents to keep them easily accessible and within reach.\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
-      "line_number": 48,
+      "line_number": 83,
       "context": ") => {\n switch (rootFolderType) {\n case FolderType.SHARE:\n return t(\"Common:EmptyShareTitle\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesTitle\");\n case FolderType.Recent:\n return t(\"Common:NoRecentFilesHereYet\");\n case FolderType.TRASH:\n return t(\"Common:EmptyScreenFolder\");\n case FolderType.USER:",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/favorites-empty-view/index.tsx",
-      "line_number": 40,
+      "line_number": 71,
       "context": ");\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"Common:EmptyFavoritesTitle\", {\n defaultValue: \"No favorites yet\",\n })}\n description={t(\"Common:EmptyFavoritesDescription\", {\n defaultValue:\n \"Star files to keep them easily accessible and within reach.\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
-      "line_number": 34,
+      "line_number": 69,
       "context": ") => {\n switch (rootFolderType) {\n case FolderType.SHARE:\n return t(\"Common:EmptyShareTitle\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesTitle\");\n case FolderType.Recent:\n return t(\"Common:NoRecentFilesHereYet\");\n case FolderType.TRASH:\n return t(\"Common:EmptyScreenFolder\");\n case FolderType.USER:",
       "module": "/packages/sdk"
     }

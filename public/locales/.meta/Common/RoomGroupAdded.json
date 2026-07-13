@@ -3,7 +3,7 @@
   "content": "Groups added.",
   "content_en_sha1_hash": "b5a565f02102919ca707ad4dfe829242fca68461",
   "created_at": "2025-05-19T21:30:54.921Z",
-  "updated_at": "2026-06-09T09:43:10.877Z",
+  "updated_at": "2026-07-07T08:59:21.812Z",
   "comment": {
     "text": "This is a message displayed in the activity feed when one or more groups have been added to a room.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
-      "line_number": 81,
+      "line_number": 112,
       "context": "return t(\"Common:RoomRemoveUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"Common:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupAdded:\n return t(\"Common:RoomGroupAdded\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"Common:RoomGroupRemove\");\n case FeedActionKeys.AddedRoomTags:\n return t(\"Common:AddedRoomTags\");\n case FeedActionKeys.DeletedRoomTags:",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 247,
+      "line_number": 282,
       "context": "return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"Common:RoomRemoveUser\");\n case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems) return t(\"Common:RoomGroupAddedCount\", { count });\n return t(\"Common:RoomGroupAdded\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"Common:RoomUpdateAccess\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"Common:RoomInviteResend\");",
       "module": "/packages/sdk"
     }

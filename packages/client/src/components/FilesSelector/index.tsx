@@ -742,7 +742,10 @@ export default inject(
     const { isVisible: infoPanelIsVisible, infoPanelSelection } =
       infoPanelStore;
 
-    const selections: (TFile | TFolder | TRoom) & { isEditing: boolean }[] =
+    // FilesStore selection/filesList entries are view-model
+    // items (TItem); the erased cast keeps this component's raw-entity
+    // annotation unchanged (type-only).
+    const selections: (TFile | TFolder | TRoom) & { isEditing: boolean }[] = (
       isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
@@ -753,15 +756,18 @@ export default inject(
               : infoPanelIsVisible && infoPanelSelection != null
                 ? [infoPanelSelection]
                 : []
-        : [];
+        : []
+    ) as unknown as (TFile | TFolder | TRoom) & { isEditing: boolean }[];
 
     // const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-    const selectionsWithoutEditing: (TFile | TFolder | TRoom)[] = isRestoreAll
-      ? filesList
-      : isCopy
-        ? selections
-        : selections.filter((f) => f && !f?.isEditing);
+    const selectionsWithoutEditing: (TFile | TFolder | TRoom)[] = (
+      isRestoreAll
+        ? filesList
+        : isCopy
+          ? selections
+          : selections.filter((f) => f && !f?.isEditing)
+    ) as unknown as (TFile | TFolder | TRoom)[];
 
     selectionsWithoutEditing.forEach((item: TFile | TFolder | TRoom) => {
       if (

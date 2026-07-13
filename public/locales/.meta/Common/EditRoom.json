@@ -3,7 +3,7 @@
   "content": "Edit room",
   "content_en_sha1_hash": "5f5fa3dd732a628dd88ba173574e6ee90598df28",
   "created_at": "2025-05-19T21:30:55.513Z",
-  "updated_at": "2026-06-15T19:31:56.145Z",
+  "updated_at": "2026-07-07T08:59:21.909Z",
   "comment": {
     "text": "This is a button label that, when clicked, opens a dialog to modify the properties of a room.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2363,
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 2545,
       "context": "isSeparator: true,\n },\n {\n id: \"option_edit-room\",\n key: \"edit-room\",\n label: t(\"Common:EditRoom\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onClickEditRoom(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 429,
+      "line_number": 464,
       "context": ">\n <ModalDialog.Header>\n {isEdit\n ? isPrivate\n ? t(\"Common:EditPrivateRoom\")\n : t(\"Common:EditRoom\")\n : isPrivate\n ? t(\"Common:CreatePrivateRoom\")\n : t(\"Common:CreateRoom\")}\n </ModalDialog.Header>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
-      "line_number": 351,
+      "line_number": 386,
       "context": "...(!room.private ? [copyLinkItem] : []),\n { key: \"separator-mute\", isSeparator: true },\n {\n id: \"option_edit-room\",\n key: \"edit-room\",\n label: t(\"Common:EditRoom\"),\n icon: EditRoomReactSvgUrl,\n onClick: () => onEditRoom?.(room),\n disabled: !room.security?.EditRoom,\n },\n {",
       "module": "/packages/sdk"
     }

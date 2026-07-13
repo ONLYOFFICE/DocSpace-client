@@ -3,7 +3,7 @@
   "content": "Website",
   "content_en_sha1_hash": "2e8a57cc5c472f4ac3b071979a38e80db7e59e87",
   "created_at": "2025-05-19T21:30:49.594Z",
-  "updated_at": "2026-06-01T21:20:44.473Z",
+  "updated_at": "2026-07-07T08:59:21.861Z",
   "comment": {
     "text": "This is a label for a text input field or a column header in a table, referring to a website address.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/TableView/Header.tsx",
-      "line_number": 22,
+      "line_number": 57,
       "context": "default: true,\n active: false,\n minWidth: 210,\n },\n {\n key: \"Website\",\n title: t(\"Website\"),\n resizable: true,\n enable: true,\n minWidth: 150,\n },",
       "module": "/packages/client"
     },

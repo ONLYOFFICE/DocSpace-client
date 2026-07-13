@@ -3,7 +3,7 @@
   "content": "Private Room",
   "content_en_sha1_hash": "a0cccc661b0d8700741fa5aee59c20fb505d3dc0",
   "created_at": "2026-05-24T17:27:35.780Z",
-  "updated_at": "2026-06-25T19:31:02.916Z",
+  "updated_at": "2026-07-07T08:59:21.733Z",
   "comment": {
     "text": "Title used to identify a room when its type is set to private.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/create-edit-room-dialog/index.tsx",
-      "line_number": 550,
+      "line_number": 585,
       "context": "className={styles.privacyIcon}\n src={PrivateRoom32SvgUrl}\n />\n <div className={styles.privacyText}>\n <Text fontWeight={600} fontSize=\"13px\">\n {t(\"Common:PrivateRoomTitle\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.privacyDescription}>\n {t(\"Common:PrivateRoomDescription\")}\n </Text>\n </div>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 29,
+      "line_number": 64,
       "context": "case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }

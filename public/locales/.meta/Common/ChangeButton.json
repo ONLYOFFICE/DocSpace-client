@@ -3,7 +3,7 @@
   "content": "Change",
   "content_en_sha1_hash": "64fbd995d3b6b156ee26ae3c03e6516434c34c12",
   "created_at": "2025-05-19T21:30:43.398Z",
-  "updated_at": "2026-06-02T22:18:04.983Z",
+  "updated_at": "2026-07-07T08:59:21.649Z",
   "comment": {
     "text": "This is a button label. It allows users to confirm a change, such as changing a room owner, portal owner, or user type.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 137,
+      "line_number": 172,
       "context": "type={LinkType.page}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onChangeDomainClick}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n <Badge\n className=\"paid-badge\"\n fontWeight=\"700\"\n backgroundColor={",
       "module": "/packages/client"
     },
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/change-room-owner/index.tsx",
-      "line_number": 114,
+      "line_number": 149,
       "context": "type={LinkType.action}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onOwnerChange}\n >\n {t(\"Common:ChangeButton\", { defaultValue: \"Change\" })}\n </Link>\n ) : null}\n </div>\n </div>\n );",
       "module": "/packages/sdk"
     }

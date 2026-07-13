@@ -3,7 +3,7 @@
   "content": "AI agent unpinned",
   "content_en_sha1_hash": "a87e0a2cbc7edf27d4fb803b62e8f863ecf8a731",
   "created_at": "2026-06-02T22:17:29.900Z",
-  "updated_at": "2026-07-04T11:30:21.950Z",
+  "updated_at": "2026-07-07T08:59:21.933Z",
   "comment": {
     "text": "Status label for an item in a list, appearing when an AI agent is unpinned. It includes the `{aiAgent}` variable representing the agent's name.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1847,
+      "file_path": "/packages/client/src/store/filesActionsStore/helpers.ts",
+      "line_number": 142,
       "context": "let translationForSeverals;\n \n if (isAIAgent) {\n translationForOneItem = isPin\n ? t(\"Common:AIAgentPinned\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"Common:AIAgentUnpinned\", { aiAgent: t(\"Common:AIAgent\") });\n translationForSeverals = isPin\n ? t(\"Common:AIAgentsPinned\", { aiAgents: t(\"Common:AIAgents\") })\n : t(\"Common:AIAgentsUnpinned\", { aiAgents: t(\"Common:AIAgents\") });\n } else {\n translationForOneItem = isPin",
       "module": "/packages/client"
     }

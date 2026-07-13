@@ -35,7 +35,11 @@
 import { inject, observer } from "mobx-react";
 import { saveThirdParty as saveThirdPartyApi } from "@docspace/shared/api/files";
 import { ConnectDialog } from "@docspace/shared/dialogs/connect";
-import type { Nullable, ThirdPartyAccountType } from "@docspace/shared/types";
+import type {
+  ConnectingStoragesType,
+  Nullable,
+  ThirdPartyAccountType,
+} from "@docspace/shared/types";
 
 import type {
   ConnectDialogWrapperProps,
@@ -127,8 +131,11 @@ export default inject<
       setSaveAfterReconnectOAuth,
     } = dialogsStore;
 
+    // type-only cast — DialogsStore.connectItem is a partial
+    // ThirdPartyAccountType built by still-.js provider/capability spreads;
+    // the original .js passed it through unchanged.
     const item: Nullable<ThirdPartyAccountType> =
-      backupConnectionItem ?? connectItem;
+      backupConnectionItem ?? (connectItem as Nullable<ThirdPartyAccountType>);
 
     const isConnectionViaBackupModule = !!backupConnectionItem;
 
@@ -139,7 +146,12 @@ export default inject<
       roomCreation,
       saveThirdParty: saveThirdPartyApi,
       openConnectWindow,
-      connectingStorages,
+      // type-only cast — ThirdPartyStore.connectingStorages is
+      // typed with the raw TConnectingStorage shape, but
+      // fetchConnectingStorages enriches every entry with
+      // id/className/category at runtime, matching ConnectingStoragesType.
+      connectingStorages:
+        connectingStorages as unknown as ConnectingStoragesType[],
       selectedFolderId: id,
       folderFormValidation,
       saveAfterReconnectOAuth,

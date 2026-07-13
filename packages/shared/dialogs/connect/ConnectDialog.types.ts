@@ -32,7 +32,12 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import type { TFolder, TThirdParty } from "../../api/files/types";
+import type {
+  TFolder,
+  TThirdParties,
+  TThirdParty,
+} from "../../api/files/types";
+import type { TRoom } from "../../api/rooms/types";
 import type {
   ConnectingStoragesType,
   Nullable,
@@ -58,14 +63,19 @@ export interface ConnectDialogProps {
   >;
   providers: TThirdParty[];
   selectedFolderId: Nullable<string | number>;
-  selectedFolderFolders: Nullable<TFolder[]>;
+  selectedFolderFolders: Nullable<(TFolder | TRoom)[]>;
   folderFormValidation: RegExp;
   isConnectionViaBackupModule: boolean;
   roomCreation: boolean;
   isConnectDialogReconnect: boolean;
   saveAfterReconnectOAuth: boolean;
   connectingStorages: ConnectingStoragesType[];
-  fetchThirdPartyProviders: () => Promise<void>;
+  /**
+   * The result is ignored by the dialog; the union keeps both
+   * ThirdPartyStore.fetchThirdPartyProviders (returns the providers list)
+   * and void-returning implementations assignable.
+   */
+  fetchThirdPartyProviders: () => Promise<TThirdParties | void>;
   saveThirdParty: (
     url: string,
     login: string,

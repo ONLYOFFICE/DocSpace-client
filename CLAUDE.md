@@ -31,8 +31,13 @@ pnpm tsc
 # Unit tests (shared package, Vitest)
 pnpm test
 
+# Unit tests (client package, Vitest)
+pnpm test:client               # all @docspace/client unit tests
+pnpm test:store                # only client store tests (src/store, incl. FilesStore)
+
 # Run single unit test file
 cd packages/shared && pnpm vitest run path/to/file.test.ts
+cd packages/client && pnpm exec vitest run src/store/filesStore
 
 # E2E tests (Playwright, requires Docker)
 cd packages/client
@@ -51,6 +56,24 @@ pnpm storybook
 # Check circular dependencies
 pnpm check-circular
 ```
+
+## VSCode Tasks
+
+The `frontend.code-workspace` file drives the grouped status-bar buttons
+(Server / Client / Tests / E2E / Tools) via the **VsCodeTaskButtons**
+extension. The wiring is three layers — change all three when adding a button:
+
+1. **`package.json` (root)** — the actual pnpm script (e.g. `test:client`,
+   `test:store`). This is the source of truth; it also works from the CLI.
+2. **`.vscode/tasks.json`** — a VSCode task whose `command` runs the script,
+   e.g. `cd ${workspaceFolder} ; pnpm run test:store`. Its `label` (e.g.
+   `Test | Vitest:store`) is what buttons reference.
+3. **`frontend.code-workspace`** → `settings > VsCodeTaskButtons.tasks` — a
+   button whose `task` field must exactly match a `tasks.json` label. Buttons
+   are grouped (the `Tests` group holds the unit/lint/tsc buttons).
+
+`frontend.code-workspace` is JSONC (trailing commas / comments allowed), so it
+is not parseable as strict JSON.
 
 ## Architecture
 
@@ -113,6 +136,18 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 - Static assets (images, fonts, scripts): served by nginx from `/var/www/public/` at `/static/` prefix
 
 ## Code Quality
+
+### Language
+
+All files committed to the repository — source code, comments, docs, Markdown,
+commit messages, and planning notes — must be written in English. User-facing
+strings are the only exception and must go through the i18n system (see below),
+never hardcoded.
+
+### Commit messages
+
+Do not add `Co-Authored-By` trailers or any other AI-attribution lines to
+commit messages.
 
 ### Pre-push Hooks (Lefthook)
 

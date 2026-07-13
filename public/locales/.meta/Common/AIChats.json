@@ -3,7 +3,7 @@
   "content": "AI chats",
   "content_en_sha1_hash": "3fd9fe09d100ec141d95e517cac55b5f4eb4cf54",
   "created_at": "2025-12-23T10:27:34.733Z",
-  "updated_at": "2026-06-30T10:18:29.513Z",
+  "updated_at": "2026-07-07T08:59:21.667Z",
   "comment": {
     "text": "This is a short label for the AI chat feature. It appears in various descriptions and settings related to AI functionality.",
     "is_auto": true,
@@ -25,31 +25,31 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 130,
+      "line_number": 165,
       "context": "\"Set up an agent with model, instructions and an {{mcpServer}} to get started.\",\n })\n : standalone && isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiChats: t(\"Common:AIChats\", { defaultValue: \"AI Chats\" }),\n defaultValue:\n \"Configure an AI provider in {{productName}} settings to unlock {{aiChats}}.\",\n })\n : isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledSaasAdminDescription\", {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/index.tsx",
-      "line_number": 178,
+      "line_number": 213,
       "context": "className={styles.description}\n dataTestId=\"provider-section-description\"\n >\n {t(\"Common:AIProviderSettingDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {aiProviderSettingsUrl ? (\n <Link\n className={styles.learnMoreLink}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/search/dialogs/reset/index.tsx",
-      "line_number": 86,
+      "line_number": 121,
       "context": "<ModalDialog.Header>{t(\"Common:ResetSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"Common:ResetWebSearchDescription\", {\n webSearch: t(\"Common:WebSearchAI\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/search/index.tsx",
-      "line_number": 210,
+      "line_number": 245,
       "context": ">\n <Text className={generalStyles.description}>\n {t(\"Common:SearchDescription\", {\n webSearch: t(\"Common:WebSearchAI\"),\n productName: getBrandName(\"ProductName\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {webSearchSettingsUrl ? (\n <Link\n className={generalStyles.learnMoreLink}",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/index.tsx",
-      "line_number": 226,
+      "line_number": 261,
       "context": "return (\n <div className={styles.mcpServers}>\n <Text className={styles.description}>\n {t(\"Common:MCPSettingsDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n aiChats: t(\"Common:AIChats\"),\n })}\n </Text>\n {mcpServersSettingsUrl ? (\n <Link\n className={styles.learnMoreLink}",
       "module": "/packages/sdk"
     }

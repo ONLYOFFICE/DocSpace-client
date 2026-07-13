@@ -3,7 +3,7 @@
   "content": "Add existing {{productName}} contacts. Or invite new users personally via email. New users will be added to your Guests list.",
   "content_en_sha1_hash": "89d589fb8b32a29489de19a39a17f2e4722ee57f",
   "created_at": "2025-05-26T07:15:53.259Z",
-  "updated_at": "2026-06-15T19:31:56.020Z",
+  "updated_at": "2026-07-07T08:59:21.769Z",
   "comment": {
     "text": "This is an informational message displayed in the \"Invite to Room\" panel when inviting guests. It explains how to add existing contacts or invite new users via email, who will then be added to the Guests list. `{{productName}}` is the name of the product.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteInput.tsx",
-      "line_number": 586,
+      "line_number": 621,
       "context": ">\n {!allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Common:InviteToRoomManuallyInfoGuest\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n \n <div className={styles.inviteInputContainer} ref={inputsRef}>",
       "module": "/packages/sdk"
     }

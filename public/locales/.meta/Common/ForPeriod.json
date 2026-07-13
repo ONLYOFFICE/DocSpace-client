@@ -3,7 +3,7 @@
   "content": "For {{period}}",
   "content_en_sha1_hash": "6fa271e32aa734f72825fb69453a3519528879e0",
   "created_at": "2026-06-25T11:54:50.691Z",
-  "updated_at": "2026-07-03T11:08:02.948Z",
+  "updated_at": "2026-07-07T08:59:22.051Z",
   "comment": {
     "text": "Caption for billing cards and usage summaries specifying the timeframe for displayed data; {{period}} represents a specific month or time range name.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "line_number": 81,
+      "context": "language={language}\n mainFontSize=\"18px\"\n fractionFontSize=\"12px\"\n withoutMargin\n />\n <Text fontSize=\"12px\">{t(\"ForPeriod\", { period: monthLabel })}</Text>\n {onViewUsage ? (\n <Link\n onClick={onViewUsage}\n textDecoration=\"underline\"\n color=\"accent\"",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
       "line_number": 305,

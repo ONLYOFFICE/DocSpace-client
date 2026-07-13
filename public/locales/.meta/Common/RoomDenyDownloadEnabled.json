@@ -3,7 +3,7 @@
   "content": "Downloading and copying restricted",
   "content_en_sha1_hash": "3148f9f57471d093da0d3b4c41a147bd2b0fa288",
   "created_at": "2025-05-19T21:30:54.910Z",
-  "updated_at": "2026-06-25T19:31:02.957Z",
+  "updated_at": "2026-07-07T08:59:21.814Z",
   "comment": {
     "text": "This is a message displayed in the information panel's history feed, indicating that downloading and copying content has been restricted for a room.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 329,
+      "line_number": 364,
       "context": ");\n }\n case FeedActionKeys.RoomLifeTimeDisabled:\n return t(\"Common:RoomLifeTimeDisabled\");\n case FeedActionKeys.RoomDenyDownloadEnabled:\n return t(\"Common:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"Common:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"Common:RoomIndexExportLocation\", {\n sectionName: t(\"Common:Files\"),",
       "module": "/packages/sdk"
     }

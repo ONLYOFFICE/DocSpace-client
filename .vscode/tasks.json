@@ -592,6 +592,21 @@
       }
     },
     {
+      "label": "Test | Jest:license",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:license ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; npm run open-report",
@@ -655,6 +670,36 @@
       "label": "Test | Jest:unit:ui-kit",
       "type": "shell",
       "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm test",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:client",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:store",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:store",
       "group": {
         "kind": "build",
         "isDefault": true

@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2026-07-04T11:30:21.854Z",
+  "updated_at": "2026-07-07T08:59:21.773Z",
   "comment": {
     "text": "This is the label for a date picker component, prompting the user to choose a specific date.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/link-settings-panel/index.tsx",
-      "line_number": 315,
+      "line_number": 350,
       "context": "locale={locale}\n hasError={false}\n onChange={(value) => setLimitDate(value)}\n openDate={new Date()}\n className={styles.linkSettingsDatePicker}\n selectDateText={t(\"Common:SelectDate\")}\n initialDate={limitDate}\n minDate={subtractFromDate(now(), 1, \"days\") ?? undefined}\n maxDate={maxDate}\n useMaxTime={!activeLink.expirationDate}\n translations={{ AM: t(\"Common:AM\"), PM: getConstName(\"PM\") }}",
       "module": "/packages/sdk"
     },

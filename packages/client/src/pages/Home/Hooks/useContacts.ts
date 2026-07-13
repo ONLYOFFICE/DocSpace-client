@@ -86,7 +86,9 @@ const useContacts = ({
     const isGroups = contactsView === "groups";
 
     const node = isInsideGroup || isGuests ? "people" : contactsView;
-    setSelectedNode(["accounts", node, "filter"]);
+    // getContactsView can return `false`, which the pre-TS code passed
+    // through unchanged; the cast keeps that legacy runtime behavior.
+    setSelectedNode(["accounts", node as string, "filter"]);
 
     setDocumentTitle(t("Common:Contacts"));
 

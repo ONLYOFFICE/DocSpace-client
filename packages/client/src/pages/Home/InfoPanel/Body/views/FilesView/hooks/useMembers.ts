@@ -37,6 +37,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 
+import type { TFileLink } from "@docspace/shared/api/files/types";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 import {
   EmployeeActivationStatus,
@@ -265,7 +266,9 @@ export const useMembers = ({
 
     try {
       const [data, links] = await Promise.all(requests);
-      if (links) setExternalLinks(links);
+      // getRoomMembers with filterType 2 (external links)
+      // returns link-shaped items, but its return type is RoomMember[].
+      if (links) setExternalLinks(links as unknown as TFileLink[]);
       else setExternalLinks([]);
 
       const convertedMembers = convertMembers(data, true);

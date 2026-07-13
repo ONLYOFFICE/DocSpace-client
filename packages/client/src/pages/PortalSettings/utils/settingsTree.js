@@ -571,6 +571,7 @@ export const settingsTree = [
     key: "10",
     type: PageType.payments,
     link: "payments",
+    alternativeUrl: "/billing/overview",
     tKey: "Common:PaymentsTitle",
     isHeader: true,
     children: [

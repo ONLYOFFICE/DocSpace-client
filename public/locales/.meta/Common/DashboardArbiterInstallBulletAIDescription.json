@@ -3,7 +3,7 @@
   "content": "The arbiter weighs every expert answer by reasoning quality — not by majority vote — and delivers a single trusted conclusion.",
   "content_en_sha1_hash": "84b42b167660b34a7692367ffc2ef8f8d85aaa60",
   "created_at": "2026-05-20T10:00:00.000Z",
-  "updated_at": "2026-05-24T17:27:49.114Z",
+  "updated_at": "2026-07-07T08:59:21.782Z",
   "comment": {
     "text": "Bullet-point description in the AI Arbiter install dialog explaining how the arbiter weighs expert answers by reasoning quality (not majority vote) to deliver a trusted conclusion.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
-      "line_number": 96,
+      "line_number": 131,
       "context": "description: string;\n }[] = [\n {\n icon: CatalogAiArbiterIcon,\n title: t(\"Common:DashboardArbiterInstallBulletAI\"),\n description: t(\"Common:DashboardArbiterInstallBulletAIDescription\"),\n },\n ];\n \n const renderConfirmBody = () => (\n <div className={styles.confirmBody}>",
       "module": "/packages/client"
     }

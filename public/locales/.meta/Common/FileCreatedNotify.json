@@ -3,7 +3,7 @@
   "content": "File created.",
   "content_en_sha1_hash": "1cbf9d9e44da87617f2a6b43738a8655e9a3d7fb",
   "created_at": "2026-05-19T19:03:16.338Z",
-  "updated_at": "2026-06-09T09:43:10.869Z",
+  "updated_at": "2026-07-07T08:59:21.803Z",
   "comment": {
     "text": "Status message in the activity feed that appears when a new file is created.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/views/history.tsx",
-      "line_number": 95,
+      "line_number": 126,
       "context": "case FeedActionKeys.RoomCoverChanged:\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.FileCreated:\n case FeedActionKeys.FileUploaded:\n return t(\"Common:FileCreatedNotify\");\n case FeedActionKeys.FileDeleted:\n case FeedActionKeys.FileMovedToTrash:\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileRenamed:\n return t(\"Common:FileRenamedNotify\");",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
-      "line_number": 56,
+      "line_number": 91,
       "context": "const count = feed.related.length + 1;\n \n const getFeedTranslation = (): React.ReactNode => {\n switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"Common:FileCreatedNotify\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"Common:FileUploadedCount\", {\n count,\n });",
       "module": "/packages/sdk"
     }

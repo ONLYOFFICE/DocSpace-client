@@ -1,0 +1,215 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > ai agents 1`] = `
+[
+  {
+    "id": "menu-pin",
+    "label": "Common:Pin",
+  },
+  {
+    "id": "menu-change-agent-quota",
+    "label": "Common:ChangeQuota",
+  },
+  {
+    "id": "menu-default-agent-quota",
+    "label": "Common:SetToDefault",
+  },
+  {
+    "id": "menu-disable-agent-quota",
+    "label": "Common:DisableQuota",
+  },
+  {
+    "id": "menu-delete-room",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > another (default) folder 1`] = `
+[
+  {
+    "id": "menu-vectorization",
+    "label": "Common:Vectorization",
+  },
+  {
+    "id": "menu-create-room",
+    "label": "Common:CreateRoom",
+  },
+  {
+    "id": "menu-download",
+    "label": "Common:Download",
+  },
+  {
+    "id": "menu-download-as",
+    "label": "Common:DownloadAs",
+  },
+  {
+    "id": "menu-move-to",
+    "label": "Common:MoveTo",
+  },
+  {
+    "id": "menu-copy",
+    "label": "Common:Copy",
+  },
+  {
+    "id": "menu-delete",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > archive rooms 1`] = `
+[
+  {
+    "id": "menu-unarchive",
+    "label": "Common:Restore",
+  },
+  {
+    "id": "menu-delete-room",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > favorites 1`] = `
+[
+  {
+    "id": "menu-download",
+    "label": "Common:Download",
+  },
+  {
+    "id": "menu-download-as",
+    "label": "Common:DownloadAs",
+  },
+  {
+    "id": "menu-copy",
+    "label": "Common:Copy",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > privacy 1`] = `
+[
+  {
+    "id": "menu-download",
+    "label": "Common:Download",
+  },
+  {
+    "id": "menu-move-to",
+    "label": "Common:MoveTo",
+  },
+  {
+    "id": "menu-delete",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > recent 1`] = `
+[
+  {
+    "id": "menu-download",
+    "label": "Common:Download",
+  },
+  {
+    "id": "menu-download-as",
+    "label": "Common:DownloadAs",
+  },
+  {
+    "id": "menu-remove-from-recent",
+    "label": "Common:RemoveFromList",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > recycle bin 1`] = `
+[
+  {
+    "id": "menu-download",
+    "label": "Common:Download",
+  },
+  {
+    "id": "menu-download-as",
+    "label": "Common:DownloadAs",
+  },
+  {
+    "id": "menu-restore",
+    "label": "Common:Restore",
+  },
+  {
+    "id": "menu-delete",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > rooms 1`] = `
+[
+  {
+    "id": "menu-pin",
+    "label": "Common:Pin",
+  },
+  {
+    "id": "menu-create-group",
+    "label": "GroupingRooms:CreateAGroup",
+  },
+  {
+    "id": "menu-add-to-group",
+    "label": "GroupingRooms:AddToGroup",
+  },
+  {
+    "id": "menu-remove-from-group",
+    "label": "GroupingRooms:RemoveFromGroup",
+  },
+  {
+    "id": "menu-archive",
+    "label": "Common:MoveToArchive",
+  },
+  {
+    "id": "menu-change-quota",
+    "label": "Common:ChangeQuota",
+  },
+  {
+    "id": "menu-default-quota",
+    "label": "Common:SetToDefault",
+  },
+  {
+    "id": "menu-disable-quota",
+    "label": "Common:DisableQuota",
+  },
+  {
+    "id": "menu-delete-room",
+    "label": "Common:Delete",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > shared with me 1`] = `
+[
+  {
+    "id": "menu-download",
+    "label": "Common:Download",
+  },
+  {
+    "id": "menu-download-as",
+    "label": "Common:DownloadAs",
+  },
+  {
+    "id": "menu-copy",
+    "label": "Common:Copy",
+  },
+  {
+    "id": "menu-remove-from-shared-with-me",
+    "label": "Common:RemoveFromList",
+  },
+]
+`;
+
+exports[`FilesActionsStore.getHeaderMenu — dispatch by folder type > templates 1`] = `
+[
+  {
+    "id": "menu-delete",
+    "label": "Common:Delete",
+  },
+]
+`;

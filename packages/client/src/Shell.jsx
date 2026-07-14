@@ -787,13 +787,14 @@ const ShellWrapper = inject(
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
-      // Scope the chat to the current agent only when we're inside an AI agent
-      // room (or one of its subfolders). Anywhere else — including the AI Agents
-      // root listing and non-agent contexts — the chat stays unscoped
-      // (entityId === undefined).
-      agentEntityId: selectedFolderStore.isAIRoom
-        ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
-        : undefined,
+      // Scope the chat to the current location: inside any room (including
+      // its subfolders) the room id wins, elsewhere the currently selected
+      // folder id is used. Only when nothing is selected yet does the chat
+      // stay unscoped (entityId === undefined).
+      agentEntityId:
+        selectedFolderStore.rootRoomId || selectedFolderStore.id
+          ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
+          : undefined,
       getAgentRoomId: () => {
         const id = selectedFolderStore.rootRoomId;
         return id ? Number(id) : null;

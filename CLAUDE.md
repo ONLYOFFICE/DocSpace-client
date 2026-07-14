@@ -133,7 +133,7 @@ Automatically runs before push:
 ## Requirements
 
 - Node.js >= 24
-- pnpm >= 10.28.0
+- pnpm >= 10 (exact version pinned via `packageManager` in package.json)
 - Docker (for E2E tests)
 
 ## Settings and Permissions

@@ -124,6 +124,9 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
     general.anonymous !== baseline.anonymous ||
     maxDownloadBytes !== savedMaxDownload;
 
+  const isGeneralValid =
+    general.header.trim() !== "" && general.secret.trim() !== "";
+
   const serverPayload = (anonymous: boolean, maxDownload: string) => ({
     isAnonymousSupport: anonymous,
     fileSizeLimit: Number(maxDownload) || 0,
@@ -331,6 +334,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
         className={styles.saveButtons}
         onSaveClick={onSaveGeneral}
         onCancelClick={onCancelGeneral}
+        saveButtonDisabled={!isGeneralValid}
         showReminder={hasChangesGeneral}
         reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}

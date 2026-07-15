@@ -82,7 +82,7 @@ const PromoPage = ({
   };
 
   return (
-    <div className={styles.promo}>
+    <div className={styles.promo} data-testid="docs_connect_promo">
       <Heading level={HeadingLevel.h1} className={styles.title}>
         {t("DocsConnect:DocsConnect")}
       </Heading>
@@ -128,6 +128,7 @@ const PromoPage = ({
             label={t("DocsConnect:Buy")}
             onClick={() => openBuyPlan?.("edit")}
             className={styles.buyButton}
+            testId="docs_connect_buy_button"
           />
         ) : (
           <Button
@@ -137,6 +138,7 @@ const PromoPage = ({
             onClick={onCreateTenant}
             isLoading={submitting}
             isDisabled={submitting}
+            testId="docs_connect_create_tenant_button"
           />
         )}
         <Link

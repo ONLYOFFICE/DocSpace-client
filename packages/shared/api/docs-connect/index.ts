@@ -74,16 +74,11 @@ type TBalanceResponse = {
   subAccounts?: { currency?: string; amount?: number }[];
 } | null;
 
-const fetchWalletServices = async (): Promise<TWalletServicesResponse> => {
-  try {
-    return (await request({
-      method: "get",
-      url: "/portal/payment/walletservices",
-    })) as TWalletServicesResponse;
-  } catch {
-    return null;
-  }
-};
+const fetchWalletServices = async (): Promise<TWalletServicesResponse> =>
+  (await request({
+    method: "get",
+    url: "/portal/payment/walletservices",
+  })) as TWalletServicesResponse;
 
 const extractPrices = (
   services: TWalletServicesResponse,
@@ -100,10 +95,6 @@ const extractPrices = (
     devPackPrice: devpack == null ? 0 : Math.max(0, devpack - base),
   };
 };
-
-export const getDocsConnectPrices =
-  async (): Promise<TDocsConnectPrices | null> =>
-    extractPrices(await fetchWalletServices());
 
 type TTariffQuota = {
   id?: number;
@@ -126,76 +117,68 @@ const fetchTariffState = async (
   services: TWalletServicesResponse,
   refresh?: boolean,
 ): Promise<TDocsConnectTariffState> => {
-  try {
-    const serviceId = (name: string) =>
-      (services ?? []).find((service) => service.serviceName === name)?.id;
+  const serviceId = (name: string) =>
+    (services ?? []).find((service) => service.serviceName === name)?.id;
 
-    const baseId = serviceId(DOCS_CLOUD_PRODUCT);
-    const devpackId = serviceId(DOCS_CLOUD_DEVPACK_SERVICE);
+  const baseId = serviceId(DOCS_CLOUD_PRODUCT);
+  const devpackId = serviceId(DOCS_CLOUD_DEVPACK_SERVICE);
 
-    if (baseId == null && devpackId == null) return EMPTY_TARIFF_STATE;
+  if (baseId == null && devpackId == null) return EMPTY_TARIFF_STATE;
 
-    const tariff = (await request({
-      method: "get",
-      url: "/portal/tariff",
-      params: refresh ? { refresh: true } : {},
-    })) as TTariffResponse;
+  const tariff = (await request({
+    method: "get",
+    url: "/portal/tariff",
+    params: refresh ? { refresh: true } : {},
+  })) as TTariffResponse;
 
-    const quotaOf = (id?: number) =>
-      id == null
-        ? undefined
-        : tariff?.quotas?.find((q) => q.wallet === true && q.id === id);
+  const quotaOf = (id?: number) =>
+    id == null
+      ? undefined
+      : tariff?.quotas?.find((q) => q.wallet === true && q.id === id);
 
-    const baseQuota = quotaOf(baseId);
-    const devpackQuota = quotaOf(devpackId);
+  const baseQuota = quotaOf(baseId);
+  const devpackQuota = quotaOf(devpackId);
 
-    if (
-      baseQuota?.state === QUOTA_STATE_OVERDUE ||
-      devpackQuota?.state === QUOTA_STATE_OVERDUE
-    ) {
-      return { scheduledChange: null, deactivated: true };
-    }
-
-    const quotaWithChange = [devpackQuota, baseQuota].find(
-      (q) => q && (q.nextQuantity ?? -1) >= 0,
-    );
-
-    if (quotaWithChange) {
-      return {
-        scheduledChange: {
-          nextUsers: quotaWithChange.nextQuantity ?? 0,
-          dueDate: quotaWithChange.dueDate ?? "",
-        },
-        deactivated: false,
-      };
-    }
-
-    return EMPTY_TARIFF_STATE;
-  } catch {
-    return EMPTY_TARIFF_STATE;
+  if (
+    baseQuota?.state === QUOTA_STATE_OVERDUE ||
+    devpackQuota?.state === QUOTA_STATE_OVERDUE
+  ) {
+    return { scheduledChange: null, deactivated: true };
   }
+
+  const quotaWithChange = [devpackQuota, baseQuota].find(
+    (q) => q && (q.nextQuantity ?? -1) >= 0,
+  );
+
+  if (quotaWithChange) {
+    return {
+      scheduledChange: {
+        nextUsers: quotaWithChange.nextQuantity ?? 0,
+        dueDate: quotaWithChange.dueDate ?? "",
+      },
+      deactivated: false,
+    };
+  }
+
+  return EMPTY_TARIFF_STATE;
 };
 
 const fetchWallet = async (
   refresh?: boolean,
 ): Promise<TDocsConnectWallet | null> => {
-  try {
-    const balance = (await request({
-      method: "get",
-      url: "/portal/payment/customer/balance",
-      params: refresh ? { refresh: true } : {},
-    })) as TBalanceResponse;
+  const balance = (await request({
+    method: "get",
+    url: "/portal/payment/customer/balance",
+    params: refresh ? { refresh: true } : {},
+  })) as TBalanceResponse;
 
-    const sub = balance?.subAccounts?.[0];
-    if (!sub) return null;
+  const sub = balance?.subAccounts?.[0];
+  if (!sub) return null;
 
-    return {
-      availableCredits: sub.amount ?? 0,
-      currency: sub.currency ?? "USD",
-    };
-  } catch {
-    return null;
-  }
+  return {
+    availableCredits: sub.amount ?? 0,
+    currency: sub.currency ?? "USD",
+  };
 };
 
 type TPaymentQuotaResponse = {
@@ -203,20 +186,16 @@ type TPaymentQuotaResponse = {
 } | null;
 
 const fetchDevPackEnabled = async (refresh?: boolean): Promise<boolean> => {
-  try {
-    const quota = (await request({
-      method: "get",
-      url: "/portal/payment/quota",
-      params: refresh ? { refresh: true } : {},
-    })) as TPaymentQuotaResponse;
+  const quota = (await request({
+    method: "get",
+    url: "/portal/payment/quota",
+    params: refresh ? { refresh: true } : {},
+  })) as TPaymentQuotaResponse;
 
-    return (quota?.features ?? []).some(
-      (feature) =>
-        feature.id === DOCS_CLOUD_DEVPACK_PRODUCT && feature.value === true,
-    );
-  } catch {
-    return false;
-  }
+  return (quota?.features ?? []).some(
+    (feature) =>
+      feature.id === DOCS_CLOUD_DEVPACK_PRODUCT && feature.value === true,
+  );
 };
 
 export const getDocsConnectInfo = async (

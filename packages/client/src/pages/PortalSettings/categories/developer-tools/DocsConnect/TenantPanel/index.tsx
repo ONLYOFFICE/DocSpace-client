@@ -180,7 +180,7 @@ const TenantPanel = ({
   ];
 
   return (
-    <div className={styles.panel}>
+    <div className={styles.panel} data-testid="docs_connect_panel">
       <div className={styles.header}>
         <div className={styles.titleRow}>
           <Text fontSize="18px" fontWeight={700} lineHeight="24px">
@@ -203,6 +203,7 @@ const TenantPanel = ({
                       ? styles.trialBadgeWarning
                       : ""
                 }`}
+                data-testid="docs_connect_trial_badge"
               >
                 {expired
                   ? t("Common:TrialExpired")

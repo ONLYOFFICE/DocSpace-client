@@ -519,6 +519,7 @@ const BuyPlanPanel = ({
                   className={styles.toggleButton}
                   isChecked={devPack}
                   onChange={onToggleDevPack}
+                  dataTestId="docs_connect_devpack_toggle"
                 />
               </div>
               <hr className={styles.devPackDivider} />
@@ -908,6 +909,7 @@ const BuyPlanPanel = ({
               isDisabled={
                 submitting || calcPending || (isEditActive && !hasChanges)
               }
+              testId="docs_connect_buy_plan_submit"
             />
             <Button
               scale

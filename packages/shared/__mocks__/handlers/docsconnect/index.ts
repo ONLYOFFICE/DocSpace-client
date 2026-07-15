@@ -103,15 +103,20 @@ export const docsCloudEndpointHandlers = (
   ),
 ];
 
+export type DocsConnectHandlersOptions = {
+  balance?: number;
+};
+
 export const docsConnectPaymentHandlers = (
   port: string,
   preset: DocsConnectPreset,
+  options?: DocsConnectHandlersOptions,
 ) => [
   http.get(apiUrl(port, PATH_WALLET_SERVICES), () =>
     jsonResponse(docsConnectWalletServicesSuccess()),
   ),
   http.get(apiUrl(port, PATH_WALLET_BALANCE), () =>
-    jsonResponse(docsConnectWalletBalanceSuccess()),
+    jsonResponse(docsConnectWalletBalanceSuccess(options?.balance)),
   ),
   http.get(apiUrl(port, PATH_PAYMENT_QUOTA), () =>
     new Response(JSON.stringify(docsConnectPaymentQuotaSuccess(preset))),
@@ -125,10 +130,24 @@ export const docsConnectPaymentHandlers = (
 export const docsConnectHandlers = (
   port: string,
   preset: DocsConnectPreset,
+  options?: DocsConnectHandlersOptions,
 ) => [
   ...docsCloudEndpointHandlers(port, preset),
-  ...docsConnectPaymentHandlers(port, preset),
+  ...docsConnectPaymentHandlers(port, preset, options),
 ];
+
+export const docsConnectPayerHandler = (
+  port: string,
+  cardLinked: boolean = true,
+) =>
+  http.get(apiUrl(port, "portal/payment/customerinfo"), () =>
+    jsonResponse({
+      portalId: null,
+      paymentMethodStatus: cardLinked ? 1 : 0,
+      email: "test@gmail.com",
+      payer: { displayName: "Test Payer", hasAvatar: false },
+    }),
+  );
 
 export const docsConnectTrialActivationHandlers = (port: string) => {
   let started = false;

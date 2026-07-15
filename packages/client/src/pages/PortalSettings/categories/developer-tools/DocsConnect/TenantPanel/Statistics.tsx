@@ -239,6 +239,7 @@ const Statistics = ({
             size={ButtonSize.small}
             label={t("Common:Upgrade")}
             onClick={() => openBuyPlan?.("trial")}
+            testId="docs_connect_trial_upgrade_button"
           />
         </div>
       ) : null}
@@ -410,6 +411,7 @@ const Statistics = ({
                   fontWeight={600}
                   textDecoration="underline dashed"
                   onClick={() => openBuyPlan?.("edit")}
+                  dataTestId="docs_connect_edit_subscription_link"
                 >
                   {t("Common:EditButton")}
                 </Link>

@@ -179,6 +179,7 @@ const Preview = ({ info, user, copyToClipboard }: PreviewProps) => {
             iconNode={<CopyIcon />}
             size={16}
             onClick={() => copyToClipboard?.(demoCode, t)}
+            dataTestId="docs_connect_demo_code_copy"
           />
           <pre className={styles.demoCodeText}>{demoCode}</pre>
         </div>

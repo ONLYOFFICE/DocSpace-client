@@ -145,7 +145,16 @@ export const docsConnectWalletServicesSuccess = () => [
     id: DOCS_CONNECT_SERVICE_ID,
     serviceName: "docscloud",
     price: { value: DOCS_CONNECT_PRICE_PER_USER },
-    features: [],
+    features: [
+      {
+        id: "docscloud",
+        title: "Docs Connect",
+        priceTitle: "Embed ONLYOFFICE editors into your product",
+        image: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect width="24" height="24" rx="4" fill="#4781D1"/></svg>',
+        value: false,
+        type: "flag",
+      },
+    ],
   },
   {
     id: DOCS_CONNECT_DEVPACK_SERVICE_ID,

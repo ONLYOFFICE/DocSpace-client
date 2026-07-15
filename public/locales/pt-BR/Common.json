@@ -605,7 +605,6 @@
   "CurrentMonthToDateSpend": "Gasto acumulado do mês atual",
   "CurrentPassphrase": "Senha de acesso atual",
   "CurrentPassphraseRequired": "A senha de acesso atual é obrigatória",
-  "CurrentPaymentMonth": "Pagamento atual: {{price}}/mês ({{size}})",
   "CurrentPlan": "Plano atual",
   "CurrentSubscription": "Assinatura atual",
   "Custom": "Personalizado",

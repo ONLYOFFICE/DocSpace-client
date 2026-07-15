@@ -588,7 +588,6 @@
   "CurrentMonthToDateSpend": "이번 달 현재까지 지출",
   "CurrentPassphrase": "현재 패스프레이즈",
   "CurrentPassphraseRequired": "현재 패스프레이즈가 필요합니다",
-  "CurrentPaymentMonth": "현재 결제: {{price}}/월 ({{size}})",
   "CurrentPlan": "현재 요금제",
   "CurrentSubscription": "현재 구독",
   "Custom": "사용자 지정",

@@ -596,7 +596,6 @@
   "CurrentMonthToDateSpend": "Geçerli ay başından bugüne kadarki harcama",
   "CurrentPassphrase": "Mevcut parola",
   "CurrentPassphraseRequired": "Mevcut parola gereklidir",
-  "CurrentPaymentMonth": "Mevcut ödeme: {{price}}/ay ({{size}})",
   "CurrentPlan": "Mevcut plan",
   "CurrentSubscription": "Mevcut abonelik",
   "Custom": "Özel",

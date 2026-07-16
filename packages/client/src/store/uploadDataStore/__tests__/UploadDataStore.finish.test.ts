@@ -24,16 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Characterization tests for the upload finalization block (#14 of the
-// plan's §3.4): finishUploadFiles + showFinishUploadToastr. They close the
-// §3.4.1 "finalization latch" invariant AT ITS ACTUAL LEVEL: the
-// finishUploadFilesCalled latch lives at the call sites (checkChunkUpload's
-// all-files-uploaded branches, ~2485/~2667), NOT inside finishUploadFiles —
-// the method itself is deliberately characterized as unguarded below.
-//
-// releaseUploadAutoLockSuspension stays REAL: without a prior acquire it is
-// a no-op (uploadDataStore/helpers.ts), so no mock is needed.
-
 import {
   describe,
   it,
@@ -43,15 +33,6 @@ import {
   afterEach,
 } from "vitest";
 
-// Import ORDER below is load-bearing. The upload harness imports
-// UploadDataStore BEFORE the filesStore harness; the filesStore harness then
-// re-registers vi.mock factories for the same module ids (socket, toastr,
-// i18n, ...), which invalidates the cached mock instances — so a test file
-// importing those modules afterwards would receive FRESH mock instances,
-// different from the ones UploadDataStore captured, and every
-// toHaveBeenCalled assertion would silently see zero calls. Evaluating the
-// filesStore harness FIRST makes the upload harness's registrations the last
-// ones, so UploadDataStore and this file share the same mock instances.
 import "../../filesStore/__tests__/testHarness";
 import { createTestUploadDataStore, makeUploadFile } from "./testHarness";
 
@@ -64,7 +45,6 @@ import type { TTranslation } from "@docspace/shared/types";
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
-/** Shape of the <Trans> elements passed to toastr in error branches. */
 type TransElementLike = {
   props: { i18nKey: string; values?: Record<string, number> };
 };
@@ -78,8 +58,6 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-// mutation-checked: deleting the SocketHelper.emit(RefreshFolder) call
-// turned 3 tests red (run 2026-07-09).
 describe("UploadDataStore.finishUploadFiles — characterization", () => {
   it("emits RefreshFolder exactly once, finalizes flags and defers the counter reset by TIMEOUT", () => {
     const { store, fakes } = createTestUploadDataStore();
@@ -99,27 +77,23 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
 
     store.finishUploadFiles(t);
 
-    // §3.4.1: RefreshFolder exactly once, with the first file's folder id
     expect(SocketHelper!.emit).toHaveBeenCalledTimes(1);
     expect(SocketHelper!.emit).toHaveBeenCalledWith(
       SocketCommands.RefreshFolder,
       { toFolderId: 7 },
     );
 
-    // error-free history -> a single success toast, no alert progress update
     expect(toastr.success).toHaveBeenCalledTimes(1);
     expect(toastr.success).toHaveBeenCalledWith(
       "Common:ItemsSuccessfullyUploaded",
     );
 
-    // synchronous finalization
     expect(store.uploaded).toBe(true);
     expect(store.converted).toBe(true);
     expect(store.uploadedFilesSize).toBe(0);
     expect(store.asyncUploadObj).toEqual({});
     expect(store.files[0].isCalculated).toBe(true);
 
-    // !waitConversion -> the bar is completed immediately
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
     ).toHaveBeenCalledWith({
@@ -127,7 +101,6 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
       completed: true,
     });
 
-    // the counter reset is deferred behind setTimeout(TIMEOUT)
     expect(store.percent).toBe(80);
     expect(store.filesSize).toBe(123);
 
@@ -138,8 +111,6 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
     expect(store.percent).toBe(0);
     expect(store.conversionPercent).toBe(0);
     expect(store.totalErrorsCount).toBe(0);
-    // panel hidden (and the phantom primaryProgressDataStore.alert prop is
-    // undefined), so files/filesToConversion are NOT part of the reset
     expect(store.files).toHaveLength(1);
   });
 
@@ -161,10 +132,6 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
     store.finishUploadFiles(t);
     store.finishUploadFiles(t);
 
-    // characterized quirk: the finishUploadFilesCalled latch is checked and
-    // set ONLY by the checkChunkUpload call sites; finishUploadFiles neither
-    // reads nor writes it, so a direct double call double-emits and
-    // double-toasts. The §3.4.1 "exactly once" guarantee holds one level up.
     expect(SocketHelper!.emit).toHaveBeenCalledTimes(2);
     expect(toastr.success).toHaveBeenCalledTimes(2);
     expect(store.finishUploadFilesCalled).toBe(false);
@@ -181,15 +148,12 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
 
     store.finishUploadFiles(t, true);
 
-    // the socket refresh and the success toast still happen...
     expect(SocketHelper!.emit).toHaveBeenCalledTimes(1);
     expect(toastr.success).toHaveBeenCalledTimes(1);
-    // ...but the progress bar is left running for the conversion phase
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
     ).not.toHaveBeenCalled();
 
-    // the deferred reset is scheduled regardless of waitConversion
     vi.advanceTimersByTime(TIMEOUT);
     expect(store.percent).toBe(0);
   });
@@ -201,7 +165,6 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
 
     store.finishUploadFiles(t);
 
-    // a new upload begins before the TIMEOUT callback fires
     const freshFile = makeUploadFile({ toFolderId: 9 });
     store.files = [freshFile];
     store.uploaded = false;
@@ -211,23 +174,15 @@ describe("UploadDataStore.finishUploadFiles — characterization", () => {
 
     vi.advanceTimersByTime(TIMEOUT);
 
-    // characterized quirk (known race zone): the setTimeout callback resets
-    // the counters UNCONDITIONALLY — it never re-checks `uploaded`, so the
-    // in-flight upload's progress bookkeeping is zeroed out from under it.
     expect(store.percent).toBe(0);
     expect(store.filesSize).toBe(0);
     expect(store.uploadedFiles).toBe(0);
-    // `uploaded` is not part of the reset payload and survives...
     expect(store.uploaded).toBe(false);
-    // ...and files are untouched because the panel is hidden
     expect(store.files).toHaveLength(1);
     expect(store.files[0].uniqueId).toBe(freshFile.uniqueId);
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.showFinishUploadToastr — characterization", () => {
   it("shows a single success toast when there are no errors", () => {
     const { store, fakes } = createTestUploadDataStore();
@@ -255,7 +210,6 @@ describe("UploadDataStore.showFinishUploadToastr — characterization", () => {
     expect(tSpy).toHaveBeenCalledWith("Common:ItemsSuccessfullyUploaded", {
       count: 2,
     });
-    // the error branch (progress alert + errorShown sweep) is skipped
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
     ).not.toHaveBeenCalled();
@@ -279,8 +233,6 @@ describe("UploadDataStore.showFinishUploadToastr — characterization", () => {
       errorCount: 2,
     });
 
-    // characterized quirk: errorShown is stamped on EVERY history entry —
-    // including the successful ones — via an in-place mutation sweep.
     expect(store.uploadedFilesHistory.map((f) => f.errorShown)).toEqual([
       true,
       true,

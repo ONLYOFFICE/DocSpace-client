@@ -26,7 +26,6 @@
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// The harness must be imported before the modules it mocks (see its header).
 import {
   createTestUploadDataStore,
   installWindowGlobals,
@@ -38,15 +37,6 @@ import {
   cancelEncryptedBatchUploadImpl,
   ensureEncryptionUnlockedForBatchImpl,
 } from "../encryption.helpers";
-
-// Direct unit tests for the extracted Phase 5 encrypted-batch gates (plan
-// §4.1 step 7). These two methods gate a batch on the encryption identity and
-// take no crypto-service dependencies beyond the willEncryptItem selector, so
-// they run against the harness store without per-file crypto mocks. The
-// DEK-wrapping methods (wrapForSelfThenRoom/encryptKeysForRoomMembers) and
-// their DEK-hygiene invariant are covered — with the required partial mocks —
-// by UploadDataStore.encryption.test.ts; the extraction-phase control mutation
-// (§4.1 step 8) confirmed that net bites this module.
 
 const keyedPrivacy = {
   treeFoldersStore: { isPrivacyFolder: true },
@@ -65,7 +55,7 @@ describe("cancelEncryptedBatchUploadImpl", () => {
     const already = makeUploadFile({
       uniqueId: "already",
       action: "upload",
-      encrypted: true, // willEncryptItem -> false, so it is left alone
+      encrypted: true,
     });
     const errored = makeUploadFile({
       uniqueId: "err",
@@ -80,21 +70,17 @@ describe("cancelEncryptedBatchUploadImpl", () => {
 
     cancelEncryptedBatchUploadImpl(store);
 
-    // the encryptable pending row is force-completed as canceled
     expect(store.files[0].cancel).toBe(true);
     expect(store.files[0].action).toBe("uploaded");
     expect(store.files[0].percent).toBe(100);
-    // already-encrypted and errored rows are untouched
     expect(store.files[1].cancel).toBe(false);
     expect(store.files[2].cancel).toBe(false);
-    // only the canceled row is pruned from the history
     expect(store.uploadedFilesHistory.map((f) => f.uniqueId)).toEqual([
       "already",
     ]);
   });
 
   it("does nothing when the user has no encryption keys", () => {
-    // harness default userStore has empty encryptionKeys -> willEncryptItem false
     const { store } = createTestUploadDataStore({
       treeFoldersStore: { isPrivacyFolder: true },
     });
@@ -119,7 +105,6 @@ describe("ensureEncryptionUnlockedForBatchImpl", () => {
 
   it("returns true when no queued file needs encryption", async () => {
     const { store } = createTestUploadDataStore(keyedPrivacy);
-    // an already-encrypted upload plus a non-upload row -> nothing to unlock
     store.files = [
       makeUploadFile({
         action: "upload",

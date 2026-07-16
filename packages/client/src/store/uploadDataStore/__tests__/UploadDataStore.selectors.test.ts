@@ -34,17 +34,10 @@ import {
   makeUploadFile,
 } from "./testHarness";
 
-// Characterization tests for the pure derivation methods of UploadDataStore
-// (plan §3.4 row #1 + the encryption selectors of Phase 1). Every expect
-// documents CURRENT behavior, including unguarded divisions by zero — those
-// are flagged inline as characterized quirks and must not be "fixed" here.
-
 beforeEach(() => {
   installWindowGlobals();
 });
 
-// mutation-checked: off-by-one in the preceding-files filter
-// (`i < indexOfFile` → `<=`) turned 2 tests red (run 2026-07-09).
 describe("UploadDataStore.getNewPercent", () => {
   it("computes cumulative percent from files preceding indexOfFile plus the current uploaded size", () => {
     const { store } = createTestUploadDataStore();
@@ -55,11 +48,8 @@ describe("UploadDataStore.getNewPercent", () => {
     ];
     store.uploaded = false;
 
-    // total = 4000; preceding (index < 1) = 1000; (500 + 1000) / 4000 * 100
     expect(store.getNewPercent(500, 1)).toBe(37.5);
-    // no preceding files: 500 / 4000 * 100
     expect(store.getNewPercent(500, 0)).toBe(12.5);
-    // preceding (index < 2) = 2000: (2000 + 2000) / 4000 * 100
     expect(store.getNewPercent(2000, 2)).toBe(100);
   });
 
@@ -74,8 +64,6 @@ describe("UploadDataStore.getNewPercent", () => {
     ];
     store.uploaded = false;
 
-    // characterized quirk: no cancel filter — the canceled file still
-    // contributes 1000 to the 2000 total: 500 / 2000 * 100.
     expect(store.getNewPercent(500, 0)).toBe(25);
   });
 
@@ -87,16 +75,11 @@ describe("UploadDataStore.getNewPercent", () => {
     ];
     store.uploaded = true;
 
-    // characterized quirk: with uploaded === true every size contributes 0,
-    // so newTotalSize is 0 and the division is unguarded.
     expect(store.getNewPercent(500, 1)).toBe(Infinity);
     expect(Number.isNaN(store.getNewPercent(0, 0))).toBe(true);
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.getFilesPercent", () => {
   it("returns the average percent across uploadedFilesHistory", () => {
     const { store } = createTestUploadDataStore();
@@ -105,7 +88,6 @@ describe("UploadDataStore.getFilesPercent", () => {
       makeUploadFile({ percent: 100 }),
     ];
 
-    // (50 + 100) / (2 * 100) * 100
     expect(store.getFilesPercent()).toBe(75);
   });
 
@@ -127,8 +109,6 @@ describe("UploadDataStore.getFilesPercent", () => {
       makeUploadFile({ percent: 0, cancel: true }),
     ];
 
-    // characterized quirk: canceled entries are not filtered out, so the
-    // canceled 0% drags the average down: 100 / 200 * 100.
     expect(store.getFilesPercent()).toBe(50);
   });
 
@@ -136,14 +116,10 @@ describe("UploadDataStore.getFilesPercent", () => {
     const { store } = createTestUploadDataStore();
     store.uploadedFilesHistory = [];
 
-    // characterized quirk: 0 / (0 * 100) is an unguarded 0/0 division.
     expect(Number.isNaN(store.getFilesPercent())).toBe(true);
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.getConversationPercent", () => {
   it("returns the ratio of fileIndex to the number of files needing conversion", () => {
     const { store } = createTestUploadDataStore();
@@ -166,26 +142,22 @@ describe("UploadDataStore.getConversationPercent", () => {
       makeUploadFile({ needConvert: false }),
     ];
 
-    // characterized quirk: the needConvert count is an unguarded denominator.
     expect(Number.isNaN(store.getConversationPercent(0))).toBe(true);
     expect(store.getConversationPercent(1)).toBe(Infinity);
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.getActiveUploadCountForRoom", () => {
   it("counts only in-flight, non-canceled, non-errored uploads targeting the room", () => {
     const { store } = createTestUploadDataStore();
     store.files = [
-      makeUploadFile({ toFolderId: 42, action: "upload" }), // counts
+      makeUploadFile({ toFolderId: 42, action: "upload" }),
       makeUploadFile({ toFolderId: 42, action: "upload", cancel: true }),
       makeUploadFile({ toFolderId: 42, action: "upload", error: "failed" }),
       makeUploadFile({ toFolderId: 42, action: "uploaded" }),
       makeUploadFile({ toFolderId: 42, action: "convert" }),
       makeUploadFile({ toFolderId: 42, action: "converted" }),
-      makeUploadFile({ toFolderId: 43, action: "upload" }), // other room
+      makeUploadFile({ toFolderId: 43, action: "upload" }),
     ];
 
     expect(store.getActiveUploadCountForRoom(42)).toBe(1);
@@ -200,7 +172,6 @@ describe("UploadDataStore.getActiveUploadCountForRoom", () => {
       makeUploadFile({ toFolderId: "42", action: "upload" }),
     ];
 
-    // both String(42) and String("42") equal the stringified target
     expect(store.getActiveUploadCountForRoom(42)).toBe(2);
     expect(store.getActiveUploadCountForRoom("42")).toBe(2);
   });
@@ -214,9 +185,6 @@ describe("UploadDataStore.getActiveUploadCountForRoom", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.getUploadedFile", () => {
   it("returns every file whose uniqueId matches, and [] when nothing matches", () => {
     const { store } = createTestUploadDataStore();
@@ -232,12 +200,8 @@ describe("UploadDataStore.getUploadedFile", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.getUserEncryptionKeys", () => {
   it("returns all-null result when the user has no encryption keys", () => {
-    // harness default: userStore.encryptionKeys = []
     const { store } = createTestUploadDataStore();
 
     expect(store.getUserEncryptionKeys()).toEqual({
@@ -268,8 +232,6 @@ describe("UploadDataStore.getUserEncryptionKeys", () => {
       },
     });
 
-    // characterized quirk: partial result — userId/publicKeyId are still
-    // returned even though publicKey degraded to null via `|| null`.
     expect(store.getUserEncryptionKeys()).toEqual({
       publicKey: null,
       userId: "user-1",
@@ -302,8 +264,6 @@ describe("UploadDataStore.getUserEncryptionKeys", () => {
       },
     });
 
-    // selectActiveKey refuses to auto-pick among 2+ keys: the user must
-    // choose one on the keys-management page first.
     expect(store.getUserEncryptionKeys()).toEqual({
       publicKey: null,
       userId: null,
@@ -333,9 +293,6 @@ describe("UploadDataStore.getUserEncryptionKeys", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.shouldEncryptCurrentUpload", () => {
   it("is false by default (no room type, no privacy folder, no keys)", () => {
     const { store } = createTestUploadDataStore();
@@ -344,8 +301,6 @@ describe("UploadDataStore.shouldEncryptCurrentUpload", () => {
   });
 
   it("is false in a privacy folder when the user has no encryption keys", () => {
-    // the real shouldEncryptUpload is NOT mocked: with no keys the
-    // `!!publicKey && !!userId` guard short-circuits the result to false.
     const { store } = createTestUploadDataStore({
       treeFoldersStore: { isPrivacyFolder: true },
     });
@@ -372,14 +327,10 @@ describe("UploadDataStore.shouldEncryptCurrentUpload", () => {
       },
     });
 
-    // shouldEncryptUpload requires isPrivate === true on top of the room type
     expect(store.shouldEncryptCurrentUpload()).toBe(false);
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.willEncryptItem", () => {
   const keyedUserStore = {
     encryptionKeys: [{ id: "key-1", publicKey: "pk-base64-1" }],
@@ -416,8 +367,6 @@ describe("UploadDataStore.willEncryptItem", () => {
   });
 
   it("is false without encryption keys even in a privacy folder", () => {
-    // real willEncryptUploadItem is NOT mocked: it early-returns false when
-    // publicKey/userId are null (harness default: empty encryptionKeys).
     const { store } = createTestUploadDataStore({
       treeFoldersStore: { isPrivacyFolder: true },
     });

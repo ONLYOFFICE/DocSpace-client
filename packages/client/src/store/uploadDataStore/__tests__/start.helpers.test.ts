@@ -42,12 +42,6 @@ import {
   setConflictDialogDataImpl,
 } from "../start.helpers";
 
-// Direct unit tests for the extracted Phase 6 start/cancel/retry helpers (plan
-// §4.1 step 7), invoked with the harness store. startUpload/handleUploadConflicts
-// require the HTTP conflict-check flow and are covered end-to-end by
-// UploadDataStore.conversion.test.ts; the extraction-phase control mutation
-// (§4.1 step 8) confirmed the net bites this module.
-
 const t = ((key: string) => key) as unknown as TTranslation;
 
 beforeEach(() => {
@@ -75,7 +69,6 @@ describe("cancelUploadImpl", () => {
     expect(store.percent).toBe(100);
     expect(store.quotaErrorRaised).toBe(false);
     expect(store.files.find((f) => f.uniqueId === "up")?.cancel).toBe(true);
-    // pending "upload" (no error) is dropped from history; "done" survives
     expect(store.uploadedFilesHistory.map((f) => f.uniqueId)).toEqual(["done"]);
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,

@@ -24,29 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Characterization tests for the conversion/conflict branching of
-// UploadDataStore (#9, #10 and the conversion entry points of the plan's
-// §3.4). They pin CURRENT behavior — including oddities marked
-// `// characterized quirk:` — and must not be "fixed" alongside store code.
-//
-// Facade methods (parallelUploading, startUploadFiles, startConversion,
-// startConversionFromFiles, handleFilesUpload, ...) are stubbed by property
-// ASSIGNMENT, not vi.spyOn: makeAutoObservable installs the actions behind
-// non-configurable accessors (spyOn throws), but plain assignment goes
-// through MobX's setter and subsequent `this.method()` calls land on the
-// assigned vi.fn.
-
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// Import ORDER below is load-bearing. The upload harness imports
-// UploadDataStore BEFORE the filesStore harness; the filesStore harness then
-// re-registers vi.mock factories for the same module ids (socket, toastr,
-// i18n, ...), which invalidates the cached mock instances — so a test file
-// importing those modules afterwards would receive FRESH mock instances,
-// different from the ones UploadDataStore captured, and every
-// toHaveBeenCalled assertion would silently see zero calls. Evaluating the
-// filesStore harness FIRST makes the upload harness's registrations the last
-// ones, so UploadDataStore and this file share the same mock instances.
 import "../../filesStore/__tests__/testHarness";
 import {
   createTestUploadDataStore,
@@ -63,7 +42,6 @@ import type { TUploadFile } from "../helpers";
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
-/** Minimal-but-complete TStartUploadData-shaped payload (§3.0.7). */
 const makeStartUploadData = (
   overrides: Partial<Record<string, unknown>> = {},
 ) => {
@@ -84,9 +62,6 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.convertUploadedFiles — characterization", () => {
   it("merges tempConversionFiles into files and restarts the upload cycle when idle (uploaded=true)", () => {
     const { store } = createTestUploadDataStore();
@@ -107,7 +82,6 @@ describe("UploadDataStore.convertUploadedFiles — characterization", () => {
 
     store.convertUploadedFiles(t, false);
 
-    // temp files appended after the existing ones, temp queue drained
     expect(store.files.map((f) => f.uniqueId)).toEqual([
       uploadedFile.uniqueId,
       conv1.uniqueId,
@@ -115,13 +89,11 @@ describe("UploadDataStore.convertUploadedFiles — characterization", () => {
     ]);
     expect(store.tempConversionFiles).toEqual([]);
 
-    // idle branch: reflection-setter applies the new upload data...
     expect(store.uploaded).toBe(false);
-    expect(store.filesSize).toBe(555); // <- convertFilesSize
-    expect(store.uploadedFiles).toBe(2); // self-assignment, unchanged
-    expect(store.percent).toBe(33); // self-assignment, unchanged
+    expect(store.filesSize).toBe(555);
+    expect(store.uploadedFiles).toBe(2);
+    expect(store.percent).toBe(33);
 
-    // ...and a fresh upload cycle starts with createNewIfExist forwarded
     expect(startUploadFiles).toHaveBeenCalledTimes(1);
     expect(startUploadFiles).toHaveBeenCalledWith(t, false);
     expect(parallelUploading).not.toHaveBeenCalled();
@@ -149,8 +121,6 @@ describe("UploadDataStore.convertUploadedFiles — characterization", () => {
       [expect.objectContaining({ uniqueId: pending.uniqueId })],
       t,
     );
-    // characterized quirk: the running-upload branch drops createNewIfExist —
-    // parallelUploading is invoked with exactly two arguments.
     expect(parallelUploading.mock.calls[0]).toHaveLength(2);
 
     expect(startUploadFiles).not.toHaveBeenCalled();
@@ -164,9 +134,6 @@ describe("UploadDataStore.convertUploadedFiles — characterization", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.handleFilesUpload — characterization", () => {
   it("adopts the new history, applies upload data via the reflection setter and starts uploading", () => {
     const { store } = createTestUploadDataStore();
@@ -178,7 +145,6 @@ describe("UploadDataStore.handleFilesUpload — characterization", () => {
     store.handleFilesUpload(data as never, t, false);
 
     expect(store.uploadedFilesHistory).toEqual(data.uploadedFilesHistory);
-    // setUploadData copies every key that exists on the store instance
     expect(store.files).toEqual(data.files);
     expect(store.filesSize).toBe(4096);
     expect(startUploadFiles).toHaveBeenCalledTimes(1);
@@ -186,9 +152,6 @@ describe("UploadDataStore.handleFilesUpload — characterization", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.handleUploadAndOptionalConversion — characterization", () => {
   it("shows the convert dialog for a conversion-only batch when confirmation is not suppressed", () => {
     const { store, fakes } = createTestUploadDataStore();
@@ -208,12 +171,10 @@ describe("UploadDataStore.handleUploadAndOptionalConversion — characterization
 
     store.handleUploadAndOptionalConversion(data as never, t, false);
 
-    // conversion-only: no upload started, stale chunk bookkeeping dropped
     expect(handleFilesUpload).not.toHaveBeenCalled();
     expect(store.asyncUploadObj).toEqual({});
     expect(store.uploadedFilesHistory).toEqual(data.uploadedFilesHistory);
 
-    // hideConfirmConvertSave=false (harness default) -> ask the user
     expect(convertUploadedFiles).not.toHaveBeenCalled();
     expect(fakes.dialogsStore.setConvertDialogVisible).toHaveBeenCalledWith(
       true,
@@ -253,23 +214,19 @@ describe("UploadDataStore.handleUploadAndOptionalConversion — characterization
 
   it("delegates straight to handleFilesUpload when nothing needs conversion", () => {
     const { store, fakes } = createTestUploadDataStore();
-    const data = makeStartUploadData(); // tempConversionFiles stays []
+    const data = makeStartUploadData();
 
     const handleFilesUpload = vi.fn();
     store.handleFilesUpload = handleFilesUpload as never;
 
     store.handleUploadAndOptionalConversion(data as never, t, false);
 
-    // the method forwards a shallow copy of the payload
     expect(handleFilesUpload).toHaveBeenCalledTimes(1);
     expect(handleFilesUpload).toHaveBeenCalledWith(data, t, false);
     expect(fakes.dialogsStore.setConvertDialogVisible).not.toHaveBeenCalled();
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.conflictDialogUploadHandler — characterization", () => {
   it("is a thin wrapper that forwards its arguments verbatim", () => {
     const { store } = createTestUploadDataStore();
@@ -290,8 +247,6 @@ describe("UploadDataStore.conflictDialogUploadHandler — characterization", () 
   });
 });
 
-// mutation-checked: inverting the `conflicts.length > 0` condition
-// (§3.4.2) turned 3 tests red.
 describe("UploadDataStore.handleUploadConflicts — characterization", () => {
   it("opens the conflict-resolve dialog when the server reports existing names", async () => {
     const { store, fakes } = createTestUploadDataStore();
@@ -303,7 +258,6 @@ describe("UploadDataStore.handleUploadConflicts — characterization", () => {
     });
     const names = (data.files as TUploadFile[]).map((f) => f.file.name);
 
-    // checkIsFileExist resolves an array of conflicting file NAMES
     vi.mocked(filesApi.checkIsFileExist).mockResolvedValue([
       names[0],
     ] as never);
@@ -351,8 +305,6 @@ describe("UploadDataStore.handleUploadConflicts — characterization", () => {
 
     await store.handleUploadConflicts(t, 5, data as never);
 
-    // characterized quirk: folder info is fetched even when it is only
-    // needed for the (not shown) conflict dialog title.
     expect(filesApi.getFolderInfo).toHaveBeenCalledWith(5);
     expect(handleUploadAndOptionalConversion).toHaveBeenCalledTimes(1);
     expect(handleUploadAndOptionalConversion).toHaveBeenCalledWith(
@@ -373,7 +325,6 @@ describe("UploadDataStore.handleUploadConflicts — characterization", () => {
       files: [makeUploadFile({ toFolderId: 5 })],
     });
 
-    // would produce a conflict if it were consulted
     vi.mocked(filesApi.checkIsFileExist).mockResolvedValue([
       "document.docx",
     ] as never);
@@ -415,7 +366,6 @@ describe("UploadDataStore.handleUploadConflicts — characterization", () => {
     await store.handleUploadConflicts(t, 5, data as never);
 
     expect(toastr.error).toHaveBeenCalledWith("boom", null, 0, true);
-    // uploaded=true and empty history -> alert + panel dismissal
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
     ).toHaveBeenCalledWith({
@@ -428,9 +378,6 @@ describe("UploadDataStore.handleUploadConflicts — characterization", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.convertFile — characterization", () => {
   it("re-marks the history entry, resets the finished queue and starts a conversion", () => {
     const { store, fakes } = createTestUploadDataStore();
@@ -441,7 +388,7 @@ describe("UploadDataStore.convertFile — characterization", () => {
       errorShown: true,
     });
     store.uploadedFilesHistory = [historyEntry];
-    store.convertFilesSize = 777; // converted=true (default) resets it
+    store.convertFilesSize = 777;
 
     const startConversion = vi.fn().mockResolvedValue(undefined);
     store.startConversion = startConversion as never;
@@ -457,7 +404,6 @@ describe("UploadDataStore.convertFile — characterization", () => {
       alert: false,
     });
 
-    // in-place history mutation at the pre-computed index
     expect(store.uploadedFilesHistory[0].action).toBe("convert");
     expect(store.uploadedFilesHistory[0].error).toBeNull();
     expect(store.uploadedFilesHistory[0].errorShown).toBe(false);
@@ -466,7 +412,6 @@ describe("UploadDataStore.convertFile — characterization", () => {
     expect(store.filesToConversion).toHaveLength(1);
     expect(store.filesToConversion[0].uniqueId).toBe(file.uniqueId);
 
-    // empty queue -> this call also starts the polling loop
     expect(startConversion).toHaveBeenCalledTimes(1);
     expect(startConversion).toHaveBeenCalledWith(t, undefined);
   });
@@ -482,7 +427,6 @@ describe("UploadDataStore.convertFile — characterization", () => {
 
     store.convertFile(makeUploadFile({ fileId: 42 }), t);
 
-    // setConvertItem(null) runs BEFORE the guard, everything else is skipped
     expect(fakes.dialogsStore.setConvertItem).toHaveBeenCalledWith(null);
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
@@ -494,7 +438,7 @@ describe("UploadDataStore.convertFile — characterization", () => {
 
   it("only enqueues when a conversion loop is already draining the queue", () => {
     const { store } = createTestUploadDataStore();
-    store.converted = false; // keeps the pre-filled queue from being reset
+    store.converted = false;
     store.filesToConversion = [makeUploadFile({ fileId: 1 })];
     store.uploadedFilesHistory = [
       makeUploadFile({ fileId: 42, action: "uploaded" }),
@@ -512,9 +456,6 @@ describe("UploadDataStore.convertFile — characterization", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.convertFileFromFiles — characterization", () => {
   it("queues a fresh file, shows the panelless progress bar and starts the loop", () => {
     const { store, fakes } = createTestUploadDataStore();
@@ -534,8 +475,6 @@ describe("UploadDataStore.convertFileFromFiles — characterization", () => {
     ).toHaveBeenCalledWith({
       operation: OPERATIONS_NAME.convert,
       alert: false,
-      // characterized quirk: `(!length as unknown) === 0` compares a boolean
-      // to a number, so `completed` is ALWAYS false here.
       completed: false,
       showPanel: store.setConversionPanelVisible,
       withoutProgress: true,
@@ -546,7 +485,6 @@ describe("UploadDataStore.convertFileFromFiles — characterization", () => {
     expect(store.displayedConversionFiles).toHaveLength(1);
     expect(store.displayedConversionFiles[0].fileId).toBe(42);
 
-    // empty queue before the push -> the loop is started
     expect(startConversionFromFiles).toHaveBeenCalledTimes(1);
     expect(startConversionFromFiles).toHaveBeenCalledWith(t, true);
   });
@@ -569,7 +507,6 @@ describe("UploadDataStore.convertFileFromFiles — characterization", () => {
       t,
     );
 
-    // setConvertItem(null) still fires before the guard
     expect(fakes.dialogsStore.setConvertItem).toHaveBeenCalledWith(null);
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
@@ -604,23 +541,18 @@ describe("UploadDataStore.convertFileFromFiles — characterization", () => {
       t,
     );
 
-    // updated in place, NOT pushed a second time
     expect(store.displayedConversionFiles).toHaveLength(1);
     expect(store.displayedConversionFiles[0].fileInfo?.fileExst).toBe(".pdf");
     expect(store.displayedConversionFiles[0].action).toBe("convert");
     expect(store.displayedConversionFiles[0].error).toBeNull();
     expect(store.displayedConversionFiles[0].errorShown).toBe(false);
 
-    // the active queue still receives the new request object
     expect(store.activeConversionQueue).toHaveLength(1);
     expect(startConversionFromFiles).toHaveBeenCalledTimes(1);
     expect(startConversionFromFiles).toHaveBeenCalledWith(t, undefined);
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.setConversionPercent — characterization", () => {
   it("forwards the percent to the progress bar while uploads are settled (uploaded=true)", () => {
     const { store, fakes } = createTestUploadDataStore();
@@ -658,8 +590,6 @@ describe("UploadDataStore.setConversionPercent — characterization", () => {
     const { store, fakes } = createTestUploadDataStore();
     store.uploaded = false;
 
-    // characterized quirk: conversion percent updates are silently discarded
-    // while the uploader owns the progress bar.
     store.setConversionPercent(50);
 
     expect(

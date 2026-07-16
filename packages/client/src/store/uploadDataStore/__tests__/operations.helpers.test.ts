@@ -26,7 +26,6 @@
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// The harness must be imported before the modules it mocks (see its header).
 import {
   createTestUploadDataStore,
   installWindowGlobals,
@@ -45,13 +44,6 @@ import {
   loopFilesOperationsImpl,
   moveToCopyToImpl,
 } from "../operations.helpers";
-
-// Direct unit tests for the extracted Phase 2 copy/move helpers (plan §4.1
-// step 7). They invoke the *Impl functions with the harness store (the
-// self-technique is tested "через harness-стор"), which proves the safety net
-// bites the operations.helpers module directly, not only through the facade.
-// The exhaustive behavior/order assertions live in
-// UploadDataStore.operations.test.ts.
 
 const makeOperation = (overrides: Partial<TOperation> = {}): TOperation => ({
   Operation: 0,
@@ -171,7 +163,6 @@ describe("moveToCopyToImpl", () => {
     const removeFiles = vi.fn();
     filesStore.removeFiles = removeFiles;
 
-    // destFolderId 99 !== selectedFolderStore.id (1) and isCopy -> else branch
     moveToCopyToImpl(
       store,
       99,

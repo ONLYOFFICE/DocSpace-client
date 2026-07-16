@@ -24,24 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// ---------------------------------------------------------------------------
-// Characterization tests for the conversion polling loops (plan §3.4 note:
-// "polling loops are characterized by their entry/exit branches with fake
-// timers; a full live cycle belongs to the manual checklist").
-//
-// Both loops await the REAL uploadDataStore/helpers.getConversationProgress,
-// which delays each poll by a 1s setTimeout before hitting the (mocked)
-// getFileConversationProgress API — hence vi.useFakeTimers() plus
-// advanceTimersByTimeAsync(1000) per scripted poll response.
-// ---------------------------------------------------------------------------
-
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-// Import-order matters — see the comment in UploadDataStore.chunks.test.ts.
 import "../../filesStore/__tests__/testHarness";
 
-// The harness import must stay ABOVE the API/toast imports: its hoisted
-// vi.mock registrations are what make the modules below resolve to mocks.
 import {
   createTestUploadDataStore,
   installWindowGlobals,
@@ -57,16 +43,12 @@ import type UploadDataStore from "../../UploadDataStore";
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
-// makeAutoObservable defines actions as non-configurable accessors, so tests
-// swap methods by plain assignment (same convention as the chunk tests).
 const replaceAction = (store: UploadDataStore, key: string) => {
   const fn = vi.fn().mockResolvedValue(undefined);
   (store as unknown as Record<string, unknown>)[key] = fn;
   return fn;
 };
 
-/** One queued conversion item, shaped like the entries pushed by convertFile
- * and convertFileFromFiles (only fileId/password/format are read). */
 const conversionItem = (fileId: number) =>
   ({ fileId, password: null, format: null }) as never;
 
@@ -89,10 +71,6 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-// mutation-checked: removing the `if (!this.converted) return` guard makes
-// the guard test red (convertFile gets called); dropping the
-// `historyFile.inConversion = false` line in the error branch makes the
-// password test red.
 describe("UploadDataStore.startConversion — entry/exit branches", () => {
   it("bails out silently while a previous conversion cycle is still running (converted=false)", async () => {
     const { store, fakes } = createTestUploadDataStore();
@@ -103,26 +81,22 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
 
     expect(filesApi.convertFile).not.toHaveBeenCalled();
     expect(progressCalls(fakes)).toEqual([]);
-    // The queue is left for the running cycle to drain.
     expect(store.filesToConversion).toHaveLength(1);
   });
 
   it("with an empty queue completes at 100% and finalizes the batch", async () => {
     const { store, fakes } = createTestUploadDataStore();
     const finishUploadFiles = replaceAction(store, "finishUploadFiles");
-    // Defaults: converted=true, uploaded=true, filesToConversion=[].
 
     await store.startConversion(t);
 
     expect(filesApi.convertFile).not.toHaveBeenCalled();
-    // setConversionPercent(0) on entry, setConversionPercent(100) on exit —
-    // both forwarded because uploaded=true, both under the upload operation.
     expect(progressCalls(fakes)).toEqual([
       [{ operation: OPERATIONS_NAME.upload, percent: 0, completed: false }],
       [{ operation: OPERATIONS_NAME.upload, percent: 100, completed: false }],
     ]);
     expect(finishUploadFiles.mock.calls).toEqual([[t, false]]);
-    expect(store.converted).toBe(false); // flipped on entry, never restored
+    expect(store.converted).toBe(false);
   });
 
   it("polls until 100%, marks the file converted and refreshes the file list", async () => {
@@ -153,10 +127,10 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
       ] as never);
 
     const run = store.startConversion(t);
-    await vi.advanceTimersByTimeAsync(1000); // poll #1 → 50%
+    await vi.advanceTimersByTimeAsync(1000);
     expect(store.files[0].convertProgress).toBe(50);
     expect(store.files[0].inConversion).toBe(true);
-    await vi.advanceTimersByTimeAsync(1000); // poll #2 → 100%
+    await vi.advanceTimersByTimeAsync(1000);
     await run;
 
     expect(vi.mocked(filesApi.convertFile).mock.calls).toEqual([
@@ -166,7 +140,6 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
       vi.mocked(filesApi.getFileConversationProgress).mock.calls,
     ).toEqual([[42], [42]]);
 
-    // Exit state on both mirrors of the entry.
     expect(store.files[0].action).toBe("converted");
     expect(store.files[0].convertProgress).toBe(100);
     expect(store.files[0].inConversion).toBe(false);
@@ -175,13 +148,8 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
     expect(store.uploadedFilesHistory[0].action).toBe("converted");
     expect(store.uploadedFilesHistory[0].fileInfo?.id).toBe(43);
 
-    // storeOriginalFiles=false => a single refresh with the live entry.
     expect(refreshFiles.mock.calls).toEqual([[store.files[0]]]);
 
-    // Percent trail: 0 on entry, then one call per poll response (the only
-    // file in conversion => getConversationPercent(1) === 100 already at the
-    // mid-poll), 100 again in the progress===100 block, 100 on the uploaded
-    // exit.
     expect(progressCalls(fakes)).toEqual([
       [{ operation: OPERATIONS_NAME.upload, percent: 0, completed: false }],
       [{ operation: OPERATIONS_NAME.upload, percent: 100, completed: false }],
@@ -201,8 +169,6 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
       action: "uploaded",
       needConvert: true,
     });
-    // A second, still-pending upload keeps allFilesIsUploaded=false so the
-    // non-finalizing exit branch is taken.
     const stillUploading = makeUploadFile({ fileId: null });
     store.files = [converting, stillUploading];
     store.uploadedFilesHistory = [{ ...converting }];
@@ -226,13 +192,10 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
     expect(store.uploadedFilesHistory[0].error).toBe("Incorrect password");
     expect(store.uploadedFilesHistory[0].needPassword).toBe(true);
 
-    // The password branch raises the upload-operation alert; nothing else is
-    // forwarded (uploaded=false suppresses setConversionPercent).
     expect(progressCalls(fakes)).toEqual([
       [{ operation: OPERATIONS_NAME.upload, alert: true }],
     ]);
 
-    // Exit branch for a still-running upload: state re-armed, no finalize.
     expect(finishUploadFiles).not.toHaveBeenCalled();
     expect(store.converted).toBe(true);
     expect(store.filesToConversion).toEqual([]);
@@ -267,7 +230,6 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
     expect(store.files[0].error).toBe("poller down");
     expect(store.files[0].inConversion).toBe(false);
     expect(store.uploadedFilesHistory[0].error).toBe("poller down");
-    // One poll happened, then the catch broke the loop — no retry.
     expect(filesApi.getFileConversationProgress).toHaveBeenCalledTimes(1);
   });
 
@@ -294,7 +256,6 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
     expect(store.uploadedFilesHistory[0].error).toBe("Common:FailedToConvert");
     expect(filesApi.getFileConversationProgress).not.toHaveBeenCalled();
 
-    // numberFiles === 1 => the catch publishes the completed alert variant.
     expect(progressCalls(fakes)).toEqual([
       [{ operation: OPERATIONS_NAME.upload, percent: 0, completed: false }],
       [
@@ -310,14 +271,11 @@ describe("UploadDataStore.startConversion — entry/exit branches", () => {
   });
 });
 
-// mutation-checked: dropping the `historyFile.action = "converted"`
-// assignment turned the happy-path red; dropping the error branch's
-// `historyFile.inConversion = false` turned the poller-error test red.
 describe("UploadDataStore.startConversionFromFiles — entry/exit branches", () => {
   it("stops at the first queued file that is no longer displayed and still finalizes the panel state", async () => {
     const { store, fakes } = createTestUploadDataStore();
     store.activeConversionQueue = [conversionItem(42)];
-    store.displayedConversionFiles = []; // user already dismissed the row
+    store.displayedConversionFiles = [];
 
     await store.startConversionFromFiles(t);
 
@@ -349,10 +307,10 @@ describe("UploadDataStore.startConversionFromFiles — entry/exit branches", () 
       ] as never);
 
     const run = store.startConversionFromFiles(t);
-    await vi.advanceTimersByTimeAsync(1000); // poll #1 → 60%
+    await vi.advanceTimersByTimeAsync(1000);
     expect(store.displayedConversionFiles[0].convertProgress).toBe(60);
     expect(store.displayedConversionFiles[0].inConversion).toBe(true);
-    await vi.advanceTimersByTimeAsync(1000); // poll #2 → 100%
+    await vi.advanceTimersByTimeAsync(1000);
     await run;
 
     const row = store.displayedConversionFiles[0];
@@ -391,7 +349,7 @@ describe("UploadDataStore.startConversionFromFiles — entry/exit branches", () 
     expect(row.error).toBe("Broken document");
     expect(row.inConversion).toBe(false);
     expect(row.needPassword).toBe(false);
-    expect(row.action).toBe("convert"); // never promoted to "converted"
+    expect(row.action).toBe("convert");
 
     expect(progressCalls(fakes)).toEqual([
       [{ operation: OPERATIONS_NAME.convert, alert: true }],
@@ -416,8 +374,6 @@ describe("UploadDataStore.startConversionFromFiles — entry/exit branches", () 
     );
     expect(filesApi.getFileConversationProgress).not.toHaveBeenCalled();
 
-    // characterized quirk: convertedFromFiles is false during the loop, so
-    // the catch's alert branch is dead — only the completion call goes out.
     expect(progressCalls(fakes)).toEqual([
       [{ operation: OPERATIONS_NAME.convert, completed: true }],
     ]);

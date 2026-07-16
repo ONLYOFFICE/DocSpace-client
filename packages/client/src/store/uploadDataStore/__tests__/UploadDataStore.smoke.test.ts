@@ -29,9 +29,6 @@ import { isObservableProp } from "mobx";
 
 import { createTestUploadDataStore, makeUploadFile } from "./testHarness";
 
-// Proves the harness constructs a working store before any characterization
-// test is written (§3.3 of the plan). If this file is red, fix the harness —
-// do not write more tests.
 describe("UploadDataStore — harness smoke", () => {
   it("constructs with pristine defaults", () => {
     const { store } = createTestUploadDataStore();
@@ -49,11 +46,7 @@ describe("UploadDataStore — harness smoke", () => {
   it("wires the injected stores it was constructed with", () => {
     const { store, fakes, filesStore } = createTestUploadDataStore();
 
-    // Class instances pass through makeAutoObservable untouched...
     expect(store.filesStore).toBe(filesStore);
-    // ...while plain-object fakes get wrapped in observable proxies, so
-    // identity is NOT preserved for them. What tests rely on instead: calls
-    // made through the store land on the very vi.fn()s the harness returned.
     store.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: "upload",
       percent: 42,
@@ -61,7 +54,6 @@ describe("UploadDataStore — harness smoke", () => {
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
     ).toHaveBeenCalledWith({ operation: "upload", percent: 42 });
-    // The real FilesStore from the filesStore harness is fully constructed.
     expect(Array.isArray(filesStore.files)).toBe(true);
   });
 

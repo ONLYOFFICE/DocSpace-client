@@ -26,9 +26,6 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-// Import ORDER is load-bearing (see UploadDataStore.finish.test.ts): the
-// filesStore harness must evaluate first so the upload harness's socket/toastr
-// mock registrations win and are the instances UploadDataStore captured.
 import "../../filesStore/__tests__/testHarness";
 import { createTestUploadDataStore, makeUploadFile } from "./testHarness";
 
@@ -41,11 +38,6 @@ import {
   finishUploadFilesImpl,
   showFinishUploadToastrImpl,
 } from "../finish.helpers";
-
-// Direct unit tests for the extracted Phase 8 finalization helpers (plan §4.1
-// step 7), invoked with the harness store. refreshFiles is covered end-to-end
-// (real FilesStore) by UploadDataStore.operations.test.ts; the extraction-phase
-// control mutation (§4.1 step 8) confirmed the net bites this module.
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
@@ -106,7 +98,6 @@ describe("finishUploadFilesImpl", () => {
     expect(store.converted).toBe(true);
     expect(store.asyncUploadObj).toEqual({});
 
-    // the deferred reset is scheduled behind a timeout; flush it cleanly
     vi.runAllTimers();
   });
 });

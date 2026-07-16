@@ -45,21 +45,10 @@ import {
   willEncryptItemImpl,
 } from "../selectors.helpers";
 
-// Direct unit tests for the extracted Phase 1 selectors (plan §4.1 step 7).
-// Unlike UploadDataStore.selectors.test.ts (which exercises the store facades),
-// these call the *Impl functions directly: the pure deps-object selectors take
-// a plain deps literal (no store required), the encryption selectors take a
-// harness store. This proves the safety net bites the NEW helper module, not a
-// leftover copy on the store. Behavior — including the characterized unguarded
-// divisions by zero — is asserted verbatim.
-
 beforeEach(() => {
   installWindowGlobals();
 });
 
-// mutation-checked: the preceding-files filter off-by-one
-// (`i < indexOfFile` → `i <= indexOfFile`) in the helper turns the first case
-// red (re-run at extraction gate 2026-07-09).
 describe("getNewPercentImpl", () => {
   it("sums files preceding indexOfFile plus the current uploaded size", () => {
     const deps = {
@@ -71,11 +60,8 @@ describe("getNewPercentImpl", () => {
       uploaded: false,
     };
 
-    // total = 4000; preceding (index < 1) = 1000; (500 + 1000) / 4000 * 100
     expect(getNewPercentImpl(500, 1, deps)).toBe(37.5);
-    // no preceding files: 500 / 4000 * 100
     expect(getNewPercentImpl(500, 0, deps)).toBe(12.5);
-    // preceding (index < 2) = 2000: (2000 + 2000) / 4000 * 100
     expect(getNewPercentImpl(2000, 2, deps)).toBe(100);
   });
 
@@ -91,8 +77,6 @@ describe("getNewPercentImpl", () => {
       uploaded: false,
     };
 
-    // characterized quirk: no cancel filter — the canceled file still
-    // contributes 1000 to the 2000 total: 500 / 2000 * 100.
     expect(getNewPercentImpl(500, 0, deps)).toBe(25);
   });
 
@@ -102,19 +86,13 @@ describe("getNewPercentImpl", () => {
       uploaded: true,
     };
 
-    // characterized quirk: with uploaded === true every size contributes 0,
-    // so newTotalSize is 0 and the division is unguarded.
     expect(getNewPercentImpl(500, 1, deps)).toBe(Infinity);
     expect(Number.isNaN(getNewPercentImpl(0, 0, deps))).toBe(true);
   });
 });
 
-// mutation-checked: swapping the numerator/denominator operands
-// (`percentCurrentFileHistory / commonPercent` → inverse) turns the average
-// case red.
 describe("getFilesPercentImpl", () => {
   it("returns the average percent across uploadedFilesHistory", () => {
-    // (50 + 100) / (2 * 100) * 100
     expect(
       getFilesPercentImpl({
         uploadedFilesHistory: [
@@ -132,8 +110,6 @@ describe("getFilesPercentImpl", () => {
   });
 });
 
-// mutation-checked: dropping the `f.needConvert` filter (counting every file)
-// turns the ratio case red.
 describe("getConversationPercentImpl", () => {
   it("returns the ratio of fileIndex to the number of files needing conversion", () => {
     const deps = {
@@ -161,11 +137,11 @@ describe("getActiveUploadCountForRoomImpl", () => {
   it("counts only in-flight, non-canceled, non-errored uploads for the room", () => {
     const deps = {
       files: [
-        makeUploadFile({ toFolderId: 42, action: "upload" }), // counts
+        makeUploadFile({ toFolderId: 42, action: "upload" }),
         makeUploadFile({ toFolderId: 42, action: "upload", cancel: true }),
         makeUploadFile({ toFolderId: 42, action: "upload", error: "x" }),
         makeUploadFile({ toFolderId: 42, action: "uploaded" }),
-        makeUploadFile({ toFolderId: 43, action: "upload" }), // other room
+        makeUploadFile({ toFolderId: 43, action: "upload" }),
       ],
     };
 
@@ -201,8 +177,6 @@ describe("getUploadedFileImpl", () => {
   });
 });
 
-// mutation-checked: dropping `activeKey.id || null` (returning null) turns the
-// single-key case red — proves the encryption selector bites the new module.
 describe("getUserEncryptionKeysImpl", () => {
   it("returns all-null when the user has no encryption keys", () => {
     const { store } = createTestUploadDataStore();

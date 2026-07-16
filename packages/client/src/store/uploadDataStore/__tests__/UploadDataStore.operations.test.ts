@@ -24,28 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// ---------------------------------------------------------------------------
-// Characterization tests for the copy/move operations block of
-// UploadDataStore (#7, #8, #12, #13 of REFACTORING_PLAN.md §3.4):
-// itemOperationToFolder, copyToAction, moveToAction, loopFilesOperations,
-// moveToCopyTo, navigateToNewFolderLocation, clearActiveOperations and
-// refreshFiles. These methods drive the secondary progress bar and mutate
-// the REAL FilesStore that the harness injects, so assertions run against
-// real observable arrays and a real FilesFilter instance.
-//
-// Note on spying: MobX (makeAutoObservable + default safeDescriptors) defines
-// store actions as non-configurable accessor properties, so `vi.spyOn` cannot
-// redefine them. Plain assignment goes through the MobX setter and works —
-// spies below are installed as `store.method = vi.fn(store.method)` (wrap the
-// original, keep behavior, record calls).
-// ---------------------------------------------------------------------------
-
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// IMPORTANT: the harness must be imported BEFORE the modules it mocks. Its
-// vi.mock registrations run when its module body executes; importing
-// @docspace/shared/api/files (or the poller) first would load and cache the
-// REAL modules, and `vi.mocked(...)` below would not be mock functions.
 import {
   createTestUploadDataStore,
   installWindowGlobals,
@@ -73,8 +53,6 @@ const asMock = (fn: unknown) => fn as AnyMock;
 const getNavigateMock = () =>
   (window as unknown as { DocSpace: { navigate: AnyMock } }).DocSpace.navigate;
 
-/** Server-side operation snapshot as returned by copy/move endpoints and the
- * progress poller (TOperation from @docspace/shared/api/files/types). */
 const makeOperation = (overrides: Partial<TOperation> = {}): TOperation => ({
   Operation: 0,
   error: "",
@@ -85,9 +63,6 @@ const makeOperation = (overrides: Partial<TOperation> = {}): TOperation => ({
   ...overrides,
 });
 
-// filesList-mappable items for the paths that run the REAL
-// FilesStore.removeFiles / showNewFilesInList (same fixture shape as
-// filesStore/__tests__/FilesStore.removeFiles.test.ts).
 const listFile = (id: number) =>
   ({
     id,
@@ -110,17 +85,12 @@ beforeEach(() => {
   installWindowGlobals();
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.itemOperationToFolder — copy/move routing", () => {
   it("isCopy=true routes to copyToFolder with exact arguments and reports progress start/end", async () => {
     const { store, fakes, filesStore } = createTestUploadDataStore();
     const finishedOp = makeOperation({ finished: true, progress: 100 });
     vi.mocked(filesApi.copyToFolder).mockResolvedValue([finishedOp] as never);
 
-    // active items previously registered for the operation — moveToCopyTo
-    // must clear them at the end of the pipeline.
     filesStore.setActiveFiles([5], 99);
     filesStore.setActiveFolders([7], 99);
 
@@ -144,7 +114,7 @@ describe("UploadDataStore.itemOperationToFolder — copy/move routing", () => {
       99,
       [7],
       [5],
-      ConflictResolveType.Duplicate, // default when data.conflictResolveType is absent
+      ConflictResolveType.Duplicate,
       false,
       true,
       false,
@@ -155,7 +125,6 @@ describe("UploadDataStore.itemOperationToFolder — copy/move routing", () => {
       fakes.secondaryProgressDataStore.setSecondaryProgressBarData,
     ).mock.calls;
 
-    // 1) synchronous kick-off with a generated operationId
     expect(progressCalls[0][0]).toEqual({
       operation: "copy",
       percent: 0,
@@ -168,7 +137,6 @@ describe("UploadDataStore.itemOperationToFolder — copy/move routing", () => {
     });
     const operationId = progressCalls[0][0].operationId as string;
 
-    // 2) loopFilesOperations announces the server operation id
     expect(progressCalls[1][0]).toEqual({
       operation: "copy",
       alert: false,
@@ -176,7 +144,6 @@ describe("UploadDataStore.itemOperationToFolder — copy/move routing", () => {
       serverOperationId: "srv-op-1",
     });
 
-    // 3) moveToCopyTo completes the bar with the same operationId
     expect(progressCalls[progressCalls.length - 1][0]).toEqual({
       operation: "copy",
       percent: 100,
@@ -184,11 +151,8 @@ describe("UploadDataStore.itemOperationToFolder — copy/move routing", () => {
       operationId,
     });
 
-    // resolves with the finished server operation, passed through untouched
     expect(result).toBe(finishedOp);
 
-    // copy into a foreign folder (99 !== selectedFolderStore.id 1) takes the
-    // else-branch of moveToCopyTo: active operations cleared, dialog untouched
     expect(filesStore.activeFiles).toEqual([]);
     expect(filesStore.activeFolders).toEqual([]);
     expect(fakes.dialogsStore.setIsFolderActions).not.toHaveBeenCalled();
@@ -220,13 +184,12 @@ describe("UploadDataStore.itemOperationToFolder — copy/move routing", () => {
       isFolder: false,
     });
 
-    // move signature has no `content` argument
     expect(filesApi.moveToFolder).toHaveBeenCalledTimes(1);
     expect(filesApi.moveToFolder).toHaveBeenCalledWith(
       99,
       [7],
       [5],
-      ConflictResolveType.Overwrite, // explicit type is passed through
+      ConflictResolveType.Overwrite,
       true,
       true,
     );
@@ -246,22 +209,16 @@ describe("UploadDataStore.itemOperationToFolder — copy/move routing", () => {
       isFolder: false,
     });
 
-    // moveToCopyTo ran the REAL FilesStore.removeFiles: moved items dropped
-    // from state, total decremented by the two removed items.
     expect(filesStore.files.map((f) => f.id)).toEqual([6]);
     expect(filesStore.folders).toHaveLength(0);
     expect(filesStore.filter.total).toBe(1);
     expect(filesStore.activeFiles).toEqual([]);
     expect(filesStore.activeFolders).toEqual([]);
     expect(fakes.dialogsStore.setIsFolderActions).toHaveBeenCalledWith(false);
-    // moved folder id 7 !== selected folder id 1 → no navigation
     expect(getNavigateMock()).not.toHaveBeenCalled();
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.copyToAction / moveToAction — error paths", () => {
   it("copyToAction: API rejection reports an alert, clears active operations and re-rejects", async () => {
     const { store, fakes, filesStore } = createTestUploadDataStore();
@@ -291,7 +248,7 @@ describe("UploadDataStore.copyToAction / moveToAction — error paths", () => {
       alert: true,
       operationId: "op-err",
       operation: "copy",
-      error: boom, // characterized quirk: the raw Error lands in `error` (typed as string)
+      error: boom,
     });
     expect(clearSpy).toHaveBeenCalledWith([5], [7]);
     expect(filesStore.activeFiles).toEqual([]);
@@ -314,7 +271,6 @@ describe("UploadDataStore.copyToAction / moveToAction — error paths", () => {
       ),
     ).rejects.toBe(failedOp);
 
-    // characterized quirk: the whole TOperation object is forwarded as `error`
     expect(
       fakes.secondaryProgressDataStore.setSecondaryProgressBarData,
     ).toHaveBeenCalledWith({
@@ -324,7 +280,6 @@ describe("UploadDataStore.copyToAction / moveToAction — error paths", () => {
       operation: "move",
       error: failedOp,
     });
-    // rejected before polling ever started
     expect(getOperationProgress).not.toHaveBeenCalled();
   });
 
@@ -332,7 +287,6 @@ describe("UploadDataStore.copyToAction / moveToAction — error paths", () => {
     const { store, fakes } = createTestUploadDataStore();
     vi.mocked(filesApi.copyToFolder).mockResolvedValue([] as never);
 
-    // characterized quirk: `Promise.reject()` with no argument
     await expect(
       store.copyToAction(
         99,
@@ -356,13 +310,10 @@ describe("UploadDataStore.copyToAction / moveToAction — error paths", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.loopFilesOperations — polling", () => {
   it("polls getOperationProgress until finished and mirrors each snapshot into the progress bar", async () => {
     const { store, fakes } = createTestUploadDataStore();
-    const data = makeOperation({ id: "srv-1" }); // progress 0, finished false
+    const data = makeOperation({ id: "srv-1" });
     const mid = makeOperation({ id: "srv-1", progress: 50 });
     const done = makeOperation({ id: "srv-1", progress: 100, finished: true });
     vi.mocked(getOperationProgress)
@@ -374,12 +325,11 @@ describe("UploadDataStore.loopFilesOperations — polling", () => {
       operationId: "cli-1",
     });
 
-    // the loop stopped exactly when the poller reported finished
     expect(getOperationProgress).toHaveBeenCalledTimes(2);
     expect(getOperationProgress).toHaveBeenNthCalledWith(
       1,
       "srv-1",
-      "Common:UnexpectedError", // echo-key i18n from the harness
+      "Common:UnexpectedError",
       true,
     );
     expect(result).toBe(done);
@@ -388,14 +338,12 @@ describe("UploadDataStore.loopFilesOperations — polling", () => {
       fakes.secondaryProgressDataStore.setSecondaryProgressBarData,
     ).mock.calls.map((c) => c[0]);
     expect(calls).toHaveLength(3);
-    // initial announcement carries no snapshot...
     expect(calls[0]).toEqual({
       operation: "move",
       alert: false,
       operationId: "cli-1",
       serverOperationId: "srv-1",
     });
-    // ...then one call per polled snapshot, in order (progress 50 → 100)
     expect(calls[1]).toEqual({
       operation: "move",
       alert: false,
@@ -441,9 +389,6 @@ describe("UploadDataStore.loopFilesOperations — polling", () => {
   });
 
   it("exits before polling when secondaryOperationsArray marks the operation item completed (user cancel)", async () => {
-    // cancellation signal: the progress store tracks an operations array of
-    // { operation, items: [{ operationId, completed, skipToast }] }; the loop
-    // checks it at the top of every iteration.
     const { store, fakes } = createTestUploadDataStore({
       secondaryProgressDataStore: {
         secondaryOperationsArray: [
@@ -454,17 +399,15 @@ describe("UploadDataStore.loopFilesOperations — polling", () => {
         ],
       },
     });
-    const data = makeOperation({ id: "srv-3" }); // finished: false
+    const data = makeOperation({ id: "srv-3" });
 
     const result = await store.loopFilesOperations(data, {
       operation: "move",
       operationId: "cli-3",
     });
 
-    // early return of the unfinished initial snapshot, no polling at all
     expect(result).toBe(data);
     expect(getOperationProgress).not.toHaveBeenCalled();
-    // only the initial serverOperationId announcement was emitted
     expect(
       fakes.secondaryProgressDataStore.setSecondaryProgressBarData,
     ).toHaveBeenCalledTimes(1);
@@ -505,14 +448,12 @@ describe("UploadDataStore.loopFilesOperations — polling", () => {
   });
 
   it("swallows a poller rejection when the operation is not tracked in secondaryOperationsArray", async () => {
-    const { store } = createTestUploadDataStore(); // secondaryOperationsArray: []
+    const { store } = createTestUploadDataStore();
     vi.mocked(getOperationProgress).mockRejectedValueOnce(
       new Error("progress fetch failed"),
     );
     const data = makeOperation({ id: "srv-5" });
 
-    // characterized quirk: with no tracked operation item the catch-branch
-    // returns the last known snapshot instead of propagating the error.
     const result = await store.loopFilesOperations(data, {
       operation: "move",
       operationId: "cli-5",
@@ -545,9 +486,6 @@ describe("UploadDataStore.loopFilesOperations — polling", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.moveToCopyTo — operation finalization", () => {
   it("move: clears active operations, removes moved items via the real FilesStore and closes folder actions", () => {
     const { store, fakes, filesStore } = createTestUploadDataStore();
@@ -584,12 +522,11 @@ describe("UploadDataStore.moveToCopyTo — operation finalization", () => {
       completed: true,
       operationId: "op-m",
     });
-    // moved folder 7 !== selected folder 1 → no navigation
     expect(getNavigateMock()).not.toHaveBeenCalled();
   });
 
   it("move of the currently selected folder triggers navigateToNewFolderLocation with the selected id", () => {
-    const { store } = createTestUploadDataStore(); // selectedFolderStore.id === 1
+    const { store } = createTestUploadDataStore();
     const navSpy = vi.fn(() => Promise.resolve());
     store.navigateToNewFolderLocation = navSpy;
 
@@ -598,11 +535,9 @@ describe("UploadDataStore.moveToCopyTo — operation finalization", () => {
       { operation: "move", operationId: "op-n" },
       false,
       [],
-      [1], // folderIds[0] === selectedFolderStore.id
+      [1],
     );
 
-    // characterized: navigates to the selected (moved) folder id, NOT to the
-    // destination folder id.
     expect(navSpy).toHaveBeenCalledTimes(1);
     expect(navSpy).toHaveBeenCalledWith(1);
   });
@@ -615,7 +550,7 @@ describe("UploadDataStore.moveToCopyTo — operation finalization", () => {
     filesStore.removeFiles = removeFilesSpy;
 
     store.moveToCopyTo(
-      1, // destFolderId === selectedFolderStore.id
+      1,
       { operation: "copy", operationId: "op-c" },
       true,
       [5],
@@ -623,7 +558,7 @@ describe("UploadDataStore.moveToCopyTo — operation finalization", () => {
     );
 
     expect(removeFilesSpy).not.toHaveBeenCalled();
-    expect(filesStore.files.map((f) => f.id)).toEqual([5]); // untouched
+    expect(filesStore.files.map((f) => f.id)).toEqual([5]);
     expect(filesStore.activeFiles).toEqual([]);
     expect(fakes.dialogsStore.setIsFolderActions).toHaveBeenCalledWith(false);
     expect(getNavigateMock()).not.toHaveBeenCalled();
@@ -654,9 +589,6 @@ describe("UploadDataStore.moveToCopyTo — operation finalization", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.navigateToNewFolderLocation", () => {
   it("mutates the real filter's folder, resolves the category URL and navigates with replace", async () => {
     const { store, filesStore } = createTestUploadDataStore();
@@ -667,13 +599,9 @@ describe("UploadDataStore.navigateToNewFolderLocation", () => {
 
     await store.navigateToNewFolderLocation(42);
 
-    // characterized quirk: a numeric id is written into FilesFilter.folder,
-    // which is declared as string.
     expect(filesStore.filter.folder).toBe(42);
     expect(filesApi.getFolderInfo).toHaveBeenCalledWith(42);
 
-    // FolderType.Rooms + parentId > 0 → CategoryType.SharedRoom URL; the
-    // query string is the REAL FilesFilter serialization after the mutation.
     expect(getNavigateMock()).toHaveBeenCalledTimes(1);
     expect(getNavigateMock()).toHaveBeenCalledWith(
       `/rooms/shared/42/filter?${filesStore.filter.toUrlParams()}`,
@@ -691,7 +619,6 @@ describe("UploadDataStore.navigateToNewFolderLocation", () => {
 
     await expect(store.navigateToNewFolderLocation(42)).resolves.toBeUndefined();
 
-    // filter.folder is assigned BEFORE the try block, so it sticks on failure
     expect(filesStore.filter.folder).toBe(42);
     expect(getNavigateMock()).not.toHaveBeenCalled();
     expect(consoleError).toHaveBeenCalledWith(
@@ -702,9 +629,6 @@ describe("UploadDataStore.navigateToNewFolderLocation", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.clearActiveOperations", () => {
   it("filters the given ids out of the real FilesStore active arrays", () => {
     const { store, filesStore } = createTestUploadDataStore();
@@ -730,12 +654,10 @@ describe("UploadDataStore.clearActiveOperations", () => {
   });
 });
 
-// mutation-checked: replacing `unshift` with `push` (§3.4.2) went red
-// on the position-0 assert.
 describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1 foreign state)", () => {
   it("unshifts a newly uploaded file, bumps filter.total by exactly 1 and setFilesCount by 1", async () => {
     const { store, fakes, filesStore } = createTestUploadDataStore({
-      selectedFolderStore: { filesCount: 5 }, // id stays 1 (harness default)
+      selectedFolderStore: { filesCount: 5 },
     });
     const f1 = makeFileInfo({ id: 11 });
     const f2 = makeFileInfo({ id: 12 });
@@ -745,14 +667,11 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
     const uploadedInfo = makeFileInfo({ id: 999, title: "fresh.docx" });
     const currentFile = makeUploadFile({
       fileInfo: uploadedInfo,
-      // path ends with selectedFolderStore.id (1) → newPath walk succeeds and
-      // the method reaches addNewFile.
       path: [1],
     });
 
     await store.refreshFiles(currentFile);
 
-    // inserted via unshift — position 0, neighbors intact and in order
     expect(filesStore.files.map((f) => f.id)).toEqual([999, 11, 12]);
     expect(filesStore.files[0]).toMatchObject({
       id: 999,
@@ -760,13 +679,12 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
     });
     expect(filesStore.files[1]).toMatchObject({ id: 11, title: f1.title });
     expect(filesStore.files[2]).toMatchObject({ id: 12, title: f2.title });
-    expect(filesStore.filter.total).toBe(3); // exactly +1
+    expect(filesStore.filter.total).toBe(3);
     expect(fakes.selectedFolderStore.setFilesCount).toHaveBeenCalledTimes(1);
-    expect(fakes.selectedFolderStore.setFilesCount).toHaveBeenCalledWith(6); // filesCount + 1
+    expect(fakes.selectedFolderStore.setFilesCount).toHaveBeenCalledWith(6);
   });
 
   it("replaces the existing entry in place when the file is already listed and storeOriginalFiles is false", async () => {
-    // harness default: filesSettingsStore.storeOriginalFiles === false
     const { store, fakes, filesStore } = createTestUploadDataStore();
     const f1 = makeFileInfo({ id: 11 });
     const f2 = makeFileInfo({ id: 12 });
@@ -778,13 +696,13 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
 
     await store.refreshFiles(currentFile);
 
-    expect(filesStore.files.map((f) => f.id)).toEqual([11, 12]); // no insert
+    expect(filesStore.files.map((f) => f.id)).toEqual([11, 12]);
     expect(filesStore.files[1]).toMatchObject({
       id: 12,
       title: "converted.docx",
     });
     expect(filesStore.files[0]).toMatchObject({ id: 11, title: f1.title });
-    expect(filesStore.filter.total).toBe(2); // untouched
+    expect(filesStore.filter.total).toBe(2);
     expect(fakes.selectedFolderStore.setFilesCount).not.toHaveBeenCalled();
   });
 
@@ -804,14 +722,12 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
   });
 
   it("is a no-op when filesStore.showNewFilesInList is false (indexed folder not fully listed)", async () => {
-    // showNewFilesInList is a FilesStore computed:
-    // false when selectedFolderStore.isIndexedFolder && filesList.length < filter.total.
     const filesStore = createTestFilesStore({
       selectedFolderStore: { isIndexedFolder: true },
     });
-    filesStore.getFilesContextOptions = () => CTX; // filesList must be mappable
+    filesStore.getFilesContextOptions = () => CTX;
     filesStore.files = [listFile(5), listFile(6)] as never;
-    filesStore.filter.total = 10; // 2 listed < 10 total → getter is false
+    filesStore.filter.total = 10;
     expect(filesStore.showNewFilesInList).toBe(false);
 
     const { store, fakes } = createTestUploadDataStore({ filesStore });
@@ -820,7 +736,7 @@ describe("UploadDataStore.refreshFiles — mutating the real FilesStore (§3.4.1
       makeUploadFile({ fileInfo: makeFileInfo({ id: 999 }), path: [1] }),
     );
 
-    expect(filesStore.files.map((f) => f.id)).toEqual([5, 6]); // unchanged
+    expect(filesStore.files.map((f) => f.id)).toEqual([5, 6]);
     expect(filesStore.filter.total).toBe(10);
     expect(fakes.selectedFolderStore.setFilesCount).not.toHaveBeenCalled();
   });

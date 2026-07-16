@@ -34,18 +34,10 @@ import {
   makeUploadFile,
 } from "./testHarness";
 
-// Characterization tests for the setter/mutator methods of UploadDataStore
-// (plan §3.4 row #2 plus the trivial visibility setters). Every expect pins
-// CURRENT behavior: which fields a method writes, which it leaves alone, and
-// whether arrays are mutated in place or replaced (§3.4.1).
-
 beforeEach(() => {
   installWindowGlobals();
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.setUploadData", () => {
   it("writes every provided key onto the store via reflection", () => {
     const { store } = createTestUploadDataStore();
@@ -72,7 +64,6 @@ describe("UploadDataStore.setUploadData", () => {
 
     expect(store.percent).toBe(77);
     expect(store.uploadedFiles).toBe(2);
-    // not part of the payload — must stay as prepared above
     expect(store.filesSize).toBe(12345);
     expect(store.converted).toBe(false);
     expect(store.currentUploadNumber).toBe(3);
@@ -81,10 +72,6 @@ describe("UploadDataStore.setUploadData", () => {
   it("silently drops keys that do not exist on the store instance", () => {
     const { store } = createTestUploadDataStore();
 
-    // characterized quirk: the reflection setter guards with `key in this`,
-    // so TUploadData keys without a backing field (newFilesWithoutConversion,
-    // allNewFiles, conversionFiles) and arbitrary junk are ignored — no field
-    // is created and no error is thrown.
     store.setUploadData({
       percent: 10,
       newFilesWithoutConversion: [makeUploadFile()],
@@ -97,8 +84,6 @@ describe("UploadDataStore.setUploadData", () => {
   });
 });
 
-// mutation-checked: dropping the `filesSize = 0` reset went red
-// (run 2026-07-09).
 describe("UploadDataStore.clearUploadData", () => {
   const dirtyStore = () => {
     const harness = createTestUploadDataStore();
@@ -157,8 +142,6 @@ describe("UploadDataStore.clearUploadData", () => {
 
     store.clearUploadData();
 
-    // characterized quirk: "clear" is partial — the conversion-panel state,
-    // the semaphore and the finish latch survive a clearUploadData call.
     expect(store.tempConversionFiles).toEqual([tempConversion]);
     expect(store.displayedConversionFiles).toHaveLength(1);
     expect(store.displayedConversionFiles[0].fileId).toBe(501);
@@ -169,9 +152,6 @@ describe("UploadDataStore.clearUploadData", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.clearUploadedFiles", () => {
   it("drops only 'uploaded' files and resets the upload counters", () => {
     const { store } = createTestUploadDataStore();
@@ -188,7 +168,6 @@ describe("UploadDataStore.clearUploadedFiles", () => {
 
     store.clearUploadedFiles();
 
-    // only action === "uploaded" is filtered out; "converted" survives
     expect(store.files).toEqual([uploading, converting, converted]);
     expect(store.filesSize).toBe(0);
     expect(store.uploadedFiles).toBe(0);
@@ -211,9 +190,6 @@ describe("UploadDataStore.clearUploadedFiles", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.removeFiles", () => {
   it("removes only 'converted' files whose fileInfo.id matches", () => {
     const { store } = createTestUploadDataStore();
@@ -237,8 +213,6 @@ describe("UploadDataStore.removeFiles", () => {
 
     store.removeFiles([10]);
 
-    // characterized quirk: an "uploaded" file with the very same fileInfo.id
-    // is NOT removed — only action === "converted" entries qualify.
     expect(store.files).toEqual([uploadedTen, convertedEleven, convertedNoInfo]);
   });
 
@@ -270,9 +244,6 @@ describe("UploadDataStore.removeFiles", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.updateUploadedFile", () => {
   it("sets fileInfo on the matching file and leaves the others alone", () => {
     const { store } = createTestUploadDataStore();
@@ -301,10 +272,6 @@ describe("UploadDataStore.updateUploadedFile", () => {
 
     store.updateUploadedFile(100, makeFileInfo({ id: 900 }));
 
-    // characterized quirk (§3.4.1 in-place question answered): this mutator
-    // is NOT in-place — `map` produces a NEW array that replaces this.files,
-    // and the matched element is a NEW spread copy. Only unmatched elements
-    // keep their identity.
     expect(store.files).not.toBe(arrayBefore);
     expect(store.files[0]).not.toBe(matchedBefore);
     expect(store.files[1]).toBe(unmatchedBefore);
@@ -319,17 +286,12 @@ describe("UploadDataStore.updateUploadedFile", () => {
 
     store.updateUploadedFile(999, makeFileInfo({ id: 900 }));
 
-    // characterized quirk: the unconditional map/assign swaps the array
-    // reference even for a no-op update; the element itself is untouched.
     expect(store.files).not.toBe(arrayBefore);
     expect(store.files[0]).toBe(elementBefore);
     expect(store.files[0].fileInfo).toBeNull();
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.clearConversionData", () => {
   it("empties the conversion-panel state and marks conversion-from-files done", () => {
     const { store } = createTestUploadDataStore();
@@ -356,15 +318,10 @@ describe("UploadDataStore.clearConversionData", () => {
 
     store.clearConversionData();
 
-    // filesToConversion belongs to the upload-conversion subsystem and is
-    // deliberately outside clearConversionData's scope.
     expect(store.filesToConversion).toEqual([pending]);
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore.selectUploadedFile", () => {
   it("stores the passed selection array", () => {
     const { store } = createTestUploadDataStore();
@@ -378,9 +335,6 @@ describe("UploadDataStore.selectUploadedFile", () => {
   });
 });
 
-// mutation-checked: via the full §3.4.2 catalog pass (file-level); a
-// direct mutation of this method re-runs at its extraction-phase gate
-// (§4.1 step 2) before the code is moved.
 describe("UploadDataStore visibility and flag setters", () => {
   it("setUploadPanelVisible writes uploadPanelVisible only", () => {
     const { store } = createTestUploadDataStore();

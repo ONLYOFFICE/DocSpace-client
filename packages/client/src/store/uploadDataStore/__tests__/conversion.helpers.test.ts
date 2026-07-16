@@ -26,7 +26,6 @@
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// The harness must be imported before the modules it mocks (see its header).
 import {
   createTestUploadDataStore,
   installWindowGlobals,
@@ -48,14 +47,6 @@ import {
   startConversionFromFilesImpl,
   startConversionImpl,
 } from "../conversion.helpers";
-
-// Direct unit tests for the extracted Phase 3 conversion-from-files helpers
-// (plan §4.1 step 7). They invoke the *Impl functions with the harness store
-// (self-technique tested "через harness-стор"), proving the safety net bites
-// the conversion.helpers module directly, not only through the facade. The
-// polling loop is covered exhaustively (fake timers) by
-// UploadDataStore.conversionLoop.test.ts; here the loop path uses an
-// immediate progress:100 response so no getConversationProgress poll runs.
 
 const t = ((key: string) => key) as unknown as TTranslation;
 
@@ -94,7 +85,6 @@ describe("setConversionPercentImpl", () => {
 
     store.uploaded = false;
     setConversionPercentImpl(store, 50);
-    // still only the first (uploaded=true) call was forwarded
     expect(
       fakes.primaryProgressDataStore.setPrimaryProgressBarData,
     ).toHaveBeenCalledTimes(1);
@@ -149,15 +139,12 @@ describe("startConversionFromFilesImpl", () => {
     store.displayedConversionFiles = [row] as never;
     store.activeConversionQueue = [{ fileId: 42, format: ".docx" }] as never;
 
-    // immediate 100% => the inner getConversationProgress poll never runs
     vi.mocked(filesApi.convertFile).mockResolvedValue([
       { progress: 100, error: "" },
     ] as never);
 
     await startConversionFromFilesImpl(store, t, false);
 
-    // MobX wraps queued plain objects in observable proxies, so assert against
-    // the store's live element rather than the raw fixture object.
     const converted = store.displayedConversionFiles[0] as {
       inConversion?: boolean;
       action?: string;
@@ -187,7 +174,6 @@ describe("retryConvertFilesImpl", () => {
 
     retryConvertFilesImpl(store, t, 42);
 
-    // assert against the store's live (observable) elements, not the raw row
     const liveRow = store.displayedConversionFiles[0];
     expect(store.files[0].inConversion).toBe(false);
     expect(liveRow.inConversion).toBe(false);
@@ -224,7 +210,6 @@ describe("cancelConversionImpl", () => {
     expect(store.converted).toBe(true);
     expect(store.percent).toBe(100);
     expect(store.filesSize).toBe(512);
-    // a survivor remains -> the panel stays open
     expect(store.uploadPanelVisible).toBe(true);
   });
 
@@ -283,7 +268,6 @@ describe("startConversionImpl", () => {
     store.uploadedFilesHistory = [makeUploadFile({ fileId: 42 })];
     store.filesToConversion = [{ fileId: 42, format: ".docx" }] as never;
 
-    // immediate 100% => the inner getConversationProgress poll never runs
     vi.mocked(filesApi.convertFile).mockResolvedValue([
       { progress: 100, error: "" },
     ] as never);
@@ -299,7 +283,7 @@ describe("startConversionImpl", () => {
 
   it("bails out immediately when a conversion cycle is already running", async () => {
     const { store } = createTestUploadDataStore();
-    store.converted = false; // guard: !converted -> return
+    store.converted = false;
     store.filesToConversion = [{ fileId: 42, format: ".docx" }] as never;
 
     await startConversionImpl(store, t, false);
@@ -322,7 +306,6 @@ describe("convertUploadedFilesImpl", () => {
 
     expect(store.files.map((f) => f.uniqueId)).toEqual(["a", "b"]);
     expect(store.tempConversionFiles).toEqual([]);
-    // setUploadData copied convertFilesSize into filesSize and flipped uploaded
     expect(store.filesSize).toBe(999);
     expect(store.uploaded).toBe(false);
     expect(startUploadSpy).toHaveBeenCalledWith(t, true);

@@ -28,27 +28,14 @@ import { describe, it, expect } from "vitest";
 
 import { createTestUploadDataStore } from "./testHarness";
 
-// Freezes the set of public member names exposed by UploadDataStore. Any
-// accidental rename/removal/addition during refactoring flips this snapshot —
-// the tripwire that guarantees the ~40 consumer files keep seeing the same
-// `uploadDataStore.X` API (startUpload, loopFilesOperations,
-// itemOperationToFolder, the observable panel state, the nested
-// primary/secondaryProgressDataStore references, ...).
-//
-// Regenerate ONLY on a deliberate public-surface change (the dead-code
-// removal phase) with `-u`, and call it out in the commit message.
 describe("UploadDataStore — public surface", () => {
   const publicMemberNames = () => {
     const { store } = createTestUploadDataStore();
     const names = new Set<string>();
 
-    // Own enumerable members: observable fields + arrow-function methods
-    // (UploadDataStore has no computed getters — all 64 members are arrows).
     for (const key of Object.keys(store)) {
       if (!key.startsWith("_") && !key.startsWith("$")) names.add(key);
     }
-    // Keep scanning the prototype anyway: if a refactor ever converts an
-    // arrow into a prototype method/getter, the surface must not change.
     const proto = Object.getPrototypeOf(store);
     for (const key of Object.getOwnPropertyNames(proto)) {
       if (key === "constructor") continue;

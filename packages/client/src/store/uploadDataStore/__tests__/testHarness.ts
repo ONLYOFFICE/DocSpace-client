@@ -24,33 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// ---------------------------------------------------------------------------
-// Characterization-test harness for UploadDataStore (Phase 0 of
-// uploadDataStore/REFACTORING_PLAN.md).
-//
-// UploadDataStore's constructor takes 10 injected stores and has NO side
-// effects, which keeps this harness simpler than FilesStore's. The heavy
-// lifting is at the module level: the HTTP layer (@docspace/shared/api/*) and
-// the operation-progress poller are replaced with vi.fn()s that individual
-// tests script per scenario, while socket/i18n/toastr/filename-cache mocks are
-// inherited from the FilesStore harness (imported below for its
-// createTestFilesStore — a REAL FilesStore instance backed by inert fakes, so
-// methods that mutate filesStore state (refreshFiles, moveToCopyTo,
-// clearActiveOperations) are characterized against real observable arrays).
-//
-// window globals the store reads directly (window.i18n in cancelUpload,
-// window.dataLayer in checkChunkUpload, window.DocSpace.navigate in
-// navigateToNewFolderLocation) are (re)installed by installWindowGlobals(),
-// which runs at import time; call it again in beforeEach for a clean
-// dataLayer/navigate per test.
-// ---------------------------------------------------------------------------
-
 import { vi } from "vitest";
 
-// HTTP layer: keep every real export (types/constants and functions other
-// code imports at module-eval time), replace only the functions
-// UploadDataStore and its local helpers call. Tests script behavior through
-// `vi.mocked(filesApi.startUploadSession).mockResolvedValue(...)`.
 vi.mock("@docspace/shared/api/files", async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, unknown>;
   return {
@@ -68,8 +43,6 @@ vi.mock("@docspace/shared/api/files", async (importOriginal) => {
     checkIsFileExist: vi.fn(),
     setFileEncryptionKeys: vi.fn(),
     getFileEncryptionAccess: vi.fn(),
-    // Called (behind a 1s setTimeout) by uploadDataStore/helpers.ts
-    // getConversationProgress — conversion tests drive it with fake timers.
     getFileConversationProgress: vi.fn(),
   };
 });
@@ -77,15 +50,6 @@ vi.mock("@docspace/shared/api/files", async (importOriginal) => {
 vi.mock("@docspace/shared/api/privacy", () => ({
   getRoomEncryptionKeys: vi.fn(),
 }));
-
-// The four mocks below duplicate the FilesStore-harness registrations ON
-// PURPOSE. vi.mock calls are hoisted above this module's imports, but the
-// FilesStore harness registers its mocks only when ITS import executes —
-// which is AFTER `import UploadDataStore` below has already loaded the real
-// modules (the real SRC_DIR/i18n boots i18next with an HTTP backend and
-// spams unhandled rejections in jsdom). Registering them here makes the
-// harness independent of import order; the factories are kept identical so
-// whichever registration wins, both suites see the same behavior.
 
 vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => {
   const actual = (await importOriginal()) as Record<string, unknown>;
@@ -129,19 +93,10 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
   },
 }));
 
-// copy/move polling: loopFilesOperations awaits this in a while-loop; tests
-// feed it a scripted sequence of progress snapshots.
 vi.mock("@docspace/shared/utils/getOperationProgress", () => ({
   getOperationProgress: vi.fn(),
 }));
 
-// The FilesStore harness import below registers (hoisted) mocks for
-// @docspace/ui-kit/utils/socket, @docspace/ui-kit/components/toast,
-// @docspace/shared/services/encryption/filename-cache, SRC_DIR/i18n and
-// SRC_DIR/helpers/info-panel — all of which UploadDataStore needs too.
-// Encryption services (secret-storage, private-room/*, file-keys) stay REAL:
-// with no unlocked identity they early-return, and encryption-path specs mock
-// them per-file (same convention as FilesStore.encryption.test.ts).
 // eslint-disable-next-line import/first
 import UploadDataStore from "../../UploadDataStore";
 // eslint-disable-next-line import/first
@@ -161,7 +116,6 @@ import {
   type FakeStore,
 } from "../../__tests__/sharedFakes";
 
-/** window globals UploadDataStore reads directly. Re-run in beforeEach. */
 export const installWindowGlobals = () => {
   const w = window as unknown as Record<string, unknown>;
   w.i18n = { t: (key: string) => key };
@@ -186,7 +140,6 @@ const defaultFakes = (): UploadFakeStores => ({
   settingsStore: fakeSettingsStore(),
   treeFoldersStore: {
     ...fakeTreeFoldersStore(),
-    // startConversion branches on this trio.
     isSharedWithMeFolder: false,
   },
   selectedFolderStore: {
@@ -196,7 +149,6 @@ const defaultFakes = (): UploadFakeStores => ({
   },
   secondaryProgressDataStore: {
     setSecondaryProgressBarData: vi.fn(),
-    // loopFilesOperations scans this for user-cancelled operations.
     secondaryOperationsArray: [],
   },
   primaryProgressDataStore: {
@@ -230,15 +182,9 @@ const defaultFakes = (): UploadFakeStores => ({
 });
 
 export type UploadHarnessOverrides = Partial<UploadFakeStores> & {
-  /** Defaults to a REAL FilesStore built by the filesStore harness. */
   filesStore?: ReturnType<typeof createTestFilesStore>;
 };
 
-/**
- * Construct an UploadDataStore backed by inert fakes plus a real FilesStore.
- * Fake overrides shallow-merge per store, e.g.
- * `createTestUploadDataStore({ filesSettingsStore: { uploadThreadCount: 1 } })`.
- */
 export const createTestUploadDataStore = (
   overrides: UploadHarnessOverrides = {},
 ): {
@@ -270,11 +216,6 @@ export const createTestUploadDataStore = (
 
   return { store, fakes, filesStore };
 };
-
-// ---------------------------------------------------------------------------
-// Fixture factories — realistic by default (§3.0.7 of the plan): minimal `{}`
-// stubs mask branches like `if (file.path)` / `if (item.encrypted)`.
-// ---------------------------------------------------------------------------
 
 let fixtureSeq = 0;
 

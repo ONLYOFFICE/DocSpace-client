@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { aiAgentsHandler } from "./agents";
+import { aiAgentsHandler, newAiAgentsHandler } from "./agents";
 import { aiConfigHandler } from "./config";
 import { aiModelsHandler } from "./models";
 import {
@@ -76,6 +76,7 @@ import { aiProvidersDefaultHandler } from "./providersDefault";
 
 export {
   aiAgentsHandler,
+  newAiAgentsHandler,
   aiConfigHandler,
   aiModelsHandler,
   aiProvidersHandler,
@@ -111,6 +112,7 @@ export {
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),
+  newAiAgentsHandler(port),
   aiConfigHandler(port),
   aiModelsHandler(port),
   aiProvidersHandler(port),

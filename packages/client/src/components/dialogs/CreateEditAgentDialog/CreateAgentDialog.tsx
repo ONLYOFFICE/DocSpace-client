@@ -60,7 +60,6 @@ type CreateAgentDialogProps = {
   onCreate: (params: TAgentParams) => void;
   fetchedTags: string[];
   isLoading: boolean;
-  portalMcpServerId: string;
 };
 
 const CreateAgentDialog = ({
@@ -71,7 +70,6 @@ const CreateAgentDialog = ({
 
   fetchedTags,
   isLoading,
-  portalMcpServerId,
 }: CreateAgentDialogProps) => {
   const { t } = useTranslation("Common");
 
@@ -114,7 +112,6 @@ const CreateAgentDialog = ({
   } = useMCP({
     agentParams,
     setAgentParams: setAgentParamssAction,
-    portalMcpServerId,
   });
 
   const setAgentTags = (newTags: TAgentTagsParams[]) =>
@@ -206,7 +203,6 @@ const CreateAgentDialog = ({
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
-          portalMcpServerId={portalMcpServerId}
           onClickAction={onClickAction}
           selectedServers={selectedServers}
           setSelectedServers={setSelectedServers}

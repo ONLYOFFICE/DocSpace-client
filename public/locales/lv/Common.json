@@ -596,7 +596,6 @@
   "CurrentMonthToDateSpend": "Pašreizējā mēneša tēriņi līdz šim brīdim",
   "CurrentPassphrase": "Pašreizējā ieejas frāze",
   "CurrentPassphraseRequired": "Pašreizējā ieejas frāze ir obligāta",
-  "CurrentPaymentMonth": "Pašreizējā maksājuma summa: {{price}}/mēnesī ({{size}})",
   "CurrentPlan": "Pašreizējais plāns",
   "CurrentSubscription": "Pašējā abonēšana",
   "Custom": "Pielāgots",

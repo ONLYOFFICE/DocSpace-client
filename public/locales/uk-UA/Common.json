@@ -596,7 +596,6 @@
   "CurrentMonthToDateSpend": "Витрати за поточний місяць на сьогодні",
   "CurrentPassphrase": "Поточна парольна фраза",
   "CurrentPassphraseRequired": "Необхідно ввести поточну парольну фразу",
-  "CurrentPaymentMonth": "Поточний платіж: {{price}}/місяць ({{size}})",
   "CurrentPlan": "Поточний тариф",
   "CurrentSubscription": "Поточна підписка",
   "Custom": "Налаштовуваний",

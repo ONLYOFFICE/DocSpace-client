@@ -59,7 +59,6 @@ export function initFilesImpl(self: FilesStore) {
 
   const {
     getPortalCultures,
-    getIsEncryptionSupport,
     getLegacyEncryptionKeys,
     // setModuleInfo,
     isDesktopClient,
@@ -96,7 +95,7 @@ export function initFilesImpl(self: FilesStore) {
     );
 
     if (isDesktopClient) {
-      requests.push(getIsEncryptionSupport(), getLegacyEncryptionKeys());
+      requests.push(getLegacyEncryptionKeys());
     }
 
     if (self.userStore?.getEncryptionKeys) {

@@ -51,9 +51,7 @@ import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/ui-kit/components/navigation";
-import { AiChatTrigger } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import NewChatButton from "@docspace/ui-kit/ai-agent/new-chat-button";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
@@ -241,8 +239,18 @@ const SectionHeaderContent = (props) => {
   const isAiChatView = currentClientView === "chat";
 
   // The "Forms" section reuses the Rooms folder; detect it from the route to
-  // adjust section labels (title, create-button caption) accordingly.
+  // adjust section labels (title, create-button caption) accordingly. This is
+  // the bare forms LIST only (CategoryType.Forms); inside a form room the
+  // route is /forms/{id}/... (CategoryType.Form) where the room-level labels
+  // apply instead.
   const isFormsSection = getCategoryType(location) === CategoryType.Forms;
+
+  // The whole Forms route tree — the list AND any folder opened inside a
+  // form-filling room. Breadcrumb navigation uses this to keep the /forms
+  // scope: form rooms live in the VirtualRooms tree, so their folders report
+  // rootFolderType = Rooms (14); deriving the URL from that alone would send
+  // the crumb to /rooms/shared/... and switch the section to Rooms.
+  const isFormsRoute = location.pathname.startsWith("/forms");
   const currentGroupName = currentGroup?.name;
 
   const addButtonRefCallback = React.useCallback(
@@ -290,10 +298,6 @@ const SectionHeaderContent = (props) => {
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
-
-  // Shared from AiAgentProviders' context (host-computed). The trigger button
-  // mirrors the panel's gating.
-  const isAiChatAvailable = useIsAiChatAvailable();
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -448,10 +452,17 @@ const SectionHeaderContent = (props) => {
 
       setSelectedNode(id);
 
-      const path = getCategoryUrl(
-        getCategoryTypeByFolderType(rootFolderType, id),
-        id,
-      );
+      // The Forms section resolves its rooms from the VirtualRooms tree, so
+      // folders opened inside a form-filling room report rootFolderType =
+      // Rooms (14), not Forms. Deriving the category from rootFolderType would
+      // send the breadcrumb to /rooms/shared/... and highlight Rooms. Detect
+      // the Forms route instead and keep the /forms scope (id is always a real
+      // folder/room id here, so it maps to CategoryType.Form → /forms/{id}).
+      const categoryType = isFormsRoute
+        ? CategoryType.Form
+        : getCategoryTypeByFolderType(rootFolderType, id);
+
+      const path = getCategoryUrl(categoryType, id);
 
       const filter = FilesFilter.getDefault();
 
@@ -499,6 +510,7 @@ const SectionHeaderContent = (props) => {
       isAIRoom,
       setSelected,
       setIsLoading,
+      isFormsRoute,
     ],
   );
 
@@ -1099,7 +1111,6 @@ const SectionHeaderContent = (props) => {
                   className={styles.analyzeResponsesButton}
                 />
               }
-              aiChatButton={isAiChatAvailable ? <AiChatTrigger /> : undefined}
               newChatButton={isAiChatView ? <NewChatButton /> : undefined}
             />
             {showSignInButton ? (

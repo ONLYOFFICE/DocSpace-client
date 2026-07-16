@@ -60,7 +60,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
 import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
 import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
-import { addServersForRoom } from "@docspace/shared/api/ai";
+import { addEntityMcpServer } from "@docspace/shared/api/ai";
 import { startDbSync } from "@docspace/shared/api/rooms";
 import { DbSyncService } from "@docspace/shared/services/db-sync.service";
 
@@ -711,7 +711,13 @@ class CreateEditRoomStore {
         );
 
       if (roomParams.mcpServers) {
-        addServersForRoom(room.id, roomParams.mcpServers);
+        // Servers are keyed by name in the new-ai model; the service
+        // resolves the stored config (system or portal-level copy) itself.
+        Promise.all(
+          roomParams.mcpServers.map((name) =>
+            addEntityMcpServer(name, String(room.id)),
+          ),
+        ).catch((err) => console.error(err));
       }
 
       if (processCreatingRoomFromData) {

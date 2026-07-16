@@ -157,8 +157,8 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
       icon: <CatalogFolderIcon />,
       title: t("Common:DashboardFilesTitle"),
       description: t("Common:DashboardFilesDescription"),
-      installed: !isGuest,
-      href: "/rooms/personal/filter",
+      installed: true,
+      href: isGuest ? "/shared-with-me/filter" : "/rooms/personal/filter",
     },
     {
       id: "ai-rooms",

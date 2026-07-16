@@ -754,6 +754,7 @@
   "DisplayFileExtension": "Display file extension next to file name",
   "DisplaySettings": "Display settings",
   "DocsConnectCallbackErrorHint": "Your card was saved, but we couldn't complete the purchase. You can retry from Docs Connect.",
+  "DocsConnectCallbackErrorTitle": "Purchase failed",
   "DocsConnectCallbackGoTo": "Go to Docs Connect",
   "DocsConnectCallbackProcessingHint": "Topping up your wallet and activating Docs Connect. This usually takes a few seconds.",
   "DocsConnectCallbackProcessingTitle": "Processing your payment",

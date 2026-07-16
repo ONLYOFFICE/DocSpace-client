@@ -52,15 +52,6 @@ import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types
 import type { TUploadBrowserFile } from "./helpers";
 import type { default as UploadDataStore } from "../UploadDataStore";
 
-// Per-upload DEK/room-key wrapping and the encrypted-batch gates extracted
-// from UploadDataStore (Phase 5 of uploadDataStore/REFACTORING_PLAN.md). These
-// are side-effect heavy (HTTP key exchange, secret-storage unlock, MobX
-// mutations, toastr) and carry the DEK-hygiene invariant (§3.4.1): the plaintext
-// DEK is wiped in wrapForSelfThenRoom's finally on every path. Transferred
-// verbatim via the self-technique; the encryption selectors they call
-// (getUserEncryptionKeys/willEncryptItem/getFilesPercent) live on the store and
-// are invoked as self.*().
-
 export async function wrapForSelfThenRoomImpl(
   self: UploadDataStore,
   fileId: number,
@@ -230,7 +221,6 @@ export function cancelEncryptedBatchUploadImpl(self: UploadDataStore) {
   try {
     toastr.info(getI18n().t("Common:EncryptionUploadCancelled"));
   } catch {
-    //
   }
 }
 
@@ -253,9 +243,6 @@ export async function prepareFileForEncryptedUploadImpl(
       : ancestorIsPrivate;
   return prepareEncryptedUpload({
     file,
-    // UploadConfig.folderId is declared as number, but the
-    // original .js forwarded toFolderId which may be a string/null for
-    // third-party folders.
     folderId: folderId as number,
     roomType: roomType || RoomsType.CustomRoom,
     isPrivate: isPrivate || false,

@@ -50,15 +50,6 @@ import type {
   TConversionFile,
 } from "../UploadDataStore";
 
-// Conversion-from-files pipeline extracted from UploadDataStore (Phase 3 of
-// uploadDataStore/REFACTORING_PLAN.md) — the conversion path driven by the
-// conversion panel / displayedConversionFiles queue. All methods are
-// side-effect heavy (primaryProgressDataStore, runInAction over observable
-// rows, the real FilesStore), so they follow the `self`-technique: bodies
-// transferred verbatim with this. → self., sibling calls kept as self.*().
-// Phase 4 (convertFile/startConversion/... — the upload-time conversion path)
-// will extend this same module.
-
 export function convertFileFromFilesImpl(
   self: UploadDataStore,
   file: TConversionFile,
@@ -81,9 +72,6 @@ export function convertFileFromFilesImpl(
   self.primaryProgressDataStore.setPrimaryProgressBarData({
     operation: OPERATIONS_NAME.convert,
     alert: false,
-    // the original .js expression `!length === 0` compares a
-    // boolean to a number and therefore always evaluates to false; the cast
-    // keeps the expression (and its result) unchanged.
     completed: (!self.activeConversionQueue.length as unknown) === 0,
     showPanel: self.setConversionPanelVisible,
     withoutProgress: true,
@@ -98,8 +86,6 @@ export function convertFileFromFilesImpl(
   if (shouldUpdateExistingFile) {
     const updatedFile = self.displayedConversionFiles[fileIndex];
 
-    // the original .js assumed fileInfo is set on both items
-    // in the "second conversion with password" flow (would throw otherwise).
     updatedFile.fileInfo!.fileExst = file.fileInfo!.fileExst;
 
     self.displayedConversionFiles[fileIndex].action = "convert";
@@ -150,9 +136,6 @@ export async function startConversionFromFilesImpl(
     const { fileId, password, format } = conversionItem;
     const itemPassword = password || null;
 
-    // `find` and `findIndex` use the same predicate on the
-    // same array, so after the `fileIndex === -1` break the original .js
-    // relied on historyFile being defined; the non-null assertions keep it.
     const historyFile = self.displayedConversionFiles.find(
       (f) => f.fileId === fileId,
     );
@@ -191,8 +174,6 @@ export async function startConversionFromFilesImpl(
     let fileInfo: TFile | "password" | null | undefined = null;
     let error: string | null | undefined = null;
 
-    // `(progress ?? 100) < 100` is runtime-identical to the
-    // original `progress < 100` (undefined < 100 is false, as is 100 < 100).
     while ((progress ?? 100) < 100) {
       const response = await getConversationProgress(fileId);
       progress = response?.[0]?.progress;
@@ -222,8 +203,6 @@ export async function startConversionFromFilesImpl(
       if (!error) error = data[0].error;
 
       if (!error && isOpen && data && data[0]) {
-        // the original .js read fileInfo.id without a guard
-        // (fileInfo is the conversion result; would throw on null).
         self.filesStore.openDocEditor((fileInfo as TFile).id);
       }
 
@@ -232,8 +211,6 @@ export async function startConversionFromFilesImpl(
         historyFile!.convertProgress = progress;
         historyFile!.inConversion = false;
 
-        // the original .js called error.indexOf without a
-        // guard (would throw when the conversion result has no error text).
         if (error!.indexOf("password") !== -1) {
           historyFile!.needPassword = true;
         } else historyFile!.action = "converted";
@@ -292,14 +269,6 @@ export function retryConvertFilesImpl(
 
   self.convertFileFromFiles(retryFileConversion, t);
 }
-
-// ── Phase 4: the upload-time conversion path ──────────────────────────────
-// convertFile/startConversion drive conversion of files that arrive through
-// the uploader (files + uploadedFilesHistory), as opposed to the panel queue
-// above. cancelConversion/cancelCurrentFileConversion/convertUploadedFiles are
-// the related teardown/entry points. Sibling calls (startConversion,
-// parallelUploading, startUploadFiles, finishUploadFiles, refreshFiles,
-// setConversionPercent, getConversationPercent) stay as self.*().
 
 export function cancelConversionImpl(self: UploadDataStore) {
   const newFiles = [];
@@ -467,8 +436,6 @@ export async function startConversionImpl(
       let fileInfo: TFile | "password" | null | undefined = null;
       let error: string | null | undefined = null;
 
-      // `(progress ?? 100) < 100` is runtime-identical to
-      // the original `progress < 100` (undefined < 100 is false).
       while ((progress ?? 100) < 100) {
         let response: TConversionProgress[] | null = null;
         try {
@@ -476,7 +443,6 @@ export async function startConversionImpl(
           progress = response?.[0]?.progress;
           fileInfo = response?.[0]?.result;
         } catch (err) {
-          // console.log("Error in startConversion while loop:", fileId, err);
           const conversionError =
             (err as Error).message || t("Common:FailedToConvert");
 
@@ -542,7 +508,6 @@ export async function startConversionImpl(
             }
           });
 
-          // this.refreshFiles(toFolderId, false);
           break;
         }
 
@@ -555,8 +520,6 @@ export async function startConversionImpl(
         if (!error) error = data[0].error;
 
         if (!error && isOpen && data && data[0]) {
-          // the original .js read fileInfo.id without a
-          // guard (fileInfo is the conversion result; would throw on null).
           self.filesStore.openDocEditor((fileInfo as TFile).id);
         }
 
@@ -567,12 +530,8 @@ export async function startConversionImpl(
             currentFile.error = error;
             currentFile.convertProgress = progress;
             currentFile.inConversion = false;
-            // the original .js could transiently store the
-            // "password" marker string here; the cast keeps that runtime.
             if (fileInfo) currentFile.fileInfo = fileInfo as TFile;
 
-            // the original .js called error.indexOf without
-            // a guard (would throw when there is no error text).
             if (error!.indexOf("password") !== -1) {
               currentFile.needPassword = true;
             } else currentFile.action = "converted";
@@ -689,7 +648,6 @@ export function convertUploadedFilesImpl(
       uploadedFiles: self.uploadedFiles,
       percent: self.percent,
       uploaded: false,
-      // converted: false,
     };
 
     self.setUploadData(newUploadData);

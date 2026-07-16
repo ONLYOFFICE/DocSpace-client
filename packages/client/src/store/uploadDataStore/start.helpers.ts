@@ -50,14 +50,6 @@ import type {
   TStartUploadData,
 } from "../UploadDataStore";
 
-// Upload start / conflict-resolution / cancel / retry entry points extracted
-// from UploadDataStore (Phase 6 of uploadDataStore/REFACTORING_PLAN.md). All
-// side-effect heavy; transferred verbatim via the self-technique. The manual
-// upload-number semaphore (currentUploadNumber) is mutated in
-// cancelCurrentUpload before it re-drives self.startSessionFunc; sibling calls
-// (startSessionFunc, startUploadFiles, parallelUploading, convert*, setUploadData)
-// stay as self.*().
-
 export function cancelUploadImpl(self: UploadDataStore) {
   self.finishUploadFilesCalled = false;
 
@@ -97,9 +89,6 @@ export function cancelUploadImpl(self: UploadDataStore) {
   self.uploadedFilesHistory = newHistory;
   self.quotaErrorRaised = false;
 
-  // the original .js referenced the bare global `i18n`
-  // (window.i18n populated by SRC_DIR/i18n.js); `window.i18n!.t!` keeps the
-  // exact runtime resolution.
   self.primaryProgressDataStore.setPrimaryProgressBarData({
     operation: OPERATIONS_NAME.upload,
     completed: true,
@@ -123,10 +112,8 @@ export function cancelCurrentUploadImpl(
       (el) => el.uniqueId !== id,
     );
 
-    // the original .js assumed the canceled file is always
-    // found (would throw on undefined); the non-null assertion keeps that.
     const canceledFile = self.files.find((f) => f.uniqueId === id)!;
-    const newPercent = self.getFilesPercent(); // canceledFile.file.size
+    const newPercent = self.getFilesPercent();
     canceledFile.cancel = true;
     canceledFile.percent = 100;
     canceledFile.action = "uploaded";
@@ -146,9 +133,6 @@ export function cancelUploadActionImpl(
   self: UploadDataStore,
   items?: { uniqueId: string }[],
 ) {
-  // the original .js read conflictResolveDialogData (and its
-  // allNewFiles) without a null guard — it is always set when the upload
-  // conflict dialog invokes this action.
   const files =
     items ??
     self.dialogsStore.conflictResolveDialogData!.newUploadData.allNewFiles!;
@@ -184,9 +168,6 @@ export function setConflictDialogDataImpl(
   operationData: Partial<TConflictResolveDialogData>,
 ) {
   self.dialogsStore.setConflictResolveDialogItems(conflicts);
-  // upload conflicts fill only a subset of
-  // TConflictResolveDialogData (no folderIds/fileIds/translations/…); the
-  // cast keeps the original .js payload as-is.
   self.dialogsStore.setConflictResolveDialogData(
     operationData as TConflictResolveDialogData,
   );
@@ -212,7 +193,6 @@ export function handleUploadAndOptionalConversionImpl(
   createNewIfExist?: boolean,
 ) {
   const newUploadData = { ...uploadData };
-  // newUploadData.files = newUploadData.filesWithoutConversion;
 
   const onlyConversion =
     !!self.tempConversionFiles.length &&
@@ -226,7 +206,6 @@ export function handleUploadAndOptionalConversionImpl(
       self.asyncUploadObj = {};
     }
     self.uploadedFilesHistory = newUploadData.uploadedFilesHistory;
-    // self.setUploadData(newUploadData);
   }
 
   if (self.tempConversionFiles.length) {
@@ -338,7 +317,7 @@ export function startUploadImpl(
     self.asyncUploadObj = {};
   }
 
-  const newFiles: TUploadFile[] = []; // self.files;
+  const newFiles: TUploadFile[] = [];
   const allFiles: TUploadFile[] = [];
   let filesSize = 0;
   let convertSize = 0;
@@ -356,7 +335,6 @@ export function startUploadImpl(
       file,
       uniqueId: uniqueid("download_row-key_"),
       fileId: null,
-      // toFolderId,
       toFolderId: isAIRoom ? knowledgeId : file.parentFolderId,
       action: "upload",
       error: null,
@@ -400,10 +378,7 @@ export function startUploadImpl(
     ...allFiles,
   ]);
 
-  // self.uploadedFilesHistory = clearArray;
-
   const newUploadData = {
-    // filesWithoutConversion,
     newFilesWithoutConversion: newFiles,
     allNewFiles: allFiles,
     conversionFiles: removeDuplicate(self.tempConversionFiles),
@@ -413,7 +388,6 @@ export function startUploadImpl(
     percent: self.percent,
     uploaded: false,
     uploadedFilesHistory: clearArray,
-    // converted: !!self.tempConversionFiles.length,
   };
 
   if (countUploadingFiles || countConversionFiles) {

@@ -59,18 +59,6 @@ import type {
   TPbData,
 } from "../UploadDataStore";
 
-// Copy/move operation pipeline extracted from UploadDataStore (Phase 2 of
-// uploadDataStore/REFACTORING_PLAN.md). Every method is side-effect heavy
-// (secondaryProgressDataStore, real FilesStore mutations, navigation), so all
-// follow the `self`-technique: bodies transferred verbatim with this. → self.,
-// including the mutual calls (copy/move → loop → moveToCopyTo →
-// clearActiveOperations/navigateToNewFolderLocation) which stay as self.*() so
-// the MobX action wrapping and test spies are preserved.
-//
-// TODO: converge copyToActionImpl and moveToActionImpl (near-identical shape,
-// different api call and the `content` argument) — only after this refactor,
-// as a separate task with its own tests.
-
 export function copyToActionImpl(
   self: UploadDataStore,
   destFolderId: number | string | null | undefined,
@@ -119,7 +107,6 @@ export function copyToActionImpl(
           return result;
         })
         .finally(async () => {
-          // to update the status of trashIsEmpty filesStore
           if (self.treeFoldersStore.isRecycleBinFolder)
             await self.filesStore.getIsEmptyTrash();
         });
@@ -180,7 +167,6 @@ export function moveToActionImpl(
           return result;
         })
         .finally(async () => {
-          // to update the status of trashIsEmpty filesStore
           if (self.treeFoldersStore.isRecycleBinFolder)
             await self.filesStore.getIsEmptyTrash();
         });
@@ -209,9 +195,6 @@ export function copyAsActionImpl(
 ) {
   const { fetchFiles, filter } = self.filesStore;
 
-  // fileCopyAs declares enableExternalExt/password as
-  // required, but the original .js callers may omit them (undefined is
-  // sent as-is at runtime).
   return fileCopyAs(
     fileId,
     title,
@@ -287,8 +270,6 @@ export function itemOperationToFolderImpl(
 
 export async function loopFilesOperationsImpl(
   self: UploadDataStore,
-  /** Callers (FilesActionsStore) pass `result ?? null`; the falsy case is
-   * handled right below. */
   data: TOperation | null,
   pbData: TPbData,
 ): Promise<TOperation | undefined> {
@@ -311,8 +292,6 @@ export async function loopFilesOperationsImpl(
     operationId: pbData.operationId,
     serverOperationId: data.id,
   });
-
-  // let progress = data.progress;
 
   let operationItem: TOperation | undefined = data;
   let finished = data.finished;
@@ -349,12 +328,10 @@ export async function loopFilesOperationsImpl(
 
       operationItem = item;
 
-      // progress = item ? item.progress : 100;
       finished = item ? item.finished : true;
 
       setSecondaryProgressBarData({
         operation: pbData.operation,
-        //  percent: progress,
         alert: false,
         currentFile: item,
         operationId: pbData.operationId,
@@ -404,8 +381,6 @@ export async function navigateToNewFolderLocationImpl(
 ) {
   const { filter } = self.filesStore;
 
-  // FilesFilter.folder is declared as string, but the
-  // original .js also assigns numeric folder ids here.
   filter.folder = folderId as string;
 
   try {
@@ -459,7 +434,6 @@ export function moveToCopyToImpl(
 
 export function clearActiveOperationsImpl(
   self: UploadDataStore,
-  /** FilesActionsStore passes null for the unaffected side. */
   fileIds: Nullable<number[]> = [],
   folderIds: Nullable<number[]> = [],
 ) {

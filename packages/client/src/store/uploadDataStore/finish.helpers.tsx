@@ -51,16 +51,6 @@ import type {
   TUploadData,
 } from "../UploadDataStore";
 
-// Upload finalization and its toasts extracted from UploadDataStore (Phase 8
-// of uploadDataStore/REFACTORING_PLAN.md). This is the first .tsx helper:
-// showFinishUploadToastr builds <Trans>/<Link> JSX toasts. Transferred
-// verbatim via the self-technique. Preserved as-is (do NOT fix): the
-// deferred setUploadData behind setTimeout(TIMEOUT), the read of the
-// non-existent primaryProgressDataStore.alert, the SocketHelper RefreshFolder
-// emit and refreshFiles' unshift + filter.total mutation of the real
-// FilesStore. The finishUploadFilesCalled latch lives in the callers, not
-// here. Sibling calls stay self.*().
-
 export async function refreshFilesImpl(
   self: UploadDataStore,
   currentFile?: TUploadFile,
@@ -78,13 +68,9 @@ export async function refreshFilesImpl(
       (x) => x.id === currentFile?.fileInfo?.id,
     );
 
-    // The assertion (instead of a plain null literal) keeps the historical
-    // TFolder|null typing: the assignment below is commented out.
     const folderInfo = null as TFolder | null;
     const index = path.findIndex((x) => x === self.selectedFolderStore.id);
     const folderId = index !== -1 ? path[index + 1] : null;
-    // if (folderId && folderId !== self.aiRoomStore.knowledgeId)
-    //   folderInfo = await getFolderInfo(folderId);
 
     const newPath: number[] = [];
     if (folderInfo || path[path.length - 1] === self.selectedFolderStore.id) {
@@ -214,8 +200,6 @@ export function showFinishUploadToastrImpl(
   }
 
   const errorItem = filesWithErrors[0];
-  // the original .js called error.indexOf without a guard —
-  // items in filesWithErrors always have a truthy error string.
   const passwordErrorIndex = errorItem.error!.indexOf("password");
 
   if (passwordErrorIndex === -1) {
@@ -291,8 +275,6 @@ export function finishUploadFilesImpl(
     const toFolderId = self.files[0]?.toFolderId;
 
     if (toFolderId) {
-      // the socket typings declare the RefreshFolder payload
-      // as a string, but the original .js has always sent this object.
       SocketHelper?.emit(SocketCommands.RefreshFolder, {
         toFolderId,
       } as unknown as string);
@@ -306,9 +288,6 @@ export function finishUploadFilesImpl(
     });
 
   setTimeout(() => {
-    // PrimaryProgressDataStore has no `alert` member (it has
-    // primaryOperationsAlert); the original .js read an undefined property
-    // here, which the cast preserves without changing the runtime.
     if (
       self.uploadPanelVisible ||
       (self.primaryProgressDataStore as { alert?: boolean }).alert

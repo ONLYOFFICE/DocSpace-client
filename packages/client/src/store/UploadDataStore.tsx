@@ -262,7 +262,7 @@ class UploadDataStore {
 
   uploadedFilesHistory: TUploadFile[] = [];
 
-  displayedConversionFiles: TConversionFile[] = []; // Files shown in the conversion panel
+  displayedConversionFiles: TConversionFile[] = [];
 
   filesSize = 0;
 
@@ -270,7 +270,7 @@ class UploadDataStore {
 
   filesToConversion: TUploadFile[] = [];
 
-  activeConversionQueue: TConversionFile[] = []; // Queue for files being converted from files view
+  activeConversionQueue: TConversionFile[] = [];
 
   convertFilesSize = 0;
 

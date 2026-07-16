@@ -68,17 +68,6 @@ import type {
   TUploadChunk,
 } from "../UploadDataStore";
 
-// The chunk-upload pipeline extracted from UploadDataStore (Phase 7 of
-// uploadDataStore/REFACTORING_PLAN.md — the most delicate phase, see §0.2).
-// Relocated as ONE unit with no reordering: the mutual recursion
-// (asyncUpload re-invokes itself and checkChunkUpload; checkChunkUpload and
-// startSessionFunc re-drive self.startSessionFunc), the manual
-// currentUploadNumber semaphore, the single-resolve protocol threaded through
-// TCheckChunkUpload, the in-place files[indexOfFile] mutations and the DEK
-// lifecycle (setFileDek/takeFileDek/wipeDek) are all preserved verbatim; only
-// this. -> self.. Sibling calls stay self.*() so the MobX action wrapping and
-// the recursion/spy seams are unchanged.
-
 export function parallelUploadingImpl(
   self: UploadDataStore,
   notUploadedFiles: TUploadFile[],
@@ -112,32 +101,16 @@ export function checkChunkUploadImpl(
 ) {
   const {
     t,
-    res, // file response data
-    index, // chunk index
-    indexOfFile, // file index in the list
-    path, // file path
-    chunksLength, // length of file chunks
-    resolve, // resolve cb
-    //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
+    res,
+    index,
+    indexOfFile,
+    path,
+    chunksLength,
+    resolve,
     createNewIfExist,
   } = chunkUploadObj;
 
   const { uploaded, id: fileId, file: fileInfo } = res;
-
-  // let uploadedSize;
-
-  // if (!uploaded && !allChunkUploaded) {
-  //   uploadedSize =
-  //     fileSize <= self.filesSettingsStore.chunkUploadSize
-  //       ? fileSize
-  //       : self.filesSettingsStore.chunkUploadSize;
-  // } else {
-  //   uploadedSize = isFinalize
-  //     ? 0
-  //     : fileSize <= self.filesSettingsStore.chunkUploadSize
-  //       ? fileSize
-  //       : fileSize - index * self.filesSettingsStore.chunkUploadSize;
-  // }
 
   const percentCurrentFile = (index / chunksLength) * 100;
 
@@ -199,7 +172,6 @@ export function checkChunkUploadImpl(
           String(userId),
           publicKey,
           publicKeyId || "",
-          // hasFileDek() above guarantees a DEK is stored for this entry.
           dekForWrap!,
           roomIdForWrap,
         ).catch((error: TAxiosLikeError) => {
@@ -225,7 +197,6 @@ export function checkChunkUploadImpl(
           try {
             toastr.error(wrapMessage);
           } catch {
-            //
           }
         });
       }
@@ -244,8 +215,6 @@ export function checkChunkUploadImpl(
       });
     }
   }
-
-  // All chuncks are uploaded
 
   const currentFile = self.files[indexOfFile];
 
@@ -473,8 +442,6 @@ export async function uploadFileChunksImpl(
         resolve,
         createNewIfExist,
       });
-
-      // console.log(`Uploaded chunk ${index}/${length}`, res);
     }
   }
 }
@@ -544,7 +511,6 @@ export async function startSessionFuncImpl(
   if (!self.uploaded && self.files.length === 0) {
     self.uploaded = true;
     self.asyncUploadObj = {};
-    // setUploadData(uploadData);
     return;
   }
 
@@ -572,19 +538,16 @@ export async function startSessionFuncImpl(
   const { chunkUploadSize } = self.filesSettingsStore;
   const { roomType, isPrivate } = self.getUploadEncryptionContext(item);
 
-  const { file, toFolderId /* , action */ } = item;
+  const { file, toFolderId } = item;
   let fileToUpload = file;
-  // Replaced with the obfuscated upload name for encrypted uploads.
   let fileName = file.name;
 
   const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
 
-  let uploadDEK: Uint8Array | null = null; // raw DEK for wrapping after upload
+  let uploadDEK: Uint8Array | null = null;
   let isEncrypted = file.encrypted || false;
 
   const { publicKey, userId } = self.getUserEncryptionKeys();
-  // shouldEncryptUpload declares roomType: RoomsType, but
-  // resolveItemRoomContext may return null/undefined (falsy at runtime).
   const shouldEncrypt =
     shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
     !!publicKey &&
@@ -650,7 +613,6 @@ export async function startSessionFuncImpl(
       try {
         toastr.error(errorMessage);
       } catch {
-        //
       }
       const newPercent = self.getFilesPercent();
       self.percent = newPercent;
@@ -685,17 +647,13 @@ export async function startSessionFuncImpl(
   }
 
   const fileSize = fileToUpload.size;
-  // the original .js passed a (silently ignored) second
-  // argument to Math.ceil; dropped because it has no runtime effect.
   const chunks = fileSize === 0 ? 1 : Math.ceil(fileSize / chunkUploadSize);
 
   return startUploadSession(
-    // the original .js could pass null here when an AI room
-    // has no knowledgeId yet; the assertion keeps that runtime unchanged.
     actualFolderId!,
     fileName,
     fileSize,
-    "", // relativePath,
+    "",
     isEncrypted,
     file.lastModifiedDate,
     createNewIfExist,

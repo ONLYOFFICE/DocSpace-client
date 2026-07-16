@@ -48,15 +48,6 @@ import { countActiveUploadsForRoom } from "@docspace/shared/utils/uploadErrors";
 import type { TUploadFile } from "./helpers";
 import type { default as UploadDataStore } from "../UploadDataStore";
 
-// Pure derivation helpers extracted from UploadDataStore (Phase 1 of
-// uploadDataStore/REFACTORING_PLAN.md). The percent/count/lookup selectors are
-// pure functions of their inputs and take an explicit `deps` object (the
-// facade reads the store observables in the same reactive context); the
-// encryption selectors read injected stores / call sibling store methods, so
-// they follow the `self`-technique. Behavior is preserved verbatim, including
-// the characterized unguarded divisions by zero.
-
-/** Deps for getNewPercent: the upload queue and whether it is already done. */
 export type NewPercentDeps = {
   files: TUploadFile[];
   uploaded: boolean;
@@ -83,12 +74,6 @@ export function getNewPercentImpl(
 export function getFilesPercentImpl(deps: {
   uploadedFilesHistory: TUploadFile[];
 }) {
-  // const newTotalSize = sumBy(this.files, (f) =>
-  //   !f.isCalculated && f.file && !this.uploaded ? f.file.size : 0,
-  // );
-
-  // const newPercent = (newSize / newTotalSize) * 100;
-
   const percentCurrentFileHistory = sumBy(
     deps.uploadedFilesHistory,
     (f) => f.percent,
@@ -153,9 +138,6 @@ export function shouldEncryptCurrentUploadImpl(self: UploadDataStore) {
     ? RoomsType.CustomRoom
     : self.selectedFolderStore.roomType;
   const { publicKey, userId } = self.getUserEncryptionKeys();
-  // shouldEncryptUpload declares roomType: RoomsType, but the
-  // original .js passed selectedFolderStore.roomType which can be null
-  // (isEncryptableRoomType(null) is simply false at runtime).
   return (
     shouldEncryptUpload(roomType as RoomsType, isPrivate) &&
     !!publicKey &&

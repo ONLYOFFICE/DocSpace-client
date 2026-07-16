@@ -134,6 +134,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
     agentEntityId,
+    isInsideAgentRoom,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -647,6 +648,7 @@ const Shell = ({ page = "home", ...rest }) => {
           isAvailable={isAiChatAvailable}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
+          hideProfilePicker={isInsideAgentRoom}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}
@@ -795,6 +797,9 @@ const ShellWrapper = inject(
         selectedFolderStore.rootRoomId || selectedFolderStore.id
           ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
           : undefined,
+      // The composer model picker is hidden only where the model is fixed
+      // by the agent's assigned profile — inside AI agent rooms.
+      isInsideAgentRoom: selectedFolderStore.isAIRoom,
       getAgentRoomId: () => {
         const id = selectedFolderStore.rootRoomId;
         return id ? Number(id) : null;

@@ -51,6 +51,7 @@ import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffSt
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
@@ -84,6 +85,8 @@ type RoomsItemHeaderProps = {
   isRoomMembersPanel?: boolean;
   hasExternalLinks?: boolean;
   isExternalShareRestricted?: boolean;
+  getRoomHistoryReport?: InfoPanelStore["getRoomHistoryReport"];
+  isRoomHistoryReportDownloading?: InfoPanelStore["isRoomHistoryReportDownloading"];
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -111,6 +114,9 @@ const RoomsItemHeader = ({
   isRoomMembersPanel,
   hasExternalLinks,
   isExternalShareRestricted,
+  roomsView,
+  getRoomHistoryReport,
+  isRoomHistoryReportDownloading,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -219,6 +225,17 @@ const RoomsItemHeader = ({
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
+  const canDownloadHistory =
+    isRoom &&
+    roomType === RoomsType.VirtualDataRoom &&
+    roomsView === InfoPanelView.infoHistory;
+
+  const onDownloadHistory = () => {
+    if (isRoomHistoryReportDownloading) return;
+
+    getRoomHistoryReport?.(selection.id);
+  };
+
   const color = "logo" in selection ? selection.logo?.color : undefined;
 
   useEffect(() => {
@@ -309,6 +326,19 @@ const RoomsItemHeader = ({
           />
         ) : null}
 
+        {canDownloadHistory ? (
+          <IconButton
+            id="info_download-history"
+            className="icon"
+            title={t("Common:Download")}
+            iconName={DownloadReactSvgUrl}
+            onClick={onDownloadHistory}
+            isDisabled={isRoomHistoryReportDownloading}
+            size={16}
+            dataTestId="info_download_history"
+          />
+        ) : null}
+
         <RoomsContextBtn selection={selection} />
       </div>
     </div>
@@ -324,7 +354,12 @@ export default inject(
     publicRoomStore,
     avatarEditorDialogStore,
   }: TStore) => {
-    const { roomsView, setIsMobileHidden } = infoPanelStore;
+    const {
+      roomsView,
+      setIsMobileHidden,
+      getRoomHistoryReport,
+      isRoomHistoryReportDownloading,
+    } = infoPanelStore;
 
     const {
       displayFileExtension,
@@ -346,6 +381,8 @@ export default inject(
     return {
       roomsView,
       setIsMobileHidden,
+      getRoomHistoryReport,
+      isRoomHistoryReportDownloading,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 

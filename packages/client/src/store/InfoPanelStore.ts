@@ -35,11 +35,13 @@
 
 import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
+import { getFolderLogReport } from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { FolderType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -70,8 +72,7 @@ import TreeFoldersStore from "./TreeFoldersStore";
 export type InfoPanelViewType = InfoPanelView | `info_plugin-${string}`;
 
 type TSelection =
-  | Nullable<TRoom | TFolder | TFile>
-  | Array<TRoom | TFolder | TFile>;
+  Nullable<TRoom | TFolder | TFile> | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
   isVisible = false;
@@ -102,9 +103,34 @@ class InfoPanelStore {
 
   shareChanged = false;
 
+  isRoomHistoryReportDownloading = false;
+
   constructor(public userStore: UserStore) {
     makeAutoObservable(this);
   }
+
+  setRoomHistoryReportDownloading = (value: boolean) => {
+    this.isRoomHistoryReportDownloading = value;
+  };
+
+  getRoomHistoryReport = async (folderId: number | string) => {
+    const { openOnNewPage } = this.filesSettingsStore;
+
+    try {
+      this.setRoomHistoryReportDownloading(true);
+
+      const url = await getFolderLogReport(folderId);
+
+      setTimeout(
+        () => window.open(url, openOnNewPage ? "_blank" : "_self"),
+        100,
+      );
+    } catch (error) {
+      toastr.error(error as TData);
+    } finally {
+      this.setRoomHistoryReportDownloading(false);
+    }
+  };
 
   setIsVisible = (visiable: boolean) => {
     const selectedFolderIsAgentOrFolderInAgent =
@@ -291,8 +317,9 @@ class InfoPanelStore {
       ? this.filesStore.selection.length === 1
         ? this.filesStore.selection[0]
         : this.filesStore.selection
-      : (this.filesStore.bufferSelection ??
-        { ...this.selectedFolderStore })) as unknown as TSelection;
+      : (this.filesStore.bufferSelection ?? {
+          ...this.selectedFolderStore,
+        })) as unknown as TSelection;
 
     if (!selection) return null;
 

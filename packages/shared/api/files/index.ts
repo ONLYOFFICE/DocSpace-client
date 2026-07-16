@@ -417,6 +417,17 @@ export async function createFolder(
   return res;
 }
 
+export async function getFolderLogReport(folderId: number | string) {
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: `/files/folder/${folderId}/log/report`,
+  };
+
+  const res = (await request(options)) as string;
+
+  return res;
+}
+
 export async function renameFolder(folderId: number, title: string) {
   const data = { title };
   const options: AxiosRequestConfig = {

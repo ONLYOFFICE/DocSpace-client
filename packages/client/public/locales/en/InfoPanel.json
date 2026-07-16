@@ -2,6 +2,7 @@
   "Administration": "Administration",
   "AndMoreLabel": "and <1>{{count}} more</1>",
   "Data": "Data",
+  "DownloadHistory": "Download history",
   "ExpectUsers": "Expect users",
   "FeedLinkWasDeleted": "Link was deleted",
   "FeedLocationLabel": "Folder «{{folderTitle}}»",

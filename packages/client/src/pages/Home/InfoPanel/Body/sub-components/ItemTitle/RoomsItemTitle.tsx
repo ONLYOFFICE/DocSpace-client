@@ -330,7 +330,7 @@ const RoomsItemHeader = ({
           <IconButton
             id="info_download-history"
             className="icon"
-            title={t("Common:Download")}
+            title={t("InfoPanel:DownloadHistory")}
             iconName={DownloadReactSvgUrl}
             onClick={onDownloadHistory}
             isDisabled={isRoomHistoryReportDownloading}

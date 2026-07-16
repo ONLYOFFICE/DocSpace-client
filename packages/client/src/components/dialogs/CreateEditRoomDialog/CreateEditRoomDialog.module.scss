@@ -565,25 +565,6 @@
   }
 }
 
-// SecondaryInfoButton - StyledHelpButton
-.secondaryInfoButton {
-  border-radius: 50%;
-  background-color: $gray;
-
-  :global(.dark) & {
-    background-color: $gray-dark;
-  }
-
-  circle,
-  rect {
-    fill: $white;
-
-    :global(.dark) & {
-      fill: $white;
-    }
-  }
-}
-
 // ThirdPartyStorage - StyledThirdPartyStorage
 .thirdPartyStorage {
   flex-direction: column;

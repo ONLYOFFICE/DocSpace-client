@@ -91,40 +91,22 @@ const CreateButtonMobile = ({
   const isContactsGuestsPage = contactsTab === "guests";
   const isFormsSection = location.pathname.startsWith("/forms");
 
-  const { showMainButton, mainButtonProps } = React.useMemo(
-    () =>
-      getSectionCreateButton({
-        t,
-        isContactsPage,
-        isContactsGroupsPage,
-        isContactsGuestsPage,
-        isRoomsFolder: !!isRoomsFolder,
-        isAIAgentsFolder: !!isAIAgentsFolder,
-        isFormsSection,
-        isFormsFolder: !!isFormsFolder,
-        selectedFolderId,
-        getFolderModel,
-        getContactsModel,
-        onCreateRoom,
-        onCreateAgent,
-        createGroup,
-      }),
-    [
-      t,
-      isContactsPage,
-      isContactsGroupsPage,
-      isContactsGuestsPage,
-      isRoomsFolder,
-      isAIAgentsFolder,
-      isFormsSection,
-      isFormsFolder,
-      selectedFolderId,
-      getFolderModel,
-      getContactsModel,
-      onCreateRoom,
-      onCreateAgent,
-    ],
-  );
+  const { showMainButton, mainButtonProps } = getSectionCreateButton({
+    t,
+    isContactsPage,
+    isContactsGroupsPage,
+    isContactsGuestsPage,
+    isRoomsFolder: !!isRoomsFolder,
+    isAIAgentsFolder: !!isAIAgentsFolder,
+    isFormsSection,
+    isFormsFolder: !!isFormsFolder,
+    selectedFolderId,
+    getFolderModel,
+    getContactsModel,
+    onCreateRoom,
+    onCreateAgent,
+    createGroup,
+  });
 
   const isDesktopView = currentDeviceType === DeviceType.desktop;
   const isCreateFabVisible = showMainButton && !isDesktopView && !showBodyLoader;

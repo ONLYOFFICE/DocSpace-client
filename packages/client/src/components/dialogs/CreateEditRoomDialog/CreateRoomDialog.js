@@ -48,6 +48,7 @@ import {
   FolderType,
   RoomsType,
   RoomsTypePrivate,
+  RoomSearchArea,
 } from "@docspace/shared/enums";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
@@ -336,7 +337,11 @@ const CreateRoomDialog = ({
             <RoomSelector
               className="template-body_selector"
               onSubmit={onSubmitRoom}
-              searchArea="Templates"
+              searchArea={
+                isFormsCreate
+                  ? RoomSearchArea.FormTemplates
+                  : RoomSearchArea.Templates
+              }
               roomType={isFormsCreate ? RoomsType.FormRoom : undefined}
               isMultiSelect={false}
               withHeader

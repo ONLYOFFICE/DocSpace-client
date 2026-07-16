@@ -205,41 +205,22 @@ const SectionFilterContent = ({
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
 
-  const { showMainButton, mainButtonProps } = React.useMemo(
-    () =>
-      getSectionCreateButton({
-        t,
-        isContactsPage,
-        isContactsGroupsPage,
-        isContactsGuestsPage,
-        isRoomsFolder,
-        isAIAgentsFolder,
-        isFormsSection,
-        isFormsFolder,
-        selectedFolderId,
-        getFolderModel,
-        getContactsModel,
-        onCreateRoom,
-        onCreateAgent,
-        createGroup,
-      }),
-    [
-      t,
-      isContactsPage,
-      isContactsGroupsPage,
-      isContactsGuestsPage,
-      isRoomsFolder,
-      isAIAgentsFolder,
-      isFormsSection,
-      isFormsFolder,
-      selectedFolderId,
-      getFolderModel,
-      getContactsModel,
-      onCreateRoom,
-      onCreateAgent,
-      createGroup,
-    ],
-  );
+  const { showMainButton, mainButtonProps } = getSectionCreateButton({
+    t,
+    isContactsPage,
+    isContactsGroupsPage,
+    isContactsGuestsPage,
+    isRoomsFolder,
+    isAIAgentsFolder,
+    isFormsSection,
+    isFormsFolder,
+    selectedFolderId,
+    getFolderModel,
+    getContactsModel,
+    onCreateRoom,
+    onCreateAgent,
+    createGroup,
+  });
 
   const isDesktopView = currentDeviceType === DeviceType.desktop;
 

@@ -47,9 +47,6 @@ export type HeaderProps = {
   isInfoPanelVisible?: boolean;
   onToggleInfoPanel?: () => void;
   headerOffset?: number;
-  /** Optional button rendered inside Navigation's control buttons area. */
-  aiChatButton?: React.ReactNode;
-
   /**
    * Optional decoration shown next to the current folder title. Used by
    * private rooms to surface the lock badge; left as a slot so other

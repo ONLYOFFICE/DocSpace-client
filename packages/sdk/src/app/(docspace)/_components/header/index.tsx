@@ -73,7 +73,6 @@ const Header = ({
   isInfoPanelVisible = false,
   onToggleInfoPanel,
   headerOffset = 0,
-  aiChatButton,
   titleIcon = "",
   titleIconTooltip = "",
 }: HeaderProps) => {
@@ -109,8 +108,9 @@ const Header = ({
     onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
     onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
     onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
-    onRestoreSelectedClick: roomActionsCtx?.restoreSelected
-      ?? (isTrashSection ? fileOpsCtx?.restoreItems : undefined),
+    onRestoreSelectedClick:
+      roomActionsCtx?.restoreSelected ??
+      (isTrashSection ? fileOpsCtx?.restoreItems : undefined),
     isRoomsFolder: !!roomActionsCtx,
     isArchiveRoomsFolder: !!roomActionsCtx?.isArchive,
     onArchiveSelectedClick: roomActionsCtx?.archiveSelected,
@@ -297,7 +297,6 @@ const Header = ({
               onLogoClick={onBurgerClick ?? (() => {})}
               clearTrash={() => {}}
               showFolderInfo={() => {}}
-              aiChatButton={aiChatButton}
               isContextButtonVisible={isHeaderMenuVisible}
             />
           </div>
@@ -312,4 +311,3 @@ const Header = ({
 };
 
 export default observer(Header);
-

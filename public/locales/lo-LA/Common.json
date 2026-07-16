@@ -596,7 +596,6 @@
   "CurrentMonthToDateSpend": "ການໃຊ້ຈ່າຍຂອງເດືອນປັດຈຸບັນຈົນຮອດປະຈຸບັນ",
   "CurrentPassphrase": "ລະຫັດລັບປັດຈຸບັນ",
   "CurrentPassphraseRequired": "ຕ້ອງໃສ່ລະຫັດລັບປັດຈຸບັນ",
-  "CurrentPaymentMonth": "ການຈ່າຍເງິນປັດຈຸບັນ: {{price}}/ເດືອນ ({{size}})",
   "CurrentPlan": "ແພັກເກັດປັດຈຸບັນ",
   "CurrentSubscription": "ການສະໝັກສະມາຊິກປັດຈຸບັນ",
   "Custom": "ກຳນົດເອງ",

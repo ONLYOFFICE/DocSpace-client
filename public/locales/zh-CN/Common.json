@@ -605,7 +605,6 @@
   "CurrentMonthToDateSpend": "本月至今支出",
   "CurrentPassphrase": "当前密码短语",
   "CurrentPassphraseRequired": "需要当前密码短语",
-  "CurrentPaymentMonth": "当前付款：{{price}}/月 ({{size}})",
   "CurrentPlan": "当前套餐",
   "CurrentSubscription": "当前订阅",
   "Custom": "自定义",

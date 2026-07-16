@@ -605,7 +605,6 @@
   "CurrentMonthToDateSpend": "今月の累計支出",
   "CurrentPassphrase": "現在のパスフレーズ",
   "CurrentPassphraseRequired": "現在のパスフレーズが必要です",
-  "CurrentPaymentMonth": "現在の支払い: {{price}}/月 ({{size}})",
   "CurrentPlan": "現在のプラン",
   "CurrentSubscription": "現在のサブスクリプション",
   "Custom": "カスタム",

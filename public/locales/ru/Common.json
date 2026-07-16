@@ -605,7 +605,6 @@
   "CurrentMonthToDateSpend": "Расходы с начала текущего месяца",
   "CurrentPassphrase": "Текущая парольная фраза",
   "CurrentPassphraseRequired": "Требуется текущая парольная фраза",
-  "CurrentPaymentMonth": "Текущий платеж: {{price}}/месяц ({{size}})",
   "CurrentPlan": "Текущий тариф",
   "CurrentSubscription": "Текущая подписка",
   "Custom": "Пользовательский",

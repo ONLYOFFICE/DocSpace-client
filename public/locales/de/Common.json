@@ -605,7 +605,6 @@
   "CurrentMonthToDateSpend": "Bisherige Ausgaben des laufenden Monats",
   "CurrentPassphrase": "Aktuelle Passphrase",
   "CurrentPassphraseRequired": "Aktuelle Passphrase ist erforderlich",
-  "CurrentPaymentMonth": "Aktueller Betrag: {{price}}/Monat ({{size}})",
   "CurrentPlan": "Aktueller Tarif",
   "CurrentSubscription": "Aktuelles Abonnement",
   "Custom": "Benutzerdefiniert",

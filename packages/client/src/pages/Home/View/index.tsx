@@ -45,7 +45,10 @@ import type { Nullable } from "@docspace/shared/types";
 import type { TError } from "@docspace/shared/utils/axiosClient";
 
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
-import { clearTextSelection } from "@docspace/shared/utils/copy";
+import {
+  clearTextSelection,
+  isEditableElementFocused,
+} from "@docspace/shared/utils/copy";
 import { TopLoaderService as TopLoadingIndicator } from "@docspace/ui-kit/components";
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -484,17 +487,10 @@ const View = ({
     if (isLoading || currentView === "chat" || currentView === "profile")
       return;
 
-    // Don't steal focus while the user is typing (e.g. the search input)
-    const activeElement = document.activeElement as HTMLElement | null;
-    const isEditingText =
-      !!activeElement &&
-      (activeElement.tagName === "INPUT" ||
-        activeElement.tagName === "TEXTAREA" ||
-        activeElement.isContentEditable);
-
     const scroll = document.getElementsByClassName("section-body");
 
-    if (scroll && scroll[0] && !isEditingText) {
+    // Don't steal focus while the user is typing (e.g. the search input).
+    if (scroll && scroll[0] && !isEditableElementFocused()) {
       const firstChild = scroll[0] as HTMLElement;
       firstChild.focus();
       setHotkeyCaret(null);

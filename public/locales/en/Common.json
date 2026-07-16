@@ -1170,6 +1170,8 @@
   "Guest": "Guest",
   "GuestAgentMaxAvailableRoleWarning": "Guests cannot be assigned as Content creator.\nOnly Room admins, {{productName}} admins and Users are eligible for this role.",
   "GuestApprovalNote": "Once approved, the shared guest will be added to your Guests list in {{sectionName}}.",
+  "GuestCantCreateOrUploadDescription": "Ask a Room or {{productName}} administrator for additional permissions.",
+  "GuestCantCreateOrUploadTitle": "Guests can't create or upload files.",
   "GuestInvitation": "<1>{{displayName}}</1> wants to share with you the contact of the guest.",
   "Guests": "Guests",
   "Guide": "Guide",

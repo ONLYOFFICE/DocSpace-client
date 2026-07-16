@@ -504,6 +504,13 @@
   padding-top: 12px;
 }
 
+// Tooltip shown to guests over disabled create/upload actions: bold title,
+// then the explanation below with a gap.
+.guestRestrictionTooltip {
+  display: flex;
+  flex-direction: column;
+}
+
 // Loaders — skeleton boxes mirroring the cards above (no interactivity), so the
 // Overview skeleton lines up with the real content and there's no layout shift.
 .loaderModuleCard {

@@ -67,6 +67,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
@@ -86,6 +87,7 @@ import { IntegrationsCard } from "./sub-components/IntegrationsCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
 import { Header } from "./sub-components/Header";
 import { DashboardLoader } from "./sub-components/DashboardLoader";
+import { GuestRestrictionTooltip } from "./sub-components/GuestRestrictionTooltip";
 import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
 import { useMyFolderId } from "./hooks/useMyFolderId";
@@ -95,6 +97,8 @@ interface DashboardProps {
   isGuest: boolean;
   showLoader: boolean;
 }
+
+const UPLOAD_LINK_ID = "dashboard-upload-link";
 
 const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
   const { t } = useTranslation(["Common", "OAuth"]);
@@ -110,7 +114,7 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
     myFolderId,
     openFiles,
   );
-  const createItems = useCreateActions(myFolderId);
+  const createItems = useCreateActions(myFolderId, isGuest);
 
   // First-run "introduce this app" promo. The clicked card's href is stashed in
   // a ref so the promo's confirm callback can navigate to it after the user
@@ -197,18 +201,28 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
               components={{
                 1: (
                   <Link
+                    id={UPLOAD_LINK_ID}
                     type={LinkType.action}
                     color="accent"
                     isHovered
+                    isSemitransparent={isGuest}
                     fontSize="18px"
                     fontWeight={700}
                     lineHeight="24px"
-                    onClick={openUploadDialog}
+                    onClick={isGuest ? undefined : openUploadDialog}
                   />
                 ),
               }}
             />
           </Text>
+          {isGuest ? (
+            <Tooltip
+              id={`${UPLOAD_LINK_ID}-tooltip`}
+              anchorSelect={`#${UPLOAD_LINK_ID}`}
+              place="bottom"
+              getContent={() => <GuestRestrictionTooltip />}
+            />
+          ) : null}
           <QuickActions items={createItems} className={styles.quickActions} />
         </section>
 

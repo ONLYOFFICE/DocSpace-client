@@ -62,82 +62,29 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
-import { getConstName } from "@docspace/shared/constants/consts";
-import {
-  BlankPdfIcon,
-  CreateDocumentIcon,
-  CreatePresentationIcon,
-  CreateSpreadsheetIcon,
-} from "@docspace/ui-kit/components/quick-actions/icons";
+import { Text } from "@docspace/ui-kit/components/text";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
-import { GuestRestrictionTooltip } from "../sub-components/GuestRestrictionTooltip";
-import { makeCreateUrl, NEW_FILE_NAMES } from "../utils";
+import styles from "../Dashboard.module.scss";
 
-// Builds the "create new file" quick actions for the Dashboard. Each action
-// opens the editor for a blank file of the matching type in the user's
-// "My documents" folder. Guests can't create files, so the tiles are disabled
-// with a tooltip explaining why instead of being hidden.
-export const useCreateActions = (
-  myFolderId: number | null,
-  isGuest: boolean,
-): QuickActionItem[] => {
+// Tooltip content shown to guests over the disabled "upload your file" link
+// and the disabled "create new file" quick-action tiles on the Dashboard.
+export const GuestRestrictionTooltip = () => {
   const { t } = useTranslation(["Common"]);
 
-  const disabledProps = React.useMemo(
-    () =>
-      isGuest
-        ? { disabled: true, tooltipContent: <GuestRestrictionTooltip /> }
-        : undefined,
-    [isGuest],
-  );
-
-  return React.useMemo<QuickActionItem[]>(
-    () => [
-      {
-        id: "document",
-        icon: <CreateDocumentIcon />,
-        label: t("Common:Document"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.document, myFolderId),
-            "_blank",
-          ),
-        ...disabledProps,
-      },
-      {
-        id: "spreadsheet",
-        icon: <CreateSpreadsheetIcon />,
-        label: t("Common:Spreadsheet"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.spreadsheet, myFolderId),
-            "_blank",
-          ),
-        ...disabledProps,
-      },
-      {
-        id: "presentation",
-        icon: <CreatePresentationIcon />,
-        label: t("Common:Presentation"),
-        onClick: () =>
-          window.open(
-            makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),
-            "_blank",
-          ),
-        ...disabledProps,
-      },
-      {
-        id: "pdf",
-        icon: <BlankPdfIcon />,
-        label: getConstName("PDF"),
-        onClick: () =>
-          window.open(makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId), "_blank"),
-        ...disabledProps,
-      },
-    ],
-    [t, myFolderId, disabledProps],
+  return (
+    <div className={styles.guestRestrictionTooltip}>
+      <Text fontWeight={700} fontSize="12px">
+        {t("Common:GuestCantCreateOrUploadTitle")}
+      </Text>
+      <Text fontSize="12px">
+        {t("Common:GuestCantCreateOrUploadDescription", {
+          productName: getBrandName("ProductName"),
+        })}
+      </Text>
+    </div>
   );
 };
 
-export default useCreateActions;
+export default GuestRestrictionTooltip;
+

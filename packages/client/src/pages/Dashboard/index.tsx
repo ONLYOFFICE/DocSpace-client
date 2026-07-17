@@ -61,7 +61,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { Navigate, useNavigate, useSearchParams } from "react-router";
+import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
@@ -105,6 +105,7 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
   useDocumentTitle("Common:Overview");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const myFolderId = useMyFolderId();
   const openFiles = React.useCallback(() => {
@@ -131,10 +132,12 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
 
   // The dashboard has no async content to load, so finish the sidebar's
   // Overview item progress animation immediately (other pages dispatch this
-  // once their content is ready).
+  // once their content is ready). Keyed on location so re-clicking Overview
+  // while already on it (same path, new location.key) ends the animation
+  // again instead of leaving it stuck in "progress".
   React.useEffect(() => {
     window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
-  }, []);
+  }, [location.key]);
 
   const design = searchParams.get("design");
   if (design === "old") {

@@ -57,6 +57,7 @@ import {
   makeRoomLink,
   selfActivationStatusHandler,
   getEmptyInvitationLink,
+  fileSharedUsersHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { createLinksRouteHandler } from "@docspace/shared/__mocks__/handlers/share/link";
 
@@ -125,6 +126,7 @@ test.describe("External Sharing — Rooms", () => {
       roomListHandler(TEST_PORT, TypeRoomList.IsDefault),
       myHandler(TEST_PORT, true),
       myDocumentsHandler(TEST_PORT, true),
+      fileSharedUsersHandler(TEST_PORT),
     );
   });
 

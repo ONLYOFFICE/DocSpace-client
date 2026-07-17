@@ -207,7 +207,6 @@ export const filesHandlers = (port: string) => [
   thirdPartyCapabilitiesHandler(port),
   thirdPartyHandler(port),
   shareHandler(port),
-  fileSharedUsersHandler(port),
   externalFolderLinksHandler(port),
   folderSharedUsersHandler(port),
   getFileInfoHandler(port),

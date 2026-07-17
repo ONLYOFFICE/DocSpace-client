@@ -99,6 +99,22 @@ const EditAgentDialog = ({
   // (not just the explicit close button), so a fresh session refetches.
   React.useEffect(() => () => modelCache.clear(), []);
 
+  // The agent's bound profile arrives asynchronously (EditAgentEvent
+  // fetches GET /new-ai/agents/:id) after the initial params were copied
+  // into state above, so merge it in and extend the pristine snapshot —
+  // otherwise the profile combobox keeps the preselected default and the
+  // Save button lights up with a phantom profile change.
+  const fetchedProfileId = fetchedAgentParams.profileId;
+  React.useEffect(() => {
+    if (!fetchedProfileId) return;
+
+    prevRoomParams.current = Object.freeze({
+      ...prevRoomParams.current,
+      profileId: fetchedProfileId,
+    });
+    setAgentParams((value) => ({ ...value, profileId: fetchedProfileId }));
+  }, [fetchedProfileId]);
+
   const compareRoomParams = (
     prevParams: TAgentParams,
     currentParams: TAgentParams,

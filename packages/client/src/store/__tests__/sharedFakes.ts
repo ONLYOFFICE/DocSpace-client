@@ -24,19 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// ---------------------------------------------------------------------------
-// Shared fake-store factories for characterization-test harnesses.
-//
-// Extracted verbatim from filesStore/__tests__/testHarness.ts so that other
-// store harnesses (uploadDataStore, ...) can construct their stores against
-// the same minimal inert fakes. Each factory returns a FRESH object (fresh
-// vi.fn() instances) per call, so tests never share mock state.
-//
-// Keep these fakes minimal: only fields that some method under test actually
-// reads. Store-specific extras belong in the consuming harness via spread
-// (`{ ...fakeFilesSettingsStore(), chunkUploadSize: 1024 }`), not here.
-// ---------------------------------------------------------------------------
-
 import { vi } from "vitest";
 
 export type FakeStore = Record<string, unknown>;
@@ -67,9 +54,6 @@ export const fakeTreeFoldersStore = (): FakeStore => ({
   isPrivacyFolder: false,
   isAIAgentsFolder: false,
   sharedWithMeFolderId: undefined,
-  // Distinct sentinels: in production these are real folder ids, so keeping
-  // them non-undefined avoids `undefined === undefined` matches in handlers
-  // that compare socket payload ids against them.
   recentFolderId: -101,
   favoritesFolderId: -102,
 });

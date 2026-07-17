@@ -69,9 +69,6 @@ vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
   // Real signature is `resolveDisplayTitle({ id, title, encrypted })` → string.
   // Echo the plaintext title so title-dependent mapping stays deterministic.
   resolveDisplayTitle: ({ title }: { title?: string }) => title,
-  // Not used by FilesStore itself, but UploadDataStore (whose harness reuses
-  // this mock registration via createTestFilesStore) calls it after encrypted
-  // chunk uploads.
   rememberEncryptedFilename: vi.fn(),
 }));
 

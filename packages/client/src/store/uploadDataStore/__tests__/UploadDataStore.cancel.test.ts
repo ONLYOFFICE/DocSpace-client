@@ -107,7 +107,7 @@ describe("UploadDataStore.cancelUpload", () => {
     store.converted = false;
     store.currentUploadNumber = 2;
     store.quotaErrorRaised = true;
-    store.finishUploadFilesCalled = true;
+    store.finishUploadFilesCalled = false;
 
     store.cancelUpload();
 
@@ -138,7 +138,7 @@ describe("UploadDataStore.cancelUpload", () => {
     expect(store.converted).toBe(true);
     expect(store.currentUploadNumber).toBe(0);
     expect(store.quotaErrorRaised).toBe(false);
-    expect(store.finishUploadFilesCalled).toBe(false);
+    expect(store.finishUploadFilesCalled).toBe(true);
     expect(store.filesSize).toBe(4096);
     expect(store.uploadedFiles).toBe(1);
   });

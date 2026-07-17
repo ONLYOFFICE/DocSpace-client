@@ -296,6 +296,14 @@ export async function asyncUploadImpl(
         ].isFinished = true;
       }
 
+      if (
+        self.uploaded ||
+        !self.files.some((f) => f.file === file) ||
+        self.files[indexOfFile]?.cancel
+      ) {
+        return resolve();
+      }
+
       self.asyncUpload(t, chunkData, resolve, reject, createNewIfExist);
 
       const activeLength = self.asyncUploadObj[operationId]

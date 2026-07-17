@@ -42,7 +42,7 @@ import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TConflictResolveDialogData } from "SRC_DIR/components/dialogs/ConflictResolveDialog/ConflictResolveDialog.types";
 
-import { removeDuplicate } from "./helpers";
+import { releaseUploadAutoLockSuspension, removeDuplicate } from "./helpers";
 import type { TUploadBrowserFile, TUploadFile } from "./helpers";
 import type {
   default as UploadDataStore,
@@ -51,7 +51,8 @@ import type {
 } from "../UploadDataStore";
 
 export function cancelUploadImpl(self: UploadDataStore) {
-  self.finishUploadFilesCalled = false;
+  self.finishUploadFilesCalled = true;
+  releaseUploadAutoLockSuspension();
 
   const newUploadData = {
     filesSize: self.filesSize,

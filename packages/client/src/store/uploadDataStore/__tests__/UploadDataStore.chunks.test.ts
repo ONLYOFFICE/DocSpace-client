@@ -311,6 +311,51 @@ describe("UploadDataStore.asyncUpload — cancelled file", () => {
   });
 });
 
+describe("UploadDataStore.asyncUpload — cancellation mid-chunk", () => {
+  it("skips finalization and the completion toast when cancelUpload lands while a chunk is in flight", async () => {
+    const { store } = createTestUploadDataStore();
+    const browserFile = makeBrowserFile("cancelled.docx", 1024);
+    const entry = makeUploadFile({
+      uniqueId: "cancel-mid",
+      file: browserFile,
+      toFolderId: 1,
+    });
+    store.files = [entry];
+    store.uploadedFilesHistory = [{ ...entry }];
+    store.uploaded = false;
+    store.currentUploadNumber = 1;
+    const refreshFiles = replaceAction(store, "refreshFiles");
+
+    vi.mocked(filesApi.startUploadSession).mockResolvedValue({
+      id: "sess-1",
+      path: [],
+    } as never);
+    let releaseChunk: (() => void) | undefined;
+    vi.mocked(filesApi.uploadChunkParallel).mockImplementation(
+      () =>
+        new Promise((res) => {
+          releaseChunk = () =>
+            res({ uploaded: false, id: null, file: null } as never);
+        }) as never,
+    );
+
+    const done = store.startSessionFunc(0, t);
+    await vi.waitFor(() => expect(releaseChunk).toBeDefined());
+
+    store.cancelUpload();
+    releaseChunk?.();
+    await done;
+
+    expect(filesApi.finalizeUploadSession).not.toHaveBeenCalled();
+    expect(toastr.success).not.toHaveBeenCalled();
+    expect(refreshFiles).not.toHaveBeenCalled();
+    expect(store.files[0].cancel).toBe(true);
+    expect(store.files[0].action).toBe("upload");
+    expect(store.finishUploadFilesCalled).toBe(true);
+    expect(toastr.info).toHaveBeenCalledWith("Common:CancelUpload");
+  });
+});
+
 describe("UploadDataStore.uploadFileChunks + asyncUpload — full cycle", () => {
   it("drains chunks through the thread pool and finalizes exactly once before resolving", async () => {
     const { store, fakes } = createTestUploadDataStore({

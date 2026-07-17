@@ -383,6 +383,12 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
           isDisabled={isBusy}
           onClick={() => setAddRuleDialogVisible(true)}
         />
+        <Button
+          size={ButtonSize.small}
+          label={t("Common:Reset")}
+          isDisabled={isBusy || rules.length === 0}
+          onClick={() => persistRules([])}
+        />
       </div>
 
       {addRuleDialogVisible ? (

@@ -38,10 +38,6 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useParams } from "react-router";
 
-import config from "PACKAGE_FILE";
-
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import {
@@ -227,15 +223,7 @@ const TenantPanel = ({
         selectedItemId={selectedTab}
         onSelect={(item) => {
           setSelectedTab(item.id);
-          window.history.replaceState(
-            "",
-            "",
-            combineUrl(
-              window.ClientConfig?.proxy?.url,
-              config.homepage,
-              `${DOCS_CONNECT_ROUTE}/${item.id}`,
-            ),
-          );
+          navigate(`${DOCS_CONNECT_ROUTE}/${item.id}`, { replace: true });
         }}
       />
     </div>

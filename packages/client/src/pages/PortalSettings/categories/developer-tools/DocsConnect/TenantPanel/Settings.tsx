@@ -375,7 +375,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
         </div>
       ) : null}
 
-      <div>
+      <div className={styles.addRuleAction}>
         <Button
           primary
           size={ButtonSize.small}

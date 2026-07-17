@@ -116,6 +116,8 @@
   "ChangeScheduled": "The change has been scheduled",
   "DemoCode": "Demo code",
   "EditorPreviewFailed": "Failed to load the editor preview. Check the tenant address and secret key.",
+  "PreviewDesktopOnlyTitle": "This section is only available in desktop version",
+  "PreviewDesktopOnlyDescription": "Please use the desktop site to preview the editor",
   "Wopi": "WOPI",
   "EnableWopi": "Enable WOPI protocol",
   "EnableWopiDescription": "Allow integrations with WOPI-compatible storage providers",

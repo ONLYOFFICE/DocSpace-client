@@ -57,6 +57,12 @@
   align-items: center;
   gap: 12px;
   min-height: 32px;
+
+  @include mixins.mobile {
+    > :first-child {
+      flex: 1;
+    }
+  }
 }
 
 .trialBadge {
@@ -209,6 +215,23 @@
 .saveButtons {
   position: static;
   margin-top: 4px;
+
+  @include mixins.mobile {
+    position: static !important;
+    background-color: transparent;
+
+    > div {
+      padding: 0 !important;
+    }
+
+    p {
+      position: static !important;
+      width: auto !important;
+      padding: 8px 0 0 !important;
+      background-color: transparent;
+      border-top: none !important;
+    }
+  }
 }
 
 .rulesList {
@@ -261,6 +284,21 @@
 .limitField {
   max-width: 320px;
   margin-top: 10px;
+
+  @include mixins.mobile {
+    max-width: none;
+  }
+}
+
+.addRuleAction {
+  @include mixins.mobile {
+    display: flex;
+
+    button {
+      width: 100%;
+      height: 40px;
+    }
+  }
 }
 
 .preview {
@@ -305,6 +343,11 @@
   font-family: monospace;
   font-size: 13px;
   line-height: 22px;
+
+  @include mixins.mobile {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
 }
 
 .deactivatedTitle {
@@ -405,7 +448,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 
-  @include mixins.tablet {
+  @include mixins.tablet-and-below {
     grid-template-columns: 1fr;
   }
 }
@@ -447,7 +490,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 
-  @include mixins.tablet {
+  @include mixins.tablet-and-below {
     grid-template-columns: 1fr;
   }
 }
@@ -572,6 +615,10 @@
 
 .downloadButton {
   height: 40px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
 }
 
 .integrationsGrid {

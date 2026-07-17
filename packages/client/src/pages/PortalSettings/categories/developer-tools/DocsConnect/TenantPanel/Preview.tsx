@@ -41,12 +41,15 @@ import { isMobile } from "react-device-detect";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
+import { EmptyView } from "@docspace/ui-kit/components/empty-view";
 import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copyTo.react.svg";
+import DesktopOnlyIcon from "PUBLIC_DIR/images/emptyview/empty.desktop.only.svg";
 
+import { DeviceType } from "@docspace/shared/enums";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TUser } from "@docspace/shared/api/people/types";
@@ -60,10 +63,17 @@ interface PreviewProps {
   info?: TDocsConnectInfo;
   user?: TUser;
   copyToClipboard?: (value: string, t: TTranslation) => void;
+  currentDeviceType?: DeviceType;
 }
 
-const Preview = ({ info, user, copyToClipboard }: PreviewProps) => {
+const Preview = ({
+  info,
+  user,
+  copyToClipboard,
+  currentDeviceType,
+}: PreviewProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
+  const isMobileView = currentDeviceType === DeviceType.mobile;
   const [view, setView] = useState<"editor" | "code">("editor");
   const [token, setToken] = useState<string | null>(null);
   const [editorError, setEditorError] = useState(false);
@@ -151,26 +161,37 @@ const Preview = ({ info, user, copyToClipboard }: PreviewProps) => {
         onSelect={(item) => setView(item.id as "editor" | "code")}
       />
 
-      <div
-        className={`${styles.previewEditor} ${
-          view === "editor" ? "" : styles.previewHidden
-        }`}
-      >
-        {editorError ? (
-          <Text className={styles.muted}>
-            {t("DocsConnect:EditorPreviewFailed")}
-          </Text>
-        ) : token ? (
-          <DocumentEditor
-            id="docs-connect-preview-editor"
-            documentServerUrl={`${serverUrl}/`}
-            config={{ ...config, token }}
-            width="100%"
-            height="100%"
-            onLoadComponentError={() => setEditorError(true)}
+      {isMobileView ? (
+        view === "editor" ? (
+          <EmptyView
+            icon={<DesktopOnlyIcon />}
+            title={t("DocsConnect:PreviewDesktopOnlyTitle")}
+            description={t("DocsConnect:PreviewDesktopOnlyDescription")}
+            options={null}
           />
-        ) : null}
-      </div>
+        ) : null
+      ) : (
+        <div
+          className={`${styles.previewEditor} ${
+            view === "editor" ? "" : styles.previewHidden
+          }`}
+        >
+          {editorError ? (
+            <Text className={styles.muted}>
+              {t("DocsConnect:EditorPreviewFailed")}
+            </Text>
+          ) : token ? (
+            <DocumentEditor
+              id="docs-connect-preview-editor"
+              documentServerUrl={`${serverUrl}/`}
+              config={{ ...config, token }}
+              width="100%"
+              height="100%"
+              onLoadComponentError={() => setEditorError(true)}
+            />
+          ) : null}
+        </div>
+      )}
 
       {view === "code" ? (
         <div className={styles.demoCode}>
@@ -187,9 +208,12 @@ const Preview = ({ info, user, copyToClipboard }: PreviewProps) => {
   );
 };
 
-export default inject(({ docsConnectStore, userStore }: TStore) => ({
-  info: docsConnectStore.info,
-  user: userStore.user,
-  copyToClipboard: docsConnectStore.copyToClipboard,
-}))(observer(Preview));
+export default inject(
+  ({ docsConnectStore, userStore, settingsStore }: TStore) => ({
+    info: docsConnectStore.info,
+    user: userStore.user,
+    copyToClipboard: docsConnectStore.copyToClipboard,
+    currentDeviceType: settingsStore.currentDeviceType,
+  }),
+)(observer(Preview));
 

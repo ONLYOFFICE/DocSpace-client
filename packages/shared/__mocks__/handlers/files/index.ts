@@ -47,9 +47,23 @@ import {
   createRoomHandler,
 } from "./roomList";
 import {
+  roomPrimaryLinkHandler,
+  roomLinksHandler,
+  roomFilePrimaryLinkHandler,
+  roomFileGetPrimaryLinkHandler,
+  roomFileLinksHandler,
+  roomContentHandler,
+  roomInfoHandler,
+  makeRoomLink,
+} from "./roomLinks";
+import { getEmptyInvitationLink } from "./roomInvite";
+import {
   externalLinksHandler,
   primaryLinkHandler,
   editExternalLinkHandler,
+  fileSharedUsersHandler,
+  externalFolderLinksHandler,
+  folderSharedUsersHandler,
 } from "./externalLinks";
 import { thirdPartyCapabilitiesHandler } from "./thirdPartyCapabilities";
 import { thirdPartyHandler } from "./thirdParty";
@@ -116,6 +130,14 @@ export {
   filesSettingsHandler,
   validatePublicRoomKeyHandler,
   roomListHandler,
+  roomPrimaryLinkHandler,
+  roomLinksHandler,
+  roomFilePrimaryLinkHandler,
+  roomFileGetPrimaryLinkHandler,
+  roomFileLinksHandler,
+  roomContentHandler,
+  roomInfoHandler,
+  makeRoomLink,
   folderHandler,
   folderInfoHandler,
   validatePublicRoomPasswordHandler,
@@ -123,6 +145,9 @@ export {
   externalLinksHandler,
   primaryLinkHandler,
   editExternalLinkHandler,
+  fileSharedUsersHandler,
+  externalFolderLinksHandler,
+  folderSharedUsersHandler,
   createRoomHandler,
   thirdPartyCapabilitiesHandler,
   thirdPartyHandler,
@@ -156,6 +181,7 @@ export {
   updateRoomGroupHandler,
   deleteRoomGroupHandler,
   updateRoomGroupIconHandler,
+  getEmptyInvitationLink,
 };
 
 // Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here
@@ -181,6 +207,9 @@ export const filesHandlers = (port: string) => [
   thirdPartyCapabilitiesHandler(port),
   thirdPartyHandler(port),
   shareHandler(port),
+  fileSharedUsersHandler(port),
+  externalFolderLinksHandler(port),
+  folderSharedUsersHandler(port),
   getFileInfoHandler(port),
   docServiceHandlers(port),
   addFileToFavoritesHandler(port),

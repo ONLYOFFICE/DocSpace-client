@@ -132,6 +132,45 @@ export const primaryLinkHandler = (port?: string) => {
   });
 };
 
+export const folderSharedUsersHandler = (port?: string) => {
+  const baseUrl = port
+    ? `${BASE_URL}:${port}`
+    : typeof window !== "undefined"
+      ? window.location.origin
+      : BASE_URL;
+
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/files/folder/:id/share`,
+    () => HttpResponse.json({ response: { items: [], total: 0 } }),
+  );
+};
+
+export const externalFolderLinksHandler = (port?: string) => {
+  const baseUrl = port
+    ? `${BASE_URL}:${port}`
+    : typeof window !== "undefined"
+      ? window.location.origin
+      : BASE_URL;
+
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/files/folder/:id/links`,
+    () => HttpResponse.json({ response: { items: [], total: 0 } }),
+  );
+};
+
+export const fileSharedUsersHandler = (port?: string) => {
+  const baseUrl = port
+    ? `${BASE_URL}:${port}`
+    : typeof window !== "undefined"
+      ? window.location.origin
+      : BASE_URL;
+
+  return http.get(
+    `${baseUrl}/${API_PREFIX}/files/file/:id/share`,
+    () => HttpResponse.json({ response: { items: [], total: 0 } }),
+  );
+};
+
 export const editExternalLinkHandler = (port?: string) => {
   let baseUrl;
   if (port) {

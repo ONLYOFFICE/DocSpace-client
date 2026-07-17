@@ -459,7 +459,7 @@ const SectionBodyContent = (props) => {
 
     document.addEventListener("dragover", onDragOver);
     document.addEventListener("dragleave", onDragLeaveDoc);
-    document.addEventListener("drop", onDropEvent);
+    document.addEventListener("drop", onDropEvent, true);
 
     return () => {
       window.removeEventListener("beforeunload", onBeforeunload);
@@ -469,7 +469,7 @@ const SectionBodyContent = (props) => {
 
       document.removeEventListener("dragover", onDragOver);
       document.removeEventListener("dragleave", onDragLeaveDoc);
-      document.removeEventListener("drop", onDropEvent);
+      document.removeEventListener("drop", onDropEvent, true);
     };
   }, [
     onMouseUp,

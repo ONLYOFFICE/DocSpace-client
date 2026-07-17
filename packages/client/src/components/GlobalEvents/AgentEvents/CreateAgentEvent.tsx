@@ -37,7 +37,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import TagsStore from "SRC_DIR/store/TagsStore";
@@ -66,7 +65,6 @@ type CreateRoomEventProps = {
 
   selectionItems: FilesStore["selection"];
 
-  aiConfig: SettingsStore["aiConfig"];
 };
 
 const CreateRoomEvent = ({
@@ -87,7 +85,6 @@ const CreateRoomEvent = ({
 
   selectionItems,
 
-  aiConfig,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -133,7 +130,6 @@ const CreateRoomEvent = ({
       onCreate={onCreate}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
-      portalMcpServerId={aiConfig?.portalMcpServerId ?? ""}
     />
   );
 };
@@ -144,7 +140,6 @@ export default inject(
     tagsStore,
     dialogsStore,
     filesStore,
-    settingsStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -164,7 +159,6 @@ export default inject(
       setCreateAgentDialogVisible,
       setCover,
       selectionItems: selections,
-      aiConfig: settingsStore.aiConfig,
     };
   },
 )(observer(CreateRoomEvent));

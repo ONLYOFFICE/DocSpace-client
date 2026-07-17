@@ -899,6 +899,79 @@ export const getProfileAssignments = async (entityId?: string) => {
   return (await response.json()) as Record<string, string>;
 };
 
+// --- new-ai MCP servers (chat-lib model) -----------------------------------
+// Entity-scoped custom MCP servers of the Node AI service (`tools/*`
+// routes). For an agent the per-entity map doubles as its MCP whitelist:
+// the agent create/edit dialog manages the set here. The service resolves
+// the stored config itself — system servers are pinned to the canonical
+// config from the new-ai config file, portal-level servers are copied.
+
+/** Name → config map of MCP servers scoped to an entity (portal scope
+ * when `entityId` is omitted). */
+export const getEntityMcpServers = async (entityId?: string) => {
+  const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
+
+  const response = await authFetch(
+    `/api/2.0/new-ai/tools/list-custom-servers${params}`,
+    { method: "GET", headers: { "Content-Type": "application/json" } },
+  );
+
+  if (!response.ok) return {} as Record<string, unknown>;
+
+  return (await response.json()) as Record<string, unknown>;
+};
+
+/** Names of the system MCP servers configured on the new-ai service. */
+export const getSystemMcpServerNames = async () => {
+  const response = await authFetch(`/api/2.0/new-ai/tools/list-system-tools`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (!response.ok) return [] as string[];
+
+  const grouped = (await response.json()) as Record<string, unknown>;
+  return Object.keys(grouped);
+};
+
+/** Enable an MCP server (by name) for an entity. The config is resolved
+ * server-side: canonical for system servers, copied from the portal scope
+ * for portal-level servers. */
+export const addEntityMcpServer = async (name: string, entityId: string) => {
+  const response = await authFetch(
+    `/api/2.0/new-ai/tools/add-custom-server`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, config: null, entityId }),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to enable MCP server "${name}": ${response.status} ${response.statusText}`,
+    );
+  }
+};
+
+/** Disable an MCP server (by name) for an entity. */
+export const removeEntityMcpServer = async (name: string, entityId: string) => {
+  const response = await authFetch(
+    `/api/2.0/new-ai/tools/remove-custom-server`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, entityId }),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to disable MCP server "${name}": ${response.status} ${response.statusText}`,
+    );
+  }
+};
+
 export const updateDefaultProvider = async ({
   providerId,
   defaultModel,

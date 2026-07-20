@@ -48,11 +48,10 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import {
-  addServersForRoom,
-  createAIAgent,
+  addEntityMcpServer,
   createAIAgentWithProfile,
-  deleteServersForRoom,
   editNewAiAgent,
+  removeEntityMcpServer,
 } from "@docspace/shared/api/ai";
 import {
   TAgentIconParams,
@@ -273,17 +272,24 @@ class CreateEditRoomStore {
       const { mcpServers, mcpServersInitial } = newParams;
 
       if (mcpServers && mcpServersInitial) {
+        // Servers are keyed by name in the new-ai model: enabling one for an
+        // agent writes an entry into the agent's per-entity map (the config
+        // is resolved server-side), disabling removes it.
         const deletedServers = mcpServersInitial.filter(
-          (id) => !mcpServers.includes(id),
+          (name) => !mcpServers.includes(name),
         );
         const addedServers = mcpServers.filter(
-          (id) => !mcpServersInitial.includes(id),
+          (name) => !mcpServersInitial.includes(name),
         );
 
-        if (addedServers.length)
-          requests.push(addServersForRoom(agentId!, addedServers));
-        if (deletedServers.length)
-          requests.push(deleteServersForRoom(agentId!, deletedServers));
+        requests.push(
+          ...addedServers.map((name) =>
+            addEntityMcpServer(name, String(agentId!)),
+          ),
+          ...deletedServers.map((name) =>
+            removeEntityMcpServer(name, String(agentId!)),
+          ),
+        );
       }
 
       if (requests.length) {
@@ -319,8 +325,6 @@ class CreateEditRoomStore {
     if (this.isLoading) return;
 
     const agentParams = this.agentParams!;
-
-    const { attachDefaultTools } = agentParams;
 
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
@@ -365,9 +369,10 @@ class CreateEditRoomStore {
 
       logo: undefined as TAgentLogo | undefined,
 
-      ...(typeof attachDefaultTools === "boolean" && {
-        attachDefaultTools,
-      }),
+      // MCP enablement (including the system portal server) is written to
+      // the agent's per-entity map after creation — never let the .NET
+      // service attach servers through the legacy room-links store.
+      attachDefaultTools: false,
     };
 
     const createAgentData: TCreateAgentWithProfileData | TCreateAgentData = {
@@ -397,7 +402,11 @@ class CreateEditRoomStore {
       this.dialogsStore!.setIsNewRoomByCurrentUser(true);
 
       if (agentParams.mcpServers?.length) {
-        addServersForRoom(agent.id, agentParams.mcpServers);
+        await Promise.all(
+          agentParams.mcpServers.map((name) =>
+            addEntityMcpServer(name, String(agent.id)),
+          ),
+        ).catch((err) => toastr.error(err as string));
       }
 
       this.onOpenNewAgent(agent);

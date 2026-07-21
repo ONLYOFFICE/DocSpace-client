@@ -16,18 +16,6 @@
       "line_number": 354,
       "context": "{isShowAdvancedSettings ? (\n <>\n <div className={styles.inputWrapper}>\n <Label\n htmlFor=\"authHeader\"\n text={t(\"Settings:DocumentServiceAuthHeader\")}\n />\n <InputBlock\n id=\"authHeader\"\n type=\"text\"\n autoComplete=\"off\"",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Information.tsx",
-      "line_number": 259,
-      "context": "setCopied(true);\n setTimeout(() => setCopied(false), 1200);\n }}\n />\n </PropertyRow>\n <PropertyRow label={t(\"DocumentServiceAuthHeader\")}>\n <span className={styles.codeChip}>{info.authorizationHeader}</span>\n </PropertyRow>\n <PropertyRow label={t(\"DocsCloud:DocumentServerSecret\")}>\n {info.documentServerSecret ? (\n <>",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Settings.tsx",
-      "line_number": 95,
-      "context": "</span>\n </div>\n <div className={styles.sectionCard}>\n <div className={styles.field}>\n <label className={styles.fieldLabel}>\n {t(\"DocumentServiceAuthHeader\")}\n </label>\n <TextInput\n type={InputType.text}\n value={draft.authorizationHeader}\n onChange={(e) => setField(\"authorizationHeader\", e.target.value)}",
-      "module": "/packages/sdk"
     }
   ],
   "languages": {

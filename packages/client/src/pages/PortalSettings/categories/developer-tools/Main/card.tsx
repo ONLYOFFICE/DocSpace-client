@@ -50,6 +50,7 @@ type CardProps = {
   icon: React.ReactNode;
   isBlank?: boolean;
   ctaUrl?: string;
+  className?: string;
 };
 
 const Card = ({
@@ -61,6 +62,7 @@ const Card = ({
   icon,
   isBlank = false,
   ctaUrl,
+  className,
 }: CardProps) => {
   const navigate = useNavigate();
 
@@ -84,7 +86,7 @@ const Card = ({
 
   return (
     <div
-      className={styles.card}
+      className={className ? `${styles.card} ${className}` : styles.card}
       onClick={handleCardClick}
       style={{ cursor: "pointer" }}
     >

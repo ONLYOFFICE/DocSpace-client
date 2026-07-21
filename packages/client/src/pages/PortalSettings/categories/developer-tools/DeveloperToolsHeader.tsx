@@ -70,6 +70,8 @@ const getSdkPresetTitle = (
 };
 
 const getTitle = (pathname: string, t: (key: string) => string): string => {
+  if (pathname.includes("/developer-tools/docs-connect"))
+    return t("DocsConnect:DocsConnect");
   if (pathname.includes("/developer-tools/api-keys")) return t("Settings:ApiKeys");
   if (pathname.includes("/developer-tools/javascript-sdk/")) {
     const slug = pathname.split("/developer-tools/javascript-sdk/")[1]?.replace(/\/$/, "");
@@ -104,6 +106,7 @@ const DeveloperToolsHeader = () => {
     "Webhooks",
     "OAuth",
     "Common",
+    "DocsConnect",
   ]);
 
   const title = getTitle(location.pathname, t);

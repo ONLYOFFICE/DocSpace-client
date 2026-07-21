@@ -56,6 +56,7 @@ interface WrapperProps {
   walletHelpUrl?: string;
   openOnNewPage?: boolean;
   user?: TPaymentUser;
+  fetchDocsConnectInfo?: () => Promise<unknown>;
 }
 
 const BillingWrapperComponent = ({
@@ -64,6 +65,7 @@ const BillingWrapperComponent = ({
   walletHelpUrl,
   openOnNewPage,
   user,
+  fetchDocsConnectInfo,
 }: WrapperProps) => {
   const location = useLocation();
 
@@ -75,8 +77,16 @@ const BillingWrapperComponent = ({
       user,
       openOnNewPage,
       routes: PAYMENT_ROUTES,
+      onServicesInit: fetchDocsConnectInfo,
     }),
-    [language, logoText, walletHelpUrl, user, openOnNewPage],
+    [
+      language,
+      logoText,
+      walletHelpUrl,
+      user,
+      openOnNewPage,
+      fetchDocsConnectInfo,
+    ],
   );
 
   // Billing pages fetch their own data on mount (self-contained stores),
@@ -106,7 +116,13 @@ const BillingWrapperComponent = ({
 };
 
 export const Component = inject(
-  ({ settingsStore, authStore, userStore, filesSettingsStore }: TStore) => {
+  ({
+    settingsStore,
+    authStore,
+    userStore,
+    filesSettingsStore,
+    docsConnectStore,
+  }: TStore) => {
     const { logoText, walletHelpUrl } = settingsStore;
     const { user } = userStore;
     const { openOnNewPage } = filesSettingsStore;
@@ -115,6 +131,7 @@ export const Component = inject(
       logoText,
       walletHelpUrl,
       openOnNewPage,
+      fetchDocsConnectInfo: docsConnectStore.fetchInfo,
       language: authStore?.language,
       user: user
         ? {

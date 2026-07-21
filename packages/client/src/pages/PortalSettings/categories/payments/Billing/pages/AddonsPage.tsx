@@ -34,38 +34,163 @@
  */
 
 import { inject, observer } from "mobx-react";
+import { useMemo } from "react";
 import { useNavigate } from "react-router";
 
 import { ServicesList } from "@docspace/ui-kit/billing";
+import type { TDocsConnectCardState } from "@docspace/ui-kit/billing/types";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
 import config from "PACKAGE_FILE";
 
+import {
+  getDocsConnectTrialState,
+  isDocsConnectCanceled,
+} from "../../../developer-tools/DocsConnect/utils";
+import BuyPlanPanel from "../../../developer-tools/DocsConnect/BuyPlanPanel";
+import CancelPlanDialog from "../../../developer-tools/DocsConnect/CancelPlanDialog";
+import DocsConnectGetStartedModal from "../../SaaS/DocsConnectGetStartedModal";
+import { PAYMENT_ROUTES } from "../../utils";
+
 interface AddonsPageProps {
   getAIConfig?: () => Promise<void>;
+  docsConnectInfo?: TDocsConnectInfo | null;
+  getStartedVisible?: boolean;
+  openGetStarted?: () => void;
+  closeGetStarted?: () => void;
+  openBuyPlan?: (mode: "trial" | "edit") => void;
+  buyPlanPanelVisible?: boolean;
+  openCancelPlanDialog?: () => void;
+  cancelPlanDialogVisible?: boolean;
 }
 
-const AddonsPage = ({ getAIConfig }: AddonsPageProps) => {
+const AddonsPage = (props: AddonsPageProps) => {
+  const {
+    getAIConfig,
+    docsConnectInfo,
+    getStartedVisible,
+    openGetStarted,
+    closeGetStarted,
+    openBuyPlan,
+    buyPlanPanelVisible,
+    openCancelPlanDialog,
+    cancelPlanDialogVisible,
+  } = props;
   const navigate = useNavigate();
 
+  const navigateToRoute = (route: string) =>
+    navigate(
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, route),
+    );
+
+  const onDocsConnectClick = () => {
+    if (docsConnectInfo) {
+      navigateToRoute(PAYMENT_ROUTES.docsConnect);
+      return;
+    }
+    openGetStarted?.();
+  };
+
+  const onDocsConnectToggle = () => {
+    if (!docsConnectInfo) {
+      openGetStarted?.();
+      return;
+    }
+
+    const { isTrial, expired, isPaid } =
+      getDocsConnectTrialState(docsConnectInfo);
+
+    if (isTrial && expired) {
+      openBuyPlan?.("trial");
+      return;
+    }
+
+    if (docsConnectInfo.deactivated || isDocsConnectCanceled(docsConnectInfo)) {
+      openBuyPlan?.("edit");
+      return;
+    }
+
+    if (isPaid) openCancelPlanDialog?.();
+  };
+
+  const docsConnectCardState = useMemo<TDocsConnectCardState>(() => {
+    if (!docsConnectInfo)
+      return {
+        subscribed: false,
+        isTrial: false,
+        trialDaysLeft: 0,
+        trialEndingSoon: false,
+        trialExpired: false,
+        trialEndDate: "",
+        tariffPrice: 0,
+        tariffUsers: 0,
+        scheduledUsers: null,
+        scheduledDate: "",
+        deactivated: false,
+        canceled: false,
+      };
+
+    const { isTrial, daysLeft, totalDays, expired, endDate } =
+      getDocsConnectTrialState(docsConnectInfo);
+    const trialExpired = isTrial && expired;
+    const trialEndingSoon =
+      isTrial && !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
+
+    const tariffUsers = docsConnectInfo.tenant?.payment?.quantity ?? 0;
+    const pricePerUser =
+      (docsConnectInfo.prices?.pricePerUser ?? 0) +
+      (docsConnectInfo.devPackEnabled
+        ? (docsConnectInfo.prices?.devPackPrice ?? 0)
+        : 0);
+
+    return {
+      subscribed: true,
+      isTrial,
+      trialDaysLeft: daysLeft,
+      trialEndingSoon,
+      trialExpired,
+      trialEndDate: endDate,
+      tariffPrice: tariffUsers * pricePerUser,
+      tariffUsers,
+      scheduledUsers: docsConnectInfo.scheduledChange?.nextUsers ?? null,
+      scheduledDate: docsConnectInfo.scheduledChange?.dueDate ?? "",
+      deactivated: docsConnectInfo.deactivated ?? false,
+      canceled: isDocsConnectCanceled(docsConnectInfo),
+    };
+  }, [docsConnectInfo]);
+
   return (
-    <ServicesList
-      getAIConfig={getAIConfig}
-      onOpenSupportedModels={() =>
-        navigate(
-          combineUrl(
-            window.ClientConfig?.proxy?.url,
-            config.homepage,
-            "/portal-settings/ai-settings/ai-models",
-          ),
-        )
-      }
-    />
+    <>
+      <ServicesList
+        getAIConfig={getAIConfig}
+        onDocsConnectClick={onDocsConnectClick}
+        onDocsConnectToggle={onDocsConnectToggle}
+        docsConnectState={docsConnectCardState}
+        onOpenSupportedModels={() =>
+          navigateToRoute("/portal-settings/ai-settings/ai-models")
+        }
+      />
+      <DocsConnectGetStartedModal
+        visible={getStartedVisible ?? false}
+        onClose={() => closeGetStarted?.()}
+      />
+      {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
+      {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
+    </>
   );
 };
 
-export const Component = inject(({ settingsStore }: TStore) => ({
+export const Component = inject(({ settingsStore, docsConnectStore }: TStore) => ({
   getAIConfig: settingsStore.getAIConfig,
+  docsConnectInfo: docsConnectStore.info,
+  getStartedVisible: docsConnectStore.getStartedVisible,
+  openGetStarted: docsConnectStore.openGetStarted,
+  closeGetStarted: docsConnectStore.closeGetStarted,
+  openBuyPlan: docsConnectStore.openBuyPlan,
+  buyPlanPanelVisible: docsConnectStore.buyPlanPanelVisible,
+  openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
+  cancelPlanDialogVisible: docsConnectStore.cancelPlanDialogVisible,
 }))(observer(AddonsPage));
 
 export default Component;

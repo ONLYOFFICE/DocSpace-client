@@ -35,11 +35,16 @@
 
 import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
+
+import { getDocsConnectTrialState } from "../../developer-tools/DocsConnect/utils";
 
 import styles from "./BillingHeader.module.scss";
 
@@ -56,6 +61,8 @@ const getTitle = (pathname: string, t: (key: string) => string): string => {
   if (pathname.includes("/billing/addons/backup")) return t("Common:Backup");
   if (pathname.includes("/billing/addons/disk-storage"))
     return t("Common:Storage");
+  if (pathname.includes("/billing/addons/docs-connect"))
+    return t("DocsConnect:DocsConnect");
   if (pathname.includes("/billing/addons")) return t("Common:Addons");
   return t("Common:Billing");
 };
@@ -68,13 +75,28 @@ const isSubPage = (pathname: string): boolean => {
   return segments.length > 2;
 };
 
-const BillingHeader = () => {
+interface BillingHeaderProps {
+  docsConnectInfo?: TDocsConnectInfo | null;
+}
+
+const BillingHeader = ({ docsConnectInfo }: BillingHeaderProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "DocsConnect"]);
 
   const title = getTitle(location.pathname, t);
   const showBackButton = isSubPage(location.pathname);
+
+  const isDocsConnectPage = location.pathname.includes(
+    "/billing/addons/docs-connect",
+  );
+  const {
+    endDate: docsConnectEndDate,
+    isPaid: docsConnectPaid,
+    expired: docsConnectExpired,
+    daysLeft: docsConnectDaysLeft,
+  } = getDocsConnectTrialState(docsConnectInfo ?? null);
+  const docsConnectTrialLow = !docsConnectExpired && docsConnectDaysLeft <= 14;
 
   const onBackToParent = () => {
     navigate(-1);
@@ -95,8 +117,22 @@ const BillingHeader = () => {
       <Heading type="content" truncate>
         {title}
       </Heading>
+      {isDocsConnectPage && docsConnectEndDate && !docsConnectPaid ? (
+        <span
+          className={classNames(styles.docsConnectTrialBadge, {
+            [styles.docsConnectTrialBadgeWarning]: docsConnectTrialLow,
+            [styles.docsConnectTrialBadgeExpired]: docsConnectExpired,
+          })}
+        >
+          {docsConnectExpired
+            ? t("Common:TrialExpired")
+            : t("Common:FreeDaysLeft", { count: docsConnectDaysLeft })}
+        </span>
+      ) : null}
     </div>
   );
 };
 
-export default BillingHeader;
+export default inject(({ docsConnectStore }: TStore) => ({
+  docsConnectInfo: docsConnectStore.info,
+}))(observer(BillingHeader));

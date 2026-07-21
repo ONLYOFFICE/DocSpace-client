@@ -43,4 +43,3 @@ const PaymentsPage = () => {
 };
 
 export const Component = PaymentsPage;
-

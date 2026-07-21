@@ -171,7 +171,6 @@ const ClientContent = (props) => {
     location.pathname.startsWith("/ai-rooms") ||
     location.pathname.startsWith("/ai-forms") ||
     location.pathname.startsWith("/agents") ||
-    location.pathname.startsWith("/docs-cloud") ||
     location.pathname.startsWith("/ai-arbiter") ||
     location.pathname.startsWith("/dashboard");
   const withMainButton =

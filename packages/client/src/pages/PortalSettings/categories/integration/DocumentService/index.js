@@ -38,6 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Link } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -62,6 +63,7 @@ const DocumentService = ({
   documentServiceSettingsUrl,
   initialDocumentServiceData,
   showPortalSettingsLoader,
+  apiBasicLink,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -265,6 +267,27 @@ const DocumentService = ({
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>
+        <div className={styles.docsConnectPromo}>
+          <div className={styles.docsConnectPromoText}>
+            <Text className={styles.docsConnectPromoTitle}>
+              {t("Settings:DocsConnectPromoTitle")}
+            </Text>
+            <Text className={styles.docsConnectPromoDescription}>
+              {t("Settings:DocsConnectPromoDescription", {
+                organizationName: getBrandName("OrganizationName"),
+                editorsName: getBrandName("ProductEditorsName"),
+              })}
+            </Text>
+          </div>
+          <Button
+            className={styles.docsConnectPromoButton}
+            size={ButtonSize.small}
+            primary
+            label={t("Common:LearnMore")}
+            onClick={() => window.open(apiBasicLink, "_blank")}
+          />
+        </div>
+
         <div className={styles.formInputs}>
           <div className={styles.inputWrapper}>
             <Label
@@ -454,6 +477,7 @@ export default inject(
       currentColorScheme,
       documentServiceSettingsUrl,
       currentDeviceType,
+      apiBasicLink,
     } = settingsStore;
     const {
       changeDocumentServiceLocation,
@@ -468,6 +492,7 @@ export default inject(
       currentDeviceType,
       showPortalSettingsLoader,
       initialDocumentServiceData,
+      apiBasicLink,
     };
   },
 )(observer(DocumentService));

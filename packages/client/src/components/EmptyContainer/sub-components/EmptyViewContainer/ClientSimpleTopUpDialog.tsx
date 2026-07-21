@@ -45,6 +45,8 @@ type ClientSimpleTopUpDialogProps = {
   onClose: () => void;
   onConfirm?: () => Promise<void> | void;
   language?: string;
+  service?: string;
+  minValue?: string;
 };
 
 const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
@@ -52,6 +54,8 @@ const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
   onClose,
   onConfirm,
   language = "en",
+  service = "ai",
+  minValue,
 }) => {
   const { paymentApi } = useApi();
 
@@ -92,7 +96,8 @@ const ClientSimpleTopUpDialog: React.FC<ClientSimpleTopUpDialogProps> = ({
       visible={visible}
       onClose={onClose}
       onConfirm={onConfirm}
-      service="ai"
+      service={service || undefined}
+      minValue={minValue}
       isFirstTopUp={store.paymentStore.isCardMissingOrInactive}
       paymentApi={paymentApi}
       formatWalletCurrency={formatWalletCurrency}

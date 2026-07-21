@@ -57,6 +57,7 @@ import * as backup from "./backup";
 import * as ai from "./ai";
 import * as apps from "./apps";
 import * as privacy from "./privacy";
+import * as docsConnect from "./docs-connect";
 
 export default {
   Filter,
@@ -81,4 +82,5 @@ export default {
   ai,
   apps,
   privacy,
+  docsConnect,
 };

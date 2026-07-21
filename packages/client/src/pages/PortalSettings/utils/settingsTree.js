@@ -635,6 +635,13 @@ export const settingsTree = [
             link: "ai-search",
             tKey: "Common:AISearch",
           },
+          {
+            id: "portal-settings_catalog-services-docs-connect",
+            key: "10-3-4",
+            icon: "",
+            link: "docs-connect",
+            tKey: "DocsConnect:DocsConnect",
+          },
         ],
       },
     ],
@@ -783,4 +790,3 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
-

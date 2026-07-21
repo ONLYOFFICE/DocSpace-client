@@ -127,6 +127,13 @@ export const generalClientRoutes = [
           ).then((m) => ({ Component: m.default })),
       },
       {
+        path: "docs-connect/:tab?",
+        lazy: () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect"
+          ).then((m) => ({ Component: m.default })),
+      },
+      {
         path: "api-keys",
         lazy: () =>
           import(
@@ -366,6 +373,16 @@ export const generalClientRoutes = [
       },
       {
         path: "addons/disk-storage",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/payments/Billing/pages/ServicePage"
+              ),
+          ),
+      },
+      {
+        path: "addons/docs-connect",
         lazy: () =>
           componentLoader(
             () =>

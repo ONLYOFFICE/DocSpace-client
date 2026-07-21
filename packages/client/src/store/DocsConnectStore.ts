@@ -251,7 +251,12 @@ class DocsConnectStore {
     }, signal);
 
     await pollUntil(async () => {
-      const info = await getDocsConnectInfo(true);
+      let info: Nullable<TDocsConnectInfo> = null;
+      try {
+        info = await getDocsConnectInfo(true);
+      } catch {
+        return false;
+      }
       const activated =
         !!info &&
         isDocsConnectPaid(info) &&

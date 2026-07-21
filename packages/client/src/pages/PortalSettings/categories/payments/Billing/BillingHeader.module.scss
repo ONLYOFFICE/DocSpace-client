@@ -34,6 +34,7 @@
  */
 
 @use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .styledHeader {
   display: flex;
@@ -48,4 +49,28 @@
       @include mixins.flip-in-rtl;
     }
   }
+}
+
+.docsConnectTrialBadge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  margin-inline-start: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: $light-status-positive;
+  border: 1px solid color-mix(in srgb, #{$light-status-positive} 40%, transparent);
+}
+
+.docsConnectTrialBadgeWarning {
+  color: $light-status-warning;
+  border-color: color-mix(in srgb, #{$light-status-warning} 40%, transparent);
+}
+
+.docsConnectTrialBadgeExpired {
+  color: $light-error-status;
+  border-color: color-mix(in srgb, #{$light-error-status} 40%, transparent);
 }

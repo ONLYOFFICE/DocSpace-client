@@ -98,6 +98,7 @@ newInstance
       "Translations",
       "FormFillingTipsDialog",
       "Settings",
+      "DocsConnect",
     ],
 
     backend: {

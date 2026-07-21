@@ -226,9 +226,7 @@ const RoomsItemHeader = ({
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
   const canDownloadHistory =
-    isRoom &&
-    roomType === RoomsType.VirtualDataRoom &&
-    roomsView === InfoPanelView.infoHistory;
+    isRoom && roomsView === InfoPanelView.infoHistory;
 
   const onDownloadHistory = () => {
     if (isRoomHistoryReportDownloading) return;

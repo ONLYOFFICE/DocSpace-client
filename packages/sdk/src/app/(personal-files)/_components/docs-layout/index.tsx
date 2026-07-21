@@ -596,7 +596,6 @@ const DocsLayoutCore = observer(
                                           infoPanelStore.toggle
                                         }
                                         headerOffset={headerOffset}
-                                        aiChatButton={ai?.chatButton}
                                       />
                                     }
                                     stickyTableHeader
@@ -833,14 +832,9 @@ const DocsLayoutCore = observer(
                                     isFirstLoad: boolean,
                                     _isSelectedParentFolder: boolean,
                                     _selectedItemId:
-                                      | string
-                                      | number
-                                      | undefined,
+                                      string | number | undefined,
                                     _selectedItemType:
-                                      | "rooms"
-                                      | "files"
-                                      | "agents"
-                                      | undefined,
+                                      "rooms" | "files" | "agents" | undefined,
                                     isRoot: boolean,
                                   ) => isFirstLoad || isRoot}
                                   onCancel={closeSelectorDialog}

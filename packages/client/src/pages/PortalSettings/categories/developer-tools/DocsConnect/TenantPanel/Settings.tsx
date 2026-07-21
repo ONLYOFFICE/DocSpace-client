@@ -385,13 +385,19 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
         </div>
       ) : null}
 
-      <div>
+      <div className={styles.addRuleAction}>
         <Button
           primary
           size={ButtonSize.small}
           label={t("DocsConnect:AddRule")}
           isDisabled={isBusy}
           onClick={() => setAddRuleDialogVisible(true)}
+        />
+        <Button
+          size={ButtonSize.small}
+          label={t("Common:Reset")}
+          isDisabled={isBusy || rules.length === 0}
+          onClick={() => persistRules([])}
         />
       </div>
 

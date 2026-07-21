@@ -605,7 +605,6 @@
   "CurrentMonthToDateSpend": "Potrošnja od početka tekućeg meseca do danas",
   "CurrentPassphrase": "Trenutna lozinka",
   "CurrentPassphraseRequired": "Trenutna lozinka je obavezna",
-  "CurrentPaymentMonth": "Trenutno plaćanje: {{price}}/mesečno ({{size}})",
   "CurrentPlan": "Trenutni plan",
   "CurrentSubscription": "Trenutna pretplata",
   "Custom": "Prilagođeni",

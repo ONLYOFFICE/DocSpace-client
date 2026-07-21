@@ -89,8 +89,12 @@ const AIAgentViewComponent = (props: Props) => {
     <>
       {shouldRenderChat ? (
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
+          {/* `chat-container` reuses the Section rule that drops the body's
+              vertical padding while a chat is visible (see Section.module.scss,
+              `:has(.chat-container...)`) — without it the 19px top padding
+              shows up as a gap between the tabs and the chat. */}
           <div
-            className={styles.aiAgentChat}
+            className={`${styles.aiAgentChat} chat-container`}
             data-chat-active={currentView === "chat" ? "" : undefined}
           >
             <NewChat isAgent aiReady={aiReady} noAccessProps={noAccessProps} />

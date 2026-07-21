@@ -286,6 +286,27 @@ const useEditorEvents = ({
         let aiAvailable = false;
         const modelProfileMap = new Map<string, string>();
 
+        // The host posts callEditorTool as soon as we signal document
+        // readiness, but the editor's AI plugin attaches its ai_onCallTool
+        // handler only once its Actions are initialized (whenAiReady).
+        // Queue early calls and flush them when the plugin is ready so
+        // they aren't dispatched into the void.
+        let aiActionsReady = false;
+        const pendingEditorToolCalls: Array<{
+          name: string;
+          arguments: Record<string, unknown>;
+        }> = [];
+        const markAiActionsReady = () => {
+          aiActionsReady = true;
+          const pending = pendingEditorToolCalls.splice(0);
+          if (pending.length) {
+            console.log(
+              `[doceditor] AI actions ready, flushing ${pending.length} queued tool call(s)`,
+            );
+          }
+          pending.forEach((call) => connector.sendEvent("ai_onCallTool", call));
+        };
+
         const isEncrypted = !!config?.file?.encrypted;
 
         if (successAuth && !isEncrypted) {
@@ -346,6 +367,7 @@ const useEditorEvents = ({
                   } satisfies ServerAPIConfig,
                 });
                 fireGenerationToolCall();
+                markAiActionsReady();
               });
             } else {
               const profiles = await getProfilesList();
@@ -394,6 +416,7 @@ const useEditorEvents = ({
                     actions,
                   });
                   fireGenerationToolCall();
+                  markAiActionsReady();
                 });
 
                 connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
@@ -441,10 +464,15 @@ const useEditorEvents = ({
           if (typeof name !== "string") return;
 
           if (aiAvailable) {
-            connector.sendEvent("ai_onCallTool", {
-              name,
-              arguments: args ?? {},
-            });
+            const call = { name, arguments: args ?? {} };
+            if (aiActionsReady) {
+              connector.sendEvent("ai_onCallTool", call);
+            } else {
+              console.log(
+                `[doceditor] AI plugin not ready yet, queueing tool call "${name}"`,
+              );
+              pendingEditorToolCalls.push(call);
+            }
             hostWindow?.postMessage(
               { type: "editorToolResult", callId, result: "" },
               "*",

@@ -134,6 +134,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
     agentEntityId,
+    isInsideAgentRoom,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -623,6 +624,16 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const composerHeader = useMemo(() => <AIActivationBanner />, []);
 
+  // AI chat host callbacks. Web Search settings save on an explicit button
+  // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
+  const aiChatCallbacks = useMemo(
+    () => ({
+      onWebSearchSaved: () =>
+        toastr.success(t("Common:ChangesSavedSuccessfully")),
+    }),
+    [t],
+  );
+
   // Defer mounting AiAgentProviders until authStore is loaded — otherwise
   // `standalone` flips after the first render, the providers' useMemo
   // rebuilds the chat stores, and StoresHydrator refires every fetch
@@ -635,7 +646,9 @@ const Shell = ({ page = "home", ...rest }) => {
           theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
           isStandalone={standalone}
           isAvailable={isAiChatAvailable}
+          callbacks={aiChatCallbacks}
           entityId={agentEntityId}
+          hideProfilePicker={isInsideAgentRoom}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}
@@ -776,13 +789,17 @@ const ShellWrapper = inject(
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
-      // Scope the chat to the current agent only when we're inside an AI agent
-      // room (or one of its subfolders). Anywhere else — including the AI Agents
-      // root listing and non-agent contexts — the chat stays unscoped
-      // (entityId === undefined).
-      agentEntityId: selectedFolderStore.isAIRoom
-        ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
-        : undefined,
+      // Scope the chat to the current location: inside any room (including
+      // its subfolders) the room id wins, elsewhere the currently selected
+      // folder id is used. Only when nothing is selected yet does the chat
+      // stay unscoped (entityId === undefined).
+      agentEntityId:
+        selectedFolderStore.rootRoomId || selectedFolderStore.id
+          ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
+          : undefined,
+      // The composer model picker is hidden only where the model is fixed
+      // by the agent's assigned profile — inside AI agent rooms.
+      isInsideAgentRoom: selectedFolderStore.isAIRoom,
       getAgentRoomId: () => {
         const id = selectedFolderStore.rootRoomId;
         return id ? Number(id) : null;

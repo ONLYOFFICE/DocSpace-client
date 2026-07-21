@@ -596,7 +596,6 @@
   "CurrentMonthToDateSpend": "Δαπάνες τρέχοντος μήνα έως σήμερα",
   "CurrentPassphrase": "Τρέχουσα κωδική φράση",
   "CurrentPassphraseRequired": "Απαιτείται η τρέχουσα κωδική φράση",
-  "CurrentPaymentMonth": "Τρέχουσα πληρωμή: {{price}}/μήνα ({{size}})",
   "CurrentPlan": "Τρέχον πρόγραμμα",
   "CurrentSubscription": "Τρέχουσα συνδρομή",
   "Custom": "Προσαρμοσμένα",

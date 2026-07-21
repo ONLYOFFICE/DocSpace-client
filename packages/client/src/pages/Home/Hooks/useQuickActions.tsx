@@ -37,6 +37,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
+import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import {
   BlankPdfIcon,
@@ -51,6 +53,7 @@ import {
   QuickFormRoomIcon,
   CreateFromTemplateIcon,
   CreateAgentIcon,
+  AIChatIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { RoomsType } from "@docspace/ui-kit/enums";
@@ -177,7 +180,19 @@ export const useQuickActions = (
     ...sectionFlags
   } = props;
 
+  const openChat = useOpenAiChat();
+
   const section = getQuickActionsSection(sectionFlags);
+
+  const aiChatItems = React.useMemo<QuickActionItem>(
+    () => ({
+      id: "quick-ai-chat",
+      icon: <AIChatIcon />,
+      label: t("Common:AIChat"),
+      onClick: openChat,
+    }),
+    [t, openChat],
+  );
 
   const fileItems = React.useMemo<QuickActionItem[]>(
     () => [
@@ -205,8 +220,9 @@ export const useQuickActions = (
         label: getConstName("PDF"),
         onClick: () => dispatchCreate(currentFolderId, "pdf", t),
       },
+      aiChatItems,
     ],
-    [t, currentFolderId],
+    [t, currentFolderId, aiChatItems],
   );
 
   const roomItems = React.useMemo<QuickActionItem[]>(
@@ -246,8 +262,9 @@ export const useQuickActions = (
         label: t("Files:RoomTemplate"),
         onClick: () => goTemplates(userId),
       },
+      aiChatItems,
     ],
-    [t, currentFolderId, userId],
+    [t, currentFolderId, userId, aiChatItems],
   );
 
   const formItems = React.useMemo<QuickActionItem[]>(
@@ -266,8 +283,9 @@ export const useQuickActions = (
         label: t("Common:FromTemplate"),
         onClick: () => goFormsTemplates(userId),
       },
+      aiChatItems,
     ],
-    [t, currentFolderId, userId],
+    [t, currentFolderId, userId, aiChatItems],
   );
 
   // Inside a Form Filling room only PDF forms can be created. A blank PDF form
@@ -297,6 +315,8 @@ export const useQuickActions = (
       });
     }
 
+    items.push(aiChatItems);
+
     return items;
   }, [
     t,
@@ -304,6 +324,7 @@ export const useQuickActions = (
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
+    aiChatItems,
   ]);
 
   const agentItems = React.useMemo<QuickActionItem[]>(
@@ -339,4 +360,3 @@ export const useQuickActions = (
 };
 
 export default useQuickActions;
-

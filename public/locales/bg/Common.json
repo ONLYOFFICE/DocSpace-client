@@ -596,7 +596,6 @@
   "CurrentMonthToDateSpend": "Разходи от началото на текущия месец до момента",
   "CurrentPassphrase": "Текуща паролна фраза",
   "CurrentPassphraseRequired": "Необходима е текущата паролна фраза",
-  "CurrentPaymentMonth": "Текущо плащане: {{price}}/месец ({{size}})",
   "CurrentPlan": "Текущ план",
   "CurrentSubscription": "Текукция абонамент",
   "Custom": "Персонализиран",

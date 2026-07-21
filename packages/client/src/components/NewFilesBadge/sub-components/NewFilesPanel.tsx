@@ -231,6 +231,7 @@ export const NewFilesPanelComponent = ({
       <div
         className={classNames(styles.panel, "new-files-panel")}
         style={panelStyle}
+        onClick={(e) => e.stopPropagation()}
       >
         <Scrollbar autoFocus>{content}</Scrollbar>
         {markAsReadButton}

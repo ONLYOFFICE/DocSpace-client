@@ -28,6 +28,6 @@
   "overrides": {
     "fast-uri": "^3.1.2",
     "ws": "^8.21.0",
-    "brace-expansion": "^5.0.6"
+    "brace-expansion": "^5.0.7"
   }
 }

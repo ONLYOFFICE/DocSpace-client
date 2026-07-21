@@ -460,7 +460,7 @@ jobs:
     name: "Client e2e tests"
     runs-on: ubuntu-latest
     needs: [changes, static-analysis-and-tests]
-    if: needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true'
+    if: always() && (needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
       - name: Add known hosts

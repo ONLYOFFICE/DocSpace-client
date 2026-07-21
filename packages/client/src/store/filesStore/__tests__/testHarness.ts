@@ -69,6 +69,7 @@ vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
   // Real signature is `resolveDisplayTitle({ id, title, encrypted })` → string.
   // Echo the plaintext title so title-dependent mapping stays deterministic.
   resolveDisplayTitle: ({ title }: { title?: string }) => title,
+  rememberEncryptedFilename: vi.fn(),
 }));
 
 // Encryption/private-room services are import-safe (no top-level side effects)
@@ -110,6 +111,15 @@ vi.mock("@docspace/ui-kit/components/toast", () => ({
 
 // eslint-disable-next-line import/first
 import FilesStore from "../../FilesStore";
+// eslint-disable-next-line import/first
+import {
+  fakeAiRoomStore,
+  fakeFilesSettingsStore,
+  fakeSelectedFolderStore,
+  fakeSettingsStore,
+  fakeTreeFoldersStore,
+  fakeUserStore,
+} from "../../__tests__/sharedFakes";
 
 /**
  * Overridable fakes for the 14 constructor dependencies. Each defaults to a
@@ -135,45 +145,9 @@ export type FakeStores = {
 
 const defaultFakes = (): FakeStores => ({
   authStore: { currentQuotaStore: {} },
-  selectedFolderStore: {
-    id: 1,
-    navigationPath: [],
-    security: {},
-    isRoom: false,
-    isIndexedFolder: false,
-    filesCount: 0,
-    foldersCount: 0,
-    setSelectedFolder: vi.fn(),
-    setFilesCount: vi.fn(),
-    setFoldersCount: vi.fn(),
-  },
-  treeFoldersStore: {
-    treeFolders: [],
-    fetchTreeFolders: vi.fn(),
-    updateTreeFoldersItem: vi.fn(),
-    setSelectedNode: vi.fn(),
-    isMy: () => false,
-    isRecycleBinFolder: false,
-    isArchiveFolder: false,
-    isRecentFolder: false,
-    isFavoritesFolder: false,
-    isPrivacyFolder: false,
-    isAIAgentsFolder: false,
-    sharedWithMeFolderId: undefined,
-    // Distinct sentinels: in production these are real folder ids, so keeping
-    // them non-undefined avoids `undefined === undefined` matches in handlers
-    // that compare socket payload ids against them.
-    recentFolderId: -101,
-    favoritesFolderId: -102,
-  },
-  filesSettingsStore: {
-    getIcon: () => "icon.svg",
-    extsWebEdited: [],
-    extsWebCustomFilterEditing: [],
-    extsImagePreviewed: [],
-    extsMediaPreviewed: [],
-    organizeRoomsGrouping: false,
-  },
+  selectedFolderStore: fakeSelectedFolderStore(),
+  treeFoldersStore: fakeTreeFoldersStore(),
+  filesSettingsStore: fakeFilesSettingsStore(),
   thirdPartyStore: {
     providers: [],
     getThirdPartyIcon: () => "third-party-icon.svg",
@@ -197,21 +171,14 @@ const defaultFakes = (): FakeStores => ({
     isPublicRoom: false,
     getExternalLinks: vi.fn(async () => {}),
   },
-  userStore: {
-    user: { id: "user-1", isAdmin: false },
-    encryptionKeys: [],
-  },
+  userStore: fakeUserStore(),
   currentTariffStatusStore: {},
-  settingsStore: { enablePlugins: false, isFrame: false, isDesktopClient: false },
+  settingsStore: fakeSettingsStore(),
   indexingStore: {
     isIndexEditingMode: false,
     setIsIndexEditingMode: vi.fn(),
   },
-  aiRoomStore: {
-    setKnowledgeId: vi.fn(),
-    setResultId: vi.fn(),
-    setCurrentTab: vi.fn(),
-  },
+  aiRoomStore: fakeAiRoomStore(),
 });
 
 /**

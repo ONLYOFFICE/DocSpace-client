@@ -64,7 +64,7 @@ export const getI18NInstance = (lng: string) => {
           return value;
         },
       },
-      ns: ["Common", "DocsCloud"],
+      ns: ["Common"],
       defaultNS: "Common",
       react: {
         useSuspense: false,

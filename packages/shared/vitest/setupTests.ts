@@ -129,6 +129,11 @@ vi.mock("react-i18next", () => ({
   // not throw "No export is defined on the mock".
   initReactI18next: { type: "3rdParty", init: () => {} },
   I18nextProvider: ({ children }: { children: React.ReactNode }) => children,
+  getI18n: () => ({
+    t: (key: string) => key,
+    language: "en",
+    changeLanguage: () => Promise.resolve(),
+  }),
 }));
 
 vi.mock("../utils/image-helpers", () => ({

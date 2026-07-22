@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+"use client";
+
 import { useCallback, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -52,10 +54,10 @@ import type {
 } from "@docspace/shared/services/encryption/types";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
+import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
-import { RecoveryPhraseInputModal } from "../modals/RecoveryPhraseInputModal";
 
-import { getEncryptionErrorMessage } from "./getEncryptionErrorMessage";
+import { RecoveryPhraseInputModal } from "./RecoveryPhraseInputModal";
 
 type Step = "idle" | "phrase" | "new-passphrase";
 

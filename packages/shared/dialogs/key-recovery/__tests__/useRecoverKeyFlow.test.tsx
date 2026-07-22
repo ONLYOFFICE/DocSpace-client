@@ -51,7 +51,7 @@ vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
     return null;
   },
 }));
-vi.mock("../../modals/RecoveryPhraseInputModal", () => ({
+vi.mock("../RecoveryPhraseInputModal", () => ({
   RecoveryPhraseInputModal: (props: Record<string, unknown>) => {
     captured.phrase = props;
     useEffect(() => () => {

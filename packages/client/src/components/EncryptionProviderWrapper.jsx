@@ -50,7 +50,10 @@ import {
   clearGhostStateHandler,
 } from "@docspace/shared/services/encryption/ghost-state-notifier";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
-import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
+import {
+  PassphraseModal,
+  usePasskeyUnlock,
+} from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { Link } from "@docspace/ui-kit/components/link";
@@ -229,7 +232,10 @@ const PassphraseUnlockAdapter = inject(({ userStore }) => ({
         onClosed: handleRecoveryClosed,
       });
 
+      const passkey = usePasskeyUnlock(userId, onUnlocked);
+
       const handleForgotPassphrase = () => {
+        passkey.abort();
         if (recover.available) {
           setIsRecovering(true);
           recover.request();
@@ -252,6 +258,8 @@ const PassphraseUnlockAdapter = inject(({ userStore }) => ({
           onForgotPassphrase={handleForgotPassphrase}
           submitLabel={t("Common:Confirm")}
           showRememberDevice
+          onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}
+          isPasskeyUnlocking={passkey.isUnlocking}
         />
       );
     },

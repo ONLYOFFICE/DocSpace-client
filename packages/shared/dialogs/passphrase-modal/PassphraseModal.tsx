@@ -76,6 +76,8 @@ type PassphraseModalProps = {
   onForgotPassphrase?: () => void;
   submitLabel?: string;
   showRememberDevice?: boolean;
+  onPasskeyUnlock?: () => void;
+  isPasskeyUnlocking?: boolean;
 };
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
@@ -107,6 +109,8 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   onForgotPassphrase,
   submitLabel,
   showRememberDevice = false,
+  onPasskeyUnlock,
+  isPasskeyUnlocking = false,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<PasswordInputHandle>(null);
@@ -126,6 +130,17 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       setRememberDevice(false);
     }
   }, [visible]);
+
+  const passkeyAutoTriedRef = useRef(false);
+  useEffect(() => {
+    if (!visible) {
+      passkeyAutoTriedRef.current = false;
+      return;
+    }
+    if (isNew || !onPasskeyUnlock || passkeyAutoTriedRef.current) return;
+    passkeyAutoTriedRef.current = true;
+    onPasskeyUnlock();
+  }, [visible, isNew, onPasskeyUnlock]);
 
   const handleGeneratePassword = useCallback((e: React.MouseEvent) => {
     inputRef.current?.onGeneratePassword(e);
@@ -305,6 +320,24 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   label={t("Common:RememberDeviceLabel")}
                   tabIndex={4}
                 />
+              </div>
+            ) : null}
+
+            {onPasskeyUnlock && !isNew ? (
+              <div className={styles.passkeyRow}>
+                <Link
+                  type={LinkType.action}
+                  fontWeight="600"
+                  fontSize="12px"
+                  isHovered
+                  onClick={() => {
+                    if (!isLoading && !isPasskeyUnlocking) onPasskeyUnlock();
+                  }}
+                  dataTestId="passkey_unlock_link"
+                  tabIndex={2}
+                >
+                  {t("Common:PasskeyUnlockButton")}
+                </Link>
               </div>
             ) : null}
           </div>

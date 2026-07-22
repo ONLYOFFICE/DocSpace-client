@@ -50,7 +50,10 @@ import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
-import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
+import {
+  PassphraseModal,
+  usePasskeyUnlock,
+} from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 
@@ -95,7 +98,10 @@ const PassphraseUnlockAdapter = ({
     onClosed: handleRecoveryClosed,
   });
 
+  const passkey = usePasskeyUnlock(userId, onUnlocked);
+
   const handleForgotPassphrase = () => {
+    passkey.abort();
     if (recover.available) {
       setIsRecovering(true);
       recover.request();
@@ -118,6 +124,8 @@ const PassphraseUnlockAdapter = ({
       onForgotPassphrase={handleForgotPassphrase}
       submitLabel={t("Common:Confirm")}
       showRememberDevice
+      onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}
+      isPasskeyUnlocking={passkey.isUnlocking}
     />
   );
 };

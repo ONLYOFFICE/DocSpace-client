@@ -34,3 +34,5 @@
  */
 
 export { PassphraseModal, default } from "./PassphraseModal";
+export { usePasskeyUnlock } from "./usePasskeyUnlock";
+export type { PasskeyUnlock } from "./usePasskeyUnlock";

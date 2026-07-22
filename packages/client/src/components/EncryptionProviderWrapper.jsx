@@ -52,10 +52,9 @@ import {
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
+import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { Link } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
-
-import { useRecoverKeyFlow } from "../pages/Profile/Section/Body/sub-components/keys-management/flows/useRecoverKeyFlow";
 
 const FilenameRecoveryEffect = inject(({ filesStore }) => ({
   recover: filesStore?.recoverEncryptedFilenamesForCurrentView,

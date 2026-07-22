@@ -130,10 +130,11 @@ const GhostStateToastEffect = () => {
 
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
-const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
+const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
   isPrivate: selectedFolderStore?.private,
+  accountKeysCount: userStore?.encryptionKeys?.length ?? 0,
 }))(
-  observer(({ isPrivate }) => {
+  observer(({ isPrivate, accountKeysCount }) => {
     const { hasConfiguredKey } = useEncryption();
     const { t } = useTranslation(["Common"]);
 
@@ -145,28 +146,40 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
         sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
       } catch {}
 
+      const setupLink = (
+        <Link
+          key="setup"
+          tag="a"
+          isHovered
+          color="accent"
+          onClick={() => {
+            toastr.clear();
+            window.location.href = "/profile/keys-management";
+          }}
+        />
+      );
+
+      // With 2+ registered keys and no per-device preference the account DOES
+      // have keys — the user only needs to pick one for this device.
       toastr.info(
-        <Trans
-          i18nKey="Common:EncryptionDeviceSetupHint"
-          t={t}
-          components={[
-            <Link
-              key="setup"
-              tag="a"
-              isHovered
-              color="accent"
-              onClick={() => {
-                toastr.clear();
-                window.location.href = "/profile/keys-management";
-              }}
-            />,
-          ]}
-        />,
+        accountKeysCount > 0 ? (
+          <Trans
+            i18nKey="Common:EncryptionChooseKeyHint"
+            t={t}
+            components={[setupLink]}
+          />
+        ) : (
+          <Trans
+            i18nKey="Common:EncryptionDeviceSetupHint"
+            t={t}
+            components={[setupLink]}
+          />
+        ),
         null,
         30000,
         true,
       );
-    }, [isPrivate, hasConfiguredKey, t]);
+    }, [isPrivate, hasConfiguredKey, accountKeysCount, t]);
 
     return null;
   }),

@@ -99,6 +99,8 @@
   font-size: 12px;
   letter-spacing: 0.5px;
   user-select: all;
+  min-width: 0;
+  word-break: break-all;
 }
 
 .keysList {

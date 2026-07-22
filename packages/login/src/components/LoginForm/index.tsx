@@ -226,7 +226,10 @@ const LoginForm = ({
 
         // deleteCookie("x-redirect-authorization-uri");
 
-        window.open(`${portalLink}&referenceUrl=${redirectUrl}`, "_self");
+        window.open(
+          `${portalLink}&referenceUrl=${encodeURIComponent(redirectUrl)}`,
+          "_self",
+        );
 
         return;
       }

@@ -46,6 +46,9 @@ export const PAYMENT_ROUTES = {
   aiSearch: `/billing/addons/ai-search`,
   backup: `/billing/addons/backup`,
   diskStorage: `/billing/addons/disk-storage`,
+  docsConnect: `/billing/addons/docs-connect`,
+  wallet: `/portal-settings/payments/wallet`,
+  usage: `/portal-settings/payments/usage`,
 } as const;
 
 export function getTwoDotsReplacing(translation: string) {

@@ -122,8 +122,25 @@ export const copySelectedText = (
   }
 };
 
+// True while a text field (input/textarea/contentEditable) is focused.
+// Guards actions that would break editing: clearing the selection (hides the
+// caret in Chromium) or moving focus for hotkey navigation.
+export const isEditableElementFocused = () => {
+  if (typeof document === "undefined") return false;
+
+  const active = document.activeElement as HTMLElement | null;
+  return (
+    !!active &&
+    (active.tagName === "INPUT" ||
+      active.tagName === "TEXTAREA" ||
+      active.isContentEditable)
+  );
+};
+
 export const clearTextSelection = () => {
   if (typeof window === "undefined") return;
+
+  if (isEditableElementFocused()) return;
 
   if (window.getSelection) {
     const selection = window.getSelection();

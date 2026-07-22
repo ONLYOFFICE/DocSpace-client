@@ -63,6 +63,13 @@
   justify-content: flex-end;
 }
 
+.strengthRow {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 4px;
+}
+
 .forgotRow {
   display: flex;
   justify-content: flex-start;

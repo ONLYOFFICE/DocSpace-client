@@ -1,0 +1,160 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+.dialog {
+  --modal-dialog-width: 800px;
+  --modal-dialog-huge-max-width: 800px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--payment-text-color);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 6px;
+  background: var(--background-service-color);
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  color: var(--color-scheme-main-buttons);
+  background: color-mix(in srgb, var(--color-scheme-main-buttons) 15%, transparent);
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 4px;
+}
+
+.cardDescription {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--payment-text-color);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--border-service-color);
+  }
+}
+
+.dividerLabel {
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--payment-inactive-color);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-scheme-main-buttons);
+  background: color-mix(in srgb, var(--color-scheme-main-buttons) 15%, transparent);
+}
+
+.chipIcon {
+  width: 16px;
+  height: 16px;
+
+  path {
+    fill: currentColor;
+  }
+}
+
+.andMore {
+  font-size: 13px;
+  font-weight: 600;
+  color: $light-second-main;
+}

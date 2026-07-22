@@ -66,6 +66,7 @@ vi.mock("@docspace/shared/api/privacy", () => ({
 }));
 
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import { changePassphrase } from "@docspace/shared/services/encryption/identity";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
@@ -114,7 +115,7 @@ describe("useRotatePassphraseFlow", () => {
 
   it("shows InvalidPassphrase inline (NOT a toast) on wrong old passphrase", async () => {
     vi.mocked(changePassphrase).mockRejectedValueOnce(
-      new Error("wrong passphrase"),
+      new InvalidPassphraseError(),
     );
     render(<Harness userId="42" refreshKeysFromServer={vi.fn()} />);
     act(() => latest.request(dummyKey));

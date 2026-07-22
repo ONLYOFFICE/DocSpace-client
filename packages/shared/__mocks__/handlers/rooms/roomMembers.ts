@@ -45,6 +45,7 @@ export type RoomMembersHandlerHandle = {
 
 export type RoomMembersHandlerOptions = {
   initial?: RoomMember[];
+  links?: unknown[];
   handle?: { current: RoomMembersHandlerHandle | null };
 };
 
@@ -103,7 +104,13 @@ export const roomMembersHandlers = (
 
   return [
     http.get(baseUrl, ({ request }) => {
-      requests.push({ method: "GET", url: new URL(request.url).pathname });
+      const url = new URL(request.url);
+      requests.push({ method: "GET", url: url.pathname });
+      // filterType=2 requests external links, not user members
+      if (url.searchParams.get("filterType") === "2") {
+        const items = opts.links ?? [];
+        return okResponse({ items, total: items.length });
+      }
       const items = state.map(buildMemberDto);
       return okResponse({ items, total: items.length });
     }),

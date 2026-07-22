@@ -51,9 +51,7 @@ import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/ui-kit/components/navigation";
-import { AiChatTrigger } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import NewChatButton from "@docspace/ui-kit/ai-agent/new-chat-button";
-import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
@@ -300,10 +298,6 @@ const SectionHeaderContent = (props) => {
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
-
-  // Shared from AiAgentProviders' context (host-computed). The trigger button
-  // mirrors the panel's gating.
-  const isAiChatAvailable = useIsAiChatAvailable();
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -1117,7 +1111,6 @@ const SectionHeaderContent = (props) => {
                   className={styles.analyzeResponsesButton}
                 />
               }
-              aiChatButton={isAiChatAvailable ? <AiChatTrigger /> : undefined}
               newChatButton={isAiChatView ? <NewChatButton /> : undefined}
             />
             {showSignInButton ? (

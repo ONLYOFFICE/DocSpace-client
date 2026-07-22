@@ -294,7 +294,16 @@ describe("EncryptionContext / EncryptionProvider", () => {
   });
 
   describe("auto-lock on tab hidden", () => {
+    afterEach(() => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      Object.defineProperty(document, "visibilityState", {
+        value: "visible",
+        configurable: true,
+      });
+    });
+
     it("locks SecretStorage when document.visibilityState becomes hidden", async () => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);
@@ -308,6 +317,23 @@ describe("EncryptionContext / EncryptionProvider", () => {
       });
       expect(latest.isUnlocked).toBe(false);
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("does not lock on tab hide when auto-lock is Off", async () => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      Object.defineProperty(document, "visibilityState", {
+        value: "hidden",
+        configurable: true,
+      });
+      await act(async () => {
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+      expect(latest.isUnlocked).toBe(true);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(true);
     });
   });
 
@@ -426,6 +452,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
     });
 
     it("suspends tab-hidden auto-lock until the handle is released", async () => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);

@@ -71,7 +71,9 @@ export default function withBadges(WrappedComponent) {
       setIsVerHistoryPanel(true);
     };
 
-    onBadgeClick = () => {
+    onBadgeClick = (e) => {
+      e?.stopPropagation?.();
+
       const { disableBadgeClick } = this.state;
       if (disableBadgeClick) return;
 

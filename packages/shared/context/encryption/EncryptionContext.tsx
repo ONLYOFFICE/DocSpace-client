@@ -268,6 +268,9 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     if (typeof document === "undefined") return undefined;
     if (autoLockSuspendCount > 0) return undefined;
     const handler = () => {
+      // The tab-hide lock obeys the same auto-lock preference: "Off" means
+      // only the 30-minute session cap in SecretStorage applies.
+      if (getAutoLockTimeoutSeconds() <= 0) return;
       if (document.visibilityState === "hidden") {
         SecretStorage.lock();
         clearEncryptedFilenameCache();

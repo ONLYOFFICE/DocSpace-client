@@ -48,6 +48,7 @@ import {
   FolderType,
   RoomsType,
   RoomsTypePrivate,
+  RoomSearchArea,
 } from "@docspace/shared/enums";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
@@ -83,6 +84,7 @@ const CreateRoomDialog = ({
   fetchedRoomParams,
   encryptionKeys,
   userId,
+  accountEmail,
   setUserEncryptionKeys,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
@@ -156,6 +158,7 @@ const CreateRoomDialog = ({
 
   const generateKey = useGenerateKeyFlow({
     userId,
+    accountLabel: accountEmail,
     refreshKeysFromServer,
     onSuccess: () => {
       if (!isMountRef.current) return;
@@ -336,7 +339,11 @@ const CreateRoomDialog = ({
             <RoomSelector
               className="template-body_selector"
               onSubmit={onSubmitRoom}
-              searchArea="Templates"
+              searchArea={
+                isFormsCreate
+                  ? RoomSearchArea.FormTemplates
+                  : RoomSearchArea.Templates
+              }
               roomType={isFormsCreate ? RoomsType.FormRoom : undefined}
               isMultiSelect={false}
               withHeader

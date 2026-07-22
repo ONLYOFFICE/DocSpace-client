@@ -102,6 +102,7 @@ type CreateRoomEventProps = {
   encryptionKeys: UserStore["encryptionKeys"];
   setUserEncryptionKeys: UserStore["setUserEncryptionKeys"];
   userId: string | undefined;
+  accountEmail: string | undefined;
 };
 
 const CreateRoomEvent = ({
@@ -142,6 +143,7 @@ const CreateRoomEvent = ({
   encryptionKeys,
   setUserEncryptionKeys,
   userId,
+  accountEmail,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -239,6 +241,7 @@ const CreateRoomEvent = ({
       encryptionKeys={encryptionKeys}
       setUserEncryptionKeys={setUserEncryptionKeys}
       userId={userId}
+      accountEmail={accountEmail}
       isExternalShareRestricted={isExternalShareRestricted}
       {...roomParams}
     />
@@ -327,6 +330,7 @@ export default inject(
       encryptionKeys,
       setUserEncryptionKeys,
       userId,
+      accountEmail: user?.email,
       isExternalShareRestricted:
         isExternalShareRestricted && externalShareApplyToRooms,
     };

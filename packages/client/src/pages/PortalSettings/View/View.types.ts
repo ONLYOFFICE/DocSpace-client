@@ -50,6 +50,7 @@ export type TView =
   | "ai-search"
   | "backup-service"
   | "disk-storage"
+  | "docs-connect"
   | "apps"
   | "";
 

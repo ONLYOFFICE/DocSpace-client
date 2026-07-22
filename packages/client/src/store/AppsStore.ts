@@ -225,16 +225,6 @@ class AppsStore {
     await this.saveSettings("ai-arbiter", null);
   };
 
-  installDocsCloud = async () => {
-    await this.saveSettings("docs-cloud", { activated: true });
-    await this.enable("docs-cloud", true);
-  };
-
-  uninstallDocsCloud = async () => {
-    await this.enable("docs-cloud", false);
-    await this.saveSettings("docs-cloud", null);
-  };
-
   // Re-enable a previously configured app without recreating its resources.
   // Returns false when the server reports no configuration yet — callers
   // should open the install dialog in that case.

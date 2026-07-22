@@ -44,6 +44,7 @@ import { useEncryption } from "@docspace/shared/context/encryption";
 import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
+import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import { AutoLockSetting } from "./AutoLockSetting";
@@ -63,12 +64,14 @@ type KeysManagementProps = {
   encryptionKeys?: TEncryptionKeyPair[] | null;
   setUserEncryptionKeys?: (keys: TEncryptionKeyPair[]) => void;
   userId?: string;
+  userEmail?: string;
 };
 
 const KeysManagement = ({
   encryptionKeys,
   setUserEncryptionKeys,
   userId,
+  userEmail,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
   const { isUnlocked, lock } = useEncryption();
@@ -86,10 +89,32 @@ const KeysManagement = ({
 
   const { rotationProgress, rotateForAllRooms } = useRotateIdentityForRooms();
 
+  const handleBeforeNewKeyActive = useCallback(
+    async (
+      oldIdentity: IdentityKeyPair | null,
+      newIdentity: IdentityKeyPair,
+      currentUserId: string,
+      newPublicKeyId: string,
+    ) => {
+      if (!oldIdentity) {
+        if (hasKeys) toastr.warning(t("Common:EncryptionRewrapSkipped"));
+        return;
+      }
+      await rotateForAllRooms(
+        oldIdentity,
+        newIdentity,
+        currentUserId,
+        newPublicKeyId,
+      );
+    },
+    [hasKeys, rotateForAllRooms, t],
+  );
+
   const generate = useGenerateKeyFlow({
     userId,
+    accountLabel: userEmail,
     refreshKeysFromServer,
-    onBeforeNewKeyActive: rotateForAllRooms,
+    onBeforeNewKeyActive: handleBeforeNewKeyActive,
   });
   const importFlow = useImportKeyFlow({
     userId,
@@ -249,5 +274,6 @@ export default inject(({ userStore }: TStore) => {
     encryptionKeys,
     setUserEncryptionKeys,
     userId: user?.id ? String(user.id) : undefined,
+    userEmail: user?.email,
   };
 })(observer(KeysManagement));

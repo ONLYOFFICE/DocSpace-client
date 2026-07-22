@@ -59,6 +59,12 @@ const items = [
     translationKey: "Common:Overview",
   },
   {
+    id: "devtools-docs-connect",
+    path: "/developer-tools/docs-connect",
+    pageType: PageType.devToolsDocsConnect,
+    translationKey: "DocsConnect:DocsConnect",
+  },
+  {
     id: "devtools-javascript-sdk",
     path: "/developer-tools/javascript-sdk",
     pageType: PageType.devToolsJavascriptSdk,
@@ -104,6 +110,7 @@ const DeveloperToolsItems = ({
     "Webhooks",
     "OAuth",
     "Common",
+    "DocsConnect",
   ]);
 
   const location = useLocation();

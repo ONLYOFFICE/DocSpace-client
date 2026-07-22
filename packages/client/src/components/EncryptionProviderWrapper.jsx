@@ -162,8 +162,6 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
         />
       );
 
-      // With 2+ registered keys and no per-device preference the account DOES
-      // have keys — the user only needs to pick one for this device.
       toastr.info(
         accountKeysCount > 0 ? (
           <Trans
@@ -217,10 +215,6 @@ const PassphraseUnlockAdapter = inject(({ userStore }) => ({
         }
       }, [setUserEncryptionKeys]);
 
-      // Success hands the recovered identity back to the EncryptionProvider,
-      // which resolves the pending unlock request — the interrupted action
-      // (download, invite, file open) resumes. Cancel/failure returns to the
-      // passphrase modal instead of a dead end.
       const handleRecoveryClosed = React.useCallback(
         (recovered) => {
           setIsRecovering(false);
@@ -258,6 +252,7 @@ const PassphraseUnlockAdapter = inject(({ userStore }) => ({
           onCancel={onCancel}
           onForgotPassphrase={handleForgotPassphrase}
           submitLabel={t("Common:Confirm")}
+          showRememberDevice
         />
       );
     },

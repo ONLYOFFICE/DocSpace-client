@@ -47,6 +47,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
   PasswordInput,
   type PasswordInputHandle,
@@ -67,13 +68,14 @@ import styles from "./PassphraseModal.module.scss";
 
 type PassphraseModalProps = {
   visible: boolean;
-  onSubmit: (passphrase: string) => void;
+  onSubmit: (passphrase: string, rememberDevice?: boolean) => void;
   onCancel: () => void;
   isNew: boolean;
   isLoading?: boolean;
   externalError?: string | null;
   onForgotPassphrase?: () => void;
   submitLabel?: string;
+  showRememberDevice?: boolean;
 };
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
@@ -104,6 +106,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   externalError,
   onForgotPassphrase,
   submitLabel,
+  showRememberDevice = false,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<PasswordInputHandle>(null);
@@ -112,6 +115,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
   const [error, setError] = useState("");
   const [rulesPassed, setRulesPassed] = useState(false);
+  const [rememberDevice, setRememberDevice] = useState(false);
 
   useEffect(() => {
     if (visible) {
@@ -119,6 +123,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       setConfirmPassphrase("");
       setError("");
       setRulesPassed(false);
+      setRememberDevice(false);
     }
   }, [visible]);
 
@@ -132,8 +137,8 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       return;
     }
 
-    onSubmit(passphrase);
-  }, [passphrase, isNew, onSubmit, t]);
+    onSubmit(passphrase, showRememberDevice ? rememberDevice : undefined);
+  }, [passphrase, isNew, onSubmit, showRememberDevice, rememberDevice, t]);
 
   const handleCancel = useCallback(() => {
     setPassphrase("");
@@ -287,6 +292,19 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 >
                   {t("Common:ForgotPassphrase")}
                 </Link>
+              </div>
+            ) : null}
+
+            {showRememberDevice && !isNew ? (
+              <div className={styles.rememberRow}>
+                <Checkbox
+                  id="rememberDevice"
+                  isChecked={rememberDevice}
+                  isDisabled={isLoading}
+                  onChange={(e) => setRememberDevice(e.target.checked)}
+                  label={t("Common:RememberDeviceLabel")}
+                  tabIndex={4}
+                />
               </div>
             ) : null}
           </div>

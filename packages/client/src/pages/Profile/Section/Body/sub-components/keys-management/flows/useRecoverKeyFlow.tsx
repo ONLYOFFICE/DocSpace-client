@@ -63,11 +63,6 @@ type Deps = {
   userId: string | undefined;
   encryptionKeys?: TEncryptionKeyPair[] | null;
   refreshKeysFromServer: () => Promise<void>;
-  /**
-   * Called whenever the flow returns to idle: with the recovered (unlocked)
-   * identity on success, with null when the user cancelled or the
-   * re-encryption failed. Lets callers resume an interrupted action.
-   */
   onClosed?: (recovered: IdentityKeyPair | null) => void;
 };
 

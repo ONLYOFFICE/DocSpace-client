@@ -76,6 +76,7 @@ const PassphraseUnlockAdapter = ({
       onCancel={onCancel}
       onForgotPassphrase={handleForgotPassphrase}
       submitLabel={t("Common:Confirm")}
+      showRememberDevice
     />
   );
 };

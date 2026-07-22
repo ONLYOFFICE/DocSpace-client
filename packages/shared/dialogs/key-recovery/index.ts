@@ -33,48 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
 
-.description {
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.inputWrapper {
-  width: 100%;
-
-  :global(.password-field-wrapper) {
-    width: 100%;
-  }
-}
-
-.passphraseField {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.generateRow {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.rememberRow {
-  margin-top: 8px;
-}
-
-.strengthRow {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  margin-top: 4px;
-}
-
-.forgotRow {
-  display: flex;
-  justify-content: flex-start;
-}
+export { useRecoverKeyFlow } from "./useRecoverKeyFlow";
+export type { RecoverKeyFlow } from "./useRecoverKeyFlow";
+export { RecoveryPhraseInputModal } from "./RecoveryPhraseInputModal";

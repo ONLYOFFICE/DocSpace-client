@@ -49,8 +49,22 @@ import {
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
+import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
+
+type EncryptionKeysData = {
+  userId: string | undefined;
+  encryptionKeys: TEncryptionKeyPair[] | null;
+  refreshKeysFromServer: () => Promise<void>;
+};
+
+const EncryptionKeysDataContext = React.createContext<EncryptionKeysData>({
+  userId: undefined,
+  encryptionKeys: null,
+  refreshKeysFromServer: async () => undefined,
+});
 
 const PassphraseUnlockAdapter = ({
   visible,
@@ -58,13 +72,40 @@ const PassphraseUnlockAdapter = ({
   error,
   onSubmit,
   onCancel,
+  onUnlocked,
 }: PassphraseDialogProps) => {
   const { t } = useTranslation(["Common"]);
+  const { userId, encryptionKeys, refreshKeysFromServer } = React.useContext(
+    EncryptionKeysDataContext,
+  );
+  const [isRecovering, setIsRecovering] = React.useState(false);
+
+  const handleRecoveryClosed = React.useCallback(
+    (recovered: IdentityKeyPair | null) => {
+      setIsRecovering(false);
+      if (recovered) onUnlocked?.(recovered);
+    },
+    [onUnlocked],
+  );
+
+  const recover = useRecoverKeyFlow({
+    userId,
+    encryptionKeys,
+    refreshKeysFromServer,
+    onClosed: handleRecoveryClosed,
+  });
 
   const handleForgotPassphrase = () => {
+    if (recover.available) {
+      setIsRecovering(true);
+      recover.request();
+      return;
+    }
     onCancel();
     window.location.href = "/profile/keys-management";
   };
+
+  if (isRecovering) return recover.modals;
 
   return (
     <PassphraseModal
@@ -76,6 +117,7 @@ const PassphraseUnlockAdapter = ({
       onCancel={onCancel}
       onForgotPassphrase={handleForgotPassphrase}
       submitLabel={t("Common:Confirm")}
+      showRememberDevice
     />
   );
 };
@@ -134,16 +176,32 @@ const EncryptionProviderWrapper = ({
         }
       : null;
 
+  const refreshKeysFromServer = React.useCallback(async () => {
+    try {
+      const fresh = await getEncryptionKeys();
+      setKeys(fresh ?? []);
+    } catch (e) {
+      console.error("Failed to refresh keys:", e);
+    }
+  }, []);
+
+  const keysData = React.useMemo<EncryptionKeysData>(
+    () => ({ userId, encryptionKeys: keys, refreshKeysFromServer }),
+    [userId, keys, refreshKeysFromServer],
+  );
+
   return (
-    <EncryptionProvider
-      userKeys={userKeys}
-      PassphraseDialog={PassphraseUnlockAdapter}
-      KeyChangeDialog={KeyChangeDialog}
-    >
-      <EncryptionKeysReadyContext.Provider value={keysReady}>
-        {children}
-      </EncryptionKeysReadyContext.Provider>
-    </EncryptionProvider>
+    <EncryptionKeysDataContext.Provider value={keysData}>
+      <EncryptionProvider
+        userKeys={userKeys}
+        PassphraseDialog={PassphraseUnlockAdapter}
+        KeyChangeDialog={KeyChangeDialog}
+      >
+        <EncryptionKeysReadyContext.Provider value={keysReady}>
+          {children}
+        </EncryptionKeysReadyContext.Provider>
+      </EncryptionProvider>
+    </EncryptionKeysDataContext.Provider>
   );
 };
 

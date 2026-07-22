@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -42,6 +42,10 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
 import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import {
+  forgetDeviceUnlock,
+  hasDeviceUnlock,
+} from "@docspace/shared/services/encryption/device-unlock-store";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
@@ -50,8 +54,8 @@ import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 import { AutoLockSetting } from "./AutoLockSetting";
 import { KeysList } from "./KeysList";
 import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
+import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
-import { useRecoverKeyFlow } from "./flows/useRecoverKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
 import { useExportKeyFlow } from "./flows/useExportKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
@@ -75,8 +79,31 @@ const KeysManagement = ({
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
   const { isUnlocked, lock } = useEncryption();
+  const [deviceRemembered, setDeviceRemembered] = useState(false);
 
   const hasKeys = !!encryptionKeys && encryptionKeys.length > 0;
+
+  useEffect(() => {
+    if (!userId) {
+      setDeviceRemembered(false);
+      return undefined;
+    }
+    let cancelled = false;
+    void hasDeviceUnlock(userId).then((remembered) => {
+      if (!cancelled) setDeviceRemembered(remembered);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, isUnlocked]);
+
+  const handleForgetDevice = useCallback(() => {
+    if (!userId) return;
+    void forgetDeviceUnlock(userId).then(() => {
+      setDeviceRemembered(false);
+      toastr.success(t("Common:DeviceUnlockForgotten"));
+    });
+  }, [userId, t]);
 
   const refreshKeysFromServer = useCallback(async () => {
     try {
@@ -225,9 +252,18 @@ const KeysManagement = ({
               size={ButtonSize.small}
               onClick={() => {
                 lock();
+                setDeviceRemembered(false);
                 toastr.success(t("Common:EncryptionLocked"));
               }}
               label={t("Common:LockNow")}
+              isDisabled={busy}
+            />
+          ) : null}
+          {deviceRemembered ? (
+            <Button
+              size={ButtonSize.small}
+              onClick={handleForgetDevice}
+              label={t("Common:ForgetDeviceButton")}
               isDisabled={busy}
             />
           ) : null}

@@ -1774,7 +1774,7 @@
   "RecoveryPhraseInputHint": "Bu cihazda erişimi geri yüklemek için 24 kelimelik kurtarma ifadenizi girin. Ardından bu cihaz için yeni bir parola belirlemeniz istenecektir.",
   "RecoveryPhrasePlaceholder": "kelime1 kelime2 kelime3 ... kelime24",
   "RecoveryPhraseRequired": "Kurtarma ifadesinin 24 kelimesinin tamamını girin.",
-  "RecoveryPhraseRestored": "Kurtarma ifadesi kabul edildi. Parola güncellendi.",
+  "RecoveryPhraseRestored": "Kurtarma ifadesi kabul edildi. Parola güncellendi. Kurtarma ifadeniz geçerliliğini korur.",
   "RecoveryPhraseSaveFirst": "Devam etmek için kurtarma ifadenizi yazdırın, indirin veya kopyalayın.",
   "RecoveryPhraseTitle": "Kurtarma ifadenizi kaydedin",
   "RecoveryPhraseWarning": "Bu ifadeye sahip olan herkes dosyalarınızın şifresini çözebilir. Asla kimseyle paylaşmayın. Sizin için kurtaramayız.",

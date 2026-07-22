@@ -63,6 +63,12 @@ type Deps = {
   userId: string | undefined;
   encryptionKeys?: TEncryptionKeyPair[] | null;
   refreshKeysFromServer: () => Promise<void>;
+  /**
+   * Called whenever the flow returns to idle: with the recovered (unlocked)
+   * identity on success, with null when the user cancelled or the
+   * re-encryption failed. Lets callers resume an interrupted action.
+   */
+  onClosed?: (recovered: IdentityKeyPair | null) => void;
 };
 
 export type RecoverKeyFlow = {
@@ -76,6 +82,7 @@ export function useRecoverKeyFlow({
   userId,
   encryptionKeys,
   refreshKeysFromServer,
+  onClosed,
 }: Deps): RecoverKeyFlow {
   const { t } = useTranslation(["Common"]);
   const [step, setStep] = useState<Step>("idle");
@@ -147,10 +154,16 @@ export function useRecoverKeyFlow({
     [encryptionKeys, scopedTarget, t],
   );
 
+  const handleDismiss = useCallback(() => {
+    reset();
+    onClosed?.(null);
+  }, [reset, onClosed]);
+
   const onNewPassphrase = useCallback(
     async (newPassphrase: string) => {
       if (!keyPair || !mnemonic || !userId || !targetKeyId) return;
       setIsPending(true);
+      let recovered: IdentityKeyPair | null = null;
       try {
         const serialized = await serializeIdentity(keyPair, newPassphrase, {
           recoveryMnemonic: mnemonic,
@@ -163,6 +176,7 @@ export function useRecoverKeyFlow({
         setActiveKeyId(userId, targetKeyId);
         SecretStorage.cacheUnlocked(userId, keyPair);
         await refreshKeysFromServer();
+        recovered = keyPair;
         toastr.success(t("Common:RecoveryPhraseRestored"));
       } catch (e) {
         toastr.error(getEncryptionErrorMessage(t, e));
@@ -170,9 +184,19 @@ export function useRecoverKeyFlow({
       } finally {
         setIsPending(false);
         reset();
+        onClosed?.(recovered);
       }
     },
-    [keyPair, mnemonic, userId, targetKeyId, refreshKeysFromServer, reset, t],
+    [
+      keyPair,
+      mnemonic,
+      userId,
+      targetKeyId,
+      refreshKeysFromServer,
+      reset,
+      onClosed,
+      t,
+    ],
   );
 
   const modals = (
@@ -181,7 +205,7 @@ export function useRecoverKeyFlow({
         <RecoveryPhraseInputModal
           visible
           onSubmit={onPhraseSubmit}
-          onCancel={reset}
+          onCancel={handleDismiss}
           error={error}
           isLoading={isPending}
         />
@@ -190,7 +214,7 @@ export function useRecoverKeyFlow({
         <PassphraseModal
           visible
           onSubmit={onNewPassphrase}
-          onCancel={reset}
+          onCancel={handleDismiss}
           isNew
           isLoading={isPending}
         />

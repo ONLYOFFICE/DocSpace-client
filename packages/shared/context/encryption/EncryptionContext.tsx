@@ -109,6 +109,13 @@ export type PassphraseDialogProps = {
   error: string | null;
   onSubmit: (passphrase: string) => Promise<void>;
   onCancel: () => void;
+  /**
+   * Lets the dialog deliver an identity unlocked through an alternative path
+   * (e.g. the recovery-phrase flow). Resolves the pending unlock request the
+   * same way a successful passphrase submit would, so the interrupted action
+   * resumes.
+   */
+  onUnlocked?: (kp: IdentityKeyPair) => void;
 };
 
 export type KeyChangeDialogModalProps = {
@@ -386,6 +393,20 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     setUnlockError(null);
   }, []);
 
+  const handlePassphraseUnlocked = useCallback(
+    (kp: IdentityKeyPair) => {
+      if (userKeys?.userId && !SecretStorage.hasUnlocked(userKeys.userId)) {
+        SecretStorage.cacheUnlocked(userKeys.userId, kp);
+      }
+      setIsUnlocked(true);
+      setUnlockError(null);
+      pendingResolveRef.current?.(kp);
+      pendingResolveRef.current = null;
+      setShowPassphraseDialog(false);
+    },
+    [userKeys?.userId],
+  );
+
   const publicKey = userKeys?.publicKey ?? null;
 
   const value = useMemo<EncryptionContextValue>(
@@ -429,6 +450,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           error={unlockError}
           onSubmit={handlePassphraseSubmit}
           onCancel={handlePassphraseCancel}
+          onUnlocked={handlePassphraseUnlocked}
         />
       )}
       {KeyChangeDialog && keyChangeRequest && (

@@ -1774,7 +1774,7 @@
   "RecoveryPhraseInputHint": "Voer uw 24-woordige herstelzin in om de toegang op dit apparaat te herstellen. Vervolgens wordt u gevraagd een nieuwe wachtzin voor dit apparaat in te stellen.",
   "RecoveryPhrasePlaceholder": "woord1 woord2 woord3 ... woord24",
   "RecoveryPhraseRequired": "Voer alle 24 woorden van de herstelzin in.",
-  "RecoveryPhraseRestored": "Herstelzin geaccepteerd. Wachtzin is bijgewerkt.",
+  "RecoveryPhraseRestored": "Herstelzin geaccepteerd. Wachtzin is bijgewerkt. Uw herstelzin blijft geldig.",
   "RecoveryPhraseSaveFirst": "Druk uw herstelzin af, download of kopieer deze om door te gaan.",
   "RecoveryPhraseTitle": "Sla uw herstelzin op",
   "RecoveryPhraseWarning": "Iedereen met deze zin kan uw bestanden ontsleutelen. Deel hem nooit. Wij kunnen hem niet voor u herstellen.",

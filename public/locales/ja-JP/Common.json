@@ -1797,7 +1797,7 @@
   "RecoveryPhraseInputHint": "このデバイスでアクセスを復元するために、24語のリカバリーフレーズを入力してください。その後、このデバイスの新しいパスフレーズの設定を求められます。",
   "RecoveryPhrasePlaceholder": "word1 word2 word3 ... word24",
   "RecoveryPhraseRequired": "リカバリーフレーズの24語すべてを入力してください。",
-  "RecoveryPhraseRestored": "リカバリーフレーズが受け付けられました。パスフレーズが更新されました。",
+  "RecoveryPhraseRestored": "リカバリーフレーズが受け付けられました。パスフレーズが更新されました。リカバリーフレーズは引き続き有効です。",
   "RecoveryPhraseSaveFirst": "続行するには、リカバリーフレーズを印刷、ダウンロード、またはコピーしてください。",
   "RecoveryPhraseTitle": "リカバリーフレーズを保存してください",
   "RecoveryPhraseWarning": "このフレーズを持つ人は誰でもファイルを復号化できます。絶対に共有しないでください。弊社では復元できません。",

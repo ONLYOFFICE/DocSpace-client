@@ -1797,7 +1797,7 @@
   "RecoveryPhraseInputHint": "Introduceți fraza de recuperare din 24 de cuvinte pentru a restaura accesul pe acest dispozitiv. Vi se va solicita apoi să setați o nouă frază de acces pentru acest dispozitiv.",
   "RecoveryPhrasePlaceholder": "cuvânt1 cuvânt2 cuvânt3 ... cuvânt24",
   "RecoveryPhraseRequired": "Introduceți toate cele 24 de cuvinte ale frazei de recuperare.",
-  "RecoveryPhraseRestored": "Fraza de recuperare acceptată. Fraza de acces a fost actualizată.",
+  "RecoveryPhraseRestored": "Fraza de recuperare acceptată. Fraza de acces a fost actualizată. Fraza de recuperare rămâne valabilă.",
   "RecoveryPhraseSaveFirst": "Imprimați, descărcați sau copiați fraza de recuperare pentru a continua.",
   "RecoveryPhraseTitle": "Salvați fraza de recuperare",
   "RecoveryPhraseWarning": "Oricine deține această frază poate decripta fișierele dvs. Nu o partajați niciodată. Nu o putem recupera în locul dvs.",

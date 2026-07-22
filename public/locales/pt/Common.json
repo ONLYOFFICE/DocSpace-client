@@ -1774,7 +1774,7 @@
   "RecoveryPhraseInputHint": "Introduza a sua frase de recuperação de 24 palavras para restaurar o acesso neste dispositivo. Será solicitado que defina uma nova frase-passe para este dispositivo.",
   "RecoveryPhrasePlaceholder": "palavra1 palavra2 palavra3 ... palavra24",
   "RecoveryPhraseRequired": "Introduza todas as 24 palavras da frase de recuperação.",
-  "RecoveryPhraseRestored": "Frase de recuperação aceite. A frase-passe foi atualizada.",
+  "RecoveryPhraseRestored": "Frase de recuperação aceite. A frase-passe foi atualizada. A sua frase de recuperação continua válida.",
   "RecoveryPhraseSaveFirst": "Imprima, transfira ou copie a sua frase de recuperação para continuar.",
   "RecoveryPhraseTitle": "Guarde a sua frase de recuperação",
   "RecoveryPhraseWarning": "Qualquer pessoa com esta frase pode desencriptar os seus ficheiros. Nunca a partilhe. Não podemos recuperá-la por si.",

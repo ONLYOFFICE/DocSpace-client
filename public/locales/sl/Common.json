@@ -1774,7 +1774,7 @@
   "RecoveryPhraseInputHint": "Vnesite 24-besedno obnovitveno frazo za obnovitev dostopa na tej napravi. Nato boste pozvani k nastavitvi novega gesla za to napravo.",
   "RecoveryPhrasePlaceholder": "beseda1 beseda2 beseda3 ... beseda24",
   "RecoveryPhraseRequired": "Vnesite vseh 24 besed obnovitvene fraze.",
-  "RecoveryPhraseRestored": "Obnovitvena fraza je bila sprejeta. Geslo je bilo posodobljeno.",
+  "RecoveryPhraseRestored": "Obnovitvena fraza je bila sprejeta. Geslo je bilo posodobljeno. Vaša obnovitvena fraza ostaja veljavna.",
   "RecoveryPhraseSaveFirst": "Za nadaljevanje natisnite, prenesite ali kopirajte svojo obnovitveno frazo.",
   "RecoveryPhraseTitle": "Shranite obnovitveno frazo",
   "RecoveryPhraseWarning": "Kdor koli s to frazo lahko dešifrira vaše datoteke. Nikoli je ne delite. Ne moremo je obnoviti namesto vas.",

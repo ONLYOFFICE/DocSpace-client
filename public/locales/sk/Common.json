@@ -1751,7 +1751,7 @@
   "RecoveryPhraseInputHint": "Zadajte svoju 24-slovnú obnovovaciu frázu na obnovenie prístupu na tomto zariadení. Potom budete vyzvaní na nastavenie novej prístupovej frázy pre toto zariadenie.",
   "RecoveryPhrasePlaceholder": "slovo1 slovo2 slovo3 ... slovo24",
   "RecoveryPhraseRequired": "Zadajte všetkých 24 slov obnovovacej frázy.",
-  "RecoveryPhraseRestored": "Obnovovacia fráza bola prijatá. Prístupová fráza bola aktualizovaná.",
+  "RecoveryPhraseRestored": "Obnovovacia fráza bola prijatá. Prístupová fráza bola aktualizovaná. Vaša obnovovacia fráza zostáva platná.",
   "RecoveryPhraseSaveFirst": "Ak chcete pokračovať, vytlačte, stiahnite alebo skopírujte svoju obnovovaciu frázu.",
   "RecoveryPhraseTitle": "Uložte svoju obnovovaciu frázu",
   "RecoveryPhraseWarning": "Ktokoľvek s touto frázou môže dešifrovať vaše súbory. Nikdy ju nezdieľajte. Nemôžeme ju za vás obnoviť.",

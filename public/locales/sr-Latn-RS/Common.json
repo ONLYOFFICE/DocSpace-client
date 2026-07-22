@@ -1797,7 +1797,7 @@
   "RecoveryPhraseInputHint": "Unesite svoju frazu za oporavak od 24 reči da biste obnovili pristup na ovom uređaju. Nakon toga će vam biti ponuđeno da postavite novu lozinku za ovaj uređaj.",
   "RecoveryPhrasePlaceholder": "reč1 reč2 reč3 ... reč24",
   "RecoveryPhraseRequired": "Unesite svih 24 reči fraze za oporavak.",
-  "RecoveryPhraseRestored": "Fraza za oporavak je prihvaćena. Lozinka je ažurirana.",
+  "RecoveryPhraseRestored": "Fraza za oporavak je prihvaćena. Lozinka je ažurirana. Vaša fraza za oporavak ostaje važeća.",
   "RecoveryPhraseSaveFirst": "Da biste nastavili, odštampajte, preuzmite ili kopirajte svoju frazu za oporavak.",
   "RecoveryPhraseTitle": "Sačuvajte frazu za oporavak",
   "RecoveryPhraseWarning": "Svako ko ima ovu frazu može dešifrovati vaše fajlove. Nikada je ne delite. Mi je ne možemo povratiti umesto vas.",

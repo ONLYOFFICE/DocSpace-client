@@ -1774,7 +1774,7 @@
   "RecoveryPhraseInputHint": "Vendosni frazën tuaj 24-fjalësh të rikuperimit për të rivendosur qasjen në këtë pajisje. Do t'ju kërkohet pastaj të caktoni një frazëkalim të ri për këtë pajisje.",
   "RecoveryPhrasePlaceholder": "fjala1 fjala2 fjala3 ... fjala24",
   "RecoveryPhraseRequired": "Vendosni të gjitha 24 fjalët e frazës së rikuperimit.",
-  "RecoveryPhraseRestored": "Fraza e rikuperimit u pranua. Frazëkalimi u përditësua.",
+  "RecoveryPhraseRestored": "Fraza e rikuperimit u pranua. Frazëkalimi u përditësua. Fraza juaj e rikuperimit mbetet e vlefshme.",
   "RecoveryPhraseSaveFirst": "Për të vazhduar, printoni, shkarkoni ose kopjoni frazën tuaj të rikuperimit.",
   "RecoveryPhraseTitle": "Ruajeni frazën tuaj të rikuperimit",
   "RecoveryPhraseWarning": "Çdo person me këtë frazë mund të dekriptojë skedarët tuaj. Mos e ndani kurrë. Ne nuk mund ta rikuperojmë për ju.",

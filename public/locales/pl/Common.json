@@ -1774,7 +1774,7 @@
   "RecoveryPhraseInputHint": "Wprowadź 24-wyrazową frazę odzyskiwania, aby przywrócić dostęp na tym urządzeniu. Następnie zostaniesz poproszony(-a) o ustawienie nowego hasła dostępu dla tego urządzenia.",
   "RecoveryPhrasePlaceholder": "word1 word2 word3 ... word24",
   "RecoveryPhraseRequired": "Wprowadź wszystkie 24 słowa frazy odzyskiwania.",
-  "RecoveryPhraseRestored": "Fraza odzyskiwania zaakceptowana. Hasło dostępu zostało zaktualizowane.",
+  "RecoveryPhraseRestored": "Fraza odzyskiwania zaakceptowana. Hasło dostępu zostało zaktualizowane. Twoja fraza odzyskiwania pozostaje ważna.",
   "RecoveryPhraseSaveFirst": "Aby kontynuować, wydrukuj, pobierz lub skopiuj swoją frazę odzyskiwania.",
   "RecoveryPhraseTitle": "Zapisz swoją frazę odzyskiwania",
   "RecoveryPhraseWarning": "Każda osoba posiadająca tę frazę może odszyfrować Twoje pliki. Nigdy jej nie udostępniaj. Nie możemy jej odzyskać za Ciebie.",

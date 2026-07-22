@@ -1774,7 +1774,7 @@
   "RecoveryPhraseInputHint": "Ievadiet savu 24 vārdu atkopšanas frāzi, lai atjaunotu piekļuvi šajā ierīcē. Pēc tam jums tiks lūgts iestatīt jaunu ieejas frāzi šai ierīcei.",
   "RecoveryPhrasePlaceholder": "vārds1 vārds2 vārds3 ... vārds24",
   "RecoveryPhraseRequired": "Ievadiet visus 24 atkopšanas frāzes vārdus.",
-  "RecoveryPhraseRestored": "Atkopšanas frāze pieņemta. Ieejas frāze ir atjaunināta.",
+  "RecoveryPhraseRestored": "Atkopšanas frāze pieņemta. Ieejas frāze ir atjaunināta. Jūsu atkopšanas frāze joprojām ir derīga.",
   "RecoveryPhraseSaveFirst": "Lai turpinātu, izdrukājiet, lejupielādējiet vai nokopējiet savu atkopšanas frāzi.",
   "RecoveryPhraseTitle": "Saglabājiet savu atkopšanas frāzi",
   "RecoveryPhraseWarning": "Ikviens, kam ir šī frāze, var atšifrēt jūsu failus. Nekad nedalieties ar to. Mēs nevaram to atgūt jūsu vietā.",

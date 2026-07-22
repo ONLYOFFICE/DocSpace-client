@@ -291,6 +291,27 @@ describe("EncryptionContext / EncryptionProvider", () => {
       const result = await promised;
       expect(result).not.toBeNull();
     });
+
+    it("onUnlocked resolves a pending requireIdentity with the delivered identity", async () => {
+      renderTree();
+      let promised!: Promise<IdentityKeyPair | null>;
+      act(() => {
+        promised = latest.requireIdentity();
+      });
+      expect(captured.passphrase).not.toBeNull();
+
+      // e.g. the recovery-phrase flow delivered an unlocked identity.
+      await act(async () => {
+        captured.passphrase!.onUnlocked?.(dummyKeyPair);
+      });
+
+      const result = await promised;
+      expect(result).toEqual(dummyKeyPair);
+      expect(latest.isUnlocked).toBe(true);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(true);
+      // The dialog is dismissed after the external unlock.
+      expect(captured.passphrase).toBeNull();
+    });
   });
 
   describe("auto-lock on tab hidden", () => {

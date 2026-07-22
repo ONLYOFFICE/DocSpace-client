@@ -1820,7 +1820,7 @@
   "RecoveryPhraseInputHint": "Enter your 24-word recovery phrase to restore access on this device. You will then be prompted to set a new passphrase for this device.",
   "RecoveryPhrasePlaceholder": "word1 word2 word3 ... word24",
   "RecoveryPhraseRequired": "Enter all 24 words of the recovery phrase.",
-  "RecoveryPhraseRestored": "Recovery phrase accepted. Passphrase has been updated.",
+  "RecoveryPhraseRestored": "Recovery phrase accepted. Passphrase has been updated. Your recovery phrase remains valid.",
   "RecoveryPhraseSaveFirst": "Print, download, or copy your recovery phrase to continue.",
   "RecoveryPhraseTitle": "Save your recovery phrase",
   "RecoveryPhraseWarning": "Anyone with this phrase can decrypt your files. Never share it. We cannot recover it for you.",

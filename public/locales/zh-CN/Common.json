@@ -1797,7 +1797,7 @@
   "RecoveryPhraseInputHint": "输入您的 24 个单词恢复短语以在此设备上恢复访问权限。之后系统将提示您为此设备设置新的密码短语。",
   "RecoveryPhrasePlaceholder": "word1 word2 word3 ... word24",
   "RecoveryPhraseRequired": "请输入恢复短语的全部 24 个单词。",
-  "RecoveryPhraseRestored": "恢复短语已验证。密码短语已更新。",
+  "RecoveryPhraseRestored": "恢复短语已验证。密码短语已更新。您的恢复短语仍然有效。",
   "RecoveryPhraseSaveFirst": "请打印、下载或复制您的恢复短语以继续。",
   "RecoveryPhraseTitle": "保存您的恢复短语",
   "RecoveryPhraseWarning": "任何持有此短语的人均可解密您的文件。请勿分享。我们无法为您找回此短语。",

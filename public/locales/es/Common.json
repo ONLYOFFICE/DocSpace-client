@@ -1797,7 +1797,7 @@
   "RecoveryPhraseInputHint": "Introduzca su frase de recuperación de 24 palabras para restaurar el acceso en este dispositivo. A continuación, se le pedirá que establezca una nueva frase de contraseña para este dispositivo.",
   "RecoveryPhrasePlaceholder": "palabra1 palabra2 palabra3 ... palabra24",
   "RecoveryPhraseRequired": "Introduzca las 24 palabras de la frase de recuperación.",
-  "RecoveryPhraseRestored": "Frase de recuperación aceptada. La frase de contraseña ha sido actualizada.",
+  "RecoveryPhraseRestored": "Frase de recuperación aceptada. La frase de contraseña ha sido actualizada. Su frase de recuperación sigue siendo válida.",
   "RecoveryPhraseSaveFirst": "Imprima, descargue o copie su frase de recuperación para continuar.",
   "RecoveryPhraseTitle": "Guarde su frase de recuperación",
   "RecoveryPhraseWarning": "Cualquier persona con esta frase puede descifrar sus archivos. Nunca la comparta. No podemos recuperarla por usted.",

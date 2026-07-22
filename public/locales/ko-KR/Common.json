@@ -1754,7 +1754,7 @@
   "RecoveryPhraseInputHint": "이 기기에서 접근을 복원하려면 24단어 복구 문구를 입력하세요. 그런 다음 이 기기의 새 패스프레이즈를 설정하라는 안내가 표시됩니다.",
   "RecoveryPhrasePlaceholder": "word1 word2 word3 ... word24",
   "RecoveryPhraseRequired": "복구 문구의 24개 단어를 모두 입력하세요.",
-  "RecoveryPhraseRestored": "복구 문구가 수락되었습니다. 패스프레이즈가 업데이트되었습니다.",
+  "RecoveryPhraseRestored": "복구 문구가 수락되었습니다. 패스프레이즈가 업데이트되었습니다. 복구 문구는 계속 유효합니다.",
   "RecoveryPhraseSaveFirst": "계속하려면 복구 문구를 인쇄, 다운로드 또는 복사하세요.",
   "RecoveryPhraseTitle": "복구 문구 저장",
   "RecoveryPhraseWarning": "이 문구가 있으면 누구든 파일을 복호화할 수 있습니다. 절대 공유하지 마세요. 저희는 이를 복구해 드릴 수 없습니다.",

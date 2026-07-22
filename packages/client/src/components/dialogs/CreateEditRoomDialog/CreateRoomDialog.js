@@ -84,6 +84,7 @@ const CreateRoomDialog = ({
   fetchedRoomParams,
   encryptionKeys,
   userId,
+  accountEmail,
   setUserEncryptionKeys,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
@@ -157,6 +158,7 @@ const CreateRoomDialog = ({
 
   const generateKey = useGenerateKeyFlow({
     userId,
+    accountLabel: accountEmail,
     refreshKeysFromServer,
     onSuccess: () => {
       if (!isMountRef.current) return;

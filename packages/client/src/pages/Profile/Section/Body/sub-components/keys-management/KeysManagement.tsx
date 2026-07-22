@@ -63,12 +63,14 @@ type KeysManagementProps = {
   encryptionKeys?: TEncryptionKeyPair[] | null;
   setUserEncryptionKeys?: (keys: TEncryptionKeyPair[]) => void;
   userId?: string;
+  userEmail?: string;
 };
 
 const KeysManagement = ({
   encryptionKeys,
   setUserEncryptionKeys,
   userId,
+  userEmail,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
   const { isUnlocked, lock } = useEncryption();
@@ -88,6 +90,7 @@ const KeysManagement = ({
 
   const generate = useGenerateKeyFlow({
     userId,
+    accountLabel: userEmail,
     refreshKeysFromServer,
     onBeforeNewKeyActive: rotateForAllRooms,
   });
@@ -249,5 +252,6 @@ export default inject(({ userStore }: TStore) => {
     encryptionKeys,
     setUserEncryptionKeys,
     userId: user?.id ? String(user.id) : undefined,
+    userEmail: user?.email,
   };
 })(observer(KeysManagement));

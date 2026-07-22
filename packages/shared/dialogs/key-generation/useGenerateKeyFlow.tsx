@@ -60,6 +60,7 @@ type Step = "idle" | "passphrase" | "recovery-display";
 
 type Deps = {
   userId: string | undefined;
+  accountLabel?: string;
   refreshKeysFromServer: () => Promise<void>;
   onSuccess?: () => void;
   onError?: () => void;
@@ -85,6 +86,7 @@ export type GenerateKeyFlow = {
 
 export function useGenerateKeyFlow({
   userId,
+  accountLabel,
   refreshKeysFromServer,
   onSuccess,
   onError,
@@ -214,6 +216,7 @@ export function useGenerateKeyFlow({
         <RecoveryPhraseDisplayModal
           visible
           mnemonic={mnemonic}
+          accountLabel={accountLabel}
           onConfirm={onRecoveryConfirm}
           onCancel={reset}
           isLoading={isPending}

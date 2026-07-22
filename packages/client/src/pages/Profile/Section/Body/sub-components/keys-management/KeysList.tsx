@@ -187,7 +187,7 @@ const KeyItem: React.FC<KeyItemProps> = ({
           <Text fontSize="13px" fontWeight={600}>
             {t("Common:Algorithm")}:
           </Text>
-          <Text fontSize="13px">ECDH P-256</Text>
+          <Text fontSize="13px">X25519</Text>
         </div>
         {keyData.id && (
           <div className={styles.keyInfo}>

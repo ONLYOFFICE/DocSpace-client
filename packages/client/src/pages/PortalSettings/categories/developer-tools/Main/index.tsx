@@ -34,6 +34,7 @@
  */
 
 import DevToolsSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-api.react.svg";
+import DocsConnectSvg from "PUBLIC_DIR/images/icons/16/docs-connect.editors.react.svg";
 import EmbedSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-javascript-sdk.react.svg";
 import PluginSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-plugin-sdk.react.svg";
 import WebhookSvg from "PUBLIC_DIR/images/icons/16/catalog.devtools-webhooks.react.svg";
@@ -63,8 +64,11 @@ const Main = (props: { apiBasicLink: string }) => {
     "WebPlugins",
     "Webhooks",
     "OAuth",
+    "DocsConnect",
   ]);
   const { apiBasicLink } = props;
+
+  const docsName = `${getBrandName("OrganizationName")} ${getBrandName("ProductEditorsName")}`;
 
   useEffect(() => {
     if (ready) setDocumentTitle(t("Common:DeveloperTools"));
@@ -97,6 +101,17 @@ const Main = (props: { apiBasicLink: string }) => {
           </Text>
         </div>
         <div className={styles.grid}>
+          <Card
+            className={styles.featured}
+            icon={<DocsConnectSvg />}
+            title={t("DocsConnect:DocsConnect")}
+            description={t("DocsConnect:CardDescription", {
+              productName: docsName,
+            })}
+            url="/developer-tools/docs-connect"
+            color={globalColors.docsConnectAccent}
+            linkTitle={t("DocsConnect:GetStarted")}
+          />
           <Card
             icon={<DevToolsSvg />}
             title={t("Settings:RestAPI")}

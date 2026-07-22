@@ -71,15 +71,26 @@ import {
   CreateSpreadsheetIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 
+import { GuestRestrictionTooltip } from "../sub-components/GuestRestrictionTooltip";
 import { makeCreateUrl, NEW_FILE_NAMES } from "../utils";
 
 // Builds the "create new file" quick actions for the Dashboard. Each action
 // opens the editor for a blank file of the matching type in the user's
-// "My documents" folder.
+// "My documents" folder. Guests can't create files, so the tiles are disabled
+// with a tooltip explaining why instead of being hidden.
 export const useCreateActions = (
   myFolderId: number | null,
+  isGuest: boolean,
 ): QuickActionItem[] => {
   const { t } = useTranslation(["Common"]);
+
+  const disabledProps = React.useMemo(
+    () =>
+      isGuest
+        ? { disabled: true, tooltipContent: <GuestRestrictionTooltip /> }
+        : undefined,
+    [isGuest],
+  );
 
   return React.useMemo<QuickActionItem[]>(
     () => [
@@ -92,6 +103,7 @@ export const useCreateActions = (
             makeCreateUrl(NEW_FILE_NAMES.document, myFolderId),
             "_blank",
           ),
+        ...disabledProps,
       },
       {
         id: "spreadsheet",
@@ -102,6 +114,7 @@ export const useCreateActions = (
             makeCreateUrl(NEW_FILE_NAMES.spreadsheet, myFolderId),
             "_blank",
           ),
+        ...disabledProps,
       },
       {
         id: "presentation",
@@ -112,6 +125,7 @@ export const useCreateActions = (
             makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),
             "_blank",
           ),
+        ...disabledProps,
       },
       {
         id: "pdf",
@@ -119,9 +133,10 @@ export const useCreateActions = (
         label: getConstName("PDF"),
         onClick: () =>
           window.open(makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId), "_blank"),
+        ...disabledProps,
       },
     ],
-    [t, myFolderId],
+    [t, myFolderId, disabledProps],
   );
 };
 

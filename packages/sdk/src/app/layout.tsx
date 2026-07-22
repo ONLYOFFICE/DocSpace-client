@@ -106,7 +106,7 @@ export default async function RootLayout({
     "en";
 
   const initialLocaleResources = await loadTranslationsForLocale(locale, {
-    namespaces: ["DocsCloud"],
+    namespaces: [],
     appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
     sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
   });

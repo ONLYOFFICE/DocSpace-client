@@ -210,6 +210,7 @@ const View = ({
   }, []);
 
   const [isLoading, setIsLoading] = React.useState(false);
+  const getViewRequestIdRef = React.useRef(0);
 
   const prevCurrentViewRef = React.useRef(currentView);
   const prevCategoryType = React.useRef<number>(getCategoryType(location));
@@ -400,6 +401,9 @@ const View = ({
 
   React.useEffect(() => {
     const getView = async () => {
+      const requestId = ++getViewRequestIdRef.current;
+      const isStale = () => getViewRequestIdRef.current !== requestId;
+
       try {
         abortControllers.current.usersAbortController?.abort();
         abortControllers.current.groupsAbortController?.abort();
@@ -442,6 +446,10 @@ const View = ({
           clearFiles();
         }
 
+        // A newer getView() run has since started (and aborted this one's
+        // requests) — let it own the loading state instead of stomping on it.
+        if (isStale()) return;
+
         if (view) {
           setCurrentView(view);
           setCurrentClientView(view);
@@ -455,8 +463,16 @@ const View = ({
       } catch (error) {
         console.log(error);
         if ((error as Error).message === "canceled") {
+          // Only a superseded run should stay silent here; if this is still
+          // the latest run, nothing else will clear the loading indicator.
+          if (isStale()) return;
+
+          setIsChangePageRequestRunning(false);
+          setIsLoading(false);
           return;
         }
+
+        if (isStale()) return;
 
         const typedError = error as TError;
 

@@ -112,11 +112,7 @@ const ClientArticleSidebar = ({
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
-  const {
-    recentFolderId,
-    favoritesFolderId,
-    recycleBinFolderId,
-  } = folderIds;
+  const { recentFolderId, favoritesFolderId, recycleBinFolderId } = folderIds;
 
   // `onFolderNavigate` is re-created on every inject render; keep a stable ref
   // so the memoized onClick handlers below don't go stale (which made nested
@@ -184,10 +180,7 @@ const ClientArticleSidebar = ({
 
   const goFormsTemplates = React.useCallback(() => {
     onFolderNavigateRef.current?.();
-    const filter = RoomsFilter.getDefault(
-      userId,
-      RoomSearchArea.FormTemplates,
-    );
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.FormTemplates);
     filter.searchArea = RoomSearchArea.FormTemplates;
     navigate(`/forms/filter?${filter.toUrlParams(userId, false)}`);
   }, [navigate, userId]);
@@ -237,7 +230,7 @@ const ClientArticleSidebar = ({
 
     const mainItems: NavMenuItem[] = [];
 
-    if (myDocsFolder && !isVisitor) {
+    if (myDocsFolder || sharedFolder || recentFolder || favFolder) {
       const children: NavSubItem[] = [];
       if (sharedFolder) {
         const hasNew = (sharedFolder.newItems ?? 0) > 0;
@@ -255,10 +248,23 @@ const ClientArticleSidebar = ({
       }
       if (recentFolder) children.push(navItem(recentFolder));
       if (favFolder) children.push(navItem(favFolder));
-      if (trashFolder)
+      // Guests can't view or manage Files (their own files/Trash), so
+      // that section is dropped and the top-level item opens Shared with me
+      // instead of the (inaccessible) Files folder.
+      if (!isVisitor && myDocsFolder && trashFolder)
         children.push(navItem(trashFolder, { withTopSeparator: true }));
 
-      mainItems.push({ ...navItem(myDocsFolder), children });
+      const primaryFolder = myDocsFolder ?? sharedFolder;
+
+      mainItems.push({
+        id: myDocsFolder ? String(myDocsFolder.id) : "files",
+        label: myDocsFolder ? myDocsFolder.title : t("Common:Files"),
+        icon: getCatalogIconUrlByType(FolderType.USER),
+        onClick: primaryFolder
+          ? goFolder(primaryFolder.id, primaryFolder.rootFolderType)
+          : undefined,
+        children,
+      });
     }
 
     if (roomsFolder) {
@@ -435,7 +441,11 @@ const ClientArticleSidebar = ({
   ]);
 
   return (
-    <AppsSidebar groups={groups} activeId={activeId} isNavLoading={isNavLoading} />
+    <AppsSidebar
+      groups={groups}
+      activeId={activeId}
+      isNavLoading={isNavLoading}
+    />
   );
 };
 

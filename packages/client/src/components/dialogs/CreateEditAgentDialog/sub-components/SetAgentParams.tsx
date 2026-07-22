@@ -96,7 +96,6 @@ type setAgentParamsProps = {
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
-  portalMcpServerId?: string;
   onClickAction?: () => void;
   selectedServers?: TSelectorItem[];
   setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
@@ -156,7 +155,6 @@ const SetAgentParams = ({
   onOwnerChange,
   isDefaultAIAgentsQuotaSet,
   infoPanelSelection,
-  portalMcpServerId,
   onClickAction,
   selectedServers,
   setSelectedServers,
@@ -505,7 +503,6 @@ const SetAgentParams = ({
       <MCPSettings
         setAgentParams={setAgentParams}
         agentParams={agentParams}
-        portalMcpServerId={portalMcpServerId}
         onClickAction={onClickAction}
         selectedServers={selectedServers}
         setSelectedServers={setSelectedServers}

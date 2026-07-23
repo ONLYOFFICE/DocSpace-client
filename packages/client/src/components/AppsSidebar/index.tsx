@@ -125,6 +125,7 @@ type AppsSidebarViewProps = AppsSidebarProps & {
   toggleArticleOpen?: () => void;
   onBack?: () => void;
   backLabel?: string;
+  limitedAccessDevToolsForUsers?: boolean;
 };
 
 export const AppsSidebarView = ({
@@ -142,6 +143,7 @@ export const AppsSidebarView = ({
   backLabel,
   articleButtonItems,
   isNavLoading,
+  limitedAccessDevToolsForUsers,
 }: AppsSidebarViewProps) => {
   const showBackButton = variant === "secondary" && !hideBack;
   const hideFooter = variant === "secondary";
@@ -172,10 +174,12 @@ export const AppsSidebarView = ({
 
   const isAdmin = user?.isAdmin ?? false;
   const isOwner = user?.isOwner ?? false;
-  // Developer Tools banner mirrors the former footer item gating: admins/owners
-  // only. Hidden entirely on the secondary sidebars (accounts/dev-tools/settings)
-  // via `hideFooter`.
-  const showDevTools = isAdmin || isOwner;
+  // Developer Tools banner mirrors the route guard in Route.private.tsx: hidden
+  // for guests, and for non-admins when access is limited. Hidden entirely on
+  // the secondary sidebars (accounts/dev-tools/settings) via `hideFooter`.
+  const showDevTools =
+    !user?.isVisitor &&
+    (isAdmin || isOwner || !limitedAccessDevToolsForUsers);
   const showDevToolsBar = showDevTools && !hideFooter;
   // While the nav skeleton is up, the footer (plugin slots + banner) stays
   // hidden so it doesn't appear ahead of the navigation it sits under.
@@ -381,6 +385,7 @@ type AppsSidebarConnectedProps = AppsSidebarProps & {
   articleOpen?: boolean;
   toggleArticleOpen?: () => void;
   articleButtonItems?: AppsPluginsItems | null;
+  limitedAccessDevToolsForUsers?: boolean;
 };
 
 const AppsSidebar = ({
@@ -420,6 +425,7 @@ export default inject<TStore>(
     toggleArticleOpen: settingsStore.toggleArticleOpen,
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     articleButtonItems: pluginStore?.articleButtonItemsList,
+    limitedAccessDevToolsForUsers: settingsStore.limitedAccessDevToolsForUsers,
   }),
 )(observer(AppsSidebar));
 

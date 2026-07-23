@@ -76,6 +76,7 @@ import { setFileView } from "SRC_DIR/helpers/info-panel";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getSuggestions } from "SRC_DIR/helpers/aiSuggestions";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
@@ -140,9 +141,12 @@ const Shell = ({ page = "home", ...rest }) => {
     closeEditorPanel,
     currentClientView,
     selectedFolderType,
+    aiSuggestions,
     isPrivacyFolder,
     isAIReady,
   } = rest;
+
+  console.debug({ currentClientView });
 
   useCreateFileError({
     setPortalTariff,
@@ -654,6 +658,7 @@ const Shell = ({ page = "home", ...rest }) => {
           closeEditorPanel={closeEditorPanel}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={standalone ? undefined : !isAIReady}
+          suggestions={aiSuggestions}
         >
           {layout}
         </AiAgentProviders>
@@ -788,6 +793,14 @@ const ShellWrapper = inject(
       isAIReady: paymentStore.isAIReady,
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
+      aiSuggestions: getSuggestions({
+        roomType: selectedFolderStore.roomType,
+        folderType: selectedFolderStore.type,
+        rootFolderType: selectedFolderStore.rootFolderType,
+        isRoom: selectedFolderStore.isRoom,
+        isFolder: selectedFolderStore.isFolder,
+        isRootFolder: selectedFolderStore.isRootFolder,
+      }),
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
       // Scope the chat to the current location: inside any room (including
       // its subfolders) the room id wins, elsewhere the currently selected

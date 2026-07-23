@@ -33,56 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
+import type { AppId } from "./apps-catalog";
 
-import { selectActivePanel } from "@/utils/ai-arbiter";
+// Temporary kill switch for apps that cannot run on the new AI stack yet.
+// The AI Arbiter still drives the removed C# AI endpoints (chat streaming,
+// providers, models), which the Node AI service does not serve, so the
+// product is hidden everywhere until it is migrated or removed. Remove the
+// id from this set to bring the app back.
+const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>([
+  "ai-arbiter",
+]);
 
-import { getAiAgents } from "@/api/arbiter";
-import { getSelf } from "@/api/people";
-import type {
-  ActivePanelSummary,
-  ArbiterCommonData,
-} from "@/types/arbiter";
-
-import AiArbiterShell from "./layout.client";
-
-export const dynamic = "force-dynamic";
-
-// Temporarily unpublished: the arbiter still drives the removed C# AI
-// endpoints (chat streaming, providers, models), which the Node AI service
-// does not serve. Flip to false once the product is migrated or removed.
-// Typed as boolean (not literal true) so the code below stays reachable
-// for the compiler and keeps typechecking.
-const AI_ARBITER_TEMPORARILY_DISABLED: boolean = true;
-
-export default async function AiArbiterServerLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  if (AI_ARBITER_TEMPORARILY_DISABLED) notFound();
-
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("asc_auth_key")?.value ?? "";
-
-  const user = await getSelf();
-  const userId = user?.id ?? null;
-
-  let activePanel: ActivePanelSummary | null = null;
-  if (userId) {
-    const agents = await getAiAgents(userId);
-    const picked = selectActivePanel(agents);
-    if (picked) {
-      activePanel = picked;
-    }
-  }
-
-  const commonData: ArbiterCommonData = {
-    activePanel,
-    authToken,
-    userId,
-  };
-
-  return <AiArbiterShell commonData={commonData}>{children}</AiArbiterShell>;
-}
+export const isAppTemporarilyDisabled = (id: string): boolean =>
+  TEMPORARILY_DISABLED_APPS.has(id);

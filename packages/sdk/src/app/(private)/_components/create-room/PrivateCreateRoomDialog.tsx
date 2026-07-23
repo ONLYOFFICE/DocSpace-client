@@ -85,6 +85,7 @@ const PrivateCreateRoomDialogInner: React.FC<PrivateCreateRoomDialogProps> = ({
 
   const generateKey = useGenerateKeyFlow({
     userId,
+    accountLabel: user?.email,
     refreshKeysFromServer,
   });
 

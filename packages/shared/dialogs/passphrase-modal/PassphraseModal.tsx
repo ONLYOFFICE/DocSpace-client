@@ -33,7 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -41,6 +47,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
   PasswordInput,
   type PasswordInputHandle,
@@ -52,23 +59,35 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import {
   PASSPHRASE_MIN_LENGTH,
+  checkPassphraseStrength,
   isPassphraseAcceptable,
+  type PassphraseStrength,
 } from "@docspace/shared/services/encryption/passphrase-strength";
 
 import styles from "./PassphraseModal.module.scss";
 
 type PassphraseModalProps = {
   visible: boolean;
-  onSubmit: (passphrase: string) => void;
+  onSubmit: (passphrase: string, rememberDevice?: boolean) => void;
   onCancel: () => void;
   isNew: boolean;
   isLoading?: boolean;
   externalError?: string | null;
   onForgotPassphrase?: () => void;
   submitLabel?: string;
+  showRememberDevice?: boolean;
+  onPasskeyUnlock?: () => void;
+  isPasskeyUnlocking?: boolean;
 };
 
 const MIN_LENGTH = PASSPHRASE_MIN_LENGTH;
+
+const STRENGTH_COLOR: Record<PassphraseStrength, string> = {
+  weak: "var(--status-error)",
+  fair: "var(--status-warning)",
+  good: "var(--status-icon-color-positive)",
+  strong: "var(--status-icon-color-positive)",
+};
 
 const PASSPHRASE_SETTINGS = {
   minLength: MIN_LENGTH,
@@ -89,6 +108,9 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   externalError,
   onForgotPassphrase,
   submitLabel,
+  showRememberDevice = false,
+  onPasskeyUnlock,
+  isPasskeyUnlocking = false,
 }) => {
   const { t, ready } = useTranslation(["Common"]);
   const inputRef = useRef<PasswordInputHandle>(null);
@@ -97,6 +119,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
   const [confirmPassphrase, setConfirmPassphrase] = useState("");
   const [error, setError] = useState("");
   const [rulesPassed, setRulesPassed] = useState(false);
+  const [rememberDevice, setRememberDevice] = useState(false);
 
   useEffect(() => {
     if (visible) {
@@ -104,8 +127,20 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       setConfirmPassphrase("");
       setError("");
       setRulesPassed(false);
+      setRememberDevice(false);
     }
   }, [visible]);
+
+  const passkeyAutoTriedRef = useRef(false);
+  useEffect(() => {
+    if (!visible) {
+      passkeyAutoTriedRef.current = false;
+      return;
+    }
+    if (isNew || !onPasskeyUnlock || passkeyAutoTriedRef.current) return;
+    passkeyAutoTriedRef.current = true;
+    onPasskeyUnlock();
+  }, [visible, isNew, onPasskeyUnlock]);
 
   const handleGeneratePassword = useCallback((e: React.MouseEvent) => {
     inputRef.current?.onGeneratePassword(e);
@@ -117,8 +152,8 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
       return;
     }
 
-    onSubmit(passphrase);
-  }, [passphrase, isNew, onSubmit, t]);
+    onSubmit(passphrase, showRememberDevice ? rememberDevice : undefined);
+  }, [passphrase, isNew, onSubmit, showRememberDevice, rememberDevice, t]);
 
   const handleCancel = useCallback(() => {
     setPassphrase("");
@@ -126,6 +161,26 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
     setError("");
     onCancel();
   }, [onCancel]);
+
+  const strengthResult = useMemo(
+    () => (isNew && passphrase ? checkPassphraseStrength(passphrase) : null),
+    [isNew, passphrase],
+  );
+
+  const strengthLabel = (strength: PassphraseStrength): string => {
+    switch (strength) {
+      case "weak":
+        return t("Common:PassphraseStrengthWeak");
+      case "fair":
+        return t("Common:PassphraseStrengthFair");
+      case "good":
+        return t("Common:PassphraseStrengthGood");
+      case "strong":
+        return t("Common:PassphraseStrengthStrong");
+      default:
+        return "";
+    }
+  };
 
   const isValid = isNew
     ? rulesPassed && passphrase === confirmPassphrase
@@ -219,6 +274,26 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
               />
             </FieldContainer>
 
+            {strengthResult ? (
+              <div className={styles.strengthRow}>
+                <Text fontSize="12px" color="var(--text-secondary)">
+                  {t("Common:PassphraseStrengthLabel")}:{" "}
+                </Text>
+                <Text
+                  fontSize="12px"
+                  fontWeight={600}
+                  color={STRENGTH_COLOR[strengthResult.strength]}
+                >
+                  {strengthLabel(strengthResult.strength)}
+                </Text>
+              </div>
+            ) : null}
+            {strengthResult?.containsCommonPattern ? (
+              <Text fontSize="12px" color="var(--status-error)">
+                {t("Common:PassphraseCommonPattern")}
+              </Text>
+            ) : null}
+
             {onForgotPassphrase && externalError ? (
               <div className={styles.forgotRow}>
                 <Link
@@ -231,6 +306,37 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   tabIndex={3}
                 >
                   {t("Common:ForgotPassphrase")}
+                </Link>
+              </div>
+            ) : null}
+
+            {showRememberDevice && !isNew ? (
+              <div className={styles.rememberRow}>
+                <Checkbox
+                  id="rememberDevice"
+                  isChecked={rememberDevice}
+                  isDisabled={isLoading}
+                  onChange={(e) => setRememberDevice(e.target.checked)}
+                  label={t("Common:RememberDeviceLabel")}
+                  tabIndex={4}
+                />
+              </div>
+            ) : null}
+
+            {onPasskeyUnlock && !isNew ? (
+              <div className={styles.passkeyRow}>
+                <Link
+                  type={LinkType.action}
+                  fontWeight="600"
+                  fontSize="12px"
+                  isHovered
+                  onClick={() => {
+                    if (!isLoading && !isPasskeyUnlocking) onPasskeyUnlock();
+                  }}
+                  dataTestId="passkey_unlock_link"
+                  tabIndex={2}
+                >
+                  {t("Common:PasskeyUnlockButton")}
                 </Link>
               </div>
             ) : null}

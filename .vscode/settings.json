@@ -1,6 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "biome.enabled": false,
   "files.exclude": {
     "**/packages": true,
     // "**/libs": true,

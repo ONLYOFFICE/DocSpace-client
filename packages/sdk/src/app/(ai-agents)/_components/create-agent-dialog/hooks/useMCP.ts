@@ -67,8 +67,8 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import {
-  getMCPServerById,
-  getServersListForRoom,
+  getEntityMcpServers,
+  getSystemMcpServerNames,
 } from "@docspace/shared/api/ai";
 import { getServerIconUrl } from "@docspace/shared/utils";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
@@ -79,11 +79,9 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 export const useMCP = ({
   agentParams,
   setAgentParams,
-  portalMcpServerId,
 }: {
   agentParams: TAgentParams;
   setAgentParams: (value: Partial<TAgentParams>) => void;
-  portalMcpServerId?: string;
 }) => {
   const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -105,108 +103,74 @@ export const useMCP = ({
   const onClose = () => setIsMCPSelectorVisible(false);
 
   const onSubmit = (servers: TSelectorItem[]) => {
-    if (servers.find((s) => s.id === portalMcpServerId)) {
-      setAgentParams({ attachDefaultTools: true });
-    }
-
     setSelectedServers(servers);
   };
 
   const agentId = agentParams.agentId;
 
+  // Servers are keyed by name in the chat-lib model. System servers (from the
+  // service config) get the portal branding; everything else is a portal
+  // custom server copied into the agent scope.
+  const toSelectorItem = React.useCallback(
+    (name: string, systemNames: readonly string[]): TSelectorItem => {
+      const isSystem = systemNames.includes(name);
+      return {
+        key: name,
+        id: name,
+        label: isSystem
+          ? `${getBrandName("OrganizationName")} ${getBrandName("ProductName")}`
+          : name,
+        icon:
+          getServerIconUrl(
+            isSystem ? ServerType.Portal : ServerType.Custom,
+            isBase,
+          ) ?? "",
+        isInputItem: false,
+        onAcceptInput: () => {},
+        onCancelInput: () => {},
+        defaultInputValue: "",
+        placeholder: "",
+      };
+    },
+    [isBase],
+  );
+
   React.useEffect(() => {
     if (agentId) {
-      getServersListForRoom(agentId).then((res) => {
-        if (res) {
-          const items = res.map((item) => {
-            const name =
-              item.serverType === ServerType.Portal
-                ? `${getBrandName("OrganizationName")} ${getBrandName("ProductName")}`
-                : item.name;
+      // Edit: the agent's enabled servers are its per-entity map.
+      Promise.all([
+        getEntityMcpServers(String(agentId)),
+        getSystemMcpServerNames(),
+      ]).then(([serversMap, systemNames]) => {
+        const items = Object.keys(serversMap).map((name) =>
+          toSelectorItem(name, systemNames),
+        );
 
-            return {
-              key: item.id,
-              id: item.id,
-              label: name,
-              icon:
-                (item.icon?.icon24 ||
-                  getServerIconUrl(item.serverType, isBase)) ??
-                "",
-              isInputItem: false,
-              onAcceptInput: () => {},
-              onCancelInput: () => {},
-              defaultInputValue: "",
-              placeholder: "",
-            };
-          });
-
-          setSelectedServers(items);
-          setInitialServers(items);
-        }
+        setSelectedServers(items);
+        setInitialServers(items);
+      });
+    } else {
+      // Create: pre-select the system (portal) servers by default.
+      getSystemMcpServerNames().then((systemNames) => {
+        setSelectedServers(
+          systemNames.map((name) => toSelectorItem(name, systemNames)),
+        );
       });
     }
-  }, [agentId, isBase, t]);
+  }, [agentId, toSelectorItem, t]);
 
   React.useEffect(() => {
+    // The whole selection is stored by name — system servers included:
+    // enabling one for an agent is a per-entity map entry like any other.
     setAgentParams({
       mcpServers: selectedServers
         .map((server) => server.id?.toString() || "")
-        .filter((id) =>
-          portalMcpServerId
-            ? id !== portalMcpServerId && id !== ""
-            : id !== "",
-        ),
+        .filter((name) => name !== ""),
       mcpServersInitial: initialServers
         .map((server) => server.id?.toString() || "")
-        .filter((id) =>
-          portalMcpServerId
-            ? id !== portalMcpServerId && id !== ""
-            : id !== "",
-        ),
+        .filter((name) => name !== ""),
     });
-  }, [selectedServers, initialServers, portalMcpServerId, setAgentParams]);
-
-  React.useEffect(() => {
-    const initBaseMcpServers = async () => {
-      if (!portalMcpServerId) return;
-
-      const portalMcpServer = await getMCPServerById(portalMcpServerId);
-
-      if (!portalMcpServer?.enabled) return;
-
-      const name =
-        portalMcpServer.serverType === ServerType.Portal
-          ? `${getBrandName("OrganizationName")} ${getBrandName("ProductName")}`
-          : portalMcpServer.name;
-
-      setSelectedServers([
-        {
-          key: portalMcpServer.id,
-          id: portalMcpServer.id,
-          label: name,
-          icon:
-            (portalMcpServer.icon?.icon24 ||
-              getServerIconUrl(portalMcpServer.serverType, isBase)) ??
-            "",
-          isInputItem: false,
-          onAcceptInput: () => {},
-          onCancelInput: () => {},
-          defaultInputValue: "",
-          placeholder: "",
-        },
-      ]);
-
-      // The portal MCP server is filtered out of `mcpServers` (see effect
-      // above) and is instead represented by the `attachDefaultTools` flag.
-      // Seed it to true so a user who never opens the MCP selector still
-      // gets the portal tools attached on Create.
-      setAgentParams({ attachDefaultTools: true });
-    };
-
-    if (portalMcpServerId) {
-      initBaseMcpServers();
-    }
-  }, [portalMcpServerId, isBase, t, setAgentParams]);
+  }, [selectedServers, initialServers, setAgentParams]);
 
   const initSelectedServers = React.useMemo(() => {
     return selectedServers.map((i) => i.id?.toString() || "");

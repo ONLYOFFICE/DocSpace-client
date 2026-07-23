@@ -34,7 +34,7 @@
  */
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
-import { KnowledgeType, ProviderType } from "@docspace/shared/api/ai/enums";
+import { KnowledgeType } from "@docspace/shared/api/ai/enums";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
@@ -60,7 +60,6 @@ type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
   knowledgeConfig?: AISettingsStore["knowledgeConfig"];
   updateKnowledge?: AISettingsStore["updateKnowledge"];
-  aiProviders?: AISettingsStore["aiProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
   knowledgeSettingsUrl?: SettingsStore["knowledgeSettingsUrl"];
@@ -72,7 +71,6 @@ const KnowledgeComponent = ({
   knowledgeInitied,
   knowledgeConfig,
   updateKnowledge,
-  aiProviders,
   getAIConfig,
   aiConfig,
   knowledgeSettingsUrl,
@@ -84,6 +82,9 @@ const KnowledgeComponent = ({
   // at least one AI model profile is configured in the AI chat.
   const { useProfilesStore } = useStores();
   const hasAIProviders = useProfilesStore((s) => s.profiles.length > 0);
+  const hasSystemProvider = useProfilesStore((s) =>
+    s.profiles.some((p) => p.providerType === "onlyoffice"),
+  );
 
   const [resetDialogVisible, setResetDialogVisible] =
     React.useState<boolean>(false);
@@ -174,9 +175,6 @@ const KnowledgeComponent = ({
     setSaveRequestRunning(false);
   };
 
-  const hasSystemProvider = aiProviders?.some(
-    (p) => p.type === ProviderType.PortalAi,
-  );
   const isSystemProviderDisabled =
     hasSystemProvider && !aiConfig?.systemAiEnabled;
 
@@ -399,7 +397,6 @@ export const Knowledge = inject(
       knowledgeInitied: aiSettingsStore.knowledgeInitied,
       knowledgeConfig: aiSettingsStore.knowledgeConfig,
       updateKnowledge: aiSettingsStore.updateKnowledge,
-      aiProviders: aiSettingsStore.aiProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
       knowledgeSettingsUrl: settingsStore.knowledgeSettingsUrl,

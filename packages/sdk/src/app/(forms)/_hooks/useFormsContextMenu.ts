@@ -45,7 +45,6 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
-import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/ai-agents.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import SpreadsheetSvgUrl from "PUBLIC_DIR/images/icons/16/spreadsheet.svg?url";
 
@@ -55,9 +54,6 @@ import { frameCallEvent } from "@docspace/shared/utils/common";
 import { FormsSection } from "@/types/forms";
 import type { CustomContextMenuAction } from "@/types/forms";
 
-import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
-import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
-import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import useFormsActions from "./useFormsActions";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
@@ -123,9 +119,6 @@ export default function useFormsContextMenu() {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
-  const { openPanelWithAgent, askFromDBAgentId } = useFormsAiAgentStore();
-  const { hasManagementAccess } = useFormsSettingsStore();
-  const { sendToDb } = useFormsDbSettingsStore();
 
   const {
     openForm,
@@ -184,8 +177,6 @@ export default function useFormsContextMenu() {
       const canResetFilling = !isPreparing && file.security?.ResetFilling;
       const canStopFilling = file.security?.StopFilling;
       const canUpdateXlsx = file.security?.UpdateXlsx;
-      const canAskFromDb =
-        Boolean(askFromDBAgentId) && hasManagementAccess && sendToDb;
 
       const optionsModel: Partial<
         Record<string, TFormsContextMenuItem | null>
@@ -222,18 +213,6 @@ export default function useFormsContextMenu() {
             }
           : null,
         "separator-after-xlsx": makeSeparator("separator-after-xlsx"),
-        "ask-from-db":
-          canFillForm && canAskFromDb && askFromDBAgentId
-            ? {
-                id: "option_ask-from-db",
-                key: "ask-from-db",
-                label: t("Common:AskFromDB"),
-                icon: AiAgentsReactSvgUrl,
-                onClick: () => openPanelWithAgent(askFromDBAgentId, file),
-                disabled: false,
-              }
-            : null,
-        separator6: makeSeparator("separator6"),
         "start-filling": canStartFilling
           ? {
               id: "option_start-filling",
@@ -305,8 +284,6 @@ export default function useFormsContextMenu() {
           "separator0",
           "update-xlsx-data",
           "separator-after-xlsx",
-          "ask-from-db",
-          "separator6",
           "start-filling",
           "reset-filling",
           "separator1",
@@ -365,10 +342,6 @@ export default function useFormsContextMenu() {
       resetFilling,
       stopFilling,
       syncXlsxData,
-      openPanelWithAgent,
-      askFromDBAgentId,
-      hasManagementAccess,
-      sendToDb,
       fileActions,
       buildCustomItems,
     ],

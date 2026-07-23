@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { TAgent } from "@docspace/shared/api/ai/types";
-import { getNewAiAgent } from "@docspace/shared/api/ai";
+import { getAIAgent } from "@docspace/shared/api/ai";
 import {
   getFetchedAgentParams,
   TAgentParams,
@@ -78,8 +78,8 @@ const EditAgentEvent = ({
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(false);
-  // The room list item never carries `profileId` — the new-ai service
-  // injects it only into GET /new-ai/agents/:id — so the agent is
+  // The room list item never carries `profileId` — the Node AI service
+  // injects it only into GET /ai/agents/:id — so the agent is
   // re-fetched below and the id merged in. Without it the edit dialog
   // preselects the default profile and saving any field would silently
   // rebind the agent's model.
@@ -105,9 +105,9 @@ const EditAgentEvent = ({
     const fetchInfo = async () => {
       const [tags, agentWithProfile] = await Promise.all([
         fetchTags(),
-        // Non-fatal: an agent without the new-ai binding (or a failed
+        // Non-fatal: an agent without the profile binding (or a failed
         // request) just keeps today's behavior of no preselected profile.
-        getNewAiAgent(item.id).catch(() => null),
+        getAIAgent(item.id).catch(() => null),
       ]);
 
       setFetchedTags(tags as string[]);

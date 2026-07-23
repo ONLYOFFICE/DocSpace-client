@@ -48,7 +48,6 @@ import { FormsNavigationStoreContextProvider } from "./FormsNavigationStore";
 import { FormsListStoreContextProvider } from "./FormsListStore";
 import { FormsSettingsStoreContextProvider } from "./FormsSettingsStore";
 import { FormsDbSettingsStoreContextProvider } from "./FormsDbSettingsStore";
-import { FormsAiAgentStoreContextProvider } from "./FormsAiAgentStore";
 import { FormsUserStoreContextProvider } from "./FormsUserStore";
 import { FormsTourStoreContextProvider } from "./FormsTourStore";
 import { FormsCustomActionsStoreContextProvider } from "./FormsCustomActionsStore";
@@ -72,23 +71,21 @@ export const FormsStoreProviders = ({
                   <FormsSettingsStoreContextProvider>
                     <FormsUserStoreContextProvider>
                       <FormsDbSettingsStoreContextProvider>
-                        <FormsAiAgentStoreContextProvider>
-                          <FormsNavigationStoreContextProvider>
-                            <FormsListStoreContextProvider>
-                              <FormsCustomActionsStoreContextProvider>
-                                <FormsDeleteDialogStoreContextProvider>
-                                  <FormsStopFillingDialogStoreContextProvider>
-                                    <FormsProgressStoreContextProvider>
-                                      <FormsTourStoreContextProvider>
-                                        {children}
-                                      </FormsTourStoreContextProvider>
-                                    </FormsProgressStoreContextProvider>
-                                  </FormsStopFillingDialogStoreContextProvider>
-                                </FormsDeleteDialogStoreContextProvider>
-                              </FormsCustomActionsStoreContextProvider>
-                            </FormsListStoreContextProvider>
-                          </FormsNavigationStoreContextProvider>
-                        </FormsAiAgentStoreContextProvider>
+                        <FormsNavigationStoreContextProvider>
+                          <FormsListStoreContextProvider>
+                            <FormsCustomActionsStoreContextProvider>
+                              <FormsDeleteDialogStoreContextProvider>
+                                <FormsStopFillingDialogStoreContextProvider>
+                                  <FormsProgressStoreContextProvider>
+                                    <FormsTourStoreContextProvider>
+                                      {children}
+                                    </FormsTourStoreContextProvider>
+                                  </FormsProgressStoreContextProvider>
+                                </FormsStopFillingDialogStoreContextProvider>
+                              </FormsDeleteDialogStoreContextProvider>
+                            </FormsCustomActionsStoreContextProvider>
+                          </FormsListStoreContextProvider>
+                        </FormsNavigationStoreContextProvider>
                       </FormsDbSettingsStoreContextProvider>
                     </FormsUserStoreContextProvider>
                   </FormsSettingsStoreContextProvider>

@@ -61,7 +61,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { KnowledgeType, ProviderType } from "@docspace/shared/api/ai/enums";
+import { KnowledgeType } from "@docspace/shared/api/ai/enums";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
@@ -90,13 +91,15 @@ const FAKE_KEY_VALUE = "0000000000000000";
 const KnowledgeComponent = () => {
   const aiSettingsStore = useAISettingsStore();
   const aiConfigStore = useAgentsAIConfigStore();
-  const {
-    knowledgeInitied,
-    knowledgeConfig,
-    updateKnowledge,
-    hasAIProviders,
-    aiProviders,
-  } = aiSettingsStore;
+  const { knowledgeInitied, knowledgeConfig, updateKnowledge } =
+    aiSettingsStore;
+  // Gate the Knowledge base on the AI chat profiles (the same signal the AI
+  // chat itself uses) — the legacy provider list is gone with the C# AI API.
+  const { useProfilesStore } = useStores();
+  const hasAIProviders = useProfilesStore((s) => s.profiles.length > 0);
+  const hasSystemProvider = useProfilesStore((s) =>
+    s.profiles.some((p) => p.providerType === "onlyoffice"),
+  );
   const { aiConfig, fetchAIConfig: getAIConfig } = aiConfigStore;
   // settingsStore.knowledgeSettingsUrl has no SDK equivalent — skip the
   // "Learn more" link in the SDK iframe context.
@@ -193,9 +196,6 @@ const KnowledgeComponent = () => {
     setSaveRequestRunning(false);
   };
 
-  const hasSystemProvider = aiProviders?.some(
-    (p) => p.type === ProviderType.PortalAi,
-  );
   const isSystemProviderDisabled =
     hasSystemProvider && !aiConfig?.systemAiEnabled;
 

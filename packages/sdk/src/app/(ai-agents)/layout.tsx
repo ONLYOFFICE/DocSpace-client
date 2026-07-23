@@ -41,7 +41,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
 
 import { getFilesSettings } from "@/api/files";
-import { getAIAgents, getAIConfig, getDefaultProvider } from "@/api/ai";
+import { getAIAgents, getAIConfig } from "@/api/ai";
 import { getSelf } from "@/api/people";
 import { getSettings } from "@/api/settings";
 import {
@@ -100,21 +100,14 @@ export default async function AiAgentsServerLayout({ children }: SlotProps) {
   );
   if (initialSearch) agentsFilter.filterValue = initialSearch;
 
-  const [
-    filesSettings,
-    user,
-    defaultProvider,
-    portalSettings,
-    aiConfig,
-    agentsData,
-  ] = await Promise.all([
-    getFilesSettings(),
-    getSelf(),
-    getDefaultProvider(),
-    getSettings().catch(() => undefined),
-    getAIConfig().catch(() => null),
-    isRootList ? getAIAgents(agentsFilter).catch(() => null) : null,
-  ]);
+  const [filesSettings, user, portalSettings, aiConfig, agentsData] =
+    await Promise.all([
+      getFilesSettings(),
+      getSelf(),
+      getSettings().catch(() => undefined),
+      getAIConfig().catch(() => null),
+      isRootList ? getAIAgents(agentsFilter).catch(() => null) : null,
+    ]);
 
   if (!user && providerName) {
     const proto = hdrs.get("x-forwarded-proto") || "https";
@@ -148,7 +141,6 @@ export default async function AiAgentsServerLayout({ children }: SlotProps) {
     socketUrl,
     filesSettings: filesSettings!,
     user,
-    defaultProvider,
     initialViewAs,
     portalSettings:
       portalSettings && typeof portalSettings !== "string"

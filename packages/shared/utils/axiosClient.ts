@@ -238,7 +238,7 @@ class AxiosClient {
         } else {
           frameCallEvent({
             event: "onAuthError",
-            data: { message: "unauthorized" },
+            data: { code: "TOKEN_REFRESH_FAILED", message: "unauthorized" },
           });
         }
         return token;
@@ -266,7 +266,7 @@ class AxiosClient {
           this.oauthUnavailable = true;
           frameCallEvent({
             event: "onAuthError",
-            data: { message: "unauthorized" },
+            data: { code: "TOKEN_UNAVAILABLE", message: "unauthorized" },
           });
         }
       })
@@ -385,7 +385,7 @@ class AxiosClient {
               const signalAuthError = (): Promise<void> => {
                 frameCallEvent({
                   event: "onAuthError",
-                  data: { message: "unauthorized" },
+                  data: { code: "UNAUTHORIZED", message: "unauthorized" },
                 });
                 return Promise.reject(error);
               };

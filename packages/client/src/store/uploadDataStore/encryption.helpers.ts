@@ -34,7 +34,6 @@
  */
 
 import { runInAction } from "mobx";
-import { getI18n } from "react-i18next";
 import { RoomsType } from "@docspace/shared/enums";
 import {
   setFileEncryptionKeys,
@@ -48,6 +47,8 @@ import { prepareEncryptedUpload } from "@docspace/shared/services/private-room/e
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
+
+import i18n from "../../i18n";
 
 import type { TUploadBrowserFile } from "./helpers";
 import type { default as UploadDataStore } from "../UploadDataStore";
@@ -219,7 +220,7 @@ export function cancelEncryptedBatchUploadImpl(self: UploadDataStore) {
   });
 
   try {
-    toastr.info(getI18n().t("Common:EncryptionUploadCancelled"));
+    toastr.info(i18n.t("Common:EncryptionUploadCancelled"));
   } catch {
   }
 }

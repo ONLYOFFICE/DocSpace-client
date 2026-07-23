@@ -58,7 +58,8 @@ import {
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import { FILTER_DOCUMENTS } from "@docspace/shared/utils/filterConstants";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { getI18n } from "react-i18next";
+
+import i18n from "../../i18n";
 
 import {
   getCategoryUrl,
@@ -198,7 +199,7 @@ export function fetchFilesImpl(
       if (data.current.private) {
         const keys = self.userStore?.encryptionKeys;
         if (!Array.isArray(keys) || keys.length === 0) {
-          toastr.warning(getI18n().t("Common:EncryptionKeysNotConfigured"));
+          toastr.warning(i18n.t("Common:EncryptionKeysNotConfigured"));
         }
 
         // The room id may differ from data.current.id when navigating into

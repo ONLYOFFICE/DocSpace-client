@@ -512,11 +512,21 @@ class AuthStore {
     this.isLogout = true;
 
     // Clear encryption state: MobX store + in-memory unlocked-identity cache
+    // + the persisted device unlock for the signed-out user
     this.userStore?.clearEncryptionKeys();
     try {
+      const userId = this.userStore?.user?.id
+        ? String(this.userStore.user.id)
+        : undefined;
       const { SecretStorage } =
         await import("../services/encryption/secret-storage");
       SecretStorage.lock();
+      if (userId) {
+        const { forgetDeviceUnlock } = await import(
+          "../services/encryption/device-unlock-store"
+        );
+        await forgetDeviceUnlock(userId);
+      }
     } catch {
       // Encryption module may not be loaded — safe to ignore
     }

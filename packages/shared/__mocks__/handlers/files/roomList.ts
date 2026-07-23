@@ -143,6 +143,7 @@ const getRoomList = (filtered: boolean = false) => {
       },
       pinned: false,
       roomType: 6,
+      isRoom: true,
       private: false,
       indexing: false,
       denyDownload: false,
@@ -152,6 +153,7 @@ const getRoomList = (filtered: boolean = false) => {
       id: 33,
       rootFolderId: 2002,
       canShare: true,
+      shareSettings: { ExternalLink: 6 },
       security: {
         Read: true,
         Create: true,

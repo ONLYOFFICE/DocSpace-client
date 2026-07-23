@@ -84,6 +84,7 @@ const CreateRoomDialog = ({
   fetchedRoomParams,
   encryptionKeys,
   userId,
+  accountEmail,
   setUserEncryptionKeys,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
@@ -157,15 +158,30 @@ const CreateRoomDialog = ({
 
   const generateKey = useGenerateKeyFlow({
     userId,
+    accountLabel: accountEmail,
     refreshKeysFromServer,
     onSuccess: () => {
       if (!isMountRef.current) return;
-      applyPrivateRoomType();
+      if (!roomParams.isPrivate) applyPrivateRoomType();
     },
     onError: () => {
       onCloseRef.current?.();
     },
   });
+
+  const keyAutoPromptedRef = useRef(false);
+  React.useEffect(() => {
+    if (!isTemplateItem || !roomParams.isPrivate) return;
+    if (encryptionKeys && encryptionKeys.length > 0) return;
+    if (keyAutoPromptedRef.current) return;
+    keyAutoPromptedRef.current = true;
+    if (!globalThis.crypto?.subtle) {
+      toastr.error(t("Common:EncryptionRequiresHttps"));
+      onCloseRef.current?.();
+      return;
+    }
+    setKeyConfirmVisible(true);
+  }, [isTemplateItem, roomParams.isPrivate, encryptionKeys, t]);
 
   const setRoomType = (newRoomType) => {
     if (newRoomType === RoomsTypePrivate) {
@@ -199,6 +215,7 @@ const CreateRoomDialog = ({
 
   const onCancelGenerateKey = () => {
     setKeyConfirmVisible(false);
+    if (roomParams.isPrivate) onCloseRef.current?.();
   };
 
   const isRoomTitleChanged = roomParams?.title?.trim() === "";

@@ -33,10 +33,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
+
+import config from "PACKAGE_FILE";
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
@@ -72,6 +76,13 @@ interface TenantPanelProps {
   openCancelPlanDialog?: () => void;
 }
 
+const getTabFromLocation = () => {
+  const segment = window.location.pathname.split("/").filter(Boolean).pop();
+  return segment === "settings" || segment === "preview"
+    ? segment
+    : "statistics";
+};
+
 const TenantPanel = ({
   info,
   openBuyPlan,
@@ -80,14 +91,7 @@ const TenantPanel = ({
 }: TenantPanelProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const navigate = useNavigate();
-  const { tab } = useParams();
-  const tabFromUrl =
-    tab === "settings" || tab === "preview" ? tab : "statistics";
-  const [selectedTab, setSelectedTab] = useState<string>(tabFromUrl);
-
-  useEffect(() => {
-    setSelectedTab(tabFromUrl);
-  }, [tabFromUrl]);
+  const [selectedTab, setSelectedTab] = useState<string>(getTabFromLocation);
 
   if (!info) return null;
 
@@ -176,7 +180,7 @@ const TenantPanel = ({
   ];
 
   return (
-    <div className={styles.panel}>
+    <div className={styles.panel} data-testid="docs_connect_panel">
       <div className={styles.header}>
         <div className={styles.titleRow}>
           <Text fontSize="18px" fontWeight={700} lineHeight="24px">
@@ -199,6 +203,7 @@ const TenantPanel = ({
                       ? styles.trialBadgeWarning
                       : ""
                 }`}
+                data-testid="docs_connect_trial_badge"
               >
                 {expired
                   ? t("Common:TrialExpired")
@@ -223,7 +228,15 @@ const TenantPanel = ({
         selectedItemId={selectedTab}
         onSelect={(item) => {
           setSelectedTab(item.id);
-          navigate(`${DOCS_CONNECT_ROUTE}/${item.id}`, { replace: true });
+          window.history.replaceState(
+            "",
+            "",
+            combineUrl(
+              window.ClientConfig?.proxy?.url,
+              config.homepage,
+              `${DOCS_CONNECT_ROUTE}/${item.id}`,
+            ),
+          );
         }}
       />
     </div>

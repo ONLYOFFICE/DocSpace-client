@@ -349,6 +349,7 @@ class SelectedFolderStore {
     this.security = null;
     this.type = null;
     this.inRoom = false;
+    this.private = false;
     this.parentRoomType = null;
     this.lifetime = null;
     this.indexing = false;

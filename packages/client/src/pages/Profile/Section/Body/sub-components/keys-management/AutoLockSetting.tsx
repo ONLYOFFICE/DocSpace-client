@@ -96,7 +96,7 @@ export const AutoLockSetting = () => {
         onSelect={handleSelect}
         size={ComboBoxSize.content}
         scaled={false}
-        scaledOptions
+        manualWidth="auto"
         displaySelectedOption
         isDefaultMode={!isMobile()}
         dataTestId="auto_lock_timeout_combobox"

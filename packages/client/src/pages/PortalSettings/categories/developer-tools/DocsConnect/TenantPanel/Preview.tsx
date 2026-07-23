@@ -42,6 +42,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { EmptyView } from "@docspace/ui-kit/components/empty-view";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
@@ -77,6 +78,7 @@ const Preview = ({
   const [view, setView] = useState<"editor" | "code">("editor");
   const [token, setToken] = useState<string | null>(null);
   const [editorError, setEditorError] = useState(false);
+  const [documentReady, setDocumentReady] = useState(false);
   const [previewKey] = useState(
     () => `docs-connect-preview-${Math.random().toString(36).slice(2, 10)}`,
   );
@@ -180,16 +182,26 @@ const Preview = ({
             <Text className={styles.muted}>
               {t("DocsConnect:EditorPreviewFailed")}
             </Text>
-          ) : token ? (
-            <DocumentEditor
-              id="docs-connect-preview-editor"
-              documentServerUrl={`${serverUrl}/`}
-              config={{ ...config, token }}
-              width="100%"
-              height="100%"
-              onLoadComponentError={() => setEditorError(true)}
-            />
-          ) : null}
+          ) : (
+            <>
+              {!documentReady ? (
+                <div className={styles.previewLoader}>
+                  <Loader type={LoaderTypes.rombs} size="40px" />
+                </div>
+              ) : null}
+              {token ? (
+                <DocumentEditor
+                  id="docs-connect-preview-editor"
+                  documentServerUrl={`${serverUrl}/`}
+                  config={{ ...config, token }}
+                  width="100%"
+                  height="100%"
+                  onLoadComponentError={() => setEditorError(true)}
+                  events_onDocumentReady={() => setDocumentReady(true)}
+                />
+              ) : null}
+            </>
+          )}
         </div>
       )}
 
@@ -200,6 +212,7 @@ const Preview = ({
             iconNode={<CopyIcon />}
             size={16}
             onClick={() => copyToClipboard?.(demoCode, t)}
+            dataTestId="docs_connect_demo_code_copy"
           />
           <pre className={styles.demoCodeText}>{demoCode}</pre>
         </div>

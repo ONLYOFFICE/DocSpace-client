@@ -124,6 +124,9 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
     general.anonymous !== baseline.anonymous ||
     maxDownloadBytes !== savedMaxDownload;
 
+  const isGeneralValid =
+    general.header.trim() !== "" && general.secret.trim() !== "";
+
   const serverPayload = (anonymous: boolean, maxDownload: string) => ({
     isAnonymousSupport: anonymous,
     fileSizeLimit: Number(maxDownload) || 0,
@@ -202,6 +205,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
             }
             isDisabled={isBusy}
             scale
+            testId="docs_connect_settings_header_input"
           />
         </FieldContainer>
         <FieldContainer
@@ -219,7 +223,9 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
               }
               isDisabled={isBusy}
               scale
+              withBorder={false}
               className={styles.secretInput}
+              testId="docs_connect_settings_secret_input"
             />
             <div className={styles.secretIcons}>
               <IconButton
@@ -231,6 +237,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
                 iconName={CopyReactSvgUrl}
                 size={16}
                 onClick={() => copyToClipboard?.(general.secret, t)}
+                dataTestId="docs_connect_settings_copy_secret"
               />
             </div>
           </div>
@@ -246,6 +253,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
               fontWeight={600}
               isChecked={general.wopiEnabled}
               isDisabled={isBusy}
+              dataTestId="docs_connect_wopi_toggle"
               onChange={() =>
                 setGeneral((prev) => ({
                   ...prev,
@@ -319,6 +327,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
               onChange={(e) => setMaxDownloadBytes(onlyDigits(e.target.value))}
               isDisabled={isBusy}
               scale
+              testId="docs_connect_settings_limit_input"
             />
             <Text fontSize="12px" className={styles.settingsHint}>
               {t("DocsConnect:MaxDownloadBytesDescription")}
@@ -331,6 +340,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
         className={styles.saveButtons}
         onSaveClick={onSaveGeneral}
         onCancelClick={onCancelGeneral}
+        saveButtonDisabled={!isGeneralValid}
         showReminder={hasChangesGeneral}
         reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
@@ -369,6 +379,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
                 size={16}
                 isDisabled={isBusy}
                 onClick={() => onDeleteRule(rule.key)}
+                dataTestId="docs_connect_rule_delete"
               />
             </div>
           ))}

@@ -147,7 +147,10 @@ const Statistics = ({
   return (
     <div className={styles.statistics}>
       {deactivated ? (
-        <div className={styles.deactivatedBanner}>
+        <div
+          className={styles.deactivatedBanner}
+          data-testid="docs_connect_deactivated_banner"
+        >
           <div className={styles.deactivatedBannerHeader}>
             <span className={styles.deactivatedBannerIcon} aria-hidden="true">
               <AlertIcon />
@@ -194,7 +197,10 @@ const Statistics = ({
       ) : null}
 
       {isTrial ? (
-        <div className={styles.trialBanner}>
+        <div
+          className={styles.trialBanner}
+          data-testid="docs_connect_trial_banner"
+        >
           <div className={styles.trialBannerText}>
             {expired ? (
               <>
@@ -233,6 +239,7 @@ const Statistics = ({
             size={ButtonSize.small}
             label={t("Common:Upgrade")}
             onClick={() => openBuyPlan?.("trial")}
+            testId="docs_connect_trial_upgrade_button"
           />
         </div>
       ) : null}
@@ -404,6 +411,7 @@ const Statistics = ({
                   fontWeight={600}
                   textDecoration="underline dashed"
                   onClick={() => openBuyPlan?.("edit")}
+                  dataTestId="docs_connect_edit_subscription_link"
                 >
                   {t("Common:EditButton")}
                 </Link>

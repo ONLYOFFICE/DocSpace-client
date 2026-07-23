@@ -266,11 +266,11 @@ class CurrentTariffStatusStore {
         const { user } = this.userStore;
 
         const isAdminUser = user && isAdmin(user);
-        const tariffWalletQuotas = res.quotas.filter(
+        const tariffWalletQuotas = (res.quotas ?? []).filter(
           (q) => q.wallet === true,
         );
 
-        if (isAdminUser && tariffWalletQuotas.length > 1) {
+        if (isAdminUser && tariffWalletQuotas.length > 0) {
           await this.resolveWalletServiceIds();
         }
 
@@ -278,12 +278,11 @@ class CurrentTariffStatusStore {
           this.portalTariffStatus = res;
 
           if (isAdminUser) {
-            const quota =
-              this.storageServiceId != null
-                ? tariffWalletQuotas.find(
-                    (q) => q.id === this.storageServiceId,
-                  )
-                : tariffWalletQuotas[0];
+            const quota = this.walletServicesResolved
+              ? tariffWalletQuotas.find(
+                  (q) => q.id === this.storageServiceId,
+                )
+              : tariffWalletQuotas[0];
 
             if (quota) {
               if (quota.state === QuotaState.Overdue) {

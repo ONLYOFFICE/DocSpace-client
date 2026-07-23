@@ -34,15 +34,8 @@
  */
 
 import React, { useEffect, useMemo } from "react";
-import {
-  now,
-  parseToDateTime,
-  formatDate,
-  formatDateLocalized,
-  isBefore,
-  isAfter,
-} from "@docspace/ui-kit/utils/date";
-import { Outlet, useLocation } from "react-router";
+
+import { Outlet, useLocation, useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -53,6 +46,14 @@ import SocketHelper, {
   SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
 import {
+  now,
+  parseToDateTime,
+  formatDate,
+  formatDateLocalized,
+  isBefore,
+  isAfter,
+} from "@docspace/ui-kit/utils/date";
+import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
 } from "@docspace/ui-kit/ai-agent/providers/themes";
@@ -62,7 +63,6 @@ import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 
-import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
@@ -72,19 +72,23 @@ import {
   InfoPanelEvents,
   SearchArea,
 } from "@docspace/shared/enums";
-import { setFileView } from "SRC_DIR/helpers/info-panel";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { getSuggestions } from "SRC_DIR/helpers/aiSuggestions";
+
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 import { handleCopy } from "@docspace/shared/utils/copy";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import "@docspace/shared/styles/theme.scss";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { setFileView } from "SRC_DIR/helpers/info-panel";
+import { getSuggestions } from "SRC_DIR/helpers/aiSuggestions";
+import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 
 import config from "PACKAGE_FILE";
 
@@ -100,7 +104,6 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
@@ -141,20 +144,43 @@ const Shell = ({ page = "home", ...rest }) => {
     closeEditorPanel,
     currentClientView,
     selectedFolderType,
-    aiSuggestions,
+    selectedRoomType,
+    selectedRootFolderType,
     isPrivacyFolder,
     isAIReady,
   } = rest;
 
-  console.debug({ currentClientView });
+  const [searchParams] = useSearchParams();
+
+  const folderType = searchParams.get("folderType");
+
+  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
+
+  const aiSuggestions = useMemo(
+    () =>
+      getSuggestions(
+        {
+          folderType,
+          selectedFolderType,
+          roomType: selectedRoomType,
+          rootFolderType: selectedRootFolderType,
+        },
+        t,
+      ),
+    [
+      selectedRoomType,
+      selectedFolderType,
+      selectedRootFolderType,
+      folderType,
+      t,
+    ],
+  );
 
   useCreateFileError({
     setPortalTariff,
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
   });
-
-  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   useEffect(() => {
     if (!logoText) setLogoText(getBrandName("OrganizationName"));
@@ -793,14 +819,8 @@ const ShellWrapper = inject(
       isAIReady: paymentStore.isAIReady,
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
-      aiSuggestions: getSuggestions({
-        roomType: selectedFolderStore.roomType,
-        folderType: selectedFolderStore.type,
-        rootFolderType: selectedFolderStore.rootFolderType,
-        isRoom: selectedFolderStore.isRoom,
-        isFolder: selectedFolderStore.isFolder,
-        isRootFolder: selectedFolderStore.isRootFolder,
-      }),
+      selectedRoomType: selectedFolderStore.roomType,
+      selectedRootFolderType: selectedFolderStore.rootFolderType,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
       // Scope the chat to the current location: inside any room (including
       // its subfolders) the room id wins, elsewhere the currently selected

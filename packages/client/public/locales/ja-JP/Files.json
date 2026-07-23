@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "アーカイブされたルームはここに表示されます。",
   "ChangeAgentOwnerSelectorInfo": "ルーム管理者または{{productName}}管理者のみがエージェントの所有者になることができます",
   "ChangeTheAgentOwner": "エージェントの所有者を変更する",
+  "ClientSearchDecryptingNames": "ファイル名を復号しています… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "フォルダーが大きすぎます。検索結果が不完全な場合があります。",
   "CompressingFiles": "ファイルを圧縮中",
   "Conversion": "変換",
   "Converting": "変換中",

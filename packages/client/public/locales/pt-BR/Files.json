@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "As salas que foram arquivadas aparecerão aqui.",
   "ChangeAgentOwnerSelectorInfo": "Somente um administrador da sala ou um administrador do {{productName}} pode se tornar o proprietário do agente.",
   "ChangeTheAgentOwner": "Alterar o proprietário do agente",
+  "ClientSearchDecryptingNames": "Descriptografando nomes de arquivos… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "A pasta é muito grande. Os resultados da pesquisa podem estar incompletos.",
   "CompressingFiles": "Compactando arquivos",
   "Conversion": "Conversão",
   "Converting": "Convertendo",

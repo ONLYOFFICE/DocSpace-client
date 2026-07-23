@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Zde se zobrazí místnosti, které byly archivovány.",
   "ChangeAgentOwnerSelectorInfo": "Pouze správce místnosti nebo správce {{productName}} může být vlastníkem agenta.",
   "ChangeTheAgentOwner": "Změnit vlastníka agenta",
+  "ClientSearchDecryptingNames": "Dešifrování názvů souborů… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Složka je příliš velká. Výsledky hledání mohou být neúplné.",
   "CompressingFiles": "Komprimace souborů",
   "Conversion": "Převod",
   "Converting": "Probíhá převod",

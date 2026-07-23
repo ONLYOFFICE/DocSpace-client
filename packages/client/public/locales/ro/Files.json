@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Sălile care au fost arhivate vor apărea aici.",
   "ChangeAgentOwnerSelectorInfo": "Doar administratorul sălii sau administratorul {{productName}} poate deveni proprietarul agentului",
   "ChangeTheAgentOwner": "Schimbare proprietar al agentului",
+  "ClientSearchDecryptingNames": "Se decriptează numele fișierelor… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Dosarul este prea mare. Rezultatele căutării pot fi incomplete.",
   "CompressingFiles": "Comprimare fișiere",
   "Conversion": "Conversie",
   "Converting": "Conversie",

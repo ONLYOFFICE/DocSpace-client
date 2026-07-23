@@ -64,6 +64,11 @@ import {
 } from "../../services/encryption/tofu-store";
 import { unlockWithPassphrase } from "../../services/encryption/identity";
 import {
+  forgetDeviceUnlock,
+  persistDeviceUnlock,
+  restoreDeviceUnlock,
+} from "../../services/encryption/device-unlock-store";
+import {
   clearEncryptedFilenameCache,
   setFilenameCacheScope,
 } from "../../services/encryption/filename-cache";
@@ -86,7 +91,7 @@ export type EncryptionContextValue = {
    * Null when no envelope is configured for this device.
    */
   publicKey: string | null;
-  unlock: (passphrase: string) => Promise<boolean>;
+  unlock: (passphrase: string, rememberDevice?: boolean) => Promise<boolean>;
   lock: () => void;
   getIdentity: () => IdentityKeyPair | null;
   /** Prompts via the registered PassphraseDialog if cache is empty. */
@@ -107,8 +112,9 @@ export type PassphraseDialogProps = {
   visible: boolean;
   isLoading: boolean;
   error: string | null;
-  onSubmit: (passphrase: string) => Promise<void>;
+  onSubmit: (passphrase: string, rememberDevice?: boolean) => Promise<void>;
   onCancel: () => void;
+  onUnlocked?: (kp: IdentityKeyPair) => void;
 };
 
 export type KeyChangeDialogModalProps = {
@@ -176,13 +182,31 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   }, [hasConfiguredKey, userKeys?.publicKey, userKeys?.userId]);
 
   useEffect(() => {
+    const userId = userKeys?.userId;
+    const publicKey = userKeys?.publicKey;
+    if (!hasConfiguredKey || !userId || !publicKey) return undefined;
+    if (SecretStorage.hasUnlocked(userId)) return undefined;
+    let cancelled = false;
+    void restoreDeviceUnlock(userId, publicKey).then((kp) => {
+      if (cancelled || !kp) return;
+      if (!SecretStorage.hasUnlocked(userId)) {
+        SecretStorage.cacheUnlocked(userId, kp);
+      }
+      setIsUnlocked(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [hasConfiguredKey, userKeys?.userId, userKeys?.publicKey]);
+
+  useEffect(() => {
     if (!showPassphraseDialog) {
       setUnlockError(null);
     }
   }, [showPassphraseDialog]);
 
   const unlock = useCallback(
-    async (passphrase: string): Promise<boolean> => {
+    async (passphrase: string, rememberDevice?: boolean): Promise<boolean> => {
       if (!userKeys?.privateKeyEnc || !userKeys?.userId) {
         setUnlockError(t("Common:EncryptionKeysNotConfigured"));
         return false;
@@ -199,6 +223,9 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
         );
         SecretStorage.cacheUnlocked(userKeys.userId, kp);
         setIsUnlocked(true);
+        if (rememberDevice) {
+          void persistDeviceUnlock(userKeys.userId, userKeys.publicKey, kp);
+        }
         return true;
       } catch (error) {
         setUnlockError(getEncryptionErrorMessage(t, error));
@@ -211,10 +238,11 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   );
 
   const lock = useCallback(() => {
+    if (userKeys?.userId) void forgetDeviceUnlock(userKeys.userId);
     SecretStorage.lock();
     clearEncryptedFilenameCache();
     setIsUnlocked(false);
-  }, []);
+  }, [userKeys?.userId]);
 
   const clearError = useCallback(() => {
     setUnlockError(null);
@@ -232,6 +260,17 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     if (cached) return cached;
 
     if (!hasConfiguredKey) return null;
+
+    const restored = await restoreDeviceUnlock(
+      userKeys.userId,
+      userKeys.publicKey,
+    );
+    if (restored) {
+      SecretStorage.cacheUnlocked(userKeys.userId, restored);
+      setIsUnlocked(true);
+      return restored;
+    }
+
     if (!PassphraseDialog) {
       if (typeof console !== "undefined") {
         console.warn(
@@ -246,7 +285,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
       pendingResolveRef.current = resolve;
       setShowPassphraseDialog(true);
     });
-  }, [hasConfiguredKey, PassphraseDialog, userKeys?.userId]);
+  }, [hasConfiguredKey, PassphraseDialog, userKeys?.userId, userKeys?.publicKey]);
 
   useEffect(() => {
     registerUnlockHandler(async () => {
@@ -268,6 +307,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     if (typeof document === "undefined") return undefined;
     if (autoLockSuspendCount > 0) return undefined;
     const handler = () => {
+      if (getAutoLockTimeoutSeconds() <= 0) return;
       if (document.visibilityState === "hidden") {
         SecretStorage.lock();
         clearEncryptedFilenameCache();
@@ -364,8 +404,8 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
   }, []);
 
   const handlePassphraseSubmit = useCallback(
-    async (passphrase: string): Promise<void> => {
-      const success = await unlock(passphrase);
+    async (passphrase: string, rememberDevice?: boolean): Promise<void> => {
+      const success = await unlock(passphrase, rememberDevice);
       if (success && userKeys?.userId) {
         const kp = SecretStorage.getCached(userKeys.userId);
         pendingResolveRef.current?.(kp);
@@ -382,6 +422,20 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
     setShowPassphraseDialog(false);
     setUnlockError(null);
   }, []);
+
+  const handlePassphraseUnlocked = useCallback(
+    (kp: IdentityKeyPair) => {
+      if (userKeys?.userId && !SecretStorage.hasUnlocked(userKeys.userId)) {
+        SecretStorage.cacheUnlocked(userKeys.userId, kp);
+      }
+      setIsUnlocked(true);
+      setUnlockError(null);
+      pendingResolveRef.current?.(kp);
+      pendingResolveRef.current = null;
+      setShowPassphraseDialog(false);
+    },
+    [userKeys?.userId],
+  );
 
   const publicKey = userKeys?.publicKey ?? null;
 
@@ -426,6 +480,7 @@ export const EncryptionProvider: React.FC<EncryptionProviderProps> = ({
           error={unlockError}
           onSubmit={handlePassphraseSubmit}
           onCancel={handlePassphraseCancel}
+          onUnlocked={handlePassphraseUnlocked}
         />
       )}
       {KeyChangeDialog && keyChangeRequest && (

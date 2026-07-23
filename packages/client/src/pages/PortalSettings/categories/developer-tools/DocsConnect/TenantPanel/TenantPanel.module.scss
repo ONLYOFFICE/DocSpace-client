@@ -195,21 +195,30 @@
 }
 
 .secretField {
-  position: relative;
+  @include mixins.common-input-color-styles;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box;
+
+  &:focus-within {
+    border-color: var(--input-border-focus);
+  }
 }
 
 .secretInput {
-  padding-inline-end: 68px;
+  flex: 1 1 0%;
+  min-width: 0;
 }
 
 .secretIcons {
-  position: absolute;
-  inset-inline-end: 12px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
+  padding-inline-end: 12px;
+  background-color: inherit;
 }
 
 .saveButtons {

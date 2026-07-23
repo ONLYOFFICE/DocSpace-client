@@ -59,6 +59,12 @@ vi.mock("../../../services/encryption/identity", () => ({
   unlockWithPassphrase: vi.fn(),
 }));
 
+vi.mock("../../../services/encryption/device-unlock-store", () => ({
+  persistDeviceUnlock: vi.fn(async () => true),
+  restoreDeviceUnlock: vi.fn(async () => null),
+  forgetDeviceUnlock: vi.fn(async () => undefined),
+}));
+
 vi.mock("../../../services/encryption/auto-lock-preference", () => ({
   getAutoLockTimeoutSeconds: vi.fn(() => 0),
   setAutoLockTimeoutSeconds: vi.fn(),
@@ -68,6 +74,11 @@ vi.mock("../../../services/encryption/auto-lock-preference", () => ({
 
 import { unlockWithPassphrase } from "../../../services/encryption/identity";
 import { getAutoLockTimeoutSeconds } from "../../../services/encryption/auto-lock-preference";
+import {
+  persistDeviceUnlock,
+  restoreDeviceUnlock,
+  forgetDeviceUnlock,
+} from "../../../services/encryption/device-unlock-store";
 
 const dummyKeyPair: IdentityKeyPair = {
   publicKey: new Uint8Array(32).fill(1),
@@ -291,10 +302,103 @@ describe("EncryptionContext / EncryptionProvider", () => {
       const result = await promised;
       expect(result).not.toBeNull();
     });
+
+    it("onUnlocked resolves a pending requireIdentity with the delivered identity", async () => {
+      renderTree();
+      let promised!: Promise<IdentityKeyPair | null>;
+      await act(async () => {
+        promised = latest.requireIdentity();
+      });
+      expect(captured.passphrase).not.toBeNull();
+
+      await act(async () => {
+        captured.passphrase!.onUnlocked?.(dummyKeyPair);
+      });
+
+      const result = await promised;
+      expect(result).toEqual(dummyKeyPair);
+      expect(latest.isUnlocked).toBe(true);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(true);
+      expect(captured.passphrase).toBeNull();
+    });
+  });
+
+  describe("remembered device unlock", () => {
+    afterEach(() => {
+      vi.mocked(restoreDeviceUnlock).mockResolvedValue(null);
+    });
+
+    it("requireIdentity restores silently without showing the dialog", async () => {
+      vi.mocked(restoreDeviceUnlock).mockResolvedValue(dummyKeyPair);
+      renderTree();
+      let promised!: Promise<IdentityKeyPair | null>;
+      await act(async () => {
+        promised = latest.requireIdentity();
+      });
+      const result = await promised;
+      expect(result).toEqual(dummyKeyPair);
+      expect(captured.passphrase).toBeNull();
+      expect(latest.isUnlocked).toBe(true);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(true);
+    });
+
+    it("proactively restores on mount so a reload comes back unlocked", async () => {
+      vi.mocked(restoreDeviceUnlock).mockResolvedValueOnce(dummyKeyPair);
+      await act(async () => {
+        renderTree();
+      });
+      expect(latest.isUnlocked).toBe(true);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(true);
+      expect(restoreDeviceUnlock).toHaveBeenCalledWith(
+        "user-42",
+        "pub-base64",
+      );
+    });
+
+    it("unlock(passphrase, true) persists the device unlock", async () => {
+      vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(dummyKeyPair);
+      renderTree();
+      await act(async () => {
+        await latest.unlock("correct", true);
+      });
+      expect(persistDeviceUnlock).toHaveBeenCalledWith(
+        "user-42",
+        "pub-base64",
+        dummyKeyPair,
+      );
+    });
+
+    it("unlock without remember does NOT persist", async () => {
+      vi.mocked(unlockWithPassphrase).mockResolvedValueOnce(dummyKeyPair);
+      renderTree();
+      await act(async () => {
+        await latest.unlock("correct");
+      });
+      expect(persistDeviceUnlock).not.toHaveBeenCalled();
+    });
+
+    it("lock() forgets the persisted device unlock", async () => {
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      act(() => {
+        latest.lock();
+      });
+      expect(forgetDeviceUnlock).toHaveBeenCalledWith("user-42");
+      expect(latest.isUnlocked).toBe(false);
+    });
   });
 
   describe("auto-lock on tab hidden", () => {
+    afterEach(() => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      Object.defineProperty(document, "visibilityState", {
+        value: "visible",
+        configurable: true,
+      });
+    });
+
     it("locks SecretStorage when document.visibilityState becomes hidden", async () => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);
@@ -308,6 +412,23 @@ describe("EncryptionContext / EncryptionProvider", () => {
       });
       expect(latest.isUnlocked).toBe(false);
       expect(SecretStorage.hasUnlocked("user-42")).toBe(false);
+    });
+
+    it("does not lock on tab hide when auto-lock is Off", async () => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(0);
+      SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
+      renderTree();
+      expect(latest.isUnlocked).toBe(true);
+
+      Object.defineProperty(document, "visibilityState", {
+        value: "hidden",
+        configurable: true,
+      });
+      await act(async () => {
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+      expect(latest.isUnlocked).toBe(true);
+      expect(SecretStorage.hasUnlocked("user-42")).toBe(true);
     });
   });
 
@@ -426,6 +547,7 @@ describe("EncryptionContext / EncryptionProvider", () => {
     });
 
     it("suspends tab-hidden auto-lock until the handle is released", async () => {
+      vi.mocked(getAutoLockTimeoutSeconds).mockReturnValue(60);
       SecretStorage.cacheUnlocked("user-42", dummyKeyPair);
       renderTree();
       expect(latest.isUnlocked).toBe(true);

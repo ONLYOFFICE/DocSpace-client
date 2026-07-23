@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+"use client";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 

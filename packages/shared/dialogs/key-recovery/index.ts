@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export { PassphraseModal, default } from "./PassphraseModal";
-export { usePasskeyUnlock } from "./usePasskeyUnlock";
-export type { PasskeyUnlock } from "./usePasskeyUnlock";
+
+export { useRecoverKeyFlow } from "./useRecoverKeyFlow";
+export type { RecoverKeyFlow } from "./useRecoverKeyFlow";
+export { RecoveryPhraseInputModal } from "./RecoveryPhraseInputModal";

@@ -302,6 +302,7 @@ export const AppsSidebarView = ({
               groups={mobileGroups}
               activeItemId={activeId}
               iconOnly={!showText}
+              withExpandControl={isMobile}
               withAnimation
             />
           )}

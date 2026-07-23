@@ -110,7 +110,7 @@ const AuthHandler = () => {
             return;
           }
 
-          const newUrl = window.location.search.split("referenceUrl=")[1];
+          const newUrl = referenceUrl;
 
           const token = getOAuthJWTSignature(user.id);
 
@@ -188,3 +188,4 @@ const AuthHandler = () => {
 };
 
 export default AuthHandler;
+

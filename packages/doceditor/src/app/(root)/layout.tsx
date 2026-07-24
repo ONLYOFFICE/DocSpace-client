@@ -117,9 +117,9 @@ export default async function RootLayout({
   return (
     <html lang="en" translate="no">
       <head>
+        <meta charSet="utf-8" />
         <ChunkRetryScript />
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
-        <meta charSet="utf-8" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"

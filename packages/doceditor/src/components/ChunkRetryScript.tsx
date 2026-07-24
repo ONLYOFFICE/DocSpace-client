@@ -77,9 +77,6 @@ const script = `
       if (node.integrity) next.integrity = node.integrity;
       var nonce = node.getAttribute("nonce");
       if (nonce) next.setAttribute("nonce", nonce);
-      next.onerror = function () {
-        reinject(next, base);
-      };
       document.head.appendChild(next);
     }, delay);
   }

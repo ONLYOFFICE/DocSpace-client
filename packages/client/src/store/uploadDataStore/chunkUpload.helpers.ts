@@ -34,7 +34,6 @@
  */
 
 import { runInAction } from "mobx";
-import { getI18n } from "react-i18next";
 import { AnalyticsEvents, RoomsType } from "@docspace/shared/enums";
 import {
   startUploadSession,
@@ -50,6 +49,8 @@ import { isQuotaError } from "@docspace/shared/utils/uploadErrors";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import type { TTranslation } from "@docspace/shared/types";
+
+import i18n from "../../i18n";
 
 import {
   acquireUploadAutoLockSuspension,
@@ -175,9 +176,7 @@ export function checkChunkUploadImpl(
           dekForWrap!,
           roomIdForWrap,
         ).catch((error: TAxiosLikeError) => {
-          const wrapMessage = getI18n().t(
-            "Common:EncryptionUploadWrapFailed",
-          );
+          const wrapMessage = i18n.t("Common:EncryptionUploadWrapFailed");
           console.error("[ENCRYPTION] Failed to set file encryption keys", {
             fileId,
             status: error?.response?.status,
@@ -580,7 +579,7 @@ export async function startSessionFuncImpl(
           self.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: OPERATIONS_NAME.upload,
             percent: newPercent,
-            label: getI18n().t("Files:Encrypting"),
+            label: i18n.t("Files:Encrypting"),
           });
         },
       );
@@ -604,7 +603,7 @@ export async function startSessionFuncImpl(
       });
       const orphanDek = takeFileDek(self.files[indexOfFile]);
       if (orphanDek) wipeDek(orphanDek);
-      const errorMessage = getI18n().t("Common:EncryptionPrepareFailed");
+      const errorMessage = i18n.t("Common:EncryptionPrepareFailed");
       runInAction(() => {
         if (self.files[indexOfFile]) {
           self.files[indexOfFile].error = errorMessage;

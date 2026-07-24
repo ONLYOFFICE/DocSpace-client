@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Las salas archivadas aparecerán aquí.",
   "ChangeAgentOwnerSelectorInfo": "Sólo un administrador de sala o un administrador de {{productName}} puede convertirse en el propietario del agente.",
   "ChangeTheAgentOwner": "Cambiar el propietario del agente",
+  "ClientSearchDecryptingNames": "Descifrando nombres de archivos… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "La carpeta es demasiado grande. Los resultados de búsqueda pueden estar incompletos.",
   "CompressingFiles": "Comprimiendo archivos",
   "Conversion": "Conversión",
   "Converting": "Convirtiendo",

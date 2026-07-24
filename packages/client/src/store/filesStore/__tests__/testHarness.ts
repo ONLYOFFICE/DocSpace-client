@@ -63,13 +63,30 @@ vi.mock("@docspace/ui-kit/utils/socket", async (importOriginal) => {
 });
 
 // Filename cache: `subscribeFilenameCache` fires in the constructor — make it
-// a no-op. `resolveDisplayTitle` is identity so title-dependent code is stable.
+// a no-op. The cache itself is a plain Map so client-search tests can seed
+// decrypted names; with an empty Map `resolveDisplayTitle` echoes the raw
+// title, which keeps every pre-existing test deterministic.
+const hoistedFilenameCache = vi.hoisted(() => new Map<string, string>());
+// separate alias — vitest forbids exporting the vi.hoisted binding itself
+export const testFilenameCache = hoistedFilenameCache;
 vi.mock("@docspace/shared/services/encryption/filename-cache", () => ({
   subscribeFilenameCache: vi.fn(),
   // Real signature is `resolveDisplayTitle({ id, title, encrypted })` → string.
-  // Echo the plaintext title so title-dependent mapping stays deterministic.
-  resolveDisplayTitle: ({ title }: { title?: string }) => title,
-  rememberEncryptedFilename: vi.fn(),
+  resolveDisplayTitle: ({
+    id,
+    title,
+    encrypted,
+  }: {
+    id?: number | string;
+    title?: string;
+    encrypted?: boolean;
+  }) => (encrypted && id ? hoistedFilenameCache.get(String(id)) || title : title),
+  rememberEncryptedFilename: vi.fn(
+    (id: number | string, name: string) => void hoistedFilenameCache.set(String(id), name),
+  ),
+  getCachedEncryptedFilename: vi.fn(
+    (id: number | string) => hoistedFilenameCache.get(String(id)) ?? null,
+  ),
 }));
 
 // Encryption/private-room services are import-safe (no top-level side effects)

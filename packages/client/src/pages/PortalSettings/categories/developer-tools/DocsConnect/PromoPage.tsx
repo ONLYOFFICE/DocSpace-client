@@ -54,6 +54,7 @@ interface PromoPageProps {
   openBuyPlan?: (mode: "trial" | "edit") => void;
   docsConnectUrl?: string;
   allConnectorsUrl?: string;
+  canManage?: boolean;
 }
 
 const PromoPage = ({
@@ -62,6 +63,7 @@ const PromoPage = ({
   openBuyPlan,
   docsConnectUrl,
   allConnectorsUrl,
+  canManage,
 }: PromoPageProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
 
@@ -70,7 +72,7 @@ const PromoPage = ({
   const onReadApiDocs = () => window.open(docsConnectUrl, "_blank");
 
   const onCreateTenant = async () => {
-    if (submitting) return;
+    if (submitting || !canManage) return;
     setSubmitting(true);
     try {
       await startTrial?.();
@@ -127,6 +129,7 @@ const PromoPage = ({
             size={ButtonSize.small}
             label={t("DocsConnect:Buy")}
             onClick={() => openBuyPlan?.("edit")}
+            isDisabled={!canManage}
             className={styles.buyButton}
             testId="docs_connect_buy_button"
           />
@@ -137,7 +140,7 @@ const PromoPage = ({
             label={t("DocsConnect:CreateTenant")}
             onClick={onCreateTenant}
             isLoading={submitting}
-            isDisabled={submitting}
+            isDisabled={submitting || !canManage}
             testId="docs_connect_create_tenant_button"
           />
         )}
@@ -180,10 +183,15 @@ const PromoPage = ({
   );
 };
 
-export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
-  startTrial: docsConnectStore.startTrial,
-  openBuyPlan: docsConnectStore.openBuyPlan,
-  docsConnectUrl: settingsStore.docsConnectUrl,
-  allConnectorsUrl: settingsStore.allConnectorsUrl,
-}))(observer(PromoPage));
+export default inject(({ docsConnectStore, settingsStore, userStore }: TStore) => {
+  const { user } = userStore;
+
+  return {
+    startTrial: docsConnectStore.startTrial,
+    openBuyPlan: docsConnectStore.openBuyPlan,
+    docsConnectUrl: settingsStore.docsConnectUrl,
+    allConnectorsUrl: settingsStore.allConnectorsUrl,
+    canManage: (user?.isAdmin || user?.isOwner) ?? false,
+  };
+})(observer(PromoPage));
 

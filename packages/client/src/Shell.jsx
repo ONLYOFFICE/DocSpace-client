@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   now,
   parseToDateTime,
@@ -63,6 +63,7 @@ import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
+import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
@@ -624,6 +625,40 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const composerHeader = useMemo(() => <AIActivationBanner />, []);
 
+  // Agent picked in the model picker: the chat re-scopes to the agent's
+  // entity (threads, uploads, assignments) and the picker shows the agent's
+  // name while its profile drives every request.
+  const [pickedAgent, setPickedAgent] = useState(null);
+
+  // "Choose AI Agent" entry (with the agents submenu) for the model picker;
+  // empty until agents are loaded and unless there is more than one of them.
+  const profilePickerActions = useAiAgentsPickerActions(
+    isLoaded && isAiChatAvailable,
+    setPickedAgent,
+  );
+
+  // Picking a plain profile row returns the chat to the current-location
+  // scope; entering an AI agent room does the same — there the room itself
+  // fixes both the entity and the profile (the picker is hidden).
+  const onProfilePickerSelect = useCallback((profile, actionId) => {
+    if (!actionId) setPickedAgent(null);
+  }, []);
+
+  useEffect(() => {
+    if (isInsideAgentRoom) setPickedAgent(null);
+  }, [isInsideAgentRoom]);
+
+  const chatEntityId =
+    !isInsideAgentRoom && pickedAgent ? pickedAgent.entityId : agentEntityId;
+
+  const chatPickerAlias = useMemo(
+    () =>
+      !isInsideAgentRoom && pickedAgent
+        ? { profileId: pickedAgent.profileId, label: pickedAgent.title }
+        : null,
+    [isInsideAgentRoom, pickedAgent],
+  );
+
   // AI chat host callbacks. Web Search settings save on an explicit button
   // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
   const aiChatCallbacks = useMemo(
@@ -647,8 +682,11 @@ const Shell = ({ page = "home", ...rest }) => {
           isStandalone={standalone}
           isAvailable={isAiChatAvailable}
           callbacks={aiChatCallbacks}
-          entityId={agentEntityId}
+          entityId={chatEntityId}
           hideProfilePicker={isInsideAgentRoom}
+          profilePickerActions={profilePickerActions}
+          profilePickerAlias={chatPickerAlias}
+          onProfilePickerSelect={onProfilePickerSelect}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}

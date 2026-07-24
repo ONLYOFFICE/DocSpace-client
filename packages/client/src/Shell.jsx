@@ -146,6 +146,8 @@ const Shell = ({ page = "home", ...rest }) => {
     selectedFolderType,
     selectedRoomType,
     selectedRootFolderType,
+    selectedIsFolder,
+    selectedIsRootFolder,
     isPrivacyFolder,
     isAIReady,
   } = rest;
@@ -153,6 +155,7 @@ const Shell = ({ page = "home", ...rest }) => {
   const [searchParams] = useSearchParams();
 
   const folderType = searchParams.get("folderType");
+  const searchArea = searchParams.get("searchArea");
 
   const { t, ready } = useTranslation([
     "Common",
@@ -165,9 +168,12 @@ const Shell = ({ page = "home", ...rest }) => {
       getSuggestions(
         {
           folderType,
+          searchArea,
           selectedFolderType,
           roomType: selectedRoomType,
           rootFolderType: selectedRootFolderType,
+          isFolder: selectedIsFolder,
+          isRootFolder: selectedIsRootFolder,
         },
         t,
       ),
@@ -175,6 +181,8 @@ const Shell = ({ page = "home", ...rest }) => {
       selectedRoomType,
       selectedFolderType,
       selectedRootFolderType,
+      selectedIsFolder,
+      selectedIsRootFolder,
       folderType,
       t,
     ],
@@ -825,6 +833,8 @@ const ShellWrapper = inject(
       selectedFolderType: selectedFolderStore.type,
       selectedRoomType: selectedFolderStore.roomType,
       selectedRootFolderType: selectedFolderStore.rootFolderType,
+      selectedIsFolder: selectedFolderStore.isFolder,
+      selectedIsRootFolder: selectedFolderStore.isRootFolder,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
       // Scope the chat to the current location: inside any room (including
       // its subfolders) the room id wins, elsewhere the currently selected

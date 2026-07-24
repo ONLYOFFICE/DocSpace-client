@@ -32,13 +32,26 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-
+import isNil from "lodash/isNil";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import type { Suggestion } from "@docspace/ui-kit/ai-agent/providers";
 import type { TTranslation } from "@docspace/shared/types";
 
+type QueryFolderType = `${FolderType}`;
+
+export type SuggestionContext = {
+  roomType?: RoomsType | null;
+  folderType?: QueryFolderType | null;
+  selectedFolderType?: FolderType | null;
+  rootFolderType?: FolderType | null;
+  isFolder?: boolean;
+  isRootFolder?: boolean;
+  searchArea?: string | null;
+};
+
 export const getSuggestionsBySection = (t: TTranslation) => {
   return {
+    // +
     files: [
       {
         name: t("AiSuggestions:FilesShowFileStructure"),
@@ -74,6 +87,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     sharedWithMe: [
       {
         name: t("AiSuggestions:SharedWithMeWhatSSharedWithMe"),
@@ -93,6 +107,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     filesRecent: [
       {
         name: t("AiSuggestions:FilesRecentSummarizeRecentFiles"),
@@ -108,6 +123,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     filesFavorites: [
       {
         name: t("AiSuggestions:FilesFavoritesSummarizeFavorites"),
@@ -129,6 +145,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     filesTrash: [
       {
         name: t("AiSuggestions:FilesTrashWhatSInTrash"),
@@ -152,6 +169,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     filesFolder: [
       {
         name: t("AiSuggestions:FilesFolderSummarizeThisFolder"),
@@ -172,41 +190,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FilesFolderFindEmptyFolders"),
         prompt: t("AiSuggestions:FilesFolderFindEmptyFoldersPrompt"),
-      },
-    ],
-
-    rooms: [
-      {
-        name: t("AiSuggestions:RoomsFindARoom"),
-        prompt: t("AiSuggestions:RoomsFindARoomPrompt"),
-      },
-      {
-        name: t("AiSuggestions:RoomsFindRoomsByParticipant"),
-        prompt: t("AiSuggestions:RoomsFindRoomsByParticipantPrompt"),
-      },
-      {
-        name: t("AiSuggestions:RoomsFindARoomByFile"),
-        prompt: t("AiSuggestions:RoomsFindARoomByFilePrompt"),
-      },
-      {
-        name: t("AiSuggestions:RoomsReviewRoomAccess"),
-        prompt: t("AiSuggestions:RoomsReviewRoomAccessPrompt"),
-      },
-      {
-        name: t("AiSuggestions:RoomsShowRoomsIManage"),
-        prompt: t("AiSuggestions:RoomsShowRoomsIManagePrompt"),
-      },
-      {
-        name: t("AiSuggestions:RoomsShowRoomsWithExternalAccess"),
-        prompt: t("AiSuggestions:RoomsShowRoomsWithExternalAccessPrompt"),
-      },
-      {
-        name: t("AiSuggestions:RoomsHelpMeChooseARoomType"),
-        prompt: t("AiSuggestions:RoomsHelpMeChooseARoomTypePrompt"),
-      },
-      {
-        name: t("AiSuggestions:RoomsSuggestRoomsToArchive"),
-        prompt: t("AiSuggestions:RoomsSuggestRoomsToArchivePrompt"),
       },
     ],
 
@@ -312,6 +295,43 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
+    rooms: [
+      {
+        name: t("AiSuggestions:RoomsFindARoom"),
+        prompt: t("AiSuggestions:RoomsFindARoomPrompt"),
+      },
+      {
+        name: t("AiSuggestions:RoomsFindRoomsByParticipant"),
+        prompt: t("AiSuggestions:RoomsFindRoomsByParticipantPrompt"),
+      },
+      {
+        name: t("AiSuggestions:RoomsFindARoomByFile"),
+        prompt: t("AiSuggestions:RoomsFindARoomByFilePrompt"),
+      },
+      {
+        name: t("AiSuggestions:RoomsReviewRoomAccess"),
+        prompt: t("AiSuggestions:RoomsReviewRoomAccessPrompt"),
+      },
+      {
+        name: t("AiSuggestions:RoomsShowRoomsIManage"),
+        prompt: t("AiSuggestions:RoomsShowRoomsIManagePrompt"),
+      },
+      {
+        name: t("AiSuggestions:RoomsShowRoomsWithExternalAccess"),
+        prompt: t("AiSuggestions:RoomsShowRoomsWithExternalAccessPrompt"),
+      },
+      {
+        name: t("AiSuggestions:RoomsHelpMeChooseARoomType"),
+        prompt: t("AiSuggestions:RoomsHelpMeChooseARoomTypePrompt"),
+      },
+      {
+        name: t("AiSuggestions:RoomsSuggestRoomsToArchive"),
+        prompt: t("AiSuggestions:RoomsSuggestRoomsToArchivePrompt"),
+      },
+    ],
+
+    // +
     roomsRecent: [
       {
         name: t("AiSuggestions:RoomsRecentSummarizeRecentRooms"),
@@ -331,6 +351,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     roomsFavorites: [
       {
         name: t("AiSuggestions:RoomsFavoritesSummarizeFavoriteRooms"),
@@ -346,6 +367,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     roomsTemplates: [
       {
         name: t("AiSuggestions:RoomsTemplatesRecommendARoomTemplate"),
@@ -369,6 +391,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     roomsArchive: [
       {
         name: t("AiSuggestions:RoomsArchiveShowRoomArchive"),
@@ -388,6 +411,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     roomsTrash: [
       {
         name: t("AiSuggestions:RoomsTrashWhatSDeleted"),
@@ -508,6 +532,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     collaborationRoom: [
       {
         name: t("AiSuggestions:CollaborationRoomFindUnansweredQuestions"),
@@ -535,6 +560,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     vdrRoom: [
       {
         name: t("AiSuggestions:VdrRoomBuildADocumentIndex"),
@@ -558,6 +584,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     publicRoom: [
       {
         name: t("AiSuggestions:PublicRoomPrepareAPublicSummary"),
@@ -577,6 +604,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     roomTemplate: [
       {
         name: t("AiSuggestions:RoomTemplateExplainTemplateStructure"),
@@ -598,6 +626,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     forms: [
       {
         name: t("AiSuggestions:FormsCreateAFormSpace"),
@@ -629,6 +658,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     formsRecent: [
       {
         name: t("AiSuggestions:FormsRecentSummarizeRecentSpaces"),
@@ -648,6 +678,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     formsFavorites: [
       {
         name: t("AiSuggestions:FormsFavoritesSummarizeFavoriteSpaces"),
@@ -667,6 +698,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     formsTemplates: [
       {
         name: t("AiSuggestions:FormsTemplatesRecommendAFormTemplate"),
@@ -694,6 +726,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     formsTrash: [
       {
         name: t("AiSuggestions:FormsTrashWhatSDeleted"),
@@ -756,6 +789,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     formSpaceInProgress: [
       {
         name: t("AiSuggestions:FormSpaceInProgressShowCompletionStatus"),
@@ -789,6 +823,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     formSpaceResults: [
       {
         name: t("AiSuggestions:FormSpaceResultsSummarizeResults"),
@@ -852,25 +887,113 @@ export type SuggestionSection = keyof ReturnType<
   typeof getSuggestionsBySection
 >;
 
-// Map a folder type to a section, or `undefined` if it isn't a section root.
-const sectionFromFolderType = (
-  folderType?: FolderType | null,
-): SuggestionSection | undefined => {
-  switch (folderType) {
+const SECTION_KEYS: Record<SuggestionSection, true> = {
+  files: true,
+  sharedWithMe: true,
+  filesRecent: true,
+  filesFavorites: true,
+  filesTrash: true,
+  filesFolder: true,
+  filesSelectedFile: true,
+  filesMultiple: true,
+  rooms: true,
+  roomsRecent: true,
+  roomsFavorites: true,
+  roomsTemplates: true,
+  roomsArchive: true,
+  roomsTrash: true,
+  insideRoom: true,
+  collaborationRoom: true,
+  vdrRoom: true,
+  publicRoom: true,
+  roomTemplate: true,
+  forms: true,
+  formsRecent: true,
+  formsFavorites: true,
+  formsTemplates: true,
+  formsTrash: true,
+  formSpace: true,
+  formSpaceInProgress: true,
+  formSpaceResults: true,
+};
+
+// Type guard for a real section key.
+const isSuggestionSection = (value: string): value is SuggestionSection =>
+  Object.hasOwn(SECTION_KEYS, value);
+
+// Narrow an arbitrary string (e.g. one built by concatenating a root-folder
+// prefix with a suffix) to a real section key, or `undefined` when it doesn't
+// name an existing section.
+const asSection = (value: string): SuggestionSection | undefined =>
+  isSuggestionSection(value) ? value : undefined;
+
+const getRootFolderName = (rootType?: FolderType | null) => {
+  switch (rootType) {
     case FolderType.USER:
       return "files";
+
+    case FolderType.EditingRoom:
+    case FolderType.VirtualDataRoom:
+    case FolderType.PublicRoom:
+    case FolderType.CustomRoom:
+      return "rooms";
+    case FolderType.AIAgent:
+      return "agents";
+    case FolderType.FormRoom:
+      return "forms";
+
+    default:
+      return "";
+  }
+};
+
+const getSectionTemplate = (searchArea?: string | null) => {
+  switch (searchArea) {
+    case "FormTemplates":
+      return "formsTemplates";
+
+    case "Templates":
+      return "roomsTemplates";
+
+    default:
+      return "";
+  }
+};
+
+const sectionRootFolder = (
+  folderType?: QueryFolderType | null,
+  rootType?: FolderType | null,
+  searchArea?: string | null,
+): SuggestionSection | undefined => {
+  switch (rootType) {
+    case FolderType.USER:
+      return "files";
+
     case FolderType.SHARE:
       return "sharedWithMe";
+
     case FolderType.Recent:
-      return "filesRecent";
+      return asSection(`${getRootFolderName(Number(folderType))}Recent`);
+
     case FolderType.Favorites:
-      return "filesFavorites";
+      return asSection(`${getRootFolderName(Number(folderType))}Favorites`);
+
     case FolderType.TRASH:
-      return "filesTrash";
-    case FolderType.Archive:
-      return "roomsArchive";
+      return asSection(`${getRootFolderName(Number(folderType))}Trash`);
+
     case FolderType.Rooms:
       return "rooms";
+
+    case FolderType.RoomTemplates:
+      return asSection(getSectionTemplate(searchArea));
+
+    case FolderType.Archive:
+      return "roomsArchive";
+    case FolderType.Forms:
+      return "forms";
+
+    case FolderType.AIAgents:
+      return asSection("agents");
     default:
       return undefined;
   }
@@ -887,42 +1010,59 @@ const sectionFromRoomType = (
       return "publicRoom";
     case RoomsType.VirtualDataRoom:
       return "vdrRoom";
-    case RoomsType.FormRoom:
-    case RoomsType.CustomRoom:
-    case RoomsType.AIRoom:
-      return "insideRoom";
+    // case RoomsType.FormRoom:
+    // case RoomsType.CustomRoom:
+    // case RoomsType.AIRoom:
+    //   return "insideRoom";
     default:
       return undefined;
   }
 };
 
-export type SuggestionContext = {
-  roomType?: RoomsType | null;
-  folderType?: FolderType | null;
-  selectedFolderType?: FolderType | null;
-  rootFolderType?: FolderType | null;
+const getFolder = (selectedFolderType?: FolderType | null) => {
+  switch (selectedFolderType) {
+    case FolderType.Done:
+    case FolderType.SubFolderDone:
+      return "formSpaceResults";
+
+    case FolderType.InProgress:
+    case FolderType.SubFolderInProgress:
+      return "formSpaceInProgress";
+    default:
+      return "filesFolder";
+  }
 };
 
-// Map the host's current context to a suggestion section.
-//
-// Inside a room the room type picks the section. Otherwise the current folder
-// type is tried first (a section root, e.g. My Documents), then
-// `rootFolderType` — which stays meaningful when the current folder is a nested
-// subfolder whose own type is just `DEFAULT`. Falls back to `files`.
 export const resolveSuggestionSection = ({
   roomType,
-  folderType,
   rootFolderType,
+  folderType,
   selectedFolderType,
+  isFolder,
+  isRootFolder,
+  searchArea,
 }: SuggestionContext): SuggestionSection => {
+  console.debug({
+    roomType,
+    rootFolderType,
+    selectedFolderType,
+    isFolder,
+    isRootFolder,
+    folderType,
+  });
+
+  if (isFolder && !isRootFolder && isNil(roomType)) {
+    return getFolder(selectedFolderType);
+  }
+
+  if (isRootFolder) {
+    return sectionRootFolder(folderType, rootFolderType, searchArea) ?? "files";
+  }
+
   const roomSection = sectionFromRoomType(roomType);
   if (roomSection) return roomSection;
 
-  return (
-    sectionFromFolderType(selectedFolderType) ??
-    sectionFromFolderType(rootFolderType) ??
-    "files"
-  );
+  return "files";
 };
 
 // Build the ready-made suggestion chips for the current section. Passed to

@@ -93,8 +93,6 @@ class DocsConnectStore {
 
   isReportGenerating: boolean = false;
 
-  reportTimerId: ReturnType<typeof setTimeout> | null = null;
-
   reportT: Nullable<TTranslation> = null;
 
   reportPageLeft: boolean = false;
@@ -108,7 +106,6 @@ class DocsConnectStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
     makeAutoObservable(this, {
-      reportTimerId: false,
       reportT: false,
       reportPageLeft: false,
     });
@@ -343,10 +340,6 @@ class DocsConnectStore {
   };
 
   private resetReportState = () => {
-    if (this.reportTimerId) {
-      clearTimeout(this.reportTimerId);
-      this.reportTimerId = null;
-    }
     this.reportT = null;
     this.reportPageLeft = false;
     runInAction(() => {
@@ -371,29 +364,6 @@ class DocsConnectStore {
     if (this.isReportGenerating) this.reportPageLeft = true;
   };
 
-  private checkReportStatus = async () => {
-    try {
-      const res = await getDocsConnectReportStatus();
-      if (!res) return;
-
-      if (res.error) {
-        toastr.error(res.error);
-        this.resetReportState();
-        return;
-      }
-
-      if (!res.isCompleted) {
-        this.reportTimerId = setTimeout(this.checkReportStatus, 1000);
-        return;
-      }
-
-      this.finishReport(res.resultFileUrl);
-    } catch (error) {
-      toastr.error(error as Error);
-      this.resetReportState();
-    }
-  };
-
   downloadReport = async (t: TTranslation) => {
     if (this.isReportGenerating) return;
 
@@ -403,21 +373,25 @@ class DocsConnectStore {
       this.isReportGenerating = true;
     });
 
-    try {
-      const res = await startDocsConnectReport();
+    const controller = new AbortController();
 
-      if (res?.error) {
-        toastr.error(res.error);
+    try {
+      let status = await startDocsConnectReport();
+
+      if (!status?.isCompleted && !status?.error) {
+        await pollUntil(async () => {
+          status = await getDocsConnectReportStatus();
+          return !!status?.isCompleted || !!status?.error;
+        }, controller.signal);
+      }
+
+      if (status?.error) {
+        toastr.error(status.error);
         this.resetReportState();
         return;
       }
 
-      if (res?.isCompleted) {
-        this.finishReport(res.resultFileUrl);
-        return;
-      }
-
-      this.reportTimerId = setTimeout(this.checkReportStatus, 1000);
+      this.finishReport(status?.resultFileUrl);
     } catch (error) {
       toastr.error(error as Error);
       this.resetReportState();

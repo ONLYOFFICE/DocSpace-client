@@ -887,119 +887,81 @@ export type SuggestionSection = keyof ReturnType<
   typeof getSuggestionsBySection
 >;
 
-const SECTION_KEYS: Record<SuggestionSection, true> = {
-  files: true,
-  sharedWithMe: true,
-  filesRecent: true,
-  filesFavorites: true,
-  filesTrash: true,
-  filesFolder: true,
-  filesSelectedFile: true,
-  filesMultiple: true,
-  rooms: true,
-  roomsRecent: true,
-  roomsFavorites: true,
-  roomsTemplates: true,
-  roomsArchive: true,
-  roomsTrash: true,
-  insideRoom: true,
-  collaborationRoom: true,
-  vdrRoom: true,
-  publicRoom: true,
-  roomTemplate: true,
-  forms: true,
-  formsRecent: true,
-  formsFavorites: true,
-  formsTemplates: true,
-  formsTrash: true,
-  formSpace: true,
-  formSpaceInProgress: true,
-  formSpaceResults: true,
-};
+type FolderArea = "files" | "rooms" | "forms";
 
-// Type guard for a real section key.
-const isSuggestionSection = (value: string): value is SuggestionSection =>
-  Object.hasOwn(SECTION_KEYS, value);
-
-// Narrow an arbitrary string (e.g. one built by concatenating a root-folder
-// prefix with a suffix) to a real section key, or `undefined` when it doesn't
-// name an existing section.
-const asSection = (value: string): SuggestionSection | undefined =>
-  isSuggestionSection(value) ? value : undefined;
-
-const getRootFolderName = (rootType?: FolderType | null) => {
-  switch (rootType) {
+const folderArea = (
+  folderType?: QueryFolderType | null,
+): FolderArea | undefined => {
+  switch (Number(folderType)) {
     case FolderType.USER:
       return "files";
-
     case FolderType.EditingRoom:
     case FolderType.VirtualDataRoom:
     case FolderType.PublicRoom:
     case FolderType.CustomRoom:
       return "rooms";
-    case FolderType.AIAgent:
-      return "agents";
     case FolderType.FormRoom:
       return "forms";
-
-    default:
-      return "";
-  }
-};
-
-const getSectionTemplate = (searchArea?: string | null) => {
-  switch (searchArea) {
-    case "FormTemplates":
-      return "formsTemplates";
-
-    case "Templates":
-      return "roomsTemplates";
-
-    default:
-      return "";
-  }
-};
-
-const sectionRootFolder = (
-  folderType?: QueryFolderType | null,
-  rootType?: FolderType | null,
-  searchArea?: string | null,
-): SuggestionSection | undefined => {
-  switch (rootType) {
-    case FolderType.USER:
-      return "files";
-
-    case FolderType.SHARE:
-      return "sharedWithMe";
-
-    case FolderType.Recent:
-      return asSection(`${getRootFolderName(Number(folderType))}Recent`);
-
-    case FolderType.Favorites:
-      return asSection(`${getRootFolderName(Number(folderType))}Favorites`);
-
-    case FolderType.TRASH:
-      return asSection(`${getRootFolderName(Number(folderType))}Trash`);
-
-    case FolderType.Rooms:
-      return "rooms";
-
-    case FolderType.RoomTemplates:
-      return asSection(getSectionTemplate(searchArea));
-
-    case FolderType.Archive:
-      return "roomsArchive";
-    case FolderType.Forms:
-      return "forms";
-
-    case FolderType.AIAgents:
-      return asSection("agents");
     default:
       return undefined;
   }
 };
 
-// Map a room type to a section, or `undefined` if it isn't a known room type.
+const VARIANT_SECTIONS: Record<
+  FolderArea,
+  Partial<Record<FolderType, SuggestionSection>>
+> = {
+  files: {
+    [FolderType.Recent]: "filesRecent",
+    [FolderType.Favorites]: "filesFavorites",
+    [FolderType.TRASH]: "filesTrash",
+  },
+  rooms: {
+    [FolderType.Recent]: "roomsRecent",
+    [FolderType.Favorites]: "roomsFavorites",
+    [FolderType.TRASH]: "roomsTrash",
+  },
+  forms: {
+    [FolderType.Recent]: "formsRecent",
+    [FolderType.Favorites]: "formsFavorites",
+    [FolderType.TRASH]: "formsTrash",
+  },
+};
+
+const TEMPLATE_SECTIONS: Record<string, SuggestionSection> = {
+  FormTemplates: "formsTemplates",
+  Templates: "roomsTemplates",
+};
+
+const ROOT_SECTIONS: Partial<Record<FolderType, SuggestionSection>> = {
+  [FolderType.USER]: "files",
+  [FolderType.SHARE]: "sharedWithMe",
+  [FolderType.Rooms]: "rooms",
+  [FolderType.Archive]: "roomsArchive",
+  [FolderType.Forms]: "forms",
+};
+
+const rootFolderSection = (
+  folderType?: QueryFolderType | null,
+  rootType?: FolderType | null,
+  searchArea?: string | null,
+): SuggestionSection | undefined => {
+  if (isNil(rootType)) return undefined;
+
+  switch (rootType) {
+    case FolderType.Recent:
+    case FolderType.Favorites:
+    case FolderType.TRASH: {
+      const area = folderArea(folderType);
+      return area ? VARIANT_SECTIONS[area][rootType] : undefined;
+    }
+    case FolderType.RoomTemplates:
+      return searchArea ? TEMPLATE_SECTIONS[searchArea] : undefined;
+    default:
+      return ROOT_SECTIONS[rootType];
+  }
+};
+
 const sectionFromRoomType = (
   roomType?: RoomsType | null,
 ): SuggestionSection | undefined => {
@@ -1019,12 +981,13 @@ const sectionFromRoomType = (
   }
 };
 
-const getFolder = (selectedFolderType?: FolderType | null) => {
+const nestedFolderSection = (
+  selectedFolderType?: FolderType | null,
+): SuggestionSection => {
   switch (selectedFolderType) {
     case FolderType.Done:
     case FolderType.SubFolderDone:
       return "formSpaceResults";
-
     case FolderType.InProgress:
     case FolderType.SubFolderInProgress:
       return "formSpaceInProgress";
@@ -1042,31 +1005,17 @@ export const resolveSuggestionSection = ({
   isRootFolder,
   searchArea,
 }: SuggestionContext): SuggestionSection => {
-  console.debug({
-    roomType,
-    rootFolderType,
-    selectedFolderType,
-    isFolder,
-    isRootFolder,
-    folderType,
-  });
-
   if (isFolder && !isRootFolder && isNil(roomType)) {
-    return getFolder(selectedFolderType);
+    return nestedFolderSection(selectedFolderType);
   }
 
   if (isRootFolder) {
-    return sectionRootFolder(folderType, rootFolderType, searchArea) ?? "files";
+    return rootFolderSection(folderType, rootFolderType, searchArea) ?? "files";
   }
 
-  const roomSection = sectionFromRoomType(roomType);
-  if (roomSection) return roomSection;
-
-  return "files";
+  return sectionFromRoomType(roomType) ?? "files";
 };
 
-// Build the ready-made suggestion chips for the current section. Passed to
-// `AiAgentProviders` via the `suggestions` prop.
 export const getSuggestions = (
   context: SuggestionContext,
   t: TTranslation,

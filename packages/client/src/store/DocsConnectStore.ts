@@ -45,7 +45,8 @@ import {
   cancelDocsConnectPlan,
   cancelDocsConnectScheduledChange,
   updateDocsConnectConfig,
-  getDocsConnectReport,
+  startDocsConnectReport,
+  getDocsConnectReportStatus,
 } from "@docspace/shared/api/docs-connect";
 import type {
   TDocsConnectInfo,
@@ -90,6 +91,14 @@ class DocsConnectStore {
 
   removeSubscriptionDialogVisible: boolean = false;
 
+  isReportGenerating: boolean = false;
+
+  reportTimerId: ReturnType<typeof setTimeout> | null = null;
+
+  reportT: Nullable<TTranslation> = null;
+
+  reportPageLeft: boolean = false;
+
   constructor(
     settingsStore: SettingsStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -98,7 +107,11 @@ class DocsConnectStore {
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      reportTimerId: false,
+      reportT: false,
+      reportPageLeft: false,
+    });
   }
 
   refreshPortalState = () => {
@@ -329,12 +342,85 @@ class DocsConnectStore {
     });
   };
 
-  downloadReport = async () => {
+  private resetReportState = () => {
+    if (this.reportTimerId) {
+      clearTimeout(this.reportTimerId);
+      this.reportTimerId = null;
+    }
+    this.reportT = null;
+    this.reportPageLeft = false;
+    runInAction(() => {
+      this.isReportGenerating = false;
+    });
+  };
+
+  private finishReport = (resultFileUrl?: string) => {
+    const t = this.reportT;
+    if (t) {
+      toastr.success(
+        t("Common:ReportSaveLocation", { sectionName: t("Common:Files") }),
+      );
+    }
+    if (!this.reportPageLeft && resultFileUrl) {
+      setTimeout(() => window.open(resultFileUrl, "_blank"), 100); // hack for ios
+    }
+    this.resetReportState();
+  };
+
+  markReportPageLeft = () => {
+    if (this.isReportGenerating) this.reportPageLeft = true;
+  };
+
+  private checkReportStatus = async () => {
     try {
-      const res = await getDocsConnectReport();
-      setTimeout(() => window.open(res, "_blank"), 100); // hack for ios
+      const res = await getDocsConnectReportStatus();
+      if (!res) return;
+
+      if (res.error) {
+        toastr.error(res.error);
+        this.resetReportState();
+        return;
+      }
+
+      if (!res.isCompleted) {
+        this.reportTimerId = setTimeout(this.checkReportStatus, 1000);
+        return;
+      }
+
+      this.finishReport(res.resultFileUrl);
     } catch (error) {
       toastr.error(error as Error);
+      this.resetReportState();
+    }
+  };
+
+  downloadReport = async (t: TTranslation) => {
+    if (this.isReportGenerating) return;
+
+    this.reportT = t;
+    this.reportPageLeft = false;
+    runInAction(() => {
+      this.isReportGenerating = true;
+    });
+
+    try {
+      const res = await startDocsConnectReport();
+
+      if (res?.error) {
+        toastr.error(res.error);
+        this.resetReportState();
+        return;
+      }
+
+      if (res?.isCompleted) {
+        this.finishReport(res.resultFileUrl);
+        return;
+      }
+
+      this.reportTimerId = setTimeout(this.checkReportStatus, 1000);
+    } catch (error) {
+      toastr.error(error as Error);
+      this.resetReportState();
     }
   };
 

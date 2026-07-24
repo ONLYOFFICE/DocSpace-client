@@ -403,7 +403,8 @@ class DocsConnectStore {
 
   applyToDocumentService = async () => {
     const data = this.connectionData;
-    if (!data) return null;
+    if (!data)
+      throw new Error("DocsConnect connection data is incomplete");
 
     const url = /^https?:\/\//i.test(data.address)
       ? data.address

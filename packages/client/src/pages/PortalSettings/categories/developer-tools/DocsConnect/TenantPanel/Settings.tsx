@@ -147,7 +147,9 @@ const Settings = ({
   const isBusy = isSavingGeneral || isSavingRules;
 
   const canApplyToPortal =
-    !!info.tenant.address && !!info.config.security.secret;
+    !!info.tenant.address &&
+    !!info.config.security.secret &&
+    !!info.config.security.header;
 
   const onApplyToPortal = async () => {
     setIsApplying(true);

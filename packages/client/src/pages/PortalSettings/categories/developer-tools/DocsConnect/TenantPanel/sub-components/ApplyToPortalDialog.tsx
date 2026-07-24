@@ -33,48 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
-import { FieldContainer } from "@docspace/ui-kit/components/field-container";
-import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "../TenantPanel.module.scss";
 
-interface AddRuleDialogProps {
+interface ApplyToPortalDialogProps {
   visible: boolean;
+  isSaving: boolean;
+  onApply: () => void;
   onClose: () => void;
-  onAdd: (type: "allow" | "deny", value: string) => Promise<boolean>;
 }
 
-const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
+const ApplyToPortalDialog = ({
+  visible,
+  isSaving,
+  onApply,
+  onClose,
+}: ApplyToPortalDialogProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
-  const [ruleType, setRuleType] = useState<"allow" | "deny">("allow");
-  const [address, setAddress] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
-
-  const ruleTypeOptions = [
-    { key: "allow", label: t("DocsConnect:RuleAllow") },
-    { key: "deny", label: t("DocsConnect:RuleDeny") },
-  ];
-
-  const onSubmit = async () => {
-    const value = address.trim();
-    if (!value) return;
-
-    setIsSaving(true);
-    try {
-      const ok = await onAdd(ruleType, value);
-      if (ok) onClose();
-    } finally {
-      setIsSaving(false);
-    }
-  };
 
   return (
     <ModalDialog
@@ -83,49 +65,21 @@ const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
       onClose={onClose}
       autoMaxHeight
     >
-      <ModalDialog.Header>{t("DocsConnect:AddAccessRule")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.addRuleBody}>
-          <Text fontSize="13px">
-            {t("DocsConnect:AddAccessRuleDescription", {
+        <div className={styles.confirmDialogBody}>
+          <Text fontWeight={600}>
+            {t("DocsConnect:SwitchToEditorsQuestion", {
               service: t("DocsConnect:DocsConnect"),
             })}
           </Text>
-          <FieldContainer
-            isVertical
-            removeMargin
-            labelVisible
-            labelText={t("DocsConnect:RuleType")}
-          >
-            <ComboBox
-              options={ruleTypeOptions}
-              selectedOption={
-                ruleTypeOptions.find((option) => option.key === ruleType) ??
-                ruleTypeOptions[0]
-              }
-              onSelect={(option) =>
-                setRuleType(option.key === "deny" ? "deny" : "allow")
-              }
-              scaled
-            />
-          </FieldContainer>
-          <FieldContainer
-            isVertical
-            removeMargin
-            labelVisible
-            labelText={t("Common:Address")}
-          >
-            <TextInput
-              type={InputType.text}
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder={t("DocsConnect:RuleAddressPlaceholder")}
-              scale
-            />
-            <Text fontSize="12px" className={styles.settingsHint}>
-              {t("DocsConnect:RuleAddressExamples")}
-            </Text>
-          </FieldContainer>
+          <Text fontSize="13px">
+            {t("DocsConnect:SwitchToEditorsDescription", {
+              organizationName: getBrandName("OrganizationName"),
+              editorsName: getBrandName("ProductEditorsName"),
+              service: t("DocsConnect:DocsConnect"),
+            })}
+          </Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -133,10 +87,10 @@ const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
           primary
           scale
           size={ButtonSize.normal}
-          label={t("Common:AddButton")}
+          label={t("DocsConnect:SwitchEditors")}
           isLoading={isSaving}
-          isDisabled={!address.trim() || isSaving}
-          onClick={onSubmit}
+          isDisabled={isSaving}
+          onClick={onApply}
         />
         <Button
           scale
@@ -150,4 +104,4 @@ const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
   );
 };
 
-export default AddRuleDialog;
+export default ApplyToPortalDialog;

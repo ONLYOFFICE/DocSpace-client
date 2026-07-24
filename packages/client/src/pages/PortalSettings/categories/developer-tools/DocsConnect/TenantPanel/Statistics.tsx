@@ -40,6 +40,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -419,9 +420,18 @@ const Statistics = ({
             </div>
             <div className={styles.detailRows}>
               <div className={styles.detailRow}>
-                <Text className={styles.muted}>
-                  {t("DocsConnect:PlanUsers")}
-                </Text>
+                <div className={styles.detailLabel}>
+                  <Text className={styles.muted}>
+                    {t("DocsConnect:PlanUsers")}
+                  </Text>
+                  <HelpButton
+                    size={12}
+                    tooltipContent={t("DocsConnect:PlanUsersTooltip", {
+                      count: planUsers,
+                    })}
+                    tooltipMaxWidth="320px"
+                  />
+                </div>
                 <Text fontWeight={600}>{planUsers}</Text>
               </div>
               <div className={styles.detailRow}>

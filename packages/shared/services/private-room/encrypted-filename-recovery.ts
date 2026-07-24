@@ -59,6 +59,11 @@ export type RecoveryCandidate = {
 const HEADER_FETCH_BYTES = 4096;
 const MAX_PARALLEL = 5;
 
+// Concurrent recovery pools (per-page auto-trigger from setFiles + explicit
+// awaited passes, e.g. client-side search warm-up) must not Range-fetch the
+// same file twice; awaiting callers also need to join an in-flight recovery.
+const inFlight = new Map<number, Promise<void>>();
+
 async function fetchHeaderBytes(url: string): Promise<Uint8Array | null> {
   try {
     const response = await fetch(url, {
@@ -72,14 +77,31 @@ async function fetchHeaderBytes(url: string): Promise<Uint8Array | null> {
   }
 }
 
-async function recoverOne(
+function recoverOne(
   file: RecoveryCandidate,
   userId: string,
   identity: IdentityKeyPair,
   roomMemberKeys: RoomMemberPublicKey[],
 ): Promise<void> {
-  if (getCachedEncryptedFilename(file.id)) return;
+  if (getCachedEncryptedFilename(file.id)) return Promise.resolve();
 
+  const existing = inFlight.get(file.id);
+  if (existing) return existing;
+
+  const task = recoverOneUncached(file, userId, identity, roomMemberKeys)
+    // recoverOneUncached swallows its own errors, so chaining here cannot
+    // surface an unhandled rejection to joined callers.
+    .finally(() => inFlight.delete(file.id));
+  inFlight.set(file.id, task);
+  return task;
+}
+
+async function recoverOneUncached(
+  file: RecoveryCandidate,
+  userId: string,
+  identity: IdentityKeyPair,
+  roomMemberKeys: RoomMemberPublicKey[],
+): Promise<void> {
   const headerBytes = await fetchHeaderBytes(file.viewUrl);
   if (!headerBytes) return;
 

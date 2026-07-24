@@ -79,6 +79,7 @@ import {
   PaymentRequiredHttpCode,
   UnauthorizedHttpCode,
 } from "./constants";
+import { loadAllPagesForClientSearchImpl } from "./clientSearch.helpers";
 import type { THighlightState, TItem } from "./types";
 
 import type { default as FilesStore } from "../FilesStore";
@@ -110,6 +111,15 @@ export function fetchFilesImpl(
   // FilesFilter.folder is typed `string` but folder ids are
   // numbers or strings at runtime; erased casts keep the values.
   filterData.folder = folderId as string;
+
+  // Client-side search is scoped to one folder; navigating elsewhere drops
+  // it. A same-folder refetch keeps the query (re-warmed below).
+  if (
+    self.clientSearchQuery &&
+    String(folderId) !== String(self.selectedFolderStore.id)
+  ) {
+    self.clearClientSearch();
+  }
 
   if (
     folderId === "@my" &&
@@ -496,6 +506,12 @@ export function fetchFilesImpl(
           );
         }
       });
+
+      // A same-folder refetch (e.g. a filter change) replaced the loaded
+      // pages with page 0 — reload the rest for the active client search.
+      if (self.clientSearchQuery) {
+        void loadAllPagesForClientSearchImpl(self);
+      }
 
       if (clearFilter) {
         if (clearSelection) {

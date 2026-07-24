@@ -61,6 +61,7 @@ import {
 } from "@docspace/shared/utils/common";
 import {
   subscribeFilenameCache,
+  getCachedEncryptedFilename,
 } from "@docspace/shared/services/encryption/filename-cache";
 import {
   ensureDecryptedFilename,
@@ -182,6 +183,11 @@ import {
   maybeBackfillEncryptedRoomImpl,
 } from "./filesStore/encryption.helpers";
 import {
+  setClientSearchQueryImpl,
+  clearClientSearchImpl,
+  applyClientSearchImpl,
+} from "./filesStore/clientSearch.helpers";
+import {
   setFilesFilterImpl,
   setRoomsFilterImpl,
 } from "./filesStore/filter.helpers";
@@ -237,6 +243,16 @@ class FilesStore {
 
   // MobX dependency for getFilesListItems so a cache write triggers re-render.
   encryptedFilenameCacheVersion = 0;
+
+  // Client-side search over decrypted names in private rooms (the query is
+  // never sent to the server). See docs/private-room-client-search.md.
+  clientSearchQuery: Nullable<string> = null;
+
+  clientSearchLoading = false;
+
+  clientSearchCapped = false;
+
+  clientSearchGeneration = 0;
 
   // the persisted view value is trusted to be a valid TViewAs
   // (it is only ever written via setViewAs).
@@ -1395,6 +1411,11 @@ class FilesStore {
   recoverEncryptedFilenamesForCurrentView = () =>
     recoverEncryptedFilenamesForCurrentViewImpl(this);
 
+  setClientSearchQuery = (query: Nullable<string>) =>
+    setClientSearchQueryImpl(this, query);
+
+  clearClientSearch = () => clearClientSearchImpl(this);
+
   ensureEncryptedFilenameForFile = (file: TFile) =>
     ensureEncryptedFilenameForFileImpl(this, file);
 
@@ -1608,7 +1629,7 @@ class FilesStore {
         return Number(a.order) - Number(b.order);
       });
 
-      return this.getFilesListItems(orderItems);
+      return applyClientSearchImpl(this, this.getFilesListItems(orderItems));
     }
 
     newFolders.sort((a, b) => {
@@ -1624,7 +1645,19 @@ class FilesStore {
       this.setIsEmptyPage(false);
     }
 
-    return this.getFilesListItems(items);
+    return applyClientSearchImpl(this, this.getFilesListItems(items));
+  }
+
+  // Progress of decrypted-name recovery for the loaded folder, used by the
+  // client-search UI ("Decrypting names… N/M").
+  get clientSearchProgress() {
+    // register the MobX dependency on filename-cache writes
+    void this.encryptedFilenameCacheVersion;
+    const encryptedFiles = this.files.filter((f) => f.encrypted && f.id);
+    const decrypted = encryptedFiles.filter((f) =>
+      getCachedEncryptedFilename(f.id),
+    ).length;
+    return { total: encryptedFiles.length, decrypted };
   }
 
   get cbMenuItems() {
@@ -1930,6 +1963,13 @@ class FilesStore {
   }
 
   get isEmptyFilesList() {
+    // A client-side search empties the *derived* list, not the raw arrays.
+    // While the search warm-up runs, the list is not "empty" yet — a match
+    // may still be undecrypted.
+    if (this.clientSearchQuery) {
+      return !this.clientSearchLoading && this.filesList.length <= 0;
+    }
+
     const filesList = [...this.files, ...this.folders];
     return filesList.length <= 0;
   }
@@ -2058,6 +2098,10 @@ class FilesStore {
     // Only 100 files on recent page should be shown
     if (isRecentFolder) return false;
 
+    // During client-side search the list is client-owned: pages are loaded by
+    // the search loop, not by infinite scroll.
+    if (this.clientSearchQuery) return false;
+
     // The Forms section is a rooms listing (served via searchArea=Forms), so
     // its pagination total lives on roomsFilter, not the files filter.
     const isRooms =
@@ -2169,8 +2213,18 @@ class FilesStore {
   };
 
   get isFiltered() {
-    const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder, isFormsFolder } =
-      this.treeFoldersStore;
+    // An active client-side search (private rooms) is a filter, even though
+    // it never touches FilesFilter — the "no results" empty view depends on
+    // this.
+    if (this.clientSearchQuery) return true;
+
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isAIAgentsFolder,
+      isFormsFolder,
+      isTemplatesFolder,
+    } = this.treeFoldersStore;
 
     const {
       subjectId,
@@ -2196,7 +2250,11 @@ class FilesStore {
     } = this.filter;
 
     const isFiltered =
-      isRoomsFolder || isArchiveFolder || isAIAgentsFolder || isFormsFolder
+      isRoomsFolder ||
+      isArchiveFolder ||
+      isAIAgentsFolder ||
+      isFormsFolder ||
+      isTemplatesFolder
         ? filterValue ||
           type ||
           provider ||

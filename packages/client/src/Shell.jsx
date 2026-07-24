@@ -154,7 +154,11 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const folderType = searchParams.get("folderType");
 
-  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
+  const { t, ready } = useTranslation([
+    "Common",
+    "SmartBanner",
+    "AiSuggestions",
+  ]);
 
   const aiSuggestions = useMemo(
     () =>

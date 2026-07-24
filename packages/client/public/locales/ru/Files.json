@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Здесь появятся комнаты, которые были заархивированы.",
   "ChangeAgentOwnerSelectorInfo": "Владельцем агента может стать только администратор комнаты или администратор {{productName}}",
   "ChangeTheAgentOwner": "Изменить владельца агента",
+  "ClientSearchDecryptingNames": "Расшифровка имён файлов… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Папка слишком большая. Результаты поиска могут быть неполными.",
   "CompressingFiles": "Сжатие файлов",
   "Conversion": "Преобразование",
   "Converting": "Преобразование",

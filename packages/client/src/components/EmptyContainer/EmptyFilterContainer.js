@@ -68,6 +68,8 @@ const EmptyFilterContainer = ({
   isTemplatesFolder,
   isRecentFolder,
   setClearSearch,
+  clientSearchActive,
+  clearClientSearch,
   theme,
   isPublicRoom,
   publicRoomKey,
@@ -117,6 +119,13 @@ const EmptyFilterContainer = ({
     event.preventDefault();
 
     setIsLoading(true);
+
+    // Client-side search (private rooms) lives outside FilesFilter and must
+    // be dropped explicitly.
+    if (clientSearchActive) {
+      clearClientSearch();
+      setClearSearch(true);
+    }
 
     if (isArchiveFolder) {
       setClearSearch(true);
@@ -218,6 +227,8 @@ export default inject(
       isTemplatesFolder,
       isRecentFolder,
       setClearSearch: filesStore.setClearSearch,
+      clientSearchActive: !!filesStore.clientSearchQuery,
+      clearClientSearch: filesStore.clearClientSearch,
       theme: settingsStore.theme,
       userId: user?.id,
       isInsideKnowledge: selectedFolderStore.isInsideKnowledge,

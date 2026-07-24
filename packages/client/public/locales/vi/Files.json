@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Các phòng đã được sao lưu sẽ xuất hiện ở đây.",
   "ChangeAgentOwnerSelectorInfo": "Chỉ có quản trị viên phòng hoặc quản trị viên {{productName}} mới có thể trở thành chủ sở hữu của agent.",
   "ChangeTheAgentOwner": "Thay đổi chủ sở hữu đại lý",
+  "ClientSearchDecryptingNames": "Đang giải mã tên tệp… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Thư mục quá lớn. Kết quả tìm kiếm có thể không đầy đủ.",
   "CompressingFiles": "Đang nén tệp",
   "Conversion": "Chuyển đổi",
   "Converting": "Đang chuyển đổi",

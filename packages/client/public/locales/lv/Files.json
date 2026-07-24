@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Šeit tiks parādītas arhivētās telpas.",
   "ChangeAgentOwnerSelectorInfo": "Tikai telpas administrators vai {{productName}} administrators var kļūt par aģenta īpašnieks.",
   "ChangeTheAgentOwner": "Izmainīt aģenta īpašnieku",
+  "ClientSearchDecryptingNames": "Notiek failu nosaukumu atšifrēšana… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Mape ir pārāk liela. Meklēšanas rezultāti var būt nepilnīgi.",
   "CompressingFiles": "Failu saspiešana",
   "Conversion": "Konvertēšana",
   "Converting": "Konvertēšana",

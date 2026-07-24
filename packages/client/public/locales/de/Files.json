@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Räume, die archiviert wurden, erscheinen hier.",
   "ChangeAgentOwnerSelectorInfo": "Nur ein Raumadministrator oder ein {{productName}}-Administrator kann Besitzer des Agenten werden",
   "ChangeTheAgentOwner": "Agentenbesitzer ändern",
+  "ClientSearchDecryptingNames": "Dateinamen werden entschlüsselt… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Der Ordner ist zu groß. Die Suchergebnisse sind möglicherweise unvollständig.",
   "CompressingFiles": "Dateien werden komprimiert",
   "Conversion": "Konvertierung",
   "Converting": "Konvertieren",

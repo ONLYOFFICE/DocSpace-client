@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Rooms that have been archived will appear here.",
   "ChangeAgentOwnerSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the agent",
   "ChangeTheAgentOwner": "Change the agent owner",
+  "ClientSearchDecryptingNames": "Decrypting file names… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "The folder is too large. Search results may be incomplete.",
   "CompressingFiles": "Compressing files",
   "Conversion": "Conversion",
   "Converting": "Converting",

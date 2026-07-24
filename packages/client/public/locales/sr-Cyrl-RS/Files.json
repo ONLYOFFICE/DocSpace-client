@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Собе које су архивиране ће се појавити овде.",
   "ChangeAgentOwnerSelectorInfo": "Само администратор собе или {{productName}} администратор може постати власник агента",
   "ChangeTheAgentOwner": "Промените власника агента",
+  "ClientSearchDecryptingNames": "Дешифровање назива датотека… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Фасцикла је превелика. Резултати претраге могу бити непотпуни.",
   "CompressingFiles": "Компресовање датотека",
   "Conversion": "Конверзија",
   "Converting": "Конвертовање",

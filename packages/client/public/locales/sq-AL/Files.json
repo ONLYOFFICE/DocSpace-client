@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Dhomat që janë akrivuar do të shfaqen këtu.",
   "ChangeAgentOwnerSelectorInfo": "Vetëm një administrator dhome ose një administrator i {{productName}} mund të bëhet pronar i agjentit",
   "ChangeTheAgentOwner": "Ndryshoni pronarin e agjentit",
+  "ClientSearchDecryptingNames": "Po deshifrohen emrat e skedarëve… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Dosja është shumë e madhe. Rezultatet e kërkimit mund të jenë të paplota.",
   "CompressingFiles": "Po kompresohen skedarët",
   "Conversion": "Konvertim",
   "Converting": "Konvertim",

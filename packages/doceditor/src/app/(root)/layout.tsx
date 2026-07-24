@@ -47,6 +47,7 @@ import "@docspace/shared/styles/theme.scss";
 
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
+import ChunkRetryScript from "@/components/ChunkRetryScript";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 import "@/styles/globals.scss";
@@ -116,6 +117,7 @@ export default async function RootLayout({
   return (
     <html lang="en" translate="no">
       <head>
+        <ChunkRetryScript />
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
         <meta charSet="utf-8" />
         <meta

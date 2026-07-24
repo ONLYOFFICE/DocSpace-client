@@ -648,8 +648,12 @@ const Shell = ({ page = "home", ...rest }) => {
     if (isInsideAgentRoom) setPickedAgent(null);
   }, [isInsideAgentRoom]);
 
-  const chatEntityId =
-    !isInsideAgentRoom && pickedAgent ? pickedAgent.entityId : agentEntityId;
+  // Talking to a picked agent keeps the conversation where the user is:
+  // history and uploads stay under the current location's entity, and only
+  // the request context (agent tools, workspace steering, profile fallback)
+  // targets the agent's room via contextEntityId.
+  const chatContextEntityId =
+    !isInsideAgentRoom && pickedAgent ? pickedAgent.entityId : undefined;
 
   const chatPickerAlias = useMemo(
     () =>
@@ -682,7 +686,8 @@ const Shell = ({ page = "home", ...rest }) => {
           isStandalone={standalone}
           isAvailable={isAiChatAvailable}
           callbacks={aiChatCallbacks}
-          entityId={chatEntityId}
+          entityId={agentEntityId}
+          contextEntityId={chatContextEntityId}
           hideProfilePicker={isInsideAgentRoom}
           profilePickerActions={profilePickerActions}
           profilePickerAlias={chatPickerAlias}

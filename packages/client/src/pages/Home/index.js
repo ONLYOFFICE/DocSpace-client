@@ -117,6 +117,7 @@ const PureHome = observer((props) => {
     startUpload,
     setDragging,
     dragging,
+    isChatDropTarget,
     createFoldersTree,
     disableDrag,
     clearPrimaryProgressData,
@@ -578,6 +579,9 @@ const PureHome = observer((props) => {
 
   sectionProps.isChatPanelAvailable = isAiChatAvailable;
   sectionProps.isChatPanelVisible = aiChatPanel.isChatPanelVisible;
+  sectionProps.chatPanelDropTargetLabel = isChatDropTarget
+    ? t("Common:DropFilesToAttach")
+    : undefined;
   sectionProps.setIsChatPanelVisible = (visible) => {
     if (!visible) aiChatPanel.closeChatPanel();
   };
@@ -800,6 +804,7 @@ export const Component = inject(
       selection,
       dragging,
       setDragging,
+      isChatDropTarget,
 
       viewAs,
       getFileInfo,
@@ -952,6 +957,7 @@ export const Component = inject(
       // homepage: config.homepage,
       firstLoad,
       dragging,
+      isChatDropTarget,
       viewAs,
       isRecycleBinFolder,
       isVisitor: userStore.user.isVisitor,

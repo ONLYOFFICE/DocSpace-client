@@ -86,6 +86,7 @@ type RoomsItemHeaderProps = {
   hasExternalLinks?: boolean;
   isExternalShareRestricted?: boolean;
   getRoomHistoryReport?: InfoPanelStore["getRoomHistoryReport"];
+  markRoomHistoryReportPageLeft?: InfoPanelStore["markRoomHistoryReportPageLeft"];
   isRoomHistoryReportDownloading?: InfoPanelStore["isRoomHistoryReportDownloading"];
 } & (
   | {
@@ -116,6 +117,7 @@ const RoomsItemHeader = ({
   isExternalShareRestricted,
   roomsView,
   getRoomHistoryReport,
+  markRoomHistoryReportPageLeft,
   isRoomHistoryReportDownloading,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
@@ -225,8 +227,7 @@ const RoomsItemHeader = ({
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
-  const canDownloadHistory =
-    isRoom && roomsView === InfoPanelView.infoHistory;
+  const canDownloadHistory = isRoom && roomsView === InfoPanelView.infoHistory;
 
   const onDownloadHistory = () => {
     if (isRoomHistoryReportDownloading) return;
@@ -239,6 +240,12 @@ const RoomsItemHeader = ({
   useEffect(() => {
     setCoverSelection?.(selection);
   }, [setCoverSelection, selection]);
+
+  useEffect(() => {
+    return () => {
+      markRoomHistoryReportPageLeft?.();
+    };
+  }, [markRoomHistoryReportPageLeft]);
 
   return (
     <div
@@ -356,6 +363,7 @@ export default inject(
       roomsView,
       setIsMobileHidden,
       getRoomHistoryReport,
+      markRoomHistoryReportPageLeft,
       isRoomHistoryReportDownloading,
     } = infoPanelStore;
 
@@ -380,6 +388,7 @@ export default inject(
       roomsView,
       setIsMobileHidden,
       getRoomHistoryReport,
+      markRoomHistoryReportPageLeft,
       isRoomHistoryReportDownloading,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,

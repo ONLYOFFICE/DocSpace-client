@@ -585,6 +585,17 @@ export type TDefaultTemplate = {
   viewUrl?: string;
 };
 
+export type TDocumentBuilderTask = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: DistributedTaskStatus;
+  resultFileId: number | string;
+  resultFileName: string;
+  resultFileUrl: string;
+};
+
 export type UpdateXlsxResponse = {
   form: TFile;
   isNewFile: boolean;

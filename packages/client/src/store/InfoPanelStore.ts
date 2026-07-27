@@ -35,20 +35,28 @@
 
 import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
-import { getFolderLogReport } from "@docspace/shared/api/files";
+import {
+  getFolderLogReportStatus,
+  startFolderLogReport,
+} from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { FolderType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { pollUntil } from "@docspace/ui-kit/billing/utils/stripe-flow";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TLogo } from "@docspace/ui-kit/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import {
+  TDocumentBuilderTask,
+  TFile,
+  TFolder,
+} from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
@@ -62,6 +70,7 @@ import {
   InfoPanelView,
 } from "SRC_DIR/helpers/info-panel";
 
+import i18n from "../i18n";
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
 import FilesSettingsStore from "./FilesSettingsStore";
@@ -105,6 +114,8 @@ class InfoPanelStore {
 
   isRoomHistoryReportDownloading = false;
 
+  roomHistoryReportPageLeft = false;
+
   constructor(public userStore: UserStore) {
     makeAutoObservable(this);
   }
@@ -113,22 +124,67 @@ class InfoPanelStore {
     this.isRoomHistoryReportDownloading = value;
   };
 
-  getRoomHistoryReport = async (folderId: number | string) => {
+  markRoomHistoryReportPageLeft = () => {
+    if (this.isRoomHistoryReportDownloading)
+      this.roomHistoryReportPageLeft = true;
+  };
+
+  private resetRoomHistoryReportState = () => {
+    this.roomHistoryReportPageLeft = false;
+    this.setRoomHistoryReportDownloading(false);
+  };
+
+  private finishRoomHistoryReport = (resultFileUrl?: string) => {
     const { openOnNewPage } = this.filesSettingsStore;
 
-    try {
-      this.setRoomHistoryReportDownloading(true);
+    toastr.success(
+      i18n.t("Common:ReportSaveLocation", {
+        sectionName: i18n.t("Common:Files"),
+      }),
+    );
 
-      const url = await getFolderLogReport(folderId);
+    if (!this.roomHistoryReportPageLeft && resultFileUrl) {
+      const url = combineUrl(window.ClientConfig?.proxy?.url, resultFileUrl);
 
       setTimeout(
         () => window.open(url, openOnNewPage ? "_blank" : "_self"),
         100,
-      );
+      ); // hack for ios
+    }
+
+    this.resetRoomHistoryReportState();
+  };
+
+  getRoomHistoryReport = async (folderId: number | string) => {
+    if (this.isRoomHistoryReportDownloading) return;
+
+    this.roomHistoryReportPageLeft = false;
+    this.setRoomHistoryReportDownloading(true);
+
+    const controller = new AbortController();
+
+    try {
+      let task: Nullable<TDocumentBuilderTask> =
+        await startFolderLogReport(folderId);
+
+      if (!task?.isCompleted && !task?.error) {
+        await pollUntil(async () => {
+          task = await getFolderLogReportStatus(folderId);
+
+          return !task || task.isCompleted || !!task.error;
+        }, controller.signal);
+      }
+
+      if (task?.error) {
+        toastr.error(task.error);
+        this.resetRoomHistoryReportState();
+        return;
+      }
+
+      this.finishRoomHistoryReport(task?.resultFileUrl);
     } catch (error) {
       toastr.error(error as TData);
-    } finally {
-      this.setRoomHistoryReportDownloading(false);
+      this.resetRoomHistoryReportState();
     }
   };
 

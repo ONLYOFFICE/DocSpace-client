@@ -87,6 +87,7 @@ import type {
   TShareToUser,
   TDefaultTemplate,
   UpdateXlsxResponse,
+  TDocumentBuilderTask,
 } from "./types";
 
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
@@ -417,13 +418,24 @@ export async function createFolder(
   return res;
 }
 
-export async function getFolderLogReport(folderId: number | string) {
+export async function startFolderLogReport(folderId: number | string) {
   const options: AxiosRequestConfig = {
     method: "post",
     url: `/files/folder/${folderId}/log/report`,
   };
 
-  const res = (await request(options)) as string;
+  const res = (await request(options)) as TDocumentBuilderTask;
+
+  return res;
+}
+
+export async function getFolderLogReportStatus(folderId: number | string) {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/folder/${folderId}/log/report`,
+  };
+
+  const res = (await request(options)) as TDocumentBuilderTask | null;
 
   return res;
 }

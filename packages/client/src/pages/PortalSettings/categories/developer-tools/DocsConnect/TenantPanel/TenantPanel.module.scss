@@ -562,6 +562,12 @@
   gap: 8px;
 }
 
+.detailLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .detailRows .detailRow:not(:last-child) {
   padding-bottom: 11px;
   border-bottom: 1px solid var(--dev-tools-card-divider);

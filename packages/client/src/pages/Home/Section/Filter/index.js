@@ -145,6 +145,7 @@ const SectionFilterContent = ({
   isRoomAdmin,
   showStorageInfo,
   isDefaultRoomsQuotaSet,
+  isDefaultUsersQuotaSet,
   isTemplatesFolder,
   isSharedWithMeFolder,
   isAIAgentsFolder,
@@ -273,7 +274,7 @@ const SectionFilterContent = ({
     isRoomAdmin,
     standalone,
     showStorageInfo,
-    isDefaultRoomsQuotaSet,
+    isDefaultUsersQuotaSet,
     groupsStore,
     usersStore,
   });
@@ -2005,7 +2006,8 @@ export default inject(
       isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { showStorageInfo, isDefaultRoomsQuotaSet, isDefaultUsersQuotaSet } =
+      currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
     const {
@@ -2046,6 +2048,7 @@ export default inject(
       isRoomAdmin,
       showStorageInfo,
       isDefaultRoomsQuotaSet,
+      isDefaultUsersQuotaSet,
 
       userId: user?.id,
 

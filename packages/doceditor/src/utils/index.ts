@@ -39,6 +39,7 @@ import { request } from "@docspace/shared/api/client";
 import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory, TFile } from "@docspace/shared/api/files/types";
 import { TTranslation } from "@docspace/shared/types";
+import { FolderType } from "@docspace/shared/enums";
 import { TFormRole } from "@/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -237,4 +238,41 @@ export const isPDFDocument = (file: TFile | undefined) => {
   if (!file) return false;
 
   return file.fileExst === ".pdf" && !file.isForm;
+};
+
+export const isFormRoomFile = (file: TFile | undefined) =>
+  file?.parentRoomType === FolderType.FormRoom &&
+  file?.rootFolderType !== FolderType.RoomTemplates;
+
+const ROOMS_SECTION_PATH = /\/rooms\/shared(\/\d+)?(\/filter)?\/?$/;
+
+export const getFormsSectionFolderUrl = (folderId: number | string) =>
+  `${window.location.origin}/forms/${folderId}/filter?folder=${folderId}`;
+
+export const toFormsSectionUrl = (
+  url: string | undefined,
+  folderId?: number | string,
+) => {
+  if (!url) return url;
+
+  try {
+    const parsedUrl = new URL(
+      url,
+      typeof window === "undefined" ? undefined : window.location.origin,
+    );
+    const targetFolderId = parsedUrl.searchParams.get("folder") ?? folderId;
+
+    if (!targetFolderId || !ROOMS_SECTION_PATH.test(parsedUrl.pathname))
+      return url;
+
+    parsedUrl.pathname = parsedUrl.pathname.replace(
+      ROOMS_SECTION_PATH,
+      `/forms/${targetFolderId}/filter`,
+    );
+    parsedUrl.searchParams.set("folder", targetFolderId.toString());
+
+    return parsedUrl.toString();
+  } catch {
+    return url;
+  }
 };

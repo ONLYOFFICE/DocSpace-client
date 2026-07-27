@@ -722,7 +722,6 @@ export async function startUploadSession(
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
-  encryptionMetadata?: unknown,
   signal?: AbortSignal,
 ) {
   const data: Record<string, unknown> = {
@@ -733,10 +732,6 @@ export async function startUploadSession(
     createOn,
     CreateNewIfExist,
   };
-
-  if (encryptionMetadata) {
-    data.encryptionMetadata = encryptionMetadata;
-  }
 
   return request({
     method: "post",

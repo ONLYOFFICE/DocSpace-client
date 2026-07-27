@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) Ascensio System SIA, 2009-2026
  *
  * This program is a free software product. You can redistribute it and/or
@@ -33,28 +33,41 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import React from "react";
+import { reaction } from "mobx";
 
-export const getFolderUrl = (
-  folderId: number | string,
-  isAnonym: boolean,
-  share?: string,
-  isFormRoom?: boolean,
-): string => {
-  if (isNullOrUndefined(folderId)) return "";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
+import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 
-  const origin = window.location.origin;
+import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
-  const filter = FilesFilter.getDefault();
+export const usePanelExclusivity = (infoPanelStore?: InfoPanelStore) => {
+  const aiChatStore = useAiChatStore();
+  const isDesktop = useIsDesktop();
 
-  filter.folder = folderId.toString();
+  const stores = useStores();
+  const setCurrentPage = stores.useRouter((s) => s.setCurrentPage);
 
-  const roomPath = isFormRoom
-    ? `/forms/${folderId}/filter?`
-    : `/rooms/shared/${folderId}?`;
+  React.useEffect(() => {
+    if (!infoPanelStore || !isDesktop) return undefined;
 
-  const path = isAnonym ? `/rooms/share?key=${share}&` : roomPath;
-
-  return `${origin}${path}${filter.toUrlParams()}`;
+    const disposers = [
+      reaction(
+        () => aiChatStore.isOnHistoryPage,
+        (visible) => {
+          if (visible) infoPanelStore.setIsVisible(false);
+        },
+      ),
+      reaction(
+        () => infoPanelStore.isVisible,
+        (visible) => {
+          if (visible) setCurrentPage("chat");
+        },
+      ),
+    ];
+    return () => disposers.forEach((dispose) => dispose());
+  }, [aiChatStore, infoPanelStore, setCurrentPage, isDesktop]);
 };
+
+export default usePanelExclusivity;

@@ -3,7 +3,7 @@
   "content": "Recently opened via the link",
   "content_en_sha1_hash": "ba1b7dbd261f921af480d706c47f89b68942c829",
   "created_at": "2025-05-19T21:30:56.021Z",
-  "updated_at": "2026-07-07T08:59:21.795Z",
+  "updated_at": "2026-07-27T13:07:50.700Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over a file or room that was recently opened via an external link.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 633,
+      "line_number": 656,
       "context": "hasExternalLinks,\n t,\n ]);\n \n const titleIconTooltip = React.useMemo(() => {\n if (sharedType) return t(\"Files:RecentlyOpenedTooltip\");\n \n if (isEncryptedRoom) return t(\"Common:PrivateRoomDescription\");\n \n if (lifetime)\n return `${t(\"Common:RoomFilesLifetime\", {",
       "module": "/packages/client"
     }

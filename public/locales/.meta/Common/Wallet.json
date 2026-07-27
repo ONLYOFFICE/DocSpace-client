@@ -3,7 +3,7 @@
   "content": "Wallet",
   "content_en_sha1_hash": "b60862f4855a392f00cc9f27e0862c0b979075a6",
   "created_at": "2026-04-10T13:53:43.879Z",
-  "updated_at": "2026-07-07T08:59:21.878Z",
+  "updated_at": "2026-07-27T13:07:50.760Z",
   "comment": {
     "text": "This is a navigation item label in the portal settings, referring to the section where users manage their payment information and balance.",
     "is_auto": true,
@@ -12,15 +12,27 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 266,
+      "context": "<div className={styles.walletLeft}>\n <span className={styles.walletIcon} aria-hidden=\"true\">\n <WalletIcon />\n </span>\n <div className={styles.walletText}>\n <Text className={styles.walletTitle}>{t(\"Common:Wallet\")}</Text>\n <Text className={styles.walletCredits}>\n {t(\"Common:AvailableCredits\")}:{\" \"}\n <span className={styles.creditsValue}>\n {formatCurrency(credits, 2)}\n </span>",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
-      "line_number": 92,
+      "line_number": 102,
       "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {title ?? t(\"Wallet\")}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: isBalanceInsufficient,\n })}",
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 432,
+      "context": "<div className={styles.walletIcon} aria-hidden>\n <WalletSvg />\n </div>\n <div>\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Common:Wallet\")}\n </Text>\n {insufficientFunds ? (\n <Text\n fontSize=\"13px\"\n fontWeight={400}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 47,
-      "context": "import ArrowPathReactSvgUrl from \"PUBLIC_DIR/images/arrow.path.react.svg?url\";\n \n import styles from \"./BillingHeader.module.scss\";\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/billing/wallet\")) return t(\"Common:Wallet\");\n if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))",
+      "line_number": 52,
+      "context": "import { getDocsConnectTrialState } from \"../../developer-tools/DocsConnect/utils\";\n \n import styles from \"./BillingHeader.module.scss\";\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/billing/wallet\")) return t(\"Common:Wallet\");\n if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))",
       "module": "/packages/client"
     },
     {

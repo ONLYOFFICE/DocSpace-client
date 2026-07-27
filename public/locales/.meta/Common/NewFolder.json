@@ -3,7 +3,7 @@
   "content": "New folder",
   "content_en_sha1_hash": "a711999b72aaf4c3d8e7523718231bf1c8d7cb4d",
   "created_at": "2025-05-19T21:30:46.744Z",
-  "updated_at": "2026-07-07T08:59:21.652Z",
+  "updated_at": "2026-07-27T13:07:50.571Z",
   "comment": {
     "text": "This is a button label or menu item text. It allows users to create a new folder within the file browser.",
     "is_auto": true,
@@ -42,9 +42,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 4042,
-      "context": "// };\n \n const createNewFolder: TContextOption = {\n id: \"personal_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:NewFolder\"),\n onClick: () => this.onCreate(),\n icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {",
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 311,
+      "context": "// };\n \n const createNewFolder: TContextOption = {\n id: \"personal_new-folder\",\n key: \"new-folder\",\n label: t(\"Common:NewFolder\"),\n onClick: () => self.onCreate(),\n icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {",
       "module": "/packages/client"
     },
     {

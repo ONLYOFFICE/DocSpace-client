@@ -3,7 +3,7 @@
   "content": "Activating {{planName}} plan",
   "content_en_sha1_hash": "5b15035ff450855439715a663b3576bf602bad54",
   "created_at": "2026-06-30T07:32:23.826Z",
-  "updated_at": "2026-07-04T11:30:22.058Z",
+  "updated_at": "2026-07-27T13:07:51.056Z",
   "comment": {
     "text": "Status text on the AI paywall completion page indicating that a specific subscription plan is being activated, where {{planName}} represents the name of the chosen tariff.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 253,
+      "line_number": 302,
       "context": "const tariffStep =\n admins && storage ? (\n <span className={styles.tariffActivation}>\n <Text as=\"span\" fontSize=\"14px\" fontWeight={700}>\n {t(\"ActivatingPlan\", { planName: plan })}\n </Text>\n <Text\n as=\"span\"\n fontSize=\"12px\"\n fontWeight={400}",
       "module": "/libs/ui-kit"
     }

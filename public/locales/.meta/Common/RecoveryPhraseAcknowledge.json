@@ -3,7 +3,7 @@
   "content": "I have saved my recovery phrase securely",
   "content_en_sha1_hash": "7da032b21f6bd8b565b787d13216cb8239bd703e",
   "created_at": "2026-05-24T17:27:36.518Z",
-  "updated_at": "2026-06-02T14:21:21.876Z",
+  "updated_at": "2026-07-27T13:07:50.927Z",
   "comment": {
     "text": "Checkbox label in the recovery phrase display modal, used to confirm the user has securely stored their phrase.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 202,
-      "context": "<Checkbox\n id=\"recoveryPhraseAcknowledged\"\n isChecked={acknowledged}\n isDisabled={isLoading}\n onChange={(e) => setAcknowledged(e.target.checked)}\n label={t(\"Common:RecoveryPhraseAcknowledge\")}\n tabIndex={1}\n />\n </div>\n </div>\n ) : (",
+      "line_number": 207,
+      "context": "<Checkbox\n id=\"recoveryPhraseAcknowledged\"\n isChecked={acknowledged}\n isDisabled={isLoading || !hasSaved}\n onChange={(e) => setAcknowledged(e.target.checked)}\n label={t(\"Common:RecoveryPhraseAcknowledge\")}\n tabIndex={1}\n />\n </div>\n {!hasSaved ? (\n <Text className={styles.saveFirstHint} fontSize=\"12px\">",
       "module": "/packages/shared"
     }
   ],

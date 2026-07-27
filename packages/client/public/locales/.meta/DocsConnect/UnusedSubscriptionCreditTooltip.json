@@ -1,0 +1,29 @@
+{
+  "key_path": "UnusedSubscriptionCreditTooltip",
+  "content": "The unused portion of your current subscription is automatically applied toward your new subscription. Your billing cycle will restart today.",
+  "content_en_sha1_hash": "64c29d7326a56898a93d61250fac2b3f13e7fef8",
+  "created_at": "2026-07-27T13:07:48.527Z",
+  "updated_at": "2026-07-27T13:44:47.298Z",
+  "comment": {
+    "text": "Tooltip for a help button in the plan purchase panel explaining how unused subscription credits are applied to a new subscription and the effect on the billing cycle.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:44:47.298Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 653,
+      "context": ")\n </Text>\n <HelpButton\n size={12}\n tooltipContent={t(\n \"DocsConnect:UnusedSubscriptionCreditTooltip\",\n )}\n tooltipMaxWidth=\"320px\"\n />\n </div>\n {calcPending ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

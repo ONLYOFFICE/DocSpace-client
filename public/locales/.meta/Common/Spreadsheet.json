@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2026-07-07T08:59:21.646Z",
+  "updated_at": "2026-07-27T13:07:50.563Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new spreadsheet, or a label within a conversion dialog. It refers to the file type.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useCreateActions.tsx",
-      "line_number": 99,
-      "context": "),\n },\n {\n id: \"spreadsheet\",\n icon: <CreateSpreadsheetIcon />,\n label: t(\"Common:Spreadsheet\"),\n onClick: () =>\n window.open(\n makeCreateUrl(NEW_FILE_NAMES.spreadsheet, myFolderId),\n \"_blank\",\n ),",
+      "line_number": 111,
+      "context": "...disabledProps,\n },\n {\n id: \"spreadsheet\",\n icon: <CreateSpreadsheetIcon />,\n label: t(\"Common:Spreadsheet\"),\n onClick: () =>\n window.open(\n makeCreateUrl(NEW_FILE_NAMES.spreadsheet, myFolderId),\n \"_blank\",\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 193,
+      "line_number": 208,
       "context": "onClick: () => dispatchCreate(currentFolderId, \"docx\", t),\n },\n {\n id: \"quick-xlsx\",\n icon: <CreateSpreadsheetIcon />,\n label: t(\"Common:Spreadsheet\"),\n onClick: () => dispatchCreate(currentFolderId, \"xlsx\", t),\n },\n {\n id: \"quick-pptx\",\n icon: <CreatePresentationIcon />,",
       "module": "/packages/client"
     },

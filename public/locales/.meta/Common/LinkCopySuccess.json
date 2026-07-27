@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-07-07T08:59:21.722Z",
+  "updated_at": "2026-07-27T13:07:50.632Z",
   "comment": {
     "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
@@ -31,44 +31,44 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 786,
+      "line_number": 691,
+      "context": "//             id,\n //             key: `external-link_${id}`,\n //             label: title,\n //             onClick: () => {\n //               copy(shareLink);\n //               toastr.success(t(\"Common:LinkCopySuccess\"));\n //             },\n //           });\n //         }\n //       }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 256,
       "context": "<Trans\n t={t as unknown as TFunction}\n i18nKey=\"Common:LinkCopySuccessWithCustomFilter\"\n />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error as string);\n }\n return;\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 786,
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 256,
       "context": "<Trans\n t={t as unknown as TFunction}\n i18nKey=\"Common:LinkCopySuccessWithCustomFilter\"\n />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error as string);\n }\n return;\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 786,
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 256,
       "context": "<Trans\n t={t as unknown as TFunction}\n i18nKey=\"Common:LinkCopySuccessWithCustomFilter\"\n />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error as string);\n }\n return;\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 786,
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 256,
       "context": "<Trans\n t={t as unknown as TFunction}\n i18nKey=\"Common:LinkCopySuccessWithCustomFilter\"\n />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error as string);\n }\n return;\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 786,
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 256,
       "context": "<Trans\n t={t as unknown as TFunction}\n i18nKey=\"Common:LinkCopySuccessWithCustomFilter\"\n />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error as string);\n }\n return;\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 786,
-      "context": "<Trans\n t={t as unknown as TFunction}\n i18nKey=\"Common:LinkCopySuccessWithCustomFilter\"\n />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error as string);\n }\n return;\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 786,
-      "context": "<Trans\n t={t as unknown as TFunction}\n i18nKey=\"Common:LinkCopySuccessWithCustomFilter\"\n />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error as string);\n }\n return;\n }",
+      "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
+      "line_number": 84,
+      "context": "key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },\n disabled: self.settingsStore.isFrame,\n },\n {\n key: \"separator0\",",
       "module": "/packages/client"
     },
     {

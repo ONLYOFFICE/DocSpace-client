@@ -49,6 +49,7 @@
   "CancellationOn": "Cancellation on {{date}}",
   "TariffPlanAutoCanceled": "Tariff plan will be automatically canceled <1>on {{date}}</1>",
   "PlanUsers": "Users",
+  "PlanUsersTooltip": "Includes {{count}} unique editors and {{count}} unique viewers per month. A user takes a seat the first time they open a document and keeps it until the end of the period.",
   "Price": "Price",
   "PricePerUserShort": "{{price}} per user",
   "PricePerUserDevPackShort": "{{price}} per user (incl. Dev Pack)",

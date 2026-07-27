@@ -349,7 +349,7 @@ const KeysManagement = ({
           {passkeyPlatformOk || passkeyEnrolled ? (
             <div className={styles.deviceRow}>
               <ToggleButton
-                label={t("Common:PasskeyUnlockLabel")}
+                className={styles.deviceToggle}
                 isChecked={passkeyEnrolled}
                 isLoading={passkeyBusy}
                 isDisabled={busy || (!passkeyEnrolled && !isUnlocked)}
@@ -359,6 +359,7 @@ const KeysManagement = ({
                 }}
                 dataTestId="passkey_unlock_toggle"
               />
+              <Text>{t("Common:PasskeyUnlockLabel")}</Text>
             </div>
           ) : null}
           {deviceRemembered ? (

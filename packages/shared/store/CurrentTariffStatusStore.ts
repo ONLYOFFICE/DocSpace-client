@@ -266,7 +266,7 @@ class CurrentTariffStatusStore {
         const { user } = this.userStore;
 
         const isAdminUser = user && isAdmin(user);
-        const tariffWalletQuotas = res.quotas.filter(
+        const tariffWalletQuotas = (res.quotas ?? []).filter(
           (q) => q.wallet === true,
         );
 

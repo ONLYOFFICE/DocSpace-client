@@ -98,6 +98,7 @@ const SectionFilterContent = ({
   roomsFilter,
   isRecentFolder,
   isFavoritesFolder,
+  isPrivacyFolder,
   sectionWidth,
   viewAs,
   createThumbnails,
@@ -421,6 +422,13 @@ const SectionFilterContent = ({
 
         newFilter.searchInContent = withContent === "true" ? "true" : null;
 
+        // Private rooms: client-side search is scoped to the current folder
+        // and content search is impossible for encrypted files.
+        if (isPrivacyFolder) {
+          newFilter.withSubfolders = null;
+          newFilter.searchInContent = null;
+        }
+
         const path = location.pathname.split("/filter")[0];
         if (isRoomsTrash) {
           newFilter.roomId = roomId;
@@ -434,6 +442,7 @@ const SectionFilterContent = ({
       isAIAgentsFolder,
       isTrash,
       isRoomsTrash,
+      isPrivacyFolder,
       setIsLoading,
       roomsFilter,
       filter,
@@ -447,6 +456,10 @@ const SectionFilterContent = ({
   const onClearFilter = useCallback(() => {
     if (isContactsPage) {
       return;
+    }
+
+    if (isPrivacyFolder) {
+      filesStore.clearClientSearch();
     }
 
     setIsLoading(true);
@@ -475,6 +488,8 @@ const SectionFilterContent = ({
   }, [
     isRooms,
     isAIAgentsFolder,
+    isPrivacyFolder,
+    filesStore,
     setIsLoading,
 
     filter,
@@ -488,6 +503,14 @@ const SectionFilterContent = ({
   const onSearch = React.useCallback(
     (data = "") => {
       const searchValue = data?.trim() ?? "";
+
+      // Private (E2E-encrypted) rooms: search runs client-side over the
+      // decrypted names — the query must reach neither the server nor the
+      // URL. See docs/private-room-client-search.md.
+      if (isPrivacyFolder) {
+        filesStore.setClientSearchQuery(searchValue || null);
+        return;
+      }
 
       const currentSearch =
         filter.search ||
@@ -546,6 +569,8 @@ const SectionFilterContent = ({
       isRooms,
       isAIAgentsFolder,
       isContactsPage,
+      isPrivacyFolder,
+      filesStore,
 
       setIsLoading,
 
@@ -623,6 +648,8 @@ const SectionFilterContent = ({
   );
 
   const getSelectedInputValue = React.useCallback(() => {
+    if (isPrivacyFolder) return filesStore.clientSearchQuery ?? "";
+
     return isContactsPage
       ? getContactsSelectedInputValue()
       : isRooms || isAIAgentsFolder
@@ -636,6 +663,8 @@ const SectionFilterContent = ({
     isRooms,
     isAIAgentsFolder,
     isContactsPage,
+    isPrivacyFolder,
+    filesStore.clientSearchQuery,
     roomsFilter.filterValue,
     filter.search,
     usersFilter.search,
@@ -1964,6 +1993,7 @@ export default inject(
       isRoomsFolder,
       isArchiveFolder,
       isPersonalRoom,
+      isPrivacyFolder,
       isTrashFolder: isTrash,
       isTemplatesFolder,
       isSharedWithMeFolder,
@@ -2038,6 +2068,7 @@ export default inject(
       isRooms,
       isTrash,
       isArchiveFolder,
+      isPrivacyFolder,
       isTemplatesFolder,
       isIndexing: isIndexedFolder,
       isIndexEditingMode,

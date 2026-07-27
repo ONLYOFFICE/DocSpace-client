@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "ستظهر هنا الغرف التي تم أرشفتها.",
   "ChangeAgentOwnerSelectorInfo": "يمكن لمسؤول الغرفة أو مسؤول {{productName}} فقط أن يصبح مالكًا للوكيل",
   "ChangeTheAgentOwner": "تغيير مالك الوكيل",
+  "ClientSearchDecryptingNames": "جارٍ فك تشفير أسماء الملفات… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "المجلد كبير جدًا. قد تكون نتائج البحث غير مكتملة.",
   "CompressingFiles": "ضغط الملفات",
   "Conversion": "تحويل",
   "Converting": "التحويل جارٍ",

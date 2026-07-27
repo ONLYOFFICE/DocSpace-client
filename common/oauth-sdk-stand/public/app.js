@@ -350,7 +350,6 @@ const events = Object.fromEntries(
     "onUploadSuccess",
     "onUploadError",
     "onNavigate",
-    "onTokenExpired",
   ].map((name) => [
     name,
     (payload) => {

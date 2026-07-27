@@ -49,8 +49,13 @@ import {
   registerGhostStateHandler,
   clearGhostStateHandler,
 } from "@docspace/shared/services/encryption/ghost-state-notifier";
-import { PassphraseModal } from "@docspace/shared/dialogs/passphrase-modal";
+import { getEncryptionKeys } from "@docspace/shared/api/privacy";
+import {
+  PassphraseModal,
+  usePasskeyUnlock,
+} from "@docspace/shared/dialogs/passphrase-modal";
 import { KeyChangeDialog } from "@docspace/shared/dialogs/key-change-dialog";
+import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { Link } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
@@ -130,10 +135,11 @@ const GhostStateToastEffect = () => {
 
 const DEVICE_SETUP_HINT_SESSION_KEY = "encryption-device-setup-hint-shown";
 
-const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
+const DeviceSetupHintEffect = inject(({ selectedFolderStore, userStore }) => ({
   isPrivate: selectedFolderStore?.private,
+  accountKeysCount: userStore?.encryptionKeys?.length ?? 0,
 }))(
-  observer(({ isPrivate }) => {
+  observer(({ isPrivate, accountKeysCount }) => {
     const { hasConfiguredKey } = useEncryption();
     const { t } = useTranslation(["Common"]);
 
@@ -145,60 +151,120 @@ const DeviceSetupHintEffect = inject(({ selectedFolderStore }) => ({
         sessionStorage.setItem(DEVICE_SETUP_HINT_SESSION_KEY, "1");
       } catch {}
 
+      const setupLink = (
+        <Link
+          key="setup"
+          tag="a"
+          isHovered
+          color="accent"
+          onClick={() => {
+            toastr.clear();
+            window.location.href = "/profile/keys-management";
+          }}
+        />
+      );
+
       toastr.info(
-        <Trans
-          i18nKey="Common:EncryptionDeviceSetupHint"
-          t={t}
-          components={[
-            <Link
-              key="setup"
-              tag="a"
-              isHovered
-              color="accent"
-              onClick={() => {
-                toastr.clear();
-                window.location.href = "/profile/keys-management";
-              }}
-            />,
-          ]}
-        />,
+        accountKeysCount > 0 ? (
+          <Trans
+            i18nKey="Common:EncryptionChooseKeyHint"
+            t={t}
+            components={[setupLink]}
+          />
+        ) : (
+          <Trans
+            i18nKey="Common:EncryptionDeviceSetupHint"
+            t={t}
+            components={[setupLink]}
+          />
+        ),
         null,
         30000,
         true,
       );
-    }, [isPrivate, hasConfiguredKey, t]);
+    }, [isPrivate, hasConfiguredKey, accountKeysCount, t]);
 
     return null;
   }),
 );
 
-const PassphraseUnlockAdapter = ({
-  visible,
-  isLoading,
-  error,
-  onSubmit,
-  onCancel,
-}) => {
-  const { t } = useTranslation(["Common"]);
+const PassphraseUnlockAdapter = inject(({ userStore }) => ({
+  userId: userStore?.user?.id ? String(userStore.user.id) : undefined,
+  encryptionKeys: userStore?.encryptionKeys,
+  setUserEncryptionKeys: userStore?.setUserEncryptionKeys,
+}))(
+  observer(
+    ({
+      visible,
+      isLoading,
+      error,
+      onSubmit,
+      onCancel,
+      onUnlocked,
+      userId,
+      encryptionKeys,
+      setUserEncryptionKeys,
+    }) => {
+      const { t } = useTranslation(["Common"]);
+      const [isRecovering, setIsRecovering] = React.useState(false);
 
-  const handleForgotPassphrase = () => {
-    onCancel();
-    window.location.href = "/profile/keys-management";
-  };
+      const refreshKeysFromServer = React.useCallback(async () => {
+        try {
+          const fresh = await getEncryptionKeys();
+          setUserEncryptionKeys?.(fresh ?? []);
+        } catch (e) {
+          console.error("Failed to refresh keys:", e);
+        }
+      }, [setUserEncryptionKeys]);
 
-  return (
-    <PassphraseModal
-      visible={visible}
-      isNew={false}
-      isLoading={isLoading}
-      externalError={error}
-      onSubmit={onSubmit}
-      onCancel={onCancel}
-      onForgotPassphrase={handleForgotPassphrase}
-      submitLabel={t("Common:Confirm")}
-    />
-  );
-};
+      const handleRecoveryClosed = React.useCallback(
+        (recovered) => {
+          setIsRecovering(false);
+          if (recovered) onUnlocked?.(recovered);
+        },
+        [onUnlocked],
+      );
+
+      const recover = useRecoverKeyFlow({
+        userId,
+        encryptionKeys,
+        refreshKeysFromServer,
+        onClosed: handleRecoveryClosed,
+      });
+
+      const passkey = usePasskeyUnlock(userId, onUnlocked);
+
+      const handleForgotPassphrase = () => {
+        passkey.abort();
+        if (recover.available) {
+          setIsRecovering(true);
+          recover.request();
+          return;
+        }
+        onCancel();
+        window.location.href = "/profile/keys-management";
+      };
+
+      if (isRecovering) return recover.modals;
+
+      return (
+        <PassphraseModal
+          visible={visible}
+          isNew={false}
+          isLoading={isLoading}
+          externalError={error}
+          onSubmit={onSubmit}
+          onCancel={onCancel}
+          onForgotPassphrase={handleForgotPassphrase}
+          submitLabel={t("Common:Confirm")}
+          showRememberDevice
+          onPasskeyUnlock={passkey.available ? passkey.unlock : undefined}
+          isPasskeyUnlocking={passkey.isUnlocking}
+        />
+      );
+    },
+  ),
+);
 
 // Read encryptionKeys in render (observer), not the inject mapper, so userKeys
 // tracks the async keys load — otherwise it stays a stale null.

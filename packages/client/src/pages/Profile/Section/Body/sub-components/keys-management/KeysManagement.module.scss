@@ -70,9 +70,26 @@
   }
 }
 
-.buttonsSeparator {
-  color: var(--text-secondary);
-  font-size: 13px;
+.secondaryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.deviceSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider-color);
+}
+
+.deviceRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .keyStatus {
@@ -85,20 +102,31 @@
   margin-bottom: 20px;
 }
 
-.keyInfo {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+.detailsGrid {
+  display: grid;
+  grid-template-columns: minmax(75px, auto) minmax(0, 1fr);
+  gap: 24px;
+  row-gap: 16px;
+  align-items: baseline;
+  max-width: 100%;
+}
+
+.detailsLabel {
+  color: var(--profile-description-text-color);
+  white-space: nowrap;
+}
+
+.keyDetails {
+  margin-top: 4px;
 }
 
 .fingerprint {
   font-family: "Roboto Mono", monospace;
-  background: var(--input-bg);
-  padding: 4px 8px;
-  border-radius: 4px;
   font-size: 12px;
   letter-spacing: 0.5px;
   user-select: all;
+  min-width: 0;
+  word-break: break-all;
 }
 
 .keysList {
@@ -183,6 +211,8 @@
 .keyIdText {
   font-family: "Roboto Mono", monospace;
   font-size: 12px;
+  min-width: 0;
+  word-break: break-all;
 }
 
 .resetSection {

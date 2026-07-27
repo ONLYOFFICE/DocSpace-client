@@ -40,9 +40,6 @@ import {
   validateMnemonic,
   splitMnemonicForDisplay,
   normalizeMnemonic,
-  pickQuizPositions,
-  verifyQuizAnswers,
-  RECOVERY_QUIZ_QUESTION_COUNT,
 } from "../recovery";
 
 // All-zeros 32-byte entropy → SHA-256 first byte = 0x66 → last word index 102
@@ -120,103 +117,6 @@ describe("recovery", () => {
   describe("normalizeMnemonic", () => {
     it("lower-cases and collapses whitespace", () => {
       expect(normalizeMnemonic("  ABANDON\tART  ")).toBe("abandon art");
-    });
-  });
-
-  describe("pickQuizPositions", () => {
-    function sequencer(values: number[]): () => number {
-      let i = 0;
-      return () => values[i++ % values.length];
-    }
-
-    it("returns RECOVERY_QUIZ_QUESTION_COUNT positions by default", () => {
-      const positions = pickQuizPositions(
-        24,
-        undefined,
-        sequencer([0.1, 0.5, 0.9]),
-      );
-      expect(positions).toHaveLength(RECOVERY_QUIZ_QUESTION_COUNT);
-    });
-
-    it("positions are unique and sorted ascending", () => {
-      const rng = sequencer([0.05, 0.5, 0.95, 0.4, 0.7]);
-      const positions = pickQuizPositions(24, 3, rng);
-      expect(new Set(positions).size).toBe(positions.length);
-      const sorted = [...positions].sort((a, b) => a - b);
-      expect(positions).toEqual(sorted);
-    });
-
-    it("positions are within [0, wordCount)", () => {
-      const positions = pickQuizPositions(
-        24,
-        3,
-        sequencer([0.0, 0.4, 0.99999]),
-      );
-      for (const p of positions) {
-        expect(p).toBeGreaterThanOrEqual(0);
-        expect(p).toBeLessThan(24);
-      }
-    });
-
-    it("returns at most wordCount positions when asked for more", () => {
-      const positions = pickQuizPositions(3, 10, sequencer([0, 0.4, 0.8]));
-      expect(positions.length).toBeLessThanOrEqual(3);
-    });
-
-    it("returns empty array when questionCount is 0", () => {
-      expect(pickQuizPositions(24, 0)).toEqual([]);
-    });
-
-    it("does not hang when rng returns a constant value (falls back to fill)", () => {
-      const positions = pickQuizPositions(24, 3, () => 0.5);
-      expect(positions).toHaveLength(3);
-      for (const p of positions) {
-        expect(p).toBeGreaterThanOrEqual(0);
-        expect(p).toBeLessThan(24);
-      }
-    });
-  });
-
-  describe("verifyQuizAnswers", () => {
-    it("accepts correct answers in the same order as positions", () => {
-      // KNOWN_VALID: positions 0..22 are "abandon", 23 is "art"
-      expect(
-        verifyQuizAnswers(KNOWN_VALID, [0, 12, 23], ["abandon", "abandon", "art"]),
-      ).toBe(true);
-    });
-
-    it("is case-insensitive and trims whitespace", () => {
-      expect(
-        verifyQuizAnswers(KNOWN_VALID, [0, 23], ["  ABANDON ", "ART"]),
-      ).toBe(true);
-    });
-
-    it("rejects when any answer is wrong", () => {
-      expect(
-        verifyQuizAnswers(KNOWN_VALID, [0, 23], ["abandon", "abandon"]),
-      ).toBe(false);
-    });
-
-    it("rejects when length of answers does not match positions", () => {
-      expect(verifyQuizAnswers(KNOWN_VALID, [0, 12], ["abandon"])).toBe(false);
-      expect(
-        verifyQuizAnswers(KNOWN_VALID, [0], ["abandon", "abandon"]),
-      ).toBe(false);
-    });
-
-    it("rejects empty quizzes", () => {
-      expect(verifyQuizAnswers(KNOWN_VALID, [], [])).toBe(false);
-    });
-
-    it("rejects out-of-range positions", () => {
-      expect(verifyQuizAnswers(KNOWN_VALID, [99], ["abandon"])).toBe(false);
-      expect(verifyQuizAnswers(KNOWN_VALID, [-1], ["abandon"])).toBe(false);
-    });
-
-    it("normalizes NFKD diacritics consistently with input", () => {
-      const mnemonic = "ábandon abandon abandon";
-      // The same canonical string passed for both → match.
-      expect(verifyQuizAnswers(mnemonic, [0], ["ábandon"])).toBe(true);
     });
   });
 });

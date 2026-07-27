@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Arşivlenen odalar burada görünecektir.",
   "ChangeAgentOwnerSelectorInfo": "Sadece bir oda yöneticisi veya bir {{productName}} yöneticisi aracının sahibi olabilir.",
   "ChangeTheAgentOwner": "Ajan sahibini değiştir",
+  "ClientSearchDecryptingNames": "Dosya adlarının şifresi çözülüyor… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Klasör çok büyük. Arama sonuçları eksik olabilir.",
   "CompressingFiles": "Dosyalar sıkıştırılıyor",
   "Conversion": "Dönüştürme",
   "Converting": "Dönüştürülüyor",

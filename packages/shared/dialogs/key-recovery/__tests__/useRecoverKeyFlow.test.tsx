@@ -51,7 +51,7 @@ vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
     return null;
   },
 }));
-vi.mock("../../modals/RecoveryPhraseInputModal", () => ({
+vi.mock("../RecoveryPhraseInputModal", () => ({
   RecoveryPhraseInputModal: (props: Record<string, unknown>) => {
     captured.phrase = props;
     useEffect(() => () => {
@@ -95,6 +95,7 @@ const Harness = (deps: {
   userId: string | undefined;
   encryptionKeys?: TEncryptionKeyPair[] | null;
   refreshKeysFromServer: () => Promise<void>;
+  onClosed?: (recovered: unknown) => void;
 }) => {
   latest = useRecoverKeyFlow(deps);
   return <>{latest.modals}</>;
@@ -348,6 +349,95 @@ describe("useRecoverKeyFlow", () => {
         "42",
         dummyKeyPair,
       );
+    });
+  });
+
+  describe("onClosed callback (resume-after-recovery)", () => {
+    it("passes the recovered identity to onClosed on success", async () => {
+      const onClosed = vi.fn();
+      vi.mocked(unlockWithRecoveryPhrase).mockResolvedValueOnce(
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
+        dummyKeyPair as any,
+      );
+      vi.mocked(serializeIdentity).mockResolvedValue({
+        publicKey: "pub-new",
+        privateKeyEnc: "enc-new",
+      });
+      vi.mocked(updateEncryptionKeys).mockResolvedValue(undefined as never);
+
+      render(
+        <Harness
+          userId="42"
+          encryptionKeys={makeKeys(1)}
+          refreshKeysFromServer={vi.fn()}
+          onClosed={onClosed}
+        />,
+      );
+      act(() => latest.request());
+      await act(async () => {
+        await (captured.phrase!.onSubmit as (p: string) => Promise<void>)(
+          "twelve words",
+        );
+      });
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "new-secret",
+        );
+      });
+
+      expect(onClosed).toHaveBeenCalledTimes(1);
+      expect(onClosed).toHaveBeenCalledWith(dummyKeyPair);
+    });
+
+    it("passes null to onClosed when the user cancels the phrase step", async () => {
+      const onClosed = vi.fn();
+      render(
+        <Harness
+          userId="42"
+          encryptionKeys={makeKeys(1)}
+          refreshKeysFromServer={vi.fn()}
+          onClosed={onClosed}
+        />,
+      );
+      act(() => latest.request());
+      act(() => {
+        (captured.phrase!.onCancel as () => void)();
+      });
+
+      expect(onClosed).toHaveBeenCalledTimes(1);
+      expect(onClosed).toHaveBeenCalledWith(null);
+    });
+
+    it("passes null to onClosed when re-encryption fails", async () => {
+      const onClosed = vi.fn();
+      vi.mocked(unlockWithRecoveryPhrase).mockResolvedValueOnce(
+        // biome-ignore lint/suspicious/noExplicitAny: test mock
+        dummyKeyPair as any,
+      );
+      vi.mocked(serializeIdentity).mockRejectedValueOnce(new Error("boom"));
+
+      render(
+        <Harness
+          userId="42"
+          encryptionKeys={makeKeys(1)}
+          refreshKeysFromServer={vi.fn()}
+          onClosed={onClosed}
+        />,
+      );
+      act(() => latest.request());
+      await act(async () => {
+        await (captured.phrase!.onSubmit as (p: string) => Promise<void>)(
+          "twelve words",
+        );
+      });
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "new-secret",
+        );
+      });
+
+      expect(onClosed).toHaveBeenCalledTimes(1);
+      expect(onClosed).toHaveBeenCalledWith(null);
     });
   });
 });

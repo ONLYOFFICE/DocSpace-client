@@ -426,6 +426,10 @@
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
+
+    .devToolTileFeatured {
+      grid-column: auto;
+    }
   }
 }
 

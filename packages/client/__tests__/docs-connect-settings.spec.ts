@@ -50,9 +50,8 @@ import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 
 test.use({ timezoneId: "UTC" });
 
-const SETTINGS_ROUTE =
-  "/portal-settings/developer-tools/docs-connect/settings";
-const PREVIEW_ROUTE = "/portal-settings/developer-tools/docs-connect/preview";
+const SETTINGS_ROUTE = "/developer-tools/docs-connect/settings";
+const PREVIEW_ROUTE = "/developer-tools/docs-connect/preview";
 const FROZEN_NOW_MS = new Date(DOCS_CONNECT_FROZEN_NOW).getTime();
 const FIRST_RENDER_TIMEOUT = 15_000;
 

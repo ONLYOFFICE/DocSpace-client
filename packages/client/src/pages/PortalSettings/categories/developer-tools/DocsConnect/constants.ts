@@ -33,8 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export const DOCS_CONNECT_ROUTE =
-  "/portal-settings/developer-tools/docs-connect";
+export const DOCS_CONNECT_ROUTE = "/developer-tools/docs-connect";
 
 export const DOCS_CONNECT_PREVIEW = {
   editorType: "word",

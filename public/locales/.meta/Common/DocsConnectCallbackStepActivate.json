@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectCallbackStepActivate",
+  "content": "Activating Docs Connect",
+  "content_en_sha1_hash": "ca1169b5f4dc57c16f89130551c66c1c5f317fd1",
+  "created_at": "2026-07-27T13:07:08.144Z",
+  "updated_at": "2026-07-27T13:36:01.880Z",
+  "comment": {
+    "text": "A status label in a progress indicator that appears during the Docs Connect activation process.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:36:01.880Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 186,
+      "context": "const getActivateStepLabel = () =>\n isAIService(service)\n ? t(\"AIPaywallCallbackStepActivate\")\n : isDocsConnect\n ? t(\"DocsConnectCallbackStepActivate\")\n : \"\";\n \n const isWalletOnly = type === \"wallet\" && !isDocsConnect;\n \n const formattedAmount = formatCurrencyValue(language, amount, currency, 2);",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

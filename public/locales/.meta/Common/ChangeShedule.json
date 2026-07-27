@@ -3,7 +3,7 @@
   "content": "Change scheduled",
   "content_en_sha1_hash": "1e9b5cbe7b9f524d1cec8d09c12e7c0472706f50",
   "created_at": "2026-04-10T13:53:42.222Z",
-  "updated_at": "2026-07-04T11:30:22.049Z",
+  "updated_at": "2026-07-27T13:07:51.045Z",
   "comment": {
     "text": "This is a short label indicating that a change to the storage plan is scheduled. It appears on a service item in the billing section.",
     "is_auto": true,
@@ -13,8 +13,14 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 179,
-      "context": "if (previousStoragePlanSize && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }\n \n if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {\n return t(\"CurrentPaymentMonth\", {\n price: formatWalletCurrency(",
+      "line_number": 198,
+      "context": "if (previousStoragePlanSize && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }\n \n if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {\n return t(\"CurrentSubscriptionInfo\", {\n amount: formatWalletCurrency(",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 198,
+      "context": "if (previousStoragePlanSize && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }\n \n if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {\n return t(\"CurrentSubscriptionInfo\", {\n amount: formatWalletCurrency(",
       "module": "/libs/ui-kit"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Template gallery",
   "content_en_sha1_hash": "6dfaa7588cf9181537129654e857881bc2647de2",
   "created_at": "2025-12-22T09:40:11.793Z",
-  "updated_at": "2026-07-07T08:59:21.646Z",
+  "updated_at": "2026-07-27T13:07:50.564Z",
   "comment": {
     "text": "This is the title for the template gallery, a collection of pre-designed document templates. It appears as a button label to open the gallery and as the header text within the gallery itself.",
     "is_auto": true,
@@ -30,15 +30,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 4066,
-      "context": "const templateGallery: TContextOption[] = templateGalleryAvailable\n ? [\n { key: \"separator\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => this.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 335,
+      "context": "const templateGallery: TContextOption[] = templateGalleryAvailable\n ? [\n { key: \"separator\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => self.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 4066,
-      "context": "const templateGallery: TContextOption[] = templateGalleryAvailable\n ? [\n { key: \"separator\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => this.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 335,
+      "context": "const templateGallery: TContextOption[] = templateGalleryAvailable\n ? [\n { key: \"separator\", isSeparator: true },\n {\n key: \"template-gallery\",\n label: t(\"Common:TemplateGallery\"),\n onClick: () => self.onShowTemplateGallery(),\n icon: TemplateGalleryReactSvgUrl,\n },\n ]\n : [];",
       "module": "/packages/client"
     }
   ],

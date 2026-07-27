@@ -1,0 +1,29 @@
+{
+  "key_path": "LiveViewerSubtitle",
+  "content": "Read-only document viewers",
+  "content_en_sha1_hash": "bc22122aaac5f89031c09e7be215585b6e0a895c",
+  "created_at": "2026-07-27T13:07:48.502Z",
+  "updated_at": "2026-07-27T14:14:04.171Z",
+  "comment": {
+    "text": "Subtitle within a usage statistics block in the Statistics panel, describing the nature of LiveViewer users.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:14:04.171Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 545,
+      "context": "limit={tenantInfo.usersLimit.edit}\n t={t}\n />\n <UsageBlock\n title={t(\"DocsConnect:LiveViewer\")}\n subtitle={t(\"DocsConnect:LiveViewerSubtitle\")}\n usageLabel={t(\"DocsConnect:ViewerUsage\")}\n usage={tenantInfo.stats.viewer}\n limit={tenantInfo.usersLimit.view}\n t={t}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

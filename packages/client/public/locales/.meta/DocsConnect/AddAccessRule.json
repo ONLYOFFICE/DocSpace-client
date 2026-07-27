@@ -1,0 +1,29 @@
+{
+  "key_path": "AddAccessRule",
+  "content": "Add access rule",
+  "content_en_sha1_hash": "f1ff6ab94f9c0023558ffc05d0d6aff974084517",
+  "created_at": "2026-07-27T13:07:48.542Z",
+  "updated_at": "2026-07-27T14:40:07.708Z",
+  "comment": {
+    "text": "Dialog title for a modal window used to create a new access rule within the DocsConnect configuration.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:40:07.708Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
+      "line_number": 80,
+      "context": "visible={visible}\n displayType={ModalDialogType.modal}\n onClose={onClose}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"DocsConnect:AddAccessRule\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.addRuleBody}>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:AddAccessRuleDescription\", {\n service: t(\"DocsConnect:DocsConnect\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

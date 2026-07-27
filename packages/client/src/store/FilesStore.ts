@@ -2018,7 +2018,17 @@ class FilesStore {
     shareKey: Nullable<string> = null,
     editForm = false,
     fillForm = false,
-  ) => openDocEditorImpl(this, id, preview, shareKey, editForm, fillForm);
+    targetWindow: Nullable<Window> = null,
+  ) =>
+    openDocEditorImpl(
+      this,
+      id,
+      preview,
+      shareKey,
+      editForm,
+      fillForm,
+      targetWindow,
+    );
 
   createThumbnails = async (files: Nullable<TFile[]> = null) =>
     createThumbnailsImpl(this, files);

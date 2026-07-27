@@ -298,6 +298,7 @@ class SelectedFolderStore {
       parentShared: this.parentShared,
       ownedBy: this.ownedBy,
       sharedBy: this.sharedBy,
+      isThirdPartyStorage: this.isThirdPartyStorage,
       isRoomStorageQuotaExceeded: this.isRoomStorageQuotaExceeded,
       roomUsedSpace: this.roomUsedSpace,
       roomQuotaLimit: this.roomQuotaLimit,
@@ -575,8 +576,14 @@ class SelectedFolderStore {
       : this.usedSpace;
   }
 
+  get isThirdPartyStorage() {
+    return !!(this.providerItem || this.providerKey);
+  }
+
   get isRoomStorageQuotaExceeded() {
     if (this.rootFolderType !== FolderType.Rooms) return false;
+
+    if (this.isThirdPartyStorage) return false;
 
     const { roomQuotaLimit, roomUsedSpace } = this;
 

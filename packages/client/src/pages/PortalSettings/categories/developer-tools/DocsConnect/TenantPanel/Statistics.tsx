@@ -71,7 +71,7 @@ interface StatisticsProps {
   openRemoveSubscriptionDialog?: () => void;
   cancelScheduledChange?: () => Promise<void>;
   copyToClipboard?: (value: string, t: TTranslation) => void;
-  downloadReport?: (t: TTranslation) => void;
+  downloadReport?: () => void;
   markReportPageLeft?: () => void;
   isReportGenerating?: boolean;
   nextcloudUrl?: string;
@@ -555,7 +555,7 @@ const Statistics = ({
           className={styles.downloadButton}
           size={ButtonSize.normal}
           label={t("DocsConnect:DownloadReport")}
-          onClick={() => downloadReport?.(t)}
+          onClick={() => downloadReport?.()}
           isLoading={isReportGenerating}
         />
         {isReportGenerating ? (

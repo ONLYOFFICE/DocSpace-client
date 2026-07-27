@@ -66,6 +66,8 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
 
+import i18n from "../i18n";
+
 export type BuyPlanMode = "trial" | "edit";
 
 class DocsConnectStore {
@@ -93,8 +95,6 @@ class DocsConnectStore {
 
   isReportGenerating: boolean = false;
 
-  reportT: Nullable<TTranslation> = null;
-
   reportPageLeft: boolean = false;
 
   constructor(
@@ -106,7 +106,6 @@ class DocsConnectStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
     makeAutoObservable(this, {
-      reportT: false,
       reportPageLeft: false,
     });
   }
@@ -340,7 +339,6 @@ class DocsConnectStore {
   };
 
   private resetReportState = () => {
-    this.reportT = null;
     this.reportPageLeft = false;
     runInAction(() => {
       this.isReportGenerating = false;
@@ -348,12 +346,11 @@ class DocsConnectStore {
   };
 
   private finishReport = (resultFileUrl?: string) => {
-    const t = this.reportT;
-    if (t) {
-      toastr.success(
-        t("Common:ReportSaveLocation", { sectionName: t("Common:Files") }),
-      );
-    }
+    toastr.success(
+      i18n.t("Common:ReportSaveLocation", {
+        sectionName: i18n.t("Common:Files"),
+      }),
+    );
     if (!this.reportPageLeft && resultFileUrl) {
       setTimeout(() => window.open(resultFileUrl, "_blank"), 100); // hack for ios
     }
@@ -364,10 +361,9 @@ class DocsConnectStore {
     if (this.isReportGenerating) this.reportPageLeft = true;
   };
 
-  downloadReport = async (t: TTranslation) => {
+  downloadReport = async () => {
     if (this.isReportGenerating) return;
 
-    this.reportT = t;
     this.reportPageLeft = false;
     runInAction(() => {
       this.isReportGenerating = true;

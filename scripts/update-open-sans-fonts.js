@@ -50,6 +50,18 @@ const defaults = {
   // Styles and weights currently used across DocSpace (see public/css/fonts.css).
   styles: ["normal", "italic"],
   weights: [300, 400, 500, 600, 700, 800],
+  // Unicode subsets actually needed by DocSpace UI languages. The CDN also
+  // offers "math" and "symbols" subsets — excluded, system fonts cover them.
+  subsets: [
+    "cyrillic-ext",
+    "cyrillic",
+    "greek-ext",
+    "greek",
+    "hebrew",
+    "vietnamese",
+    "latin-ext",
+    "latin",
+  ],
   display: "swap",
   cssOut: path.join(rootDir, "public/css/fonts.css"),
   fontsRoot: path.join(rootDir, "public/fonts"),
@@ -69,6 +81,9 @@ function printHelp() {
       '  --family <name>     Font family (default: "Open Sans").',
       "  --weights <list>    Comma-separated weights (default: 300,400,500,600,700,800).",
       "  --styles <list>     Comma-separated styles (default: normal,italic).",
+      "  --subsets <list>    Comma-separated unicode subsets to keep, or \"all\"",
+      "                      (default: cyrillic-ext,cyrillic,greek-ext,greek,",
+      "                      hebrew,vietnamese,latin-ext,latin).",
       "  --display <value>   font-display value (default: swap).",
       "  --css-out <path>    Output CSS path (default: public/css/fonts.css).",
       "  --fonts-root <path> Root fonts directory (default: public/fonts).",
@@ -105,6 +120,13 @@ function parseArgs(argv) {
         break;
       case "--styles":
         args.styles = takeValue(i, arg)
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+        i += 1;
+        break;
+      case "--subsets":
+        args.subsets = takeValue(i, arg)
           .split(",")
           .map((s) => s.trim())
           .filter(Boolean);
@@ -176,6 +198,36 @@ async function fetchBinary(url, headers) {
   return Buffer.from(await res.arrayBuffer());
 }
 
+function filterSubsets(css, subsets) {
+  if (subsets.includes("all")) return css;
+
+  const allowed = new Set(subsets);
+  const found = new Set();
+  const dropped = new Set();
+
+  // The CSS API precedes every @font-face block with a "/* subset */" comment.
+  const filtered = css.replace(
+    /\/\* ([\w-]+) \*\/\s*@font-face \{[^}]*\}\n?/g,
+    (block, subset) => {
+      found.add(subset);
+      if (allowed.has(subset)) return block;
+      dropped.add(subset);
+      return "";
+    },
+  );
+
+  const missing = subsets.filter((s) => !found.has(s));
+  if (missing.length > 0) {
+    throw new Error(
+      `Requested subsets not present in the CDN response: ${missing.join(", ")}`,
+    );
+  }
+  if (dropped.size > 0) {
+    process.stdout.write(`Skipped subsets: ${[...dropped].join(", ")}\n`);
+  }
+  return filtered;
+}
+
 async function formatCss(css, cssOutPath) {
   // The committed fonts.css is Prettier-formatted (double quotes, 80-column
   // wrapping), while the Google Fonts CDN emits single quotes and long lines.
@@ -216,7 +268,10 @@ async function main() {
 
   const apiUrl = buildCssApiUrl(args);
   process.stdout.write(`Fetching CSS from Google Fonts:\n  ${apiUrl}\n`);
-  const remoteCss = await fetchText(apiUrl, headers);
+  const remoteCss = filterSubsets(
+    await fetchText(apiUrl, headers),
+    args.subsets,
+  );
 
   const urlMatches = [...remoteCss.matchAll(/url\((https:\/\/[^)]+)\)/g)];
   if (urlMatches.length === 0) {
@@ -294,6 +349,18 @@ async function main() {
     args.cssOut,
   );
   fs.writeFileSync(args.cssOut, finalCss, "utf8");
+
+  // Remove files of the current version that the CSS no longer references
+  // (e.g. subsets excluded via --subsets on a re-run).
+  const referenced = new Set(
+    [...localByUrl.values()].map(({ fileName }) => fileName),
+  );
+  for (const entry of fs.readdirSync(targetDir)) {
+    if (!referenced.has(entry)) {
+      fs.rmSync(path.join(targetDir, entry));
+      process.stdout.write(`  removed unreferenced file ${entry}\n`);
+    }
+  }
 
   // Optionally remove previous versions.
   if (args.cleanOld && fs.existsSync(args.fontsRoot)) {

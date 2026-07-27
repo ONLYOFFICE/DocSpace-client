@@ -54,6 +54,7 @@ import {
 } from "@docspace/shared/enums";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
+import ClientSearchProgress from "./ClientSearchProgress";
 import { NoAccessContainerType } from "../../../../components/EmptyContainer/NoAccessContainer";
 import KnowledgeDisabledContainer from "../../../../components/EmptyContainer/KnowledgeDisabledContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
@@ -513,7 +514,12 @@ const SectionBodyContent = (props) => {
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
-  return <FileViewComponent />;
+  return (
+    <>
+      <ClientSearchProgress />
+      <FileViewComponent />
+    </>
+  );
 };
 
 export default inject(

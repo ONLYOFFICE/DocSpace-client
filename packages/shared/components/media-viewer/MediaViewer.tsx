@@ -133,6 +133,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     const item = playlist.find(
       (file) => file.fileId?.toString() === currentFileId?.toString(),
     );
+    if (item?.encrypted) return undefined;
     return item?.src;
   });
   const fileUrl = fileUrlRaw;

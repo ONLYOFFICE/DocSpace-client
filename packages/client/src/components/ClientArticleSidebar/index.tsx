@@ -212,6 +212,36 @@ const ClientArticleSidebar = ({
       ...extra,
     });
 
+    const newCount = (folder?: TTreeFolder) => folder?.newItems ?? 0;
+
+    const sectionBadge = (
+      folderId: string | number,
+      count: number,
+    ): Pick<NavSubItem, "showBadge" | "badgeComponent"> =>
+      count > 0
+        ? {
+            showBadge: true,
+            badgeComponent: (
+              <NewFilesBadge newFilesCount={count} folderId={folderId} />
+            ),
+          }
+        : {};
+
+    const collapsedBadge = (
+      parent: TTreeFolder | undefined,
+      children: (TTreeFolder | undefined)[],
+    ): Pick<NavMenuItem, "collapsedBadgeComponent"> => {
+      const total =
+        newCount(parent) +
+        children.reduce((sum, child) => sum + newCount(child), 0);
+      if (total <= 0 || !parent) return {};
+      return {
+        collapsedBadgeComponent: (
+          <NewFilesBadge newFilesCount={total} folderId={parent.id} />
+        ),
+      };
+    };
+
     const overview: NavMenuItem = {
       id: "dashboard",
       label: t("Common:Overview"),
@@ -232,29 +262,39 @@ const ClientArticleSidebar = ({
 
     if (myDocsFolder || sharedFolder || recentFolder || favFolder) {
       const children: NavSubItem[] = [];
-      if (sharedFolder) {
-        const hasNew = (sharedFolder.newItems ?? 0) > 0;
+      if (sharedFolder)
         children.push(
-          navItem(sharedFolder, {
-            showBadge: hasNew,
-            badgeComponent: hasNew ? (
-              <NewFilesBadge
-                newFilesCount={sharedFolder.newItems!}
-                folderId={sharedFolder.id}
-              />
-            ) : undefined,
-          }),
+          navItem(
+            sharedFolder,
+            sectionBadge(sharedFolder.id, newCount(sharedFolder)),
+          ),
         );
-      }
-      if (recentFolder) children.push(navItem(recentFolder));
-      if (favFolder) children.push(navItem(favFolder));
+      if (recentFolder)
+        children.push(
+          navItem(
+            recentFolder,
+            sectionBadge(recentFolder.id, newCount(recentFolder)),
+          ),
+        );
+      if (favFolder)
+        children.push(
+          navItem(favFolder, sectionBadge(favFolder.id, newCount(favFolder))),
+        );
       // Guests can't view or manage Files (their own files/Trash), so
       // that section is dropped and the top-level item opens Shared with me
       // instead of the (inaccessible) Files folder.
       if (!isVisitor && myDocsFolder && trashFolder)
-        children.push(navItem(trashFolder, { withTopSeparator: true }));
+        children.push(
+          navItem(trashFolder, {
+            withTopSeparator: true,
+            ...sectionBadge(trashFolder.id, newCount(trashFolder)),
+          }),
+        );
 
       const primaryFolder = myDocsFolder ?? sharedFolder;
+
+      const childFolders = [sharedFolder, recentFolder, favFolder];
+      if (!isVisitor && myDocsFolder) childFolders.push(trashFolder);
 
       mainItems.push({
         id: myDocsFolder ? String(myDocsFolder.id) : "files",
@@ -263,6 +303,11 @@ const ClientArticleSidebar = ({
         onClick: primaryFolder
           ? goFolder(primaryFolder.id, primaryFolder.rootFolderType)
           : undefined,
+        ...sectionBadge(
+          myDocsFolder ? myDocsFolder.id : (primaryFolder?.id ?? ""),
+          newCount(myDocsFolder),
+        ),
+        ...collapsedBadge(myDocsFolder ?? primaryFolder, childFolders),
         children,
       });
     }
@@ -270,6 +315,8 @@ const ClientArticleSidebar = ({
     if (roomsFolder) {
       mainItems.push({
         ...navItem(roomsFolder),
+        ...sectionBadge(roomsFolder.id, newCount(roomsFolder)),
+        ...collapsedBadge(roomsFolder, [archiveFolder]),
         children: [
           // Recent/Favorites under Rooms reuse the @recent/@favorites files
           // view, scoped to room content via the room folder types.
@@ -306,7 +353,12 @@ const ClientArticleSidebar = ({
               ]
             : []),
           ...(archiveFolder
-            ? [navItem(archiveFolder, { withTopSeparator: true })]
+            ? [
+                navItem(archiveFolder, {
+                  withTopSeparator: true,
+                  ...sectionBadge(archiveFolder.id, newCount(archiveFolder)),
+                }),
+              ]
             : []),
           {
             id: "rooms-trash",
@@ -394,12 +446,18 @@ const ClientArticleSidebar = ({
       const agentChildren: NavSubItem[] = [];
       if (recentFolder)
         agentChildren.push({
-          ...navItem(recentFolder, { id: "agents-recent" }),
+          ...navItem(recentFolder, {
+            id: "agents-recent",
+            ...sectionBadge(recentFolder.id, newCount(recentFolder)),
+          }),
           onClick: goFolderAgent(recentFolder.id, recentFolder.rootFolderType),
         });
       if (favFolder)
         agentChildren.push({
-          ...navItem(favFolder, { id: "agents-favorites" }),
+          ...navItem(favFolder, {
+            id: "agents-favorites",
+            ...sectionBadge(favFolder.id, newCount(favFolder)),
+          }),
           onClick: goFolderAgent(favFolder.id, favFolder.rootFolderType),
         });
       if (trashFolder)
@@ -407,14 +465,26 @@ const ClientArticleSidebar = ({
           ...navItem(trashFolder, {
             id: "agents-trash",
             withTopSeparator: true,
+            ...sectionBadge(trashFolder.id, newCount(trashFolder)),
           }),
           onClick: goFolderAgent(trashFolder.id, trashFolder.rootFolderType),
         });
 
-      const agentsItem = navItem(aiAgentsFolder);
+      const agentsItem: NavMenuItem = {
+        ...navItem(aiAgentsFolder),
+        ...sectionBadge(aiAgentsFolder.id, newCount(aiAgentsFolder)),
+      };
       mainItems.push(
         agentChildren.length > 0
-          ? { ...agentsItem, children: agentChildren }
+          ? {
+              ...agentsItem,
+              ...collapsedBadge(aiAgentsFolder, [
+                recentFolder,
+                favFolder,
+                trashFolder,
+              ]),
+              children: agentChildren,
+            }
           : agentsItem,
       );
     }

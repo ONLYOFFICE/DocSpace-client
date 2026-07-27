@@ -3,7 +3,7 @@
   "content": "Version",
   "content_en_sha1_hash": "2da600bf9404843107a9531694f654e5662959e0",
   "created_at": "2025-05-19T21:30:49.494Z",
-  "updated_at": "2026-05-15T14:00:06.696Z",
+  "updated_at": "2026-07-27T13:07:50.664Z",
   "comment": {
     "text": "This is a label indicating the version number of a plugin or a JavaScript SDK. It appears as a short label next to the version number.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
       "line_number": 88,
       "context": ") : null}\n \n {plugin.version ? (\n <>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>\n {t(\"Common:Version\")}\n </Text>\n <div\n className={classNames(styles.version, {\n [styles.incompatible]: !plugin.compatible,\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 508,
+      "context": "<div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"DocsConnect:BuildType\")}</Text>\n <Text fontWeight={600}>{tenantInfo.server.packageType}</Text>\n </div>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"Common:Version\")}</Text>\n <Text fontWeight={600}>{tenantInfo.server.version}</Text>\n </div>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"DocsConnect:Released\")}</Text>\n <Text fontWeight={600}>",
       "module": "/packages/client"
     },
     {

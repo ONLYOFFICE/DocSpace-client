@@ -1,0 +1,29 @@
+{
+  "key_path": "RealtimeCollaborationTitle",
+  "content": "Real-time collaboration",
+  "content_en_sha1_hash": "6dc58b0e32a5b77b9b7b318ae4da7d90ed3c4474",
+  "created_at": "2026-07-27T13:07:48.464Z",
+  "updated_at": "2026-07-27T14:03:35.734Z",
+  "comment": {
+    "text": "Title of a feature item within the DocsConnect \"Get Started\" modal.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:03:35.734Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
+      "line_number": 91,
+      "context": "title: t(\"DocsConnect:FourEditorsTitle\"),\n description: t(\"DocsConnect:FourEditorsDescription\"),\n },\n {\n Icon: CollaborationIcon,\n title: t(\"DocsConnect:RealtimeCollaborationTitle\"),\n description: t(\"DocsConnect:RealtimeCollaborationDescription\"),\n },\n {\n Icon: IntegrationIcon,\n title: t(\"DocsConnect:DropInIntegrationTitle\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Tutaj pojawią się zarchiwizowane pokoje.",
   "ChangeAgentOwnerSelectorInfo": "Tylko administrator pokoju lub administrator {{productName}} może zostać właścicielem agenta.",
   "ChangeTheAgentOwner": "Zmień właściciela agenta",
+  "ClientSearchDecryptingNames": "Odszyfrowywanie nazw plików… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Folder jest zbyt duży. Wyniki wyszukiwania mogą być niepełne.",
   "CompressingFiles": "Kompresowanie plików",
   "Conversion": "Konwersja",
   "Converting": "Konwertowanie",

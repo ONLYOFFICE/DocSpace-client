@@ -3,7 +3,7 @@
   "content": "Filter",
   "content_en_sha1_hash": "d7decf1aa22b02ae8abf9a96849ee423eee838e4",
   "created_at": "2025-05-19T21:30:55.685Z",
-  "updated_at": "2026-07-07T08:59:21.828Z",
+  "updated_at": "2026-07-27T13:07:50.730Z",
   "comment": {
     "text": "This is a button label or dialog title that allows users to narrow down a list of items (e.g., transactions, files, webhooks) by specific criteria.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1901,
+      "line_number": 1912,
       "context": "isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}\n clearAll={clearAll}\n filterTitle={t(\"Common:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n clearSearch={clearSearch}\n setClearSearch={setClearSearch}\n onSortButtonClick={onSortButtonClick}\n currentDeviceType={currentDeviceType}",
       "module": "/packages/client"
     },

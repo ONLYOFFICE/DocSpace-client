@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Arxivlənmiş otaqlar burada görünəcək.",
   "ChangeAgentOwnerSelectorInfo": "Ancaq otaq administratorı və ya {{productName}} administratoru agentin sahibi ola bilər.",
   "ChangeTheAgentOwner": "Agent sahibi dəyişdir",
+  "ClientSearchDecryptingNames": "Fayl adlarının şifrəsi açılır… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Qovluq çox böyükdür. Axtarış nəticələri natamam ola bilər.",
   "CompressingFiles": "Fayllar sıxılır",
   "Conversion": "Konversiya",
   "Converting": "Dəyişdirilir",

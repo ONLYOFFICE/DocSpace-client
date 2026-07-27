@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Arkistoidut huoneet ilmestyvät tähän.",
   "ChangeAgentOwnerSelectorInfo": "Vain tilanhallinnoija tai {{productName}}-hallinnoija voi olla agentin omistaja.",
   "ChangeTheAgentOwner": "Vaihda agentin omistaja",
+  "ClientSearchDecryptingNames": "Puretaan tiedostonimien salausta… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Kansio on liian suuri. Hakutulokset voivat olla puutteelliset.",
   "CompressingFiles": "Pakataan tiedostoja",
   "Conversion": "Muuntaminen",
   "Converting": "Muuntaminen",

@@ -223,6 +223,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
               }
               isDisabled={isBusy}
               scale
+              withBorder={false}
               className={styles.secretInput}
               testId="docs_connect_settings_secret_input"
             />

@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-07-07T08:59:21.677Z",
+  "updated_at": "2026-07-27T13:07:50.592Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/providers/files/save-dialog.tsx",
-      "line_number": 127,
+      "line_number": 220,
       "context": "getIsDisabled={getIsDisabled}\n currentFolderId=\"\"\n rootFolderType={FolderType.USER}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SaveButton\", { defaultValue: \"Save\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader={t(\"Common:FileName\", { defaultValue: \"File name\" })}\n currentFooterInputValue={stripDocxExt(defaultName)}",
       "module": "/libs/ui-kit"
     },
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/EditAgentDialog.tsx",
-      "line_number": 262,
+      "line_number": 278,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n primary\n scale\n onClick={onEditRoom}\n isDisabled={\n (!agentParams.profileId && !agentParams.modelId) ||",
       "module": "/packages/client"
     },
@@ -198,6 +198,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 346,
+      "context": "onSaveClick={onSaveGeneral}\n onCancelClick={onCancelGeneral}\n saveButtonDisabled={!isGeneralValid}\n showReminder={hasChangesGeneral}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n isSaving={isSavingGeneral}\n displaySettings\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/index.tsx",
       "line_number": 495,
       "context": "errorFields={allErrorFields}\n requiredErrorFields={requiredErrorFields}\n onBlur={onBlur}\n />\n <ButtonsBlock\n saveLabel={t(\"Common:SaveButton\")}\n cancelLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n isRequestRunning={isRequestRunning}\n saveButtonDisabled={isEdit ? !isValid : false}",
@@ -211,7 +217,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 433,
+      "line_number": 456,
       "context": "</div>\n \n <SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading",
       "module": "/packages/client"
     },
@@ -387,12 +393,6 @@
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/EditAgentDialog.tsx",
       "line_number": 260,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n primary\n scale\n onClick={onEditRoom}\n isDisabled={\n !agentParams.profileId ||",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Settings.tsx",
-      "line_number": 165,
-      "context": "</div>\n \n {/* Footer */}\n <div className={styles.sectionFooter}>\n <Button\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n isLoading={isSaving}\n isDisabled={!isDirty}\n onClick={handleSave}\n primary",
       "module": "/packages/sdk"
     },
     {

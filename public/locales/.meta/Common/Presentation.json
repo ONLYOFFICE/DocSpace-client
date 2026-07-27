@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2026-07-07T08:59:21.647Z",
+  "updated_at": "2026-07-27T13:07:50.564Z",
   "comment": {
     "text": "This is a label for a presentation file type or a button to create a new presentation. It appears in menus and file listings.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useCreateActions.tsx",
-      "line_number": 109,
-      "context": "),\n },\n {\n id: \"presentation\",\n icon: <CreatePresentationIcon />,\n label: t(\"Common:Presentation\"),\n onClick: () =>\n window.open(\n makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),\n \"_blank\",\n ),",
+      "line_number": 122,
+      "context": "...disabledProps,\n },\n {\n id: \"presentation\",\n icon: <CreatePresentationIcon />,\n label: t(\"Common:Presentation\"),\n onClick: () =>\n window.open(\n makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),\n \"_blank\",\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 199,
+      "line_number": 214,
       "context": "onClick: () => dispatchCreate(currentFolderId, \"xlsx\", t),\n },\n {\n id: \"quick-pptx\",\n icon: <CreatePresentationIcon />,\n label: t(\"Common:Presentation\"),\n onClick: () => dispatchCreate(currentFolderId, \"pptx\", t),\n },\n {\n id: \"quick-pdf\",\n icon: <BlankPdfIcon />,",
       "module": "/packages/client"
     },

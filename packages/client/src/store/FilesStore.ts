@@ -2218,8 +2218,13 @@ class FilesStore {
     // this.
     if (this.clientSearchQuery) return true;
 
-    const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder, isFormsFolder } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isAIAgentsFolder,
+      isFormsFolder,
+      isTemplatesFolder,
+    } = this.treeFoldersStore;
 
     const {
       subjectId,
@@ -2245,7 +2250,11 @@ class FilesStore {
     } = this.filter;
 
     const isFiltered =
-      isRoomsFolder || isArchiveFolder || isAIAgentsFolder || isFormsFolder
+      isRoomsFolder ||
+      isArchiveFolder ||
+      isAIAgentsFolder ||
+      isFormsFolder ||
+      isTemplatesFolder
         ? filterValue ||
           type ||
           provider ||

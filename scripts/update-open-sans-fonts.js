@@ -176,6 +176,28 @@ async function fetchBinary(url, headers) {
   return Buffer.from(await res.arrayBuffer());
 }
 
+async function formatCss(css, cssOutPath) {
+  // The committed fonts.css is Prettier-formatted (double quotes, 80-column
+  // wrapping), while the Google Fonts CDN emits single quotes and long lines.
+  // Formatting the output keeps re-runs of this script diff-minimal.
+  let prettier;
+  try {
+    prettier = require("prettier");
+  } catch {
+    process.stderr.write(
+      "Warning: prettier is not installed, writing unformatted CSS.\n",
+    );
+    return css;
+  }
+  const config = (await prettier.resolveConfig(cssOutPath)) ?? {};
+  return prettier.format(css, {
+    ...config,
+    parser: "css",
+    // The committed fonts.css uses LF regardless of the repo-wide CRLF setting.
+    endOfLine: "lf",
+  });
+}
+
 function extractLicenseHeader(cssOutPath) {
   // Reuse the header already present in fonts.css to avoid churn; fall back to
   // this script's own AGPL header if the file does not exist yet.
@@ -267,7 +289,10 @@ async function main() {
   }
 
   const header = extractLicenseHeader(args.cssOut);
-  const finalCss = `${header}\n\n${localCss.trim()}\n`;
+  const finalCss = await formatCss(
+    `${header}\n\n${localCss.trim()}\n`,
+    args.cssOut,
+  );
   fs.writeFileSync(args.cssOut, finalCss, "utf8");
 
   // Optionally remove previous versions.

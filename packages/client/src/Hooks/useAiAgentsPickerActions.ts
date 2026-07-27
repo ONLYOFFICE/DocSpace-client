@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getNewAiAgent, getNewAiAgents } from "@docspace/shared/api/ai";
 import type { TAgent } from "@docspace/shared/api/ai/types";
@@ -47,26 +47,37 @@ const CHOOSE_AI_AGENT_LABEL = "Choose AI Agent";
 // Same cap as FilesStore.fetchAgents — the agents view never pages past 100.
 const AGENTS_PAGE_COUNT = 100;
 
-/** Agent picked in the model picker, in the shape the chat host needs. */
+/**
+ * Agent picked in the model picker (or restored from a thread), in the
+ * shape the chat host needs. `profileId`/`title` may be absent when the
+ * agent is restored from a thread but no longer resolvable in the agents
+ * list — the request context still targets `entityId`, while the picker
+ * alias is skipped.
+ */
 export type TPickedAgent = {
-  /** Agent room id — becomes the chat scope (entityId). */
+  /** Agent room id — the request context scope (contextEntityId). */
   entityId: string;
-  /** The agent's bound AI profile — drives every chat request. */
-  profileId: string;
+  /** The agent's bound AI profile — drives the picker alias. */
+  profileId?: string;
   /** Agent title — displayed as the picker value instead of the profile. */
-  title: string;
+  title?: string;
 };
 
 /**
  * Loads the AI agents list (once, when `enabled` first turns true) and builds
- * the "Choose AI Agent" entry for the chat model picker. Returns an empty
- * array while loading and when the user has at most one agent — the entry is
- * shown only when there is more than one agent to choose from.
+ * the "Choose AI Agent" entry for the chat model picker (`actions` is empty
+ * while loading and when at most one agent has a bound profile — the entry
+ * is shown only when there is a real choice). `getAgentByRoomId` resolves a
+ * loaded agent by its room id — used to restore the picked agent from a
+ * thread's persisted context.
  */
 export const useAiAgentsPickerActions = (
   enabled: boolean,
   onAgentPick: (agent: TPickedAgent) => void,
-): ProfilePickerAction[] => {
+): {
+  actions: ProfilePickerAction[];
+  getAgentByRoomId: (roomId: string) => TPickedAgent | null;
+} => {
   const [agents, setAgents] = useState<TAgent[] | null>(null);
   const requested = useRef(false);
 
@@ -103,7 +114,7 @@ export const useAiAgentsPickerActions = (
     return () => controller.abort();
   }, [enabled]);
 
-  return useMemo<ProfilePickerAction[]>(() => {
+  const actions = useMemo<ProfilePickerAction[]>(() => {
     // Only agents bound to an AI profile are pickable — selecting an agent
     // switches the chat to its profile (displayed under the agent's name).
     const pickable = (agents ?? []).flatMap((agent) =>
@@ -129,4 +140,19 @@ export const useAiAgentsPickerActions = (
       },
     ];
   }, [agents, onAgentPick]);
+
+  const getAgentByRoomId = useCallback(
+    (roomId: string): TPickedAgent | null => {
+      const agent = agents?.find((a) => String(a.id) === roomId);
+      if (!agent) return null;
+      return {
+        entityId: roomId,
+        profileId: agent.profileId,
+        title: agent.title,
+      };
+    },
+    [agents],
+  );
+
+  return { actions, getAgentByRoomId };
 };

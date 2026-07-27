@@ -625,16 +625,32 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const composerHeader = useMemo(() => <AIActivationBanner />, []);
 
-  // Agent picked in the model picker: the chat re-scopes to the agent's
-  // entity (threads, uploads, assignments) and the picker shows the agent's
-  // name while its profile drives every request.
+  // Agent picked in the model picker (or restored from an opened thread's
+  // persisted context): the picker shows the agent's name while its profile
+  // drives every request, and sends carry the agent's room as the request
+  // context — the conversation itself stays in the current location.
   const [pickedAgent, setPickedAgent] = useState(null);
 
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
-  const profilePickerActions = useAiAgentsPickerActions(
-    isLoaded && isAiChatAvailable,
-    setPickedAgent,
+  const { actions: profilePickerActions, getAgentByRoomId } =
+    useAiAgentsPickerActions(isLoaded && isAiChatAvailable, setPickedAgent);
+
+  // Re-derive the picked agent from the opened thread's persisted context:
+  // agent threads restore their agent (alias + request context), plain
+  // threads drop it. An agent missing from the loaded list still restores
+  // the request context — only the picker alias is skipped.
+  const onThreadContextChange = useCallback(
+    (contextEntityId) => {
+      if (!contextEntityId) {
+        setPickedAgent(null);
+        return;
+      }
+      setPickedAgent(
+        getAgentByRoomId(contextEntityId) ?? { entityId: contextEntityId },
+      );
+    },
+    [getAgentByRoomId],
   );
 
   // Picking a plain profile row returns the chat to the current-location
@@ -657,7 +673,7 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const chatPickerAlias = useMemo(
     () =>
-      !isInsideAgentRoom && pickedAgent
+      !isInsideAgentRoom && pickedAgent?.profileId && pickedAgent?.title
         ? { profileId: pickedAgent.profileId, label: pickedAgent.title }
         : null,
     [isInsideAgentRoom, pickedAgent],
@@ -692,6 +708,7 @@ const Shell = ({ page = "home", ...rest }) => {
           profilePickerActions={profilePickerActions}
           profilePickerAlias={chatPickerAlias}
           onProfilePickerSelect={onProfilePickerSelect}
+          onThreadContextChange={onThreadContextChange}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}

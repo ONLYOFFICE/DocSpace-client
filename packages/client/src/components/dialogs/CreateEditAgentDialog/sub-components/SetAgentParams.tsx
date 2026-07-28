@@ -1,36 +1,45 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { isMobile, mobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
+import styles from "../CreateEditAgentDialog.module.scss";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 
@@ -42,7 +51,7 @@ import AvatarEditorDialog from "../../AvatarEditorDialog";
 import TagInput from "../../../TagInput";
 import InputParam from "../../../CreateEditDialogParams/InputParam";
 
-import ModelSettings from "../sub-components/Model";
+import ProfileSettings from "../sub-components/Profile";
 import InstructionsSettings from "../sub-components/Instructions";
 import MCPSettings from "../sub-components/MCP";
 import {
@@ -55,69 +64,14 @@ import { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
+import CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
+import { AgentDialogContext } from "SRC_DIR/helpers/enums";
 import { TLogo } from "@docspace/ui-kit/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 import RoomQuota from "SRC_DIR/components/RoomQuota";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import type { TRoom } from "@docspace/shared//api/rooms/types";
-
-const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 22px;
-  margin-top: 20px;
-
-  .icon-editor_text {
-    margin-bottom: 6px;
-  }
-
-  .icon-editor {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: start;
-    gap: 16px;
-
-    ${(props) =>
-      props.disableImageRescaling &&
-      css`
-        margin-bottom: 24px;
-      `};
-  }
-
-  .logo-name-container {
-    display: flex;
-    align-items: end;
-    gap: 16px;
-
-    @media ${mobile} {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .room-params-icon,
-    .react-svg-icon {
-      min-width: 64px;
-      min-height: 64px;
-      @media ${mobile} {
-        min-width: 96px;
-        min-height: 96px;
-      }
-    }
-    .room-title {
-      font-size: 32px;
-      font-weight: 700;
-      line-height: 37px;
-      user-select: none;
-      @media ${mobile} {
-        font-size: 42px;
-        line-height: 56px;
-      }
-    }
-  }
-`;
 
 type TServerCover = {
   id: string;
@@ -142,7 +96,6 @@ type setAgentParamsProps = {
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: VoidFunction;
-  portalMcpServerId?: string;
   onClickAction?: () => void;
   selectedServers?: TSelectorItem[];
   setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
@@ -165,11 +118,14 @@ type setAgentParamsProps = {
   setCover?: DialogsStore["setCover"];
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
-  modelAliases?: TAIConfig["modelAliases"];
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
+  recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
+  isUserAdmin?: boolean;
+  openContext?: CreateEditAgentStore["openContext"];
+  standalone?: SettingsStore["standalone"];
 };
 
-const setAgentParams = ({
+const SetAgentParams = ({
   agentParams,
   setAgentParams,
   tagHandler,
@@ -199,18 +155,19 @@ const setAgentParams = ({
   onOwnerChange,
   isDefaultAIAgentsQuotaSet,
   infoPanelSelection,
-  portalMcpServerId,
   onClickAction,
   selectedServers,
   setSelectedServers,
-  modelAliases,
   systemAiEnabled,
+  recommendedModelForForms,
+  isUserAdmin,
+  openContext,
+  standalone,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
     "Translations",
     "Common",
-    "RoomLogoCover",
   ]);
 
   const [previewIcon, setPreviewIcon] = useState(agentParams.previewIcon);
@@ -270,7 +227,9 @@ const setAgentParams = ({
 
   React.useEffect(() => {
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: previewTitle,
     });
   }, []);
@@ -311,7 +270,7 @@ const setAgentParams = ({
       iconWasUpdated: agentParams.iconWasUpdated,
     };
 
-    const uploadedFile = await uploadFile?.(t, e);
+    const uploadedFile = (await uploadFile?.(t, e)) as File | null;
 
     setAgentParams({
       ...agentParams,
@@ -355,7 +314,9 @@ const setAgentParams = ({
     }
 
     setRoomCoverDialogProps?.({
-      ...roomCoverDialogProps,
+      // type-only assertion — the prop is always injected
+      // alongside setRoomCoverDialogProps; the original .js spread it as-is.
+      ...roomCoverDialogProps!,
       title: newValue,
     });
 
@@ -486,7 +447,9 @@ const setAgentParams = ({
   const inputTitle = `${t("Common:AgentName")}:`;
 
   return (
-    <StyledSetAgentParams disableImageRescaling={disableImageRescaling}>
+    <div
+      className={`${styles.setAgentParams}${disableImageRescaling ? ` ${styles.disableImageRescaling}` : ""}`}
+    >
       <div className="logo-name-container">
         {element}
         <InputParam
@@ -527,12 +490,11 @@ const setAgentParams = ({
         />
       ) : null}
 
-      <ModelSettings
+      <ProfileSettings
         agentParams={agentParams}
-        modelAliases={modelAliases}
-        systemAiEnabled={systemAiEnabled}
         setAgentParams={setAgentParams}
       />
+
       <InstructionsSettings
         agentParams={agentParams}
         setAgentParams={setAgentParams}
@@ -541,7 +503,6 @@ const setAgentParams = ({
       <MCPSettings
         setAgentParams={setAgentParams}
         agentParams={agentParams}
-        portalMcpServerId={portalMcpServerId}
         onClickAction={onClickAction}
         selectedServers={selectedServers}
         setSelectedServers={setSelectedServers}
@@ -576,7 +537,7 @@ const setAgentParams = ({
           />
         ) : null}
       </div>
-    </StyledSetAgentParams>
+    </div>
   );
 };
 
@@ -588,9 +549,12 @@ export default inject(
     infoPanelStore,
     avatarEditorDialogStore,
     currentQuotaStore,
+    userStore,
+    createEditAgentStore,
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
-    const { folderFormValidation, maxImageUploadSize, aiConfig } =
+    const { openContext } = createEditAgentStore;
+    const { folderFormValidation, maxImageUploadSize, aiConfig, standalone } =
       settingsStore;
 
     const { bufferSelection } = filesStore;
@@ -614,7 +578,9 @@ export default inject(
       setCover,
     } = dialogsStore;
 
-    setCoverSelection(bufferSelection);
+    // bufferSelection is a FilesStore view-model item
+    // (TItem); erased cast adapts it to the raw-entity dialog param.
+    setCoverSelection(bufferSelection as Nullable<TRoom>);
 
     return {
       folderFormValidation,
@@ -635,9 +601,12 @@ export default inject(
       isDefaultAIAgentsQuotaSet,
       infoPanelSelection,
 
-      modelAliases: aiConfig?.modelAliases,
       systemAiEnabled: aiConfig?.systemAiEnabled,
+      recommendedModelForForms: aiConfig?.recommendedModelForForms,
+      isUserAdmin:
+        !!userStore?.user && (userStore.user.isOwner || userStore.user.isAdmin),
+      openContext,
+      standalone,
     };
   },
-)(observer(setAgentParams));
-
+)(observer(SetAgentParams));

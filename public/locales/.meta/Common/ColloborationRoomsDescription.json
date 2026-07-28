@@ -1,0 +1,29 @@
+{
+  "key_path": "ColloborationRoomsDescription",
+  "content": "Сo-edit documents with version control, comments, and full change tracking.",
+  "content_en_sha1_hash": "fe2c9d557e60dc7b480f475b2ddc231db733f3e9",
+  "created_at": "2026-06-25T19:30:57.267Z",
+  "updated_at": "2026-07-07T08:59:21.701Z",
+  "comment": {
+    "text": "Feature description within an AppPromoDialog that details the capabilities of collaboration rooms.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:43:11.668Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 142,
+      "context": "description: t(\"Common:RoomsPromoDescription\"),\n features: [\n {\n Icon: CollaborationRoomIcon,\n title: t(\"Common:ColloborationRooms\"),\n description: t(\"Common:ColloborationRoomsDescription\"),\n },\n {\n Icon: PublicRoomIcon,\n title: t(\"Common:PublicRooms\"),\n description: t(\"Common:PublicRoomsDescription\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

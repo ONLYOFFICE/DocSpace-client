@@ -3,18 +3,19 @@
   "content": "Sending...",
   "content_en_sha1_hash": "c338c191ab1e9319ba354d56467b938e0ba4e119",
   "created_at": "2025-05-19T21:30:48.541Z",
-  "updated_at": "2026-02-19T13:36:32.461Z",
+  "updated_at": "2026-05-15T15:37:40.285Z",
   "comment": {
-    "text": "\"This translation key is used to display a progress indicator when sending a request or data. It appears as a label on buttons in various UI elements, such as a modal dialog footer and a sales department request dialog. Translators should ensure that this phrase conveys the same sense of progress and anticipation in different languages.\"",
+    "text": "This is the label for a button that appears while an action, such as sending a request or enabling a service, is in progress.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:52.139Z"
+    "updated_at": "2026-04-11T20:43:22.225Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 245,
-      "context": "</FieldContainer>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={isLoading ? t(\"Common:Sending\") : t(\"Common:SendButton\")}\n size=\"normal\"\n primary\n onClick={onSendRequest}\n isLoading={isLoading}\n isDisabled={isLoading}",
-      "module": "/packages/client"
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 259,
+      "context": "</FieldContainer>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-button\"\n label={isLoading ? t(\"Sending\") : t(\"SendButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSendRequest}\n isLoading={isLoading}\n isDisabled={isLoading}",
+      "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
@@ -24,13 +25,13 @@
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 141,
+      "line_number": 153,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"registration-modal_send\"\n className=\"modal-dialog-button\"\n key=\"RegisterSendBtn\"\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendRequest\")}\n size={ButtonSize.normal}\n scale={false}\n primary\n onClick={onSendRegisterRequest}\n isLoading={loading}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 350,
+      "line_number": 359,
       "context": "isDisabled={loading}\n key=\"RecoverySendBtn\"\n size={ButtonSize.normal}\n id=\"recover-access-modal_send\"\n className={styles.recoverButtonDialog}\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendButton\")}\n onClick={onSendRecoverRequest}\n aria-label=\"Send recover request\"\n testId=\"recover_access_modal_submit_button\"\n />\n <Button",
       "module": "/packages/shared"
     }
@@ -166,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -217,6 +218,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

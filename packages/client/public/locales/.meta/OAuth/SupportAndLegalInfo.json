@@ -3,22 +3,23 @@
   "content": "Support & Legal info",
   "content_en_sha1_hash": "7ce901e3351f432410ccf2530e8f58ea4855b320",
   "created_at": "2025-05-19T21:30:54.048Z",
-  "updated_at": "2026-03-26T08:26:58.172Z",
+  "updated_at": "2026-06-15T19:31:56.107Z",
   "comment": {
-    "text": "This translation key is used to display \"Support & Legal info\" in the user interface, specifically in a support block component within an OAuth client form, likely as a header or title. It appears alongside a field where users can input a policy URL, and also in an information dialog box for privacy policies.",
+    "text": "This is a section header in the OAuth client form and a label in the OAuth client info dialog. It introduces fields for privacy policy and terms of service URLs.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:33.532Z"
+    "updated_at": "2026-04-11T21:18:14.022Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/SupportBlock.tsx",
-      "line_number": 79,
-      "context": "const policyError = errorFields.includes(\"policy_url\");\n const termsError = errorFields.includes(\"terms_url\");\n \n return (\n <StyledBlock>\n <BlockHeader header={t(\"SupportAndLegalInfo\")} />\n <StyledInputBlock>\n <InputGroup\n label={t(\"PrivacyPolicyURL\")}\n name=\"policy_url\"\n placeholder={t(\"EnterURL\")}",
+      "line_number": 88,
+      "context": "const policyError = errorFields.includes(\"policy_url\");\n const termsError = errorFields.includes(\"terms_url\");\n \n return (\n <div className={styles.styledBlock}>\n <BlockHeader header={t(\"SupportAndLegalInfo\")} />\n <div className={styles.styledInputBlock}>\n <InputGroup\n label={t(\"PrivacyPolicyURL\")}\n name=\"policy_url\"\n placeholder={t(\"Common:EnterURL\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 293,
+      "line_number": 308,
       "context": "fontSize=\"14px\"\n lineHeight=\"20px\"\n fontWeight=\"600\"\n truncate\n >\n {t(\"SupportAndLegalInfo\")}\n </Text>\n <Text\n className=\"privacy-block\"\n fontSize=\"13px\"\n lineHeight=\"15px\"",
       "module": "/packages/client"
     }
@@ -57,13 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "Hyphen usage is inconsistent. The English uses '&', while the German uses a hyphen. While acceptable, consistency would be preferred.",
-          "suggestion": "Consider using '&' instead of '-' for visual consistency with the English version: 'Support & Rechtsinformationen'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -117,13 +112,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ຂໍ້ມູນສະຫນັບສະຫນູນ & ຂໍ້ມູນທາງການຜະລິດ\" doesn't accurately convey the meaning of \"Support & Legal info\". \"ຂໍ້ມູນທາງການຜະລິດ\" translates to 'production information' which isn't synonymous with 'Legal info'.",
-          "suggestion": "ຂໍ້ມູນສະຫນັບສະຫນູນ & ຂໍ້ມູນກົດຫມູ່ຽນ (Support & Legal info)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,20 +148,14 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Asistență\" is a valid translation for \"Support\", \"informații juridice\" is a more literal and potentially less user-friendly translation of \"Legal info\". The term \"Legal info\" is often shortened or paraphrased in Romanian to convey the same meaning more naturally.",
-          "suggestion": "Consider \"Informații legale\" or \"Informații despre legislație\" as more natural alternatives to \"informații juridice\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -195,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Подршка' is a good translation for 'Support', 'правне информације' is a more formal and slightly less natural translation of 'Legal info'. A more colloquial and frequently used translation would be 'Законе информације'.",
-          "suggestion": "Законе информације"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

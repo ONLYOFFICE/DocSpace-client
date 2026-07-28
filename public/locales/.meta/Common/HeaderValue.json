@@ -1,0 +1,32 @@
+{
+  "key_path": "HeaderValue",
+  "content": "Header value",
+  "content_en_sha1_hash": "418adf04f2dc1501aee19de7cd0076792c4e38a3",
+  "created_at": "2025-10-27T16:14:31.645Z",
+  "updated_at": "2026-07-07T08:59:22.010Z",
+  "comment": {
+    "text": "This is a text input label for a field where users enter the value associated with a custom header name for AI service authentication.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:49.803Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/hooks/useAdvancedSettings.tsx",
+      "line_number": 193,
+      "context": "hasError={needReset && !headerNames[index] && index === 0}\n testId=\"mcp-header-name-input\"\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:HeaderValue\")}\n isVertical\n removeMargin\n labelVisible\n >\n <TextInput",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

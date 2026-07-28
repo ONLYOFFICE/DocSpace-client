@@ -1,10 +1,7 @@
 {
-  "ChooseFromList": "Выберите из списка",
-  "FileLocked": "Заблокирован файл",
   "FileProtected": "Файл защищен с помощью пароля",
-  "FileUnlocked": "Разблокирован файл",
   "FolderTitleBoxNet": "Каталог Box",
-  "FolderTitleDocuSign": "Аккаунт DocuSign",
+  "FolderTitleDocuSign": "Учетная запись DocuSign",
   "FolderTitleDropBox": "Каталог Dropbox",
   "FolderTitleGoogle": "Каталог Google",
   "FolderTitlekDrive": "Каталог kDrive",
@@ -13,13 +10,12 @@
   "FolderTitleWebDav": "Каталог WebDAV",
   "FolderTitleYandex": "Каталог Яндекса",
   "NewForm": "PDF-форма",
-  "OwnerChange": "Сменить владельца",
   "RoleGuestDescriprion": "Гости могут получать доступ к комнатам, в которые они приглашены, а также создавать и редактировать документы, если им назначены соответствующие роли в комнате.",
   "SearchByHeadOfGroup": "Поиск по руководителю группы",
   "SearchByOwner": "Поиск по владельцам",
   "SubNewForm": "Пустая",
   "SubNewFormFile": "Из текстового файла",
-  "ThirdPartyInfo": "Изменить настройки подключения",
+  "ThirdPartyInfo": "Изменить информацию о стороннем сервисе",
   "ThirdPartyTitle": "Сторонние сервисы",
-  "TrashItemsDeleteSuccess": "Выбранные элементы были успешно удалены из раздела {{sectionName}}"
+  "TrashItemsDeleteSuccess": "Выбранные элементы успешно удалены из раздела {{sectionName}}"
 }

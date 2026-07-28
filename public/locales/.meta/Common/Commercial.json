@@ -3,16 +3,17 @@
   "content": "Commercial",
   "content_en_sha1_hash": "b48513e4d112b083333d204170e504fdb1a362c0",
   "created_at": "2025-05-19T21:30:43.578Z",
-  "updated_at": "2025-08-04T07:30:01.654Z",
+  "updated_at": "2026-05-15T14:00:06.923Z",
   "comment": {
-    "text": "This translation key is used for the text \"Commercial\" in a branding and licensing context, typically found on a license agreement or permissions page where users can select a commercial usage option.",
+    "text": "This is a label indicating the license type of the software. It appears in the \"About\" dialog to specify that the current DocSpace instance is a commercial version.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:03.010Z"
+    "updated_at": "2026-04-11T20:56:56.722Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 53,
+      "line_number": 63,
       "context": "logoText,\n }: IContentProps) => {\n const { t } = useTranslation(\"Common\");\n const { isBase } = useTheme();\n const isCommercial = !standalone || isEnterprise;\n const license = isCommercial ? t(\"Common:Commercial\") : \"AGPL-3.0\";\n const linkRepo = \"https://github.com/ONLYOFFICE/DocSpace\";\n const linkDocs = \"https://github.com/ONLYOFFICE/DocumentServer\";\n \n const companyName = previewData\n ? previewData.companyName",
       "module": "/packages/shared"
     }
@@ -129,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Comerciais' is the plural form of 'Commercial'. The English content is a singular noun. The correct translation should be 'Comercial'.",
-          "suggestion": "Comercial"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,20 +142,14 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Comerț\" while technically meaning 'commerce' or 'trade,' isn't the most natural or precise translation of 'Commercial' in this context. 'Commercial' can also mean relating to business or intended for sale.",
-          "suggestion": "Consider using \"Afaceri\" (business), \"Comercial\" (direct translation, but potentially less common depending on the context), or \"Destinat comercial\" (intended for commercial use) as alternative translations, depending on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -183,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Комерцијално' is a valid Serbian word, it doesn't perfectly capture the nuance of 'Commercial' in all contexts. 'Commercial' can refer to a business activity, a commercial building, or an advertisement. 'Комерцијално' most closely relates to commercial activity or a commercial enterprise. Depending on the context, a more accurate translation might be needed.",
-          "suggestion": "Consider context. Possible alternatives: 'Трговачки' (for a commercial building or activity), 'Оглас' (for an advertisement)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,13 +202,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '商业许可' (shangye xuqian) more accurately means 'commercial license' rather than simply 'commercial'. While related, it's not a direct equivalent.",
-          "suggestion": "Consider alternatives like '商业' (shangye) for a more direct translation of 'Commercial', or '商业用途' (shangye yongtu) for 'commercial use'."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -1,0 +1,51 @@
+// The shell content cell that hosts both the persistent frame and the
+// routed page's gating UI (rendered into the overlay layer above).
+.contentCell {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+}
+
+// Gating UI (EmptyView / install dialogs) renders here, above the frame.
+// When a live app is shown the page returns null, so this is empty and the
+// frame underneath is interactive. Disable hits except on actual children.
+.outletLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.host {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+}
+
+.slot {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+// Outgoing frame kept on screen while the incoming loads.
+.dimmed {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+// Incoming frame stacked above the dimmed outgoing, invisible until it
+// reports ready (then the reducer commit reveals it and drops the outgoing).
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}

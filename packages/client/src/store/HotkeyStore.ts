@@ -1,0 +1,1219 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { makeAutoObservable } from "mobx";
+import type { NavigateFunction } from "react-router";
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { RoomsType } from "@docspace/shared/enums";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import type FilesFilter from "@docspace/shared/api/files/filter";
+import type { TTranslation } from "@docspace/shared/types";
+
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
+import { clearTextSelection } from "@docspace/shared/utils/copy";
+
+import config from "PACKAGE_FILE";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { TABLE_HEADER_HEIGHT } from "@docspace/ui-kit/components/table/Table.constants";
+
+import type FilesSettingsStore from "./FilesSettingsStore";
+import type IndexingStore from "./IndexingStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
+import type { TSelectedFolder } from "./SelectedFolderStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+
+type TFilesItem = {
+  id: number | string;
+  title?: string;
+  fileExst?: string;
+  contentLength?: string | number;
+  parentId?: number | string;
+  isFolder?: boolean;
+  isEditing?: boolean;
+  security?: { Copy?: boolean; Move?: boolean };
+};
+
+type TOperationData = {
+  destFolderId: number | string | null;
+  destFolderInfo: TSelectedFolder;
+  folderIds: (number | string)[];
+  fileIds: (number | string)[];
+  deleteAfter: boolean;
+  isCopy: boolean;
+  itemsCount: number;
+  title?: string;
+  isFolder?: boolean;
+};
+
+type TFilesStore = {
+  viewAs: string;
+  selection: TFilesItem[];
+  filesList: TFilesItem[];
+  files: TFilesItem[];
+  folders: TFilesItem[];
+  hotkeyCaret: TFilesItem | null;
+  hotkeyCaretStart: TFilesItem | null;
+  hotkeysClipboard: TFilesItem[];
+  // FilesStore.activeFiles/activeFolders hold either plain ids
+  // or `{ id, destFolderId }` objects depending on the code path, so
+  // `activeFiles.includes(item.id)` below only matches the id-shaped entries.
+  activeFiles: unknown[];
+  activeFolders: unknown[];
+  filter: FilesFilter;
+  categoryType: number;
+  setSelection: (selection: TFilesItem[]) => void;
+  setSelected: (selected: "all" | "none") => void;
+  setHotkeyCaret: (caret: TFilesItem | null) => void;
+  setHotkeyCaretStart: (caret: TFilesItem | null) => void;
+  setHotkeysClipboard: (clipboard?: TFilesItem[]) => void;
+  deselectFile: (file: TFilesItem | null) => void;
+};
+
+type TDialogsStore = {
+  setMoveToPublicRoomVisible: (
+    visible: boolean,
+    operationData: TOperationData,
+  ) => void;
+};
+
+type TFilesActionsStore = {
+  mediaViewerDataStore: { isViewerOpen: boolean };
+  openFileAction: (item: TFilesItem, t: TTranslation) => void;
+  revokeFilesOrder: () => void;
+  checkFileConflicts: (
+    destFolderId: number | string | null,
+    folderIds: (number | string)[],
+    fileIds: (number | string)[],
+  ) => Promise<unknown[]>;
+  setSelectedItems: (title: string | undefined, length: number) => void;
+  setConflictDialogData: (
+    conflicts: unknown[],
+    operationData: TOperationData,
+  ) => void;
+  createFoldersTree: (t: TTranslation, files: unknown[]) => Promise<unknown[]>;
+};
+
+type TUploadDataStore = {
+  itemOperationToFolder: (operationData: TOperationData) => Promise<unknown>;
+  clearActiveOperations: (
+    fileIds: (number | string)[],
+    folderIds: (number | string)[],
+  ) => void;
+  startUpload: (files: unknown[], folderId: null, t: TTranslation) => void;
+};
+
+class HotkeyStore {
+  filesStore: TFilesStore;
+
+  dialogsStore: TDialogsStore;
+
+  filesSettingsStore: FilesSettingsStore;
+
+  filesActionsStore: TFilesActionsStore;
+
+  treeFoldersStore: TreeFoldersStore;
+
+  uploadDataStore: TUploadDataStore;
+
+  selectedFolderStore: SelectedFolderStore;
+
+  indexingStore: IndexingStore;
+
+  elemOffset = 0;
+
+  hotkeysClipboardAction: "move" | "copy" | null = null;
+
+  selectionAreaIsEnabled = true;
+
+  withContentSelection = false;
+
+  constructor(
+    filesStore: TFilesStore,
+    dialogsStore: TDialogsStore,
+    filesSettingsStore: FilesSettingsStore,
+    filesActionsStore: TFilesActionsStore,
+    treeFoldersStore: TreeFoldersStore,
+    uploadDataStore: TUploadDataStore,
+    selectedFolderStore: SelectedFolderStore,
+    indexingStore: IndexingStore,
+  ) {
+    makeAutoObservable(this);
+    this.filesStore = filesStore;
+    this.dialogsStore = dialogsStore;
+    this.filesSettingsStore = filesSettingsStore;
+    this.filesActionsStore = filesActionsStore;
+    this.treeFoldersStore = treeFoldersStore;
+    this.uploadDataStore = uploadDataStore;
+    this.selectedFolderStore = selectedFolderStore;
+    this.indexingStore = indexingStore;
+  }
+
+  scrollToCaret = () => {
+    const { offsetTop, item } = this.getItemOffset();
+
+    const scroll = isMobile()
+      ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
+      : document.getElementsByClassName("section-scroll")[0];
+
+    const stickySection = document.querySelector(".section-sticky-container");
+    const stickySectionHeight =
+      stickySection?.getBoundingClientRect().height ?? 0;
+
+    const tableHeaderHeight =
+      this.filesStore.viewAs === "table" ? TABLE_HEADER_HEIGHT : 0;
+
+    const scrollRect = scroll?.getBoundingClientRect();
+
+    if (item && item[0]) {
+      const el = item[0];
+      const rect = el.getBoundingClientRect();
+
+      // `scroll`/`scrollRect`/`offsetTop` can be
+      // null/undefined when the scroll container is not in the DOM — the
+      // original .js dereferenced them unguarded here; non-null assertions
+      // keep runtime identical.
+      if (
+        scrollRect!.top + scrollRect!.height - rect.height > rect.top &&
+        scrollRect!.top + stickySectionHeight + tableHeaderHeight < rect.top
+      ) {
+        // console.log("element is visible");
+      } else {
+        scroll!.scrollTo(0, offsetTop! - scrollRect!.height / 2);
+        // console.log("element is not visible");
+      }
+    } else {
+      scroll?.scrollTo(0, this.elemOffset - scrollRect!.height / 2);
+    }
+  };
+
+  activateHotkeys = (e: KeyboardEvent) => {
+    const infiniteLoaderComponent = document.getElementsByClassName(
+      "ReactVirtualized__List",
+    )[0] as HTMLElement;
+
+    if (infiniteLoaderComponent) {
+      infiniteLoaderComponent.tabIndex = -1;
+    }
+
+    const { isViewerOpen } = this.filesActionsStore.mediaViewerDataStore;
+
+    const someDialogIsOpen = checkDialogsOpen() || isViewerOpen;
+
+    if (
+      someDialogIsOpen ||
+      ((e.target as HTMLInputElement)?.tagName === "INPUT" &&
+        (e.target as HTMLInputElement).type !== "checkbox") ||
+      (e.target as HTMLElement)?.tagName === "TEXTAREA"
+    )
+      return e;
+
+    const isDefaultKeys =
+      ["PageUp", "PageDown", "Home", "End", "KeyV"].indexOf(e.code) > -1;
+
+    if (
+      ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
+        e.code,
+      ) > -1
+    ) {
+      e.preventDefault();
+    }
+
+    const { selection: s, hotkeyCaret, filesList } = this.filesStore;
+    const selection = s.length ? s : filesList;
+
+    if (!hotkeyCaret) {
+      const scroll = document.getElementsByClassName("section-scroll");
+      // `firstChild` is a nullable ChildNode — the original
+      // .js called `.focus()` on it unguarded; the cast keeps runtime
+      // identical.
+      scroll && scroll[0] && (scroll[0]?.firstChild as HTMLElement).focus();
+    }
+
+    if (!hotkeyCaret && selection.length) {
+      this.setCaret(selection[0], !(e.ctrlKey || e.metaKey || e.shiftKey));
+      this.filesStore.setHotkeyCaretStart(selection[0]);
+    }
+
+    if (!hotkeyCaret || isDefaultKeys) return e;
+  };
+
+  setCaret = (caret: TFilesItem, withScroll: boolean = true) => {
+    // TODO: inf-scroll
+    // const id = caret.isFolder ? `folder_${caret.id}` : `file_${caret.id}`;
+    // const elem = document.getElementById(id);
+    // if (!elem) return;
+
+    this.filesStore.setHotkeyCaret(caret);
+    withScroll && this.scrollToCaret();
+
+    const { offsetTop } = this.getItemOffset();
+    if (offsetTop) this.elemOffset = offsetTop;
+  };
+
+  getItemOffset = () => {
+    const { hotkeyCaret, viewAs } = this.filesStore;
+
+    // `hotkeyCaret` can be null — the original .js read
+    // `.fileExst` on it unguarded (callers ensure a caret is set); the
+    // non-null assertion keeps runtime identical.
+    const className = hotkeyCaret!.fileExst
+      ? `${hotkeyCaret!.id}_${hotkeyCaret!.fileExst}`
+      : `${hotkeyCaret!.id}`;
+
+    let item: HTMLCollectionOf<Element> | undefined =
+      document.getElementsByClassName(className);
+
+    if (viewAs === "table") {
+      item = item && item[0]?.getElementsByClassName("table-container_cell");
+    }
+
+    if (item && item[0]) {
+      const el = item[0] as HTMLElement;
+
+      const offset = el.closest<HTMLElement>(".window-item")?.offsetTop;
+
+      // the `parentElement` chain is nullable — the original
+      // .js dereferenced it unguarded; non-null assertions keep runtime
+      // identical.
+      const offsetTop =
+        offset ||
+        (viewAs === "tile"
+          ? el.parentElement!.parentElement!.offsetTop
+          : el.offsetTop);
+
+      return { offsetTop, item };
+    }
+
+    return { offsetTop: null, item: null };
+  };
+
+  selectFirstFile = () => {
+    const { filesList } = this.filesStore;
+
+    if (filesList.length) {
+      // scroll to first element
+      const scroll = isMobile()
+        ? document.querySelector(
+            "#customScrollBar > .scroll-wrapper > .scroller",
+          )
+        : document.getElementsByClassName("section-scroll")[0];
+
+      scroll?.scrollTo(0, 0);
+
+      this.filesStore.setSelection([filesList[0]]);
+      this.setCaret(filesList[0]);
+      this.filesStore.setHotkeyCaretStart(filesList[0]);
+    }
+  };
+
+  setSelectionWithCaret = (selection: TFilesItem[]) => {
+    this.filesStore.setSelection(selection);
+    this.setCaret(selection[0]);
+    this.filesStore.setHotkeyCaretStart(selection[0]);
+  };
+
+  selectFile = () => {
+    const { selection, setSelection, hotkeyCaret, setHotkeyCaretStart } =
+      this.filesStore;
+
+    const index = selection.findIndex(
+      (f) => f.id === hotkeyCaret?.id && f.isFolder === hotkeyCaret?.isFolder,
+    );
+    if (index !== -1) {
+      const newSelection = selection;
+      newSelection.splice(index, 1);
+      setSelection(newSelection);
+    } else if (hotkeyCaret) {
+      const newSelection = selection;
+      newSelection.push(hotkeyCaret);
+      setSelection(newSelection);
+      setHotkeyCaretStart(hotkeyCaret);
+    } else if (selection.length) {
+      this.setCaret(selection[0]);
+      setHotkeyCaretStart(selection[0]);
+    } else this.selectFirstFile();
+  };
+
+  selectBottom = () => {
+    const { viewAs, hotkeyCaret, selection } = this.filesStore;
+
+    if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
+    if (viewAs === "tile") this.setSelectionWithCaret([this.nextForTileDown]);
+    else if (this.nextFile) this.setSelectionWithCaret([this.nextFile]);
+  };
+
+  selectUpper = () => {
+    const { hotkeyCaret, viewAs, selection } = this.filesStore;
+
+    if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
+    if (viewAs === "tile") this.setSelectionWithCaret([this.prevForTileUp]);
+    else if (this.prevFile) this.setSelectionWithCaret([this.prevFile]);
+  };
+
+  selectLeft = () => {
+    const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
+      this.filesStore;
+    if (viewAs !== "tile") return;
+
+    if (!hotkeyCaret && !selection.length) {
+      this.selectFirstFile();
+
+      setHotkeyCaretStart(filesList[0]);
+    } else if (this.prevFile) {
+      this.setSelectionWithCaret([this.prevFile]);
+    }
+  };
+
+  selectRight = () => {
+    const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
+      this.filesStore;
+    if (viewAs !== "tile") return;
+
+    if (!hotkeyCaret && !selection.length) {
+      this.selectFirstFile();
+      setHotkeyCaretStart(filesList[0]);
+    } else if (this.nextFile) {
+      this.setSelectionWithCaret([this.nextFile]);
+    }
+  };
+
+  multiSelectBottom = () => {
+    const {
+      selection,
+      setSelection,
+      hotkeyCaretStart,
+      setHotkeyCaretStart,
+      hotkeyCaret,
+      viewAs,
+      deselectFile,
+      filesList,
+    } = this.filesStore;
+
+    if (!hotkeyCaretStart) {
+      setHotkeyCaretStart(hotkeyCaret);
+    }
+    if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
+
+    // `hotkeyCaret`/`hotkeyCaretStart`/`this.nextFile` are
+    // nullable — the original .js dereferenced them unguarded on these paths;
+    // non-null assertions keep runtime identical.
+    if (viewAs === "tile") {
+      if (
+        this.nextForTileDown.id === hotkeyCaret!.id &&
+        this.nextForTileDown.isFolder === hotkeyCaret!.isFolder
+      )
+        return;
+
+      setSelection(this.selectionsDown);
+      this.setCaret(this.nextForTileDown);
+    } else if (this.nextFile) {
+      if (selection.findIndex((f) => f.id === this.nextFile!.id) !== -1) {
+        const startIndex = filesList.findIndex(
+          (f) =>
+            f.id === hotkeyCaretStart!.id &&
+            f.isFolder === hotkeyCaretStart!.isFolder,
+        );
+
+        if (startIndex > (this.caretIndex as number)) {
+          deselectFile(hotkeyCaret);
+        }
+      } else {
+        setSelection([...selection, ...[this.nextFile]]);
+      }
+      this.setCaret(this.nextFile);
+    }
+  };
+
+  multiSelectUpper = () => {
+    const {
+      selection,
+      setSelection,
+      hotkeyCaretStart,
+      setHotkeyCaretStart,
+      hotkeyCaret,
+      viewAs,
+      deselectFile,
+      filesList,
+    } = this.filesStore;
+
+    if (!hotkeyCaretStart) {
+      setHotkeyCaretStart(hotkeyCaret);
+    }
+    if (!hotkeyCaret && !selection.length) this.selectFirstFile();
+
+    // `hotkeyCaret`/`hotkeyCaretStart`/`this.prevFile` are
+    // nullable — the original .js dereferenced them unguarded on these paths;
+    // non-null assertions keep runtime identical.
+    if (viewAs === "tile") {
+      if (
+        this.prevForTileUp.id === hotkeyCaret!.id &&
+        this.prevForTileUp.isFolder === hotkeyCaret!.isFolder
+      )
+        return;
+
+      setSelection(this.selectionsUp);
+      this.setCaret(this.prevForTileUp);
+    } else if (this.prevFile) {
+      if (
+        selection.findIndex(
+          (f) =>
+            f.id === this.prevFile!.id &&
+            f.isFolder === this.prevFile!.isFolder,
+        ) !== -1
+      ) {
+        const startIndex = filesList.findIndex(
+          (f) =>
+            f.id === hotkeyCaretStart!.id &&
+            f.isFolder === hotkeyCaretStart!.isFolder,
+        );
+
+        if (startIndex < (this.caretIndex as number)) {
+          deselectFile(hotkeyCaret);
+        }
+      } else {
+        setSelection([...[this.prevFile], ...selection]);
+      }
+
+      this.setCaret(this.prevFile);
+    }
+  };
+
+  multiSelectRight = () => {
+    const {
+      selection,
+      setSelection,
+      hotkeyCaret,
+      viewAs,
+      hotkeyCaretStart,
+      filesList,
+    } = this.filesStore;
+    if (viewAs !== "tile") return;
+
+    if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
+
+    const nextFile = this.nextFile;
+    if (!nextFile) return;
+
+    const hotkeyCaretStartIndex = filesList.findIndex(
+      (f) =>
+        f.id === hotkeyCaretStart?.id &&
+        f.isFolder === hotkeyCaretStart?.isFolder,
+    );
+
+    const nextCaretIndex = (this.caretIndex as number) + 1;
+    let nextForTileRight = selection;
+
+    let iNext = hotkeyCaretStartIndex;
+    if (iNext < nextCaretIndex) {
+      while (iNext !== nextCaretIndex + 1) {
+        if (filesList[iNext]) {
+          if (
+            nextForTileRight.findIndex(
+              (f) =>
+                f.id === filesList[iNext].id &&
+                f.isFolder === filesList[iNext].isFolder,
+            ) !== -1
+          ) {
+            nextForTileRight.filter(
+              (f) =>
+                f.id === filesList[iNext].id &&
+                f.isFolder === filesList[iNext].isFolder,
+            );
+          } else {
+            nextForTileRight.push(filesList[iNext]);
+          }
+        }
+        iNext++;
+      }
+    }
+
+    if ((this.caretIndex as number) < hotkeyCaretStartIndex) {
+      // `hotkeyCaret` is nullable — the original .js
+      // dereferenced it unguarded here; non-null assertions keep runtime
+      // identical.
+      const idx = nextForTileRight.findIndex(
+        (f) => f.id === hotkeyCaret!.id && f.isFolder === hotkeyCaret!.isFolder,
+      );
+      nextForTileRight = nextForTileRight.filter((_, index) => index !== idx);
+    }
+
+    setSelection(nextForTileRight);
+
+    this.setCaret(nextFile);
+  };
+
+  multiSelectLeft = () => {
+    const {
+      selection,
+      setSelection,
+      hotkeyCaret,
+      viewAs,
+      filesList,
+      hotkeyCaretStart,
+    } = this.filesStore;
+    if (viewAs !== "tile") return;
+
+    if (!hotkeyCaret && !selection.length) return this.selectFirstFile();
+
+    const prevFile = this.prevFile;
+    if (!prevFile) return;
+
+    const hotkeyCaretStartIndex = filesList.findIndex(
+      (f) =>
+        f.id === hotkeyCaretStart?.id &&
+        f.isFolder === hotkeyCaretStart?.isFolder,
+    );
+
+    const prevCaretIndex = (this.caretIndex as number) - 1;
+    let prevForTileLeft = selection;
+
+    let iPrev = hotkeyCaretStartIndex;
+    if (iPrev > prevCaretIndex) {
+      while (iPrev !== prevCaretIndex - 1) {
+        if (filesList[iPrev]) {
+          if (
+            prevForTileLeft.findIndex(
+              (f) =>
+                f.id === filesList[iPrev].id &&
+                f.isFolder === filesList[iPrev].isFolder,
+            ) !== -1
+          ) {
+            prevForTileLeft.filter(
+              (f) =>
+                f.id === filesList[iPrev].id &&
+                f.isFolder === filesList[iPrev].isFolder,
+            );
+          } else {
+            prevForTileLeft.push(filesList[iPrev]);
+          }
+        }
+        iPrev--;
+      }
+    }
+
+    if ((this.caretIndex as number) > hotkeyCaretStartIndex) {
+      // `hotkeyCaret` is nullable — the original .js
+      // dereferenced it unguarded here; non-null assertions keep runtime
+      // identical.
+      const idx = prevForTileLeft.findIndex(
+        (f) => f.id === hotkeyCaret!.id && f.isFolder === hotkeyCaret!.isFolder,
+      );
+      prevForTileLeft = prevForTileLeft.filter((_, index) => index !== idx);
+    }
+
+    setSelection(prevForTileLeft);
+    this.setCaret(prevFile);
+  };
+
+  moveCaretBottom = () => {
+    const { viewAs } = this.filesStore;
+
+    if (viewAs === "tile") this.setCaret(this.nextForTileDown);
+    else if (this.nextFile) this.setCaret(this.nextFile);
+  };
+
+  moveCaretUpper = () => {
+    const { viewAs } = this.filesStore;
+
+    if (viewAs === "tile") this.setCaret(this.prevForTileUp);
+    else if (this.prevFile) this.setCaret(this.prevFile);
+  };
+
+  moveCaretLeft = () => {
+    if (this.prevFile) this.setCaret(this.prevFile);
+  };
+
+  moveCaretRight = () => {
+    if (this.nextFile) this.setCaret(this.nextFile);
+  };
+
+  openItem = (t: TTranslation) => {
+    const { selection } = this.filesStore;
+
+    const someDialogIsOpen = checkDialogsOpen();
+
+    selection.length === 1 &&
+      !someDialogIsOpen &&
+      this.filesActionsStore.openFileAction(selection[0], t);
+  };
+
+  selectAll = () => {
+    const { filesList, hotkeyCaret, setHotkeyCaretStart, setSelected } =
+      this.filesStore;
+
+    setSelected("all");
+    if (!hotkeyCaret && filesList.length) {
+      this.setCaret(filesList[0]);
+      setHotkeyCaretStart(filesList[0]);
+    }
+  };
+
+  deselectAll = () => {
+    const { setSelected } = this.filesStore;
+    const { revokeFilesOrder } = this.filesActionsStore;
+    const { isIndexEditingMode, setIsIndexEditingMode } = this.indexingStore;
+
+    if (isIndexEditingMode) {
+      revokeFilesOrder();
+      setIsIndexEditingMode(false);
+
+      return;
+    }
+
+    this.elemOffset = 0;
+    setSelected("none");
+  };
+
+  goToHomePage = (navigate: NavigateFunction) => {
+    const { filter, categoryType } = this.filesStore;
+
+    const filterParamsStr = filter.toUrlParams();
+
+    const url = getCategoryUrl(categoryType, filter.folder);
+
+    navigate(
+      combineUrl(
+        window.ClientConfig?.proxy?.url,
+        config.homepage,
+        `${url}?${filterParamsStr}`,
+      ),
+    );
+  };
+
+  uploadFile = (
+    isFolder: boolean,
+    navigate: NavigateFunction,
+    t: TTranslation,
+  ) => {
+    if (isFolder) {
+      if (this.treeFoldersStore.isPrivacyFolder) return;
+      const folderInput = document.getElementById("customFolderInput");
+      folderInput && folderInput.click();
+    } else {
+      const fileInput = document.getElementById("customFileInput");
+      fileInput && fileInput.click();
+    }
+  };
+
+  copyToClipboard = (t: TTranslation, isCut?: boolean) => {
+    const { selection, setHotkeysClipboard } = this.filesStore;
+
+    const canCopy = selection.every((s) => s.security?.Copy);
+    const canMove = selection.every((s) => s.security?.Move);
+
+    if (!canCopy || (isCut && !canMove) || !selection.length) return;
+
+    setHotkeysClipboard();
+    this.hotkeysClipboardAction = isCut ? "move" : "copy";
+
+    const copyText = `${t("AddedToClipboard")}: ${selection.length}`;
+    toastr.success(copyText);
+  };
+
+  moveFilesFromClipboard = (t: TTranslation) => {
+    const fileIds: (number | string)[] = [];
+    const folderIds: (number | string)[] = [];
+
+    const {
+      id: selectedItemId,
+      roomType,
+      security,
+      getSelectedFolder,
+    } = this.selectedFolderStore;
+    const { activeFiles, activeFolders, hotkeysClipboard } = this.filesStore;
+    const { checkFileConflicts, setSelectedItems, setConflictDialogData } =
+      this.filesActionsStore;
+    const { itemOperationToFolder, clearActiveOperations } =
+      this.uploadDataStore;
+
+    const isCopy = this.hotkeysClipboardAction === "copy";
+    const selections = isCopy
+      ? hotkeysClipboard
+      : hotkeysClipboard.filter((f) => f && !f?.isEditing);
+
+    if (!selections.length) return;
+
+    // `security` is nullable on SelectedFolderStore — the
+    // original .js read `.CopyTo`/`.MoveTo` unguarded; non-null assertions
+    // keep runtime identical.
+    if (!security!.CopyTo || !security!.MoveTo) return;
+
+    const isPublic = roomType === RoomsType.PublicRoom;
+
+    selections.forEach((item) => {
+      if (item.fileExst || item.contentLength) {
+        const fileInAction = activeFiles.includes(item.id);
+        if (!fileInAction) {
+          fileIds.push(item.id);
+        }
+      } else if (item.id === selectedItemId) {
+        toastr.error(t("Common:MoveToFolderMessage"));
+      } else {
+        const folderInAction = activeFolders.includes(item.id);
+
+        if (!folderInAction) {
+          folderIds.push(item.id);
+        }
+      }
+    });
+
+    const itemsLength = folderIds.length + fileIds.length;
+
+    if (folderIds.length || fileIds.length) {
+      const operationData: TOperationData = {
+        destFolderId: selectedItemId,
+        destFolderInfo: getSelectedFolder(),
+        folderIds,
+        fileIds,
+        deleteAfter: false,
+        isCopy,
+        itemsCount: itemsLength,
+        ...(itemsLength === 1 && {
+          title: selections[0].title,
+          isFolder: selections[0].isFolder,
+        }),
+      };
+
+      // `selections` is an array, so `selections.rootFolderType`
+      // is always undefined at runtime (looks like a latent bug — probably
+      // meant `selections[0].rootFolderType`); the cast keeps the original
+      // runtime behavior.
+      if (
+        isPublic &&
+        !(selections as TFilesItem[] & { rootFolderType?: unknown })
+          .rootFolderType
+      ) {
+        this.dialogsStore.setMoveToPublicRoomVisible(true, operationData);
+        return;
+      }
+
+      const fileTitle = hotkeysClipboard.find((f) => f.title)?.title;
+      setSelectedItems(fileTitle, hotkeysClipboard.length);
+
+      checkFileConflicts(selectedItemId, folderIds, fileIds)
+        .then(async (conflicts) => {
+          if (conflicts.length) {
+            setConflictDialogData(conflicts, operationData);
+          } else {
+            await itemOperationToFolder(operationData);
+          }
+        })
+        .catch(() => {
+          clearActiveOperations(fileIds, folderIds);
+        })
+        .finally(() => {
+          this.filesStore.setHotkeysClipboard([]);
+        });
+    } else {
+      toastr.error(t("Common:ErrorEmptyList"));
+    }
+  };
+
+  uploadClipboardFiles = async (t: TTranslation, event: ClipboardEvent) => {
+    const { createFoldersTree } = this.filesActionsStore;
+    const { startUpload } = this.uploadDataStore;
+
+    // Return early if the event target is an input or textarea element
+    if (
+      event &&
+      event.target &&
+      ((event.target as HTMLElement).tagName === "INPUT" ||
+        (event.target as HTMLElement).tagName === "TEXTAREA")
+    ) {
+      return;
+    }
+
+    if (this.filesStore.hotkeysClipboard.length) {
+      return this.moveFilesFromClipboard(t);
+    }
+
+    const files = await getFilesFromEvent(event);
+
+    createFoldersTree(t, files)
+      .then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      })
+      .catch((err) => {
+        toastr.error(err as string, null, 0, true);
+      });
+  };
+
+  setSelectionAreaIsEnabled = (selectionAreaIsEnabled: boolean) => {
+    this.selectionAreaIsEnabled = selectionAreaIsEnabled;
+  };
+
+  setWithContentSelection = (withContentSelection: boolean) => {
+    this.withContentSelection = withContentSelection;
+  };
+
+  enableSelection = (e: KeyboardEvent) => {
+    if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      clearTextSelection();
+      this.setSelectionAreaIsEnabled(false);
+      this.setWithContentSelection(true);
+    } else if (e.type === "keyup") {
+      this.setSelectionAreaIsEnabled(true);
+    }
+    e.preventDefault();
+  };
+
+  getTileItems = (item: Element, itemId: string) => {
+    const tileItems = item.querySelectorAll(".tile-item");
+    let id: string | null = null;
+
+    tileItems.forEach((tileItem) => {
+      if ((tileItem.childNodes[0] as HTMLElement).id === itemId) {
+        id = (tileItem.childNodes[0] as HTMLElement).id;
+      }
+    });
+
+    return id;
+  };
+
+  openContextMenu = () => {
+    const { selection, filesList, viewAs } = this.filesStore;
+
+    if (!selection.length) return;
+
+    const index = filesList.findIndex(
+      (i) => i.id === selection[0].id && i.isFolder === selection[0].isFolder,
+    );
+    const firstSelectedItem = filesList[index];
+    const itemId = firstSelectedItem.isFolder
+      ? `folder_${firstSelectedItem.id}`
+      : `file_${firstSelectedItem.id}`;
+
+    const windowItems = document.querySelectorAll(".window-item");
+
+    windowItems.forEach((item) => {
+      let nodeId = (item.childNodes[0] as HTMLElement).id;
+
+      if (viewAs === "tile") {
+        nodeId = this.getTileItems(item, itemId) ?? nodeId;
+      }
+
+      if (nodeId === itemId) {
+        const cmButton = item.querySelector(".context-menu-button");
+        if (!cmButton) return;
+
+        const rect = cmButton.getBoundingClientRect();
+
+        const event = new MouseEvent("contextmenu", {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: rect.left,
+          clientY: rect.top,
+          button: 2,
+        });
+
+        cmButton.dispatchEvent(event);
+        this.selectFile();
+      }
+    });
+  };
+
+  get countTilesInRow() {
+    return getCountTilesInRow(this.treeFoldersStore?.isRoomsFolder);
+  }
+
+  get division() {
+    const { folders } = this.filesStore;
+    return folders.length % this.countTilesInRow;
+  }
+
+  get countOfMissingFiles() {
+    return this.division ? this.countTilesInRow - this.division : 0;
+  }
+
+  get caretIsFolder() {
+    const { filesList } = this.filesStore;
+
+    if (this.caretIndex !== -1) {
+      return filesList[this.caretIndex as number]?.isFolder;
+    }
+    return false;
+  }
+
+  // `caretIndex` returns null (never -1) when nothing is
+  // found, so the `!== -1` checks at the call sites are always true and the
+  // arithmetic there relies on JS null coercion (e.g. `null + 1 === 1`). The
+  // `as number` casts at those sites keep runtime identical.
+  get caretIndex() {
+    const { filesList, hotkeyCaret, selection } = this.filesStore;
+
+    const item =
+      hotkeyCaret ||
+      (selection.length
+        ? selection.length === 1
+          ? selection[0]
+          : selection[selection.length - 1]
+        : null);
+
+    const caretIndex = filesList.findIndex(
+      (f) => f.id === item?.id && f.isFolder === item?.isFolder,
+    );
+
+    if (caretIndex !== -1) return caretIndex;
+    return null;
+  }
+
+  get nextFile(): TFilesItem | null {
+    const { filesList } = this.filesStore;
+
+    if (this.caretIndex !== -1) {
+      const nextCaretIndex = (this.caretIndex as number) + 1;
+      return filesList[nextCaretIndex];
+    }
+    return null;
+  }
+
+  get nextForTileDown() {
+    const { filesList, folders, files } = this.filesStore;
+    const nextTileFile =
+      filesList[(this.caretIndex as number) + this.countTilesInRow];
+    const foldersLength = folders.length;
+
+    let nextForTileDown = nextTileFile || filesList[filesList.length - 1];
+
+    // Next tile
+
+    if (nextForTileDown.isFolder !== this.caretIsFolder) {
+      const indexForNextTile =
+        (this.caretIndex as number) +
+        this.countTilesInRow -
+        this.countOfMissingFiles;
+
+      nextForTileDown =
+        foldersLength - (this.caretIndex as number) - 1 <= this.division ||
+        this.division === 0
+          ? filesList[indexForNextTile]
+            ? filesList[indexForNextTile]
+            : files[0]
+          : folders[foldersLength - 1];
+    } else if (!nextTileFile) {
+      // const pp = filesList.findIndex((f) => f.id === nextForTileDown?.id);
+      // if (pp < this.caretIndex + this.countTilesInRow) {
+      //   nextForTileDown = hotkeyCaret;
+      // }
+    }
+
+    if (nextForTileDown.isFolder === undefined) {
+      nextForTileDown.isFolder = !!nextForTileDown.parentId;
+    }
+
+    return nextForTileDown;
+  }
+
+  get prevFile(): TFilesItem | null {
+    const { filesList } = this.filesStore;
+
+    if (this.caretIndex !== -1) {
+      const prevCaretIndex = (this.caretIndex as number) - 1;
+      return filesList[prevCaretIndex];
+    }
+    return null;
+  }
+
+  get prevForTileUp() {
+    const { filesList, folders, hotkeyCaret } = this.filesStore;
+    const foldersLength = folders.length;
+
+    const prevTileFile =
+      filesList[(this.caretIndex as number) - this.countTilesInRow];
+    let prevForTileUp = prevTileFile || filesList[0];
+
+    if (prevForTileUp.isFolder !== this.caretIsFolder) {
+      const indexForPrevTile =
+        (this.caretIndex as number) -
+        this.countTilesInRow +
+        this.countOfMissingFiles;
+
+      prevForTileUp = filesList[indexForPrevTile]
+        ? filesList[indexForPrevTile].isFolder
+          ? filesList[indexForPrevTile]
+          : folders[foldersLength - 1]
+        : folders[foldersLength - 1];
+    } else if (!prevTileFile) {
+      // `hotkeyCaret` can be null — the original .js assigned
+      // it here and dereferenced `.isFolder` below unguarded; the non-null
+      // assertion keeps runtime identical.
+      prevForTileUp = hotkeyCaret!;
+    }
+
+    if (prevForTileUp.isFolder === undefined) {
+      prevForTileUp.isFolder = !!prevForTileUp.parentId;
+    }
+
+    return prevForTileUp;
+  }
+
+  get selectionsDown() {
+    const { filesList, hotkeyCaretStart, viewAs, selection } = this.filesStore;
+    let selectionsDown: TFilesItem[] = JSON.parse(JSON.stringify(selection));
+
+    const hotkeyCaretStartIndex = filesList.findIndex(
+      (f) =>
+        f.id === hotkeyCaretStart?.id &&
+        f.isFolder === hotkeyCaretStart?.isFolder,
+    );
+
+    const firstSelectionIndex = filesList.findIndex(
+      (f) => f.id === selection[0]?.id && f.isFolder === selection[0]?.isFolder,
+    );
+
+    const nextForTileDownIndex = filesList.findIndex(
+      (f) =>
+        f.id === this.nextForTileDown?.id &&
+        f.isFolder === this.nextForTileDown?.isFolder,
+    );
+
+    let nextForTileDownItemIndex = nextForTileDownIndex;
+
+    const itemIndexDown =
+      hotkeyCaretStartIndex !== -1 &&
+      hotkeyCaretStartIndex < firstSelectionIndex
+        ? hotkeyCaretStartIndex
+        : firstSelectionIndex;
+
+    if (itemIndexDown !== -1 && viewAs === "tile") {
+      if (nextForTileDownItemIndex === -1) {
+        nextForTileDownItemIndex = itemIndexDown + this.countTilesInRow;
+      }
+
+      let itemIndex = this.caretIndex as number;
+
+      while (itemIndex !== nextForTileDownItemIndex) {
+        const fileIndex = selectionsDown.findIndex(
+          (f) =>
+            f.id === filesList[itemIndex].id &&
+            f.isFolder === filesList[itemIndex].isFolder,
+        );
+
+        if (fileIndex === -1) {
+          selectionsDown.push(filesList[itemIndex]);
+        } else if (hotkeyCaretStartIndex > itemIndex) {
+          selectionsDown = selectionsDown.filter(
+            (_, index) => index !== fileIndex,
+          );
+        }
+
+        itemIndex++;
+      }
+
+      if (
+        selectionsDown.findIndex(
+          (f) =>
+            f.id === this.nextForTileDown.id &&
+            f.isFolder === this.nextForTileDown.isFolder,
+        ) === -1
+      ) {
+        selectionsDown.push(this.nextForTileDown);
+      }
+    }
+
+    return selectionsDown;
+  }
+
+  get selectionsUp() {
+    const { filesList, viewAs, selection, hotkeyCaretStart } = this.filesStore;
+
+    let selectionsUp: TFilesItem[] = JSON.parse(JSON.stringify(selection));
+
+    const hotkeyCaretStartIndex = filesList.findIndex(
+      (f) =>
+        f.id === hotkeyCaretStart?.id &&
+        f.isFolder === hotkeyCaretStart?.isFolder,
+    );
+
+    const firstSelectionIndex = filesList.findIndex(
+      (f) => f.id === selection[0]?.id && f.isFolder === selection[0]?.isFolder,
+    );
+
+    const prevForTileUpIndex = filesList.findIndex(
+      (f) =>
+        f.id === this.prevForTileUp?.id &&
+        f.isFolder === this.prevForTileUp?.isFolder,
+    );
+    let prevForTileUpItemIndex = prevForTileUpIndex;
+
+    const itemIndexUp =
+      hotkeyCaretStartIndex !== -1 &&
+      hotkeyCaretStartIndex > firstSelectionIndex
+        ? hotkeyCaretStartIndex
+        : firstSelectionIndex;
+
+    if (itemIndexUp !== -1 && viewAs === "tile") {
+      if (prevForTileUpItemIndex === -1) {
+        prevForTileUpItemIndex = itemIndexUp - this.countTilesInRow;
+      }
+
+      let itemIndex = this.caretIndex as number;
+
+      while (itemIndex !== prevForTileUpItemIndex) {
+        const fileIndex = selectionsUp.findIndex(
+          (f) =>
+            f.id === filesList[itemIndex].id &&
+            f.isFolder === filesList[itemIndex].isFolder,
+        );
+
+        if (fileIndex === -1) {
+          selectionsUp.push(filesList[itemIndex]);
+        } else if (hotkeyCaretStartIndex < itemIndex) {
+          selectionsUp = selectionsUp.filter((_, index) => index !== fileIndex);
+        }
+
+        itemIndex--;
+      }
+
+      if (
+        selectionsUp.findIndex(
+          (f) =>
+            f.id === this.prevForTileUp.id &&
+            f.isFolder === this.prevForTileUp.isFolder,
+        ) === -1
+      ) {
+        selectionsUp.push(this.prevForTileUp);
+      }
+    }
+
+    return selectionsUp;
+  }
+}
+
+export default HotkeyStore;

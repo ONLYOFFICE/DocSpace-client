@@ -1,8 +1,11 @@
 {
-  "ChangeData": "Modificare date și parolă\n",
-  "ClickButtonBelow": "Dacă doriți să vă conectați folosind adresa dvs de e-mail, setați parola dvs. <br /> Odată ce va fi gata, faceți clic pe butonul de mai jos.\n",
-  "ContinueToProduct": "Procedează la {{productName}}\n",
-  "GeneratedPassword": "Parolă generată\n",
-  "ProductNameDetail": "Denumire {{productName}}\n",
-  "ReviewAccountDetails": "Vă rugăm să acordați câteva momente pentru a revizui detaliile contului dvs:\n"
+  "ChangeData": "Modificare date și parolă",
+  "ClickButtonBelow": "Dacă doriți să vă autentificați folosind adresa de e-mail, vă rugăm să vă setați propria parolă. <br /> După ce ați terminat, vă rugăm să faceți clic pe butonul de mai jos.",
+  "ContinueToProduct": "Procedează la {{productName}}",
+  "GeneratedPassword": "Parolă generată",
+  "ProductNameDetail": "Denumire {{productName}}",
+  "ReviewAccountDetails": "Vă rugăm să acordați câteva momente pentru a revizui detaliile contului dvs:",
+  "SetEmailPassword": "Setare parolă",
+  "WelcomeSubtitle": "Spațiul dvs. a fost creat cu succes. Examinați detaliile profilului dvs. și începeți să lucrați.",
+  "YourProfileDetails": "Detaliile profilului dvs"
 }

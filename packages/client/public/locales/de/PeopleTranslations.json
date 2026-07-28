@@ -23,7 +23,7 @@
   "RemoveGuestsDescription": "Ausgewählte Gäste werden aus allen Räumen entfernt, in die Sie sie eingeladen haben. Diese Aktion kann nicht rückgängig gemacht werden.",
   "ResetAuth": "Authentifizierung zurücksetzen",
   "SendInviteAgain": "Einladung erneut senden",
-  "ShareGuest": "Gast teilen",
+  "ShareGuest": "Gastinformationen teilen",
   "SSOAccountTooltip": "Dieses Benutzerkonto wird von SSO geladen. Wenn Sie den Benutzernamen und die E-Mail-Adresse ändern müssen, wenden Sie sich an den SSO-Server.",
   "StandardLogin": "Standardmäßige Anmeldung",
   "SuccessChangeGuestStatus": "Der Gaststatus wurde erfolgreich geändert",
@@ -31,7 +31,7 @@
   "SuccessCopyContantLink": "Kontaktlink erfolgreich kopiert. Der Link ist <strong>7 Tage gültig</strong>.",
   "SuccessDeleteGroup": "Die Gruppe wurde erfolgreich entfernt",
   "SuccessDeleteGroups": "Die Gruppen wurden erfolgreich entfernt",
-  "SuccessDeletePersonalData": "Alle persönlichen Daten wurden erfolgreich gelöscht",
+  "SuccessDeletePersonalData": "Persönliche Daten wurden erfolgreich gelöscht",
   "SuccessSentInvitation": "Die Einladung wurde erfolgreich gesendet",
   "SuccessSentMultipleInvitatios": "Einladungen wurden erfolgreich versendet",
   "WithoutGroup": "Ohne Gruppe"

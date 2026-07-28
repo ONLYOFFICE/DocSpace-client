@@ -1,31 +1,38 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import React from "react";
-import { ThemeProvider } from "styled-components";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -36,7 +43,6 @@ import {
 	RoomsType,
 	ShareAccessRights,
 } from "../../enums";
-import { Base } from "@docspace/ui-kit/providers/theme";
 import Badges from ".";
 import styles from "./Badges.module.scss";
 
@@ -86,38 +92,34 @@ describe("<Badges />", () => {
 		showNew: true,
 	};
 
-	const renderWithTheme = (ui: React.ReactElement) => {
-		return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-	};
-
 	beforeEach(() => {
 		vi.clearAllMocks();
 	});
 
 	describe("Rendering", () => {
 		it("renders Badges component", () => {
-			renderWithTheme(<Badges {...defaultProps} />);
+			render(<Badges {...defaultProps} />);
 			const badgesElement = screen.getByTestId("badges");
 			expect(badgesElement).toBeInTheDocument();
 		});
 
 		it("renders with correct class based on viewAs prop", () => {
 			// Test each viewAs prop in separate test renders
-			const { unmount: unmountTable } = renderWithTheme(
+			const { unmount: unmountTable } = render(
 				<Badges {...defaultProps} viewAs="table" />,
 			);
 			const tableBadgesElement = screen.getByTestId("badges");
 			expect(tableBadgesElement).toHaveClass(styles.tableView);
 			unmountTable();
 
-			const { unmount: unmountRow } = renderWithTheme(
+			const { unmount: unmountRow } = render(
 				<Badges {...defaultProps} viewAs="row" />,
 			);
 			const rowBadgesElement = screen.getByTestId("badges");
 			expect(rowBadgesElement).toHaveClass(styles.rowView);
 			unmountRow();
 
-			const { unmount: unmountTile } = renderWithTheme(
+			const { unmount: unmountTile } = render(
 				<Badges {...defaultProps} viewAs="tile" />,
 			);
 			const tileBadgesElement = screen.getByTestId("badges");
@@ -126,7 +128,7 @@ describe("<Badges />", () => {
 		});
 
 		it("renders with custom className", () => {
-			renderWithTheme(<Badges {...defaultProps} className="custom-class" />);
+			render(<Badges {...defaultProps} className="custom-class" />);
 			const badgesElement = screen.getByTestId("badges");
 			expect(badgesElement).toHaveClass("custom-class");
 		});
@@ -135,7 +137,7 @@ describe("<Badges />", () => {
 	describe("Badge rendering based on item properties", () => {
 		it("renders version badge when version count is present", () => {
 			const item = { ...defaultItem, version: 1000 };
-			renderWithTheme(<Badges {...defaultProps} item={item} />);
+			render(<Badges {...defaultProps} item={item} />);
 
 			// The badge container should be present
 			const badgesContainer = screen.getByTestId("badges");
@@ -144,7 +146,7 @@ describe("<Badges />", () => {
 
 		it("renders '999+' for large version numbers", () => {
 			const item = { ...defaultItem, version: 1000 };
-			renderWithTheme(<Badges {...defaultProps} item={item} />);
+			render(<Badges {...defaultProps} item={item} />);
 
 			// Check for the badge container instead of specific text
 			const badgesContainer = screen.getByTestId("badges");
@@ -156,7 +158,7 @@ describe("<Badges />", () => {
 				...defaultItem,
 				formFillingStatus: FileFillingFormStatus.Completed,
 			};
-			renderWithTheme(<Badges {...defaultProps} item={item} />);
+			render(<Badges {...defaultProps} item={item} />);
 
 			// Check for the badge container instead of specific text
 			const badgesContainer = screen.getByTestId("badges");
@@ -168,7 +170,7 @@ describe("<Badges />", () => {
 
 		it("renders draft badge when hasDraft is true", () => {
 			const item = { ...defaultItem, hasDraft: true };
-			renderWithTheme(<Badges {...defaultProps} item={item} />);
+			render(<Badges {...defaultProps} item={item} />);
 
 			// The badge text is rendered as "Common:BadgeMyDraftTitle" instead
 			const draftBadge = screen.getByText("Common:BadgeMyDraftTitle");
@@ -177,7 +179,7 @@ describe("<Badges />", () => {
 
 		it("renders new badge when new count is present", () => {
 			const item = { ...defaultItem, new: 5 };
-			renderWithTheme(<Badges {...defaultProps} item={item} />);
+			render(<Badges {...defaultProps} item={item} />);
 
 			// The badge text is rendered as "Common:New" instead of the count
 			const newBadge = screen.getByText("Common:New");
@@ -187,7 +189,7 @@ describe("<Badges />", () => {
 		it("renders pin badge when pinned is true", () => {
 			const item = { ...defaultItem, pinned: true };
 			const onUnpinClick = vi.fn();
-			renderWithTheme(
+			render(
 				<Badges {...defaultProps} item={item} onUnpinClick={onUnpinClick} />,
 			);
 
@@ -199,7 +201,7 @@ describe("<Badges />", () => {
 		it("renders mute badge when mute is true", () => {
 			const item = { ...defaultItem, mute: true };
 			const onUnmuteClick = vi.fn();
-			renderWithTheme(
+			render(
 				<Badges {...defaultProps} item={item} onUnmuteClick={onUnmuteClick} />,
 			);
 
@@ -210,7 +212,7 @@ describe("<Badges />", () => {
 
 		it("renders custom filter badge when customFilterEnabled is true", () => {
 			const item = { ...defaultItem, customFilterEnabled: true };
-			renderWithTheme(
+			render(
 				<Badges {...defaultProps} item={item} isExtsCustomFilter />,
 			);
 
@@ -228,7 +230,7 @@ describe("<Badges />", () => {
 				shared: true,
 			};
 			const onCopyPrimaryLink = vi.fn();
-			renderWithTheme(
+			render(
 				<Badges
 					{...defaultProps}
 					item={item}
@@ -250,7 +252,7 @@ describe("<Badges />", () => {
 				lockedBy: "John Doe",
 			};
 
-			renderWithTheme(
+			render(
 				<Badges {...defaultProps} item={lockedItem} viewAs="row" />,
 			);
 
@@ -267,7 +269,7 @@ describe("<Badges />", () => {
 				lockedBy: "John Doe",
 			};
 
-			renderWithTheme(
+			render(
 				<Badges
 					{...defaultProps}
 					item={lockedItem}
@@ -294,7 +296,7 @@ describe("<Badges />", () => {
 				},
 			};
 
-			renderWithTheme(
+			render(
 				<Badges
 					{...defaultProps}
 					item={lockedItem}
@@ -316,7 +318,7 @@ describe("<Badges />", () => {
 				lockedBy: "John Doe",
 			};
 
-			renderWithTheme(
+			render(
 				<Badges {...defaultProps} item={lockedItem} viewAs="tile" />,
 			);
 
@@ -335,7 +337,7 @@ describe("<Badges />", () => {
 				},
 			};
 
-			renderWithTheme(
+			render(
 				<Badges {...defaultProps} item={lockedItem} viewAs="row" />,
 			);
 

@@ -3,16 +3,17 @@
   "content": "Link was deleted",
   "content_en_sha1_hash": "7ec9741f0ef568382146dd5d0aabb201e06b9fe7",
   "created_at": "2025-05-19T21:30:54.778Z",
-  "updated_at": "2025-08-26T11:15:14.133Z",
+  "updated_at": "2026-05-15T14:00:06.732Z",
   "comment": {
-    "text": "The translation key \"FeedLinkWasDeleted\" is used to display a message when a feed link has been deleted. In the UI, this message appears as an error notification when editing a shared feed, prompting the user to view the updated room external link history. Translators should provide a concise and clear equivalent in their target language to convey this action.",
+    "text": "This is an error toast message displayed when a user attempts to edit a shared link that has already been deleted.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:10.014Z"
+    "updated_at": "2026-04-11T21:13:46.488Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/RoomExternalLink.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "const { t } = useTranslation([\"InfoPanel\"]);\n \n const onEditLink = () => {\n if (!feedData.sharedTo) {\n toastr.error(t(\"FeedLinkWasDeleted\"));\n return;\n }\n \n if (!selection || !isSharedLink(feedData)) {\n return;",
       "module": "/packages/client"
     }
@@ -148,18 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ලිංකිය ඉවත් කර ඇත' while understandable, is a bit literal. A more natural Sinhala phrasing would be something like 'දුරුවා දැමුව' (duruvaa d'amuvva) or 'පාස තැවරුව' (paasa thaweruvva) meaning 'removed' or 'disabled'.",
-          "suggestion": "දුරුවා දැමුව"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

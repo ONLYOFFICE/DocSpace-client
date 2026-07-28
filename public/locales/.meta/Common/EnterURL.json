@@ -1,0 +1,251 @@
+{
+  "key_path": "EnterURL",
+  "content": "Enter URL",
+  "content_en_sha1_hash": "ae5afe234b1427d8cf89877643fbda2757a1d47d",
+  "created_at": "2025-05-19T21:30:53.881Z",
+  "updated_at": "2026-07-07T08:59:21.858Z",
+  "comment": {
+    "text": "This is a placeholder text for an input field where the user is expected to type or paste a URL.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:18:55.419Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
+      "line_number": 173,
+      "context": "dataTestId=\"app_name_input_group\"\n />\n <InputGroup\n label={t(\"WebsiteUrl\")}\n name=\"website_url\"\n placeholder={t(\"Common:EnterURL\")}\n value={websiteUrlValue}\n error={\n isWebsiteError\n ? getOAuthValidationCodeTranslation(\n t,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
+      "line_number": 173,
+      "context": "dataTestId=\"app_name_input_group\"\n />\n <InputGroup\n label={t(\"WebsiteUrl\")}\n name=\"website_url\"\n placeholder={t(\"Common:EnterURL\")}\n value={websiteUrlValue}\n error={\n isWebsiteError\n ? getOAuthValidationCodeTranslation(\n t,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/OAuthBlock.tsx",
+      "line_number": 78,
+      "context": "<BlockHeader header={t(\"OAuthHeaderBlock\")} />\n <div className={styles.styledInputBlock}>\n <MultiInputGroup\n t={t}\n label={t(\"RedirectsURLS\")}\n placeholder={t(\"Common:EnterURL\")}\n name=\"redirect_uris\"\n onAdd={changeValue}\n currentValue={redirectUrisValue}\n helpButtonText={t(\"RedirectsURLSHelpButton\")}\n isDisabled={isEdit}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/OAuthBlock.tsx",
+      "line_number": 78,
+      "context": "<BlockHeader header={t(\"OAuthHeaderBlock\")} />\n <div className={styles.styledInputBlock}>\n <MultiInputGroup\n t={t}\n label={t(\"RedirectsURLS\")}\n placeholder={t(\"Common:EnterURL\")}\n name=\"redirect_uris\"\n onAdd={changeValue}\n currentValue={redirectUrisValue}\n helpButtonText={t(\"RedirectsURLSHelpButton\")}\n isDisabled={isEdit}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/SupportBlock.tsx",
+      "line_number": 93,
+      "context": "<BlockHeader header={t(\"SupportAndLegalInfo\")} />\n <div className={styles.styledInputBlock}>\n <InputGroup\n label={t(\"PrivacyPolicyURL\")}\n name=\"policy_url\"\n placeholder={t(\"Common:EnterURL\")}\n value={policyUrlValue}\n error={\n policyError\n ? getOAuthValidationCodeTranslation(\n t,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/SupportBlock.tsx",
+      "line_number": 93,
+      "context": "<BlockHeader header={t(\"SupportAndLegalInfo\")} />\n <div className={styles.styledInputBlock}>\n <InputGroup\n label={t(\"PrivacyPolicyURL\")}\n name=\"policy_url\"\n placeholder={t(\"Common:EnterURL\")}\n value={policyUrlValue}\n error={\n policyError\n ? getOAuthValidationCodeTranslation(\n t,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 540,
+      "context": "size={InputSize.base}\n type={InputType.text}\n value={providerUrl}\n onChange={(e) => setProviderUrl(e.target.value)}\n scale\n placeholder={t(\"Common:EnterURL\")}\n isDisabled={\n isRequestRunning ||\n selectedOption.key !== ProviderType.OpenAiCompatible\n }\n testId=\"provider-url-input\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/hooks/useBaseParams.tsx",
+      "line_number": 199,
+      "context": "<TextInput\n type={InputType.text}\n size={InputSize.base}\n value={url}\n onChange={(e) => onChangeUrl(e.target.value)}\n placeholder={t(\"Common:EnterURL\")}\n scale\n hasError={!!urlError}\n testId=\"mcp-url-input\"\n />\n <Text className={styles.fieldHint}>",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

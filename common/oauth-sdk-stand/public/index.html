@@ -1,0 +1,203 @@
+<!--
+  Copyright (C) Ascensio System SIA, 2009-2026
+
+  This program is a free software product. You can redistribute it and/or
+  modify it under the terms of the GNU Affero General Public License (AGPL)
+  version 3 as published by the Free Software Foundation, together with the
+  additional terms provided in the LICENSE file.
+
+  This program is distributed WITHOUT ANY WARRANTY; without even the implied
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+  details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+
+  You can contact Ascensio System SIA by email at info@onlyoffice.com
+  or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+  LV-1050, Latvia, European Union.
+
+  The interactive user interfaces in modified versions of the Program
+  are required to display Appropriate Legal Notices in accordance with
+  Section 5 of the GNU AGPL version 3.
+
+  No trademark rights are granted under this License.
+
+  All non-code elements of the Product, including illustrations,
+  icon sets, and technical writing content, are licensed under the
+  Creative Commons Attribution-ShareAlike 4.0 International License:
+  https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+  This license applies only to such non-code elements and does not
+  modify or replace the licensing terms applicable to the Program's
+  source code, which remains licensed under the GNU Affero General
+  Public License v3.
+
+  SPDX-License-Identifier: AGPL-3.0-only
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DocSpace SDK — OAuth stand</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <aside id="steps">
+      <section class="step" id="step-health">
+        <h2>1. Availability <span class="badge" id="health-badge">checking…</span></h2>
+        <div class="body">
+          <ul class="checks small" id="health-list"></ul>
+          <div class="row">
+            <button id="health-retry" class="ghost">Re-check</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="step locked" id="step-login">
+        <h2>2. Portal sign-in <span class="badge" id="login-badge">—</span></h2>
+        <div class="body">
+          <div id="login-form">
+            <p class="muted small" style="margin: 0">
+              Credentials go to the stand backend only and are used to call the
+              portal API (client management). An admin/owner account also lets
+              the stand auto-configure the SDK CSP list.
+            </p>
+            <label>Email</label>
+            <input id="login-email" type="email" autocomplete="username" />
+            <label>Password</label>
+            <input id="login-password" type="password" autocomplete="current-password" />
+            <div class="row"><button id="login-btn">Sign in</button></div>
+          </div>
+          <div id="login-done" hidden>
+            <span id="login-user"></span>
+            <div class="row"><button id="login-reset" class="secondary">Sign out</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="step locked" id="step-client">
+        <h2>3. OAuth client <span class="badge" id="client-badge">—</span></h2>
+        <div class="body">
+          <p class="muted small" style="margin: 0">
+            The portal returns the client secret only once, at creation time —
+            so the stand always works with its own clients: create one here,
+            reuse it across restarts, delete it when done. Redirect URI,
+            allowed origins, URLs, logo and CSP are configured automatically.
+          </p>
+          <label>Name</label>
+          <input id="client-name" type="text" value="SDK OAuth Stand" />
+          <label>Scopes</label>
+          <div class="scopes" id="client-scopes"></div>
+          <div class="row">
+            <button id="client-create-btn">Create &amp; use</button>
+          </div>
+          <div id="client-mine" hidden>
+            <label style="margin-top: 12px">Created earlier by this stand</label>
+            <div id="client-list"></div>
+          </div>
+          <div id="client-warnings" class="small"></div>
+        </div>
+      </section>
+
+      <section class="step locked" id="step-auth">
+        <h2>4. Authorize <span class="badge" id="auth-badge">—</span></h2>
+        <div class="body">
+          <p class="muted small" style="margin: 0 0 4px">
+            You will sign in on the portal and pass the consent screen. Right
+            after the token exchange the stand <b>wipes the portal cookies</b>
+            (asc_auth_key &amp; co) for localhost — everything below runs on the
+            OAuth Bearer token alone.
+          </p>
+          <div class="row">
+            <button id="auth-login">Login with DocSpace</button>
+            <button id="auth-logout" class="secondary">Logout / revoke</button>
+          </div>
+          <div class="row">
+            <button id="auth-probe" class="ghost">Probe access token</button>
+            <button id="auth-introspect" class="ghost">Introspect</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="step locked" id="step-demo">
+        <h2>5. SDK demo <span class="badge" id="demo-badge">—</span></h2>
+        <div class="body">
+          <div class="grid2">
+            <div>
+              <label>Mode</label>
+              <select id="demo-mode">
+                <option value="manager">manager</option>
+                <option value="personal">personal</option>
+                <option value="room-selector">room-selector</option>
+                <option value="file-selector">file-selector</option>
+                <option value="editor">editor</option>
+                <option value="viewer">viewer</option>
+                <option value="uploader">uploader</option>
+                <option value="forms">forms</option>
+                <option value="chat">chat</option>
+                <option value="public-room">public-room</option>
+                <option value="system">system (headless)</option>
+              </select>
+            </div>
+            <div>
+              <label>Theme</label>
+              <select id="demo-theme">
+                <option value="System">System</option>
+                <option value="Base">Base</option>
+                <option value="Dark">Dark</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid2">
+            <div>
+              <label>Entity id <span class="muted">(file / folder / room)</span></label>
+              <input id="demo-id" type="text" placeholder="editor, viewer, uploader, forms" />
+            </div>
+            <div>
+              <label>Agent id <span class="muted">(chat)</span></label>
+              <input id="demo-agent" type="text" />
+            </div>
+          </div>
+          <label>Request token <span class="muted">(public-room)</span></label>
+          <input id="demo-request-token" type="text" />
+          <div class="row small">
+            <label style="font-weight: 400; margin: 0"><input type="checkbox" id="demo-csp" checked /> checkCSP</label>
+            <label style="font-weight: 400; margin: 0"><input type="checkbox" id="demo-menu" /> showMenu</label>
+            <label style="font-weight: 400; margin: 0"><input type="checkbox" id="demo-filter" /> showFilter</label>
+          </div>
+          <div class="row">
+            <button id="demo-init">Init frame</button>
+            <button id="demo-destroy" class="secondary">Destroy</button>
+            <button id="log-clear" class="secondary">Clear log</button>
+          </div>
+
+          <label style="margin-top: 12px">Instance methods</label>
+          <div class="methods" id="demo-getters"></div>
+          <div class="row">
+            <input id="demo-title" type="text" placeholder="title for create*" />
+          </div>
+          <div class="methods">
+            <button data-create="folder">createFolder</button>
+            <button data-create="file">createFile</button>
+            <button data-create="room">createRoom</button>
+          </div>
+          <div class="row">
+            <select id="demo-view" style="width: auto">
+              <option value="row">row</option>
+              <option value="table">table</option>
+              <option value="tile">tile</option>
+            </select>
+            <button id="demo-setview" class="ghost">setListView</button>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <main id="center">
+      <div id="ds-frame"></div>
+      <div id="log"></div>
+    </main>
+
+    <script src="/api.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

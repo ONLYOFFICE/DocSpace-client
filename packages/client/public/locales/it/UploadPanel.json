@@ -1,6 +1,10 @@
 {
   "HideInput": "Nascondere",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} di {{total}}</0> caricati. Quota di archiviazione superata — <1>visualizza i dettagli</1>.",
+  "QuotaExceededTooltip": "Quota di archiviazione superata. Liberare spazio o aggiornare il piano, quindi riprovare.",
   "Ready": "Fatto",
+  "RetryAfterQuotaUpgrade": "Riprova dopo l'aggiornamento della quota",
+  "RetryUpload": "Riprova",
   "UploadingAndConversion": "Caricamento e conversione",
   "UploadingError": "Errore di caricamento"
 }

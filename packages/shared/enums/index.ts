@@ -1,30 +1,44 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 export * from "@docspace/ui-kit/enums";
+
+import type { RoomsType } from "@docspace/ui-kit/enums";
+
+/** Private room type (extends RoomsType enum from ui-kit) */
+export const RoomsTypePrivate = 13 as RoomsType;
 
 export const enum ScopeType {
   read = "read",
@@ -182,6 +196,13 @@ export const enum RoomSearchArea {
   Archive = "Archive",
   Templates = "Templates",
   AIAgents = "AiAgents",
+  Forms = "Forms",
+  FormTemplates = "FormTemplates",
+}
+export const enum RoomPrivacyFilter {
+  None = 0,
+  Private = 1,
+  NotPrivate = 2,
 }
 /**
  * Enum for file action.
@@ -206,6 +227,7 @@ export const enum PageType {
   integration = "integration",
   developerTools = "developerTools",
   devToolsOverview = "devToolsOverview",
+  devToolsDocsConnect = "devToolsDocsConnect",
   devToolsJavascriptSdk = "devToolsJavascriptSdk",
   devToolsPluginSdk = "devToolsPluginSdk",
   devToolsWebhooks = "devToolsWebhooks",
@@ -221,21 +243,7 @@ export const enum PageType {
   groups = "groups",
   guests = "guests",
   aiSettings = "aiSettings",
-}
-
-export const enum ShareRights {
-  None = "None",
-  ReadWrite = "ReadWrite",
-  Read = "Read",
-  Restrict = "Restrict",
-  Varies = "Varies",
-  Review = "Review",
-  Comment = "Comment",
-  FillForms = "FillForms",
-  CustomFilter = "CustomFilter",
-  RoomManager = "RoomManager",
-  Editing = "Editing",
-  ContentCreator = "ContentCreator",
+  newAISettings = "new-ai-settings",
 }
 
 export const enum ConflictResolveType {
@@ -280,22 +288,6 @@ export const enum TenantTrustedDomainsType {
   None = 0,
   Custom = 1,
   All = 2,
-}
-
-/**
- * Enum for file status.
- * @readonly
- */
-export const enum FileStatus {
-  None = 0,
-  IsEditing = 1,
-  IsNew = 2,
-  IsConverting = 4,
-  IsOriginal = 8,
-  IsEditingAlone = 16,
-  IsFavorite = 32,
-  IsTemplate = 64,
-  IsFillFormDraft = 128,
 }
 
 /**
@@ -363,15 +355,6 @@ export const enum TariffState {
   Paid = 1,
   Delay = 2,
   NotPaid = 3,
-}
-
-/**
- * Enum for theme keys.
- * @readonly
- */
-export const enum PortalFeaturesLimitations {
-  Limitless = -1,
-  Unavailable = 0,
 }
 
 /**
@@ -653,6 +636,8 @@ export enum WebhookTriggers {
   AgentCreated = 2147483648,
   AgentUpdated = 4294967296,
   AgentDeleted = 8589934592,
+  FileDownloaded = 17179869184,
+  FolderDownloaded = 34359738368,
 }
 
 export enum RoomSecurityError {
@@ -721,3 +706,4 @@ export enum VectorizationStatus {
   Completed,
   Failed,
 }
+

@@ -1,0 +1,596 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+"use client";
+
+import React from "react";
+import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
+
+import {
+  type WebSearchConfig,
+  type KnowledgeConfig,
+  type TAddNewServer,
+  type TAiProvider,
+  type TCreateAiProvider,
+  type TServer,
+  type TUpdateAiProvider,
+  type TUpdateServer,
+  TDefaultProvider,
+  TModel,
+} from "@docspace/shared/api/ai/types";
+import {
+  addNewServer,
+  createProvider,
+  deleteProviders,
+  deleteServers,
+  getProviders,
+  getServersList,
+  updateProvider,
+  updateServer,
+  updateServerStatus,
+  getWebSearchConfig,
+  updateWebSearchConfig,
+  updateKnowledgeConfig,
+  getKnowledgeConfig,
+  getProviderAvailabilityStatus,
+  getDefaultProvider,
+  getModels,
+  updateDefaultProvider,
+} from "@docspace/shared/api/ai";
+import {
+  ProviderType,
+  ServerType,
+  WebSearchType,
+  KnowledgeType,
+} from "@docspace/shared/api/ai/enums";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { TTranslation } from "@docspace/shared/types";
+
+import AgentsAIConfigStore, {
+  useAgentsAIConfigStore,
+} from "./AgentsAIConfigStore";
+
+class AISettingsStore {
+  aiConfigStore: AgentsAIConfigStore;
+
+  isInit = false;
+
+  aiProviders: TAiProvider[] = [];
+
+  mcpServers: TServer[] = [];
+
+  webSearchConfig: WebSearchConfig | null = null;
+
+  knowledgeConfig: KnowledgeConfig | null = null;
+
+  aiProvidersInitied = false;
+
+  knowledgeInitied = false;
+
+  mcpServersInitied = false;
+
+  webSearchInitied = false;
+
+  unavailableProvidersIdsSet: Set<number> = new Set<number>();
+
+  checkProvidersAbortController: AbortController | null = null;
+
+  defaultProvider: TDefaultProvider | null = null;
+
+  defaultProviderModels: TModel[] | null = null;
+
+  isDefaultProviderModelsLoading = false;
+
+  defaultProviderModelsError: string | null = null;
+
+  defaultProviderInitied = false;
+
+  constructor(aiConfigStore: AgentsAIConfigStore) {
+    this.aiConfigStore = aiConfigStore;
+    makeAutoObservable(this);
+  }
+
+  setIsInit = (value: boolean) => {
+    this.isInit = value;
+  };
+
+  setAiProvidersInitied = (value: boolean) => {
+    this.aiProvidersInitied = value;
+  };
+
+  setKnowledgeInitied = (value: boolean) => {
+    this.knowledgeInitied = value;
+  };
+
+  setMCPServersInitied = (value: boolean) => {
+    this.mcpServersInitied = value;
+  };
+
+  setWebSearchInitied = (value: boolean) => {
+    this.webSearchInitied = value;
+  };
+
+  setDefaultProvider = (provider: TDefaultProvider | null) => {
+    this.defaultProvider = provider;
+  };
+
+  setDefaultProviderModels = (models: TModel[] | null) => {
+    this.defaultProviderModels = models;
+  };
+
+  setIsDefaultProviderModelsLoading = (value: boolean) => {
+    this.isDefaultProviderModelsLoading = value;
+  };
+
+  setDefaultProviderModelsError = (error: string | null) => {
+    this.defaultProviderModelsError = error;
+  };
+
+  setDefaultProviderInitied = (value: boolean) => {
+    this.defaultProviderInitied = value;
+  };
+
+  setAIProviders = (providers: TAiProvider[]) => {
+    this.aiProviders = providers;
+  };
+
+  setMCPServers = (servers: TServer[]) => {
+    this.mcpServers = servers;
+  };
+
+  setWebSearchConfig = (config: WebSearchConfig | null) => {
+    this.webSearchConfig = config;
+  };
+
+  setKnowledgeConfig = (config: KnowledgeConfig | null) => {
+    this.knowledgeConfig = config;
+  };
+
+  addAIProvider = async (provider: TCreateAiProvider) => {
+    const newProvider = await createProvider(provider);
+
+    runInAction(() => {
+      this.aiProviders.push(newProvider);
+    });
+
+    if (this.aiProviders.length === 1) {
+      await this.initDefaultProvider();
+    }
+  };
+
+  updateAIProvider = async (id: TAiProvider["id"], data: TUpdateAiProvider) => {
+    const newProvider = await updateProvider(id, data);
+
+    runInAction(() => {
+      const index = this.aiProviders.findIndex((p) => p.id === id);
+      if (index !== -1) {
+        this.aiProviders[index] = newProvider;
+      }
+    });
+
+    if (this.unavailableProvidersIdsSet.has(id)) {
+      const res = await getProviderAvailabilityStatus(id);
+
+      if (res.available) {
+        runInAction(() => {
+          this.unavailableProvidersIdsSet.delete(id);
+        });
+      }
+    }
+
+    runInAction(() => {
+      if (
+        this.defaultProvider?.providerId === newProvider.id &&
+        this.defaultProvider?.providerTitle !== newProvider.title
+      ) {
+        this.defaultProvider.providerTitle = newProvider.title;
+      }
+    });
+  };
+
+  deleteAIProvider = async (id: TAiProvider["id"]) => {
+    const isDefaultProvider = this.aiProviders?.find(
+      (p) => p.id === id,
+    )?.isDefault;
+    const isLastProvider = this.aiProviders.length === 1;
+
+    await deleteProviders({ ids: [id] });
+
+    runInAction(() => {
+      this.aiProviders = this.aiProviders.filter(
+        (provider) => provider.id !== id,
+      );
+
+      if (isLastProvider) {
+        this.clearDefaultProviderData();
+      }
+    });
+
+    if (isDefaultProvider && !isLastProvider) {
+      await this.initDefaultProvider();
+
+      runInAction(() => {
+        const defaultProviderInList = this.aiProviders.find(
+          (p) => p.id === this.defaultProvider?.providerId,
+        );
+
+        if (defaultProviderInList && !defaultProviderInList.isDefault) {
+          defaultProviderInList.isDefault = true;
+        }
+      });
+    }
+  };
+
+  fetchAIProviders = async () => {
+    try {
+      const res = await getProviders();
+
+      this.setAIProviders(res);
+    } catch (e) {
+      console.error(e);
+      toastr.error(e instanceof Error ? e.message : String(e));
+    } finally {
+      this.setAiProvidersInitied(true);
+    }
+  };
+
+  fetchMCPServers = async () => {
+    try {
+      const res = await getServersList(0);
+      this.setMCPServersInitied(true);
+
+      if (!res) return;
+
+      this.setMCPServers(res.items);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  fetchWebSearch = async () => {
+    try {
+      const res = await getWebSearchConfig();
+
+      this.setWebSearchInitied(true);
+
+      if (res) this.setWebSearchConfig(res);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  updateWebSearch = async (
+    enabled: boolean,
+    type: WebSearchType,
+    key: string,
+  ) => {
+    await updateWebSearchConfig(enabled, type, key);
+    this.setWebSearchConfig({ enabled, type, key });
+  };
+
+  restoreWebSearch = async () => {
+    await updateWebSearchConfig(false, WebSearchType.None, "");
+    this.setWebSearchConfig(null);
+  };
+
+  fetchKnowledge = async () => {
+    try {
+      const res = await getKnowledgeConfig();
+
+      this.setKnowledgeInitied(true);
+
+      if (res) this.setKnowledgeConfig(res);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  updateKnowledge = async (type: KnowledgeType, key: string) => {
+    await updateKnowledgeConfig(type, key);
+    this.setKnowledgeConfig({ type, key });
+  };
+
+  restoreKnowledge = async () => {
+    await updateKnowledgeConfig(KnowledgeType.None, "");
+    this.setKnowledgeConfig(null);
+  };
+
+  addNewMCP = async (data: TAddNewServer) => {
+    const newServer = await addNewServer(data);
+
+    if (newServer) {
+      runInAction(() => {
+        this.mcpServers.push(newServer);
+      });
+    }
+  };
+
+  updateMCP = async (id: TServer["id"], data: TUpdateServer) => {
+    const newServer = await updateServer(id, data);
+
+    runInAction(() => {
+      const index = this.mcpServers.findIndex((p) => p.id === id);
+      if (index !== -1) {
+        this.mcpServers[index] = newServer;
+      }
+    });
+  };
+
+  deleteMCP = async (id: TServer["id"]) => {
+    await deleteServers([id]);
+
+    runInAction(() => {
+      this.mcpServers = this.mcpServers.filter((mcp) => mcp.id !== id);
+    });
+  };
+
+  updateMCPStatus = async (id: TServer["id"], enabled: boolean) => {
+    const newMCP = await updateServerStatus(id, enabled);
+
+    runInAction(() => {
+      const index = this.mcpServers.findIndex((p) => p.id === id);
+      if (index !== -1) {
+        this.mcpServers[index] = newMCP;
+      }
+    });
+  };
+
+  initAISettings = async (standalone: boolean) => {
+    const actions = [this.fetchMCPServers()];
+
+    if (standalone) {
+      actions.push(this.fetchAIProviders());
+    }
+
+    await Promise.all(actions);
+
+    this.setIsInit(true);
+  };
+
+  checkUnavailableProviders = async () => {
+    if (this.aiProviders.length === 0) return;
+
+    this.cancelAvailabilityCheck();
+    const abortController = new AbortController();
+    this.checkProvidersAbortController = abortController;
+
+    const requests = this.aiProviders.map((provider) =>
+      getProviderAvailabilityStatus(provider.id, abortController),
+    );
+
+    const res = await Promise.allSettled(requests);
+
+    if (abortController.signal.aborted) {
+      this.checkProvidersAbortController = null;
+      return;
+    }
+
+    runInAction(() => {
+      this.unavailableProvidersIdsSet.clear();
+
+      res.forEach((p) => {
+        if (p.status === "fulfilled" && !p.value.available) {
+          this.unavailableProvidersIdsSet.add(p.value.id);
+        }
+
+        if (p.status === "rejected") {
+          console.error(p.reason);
+          return;
+        }
+      });
+    });
+
+    this.checkProvidersAbortController = null;
+  };
+
+  cancelAvailabilityCheck = () => {
+    this.checkProvidersAbortController?.abort();
+    this.checkProvidersAbortController = null;
+  };
+
+  isProviderAvailable = (id: number) => {
+    return !this.unavailableProvidersIdsSet.has(id);
+  };
+
+  fetchDefaultProviderModels = async (providerId: TAiProvider["id"]) => {
+    let models = null;
+
+    try {
+      this.setIsDefaultProviderModelsLoading(true);
+      this.setDefaultProviderModelsError(null);
+
+      models = await getModels(providerId);
+      this.setDefaultProviderModels(models);
+    } catch (e) {
+      let error = e;
+
+      if (axios.isAxiosError(e)) {
+        const axiosErr = e as { response?: { data?: { error?: { message?: string } } } };
+        error = axiosErr.response?.data?.error?.message;
+      }
+
+      toastr.error(error instanceof Error ? error.message : String(error));
+      console.error(e);
+      this.setDefaultProviderModelsError(
+        typeof error === "string"
+          ? error
+          : error instanceof Error
+            ? error.message
+            : String(error),
+      );
+      this.setDefaultProviderModels(null);
+    } finally {
+      this.setIsDefaultProviderModelsLoading(false);
+    }
+
+    return models;
+  };
+
+  initDefaultProvider = async () => {
+    this.setDefaultProviderInitied(false);
+
+    try {
+      const defaultProvider = await getDefaultProvider();
+
+      if (defaultProvider) {
+        this.setDefaultProvider(defaultProvider);
+        await this.fetchDefaultProviderModels(defaultProvider.providerId);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setDefaultProviderInitied(true);
+    }
+  };
+
+  changeDefaultProvider = async (
+    providerData: {
+      providerId: number;
+      defaultModel: string;
+    },
+    t: TTranslation,
+  ) => {
+    try {
+      const newDefaultProvider = await updateDefaultProvider(providerData);
+
+      runInAction(() => {
+        this.aiProviders.forEach((p) => {
+          if (p.isDefault) {
+            p.isDefault = false;
+          }
+
+          if (p.id === newDefaultProvider.providerId) {
+            p.isDefault = true;
+          }
+        });
+      });
+
+      this.setDefaultProvider(newDefaultProvider);
+      toastr.success(t("Common:DefaultProviderSetSuccess"));
+    } catch (e) {
+      toastr.error(e instanceof Error ? e.message : String(e));
+      console.error(e);
+    }
+  };
+
+  clearDefaultProviderData = () => {
+    this.setDefaultProvider(null);
+    this.setDefaultProviderModels(null);
+    this.setDefaultProviderInitied(false);
+    this.setDefaultProviderModelsError(null);
+  };
+
+  get systemMCPServers() {
+    return this.mcpServers.filter(
+      (mcp) => mcp.serverType !== ServerType.Custom,
+    );
+  }
+
+  get customMCPServers() {
+    return this.mcpServers.filter(
+      (mcp) => mcp.serverType === ServerType.Custom,
+    );
+  }
+
+  get hasAIProviders() {
+    if (this.aiProviders.length === 0) return false;
+
+    const isOnlyDisabledPortalAi =
+      this.aiProviders.length === 1 &&
+      this.aiProviders[0].type === ProviderType.PortalAi &&
+      !this.aiConfigStore.aiConfig?.systemAiEnabled;
+
+    return !isOnlyDisabledPortalAi;
+  }
+}
+
+const AISettingsStoreContext = React.createContext<AISettingsStore | null>(
+  null,
+);
+
+export const AISettingsStoreContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const aiConfigStore = useAgentsAIConfigStore();
+  const store = React.useMemo(
+    () => new AISettingsStore(aiConfigStore),
+    [aiConfigStore],
+  );
+  return (
+    <AISettingsStoreContext.Provider value={store}>
+      {children}
+    </AISettingsStoreContext.Provider>
+  );
+};
+
+export const useAISettingsStore = () => {
+  const store = React.useContext(AISettingsStoreContext);
+  if (!store)
+    throw new Error(
+      "useAISettingsStore must be used within AISettingsStoreContextProvider",
+    );
+  return store;
+};
+
+export default AISettingsStore;

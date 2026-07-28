@@ -9,7 +9,7 @@
   "TitleSharing": "Invitez d'autres membres de {{productName}} dans la salle pour remplir les formulaires PDF téléchargés. Copiez un lien d'accès public pour partager la salle avec des utilisateurs externes.",
   "TitleStarting": "Lorsqu'un formulaire est ouvert pour être rempli, une copie individuelle est automatiquement créée pour chaque répondant et est enregistrée dans le dossier En cours. Cela signifie que le remplissage du formulaire a été démarré, mais qu'il n'est pas encore terminé.",
   "TitleSubmitting": "Une fois que le bouton Compléter et Soumettre est cliqué dans la copie ouverte du formulaire, celui-ci est déplacé dans le dossier Complété.",
-  "WelcomeDescription": "Ici, vous pouvez organiser le remplissage de formulaires PDF simples, collecter et analyser facilement les réponses. Voulez-vous commencer ?",
   "WelcomeFillingForm": "Bienvenue dans la salle de remplissage des formulaires !",
-  "WelcomeStartTutorial": "Faire un petit tour"
+  "WelcomeStartTutorial": "Faire un petit tour",
+  "WelcomeTipsDescription": "Ici, vous pouvez organiser le remplissage de formulaires PDF simples, collecter et analyser facilement les réponses. Voulez-vous commencer ?"
 }

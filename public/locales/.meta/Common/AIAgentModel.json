@@ -3,13 +3,45 @@
   "content": "Model",
   "content_en_sha1_hash": "68c2cc7f0ceaa3e499ecb4db331feb4debbbcc23",
   "created_at": "2026-03-31T15:18:16.635Z",
-  "updated_at": "2026-03-31T15:18:16.635Z",
+  "updated_at": "2026-07-07T08:59:21.729Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short label for a dropdown menu in the AI Agent settings, allowing users to select a specific AI model.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:38.391Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Profile.tsx",
+      "line_number": 126,
+      "context": "shrinking to its content (the shared StyledParam info block sizes to\n content by default). */}\n <div className=\" set_room_params-info\" style={{ width: \"100%\" }}>\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Common:AIAgentModel\", { defaultValue: \"Model\" })}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/Profile.tsx",
+      "line_number": 157,
+      "context": "return (\n <StyledParam increaseGap>\n <div className=\" set_room_params-info\">\n <div>\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} noSelect>\n {t(\"Common:AIAgentModel\", { defaultValue: \"Model\" })}\n </Text>\n <Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 479,
+      "context": "<span className={styles.previewItemMeta}>\n {e.domain_expertise.slice(0, 3).join(\" • \")}\n </span>\n </div>\n <div className={styles.previewItemModel}>\n <span className={styles.previewModelLabel}>{t(\"Common:AIAgentModel\")}</span>\n {renderModelControl(expertModelIds[i] ?? \"\", (v) =>\n setExpertModelIds((prev) => {\n const next = [...prev];\n next[i] = v;\n return next;",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 479,
+      "context": "<span className={styles.previewItemMeta}>\n {e.domain_expertise.slice(0, 3).join(\" • \")}\n </span>\n </div>\n <div className={styles.previewItemModel}>\n <span className={styles.previewModelLabel}>{t(\"Common:AIAgentModel\")}</span>\n {renderModelControl(expertModelIds[i] ?? \"\", (v) =>\n setExpertModelIds((prev) => {\n const next = [...prev];\n next[i] = v;\n return next;",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
+      "line_number": 366,
+      "context": "</FieldContainer>\n \n <FieldContainer\n labelVisible\n isVertical\n labelText={t(\"Common:AIAgentModel\")}\n removeMargin\n >\n <ComboBox\n options={modelOptions}\n selectedOption={selectedModelOption}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -141,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

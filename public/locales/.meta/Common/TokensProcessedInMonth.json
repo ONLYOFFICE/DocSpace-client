@@ -1,0 +1,29 @@
+{
+  "key_path": "TokensProcessedInMonth",
+  "content": "Tokens processed in {{month}}",
+  "content_en_sha1_hash": "453e1eeb3bbc89790f7571860f7892293ce3c4ec",
+  "created_at": "2026-06-25T11:54:59.041Z",
+  "updated_at": "2026-07-27T13:07:51.055Z",
+  "comment": {
+    "text": "Caption in an informational card indicating the quantity of tokens processed during the specified {{month}}.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:59:25.578Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 338,
+      "context": "<div className={styles.card}>\n <Text className={styles.cardLabel}>{t(\"MonthUsage\")}</Text>\n <Text className={styles.cardValue}>{monthTokensText}</Text>\n <Text className={styles.cardCaption}>\n {t(\"TokensProcessedInMonth\", { month: monthLabel })}\n </Text>\n </div>\n </div>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "key_path": "IntegrationURL",
+  "content": "Integration URL",
+  "content_en_sha1_hash": "6bf2444e08740f34e6b6654120d3a6b255f97e6b",
+  "created_at": "2025-10-27T16:14:31.644Z",
+  "updated_at": "2026-07-07T08:59:22.010Z",
+  "comment": {
+    "text": "This is a label for an input field where the user enters the URL for an integration.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:47.810Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/hooks/useBaseParams.tsx",
+      "line_number": 186,
+      "context": "? `${t(\"Common:AllowedCharacters\")}: ${ALLOWED_MCP_CHARACTERS}`\n : t(\"Common:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:IntegrationURL\")}\n isRequired\n isVertical\n removeMargin\n labelVisible\n errorMessage={urlError}",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

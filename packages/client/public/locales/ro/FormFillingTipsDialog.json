@@ -9,7 +9,7 @@
   "TitleSharing": "Invitați alți membrii {{productName}} în sala pentru completare a formularelor PDF încărcate. Copiați link-ul public pentru a partaja sala cu utilizatorii externi.",
   "TitleStarting": "Atunci când un formular este deschis pentru completare, se creează automat o copie individuală pentru fiecare respondent și se salvează în folderul În curs de completare. Aceasta înseamnă că completarea formularului s-a început, dar încă nu s-a terminat.",
   "TitleSubmitting": "Odată ce faceți clic pe butonul Completare și trimitere din copia formularului, acest formular este mutat în folderul Formulare completate.",
-  "WelcomeDescription": "Aici, puteți faceți completarea formularelor PDF simplă, dar colectarea și analiza răspunsurilor ușoară. Sunteți gata să începeți?",
   "WelcomeFillingForm": "Bun venit în Sala de completare a formularelor!",
-  "WelcomeStartTutorial": "Faceți un scurt tur"
+  "WelcomeStartTutorial": "Faceți un scurt tur",
+  "WelcomeTipsDescription": "Aici, puteți faceți completarea formularelor PDF simplă, dar colectarea și analiza răspunsurilor ușoară. Sunteți gata să începeți?"
 }

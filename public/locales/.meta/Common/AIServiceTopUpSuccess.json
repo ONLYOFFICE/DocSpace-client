@@ -1,0 +1,29 @@
+{
+  "key_path": "AIServiceTopUpSuccess",
+  "content": "AI service balance successfully topped up.",
+  "content_en_sha1_hash": "c9cf776251e04beb1a89344944598e761de36696",
+  "created_at": "2026-05-15T13:59:46.436Z",
+  "updated_at": "2026-05-15T14:01:34.934Z",
+  "comment": {
+    "text": "Success toast message appearing after a user successfully tops up their AI service balance.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:01:34.934Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AiSimpleTopUpDialog.tsx",
+      "line_number": 149,
+      "context": ");\n } else {\n await servicesStore.fetchAiServiceBalance();\n }\n \n toastr.success(t(\"AIServiceTopUpSuccess\"));\n \n onClose();\n } catch (e) {\n console.error(\"[ai-simple-topup] failed\", e);\n toastr.error(t(\"UnexpectedError\"));",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

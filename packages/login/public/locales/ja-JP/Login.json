@@ -1,6 +1,5 @@
 {
   "ChangePasswordSuccess": "パスワードの変更に成功しました。",
-  "CodeTitle": "コードを送りました",
   "ConfirmEmailChange": "メールアドレスの変更をご確認ください",
   "ConfirmEmailChangeText": "あなたは{{productName}}アカウントのメールアドレスを変更するようにリクエストしました。続行するには、現在の認証情報を使用してサインインしてください。",
   "ErrorInvalidText": "10秒後、<1>{{productName}}</1>にリダイレクトされます。",
@@ -12,7 +11,7 @@
   "PasswordRecoveryTitle": "パスワード復旧",
   "RecoverAccess": "アクセス回復",
   "RecoverContactEmailPlaceholder": "連絡先メール",
-  "RecoverTextBody": "既存のアカウントでログインできない場合や、新規ユーザーとして登録したい場合は、ポータル管理者にお問い合わせください。 ",
+  "RecoverTextBody": "既存のアカウントでログインできない場合や、新規ユーザーとして登録したい場合は、ポータル管理者にお問い合わせください。",
   "Register": "登録",
   "RegisterTextBodyAfterDomainsList": "登録するには、メールアドレスを入力して「リクエスト送信」をクリックします。指定されたアドレスに、アカウント有効化のためのリンクが添付されたメッセージが送信されます。",
   "RegisterTextBodyBeforeDomainsList": "のメールアカウントをお持ちの方は登録が可能です。",

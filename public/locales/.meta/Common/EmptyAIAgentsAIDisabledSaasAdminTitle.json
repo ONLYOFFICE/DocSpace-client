@@ -1,0 +1,32 @@
+{
+  "key_path": "EmptyAIAgentsAIDisabledSaasAdminTitle",
+  "content": "Connect your wallet and enable AI features",
+  "content_en_sha1_hash": "001c2b8c2e6ea4354703efad4e48f635dcc9fad1",
+  "created_at": "2025-11-03T12:10:32.836Z",
+  "updated_at": "2026-07-07T08:59:22.001Z",
+  "comment": {
+    "text": "This is a title displayed in an empty state view for SaaS administrators. It instructs them to connect their wallet to enable AI features.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:07:11.142Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
+      "line_number": 142,
+      "context": "defaultValue: \"AI Provider\",\n }),\n defaultValue: \"Configure {{aiProvider}} to start\",\n })\n : isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledSaasAdminTitle\", {\n defaultValue: \"AI agents are unavailable\",\n })\n : t(\"Common:EmptyAIAgentsAIDisabledUserTitle\", {\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue: \"{{aiAgents}} are unavailable\",",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

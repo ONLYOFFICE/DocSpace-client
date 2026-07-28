@@ -1,33 +1,48 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { request } from "@docspace/shared/api/client";
 import { getProgress } from "@docspace/shared/api/files";
 import type { TOperation } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
+
+import {
+  externalStorageGet,
+  externalStorageSet,
+  isExternalStorageAvailable,
+} from "@/utils/externalStorage";
 
 const FOLDER_AGENTS_STORAGE_KEY = "forms_folder_agents";
 const AI_ENABLED_STORAGE_KEY = "forms_ai_enabled";
@@ -36,6 +51,42 @@ const USER_DISABLED_STORAGE_KEY = "forms_ai_user_disabled";
 const PANEL_WIDTH_STORAGE_KEY = "forms_chat_panel_width";
 const PANEL_POSITION_STORAGE_KEY = "forms_chat_panel_position";
 
+const EXT_FOLDER_AGENTS = (roomId: string | number) =>
+  `aiforms.folderAgents.${roomId}`;
+const EXT_AI_ENABLED = (roomId: string | number) =>
+  `aiforms.aiEnabled.${roomId}`;
+const EXT_USER_DISABLED = (roomId: string | number) =>
+  `aiforms.userDisabled.${roomId}`;
+const EXT_ASK_FROM_DB = (roomId: string | number) =>
+  `aiforms.askFromDB.${roomId}`;
+const EXT_PANEL_WIDTH = (roomId: string | number) =>
+  `aiforms.panelWidth.${roomId}`;
+const EXT_PANEL_POSITION = "aiforms.panelPosition";
+
+const safeGet = (key: string): string | null => {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+};
+
+const safeSet = (key: string, value: string): void => {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* noop */
+  }
+};
+
+const safeRemove = (key: string): void => {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    /* noop */
+  }
+};
+
 export const tokenToHash = (token: string): string => {
   let h = 0;
   for (let i = 0; i < token.length; i++) {
@@ -43,6 +94,17 @@ export const tokenToHash = (token: string): string => {
   }
   return (h >>> 0).toString(36);
 };
+
+export const SERVICE_TAG_PREFIX = "aiforms-";
+
+export const serviceTagForFolder = (folderId: number | string) =>
+  `${SERVICE_TAG_PREFIX}f-${folderId}`;
+
+export const serviceTagForAskDB = (roomId: number | string) =>
+  `${SERVICE_TAG_PREFIX}askdb-r-${roomId}`;
+
+export const isServiceTag = (tag: string): boolean =>
+  tag.startsWith(SERVICE_TAG_PREFIX);
 
 export type FolderAgentEntry = {
   agentId: number;
@@ -62,26 +124,50 @@ export const saveFolderAgentsMap = (
   map: FolderAgentsMap,
   userHash?: string,
 ) => {
-  localStorage.setItem(folderAgentsKey(roomId, userHash), JSON.stringify(map));
+  safeSet(folderAgentsKey(roomId, userHash), JSON.stringify(map));
+  void externalStorageSet(EXT_FOLDER_AGENTS(roomId), map);
 };
 
-export const loadFolderAgentsMap = (
+const parseFolderAgents = (raw: string): FolderAgentsMap | null => {
+  try {
+    return JSON.parse(raw) as FolderAgentsMap;
+  } catch {
+    return null;
+  }
+};
+
+export const loadFolderAgentsMap = async (
   roomId: string | number,
   userHash?: string,
-): FolderAgentsMap => {
-  try {
-    const val = localStorage.getItem(folderAgentsKey(roomId, userHash));
-    return val ? (JSON.parse(val) as FolderAgentsMap) : {};
-  } catch {
+): Promise<FolderAgentsMap> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<FolderAgentsMap>(
+      EXT_FOLDER_AGENTS(roomId),
+    );
+    if (ext !== null) return ext;
+
+    const lsVal = safeGet(folderAgentsKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = parseFolderAgents(lsVal);
+      if (parsed) {
+        void externalStorageSet(EXT_FOLDER_AGENTS(roomId), parsed);
+        return parsed;
+      }
+    }
     return {};
   }
+
+  const val = safeGet(folderAgentsKey(roomId, userHash));
+  if (!val) return {};
+  return parseFolderAgents(val) ?? {};
 };
 
 export const clearFolderAgentsMap = (
   roomId: string | number,
   userHash?: string,
 ) => {
-  localStorage.removeItem(folderAgentsKey(roomId, userHash));
+  safeRemove(folderAgentsKey(roomId, userHash));
+  void externalStorageSet(EXT_FOLDER_AGENTS(roomId), {});
 };
 
 
@@ -95,14 +181,27 @@ export const saveAiEnabled = (
   enabled: boolean,
   userHash?: string,
 ) => {
-  localStorage.setItem(aiEnabledKey(roomId, userHash), String(enabled));
+  safeSet(aiEnabledKey(roomId, userHash), String(enabled));
+  void externalStorageSet(EXT_AI_ENABLED(roomId), enabled);
 };
 
-export const loadAiEnabled = (
+export const loadAiEnabled = async (
   roomId: string | number,
   userHash?: string,
-): boolean => {
-  return localStorage.getItem(aiEnabledKey(roomId, userHash)) === "true";
+): Promise<boolean> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<boolean>(EXT_AI_ENABLED(roomId));
+    if (ext !== null) return ext;
+
+    const lsVal = safeGet(aiEnabledKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = lsVal === "true";
+      void externalStorageSet(EXT_AI_ENABLED(roomId), parsed);
+      return parsed;
+    }
+    return false;
+  }
+  return safeGet(aiEnabledKey(roomId, userHash)) === "true";
 };
 
 
@@ -116,18 +215,34 @@ export const saveAskFromDBAgentId = (
   agentId: number,
   userHash?: string,
 ) => {
-  localStorage.setItem(askFromDBAgentKey(roomId, userHash), String(agentId));
+  safeSet(askFromDBAgentKey(roomId, userHash), String(agentId));
+  void externalStorageSet(EXT_ASK_FROM_DB(roomId), agentId);
 };
 
-export const loadAskFromDBAgentId = (
+export const loadAskFromDBAgentId = async (
   roomId: string | number,
   userHash?: string,
-): number | null => {
-  const val = localStorage.getItem(askFromDBAgentKey(roomId, userHash));
+): Promise<number | null> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<number>(EXT_ASK_FROM_DB(roomId));
+    if (ext !== null && Number.isFinite(ext)) return ext;
+
+    const lsVal = safeGet(askFromDBAgentKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = Number(lsVal);
+      if (Number.isFinite(parsed)) {
+        void externalStorageSet(EXT_ASK_FROM_DB(roomId), parsed);
+        return parsed;
+      }
+    }
+    return null;
+  }
+
+  const val = safeGet(askFromDBAgentKey(roomId, userHash));
   if (!val) return null;
   const parsed = Number(val);
   return Number.isFinite(parsed) ? parsed : null;
-}
+};
 
 const userDisabledKey = (roomId: string | number, userHash?: string) =>
   userHash
@@ -139,16 +254,27 @@ export const saveUserExplicitlyDisabled = (
   disabled: boolean,
   userHash?: string,
 ) => {
-  localStorage.setItem(userDisabledKey(roomId, userHash), String(disabled));
+  safeSet(userDisabledKey(roomId, userHash), String(disabled));
+  void externalStorageSet(EXT_USER_DISABLED(roomId), disabled);
 };
 
-export const loadUserExplicitlyDisabled = (
+export const loadUserExplicitlyDisabled = async (
   roomId: string | number,
   userHash?: string,
-): boolean => {
-  return (
-    localStorage.getItem(userDisabledKey(roomId, userHash)) === "true"
-  );
+): Promise<boolean> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<boolean>(EXT_USER_DISABLED(roomId));
+    if (ext !== null) return ext;
+
+    const lsVal = safeGet(userDisabledKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = lsVal === "true";
+      void externalStorageSet(EXT_USER_DISABLED(roomId), parsed);
+      return parsed;
+    }
+    return false;
+  }
+  return safeGet(userDisabledKey(roomId, userHash)) === "true";
 };
 
 
@@ -246,14 +372,30 @@ export const savePanelWidth = (
   width: number,
   userHash?: string,
 ) => {
-  localStorage.setItem(panelWidthKey(roomId, userHash), String(width));
+  safeSet(panelWidthKey(roomId, userHash), String(width));
+  void externalStorageSet(EXT_PANEL_WIDTH(roomId), width);
 };
 
-export const loadPanelWidth = (
+export const loadPanelWidth = async (
   roomId: string | number,
   userHash?: string,
-): number | null => {
-  const val = localStorage.getItem(panelWidthKey(roomId, userHash));
+): Promise<number | null> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<number>(EXT_PANEL_WIDTH(roomId));
+    if (ext !== null && Number.isFinite(ext)) return ext;
+
+    const lsVal = safeGet(panelWidthKey(roomId, userHash));
+    if (lsVal !== null) {
+      const parsed = Number(lsVal);
+      if (Number.isFinite(parsed)) {
+        void externalStorageSet(EXT_PANEL_WIDTH(roomId), parsed);
+        return parsed;
+      }
+    }
+    return null;
+  }
+
+  const val = safeGet(panelWidthKey(roomId, userHash));
   if (!val) return null;
   const parsed = Number(val);
   return Number.isFinite(parsed) ? parsed : null;
@@ -263,11 +405,27 @@ export const savePanelPosition = (
   position: PanelPosition,
   userHash?: string,
 ) => {
-  localStorage.setItem(panelPositionKey(userHash), position);
+  safeSet(panelPositionKey(userHash), position);
+  void externalStorageSet(EXT_PANEL_POSITION, position);
 };
 
-export const loadPanelPosition = (userHash?: string): PanelPosition => {
-  const val = localStorage.getItem(panelPositionKey(userHash));
+export const loadPanelPosition = async (
+  userHash?: string,
+): Promise<PanelPosition> => {
+  if (await isExternalStorageAvailable()) {
+    const ext = await externalStorageGet<PanelPosition>(EXT_PANEL_POSITION);
+    if (ext === "right" || ext === "left") return ext;
+
+    const lsVal = safeGet(panelPositionKey(userHash));
+    if (lsVal !== null) {
+      const normalized: PanelPosition = lsVal === "right" ? "right" : "left";
+      void externalStorageSet(EXT_PANEL_POSITION, normalized);
+      return normalized;
+    }
+    return "left";
+  }
+
+  const val = safeGet(panelPositionKey(userHash));
   return val === "right" ? "right" : "left";
 };
 

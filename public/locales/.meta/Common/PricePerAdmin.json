@@ -1,0 +1,29 @@
+{
+  "key_path": "PricePerAdmin",
+  "content": "Price per admin",
+  "content_en_sha1_hash": "fae0eae840a235cfe8e79378f4e3b5f764d05535",
+  "created_at": "2026-06-30T07:32:36.747Z",
+  "updated_at": "2026-07-03T11:08:02.941Z",
+  "comment": {
+    "text": "Label in a row within the Price Details dialog that indicates the unit cost for each administrator.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:34:09.284Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "line_number": 155,
+      "context": "isDowngradePlan\n ? `${additionalAdmins}`\n : `+${additionalAdmins}`,\n )}\n {renderRow(\n t(\"PricePerAdmin\"),\n formatPaymentCurrency(pricePerAdmin),\n )}\n {isDowngradePlan\n ? renderRow(\n t(\"NewMonthlyPrice\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,17 +3,18 @@
   "content": "In 10 seconds you will be redirected to the <1>{{productName}}</1>",
   "content_en_sha1_hash": "3274f93a7ba25ed0ac27cd5b595d7147c8d9ea48",
   "created_at": "2025-05-19T21:30:57.240Z",
-  "updated_at": "2025-05-24T15:06:44.760Z",
+  "updated_at": "2026-05-15T14:00:06.918Z",
   "comment": {
-    "text": "This translation key is used for a countdown message displayed on an error screen after invalid input, redirecting the user to the product name in 10 seconds. It appears as a notification component, likely a button or dialog overlay. Translators should provide a time-sensitive message that informs users of an upcoming redirection.",
+    "text": "This is an error message displayed on a page, informing the user that they will be redirected to the specified product after a 10-second countdown. `{{productName}}` is the name of the product.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:47.375Z"
+    "updated_at": "2026-04-11T21:31:15.714Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/login/src/components/Invalid.tsx",
-      "line_number": 85,
-      "context": "return (\n <ErrorContainer headerText={errorTitle}>\n <Text fontSize=\"13px\" fontWeight=\"600\">\n <Trans\n t={t}\n i18nKey=\"ErrorInvalidText\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: (",
+      "line_number": 95,
+      "context": "return (\n <ErrorContainer headerText={errorTitle}>\n <Text fontSize=\"13px\" fontWeight=\"600\">\n <Trans\n t={t}\n i18nKey=\"ErrorInvalidText\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: (",
       "module": "/packages/login"
     }
   ],
@@ -33,18 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'yönləndiriləcəksiniz' directly translates to 'will be redirected' but lacks the nuance of 'you will be redirected to'. The English emphasizes *where* they are being redirected.",
-          "suggestion": "10 saniyədə <1>{{productName}}</1> istiqamətinə yönləndiriləcəksiniz"
-        },
-        {
-          "type": "formatting",
-          "description": "The formatting tags (<1> and </1>) are identical in both the English and Azerbaijani versions. Ensure this is intentional and consistent with the platform/system using these tags.",
-          "suggestion": "No change needed, but verify consistency across all translations."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -74,30 +64,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"In 10 seconds you will be redirected to the\" is best translated as \"En 10 segundos será redirigido/a a...\" or \"Dentro de 10 segundos será redirigido/a a...\". \"Dentro de 10 segundos se le redirigirá a...\" is grammatically correct but less common and sounds slightly more formal or distant. \"Se le redirigirá\" can sound passive and less direct.",
-          "suggestion": "En 10 segundos será redirigido/a a la página de <1>{{productName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '10 sekunnin kuluttua sinut ohjataan' doesn't quite convey the 'In 10 seconds you will be redirected' part accurately. A more natural Finnish phrasing would be 'Sinut ohjataan <1>{{productName}}</1> 10 sekunnin kuluttua' or 'Ohjataan sinut <1>{{productName}}</1> 10 sekunnin kuluttua'. The current translation puts the '10 seconds' awkwardly at the beginning of the redirection.",
-          "suggestion": "Sinut ohjataan <1>{{productName}}</1> 10 sekunnin kuluttua"
-        },
-        {
-          "type": "formatting",
-          "description": "The formatting tags <1> and </1> are preserved in the translation, which is expected, but it's good to note for consistency and to ensure the translators are aware of the intention.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -121,30 +94,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"you will be redirected to\" is not accurately translated. The Japanese translation \"にリダイレクトされます\" directly translates to \"will be redirected to\" but lacks the implied agency or action performed by a system. A more natural phrasing would convey the redirecting *is being done*. ",
-          "suggestion": "10秒後、<1>{{productName}}</1>にリダイレクトが開始されます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '10초 내에 <1>{{productName}}</1>로 리디렉션됩니다' doesn't fully convey the meaning of 'In 10 seconds you will be redirected to the <1>{{productName}}</1>'.  A more natural and accurate translation would indicate *who* is being redirected.  '로' implies movement *to* something, but doesn't explicitly state 'you'.",
-          "suggestion": "10초 내에 <1>{{productName}}</1>로 이동합니다 (10초 내에 <1>{{productName}}</1>로 이동합니다)"
-        },
-        {
-          "type": "formatting",
-          "description": "The original content uses '<1>{{productName}}</1>'. The Korean translation uses the same formatting. This appears consistent, so no change is strictly necessary, but consider if this is standard practice and if it is conveying the intended meaning (e.g., a specific tag or identifier for productName).",
-          "suggestion": "Maintain consistency with original formatting. Verify purpose of tags."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -156,25 +112,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'redirected to' is better translated as 'pārvests uz' or 'virzīts uz' rather than simply 'novirzīts uz'. While 'novirzīts uz' isn't wrong, it's not the most natural sounding translation in this context.",
-          "suggestion": "Pēc 10 sekundēm jūs tiksiet pārvests uz <1>{{productName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The sentence \"Over 10 seconden wordt u doorverwezen\" sounds slightly awkward in Dutch. A more natural phrasing would be \"Na 10 seconden wordt u...\"",
-          "suggestion": "Na 10 seconden wordt u doorverwezen naar de <1>{{productName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -186,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The possessive pronoun 'your' is missing. The English text uses 'you will be redirected', implying the redirection is for the user. The Portuguese translation 'será redirecionado' is passive and doesn't convey the same personalized experience.  It should be translated to reflect the user being redirected.",
-          "suggestion": "Em 10 segundos você será redirecionado para a <1>{{productName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -211,28 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The character 𑇪 (Devanagari letter 'ra') appears to be used incorrectly. It doesn't fit the context and is likely a typo.",
-          "suggestion": "Replace 𑇪 with the appropriate Sinhala character representing 'dalam'. Considering the context, it should be a time indicator, perhaps 'dalam'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'හොබව හරවා යවනු ලැබේ' is overly literal and doesn't flow naturally in Sinhala. A more idiomatic translation for 'redirected to' is needed.",
-          "suggestion": "Consider a more natural phrasing like 'ඔබව <1>{{productName}}</1> වෙත යොමු කරනු ලැබේ' or 'ඔබව <1>{{productName}}</1> වෙත යනු ලැබේ'."
-        },
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are unusual. They might need clarification or a standard format should be used consistently across all translations.",
-          "suggestion": "Verify if these tags are intentional and aligned with the project's requirements. If not, use standard HTML tags or remove them altogether based on the required output format."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -250,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'биц́ете' is not the standard or most natural way to express 'you will be' in this context. While technically understandable, it sounds slightly awkward.",
-          "suggestion": "Усмерићете"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -268,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'you will be redirected to' is translated as 'yönlendirileceksiniz', which is grammatically correct but sounds a bit abrupt and formal in Turkish. A more natural phrasing would be '... sayfasına yönlendirileceksiniz' (to the page of...).",
-          "suggestion": "10 saniye içinde <1>{{productName}}</1> sayfasına yönlendirileceksiniz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -292,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are present in both the English and Chinese versions.  While technically correct in preserving the formatting, it's unclear what their purpose is and if they should be removed or replaced with a more standard HTML tag (e.g., `<span>`) or removed entirely, depending on the context of their intended use.",
-          "suggestion": "Review the purpose of `<1>` and `</1>` tags.  Consider replacing them with a more standard HTML tag (e.g., `<span>`) or removing them if they are not semantically necessary."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,16 +3,17 @@
   "content": "Room cannot be restored",
   "content_en_sha1_hash": "535cea729d9ce554fc381ca1a410cd6f99bcf7ca",
   "created_at": "2025-05-19T21:30:53.672Z",
-  "updated_at": "2025-05-24T06:56:45.711Z",
+  "updated_at": "2026-05-15T14:00:06.687Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that a room cannot be restored, typically found on a button or dialog in a UI where users can select rooms to restore. The exact wording may vary based on whether the user has access to an archive folder root.",
+    "text": "This is an error message displayed in a dialog. It informs the user that a room cannot be restored, appearing when a user attempts to restore a room from an archive but is prevented by a tariff limit.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:14.135Z"
+    "updated_at": "2026-04-11T21:19:45.300Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
-      "line_number": 64,
+      "line_number": 74,
       "context": "if (isRoomsTariffLimit)\n return (\n <>\n <Text fontWeight={600}>\n {isArchiveFolderRoot\n ? t(\"CannotRestoreRoom\")\n : t(\"CannotCreateNewRoom\")}\n </Text>\n <br />\n <Text>\n {isArchiveFolderRoot",
       "module": "/packages/client"
     }
@@ -141,31 +142,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Imposibil de restaurat sala' is a very literal translation. A more natural Romanian phrasing would be 'Nu se poate restaura camera' or 'Restaurarea camerei nu este posibilă'. 'Sala' typically refers to a large room or hall, while 'camera' is a more general term for a room.  Given the context of 'Payments', 'camera' is likely the intended term.",
-          "suggestion": "Nu se poate restaura camera"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාමරය ප්‍රතිෂ්ඨාපනය කළ නොහැකි' while technically conveying 'cannot be restored', is a very formal and potentially unnatural phrasing in Sinhala for a user-facing message. A more natural and user-friendly translation would be preferable.",
-          "suggestion": "කාමරය යථා තත්ත්වයට පමුණුවා ගත නොහැකිය (Kamaraya yatha taththawathaya pamunuwa gata na hakiy)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Просторија не може бити обновљена' while technically correct, doesn't convey the most natural meaning in this context. 'Restore' in the context of a 'room' often implies a return to a previous state, which is better conveyed by a term like 'враћена' (vraćena).",
-          "suggestion": "Просторија не може бити враћена"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -207,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Неможливо відновити кімнати' is too literal and doesn't convey the nuance of 'Room cannot be restored'. It implies restoring multiple rooms. A more accurate translation would focus on the room itself.",
-          "suggestion": "Неможливо відновити кімнату"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

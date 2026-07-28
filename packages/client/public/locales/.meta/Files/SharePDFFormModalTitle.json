@@ -3,16 +3,17 @@
   "content": "Share PDF form",
   "content_en_sha1_hash": "be97f2e5a0e59dd9851031bf40feff0089df4deb",
   "created_at": "2025-05-19T21:30:56.195Z",
-  "updated_at": "2025-05-26T07:57:32.335Z",
+  "updated_at": "2026-05-28T15:46:18.548Z",
   "comment": {
-    "text": "The \"Share PDF form\" translation key is used as a title for a modal dialog in an application, indicating that the user can share a specific PDF form. This text appears on a header within the dialog, providing context to users about the purpose of sharing the file.",
+    "text": "This is the title of a dialog window. It appears when a user chooses to share a PDF form.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:07.364Z"
+    "updated_at": "2026-04-11T21:08:06.090Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SharePDFFormDialog/SharePDFFormDialog.tsx",
-      "line_number": 85,
+      "line_number": 98,
       "context": "autoMaxHeight\n onClose={handleOnClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"Files:SharePDFFormModalTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"Files:SharePDFFormModalDescription\")}\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"PDF 양식 공유 \" is a literal translation and sounds unnatural in Korean. A more natural phrasing would be \"PDF 양식 공유하기\" or \"PDF 공유 양식\" depending on the context of the modal.",
-          "suggestion": "PDF 공유 양식 or PDF 양식 공유하기"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Deel PDF formulier' is not ideal. 'Formulier' is a more formal term than necessary. A more natural Dutch translation would use 'form'.",
-          "suggestion": "Deel PDF form"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -160,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -183,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Подели PDF формулар' is not the most natural or accurate rendering of 'Share PDF form' in Serbian (Cyrillic).  'Formular' is a direct transliteration and not a standard Serbian word for 'form'.",
-          "suggestion": "Подели PDF образац"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, \"Podeli\" is a somewhat informal or colloquial way to say \"Share\". A more formal and commonly used translation would be \"Deljenje\" or \"Podelite\".",
-          "suggestion": "Deljenje PDF formular"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

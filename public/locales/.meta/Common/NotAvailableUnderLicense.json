@@ -3,16 +3,17 @@
   "content": "Not available under this license",
   "content_en_sha1_hash": "fc7d2762ca5286b81d400f0c8ae1c6279cc8c56a",
   "created_at": "2025-05-26T07:15:45.537Z",
-  "updated_at": "2025-06-02T10:20:51.605Z",
+  "updated_at": "2026-05-15T14:00:06.952Z",
   "comment": {
-    "text": "This translation key displays a message indicating that content is not available due to licensing restrictions, appearing on branding pages. It's used in two different contexts: one as part of a page component and another as part of a white label version of the same page. Translators should adapt this text to convey the same meaning while varying tone according to the context.",
+    "text": "This is a short text label displayed when a feature or option is unavailable due to the current license. It indicates that the user's license does not permit access to the displayed item.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:30.917Z"
+    "updated_at": "2026-04-11T20:47:49.489Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/NotAvailable.tsx",
-      "line_number": 44,
+      "line_number": 53,
       "context": "return (\n <div className={styles.notAvailableWrapper}>\n <ReactSVG className={styles.lockIcon} src={LockedReactSvgUrl} />\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"NotAvailableUnderLicense\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/shared"
     }
@@ -142,7 +143,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "sk": {
       "ai_translated": false,
@@ -187,6 +188,24 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

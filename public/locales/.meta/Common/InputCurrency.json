@@ -1,0 +1,29 @@
+{
+  "key_path": "InputCurrency",
+  "content": "Input ({{currency}}/1M)",
+  "content_en_sha1_hash": "bbc5e357a0c56d0a4af679416681361e811be123",
+  "created_at": "2026-07-03T11:07:36.984Z",
+  "updated_at": "2026-07-03T11:10:56.706Z",
+  "comment": {
+    "text": "Table column header title displaying an input amount in a specific currency ({{currency}}) per 1 million units.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:10:56.706Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/TableHeader.tsx",
+      "line_number": 71,
+      "context": "active: true,\n minWidth: 180,\n },\n {\n key: \"Input\",\n title: t(\"Common:InputCurrency\", { currency: aiModelsCurrencySymbol }),\n enable: true,\n resizable: true,\n minWidth: 90,\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,16 +3,17 @@
   "content": "Share this document",
   "content_en_sha1_hash": "e221ad72445df0b9bdff3f83c62c294910835379",
   "created_at": "2025-05-19T21:30:48.642Z",
-  "updated_at": "2025-09-23T07:24:24.402Z",
+  "updated_at": "2026-05-15T14:00:06.938Z",
   "comment": {
-    "text": "This translation key is used to display a message encouraging users to share a document. It appears as part of a UI element containing a button or link that allows users to share a file, and its purpose is to provide context for the sharing action.",
+    "text": "This is the header text for a share information bar. It appears when a user is sharing a document, indicating the action being performed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:15.941Z"
+    "updated_at": "2026-04-11T20:43:04.365Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/ShareInfoBar.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "}\n \n return {\n headerText: isFolder\n ? t(\"Common:ShareFolder\")\n : t(\"Common:ShareDocument\"),\n bodyText: isFolder\n ? t(\"Common:ShareFolderDescription\")\n : t(\"Common:ShareDocumentDescription\"),\n iconName: InfoIcon,\n onClose: () => setVisibleBar(false),",
       "module": "/packages/shared"
     }
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Համօգտագործել այս փաստաթուղթը\" translates to 'Use this document' which doesn't accurately convey the meaning of 'Share this document'. 'Share' implies giving access or distributing, while 'use' implies personal consumption.",
-          "suggestion": "A more accurate translation could be something like \"Բաշխեք այս փաստաթուղթը\" (Bashkeg ays fasitoghutyun) - meaning 'Distribute this document', or \"Միավորեք այս փաստաթուղթը\" (Miavordz ays fasitoghutyun) meaning 'Share this document' (in a collaborative sense)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -105,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"이 문서 공유\" is a literal translation of \"Share this document\" and lacks a polite verb conjugation. It sounds abrupt and unnatural in Korean. A more appropriate translation would include a verb conjugation to make it sound more polite and natural.",
-          "suggestion": "이 문서를 공유해주세요 (I munseoreul gongyohaeyeo juseyo)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -160,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -189,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Deli ovaj dokument\" is not the most natural or accurate rendering of \"Share this document\" in Serbian. \"Deli\" is a command form, and while technically correct, a more common and polite phrasing would be \"Podeli ovaj dokument\" or \"Podelite ovaj dokument\" (formal).",
-          "suggestion": "Podeli ovaj dokument"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -217,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,33 +1,44 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import type { DateTime } from "luxon";
+
+import type { TFile } from "@docspace/ui-kit/types";
 
 import {
   ConflictResolveType,
@@ -47,11 +58,10 @@ import { request } from "../client";
 import { SHARED_MEMBERS_COUNT } from "../../constants";
 
 import FilesFilter from "./filter";
-import {
+import type {
   TDocServiceLocation,
   TEditDiff,
   TEditHistory,
-  TFile,
   TFileLink,
   TFilesSettings,
   TFilesUsedSpace,
@@ -76,7 +86,9 @@ import {
   TFileFillingFormStatus,
   TShareToUser,
   TDefaultTemplate,
+  UpdateXlsxResponse,
 } from "./types";
+
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
 export async function openEdit(
@@ -710,8 +722,9 @@ export async function startUploadSession(
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
+  signal?: AbortSignal,
 ) {
-  const data = {
+  const data: Record<string, unknown> = {
     fileName,
     fileSize,
     relativePath,
@@ -725,6 +738,7 @@ export async function startUploadSession(
     url: `/files/${folderId}/session`,
     data,
     skipForbidden: true,
+    signal,
   }) as TUploadOperation;
 }
 
@@ -733,11 +747,13 @@ export async function uploadChunkParallel(
   sessionId: string,
   chunkNumber: number,
   data: FormData,
+  signal?: AbortSignal,
 ) {
   return request({
     method: "post",
     url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
     data,
+    signal,
   });
 }
 
@@ -756,10 +772,12 @@ export async function uploadChunkSequential(
 export async function finalizeUploadSession(
   folderId: string | number,
   sessionId: string,
+  signal?: AbortSignal,
 ) {
   const res = await request({
     method: "put",
     url: `/files/${folderId}/session/${sessionId}/finalize`,
+    signal,
   });
   return res;
 }
@@ -897,7 +915,12 @@ export async function moveToFolder(
   return res;
 }
 
-export async function getFileVersionInfo(fileId: number, shareKey?: string) {
+export async function getFileVersionInfo(
+  /** Callers pass both numeric and string ids (e.g. `${item.id}`); the id is
+   * only interpolated into the URL. */
+  fileId: number | string,
+  shareKey?: string,
+) {
   const res = (await request({
     method: "get",
     url: `/files/file/${fileId}/history`,
@@ -931,9 +954,11 @@ export async function getNewFiles(folderId: number | string) {
 }
 
 export async function getNewFilesAgents() {
+  // Agents are served by the new-ai service now; its /news endpoint forwards
+  // to the same .NET /ai/agents/news, so the response shape is identical.
   const res = (await request({
     method: "get",
-    url: `/ai/agents/news`,
+    url: `/new-ai/agents/news`,
   })) as TNewFiles[];
 
   return res;
@@ -951,8 +976,8 @@ export async function getNewFolderFiles(folderId: number | string) {
 // TODO: update res type
 export async function convertFile(
   fileId: string | number | null,
-  outputType = null,
-  password = null,
+  outputType: string | null = null,
+  password: string | null = null,
   sync = false,
 ) {
   const data = { password, sync, outputType };
@@ -961,7 +986,13 @@ export async function convertFile(
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  })) as { result: { webUrl: string; title: string } }[];
+  })) as {
+    result: { webUrl: string; title: string };
+    /** Conversion progress percent (0-100). */
+    progress?: number;
+    /** Conversion error text; empty when the conversion succeeded. */
+    error?: string;
+  }[];
 
   return res;
 }
@@ -1239,6 +1270,27 @@ export async function getSettingsFiles(headers = null) {
   return res;
 }
 
+export type TAccessControlSettings = Pick<
+  TFilesSettings,
+  | "externalShare"
+  | "defaultShareLinkInternal"
+  | "externalShareApplyToDocuments"
+  | "externalShareApplyToRooms"
+  | "blockExistingLinksOnRestrict"
+>;
+
+export async function setAccessControlSettings(
+  settings: TAccessControlSettings,
+) {
+  const res = (await request({
+    method: "put",
+    url: "/files/settings/externalsharingsettings",
+    data: settings,
+  })) as TAccessControlSettings;
+
+  return res;
+}
+
 export async function markAsFavorite(fileIds: number[], folderIds: number[]) {
   const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
@@ -1304,6 +1356,53 @@ export async function getEncryptionAccess(fileId: number | string) {
     url: `privacyroom/access/${fileId}`,
     data: fileId,
   })) as { [key: string]: string | boolean };
+
+  return res;
+}
+
+export async function getFileEncryptionAccess(fileId: number | string) {
+  const res = await request({
+    method: "get",
+    url: `files/${fileId}/access`,
+  });
+
+  return res as import("./types").TFileEncryptionInfo;
+}
+
+export async function setFileEncryptionKeys(
+  fileId: number | string,
+  keys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+  }>,
+) {
+  const res = await request({
+    method: "put",
+    url: `files/${fileId}/access`,
+    data: keys,
+  });
+
+  return res;
+}
+
+export async function updateFileStream(
+  fileId: number | string,
+  file: File,
+  encrypted: boolean,
+  forcesave: boolean,
+) {
+  const fd = new FormData();
+
+  fd.append("file", file);
+  fd.append("encrypted", String(encrypted));
+  fd.append("forcesave", String(forcesave));
+
+  const res = await request({
+    method: "put",
+    url: `/files/${fileId}/update`,
+    data: fd,
+  });
 
   return res;
 }
@@ -2000,4 +2099,25 @@ export async function setOrganizeGrouping(set: boolean) {
   });
 
   return res as boolean;
+}
+
+export async function updateXlsxFile(fileId: string | number) {
+  return request<UpdateXlsxResponse>({
+    method: "POST",
+    url: `/files/file/${fileId}/xlsx`,
+  });
+}
+
+export async function updateXlsxFolder(folderId: string | number) {
+  return request<UpdateXlsxResponse>({
+    method: "POST",
+    url: `/files/folder/${folderId}/xlsx`,
+  });
+}
+
+export async function getProgressXlsx(itemId: string | number) {
+  return request<UpdateXlsxResponse["task"]>({
+    method: "GET",
+    url: `/files/file/${itemId}/xlsx`,
+  });
 }

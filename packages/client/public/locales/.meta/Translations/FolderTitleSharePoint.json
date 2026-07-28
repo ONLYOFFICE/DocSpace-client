@@ -3,16 +3,17 @@
   "content": "SharePoint directory",
   "content_en_sha1_hash": "ba3b2bcebb6c52948e33724869585c561a7dec4f",
   "created_at": "2025-05-19T21:30:49.979Z",
-  "updated_at": "2025-10-27T16:14:33.354Z",
+  "updated_at": "2026-05-28T15:46:18.564Z",
   "comment": {
-    "text": "This translation key is used to display the title of a SharePoint directory. It appears in various contexts, such as file lists or directories, where a user needs to identify the type of storage location. The label will be translated to reflect its specific content.",
+    "text": "This is a folder title displayed in the file list. It identifies a folder that represents a connected SharePoint directory.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:32.860Z"
+    "updated_at": "2026-04-11T21:27:29.926Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 117,
+      "line_number": 161,
       "context": "case \"OneDrive\":\n case \"SkyDrive\":\n return t(\"Translations:FolderTitleSkyDrive\");\n \n case \"SharePoint\":\n return t(\"Translations:FolderTitleSharePoint\");\n case \"WebDav\":\n return t(\"Translations:FolderTitleWebDav\");\n case \"kDrive\":\n return t(\"Translations:FolderTitlekDrive\");\n case \"Yandex\":",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"مجلد SharePoint\" literally translates to \"SharePoint folder\". While understandable, \"SharePoint directory\" implies a broader collection of files and information, not just a single folder. A more accurate translation would convey this broader scope.",
-          "suggestion": "مجلدات SharePoint"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -87,25 +82,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'SharePoint գրացուցակ' is a literal translation of 'directory' as 'ցուցակ' which typically refers to a list or index, not a directory. A more appropriate translation for 'SharePoint directory' would be 'SharePoint թղթապանակների շարք' or 'SharePoint տեղամաս' depending on the specific context.",
-          "suggestion": "SharePoint թղթապանակների շարք"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cartella di SharePoint' is technically correct but could be improved to be more natural-sounding for Italian speakers. 'Directory' in this context implies a shared space, and 'Cartella' emphasizes just a folder. A better translation would reflect the concept of a shared space or repository.",
-          "suggestion": "Spazio SharePoint"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -123,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ໄດເລກະທໍລີ SharePoint\" doesn't accurately convey the meaning of \"SharePoint directory\". \"ໄດເລກະທໍລີ\" generally means 'directory' or 'folder,' but combining it with 'SharePoint' creates an unnatural phrasing. A more accurate translation would incorporate a phrase indicating a SharePoint location or container.",
-          "suggestion": "Consider alternatives like \"ບ່ອນເກັບຂໍ້ມູນ SharePoint\" (SharePoint data storage) or \"ໄດເລກະທໍລີ ຂອງ SharePoint\" (SharePoint's directory)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,20 +142,14 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Director SharePoint' doesn't accurately convey the meaning of 'SharePoint directory'. 'Director' translates to 'Director' in Romanian, but it doesn't fit the context of a directory. It implies a person rather than a location of files.",
-          "suggestion": "Dosar SharePoint"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -189,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Priečinok SharePoint' is a literal translation but doesn't quite convey the meaning of \"SharePoint directory\" as it's often understood. 'Directory' in this context refers to a specific area or repository within SharePoint.",
-          "suggestion": "Zložka SharePoint"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -231,16 +196,16 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Thư mục\" is a valid translation for 'directory', it's a very literal one. A more natural translation for 'SharePoint directory' would be something like 'SharePoint site' or 'SharePoint repository'. 'Directory' in this context refers to a collection of files and resources within SharePoint, and 'site' or 'repository' conveys that meaning better.",
-          "suggestion": "SharePoint site"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

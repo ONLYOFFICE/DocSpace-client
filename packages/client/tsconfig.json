@@ -11,7 +11,8 @@
       "PACKAGE_FILE": ["./package.json"],
       "COMMON_DIR/*": ["../common/*"],
       "@docspace/shared/*": ["../shared/*"],
-      "@docspace/ui-kit/*": ["../../libs/ui-kit/*"]
+      "@docspace/ui-kit/*": ["../../libs/ui-kit/*"],
+      "@onlyoffice/ai-chat": ["../../libs/ui-kit/node_modules/@onlyoffice/ai-chat/dist/index.d.ts"]
     },
     "target": "esnext",
     "types": ["vite/client"]

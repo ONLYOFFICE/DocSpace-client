@@ -1,0 +1,29 @@
+{
+  "key_path": "AIFeaturesEnabled",
+  "content": "AI features enabled",
+  "content_en_sha1_hash": "2aabdfb25234057920b26eaf0e9c67a33bb4beb9",
+  "created_at": "2026-07-03T11:07:18.744Z",
+  "updated_at": "2026-07-03T11:14:53.986Z",
+  "comment": {
+    "text": "Status label in the AI settings banner indicating that AI functionality is currently active.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:14:53.986Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 148,
+      "context": "<div className={styles.textBlock}>\n <div className={styles.title}>\n {isEnabled ? <EnabledIcon className={styles.enabledIcon} /> : null}\n <Text fontSize=\"13px\" fontWeight={600}>\n {isEnabled\n ? t(\"Common:AIFeaturesEnabled\")\n : t(\"Common:ActivateAIFeaturesToGetStarted\")}\n </Text>\n {isMobile && isEnabled ? (\n <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

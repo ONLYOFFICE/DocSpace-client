@@ -3,16 +3,17 @@
   "content": "Personal data has been successfully deleted",
   "content_en_sha1_hash": "e256cc198af35fcc4ab33a823b0b291ec5372e4b",
   "created_at": "2025-05-19T21:30:53.528Z",
-  "updated_at": "2025-05-26T07:57:32.382Z",
+  "updated_at": "2026-05-15T14:00:06.716Z",
   "comment": {
-    "text": "Personal data deletion confirmation message used to notify users when their personal data has been successfully deleted. This translation key is likely used in a button or dialog prompt within the application, where it will be displayed to confirm that personal data removal was successful.",
+    "text": "Toast message. Appears after a user successfully deletes personal data from a contact.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:32.686Z"
+    "updated_at": "2026-04-11T21:19:55.227Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/contacts/utils.ts",
-      "line_number": 237,
+      "line_number": 246,
       "context": "window.dispatchEvent(event);\n };\n \n export const onDeletePersonalDataClick = (t: TTranslation) => {\n toastr.success(t(\"PeopleTranslations:SuccessDeletePersonalData\"));\n };\n \n export const onInviteAgainClick = (\n item: ReturnType<UsersStore[\"getPeopleListItem\"]>,\n t: TTranslation,",
       "module": "/packages/client"
     }
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

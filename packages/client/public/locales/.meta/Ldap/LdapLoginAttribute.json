@@ -3,16 +3,17 @@
   "content": "Login Attribute",
   "content_en_sha1_hash": "3ac7b30a623c8fc7cb1536f89a7edbd479a9ee87",
   "created_at": "2025-05-19T21:30:54.231Z",
-  "updated_at": "2025-08-11T18:11:59.242Z",
+  "updated_at": "2026-05-15T14:00:06.849Z",
   "comment": {
-    "text": "The \"Login Attribute\" translation key is used to display a label for an LDAP authentication field that requires users to select or input their login attribute. This field is expected in a connection settings dialog or similar interface where users configure LDAP integration.",
+    "text": "This is the label for a text input field where the administrator specifies the LDAP attribute used for user login.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:08.526Z"
+    "updated_at": "2026-04-11T21:17:02.818Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
-      "line_number": 141,
+      "line_number": 150,
       "context": "style={LAST_FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.loginAttribute}\n labelText={t(\"LdapLoginAttribute\")}\n tooltipContent={t(\"LdapLoginAttributeTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"login_attribute_field_container\"\n >",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"ميزة تسجيل الدخول\" translates to \"Login Feature\" rather than \"Login Attribute\". While close, 'attribute' implies a specific data field, and 'feature' is more general.",
-          "suggestion": "مُسَمَّى تسجيل الدخول"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -111,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄຸນນະສົມບັດເຂົ້າສູ່ລະບົບ' while technically correct, is a bit verbose and formal for a simple 'Login Attribute'. A more natural and concise translation would be preferable.",
-          "suggestion": "ຄຸນນະພາບເຂົ້າສູ່ລະບົບ (Khunnaphap khao su rabop) - emphasizing the quality or property of login.  Or even simpler: ລະບຸຕົວເຂົ້າສູ່ລະບົບ (Rabutua khao su rabop) - Login Identifier"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -129,25 +118,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Login Attribuut' is understandable, 'Attribuut' is a direct transliteration and not the most natural Dutch phrasing. A more accurate and idiomatic translation would be 'Inlogattribuut'.",
-          "suggestion": "Inlogattribuut"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a colon at the end of the phrase. This might not be necessary or appropriate depending on the context where this key is used.",
-          "suggestion": "Consider removing the colon: 'Atrybut logowania'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -171,37 +148,19 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Атрибут логин' is a literal translation and doesn't flow naturally in Russian. It's missing the definite article or preposition that would be used in a natural phrase.",
-          "suggestion": "Consider a more idiomatic translation like 'Атрибут для входа' (Attribute for login) or 'Входной атрибут' (Login attribute)."
-        }
-      ],
-      "approved_at": null
+      "ai_spell_check_issues": [],
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පුරනය වීමේ ගුණාංගය' (puranaya vimne gunaangay) while technically meaning 'attribute of logging in', doesn't convey the meaning of 'Login Attribute' accurately. It is overly literal and sounds unnatural in Sinhala.",
-          "suggestion": "Consider a more natural translation like 'ඇතුළු වීම් ගුණාංගය' (athuuluma vim ganaangay) or 'පිවිසුම් ගුණාංගය' (pivusum gunaangay), which directly translates to 'Login Attribute' or 'Access Attribute' respectively, while sounding more idiomatic."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Atribút Prihlásenie' is a literal translation of 'Login Attribute' but doesn't convey the intended meaning clearly in Slovak. 'Prihlásenie' directly translates to 'Login' which makes the phrase read as 'Login Attribute of Login' - redundant and confusing. The correct terminology in Slovak would involve the attribute *used for* login.",
-          "suggestion": "Consider 'Používateľský atribút prihlásenia' (User login attribute) or 'Atribút na prihlásenie' (Attribute for login)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -225,25 +184,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Oturum Açma Özelliği\" is a literal translation of \"Login Attribute\", it's not the most natural or commonly used term in Turkish for this context.  'Giriş Özelliği' or 'Kullanıcı Özelliği' would be more appropriate, depending on the exact usage within the LDAP configuration.",
-          "suggestion": "Consider 'Giriş Özelliği' or 'Kullanıcı Özelliği' depending on the LDAP context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Атрибут логіну\" is understandable, a more accurate and commonly used translation would be \"Атрибут входу\" or \"Атрибут авторизації\". \"Логіну\" directly translates to \"login\" and isn't the standard terminology in Ukrainian for this context.",
-          "suggestion": "Атрибут входу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

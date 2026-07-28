@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { makeAutoObservable, observable } from "mobx";
 import axios from "axios";
@@ -44,57 +53,17 @@ import {
 import { getBackupsCount } from "@docspace/shared/api/backup";
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { formatterCurrencyWithoutTranction } from "SRC_DIR/pages/PortalSettings/categories/payments/SaaS/wallet/utils";
+import { formatterCurrencyWithoutTranction } from "@docspace/ui-kit/billing/wallet/utils";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
   AI_ENUM,
-  AI_TOOLS,
   BACKUP_SERVICE,
   STORAGE_ENUM,
-} from "@docspace/shared/constants";
+} from "@docspace/ui-kit/billing/constants";
+import { parseAiPrices } from "@docspace/ui-kit/billing/utils/parsers";
+import type { TAiToolsPrices } from "@docspace/ui-kit/billing/types";
 
-type TAiToolsChatPrice = {
-  prompt: number;
-  completion: number;
-};
-
-type TAiToolsEmbeddingPrice = {
-  prompt: number;
-};
-
-type TAiToolsChatModelPrice = {
-  id: string;
-  alias: string;
-  provider: string;
-  image: string;
-  price: TAiToolsChatPrice;
-};
-
-type TAiToolsEmbeddingModelPrice = {
-  id: string;
-  alias: string;
-  provider: string;
-  image: string;
-  price: TAiToolsEmbeddingPrice;
-};
-
-type TAiToolsWebSearchPrice = {
-  id: string;
-  alias: string;
-  provider: string;
-  image: string;
-  price: number;
-};
-
-export type TAiToolsPrices = {
-  currency?: {
-    code: string;
-    symbol: string;
-  };
-  chat?: TAiToolsChatModelPrice[];
-  embedding?: TAiToolsEmbeddingModelPrice[];
-  webSearch?: TAiToolsWebSearchPrice[];
-};
+export type { TAiToolsPrices };
 
 class ServicesStore {
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
@@ -115,7 +84,7 @@ class ServicesStore {
 
   partialUpgradeFee: number = 0;
 
-  reccomendedAmount: number = 0;
+  recommendedAmount: number = 0;
 
   featureCountData: number = 0;
 
@@ -124,6 +93,8 @@ class ServicesStore {
   aiToolsBalance: TBalance = null;
 
   aiToolsPrices: TAiToolsPrices | null = null;
+
+  isAiToolsPricesLoading = false;
 
   usedBackupsCount: number = 0;
 
@@ -145,27 +116,6 @@ class ServicesStore {
     });
   }
 
-  // get storageSizeIncrement() { // temp in payment store because of storage tariff deeactivation
-  //   return (
-  //     (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
-  //       ?.value || 0
-  //   );
-  // }
-
-  // get storagePriceIncrement() {
-  //   return this.servicesQuotas?.price.value ?? 0;
-  // }
-
-  // get storageQuotaIncrementPrice() {
-  //   return (
-  //     this.servicesQuotas?.price ?? {
-  //       value: 0,
-  //       currencySymbol: "",
-  //       isoCurrencySymbol: "USD",
-  //     }
-  //   );
-  // }
-
   get aiServiceBalance() {
     if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
       return this.aiToolsBalance.subAccounts[0].amount;
@@ -173,38 +123,11 @@ class ServicesStore {
     return 0.0;
   }
 
-  get isAiServiceLowBalance() {
-    if (!this.wasFirstAiServiceTopUp) return false;
-
-    return this.aiServiceBalance < 1;
-  }
-
   get aiServiceCodeCurrency() {
     if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
       return this.aiToolsBalance.subAccounts[0].currency;
 
     return "USD";
-  }
-
-  get aiServiceLastCreditAmount() {
-    if (!this.aiToolsBalance || typeof this.aiToolsBalance === "number")
-      return null;
-
-    return this.aiToolsBalance.lastCredit?.amount ?? null;
-  }
-
-  get aiServiceLastCreditCurrency() {
-    if (!this.aiToolsBalance || typeof this.aiToolsBalance === "number")
-      return "";
-
-    return this.aiToolsBalance.lastCredit?.currency ?? "USD";
-  }
-
-  get aiServiceLastCreditDate() {
-    if (!this.aiToolsBalance || typeof this.aiToolsBalance === "number")
-      return null;
-
-    return this.aiToolsBalance.lastCredit?.date ?? null;
   }
 
   get aiModelsCurrency() {
@@ -215,98 +138,84 @@ class ServicesStore {
   }
 
   get aiModelsCurrencySymbol() {
-    const currency = this.aiToolsPrices?.currency;
-    if (!currency) return "$";
-
-    return currency.symbol ?? "$";
+    return this.aiToolsPrices?.currency?.symbol ?? "$";
   }
 
-  get minimumInputPrice() {
-    const inputValues: Array<number | undefined> = [];
+  formatAiModelsCurrency = (amount: number) => {
+    const { language } = authStore;
 
-    for (const model of this.aiToolsPrices?.chat ?? []) {
-      inputValues.push(model.price?.prompt);
-    }
-
-    for (const model of this.aiToolsPrices?.embedding ?? []) {
-      inputValues.push(model.price?.prompt);
-    }
-
-    for (const ws of this.aiToolsPrices?.webSearch ?? []) {
-      inputValues.push(ws.price);
-    }
-
-    const values = inputValues.filter((v): v is number => Number.isFinite(v));
-
-    return values.length ? Math.min(...values) : 0;
-  }
-
-  get minimumOutputPrice() {
-    const values = (this.aiToolsPrices?.chat ?? [])
-      .map((m) => m.price?.completion)
-      .filter((v): v is number => Number.isFinite(v));
-
-    return values.length ? Math.min(...values) : 0;
-  }
-
-  get wasFirstAiServiceTopUp() {
-    // return false;
-    if (!this.aiToolsBalance) return false;
-
-    return this.aiToolsBalance.subAccounts.length !== 0;
-  }
-
-  setPartialUpgradeFee = (partialUpgradeFee: number) => {
-    this.partialUpgradeFee = partialUpgradeFee;
+    return formatterCurrencyWithoutTranction(
+      language,
+      amount,
+      this.aiModelsCurrency,
+    );
   };
 
-  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
-    this.isVisibleWalletSettings = isVisibleWalletSettings;
+  formatAiServiceCurrency = (
+    item: number | null = null,
+    fractionDigits: number = 3,
+    currency: string = this.aiServiceCodeCurrency,
+  ) => {
+    const { language } = authStore;
+
+    const amount = item ?? this.aiServiceBalance;
+
+    return formatCurrencyValue(language, amount, currency, fractionDigits);
   };
 
-  setIsInitServicesPage = (isInitServicesPage: boolean) => {
-    this.isInitServicesPage = isInitServicesPage;
-  };
-
-  setIsInitServiceData = (isInitServicesData: boolean) => {
-    this.isInitServicesData = isInitServicesData;
-  };
-
-  fetchAiPrices = async () => {
+  fetchAiServiceBalance = async (isRefresh?: boolean) => {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
     try {
-      const res = await getAiPrices(abortController.signal);
+      const res = await getServiceQuotaBalance(
+        isRefresh,
+        abortController.signal,
+      );
+
       if (!res) return;
-      this.aiToolsPrices = res;
+
+      this.aiToolsBalance = res;
     } catch (error) {
       if (axios.isCancel(error)) return;
       console.error(error);
     }
   };
 
-  fetchAiModelAvailabilitySettings = async () => {
+  fetchAiPrices = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    this.isAiToolsPricesLoading = true;
+
+    try {
+      const res = await getAiPrices(abortController.signal);
+
+      const prices = parseAiPrices(res);
+
+      if (prices) this.aiToolsPrices = prices;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    } finally {
+      this.isAiToolsPricesLoading = false;
+    }
+
+    this.isAiToolsPricesLoading = false;
+  };
+
+  fetchAiModelRestrictions = async () => {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
     try {
       const res = await getAiModelRestrictions(abortController.signal);
-      if (!res) return;
+
+      const models = Array.isArray(res) ? [] : (res?.models ?? []);
 
       const nextMap = new Map<string, boolean>();
-
-      const restrictedModels = new Set<string>();
-
-      if (Array.isArray((res as { models?: unknown }).models)) {
-        (res as { models: string[] }).models.forEach((id) => {
-          if (!id) return;
-          restrictedModels.add(String(id));
-        });
-      }
-
-      restrictedModels.forEach((modelId) => {
-        nextMap.set(modelId, false);
+      models.forEach((id) => {
+        if (id) nextMap.set(String(id), false);
       });
 
       this.aiModelAvailabilityMap = nextMap;
@@ -354,273 +263,6 @@ class ServicesStore {
       const nextSet = new Set(this.aiModelAvailabilityUpdatingSet);
       nextSet.delete(modelId);
       this.aiModelAvailabilityUpdatingSet = nextSet;
-    }
-  };
-
-  formatAiModelsCurrency = (amount: number) => {
-    const { language } = authStore;
-
-    return formatterCurrencyWithoutTranction(
-      language,
-      amount,
-      this.aiModelsCurrency,
-    );
-  };
-
-  formatAiServiceCurrency = (
-    item: number | null = null,
-    fractionDigits: number = 3,
-    currency: string = this.aiServiceCodeCurrency,
-  ) => {
-    const { language } = authStore;
-
-    const amount = item ?? this.aiServiceBalance;
-
-    return formatCurrencyValue(language, amount, currency, fractionDigits);
-  };
-
-  fetchAiServiceBalance = async (isRefresh?: boolean) => {
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    try {
-      const res = await getServiceQuotaBalance(
-        AI_TOOLS,
-        isRefresh,
-        abortController.signal,
-      );
-
-      if (!res) return;
-
-      this.aiToolsBalance = res;
-    } catch (error) {
-      if (axios.isCancel(error)) return;
-      console.error(error);
-    }
-  };
-
-  fetchBackupsCount = async () => {
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    try {
-      const res = await getBackupsCount(
-        undefined,
-        undefined,
-        abortController.signal,
-      );
-
-      if (!res) return;
-
-      this.usedBackupsCount = res;
-    } catch (error) {
-      if (axios.isCancel(error)) return;
-      console.error(error);
-    }
-  };
-
-  // handleServicesQuotas = async () => { // temp in payment store because of storage tariff deeactivation
-  //   const res = await getServicesQuotas();
-
-  //   if (!res) return;
-
-  //   res[0].features.forEach((feature) => {
-  //     this.servicesQuotasFeatures.set(feature.id, feature);
-  //   });
-
-  //   this.servicesQuotas = res[0];
-
-  //   return res;
-  // };
-
-  setConfirmActionType = (value: string) => {
-    this.confirmActionType = value;
-  };
-
-  setReccomendedAmount = (amount: number) => {
-    this.reccomendedAmount = amount;
-  };
-
-  setFeatureCountData = (featureCountData: number) => {
-    this.featureCountData = featureCountData;
-  };
-
-  initServiceData = async (
-    t: TTranslation,
-    serviceName: string,
-    serviceEnum?: string,
-  ) => {
-    const isRefresh = window.location.href.includes("complete=true");
-
-    this.setIsInitServiceData(false);
-
-    if (!this.paymentStore || !this.currentTariffStatusStore) return;
-
-    const {
-      fetchTransactionHistory,
-      initWalletPayerAndBalance,
-      setServiceQuota,
-      fetchCardLinked,
-    } = this.paymentStore;
-
-    const { fetchPortalTariff, walletCustomerStatusNotActive } =
-      this.currentTariffStatusStore;
-
-    try {
-      let resolvedServiceName = serviceName;
-
-      if (serviceEnum === STORAGE_ENUM) {
-        resolvedServiceName =
-          (await setServiceQuota(serviceEnum)) ?? serviceName;
-      }
-
-      const serviceQuotaRequest =
-        serviceEnum !== STORAGE_ENUM
-          ? [setServiceQuota(serviceEnum ?? serviceName)]
-          : [];
-
-      const requests = [
-        ...serviceQuotaRequest,
-        fetchTransactionHistory(
-          null,
-          null,
-          true,
-          true,
-          "",
-          resolvedServiceName,
-        ),
-        initWalletPayerAndBalance(isRefresh),
-        fetchPortalTariff(isRefresh),
-      ];
-
-      if (serviceName === AI_TOOLS) {
-        requests.push(
-          this.fetchAiPrices(),
-          this.fetchAiServiceBalance(),
-          this.fetchAiModelAvailabilitySettings(),
-        );
-      }
-
-      if (serviceName === BACKUP_SERVICE) {
-        requests.push(this.fetchBackupsCount());
-      }
-
-      await Promise.all(requests);
-
-      if (this.paymentStore.isAlreadyPaid) {
-        if (this.paymentStore.isStripePortalAvailable) {
-          requests.push(this.paymentStore.setPaymentAccount());
-
-          if (this.paymentStore!.isPayer && walletCustomerStatusNotActive) {
-            requests.push(fetchCardLinked());
-          }
-
-          if (
-            this.paymentStore.isShowStorageTariffDeactivated() &&
-            this.paymentStore.isPayer
-          ) {
-            this.paymentStore.setIsShowTariffDeactivatedModal(true);
-          }
-        }
-
-        requests.push(this.paymentStore.fetchAutoPayments());
-      }
-
-      this.setIsInitServiceData(true);
-    } catch (error) {
-      console.error(error);
-      toastr.error(t("Common:UnexpectedError"));
-    }
-  };
-
-  servicesInit = async (t: TTranslation) => {
-    const isRefresh = window.location.href.includes("complete=true");
-
-    if (!isRefresh) {
-      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
-    }
-
-    const {
-      fetchAutoPayments,
-      fetchCardLinked,
-      setPaymentAccount,
-      initWalletPayerAndBalance,
-      handleServicesQuotas,
-    } = this.paymentStore!;
-
-    const { fetchPortalTariff, walletCustomerStatusNotActive } =
-      this.currentTariffStatusStore!;
-
-    try {
-      const requests = [
-        handleServicesQuotas(),
-        initWalletPayerAndBalance(isRefresh),
-        fetchPortalTariff(),
-        this.fetchAiServiceBalance(),
-        this.fetchAiPrices(),
-      ];
-
-      const [quotas] = await Promise.all(requests);
-
-      if (!quotas) throw new Error();
-
-      if (this.paymentStore!.isAlreadyPaid) {
-        if (this.paymentStore!.isStripePortalAvailable) {
-          requests.push(setPaymentAccount());
-
-          if (this.paymentStore!.isPayer && walletCustomerStatusNotActive) {
-            requests.push(fetchCardLinked());
-          }
-
-          if (
-            this.paymentStore!.isShowStorageTariffDeactivated() &&
-            this.paymentStore!.isPayer
-          ) {
-            this.paymentStore!.setIsShowTariffDeactivatedModal(true);
-          }
-        }
-        requests.push(fetchAutoPayments());
-      } else {
-        requests.push(fetchCardLinked());
-      }
-
-      this.setIsInitServicesPage(true);
-      if (isRefresh) {
-        const url = new URL(window.location.href);
-        const params = url.searchParams;
-
-        const amountParam = params.get("amount");
-        const recommendedAmountParam = params.get("recommendedAmount");
-        const actionTypeParam = params.get("actionType");
-
-        if (amountParam && recommendedAmountParam) {
-          const amount = Number(amountParam);
-          const recommendedAmount = Number(recommendedAmountParam);
-
-          this.setReccomendedAmount(Math.ceil(recommendedAmount));
-          this.setFeatureCountData(amount);
-        }
-
-        if (amountParam && !recommendedAmountParam) {
-          const amount = Number(amountParam);
-          this.setFeatureCountData(amount);
-        }
-
-        if (actionTypeParam) {
-          this.setConfirmActionType(actionTypeParam);
-          this.setVisibleWalletSetting(true);
-        }
-
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname,
-        );
-      }
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      toastr.error(t("Common:UnexpectedError"));
-      console.error(e);
     }
   };
 }

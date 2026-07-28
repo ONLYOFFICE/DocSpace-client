@@ -3,22 +3,71 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-02-19T13:36:33.148Z",
+  "updated_at": "2026-07-27T13:07:50.569Z",
   "comment": {
-    "text": "This translation key is used to display the title of a PDF form or document, appearing in a download dialog for files containing PDF forms. The title can be singular (\"Form\") or plural (\"Forms\"), depending on whether the file contains one or multiple forms.",
+    "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:05.184Z"
+    "updated_at": "2026-04-11T20:52:01.550Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useFilesHelper.ts",
+      "line_number": 394,
+      "context": "// server path, so it is missing from pathParts. Re-insert it after\n // the root crumb so returning to it keeps searchArea=Forms.\n if (formsSectionRef.current && !isThirdParty) {\n const insertIndex = breadCrumbs.findIndex((bc) => +bc.id === 0) + 1;\n breadCrumbs.splice(insertIndex, 0, {\n label: t(\"Forms\"),\n id: \"forms-section\",\n isRoom: true,\n rootFolderType: FolderType.FillingFormsRoom,\n });\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "line_number": 202,
+      "context": "withFormsTreeFolder &&\n !isUserOnly &&\n folder.rootFolderType === FolderType.VirtualRooms\n ) {\n newItems.push({\n label: t(\"Forms\"),\n id: \"forms-section\",\n parentId: folder.parentId!,\n rootFolderType: FolderType.FillingFormsRoom,\n filesCount: folder.filesCount!,\n foldersCount: folder.foldersCount!,",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "line_number": 299,
+      "context": "? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel:\n headerProps.headerLabel || (isForms ? t(\"Forms\") : t(\"RoomList\")),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "line_number": 299,
+      "context": "? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel:\n headerProps.headerLabel || (isForms ? t(\"Forms\") : t(\"RoomList\")),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 388,
+      "context": "const formsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);\n formsFilter.searchArea = RoomSearchArea.Forms;\n \n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n onClick: go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),\n children: [\n {\n id: \"forms-recent\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 611,
+      "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 808,
+      "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
+      "line_number": 86,
+      "context": "{\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n ];\n \n return options.filter((option) => !unavailableOptions.includes(option.key));",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 513,
+      "line_number": 520,
       "context": "isChecked={state.pdfForms.isChecked}\n isIndeterminate={state.pdfForms.isIndeterminate}\n items={state.pdfForms.files}\n titleFormat={state.pdfForms.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.PdfForms}\n title={t(\"Common:Forms\")}\n dataTestId=\"download_dialog_pdf-forms\"\n />\n ) : null}\n {state.diagrams.files.length > 0 ? (\n <DownloadContent",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getPDFTite.ts",
-      "line_number": 34,
+      "line_number": 43,
       "context": "export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {\n return isForm ? t(\"Common:Form\") : t(\"Common:Document\");\n };\n \n export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {\n return `PDF-${(isForms ? t(\"Common:Forms\") : t(\"Common:Documents\")).toLowerCase()}`;\n };",
       "module": "/packages/shared"
     }
@@ -154,18 +203,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ආකෘතිපත්‍ර\" (ākṛtipaṭra) is a possible translation for 'Forms', it's quite formal and might not be the most natural or common usage in all contexts. A more common and generally acceptable translation might be \"ගොඩනැගිලි\" (godanagiili) or simply \"ආකෘති\" (ākṛti). The best choice depends on the context.",
-          "suggestion": "Consider \"ගොඩනැගිලි\" (godanagiili) or \"ආකෘති\" (ākṛti) as alternatives, depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +232,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation \"Obrasci\" while potentially understandable, is not the most common or accurate translation of \"Forms\". A more common and accurate translation would be \"Forme\".",
-          "suggestion": "Forme"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -217,6 +254,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

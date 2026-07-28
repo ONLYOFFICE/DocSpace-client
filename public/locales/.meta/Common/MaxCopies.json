@@ -3,22 +3,23 @@
   "content": "{{copiesCount}} - maximum number of backup copies",
   "content_en_sha1_hash": "dc8889f65c1fdcd962fdee460240c4c975bb6319",
   "created_at": "2025-05-26T07:15:45.014Z",
-  "updated_at": "2025-08-11T09:02:44.094Z",
+  "updated_at": "2026-05-15T14:00:06.959Z",
   "comment": {
-    "text": "This translation key is used to display a maximum number of backup copies, typically found in a settings or configuration section. The translated text will appear as an option label in a combobox used to select the maximum number of copies, likely on a schedule or backup settings page.",
+    "text": "This is a label for a dropdown menu option, indicating the maximum number of backup copies to be kept. The `{{copiesCount}}` variable will be replaced by a number (1-30).",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:38.134Z"
+    "updated_at": "2026-04-11T20:48:56.171Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/hooks/index.ts",
-      "line_number": 38,
+      "line_number": 47,
       "context": "const maxNumberCopiesArray = useMemo(() => {\n return Array(30)\n .fill(null)\n .map((_, index) => ({\n key: `${index + 1}`,\n label: `${t(\"Common:MaxCopies\", { copiesCount: index + 1 })}`,\n }));\n }, [t]);\n \n const periodsObject = useMemo(\n () => [",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/sub-components/ScheduleComponent/ScheduleComponent.tsx",
-      "line_number": 221,
+      "line_number": 231,
       "context": "<div className={classNames(styles.maxCopiesOption, \"maxCopiesOption\")}>\n <ComboBox\n options={maxNumberCopiesArray}\n selectedOption={{\n key: 0,\n label: `${t(\"Common:MaxCopies\", {\n copiesCount: selectedMaxCopiesNumber,\n })}`,\n }}\n onSelect={setMaxCopies}\n isDisabled={isLoadingData}",
       "module": "/packages/shared"
     }
@@ -154,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -205,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

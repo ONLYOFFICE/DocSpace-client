@@ -1,8 +1,11 @@
 {
   "ChangeData": "Modifica dati e password",
-  "ClickButtonBelow": "Se desideri accedere utilizzando la tua email, imposta una password personale. <br /> Quando sei pronto, fai clic sul pulsante qui sotto.",
+  "ClickButtonBelow": "Se desideri accedere utilizzando l'e-mail, ti preghiamo di impostare una password. <br/> Una volta completata l'operazione, clicca sul pulsante sottostante.",
   "ContinueToProduct": "Continua su {{productName}}",
   "GeneratedPassword": "Password generata",
   "ProductNameDetail": "Nome di {{productName}}",
-  "ReviewAccountDetails": "Dedica un momento alla revisione dei dettagli del tuo account:"
+  "ReviewAccountDetails": "Dedica un momento alla revisione dei dettagli del tuo account:",
+  "SetEmailPassword": "Imposta password",
+  "WelcomeSubtitle": "Il tuo spazio è stato creato con successo. Controlla i dettagli del tuo profilo e inizia a lavorare.",
+  "YourProfileDetails": "I dettagli del tuo profilo"
 }

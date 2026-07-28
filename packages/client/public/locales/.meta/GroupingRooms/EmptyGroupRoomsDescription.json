@@ -1,0 +1,32 @@
+{
+  "key_path": "EmptyGroupRoomsDescription",
+  "content": "There are no rooms here. Try adding a room or remove this group.",
+  "content_en_sha1_hash": "dc5c9ab75de492a7d03dc411637c358f220ef49f",
+  "created_at": "2026-02-19T13:36:24.873Z",
+  "updated_at": "2026-05-15T14:00:06.592Z",
+  "comment": {
+    "text": "This is a descriptive text displayed when a room group is empty, suggesting actions to the user.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:11:35.240Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyRoomGroupContainer.tsx",
+      "line_number": 79,
+      "context": "return (\n <EmptyView\n icon={icon}\n title={t(\"GroupingRooms:GroupIsEmpty\")}\n description={t(\"GroupingRooms:EmptyGroupRoomsDescription\")}\n options={options}\n className={styles.wrapper}\n bodyClassName={styles.body}\n />\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "key_path": "UpcomingPayments",
+  "content": "Upcoming payments",
+  "content_en_sha1_hash": "48131f54938649b45d505495e6737b6ed2d9b09c",
+  "created_at": "2026-06-25T11:54:59.778Z",
+  "updated_at": "2026-07-07T08:59:22.052Z",
+  "comment": {
+    "text": "Section title in the wallet interface that labels the area displaying scheduled future transactions.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:57:40.908Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/UpcomingPayments.tsx",
+      "line_number": 70,
+      "context": "})}`;\n \n return (\n <div className={styles.card}>\n <Text fontSize=\"12px\" fontWeight={600} className={styles.mutedTitle}>\n {t(\"UpcomingPayments\")}\n </Text>\n <Text fontSize=\"18px\" fontWeight={700}>\n {formatWalletCurrency(upcomingTotal, 2, walletCodeCurrency)}\n </Text>\n {upcomingPayments.length === 0 ? (",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 192,
+      "context": "</div>\n ),\n },\n {\n id: \"upcoming-payments\",\n name: t(\"UpcomingPayments\"),\n content: <UpcomingPayments />,\n },\n ];\n \n return (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "key_path": "ProviderURL",
+  "content": "URL",
+  "content_en_sha1_hash": "0e2d9b0777a485c1276de0803c12a7d76fbc5c39",
+  "created_at": "2025-10-27T16:14:31.653Z",
+  "updated_at": "2026-07-07T08:59:22.004Z",
+  "comment": {
+    "text": "This is a label for a text input field where the user enters the URL of an AI provider.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:28.676Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 528,
+      "context": "{t(\"Common:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n \n <FieldContainer\n labelText={t(\"Common:ProviderURL\")}\n labelVisible\n isVertical\n removeMargin\n isRequired\n >",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

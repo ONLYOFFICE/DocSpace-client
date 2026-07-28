@@ -1,6 +1,10 @@
 {
   "HideInput": "Fshihni",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} nga {{total}}</0> u ngarkuan. Kuota e ruajtjes u tejkalua — <1>shikoni detajet</1>.",
+  "QuotaExceededTooltip": "Kuota e ruajtjes u tejkalua. Lironi hapësirë ose përmirësoni planin tuaj, pastaj provoni përsëri.",
   "Ready": "I/E kryer",
-  "UploadingAndConversion": "Ngarkoni dhe konvertoni skedarët",
-  "UploadingError": "Ngarkimet"
+  "RetryAfterQuotaUpgrade": "Provoni përsëri pas rritjes së kuotës",
+  "RetryUpload": "Provoni përsëri",
+  "UploadingAndConversion": "Ngarkimi dhe Konvertimi",
+  "UploadingError": "Gabim gjatë ngarkimit"
 }

@@ -13,13 +13,19 @@ pip install -r requirements.txt
 
 To avoid the "docbuilder: license is invalid!" warning:
 
-**Option 1 (Easiest):** Set environment variable
+**Option 1 (Easiest):** Set environment variable in your shell profile
 ```bash
-cp .env.example .env
-# Edit .env: ONLYOFFICE_BUILDER_LICENSE=/path/to/license.lic
+# Add to ~/.bashrc, ~/.zshrc, or equivalent:
+export ONLYOFFICE_BUILDER_LICENSE="/path/to/license.xml"
 ```
 
-**Option 2:** Install in Document Builder directory
+**Option 2:** Use `.env` file in the scripts directory
+```bash
+cp .env.example .env
+# Edit .env: ONLYOFFICE_BUILDER_LICENSE=/path/to/license.xml
+```
+
+**Option 3:** Install in Document Builder directory
 - Windows: `C:\Program Files\ONLYOFFICE\DocumentBuilder\license.lic`
 - Linux: `/opt/onlyoffice/documentbuilder/license.lic`
 - macOS: `/Applications/ONLYOFFICE/DocumentBuilder.app/Contents/license.lic`

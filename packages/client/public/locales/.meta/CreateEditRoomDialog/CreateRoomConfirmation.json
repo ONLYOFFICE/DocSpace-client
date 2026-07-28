@@ -3,16 +3,17 @@
   "content": "Continue without connecting the storage?\nYou have selected a third-party storage option that is not connected yet. If you proceed without connecting the service, this option will not be added.",
   "content_en_sha1_hash": "2d29b440ea315d9ac9d67057564aa95d991d43fd",
   "created_at": "2025-05-19T21:30:56.786Z",
-  "updated_at": "2025-05-26T07:57:32.274Z",
+  "updated_at": "2026-05-15T14:00:06.666Z",
   "comment": {
-    "text": "This translation key is used for a confirmation message that appears when a user selects a third-party storage option that is not yet connected. The message prompts the user to decide whether to proceed without connecting the service. It appears in a dialog box, likely as part of a Create Room feature.",
+    "text": "This is the body text of a confirmation dialog that appears when a user tries to create a room with a third-party storage option that hasn't been connected yet.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:11.029Z"
+    "updated_at": "2026-04-11T21:04:52.794Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateRoomConfirmDialog/index.js",
-      "line_number": 53,
+      "line_number": 62,
       "context": "};\n \n const bodyText =\n selectedRoomType === RoomsType.VirtualDataRoom\n ? t(\"CreateEditRoomDialog:CreateRoomWatermarksConfirmation\")\n : t(\"CreateEditRoomDialog:CreateRoomConfirmation\");\n \n return (\n <ModalDialog\n visible={visible || confirmDialogIsLoading}\n onClose={onClose}",
       "module": "/packages/client"
     }
@@ -27,40 +28,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"وحدة التخزين\" (storage unit) is not the most natural way to refer to 'storage' in this context.  'التخزين' (al-takhzeen) would be a more accurate and common term for 'storage' referring to cloud storage or a storage service.",
-          "suggestion": "هل تريد المتابعة بدون توصيل التخزين؟"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"جهة خارجية\" (third party) is accurate but slightly formal for this user interface context. A more common and simpler phrasing would improve readability.  Consider 'طرف ثالث' as a slightly less formal alternative.",
-          "suggestion": "هل تريد المتابعة بدون توصيل التخزين؟ لقد حددت خيار تخزين من جهة خارجية غير متصل بعد."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Yaddaşa' is potentially a misspelling or incomplete form of 'Yaddaş'.",
-          "suggestion": "Yaddaş"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Siz hələ qoşulmamış üçüncü tərəfin yaddaş seçimini etmisiniz' is grammatically awkward. A more natural phrasing would improve readability.",
-          "suggestion": "Siz hələ qoşulmamış üçüncü tərəf yaddaş seçimini seçmisiniz."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'third-party storage option' is translated as 'üçüncü tərəf yaddaş seçimi'. While technically correct, 'xarici yaddaş seçimi' might be more aligned with common terminology or be more easily understood by the target audience.",
-          "suggestion": "xarici yaddaş seçimi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -96,18 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'You have selected a third-party storage option that is not connected yet' is translated as 'Et voi alentaa kolmannen osapuolen muistivaihtoehtoa, joka ei ole vielä yhdistetty.'  'Alentaa' (to reduce, lower) doesn't accurately convey 'selected'. It suggests a decrease or reduction, which isn't the intended meaning. A better translation would reflect the selection process.",
-          "suggestion": "Et ole valinnut kolmannen osapuolen muistivaihtoehtoa, joka ei ole vielä yhdistetty."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'this option will not be added' is translated as 'tätä vaihtoehtoa ei lisätä'. While grammatically correct, it sounds overly formal and impersonal. A more natural phrasing would improve the user experience.",
-          "suggestion": "tätä vaihtoehtoa ei oteta käyttöön."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -119,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The question mark is missing after the first sentence. It's a question.",
-          "suggestion": "Շարունակե՞լ առանց պահեստը միացնելու:?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -137,18 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"You have selected a third-party storage option that is not connected yet\" is too literal and sounds unnatural in Japanese. A more natural phrasing would be something like \"選択されたサードパーティストレージはまだ接続されていません\" (The third-party storage you selected is not yet connected).",
-          "suggestion": "選択されたサードパーティストレージはまだ接続されていません。"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure feels a bit clunky. Consider breaking it up for better readability.",
-          "suggestion": "ストレージを接続せずに続けますか？選択されたサードパーティストレージはまだ接続されていません。サービスを接続せずに進めると、このオプションは追加されません。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -160,35 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"third-party storage\" is a bit clunky in Lao. A more natural phrasing might be \"ການເກັບຂໍ້ມູນຂອງຝ່າຍທີສາມ\" or something similar.",
-          "suggestion": "Consider using a more natural Lao phrasing for 'third-party storage', such as 'ການເກັບຂໍ້ມູນຂອງຝ່າຍທີສາມ' or a similar idiom."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'If you proceed without connecting the service' could be more clearly translated as 'ຖ້າທ່ານດໍາເນີນການຕໍ່ໄປໂດຍບໍ່ເຊື່ອມຕໍ່ການບໍລິການ'.",
-          "suggestion": "Rewrite 'ຖ້າທ່ານດໍາເນີນການໂດຍບໍ່ມີການເຊື່ອມຕໍ່ການບໍລິການ' to 'ຖ້າທ່ານດໍາເນີນການຕໍ່ໄປໂດຍບໍ່ເຊື່ອມຕໍ່ການບໍລິການ' for clarity."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Create Room Confirmation' in the English context implies a confirmation message related to creating a room. The Latvian translation 'Vai turpināt, neizveidojot savienojumu ar krātuvi?' (Shall we continue without connecting to storage?) doesn't fully convey the context of confirming a room creation. It focuses solely on the storage connection issue.",
-          "suggestion": "Consider a more contextually appropriate translation such as: 'Apstiprināt istabes izveidi bez krātuves pieslēguma? Jūs esat izvēlējies trešās puses krātuves opciju, kas vēl nav pievienota. Ja turpināsiet, nepievienojot pakalpojumu, šī opcija netiks pievienota.'"
-        },
-        {
-          "type": "formatting",
-          "description": "The Latvian translation lacks a clear separation (e.g., a colon) between the question and the explanation, which is present in the English version. This makes it slightly less readable.",
-          "suggestion": "Add a colon or similar punctuation mark to separate the question and explanation, like this: 'Vai turpināt, neizveidojot savienojumu ar krātuvi: Esat atlasījis...' "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -200,35 +124,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'pamięci podmiotu trzeciego' (memory of a third party) is an awkward and potentially inaccurate translation of 'third-party storage'. A more natural Polish translation would be 'zewnętrznej pamięci' (external memory) or 'pamięci zewnętrznej'.",
-          "suggestion": "Kontynuować bez podłączania zewnętrznej pamięci?"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Jeśli będziesz kontynuować' is slightly verbose. A more concise and natural way to express it is 'Jeśli kontynuujesz'.",
-          "suggestion": "Jeśli kontynuujesz bez podłączenia usługi, dana opcja nie zostanie dodana."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure and flow can be improved for better readability in Polish. The two sentences could potentially be combined for a smoother read.",
-          "suggestion": "Kontynuować bez podłączania zewnętrznej pamięci? Wybrano zewnętrzną pamięć, która nie jest jeszcze podłączona. Jeśli kontynuujesz bez podłączenia usługi, dana opcja nie zostanie dodana."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"connecting the storage\" is translated as \"se conectar ao armazenamento.\" While technically correct, a more natural and idiomatic translation might be \"conectar o armazenamento\" or \"ligar ao armazenamento.\" \"Associada\" in the second sentence is also a less direct translation of \"connected\".",
-          "suggestion": "Continuar sem conectar o armazenamento? Selecionou uma opção de armazenamento de terceiros que ainda não está conectada. Se prosseguir sem conectar o serviço, esta opção não será adicionada."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -240,63 +142,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"conectarea serviciu de stocare\" is not grammatically correct. It should be \"conectarea serviciului de stocare\".",
-          "suggestion": "Continuați fără a conecta serviciul de stocare?"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Dacă continuați fără a vă conecta la serviciul\" is slightly awkward.  A more natural phrasing would be 'Dacă continuați fără a conecta serviciul'.",
-          "suggestion": "Dacă continuați fără a conecta serviciul"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation of 'third-party storage' is literal and a little clunky.  Consider a more idiomatic translation.",
-          "suggestion": "Ați selectat un serviciu de stocare extern care nu este încă conectat."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ආචයනය' (aachayanaya) likely refers to 'storage'. A more accurate translation would be 'ගබඩුව' (gabaduwa) or 'சேமிப்பகம்' (semipapakam - Sinhala transliteration for storage).",
-          "suggestion": "Replace 'ආචයනය' with 'ගබඩුව' or 'சேமிப்பகம்'."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'ඔබ තවමත් සම්බන්ධ කර නැති තෙවන පාර්ශ්ව ආචයන විකල්පයක් තෝරාගෙන ඇත' could be improved for better flow.  It's a bit clunky. ",
-          "suggestion": "Consider rewording to something like 'ඔබ තෝරාගත් තෙවන පාර්ශ්ව ගබඩුව ακόμα සම්බන්ධ කර නොමැත' (You have selected a third-party storage that is not yet connected)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'මෙම විකල්පය එකතු නොවේ' is a literal translation and could be more naturally expressed. The implication is that the storage option won't be *added* as a usable option.",
-          "suggestion": "Replace 'මෙම විකල්පය එකතු නොවේ' with 'මෙය ක්‍රියාත්මක නොවනු ඇත' (it won't be active) or 'මෙය සාමාන්‍ය පරිදි වැඩ නොකරනු ඇත' (it will not work normally)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Continue without connecting the storage?\" is not accurately translated. \"Ak budete pokračovať\" is more literal 'If you will continue' than a more appropriate phrasing like \"Pokračovať bez pripojenia úložiska?\" or \"Chcete pokračovať bez pripojenia úložiska?\"",
-          "suggestion": "Pokračovať bez pripojenia úložiska?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -308,30 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"трец́е\" is misspelled. It should be \"треће\".",
-          "suggestion": "треће"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase \"ако наставите без повезивања услуге\" is grammatically awkward. A more natural phrasing would be \"ако наставите без повезивања сервиса\".",
-          "suggestion": "ако наставите без повезивања сервиса"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'skladištenja' is misspelled. The correct spelling is 'skladištenja'.",
-          "suggestion": "skladištenja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -349,40 +196,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Continue without connecting the storage?\" is a bit abrupt and could be more naturally phrased. The current translation \"Tiếp tục mà không cần kết nối bộ nhớ?\" is literal but sounds slightly unnatural.",
-          "suggestion": "Tiếp tục mà không kết nối bộ nhớ?"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The sentence \"You have selected a third-party storage option that is not connected yet\" translates to \"Bạn đã chọn tùy chọn bộ nhớ của bên thứ ba chưa được kết nối.\" which is accurate but could be improved for flow. The word 'yet' doesn't directly translate and can be omitted.",
-          "suggestion": "Bạn đã chọn tùy chọn bộ nhớ của bên thứ ba chưa được kết nối."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'this option will not be added' translates to 'tùy chọn này sẽ không được thêm vào'. While technically correct, it’s a bit formal and could be simplified.",
-          "suggestion": "tùy chọn này sẽ không được sử dụng."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Continue without connecting the storage?' is translated as '继续且不连接存储？'. While technically correct, it sounds unnatural in Chinese. A more natural phrasing would be '继续而不连接存储吗？' or '继续不连接存储？'",
-          "suggestion": "继续而不连接存储吗？"
-        },
-        {
-          "type": "formatting",
-          "description": "The question mark in '继续且不连接存储？' feels slightly jarring given the preceding sentence structure. The suggestion includes a more natural question mark placement.",
-          "suggestion": "N/A (addressed through incorrect translation suggestion)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

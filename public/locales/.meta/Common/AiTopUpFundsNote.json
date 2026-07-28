@@ -1,0 +1,29 @@
+{
+  "key_path": "AiTopUpFundsNote",
+  "content": "Funds load directly into your AI balance.",
+  "content_en_sha1_hash": "6a481d36d9a53f053dd26808f142c852d0e30108",
+  "created_at": "2026-05-15T13:59:46.499Z",
+  "updated_at": "2026-05-15T14:00:48.913Z",
+  "comment": {
+    "text": "Informational note in the AI top-up dialog explaining that funds are credited directly to the user's AI balance.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:00:48.913Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AiSimpleTopUpDialog.tsx",
+      "line_number": 242,
+      "context": "{formattedAfter}\n </Text>\n </div>\n \n <Text fontSize=\"12px\" className={styles.fundsNote}>\n {t(\"AiTopUpFundsNote\")}\n </Text>\n </div>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

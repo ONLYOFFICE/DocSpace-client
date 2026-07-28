@@ -3,16 +3,17 @@
   "content": "Please note: A fee applies to each backup",
   "content_en_sha1_hash": "512c44b45a36ce7fbdcc312908a8cfdf8e540e36",
   "created_at": "2025-10-01T15:17:17.999Z",
-  "updated_at": "2025-10-01T15:17:52.249Z",
+  "updated_at": "2026-05-15T14:00:06.963Z",
   "comment": {
-    "text": "This text informs the user that a fee is associated with each backup. It appears within a note component on the backup page, likely to clarify pricing details. Translators should ensure the wording accurately reflects the fee structure.",
+    "text": "This is a note displayed to the user, informing them that each backup incurs a separate fee. It appears within a `NoteComponent`.",
     "is_auto": true,
-    "updated_at": "2025-10-01T15:17:52.249Z"
+    "updated_at": "2026-04-11T20:52:54.965Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/sub-components/NoteComponent.tsx",
-      "line_number": 41,
+      "line_number": 50,
       "context": "if (!isVisible) return null;\n \n return (\n <div className={styles.noteComponent}>\n <Text>{t(\"Common:FeeAppliesToEachBackup\")}</Text>\n </div>\n );\n };\n \n export default NoteComponent;",
       "module": "/packages/shared"
     }
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

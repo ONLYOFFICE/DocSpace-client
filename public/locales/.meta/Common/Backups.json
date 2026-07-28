@@ -1,0 +1,29 @@
+{
+  "key_path": "Backups",
+  "content": "Backups",
+  "content_en_sha1_hash": "530cc25bdc7d0ba5a4ef3d1206ec89ca3164965a",
+  "created_at": "2026-06-25T11:54:45.739Z",
+  "updated_at": "2026-06-30T11:38:22.665Z",
+  "comment": {
+    "text": "Service title used as a label for the backup category within the billing usage breakdown.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:21:04.963Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "line_number": 154,
+      "context": "// const getServiceTitle = (service: string) => {\n //   switch (service) {\n //     case DISK_STORAGE:\n //       return t(\"AdditionalStorageInfo\");\n //     case BACKUP_SERVICE:\n //       return t(\"Backups\");\n //     case AI_TOOLS:\n //       return t(\"AIFeatures\");\n //     default:\n //       return service;\n //   }",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

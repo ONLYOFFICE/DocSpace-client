@@ -3,17 +3,18 @@
   "content": "Select from {{productName}}",
   "content_en_sha1_hash": "3365d131cf57bbe561f947df5ac7dcf4feb0ca97",
   "created_at": "2025-05-19T21:30:48.440Z",
-  "updated_at": "2025-05-26T07:57:32.177Z",
+  "updated_at": "2026-05-15T14:00:06.611Z",
   "comment": {
-    "text": "This translation key is used to display a message prompting users to select from a portal. It appears when selecting files or actions in certain contexts and asks users to choose from a list of options related to a product named \"Product Name\".",
+    "text": "This is a button label or dialog title that appears when selecting a file from the portal. `{{productName}}` will be replaced with the brand name of the product (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:52:08.672Z"
+    "updated_at": "2026-04-11T20:43:36.273Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 59,
-      "context": "if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: t(\"Common:ProductName\"),\n });\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)",
+      "line_number": 69,
+      "context": "if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: getBrandName(\"ProductName\"),\n });\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}} dan seçin\" is not the most natural or accurate translation of \"Select from {{productName}}\".  While technically correct, 'dan' isn't the ideal preposition to use here. 'Seçin' is correct for 'Select', but a more idiomatic translation would use a preposition like 'üzrə' or 'lə'.",
-          "suggestion": "{{productName}} üzrə seçin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,42 +70,19 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Valitse {{productName}}:sta' is not the most natural or accurate translation of 'Select from {{productName}}'.  The ':sta' suffix implies 'from' in a way that can sound awkward in this context. A more natural translation would use a preposition like 'lta' or be restructured.",
-          "suggestion": "Valitse {{productName}} lta"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation could be improved for better flow. 'Valitse {{productName}}' alone might be better depending on the desired tone.  The addition of ':sta' makes it sound slightly more formal than potentially required.",
-          "suggestion": "Valitse {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sélectionner de {{productName}}' is not idiomatic French. 'Sélectionner' is correct, but 'de' doesn't work well here. It would be better to use a preposition that conveys 'from' in this context.",
-          "suggestion": "Sélectionner parmi {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ընտրել {{productName}}-ից\" literally translates to \"Select from {{productName}}-from\".  A more natural and accurate Armenian translation for \"Select from {{productName}}\" would be something like \"Ընտրել {{productName}}-ից\" or \"Ընտրել {{productName}}-նից\" depending on the desired level of formality and context.  The current translation feels clunky and grammatically awkward.",
-          "suggestion": "Ընտրել {{productName}}-ից"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -146,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Selecteer van {{productName}}\" is not the most natural Dutch phrasing. 'Van' implies selecting *from* something, but the English 'Select from' is often better translated as 'Kies uit' or 'Selecteer uit'.",
-          "suggestion": "Selecteer uit {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -170,13 +136,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Selecione em {{productName}}' is not the most natural or accurate translation of 'Select from {{productName}}'. While technically correct, it doesn't flow as well in Portuguese. 'Selecione' is correct, but 'em' (in/at) doesn't convey the meaning of 'from'.",
-          "suggestion": "Selecione a partir de {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -189,18 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Select from {{productName}}' implies choosing a value or option *within* a product. The Sinhala translation '{{productName}} වෙතින් තෝදන්න' literally translates to 'Select from {{productName}}'. While not entirely wrong, it doesn't convey the nuance of selection *within* the product as intended. A more appropriate translation might imply choosing from a set of options related to the product.",
-          "suggestion": "{{productName}} තුළින් තෝදන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -218,30 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The genitive case suffix '-а' might be incorrect depending on the gender of 'productName'. It assumes 'productName' is masculine. It needs to be adjusted based on the actual gender of 'productName'.",
-          "suggestion": "Consider using a more general phrase or dynamically adjust the case suffix based on the gender of 'productName'. For example: 'Изаберите из {{productName}}'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Изаберите из {{productName}}-а' is a very literal translation and doesn't flow naturally in Serbian. A more idiomatic translation would be better.",
-          "suggestion": "Consider 'Изаберите {{productName}}' or 'Одаберите из {{productName}}'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Serbian translation uses the genitive case ('-а') which might not be the most natural phrasing. Depending on the context, the locative case or even nominative might be more suitable.",
-          "suggestion": "Consider 'Izaberite iz {{productName}}' (locative) or 'Izaberite {{productName}}' (nominative) - context dependent."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -263,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

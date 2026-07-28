@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletSectionDescriptionAddons",
+  "content": "The Wallet allows you to easily purchase add-ons such as storage, AI tools, and backups. Add credits and select the <1>add-ons</1> you need to get started.",
+  "content_en_sha1_hash": "c36dd41c804f98e0002bce9b177a9418c8b050c6",
+  "created_at": "2026-06-25T11:55:00.426Z",
+  "updated_at": "2026-06-25T11:56:02.700Z",
+  "comment": {
+    "text": "Descriptive text in the Wallet section explaining how to purchase additional services. The <1> tag wraps a clickable link.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:56:02.700Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 201,
+      "context": "return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n <CommonTrans\n i18nKey=\"WalletSectionDescriptionAddons\"\n components={{\n 1: (\n <Link\n as=\"span\"\n onClick={onAddonsClick}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

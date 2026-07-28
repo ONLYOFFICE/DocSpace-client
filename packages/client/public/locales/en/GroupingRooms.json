@@ -8,7 +8,7 @@
   "DisablingRoomGroups": "Disabling room groups",
   "DisablingRoomGroupsDescription": "Groups will be saved but hidden. Re-enable in Profile, File management.",
   "EditRoomGroups": "Edit room groups",
-  "EmptyGroupDescription": "There are no rooms here. Try adding a room or remove this group.",
+  "EmptyGroupRoomsDescription": "There are no rooms here. Try adding a room or remove this group.",
   "GroupHasBeenDeleted": "The group has been deleted",
   "GroupIcon": "Group icon",
   "GroupIsEmpty": "Group is empty",

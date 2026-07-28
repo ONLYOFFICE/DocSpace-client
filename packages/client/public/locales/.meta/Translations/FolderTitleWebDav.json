@@ -3,16 +3,17 @@
   "content": "WebDAV Directory",
   "content_en_sha1_hash": "5f28e3af75cb8e8a3f669af321d961250561489f",
   "created_at": "2025-05-19T21:30:49.983Z",
-  "updated_at": "2025-10-27T16:14:33.354Z",
+  "updated_at": "2026-05-28T15:46:18.564Z",
   "comment": {
-    "text": "This translation key is used to display the title of a directory in various file management contexts. It is likely used in buttons or dialogs that allow users to select a directory from a list, such as a folder selection dialog or a context menu. The value will be displayed next to the folder title, allowing users to easily identify the selected directory.",
+    "text": "This is a folder title displayed in the file browser when a WebDAV directory is connected as a third-party storage.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:32.099Z"
+    "updated_at": "2026-04-11T21:27:28.163Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 119,
+      "line_number": 163,
       "context": "return t(\"Translations:FolderTitleSkyDrive\");\n \n case \"SharePoint\":\n return t(\"Translations:FolderTitleSharePoint\");\n case \"WebDav\":\n return t(\"Translations:FolderTitleWebDav\");\n case \"kDrive\":\n return t(\"Translations:FolderTitlekDrive\");\n case \"Yandex\":\n return t(\"Translations:FolderTitleYandex\");",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'مجلد WebDAV' is a literal transliteration of 'WebDAV Directory'. A more natural and accurate translation would incorporate the concept of a directory.  'WebDAV Directory' implies a collection of files and folders accessible via WebDAV.",
-          "suggestion": "مجلد WebDAV للملفات"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"WebDAV գրացուցակ\" is a literal translation of \"directory\" but doesn't convey the meaning of a *WebDAV* directory, which implies a folder accessible via WebDAV protocol. A more accurate translation would consider the context.",
-          "suggestion": "WebDAV թղթապանակ (WebDAV t'ghat'apanak)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ໄດເລກະທໍລີ WebDAV\" is a transliteration and doesn't accurately convey the meaning of 'WebDAV Directory.' A more accurate translation would incorporate the concept of a directory.",
-          "suggestion": "ໄດເລກະທໍລີ WebDAV ຫຼື ໂຟນ້າທ໌ໄດເລກະທໍລີ WebDAV (depending on the desired level of explanation)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,31 +142,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Director WebDAV' is a literal translation and doesn't fully convey the meaning of 'WebDAV Directory'.  'Director' implies a person or management, whereas 'Directory' refers to a folder or collection of files.",
-          "suggestion": "Dosar WebDAV"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'WebDAV නාමාවලිය' translates to 'WebDAV list' which is not the most accurate rendering of 'WebDAV Directory'. 'Directory' implies a folder or collection of files, while 'list' is more generic.",
-          "suggestion": "WebDAV ෆෝල්ඩර් (WebDAV Folder)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -229,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

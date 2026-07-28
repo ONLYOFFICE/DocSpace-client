@@ -3,13 +3,21 @@
   "content": "File deleted",
   "content_en_sha1_hash": "80bb638b8b9d2b50c437a89c6f74323269298583",
   "created_at": "2025-05-19T21:30:49.726Z",
-  "updated_at": "2025-05-24T02:26:24.790Z",
+  "updated_at": "2026-05-15T14:00:06.833Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message or status indicator that appears when a file has been successfully deleted.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:29:01.155Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 64,
+      "context": "case WebhookTriggers.FileUpdated:\n return t(\"FileUpdated\");\n case WebhookTriggers.FileTrashed:\n return t(\"FileTrashed\");\n case WebhookTriggers.FileDeleted:\n return t(\"FileDeleted\");\n case WebhookTriggers.FileRestored:\n return t(\"FileRestored\");\n case WebhookTriggers.FileCopied:\n return t(\"FileCopied\");\n case WebhookTriggers.FileMoved:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -104,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation \"Fails dzēsts\" is a literal translation and doesn't quite convey the intended meaning in a natural way. While technically correct, it sounds awkward.",
-          "suggestion": "Consider a more idiomatic translation such as \"Dzēsts fails\" or \"Fails ir dzēsts\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -147,18 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ගොනුව මකන ලදි' while literally translating to 'file deleted', may not be the most natural or idiomatic phrasing in Sinhala. A more common and accurate translation would be something like 'ගොනුව ඉවත් කරන ලදි' or 'ගොනුව නිදහසට යවන ලදි'. The original translation leans towards a more active verb form ('deleted') when a more passive or completed action is likely implied in the context of a webhook event.",
-          "suggestion": "ගොනුව ඉවත් කරන ලදි"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -176,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Фајл' is spelled correctly. 'обрисан' is the correct Serbian (Cyrillic) word for 'deleted' in this context.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian word 'Fajl' is a transliteration of the English 'File'. While understandable, the more accurate and natural Serbian word for 'File' is 'Datoteka'.",
-          "suggestion": "Datoteka obrisan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -216,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,30 +3,73 @@
   "content": "Last modified date",
   "content_en_sha1_hash": "db142287f88a07da18a28455cfab95c90749ca33",
   "created_at": "2025-05-19T21:30:46.056Z",
-  "updated_at": "2026-03-31T15:18:46.212Z",
+  "updated_at": "2026-07-27T13:07:50.610Z",
   "comment": {
-    "text": "The translation key \"LastModifiedDate\" refers to a date field that displays the last modified date of a file or item. It is used in sorting and filtering contexts to allow users to sort results by this field. This label appears in various UI elements such as filters, sorting menus, and data tables.",
+    "text": "This is a label for a sorting option, indicating the date when an item was most recently changed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:45.213Z"
+    "updated_at": "2026-04-11T20:50:23.933Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/TemplateGallery/Filter/SortFilter/index.tsx",
-      "line_number": 65,
+      "line_number": 74,
       "context": "isSelected: false,\n },\n {\n id: \"sort-by_updatedAt\",\n key: \"updatedAt\",\n label: t(\"Common:LastModifiedDate\"),\n default: false,\n isSelected: false,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1558,
+      "line_number": 1569,
       "context": "default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastModifiedDate\"),\n default: true,\n };\n const activityDate = {\n id: \"sort-by_activity\",\n key: SortByFieldName.ModifiedDate,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 120,
-      "context": "const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },",
+      "line_number": 130,
+      "context": "const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Common:ByCreation\") },\n { key: \"Author\", label: t(\"Common:ByAuthor\") },",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 166,
+      "context": "default: true,\n },\n {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastModifiedDate\", {\n defaultValue: \"Last modified date\",\n }),\n default: true,\n },\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/index.tsx",
+      "line_number": 403,
+      "context": "resizable: true,\n minWidth: 210,\n },\n {\n key: \"Activity\",\n title: t(\"Common:LastModifiedDate\", {\n defaultValue: \"Last activity\",\n }),\n enable: true,\n resizable: true,\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 152,
+      "context": "default: true,\n },\n {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastModifiedDate\", {\n defaultValue: \"Last modified date\",\n }),\n default: true,\n },\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/table-view/index.tsx",
+      "line_number": 131,
+      "context": "minWidth: 210,\n onClick: onColumnSort,\n },\n {\n key: \"Modified\",\n title: t(\"Common:LastModifiedDate\"),\n sortBy: SortByFieldName.ModifiedDate,\n enable: columnState.Modified !== false,\n resizable: true,\n onClick: onColumnSort,\n onChange: onColumnChange,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 172,
+      "context": "default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastModifiedDate\"),\n default: true,\n };\n \n const size = {\n id: \"sort-by_size\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
+      "line_number": 77,
+      "context": "case \"Author\":\n return t(\"Common:ByAuthor\");\n case \"Created\":\n return t(\"Common:ByCreation\");\n case \"Modified\":\n return t(\"Common:LastModifiedDate\");\n case \"Size\":\n return t(\"Common:Size\");\n case \"Type\":\n return t(\"Common:Type\");\n case \"Location\":",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 166,
+      "context": "default: true,\n },\n {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastModifiedDate\"),\n default: true,\n },\n {\n id: \"sort-by_author\",\n key: SortByFieldName.Author,",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -57,13 +100,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Modifikováno\" while technically meaning 'modified', doesn't accurately convey the full meaning of \"Last modified date\". It's missing the 'date' component. A more accurate translation would include the concept of 'date'.",
-          "suggestion": "Datum poslední modifikace"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -93,13 +130,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation \"Modifié\" is incomplete and doesn't accurately represent the English phrase \"Last modified date\". It only translates \"Modified\".",
-          "suggestion": "Date de dernière modification"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -117,13 +148,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '変更日' (henkoubi) is a reasonable translation for 'Last modified date', it lacks the specificity implied by the English. 'Last modified date' directly refers to the date of the last change, whereas '変更日' is a more general 'change date'.",
-          "suggestion": "Consider a more precise translation such as \"最終更新日\" (saishuu koushinbi) which directly translates to 'last updated date'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -178,7 +203,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -189,13 +214,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"Modifikované\" is incomplete and doesn't accurately convey the meaning of \"Last modified date\". It only translates to \"Modified\".",
-          "suggestion": "Dátum poslednej modifikácie"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -235,6 +254,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,10 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Aucun résultat correspondant à votre requête n'a pu être trouvé",
   "ErrorViewDescription": "Veuillez réessayer plus tard",
   "ErrorViewDescriptionNetworkError": "La connexion Internet semble être interrompue",
+  "ErrorViewHeader": "La galerie est temporairement indisponible",
+  "GalleryTitle": "{{organizationName}} Galerie de modèles",
+  "SelectTemplate": "Sélectionner un modèle",
+  "SubmitToGalleryDialogMainInfo": "Soumettez votre modèle à la galerie publique pour que d'autres puissent l'utiliser dans leur travail. Une fois que le modèle aura passé la modération, vous serez notifié et récompensé pour votre contribution.",
   "SuggestChanges": "Proposer des modifications",
   "TemplateInfo": "Informations sur le modèle",
-  "ViewAllTemplates": "Afficher tous les formulaires",
-  "ErrorViewHeader": "La galerie est temporairement indisponible",
-  "SelectTemplate": "Sélectionner un modèle",
-  "UploadGallery": "Télécharger dans la Galerie"
+  "UploadGallery": "Télécharger dans la Galerie",
+  "ViewAllTemplates": "Afficher tous les formulaires"
 }

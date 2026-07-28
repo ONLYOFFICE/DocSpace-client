@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomAIProviderNotConnected",
+  "content": "Connect an AI provider in your {{productName}} settings to analyze form data with Ask AI, create charts, and uncover insights.",
+  "content_en_sha1_hash": "6d172554a384c4449001cd01b565c7c1ccfb6a3d",
+  "created_at": "2026-05-08T19:46:42.472Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
+  "comment": {
+    "text": "Informational text in the AI card within the Form Room Info Panel, appearing when an AI provider is not configured. Includes the {{productName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T19:49:08.574Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
+      "line_number": 101,
+      "context": "return t(\"InfoPanel:FormRoomAIReadyDescriptionRoom\");\n }\n \n if (!aiReady) {\n if (isAdmin) {\n return t(\"InfoPanel:FormRoomAIProviderNotConnected\", {\n productName: getBrandName(\"ProductName\"),\n });\n }\n \n return (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

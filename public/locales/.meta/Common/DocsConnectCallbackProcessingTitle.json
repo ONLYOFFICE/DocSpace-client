@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectCallbackProcessingTitle",
+  "content": "Processing your payment",
+  "content_en_sha1_hash": "7883e37eeca1fc3971dea18fa641932952c3b09b",
+  "created_at": "2026-07-27T13:07:08.124Z",
+  "updated_at": "2026-07-27T13:36:36.783Z",
+  "comment": {
+    "text": "A page title displayed during the payment processing stage of a DocsConnect transaction.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:36:36.783Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 338,
+      "context": "{status === \"processing\" ? (\n <>\n <div className={styles.heroText}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isDocsConnect\n ? t(\"DocsConnectCallbackProcessingTitle\")\n : isWalletOnly\n ? t(\"WalletTopUpCallbackProcessingTitle\")\n : t(\"AIPaywallCallbackProcessing\")}\n </Text>\n <Text lineHeight=\"20px\">",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

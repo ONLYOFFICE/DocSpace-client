@@ -100,23 +100,23 @@ test.describe("Profile > Keys Management", () => {
     const continueBtn = recoveryDialog.getByRole("button", { name: "Continue" });
     await expect(continueBtn).toBeDisabled();
 
-    const words = await page.locator("[class*='wordText']").allTextContents();
+    const phraseText = await recoveryDialog
+      .locator("[class*='phraseBox']")
+      .textContent();
+    const words = (phraseText ?? "").trim().split(/\s+/);
     expect(words).toHaveLength(24);
+
+    // The acknowledge checkbox unlocks only after the phrase is saved
+    // (printed, downloaded, or copied).
+    await expect(acknowledge).toBeDisabled();
+    const downloadPromise = page.waitForEvent("download");
+    await recoveryDialog
+      .getByRole("button", { name: "Download", exact: true })
+      .click();
+    await downloadPromise;
 
     await acknowledge.check();
     await expect(continueBtn).toBeEnabled();
-    await continueBtn.click();
-
-    const quizInputs = recoveryDialog.locator('input[name^="quiz-input-"]');
-    await expect(quizInputs.first()).toBeVisible({ timeout: 5_000 });
-    const inputCount = await quizInputs.count();
-    for (let i = 0; i < inputCount; i++) {
-      const label = await recoveryDialog
-        .locator(`label[for="quiz-input-${i}"]`)
-        .textContent();
-      const wordNumber = Number.parseInt(label?.match(/#(\d+)/)?.[1] ?? "0", 10);
-      await quizInputs.nth(i).fill(words[wordNumber - 1]);
-    }
 
     const postPromise = page.waitForRequest(
       (req) =>
@@ -124,7 +124,7 @@ test.describe("Profile > Keys Management", () => {
         req.url().endsWith("/privacyroom/keys"),
     );
 
-    await recoveryDialog.getByRole("button", { name: "Verify" }).click();
+    await continueBtn.click();
 
     const post = await postPromise;
     const body = post.postDataJSON() as {

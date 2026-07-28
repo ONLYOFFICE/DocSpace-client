@@ -1,0 +1,29 @@
+{
+  "key_path": "NoDocsConnectTransactionDescription",
+  "content": "Once you subscribe, the transaction history and charges will appear here.",
+  "content_en_sha1_hash": "270b85e2ca2901abba8f74c873d65043bc833209",
+  "created_at": "2026-07-27T13:07:23.756Z",
+  "updated_at": "2026-07-27T13:27:59.622Z",
+  "comment": {
+    "text": "Placeholder text within an empty state view in the transaction history, shown when no DocsConnect transactions have been recorded yet.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:27:59.622Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TransactionBody.tsx",
+      "line_number": 116,
+      "context": "(isDocsConnect ? t(\"NoDocsConnectTransaction\") : t(\"NoWalletTransaction\")));\n const description = hasAppliedDateFilter\n ? t(\"NoTransactionsFilter\")\n : (emptyDescription ??\n (isDocsConnect\n ? t(\"NoDocsConnectTransactionDescription\")\n : t(\"NoWalletTransactionDescription\")));\n \n const emptyView = (\n <EmptyView\n icon={hasAppliedDateFilter ? filterIcon : emptyIcon}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

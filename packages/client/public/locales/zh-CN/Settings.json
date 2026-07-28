@@ -125,6 +125,8 @@
   "DNSSettingsHint": "输入域名，如下所示：",
   "DNSSettingsMobile": "您可向我们的支持团队发送请求，我们将有专员帮助您进行设置。",
   "DNSSettingsNavDescription": "可通过 DNS 设置为门户网站设置替代 URL。",
+  "DocsConnectPromoDescription": "通过 Docs Connect 连接云托管的 {{organizationName}} {{editorsName}} 服务——只需在上方粘贴其地址即可。无需安装，无需维护，使用您自己的密钥。",
+  "DocsConnectPromoTitle": "无需安装 Document Server？",
   "DocumentService": "文件服务",
   "DocumentServiceAdvancedSettings": "高级服务器设置",
   "DocumentServiceAuthHeader": "授权标头",

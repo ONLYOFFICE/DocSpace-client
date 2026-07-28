@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "සංරක්‍ෂිත කාමර මෙහි දිස් වනු ඇත.",
   "ChangeAgentOwnerSelectorInfo": "නියෝජිතයාගේ හිමිකරු විය හැක්කේ කාමර පරිපාලකයෙකුට හෝ {{productName}} පරිපාලකයෙකුට පමණි.",
   "ChangeTheAgentOwner": "නියෝජිත හිමිකරු වෙනස් කරන්න",
+  "ClientSearchDecryptingNames": "ගොනු නාම විකේතනය කරමින්… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "ෆෝල්ඩරය ඉතා විශාලයි. සෙවුම් ප්‍රතිඵල අසම්පූර්ණ විය හැක.",
   "CompressingFiles": "ගොනු සම්පීඩනය කරමින්",
   "Conversion": "පරිවර්තනය",
   "Converting": "පරිවර්තනය කිරීම",

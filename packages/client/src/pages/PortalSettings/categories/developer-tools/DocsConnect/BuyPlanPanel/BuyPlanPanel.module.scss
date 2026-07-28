@@ -215,6 +215,12 @@
   gap: 4px;
 }
 
+.summaryLabelWithHint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .summaryLabel {
   color: var(--text-color);
 }

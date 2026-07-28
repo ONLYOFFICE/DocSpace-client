@@ -73,7 +73,8 @@ All configuration is optional — copy `.env-example` to `.env` to override:
    token claims.
 5. **SDK demo** — all 11 init modes (manager, personal, selectors, editor,
    viewer, uploader, forms, chat, public-room, system), the full event log
-   (including `onAuthError` / `onTokenExpired`), and instance methods
+   (including `onAuthError` with a machine-readable `code`), and instance
+   methods
    (getUserInfo, getFiles/getFolders/getList, getRooms, createFile/Folder/Room,
    setListView, …). The SDK gets tokens via `getToken() -> /api/token`; the
    client secret and refresh token never reach the browser.

@@ -1,0 +1,29 @@
+{
+  "key_path": "BillingCycleRestartNote",
+  "content": "Your monthly billing cycle will restart today. The next payment of <1>{{amount}}</1> will be charged <2>on {{date}}</2>.",
+  "content_en_sha1_hash": "372a825d8be89a8023e38ff78abfa4869e4ccf91",
+  "created_at": "2026-07-27T13:07:48.529Z",
+  "updated_at": "2026-07-27T14:35:19.680Z",
+  "comment": {
+    "text": "Informational footer text in the BuyPlanPanel notifying users of an upcoming billing cycle restart, including placeholders for a currency amount (`amount`) and a localized date (`date`).",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:35:19.680Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 893,
+      "context": "fontWeight={400}\n className={styles.footerHint}\n >\n <Trans\n ns=\"DocsConnect\"\n i18nKey=\"BillingCycleRestartNote\"\n values={{\n amount: formatCurrency(totalMonthly),\n date: nextBillingDateLocalized,\n }}\n components={{",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

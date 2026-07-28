@@ -3,7 +3,7 @@
   "content": "Upload PDF form",
   "content_en_sha1_hash": "b5afa97be11c4d1636475bc3623a9f975f26ebd9",
   "created_at": "2025-05-19T21:30:49.443Z",
-  "updated_at": "2026-07-07T08:59:21.644Z",
+  "updated_at": "2026-07-27T13:07:50.561Z",
   "comment": {
     "text": "This is a button label that allows users to upload a PDF form.",
     "is_auto": true,
@@ -18,9 +18,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 3912,
-      "context": ") => {\n const uploadReadyPDFFrom: TContextOption = {\n id: \"personal_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"personal_upload-ready-Pdf-from\",\n items: [\n {\n id: \"personal_upload-from-docspace\",\n className: \"main-button_drop-down\",",
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 178,
+      "context": ")=> {\n const uploadReadyPDFFrom: TContextOption = {\n id: \"personal_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"personal_upload-ready-Pdf-from\",\n items: [\n {\n id: \"personal_upload-from-docspace\",\n className: \"main-button_drop-down\",",
       "module": "/packages/client"
     },
     {

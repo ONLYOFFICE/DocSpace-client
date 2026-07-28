@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Tu sa zobrazia miestnosti, ktoré boli archivované.",
   "ChangeAgentOwnerSelectorInfo": "Len správca priestoru alebo správca {{productName}} môže byť vlastníkom agenta.",
   "ChangeTheAgentOwner": "Zmeniť vlastníka agenta",
+  "ClientSearchDecryptingNames": "Dešifrovanie názvov súborov… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Priečinok je príliš veľký. Výsledky vyhľadávania môžu byť neúplné.",
   "CompressingFiles": "Komprimácia súborov",
   "Conversion": "Konverzia",
   "Converting": "Konvertovanie",

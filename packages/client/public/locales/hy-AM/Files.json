@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Սենյակները, որոնք արխիվացված են, կհայտնվեն այստեղ:",
   "ChangeAgentOwnerSelectorInfo": "Միայն սենյակի ադմինիստրատորը կամ {{productName}} ադմինիստրատորը կարող է դառնալ գործակալի սեփականատերը",
   "ChangeTheAgentOwner": "Փոխել գործակալի սեփականատիրոջը",
+  "ClientSearchDecryptingNames": "Ֆայլերի անունների վերծանում… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Պանակը չափազանց մեծ է։ Որոնման արդյունքները կարող են թերի լինել։",
   "CompressingFiles": "Ֆայլերի սեղմում",
   "Conversion": "Փոխարկում",
   "Converting": "Փոխարկվում է",

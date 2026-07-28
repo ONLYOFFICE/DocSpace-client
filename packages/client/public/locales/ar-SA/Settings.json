@@ -125,6 +125,8 @@
   "DNSSettingsHint": "أدخل اسم المجال مثل هذا:",
   "DNSSettingsMobile": "أرسل طلبك إلى فريق الدعم لدينا ، وسيساعدك المتخصصون لدينا في الإعدادات.",
   "DNSSettingsNavDescription": "إعدادات DNS هي طريقة لتعيين رابط بديل لبوابتك.",
+  "DocsConnectPromoDescription": "اربط خدمة {{organizationName}} {{editorsName}} المستضافة على السحابة باستخدام Docs Connect — ما عليك سوى لصق عنوانها أعلاه. بدون تثبيت، بدون صيانة، وبمفاتيحك الخاصة.",
+  "DocsConnectPromoTitle": "ألا يوجد لديك خادم مستندات لتثبيته؟",
   "DocumentService": "خدمة المستند",
   "DocumentServiceAdvancedSettings": "إعدادات الخادم المتقدمة",
   "DocumentServiceAuthHeader": "ترويسة المصادقة",

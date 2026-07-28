@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Futni emrin e domain si ky:",
   "DNSSettingsMobile": "Dërgoni kërkesën tuaj te ekipi ynë mbështetës dhe specialistët tanë do t'ju ndihmojnë me cilësimet.",
   "DNSSettingsNavDescription": "Cilësimet DNS janë një mënyrë për të vendosur një URL alternative për portalin tuaj.",
+  "DocsConnectPromoDescription": "Lidhni një shërbim {{organizationName}} {{editorsName}} të pritur në cloud me Docs Connect — thjesht ngjitni adresën e tij më sipër. Pa instalim, pa mirëmbajtje, çelësat tuaj.",
+  "DocsConnectPromoTitle": "Nuk keni Document Server për instalim?",
   "DocumentService": "Shërbimi i Dokumenteve",
   "DocumentServiceAdvancedSettings": "Cilësime të avancuara të serverit",
   "DocumentServiceAuthHeader": "Headeri i autorizimit",

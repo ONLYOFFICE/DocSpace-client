@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Введіть доменне ім’я таким чином:",
   "DNSSettingsMobile": "Надішліть запит до нашої служби підтримки, і наші спеціалісти допоможуть вам із параметрами.",
   "DNSSettingsNavDescription": "Параметри DNS — це спосіб встановити альтернативну URL-адресу для вашого порталу.",
+  "DocsConnectPromoDescription": "Підключіть хмарний сервіс {{organizationName}} {{editorsName}} за допомогою Docs Connect — просто вставте його адресу вище. Без встановлення, без обслуговування, з власними ключами.",
+  "DocsConnectPromoTitle": "Немає Document Server для встановлення?",
   "DocumentService": "Сервіс документів",
   "DocumentServiceAdvancedSettings": "Додаткові параметри сервера",
   "DocumentServiceAuthHeader": "Заголовок авторизації",

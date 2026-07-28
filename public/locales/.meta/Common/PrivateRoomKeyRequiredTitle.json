@@ -3,7 +3,7 @@
   "content": "Encryption key required",
   "content_en_sha1_hash": "89a0141e9456e10c132c27f231a4a2ca03cefc47",
   "created_at": "2026-06-09T09:42:54.544Z",
-  "updated_at": "2026-06-25T19:31:02.914Z",
+  "updated_at": "2026-07-27T13:07:50.639Z",
   "comment": {
     "text": "Dialog title in a confirmation modal that appears when an encryption key must be provided or generated for a private room.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 312,
+      "line_number": 330,
       "context": "return (\n <>\n <ConfirmationModal\n visible={keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={onConfirmGenerateKey}\n onCancel={onCancelGenerateKey}\n zIndex={410}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/create-room/PrivateCreateRoomDialog.tsx",
-      "line_number": 126,
+      "line_number": 127,
       "context": "return (\n <>\n <ConfirmationModal\n visible={keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={onConfirmGenerateKey}\n onCancel={onCancelGenerateKey}\n zIndex={410}",
       "module": "/packages/sdk"
     }

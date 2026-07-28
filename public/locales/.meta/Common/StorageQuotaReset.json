@@ -3,7 +3,7 @@
   "content": "Storage quota successfully set to default.",
   "content_en_sha1_hash": "b6fea99a34e64a58d31ebe5913e5b51c86e315db",
   "created_at": "2025-05-19T21:30:49.128Z",
-  "updated_at": "2026-07-07T08:59:21.692Z",
+  "updated_at": "2026-07-27T13:07:50.607Z",
   "comment": {
     "text": "This is a toast message confirming that the storage quota has been successfully reverted to its default setting.",
     "is_auto": true,
@@ -24,14 +24,14 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.ts",
-      "line_number": 3249,
+      "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
+      "line_number": 499,
       "context": "return (item as TActionItem)?.id ? (item as TActionItem).id : item;\n }) as number[];\n \n try {\n await resetRoomQuota(userIDs);\n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n toastr.error(e as string);\n }\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.ts",
-      "line_number": 3249,
+      "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
+      "line_number": 499,
       "context": "return (item as TActionItem)?.id ? (item as TActionItem).id : item;\n }) as number[];\n \n try {\n await resetRoomQuota(userIDs);\n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n toastr.error(e as string);\n }\n };",
       "module": "/packages/client"
     }

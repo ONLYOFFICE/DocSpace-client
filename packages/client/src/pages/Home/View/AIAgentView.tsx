@@ -35,6 +35,7 @@
 
 import { Activity } from "react";
 import { inject, observer } from "mobx-react";
+import { useStores } from "@onlyoffice/ai-chat";
 
 import NewChat from "@docspace/ui-kit/ai-agent/new-chat";
 
@@ -52,6 +53,7 @@ import {
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
+import { usePanelExclusivity } from "./usePanelExclusivity";
 
 type Props = ChatNoAccessStoreProps & {
   currentView: string;
@@ -59,6 +61,7 @@ type Props = ChatNoAccessStoreProps & {
   showArticleLoader?: ClientLoadingStore["showArticleLoader"];
   showBodyLoader?: ClientLoadingStore["showBodyLoader"];
   canUseChat?: AccessRightsStore["canUseChat"];
+  infoPanelStore?: TStore["infoPanelStore"];
 };
 
 const AIAgentViewComponent = (props: Props) => {
@@ -68,9 +71,12 @@ const AIAgentViewComponent = (props: Props) => {
     showArticleLoader,
     showBodyLoader,
     canUseChat,
+    infoPanelStore,
   } = props;
 
   const { aiReady, noAccessProps, topUpDialog } = useChatNoAccess(props);
+
+  usePanelExclusivity(infoPanelStore);
 
   if (
     currentView === "chat" &&
@@ -97,7 +103,7 @@ const AIAgentViewComponent = (props: Props) => {
             className={`${styles.aiAgentChat} chat-container`}
             data-chat-active={currentView === "chat" ? "" : undefined}
           >
-            <NewChat isAgent aiReady={aiReady} noAccessProps={noAccessProps} />
+            <NewChat isAgents aiReady={aiReady} noAccessProps={noAccessProps} />
           </div>
         </Activity>
       ) : null}
@@ -110,7 +116,8 @@ const AIAgentViewComponent = (props: Props) => {
 };
 
 export const AIAgentView = inject((stores: TStore) => {
-  const { filesStore, clientLoadingStore, accessRightsStore } = stores;
+  const { filesStore, clientLoadingStore, accessRightsStore, infoPanelStore } =
+    stores;
   const { isErrorAIAgentNotAvailable } = filesStore;
   const { showArticleLoader, showBodyLoader } = clientLoadingStore;
   const { canUseChat } = accessRightsStore;
@@ -121,6 +128,6 @@ export const AIAgentView = inject((stores: TStore) => {
     showArticleLoader,
     showBodyLoader,
     canUseChat,
+    infoPanelStore,
   };
 })(observer(AIAgentViewComponent));
-

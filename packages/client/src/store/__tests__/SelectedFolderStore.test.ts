@@ -51,6 +51,7 @@ vi.mock("../../helpers/utils", () => ({
 }));
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { FolderType } from "@docspace/shared/enums";
 
 import SelectedFolderStore from "../SelectedFolderStore";
 
@@ -95,5 +96,64 @@ describe("SelectedFolderStore.toDefault", () => {
     });
 
     expect(store.private).toBe(false);
+  });
+});
+
+describe("SelectedFolderStore.isRoomStorageQuotaExceeded", () => {
+  const openRoom = (store: SelectedFolderStore, extra: object) =>
+    store.setSelectedFolder({
+      id: 42,
+      title: "Box",
+      isRoom: true,
+      rootFolderType: FolderType.Rooms,
+      navigationPath: [],
+      ...extra,
+    });
+
+  it("is true for a room that reached its quota", () => {
+    const store = createStore();
+
+    openRoom(store, { quotaLimit: 1024, usedSpace: 1024 });
+
+    expect(store.isRoomStorageQuotaExceeded).toBe(true);
+  });
+
+  // Regression: third-party rooms have no quota — the backend reports
+  // quotaLimit/usedSpace as 0, which read as "0 >= 0" and showed a
+  // "Room storage limit exceeded (0 Bytes/0 Bytes)" warning.
+  it("is false for a room connected to third-party storage", () => {
+    const store = createStore();
+
+    openRoom(store, {
+      quotaLimit: 0,
+      usedSpace: 0,
+      providerKey: "Box",
+    });
+
+    expect(store.isRoomStorageQuotaExceeded).toBe(false);
+  });
+
+  it("is false for a folder inside a third-party room", () => {
+    const store = createStore();
+
+    store.setSelectedFolder({
+      id: 43,
+      title: "Subfolder",
+      rootFolderType: FolderType.Rooms,
+      providerItem: true,
+      navigationPath: [
+        {
+          id: 42,
+          title: "Box",
+          isRoom: true,
+          isRootRoom: false,
+          quotaLimit: 0,
+          usedSpace: 0,
+        },
+        { id: 1, title: "Rooms", isRoom: false, isRootRoom: true },
+      ],
+    });
+
+    expect(store.isRoomStorageQuotaExceeded).toBe(false);
   });
 });

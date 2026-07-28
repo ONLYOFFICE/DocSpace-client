@@ -32,6 +32,7 @@
     "licenses-audit": "node scripts/check-licenses.js",
     "licenses-aggregate": "node scripts/aggregate-licenses.js",
     "biome-plugins:generate": "node scripts/generate-biome-i18n-constants-plugin.js",
+    "update-fonts": "node scripts/update-open-sans-fonts.js",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "fallow": "fallow dead-code",

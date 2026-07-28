@@ -41,6 +41,7 @@ import {
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
+import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type {
@@ -211,7 +212,7 @@ export type TEditorConfig = {
   recent: [];
   templates: [];
   user: { id: string; name: string };
-  encryptionKeys?: { [key: string]: string | boolean };
+  encryptionKeys?: TEncryptionKeyPair[];
 };
 
 export interface IInitialConfig {

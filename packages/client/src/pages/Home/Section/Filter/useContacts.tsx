@@ -186,7 +186,7 @@ type UseContactsFilterProps = {
   isRoomAdmin: boolean;
   standalone: boolean;
   showStorageInfo: boolean;
-  isDefaultRoomsQuotaSet: boolean;
+  isDefaultUsersQuotaSet: boolean;
 
   groupsStore: GroupsStore;
   usersStore: UsersStore;
@@ -208,7 +208,7 @@ export const useContactsFilter = ({
   isRoomAdmin,
   standalone,
   showStorageInfo,
-  isDefaultRoomsQuotaSet,
+  isDefaultUsersQuotaSet,
   groupsStore,
   usersStore,
 }: UseContactsFilterProps) => {
@@ -687,7 +687,7 @@ export const useContactsFilter = ({
         if (!isGuests) filterOptions.push(...typeItems);
         if (!standalone && !isGuests) filterOptions.push(...accountItems);
         filterOptions.push(...accountLoginTypeItems);
-        if (showStorageInfo && isDefaultRoomsQuotaSet && !isGuests)
+        if (showStorageInfo && isDefaultUsersQuotaSet && !isGuests)
           filterOptions.push(...quotaFilter);
 
         return filterOptions;
@@ -747,7 +747,7 @@ export const useContactsFilter = ({
       return filterOptions;
     },
     [
-      isDefaultRoomsQuotaSet,
+      isDefaultUsersQuotaSet,
       isGroups,
       isGuests,
       isPeople,

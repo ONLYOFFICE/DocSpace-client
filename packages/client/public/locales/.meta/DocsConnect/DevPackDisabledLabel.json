@@ -1,0 +1,29 @@
+{
+  "key_path": "DevPackDisabledLabel",
+  "content": "Dev Pack disabled",
+  "content_en_sha1_hash": "0870beb096818993e815a9f696c383722aa5efcf",
+  "created_at": "2026-07-27T13:07:48.524Z",
+  "updated_at": "2026-07-27T14:26:02.446Z",
+  "comment": {
+    "text": "A label in a summary row within the Buy Plan panel indicating that the Developer Pack feature is currently disabled.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:26:02.446Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 698,
+      "context": "</>\n ) : (\n <>\n {devPackTurnedOff\n ? summaryRow(\n t(\"DocsConnect:DevPackDisabledLabel\"),\n t(\"DocsConnect:MinusPricePerUser\", {\n price: formatCurrency(devPackPrice),\n }),\n )\n : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -162,8 +162,12 @@
 
   :global(.info_title-icons) {
     display: flex;
+    align-items: center;
     margin-inline-start: auto;
     gap: 14px;
+    :global(.info_title-loader) {
+      display: flex;
+    }
     :global(.icon) {
       cursor: pointer;
       path,

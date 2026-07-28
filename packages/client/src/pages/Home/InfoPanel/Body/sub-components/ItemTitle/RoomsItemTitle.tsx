@@ -42,6 +42,7 @@ import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitl
 import { Text } from "@docspace/ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
@@ -241,8 +242,6 @@ const RoomsItemHeader = ({
     showHistoryActions && !!onSelectHistoryDay && !!setIsScrollLocked;
 
   const onDownloadHistory = () => {
-    if (isRoomHistoryReportDownloading) return;
-
     getRoomHistoryReport?.(selection.id);
   };
 
@@ -343,16 +342,25 @@ const RoomsItemHeader = ({
         ) : null}
 
         {showHistoryActions ? (
-          <IconButton
-            id="info_download-history"
-            className="icon"
-            title={t("InfoPanel:DownloadHistory")}
-            iconName={DownloadReactSvgUrl}
-            onClick={onDownloadHistory}
-            isDisabled={isRoomHistoryReportDownloading}
-            size={16}
-            dataTestId="info_download_history"
-          />
+          isRoomHistoryReportDownloading ? (
+            <Loader
+              id="info_download-history-loader"
+              className="info_title-loader"
+              color=""
+              size="16px"
+              type={LoaderTypes.track}
+            />
+          ) : (
+            <IconButton
+              id="info_download-history"
+              className="icon"
+              title={t("InfoPanel:DownloadHistory")}
+              iconName={DownloadReactSvgUrl}
+              onClick={onDownloadHistory}
+              size={16}
+              dataTestId="info_download_history"
+            />
+          )
         ) : null}
 
         {canFilterHistoryByDay ? (

@@ -365,17 +365,20 @@ test.describe("Rooms — info panel history", () => {
       await openHistoryPanel(page, baseUrl);
 
       const downloadButton = page.getByTestId("info_download_history");
+      const loader = page.locator("#info_download-history-loader");
 
       await downloadButton.click();
 
-      await expect(downloadButton).toHaveAttribute("aria-disabled", "true");
+      await expect(loader).toBeVisible();
+      await expect(downloadButton).toBeHidden();
 
       const toast = page.getByTestId("toast-content").first();
 
       await expect(toast).toBeVisible();
       await expect(toast).toContainText("The report will be saved to");
 
-      await expect(downloadButton).toHaveAttribute("aria-disabled", "false");
+      await expect(loader).toBeHidden();
+      await expect(downloadButton).toBeVisible();
 
       expect(handle.current?.getStatusRequestCount()).toBeGreaterThan(1);
     });
@@ -403,7 +406,7 @@ test.describe("Rooms — info panel history", () => {
       await expect(toast).toBeVisible();
       await expect(toast).toContainText("The maximum file size is exceeded");
 
-      await expect(downloadButton).toHaveAttribute("aria-disabled", "false");
+      await expect(downloadButton).toBeVisible();
     });
   });
 });

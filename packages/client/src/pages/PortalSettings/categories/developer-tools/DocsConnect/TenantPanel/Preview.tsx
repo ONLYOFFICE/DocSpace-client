@@ -38,7 +38,6 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import { EmptyView } from "@docspace/ui-kit/components/empty-view";
@@ -49,6 +48,8 @@ import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.r
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copyTo.react.svg";
 import DesktopOnlyIcon from "PUBLIC_DIR/images/emptyview/empty.desktop.only.svg";
+
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
 import { DeviceType } from "@docspace/shared/enums";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
@@ -180,9 +181,7 @@ const Preview = ({
         >
           <div className={styles.previewEditor}>
             {editorError ? (
-              <Text className={styles.muted}>
-                {t("DocsConnect:EditorPreviewFailed")}
-              </Text>
+              <EmptyServerErrorContainer />
             ) : (
               <>
                 {!documentReady ? (
@@ -231,4 +230,3 @@ export default inject(
     currentDeviceType: settingsStore.currentDeviceType,
   }),
 )(observer(Preview));
-

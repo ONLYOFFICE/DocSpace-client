@@ -98,6 +98,7 @@ export const roomContentHandler = (
   port: string,
   roomId: number | string,
   fileId: number | string,
+  currentOverrides: Record<string, unknown> = {},
 ) =>
   http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/files/${roomId}`,
@@ -235,6 +236,7 @@ export const roomContentHandler = (
             createdBy: makeUser(),
             updated: "2026-01-01T00:00:00.000Z",
             updatedBy: makeUser(),
+            ...currentOverrides,
           },
           pathParts: [
             { id: 2002, title: "Rooms", folderType: 14 },

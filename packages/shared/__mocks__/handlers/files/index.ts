@@ -108,6 +108,10 @@ import {
 } from "./roomGroups";
 import { encryptedFilesHandlers } from "./encryptedFiles";
 import { privateRoomListHandler } from "./privateRoomList";
+import {
+  folderHistoryHandler,
+  folderHistoryReportHandlers,
+} from "./folderHistory";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -124,6 +128,15 @@ export {
   privateRoomListHandler,
   type PrivateRoomListOptions,
 } from "./privateRoomList";
+
+export {
+  type FolderHistoryFeedSeed,
+  type FolderHistoryHandlerHandle,
+  type FolderHistoryHandlerOptions,
+  type FolderHistoryRequestLog,
+  type FolderHistoryReportHandle,
+  type FolderHistoryReportHandlerOptions,
+} from "./folderHistory";
 
 export {
   foldersTreeHandler,
@@ -182,6 +195,8 @@ export {
   deleteRoomGroupHandler,
   updateRoomGroupIconHandler,
   getEmptyInvitationLink,
+  folderHistoryHandler,
+  folderHistoryReportHandlers,
 };
 
 // Note: recentHandler, sharedWithMeHandler, favoritesHandler are NOT included here

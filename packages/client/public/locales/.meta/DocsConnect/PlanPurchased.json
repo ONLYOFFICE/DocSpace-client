@@ -1,0 +1,35 @@
+{
+  "key_path": "PlanPurchased",
+  "content": "Your plan has been purchased",
+  "content_en_sha1_hash": "eb782239aaa5a02188f28273e523acd76fcc3d7b",
+  "created_at": "2026-07-27T13:07:48.519Z",
+  "updated_at": "2026-07-27T14:09:30.767Z",
+  "comment": {
+    "text": "Success toast message appearing after a user successfully completes a plan purchase or upgrade in the DocsConnect settings.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:09:30.767Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 314,
+      "context": "\"_blank\",\n );\n \n const onTopUpConfirm = async () => {\n await switchToDevPack?.({ quantity: users, topUp: 0 });\n toastr.success(t(\"DocsConnect:PlanPurchased\"));\n };\n \n const onBuy = async () => {\n if (submitting) return;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 314,
+      "context": "\"_blank\",\n );\n \n const onTopUpConfirm = async () => {\n await switchToDevPack?.({ quantity: users, topUp: 0 });\n toastr.success(t(\"DocsConnect:PlanPurchased\"));\n };\n \n const onBuy = async () => {\n if (submitting) return;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

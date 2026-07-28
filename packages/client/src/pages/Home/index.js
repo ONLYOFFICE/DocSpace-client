@@ -217,6 +217,7 @@ const PureHome = observer((props) => {
 
     currentFolderId,
     canCreateFiles,
+    canCreateEncrypted,
     canCreateRooms,
     isDocumentsFolder,
     isRoom,
@@ -312,6 +313,7 @@ const PureHome = observer((props) => {
   const quickActions = useQuickActions({
     currentFolderId,
     canCreateFiles,
+    canCreateEncrypted,
     canCreateRooms,
     canCreateAgents,
     userId,
@@ -1083,6 +1085,7 @@ export const Component = inject(
       // isRecycleBinFolder are already returned above.)
       currentFolderId: selectedFolderStore.id,
       canCreateFiles: folderSecurity?.Create,
+      canCreateEncrypted: uploadDataStore.shouldEncryptCurrentUpload(),
       canCreateRooms: isAdmin || isRoomAdmin,
       isDocumentsFolder,
       isRoom,

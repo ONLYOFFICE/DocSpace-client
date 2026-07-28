@@ -41,6 +41,7 @@ import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import { Text } from "@docspace/ui-kit/components/text";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { useItemIcon } from "@docspace/shared/hooks/useItemIcon";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
 import styles from "./ShareDialog.module.scss";
@@ -58,9 +59,11 @@ const ShareDialogHeader: FC<ShareDialogHeaderProps> = ({
 
   const icon = useMemo(() => getIcon(file.fileExst, 32), [file.fileExst]);
 
+  const resolvedTitle = useResolvedFileTitle(file);
+
   const title = useMemo(
-    () => file.title.replace(/\.[^/.]+$/, ""),
-    [file.title],
+    () => resolvedTitle.replace(/\.[^/.]+$/, ""),
+    [resolvedTitle],
   );
 
   return (

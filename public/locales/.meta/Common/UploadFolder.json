@@ -3,7 +3,7 @@
   "content": "Upload folder",
   "content_en_sha1_hash": "e77a1496f8e8093547d02f31abdfb67b6e95e806",
   "created_at": "2026-04-03T21:51:34.737Z",
-  "updated_at": "2026-07-07T08:59:21.647Z",
+  "updated_at": "2026-07-27T13:07:50.565Z",
   "comment": {
     "text": "This is the label for a button that allows users to upload an entire folder of files. It also appears in the hotkeys panel to describe the shortcut for this action.",
     "is_auto": true,
@@ -24,8 +24,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 4056,
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 325,
       "context": "icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {\n key: \"upload-folder\",\n label: t(\"Common:UploadFolder\"),\n onClick: () => onUploadAction(\"folder\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const templateGallery: TContextOption[] = templateGalleryAvailable",
       "module": "/packages/client"
     },

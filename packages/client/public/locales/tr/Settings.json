@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Alan(domain) adını bu şekilde girin:",
   "DNSSettingsMobile": "İsteğinizi destek ekibimize gönderin, uzmanlarımız ayarlar konusunda size yardımcı olacaktır.",
   "DNSSettingsNavDescription": "DNS Ayarları, portalınız için alternatif bir URL ayarlamanın bir yoludur.",
+  "DocsConnectPromoDescription": "Docs Connect ile bulutta barındırılan bir {{organizationName}} {{editorsName}} hizmetine bağlanın — adresini yukarıya yapıştırmanız yeterli. Kurulum yok, bakım yok, kendi anahtarlarınız.",
+  "DocsConnectPromoTitle": "Kurulacak bir Belge Sunucunuz yok mu?",
   "DocumentService": "Belge Servisi",
   "DocumentServiceAdvancedSettings": "Gelişmiş sunucu ayarları",
   "DocumentServiceAuthHeader": "Yetkilendirme başlığı",

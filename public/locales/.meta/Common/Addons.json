@@ -3,7 +3,7 @@
   "content": "Add-ons",
   "content_en_sha1_hash": "41b634ed241336cc8b5e03729fd92977c540cc02",
   "created_at": "2026-06-25T11:54:43.546Z",
-  "updated_at": "2026-07-07T08:59:21.879Z",
+  "updated_at": "2026-07-27T13:07:50.824Z",
   "comment": {
     "text": "Tab label in the Portal Settings services section representing available extensions or extra features.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 59,
-      "context": "if (pathname.includes(\"/billing/addons/ai-search\"))\n return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");\n if (pathname.includes(\"/billing/addons\")) return t(\"Common:Addons\");\n return t(\"Common:Billing\");\n };\n \n const isSubPage = (pathname: string): boolean => {\n const path = pathname.replace(/\\/$/, \"\");",
+      "line_number": 66,
+      "context": "if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");\n if (pathname.includes(\"/billing/addons/docs-connect\"))\n return t(\"DocsConnect:DocsConnect\");\n if (pathname.includes(\"/billing/addons\")) return t(\"Common:Addons\");\n return t(\"Common:Billing\");\n };\n \n const isSubPage = (pathname: string): boolean => {\n const path = pathname.replace(/\\/$/, \"\");",
       "module": "/packages/client"
     }
   ],

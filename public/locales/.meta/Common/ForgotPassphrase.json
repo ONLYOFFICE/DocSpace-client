@@ -3,7 +3,7 @@
   "content": "Forgot passphrase?",
   "content_en_sha1_hash": "038e3d6cb7b28bbbbb151504638702f03061d2e2",
   "created_at": "2026-06-09T09:42:45.649Z",
-  "updated_at": "2026-06-15T19:31:56.139Z",
+  "updated_at": "2026-07-27T13:07:50.849Z",
   "comment": {
     "text": "Clickable link in key management and passphrase modals that initiates the passphrase recovery process.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 233,
-      "context": "isHovered\n onClick={onForgotPassphrase}\n dataTestId=\"forgot_passphrase_link\"\n tabIndex={3}\n >\n {t(\"Common:ForgotPassphrase\")}\n </Link>\n </div>\n ) : null}\n </div>",
+      "line_number": 308,
+      "context": "isHovered\n onClick={onForgotPassphrase}\n dataTestId=\"forgot_passphrase_link\"\n tabIndex={3}\n >\n {t(\"Common:ForgotPassphrase\")}\n </Link>\n </div>\n ) : null}\n \n {showRememberDevice && !isNew ? (",
       "module": "/packages/shared"
     }
   ],

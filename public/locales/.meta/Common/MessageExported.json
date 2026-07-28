@@ -3,7 +3,7 @@
   "content": "Message exported to file: <1>{{fileName}}</1>",
   "content_en_sha1_hash": "ab92a01d2527086a1e79c6bc2ac3c304fee54796",
   "created_at": "2025-10-27T16:14:24.189Z",
-  "updated_at": "2026-05-15T14:00:06.991Z",
+  "updated_at": "2026-07-27T13:07:51.008Z",
   "comment": {
     "text": "This is a toast message that appears after a message has been successfully exported. `{{fileName}}` is the name of the exported file, and `<1></1>` is a link to open the file.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/buttons/index.tsx",
       "line_number": 135,
       "context": "handleFileOpen(resultFile.id!.toString());\n }\n \n const toastMsg = (\n <CommonTrans\n i18nKey=\"MessageExported\"\n values={{ fileName }}\n components={{\n 1: (\n <Link\n type={LinkType.action}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/save-dialog.tsx",
+      "line_number": 143,
+      "context": "// translations for every locale); without a `components` entry the\n // <1>…</1> file name renders as plain text.\n const exportedToast = (createdTitle: string) =>\n toastr.success(\n <CommonTrans\n i18nKey=\"MessageExported\"\n values={{ fileName: createdTitle }}\n />,\n );\n try {\n // Real md → docx conversion via the AI Worker. The call only",
       "module": "/libs/ui-kit"
     }
   ],

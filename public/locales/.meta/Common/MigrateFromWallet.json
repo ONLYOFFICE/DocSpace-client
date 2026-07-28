@@ -3,7 +3,7 @@
   "content": "From your wallet",
   "content_en_sha1_hash": "364f8ae7a930341a11814e8cd9602e891e2845d4",
   "created_at": "2026-06-30T07:32:34.265Z",
-  "updated_at": "2026-07-03T11:08:02.940Z",
+  "updated_at": "2026-07-27T13:07:51.038Z",
   "comment": {
     "text": "Row label in a migration dialog indicating an amount being applied from the user's wallet balance.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
-      "line_number": 333,
+      "line_number": 336,
       "context": "t(\"MigratePerMonth\", {\n price: formatFuturePaymentCurrency(newSubscriptionAmount),\n }),\n )}\n {renderRow(\n t(\"MigrateFromWallet\"),\n withLoader(\n `- ${formatWalletCurrency(walletApplied, 2, walletCurrency)}`,\n ),\n styles.positive,\n )}",
       "module": "/libs/ui-kit"
     }

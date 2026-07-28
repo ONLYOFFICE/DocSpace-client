@@ -3,7 +3,7 @@
   "content": "The room link you are trying to open does not exist or has expired.",
   "content_en_sha1_hash": "c16f473a9fbf86a65ac485294a575a3b10d7278a",
   "created_at": "2025-05-19T21:30:48.190Z",
-  "updated_at": "2026-07-07T08:59:21.796Z",
+  "updated_at": "2026-07-27T13:07:50.702Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to access a Room link that is no longer valid or has been removed.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 492,
+      "line_number": 264,
       "context": "(item.isLinkExpired || (await isExpiredLinkAsync(item)))\n ) {\n const isRoom = isRoomUtil(item);\n \n const description = isRoom\n ? t(\"Common:RoomLinkExpired\")\n : t(\"Common:FolderLinkExpired\");\n \n const title = isRoom\n ? t(\"Common:RoomNotAvailable\")\n : t(\"Common:FolderNotAvailable\");",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 492,
-      "context": "(item.isLinkExpired || (await isExpiredLinkAsync(item)))\n ) {\n const isRoom = isRoomUtil(item);\n \n const description = isRoom\n ? t(\"Common:RoomLinkExpired\")\n : t(\"Common:FolderLinkExpired\");\n \n const title = isRoom\n ? t(\"Common:RoomNotAvailable\")\n : t(\"Common:FolderNotAvailable\");",
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 330,
+      "context": ") => {\n const { isExpiredLinkAsync } = self.filesActionsStore;\n \n if (item.external && (item.isLinkExpired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n let primaryLink;",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.ts",
-      "line_number": 3628,
+      "file_path": "/packages/client/src/store/filesActionsStore/navigation.helpers.ts",
+      "line_number": 546,
       "context": "const description = isFile\n ? t(\"Common:FileLinkExpired\")\n : isFolder\n ? t(\"Common:FolderLinkExpired\")\n : t(\"Common:RoomLinkExpired\");\n \n const title = isFile\n ? t(\"Common:FileNotAvailable\")\n : isFolder\n ? t(\"Common:FolderNotAvailable\")",
       "module": "/packages/client"
     }

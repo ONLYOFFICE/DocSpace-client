@@ -85,6 +85,8 @@ const withHotkeys = (Component) => {
       isArchiveFolder,
       isRoomsFolder,
       isAIAgentsFolder,
+      isPrivacyFolder,
+      canCreateEncrypted,
       isAIRoom,
 
       getSelection,
@@ -155,6 +157,8 @@ const withHotkeys = (Component) => {
         (Boolean(extension) && (isFormRoom || isParentFolderFormRoom))
       )
         return;
+
+      if (isPrivacyFolder && extension && !canCreateEncrypted) return;
 
       const event = new CustomEvent(Events.CREATE, {
         detail: { parentId: currentFolderId, context: "hotkey", extension },
@@ -554,6 +558,7 @@ const withHotkeys = (Component) => {
       userStore,
       indexingStore,
       currentQuotaStore,
+      uploadDataStore,
     }) => {
       const {
         setSelected,
@@ -617,7 +622,10 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
         isAIAgentsFolder,
+        isPrivacyFolder,
       } = treeFoldersStore;
+
+      const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
 
       const { isWarningRoomsDialog } = currentQuotaStore;
 
@@ -669,6 +677,8 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
         isAIAgentsFolder,
+        isPrivacyFolder,
+        canCreateEncrypted,
         isAIRoom: selectedFolderStore.isAIRoom,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 

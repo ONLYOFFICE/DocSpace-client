@@ -97,6 +97,23 @@ export type TModel = {
 
 export type TModelList = TModel[];
 
+export type TProfile = {
+  id: string;
+  name: string;
+  providerType: string;
+  baseUrl: string;
+  modelId: string;
+  key?: string | null;
+  headers?: Record<string, string>;
+  reasoning?: boolean;
+  capabilities?: number;
+  canUseTool?: boolean;
+  useResponsesApi?: boolean;
+  createdAt?: number;
+};
+
+export type TProfilesList = TProfile[];
+
 export type TVectorizeOperation = {
   error: string;
   id: string;
@@ -135,7 +152,10 @@ export type KnowledgeConfig = {
   needReset?: boolean;
 };
 
-export type TAgent = TRoom;
+// `profileId` is injected by the new-ai service on GET /new-ai/agents/:id
+// (resolved from the Chat-action assignment), so it isn't part of the base
+// room contract.
+export type TAgent = TRoom & { profileId?: string };
 
 export type TAgentLogo = {
   tmpFile: string;
@@ -173,7 +193,24 @@ export type TGetAgents = {
   new: number;
 };
 
-export type TEditAgentData = Partial<TCreateAgentData>;
+// Edit goes through the new-ai service (PUT /new-ai/agents/:id): room fields
+// (incl. `chatSettings.prompt`) are forwarded to .NET, and an optional
+// `profileId` rebinds the agent's Chat-action profile server-side.
+export type TEditAgentData = Partial<TCreateAgentData> & {
+  profileId?: string;
+};
+
+// Payload of the new agent-creation endpoint (POST /new-ai/agents, Node AI
+// service). The service forwards everything except `profileId`/`prompt` to
+// the .NET endpoint and binds the profile to the created agent itself, so
+// `chatSettings` must not be sent by the caller.
+export type TCreateAgentWithProfileData = Omit<
+  TCreateAgentData,
+  "chatSettings"
+> & {
+  profileId: string;
+  prompt: string;
+};
 
 export type TDefaultProvider = {
   providerId: TAiProvider["id"];
@@ -186,6 +223,10 @@ export type TDefaultProvider = {
 export type TUpdateDefaultProviderData = {
   providerId: TAiProvider["id"];
   defaultModel: TModel["modelId"];
+};
+
+export type TAIUserConfig = {
+  chatRecommendedModelVisible: boolean;
 };
 
 export type TModelSettingsItem = {

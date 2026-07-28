@@ -157,6 +157,16 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
+  const fetchDefaultForms = () => {
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
+
+    const categoryType = getCategoryType(location) as number;
+
+    const url = getCategoryUrl(categoryType);
+
+    navigate(`${url}?${filter.toUrlParams()}`);
+  };
+
   const getFiles = React.useCallback(async () => {
     if (isPublicRoom()) return;
 
@@ -170,7 +180,9 @@ const useFiles = ({
       playlist.length < 1
     ) {
       setTimeout(() => {
-        getFileInfo(id)
+        // `id` comes from the media-view URL and may be
+        // undefined; the erased cast keeps the old unchecked call.
+        getFileInfo(id as string)
           .then((data) => {
             const canOpenPlayer =
               data.viewAccessibility.ImageView ||
@@ -190,6 +202,7 @@ const useFiles = ({
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
     const isAIAgents = categoryType === CategoryType.AIAgents;
+    const isForms = categoryType === CategoryType.Forms;
 
     if (isAIAgents) {
       filterObj = RoomsFilter.getFilter(window.location);
@@ -199,9 +212,20 @@ const useFiles = ({
 
         return;
       }
+    } else if (isForms && !isRoomFolder) {
+      filterObj = RoomsFilter.getFilter(window.location);
+
+      isRooms = true;
+
+      if (!filterObj) {
+        fetchDefaultForms();
+
+        return;
+      }
     } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
+        categoryType == CategoryType.Form ||
         categoryType == CategoryType.Archive) &&
       !isRoomFolder
     ) {
@@ -300,13 +324,19 @@ const useFiles = ({
 
         if (newFilter) {
           if (isAIAgents) {
-            return fetchAgents(null, newFilter, false, false);
+            return fetchAgents(null, newFilter as RoomsFilter, false, false);
           }
           if (isRooms) {
-            return fetchRooms(null, newFilter, undefined, undefined, false);
+            return fetchRooms(
+              null,
+              newFilter as RoomsFilter,
+              undefined,
+              undefined,
+              false,
+            );
           }
           const folderId = (newFilter as FilesFilter).folder;
-          return fetchFiles(folderId, newFilter)?.finally(() => {
+          return fetchFiles(folderId, newFilter as FilesFilter)?.finally(() => {
             const itemData = sessionStorage.getItem(CREATED_FORM_KEY);
             if (itemData) {
               wsCreatedPDFForm({

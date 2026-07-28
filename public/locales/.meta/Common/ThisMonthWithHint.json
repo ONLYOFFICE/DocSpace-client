@@ -1,0 +1,29 @@
+{
+  "key_path": "ThisMonthWithHint",
+  "content": "This month <1>({{month}})</1>",
+  "content_en_sha1_hash": "79390f73cb99a6338b84f1d1e7ad64d9e97140bb",
+  "created_at": "2026-06-25T11:54:58.955Z",
+  "updated_at": "2026-06-25T12:00:09.048Z",
+  "comment": {
+    "text": "Selection option label in a period picker that displays the current month, where the <1> tag contains the interpolated full month name.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:00:09.048Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
+      "line_number": 68,
+      "context": "switch (period) {\n case \"thisMonth\":\n return (\n <CommonTrans\n i18nKey=\"ThisMonthWithHint\"\n values={{ month: current.toFormat(\"LLLL\") }}\n components={{ 1: hintSpan }}\n />\n );\n case \"lastMonth\":",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

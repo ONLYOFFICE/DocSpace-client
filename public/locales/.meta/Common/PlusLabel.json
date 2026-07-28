@@ -1,0 +1,29 @@
+{
+  "key_path": "PlusLabel",
+  "content": "PLUS",
+  "content_en_sha1_hash": "c1ff976fc2bf29eeeaef7da4bc5679fa2699b405",
+  "created_at": "2026-06-25T11:54:54.947Z",
+  "updated_at": "2026-06-25T12:01:50.345Z",
+  "comment": {
+    "text": "Label for a divider line in the AI features dialog, used to separate content or denote a specific subscription tier.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:01:50.345Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 169,
+      "context": "))}\n </div>\n \n <div className={styles.divider}>\n <span className={styles.dividerLine} />\n <Text className={styles.dividerLabel}>{t(\"PlusLabel\")}</Text>\n <span className={styles.dividerLine} />\n </div>\n \n <div className={styles.tags}>\n {tags.map((tag) => (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

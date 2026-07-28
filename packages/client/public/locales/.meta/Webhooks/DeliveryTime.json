@@ -3,7 +3,7 @@
   "content": "Delivery time",
   "content_en_sha1_hash": "fac21896589baac71fc217cd87162f623e22647d",
   "created_at": "2025-05-19T21:30:49.693Z",
-  "updated_at": "2026-05-15T15:37:40.265Z",
+  "updated_at": "2026-06-01T21:20:44.482Z",
   "comment": {
     "text": "This is a label for a specific time value, indicating when a webhook delivery occurred. It appears in the details section of a webhook event.",
     "is_auto": true,
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

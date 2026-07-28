@@ -3,7 +3,7 @@
   "content": "Remaining period",
   "content_en_sha1_hash": "f5023b8b9e7191d0cd371a3a36ee2dbe6bdf5e2d",
   "created_at": "2026-04-10T13:53:45.647Z",
-  "updated_at": "2026-05-15T14:00:07.011Z",
+  "updated_at": "2026-07-27T13:07:50.765Z",
   "comment": {
     "text": "This is a label in the order summary for a storage plan. It indicates the duration of the current subscription that will be credited when changing the plan.",
     "is_auto": true,
@@ -12,10 +12,28 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 281,
+      "context": "t(\"MigratePerMonth\", {\n price: formatPaymentCurrency(currentTariffCost),\n }),\n )}\n {renderRow(\n t(\"RemainingPeriod\"),\n <>\n {`${daysDisplay} `}\n <Text\n as=\"span\"\n fontSize=\"14px\"",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "line_number": 167,
+      "context": ")\n : null}\n {isDowngradePlan\n ? renderRow(t(\"EffectiveDate\"), initialPaymentDate)\n : renderRow(\n t(\"RemainingPeriod\"),\n <>\n {`${daysDisplay} `}\n <Text as=\"span\" fontSize=\"14px\" className={styles.muted}>\n ({t(\"UntilDate\", { date: initialPaymentDate })})\n </Text>",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
-      "line_number": 266,
+      "line_number": 260,
       "context": "{!isExceedingStorageLimit && !isNewSubscription ? (\n <div className={styles.summaryRow}>\n <Text fontSize=\"14px\" className={styles.rowLabel}>\n {isDowngradeStoragePlan\n ? t(\"EffectiveDate\")\n : t(\"RemainingPeriod\")}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"14px\"\n className={styles.rowValue}",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 740,
+      "context": "formatCurrency(devPackPrice),\n )\n : null}\n {isUpgrade ? (\n summaryRow(\n t(\"Common:RemainingPeriod\"),\n <>\n {t(\"DocsConnect:DaysCount\", {\n count: remainingDays,\n })}{\" \"}\n <Text",
+      "module": "/packages/client"
     }
   ],
   "languages": {

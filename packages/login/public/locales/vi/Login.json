@@ -4,7 +4,7 @@
   "ConfirmEmailChangeText": "Bạn đã yêu cầu thay đổi địa chỉ email trên tài khoản {{productName}} của bạn. Để tiếp tục, vui lòng đăng nhập bằng thông tin đăng nhập hiện tại của bạn.",
   "ErrorInvalidText": "Trong 10 giây, bạn sẽ được chuyển hướng đến <1>{{productName}}</1>",
   "ForgotPassword": "Bạn quên mật khẩu?",
-  "LDAPUsernamePlaceholder": "Tên người dùng của {{ldap_domain}} ",
+  "LDAPUsernamePlaceholder": "Tên người dùng của {{ldap_domain}}",
   "MessageAuthorize": "Đăng nhập để tiếp tục",
   "MessageEmailConfirmed": "Email của bạn đã được kích hoạt thành công.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Vui lòng nhập email bạn đã sử dụng để đăng ký. Hướng dẫn khôi phục mật khẩu sẽ được gửi đến email đó.",

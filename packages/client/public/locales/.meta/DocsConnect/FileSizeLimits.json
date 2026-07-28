@@ -1,0 +1,29 @@
+{
+  "key_path": "FileSizeLimits",
+  "content": "File size limits",
+  "content_en_sha1_hash": "dceaf7ba6e3f3b911792f5b55f48ad66146598fe",
+  "created_at": "2026-07-27T13:07:48.546Z",
+  "updated_at": "2026-07-27T14:20:30.589Z",
+  "comment": {
+    "text": "Section header in the DocsConnect settings panel that introduces the configuration for file size constraints.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:20:30.589Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 318,
+      "context": "]}\n />\n </div>\n \n <div className={styles.settingsGroup}>\n <Text fontWeight={600}>{t(\"DocsConnect:FileSizeLimits\")}</Text>\n <Text fontSize=\"13px\" className={styles.settingsHint}>\n {t(\"DocsConnect:FileSizeLimitsDescription\")}\n </Text>\n <div className={styles.limitField}>\n <FieldContainer isVertical removeMargin>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

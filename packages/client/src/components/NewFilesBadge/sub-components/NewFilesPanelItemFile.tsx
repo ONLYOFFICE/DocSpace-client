@@ -42,6 +42,7 @@ import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Text } from "@docspace/ui-kit/components/text";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 
 import FolderLocationIconSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import config from "PACKAGE_FILE";
@@ -66,6 +67,8 @@ const NewFilesPanelItemFileComponent = ({
   displayFileExtension,
 }: NewFilesPanelItemFileProps) => {
   const icon = getIcon?.(24, item.fileExst);
+
+  const resolvedTitle = useResolvedFileTitle(item);
 
   const onOpenFileLocation = () => {
     checkAndOpenLocationAction!(item);
@@ -109,7 +112,7 @@ const NewFilesPanelItemFileComponent = ({
           className="file-icon"
           logo={icon!}
           showDefault={false}
-          title={item.title}
+          title={resolvedTitle}
         />
         <Text
           noSelect
@@ -118,7 +121,7 @@ const NewFilesPanelItemFileComponent = ({
           fontWeight={600}
           lineHeight="16px"
         >
-          {item.title.replace(item.fileExst, "")}
+          {resolvedTitle.replace(item.fileExst, "")}
           {displayFileExtension ? (
             <span className="file-exst">{item.fileExst}</span>
           ) : null}

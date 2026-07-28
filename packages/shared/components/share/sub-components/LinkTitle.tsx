@@ -46,47 +46,55 @@ import styles from "../Share.module.scss";
 import type { LinkTitleProps } from "../Share.types";
 
 const LinkTitle: FC<LinkTitleProps> = ({
-	t,
-	isLoaded,
-	linkTitle,
-	disabledCopy,
-	isExpiredLink,
-	shareLink,
-	onCopyLink,
+  t,
+  isLoaded,
+  linkTitle,
+  disabledCopy,
+  isExpiredLink,
+  shareLink,
+  onCopyLink,
+  isBlockedByAdmin,
 }) => {
-	return (
-		<div className={styles.linkTitleContainer} onClick={onCopyLink}>
-			<Text
-				className={classNames(
-					styles.linkOptionsTitle,
-					styles.linkOptionsTitleRoom,
-					{
-						[styles.isExpired]: isExpiredLink,
-					},
-				)}
-				title={linkTitle}
-				truncate
-			>
-				{linkTitle}
-			</Text>
-			{!disabledCopy ? (
-				<div className={styles.linkActionsCopyIconContainer}>
-					<img
-						className={styles.linkActionsCopyImgIcon}
-						src={EmptyIcon}
-						alt={shareLink}
-					/>
-					<IconButton
-						title={t("Common:CopySharedLink")}
-						className={styles.linkActionsCopyIcon}
-						size={12}
-						iconName={CopyIcon}
-						isDisabled={isExpiredLink || isLoaded}
-					/>
-				</div>
-			) : null}
-		</div>
-	);
+  return (
+    <div>
+      <div className={styles.linkTitleContainer} onClick={onCopyLink}>
+        <Text
+          className={classNames(
+            styles.linkOptionsTitle,
+            styles.linkOptionsTitleRoom,
+            {
+              [styles.isExpired]: isExpiredLink,
+            },
+          )}
+          title={linkTitle}
+          truncate
+        >
+          {linkTitle}
+        </Text>
+        {!disabledCopy ? (
+          <div className={styles.linkActionsCopyIconContainer}>
+            <img
+              className={styles.linkActionsCopyImgIcon}
+              src={EmptyIcon}
+              alt={shareLink}
+            />
+            <IconButton
+              title={t("Common:CopySharedLink")}
+              className={styles.linkActionsCopyIcon}
+              size={12}
+              iconName={CopyIcon}
+              isDisabled={isExpiredLink || isLoaded}
+            />
+          </div>
+        ) : null}
+      </div>
+      {isBlockedByAdmin ? (
+        <Text className={styles.blockedByAdmin}>
+          {t("Common:BlockedByAdmin")}
+        </Text>
+      ) : null}
+    </div>
+  );
 };
 
 export default LinkTitle;

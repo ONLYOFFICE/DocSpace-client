@@ -292,9 +292,10 @@ const SetRoomParams = ({
     }
   };
 
-  const onSaveAvatar = () => {
+  const onSaveAvatar = (image, preview) => {
     setAvatarEditorDialogVisible(false);
     setCover();
+    if (preview) setPreviewIcon(preview);
   };
 
   const onDeleteAvatar = () => {
@@ -685,7 +686,6 @@ export default inject(
       "CreateEditRoomDialog",
       "Translations",
       "Common",
-      "RoomLogoCover",
     ])(withLoader(SetRoomParams)(<SetRoomParamsLoader />)),
   ),
 );

@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Aus der Liste wählen",
-  "FileLocked": "Datei gesperrt",
   "FileProtected": "Diese Datei ist kennwortgeschützt",
-  "FileUnlocked": "Datei entsperrt",
   "FolderTitleBoxNet": "Box-Verzeichnis",
   "FolderTitleDocuSign": "DocuSign Konto",
   "FolderTitleDropBox": "Dropbox-Verzeichnis",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "WebDAV Verzeichnis",
   "FolderTitleYandex": "Yandex Verzeichnis",
   "NewForm": "PDF-Formular",
-  "OwnerChange": "Besitzer ändern",
   "RoleGuestDescriprion": "Gäste können auf die Räume zugreifen, zu denen sie eingeladen wurden, sowie Dokumente erstellen und bearbeiten, wenn ihnen die entsprechenden Rollen im Raum zugewiesen wurden.",
   "SearchByHeadOfGroup": "Suchen nach Gruppenleiter",
   "SearchByOwner": "Suche nach Besitzern",

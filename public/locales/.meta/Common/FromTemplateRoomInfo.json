@@ -3,7 +3,7 @@
   "content": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template.",
   "content_en_sha1_hash": "7f6e9f2e8f37792cc17775b4bd5cca6a6740ca48",
   "created_at": "2025-05-26T07:15:43.923Z",
-  "updated_at": "2026-04-11T21:47:48.944Z",
+  "updated_at": "2026-07-07T08:59:21.956Z",
   "comment": {
     "text": "This is a description displayed when creating a new room from a template, explaining that the new room will inherit settings, users, folders, and files from the chosen template.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
-      "line_number": 34,
-      "context": "export const getRoomTypeDescriptionTranslation = (\n t: TTranslation,\n roomType: RoomsType = 1,\n isTemplate: boolean = false,\n ) => {\n if (isTemplate) return t(\"Common:FromTemplateRoomInfo\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:",
+      "line_number": 44,
+      "context": "if (isFormSection)\n return isTemplate\n ? t(\"Common:SetTemplateDescription\")\n : t(\"Common:FormSetDescription\");\n \n if (isTemplate) return t(\"Common:FromTemplateRoomInfo\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 34,
-      "context": "export const getRoomTypeDescriptionTranslation = (\n t: TTranslation,\n roomType: RoomsType = 1,\n isTemplate: boolean = false,\n ) => {\n if (isTemplate) return t(\"Common:FromTemplateRoomInfo\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:",
+      "line_number": 81,
+      "context": "if (isFormSection)\n return isTemplate\n ? t(\"Common:SetTemplateDescription\")\n : t(\"Common:FormSetDescription\");\n \n if (isTemplate) return t(\"Common:FromTemplateRoomInfo\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:",
       "module": "/packages/shared"
     }
   ],

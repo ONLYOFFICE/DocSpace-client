@@ -1,0 +1,29 @@
+{
+  "key_path": "LicenseTitle",
+  "content": "License",
+  "content_en_sha1_hash": "3229609e15436ec51bcf00818a69a84dbc58a0c2",
+  "created_at": "2026-07-27T13:07:48.484Z",
+  "updated_at": "2026-07-27T14:14:52.217Z",
+  "comment": {
+    "text": "Title for a detail card in the DocsConnect statistics view within Portal Settings.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:14:52.217Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 335,
+      "context": "<Text\n className={styles.detailCardTitle}\n fontSize=\"16px\"\n fontWeight={700}\n >\n {t(\"DocsConnect:LicenseTitle\")}\n </Text>\n <div className={styles.detailRows}>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"Common:Start\")}</Text>\n <Text fontWeight={600}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

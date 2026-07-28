@@ -268,7 +268,14 @@ class InfoPanelStore {
       return item.logo?.cover ? item.logo : item.logo?.medium;
 
     if (isFolder(item))
-      return this.filesSettingsStore.getIconByFolderType(folderType, size);
+      // type-only cast — `folderType` is
+      // `false | FolderType | undefined` here and was passed to the untyped
+      // .js store unchanged; getIconPathByFolderType falls back to the
+      // default folder icon for non-FolderType values.
+      return this.filesSettingsStore.getIconByFolderType(
+        folderType as FolderType,
+        size,
+      );
 
     const fileExst = "fileExst" in item && item.fileExst;
 
@@ -276,11 +283,16 @@ class InfoPanelStore {
   };
 
   get infoPanelSelection(): TSelection {
-    const selection = this.filesStore.selection.length
+    // FilesStore selection/bufferSelection are filesList
+    // view-model items (TItem) and the fallback is a spread of the selected
+    // folder store; the erased casts keep the old JS values while this
+    // getter keeps its raw-entity TSelection facade.
+    const selection = (this.filesStore.selection.length
       ? this.filesStore.selection.length === 1
         ? this.filesStore.selection[0]
         : this.filesStore.selection
-      : (this.filesStore.bufferSelection ?? { ...this.selectedFolderStore });
+      : (this.filesStore.bufferSelection ??
+        { ...this.selectedFolderStore })) as unknown as TSelection;
 
     if (!selection) return null;
 
@@ -290,7 +302,7 @@ class InfoPanelStore {
 
     const icon = this.getInfoPanelItemIcon(selection, 32);
 
-    return { ...selection, icon };
+    return { ...selection, icon } as unknown as TSelection;
   }
 
   get infoPanelRoomSelection(): Nullable<TRoom> {
@@ -300,7 +312,7 @@ class InfoPanelStore {
       "isRoom" in this.infoPanelSelection &&
       this.infoPanelSelection.isRoom
     ) {
-      return this.infoPanelSelection;
+      return this.infoPanelSelection as TRoom;
     }
 
     return this.infoPanelRoom;
@@ -348,16 +360,22 @@ class InfoPanelStore {
     const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
+    const isForms = this.getIsForms();
     const isAccounts =
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return isRooms || isFiles || isAccounts || isAIAgent;
+    return isRooms || isFiles || isForms || isAccounts || isAIAgent;
   };
 
   getIsAIAgent = () => {
     const pathname = window.location.pathname.toLowerCase();
     return pathname.indexOf("ai-agent") !== -1;
+  };
+
+  getIsForms = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return pathname.indexOf("forms") !== -1;
   };
 
   getIsFiles = () => {

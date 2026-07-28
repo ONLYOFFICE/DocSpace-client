@@ -27,7 +27,7 @@
   --text-color: #{$black};
   --text-disable-color: #{$gray};
 
-  --link-color: #{$black};
+  --link-text-color: #{$black};
 
   --button-color-base: #{$black};
   --button-color-base-hover: #{$black};
@@ -66,7 +66,11 @@
   --text-color: #{$white};
   --text-disable-color: #{$gray-dark-text};
 
-  --link-color: #{$white};
+  --checkbox-fill-color: #{$dark-gray-light};
+  --checkbox-border-color: #{$gray-dark-strong};
+  --checkbox-arrow-color: #{$white};
+
+  --link-text-color: #{$white};
 
   --button-color-base: #{$white};
   --button-color-base-hover: #{$white};
@@ -557,7 +561,7 @@
 .light {
   --status-warning: #{$light-status-warning};
   --main-button-mobile-text-color: #{$light-gray-dark};
-  --main-button-mobile-button-color: #{$light-status-warning};
+  --main-button-mobile-button-color: #{$light-blue-main};
   --main-button-mobile-icon-fill: #{$white};
   --main-button-mobile-circle-background: #{$white};
   --main-button-mobile-mobile-progress-bar-background: #{$gray-strong};
@@ -585,7 +589,7 @@
 .dark {
   --status-warning: #{$dark-status-warning};
   --main-button-mobile-text-color: #{$dark-gray-dark};
-  --main-button-mobile-button-color: #{$dark-status-warning};
+  --main-button-mobile-button-color: #{$light-blue-main};
   --main-button-mobile-icon-fill: #{$black};
   --main-button-mobile-circle-background: #{$black};
   --main-button-mobile-mobile-progress-bar-background: #{$gray-dark-strong};
@@ -718,6 +722,7 @@
   --room-type-list-item-background: none;
   --room-type-list-item-border: #{$gray-light-mid};
   --room-type-list-item-hover-background: #{$gray-light};
+  --room-type-list-item-disabled-background: #{$gray-light};
   --room-type-list-item-description-text: #{$gray};
 
   --room-type-dropdown-button-background: none;
@@ -738,6 +743,7 @@
   --room-type-list-item-background: none;
   --room-type-list-item-border: #{$gray-dark-strong};
   --room-type-list-item-hover-background: #{$dark-gray-light};
+  --room-type-list-item-disabled-background: #{$dark-gray-light};
   --room-type-list-item-description-text: #{$gray};
 
   --room-type-dropdown-button-background: none;
@@ -789,6 +795,7 @@
   --info-panel-border: #{$gray-light-mid};
   --info-panel-avatar-color: #{$gray-text};
   --info-panel-link-expired: #{$gray};
+  --info-panel-link-blocked: #{$light-status-warning};
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$gray-text};
   --info-panel-members-create-link: #{$black};
@@ -801,6 +808,7 @@
   --info-panel-border: #{$gray-dark-strong};
   --info-panel-avatar-color: #{$gray};
   --info-panel-link-expired: #{$gray};
+  --info-panel-link-blocked: #{$light-status-warning};
   --info-panel-links-color: #{$light-blue-main};
   --info-panel-links-primary-color: #{$dark-gray-dark};
   --info-panel-members-create-link: #{$gray-dark};
@@ -1267,7 +1275,7 @@
   --media-viewer-tap-highlight: #{$tap-highlight};
   --viewer-details: #{$background-color};
 
-  --viewer-loader-border-color: #{$white};
+  --viewer-loader-border-color: #{$black};
   --viewer-loader-background: #{$brown-background};
 
   --viewer-player-fullscreen-bg: #{$dark-black};
@@ -1495,7 +1503,7 @@
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
 
-  --ai-settings-description:#{$gray};
+  --ai-settings-description: #{$gray};
 }
 
 .dark {
@@ -1556,7 +1564,10 @@
   --payment-background-color: #{$gray-light};
   --payment-backgroud-color-warning: #{$gray-light};
   --payment-text-color: #{$light-gray-dark};
+  --payment-secondary-text-color: #{$gray};
   --payment-credit-color: #{$light-status-positive};
+  --payment-card-background-color: #{$white};
+  --payment-card-border-color: #{$light-gray-selected};
   --payment-icon-background: #{$gray-light-mid};
   --payment-icon-color: #{$light-gray-dark};
   --payment-dialog-text: #{$gray};
@@ -1567,6 +1578,7 @@
   --payment-error-color: #{$light-error-status};
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
+  --background-cards-color: #{$gray-light};
   --border-service-color: #{$gray-light-mid};
   --services-additional-info: #{$gray};
   --services-link-color: #{$gray};
@@ -1585,7 +1597,10 @@
   --payment-background-color: #{$light-dark-gray-hover};
   --payment-backgroud-color-warning: #{$dark-gray-light};
   --payment-text-color: #{$dark-gray-dark};
+  --payment-secondary-text-color: #{$white};
   --payment-credit-color: #{$dark-status-positive};
+  --payment-card-background-color: #{$black};
+  --payment-card-border-color: #{$gray-dark-strong};
   --payment-icon-background: #{$gray-dark-mid};
   --payment-icon-color: #{$dark-gray-dark};
   --payment-dialog-text: #{$gray-dark};
@@ -1596,6 +1611,7 @@
   --payment-error-color: #{$dark-error-status};
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
+  --background-cards-color: #{$dark-gray-light};
   --border-service-color: #{$gray-dark-strong};
   --modal-dialog-border-color: #{$gray-dark-strong};
   --services-additional-info: #{$gray-dark};
@@ -1972,7 +1988,7 @@
   --input-block-icon-color: #{$gray-dark};
   --input-block-hover-icon-color: #{$white};
   --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
-  --settings-common-white-label-not-available-background: #{$gray-dark};
+  --settings-common-white-label-not-available-background: #{$dark-gray-light};
   --settings-common-white-label-text-color: #{$white};
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
   --settings-backup-text-disabled: #{$gray-dark-text};
@@ -2885,11 +2901,29 @@
 .light {
   --dev-tools-card-border: 1px solid #{$light-gray-selected};
   --dev-tools-card-divider: #{$gray-light-mid};
+  --dev-tools-card-bg: #{$gray-light};
+  --dev-tools-border-color: #{$light-gray-selected};
+  --dev-tools-text-secondary: #{$gray};
+  --dev-tools-text-tertiary: #{$gray-text};
+  --dev-tools-text: #{$light-gray-dark};
+  --dev-tools-icon-color: #{$light-gray-dark};
+  --dev-tools-status-positive: #{$light-status-positive};
+  --dev-tools-status-warning: #{$light-status-warning};
+  --dev-tools-status-negative: #{$light-error-status};
 }
 
 .dark {
   --dev-tools-card-border: 1px solid #{$gray-dark-strong};
   --dev-tools-card-divider: #{$gray-dark-strong};
+  --dev-tools-card-bg: #{$gray-dark-mid};
+  --dev-tools-border-color: #{$gray-dark-strong};
+  --dev-tools-text-secondary: #{$gray-dark};
+  --dev-tools-text-tertiary: #{$gray-dark};
+  --dev-tools-text: #{$dark-gray-dark};
+  --dev-tools-icon-color: #{$dark-gray-dark};
+  --dev-tools-status-positive: #{$dark-status-positive};
+  --dev-tools-status-warning: #{$dark-status-warning};
+  --dev-tools-status-negative: #{$dark-error-status};
 }
 
 .light {
@@ -2929,4 +2963,22 @@
   --files-version-history-link-color: #{$gray-dark};
   --files-version-history-comment-color: #{$gray-dark};
   --files-version-history-badge-delete-text-color: #{$dark-gray-dark};
+}
+
+.light {
+  --text-secondary: #{$gray-text};
+  --row-background-color: #{$light-gray-hover};
+  --divider-color: #{$gray-light-mid};
+  --background-secondary: #{$gray-light};
+  --color-error: #{$light-error-status};
+  --color-error-light: #{rgba($light-error-status, 0.08)};
+}
+
+.dark {
+  --text-secondary: #{$dark-gray-dark};
+  --row-background-color: #{$light-dark-gray-hover};
+  --divider-color: #{$gray-dark-strong};
+  --background-secondary: #{$gray-dark-mid};
+  --color-error: #{$dark-error-status};
+  --color-error-light: #{rgba($dark-error-status, 0.12)};
 }

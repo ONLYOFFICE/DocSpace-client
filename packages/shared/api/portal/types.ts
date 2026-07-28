@@ -45,6 +45,12 @@ export type TQuotas = {
   state?: QuotaState;
 };
 
+export type TPortalWalletService = {
+  id?: number;
+  serviceName?: string;
+  features?: { id?: string }[];
+};
+
 export type TPortalTariff = {
   id: number;
   state: TariffState;
@@ -139,6 +145,8 @@ export type TPortal = {
   trustedDomainsType: number;
   version: number;
   versionChanged: Date;
+  /** Custom DNS name; present when a mapped domain is configured */
+  mappedDomain?: string;
 };
 
 export type TTariff = {

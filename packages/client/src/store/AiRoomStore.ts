@@ -45,7 +45,11 @@ class AiRoomStore {
   knowledgeId: Nullable<number> = null;
   resultId: Nullable<number> = null;
 
-  currentTab: "chat" | "knowledge" | "result" = "chat";
+  // Nullable: FilesStore resets the tab with `setCurrentTab(null)` when
+  // leaving AI-room contexts (fetchRooms/fetchAgents/plain folders).
+  currentTab: Nullable<"chat" | "knowledge" | "result"> = "chat";
+
+  selectedResultFileId: Nullable<number> = null;
 
   aiPlaylistImages: TChatPlaylistImage[] = [];
 
@@ -61,8 +65,13 @@ class AiRoomStore {
     this.roomId = roomId;
   };
 
-  setCurrentTab = (currentTab: "chat" | "knowledge" | "result") => {
+  setCurrentTab = (currentTab: Nullable<"chat" | "knowledge" | "result">) => {
     this.currentTab = currentTab;
+    if (currentTab !== "result") this.selectedResultFileId = null;
+  };
+
+  setSelectedResultFileId = (id: Nullable<number>) => {
+    this.selectedResultFileId = id;
   };
 
   setKnowledgeId = (knowledgeId: Nullable<number>) => {

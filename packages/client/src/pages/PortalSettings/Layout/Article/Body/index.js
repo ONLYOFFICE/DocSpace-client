@@ -202,7 +202,7 @@ const ArticleBodyContent = (props) => {
       case "Customization":
         return t("Customization");
       case "SettingsGeneral":
-        return t("SettingsGeneral");
+        return t("Common:SettingsGeneral");
       case "StudioTimeLanguageSettings":
         return t("StudioTimeLanguageSettings");
       case "CustomTitlesWelcome":
@@ -219,7 +219,7 @@ const ArticleBodyContent = (props) => {
         return t("ThirdPartyAuthorization");
       case "Migration":
         return t("Migration");
-      case "Backup":
+      case "Common:Backup":
         return t("Common:Backup");
       case "Common:PaymentsTitle":
         return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
@@ -232,7 +232,9 @@ const ArticleBodyContent = (props) => {
       case "Common:RestoreBackup":
         return t("Common:RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion", { productName: getBrandName("ProductName") });
+        return t("PortalDeletion", {
+          productName: getBrandName("ProductName"),
+        });
       case "Common:Bonus":
         return t("Common:Bonus");
       case "Common:FreeAccessToLicensedVersion":
@@ -245,6 +247,8 @@ const ArticleBodyContent = (props) => {
         return t("Services");
       case "AISettings":
         return t("Settings:AISettings");
+      case "OAuth:Apps":
+        return t("OAuth:Apps");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -262,7 +266,7 @@ const ArticleBodyContent = (props) => {
     if (isNotPaidPeriod) {
       resultTree = resultTree.filter((e) => {
         return (
-          e.tKey === "Backup" ||
+          e.tKey === "Common:Backup" ||
           e.tKey === "Common:PaymentsTitle" ||
           (isOwner && e.tKey === "PortalDeletion")
         );
@@ -308,7 +312,10 @@ const ArticleBodyContent = (props) => {
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
-      const linkData = getLinkData(item.key);
+      const linkData =
+        !standalone && item.alternativeUrl
+          ? { path: item.alternativeUrl, state: {} }
+          : getLinkData(item.key);
 
       const style = {
         marginTop: `${item.key.includes(standalone ? 9 : 10) ? "16px" : "0"}`,
@@ -344,9 +351,7 @@ const ArticleBodyContent = (props) => {
   return !isLoadedArticleBody || isProfileLoading ? (
     <ArticleFolderLoader />
   ) : (
-    <>
-      {items}
-    </>
+    <>{items}</>
   );
 };
 
@@ -399,7 +404,7 @@ export default inject(
   },
 )(
   withLoading(
-    withTranslation(["Settings", "Common", "Ldap"])(
+    withTranslation(["Settings", "Common", "Ldap", "OAuth"])(
       observer(ArticleBodyContent),
     ),
   ),

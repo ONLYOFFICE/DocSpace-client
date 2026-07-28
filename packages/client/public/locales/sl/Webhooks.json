@@ -1,7 +1,7 @@
 {
   "AgentCreated": "Ustvarjen AI agent",
   "AgentDeleted": "AI Agent izbrisan",
-  "AgentUpdated": "AI Agent posodobljen",
+  "AgentUpdated": "AI agent posodobljen",
   "Before": "Pred",
   "CreateWebhook": "Ustvari webhook",
   "DeleteHint": "Webhook bo trajno izbrisan.\nTega dejanja ne boste mogli razveljaviti.",
@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Zaglavje POST zahteve je bilo uspešno kopirano v odložišče",
   "RequestPostBody": "POST telo zahteve",
   "RequestPostHeader": "POST glava zahteve",
-  "ResetKey": "Ponastavi ključ",
   "Response": "Odgovor",
   "ResponseBodyCopied": "Telo odgovora POST je bilo uspešno kopirano v odložišče",
   "ResponseHeaderCopied": "Glava odgovora POST je bila uspešno kopirana v odložišče",

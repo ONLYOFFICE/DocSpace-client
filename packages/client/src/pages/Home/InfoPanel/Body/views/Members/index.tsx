@@ -100,6 +100,9 @@ const Members = ({
   isMembersPanelUpdating,
   setAccessSettingsIsVisible,
   templateAvailable,
+  isExternalShareRestricted,
+  defaultShareLinkInternal,
+  hasExternalLinks,
 }: MembersProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -121,31 +124,30 @@ const Members = ({
   }, [isMembersPanelUpdating, scrollToTop]);
 
   const onAddNewLink = async () => {
-    if (isPublicRoom || primaryLink) {
-      const roomId = infoPanelSelection!.id;
+    const roomId = infoPanelSelection!.id;
 
-      try {
-        const link = await createExternalLink(roomId);
+    try {
+      if (isPublicRoom || primaryLink) {
+        const link = await createExternalLink(roomId, {
+          internal:
+            !isPublicRoom &&
+            (isExternalShareRestricted || defaultShareLinkInternal),
+        });
+        setExternalLink!(link);
+      } else {
+        const link = isExternalShareRestricted
+          ? await createExternalLink(roomId, {
+              internal: defaultShareLinkInternal,
+            })
+          : await getPrimaryLink!(roomId);
 
         setExternalLink!(link);
-      } catch (error) {
-        toastr.error(error as Error);
-        console.error(error);
-      }
-    } else {
-      getPrimaryLink!(infoPanelSelection!.id).then((link) => {
-        setExternalLink!(link);
-
-        const typeLink = link as {
-          sharedTo: { shareLink: string; requestToken: string };
-        };
-
-        const shareLink = typeLink.sharedTo.shareLink;
-
-        copyShareLink(shareLink);
-
+        copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
-      });
+      }
+    } catch (error) {
+      toastr.error(error as Error);
+      console.error(error);
     }
   };
 
@@ -186,7 +188,9 @@ const Members = ({
               {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
             </Text>
 
-            {!isArchiveFolder && canAddLink ? (
+            {!isArchiveFolder &&
+            canAddLink &&
+            !(isPublicRoom && isExternalShareRestricted) ? (
               <div
                 data-tooltip-id="emailTooltip"
                 data-tooltip-content={t(
@@ -220,6 +224,23 @@ const Members = ({
             ) : null}
           </div>,
         );
+
+        if (isExternalShareRestricted && hasExternalLinks && !isArchiveFolder) {
+          publicRoomItems.push(
+            <div
+              key="restricted-bar"
+              data-restricted-bar
+              className={styles.restrictedBarItem}
+              data-testid="info_panel_members_restricted_bar"
+            >
+              <PublicRoomBar
+                hideHeader
+                headerText=""
+                bodyText={t("Common:ExternalLinksDisabledForGuests")}
+              />
+            </div>,
+          );
+        }
       }
 
       if (primaryLink && !searchValue) {
@@ -322,7 +343,17 @@ const Members = ({
       ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
       infoPanelSelection?.security?.EditAccess &&
       !searchValue &&
-      !isTemplate;
+      !isTemplate &&
+      !isExternalShareRestricted;
+
+    const showRestrictedBar =
+      isExternalShareRestricted &&
+      hasExternalLinks &&
+      isPublicRoomType &&
+      infoPanelSelection?.security?.EditAccess &&
+      !searchValue &&
+      !isTemplate &&
+      !isArchiveFolder;
 
     const publicRoomItemsLength = publicRoomItems.length;
 
@@ -396,6 +427,7 @@ const Members = ({
           itemCount={total + headersCount + publicRoomItemsLength}
           linksBlockLength={publicRoomItemsLength}
           withoutTitlesAndLinks={!!searchValue}
+          restrictedBarVisible={showRestrictedBar}
         >
           {publicRoomItems}
           {membersList.map((user, index) => {
@@ -453,7 +485,8 @@ export default inject(
 
     const { id: selfId } = userStore.user!;
 
-    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink, hasExternalLinks } =
+      publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
     const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
@@ -466,10 +499,19 @@ export default inject(
     const isFormRoom = roomType === RoomsType.FormRoom;
     const isPublicRoom = roomType === RoomsType.PublicRoom;
     const isCustomRoom = roomType === RoomsType.CustomRoom;
+    const isPrivateRoom = !!infoPanelRoomSelection?.private;
 
-    const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
+    const isPublicRoomType =
+      !isPrivateRoom && (isPublicRoom || isCustomRoom || isFormRoom);
 
     const { isRootFolder } = selectedFolderStore;
+    const {
+      isExternalShareRestricted: isExternalShareRestrictedRaw,
+      externalShareApplyToRooms,
+      defaultShareLinkInternal,
+    } = filesStore.filesSettingsStore;
+    const isExternalShareRestricted =
+      isExternalShareRestrictedRaw && externalShareApplyToRooms;
 
     return {
       infoPanelSelection: { ...infoPanelRoomSelection, isRoom: true },
@@ -484,6 +526,7 @@ export default inject(
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
       additionalLinks,
+      hasExternalLinks,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
 
@@ -493,6 +536,8 @@ export default inject(
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
       isRootFolder,
+      isExternalShareRestricted,
+      defaultShareLinkInternal,
     };
   },
 )(observer(Members));

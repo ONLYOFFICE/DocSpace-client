@@ -165,28 +165,6 @@ const SectionHeaderContent = (props) => {
 
     const arrayOfParams = getArrayOfParams();
 
-    const serviceSubPageHeaders = {
-      "backup": "Common:Backup",
-      "ai-services": "Common:OrganizationAI",
-      "disk-storage": "Common:AdditionalDiskStorage",
-    };
-
-    let number = 1;
-    if (window.location.href.includes("disk-storage")) number = 2;
-    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
-
-    if (serviceSubPageHeader) {
-      const header = serviceSubPageHeader;
-      const isCategoryOrHeader = false;
-
-      setState((val) => {
-        if (val.header === header && val.isCategoryOrHeader === isCategoryOrHeader)
-          return val;
-        return { ...val, header, isCategoryOrHeader };
-      });
-      return;
-    }
-
     const key = getKeyByLink(arrayOfParams, settingsTree);
 
     const keysCollection = key.split("-");
@@ -230,7 +208,8 @@ const SectionHeaderContent = (props) => {
     const isServicesSubPage =
       location.pathname.includes("/services/disk-storage") ||
       location.pathname.includes("/services/backup") ||
-      location.pathname.includes("/services/ai-services");
+      location.pathname.includes("/services/ai-services") ||
+      location.pathname.includes("/services/ai-search");
 
     if (isServicesSubPage && location.key === "default") {
       navigate("/portal-settings/payments/services");
@@ -316,8 +295,8 @@ const SectionHeaderContent = (props) => {
             : t("DataImport")
       : !standalone && isPaymentPage
         ? t("Common:Billing")
-        // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
-        : t(header, {
+        : // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
+          t(header, {
             organizationName: logoText,
             license: t("Common:EnterpriseLicense"),
             productName: getBrandName("ProductName"),
@@ -344,6 +323,7 @@ const SectionHeaderContent = (props) => {
           {!isCategoryOrHeader &&
           arrayOfParams[0] &&
           (isMobile() ||
+            window.location.href.indexOf("/ai-search") > -1 ||
             window.location.href.indexOf("/javascript-sdk/") > -1 ||
             window.location.href.indexOf("/ai-services") > -1 ||
             window.location.href.indexOf("/services/backup") > -1 ||
@@ -479,7 +459,6 @@ export default inject(
       "JavascriptSdk",
       "OAuth",
       "Ldap",
-      "Services",
       "Payments",
     ])(observer(SectionHeaderContent)),
   ),

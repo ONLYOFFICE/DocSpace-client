@@ -70,6 +70,10 @@ class CurrentTariffStatusStore {
 
   previousWalletQuota: TQuotas[] = [];
 
+  storageServiceId: Nullable<number> = null;
+
+  walletServicesResolved = false;
+
   payerInfo: TCustomerInfo = {
     portalId: null,
     paymentMethodStatus: 0,
@@ -230,22 +234,55 @@ class CurrentTariffStatusStore {
     }
   };
 
+  resolveWalletServiceIds = async () => {
+    if (this.walletServicesResolved) return;
+
+    try {
+      const services = await api.portal.getWalletServices();
+      const storageService = (services ?? []).find((service) =>
+        (service.features ?? []).some(
+          (feature) => feature.id === "total_size",
+        ),
+      );
+
+      runInAction(() => {
+        this.storageServiceId = storageService?.id ?? null;
+        this.walletServicesResolved = true;
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   fetchPortalTariff = async (refresh?: boolean) => {
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
     return api.portal
       .getPortalTariff(refresh, abortController.signal)
-      .then((res) => {
+      .then(async (res) => {
         if (!res) return;
 
         const { user } = this.userStore;
 
+        const isAdminUser = user && isAdmin(user);
+        const tariffWalletQuotas = (res.quotas ?? []).filter(
+          (q) => q.wallet === true,
+        );
+
+        if (isAdminUser && tariffWalletQuotas.length > 0) {
+          await this.resolveWalletServiceIds();
+        }
+
         runInAction(() => {
           this.portalTariffStatus = res;
 
-          if (user && isAdmin(user)) {
-            const quota = res.quotas.find((q) => q.wallet === true);
+          if (isAdminUser) {
+            const quota = this.walletServicesResolved
+              ? tariffWalletQuotas.find(
+                  (q) => q.id === this.storageServiceId,
+                )
+              : tariffWalletQuotas[0];
 
             if (quota) {
               if (quota.state === QuotaState.Overdue) {

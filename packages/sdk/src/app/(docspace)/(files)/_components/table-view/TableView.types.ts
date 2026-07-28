@@ -34,6 +34,7 @@
  */
 
 import type { Nullable, TSortBy } from "@docspace/shared/types";
+import type { FolderType } from "@docspace/shared/enums";
 import type { IndexRange } from "react-virtualized";
 
 import type { TFileItem, TFolderItem } from "../../../_hooks/useItemList";
@@ -45,6 +46,10 @@ export type TableViewRowProps = {
   displayFileExtension: boolean;
   hideColumns?: boolean;
   lastColumn: string;
+  currentUserId?: string;
+  isPrivate?: boolean;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 export type TableViewProps = {
@@ -57,4 +62,15 @@ export type TableViewProps = {
   timezone: string;
   displayFileExtension: boolean;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  currentUserId?: string;
+  infoPanelVisible?: boolean;
+  isPrivate?: boolean;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
+  /**
+   * Current section root folder type. Drives the section-specific column set,
+   * order, and per-column sortability (see columns.ts).
+   */
+  rootFolderType?: FolderType;
 };
+

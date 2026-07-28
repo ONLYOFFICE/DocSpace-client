@@ -35,13 +35,20 @@
 
 import { inject, observer } from "mobx-react";
 import { useEffect, useMemo } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import { BillingRoot } from "@docspace/ui-kit/billing";
 import { default as AiPage } from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
+import { default as AiSearchPage } from "@docspace/ui-kit/billing/services/pages/ai-search/AiSearchPage";
 import { default as BackupPage } from "@docspace/ui-kit/billing/services/pages/backup/BackupPage";
 import { default as AdditionalStoragePage } from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
 import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
+
+import config from "PACKAGE_FILE";
+
 import { PAYMENT_ROUTES } from "./utils";
 
 interface ServicesPageProps {
@@ -63,9 +70,18 @@ const ServicesPage = (props: ServicesPageProps) => {
     fetchPayerInfo,
   } = props;
   const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     fetchPayerInfo?.();
   }, [fetchPayerInfo]);
+
+  const onViewUsage = () => {
+    const url = isManagement()
+      ? "/management/payments/usage"
+      : "/portal-settings/payments/usage";
+
+    navigate(combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url));
+  };
 
   const paymentConfig = useMemo(
     () => ({
@@ -83,10 +99,34 @@ const ServicesPage = (props: ServicesPageProps) => {
   return (
     <BillingRoot config={paymentConfig}>
       {pathname.includes("ai-services") ? (
-        <AiPage getAIConfig={getAIConfig} withBottomMargin={true}/>
+        <AiPage
+          getAIConfig={getAIConfig}
+          withBottomMargin={true}
+          onViewMore={onViewUsage}
+          onOpenSupportedModels={() =>
+            navigate(
+              combineUrl(
+                window.ClientConfig?.proxy?.url,
+                config.homepage,
+                "/portal-settings/ai-settings/ai-models",
+              ),
+            )
+          }
+        />
       ) : null}
-      {pathname.includes("backup") ? <BackupPage withBottomMargin={true}/> : null}
-      {pathname.includes("disk-storage") ? <AdditionalStoragePage withBottomMargin={true}/> : null}
+      {pathname.includes("ai-search") ? (
+        <AiSearchPage
+          getAIConfig={getAIConfig}
+          withBottomMargin={true}
+          onViewMore={onViewUsage}
+        />
+      ) : null}
+      {pathname.includes("backup") ? (
+        <BackupPage withBottomMargin={true} onViewMore={onViewUsage} />
+      ) : null}
+      {pathname.includes("disk-storage") ? (
+        <AdditionalStoragePage withBottomMargin={true} />
+      ) : null}
     </BillingRoot>
   );
 };

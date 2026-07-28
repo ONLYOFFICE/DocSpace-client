@@ -10,7 +10,7 @@
   "NotConfigured": "Ni konfigurirano",
   "Notifications": "Obvestila",
   "RoomsActivityDescription": "Prejemajte takojšnje e-poštovne obvestila o novih deljenih datotekah/mapah in aktivnosti v vaših {{rooms}} in {{aiAgents}}.",
-  "RoomUpdateNotify": "Deljeni vsebine, {{rooms}} in aktivnost {{aiAgents}}",
+  "RoomUpdateNotify": "Deljeni vsebine, dejavnost v razdelkih {{rooms}} in {{aiAgents}}",
   "SettingUpNotifications": "Nastavljanje obvestil",
   "SuccessConnected": "{{serviceName}} je bil uspešno povezan kot kanal za obveščanje. Sedaj boste prejemali posodobitve tam.",
   "SuccessDisconnected": "{{serviceName}} je bil uspešno izklopljen kot kanal za obveščanja. Obveščanja ne bodo več poslana tja.",

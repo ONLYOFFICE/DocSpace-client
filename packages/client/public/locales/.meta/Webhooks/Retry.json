@@ -3,7 +3,7 @@
   "content": "Retry",
   "content_en_sha1_hash": "9f5cd8a2e8807d73efa02c844bfbca9fe552b283",
   "created_at": "2025-05-19T21:30:49.814Z",
-  "updated_at": "2026-05-15T15:37:40.172Z",
+  "updated_at": "2026-05-24T17:27:49.164Z",
   "comment": {
     "text": "This is a button label that allows the user to reattempt an action, such as reloading a file or retrying a webhook.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/PanelComponents/ErrorFile.js",
-      "line_number": 67,
-      "context": "<Text\n className=\"enter-password\"\n fontWeight=\"600\"\n onClick={onRetryClick}\n >\n {t(\"Retry\")}\n </Text>\n ) : null}\n {item.needPassword ? (\n <Text className=\"enter-password\" fontWeight=\"600\" onClick={onTextClick}>\n {showPasswordInput ? t(\"HideInput\") : t(\"Common:EnterPassword\")}",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
       "line_number": 158,
@@ -167,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

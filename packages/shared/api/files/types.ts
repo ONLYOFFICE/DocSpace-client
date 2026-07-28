@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TFile } from "@docspace/ui-kit/types";
+import type { TFile as TFileBase } from "@docspace/ui-kit/types";
 
 import type {
   TAvailableShareRights,
@@ -54,7 +54,28 @@ import type {
 import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
 
-export type { TFile };
+export type TFile = TFileBase & {
+  encrypted?: boolean;
+};
+
+export type TFileEncryptionInfo = {
+  userKeys: Array<{
+    id: string;
+    userId: string;
+    publicKey: string;
+    privateKeyEnc: string;
+    date: string;
+    cryptoEngineId: string;
+  }>;
+  fileKeys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+    tenantId?: number;
+    fileId?: number;
+    createOn?: string;
+  }>;
+};
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -191,13 +212,17 @@ export type TFolder = {
   path?: TPathParts[];
   type?: FolderType;
   isFolder?: boolean;
+  /** Present on folders returned inside rooms listings (`GET /files/{id}`
+   * current); consumed by FilesStore (`data.current.inRoom`,
+   * `setInRoomFolder`). */
+  inRoom?: boolean;
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;
   parentShared?: boolean;
   parentRoomType?: FolderType;
   order?: string;
-  isRoom?: false;
+  isRoom?: boolean;
   rootRoomType?: RoomsType;
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
@@ -265,6 +290,9 @@ export type TThirdParty = {
   providerKey: string;
   provider_id?: string;
   customer_title?: string;
+  /** Snake-case variant returned by the providers endpoint; read by
+   * FilesActionsStore.setThirdpartyInfo. */
+  provider_key?: string;
 };
 
 export type TThirdParties = TThirdParty[];
@@ -286,6 +314,10 @@ export type TFilesSettings = {
   enableThirdParty: boolean;
   externalShare: boolean;
   externalShareSocialMedia: boolean;
+  defaultShareLinkInternal: boolean;
+  externalShareApplyToDocuments: boolean;
+  externalShareApplyToRooms: boolean;
+  blockExistingLinksOnRestrict: boolean;
   extsArchive: string[];
   extsAudio: string[];
   extsCoAuthoring: string[];
@@ -337,6 +369,12 @@ export type TFilesSettings = {
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
   organizeRoomsGrouping: boolean;
+  /** Whether the room lifetime confirmation dialog is hidden (see PUT files/hideconfirmroomlifetime). */
+  hideConfirmRoomLifetime?: boolean;
+  /** Whether the cancel-operation confirmation dialog is hidden (see PUT files/hideconfirmcanceloperation). */
+  hideConfirmCancelOperation?: boolean;
+  /** Extensions of files that can be vectorized (uploaded to AI rooms). */
+  extsFilesVectorized?: string[];
 };
 
 export type TPresignedUri = {
@@ -422,6 +460,8 @@ export type TDocServiceLocation = {
   docServiceSignatureSecret: string;
   isDefault: boolean;
   docServiceSslVerification: boolean;
+  /** URL of the document server preload frame (returned by GET files/docservice). */
+  docServicePreloadUrl?: string;
 };
 
 export type TFileLink = {
@@ -445,6 +485,10 @@ export type TFileLink = {
     expirationDate?: string | null;
     internal: boolean;
     password?: string;
+    /** Whether the link is disabled (returned for room external links). */
+    disabled?: boolean;
+    /** Whether the link belongs to a room template (returned for room external links). */
+    isTemplate?: boolean;
   };
   subjectType: number;
 };

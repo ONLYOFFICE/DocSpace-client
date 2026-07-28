@@ -1,0 +1,736 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+.panel {
+  --payment-warning-color: var(--dev-tools-status-warning);
+  --payment-backgroud-color-warning: var(--dev-tools-card-bg);
+
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  width: 100%;
+  gap: 16px;
+  padding-top: 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 32px;
+
+  @include mixins.mobile {
+    > :first-child {
+      flex: 1;
+    }
+  }
+}
+
+.trialBadge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--dev-tools-status-positive);
+  border: 1px solid
+    color-mix(in srgb, var(--dev-tools-status-positive) 40%, transparent);
+}
+
+.trialBadgeWarning {
+  color: var(--dev-tools-status-warning);
+  border-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-warning) 40%,
+    transparent
+  );
+}
+
+.trialBadgeExpired {
+  color: var(--dev-tools-status-negative);
+  border-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-negative) 40%,
+    transparent
+  );
+}
+
+.trialExpiredTitle {
+  color: var(--dev-tools-status-negative);
+}
+
+.muted {
+  color: var(--dev-tools-text-tertiary);
+}
+
+.tariffNote {
+  color: var(--dev-tools-text-secondary);
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.activityHeader {
+  margin-bottom: 7px;
+}
+
+.statistics {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 40px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 660px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.settingsRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.settingsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settingsHint {
+  color: var(--dev-tools-text-secondary);
+}
+
+.toggleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toggleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 6px;
+  background-color: var(--dev-tools-card-bg);
+}
+
+.toggleControl {
+  label {
+    position: relative;
+  }
+}
+
+.toggleDescription {
+  margin-inline-start: 36px;
+  color: var(--dev-tools-text);
+}
+
+.radioHint {
+  font-weight: 400;
+  color: var(--dev-tools-text-secondary);
+}
+
+.radioGroup {
+  margin-top: 16px;
+}
+
+.secretField {
+  @include mixins.common-input-color-styles;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box;
+
+  &:focus-within {
+    border-color: var(--input-border-focus);
+  }
+}
+
+.secretInput {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.secretIcons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline-end: 12px;
+  background-color: inherit;
+}
+
+.saveButtons {
+  position: static;
+  margin-top: 4px;
+
+  @include mixins.mobile {
+    position: static !important;
+    background-color: transparent;
+
+    > div {
+      padding: 0 !important;
+    }
+
+    p {
+      position: static !important;
+      width: auto !important;
+      padding: 8px 0 0 !important;
+      background-color: transparent;
+      border-top: none !important;
+    }
+  }
+}
+
+.rulesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.ruleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--dev-tools-card-divider);
+}
+
+.ruleBadge {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--dev-tools-status-positive);
+  background-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-positive) 12%,
+    transparent
+  );
+}
+
+.ruleBadgeDeny {
+  color: var(--dev-tools-status-negative);
+  background-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-negative) 12%,
+    transparent
+  );
+}
+
+.ruleValue {
+  flex: 1;
+}
+
+.addRuleBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.limitField {
+  max-width: 320px;
+  margin-top: 10px;
+
+  @include mixins.mobile {
+    max-width: none;
+  }
+}
+
+.addRuleAction {
+  display: flex;
+  gap: 8px;
+
+  button {
+    height: 32px !important;
+    font-size: 13px !important;
+    line-height: 20px !important;
+    padding: 0 28px;
+  }
+
+  @include mixins.tablet-and-below {
+    button {
+      height: 40px !important;
+      font-size: 14px !important;
+      line-height: 16px !important;
+    }
+  }
+
+  @include mixins.mobile {
+    button {
+      flex: 1;
+    }
+  }
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.previewEditor {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 260px);
+  min-height: 480px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.previewLoader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+}
+
+.previewHidden {
+  display: none;
+}
+
+.demoCode {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px;
+  border-radius: 6px;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+}
+
+.demoCodeCopy {
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 12px;
+}
+
+.demoCodeText {
+  margin: 0;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 22px;
+
+  @include mixins.mobile {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}
+
+.deactivatedTitle {
+  color: var(--dev-tools-status-negative);
+}
+
+.trialBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-sizing: border-box;
+  max-width: 660px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--dev-tools-card-bg);
+
+  @include mixins.mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.trialBannerText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bannerButton {
+  flex-shrink: 0;
+}
+
+.deactivatedBanner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  max-width: 660px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--dev-tools-card-bg);
+}
+
+.deactivatedBannerHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deactivatedBannerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg path {
+    fill: var(--dev-tools-status-negative);
+  }
+}
+
+.deactivatedBannerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.deactivatedBannerDivider {
+  color: var(--dev-tools-text-tertiary);
+}
+
+.subscriptionTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inactiveBadge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 16px;
+  color: var(--dev-tools-status-negative);
+  background-color: color-mix(
+    in srgb,
+    var(--dev-tools-status-negative) 12%,
+    transparent
+  );
+}
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  @include mixins.tablet-and-below {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 15px;
+  border-radius: 12px;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+}
+
+.infoLabelRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.eyeIcon {
+  cursor: pointer;
+}
+
+.infoValueRow {
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
+  gap: 8px;
+}
+
+.copyIcon {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.twoCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  @include mixins.tablet-and-below {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detailCard {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 12px;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+}
+
+.detailCardTitle {
+  margin-bottom: 18px;
+}
+
+.detailCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.detailRows {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.detailLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailRows .detailRow:not(:last-child) {
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--dev-tools-card-divider);
+}
+
+.detailRows .detailRow + .detailRow {
+  padding-top: 12px;
+}
+
+.licenseProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 9px;
+  --progress-bar-size: 8px;
+  --progress-bar-fill: var(--dev-tools-status-positive);
+}
+
+.licenseProgressLow {
+  --progress-bar-fill: var(--dev-tools-status-warning);
+}
+
+.licenseProgressExpired {
+  --progress-bar-fill: var(--dev-tools-status-negative);
+}
+
+.usageBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+  --progress-bar-size: 8px;
+  --progress-bar-fill: var(--usage-color);
+}
+
+.usagePositive {
+  --usage-color: var(--dev-tools-status-positive);
+}
+
+.usageWarning {
+  --usage-color: var(--dev-tools-status-warning);
+}
+
+.usageNegative {
+  --usage-color: var(--dev-tools-status-negative);
+}
+
+.statValueHighlight {
+  color: var(--usage-color);
+}
+
+.usageBarRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.usageProgress {
+  margin-top: -11px;
+}
+
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.statColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.downloadReport {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 8px;
+
+  @include mixins.mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.downloadButton {
+  height: 40px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+}
+
+.integrationsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.integrationTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  padding: 21px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border: var(--dev-tools-card-border);
+  background-color: var(--background-color);
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--accent-main);
+  }
+}
+
+.integrationTileMore {
+  background-color: var(--dev-tools-card-bg);
+}
+
+.integrationName {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 0;
+}
+
+.integrationLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15px;
+  color: var(--accent-main);
+  text-decoration: underline;
+}
+
+.integrationArrow {
+  width: 8px;
+  height: 9px;
+  flex-shrink: 0;
+
+  path {
+    fill: var(--accent-main);
+  }
+}

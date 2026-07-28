@@ -1,10 +1,16 @@
-FROM node:24-bookworm-slim
+FROM mcr.microsoft.com/playwright:v1.58.1-noble
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN apt-get -y update && apt-get install -yq
+# Playwright image ships with Node 22; upgrade to 24 as required by the project
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g pnpm@10.33.0
 
@@ -21,10 +27,6 @@ COPY public/ ./public/
 COPY libs/ui-kit/ ./libs/ui-kit/
 
 RUN pnpm install --frozen-lockfile
-
-RUN npm uninstall -g playwright playwright-core @playwright/test
-
-RUN cd /app/packages/management && pnpm exec playwright install chromium --with-deps
 
 RUN pnpm --filter @docspace/management run build:translations
 

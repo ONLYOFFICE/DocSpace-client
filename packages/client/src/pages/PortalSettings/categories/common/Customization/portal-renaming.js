@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { withTranslation, Trans } from "react-i18next";
 import { Badge } from "@docspace/ui-kit/components/badge";
@@ -42,7 +42,7 @@ import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { isMobileDevice } from "@docspace/shared/utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
@@ -78,6 +78,35 @@ const PortalRenamingComponent = (props) => {
   } = props;
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (location.hash !== "#portal-renaming" || !containerRef.current) return;
+
+    const el = containerRef.current;
+    const scroller = el.closest(".scroller");
+
+    if (scroller) {
+      const elTop =
+        el.getBoundingClientRect().top -
+        scroller.getBoundingClientRect().top +
+        scroller.scrollTop;
+      scroller.scrollTo({ top: elTop - 16, behavior: "smooth" });
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    const accent = currentColorScheme?.main?.accent ?? globalColors.lightBlueMain;
+    el.animate(
+      [
+        { outline: `2px solid transparent`, outlineOffset: "4px" },
+        { outline: `2px solid ${accent}`, outlineOffset: "4px" },
+        { outline: `2px solid transparent`, outlineOffset: "4px" },
+      ],
+      { duration: 2000, easing: "ease-in-out", delay: 400 },
+    );
+  }, [location.hash]);
 
   let portalNameFromSessionStorage = getFromSessionStorage("portalName");
 
@@ -249,28 +278,28 @@ const PortalRenamingComponent = (props) => {
 
     switch (true) {
       case value === "":
-        setErrorValue(t("PortalNameEmpty"));
-        saveToSessionStorage("errorValue", t("PortalNameEmpty"));
+        setErrorValue(t("Common:PortalNameEmpty"));
+        saveToSessionStorage("errorValue", t("Common:PortalNameEmpty"));
         break;
       case value.length < domainValidator.minLength ||
         value.length > domainValidator.maxLength:
         setErrorValue(
-          t("PortalNameLength", {
+          t("Common:PortalNameLength", {
             minLength: domainValidator.minLength,
             maxLength: domainValidator.maxLength,
           }),
         );
         saveToSessionStorage(
           "errorValue",
-          t("PortalNameLength", {
+          t("Common:PortalNameLength", {
             minLength: domainValidator.minLength,
             maxLength: domainValidator.maxLength,
           }),
         );
         break;
       case !validDomain.test(value):
-        setErrorValue(t("PortalNameIncorrect"));
-        saveToSessionStorage("errorValue", t("PortalNameIncorrect"));
+        setErrorValue(t("Common:PortalNameIncorrect"));
+        saveToSessionStorage("errorValue", t("Common:PortalNameIncorrect"));
         break;
       default:
         saveToSessionStorage("errorValue", null);
@@ -312,6 +341,7 @@ const PortalRenamingComponent = (props) => {
         <TextInput
           tabIndex={10}
           id="textInputContainerPortalRenaming"
+          name="portal_name"
           scale
           value={portalName}
           testId="customization_portal_renaming_text_input"
@@ -331,6 +361,8 @@ const PortalRenamingComponent = (props) => {
     <LoaderCustomization portalRenaming />
   ) : (
     <StyledSettingsComponent
+      ref={containerRef}
+      id="portal-renaming"
       hasScroll={hasScroll}
       className="category-item-wrapper"
       isSettingPaid={isSettingPaid}

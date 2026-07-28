@@ -3,7 +3,7 @@
   "content": "Active",
   "content_en_sha1_hash": "a733b809d2f1233496ab516eed0f3ef75cf3791a",
   "created_at": "2025-05-19T21:30:42.902Z",
-  "updated_at": "2026-05-15T14:00:06.715Z",
+  "updated_at": "2026-07-27T13:07:50.681Z",
   "comment": {
     "text": "This is a short label indicating an active status for a user or item, often used in filters or status displays.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 141,
+      "line_number": 140,
       "context": "label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n \n case EmployeeStatus.Active:\n default:\n label = t(\"Common:Active\");\n break;\n }\n \n setStatusLabel(label);\n }, [userSelection, t]);",
       "module": "/packages/client"
     },
@@ -33,6 +33,18 @@
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 367,
       "context": "let label = \"\";\n const key = usersFilter.employeeStatus;\n \n switch (key) {\n case EmployeeStatus.Active:\n label = t(\"Common:Active\");\n break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/UsageBlock.tsx",
+      "line_number": 92,
+      "context": "{`${usage.active} / ${limit}`}\n </Text>\n </div>\n <ProgressBar percent={percent} className={styles.usageProgress} />\n <div className={styles.statRow}>\n <StatColumn value={usage.active} label={t(\"Common:Active\")} />\n <StatColumn value={usage.internal} label={t(\"DocsConnect:Internal\")} />\n <StatColumn value={usage.external} label={t(\"DocsConnect:External\")} />\n <StatColumn\n value={usage.remaining}\n label={t(\"DocsConnect:Remaining\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
+      "line_number": 124,
+      "context": "return (\n <div className={styles.keyItem}>\n <div className={styles.keyItemHeader}>\n <div className={styles.keyItemBadges}>\n <Badge\n label={t(\"Common:Active\")}\n backgroundColor={globalColors.secondGreen}\n maxWidth=\"none\"\n />\n {isCurrentDevice ? (\n <Badge",
       "module": "/packages/client"
     }
   ],

@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "从列表中选择",
-  "FileLocked": "文件已锁定",
   "FileProtected": "该文件受密码保护",
-  "FileUnlocked": "文件已解锁",
   "FolderTitleBoxNet": "Box 目录",
   "FolderTitleDocuSign": "DocuSign账户",
   "FolderTitleDropBox": "Dropbox 目录",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "WebDAV目录",
   "FolderTitleYandex": "Yandex目录",
   "NewForm": "PDF 表单",
-  "OwnerChange": "变更所有者",
   "RoleGuestDescriprion": "访客可以访问他们被邀请的房间，如果他们被分配了适当的角色，还可以创建和编辑文档。",
   "SearchByHeadOfGroup": "按组长进行搜索",
   "SearchByOwner": "按所有者搜索",

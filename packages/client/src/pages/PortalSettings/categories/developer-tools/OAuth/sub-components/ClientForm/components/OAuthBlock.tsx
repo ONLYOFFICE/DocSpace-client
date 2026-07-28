@@ -75,7 +75,7 @@ const OAuthBlock = ({
         <MultiInputGroup
           t={t}
           label={t("RedirectsURLS")}
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           name="redirect_uris"
           onAdd={changeValue}
           currentValue={redirectUrisValue}
@@ -87,7 +87,7 @@ const OAuthBlock = ({
         <MultiInputGroup
           t={t}
           label={t("AllowedOrigins")}
-          placeholder={t("EnterURL")}
+          placeholder={t("Common:EnterURL")}
           name="allowed_origins"
           onAdd={changeValue}
           currentValue={allowedOriginsValue}

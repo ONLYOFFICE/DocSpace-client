@@ -3,7 +3,7 @@
   "content": "Upload from your Device",
   "content_en_sha1_hash": "c766735fe84df9f06fa3ff2fbe6daa4d88c8afe4",
   "created_at": "2025-05-19T21:30:56.546Z",
-  "updated_at": "2026-05-15T14:00:06.585Z",
+  "updated_at": "2026-07-27T13:07:50.562Z",
   "comment": {
     "text": "This is the title for an option that allows users to upload files from their local device. It appears in menus or dialogs where file upload options are presented.",
     "is_auto": true,
@@ -13,33 +13,45 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 408,
+      "line_number": 474,
       "context": "key: \"upload-files\",\n },\n ];\n \n if (isAIRoom && isKnowledgeTab) {\n newUploadActions[0].label = t(\"EmptyView:UploadDeviceOptionTitle\");\n const uploadFromDocspace = {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\", {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 429,
-      "context": "onClick: actions.onGoToAIProviderSettings,\n } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",
+      "line_number": 126,
+      "context": "onClick={onUploadFiles}\n >\n <UploadDeviceIcon />\n <span className={styles.actionBody}>\n <span className={styles.actionTitle}>\n {t(\"EmptyView:UploadDeviceOptionTitle\")}\n </span>\n <span className={styles.actionDescription}>\n {t(\"EmptyView:UploadDeviceOptionDescription\")}\n </span>\n </span>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 429,
-      "context": "onClick: actions.onGoToAIProviderSettings,\n } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
+      "line_number": 484,
+      "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 429,
-      "context": "onClick: actions.onGoToAIProviderSettings,\n } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
+      "line_number": 484,
+      "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3766,
-      "context": "},\n {\n id: \"actions_upload-files\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"EmptyView:UploadDeviceOptionTitle\"),\n onClick: () => this.onUploadAction(\"file\"),\n key: \"upload-files\",\n },\n ];\n }",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 484,
+      "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 376,
+      "context": "},\n {\n id: \"actions_upload-files\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"EmptyView:UploadDeviceOptionTitle\"),\n onClick: () => onUploadAction(\"file\"),\n key: \"upload-files\",\n },\n ];\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
+      "line_number": 163,
+      "context": "icon: <UploadPDFFormIcon />,\n onClick: onUploadFromDocSpace,\n },\n {\n key: \"knowledge-empty-upload-from-device\",\n title: t(\"EmptyView:UploadDeviceOptionTitle\", {\n defaultValue: \"Upload from device\",\n }),\n description: t(\"Common:UploadFilesDevice\", {\n defaultValue: \"Pick files from your device.\",\n }),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -173,7 +185,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

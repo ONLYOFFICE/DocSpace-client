@@ -149,6 +149,13 @@ export type TFrameConfig = {
   downloadToEvent?: boolean;
   editorCustomization?: TEditorCustomization;
   editorGoBack?: boolean | "event";
+  /**
+   * Absolute URL the editor's "go back" / close action should navigate to.
+   * Used when the editor is opened at the top level (e.g. broken out of an
+   * SDK iframe) so closing returns to the originating listing instead of the
+   * backend-provided goback location.
+   */
+  returnUrl?: string;
   withoutGoBackText?: boolean;
   editorType?: string;
   events?: TFrameEvents;
@@ -191,4 +198,5 @@ export type TFrameConfig = {
   withBreadCrumbs?: boolean;
   withSearch?: boolean;
   withSubtitle?: boolean;
+  openEditorInSameTab?: boolean;
 };

@@ -1,3 +1,38 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
 import axios, { AxiosError } from "axios";
 import type { DateTime } from "luxon";
 
@@ -14,7 +49,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 
 import { isDesktop } from "../../../utils";
-import { ShareAccessRights } from "../../../enums";
+import { AnalyticsEvents, FolderType, ShareAccessRights } from "../../../enums";
 import type { TFileLink } from "../../../api/files/types";
 import { ShareLinkService } from "../../../services/share-link.service";
 import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
@@ -47,6 +82,9 @@ export const useShare = ({
   setEditLinkPanelIsVisible,
   setEmbeddingPanelData,
   hideLinkTypeSelector,
+  isExternalShareRestricted,
+  blockExistingLinksOnRestrict,
+  defaultShareLinkInternal,
 }: UseShareProps) => {
   const isFolder = infoPanelSelection.isFolder;
 
@@ -117,7 +155,10 @@ export const useShare = ({
     try {
       addLoaderLink();
 
-      const link = await ShareLinkService.getPrimaryLink(infoPanelSelection);
+      const link = await ShareLinkService.getPrimaryLink(
+        infoPanelSelection,
+        defaultShareLinkInternal,
+      );
 
       if (link) {
         setFileLinks((links) => {
@@ -160,8 +201,10 @@ export const useShare = ({
     addLoaderLink();
 
     try {
-      const newLink =
-        await ShareLinkService.addExternalLink(infoPanelSelection);
+      const newLink = await ShareLinkService.addExternalLink(
+        infoPanelSelection,
+        defaultShareLinkInternal,
+      );
 
       setFileLinks((links) => {
         const newLinks: TLink[] = [...links];
@@ -273,7 +316,13 @@ export const useShare = ({
       }
     };
 
-    if (item.access === ShareAccessRights.FormFilling && onOpenPanel) {
+    const isRooms = infoPanelSelection?.rootFolderType === FolderType.Rooms;
+
+    if (
+      item.access === ShareAccessRights.FormFilling &&
+      !isRooms &&
+      onOpenPanel
+    ) {
       onOpenPanel({
         visible: true,
         updateAccessLink,
@@ -368,13 +417,68 @@ export const useShare = ({
     }
   };
 
-  const onCopyLink = (link: TFileLink) => {
-    if (link.sharedTo?.isExpired) return;
+  const onCopyLink = async (link: TFileLink) => {
+    if (link.sharedTo?.isExpired) {
+      toastr.error(t("Common:LinkExpired"));
+      return;
+    }
 
-    copyShareLink(infoPanelSelection, link, t);
+    const isBlockedByAdmin =
+      isExternalShareRestricted &&
+      !link.sharedTo?.internal &&
+      blockExistingLinksOnRestrict;
+
+    if (isBlockedByAdmin) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+
+      const isRoomItem =
+        "roomType" in infoPanelSelection &&
+        infoPanelSelection.roomType !== undefined;
+      const isFileItem = "folderId" in infoPanelSelection;
+      if (isRoomItem || isFileItem) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: isRoomItem
+            ? AnalyticsEvents.RoomShared
+            : AnalyticsEvents.FileShared,
+          id: infoPanelSelection.id,
+          linkId: link.sharedTo?.id,
+          parentId: isFileItem
+            ? infoPanelSelection.folderId
+            : infoPanelSelection.parentId,
+        });
+      }
+      return;
+    }
+
+    await copyShareLink(infoPanelSelection, link, t);
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
+    const isRestrictedByAdmin =
+      isExternalShareRestricted && !link.sharedTo.internal;
+
+    if (isRestrictedByAdmin) {
+      return [
+        {
+          key: "copy-link-settings-key",
+          label: t("Common:CopyLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: () => onCopyLink(link),
+        },
+        {
+          key: "delete-link-separator",
+          isSeparator: true,
+        },
+        {
+          key: "delete-link-key",
+          label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+          icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          onClick: () => removeLink(link),
+        },
+      ];
+    }
+
     return [
       {
         key: "edit-link-key",
@@ -386,7 +490,7 @@ export const useShare = ({
         key: "copy-link-settings-key",
         label: t("Common:CopySharedLink"),
         icon: CopyToReactSvgUrl,
-        onClick: () => copyShareLink(infoPanelSelection, link, t),
+        onClick: () => onCopyLink(link),
       },
       {
         key: "embedding-settings-key",
@@ -424,6 +528,11 @@ export const useShare = ({
 
   const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
+  const blockLinkCreation =
+    isExternalShareRestricted &&
+    blockExistingLinksOnRestrict &&
+    infoPanelSelection.parentRoomType === FolderType.PublicRoom;
+
   const getTextTooltip = () => {
     return (
       <Text fontSize="12px" noSelect>
@@ -434,7 +543,10 @@ export const useShare = ({
 
   const getLinkElements = () => {
     const options =
-      fileLinks.length > 0 && !onlyOneLink && canAddLink ? (
+      fileLinks.length > 0 &&
+      !onlyOneLink &&
+      canAddLink &&
+      !blockLinkCreation ? (
         <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
           <IconButton
             className={styles.linkToViewingIcon}
@@ -465,7 +577,7 @@ export const useShare = ({
     );
 
     if (fileLinks.length === 0) {
-      if (!canAddLink) return [];
+      if (!canAddLink || blockLinkCreation) return [];
 
       return [
         header,
@@ -496,6 +608,7 @@ export const useShare = ({
           changeExpirationOption={changeExpirationOption}
           availableShareRights={availableShareRights}
           hideLinkTypeSelector={hideLinkTypeSelector}
+          isExternalShareRestricted={isExternalShareRestricted}
         />
       )),
     ];

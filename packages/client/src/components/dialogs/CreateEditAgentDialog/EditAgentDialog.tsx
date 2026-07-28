@@ -95,6 +95,26 @@ const EditAgentDialog = ({
     }),
   );
 
+  // Drop the provider/model cache when the dialog goes away by any path
+  // (not just the explicit close button), so a fresh session refetches.
+  React.useEffect(() => () => modelCache.clear(), []);
+
+  // The agent's bound profile arrives asynchronously (EditAgentEvent
+  // fetches GET /new-ai/agents/:id) after the initial params were copied
+  // into state above, so merge it in and extend the pristine snapshot —
+  // otherwise the profile combobox keeps the preselected default and the
+  // Save button lights up with a phantom profile change.
+  const fetchedProfileId = fetchedAgentParams.profileId;
+  React.useEffect(() => {
+    if (!fetchedProfileId) return;
+
+    prevRoomParams.current = Object.freeze({
+      ...prevRoomParams.current,
+      profileId: fetchedProfileId,
+    });
+    setAgentParams((value) => ({ ...value, profileId: fetchedProfileId }));
+  }, [fetchedProfileId]);
+
   const compareRoomParams = (
     prevParams: TAgentParams,
     currentParams: TAgentParams,
@@ -117,9 +137,10 @@ const EditAgentDialog = ({
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota &&
+      prevParams.prompt === currentParams.prompt &&
+      prevParams.profileId === currentParams.profileId &&
       prevParams.modelId === currentParams.modelId &&
       prevParams.providerId === currentParams.providerId &&
-      prevParams.prompt === currentParams.prompt &&
       currentParams.mcpServers?.every((id) =>
         currentParams.mcpServersInitial?.includes(id),
       ) &&
@@ -127,8 +148,6 @@ const EditAgentDialog = ({
         currentParams.mcpServersInitial?.length
     );
   };
-
-  const isModelSelected = !!agentParams?.modelId;
 
   const setAgentParamsAction = React.useCallback(
     (newParams: Partial<TAgentParams>) => {
@@ -261,11 +280,11 @@ const EditAgentDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            !cover
+            (!agentParams.profileId && !agentParams.modelId) ||
+            (!cover
               ? isWrongTitle ||
-                compareRoomParams(prevRoomParams.current, agentParams) ||
-                !isModelSelected
-              : false
+                compareRoomParams(prevRoomParams.current, agentParams)
+              : false)
           }
           isLoading={isLoading}
         />

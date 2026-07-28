@@ -39,16 +39,12 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import type { InfoPanelViewType } from "SRC_DIR/store/InfoPanelStore";
 
 import { InfoPanelView } from "./index";
 
-type TSelection =
-  | TRoom
-  | TFolder
-  | TFile
-  | null
-  | (TRoom | TFolder | TFile)[];
+type TSelection = TRoom | TFolder | TFile | null | (TRoom | TFolder | TFile)[];
 
 type TPluginItem = {
   key: string;
@@ -62,7 +58,9 @@ type TPluginItem = {
 export type TGetAvailableInfoPanelTabsParams = {
   selection: TSelection;
   isTrash: boolean;
-  isRecentFolder: boolean;
+  // `undefined` is allowed because TreeFoldersStore.isRecentFolder is
+  // `boolean | undefined`; the flag is only used for truthiness checks.
+  isRecentFolder: boolean | undefined;
   enablePlugins: boolean;
   infoPanelItemsList: TPluginItem[];
 };
@@ -128,12 +126,17 @@ export function getAvailableInfoPanelTabs({
 
   const tabs: InfoPanelViewType[] = [];
 
+  const isPrivateItem =
+    ("private" in selection && selection.private === true) ||
+    ("encrypted" in selection && selection.encrypted === true);
+
   if (useRoomsView) {
     tabs.push(InfoPanelView.infoMembers);
   } else if (
     "canShare" in selection &&
     selection.canShare &&
-    !isRoomUtil(selection)
+    !isRoomUtil(selection) &&
+    !isPrivateItem
   ) {
     tabs.push(InfoPanelView.infoShare);
   }

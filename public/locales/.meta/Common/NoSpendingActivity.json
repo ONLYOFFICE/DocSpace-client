@@ -1,0 +1,29 @@
+{
+  "key_path": "NoSpendingActivity",
+  "content": "No spending activity for the selected period",
+  "content_en_sha1_hash": "5d5e87b0515f62a027d7abf2f956811dddc2ed0d",
+  "created_at": "2026-06-25T11:54:53.701Z",
+  "updated_at": "2026-06-30T11:38:22.666Z",
+  "comment": {
+    "text": "Title of an empty state view in the billing usage breakdown, appearing when no records are found for the selected date range.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:04:06.466Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "line_number": 189,
+      "context": "};\n \n const emptyView = (\n <EmptyView\n icon={isBase ? <NoSpendingIcon /> : <NoSpendingDarkIcon />}\n title={t(\"NoSpendingActivity\")}\n description={t(\"NoSpendingActivityDescription\")}\n options={null}\n />\n );",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

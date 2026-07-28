@@ -72,9 +72,10 @@ export const HeightSetter = (props) => {
 
   return (
     <ControlsGroup>
-      <Label className="label" text={t("EmbeddingPanel:Height")} />
+      <Label className="label" text={t("Common:Height")} />
       <RowContainer combo>
         <TextInput
+          name="embed_height"
           onChange={onChangeHeight}
           placeholder={t("EnterHeight")}
           value={height}

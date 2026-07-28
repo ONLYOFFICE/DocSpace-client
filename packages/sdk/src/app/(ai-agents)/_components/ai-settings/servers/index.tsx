@@ -1,0 +1,348 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+/*
+ * (c) Copyright Ascensio System SIA 2009-2026
+ *
+ * This program is a free software product.
+ * You can redistribute it and/or modify it under the terms
+ * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+ * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+ * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+ * any third-party rights.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+ * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ *
+ * The  interactive user interfaces in modified source and object code versions of the Program must
+ * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ *
+ * Pursuant to Section 7(b) of the License you must retain the original Product logo when
+ * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+ * trademark law for use of our trademarks.
+ *
+ * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+ * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+ * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ */
+
+import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
+
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import type { TServer } from "@docspace/shared/api/ai/types";
+import { toastr } from "@docspace/ui-kit/components/toast";
+
+import { useAISettingsStore } from "../../../_store";
+
+import styles from "../AISettings.module.scss";
+
+import { AddMCPDialog } from "./dialogs/add";
+import { DeleteMCPDialog } from "./dialogs/delete";
+import { DisableMCPDialog } from "./dialogs/disable";
+import { EditMCPDialog } from "./dialogs/edit";
+import { MCPTile } from "./mcp-tile";
+import { ServersLoader } from "./ServersLoader";
+
+type MCPListProps = {
+  showHeading: boolean;
+  headingText: string;
+  mcpServers?: TServer[];
+  onMCPToggle: (id: TServer["id"], enabled: boolean) => void;
+  onSettingsClick: (item: TServer) => void;
+  onDeleteClick: (id: TServer["id"]) => void;
+  isMCPActionsDisabled?: boolean;
+  dataTestId?: string;
+};
+
+const MCPList = ({
+  showHeading,
+  headingText,
+  mcpServers,
+  onMCPToggle,
+  onSettingsClick,
+  onDeleteClick,
+  isMCPActionsDisabled,
+  dataTestId = "mcp-list",
+}: MCPListProps) => {
+  if (!mcpServers?.length) return;
+
+  return (
+    <div className={styles.mcpListContainer} data-testid={dataTestId}>
+      {showHeading ? (
+        <Heading
+          className={styles.mcpHeading}
+          level={HeadingLevel.h3}
+          fontSize="16px"
+          fontWeight={700}
+          lineHeight="22px"
+        >
+          {headingText}
+        </Heading>
+      ) : null}
+
+      <div className={styles.mcpList}>
+        {mcpServers.map((mcp) => (
+          <MCPTile
+            key={mcp.id}
+            item={mcp}
+            onToggle={onMCPToggle}
+            onSettingsClick={onSettingsClick}
+            onDeleteClick={onDeleteClick}
+            disableActions={isMCPActionsDisabled}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+type DisableDeleteDialogData =
+  | { visible: false; serverId: null }
+  | { visible: true; serverId: TServer["id"] };
+
+type EditDialogData =
+  | { visible: false; server: null }
+  | { visible: true; server: TServer };
+
+type MCPServersProps = {
+  standalone?: boolean;
+};
+
+const MCPServersComponent = ({ standalone }: MCPServersProps) => {
+  const aiSettingsStore = useAISettingsStore();
+  const {
+    customMCPServers,
+    systemMCPServers,
+    updateMCPStatus,
+    hasAIProviders,
+    mcpServersInitied,
+  } = aiSettingsStore;
+  // settingsStore.mcpServersSettingsUrl has no SDK equivalent — skip the
+  // "Learn more" link in the SDK iframe context.
+  const mcpServersSettingsUrl: string | undefined = undefined;
+  const { t } = useTranslation(["Common"]);
+  const [addDialogVisible, setAddDialogVisible] = useState(false);
+  const [deleteDialogData, setDeleteDialogData] =
+    useState<DisableDeleteDialogData>({
+      visible: false,
+      serverId: null,
+    });
+  const [disableDialogData, setDisableDialogData] =
+    useState<DisableDeleteDialogData>({
+      visible: false,
+      serverId: null,
+    });
+
+  const [editDialogData, setEditDialogData] = useState<EditDialogData>({
+    visible: false,
+    server: null,
+  });
+
+  const pendingTogglesRef = useRef<Set<TServer["id"]>>(new Set());
+
+  const isMCPActionsDisabled = standalone && !hasAIProviders;
+
+  const showMCPHeadings = !!customMCPServers?.length;
+
+  const onMCPToggle = async (id: TServer["id"], enabled: boolean) => {
+    // Prevent double-click/concurrent toggles
+    if (pendingTogglesRef.current.has(id)) {
+      return;
+    }
+
+    if (!enabled) {
+      setDisableDialogData({
+        visible: true,
+        serverId: id,
+      });
+
+      return;
+    }
+
+    pendingTogglesRef.current.add(id);
+
+    try {
+      await updateMCPStatus?.(id, enabled);
+      toastr.success(t("Common:ServerEnabledSuccess"));
+    } catch (e) {
+      console.error(e);
+      toastr.error(e instanceof Error ? e.message : String(e));
+    } finally {
+      pendingTogglesRef.current.delete(id);
+    }
+  };
+
+  const hideDisableDialog = () => {
+    setDisableDialogData({
+      visible: false,
+      serverId: null,
+    });
+  };
+
+  const onUpdateMCP = (item: TServer) => {
+    setEditDialogData({
+      visible: true,
+      server: item,
+    });
+  };
+
+  const onDeleteMCP = (id: TServer["id"]) => {
+    setDeleteDialogData({
+      visible: true,
+      serverId: id,
+    });
+  };
+
+  const showAddDialog = () => setAddDialogVisible(true);
+
+  const hideAddDialog = () => setAddDialogVisible(false);
+
+  const hideDeleteDialog = () => {
+    setDeleteDialogData({
+      visible: false,
+      serverId: null,
+    });
+  };
+
+  const hideEditDialog = () => {
+    setEditDialogData({
+      visible: false,
+      server: null,
+    });
+  };
+
+  if (!mcpServersInitied) return <ServersLoader />;
+
+  return (
+    <div className={styles.mcpServers}>
+      <Text className={styles.description}>
+        {t("Common:MCPSettingsDescription", {
+          mcpServers: t("Common:MCPSettingTitle"),
+          aiChats: t("Common:AIChats"),
+        })}
+      </Text>
+      {mcpServersSettingsUrl ? (
+        <Link
+          className={styles.learnMoreLink}
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          fontWeight={600}
+          isHovered
+          href={mcpServersSettingsUrl}
+          color="accent"
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
+      <Button
+        primary
+        size={ButtonSize.small}
+        label={t("Common:AddMCPServer", {
+          mcpServer: t("Common:MCPServer"),
+        })}
+        scale={false}
+        className={styles.addProviderButton}
+        onClick={showAddDialog}
+        isDisabled={isMCPActionsDisabled}
+        tooltipText={
+          isMCPActionsDisabled
+            ? t("Common:ToUseAddProvider", {
+                value: t("Common:MCPServer"),
+                aiProvider: t("Common:AIProvider"),
+              })
+            : undefined
+        }
+        testId="add-mcp-button"
+      />
+
+      <MCPList
+        headingText={t("Common:CustomMCPListTitle")}
+        mcpServers={customMCPServers}
+        showHeading={showMCPHeadings}
+        onMCPToggle={onMCPToggle}
+        onSettingsClick={onUpdateMCP}
+        onDeleteClick={onDeleteMCP}
+        isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="custom-mcp-list"
+      />
+
+      <MCPList
+        headingText={t("Common:SystemMCPListTitle")}
+        mcpServers={systemMCPServers}
+        showHeading={showMCPHeadings}
+        onMCPToggle={onMCPToggle}
+        onSettingsClick={onUpdateMCP}
+        onDeleteClick={onDeleteMCP}
+        isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="system-mcp-list"
+      />
+
+      {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}
+
+      {deleteDialogData.visible ? (
+        <DeleteMCPDialog
+          onClose={hideDeleteDialog}
+          serverId={deleteDialogData.serverId}
+        />
+      ) : null}
+
+      {disableDialogData.visible ? (
+        <DisableMCPDialog
+          onClose={hideDisableDialog}
+          serverId={disableDialogData.serverId}
+        />
+      ) : null}
+
+      {editDialogData.visible ? (
+        <EditMCPDialog
+          server={editDialogData.server}
+          onClose={hideEditDialog}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+export const MCPServers = observer(MCPServersComponent);
+
+export { ServersLoader };

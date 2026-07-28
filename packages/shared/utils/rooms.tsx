@@ -37,14 +37,49 @@ import { TCreatedBy } from "../types";
 import { TRoom, TRoomLifetime, TWatermark } from "../api/rooms/types";
 import { TConnectingStorage } from "../api/files/types";
 
-import { RoomsType } from "../enums";
+import { FolderType, RoomsType, RoomsTypePrivate } from "../enums";
+
+import { RoomsTypeValues } from "./common";
+
+/**
+ * Room types offered as filter options in the "Rooms" section dropdown.
+ *
+ * Form Filling Rooms are excluded because they live in their own "Forms"
+ * section (the backend serves them via `searchArea=Forms` and never returns
+ * them in the Active rooms listing), so filtering the Rooms section by that
+ * type would never match anything.
+ *
+ * `RoomsTypePrivate` is excluded too: it is a client-only synthetic value used
+ * by the create flow, not a real backend room type (the API rejects it). A
+ * private room is stored under its real type, so it still shows via that type.
+ *
+ * This is a UI-options list only — it no longer scopes any API request; the
+ * Rooms/Forms split is enforced server-side by the room's folder type.
+ */
+export const ROOMS_SECTION_TYPES = RoomsTypeValues.filter(
+  (type) => type !== RoomsType.FormRoom && type !== RoomsTypePrivate,
+);
+
+/**
+ * `FolderType` values of the rooms that make up the "Rooms" section, for the
+ * `folderType` scope filter of the Recent/Favorites/Trash aggregates
+ * (`GET files/{folderId}?folderType=...`, bound to `List<FolderType>` on the
+ * server). Mirrors ROOMS_SECTION_TYPES: form-filling rooms belong to the
+ * "Forms" section and AI rooms to "AI Agents", so both are excluded here.
+ */
+export const ROOMS_SECTION_FOLDER_TYPES = [
+  FolderType.EditingRoom,
+  FolderType.CustomRoom,
+  FolderType.PublicRoom,
+  FolderType.VirtualDataRoom,
+];
 
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   const startRoomParams = {
     type: startRoomType,
     title: title ?? "",
     tags: [],
-    isPrivate: false,
+    isPrivate: startRoomType === RoomsTypePrivate,
     storageLocation: {
       isThirdparty: false,
       provider: null,
@@ -147,7 +182,7 @@ const getFetchedRoomParams = (
       providerKey: item.providerKey,
       iconSrc: getThirdPartyIcon(item.providerKey || ""),
     },
-    isPrivate: false,
+    isPrivate: !!item.private,
     icon: {
       uploadedFile: item?.logo?.original,
       tmpFile: "",

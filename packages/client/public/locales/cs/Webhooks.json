@@ -1,6 +1,6 @@
 {
-  "AgentCreated": "AI Agent vytvořen",
-  "AgentDeleted": "AI Agent smazán",
+  "AgentCreated": "AI agent vytvořen",
+  "AgentDeleted": "AI agent smazán",
   "AgentUpdated": "AI Agent aktualizován",
   "Before": "Před",
   "CreateWebhook": "Vytvoření webhooku",
@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Hlavička požadavku POST úspěšně zkopírována do schránky",
   "RequestPostBody": "Tělo požadavku POST",
   "RequestPostHeader": "Záhlaví požadavku POST",
-  "ResetKey": "Klíč resetování",
   "Response": "Reakce",
   "ResponseBodyCopied": "Tělo odpovědi POST úspěšně zkopírováno do schránky",
   "ResponseHeaderCopied": "Úspěšné zkopírování hlavičky odpovědi POST do schránky",

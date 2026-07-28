@@ -56,11 +56,7 @@ const PluginSDK = ({
   theme,
   apiPluginSDKLink,
 }) => {
-  const { t, ready } = useTranslation([
-    "WebPlugins",
-    "VersionHistory",
-    "Common",
-  ]);
+  const { t, ready } = useTranslation(["WebPlugins", "Common"]);
 
   React.useEffect(() => {
     if (ready) setDocumentTitle(t("WebPlugins:PluginSDK"));
@@ -105,7 +101,7 @@ const PluginSDK = ({
           <div className={styles.pluginInfoContainer}>
             <Text>{p.name}</Text>
             <Text className={styles.description}>
-              {t("VersionHistory:VersionShort")} {p.version}
+              {t("Common:VersionShort")} {p.version}
             </Text>
           </div>
         </div>

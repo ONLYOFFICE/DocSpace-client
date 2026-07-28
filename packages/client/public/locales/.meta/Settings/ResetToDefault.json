@@ -3,7 +3,7 @@
   "content": "Reset to default",
   "content_en_sha1_hash": "39c90eb758c57422548baebb38a39652279feb65",
   "created_at": "2026-02-18T14:56:29.456Z",
-  "updated_at": "2026-05-15T14:00:06.694Z",
+  "updated_at": "2026-07-07T08:59:21.754Z",
   "comment": {
     "text": "This is a button label and a dialog title. It indicates an action to revert settings or a template to their original, factory-set values.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 144,
+      "line_number": 146,
       "context": "disabled: false,\n icon: DownloadIcon,\n },\n {\n key: \"reset\",\n label: t(\"Settings:ResetToDefault\"),\n onClick: () => setIsDialogVisible(true),\n disabled: false,\n icon: ResetIcon,\n },\n ];",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

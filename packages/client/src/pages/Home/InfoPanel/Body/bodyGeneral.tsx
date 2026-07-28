@@ -41,6 +41,7 @@ import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
+import type { TIconCrop } from "SRC_DIR/store/AvatarEditorDialogStore";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
 
@@ -65,6 +66,7 @@ const InfoPanelBodyGeneral = ({
   fileView,
   getIsFiles,
   getIsRooms,
+  getIsForms,
   getIsAIAgent,
   getIsTrash,
 
@@ -90,6 +92,7 @@ const InfoPanelBodyGeneral = ({
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
+  const isForms = getIsForms();
   const isAgents = getIsAIAgent();
   const isTrash = getIsTrash();
   const isGroups = contactsTab === "groups";
@@ -130,13 +133,19 @@ const InfoPanelBodyGeneral = ({
 
   const currentView = useMemo(() => {
     const raw = useRoomsView ? roomsView : fileView;
-    return availableTabs.includes(raw) ? raw : availableTabs[0] ?? InfoPanelView.infoDetails;
+    return availableTabs.includes(raw)
+      ? raw
+      : (availableTabs[0] ?? InfoPanelView.infoDetails);
   }, [availableTabs, useRoomsView, roomsView, fileView]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
   const isExpiredLink = useEventCallback(() =>
-    checkIsExpiredLinkAsync(selection),
+    // type-only cast — isExpiredLinkAsync takes the .js
+    // view-model item type; the info-panel selection is compatible at runtime.
+    checkIsExpiredLinkAsync(
+      selection as unknown as Parameters<typeof checkIsExpiredLinkAsync>[0],
+    ),
   );
 
   useEffect(() => {
@@ -161,6 +170,7 @@ const InfoPanelBodyGeneral = ({
         <NoItem
           isRooms={isRooms}
           isFiles={isFiles}
+          isForms={isForms}
           isTemplatesRoom={isTemplatesRoom}
           isAgents={isAgents}
           infoPanelSelection={selection}
@@ -216,7 +226,12 @@ const InfoPanelBodyGeneral = ({
           onClose={() => setAvatarEditorDialogVisible(false)}
           onSave={(img: unknown) =>
             !templateEventVisible
-              ? onSaveRoomLogo(selection?.id, img, selection, true)
+              ? onSaveRoomLogo(
+                  selection?.id,
+                  img as TIconCrop,
+                  selection,
+                  true,
+                )
               : setAvatarEditorDialogVisible(false)
           }
           onChangeFile={onChangeFile}

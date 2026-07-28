@@ -96,6 +96,7 @@ const FilesTableRow = memo((props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
+    badgeIconColor,
     isRecentFolder,
     isFavoritesFolder,
     isSharedWithMeFolder,
@@ -127,6 +128,7 @@ const FilesTableRow = memo((props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      isPrivateRoom={item.isPrivateRoom}
       title={item.title}
       showDefault={
         !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
@@ -136,6 +138,8 @@ const FilesTableRow = memo((props) => {
       isArchive={item.isArchive}
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      encrypted={item.encrypted}
+      badgeIconColor={badgeIconColor}
       className={classNames({
         "icon-with-index-column": isIndexing,
       })}
@@ -409,3 +413,4 @@ export default withTranslation([
   "Notifications",
   "GroupingRooms",
 ])(withFileActions(withContent(withQuickButtons(withBadges(FilesTableRow)))));
+

@@ -51,7 +51,6 @@ import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 interface MCPSettingsProps {
   agentParams: TAgentParams;
   setAgentParams: (value: Partial<TAgentParams>) => void;
-  portalMcpServerId?: string;
   onClickAction?: () => void;
   selectedServers?: TSelectorItem[];
   setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
@@ -60,12 +59,11 @@ interface MCPSettingsProps {
 const MCPSettings = ({
   agentParams,
   setAgentParams,
-  portalMcpServerId,
   onClickAction,
   selectedServers,
   setSelectedServers,
 }: MCPSettingsProps) => {
-  const { t } = useTranslation(["AIRoom", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   return (
     <StyledParam increaseGap>
@@ -111,11 +109,6 @@ const MCPSettings = ({
                   setSelectedServers?.((prev) =>
                     prev.filter((item) => item.id !== server.id),
                   );
-                  if (portalMcpServerId && server.id === portalMcpServerId) {
-                    setAgentParams({
-                      attachDefaultTools: false,
-                    });
-                  }
                 }}
                 dataTestId="remove-mcp-button"
               />
@@ -128,3 +121,4 @@ const MCPSettings = ({
 };
 
 export default MCPSettings;
+

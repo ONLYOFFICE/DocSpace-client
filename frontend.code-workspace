@@ -167,6 +167,11 @@
             "tooltip": "🛠️ Start the \"frontend deploy\" task"
           },
           {
+            "label": "Deploy run",
+            "task": "Frontend | deploy run",
+            "tooltip": "🚀 Run the deployed build from ../publish/web — Next.js apps (login 5011, editor 5013, management 5015, sdk 5099) via node server.js + client via npx serve on 5001"
+          },
+          {
             "label": "Start storybook",
             "task": "Frontend | storybook",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
@@ -218,6 +223,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
           },
           {
+            "label": "Test license headers (common)",
+            "task": "Test | Jest:license",
+            "tooltip": "🛠️ Start the \"Test | Jest:license\" task"
+          },
+          {
             "label": "Test translations (common)",
             "task": "Test | Jest:translations",
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
@@ -261,6 +271,16 @@
             "label": "Test unit:ui-kit",
             "task": "Test | Jest:unit:ui-kit",
             "tooltip": "🛠️ Start the \"Test | Jest:unit:ui-kit\" task"
+          },
+          {
+            "label": "Test vitest (client)",
+            "task": "Test | Vitest:client",
+            "tooltip": "🛠️ Run all @docspace/client vitest unit tests"
+          },
+          {
+            "label": "Test vitest (store)",
+            "task": "Test | Vitest:store",
+            "tooltip": "🛠️ Run @docspace/client store unit tests (src/store, incl. FilesStore)"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"

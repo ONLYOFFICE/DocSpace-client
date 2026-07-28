@@ -43,6 +43,7 @@ export interface SharePDFFormDialogProps
     Partial<Pick<TStore["filesStore"], "setBufferSelection">> {
   onClose: VoidFunction;
   file: TFile;
+  currentFolderId?: number | string;
 }
 
 export type EventWithPayload = Event & {

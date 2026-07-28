@@ -804,7 +804,8 @@ class PluginStore {
     ctx: IContextMenuItemValidation,
   ) => {
     const keys: string[] = [];
-    const { type, fileExst, userRole, device, security, itemSecurity } = ctx;
+    const { type, fileExst, userRole, device, security, itemSecurity, itemId } =
+      ctx;
 
     if (type && item.fileType && !item.fileType.includes(type)) return;
 
@@ -831,6 +832,13 @@ class PluginStore {
     )
       return;
 
+    if (
+      itemId !== undefined &&
+      item.itemId &&
+      !item.itemId.includes(itemId)
+    )
+      return;
+
     if (item.items && item.items.length > 0) {
       item.items.forEach((subItem) => {
         const validContextMenuItemKeys = this.getValidContextMenuItemKeys(
@@ -850,9 +858,18 @@ class PluginStore {
 
   getContextMenuKeysByType = (
     type: PluginFileType,
-    fileExst?: string,
-    security?: TRoomSecurity | TFolderSecurity,
-    itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity,
+    fileExst?: string | null,
+    security?:
+      | TRoomSecurity
+      | TFolderSecurity
+      | Partial<TRoomSecurity & TFolderSecurity>
+      | null,
+    itemSecurity?:
+      | TFileSecurity
+      | TRoomSecurity
+      | TFolderSecurity
+      | Partial<TFileSecurity & TRoomSecurity & TFolderSecurity>,
+    itemId?: number | string,
   ) => {
     if (this.contextMenuItems.size === 0) return;
 
@@ -872,6 +889,7 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -886,6 +904,7 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -899,6 +918,7 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -913,6 +933,7 @@ class PluginStore {
             fileExst,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -927,6 +948,7 @@ class PluginStore {
             security,
             fileExst,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);

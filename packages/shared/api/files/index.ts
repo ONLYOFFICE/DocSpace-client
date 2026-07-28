@@ -722,8 +722,9 @@ export async function startUploadSession(
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
+  signal?: AbortSignal,
 ) {
-  const data = {
+  const data: Record<string, unknown> = {
     fileName,
     fileSize,
     relativePath,
@@ -737,6 +738,7 @@ export async function startUploadSession(
     url: `/files/${folderId}/session`,
     data,
     skipForbidden: true,
+    signal,
   }) as TUploadOperation;
 }
 
@@ -745,11 +747,13 @@ export async function uploadChunkParallel(
   sessionId: string,
   chunkNumber: number,
   data: FormData,
+  signal?: AbortSignal,
 ) {
   return request({
     method: "post",
     url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
     data,
+    signal,
   });
 }
 
@@ -768,10 +772,12 @@ export async function uploadChunkSequential(
 export async function finalizeUploadSession(
   folderId: string | number,
   sessionId: string,
+  signal?: AbortSignal,
 ) {
   const res = await request({
     method: "put",
     url: `/files/${folderId}/session/${sessionId}/finalize`,
+    signal,
   });
   return res;
 }
@@ -909,7 +915,12 @@ export async function moveToFolder(
   return res;
 }
 
-export async function getFileVersionInfo(fileId: number, shareKey?: string) {
+export async function getFileVersionInfo(
+  /** Callers pass both numeric and string ids (e.g. `${item.id}`); the id is
+   * only interpolated into the URL. */
+  fileId: number | string,
+  shareKey?: string,
+) {
   const res = (await request({
     method: "get",
     url: `/files/file/${fileId}/history`,
@@ -943,9 +954,11 @@ export async function getNewFiles(folderId: number | string) {
 }
 
 export async function getNewFilesAgents() {
+  // Agents are served by the new-ai service now; its /news endpoint forwards
+  // to the same .NET /ai/agents/news, so the response shape is identical.
   const res = (await request({
     method: "get",
-    url: `/ai/agents/news`,
+    url: `/new-ai/agents/news`,
   })) as TNewFiles[];
 
   return res;
@@ -963,8 +976,8 @@ export async function getNewFolderFiles(folderId: number | string) {
 // TODO: update res type
 export async function convertFile(
   fileId: string | number | null,
-  outputType = null,
-  password = null,
+  outputType: string | null = null,
+  password: string | null = null,
   sync = false,
 ) {
   const data = { password, sync, outputType };
@@ -973,7 +986,13 @@ export async function convertFile(
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  })) as { result: { webUrl: string; title: string } }[];
+  })) as {
+    result: { webUrl: string; title: string };
+    /** Conversion progress percent (0-100). */
+    progress?: number;
+    /** Conversion error text; empty when the conversion succeeded. */
+    error?: string;
+  }[];
 
   return res;
 }
@@ -1251,6 +1270,27 @@ export async function getSettingsFiles(headers = null) {
   return res;
 }
 
+export type TAccessControlSettings = Pick<
+  TFilesSettings,
+  | "externalShare"
+  | "defaultShareLinkInternal"
+  | "externalShareApplyToDocuments"
+  | "externalShareApplyToRooms"
+  | "blockExistingLinksOnRestrict"
+>;
+
+export async function setAccessControlSettings(
+  settings: TAccessControlSettings,
+) {
+  const res = (await request({
+    method: "put",
+    url: "/files/settings/externalsharingsettings",
+    data: settings,
+  })) as TAccessControlSettings;
+
+  return res;
+}
+
 export async function markAsFavorite(fileIds: number[], folderIds: number[]) {
   const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
@@ -1316,6 +1356,53 @@ export async function getEncryptionAccess(fileId: number | string) {
     url: `privacyroom/access/${fileId}`,
     data: fileId,
   })) as { [key: string]: string | boolean };
+
+  return res;
+}
+
+export async function getFileEncryptionAccess(fileId: number | string) {
+  const res = await request({
+    method: "get",
+    url: `files/${fileId}/access`,
+  });
+
+  return res as import("./types").TFileEncryptionInfo;
+}
+
+export async function setFileEncryptionKeys(
+  fileId: number | string,
+  keys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+  }>,
+) {
+  const res = await request({
+    method: "put",
+    url: `files/${fileId}/access`,
+    data: keys,
+  });
+
+  return res;
+}
+
+export async function updateFileStream(
+  fileId: number | string,
+  file: File,
+  encrypted: boolean,
+  forcesave: boolean,
+) {
+  const fd = new FormData();
+
+  fd.append("file", file);
+  fd.append("encrypted", String(encrypted));
+  fd.append("forcesave", String(forcesave));
+
+  const res = await request({
+    method: "put",
+    url: `/files/${fileId}/update`,
+    data: fd,
+  });
 
   return res;
 }

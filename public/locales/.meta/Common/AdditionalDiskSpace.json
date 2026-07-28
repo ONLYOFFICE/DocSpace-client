@@ -1,0 +1,29 @@
+{
+  "key_path": "AdditionalDiskSpace",
+  "content": "Additional disk space",
+  "content_en_sha1_hash": "82bcf9bd605167db8cb63a6c819cd7174df26203",
+  "created_at": "2026-06-25T11:54:43.463Z",
+  "updated_at": "2026-06-30T07:32:49.211Z",
+  "comment": {
+    "text": "Caption label in a storage summary card describing the type of extra capacity shown.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:23:54.942Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 336,
+      "context": "<Text className={styles.cardLabel}>{t(\"StorageAdded\")}</Text>\n <Text className={styles.cardValue}>\n {`${currentStoragePlanSize} ${t(\"Gigabyte\")}`}\n </Text>\n <Text className={styles.cardCaption}>\n {t(\"AdditionalDiskSpace\")}\n </Text>\n </div>\n </div>\n ) : null}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

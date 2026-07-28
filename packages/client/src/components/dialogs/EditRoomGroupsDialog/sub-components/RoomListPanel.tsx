@@ -83,6 +83,7 @@ const RoomListPanel = ({
             withoutBackButton: false,
           }}
           withSearch={withSearch}
+          isForms={false}
           isMultiSelect
           forceIsMultiSelect
           selectedItems={

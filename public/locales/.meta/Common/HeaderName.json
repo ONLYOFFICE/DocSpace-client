@@ -1,0 +1,32 @@
+{
+  "key_path": "HeaderName",
+  "content": "Header name",
+  "content_en_sha1_hash": "b46f85a9b7d61d832e708d435d51c596f9144100",
+  "created_at": "2025-10-27T16:14:31.645Z",
+  "updated_at": "2026-07-07T08:59:22.010Z",
+  "comment": {
+    "text": "This is a text input label for a header name within the AI settings. It appears when configuring advanced settings for AI servers.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:50.554Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/hooks/useAdvancedSettings.tsx",
+      "line_number": 176,
+      "context": "<div>\n <div className={addEditStyles.headersContainer}>\n {Array.from({ length: headerCounts }).map((_, index) => (\n <React.Fragment key={`header-${index * 2}`}>\n <FieldContainer\n labelText={t(\"Common:HeaderName\")}\n isVertical\n removeMargin\n labelVisible\n >\n <TextInput",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

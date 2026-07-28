@@ -3,7 +3,7 @@
   "content": "MB",
   "content_en_sha1_hash": "6e979f426b676955f4896002085eb834b93326b1",
   "created_at": "2025-05-19T21:30:46.418Z",
-  "updated_at": "2026-05-15T14:00:06.804Z",
+  "updated_at": "2026-06-30T07:32:49.147Z",
   "comment": {
     "text": "This is a short label for the unit of digital information, \"Megabyte\", used in various contexts such as file size displays, quota settings, and upload limits.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/utils/common.ts",
-      "line_number": 61,
+      "line_number": 84,
       "context": "let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
       "module": "/libs/ui-kit"
     },

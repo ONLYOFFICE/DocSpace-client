@@ -75,6 +75,7 @@ export const ItemsCountBlock = ({ t, count, setConfig }) => {
 			</LabelGroup>
 			<TextInput
 				scale
+				name="items_count"
 				onChange={onChangeCount}
 				placeholder={t("EnterCount")}
 				value={value}

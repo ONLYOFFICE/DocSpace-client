@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2026-05-15T15:37:40.222Z",
+  "updated_at": "2026-07-07T08:59:21.821Z",
   "comment": {
     "text": "This is the title for various information panels and dialogs, indicating that the content within provides details or context.",
     "is_auto": true,
@@ -73,15 +73,27 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 257,
+      "line_number": 277,
       "context": "case \"show-info\":\n if (isDesktop()) return null;\n return {\n id: \"menu-show-info\",\n key: \"show-info\",\n label: t(\"Common:Info\"),\n iconUrl: InfoOutlineReactSvgUrl,\n onClick: showInfoPanel,\n };\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 732,
+      "line_number": 767,
       "context": "};\n \n const infoOption = {\n key: \"info\",\n icon: SettingsIconUrl,\n label: t(\"Common:Info\"),\n onClick: onShowInfo,\n disabled: isInfo,\n dataTestId: \"oauth_info_option\",\n };",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/index.tsx",
+      "line_number": 65,
+      "context": "if (!currentAgent) return null;\n \n return (\n <AsideHeader\n header={t(\"Common:Info\", { defaultValue: \"Info\" })}\n onCloseClick={hide}\n withoutBorder\n isCloseable\n dataTestId=\"agent_info_panel_header\"\n />",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/Header.tsx",
+      "line_number": 126,
+      "context": "className={classNames(styles.infoPanelHeader, {\n [styles.withTabs]: withTabs,\n })}\n >\n <AsideHeader\n header={t(\"Common:Info\")}\n onCloseClick={close}\n withoutBorder\n className=\"header-text\"\n isCloseable\n dataTestId=\"info_panel_aside_header\"",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",

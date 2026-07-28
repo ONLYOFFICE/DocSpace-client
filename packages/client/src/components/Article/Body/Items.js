@@ -211,7 +211,9 @@ const Item = ({
         badgeTitle={
           labelBadge
             ? ""
-            : t("EmptySection", { sectionName: t("Common:TrashSection") })
+            : t("Common:EmptySection", {
+                sectionName: t("Common:TrashSection"),
+              })
         }
         badgeComponent={
           <NewFilesBadge
@@ -577,3 +579,4 @@ export default inject(
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));
+

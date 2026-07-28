@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Izvēlaties no saraksta",
-  "FileLocked": "Bloķēts fails",
   "FileProtected": "Fails ir aizsargāts ar paroli",
-  "FileUnlocked": "Atbloķēts fails",
   "FolderTitleBoxNet": "Box direktorijs",
   "FolderTitleDocuSign": "DocuSign konts",
   "FolderTitleDropBox": "Dropbox direktorijs",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "WebDAV direktorijs",
   "FolderTitleYandex": "Yandex direktorijs",
   "NewForm": "PDF veidlapa",
-  "OwnerChange": "Mainīt īpašnieku",
   "RoleGuestDescriprion": "Viesi var piekļūt telpām, uz kurām viņi ir uzaicināti, kā arī izveidot un rediģēt dokumentus, ja viņiem ir piešķirtas atbilstošas lomas telpā.",
   "SearchByHeadOfGroup": "Meklēt pēc grupas vadītāja",
   "SearchByOwner": "Meklēt pēc īpašniekiem",

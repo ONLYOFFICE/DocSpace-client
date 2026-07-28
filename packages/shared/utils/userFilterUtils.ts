@@ -137,7 +137,11 @@ export const getUserFilter = (storageKey: string) => {
 export const setUserFilter = (storageKey: string, filterObj: FilterObject) => {
   const filterValue = cleanUpFilterObj(filterObj, storageKey);
 
-  localStorage.setItem(`${storageKey}&ver=${FILTER_VERSION}`, filterValue);
+  try {
+    localStorage.setItem(`${storageKey}&ver=${FILTER_VERSION}`, filterValue);
+  } catch {
+    // storage can be full or unavailable (private mode) — filter persistence is optional
+  }
 };
 
 export const removeUserFilter = (storageKey: string) => {

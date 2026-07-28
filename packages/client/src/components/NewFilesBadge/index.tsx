@@ -180,7 +180,9 @@ const NewFilesBadge = ({
     );
   }, []);
 
-  const onBadgeClickAction = () => {
+  const onBadgeClickAction = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+
     if (showPanel) return;
 
     setOpenWithClick(true);

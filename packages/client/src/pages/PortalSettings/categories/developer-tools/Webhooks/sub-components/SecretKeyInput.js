@@ -138,7 +138,7 @@ const SecretKeyInput = (props) => {
             className="link"
             dataTestId="reset_key_link"
           >
-            {t("ResetKey")}
+            {t("Common:ResetKey")}
           </Link>
         </div>
       ) : null}

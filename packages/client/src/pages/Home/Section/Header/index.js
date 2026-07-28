@@ -34,7 +34,9 @@
  */
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
+import PublicRoomRestrictedIconUrl from "PUBLIC_DIR/images/public-room.restricted.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+import EncryptedRoomIconUrl from "PUBLIC_DIR/images/icons/16/security.private.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -49,6 +51,7 @@ import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/ui-kit/components/navigation";
+import NewChatButton from "@docspace/ui-kit/ai-agent/new-chat-button";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
@@ -77,7 +80,10 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
+import {
+  getLifetimePeriodTranslation,
+  getCategoryType,
+} from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -146,6 +152,8 @@ const SectionHeaderContent = (props) => {
     setGroupsSelected,
     isRoomAdmin,
     isEmptyPage,
+    isGroupsEmpty,
+    groupsIsFiltered,
 
     isLoading,
 
@@ -163,7 +171,6 @@ const SectionHeaderContent = (props) => {
     showNavigationButton,
     startUpload,
     getFolderModel,
-    getContactsModel,
     contactsCanCreate,
     onCreateRoom,
     onCreateAgent,
@@ -188,9 +195,8 @@ const SectionHeaderContent = (props) => {
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
+    isPrivacyFolder,
     showTemplateBadge,
-
-    allowInvitingMembers,
 
     isAIRoom,
     isAIAgent,
@@ -217,6 +223,9 @@ const SectionHeaderContent = (props) => {
     filesSelection,
     isCollaborator,
     isVisitor,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
   } = props;
 
   const location = useLocation();
@@ -227,6 +236,21 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
+  const isAiChatView = currentClientView === "chat";
+
+  // The "Forms" section reuses the Rooms folder; detect it from the route to
+  // adjust section labels (title, create-button caption) accordingly. This is
+  // the bare forms LIST only (CategoryType.Forms); inside a form room the
+  // route is /forms/{id}/... (CategoryType.Form) where the room-level labels
+  // apply instead.
+  const isFormsSection = getCategoryType(location) === CategoryType.Forms;
+
+  // The whole Forms route tree — the list AND any folder opened inside a
+  // form-filling room. Breadcrumb navigation uses this to keep the /forms
+  // scope: form rooms live in the VirtualRooms tree, so their folders report
+  // rootFolderType = Rooms (14); deriving the URL from that alone would send
+  // the crumb to /rooms/shared/... and switch the section to Rooms.
+  const isFormsRoute = location.pathname.startsWith("/forms");
   const currentGroupName = currentGroup?.name;
 
   const addButtonRefCallback = React.useCallback(
@@ -428,10 +452,17 @@ const SectionHeaderContent = (props) => {
 
       setSelectedNode(id);
 
-      const path = getCategoryUrl(
-        getCategoryTypeByFolderType(rootFolderType, id),
-        id,
-      );
+      // The Forms section resolves its rooms from the VirtualRooms tree, so
+      // folders opened inside a form-filling room report rootFolderType =
+      // Rooms (14), not Forms. Deriving the category from rootFolderType would
+      // send the breadcrumb to /rooms/shared/... and highlight Rooms. Detect
+      // the Forms route instead and keep the /forms scope (id is always a real
+      // folder/room id here, so it maps to CategoryType.Form → /forms/{id}).
+      const categoryType = isFormsRoute
+        ? CategoryType.Form
+        : getCategoryTypeByFolderType(rootFolderType, id);
+
+      const path = getCategoryUrl(categoryType, id);
 
       const filter = FilesFilter.getDefault();
 
@@ -479,17 +510,39 @@ const SectionHeaderContent = (props) => {
       isAIRoom,
       setSelected,
       setIsLoading,
+      isFormsRoute,
     ],
   );
 
-  const getContextOptionsPlus = React.useCallback(() => {
-    if (isContactsPage) return getContactsModel(t);
-    return getFolderModel(t);
-  }, [isContactsPage, getContactsModel, getFolderModel, t, contactsTab]);
+  const getContextOptionsPlus = React.useCallback(
+    () => getFolderModel(t),
+    [getFolderModel, t],
+  );
+
+  const onPlusClick = React.useCallback(() => {
+    if (isContactsGroupsPage) return createGroup();
+    if (isAIAgentsFolder) return onCreateAgent();
+    return onCreateRoom();
+  }, [isContactsGroupsPage, isAIAgentsFolder, onCreateAgent, onCreateRoom]);
+
+  const isPlusButtonVisible =
+    (isEmptyPage && !isContactsPage) ||
+    (isContactsGroupsPage && isGroupsEmpty && !groupsIsFiltered);
 
   const onNavigationButtonClick = React.useCallback(() => {
-    onCreateAndCopySharedLink(selectedFolder, t);
-  }, [onCreateAndCopySharedLink, selectedFolder, t]);
+    const roomInPath = navigationPath?.find((item) => item.isRoom);
+
+    const shareTarget =
+      !selectedFolder?.isRoom && roomInPath
+        ? {
+            ...roomInPath,
+            isRoom: true,
+            rootFolderType: selectedFolder?.rootFolderType,
+          }
+        : selectedFolder;
+
+    onCreateAndCopySharedLink(shareTarget, t);
+  }, [onCreateAndCopySharedLink, navigationPath, selectedFolder, t]);
 
   const onCloseIndexMenu = React.useCallback(() => {
     const items = getIndexingArray();
@@ -530,9 +583,12 @@ const SectionHeaderContent = (props) => {
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
   const sharedType =
     (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
+  const isEncryptedRoom = selectedFolder?.private === true || isPrivacyFolder;
 
   const titleIcon = React.useMemo(() => {
     if (sharedType) return SharedLinkSvgUrl;
+
+    if (isEncryptedRoom) return EncryptedRoomIconUrl;
 
     if (navigationButtonIsVisible && !isPublicRoom) {
       const roomInPath = (
@@ -547,7 +603,11 @@ const SectionHeaderContent = (props) => {
         isInPublicRoom ||
         (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
       ) {
-        return PublicRoomIconUrl;
+        return isExternalShareRestricted &&
+          blockExistingLinksOnRestrict &&
+          hasExternalLinks
+          ? PublicRoomRestrictedIconUrl
+          : PublicRoomIconUrl;
       } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
         return PublicRoomIconUrl;
     }
@@ -557,6 +617,7 @@ const SectionHeaderContent = (props) => {
     return "";
   }, [
     sharedType,
+    isEncryptedRoom,
     navigationButtonIsVisible,
     isPublicRoom,
     isArchive,
@@ -566,13 +627,38 @@ const SectionHeaderContent = (props) => {
     isRoom,
     isSharedWithMeFolderRoot,
     isLifetimeEnabled,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
+  ]);
+
+  const titleTooltip = React.useMemo(() => {
+    if (
+      isRoom &&
+      selectedFolder?.shared &&
+      isExternalShareRestricted &&
+      blockExistingLinksOnRestrict &&
+      hasExternalLinks
+    )
+      return t("Common:ExternalAccessDisabledByAdmin");
+
+    return undefined;
+  }, [
+    isRoom,
+    selectedFolder,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
+    t,
   ]);
 
   const titleIconTooltip = React.useMemo(() => {
     if (sharedType) return t("Files:RecentlyOpenedTooltip");
 
+    if (isEncryptedRoom) return t("Common:PrivateRoomDescription");
+
     if (lifetime)
-      return `${t("Files:RoomFilesLifetime", {
+      return `${t("Common:RoomFilesLifetime", {
         days: lifetime.value,
         period: getLifetimePeriodTranslation(lifetime.period, t),
       })}. ${
@@ -584,7 +670,7 @@ const SectionHeaderContent = (props) => {
       }`;
 
     return null;
-  }, [sharedType, lifetime, t]);
+  }, [sharedType, isEncryptedRoom, lifetime, t]);
 
   const onLogoClick = React.useCallback(() => {
     if (isFrame) return;
@@ -716,6 +802,11 @@ const SectionHeaderContent = (props) => {
 
     if (isSettingsPage) return t("Common:Settings");
 
+    if (getCategoryType(location) === CategoryType.Forms)
+      return selectedFolder?.rootFolderType === FolderType.RoomTemplates
+        ? t("Common:Templates")
+        : t("Common:Forms");
+
     if (isContactsPage) {
       switch (contactsTab) {
         case "people":
@@ -745,12 +836,17 @@ const SectionHeaderContent = (props) => {
     insideGroupTempTitle,
     currentGroupName,
     title,
+    location,
+    selectedFolder?.rootFolderType,
   ]);
 
   const contextMenuHeader = React.useMemo(() => {
     const srcLogo = selectedFolder?.logo || null;
     const title = currentTitle || selectedFolder?.title || "";
-    const headerBadgeUrl = titleIcon.includes("public-room") ? titleIcon : "";
+    const headerBadgeUrl =
+      titleIcon.includes("public-room") || titleIcon.includes("security")
+        ? titleIcon
+        : "";
 
     const iconUrl = getIcon(
       32,
@@ -833,6 +929,7 @@ const SectionHeaderContent = (props) => {
 
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Form ||
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
@@ -899,35 +996,6 @@ const SectionHeaderContent = (props) => {
     isRootFolder,
   ]);
 
-  const onPlusClick = React.useCallback(() => {
-    if (isAIAgentsFolder) return onCreateAgent();
-    if (!isContactsPage) return onCreateRoom();
-    if (isContactsGroupsPage) return createGroup();
-  }, [
-    isAIAgentsFolder,
-    isContactsPage,
-    isContactsGroupsPage,
-    onCreateAgent,
-    onCreateRoom,
-    createGroup,
-  ]);
-
-  const isPlusButtonVisible = React.useMemo(() => {
-    if (allowInvitingMembers) return true;
-
-    if (!isContactsPage || isContactsGroupsPage) return true;
-
-    const lengthList = getContextOptionsPlus()?.length;
-    if (!lengthList || lengthList === 0) return false;
-
-    return true;
-  }, [
-    getContextOptionsPlus,
-    isContactsPage,
-    isContactsGroupsPage,
-    allowInvitingMembers,
-  ]);
-
   const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
@@ -940,6 +1008,8 @@ const SectionHeaderContent = (props) => {
           [styles.isExternalFolder]:
             location.state?.isExternal || selectedFolder?.external,
           [styles.isLifetimeEnabled]: isLifetimeEnabled,
+          [styles.isColoredTitleIcon]:
+            titleIcon === PublicRoomRestrictedIconUrl,
         })}
       >
         {tableGroupMenuVisible ? (
@@ -996,9 +1066,11 @@ const SectionHeaderContent = (props) => {
                 warningIcon: isRoomStorageQuotaExceeded
                   ? WarningQuotaExceededUrl
                   : undefined,
-                actions: isRoomsFolder
-                  ? t("Common:NewRoom")
-                  : t("Common:Actions"),
+                actions: isFormsSection
+                  ? t("Common:CreateFormSet")
+                  : isRoomsFolder
+                    ? t("Common:NewRoom")
+                    : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
               }}
@@ -1022,6 +1094,7 @@ const SectionHeaderContent = (props) => {
               isPublicRoom={isPublicRoom}
               titleIcon={titleIcon}
               titleIconTooltip={titleIconTooltip}
+              titleTooltip={titleTooltip}
               showRootFolderTitle={
                 insideTheRoom || insideTheAgent || isContactsInsideGroupPage
               }
@@ -1049,6 +1122,7 @@ const SectionHeaderContent = (props) => {
                   className={styles.analyzeResponsesButton}
                 />
               }
+              newChatButton={isAiChatView ? <NewChatButton /> : undefined}
             />
             {showSignInButton ? (
               <Button
@@ -1159,6 +1233,7 @@ export default inject(
       isPersonalReadOnly,
       isSharedWithMeFolderRoot,
       isAIAgentsFolder,
+      isPrivacyFolder,
     } = treeFoldersStore;
 
     const {
@@ -1200,14 +1275,8 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const {
-      theme,
-      frameConfig,
-      isFrame,
-      currentDeviceType,
-      displayAbout,
-      allowInvitingMembers,
-    } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
 
@@ -1242,6 +1311,8 @@ export default inject(
       setSelected: setGroupsSelected,
       setBufferSelection: setGroupsBufferSelection,
       insideGroupTempTitle,
+      groups,
+      groupsIsFiltered,
     } = groupsStore;
 
     const {
@@ -1257,18 +1328,17 @@ export default inject(
       getContactsHeaderMenu,
     } = headerMenuStore;
 
-    const { getContactsModel, contactsCanCreate } =
-      peopleStore.contextOptionsStore;
+    const { contactsCanCreate } = peopleStore.contextOptionsStore;
 
     const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
-    const { isPublicRoom } = publicRoomStore;
+    const { isPublicRoom, hasExternalLinks } = publicRoomStore;
 
     let folderPath = navigationPath;
 
-    if (isFrame && !!pathParts) {
+    if (isFrame && pathParts) {
       folderPath = navigationPath.filter((item) => !item.isRootRoom);
     }
 
@@ -1282,14 +1352,6 @@ export default inject(
     const isRootRooms = rootFolderType === FolderType.Rooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
-
-    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
-    isPublicRoom ||
-    isSharedWithMeFolderRoot ||
-    isArchive ||
-    !isRootRooms
-      ? false
-      : security?.Read && isShared);
 
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
@@ -1310,6 +1372,25 @@ export default inject(
     const { showProfileLoader } = clientLoadingStore;
 
     const { enabledHotkeys } = filesStore;
+    const {
+      getIcon,
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToRooms,
+      externalShareApplyToDocuments,
+      blockExistingLinksOnRestrict,
+    } = filesStore.filesSettingsStore;
+
+    const isExternalShareRestricted =
+      isShareRestricted &&
+      (isRoom ? externalShareApplyToRooms : externalShareApplyToDocuments);
+
+    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
+    isPublicRoom ||
+    isSharedWithMeFolderRoot ||
+    isArchive ||
+    !isRootRooms
+      ? false
+      : security?.Read && isShared);
 
     return {
       currentClientView,
@@ -1345,6 +1426,7 @@ export default inject(
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
+      isPrivacyFolder,
 
       setIsLoading,
 
@@ -1378,6 +1460,8 @@ export default inject(
       isCollaborator,
       isVisitor,
       isEmptyPage,
+      isGroupsEmpty: groups?.length === 0,
+      groupsIsFiltered,
       categoryType,
       theme,
       isFrame,
@@ -1400,7 +1484,6 @@ export default inject(
       setReorderDialogVisible,
       setGroupsBufferSelection,
       createFoldersTree,
-      getContactsModel,
       contactsCanCreate,
       revokeFilesOrder,
       saveIndexOfFiles,
@@ -1416,7 +1499,6 @@ export default inject(
       setRefMap,
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
-      allowInvitingMembers,
 
       isAIRoom,
       isAIAgent,
@@ -1436,7 +1518,10 @@ export default inject(
       setChangePasswordVisible,
       setChangeAvatarVisible,
       setChangeNameVisible,
-      getIcon: filesStore.filesSettingsStore.getIcon,
+      getIcon,
+      isExternalShareRestricted,
+      blockExistingLinksOnRestrict,
+      hasExternalLinks,
 
       isRootRooms,
       isArchive,
@@ -1451,7 +1536,6 @@ export default inject(
     "Common",
     "Translations",
     "InfoPanel",
-    "Article",
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",
@@ -1460,3 +1544,4 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
+

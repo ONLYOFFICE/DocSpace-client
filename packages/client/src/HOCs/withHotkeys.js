@@ -85,6 +85,8 @@ const withHotkeys = (Component) => {
       isArchiveFolder,
       isRoomsFolder,
       isAIAgentsFolder,
+      isPrivacyFolder,
+      canCreateEncrypted,
       isAIRoom,
 
       getSelection,
@@ -108,6 +110,7 @@ const withHotkeys = (Component) => {
       enableSelection,
       openContextMenu,
       askAIAction,
+      currentFolderId,
     } = props;
 
     const navigate = useNavigate();
@@ -155,7 +158,11 @@ const withHotkeys = (Component) => {
       )
         return;
 
-      const event = new Event(Events.CREATE);
+      if (isPrivacyFolder && extension && !canCreateEncrypted) return;
+
+      const event = new CustomEvent(Events.CREATE, {
+        detail: { parentId: currentFolderId, context: "hotkey", extension },
+      });
 
       const payload = {
         extension,
@@ -175,7 +182,9 @@ const withHotkeys = (Component) => {
 
         if (!item.contextOptions.includes("rename")) return;
 
-        const event = new Event(Events.RENAME);
+        const event = new CustomEvent(Events.RENAME, {
+          detail: { parentId: currentFolderId, context: "hotkey" },
+        });
         event.item = item;
 
         window.dispatchEvent(event);
@@ -189,14 +198,18 @@ const withHotkeys = (Component) => {
           return;
         }
 
-        const event = new Event(Events.ROOM_CREATE);
+        const event = new CustomEvent(Events.ROOM_CREATE, {
+          detail: { parentId: currentFolderId, context: "hotkey" },
+        });
         window.dispatchEvent(event);
       }
     };
 
     const onCreateAIAgent = () => {
       if (!isVisitor && isAIAgentsFolder && security?.Create) {
-        const event = new Event(Events.AGENT_CREATE);
+        const event = new CustomEvent(Events.AGENT_CREATE, {
+          detail: { parentId: currentFolderId, context: "hotkey" },
+        });
         window.dispatchEvent(event);
       }
     };
@@ -545,6 +558,7 @@ const withHotkeys = (Component) => {
       userStore,
       indexingStore,
       currentQuotaStore,
+      uploadDataStore,
     }) => {
       const {
         setSelected,
@@ -608,7 +622,10 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
         isAIAgentsFolder,
+        isPrivacyFolder,
       } = treeFoldersStore;
+
+      const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
 
       const { isWarningRoomsDialog } = currentQuotaStore;
 
@@ -616,6 +633,7 @@ const withHotkeys = (Component) => {
       const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
       const isParentFolderFormRoom =
         selectedFolderStore.parentRoomType === FolderType.FormRoom;
+      const currentFolderId = selectedFolderStore.id;
 
       return {
         setSelected,
@@ -659,6 +677,8 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
         isAIAgentsFolder,
+        isPrivacyFolder,
+        canCreateEncrypted,
         isAIRoom: selectedFolderStore.isAIRoom,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 
@@ -683,6 +703,7 @@ const withHotkeys = (Component) => {
         isParentFolderFormRoom,
         enableSelection,
         askAIAction,
+        currentFolderId,
       };
     },
   )(observer(WithHotkeys));

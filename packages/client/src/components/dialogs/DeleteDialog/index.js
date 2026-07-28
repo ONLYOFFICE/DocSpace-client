@@ -128,11 +128,11 @@ const DeleteDialogComponent = (props) => {
   const onDeleteRoom = async () => {
     const translations = {
       successRemoveRoom: isAIAgent
-        ? t("Files:AgentRemoved")
-        : t("Files:RoomRemoved"),
+        ? t("Common:AgentRemoved")
+        : t("Common:RoomRemoved"),
       successRemoveRooms: isAIAgent
-        ? t("Files:AgentsRemoved")
-        : t("Files:RoomsRemoved"),
+        ? t("Common:AgentsRemoved")
+        : t("Common:RoomsRemoved"),
     };
 
     if (isTemplate) {
@@ -198,8 +198,7 @@ const DeleteDialogComponent = (props) => {
       return t("Common:DeletePermanently");
     }
 
-    if (isRecycleBinFolder)
-      return t("Common:DeleteForeverButton");
+    if (isRecycleBinFolder) return t("Common:DeleteForeverButton");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:OKButton");
@@ -211,7 +210,7 @@ const DeleteDialogComponent = (props) => {
 
   const getDialogTitle = () => {
     if (isAIAgent) {
-      return t("DeleteDialog:DeleteAIAgentTitle");
+      return t("Common:DeleteAIAgentTitle");
     }
 
     if (isTemplate) {
@@ -219,11 +218,11 @@ const DeleteDialogComponent = (props) => {
     }
 
     if (isRoomDelete) {
-      if (selection.length > 1) return t("DeleteRoomsTitle");
-      return t("DeleteRoomTitle");
+      if (selection.length > 1) return t("Common:DeleteRoomsTitle");
+      return t("Common:DeleteRoomTitle");
     }
 
-    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverTitle");
+    if (isRecycleBinFolder) return t("Common:DeleteForeverTitle");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:Confirmation");
@@ -272,10 +271,10 @@ const DeleteDialogComponent = (props) => {
             style={{ marginTop: "16px" }}
             label={
               isAIAgent
-                ? t("DeleteAIAgentWarning")
+                ? t("Common:DeleteAIAgentWarning")
                 : isTemplate
                   ? t("DeleteTemplateWarning")
-                  : t("DeleteRoomWarning")
+                  : t("Common:DeleteRoomWarning")
             }
             dataTestId="delete_warning_checkbox"
             isChecked={isChecked}
@@ -316,7 +315,6 @@ const DeleteDialog = withTranslation([
   "Common",
   "Translations",
   "Files",
-  "EmptyTrashDialog",
 ])(DeleteDialogComponent);
 
 export default inject(
@@ -390,3 +388,4 @@ export default inject(
     };
   },
 )(observer(DeleteDialog));
+

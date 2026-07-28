@@ -60,7 +60,6 @@ export const PreviewBlock = ({
   const { t, ready } = useTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Translations",
     "CreateEditRoomDialog",
@@ -93,7 +92,7 @@ export const PreviewBlock = ({
     },
     {
       id: "code",
-      name: t("Code"),
+      name: t("Common:Code"),
       content: code,
       iconName: CodeReactSvgUrl,
     },

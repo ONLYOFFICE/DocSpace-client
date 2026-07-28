@@ -296,14 +296,22 @@ export const getContactsView = (
   return false;
 };
 
-export const createGroup = () => {
-  const event = new Event(Events.GROUP_CREATE);
+export const createGroup = (
+  parentId?: number | string,
+  context: string = "button",
+) => {
+  const event = new CustomEvent(Events.GROUP_CREATE, {
+    detail: { parentId, context },
+  });
 
   window.dispatchEvent(event);
 };
 
 export const editGroup = (item: TGroup) => {
-  const event: Event & { item?: TGroup } = new Event(Events.GROUP_EDIT);
+  const event: CustomEvent & { item?: TGroup } = new CustomEvent(
+    Events.GROUP_EDIT,
+    { detail: { context: "context_menu" } },
+  );
   event.item = item;
   window.dispatchEvent(event);
 };

@@ -90,8 +90,9 @@ export const getDialogContent = (
         <Trans
           t={t}
           i18nKey="DeleteAIAgentDescription"
-          ns="DeleteDialog"
+          ns="Common"
           values={{ agentName: selection[0]?.title }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
         />{" "}
         {t("Common:WantToContinue")}
       </>
@@ -115,7 +116,7 @@ export const getDialogContent = (
   if (isRoomDelete) {
     return isSingle ? (
       <>
-        <Trans t={t} i18nKey="DeleteRoomConfirm" ns="DeleteDialog">
+        <Trans t={t} i18nKey="DeleteRoomConfirm" ns="Common">
           The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
           will be permanently deleted. All data and user accesses will be lost.
         </Trans>{" "}
@@ -125,7 +126,7 @@ export const getDialogContent = (
       <>
         <Trans
           i18nKey="DeleteRooms"
-          ns="DeleteDialog"
+          ns="Common"
           t={t}
           values={{ count: selection.length }}
           components={{ 1: <Text fontWeight={600} as="span" /> }}
@@ -283,3 +284,4 @@ export const getDialogContent = (
     }
   }
 };
+

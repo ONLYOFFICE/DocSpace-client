@@ -3,7 +3,7 @@
   "content": "Subscription deactivated — non-payment",
   "content_en_sha1_hash": "6244400f48c757281fab42d54dc81d4c61f933c3",
   "created_at": "2026-04-10T13:53:45.694Z",
-  "updated_at": "2026-05-15T15:49:17.109Z",
+  "updated_at": "2026-07-27T13:07:50.770Z",
   "comment": {
     "text": "This is a status message displayed when a subscription has been deactivated due to non-payment, specifically for storage plan changes.",
     "is_auto": true,
@@ -12,10 +12,22 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 187,
-      "context": "enabled?: boolean,\n ) => {\n switch (serviceName) {\n case TOTAL_SIZE:\n if (previousStoragePlanSize && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }",
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 251,
+      "context": "<span className={styles.deactivatedBannerIcon} aria-hidden=\"true\">\n <AlertIcon />\n </span>\n <div className={styles.deactivatedBannerText}>\n <Text className={styles.deactivatedTitle}>\n {t(\"Common:SubscriptionDeactivated\")}\n </Text>\n <Text className={styles.deactivatedDescription}>\n {t(\"Common:SubscriptionDeactivatedDescription\")}\n </Text>\n </div>",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 194,
+      "context": "priceValue?: number,\n ) => {\n switch (serviceName) {\n case TOTAL_SIZE:\n if (previousStoragePlanSize && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 175,
+      "context": "<Text\n fontSize=\"13px\"\n fontWeight={600}\n className={styles.deactivatedTitle}\n >\n {t(\"Common:SubscriptionDeactivated\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" className={styles.muted}>\n {t(\"Common:SubscriptionDeactivatedDescription\")}\n </Text>",
+      "module": "/packages/client"
     }
   ],
   "languages": {

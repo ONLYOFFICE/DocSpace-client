@@ -3,7 +3,7 @@
   "content": "If you want to renew an automatic login using {{organizationName}} {{productName}}, you will be asked to grant access to your {{productName}} account data.",
   "content_en_sha1_hash": "b0fb1bbcb26b1b6c7baba54b4b588b51994f0991",
   "created_at": "2025-05-19T21:30:54.018Z",
-  "updated_at": "2026-04-11T21:18:24.664Z",
+  "updated_at": "2026-07-07T08:59:21.887Z",
   "comment": {
     "text": "This is a descriptive sentence within a dialog box, explaining the consequence of revoking consent for an automatic login. It appears when a user chooses to revoke access for an authorized application. `{{organizationName}}` refers to the organization's name, and `{{productName}}` refers to the product's name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/RevokeDialog.tsx",
-      "line_number": 56,
+      "line_number": 91,
       "context": "/>\n );\n const secondDesc = isGroup ? (\n <Trans\n t={t}\n i18nKey=\"RevokeConsentLoginGroup\"\n ns=\"OAuth\"\n values={{\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }}",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

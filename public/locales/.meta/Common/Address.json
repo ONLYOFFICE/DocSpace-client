@@ -3,7 +3,7 @@
   "content": "Address",
   "content_en_sha1_hash": "d70f93df5e8f9b55be44fbeee9d203972e3383d4",
   "created_at": "2025-05-19T21:30:42.924Z",
-  "updated_at": "2026-05-15T14:00:06.924Z",
+  "updated_at": "2026-07-27T13:07:50.772Z",
   "comment": {
     "text": "This is a label for a text input field where users enter a company's physical location. It also appears as a label for the company's address in an \"About\" dialog.",
     "is_auto": true,
@@ -12,6 +12,18 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 307,
+      "context": ">\n {t(\"DocsConnect:SystemOverview\")}\n </Heading>\n <div className={styles.overviewGrid}>\n <InfoField\n label={t(\"Common:Address\")}\n value={tenant.address ?? \"\"}\n onCopy={onCopy}\n copyTitle={t(\"Common:CopyToClipboard\")}\n />\n <InfoField",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
+      "line_number": 110,
+      "context": "</FieldContainer>\n <FieldContainer\n isVertical\n removeMargin\n labelVisible\n labelText={t(\"Common:Address\")}\n >\n <TextInput\n type={InputType.text}\n value={address}\n onChange={(e) => setAddress(e.target.value)}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
       "line_number": 221,
       "context": "<div className={classNames(styles.row, \"row\")}>\n <Text\n className={classNames(styles.addressTitle, \"address-title\")}\n fontSize=\"13px\"\n >\n {t(\"Common:Address\")}:{\" \"}\n </Text>\n <Text\n className={classNames(\n styles.addressTitle,\n styles.selectEl,",
@@ -19,8 +31,8 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 287,
-      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerAddress\"\n className=\"field-container-width\"\n labelText={t(\"Common:Address\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerAddress\"\n testId=\"company_info_settings_address_input\"",
+      "line_number": 291,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerAddress\"\n className=\"field-container-width\"\n labelText={t(\"Common:Address\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerAddress\"\n name=\"company_address\"",
       "module": "/packages/shared"
     }
   ],

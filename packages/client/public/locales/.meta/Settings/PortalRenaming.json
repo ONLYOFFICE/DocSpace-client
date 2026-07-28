@@ -3,7 +3,7 @@
   "content": "{{productName}} Renaming",
   "content_en_sha1_hash": "0319b32930f9f565cf61d81d5d89dbc5851737dc",
   "created_at": "2025-05-19T21:30:52.254Z",
-  "updated_at": "2026-05-15T15:37:40.200Z",
+  "updated_at": "2026-06-02T22:18:05.024Z",
   "comment": {
     "text": "This is the title for a dialog and a navigation item related to changing the name of the portal. `{{productName}}` will be replaced with the product's name (e.g., \"ONLYOFFICE DocSpace\").",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 135,
+      "line_number": 164,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: getBrandName(\"ProductName\") }),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 135,
+      "line_number": 164,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: getBrandName(\"ProductName\") }),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

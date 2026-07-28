@@ -218,6 +218,7 @@ export const OPERATIONS_NAME = Object.freeze({
   upload: "upload",
   deleteVersionFile: "deleteVersionFile",
   backup: "backup",
+  roomReencryption: "roomReencryption",
   syncDatabase: "syncDatabase",
 });
 
@@ -257,6 +258,8 @@ export const CategoryType = Object.freeze({
   Guests: 14,
   AIAgents: 15,
   AIAgent: 16,
+  Forms: 17,
+  Form: 18,
 });
 
 export const SHARED_MEMBERS_COUNT = 100;

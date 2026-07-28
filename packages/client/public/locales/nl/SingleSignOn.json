@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Certificaat toevoegen",
-  "AdvancedSettings": "Geavanceerde Instellingen",
   "AdvancedSettingsTooltip": "Standaard authenticatiepagina verbergen en automatisch doorverwijzen naar SSO-dienst.",
   "AttributeMatching": "Attribute Mapping",
   "AttributeMatchingTooltip": "De correspondentie van de Single Sign-On attributen met de items van de \"Accounts\" sectie.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Download SP metadata XML",
   "Encryption": "Versleuteling",
   "GenerateCertificate": "Nieuw Zelfondertekend Certificaat Genereren",
-  "Hide": "Verbergen",
   "HideAdditionalParameters": "Geavanceerde instellingen verbergen",
   "HideAuthPage": "Verberg auth pagina",
   "idpAuthRequest": "Verifieer ondertekening van auth-responses",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Identity Provider Entity Id (Uitgever URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Instellingen",
   "ServiceProviderSettingsDescription": "Configureer Service Provider instellingen en voeg SP certificaten toe voor Single Sign-On.",
-  "Show": "Toon",
   "ShowAdditionalParameters": "Geavanceerde instellingen weergeven",
   "Signing": "Ondertekening",
   "SigningAndEncryption": "Ondertekening en versleuteling",

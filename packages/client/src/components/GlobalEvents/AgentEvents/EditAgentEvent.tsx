@@ -38,6 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { TAgent } from "@docspace/shared/api/ai/types";
+import { getNewAiAgent } from "@docspace/shared/api/ai";
 import {
   getFetchedAgentParams,
   TAgentParams,
@@ -53,9 +54,11 @@ type EditAgentEventProps = {
   visible: boolean;
   onClose: VoidFunction;
   item: TAgent;
+  context?: string;
   fetchTags: TagsStore["fetchTags"];
   cover: ICover;
   onSaveEditAgent: CreateEditAgentStore["onSaveEditAgent"];
+  setOpenContext: CreateEditAgentStore["setOpenContext"];
   isDefaultAIAgentsQuotaSet: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
 };
 
@@ -63,9 +66,11 @@ const EditAgentEvent = ({
   visible,
   onClose,
   item,
+  context,
   fetchTags,
   cover,
   onSaveEditAgent,
+  setOpenContext,
   isDefaultAIAgentsQuotaSet,
 }: EditAgentEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
@@ -73,16 +78,22 @@ const EditAgentEvent = ({
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(false);
+  // The room list item never carries `profileId` — the new-ai service
+  // injects it only into GET /new-ai/agents/:id — so the agent is
+  // re-fetched below and the id merged in. Without it the edit dialog
+  // preselects the default profile and saving any field would silently
+  // rebind the agent's model.
+  const [agent, setAgent] = useState<TAgent>(item);
 
   const fetchedAgentParams = getFetchedAgentParams(
-    item,
+    agent,
     isDefaultAIAgentsQuotaSet,
   );
 
   const onSave = async (agentParams: TAgentParams) => {
     setIsLoading(true);
 
-    await onSaveEditAgent(t, agentParams, item);
+    await onSaveEditAgent(t, agentParams, agent);
 
     setIsLoading(false);
     onClose();
@@ -92,15 +103,33 @@ const EditAgentEvent = ({
     setIsInitLoading(true);
 
     const fetchInfo = async () => {
-      const tags = await fetchTags();
+      const [tags, agentWithProfile] = await Promise.all([
+        fetchTags(),
+        // Non-fatal: an agent without the new-ai binding (or a failed
+        // request) just keeps today's behavior of no preselected profile.
+        getNewAiAgent(item.id).catch(() => null),
+      ]);
 
       setFetchedTags(tags as string[]);
+      if (agentWithProfile?.profileId) {
+        setAgent((prev) => ({
+          ...prev,
+          profileId: agentWithProfile.profileId,
+        }));
+      }
 
       setIsInitLoading(false);
     };
 
     fetchInfo();
   }, []);
+
+  useEffect(() => {
+    setOpenContext(context ?? "");
+    return () => {
+      setOpenContext("");
+    };
+  }, [context, setOpenContext]);
 
   if (!visible) return null;
 
@@ -131,7 +160,7 @@ export default inject(
 
     const { cover } = dialogsStore;
 
-    const { onSaveEditAgent } = createEditAgentStore;
+    const { onSaveEditAgent, setOpenContext } = createEditAgentStore;
 
     return {
       isDefaultAIAgentsQuotaSet,
@@ -140,6 +169,7 @@ export default inject(
 
       cover,
       onSaveEditAgent,
+      setOpenContext,
     };
   },
 )(observer(EditAgentEvent));

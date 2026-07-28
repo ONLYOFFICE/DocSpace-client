@@ -41,10 +41,15 @@ import classNames from "classnames";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { FileTile } from "@docspace/ui-kit/components/tiles/file-tile";
 import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
+import { FolderType } from "@docspace/shared/enums";
 import Badges from "@docspace/shared/components/badges";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import EditorsTooltip from "../../editors-tooltip";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -60,11 +65,17 @@ import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
+import { DragContext } from "@/app/(docspace)/_contexts/DragContext";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
+import { CopyShareLinkContext } from "@/app/(docspace)/_contexts/CopyShareLinkContext";
+import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
+import { VersionHistoryContext } from "@/app/(docspace)/_contexts/VersionHistoryContext";
+import { ConvertContext } from "@/app/(docspace)/_contexts/ConvertContext";
+import { AskAIContext } from "@/app/(docspace)/_contexts/AskAIContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -80,12 +91,25 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   return getIcon(temporaryExtension, 96, item.contentLength);
 };
 
-const Tile = ({ item, getIcon, index }: TileProps) => {
+const Tile = ({
+  item,
+  getIcon,
+  index,
+  isPrivate,
+  hasEncryptionKeys,
+  currentUserId,
+}: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
   const { filesSettings } = useFilesSettingsStore();
   const filesListStore = useFilesListStore();
+
+  const decryptedTitle = useDecryptedFilename(
+    item.id,
+    item.title,
+    "encrypted" in item ? item.encrypted : false,
+  );
 
   const {
     isCheckedItem,
@@ -99,31 +123,51 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const storeItem = filesListStore.items.find((i) => i.id === item.id);
   const observableItem = storeItem ?? item;
 
-  const { openFile } = useFilesActions({ t });
+  const { openFile, lockFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
   const onShareClick = React.useContext(ShareContext);
+  const onCopyShareLink = React.useContext(CopyShareLinkContext);
+  const onInfoClick = React.useContext(InfoContext);
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
   const renameCtx = React.useContext(RenameContext);
+  const onShowVersionHistory = React.useContext(VersionHistoryContext);
+  const onConvert = React.useContext(ConvertContext);
+  const onAskAI = React.useContext(AskAIContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
+    onInfoClick: onInfoClick ?? undefined,
     onDeleteClick: deleteCtx?.deleteItem,
     onCopyClick: fileOpsCtx?.copyItem,
     onMoveClick: fileOpsCtx?.moveItem,
     onDuplicateClick: fileOpsCtx?.duplicateItem,
     onRestoreClick: fileOpsCtx?.restoreItem,
     onRenameClick: renameCtx?.renameItem,
+    onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
+    onAskAI: onAskAI ?? undefined,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
   const { isItemActive } = useActiveItemsStore();
 
+  const dragCtx = React.useContext(DragContext);
+
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
+  const isExtsCustomFilter =
+    "fileExst" in item
+      ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(
+          item.fileExst,
+        )
+      : false;
   const temporaryIcon = getTemporaryIcon(item, getIcon);
   const isChecked = isCheckedItem(item);
   const inProgress = isItemActive(item);
-  const value = generateFilesItemValue(item, false, index);
+  const isDroppable =
+    item.isFolder &&
+    "security" in item &&
+    (item as TFolderItem).security?.MoveTo === true;
+  const value = generateFilesItemValue(item, isDroppable, index);
 
   const openItem = (e: React.MouseEvent) => {
     const { target } = e;
@@ -156,7 +200,22 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const contextMenuModel = getContextMenuModel(true);
 
   const element = (
-    <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+    <EncryptedItemIconWrapper
+      encrypted={!!("encrypted" in item && (item as TFileItem).encrypted)}
+      hasEncryptionKeys={hasEncryptionKeys ?? true}
+      isRoom={false}
+    >
+      <RoomIcon
+        logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+        color={
+          "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+        }
+        title={decryptedTitle}
+        showDefault={
+          "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+        }
+      />
+    </EncryptedItemIconWrapper>
   );
 
   const tileContent = (
@@ -175,6 +234,16 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     }
   };
 
+  const onClickLock = () => {
+    if (!observableItem.isFolder) {
+      lockFile(observableItem as TFileItem);
+    }
+  };
+
+  const editorsTooltip = (
+    <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
+  );
+
   const badgesComponent = (
     <Badges
       t={t}
@@ -182,18 +251,34 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       item={observableItem}
       viewAs="tile"
       showNew={false}
+      isExtsCustomFilter={isExtsCustomFilter}
+      editorsTooltip={editorsTooltip}
       onFilesClick={() => {
         if (!observableItem.isFolder) {
           openFile(observableItem);
         }
       }}
       onClickFavorite={onClickFavorite}
+      onClickLock={onClickLock}
+      setConvertDialogVisible={
+        !observableItem.isFolder && onConvert
+          ? () => onConvert(observableItem as TFileItem)
+          : undefined
+      }
+      onShowVersionHistory={
+        !observableItem.isFolder && onShowVersionHistory
+          ? () => onShowVersionHistory(observableItem as TFileItem)
+          : undefined
+      }
     />
   );
 
-  const handleShareClick = React.useCallback(() => {
-    onShareClick?.(observableItem);
-  }, [onShareClick, observableItem]);
+  const handleCopyShareLink = React.useCallback(() => {
+    onCopyShareLink?.(observableItem);
+  }, [onCopyShareLink, observableItem]);
+
+  const isTrashFolder =
+    filesListStore.rootFolderType === FolderType.TRASH;
 
   const quickButtonsComponent = (
     <QuickButtons
@@ -202,15 +287,17 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       viewAs="tile"
       onClickDownload={() => downloadAction(observableItem)}
       onClickFavorite={onClickFavorite}
-      onClickShare={onShareClick ? handleShareClick : undefined}
-      openShareTab={onShareClick ? handleShareClick : undefined}
+      onClickLock={onClickLock}
+      onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
+      openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
+      isTrashFolder={isTrashFolder}
     />
   );
 
   const commonTileProps = {
     item,
     contextOptions: contextMenuModel,
-    isHighlight: false,
+    isHighlight: filesListStore.highlightFileId === item.id,
     checked: isChecked,
     isActive: false,
     inProgress,
@@ -229,12 +316,19 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 
   return (
     <div>
-      <div
+      <DragAndDrop
+        data-title={item.title}
         className={classNames("files-item", {
           "tile-selected": isChecked,
+          droppable: isDroppable,
         })}
-        // @ts-expect-error: value required for SelectionArea
         value={value}
+        dragging={isDroppable && !!dragCtx?.isDragging}
+        onDrop={dragCtx ? (files) => { if (isDroppable) dragCtx.onFilesDroppedToFolder(files, item.id as number); else dragCtx.onFilesDroppedToCurrentFolder(files); } : undefined}
+        onDragOver={dragCtx ? (isDragActive: boolean) => { if (isDragActive && isDroppable) dragCtx.onFolderDragOver(item.title); else dragCtx.onFolderDragLeave(); } : undefined}
+        onDragLeave={dragCtx ? () => dragCtx.onFolderDragLeave() : undefined}
+        // @ts-expect-error: native onMouseDown with event arg passed via ...rest to root div
+        onMouseDown={(e: MouseEvent) => dragCtx?.onItemMouseDown(e, item)}
       >
         {item.isFolder ? (
           <FolderTile {...commonTileProps} />
@@ -249,9 +343,10 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
             contentElement={quickButtonsComponent}
           />
         )}
-      </div>
+      </DragAndDrop>
     </div>
   );
 };
 
 export default observer(Tile);
+

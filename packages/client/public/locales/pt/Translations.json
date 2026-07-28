@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Escolha a partir da lista",
-  "FileLocked": "Ficheiro bloqueado",
   "FileProtected": "O ficheiro está protegido por uma palavra-passe",
-  "FileUnlocked": "File desbloqueado",
   "FolderTitleBoxNet": "Diretório da Caixa",
   "FolderTitleDocuSign": "Conta DocuSign",
   "FolderTitleDropBox": "Diretório Dropbox",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "Diretório WebDAV",
   "FolderTitleYandex": "Diretório Yandex",
   "NewForm": "Formulário PDF",
-  "OwnerChange": "Alterar dono",
   "RoleGuestDescriprion": "Os hóspedes podem aceder aos quartos para os quais foram convidados, bem como criar e editar documentos, caso lhes tenham sido atribuídas as funções apropriadas na sala.",
   "SearchByHeadOfGroup": "Pesquisa por chefe do grupo",
   "SearchByOwner": "Procurar por Proprietários",

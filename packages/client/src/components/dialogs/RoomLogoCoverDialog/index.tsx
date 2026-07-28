@@ -42,12 +42,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
-import {
-  isMobile,
-  isDesktop,
-  isTablet,
-  size,
-} from "@docspace/shared/utils";
+import { isMobile, isDesktop, isTablet, size } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
 import { CoverDialogProps, ILogoCover } from "./RoomLogoCoverDialog.types";
@@ -83,7 +78,7 @@ const RoomLogoCoverDialog = ({
   setUploadedFile,
   isAIAgentsFolderRoot,
 }: CoverDialogProps) => {
-  const { t } = useTranslation(["Common", "RoomLogoCover"]);
+  const { t } = useTranslation(["Common"]);
   const { currentColorScheme } = useTheme();
 
   const defaultHeight = isDesktop() ? DESKTOP_HEIGHT : TABLET_HEIGHT;
@@ -254,7 +249,7 @@ const RoomLogoCoverDialog = ({
       <ModalDialog.Header>
         {isAIAgentsFolderRoot
           ? t("RoomLogoCover:AgentCover")
-          : t("RoomLogoCover:RoomCover")}
+          : t("Common:RoomCover")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <RoomLogoCover
@@ -265,8 +260,6 @@ const RoomLogoCoverDialog = ({
           setOpenColorPicker={setOpenColorPicker}
           generalScroll={!!scrollBodyHeight}
           isScrollLocked={openColorPicker}
-          setCover={setCover}
-          cover={roomCoverDialogProps.icon as unknown as ILogoCover}
           currentColorScheme={currentColorScheme!}
           setRoomCoverDialogProps={setRoomCoverDialogProps}
           roomCoverDialogProps={roomCoverDialogProps}
@@ -344,3 +337,4 @@ export default inject<TStore>(
     };
   },
 )(observer(RoomLogoCoverDialog));
+

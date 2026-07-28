@@ -3,7 +3,7 @@
   "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
   "created_at": "2025-05-19T21:30:44.727Z",
-  "updated_at": "2026-05-15T14:00:06.886Z",
+  "updated_at": "2026-07-27T13:07:50.866Z",
   "comment": {
     "text": "Button label. Creates a copy of the selected item.",
     "is_auto": true,
@@ -12,27 +12,39 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2074,
-      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 270,
+      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => self.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2074,
-      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 270,
+      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => self.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2074,
-      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 270,
+      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => self.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 299,
+      "line_number": 463,
       "context": "const getDuplicateItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => onDuplicateClick?.(i),\n disabled: !onDuplicateClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 192,
+      "context": "dialogsStore.openDialog(SDKDialogs.LeaveRoom);\n };\n const handleDuplicate = async () => {\n const opId = operationsStore.startOperation(\n \"duplicate\",\n t(\"Common:Duplicate\"),\n );\n let opAlert = false;\n try {\n const operations = await api.files.duplicate(\n [room.id as number],",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 192,
+      "context": "dialogsStore.openDialog(SDKDialogs.LeaveRoom);\n };\n const handleDuplicate = async () => {\n const opId = operationsStore.startOperation(\n \"duplicate\",\n t(\"Common:Duplicate\"),\n );\n let opAlert = false;\n try {\n const operations = await api.files.duplicate(\n [room.id as number],",
       "module": "/packages/sdk"
     },
     {

@@ -131,8 +131,8 @@ const Manager = (props) => {
     { key: "AZ", label: t("Common:Title") },
     { key: "Type", label: t("Common:Type") },
     { key: "Size", label: t("Common:Size") },
-    { key: "DateAndTimeCreation", label: t("Files:ByCreation") },
-    { key: "Author", label: t("Files:ByAuthor") },
+    { key: "DateAndTimeCreation", label: t("Common:ByCreation") },
+    { key: "Author", label: t("Common:ByAuthor") },
   ];
 
   const dataSortOrder = [
@@ -449,7 +449,9 @@ const Manager = (props) => {
       description={t("CustomDescription", {
         productName: getBrandName("ProductName"),
       })}
-      header={t("CreateSamplePortal", { productName: getBrandName("ProductName") })}
+      header={t("CreateSamplePortal", {
+        productName: getBrandName("ProductName"),
+      })}
     >
       <Container>
         <PreviewBlock
@@ -490,7 +492,7 @@ const Manager = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+            <CategorySubHeader>{t("Common:InterfaceElements")}</CategorySubHeader>
 
             <CheckboxGroup>
               <LabelGroup>
@@ -585,7 +587,7 @@ const Manager = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("SearchFilterAndSort")}
+                  label={t("Common:SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
                   dataTestId="show_filter_checkbox"
@@ -596,8 +598,8 @@ const Manager = (props) => {
                   size={12}
                   tooltipContent={
                     <TooltipContent
-                      title={t("SearchBlock")}
-                      description={t("ManagerSearchBlockDescription")}
+                      title={t("Common:SearchBlock")}
+                      description={t("Common:ManagerSearchBlockDescription")}
                       img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     />
                   }
@@ -607,7 +609,7 @@ const Manager = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("Header")}
+                  label={t("Common:Header")}
                   onChange={onChangeShowHeader}
                   isChecked={config.showHeader}
                   dataTestId="show_header_checkbox"
@@ -619,8 +621,8 @@ const Manager = (props) => {
                   size={12}
                   tooltipContent={
                     <TooltipContent
-                      title={t("Header")}
-                      description={t("HeaderDescription", {
+                      title={t("Common:Header")}
+                      description={t("Common:HeaderDescription", {
                         productName: getBrandName("ProductName"),
                       })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
@@ -796,9 +798,9 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Files",
     "Translations",
   ])(observer(Manager)),
 );
+

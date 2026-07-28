@@ -35,6 +35,11 @@
 
 export * from "@docspace/ui-kit/enums";
 
+import type { RoomsType } from "@docspace/ui-kit/enums";
+
+/** Private room type (extends RoomsType enum from ui-kit) */
+export const RoomsTypePrivate = 13 as RoomsType;
+
 export const enum ScopeType {
   read = "read",
   write = "write",
@@ -191,6 +196,13 @@ export const enum RoomSearchArea {
   Archive = "Archive",
   Templates = "Templates",
   AIAgents = "AiAgents",
+  Forms = "Forms",
+  FormTemplates = "FormTemplates",
+}
+export const enum RoomPrivacyFilter {
+  None = 0,
+  Private = 1,
+  NotPrivate = 2,
 }
 /**
  * Enum for file action.
@@ -215,6 +227,7 @@ export const enum PageType {
   integration = "integration",
   developerTools = "developerTools",
   devToolsOverview = "devToolsOverview",
+  devToolsDocsConnect = "devToolsDocsConnect",
   devToolsJavascriptSdk = "devToolsJavascriptSdk",
   devToolsPluginSdk = "devToolsPluginSdk",
   devToolsWebhooks = "devToolsWebhooks",
@@ -230,6 +243,7 @@ export const enum PageType {
   groups = "groups",
   guests = "guests",
   aiSettings = "aiSettings",
+  newAISettings = "new-ai-settings",
 }
 
 export const enum ConflictResolveType {
@@ -342,7 +356,6 @@ export const enum TariffState {
   Delay = 2,
   NotPaid = 3,
 }
-
 
 /**
  * Enum for payment method status.
@@ -693,3 +706,4 @@ export enum VectorizationStatus {
   Completed,
   Failed,
 }
+

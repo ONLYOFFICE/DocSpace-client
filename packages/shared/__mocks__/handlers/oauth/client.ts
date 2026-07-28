@@ -36,7 +36,7 @@
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export const PATH = "clients/:clientId/public/info";
+export const PATH = "oauth2/clients/:clientId/public/info";
 
 export const successClient = {
   name: "Test 12",

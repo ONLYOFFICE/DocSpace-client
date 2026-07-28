@@ -57,5 +57,7 @@ export default function DocsSettingsPage({
 }: DocsSettingsPageProps) {
   useDocsPageInit({ authToken, filesSettings, portalSettings, user });
 
-  return <DocsSettingsLayout />;
+  const canSeeBilling = user?.isAdmin || user?.isOwner;
+
+  return <DocsSettingsLayout canSeeBilling={canSeeBilling} />;
 }

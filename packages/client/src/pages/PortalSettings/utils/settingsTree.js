@@ -56,7 +56,7 @@ export const settingsTree = [
         key: "0-0",
         icon: "",
         link: "general",
-        tKey: "SettingsGeneral",
+        tKey: "Common:SettingsGeneral",
         isCategory: true,
         children: [
           {
@@ -263,6 +263,13 @@ export const settingsTree = [
             link: "lifetime",
             tKey: "SessionLifetime",
           },
+          {
+            id: "portal-settings_catalog-access-control",
+            key: "1-0-9",
+            icon: "",
+            link: "access-control",
+            tKey: "AccessControl",
+          },
         ],
       },
       {
@@ -270,7 +277,7 @@ export const settingsTree = [
         key: "1-1",
         icon: "",
         link: "access-rights",
-        tKey: "AccessRights",
+        tKey: "Common:AccessRights",
         isCategory: true,
         children: [
           {
@@ -304,7 +311,7 @@ export const settingsTree = [
     key: "2",
     type: PageType.backup,
     link: "backup",
-    tKey: "Backup",
+    tKey: "Common:Backup",
     isHeader: true,
     children: [
       {
@@ -312,7 +319,7 @@ export const settingsTree = [
         key: "2-0",
         icon: "",
         link: "data-backup",
-        tKey: "Backup",
+        tKey: "Common:Backup",
         isCategory: true,
       },
       {
@@ -320,7 +327,7 @@ export const settingsTree = [
         key: "2-1",
         icon: "",
         link: "auto-backup",
-        tKey: "AutoBackup",
+        tKey: "Common:AutoBackup",
         isCategory: true,
       },
     ],
@@ -411,7 +418,7 @@ export const settingsTree = [
         key: "4-3",
         icon: "",
         link: "plugins",
-        tKey: "Plugins",
+        tKey: "Common:Plugins",
         isCategory: true,
       },
       {
@@ -493,37 +500,44 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-ai-settings",
     key: "7",
-    type: PageType.aiSettings,
     link: "ai-settings",
     tKey: "AISettings",
+    type: PageType.aiSettings,
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-ai-settings-providers",
+        id: "portal-settings_catalog-ai-settings-ai-models",
         key: "7-0",
-        link: "providers",
+        link: "ai-models",
         tKey: "AISettings",
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-ai-settings-servers",
+        id: "portal-settings_catalog-ai-settings-model-assignment",
         key: "7-1",
-        link: "servers",
+        link: "model-assignment",
         tKey: "AISettings",
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-ai-settings-search",
+        id: "portal-settings_catalog-ai-settings-mcp-servers",
         key: "7-2",
-        link: "search",
+        link: "mcp-servers",
+        tKey: "AISettings",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-ai-settings-web-search",
+        key: "7-3",
+        link: "web-search",
         tKey: "AISettings",
         isCategory: true,
       },
       {
         id: "portal-settings_catalog-ai-settings-knowledge",
-        key: "7-3",
+        key: "7-4",
         link: "knowledge",
-        tKey: "AIRoom:Knowledge",
+        tKey: "Common:Knowledge",
         isCategory: true,
       },
     ],
@@ -557,6 +571,7 @@ export const settingsTree = [
     key: "10",
     type: PageType.payments,
     link: "payments",
+    alternativeUrl: "/billing/overview",
     tKey: "Common:PaymentsTitle",
     isHeader: true,
     children: [
@@ -573,7 +588,7 @@ export const settingsTree = [
         key: "10-1",
         icon: "",
         link: "payment-method",
-        tKey: "PaymentMethod",
+        tKey: "Common:PaymentMethod",
         isCategory: true,
       },
       {
@@ -581,7 +596,7 @@ export const settingsTree = [
         key: "10-2",
         icon: "",
         link: "wallet",
-        tKey: "Wallet",
+        tKey: "Common:Wallet",
         isCategory: true,
       },
       {
@@ -591,6 +606,43 @@ export const settingsTree = [
         link: "services",
         tKey: "Services",
         isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-services-ai-services",
+            key: "10-3-0",
+            icon: "",
+            link: "ai-services",
+            tKey: "Common:AIFeatures",
+          },
+          {
+            id: "portal-settings_catalog-services-backup",
+            key: "10-3-1",
+            icon: "",
+            link: "backup",
+            tKey: "Common:AdditionalBackup",
+          },
+          {
+            id: "portal-settings_catalog-services-disk-storage",
+            key: "10-3-2",
+            icon: "",
+            link: "disk-storage",
+            tKey: "Common:AdditionalDiskStorage",
+          },
+          {
+            id: "portal-settings_catalog-services-ai-search",
+            key: "10-3-3",
+            icon: "",
+            link: "ai-search",
+            tKey: "Common:AISearch",
+          },
+          {
+            id: "portal-settings_catalog-services-docs-connect",
+            key: "10-3-4",
+            icon: "",
+            link: "docs-connect",
+            tKey: "DocsConnect:DocsConnect",
+          },
+        ],
       },
     ],
   },
@@ -738,4 +790,3 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
-

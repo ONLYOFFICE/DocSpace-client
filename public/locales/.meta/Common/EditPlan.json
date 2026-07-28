@@ -1,0 +1,35 @@
+{
+  "key_path": "EditPlan",
+  "content": "Edit plan",
+  "content_en_sha1_hash": "2cdbc67066c5514f72abda0be6f1e65c5f8db4e2",
+  "created_at": "2026-06-25T11:54:48.788Z",
+  "updated_at": "2026-07-07T08:59:22.051Z",
+  "comment": {
+    "text": "Button label in the upcoming payments table row used to initiate changes to a billing plan.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:15:46.737Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "line_number": 96,
+      "context": "color=\"accent\"\n fontWeight={600}\n className={styles.cardLink}\n dataTestId=\"overview_edit_plan_link\"\n >\n {isFreeTariff ? t(\"UpgradePlan\") : t(\"EditPlan\")}\n </Link>\n ) : null}\n </div>\n );\n };",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/TableView/TableRow.tsx",
+      "line_number": 68,
+      "context": "const store = usePaymentStore();\n const t = useCommonTranslation();\n \n const actionLabel =\n actionType === \"edit-plan\"\n ? t(\"EditPlan\")\n : actionType === \"edit-subscription\"\n ? t(\"EditSubscription\")\n : \"\";\n \n const onAction = () => {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

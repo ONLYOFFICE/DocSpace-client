@@ -41,63 +41,67 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 
-import useDeviceType from "@/hooks/useDeviceType";
 import RootScrollbar from "@/app/(docspace)/_components/RootScrollbar";
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import { DeviceTypeObserver } from "@/app/(docspace)/_components/DeviceTypeObserver";
 import Dialogs from "@/app/(docspace)/_components/dialogs";
 
-import { useSDKConfig } from "@/providers/SDKConfigProvider";
-
-import { SidebarProvider } from "../../_contexts/SidebarContext";
-import DocsSidebar from "../sidebar";
 import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import Settings from "./index";
 
 import layoutStyles from "../docs-layout/DocsLayout.module.scss";
 
-const DocsSettingsLayoutInner = observer(() => {
-  const { t } = useTranslation(["Common"]);
-  const { sdkConfig } = useSDKConfig();
-
-  useDocsFrameBridge({ isReady: true });
-
-  return (
-    <div className={layoutStyles.root}>
-      {sdkConfig?.showMenu !== false && <DocsSidebar />}
-      <div className={layoutStyles.sectionArea}>
-        <RootScrollbar>
-          <SectionWrapper
-            sectionHeaderContent={
-              <div style={{ padding: "12px 0" }}>
-                <Text fontSize="18px" fontWeight={700}>
-                  {t("Common:Settings")}
-                </Text>
-              </div>
-            }
-            sectionFilterContent={<div />}
-            sectionBodyContent={<Settings />}
-            isEmptyPage={false}
-            filesFilter=""
-            showFilter={false}
-            viewAs="settings"
-          />
-          <DeviceTypeObserver />
-          <Dialogs />
-        </RootScrollbar>
-      </div>
-    </div>
-  );
-});
-
-const DocsSettingsLayout = () => {
-  const { currentDeviceType } = useDeviceType();
-
-  return (
-    <SidebarProvider currentDeviceType={currentDeviceType}>
-      <DocsSettingsLayoutInner />
-    </SidebarProvider>
-  );
+type DocsSettingsLayoutProps = {
+  canSeeBilling?: boolean;
+  // The (rooms) group reuses this settings layout but mounts its own
+  // (rooms) frame bridge. Pass `false` there so the personal-files bridge
+  // doesn't also answer `navigateSection` and route out of the rooms group.
+  mountFrameBridge?: boolean;
 };
+
+// Isolated so the hook is only invoked when the personal-files bridge
+// should own `navigateSection` (keeps the rules-of-hooks contract while
+// allowing a conditional mount).
+const DocsFrameBridgeHost = () => {
+  useDocsFrameBridge({ isReady: true });
+  return null;
+};
+
+const DocsSettingsLayout = observer(
+  ({ canSeeBilling, mountFrameBridge = true }: DocsSettingsLayoutProps) => {
+    const { t } = useTranslation(["Common"]);
+
+    return (
+      <>
+        {mountFrameBridge ? <DocsFrameBridgeHost /> : null}
+        <div className={layoutStyles.root}>
+          <div className={layoutStyles.sectionArea}>
+            <RootScrollbar>
+              <SectionWrapper
+                sectionHeaderContent={
+                  <div style={{ padding: "12px 0" }}>
+                    <Text fontSize="18px" fontWeight={700}>
+                      {t("Common:Settings")}
+                    </Text>
+                  </div>
+                }
+                sectionFilterContent={<div />}
+                sectionBodyContent={
+                  <Settings canSeeBilling={canSeeBilling} />
+                }
+                isEmptyPage={false}
+                filesFilter=""
+                showFilter={false}
+                viewAs="settings"
+              />
+              <DeviceTypeObserver />
+              <Dialogs />
+            </RootScrollbar>
+          </div>
+        </div>
+      </>
+    );
+  },
+);
 
 export default DocsSettingsLayout;

@@ -45,51 +45,56 @@ import { TPortal } from "@/types";
 import { getRedirectURL } from "@/utils";
 
 type ItemProps = {
-	portal: TPortal;
-	baseDomain: string;
+  portal: TPortal;
+  baseDomain: string;
 };
 
 const Item = ({ portal, baseDomain }: ItemProps) => {
-	const name = portal.portalName.includes(baseDomain)
-		? portal.portalName
-		: `${portal.portalName}.${baseDomain}`;
+  const name = portal.portalName.includes(baseDomain)
+    ? portal.portalName
+    : `${portal.portalName}.${baseDomain}`;
 
-	const onClick = () => {
-		const redirectUrl = getRedirectURL()?.replace(window.location.origin, name);
+  const onClick = () => {
+    const redirectUrl = getRedirectURL()?.replace(window.location.origin, name);
 
-		sessionStorage.removeItem("tenant-list");
+    sessionStorage.removeItem("tenant-list");
 
-		window.open(`${portal.portalLink}&referenceUrl=${redirectUrl}`, "_self");
-	};
+    const referenceUrl = redirectUrl
+      ? `&referenceUrl=${encodeURIComponent(redirectUrl)}`
+      : "";
 
-	return (
-		<div className="item" onClick={onClick} data-testid={portal}>
-			<div className="info">
-				<Image
-					className="favicon"
-					alt="Portal favicon"
-					src={DefaultLogoUrl}
-					width={32}
-					height={32}
-				/>
-				<Text
-					fontWeight={600}
-					fontSize="14px"
-					lineHeight="16px"
-					truncate
-					dataTestId="portal_name_text"
-				>
-					{name.replace("http://", "").replace("https://", "")}
-				</Text>
-			</div>
-			<IconButton
-				iconName={ArrowRightSvrUrl}
-				size={16}
-				className="icon-button"
-				dataTestId="open_portal_icon_button"
-			/>
-		</div>
-	);
+    window.open(`${portal.portalLink}${referenceUrl}`, "_self");
+  };
+
+  return (
+    <div className="item" onClick={onClick} data-testid={portal}>
+      <div className="info">
+        <Image
+          className="favicon"
+          alt="Portal favicon"
+          src={DefaultLogoUrl}
+          width={32}
+          height={32}
+        />
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          lineHeight="16px"
+          truncate
+          dataTestId="portal_name_text"
+        >
+          {name.replace("http://", "").replace("https://", "")}
+        </Text>
+      </div>
+      <IconButton
+        iconName={ArrowRightSvrUrl}
+        size={16}
+        className="icon-button"
+        dataTestId="open_portal_icon_button"
+      />
+    </div>
+  );
 };
 
 export default Item;
+

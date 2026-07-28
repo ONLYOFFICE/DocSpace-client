@@ -168,7 +168,6 @@ const MoveToPublicRoomDialog = withTranslation([
   "Common",
   "Translations",
   "Files",
-  "EmptyTrashDialog",
 ])(MoveToPublicRoomComponent);
 
 export default inject(
@@ -208,3 +207,4 @@ export default inject(
     };
   },
 )(observer(MoveToPublicRoomDialog));
+

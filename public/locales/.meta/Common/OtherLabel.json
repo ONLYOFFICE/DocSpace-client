@@ -3,7 +3,7 @@
   "content": "Other",
   "content_en_sha1_hash": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
   "created_at": "2025-05-19T21:30:47.177Z",
-  "updated_at": "2026-05-15T14:00:06.750Z",
+  "updated_at": "2026-07-27T13:07:50.727Z",
   "comment": {
     "text": "This is a label for a filter option. It represents an \"other\" category when filtering by author or group.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 839,
+      "line_number": 910,
       "context": "if (filter.authorType) {\n const isMe = userId === filter.authorType.replace(\"user_\", \"\");\n \n let label = isMe\n ? filter.excludeSubject\n ? t(\"Common:OtherLabel\")\n : t(\"Common:MeLabel\")\n : null;\n \n if (!isMe) {\n const user = await getUser(filter.authorType.replace(\"user_\", \"\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 839,
+      "line_number": 910,
       "context": "if (filter.authorType) {\n const isMe = userId === filter.authorType.replace(\"user_\", \"\");\n \n let label = isMe\n ? filter.excludeSubject\n ? t(\"Common:OtherLabel\")\n : t(\"Common:MeLabel\")\n : null;\n \n if (!isMe) {\n const user = await getUser(filter.authorType.replace(\"user_\", \"\"));",
       "module": "/packages/client"
     },
@@ -40,6 +40,12 @@
       "line_number": 544,
       "context": "},\n {\n id: \"filter_group-other\",\n key: FilterKeys.other,\n group: FilterGroups.filterGroup,\n label: t(\"Common:OtherLabel\"),\n },\n {\n id: \"filter_group-selected-group\",\n key: FilterKeys.selectedGroup,\n group: FilterGroups.filterGroup,",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 230,
+      "context": "});\n authorOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.filterAuthor,\n label: t(\"Common:OtherLabel\", { defaultValue: \"Other\" }),\n });\n }\n \n const typeOptions: TItem[] = [\n {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

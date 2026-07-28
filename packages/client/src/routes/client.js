@@ -46,6 +46,7 @@ import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
+import ProtectedAppRoute from "../components/ProtectedAppRoute";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
@@ -130,46 +131,6 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "ai-agents",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/chat",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
             path: "recent",
             element: (
               <PrivateRoute>
@@ -234,6 +195,54 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "rooms/recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/favorite",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/favorite/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/trash",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/trash/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/shared",
             element: (
               <PrivateRoute>
@@ -259,6 +268,86 @@ const ClientRoutes = [
           },
           {
             path: "rooms/shared/:room/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/:room",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/:room/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/favorites",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/favorites/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/trash",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/trash/filter",
             element: (
               <PrivateRoute>
                 <ViewComponent />
@@ -338,6 +427,94 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
+          {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/favorites",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/favorites/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/trash",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/trash/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:id",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:id/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:id/chat",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
           ...contactsRoutes,
           ...profileClientRoutes,
         ],
@@ -351,6 +528,142 @@ const ClientRoutes = [
         ),
       },
       ...generalClientRoutes,
+      {
+        path: "/ai-files",
+        async lazy() {
+          const { AiFiles } = await componentLoader(
+            () => import("SRC_DIR/pages/AiFiles"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-files">
+                <ErrorBoundary>
+                  <AiFiles />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-forms",
+        async lazy() {
+          const { AiForms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiForms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-forms">
+                <ErrorBoundary>
+                  <AiForms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-arbiter",
+        async lazy() {
+          const { AiArbiter } = await componentLoader(
+            () => import("SRC_DIR/pages/AiArbiter"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-arbiter">
+                <ErrorBoundary>
+                  <AiArbiter />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/agents",
+        async lazy() {
+          const { AiAgents } = await componentLoader(
+            () => import("SRC_DIR/pages/AiAgents"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiAgents />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-rooms",
+        async lazy() {
+          const { AiRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-rooms">
+                <ErrorBoundary>
+                  <AiRooms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/e2e-rooms",
+        async lazy() {
+          const { E2eRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/E2eRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="e2e-rooms">
+                <ErrorBoundary>
+                  <E2eRooms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/dashboard",
+        async lazy() {
+          const { Dashboard } = await componentLoader(
+            () => import("SRC_DIR/pages/Dashboard"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <Dashboard />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
   },
   {
@@ -639,8 +952,7 @@ const ClientRoutes = [
     async lazy() {
       const { default: NoAccessContainer, NoAccessContainerType } =
         await componentLoader(
-          () =>
-            import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
+          () => import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
         );
 
       const Component = () => (
@@ -693,3 +1005,4 @@ const ClientRoutes = [
 ];
 
 export default ClientRoutes;
+

@@ -44,14 +44,18 @@ import {
   frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
+import { FolderType } from "@docspace/shared/enums";
 
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { PAGE_COUNT } from "@/utils/constants";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 type UseDocsFrameBridgeParams = {
   isReady: boolean;
   uploadFilesToFolder?: (files: FileList | File[]) => Promise<void>;
+  enabled?: boolean;
 };
 
 const PERSONAL_BASE_PATH = "/personal-files";
@@ -60,6 +64,25 @@ const SETTINGS_PATH = "/personal-files/settings";
 const VALID_SECTIONS: ReadonlySet<string> = new Set(
   Object.values(DocsSection),
 );
+
+const sectionFromRootFolderType = (
+  rootFolderType: FolderType | null,
+): string | null => {
+  switch (rootFolderType) {
+    case FolderType.USER:
+      return DocsSection.MyDocuments;
+    case FolderType.Favorites:
+      return DocsSection.Favorites;
+    case FolderType.Recent:
+      return DocsSection.Recent;
+    case FolderType.SHARE:
+      return DocsSection.SharedWithMe;
+    case FolderType.TRASH:
+      return DocsSection.Trash;
+    default:
+      return null;
+  }
+};
 
 const sectionFromPathnameAndFolder = (
   pathname: string,
@@ -78,6 +101,8 @@ const sectionFromPathnameAndFolder = (
       return DocsSection.Favorites;
     case "@recent":
       return DocsSection.Recent;
+    case "@share":
+      return DocsSection.SharedWithMe;
     case "@trash":
       return DocsSection.Trash;
     default:
@@ -85,9 +110,12 @@ const sectionFromPathnameAndFolder = (
   }
 };
 
+const withAuthParam = (url: string): string =>
+  isOAuthFrame() ? `${url}${url.includes("?") ? "&" : "?"}auth=oauth` : url;
+
 const sectionToUrl = (section: string): string => {
   if (section === DocsSection.Settings) {
-    return SETTINGS_PATH;
+    return withAuthParam(SETTINGS_PATH);
   }
 
   const folderAlias =
@@ -96,7 +124,7 @@ const sectionToUrl = (section: string): string => {
   filter.folder = folderAlias;
   filter.pageCount = PAGE_COUNT;
 
-  return `${PERSONAL_BASE_PATH}?${filter.toUrlParams()}`;
+  return withAuthParam(`${PERSONAL_BASE_PATH}?${filter.toUrlParams()}`);
 };
 
 /**
@@ -110,24 +138,30 @@ const sectionToUrl = (section: string): string => {
 export const useDocsFrameBridge = ({
   isReady,
   uploadFilesToFolder,
+  enabled = true,
 }: UseDocsFrameBridgeParams) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { rootFolderType } = useFilesListStore();
 
   const rootFolder = searchParams.get("folder");
-  const activeSection = sectionFromPathnameAndFolder(pathname, rootFolder);
+  const activeSection =
+    sectionFromRootFolderType(rootFolderType) ??
+    sectionFromPathnameAndFolder(pathname, rootFolder);
 
   const appReadySent = React.useRef(false);
   React.useEffect(() => {
+    if (!enabled) return;
     if (isReady && !appReadySent.current) {
       appReadySent.current = true;
       frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
     }
-  }, [isReady]);
+  }, [isReady, enabled]);
 
   const prevSection = React.useRef<string | null>(activeSection);
   React.useEffect(() => {
+    if (!enabled) return;
     if (prevSection.current !== activeSection && activeSection) {
       prevSection.current = activeSection;
       frameCallEvent({
@@ -135,7 +169,7 @@ export const useDocsFrameBridge = ({
         data: { section: activeSection },
       });
     }
-  }, [activeSection]);
+  }, [activeSection, enabled]);
 
   const uploadRef = React.useRef(uploadFilesToFolder);
   React.useEffect(() => {
@@ -143,6 +177,7 @@ export const useDocsFrameBridge = ({
   }, [uploadFilesToFolder]);
 
   React.useEffect(() => {
+    if (!enabled) return undefined;
     const handler = (e: MessageEvent) => {
       if (window.self === window.parent || e.source !== window.parent) return;
 
@@ -221,5 +256,5 @@ export const useDocsFrameBridge = ({
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
-  }, [router]);
+  }, [router, enabled]);
 };

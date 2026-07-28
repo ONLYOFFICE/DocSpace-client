@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateUnusedValueRefund",
+  "content": "Unused value refund",
+  "content_en_sha1_hash": "f5c79eef2d4158e1e12e65ec7cefda13d573a608",
+  "created_at": "2026-06-30T11:38:08.339Z",
+  "updated_at": "2026-07-27T13:07:51.037Z",
+  "comment": {
+    "text": "Row label in the migration dialog representing the amount of unused funds being refunded to the wallet.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T11:39:06.361Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 295,
+      "context": "</Text>\n </>,\n )}\n {isDetailsReady && !isSameCurrency\n ? renderRow(\n t(\"MigrateUnusedValueRefund\"),\n formatWalletCurrency(\n subscriptionDetails?.remainingBalance ?? 0,\n 2,\n subscriptionDetails?.currency,\n ),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

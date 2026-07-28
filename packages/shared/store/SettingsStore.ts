@@ -36,6 +36,7 @@
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 
+import { connectFrameSocket } from "../utils/oauthFrameSocket";
 import SocketHelper, {
   SocketCommands,
   SocketCommandsRoomParts,
@@ -95,6 +96,7 @@ import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import {
   frameCallEvent,
   getShowText,
+  insertDataLayer,
   insertTagManager,
   isManagement,
   isPublicRoom,
@@ -201,7 +203,7 @@ class SettingsStore {
   // isDesktopEncryption: desktopEncryption;
   isEncryptionSupport = false;
 
-  encryptionKeys: { [key: string]: string | boolean } = {};
+  legacyEncryptionKeys: { [key: string]: string | boolean } = {};
 
   roomsMode = false;
 
@@ -351,7 +353,6 @@ class SettingsStore {
   scrollToSettings: boolean = false;
 
   displayBanners: boolean = false;
-
 
   aiServicesEnabled: boolean = true;
 
@@ -788,9 +789,21 @@ class SettingsStore {
       : this.apiDomain;
   }
 
+  get docsConnectUrl() {
+    return this.apiDomain && this.apiEntries?.["docs-connect"]
+      ? `${this.apiDomain}${this.apiEntries["docs-connect"]}`
+      : this.apiDomain;
+  }
+
   get forEnterprisesUrl() {
     return this.siteDomain && this.siteEntries?.forenterprises
       ? `${this.siteDomain}${this.siteEntries.forenterprises}`
+      : this.siteDomain;
+  }
+
+  get docspacePricesUrl() {
+    return this.siteDomain && this.siteEntries?.docspaceprices
+      ? `${this.siteDomain}${this.siteEntries.docspaceprices}`
       : this.siteDomain;
   }
 
@@ -821,6 +834,42 @@ class SettingsStore {
   get zoomUrl() {
     return this.siteDomain && this.siteEntries?.officeforzoom
       ? `${this.siteDomain}${this.siteEntries.officeforzoom}`
+      : this.siteDomain;
+  }
+
+  get nextcloudUrl() {
+    return this.siteDomain && this.siteEntries?.nextcloud
+      ? `${this.siteDomain}${this.siteEntries.nextcloud}`
+      : this.siteDomain;
+  }
+
+  get owncloudUrl() {
+    return this.siteDomain && this.siteEntries?.owncloud
+      ? `${this.siteDomain}${this.siteEntries.owncloud}`
+      : this.siteDomain;
+  }
+
+  get confluenceUrl() {
+    return this.siteDomain && this.siteEntries?.confluence
+      ? `${this.siteDomain}${this.siteEntries.confluence}`
+      : this.siteDomain;
+  }
+
+  get alfrescoUrl() {
+    return this.siteDomain && this.siteEntries?.alfresco
+      ? `${this.siteDomain}${this.siteEntries.alfresco}`
+      : this.siteDomain;
+  }
+
+  get moodleUrl() {
+    return this.siteDomain && this.siteEntries?.moodle
+      ? `${this.siteDomain}${this.siteEntries.moodle}`
+      : this.siteDomain;
+  }
+
+  get odooUrl() {
+    return this.siteDomain && this.siteEntries?.odoo
+      ? `${this.siteDomain}${this.siteEntries.odoo}`
       : this.siteDomain;
   }
 
@@ -1075,6 +1124,10 @@ class SettingsStore {
     }
 
     if (origSettings?.tagManagerId) {
+      if (origSettings?.ownerId) {
+        insertDataLayer(origSettings.ownerId);
+      }
+
       insertTagManager(origSettings.tagManagerId);
     }
   };
@@ -1143,7 +1196,7 @@ class SettingsStore {
   };
 
   setCultures = (cultures: string[]) => {
-    this.cultures = cultures;
+    this.cultures = cultures ?? [];
   };
 
   setAdditionalResourcesData = (data: TAdditionalResources) => {
@@ -1189,15 +1242,17 @@ class SettingsStore {
     this.setIsEncryptionSupport(isEncryptionSupport);
   };
 
-  updateEncryptionKeys = (encryptionKeys: {
+  updateLegacyEncryptionKeys = (encryptionKeys: {
     [key: string]: string | boolean;
   }) => {
-    this.encryptionKeys = encryptionKeys ?? {};
+    this.legacyEncryptionKeys = encryptionKeys ?? {};
   };
 
-  setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
+  setLegacyEncryptionKeys = async (keys: {
+    [key: string]: string | boolean;
+  }) => {
     await api.files.setEncryptionKeys(keys);
-    this.updateEncryptionKeys(keys);
+    this.updateLegacyEncryptionKeys(keys);
   };
 
   setCompanyInfoSettingsData = (data: TCompanyInfo) => {
@@ -1267,9 +1322,9 @@ class SettingsStore {
     await this.getAllPortals();
   };
 
-  getEncryptionKeys = async () => {
+  getLegacyEncryptionKeys = async () => {
     const encryptionKeys = await api.files.getEncryptionKeys();
-    this.updateEncryptionKeys(encryptionKeys);
+    this.updateLegacyEncryptionKeys(encryptionKeys);
   };
 
   setModuleInfo = (homepage: string, productId: string) => {
@@ -1359,7 +1414,7 @@ class SettingsStore {
   };
 
   setTimezones = (timezones: TTimeZone[]) => {
-    this.timezones = timezones;
+    this.timezones = timezones ?? [];
   };
 
   getPortalTimezones = async (token = undefined) => {
@@ -1423,7 +1478,7 @@ class SettingsStore {
     const socketUrl =
       isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    SocketHelper?.connect(socketUrl, this.publicRoomKey);
+    void connectFrameSocket(socketUrl, this.publicRoomKey);
   };
 
   setPublicRoomKey = (key: string) => {
@@ -1431,7 +1486,7 @@ class SettingsStore {
 
     const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
 
-    SocketHelper?.connect(socketUrl, key);
+    void connectFrameSocket(socketUrl, key);
   };
 
   getBuildVersionInfo = async () => {

@@ -42,27 +42,34 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { RoomsType, SearchArea } from "@docspace/shared/enums";
+import { AnalyticsEvents, RoomsType, SearchArea } from "@docspace/shared/enums";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import {
-  addServersForRoom,
-  createAIAgent,
-  deleteServersForRoom,
-  editAIAgent,
+  addEntityMcpServer,
+  createAIAgentWithProfile,
+  editNewAiAgent,
+  removeEntityMcpServer,
 } from "@docspace/shared/api/ai";
 import {
   TAgentIconParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
-import { TAgent, TAgentLogo } from "@docspace/shared/api/ai/types";
+import {
+  TAgent,
+  TAgentLogo,
+  TChatSettings,
+  TCreateAgentData,
+  TCreateAgentWithProfileData,
+  TEditAgentData,
+} from "@docspace/shared/api/ai/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { modelCache } from "SRC_DIR/components/dialogs/CreateEditAgentDialog/sub-components/modelCache";
 
@@ -107,6 +114,12 @@ class CreateEditRoomStore {
   isImageType: boolean = false;
 
   selectedRoomType: Nullable<RoomsType> = null;
+
+  openContext: string = "";
+
+  setOpenContext = (context: string) => {
+    this.openContext = context;
+  };
 
   constructor(
     filesStore: FilesStore,
@@ -170,16 +183,12 @@ class CreateEditRoomStore {
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore!;
     const { changeRoomOwner } = this.filesActionsStore!;
 
-    const {
-      title,
-      icon,
-      agentId,
-      prompt,
-      providerId,
-      modelId,
-      agentOwner,
-      quota,
-    } = newParams;
+    const { title, icon, agentId, prompt, agentOwner, quota, profileId } =
+      newParams;
+
+    // new-ai service rebinds the agent's Chat-action profile when a
+    // profileId is sent; only include it when actually changed.
+    const isProfileChanged = !!profileId && profileId !== agent.profileId;
 
     const quotaLimit = quota || agent.quotaLimit;
     const isQuotaChanged = quotaLimit !== agent.quotaLimit;
@@ -191,7 +200,7 @@ class CreateEditRoomStore {
     const currTags = newParams.tags.map((p) => p.name).sort();
     const isTagsChanged = !isEqual(prevTags, currTags);
 
-    const editAgentParams = {
+    const editAgentParams: TEditAgentData = {
       ...(isTitleChanged && {
         title: title || t("Common:NewRoom"),
       }),
@@ -212,13 +221,11 @@ class CreateEditRoomStore {
 
       logo: undefined as TAgentLogo | undefined,
 
-      ...((prompt || providerId || modelId) && {
-        chatSettings: {
-          prompt,
-          providerId,
-          modelId,
-        },
+      ...(prompt && {
+        chatSettings: { prompt } satisfies TChatSettings,
       }),
+
+      ...(isProfileChanged && { profileId }),
     };
 
     const isDeleteLogo = !!agent.logo.original && !icon.uploadedFile;
@@ -251,7 +258,7 @@ class CreateEditRoomStore {
 
     try {
       if (Object.keys(editAgentParams).length) {
-        await editAIAgent(agent.id, editAgentParams);
+        await editNewAiAgent(agent.id, editAgentParams);
       }
 
       if (isOwnerChanged) {
@@ -265,17 +272,24 @@ class CreateEditRoomStore {
       const { mcpServers, mcpServersInitial } = newParams;
 
       if (mcpServers && mcpServersInitial) {
+        // Servers are keyed by name in the new-ai model: enabling one for an
+        // agent writes an entry into the agent's per-entity map (the config
+        // is resolved server-side), disabling removes it.
         const deletedServers = mcpServersInitial.filter(
-          (id) => !mcpServers.includes(id),
+          (name) => !mcpServers.includes(name),
         );
         const addedServers = mcpServers.filter(
-          (id) => !mcpServersInitial.includes(id),
+          (name) => !mcpServersInitial.includes(name),
         );
 
-        if (addedServers.length)
-          requests.push(addServersForRoom(agentId!, addedServers));
-        if (deletedServers.length)
-          requests.push(deleteServersForRoom(agentId!, deletedServers));
+        requests.push(
+          ...addedServers.map((name) =>
+            addEntityMcpServer(name, String(agentId!)),
+          ),
+          ...deletedServers.map((name) =>
+            removeEntityMcpServer(name, String(agentId!)),
+          ),
+        );
       }
 
       if (requests.length) {
@@ -304,15 +318,25 @@ class CreateEditRoomStore {
   };
 
   onCreateAgent = async (t: TFunction, successToast: Element | null = null) => {
-    const agentParams = this.agentParams!;
+    // Re-entry guard: the create dialog can fire this twice in one click
+    // (submit button is both `type="submit"` and has an onClick), which would
+    // POST two agents. `isLoading` is set synchronously below before the first
+    // await, so the second call bails here.
+    if (this.isLoading) return;
 
-    const { attachDefaultTools } = agentParams;
+    const agentParams = this.agentParams!;
 
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
-    const { tags, title, icon, logo, prompt, providerId, modelId, quota } =
-      agentParams;
+    const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;
+
+    // The agent is bound to a chat-lib profile (profileId), which is
+    // mandatory before we create.
+    if (!profileId) {
+      toastr.error(t("Common:RequiredField"));
+      return;
+    }
 
     const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
@@ -330,7 +354,7 @@ class CreateEditRoomStore {
           }
         : null;
 
-    const createAgentData = {
+    const baseAgentData = {
       title: title || t("Common:NewAgent"),
 
       ...(quotaLimit && {
@@ -345,18 +369,17 @@ class CreateEditRoomStore {
 
       logo: undefined as TAgentLogo | undefined,
 
-      ...((prompt || providerId || modelId) && {
-        chatSettings: {
-          prompt,
-          providerId,
-          modelId,
-        },
-      }),
-
-      ...(typeof attachDefaultTools === "boolean" && {
-        attachDefaultTools,
-      }),
+      // MCP enablement (including the system portal server) is written to
+      // the agent's per-entity map after creation — never let the .NET
+      // service attach servers through the legacy room-links store.
+      attachDefaultTools: false,
     };
+
+    const createAgentData: TCreateAgentWithProfileData | TCreateAgentData = {
+      ...baseAgentData,
+      profileId: profileId!,
+      prompt: prompt ?? "",
+    } satisfies TCreateAgentWithProfileData;
 
     this.setIsLoading(true);
 
@@ -366,7 +389,9 @@ class CreateEditRoomStore {
         createAgentData.logo = agentLogo;
       }
 
-      const agent = await createAIAgent(createAgentData);
+      const agent = await createAIAgentWithProfile(
+        createAgentData as TCreateAgentWithProfileData,
+      );
 
       if ((agent as unknown as { errorMsg: string }).errorMsg) {
         return toastr.error(
@@ -377,10 +402,22 @@ class CreateEditRoomStore {
       this.dialogsStore!.setIsNewRoomByCurrentUser(true);
 
       if (agentParams.mcpServers?.length) {
-        addServersForRoom(agent.id, agentParams.mcpServers);
+        await Promise.all(
+          agentParams.mcpServers.map((name) =>
+            addEntityMcpServer(name, String(agent.id)),
+          ),
+        ).catch((err) => toastr.error(err as string));
       }
 
       this.onOpenNewAgent(agent);
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.AgentCreated,
+        id: agent.id,
+        parentId: agent.parentId,
+        context: this.openContext,
+      });
 
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);

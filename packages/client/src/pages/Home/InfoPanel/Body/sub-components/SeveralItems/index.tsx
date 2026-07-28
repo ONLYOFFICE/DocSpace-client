@@ -62,7 +62,7 @@ const SeveralItems = ({
   isUsers,
   selectedItems,
 }: SeveralItemsProps) => {
-  const { t } = useTranslation(["InfoPanel"]);
+  const { t } = useTranslation(["InfoPanel", "Common"]);
   const { isBase } = useTheme();
 
   const emptyScreenAlt = isBase
@@ -81,7 +81,7 @@ const SeveralItems = ({
     ? t("InfoPanel:SelectedGroups")
     : isUsers
       ? t("InfoPanel:SelectedUsers")
-      : t("InfoPanel:ItemsSelected");
+      : t("Common:ItemsSelected");
 
   return (
     <div className={classNames("no-thumbnail-img-wrapper", styles.container)}>

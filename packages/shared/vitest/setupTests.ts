@@ -123,6 +123,17 @@ vi.mock("react-i18next", () => ({
   Trans: ({ t, i18nKey, values }: TransProps) => {
     return t(i18nKey, { ...values });
   },
+  // Modules that bootstrap i18n at import time (e.g. client `src/i18n.js`,
+  // pulled in transitively by store modules) call `.use(initReactI18next)` and
+  // wrap trees in `<I18nextProvider>`. Provide inert stubs so those imports do
+  // not throw "No export is defined on the mock".
+  initReactI18next: { type: "3rdParty", init: () => {} },
+  I18nextProvider: ({ children }: { children: React.ReactNode }) => children,
+  getI18n: () => ({
+    t: (key: string) => key,
+    language: "en",
+    changeLanguage: () => Promise.resolve(),
+  }),
 }));
 
 vi.mock("../utils/image-helpers", () => ({
@@ -139,3 +150,123 @@ global.TextDecoder = TextDecoder;
 if (typeof SVGSVGElement === "undefined") {
   global.SVGSVGElement = class SVGSVGElement {} as unknown as typeof SVGSVGElement;
 }
+
+// Node.js 22+ exposes a built-in `localStorage` that lacks standard Web Storage
+// methods (clear, setItem, etc.), which shadows the jsdom implementation.
+// Provide a spec-compliant in-memory Storage mock so that tests calling
+// `vi.spyOn(Storage.prototype, ...)` work correctly.
+class MockStorage {
+  store: Record<string, string> = {};
+
+  getItem(key: string): string | null {
+    return key in this.store ? this.store[key] : null;
+  }
+
+  setItem(key: string, value: string): void {
+    this.store[key] = String(value);
+  }
+
+  removeItem(key: string): void {
+    delete this.store[key];
+  }
+
+  clear(): void {
+    this.store = {};
+  }
+
+  key(index: number): string | null {
+    return Object.keys(this.store)[index] ?? null;
+  }
+
+  get length(): number {
+    return Object.keys(this.store).length;
+  }
+}
+
+Object.defineProperty(globalThis, "Storage", {
+  value: MockStorage,
+  writable: true,
+});
+Object.defineProperty(globalThis, "localStorage", {
+  value: new MockStorage(),
+  writable: true,
+});
+Object.defineProperty(globalThis, "sessionStorage", {
+  value: new MockStorage(),
+  writable: true,
+});
+
+if (typeof Blob !== "undefined" && !Blob.prototype.arrayBuffer) {
+  // biome-ignore lint/suspicious/noExplicitAny: polyfilling missing DOM API
+  (Blob.prototype as any).arrayBuffer = function arrayBuffer() {
+    return new Promise<ArrayBuffer>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as ArrayBuffer);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsArrayBuffer(this);
+    });
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Silent-failure guard for `[ENCRYPTION] ...` console.error
+// ---------------------------------------------------------------------------
+// The encryption wrap chain (UploadDataStore, room-encryption) historically
+// caught all errors and only console.error-ed them. Vitest does not fail on
+// console.error by default, so a silent server rejection (e.g. 403 on
+// PUT /files/{id}/access) used to slip through tests.
+//
+// This guard captures every console.error call whose formatted output contains
+// "[ENCRYPTION]" and fails the test in afterEach unless it was explicitly
+// whitelisted via `allowConsoleError(/pattern/ | "substring")`.
+import { beforeEach as _beforeEach, afterEach as _afterEach } from "vitest";
+
+const unexpectedEncryptionErrors: string[] = [];
+const allowedErrorPatterns: (RegExp | string)[] = [];
+
+const originalConsoleError = console.error.bind(console);
+console.error = (...args: unknown[]) => {
+  const formatted = args
+    .map((a) => {
+      if (a instanceof Error) return `${a.message} ${a.stack ?? ""}`;
+      if (typeof a === "string") return a;
+      try {
+        return JSON.stringify(a);
+      } catch {
+        return String(a);
+      }
+    })
+    .join(" ");
+  if (formatted.includes("[ENCRYPTION]")) {
+    const allowed = allowedErrorPatterns.some((p) =>
+      typeof p === "string" ? formatted.includes(p) : p.test(formatted),
+    );
+    if (!allowed) {
+      unexpectedEncryptionErrors.push(formatted);
+    }
+  }
+  originalConsoleError(...args);
+};
+
+(globalThis as Record<string, unknown>).allowConsoleError = (
+  matcher: RegExp | string,
+) => {
+  allowedErrorPatterns.push(matcher);
+};
+
+_beforeEach(() => {
+  unexpectedEncryptionErrors.length = 0;
+  allowedErrorPatterns.length = 0;
+});
+
+_afterEach(() => {
+  if (unexpectedEncryptionErrors.length > 0) {
+    const messages = unexpectedEncryptionErrors.slice();
+    unexpectedEncryptionErrors.length = 0;
+    throw new Error(
+      "Unexpected `[ENCRYPTION]` console.error in test (silent-failure guard):\n  " +
+        messages.join("\n  ") +
+        "\nIf this is intentional, call `allowConsoleError(/pattern/)` at the start of the test.",
+    );
+  }
+});

@@ -1225,7 +1225,7 @@ const myDocumentsList = {
       indexing: false,
       denyDownload: false,
       fileEntryType: 1,
-      id: 100,
+      id: 12764,
       rootFolderId: 12764,
       canShare: true,
       security: {

@@ -61,4 +61,5 @@ export interface InjectedEditLinkPanelProps {
   currentDeviceType: DeviceType;
 
   getPortalPasswordSettings: () => Promise<void>;
+  isExternalShareRestricted: boolean;
 }

@@ -85,6 +85,7 @@ import {
   EmployeeType,
   EmployeeTypeString,
   UrlActionType,
+  RoomsTypePrivate,
 } from "../enums";
 import {
   CategoryType,
@@ -593,7 +594,7 @@ export function convertLanguage(key: string) {
   }
 }
 
-export function convertToLanguage(key: string) {
+export function convertToLanguage(key?: string) {
   if (!key) return;
 
   const splittedKey = key.split("-");
@@ -959,8 +960,11 @@ export const toUrlParams = (
 
     const item = obj[key];
 
-    // added for double employeetype or room type
-    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
+    // added for double employeetype, room type or folder type
+    if (
+      Array.isArray(item) &&
+      (key === "employeetypes" || key === "type" || key === "folderType")
+    ) {
       for (let i = 0; i < item.length; i += 1) {
         str += `${key}=${encodeURIComponent(item[i])}`;
         if (i !== item.length - 1) {
@@ -1040,10 +1044,13 @@ export function tryParseArray(str: string) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).filter(
-  (item): item is number =>
-    typeof item === "number" && item !== RoomsType.AIRoom,
-);
+export const RoomsTypeValues = [
+  ...Object.values(RoomsType).filter(
+    (item): item is number =>
+      typeof item === "number" && item !== RoomsType.AIRoom,
+  ),
+  RoomsTypePrivate,
+];
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {
@@ -1499,9 +1506,29 @@ export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/rooms")) {
+  if (pathname.startsWith("/forms")) {
+    const formRoomRegexp = /(forms)\/(\d+)/;
+
+    if (formRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.Form;
+    } else if (pathname.indexOf("/recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("/favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("/trash") > -1) {
+      categoryType = CategoryType.Trash;
+    } else {
+      categoryType = CategoryType.Forms;
+    }
+  } else if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
+    } else if (pathname.indexOf("recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("trash") > -1) {
+      categoryType = CategoryType.Trash;
     } else if (pathname.indexOf("shared") > -1) {
       const regexp = /(rooms)\/shared\/(\d+)/;
 
@@ -1531,7 +1558,17 @@ export const getCategoryType = (location: { pathname: string }) => {
     const agentRegexp = /(ai-agents)\/(\d+)/;
     const chatRegexp = /(ai-agents)\/(\d+)\/chat/;
 
-    if (chatRegexp.test(location.pathname)) {
+    // Agent-scoped alias sections reuse the file recent/favorites/trash data
+    // (same as the global sections), but live under /ai-agents/* so the
+    // sidebar keeps them under AI Agents. Detect them before the agent-detail
+    // patterns.
+    if (pathname.startsWith("/ai-agents/recent")) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.startsWith("/ai-agents/favorites")) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.startsWith("/ai-agents/trash")) {
+      categoryType = CategoryType.Trash;
+    } else if (chatRegexp.test(location.pathname)) {
       categoryType = CategoryType.Chat;
     } else if (agentRegexp.test(location.pathname)) {
       categoryType = CategoryType.AIAgent;

@@ -3,7 +3,7 @@
   "content": "Customization",
   "content_en_sha1_hash": "d7f0ac9e007291a6ccc21d036f4711505ad9d0b1",
   "created_at": "2025-05-19T21:30:51.004Z",
-  "updated_at": "2026-05-15T15:37:40.225Z",
+  "updated_at": "2026-07-07T08:59:21.687Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the customization options for the portal's appearance and behavior.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
+      "line_number": 114,
+      "context": "}, [ready, setIsLoadedArticleBody]);\n \n const mapLabel = (tKey: string): string => {\n switch (tKey) {\n case \"Customization\":\n return t(\"Settings:Customization\");\n case \"ManagementCategorySecurity\":\n return t(\"Settings:ManagementCategorySecurity\");\n case \"Common:Backup\":\n return t(\"Common:Backup\");\n case \"Common:RestoreBackup\":",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization.js",
       "line_number": 70,
@@ -20,7 +26,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 202,
-      "context": "const mapKeys = (tKey) => {\n switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");",
+      "context": "const mapKeys = (tKey) => {\n switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"Common:SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");",
       "module": "/packages/client"
     },
     {
@@ -167,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

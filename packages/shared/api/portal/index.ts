@@ -45,6 +45,7 @@ import {
   TPaymentQuota,
   TPortal,
   TPortalTariff,
+  TPortalWalletService,
   TRestoreProgress,
   TLicenseQuota,
 } from "./types";
@@ -370,6 +371,16 @@ export async function getPortalTariff(refresh = false, signal?: AbortSignal) {
   return res;
 }
 
+export async function getWalletServices(signal?: AbortSignal) {
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/walletservices",
+    signal,
+  })) as TPortalWalletService[] | null;
+
+  return res;
+}
+
 export async function getPaymentAccount(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
@@ -437,6 +448,20 @@ export function getCurrencies() {
 
 export function getPaymentTariff() {
   return request({ method: "get", url: "/portal/payment/tariff" });
+}
+
+export async function getWalletBalance(
+  refresh?: boolean,
+  signal?: AbortSignal,
+) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
+    method: "get",
+    url: `/portal/payment/customer/balance`,
+    params,
+    signal,
+  }) as TBalance;
 }
 
 export async function getServiceQuotaBalance(

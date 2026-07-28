@@ -108,7 +108,7 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToEditor,
     },
     {
-      title: t("Viewer"),
+      title: t("Common:Viewer"),
       description: t("ViewerDescription"),
       image: theme.isBase ? ViewerImg : ViewerImgDark,
       handleOnClick: navigateToViewer,
@@ -214,7 +214,6 @@ export default inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "CreateEditRoomDialog",
     "Common",
   ])(observer(PortalIntegration)),

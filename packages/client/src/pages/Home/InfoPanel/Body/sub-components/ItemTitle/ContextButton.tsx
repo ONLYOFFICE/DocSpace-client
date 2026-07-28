@@ -39,6 +39,7 @@ import { inject, observer } from "mobx-react";
 
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { isMobile } from "@docspace/shared/utils";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import {
@@ -64,6 +65,9 @@ type RoomsContextBtnProps = {
   getItemContextOptionsActions?: ContextOptionsStore["getFilesContextOptions"];
 
   getIcon?: FilesSettingsStore["getIcon"];
+  externalShareApplyToRooms?: boolean;
+  blockExistingLinksOnRestrict?: boolean;
+  hasExternalLinks?: boolean;
 };
 
 const RoomsContextBtn = ({
@@ -71,6 +75,9 @@ const RoomsContextBtn = ({
 
   getItemContextOptionsActions,
   getIcon,
+  externalShareApplyToRooms,
+  blockExistingLinksOnRestrict,
+  hasExternalLinks,
 }: RoomsContextBtnProps) => {
   const { t } = useTranslation([
     "Files",
@@ -79,6 +86,8 @@ const RoomsContextBtn = ({
     "InfoPanel",
   ]);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
+
+  const resolvedTitle = useResolvedFileTitle(selection);
 
   const onContextMenu = (e: React.MouseEvent) => {
     if (!contextMenuRef?.current?.menuRef.current)
@@ -96,7 +105,14 @@ const RoomsContextBtn = ({
     if (!selection) return undefined;
 
     const isRoom = "isRoom" in selection && selection.isRoom;
-    const badgeUrl = isRoom ? getRoomBadgeUrl(selection) : null;
+    const badgeUrl = isRoom
+      ? getRoomBadgeUrl(
+          selection,
+          12,
+          externalShareApplyToRooms && blockExistingLinksOnRestrict,
+          hasExternalLinks,
+        )
+      : null;
 
     const isFile = "isFile" in selection && selection.isFile;
 
@@ -112,8 +128,16 @@ const RoomsContextBtn = ({
         )
       : "";
 
+    const badgeIconColor =
+      externalShareApplyToRooms &&
+      blockExistingLinksOnRestrict &&
+      hasExternalLinks &&
+      badgeUrl
+        ? "var(--info-panel-link-blocked)"
+        : undefined;
+
     return {
-      title: selection.title || "",
+      title: resolvedTitle || selection.title || "",
       icon:
         "icon" in selection ? (selection.icon as string) || iconUrl || "" : "",
       original: "logo" in selection ? selection.logo?.original : "",
@@ -128,8 +152,9 @@ const RoomsContextBtn = ({
             : selection.logo.cover
           : undefined,
       badgeUrl: badgeUrl ?? undefined,
+      badgeIconColor,
     };
-  }, [selection]);
+  }, [selection, resolvedTitle, externalShareApplyToRooms, hasExternalLinks]);
 
   const onHideContextMenu = () => {
     // Callback is called when the context menu is closed.
@@ -161,6 +186,7 @@ const RoomsContextBtn = ({
         ignoreChangeView={isMobile()}
         header={contextMenuHeader}
         badgeUrl={contextMenuHeader?.badgeUrl}
+        badgeIconColor={contextMenuHeader?.badgeIconColor}
         onHide={onHideContextMenu}
       />
     </div>
@@ -168,9 +194,12 @@ const RoomsContextBtn = ({
 };
 
 export default inject(
-  ({ contextOptionsStore, filesSettingsStore }: TStore) => ({
+  ({ contextOptionsStore, filesSettingsStore, publicRoomStore }: TStore) => ({
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
+    externalShareApplyToRooms: filesSettingsStore.externalShareApplyToRooms,
+    blockExistingLinksOnRestrict:
+      filesSettingsStore.blockExistingLinksOnRestrict,
+    hasExternalLinks: publicRoomStore.hasExternalLinks,
   }),
 )(observer(RoomsContextBtn));
-

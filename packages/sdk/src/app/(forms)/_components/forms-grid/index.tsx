@@ -63,7 +63,9 @@ type FormsGridProps = {
 
 const FormsGrid = ({ filesSettings, fetchMore }: FormsGridProps) => {
   const formsListStore = useFormsListStore();
-  const { items, folders, hasMore, isLoading } = formsListStore;
+  const { hasMore, isLoading } = formsListStore;
+  const items = formsListStore.filteredItems;
+  const folders = formsListStore.filteredFolders;
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
   const {

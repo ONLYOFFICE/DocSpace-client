@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-05-15T15:37:40.167Z",
+  "updated_at": "2026-07-27T13:07:50.591Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/attach-dialog.tsx",
+      "line_number": 162,
+      "context": "getIsDisabled={getIsDisabled}\n currentFolderId=\"\"\n rootFolderType={FolderType.USER}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SelectAction\", { defaultValue: \"Select\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 527,
+      "line_number": 544,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
       "module": "/libs/ui-kit"
     },
@@ -43,7 +49,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 338,
+      "line_number": 341,
       "context": "{...withAside}\n withPadding={withPadding}\n onSelect={onSelect}\n items={sortedItems}\n selectedItems={selectedItems}\n submitButtonLabel={submitButtonLabel || t(\"SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={\n isBase ? <EmptyScreenRoomsLight /> : <EmptyScreenRoomsDark />\n }",
       "module": "/libs/ui-kit"
     },
@@ -73,31 +79,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1265,
+      "line_number": 1326,
       "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const ownerOptions = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1265,
+      "line_number": 1326,
       "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const ownerOptions = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 300,
+      "line_number": 305,
       "context": "<ComboBox\n options={items}\n showDisabledItems\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as KnowledgeType)",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
-      "line_number": 253,
-      "context": "<ComboBox\n options={items}\n showDisabledItems\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as WebSearchType)",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 239,
+      "line_number": 244,
       "context": "key=\"select-default-template-dialog\"\n filterParam={filterParam}\n isPanelVisible={isSelectorVisible}\n onSelectFile={(file) => onSelectFile(file as TFile)}\n onClose={() => setIsSelectorVisible(false)}\n acceptButtonLabel={t(\"Common:SelectAction\")}\n isMultiSelect={false}\n withRecentTreeFolder\n withFavoritesTreeFolder\n withAIAgentsTreeFolder\n openRoot",
       "module": "/packages/client"
     },
@@ -115,13 +115,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 746,
+      "line_number": 748,
       "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 746,
+      "line_number": 748,
       "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
@@ -145,14 +145,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SelectTextInput.js",
-      "line_number": 64,
-      "context": "<>\n <Label className=\"label\" text={t(\"SelectButtonText\")} />\n <TextInput\n scale\n onChange={onChangeAcceptLabel}\n placeholder={t(\"Common:SelectAction\")}\n value={value}\n tabIndex={7}\n testId=\"select_text_input\"\n />\n </>",
+      "line_number": 65,
+      "context": "<Label className=\"label\" text={t(\"SelectButtonText\")} />\n <TextInput\n scale\n name=\"select_button_text\"\n onChange={onChangeAcceptLabel}\n placeholder={t(\"Common:SelectAction\")}\n value={value}\n tabIndex={7}\n testId=\"select_text_input\"\n />\n </>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2140,
-      "context": "const optionsModel = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => this.onSelect(item),\n disabled: false,\n },\n withOpen && {",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 336,
+      "context": "const optionsModel: (TContextOption | false)[] = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => self.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },
     {
@@ -166,11 +166,77 @@
       "line_number": 63,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 279,
+      "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\", { defaultValue: \"Select\" }),\n });\n }\n \n const ownerOptions = [\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 279,
+      "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\", { defaultValue: \"Select\" }),\n });\n }\n \n const ownerOptions = [\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
+      "line_number": 168,
+      "context": "// 1. Select\n items.push({\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\", { defaultValue: \"Select\" }),\n icon: CheckBoxReactSvgUrl,\n onClick: () => listStore.toggleAgentSelection(agent),\n });\n \n // 2. Open",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
+      "line_number": 323,
+      "context": "<ComboBox\n options={items}\n showDisabledItems\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as KnowledgeType)",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/search/index.tsx",
+      "line_number": 275,
+      "context": "<ComboBox\n options={items}\n showDisabledItems\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as WebSearchType)",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/knowledge-upload-selector-dialog/index.tsx",
+      "line_number": 195,
+      "context": "disabledItems={[]}\n // FilesSelectorFilterTypes is a `const enum` and the SDK runs with\n // `isolatedModules`, so SWC can't inline its value — passing the\n // string literal directly avoids a runtime import failure.\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SelectAction\", { defaultValue: \"Select\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
+      "line_number": 364,
+      "context": "withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterInput={false}\n withFooterCheckbox={false}\n submitButtonLabel={t(\"Common:SelectAction\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n descriptionText=\"\"",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 78,
+      "line_number": 188,
       "context": "const getSelectItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(i),\n disabled: false,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 269,
+      "context": "if (!isCollaborator && !isVisitor) {\n ownerOptions.push({\n id: \"filter_owner-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const subjectOptions: unknown[] = [\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 269,
+      "context": "if (!isCollaborator && !isVisitor) {\n ownerOptions.push({\n id: \"filter_owner-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const subjectOptions: unknown[] = [\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 221,
+      "context": "if (isArchive) {\n return [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 221,
+      "context": "if (isArchive) {\n return [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(item),\n },\n {\n id: \"option_open\",",
       "module": "/packages/sdk"
     },
     {
@@ -205,7 +271,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/selector/index.tsx",
-      "line_number": 148,
+      "line_number": 159,
       "context": "filter={filter}\n withBlur={false}\n roomId={item.id}\n withoutBackground={false}\n onClose={onClose}\n submitButtonLabel={t(\"Common:SelectAction\")}\n disableSubmitButton={false}\n onSubmit={handleSubmit}\n targetEntityType={targetEntityType}\n data-test-id=\"share_to_people_selector\"\n disabledInvitedText={t(\"Common:Shared\")}",
       "module": "/packages/shared"
     },

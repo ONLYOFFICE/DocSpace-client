@@ -36,7 +36,15 @@
 import { type Plugin } from "vite";
 import path from "path";
 import fs from "fs";
+import crypto from "crypto";
 import { rootDir } from "../utils";
+
+// The client owns most namespaces; the repo-root public holds the shared ones
+// (Common, etc.). Both feed the combined bundle and its hash.
+const localeSrcRoots = () => [
+  path.resolve(rootDir, "public/locales"),
+  path.resolve(rootDir, "../../public/locales"),
+];
 
 // ---------------------------------------------------------------------------
 // Custom plugin: copy and minify locale JSON files to dist/ (production build)
@@ -61,11 +69,82 @@ function copyAndMinifyLocales(src: string, dest: string) {
   }
 }
 
+// Mirror getLanguage() so combined files are keyed exactly like the runtime
+// lookup (en-US/en-GB → en, xx-Xx → xx).
+function normalizeLanguage(lng: string) {
+  let language = lng === "en-US" || lng === "en-GB" ? "en" : lng;
+  const splitted = lng.split("-");
+  if (splitted.length === 2 && splitted[0] === splitted[1].toLowerCase()) {
+    [language] = splitted;
+  }
+  return language;
+}
+
+// Merge every namespace of a language (from BOTH locale roots — the client's
+// own namespaces and the shared root that holds Common) into a single
+// serialized bundle string `{ [namespace]: translations }`. Loading this one
+// file gives i18next every namespace in a single request instead of ~15+.
+// Returns the exact JSON string per language so the emitted `_combined.json`
+// and its ?hash= cache-buster are derived from identical content.
+function buildLanguageBundleJson(srcRoots: string[]): Map<string, string> {
+  const byLanguage = new Map<string, Record<string, unknown>>();
+
+  for (const root of srcRoots) {
+    if (!fs.existsSync(root)) continue;
+    for (const dir of fs.readdirSync(root, { withFileTypes: true })) {
+      if (!dir.isDirectory() || dir.name.startsWith(".")) continue;
+      const language = normalizeLanguage(dir.name);
+      const bundle = byLanguage.get(language) ?? {};
+      const langDir = path.join(root, dir.name);
+      for (const file of fs.readdirSync(langDir)) {
+        if (!file.endsWith(".json") || file === "_combined.json") continue;
+        const ns = file.slice(0, -".json".length);
+        try {
+          bundle[ns] = JSON.parse(
+            fs.readFileSync(path.join(langDir, file), "utf-8"),
+          );
+        } catch {
+          // skip malformed namespace, keep the rest of the bundle usable
+        }
+      }
+      byLanguage.set(language, bundle);
+    }
+  }
+
+  const result = new Map<string, string>();
+  for (const [language, bundle] of byLanguage) {
+    result.set(language, JSON.stringify(bundle));
+  }
+  return result;
+}
+
+function buildCombinedLocales(srcRoots: string[], destDir: string) {
+  for (const [language, json] of buildLanguageBundleJson(srcRoots)) {
+    const langDestDir = path.join(destDir, language);
+    fs.mkdirSync(langDestDir, { recursive: true });
+    fs.writeFileSync(path.join(langDestDir, "_combined.json"), json, "utf-8");
+  }
+}
+
+// Per-language md5 of the combined bundle, baked into the client at build time
+// (Vite `define`) and appended as `?hash=` in loadCombinedLanguagePath. The
+// `_combined.json` URL is fixed and served `immutable, max-age=31536000`, so
+// without this cache-buster a browser would keep stale translations forever.
+// Mirrors the per-namespace ?hash= emitted by the static-url plugin.
+export function computeCombinedLocaleHashes(): Record<string, string> {
+  const hashes: Record<string, string> = {};
+  for (const [language, json] of buildLanguageBundleJson(localeSrcRoots())) {
+    hashes[language] = crypto.createHash("md5").update(json).digest("hex");
+  }
+  return hashes;
+}
+
 export const copyLocalesPlugin = (): Plugin => ({
   name: "copy-locales",
   closeBundle() {
-    const srcDir = path.resolve(rootDir, "public/locales");
+    const [clientLocales] = localeSrcRoots();
     const destDir = path.resolve(rootDir, "dist/locales");
-    copyAndMinifyLocales(srcDir, destDir);
+    copyAndMinifyLocales(clientLocales, destDir);
+    buildCombinedLocales(localeSrcRoots(), destDir);
   },
 });

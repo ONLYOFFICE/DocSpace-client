@@ -66,6 +66,7 @@ export const TagManagement: FC<TagManagementProps> = ({
   className,
   access,
   roomName,
+  onTagsChanged,
 }) => {
   const {
     isModalOpen,
@@ -148,7 +149,7 @@ export const TagManagement: FC<TagManagementProps> = ({
           <Trans
             t={t}
             i18nKey="RemoveTag"
-            ns="TagManagement"
+            ns="Common"
             components={{
               1: <strong key="removed-tag" />,
             }}
@@ -203,6 +204,7 @@ export const TagManagement: FC<TagManagementProps> = ({
           onSelectTag={onSelectTag}
           onEditTag={confirmEditTag}
           onDeleteTag={confirmDeleteTag}
+          onTagsChanged={onTagsChanged}
         />
       ) : null}
 

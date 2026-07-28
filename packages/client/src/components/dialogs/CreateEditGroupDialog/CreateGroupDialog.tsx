@@ -66,11 +66,7 @@ const CreateGroupDialog = ({
   onClose,
   currentUserId,
 }: CreateGroupDialogProps) => {
-  const { t } = useTranslation([
-    "Common",
-    "PeopleTranslations",
-    "InviteDialog",
-  ]);
+  const { t } = useTranslation(["Common", "PeopleTranslations"]);
 
   const [groupParams, setGroupParams] = useState<GroupParams>({
     groupName: "",
@@ -128,7 +124,7 @@ const CreateGroupDialog = ({
     });
 
     if (showErrorWasSelected) {
-      toastr.warning(t("InviteDialog:UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     }
 
     setGroupMembers(resultGroupMembers);

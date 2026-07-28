@@ -33,8 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect } from "react";
-import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
+import React, { useEffect, useMemo } from "react";
+import {
+  now,
+  parseToDateTime,
+  formatDate,
+  formatDateLocalized,
+  isBefore,
+  isAfter,
+} from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -45,12 +52,30 @@ import SocketHelper, {
   SocketEvents,
   SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
+import {
+  PORTAL_BASE_THEME_ID,
+  PORTAL_DARK_THEME_ID,
+} from "@docspace/ui-kit/ai-agent/providers/themes";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
+import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+
+import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { updateTempContent } from "@docspace/shared/utils/common";
-import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import {
+  AnalyticsEvents,
+  DeviceType,
+  FolderType,
+  IndexedDBStores,
+  InfoPanelEvents,
+  SearchArea,
+} from "@docspace/shared/enums";
+import { setFileView } from "SRC_DIR/helpers/info-panel";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
@@ -108,6 +133,15 @@ const Shell = ({ page = "home", ...rest }) => {
     isGuest,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
+    agentEntityId,
+    isInsideAgentRoom,
+    getAgentRoomId,
+    openResultFile,
+    closeEditorPanel,
+    currentClientView,
+    selectedFolderType,
+    isPrivacyFolder,
+    isAIReady,
   } = rest;
 
   useCreateFileError({
@@ -345,7 +379,9 @@ const Shell = ({ page = "home", ...rest }) => {
 
     // lastCampaignStr = campaignStr;
 
-    const targetDate = to ? formatDateLocalized(to, "DATE_MED", { locale: language }) : "";
+    const targetDate = to
+      ? formatDateLocalized(to, "DATE_MED", { locale: language })
+      : "";
 
     const barConfig = {
       parentElementId: "main-bar",
@@ -359,7 +395,10 @@ const Shell = ({ page = "home", ...rest }) => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
         SnackBar.close();
-        localStorage.setItem(LS_CAMPAIGN_DATE, to ? formatDate(to, DATE_FORMAT) : "");
+        localStorage.setItem(
+          LS_CAMPAIGN_DATE,
+          to ? formatDate(to, DATE_FORMAT) : "",
+        );
       },
       opacity: 1,
       onLoad: () => {
@@ -472,12 +511,17 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userTheme]);
 
   useEffect(() => {
-    if (
-      isLoaded &&
-      localStorage.getItem("showSocialAuthWelcomeDialog") === "true"
-    ) {
-      localStorage.removeItem("showSocialAuthWelcomeDialog");
+    if (isLoaded && localStorage.getItem("socialAuthWelcomeBar") === "true") {
       setSocialAuthWelcomeDialogVisible(true);
+
+      if (localStorage.getItem("portalCreatedEventSent") !== "true") {
+        localStorage.setItem("portalCreatedEventSent", "true");
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.PortalCreated,
+        });
+      }
     }
   }, [isLoaded]);
 
@@ -527,6 +571,26 @@ const Shell = ({ page = "home", ...rest }) => {
     );
   const location = useLocation();
 
+  // Single source of truth for AI chat availability: computed once here in the
+  // host and handed to AiAgentProviders, which shares it with descendants
+  // (Home page, section header) via context / `useIsAiChatAvailable()`. The
+  // chat is offered only on file/room/document views — never on contacts,
+  // profile, settings, the embedded chat view, or the Knowledge /
+  // ResultStorage system folders.
+  const isSettingsPage =
+    location.pathname.includes("settings") &&
+    !location.pathname.includes("settings/plugins");
+
+  const isAiChatAvailable =
+    currentClientView !== "users" &&
+    currentClientView !== "groups" &&
+    currentClientView !== "profile" &&
+    currentClientView !== "chat" &&
+    !isSettingsPage &&
+    !isPrivacyFolder &&
+    selectedFolderType !== FolderType.Knowledge &&
+    selectedFolderType !== FolderType.ResultStorage;
+
   const withoutNavMenu =
     isEditor ||
     pagesWithoutNavMenu ||
@@ -534,29 +598,68 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
-  return (
-    <SectionNavigationProvider>
-      <Layout>
-        {toast}
-        <RootTooltip />
-        {isMobileOnly && !isFrame ? (
+  const layout = (
+    <Layout>
+      {toast}
+      <RootTooltip />
+      {isMobileOnly && !isFrame ? (
+        <ReactSmartBanner t={t} ready={ready} />
+      ) : null}
+      {withoutNavMenu ? null : <NavMenu />}
+      <IndicatorLoader />
+      <ScrollToTop />
+      <DialogsWrapper t={t} />
+
+      <Main isDesktop={isDesktop}>
+        {!isMobileOnly && !isFrame ? (
           <ReactSmartBanner t={t} ready={ready} />
         ) : null}
-        {withoutNavMenu ? null : <NavMenu />}
-        <IndicatorLoader />
-        <ScrollToTop />
-        <DialogsWrapper t={t} />
+        {barTypeInFrame !== "none" ? <MainBar /> : null}
+        <div className="main-container">
+          <Outlet />
+        </div>
+      </Main>
+    </Layout>
+  );
 
-        <Main isDesktop={isDesktop}>
-          {!isMobileOnly && !isFrame ? (
-            <ReactSmartBanner t={t} ready={ready} />
-          ) : null}
-          {barTypeInFrame !== "none" ? <MainBar /> : null}
-          <div className="main-container">
-            <Outlet />
-          </div>
-        </Main>
-      </Layout>
+  const composerHeader = useMemo(() => <AIActivationBanner />, []);
+
+  // AI chat host callbacks. Web Search settings save on an explicit button
+  // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
+  const aiChatCallbacks = useMemo(
+    () => ({
+      onWebSearchSaved: () =>
+        toastr.success(t("Common:ChangesSavedSuccessfully")),
+    }),
+    [t],
+  );
+
+  // Defer mounting AiAgentProviders until authStore is loaded — otherwise
+  // `standalone` flips after the first render, the providers' useMemo
+  // rebuilds the chat stores, and StoresHydrator refires every fetch
+  // (profiles/threads/servers/web-search/knowledge/...) a second time.
+  return (
+    <SectionNavigationProvider>
+      {isLoaded ? (
+        <AiAgentProviders
+          locale={language}
+          theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
+          isStandalone={standalone}
+          isAvailable={isAiChatAvailable}
+          callbacks={aiChatCallbacks}
+          entityId={agentEntityId}
+          hideProfilePicker={isInsideAgentRoom}
+          getAgentRoomId={getAgentRoomId}
+          openResultFile={openResultFile}
+          closeEditorPanel={closeEditorPanel}
+          composerHeader={standalone ? undefined : composerHeader}
+          composerDisabled={standalone ? undefined : !isAIReady}
+        >
+          {layout}
+        </AiAgentProviders>
+      ) : (
+        layout
+      )}
     </SectionNavigationProvider>
   );
 };
@@ -570,6 +673,10 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
+    selectedFolderStore,
+    treeFoldersStore,
+    aiRoomStore,
+    paymentStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -678,6 +785,46 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      isAIReady: paymentStore.isAIReady,
+      currentClientView: clientLoadingStore.currentClientView,
+      selectedFolderType: selectedFolderStore.type,
+      isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
+      // Scope the chat to the current location: inside any room (including
+      // its subfolders) the room id wins, elsewhere the currently selected
+      // folder id is used. Only when nothing is selected yet does the chat
+      // stay unscoped (entityId === undefined).
+      agentEntityId:
+        selectedFolderStore.rootRoomId || selectedFolderStore.id
+          ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
+          : undefined,
+      // The composer model picker is hidden only where the model is fixed
+      // by the agent's assigned profile — inside AI agent rooms.
+      isInsideAgentRoom: selectedFolderStore.isAIRoom,
+      getAgentRoomId: () => {
+        const id = selectedFolderStore.rootRoomId;
+        return id ? Number(id) : null;
+      },
+      openResultFile: (fileId) => {
+        if (!selectedFolderStore.isAIRoom) return;
+        const roomId = selectedFolderStore.rootRoomId || selectedFolderStore.id;
+        if (!roomId) return;
+
+        aiRoomStore.setCurrentTab("result");
+        aiRoomStore.setSelectedResultFileId(Number(fileId));
+
+        const filesFilter = FilesFilter.getDefault();
+        filesFilter.folder = String(roomId);
+        filesFilter.searchArea = SearchArea.ResultStorage;
+        const path = getCategoryUrl(CategoryType.AIAgent, roomId);
+        clientLoadingStore.setIsSectionBodyLoading(true, false);
+        window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
+
+        window.dispatchEvent(new CustomEvent(InfoPanelEvents.showInfoPanel));
+        setFileView("info_ai_chat");
+      },
+      closeEditorPanel: () => {
+        aiRoomStore.setSelectedResultFileId(null);
+      },
     };
   },
 )(observer(Shell));
@@ -689,3 +836,4 @@ const Root = () => (
 );
 
 export default Root;
+

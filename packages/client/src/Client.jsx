@@ -53,38 +53,28 @@ import {
   ArticleMainButtonContent,
 } from "./components/Article";
 import ArticleWrapper from "./components/ArticleWrapper";
+import ClientArticleSidebar from "./components/ClientArticleSidebar";
+import AccountsSidebar from "./components/AccountsSidebar";
+import DeveloperToolsSidebar from "./components/DeveloperToolsSidebar";
+import BillingSidebar from "./components/BillingSidebar";
+import { SdkFrameProvider } from "./components/SdkFrameHost/SdkFrameContext";
+import SdkFrameHost from "./components/SdkFrameHost/SdkFrameHost";
+import sdkHostStyles from "./components/SdkFrameHost/SdkFrameHost.module.scss";
 
 const ClientArticle = React.memo(
   ({
-    withMainButton,
     showArticleLoader,
     isInfoPanelVisible,
     isAccountsArticle,
     isDeveloperToolsArticle,
+    isBillingArticle,
+    withMainButton,
   }) => {
-    return (
-      <ArticleWrapper
-        isInfoPanelVisible={isInfoPanelVisible}
-        withMainButton={withMainButton}
-        showArticleLoader={showArticleLoader && !isDeveloperToolsArticle}
-        showBackButton={isAccountsArticle || isDeveloperToolsArticle}
-      >
-        <Article.Header>
-          <ArticleHeaderContent />
-        </Article.Header>
+    if (isAccountsArticle) return <AccountsSidebar />;
+    if (isDeveloperToolsArticle) return <DeveloperToolsSidebar />;
+    if (isBillingArticle) return <BillingSidebar />;
 
-        <Article.MainButton>
-          <ArticleMainButtonContent />
-        </Article.MainButton>
-
-        <Article.Body>
-          <ArticleBodyContent
-            isAccountsArticle={isAccountsArticle}
-            isDeveloperToolsArticle={isDeveloperToolsArticle}
-          />
-        </Article.Body>
-      </ArticleWrapper>
-    );
+    return <ClientArticleSidebar />;
   },
 );
 
@@ -97,8 +87,9 @@ const ClientContent = (props) => {
     isAuthenticated,
     user,
     isEncryption,
-    encryptionKeys,
-    setEncryptionKeys,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
     showMenu,
@@ -134,26 +125,28 @@ const ClientContent = (props) => {
       regDesktop(
         user,
         isEncryption,
-        encryptionKeys,
-        setEncryptionKeys,
+        legacyEncryptionKeys,
+        setLegacyEncryptionKeys,
+        updateLegacyEncryptionKeys,
         isEditor,
         null,
         t,
       );
-      //   console.log(
-      //     "%c%s",
-      //     "color: green; font: 1.2em bold;",
-      //     "Current keys is: ",
-      //     encryptionKeys
-      //   );
+      console.log(
+        "%c%s",
+        "color: green; font: 1.2em bold;",
+        "Current keys is: ",
+        legacyEncryptionKeys,
+      );
     }
   }, [
     t,
     isAuthenticated,
     user,
     isEncryption,
-    encryptionKeys,
-    setEncryptionKeys,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
   ]);
@@ -172,8 +165,16 @@ const ClientContent = (props) => {
       location.state?.fromUrl?.includes("/accounts"));
   const isDeveloperToolsArticle =
     location.pathname.includes("/developer-tools");
+  const isBillingArticle = location.pathname.startsWith("/billing");
+  const isNewArticle =
+    location.pathname.startsWith("/ai-files") ||
+    location.pathname.startsWith("/ai-rooms") ||
+    location.pathname.startsWith("/ai-forms") ||
+    location.pathname.startsWith("/agents") ||
+    location.pathname.startsWith("/ai-arbiter") ||
+    location.pathname.startsWith("/dashboard");
   const withMainButton =
-    isAccountsArticle || isDeveloperToolsArticle
+    isAccountsArticle || isDeveloperToolsArticle || isBillingArticle
       ? currentDeviceType !== DeviceType.desktop
       : true;
 
@@ -181,19 +182,7 @@ const ClientContent = (props) => {
     <>
       <FilesPanels />
       <GlobalEvents />
-      {isFrame ? (
-        showMenu && (
-          <ClientArticle
-            isInfoPanelVisible={isInfoPanelVisible}
-            withMainButton={withMainButton}
-            setIsHeaderLoading={setIsHeaderLoading}
-            setIsFilterLoading={setIsFilterLoading}
-            showArticleLoader={showArticleLoader}
-            isAccountsArticle={isAccountsArticle}
-            isDeveloperToolsArticle={isDeveloperToolsArticle}
-          />
-        )
-      ) : (
+      {(!isFrame || showMenu) && (
         <ClientArticle
           isInfoPanelVisible={isInfoPanelVisible}
           withMainButton={withMainButton}
@@ -202,9 +191,22 @@ const ClientContent = (props) => {
           showArticleLoader={showArticleLoader}
           isAccountsArticle={isAccountsArticle}
           isDeveloperToolsArticle={isDeveloperToolsArticle}
+          isBillingArticle={isBillingArticle}
+          forceNewArticle={!isFrame && isNewArticle}
         />
       )}
-      <Outlet />
+      {isNewArticle ? (
+        <SdkFrameProvider>
+          <div className={sdkHostStyles.contentCell}>
+            <SdkFrameHost />
+            <div className={sdkHostStyles.outletLayer}>
+              <Outlet />
+            </div>
+          </div>
+        </SdkFrameProvider>
+      ) : (
+        <Outlet />
+      )}
     </>
   );
 };
@@ -223,8 +225,9 @@ export const Client = inject(
       frameConfig,
       isFrame,
       isDesktopClient,
-      encryptionKeys,
-      setEncryptionKeys,
+      legacyEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       isEncryptionSupport,
       enablePlugins,
       isDesktopClientInit,
@@ -256,7 +259,7 @@ export const Client = inject(
       showMenu: frameConfig?.showMenu,
       user: userStore.user,
       isAuthenticated: authStore.isAuthenticated,
-      encryptionKeys,
+      legacyEncryptionKeys,
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
@@ -264,7 +267,8 @@ export const Client = inject(
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
-      setEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];
@@ -277,3 +281,4 @@ export const Client = inject(
     };
   },
 )(withTranslation("Common")(observer(ClientContent)));
+

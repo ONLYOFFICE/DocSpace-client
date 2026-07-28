@@ -3,7 +3,7 @@
   "content": "Metadata file not transferred",
   "content_en_sha1_hash": "cda5ccce62dbf3d4f7635fc868380764681ac8cb",
   "created_at": "2025-05-19T21:30:50.110Z",
-  "updated_at": "2026-05-15T14:00:06.900Z",
+  "updated_at": "2026-07-07T08:59:21.928Z",
   "comment": {
     "text": "Toast message. This error appears when the system fails to load metadata, likely during an SSO configuration process.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 364,
-      "context": "this.setFieldsFromMetaData(response.data.meta);\n this.hideErrors();\n this.isLoadingXml = false;\n } catch (err) {\n this.isLoadingXml = false;\n toastr.error(t(\"MetadataLoadError\"));\n console.error(err);\n }\n };\n \n uploadXml = async (file) => {",
+      "file_path": "/packages/client/src/store/SsoFormStore.ts",
+      "line_number": 400,
+      "context": "this.setFieldsFromMetaData(response.data.meta);\n this.hideErrors();\n this.isLoadingXml = false;\n } catch (err) {\n this.isLoadingXml = false;\n toastr.error(t(\"MetadataLoadError\"));\n console.error(err);\n }\n };\n \n uploadXml = async (file: File) => {",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

@@ -32,9 +32,12 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+import path from "path";
+
 import { redirect } from "next/navigation";
 import { headers, cookies } from "next/headers";
 
+import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
@@ -46,8 +49,14 @@ import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
-
 import "@/styles/globals.scss";
+
+const DOCEDITOR_NAMESPACES = [
+  "Editor",
+  "DeepLink",
+  "ChangeLinkTypeDialog",
+  "CompletedForm",
+] as const;
 
 export default async function RootLayout({
   children,
@@ -98,6 +107,12 @@ export default async function RootLayout({
     redirect(`${baseURL}/${settings}`);
   }
 
+  const translations = await loadTranslationsForLocale(locale || "en", {
+    namespaces: DOCEDITOR_NAMESPACES,
+    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+  });
+
   return (
     <html lang="en" translate="no">
       <head>
@@ -128,6 +143,7 @@ export default async function RootLayout({
             systemTheme,
             colorTheme,
             locale,
+            translations,
           }}
         >
           {children}

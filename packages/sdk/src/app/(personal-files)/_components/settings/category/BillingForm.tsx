@@ -44,8 +44,8 @@ import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
 import AdditionalStoragePage from "@docspace/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { useDocsUserStore } from "../../../_store/DocsUserStore";
 
 import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
 import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
@@ -70,31 +70,34 @@ const TAB_DEFS: {
 }[] = [
   {
     id: "wallet",
-    titleKey: "Wallet",
-    tKey: "BillingWalletCardDesc",
+    titleKey: "Common:Wallet",
+    tKey: "Common:BillingWalletCardDesc",
     iconClass: cardStyles.billingIconWallet,
     icon: <WalletIcon />,
   },
   {
     id: "storage",
-    titleKey: "AdditionalDiskStorage",
-    tKey: "BillingAdditionalStorageCardDesc",
+    titleKey: "Common:AdditionalDiskStorage",
+    tKey: "Common:BillingAdditionalStorageCardDesc",
     iconClass: cardStyles.billingIconStorage,
     icon: <StorageIcon />,
   },
   {
     id: "payment-method",
-    titleKey: "PaymentMethod",
-    tKey: "BillingPaymentMethodCardDesc",
+    titleKey: "Common:PaymentMethod",
+    tKey: "Common:BillingPaymentMethodCardDesc",
     iconClass: cardStyles.billingIconPayment,
     icon: <CardIcon />,
     nativeIcon: true,
   },
 ];
 
-const BillingForm = () => {
+type BillingFormProps = {
+  user?: TUser | null;
+};
+
+const BillingForm = ({ user }: BillingFormProps) => {
   const { t, i18n } = useTranslation();
-  const { user } = useDocsUserStore();
   const [activeTab, setActiveTab] = React.useState<BillingTab>("wallet");
 
   const onOpenBilling = React.useCallback(() => {
@@ -133,7 +136,7 @@ const BillingForm = () => {
   return (
     <div className={styles.billingWrapper}>
       <Text fontSize="12px" lineHeight="16px" className={styles.billingNotice}>
-        {t("BillingPortalNotice")}{" "}
+        {t("Common:BillingPortalNotice")}{" "}
         <Link
           type={LinkType.action}
           fontSize="12px"
@@ -141,7 +144,7 @@ const BillingForm = () => {
           className={styles.billingPortalLink}
           onClick={onOpenBilling}
         >
-          {t("OpenPortalBilling")}
+          {t("Common:OpenPortalBilling")}
         </Link>
       </Text>
 

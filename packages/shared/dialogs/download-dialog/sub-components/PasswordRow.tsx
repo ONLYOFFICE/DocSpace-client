@@ -48,6 +48,7 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-button";
 import { SimulatePassword } from "../../../components/simulate-password";
+import { useResolvedFileTitle } from "../../../hooks/useResolvedFileTitle";
 
 import { isFile, type PasswordRowProps } from "../DownloadDialog.types";
 import styles from "../DownloadDialog.module.scss";
@@ -149,6 +150,8 @@ export const PasswordRow = ({
 
   const element = getItemIcon(item);
 
+  const resolvedTitle = useResolvedFileTitle(item);
+
   return (
     <div className={styles.downloadContent}>
       <div className={styles.downloadDialogRow}>
@@ -174,7 +177,7 @@ export const PasswordRow = ({
             dir="auto"
             truncate
           >
-            {item.title}
+            {resolvedTitle}
           </Text>
         </div>
         <div className={styles.downloadDialogActions}>

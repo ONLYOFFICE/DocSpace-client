@@ -147,6 +147,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
+  user-select: none;
   font-weight: 600;
   font-size: 13px;
   margin-inline-start: 12px;
@@ -159,8 +160,7 @@
 }
 
 .secondaryCell {
-  display: flex;
-  align-items: center;
+  display: block;
   overflow: hidden;
   color: var(--files-section-table-view-exst-color);
   font-size: 12px;
@@ -168,6 +168,54 @@
   text-overflow: ellipsis;
   flex-shrink: 1;
   min-width: 0;
+  margin-inline-end: 8px;
+}
+
+.badgesContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-inline-start: 8px;
+
+  :global(.badges) {
+    display: flex;
+    align-items: center;
+    margin-inline-end: 12px;
+  }
+
+  :global(.badges):last-child {
+    margin-inline-end: 0;
+  }
+
+  :global(.badge) {
+    cursor: pointer;
+    margin-inline-end: 8px;
+  }
+
+  :global(.badge-version) {
+    width: max-content;
+    margin-block: 0 -2px;
+    margin-inline: -2px 5px;
+
+    & > div {
+      padding-block: 0;
+      padding-inline: 4px 3.3px;
+
+      p {
+        letter-spacing: 0.5px;
+        font-size: 9px;
+        font-weight: 800;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  :global(.badge-new-version) {
+    width: max-content;
+  }
 }
 
 .quickButtonsContainer {
@@ -194,7 +242,43 @@
 
 // Last cell hosting quick buttons: allow badges to overflow
 .lastCell {
-  overflow: visible !important;
+  // overflow: visible !important;
   z-index: 1;
   position: relative;
+}
+
+.inlineBadges {
+  display: flex;
+  align-items: center;
+  margin-inline-start: 16px;
+
+  :global(.badges) {
+    display: flex;
+    align-items: center;
+  }
+
+  :global(.badge) {
+    cursor: pointer;
+    margin-inline-end: 8px;
+  }
+}
+
+.dragAndDropWrapper {
+  display: contents;
+}
+
+.isHighlight {
+  :global(.table-container_cell) {
+    animation: Highlight 2s 1;
+  }
+}
+
+@keyframes Highlight {
+  0% {
+    background: var(--files-section-animation-color);
+  }
+
+  100% {
+    background: none;
+  }
 }

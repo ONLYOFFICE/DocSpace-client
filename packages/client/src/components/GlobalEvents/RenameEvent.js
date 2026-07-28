@@ -158,6 +158,7 @@ const RenameEvent = ({
 			t={t}
 			visible={eventDialogVisible}
 			title={t("Common:Rename")}
+			testIdPrefix="rename"
 			startValue={startValue}
 			onSave={onUpdate}
 			onCancel={onCancel}

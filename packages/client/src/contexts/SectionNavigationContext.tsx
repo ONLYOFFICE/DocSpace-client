@@ -43,12 +43,16 @@ const SECTION_PREFIXES = [
   "/portal-settings",
   "/developer-tools",
   "/accounts",
+  "/dashboard",
+  "/forms",
+  "/ai-files",
+  "/ai-forms",
+  "/ai-arbiter",
+  "/ai-rooms",
 ] as const;
 
 function getSectionPrefix(pathname: string): string {
-  const match = SECTION_PREFIXES.find((prefix) =>
-    pathname.startsWith(prefix),
-  );
+  const match = SECTION_PREFIXES.find((prefix) => pathname.startsWith(prefix));
   return match ?? "/";
 }
 
@@ -69,25 +73,36 @@ export const SectionNavigationProvider = ({
 
   const stackRef = useRef<string[]>([]);
   const prevSectionRef = useRef<string>(getSectionPrefix(location.pathname));
+  const prevPathRef = useRef<string>(location.pathname + location.search);
 
   useEffect(() => {
     const currentSection = getSectionPrefix(location.pathname);
 
     if (currentSection !== prevSectionRef.current) {
-      stackRef.current.push(prevSectionRef.current);
+      // Store the full previous path (not just the section prefix) so that
+      // "Back" returns to the exact page we left — e.g. a specific agent
+      // chat (/ai-agents/:id/chat) or the agents list (/ai-agents/filter),
+      // instead of collapsing every non-prefixed route to "/".
+      stackRef.current.push(prevPathRef.current);
       prevSectionRef.current = currentSection;
     }
-  }, [location.pathname]);
+
+    prevPathRef.current = location.pathname + location.search;
+  }, [location.pathname, location.search]);
 
   const navigateBack = () => {
     const prev = stackRef.current.pop();
 
-    if (prev) {
-      prevSectionRef.current = getSectionPrefix(prev);
-      navigate(prev);
-    } else {
-      navigate("/");
-    }
+    // When we have a recorded origin (the path we were on before entering the
+    // current section) return there. Otherwise — e.g. after a page reload or a
+    // direct deep-link into the section, when no boundary crossing was observed
+    // — fall back to the home section instead of `navigate(-1)`, which would
+    // step backwards through the in-section tree history one entry at a time.
+    const target = prev ?? "/";
+
+    prevSectionRef.current = getSectionPrefix(target);
+    prevPathRef.current = target;
+    navigate(target);
   };
 
   return (
@@ -108,3 +123,4 @@ export const useSectionNavigation = (): SectionNavigationContextValue => {
 
   return ctx;
 };
+

@@ -55,6 +55,7 @@ type InjectedProps = {
   isInited?: boolean;
   isBackupServiceOn?: boolean;
   isNotPaidPeriod?: boolean;
+  isCardLinkedToPortal?: boolean;
 };
 
 const Warning = ({
@@ -69,8 +70,9 @@ const Warning = ({
   isInited,
   isBackupServiceOn,
   isNotPaidPeriod,
+  isCardLinkedToPortal,
 }: InjectedProps) => {
-  const { t, ready } = useTranslation(["Services", "Common", "Payments"]);
+  const { t, ready } = useTranslation(["Common", "Payments"]);
   const { pathname } = useLocation();
   const [warningText, setWarningText] = React.useState<React.ReactNode>("");
 
@@ -137,7 +139,7 @@ const Warning = ({
         <Trans
           t={t}
           i18nKey="ContactToPayer"
-          ns="Services"
+          ns="Common"
           values={{ email: walletCustomerEmail }}
           components={{
             1: (
@@ -217,7 +219,8 @@ const Warning = ({
 
   if (
     (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
-    !isPayer
+    !isPayer &&
+    isCardLinkedToPortal
   ) {
     if (!isPayerInfoLoaded) return null;
 
@@ -261,6 +264,7 @@ export default inject(
       cardLinkedOnNonProfit,
       cardLinkedOnFreeTariff,
       isBackupServiceOn,
+      isCardLinkedToPortal,
     } = paymentStore;
     const { walletCustomerEmail, isNotPaidPeriod, isPayerInfoLoaded } =
       currentTariffStatusStore;
@@ -278,6 +282,7 @@ export default inject(
       isBackupServiceOn,
       maxFreeBackups,
       isNotPaidPeriod,
+      isCardLinkedToPortal,
     };
   },
 )(observer(Warning));

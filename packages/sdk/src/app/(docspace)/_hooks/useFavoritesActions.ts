@@ -36,6 +36,7 @@
 import { useCallback } from "react";
 
 import api from "@docspace/shared/api";
+import { removeSharedFolderOrFile } from "@docspace/shared/api/files";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -90,5 +91,25 @@ export default function useFavoritesActions({ t }: UseFavoritesActionsProps) {
     [t, filesListStore],
   );
 
-  return { markAsFavorite, removeFromFavorites, removeFromRecent };
+  const removeFromSharedWithMe = useCallback(
+    async (item: TFileItem | TFolderItem) => {
+      try {
+        const fileIds = item.isFolder ? [] : [item.id as number];
+        const folderIds = item.isFolder ? [item.id as number] : [];
+        await removeSharedFolderOrFile(folderIds, fileIds);
+        filesListStore.removeItem(item.id);
+        toastr.success(t("Common:RemovedFromList"));
+      } catch {
+        toastr.error(t("Common:UnexpectedError"));
+      }
+    },
+    [t, filesListStore],
+  );
+
+  return {
+    markAsFavorite,
+    removeFromFavorites,
+    removeFromRecent,
+    removeFromSharedWithMe,
+  };
 }

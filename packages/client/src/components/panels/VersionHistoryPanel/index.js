@@ -63,7 +63,8 @@ class PureVersionHistoryPanel extends React.Component {
   onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && this.onClose();
 
   render() {
-    const { visible, isLoading, versions, showProgressBar } = this.props;
+    const { visible, isLoading, versions, fileTitle, showProgressBar } =
+      this.props;
 
     return (
       <ModalDialog
@@ -73,9 +74,7 @@ class PureVersionHistoryPanel extends React.Component {
         displayType={ModalDialogType.aside}
         dataTestId="version_history_panel"
       >
-        <ModalDialog.Header>
-          {versions ? versions[0].title : ""}
-        </ModalDialog.Header>
+        <ModalDialog.Header>{versions ? fileTitle : ""}</ModalDialog.Header>
         <ModalDialog.Body data-testid="version_history_panel_body">
           <SectionBodyContent onClose={this.onClose} />
 
@@ -88,9 +87,7 @@ class PureVersionHistoryPanel extends React.Component {
   }
 }
 
-const VersionHistoryPanel = withTranslation("VersionHistory")(
-  PureVersionHistoryPanel,
-);
+const VersionHistoryPanel = withTranslation("Common")(PureVersionHistoryPanel);
 
 VersionHistoryPanel.propTypes = {
   fileId: PropTypes.string,
@@ -109,6 +106,7 @@ export default inject(
     const {
       fileId,
       versions,
+      fileTitle,
       setIsVerHistoryPanel,
       isVisible: visible,
       showProgressBar,
@@ -120,6 +118,7 @@ export default inject(
       isLoading,
       fileId,
       versions,
+      fileTitle,
       visible,
       showProgressBar,
 
@@ -128,3 +127,4 @@ export default inject(
     };
   },
 )(observer(VersionHistoryPanel));
+

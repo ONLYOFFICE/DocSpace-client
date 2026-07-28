@@ -47,8 +47,20 @@ import { useSettingsStore } from "../../_store/SettingsStore";
 
 type SectionProps = {
   sectionHeaderContent: React.ReactNode;
-  sectionFilterContent: React.ReactNode;
+  sectionFilterContent?: React.ReactNode;
   sectionBodyContent: React.ReactNode;
+  sectionBannerContent?: React.ReactNode;
+  sectionWarningContent?: React.ReactNode;
+
+  infoPanelHeaderContent?: React.ReactNode;
+  infoPanelBodyContent?: React.ReactNode;
+  isInfoPanelVisible?: boolean;
+  infoPanelWithoutScroll?: boolean;
+  setIsInfoPanelVisible?: (visible: boolean) => void;
+
+  chatPanelContent?: React.ReactNode;
+  isChatPanelVisible?: boolean;
+  setIsChatPanelVisible?: (visible: boolean) => void;
 
   isEmptyPage: boolean;
   filesFilter: string;
@@ -56,6 +68,18 @@ type SectionProps = {
   showFilter?: boolean;
   showHeader?: boolean;
   viewAs?: TViewAs;
+  /**
+   * Render the banner inside the scrollable body so it scrolls away under the
+   * sticky header (used by files to host the quick-action tiles above the
+   * sticky filter). Defaults to the pinned-banner behaviour.
+   */
+  scrollableBanner?: boolean;
+  /**
+   * Render the (desktop) filter slot inside the scroll body as sticky and pin
+   * the table header below it via `position: sticky` — used by files so the
+   * quick-action tiles scroll away above a sticky filter without any host JS.
+   */
+  stickyTableHeader?: boolean;
 };
 
 export const SectionWrapper = observer(
@@ -63,10 +87,22 @@ export const SectionWrapper = observer(
     sectionHeaderContent,
     sectionFilterContent,
     sectionBodyContent,
+    sectionBannerContent,
+    sectionWarningContent,
+    infoPanelHeaderContent,
+    infoPanelBodyContent,
+    isInfoPanelVisible,
+    infoPanelWithoutScroll,
+    setIsInfoPanelVisible,
+    chatPanelContent,
+    isChatPanelVisible,
+    setIsChatPanelVisible,
     isEmptyPage,
     filesFilter,
     showFilter = true,
     viewAs,
+    scrollableBanner,
+    stickyTableHeader,
   }: SectionProps) => {
     const searchParams = useSearchParams();
 
@@ -85,6 +121,9 @@ export const SectionWrapper = observer(
 
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
 
+    const showInfoPanel = !!(infoPanelHeaderContent || infoPanelBodyContent);
+    const showChatPanel = !!chatPanelContent;
+
     return (
       <Section
         withBodyScroll
@@ -92,15 +131,43 @@ export const SectionWrapper = observer(
         viewAs={viewAs ?? settingsStore.filesViewAs ?? "row"}
         isEmptyPage={isEmptyList}
         currentDeviceType={currentDeviceType}
+        isInfoPanelAvailable={showInfoPanel}
+        isInfoPanelVisible={isInfoPanelVisible}
+        infoPanelWithoutScroll={infoPanelWithoutScroll}
+        setIsInfoPanelVisible={setIsInfoPanelVisible}
+        isChatPanelAvailable={showChatPanel}
+        isChatPanelVisible={isChatPanelVisible}
+        setIsChatPanelVisible={setIsChatPanelVisible}
+        canDisplay={showInfoPanel}
+        scrollableBanner={scrollableBanner}
+        stickyTableHeader={stickyTableHeader}
       >
+        {sectionBannerContent ? (
+          <Section.SectionBanner>{sectionBannerContent}</Section.SectionBanner>
+        ) : null}
+
         <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 
         <Section.SectionFilter>
           {effectiveShowFilter ? sectionFilterContent : null}
         </Section.SectionFilter>
 
+        {sectionWarningContent ? (
+          <Section.SectionWarning>
+            {sectionWarningContent}
+          </Section.SectionWarning>
+        ) : null}
+
         <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>
+
+        <Section.InfoPanelHeader>
+          {infoPanelHeaderContent}
+        </Section.InfoPanelHeader>
+        <Section.InfoPanelBody>{infoPanelBodyContent}</Section.InfoPanelBody>
+
+        <Section.ChatPanel>{chatPanelContent}</Section.ChatPanel>
       </Section>
     );
   },
 );
+

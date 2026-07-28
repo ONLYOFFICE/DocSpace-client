@@ -3,7 +3,7 @@
   "content": "AI Chat",
   "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
   "created_at": "2026-03-20T09:07:26.752Z",
-  "updated_at": "2026-05-15T14:00:06.975Z",
+  "updated_at": "2026-06-25T19:31:03.054Z",
   "comment": {
     "text": "This is the label for a button that opens the AI Chat panel. It appears as a short label on a floating button.",
     "is_auto": true,
@@ -11,6 +11,24 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/ai-chat-panel/components/ai-chat-panel-header-container/index.tsx",
+      "line_number": 68,
+      "context": "store.close();\n };\n \n return (\n <AiChatPanelHeader\n title={t(\"Common:AIChatButton\")}\n onClose={handleClose}\n isFullscreen={store.effectiveFullscreen}\n onToggleFullscreen={isDesktop ? store.toggleFullscreen : undefined}\n isFullscreenToggleDisabled={store.isFullscreenToggleDisabled}\n />",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/ai-chat-panel/components/ai-chat-trigger/index.tsx",
+      "line_number": 59,
+      "context": "return (\n <Button\n accent\n onClick={openChat}\n size={ButtonSize.small}\n label={t(\"Common:AIChatButton\")}\n icon={<AiAgentsReactSvg />}\n aria-label={t(\"Common:AIChatButton\")}\n className={styles.trigger}\n />\n );",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/ai-chat-panel/components/ai-chat-trigger/index.tsx",
+      "line_number": 59,
+      "context": "return (\n <Button\n accent\n onClick={openChat}\n size={ButtonSize.small}\n label={t(\"Common:AIChatButton\")}\n icon={<AiAgentsReactSvg />}\n aria-label={t(\"Common:AIChatButton\")}\n className={styles.trigger}\n />\n );",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-button/index.tsx",
       "line_number": 92,

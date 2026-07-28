@@ -36,8 +36,14 @@
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { checkFilterInstance } from "../../utils/common";
+import { isOAuthFrame } from "../../utils/oauthToken";
 
-import { request, getAuthToken } from "../client";
+import {
+  request,
+  getAuthToken,
+  resolveOAuthToken,
+  refreshOAuthToken,
+} from "../client";
 import type { TFile } from "../files/types";
 import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
@@ -61,12 +67,15 @@ import type {
   TAIConfig,
   TAgent,
   TCreateAgentData,
+  TCreateAgentWithProfileData,
   TEditAgentData,
   TGetAgents,
   TDefaultProvider,
   TUpdateDefaultProviderData,
   TModelSettingsDto,
   TPreviewModelsRequest,
+  TAIUserConfig,
+  TProfilesList,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -184,8 +193,13 @@ export const getProviderAvailabilityStatus = async (
     }));
 };
 
-const getAuthHeaders = (): Record<string, string> => {
+const getAuthHeaders = async (): Promise<Record<string, string>> => {
   if (typeof window === "undefined") return {};
+
+  if (isOAuthFrame()) {
+    const oauthToken = await resolveOAuthToken();
+    return oauthToken ? { Authorization: `Bearer ${oauthToken}` } : {};
+  }
 
   const cookie = getCookie("asc_auth_key");
   if (cookie) return { Authorization: cookie };
@@ -193,16 +207,47 @@ const getAuthHeaders = (): Record<string, string> => {
   const token = getAuthToken();
   if (token) return { Authorization: token };
 
-  const publicRoomKey =
-    new URLSearchParams(window.location.search).get("share");
+  const publicRoomKey = new URLSearchParams(window.location.search).get(
+    "share",
+  );
 
   if (publicRoomKey)
     return {
-      Authorization: `Bearer ${publicRoomKey}`,
       "Request-Token": publicRoomKey,
     };
 
   return {};
+};
+
+const authFetch = async (
+  url: string,
+  init: RequestInit = {},
+): Promise<Response> => {
+  const send = async () => {
+    const headers = new Headers(init.headers);
+    for (const [name, value] of Object.entries(await getAuthHeaders()))
+      headers.set(name, value);
+    return {
+      hadAuth: headers.has("Authorization"),
+      response: await fetch(url, { ...init, headers }),
+    };
+  };
+
+  const first = await send();
+  let { response } = first;
+
+  if (
+    response.status === 401 &&
+    first.hadAuth &&
+    typeof window !== "undefined" &&
+    isOAuthFrame() &&
+    !init.signal?.aborted &&
+    (await refreshOAuthToken())
+  ) {
+    ({ response } = await send());
+  }
+
+  return response;
 };
 
 export const startNewChat = async (
@@ -211,11 +256,10 @@ export const startNewChat = async (
   files: string[],
   abortController?: AbortController,
 ) => {
-  const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
+  const response = await authFetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...getAuthHeaders(),
     },
     signal: abortController?.signal,
     body: JSON.stringify({ message, files }),
@@ -230,15 +274,17 @@ export const sendMessageToChat = async (
   files: string[],
   abortController?: AbortController,
 ) => {
-  const response = await fetch(`/api/2.0${baseUrl}/chats/${chatId}/messages`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...getAuthHeaders(),
+  const response = await authFetch(
+    `/api/2.0${baseUrl}/chats/${chatId}/messages`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      signal: abortController?.signal,
+      body: JSON.stringify({ message, files }),
     },
-    signal: abortController?.signal,
-    body: JSON.stringify({ message, files }),
-  });
+  );
 
   return response.body;
 };
@@ -640,6 +686,20 @@ export const createAIAgent = async (data: TCreateAgentData) => {
   return res as TAgent;
 };
 
+// New agent creation flow: the Node AI service (mounted at /new-ai) creates
+// the agent via the .NET endpoint and binds the selected AI profile to it.
+export const createAIAgentWithProfile = async (
+  data: TCreateAgentWithProfileData,
+) => {
+  const res = await request({
+    method: "POST",
+    url: `/new-ai/agents`,
+    data,
+  });
+
+  return res as TAgent;
+};
+
 export const editAIAgent = async (id: TAgent["id"], data: TEditAgentData) => {
   const res = await request({
     method: "PUT",
@@ -648,6 +708,83 @@ export const editAIAgent = async (id: TAgent["id"], data: TEditAgentData) => {
   });
 
   return res as TAgent;
+};
+
+// --- new-ai (profile-based) agent flow -------------------------------------
+// The Node AI service (mounted at /new-ai) owns the profile<->agent binding.
+// These mirror the /ai functions above but go through /new-ai/agents so the
+// service can inject `profileId` (GET :id), rebind the profile (PUT) and keep
+// the prompt in `chatSettings`. Only the ai-agents product uses these; the
+// legacy /ai flow (forms/arbiter/old client) stays on the functions above.
+const newAiBaseUrl = "/new-ai/agents";
+
+export const getNewAiAgent = async (id: TAgent["id"]) => {
+  const res = await request({ method: "GET", url: `${newAiBaseUrl}/${id}` });
+
+  return res as TAgent;
+};
+
+export const getNewAiAgents = async (
+  filter: RoomsFilter,
+  signal?: AbortSignal,
+) => {
+  let params: string = "";
+
+  if (filter) {
+    checkFilterInstance(filter, RoomsFilter);
+
+    params = `?${filter.toApiUrlParams()}`;
+  }
+
+  const res = await request({
+    method: "GET",
+    url: `${newAiBaseUrl}${params}`,
+    signal,
+  });
+
+  return res as TGetAgents;
+};
+
+export const editNewAiAgent = async (
+  id: TAgent["id"],
+  data: TEditAgentData,
+) => {
+  const res = await request({
+    method: "PUT",
+    url: `${newAiBaseUrl}/${id}`,
+    data,
+  });
+
+  return res as TAgent;
+};
+
+export const deleteNewAiAgent = async (id: TAgent["id"]) => {
+  await request({ method: "DELETE", url: `${newAiBaseUrl}/${id}`, data: {} });
+};
+
+export const resetNewAiAgentQuota = async (
+  roomIds: TAgent["id"] | TAgent["id"][],
+) => {
+  return request({
+    method: "put",
+    url: `${newAiBaseUrl}/resetquota`,
+    data: { roomIds },
+  });
+};
+
+export const setNewAiAgentQuota = (
+  roomIds: TAgent["id"] | TAgent["id"][],
+  quota: number,
+) => {
+  return request({
+    method: "put",
+    url: `${newAiBaseUrl}/agentquota`,
+    data: { roomIds, quota },
+  });
+};
+
+export const getNewAiAgentsNews = async () => {
+  return request({ method: "GET", url: `${newAiBaseUrl}/news` });
 };
 
 export const getAIAgent = async (id: TAgent["id"]) => {
@@ -731,6 +868,110 @@ export const getDefaultProvider = async () => {
   return res as TDefaultProvider;
 };
 
+export const getProfilesList = async () => {
+  const response = await authFetch(`/api/2.0/new-ai/profiles/list`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) return [] as TProfilesList;
+
+  return (await response.json()) as TProfilesList;
+};
+
+export const getProfileAssignments = async (entityId?: string) => {
+  const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
+
+  const response = await authFetch(
+    `/api/2.0/new-ai/assignments/get-all-assignments${params}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  if (!response.ok) return {} as Record<string, string>;
+
+  return (await response.json()) as Record<string, string>;
+};
+
+// --- new-ai MCP servers (chat-lib model) -----------------------------------
+// Entity-scoped custom MCP servers of the Node AI service (`tools/*`
+// routes). For an agent the per-entity map doubles as its MCP whitelist:
+// the agent create/edit dialog manages the set here. The service resolves
+// the stored config itself — system servers are pinned to the canonical
+// config from the new-ai config file, portal-level servers are copied.
+
+/** Name → config map of MCP servers scoped to an entity (portal scope
+ * when `entityId` is omitted). */
+export const getEntityMcpServers = async (entityId?: string) => {
+  const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
+
+  const response = await authFetch(
+    `/api/2.0/new-ai/tools/list-custom-servers${params}`,
+    { method: "GET", headers: { "Content-Type": "application/json" } },
+  );
+
+  if (!response.ok) return {} as Record<string, unknown>;
+
+  return (await response.json()) as Record<string, unknown>;
+};
+
+/** Names of the system MCP servers configured on the new-ai service. */
+export const getSystemMcpServerNames = async () => {
+  const response = await authFetch(`/api/2.0/new-ai/tools/list-system-tools`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (!response.ok) return [] as string[];
+
+  const grouped = (await response.json()) as Record<string, unknown>;
+  return Object.keys(grouped);
+};
+
+/** Enable an MCP server (by name) for an entity. The config is resolved
+ * server-side: canonical for system servers, copied from the portal scope
+ * for portal-level servers. */
+export const addEntityMcpServer = async (name: string, entityId: string) => {
+  const response = await authFetch(
+    `/api/2.0/new-ai/tools/add-custom-server`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, config: null, entityId }),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to enable MCP server "${name}": ${response.status} ${response.statusText}`,
+    );
+  }
+};
+
+/** Disable an MCP server (by name) for an entity. */
+export const removeEntityMcpServer = async (name: string, entityId: string) => {
+  const response = await authFetch(
+    `/api/2.0/new-ai/tools/remove-custom-server`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, entityId }),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to disable MCP server "${name}": ${response.status} ${response.statusText}`,
+    );
+  }
+};
+
 export const updateDefaultProvider = async ({
   providerId,
   defaultModel,
@@ -744,4 +985,27 @@ export const updateDefaultProvider = async ({
   const res = await request(options);
 
   return res as TDefaultProvider;
+};
+
+export const getAIUserConfig = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/config/user`,
+  };
+
+  const res = await request(options);
+
+  return res as TAIUserConfig;
+};
+
+export const updateAIUserConfig = async (data: TAIUserConfig) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/config/user`,
+    data,
+  };
+
+  const res = await request(options);
+
+  return res as TAIUserConfig;
 };

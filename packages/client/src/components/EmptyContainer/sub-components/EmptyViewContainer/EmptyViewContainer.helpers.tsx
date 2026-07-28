@@ -53,6 +53,8 @@ import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spr
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
 import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
+import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
+import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
@@ -110,13 +112,18 @@ export const getDescription = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isPayer?: boolean,
+  walletCustomerEmail?: string | null,
+  walletCustomerDisplayName?: string | null,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -124,26 +131,26 @@ export const getDescription = (
     if (isKnowledgeTab)
       return (
         <>
-          {t("AIRoom:EmptyKnowledgeDescription", {
-            aiChat: t("AIRoom:AIChat"),
+          {t("Common:EmptyKnowledgeDescription", {
+            aiChat: t("Common:AIChat"),
           })}
           <Text
             as="span"
             fontSize="12px"
             style={{ display: "block", marginTop: "8px" }}
           >
-            {t("AIRoom:EmptyKnowledgeDescriptionActions")}
+            {t("Common:EmptyKnowledgeDescriptionActions")}
           </Text>
         </>
       );
 
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
-        ? t("AIRoom:EmptyResultsDescription", {
-            aiChat: t("AIRoom:AIChat"),
+        ? t("Common:EmptyResultsDescription", {
+            aiChat: t("Common:AIChat"),
           })
-        : t("AIRoom:EmptyResultsViewerDescription", {
-            aiChat: t("AIRoom:AIChat"),
+        : t("Common:EmptyResultsViewerDescription", {
+            aiChat: t("Common:AIChat"),
           });
   }
 
@@ -157,6 +164,9 @@ export const getDescription = (
       standalone,
       aiReady,
       isPortalAdmin,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName,
     );
 
   if (isFolder)
@@ -182,7 +192,9 @@ export const getTitle = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
@@ -193,11 +205,11 @@ export const getTitle = (
   const isNotAdmin = isUser(access);
 
   if (isAIRoom) {
-    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeTitle");
+    if (isKnowledgeTab) return t("Common:EmptyKnowledgeTitle");
 
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
-        ? t("AIRoom:EmptyResultsTitle")
+        ? t("Common:EmptyResultsTitle")
         : t("Common:NothingToShowYet");
   }
 
@@ -233,10 +245,22 @@ export const getIcon = (
   parentRoomType: Nullable<FolderType>,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isResultsTab?: boolean,
+  isKnowledgeTab?: boolean,
+  isAIRoom?: boolean,
 ): JSX.Element => {
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
+
+  // The knowledge tab shows a folder whose `folderType` isn't a default-folder
+  // type, so `getFolderIcon` would fall through to its empty `<div />` and the
+  // empty screen would render with no illustration. Use the same default
+  // folder icon the SDK agents knowledge empty view uses.
+  if (isAIRoom && isKnowledgeTab)
+    return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
+
   return isFolder
     ? getFolderIcon(
         parentRoomType,
@@ -251,7 +275,9 @@ export const getIcon = (
 
 export const getOptions = (
   type: RoomsType,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   t: TTranslation,
   access: AccessType,
   isFolder: boolean,
@@ -270,6 +296,10 @@ export const getOptions = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
+  isCardLinkedToPortal: boolean = false,
+  isPayer?: boolean,
+  isActivating: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -305,7 +335,7 @@ export const getOptions = (
       productName: getBrandName("ProductName"),
     }),
     t("EmptyView:SectionsUploadDescription", {
-      sectionNameFirst: t("Common:MyDocuments"),
+      sectionNameFirst: t("Common:Files"),
       sectionNameSecond: t("Common:Rooms"),
     }),
     // TODO: need fix selector
@@ -389,14 +419,15 @@ export const getOptions = (
   };
 
   const createAIAgent = {
-    title: t("EmptyView:CreateNewAIAgent"),
-    description: t("EmptyView:CreateAIAgentDescription", {
+    title: t("Common:CreateNewAIAgent"),
+    description: t("Common:CreateAIAgentDescription", {
       aiAgent: t("Common:AIAgent"),
     }),
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,
-    disabled: !security?.Create,
+    //disabled: !security?.Create,
+    disabled: false,
   };
 
   const inviteRootRoom = {
@@ -423,6 +454,30 @@ export const getOptions = (
     key: "go-to-ai-provider-settings",
     onClick: actions.onGoToAIProviderSettings,
   } as const;
+
+  const activateOrTopUpAI = isCardLinkedToPortal
+    ? ({
+        type: "button",
+        title: t("Common:Activate"),
+        key: "activate-ai",
+        onClick: actions.onActivateAI,
+        isLoading: isActivating,
+      } as const)
+    : ({
+        type: "button",
+        title: t("Common:TopUpAndActivate"),
+        key: "top-up-and-activate-ai",
+        onClick: actions.onTopUpAndActivateAI,
+        isLoading: isActivating,
+      } as const);
+
+  // const aiBenefits = {
+  //   type: "button",
+  //   title: t("Common:Benefits"),
+  //   key: "ai-benefits",
+  //   primary: false,
+  //   onClick: actions.onShowAIBenefits,
+  // } as const;
 
   const uploadFromDeviceAnyFile = isMobile
     ? createUploadFromDeviceOption(
@@ -505,23 +560,30 @@ export const getOptions = (
     ],
   };
 
-  if (isRootEmptyPage) {
+  // The knowledge/results tabs view the agent room itself, which lives at the
+  // section root (`parentId === 0`) and so trips `isRootEmptyPage`. Without
+  // this guard the root branch below (FolderType.AIAgents → create-agent)
+  // would win and the knowledge/results upload actions never render. Title and
+  // description already special-case `isAIRoom` first, so options must too.
+  const isAIAliasTab = !!(isAIRoom && (isKnowledgeTab || isResultsTab));
+
+  if (isRootEmptyPage && !isAIAliasTab) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
-      .with([FolderType.AIAgents, P._, P._], () =>
-        match([aiReady, standalone, isPortalAdmin])
-          .with([true, P._, P.when(() => isAdmin(access))], () => [
-            createAIAgent,
-          ])
-          .with([false, P._, true], () => [goToAIProviderSettings]) // NOTE: AI SaaS same as AI Standalone in v.4.0
-          // .with([false, false, true], () => [goToServices])
-          .otherwise(() => []),
-      )
+      .with([FolderType.AIAgents, P._, P._], () => {
+        if (aiReady) return isPortalAdmin ? [createAIAgent] : [];
+        if (!isPortalAdmin) return [];
+        if (standalone) return [goToAIProviderSettings];
+        if (isCardLinkedToPortal && !isPayer) return [];
+        return [activateOrTopUpAI];
+      })
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,
         migrationData,
       ])
+      .with([FolderType.Forms, P._, true], () => [])
+      .with([FolderType.Forms, P._, P._], () => [createRoom])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,
@@ -532,20 +594,45 @@ export const getOptions = (
         {
           ...actions.onGoToShared(),
           icon: <FolderIcon />,
-          description: t("Files:GoToMyRooms"),
+          description: t("Common:GoToMyRooms"),
           key: "empty-view-goto-shared",
         },
       ])
-      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [
-        {
-          ...actions.onGoToPersonal(),
-          icon: <PersonIcon />,
-          description: t("Files:GoToSection", {
-            sectionName: t("Common:MyDocuments"),
-          }),
-          key: "empty-view-trash-goto-personal",
-        },
-      ])
+      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => {
+        const trashOrigin = {
+          rooms: {
+            link: actions.onGoToShared(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:Rooms"),
+          },
+          forms: {
+            link: actions.onGoToForms(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:Forms"),
+          },
+          agents: {
+            link: actions.onGoToAgents(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:AIAgents"),
+          },
+          personal: {
+            link: actions.onGoToPersonal(),
+            icon: <PersonIcon />,
+            sectionName: t("Common:Files"),
+          },
+        }[trashSection];
+
+        return [
+          {
+            ...trashOrigin.link,
+            icon: trashOrigin.icon,
+            description: t("Common:GoToSection", {
+              sectionName: trashOrigin.sectionName,
+            }),
+            key: "empty-view-trash-goto-origin",
+          },
+        ];
+      })
       .otherwise(() => []);
   }
 
@@ -557,8 +644,8 @@ export const getOptions = (
         t("EmptyView:UploadFromPortalTitle", {
           productName: getBrandName("ProductName"),
         }),
-        t("AIRoom:UploadFilesPortal", {
-          sectionNameFirst: t("Common:MyDocuments"),
+        t("Common:UploadFilesPortal", {
+          sectionNameFirst: t("Common:Files"),
           sectionNameSecond: t("Common:Rooms"),
         }),
         "",
@@ -567,8 +654,9 @@ export const getOptions = (
 
       const uploadFilesFromDevice = createUploadFromDeviceOption(
         t("EmptyView:UploadDeviceOptionTitle"),
-        t("AIRoom:UploadFilesDevice"),
+        t("Common:UploadFilesDevice"),
         "file",
+        true,
       );
 
       return [uploadFilesFromDocSpace, uploadFilesFromDevice];
@@ -578,7 +666,7 @@ export const getOptions = (
       return [
         {
           key: "open-chat",
-          title: t("AIRoom:CreateChat"),
+          title: t("Common:CreateChat"),
           icon: <CreateChatIcon />,
           onClick: () => {
             const filesFilter = FilesFilter.getFilter(window.location);
@@ -589,8 +677,8 @@ export const getOptions = (
 
             window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
           },
-          description: t("AIRoom:CreateChatDescription", {
-            aiChat: t("AIRoom:AIChat"),
+          description: t("Common:CreateChatDescription", {
+            aiChat: t("Common:AIChat"),
           }),
           disabled: !canUseChat,
         },
@@ -696,3 +784,4 @@ export const getOptions = (
       return [];
   }
 };
+

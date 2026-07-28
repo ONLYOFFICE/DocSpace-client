@@ -3,7 +3,7 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2026-05-15T15:37:40.158Z",
+  "updated_at": "2026-07-27T13:07:50.559Z",
   "comment": {
     "text": "This is a label for a section or category within the application, referring to collections of users. It appears in selectors for filtering or organizing users, and as a title for a dedicated \"Groups\" page.",
     "is_auto": true,
@@ -24,6 +24,12 @@
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/packages/client/src/components/AccountsSidebar/index.tsx",
+      "line_number": 123,
+      "context": "icon: getCatalogIconUrlByType(PageType.account),\n onClick: goToFilterRoute(PEOPLE_ROUTE_WITH_FILTER),\n },\n {\n id: GROUPS_ID,\n label: t(\"Common:Groups\"),\n icon: getCatalogIconUrlByType(PageType.groups),\n onClick: goToFilterRoute(GROUPS_ROUTE_WITH_FILTER),\n },\n {\n id: GUESTS_ID,",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
       "line_number": 85,
       "context": "LinkRouter={Link}\n withAnimation\n />\n <ArticleItem\n key=\"accounts-groups\"\n text={t(\"Common:Groups\")}\n linkData={getLinkData(\"groups\")}\n title={t(\"Common:Groups\")}\n icon={getCatalogIconUrlByType(PageType.groups)}\n showText={showText}\n onClick={onClickAction}",
@@ -37,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
-      "line_number": 114,
+      "line_number": 115,
       "context": "label: t(\"InfoPanel:Administration\"),\n list: administrators,\n },\n {\n key: TInfoPanelMemberType.groups,\n label: t(\"Common:Groups\"),\n list: groups,\n },\n {\n key: TInfoPanelMemberType.users,\n label: t(\"InfoPanel:Users\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 724,
+      "line_number": 815,
       "context": "if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle\n : currentGroupName;\n }",
       "module": "/packages/client"
     },
@@ -64,6 +70,12 @@
       "line_number": 149,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={\n <Trans\n t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/useMembers.ts",
+      "line_number": 112,
+      "context": "label: t(\"Common:RoomAdministration\"),\n list: administrators,\n },\n {\n key: TInfoPanelMemberType.groups,\n label: t(\"Common:Groups\"),\n list: groups,\n },\n {\n key: TInfoPanelMemberType.users,\n label: t(\"Common:RoomUsers\"),",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",

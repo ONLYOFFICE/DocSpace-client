@@ -45,12 +45,20 @@ export type TileViewProps = {
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   currentFolderId: string | number;
   filesLength: number;
+  isPrivate?: boolean;
+  currentUserId?: string;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 export type TileProps = {
   item: TFolderItem | TFileItem;
   getIcon: TGetIcon;
   index: number;
+  isPrivate?: boolean;
+  currentUserId?: string;
+  /** Whether the current user has loaded their E2EE key pair. */
+  hasEncryptionKeys?: boolean;
 };
 
 export type TileContentProps = {

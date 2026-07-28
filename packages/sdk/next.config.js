@@ -60,10 +60,27 @@ const version = pkg.version;
 const banner = getBanner(version);
 const isDev = process.env.NODE_ENV !== productionMode;
 
+const monorepoRoot = path.resolve(__dirname, "../..");
+const docspaceApiSdkDir = path.dirname(
+  require.resolve("@onlyoffice/docspace-api-sdk/package.json", {
+    paths: [path.resolve(__dirname, "../../libs/ui-kit")],
+  }),
+);
+const docspaceApiSdkTraceGlob = `${path
+  .relative(__dirname, docspaceApiSdkDir)
+  .split(path.sep)
+  .join("/")}/**`;
+
 const nextConfig = {
   basePath: "/sdk",
+  outputFileTracingRoot: monorepoRoot,
   outputFileTracingIncludes: {
-    "/forms/**": ["./src/app/(forms)/_styles/*.scss"],
+    "/forms/**": ["./src/app/(forms)/_styles/*.scss", "./data.zip"],
+    "/*": [
+      docspaceApiSdkTraceGlob,
+      "public/locales/*/*.json",
+      "../../public/locales/*/Common.json",
+    ],
   },
   serverExternalPackages: [
     "nconf",
@@ -72,6 +89,7 @@ const nextConfig = {
     "winston-cloudwatch",
     "winston-daily-rotate-file",
     "@aws-sdk/client-cloudwatch-logs",
+    "@onlyoffice/docspace-api-sdk",
   ],
   compiler: {
     styledComponents: true,
@@ -93,6 +111,7 @@ const nextConfig = {
   },
   webpack: (config) => {
     const isProduction = config.mode === "production";
+
     // Add resolve configuration for shared package
     config.resolve = {
       ...config.resolve,
@@ -100,6 +119,14 @@ const nextConfig = {
         ...config.resolve?.alias,
         "@docspace/shared": path.resolve(__dirname, "../shared"),
         "@docspace/ui-kit": path.resolve(__dirname, "../../libs/ui-kit"),
+      },
+      fallback: {
+        ...config.resolve?.fallback,
+        // hash-wasm dynamically tries to fall back to node:fs / node:crypto on
+        // server bundles. We're encryption-client-only — stub them out so the
+        // bundle doesn't pull in Node polyfills.
+        fs: false,
+        crypto: false,
       },
     };
 
@@ -131,6 +158,16 @@ const nextConfig = {
             firebase: {
               test: /[\\/](?:@firebase|firebase[\\/]compat)[\\/]/,
               name: "firebase-vendor",
+              chunks: "async",
+              priority: 30,
+              reuseExistingChunk: true,
+              enforce: true,
+            },
+            // Argon2 (hash-wasm) + HPKE only loaded inside (private). Async-only
+            // so the rooms-list view does not pay the ~200 KB cost on first paint.
+            encryption: {
+              test: /[\\/](?:hash-wasm|@hpke[\\/])[\\/]/,
+              name: "encryption-vendor",
               chunks: "async",
               priority: 30,
               reuseExistingChunk: true,

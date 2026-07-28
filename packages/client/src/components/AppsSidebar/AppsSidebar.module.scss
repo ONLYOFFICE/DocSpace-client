@@ -1,0 +1,166 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.articleFlex {
+  display: flex;
+  flex-direction: column;
+
+  @include mixins.desktop {
+    &:global([data-show-text="false"]) {
+      min-width: var(--article-tablet-width-collapsed-v) !important;
+      max-width: var(--article-tablet-width-collapsed-v) !important;
+    }
+  }
+
+  &:global(#article-container) {
+    @include mixins.mobile {
+      position: fixed;
+      inset-block-start: var(--section-header-height-mobile, 53px);
+      inset-inline-start: 0;
+      width: 100%;
+      min-width: 0 !important;
+      max-width: none !important;
+      height: calc(100% - var(--section-header-height-mobile, 53px)) !important;
+      z-index: 230;
+      box-shadow: 4px 0 16px rgb(0 0 0 / 15%);
+      transform: translateX(-100%);
+      transition: transform 0.2s ease-out;
+      will-change: transform;
+      padding-block-start: 16px;
+
+      &:global([data-sidebar-open="true"]) {
+        transform: translateX(0);
+      }
+
+      :global([dir="rtl"]) & {
+        transform: translateX(100%);
+
+        &:global([data-sidebar-open="true"]) {
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+}
+
+.header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  &[data-show-text="false"] {
+    justify-content: center;
+    padding-inline: 0 !important;
+  }
+}
+
+.logoWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logoFull {
+  display: block;
+  height: 24px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.collapsedHeader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // On desktop: show burger logo by default, swap to collapse button on hover.
+  @include mixins.desktop {
+    .collapseButton {
+      display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        .logoBurgerButton {
+          display: none;
+        }
+
+        .collapseButton {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  // On tablet: always show the collapse button instead of the burger logo.
+  @include mixins.tablet {
+    .logoBurgerButton {
+      display: none;
+    }
+  }
+}
+
+.logoBurgerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.logoBurger {
+  display: block;
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+}
+
+.backButtonWrapper {
+  @include mixins.mobile {
+    margin-block-end: 16px;
+  }
+}
+
+.scrollbar {
+  flex: 1;
+  min-height: 0;
+
+  @include mixins.mobile {
+    height: 100% !important;
+  }
+}
+
+// Lay the scroll content out as a column that fills the viewport height so the
+// footer's margin-block-start: auto can push it to the bottom when there is
+// room, while still scrolling with the content once the apps list overflows.
+.scrollBody {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+// ArticleProfile renders profileWrapper with position:absolute; bottom:0 —
+// override to place it in normal flex flow.
+.profileBlockWrapper {
+  flex-shrink: 0;
+
+  > div {
+    position: static;
+    min-width: unset;
+    max-width: unset;
+  }
+}
+
+// Footer items render the same ArticleItem as the apps above, so they must
+// share the apps' horizontal inset (no extra inline padding) to stay aligned.
+// margin-block-start: auto pins them to the bottom when there is free space,
+// and collapses to 0 so they scroll with the apps list on overflow.
+.footer {
+  margin-block-start: auto;
+  padding-block: 8px;
+}

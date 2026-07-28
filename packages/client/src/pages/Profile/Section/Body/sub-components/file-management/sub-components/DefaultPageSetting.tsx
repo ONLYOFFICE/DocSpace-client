@@ -75,7 +75,7 @@ const StartPageSettingComponent = ({
         key: FolderType.AIAgents,
       },
       {
-        label: t("Common:MyDocuments"),
+        label: t("Common:Files"),
         key: FolderType.USER,
       },
       {
@@ -83,16 +83,8 @@ const StartPageSettingComponent = ({
         key: FolderType.Rooms,
       },
       {
-        label: t("Common:SharedWithMe"),
-        key: FolderType.SHARE,
-      },
-      {
-        label: t("Common:Favorites"),
-        key: FolderType.Favorites,
-      },
-      {
-        label: t("Common:Recent"),
-        key: FolderType.Recent,
+        label: t("Common:Forms"),
+        key: FolderType.Forms,
       },
     ];
 

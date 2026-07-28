@@ -98,6 +98,7 @@ export type MembersProps = {
 
   primaryLink?: PublicRoomStore["primaryLink"];
   additionalLinks?: PublicRoomStore["additionalLinks"];
+  hasExternalLinks?: boolean;
   setExternalLink?: PublicRoomStore["setExternalLink"];
   setExternalLinks?: PublicRoomStore["setExternalLinks"];
 
@@ -107,6 +108,8 @@ export type MembersProps = {
 
   currentId?: SelectedFolderStore["id"];
   isRootFolder?: SelectedFolderStore["isRootFolder"];
+  isExternalShareRestricted?: boolean;
+  defaultShareLinkInternal?: boolean;
 
   members: Nullable<TInfoPanelMembers>;
   total: number;
@@ -147,6 +150,8 @@ export type UserProps = {
   setEditMembersGroup?: DialogsStore["setEditMembersGroup"];
   setEditGroupMembersDialogVisible?: DialogsStore["setEditGroupMembersDialogVisible"];
   setRemoveUserConfirmation?: DialogsStore["setRemoveUserConfirmation"];
+
+  getActiveUploadCountForRoom?: (roomId: string | number) => number;
 };
 
 export type LinkRowProps = {
@@ -161,6 +166,9 @@ export type LinkRowProps = {
 
   isArchiveFolder?: boolean;
   isShareLink?: boolean;
+  isExternalShareRestricted?: boolean;
+  isLinkBlockedByAdmin?: (item: TRoom, link: TFileLink) => boolean;
+  isLinkRestrictedByAdmin?: (item: TRoom, link: TFileLink) => boolean;
   setIsScrollLocked?: InfoPanelStore["setIsScrollLocked"];
   isPublicRoomType: boolean;
   isFormRoom: boolean;

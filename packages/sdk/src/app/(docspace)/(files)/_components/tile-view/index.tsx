@@ -49,6 +49,9 @@ const TileView = ({
   hasMoreFiles,
   currentFolderId,
   filesLength,
+  isPrivate,
+  hasEncryptionKeys,
+  currentUserId,
 }: TileViewProps) => {
   const { t } = useTranslation();
   const isServer = useIsServer();
@@ -77,6 +80,9 @@ const TileView = ({
           item={item}
           getIcon={getIcon}
           index={index}
+          isPrivate={isPrivate}
+          hasEncryptionKeys={hasEncryptionKeys}
+          currentUserId={currentUserId}
         />
       ))}
     </TileContainer>

@@ -60,8 +60,23 @@ const banner = getBanner(version);
 
 const isDev = process.env.NODE_ENV !== productionMode;
 
+const monorepoRoot = path.resolve(__dirname, "../..");
+const docspaceApiSdkDir = path.dirname(
+  require.resolve("@onlyoffice/docspace-api-sdk/package.json", {
+    paths: [path.resolve(__dirname, "../../libs/ui-kit")],
+  }),
+);
+const docspaceApiSdkTraceGlob = `${path
+  .relative(__dirname, docspaceApiSdkDir)
+  .split(path.sep)
+  .join("/")}/**`;
+
 const nextConfig = {
   basePath: "/doceditor",
+  outputFileTracingRoot: monorepoRoot,
+  outputFileTracingIncludes: {
+    "/*": [docspaceApiSdkTraceGlob, "public/locales/*/*.json", "../../public/locales/*/Common.json"],
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -72,6 +87,7 @@ const nextConfig = {
     "winston-cloudwatch",
     "winston-daily-rotate-file",
     "@aws-sdk/client-cloudwatch-logs",
+    "@onlyoffice/docspace-api-sdk",
   ],
   compiler: {
     styledComponents: true,
@@ -108,6 +124,7 @@ if (isDev) {
 module.exports = withBundleAnalyzer({
   webpack(config) {
     const isProduction = config.mode === productionMode;
+
     // Add resolve configuration for shared package
     config.resolve = {
       ...config.resolve,

@@ -48,6 +48,7 @@ import { logger } from "@/../logger.mjs";
 
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import OAuthEditor from "@/components/OAuthEditor";
 import FilePassword from "@/components/file-password";
 import type { TFrameConfig, TFrameTheme } from "@docspace/shared/types/Frame";
 
@@ -79,6 +80,7 @@ async function Page(props: RootPageProps) {
     theme,
     is_file,
     editorGoBack,
+    returnUrl,
     withoutGoBackText,
     isSDK,
     withTool,
@@ -93,6 +95,7 @@ async function Page(props: RootPageProps) {
     src: "",
     editorCustomization: { uiTheme: theme },
     editorGoBack,
+    returnUrl,
     withoutGoBackText,
     editorType,
     id: fileId,
@@ -140,6 +143,22 @@ async function Page(props: RootPageProps) {
     type,
     withTool,
   );
+
+  const isOAuth =
+    (searchParams as { auth?: string } | undefined)?.auth === "oauth";
+
+  if (isOAuth && !data.config) {
+    return (
+      <OAuthEditor
+        fileId={fileId ?? fileid ?? ""}
+        version={version}
+        doc={doc}
+        action={action}
+        editorType={type}
+        baseSdkConfig={baseSdkConfig}
+      />
+    );
+  }
 
   if (data.error?.status === "access-denied" && share) {
     const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");

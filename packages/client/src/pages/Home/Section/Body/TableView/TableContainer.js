@@ -266,8 +266,10 @@ export default inject(
       isSharedWithMeFolder,
       isInSharedFolder,
       isAIAgentsFolder,
+      isFormsFolder,
     } = treeFoldersStore;
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 

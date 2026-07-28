@@ -3,7 +3,7 @@
   "content": "AM",
   "content_en_sha1_hash": "80d305c58f97edfae92a3627f5a66d9bef4d8d46",
   "created_at": "2026-02-18T14:55:14.937Z",
-  "updated_at": "2026-05-15T15:37:40.211Z",
+  "updated_at": "2026-07-07T08:59:21.773Z",
   "comment": {
     "text": "This is a short label for \"ante meridiem\" (before noon) in a time picker, used to denote the morning hours.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 326,
+      "line_number": 327,
       "context": "selectDateText={t(\"Common:SelectDate\")}\n initialDate={limitDate}\n minDate={subtractFromDate(now(), 1, \"days\") ?? undefined}\n maxDate={maxDate}\n useMaxTime={!activeLink.expirationDate}\n translations={{ AM: t(\"Common:AM\"), PM: getConstName(\"PM\") }}\n />\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/link-settings-panel/index.tsx",
+      "line_number": 355,
+      "context": "selectDateText={t(\"Common:SelectDate\")}\n initialDate={limitDate}\n minDate={subtractFromDate(now(), 1, \"days\") ?? undefined}\n maxDate={maxDate}\n useMaxTime={!activeLink.expirationDate}\n translations={{ AM: t(\"Common:AM\"), PM: getConstName(\"PM\") }}\n />\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/LimitTimeBlock.tsx",

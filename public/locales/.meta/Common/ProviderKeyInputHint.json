@@ -1,0 +1,32 @@
+{
+  "key_path": "ProviderKeyInputHint",
+  "content": "Enter the API key generated from your {{aiProvider}}'s dashboard",
+  "content_en_sha1_hash": "96a254263b33d81c637216dc5f0b707bf68cbd91",
+  "created_at": "2025-12-23T10:30:50.965Z",
+  "updated_at": "2026-07-07T08:59:22.005Z",
+  "comment": {
+    "text": "This is a hint text displayed below an input field for an API key. It instructs the user to enter the API key obtained from their AI provider's dashboard. The `{{aiProvider}}` variable will be replaced with the name of the AI provider (e.g., \"OpenAI\").",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:02:33.317Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
+      "line_number": 593,
+      "context": "<Text\n className={classNames(styles.fieldHint, {\n [styles.fieldHintError]: providerData?.needReset,\n })}\n >\n {t(\"Common:ProviderKeyInputHint\", {\n aiProvider: t(\"Common:AIProvider\"),\n })}\n </Text>\n </>\n )}",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "ContactNotFound",
+  "content": "Contact <1>«{{email}}»</1> is not found",
+  "content_en_sha1_hash": "80218b23ad264549df57f3681269be74a8b88ea8",
+  "created_at": "2026-06-03T08:04:09.928Z",
+  "updated_at": "2026-06-03T08:06:34.464Z",
+  "comment": {
+    "text": "Error text in the payer information section that appears when a contact cannot be located, featuring the email address as a clickable link.",
+    "is_auto": true,
+    "updated_at": "2026-06-03T08:06:34.464Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "line_number": 197,
+      "context": "<Text as=\"span\" fontWeight={600} fontSize=\"14px\">\n {payerInfo ? (\n Encoder.htmlDecode(payerInfo.displayName ?? \"\")\n ) : (\n <CommonTrans\n i18nKey=\"ContactNotFound\"\n values={{ email: emailUnfoundedUser }}\n components={{\n 1: (\n <Link\n as=\"span\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

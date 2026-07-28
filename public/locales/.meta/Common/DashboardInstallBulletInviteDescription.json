@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardInstallBulletInviteDescription",
+  "content": "Everyone in your portal can fill out forms straight away, no extra invites needed.",
+  "content_en_sha1_hash": "dd2d548e79ae7268e066a8af3c56cdc68030721a",
+  "created_at": "2026-05-19T19:03:13.816Z",
+  "updated_at": "2026-07-07T08:59:21.785Z",
+  "comment": {
+    "text": "A descriptive bullet point in the module installation dialog explaining that portal users can access forms without needing additional invitations.",
+    "is_auto": true,
+    "updated_at": "2026-05-19T19:29:42.003Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
+      "line_number": 174,
+      "context": "description: t(\"Common:DashboardInstallBulletCreateRoomDescription\"),\n },\n {\n Icon: PeopleIcon,\n title: t(\"Common:DashboardInstallBulletInvite\"),\n description: t(\"Common:DashboardInstallBulletInviteDescription\"),\n },\n {\n Icon: TemplateIcon,\n title: t(\"Common:DashboardInstallBulletStarter\"),\n description: t(\"Common:DashboardInstallBulletStarterDescription\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

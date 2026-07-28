@@ -34,7 +34,7 @@
  */
 
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import {
   getPaymentSettings,
@@ -45,6 +45,8 @@ import {
   getServicesQuotas,
   getServiceQuota,
   getLicenseQuota,
+  setServiceState,
+  getWalletBalance,
 } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
@@ -65,8 +67,20 @@ import {
 } from "@docspace/shared/api/portal/types";
 
 import { AI_ENUM, BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+import { applyServiceQuotaToMap } from "@docspace/ui-kit/billing/utils/parsers";
+import {
+  getCardLinkedOnFreeTariff,
+  getCardLinkedOnNonProfit,
+  getIsCardLinkedToPortal,
+  getIsCardMissingOrInactive,
+  getIsPayer,
+  getWalletBalanceAmount,
+  getWalletBalanceCurrency,
+  formatPaymentDate,
+} from "@docspace/ui-kit/billing/utils/paymentSelectors";
 import type { DateTime } from "luxon";
-import { formatDate as formatDateUtil } from "@docspace/ui-kit/utils/date";
+
+import { PersistenceKeys, removePersisted } from "./utils/persistence";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -89,6 +103,22 @@ class PaymentStore {
   settingsStore: SettingsStore | null = null;
 
   licenseQuota: TLicenseQuota | null = null;
+
+  walletBalanceData: TBalance | null = null;
+
+  get walletBalance(): number {
+    return getWalletBalanceAmount(this.walletBalanceData);
+  }
+
+  get walletCodeCurrency(): string {
+    return getWalletBalanceCurrency(this.walletBalanceData);
+  }
+
+  fetchWalletBalance = async (isRefresh?: boolean) => {
+    const res = await getWalletBalance(isRefresh);
+    if (res) this.walletBalanceData = res;
+    return this.walletBalance;
+  };
 
   salesEmail = "";
 
@@ -132,14 +162,10 @@ class PaymentStore {
   }
 
   get isPayer() {
-    if (!this.userStore || !this.currentTariffStatusStore) return;
-
-    const { user } = this.userStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-
-    if (!user || !walletCustomerEmail) return false;
-
-    return user.email === walletCustomerEmail;
+    return getIsPayer(
+      this.userStore?.user?.email,
+      this.currentTariffStatusStore?.walletCustomerEmail,
+    );
   }
 
   setIsUpdatingBasicSettings = (isUpdatingBasicSettings: boolean) => {
@@ -149,23 +175,41 @@ class PaymentStore {
   get cardLinkedOnFreeTariff() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    const { isFreeTariff } = this.currentQuotaStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-
-    return isFreeTariff && !!walletCustomerEmail;
+    return getCardLinkedOnFreeTariff(
+      this.currentQuotaStore.isFreeTariff,
+      this.currentTariffStatusStore.walletCustomerEmail,
+    );
   }
 
   get cardLinkedOnNonProfit() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-    const { isNonProfit } = this.currentQuotaStore;
+    return getCardLinkedOnNonProfit(
+      this.currentQuotaStore.isNonProfit,
+      this.currentTariffStatusStore.walletCustomerEmail,
+    );
+  }
 
-    if (!isNonProfit) return false;
+  get isCardLinkedToPortal() {
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    if (!walletCustomerEmail) return false;
+    return getIsCardLinkedToPortal({
+      isNonProfit: this.currentQuotaStore.isNonProfit,
+      isFreeTariff: this.currentQuotaStore.isFreeTariff,
+      walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+    });
+  }
 
-    return true;
+  get isCardMissingOrInactive() {
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return true;
+
+    return getIsCardMissingOrInactive({
+      isNonProfit: this.currentQuotaStore.isNonProfit,
+      isFreeTariff: this.currentQuotaStore.isFreeTariff,
+      walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+      walletCustomerStatusNotActive:
+        this.currentTariffStatusStore.walletCustomerStatusNotActive,
+    });
   }
 
   get storageSizeIncrement() {
@@ -198,16 +242,15 @@ class PaymentStore {
     return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
   }
 
-  formatDate = (date: DateTime, timeType?: "start" | "end") => {
-    if (!timeType) {
-      return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
-    }
+  get isAIReady() {
+    return (
+      Boolean(this.isAiToolsServiceOn) ||
+      Boolean(settingsStore.aiConfig?.aiReady)
+    );
+  }
 
-    const dateStr = formatDateUtil(date, "yyyy-MM-dd", { locale: "en" });
-    const timeTypeValue = timeType === "start" ? "00:00:00" : "23:59:59";
-
-    return `${dateStr}T${timeTypeValue}`;
-  };
+  formatDate = (date: DateTime, timeType?: "start" | "end") =>
+    formatPaymentDate(date, timeType);
 
   handleServiceQuota = async (serviceName = BACKUP_SERVICE) => {
     const abortController = new AbortController();
@@ -215,28 +258,32 @@ class PaymentStore {
 
     const service = await getServiceQuota(serviceName, abortController.signal);
 
-    const feature = service.features[0];
-
-    const featureWithPrice = {
-      ...feature,
-      price: service.price,
-      serviceName: service.serviceName,
-    } as TServiceFeatureWithPrice;
-
-    const existingEntry = Array.from(
-      this.servicesQuotasFeatures.entries(),
-    ).find(
-      ([, value]) =>
-        (value as TServiceFeatureWithPrice).serviceName === service.serviceName,
-    );
-
-    const key = existingEntry
-      ? existingEntry[0]
-      : service.features[0].id.toString();
-
-    this.servicesQuotasFeatures.set(key, featureWithPrice);
+    runInAction(() => {
+      applyServiceQuotaToMap(
+        service,
+        this.servicesQuotasFeatures as Parameters<
+          typeof applyServiceQuotaToMap
+        >[1],
+      );
+    });
 
     return service.serviceName;
+  };
+
+  enableAIService = async (onSuccess?: () => void | Promise<void>) => {
+    const feature = this.servicesQuotasFeatures.get(AI_ENUM);
+    if (feature) {
+      this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: true });
+    }
+    try {
+      await setServiceState({ service: AI_ENUM, enabled: true });
+      await onSuccess?.();
+    } catch (e) {
+      if (feature) {
+        this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: false });
+      }
+      toastr.error(e as Error);
+    }
   };
 
   standaloneBasicSettings = async (t: TTranslation) => {
@@ -358,8 +405,8 @@ class PaymentStore {
         return;
       }
 
-      toastr.success(t("ActivateLicenseActivated"));
-      localStorage.removeItem("enterpriseAlertClose");
+      toastr.success(t("Common:ActivateLicenseActivated"));
+      removePersisted(PersistenceKeys.enterpriseAlertClose);
 
       await getPaymentInfo();
       await this.settingsStore?.getSettings();

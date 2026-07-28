@@ -66,7 +66,7 @@ const AdvancedSettings = (props: InjectedProps) => {
 	return (
 		<div className={styles.styledWrapper}>
 			<Text className={styles.advancedTitle} fontWeight={600} fontSize="14px">
-				{t("AdvancedSettings")}
+				{t("Common:AdvancedSettings")}
 			</Text>
 
 			<div className={styles.advancedBlock}>

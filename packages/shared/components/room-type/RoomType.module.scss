@@ -121,7 +121,20 @@
   :global {
     .choose_room-logo_wrapper {
       width: 32px;
+      height: 32px;
       margin-bottom: auto;
+    }
+
+    .choose_room-private-logo {
+      display: flex;
+      width: 32px;
+      height: 32px;
+
+      div,
+      svg {
+        width: 32px;
+        height: 32px;
+      }
     }
 
     .choose_room-info_wrapper {
@@ -172,6 +185,19 @@
   :global {
     .choose_room-description {
       color: var(--room-type-list-item-description-text);
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    background-color: var(--room-type-list-item-disabled-background);
+
+    &:hover:not(:active) {
+      background-color: var(--room-type-list-item-disabled-background);
+    }
+
+    &:active {
+      border-color: var(--room-type-list-item-border);
     }
   }
 }

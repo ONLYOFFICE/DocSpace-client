@@ -79,6 +79,7 @@ export type EditLinkPanelProps = ExternalLinkType & {
 
   onClose?: VoidFunction;
   updateLink?: (link: TFileLink) => void;
+  isExternalShareRestricted?: boolean;
 };
 
 export interface ToggleBlockProps {

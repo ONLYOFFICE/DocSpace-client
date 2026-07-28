@@ -107,7 +107,6 @@ const Users = ({
 	const { t, ready } = useTranslation([
 		"People",
 		"InfoPanel",
-		"ConnectDialog",
 		"Common",
 		"PeopleTranslations",
 		"People",

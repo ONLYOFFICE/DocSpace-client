@@ -32,6 +32,8 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+import path from "path";
+
 import { headers, cookies } from "next/headers";
 import type { Metadata } from "next";
 
@@ -45,11 +47,13 @@ import {
 import "@docspace/shared/styles/theme.scss";
 
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
 import {
   LOCALE_HEADER,
+  OAUTH_FRAME_HEADER,
   STYLES_URL_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
@@ -58,7 +62,6 @@ import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
 import { logger } from "@/../logger.mjs";
-import { loadLocale } from "@/utils/translationLoaders";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -102,11 +105,11 @@ export default async function RootLayout({
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
 
-  const initialLocaleNsMap =
-    locale && locale !== "en"
-      ? await loadLocale(locale).catch(() => null)
-      : null;
-  const initialLocaleResources = initialLocaleNsMap?.get("Common");
+  const initialLocaleResources = await loadTranslationsForLocale(locale, {
+    namespaces: [],
+    appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
+  });
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
     | ThemeKeys
@@ -161,6 +164,7 @@ export default async function RootLayout({
           </style>
         )}
         <Providers
+          oauthFrame={hdrs.get(OAUTH_FRAME_HEADER) === "1"}
           contextData={{
             initialTheme: theme,
             user: self,

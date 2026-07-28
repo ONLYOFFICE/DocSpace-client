@@ -97,7 +97,10 @@ export interface InjectedEmptyViewContainerProps
       TStore["selectedFolderStore"],
       "access" | "security" | "rootFolderType"
     >,
-    Pick<TStore["treeFoldersStore"], "myFolder" | "myFolderId" | "roomsFolder">,
+    Pick<
+      TStore["treeFoldersStore"],
+      "myFolder" | "myFolderId" | "roomsFolder" | "isPrivacyFolder"
+    >,
     Pick<TStore["clientLoadingStore"], "setIsSectionFilterLoading"> {
   selectedFolder: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]
@@ -117,6 +120,24 @@ export interface InjectedEmptyViewContainerProps
   isPortalAdmin: AuthStore["isAdmin"];
   aiReady?: boolean;
   standalone: SettingsStore["standalone"];
+  isCardLinkedToPortal?: boolean;
+  isPayer?: boolean;
+  walletCustomerEmail?: string | null;
+  walletCustomerDisplayName?: string | null;
+  enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
+  getAIConfig?: () => Promise<void>;
+  refreshCurrentFolder?: () => Promise<void>;
+  refreshPaymentInfo?: () => Promise<void>;
+  language?: string;
+  socialAuthWelcomeVisible: boolean;
+  onSocialAuthWelcomeClose: () => void;
+  tenantAlias: string;
+  baseDomain: string | null;
+  socialAuthUser: TStore["userStore"]["user"];
+  isGracePeriod: boolean;
+  knowledgeId: number | null;
+  startUpload: TStore["uploadDataStore"]["startUpload"];
+  createFoldersTree: TStore["filesActionsStore"]["createFoldersTree"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &
@@ -136,6 +157,7 @@ export type OptionActions = {
     openRoot?: boolean,
   ) => void;
   uploadFromDocspaceAiKnowledge: VoidFunction;
+  uploadFromDeviceAiKnowledge: VoidFunction;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
@@ -143,7 +165,12 @@ export type OptionActions = {
   inviteRootUser: ContactsConextOptionsStore["inviteUser"];
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
+  onGoToForms: () => LinkProps;
+  onGoToAgents: () => LinkProps;
   onCreateAIAgent: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;
+  onTopUpAndActivateAI: VoidFunction;
+  onActivateAI: VoidFunction;
+  onShowAIBenefits: VoidFunction;
 };

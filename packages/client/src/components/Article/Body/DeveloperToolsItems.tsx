@@ -55,8 +55,14 @@ const items = [
     id: "devtools-overview",
     path: "/developer-tools/overview",
     pageType: PageType.devToolsOverview,
-    // t("Settings:Overview") - already translated in the parent component
-    translationKey: "Settings:Overview",
+    // t("Common:Overview") - already translated in the parent component
+    translationKey: "Common:Overview",
+  },
+  {
+    id: "devtools-docs-connect",
+    path: "/developer-tools/docs-connect",
+    pageType: PageType.devToolsDocsConnect,
+    translationKey: "DocsConnect:DocsConnect",
   },
   {
     id: "devtools-javascript-sdk",
@@ -103,6 +109,8 @@ const DeveloperToolsItems = ({
     "WebPlugins",
     "Webhooks",
     "OAuth",
+    "Common",
+    "DocsConnect",
   ]);
 
   const location = useLocation();
@@ -163,3 +171,4 @@ export default inject(({ settingsStore, authStore }: TStore) => {
     currentDeviceType,
   };
 })(observer(DeveloperToolsItems));
+

@@ -65,8 +65,8 @@ const ChoiceNewOwner = ({ t, targetUser, onTogglePeopleSelector }) => {
       <AddButton
         className="selector-add-button"
         onClick={onTogglePeopleSelector}
-        label={t("Translations:ChooseFromList")}
-        titleText={t("Translations:ChooseFromList")}
+        label={t("Common:ChooseFromList")}
+        titleText={t("Common:ChooseFromList")}
         noSelect
       />
     </div>

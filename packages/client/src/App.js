@@ -53,6 +53,7 @@ import "./custom.scss";
 
 import ThemeProvider from "./components/ThemeProviderWrapper";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+import EncryptionProviderWrapper from "./components/EncryptionProviderWrapper";
 
 import router from "./router";
 
@@ -98,7 +99,9 @@ const App = () => {
           <I18nextProvider i18n={i18n}>
             <ThemeProvider>
               <ErrorBoundary>
-                <RouterProvider router={router} />
+                <EncryptionProviderWrapper>
+                  <RouterProvider router={router} />
+                </EncryptionProviderWrapper>
               </ErrorBoundary>
             </ThemeProvider>
           </I18nextProvider>

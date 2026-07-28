@@ -1,6 +1,10 @@
 {
   "HideInput": "ເຊື່ອງ",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} ຈາກ {{total}}</0> ໂຫຼດສຳເລັດ. ໂຄຕ້າການເກັບຂໍ້ມູນເກີນ — <1>ເບິ່ງລາຍລະອຽດ</1>.",
+  "QuotaExceededTooltip": "ໂຄຕ້າການເກັບຂໍ້ມູນເກີນ. ລຶບຂໍ້ມູນ ຫຼືອັບເກຣດແຜນ ແລ້ວລອງໃໝ່.",
   "Ready": "ສຳເລັດ",
+  "RetryAfterQuotaUpgrade": "ລອງໃໝ່ຫຼັງຈາກອັບເກຣດໂຄຕ້າ",
+  "RetryUpload": "ລອງໃໝ່",
   "UploadingAndConversion": "ການໂຫຼດ & ການປ່ຽນຮູບແບບ",
   "UploadingError": "ການໂຫຼດຜິດພາດ"
 }

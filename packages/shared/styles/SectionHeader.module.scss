@@ -116,7 +116,7 @@
       }
 
       .title-icon {
-        svg {
+        svg:not(.security) {
           path {
             fill: var(--room-icon-link-icon-path);
           }
@@ -153,12 +153,43 @@
     }
   }
 
-  &:not(.isExternalFolder) {
+  &:not(.isColoredTitleIcon) {
     :global {
       .header-container {
         .title-icon {
           svg {
             path {
+              fill: var(--room-icon-link-icon-path);
+            }
+            rect {
+              stroke: var(--background-color);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.isExternalFolder):not(.isColoredTitleIcon) {
+    :global {
+      .header-container {
+        .title-icon {
+          svg:not(.security) {
+            path {
+              fill: var(--background-color);
+            }
+          }
+
+          .security {
+            .security-backing {
+              fill: var(--background-color);
+            }
+
+            .security-shield {
+              fill: colors.$light-status-positive;
+            }
+
+            .security-check {
               fill: var(--background-color);
             }
           }

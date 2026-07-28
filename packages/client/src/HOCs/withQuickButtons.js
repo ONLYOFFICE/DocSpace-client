@@ -35,7 +35,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { now, parseToDateTime, addToDate, dateDiff } from "@docspace/ui-kit/utils/date";
+import {
+  now,
+  parseToDateTime,
+  addToDate,
+  dateDiff,
+} from "@docspace/ui-kit/utils/date";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
@@ -44,6 +49,7 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { FolderType } from "@docspace/shared/enums";
 
 import { openShareTab } from "SRC_DIR/helpers/info-panel";
 
@@ -63,7 +69,7 @@ export default function withQuickButtons(WrappedComponent) {
       if (!security?.Lock || isLoading) return;
       this.setState({ isLoading: true });
       return lockFileAction(id, !locked)
-        .then(() => toastr.success(t("Translations:FileUnlocked")))
+        .then(() => toastr.success(t("Common:FileUnlocked")))
         .catch((err) => toastr.error(err))
         .finally(() => this.setState({ isLoading: false }));
     };
@@ -89,23 +95,39 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onClickShare = async () => {
-      const { t, item, setShareChanged, getManageLinkOptions } = this.props;
+      const {
+        t,
+        item,
+        setShareChanged,
+        getManageLinkOptions,
+        isLinkBlockedByAdmin,
+      } = this.props;
 
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
       if (primaryLink) {
+        if (isLinkBlockedByAdmin(item, primaryLink)) {
+          toastr.error(t("Common:LinkBlockedByAdminWarning"));
+          return;
+        }
+
         copyShareLink(item, primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
       }
     };
 
     onCopyPrimaryLink = async () => {
-      const { t, item, getManageLinkOptions } = this.props;
+      const { t, item, getManageLinkOptions, isLinkBlockedByAdmin } =
+        this.props;
+
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
+        if (isLinkBlockedByAdmin(item, primaryLink)) {
+          toastr.error(t("Common:LinkBlockedByAdminWarning"));
+          return;
+        }
+
         copyShareLink(item, primaryLink, t, getManageLinkOptions(item));
-        // copyShareLink(primaryLink.sharedTo.shareLink);
-        // toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };
 
@@ -132,7 +154,8 @@ export default function withQuickButtons(WrappedComponent) {
       const startDate = this.getStartDate();
       const startDateTime = parseToDateTime(startDate);
       const expiredDateTime = parseToDateTime(item.expired);
-      const diffMs = dateDiff(startDateTime, expiredDateTime, "milliseconds") * 0.1;
+      const diffMs =
+        dateDiff(startDateTime, expiredDateTime, "milliseconds") * 0.1;
       const showDate = addToDate(expiredDateTime, diffMs, "milliseconds");
 
       return now().toMillis() >= showDate.toMillis();
@@ -247,6 +270,7 @@ export default function withQuickButtons(WrappedComponent) {
       indexingStore,
       contextOptionsStore,
       selectedFolderStore,
+      filesSettingsStore,
     }) => {
       const {
         setFavoriteAction,
@@ -301,7 +325,9 @@ export default function withQuickButtons(WrappedComponent) {
         retryVectorization,
         isTrashFolder,
         showForcedInfoPanelLoader,
+        isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
       };
     },
   )(observer(WithQuickButtons));
 }
+

@@ -60,6 +60,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
 	setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
 	getIcon: (size: number, fileExst: string) => string;
+	isExternalShareEnabled: boolean;
 
 	onClose?: () => void;
 
@@ -89,6 +90,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	withRecentTreeFolder?: boolean;
 	withFavoritesTreeFolder?: boolean;
 	withAIAgentsTreeFolder?: boolean;
+	withFormsTreeFolder?: boolean;
 
 	theme: TTheme;
 
@@ -103,6 +105,14 @@ export type FilesSelectorProps = TSelectorHeader & {
 	setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
 	setConflictDialogData: (conflicts: unknown, operationData: unknown) => void;
 	itemOperationToFolder: (operationData: unknown) => Promise<void>;
+	copyEncryptedFilesToFolder: (
+		items: TFile[],
+		destFolderId: string | number,
+		destInfo: { private?: boolean; rootFolderId?: number; roomType?: number },
+	) => Promise<void>;
+	sourceIsPrivate?: boolean;
+	sourceInPrivateRoom?: boolean;
+	privateRoomId?: number | string;
 	clearActiveOperations: (
 		folderIds: string[] | number[],
 		fileIds: string[] | number[],

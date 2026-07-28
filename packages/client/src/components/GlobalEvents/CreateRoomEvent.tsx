@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/utils/rooms";
 import { Text } from "@docspace/ui-kit/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 import { RoomsType } from "@docspace/shared/enums";
 import { TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
@@ -61,7 +62,9 @@ type CreateRoomEventProps = {
   title: string;
   visible: boolean;
   startRoomType: RoomsType;
+  isFormsCreate?: boolean;
   item: TFolder;
+  context: string;
   onClose: VoidFunction;
 
   processCreatingRoomFromData: FilesActionStore["processCreatingRoomFromData"];
@@ -74,6 +77,7 @@ type CreateRoomEventProps = {
   setSelectedRoomType: CreateEditRoomStore["setSelectedRoomType"];
   setIsLoading: CreateEditRoomStore["setIsLoading"];
   setOnClose: CreateEditRoomStore["setOnClose"];
+  setOpenContext: CreateEditRoomStore["setOpenContext"];
   isCorrectWatermark: CreateEditRoomStore["isCorrectWatermark"];
   confirmDialogIsLoading: CreateEditRoomStore["confirmDialogIsLoading"];
   isLoading: CreateEditRoomStore["isLoading"];
@@ -89,16 +93,23 @@ type CreateRoomEventProps = {
   getThirdPartyIcon: ThirdPartyStore["getThirdPartyIcon"];
 
   enableThirdParty: FilesSettingsStore["enableThirdParty"];
+  isExternalShareRestricted: boolean;
 
   selectionItems: FilesStore["selection"];
 
   isDefaultRoomsQuotaSet: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+
+  encryptionKeys: UserStore["encryptionKeys"];
+  setUserEncryptionKeys: UserStore["setUserEncryptionKeys"];
+  userId: string | undefined;
+  accountEmail: string | undefined;
 };
 
 const CreateRoomEvent = ({
   title,
   visible,
   onClose,
+  context,
 
   fetchTags,
   setRoomParams,
@@ -111,6 +122,7 @@ const CreateRoomEvent = ({
   isLoading,
   setIsLoading,
   setOnClose,
+  setOpenContext,
   setCreateRoomDialogVisible,
   setCover,
 
@@ -118,6 +130,7 @@ const CreateRoomEvent = ({
   enableThirdParty,
   deleteThirdParty,
   startRoomType,
+  isFormsCreate,
   isCorrectWatermark,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
@@ -125,7 +138,12 @@ const CreateRoomEvent = ({
   setSelectedRoomType,
   getThirdPartyIcon,
   isDefaultRoomsQuotaSet,
+  isExternalShareRestricted,
   item,
+  encryptionKeys,
+  setUserEncryptionKeys,
+  userId,
+  accountEmail,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState<string[]>([]);
@@ -177,6 +195,7 @@ const CreateRoomEvent = ({
   }, [fetchTagsAction]);
 
   useEffect(() => {
+    setOpenContext(context ?? "");
     setCreateRoomDialogVisible(true);
     return () => {
       setCreateRoomDialogVisible(false);
@@ -206,6 +225,7 @@ const CreateRoomEvent = ({
       onClose={onClose}
       onCreate={onCreate}
       startRoomType={startRoomType}
+      isFormsCreate={isFormsCreate}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
       setIsLoading={setIsLoading}
@@ -218,6 +238,11 @@ const CreateRoomEvent = ({
       setSelectedRoomType={setSelectedRoomType}
       getThirdPartyIcon={getThirdPartyIcon}
       isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+      encryptionKeys={encryptionKeys}
+      setUserEncryptionKeys={setUserEncryptionKeys}
+      userId={userId}
+      accountEmail={accountEmail}
+      isExternalShareRestricted={isExternalShareRestricted}
       {...roomParams}
     />
   );
@@ -232,6 +257,7 @@ export default inject(
     filesStore,
     filesActionsStore,
     currentQuotaStore,
+    userStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -242,7 +268,11 @@ export default inject(
     const { deleteThirdParty, fetchThirdPartyProviders, getThirdPartyIcon } =
       filesSettingsStore.thirdPartyStore;
 
-    const { enableThirdParty } = filesSettingsStore;
+    const {
+      enableThirdParty,
+      isExternalShareRestricted,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
 
     const {
       createRoomConfirmDialogVisible,
@@ -258,6 +288,7 @@ export default inject(
       isLoading,
       setIsLoading,
       setOnClose,
+      setOpenContext,
       confirmDialogIsLoading,
 
       isCorrectWatermark,
@@ -265,6 +296,9 @@ export default inject(
     } = createEditRoomStore;
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+
+    const { encryptionKeys, setUserEncryptionKeys, user } = userStore;
+    const userId = user?.id ? String(user.id) : undefined;
 
     const selectionItems = selections;
 
@@ -278,6 +312,7 @@ export default inject(
       isLoading,
       setIsLoading,
       setOnClose,
+      setOpenContext,
       confirmDialogIsLoading,
       setCreateRoomDialogVisible,
       fetchThirdPartyProviders,
@@ -292,6 +327,12 @@ export default inject(
       setProcessCreatingRoomFromData,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
+      encryptionKeys,
+      setUserEncryptionKeys,
+      userId,
+      accountEmail: user?.email,
+      isExternalShareRestricted:
+        isExternalShareRestricted && externalShareApplyToRooms,
     };
   },
 )(observer(CreateRoomEvent));

@@ -3,7 +3,7 @@
   "content": "Guests",
   "content_en_sha1_hash": "3c23a67045a35d8dc1bd02b5088b1f1470636e89",
   "created_at": "2025-05-19T21:30:45.714Z",
-  "updated_at": "2026-05-15T14:00:06.583Z",
+  "updated_at": "2026-07-27T13:07:50.559Z",
   "comment": {
     "text": "This is a label for a section or category that refers to external users who have limited access to the platform. It appears in navigation menus or lists.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 704,
       "context": "},\n ],\n ...[\n withGuests && {\n id: GUESTS_TAB_ID,\n name: t(\"Guests\"),\n onClick: () => changeActiveTab(GUESTS_TAB_ID),\n content: null,\n },\n ],\n ].filter((i) => !!i),",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/AccountsSidebar/index.tsx",
+      "line_number": 129,
+      "context": "icon: getCatalogIconUrlByType(PageType.groups),\n onClick: goToFilterRoute(GROUPS_ROUTE_WITH_FILTER),\n },\n {\n id: GUESTS_ID,\n label: t(\"Common:Guests\"),\n icon: getCatalogIconUrlByType(PageType.guests),\n onClick: goToFilterRoute(GUESTS_ROUTE_WITH_FILTER),\n },\n ];\n return [{ id: \"accounts\", items }];",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
@@ -37,15 +43,21 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
-      "line_number": 124,
+      "line_number": 125,
       "context": "label: t(\"InfoPanel:Users\"),\n list: users,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"Common:Guests\"),\n list: guests,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"InfoPanel:ExpectUsers\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 731,
+      "line_number": 822,
       "context": "return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle\n : currentGroupName;\n }\n case \"guests\":\n return t(\"Common:Guests\");\n default:\n return t(\"Common:Members\");\n }\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/useMembers.ts",
+      "line_number": 122,
+      "context": "label: t(\"Common:RoomUsers\"),\n list: users,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"Common:Guests\"),\n list: guests,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"Common:RoomExpectUsers\"),",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",

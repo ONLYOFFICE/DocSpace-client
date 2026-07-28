@@ -71,7 +71,9 @@ export default function withBadges(WrappedComponent) {
       setIsVerHistoryPanel(true);
     };
 
-    onBadgeClick = () => {
+    onBadgeClick = (e) => {
+      e?.stopPropagation?.();
+
       const { disableBadgeClick } = this.state;
       if (disableBadgeClick) return;
 
@@ -186,7 +188,7 @@ export default function withBadges(WrappedComponent) {
 
       this.setState({ isLoading: true });
       return lockFileAction(id, !locked)
-        .then(() => toastr.success(t("Translations:FileUnlocked")))
+        .then(() => toastr.success(t("Common:FileUnlocked")))
         .catch((err) => toastr.error(err))
         .finally(() => this.setState({ isLoading: false }));
     };
@@ -403,3 +405,4 @@ export default function withBadges(WrappedComponent) {
     },
   )(observer(WithBadges));
 }
+

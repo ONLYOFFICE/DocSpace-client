@@ -424,7 +424,7 @@ const SimpleRoom = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+            <CategorySubHeader>{t("Common:InterfaceElements")}</CategorySubHeader>
 
             <CheckboxGroup>
               <LabelGroup>
@@ -452,7 +452,7 @@ const SimpleRoom = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("SearchFilterAndSort")}
+                  label={t("Common:SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
                   dataTestId="filter_checkbox"
@@ -464,8 +464,8 @@ const SimpleRoom = (props) => {
                   dataTestId="filter_help_button"
                   tooltipContent={
                     <TooltipContent
-                      title={t("SearchBlock")}
-                      description={t("ManagerSearchBlockDescription")}
+                      title={t("Common:SearchBlock")}
+                      description={t("Common:ManagerSearchBlockDescription")}
                       img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     />
                   }
@@ -497,7 +497,6 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Files",
     "Translations",

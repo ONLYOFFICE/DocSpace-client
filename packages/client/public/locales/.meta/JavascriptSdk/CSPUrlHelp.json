@@ -3,7 +3,7 @@
   "content": "Please provide only the domain name, avoiding URL paths or extra characters.",
   "content_en_sha1_hash": "8518f3b5c2600c34e8bf485ef87d1b3b4d31f203",
   "created_at": "2025-06-08T12:02:20.112Z",
-  "updated_at": "2026-05-15T15:37:40.259Z",
+  "updated_at": "2026-06-01T21:20:44.471Z",
   "comment": {
     "text": "This is an error message or help text displayed below an input field for Content Security Policy (CSP) domains. It guides the user on the correct format for entering a domain name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 199,
+      "line_number": 200,
       "context": "</div>\n <Text\n lineHeight=\"20px\"\n color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}\n >\n {error || t(\"CSPUrlHelp\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <div className={styles.chipsContainer}>{getChips(cspDomains)}</div>\n </>\n );\n };",
       "module": "/packages/client"
     }
@@ -77,7 +77,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "sq-AL": {
       "ai_translated": false,

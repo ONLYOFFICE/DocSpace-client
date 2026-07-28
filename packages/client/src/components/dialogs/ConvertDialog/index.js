@@ -72,11 +72,11 @@ const ConvertDialogComponent = (props) => {
 
   const options = [
     {
-      label: t("Document"),
+      label: t("Common:Document"),
       value: ".docx",
     },
     {
-      label: t("Spreadsheet"),
+      label: t("Common:Spreadsheet"),
       value: ".xlsx",
     },
   ];
@@ -90,7 +90,7 @@ const ConvertDialogComponent = (props) => {
 
   if (convertSingleFile && sortedFolder) {
     rootFolderTitle = isSharedWithMeFolder
-      ? t("Common:MyDocuments")
+      ? t("Common:Files")
       : rootFoldersTitles[convertItem.rootFolderType]?.title;
   }
 
@@ -153,21 +153,21 @@ const ConvertDialogComponent = (props) => {
     >
       <ModalDialog.Header>
         {convertSingleFile
-          ? t("DocumentConversionTitle")
+          ? t("Common:DocumentConversionTitle")
           : t("FileUploadTitle")}
       </ModalDialog.Header>
       <ModalDialog.Body style={{ paddingBottom: "0px" }}>
         <Text>
           {convertSingleFile
             ? isXML
-              ? t("ConversionXmlMessage")
-              : t("OpenFileMessage")
+              ? t("Common:ConversionXmlMessage")
+              : t("Common:OpenFileMessage")
             : t("ConversionMessage")}
         </Text>
 
         {isXML ? (
           <div style={{ boxSizing: "border-box", padding: "16px 0 0" }}>
-            <Text>{t("SelectFileType")}</Text>
+            <Text>{t("Common:SelectFileType")}</Text>
             <RadioButtonGroup
               orientation="vertical"
               options={options}
@@ -186,7 +186,7 @@ const ConvertDialogComponent = (props) => {
           <div className={styles.convertDialogCheckboxes}>
             <Checkbox
               className="convert_dialog_checkbox"
-              label={t("SaveOriginalFormatMessage")}
+              label={t("Common:SaveOriginalFormatMessage")}
               isChecked={storeOriginalFiles}
               onChange={onChangeFormat}
               dataTestId="convert_dialog_save_original_checkbox"
@@ -210,7 +210,7 @@ const ConvertDialogComponent = (props) => {
             {!convertSingleFile ? (
               <Checkbox
                 className="convert_dialog_checkbox"
-                label={t("HideMessage")}
+                label={t("Common:HideMessage")}
                 isChecked={hideMessage}
                 onChange={onChangeMessageVisible}
                 dataTestId="convert_dialog_hide_message_checkbox"
@@ -300,3 +300,4 @@ export default inject(
     };
   },
 )(observer(ConvertDialog));
+

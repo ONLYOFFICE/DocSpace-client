@@ -58,6 +58,7 @@ import {
 } from "@docspace/shared/api/files/types";
 import {
   TAIRoomChatSettings,
+  TRoom,
   TRoomLifetime,
   TRoomSecurity,
   TWatermark,
@@ -70,11 +71,25 @@ export type TNavigationPath = {
   id: number | string;
   title: string;
   isRoom: boolean;
-  roomType: RoomsType;
+  /** Optional: FilesStore builds path entries for plain folders where the
+   * fetched info has no roomType. */
+  roomType?: RoomsType;
   isRootRoom: boolean;
-  shared: boolean;
+  /** Optional: only resolved for the room level (idx 1) in FilesStore. */
+  shared?: boolean;
   quotaLimit?: number;
   usedSpace?: number;
+  private?: boolean;
+  /** Set by FilesStore.fetchFiles for external (shared-with-me) rooms. */
+  external?: boolean;
+  /** Set by FilesStore.fetchFiles for the room-templates root entry. */
+  isRootTemplates?: boolean;
+  /** Folder type of the path part (used to drop Knowledge/ResultStorage
+   * entries). */
+  folderType?: FolderType;
+  /** Set by the .js FilesStore for template folders; read by
+   * FilesActionsStore.moveToRoomsPage. */
+  isTemplatesFolder?: boolean;
 };
 
 type ExcludeTypes = SettingsStore | CallableFunction;
@@ -92,7 +107,9 @@ export type TSetSelectedFolder = {
 };
 
 class SelectedFolderStore {
-  folders: TFolder[] | null = null;
+  // Rooms/agents listings store TRoom entries here (FilesStore.fetchRooms /
+  // fetchAgents pass data.folders through setSelectedFolder).
+  folders: (TFolder | TRoom)[] | null = null;
 
   parentId = 0;
 
@@ -112,11 +129,12 @@ class SelectedFolderStore {
 
   shared = false;
 
-  created: Date | null = null;
+  // The files API returns ISO strings; some callers set Date objects.
+  created: Date | string | null = null;
 
   createdBy: TCreatedBy | null = null;
 
-  updated: Date | null = null;
+  updated: Date | string | null = null;
 
   updatedBy: TCreatedBy | null = null;
 
@@ -130,11 +148,11 @@ class SelectedFolderStore {
 
   navigationPath: TNavigationPath[] = [];
 
-  providerItem = null;
+  providerItem: Nullable<boolean> = null;
 
-  providerKey = null;
+  providerKey: Nullable<string> = null;
 
-  providerId = null;
+  providerId: Nullable<number> = null;
 
   roomType: RoomsType | null = null;
 
@@ -152,7 +170,13 @@ class SelectedFolderStore {
 
   rootFolderId: number = 0;
 
-  security: TFolderSecurity | TRoomSecurity | null = null;
+  // The Partial variant covers FilesStore's merged AI room/sub-folder
+  // security view-model.
+  security:
+    | TFolderSecurity
+    | TRoomSecurity
+    | Partial<TFolderSecurity & TRoomSecurity>
+    | null = null;
 
   type: Nullable<FolderType> = null;
 
@@ -275,6 +299,7 @@ class SelectedFolderStore {
       parentShared: this.parentShared,
       ownedBy: this.ownedBy,
       sharedBy: this.sharedBy,
+      isThirdPartyStorage: this.isThirdPartyStorage,
       isRoomStorageQuotaExceeded: this.isRoomStorageQuotaExceeded,
       roomUsedSpace: this.roomUsedSpace,
       roomQuotaLimit: this.roomQuotaLimit,
@@ -323,6 +348,7 @@ class SelectedFolderStore {
     this.security = null;
     this.type = null;
     this.inRoom = false;
+    this.private = false;
     this.parentRoomType = null;
     this.lifetime = null;
     this.indexing = false;
@@ -548,8 +574,14 @@ class SelectedFolderStore {
       : this.usedSpace;
   }
 
+  get isThirdPartyStorage() {
+    return !!(this.providerItem || this.providerKey);
+  }
+
   get isRoomStorageQuotaExceeded() {
     if (this.rootFolderType !== FolderType.Rooms) return false;
+
+    if (this.isThirdPartyStorage) return false;
 
     const { roomQuotaLimit, roomUsedSpace } = this;
 

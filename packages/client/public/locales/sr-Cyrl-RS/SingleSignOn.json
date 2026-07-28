@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Додај сертификат",
-  "AdvancedSettings": "Напредна подешавања",
   "AdvancedSettingsTooltip": "Сакријте подразумевану страницу за аутентификацију и аутоматски преусмерите на SSO сервис.",
   "AttributeMatching": "Мапирање атрибута",
   "AttributeMatchingTooltip": "Одговарајуће Single Sign-On атрибута са уносима одељка 'Налози'.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Преузми SP метаподатке XML",
   "Encryption": "Шифровање",
   "GenerateCertificate": "Генериши нови самопотписани сертификат",
-  "Hide": "Сакриј",
   "HideAdditionalParameters": "Сакриј напредна подешавања",
   "HideAuthPage": "Сакриј страницу за аутентификацију",
   "idpAuthRequest": "Провери потпис аутентификационих одговора",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Entitet IdP-а (URL издаваоца)",
   "ServiceProviderSettings": "Подешавања  SP-а за {{organizationName}}",
   "ServiceProviderSettingsDescription": "Конфигуришите подешавања пружаоца услуга и додајте сертификате SP-а за Single Sign-On.",
-  "Show": "Прикажи",
   "ShowAdditionalParameters": "Прикажи напредна подешавања",
   "Signing": "Потписивање",
   "SigningAndEncryption": "Потписивање и шифровање",

@@ -96,10 +96,25 @@ const DATE = "date";
 const TAGS = "tags";
 const LOCATION = "location";
 const AREA = "area";
+const PARENT_ID = "parentId";
+const FOLDER_TYPE = "folderType";
 
 // TODO: add next params
 // subjectGroup bool
 // subjectID
+
+// The `folderType` URL value can be a single string ("5"), a repeated-key
+// array (["16", "19"]) or a comma-joined string ("16,19") — normalize all
+// three into a number list for the API (`List<FolderType>` on the server).
+const parseFolderTypes = (value: unknown): number[] | null => {
+  if (value == null) return null;
+
+  const list = (Array.isArray(value) ? value : String(value).split(","))
+    .map(Number)
+    .filter((item) => !Number.isNaN(item));
+
+  return list.length ? list : null;
+};
 
 const getOtherSearchParams = () => {
   const searchParams = new URLSearchParams(window.location.search);
@@ -127,6 +142,8 @@ const getOtherSearchParams = () => {
     TAGS,
     LOCATION,
     AREA,
+    PARENT_ID,
+    FOLDER_TYPE,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -199,6 +216,10 @@ class FilesFilter {
   key: string | null = null;
 
   location: FilterLocation | null = null;
+
+  parentId: number | string | null;
+
+  folderType: number[] | null = null;
 
   static getDefault(
     options: {
@@ -307,6 +328,9 @@ class FilesFilter {
       sharedBy,
     );
 
+    if (urlFilter[PARENT_ID]) newFilter.parentId = urlFilter[PARENT_ID];
+    newFilter.folderType = parseFolderTypes(urlFilter[FOLDER_TYPE]);
+
     return newFilter;
   }
 
@@ -331,6 +355,7 @@ class FilesFilter {
     key = DEFAULT_KEY,
     location = DEFAULT_LOCATION,
     sharedBy = DEFAULT_SHARED_BY_TYPE,
+    parentId: number | string | null = null,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -352,6 +377,7 @@ class FilesFilter {
     this.key = key;
     this.location = location;
     this.sharedBy = sharedBy;
+    this.parentId = parentId;
   }
 
   getStartIndex = () => {
@@ -393,9 +419,9 @@ class FilesFilter {
       filterType ||
       (search ?? "").trim() ||
       authorType ||
-      applyFilterOption !== ApplyFilterOption.All
-        ? withSubfolders
-        : false;
+      (applyFilterOption != null && applyFilterOption !== ApplyFilterOption.All)
+        ? (withSubfolders ?? "false")
+        : "false";
 
     const userIdOrGroupId =
       authorType && authorType.includes("_")
@@ -420,6 +446,8 @@ class FilesFilter {
       searchArea,
       location,
       sharedBy,
+      parentId: this.parentId,
+      folderType: this.folderType,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -470,6 +498,8 @@ class FilesFilter {
     if (searchArea) dtoFilter[SEARCH_AREA] = searchArea;
     if (key) dtoFilter[KEY] = key;
     if (location) dtoFilter[LOCATION] = location;
+    if (this.parentId != null) dtoFilter[PARENT_ID] = this.parentId;
+    if (this.folderType != null) dtoFilter[FOLDER_TYPE] = this.folderType;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -503,7 +533,7 @@ class FilesFilter {
   }
 
   clone() {
-    return new FilesFilter(
+    const filter = new FilesFilter(
       this.page,
       this.pageCount,
       this.total,
@@ -524,7 +554,12 @@ class FilesFilter {
       this.key,
       this.location,
       this.sharedBy,
+      this.parentId,
     );
+
+    filter.folderType = this.folderType ? [...this.folderType] : null;
+
+    return filter;
   }
 
   equals(filter: FilesFilter) {
@@ -546,7 +581,8 @@ class FilesFilter {
       this.extension === filter.extension &&
       this.searchArea === filter.searchArea &&
       this.location === filter.location &&
-      this.sharedBy === filter.sharedBy;
+      this.sharedBy === filter.sharedBy &&
+      String(this.folderType ?? "") === String(filter.folderType ?? "");
 
     return equals;
   }

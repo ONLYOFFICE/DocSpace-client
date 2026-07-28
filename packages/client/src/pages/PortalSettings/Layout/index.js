@@ -41,42 +41,12 @@ import Section from "@docspace/ui-kit/components/section";
 import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 
 import SectionWrapper from "SRC_DIR/components/Section";
+import PortalSettingsSidebar from "SRC_DIR/components/PortalSettingsSidebar";
 
 import SectionHeaderContent from "./Section/Header";
-import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import Warning from "./WarningComponent";
-
-
-const ArticleSettings = React.memo(
-  ({ showArticleLoader, needPageReload, isNotPaidPeriod }) => {
-    const onLogoClickAction = () => {
-      if (needPageReload) {
-        window.location.replace("/");
-      }
-    };
-
-    return (
-      <ArticleWrapper
-        showArticleLoader={showArticleLoader}
-        onLogoClickAction={onLogoClickAction}
-        showBackButton={!isNotPaidPeriod}
-      >
-        <Article.Header>
-          <ArticleHeaderContent />
-        </Article.Header>
-
-        <Article.Body>
-          <ArticleBodyContent />
-        </Article.Body>
-      </ArticleWrapper>
-    );
-  },
-);
-
-ArticleSettings.displayName = "ArticleSettings";
 
 const Layout = ({
   currentProductId,
@@ -88,9 +58,6 @@ const Layout = ({
   isInitPlugins,
   initPlugins,
 
-  isLoadedArticleBody,
-  needPageReload,
-  isNotPaidPeriod,
   currentDeviceType,
 }) => {
   const location = useLocation();
@@ -110,11 +77,7 @@ const Layout = ({
 
   return (
     <>
-      <ArticleSettings
-        showArticleLoader={!isLoadedArticleBody}
-        needPageReload={needPageReload}
-        isNotPaidPeriod={isNotPaidPeriod}
-      />
+      <PortalSettingsSidebar />
       {!isGeneralPage ? (
         <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
           <Section.SectionHeader>
@@ -140,7 +103,6 @@ export default inject(
     settingsStore,
     setup,
     pluginStore,
-    currentTariffStatusStore,
   }) => {
     const { language } = authStore;
     const { addUsers } = setup.headerAction;
@@ -149,10 +111,8 @@ export default inject(
       setCurrentProductId,
       enablePlugins,
       currentDeviceType,
-      isLoadedArticleBody,
     } = settingsStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
-    const { isInit: isInitPlugins, initPlugins, needPageReload } = pluginStore;
+    const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
     return {
       language,
@@ -163,9 +123,6 @@ export default inject(
       isInitPlugins,
       initPlugins,
 
-      isLoadedArticleBody,
-      needPageReload,
-      isNotPaidPeriod,
       currentDeviceType,
     };
   },

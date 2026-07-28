@@ -9,6 +9,6 @@
   "HostPassword": "Пароль хоста",
   "Port": "Порт",
   "SenderDisplayName": "Отображаемое имя отправителя",
-  "SenderEmailAddress": "Адрес email отправителя",
+  "SenderEmailAddress": "Адрес электронной почты отправителя",
   "SendTestMail": "Отправить тестовое письмо"
 }

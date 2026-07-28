@@ -3,7 +3,7 @@
   "content": "Chat history",
   "content_en_sha1_hash": "3baf78008193775e12919cdbc823e5fe05e312d3",
   "created_at": "2025-11-17T07:51:08.989Z",
-  "updated_at": "2026-05-15T14:00:06.987Z",
+  "updated_at": "2026-06-30T10:18:29.644Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over an icon, indicating that clicking it will display the chat history.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat-toolbar/index.tsx",
+      "line_number": 66,
+      "context": "<ActionButton\n icon={<HistoriesIcon />}\n className={classNames(styles.button, {\n [styles.active]: isHistoryActive,\n })}\n label={t(\"Common:ChatHistory\")}\n onClick={handleNavigateToHistory}\n />\n {/* <ActionButton\n icon={<PlusIcon />}\n className={styles.button}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/select-chat/index.tsx",
       "line_number": 289,

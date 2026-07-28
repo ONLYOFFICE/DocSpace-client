@@ -1,0 +1,29 @@
+{
+  "key_path": "SpendingBreakdown",
+  "content": "Spending breakdown",
+  "content_en_sha1_hash": "a295d0cb7f5a7243aa52a82d6df2c1628a9521d3",
+  "created_at": "2026-06-25T11:54:58.073Z",
+  "updated_at": "2026-06-30T11:38:22.666Z",
+  "comment": {
+    "text": "Section title for a detailed view of expenses within the billing usage component.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:00:52.610Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
+      "line_number": 304,
+      "context": "return (\n <div className={styles.breakdown}>\n <div className={styles.breakdownHeader}>\n <div className={styles.breakdownTitle}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"SpendingBreakdown\")}\n </Text>\n <Text fontSize=\"13px\">{dateRangeText}</Text>\n </div>\n \n <Tabs",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

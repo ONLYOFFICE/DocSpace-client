@@ -38,13 +38,12 @@ import React from "react";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
-import styles from "SRC_DIR/components/dialogs/CreateEditRoomDialog/CreateEditRoomDialog.module.scss";
 
 const SecondaryInfoButton = ({ content }) => {
   return (
     <HelpButton
       displayType="auto"
-      className={`set_room_params-info-title-help ${styles.secondaryInfoButton}`}
+      className="set_room_params-info-title-help"
       iconName={InfoReactSvgUrl}
       tooltipProps={{ globalEventOff: "click" }}
       tooltipContent={content}

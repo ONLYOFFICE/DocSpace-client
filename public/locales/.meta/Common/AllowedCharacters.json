@@ -3,7 +3,7 @@
   "content": "Allowed characters",
   "content_en_sha1_hash": "ac77db038821c031371dfa5b23843ccca5ae915f",
   "created_at": "2025-05-19T21:30:42.982Z",
-  "updated_at": "2026-05-15T15:37:40.232Z",
+  "updated_at": "2026-07-07T08:59:21.940Z",
   "comment": {
     "text": "This is a label for a list of characters that are permitted in a field, such as a password or a provider name. It is followed by a colon and the actual list of allowed characters.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
-      "line_number": 155,
-      "context": "className={classNames(styles.fieldHint, {\n [styles.errorText]: hasError,\n })}\n >\n {hasError\n ? `${t(\"Common:AllowedCharacters\")}: ${ALLOWED_MCP_CHARACTERS}`\n : t(\"AISettings:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"AISettings:IntegrationURL\")}",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
       "line_number": 275,
@@ -34,6 +28,12 @@
       "line_number": 186,
       "context": "tooltipPasswordCapital={`${t(\"Common:PasswordLimitUpperCase\")}`}\n tooltipPasswordSpecial={`${t(\n \"Common:PasswordLimitSpecialSymbols\",\n )}`}\n generatePasswordTitle={t(\"Common:GeneratePassword\")}\n tooltipAllowedCharacters={`${t(\"Common:AllowedCharacters\")}: ${ALLOWED_PASSWORD_CHARACTERS}`}\n isAutoFocussed\n />\n </FieldContainer>\n </div>",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/hooks/useBaseParams.tsx",
+      "line_number": 181,
+      "context": "className={classNames(styles.fieldHint, {\n [styles.errorText]: hasError,\n })}\n >\n {hasError\n ? `${t(\"Common:AllowedCharacters\")}: ${ALLOWED_MCP_CHARACTERS}`\n : t(\"Common:ProviderNameInputHint\")}\n </Text>\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:IntegrationURL\")}",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/PasswordAccessBlock.tsx",

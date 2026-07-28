@@ -38,6 +38,7 @@ import { Navigate } from "react-router";
 
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { FolderType } from "@docspace/shared/enums";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 
 import { getUrlByDefaultFolderType } from "SRC_DIR/helpers/utils";
 
@@ -46,11 +47,19 @@ type Props = {
 };
 
 const DefaultPageRedirectComponent = ({ defaultFolderType }: Props) => {
-  const defaultUrl = getUrlByDefaultFolderType(
-    defaultFolderType || FolderType.Rooms,
-  );
+  const val = localStorage.getItem("useDocSpace");
 
-  return <Navigate to={defaultUrl} replace />;
+  if (val === "old" || isOAuthFrame()) {
+    const defaultUrl = getUrlByDefaultFolderType(
+      defaultFolderType || FolderType.Rooms,
+    );
+    return <Navigate to={defaultUrl} replace />;
+  }
+
+  // First visit (null) — write "new" via the URL handler so the value is stored explicitly
+  if (val === null) return <Navigate to="/dashboard?design=new" replace />;
+
+  return <Navigate to="/dashboard" replace />;
 };
 
 export const DefaultPageRedirect = inject(({ settingsStore }: TStore) => ({

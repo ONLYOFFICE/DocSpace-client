@@ -105,6 +105,7 @@ const renderFilterSelector = ({
       }}
       isMultiSelect={false}
       withSearch
+      isForms={false}
       disableThirdParty={disableThirdParty}
     />
   );

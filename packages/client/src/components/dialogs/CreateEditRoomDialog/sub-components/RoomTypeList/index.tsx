@@ -38,11 +38,15 @@ import { useTranslation } from "react-i18next";
 import RoomType from "@docspace/shared/components/room-type";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "./RoomTypeList.module.scss";
 
 type RoomTypeListProps = {
   disabledFormRoom: boolean;
+  isExternalShareRestricted?: boolean;
+  processCreatingRoomFromData?: boolean;
+  isFormsCreate?: boolean;
 
   setRoomType: (roomType: RoomsType) => void;
   setTemplateDialogIsVisible: (isVisible: boolean) => void;
@@ -50,14 +54,26 @@ type RoomTypeListProps = {
 
 const RoomTypeList = ({
   disabledFormRoom = true,
+  isExternalShareRestricted,
+  processCreatingRoomFromData,
+  isFormsCreate,
 
   setRoomType,
   setTemplateDialogIsVisible,
 }: RoomTypeListProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Files", "Common"]);
 
+  // Form Filling Rooms are created from the dedicated "Forms" section (which
+  // opens straight into the FFR form via startRoomType). The only place the
+  // FFR card still belongs in this generic chooser is the "create room from
+  // selected PDF data" flow.
+  const roomTypeValues = processCreatingRoomFromData
+    ? RoomsTypeValues
+    : RoomsTypeValues.filter((roomType) => roomType !== RoomsType.FormRoom);
+
   const handleClick = (roomType: RoomsType | "template") => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
+    if (isExternalShareRestricted && roomType === RoomsType.PublicRoom) return;
 
     if (roomType === "template") {
       setTemplateDialogIsVisible(true);
@@ -68,15 +84,50 @@ const RoomTypeList = ({
     setRoomType(roomType);
   };
 
-  const tooltipContent = t("Files:FormRoomCreationLimit", {
+  const formRoomTooltipContent = t("Files:FormRoomCreationLimit", {
     sectionName: t("Common:Rooms"),
   });
 
+  const publicRoomTooltipContent = t("Common:PublicRoomCreationDisabled");
+
+  if (isFormsCreate) {
+    return (
+      <div className={styles.roomTypeList}>
+        <RoomType
+          id={RoomsType.FormRoom.toString()}
+          roomType={RoomsType.FormRoom}
+          type="listItem"
+          isFormSection
+          onClick={() => handleClick(RoomsType.FormRoom)}
+          isOpen={false}
+          selectedId={RoomsType.FormRoom.toString()}
+        />
+        <RoomType
+          id="Template"
+          isTemplate
+          isFormSection
+          type="listItem"
+          onClick={() => handleClick("template")}
+          isOpen={false}
+          selectedId="Template"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.roomTypeList}>
-      {RoomsTypeValues.map((roomType) => {
+      {roomTypeValues.map((roomType) => {
         const isFormRoom = roomType === RoomsType.FormRoom;
-        const showTooltip = isFormRoom && disabledFormRoom;
+        const isPublicRoom = roomType === RoomsType.PublicRoom;
+
+        const showFormRoomTooltip = isFormRoom && disabledFormRoom;
+        const showPublicRoomTooltip = isPublicRoom && isExternalShareRestricted;
+        const showTooltip = showFormRoomTooltip || showPublicRoomTooltip;
+
+        const tooltipContent = showFormRoomTooltip
+          ? formRoomTooltipContent
+          : publicRoomTooltipContent;
 
         const roomTypeElement = (
           <RoomType
@@ -86,19 +137,24 @@ const RoomTypeList = ({
             type="listItem"
             onClick={() => handleClick(roomType)}
             disabledFormRoom={disabledFormRoom}
+            disabledPublicRoom={isExternalShareRestricted}
             isOpen={false}
             selectedId={roomType.toString()}
           />
         );
 
+        const tooltipId = `room-type-disabled-tooltip-${roomType}`;
+
         return showTooltip ? (
-          <div
-            key={roomType}
-            data-tooltip-id="system-tooltip"
-            data-tooltip-content={tooltipContent}
-            data-tooltip-place="bottom"
-          >
+          <div key={roomType} id={tooltipId}>
             {roomTypeElement}
+            <Tooltip
+              id={`${tooltipId}-instance`}
+              anchorSelect={`#${tooltipId}`}
+              place="bottom"
+              float
+              getContent={() => tooltipContent as string}
+            />
           </div>
         ) : (
           roomTypeElement

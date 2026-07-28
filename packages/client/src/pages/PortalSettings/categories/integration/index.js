@@ -57,7 +57,6 @@ const IntegrationWrapper = (props) => {
   const {
     t,
     currentDeviceType,
-    standalone,
     enablePlugins,
 
     setup,
@@ -129,10 +128,7 @@ const IntegrationWrapper = (props) => {
         await getSMTPSettingsData();
       },
     },
-  ];
-
-  if (standalone) {
-    const documentServiceData = {
+    {
       id: "document-service",
       name: t("Settings:DocumentService"),
       content: <DocumentService />,
@@ -140,10 +136,8 @@ const IntegrationWrapper = (props) => {
         clearAbortControllerArr();
         await getDocumentServiceData();
       },
-    };
-
-    data.push(documentServiceData);
-  }
+    },
+  ];
 
   if (enablePlugins) {
     const pluginLabel = (

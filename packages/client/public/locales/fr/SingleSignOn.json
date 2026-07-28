@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Ajouter un certificat",
-  "AdvancedSettings": "Paramètres avancés",
   "AdvancedSettingsTooltip": "Masquer la page d’authentification par défaut et rediriger automatiquement vers le service SSO.",
   "AttributeMatching": "Mappage d’attributs",
   "AttributeMatchingTooltip": "La correspondance entre les attributs de l’authentification unique et les entrées de la section \"Comptes\".",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Télécharger le fichier XML des métadonnées SP",
   "Encryption": "Chiffrement",
   "GenerateCertificate": "Générer un nouveau certificat auto-signé",
-  "Hide": "Masquer",
   "HideAdditionalParameters": "Masquer les paramètres avancés",
   "HideAuthPage": "Masquer la page d’authentification",
   "idpAuthRequest": "Vérifier la signature des réponses d’authentification",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "ID de l’entité du fournisseur (URL de l’émetteur)",
   "ServiceProviderSettings": "Paramètres {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Configurez les paramètres du fournisseur de services et ajoutez des certificats SP pour l'authentification unique.",
-  "Show": "Afficher",
   "ShowAdditionalParameters": "Afficher les paramètres avancés",
   "Signing": "Signature",
   "SigningAndEncryption": "Signature et chiffrement",

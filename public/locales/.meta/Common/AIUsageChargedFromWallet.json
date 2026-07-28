@@ -1,0 +1,29 @@
+{
+  "key_path": "AIUsageChargedFromWallet",
+  "content": "AI usage is charged from your wallet balance.",
+  "content_en_sha1_hash": "0254e146a2d720dd1481297520930c9f7591300a",
+  "created_at": "2026-06-25T11:54:44.814Z",
+  "updated_at": "2026-06-25T12:26:32.596Z",
+  "comment": {
+    "text": "Informational text within the Activate AI dialog explaining that AI usage costs are deducted from the user's wallet balance.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:26:32.596Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
+      "line_number": 104,
+      "context": "/>\n ),\n }}\n />\n <br />\n {t(\"Common:AIUsageChargedFromWallet\")}\n </>\n );\n }\n \n if (canConnectTopayer) {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

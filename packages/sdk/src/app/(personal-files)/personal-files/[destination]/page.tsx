@@ -41,6 +41,7 @@ const NAVIGABLE_SECTIONS = new Set<string>([
   DocsSection.MyDocuments,
   DocsSection.Favorites,
   DocsSection.Recent,
+  DocsSection.SharedWithMe,
   DocsSection.Trash,
 ]);
 
@@ -65,10 +66,12 @@ export default async function PersonalFilesDestination({
   if (sp.count) out.set("pageCount", sp.count);
   else if (sp.pageCount) out.set("pageCount", sp.pageCount);
 
-  for (const key of ["page", "sortBy", "sortOrder", "search"] as const) {
+  for (const key of ["page", "sortBy", "sortOrder", "search", "parentId"] as const) {
     const value = sp[key];
     if (value) out.set(key, value);
   }
+
+  if (sp.auth) out.set("auth", sp.auth);
 
   redirect(`/personal-files?${out.toString()}`);
 }

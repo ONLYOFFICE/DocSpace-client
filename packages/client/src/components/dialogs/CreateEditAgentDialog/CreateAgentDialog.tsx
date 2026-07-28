@@ -60,7 +60,6 @@ type CreateAgentDialogProps = {
   onCreate: (params: TAgentParams) => void;
   fetchedTags: string[];
   isLoading: boolean;
-  portalMcpServerId: string;
 };
 
 const CreateAgentDialog = ({
@@ -71,7 +70,6 @@ const CreateAgentDialog = ({
 
   fetchedTags,
   isLoading,
-  portalMcpServerId,
 }: CreateAgentDialogProps) => {
   const { t } = useTranslation("Common");
 
@@ -84,6 +82,10 @@ const CreateAgentDialog = ({
       isMountRef.current = false;
     };
   });
+
+  // Drop the provider/model cache when the dialog goes away by any path
+  // (not just the explicit close button), so a fresh session refetches.
+  React.useEffect(() => () => modelCache.clear(), []);
 
   const startAgentParams = getStartAgentParams(title);
 
@@ -110,7 +112,6 @@ const CreateAgentDialog = ({
   } = useMCP({
     agentParams,
     setAgentParams: setAgentParamssAction,
-    portalMcpServerId,
   });
 
   const setAgentTags = (newTags: TAgentTagsParams[]) =>
@@ -124,7 +125,9 @@ const CreateAgentDialog = ({
 
   const isAgentTitleChanged = agentParams?.title?.trim() === "";
 
-  const isModelSelected = !!agentParams?.modelId;
+  // Standalone binds a chat profile (profileId); SaaS binds a model (modelId).
+  const isProfileSelected =
+    !!agentParams?.profileId || !!agentParams?.modelId;
 
   const onCreateAgent = async () => {
     if (!agentParams?.title?.trim()) {
@@ -139,14 +142,17 @@ const CreateAgentDialog = ({
   };
 
   const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isWrongTitle || !isModelSelected) return;
+    if (isWrongTitle || !isProfileSelected) return;
     if (e.keyCode === 13) onCreateAgent();
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const tagInput = event.currentTarget.tagInput;
 
-    if (!tagInput) onCreateAgent();
+    if (!tagInput) {
+      onCreateAgent();
+      return;
+    }
 
     const value = tagInput.value ?? "";
     const hasFocus = tagInput === document.activeElement;
@@ -197,7 +203,6 @@ const CreateAgentDialog = ({
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
-          portalMcpServerId={portalMcpServerId}
           onClickAction={onClickAction}
           selectedServers={selectedServers}
           setSelectedServers={setSelectedServers}
@@ -211,10 +216,9 @@ const CreateAgentDialog = ({
           label={t("Common:Create")}
           primary
           scale
-          isDisabled={isAgentTitleChanged || isWrongTitle || !isModelSelected}
+          isDisabled={isAgentTitleChanged || isWrongTitle || !isProfileSelected}
           isLoading={isLoading}
           type="submit"
-          onClick={onCreateAgent}
           testId="create_agent_dialog_save"
         />
         <Button

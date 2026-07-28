@@ -3,7 +3,7 @@
   "content": "Access granted",
   "content_en_sha1_hash": "2c5e9cb9ebce16b0d8e756cdb2fb8e5bdfd8a78e",
   "created_at": "2025-05-19T21:30:53.778Z",
-  "updated_at": "2026-05-15T15:37:40.264Z",
+  "updated_at": "2026-07-07T08:59:21.861Z",
   "comment": {
     "text": "This text appears as a label in a table header and within an information dialog, indicating that access has been successfully granted.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/TableView/Header.tsx",
-      "line_number": 30,
+      "line_number": 65,
       "context": "enable: true,\n minWidth: 150,\n },\n {\n key: \"Access granted\",\n title: t(\"OAuth:AccessGranted\"),\n resizable: true,\n enable: true,\n minWidth: 150,\n },\n ];",
       "module": "/packages/client"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

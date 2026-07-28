@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-05-15T15:37:40.174Z",
+  "updated_at": "2026-07-27T13:07:50.609Z",
   "comment": {
     "text": "This is a header label for a people selector or invitation panel, identifying the section as \"Contacts\".",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 903,
+      "line_number": 1062,
       "context": "withGuests={showGuestsTab}\n withHeader\n dataTestId=\"invite_panel_people_selector\"\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/client"
     },
@@ -31,25 +31,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useContacts.ts",
-      "line_number": 91,
-      "context": "const isGroups = contactsView === \"groups\";\n \n const node = isInsideGroup || isGuests ? \"people\" : contactsView;\n setSelectedNode([\"accounts\", node, \"filter\"]);\n \n setDocumentTitle(t(\"Common:Contacts\"));\n \n const getList = async () => {\n if (isGroups) {\n const newFilter = GroupsFilter.getFilter(location)!;",
+      "line_number": 93,
+      "context": "const node = isInsideGroup || isGuests ? \"people\" : contactsView;\n // getContactsView can return `false`, which the pre-TS code passed\n // through unchanged; the cast keeps that legacy runtime behavior.\n setSelectedNode([\"accounts\", node as string, \"filter\"]);\n \n setDocumentTitle(t(\"Common:Contacts\"));\n \n const getList = async () => {\n if (isGroups) {\n const newFilter = GroupsFilter.getFilter(location)!;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 115,
-      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"InfoPanel:SubmenuHistory\");\n } else if (id === InfoPanelView.infoDetails) {\n name = t(\"InfoPanel:SubmenuDetails\");\n } else if (id === InfoPanelView.infoShare) {",
+      "line_number": 116,
+      "context": ": (availableTabs[0] ?? InfoPanelView.infoDetails);\n \n const tabItems = availableTabs.map((id) => {\n const name = match(id)\n .with(InfoPanelView.infoMembers, () =>\n isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .otherwise(() => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1240,
+      "line_number": 1301,
       "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: isTemplatesFolder ? t(\"TemplateOwner\") : t(\"Common:Contacts\"),\n isHeader: true,\n isLast: isAIAgentsFolder && !tags?.length,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 815,
+      "line_number": 911,
       "context": "const accountsNavigationPath = React.useMemo(() => {\n if (isContactsInsideGroupPage) {\n return [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];\n }",
       "module": "/packages/client"
     },
@@ -84,9 +84,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 440,
-      "context": "const accounts =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
+      "file_path": "/packages/client/src/store/ProfileActionsStore.tsx",
+      "line_number": 525,
+      "context": "const accounts: TProfileActionType | null =\n !isNotPaidPeriod && !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
       "module": "/packages/client"
     },
     {
@@ -96,8 +96,44 @@
       "module": "/packages/login"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 255,
+      "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:Contacts\", { defaultValue: \"Contacts\" }),\n isHeader: true,\n isLast: !tags?.length,\n withMultiItems: true,\n },\n {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/info-panel/index.tsx",
+      "line_number": 88,
+      "context": "if (!currentAgent) return null;\n \n const tabItems = [\n {\n id: \"members\" as AgentInfoPanelView,\n name: t(\"Common:Contacts\", { defaultValue: \"Contacts\" }),\n content: null,\n onClick: () => setView(\"members\"),\n },\n {\n id: \"history\" as AgentInfoPanelView,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/Header.tsx",
+      "line_number": 107,
+      "context": "}, [selectedTabId, fileView, setView]);\n \n const tabItems = availableTabs.map((id) => {\n let name: string;\n if (id === InfoPanelView.infoMembers) {\n name = t(\"Common:Contacts\");\n } else if (id === InfoPanelView.infoShare) {\n name = t(\"Common:Share\");\n } else if (id === InfoPanelView.infoHistory) {\n name = t(\"Common:SubmenuHistory\");\n } else {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
+      "line_number": 976,
+      "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
+      "line_number": 976,
+      "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n data-test-id=\"invite_panel_people_selector\"\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 277,
+      "context": "const subjectOptions: unknown[] = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:Contacts\"),\n isHeader: true,\n isLast: !tags.length,\n withMultiItems: true,\n },\n {",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/share/selector/index.tsx",
-      "line_number": 156,
+      "line_number": 167,
       "context": "targetEntityType={targetEntityType}\n data-test-id=\"share_to_people_selector\"\n disabledInvitedText={t(\"Common:Shared\")}\n {...accessRightsProps}\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick,\n onCloseClick,",
       "module": "/packages/shared"
     }

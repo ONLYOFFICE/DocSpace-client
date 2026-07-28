@@ -159,11 +159,20 @@ export interface IMediaViewerClient extends IMediaViewer {
 
 export interface IContextMenuItemValidation {
   type?: PluginFileType;
-  fileExst?: string;
+  fileExst?: string | null;
   userRole?: PluginUsersType;
   device?: PluginDevices;
-  security?: TRoomSecurity | TFolderSecurity;
-  itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity;
+  security?:
+    | TRoomSecurity
+    | TFolderSecurity
+    | Partial<TRoomSecurity & TFolderSecurity>
+    | null;
+  itemSecurity?:
+    | TFileSecurity
+    | TRoomSecurity
+    | TFolderSecurity
+    | Partial<TFileSecurity & TRoomSecurity & TFolderSecurity>;
+  itemId?: number | string;
 }
 
 // Client-specific window interface

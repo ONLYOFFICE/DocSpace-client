@@ -1,0 +1,30 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+// Cross-route CSS overrides for the ai-agents root layout. Lives next to
+// layout.client.tsx so it's loaded together with the root layout's CSS
+// chunk, but the rules below use element+attribute selectors to win
+// against the per-page Text_text shorthand `margin: 0` that otherwise
+// re-applies after Navigation_text in the cascade (parallel-route CSS
+// chunks load body.css last).
+
+// Restore Navigation item's icon→title spacing inside the dropbox.
+:global(p[class*="Navigation_text"]),
+:global(span[class*="Navigation_text"]),
+:global(div[class*="Navigation_text"]) {
+	margin-inline-start: 10px;
+}
+
+// Mirror the original AgentsList.root rule for the Navigation_box top
+// padding (was scoped to .root in Phase 1 — now needs to apply globally
+// inside the ai-agents layout).
+:global([class*="Navigation_box"]) {
+	padding-top: var(--nav-dropbox-padding-top, 18px);
+
+	@include mixins.tablet-and-below {
+		padding-top: var(--nav-dropbox-padding-top, 14px);
+	}
+
+	@include mixins.mobile {
+		padding-top: var(--nav-dropbox-padding-top, 10px) !important;
+	}
+}

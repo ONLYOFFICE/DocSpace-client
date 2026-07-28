@@ -82,7 +82,7 @@ const LinkSettingsPanel = ({
   showUsersLimitWarning,
   isContacts,
 }: LinkSettingsPanelProps) => {
-  const { t, ready } = useTranslation(["Common", "Files"]);
+  const { t, ready } = useTranslation(["Common"]);
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
   const usersNumber = activeLink.currentUseCount ?? 0;
@@ -210,7 +210,7 @@ const LinkSettingsPanel = ({
               fontWeight={400}
               className={styles.linkSettingsDescriptionText}
             >
-              {t("Files:UserLimitDescription")}
+              {t("Common:UserLimitDescription")}
             </Text>
 
             {userLimitIsChecked ? (
@@ -224,7 +224,7 @@ const LinkSettingsPanel = ({
                   >
                     <Trans
                       t={t}
-                      ns="Files"
+                      ns="Common"
                       i18nKey="MaxNumber"
                       values={{ usersCount: MAX_USERS_COUNT }}
                       components={{
@@ -243,7 +243,7 @@ const LinkSettingsPanel = ({
                       place="right"
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
-                        <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                        <Text>{t("Common:LinkSettingsUsersLimitToast")}</Text>
                       }
                       className={styles.linkSettingsHelpButton}
                     />
@@ -251,6 +251,7 @@ const LinkSettingsPanel = ({
                 </div>
                 <TextInput
                   className={styles.userLimitTextInput}
+                  name="users_limit"
                   type={InputType.text}
                   value={maxNumber}
                   scale
@@ -267,8 +268,8 @@ const LinkSettingsPanel = ({
                   })}
                 >
                   {showLimitError
-                    ? t("Files:LinkSettingsLimitExceeded")
-                    : t("Files:LinkSettingsLimitDescription")}
+                    ? t("Common:LinkSettingsLimitExceeded")
+                    : t("Common:LinkSettingsLimitDescription")}
                 </Text>
                 <div className={styles.joinedUsersBlock}>
                   <div className={styles.joinedUsersCell}>
@@ -285,7 +286,7 @@ const LinkSettingsPanel = ({
                     fontWeight={400}
                     className={styles.linkSettingsDescriptionText}
                   >
-                    {t("Files:LinkSettingsJoinedUsers")}
+                    {t("Common:LinkSettingsJoinedUsers")}
                   </Text>
                 </div>
               </div>

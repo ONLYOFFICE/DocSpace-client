@@ -144,6 +144,7 @@ const UserFields = (props) => {
 											tabIndex={index}
 											className={`${classNameAdditional}-input text-input`}
 											id={`user-input-${input}`}
+											name={`${classNameAdditional}_${index}`}
 											isAutoFocussed={isAutoFocussed}
 											keepCharPositions
 											value={input}

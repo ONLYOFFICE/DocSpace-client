@@ -120,6 +120,7 @@ const InviteInput = ({
   usersList,
   setUsersList,
   allowInvitingGuests,
+  isPrivateRoom,
 }) => {
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
@@ -276,7 +277,13 @@ const InviteInput = ({
       const users =
         roomId === -1
           ? await getUserList(filter)
-          : await getMembersList(AccountsSearchArea.Any, roomId, filter);
+          : await getMembersList(
+              isPrivateRoom
+                ? AccountsSearchArea.People
+                : AccountsSearchArea.Any,
+              roomId,
+              filter,
+            );
 
       setUsersList(
         roomId === -1
@@ -335,9 +342,9 @@ const InviteInput = ({
     const isDisabled = status === EmployeeStatus.Disabled;
 
     if (isDisabled) {
-      toastr.warning(t("UsersCannotBeAdded"));
+      toastr.warning(t("Common:UsersCannotBeAdded"));
     } else if (shared) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     } else {
       const guestWrongRoleInAgent =
         isVisitor &&
@@ -459,6 +466,8 @@ const InviteInput = ({
       return;
     }
 
+    if (isPrivateRoom) return;
+
     const items = toUserItems(inputValue);
 
     const filteredItems = items
@@ -521,7 +530,7 @@ const InviteInput = ({
       });
 
     if (filteredItems.length !== items.length) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     }
 
     if (!filteredItems.length) {
@@ -557,11 +566,11 @@ const InviteInput = ({
       return prevDropDownContent.current;
     }
 
-    if (partsLength === 1 && !!usersList.length) {
+    if (partsLength === 1 && usersList.length) {
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
-    } else if (roomId !== -1 && !allowInvitingGuests)
+    } else if (roomId !== -1 && (!allowInvitingGuests || isPrivateRoom))
       prevDropDownContent.current = (
         <DropDownItem disabled className={styles.noUsersList}>
           <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
@@ -609,7 +618,7 @@ const InviteInput = ({
       );
     }
     return prevDropDownContent.current;
-  }, [usersList, inputValue, selectedAccess]);
+  }, [usersList, inputValue, selectedAccess, isPrivateRoom]);
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
@@ -640,7 +649,7 @@ const InviteInput = ({
   return (
     <>
       <Heading className={styles.subHeader}>
-        {t("AddManually")}
+        {t("Common:AddManually")}
         {!hideSelector ? (
           <Link
             className={classNames(styles.styledLink, "link-list")}
@@ -650,7 +659,7 @@ const InviteInput = ({
             onClick={openUsersPanel}
             dataTestId="invite_panel_choose_from_list_link"
           >
-            {t("Translations:ChooseFromList")}
+            {t("Common:ChooseFromList")}
           </Link>
         ) : null}
       </Heading>
@@ -665,10 +674,10 @@ const InviteInput = ({
               productName: getBrandName("ProductName"),
             })
           : !allowInvitingGuests
-            ? t("InviteToRoomManuallyInfoMembers", {
+            ? t("Common:InviteToRoomManuallyInfoMembers", {
                 productName: getBrandName("ProductName"),
               })
-            : t("InviteToRoomManuallyInfoGuest", {
+            : t("Common:InviteToRoomManuallyInfoGuest", {
                 productName: getBrandName("ProductName"),
               })}
       </Text>
@@ -728,8 +737,8 @@ const InviteInput = ({
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
                 : !allowInvitingGuests
-                  ? t("InviteToRoomAddPlaceholder")
-                  : t("InviteToRoomSearchPlaceholder")
+                  ? t("Common:InviteToRoomAddPlaceholder")
+                  : t("Common:InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             onKeyDown={onKeyDown}
@@ -823,3 +832,4 @@ export default inject(
     ),
   ),
 );
+

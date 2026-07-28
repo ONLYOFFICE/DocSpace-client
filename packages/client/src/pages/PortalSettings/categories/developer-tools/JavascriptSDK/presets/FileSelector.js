@@ -404,7 +404,7 @@ const FileSelector = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <Label className="label">{t("InterfaceElements")}</Label>
+            <Label className="label">{t("Common:InterfaceElements")}</Label>
 
             <LabelGroup>
               <Checkbox
@@ -553,7 +553,6 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Translations",
   ])(observer(FileSelector)),

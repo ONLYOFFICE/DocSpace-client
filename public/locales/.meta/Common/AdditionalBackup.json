@@ -1,0 +1,29 @@
+{
+  "key_path": "AdditionalBackup",
+  "content": "Additional backup",
+  "content_en_sha1_hash": "3be5f6277c495e226621e6f71c3b7588ddc62c06",
+  "created_at": "2026-05-27T14:11:28.342Z",
+  "updated_at": "2026-07-07T08:59:21.885Z",
+  "comment": {
+    "text": "Section header label in the Portal Settings used to identify the additional backup service for paid tariffs.",
+    "is_auto": true,
+    "updated_at": "2026-05-27T14:15:43.085Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 622,
+      "context": "{\n id: \"portal-settings_catalog-services-backup\",\n key: \"10-3-1\",\n icon: \"\",\n link: \"backup\",\n tKey: \"Common:AdditionalBackup\",\n },\n {\n id: \"portal-settings_catalog-services-disk-storage\",\n key: \"10-3-2\",\n icon: \"\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

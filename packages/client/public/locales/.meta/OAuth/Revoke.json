@@ -3,7 +3,7 @@
   "content": "Revoke",
   "content_en_sha1_hash": "0be720759ff04d13c5706881d5d227a2621f91a6",
   "created_at": "2025-05-19T21:30:54.004Z",
-  "updated_at": "2026-05-15T14:00:06.825Z",
+  "updated_at": "2026-07-07T08:59:21.860Z",
   "comment": {
     "text": "This is a button label that allows users to revoke (cancel/deactivate) an authorized developer token or application. It appears in dialogs related to managing developer tools and authorized applications.",
     "is_auto": true,
@@ -19,25 +19,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RevokeDeveloperTokenDialog.tsx",
-      "line_number": 195,
+      "line_number": 196,
       "context": "</FieldContainer>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"OAuth:Revoke\")}\n primary\n scale\n onClick={onRevoke}\n isDisabled={!token || !isValidToken || !secret}\n isLoading={requestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/RevokeDialog.tsx",
-      "line_number": 114,
+      "line_number": 149,
       "context": "<Text>{secondDesc}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Revoke\")}\n primary\n scale={isMobile}\n size={ButtonSize.normal}\n isLoading={isRequestRunning}\n onClick={onRevokeAction}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 755,
+      "line_number": 790,
       "context": "}\n \n items.push({\n key: \"revoke\",\n icon: OauthRevokeSvgUrl,\n label: t(\"Revoke\"),\n onClick: () => this.onRevoke(clientId),\n disabled: false,\n dataTestId: \"oauth_revoke_option\",\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 866,
+      "line_number": 901,
       "context": "if (!isSettings)\n return [\n {\n key: \"revoke\",\n iconUrl: OauthRevokeSvgUrl,\n label: t(\"OAuth:Revoke\"),\n onClick: this.onRevoke,\n disabled: false,\n dataTestId: \"oauth_revoke_option\",\n },\n ];",
       "module": "/packages/client"
     }
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

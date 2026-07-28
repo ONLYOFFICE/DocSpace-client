@@ -44,12 +44,18 @@ import { TFilesSettings } from "@docspace/shared/api/files/types";
 
 import { useMediaViewer } from "@/app/(docspace)/_components/FilesMediaViewer/hooks/useMediaViewer";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
 
 type FilesMediaViewerProps = {
   filesSettings: TFilesSettings;
+  /** Required for HPKE-Auth unwrap of encrypted previews. */
+  currentRoomId?: number | string | null;
 };
 
-function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
+function FilesMediaViewer({
+  filesSettings,
+  currentRoomId,
+}: FilesMediaViewerProps) {
   const { t } = useTranslation(["Common"]);
   const {
     visible,
@@ -63,8 +69,14 @@ function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
     onPrevClick,
     autoPlay,
     getIcon,
+    onClickDownload,
+    onClickRename,
+    onClickDelete,
+    onDownload,
+    onDelete,
   } = useMediaViewer({ filesSettings });
   const { currentDeviceType } = useSettingsStore();
+  const docsUserStore = useDocsUserStore();
 
   return visible && mediaId ? (
     <Portal
@@ -84,6 +96,13 @@ function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
           currentDeviceType={currentDeviceType}
           nextMedia={onNextClick}
           prevMedia={onPrevClick}
+          userId={docsUserStore.user?.id}
+          currentRoomId={currentRoomId}
+          onClickDownload={onClickDownload}
+          onClickRename={onClickRename}
+          onClickDelete={onClickDelete}
+          onDownload={onDownload}
+          onDelete={onDelete}
         />
       }
     />

@@ -33,14 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { RoomSearchArea } from "@docspace/shared/enums";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-
 import { getRooms } from "@/api/rooms";
-import { PAGE_COUNT } from "@/utils/constants";
 
 import RoomSelector from "./page.client";
+import RoomSelectorOAuth from "./page.oauth.client";
+import {
+  loadRoomSelectorData,
+  type RoomSelectorBaseConfig,
+  type RoomSelectorDeps,
+} from "./loadData";
 import { logger } from "../../../../logger.mjs";
+
+const ssrDeps = { getRooms } as unknown as RoomSelectorDeps;
 
 export default async function Page({
   searchParams,
@@ -49,30 +53,23 @@ export default async function Page({
 }) {
   logger.info("Room-selector page");
 
+  const rawParams = await searchParams;
+
   const baseConfig = Object.fromEntries(
-    Object.entries(await searchParams).map(([k, v]) => [
+    Object.entries(rawParams).map(([k, v]) => [
       k,
       v === "true" ? true : v === "false" ? false : v,
     ]),
-  );
+  ) as RoomSelectorBaseConfig;
 
-  const filter = RoomsFilter.getDefault();
+  if (rawParams.auth === "oauth") {
+    return <RoomSelectorOAuth baseConfig={baseConfig} />;
+  }
 
-  filter.page = 0;
-  filter.pageCount = PAGE_COUNT;
-  filter.searchArea = RoomSearchArea.Active;
-  filter.type = (baseConfig.roomType as string | undefined) || null;
-
-  const rooms = await getRooms(filter);
+  const data = await loadRoomSelectorData(ssrDeps, baseConfig);
 
   // TODO: handle error with throw new Error()
-  if (!rooms) return null;
+  if (!data) return null;
 
-  return (
-    <RoomSelector
-      roomList={rooms}
-      pageCount={PAGE_COUNT}
-      baseConfig={baseConfig}
-    />
-  );
+  return <RoomSelector {...data} />;
 }

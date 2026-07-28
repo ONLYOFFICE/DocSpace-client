@@ -34,6 +34,7 @@
  */
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useSearchParams } from "react-router";
 import debounce from "lodash/debounce";
 import { ReactSVG } from "react-svg";
 import { useTranslation, Trans } from "react-i18next";
@@ -84,6 +85,7 @@ import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import CampaignsStore from "SRC_DIR/store/CampaignsStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
+import type { TAvatarImage } from "SRC_DIR/store/AvatarEditorDialogStore";
 
 import styles from "./Profile.module.scss";
 import { getConstName } from "@docspace/shared/constants/consts";
@@ -134,7 +136,7 @@ type MainProfileProps = {
 };
 
 const MainProfile = (props: MainProfileProps) => {
-	const { t, i18n } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
+	const { t, i18n } = useTranslation(["Profile", "Common"]);
 
 	const {
 		profile,
@@ -281,10 +283,21 @@ const MainProfile = (props: MainProfileProps) => {
 		setChangePasswordVisible?.(true);
 	};
 
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	useEffect(() => {
+		if (!profile?.email) return;
+		if (searchParams.get("changePassword") === "true") {
+			onChangePasswordClick();
+			searchParams.delete("changePassword");
+			setSearchParams(searchParams, { replace: true });
+		}
+	}, [profile?.email]);
+
 	const model = getProfileModel?.(t);
 
 	const onChangeIcon = (icon: unknown) => {
-		setImage?.(icon);
+		setImage?.(icon as TAvatarImage);
 	};
 
 	const userAvatar =

@@ -1,0 +1,239 @@
+{
+  "key_path": "DashboardAIArbiterTitle",
+  "content": "AI Arbiter",
+  "content_en_sha1_hash": "542571c512268a0755f7361f633efe00b416b5cf",
+  "created_at": "2026-05-20T10:00:00.000Z",
+  "updated_at": "2026-07-27T13:07:50.599Z",
+  "comment": {
+    "text": "Title for the AI Arbiter app catalog entry on the Dashboard modules page.",
+    "is_auto": true,
+    "updated_at": "2026-05-20T10:00:00.000Z",
+    "model": "claude-sonnet-4-6"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 490,
+      "context": "}\n };\n \n const aiArbiterItem: NavMenuItem = {\n id: AI_ARBITER_ID,\n label: t(\"Common:DashboardAIArbiterTitle\"),\n icon: CatalogAiArbiterReactSvgUrl,\n onClick: handleAiArbiterClick,\n };\n \n const handleE2eRoomsClick = async () => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
+      "line_number": 133,
+      "context": "alwaysOn: false,\n },\n {\n id: \"ai-arbiter\",\n icon: <CatalogAiArbiterIcon />,\n title: t(\"Common:DashboardAIArbiterTitle\"),\n description: t(\"Common:DashboardAIArbiterDescription\"),\n href: \"/ai-arbiter\",\n supported: true,\n alwaysOn: false,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiArbiter/index.tsx",
+      "line_number": 70,
+      "context": "fetchAppSettings,\n canManageAgents,\n theme,\n }: AiArbiterProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardAIArbiterTitle\");\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n \n // Show the frame only once configuration is verified, the user can manage\n // agents, and setup is complete; otherwise the page renders its gating UI",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiArbiter/index.tsx",
+      "line_number": 70,
+      "context": "fetchAppSettings,\n canManageAgents,\n theme,\n }: AiArbiterProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:DashboardAIArbiterTitle\");\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n \n // Show the frame only once configuration is verified, the user can manage\n // agents, and setup is complete; otherwise the page renders its gating UI",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallAiArbiterDialog/index.tsx",
+      "line_number": 121,
+      "context": "setPhase(\"confirm\");\n setIsPending(false);\n }\n }, [visible]);\n \n const moduleTitle = t(\"Common:DashboardAIArbiterTitle\");\n \n const confirmBullets: {\n icon: typeof CatalogAiArbiterIcon;\n title: string;\n description: string;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

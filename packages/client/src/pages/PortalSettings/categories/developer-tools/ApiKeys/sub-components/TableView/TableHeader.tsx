@@ -71,7 +71,7 @@ const TableHeader = (props: TableHeaderProps) => {
     },
     {
       key: "Created",
-      title: t("Files:ByCreation"),
+      title: t("Common:ByCreation"),
       enable: true,
       resizable: true,
     },
@@ -144,3 +144,4 @@ export default inject(({ userStore }: TStore) => {
     userId: userStore.user!.id,
   };
 })(observer(TableHeader));
+

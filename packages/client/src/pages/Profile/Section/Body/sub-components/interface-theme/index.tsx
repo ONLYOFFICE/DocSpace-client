@@ -207,3 +207,4 @@ export default inject(({ settingsStore, userStore }: TStore) => {
     isDesktopClient,
   };
 })(observer(InterfaceTheme));
+

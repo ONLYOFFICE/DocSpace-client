@@ -100,7 +100,10 @@ const ExternalLinks = ({
   const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
     activeLink?.currentUseCount >= activeLink?.maxUseCount;
-  const linkIsExpired = isAfter(now(), parseToDateTime(activeLink?.expirationDate));
+  const linkIsExpired = isAfter(
+    now(),
+    parseToDateTime(activeLink?.expirationDate),
+  );
 
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
@@ -184,13 +187,13 @@ const ExternalLinks = ({
         })
       : roomType === RoomsType.AIRoom
         ? allowInvitingGuests
-          ? t("InviteViaLinkDescriptionAgentGuest")
-          : t("InviteViaLinkDescriptionAgentMembers", {
+          ? t("Common:InviteViaLinkDescriptionAgentGuest")
+          : t("Common:InviteViaLinkDescriptionAgentMembers", {
               productName: getBrandName("ProductName"),
             })
         : allowInvitingGuests
-          ? t("InviteViaLinkDescriptionRoomGuest")
-          : t("InviteViaLinkDescriptionRoomMembers", {
+          ? t("Common:InviteViaLinkDescriptionRoomGuest")
+          : t("Common:InviteViaLinkDescriptionRoomMembers", {
               productName: getBrandName("ProductName"),
             });
 
@@ -201,7 +204,7 @@ const ExternalLinks = ({
           [styles.inline]: true,
         })}
       >
-        {t("InviteViaLink")}
+        {t("Common:InviteViaLink")}
 
         <IconButton
           iconName={SettingsReactSvgUrl}
@@ -274,7 +277,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("Files:ValidUntil")}
+                    {t("Common:ValidUntil")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -294,7 +297,7 @@ const ExternalLinks = ({
                         <>
                           <Text>{t("Common:LinkSettingsExpired")}</Text>
                           <Text>
-                            {t("Files:LinkSettingsExpiredToastDescription")}
+                            {t("Common:LinkSettingsExpiredToastDescription")}
                           </Text>
                         </>
                       }
@@ -316,7 +319,7 @@ const ExternalLinks = ({
                     fontSize="12px"
                     fontWeight={400}
                   >
-                    {t("Files:UsersJoined")}
+                    {t("Common:UsersJoined")}
                   </Text>
                   <Text
                     fontSize="12px"
@@ -333,9 +336,9 @@ const ExternalLinks = ({
                       iconNode={<ButtonAlertIcon />}
                       tooltipContent={
                         <>
-                          <Text>{t("Files:LinkSettingsUsersLimitToast")}</Text>
+                          <Text>{t("Common:LinkSettingsUsersLimitToast")}</Text>
                           <Text>
-                            {t("Files:LinkSettingsUsersLimitToastDescription")}
+                            {t("Common:LinkSettingsUsersLimitToastDescription")}
                           </Text>
                         </>
                       }
@@ -375,3 +378,4 @@ export default inject(
     };
   },
 )(observer(ExternalLinks));
+

@@ -50,11 +50,11 @@ import { logout as logoutDesktop } from "../utils/desktop";
 import {
   frameCallEvent,
   isAdmin,
-  insertDataLayer,
   isPublicRoom,
   isPublicPreview,
 } from "../utils/common";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
+import { isOAuthFrame } from "../utils/oauthToken";
 import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -90,9 +90,14 @@ class AuthStore {
   isPortalInfoLoaded = false;
 
   constructor(
-    private userStore: UserStore,
+    /** Public: consumed as `authStore.userStore.user` by client stores
+     * (AccessRightsStore); was reached externally even while `private`. */
+    public userStore: UserStore,
     private currentTariffStatusStore: CurrentTariffStatusStore,
-    private currentQuotaStore: CurrentQuotasStore,
+    /** Public: consumed as `authStore.currentQuotaStore` by client stores
+     * (FilesStore quota getters). Visibility change only — the parameter
+     * property assignment is identical at runtime. */
+    public currentQuotaStore: CurrentQuotasStore,
     public settingsStore: SettingsStore,
   ) {
     makeAutoObservable(this);
@@ -167,7 +172,7 @@ class AuthStore {
 
     const user = this.userStore?.user;
 
-    if (user && isAdmin(user)) {
+    if (user && isAdmin(user) && !this.settingsStore?.standalone) {
       await this.currentTariffStatusStore?.fetchPayerInfo();
     }
 
@@ -199,7 +204,7 @@ class AuthStore {
 
     if (
       this.settingsStore?.isLoaded &&
-      !!this.settingsStore?.socketUrl &&
+      this.settingsStore?.socketUrl &&
       !isPortalDeactivated &&
       !isPortalEncryption &&
       !isPublicRoom() &&
@@ -209,7 +214,11 @@ class AuthStore {
         this.userStore
           ?.init(i18n, this.settingsStore.culture)
           .then(async () => {
-            if (!isPortalRestore) {
+            if (isOAuthFrame()) {
+              runInAction(() => {
+                this.isPortalInfoLoaded = true;
+              });
+            } else if (!isPortalRestore) {
               await this.getPaymentInfo();
 
               if (
@@ -228,14 +237,24 @@ class AuthStore {
       );
     } else {
       this.userStore?.setIsLoaded(true);
+
+      const portalCulture = this.settingsStore?.culture;
+      if (i18n && portalCulture && portalCulture !== i18n.language) {
+        i18n.changeLanguage(portalCulture);
+      }
     }
 
     return Promise.all(requests)
       .then(() => {
         const user = this.userStore?.user;
 
-        if (user?.id) {
-          insertDataLayer(user.id);
+        // Load encryption keys for the authenticated user (needed for private rooms)
+        if (user?.id && this.isAuthenticated) {
+          requests.push(
+            this.userStore?.getEncryptionKeys().catch(() => {
+              // Encryption keys not available — not critical for app init
+            }),
+          );
         }
 
         if (this.isAuthenticated && !skipRequest) {
@@ -276,6 +295,8 @@ class AuthStore {
       refresh = true;
     }
     const user = this.userStore?.user?.isVisitor;
+    const isAdmin =
+      this.userStore?.user?.isAdmin || this.userStore?.user?.isOwner;
 
     const request = [];
 
@@ -283,6 +304,10 @@ class AuthStore {
 
     if (!user) {
       request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
+    }
+
+    if (isAdmin && !this.settingsStore?.standalone) {
+      request.push(this.currentTariffStatusStore?.fetchPayerInfo(refresh));
     }
 
     await Promise.all(request);
@@ -485,6 +510,26 @@ class AuthStore {
     }
 
     this.isLogout = true;
+
+    // Clear encryption state: MobX store + in-memory unlocked-identity cache
+    // + the persisted device unlock for the signed-out user
+    this.userStore?.clearEncryptionKeys();
+    try {
+      const userId = this.userStore?.user?.id
+        ? String(this.userStore.user.id)
+        : undefined;
+      const { SecretStorage } =
+        await import("../services/encryption/secret-storage");
+      SecretStorage.lock();
+      if (userId) {
+        const { forgetDeviceUnlock } = await import(
+          "../services/encryption/device-unlock-store"
+        );
+        await forgetDeviceUnlock(userId);
+      }
+    } catch {
+      // Encryption module may not be loaded — safe to ignore
+    }
 
     const isDesktop = this.settingsStore?.isDesktopClient;
     const isFrame = this.settingsStore?.isFrame;

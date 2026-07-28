@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectMCPServersTitle",
+  "content": "Connect MCP servers",
+  "content_en_sha1_hash": "844ec95a125554912b1f1aa5a1024ab093b63a91",
+  "created_at": "2026-06-25T11:54:47.185Z",
+  "updated_at": "2026-06-25T12:17:45.703Z",
+  "comment": {
+    "text": "Dialog title for a feature section used to configure Model Context Protocol (MCP) servers.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:17:45.703Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 107,
+      "context": "icon: (\n <div className={styles.mcpIcon}>\n <McpToolIcon />\n </div>\n ),\n title: t(\"ConnectMCPServersTitle\"),\n description: t(\"ConnectMCPServersCardDescription\"),\n },\n ];\n \n const tags = [",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

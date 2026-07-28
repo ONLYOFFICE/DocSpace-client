@@ -302,7 +302,7 @@ const RoomSelector = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <Label className="label">{t("InterfaceElements")}</Label>
+            <Label className="label">{t("Common:InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
               label={t("Common:Search")}
@@ -350,7 +350,6 @@ export const Component = inject(({ settingsStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "CreateEditRoomDialog",
   ])(observer(RoomSelector)),

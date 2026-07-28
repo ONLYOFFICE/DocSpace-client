@@ -36,83 +36,109 @@
 "use client";
 
 import React from "react";
+import classNames from "classnames";
 
-import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 
+import { useDragStore } from "../../_store/DragStore";
 import styles from "./DropZone.module.scss";
 
 type DropZoneProps = {
   children: React.ReactNode;
   onFilesDropped: (files: File[]) => void;
   disabled?: boolean;
+  className?: string;
+  currentFolderTitle?: string;
+  canCreate?: boolean;
 };
 
-const DropZone = ({ children, onFilesDropped, disabled }: DropZoneProps) => {
-  const [isDragging, setIsDragging] = React.useState(false);
-  const dragCounterRef = React.useRef(0);
+const hasFiles = (e: DragEvent) =>
+  !!e.dataTransfer &&
+  (e.dataTransfer.types.includes("Files") ||
+    e.dataTransfer.types.includes("application/x-moz-file"));
 
-  const onDragEnter = React.useCallback(
-    (e: React.DragEvent) => {
-      if (disabled) return;
-      e.preventDefault();
-      e.stopPropagation();
-      dragCounterRef.current += 1;
-      if (e.dataTransfer.types.includes("Files")) {
-        setIsDragging(true);
+// Root-level OS-file drop target.
+//
+// "Is an OS file drag happening" is detected with document-level listeners
+// (mirroring the client's onDragOver/onDragLeaveDoc) rather than the wrapping
+// element: the per-row DragAndDrop wrappers stop native event propagation
+// (react-dropzone, noDragEventsBubbling), so a wrapper would never see a drag
+// that starts over a row. The document listener also sets the default upload
+// destination (the current folder), which a hovered sub-folder later overrides.
+//
+// "Where the file lands" is owned by the DragAndDrop dropzones: the per-row
+// wrappers handle drops on themselves, and this outer dropzone catches drops on
+// the gaps/empty area below the list — both routing to an upload. The
+// document-level `drop` only resets drag state (it must NOT upload, or a drop
+// on a row would upload twice).
+const DropZone = ({
+  children,
+  onFilesDropped,
+  disabled,
+  className,
+  currentFolderTitle,
+  canCreate,
+}: DropZoneProps) => {
+  const dragStore = useDragStore();
+
+  // Keep the latest gating values in a ref so the document listeners (attached
+  // once) always read fresh props without re-subscribing on every render.
+  const cfgRef = React.useRef({ disabled, currentFolderTitle, canCreate });
+  cfgRef.current = { disabled, currentFolderTitle, canCreate };
+
+  React.useEffect(() => {
+    const startOsDrag = () => {
+      if (!dragStore.osDragging) {
+        dragStore.setOsDragging(true);
+        document.body.classList.add("os-drag");
       }
-    },
-    [disabled],
-  );
+      const { canCreate: cc, currentFolderTitle: title } = cfgRef.current;
+      if (cc && title) dragStore.setOsCurrentFolderTitle(title);
+    };
+    const stopOsDrag = () => {
+      dragStore.setOsDragging(false);
+      document.body.classList.remove("os-drag");
+    };
 
-  const onDragLeave = React.useCallback(
-    (e: React.DragEvent) => {
-      if (disabled) return;
-      e.preventDefault();
-      e.stopPropagation();
-      dragCounterRef.current -= 1;
-      if (dragCounterRef.current === 0) {
-        setIsDragging(false);
-      }
-    },
-    [disabled],
-  );
+    const onDragOver = (e: DragEvent) => {
+      if (cfgRef.current.disabled || !hasFiles(e)) return;
+      if (e.dataTransfer) e.dataTransfer.dropEffect = "copy";
+      startOsDrag();
+    };
+    const onDragLeaveDoc = (e: DragEvent) => {
+      // relatedTarget is null when the cursor leaves the window entirely.
+      if (!e.relatedTarget || !hasFiles(e)) stopOsDrag();
+    };
+    const onDropDoc = () => stopOsDrag();
 
-  const onDragOver = React.useCallback(
-    (e: React.DragEvent) => {
-      if (disabled) return;
-      e.preventDefault();
-      e.stopPropagation();
-    },
-    [disabled],
-  );
+    document.addEventListener("dragover", onDragOver);
+    document.addEventListener("dragleave", onDragLeaveDoc);
+    document.addEventListener("drop", onDropDoc);
+
+    return () => {
+      document.removeEventListener("dragover", onDragOver);
+      document.removeEventListener("dragleave", onDragLeaveDoc);
+      document.removeEventListener("drop", onDropDoc);
+      document.body.classList.remove("os-drag");
+    };
+  }, [dragStore]);
 
   const onDrop = React.useCallback(
-    async (e: React.DragEvent) => {
+    (files: File[]) => {
       if (disabled) return;
-      e.preventDefault();
-      e.stopPropagation();
-      dragCounterRef.current = 0;
-      setIsDragging(false);
-
-      const files = await getFilesFromEvent(e.nativeEvent);
-      if (files.length > 0) {
-        onFilesDropped(files);
-      }
+      if (files.length > 0) onFilesDropped(files);
     },
     [disabled, onFilesDropped],
   );
 
   return (
-    <div
-      className={styles.dropZone}
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
-      onDragOver={onDragOver}
+    <DragAndDrop
+      isDropZone
+      className={classNames(styles.dropZone, className)}
       onDrop={onDrop}
     >
       {children}
-      {isDragging && <div className={styles.overlay} />}
-    </div>
+    </DragAndDrop>
   );
 };
 

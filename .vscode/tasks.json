@@ -28,6 +28,12 @@
     {
       "label": "Backend | run CE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
+        }
+      },
       "type": "shell",
       "group": {
         "kind": "build",
@@ -45,7 +51,8 @@
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
       "options": {
         "env": {
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
       "type": "shell",
@@ -63,12 +70,14 @@
     {
       "label": "Backend | run EE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
-      "type": "shell",
       "options": {
         "env": {
-          "APP_EDITION": "enterprise"
+          "APP_EDITION": "enterprise",
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -83,13 +92,14 @@
     {
       "label": "Backend | run EE - full (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
-      "type": "shell",
       "options": {
         "env": {
           "APP_EDITION": "enterprise",
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -104,12 +114,14 @@
     {
       "label": "Backend | run DE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
-      "type": "shell",
       "options": {
         "env": {
-          "APP_EDITION": "developer"
+          "APP_EDITION": "developer",
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -123,14 +135,15 @@
     },
     {
       "label": "Backend | run DE - full (Aspire)",
-      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; SKIP_CLIENT=true dotnet run --launch-profile development",
-      "type": "shell",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
       "options": {
         "env": {
           "APP_EDITION": "developer",
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -145,6 +158,12 @@
     {
       "label": "Backend | run SAAS (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev --APP_HOSTING_STANDALONE false",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
+        }
+      },
       "type": "shell",
       "group": {
         "kind": "build",
@@ -160,12 +179,14 @@
     {
       "label": "Backend | run SAAS - full (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development --APP_HOSTING_STANDALONE false",
-      "type": "shell",
       "options": {
         "env": {
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false",
+          "APP_EDITION": "developer"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -179,9 +200,9 @@
     },
     {
       "label": "Backend | clear Aspire (Docker)",
-      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker rm && docker volume prune -f && docker network prune -f",
+      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker rm && docker volume ls --format '{{.Name}}' | grep -E '^docspace' | xargs -r docker volume rm && docker volume prune -f && docker network prune -f",
       "windows": {
-        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; docker volume prune -f; docker network prune -f"
+        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; $v = docker volume ls --format '{{.Name}}' | Where-Object { $_ -match '^docspace' }; if ($v) { $v | ForEach-Object { docker volume rm $_ } }; docker volume prune -f; docker network prune -f"
       },
       "type": "shell",
       "group": {
@@ -421,6 +442,21 @@
       }
     },
     {
+      "label": "Frontend | deploy run",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../publish/web ; trap 'kill 0' EXIT ; (cd login && node server.js) & (cd editor && node server.js) & (cd management && node server.js) & (cd sdk && node server.js) & npx serve client -s -l 5001",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | storybook (ui-kit)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",
@@ -556,6 +592,21 @@
       }
     },
     {
+      "label": "Test | Jest:license",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:license ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; npm run open-report",
@@ -619,6 +670,36 @@
       "label": "Test | Jest:unit:ui-kit",
       "type": "shell",
       "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm test",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:client",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:store",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:store",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1446,7 +1527,7 @@
     {
       "label": "Translation App | update metadata",
       "type": "shell",
-      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
       "group": "build",
       "presentation": {
         "reveal": "always",

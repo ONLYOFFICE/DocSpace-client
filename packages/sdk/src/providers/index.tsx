@@ -38,6 +38,7 @@
 import React from "react";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
+import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
@@ -55,6 +56,15 @@ import type { TThemeProvider } from "@docspace/ui-kit/providers/theme";
 import { ApiProvider } from "@docspace/ui-kit/providers/api";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import {
+  isOAuthFrame,
+  requestAuthToken,
+} from "@docspace/shared/utils/oauthToken";
+import {
+  setAuthToken,
+  setWithCredentialsStatus,
+} from "@docspace/shared/api/client";
+import { installOAuthFetchInterceptor } from "@docspace/shared/utils/oauthFetchInterceptor";
 import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 
 import {
@@ -78,12 +88,13 @@ export type TContextData = {
   locale?: string;
   portalCultures: string[];
   authToken?: string;
-  initialLocaleResources?: Record<string, string>;
+  initialLocaleResources?: TTranslations;
 };
 
 export type TProviders = {
   children: React.ReactNode;
   contextData: TContextData;
+  oauthFrame?: boolean;
 };
 
 const getApiUrl = () => {
@@ -96,21 +107,15 @@ const getApiUrl = () => {
   return combineUrl(origin, proxy);
 };
 
-const Providers = ({ children, contextData }: TProviders) => {
+const Providers = ({ children, contextData, oauthFrame }: TProviders) => {
   const { user, settings, systemTheme, colorTheme, locale } = contextData;
 
   const requestedLng =
     locale || user?.cultureName || settings?.culture || "en";
 
   const [translations, setTranslations] = React.useState(() => {
-    const base = createInitialTranslations();
     const preloaded = contextData.initialLocaleResources;
-    if (preloaded && requestedLng !== "en") {
-      const next = new Map(base);
-      next.set(requestedLng, new Map([["Common", preloaded]]));
-      return next;
-    }
-    return base;
+    return preloaded ?? createInitialTranslations();
   });
 
   React.useEffect(() => {
@@ -147,8 +152,39 @@ const Providers = ({ children, contextData }: TProviders) => {
     document.body.classList.add(themeClass);
   }, []);
 
+  const oauthActive =
+    oauthFrame ?? (typeof window !== "undefined" && isOAuthFrame());
+
+  const [oauthToken, setOauthToken] = React.useState<string | null>(
+    oauthActive ? null : "",
+  );
+
+  React.useEffect(() => {
+    if (!oauthActive) return undefined;
+
+    let cancelled = false;
+    setWithCredentialsStatus(false);
+    installOAuthFetchInterceptor();
+
+    requestAuthToken().then((token) => {
+      if (cancelled) return;
+      if (token) setAuthToken(token);
+      setOauthToken(token ?? "");
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [oauthActive]);
+
   const apiUrl = getApiUrl();
-  const apiKey = getCookie("asc_auth_key") || contextData.authToken || "";
+  const apiKey = oauthActive
+    ? (oauthToken ?? "")
+    : getCookie("asc_auth_key") || contextData.authToken || "";
+
+  if (oauthActive && oauthToken === null) {
+    return null;
+  }
 
   return (
     <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
@@ -169,6 +205,7 @@ const Providers = ({ children, contextData }: TProviders) => {
               <SDKConfigProvider>
                 {children}
                 <Toast isSSR />
+                <RootTooltip />
               </SDKConfigProvider>
             </ErrorProvider>
           </ThemeProvider>

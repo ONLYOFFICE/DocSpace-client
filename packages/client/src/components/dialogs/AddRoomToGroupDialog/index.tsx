@@ -184,6 +184,7 @@ const AddRoomToGroupDialog = ({
             withoutBackButton: false,
           }}
           withSearch
+          isForms={false}
           isMultiSelect
           selectedItems={groupData ? convertToItems(groupData.rooms || []) : []}
           withCancelButton

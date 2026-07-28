@@ -33,12 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import path from "path";
+
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
 
@@ -58,6 +61,8 @@ import { ManagementDialogs } from "@/dialogs";
 import "@/styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
 import { logger } from "../../logger.mjs";
+
+const MANAGEMENT_NAMESPACES = ["Management"] as const;
 
 export default async function RootLayout({
   children,
@@ -82,9 +87,21 @@ export default async function RootLayout({
     redirect(`${baseURL}/${settings}`);
   }
 
+  if (settings && !settings.standalone) {
+    logger.info("Management layout not available: SaaS mode");
+
+    redirect(`${baseURL}/error/403`);
+  }
+
+  if (!settings || !user) {
+    logger.info("Management layout error/403: settings or user unavailable");
+
+    redirect(`${baseURL}/error/403`);
+  }
+
   if (
-    (user && !user.isAdmin && !user.isOwner) ||
-    (settings && settings.limitedAccessSpace) ||
+    (!user.isAdmin && !user.isOwner) ||
+    settings.limitedAccessSpace ||
     !portalTariff
   ) {
     logger.info("Management layout error/403");
@@ -100,6 +117,21 @@ export default async function RootLayout({
   if (cookieLng && settings && typeof settings !== "string") {
     settings.culture = cookieLng.value;
   }
+
+  const locale =
+    user?.cultureName ??
+    (typeof settings === "object" ? settings?.culture : undefined) ??
+    "en";
+
+  const translations = await loadTranslationsForLocale(locale, {
+    namespaces: MANAGEMENT_NAMESPACES,
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
+  });
 
   const { openSource } = portalTariff;
 
@@ -129,11 +161,13 @@ export default async function RootLayout({
             settings,
             systemTheme: systemTheme?.value as ThemeKeys,
             colorTheme,
+            locale,
+            translations,
           }}
         >
           <Toast isSSR />
-          <ManagementDialogs settings={settings!} user={user!} />
-          <LayoutWrapper portals={portals!} isCommunity={openSource}>
+          <ManagementDialogs settings={settings} user={user} />
+          <LayoutWrapper portals={portals} isCommunity={openSource}>
             {children}
           </LayoutWrapper>
         </Providers>
@@ -142,3 +176,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

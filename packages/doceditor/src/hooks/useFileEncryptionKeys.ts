@@ -189,8 +189,11 @@ const useFileEncryptionKeys = (
         await recoverFilenameWithDek(numericFileId, fileViewUrl, dek);
         if (cancelled) return;
 
-        const serverCryptoEngineId =
-          config?.editorConfig?.encryptionKeys?.cryptoEngineId;
+        const serverKeyPairs = config?.editorConfig?.encryptionKeys;
+        const serverCryptoEngineId = (
+          serverKeyPairs?.find((k) => String(k.userId) === currentUserId) ??
+          serverKeyPairs?.[0]
+        )?.cryptoEngineId;
 
         const encryptionKeys: TEditorEncryptionKeys = {
           dek: arrayBufferToBase64(dek),

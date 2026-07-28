@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "Onemogočanje storitve varnostnih kopij bo preprečilo skrbnikom {{productName}} ustvarjanje varnostnih kopij. Če je vklopljena samodejna varnostna kopija, bo deaktivirana. Ste prepričani, da želite nadaljevati?",
   "Disabled": "Onemogočeno",
   "DisableDownload": "Omeji kopiranje vsebine datoteke, prenos datoteke in tiskanje",
-  "DisableMCPServer": "Onemogoči strežnik",
   "DisableNotifications": "Onemogoči obvestila",
   "DisableQuota": "Onemogoči kvoto",
   "DisableStorageQuota": "Onemogoči kvoto za shranjevanje",

@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "Tắt dịch vụ Sao lưu sẽ ngăn chặn các quản trị viên {{productName}} tạo các bản sao lưu. Nếu Auto Backup được bật, nó sẽ bị tắt. Bạn có chắc chắn muốn tiếp tục không?",
   "Disabled": "Đã vô hiệu hóa",
   "DisableDownload": "Hạn chế sao chép nội dung tập tin, tải xuống và in tập tin",
-  "DisableMCPServer": "Tắt máy chủ",
   "DisableNotifications": "Tắt thông báo",
   "DisableQuota": "Vô hiệu hóa hạn mức",
   "DisableStorageQuota": "Vô hiệu hóa hạn mức lưu trữ",

@@ -700,7 +700,6 @@
   "DisableBackupConfirmWithoutQuota": "バックアップ サービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合は、無効になります。続行しますか？",
   "Disabled": "無効",
   "DisableDownload": "ファイル内容のコピー、ファイルのダウンロード、印刷の制限",
-  "DisableMCPServer": "サーバーを無効にする",
   "DisableNotifications": "通知をオフする",
   "DisableQuota": "容量制限を無効にする",
   "DisableStorageQuota": "ストレージの容量制限を無効にする",

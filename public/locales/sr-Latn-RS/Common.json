@@ -700,7 +700,6 @@
   "DisableBackupConfirmWithoutQuota": "Onemogućavanje servisa za bekap sprečiće administratore {{productName}} da prave rezervne kopije. Ako je Auto Backup omogućen, biće deaktiviran. Da li ste sigurni da želite da nastavite?",
   "Disabled": "Onemogućeno",
   "DisableDownload": "Ograniči kopiranje sadržaja datoteke, preuzimanje i štampanje",
-  "DisableMCPServer": "Onemogućite server",
   "DisableNotifications": "Onemogući notifikacije",
   "DisableQuota": "Onemogući kvotu",
   "DisableStorageQuota": "Onemogući kvotu skladišta",

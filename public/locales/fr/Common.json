@@ -700,7 +700,6 @@
   "DisableBackupConfirmWithoutQuota": "La désactivation du service de sauvegarde empêchera les administrateurs de {{productName}} de créer des sauvegardes. Si la sauvegarde automatique est activée, elle sera désactivée. Souhaitez-vous vraiment continuer ?",
   "Disabled": "Désactivé",
   "DisableDownload": "Restreindre la copie du contenu des fichiers, le téléchargement et l'impression des fichiers",
-  "DisableMCPServer": "Désactiver le serveur",
   "DisableNotifications": "Désactiver les notifications",
   "DisableQuota": "Désactiver le quota",
   "DisableStorageQuota": "Désactiver les quotas de stockage",

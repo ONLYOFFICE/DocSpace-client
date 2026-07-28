@@ -700,7 +700,6 @@
   "DisableBackupConfirmWithoutQuota": "禁用备份服务后，{{productName}}管理员将无法创建备份。若已启用自动备份，该功能将被立即停用。确定要继续吗？",
   "Disabled": "已禁用",
   "DisableDownload": "限制文件内容复制、文件下载和打印",
-  "DisableMCPServer": "禁用服务器",
   "DisableNotifications": "禁用消息通知",
   "DisableQuota": "停用配额",
   "DisableStorageQuota": "停用存储配额",

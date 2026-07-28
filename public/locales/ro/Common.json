@@ -700,7 +700,6 @@
   "DisableBackupConfirmWithoutQuota": "Dezactivarea serviciului de copiere de rezervă nu va permite administratorilor ale {{productName}} să creeze copii de rezervă. Dacă copiera de rezervă automată este activată, aceasta va fi dezactivată. Sigur doriţi să continuați?",
   "Disabled": "Dezactivat",
   "DisableDownload": "Restricționează copierea, descărcarea și imprimarea conținutului fișierului",
-  "DisableMCPServer": "Dezactivare server",
   "DisableNotifications": "Dezactivare notificări",
   "DisableQuota": "Dezactivare cotă",
   "DisableStorageQuota": "Dezactivare cotă spațiu de stocare",

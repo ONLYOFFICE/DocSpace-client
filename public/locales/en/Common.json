@@ -700,7 +700,6 @@
   "DisableBackupConfirmWithoutQuota": "Disabling the Backup service will prevent {{productName}} administrators from creating backups. If Auto Backup is enabled, it will be deactivated. Are you sure you want to continue?",
   "Disabled": "Disabled",
   "DisableDownload": "Restrict file content copy, file download and printing",
-  "DisableMCPServer": "Disable server",
   "DisableNotifications": "Disable notifications",
   "DisableQuota": "Disable quota",
   "DisableStorageQuota": "Disable storage quota",

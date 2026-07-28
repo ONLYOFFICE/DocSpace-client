@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "Yedekleme hizmetini devre dışı bırakmak, {{productName}} yöneticilerinin yedekleme oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse, devre dışı bırakılacaktır. Devam etmek istediğinizden emin misiniz?",
   "Disabled": "Devre dışı bırakıldı",
   "DisableDownload": "Dosya içeriği kopyalamayı, dosya indirmeyi ve yazdırmayı kısıtla",
-  "DisableMCPServer": "Sunucuyu devre dışı bırak",
   "DisableNotifications": "Bildirimleri devre dışı bırak",
   "DisableQuota": "Kotayı devre dışı bırak",
   "DisableStorageQuota": "Depolama kotasını devre dışı bırak",

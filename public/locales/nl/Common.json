@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "Het uitschakelen van de Backup service voorkomt dat {{productName}} beheerders back-ups maken. Als Auto Backup is ingeschakeld, wordt deze uitgeschakeld. Ben je zeker dat je wilt doorgaan?",
   "Disabled": "Uitgeschakeld",
   "DisableDownload": "Beperk het kopiëren van materiaal, downloaden en afdrukken van bestanden",
-  "DisableMCPServer": "Server uitschakelen",
   "DisableNotifications": "Meldingen uitschakelen",
   "DisableQuota": "Quota uitschakelen",
   "DisableStorageQuota": "Opslagquota uitschakelen",

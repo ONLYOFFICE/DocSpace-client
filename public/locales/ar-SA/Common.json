@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "سيؤدي تعطيل خدمة النسخ الاحتياطي إلى منع مسؤولي {{productName}} من إنشاء نسخ احتياطية. إذا كان النسخ الاحتياطي التلقائي مفعلاً، فسيتم تعطيله. هل أنتم متأكدون من رغبتكم في المتابعة؟",
   "Disabled": "معطل",
   "DisableDownload": "تقييد نسخ محتوى الملف وتنزيل الملف وطباعته",
-  "DisableMCPServer": "تعطيل الخادم",
   "DisableNotifications": "تعطيل التنبيهات",
   "DisableQuota": "تعطيل الحصة",
   "DisableStorageQuota": "تعطيل حصة التخزين",

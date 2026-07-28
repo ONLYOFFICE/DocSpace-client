@@ -700,7 +700,6 @@
   "DisableBackupConfirmWithoutQuota": "Deshabilitar el servicio de Copia de seguridad evitará que los administradores de {{productName}} creen copias de seguridad. Si la Copia de seguridad automática está habilitada, se desactivará. ¿Está seguro de que desea continuar?",
   "Disabled": "Deshabilitado",
   "DisableDownload": "Restringir la copia, descarga e impresión del contenido de los archivos",
-  "DisableMCPServer": "Deshabilitar servidor",
   "DisableNotifications": "Deshabilitar notificaciones",
   "DisableQuota": "Desactivar cuota",
   "DisableStorageQuota": "Desactivar cuota de almacenamiento",

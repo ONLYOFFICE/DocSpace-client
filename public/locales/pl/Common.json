@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "Wyłączenie usługi Kopia zapasowa uniemożliwi administratorom {{productName}} tworzenie kopii zapasowych. Jeśli włączono automatyczne tworzenie kopii zapasowych, zostanie ono wyłączone. Czy chcesz kontynuować?",
   "Disabled": "Wyłączono",
   "DisableDownload": "Ogranicz możliwość kopiowania zawartości pliku, jego pobierania oraz drukowania",
-  "DisableMCPServer": "Wyłącz serwer",
   "DisableNotifications": "Wyłącz powiadomienia",
   "DisableQuota": "Wyłącz limit",
   "DisableStorageQuota": "Wyłącz limit pamięci",

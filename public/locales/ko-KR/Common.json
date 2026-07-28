@@ -675,7 +675,6 @@
   "DisableBackupConfirmWithoutQuota": "백업 서비스를 사용 중지하면 {{productName}} 관리자가 백업을 생성할 수 없습니다. 자동 백업이 활성화되어 있는 경우, 비활성화됩니다. 계속 진행하시겠습니까?",
   "Disabled": "비활성화",
   "DisableDownload": "파일 콘텐츠 복사, 파일 다운로드 및 인쇄 제한",
-  "DisableMCPServer": "서버 비활성화",
   "DisableNotifications": "알림 비활성화",
   "DisableQuota": "할당량 비활성화",
   "DisableStorageQuota": "스토리지 할당량 비활성화",

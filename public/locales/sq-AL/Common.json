@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "Çaktivizimi i shërbimit të kopjes rezervë do të parandalojë administratorët e {{productName}} që të krijojnë kopje rezervë. Nëse ruajtja automatike e të dhënave është e aktivizuar, do të çaktivizohet. Jeni të sigurt që doni të vazhdoni?",
   "Disabled": "I çaktivizuar",
   "DisableDownload": "Kufizoni kopjimin e përmbajtjes së skedarit, shkarkimin dhe printimin e skedarëve",
-  "DisableMCPServer": "Çaktivizo serverin",
   "DisableNotifications": "Çaktivizoni njoftimet",
   "DisableQuota": "Çaktivizoni kuotën",
   "DisableStorageQuota": "Çaktivizoni kuotën e ruajtjes",

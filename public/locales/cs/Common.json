@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "Vypnutí služby Zálohování zabrání administrátorům {{productName}} ve vytváření záloh. Pokud je povoleno Automatické zálohování, bude deaktivováno. Jste si jistí, že chcete pokračovat?",
   "Disabled": "Deaktivováno",
   "DisableDownload": "Omezení kopírování obsahu souborů, stahování souborů a tisku",
-  "DisableMCPServer": "Vypnout server",
   "DisableNotifications": "Zakázat oznámení",
   "DisableQuota": "Zakázat kvótu",
   "DisableStorageQuota": "Zakázat kvóty úložiště",

@@ -689,7 +689,6 @@
   "DisableBackupConfirmWithoutQuota": "Atvienojot Backup pakalpojumu, {{productName}} administratori nevarēs veidot dublējumus. Ja ir ieslēgts Auto Backup, tas tiks atslēgts. Vai esat pārliecināts, ka vēlaties turpināt?",
   "Disabled": "Atspēgts",
   "DisableDownload": "Ierobežojiet failu satura kopēšanu, lejupielādi un drukāšanu",
-  "DisableMCPServer": "Atspējot serveri",
   "DisableNotifications": "Atspējot paziņojumus",
   "DisableQuota": "Atspēgt kvotu",
   "DisableStorageQuota": "Atspiet krātuves kvotu",

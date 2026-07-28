@@ -700,7 +700,6 @@
   "DisableBackupConfirmWithoutQuota": "Das Deaktivieren des Backup-Dienstes verhindert, dass {{productName}}-Administratoren Backups erstellen. Wenn Auto Backup aktiviert ist, wird es deaktiviert. Sind Sie sicher, dass Sie fortfahren möchten?",
   "Disabled": "Deaktiviert",
   "DisableDownload": "Beschränken Sie das Kopieren, Herunterladen und Drucken von Dateiinhalten",
-  "DisableMCPServer": "Server deaktivieren",
   "DisableNotifications": "Benachrichtigungen deaktivieren",
   "DisableQuota": "Kontingent deaktivieren",
   "DisableStorageQuota": "Speicherquote deaktivieren",

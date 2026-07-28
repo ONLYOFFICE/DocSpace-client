@@ -280,14 +280,14 @@ export const useQuickActions = (
       {
         id: "quick-form-room",
         icon: <QuickFormRoomIcon />,
-        label: t("Common:FormSetTitle"),
+        label: t("Common:FormSpaceTitle"),
         onClick: () => dispatchCreateRoom(currentFolderId, RoomsType.FormRoom),
       },
       // Opens the form templates list (sidebar Forms → Templates).
       {
         id: "quick-form-template",
         icon: <UseRoomTemplateIllustrationIcon />,
-        label: t("Common:FromTemplate"),
+        label: t("Common:SpaceTemplate"),
         onClick: () => goFormsTemplates(userId),
       },
       aiChatItems,
@@ -314,7 +314,7 @@ export const useQuickActions = (
       items.push({
         id: "quick-form-template",
         icon: <CreateFromTemplateIcon />,
-        label: t("Common:FromTemplate"),
+        label: t("Common:TemplateGallery"),
         onClick: () => {
           setTemplateGalleryVisible?.(true);
           setOformFromFolderId?.(currentFolderId);
@@ -368,3 +368,4 @@ export const useQuickActions = (
 };
 
 export default useQuickActions;
+

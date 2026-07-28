@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Nullable } from "@docspace/shared/types";
+
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { SearchProps } from "../Search";
 
@@ -47,6 +49,7 @@ type ItemTitleProps = {
   isContacts?: boolean;
   isPlugin?: boolean;
   isPluginHeaderVisible?: boolean;
+  onSelectHistoryDay?: (day: Nullable<string>) => void;
 } & (
   | {
       isRoomMembersPanel: true;
@@ -70,6 +73,7 @@ const ItemTitle = ({
   isPluginHeaderVisible,
   isPlugin,
   searchProps,
+  onSelectHistoryDay,
 }: ItemTitleProps) => {
   if (!infoPanelSelection) return null;
 
@@ -91,6 +95,7 @@ const ItemTitle = ({
     <RoomsItemHeader
       selection={infoPanelSelection}
       isRoomMembersPanel={isRoomMembersPanel}
+      onSelectHistoryDay={onSelectHistoryDay}
     />
   );
 };

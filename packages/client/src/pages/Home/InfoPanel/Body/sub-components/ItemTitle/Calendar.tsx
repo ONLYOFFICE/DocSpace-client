@@ -59,13 +59,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import IconCalendar from "PUBLIC_DIR/images/calendar.info.panel.react.svg?url";
+import IconCalendar from "@docspace/ui-kit/assets/calendar.react.svg";
 import { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
 import type { DateTime } from "luxon";
 import { Calendar } from "@docspace/ui-kit/components/calendar";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { isMobile } from "@docspace/shared/utils";
-import { ReactSVG } from "react-svg";
+import type { Nullable } from "@docspace/shared/types";
 import { now, formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
 
 import styles from "./Calendar.module.scss";
@@ -73,10 +74,11 @@ import styles from "./Calendar.module.scss";
 const heightCalendar = 376;
 
 interface CalendarProps {
-  roomCreationDate: string;
-  setCalendarDay: (value: null | string) => void;
+  roomCreationDate?: string;
+  setCalendarDay: (value: Nullable<string>) => void;
   setIsScrollLocked: (value: boolean) => void;
   locale: string;
+  title: string;
 }
 
 const CalendarComponent = ({
@@ -84,6 +86,7 @@ const CalendarComponent = ({
   setCalendarDay,
   setIsScrollLocked,
   locale,
+  title,
 }: CalendarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<DateTime | undefined>();
@@ -140,6 +143,8 @@ const CalendarComponent = ({
 
   const toggleCalendar = () => setIsOpen((open) => !open);
 
+  const isShrunk = height < heightCalendar;
+
   const onDateSet = (date: DateTime) => {
     if (!date) return;
     setSelectedDate(date);
@@ -147,34 +152,38 @@ const CalendarComponent = ({
     setIsOpen(false);
   };
 
-  const formattedRoomCreationDate = formatDate(
-    parseToDateTime(roomCreationDate),
-    "yyyy-MM-dd",
-  );
+  const creationDate = parseToDateTime(roomCreationDate);
 
   const mobile = isMobile();
 
   return (
-    <div className={styles.calendarComponent}>
+    <div
+      className={styles.calendarComponent}
+      data-testid="info_history_date_picker"
+    >
       <div ref={calendarButtonRef}>
-        <ReactSVG
-          className="icon-calendar"
-          src={IconCalendar}
+        <IconButton
+          id="info_history-calendar"
+          className="icon"
+          title={title}
+          iconNode={<IconCalendar />}
           onClick={toggleCalendar}
+          size={16}
+          dataTestId="info_history_calendar"
         />
       </div>
 
       {isOpen ? (
         <Calendar
           className={classNames(styles.calendar, { [styles.mobile]: mobile })}
-          style={{ height: mobile ? undefined : height }}
+          style={!mobile && isShrunk ? { height } : undefined}
           setSelectedDate={onDateSet}
           selectedDate={selectedDate ?? now()}
-          minDate={new Date(formattedRoomCreationDate)}
-          maxDate={new Date()}
+          minDate={creationDate ?? undefined}
+          maxDate={now()}
           forwardedRef={calendarRef}
           isMobile={mobile}
-          isScroll={!mobile}
+          isScroll={!mobile && isShrunk}
           locale={locale}
         />
       ) : null}

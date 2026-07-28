@@ -47,6 +47,7 @@ import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUse
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import type { Nullable } from "@docspace/shared/types";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
@@ -63,6 +64,7 @@ import commonStyles from "../../helpers/Common.module.scss";
 
 import Search, { SearchProps } from "../Search";
 
+import CalendarComponent from "./Calendar";
 import RoomsContextBtn, { type TSelection } from "./ContextButton";
 
 type RoomsItemHeaderProps = {
@@ -88,6 +90,8 @@ type RoomsItemHeaderProps = {
   getRoomHistoryReport?: InfoPanelStore["getRoomHistoryReport"];
   markRoomHistoryReportPageLeft?: InfoPanelStore["markRoomHistoryReportPageLeft"];
   isRoomHistoryReportDownloading?: InfoPanelStore["isRoomHistoryReportDownloading"];
+  setIsScrollLocked?: InfoPanelStore["setIsScrollLocked"];
+  onSelectHistoryDay?: (day: Nullable<string>) => void;
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -119,8 +123,10 @@ const RoomsItemHeader = ({
   getRoomHistoryReport,
   markRoomHistoryReportPageLeft,
   isRoomHistoryReportDownloading,
+  setIsScrollLocked,
+  onSelectHistoryDay,
 }: RoomsItemHeaderProps) => {
-  const { t } = useTranslation([
+  const { t, i18n } = useTranslation([
     "Files",
     "Common",
     "Translations",
@@ -226,8 +232,13 @@ const RoomsItemHeader = ({
   const onSearchClick = () => setShowSearchBlock?.(true);
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
+  const isThirdParty = "providerId" in selection && !!selection.providerId;
 
-  const canDownloadHistory = isRoom && roomsView === InfoPanelView.infoHistory;
+  const showHistoryActions =
+    isRoom && !isThirdParty && roomsView === InfoPanelView.infoHistory;
+
+  const canFilterHistoryByDay =
+    showHistoryActions && !!onSelectHistoryDay && !!setIsScrollLocked;
 
   const onDownloadHistory = () => {
     if (isRoomHistoryReportDownloading) return;
@@ -331,7 +342,7 @@ const RoomsItemHeader = ({
           />
         ) : null}
 
-        {canDownloadHistory ? (
+        {showHistoryActions ? (
           <IconButton
             id="info_download-history"
             className="icon"
@@ -341,6 +352,18 @@ const RoomsItemHeader = ({
             isDisabled={isRoomHistoryReportDownloading}
             size={16}
             dataTestId="info_download_history"
+          />
+        ) : null}
+
+        {canFilterHistoryByDay ? (
+          <CalendarComponent
+            roomCreationDate={
+              "created" in selection ? selection.created : undefined
+            }
+            setCalendarDay={onSelectHistoryDay}
+            setIsScrollLocked={setIsScrollLocked}
+            locale={i18n.language}
+            title={t("Common:SelectDate")}
           />
         ) : null}
 
@@ -365,6 +388,7 @@ export default inject(
       getRoomHistoryReport,
       markRoomHistoryReportPageLeft,
       isRoomHistoryReportDownloading,
+      setIsScrollLocked,
     } = infoPanelStore;
 
     const {
@@ -390,6 +414,7 @@ export default inject(
       getRoomHistoryReport,
       markRoomHistoryReportPageLeft,
       isRoomHistoryReportDownloading,
+      setIsScrollLocked,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 

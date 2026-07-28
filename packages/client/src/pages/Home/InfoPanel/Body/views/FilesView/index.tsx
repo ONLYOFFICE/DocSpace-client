@@ -136,6 +136,12 @@ const FilesView = ({
     infoPanelItemsList,
   );
 
+  const scrollContext = React.use(ScrollbarContext);
+
+  const scrollToTop = React.useCallback(() => {
+    scrollContext?.parentScrollbar?.scrollToTop();
+  }, []);
+
   const {
     history,
     total: historyTotal,
@@ -144,10 +150,12 @@ const FilesView = ({
     isFirstLoading: historyIsFirstLoading,
     fetchHistory,
     fetchMoreHistory,
+    selectHistoryDay,
     abortController,
   } = useHistory({
     selection,
     setExternalLinks: setExternalLinks!,
+    scrollToTop,
   });
 
   const {
@@ -160,12 +168,6 @@ const FilesView = ({
     isFolder: isFolder(selection),
     generatePrimaryLink,
   });
-
-  const scrollContext = React.use(ScrollbarContext);
-
-  const scrollToTop = React.useCallback(() => {
-    scrollContext?.parentScrollbar?.scrollToTop();
-  }, []);
 
   const {
     members,
@@ -413,6 +415,7 @@ const FilesView = ({
             ? { ...infoPanelRoomSelection!, isRoom: true }!
             : selection
         }
+        onSelectHistoryDay={selectHistoryDay}
         {...pluginProps}
         {...roomMembersProps}
       />

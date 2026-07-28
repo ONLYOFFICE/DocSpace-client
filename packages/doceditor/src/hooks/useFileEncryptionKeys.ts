@@ -42,6 +42,14 @@ import { useEncryptionOptional } from "@docspace/shared/context/encryption";
 import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
 import { wipeDek } from "@docspace/shared/services/encryption/file-keys";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
+import {
+  getCachedEncryptedFilename,
+  rememberEncryptedFilename,
+} from "@docspace/shared/services/encryption/filename-cache";
+import {
+  decryptFileNameRaw,
+  parseDSE3Header,
+} from "@docspace/shared/services/encryption/streaming-encryption";
 import { loadRoomMemberKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
 import type { TUser } from "@docspace/shared/api/people/types";
 
@@ -62,6 +70,42 @@ export type TUseFileEncryptionKeys = {
   encryptionKeys?: TEditorEncryptionKeys;
 };
 
+const HEADER_FETCH_BYTES = 4096;
+
+// The real filename of an encrypted file exists only inside its DSE3 header;
+// the server-side title is an opaque placeholder. Decrypt the name while the
+// DEK is at hand and publish it to the per-tab filename cache so every title
+// surface (tab title, editor caption, dialogs) can resolve it.
+const recoverFilenameWithDek = async (
+  fileId: number,
+  viewUrl: string | undefined,
+  dek: Uint8Array,
+): Promise<void> => {
+  if (!viewUrl || getCachedEncryptedFilename(fileId)) return;
+
+  try {
+    const response = await fetch(viewUrl, {
+      headers: { Range: `bytes=0-${HEADER_FETCH_BYTES - 1}` },
+    });
+    if (!response.ok) return;
+
+    const header = parseDSE3Header(
+      new Uint8Array(await response.arrayBuffer()),
+    );
+    if (!header.encryptedName) return;
+
+    const name = await decryptFileNameRaw(
+      header.encryptedName,
+      dek,
+      header.fileNonce,
+    );
+    if (name) rememberEncryptedFilename(fileId, name);
+  } catch (error) {
+    // A missing display name must not block opening the editor.
+    console.error("[ENCRYPTION] filename recovery failed:", error);
+  }
+};
+
 const useFileEncryptionKeys = (
   config: IInitialConfig | undefined,
   user: TUser | undefined,
@@ -73,6 +117,7 @@ const useFileEncryptionKeys = (
   });
 
   const fileId = config?.file?.id;
+  const fileViewUrl = config?.file?.viewUrl;
   const userId = user?.id;
 
   const roomId =
@@ -141,6 +186,9 @@ const useFileEncryptionKeys = (
           fileId: numericFileId,
         });
 
+        await recoverFilenameWithDek(numericFileId, fileViewUrl, dek);
+        if (cancelled) return;
+
         const serverCryptoEngineId =
           config?.editorConfig?.encryptionKeys?.cryptoEngineId;
 
@@ -169,7 +217,15 @@ const useFileEncryptionKeys = (
     return () => {
       cancelled = true;
     };
-  }, [isEncrypted, fileId, userId, roomId, requireIdentity, keysReady]);
+  }, [
+    isEncrypted,
+    fileId,
+    fileViewUrl,
+    userId,
+    roomId,
+    requireIdentity,
+    keysReady,
+  ]);
 
   return state;
 };

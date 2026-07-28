@@ -3,7 +3,7 @@
   "content": "Create Form Set",
   "content_en_sha1_hash": "5c266be0e2451747828508884538e488e1806f2d",
   "created_at": "2026-06-25T19:30:28.607Z",
-  "updated_at": "2026-07-28T07:30:59.870Z",
+  "updated_at": "2026-07-28T11:44:10.651Z",
   "comment": {
     "text": "Button label in the Forms section header used to initiate the creation of a new collection of forms.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "gemma4:26b"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/helpers/getSectionCreateButton.ts",
-      "line_number": 95,
-      "context": "if (!model || model.length === 0) return HIDDEN;\n \n return {\n showMainButton: true,\n mainButtonProps: {\n text: t(\"Common:CreateFormSet\"),\n isDropdown: false,\n model: [],\n onAction: () => onCreateRoom(),\n },\n };",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
       "line_number": 1070,

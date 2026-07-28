@@ -1,0 +1,29 @@
+{
+  "key_path": "DemoCode",
+  "content": "Demo code",
+  "content_en_sha1_hash": "e929046ab007dd316192f4254a45a66f4e761255",
+  "created_at": "2026-07-27T13:07:48.532Z",
+  "updated_at": "2026-07-27T14:27:24.159Z",
+  "comment": {
+    "text": "A navigation label for a menu item within the DocsConnect developer tools panel.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:27:24.159Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Preview.tsx",
+      "line_number": 157,
+      "context": "iconName: DocumentsReactSvgUrl,\n content: null,\n },\n {\n id: \"code\",\n name: t(\"DocsConnect:DemoCode\"),\n iconName: CodeReactSvgUrl,\n content: null,\n },\n ]}\n selectedItemId={view}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

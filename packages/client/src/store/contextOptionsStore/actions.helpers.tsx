@@ -45,9 +45,7 @@ import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
-import {
-  connectedCloudsTypeTitleTranslation,
-} from "SRC_DIR/helpers/filesUtils";
+import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
@@ -73,12 +71,8 @@ import {
   isRoom as isRoomUtil,
 } from "@docspace/shared/utils/typeGuards";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
-import {
-  XlsxUpdateService,
-} from "@docspace/shared/services/xlsx-update.service";
-import {
-  showCreatedPDFFormDialog,
-} from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+import { XlsxUpdateService } from "@docspace/shared/services/xlsx-update.service";
+import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { PersistenceKeys, getPersisted } from "../utils/persistence";
 import { onEditRoomTemplate, systemFolders } from "./helpers";
@@ -87,8 +81,10 @@ import type DialogsStore from "../DialogsStore";
 import type ContextOptionsStore from "../ContextOptionsStore";
 
 export const onClickReconnectStorageImpl = async (
-self: ContextOptionsStore,item: TContextItem, t: TTranslation
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+  t: TTranslation,
+) => {
   const { thirdPartyStore } = self.filesSettingsStore;
 
   const { openConnectWindow, connectItems } = thirdPartyStore;
@@ -148,10 +144,11 @@ self: ContextOptionsStore,item: TContextItem, t: TTranslation
   }
 };
 
-
 export const onClickMakeFormImpl = (
-self: ContextOptionsStore,item: TContextItem, t: TTranslation
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+  t: TTranslation,
+) => {
   const { setConvertPasswordDialogVisible, setFormCreationInfo } =
     self.dialogsStore;
   // the original .js assumed a file item (fileExst/folderId
@@ -205,10 +202,11 @@ self: ContextOptionsStore,item: TContextItem, t: TTranslation
     });
 };
 
-
 export const onCopyLinkImpl = async (
-self: ContextOptionsStore,item: TContextItem, t: TTranslation
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+  t: TTranslation,
+) => {
   const { shared, navigationPath } = self.selectedFolderStore;
 
   const isArchive = item.rootFolderType === FolderType.Archive;
@@ -305,10 +303,10 @@ self: ContextOptionsStore,item: TContextItem, t: TTranslation
   toastr.success(t("Common:LinkCopySuccess"));
 };
 
-
 export const onOpenEmbeddingSettingsImpl = async (
-self: ContextOptionsStore,item: TContextItem
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+) => {
   const { setLinkParams, setEmbeddingPanelData } = self.dialogsStore;
 
   // the original .js sets linkParams without the `link`
@@ -320,22 +318,27 @@ self: ContextOptionsStore,item: TContextItem
   setEmbeddingPanelData({ visible: true, item });
 };
 
-
 export const onCreateAndCopySharedLinkImpl = async (
-self: ContextOptionsStore,item: TContextItem, t: TTranslation
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+  t: TTranslation,
+) => {
   const { isExpiredLinkAsync } = self.filesActionsStore;
 
-  if (
-    item.external &&
-    (item.isLinkExpired || (await isExpiredLinkAsync(item)))
-  )
+  if (item.external && (item.isLinkExpired || (await isExpiredLinkAsync(item))))
     return toastr.error(
       t("Common:RoomLinkExpired"),
       t("Common:RoomNotAvailable"),
     );
 
-  const primaryLink = await self.filesStore.getPrimaryLink(item.id);
+  let primaryLink;
+
+  try {
+    primaryLink = await self.filesStore.getPrimaryLink(item.id);
+  } catch (error) {
+    toastr.error(error as string);
+    return;
+  }
 
   if (primaryLink) {
     if (
@@ -370,10 +373,10 @@ self: ContextOptionsStore,item: TContextItem, t: TTranslation
   }
 };
 
-
 export const onRemoveSharedFilesOrFolderImpl = async (
-self: ContextOptionsStore,items: TContextItem[]
-)=> {
+  self: ContextOptionsStore,
+  items: TContextItem[],
+) => {
   if (!Array.isArray(items) || items.length === 0) return;
 
   const { addActiveItems } = self.filesStore;
@@ -410,10 +413,11 @@ self: ContextOptionsStore,items: TContextItem[]
   }
 };
 
-
 export const startFillingInRoleBasedRoomImpl = (
-self: ContextOptionsStore,item: TContextItem, t: TTranslation
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+  t: TTranslation,
+) => {
   if (isMobile)
     return toastr.info(t("Common:MobileStartFillingPdfNotAvailableInfo"));
 
@@ -428,10 +432,10 @@ self: ContextOptionsStore,item: TContextItem, t: TTranslation
   if (refPage) refPage.sessionStorage.setItem(FILLING_STATUS_ID, "true");
 };
 
-
 export const startFillingInFormRoomImpl = async (
-self: ContextOptionsStore,item: TContextItem
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+) => {
   try {
     await manageFormFilling(item.id, FormFillingManageAction.Start);
 
@@ -443,10 +447,10 @@ self: ContextOptionsStore,item: TContextItem
   }
 };
 
-
 export const onClickResetAndStartFillingImpl = async (
-self: ContextOptionsStore,item: TContextItem
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+) => {
   const { addActiveItems } = self.filesStore;
   const { clearActiveOperations } = self.uploadDataStore;
   const { setGroupMenuBlocked } = self.filesActionsStore;
@@ -478,16 +482,16 @@ self: ContextOptionsStore,item: TContextItem
   }
 };
 
-
 export const onClickDeleteSelectedFolderImpl = (
-self: ContextOptionsStore,t: TTranslation, isRoom?: boolean
-)=> {
+  self: ContextOptionsStore,
+  t: TTranslation,
+  isRoom?: boolean,
+) => {
   const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
     self.dialogsStore;
   const { confirmDelete } = self.filesSettingsStore;
   const { deleteAction, deleteRoomsAction } = self.filesActionsStore;
-  const { id: selectedFolderId, getSelectedFolder } =
-    self.selectedFolderStore;
+  const { id: selectedFolderId, getSelectedFolder } = self.selectedFolderStore;
   const { isThirdPartySelection, setBufferSelection } = self.filesStore;
 
   const selectedFolder = getSelectedFolder();
@@ -512,8 +516,8 @@ self: ContextOptionsStore,t: TTranslation, isRoom?: boolean
       successRemoveRooms: t("Common:RoomsRemoved"),
     };
 
-    deleteRoomsAction([selectedFolderId], translations).catch(
-      (err: unknown) => toastr.error(err as string),
+    deleteRoomsAction([selectedFolderId], translations).catch((err: unknown) =>
+      toastr.error(err as string),
     );
   } else {
     translations = {
@@ -528,15 +532,13 @@ self: ContextOptionsStore,t: TTranslation, isRoom?: boolean
   }
 };
 
-
 export const onAddRoomsToGroupImpl = async (
-self: ContextOptionsStore,
+  self: ContextOptionsStore,
   roomIds: number[],
   groupId: string,
   t: TTranslation,
   groupName: string,
-
-)=> {
+) => {
   try {
     await self.dialogsStore.updateRoomGroup(groupId, {
       roomsToAdd: roomIds,
@@ -565,10 +567,11 @@ self: ContextOptionsStore,
   }
 };
 
-
 export const onRemoveRoomsFromGroupImpl = async (
-self: ContextOptionsStore,roomIds: number[], t: TTranslation
-)=> {
+  self: ContextOptionsStore,
+  roomIds: number[],
+  t: TTranslation,
+) => {
   const currentGroupId = self.filesStore.roomsFilter?.groupId;
   if (!currentGroupId) return;
 
@@ -609,10 +612,10 @@ self: ContextOptionsStore,roomIds: number[], t: TTranslation
   }
 };
 
-
 export const onCreateTemplateImpl = async (
-self: ContextOptionsStore,_navigate?: unknown
-)=> {
+  self: ContextOptionsStore,
+  _navigate?: unknown,
+) => {
   self.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
   const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
@@ -641,10 +644,11 @@ self: ContextOptionsStore,_navigate?: unknown
   window.dispatchEvent(event);
 };
 
-
 export const onSyncXlsxDataImpl = async (
-self: ContextOptionsStore,item: TContextItem, t: TTranslation
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+  t: TTranslation,
+) => {
   const { clearSecondaryProgressData, setSecondaryProgressBarData } =
     self.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
 
@@ -690,10 +694,11 @@ self: ContextOptionsStore,item: TContextItem, t: TTranslation
   }
 };
 
-
 export const handleCopyPrimaryLinkImpl = async (
-self: ContextOptionsStore,item: TContextItem, t: TTranslation
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+  t: TTranslation,
+) => {
   if (!item.canShare) return;
 
   const primaryLink = await ShareLinkService.getPrimaryLink(
@@ -737,10 +742,9 @@ self: ContextOptionsStore,item: TContextItem, t: TTranslation
   }
 };
 
-
 export const _resolveRoomImpl = async (
-self: ContextOptionsStore
-): Promise<TContextItem | null>=> {
+  self: ContextOptionsStore,
+): Promise<TContextItem | null> => {
   const { infoPanelRoom } = self.infoPanelStore;
   const selectedFolder = self.selectedFolderStore.getSelectedFolder();
 
@@ -758,20 +762,20 @@ self: ContextOptionsStore
   return room;
 };
 
-
 export const _syncInfoPanelRoomImpl = (
-self: ContextOptionsStore,newRoom: TRoom
-)=> {
+  self: ContextOptionsStore,
+  newRoom: TRoom,
+) => {
   const { infoPanelStore } = self;
   if (infoPanelStore.isVisible && infoPanelStore.isDetailsTabActive) {
     infoPanelStore.setInfoPanelRoom(newRoom);
   }
 };
 
-
 export const askAIImpl = async (
-self: ContextOptionsStore,item: TContextItem
-)=> {
+  self: ContextOptionsStore,
+  item: TContextItem,
+) => {
   const skipAi = getPersisted(PersistenceKeys.skipAiModal, false);
 
   if (item.parentRoomType !== FolderType.FormRoom || skipAi) {

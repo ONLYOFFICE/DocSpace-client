@@ -195,21 +195,30 @@
 }
 
 .secretField {
-  position: relative;
+  @include mixins.common-input-color-styles;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box;
+
+  &:focus-within {
+    border-color: var(--input-border-focus);
+  }
 }
 
 .secretInput {
-  padding-inline-end: 68px;
+  flex: 1 1 0%;
+  min-width: 0;
 }
 
 .secretIcons {
-  position: absolute;
-  inset-inline-end: 12px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
+  padding-inline-end: 12px;
+  background-color: inherit;
 }
 
 .saveButtons {
@@ -325,11 +334,21 @@
 }
 
 .previewEditor {
+  position: relative;
   width: 100%;
   height: calc(100vh - 260px);
   min-height: 480px;
   border-radius: 6px;
   overflow: hidden;
+}
+
+.previewLoader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
 }
 
 .previewHidden {
@@ -543,6 +562,12 @@
   gap: 8px;
 }
 
+.detailLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .detailRows .detailRow:not(:last-child) {
   padding-bottom: 11px;
   border-bottom: 1px solid var(--dev-tools-card-divider);
@@ -624,8 +649,16 @@
 }
 
 .downloadReport {
+  display: flex;
+  gap: 12px;
+  align-items: center;
   margin-top: 4px;
   margin-bottom: 8px;
+
+  @include mixins.mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .downloadButton {

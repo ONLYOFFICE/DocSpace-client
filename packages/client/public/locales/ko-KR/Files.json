@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "아카이브된 방이 여기에 표시됩니다.",
   "ChangeAgentOwnerSelectorInfo": "에이전트의 소유자는 룸 관리자 또는 {{productName}} 관리자만 될 수 있습니다.",
   "ChangeTheAgentOwner": "에이전트 소유자 변경",
+  "ClientSearchDecryptingNames": "파일 이름 복호화 중… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "폴더가 너무 큽니다. 검색 결과가 불완전할 수 있습니다.",
   "CompressingFiles": "파일 압축 중",
   "Conversion": "변환",
   "Converting": "변환 중",

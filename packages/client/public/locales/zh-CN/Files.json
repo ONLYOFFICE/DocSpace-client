@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "已存档房间将出现在此处。",
   "ChangeAgentOwnerSelectorInfo": "只有房间管理员或{{productName}}管理员可以成为此智能体的所有者",
   "ChangeTheAgentOwner": "更改智能体所有者",
+  "ClientSearchDecryptingNames": "正在解密文件名… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "文件夹过大，搜索结果可能不完整。",
   "CompressingFiles": "正在压缩文件",
   "Conversion": "转换",
   "Converting": "转换中",

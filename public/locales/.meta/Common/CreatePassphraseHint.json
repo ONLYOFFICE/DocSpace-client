@@ -1,19 +1,19 @@
 {
   "key_path": "CreatePassphraseHint",
-  "content": "Create a strong passphrase to protect your encryption key on this device. Each device you sign in on uses its own passphrase. You will need this passphrase to decrypt files.",
-  "content_en_sha1_hash": "9cf48c31e1bb3304514cac9303bccb5fb8830db9",
-  "created_at": "2026-05-24T17:27:22.299Z",
-  "updated_at": "2026-06-15T19:31:56.199Z",
+  "content": "Create a strong passphrase to protect your encryption key. You will need it to decrypt files on any device where you use this key.",
+  "content_en_sha1_hash": "4e37a735530453e04d9d54edc30a3afb8d563f72",
+  "created_at": "2026-07-27T13:07:04.711Z",
+  "updated_at": "2026-07-27T13:39:55.741Z",
   "comment": {
-    "text": "Instructional description text within a modal dialog, shown when a user is creating a new passphrase for device-specific encryption key protection.",
+    "text": "Description text within a modal dialog body providing instructions for creating a new encryption passphrase during initial setup.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:26:09.311Z",
+    "updated_at": "2026-07-27T13:39:55.741Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 159,
+      "line_number": 214,
       "context": "<ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>\n {isNew\n ? t(\"Common:CreatePassphraseHint\")\n : t(\"Common:PassphraseHint\")}\n </Text>\n \n <div className={styles.passphraseField}>\n {isNew ? (",
       "module": "/packages/shared"
     }

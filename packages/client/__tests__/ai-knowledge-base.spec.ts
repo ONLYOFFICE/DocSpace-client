@@ -76,7 +76,9 @@ test.describe("AI knowledge base", () => {
 
       await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=5`);
 
-      const emptyView = await page.getByTestId("empty-view");
+      const emptyView = page
+        .getByTestId("empty-view")
+        .filter({ visible: true });
 
       await expect(emptyView).toBeVisible();
 
@@ -99,7 +101,9 @@ test.describe("AI knowledge base", () => {
 
       await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=5`);
 
-      const emptyView = await page.getByTestId("empty-view");
+      const emptyView = page
+        .getByTestId("empty-view")
+        .filter({ visible: true });
 
       await expect(emptyView).toBeVisible();
 
@@ -258,7 +262,9 @@ test.describe("AI knowledge base", () => {
 
       await page.goto(`${baseUrl}/ai-agents/2?folder=2&searchArea=5`);
 
-      const emptyView = await page.getByTestId("empty-view");
+      const emptyView = page
+        .getByTestId("empty-view")
+        .filter({ visible: true });
 
       await expect(emptyView).toBeVisible();
 

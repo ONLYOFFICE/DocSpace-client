@@ -367,11 +367,6 @@ async function uploadOneFile(
       true, // encrypted
       undefined,
       true, // CreateNewIfExist
-      {
-        originalFileName: prepared.originalFileName,
-        originalFileSize: prepared.originalFileSize,
-        originalFileType: prepared.originalFileType,
-      },
     );
 
     const sessionId = session?.id;

@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Τα δωμάτια που έχουν αρχειοθετηθεί θα εμφανίζονται εδώ.",
   "ChangeAgentOwnerSelectorInfo": "Μόνο ένας διαχειριστής δωματίου ή ένας διαχειριστής {{productName}} μπορεί να γίνει ο κάτοχος του agent.",
   "ChangeTheAgentOwner": "Αλλαγή του ιδιοκτήτη του πράκτορα",
+  "ClientSearchDecryptingNames": "Αποκρυπτογράφηση ονομάτων αρχείων… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "Ο φάκελος είναι πολύ μεγάλος. Τα αποτελέσματα αναζήτησης ενδέχεται να είναι ελλιπή.",
   "CompressingFiles": "Συμπίεση αρχείων",
   "Conversion": "Μετατροπή",
   "Converting": "Γίνεται μετατροπή",

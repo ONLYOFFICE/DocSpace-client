@@ -3,7 +3,7 @@
   "content": "Write down these 24 words in order and store them somewhere safe. They work across all your devices and are the only way to restore access to your encrypted files if you forget your passphrase.",
   "content_en_sha1_hash": "4a806b1a191272b92708c1be4e997dd16c0ac261",
   "created_at": "2026-05-24T17:27:36.532Z",
-  "updated_at": "2026-06-02T14:21:21.876Z",
+  "updated_at": "2026-07-27T13:07:50.927Z",
   "comment": {
     "text": "Instructional description text within a modal dialog that provides guidance on how to securely store the recovery phrase.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 163,
-      "context": "<ModalDialog.Body>\n {step === \"display\" ? (\n <div className={styles.container}>\n <Text className={styles.description}>\n {t(\"Common:RecoveryPhraseHint\")}\n </Text>\n \n <div className={styles.warningBox}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:RecoveryPhraseWarning\")}",
+      "line_number": 164,
+      "context": "</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>\n {t(\"Common:RecoveryPhraseHint\")}\n </Text>\n \n <div className={styles.warningBox}>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:RecoveryPhraseWarning\")}",
       "module": "/packages/shared"
     }
   ],

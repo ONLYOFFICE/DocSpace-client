@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Badge } from "@docspace/ui-kit/components/badge";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
@@ -167,38 +168,42 @@ const KeyItem: React.FC<KeyItemProps> = ({
         </div>
       </div>
       <div className={styles.keyItemContent}>
-        <div className={styles.keyInfo}>
-          <Text fontSize="13px" fontWeight={600}>
-            {t("Common:KeyFingerprint")}:
-          </Text>
-          <Text fontSize="13px" className={styles.fingerprint}>
-            {fingerprint || "..."}
-          </Text>
-        </div>
         {createdDate && (
-          <div className={styles.keyInfo}>
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Common:KeyCreatedOn")}:
+          <div className={styles.detailsGrid}>
+            <Text fontSize="13px" className={styles.detailsLabel}>
+              {t("Common:KeyCreatedOn")}
             </Text>
             <Text fontSize="13px">{createdDate}</Text>
           </div>
         )}
-        <div className={styles.keyInfo}>
-          <Text fontSize="13px" fontWeight={600}>
-            {t("Common:Algorithm")}:
-          </Text>
-          <Text fontSize="13px">X25519</Text>
-        </div>
-        {keyData.id && (
-          <div className={styles.keyInfo}>
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Common:KeyId")}:
+        <CollapsibleCard
+          title={t("Common:Details")}
+          className={styles.keyDetails}
+          dataTestId="key_details_collapsible"
+        >
+          <div className={styles.detailsGrid}>
+            <Text fontSize="13px" className={styles.detailsLabel}>
+              {t("Common:KeyFingerprint")}
             </Text>
-            <Text fontSize="13px" className={styles.keyIdText}>
-              {keyData.id.slice(0, 8)}...
+            <Text fontSize="13px" className={styles.fingerprint}>
+              {fingerprint || "..."}
             </Text>
+            {keyData.id ? (
+              <>
+                <Text fontSize="13px" className={styles.detailsLabel}>
+                  {t("Common:KeyId")}
+                </Text>
+                <Text fontSize="13px" className={styles.keyIdText}>
+                  {keyData.id}
+                </Text>
+              </>
+            ) : null}
+            <Text fontSize="13px" className={styles.detailsLabel}>
+              {t("Common:Algorithm")}
+            </Text>
+            <Text fontSize="13px">X25519</Text>
           </div>
-        )}
+        </CollapsibleCard>
       </div>
       {isCurrentlyDeleting && (
         <div className={styles.keyItemOverlay}>

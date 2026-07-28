@@ -125,6 +125,8 @@
   "DNSSettingsHint": "ໃສ່ຊື່ໂດເມນແບບນີ້:",
   "DNSSettingsMobile": "ສົ່ງຄໍາຮ້ອງຂໍຂອງທ່ານໄປຫາທີມງານສະຫນັບສະຫນູນຂອງພວກເຮົາ, ແລະຜູ້ຊ່ຽວຊານຂອງພວກເຮົາຈະຊ່ວຍທ່ານໃນການຕັ້ງຄ່າ.",
   "DNSSettingsNavDescription": "ການຕັ້ງຄ່າ DNS ແມ່ນວິທີການກໍານົດ URL ທາງເລືອກສໍາລັບ Portal ຂອງທ່ານ.",
+  "DocsConnectPromoDescription": "ເຊື່ອມຕໍ່ບໍລິການ {{organizationName}} {{editorsName}} ແບບໂຮສຢູ່ໃນຄລາວ ດ້ວຍ Docs Connect — ພຽງແຕ່ວາງທີ່ຢູ່ຂອງມັນໄວ້ດ້ານເທິງ. ບໍ່ຕ້ອງຕິດຕັ້ງ, ບໍ່ຕ້ອງບຳລຸງຮັກສາ, ໃຊ້ຄີຂອງທ່ານເອງ.",
+  "DocsConnectPromoTitle": "ບໍ່ຕ້ອງການຕິດຕັ້ງ Document Server ບໍ?",
   "DocumentService": "ບໍລິການເອກະສານ",
   "DocumentServiceAdvancedSettings": "ການຕັ້ງຄ່າເຄື່ອງແມ່ຂ່າຍຂັ້ນສູງ",
   "DocumentServiceAuthHeader": "ສ່ວນຫົວການອະນຸຍາດ",

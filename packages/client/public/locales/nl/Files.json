@@ -16,6 +16,8 @@
   "ArchiveEmptyScreenUser": "Kamers die zijn gearchiveerd verschijnen hier.",
   "ChangeAgentOwnerSelectorInfo": "Alleen een room admin of een {{productName}} admin kan de eigenaar van de agent worden.",
   "ChangeTheAgentOwner": "Wijzig de agent eigenaar",
+  "ClientSearchDecryptingNames": "Bestandsnamen worden ontsleuteld… {{decrypted}}/{{total}}",
+  "ClientSearchPartialResults": "De map is te groot. De zoekresultaten kunnen onvolledig zijn.",
   "CompressingFiles": "Bestanden comprimeren",
   "Conversion": "Conversie",
   "Converting": "Omzetten",

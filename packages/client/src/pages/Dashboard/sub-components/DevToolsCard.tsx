@@ -61,6 +61,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -74,28 +75,18 @@ type DevTool = {
   id: string;
   title: string;
   description: string;
+  path?: string;
   url?: string;
+  featured?: boolean;
+  linkTitle: string;
 };
 
 interface DevToolsCardProps {
   apiBasicLink?: string;
-  sdkLink?: string;
-  apiPluginSDKLink?: string;
-  webhooksGuideUrl?: string;
-  apiOAuthLink?: string;
-  apiKeysUrl?: string;
-  docsConnectUrl?: string;
 }
 
 const useDevTools = (props: DevToolsCardProps): DevTool[] => {
-  const {
-    apiBasicLink,
-    sdkLink,
-    apiPluginSDKLink,
-    webhooksGuideUrl,
-    apiOAuthLink,
-    apiKeysUrl,
-  } = props;
+  const { apiBasicLink } = props;
 
   const { t } = useTranslation([
     "Settings",
@@ -103,12 +94,22 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
     "Webhooks",
     "OAuth",
     "Common",
+    "DocsConnect",
   ]);
 
   const productName = getBrandName("ProductName");
   const organizationName = getBrandName("OrganizationName");
+  const docsName = `${organizationName} ${getBrandName("ProductEditorsName")}`;
 
   return [
+    {
+      id: "docs-connect",
+      title: t("DocsConnect:DocsConnect"),
+      description: t("DocsConnect:CardDescription", { productName: docsName }),
+      path: "/developer-tools/docs-connect",
+      featured: true,
+      linkTitle: t("DocsConnect:GetStarted"),
+    },
     {
       id: "rest-api",
       title: t("Settings:RestAPI"),
@@ -117,18 +118,21 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
         productName,
       }),
       url: apiBasicLink,
+      linkTitle: t("Common:LearnMore"),
     },
     {
       id: "embed-sdk",
       title: t("Settings:EmbedSDK"),
       description: t("Settings:EmbedSDKDescription", { productName }),
-      url: sdkLink,
+      path: "/developer-tools/javascript-sdk",
+      linkTitle: t("Common:LearnMore"),
     },
     {
       id: "plugins-sdk",
       title: t("WebPlugins:PluginSDK"),
       description: t("Settings:PluginDescription", { productName }),
-      url: apiPluginSDKLink,
+      path: "/developer-tools/plugin-sdk",
+      linkTitle: t("Common:LearnMore"),
     },
     {
       id: "webhooks",
@@ -137,7 +141,8 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
         organizationName,
         productName,
       }),
-      url: webhooksGuideUrl,
+      path: "/developer-tools/webhooks",
+      linkTitle: t("Common:LearnMore"),
     },
     {
       id: "oauth",
@@ -146,7 +151,8 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
         organizationName,
         productName,
       }),
-      url: apiOAuthLink,
+      path: "/developer-tools/oauth",
+      linkTitle: t("Common:LearnMore"),
     },
     {
       id: "api-keys",
@@ -155,16 +161,57 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
         organizationName,
         productName,
       }),
-      url: apiKeysUrl,
+      path: "/developer-tools/api-keys",
+      linkTitle: t("Common:LearnMore"),
     },
   ];
 };
 
+const DevToolTile = ({ tool }: { tool: DevTool }) => {
+  const className = tool.featured
+    ? `${styles.devToolTile} ${styles.devToolTileFeatured}`
+    : styles.devToolTile;
+
+  const content = (
+    <>
+      <Text as="p" className={styles.devToolTitle}>
+        {tool.title}
+      </Text>
+      <Text as="p" className={styles.devToolDescription}>
+        {tool.description}
+      </Text>
+      <span className={styles.devToolLink}>
+        {tool.linkTitle}
+        <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
+      </span>
+    </>
+  );
+
+  if (tool.path) {
+    return (
+      <Link className={className} to={tool.path}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      className={className}
+      href={tool.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-disabled={!tool.url}
+    >
+      {content}
+    </a>
+  );
+};
+
 const DevToolsCardComponent = (props: DevToolsCardProps) => {
-  const { t } = useTranslation(["Common", "DocsConnect"]);
+  const { t } = useTranslation(["Common"]);
   const tools = useDevTools(props);
   const organizationName = getBrandName("OrganizationName");
-  const docsName = `${organizationName} ${getBrandName("ProductEditorsName")}`;
 
   return (
     <CollapsibleCard
@@ -173,47 +220,8 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
       defaultOpen
     >
       <div className={styles.devToolsGrid}>
-        <a
-          className={`${styles.devToolTile} ${styles.devToolTileFeatured}`}
-          href={props.docsConnectUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-disabled={!props.docsConnectUrl}
-        >
-          <Text as="p" className={styles.devToolTitle}>
-            {t("DocsConnect:DocsConnect")}
-          </Text>
-          <Text as="p" className={styles.devToolDescription}>
-            {t("DocsConnect:CardDescription", { productName: docsName })}
-          </Text>
-          <span className={styles.devToolLink}>
-            {t("DocsConnect:GetStarted")}
-            <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
-          </span>
-        </a>
         {tools.map((tool) => (
-          <a
-            key={tool.id}
-            className={styles.devToolTile}
-            href={tool.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-disabled={!tool.url}
-          >
-            <Text as="p" className={styles.devToolTitle}>
-              {tool.title}
-            </Text>
-            <Text as="p" className={styles.devToolDescription}>
-              {tool.description}
-            </Text>
-            <span className={styles.devToolLink}>
-              {t("Common:LearnMore")}
-              <ArrowIcon
-                aria-hidden="true"
-                className={styles.integrationArrow}
-              />
-            </span>
-          </a>
+          <DevToolTile key={tool.id} tool={tool} />
         ))}
       </div>
     </CollapsibleCard>
@@ -222,12 +230,6 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
 
 export const DevToolsCard = inject<TStore>(({ settingsStore }) => ({
   apiBasicLink: settingsStore.apiBasicLink,
-  sdkLink: settingsStore.sdkLink,
-  apiPluginSDKLink: settingsStore.apiPluginSDKLink,
-  webhooksGuideUrl: settingsStore.webhooksGuideUrl,
-  apiOAuthLink: settingsStore.apiOAuthLink,
-  apiKeysUrl: settingsStore.apiKeysUrl,
-  docsConnectUrl: settingsStore.docsConnectUrl,
 }))(observer(DevToolsCardComponent));
 
 export default DevToolsCard;

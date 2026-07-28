@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Saisissez le nom de domaine comme suit:",
   "DNSSettingsMobile": "Envoyez votre demande à notre équipe de support et nos spécialistes vous aideront à définir les paramètres.",
   "DNSSettingsNavDescription": "Les paramètres DNS permettent de définir une autre URL pour votre portail.",
+  "DocsConnectPromoDescription": "Connectez un service {{editorsName}} {{organizationName}} hébergé dans le cloud avec Docs Connect — il suffit de coller son adresse ci-dessus. Aucune installation, aucune maintenance, vos propres clés.",
+  "DocsConnectPromoTitle": "Aucun Document Server à installer ?",
   "DocumentService": "Service de documents",
   "DocumentServiceAdvancedSettings": "Paramètres avancés du serveur",
   "DocumentServiceAuthHeader": "En-tête d'autorisation",

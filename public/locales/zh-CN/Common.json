@@ -763,7 +763,6 @@
   "DocsConnectCallbackStepActivate": "正在激活 Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect 已激活",
   "DocsConnectCurrentTariffPlan": "当前订阅：{{price}}/月（用户数：{{count}}）",
-  "DocsConnectGoToStatistics": "统计",
   "DocsConnectPricePerMonth": "{{price}}/月",
   "DocsConnectTrialAvailable": "提供免费试用 | 此后起价 {{price}}/用户/月",
   "DocsConnectTrialDaysLeft": "剩余 {{count}} 天免费试用",

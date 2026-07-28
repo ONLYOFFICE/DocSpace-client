@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "ກຳລັງເປີດໃຊ້ງານ Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect ຖືກເປີດໃຊ້ງານແລ້ວ",
   "DocsConnectCurrentTariffPlan": "ການສະໝັກໃຊ້ປັດຈຸບັນ: {{price}}/ເດືອນ (ຜູ້ໃຊ້:{{count}})",
-  "DocsConnectGoToStatistics": "ສະຖິຕິ",
   "DocsConnectPricePerMonth": "{{price}} ຕໍ່ເດືອນ",
   "DocsConnectTrialAvailable": "ມີໄລຍະທົດລອງໃຊ້ຟຣີ | ຈາກນັ້ນເລີ່ມຕົ້ນທີ່ {{price}} ຕໍ່ຜູ້ໃຊ້ / ເດືອນ",
   "DocsConnectTrialDaysLeft": "ເຫຼືອ {{count}} ມື້ຟຣີ",

@@ -763,7 +763,6 @@
   "DocsConnectCallbackStepActivate": "Активирање Docs Connect услуге",
   "DocsConnectCallbackSuccess": "Docs Connect је активиран",
   "DocsConnectCurrentTariffPlan": "Тренутна претплата: {{price}}/мес. (Корисници:{{count}})",
-  "DocsConnectGoToStatistics": "Статистике",
   "DocsConnectPricePerMonth": "{{price}} месечно",
   "DocsConnectTrialAvailable": "Доступан бесплатни пробни период | Затим од {{price}} по кориснику / месечно",
   "DocsConnectTrialDaysLeft": "{{count}} бесплатних дана преостало",

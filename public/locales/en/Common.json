@@ -763,7 +763,6 @@
   "DocsConnectCallbackStepActivate": "Activating Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect activated",
   "DocsConnectCurrentTariffPlan": "Current subscription: {{price}}/month (Users:{{count}})",
-  "DocsConnectGoToStatistics": "Statistics",
   "DocsConnectPricePerMonth": "{{price}} per month",
   "DocsConnectTrialAvailable": "Free trial available | Then from {{price}} per user / month",
   "DocsConnectTrialDaysLeft": "{{count}} Free days left",

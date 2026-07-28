@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Docs Connect සක්‍රිය කරමින්",
   "DocsConnectCallbackSuccess": "Docs Connect සක්‍රිය කර ඇත",
   "DocsConnectCurrentTariffPlan": "වත්මන් දායකත්වය: {{price}}/මාසයකට (පරිශීලකයින්:{{count}})",
-  "DocsConnectGoToStatistics": "සංඛ්‍යාලේඛන",
   "DocsConnectPricePerMonth": "{{price}} මාසයකට",
   "DocsConnectTrialAvailable": "නොමිලේ අත්හදා බැලීමක් ලබා ගත හැක | පසුව {{price}} සිට එක් පරිශීලකයෙකුට / මාසයකට",
   "DocsConnectTrialDaysLeft": "නොමිලේ දවස් {{count}} ක් ඉතිරියි",

@@ -763,7 +763,6 @@
   "DocsConnectCallbackStepActivate": "Docs Connect を有効化中",
   "DocsConnectCallbackSuccess": "Docs Connect が有効化されました",
   "DocsConnectCurrentTariffPlan": "現在のサブスクリプション：{{price}}/月（ユーザー数：{{count}}）",
-  "DocsConnectGoToStatistics": "統計",
   "DocsConnectPricePerMonth": "{{price}}/月",
   "DocsConnectTrialAvailable": "無料試用が利用可能 | その後はユーザーあたり{{price}}／月から",
   "DocsConnectTrialDaysLeft": "無料期間残り{{count}}日",

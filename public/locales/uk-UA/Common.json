@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Активація Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect активовано",
   "DocsConnectCurrentTariffPlan": "Поточна підписка: {{price}}/місяць (Користувачі:{{count}})",
-  "DocsConnectGoToStatistics": "Статистика",
   "DocsConnectPricePerMonth": "{{price}} на місяць",
   "DocsConnectTrialAvailable": "Доступна безкоштовна пробна версія | Потім від {{price}} за користувача / місяць",
   "DocsConnectTrialDaysLeft": "Залишилося {{count}} безкоштовних днів",

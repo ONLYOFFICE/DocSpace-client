@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Aktivoidaan Docs Connect -palvelua",
   "DocsConnectCallbackSuccess": "Docs Connect on aktivoitu",
   "DocsConnectCurrentTariffPlan": "Nykyinen tilaus: {{price}}/kk (Käyttäjiä:{{count}})",
-  "DocsConnectGoToStatistics": "Tilastot",
   "DocsConnectPricePerMonth": "{{price}} / kk",
   "DocsConnectTrialAvailable": "Ilmainen kokeilujakso saatavilla | Sitten alkaen {{price}} / käyttäjä / kk",
   "DocsConnectTrialDaysLeft": "{{count}} ilmaista päivää jäljellä",

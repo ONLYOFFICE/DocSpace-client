@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Po aktivizohet Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect u aktivizua",
   "DocsConnectCurrentTariffPlan": "Abonimi aktual: {{price}}/muaj (Përdorues:{{count}})",
-  "DocsConnectGoToStatistics": "Statistikat",
   "DocsConnectPricePerMonth": "{{price}} në muaj",
   "DocsConnectTrialAvailable": "Provë falas e disponueshme | Më pas nga {{price}} për përdorues / muaj",
   "DocsConnectTrialDaysLeft": "{{count}} ditë falas të mbetura",

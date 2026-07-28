@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Docs Connect etkinleştiriliyor",
   "DocsConnectCallbackSuccess": "Docs Connect etkinleştirildi",
   "DocsConnectCurrentTariffPlan": "Mevcut abonelik: {{price}}/ay (Kullanıcı:{{count}})",
-  "DocsConnectGoToStatistics": "İstatistikler",
   "DocsConnectPricePerMonth": "{{price}}/ay",
   "DocsConnectTrialAvailable": "Ücretsiz deneme mevcut | Sonrasında kullanıcı başına {{price}}/ay'dan itibaren",
   "DocsConnectTrialDaysLeft": "{{count}} ücretsiz gün kaldı",

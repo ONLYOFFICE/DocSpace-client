@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Активиране на Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect е активиран",
   "DocsConnectCurrentTariffPlan": "Текущ абонамент: {{price}}/месец (Потребители:{{count}})",
-  "DocsConnectGoToStatistics": "Статистика",
   "DocsConnectPricePerMonth": "{{price}} на месец",
   "DocsConnectTrialAvailable": "Безплатен пробен период | След това от {{price}} на потребител / месец",
   "DocsConnectTrialDaysLeft": "{{count}} безплатни дни остават",

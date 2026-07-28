@@ -738,7 +738,6 @@
   "DocsConnectCallbackStepActivate": "Docs Connect 활성화 중",
   "DocsConnectCallbackSuccess": "Docs Connect 활성화됨",
   "DocsConnectCurrentTariffPlan": "현재 구독: {{price}}/월 (사용자: {{count}}명)",
-  "DocsConnectGoToStatistics": "통계",
   "DocsConnectPricePerMonth": "{{price}}/월",
   "DocsConnectTrialAvailable": "무료 체험 가능 | 이후 사용자당 {{price}}/월부터",
   "DocsConnectTrialDaysLeft": "무료 {{count}}일 남음",

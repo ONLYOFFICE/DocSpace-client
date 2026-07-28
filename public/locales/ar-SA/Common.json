@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "جارٍ تفعيل Docs Connect",
   "DocsConnectCallbackSuccess": "تم تفعيل Docs Connect",
   "DocsConnectCurrentTariffPlan": "الاشتراك الحالي: {{price}}/الشهر (المستخدمون:{{count}})",
-  "DocsConnectGoToStatistics": "الإحصائيات",
   "DocsConnectPricePerMonth": "{{price}} شهريًا",
   "DocsConnectTrialAvailable": "تجربة مجانية متاحة | ثم بدءًا من {{price}} لكل مستخدم / شهريًا",
   "DocsConnectTrialDaysLeft": "{{count}} يوم مجاني متبقٍ",

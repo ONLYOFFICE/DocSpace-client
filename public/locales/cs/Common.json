@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Aktivace Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect aktivováno",
   "DocsConnectCurrentTariffPlan": "Aktuální předplatné: {{price}}/měsíc (Uživatelé: {{count}})",
-  "DocsConnectGoToStatistics": "Statistika",
   "DocsConnectPricePerMonth": "{{price}} za měsíc",
   "DocsConnectTrialAvailable": "Zkušební verze zdarma k dispozici | Poté od {{price}} za uživatele / měsíc",
   "DocsConnectTrialDaysLeft": "Zbývá {{count}} dní zdarma",

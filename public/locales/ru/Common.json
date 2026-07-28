@@ -763,7 +763,6 @@
   "DocsConnectCallbackStepActivate": "Активация Docs Connect",
   "DocsConnectCallbackSuccess": "Docs Connect активирован",
   "DocsConnectCurrentTariffPlan": "Текущая подписка: {{price}}/месяц (Пользователи: {{count}})",
-  "DocsConnectGoToStatistics": "Статистика",
   "DocsConnectPricePerMonth": "{{price}} в месяц",
   "DocsConnectTrialAvailable": "Доступен бесплатный пробный период | Затем от {{price}} за пользователя в месяц",
   "DocsConnectTrialDaysLeft": "Осталось {{count}} бесплатных дней",

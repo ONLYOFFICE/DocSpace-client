@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Docs Connect aktivizēšana",
   "DocsConnectCallbackSuccess": "Docs Connect aktivizēts",
   "DocsConnectCurrentTariffPlan": "Pašreizējais abonements: {{price}}/mēnesī (Lietotāji:{{count}})",
-  "DocsConnectGoToStatistics": "Statistika",
   "DocsConnectPricePerMonth": "{{price}} mēnesī",
   "DocsConnectTrialAvailable": "Pieejams bezmaksas izmēģinājums | Pēc tam no {{price}} par lietotāju / mēnesī",
   "DocsConnectTrialDaysLeft": "Atlikušas {{count}} bezmaksas dienas",

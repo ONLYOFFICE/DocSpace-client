@@ -752,7 +752,6 @@
   "DocsConnectCallbackStepActivate": "Docs Connect activeren",
   "DocsConnectCallbackSuccess": "Docs Connect geactiveerd",
   "DocsConnectCurrentTariffPlan": "Huidig abonnement: {{price}}/maand (Gebruikers: {{count}})",
-  "DocsConnectGoToStatistics": "Statistieken",
   "DocsConnectPricePerMonth": "{{price}} per maand",
   "DocsConnectTrialAvailable": "Gratis proefperiode beschikbaar | Daarna vanaf {{price}} per gebruiker / maand",
   "DocsConnectTrialDaysLeft": "{{count}} gratis dagen resterend",

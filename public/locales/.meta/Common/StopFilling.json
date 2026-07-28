@@ -3,7 +3,7 @@
   "content": "Stop filling",
   "content_en_sha1_hash": "81403b204666d43c8e360eaa868736a22790325d",
   "created_at": "2025-05-19T21:30:49.055Z",
-  "updated_at": "2026-07-27T13:07:50.873Z",
+  "updated_at": "2026-07-28T11:25:41.892Z",
   "comment": {
     "text": "This is a button label that allows users to stop the filling process for a document.",
     "is_auto": true,
@@ -37,13 +37,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
-      "line_number": 201,
+      "line_number": 206,
       "context": "{file.security.StopFilling ? (\n <Button\n id=\"panel_button_stop\"\n key=\"panel_button_stop\"\n onClick={() => onStopFilling(file)}\n label={t(\"Common:StopFilling\")}\n size={ButtonSize.normal}\n scale\n />\n ) : null}\n </ModalDialog.Footer>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
-      "line_number": 201,
+      "line_number": 206,
       "context": "{file.security.StopFilling ? (\n <Button\n id=\"panel_button_stop\"\n key=\"panel_button_stop\"\n onClick={() => onStopFilling(file)}\n label={t(\"Common:StopFilling\")}\n size={ButtonSize.normal}\n scale\n />\n ) : null}\n </ModalDialog.Footer>",
       "module": "/packages/shared"
     },

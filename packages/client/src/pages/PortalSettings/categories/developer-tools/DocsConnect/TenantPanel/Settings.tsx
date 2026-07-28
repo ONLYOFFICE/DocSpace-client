@@ -216,7 +216,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
         >
           <div className={styles.secretField}>
             <TextInput
-              type={secretRevealed ? InputType.text : InputType.password}
+              type={InputType.text}
               value={general.secret}
               onChange={(e) =>
                 setGeneral((prev) => ({ ...prev, secret: e.target.value }))
@@ -224,7 +224,10 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
               isDisabled={isBusy}
               scale
               withBorder={false}
-              className={styles.secretInput}
+              autoComplete="off"
+              className={`${styles.secretInput} ${
+                secretRevealed ? "" : styles.secretMasked
+              }`}
               testId="docs_connect_settings_secret_input"
             />
             <div className={styles.secretIcons}>
@@ -405,6 +408,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
       {addRuleDialogVisible ? (
         <AddRuleDialog
           visible
+          existingAddresses={rules.map((rule) => rule.value)}
           onClose={() => setAddRuleDialogVisible(false)}
           onAdd={onAddRule}
         />

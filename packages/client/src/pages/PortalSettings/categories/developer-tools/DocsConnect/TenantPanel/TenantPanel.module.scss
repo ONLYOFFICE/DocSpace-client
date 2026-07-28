@@ -213,6 +213,10 @@
   min-width: 0;
 }
 
+.secretMasked {
+  -webkit-text-security: disc;
+}
+
 .secretIcons {
   display: flex;
   align-items: center;

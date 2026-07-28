@@ -136,6 +136,7 @@
   "RuleType": "Rule type",
   "RuleAddressPlaceholder": "Enter IP address, range, or host",
   "RuleAddressExamples": "Examples: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
+  "RuleAlreadyAdded": "This address has already been added",
   "FileSizeLimits": "File size limits",
   "FileSizeLimitsDescription": "Configure maximum download limits for document processing",
   "MaxDownloadBytesDescription": "Maximum number of bytes that can be downloaded (e.g., 104857600 = 100MB)"

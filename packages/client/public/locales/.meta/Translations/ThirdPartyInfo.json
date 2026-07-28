@@ -3,7 +3,7 @@
   "content": "Change the third-party info",
   "content_en_sha1_hash": "9698ca4ad97dadedc70245cfc37a83f4aa325ad5",
   "created_at": "2025-05-19T21:30:50.012Z",
-  "updated_at": "2026-07-07T08:59:21.915Z",
+  "updated_at": "2026-07-27T13:07:50.872Z",
   "comment": {
     "text": "This is a button label. It allows users to modify information related to third-party integrations or services.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 2973,
-      "context": "disabled: false,\n },\n {\n id: \"option_change-thirdparty-info\",\n key: \"change-thirdparty-info\",\n label: t(\"Translations:ThirdPartyInfo\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => this.onChangeThirdPartyInfo(item.providerKey),\n disabled: false,\n },\n {",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 896,
+      "context": "disabled: false,\n },\n {\n id: \"option_change-thirdparty-info\",\n key: \"change-thirdparty-info\",\n label: t(\"Translations:ThirdPartyInfo\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => self.onChangeThirdPartyInfo(item.providerKey),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
   ],

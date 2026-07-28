@@ -227,7 +227,7 @@ Base languages (enforced by tests): `de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru
 ## Requirements
 
 - Node.js >= 24
-- pnpm >= 10.28.0
+- pnpm >= 10 (exact version pinned via `packageManager` in package.json)
 - Docker (for E2E tests)
 
 ## Settings and Permissions

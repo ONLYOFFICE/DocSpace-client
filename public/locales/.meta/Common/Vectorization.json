@@ -3,7 +3,7 @@
   "content": "Vectorization",
   "content_en_sha1_hash": "7931aa02a8abd743ba5a4eb62663710441cb75ec",
   "created_at": "2025-10-27T16:14:30.919Z",
-  "updated_at": "2026-07-07T08:59:21.833Z",
+  "updated_at": "2026-07-27T13:07:50.736Z",
   "comment": {
     "text": "This is a button label in the file context menu and header, allowing users to retry the vectorization process for a selected file.",
     "is_auto": true,
@@ -18,15 +18,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 2486,
-      "context": "disabled: false,\n },\n {\n id: \"option_vectorization\",\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => this.filesActionsStore.retryVectorization([item]),\n disabled: !item.security?.Vectorization,\n },\n {",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 409,
+      "context": "disabled: false,\n },\n {\n id: \"option_vectorization\",\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => self.filesActionsStore.retryVectorization([item]),\n disabled: !item.security?.Vectorization,\n },\n {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 2486,
-      "context": "disabled: false,\n },\n {\n id: \"option_vectorization\",\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => this.filesActionsStore.retryVectorization([item]),\n disabled: !item.security?.Vectorization,\n },\n {",
+      "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
+      "line_number": 269,
+      "context": "onClick: () => self.onCreateRoom(null, true),\n disabled: !canCreateRoom,\n },\n {\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => self.filesActionsStore.retryVectorization(selection),\n disabled: !canRetryVectorization,\n },\n {",
       "module": "/packages/client"
     },
     {

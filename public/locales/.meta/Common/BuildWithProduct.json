@@ -3,7 +3,7 @@
   "content": "Build with {{organizationName}}",
   "content_en_sha1_hash": "57f6b7253bdb61d642327a73629abc19f33c126d",
   "created_at": "2026-06-01T21:20:38.478Z",
-  "updated_at": "2026-07-07T08:59:21.791Z",
+  "updated_at": "2026-07-27T13:07:50.696Z",
   "comment": {
     "text": "Card title in the DevTools section of the Dashboard, featuring the organization's brand name via the {{organizationName}} variable.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 169,
+      "line_number": 218,
       "context": "const tools = useDevTools(props);\n const organizationName = getBrandName(\"OrganizationName\");\n \n return (\n <CollapsibleCard\n title={t(\"Common:BuildWithProduct\", { organizationName })}\n description={t(\"Common:BuildWithProductDescription\")}\n defaultOpen\n >\n <div className={styles.devToolsGrid}>\n {tools.map((tool) => (",
       "module": "/packages/client"
     }

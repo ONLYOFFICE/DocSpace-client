@@ -125,6 +125,8 @@
   "DNSSettingsHint": "මෙවැනි වසම් නාමයක් යොදන්න:",
   "DNSSettingsMobile": "ඔබගේ ඉල්ලීම අපගේ සහාය කණ්ඩායමට එවන්න. ඔවුන් මෙය සැකසීමට උපකාර කරනු ඇත.",
   "DNSSettingsNavDescription": "DNS සැකසුම් යනු ඔබගේ පෝටලය සඳහා විකල්ප URL එකක් සැකසීමේ ක්‍රමයකි.",
+  "DocsConnectPromoDescription": "Docs Connect සමඟ ක්ලවුඩ්-සත්කාරක {{organizationName}} {{editorsName}} සේවාවක් සම්බන්ධ කරන්න — එහි ලිපිනය ඉහත අලවන්න පමණි. ස්ථාපනයක් නැත, නඩත්තුවක් නැත, ඔබේම යතුරු.",
+  "DocsConnectPromoTitle": "ස්ථාපනය කිරීමට ලේඛන සේවාදායකයක් නැද්ද?",
   "DocumentService": "ලේඛන සේවාව",
   "DocumentServiceAdvancedSettings": "උසස් සේවාදායක සැකසුම්",
   "DocumentServiceAuthHeader": "අනු authorization ශීර්ෂකය",

@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Εισαγάγετε το όνομα χώρου ως εξής:",
   "DNSSettingsMobile": "Στείλτε το αίτημά σας στην ομάδα υποστήριξής μας και οι ειδικοί μας θα σας βοηθήσουν με τις ρυθμίσεις.",
   "DNSSettingsNavDescription": "Οι Ρυθμίσεις DNS είναι ένας τρόπος για να ορίσετε μια εναλλακτική διεύθυνση URL για την πύλη σας.",
+  "DocsConnectPromoDescription": "Συνδέστε μια υπηρεσία {{organizationName}} {{editorsName}} που φιλοξενείται στο cloud με το Docs Connect — απλώς επικολλήστε τη διεύθυνσή της παραπάνω. Χωρίς εγκατάσταση, χωρίς συντήρηση, με τα δικά σας κλειδιά.",
+  "DocsConnectPromoTitle": "Δεν θέλετε να εγκαταστήσετε Διακομιστή Εγγράφων;",
   "DocumentService": "Υπηρεσία εγγράφων",
   "DocumentServiceAdvancedSettings": "Σύνθετες ρυθμίσεις διακομιστή",
   "DocumentServiceAuthHeader": "Κεφαλίδα εξουσιοδότησης",

@@ -1,0 +1,29 @@
+{
+  "key_path": "ReducedUsers",
+  "content": "Reduced users",
+  "content_en_sha1_hash": "434c609162ac7fca6500f2f928e8c6e20b2cef0d",
+  "created_at": "2026-07-27T13:07:48.522Z",
+  "updated_at": "2026-07-27T14:02:13.861Z",
+  "comment": {
+    "text": "Label for a summary row indicating the number of users removed from the current plan.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:02:13.861Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 722,
+      "context": "`+${users - currentUsers}`,\n )\n : null}\n {usersChanged && users < currentUsers\n ? summaryRow(\n t(\"DocsConnect:ReducedUsers\"),\n t(\"DocsConnect:MinusCount\", {\n count: currentUsers - users,\n }),\n )\n : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

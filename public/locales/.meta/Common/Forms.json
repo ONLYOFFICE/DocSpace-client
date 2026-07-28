@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-07-07T08:59:21.650Z",
+  "updated_at": "2026-07-27T13:07:50.569Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,19 +37,19 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 358,
+      "line_number": 388,
       "context": "const formsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);\n formsFilter.searchArea = RoomSearchArea.Forms;\n \n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n onClick: go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),\n children: [\n {\n id: \"forms-recent\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 610,
+      "line_number": 611,
       "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 785,
+      "line_number": 808,
       "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
       "module": "/packages/client"
     },

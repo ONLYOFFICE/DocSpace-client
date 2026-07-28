@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Voer de domeinnaam als volgt in:",
   "DNSSettingsMobile": "Stuur uw verzoek naar ons ondersteuningsteam, en onze specialisten zullen u helpen met de instellingen.",
   "DNSSettingsNavDescription": "DNS Instellingen is een manier om een alternatieve URL voor uw portaal in te stellen.",
+  "DocsConnectPromoDescription": "Verbind een cloudgehoste {{organizationName}} {{editorsName}}-service met Docs Connect — plak eenvoudig het adres hierboven. Geen installatie, geen onderhoud, uw eigen sleutels.",
+  "DocsConnectPromoTitle": "Geen Document Server om te installeren?",
   "DocumentService": "Documentservice",
   "DocumentServiceAdvancedSettings": "Geavanceerde server instellingen",
   "DocumentServiceAuthHeader": "Autorisatie header",

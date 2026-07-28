@@ -1,0 +1,29 @@
+{
+  "key_path": "MinUsersNote",
+  "content": "(min users: {{count}})",
+  "content_en_sha1_hash": "ff8a75f349d2decbe1bd325e8a7f4f0d125f016d",
+  "created_at": "2026-07-27T13:07:48.520Z",
+  "updated_at": "2026-07-27T14:13:10.561Z",
+  "comment": {
+    "text": "Secondary text label in the Buy Plan panel indicating the minimum required number of users, where {{count}} is a numeric value.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:13:10.561Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 535,
+      "context": "<Text\n as=\"span\"\n fontSize=\"13px\"\n className={styles.secondaryText}\n >\n {t(\"DocsConnect:MinUsersNote\", {\n count: DEVPACK_MIN_USERS,\n })}\n </Text>\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

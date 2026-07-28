@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Geben Sie den Domainnamen wie folgt ein:",
   "DNSSettingsMobile": "Senden Sie Ihre Anfrage an unser Support-Team, und unsere Spezialisten werden Ihnen bei den Einstellungen helfen.",
   "DNSSettingsNavDescription": "Mit DNS-Einstellungen können Sie eine alternative URL für Ihr Portal festlegen.",
+  "DocsConnectPromoDescription": "Verbinden Sie einen cloudbasierten {{organizationName}} {{editorsName}}-Dienst mit Docs Connect – fügen Sie einfach dessen Adresse oben ein. Keine Installation, keine Wartung, Ihre eigenen Schlüssel.",
+  "DocsConnectPromoTitle": "Kein Document Server zur Installation nötig?",
   "DocumentService": "Dokumentenservice",
   "DocumentServiceAdvancedSettings": "Erweiterte Servereinstellungen",
   "DocumentServiceAuthHeader": "Autorisierungsheader",

@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Nhập tên miền như sau:",
   "DNSSettingsMobile": "Gửi yêu cầu của bạn đến nhóm hỗ trợ của chúng tôi và các chuyên gia của chúng tôi sẽ giúp bạn cài đặt.",
   "DNSSettingsNavDescription": "Cài đặt DNS là một cách để thiết lập một URL thay thế cho cổng thông tin của bạn.",
+  "DocsConnectPromoDescription": "Kết nối dịch vụ {{editorsName}} của {{organizationName}} được lưu trữ trên đám mây bằng Docs Connect — chỉ cần dán địa chỉ của dịch vụ đó ở trên. Không cần cài đặt, không cần bảo trì, sử dụng khóa của riêng bạn.",
+  "DocsConnectPromoTitle": "Không muốn cài đặt Document Server?",
   "DocumentService": "Dịch vụ Tài liệu",
   "DocumentServiceAdvancedSettings": "Cài đặt máy chủ nâng cao",
   "DocumentServiceAuthHeader": "Header Authorization",

@@ -1,0 +1,29 @@
+{
+  "key_path": "NoDocsConnectTransaction",
+  "content": "No Docs Connect transactions yet",
+  "content_en_sha1_hash": "cd44bb4b3308c674c2f864fdc994b202a1f8ff91",
+  "created_at": "2026-07-27T13:07:23.733Z",
+  "updated_at": "2026-07-27T13:28:25.142Z",
+  "comment": {
+    "text": "Title displayed in the transaction history list when no records exist for the Docs Connect service.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:28:25.142Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TransactionBody.tsx",
+      "line_number": 111,
+      "context": "const isDocsConnect = serviceName === DOCS_CONNECT_SERVICE;\n \n const title = hasAppliedDateFilter\n ? t(\"NoFindingsFound2\")\n : (emptyTitle ??\n (isDocsConnect ? t(\"NoDocsConnectTransaction\") : t(\"NoWalletTransaction\")));\n const description = hasAppliedDateFilter\n ? t(\"NoTransactionsFilter\")\n : (emptyDescription ??\n (isDocsConnect\n ? t(\"NoDocsConnectTransactionDescription\")",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

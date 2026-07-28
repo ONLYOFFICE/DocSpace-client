@@ -3,7 +3,7 @@
   "content": "<0>{{uploaded}} of {{total}}</0> uploaded. Storage quota exceeded — <1>view details</1>.",
   "content_en_sha1_hash": "3974e8d84c516e1f17d49dd2b77fa90dc7fe2d2b",
   "created_at": "2026-05-24T17:27:44.542Z",
-  "updated_at": "2026-07-07T08:59:21.930Z",
+  "updated_at": "2026-07-27T13:07:50.884Z",
   "comment": {
     "text": "Error toast message appearing during file uploads when the storage quota is exceeded. It includes the number of successfully uploaded files and the total number of files, with a link to view details.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/UploadDataStore.tsx",
-      "line_number": 2713,
+      "file_path": "/packages/client/src/store/uploadDataStore/finish.helpers.tsx",
+      "line_number": 171,
       "context": "const hasQuotaError = filesWithErrors.some((f) => f.isQuotaError);\n \n if (hasQuotaError) {\n toastr.error(\n <Trans\n i18nKey=\"UploadPanel:QuotaExceededDuringUpload\"\n t={t as TTranslation & TFunction}\n values={{\n uploaded: filesWithoutErrors.length,\n total: filesWithoutErrors.length + filesWithAllErrors,\n }}",
       "module": "/packages/client"
     }

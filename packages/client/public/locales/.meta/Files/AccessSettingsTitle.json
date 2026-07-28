@@ -3,7 +3,7 @@
   "content": "Access settings",
   "content_en_sha1_hash": "7b34b38f3e6a5710c25a3765304dc0c570600dd3",
   "created_at": "2025-05-19T21:30:55.184Z",
-  "updated_at": "2026-07-07T08:59:21.734Z",
+  "updated_at": "2026-07-27T13:07:50.643Z",
   "comment": {
     "text": "This is the title for the \"Access settings\" panel and a link to open it. It refers to configuring permissions and access rights.",
     "is_auto": true,
@@ -48,9 +48,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 2673,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_access-settings\",\n key: \"access-settings\",\n label: t(\"AccessSettingsTitle\"),\n icon: PersonReactSvgUrl,\n onClick: () => this.onOpenTemplateAccessOptions(),\n disabled: !isTemplateOwner,\n },\n // {",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 596,
+      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_access-settings\",\n key: \"access-settings\",\n label: t(\"AccessSettingsTitle\"),\n icon: PersonReactSvgUrl,\n onClick: () => self.onOpenTemplateAccessOptions(),\n disabled: !isTemplateOwner,\n },\n // {",
       "module": "/packages/client"
     }
   ],

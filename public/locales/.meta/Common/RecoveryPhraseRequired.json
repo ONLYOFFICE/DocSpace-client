@@ -3,7 +3,7 @@
   "content": "Enter all 24 words of the recovery phrase.",
   "content_en_sha1_hash": "63666654b427a54af10c3bf4df4f36a6d957eb70",
   "created_at": "2026-05-24T17:27:36.575Z",
-  "updated_at": "2026-05-24T17:37:45.619Z",
+  "updated_at": "2026-07-27T13:07:50.928Z",
   "comment": {
     "text": "Error text in the recovery phrase input modal that appears when the entered phrase does not contain exactly 24 words.",
     "is_auto": true,
@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseInputModal.tsx",
-      "line_number": 85,
+      "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
+      "line_number": 87,
       "context": "setLocalError(\"\");\n const normalized = normalizeMnemonic(phrase);\n const wordCount = normalized.length === 0 ? 0 : normalized.split(\" \").length;\n \n if (wordCount !== 24) {\n setLocalError(t(\"Common:RecoveryPhraseRequired\"));\n return;\n }\n \n setIsValidating(true);\n try {",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

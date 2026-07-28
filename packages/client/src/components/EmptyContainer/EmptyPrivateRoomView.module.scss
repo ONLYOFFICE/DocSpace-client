@@ -35,77 +35,22 @@
 
 @use "@docspace/ui-kit/styles/variables/colors" as colors;
 
-.wrapper {
-  margin-inline: auto;
-  width: 100%;
-  max-width: 560px;
-  padding-top: 61px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-
-  :global(.light) & {
-    --private-empty-title-color: #{colors.$black};
-    --private-empty-text-color: #{colors.$black};
-    --private-empty-action-title: #{colors.$black};
-    --private-empty-action-desc: #{colors.$gray-text};
-    --private-empty-action-hover: #{colors.$light-gray-hover};
-    --private-empty-action-press: #{colors.$gray-light-mid};
-  }
-
-  :global(.dark) & {
-    --private-empty-title-color: #{colors.$white};
-    --private-empty-text-color: #{colors.$white};
-    --private-empty-action-title: #{colors.$white};
-    --private-empty-action-desc: #{colors.$dark-gray-dark};
-    --private-empty-action-hover: #{colors.$light-dark-gray-hover};
-    --private-empty-action-press: #{colors.$gray-dark-strong};
-  }
-
-  @media (max-width: 600px) {
-    padding-top: 40px;
-    gap: 20px;
-  }
-}
-
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  > svg {
-    width: 200px;
-    height: 140px;
-  }
-
-  @media (max-width: 600px) {
-    > svg {
-      width: 150px;
-      height: 105px;
-    }
-  }
-}
-
-.title {
-  margin: 0;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 22px;
-  color: var(--private-empty-title-color);
-  max-width: 520px;
-}
-
 .list {
   margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   gap: 6px;
-  align-self: center;
+  text-align: start;
+
+  :global(.light) & {
+    --private-empty-text-color: #{colors.$black};
+  }
+
+  :global(.dark) & {
+    --private-empty-text-color: #{colors.$white};
+  }
 }
 
 .listItem {
@@ -129,82 +74,4 @@
       fill: var(--background-color);
     }
   }
-}
-
-.actions {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.actionItem {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 6px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-align: start;
-  font: inherit;
-  color: inherit;
-
-  > svg {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-  }
-
-  &:nth-child(1) > svg {
-    rect {
-      color: colors.$light-second-main;
-    }
-    path {
-      color: colors.$light-blue-main;
-    }
-  }
-
-  &:nth-child(2) > svg {
-    rect {
-      color: colors.$main-green;
-    }
-    path {
-      color: colors.$main-green;
-    }
-  }
-
-  @media (hover: hover) {
-    &:hover {
-      background-color: var(--private-empty-action-hover);
-    }
-  }
-
-  &:active {
-    background-color: var(--private-empty-action-press);
-  }
-}
-
-.actionBody {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.actionTitle {
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
-  color: var(--private-empty-action-title);
-}
-
-.actionDescription {
-  font-size: 12px;
-  line-height: 16px;
-  color: var(--private-empty-action-desc);
 }

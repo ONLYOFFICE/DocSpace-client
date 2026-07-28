@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Ievadiet domēna nosaukumu šādi:",
   "DNSSettingsMobile": "Nosūtiet savu pieprasījumu mūsu atbalsta komandai, un mūsu speciālisti palīdzēs jums ar iestatījumiem.",
   "DNSSettingsNavDescription": "DNS iestatījumi ir veids, kā savam portālam iestatīt alternatīvu vietrādi URL.",
+  "DocsConnectPromoDescription": "Savienojiet mākonī izvietotu {{organizationName}} {{editorsName}} pakalpojumu ar Docs Connect — vienkārši ielīmējiet tā adresi augstāk. Bez instalēšanas, bez uzturēšanas, ar savām atslēgām.",
+  "DocsConnectPromoTitle": "Nav Dokumentu servera, ko instalēt?",
   "DocumentService": "Dokumentu apkalpošana",
   "DocumentServiceAdvancedSettings": "Papildu servera iestatījumi",
   "DocumentServiceAuthHeader": "Autorizācijas galvene",

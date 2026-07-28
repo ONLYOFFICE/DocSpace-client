@@ -3,7 +3,7 @@
   "content": "Generate new key",
   "content_en_sha1_hash": "e963303ff3b0ffd06b14218564a3ed9952c017b6",
   "created_at": "2026-05-24T17:27:28.874Z",
-  "updated_at": "2026-06-09T09:43:10.922Z",
+  "updated_at": "2026-07-27T13:07:50.844Z",
   "comment": {
     "text": "Button label that triggers the creation of a new key in the keys management section.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 177,
-      "context": "<div className={styles.inputGroup}>\n <Button\n primary\n size={ButtonSize.small}\n onClick={generate.request}\n label={t(\"Common:GenerateNewKey\")}\n isLoading={generate.isPending}\n isDisabled={busy}\n />\n <div className={styles.buttonsSeparator}>{t(\"Common:Or\")}</div>\n <Button",
+      "line_number": 300,
+      "context": "<div className={styles.inputGroup}>\n <Button\n primary\n size={ButtonSize.small}\n onClick={generate.request}\n label={t(\"Common:GenerateNewKey\")}\n isLoading={generate.isPending}\n isDisabled={busy}\n />\n {importFlow.fileInput}\n </div>",
       "module": "/packages/client"
     }
   ],

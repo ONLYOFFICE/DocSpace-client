@@ -36,9 +36,13 @@
 import { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { Events } from "@docspace/shared/enums";
+import { EmptyView } from "@docspace/shared/components/empty-view";
+import type { EmptyViewOptionsType } from "@docspace/shared/components/empty-view";
 import type { Nullable } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
@@ -46,17 +50,26 @@ import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import EmptyPrivateRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.private.room.light.svg";
 import EmptyPrivateRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.private.room.dark.svg";
 import UploadDeviceIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
-import CreateNewFolderIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
+import CreateNewFileIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import SecurityShieldIcon from "PUBLIC_DIR/images/icons/16/security.react.svg";
+import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
+import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
+import PresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
+import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
+import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import styles from "./EmptyPrivateRoomView.module.scss";
 
 type EmptyPrivateRoomViewProps = {
   security?: Nullable<TFolderSecurity | TRoomSecurity>;
+  canCreateEncrypted?: boolean;
 };
 
-const EmptyPrivateRoomView = ({ security }: EmptyPrivateRoomViewProps) => {
-  const { t } = useTranslation(["EmptyView", "Common"]);
+const EmptyPrivateRoomView = ({
+  security,
+  canCreateEncrypted,
+}: EmptyPrivateRoomViewProps) => {
+  const { t } = useTranslation(["EmptyView", "Common", "Translations"]);
   const { isBase } = useTheme();
 
   const items = [
@@ -66,14 +79,23 @@ const EmptyPrivateRoomView = ({ security }: EmptyPrivateRoomViewProps) => {
     t("Common:PrivateRoomEmptyBenefitKDF"),
   ];
 
-  const onCreateFolder = useCallback(() => {
-    const event: Event & { payload?: unknown } = new Event(Events.CREATE);
-    (event as Event & { payload?: object }).payload = {
-      id: -1,
-      extension: undefined,
-    };
-    window.dispatchEvent(event);
-  }, []);
+  const dispatchCreate = useCallback(
+    (extension?: string) => {
+      if (extension === "pdf" && isMobile) {
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
+
+      const event: Event & { payload?: unknown } = new Event(Events.CREATE);
+      (event as Event & { payload?: object }).payload = {
+        id: -1,
+        extension,
+        edit: extension === "pdf",
+      };
+      window.dispatchEvent(event);
+    },
+    [t],
+  );
 
   const onUploadFiles = useCallback(() => {
     const input = document.querySelector(
@@ -84,62 +106,96 @@ const EmptyPrivateRoomView = ({ security }: EmptyPrivateRoomViewProps) => {
 
   const canCreate = !!security?.Create;
 
+  const options: EmptyViewOptionsType = [];
+
+  if (canCreate) {
+    if (canCreateEncrypted) {
+      options.push({
+        title: t("EmptyView:CreateNewFileTitle"),
+        description: t("EmptyView:CreateNewFileDescription"),
+        icon: <CreateNewFileIcon />,
+        key: "create-file",
+        model: [
+          {
+            key: "create-document",
+            label: t("Common:Document"),
+            icon: DocumentsReactSvgUrl,
+            onClick: () => dispatchCreate("docx"),
+          },
+          {
+            key: "create-spreadsheet",
+            label: t("Common:Spreadsheet"),
+            icon: SpreadsheetReactSvgUrl,
+            onClick: () => dispatchCreate("xlsx"),
+          },
+          {
+            key: "create-presentation",
+            label: t("Common:Presentation"),
+            icon: PresentationReactSvgUrl,
+            onClick: () => dispatchCreate("pptx"),
+          },
+          {
+            key: "create-pdf-form",
+            label: t("Translations:NewForm"),
+            icon: FormReactSvgUrl,
+            onClick: () => dispatchCreate("pdf"),
+          },
+          { isSeparator: true, key: "separator" },
+          {
+            key: "create-folder",
+            label: t("Common:Folder"),
+            icon: FolderReactSvgUrl,
+            onClick: () => dispatchCreate(undefined),
+          },
+        ],
+      });
+    } else {
+      options.push({
+        title: t("Common:NewFolder"),
+        description: t("EmptyView:CreateNewFileDescription"),
+        icon: <CreateNewFileIcon />,
+        key: "create-folder",
+        onClick: () => dispatchCreate(undefined),
+      });
+    }
+
+    options.push({
+      title: t("EmptyView:UploadDeviceOptionTitle"),
+      description: t("EmptyView:UploadDeviceOptionDescription"),
+      icon: <UploadDeviceIcon />,
+      key: "upload-device",
+      onClick: onUploadFiles,
+    });
+  }
+
+  const description = (
+    <ul className={styles.list}>
+      {items.map((text) => (
+        <li key={text} className={styles.listItem}>
+          <SecurityShieldIcon />
+          <span>{text}</span>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
-    <div className={styles.wrapper} data-testid="empty-private-room-view">
-      <div className={styles.icon}>
-        {isBase ? <EmptyPrivateRoomLightIcon /> : <EmptyPrivateRoomDarkIcon />}
-      </div>
-      <h3 className={styles.title}>{t("Common:PrivateRoomEmptyTitle")}</h3>
-      <ul className={styles.list}>
-        {items.map((text) => (
-          <li key={text} className={styles.listItem}>
-            <SecurityShieldIcon />
-            <span>{text}</span>
-          </li>
-        ))}
-      </ul>
-      {canCreate ? (
-        <div className={styles.actions}>
-          <button
-            type="button"
-            className={styles.actionItem}
-            onClick={onCreateFolder}
-          >
-            <CreateNewFolderIcon />
-            <span className={styles.actionBody}>
-              <span className={styles.actionTitle}>
-                {t("Common:NewFolder")}
-              </span>
-              <span className={styles.actionDescription}>
-                {t("EmptyView:CreateNewFileDescription")}
-              </span>
-            </span>
-          </button>
-          <button
-            type="button"
-            className={styles.actionItem}
-            onClick={onUploadFiles}
-          >
-            <UploadDeviceIcon />
-            <span className={styles.actionBody}>
-              <span className={styles.actionTitle}>
-                {t("EmptyView:UploadDeviceOptionTitle")}
-              </span>
-              <span className={styles.actionDescription}>
-                {t("EmptyView:UploadDeviceOptionDescription")}
-              </span>
-            </span>
-          </button>
-        </div>
-      ) : null}
-    </div>
+    <EmptyView
+      icon={isBase ? <EmptyPrivateRoomLightIcon /> : <EmptyPrivateRoomDarkIcon />}
+      title={t("Common:PrivateRoomEmptyTitle")}
+      description={description}
+      options={options}
+    />
   );
 };
 
-const InjectedEmptyPrivateRoomView = inject<TStore>(({ selectedFolderStore }) => {
-  return {
-    security: selectedFolderStore.security,
-  };
-})(observer(EmptyPrivateRoomView));
+const InjectedEmptyPrivateRoomView = inject<TStore>(
+  ({ selectedFolderStore, uploadDataStore }) => {
+    return {
+      security: selectedFolderStore.security,
+      canCreateEncrypted: uploadDataStore.shouldEncryptCurrentUpload(),
+    };
+  },
+)(observer(EmptyPrivateRoomView));
 
 export default InjectedEmptyPrivateRoomView;

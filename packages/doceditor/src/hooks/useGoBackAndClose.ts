@@ -37,6 +37,8 @@ import type { EditorProps, IInitialConfig, TGoBack } from "@/types";
 import { useTranslation } from "react-i18next";
 import { FolderType } from "@docspace/ui-kit/enums";
 
+import { isFormRoomFile, toFormsSectionUrl } from "@/utils";
+
 const useGoBackAndClose = (
   fileInfo: EditorProps["fileInfo"],
   sdkConfig: EditorProps["sdkConfig"],
@@ -101,7 +103,9 @@ const useGoBackAndClose = (
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.url = goBackUrl;
+        goBack.url = isFormRoomFile(fileInfo)
+          ? toFormsSectionUrl(goBackUrl, fileInfo.folderId)
+          : goBackUrl;
       }
     }
   }

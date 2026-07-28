@@ -3,7 +3,7 @@
   "content": "Use this only if you have lost both your passphrase and recovery phrase. You will permanently lose access to every existing encrypted file across all your devices.",
   "content_en_sha1_hash": "09f12bd5df738e5ffb873574fe394e5d0bcc5400",
   "created_at": "2026-05-24T17:27:37.173Z",
-  "updated_at": "2026-06-09T09:43:10.922Z",
+  "updated_at": "2026-07-27T13:07:50.846Z",
   "comment": {
     "text": "Instructional hint text in the keys management section that warns users about the permanent loss of encrypted files when resetting encryption keys.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 223,
-      "context": "{hasKeys ? <AutoLockSetting /> : null}\n </div>\n {reset.available ? (\n <div className={styles.resetSection}>\n <span className={styles.resetHint}>\n {t(\"Common:ResetEncryptionKeysHint\")}\n </span>\n <Button\n className={styles.resetButton}\n size={ButtonSize.small}\n onClick={reset.request}",
+      "line_number": 406,
+      "context": "</div>\n ) : null}\n {reset.available ? (\n <div className={styles.resetSection}>\n <span className={styles.resetHint}>\n {t(\"Common:ResetEncryptionKeysHint\")}\n </span>\n <Button\n className={styles.resetButton}\n size={ButtonSize.small}\n onClick={reset.request}",
       "module": "/packages/client"
     }
   ],

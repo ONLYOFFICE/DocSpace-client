@@ -45,7 +45,8 @@ import {
   cancelDocsConnectPlan,
   cancelDocsConnectScheduledChange,
   updateDocsConnectConfig,
-  getDocsConnectReport,
+  startDocsConnectReport,
+  getDocsConnectReportStatus,
 } from "@docspace/shared/api/docs-connect";
 import type {
   TDocsConnectInfo,
@@ -64,6 +65,8 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
+
+import i18n from "../i18n";
 
 export type BuyPlanMode = "trial" | "edit";
 
@@ -90,6 +93,10 @@ class DocsConnectStore {
 
   removeSubscriptionDialogVisible: boolean = false;
 
+  isReportGenerating: boolean = false;
+
+  reportPageLeft: boolean = false;
+
   constructor(
     settingsStore: SettingsStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -98,7 +105,9 @@ class DocsConnectStore {
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      reportPageLeft: false,
+    });
   }
 
   refreshPortalState = () => {
@@ -329,12 +338,59 @@ class DocsConnectStore {
     });
   };
 
+  private resetReportState = () => {
+    this.reportPageLeft = false;
+    runInAction(() => {
+      this.isReportGenerating = false;
+    });
+  };
+
+  private finishReport = (resultFileUrl?: string) => {
+    toastr.success(
+      i18n.t("Common:ReportSaveLocation", {
+        sectionName: i18n.t("Common:Files"),
+      }),
+    );
+    if (!this.reportPageLeft && resultFileUrl) {
+      setTimeout(() => window.open(resultFileUrl, "_blank"), 100); // hack for ios
+    }
+    this.resetReportState();
+  };
+
+  markReportPageLeft = () => {
+    if (this.isReportGenerating) this.reportPageLeft = true;
+  };
+
   downloadReport = async () => {
+    if (this.isReportGenerating) return;
+
+    this.reportPageLeft = false;
+    runInAction(() => {
+      this.isReportGenerating = true;
+    });
+
+    const controller = new AbortController();
+
     try {
-      const res = await getDocsConnectReport();
-      setTimeout(() => window.open(res, "_blank"), 100); // hack for ios
+      let status = await startDocsConnectReport();
+
+      if (!status?.isCompleted && !status?.error) {
+        await pollUntil(async () => {
+          status = await getDocsConnectReportStatus();
+          return !!status?.isCompleted || !!status?.error;
+        }, controller.signal);
+      }
+
+      if (status?.error) {
+        toastr.error(status.error);
+        this.resetReportState();
+        return;
+      }
+
+      this.finishReport(status?.resultFileUrl);
     } catch (error) {
       toastr.error(error as Error);
+      this.resetReportState();
     }
   };
 

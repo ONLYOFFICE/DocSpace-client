@@ -36,6 +36,8 @@
 import React from "react";
 import { isIOS, deviceType } from "react-device-detect";
 
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
+
 import { UseInitProps } from "@/types";
 import { setDocumentTitle, showDocEditorMessage } from "@/utils";
 import initDesktop from "@/utils/initDesktop";
@@ -58,12 +60,24 @@ const useInit = ({
     }
   }, []);
 
+  // For encrypted files the server title is an opaque placeholder; the real
+  // name appears in the filename cache once useFileEncryptionKeys decrypts it.
+  const resolvedTitle = useResolvedFileTitle(
+    config
+      ? {
+          id: config.file?.id,
+          title: config.document?.title,
+          encrypted: config.file?.encrypted,
+        }
+      : null,
+  );
+
   React.useEffect(() => {
     if (!config) return;
 
     setDocumentTitle(
       t,
-      config.document.title,
+      resolvedTitle || config.document.title,
       config.document.fileType,
       documentReady,
       successAuth ?? false,
@@ -73,6 +87,7 @@ const useInit = ({
   }, [
     t,
     config,
+    resolvedTitle,
     documentReady,
     fileInfo,
     setDocTitle,

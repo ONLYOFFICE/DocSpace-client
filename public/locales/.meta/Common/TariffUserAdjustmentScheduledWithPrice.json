@@ -1,0 +1,29 @@
+{
+  "key_path": "TariffUserAdjustmentScheduledWithPrice",
+  "content": "Change scheduled: Users {{fromCount}} → {{toCount}}  |  {{price}}/month",
+  "content_en_sha1_hash": "501c8f306a4b374838b7a4c5404b98ed738f6b85",
+  "created_at": "2026-07-27T13:07:38.314Z",
+  "updated_at": "2026-07-27T13:11:22.454Z",
+  "comment": {
+    "text": "Title of a warning component displaying an upcoming change in user count and monthly price; {{fromCount}} represents the current number of users, {{toCount}} is the new number of users, and {{price}} is the formatted monthly cost.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:11:22.454Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 264,
+      "context": "{scheduledChange ? (\n <StorageWarning\n title={\n isCancellation\n ? t(\"Common:SubscriptionCancellation\")\n : t(\"Common:TariffUserAdjustmentScheduledWithPrice\", {\n fromCount: planUsers,\n toCount: scheduledChange.nextUsers,\n price: formatCurrencyValue(\n i18n.language,\n scheduledChange.nextUsers * pricePerUser,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

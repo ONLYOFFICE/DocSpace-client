@@ -125,6 +125,8 @@
   "DNSSettingsHint": "次のようにドメイン名を入力してください：",
   "DNSSettingsMobile": "弊社サポートチームまでご連絡いただければ、専門スタッフが設定をお手伝いさせていただきます。",
   "DNSSettingsNavDescription": "DNS設定は、ポータルの代替URLを設定する方法です。",
+  "DocsConnectPromoDescription": "Docs Connect でクラウドホスト型の{{organizationName}} {{editorsName}}サービスに接続 — 上のフィールドにアドレスを貼り付けるだけです。インストール不要、メンテナンス不要、キーはご自身で管理。",
+  "DocsConnectPromoTitle": "ドキュメントサーバーをインストールしていませんか？",
   "DocumentService": "文書サービス",
   "DocumentServiceAdvancedSettings": "高度なサーバー設定",
   "DocumentServiceAuthHeader": "認証ヘッダー",

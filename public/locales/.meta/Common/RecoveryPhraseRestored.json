@@ -1,21 +1,21 @@
 {
   "key_path": "RecoveryPhraseRestored",
-  "content": "Recovery phrase accepted. Passphrase has been updated.",
-  "content_en_sha1_hash": "1028851aa103af0943e7c4f3157dbc6428b9c172",
-  "created_at": "2026-05-24T17:27:36.589Z",
-  "updated_at": "2026-06-09T09:43:10.923Z",
+  "content": "Recovery phrase accepted. Passphrase has been updated. Your recovery phrase remains valid.",
+  "content_en_sha1_hash": "d88335aeb022e93aae2941bd5be6227a2442b732",
+  "created_at": "2026-07-27T13:07:29.889Z",
+  "updated_at": "2026-07-27T13:15:41.959Z",
   "comment": {
-    "text": "Success toast message appearing after a user successfully restores their recovery phrase and updates their passphrase.",
+    "text": "Success toast message appearing after a user successfully updates their passphrase using a recovery phrase.",
     "is_auto": true,
-    "updated_at": "2026-05-24T17:37:24.393Z",
+    "updated_at": "2026-07-27T13:15:41.959Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useRecoverKeyFlow.tsx",
-      "line_number": 166,
-      "context": "privateKeyEnc: serialized.privateKeyEnc,\n });\n setActiveKeyId(userId, targetKeyId);\n SecretStorage.cacheUnlocked(userId, keyPair);\n await refreshKeysFromServer();\n toastr.success(t(\"Common:RecoveryPhraseRestored\"));\n } catch (e) {\n toastr.error(getEncryptionErrorMessage(t, e));\n console.error(\"Recovery re-encrypt failed:\", e);\n } finally {\n setIsPending(false);",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/key-recovery/useRecoverKeyFlow.tsx",
+      "line_number": 177,
+      "context": "});\n setActiveKeyId(userId, targetKeyId);\n SecretStorage.cacheUnlocked(userId, keyPair);\n await refreshKeysFromServer();\n recovered = keyPair;\n toastr.success(t(\"Common:RecoveryPhraseRestored\"));\n } catch (e) {\n toastr.error(getEncryptionErrorMessage(t, e));\n console.error(\"Recovery re-encrypt failed:\", e);\n } finally {\n setIsPending(false);",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

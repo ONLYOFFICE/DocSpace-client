@@ -3,7 +3,7 @@
   "content": "Enter your 24-word recovery phrase to restore access on this device. You will then be prompted to set a new passphrase for this device.",
   "content_en_sha1_hash": "9b88bd56b4d73c52792cc4c2deaab25795409af8",
   "created_at": "2026-05-24T17:27:36.547Z",
-  "updated_at": "2026-05-24T17:38:29.840Z",
+  "updated_at": "2026-07-27T13:07:50.928Z",
   "comment": {
     "text": "Instructional description text within a modal dialog that provides steps for restoring access and informs the user about setting a new passphrase.",
     "is_auto": true,
@@ -12,10 +12,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseInputModal.tsx",
-      "line_number": 129,
+      "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
+      "line_number": 131,
       "context": "</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>\n {t(\"Common:RecoveryPhraseInputHint\")}\n </Text>\n \n {error ? (\n <div className={styles.errorBox}>\n <Text fontSize=\"13px\" fontWeight={600} color=\"var(--color-error)\">",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

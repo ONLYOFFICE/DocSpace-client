@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Syötä tämänkaltainen verkkotunnus:",
   "DNSSettingsMobile": "Lähetä pyyntösi tukitiimillemme ja asiantuntijamme auttavat sinua asetusten kanssa.",
   "DNSSettingsNavDescription": "DNS-asetukset on tapa asettaa portaalillesi vaihtoehto URL.",
+  "DocsConnectPromoDescription": "Yhdistä pilvipalveluna toimiva {{organizationName}} {{editorsName}} -palvelu Docs Connectiin — liitä vain sen osoite yllä. Ei asennusta, ei ylläpitoa, omat avaimesi.",
+  "DocsConnectPromoTitle": "Eikö asiakirjapalvelinta ole asennettu?",
   "DocumentService": "Asiakirjapalvelu",
   "DocumentServiceAdvancedSettings": "Palvelimen lisäasetukset",
   "DocumentServiceAuthHeader": "Valtuutusotsikko",

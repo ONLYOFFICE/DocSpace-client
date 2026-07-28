@@ -100,9 +100,10 @@ test.describe("Keys management — advanced flows", () => {
 
     await page.goto(`${baseUrl}/profile/keys-management`);
 
-    await page
-      .getByRole("button", { name: "Use recovery phrase", exact: true })
-      .click();
+    // "Use recovery phrase" is rendered as a Link, not a Button.
+    const recoveryLink = page.getByTestId("use_recovery_phrase_link");
+    await expect(recoveryLink).toBeVisible({ timeout: 10000 });
+    await recoveryLink.click();
 
     const phraseInput = page.locator("#recoveryPhraseInput");
     await expect(phraseInput).toBeVisible({ timeout: 5000 });

@@ -243,7 +243,6 @@ export default function useDocsActions(options?: UseDocsActionsOptions) {
             false,
             new Date(file.lastModified),
             createNewIfExist,
-            undefined,
             signal,
           );
 

@@ -92,6 +92,16 @@
   gap: 12px;
 }
 
+.deviceToggle {
+  position: relative;
+  height: 20px;
+  line-height: 20px;
+
+  & > svg {
+    margin-top: 2px;
+  }
+}
+
 .keyStatus {
   display: flex;
   flex-direction: column;

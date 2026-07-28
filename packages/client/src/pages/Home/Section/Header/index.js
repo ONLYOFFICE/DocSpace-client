@@ -530,8 +530,19 @@ const SectionHeaderContent = (props) => {
     (isContactsGroupsPage && isGroupsEmpty && !groupsIsFiltered);
 
   const onNavigationButtonClick = React.useCallback(() => {
-    onCreateAndCopySharedLink(selectedFolder, t);
-  }, [onCreateAndCopySharedLink, selectedFolder, t]);
+    const roomInPath = navigationPath?.find((item) => item.isRoom);
+
+    const shareTarget =
+      !selectedFolder?.isRoom && roomInPath
+        ? {
+            ...roomInPath,
+            isRoom: true,
+            rootFolderType: selectedFolder?.rootFolderType,
+          }
+        : selectedFolder;
+
+    onCreateAndCopySharedLink(shareTarget, t);
+  }, [onCreateAndCopySharedLink, navigationPath, selectedFolder, t]);
 
   const onCloseIndexMenu = React.useCallback(() => {
     const items = getIndexingArray();
@@ -1533,3 +1544,4 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
+

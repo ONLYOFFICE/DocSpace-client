@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -40,6 +41,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -70,6 +72,8 @@ interface StatisticsProps {
   cancelScheduledChange?: () => Promise<void>;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   downloadReport?: () => void;
+  markReportPageLeft?: () => void;
+  isReportGenerating?: boolean;
   nextcloudUrl?: string;
   owncloudUrl?: string;
   confluenceUrl?: string;
@@ -86,6 +90,8 @@ const Statistics = ({
   cancelScheduledChange,
   copyToClipboard,
   downloadReport,
+  markReportPageLeft,
+  isReportGenerating,
   nextcloudUrl,
   owncloudUrl,
   confluenceUrl,
@@ -95,6 +101,12 @@ const Statistics = ({
   allConnectorsUrl,
 }: StatisticsProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
+
+  useEffect(() => {
+    return () => {
+      markReportPageLeft?.();
+    };
+  }, [markReportPageLeft]);
 
   if (!info) return null;
 
@@ -419,9 +431,18 @@ const Statistics = ({
             </div>
             <div className={styles.detailRows}>
               <div className={styles.detailRow}>
-                <Text className={styles.muted}>
-                  {t("DocsConnect:PlanUsers")}
-                </Text>
+                <div className={styles.detailLabel}>
+                  <Text className={styles.muted}>
+                    {t("DocsConnect:PlanUsers")}
+                  </Text>
+                  <HelpButton
+                    size={12}
+                    tooltipContent={t("DocsConnect:PlanUsersTooltip", {
+                      count: planUsers,
+                    })}
+                    tooltipMaxWidth="320px"
+                  />
+                </div>
                 <Text fontWeight={600}>{planUsers}</Text>
               </div>
               <div className={styles.detailRow}>
@@ -534,8 +555,16 @@ const Statistics = ({
           className={styles.downloadButton}
           size={ButtonSize.normal}
           label={t("DocsConnect:DownloadReport")}
-          onClick={downloadReport}
+          onClick={() => downloadReport?.()}
+          isLoading={isReportGenerating}
         />
+        {isReportGenerating ? (
+          <Text fontSize="13px" className={styles.muted}>
+            {t("DocsConnect:ReportGenerationHint", {
+              sectionName: t("Common:Files"),
+            })}
+          </Text>
+        ) : null}
       </div>
 
       <CollapsibleCard
@@ -588,6 +617,8 @@ export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   cancelScheduledChange: docsConnectStore.cancelScheduledChange,
   copyToClipboard: docsConnectStore.copyToClipboard,
   downloadReport: docsConnectStore.downloadReport,
+  markReportPageLeft: docsConnectStore.markReportPageLeft,
+  isReportGenerating: docsConnectStore.isReportGenerating,
   nextcloudUrl: settingsStore.nextcloudUrl,
   owncloudUrl: settingsStore.owncloudUrl,
   confluenceUrl: settingsStore.confluenceUrl,

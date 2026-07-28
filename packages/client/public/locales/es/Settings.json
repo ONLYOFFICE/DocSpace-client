@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Introduzca el nombre de dominio como este:",
   "DNSSettingsMobile": "Envíe su solicitud a nuestro equipo de soporte y nuestros especialistas le ayudarán con la configuración.",
   "DNSSettingsNavDescription": "La configuración DNS es una forma de establecer una URL alternativa para su portal.",
+  "DocsConnectPromoDescription": "Conecte un servicio de {{editorsName}} de {{organizationName}} alojado en la nube con Docs Connect: solo tiene que pegar su dirección arriba. Sin instalación, sin mantenimiento, con sus propias claves.",
+  "DocsConnectPromoTitle": "¿No tiene un Document Server que instalar?",
   "DocumentService": "Servicio de documentos",
   "DocumentServiceAdvancedSettings": "Configuración avanzada del servidor",
   "DocumentServiceAuthHeader": "Encabezado de autorización",

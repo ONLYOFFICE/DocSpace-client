@@ -105,6 +105,7 @@ const ArticleMainButtonContent = (props) => {
     isFavoritesFolder,
     isRecentFolder,
     isRecycleBinFolder,
+    canCreateEncrypted,
 
     currentFolderId,
     currentRoomType,
@@ -610,15 +611,26 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const newActions = isPrivacy
-      ? [createNewFolder]
-      : [
+    const createNewPdfForm = {
+      id: "actions_new-pdf-form",
+      className: "main-button_drop-down",
+      icon: FormReactSvgUrl,
+      label: t("Translations:NewForm"),
+      onClick: onCreate,
+      action: "pdf",
+      key: "pdf",
+    };
+
+    const canCreateDocuments = !isPrivacy || canCreateEncrypted;
+    const newActions = canCreateDocuments
+      ? [
           createNewDocumentDocx,
           createNewSpreadsheetXlsx,
           createNewPresentationPptx,
-          formActions,
+          isPrivacy ? createNewPdfForm : formActions,
           createNewFolder,
-        ];
+        ]
+      : [createNewFolder];
 
     if (pluginItems.length > 0 && !isPrivacy) {
       newActions.push({
@@ -658,6 +670,7 @@ const ArticleMainButtonContent = (props) => {
   }, [
     t,
     isPrivacy,
+    canCreateEncrypted,
     currentFolderId,
     isAccountsPage,
     isSettingsPage,
@@ -913,6 +926,7 @@ export default inject(
       selectedTreeNode,
     } = treeFoldersStore;
     const { startUpload } = uploadDataStore;
+    const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
     const {
       setSelectFileDialogVisible,
       setInvitePanelOptions,
@@ -968,6 +982,7 @@ export default inject(
 
       showArticleLoader,
       isPrivacy: isPrivacyFolder,
+      canCreateEncrypted,
       isFavoritesFolder,
       isRecentFolder,
       isRecycleBinFolder,

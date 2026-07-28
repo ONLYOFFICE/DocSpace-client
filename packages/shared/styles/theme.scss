@@ -1572,6 +1572,9 @@
   --payment-icon-color: #{$light-gray-dark};
   --payment-dialog-text: #{$gray};
   --payment-devider-color: #{$gray-light-mid};
+  --payment-spend-track-color: #{$light-gray-hover};
+  --payment-spend-subscriptions-color: #388bde;
+  --payment-spend-payg-color: #eb7b0c;
   --payment-contact-container-text-color: #{$gray};
   --payment-contact-container-link-color: #{$light-gray-dark};
   --payment-inactive-color: #{$gray};
@@ -1605,6 +1608,9 @@
   --payment-icon-color: #{$dark-gray-dark};
   --payment-dialog-text: #{$gray-dark};
   --payment-devider-color: #{$gray-dark-mid};
+  --payment-spend-track-color: #{$gray-dark-mid};
+  --payment-spend-subscriptions-color: #388bde;
+  --payment-spend-payg-color: #eb7b0c;
   --payment-contact-container-text-color: #{$dark-gray-dark};
   --payment-contact-container-link-color: #{$gray-dark};
   --payment-inactive-color: #{$gray-dark};

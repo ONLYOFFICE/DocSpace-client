@@ -12,7 +12,7 @@
     "autoprefixer": "^10.4.21",
     "axios": "1.15.2",
     "framer-motion": "^11.18.2",
-    "next": "16.2.6",
+    "next": "16.2.11",
     "postcss": "^8.5.10",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

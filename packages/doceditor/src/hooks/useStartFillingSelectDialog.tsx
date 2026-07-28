@@ -42,6 +42,7 @@ import { FormFillingManageAction, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
 import { getFileInfo, manageFormFilling } from "@docspace/shared/api/files";
+import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 
 import type {
   TFile,
@@ -163,7 +164,7 @@ const useStartFillingSelectDialog = (
         ]);
 
         const response = await saveAs(
-          file.title,
+          resolveDisplayTitle(file),
           fileUrl,
           selectedItemId,
           false,

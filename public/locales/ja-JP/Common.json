@@ -554,7 +554,7 @@
   "CreateFormSet": "フォームセットを作成",
   "CreateGroup": "グループの作成",
   "CreateMasterFormFromFile": "ファイルからPDFフォームを作成する",
-  "CreateNewAIAgent": "新規エージェントを作成",
+  "CreateAIAgentTitle": "新規エージェントを作成",
   "CreateNewOrUpload": "新規作成または<1>ファイルをアップロード</1>",
   "CreatePassphrase": "パスフレーズの作成",
   "CreatePassphraseHint": "暗号化キーを保護するための強力なパスフレーズを作成してください。このキーを使用するすべてのデバイスで、ファイルの復号にパスフレーズが必要になります。",

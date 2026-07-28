@@ -554,7 +554,7 @@
   "CreateFormSet": "Create Form Set",
   "CreateGroup": "Create group",
   "CreateMasterFormFromFile": "Create PDF form from file",
-  "CreateNewAIAgent": "Create a new agent",
+  "CreateAIAgentTitle": "Create a new agent",
   "CreateNewOrUpload": "Create new or <1>upload your file</1>",
   "CreatePassphrase": "Create passphrase",
   "CreatePassphraseHint": "Create a strong passphrase to protect your encryption key. You will need it to decrypt files on any device where you use this key.",

@@ -198,7 +198,7 @@ const AgentsEmptyView = () => {
       ? [
           {
             key: "create-ai-agent",
-            title: t("Common:CreateNewAIAgent", {
+            title: t("Common:CreateAIAgentTitle", {
               defaultValue: "Create a new AI agent",
             }),
             description: t("Common:CreateAIAgentDescription", {

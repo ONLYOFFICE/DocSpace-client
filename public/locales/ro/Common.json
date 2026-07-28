@@ -554,7 +554,7 @@
   "CreateFormSet": "Creare set de formulare",
   "CreateGroup": "Creare grup",
   "CreateMasterFormFromFile": "Crearea unui formular PDF din fișier",
-  "CreateNewAIAgent": "Creare un agent nou",
+  "CreateAIAgentTitle": "Creare un agent nou",
   "CreateNewOrUpload": "Creați nou sau <1>încărcați fișierul dvs.</1>",
   "CreatePassphrase": "Creare frază de acces",
   "CreatePassphraseHint": "Creați o frază de acces puternică pentru a vă proteja cheia de criptare. Veți avea nevoie de ea pentru a decripta fișiere pe orice dispozitiv pe care folosiți această cheie.",

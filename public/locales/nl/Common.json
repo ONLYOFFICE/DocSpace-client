@@ -546,7 +546,7 @@
   "CreateFormSet": "Formulierset aanmaken",
   "CreateGroup": "Groep aanmaken",
   "CreateMasterFormFromFile": "Maak PDF-formulier van bestand",
-  "CreateNewAIAgent": "Maak een nieuwe agent",
+  "CreateAIAgentTitle": "Maak een nieuwe agent",
   "CreateNewOrUpload": "Nieuw maken of <1>uw bestand uploaden</1>",
   "CreatePassphrase": "Wachtzin aanmaken",
   "CreatePassphraseHint": "Maak een sterke wachtzin om uw versleutelingssleutel te beschermen. U hebt deze nodig om bestanden te ontsleutelen op elk apparaat waarop u deze sleutel gebruikt.",

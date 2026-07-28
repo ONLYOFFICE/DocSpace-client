@@ -546,7 +546,7 @@
   "CreateFormSet": "Luo lomakesarja",
   "CreateGroup": "Luo ryhmä",
   "CreateMasterFormFromFile": "Luo PDF-lomake tiedostosta",
-  "CreateNewAIAgent": "Luo uusi agentti",
+  "CreateAIAgentTitle": "Luo uusi agentti",
   "CreateNewOrUpload": "Luo uusi tai <1>lataa tiedostosi</1>",
   "CreatePassphrase": "Luo salauslause",
   "CreatePassphraseHint": "Luo vahva salauslause suojaamaan salausavaintasi. Tarvitset sitä tiedostojen purkamiseen kaikilla laitteilla, joilla käytät tätä avainta.",

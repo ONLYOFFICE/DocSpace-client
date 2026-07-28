@@ -546,7 +546,7 @@
   "CreateFormSet": "Krijoni grup formularësh",
   "CreateGroup": "Krijoni grup",
   "CreateMasterFormFromFile": "Krijoni formular PDF nga skedari",
-  "CreateNewAIAgent": "Krijo një agjent të ri",
+  "CreateAIAgentTitle": "Krijo një agjent të ri",
   "CreateNewOrUpload": "Krijo të re ose <1>ngarko skedarin tuaj</1>",
   "CreatePassphrase": "Krijoni frazëkalim",
   "CreatePassphraseHint": "Krijoni një frazëkalim të fortë për të mbrojtur çelësin tuaj të enkriptimit. Do t'ju duhet për të deshifruar skedarët në çdo pajisje ku përdorni këtë çelës.",

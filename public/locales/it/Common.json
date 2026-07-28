@@ -554,7 +554,7 @@
   "CreateFormSet": "Crea set di moduli",
   "CreateGroup": "Crea un gruppo",
   "CreateMasterFormFromFile": "Creare modulo PDF da file",
-  "CreateNewAIAgent": "Crea un nuovo agente",
+  "CreateAIAgentTitle": "Crea un nuovo agente",
   "CreateNewOrUpload": "Crea nuovo o <1>carica il tuo file</1>",
   "CreatePassphrase": "Crea passphrase",
   "CreatePassphraseHint": "Crei una passphrase robusta per proteggere la sua chiave di crittografia. Le servirà per decifrare i file su qualsiasi dispositivo in cui usa questa chiave.",

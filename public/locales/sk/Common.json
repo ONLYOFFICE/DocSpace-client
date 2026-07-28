@@ -540,7 +540,7 @@
   "CreateFormSet": "Vytvoriť sadu formulárov",
   "CreateGroup": "Vytvoriť skupinu",
   "CreateMasterFormFromFile": "Vytvoriť PDF formulár zo súboru",
-  "CreateNewAIAgent": "Vytvoriť nového agenta",
+  "CreateAIAgentTitle": "Vytvoriť nového agenta",
   "CreateNewOrUpload": "Vytvoriť nový alebo <1>nahrať váš súbor</1>",
   "CreatePassphrase": "Vytvoriť prístupovú frázu",
   "CreatePassphraseHint": "Vytvorte silnú prístupovú frázu na ochranu svojho šifrovacieho kľúča. Budete ju potrebovať na dešifrovanie súborov na každom zariadení, kde tento kľúč používate.",

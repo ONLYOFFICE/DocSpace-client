@@ -546,7 +546,7 @@
   "CreateFormSet": "Forma dəsti yaradın",
   "CreateGroup": "Qrup yaradın",
   "CreateMasterFormFromFile": "Fayldan PDF forması yaradın",
-  "CreateNewAIAgent": "Yeni agent yarat",
+  "CreateAIAgentTitle": "Yeni agent yarat",
   "CreateNewOrUpload": "Yeni yaradın və ya <1>faylınızı yükləyin</1>",
   "CreatePassphrase": "Parol yaradın",
   "CreatePassphraseHint": "Şifrələmə açarınızı qorumaq üçün güclü parol yaradın. Bu açarı istifadə etdiyiniz istənilən cihazda faylların şifrəsini açmaq üçün ona ehtiyacınız olacaq.",

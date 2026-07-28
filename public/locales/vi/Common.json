@@ -546,7 +546,7 @@
   "CreateFormSet": "Tạo Bộ biểu mẫu",
   "CreateGroup": "Tạo nhóm",
   "CreateMasterFormFromFile": "Tạo biểu mẫu PDF từ tệp",
-  "CreateNewAIAgent": "Tạo một tác nhân mới",
+  "CreateAIAgentTitle": "Tạo một tác nhân mới",
   "CreateNewOrUpload": "Tạo mới hoặc <1>tải lên tệp của bạn</1>",
   "CreatePassphrase": "Tạo mật khẩu bảo vệ",
   "CreatePassphraseHint": "Tạo mật khẩu bảo vệ mạnh để bảo vệ khóa mã hóa của bạn. Bạn sẽ cần nó để giải mã tệp trên bất kỳ thiết bị nào sử dụng khóa này.",

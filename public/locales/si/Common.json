@@ -546,7 +546,7 @@
   "CreateFormSet": "පෝරම කට්ටලය සාදන්න",
   "CreateGroup": "සමූහයක් සාදන්න",
   "CreateMasterFormFromFile": "ගොනුවෙන් PDF පෝරමය සාදන්න",
-  "CreateNewAIAgent": "නව නියෝජිතයෙකු සාදන්න",
+  "CreateAIAgentTitle": "නව නියෝජිතයෙකු සාදන්න",
   "CreateNewOrUpload": "නව ලෙස සාදන්න හෝ <1>ඔබේ ගොනුව උඩුගත කරන්න</1>",
   "CreatePassphrase": "මුරවාක්‍යය සාදන්න",
   "CreatePassphraseHint": "ඔබගේ සංකේතන යතුර ආරක්ෂා කිරීමට ශක්තිමත් මුරවාක්‍යයක් සාදන්න. මෙම යතුර භාවිත කරන ඕනෑම උපකරණයක ගොනු විකේතනය කිරීමට එය අවශ්‍ය වේ.",

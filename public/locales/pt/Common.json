@@ -546,7 +546,7 @@
   "CreateFormSet": "Criar conjunto de formulários",
   "CreateGroup": "Criar grupo",
   "CreateMasterFormFromFile": "Criar formulário PDF a partir do ficheiro",
-  "CreateNewAIAgent": "Criar um novo agente",
+  "CreateAIAgentTitle": "Criar um novo agente",
   "CreateNewOrUpload": "Criar novo ou <1>carregar o seu ficheiro</1>",
   "CreatePassphrase": "Criar frase-passe",
   "CreatePassphraseHint": "Crie uma frase-passe forte para proteger a sua chave de encriptação. Irá precisar dela para desencriptar ficheiros em qualquer dispositivo onde utilize esta chave.",

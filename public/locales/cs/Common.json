@@ -546,7 +546,7 @@
   "CreateFormSet": "Vytvořit sadu formulářů",
   "CreateGroup": "Vytvořit skupinu",
   "CreateMasterFormFromFile": "Vytvořit PDF formulář ze souboru",
-  "CreateNewAIAgent": "Vytvořit nového agenta",
+  "CreateAIAgentTitle": "Vytvořit nového agenta",
   "CreateNewOrUpload": "Vytvořit nový nebo <1>nahrát váš soubor</1>",
   "CreatePassphrase": "Vytvořit přístupovou frázi",
   "CreatePassphraseHint": "Vytvořte silnou přístupovou frázi na ochranu svého šifrovacího klíče. Budete ji potřebovat k dešifrování souborů na každém zařízení, kde tento klíč používáte.",

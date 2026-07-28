@@ -546,7 +546,7 @@
   "CreateFormSet": "إنشاء مجموعة نماذج",
   "CreateGroup": "إنشاء مجموعة",
   "CreateMasterFormFromFile": "إنشاء نموذج PDF من ملف",
-  "CreateNewAIAgent": "إنشاء وكيل جديد",
+  "CreateAIAgentTitle": "إنشاء وكيل جديد",
   "CreateNewOrUpload": "إنشاء جديد أو <1>رفع ملفك</1>",
   "CreatePassphrase": "إنشاء عبارة مرور",
   "CreatePassphraseHint": "أنشئ عبارة مرور قوية لحماية مفتاح التشفير الخاص بك. ستحتاج إليها لفك تشفير الملفات على أي جهاز تستخدم فيه هذا المفتاح.",

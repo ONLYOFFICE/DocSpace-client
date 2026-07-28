@@ -546,7 +546,7 @@
   "CreateFormSet": "Form Seti oluştur",
   "CreateGroup": "Grup oluştur",
   "CreateMasterFormFromFile": "Dosyadan PDF formu oluştur",
-  "CreateNewAIAgent": "Yeni bir ajan oluştur",
+  "CreateAIAgentTitle": "Yeni bir ajan oluştur",
   "CreateNewOrUpload": "Yeni oluştur veya <1>dosyanızı yükleyin</1>",
   "CreatePassphrase": "Parola oluştur",
   "CreatePassphraseHint": "Şifreleme anahtarınızı korumak için güçlü bir parola oluşturun. Bu anahtarı kullandığınız her cihazda dosyaların şifresini çözmek için buna ihtiyacınız olacak.",

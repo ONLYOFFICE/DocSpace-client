@@ -554,7 +554,7 @@
   "CreateFormSet": "Kreiraj skup obrazaca",
   "CreateGroup": "Kreiraj grupu",
   "CreateMasterFormFromFile": "Kreiraj PDF obrazac iz datoteke",
-  "CreateNewAIAgent": "Kreirajte novog agenta",
+  "CreateAIAgentTitle": "Kreirajte novog agenta",
   "CreateNewOrUpload": "Napravite novo ili <1>otpremite svoju datoteku</1>",
   "CreatePassphrase": "Kreiraj lozinku",
   "CreatePassphraseHint": "Napravite jaku lozinku da zaštitite svoj ključ za šifrovanje. Biće vam potrebna za dešifrovanje datoteka na svakom uređaju na kom koristite ovaj ključ.",

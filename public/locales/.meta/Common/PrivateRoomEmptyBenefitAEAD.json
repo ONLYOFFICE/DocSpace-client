@@ -3,7 +3,7 @@
   "content": "Every document gets its own key, so one leaked file never exposes another.",
   "content_en_sha1_hash": "9a43490d13598e0cc755c7866f545c398c727123",
   "created_at": "2026-06-09T09:42:54.385Z",
-  "updated_at": "2026-06-09T10:00:11.949Z",
+  "updated_at": "2026-07-28T11:25:41.767Z",
   "comment": {
     "text": "List item in an empty state view for Private Rooms, describing one of several security benefits.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",
-      "line_number": 64,
-      "context": "const { t } = useTranslation([\"EmptyView\", \"Common\"]);\n const { isBase } = useTheme();\n \n const items = [\n t(\"Common:PrivateRoomEmptyBenefitE2EE\"),\n t(\"Common:PrivateRoomEmptyBenefitAEAD\"),\n t(\"Common:PrivateRoomEmptyBenefitHPKE\"),\n t(\"Common:PrivateRoomEmptyBenefitKDF\"),\n ];\n \n const onCreateFolder = useCallback(() => {",
+      "line_number": 77,
+      "context": "const { t } = useTranslation([\"EmptyView\", \"Common\", \"Translations\"]);\n const { isBase } = useTheme();\n \n const items = [\n t(\"Common:PrivateRoomEmptyBenefitE2EE\"),\n t(\"Common:PrivateRoomEmptyBenefitAEAD\"),\n t(\"Common:PrivateRoomEmptyBenefitHPKE\"),\n t(\"Common:PrivateRoomEmptyBenefitKDF\"),\n ];\n \n const dispatchCreate = useCallback(",
       "module": "/packages/client"
     },
     {

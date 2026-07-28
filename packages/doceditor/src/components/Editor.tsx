@@ -44,6 +44,7 @@ import { DocumentEditor, type IConfig } from "@docspace/ui-kit/document-editor";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
@@ -176,17 +177,30 @@ const Editor = ({
 
   const encryption = useFileEncryptionKeys(config, user);
 
+  // For encrypted files config.document.title is an opaque server placeholder;
+  // the real name is decrypted into the filename cache by useFileEncryptionKeys
+  // before the editor mounts.
+  const resolvedTitle = useResolvedFileTitle(
+    config
+      ? {
+          id: config.file?.id,
+          title: config.document?.title,
+          encrypted: config.file?.encrypted,
+        }
+      : null,
+  );
+
   const newConfig: IConfig = useMemo(() => {
     return config
       ? {
-          document: config.document,
+          document: { ...config.document, title: resolvedTitle },
           documentType: config.documentType,
           token: config.token,
           type: config.type,
           editorConfig: { ...config.editorConfig },
         }
       : {};
-  }, [config]);
+  }, [config, resolvedTitle]);
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 

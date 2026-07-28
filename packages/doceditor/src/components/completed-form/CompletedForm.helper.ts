@@ -40,6 +40,7 @@ export const getFolderUrl = (
   folderId: number | string,
   isAnonym: boolean,
   share?: string,
+  isFormRoom?: boolean,
 ): string => {
   if (isNullOrUndefined(folderId)) return "";
 
@@ -49,9 +50,11 @@ export const getFolderUrl = (
 
   filter.folder = folderId.toString();
 
-  const path = isAnonym
-    ? `/rooms/share?key=${share}&`
+  const roomPath = isFormRoom
+    ? `/forms/${folderId}/filter?`
     : `/rooms/shared/${folderId}?`;
+
+  const path = isAnonym ? `/rooms/share?key=${share}&` : roomPath;
 
   return `${origin}${path}${filter.toUrlParams()}`;
 };

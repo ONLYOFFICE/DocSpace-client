@@ -81,7 +81,7 @@ const defaultFakes = () => ({
     isPersonalRoom: false,
     isRecentTab: false,
   },
-  uploadDataStore: {},
+  uploadDataStore: { shouldEncryptCurrentUpload: () => false },
   versionHistoryStore: {},
   filesSettingsStore: { getIcon: () => "icon.svg" },
   selectedFolderStore: { id: 1, security: {}, navigationPath: [] },

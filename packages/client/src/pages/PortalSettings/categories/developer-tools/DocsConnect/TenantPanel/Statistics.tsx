@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -72,6 +72,8 @@ interface StatisticsProps {
   cancelScheduledChange?: () => Promise<void>;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   downloadReport?: () => void;
+  markReportPageLeft?: () => void;
+  isReportGenerating?: boolean;
   nextcloudUrl?: string;
   owncloudUrl?: string;
   confluenceUrl?: string;
@@ -88,6 +90,8 @@ const Statistics = ({
   cancelScheduledChange,
   copyToClipboard,
   downloadReport,
+  markReportPageLeft,
+  isReportGenerating,
   nextcloudUrl,
   owncloudUrl,
   confluenceUrl,
@@ -98,6 +102,12 @@ const Statistics = ({
 }: StatisticsProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      markReportPageLeft?.();
+    };
+  }, [markReportPageLeft]);
 
   if (!info) return null;
 
@@ -552,8 +562,16 @@ const Statistics = ({
           className={styles.downloadButton}
           size={ButtonSize.normal}
           label={t("DocsConnect:DownloadReport")}
-          onClick={downloadReport}
+          onClick={() => downloadReport?.()}
+          isLoading={isReportGenerating}
         />
+        {isReportGenerating ? (
+          <Text fontSize="13px" className={styles.muted}>
+            {t("DocsConnect:ReportGenerationHint", {
+              sectionName: t("Common:Files"),
+            })}
+          </Text>
+        ) : null}
       </div>
 
       <CollapsibleCard
@@ -606,6 +624,8 @@ export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   cancelScheduledChange: docsConnectStore.cancelScheduledChange,
   copyToClipboard: docsConnectStore.copyToClipboard,
   downloadReport: docsConnectStore.downloadReport,
+  markReportPageLeft: docsConnectStore.markReportPageLeft,
+  isReportGenerating: docsConnectStore.isReportGenerating,
   nextcloudUrl: settingsStore.nextcloudUrl,
   owncloudUrl: settingsStore.owncloudUrl,
   confluenceUrl: settingsStore.confluenceUrl,

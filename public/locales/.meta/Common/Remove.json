@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-06-09T09:43:10.832Z",
+  "updated_at": "2026-07-27T13:07:50.649Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -33,6 +33,18 @@
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
       "line_number": 123,
       "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: this.t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/RemoveSubscriptionDialog/index.tsx",
+      "line_number": 95,
+      "context": "<ModalDialog.Footer>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:Remove\")}\n onClick={onConfirm}\n isLoading={submitting}\n isDisabled={submitting}\n />\n <Button",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 205,
+      "context": "fontSize=\"13px\"\n fontWeight={600}\n textDecoration=\"underline dashed\"\n onClick={openRemoveSubscriptionDialog}\n >\n {t(\"Common:Remove\")}\n </Link>\n </div>\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {

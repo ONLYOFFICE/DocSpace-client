@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Въведете име на домейн по следния начин:",
   "DNSSettingsMobile": "Изпратете заявката си до нашия екип за обслужване на клиенти и специалистите ни ще Ви помогнат с настройките.",
   "DNSSettingsNavDescription": "DNS настройките са начин да зададете алтернативен URL адрес за портала Ви.",
+  "DocsConnectPromoDescription": "Свържете хостнатата в облака услуга {{organizationName}} {{editorsName}} с Docs Connect — просто поставете адреса ѝ по-горе. Без инсталация, без поддръжка, със собствени ключове.",
+  "DocsConnectPromoTitle": "Нямате инсталиран сървър за документи?",
   "DocumentService": "Служба за документи",
   "DocumentServiceAdvancedSettings": "Разширени настройки на сървъра",
   "DocumentServiceAuthHeader": "Заглавка за оторизация",

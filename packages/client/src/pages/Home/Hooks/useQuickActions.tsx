@@ -141,6 +141,8 @@ export type UseQuickActionsProps = SectionFlags & {
   currentFolderId: number | string | null;
   // selectedFolderStore.security?.Create — folder-level create permission.
   canCreateFiles?: boolean;
+  // Private rooms only: the user has encryption keys registered.
+  canCreateEncrypted?: boolean;
   // SDK's canCreateRooms: admins / owners / room admins.
   canCreateRooms?: boolean;
   // AI is ready and the user can manage agents (admins / owners / room admins).
@@ -171,6 +173,7 @@ export const useQuickActions = (
   const {
     currentFolderId,
     canCreateFiles,
+    canCreateEncrypted,
     canCreateRooms,
     canCreateAgents,
     userId,
@@ -194,7 +197,7 @@ export const useQuickActions = (
     [t, openChat],
   );
 
-  const fileItems = React.useMemo<QuickActionItem[]>(
+  const createFileTiles = React.useMemo<QuickActionItem[]>(
     () => [
       {
         id: "quick-docx",
@@ -220,9 +223,13 @@ export const useQuickActions = (
         label: getConstName("PDF"),
         onClick: () => dispatchCreate(currentFolderId, "pdf", t),
       },
-      aiChatItems,
     ],
-    [t, currentFolderId, aiChatItems],
+    [t, currentFolderId],
+  );
+
+  const fileItems = React.useMemo<QuickActionItem[]>(
+    () => [...createFileTiles, aiChatItems],
+    [createFileTiles, aiChatItems],
   );
 
   const roomItems = React.useMemo<QuickActionItem[]>(
@@ -273,14 +280,14 @@ export const useQuickActions = (
       {
         id: "quick-form-room",
         icon: <QuickFormRoomIcon />,
-        label: t("Common:FormSetTitle"),
+        label: t("Common:FormSpaceTitle"),
         onClick: () => dispatchCreateRoom(currentFolderId, RoomsType.FormRoom),
       },
       // Opens the form templates list (sidebar Forms → Templates).
       {
         id: "quick-form-template",
         icon: <UseRoomTemplateIllustrationIcon />,
-        label: t("Common:FromTemplate"),
+        label: t("Common:SpaceTemplate"),
         onClick: () => goFormsTemplates(userId),
       },
       aiChatItems,
@@ -307,7 +314,7 @@ export const useQuickActions = (
       items.push({
         id: "quick-form-template",
         icon: <CreateFromTemplateIcon />,
-        label: t("Common:FromTemplate"),
+        label: t("Common:TemplateGallery"),
         onClick: () => {
           setTemplateGalleryVisible?.(true);
           setOformFromFolderId?.(currentFolderId);
@@ -354,9 +361,11 @@ export const useQuickActions = (
   if (section === "ai-agents" && canCreateAgents)
     return { show: true, items: agentItems };
 
-  // "private" rooms and every other section render no banner (see
-  // getQuickActionsSection for why private rooms are skipped).
+  if (section === "private" && canCreateFiles && canCreateEncrypted)
+    return { show: true, items: createFileTiles };
+
   return { show: false, items: [] };
 };
 
 export default useQuickActions;
+

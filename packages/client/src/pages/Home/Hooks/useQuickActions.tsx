@@ -190,6 +190,7 @@ export const useQuickActions = (
   const aiChatItems = React.useMemo<QuickActionItem>(
     () => ({
       id: "quick-ai-chat",
+      dataTestId: "quick-ai-chat",
       icon: <AIChatIcon />,
       label: t("Common:AIChat"),
       onClick: openChat,
@@ -201,24 +202,28 @@ export const useQuickActions = (
     () => [
       {
         id: "quick-docx",
+        dataTestId: "quick-docx",
         icon: <CreateDocumentIcon />,
         label: t("Common:Document"),
         onClick: () => dispatchCreate(currentFolderId, "docx", t),
       },
       {
         id: "quick-xlsx",
+        dataTestId: "quick-xlsx",
         icon: <CreateSpreadsheetIcon />,
         label: t("Common:Spreadsheet"),
         onClick: () => dispatchCreate(currentFolderId, "xlsx", t),
       },
       {
         id: "quick-pptx",
+        dataTestId: "quick-pptx",
         icon: <CreatePresentationIcon />,
         label: t("Common:Presentation"),
         onClick: () => dispatchCreate(currentFolderId, "pptx", t),
       },
       {
         id: "quick-pdf",
+        dataTestId: "quick-pdf",
         icon: <BlankPdfIcon />,
         label: getConstName("PDF"),
         onClick: () => dispatchCreate(currentFolderId, "pdf", t),

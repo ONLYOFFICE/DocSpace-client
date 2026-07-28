@@ -1,0 +1,22 @@
+{
+  "AgentsCreate": "Set up a new AI agent, connect a knowledge base, and define what it can do.",
+  "AgentsCreateTitle": "Create an agent",
+  "AgentsInfoPanel": "Open the info panel to view agent details, its knowledge sources, and access settings.",
+  "AgentsInfoPanelTitle": "Info panel",
+  "AgentsIntro": "This is the AI agents section — create and manage AI assistants that work with your files.",
+  "AgentsQuickAccess": "Recent items, favorites, and Trash are always at hand right under AI agents.",
+  "AgentsQuickAccessTitle": "Quick access",
+  "AgentsSearch": "Quickly find the agent you need by name.",
+  "AgentsSearchTitle": "Search agents",
+  "AgentsView": "Switch between the row and tile views — choose whichever is more convenient for you.",
+  "AgentsViewTitle": "View mode",
+  "AgentsWelcomeTitle": "Welcome to AI agents",
+  "FeatureAgents": "Create AI agents tuned for your tasks — from answering questions to processing documents.",
+  "FeatureAgentsTitle": "Build your own AI agents",
+  "FeatureChat": "Talk to an agent in chat, ask about your files, and automate routine tasks.",
+  "FeatureChatTitle": "Chat and automate",
+  "FeatureControl": "Manage who can use each agent and what data it may access.",
+  "FeatureControlTitle": "Stay in control",
+  "FeatureKnowledge": "Connect documents as a knowledge base so agents answer using your own content.",
+  "FeatureKnowledgeTitle": "Ground them in your files"
+}

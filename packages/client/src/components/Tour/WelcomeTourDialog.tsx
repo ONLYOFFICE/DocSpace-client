@@ -39,52 +39,38 @@ import { ReactSVG } from "react-svg";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { getBrandName } from "@docspace/shared/constants/brands";
-
-import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
-import SharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
-import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
-import SecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
 
 import styles from "./WelcomeTourDialog.module.scss";
 
+export type TourFeature = {
+  icon: string;
+  title: string;
+  description: string;
+};
+
 type WelcomeTourDialogProps = {
   visible: boolean;
+  title: string;
+  features: TourFeature[];
   canTakeTour: boolean;
   onStart: () => void;
   onSkip: () => void;
 };
 
+/**
+ * Shared welcome dialog shown before a section tour. Section hosts pass the
+ * localized title and the list of feature cards; the primary "Take a tour"
+ * button is hidden when the tour can't run (mobile).
+ */
 export default function WelcomeTourDialog({
   visible,
+  title,
+  features,
   canTakeTour,
   onStart,
   onSkip,
 }: WelcomeTourDialogProps) {
-  const { t } = useTranslation(["FilesTour", "Common"]);
-
-  const features = [
-    {
-      icon: DocumentsReactSvgUrl,
-      title: t("FilesTour:FeatureDocumentsTitle"),
-      description: t("FilesTour:FeatureDocuments"),
-    },
-    {
-      icon: SharedReactSvgUrl,
-      title: t("FilesTour:FeatureSharingTitle"),
-      description: t("FilesTour:FeatureSharing"),
-    },
-    {
-      icon: SearchReactSvgUrl,
-      title: t("FilesTour:FeatureOrganizeTitle"),
-      description: t("FilesTour:FeatureOrganize"),
-    },
-    {
-      icon: SecurityReactSvgUrl,
-      title: t("FilesTour:FeatureSecurityTitle"),
-      description: t("FilesTour:FeatureSecurity"),
-    },
-  ];
+  const { t } = useTranslation(["Common"]);
 
   return (
     <ModalDialog
@@ -93,11 +79,7 @@ export default function WelcomeTourDialog({
       onClose={onSkip}
       autoMaxHeight
     >
-      <ModalDialog.Header>
-        {t("FilesTour:TourWelcomeTitle", {
-          productName: getBrandName("ProductName"),
-        })}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.featuresList}>
           {features.map((feature) => (

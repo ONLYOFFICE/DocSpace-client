@@ -33,12 +33,32 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import TourStore from "./TourStore";
+import type { ReactNode } from "react";
 
-class FilesTourStore extends TourStore {
-  constructor() {
-    super("files_tour_completed");
-  }
+import styles from "./TourTooltip.module.scss";
+
+/**
+ * A step body: a lead sentence, optionally followed by a few concrete points.
+ * Passing a plain string keeps the old single-paragraph form.
+ */
+export type StepBody = string | { text: string; points?: string[] };
+
+/** Renders a StepBody into the node react-joyride puts in `step.content`. */
+export function stepContent(body: StepBody): ReactNode {
+  if (typeof body === "string") return body;
+
+  const { text, points } = body;
+
+  if (!points?.length) return text;
+
+  return (
+    <>
+      {text}
+      <ul className={styles.points}>
+        {points.map((point) => (
+          <li key={point}>{point}</li>
+        ))}
+      </ul>
+    </>
+  );
 }
-
-export default FilesTourStore;

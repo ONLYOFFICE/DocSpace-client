@@ -36,150 +36,257 @@
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
-import { waitForElement } from "./waitForElement";
+import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
+import {
+  navItemStep,
+  elementStep,
+  fileItemStep,
+  sidebarSelector,
+  expandQuickActions,
+} from "SRC_DIR/components/Tour/stepBuilders";
 
-export type TourStepCallbacks = {
-  getSignal: () => AbortSignal | undefined;
-};
+const LOG_LABEL = "files tour";
+
+// The first item of the file list, in whichever view is active (only one of
+// the three is mounted at a time).
+//
+// In the table view neither row wrapper has geometry: both the row
+// (TableRow.module.scss `.tableRow`) and the drag wrapper
+// (StyledTable.module.scss `.styledDragAndDrop`) are `display: contents`, so a
+// naive spotlight lands on a 0x0 point in the corner. `fileItemStep` detects
+// that and falls back to the row's widest cell.
+const FIRST_ITEM_SELECTOR =
+  '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
 export type TourStepFlags = {
   isDesktop: boolean;
   canCreate: boolean;
   showFilter: boolean;
+  // Whether the file list has at least one item — steps that point at a row
+  // are skipped on an empty folder.
+  hasItems: boolean;
+  // Table view is the only one that renders a column header (and its column
+  // picker); the row/tile views don't.
+  isTableView: boolean;
   // Sidebar anchors: NavMenu renders `data-item-id` per item, the ids of the
   // tree-folder items are their folder ids (null — item is absent).
   myDocumentsId: string | null;
-  quickAccessId: string | null;
+  sharedId: string | null;
+  recentId: string | null;
+  favoritesId: string | null;
+  trashId: string | null;
 };
-
-function isAbortError(err: unknown) {
-  return err instanceof DOMException && err.name === "AbortError";
-}
-
-function silenceNonAbort(err: unknown) {
-  if (!isAbortError(err) && process.env.NODE_ENV !== "production") {
-    // eslint-disable-next-line no-console
-    console.warn("[files tour] waitForElement failed:", err);
-  }
-}
-
-function navItemStep(
-  selector: string,
-  title: string,
-  content: string,
-  callbacks?: TourStepCallbacks,
-  spotlightList = false,
-): Step {
-  return {
-    target: selector,
-    spotlightTarget: spotlightList
-      ? () => {
-          const el = document.querySelector(selector);
-          return (el?.closest("ul") as HTMLElement) ?? (el as HTMLElement);
-        }
-      : undefined,
-    spotlightPadding: 4,
-    placement: "auto" as const,
-    content,
-    title,
-    skipBeacon: true,
-    before: async () => {
-      const signal = callbacks?.getSignal();
-      await waitForElement(selector, 10000, signal).catch(silenceNonAbort);
-      if (!spotlightList) {
-        document.querySelector(selector)?.classList.add("tour-outline-item");
-      }
-    },
-    after: () => {
-      document
-        .querySelector(".tour-outline-item")
-        ?.classList.remove("tour-outline-item");
-    },
-  };
-}
-
-function elementStep(
-  target: string,
-  title: string,
-  content: string,
-  callbacks?: TourStepCallbacks,
-  spotlightPadding = 6,
-): Step {
-  return {
-    target,
-    spotlightPadding,
-    placement: "auto" as const,
-    content,
-    title,
-    skipBeacon: true,
-    before: async () => {
-      const signal = callbacks?.getSignal();
-      await waitForElement(target, 10000, signal).catch(silenceNonAbort);
-    },
-  };
-}
 
 export function getTourSteps(
   t: TFunction,
   callbacks: TourStepCallbacks | undefined,
   flags: TourStepFlags,
 ): Step[] {
-  const { isDesktop, canCreate, showFilter, myDocumentsId, quickAccessId } =
-    flags;
+  const {
+    isDesktop,
+    canCreate,
+    showFilter,
+    hasItems,
+    isTableView,
+    myDocumentsId,
+    sharedId,
+    recentId,
+    favoritesId,
+    trashId,
+  } = flags;
 
-  const navSelector = (id: string) => `[data-item-id="${id}"]`;
+  // The quick-access sub-items are nested under My documents and rendered
+  // expanded while the section is active. Skipped on tablet: the collapsed
+  // icon-only sidebar flattens sub-items into the main list.
+  const showQuickAccess = isDesktop && !!myDocumentsId;
 
   return [
+    // 1. Where am I — the personal space, and how it differs from Rooms.
     myDocumentsId &&
       navItemStep(
-        navSelector(myDocumentsId),
+        sidebarSelector(myDocumentsId),
         t("Common:Files"),
-        t("FilesTour:TourMyDocuments"),
+        {
+          text: t("FilesTour:TourMyDocuments"),
+          points: [
+            t("FilesTour:TourMyDocumentsPrivate"),
+            t("FilesTour:TourMyDocumentsShare"),
+          ],
+        },
         callbacks,
+        LOG_LABEL,
       ),
-    // The quick-access block (Shared with me / Recent / Favorites / Trash)
-    // is nested under My documents and rendered expanded while the section
-    // is active. Skipped on tablet: the collapsed icon-only sidebar flattens
-    // sub-items into the main list, so there is no block to spotlight.
-    isDesktop &&
-      myDocumentsId &&
-      quickAccessId &&
-      navItemStep(
-        navSelector(quickAccessId),
-        t("FilesTour:TourQuickAccessTitle"),
-        t("FilesTour:TourQuickAccess"),
-        callbacks,
-        true,
-      ),
+
+    // 2. Create — the quick-action tiles, named by what they produce. Upload
+    // is mentioned here too: the header "+" button only renders on an empty
+    // page (isPlusButtonVisible), so it can't be spotlighted in this tour.
     canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-actions"]',
         t("FilesTour:TourActionsTitle"),
-        t("FilesTour:TourActions"),
+        {
+          text: t("FilesTour:TourActions"),
+          points: [
+            t("FilesTour:TourActionsFormats"),
+            t("FilesTour:TourActionsPdfForm"),
+            t("FilesTour:TourActionsDragDrop"),
+          ],
+        },
         callbacks,
+        LOG_LABEL,
       ),
-    showFilter &&
+
+    // 3. AI chat tile — the least discoverable, most differentiating feature.
+    // It is the fifth tile, so it may sit in the clipped second row; expand
+    // the banner first so the spotlight lands on something visible.
+    canCreate &&
+      showFilter &&
       elementStep(
-        "#filter_search-input",
-        t("FilesTour:TourSearchTitle"),
-        t("FilesTour:TourSearch"),
+        '[data-testid="quick-ai-chat"]',
+        t("FilesTour:TourAiChatTitle"),
+        t("FilesTour:TourAiChat"),
         callbacks,
+        LOG_LABEL,
+        6,
+        expandQuickActions,
       ),
-    showFilter &&
-      isDesktop &&
-      elementStep(
-        "#view-switch--row, #view-switch--tile",
-        t("FilesTour:TourViewTitle"),
-        t("FilesTour:TourView"),
+
+    // 4. A real file row: the per-item actions users most often hunt for.
+    hasItems &&
+      fileItemStep(
+        FIRST_ITEM_SELECTOR,
+        t("FilesTour:TourFileItemTitle"),
+        {
+          text: t("FilesTour:TourFileItem"),
+          points: [
+            t("FilesTour:TourFileItemOpen"),
+            t("FilesTour:TourFileItemContextMenu"),
+            t("FilesTour:TourFileItemSelect"),
+          ],
+        },
         callbacks,
+        LOG_LABEL,
       ),
+
+    // 5. Info panel — sharing, versions and activity all live here.
     isDesktop &&
       elementStep(
         "#info-panel-toggle--open",
         t("FilesTour:TourInfoPanelTitle"),
-        t("FilesTour:TourInfoPanel"),
+        {
+          text: t("FilesTour:TourInfoPanel"),
+          points: [
+            t("FilesTour:TourInfoPanelShare"),
+            t("FilesTour:TourInfoPanelHistory"),
+          ],
+        },
         callbacks,
+        LOG_LABEL,
+      ),
+
+    // 6. Search — scoped, so it is worth saying what it covers.
+    showFilter &&
+      elementStep(
+        "#filter_search-input",
+        t("FilesTour:TourSearchTitle"),
+        {
+          text: t("FilesTour:TourSearch"),
+          points: [
+            t("FilesTour:TourSearchFilters"),
+            t("FilesTour:TourSearchContent"),
+          ],
+        },
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 7. Advanced filter — narrowing by type/author, not just by name.
+    showFilter &&
+      elementStep(
+        "#filter-button",
+        t("FilesTour:TourFilesFilterTitle"),
+        {
+          text: t("FilesTour:TourFilesFilter"),
+          points: [
+            t("FilesTour:TourFilesFilterTypes"),
+          ],
+        },
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 8. Sorting, and the column/tile layout switch next to it.
+    showFilter &&
+      isDesktop &&
+      elementStep(
+        "#sort-by-button",
+        t("FilesTour:TourSortTitle"),
+        {
+          text: t("FilesTour:TourSort"),
+          points: [
+            t("FilesTour:TourSortView"),
+          ],
+        },
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 9. Table column picker — rendered by the table header only, so this
+    // step is skipped in the row/tile views.
+    isTableView &&
+      isDesktop &&
+      elementStep(
+        '[data-testid="settings-block"]',
+        t("FilesTour:TourColumnsTitle"),
+        t("FilesTour:TourColumns"),
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 10. Shared with me — files other people gave you access to.
+    showQuickAccess &&
+      sharedId &&
+      navItemStep(
+        sidebarSelector(sharedId),
+        t("FilesTour:TourSharedTitle"),
+        t("FilesTour:TourShared"),
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 11. Recent + Favorites — the two shortcuts that save the most clicks.
+    showQuickAccess &&
+      recentId &&
+      navItemStep(
+        sidebarSelector(recentId),
+        t("FilesTour:TourRecentTitle"),
+        {
+          text: t("FilesTour:TourRecent"),
+          points: favoritesId
+            ? [
+                t("FilesTour:TourRecentFavorites"),
+              ]
+            : undefined,
+        },
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 12. Trash — restore, and the fact that it empties itself.
+    showQuickAccess &&
+      trashId &&
+      navItemStep(
+        sidebarSelector(trashId),
+        t("FilesTour:TourTrashTitle"),
+        {
+          text: t("FilesTour:TourTrash"),
+          points: [
+            t("FilesTour:TourTrashAutoClean"),
+          ],
+        },
+        callbacks,
+        LOG_LABEL,
       ),
   ].filter(Boolean) as Step[];
 }

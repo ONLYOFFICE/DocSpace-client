@@ -39,9 +39,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
-import type FilesTourStore from "SRC_DIR/store/FilesTourStore";
+import type RoomsTourStore from "SRC_DIR/store/RoomsTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
@@ -49,81 +48,49 @@ import WelcomeTourDialog, {
   type TourFeature,
 } from "SRC_DIR/components/Tour/WelcomeTourDialog";
 
-import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import RoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import UserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 import SharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
-import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 import SecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
 
-type FilesTourProps = {
-  filesTourStore: FilesTourStore;
+type RoomsTourProps = {
+  roomsTourStore: RoomsTourStore;
   userId?: string;
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
-  isPersonalRoot: boolean;
+  isRoomsRoot: boolean;
   canCreate: boolean;
+  canUseTemplates: boolean;
   showFilter: boolean;
-  hasItems: boolean;
-  isTableView: boolean;
-  myDocumentsId: string | null;
-  sharedId: string | null;
-  recentId: string | null;
-  favoritesId: string | null;
-  trashId: string | null;
+  roomsId: string | null;
 };
 
-const FilesTour = ({
-  filesTourStore,
+const RoomsTour = ({
+  roomsTourStore,
   userId,
   currentDeviceType,
   isFrame,
   firstLoad,
-  isPersonalRoot,
+  isRoomsRoot,
   canCreate,
+  canUseTemplates,
   showFilter,
-  hasItems,
-  isTableView,
-  myDocumentsId,
-  sharedId,
-  recentId,
-  favoritesId,
-  trashId,
-}: FilesTourProps) => {
-  const { t } = useTranslation(["FilesTour", "Common"]);
+  roomsId,
+}: RoomsTourProps) => {
+  const { t } = useTranslation(["RoomsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
   useEffect(() => {
-    if (userId) filesTourStore.hydrateForUser(userId);
-  }, [userId, filesTourStore]);
+    if (userId) roomsTourStore.hydrateForUser(userId);
+  }, [userId, roomsTourStore]);
 
   const flags = useMemo<TourStepFlags>(
-    () => ({
-      isDesktop,
-      canCreate,
-      showFilter,
-      hasItems,
-      isTableView,
-      myDocumentsId,
-      sharedId,
-      recentId,
-      favoritesId,
-      trashId,
-    }),
-    [
-      isDesktop,
-      canCreate,
-      showFilter,
-      hasItems,
-      isTableView,
-      myDocumentsId,
-      sharedId,
-      recentId,
-      favoritesId,
-      trashId,
-    ],
+    () => ({ isDesktop, canCreate, canUseTemplates, showFilter, roomsId }),
+    [isDesktop, canCreate, canUseTemplates, showFilter, roomsId],
   );
 
   const buildSteps = useCallback(
@@ -132,33 +99,33 @@ const FilesTour = ({
   );
 
   const { Tour } = useTour(
-    filesTourStore,
+    roomsTourStore,
     buildSteps,
     isMobileView,
-    "files tour",
+    "rooms tour",
   );
 
   const features = useMemo<TourFeature[]>(
     () => [
       {
-        icon: DocumentsReactSvgUrl,
-        title: t("FilesTour:FeatureDocumentsTitle"),
-        description: t("FilesTour:FeatureDocuments"),
+        icon: RoomsReactSvgUrl,
+        title: t("RoomsTour:FeatureTypesTitle"),
+        description: t("RoomsTour:FeatureTypes"),
+      },
+      {
+        icon: UserReactSvgUrl,
+        title: t("RoomsTour:FeatureMembersTitle"),
+        description: t("RoomsTour:FeatureMembers"),
       },
       {
         icon: SharedReactSvgUrl,
-        title: t("FilesTour:FeatureSharingTitle"),
-        description: t("FilesTour:FeatureSharing"),
-      },
-      {
-        icon: SearchReactSvgUrl,
-        title: t("FilesTour:FeatureOrganizeTitle"),
-        description: t("FilesTour:FeatureOrganize"),
+        title: t("RoomsTour:FeatureAccessTitle"),
+        description: t("RoomsTour:FeatureAccess"),
       },
       {
         icon: SecurityReactSvgUrl,
-        title: t("FilesTour:FeatureSecurityTitle"),
-        description: t("FilesTour:FeatureSecurity"),
+        title: t("RoomsTour:FeatureRoomSecurityTitle"),
+        description: t("RoomsTour:FeatureRoomSecurity"),
       },
     ],
     [t],
@@ -168,30 +135,28 @@ const FilesTour = ({
 
   const welcomeVisible =
     !firstLoad &&
-    isPersonalRoot &&
-    filesTourStore.isHydrated &&
-    !filesTourStore.tourCompleted &&
-    !filesTourStore.isRunning;
+    isRoomsRoot &&
+    roomsTourStore.isHydrated &&
+    !roomsTourStore.tourCompleted &&
+    !roomsTourStore.isRunning;
 
   const onStart = () => {
     if (isMobileView) {
-      filesTourStore.completeTour();
+      roomsTourStore.completeTour();
       return;
     }
-    filesTourStore.startTour();
+    roomsTourStore.startTour();
   };
 
   const onSkip = () => {
-    filesTourStore.completeTour();
+    roomsTourStore.completeTour();
   };
 
   return (
     <>
       <WelcomeTourDialog
         visible={welcomeVisible}
-        title={t("FilesTour:TourWelcomeTitle", {
-          productName: getBrandName("ProductName"),
-        })}
+        title={t("RoomsTour:RoomsWelcomeTitle")}
         features={features}
         canTakeTour={!isMobileView}
         onStart={onStart}
@@ -204,53 +169,36 @@ const FilesTour = ({
 
 export default inject(
   ({
+    authStore,
     userStore,
     settingsStore,
     filesStore,
     treeFoldersStore,
     clientLoadingStore,
     publicRoomStore,
-    filesTourStore,
+    roomsTourStore,
   }: TStore) => {
-    const {
-      myFolder,
-      myFolderId,
-      sharedWithMeFolder,
-      recentFolderId,
-      favoritesFolderId,
-      recycleBinFolderId,
-      isPersonalRoom,
-      isRoot,
-    } = treeFoldersStore;
+    const { roomsFolder, roomsFolderId, isRoomsFolderRoot, isRoot } =
+      treeFoldersStore;
 
-    const isVisitor = userStore?.user?.isVisitor;
-    const hasMyDocuments = !!myFolder && !isVisitor;
-    const sharedWithMeId = sharedWithMeFolder?.id;
+    const { isAdmin, isRoomAdmin } = authStore;
 
     return {
-      filesTourStore,
+      roomsTourStore,
       userId: userStore?.user?.id,
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
-      isPersonalRoot:
-        isPersonalRoom && isRoot && !publicRoomStore.isPublicRoom,
-      canCreate: !!myFolder?.security?.Create,
+      isRoomsRoot:
+        isRoomsFolderRoot && isRoot && !publicRoomStore.isPublicRoom,
+      // Only room admins / admins see the rooms creation banner and the
+      // Templates sidebar item (same gate as ClientArticleSidebar).
+      canCreate: (isAdmin || isRoomAdmin) && !!roomsFolder,
+      canUseTemplates: isAdmin || isRoomAdmin,
       showFilter: !filesStore.isEmptyPage,
-      hasItems: filesStore.filesList?.length > 0,
-      isTableView: filesStore.viewAs === "table",
-      // Sidebar anchors (ClientArticleSidebar → NavMenu data-item-id). Item
-      // ids of tree sections are their folder ids, so they mirror the same
-      // gating the sidebar itself applies (Trash is hidden from guests).
-      myDocumentsId:
-        hasMyDocuments && myFolderId != null ? String(myFolderId) : null,
-      sharedId: sharedWithMeId != null ? String(sharedWithMeId) : null,
-      recentId: recentFolderId != null ? String(recentFolderId) : null,
-      favoritesId: favoritesFolderId != null ? String(favoritesFolderId) : null,
-      trashId:
-        hasMyDocuments && recycleBinFolderId != null
-          ? String(recycleBinFolderId)
-          : null,
+      // Sidebar anchor (ClientArticleSidebar → NavMenu data-item-id). The Rooms
+      // parent item id is the tree folder id.
+      roomsId: roomsFolderId != null ? String(roomsFolderId) : null,
     };
   },
-)(observer(FilesTour));
+)(observer(RoomsTour));

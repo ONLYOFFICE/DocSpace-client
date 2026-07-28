@@ -37,47 +37,54 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useJoyride, EVENTS, STATUS, ACTIONS } from "react-joyride";
+import { useJoyride, EVENTS, STATUS, ACTIONS, type Step } from "react-joyride";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
-import type FilesTourStore from "SRC_DIR/store/FilesTourStore";
+import type TourStore from "SRC_DIR/store/TourStore";
 
-import {
-  getTourSteps,
-  type TourStepCallbacks,
-  type TourStepFlags,
-} from "./tourSteps";
 import TourTooltip from "./TourTooltip";
 
-export default function useFilesTour(
-  tourStore: FilesTourStore,
-  flags: TourStepFlags,
+export type TourStepCallbacks = {
+  getSignal: () => AbortSignal | undefined;
+};
+
+/**
+ * Shared react-joyride driver for the section onboarding tours. Owns the tour
+ * lifecycle (a fresh AbortSignal per step, teardown, and completion on
+ * end/skip/close/target-not-found) and returns the portal-ready <Tour/>
+ * element plus stable `callbacks` a section's step builder threads into each
+ * step's `before` hook.
+ *
+ * `buildSteps(callbacks)` is called on every render; memoize its inputs in the
+ * caller so the steps array is stable.
+ */
+export default function useTour(
+  tourStore: TourStore,
+  buildSteps: (callbacks: TourStepCallbacks) => Step[],
   isMobileView: boolean,
+  logLabel: string,
 ) {
   const { isBase } = useTheme();
-  const { t } = useTranslation(["FilesTour", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const stepAbortRef = useRef<AbortController | null>(null);
+  const currentSignalRef = useRef<AbortSignal | undefined>(undefined);
+
   const freshStepSignal = () => {
     stepAbortRef.current?.abort();
     const ctrl = new AbortController();
     stepAbortRef.current = ctrl;
+    currentSignalRef.current = ctrl.signal;
     return ctrl.signal;
   };
-  const currentSignalRef = useRef<AbortSignal | undefined>(undefined);
 
-  const tourCallbacks = useMemo<TourStepCallbacks>(
-    () => ({
-      getSignal: () => currentSignalRef.current,
-    }),
+  const callbacks = useMemo<TourStepCallbacks>(
+    () => ({ getSignal: () => currentSignalRef.current }),
     [],
   );
 
-  const steps = useMemo(
-    () => getTourSteps(t, tourCallbacks, flags),
-    [t, tourCallbacks, flags],
-  );
+  const steps = buildSteps(callbacks);
 
   const { on, Tour } = useJoyride({
     continuous: true,
@@ -143,7 +150,7 @@ export default function useFilesTour(
     };
 
     const unsubBeforeHook = on(EVENTS.STEP_BEFORE_HOOK, () => {
-      currentSignalRef.current = freshStepSignal();
+      freshStepSignal();
     });
 
     const unsubAfter = on(EVENTS.STEP_AFTER, (data) => {
@@ -168,7 +175,7 @@ export default function useFilesTour(
       if (process.env.NODE_ENV !== "production") {
         // eslint-disable-next-line no-console
         console.warn(
-          "[files tour] target not found, ending tour:",
+          `[${logLabel}] target not found, ending tour:`,
           data.step?.target,
         );
       }
@@ -182,7 +189,7 @@ export default function useFilesTour(
       unsubStatus();
       unsubTargetNotFound();
     };
-  }, [on, tourStore]);
+  }, [on, tourStore, logLabel]);
 
   return { Tour: isMobileView ? null : Tour };
 }

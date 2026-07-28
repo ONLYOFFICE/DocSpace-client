@@ -39,9 +39,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { getBrandName } from "@docspace/shared/constants/brands";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 
-import type FilesTourStore from "SRC_DIR/store/FilesTourStore";
+import type AiAgentsTourStore from "SRC_DIR/store/AiAgentsTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
@@ -49,81 +49,57 @@ import WelcomeTourDialog, {
   type TourFeature,
 } from "SRC_DIR/components/Tour/WelcomeTourDialog";
 
-import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
-import SharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
-import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
+import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
+import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import ChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-arbiter.react.svg?url";
 import SecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
 
-type FilesTourProps = {
-  filesTourStore: FilesTourStore;
+type AiAgentsTourProps = {
+  aiAgentsTourStore: AiAgentsTourStore;
   userId?: string;
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
-  isPersonalRoot: boolean;
-  canCreate: boolean;
+  isAiAgentsRoot: boolean;
+  canCreateRooms: boolean;
+  aiReady: boolean;
   showFilter: boolean;
-  hasItems: boolean;
-  isTableView: boolean;
-  myDocumentsId: string | null;
-  sharedId: string | null;
-  recentId: string | null;
-  favoritesId: string | null;
-  trashId: string | null;
+  aiAgentsId: string | null;
 };
 
-const FilesTour = ({
-  filesTourStore,
+const AiAgentsTour = ({
+  aiAgentsTourStore,
   userId,
   currentDeviceType,
   isFrame,
   firstLoad,
-  isPersonalRoot,
-  canCreate,
+  isAiAgentsRoot,
+  canCreateRooms,
+  aiReady,
   showFilter,
-  hasItems,
-  isTableView,
-  myDocumentsId,
-  sharedId,
-  recentId,
-  favoritesId,
-  trashId,
-}: FilesTourProps) => {
-  const { t } = useTranslation(["FilesTour", "Common"]);
+  aiAgentsId,
+}: AiAgentsTourProps) => {
+  const { t } = useTranslation(["AiAgentsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
+  // Agent creation gating mirrors Home: AI must be ready (or chat-lib profiles
+  // already loaded, which can lead the portal /ai/config flag) and the user
+  // able to manage agents. `useStores` is safe here — this host renders inside
+  // Home, under the AiAgentProviders that also back the section itself.
+  const { useProfilesStore } = useStores();
+  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const canCreate = (aiReady || hasAiProfiles) && canCreateRooms;
+
   useEffect(() => {
-    if (userId) filesTourStore.hydrateForUser(userId);
-  }, [userId, filesTourStore]);
+    if (userId) aiAgentsTourStore.hydrateForUser(userId);
+  }, [userId, aiAgentsTourStore]);
 
   const flags = useMemo<TourStepFlags>(
-    () => ({
-      isDesktop,
-      canCreate,
-      showFilter,
-      hasItems,
-      isTableView,
-      myDocumentsId,
-      sharedId,
-      recentId,
-      favoritesId,
-      trashId,
-    }),
-    [
-      isDesktop,
-      canCreate,
-      showFilter,
-      hasItems,
-      isTableView,
-      myDocumentsId,
-      sharedId,
-      recentId,
-      favoritesId,
-      trashId,
-    ],
+    () => ({ isDesktop, canCreate, showFilter, aiAgentsId }),
+    [isDesktop, canCreate, showFilter, aiAgentsId],
   );
 
   const buildSteps = useCallback(
@@ -132,33 +108,33 @@ const FilesTour = ({
   );
 
   const { Tour } = useTour(
-    filesTourStore,
+    aiAgentsTourStore,
     buildSteps,
     isMobileView,
-    "files tour",
+    "ai agents tour",
   );
 
   const features = useMemo<TourFeature[]>(
     () => [
       {
-        icon: DocumentsReactSvgUrl,
-        title: t("FilesTour:FeatureDocumentsTitle"),
-        description: t("FilesTour:FeatureDocuments"),
+        icon: AiAgentsReactSvgUrl,
+        title: t("AiAgentsTour:FeatureAgentsTitle"),
+        description: t("AiAgentsTour:FeatureAgents"),
       },
       {
-        icon: SharedReactSvgUrl,
-        title: t("FilesTour:FeatureSharingTitle"),
-        description: t("FilesTour:FeatureSharing"),
+        icon: KnowledgeReactSvgUrl,
+        title: t("AiAgentsTour:FeatureKnowledgeTitle"),
+        description: t("AiAgentsTour:FeatureKnowledge"),
       },
       {
-        icon: SearchReactSvgUrl,
-        title: t("FilesTour:FeatureOrganizeTitle"),
-        description: t("FilesTour:FeatureOrganize"),
+        icon: ChatReactSvgUrl,
+        title: t("AiAgentsTour:FeatureChatTitle"),
+        description: t("AiAgentsTour:FeatureChat"),
       },
       {
         icon: SecurityReactSvgUrl,
-        title: t("FilesTour:FeatureSecurityTitle"),
-        description: t("FilesTour:FeatureSecurity"),
+        title: t("AiAgentsTour:FeatureControlTitle"),
+        description: t("AiAgentsTour:FeatureControl"),
       },
     ],
     [t],
@@ -168,30 +144,28 @@ const FilesTour = ({
 
   const welcomeVisible =
     !firstLoad &&
-    isPersonalRoot &&
-    filesTourStore.isHydrated &&
-    !filesTourStore.tourCompleted &&
-    !filesTourStore.isRunning;
+    isAiAgentsRoot &&
+    aiAgentsTourStore.isHydrated &&
+    !aiAgentsTourStore.tourCompleted &&
+    !aiAgentsTourStore.isRunning;
 
   const onStart = () => {
     if (isMobileView) {
-      filesTourStore.completeTour();
+      aiAgentsTourStore.completeTour();
       return;
     }
-    filesTourStore.startTour();
+    aiAgentsTourStore.startTour();
   };
 
   const onSkip = () => {
-    filesTourStore.completeTour();
+    aiAgentsTourStore.completeTour();
   };
 
   return (
     <>
       <WelcomeTourDialog
         visible={welcomeVisible}
-        title={t("FilesTour:TourWelcomeTitle", {
-          productName: getBrandName("ProductName"),
-        })}
+        title={t("AiAgentsTour:AgentsWelcomeTitle")}
         features={features}
         canTakeTour={!isMobileView}
         onStart={onStart}
@@ -204,53 +178,33 @@ const FilesTour = ({
 
 export default inject(
   ({
+    authStore,
     userStore,
     settingsStore,
     filesStore,
     treeFoldersStore,
     clientLoadingStore,
     publicRoomStore,
-    filesTourStore,
+    aiAgentsTourStore,
   }: TStore) => {
-    const {
-      myFolder,
-      myFolderId,
-      sharedWithMeFolder,
-      recentFolderId,
-      favoritesFolderId,
-      recycleBinFolderId,
-      isPersonalRoom,
-      isRoot,
-    } = treeFoldersStore;
+    const { aiAgentsFolderId, isAIAgentsFolderRoot, isRoot } = treeFoldersStore;
 
-    const isVisitor = userStore?.user?.isVisitor;
-    const hasMyDocuments = !!myFolder && !isVisitor;
-    const sharedWithMeId = sharedWithMeFolder?.id;
+    const { isAdmin, isRoomAdmin } = authStore;
 
     return {
-      filesTourStore,
+      aiAgentsTourStore,
       userId: userStore?.user?.id,
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
-      isPersonalRoot:
-        isPersonalRoom && isRoot && !publicRoomStore.isPublicRoom,
-      canCreate: !!myFolder?.security?.Create,
+      isAiAgentsRoot:
+        isAIAgentsFolderRoot && isRoot && !publicRoomStore.isPublicRoom,
+      canCreateRooms: isAdmin || isRoomAdmin,
+      aiReady: !!settingsStore.aiConfig?.aiReady,
       showFilter: !filesStore.isEmptyPage,
-      hasItems: filesStore.filesList?.length > 0,
-      isTableView: filesStore.viewAs === "table",
-      // Sidebar anchors (ClientArticleSidebar → NavMenu data-item-id). Item
-      // ids of tree sections are their folder ids, so they mirror the same
-      // gating the sidebar itself applies (Trash is hidden from guests).
-      myDocumentsId:
-        hasMyDocuments && myFolderId != null ? String(myFolderId) : null,
-      sharedId: sharedWithMeId != null ? String(sharedWithMeId) : null,
-      recentId: recentFolderId != null ? String(recentFolderId) : null,
-      favoritesId: favoritesFolderId != null ? String(favoritesFolderId) : null,
-      trashId:
-        hasMyDocuments && recycleBinFolderId != null
-          ? String(recycleBinFolderId)
-          : null,
+      // Sidebar anchor (ClientArticleSidebar → NavMenu data-item-id). The AI
+      // Agents parent item id is the tree folder id.
+      aiAgentsId: aiAgentsFolderId != null ? String(aiAgentsFolderId) : null,
     };
   },
-)(observer(FilesTour));
+)(observer(AiAgentsTour));

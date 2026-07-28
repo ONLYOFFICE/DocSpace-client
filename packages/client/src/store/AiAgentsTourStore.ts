@@ -35,10 +35,10 @@
 
 import TourStore from "./TourStore";
 
-class FilesTourStore extends TourStore {
+class AiAgentsTourStore extends TourStore {
   constructor() {
-    super("files_tour_completed");
+    super("ai_agents_tour_completed");
   }
 }
 
-export default FilesTourStore;
+export default AiAgentsTourStore;

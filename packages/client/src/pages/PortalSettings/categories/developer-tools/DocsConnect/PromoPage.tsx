@@ -152,7 +152,7 @@ const PromoPage = ({
           fontWeight={600}
           onClick={onReadApiDocs}
         >
-          {t("Common:ReadApiDocumentation")}
+          {t("ReadApiDocumentation")}
         </Link>
       </div>
 

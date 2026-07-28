@@ -174,34 +174,36 @@ const Preview = ({
         ) : null
       ) : (
         <div
-          className={`${styles.previewEditor} ${
-            view === "editor" ? "" : styles.previewHidden
+          className={`${styles.previewEditorSlot} ${
+            view === "editor" ? "" : styles.previewEditorSlotHidden
           }`}
         >
-          {editorError ? (
-            <Text className={styles.muted}>
-              {t("DocsConnect:EditorPreviewFailed")}
-            </Text>
-          ) : (
-            <>
-              {!documentReady ? (
-                <div className={styles.previewLoader}>
-                  <Loader type={LoaderTypes.rombs} size="40px" />
-                </div>
-              ) : null}
-              {token ? (
-                <DocumentEditor
-                  id="docs-connect-preview-editor"
-                  documentServerUrl={`${serverUrl}/`}
-                  config={{ ...config, token }}
-                  width="100%"
-                  height="100%"
-                  onLoadComponentError={() => setEditorError(true)}
-                  events_onDocumentReady={() => setDocumentReady(true)}
-                />
-              ) : null}
-            </>
-          )}
+          <div className={styles.previewEditor}>
+            {editorError ? (
+              <Text className={styles.muted}>
+                {t("DocsConnect:EditorPreviewFailed")}
+              </Text>
+            ) : (
+              <>
+                {!documentReady ? (
+                  <div className={styles.previewLoader}>
+                    <Loader type={LoaderTypes.rombs} size="40px" />
+                  </div>
+                ) : null}
+                {token ? (
+                  <DocumentEditor
+                    id="docs-connect-preview-editor"
+                    documentServerUrl={`${serverUrl}/`}
+                    config={{ ...config, token }}
+                    width="100%"
+                    height="100%"
+                    onLoadComponentError={() => setEditorError(true)}
+                    events_onDocumentReady={() => setDocumentReady(true)}
+                  />
+                ) : null}
+              </>
+            )}
+          </div>
         </div>
       )}
 

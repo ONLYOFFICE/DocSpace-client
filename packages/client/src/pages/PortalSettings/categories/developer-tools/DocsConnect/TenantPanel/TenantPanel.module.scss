@@ -330,11 +330,26 @@
 }
 
 .preview {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 24px;
   width: 100%;
   padding-top: 20px;
+}
+
+.previewEditorSlot {
+  width: 100%;
+}
+
+.previewEditorSlotHidden {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .previewEditor {
@@ -353,10 +368,6 @@
   align-items: center;
   justify-content: center;
   background-color: var(--background-color);
-}
-
-.previewHidden {
-  display: none;
 }
 
 .demoCode {

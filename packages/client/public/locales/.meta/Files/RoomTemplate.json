@@ -3,7 +3,7 @@
   "content": "Room template",
   "content_en_sha1_hash": "fdbb1ce823b57a9b8c778f4202dca453bf47d748",
   "created_at": "2025-05-19T21:30:56.152Z",
-  "updated_at": "2026-07-27T13:07:50.698Z",
+  "updated_at": "2026-07-28T07:30:59.872Z",
   "comment": {
     "text": "This is a label identifying a room as a template. It appears in the information panel when viewing details of a room that has been designated as a template.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 262,
+      "line_number": 269,
       "context": "},\n // Opens the Templates list (sidebar Rooms → Templates).\n {\n id: \"quick-use-template\",\n icon: <UseRoomTemplateIllustrationIcon />,\n label: t(\"Files:RoomTemplate\"),\n onClick: () => goTemplates(userId),\n },\n aiChatItems,\n ],\n [t, currentFolderId, userId, aiChatItems],",
       "module": "/packages/client"
     },

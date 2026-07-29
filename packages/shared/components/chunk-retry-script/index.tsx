@@ -33,37 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import {
-  canReloadOnChunkError,
-  scheduleChunkErrorReload,
-} from "./chunk-load-error";
+import { chunkRetryInlineScript } from "../../utils/chunk-retry-script";
 
-const RELOAD_KEY = "retry-lazy-refreshed";
+// Inline bootstrap for the <head> of every Next.js app in the monorepo:
+// retries Next.js chunk loads dropped by background throttling or a lost
+// connection. Must be rendered inside <head> of the root layout.
+const ChunkRetryScript = () => {
+  return (
+    <script
+      id="chunk-retry"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: bootstrap script must run before hydration to retry failed Next.js chunk loads
+      dangerouslySetInnerHTML={{ __html: chunkRetryInlineScript }}
+    />
+  );
+};
 
-export default function componentLoader(lazyComponent: () => Promise<unknown>) {
-  return new Promise((resolve) => {
-    lazyComponent()
-      .then((component: unknown) => {
-        resolve(component);
-      })
-      .catch((error: unknown) => {
-        if (canReloadOnChunkError(error, RELOAD_KEY)) {
-          scheduleChunkErrorReload(RELOAD_KEY);
-          return;
-        }
-
-        const { message, stack } = error as Error;
-
-        try {
-          window.sessionStorage.setItem(
-            "errorLog",
-            JSON.stringify({ message, stack }),
-          );
-        } catch {
-          // sessionStorage unavailable: navigate without the error log.
-        }
-
-        window.location.replace(`/error/520`);
-      });
-  });
-}
+export default ChunkRetryScript;

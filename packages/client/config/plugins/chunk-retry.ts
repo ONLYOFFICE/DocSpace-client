@@ -33,37 +33,42 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import {
-  canReloadOnChunkError,
-  scheduleChunkErrorReload,
-} from "./chunk-load-error";
+import { type Plugin } from "vite";
 
-const RELOAD_KEY = "retry-lazy-refreshed";
+// Relative import: the Vite config is bundled by esbuild before any
+// workspace alias resolution is available.
+import { buildChunkRetryInlineScript } from "../../../shared/utils/chunk-retry-script";
 
-export default function componentLoader(lazyComponent: () => Promise<unknown>) {
-  return new Promise((resolve) => {
-    lazyComponent()
-      .then((component: unknown) => {
-        resolve(component);
-      })
-      .catch((error: unknown) => {
-        if (canReloadOnChunkError(error, RELOAD_KEY)) {
-          scheduleChunkErrorReload(RELOAD_KEY);
-          return;
-        }
+// URL pattern of the assets emitted by this app's production build:
+// JS bundles under /static/js/, the style bundle under /static/styles/ and
+// the shared fonts stylesheet under /static/css/.
+const CLIENT_ASSET_PATTERN =
+  "/static/(?:js/.+?\\.js|(?:styles|css)/.+?\\.css)";
 
-        const { message, stack } = error as Error;
+// ---------------------------------------------------------------------------
+// Custom plugin: inline the shared chunk-retry bootstrap into <head>.
+// It retries bundle loads dropped by background throttling or a lost
+// connection (see @docspace/shared/utils/chunk-retry-script). Injected only
+// for production builds: in dev Vite serves unbundled modules from /src and
+// HMR already handles recovery.
+// ---------------------------------------------------------------------------
+export const chunkRetryPlugin = (): Plugin => {
+  return {
+    name: "chunk-retry-inline",
+    apply: "build",
 
-        try {
-          window.sessionStorage.setItem(
-            "errorLog",
-            JSON.stringify({ message, stack }),
-          );
-        } catch {
-          // sessionStorage unavailable: navigate without the error log.
-        }
-
-        window.location.replace(`/error/520`);
-      });
-  });
-}
+    transformIndexHtml: {
+      order: "pre",
+      handler() {
+        return [
+          {
+            tag: "script",
+            attrs: { id: "chunk-retry" },
+            children: buildChunkRetryInlineScript(CLIENT_ASSET_PATTERN),
+            injectTo: "head-prepend",
+          },
+        ];
+      },
+    },
+  };
+};

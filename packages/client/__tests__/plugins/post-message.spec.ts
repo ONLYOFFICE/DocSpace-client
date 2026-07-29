@@ -83,7 +83,7 @@ test.describe("PostMessage Plugin — IPostMessagePlugin via profile menu", () =
 
     await clickOpenPanelItem(page);
 
-    const dialog = page.getByTestId("modal-dialog");
+    const dialog = page.getByTestId("plugin_modal").getByTestId("modal-dialog");
     await expect(dialog).toBeVisible();
 
     const iframe = dialog.locator("iframe[name='post-message-frame']");
@@ -135,7 +135,7 @@ test.describe("PostMessage Plugin — IPostMessagePlugin via profile menu", () =
 
     await clickOpenPanelItem(page);
 
-    const dialog = page.getByTestId("modal-dialog");
+    const dialog = page.getByTestId("plugin_modal").getByTestId("modal-dialog");
     await expect(dialog).toBeVisible();
 
     // Access the button inside the sandboxed iframe and click it.

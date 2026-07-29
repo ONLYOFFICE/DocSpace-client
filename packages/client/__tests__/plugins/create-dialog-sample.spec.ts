@@ -42,7 +42,7 @@ import { expect, test, TEST_PORT } from "../fixtures/base";
 const PLUGIN_REQUEST_URL = "**/plugins/create-dialog-sample/plugin.js";
 
 const PERSONAL_FOLDER_URL = "/rooms/personal/filter?folder=12764";
-const DLG = "create_plugin_folder";
+const DLG = "new_folder";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -114,7 +114,7 @@ test.describe("Create Dialog Sample Plugin — ICreateDialog via main button", (
 
     await clickCreateFolderItem(page);
 
-    const header = page.locator(".modal-header");
+    const header = page.getByTestId(`${DLG}_dialog`).locator(".modal-header");
     await expect(header).toContainText("Create Plugin Folder");
 
     await expectScreenshot(page, [

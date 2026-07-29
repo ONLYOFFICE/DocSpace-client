@@ -105,7 +105,7 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
 
     await clickAboutItem(page);
 
-    await expect(page.getByTestId("modal-dialog")).toBeVisible();
+    await expect(page.getByTestId("plugin_modal").getByTestId("modal-dialog")).toBeVisible();
 
     await expectScreenshot(page, [
       "desktop",
@@ -126,7 +126,9 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
 
     await clickAboutItem(page);
 
-    await expect(page.locator(".modal-header")).toContainText(
+    await expect(
+      page.getByTestId("plugin_modal").getByTestId("modal-dialog").locator(".modal-header"),
+    ).toContainText(
       "About Modal Dialog Sample",
     );
   });
@@ -143,7 +145,7 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
 
     await clickAboutItem(page);
 
-    const dialog = page.getByTestId("modal-dialog");
+    const dialog = page.getByTestId("plugin_modal").getByTestId("modal-dialog");
     await expect(dialog).toContainText("This plugin demonstrates IModalDialog");
   });
 
@@ -173,11 +175,11 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
 
     await clickAboutItem(page);
 
-    await expect(page.getByTestId("modal-dialog")).toBeVisible();
+    await expect(page.getByTestId("plugin_modal").getByTestId("modal-dialog")).toBeVisible();
 
     await page.getByRole("button", { name: "Close" }).click();
 
-    await expect(page.getByTestId("modal-dialog")).not.toBeVisible();
+    await expect(page.getByTestId("plugin_modal").getByTestId("modal-dialog")).toHaveCount(0);
   });
 
   // -- 7. x button (onClose) dismisses the dialog ---------------------------
@@ -192,12 +194,15 @@ test.describe("Modal Dialog Sample Plugin — IModalDialog via profile menu", ()
 
     await clickAboutItem(page);
 
-    await expect(page.getByTestId("modal-dialog")).toBeVisible();
+    await expect(page.getByTestId("plugin_modal").getByTestId("modal-dialog")).toBeVisible();
 
     // The x close button inside the modal header.
-    await page.getByTestId("aside_header_close_icon_button").click();
+    await page
+      .getByTestId("plugin_modal")
+      .getByTestId("aside_header_close_icon_button")
+      .click();
 
-    await expect(page.getByTestId("modal-dialog")).not.toBeVisible();
+    await expect(page.getByTestId("plugin_modal").getByTestId("modal-dialog")).toHaveCount(0);
   });
 });
 

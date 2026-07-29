@@ -54,24 +54,38 @@ const chunkRetryBootstrap = () => {
   const MAX_RETRIES = 3;
   const MAX_RELOADS = 2;
   const RELOAD_KEY = "chunk-retry-reload-count";
-  const attempts: Record<string, number> = {};
+  let attempts: Record<string, number> = {};
   let reloading = false;
   let hadFailure = false;
 
-  // Retrying while the tab is still hidden would most likely fail for the
-  // same reason the original load did, so wait for visibility first.
-  const whenVisible = (fn: () => void) => {
-    if (document.visibilityState === "visible") {
+  // Retrying while the tab is still hidden or the device is offline would
+  // most likely fail for the same reason the original load did, so wait
+  // until the page is both visible and connected. onLine === false is the
+  // only reliable signal (true does not guarantee connectivity), which is
+  // why it may only defer a retry, never cancel one.
+  const isReady = () =>
+    document.visibilityState === "visible" && navigator.onLine !== false;
+
+  const whenReady = (fn: () => void) => {
+    if (isReady()) {
       fn();
       return;
     }
     const handler = () => {
-      if (document.visibilityState !== "visible") return;
+      if (!isReady()) return;
       document.removeEventListener("visibilitychange", handler);
+      window.removeEventListener("online", handler);
       fn();
     };
     document.addEventListener("visibilitychange", handler);
+    window.addEventListener("online", handler);
   };
+
+  // Failures while offline say nothing about the assets themselves, so a
+  // restored connection grants every chunk a fresh retry budget.
+  window.addEventListener("online", () => {
+    attempts = {};
+  });
 
   const reloadCount = () => {
     try {
@@ -98,7 +112,7 @@ const chunkRetryBootstrap = () => {
     } catch {
       // Unreachable: reloadCount() already exhausted the budget above.
     }
-    whenVisible(() => {
+    whenReady(() => {
       window.location.reload();
     });
   };
@@ -125,7 +139,7 @@ const chunkRetryBootstrap = () => {
     const attempt = attempts[base];
     const delay = 300 * 2 ** count;
 
-    whenVisible(() => {
+    whenReady(() => {
       window.setTimeout(() => {
         let next: HTMLScriptElement | HTMLLinkElement;
         if (node.tagName === "LINK") {

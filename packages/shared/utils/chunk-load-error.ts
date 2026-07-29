@@ -86,19 +86,27 @@ export const canReloadOnChunkError = (
   return Date.now() - lastReloadAt(storageKey) > RELOAD_WINDOW_MS;
 };
 
-// Reloading while the tab is still hidden would most likely fail for the
-// same reason the original chunk load did, so wait for visibility first.
-const whenVisible = (fn: () => void) => {
-  if (document.visibilityState === "visible") {
+// Reloading while the tab is still hidden or the device is offline would
+// most likely fail for the same reason the original chunk load did, so
+// wait until the page is both visible and connected. onLine === false is
+// the only reliable signal (true does not guarantee connectivity), which
+// is why it may only defer a reload, never cancel one.
+const isReady = () =>
+  document.visibilityState === "visible" && navigator.onLine !== false;
+
+const whenReady = (fn: () => void) => {
+  if (isReady()) {
     fn();
     return;
   }
   const handler = () => {
-    if (document.visibilityState !== "visible") return;
+    if (!isReady()) return;
     document.removeEventListener("visibilitychange", handler);
+    window.removeEventListener("online", handler);
     fn();
   };
   document.addEventListener("visibilitychange", handler);
+  window.addEventListener("online", handler);
 };
 
 export const scheduleChunkErrorReload = (storageKey: string) => {
@@ -106,7 +114,7 @@ export const scheduleChunkErrorReload = (storageKey: string) => {
   // budget only once.
   if (reloadScheduled) return;
   reloadScheduled = true;
-  whenVisible(() => {
+  whenReady(() => {
     try {
       window.sessionStorage.setItem(storageKey, String(Date.now()));
     } catch {

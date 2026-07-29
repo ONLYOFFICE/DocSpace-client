@@ -56,6 +56,13 @@ const setVisibility = (state: DocumentVisibilityState) => {
   });
 };
 
+const setOnline = (value: boolean) => {
+  Object.defineProperty(window.navigator, "onLine", {
+    configurable: true,
+    get: () => value,
+  });
+};
+
 // The module keeps a "reload already scheduled" flag, so every test gets a
 // freshly evaluated copy.
 let mod: typeof import("./chunk-load-error");
@@ -64,15 +71,18 @@ beforeEach(async () => {
   vi.resetModules();
   window.sessionStorage.clear();
   setVisibility("visible");
+  setOnline(true);
   mod = await import("./chunk-load-error");
 });
 
 afterEach(() => {
   vi.restoreAllMocks();
-  // Flush pending visibility-gated reloads so their self-removing
-  // listeners do not leak into the next test.
+  // Flush pending gated reloads so their self-removing listeners do not
+  // leak into the next test.
   setVisibility("visible");
+  setOnline(true);
   document.dispatchEvent(new Event("visibilitychange"));
+  window.dispatchEvent(new Event("online"));
 });
 
 describe("isChunkLoadError", () => {
@@ -206,6 +216,39 @@ describe("scheduleChunkErrorReload", () => {
     expect(
       Number(window.sessionStorage.getItem(RELOAD_KEY)),
     ).toBeGreaterThan(0);
+  });
+
+  it("emulates a mobile network drop: reload waits for connectivity", () => {
+    setOnline(false);
+    mod.scheduleChunkErrorReload(RELOAD_KEY);
+
+    // No reload into the void while the device is offline.
+    expect(reloadMock).not.toHaveBeenCalled();
+    expect(window.sessionStorage.getItem(RELOAD_KEY)).toBeNull();
+
+    // Connectivity returns: the browser fires "online" and the reload
+    // runs with a stamped budget.
+    setOnline(true);
+    window.dispatchEvent(new Event("online"));
+
+    expect(reloadMock).toHaveBeenCalledTimes(1);
+    expect(
+      Number(window.sessionStorage.getItem(RELOAD_KEY)),
+    ).toBeGreaterThan(0);
+  });
+
+  it("requires both visibility and connectivity before reloading", () => {
+    setVisibility("hidden");
+    setOnline(false);
+    mod.scheduleChunkErrorReload(RELOAD_KEY);
+
+    setOnline(true);
+    window.dispatchEvent(new Event("online"));
+    expect(reloadMock).not.toHaveBeenCalled();
+
+    setVisibility("visible");
+    document.dispatchEvent(new Event("visibilitychange"));
+    expect(reloadMock).toHaveBeenCalledTimes(1);
   });
 
   it("blocks a reload loop on the next page load, then self-resets", async () => {

@@ -57,6 +57,13 @@ const setVisibility = (state: DocumentVisibilityState) => {
   });
 };
 
+const setOnline = (value: boolean) => {
+  Object.defineProperty(window.navigator, "onLine", {
+    configurable: true,
+    get: () => value,
+  });
+};
+
 // The inline script registers window/document listeners it never removes
 // (it lives for the whole page). Tests run many script instances in one
 // jsdom window, so every registered listener is recorded and detached
@@ -112,6 +119,7 @@ beforeEach(() => {
   vi.useFakeTimers();
   window.sessionStorage.clear();
   setVisibility("visible");
+  setOnline(true);
   trackListeners(window);
   trackListeners(document);
   runInlineScript();
@@ -194,6 +202,74 @@ describe("chunkRetryInlineScript", () => {
     vi.advanceTimersByTime(300);
 
     expect(scriptsFor(CHUNK_URL)).toHaveLength(2);
+  });
+
+  it("pauses retries while offline and resumes on reconnect", () => {
+    // A mobile connection drops right as the chunks start loading.
+    setOnline(false);
+    failScript(CHUNK_URL);
+
+    // Nothing is retried into the void, no matter how long the outage is.
+    vi.advanceTimersByTime(600_000);
+    expect(scriptsFor(CHUNK_URL)).toHaveLength(1);
+
+    // Connectivity returns: the browser fires "online" and the retry runs.
+    setOnline(true);
+    window.dispatchEvent(new Event("online"));
+    vi.advanceTimersByTime(300);
+
+    expect(scriptsFor(CHUNK_URL)).toHaveLength(2);
+  });
+
+  it("waits for both visibility and connectivity before retrying", () => {
+    setVisibility("hidden");
+    setOnline(false);
+    failScript(CHUNK_URL);
+
+    setOnline(true);
+    window.dispatchEvent(new Event("online"));
+    vi.advanceTimersByTime(600_000);
+    expect(scriptsFor(CHUNK_URL)).toHaveLength(1);
+
+    setVisibility("visible");
+    document.dispatchEvent(new Event("visibilitychange"));
+    vi.advanceTimersByTime(300);
+
+    expect(scriptsFor(CHUNK_URL)).toHaveLength(2);
+  });
+
+  it("grants a fresh retry budget when the connection returns", () => {
+    exhaustRetries(CHUNK_URL);
+
+    // Reconnecting resets the per-chunk attempt counters…
+    window.dispatchEvent(new Event("online"));
+
+    // …so the next failure retries again instead of burning a reload.
+    const injected = scriptsFor(CHUNK_URL);
+    injected[injected.length - 1].dispatchEvent(new Event("error"));
+    vi.advanceTimersByTime(300);
+
+    expect(scriptsFor(CHUNK_URL).length).toBeGreaterThan(injected.length);
+    expect(reloadMock).not.toHaveBeenCalled();
+    expect(window.sessionStorage.getItem(RELOAD_KEY)).toBeNull();
+  });
+
+  it("defers the fallback reload until the connection returns", () => {
+    exhaustRetries(CHUNK_URL);
+
+    setOnline(false);
+    const injected = scriptsFor(CHUNK_URL);
+    injected[injected.length - 1].dispatchEvent(new Event("error"));
+
+    // The budget is consumed immediately, but the reload waits for
+    // connectivity.
+    expect(window.sessionStorage.getItem(RELOAD_KEY)).toBe("1");
+    expect(reloadMock).not.toHaveBeenCalled();
+
+    setOnline(true);
+    window.dispatchEvent(new Event("online"));
+
+    expect(reloadMock).toHaveBeenCalledTimes(1);
   });
 
   it("falls back to a single visibility-gated reload after retries are exhausted", () => {

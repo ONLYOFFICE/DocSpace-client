@@ -132,6 +132,67 @@ test.describe("Chunk load recovery", () => {
     expect(recovered.size).toBeGreaterThan(0);
   });
 
+  test("recovers after a network outage while the editor is loading", async ({
+    page,
+    serverRequestInterceptor,
+    port,
+    baseUrl,
+  }) => {
+    serverRequestInterceptor.use(
+      filesSettingsHandler(port),
+      fileByIdHandler(port, true),
+      fillingStatusHandler(port),
+    );
+
+    // Emulates a mobile connection dropping right as the chunks start
+    // loading: the HTML made it through, the chunks did not.
+    let outage = true;
+    await page.route(CHUNKS_ROUTE, async (route) => {
+      if (outage) {
+        await route.abort("internetdisconnected");
+        return;
+      }
+      await route.continue();
+    });
+
+    await page.goto(`${baseUrl}${PAGE_PATH}`);
+    // setOffline flips navigator.onLine and fires real online/offline
+    // events in the page, exactly like a device losing signal.
+    await page.context().setOffline(true);
+
+    // While offline nothing must be retried into the void.
+    await page.waitForTimeout(3_000);
+    const bootedOffline = await page
+      .evaluate(() =>
+        Boolean((window as { next?: { version?: string } }).next?.version),
+      )
+      .catch(() => false);
+    expect(bootedOffline).toBe(false);
+
+    // Connectivity returns: the online event lifts the gate, restores the
+    // per-chunk retry budgets and the editor finishes bootstrapping.
+    outage = false;
+    await page.context().setOffline(false);
+
+    await expect
+      .poll(
+        () =>
+          page
+            .evaluate(() =>
+              Boolean(
+                (window as { next?: { version?: string } }).next?.version,
+              ),
+            )
+            .catch(() => false),
+        { timeout: 30_000 },
+      )
+      .toBe(true);
+
+    await expect(
+      page.getByTestId("completed_form_vdr_container"),
+    ).toBeVisible();
+  });
+
   test("reloads a bounded number of times when chunks never load", async ({
     page,
     serverRequestInterceptor,

@@ -972,7 +972,8 @@ const sectionFromRoomType = (
       return "publicRoom";
     case RoomsType.VirtualDataRoom:
       return "vdrRoom";
-    // case RoomsType.FormRoom:
+    case RoomsType.FormRoom:
+      return "formSpace";
     // case RoomsType.CustomRoom:
     // case RoomsType.AIRoom:
     //   return "insideRoom";

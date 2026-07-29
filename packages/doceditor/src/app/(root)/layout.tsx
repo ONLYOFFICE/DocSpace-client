@@ -45,9 +45,10 @@ import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/consta
 
 import "@docspace/shared/styles/theme.scss";
 
+import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
+
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
-import ChunkRetryScript from "@/components/ChunkRetryScript";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 import "@/styles/globals.scss";

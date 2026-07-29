@@ -33,8 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { chunkRetryInlineScript } from "@docspace/shared/utils/chunk-retry-script";
+import { chunkRetryInlineScript } from "../../utils/chunk-retry-script";
 
+// Inline bootstrap for the <head> of every Next.js app in the monorepo:
+// retries Next.js chunk loads dropped by background throttling or a lost
+// connection. Must be rendered inside <head> of the root layout.
 const ChunkRetryScript = () => {
   return (
     <script

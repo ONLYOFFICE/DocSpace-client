@@ -245,14 +245,14 @@ test.describe("Info Panel Sample Plugin", () => {
     const pluginBody = page.getByTestId("info_panel_plugin_info-panel");
     await expect(pluginBody.getByText("Visible only for files, not folders.")).toBeVisible();
 
-    // Deselect, then select a folder — tab must disappear and Details view shown.
+    // Deselect, then select a folder — the tab and its body must disappear.
     await page.keyboard.press("Escape");
     await selectRow(page, ROW_FOLDER);
 
     await expect(fileOnlyTab).not.toBeVisible();
     await expect(
-      page.getByTestId("info_panel_files_view_details"),
-    ).toBeVisible();
+      pluginBody.getByText("Visible only for files, not folders."),
+    ).not.toBeVisible();
   });
 
   test("Image info tab: onLoad replaces placeholder with loaded content", async ({

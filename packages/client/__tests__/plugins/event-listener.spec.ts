@@ -64,9 +64,6 @@ test.describe("Event Listener Sample Plugin", () => {
   });
 
   // ── 1. CREATE event ───────────────────────────────────────────────────────────
-  // Open the main-button dropdown and click "New Document".
-  // This dispatches Events.CREATE exactly as the real app does, triggering
-  // the plugin's eventHandler which shows an info toast.
 
   test("CREATE event fires an info toast", async ({ page, baseUrl }) => {
     const pluginLoaded = page.waitForResponse(PLUGIN_REQUEST_URL);
@@ -77,8 +74,7 @@ test.describe("Event Listener Sample Plugin", () => {
     await expect(mainButton).toBeVisible();
     await mainButton.click();
 
-    // "New Document" item — key "docx" becomes data-testid via ContextMenu's SubMenu
-    await page.getByTestId("docx").click();
+    await page.getByTestId("new-document").click();
 
     const toast = page.getByTestId("toast-content");
     await expect(toast).toBeVisible();
@@ -87,9 +83,6 @@ test.describe("Event Listener Sample Plugin", () => {
   });
 
   // ── 2. ROOM_CREATE event ──────────────────────────────────────────────────────
-  // On the shared rooms section the ArticleMainButton renders a single
-  // "Create New Room" button.  Clicking it dispatches Events.ROOM_CREATE,
-  // triggering the plugin's eventHandler which shows a success toast.
 
   test("ROOM_CREATE event fires a success toast", async ({
     page,
@@ -106,9 +99,10 @@ test.describe("Event Listener Sample Plugin", () => {
 
     await expect(page.getByTestId("table-body")).toBeVisible();
 
-    const createRoomBtn = page.getByTestId("create_new_room_button");
-    await expect(createRoomBtn).toBeVisible();
-    await createRoomBtn.click();
+    // Picking a room type dispatches Events.ROOM_CREATE.
+    await page
+      .getByRole("button", { name: "Collaboration room", exact: true })
+      .click();
 
     const toast = page.getByTestId("toast-content");
     await expect(toast).toBeVisible();

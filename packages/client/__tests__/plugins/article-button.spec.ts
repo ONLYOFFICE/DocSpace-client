@@ -155,15 +155,11 @@ test.describe("Article Button Sample Plugin", () => {
       page.locator("#article-button-sample-status-btn"),
     ).toBeVisible();
 
-    // Resize to tablet — the hide-menu toggle gains display:flex via CSS
-    // (desktop mixin no longer applies) but React showText state is unchanged.
+    // Resize to tablet — the sidebar collapses itself at this width.
     await page.setViewportSize({ width: 900, height: 1024 });
 
-    // Collapse the sidebar.
-    await page.locator(".article-hide-menu-container").click();
-
     // Article container must now report collapsed state.
-    await expect(page.getByTestId("article")).toHaveAttribute(
+    await expect(page.locator("#article-container")).toHaveAttribute(
       "data-show-text",
       "false",
     );

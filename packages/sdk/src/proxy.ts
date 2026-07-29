@@ -39,7 +39,6 @@ import type { NextRequest } from "next/server";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 
 import {
-  AGENT_ID_HEADER,
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
   LOCALE_HEADER,

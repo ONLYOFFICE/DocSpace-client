@@ -746,6 +746,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // +
     formSpace: [
       {
         name: t("AiSuggestions:FormSpaceSummarizeSpace"),
@@ -880,6 +881,8 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         ),
       },
     ],
+
+    default: [],
   };
 };
 
@@ -1011,10 +1014,12 @@ export const resolveSuggestionSection = ({
   }
 
   if (isRootFolder) {
-    return rootFolderSection(folderType, rootFolderType, searchArea) ?? "files";
+    return (
+      rootFolderSection(folderType, rootFolderType, searchArea) ?? "default"
+    );
   }
 
-  return sectionFromRoomType(roomType) ?? "files";
+  return sectionFromRoomType(roomType) ?? "default";
 };
 
 export const getSuggestions = (

@@ -61,7 +61,10 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { KnowledgeType } from "@docspace/shared/api/ai/enums";
+import {
+  KnowledgeType,
+  SYSTEM_AI_PROFILE_PROVIDER_TYPE,
+} from "@docspace/shared/api/ai/enums";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
@@ -98,7 +101,9 @@ const KnowledgeComponent = () => {
   const { useProfilesStore } = useStores();
   const hasAIProviders = useProfilesStore((s) => s.profiles.length > 0);
   const hasSystemProvider = useProfilesStore((s) =>
-    s.profiles.some((p) => p.providerType === "onlyoffice"),
+    s.profiles.some(
+      (p) => p.providerType === SYSTEM_AI_PROFILE_PROVIDER_TYPE,
+    ),
   );
   const { aiConfig, fetchAIConfig: getAIConfig } = aiConfigStore;
   // settingsStore.knowledgeSettingsUrl has no SDK equivalent — skip the

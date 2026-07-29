@@ -81,8 +81,10 @@ test.describe("Profile Menu Sample Plugin", () => {
 
     await openProfileMenu(page);
 
-    const accountInfoItem = page.locator("#profile-menu-sample-account-info");
-    const quickHelpItem = page.locator("#profile-menu-sample-quick-help");
+    const accountInfoItem = page.getByTestId(
+      "profile-menu-sample-account-info",
+    );
+    const quickHelpItem = page.getByTestId("profile-menu-sample-quick-help");
 
     await expect(accountInfoItem).toBeVisible();
     await expect(quickHelpItem).toBeVisible();
@@ -103,7 +105,7 @@ test.describe("Profile Menu Sample Plugin", () => {
 
     await openProfileMenu(page);
 
-    await page.locator("#profile-menu-sample-account-info").click();
+    await page.getByTestId("profile-menu-sample-account-info").click();
 
     const toast = page.getByTestId("toast-content");
     await expect(toast).toBeVisible();
@@ -120,7 +122,7 @@ test.describe("Profile Menu Sample Plugin", () => {
 
     await openProfileMenu(page);
 
-    await page.locator("#profile-menu-sample-quick-help").click();
+    await page.getByTestId("profile-menu-sample-quick-help").click();
 
     const toast = page.getByTestId("toast-content");
     await expect(toast).toBeVisible();

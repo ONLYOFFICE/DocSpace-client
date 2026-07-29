@@ -87,7 +87,7 @@ import "@docspace/shared/styles/theme.scss";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
-import { getSuggestions } from "SRC_DIR/helpers/aiSuggestions";
+import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 
 import config from "PACKAGE_FILE";
@@ -166,9 +166,12 @@ const Shell = ({ page = "home", ...rest }) => {
     "AiSuggestions",
   ]);
 
+  // A set rather than a flat list: while files are attached in the composer,
+  // the chat provider swaps the location chips for the file / form ones (it
+  // owns the attachments state).
   const aiSuggestions = useMemo(
     () =>
-      getSuggestions(
+      getSuggestionSet(
         {
           folderType,
           searchArea,

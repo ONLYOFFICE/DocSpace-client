@@ -34,7 +34,10 @@
  */
 import isNil from "lodash/isNil";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
-import type { Suggestion } from "@docspace/ui-kit/ai-agent/providers";
+import type {
+  Suggestion,
+  SuggestionSet,
+} from "@docspace/ui-kit/ai-agent/providers";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -1083,6 +1086,31 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    // Composer attachment the backend flagged as analyzable (a form): the
+    // chips act on the attached file itself, so they need no folder rights.
+    attachedForm: [
+      {
+        name: t("AiSuggestions:AiFormAnalyzeTheForm"),
+        prompt: t("AiSuggestions:AiFormAnalyzeTheFormPrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiFormShowTheFields"),
+        prompt: t("AiSuggestions:AiFormShowTheFieldsPrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiFormWhatIsStillEmpty"),
+        prompt: t("AiSuggestions:AiFormWhatIsStillEmptyPrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiFormCheckTheAnswers"),
+        prompt: t("AiSuggestions:AiFormCheckTheAnswersPrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiFormSummarizeTheResponses"),
+        prompt: t("AiSuggestions:AiFormSummarizeTheResponsesPrompt"),
+      },
+    ],
+
     default: [],
     // `satisfies` (rather than an annotation) keeps the literal section keys
     // for SuggestionSection while typing `requires` as SuggestionAccess.
@@ -1226,14 +1254,39 @@ export const resolveSuggestionSection = ({
   return sectionFromRoomType(roomType);
 };
 
+const toSuggestions = (
+  entries: SuggestionEntry[],
+  context: SuggestionContext,
+): Suggestion[] =>
+  entries
+    .filter((entry) => hasAccess(entry.requires, context))
+    .map(({ name, prompt }) => ({ name, prompt }));
+
 export const getSuggestions = (
   context: SuggestionContext,
   t: TTranslation,
-): Suggestion[] => {
-  const entries: SuggestionEntry[] =
-    getSuggestionsBySection(t)[resolveSuggestionSection(context)];
+): Suggestion[] =>
+  toSuggestions(
+    getSuggestionsBySection(t)[resolveSuggestionSection(context)],
+    context,
+  );
 
-  return entries
-    .filter((entry) => hasAccess(entry.requires, context))
-    .map(({ name, prompt }) => ({ name, prompt }));
+/**
+ * Chips per composer state, for the AI chat provider to choose from: while
+ * files are attached in the composer they are what the user is asking about,
+ * so the location-based section steps aside. The provider owns the switching
+ * — only it sees the attachments store (drag-and-drop, chip removal).
+ */
+export const getSuggestionSet = (
+  context: SuggestionContext,
+  t: TTranslation,
+): Required<SuggestionSet> => {
+  const sections = getSuggestionsBySection(t);
+
+  return {
+    default: getSuggestions(context, t),
+    singleFile: toSuggestions(sections.filesSelectedFile, context),
+    multipleFiles: toSuggestions(sections.filesMultiple, context),
+    analyzableForm: toSuggestions(sections.attachedForm, context),
+  };
 };

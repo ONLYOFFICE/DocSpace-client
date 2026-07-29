@@ -189,7 +189,8 @@ const AgentsEmptyView = () => {
   // Actions:
   // - AI-enabled + admin/owner → [createAIAgent] item.
   // - AI-disabled + admin/owner → ["Go to settings"] button targeting the
-  //   SDK's providers route. Mirrors client's `onGoToAIProviderSettings`
+  //   SDK settings root, which redirects to the landing tab per
+  //   SaaS/standalone. Mirrors client's `onGoToAIProviderSettings`
   //   from EmptyViewContainer.hooks.ts (just rewritten for the SDK
   //   settings tree).
   // - Anyone else (visitor, non-admin disabled view) → no actions.
@@ -220,7 +221,7 @@ const AgentsEmptyView = () => {
               }),
               onClick: (event: React.MouseEvent<HTMLElement>) => {
                 event.preventDefault();
-                router.push("/ai-agents/settings/providers");
+                router.push("/ai-agents/settings");
               },
             },
           ]

@@ -35,7 +35,10 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
-import { chunkRetryInlineScript } from "./chunk-retry-script";
+import {
+  buildChunkRetryInlineScript,
+  chunkRetryInlineScript,
+} from "./chunk-retry-script";
 
 const reloadMock = vi.fn();
 Object.defineProperty(window, "location", {
@@ -330,5 +333,68 @@ describe("chunkRetryInlineScript", () => {
     vi.advanceTimersByTime(10_000);
 
     expect(window.sessionStorage.getItem(RELOAD_KEY)).toBe("2");
+  });
+});
+
+// The parameterized variant used by the Vite-built client app. The default
+// instance from beforeEach stays active but ignores non-Next URLs, so the
+// two do not interfere.
+describe("buildChunkRetryInlineScript", () => {
+  const VITE_PATTERN = "/static/(?:js/.+?\\.js|(?:styles|css)/.+?\\.css)";
+  const VITE_URL =
+    "https://portal.example/static/js/index.abc123.bundle.js";
+
+  const runViteScript = () =>
+    new Function(buildChunkRetryInlineScript(VITE_PATTERN))();
+
+  it("retries assets matching the custom pattern", () => {
+    runViteScript();
+
+    failScript(VITE_URL);
+    vi.advanceTimersByTime(300);
+
+    expect(scriptsFor(VITE_URL)).toHaveLength(2);
+  });
+
+  it("preserves the module type on re-injected scripts", () => {
+    runViteScript();
+
+    const el = document.createElement("script");
+    el.src = VITE_URL;
+    el.type = "module";
+    document.head.appendChild(el);
+    el.dispatchEvent(new Event("error"));
+    vi.advanceTimersByTime(300);
+
+    const scripts = scriptsFor(VITE_URL);
+    expect(scripts).toHaveLength(2);
+    expect(scripts[1].type).toBe("module");
+  });
+
+  it("retries the style bundle", () => {
+    runViteScript();
+
+    const cssUrl = "https://portal.example/static/styles/style.abc.css";
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = cssUrl;
+    document.head.appendChild(link);
+    link.dispatchEvent(new Event("error"));
+    vi.advanceTimersByTime(300);
+
+    const links = Array.from(
+      document.head.querySelectorAll('link[rel="stylesheet"]'),
+    ).filter((el) => (el as HTMLLinkElement).href.startsWith(cssUrl));
+    expect(links).toHaveLength(2);
+  });
+
+  it("ignores assets outside the custom pattern", () => {
+    runViteScript();
+
+    const foreign = "https://portal.example/static/scripts/api.js";
+    failScript(foreign);
+    vi.advanceTimersByTime(10_000);
+
+    expect(scriptsFor(foreign)).toHaveLength(1);
   });
 });

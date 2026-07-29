@@ -44,13 +44,18 @@
 // self-contained: no imports and no references to anything outside its own
 // scope. The unit test executes the serialized string, so a violation
 // fails the suite.
-const chunkRetryBootstrap = () => {
+const chunkRetryBootstrap = (assetPattern?: string) => {
   // Re-injecting a failed initial script lets it self-register in
   // webpackChunk and the bootstrap continues. For chunks requested via a
   // dynamic import() the webpack promise is already rejected by the time
   // the error fires, so re-injection only warms the cache — the page
   // reload fallback is what actually recovers that case.
-  const ASSET_RE = /_next\/static\/(?:chunks\/.+?\.js|css\/.+?\.css)/;
+  //
+  // assetPattern (regex source) overrides the default Next.js asset URLs
+  // for other bundlers — e.g. the Vite-built client app.
+  const ASSET_RE = assetPattern
+    ? new RegExp(assetPattern)
+    : /_next\/static\/(?:chunks\/.+?\.js|css\/.+?\.css)/;
   const MAX_RETRIES = 3;
   const MAX_RELOADS = 2;
   const RELOAD_KEY = "chunk-retry-reload-count";
@@ -206,3 +211,9 @@ const chunkRetryBootstrap = () => {
 // Serialized once at module load; type annotations are erased by the
 // transpiler before toString() ever runs, so the string is plain JS.
 export const chunkRetryInlineScript = `(${chunkRetryBootstrap.toString()})();`;
+
+// Same bootstrap for non-Next bundlers: pass the regex source matching the
+// bundler's script/stylesheet URLs (e.g. Vite's /static/js/... in the
+// client app).
+export const buildChunkRetryInlineScript = (assetPattern: string) =>
+  `(${chunkRetryBootstrap.toString()})(${JSON.stringify(assetPattern)});`;

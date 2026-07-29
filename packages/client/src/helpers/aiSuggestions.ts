@@ -631,61 +631,63 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
-    // AI room — a content-oriented subset of `insideRoom`: analysis and
-    // authoring over the room's files, plus the few structural actions that
-    // still make sense. Role/permission/branding management is intentionally
-    // left out — it is not what the room is used for.
     aiRoom: [
       {
-        name: t("AiSuggestions:InsideRoomSummarizeRoom"),
-        prompt: t("AiSuggestions:InsideRoomSummarizeRoomPrompt"),
+        name: t("AiSuggestions:AiRoomWhatCanIAsk"),
+        prompt: t("AiSuggestions:AiRoomWhatCanIAskPrompt"),
       },
       {
-        name: t("AiSuggestions:InsideRoomSummarizeRoomFiles"),
-        prompt: t("AiSuggestions:InsideRoomSummarizeRoomFilesPrompt"),
+        name: t("AiSuggestions:AiRoomSummarizeTheKnowledgeBase"),
+        prompt: t("AiSuggestions:AiRoomSummarizeTheKnowledgeBasePrompt"),
       },
       {
-        name: t("AiSuggestions:InsideRoomFindADocument"),
-        prompt: t("AiSuggestions:InsideRoomFindADocumentPrompt"),
+        name: t("AiSuggestions:AiRoomShowSourceDocuments"),
+        prompt: t("AiSuggestions:AiRoomShowSourceDocumentsPrompt"),
       },
       {
-        name: t("AiSuggestions:InsideRoomFindImportantFiles"),
-        prompt: t("AiSuggestions:InsideRoomFindImportantFilesPrompt"),
+        name: t("AiSuggestions:AiRoomFindADocument"),
+        prompt: t("AiSuggestions:AiRoomFindADocumentPrompt"),
       },
       {
-        name: t("AiSuggestions:InsideRoomFindTasksAndDeadlines"),
-        prompt: t("AiSuggestions:InsideRoomFindTasksAndDeadlinesPrompt"),
+        name: t("AiSuggestions:AiRoomFindTasksAndDeadlines"),
+        prompt: t("AiSuggestions:AiRoomFindTasksAndDeadlinesPrompt"),
       },
       {
-        name: t("AiSuggestions:InsideRoomCollectRoomDataIntoATable"),
-        prompt: t("AiSuggestions:InsideRoomCollectRoomDataIntoATablePrompt"),
+        name: t("AiSuggestions:AiRoomCompareDocuments"),
+        prompt: t("AiSuggestions:AiRoomCompareDocumentsPrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiRoomFindContradictions"),
+        prompt: t("AiSuggestions:AiRoomFindContradictionsPrompt"),
+      },
+      {
+        name: t("AiSuggestions:AiRoomCreateAReport"),
+        prompt: t("AiSuggestions:AiRoomCreateAReportPrompt"),
         requires: "create",
       },
       {
-        name: t("AiSuggestions:InsideRoomCreateAReportFromTheRoom"),
-        prompt: t("AiSuggestions:InsideRoomCreateAReportFromTheRoomPrompt"),
+        name: t("AiSuggestions:AiRoomCreateAPresentation"),
+        prompt: t("AiSuggestions:AiRoomCreateAPresentationPrompt"),
         requires: "create",
       },
       {
-        name: t("AiSuggestions:InsideRoomCreateAPresentationFromTheRoom"),
-        prompt: t(
-          "AiSuggestions:InsideRoomCreateAPresentationFromTheRoomPrompt",
-        ),
+        name: t("AiSuggestions:AiRoomCollectDataIntoATable"),
+        prompt: t("AiSuggestions:AiRoomCollectDataIntoATablePrompt"),
         requires: "create",
       },
       {
-        name: t("AiSuggestions:InsideRoomUploadFilesToTheRoom"),
-        prompt: t("AiSuggestions:InsideRoomUploadFilesToTheRoomPrompt"),
+        name: t("AiSuggestions:AiRoomTranslateADocument"),
+        prompt: t("AiSuggestions:AiRoomTranslateADocumentPrompt"),
         requires: "create",
       },
       {
-        name: t("AiSuggestions:InsideRoomOrganizeContent"),
-        prompt: t("AiSuggestions:InsideRoomOrganizeContentPrompt"),
-        requires: "create",
+        name: t("AiSuggestions:AiRoomShowSavedResults"),
+        prompt: t("AiSuggestions:AiRoomShowSavedResultsPrompt"),
       },
       {
-        name: t("AiSuggestions:InsideRoomShowRoomInfo"),
-        prompt: t("AiSuggestions:InsideRoomShowRoomInfoPrompt"),
+        name: t("AiSuggestions:AiRoomAddToTheKnowledgeBase"),
+        prompt: t("AiSuggestions:AiRoomAddToTheKnowledgeBasePrompt"),
+        requires: "create",
       },
     ],
 

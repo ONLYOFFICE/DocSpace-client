@@ -45,6 +45,7 @@ import type {
   TDocsConnectWallet,
   TDocsConnectConfigUpdate,
   TDocsConnectDevPackCalculation,
+  TDocsConnectReportStatus,
 } from "./types";
 
 const BASE = "/settings/docscloud";
@@ -304,12 +305,21 @@ export const updateDocsConnectConfig = async (
   })) as TDocsConnectConfig | null;
 };
 
-export const getDocsConnectReport = async (): Promise<string> => {
-  return (await request({
-    method: "post",
-    url: `${BASE}/tenant/quota/report`,
-  })) as string;
-};
+export const startDocsConnectReport =
+  async (): Promise<TDocsConnectReportStatus | null> => {
+    return (await request({
+      method: "post",
+      url: `${BASE}/tenant/quota/report`,
+    })) as TDocsConnectReportStatus | null;
+  };
+
+export const getDocsConnectReportStatus =
+  async (): Promise<TDocsConnectReportStatus | null> => {
+    return (await request({
+      method: "get",
+      url: `${BASE}/tenant/quota/report`,
+    })) as TDocsConnectReportStatus | null;
+  };
 
 export const cancelDocsConnectPlan = async (
   devPackEnabled: boolean,

@@ -92,7 +92,7 @@ export const getSectionCreateButton = ({
     return {
       showMainButton: true,
       mainButtonProps: {
-        text: t("Common:CreateFormSet"),
+        text: t("Common:CreateFormSpace"),
         isDropdown: false,
         model: [],
         onAction: () => onCreateRoom(),
@@ -170,3 +170,4 @@ export const getSectionCreateButton = ({
     },
   };
 };
+

@@ -3,7 +3,7 @@
   "content": "Save your recovery phrase",
   "content_en_sha1_hash": "c975fd6c2798c9b61e0b17b51039d3b639437860",
   "created_at": "2026-05-24T17:27:36.602Z",
-  "updated_at": "2026-06-02T14:21:21.878Z",
+  "updated_at": "2026-07-27T13:07:50.927Z",
   "comment": {
     "text": "Dialog title in the header of the modal used to display the recovery phrase.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 155,
-      "context": "isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {step === \"display\"\n ? t(\"Common:RecoveryPhraseTitle\")\n : t(\"Common:RecoveryQuizTitle\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n {step === \"display\" ? (",
+      "line_number": 158,
+      "context": "displayType={ModalDialogType.modal}\n isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"Common:RecoveryPhraseTitle\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>",
       "module": "/packages/shared"
     }
   ],

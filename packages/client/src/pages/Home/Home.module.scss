@@ -34,16 +34,18 @@
  */
 
 @use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/quick-actions" as quick-actions;
 
 // Quick-actions banner above the files/rooms list (ported from the SDK
-// layouts). Centered, capped to fit the widest banner (Rooms = 5 tiles) in a
-// single row; the 4-tile Files banner stays centered within it. The tiles keep
-// their fixed width, so the grid only wraps (and shows "Show more") when the
-// viewport is genuinely too narrow.
+// layouts). Centered, capped to fit the widest banner (Rooms = 5 room tiles +
+// AI chat = 6) in a single row; narrower banners stay centered within it. The
+// cap is derived from the ui-kit tile metrics — hardcoding it went stale when
+// the tile size/gap changed and clipped the last tile at every width, so
+// "Show more" appeared with room to spare.
 .quickActions {
   margin: 4px auto 16px;
   justify-content: center;
-  max-width: 924px; // 5 tiles * 172px + 4 gaps * 16px
+  max-width: quick-actions.row-width();
   width: 100%;
   flex-shrink: 0;
 }

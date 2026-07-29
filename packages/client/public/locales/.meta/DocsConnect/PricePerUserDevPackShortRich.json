@@ -1,0 +1,29 @@
+{
+  "key_path": "PricePerUserDevPackShortRich",
+  "content": "{{price}} per user <1>(incl. Dev Pack)</1>",
+  "content_en_sha1_hash": "f4b4ab31fc0e5b9c0cf82c39e4ca46cd9d0a08c9",
+  "created_at": "2026-07-27T13:07:48.493Z",
+  "updated_at": "2026-07-27T14:06:09.249Z",
+  "comment": {
+    "text": "Text label in the Tenant Panel statistics section showing the price per user when the Developer Pack is enabled. It includes a formatted currency variable {{price}} and uses tag <1> to style the suffix.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:06:09.249Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 454,
+      "context": "<Text className={styles.muted}>{t(\"DocsConnect:Price\")}</Text>\n <Text fontWeight={600}>\n {devPackEnabled ? (\n <Trans\n t={t}\n i18nKey=\"DocsConnect:PricePerUserDevPackShortRich\"\n values={{\n price: formatCurrencyValue(\n i18n.language,\n pricePerUser,\n currency,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

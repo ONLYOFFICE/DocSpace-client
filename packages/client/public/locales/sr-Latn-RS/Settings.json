@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Unesi ime domena ovako:",
   "DNSSettingsMobile": "Pošaljite vaš zahtev našem timu za podršku, i naši specijalisti će vam pomoći sa podešavanjima.",
   "DNSSettingsNavDescription": "DNS podešavanja su način da postavite alternativni URL za vaš portal.",
+  "DocsConnectPromoDescription": "Povežite {{organizationName}} {{editorsName}} servis hostovan u oblaku sa Docs Connect — samo nalepite njegovu adresu iznad. Bez instalacije, bez održavanja, sopstveni ključevi.",
+  "DocsConnectPromoTitle": "Nemate Document Server za instalaciju?",
   "DocumentService": "Servis za dokumente",
   "DocumentServiceAdvancedSettings": "Napredna podešavanja servera",
   "DocumentServiceAuthHeader": "Zaglavlje za autorizaciju",

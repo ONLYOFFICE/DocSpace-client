@@ -49,6 +49,7 @@ import {
 } from "../../utils";
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useResolvedFileTitle } from "../../hooks/useResolvedFileTitle";
 import { FileFillingFormStatus } from "../../enums";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -91,7 +92,11 @@ export const FillingStatusPanel = ({
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const fileName = getTitleWithoutExtension(file, false);
+  const resolvedTitle = useResolvedFileTitle(file);
+  const fileName = getTitleWithoutExtension(
+    { ...file, title: resolvedTitle },
+    false,
+  );
   const fillingStatus = file.formFillingStatus!;
 
   const color = FILLING_FORM_STATUS_COLORS[fillingStatus];

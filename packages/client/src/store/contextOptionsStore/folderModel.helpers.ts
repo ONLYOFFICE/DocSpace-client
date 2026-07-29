@@ -382,7 +382,20 @@ self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
 
   const showUploadFolder = !(isMobile || isTablet);
 
+  const canCreateEncrypted = self.uploadDataStore.shouldEncryptCurrentUpload();
+
+  const createNewPdfForm: TContextOption = {
+    id: "personal_new-pdf-form",
+    key: "new-pdf-form",
+    label: t("Translations:NewForm"),
+    icon: FormReactSvgUrl,
+    onClick: () => self.onCreate("pdf", t),
+  };
+
   const privateFolderActions = [
+    ...(canCreateEncrypted
+      ? [createNewDoc, createNewSpreadsheet, createNewPresentation, createNewPdfForm]
+      : []),
     createNewFolder,
     { key: "separator", isSeparator: true },
     uploadFiles,

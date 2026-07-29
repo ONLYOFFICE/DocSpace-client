@@ -49,7 +49,19 @@ const initDesktop = (
   fileId: string | number,
   t: Nullable<TTranslation>,
 ) => {
-  const encryptionKeys = cfg?.editorConfig?.encryptionKeys;
+  const keyPairs = cfg?.editorConfig?.encryptionKeys;
+  const keyPair =
+    keyPairs?.find((k) => String(k.userId) === String(user.id)) ??
+    keyPairs?.[0];
+  const encryptionKeys = keyPair
+    ? {
+        privateKeyEnc: keyPair.privateKeyEnc,
+        publicKey: keyPair.publicKey,
+        ...(keyPair.cryptoEngineId
+          ? { cryptoEngineId: keyPair.cryptoEngineId }
+          : {}),
+      }
+    : undefined;
   regDesktop(
     user,
     !!encryptionKeys,

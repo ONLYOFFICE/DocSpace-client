@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Domen adını belə daxil edin:",
   "DNSSettingsMobile": "Sorğunuzu dəstək komandamıza göndərin və mütəxəssislərimiz sizə parametrlərdə kömək edəcəklər.",
   "DNSSettingsNavDescription": "DNS Parametrləri portalınız üçün alternativ URL təyin etməyin bir yoludur.",
+  "DocsConnectPromoDescription": "Docs Connect ilə bulud əsaslı {{organizationName}} {{editorsName}} xidmətini qoşun — sadəcə ünvanını yuxarıda yapışdırın. Quraşdırma yoxdur, texniki qulluq yoxdur, öz açarlarınızla.",
+  "DocsConnectPromoTitle": "Quraşdırılacaq Sənəd Serveri yoxdurmu?",
   "DocumentService": "Sənəd Xidməti",
   "DocumentServiceAdvancedSettings": "Qabaqcıl server parametrləri",
   "DocumentServiceAuthHeader": "Avtorizasiya başlığı",

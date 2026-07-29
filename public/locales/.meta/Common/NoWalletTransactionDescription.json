@@ -3,7 +3,7 @@
   "content": "Once you start using the wallet, the payment history will be displayed here.",
   "content_en_sha1_hash": "436a1d781ae1fef2473dff39be5215aca66e1d5b",
   "created_at": "2026-04-10T13:53:42.811Z",
-  "updated_at": "2026-07-04T11:30:22.081Z",
+  "updated_at": "2026-07-27T13:07:51.088Z",
   "comment": {
     "text": "This is the description text displayed in the transaction history section when no wallet transactions have occurred yet. It informs the user that their payment history will appear here once they start using the wallet.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TransactionBody.tsx",
-      "line_number": 110,
-      "context": "const title = hasAppliedDateFilter\n ? t(\"NoFindingsFound2\")\n : (emptyTitle ?? t(\"NoWalletTransaction\"));\n const description = hasAppliedDateFilter\n ? t(\"NoTransactionsFilter\")\n : (emptyDescription ?? t(\"NoWalletTransactionDescription\"));\n \n const emptyView = (\n <EmptyView\n icon={hasAppliedDateFilter ? filterIcon : emptyIcon}\n title={title}",
+      "line_number": 117,
+      "context": "const description = hasAppliedDateFilter\n ? t(\"NoTransactionsFilter\")\n : (emptyDescription ??\n (isDocsConnect\n ? t(\"NoDocsConnectTransactionDescription\")\n : t(\"NoWalletTransactionDescription\")));\n \n const emptyView = (\n <EmptyView\n icon={hasAppliedDateFilter ? filterIcon : emptyIcon}\n title={title}",
       "module": "/libs/ui-kit"
     }
   ],

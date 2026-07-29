@@ -125,6 +125,8 @@
   "DNSSettingsHint": "Introduceți nume de domeniu în acest mod:",
   "DNSSettingsMobile": "Trimiteţi solicitarea către echipa noastră de asistenţă, care este gata să vă ajute cu setarea.",
   "DNSSettingsNavDescription": "Setări DNS este o modalitate de setare a adresei URL alternative pentru portalul dvs.",
+  "DocsConnectPromoDescription": "Conectați un serviciu {{organizationName}} {{editorsName}} găzduit în cloud cu Docs Connect — introduceți doar adresa acestuia mai sus. Fără instalare, fără mentenanță, propriile chei.",
+  "DocsConnectPromoTitle": "Niciun Document Server de instalat?",
   "DocumentService": "Serviciul de Documente",
   "DocumentServiceAdvancedSettings": "Setări avansate de server",
   "DocumentServiceAuthHeader": "Antet de autorizare",

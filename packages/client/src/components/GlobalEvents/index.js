@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -135,8 +135,6 @@ const GlobalEvents = ({
 
   const { useProfilesStore } = useStores();
   const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
-
-  const eventHandlersList = useRef([]);
 
   const onCreate = useCallback((e) => {
     const { payload } = e;
@@ -453,6 +451,8 @@ const GlobalEvents = ({
   }, [handleCreatePDFFormFile]);
 
   useEffect(() => {
+    const pluginEventHandlers = [];
+
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
     window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
@@ -476,7 +476,7 @@ const GlobalEvents = ({
             item.value.eventHandler(e);
           };
 
-          eventHandlersList.current.push(eventHandler);
+          pluginEventHandlers.push(eventHandler);
 
           window.addEventListener(item.value.eventType, eventHandler);
         });
@@ -505,7 +505,7 @@ const GlobalEvents = ({
           eventListenerItemsList.forEach((item, index) => {
             window.removeEventListener(
               item.value.eventType,
-              eventHandlersList.current[index],
+              pluginEventHandlers[index],
             );
           });
         }

@@ -321,7 +321,9 @@ class DocsConnectStore {
 
   cancelScheduledChange = async () => {
     const info = await cancelDocsConnectScheduledChange(
-      this.info?.devPackEnabled ?? false,
+      this.info?.scheduledChange?.scheduledOnDevPack ??
+        this.info?.devPackEnabled ??
+        false,
     );
     runInAction(() => {
       this.info = info;

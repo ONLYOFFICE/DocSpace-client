@@ -104,6 +104,7 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
+    isAuthenticated,
     loadBaseInfo,
 
     isDesktop,
@@ -646,6 +647,15 @@ const Shell = ({ page = "home", ...rest }) => {
           theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
           isStandalone={standalone}
           isAvailable={isAiChatAvailable}
+          // Anonymous sessions (login redirect, public room, public preview)
+          // would 401 on every AI call; guests are barred from AI both
+          // server-side (endpoint checks) and by role — a guest can never
+          // hold a chat-capable room role (`UseChat` needs RoomManager /
+          // ContentCreator), so excluding the type is exact. Providers stay
+          // mounted for useStores() consumers; only hydration and the chat
+          // UI are switched off. Viewer-role gating inside agent rooms is
+          // handled by `accessRightsStore.canUseChat` in AIAgentView.
+          canUseAi={isAuthenticated && !isGuest}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           hideProfilePicker={isInsideAgentRoom}
@@ -751,6 +761,7 @@ const ShellWrapper = inject(
       },
       language,
       isLoaded,
+      isAuthenticated: authStore.isAuthenticated,
 
       isDesktop: isDesktopClient,
       FirebaseHelper: firebaseHelper,

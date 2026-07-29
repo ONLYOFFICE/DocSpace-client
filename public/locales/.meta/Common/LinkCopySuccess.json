@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-07-27T13:07:50.632Z",
+  "updated_at": "2026-07-28T11:25:41.788Z",
   "comment": {
     "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
@@ -79,7 +79,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 115,
+      "line_number": 116,
       "context": "const origin = window.location.origin;\n \n const url = `${origin}/doceditor?fileId=${completedForm.id}`;\n \n await copyShareLink(url);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleDownload = () => {\n window.open(completedForm.viewUrl, \"_self\");\n };",
       "module": "/packages/doceditor"
     },

@@ -35,6 +35,7 @@
 
 import { isSafari } from "react-device-detect";
 import { TFile } from "@docspace/shared/api/files/types";
+import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 
 export type TDeepLinkConfig = {
   iosPackageId: string;
@@ -121,7 +122,9 @@ export const getDeepLink = (
     email,
     file: {
       id: file?.id,
-      title: file?.title,
+      // for encrypted files the server title is an opaque placeholder;
+      // send the decrypted display name when it is available
+      title: resolveDisplayTitle(file),
       extension: file?.fileExst,
     },
     folder: {

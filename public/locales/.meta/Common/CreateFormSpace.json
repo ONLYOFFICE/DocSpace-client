@@ -1,0 +1,29 @@
+{
+  "key_path": "CreateFormSpace",
+  "content": "Create Form space",
+  "content_en_sha1_hash": "b679d4de30f3c393f4e118ba46859749b669de76",
+  "created_at": "2026-07-28T11:25:01.903Z",
+  "updated_at": "2026-07-28T11:27:06.352Z",
+  "comment": {
+    "text": "Button label used to initiate the creation of a new Form space.",
+    "is_auto": true,
+    "updated_at": "2026-07-28T11:27:06.352Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/getSectionCreateButton.ts",
+      "line_number": 95,
+      "context": "if (!model || model.length === 0) return HIDDEN;\n \n return {\n showMainButton: true,\n mainButtonProps: {\n text: t(\"Common:CreateFormSpace\"),\n isDropdown: false,\n model: [],\n onAction: () => onCreateRoom(),\n },\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

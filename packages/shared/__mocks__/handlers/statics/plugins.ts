@@ -36,14 +36,15 @@
 import { http } from "msw";
 import * as fs from "fs";
 import * as path from "path";
+import { unzipSync, type Unzipped } from "fflate";
 
-// Path to test plugins directory
+// Path to test plugin archives, one <pluginName>.zip per plugin
 const PLUGINS_DIR = path.resolve(
   __dirname,
   "../../../../client/__tests__/plugins/test-plugins",
 );
 
-// Mock plugin JavaScript content (fallback when plugin file not found)
+// Mock plugin JavaScript content (fallback when plugin archive not found)
 const mockPluginJs = `
 (function() {
   // Mock plugin script
@@ -51,67 +52,98 @@ const mockPluginJs = `
 })();
 `;
 
-// Mock plugin CSS content
+// Mock plugin CSS content (fallback when archive has no plugin.css)
 const mockPluginCss = `
 /* Mock plugin styles */
 .mock-plugin { display: block; }
 `;
 
+const archiveCache = new Map<string, Unzipped | null>();
+
+const readArchive = (pluginName: string) => {
+  const cached = archiveCache.get(pluginName);
+
+  if (cached !== undefined) return cached;
+
+  let archive: Unzipped | null = null;
+
+  try {
+    const zip = fs.readFileSync(path.join(PLUGINS_DIR, `${pluginName}.zip`));
+    archive = unzipSync(new Uint8Array(zip));
+  } catch {
+    archive = null;
+  }
+
+  archiveCache.set(pluginName, archive);
+
+  return archive;
+};
+
+const readArchiveEntry = (pluginName: string, entryName: string) =>
+  readArchive(pluginName)?.[entryName] ?? null;
+
+const readArchiveText = (pluginName: string, entryName: string) => {
+  const content = readArchiveEntry(pluginName, entryName);
+
+  return content ? new TextDecoder().decode(content) : null;
+};
+
+const getContentType = (entryName: string) => {
+  switch (path.extname(entryName).toLowerCase()) {
+    case ".png":
+      return "image/png";
+    case ".jpg":
+    case ".jpeg":
+      return "image/jpeg";
+    case ".svg":
+      return "image/svg+xml";
+    case ".gif":
+      return "image/gif";
+    case ".html":
+      return "text/html; charset=utf-8";
+    case ".json":
+      return "application/json; charset=utf-8";
+    case ".css":
+      return "text/css; charset=utf-8";
+    case ".js":
+      return "application/javascript; charset=utf-8";
+    default:
+      return "application/octet-stream";
+  }
+};
+
 export const pluginJsHandler = () => {
   return http.get("*/plugins/:pluginName/plugin.js", ({ params }) => {
-    const { pluginName } = params;
-    const pluginPath = path.join(PLUGINS_DIR, String(pluginName), "plugin.js");
+    const content = readArchiveText(String(params.pluginName), "plugin.js");
 
-    try {
-      const content = fs.readFileSync(pluginPath, "utf-8");
-      return new Response(content, {
-        headers: { "Content-Type": "application/javascript" },
-      });
-    } catch {
-      return new Response(mockPluginJs, {
-        headers: { "Content-Type": "application/javascript" },
-      });
-    }
+    return new Response(content ?? mockPluginJs, {
+      headers: { "Content-Type": "application/javascript; charset=utf-8" },
+    });
   });
 };
 
 export const pluginCssHandler = () => {
-  return http.get("*/plugins/*/plugin.css", () => {
-    return new Response(mockPluginCss, {
-      headers: {
-        "Content-Type": "text/css",
-      },
+  return http.get("*/plugins/:pluginName/plugin.css", ({ params }) => {
+    const content = readArchiveText(String(params.pluginName), "plugin.css");
+
+    return new Response(content ?? mockPluginCss, {
+      headers: { "Content-Type": "text/css; charset=utf-8" },
     });
   });
 };
 
 export const pluginAssetsHandler = () => {
-  return http.get("*/plugins/:pluginName/assets/:assetName", ({ params }) => {
-    const { pluginName, assetName } = params;
-    const assetPath = path.join(
-      PLUGINS_DIR,
-      String(pluginName),
-      "assets",
-      String(assetName).split("?")[0],
+  return http.get("*/plugins/:pluginName/assets/*", ({ request, params }) => {
+    const assetName = new URL(request.url).pathname.split("/assets/")[1] ?? "";
+    const content = readArchiveEntry(
+      String(params.pluginName),
+      `assets/${assetName}`,
     );
 
-    try {
-      const fileBuffer = fs.readFileSync(assetPath);
-      const ext = path.extname(assetPath).toLowerCase();
+    if (!content) return new Response(null, { status: 404 });
 
-      let contentType = "application/octet-stream";
-      if (ext === ".png") contentType = "image/png";
-      else if (ext === ".jpg" || ext === ".jpeg") contentType = "image/jpeg";
-      else if (ext === ".svg") contentType = "image/svg+xml";
-      else if (ext === ".gif") contentType = "image/gif";
-
-      return new Response(new Uint8Array(fileBuffer), {
-        headers: {
-          "Content-Type": contentType,
-        },
-      });
-    } catch {
-      return new Response(null, { status: 404 });
-    }
+    return new Response(content.slice().buffer, {
+      headers: { "Content-Type": getContentType(assetName) },
+    });
   });
 };

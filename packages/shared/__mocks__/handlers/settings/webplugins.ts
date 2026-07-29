@@ -52,7 +52,7 @@ export const mockPlugin1: TAPIPlugin = {
   homePage: "https://github.com/ONLYOFFICE/docspace-plugins",
   pluginName: "Testpluginone",
   scopes: "ContextMenu,InfoPanel,MainButton",
-  image: "icon.png",
+  image: "",
   createBy: {
     id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
     displayName: " Administrator",

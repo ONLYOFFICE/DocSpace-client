@@ -51,7 +51,6 @@ import { FormsSection } from "@/types/forms";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
-import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { sectionFromPathname } from "../_utils/sectionFromPathname";
 
@@ -71,7 +70,6 @@ const filterByFolder = (
 export default function useFormsData() {
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
-  const aiStore = useFormsAiAgentStore();
   const dbSettingsStore = useFormsDbSettingsStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
@@ -143,7 +141,7 @@ export default function useFormsData() {
         case FormsSection.CompletedForms:
           return (
             completedFolder?.id ??
-            aiStore.doneFolderId ??
+            formsSettingsStore.doneFolderId ??
             doneFolderIdRef.current ??
             ""
           );
@@ -151,7 +149,7 @@ export default function useFormsData() {
           return formsSettingsStore.roomId;
       }
     },
-    [pathname, formsSettingsStore, completedFolder, inProgressFolder, aiStore],
+    [pathname, formsSettingsStore, completedFolder, inProgressFolder],
   );
 
   const fetchVirtualFolders = useCallback(
@@ -165,7 +163,7 @@ export default function useFormsData() {
 
       const cachedId =
         virtualFolderType === FolderType.Done
-          ? aiStore.doneFolderId
+          ? formsSettingsStore.doneFolderId
           : virtualFolderType === FolderType.InProgress
             ? formsSettingsStore.inProgressFolderId
             : undefined;
@@ -199,7 +197,7 @@ export default function useFormsData() {
         folderIdRef.current = virtualFolder.id;
 
         if (virtualFolderType === FolderType.Done) {
-          aiStore.setDoneFolderId(virtualFolder.id);
+          formsSettingsStore.setDoneFolderId(virtualFolder.id);
         }
         if (virtualFolderType === FolderType.InProgress) {
           formsSettingsStore.setInProgressFolderId(virtualFolder.id);
@@ -221,7 +219,7 @@ export default function useFormsData() {
       formsListStore.setFolders(res.folders);
       formsListStore.setItems([], 0);
     },
-    [formsSettingsStore, formsListStore, aiStore],
+    [formsSettingsStore, formsListStore],
   );
 
   const isCompletedWithXlsx =

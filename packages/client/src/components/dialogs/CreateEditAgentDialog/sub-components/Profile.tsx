@@ -50,7 +50,7 @@ type ProfileSettingsProps = {
 
 // Single combobox with the AI profiles configured in the chat library
 // (provider + model pairs). Replaces the previous provider/model pair of
-// comboboxes: the new agent-creation endpoint (POST /new-ai/agents) takes a
+// comboboxes: the new agent-creation endpoint (POST /ai/agents) takes a
 // `profileId` and binds the profile to the created agent server-side.
 const ProfileSettings = ({
   agentParams,

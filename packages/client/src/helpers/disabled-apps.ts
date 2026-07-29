@@ -33,55 +33,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-"use client";
+import type { AppId } from "./apps-catalog";
 
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+// Temporary kill switch for apps that cannot run on the new AI stack yet.
+// The AI Arbiter still drives the removed C# AI endpoints (chat streaming,
+// providers, models), which the Node AI service does not serve, so the
+// product is hidden everywhere until it is migrated or removed. Remove the
+// id from this set to bring the app back.
+const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>([
+  "ai-arbiter",
+]);
 
-const containerStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "100%",
-  height: "100%",
-  gap: "16px",
-  fontFamily: "'Open Sans', sans-serif",
-  color: "var(--text-color)",
-};
-
-const buttonStyle: React.CSSProperties = {
-  padding: "8px 24px",
-  border: "1px solid var(--checkbox-border-color)",
-  borderRadius: "6px",
-  backgroundColor: "var(--button-background-base)",
-  cursor: "pointer",
-  fontSize: "14px",
-  lineHeight: "20px",
-  color: "var(--text-color)",
-};
-
-export default function ChatError({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-  const { t } = useTranslation("Common");
-
-  useEffect(() => {
-    console.error("Chat error boundary caught:", error);
-  }, [error]);
-
-  return (
-    <div style={containerStyle}>
-      <p style={{ margin: 0, fontSize: "14px" }}>
-        {t("Common:SomethingWentWrong")}
-      </p>
-      <button type="button" style={buttonStyle} onClick={reset}>
-        {t("Common:TryAgain")}
-      </button>
-    </div>
-  );
-}
+export const isAppTemporarilyDisabled = (id: string): boolean =>
+  TEMPORARILY_DISABLED_APPS.has(id);

@@ -3,7 +3,7 @@
   "content": "Open file location",
   "content_en_sha1_hash": "3e3e6fccc753b74da3c1194baf8f98ec4f2b9768",
   "created_at": "2025-05-19T21:30:57.126Z",
-  "updated_at": "2026-07-28T11:25:41.898Z",
+  "updated_at": "2026-07-28T07:30:59.934Z",
   "comment": {
     "text": "This is a button label that, when clicked, navigates the user to the folder containing the currently open file.",
     "is_auto": true,

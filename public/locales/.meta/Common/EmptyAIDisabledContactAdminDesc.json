@@ -3,7 +3,7 @@
   "content": "Contact the {{productName}} admin to activate AI features and create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
   "content_en_sha1_hash": "2c76fe852205b22948431eb702d965e812ec49bc",
   "created_at": "2026-06-25T11:54:49.014Z",
-  "updated_at": "2026-06-25T12:13:50.500Z",
+  "updated_at": "2026-07-28T07:30:59.800Z",
   "comment": {
     "text": "Description text on an empty state or \"no access\" screen that appears when AI features are disabled for a user. It includes the {{productName}} variable, which represents the product's brand name.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
       "line_number": 155,
       "context": "aiAgents: t(\"AIAgents\"),\n }),\n )\n // saas user\n .otherwise(() =>\n t(\"EmptyAIDisabledContactAdminDesc\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n \n const goToAIProviderSettings = {",
       "module": "/libs/ui-kit"

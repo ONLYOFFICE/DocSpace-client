@@ -104,6 +104,7 @@
   "RuleAddressExamples": "Exemple: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Introduceți adresa IP, intervalul sau gazda",
   "RuleAllow": "Permite",
+  "RuleAlreadyAdded": "Această adresă a fost deja adăugată",
   "RuleDeny": "Refuză",
   "RuleType": "Tip regulă",
   "SecretKeyLabel": "Cheie secretă",

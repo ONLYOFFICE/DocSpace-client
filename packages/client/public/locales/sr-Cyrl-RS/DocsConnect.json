@@ -104,6 +104,7 @@
   "RuleAddressExamples": "Примери: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Унесите ИП адресу, опсег или хост",
   "RuleAllow": "Дозволи",
+  "RuleAlreadyAdded": "Ова адреса је већ додата",
   "RuleDeny": "Забрани",
   "RuleType": "Тип правила",
   "SecretKeyLabel": "Тајни кључ",

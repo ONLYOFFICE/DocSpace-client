@@ -104,6 +104,7 @@
   "RuleAddressExamples": "示例：192.168.1.10、192.168.1.0/24、*.example.com、*",
   "RuleAddressPlaceholder": "输入 IP 地址、范围或主机",
   "RuleAllow": "允许",
+  "RuleAlreadyAdded": "该地址已添加",
   "RuleDeny": "拒绝",
   "RuleType": "规则类型",
   "SecretKeyLabel": "密钥",

@@ -65,6 +65,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import {
   getEntityMcpServers,
@@ -141,21 +142,29 @@ export const useMCP = ({
       Promise.all([
         getEntityMcpServers(String(agentId)),
         getSystemMcpServerNames(),
-      ]).then(([serversMap, systemNames]) => {
-        const items = Object.keys(serversMap).map((name) =>
-          toSelectorItem(name, systemNames),
-        );
+      ])
+        .then(([serversMap, systemNames]) => {
+          const items = Object.keys(serversMap).map((name) =>
+            toSelectorItem(name, systemNames),
+          );
 
-        setSelectedServers(items);
-        setInitialServers(items);
-      });
+          setSelectedServers(items);
+          setInitialServers(items);
+        })
+        .catch((err) =>
+          toastr.error(err instanceof Error ? err.message : String(err)),
+        );
     } else {
       // Create: pre-select the system (portal) servers by default.
-      getSystemMcpServerNames().then((systemNames) => {
-        setSelectedServers(
-          systemNames.map((name) => toSelectorItem(name, systemNames)),
+      getSystemMcpServerNames()
+        .then((systemNames) => {
+          setSelectedServers(
+            systemNames.map((name) => toSelectorItem(name, systemNames)),
+          );
+        })
+        .catch((err) =>
+          toastr.error(err instanceof Error ? err.message : String(err)),
         );
-      });
     }
   }, [agentId, toSelectorItem, t]);
 

@@ -135,6 +135,8 @@ const Shell = ({ page = "home", ...rest }) => {
     setLogoText,
     standalone,
     isGuest,
+    isAdmin,
+    isRoomAdmin,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
     agentEntityId,
@@ -148,6 +150,7 @@ const Shell = ({ page = "home", ...rest }) => {
     selectedRootFolderType,
     selectedIsFolder,
     selectedIsRootFolder,
+    selectedSecurity,
     isPrivacyFolder,
     isAIReady,
   } = rest;
@@ -174,6 +177,10 @@ const Shell = ({ page = "home", ...rest }) => {
           rootFolderType: selectedRootFolderType,
           isFolder: selectedIsFolder,
           isRootFolder: selectedIsRootFolder,
+          security: selectedSecurity,
+          isAdmin,
+          isRoomAdmin,
+          isGuest,
         },
         t,
       ),
@@ -183,7 +190,12 @@ const Shell = ({ page = "home", ...rest }) => {
       selectedRootFolderType,
       selectedIsFolder,
       selectedIsRootFolder,
+      selectedSecurity,
+      isAdmin,
+      isRoomAdmin,
+      isGuest,
       folderType,
+      searchArea,
       t,
     ],
   );
@@ -811,6 +823,10 @@ const ShellWrapper = inject(
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
       isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
+      // Room admin — the role that may create rooms and form spaces; gates
+      // the room / forms AI suggestions that the spec limits to owners and
+      // managers.
+      isRoomAdmin: authStore.isRoomAdmin,
       isGuest: userStore?.user?.isVisitor,
       registrationDate: userStore?.user?.registrationDate,
 
@@ -835,6 +851,9 @@ const ShellWrapper = inject(
       selectedRootFolderType: selectedFolderStore.rootFolderType,
       selectedIsFolder: selectedFolderStore.isFolder,
       selectedIsRootFolder: selectedFolderStore.isRootFolder,
+      // Drives which AI suggestions the current user is offered: actions the
+      // rights of the opened folder / room do not allow are filtered out.
+      selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
       // Scope the chat to the current location: inside any room (including
       // its subfolders) the room id wins, elsewhere the currently selected

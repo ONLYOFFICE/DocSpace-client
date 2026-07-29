@@ -35,9 +35,48 @@
 import isNil from "lodash/isNil";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import type { Suggestion } from "@docspace/ui-kit/ai-agent/providers";
+import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 type QueryFolderType = `${FolderType}`;
+
+/**
+ * Right a suggestion needs before it is offered — the "who to show it to"
+ * column of the AI presets spec. Two families, because the two kinds of
+ * section have two different sources of truth:
+ *
+ * - *entity rights* (`create` … `editAccess`) are checked against the
+ *   security of the opened room or space — the sections the spec labels
+ *   "inside a room", "inside a Form Space", and the per-room-type ones. This
+ *   also covers rights granted through a group or an external link, which a
+ *   role name alone would miss.
+ * - *portal roles* (`contentCreator`, `roomAdmin`) are checked against the
+ *   current user. Used by the cross-entity lists — the Rooms and Forms roots,
+ *   Recent, Favorites, Templates, Archive, Trash — where the listing folder
+ *   carries no rights for the rooms and spaces shown inside it.
+ *
+ * Left unset the suggestion is shown to anyone who can see the section: every
+ * "any user" / "any member" row, and every Files-sheet row, since that sheet
+ * has no "who to show it to" column at all.
+ */
+export type SuggestionAccess =
+  /** "Content Creator or higher": create, upload, organize, generate files. */
+  | "create"
+  /** "Room Owner": archive the room. */
+  | "move"
+  /** "Room Owner/Manager": name, tags, avatar, collection workflow. */
+  | "editRoom"
+  /** "Room Owner/Manager; DocSpace Admin": participants, roles, sharing. */
+  | "editAccess"
+  /** "Content Creator or higher" outside a room: anyone but a guest. */
+  | "contentCreator"
+  /**
+   * "Room Owner", "Form Space Owner/Manager", "template owner", "user allowed
+   * to create rooms / spaces" — DocSpace admins included.
+   */
+  | "roomAdmin";
+
+type SuggestionEntry = Suggestion & { requires?: SuggestionAccess };
 
 export type SuggestionContext = {
   roomType?: RoomsType | null;
@@ -47,6 +86,35 @@ export type SuggestionContext = {
   isFolder?: boolean;
   isRootFolder?: boolean;
   searchArea?: string | null;
+  /** Security of the currently opened folder or room. */
+  security?: Partial<TFolderSecurity> | null;
+  /** DocSpace admin or portal owner. */
+  isAdmin?: boolean;
+  /** Room admin — can create rooms and spaces. */
+  isRoomAdmin?: boolean;
+  /** Guest (visitor): read-only participant. */
+  isGuest?: boolean;
+};
+
+const hasAccess = (
+  requires: SuggestionAccess | undefined,
+  { security, isAdmin, isRoomAdmin, isGuest }: SuggestionContext,
+): boolean => {
+  if (!requires) return true;
+
+  if (requires === "contentCreator") return !isGuest;
+  if (requires === "roomAdmin") return Boolean(isAdmin) || Boolean(isRoomAdmin);
+
+  // Security is absent until the room is loaded — show the suggestion rather
+  // than render an empty welcome screen; the action itself is still checked
+  // server-side.
+  if (!security) return true;
+
+  if (requires === "create") return Boolean(security.Create);
+  if (requires === "move") return Boolean(security.Move);
+  if (requires === "editRoom") return Boolean(security.EditRoom);
+
+  return Boolean(security.EditAccess);
 };
 
 export const getSuggestionsBySection = (t: TTranslation) => {
@@ -312,6 +380,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsReviewRoomAccess"),
         prompt: t("AiSuggestions:RoomsReviewRoomAccessPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsShowRoomsIManage"),
@@ -320,6 +389,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsShowRoomsWithExternalAccess"),
         prompt: t("AiSuggestions:RoomsShowRoomsWithExternalAccessPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsHelpMeChooseARoomType"),
@@ -328,6 +398,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsSuggestRoomsToArchive"),
         prompt: t("AiSuggestions:RoomsSuggestRoomsToArchivePrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -344,10 +415,12 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsRecentReviewAccessInRecentRooms"),
         prompt: t("AiSuggestions:RoomsRecentReviewAccessInRecentRoomsPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsRecentArchiveInactiveRooms"),
         prompt: t("AiSuggestions:RoomsRecentArchiveInactiveRoomsPrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -364,6 +437,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsFavoritesArchiveSelectedRooms"),
         prompt: t("AiSuggestions:RoomsFavoritesArchiveSelectedRoomsPrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -376,6 +450,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsTemplatesCreateARoomFromATemplate"),
         prompt: t("AiSuggestions:RoomsTemplatesCreateARoomFromATemplatePrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsTemplatesExplainThisTemplate"),
@@ -384,10 +459,12 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsTemplatesUpdateTemplate"),
         prompt: t("AiSuggestions:RoomsTemplatesUpdateTemplatePrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsTemplatesSaveAsTemplate"),
         prompt: t("AiSuggestions:RoomsTemplatesSaveAsTemplatePrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -404,10 +481,12 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsArchiveRestoreARoomFromTheArchive"),
         prompt: t("AiSuggestions:RoomsArchiveRestoreARoomFromTheArchivePrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsArchiveDeleteAnArchivedRoom"),
         prompt: t("AiSuggestions:RoomsArchiveDeleteAnArchivedRoomPrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -416,18 +495,22 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:RoomsTrashWhatSDeleted"),
         prompt: t("AiSuggestions:RoomsTrashWhatSDeletedPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsTrashFindADeletedFileOrFolder"),
         prompt: t("AiSuggestions:RoomsTrashFindADeletedFileOrFolderPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsTrashRestoreARoom"),
         prompt: t("AiSuggestions:RoomsTrashRestoreARoomPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomsTrashDeletePermanently"),
         prompt: t("AiSuggestions:RoomsTrashDeletePermanentlyPrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -451,14 +534,17 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:InsideRoomCreateAFolderInTheRoom"),
         prompt: t("AiSuggestions:InsideRoomCreateAFolderInTheRoomPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:InsideRoomUploadFilesToTheRoom"),
         prompt: t("AiSuggestions:InsideRoomUploadFilesToTheRoomPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:InsideRoomOrganizeContent"),
         prompt: t("AiSuggestions:InsideRoomOrganizeContentPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:InsideRoomFindADocument"),
@@ -471,6 +557,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:InsideRoomArchiveRoom"),
         prompt: t("AiSuggestions:InsideRoomArchiveRoomPrompt"),
+        requires: "move",
       },
       {
         name: t("AiSuggestions:InsideRoomShowParticipantsAndRoles"),
@@ -479,30 +566,37 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:InsideRoomInviteParticipants"),
         prompt: t("AiSuggestions:InsideRoomInviteParticipantsPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:InsideRoomCheckExcessivePermissions"),
         prompt: t("AiSuggestions:InsideRoomCheckExcessivePermissionsPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:InsideRoomFindExternalAccess"),
         prompt: t("AiSuggestions:InsideRoomFindExternalAccessPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:InsideRoomChangeNameAndTags"),
         prompt: t("AiSuggestions:InsideRoomChangeNameAndTagsPrompt"),
+        requires: "editRoom",
       },
       {
         name: t("AiSuggestions:InsideRoomUpdateRoomAvatar"),
         prompt: t("AiSuggestions:InsideRoomUpdateRoomAvatarPrompt"),
+        requires: "editRoom",
       },
       {
         name: t("AiSuggestions:InsideRoomChangeParticipantRoles"),
         prompt: t("AiSuggestions:InsideRoomChangeParticipantRolesPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:InsideRoomRemoveAParticipant"),
         prompt: t("AiSuggestions:InsideRoomRemoveAParticipantPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:InsideRoomExplainCurrentPermissions"),
@@ -511,24 +605,87 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:InsideRoomCheckRoleAlignment"),
         prompt: t("AiSuggestions:InsideRoomCheckRoleAlignmentPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:InsideRoomSuggestARoomStructure"),
         prompt: t("AiSuggestions:InsideRoomSuggestARoomStructurePrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:InsideRoomCreateAPresentationFromTheRoom"),
         prompt: t(
           "AiSuggestions:InsideRoomCreateAPresentationFromTheRoomPrompt",
         ),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:InsideRoomCreateAReportFromTheRoom"),
         prompt: t("AiSuggestions:InsideRoomCreateAReportFromTheRoomPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:InsideRoomCollectRoomDataIntoATable"),
         prompt: t("AiSuggestions:InsideRoomCollectRoomDataIntoATablePrompt"),
+        requires: "create",
+      },
+    ],
+
+    // AI room — a content-oriented subset of `insideRoom`: analysis and
+    // authoring over the room's files, plus the few structural actions that
+    // still make sense. Role/permission/branding management is intentionally
+    // left out — it is not what the room is used for.
+    aiRoom: [
+      {
+        name: t("AiSuggestions:InsideRoomSummarizeRoom"),
+        prompt: t("AiSuggestions:InsideRoomSummarizeRoomPrompt"),
+      },
+      {
+        name: t("AiSuggestions:InsideRoomSummarizeRoomFiles"),
+        prompt: t("AiSuggestions:InsideRoomSummarizeRoomFilesPrompt"),
+      },
+      {
+        name: t("AiSuggestions:InsideRoomFindADocument"),
+        prompt: t("AiSuggestions:InsideRoomFindADocumentPrompt"),
+      },
+      {
+        name: t("AiSuggestions:InsideRoomFindImportantFiles"),
+        prompt: t("AiSuggestions:InsideRoomFindImportantFilesPrompt"),
+      },
+      {
+        name: t("AiSuggestions:InsideRoomFindTasksAndDeadlines"),
+        prompt: t("AiSuggestions:InsideRoomFindTasksAndDeadlinesPrompt"),
+      },
+      {
+        name: t("AiSuggestions:InsideRoomCollectRoomDataIntoATable"),
+        prompt: t("AiSuggestions:InsideRoomCollectRoomDataIntoATablePrompt"),
+        requires: "create",
+      },
+      {
+        name: t("AiSuggestions:InsideRoomCreateAReportFromTheRoom"),
+        prompt: t("AiSuggestions:InsideRoomCreateAReportFromTheRoomPrompt"),
+        requires: "create",
+      },
+      {
+        name: t("AiSuggestions:InsideRoomCreateAPresentationFromTheRoom"),
+        prompt: t(
+          "AiSuggestions:InsideRoomCreateAPresentationFromTheRoomPrompt",
+        ),
+        requires: "create",
+      },
+      {
+        name: t("AiSuggestions:InsideRoomUploadFilesToTheRoom"),
+        prompt: t("AiSuggestions:InsideRoomUploadFilesToTheRoomPrompt"),
+        requires: "create",
+      },
+      {
+        name: t("AiSuggestions:InsideRoomOrganizeContent"),
+        prompt: t("AiSuggestions:InsideRoomOrganizeContentPrompt"),
+        requires: "create",
+      },
+      {
+        name: t("AiSuggestions:InsideRoomShowRoomInfo"),
+        prompt: t("AiSuggestions:InsideRoomShowRoomInfoPrompt"),
       },
     ],
 
@@ -553,10 +710,12 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:CollaborationRoomInviteParticipants"),
         prompt: t("AiSuggestions:CollaborationRoomInviteParticipantsPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:CollaborationRoomCreateAFileForTheRoom"),
         prompt: t("AiSuggestions:CollaborationRoomCreateAFileForTheRoomPrompt"),
+        requires: "create",
       },
     ],
 
@@ -569,6 +728,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:VdrRoomReviewVDRAccess"),
         prompt: t("AiSuggestions:VdrRoomReviewVDRAccessPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:VdrRoomFindSensitiveData"),
@@ -581,6 +741,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:VdrRoomOrganizeVDRDocuments"),
         prompt: t("AiSuggestions:VdrRoomOrganizeVDRDocumentsPrompt"),
+        requires: "create",
       },
     ],
 
@@ -589,18 +750,22 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:PublicRoomPrepareAPublicSummary"),
         prompt: t("AiSuggestions:PublicRoomPrepareAPublicSummaryPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:PublicRoomReviewBeforePublishing"),
         prompt: t("AiSuggestions:PublicRoomReviewBeforePublishingPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:PublicRoomReviewPublicAccess"),
         prompt: t("AiSuggestions:PublicRoomReviewPublicAccessPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:PublicRoomFindOutdatedContent"),
         prompt: t("AiSuggestions:PublicRoomFindOutdatedContentPrompt"),
+        requires: "create",
       },
     ],
 
@@ -619,10 +784,12 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         prompt: t(
           "AiSuggestions:RoomTemplateCreateARoomFromThisTemplatePrompt",
         ),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:RoomTemplateImproveTemplate"),
         prompt: t("AiSuggestions:RoomTemplateImproveTemplatePrompt"),
+        requires: "editRoom",
       },
     ],
 
@@ -631,10 +798,12 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormsCreateAFormSpace"),
         prompt: t("AiSuggestions:FormsCreateAFormSpacePrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsStartFromAFormTemplate"),
         prompt: t("AiSuggestions:FormsStartFromAFormTemplatePrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsRecommendAFormForTheTask"),
@@ -643,18 +812,22 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormsCreateAFormWithAI"),
         prompt: t("AiSuggestions:FormsCreateAFormWithAIPrompt"),
+        requires: "contentCreator",
       },
       {
         name: t("AiSuggestions:FormsConvertAFileIntoAForm"),
         prompt: t("AiSuggestions:FormsConvertAFileIntoAFormPrompt"),
+        requires: "contentCreator",
       },
       {
         name: t("AiSuggestions:FormsWhichCollectionsNeedAttention"),
         prompt: t("AiSuggestions:FormsWhichCollectionsNeedAttentionPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsReviewFormsAccess"),
         prompt: t("AiSuggestions:FormsReviewFormsAccessPrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -671,10 +844,12 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormsRecentWhereActionIsNeeded"),
         prompt: t("AiSuggestions:FormsRecentWhereActionIsNeededPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsRecentContinueFormSetup"),
         prompt: t("AiSuggestions:FormsRecentContinueFormSetupPrompt"),
+        requires: "contentCreator",
       },
     ],
 
@@ -691,6 +866,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormsFavoritesCreateASimilarSpace"),
         prompt: t("AiSuggestions:FormsFavoritesCreateASimilarSpacePrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsFavoritesFindTheFormYouNeed"),
@@ -709,12 +885,14 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         prompt: t(
           "AiSuggestions:FormsTemplatesCreateASpaceFromATemplatePrompt",
         ),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsTemplatesAdaptTheTemplateToTheTask"),
         prompt: t(
           "AiSuggestions:FormsTemplatesAdaptTheTemplateToTheTaskPrompt",
         ),
+        requires: "contentCreator",
       },
       {
         name: t("AiSuggestions:FormsTemplatesShowTemplateFields"),
@@ -723,6 +901,7 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormsTemplatesSaveAsTemplate"),
         prompt: t("AiSuggestions:FormsTemplatesSaveAsTemplatePrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -731,18 +910,22 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormsTrashWhatSDeleted"),
         prompt: t("AiSuggestions:FormsTrashWhatSDeletedPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsTrashFindADeletedForm"),
         prompt: t("AiSuggestions:FormsTrashFindADeletedFormPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsTrashRestoreSelectedItems"),
         prompt: t("AiSuggestions:FormsTrashRestoreSelectedItemsPrompt"),
+        requires: "roomAdmin",
       },
       {
         name: t("AiSuggestions:FormsTrashDeletePermanently"),
         prompt: t("AiSuggestions:FormsTrashDeletePermanentlyPrompt"),
+        requires: "roomAdmin",
       },
     ],
 
@@ -755,38 +938,47 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormSpaceCreateAFormWithAI"),
         prompt: t("AiSuggestions:FormSpaceCreateAFormWithAIPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:FormSpaceCreateABlankForm"),
         prompt: t("AiSuggestions:FormSpaceCreateABlankFormPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:FormSpaceConvertAFileIntoAForm"),
         prompt: t("AiSuggestions:FormSpaceConvertAFileIntoAFormPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:FormSpaceAddAFormFromTheGallery"),
         prompt: t("AiSuggestions:FormSpaceAddAFormFromTheGalleryPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:FormSpaceInviteParticipants"),
         prompt: t("AiSuggestions:FormSpaceInviteParticipantsPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:FormSpaceReviewAccessPermissions"),
         prompt: t("AiSuggestions:FormSpaceReviewAccessPermissionsPrompt"),
+        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:FormSpaceOrganizeForms"),
         prompt: t("AiSuggestions:FormSpaceOrganizeFormsPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:FormSpaceStartCollectingResponses"),
         prompt: t("AiSuggestions:FormSpaceStartCollectingResponsesPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:FormSpaceChangeNameAndTags"),
         prompt: t("AiSuggestions:FormSpaceChangeNameAndTagsPrompt"),
+        requires: "editRoom",
       },
     ],
 
@@ -801,12 +993,14 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormSpaceInProgressWhoHasnTCompleted"),
         prompt: t("AiSuggestions:FormSpaceInProgressWhoHasnTCompletedPrompt"),
+        requires: "editRoom",
       },
       {
         name: t("AiSuggestions:FormSpaceInProgressFindOverdueResponses"),
         prompt: t(
           "AiSuggestions:FormSpaceInProgressFindOverdueResponsesPrompt",
         ),
+        requires: "editRoom",
       },
       {
         name: t("AiSuggestions:FormSpaceInProgressShowCurrentStage"),
@@ -815,12 +1009,14 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormSpaceInProgressFindBottlenecks"),
         prompt: t("AiSuggestions:FormSpaceInProgressFindBottlenecksPrompt"),
+        requires: "editRoom",
       },
       {
         name: t("AiSuggestions:FormSpaceInProgressPrepareAReminderList"),
         prompt: t(
           "AiSuggestions:FormSpaceInProgressPrepareAReminderListPrompt",
         ),
+        requires: "editRoom",
       },
     ],
 
@@ -869,21 +1065,26 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FormSpaceResultsCreateAResultsReport"),
         prompt: t("AiSuggestions:FormSpaceResultsCreateAResultsReportPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:FormSpaceResultsCreateAPresentation"),
         prompt: t("AiSuggestions:FormSpaceResultsCreateAPresentationPrompt"),
+        requires: "create",
       },
       {
         name: t("AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheet"),
         prompt: t(
           "AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheetPrompt",
         ),
+        requires: "create",
       },
     ],
 
     default: [],
-  };
+    // `satisfies` (rather than an annotation) keeps the literal section keys
+    // for SuggestionSection while typing `requires` as SuggestionAccess.
+  } satisfies Record<string, SuggestionEntry[]>;
 };
 
 export type SuggestionSection = keyof ReturnType<
@@ -967,7 +1168,7 @@ const rootFolderSection = (
 
 const sectionFromRoomType = (
   roomType?: RoomsType | null,
-): SuggestionSection | undefined => {
+): SuggestionSection => {
   switch (roomType) {
     case RoomsType.EditingRoom:
       return "collaborationRoom";
@@ -977,11 +1178,12 @@ const sectionFromRoomType = (
       return "vdrRoom";
     case RoomsType.FormRoom:
       return "formSpace";
+    case RoomsType.AIRoom:
+      return "aiRoom";
     // case RoomsType.CustomRoom:
-    // case RoomsType.AIRoom:
     //   return "insideRoom";
     default:
-      return undefined;
+      return "default";
   }
 };
 
@@ -1019,11 +1221,17 @@ export const resolveSuggestionSection = ({
     );
   }
 
-  return sectionFromRoomType(roomType) ?? "default";
+  return sectionFromRoomType(roomType);
 };
 
 export const getSuggestions = (
   context: SuggestionContext,
   t: TTranslation,
-): Suggestion[] =>
-  getSuggestionsBySection(t)[resolveSuggestionSection(context)];
+): Suggestion[] => {
+  const entries: SuggestionEntry[] =
+    getSuggestionsBySection(t)[resolveSuggestionSection(context)];
+
+  return entries
+    .filter((entry) => hasAccess(entry.requires, context))
+    .map(({ name, prompt }) => ({ name, prompt }));
+};

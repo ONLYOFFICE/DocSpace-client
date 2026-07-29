@@ -1,5 +1,5 @@
 {
-  "ActionsWithFilesDescription": "Badges zeigen die Dateiakтивность – Uploads, Bearbeitungen oder Freigaben – in den Bereichen {{rooms}}, {{shared}}, {{documents}} und {{aiAgents}} an.",
+  "ActionsWithFilesDescription": "Abzeichen zeigen Dateiaktivitäten – Uploads, Bearbeitungen oder Freigaben – in den Bereichen Räume, Für mich freigegeben, Meine Dokumente und KI-Agenten an.",
   "AdminSetupRequired": "Administrator-Einrichtung erforderlich",
   "Badges": "Abzeichen",
   "DailyFeed": "Täglicher {{productName}}-Feed",

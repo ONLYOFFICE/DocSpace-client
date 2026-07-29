@@ -39,6 +39,7 @@ import {
   webPluginsHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { successSelf } from "@docspace/shared/__mocks__/handlers/people/self";
+
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test, TEST_PORT } from "../fixtures/base";
@@ -155,9 +156,13 @@ test.describe("Selector Plugin", () => {
     ]);
 
     // Submit — selector closes, success toast appears.
+    // Both item clicks already fired their own onSelect info toasts,
+    // so the submit toast has to be matched by its text.
     await submitBtn.click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Selected: option-a, option-b" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
     await expect(page.getByTestId("aside")).not.toBeVisible();
@@ -194,7 +199,9 @@ test.describe("Selector Plugin", () => {
 
     await openSelector(page, "selector-sample-file");
 
-    await expect(page.getByTestId("aside-header")).toContainText(
+    await expect(
+      page.getByTestId("aside").getByTestId("aside-header"),
+    ).toContainText(
       "File Selector",
     );
     await expect(page.getByTestId("selector_search_input")).toBeVisible();
@@ -261,7 +268,9 @@ test.describe("Selector Plugin", () => {
     await openSelector(page, "selector-sample-room");
 
     await expect(page.getByTestId("room_selector")).toBeVisible();
-    await expect(page.getByTestId("aside-header")).toContainText(
+    await expect(
+      page.getByTestId("aside").getByTestId("aside-header"),
+    ).toContainText(
       "Room Selector",
     );
     await expect(page.getByTestId("selector_search_input")).toBeVisible();
@@ -323,7 +332,9 @@ test.describe("Selector Plugin", () => {
     await openSelector(page, "selector-sample-group");
 
     await expect(page.getByTestId("groups_selector")).toBeVisible();
-    await expect(page.getByTestId("aside-header")).toContainText(
+    await expect(
+      page.getByTestId("aside").getByTestId("aside-header"),
+    ).toContainText(
       "Group Selector",
     );
 
@@ -373,7 +384,9 @@ test.describe("Selector Plugin", () => {
     await openSelector(page, "selector-sample-user");
 
     await expect(page.getByTestId("people-selector")).toBeVisible();
-    await expect(page.getByTestId("aside-header")).toContainText(
+    await expect(
+      page.getByTestId("aside").getByTestId("aside-header"),
+    ).toContainText(
       "User Selector",
     );
     await expect(page.getByTestId("0_tab")).toContainText("Members");

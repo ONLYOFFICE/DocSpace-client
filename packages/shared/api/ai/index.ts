@@ -45,24 +45,14 @@ import {
   refreshOAuthToken,
 } from "../client";
 import type { TFile } from "../files/types";
-import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
+import type { KnowledgeType } from "./enums";
 import RoomsFilter from "../rooms/filter";
 
 import type {
-  TCreateAiProvider,
   TAiProvider,
-  TUpdateAiProvider,
-  TDeleteAiProviders,
   TModelList,
   TChat,
-  TMessage,
-  TMCPTool,
-  TServer,
   TVectorizeOperation,
-  TProviderTypeWithUrl,
-  TAddNewServer,
-  TUpdateServer,
-  WebSearchConfig,
   KnowledgeConfig,
   TAIConfig,
   TAgent,
@@ -71,90 +61,11 @@ import type {
   TEditAgentData,
   TGetAgents,
   TDefaultProvider,
-  TUpdateDefaultProviderData,
-  TModelSettingsDto,
-  TPreviewModelsRequest,
   TAIUserConfig,
   TProfilesList,
 } from "./types";
 
 const baseUrl = "/ai";
-
-export const createProvider = async (provider: TCreateAiProvider) => {
-  const res = (await request({
-    method: "post",
-    url: `${baseUrl}/providers`,
-    data: provider,
-  })) as TAiProvider;
-
-  return res;
-};
-
-export const getProviders = async () => {
-  const res = (await request({
-    method: "get",
-    url: `${baseUrl}/providers`,
-  })) as { items: TAiProvider[]; total: number };
-
-  return res.items;
-};
-
-export const updateProvider = async (
-  providerId: TAiProvider["id"],
-  data: TUpdateAiProvider,
-) => {
-  const res = (await request({
-    method: "put",
-    url: `${baseUrl}/providers/${providerId}`,
-    data,
-  })) as TAiProvider;
-
-  return res;
-};
-
-export const deleteProviders = async (data: TDeleteAiProviders) => {
-  const res = (await request({
-    method: "delete",
-    url: `${baseUrl}/providers`,
-    data,
-  })) as TDeleteAiProviders;
-
-  return res;
-};
-
-export const getAvailableProviderUrls = async () => {
-  const res = (await request({
-    method: "get",
-    url: `${baseUrl}/providers/available`,
-  })) as TProviderTypeWithUrl[];
-
-  return res;
-};
-
-export const previewProviderModels = async (
-  data: TPreviewModelsRequest,
-  abortController?: AbortController | null,
-) => {
-  const res = (await request({
-    method: "post",
-    url: `${baseUrl}/providers/models/preview`,
-    data,
-    signal: abortController?.signal,
-  })) as TModelSettingsDto[];
-
-  return res;
-};
-
-export const getProviderModelSettings = async (
-  providerId: TAiProvider["id"],
-) => {
-  const res = (await request({
-    method: "get",
-    url: `${baseUrl}/providers/${providerId}/models`,
-  })) as TModelSettingsDto[];
-
-  return res;
-};
 
 export const getModels = async (
   providerId?: TAiProvider["id"],
@@ -176,21 +87,6 @@ export const getModels = async (
   return res.map((m) => ({
     ...m,
   })) as TModelList;
-};
-
-export const getProviderAvailabilityStatus = async (
-  id: number,
-  abortController?: AbortController | null,
-) => {
-  return getModels(id, abortController)
-    .then(() => ({
-      id: id,
-      available: true,
-    }))
-    .catch(() => ({
-      id: id,
-      available: false,
-    }));
 };
 
 const getAuthHeaders = async (): Promise<Record<string, string>> => {
@@ -305,253 +201,11 @@ export const getChats = async (
   return res as { items: TChat[]; total: number };
 };
 
-export const getChatMessages = async (
-  chatId: string,
-  startIndex: number,
-  count: number = 100,
-) => {
-  const searchParams = new URLSearchParams();
-  searchParams.append("startIndex", startIndex.toString());
-  searchParams.append("count", count.toString());
-  const res = await request({
-    method: "GET",
-    url: `${baseUrl}/chats/${chatId}/messages?${searchParams.toString()}`,
-  });
-
-  return res as { items: TMessage[]; total: number };
-};
-
-export const getChat = async (chatId: string) => {
-  const res = (await request({
-    method: "get",
-    url: `${baseUrl}/chats/${chatId}`,
-  })) as TChat;
-
-  return res;
-};
-
-export const renameChat = async (chatId: string, name: string) => {
-  const res = await request({
-    method: "PUT",
-    url: `${baseUrl}/chats/${chatId}`,
-    data: { name },
-  });
-
-  return res as TChat;
-};
-
 export const deleteChat = async (chatId: string) => {
   await request({
     method: "DELETE",
     url: `${baseUrl}/chats/${chatId}`,
   });
-};
-
-export const getServersList = async (startIndex: number, count?: number) => {
-  try {
-    const res = await request({
-      method: "get",
-      url: `${baseUrl}/servers`,
-      params: {
-        startIndex,
-        count,
-      },
-    });
-
-    return res as { items: TServer[]; total: number };
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const getAvailableServersList = async (
-  startIndex: number,
-  count: number,
-) => {
-  try {
-    const res = await request({
-      method: "get",
-      url: `${baseUrl}/servers/available?startIndex=${startIndex}&count=${count}`,
-    });
-
-    return res as { items: TServer[]; total: number };
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const addNewServer = async (data: TAddNewServer) => {
-  return (await request({
-    method: "post",
-    url: `${baseUrl}/servers`,
-    data,
-  })) as TServer;
-};
-
-export const updateServer = async (serverId: string, data: TUpdateServer) => {
-  const res = await request({
-    method: "put",
-    url: `${baseUrl}/servers/${serverId}`,
-    data,
-  });
-
-  return res as TServer;
-};
-
-export const deleteServers = async (servers: string[]) => {
-  await request({
-    method: "delete",
-    url: `${baseUrl}/servers`,
-    data: { servers },
-  });
-};
-
-export const addServersForRoom = async (roomId: number, servers: string[]) => {
-  try {
-    await request({
-      method: "post",
-      url: `${baseUrl}/rooms/${roomId}/servers`,
-      data: { servers },
-    });
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const getServersListForRoom = async (roomId: number) => {
-  try {
-    const res = await request({
-      method: "get",
-      url: `${baseUrl}/rooms/${roomId}/servers`,
-    });
-
-    return res as TServer[];
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const connectServer = async (
-  roomId: number,
-  serverId: string,
-  code: string,
-) => {
-  try {
-    await request({
-      method: "post",
-      url: `${baseUrl}/rooms/${roomId}/servers/${serverId}/connect`,
-      data: { code },
-    });
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const disconnectServer = async (roomId: number, serverId: string) => {
-  try {
-    await request({
-      method: "post",
-      url: `${baseUrl}/rooms/${roomId}/servers/${serverId}/disconnect`,
-    });
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const deleteServersForRoom = async (
-  roomId: number,
-  servers: string[],
-) => {
-  try {
-    await request({
-      method: "delete",
-      url: `${baseUrl}/rooms/${roomId}/servers`,
-      data: { servers },
-    });
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const updateServerStatus = async (
-  serverId: TServer["id"],
-  enabled: boolean,
-) => {
-  const res = await request({
-    method: "put",
-    url: `${baseUrl}/servers/${serverId}/status`,
-    data: { enabled },
-  });
-
-  return res as TServer;
-};
-
-export const getMCPToolsForRoom = async (room: number, mcpId: string) => {
-  try {
-    const res = await request({
-      method: "get",
-      url: `${baseUrl}/rooms/${room}/servers/${mcpId}/tools`,
-    });
-
-    return res as TMCPTool[];
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const changeMCPToolsForRoom = async (
-  room: number,
-  mcpId: string,
-  disabledTools: string[],
-) => {
-  const res = await request({
-    method: "PUT",
-    url: `${baseUrl}/rooms/${room}/servers/${mcpId}/tools`,
-    data: { disabledTools },
-  });
-
-  return res;
-};
-
-export const exportChat = async (
-  chatId: string,
-  folderId: string | number,
-  title: string,
-) => {
-  try {
-    return (await request({
-      method: "POST",
-      url: `${baseUrl}/chats/${chatId}/messages/export`,
-      data: { folderId, title },
-    })) as TFile;
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const exportChatMessage = async (
-  messageId: number,
-  folderId: string | number,
-  title: string,
-) => {
-  try {
-    return (await request({
-      method: "POST",
-      url: `${baseUrl}/messages/${messageId}/export`,
-      data: { folderId, title },
-    })) as TFile;
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
 };
 
 export const retryVectorization = async (fileIds: TFile["id"][]) => {
@@ -562,53 +216,6 @@ export const retryVectorization = async (fileIds: TFile["id"][]) => {
   });
 
   return res as TVectorizeOperation;
-};
-
-export const updateToolsPermission = async (
-  callId: string,
-  decision: ToolsPermission,
-) => {
-  try {
-    await request({
-      method: "POST",
-      url: `${baseUrl}/chats/tool-permissions/${callId}/decision`,
-      data: { decision },
-    });
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const getWebSearchInRoom = async (roomId: number) => {
-  try {
-    const res = await request({
-      method: "get",
-      url: `${baseUrl}/rooms/${roomId}/chats/config`,
-    });
-
-    return res as { webSearchEnabled: boolean };
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const updateWebSearchInRoom = async (
-  roomId: number,
-  webSearchEnabled: boolean,
-) => {
-  try {
-    const res = await request({
-      method: "put",
-      url: `${baseUrl}/rooms/${roomId}/chats/config`,
-      data: { webSearchEnabled },
-    });
-
-    return res;
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
 };
 
 export const getAIConfig = async () => {
@@ -623,34 +230,6 @@ export const getAIConfig = async () => {
     console.log(e);
     toastr.error(e as string);
   }
-};
-
-export const getWebSearchConfig = async () => {
-  try {
-    const res = await request({
-      method: "get",
-      url: `${baseUrl}/config/web-search`,
-    });
-
-    return res as WebSearchConfig;
-  } catch (e) {
-    console.log(e);
-    toastr.error(e as string);
-  }
-};
-
-export const updateWebSearchConfig = async (
-  enabled: boolean,
-  type: WebSearchType,
-  key: string,
-) => {
-  const res = await request({
-    method: "put",
-    url: `${baseUrl}/config/web-search`,
-    data: { enabled, type, key },
-  });
-
-  return res as WebSearchConfig;
 };
 
 export const getKnowledgeConfig = async () => {
@@ -686,20 +265,23 @@ export const createAIAgent = async (data: TCreateAgentData) => {
   return res as TAgent;
 };
 
-// New agent creation flow: the Node AI service (mounted at /new-ai) creates
+// New agent creation flow: the Node AI service (mounted at /ai) creates
 // the agent via the .NET endpoint and binds the selected AI profile to it.
 export const createAIAgentWithProfile = async (
   data: TCreateAgentWithProfileData,
 ) => {
   const res = await request({
     method: "POST",
-    url: `/new-ai/agents`,
+    url: `/ai/agents`,
     data,
   });
 
   return res as TAgent;
 };
 
+// The Node AI service (mounted at /ai) owns the profile<->agent binding: it
+// injects `profileId` (GET :id), rebinds the profile when a `profileId` is
+// sent (PUT) and keeps the prompt in `chatSettings`.
 export const editAIAgent = async (id: TAgent["id"], data: TEditAgentData) => {
   const res = await request({
     method: "PUT",
@@ -710,83 +292,8 @@ export const editAIAgent = async (id: TAgent["id"], data: TEditAgentData) => {
   return res as TAgent;
 };
 
-// --- new-ai (profile-based) agent flow -------------------------------------
-// The Node AI service (mounted at /new-ai) owns the profile<->agent binding.
-// These mirror the /ai functions above but go through /new-ai/agents so the
-// service can inject `profileId` (GET :id), rebind the profile (PUT) and keep
-// the prompt in `chatSettings`. Only the ai-agents product uses these; the
-// legacy /ai flow (forms/arbiter/old client) stays on the functions above.
-const newAiBaseUrl = "/new-ai/agents";
-
-export const getNewAiAgent = async (id: TAgent["id"]) => {
-  const res = await request({ method: "GET", url: `${newAiBaseUrl}/${id}` });
-
-  return res as TAgent;
-};
-
-export const getNewAiAgents = async (
-  filter: RoomsFilter,
-  signal?: AbortSignal,
-) => {
-  let params: string = "";
-
-  if (filter) {
-    checkFilterInstance(filter, RoomsFilter);
-
-    params = `?${filter.toApiUrlParams()}`;
-  }
-
-  const res = await request({
-    method: "GET",
-    url: `${newAiBaseUrl}${params}`,
-    signal,
-  });
-
-  return res as TGetAgents;
-};
-
-export const editNewAiAgent = async (
-  id: TAgent["id"],
-  data: TEditAgentData,
-) => {
-  const res = await request({
-    method: "PUT",
-    url: `${newAiBaseUrl}/${id}`,
-    data,
-  });
-
-  return res as TAgent;
-};
-
-export const deleteNewAiAgent = async (id: TAgent["id"]) => {
-  await request({ method: "DELETE", url: `${newAiBaseUrl}/${id}`, data: {} });
-};
-
-export const resetNewAiAgentQuota = async (
-  roomIds: TAgent["id"] | TAgent["id"][],
-) => {
-  return request({
-    method: "put",
-    url: `${newAiBaseUrl}/resetquota`,
-    data: { roomIds },
-  });
-};
-
-export const setNewAiAgentQuota = (
-  roomIds: TAgent["id"] | TAgent["id"][],
-  quota: number,
-) => {
-  return request({
-    method: "put",
-    url: `${newAiBaseUrl}/agentquota`,
-    data: { roomIds, quota },
-  });
-};
-
-export const getNewAiAgentsNews = async () => {
-  return request({ method: "GET", url: `${newAiBaseUrl}/news` });
-};
-
+// `profileId` is injected by the Node AI service (resolved from the
+// Chat-action assignment) — the list endpoint below never carries it.
 export const getAIAgent = async (id: TAgent["id"]) => {
   const res = await request({ method: "GET", url: `${baseUrl}/agents/${id}` });
 
@@ -818,7 +325,9 @@ export const deleteAIAgent = async (id: TAgent["id"]) => {
   await request({ method: "DELETE", url: `${baseUrl}/agents/${id}`, data: {} });
 };
 
-export const resetAIAgentQuota = async (roomIds: TAgent["id"]) => {
+export const resetAIAgentQuota = async (
+  roomIds: TAgent["id"] | TAgent["id"][],
+) => {
   const data = {
     roomIds,
   };
@@ -831,7 +340,10 @@ export const resetAIAgentQuota = async (roomIds: TAgent["id"]) => {
   return request(options);
 };
 
-export function setCustomAIAgentQuota(roomIds: TAgent["id"], quota: number) {
+export function setCustomAIAgentQuota(
+  roomIds: TAgent["id"] | TAgent["id"][],
+  quota: number,
+) {
   const data = {
     roomIds,
     quota,
@@ -846,17 +358,6 @@ export function setCustomAIAgentQuota(roomIds: TAgent["id"], quota: number) {
   return request(options);
 }
 
-export const getMCPServerById = async (id: string) => {
-  const options = {
-    method: "get",
-    url: `${baseUrl}/servers/${id}`,
-  };
-
-  const res = await request(options);
-
-  return res as TServer;
-};
-
 export const getDefaultProvider = async () => {
   const options = {
     method: "get",
@@ -869,7 +370,7 @@ export const getDefaultProvider = async () => {
 };
 
 export const getProfilesList = async () => {
-  const response = await authFetch(`/api/2.0/new-ai/profiles/list`, {
+  const response = await authFetch(`/api/2.0/ai/profiles/list`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -885,7 +386,7 @@ export const getProfileAssignments = async (entityId?: string) => {
   const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
 
   const response = await authFetch(
-    `/api/2.0/new-ai/assignments/get-all-assignments${params}`,
+    `/api/2.0/ai/assignments/get-all-assignments${params}`,
     {
       method: "GET",
       headers: {
@@ -899,12 +400,13 @@ export const getProfileAssignments = async (entityId?: string) => {
   return (await response.json()) as Record<string, string>;
 };
 
-// --- new-ai MCP servers (chat-lib model) -----------------------------------
+// --- MCP servers (chat-lib model) ------------------------------------------
 // Entity-scoped custom MCP servers of the Node AI service (`tools/*`
 // routes). For an agent the per-entity map doubles as its MCP whitelist:
 // the agent create/edit dialog manages the set here. The service resolves
 // the stored config itself — system servers are pinned to the canonical
-// config from the new-ai config file, portal-level servers are copied.
+// config from the Node AI service config file, portal-level servers are
+// copied.
 
 /** Name → config map of MCP servers scoped to an entity (portal scope
  * when `entityId` is omitted). */
@@ -912,7 +414,7 @@ export const getEntityMcpServers = async (entityId?: string) => {
   const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
 
   const response = await authFetch(
-    `/api/2.0/new-ai/tools/list-custom-servers${params}`,
+    `/api/2.0/ai/tools/list-custom-servers${params}`,
     { method: "GET", headers: { "Content-Type": "application/json" } },
   );
 
@@ -921,9 +423,9 @@ export const getEntityMcpServers = async (entityId?: string) => {
   return (await response.json()) as Record<string, unknown>;
 };
 
-/** Names of the system MCP servers configured on the new-ai service. */
+/** Names of the system MCP servers configured on the Node AI service. */
 export const getSystemMcpServerNames = async () => {
-  const response = await authFetch(`/api/2.0/new-ai/tools/list-system-tools`, {
+  const response = await authFetch(`/api/2.0/ai/tools/list-system-tools`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
@@ -939,7 +441,7 @@ export const getSystemMcpServerNames = async () => {
  * for portal-level servers. */
 export const addEntityMcpServer = async (name: string, entityId: string) => {
   const response = await authFetch(
-    `/api/2.0/new-ai/tools/add-custom-server`,
+    `/api/2.0/ai/tools/add-custom-server`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -957,7 +459,7 @@ export const addEntityMcpServer = async (name: string, entityId: string) => {
 /** Disable an MCP server (by name) for an entity. */
 export const removeEntityMcpServer = async (name: string, entityId: string) => {
   const response = await authFetch(
-    `/api/2.0/new-ai/tools/remove-custom-server`,
+    `/api/2.0/ai/tools/remove-custom-server`,
     {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -970,21 +472,6 @@ export const removeEntityMcpServer = async (name: string, entityId: string) => {
       `Failed to disable MCP server "${name}": ${response.status} ${response.statusText}`,
     );
   }
-};
-
-export const updateDefaultProvider = async ({
-  providerId,
-  defaultModel,
-}: TUpdateDefaultProviderData) => {
-  const options = {
-    method: "put",
-    url: `${baseUrl}/providers/default`,
-    data: { providerId, defaultModel },
-  };
-
-  const res = await request(options);
-
-  return res as TDefaultProvider;
 };
 
 export const getAIUserConfig = async () => {

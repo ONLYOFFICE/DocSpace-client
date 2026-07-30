@@ -33,16 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/mixins";
-
-.aiSettingsContainer {
-  width: 100%;
-  max-width: 700px;
-}
-
-
-.aiProvider,
-.mcpServers,
 .search {
   display: flex;
   flex-direction: column;
@@ -51,53 +41,10 @@
   max-width: 700px;
 }
 
-.aiProvider {
-  margin-bottom: 24px;
-}
-
-.heading {
-  margin-bottom: 8px;
-}
-
 .description {
   color: var(--settings-common-description-color);
 
   margin-bottom: 8px;
-}
-
-.defaultProviderDescription {
-  margin-bottom: 16px;
-}
-
-.defaultProviderForm {
-  max-width: 340px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.defaultAISetup {
-  width: 100%;
-  max-width: 700px;
-
-  display: flex;
-  flex-direction: column;
-
-  padding: 20px;
-  border: 1px solid var(--payment-card-border-color);
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.defaultAISetupForm {
-  margin-top: 16px;
-  width: 100%;
-}
-
-.defaultProviderFormButtons {
-  display: flex;
-  gap: 8px;
 }
 
 .learnMoreLink {
@@ -106,76 +53,4 @@
 
 .addProviderButton {
   margin-bottom: 20px;
-}
-
-.providerList,
-.mcpList {
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 340px);
-  gap: 20px;
-
-  @include mixins.mobile {
-    grid-template-columns: 1fr;
-  }
-}
-
-.providerList {
-  margin-bottom: 20px;
-}
-
-.mcpHeading {
-  margin-bottom: 20px;
-}
-
-.mcpListContainer {
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.aiContextMenuDropDown {
-  margin-top: 15px;
-}
-
-.truncate2Lines {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-}
-
-.tabsLoader {
-  width: min(400px, 100%);
-  height: 33px;
-  margin-bottom: 20px;
-}
-
-.hasError {
-  :global(.combo-button) {
-    border-color: var(--input-error-border);
-  }
-}
-
-.modelOption {
-  display: flex;
-  flex-direction: column;
-}
-
-.modelLabel{
-  height: 20px;
-}
-.modelDescription {
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--ai-settings-description);
-}
-
-.modelDropdown {
-  :global(.scroll-body) {
-    padding-inline-end: 0 !important;
-  }
 }

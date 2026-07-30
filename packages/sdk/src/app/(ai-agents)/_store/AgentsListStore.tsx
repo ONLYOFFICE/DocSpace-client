@@ -320,7 +320,7 @@ class AgentsListStore {
     );
 
   deleteAgent = (id: TAgent["id"]) =>
-    this.optimisticRemove(id, () => api.ai.deleteNewAiAgent(id));
+    this.optimisticRemove(id, () => api.ai.deleteAIAgent(id));
 
   fetchAgents = async (filter?: RoomsFilter) => {
     const filterData = filter ? filter.clone() : this.filter.clone();
@@ -331,7 +331,7 @@ class AgentsListStore {
 
     this.setIsLoading(true);
     try {
-      const data = await api.ai.getNewAiAgents(filterData, controller.signal);
+      const data = await api.ai.getAIAgents(filterData, controller.signal);
       if (controller.signal.aborted) return;
 
       filterData.total = data.total;
@@ -365,7 +365,7 @@ class AgentsListStore {
 
     this.setIsLoading(true);
     try {
-      const data = await api.ai.getNewAiAgents(filterData, controller.signal);
+      const data = await api.ai.getAIAgents(filterData, controller.signal);
       if (controller.signal.aborted) return;
 
       filterData.total = data.total;

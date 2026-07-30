@@ -50,7 +50,7 @@ import { TWatermark } from "@docspace/shared/api/rooms/types";
 import {
   addEntityMcpServer,
   createAIAgentWithProfile,
-  editNewAiAgent,
+  editAIAgent,
   removeEntityMcpServer,
 } from "@docspace/shared/api/ai";
 import {
@@ -71,7 +71,6 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
 import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
-import { modelCache } from "SRC_DIR/components/dialogs/CreateEditAgentDialog/sub-components/modelCache";
 
 import FilesStore from "./FilesStore";
 import ClientLoadingStore from "./ClientLoadingStore";
@@ -186,7 +185,7 @@ class CreateEditRoomStore {
     const { title, icon, agentId, prompt, agentOwner, quota, profileId } =
       newParams;
 
-    // new-ai service rebinds the agent's Chat-action profile when a
+    // The Node AI service rebinds the agent's Chat-action profile when a
     // profileId is sent; only include it when actually changed.
     const isProfileChanged = !!profileId && profileId !== agent.profileId;
 
@@ -258,7 +257,7 @@ class CreateEditRoomStore {
 
     try {
       if (Object.keys(editAgentParams).length) {
-        await editNewAiAgent(agent.id, editAgentParams);
+        await editAIAgent(agent.id, editAgentParams);
       }
 
       if (isOwnerChanged) {
@@ -272,7 +271,7 @@ class CreateEditRoomStore {
       const { mcpServers, mcpServersInitial } = newParams;
 
       if (mcpServers && mcpServersInitial) {
-        // Servers are keyed by name in the new-ai model: enabling one for an
+        // Servers are keyed by name in the chat-lib model: enabling one for an
         // agent writes an entry into the agent's per-entity map (the config
         // is resolved server-side), disabling removes it.
         const deletedServers = mcpServersInitial.filter(
@@ -421,8 +420,6 @@ class CreateEditRoomStore {
 
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
-
-      modelCache.clear();
     } catch (err) {
       toastr.error(err as string);
     } finally {

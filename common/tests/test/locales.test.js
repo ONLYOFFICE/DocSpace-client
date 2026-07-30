@@ -2325,10 +2325,10 @@ describe("Locales Tests", () => {
     };
 
     // Latin-script languages need no native ranges beyond commonAllowed,
-    // except a few extras: Vietnamese diacritics and Azerbaijani ə.
+    // except a few extras: Vietnamese diacritics and Azerbaijani schwa.
     // Anything else (e.g. Cyrillic inside a German string) is contamination.
     const latinExtraRanges = [
-      [0x0250, 0x02AF], // IPA Extensions (Azerbaijani ə)
+      [0x0250, 0x02AF], // IPA Extensions (Azerbaijani schwa, U+0259)
       [0x02B0, 0x02FF], // Spacing Modifier Letters
       [0x1E00, 0x1EFF], // Latin Extended Additional (Vietnamese)
     ];

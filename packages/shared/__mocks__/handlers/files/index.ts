@@ -136,6 +136,7 @@ export {
   type FolderHistoryRequestLog,
   type FolderHistoryReportHandle,
   type FolderHistoryReportHandlerOptions,
+  type FolderHistoryReportRequestLog,
 } from "./folderHistory";
 
 export {

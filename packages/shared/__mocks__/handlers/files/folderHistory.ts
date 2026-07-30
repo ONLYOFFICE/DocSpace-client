@@ -94,9 +94,15 @@ const makeFeed = (seed: FolderHistoryFeedSeed, folderId: number | string) => ({
   related: [],
 });
 
+export type FolderHistoryReportRequestLog = {
+  fromDate: string | null;
+  toDate: string | null;
+};
+
 export type FolderHistoryReportHandle = {
   getStatusRequestCount: () => number;
   getStartRequestCount: () => number;
+  getLastStartRequest: () => FolderHistoryReportRequestLog | undefined;
 };
 
 export type FolderHistoryReportHandlerOptions = {
@@ -133,21 +139,27 @@ export const folderHistoryReportHandlers = (
 ) => {
   const { pollsBeforeComplete = 1, error, resultFileUrl } = options;
 
-  let startRequests = 0;
   let statusRequests = 0;
+  const startRequestLogs: FolderHistoryReportRequestLog[] = [];
 
   if (options.handle) {
     options.handle.current = {
       getStatusRequestCount: () => statusRequests,
-      getStartRequestCount: () => startRequests,
+      getStartRequestCount: () => startRequestLogs.length,
+      getLastStartRequest: () => startRequestLogs.at(-1),
     };
   }
 
   const url = `${BASE_URL}:${port}/${API_PREFIX}/files/folder/${folderId}/log/report`;
 
   return [
-    http.post(url, () => {
-      startRequests += 1;
+    http.post(url, ({ request }) => {
+      const params = new URL(request.url).searchParams;
+
+      startRequestLogs.push({
+        fromDate: params.get("fromDate"),
+        toDate: params.get("toDate"),
+      });
 
       return okResponse(makeTask({ isCompleted: false, percentage: 0 }));
     }),

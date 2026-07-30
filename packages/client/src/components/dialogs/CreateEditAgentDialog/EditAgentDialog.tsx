@@ -55,7 +55,6 @@ import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 
 import SetAgentParams from "./sub-components/SetAgentParams";
 import { useMCP } from "./hooks/useMCP";
-import { modelCache } from "./sub-components/modelCache";
 
 type EditAgentDialogProps = {
   visible: boolean;
@@ -95,12 +94,8 @@ const EditAgentDialog = ({
     }),
   );
 
-  // Drop the provider/model cache when the dialog goes away by any path
-  // (not just the explicit close button), so a fresh session refetches.
-  React.useEffect(() => () => modelCache.clear(), []);
-
   // The agent's bound profile arrives asynchronously (EditAgentEvent
-  // fetches GET /new-ai/agents/:id) after the initial params were copied
+  // fetches GET /ai/agents/:id) after the initial params were copied
   // into state above, so merge it in and extend the pristine snapshot —
   // otherwise the profile combobox keeps the preselected default and the
   // Save button lights up with a phantom profile change.
@@ -195,7 +190,6 @@ const EditAgentDialog = ({
   const onCloseAction = () => {
     if (isLoading) return;
 
-    modelCache.clear();
     onClose && onClose();
   };
 

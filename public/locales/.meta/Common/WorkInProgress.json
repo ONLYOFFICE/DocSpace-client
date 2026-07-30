@@ -3,7 +3,7 @@
   "content": "Work in progress",
   "content_en_sha1_hash": "e47daa7a6731608211a6729ba435943b8d544c06",
   "created_at": "2025-10-27T16:14:24.228Z",
-  "updated_at": "2026-07-07T08:59:21.726Z",
+  "updated_at": "2026-07-28T07:30:59.839Z",
   "comment": {
     "text": "This toast message indicates that a feature is not yet fully implemented.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/buttons/index.tsx",
-      "line_number": 206,
-      "context": "{/*{isLast ? (*/}\n {/*  <div*/}\n {/*    className={styles.buttonsBlockItem}*/}\n {/*    title={t(\"RefreshMessage\")}*/}\n {/*    onClick={() => {*/}\n {/*      toastr.info(t(\"WorkInProgress\"));*/}\n {/*    }}*/}\n {/*  >*/}\n {/*    <RefreshIcon />*/}\n {/*  </div>*/}\n {/*) : null}*/}",
-      "module": "/libs/ui-kit"
-    },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
       "line_number": 53,

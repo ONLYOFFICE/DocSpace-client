@@ -37,7 +37,6 @@
 
 import { getSettingsFiles } from "@docspace/shared/api/files";
 import { getUser } from "@docspace/shared/api/people";
-import { getDefaultProvider } from "@docspace/shared/api/ai";
 import { getSettings } from "@docspace/shared/api/settings";
 import type { TViewAs } from "@docspace/shared/types";
 
@@ -53,13 +52,11 @@ async function loadCommonData(): Promise<AiAgentsCommonData | null> {
     typeof window !== "undefined" ? window.location.search : "";
   const roomId = new URLSearchParams(search).get("roomId") || "";
 
-  const [filesSettings, user, defaultProvider, portalSettings] =
-    await Promise.all([
-      getSettingsFiles(),
-      getUser().catch(() => undefined),
-      getDefaultProvider().catch(() => undefined),
-      getSettings().catch(() => undefined),
-    ]);
+  const [filesSettings, user, portalSettings] = await Promise.all([
+    getSettingsFiles(),
+    getUser().catch(() => undefined),
+    getSettings().catch(() => undefined),
+  ]);
 
   if (!filesSettings) return null;
 
@@ -74,7 +71,6 @@ async function loadCommonData(): Promise<AiAgentsCommonData | null> {
     socketUrl,
     filesSettings,
     user,
-    defaultProvider,
     initialViewAs: "row" as TViewAs,
     portalSettings:
       portalSettings && typeof portalSettings !== "string"

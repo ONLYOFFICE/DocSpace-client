@@ -38,8 +38,6 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 import { ShareAccessRights } from "../../../enums";
 
 export const PATH_AI_AGENTS = "ai/agents";
-// Same list served by the Node AI service (used by the ui-kit selectors).
-export const PATH_NEW_AI_AGENTS = "new-ai/agents";
 
 const successEmpty = {
 	response: {
@@ -965,36 +963,4 @@ export const aiAgentsHandler = (
 			isDocAdmin,
 		});
 	});
-};
-
-// The /new-ai/agents list proxies the same .NET endpoint, so the response
-// shape is identical to /ai/agents — reuse the same resolver.
-export const newAiAgentsHandler = (
-	port: string,
-	{
-		withCreate,
-		withListCreate,
-		aiAccess,
-		inRoom,
-		isDocAdmin,
-	}: {
-		withCreate?: boolean;
-		withListCreate?: boolean;
-		aiAccess?: ShareAccessRights;
-		inRoom?: boolean;
-		isDocAdmin?: boolean;
-	} = {},
-) => {
-	return http.get(
-		`${BASE_URL}:${port}/${API_PREFIX}/${PATH_NEW_AI_AGENTS}`,
-		() => {
-			return aiAgentsResolver({
-				withCreate,
-				withListCreate,
-				aiAccess,
-				inRoom,
-				isDocAdmin,
-			});
-		},
-	);
 };

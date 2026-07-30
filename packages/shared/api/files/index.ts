@@ -954,11 +954,11 @@ export async function getNewFiles(folderId: number | string) {
 }
 
 export async function getNewFilesAgents() {
-  // Agents are served by the new-ai service now; its /news endpoint forwards
-  // to the same .NET /ai/agents/news, so the response shape is identical.
+  // Agents are served by the Node AI service now; its /news endpoint forwards
+  // to the same .NET endpoint, so the response shape is identical.
   const res = (await request({
     method: "get",
-    url: `/new-ai/agents/news`,
+    url: `/ai/agents/news`,
   })) as TNewFiles[];
 
   return res;

@@ -419,7 +419,7 @@ export const getOptions = (
   };
 
   const createAIAgent = {
-    title: t("Common:CreateNewAIAgent"),
+    title: t("Common:CreateAIAgentTitle"),
     description: t("Common:CreateAIAgentDescription", {
       aiAgent: t("Common:AIAgent"),
     }),

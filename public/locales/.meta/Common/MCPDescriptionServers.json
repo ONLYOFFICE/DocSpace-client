@@ -3,7 +3,7 @@
   "content": "Use {{mcpServers}} connected by the administrator to enhance chat experience with AI. {{mcpServers}} can assist with data extraction, summaries, smart suggestions, etc.",
   "content_en_sha1_hash": "64a638703aa5554ea60107211b1d5bfa55d866bd",
   "created_at": "2025-12-19T10:17:03.457Z",
-  "updated_at": "2026-07-27T13:07:50.636Z",
+  "updated_at": "2026-07-28T07:30:59.841Z",
   "comment": {
     "text": "This is a descriptive text within a dialog, explaining how administrator-connected AI servers enhance the chat experience. It includes the variable `{{mcpServers}}` which will be replaced by the localized term for \"AI servers\".",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/MCP.tsx",
-      "line_number": 112,
+      "line_number": 110,
       "context": "lineHeight=\"16px\"\n fontWeight={400}\n className=\"set_room_params-info-description\"\n noSelect\n >\n {t(\"Common:MCPDescriptionServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n defaultValue:\n \"Use MCP servers connected by the administrator to enhance the chat with AI.\",\n })}\n </Text>",
       "module": "/packages/sdk"
     }

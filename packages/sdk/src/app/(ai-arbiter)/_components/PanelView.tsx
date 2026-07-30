@@ -39,7 +39,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import MarkdownField from "@docspace/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/Markdown";
+import MarkdownField from "@docspace/ui-kit/ai-agent/markdown";
 
 import type { PanelState } from "@/types/arbiter";
 

@@ -3,7 +3,7 @@
   "content": "Connect your own AI service to unlock advanced features in {{productName}}. Once added, it will be accessible to all users in {{aiChats}}.",
   "content_en_sha1_hash": "a65fbd5865591bc45637f4aadcb15bfb36b35fad",
   "created_at": "2025-12-22T14:24:24.511Z",
-  "updated_at": "2026-07-07T08:59:21.667Z",
+  "updated_at": "2026-07-28T07:30:59.803Z",
   "comment": {
     "text": "Description text displayed to a standalone portal administrator when no AI agents are configured. It explains how to enable AI features by connecting an AI service, which will then be available to all users in the AI Chats section. `{{productName}}` is the product's brand name (e.g., \"DocSpace\"), and `{{aiChats}}` refers to the \"AI Chats\" feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
       "line_number": 103,
       "context": ".otherwise(() => t(\"AIFeaturesAreCurrentlyDisabled\"));\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiChats: t(\"AIChats\"),\n }),\n )\n // saas admin",
       "module": "/libs/ui-kit"

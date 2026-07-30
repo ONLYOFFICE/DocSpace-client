@@ -60,100 +60,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { usePathname, useRouter } from "next/navigation";
 
 import { useAISettingsStore } from "../../_store";
 
-type UseAiSettingsProps = {
-  standalone?: boolean;
-};
-
-const useAISettings = ({ standalone }: UseAiSettingsProps) => {
-  const router = useRouter();
-  const pathname = usePathname();
-
+// Knowledge is the only settings tab whose data comes from this package's
+// AISettingsStore; the servers/search tabs are chat-lib pages that fetch
+// their own data from the Node AI service.
+const useAISettings = () => {
   const aiSettingsStore = useAISettingsStore();
-  const {
-    fetchAIProviders,
-    fetchMCPServers,
-    fetchWebSearch,
-    fetchKnowledge,
-    initDefaultProvider,
-  } = aiSettingsStore;
+  const { fetchKnowledge } = aiSettingsStore;
 
-  // Consult the store's initied flags before re-firing the fetchers — a
-  // tab switch (Providers → MCP → Providers) used to refetch on every
-  // mount because `initAIProviders` etc. ran unconditionally.
-  const fetchAIProvidersIfNeeded = React.useCallback(async () => {
-    if (aiSettingsStore.aiProvidersInitied) return;
-    await fetchAIProviders?.();
-  }, [aiSettingsStore, fetchAIProviders]);
-
-  const initAIProviders = React.useCallback(async () => {
-    await fetchAIProvidersIfNeeded();
-    if (!aiSettingsStore.defaultProviderInitied) {
-      await initDefaultProvider?.();
-    }
-  }, [aiSettingsStore, fetchAIProvidersIfNeeded, initDefaultProvider]);
-
-  const initMCPServers = React.useCallback(async () => {
-    const tasks: Promise<unknown>[] = [];
-    if (!aiSettingsStore.mcpServersInitied && fetchMCPServers)
-      tasks.push(fetchMCPServers());
-    tasks.push(fetchAIProvidersIfNeeded());
-    await Promise.all(tasks);
-  }, [aiSettingsStore, fetchMCPServers, fetchAIProvidersIfNeeded]);
-
-  const initWebSearch = React.useCallback(async () => {
-    const tasks: Promise<unknown>[] = [];
-    if (!aiSettingsStore.webSearchInitied && fetchWebSearch)
-      tasks.push(fetchWebSearch());
-    tasks.push(fetchAIProvidersIfNeeded());
-    await Promise.all(tasks);
-  }, [aiSettingsStore, fetchWebSearch, fetchAIProvidersIfNeeded]);
-
+  // Consult the store's initied flag before re-firing the fetcher — a tab
+  // switch used to refetch on every mount otherwise.
   const initKnowledge = React.useCallback(async () => {
-    const tasks: Promise<unknown>[] = [];
-    if (!aiSettingsStore.knowledgeInitied && fetchKnowledge)
-      tasks.push(fetchKnowledge());
-    tasks.push(fetchAIProvidersIfNeeded());
-    await Promise.all(tasks);
-  }, [aiSettingsStore, fetchKnowledge, fetchAIProvidersIfNeeded]);
-
-  const getAiSettingsInitialValue = React.useCallback(async () => {
-    const path = pathname ?? "";
-    const isProviders = path.includes("providers");
-    const isServers = path.includes("servers");
-    const isSearch = path.includes("search");
-    const isKnowledge = path.includes("knowledge");
-
-    if (!standalone && !isServers) {
-      router.push("/ai-agents/settings/servers");
-      await initMCPServers();
-
-      return;
-    }
-
-    if (isProviders) await initAIProviders();
-    if (isServers) await initMCPServers();
-    if (isSearch) await initWebSearch();
-    if (isKnowledge) await initKnowledge();
-  }, [
-    initAIProviders,
-    initMCPServers,
-    initWebSearch,
-    initKnowledge,
-    router,
-    pathname,
-    standalone,
-  ]);
+    if (aiSettingsStore.knowledgeInitied || !fetchKnowledge) return;
+    await fetchKnowledge();
+  }, [aiSettingsStore, fetchKnowledge]);
 
   return {
-    initAIProviders,
-    initMCPServers,
-    initWebSearch,
     initKnowledge,
-    getAiSettingsInitialValue,
   };
 };
 

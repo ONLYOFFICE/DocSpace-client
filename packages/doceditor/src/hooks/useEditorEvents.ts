@@ -365,7 +365,7 @@ const useEditorEvents = ({
                   actionsOverride: true,
                   apiConfig: {
                     origin: window.location.origin,
-                    baseUrl: "/api/2.0/new-ai",
+                    baseUrl: "/api/2.0/ai",
                     routes: DEFAULT_SERVER_API_ROUTES,
                   } satisfies ServerAPIConfig,
                 });

@@ -56,6 +56,7 @@ import {
   TDocumentBuilderTask,
   TFile,
   TFolder,
+  TFolderLogReportDateRange,
 } from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
@@ -155,7 +156,10 @@ class InfoPanelStore {
     this.resetRoomHistoryReportState();
   };
 
-  getRoomHistoryReport = async (folderId: number | string) => {
+  getRoomHistoryReport = async (
+    folderId: number | string,
+    dateRange?: TFolderLogReportDateRange,
+  ) => {
     if (this.isRoomHistoryReportDownloading) return;
 
     this.roomHistoryReportPageLeft = false;
@@ -164,8 +168,10 @@ class InfoPanelStore {
     const controller = new AbortController();
 
     try {
-      let task: Nullable<TDocumentBuilderTask> =
-        await startFolderLogReport(folderId);
+      let task: Nullable<TDocumentBuilderTask> = await startFolderLogReport(
+        folderId,
+        dateRange,
+      );
 
       if (!task?.isCompleted && !task?.error) {
         await pollUntil(async () => {

@@ -45,6 +45,8 @@ import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/consta
 
 import "@docspace/shared/styles/theme.scss";
 
+import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
+
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
@@ -116,8 +118,9 @@ export default async function RootLayout({
   return (
     <html lang="en" translate="no">
       <head>
-        <link id="favicon" rel="shortcut icon" type="image/x-icon" />
         <meta charSet="utf-8" />
+        <ChunkRetryScript />
+        <link id="favicon" rel="shortcut icon" type="image/x-icon" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"

@@ -128,8 +128,6 @@ const PortalSettingsSidebar = ({
         return t("Settings:Services");
       case "AISettings":
         return t("Settings:AISettings");
-      case "NewAISettings":
-        return t("Settings:NewAISettings");
       case "PortalDeletion":
         return t("Settings:PortalDeletion", {
           productName: getBrandName("ProductName"),

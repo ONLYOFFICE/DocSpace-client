@@ -35,48 +35,15 @@
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type RoomsFilter from "@docspace/shared/api/rooms/filter";
-import type {
-  TAIConfig,
-  TDefaultProvider,
-  TGetAgents,
-} from "@docspace/shared/api/ai/types";
+import type { TAIConfig, TGetAgents } from "@docspace/shared/api/ai/types";
 import { logger } from "@/../logger.mjs";
-
-export async function getDefaultProvider(): Promise<
-  TDefaultProvider | undefined
-> {
-  logger.debug("Start GET /ai/providers/default");
-
-  try {
-    const [req] = await createRequest(
-      ["/ai/providers/default"],
-      [["", ""]],
-      "GET",
-    );
-    const res = await fetch(req, {
-      next: { revalidate: 900 },
-      signal: AbortSignal.timeout(8000),
-    });
-
-    if (!res.ok) {
-      logger.error(`GET /ai/providers/default failed: ${res.status}`);
-      return;
-    }
-
-    const json = await res.json();
-
-    return json.response as TDefaultProvider;
-  } catch (error) {
-    logger.error(`Error in getDefaultProvider: ${error}`);
-  }
-}
 
 export async function getAIAgents(
   filter: RoomsFilter,
 ): Promise<TGetAgents | undefined> {
-  // new-ai service: returns the same DocSpace envelope as /ai/agents but
+  // Node AI service: returns the DocSpace envelope for /ai/agents and
   // injects profile bindings; product (ai-agents) reads agents from here.
-  const path = `/new-ai/agents?${filter.toApiUrlParams()}`;
+  const path = `/ai/agents?${filter.toApiUrlParams()}`;
   logger.debug(`Start GET ${path}`);
 
   try {

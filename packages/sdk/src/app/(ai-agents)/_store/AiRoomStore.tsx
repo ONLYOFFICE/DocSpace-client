@@ -65,7 +65,7 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 import type { Nullable } from "@docspace/shared/types";
-import type { TChatPlaylistImage } from "@docspace/ui-kit/ai-agent/chat/Chat.types";
+import type { TChatPlaylistImage } from "@docspace/ui-kit/types/ai";
 
 export type AiRoomTab = "chat" | "knowledge" | "result";
 

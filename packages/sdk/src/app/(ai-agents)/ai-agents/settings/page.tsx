@@ -64,7 +64,7 @@ import { redirect } from "next/navigation";
 import { getSettings } from "@/api/settings";
 
 export default async function SettingsRoot() {
-  // Billing is hidden in standalone portals, so the landing tab is providers
+  // Billing is hidden in standalone portals, so the landing tab is servers
   // there. SaaS still lands on billing for admins/owners; the client layout
   // bounces regular users off to the next allowed tab.
   const portalSettings = await getSettings().catch(() => undefined);
@@ -74,8 +74,6 @@ export default async function SettingsRoot() {
       : false;
 
   redirect(
-    standalone
-      ? "/ai-agents/settings/providers"
-      : "/ai-agents/settings/billing",
+    standalone ? "/ai-agents/settings/servers" : "/ai-agents/settings/billing",
   );
 }

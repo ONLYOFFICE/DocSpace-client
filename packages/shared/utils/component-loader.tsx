@@ -33,30 +33,35 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import {
+  canReloadOnChunkError,
+  scheduleChunkErrorReload,
+} from "./chunk-load-error";
+
+const RELOAD_KEY = "retry-lazy-refreshed";
+
 export default function componentLoader(lazyComponent: () => Promise<unknown>) {
   return new Promise((resolve) => {
-    const hasRefreshed = JSON.parse(
-      window.sessionStorage.getItem("retry-lazy-refreshed") || "false",
-    );
-
     lazyComponent()
       .then((component: unknown) => {
         resolve(component);
       })
       .catch((error: unknown) => {
-        const { message, stack } = error as Error;
-
-        const isChunkError = message?.includes("Loading chunk");
-
-        if (!hasRefreshed && isChunkError) {
-          window.sessionStorage.setItem("retry-lazy-refreshed", "true");
-          return window.location.reload();
+        if (canReloadOnChunkError(error, RELOAD_KEY)) {
+          scheduleChunkErrorReload(RELOAD_KEY);
+          return;
         }
 
-        window.sessionStorage.setItem(
-          "errorLog",
-          JSON.stringify({ message, stack }),
-        );
+        const { message, stack } = error as Error;
+
+        try {
+          window.sessionStorage.setItem(
+            "errorLog",
+            JSON.stringify({ message, stack }),
+          );
+        } catch {
+          // sessionStorage unavailable: navigate without the error log.
+        }
 
         window.location.replace(`/error/520`);
       });

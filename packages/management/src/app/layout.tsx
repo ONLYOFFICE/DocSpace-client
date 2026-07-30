@@ -42,6 +42,7 @@ import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
+import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
 
@@ -146,6 +147,7 @@ export default async function RootLayout({
           href="/logo.ashx?logotype=3"
         />
         <meta charSet="utf-8" />
+        <ChunkRetryScript />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"

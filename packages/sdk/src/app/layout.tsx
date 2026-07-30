@@ -48,6 +48,7 @@ import "@docspace/shared/styles/theme.scss";
 
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
+import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
 
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
@@ -141,6 +142,7 @@ export default async function RootLayout({
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
         <meta charSet="utf-8" />
+        <ChunkRetryScript />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"

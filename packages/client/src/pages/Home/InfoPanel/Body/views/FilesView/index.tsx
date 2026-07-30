@@ -61,7 +61,6 @@ import ThirdPartyComponent from "../History/HistoryBlockContent/ThirdParty";
 import Members from "../Members";
 import Share from "../Share";
 import Plugin from "../Plugin";
-import AIChat from "../AIChat";
 
 import { useHistory } from "./hooks/useHistory";
 import { usePlugin } from "./hooks/usePlugin";

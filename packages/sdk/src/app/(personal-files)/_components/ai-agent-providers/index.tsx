@@ -73,14 +73,18 @@ import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 
 type PersonalFilesAiAgentProvidersProps = {
   myFolderId?: number | string;
+  canUseAi?: boolean;
   children: React.ReactNode;
 };
 
 // Host glue for the SDK personal-files surface: derives the chat theme from the
 // portal theme and the locale from i18n, then delegates to the shared
 // AiAgentProviders (which owns the attach/save/upload behavior).
+// `canUseAi={false}` (anonymous SDK embeds, guests) keeps the providers
+// mounted but skips hydration so no /api/2.0/ai request fires.
 const PersonalFilesAiAgentProviders = ({
   children,
+  canUseAi,
 }: PersonalFilesAiAgentProvidersProps) => {
   const { i18n } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -89,6 +93,7 @@ const PersonalFilesAiAgentProviders = ({
     <AiAgentProviders
       theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
       locale={i18n.language}
+      canUseAi={canUseAi}
     >
       {children}
     </AiAgentProviders>

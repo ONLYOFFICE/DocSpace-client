@@ -38,7 +38,7 @@
 import React from "react";
 import { reaction } from "mobx";
 
-import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 
 import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
@@ -57,11 +57,13 @@ import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
  * rooms) skip wiring the reactions while keeping the hook call unconditional.
  */
 export const usePanelExclusivity = (enabled = true) => {
-  const aiChatStore = useAiChatStore();
+  // Null-safe read: sections that disable the hook (private rooms) do not
+  // mount AiChatStoreProvider at all, so the strict hook would throw.
+  const aiChatStore = useAiChatStoreOptional();
   const infoPanelStore = useInfoPanelStore();
 
   React.useEffect(() => {
-    if (!enabled) return undefined;
+    if (!enabled || !aiChatStore) return undefined;
 
     const disposers = [
       reaction(

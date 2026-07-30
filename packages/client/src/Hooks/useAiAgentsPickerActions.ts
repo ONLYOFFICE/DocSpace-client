@@ -35,7 +35,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { getNewAiAgent, getNewAiAgents } from "@docspace/shared/api/ai";
+import { getAIAgent, getAIAgents } from "@docspace/shared/api/ai";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
@@ -89,14 +89,14 @@ export const useAiAgentsPickerActions = (
     const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AIAgents);
     filter.pageCount = AGENTS_PAGE_COUNT;
 
-    getNewAiAgents(filter, controller.signal)
+    getAIAgents(filter, controller.signal)
       .then(async (data) => {
         // The list response never carries `profileId` — the new-ai service
         // injects it only into GET /new-ai/agents/:id (see EditAgentEvent) —
         // so each agent's details are fetched and the id merged in.
         const detailed = await Promise.all(
           data.folders.map((agent) =>
-            getNewAiAgent(agent.id)
+            getAIAgent(agent.id)
               .then((full) => ({ ...agent, profileId: full?.profileId }))
               // Non-fatal: an agent without the new-ai binding just stays
               // non-pickable, matching the edit dialog's behavior.

@@ -121,20 +121,92 @@ const hasAccess = (
 };
 
 export const getSuggestionsBySection = (t: TTranslation) => {
+  // The base "inside a room" rows. Every room type shows them, and the
+  // per-type sections below only add their own rows on top, so the list is
+  // kept in one place instead of being repeated four times.
+  const insideRoom: SuggestionEntry[] = [
+    {
+      name: t("AiSuggestions:InsideRoomSummarizeRoom"),
+      prompt: t("AiSuggestions:InsideRoomSummarizeRoomPrompt"),
+    },
+    {
+      name: t("AiSuggestions:InsideRoomOrganizeContent"),
+      prompt: t("AiSuggestions:InsideRoomOrganizeContentPrompt"),
+      requires: "create",
+    },
+    {
+      name: t("AiSuggestions:InsideRoomFindADocument"),
+      prompt: t("AiSuggestions:InsideRoomFindADocumentPrompt"),
+    },
+    {
+      name: t("AiSuggestions:InsideRoomChangeNameAndTags"),
+      prompt: t("AiSuggestions:InsideRoomChangeNameAndTagsPrompt"),
+      requires: "editRoom",
+    },
+    {
+      name: t("AiSuggestions:InsideRoomSuggestARoomStructure"),
+      prompt: t("AiSuggestions:InsideRoomSuggestARoomStructurePrompt"),
+      requires: "create",
+    },
+    {
+      name: t("AiSuggestions:InsideRoomCreateAReportFromTheRoom"),
+      prompt: t("AiSuggestions:InsideRoomCreateAReportFromTheRoomPrompt"),
+      requires: "create",
+    },
+  ];
+
+  // "Complete and results" is a single section in the spec, so the in-progress
+  // and the done folders of a Form Space share one list.
+  const formSpaceResults: SuggestionEntry[] = [
+    {
+      name: t("AiSuggestions:FormSpaceResultsSummarizeResults"),
+      prompt: t("AiSuggestions:FormSpaceResultsSummarizeResultsPrompt"),
+    },
+    {
+      name: t("AiSuggestions:FormSpaceResultsCompareGroupsOrPeriods"),
+      prompt: t("AiSuggestions:FormSpaceResultsCompareGroupsOrPeriodsPrompt"),
+    },
+    {
+      name: t("AiSuggestions:FormSpaceResultsCreateAResultsReport"),
+      prompt: t("AiSuggestions:FormSpaceResultsCreateAResultsReportPrompt"),
+      requires: "create",
+    },
+    {
+      name: t("AiSuggestions:FormSpaceResultsShowKeyMetrics"),
+      prompt: t("AiSuggestions:FormSpaceResultsShowKeyMetricsPrompt"),
+    },
+    {
+      name: t("AiSuggestions:FormSpaceResultsFindCommonAnswers"),
+      prompt: t("AiSuggestions:FormSpaceResultsFindCommonAnswersPrompt"),
+    },
+    {
+      name: t("AiSuggestions:FormSpaceResultsFindUnusualAnswers"),
+      prompt: t("AiSuggestions:FormSpaceResultsFindUnusualAnswersPrompt"),
+    },
+    {
+      name: t("AiSuggestions:FormSpaceResultsConvertToATableOrChart"),
+      prompt: t("AiSuggestions:FormSpaceResultsConvertToATableOrChartPrompt"),
+    },
+    {
+      name: t("AiSuggestions:FormSpaceResultsCreateAPresentation"),
+      prompt: t("AiSuggestions:FormSpaceResultsCreateAPresentationPrompt"),
+      requires: "create",
+    },
+    {
+      name: t("AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheet"),
+      prompt: t(
+        "AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheetPrompt",
+      ),
+      requires: "create",
+    },
+  ];
+
   return {
     // +
     files: [
       {
         name: t("AiSuggestions:FilesShowFileStructure"),
         prompt: t("AiSuggestions:FilesShowFileStructurePrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesCreateANewFolder"),
-        prompt: t("AiSuggestions:FilesCreateANewFolderPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesUploadAFile"),
-        prompt: t("AiSuggestions:FilesUploadAFilePrompt"),
       },
       {
         name: t("AiSuggestions:FilesOrganizeFilesIntoFolders"),
@@ -247,10 +319,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         prompt: t("AiSuggestions:FilesFolderSummarizeThisFolderPrompt"),
       },
       {
-        name: t("AiSuggestions:FilesFolderCreateASubfolder"),
-        prompt: t("AiSuggestions:FilesFolderCreateASubfolderPrompt"),
-      },
-      {
         name: t("AiSuggestions:FilesFolderRenameFolder"),
         prompt: t("AiSuggestions:FilesFolderRenameFolderPrompt"),
       },
@@ -270,20 +338,8 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         prompt: t("AiSuggestions:FilesSelectedFileSummarizeFilePrompt"),
       },
       {
-        name: t("AiSuggestions:FilesSelectedFileExtractMainPoints"),
-        prompt: t("AiSuggestions:FilesSelectedFileExtractMainPointsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesSelectedFileFindTasksAndDeadlines"),
-        prompt: t("AiSuggestions:FilesSelectedFileFindTasksAndDeadlinesPrompt"),
-      },
-      {
         name: t("AiSuggestions:FilesSelectedFileFixGrammar"),
         prompt: t("AiSuggestions:FilesSelectedFileFixGrammarPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesSelectedFileMakeTextMoreFormal"),
-        prompt: t("AiSuggestions:FilesSelectedFileMakeTextMoreFormalPrompt"),
       },
       {
         name: t("AiSuggestions:FilesSelectedFileConvertToATable"),
@@ -292,26 +348,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       {
         name: t("AiSuggestions:FilesSelectedFileConvertFile"),
         prompt: t("AiSuggestions:FilesSelectedFileConvertFilePrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesSelectedFileFindTextInTheDocument"),
-        prompt: t("AiSuggestions:FilesSelectedFileFindTextInTheDocumentPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesSelectedFileShowFileDetails"),
-        prompt: t("AiSuggestions:FilesSelectedFileShowFileDetailsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesSelectedFileRenameFile"),
-        prompt: t("AiSuggestions:FilesSelectedFileRenameFilePrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesSelectedFileMoveFile"),
-        prompt: t("AiSuggestions:FilesSelectedFileMoveFilePrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesSelectedFileDeleteFile"),
-        prompt: t("AiSuggestions:FilesSelectedFileDeleteFilePrompt"),
       },
       {
         name: t(
@@ -349,18 +385,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         prompt: t("AiSuggestions:FilesMultipleCreateACombinedSummaryPrompt"),
       },
       {
-        name: t("AiSuggestions:FilesMultipleFindContradictions"),
-        prompt: t("AiSuggestions:FilesMultipleFindContradictionsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesMultiplePrepareForAMeeting"),
-        prompt: t("AiSuggestions:FilesMultiplePrepareForAMeetingPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FilesMultipleCreateAnActionPlan"),
-        prompt: t("AiSuggestions:FilesMultipleCreateAnActionPlanPrompt"),
-      },
-      {
         name: t("AiSuggestions:FilesMultipleConvertSelectedFiles"),
         prompt: t("AiSuggestions:FilesMultipleConvertSelectedFilesPrompt"),
       },
@@ -369,8 +393,8 @@ export const getSuggestionsBySection = (t: TTranslation) => {
     // +
     rooms: [
       {
-        name: t("AiSuggestions:RoomsFindARoom"),
-        prompt: t("AiSuggestions:RoomsFindARoomPrompt"),
+        name: t("AiSuggestions:RoomsHelpMeChooseARoomType"),
+        prompt: t("AiSuggestions:RoomsHelpMeChooseARoomTypePrompt"),
       },
       {
         name: t("AiSuggestions:RoomsFindRoomsByParticipant"),
@@ -381,11 +405,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         prompt: t("AiSuggestions:RoomsFindARoomByFilePrompt"),
       },
       {
-        name: t("AiSuggestions:RoomsReviewRoomAccess"),
-        prompt: t("AiSuggestions:RoomsReviewRoomAccessPrompt"),
-        requires: "roomAdmin",
-      },
-      {
         name: t("AiSuggestions:RoomsShowRoomsIManage"),
         prompt: t("AiSuggestions:RoomsShowRoomsIManagePrompt"),
       },
@@ -393,10 +412,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         name: t("AiSuggestions:RoomsShowRoomsWithExternalAccess"),
         prompt: t("AiSuggestions:RoomsShowRoomsWithExternalAccessPrompt"),
         requires: "roomAdmin",
-      },
-      {
-        name: t("AiSuggestions:RoomsHelpMeChooseARoomType"),
-        prompt: t("AiSuggestions:RoomsHelpMeChooseARoomTypePrompt"),
       },
       {
         name: t("AiSuggestions:RoomsSuggestRoomsToArchive"),
@@ -517,123 +532,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
-    insideRoom: [
-      {
-        name: t("AiSuggestions:InsideRoomSummarizeRoom"),
-        prompt: t("AiSuggestions:InsideRoomSummarizeRoomPrompt"),
-      },
-      {
-        name: t("AiSuggestions:InsideRoomSummarizeRoomFiles"),
-        prompt: t("AiSuggestions:InsideRoomSummarizeRoomFilesPrompt"),
-      },
-      {
-        name: t("AiSuggestions:InsideRoomFindTasksAndDeadlines"),
-        prompt: t("AiSuggestions:InsideRoomFindTasksAndDeadlinesPrompt"),
-      },
-      {
-        name: t("AiSuggestions:InsideRoomFindImportantFiles"),
-        prompt: t("AiSuggestions:InsideRoomFindImportantFilesPrompt"),
-      },
-      {
-        name: t("AiSuggestions:InsideRoomCreateAFolderInTheRoom"),
-        prompt: t("AiSuggestions:InsideRoomCreateAFolderInTheRoomPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomUploadFilesToTheRoom"),
-        prompt: t("AiSuggestions:InsideRoomUploadFilesToTheRoomPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomOrganizeContent"),
-        prompt: t("AiSuggestions:InsideRoomOrganizeContentPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomFindADocument"),
-        prompt: t("AiSuggestions:InsideRoomFindADocumentPrompt"),
-      },
-      {
-        name: t("AiSuggestions:InsideRoomShowRoomInfo"),
-        prompt: t("AiSuggestions:InsideRoomShowRoomInfoPrompt"),
-      },
-      {
-        name: t("AiSuggestions:InsideRoomArchiveRoom"),
-        prompt: t("AiSuggestions:InsideRoomArchiveRoomPrompt"),
-        requires: "move",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomShowParticipantsAndRoles"),
-        prompt: t("AiSuggestions:InsideRoomShowParticipantsAndRolesPrompt"),
-      },
-      {
-        name: t("AiSuggestions:InsideRoomInviteParticipants"),
-        prompt: t("AiSuggestions:InsideRoomInviteParticipantsPrompt"),
-        requires: "editAccess",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomCheckExcessivePermissions"),
-        prompt: t("AiSuggestions:InsideRoomCheckExcessivePermissionsPrompt"),
-        requires: "editAccess",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomFindExternalAccess"),
-        prompt: t("AiSuggestions:InsideRoomFindExternalAccessPrompt"),
-        requires: "editAccess",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomChangeNameAndTags"),
-        prompt: t("AiSuggestions:InsideRoomChangeNameAndTagsPrompt"),
-        requires: "editRoom",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomUpdateRoomAvatar"),
-        prompt: t("AiSuggestions:InsideRoomUpdateRoomAvatarPrompt"),
-        requires: "editRoom",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomChangeParticipantRoles"),
-        prompt: t("AiSuggestions:InsideRoomChangeParticipantRolesPrompt"),
-        requires: "editAccess",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomRemoveAParticipant"),
-        prompt: t("AiSuggestions:InsideRoomRemoveAParticipantPrompt"),
-        requires: "editAccess",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomExplainCurrentPermissions"),
-        prompt: t("AiSuggestions:InsideRoomExplainCurrentPermissionsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:InsideRoomCheckRoleAlignment"),
-        prompt: t("AiSuggestions:InsideRoomCheckRoleAlignmentPrompt"),
-        requires: "editAccess",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomSuggestARoomStructure"),
-        prompt: t("AiSuggestions:InsideRoomSuggestARoomStructurePrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomCreateAPresentationFromTheRoom"),
-        prompt: t(
-          "AiSuggestions:InsideRoomCreateAPresentationFromTheRoomPrompt",
-        ),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomCreateAReportFromTheRoom"),
-        prompt: t("AiSuggestions:InsideRoomCreateAReportFromTheRoomPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:InsideRoomCollectRoomDataIntoATable"),
-        prompt: t("AiSuggestions:InsideRoomCollectRoomDataIntoATablePrompt"),
-        requires: "create",
-      },
-    ],
-
     aiRoom: [
       {
         name: t("AiSuggestions:AiRoomWhatCanIAsk"),
@@ -694,84 +592,32 @@ export const getSuggestionsBySection = (t: TTranslation) => {
       },
     ],
 
+    customRoom: insideRoom,
     // +
-    collaborationRoom: [
-      {
-        name: t("AiSuggestions:CollaborationRoomFindUnansweredQuestions"),
-        prompt: t(
-          "AiSuggestions:CollaborationRoomFindUnansweredQuestionsPrompt",
-        ),
-      },
-      {
-        name: t("AiSuggestions:CollaborationRoomPrepareForAMeeting"),
-        prompt: t("AiSuggestions:CollaborationRoomPrepareForAMeetingPrompt"),
-      },
-      {
-        name: t("AiSuggestions:CollaborationRoomShowParticipantsAndRoles"),
-        prompt: t(
-          "AiSuggestions:CollaborationRoomShowParticipantsAndRolesPrompt",
-        ),
-      },
-      {
-        name: t("AiSuggestions:CollaborationRoomInviteParticipants"),
-        prompt: t("AiSuggestions:CollaborationRoomInviteParticipantsPrompt"),
-        requires: "editAccess",
-      },
-      {
-        name: t("AiSuggestions:CollaborationRoomCreateAFileForTheRoom"),
-        prompt: t("AiSuggestions:CollaborationRoomCreateAFileForTheRoomPrompt"),
-        requires: "create",
-      },
-    ],
+    collaborationRoom: insideRoom,
 
     // +
     vdrRoom: [
       {
-        name: t("AiSuggestions:VdrRoomBuildADocumentIndex"),
-        prompt: t("AiSuggestions:VdrRoomBuildADocumentIndexPrompt"),
-      },
-      {
-        name: t("AiSuggestions:VdrRoomReviewVDRAccess"),
-        prompt: t("AiSuggestions:VdrRoomReviewVDRAccessPrompt"),
-        requires: "editAccess",
-      },
-      {
         name: t("AiSuggestions:VdrRoomFindSensitiveData"),
         prompt: t("AiSuggestions:VdrRoomFindSensitiveDataPrompt"),
-      },
-      {
-        name: t("AiSuggestions:VdrRoomWhatDocumentsAreMissing"),
-        prompt: t("AiSuggestions:VdrRoomWhatDocumentsAreMissingPrompt"),
       },
       {
         name: t("AiSuggestions:VdrRoomOrganizeVDRDocuments"),
         prompt: t("AiSuggestions:VdrRoomOrganizeVDRDocumentsPrompt"),
         requires: "create",
       },
+      ...insideRoom,
     ],
 
     // +
     publicRoom: [
       {
-        name: t("AiSuggestions:PublicRoomPrepareAPublicSummary"),
-        prompt: t("AiSuggestions:PublicRoomPrepareAPublicSummaryPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:PublicRoomReviewBeforePublishing"),
-        prompt: t("AiSuggestions:PublicRoomReviewBeforePublishingPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:PublicRoomReviewPublicAccess"),
-        prompt: t("AiSuggestions:PublicRoomReviewPublicAccessPrompt"),
-        requires: "editAccess",
-      },
-      {
         name: t("AiSuggestions:PublicRoomFindOutdatedContent"),
         prompt: t("AiSuggestions:PublicRoomFindOutdatedContentPrompt"),
         requires: "create",
       },
+      ...insideRoom,
     ],
 
     // +
@@ -811,10 +657,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         requires: "roomAdmin",
       },
       {
-        name: t("AiSuggestions:FormsRecommendAFormForTheTask"),
-        prompt: t("AiSuggestions:FormsRecommendAFormForTheTaskPrompt"),
-      },
-      {
         name: t("AiSuggestions:FormsCreateAFormWithAI"),
         prompt: t("AiSuggestions:FormsCreateAFormWithAIPrompt"),
         requires: "contentCreator",
@@ -823,16 +665,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         name: t("AiSuggestions:FormsConvertAFileIntoAForm"),
         prompt: t("AiSuggestions:FormsConvertAFileIntoAFormPrompt"),
         requires: "contentCreator",
-      },
-      {
-        name: t("AiSuggestions:FormsWhichCollectionsNeedAttention"),
-        prompt: t("AiSuggestions:FormsWhichCollectionsNeedAttentionPrompt"),
-        requires: "roomAdmin",
-      },
-      {
-        name: t("AiSuggestions:FormsReviewFormsAccess"),
-        prompt: t("AiSuggestions:FormsReviewFormsAccessPrompt"),
-        requires: "roomAdmin",
       },
     ],
 
@@ -946,11 +778,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         requires: "create",
       },
       {
-        name: t("AiSuggestions:FormSpaceCreateABlankForm"),
-        prompt: t("AiSuggestions:FormSpaceCreateABlankFormPrompt"),
-        requires: "create",
-      },
-      {
         name: t("AiSuggestions:FormSpaceConvertAFileIntoAForm"),
         prompt: t("AiSuggestions:FormSpaceConvertAFileIntoAFormPrompt"),
         requires: "create",
@@ -959,16 +786,6 @@ export const getSuggestionsBySection = (t: TTranslation) => {
         name: t("AiSuggestions:FormSpaceAddAFormFromTheGallery"),
         prompt: t("AiSuggestions:FormSpaceAddAFormFromTheGalleryPrompt"),
         requires: "create",
-      },
-      {
-        name: t("AiSuggestions:FormSpaceInviteParticipants"),
-        prompt: t("AiSuggestions:FormSpaceInviteParticipantsPrompt"),
-        requires: "editAccess",
-      },
-      {
-        name: t("AiSuggestions:FormSpaceReviewAccessPermissions"),
-        prompt: t("AiSuggestions:FormSpaceReviewAccessPermissionsPrompt"),
-        requires: "editAccess",
       },
       {
         name: t("AiSuggestions:FormSpaceOrganizeForms"),
@@ -988,103 +805,10 @@ export const getSuggestionsBySection = (t: TTranslation) => {
     ],
 
     // +
-    formSpaceInProgress: [
-      {
-        name: t("AiSuggestions:FormSpaceInProgressShowCompletionStatus"),
-        prompt: t(
-          "AiSuggestions:FormSpaceInProgressShowCompletionStatusPrompt",
-        ),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceInProgressWhoHasnTCompleted"),
-        prompt: t("AiSuggestions:FormSpaceInProgressWhoHasnTCompletedPrompt"),
-        requires: "editRoom",
-      },
-      {
-        name: t("AiSuggestions:FormSpaceInProgressFindOverdueResponses"),
-        prompt: t(
-          "AiSuggestions:FormSpaceInProgressFindOverdueResponsesPrompt",
-        ),
-        requires: "editRoom",
-      },
-      {
-        name: t("AiSuggestions:FormSpaceInProgressShowCurrentStage"),
-        prompt: t("AiSuggestions:FormSpaceInProgressShowCurrentStagePrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceInProgressFindBottlenecks"),
-        prompt: t("AiSuggestions:FormSpaceInProgressFindBottlenecksPrompt"),
-        requires: "editRoom",
-      },
-      {
-        name: t("AiSuggestions:FormSpaceInProgressPrepareAReminderList"),
-        prompt: t(
-          "AiSuggestions:FormSpaceInProgressPrepareAReminderListPrompt",
-        ),
-        requires: "editRoom",
-      },
-    ],
+    formSpaceInProgress: formSpaceResults,
 
     // +
-    formSpaceResults: [
-      {
-        name: t("AiSuggestions:FormSpaceResultsSummarizeResults"),
-        prompt: t("AiSuggestions:FormSpaceResultsSummarizeResultsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsShowKeyMetrics"),
-        prompt: t("AiSuggestions:FormSpaceResultsShowKeyMetricsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsFindCommonAnswers"),
-        prompt: t("AiSuggestions:FormSpaceResultsFindCommonAnswersPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsCompareGroupsOrPeriods"),
-        prompt: t("AiSuggestions:FormSpaceResultsCompareGroupsOrPeriodsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsShowTrends"),
-        prompt: t("AiSuggestions:FormSpaceResultsShowTrendsPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsFindUnusualAnswers"),
-        prompt: t("AiSuggestions:FormSpaceResultsFindUnusualAnswersPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsCheckResponseQuality"),
-        prompt: t("AiSuggestions:FormSpaceResultsCheckResponseQualityPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsGroupOpenEndedAnswers"),
-        prompt: t("AiSuggestions:FormSpaceResultsGroupOpenEndedAnswersPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsCreateAnActionPlan"),
-        prompt: t("AiSuggestions:FormSpaceResultsCreateAnActionPlanPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsConvertToATableOrChart"),
-        prompt: t("AiSuggestions:FormSpaceResultsConvertToATableOrChartPrompt"),
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsCreateAResultsReport"),
-        prompt: t("AiSuggestions:FormSpaceResultsCreateAResultsReportPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsCreateAPresentation"),
-        prompt: t("AiSuggestions:FormSpaceResultsCreateAPresentationPrompt"),
-        requires: "create",
-      },
-      {
-        name: t("AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheet"),
-        prompt: t(
-          "AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheetPrompt",
-        ),
-        requires: "create",
-      },
-    ],
+    formSpaceResults,
 
     // Composer attachment the backend flagged as analyzable (a form): the
     // chips act on the attached file itself, so they need no folder rights.
@@ -1200,6 +924,8 @@ const sectionFromRoomType = (
   roomType?: RoomsType | null,
 ): SuggestionSection => {
   switch (roomType) {
+    case RoomsType.CustomRoom:
+      return "customRoom";
     case RoomsType.EditingRoom:
       return "collaborationRoom";
     case RoomsType.PublicRoom:
@@ -1210,8 +936,6 @@ const sectionFromRoomType = (
       return "formSpace";
     case RoomsType.AIRoom:
       return "aiRoom";
-    // case RoomsType.CustomRoom:
-    //   return "insideRoom";
     default:
       return "default";
   }

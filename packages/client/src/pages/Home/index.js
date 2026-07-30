@@ -42,6 +42,8 @@ import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
 import {
   useChatNoAccess,
   mapChatNoAccessStores,
@@ -96,7 +98,6 @@ import {
   usePanelExclusivity,
 } from "./Hooks";
 import { useQuickActions } from "./Hooks/useQuickActions";
-import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import styles from "./Home.module.scss";
 
@@ -117,6 +118,7 @@ const PureHome = observer((props) => {
     startUpload,
     setDragging,
     dragging,
+    isChatDropTarget,
     createFoldersTree,
     disableDrag,
     clearPrimaryProgressData,
@@ -235,6 +237,7 @@ const PureHome = observer((props) => {
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
+  const isDesktop = useIsDesktop();
 
   const location = useLocation();
 
@@ -282,7 +285,7 @@ const PureHome = observer((props) => {
   const isAiChatFullscreen =
     isAiChatAvailable &&
     aiChatPanel.isChatPanelVisible &&
-    aiChatPanel.isChatPanelFullscreen;
+    (aiChatPanel.isChatPanelFullscreen || !isDesktop);
 
   // The "Forms" section root gets its own quick-actions tile set (collect
   // forms + from template), resolved by the hook below.
@@ -580,6 +583,9 @@ const PureHome = observer((props) => {
 
   sectionProps.isChatPanelAvailable = isAiChatAvailable;
   sectionProps.isChatPanelVisible = aiChatPanel.isChatPanelVisible;
+  sectionProps.chatPanelDropTargetLabel = isChatDropTarget
+    ? t("Common:DropFilesToAttach")
+    : undefined;
   sectionProps.setIsChatPanelVisible = (visible) => {
     if (!visible) aiChatPanel.closeChatPanel();
   };
@@ -802,6 +808,7 @@ export const Component = inject(
       selection,
       dragging,
       setDragging,
+      isChatDropTarget,
 
       viewAs,
       getFileInfo,
@@ -954,6 +961,7 @@ export const Component = inject(
       // homepage: config.homepage,
       firstLoad,
       dragging,
+      isChatDropTarget,
       viewAs,
       isRecycleBinFolder,
       isVisitor: userStore.user.isVisitor,
@@ -1108,4 +1116,3 @@ export const Component = inject(
     };
   },
 )(observer(HomeWithGuard));
-

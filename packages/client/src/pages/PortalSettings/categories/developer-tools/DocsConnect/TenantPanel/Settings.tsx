@@ -33,9 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
+
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -51,6 +54,7 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import CheckRoundReactSvgUrl from "PUBLIC_DIR/images/icons/16/check.round.react.svg?url";
 
 import type {
   TDocsConnectInfo,
@@ -59,6 +63,8 @@ import type {
 import type { TTranslation } from "@docspace/shared/types";
 
 import AddRuleDialog from "./sub-components/AddRuleDialog";
+import ApplyToPortalDialog from "./sub-components/ApplyToPortalDialog";
+import ResetRulesDialog from "./sub-components/ResetRulesDialog";
 
 import styles from "./TenantPanel.module.scss";
 
@@ -79,12 +85,25 @@ interface SettingsProps {
   info?: TDocsConnectInfo;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   updateConfig?: (data: TDocsConnectConfigUpdate) => Promise<void>;
+  applyToDocumentService?: () => Promise<void>;
+  resetDocumentService?: () => Promise<void>;
+  fetchDocumentService?: () => Promise<void>;
+  isConnectedToPortal?: boolean;
 }
 
 const onlyDigits = (value: string) => value.replace(/\D/g, "");
 
-const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
+const Settings = ({
+  info,
+  copyToClipboard,
+  updateConfig,
+  applyToDocumentService,
+  resetDocumentService,
+  fetchDocumentService,
+  isConnectedToPortal,
+}: SettingsProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
+  const navigate = useNavigate();
 
   const [baseline, setBaseline] = useState<TGeneralState>(() => ({
     header: info?.config.security.header ?? "",
@@ -104,6 +123,8 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
     })),
   );
   const [addRuleDialogVisible, setAddRuleDialogVisible] = useState(false);
+  const [resetRulesDialogVisible, setResetRulesDialogVisible] =
+    useState(false);
 
   const [savedMaxDownload, setSavedMaxDownload] = useState(() =>
     info?.config.server.fileSizeLimit != null
@@ -113,9 +134,47 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
   const [maxDownloadBytes, setMaxDownloadBytes] = useState(savedMaxDownload);
   const [isSavingRules, setIsSavingRules] = useState(false);
 
+  const [applyDialogVisible, setApplyDialogVisible] = useState(false);
+  const [isApplying, setIsApplying] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
+
+  useEffect(() => {
+    fetchDocumentService?.();
+  }, [fetchDocumentService]);
+
   if (!info) return null;
 
   const isBusy = isSavingGeneral || isSavingRules;
+
+  const canApplyToPortal =
+    !!info.tenant.address &&
+    !!info.config.security.secret &&
+    !!info.config.security.header;
+
+  const onApplyToPortal = async () => {
+    setIsApplying(true);
+    try {
+      await applyToDocumentService?.();
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+      setApplyDialogVisible(false);
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      setIsApplying(false);
+    }
+  };
+
+  const onResetPortal = async () => {
+    setIsResetting(true);
+    try {
+      await resetDocumentService?.();
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      setIsResetting(false);
+    }
+  };
 
   const hasChangesGeneral =
     general.header !== baseline.header ||
@@ -156,8 +215,6 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
   };
 
   const persistRules = async (next: TAccessRule[]) => {
-    const prev = rules;
-    setRules(next);
     setIsSavingRules(true);
     try {
       await updateConfig?.({
@@ -168,17 +225,18 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
           })),
         },
       });
+      setRules(next);
+      return true;
     } catch (e) {
-      setRules(prev);
       toastr.error(e as Error);
+      return false;
     } finally {
       setIsSavingRules(false);
     }
   };
 
-  const onAddRule = (type: "allow" | "deny", value: string) => {
+  const onAddRule = (type: "allow" | "deny", value: string) =>
     persistRules([...rules, { key: `${Date.now()}`, type, value }]);
-  };
 
   const onDeleteRule = (key: string) => {
     persistRules(rules.filter((rule) => rule.key !== key));
@@ -186,6 +244,94 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
 
   return (
     <div className={styles.settings}>
+      <Text fontSize="16px" fontWeight={700}>
+        {t("DocsConnect:DocsConnectionTitle", {
+          organizationName: getBrandName("OrganizationName"),
+          editorsName: getBrandName("ProductEditorsName"),
+        })}
+      </Text>
+
+      {isConnectedToPortal ? (
+        <div className={styles.connectionGroup}>
+          <div className={styles.connectedBanner}>
+            <img
+              src={CheckRoundReactSvgUrl}
+              alt=""
+              className={styles.connectedBannerIcon}
+            />
+            <Text fontSize="13px">
+              <Trans
+                ns="DocsConnect"
+                i18nKey="ConnectedBanner"
+                values={{
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                  service: t("DocsConnect:DocsConnect"),
+                }}
+                components={{ 1: <Text as="span" fontWeight={600} /> }}
+              />
+            </Text>
+          </div>
+          <div className={styles.addRuleAction}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("DocsConnect:OpenDocsSettings", {
+                editorsName: getBrandName("ProductEditorsName"),
+              })}
+              isDisabled={isBusy || isResetting}
+              onClick={() =>
+                navigate("/portal-settings/integration/document-service")
+              }
+              testId="docs_connect_open_docs_settings"
+            />
+            <Button
+              size={ButtonSize.small}
+              label={t("Common:Reset")}
+              isDisabled={isBusy || isResetting}
+              isLoading={isResetting}
+              onClick={onResetPortal}
+              testId="docs_connect_reset_portal"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className={styles.connectionGroup}>
+          <div className={styles.settingsGroup}>
+            <Text fontWeight={600}>
+              {t("DocsConnect:UseEditorsInProduct", {
+                productName: getBrandName("ProductName"),
+              })}
+            </Text>
+            <Text fontSize="13px" className={styles.settingsHint}>
+              {t("DocsConnect:DocsConnectionDescription", {
+                service: t("DocsConnect:DocsConnect"),
+                productName: getBrandName("ProductName"),
+              })}
+            </Text>
+          </div>
+          <div className={styles.addRuleAction}>
+            <Button
+              primary
+              size={ButtonSize.small}
+              label={t("DocsConnect:ConnectToDocs", {
+                organizationName: getBrandName("OrganizationName"),
+                editorsName: getBrandName("ProductEditorsName"),
+              })}
+              isDisabled={isBusy || isResetting || !canApplyToPortal}
+              onClick={() => setApplyDialogVisible(true)}
+              testId="docs_connect_apply_to_portal"
+            />
+            <Button
+              size={ButtonSize.small}
+              label={t("Common:Reset")}
+              isDisabled
+              testId="docs_connect_reset_portal"
+            />
+          </div>
+        </div>
+      )}
+
       <Text fontSize="16px" fontWeight={700}>
         {t("Common:SettingsGeneral")}
       </Text>
@@ -398,7 +544,7 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
           size={ButtonSize.small}
           label={t("Common:Reset")}
           isDisabled={isBusy || rules.length === 0}
-          onClick={() => persistRules([])}
+          onClick={() => setResetRulesDialogVisible(true)}
         />
       </div>
 
@@ -409,6 +555,27 @@ const Settings = ({ info, copyToClipboard, updateConfig }: SettingsProps) => {
           onAdd={onAddRule}
         />
       ) : null}
+
+      {applyDialogVisible ? (
+        <ApplyToPortalDialog
+          visible
+          isSaving={isApplying}
+          onApply={onApplyToPortal}
+          onClose={() => setApplyDialogVisible(false)}
+        />
+      ) : null}
+
+      {resetRulesDialogVisible ? (
+        <ResetRulesDialog
+          visible
+          isSaving={isSavingRules}
+          onReset={async () => {
+            const ok = await persistRules([]);
+            if (ok) setResetRulesDialogVisible(false);
+          }}
+          onClose={() => setResetRulesDialogVisible(false)}
+        />
+      ) : null}
     </div>
   );
 };
@@ -417,5 +584,9 @@ export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   copyToClipboard: docsConnectStore.copyToClipboard,
   updateConfig: docsConnectStore.updateConfig,
+  applyToDocumentService: docsConnectStore.applyToDocumentService,
+  resetDocumentService: docsConnectStore.resetDocumentService,
+  fetchDocumentService: docsConnectStore.fetchDocumentService,
+  isConnectedToPortal: docsConnectStore.isConnectedToPortal,
 }))(observer(Settings));
 

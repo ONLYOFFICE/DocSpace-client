@@ -397,6 +397,17 @@ export const encryptedFilesHandlers = (
         });
         const f = files.get(fileId);
         if (!f) return errorResponse(404, `file ${fileId} not found`);
+        const seenUsers = new Set<string>();
+        for (const k of keys) {
+          const uid = String(k.userId);
+          if (seenUsers.has(uid)) {
+            return errorResponse(
+              403,
+              `duplicate DbFileKeys row for user ${uid} on file ${fileId}`,
+            );
+          }
+          seenUsers.add(uid);
+        }
         f.fileKeys = keys;
         return okResponse({ keys });
       },

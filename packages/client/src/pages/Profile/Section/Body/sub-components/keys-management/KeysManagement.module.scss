@@ -92,6 +92,10 @@
   gap: 12px;
 }
 
+.toggleRow {
+  display: flex;
+}
+
 .deviceToggle {
   position: relative;
   height: 20px;
@@ -126,11 +130,7 @@
   white-space: nowrap;
 }
 
-.keyDetails {
-  margin-top: 4px;
-}
-
-.fingerprint {
+.monoValue {
   font-family: "Roboto Mono", monospace;
   font-size: 12px;
   letter-spacing: 0.5px;
@@ -161,11 +161,12 @@
   border: 1px solid var(--divider-color);
 }
 
-.keyItemHeader {
+.statusRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  gap: 8px;
+  min-width: 0;
 }
 
 .keyItemBadges {
@@ -218,13 +219,6 @@
   margin-bottom: 20px;
 }
 
-.keyIdText {
-  font-family: "Roboto Mono", monospace;
-  font-size: 12px;
-  min-width: 0;
-  word-break: break-all;
-}
-
 .resetSection {
   margin-top: 32px;
   padding-top: 16px;
@@ -232,6 +226,23 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.resumeSection {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--row-background-color);
+  border: 1px solid var(--divider-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.resumeActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .resetHint {

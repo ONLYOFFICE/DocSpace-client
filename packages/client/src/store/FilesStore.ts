@@ -1272,7 +1272,7 @@ class FilesStore {
   ) => {
     // the AI quota endpoints are typed with numeric agent
     // ids; string ids pass through unchanged at runtime.
-    const agents = await api.ai.setNewAiAgentQuota(
+    const agents = await api.ai.setCustomAIAgentQuota(
       itemsIDs as number[],
       +quotaSize,
     );
@@ -1309,7 +1309,7 @@ class FilesStore {
     inAgent = false,
     filter: Nullable<TRoomsFilter> = null,
   ) => {
-    const agents = await api.ai.resetNewAiAgentQuota(itemsIDs as number[]);
+    const agents = await api.ai.resetAIAgentQuota(itemsIDs as number[]);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);

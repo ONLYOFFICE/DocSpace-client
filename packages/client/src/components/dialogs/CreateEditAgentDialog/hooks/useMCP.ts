@@ -79,7 +79,7 @@ export const useMCP = ({
 
 	const agentId = agentParams.agentId;
 
-	// Servers are keyed by name in the new-ai model. System servers (from the
+	// Servers are keyed by name in the chat-lib model. System servers (from the
 	// service config) get the portal branding; everything else is a portal
 	// custom server copied into the agent scope.
 	const toSelectorItem = React.useCallback(

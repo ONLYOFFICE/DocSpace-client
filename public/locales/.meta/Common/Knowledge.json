@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-07-07T08:59:21.726Z",
+  "updated_at": "2026-07-28T07:30:59.841Z",
   "comment": {
     "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 228,
+      "line_number": 212,
       "context": "onClick: makeOnClick(TAB_IDS.WEB_SEARCH),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.KNOWLEDGE,\n name: t(\"Common:Knowledge\"),\n content: standalone ? <Knowledge /> : <KnowledgeBaseSaas />,\n onClick: makeOnClick(TAB_IDS.KNOWLEDGE),\n isDisabled: disableNonAiModels,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 268,
+      "line_number": 266,
       "context": "className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n >",
       "module": "/packages/client"
     },
@@ -61,8 +61,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/settings-tabs/index.tsx",
-      "line_number": 93,
-      "context": "]\n : []),\n { id: \"providers\", name: t(\"Common:AIProvider\"), content: null },\n { id: \"servers\", name: t(\"Common:MCPSettingTitle\"), content: null },\n { id: \"search\", name: t(\"Common:WebSearchAI\"), content: null },\n { id: \"knowledge\", name: t(\"Common:Knowledge\"), content: null },\n ];\n \n const onSelect = (element: TTabItem) => {\n router.push(`/ai-agents/settings/${element.id}`);\n };",
+      "line_number": 86,
+      "context": "},\n ]\n : []),\n { id: \"servers\", name: t(\"Common:MCPSettingTitle\"), content: null },\n { id: \"search\", name: t(\"Common:WebSearchAI\"), content: null },\n { id: \"knowledge\", name: t(\"Common:Knowledge\"), content: null },\n ];\n \n const onSelect = (element: TTabItem) => {\n router.push(`/ai-agents/settings/${element.id}`);\n };",
       "module": "/packages/sdk"
     }
   ],

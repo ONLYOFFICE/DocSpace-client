@@ -82,8 +82,6 @@ import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
-import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
-import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import useInitCommonStores, {
   type CommonData,
@@ -92,10 +90,8 @@ import useFormsData from "../_hooks/useFormsData";
 import { FormsDataProvider } from "../_context/FormsDataContext";
 import useFolderActions from "../_hooks/useFolderActions";
 import useFormsSocket from "../_hooks/useFormsSocket";
-import useFormEventHooks from "../_hooks/useFormEventHooks";
 import useEditorGuard from "../_hooks/useEditorGuard";
 
-import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import { useFormsProgressStore } from "../_store/FormsProgressStore";
@@ -109,12 +105,6 @@ import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
 
-const AiChatPanel = dynamic(() => import("../_components/ai-chat-panel"), {
-  ssr: false,
-});
-const AiChatButton = dynamic(() => import("../_components/ai-chat-button"), {
-  ssr: false,
-});
 const CreateFormDialog = dynamic(
   () => import("../_components/create-form-dialog"),
   { ssr: false },
@@ -142,6 +132,9 @@ import {
 } from "../_utils/mockFormFiles";
 import styles from "../_components/forms-layout/FormsLayout.module.scss";
 
+// Minimum width the section content area may shrink to.
+const MIN_SECTION_WIDTH = 400;
+
 type FormsShellProps = {
   commonData: CommonData & { authToken: string };
   children: React.ReactNode;
@@ -161,12 +154,9 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     goBackToInProgressRoot,
   } = formsNavigationStore;
   // libraryNav removed — library uses URL routing now
-  const aiStore = useFormsAiAgentStore();
-  const dbSettingsStore = useFormsDbSettingsStore();
-  const { sendToDb } = dbSettingsStore;
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
-  const { roomId, socketUrl, hasManagementAccess } = formsSettingsStore;
+  const { roomId, socketUrl, doneFolderId } = formsSettingsStore;
   const formsListStore = useFormsListStore();
   const { items, folders, isLoading } = formsListStore;
   const tourStore = useFormsTourStore();
@@ -182,18 +172,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   );
   const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
 
-  const { headerOffset, headerHeight, frameHeaderVars } =
-    useFrameHeaderConfig();
-
-  const isChatPanelOnLeft =
-    aiStore.isPanelVisible &&
-    !!aiStore.currentAgentId &&
-    hasManagementAccess &&
-    !editingFile &&
-    aiStore.panelPosition === "left";
-
-  const formsHeaderOffset = isChatPanelOnLeft ? 0 : headerOffset;
-  const chatPanelHeaderOffset = isChatPanelOnLeft ? headerOffset : 0;
+  const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
   const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
     async () => {},
@@ -323,18 +302,9 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     if (roomId) ids.add(String(roomId));
     if (completedFolder) ids.add(String(completedFolder.id));
     if (inProgressFolder) ids.add(String(inProgressFolder.id));
-    if (aiStore.doneFolderId) ids.add(String(aiStore.doneFolderId));
-    for (const key of Object.keys(aiStore.folderAgentsMap)) {
-      ids.add(key);
-    }
+    if (doneFolderId) ids.add(String(doneFolderId));
     return [...ids];
-  }, [
-    roomId,
-    completedFolder,
-    inProgressFolder,
-    aiStore.doneFolderId,
-    aiStore.folderAgentsMap,
-  ]);
+  }, [roomId, completedFolder, inProgressFolder, doneFolderId]);
 
   const socketFileIds = React.useMemo(() => items.map((f) => f.id), [items]);
 
@@ -349,8 +319,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     fetchSection,
     refreshAfterMutation,
   );
-  useFormEventHooks(hasManagementAccess ? aiStore : null, socketUrl);
-
 
   const isEditing = Boolean(editingFile);
 
@@ -373,47 +341,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     if (!user?.id) return;
     void tourStore.hydrateForUser(String(user.id));
   }, [user?.id, tourStore]);
-
-  React.useEffect(() => {
-    if (!roomId || !user?.id || !hasManagementAccess) return;
-
-    let cancelled = false;
-    let idleId: number | undefined;
-    let timeoutId: number | undefined;
-    const win = window as Window & {
-      requestIdleCallback?: (
-        cb: () => void,
-        opts?: { timeout: number },
-      ) => number;
-      cancelIdleCallback?: (id: number) => void;
-    };
-
-    (async () => {
-      await aiStore.initForRoom(roomId, user.id);
-      if (cancelled) return;
-
-      const runAutoEnable = () => {
-        if (!cancelled) aiStore.autoEnableIfAvailable();
-      };
-
-      if (win.requestIdleCallback) {
-        idleId = win.requestIdleCallback(runAutoEnable, { timeout: 2000 });
-      } else {
-        timeoutId = window.setTimeout(runAutoEnable, 2000);
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-      if (idleId !== undefined) win.cancelIdleCallback?.(idleId);
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
-    };
-  }, [roomId, user?.id, aiStore, hasManagementAccess]);
-
-  React.useEffect(() => {
-    if (!roomId || !user?.id || !hasManagementAccess || !sendToDb) return;
-    aiStore.initAskFromDBAgent();
-  }, [roomId, user?.id, aiStore, hasManagementAccess, sendToDb]);
 
   const prevPathname = React.useRef(pathname);
   const prevCompletedFolderShell = React.useRef(completedFolder);
@@ -502,35 +429,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         }
       }
     }
-
-    if (sectionChanged || folderChanged) {
-      if (hasManagementAccess && !tourStore.isRunning) {
-        aiStore.clearOverride();
-      }
-
-      if (
-        activeSection === FormsSection.Settings &&
-        hasManagementAccess &&
-        !tourStore.isRunning
-      ) {
-        aiStore.closePanel();
-      }
-
-      if (
-        sectionChanged &&
-        activeSection !== FormsSection.CompletedForms &&
-        hasManagementAccess
-      ) {
-        aiStore.setCurrentFolder(null);
-      }
-    }
   }, [
     pathname,
     completedFolder,
     inProgressFolder,
     activeSection,
-    hasManagementAccess,
-    aiStore,
     formsListStore,
   ]);
 
@@ -707,7 +610,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     formsListStore.setIsLoading(false);
   }, [activeSection, completedFolder, tourStore.isRunning, formsListStore]);
 
-  const rootRef = React.useRef<HTMLDivElement>(null);
   const isSettings = activeSection === FormsSection.Settings;
 
   if (!isReady) {
@@ -717,18 +619,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   return (
     <div
       className={styles.root}
-      ref={rootRef}
       style={
         {
           "--min-section-width": `${MIN_SECTION_WIDTH}px`,
         } as React.CSSProperties
       }
     >
-      <AiChatPanel
-        rootRef={rootRef}
-        headerOffset={chatPanelHeaderOffset}
-        headerHeight={headerHeight}
-      />
       <div className={styles.sectionArea} style={frameHeaderVars}>
         <Section
           withBodyScroll={!isEditing}
@@ -744,7 +640,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           currentDeviceType={currentDeviceType}
         >
           <Section.SectionHeader>
-            <FormsHeader headerOffset={formsHeaderOffset} />
+            <FormsHeader headerOffset={headerOffset} />
           </Section.SectionHeader>
           <Section.SectionBody>
             {isEditing && (
@@ -769,7 +665,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             </FormsDataProvider>
           </Section.SectionBody>
         </Section>
-        <AiChatButton shiftUp={progressStore.icon !== null} />
         {progressStore.icon !== null && (
           <div className={styles.floatingButtonContainer}>
             <FloatingButton

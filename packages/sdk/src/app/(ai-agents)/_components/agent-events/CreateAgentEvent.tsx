@@ -79,7 +79,6 @@ type Props = {
   title?: string;
   visible: boolean;
   onClose: VoidFunction;
-  portalMcpServerId?: string;
   folderFormValidation?: RegExp;
   maxImageUploadSize?: number;
 };
@@ -88,7 +87,6 @@ const CreateAgentEvent = ({
   title,
   visible,
   onClose,
-  portalMcpServerId = "",
   folderFormValidation,
   maxImageUploadSize,
 }: Props) => {
@@ -134,7 +132,6 @@ const CreateAgentEvent = ({
       onCreate={onCreate}
       fetchedTags={tagsStore.tags}
       isLoading={createEditAgentStore.isLoading}
-      portalMcpServerId={portalMcpServerId}
       folderFormValidation={folderFormValidation}
       maxImageUploadSize={maxImageUploadSize}
     />

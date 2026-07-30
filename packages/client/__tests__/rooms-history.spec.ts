@@ -52,6 +52,7 @@ import {
   type FolderHistoryHandlerHandle,
   type FolderHistoryReportHandle,
 } from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 // Public Room id from the roomList mock (getRoomList index 0, roomType 6)
@@ -137,6 +138,25 @@ async function selectDay(page: Page, day: string) {
   await datePicker.getByRole("button", { name: day, exact: true }).click();
 }
 
+async function selectDateRangeScope(page: Page) {
+  const dateRangeScope = page.getByTestId("info_history_export_date-range");
+
+  await dateRangeScope.click();
+
+  await expect(dateRangeScope.locator("input")).toBeChecked();
+}
+
+async function exportHistory(page: Page) {
+  await page.getByTestId("info_history_export").click();
+
+  const exportPopup = page.getByTestId("info_history_export_popup");
+  await expect(exportPopup).toBeVisible();
+
+  await page.getByTestId("info_history_export_submit").click();
+
+  await expect(exportPopup).toBeHidden();
+}
+
 test.use({ timezoneId: "UTC" });
 
 test.describe("Rooms — info panel history", () => {
@@ -176,6 +196,8 @@ test.describe("Rooms — info panel history", () => {
       }),
     );
 
+    await page.clock.setFixedTime(new Date(FIXED_NOW));
+
     const historyTab = await openRoom(page, baseUrl);
 
     await historyTab.click();
@@ -184,8 +206,13 @@ test.describe("Rooms — info panel history", () => {
       page.getByTestId("info_panel_files_view_container"),
     ).toBeVisible();
 
-    await expect(page.getByTestId("info_history_calendar")).toBeHidden();
-    await expect(page.getByTestId("info_download_history")).toBeHidden();
+    await expect(page.getByTestId("info_history_toolbar")).toBeHidden();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "rooms-history",
+      "third-party-room.png",
+    ]);
   });
 
   test.describe("Date picker", () => {
@@ -199,15 +226,15 @@ test.describe("Rooms — info panel history", () => {
     }) => {
       await openHistoryPanel(page, baseUrl);
 
-      const calendarButton = page.getByTestId("info_history_calendar");
+      const toolbar = page.getByTestId("info_history_toolbar");
       const detailsView = page.getByTestId("info_panel_files_view_details");
 
-      await expect(calendarButton).toBeVisible();
+      await expect(toolbar).toBeVisible();
 
       await page.getByTestId("info_details_tab").click();
 
       await expect(detailsView).toBeVisible();
-      await expect(calendarButton).toBeHidden();
+      await expect(toolbar).toBeHidden();
     });
 
     test("should request the history up to the selected day", async ({
@@ -238,6 +265,40 @@ test.describe("Rooms — info panel history", () => {
       await expect(historyPanel.getByText("Beta")).toBeVisible();
       await expect(historyPanel.getByText("Alpha")).toBeVisible();
       await expect(historyPanel.getByText("Gamma")).toBeHidden();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "rooms-history",
+        "date-picker-selected-day.png",
+      ]);
+    });
+
+    test("should request the whole history back when the day is cleared", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      const handle = historyHandle();
+
+      mockRequest.use(
+        folderHistoryHandler(TEST_PORT, ROOM_ID, { feeds: FEEDS, handle }),
+      );
+
+      await openHistoryPanel(page, baseUrl);
+
+      const blocks = page.locator(HISTORY_BLOCKS);
+      const dateFilterButton = page.getByTestId("info_history_calendar");
+
+      await selectDay(page, "16");
+
+      await expect(blocks).toHaveCount(2);
+      await expect(dateFilterButton).toHaveText("Mar 16, 2026");
+
+      await page.getByTestId("info_history_calendar_reset").click();
+
+      await expect(blocks).toHaveCount(FEEDS.length);
+      await expect(dateFilterButton).toHaveText("Go to date");
+      expect(handle.current?.getLastRequest()?.toDate).toBeNull();
     });
 
     test("should clear the selected day when the history tab is reopened", async ({
@@ -313,10 +374,99 @@ test.describe("Rooms — info panel history", () => {
       await expect(
         datePicker.getByRole("button", { name: "19", exact: true }),
       ).toBeDisabled();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "rooms-history",
+        "date-picker-calendar.png",
+      ]);
     });
   });
 
   test.describe("Report", () => {
+    test("should reveal the date range fields only for the date range scope", async ({
+      page,
+      baseUrl,
+    }) => {
+      await page.clock.setFixedTime(new Date(FIXED_NOW));
+
+      await openHistoryPanel(page, baseUrl);
+
+      await page.getByTestId("info_history_export").click();
+
+      const exportPopup = page.getByTestId("info_history_export_popup");
+      const dateRangeFields = page.getByTestId(
+        "info_history_export_date_range",
+      );
+
+      await expect(
+        exportPopup.getByRole("radio", { name: "All history" }),
+      ).toBeChecked();
+      await expect(dateRangeFields).toBeHidden();
+
+      await expectScreenshot(page, [
+        "desktop",
+        "rooms-history",
+        "export-all-history.png",
+      ]);
+
+      await selectDateRangeScope(page);
+
+      await expect(dateRangeFields).toBeVisible();
+      await expect(page.getByTestId("info_history_export_fromDate")).toHaveValue(
+        "18/02/2026",
+      );
+      await expect(page.getByTestId("info_history_export_toDate")).toHaveValue(
+        "18/03/2026",
+      );
+
+      await expectScreenshot(page, [
+        "desktop",
+        "rooms-history",
+        "export-date-range.png",
+      ]);
+    });
+
+    test("should send the picked range with the report request", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      const handle = reportHandle();
+
+      mockRequest.use(
+        ...folderHistoryReportHandlers(TEST_PORT, ROOM_ID, {
+          pollsBeforeComplete: 0,
+          resultFileUrl: REPORT_URL,
+          handle,
+        }),
+      );
+
+      await page.clock.setFixedTime(new Date(FIXED_NOW));
+
+      await openHistoryPanel(page, baseUrl);
+
+      await page.getByTestId("info_history_export").click();
+
+      await expect(
+        page.getByTestId("info_history_export_popup"),
+      ).toBeVisible();
+
+      await selectDateRangeScope(page);
+
+      const popupPromise = page.waitForEvent("popup");
+
+      await page.getByTestId("info_history_export_submit").click();
+
+      const reportPopup = await popupPromise;
+      await reportPopup.close();
+
+      expect(handle.current?.getLastStartRequest()).toEqual({
+        fromDate: "2026-02-18T00:00:00.000Z",
+        toDate: "2026-03-18T23:59:59.999Z",
+      });
+    });
+
     test("should open the generated report file", async ({
       page,
       baseUrl,
@@ -336,7 +486,7 @@ test.describe("Rooms — info panel history", () => {
 
       const popupPromise = page.waitForEvent("popup");
 
-      await page.getByTestId("info_download_history").click();
+      await exportHistory(page);
 
       const popup = await popupPromise;
 
@@ -364,13 +514,13 @@ test.describe("Rooms — info panel history", () => {
 
       await openHistoryPanel(page, baseUrl);
 
-      const downloadButton = page.getByTestId("info_download_history");
-      const loader = page.locator("#info_download-history-loader");
+      const exportButton = page.getByTestId("info_history_export");
+      const loader = page.locator("#info_history-export-loader");
 
-      await downloadButton.click();
+      await exportHistory(page);
 
       await expect(loader).toBeVisible();
-      await expect(downloadButton).toBeHidden();
+      await expect(exportButton).toBeDisabled();
 
       const toast = page.getByTestId("toast-content").first();
 
@@ -378,7 +528,7 @@ test.describe("Rooms — info panel history", () => {
       await expect(toast).toContainText("The report will be saved to");
 
       await expect(loader).toBeHidden();
-      await expect(downloadButton).toBeVisible();
+      await expect(exportButton).toBeEnabled();
 
       expect(handle.current?.getStatusRequestCount()).toBeGreaterThan(1);
     });
@@ -397,16 +547,16 @@ test.describe("Rooms — info panel history", () => {
 
       await openHistoryPanel(page, baseUrl);
 
-      const downloadButton = page.getByTestId("info_download_history");
+      const exportButton = page.getByTestId("info_history_export");
 
-      await downloadButton.click();
+      await exportHistory(page);
 
       const toast = page.getByTestId("toast-content").first();
 
       await expect(toast).toBeVisible();
       await expect(toast).toContainText("The maximum file size is exceeded");
 
-      await expect(downloadButton).toBeVisible();
+      await expect(exportButton).toBeEnabled();
     });
   });
 });

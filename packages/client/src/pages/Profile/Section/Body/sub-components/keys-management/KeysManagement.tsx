@@ -347,7 +347,7 @@ const KeysManagement = ({
           </Text>
           <AutoLockSetting />
           {passkeyPlatformOk || passkeyEnrolled ? (
-            <div className={styles.deviceRow}>
+            <div className={styles.toggleRow}>
               <ToggleButton
                 className={styles.deviceToggle}
                 isChecked={passkeyEnrolled}

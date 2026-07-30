@@ -65,7 +65,10 @@ type RoomsTourProps = {
   canCreate: boolean;
   canUseTemplates: boolean;
   showFilter: boolean;
+  hasItems: boolean;
+  isTableView: boolean;
   roomsId: string | null;
+  archiveId: string | null;
 };
 
 const RoomsTour = ({
@@ -78,7 +81,10 @@ const RoomsTour = ({
   canCreate,
   canUseTemplates,
   showFilter,
+  hasItems,
+  isTableView,
   roomsId,
+  archiveId,
 }: RoomsTourProps) => {
   const { t } = useTranslation(["RoomsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -89,8 +95,26 @@ const RoomsTour = ({
   }, [userId, roomsTourStore]);
 
   const flags = useMemo<TourStepFlags>(
-    () => ({ isDesktop, canCreate, canUseTemplates, showFilter, roomsId }),
-    [isDesktop, canCreate, canUseTemplates, showFilter, roomsId],
+    () => ({
+      isDesktop,
+      canCreate,
+      canUseTemplates,
+      showFilter,
+      hasItems,
+      isTableView,
+      roomsId,
+      archiveId,
+    }),
+    [
+      isDesktop,
+      canCreate,
+      canUseTemplates,
+      showFilter,
+      hasItems,
+      isTableView,
+      roomsId,
+      archiveId,
+    ],
   );
 
   const buildSteps = useCallback(
@@ -178,8 +202,13 @@ export default inject(
     publicRoomStore,
     roomsTourStore,
   }: TStore) => {
-    const { roomsFolder, roomsFolderId, isRoomsFolderRoot, isRoot } =
-      treeFoldersStore;
+    const {
+      roomsFolder,
+      roomsFolderId,
+      archiveFolderId,
+      isRoomsFolderRoot,
+      isRoot,
+    } = treeFoldersStore;
 
     const { isAdmin, isRoomAdmin } = authStore;
 
@@ -196,9 +225,13 @@ export default inject(
       canCreate: (isAdmin || isRoomAdmin) && !!roomsFolder,
       canUseTemplates: isAdmin || isRoomAdmin,
       showFilter: !filesStore.isEmptyPage,
-      // Sidebar anchor (ClientArticleSidebar → NavMenu data-item-id). The Rooms
-      // parent item id is the tree folder id.
+      hasItems: filesStore.filesList?.length > 0,
+      isTableView: filesStore.viewAs === "table",
+      // Sidebar anchors (ClientArticleSidebar → NavMenu data-item-id). The
+      // Rooms parent item id is the tree folder id, and so is Archive's; the
+      // remaining sub-items use static ids ("rooms-recent", "rooms-trash").
       roomsId: roomsFolderId != null ? String(roomsFolderId) : null,
+      archiveId: archiveFolderId != null ? String(archiveFolderId) : null,
     };
   },
 )(observer(RoomsTour));

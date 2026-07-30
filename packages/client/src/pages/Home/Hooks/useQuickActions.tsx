@@ -241,6 +241,7 @@ export const useQuickActions = (
     () => [
       {
         id: "quick-vdr-room",
+        dataTestId: "quick-vdr-room",
         icon: <QuickVdrRoomIcon />,
         label: t("Common:VirtualDataRoom"),
         onClick: () =>
@@ -248,6 +249,7 @@ export const useQuickActions = (
       },
       {
         id: "quick-collaboration-room",
+        dataTestId: "quick-collaboration-room",
         icon: <QuickCollaborationRoomIcon />,
         label: t("Common:CollaborationRoomTitle"),
         onClick: () =>
@@ -255,6 +257,7 @@ export const useQuickActions = (
       },
       {
         id: "quick-public-room",
+        dataTestId: "quick-public-room",
         icon: <QuickPublicRoomIcon />,
         label: t("Common:PublicRoom"),
         onClick: () =>
@@ -262,6 +265,7 @@ export const useQuickActions = (
       },
       {
         id: "quick-custom-room",
+        dataTestId: "quick-custom-room",
         icon: <QuickCustomRoomIcon />,
         label: t("Common:CustomRoomTitle"),
         onClick: () =>
@@ -270,6 +274,7 @@ export const useQuickActions = (
       // Opens the Templates list (sidebar Rooms → Templates).
       {
         id: "quick-use-template",
+        dataTestId: "quick-use-template",
         icon: <UseRoomTemplateIllustrationIcon />,
         label: t("Files:RoomTemplate"),
         onClick: () => goTemplates(userId),

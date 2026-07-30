@@ -95,8 +95,8 @@ const makeFeed = (seed: FolderHistoryFeedSeed, folderId: number | string) => ({
 });
 
 export type FolderHistoryReportRequestLog = {
-  fromDate: string | null;
-  toDate: string | null;
+  from: string | null;
+  to: string | null;
 };
 
 export type FolderHistoryReportHandle = {
@@ -157,8 +157,8 @@ export const folderHistoryReportHandlers = (
       const params = new URL(request.url).searchParams;
 
       startRequestLogs.push({
-        fromDate: params.get("fromDate"),
-        toDate: params.get("toDate"),
+        from: params.get("from"),
+        to: params.get("to"),
       });
 
       return okResponse(makeTask({ isCompleted: false, percentage: 0 }));

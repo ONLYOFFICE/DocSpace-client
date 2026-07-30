@@ -59,6 +59,6 @@ export const toReportDateRange = ({
   fromDate,
   toDate,
 }: TExportDateRange): TFolderLogReportDateRange => ({
-  fromDate: fromDate.startOf("day").toUTC().toISO() ?? "",
-  toDate: toDate.endOf("day").toUTC().toISO() ?? "",
+  from: fromDate.startOf("day").toUTC().toISO() ?? "",
+  to: toDate.endOf("day").toUTC().toISO() ?? "",
 });

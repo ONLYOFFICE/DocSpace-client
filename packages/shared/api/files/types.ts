@@ -586,8 +586,8 @@ export type TDefaultTemplate = {
 };
 
 export type TFolderLogReportDateRange = {
-  fromDate: string;
-  toDate: string;
+  from: string;
+  to: string;
 };
 
 export type TDocumentBuilderTask = {

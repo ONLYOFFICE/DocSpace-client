@@ -462,8 +462,8 @@ test.describe("Rooms — info panel history", () => {
       await reportPopup.close();
 
       expect(handle.current?.getLastStartRequest()).toEqual({
-        fromDate: "2026-02-18T00:00:00.000Z",
-        toDate: "2026-03-18T23:59:59.999Z",
+        from: "2026-02-18T00:00:00.000Z",
+        to: "2026-03-18T23:59:59.999Z",
       });
     });
 

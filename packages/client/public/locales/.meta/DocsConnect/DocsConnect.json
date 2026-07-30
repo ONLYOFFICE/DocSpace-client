@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-07-27T14:24:45.199Z",
+  "updated_at": "2026-07-30T16:14:11.182Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -78,6 +78,18 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 269,
+      "context": "ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 269,
+      "context": "ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n </div>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
       "line_number": 283,
       "context": "date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n { locale: i18n.language },\n ),\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",",
@@ -85,8 +97,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
-      "line_number": 85,
+      "line_number": 91,
       "context": "<ModalDialog.Header>{t(\"DocsConnect:AddAccessRule\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.addRuleBody}>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:AddAccessRuleDescription\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <FieldContainer\n isVertical\n removeMargin",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog.tsx",
+      "line_number": 73,
+      "context": "<ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.confirmDialogBody}>\n <Text fontWeight={600}>\n {t(\"DocsConnect:SwitchToEditorsQuestion\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:SwitchToEditorsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog.tsx",
+      "line_number": 73,
+      "context": "<ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.confirmDialogBody}>\n <Text fontWeight={600}>\n {t(\"DocsConnect:SwitchToEditorsQuestion\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:SwitchToEditorsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),",
       "module": "/packages/client"
     },
     {

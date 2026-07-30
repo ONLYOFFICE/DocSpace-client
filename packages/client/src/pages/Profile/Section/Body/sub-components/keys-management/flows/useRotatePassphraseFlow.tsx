@@ -40,7 +40,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { changePassphrase } from "@docspace/shared/services/encryption/identity";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { getActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { updateEncryptionKeys } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -95,8 +95,9 @@ export function useRotatePassphraseFlow({
           publicKey: updated.publicKey,
           privateKeyEnc: updated.privateKeyEnc,
         });
-        setActiveKeyId(userId, target.id);
-        SecretStorage.lock();
+        if (getActiveKeyId(userId) === target.id) {
+          SecretStorage.lock();
+        }
         await refreshKeysFromServer();
         toastr.success(t("Common:PassphraseUpdated"));
         reset();

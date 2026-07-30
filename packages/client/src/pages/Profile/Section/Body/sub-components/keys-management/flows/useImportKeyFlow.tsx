@@ -33,17 +33,24 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useCallback, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type ReactNode,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 
+import { useEncryption } from "@docspace/shared/context/encryption";
 import {
   importIdentityFromFile,
   unlockWithPassphrase,
 } from "@docspace/shared/services/encryption/identity";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { applyNewIdentity } from "@docspace/shared/services/encryption/apply-new-identity";
 import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 import { InvalidPassphraseError } from "@docspace/shared/services/encryption/errors";
 import type { SerializedIdentity } from "@docspace/shared/services/encryption/types";
@@ -56,6 +63,7 @@ type Step = "idle" | "passphrase";
 
 type Deps = {
   userId: string | undefined;
+  hasExistingKeys?: boolean;
   refreshKeysFromServer: () => Promise<void>;
 };
 
@@ -68,13 +76,20 @@ export type ImportKeyFlow = {
 
 export function useImportKeyFlow({
   userId,
+  hasExistingKeys,
   refreshKeysFromServer,
 }: Deps): ImportKeyFlow {
   const { t } = useTranslation(["Common"]);
+  const { suspendAutoLock } = useEncryption();
   const [step, setStep] = useState<Step>("idle");
   const [isPending, setIsPending] = useState(false);
   const [imported, setImported] = useState<SerializedIdentity | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (step === "idle" && !isPending) return undefined;
+    return suspendAutoLock();
+  }, [step, isPending, suspendAutoLock]);
 
   const reset = useCallback(() => {
     setStep("idle");
@@ -90,7 +105,7 @@ export function useImportKeyFlow({
   }, [t]);
 
   const onFileChosen = useCallback(
-    async (event: React.ChangeEvent<HTMLInputElement>) => {
+    async (event: ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
       if (!file) return;
       setIsPending(true);
@@ -122,8 +137,13 @@ export function useImportKeyFlow({
           publicKey: imported.publicKey,
           privateKeyEnc: imported.privateKeyEnc,
         });
-        setActiveKeyId(userId, id);
-        SecretStorage.cacheUnlocked(userId, kp);
+        await applyNewIdentity({
+          userId,
+          newIdentity: kp,
+          newPublicKeyB64: imported.publicKey,
+          newPublicKeyId: id,
+          activate: !hasExistingKeys,
+        });
         await refreshKeysFromServer();
         toastr.success(t("Common:EncryptionKeyImported"));
         reset();
@@ -138,7 +158,7 @@ export function useImportKeyFlow({
         setIsPending(false);
       }
     },
-    [imported, userId, refreshKeysFromServer, t, reset],
+    [imported, userId, hasExistingKeys, refreshKeysFromServer, t, reset],
   );
 
   const fileInput = (

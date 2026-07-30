@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "Obvestila za je onemogočena",
   "AIAgentNotificationsEnabled": "Uključene obvestila za",
   "AIAgentPinLimitMessage": "Ne morete pritrditi več kot 10 {{aiAgents}} na vrh. Odprtje nekaj, ki so trenutno pritrdinjene.",
-  "AIAgentPinned": "priкрепljen",
+  "AIAgentPinned": "Agent AI pripet",
   "AIAgents": "AI agenti",
   "AIAgentsCardDescription": "Nastavite pomočnike z umetno inteligenco, ki poznajo vaše datoteke. Delite jih s svojo ekipo in jih uporabljajte v sobah za odgovarjanje na vprašanja ali izvajanje nalog v vašem imenu.",
   "AIAgentsDescription": "Nastavite osebnega asistenta za svoj ekipo z dodajanjem zbirke znanja, izbiro idealnega modela in povezavo z {{mcpServer}}.",

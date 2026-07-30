@@ -466,7 +466,7 @@
   "CollectResultsInXlsx": "Collect results in XLSX",
   "CollectResultsInXlsxDescription": "Automatic collection of form results into spreadsheets. Spreadsheets are created in the same folder where filled form copies are stored. A separate XLSX file is generated for each form. Each row represents a single filled form, and columns correspond to form fields.",
   "ColloborationRooms": "Collaboration rooms",
-  "ColloborationRoomsDescription": "Сo-edit documents with version control, comments, and full change tracking.",
+  "ColloborationRoomsDescription": "Co-edit documents with version control, comments, and full change tracking.",
   "Color": "Color",
   "ComingSoon": "Coming soon",
   "Comment": "Comment",

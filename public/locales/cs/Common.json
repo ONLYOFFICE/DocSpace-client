@@ -1207,7 +1207,7 @@
   "KeyId": "ID klíče",
   "KeysManagement": "Správa klíčů",
   "Kilobyte": "KB",
-  "Knowledge": "Základ зна}*/",
+  "Knowledge": "Znalostní báze",
   "KnowledgeBaseDescription": "Používejte znalostní bázi pro agenty AI. Systém bude indexovat vaše dokumenty pomocí modelu text-embedding-3-small pro podporu vyhledávání založeného na dotazech ve vašich datech. Tato funkce se zaměřuje na hledání relevantních informací, ale negeneruje shrnutí ani neprovádí globální analýzu.",
   "KnowledgeDescription": "Nahrajte soubory z vašeho počítače nebo z {{productName}}, abyste poskytli lepší kontext pro chat. Upozornění: během konverzace mohou být některé nebo všechny nahrané soubory zobrazeny.",
   "KnowledgeDisabledSuccess": "Základna znalostí byla úspěšně vypnuta.",

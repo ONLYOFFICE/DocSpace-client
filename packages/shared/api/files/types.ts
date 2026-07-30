@@ -585,6 +585,11 @@ export type TDefaultTemplate = {
   viewUrl?: string;
 };
 
+export type TFolderLogReportDateRange = {
+  fromDate: string;
+  toDate: string;
+};
+
 export type TDocumentBuilderTask = {
   id: string;
   error: string;

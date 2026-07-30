@@ -51,6 +51,7 @@ import {
   decodeDisplayName,
   getFolderClassNameByType,
   sortInDisplayOrder,
+  toUrlParams,
 } from "../../utils/common";
 
 import type { RoomMember, TGetRoomMembers, TNewFiles } from "../rooms/types";
@@ -88,6 +89,7 @@ import type {
   TDefaultTemplate,
   UpdateXlsxResponse,
   TDocumentBuilderTask,
+  TFolderLogReportDateRange,
 } from "./types";
 
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
@@ -418,10 +420,15 @@ export async function createFolder(
   return res;
 }
 
-export async function startFolderLogReport(folderId: number | string) {
+export async function startFolderLogReport(
+  folderId: number | string,
+  dateRange?: TFolderLogReportDateRange,
+) {
+  const params = dateRange ? `?${toUrlParams(dateRange, false)}` : "";
+
   const options: AxiosRequestConfig = {
     method: "post",
-    url: `/files/folder/${folderId}/log/report`,
+    url: `/files/folder/${folderId}/log/report${params}`,
   };
 
   const res = (await request(options)) as TDocumentBuilderTask;

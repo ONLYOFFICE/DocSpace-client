@@ -2289,6 +2289,7 @@
   "ToppedUpWallet": "You have successfully topped up your wallet.",
   "TopUp": "Top up",
   "TopUpAndActivate": "Top up & activate",
+  "TopUpBeforeNextPayment": "Top up {{amount}} before {{date}} to cover your next payment.",
   "TopUpAndPay": "Top up & Pay",
   "TopUpAndRenew": "Top up & Renew",
   "TopUpAndUpgrade": "Top up & Upgrade",

@@ -43,7 +43,6 @@ export enum FormsSection {
 
 export enum SettingsSubSection {
   Billing = "billing",
-  AiAgent = "ai-agent",
   Access = "access",
   CollectData = "collect-data",
 }

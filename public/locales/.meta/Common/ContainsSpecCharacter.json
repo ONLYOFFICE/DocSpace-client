@@ -3,7 +3,7 @@
   "content": "The title can't contain any of the following characters: *+:\"<>?|/",
   "content_en_sha1_hash": "2988d94a573dbf375e5668150d952ca1022bdb80",
   "created_at": "2025-05-26T07:15:41.554Z",
-  "updated_at": "2026-07-07T08:59:21.679Z",
+  "updated_at": "2026-07-28T07:30:59.808Z",
   "comment": {
     "text": "This is an error message that appears when a user enters an invalid character in a title field, such as for a room or an agent.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 469,
+      "line_number": 466,
       "context": "isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/SetAgentParams.tsx",
-      "line_number": 430,
+      "line_number": 428,
       "context": "isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"",
       "module": "/packages/sdk"
     },

@@ -49,25 +49,31 @@ import styles from "../TenantPanel.module.scss";
 interface AddRuleDialogProps {
   visible: boolean;
   onClose: () => void;
-  onAdd: (type: "allow" | "deny", value: string) => void;
+  onAdd: (type: "allow" | "deny", value: string) => Promise<boolean>;
 }
 
 const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const [ruleType, setRuleType] = useState<"allow" | "deny">("allow");
   const [address, setAddress] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   const ruleTypeOptions = [
     { key: "allow", label: t("DocsConnect:RuleAllow") },
     { key: "deny", label: t("DocsConnect:RuleDeny") },
   ];
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const value = address.trim();
     if (!value) return;
 
-    onAdd(ruleType, value);
-    onClose();
+    setIsSaving(true);
+    try {
+      const ok = await onAdd(ruleType, value);
+      if (ok) onClose();
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -128,13 +134,15 @@ const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
           scale
           size={ButtonSize.normal}
           label={t("Common:AddButton")}
-          isDisabled={!address.trim()}
+          isLoading={isSaving}
+          isDisabled={!address.trim() || isSaving}
           onClick={onSubmit}
         />
         <Button
           scale
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
+          isDisabled={isSaving}
           onClick={onClose}
         />
       </ModalDialog.Footer>

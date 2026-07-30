@@ -73,6 +73,7 @@ import {
   setAppSettings,
 } from "@docspace/shared/api/apps";
 import type { TApp } from "@docspace/shared/api/apps/types";
+import { isAppTemporarilyDisabled } from "SRC_DIR/helpers/disabled-apps";
 
 class AppsStore {
   apps: TApp[] = [];
@@ -138,6 +139,7 @@ class AppsStore {
   };
 
   isEnabled = (id: string): boolean => {
+    if (isAppTemporarilyDisabled(id)) return false;
     return this.apps.find((a) => a.id === id)?.enabled ?? false;
   };
 

@@ -1,13 +1,13 @@
 {
   "key_path": "AutoLockOff",
-  "content": "Only when tab is hidden",
-  "content_en_sha1_hash": "7c68ff8800188312852ef939d248ec628dbd94e5",
-  "created_at": "2026-05-24T17:27:19.222Z",
-  "updated_at": "2026-05-24T18:31:56.142Z",
+  "content": "Off",
+  "content_en_sha1_hash": "e3de5ab0ca4c69dbf00e86d2558843e8d806bb49",
+  "created_at": "2026-07-27T13:06:59.784Z",
+  "updated_at": "2026-07-27T13:40:33.549Z",
   "comment": {
-    "text": "Label for a selection option in the AutoLock settings menu.",
+    "text": "Option label in a selection menu representing the disabled state of the AutoLock feature.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:31:56.142Z",
+    "updated_at": "2026-07-27T13:40:33.549Z",
     "model": "gemma4:26b"
   },
   "usage": [

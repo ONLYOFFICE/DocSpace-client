@@ -53,7 +53,6 @@ export type TourStepFlags = {
   showLibrary: boolean;
   showSettings: boolean;
   showMenu: boolean;
-  isTouch: boolean;
 };
 
 function isAbortError(err: unknown) {
@@ -65,66 +64,6 @@ function silenceNonAbort(err: unknown) {
     // eslint-disable-next-line no-console
     console.warn("[forms tour] waitForElement failed:", err);
   }
-}
-
-function openContextMenu(signal?: AbortSignal): Promise<void> {
-  const tile = document.querySelector('[data-testid="tile"]') as HTMLElement | null;
-  if (!tile) return Promise.resolve();
-
-  const rect = tile.getBoundingClientRect();
-  const event = new MouseEvent("contextmenu", {
-    bubbles: true,
-    cancelable: true,
-    clientX: rect.left + rect.width / 2,
-    clientY: rect.top + rect.height / 2,
-    button: 2,
-  });
-  tile.dispatchEvent(event);
-
-  return waitForElement("#option_view", 3000, signal)
-    .then(() => {})
-    .catch(silenceNonAbort);
-}
-
-function contextMenuStep(
-  targetId: string,
-  title: string,
-  content: string,
-  page: string,
-  callbacks?: TourStepCallbacks,
-): Step {
-  return {
-    target: `#${targetId}`,
-    spotlightTarget: () => {
-      const item = document.querySelector(`#${targetId}`);
-      const ul = item?.closest("ul");
-      return (ul as HTMLElement) ?? null;
-    },
-    spotlightPadding: 8,
-    placement: "auto" as const,
-    content,
-    title,
-    data: { page } satisfies TourStepData,
-    skipBeacon: true,
-    before: async () => {
-      const signal = callbacks?.getSignal();
-      await waitForElement('[data-tour="forms-grid"]', 3000, signal).catch(
-        silenceNonAbort,
-      );
-      if (!document.querySelector(`#${targetId}`)) {
-        await openContextMenu(signal);
-      }
-      await waitForElement(`#${targetId}`, 3000, signal).catch(silenceNonAbort);
-      document
-        .querySelector(`#${targetId}`)
-        ?.classList.add("tour-outline-item");
-    },
-    after: () => {
-      document
-        .querySelector(".tour-outline-item")
-        ?.classList.remove("tour-outline-item");
-    },
-  };
 }
 
 function navSectionStep(
@@ -187,7 +126,7 @@ function navSectionStep(
 }
 
 function settingsStep(
-  subSection: "billing" | "ai-agent" | "access" | "collect-data",
+  subSection: "billing" | "access" | "collect-data",
   title: string,
   content: string,
   callbacks?: TourStepCallbacks,
@@ -229,7 +168,6 @@ export function getTourSteps(
     showLibrary = true,
     showSettings = true,
     showMenu = true,
-    isTouch = false,
   } = flags ?? {};
 
   return [
@@ -253,18 +191,6 @@ export function getTourSteps(
       data: { page: "/forms/my-forms" } satisfies TourStepData,
       skipBeacon: true,
     },
-    canCreate &&
-      !isTouch &&
-      contextMenuStep(
-        "option_ask-from-db",
-        t("Common:TourCtxAskFromDBTitle", "Ask from DB"),
-        t(
-          "Common:TourCtxAskFromDB",
-          "Chat with the AI agent about this form using data from a connected database.",
-        ),
-        "/forms/my-forms",
-        callbacks,
-      ),
     navSectionStep(
       "in-progress",
       t("Common:InProgress"),
@@ -323,16 +249,6 @@ export function getTourSteps(
         t(
           "Common:TourBilling",
           "Manage your subscription plan and payment details for this forms room.",
-        ),
-        callbacks,
-      ),
-    showSettings &&
-      settingsStep(
-        "ai-agent",
-        t("Common:AIAgent"),
-        t(
-          "Common:TourAiAgent",
-          "Enable the AI agent to automatically process submitted forms, extract data, and assist with form review.",
         ),
         callbacks,
       ),

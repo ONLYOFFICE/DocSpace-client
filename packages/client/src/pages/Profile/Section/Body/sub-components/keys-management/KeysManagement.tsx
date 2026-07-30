@@ -44,7 +44,6 @@ import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { useEncryption } from "@docspace/shared/context/encryption";
-import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import {
   forgetDeviceUnlock,
   hasDeviceUnlock,
@@ -56,9 +55,7 @@ import {
   removePasskeyUnlock,
 } from "@docspace/shared/services/encryption/passkey-unlock";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
-import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import { AutoLockSetting } from "./AutoLockSetting";
@@ -67,6 +64,7 @@ import { useGenerateKeyFlow } from "@docspace/shared/dialogs/key-generation";
 import { useRecoverKeyFlow } from "@docspace/shared/dialogs/key-recovery";
 import { useImportKeyFlow } from "./flows/useImportKeyFlow";
 import { useDeleteKeyFlow } from "./flows/useDeleteKeyFlow";
+import { useSwitchKeyFlow } from "./flows/useSwitchKeyFlow";
 import { useExportKeyFlow } from "./flows/useExportKeyFlow";
 import { useRotatePassphraseFlow } from "./flows/useRotatePassphraseFlow";
 import { useResetKeysFlow } from "./flows/useResetKeysFlow";
@@ -79,6 +77,13 @@ type KeysManagementProps = {
   setUserEncryptionKeys?: (keys: TEncryptionKeyPair[]) => void;
   userId?: string;
   userEmail?: string;
+  setSecondaryProgressBarData?: (data: {
+    operation: string;
+    operationId: string;
+    percent?: number;
+    completed?: boolean;
+    alert?: boolean;
+  }) => void;
 };
 
 const KeysManagement = ({
@@ -86,6 +91,7 @@ const KeysManagement = ({
   setUserEncryptionKeys,
   userId,
   userEmail,
+  setSecondaryProgressBarData,
 }: KeysManagementProps) => {
   const { t } = useTranslation(["Common"]);
   const { isUnlocked, lock, getIdentity, requireIdentity, publicKey } =
@@ -185,37 +191,27 @@ const KeysManagement = ({
     }
   }, [setUserEncryptionKeys]);
 
-  const { rotationProgress, rotateForAllRooms } = useRotateIdentityForRooms();
+  const { rotationProgress, rotateForAllRooms } = useRotateIdentityForRooms({
+    setSecondaryProgressBarData,
+  });
 
-  const handleBeforeNewKeyActive = useCallback(
-    async (
-      oldIdentity: IdentityKeyPair | null,
-      newIdentity: IdentityKeyPair,
-      currentUserId: string,
-      newPublicKeyId: string,
-    ) => {
-      if (!oldIdentity) {
-        if (hasKeys) toastr.warning(t("Common:EncryptionRewrapSkipped"));
-        return;
-      }
-      await rotateForAllRooms(
-        oldIdentity,
-        newIdentity,
-        currentUserId,
-        newPublicKeyId,
-      );
-    },
-    [hasKeys, rotateForAllRooms, t],
-  );
+  const switchKey = useSwitchKeyFlow({
+    userId,
+    encryptionKeys,
+    requireIdentity,
+    rotateForAllRooms,
+    refreshKeysFromServer,
+  });
 
   const generate = useGenerateKeyFlow({
     userId,
     accountLabel: userEmail,
+    hasExistingKeys: hasKeys,
     refreshKeysFromServer,
-    onBeforeNewKeyActive: handleBeforeNewKeyActive,
   });
   const importFlow = useImportKeyFlow({
     userId,
+    hasExistingKeys: hasKeys,
     refreshKeysFromServer,
   });
   const recover = useRecoverKeyFlow({
@@ -264,20 +260,15 @@ const KeysManagement = ({
     rotate.isPending ||
     recover.isPending ||
     reset.isPending ||
+    switchKey.isPending ||
     isRotating;
 
   const handleSelectActive = useCallback(
     (keyId: string) => {
-      if (!userId) return;
-      setActiveKeyId(userId, keyId);
-      // The cached identity belongs to the previously-active key. Lock so the
-      // next op prompts for the new key's passphrase rather than silently
-      // failing with a wrap/identity mismatch.
-      SecretStorage.lock();
-      void refreshKeysFromServer();
-      toastr.success(t("Common:EncryptionKeyActivated"));
+      if (busy) return;
+      void switchKey.switchTo(keyId);
     },
-    [userId, refreshKeysFromServer, t],
+    [busy, switchKey],
   );
 
   return (
@@ -340,6 +331,36 @@ const KeysManagement = ({
           </div>
         ) : null}
       </div>
+      {switchKey.pendingState && !switchKey.isDismissed && !isRotating ? (
+        <div className={styles.resumeSection} data-testid="resume_rotation_banner">
+          <span className={styles.resetHint}>
+            {t("Common:ResumeReEncryptionHint")}
+          </span>
+          <div className={styles.resumeActions}>
+            <Button
+              size={ButtonSize.small}
+              onClick={() => {
+                if (!busy && switchKey.pendingState) {
+                  void switchKey.switchTo(switchKey.pendingState.newKeyId);
+                }
+              }}
+              label={t("Common:ResumeReEncryptionCta")}
+              isLoading={switchKey.isPending}
+              isDisabled={busy}
+            />
+            <Link
+              type={LinkType.action}
+              fontWeight="600"
+              fontSize="13px"
+              isHovered
+              onClick={switchKey.dismiss}
+              dataTestId="resume_rotation_dismiss_link"
+            >
+              {t("Common:Later")}
+            </Link>
+          </div>
+        </div>
+      ) : null}
       {hasKeys ? (
         <div className={styles.deviceSection}>
           <Text fontSize="14px" fontWeight={600}>
@@ -347,9 +368,9 @@ const KeysManagement = ({
           </Text>
           <AutoLockSetting />
           {passkeyPlatformOk || passkeyEnrolled ? (
-            <div className={styles.deviceRow}>
+            <div className={styles.toggleRow}>
               <ToggleButton
-                label={t("Common:PasskeyUnlockLabel")}
+                className={styles.deviceToggle}
                 isChecked={passkeyEnrolled}
                 isLoading={passkeyBusy}
                 isDisabled={busy || (!passkeyEnrolled && !isUnlocked)}
@@ -359,6 +380,7 @@ const KeysManagement = ({
                 }}
                 dataTestId="passkey_unlock_toggle"
               />
+              <Text>{t("Common:PasskeyUnlockLabel")}</Text>
             </div>
           ) : null}
           {deviceRemembered ? (
@@ -415,6 +437,7 @@ const KeysManagement = ({
         </div>
       ) : null}
       {generate.modals}
+      {switchKey.modals}
       {importFlow.modals}
       {recover.modals}
       {remove.modals}
@@ -425,12 +448,14 @@ const KeysManagement = ({
   );
 };
 
-export default inject(({ userStore }: TStore) => {
+export default inject(({ userStore, uploadDataStore }: TStore) => {
   const { encryptionKeys, setUserEncryptionKeys, user } = userStore;
   return {
     encryptionKeys,
     setUserEncryptionKeys,
     userId: user?.id ? String(user.id) : undefined,
     userEmail: user?.email,
+    setSecondaryProgressBarData:
+      uploadDataStore.secondaryProgressDataStore.setSecondaryProgressBarData,
   };
 })(observer(KeysManagement));

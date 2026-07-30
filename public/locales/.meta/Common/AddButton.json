@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-07-07T08:59:21.687Z",
+  "updated_at": "2026-07-30T16:14:11.152Z",
   "comment": {
     "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
-      "line_number": 146,
-      "context": "withCreate={false}\n withSubFolders={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"AddButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId=\"\"\n rootFolderType={FolderType.Rooms}",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 254,
+      "line_number": 242,
       "context": "<EmptyScreenRoomSelectorDark />\n )\n }\n searchEmptyScreenHeader={t(\"NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"SearchEmptyRoomsDescription\")}\n submitButtonLabel={t(\"AddButton\")}\n disableSubmitButton={false}\n onSubmit={onSubmitAction}\n rowLoader={<RowLoader />}\n hasNextPage={servers.length < totalServers}\n isNextPageLoading={false}",
       "module": "/libs/ui-kit"
     },
@@ -39,6 +33,12 @@
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
       "line_number": 149,
       "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
+      "line_number": 136,
+      "context": "<ModalDialog.Footer>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:AddButton\")}\n isLoading={isSaving}\n isDisabled={!address.trim() || isSaving}\n onClick={onSubmit}\n />\n <Button",
       "module": "/packages/client"
     },
     {

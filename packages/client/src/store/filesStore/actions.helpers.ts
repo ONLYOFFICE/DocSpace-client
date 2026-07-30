@@ -155,6 +155,7 @@ export function openDocEditorImpl(
   shareKey: Nullable<string> = null,
   editForm = false,
   fillForm = false,
+  targetWindow: Nullable<Window> = null,
 ) {
   const { openOnNewPage } = self.filesSettingsStore;
 
@@ -200,6 +201,11 @@ export function openDocEditorImpl(
     });
 
     return;
+  }
+
+  if (targetWindow && !targetWindow.closed) {
+    targetWindow.location.href = url;
+    return targetWindow;
   }
 
   return window.open(url, openOnNewPage ? "_blank" : "_self");

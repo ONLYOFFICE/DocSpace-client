@@ -1,0 +1,29 @@
+{
+  "key_path": "ResetAccessRulesWarning",
+  "content": "All allow and deny rules will be permanently deleted. Access will be allowed from any IP address until you add new rules.",
+  "content_en_sha1_hash": "2a683e308dc287804dad90c12f147e236e071e30",
+  "created_at": "2026-07-30T16:14:09.731Z",
+  "updated_at": "2026-07-30T16:17:07.459Z",
+  "comment": {
+    "text": "Warning text in the body of a modal dialog that appears when resetting access rules to inform the user about the permanent deletion of existing IP restrictions.",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:17:07.459Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ResetRulesDialog.tsx",
+      "line_number": 69,
+      "context": ">\n <ModalDialog.Header>\n {t(\"DocsConnect:ResetAccessRulesTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">{t(\"DocsConnect:ResetAccessRulesWarning\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n scale",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

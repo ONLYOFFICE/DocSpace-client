@@ -51,7 +51,6 @@ import MCPServersSelector from "@docspace/ui-kit/selectors/MCPServers";
 import TagHandler from "../../../helpers/TagHandler";
 import SetAgentParams from "./sub-components/SetAgentParams";
 import { useMCP } from "./hooks/useMCP";
-import { modelCache } from "./sub-components/modelCache";
 
 type CreateAgentDialogProps = {
   visible: boolean;
@@ -82,10 +81,6 @@ const CreateAgentDialog = ({
       isMountRef.current = false;
     };
   });
-
-  // Drop the provider/model cache when the dialog goes away by any path
-  // (not just the explicit close button), so a fresh session refetches.
-  React.useEffect(() => () => modelCache.clear(), []);
 
   const startAgentParams = getStartAgentParams(title);
 
@@ -163,7 +158,6 @@ const CreateAgentDialog = ({
   const onCloseDialog = async () => {
     if (isLoading) return;
 
-    modelCache.clear();
     onClose();
   };
 

@@ -1,0 +1,47 @@
+{
+  "key_path": "ScheduledChangeBillingPeriodNote",
+  "content": "Your current subscription remains unchanged until the end of your billing period (on {{date}}). The scheduled changes will take effect starting with the next billing period.",
+  "content_en_sha1_hash": "ddbb27e480c0c23b15dbd458d2153e888aa6bdda",
+  "created_at": "2026-07-27T13:07:33.866Z",
+  "updated_at": "2026-07-27T13:13:55.421Z",
+  "comment": {
+    "text": "Informational warning text within a `StorageWarning` component used in billing panels and cancellation dialogs. It notifies users that subscription changes are pending, with {{date}} representing the end date of the current billing period.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:13:55.421Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 230,
+      "context": "locale: language,\n },\n ),\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n {\n locale: language,",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 838,
+      "context": "</>\n )}\n </div>\n {isScheduled ? (\n <StorageWarning\n body={t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: periodEndDateLocalized,\n })}\n />\n ) : insufficientFunds ? (\n <Text",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/CancelPlanDialog/index.tsx",
+      "line_number": 126,
+      "context": ">\n ({t(\"DocsConnect:PlanUsers\")}: {planUsers})\n </Text>\n </Text>\n <StorageWarning\n body={t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: periodEndDateLocalized,\n })}\n />\n </div>\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 285,
+      "context": "\"DATE_MED\",\n { locale: i18n.language },\n ),\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n { locale: i18n.language },\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

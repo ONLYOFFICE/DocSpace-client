@@ -3,7 +3,7 @@
   "content": "Failed to decrypt all selected files",
   "content_en_sha1_hash": "62dbd07438816ef485c9068348c3f5c97a97f1cc",
   "created_at": "2026-05-24T17:27:47.382Z",
-  "updated_at": "2026-07-07T08:59:21.919Z",
+  "updated_at": "2026-07-27T13:07:50.876Z",
   "comment": {
     "text": "Error toast message appearing when the decryption of all selected files fails.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.ts",
-      "line_number": 1556,
+      "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
+      "line_number": 537,
       "context": "percent: 100,\n completed: true,\n alert: true,\n operationId,\n });\n toastr.error(i18n.t(\"Files:DecryptAllFailed\"));\n return;\n }\n \n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,",
       "module": "/packages/client"
     }

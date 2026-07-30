@@ -3,7 +3,7 @@
   "content": "Use recovery phrase",
   "content_en_sha1_hash": "8d7f041d531f2d7ac208f5ce3dcc4a7114eec8e4",
   "created_at": "2026-05-24T17:27:43.016Z",
-  "updated_at": "2026-06-09T09:43:10.922Z",
+  "updated_at": "2026-07-27T13:07:50.845Z",
   "comment": {
     "text": "Button label and modal dialog title used to initiate the process of recovering keys via a recovery phrase.",
     "is_auto": true,
@@ -13,15 +13,21 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 194,
-      "context": "{importFlow.fileInput}\n {recover.available ? (\n <Button\n size={ButtonSize.small}\n onClick={() => recover.request()}\n label={t(\"Common:UseRecoveryPhrase\")}\n isDisabled={busy}\n />\n ) : null}\n {hasKeys && isUnlocked ? (\n <Button",
+      "line_number": 330,
+      "context": "onClick={() => {\n if (!busy) recover.request();\n }}\n dataTestId=\"use_recovery_phrase_link\"\n >\n {t(\"Common:UseRecoveryPhrase\")}\n </Link>\n ) : null}\n </div>\n {isRotating && rotationProgress ? (\n <div className={styles.rotationProgress} role=\"status\">",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/modals/RecoveryPhraseInputModal.tsx",
-      "line_number": 123,
+      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
+      "line_number": 120,
+      "context": "productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),\n howText: t(\"Common:RecoveryKitHowText\", {\n action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/key-recovery/RecoveryPhraseInputModal.tsx",
+      "line_number": 125,
       "context": "displayType={ModalDialogType.modal}\n isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"Common:UseRecoveryPhrase\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

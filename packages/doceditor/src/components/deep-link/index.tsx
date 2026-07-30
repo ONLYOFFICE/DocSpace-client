@@ -49,6 +49,7 @@ import { DeepLinkType } from "@docspace/shared/enums";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { getDeepLink, redirectToStore } from "./DeepLink.helper";
 
 import { DeepLinkProps } from "./DeepLink.types";
@@ -104,10 +105,12 @@ const DeepLink = ({
     return icon;
   };
 
+  const resolvedTitle = useResolvedFileTitle(fileInfo);
+
   const getFileTitle = () => {
     return fileInfo?.fileExst
-      ? fileInfo.title.split(".").slice(0, -1).join(".")
-      : fileInfo?.title || "";
+      ? resolvedTitle.split(".").slice(0, -1).join(".")
+      : resolvedTitle;
   };
 
   const bgPattern = getBgPattern(currentColorScheme?.id);

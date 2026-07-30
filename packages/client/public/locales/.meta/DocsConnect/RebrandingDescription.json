@@ -1,0 +1,29 @@
+{
+  "key_path": "RebrandingDescription",
+  "content": "Use your own logo and colors",
+  "content_en_sha1_hash": "e85ca00dc3e2f75af884e3587525e86a9e49ecf0",
+  "created_at": "2026-07-27T13:07:48.513Z",
+  "updated_at": "2026-07-27T14:02:35.876Z",
+  "comment": {
+    "text": "A descriptive subtitle located under the Rebranding heading in the DocsConnect purchase panel, explaining customization capabilities.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:02:35.876Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 572,
+      "context": "<div>\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"DocsConnect:Rebranding\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.secondaryText}>\n {t(\"DocsConnect:RebrandingDescription\")}\n </Text>\n </div>\n </div>\n </div>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

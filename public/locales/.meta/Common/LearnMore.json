@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-07-07T08:59:21.791Z",
+  "updated_at": "2026-07-30T16:14:11.183Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to a help page or settings page for more information about the current feature or setting.",
     "is_auto": true,
@@ -19,13 +19,43 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 190,
-      "context": "</Text>\n <Text as=\"p\" className={styles.devToolDescription}>\n {tool.description}\n </Text>\n <span className={styles.devToolLink}>\n {t(\"Common:LearnMore\")}\n <ArrowIcon\n aria-hidden=\"true\"\n className={styles.integrationArrow}\n />\n </span>",
+      "line_number": 121,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 121,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 121,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 121,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 121,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 121,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 290,
+      "line_number": 293,
       "context": "fontWeight={600}\n isHovered\n href={knowledgeSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.knowledgeForm} data-testid=\"knowledge-form\">\n <FieldContainer\n labelVisible",
       "module": "/packages/client"
     },
@@ -103,13 +133,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 109,
+      "line_number": 124,
       "context": "organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 262,
+      "line_number": 323,
+      "context": "isHovered\n target=\"_blank\"\n href={documentServiceSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Styled.LocationHeader>\n \n <Styled.LocationForm onSubmit={onSubmit}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 323,
       "context": "isHovered\n target=\"_blank\"\n href={documentServiceSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Styled.LocationHeader>\n \n <Styled.LocationForm onSubmit={onSubmit}>",
       "module": "/packages/client"
     },
@@ -253,38 +289,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 308,
+      "line_number": 313,
       "context": "fontWeight={600}\n isHovered\n href={knowledgeSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.knowledgeForm} data-testid=\"knowledge-form\">\n <FieldContainer\n labelVisible",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/index.tsx",
-      "line_number": 226,
-      "context": "fontWeight={600}\n isHovered\n href={aiProviderSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <Button\n testId=\"add-provider-button\"\n primary",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/search/index.tsx",
-      "line_number": 258,
-      "context": "fontWeight={600}\n isHovered\n href={webSearchSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <div className={styles.searchForm} data-testid=\"web-search-form\">\n <FieldContainer\n labelVisible",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/add/index.tsx",
-      "line_number": 178,
-      "context": "fontWeight={600}\n isHovered\n href={mcpServersSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {iconComponent}\n {baseParamsComponent}",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/edit/index.tsx",
-      "line_number": 202,
-      "context": "fontWeight={600}\n isHovered\n href={mcpServersSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {iconComponent}\n {baseParamsComponent}",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/index.tsx",
-      "line_number": 274,
-      "context": "fontWeight={600}\n isHovered\n href={mcpServersSettingsUrl}\n color=\"accent\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <Button\n primary\n size={ButtonSize.small}",
       "module": "/packages/sdk"
     },
     {

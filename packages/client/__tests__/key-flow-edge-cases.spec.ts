@@ -202,26 +202,24 @@ test.describe("Keys management — edge cases", () => {
     const acknowledge = page.locator("#recoveryPhraseAcknowledged");
     await expect(acknowledge).toBeVisible({ timeout: 5000 });
 
-    const words = await page.locator("[class*='wordText']").allTextContents();
+    const recoveryDialog = page.getByRole("dialog");
+    const phraseText = await recoveryDialog
+      .locator("[class*='phraseBox']")
+      .textContent();
+    const words = (phraseText ?? "").trim().split(/\s+/);
     expect(words).toHaveLength(24);
 
+    // Saving the phrase (download) unlocks the acknowledge checkbox.
+    const downloadPromise = page.waitForEvent("download");
+    await recoveryDialog
+      .getByRole("button", { name: "Download", exact: true })
+      .click();
+    await downloadPromise;
+
     await acknowledge.check();
-    const recoveryDialog = page.getByRole("dialog");
     await recoveryDialog
       .getByRole("button", { name: "Continue", exact: true })
       .click();
-
-    const quizInputs = recoveryDialog.locator('input[name^="quiz-input-"]');
-    await expect(quizInputs.first()).toBeVisible({ timeout: 5000 });
-    const inputCount = await quizInputs.count();
-    for (let i = 0; i < inputCount; i++) {
-      const label = await recoveryDialog
-        .locator(`label[for="quiz-input-${i}"]`)
-        .textContent();
-      const wordNumber = Number.parseInt(label?.match(/#(\d+)/)?.[1] ?? "0", 10);
-      await quizInputs.nth(i).fill(words[wordNumber - 1]);
-    }
-    await recoveryDialog.getByRole("button", { name: "Verify" }).click();
 
     const errorToast = page
       .getByTestId("toast-content")
@@ -238,10 +236,15 @@ test.describe("Keys management — edge cases", () => {
   }) => {
     await bootstrapEncryption(page, mockRequest, baseUrl);
 
-    const lockNowBtn = page.getByRole("button", {
-      name: "Lock now",
-      exact: true,
-    });
+    // The tab-hide lock obeys the auto-lock preference, and the default is
+    // "Off" — enable a preset so hiding the tab actually locks. The legacy
+    // key is migrated to the per-user key on first read.
+    await page.evaluate(() =>
+      localStorage.setItem("encryption-auto-lock-timeout-seconds", "300"),
+    );
+
+    // "Lock now" is rendered as a Link, not a Button.
+    const lockNowBtn = page.getByTestId("lock_now_link");
     await expect(lockNowBtn).toBeVisible({ timeout: 5000 });
 
     await page.evaluate(() => {

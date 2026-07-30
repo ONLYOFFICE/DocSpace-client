@@ -1,13 +1,13 @@
 {
   "key_path": "AutoLockHint",
-  "content": "Keys are also locked when this tab becomes hidden.",
-  "content_en_sha1_hash": "823873aa2d143a40dbc449adc10a869cd8324e76",
-  "created_at": "2026-05-24T17:27:19.194Z",
-  "updated_at": "2026-05-24T18:32:43.737Z",
+  "content": "Timed options also lock keys when the tab is hidden. Keys always lock after 30 minutes without use.",
+  "content_en_sha1_hash": "e65d87f9ca87f2cdce7743fc4790936af83fec2f",
+  "created_at": "2026-07-27T13:06:59.744Z",
+  "updated_at": "2026-07-27T13:41:04.599Z",
   "comment": {
-    "text": "Subtext for the AutoLock setting label in the Keys Management section, providing additional information about the locking behavior.",
+    "text": "Instructional hint text located below the AutoLock setting label that explains how keys are locked based on tab visibility and inactivity.",
     "is_auto": true,
-    "updated_at": "2026-05-24T18:32:43.737Z",
+    "updated_at": "2026-07-27T13:41:04.599Z",
     "model": "gemma4:26b"
   },
   "usage": [

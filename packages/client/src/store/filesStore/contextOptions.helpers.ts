@@ -111,6 +111,10 @@ export const buildContextOptions = (
 
   const isMyFolder = isMy(item.rootFolderType!);
 
+  const isRoomsSection =
+    item.rootFolderType === FolderType.Rooms ||
+    item.rootFolderType === FolderType.Archive;
+
   const { isDesktopClient } = deps.settingsStore;
 
   const canRenameItem = item.security?.Rename;
@@ -570,7 +574,8 @@ export const buildContextOptions = (
       !(
         isRecentFolder ||
         isFavoritesFolder ||
-        (isMyFolder && (deps.filterType || deps.filterSearch))
+        ((isMyFolder || isRoomsSection) &&
+          (deps.filterType || deps.filterSearch))
       )
     ) {
       fileOptions = removeOptions(fileOptions, ["open-location"]);
@@ -1119,7 +1124,8 @@ export const buildContextOptions = (
     !(
       isRecentFolder ||
       isFavoritesFolder ||
-      (isMyFolder && (deps.filterType || deps.filterSearch))
+      ((isMyFolder || isRoomsSection) &&
+        (deps.filterType || deps.filterSearch))
     )
   ) {
     folderOptions = removeOptions(folderOptions, ["open-location"]);

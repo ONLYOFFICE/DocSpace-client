@@ -45,8 +45,16 @@ import {
   cancelDocsConnectPlan,
   cancelDocsConnectScheduledChange,
   updateDocsConnectConfig,
-  getDocsConnectReport,
+  startDocsConnectReport,
+  getDocsConnectReportStatus,
+  getDocsConnectConnection,
 } from "@docspace/shared/api/docs-connect";
+import type { TDocsConnectConnection } from "@docspace/shared/api/docs-connect";
+import {
+  changeDocumentServiceLocation,
+  getDocumentServiceLocation,
+} from "@docspace/shared/api/files";
+import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 import type {
   TDocsConnectInfo,
   TDocsConnectConfigUpdate,
@@ -64,6 +72,8 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
+
+import i18n from "../i18n";
 
 export type BuyPlanMode = "trial" | "edit";
 
@@ -90,6 +100,14 @@ class DocsConnectStore {
 
   removeSubscriptionDialogVisible: boolean = false;
 
+  documentService: Nullable<TDocServiceLocation> = null;
+
+  connection: Nullable<TDocsConnectConnection> = null;
+
+  isReportGenerating: boolean = false;
+
+  reportPageLeft: boolean = false;
+
   constructor(
     settingsStore: SettingsStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -98,7 +116,9 @@ class DocsConnectStore {
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      reportPageLeft: false,
+    });
   }
 
   refreshPortalState = () => {
@@ -329,12 +349,59 @@ class DocsConnectStore {
     });
   };
 
+  private resetReportState = () => {
+    this.reportPageLeft = false;
+    runInAction(() => {
+      this.isReportGenerating = false;
+    });
+  };
+
+  private finishReport = (resultFileUrl?: string) => {
+    toastr.success(
+      i18n.t("Common:ReportSaveLocation", {
+        sectionName: i18n.t("Common:Files"),
+      }),
+    );
+    if (!this.reportPageLeft && resultFileUrl) {
+      setTimeout(() => window.open(resultFileUrl, "_blank"), 100); // hack for ios
+    }
+    this.resetReportState();
+  };
+
+  markReportPageLeft = () => {
+    if (this.isReportGenerating) this.reportPageLeft = true;
+  };
+
   downloadReport = async () => {
+    if (this.isReportGenerating) return;
+
+    this.reportPageLeft = false;
+    runInAction(() => {
+      this.isReportGenerating = true;
+    });
+
+    const controller = new AbortController();
+
     try {
-      const res = await getDocsConnectReport();
-      setTimeout(() => window.open(res, "_blank"), 100); // hack for ios
+      let status = await startDocsConnectReport();
+
+      if (!status?.isCompleted && !status?.error) {
+        await pollUntil(async () => {
+          status = await getDocsConnectReportStatus();
+          return !!status?.isCompleted || !!status?.error;
+        }, controller.signal);
+      }
+
+      if (status?.error) {
+        toastr.error(status.error);
+        this.resetReportState();
+        return;
+      }
+
+      this.finishReport(status?.resultFileUrl);
     } catch (error) {
       toastr.error(error as Error);
+      this.resetReportState();
     }
   };
 
@@ -343,6 +410,88 @@ class DocsConnectStore {
 
     copy(value);
     toastr.success(t("Common:Copied"));
+  };
+
+  fetchDocumentService = async () => {
+    try {
+      const result = await getDocumentServiceLocation();
+      runInAction(() => {
+        this.documentService = result;
+      });
+    } catch {
+      // ignore: absence of doc service info only affects the Reset button state
+    }
+  };
+
+  fetchConnection = async () => {
+    try {
+      const result = await getDocsConnectConnection();
+      runInAction(() => {
+        this.connection = result;
+      });
+    } catch {
+      // ignore: absence of connection data only hides the "connect editors" banner
+    }
+  };
+
+  get connectionData(): Nullable<TDocsConnectConnection> {
+    const address = this.info?.tenant.address ?? this.connection?.address;
+    const secret = this.info?.config.security.secret ?? this.connection?.secret;
+    const header = this.info?.config.security.header ?? this.connection?.header;
+    if (!address || !secret || !header) return null;
+
+    return { address, secret, header };
+  }
+
+  get isConnectedToPortal() {
+    const address = this.connectionData?.address;
+    const current = this.documentService?.docServiceUrl;
+    if (!address || !current) return false;
+
+    const normalize = (value: string) =>
+      value
+        .replace(/^https?:\/\//i, "")
+        .replace(/\/+$/, "")
+        .toLowerCase();
+
+    return normalize(current) === normalize(address);
+  }
+
+  applyToDocumentService = async () => {
+    const data = this.connectionData;
+    if (!data) throw new Error("DocsConnect connection data is incomplete");
+
+    const url = /^https?:\/\//i.test(data.address)
+      ? data.address
+      : `https://${data.address}`;
+    const portalUrl = window.location.origin;
+
+    const result = await changeDocumentServiceLocation(
+      url,
+      data.secret,
+      data.header,
+      url,
+      portalUrl,
+      true,
+    );
+    runInAction(() => {
+      this.documentService = result;
+    });
+    return result;
+  };
+
+  resetDocumentService = async () => {
+    const result = await changeDocumentServiceLocation(
+      null,
+      null,
+      null,
+      null,
+      null,
+      true,
+    );
+    runInAction(() => {
+      this.documentService = result;
+    });
   };
 
   copySecretKey = (t: TTranslation) => {

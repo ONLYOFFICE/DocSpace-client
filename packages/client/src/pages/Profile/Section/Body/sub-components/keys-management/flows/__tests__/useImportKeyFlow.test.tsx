@@ -52,18 +52,21 @@ vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
 }));
 
 vi.mock("@docspace/ui-kit/components/toast", () => ({
-  toastr: { success: vi.fn(), error: vi.fn() },
+  toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
 }));
 
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
   importIdentityFromFile: vi.fn(),
   unlockWithPassphrase: vi.fn(),
 }));
-vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
-  SecretStorage: { cacheUnlocked: vi.fn(), lock: vi.fn() },
+vi.mock("@docspace/shared/services/encryption/apply-new-identity", () => ({
+  applyNewIdentity: vi.fn(),
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
   setEncryptionKeys: vi.fn(),
+}));
+vi.mock("@docspace/shared/context/encryption", () => ({
+  useEncryption: () => ({ suspendAutoLock: () => () => {} }),
 }));
 
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -75,7 +78,7 @@ import {
   InvalidFormatError,
   WebCryptoUnavailableError,
 } from "@docspace/shared/services/encryption/errors";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
+import { applyNewIdentity } from "@docspace/shared/services/encryption/apply-new-identity";
 import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import {
@@ -84,10 +87,7 @@ import {
 } from "../useImportKeyFlow";
 
 let latest: ImportKeyFlow;
-const Harness = (deps: {
-  userId: string | undefined;
-  refreshKeysFromServer: () => Promise<void>;
-}) => {
+const Harness = (deps: Parameters<typeof useImportKeyFlow>[0]) => {
   latest = useImportKeyFlow(deps);
   return (
     <>
@@ -136,6 +136,52 @@ describe("useImportKeyFlow", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     captured.passphrase = null;
+  });
+
+  describe("activation", () => {
+    it("registers INACTIVE (activate=false) when the account already has keys", async () => {
+      happyImport();
+      render(
+        <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        fireFileChosen(new File(["{}"], "key.json"));
+      });
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+
+      expect(applyNewIdentity).toHaveBeenCalledWith(
+        expect.objectContaining({ userId: "42", activate: false }),
+      );
+    });
+
+    it("activates (activate=true) in the zero-keys bootstrap case", async () => {
+      happyImport();
+      render(
+        <Harness
+          userId="42"
+          hasExistingKeys={false}
+          refreshKeysFromServer={vi.fn()}
+        />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        fireFileChosen(new File(["{}"], "key.json"));
+      });
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+
+      expect(applyNewIdentity).toHaveBeenCalledWith(
+        expect.objectContaining({ activate: true }),
+      );
+    });
   });
 
   describe("file selection", () => {
@@ -220,9 +266,8 @@ describe("useImportKeyFlow", () => {
           ),
         }),
       );
-      expect(SecretStorage.cacheUnlocked).toHaveBeenCalledWith(
-        "42",
-        dummyKeyPair,
+      expect(applyNewIdentity).toHaveBeenCalledWith(
+        expect.objectContaining({ userId: "42", newIdentity: dummyKeyPair }),
       );
     });
 
@@ -252,7 +297,7 @@ describe("useImportKeyFlow", () => {
       expect(setEncryptionKeys).not.toHaveBeenCalled();
     });
 
-    it("does NOT cache identity when setEncryptionKeys fails", async () => {
+    it("does NOT apply the new identity when setEncryptionKeys fails", async () => {
       happyImport();
       vi.mocked(setEncryptionKeys).mockRejectedValueOnce(new Error("network"));
 
@@ -268,7 +313,7 @@ describe("useImportKeyFlow", () => {
         );
       });
 
-      expect(SecretStorage.cacheUnlocked).not.toHaveBeenCalled();
+      expect(applyNewIdentity).not.toHaveBeenCalled();
       expect(toastr.error).toHaveBeenCalledTimes(1);
     });
   });

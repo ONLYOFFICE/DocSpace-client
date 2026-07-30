@@ -42,6 +42,7 @@ import { FormFillingManageAction, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
 import { getFileInfo, manageFormFilling } from "@docspace/shared/api/files";
+import { resolveDisplayTitle } from "@docspace/shared/services/encryption/filename-cache";
 
 import type {
   TFile,
@@ -54,7 +55,7 @@ import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type { TSelectedFileInfo } from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type { TData } from "@docspace/ui-kit/components/toast";
 
-import { saveAs } from "@/utils";
+import { getFormsSectionFolderUrl, saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 
@@ -163,7 +164,7 @@ const useStartFillingSelectDialog = (
         ]);
 
         const response = await saveAs(
-          file.title,
+          resolveDisplayTitle(file),
           fileUrl,
           selectedItemId,
           false,
@@ -182,11 +183,9 @@ const useStartFillingSelectDialog = (
 
                 sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
 
-                const url = new URL(
-                  `${window.location.origin}/rooms/shared/filter`,
+                window.location.replace(
+                  getFormsSectionFolderUrl(selectedItemId),
                 );
-                url.searchParams.set("folder", selectedItemId.toString());
-                window.location.replace(url.toString());
               }
 
               break;

@@ -37,6 +37,12 @@ import { ProviderType, ServerType } from "@docspace/ui-kit/enums/ai";
 
 export { ProviderType, ServerType };
 
+// The chat-lib profile `providerType` value of the built-in system (portal)
+// provider. Must match the "onlyoffice" member of `BuiltinProviderType` in
+// @onlyoffice/ai-chat — the union also accepts arbitrary strings, so a typo
+// at a call site would not fail typechecking.
+export const SYSTEM_AI_PROFILE_PROVIDER_TYPE = "onlyoffice";
+
 export enum ToolsPermission {
   Allow,
   AlwaysAllow,

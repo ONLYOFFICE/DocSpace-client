@@ -145,6 +145,7 @@ const SectionFilterContent = ({
   isRoomAdmin,
   showStorageInfo,
   isDefaultRoomsQuotaSet,
+  isDefaultUsersQuotaSet,
   isTemplatesFolder,
   isSharedWithMeFolder,
   isAIAgentsFolder,
@@ -273,7 +274,7 @@ const SectionFilterContent = ({
     isRoomAdmin,
     standalone,
     showStorageInfo,
-    isDefaultRoomsQuotaSet,
+    isDefaultUsersQuotaSet,
     groupsStore,
     usersStore,
   });
@@ -1106,7 +1107,10 @@ const SectionFilterContent = ({
       connectedThirdParty.push(item.provider_key);
     });
 
-    const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
+    const showThirdPartyFilter =
+      connectedThirdParty.length > 0 && !isTemplatesFolder && !isFormsSection;
+
+    const isLastTypeOptionsRooms = !showThirdPartyFilter && !tags?.length;
 
     const folders = !isRecentFolder
       ? [
@@ -1414,7 +1418,7 @@ const SectionFilterContent = ({
           isMultiSelect: true,
         }));
 
-        const isLast = connectedThirdParty.length === 0;
+        const isLast = !showThirdPartyFilter;
 
         filterOptions.push({
           key: FilterGroups.roomFilterTags,
@@ -1427,7 +1431,7 @@ const SectionFilterContent = ({
         filterOptions.push(...tagsOptions);
       }
 
-      if (connectedThirdParty.length > 0 && !isTemplatesFolder) {
+      if (showThirdPartyFilter) {
         const thirdPartyOptions = connectedThirdParty.map((thirdParty) => {
           const key = Object.entries(RoomsProviderType).find(
             (item) => item[0] === thirdParty,
@@ -2005,7 +2009,8 @@ export default inject(
       isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { showStorageInfo, isDefaultRoomsQuotaSet, isDefaultUsersQuotaSet } =
+      currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
     const {
@@ -2046,6 +2051,7 @@ export default inject(
       isRoomAdmin,
       showStorageInfo,
       isDefaultRoomsQuotaSet,
+      isDefaultUsersQuotaSet,
 
       userId: user?.id,
 

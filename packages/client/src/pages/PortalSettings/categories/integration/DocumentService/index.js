@@ -51,6 +51,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 import styles from "./index.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import ApplyToPortalDialog from "../../developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog";
 
 const URL_REGEX =
   /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
@@ -64,11 +65,16 @@ const DocumentService = ({
   initialDocumentServiceData,
   showPortalSettingsLoader,
   apiBasicLink,
+  docsConnectConnection,
+  fetchDocsConnectConnection,
+  applyDocsConnectToPortal,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
+  const [connectDialogVisible, setConnectDialogVisible] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
 
   const [docServiceUrl, setDocServiceUrl] = useState("");
   const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
@@ -98,6 +104,10 @@ const DocumentService = ({
   useEffect(() => {
     setDocumentTitle(t("DocumentService"));
   }, [t]);
+
+  useEffect(() => {
+    fetchDocsConnectConnection?.();
+  }, [fetchDocsConnectConnection]);
 
   useEffect(() => {
     if (initialDocumentServiceData) {
@@ -224,6 +234,55 @@ const DocumentService = ({
       .finally(() => setResetIsLoading(false));
   };
 
+  const onConnectDocsConnect = async () => {
+    setIsConnecting(true);
+    try {
+      const result = await applyDocsConnectToPortal();
+
+      setIsDefaultSettings(result?.isDefault || false);
+      setPortalUrl(result?.docServicePortalUrl);
+      setAuthHeader(result?.docServiceSignatureHeader);
+      setSecretKey(
+        result?.docServiceSignatureSecret ?? docsConnectConnection?.secret,
+      );
+      setInternalUrl(result?.docServiceUrlInternal);
+      setDocServiceUrl(result?.docServiceUrl);
+      setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+
+      setInitPortalUrl(result?.docServicePortalUrl);
+      setInitSecretKey(
+        result?.docServiceSignatureSecret ?? docsConnectConnection?.secret,
+      );
+      setInitAuthHeader(result?.docServiceSignatureHeader);
+      setInitDocServiceUrl(result?.docServiceUrl);
+      setInitInternalUrl(result?.docServiceUrlInternal);
+      setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
+
+      setSecretKeyVersion((v) => v + 1);
+      toastr.success(t("Common:ChangesSavedSuccessfully"));
+      setConnectDialogVisible(false);
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  const normalizeAddress = (value) =>
+    (value ?? "")
+      .replace(/^https?:\/\//i, "")
+      .replace(/\/+$/, "")
+      .toLowerCase();
+
+  const isConnectedToDocsConnect =
+    !!docsConnectConnection?.address &&
+    !!docServiceUrl &&
+    normalizeAddress(docServiceUrl) ===
+      normalizeAddress(docsConnectConnection.address);
+
+  const showConnectEditorsBanner =
+    !!docsConnectConnection && !isConnectedToDocsConnect;
+
   const isFormEmpty =
     !docServiceUrl && !internalUrl && !portalUrl && !authHeader && !secretKey;
   const allInputsValid =
@@ -267,26 +326,51 @@ const DocumentService = ({
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>
-        <div className={styles.docsConnectPromo}>
-          <div className={styles.docsConnectPromoText}>
-            <Text className={styles.docsConnectPromoTitle}>
-              {t("Settings:DocsConnectPromoTitle")}
-            </Text>
-            <Text className={styles.docsConnectPromoDescription}>
-              {t("Settings:DocsConnectPromoDescription", {
-                organizationName: getBrandName("OrganizationName"),
-                editorsName: getBrandName("ProductEditorsName"),
-              })}
-            </Text>
+        {showConnectEditorsBanner ? (
+          <div className={styles.docsConnectPromo}>
+            <div className={styles.docsConnectPromoText}>
+              <Text className={styles.docsConnectPromoTitle}>
+                {t("Settings:DocsConnectReadyTitle")}
+              </Text>
+              <Text className={styles.docsConnectPromoDescription}>
+                {t("Settings:DocsConnectReadyDescription", {
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                })}
+              </Text>
+            </div>
+            <Button
+              className={styles.docsConnectPromoButton}
+              size={ButtonSize.small}
+              primary
+              label={t("Settings:ConnectEditors")}
+              onClick={() => setConnectDialogVisible(true)}
+              isDisabled={isSaveLoading || isResetLoading || isConnecting}
+              dataTestId="docs_connect_connect_editors"
+            />
           </div>
-          <Button
-            className={styles.docsConnectPromoButton}
-            size={ButtonSize.small}
-            primary
-            label={t("Common:LearnMore")}
-            onClick={() => window.open(apiBasicLink, "_blank")}
-          />
-        </div>
+        ) : (
+          <div className={styles.docsConnectPromo}>
+            <div className={styles.docsConnectPromoText}>
+              <Text className={styles.docsConnectPromoTitle}>
+                {t("Settings:DocsConnectPromoTitle")}
+              </Text>
+              <Text className={styles.docsConnectPromoDescription}>
+                {t("Settings:DocsConnectPromoDescription", {
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                })}
+              </Text>
+            </div>
+            <Button
+              className={styles.docsConnectPromoButton}
+              size={ButtonSize.small}
+              primary
+              label={t("Common:LearnMore")}
+              onClick={() => window.open(apiBasicLink, "_blank")}
+            />
+          </div>
+        )}
 
         <div className={styles.formInputs}>
           <div className={styles.inputWrapper}>
@@ -467,12 +551,26 @@ const DocumentService = ({
           cancelButtonDataTestId="default_settings_button"
         />
       </Styled.LocationForm>
+
+      {connectDialogVisible ? (
+        <ApplyToPortalDialog
+          visible
+          isSaving={isConnecting}
+          onApply={onConnectDocsConnect}
+          onClose={() => setConnectDialogVisible(false)}
+        />
+      ) : null}
     </Styled.Location>
   );
 };
 
 export default inject(
-  ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
+  ({
+    settingsStore,
+    filesSettingsStore,
+    clientLoadingStore,
+    docsConnectStore,
+  }) => {
     const {
       currentColorScheme,
       documentServiceSettingsUrl,
@@ -493,6 +591,9 @@ export default inject(
       showPortalSettingsLoader,
       initialDocumentServiceData,
       apiBasicLink,
+      docsConnectConnection: docsConnectStore.connectionData,
+      fetchDocsConnectConnection: docsConnectStore.fetchConnection,
+      applyDocsConnectToPortal: docsConnectStore.applyToDocumentService,
     };
   },
 )(observer(DocumentService));

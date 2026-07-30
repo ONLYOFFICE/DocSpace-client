@@ -66,7 +66,11 @@ type AiAgentsTourProps = {
   canCreateRooms: boolean;
   aiReady: boolean;
   showFilter: boolean;
+  hasItems: boolean;
+  isTableView: boolean;
   aiAgentsId: string | null;
+  hasRecent: boolean;
+  hasTrash: boolean;
 };
 
 const AiAgentsTour = ({
@@ -79,7 +83,11 @@ const AiAgentsTour = ({
   canCreateRooms,
   aiReady,
   showFilter,
+  hasItems,
+  isTableView,
   aiAgentsId,
+  hasRecent,
+  hasTrash,
 }: AiAgentsTourProps) => {
   const { t } = useTranslation(["AiAgentsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -98,8 +106,26 @@ const AiAgentsTour = ({
   }, [userId, aiAgentsTourStore]);
 
   const flags = useMemo<TourStepFlags>(
-    () => ({ isDesktop, canCreate, showFilter, aiAgentsId }),
-    [isDesktop, canCreate, showFilter, aiAgentsId],
+    () => ({
+      isDesktop,
+      canCreate,
+      showFilter,
+      hasItems,
+      isTableView,
+      aiAgentsId,
+      hasRecent,
+      hasTrash,
+    }),
+    [
+      isDesktop,
+      canCreate,
+      showFilter,
+      hasItems,
+      isTableView,
+      aiAgentsId,
+      hasRecent,
+      hasTrash,
+    ],
   );
 
   const buildSteps = useCallback(
@@ -187,7 +213,13 @@ export default inject(
     publicRoomStore,
     aiAgentsTourStore,
   }: TStore) => {
-    const { aiAgentsFolderId, isAIAgentsFolderRoot, isRoot } = treeFoldersStore;
+    const {
+      aiAgentsFolderId,
+      recentFolderId,
+      recycleBinFolderId,
+      isAIAgentsFolderRoot,
+      isRoot,
+    } = treeFoldersStore;
 
     const { isAdmin, isRoomAdmin } = authStore;
 
@@ -202,9 +234,15 @@ export default inject(
       canCreateRooms: isAdmin || isRoomAdmin,
       aiReady: !!settingsStore.aiConfig?.aiReady,
       showFilter: !filesStore.isEmptyPage,
+      hasItems: filesStore.filesList?.length > 0,
+      isTableView: filesStore.viewAs === "table",
       // Sidebar anchor (ClientArticleSidebar → NavMenu data-item-id). The AI
       // Agents parent item id is the tree folder id.
       aiAgentsId: aiAgentsFolderId != null ? String(aiAgentsFolderId) : null,
+      // The agents sub-items reuse the portal-wide aliases and are only
+      // rendered when those folders exist, so mirror the sidebar's own gating.
+      hasRecent: recentFolderId != null,
+      hasTrash: recycleBinFolderId != null,
     };
   },
 )(observer(AiAgentsTour));

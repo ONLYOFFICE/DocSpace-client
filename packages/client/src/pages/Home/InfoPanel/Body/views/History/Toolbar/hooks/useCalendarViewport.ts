@@ -33,59 +33,45 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+import { useEffect, useState } from "react";
 
-import { TSelection } from "./ContextButton";
+import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
-import RoomsItemHeader from "./RoomsItemTitle";
+const FULL_CALENDAR_HEIGHT = 376;
+const CALENDAR_BOTTOM_INDENT = 20;
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+export const useCalendarViewport = (
+  anchorRef: React.RefObject<HTMLElement | null>,
+) => {
+  const [availableHeight, setAvailableHeight] = useState(FULL_CALENDAR_HEIGHT);
 
-const ItemTitle = ({
-  infoPanelSelection,
+  const isMobileView = useIsMobile();
 
-  isNoItem,
+  const fitToViewport = useEventCallback(() => {
+    if (!anchorRef.current) return;
 
-  isGallery,
-  isContacts,
+    const spaceBelowAnchor =
+      document.documentElement.clientHeight -
+      anchorRef.current.getBoundingClientRect().bottom -
+      CALENDAR_BOTTOM_INDENT;
 
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
+    setAvailableHeight(Math.min(spaceBelowAnchor, FULL_CALENDAR_HEIGHT));
+  });
 
-  if (isPlugin && !isPluginHeaderVisible) return null;
+  useEffect(() => {
+    fitToViewport();
+  }, [fitToViewport]);
 
-  if (isNoItem || isContacts || isGallery) return null;
+  useEventListener("resize", fitToViewport);
 
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
-    );
+  const isShrunk = !isMobileView && availableHeight < FULL_CALENDAR_HEIGHT;
 
-  return <RoomsItemHeader selection={infoPanelSelection} />;
+  return {
+    isMobileView,
+    isShrunk,
+    height: availableHeight,
+    refreshPlacement: fitToViewport,
+  };
 };
-
-export default ItemTitle;

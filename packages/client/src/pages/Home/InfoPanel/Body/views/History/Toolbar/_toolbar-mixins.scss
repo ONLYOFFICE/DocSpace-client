@@ -33,59 +33,59 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+// Primitives shared by the history toolbar and its sub-components.
+// Component-specific rules live in the matching *.module.scss.
 
-import { TSelection } from "./ContextButton";
+$popup-z-index: 401;
+$mobile-calendar-height: 420px;
+$body-padding-start: 20px;
 
-import RoomsItemHeader from "./RoomsItemTitle";
+// Triggers are centered in the toolbar, so a popup hangs from the bottom edge
+// of the tallest one plus the design gap.
+$trigger-height: 28px;
+$popup-gap: 4px;
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+@mixin popup-top {
+  top: calc(
+    (var(--info-panel-history-toolbar-height) + #{$trigger-height}) * 0.5 +
+      #{$popup-gap}
+  );
+}
 
-const ItemTitle = ({
-  infoPanelSelection,
+@mixin plain-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--info-panel-text-color);
+}
 
-  isNoItem,
+@mixin action-icon($size) {
+  flex-shrink: 0;
+  width: $size;
+  height: $size;
 
-  isGallery,
-  isContacts,
+  path,
+  rect {
+    fill: var(--info-panel-text-color);
+  }
+}
 
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
+@mixin calendar-popup {
+  position: absolute;
+  z-index: $popup-z-index;
 
-  if (isPlugin && !isPluginHeaderVisible) return null;
+  :global(.track-vertical) {
+    height: 100% !important;
+  }
+}
 
-  if (isNoItem || isContacts || isGallery) return null;
-
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
-    );
-
-  return <RoomsItemHeader selection={infoPanelSelection} />;
-};
-
-export default ItemTitle;
+@mixin calendar-popup-mobile {
+  position: fixed;
+  bottom: 0;
+  top: auto;
+  inset-inline: 0 auto;
+  height: $mobile-calendar-height;
+}

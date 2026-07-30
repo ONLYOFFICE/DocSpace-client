@@ -42,30 +42,25 @@ import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitl
 import { Text } from "@docspace/ui-kit/components/text";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
-import type { Nullable } from "@docspace/shared/types";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import commonStyles from "../../helpers/Common.module.scss";
 
 import Search, { SearchProps } from "../Search";
 
-import CalendarComponent from "./Calendar";
 import RoomsContextBtn, { type TSelection } from "./ContextButton";
 
 type RoomsItemHeaderProps = {
@@ -85,21 +80,15 @@ type RoomsItemHeaderProps = {
 
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
-  isRoomMembersPanel?: boolean;
   hasExternalLinks?: boolean;
   isExternalShareRestricted?: boolean;
-  getRoomHistoryReport?: InfoPanelStore["getRoomHistoryReport"];
-  markRoomHistoryReportPageLeft?: InfoPanelStore["markRoomHistoryReportPageLeft"];
-  isRoomHistoryReportDownloading?: InfoPanelStore["isRoomHistoryReportDownloading"];
-  setIsScrollLocked?: InfoPanelStore["setIsScrollLocked"];
-  onSelectHistoryDay?: (day: Nullable<string>) => void;
 } & (
   | {
-      roomsView: InfoPanelView.infoMembers;
+      isRoomMembersPanel: true;
       searchProps: SearchProps;
     }
   | {
-      roomsView?: InfoPanelStore["roomsView"];
+      isRoomMembersPanel?: undefined;
       searchProps?: undefined;
     }
 );
@@ -120,19 +109,8 @@ const RoomsItemHeader = ({
   isRoomMembersPanel,
   hasExternalLinks,
   isExternalShareRestricted,
-  roomsView,
-  getRoomHistoryReport,
-  markRoomHistoryReportPageLeft,
-  isRoomHistoryReportDownloading,
-  setIsScrollLocked,
-  onSelectHistoryDay,
 }: RoomsItemHeaderProps) => {
-  const { t, i18n } = useTranslation([
-    "Files",
-    "Common",
-    "Translations",
-    "InfoPanel",
-  ]);
+  const { t } = useTranslation(["Files", "Common", "Translations"]);
 
   const [showSearchBlock, setShowSearchBlock] = useState(false);
 
@@ -233,29 +211,12 @@ const RoomsItemHeader = ({
   const onSearchClick = () => setShowSearchBlock?.(true);
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
-  const isThirdParty = "providerId" in selection && !!selection.providerId;
-
-  const showHistoryActions =
-    isRoom && !isThirdParty && roomsView === InfoPanelView.infoHistory;
-
-  const canFilterHistoryByDay =
-    showHistoryActions && !!onSelectHistoryDay && !!setIsScrollLocked;
-
-  const onDownloadHistory = () => {
-    getRoomHistoryReport?.(selection.id);
-  };
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
 
   useEffect(() => {
     setCoverSelection?.(selection);
   }, [setCoverSelection, selection]);
-
-  useEffect(() => {
-    return () => {
-      markRoomHistoryReportPageLeft?.();
-    };
-  }, [markRoomHistoryReportPageLeft]);
 
   return (
     <div
@@ -341,40 +302,6 @@ const RoomsItemHeader = ({
           />
         ) : null}
 
-        {showHistoryActions ? (
-          isRoomHistoryReportDownloading ? (
-            <Loader
-              id="info_download-history-loader"
-              className="info_title-loader"
-              color=""
-              size="16px"
-              type={LoaderTypes.track}
-            />
-          ) : (
-            <IconButton
-              id="info_download-history"
-              className="icon"
-              title={t("InfoPanel:DownloadHistory")}
-              iconName={DownloadReactSvgUrl}
-              onClick={onDownloadHistory}
-              size={16}
-              dataTestId="info_download_history"
-            />
-          )
-        ) : null}
-
-        {canFilterHistoryByDay ? (
-          <CalendarComponent
-            roomCreationDate={
-              "created" in selection ? selection.created : undefined
-            }
-            setCalendarDay={onSelectHistoryDay}
-            setIsScrollLocked={setIsScrollLocked}
-            locale={i18n.language}
-            title={t("Common:SelectDate")}
-          />
-        ) : null}
-
         <RoomsContextBtn selection={selection} />
       </div>
     </div>
@@ -390,14 +317,7 @@ export default inject(
     publicRoomStore,
     avatarEditorDialogStore,
   }: TStore) => {
-    const {
-      roomsView,
-      setIsMobileHidden,
-      getRoomHistoryReport,
-      markRoomHistoryReportPageLeft,
-      isRoomHistoryReportDownloading,
-      setIsScrollLocked,
-    } = infoPanelStore;
+    const { setIsMobileHidden } = infoPanelStore;
 
     const {
       displayFileExtension,
@@ -417,12 +337,7 @@ export default inject(
       isShareRestricted;
 
     return {
-      roomsView,
       setIsMobileHidden,
-      getRoomHistoryReport,
-      markRoomHistoryReportPageLeft,
-      isRoomHistoryReportDownloading,
-      setIsScrollLocked,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 

@@ -227,12 +227,12 @@ export const useHistory = ({
   const selectHistoryDay = useEventCallback((day: Nullable<string>) => {
     setHistoryDay(day);
 
-    if (!day) return;
-
     fetchHistory(day)
       .then(() => scrollToTop())
       .catch((error) => console.log(error));
   });
+
+  const resetHistoryDay = useEventCallback(() => setHistoryDay(null));
 
   const fetchMoreHistory = async () => {
     if (!selection?.id) return;
@@ -331,6 +331,7 @@ export const useHistory = ({
 
     historyDay,
     selectHistoryDay,
+    resetHistoryDay,
 
     abortController,
   };

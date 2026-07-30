@@ -33,59 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+import type { Nullable } from "@docspace/shared/types";
 
-import { TSelection } from "./ContextButton";
+export type HistoryToolbarProps = {
+  roomId: number | string;
+  roomCreationDate?: string;
+  selectedDay: Nullable<string>;
 
-import RoomsItemHeader from "./RoomsItemTitle";
-
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
-
-const ItemTitle = ({
-  infoPanelSelection,
-
-  isNoItem,
-
-  isGallery,
-  isContacts,
-
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
-
-  if (isPlugin && !isPluginHeaderVisible) return null;
-
-  if (isNoItem || isContacts || isGallery) return null;
-
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
-    );
-
-  return <RoomsItemHeader selection={infoPanelSelection} />;
+  onSelectDay: (day: Nullable<string>) => void;
 };
 
-export default ItemTitle;
+export type InjectedHistoryToolbarProps = Pick<
+  TStore["infoPanelStore"],
+  | "getRoomHistoryReport"
+  | "markRoomHistoryReportPageLeft"
+  | "isRoomHistoryReportDownloading"
+  | "setIsScrollLocked"
+>;

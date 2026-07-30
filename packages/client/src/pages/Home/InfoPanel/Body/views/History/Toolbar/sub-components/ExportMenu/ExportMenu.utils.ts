@@ -33,59 +33,32 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+import type { DateTime } from "luxon";
 
-import { TSelection } from "./ContextButton";
+import { now } from "@docspace/ui-kit/utils/date";
+import type { TFolderLogReportDateRange } from "@docspace/shared/api/files/types";
+import type { Nullable } from "@docspace/shared/types";
 
-import RoomsItemHeader from "./RoomsItemTitle";
+import type { TExportDateRange } from "../ExportDateRange";
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+const DEFAULT_RANGE_MONTHS = 1;
 
-const ItemTitle = ({
-  infoPanelSelection,
+export const getDefaultDateRange = (
+  earliestDate?: Nullable<DateTime>,
+): TExportDateRange => {
+  const today = now();
+  const monthAgo = today.minus({ months: DEFAULT_RANGE_MONTHS });
 
-  isNoItem,
-
-  isGallery,
-  isContacts,
-
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
-
-  if (isPlugin && !isPluginHeaderVisible) return null;
-
-  if (isNoItem || isContacts || isGallery) return null;
-
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
-    );
-
-  return <RoomsItemHeader selection={infoPanelSelection} />;
+  return {
+    fromDate: earliestDate && earliestDate > monthAgo ? earliestDate : monthAgo,
+    toDate: today,
+  };
 };
 
-export default ItemTitle;
+export const toReportDateRange = ({
+  fromDate,
+  toDate,
+}: TExportDateRange): TFolderLogReportDateRange => ({
+  fromDate: fromDate.startOf("day").toUTC().toISO() ?? "",
+  toDate: toDate.endOf("day").toUTC().toISO() ?? "",
+});

@@ -35,7 +35,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import { ChatInfoBlock } from "@docspace/ui-kit/ai-agent/chat/components/chat-info-block";
+import { ChatInfoBlock } from "@docspace/ui-kit/ai-agent/chat-info-block";
 
 import {
   useChatNoAccess,

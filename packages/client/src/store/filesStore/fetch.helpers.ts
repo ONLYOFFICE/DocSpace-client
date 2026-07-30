@@ -901,7 +901,7 @@ export function fetchAgentsImpl(
 
   const request = () =>
     api.ai
-      .getNewAiAgents(filterData, self.aiAgentsController!.signal)
+      .getAIAgents(filterData, self.aiAgentsController!.signal)
       .then(async (data) => {
         if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -1064,7 +1064,7 @@ export async function fetchMoreFilesImpl(self: FilesStore) {
   const newFilesData = isRooms
     ? await api.rooms.getRooms(newFilter as TRoomsFilter)
     : isAIAgentsFolder
-      ? await api.ai.getNewAiAgents(newFilter as TRoomsFilter)
+      ? await api.ai.getAIAgents(newFilter as TRoomsFilter)
       : await api.files.getFolder(
           (newFilter as TFilesFilter).folder,
           newFilter as TFilesFilter,

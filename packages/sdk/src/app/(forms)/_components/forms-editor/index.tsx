@@ -52,7 +52,6 @@ import { sectionToPath } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import DualRingSpinner from "../forms-layout/DualRingSpinner";
 import styles from "./FormsEditor.module.scss";
 
@@ -74,9 +73,9 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     closeEditor,
     openCompletedFolder,
   } = useFormsNavigationStore();
-  const { roomId } = useFormsSettingsStore();
+  const formsSettingsStore = useFormsSettingsStore();
+  const { roomId } = formsSettingsStore;
   const formsListStore = useFormsListStore();
-  const aiStore = useFormsAiAgentStore();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
   const [isCompleting, setIsCompleting] = React.useState(false);
@@ -139,7 +138,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
           continue;
         }
 
-        aiStore.setDoneFolderId(doneFolder.id);
+        formsSettingsStore.setDoneFolderId(doneFolder.id);
 
         const doneRes = await api.files.getFolder(doneFolder.id, filter);
         const subfolder = doneRes.folders.find(
@@ -187,7 +186,7 @@ const FormsEditor = ({ onNavigatedAway }: FormsEditorProps) => {
     roomId,
     editingFile?.title,
     formsListStore,
-    aiStore,
+    formsSettingsStore,
     router,
     openCompletedFolder,
     closeEditor,

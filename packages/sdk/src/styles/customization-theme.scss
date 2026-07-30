@@ -164,10 +164,6 @@ body.light {
   --chat-border-radius-base: var(--border-radius-element);
   --chat-font-size: var(--default-font-size);
 
-  // ── AiChatButton ───────────────────────────────────────────────────────────
-  --ai-chat-button-bg: var(--color-primary-element);
-  --ai-chat-button-color: var(--color-primary-element-text);
-
   // ── Loader ─────────────────────────────────────────────────────────────────
   --loader-track-base: var(--color-loading-dark);
   --loader-track-primary: var(--color-loading-light);
@@ -396,10 +392,6 @@ body.dark {
   --avatar-bg: var(--color-background-hover);
   --avatar-initials-bg: var(--color-primary-light);
   --avatar-initials-color: var(--color-main-text);
-
-  // ── AiChatButton ───────────────────────────────────────────────────────────
-  --ai-chat-button-bg: var(--color-primary-element);
-  --ai-chat-button-color: var(--color-primary-element-text);
 
   // ── Loader ─────────────────────────────────────────────────────────────────
   --loader-track-base: var(--color-loading-dark);

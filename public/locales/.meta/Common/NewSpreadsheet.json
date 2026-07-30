@@ -3,7 +3,7 @@
   "content": "New spreadsheet",
   "content_en_sha1_hash": "6bde054ddba34bfc0975daa6211434db38bf5b6f",
   "created_at": "2025-05-19T21:30:46.791Z",
-  "updated_at": "2026-07-28T11:25:41.807Z",
+  "updated_at": "2026-07-28T07:30:59.868Z",
   "comment": {
     "text": "This string is used as the default file name for a new spreadsheet and as a label for a button that creates a new spreadsheet.",
     "is_auto": true,

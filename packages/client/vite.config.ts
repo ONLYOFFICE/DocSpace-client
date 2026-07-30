@@ -41,6 +41,7 @@ import { pkg, getBuildDate } from "./config/utils";
 import { jsxInJsPlugin } from "./config/plugins/jsx-in-js";
 import { staticUrlPlugin } from "./config/plugins/static-url";
 import { htmlTransformPlugin } from "./config/plugins/html-transform";
+import { chunkRetryPlugin } from "./config/plugins/chunk-retry";
 import { bannerPlugin } from "./config/plugins/banner";
 import {
   copyLocalesPlugin,
@@ -102,6 +103,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       }),
       react(),
       htmlTransformPlugin(),
+      chunkRetryPlugin(),
       serveRootPublicPlugin(),
       isProduction && bannerPlugin(),
       isProduction && copyLocalesPlugin(),

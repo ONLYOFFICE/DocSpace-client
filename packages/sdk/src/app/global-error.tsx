@@ -49,21 +49,19 @@ import useDeviceType from "@/hooks/useDeviceType";
 import useI18N from "@/hooks/useI18N";
 
 import type FirebaseHelper from "@docspace/shared/utils/firebase";
+import {
+  canReloadOnChunkError,
+  scheduleChunkErrorReload,
+} from "@docspace/shared/utils/chunk-load-error";
 
 import pkg from "../../package.json";
 
 const CHUNK_RELOAD_FLAG = "sdk.chunkErrorReloaded";
 
-const isChunkLoadError = (error: Error) =>
-  error.name === "ChunkLoadError" ||
-  /Loading chunk [\w-]+ failed/i.test(error.message ?? "");
-
 export default function GlobalError({ error }: { error: Error }) {
-  const [shouldReload] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    if (!isChunkLoadError(error)) return false;
-    return !window.sessionStorage.getItem(CHUNK_RELOAD_FLAG);
-  });
+  const [shouldReload] = useState<boolean>(() =>
+    canReloadOnChunkError(error, CHUNK_RELOAD_FLAG),
+  );
 
   const [user, setUser] = useState<TUser>();
   const [settings, setSettings] = useState<TSettings>();
@@ -104,8 +102,7 @@ export default function GlobalError({ error }: { error: Error }) {
 
   useEffect(() => {
     if (shouldReload) {
-      window.sessionStorage.setItem(CHUNK_RELOAD_FLAG, "1");
-      window.location.reload();
+      scheduleChunkErrorReload(CHUNK_RELOAD_FLAG);
       return;
     }
 

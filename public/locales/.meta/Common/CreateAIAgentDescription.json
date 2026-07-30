@@ -3,7 +3,7 @@
   "content": "Start building your first {{aiAgent}}",
   "content_en_sha1_hash": "bc35c16942607e9987acc8e733fb2225858ed337",
   "created_at": "2026-06-02T22:17:35.996Z",
-  "updated_at": "2026-07-28T11:44:10.601Z",
+  "updated_at": "2026-07-30T16:14:11.144Z",
   "comment": {
     "text": "Description text in an empty state view shown when no agents exist. The {{aiAgent}} variable is a noun representing the type of agent being created.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
-      "line_number": 204,
+      "line_number": 205,
       "context": "{\n key: \"create-ai-agent\",\n title: t(\"Common:CreateAIAgentTitle\", {\n defaultValue: \"Create a new AI agent\",\n }),\n description: t(\"Common:CreateAIAgentDescription\", {\n aiAgent: t(\"Common:AIAgent\", { defaultValue: \"AI Agent\" }),\n defaultValue: \"Set up a new {{aiAgent}} from scratch.\",\n }),\n icon: <CreateAIAgentIcon />,\n onClick: () => dialogsStore.setCreateAgentDialogVisible(true),",
       "module": "/packages/sdk"
     }

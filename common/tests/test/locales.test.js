@@ -2324,6 +2324,40 @@ describe("Locales Tests", () => {
       "sr-Cyrl-RS":  [[0x0400, 0x04FF]], // Cyrillic
     };
 
+    // Latin-script languages need no native ranges beyond commonAllowed,
+    // except a few extras: Vietnamese diacritics and Azerbaijani ə.
+    // Anything else (e.g. Cyrillic inside a German string) is contamination.
+    const latinExtraRanges = [
+      [0x0250, 0x02AF], // IPA Extensions (Azerbaijani ə)
+      [0x02B0, 0x02FF], // Spacing Modifier Letters
+      [0x1E00, 0x1EFF], // Latin Extended Additional (Vietnamese)
+    ];
+    const latinLanguages = [
+      "en",
+      "az",
+      "cs",
+      "de",
+      "es",
+      "fi",
+      "fr",
+      "it",
+      "lv",
+      "nl",
+      "pl",
+      "pt",
+      "pt-BR",
+      "ro",
+      "sk",
+      "sl",
+      "sq-AL",
+      "sr-Latn-RS",
+      "tr",
+      "vi",
+    ];
+    for (const lang of latinLanguages) {
+      scriptRanges[lang] = latinExtraRanges;
+    }
+
     // Common ranges allowed for ALL languages (Latin for markup/brands, general punctuation, etc.)
     const commonAllowed = [
       [0x0000, 0x007F],   // Basic Latin (ASCII)

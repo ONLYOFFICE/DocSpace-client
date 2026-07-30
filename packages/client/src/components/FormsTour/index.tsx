@@ -65,6 +65,8 @@ type FormsTourProps = {
   canCreate: boolean;
   canUseTemplates: boolean;
   showFilter: boolean;
+  hasItems: boolean;
+  isTableView: boolean;
   hasForms: boolean;
 };
 
@@ -78,6 +80,8 @@ const FormsTour = ({
   canCreate,
   canUseTemplates,
   showFilter,
+  hasItems,
+  isTableView,
   hasForms,
 }: FormsTourProps) => {
   const { t } = useTranslation(["FormsTour", "Common"]);
@@ -89,8 +93,24 @@ const FormsTour = ({
   }, [userId, formsTourStore]);
 
   const flags = useMemo<TourStepFlags>(
-    () => ({ isDesktop, canCreate, canUseTemplates, showFilter, hasForms }),
-    [isDesktop, canCreate, canUseTemplates, showFilter, hasForms],
+    () => ({
+      isDesktop,
+      canCreate,
+      canUseTemplates,
+      showFilter,
+      hasItems,
+      isTableView,
+      hasForms,
+    }),
+    [
+      isDesktop,
+      canCreate,
+      canUseTemplates,
+      showFilter,
+      hasItems,
+      isTableView,
+      hasForms,
+    ],
   );
 
   const buildSteps = useCallback(
@@ -193,6 +213,8 @@ export default inject(
       canCreate: (isAdmin || isRoomAdmin) && !!roomsFolder,
       canUseTemplates: isAdmin || isRoomAdmin,
       showFilter: !filesStore.isEmptyPage,
+      hasItems: filesStore.filesList?.length > 0,
+      isTableView: filesStore.viewAs === "table",
       // The Forms sidebar item is shown whenever Rooms exists (it surfaces
       // Form Filling Rooms via searchArea=Forms).
       hasForms: !!roomsFolder,

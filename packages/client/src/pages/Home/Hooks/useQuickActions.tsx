@@ -289,13 +289,17 @@ export const useQuickActions = (
       // Collect forms → create a Form Filling Room.
       {
         id: "quick-form-room",
+        dataTestId: "quick-form-room",
         icon: <QuickFormRoomIcon />,
         label: t("Common:FormSpaceTitle"),
         onClick: () => dispatchCreateRoom(currentFolderId, RoomsType.FormRoom),
       },
-      // Opens the form templates list (sidebar Forms → Templates).
+      // Opens the form templates list (sidebar Forms → Templates). Note the
+      // in-room tile below reuses this `id` for the OForms gallery; only this
+      // one carries a testid, so the two can never collide in the DOM.
       {
         id: "quick-form-template",
+        dataTestId: "quick-form-space-template",
         icon: <UseRoomTemplateIllustrationIcon />,
         label: t("Common:SpaceTemplate"),
         onClick: () => goFormsTemplates(userId),

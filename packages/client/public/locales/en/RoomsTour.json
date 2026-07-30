@@ -35,7 +35,7 @@
   "TourFilterTags": "Tag your rooms by project or client, then filter by a tag to see just those.",
   "TourFilterTitle": "Filters and tags",
   "TourRoomItem": "Every row is a room you can act on without opening it.",
-  "TourRoomItemContextMenu": "The three dots open all actions: invite people, copy the link, rename, archive.",
+  "TourRoomItemContextMenu": "The three dots open all actions: invite people, copy the shared link, edit the room, archive it.",
   "TourRoomItemOpen": "Click the name to go inside and work with the files.",
   "TourRoomItemPin": "Pin the rooms you use daily and they stay at the top of the list.",
   "TourRoomItemTitle": "Working with a room",

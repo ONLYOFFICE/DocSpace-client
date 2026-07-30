@@ -92,6 +92,10 @@
   gap: 12px;
 }
 
+.toggleRow {
+  display: flex;
+}
+
 .deviceToggle {
   position: relative;
   height: 20px;
@@ -126,11 +130,7 @@
   white-space: nowrap;
 }
 
-.keyDetails {
-  margin-top: 4px;
-}
-
-.fingerprint {
+.monoValue {
   font-family: "Roboto Mono", monospace;
   font-size: 12px;
   letter-spacing: 0.5px;
@@ -161,11 +161,12 @@
   border: 1px solid var(--divider-color);
 }
 
-.keyItemHeader {
+.statusRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  gap: 8px;
+  min-width: 0;
 }
 
 .keyItemBadges {
@@ -216,13 +217,6 @@
   background: var(--row-background-color);
   border-radius: 8px;
   margin-bottom: 20px;
-}
-
-.keyIdText {
-  font-family: "Roboto Mono", monospace;
-  font-size: 12px;
-  min-width: 0;
-  word-break: break-all;
 }
 
 .resetSection {

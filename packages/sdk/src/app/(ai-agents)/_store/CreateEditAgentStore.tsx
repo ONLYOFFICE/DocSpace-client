@@ -70,10 +70,10 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import type { Nullable } from "@docspace/shared/types";
 import {
-  addServersForRoom,
+  addEntityMcpServer,
   createAIAgentWithProfile,
-  deleteServersForRoom,
-  editNewAiAgent,
+  editAIAgent,
+  removeEntityMcpServer,
 } from "@docspace/shared/api/ai";
 import type {
   TAgent,
@@ -134,8 +134,6 @@ type CreateAgentDeps = {
   // Whether portal default quota is set (replaces CurrentQuotasStore lookup).
   isDefaultAgentsQuotaSet?: boolean;
   isDefaultRoomsQuotaSet?: boolean;
-  // Clear the in-memory model cache used inside the dialog.
-  clearModelCache?: () => void;
 };
 
 class CreateEditAgentStore {
@@ -255,7 +253,7 @@ class CreateEditAgentStore {
       ...(prompt && {
         chatSettings: { prompt } satisfies TChatSettings,
       }),
-      // new-ai service rebinds the agent's Chat-action profile when a
+      // The Node AI service rebinds the agent's Chat-action profile when a
       // profileId is sent; only include it when actually changed.
       ...(isProfileChanged && { profileId }),
     };
@@ -284,7 +282,7 @@ class CreateEditAgentStore {
 
     try {
       if (Object.keys(editAgentParams).length) {
-        await editNewAiAgent(agent.id, editAgentParams);
+        await editAIAgent(agent.id, editAgentParams);
       }
 
       const requests: Promise<unknown>[] = [];
@@ -299,16 +297,24 @@ class CreateEditAgentStore {
 
       const { mcpServers, mcpServersInitial } = newParams;
       if (mcpServers && mcpServersInitial) {
+        // Servers are keyed by name in the chat-lib model: enabling one for
+        // an agent writes an entry into the agent's per-entity map (the
+        // config is resolved server-side), disabling removes it.
         const deletedServers = mcpServersInitial.filter(
-          (id) => !mcpServers.includes(id),
+          (name) => !mcpServers.includes(name),
         );
         const addedServers = mcpServers.filter(
-          (id) => !mcpServersInitial.includes(id),
+          (name) => !mcpServersInitial.includes(name),
         );
-        if (addedServers.length)
-          requests.push(addServersForRoom(agentId!, addedServers));
-        if (deletedServers.length)
-          requests.push(deleteServersForRoom(agentId!, deletedServers));
+
+        requests.push(
+          ...addedServers.map((name) =>
+            addEntityMcpServer(name, String(agentId!)),
+          ),
+          ...deletedServers.map((name) =>
+            removeEntityMcpServer(name, String(agentId!)),
+          ),
+        );
       }
 
       if (requests.length) await Promise.all(requests);
@@ -328,7 +334,6 @@ class CreateEditAgentStore {
     const isDefaultRoomsQuotaSet = !!deps.isDefaultRoomsQuotaSet;
 
     const agentParams = this.agentParams;
-    const { attachDefaultTools } = agentParams;
     const cover = dialogsStore.cover;
 
     const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;
@@ -357,7 +362,10 @@ class CreateEditAgentStore {
       ...(quotaLimit && { quota: Number(quotaLimit) }),
       ...logoCover,
       ...(tagsToAddList.length && { tags: tagsToAddList }),
-      ...(typeof attachDefaultTools === "boolean" && { attachDefaultTools }),
+      // MCP enablement (including the system portal server) is written to
+      // the agent's per-entity map after creation — never let the .NET
+      // service attach servers through the legacy room-links store.
+      attachDefaultTools: false,
     };
 
     this.setIsLoading(true);
@@ -382,14 +390,18 @@ class CreateEditAgentStore {
       dialogsStore.setIsNewRoomByCurrentUser(true);
 
       if (agentParams.mcpServers?.length) {
-        addServersForRoom(agent.id, agentParams.mcpServers).catch(() => {});
+        await Promise.all(
+          agentParams.mcpServers.map((name) =>
+            addEntityMcpServer(name, String(agent.id)),
+          ),
+        ).catch((err) =>
+          toastr.error(err instanceof Error ? err.message : String(err)),
+        );
       }
 
       this.onOpenNewAgent(agent);
 
       if (successToast) toastr.success(successToast);
-
-      deps.clearModelCache?.();
 
       return agent;
     } catch (err) {

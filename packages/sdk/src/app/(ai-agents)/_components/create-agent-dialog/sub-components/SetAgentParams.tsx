@@ -107,7 +107,6 @@ type SetAgentParamsProps = {
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onOwnerChange?: () => void;
-  portalMcpServerId?: string;
   onClickAction?: () => void;
   selectedServers?: TSelectorItem[];
   setSelectedServers?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
@@ -129,7 +128,6 @@ const SetAgentParams = ({
   setIsWrongTitle,
   onKeyUp,
   onOwnerChange,
-  portalMcpServerId,
   onClickAction,
   selectedServers,
   setSelectedServers,
@@ -453,7 +451,7 @@ const SetAgentParams = ({
         />
       ) : null}
 
-      {/* Profile selection on both create and edit — the new-ai service
+      {/* Profile selection on both create and edit — the Node AI service
           rebinds the agent's profile on PUT when profileId changes. */}
       <ProfileSettings
         agentParams={agentParams}
@@ -468,7 +466,6 @@ const SetAgentParams = ({
       <MCPSettings
         agentParams={agentParams}
         setAgentParams={setAgentParams}
-        portalMcpServerId={portalMcpServerId}
         onClickAction={onClickAction}
         selectedServers={selectedServers}
         setSelectedServers={setSelectedServers}

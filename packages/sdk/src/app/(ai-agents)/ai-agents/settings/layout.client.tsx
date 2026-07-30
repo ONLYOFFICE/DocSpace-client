@@ -43,22 +43,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import useAiSettings from "../../_components/ai-settings/useAiSettings";
-import { ProvidersLoader } from "../../_components/ai-settings/providers/ProvidersLoader";
-import { ServersLoader } from "../../_components/ai-settings/servers/ServersLoader";
-import { SearchLoader } from "../../_components/ai-settings/search/SearchLoader";
 import { KnowledgeLoader } from "../../_components/ai-settings/knowledge/KnowledgeLoader";
 import { useAgentLoadingStore } from "../../_store";
 import { useAgentsUserStore } from "../../_store/AgentsUserStore";
 import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 import styles from "../../_components/ai-settings/AISettings.module.scss";
 
-const VALID_TABS = [
-  "billing",
-  "providers",
-  "servers",
-  "search",
-  "knowledge",
-] as const;
+const VALID_TABS = ["billing", "servers", "search", "knowledge"] as const;
 type TabId = (typeof VALID_TABS)[number];
 
 const getTabIdFromPath = (path: string | null, defaultTab: TabId): TabId => {
@@ -79,7 +70,7 @@ const SettingsLayoutClient = ({ children }: { children: React.ReactNode }) => {
   const standalone = Boolean(portalSettings?.standalone);
   const canSeeBilling = !standalone && Boolean(user?.isAdmin || user?.isOwner);
 
-  const defaultTab: TabId = standalone ? "providers" : "billing";
+  const defaultTab: TabId = standalone ? "servers" : "billing";
   const currentTabId = getTabIdFromPath(pathname, defaultTab);
 
   // Non-admins land on /billing via the server-side redirect default. Once
@@ -90,32 +81,22 @@ const SettingsLayoutClient = ({ children }: { children: React.ReactNode }) => {
   React.useEffect(() => {
     if (!user) return;
     if (currentTabId === "billing" && !canSeeBilling) {
-      router.replace("/ai-agents/settings/providers");
+      router.replace("/ai-agents/settings/servers");
     }
   }, [user, currentTabId, canSeeBilling, router]);
 
-  const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
-    useAiSettings({ standalone });
+  const { initKnowledge } = useAiSettings();
 
-  // Initialise data on direct deep-links + on tab changes.
+  // Initialise data on direct deep-links + on tab changes. The servers and
+  // search tabs are chat-lib pages that fetch their own data.
   React.useEffect(() => {
-    if (currentTabId === "providers") void initAIProviders();
-    else if (currentTabId === "servers") void initMCPServers();
-    else if (currentTabId === "search") void initWebSearch();
-    else if (currentTabId === "knowledge") void initKnowledge();
-  }, [
-    currentTabId,
-    initAIProviders,
-    initMCPServers,
-    initWebSearch,
-    initKnowledge,
-  ]);
+    if (currentTabId === "knowledge") void initKnowledge();
+  }, [currentTabId, initKnowledge]);
 
   const loaders: Record<TabId, React.ReactNode> = {
     billing: null,
-    providers: <ProvidersLoader />,
-    servers: <ServersLoader />,
-    search: <SearchLoader />,
+    servers: null,
+    search: null,
     knowledge: <KnowledgeLoader />,
   };
 

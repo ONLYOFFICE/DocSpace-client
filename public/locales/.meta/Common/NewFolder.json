@@ -3,7 +3,7 @@
   "content": "New folder",
   "content_en_sha1_hash": "a711999b72aaf4c3d8e7523718231bf1c8d7cb4d",
   "created_at": "2025-05-19T21:30:46.744Z",
-  "updated_at": "2026-07-27T13:07:50.571Z",
+  "updated_at": "2026-07-28T07:30:59.797Z",
   "comment": {
     "text": "This is a button label or menu item text. It allows users to create a new folder within the file browser.",
     "is_auto": true,
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",
-      "line_number": 111,
-      "context": "onClick={onCreateFolder}\n >\n <CreateNewFolderIcon />\n <span className={styles.actionBody}>\n <span className={styles.actionTitle}>\n {t(\"Common:NewFolder\")}\n </span>\n <span className={styles.actionDescription}>\n {t(\"EmptyView:CreateNewFileDescription\")}\n </span>\n </span>",
+      "line_number": 154,
+      "context": "},\n ],\n });\n } else {\n options.push({\n title: t(\"Common:NewFolder\"),\n description: t(\"EmptyView:CreateNewFileDescription\"),\n icon: <CreateNewFileIcon />,\n key: \"create-folder\",\n onClick: () => dispatchCreate(undefined),\n });",
       "module": "/packages/client"
     },
     {

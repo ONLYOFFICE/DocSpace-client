@@ -59,6 +59,7 @@ class FormsSettingsStore {
   folderSecurity: TFolderSecurity | null = null;
   userAccess: ShareAccessRights | null = null;
   inProgressFolderId: number | undefined = undefined;
+  doneFolderId: number | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -88,6 +89,10 @@ class FormsSettingsStore {
 
   setInProgressFolderId = (id: number | undefined) => {
     this.inProgressFolderId = id;
+  };
+
+  setDoneFolderId = (id: number | undefined) => {
+    this.doneFolderId = id;
   };
 
   get hasManagementAccess(): boolean {

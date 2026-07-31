@@ -3,7 +3,7 @@
   "content": "Encryption keys",
   "content_en_sha1_hash": "771080fa67be34b08e37bcdae8841d394f1be607",
   "created_at": "2026-05-24T17:27:26.591Z",
-  "updated_at": "2026-07-27T13:07:50.842Z",
+  "updated_at": "2026-07-31T12:36:29.535Z",
   "comment": {
     "text": "Section title for the encryption keys list, followed by the total count of keys in parentheses.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 257,
+      "line_number": 253,
       "context": "}\n \n return (\n <div className={styles.keysList}>\n <Text fontSize=\"14px\" fontWeight={600} className={styles.keysListTitle}>\n {t(\"Common:EncryptionKeys\")} ({keys.length})\n </Text>\n <div className={styles.keysListItems}>\n {keys.map((key) => (\n <KeyItem\n key={key.id}",
       "module": "/packages/client"
     }

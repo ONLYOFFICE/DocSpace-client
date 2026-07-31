@@ -370,13 +370,15 @@
   width: 100%;
 }
 
+// Keeps the editor mounted, sized and rendered while another tab is active —
+// it is only moved out of the viewport. `display: none` / `visibility: hidden`
+// / a zero-height clip would let the browser stop rendering the iframe and
+// blank out an editor that is still loading. Offsetting upwards never creates
+// reachable overflow, so no scrollbars appear.
 .previewEditorSlotHidden {
   position: absolute;
-  top: 0;
+  top: -99999px;
   inset-inline-start: 0;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
   pointer-events: none;
 }
 

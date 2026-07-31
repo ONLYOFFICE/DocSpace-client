@@ -3,7 +3,7 @@
   "content": "Top up & Renew",
   "content_en_sha1_hash": "8dd4787548a226b9236b332c2f3b9277d5d48bc0",
   "created_at": "2026-07-27T13:07:39.125Z",
-  "updated_at": "2026-07-27T13:10:06.651Z",
+  "updated_at": "2026-07-31T15:04:17.663Z",
   "comment": {
     "text": "Button label and clickable link text used to initiate the process of adding funds or extending an expired subscription.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 413,
+      "line_number": 416,
       "context": "deactivated ? (\n <div className={styles.actionsRow}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:TopUpAndRenew\")}\n onClick={onEditPlan}\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:RemoveSubscription\")}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 190,
+      "line_number": 196,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n textDecoration=\"underline dashed\"\n onClick={onTopUpAndPay}\n >\n {t(\"Common:TopUpAndRenew\")}\n </Link>\n <span\n className={styles.deactivatedBannerDivider}\n aria-hidden=\"true\"\n >",
       "module": "/packages/client"
     }

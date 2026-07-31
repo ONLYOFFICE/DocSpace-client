@@ -3,7 +3,7 @@
   "content": "{{planName}} plan activated",
   "content_en_sha1_hash": "8cfb807202c61925e5425640a5f51b101fd87e48",
   "created_at": "2026-06-30T07:32:36.332Z",
-  "updated_at": "2026-07-27T13:07:51.059Z",
+  "updated_at": "2026-07-31T15:04:17.733Z",
   "comment": {
     "text": "Card title on the AI paywall completion page shown upon successful activation; includes the {{planName}} variable representing the name of the activated plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 432,
+      "line_number": 437,
       "context": "</div>\n \n <div className={styles.cardBody}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {admins\n ? t(\"PlanActivated\", { planName: plan })\n : isDocsConnect\n ? t(\"DocsConnectCallbackSuccess\")\n : isWalletOnly\n ? t(\"WalletTopUpSuccessTitle\")\n : t(\"AIPaywallCallbackSuccess\")}",
       "module": "/libs/ui-kit"
     }

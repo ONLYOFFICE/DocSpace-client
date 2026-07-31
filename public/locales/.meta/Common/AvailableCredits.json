@@ -3,7 +3,7 @@
   "content": "Available credits",
   "content_en_sha1_hash": "18001da8d15dc257d0536ba486f2b5d8401f3591",
   "created_at": "2026-04-10T13:53:44.792Z",
-  "updated_at": "2026-07-27T13:07:50.761Z",
+  "updated_at": "2026-07-31T15:04:17.658Z",
   "comment": {
     "text": "This is a label for a numerical value, indicating the remaining balance of AI service credits. It appears within a balance card on the AI tools page.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 268,
+      "line_number": 271,
       "context": "<WalletIcon />\n </span>\n <div className={styles.walletText}>\n <Text className={styles.walletTitle}>{t(\"Common:Wallet\")}</Text>\n <Text className={styles.walletCredits}>\n {t(\"Common:AvailableCredits\")}:{\" \"}\n <span className={styles.creditsValue}>\n {formatCurrency(credits, 2)}\n </span>\n </Text>\n </div>",
       "module": "/libs/ui-kit"
     },

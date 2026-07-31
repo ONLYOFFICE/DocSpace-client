@@ -3,7 +3,7 @@
   "content": "Your current subscription remains unchanged until the end of your billing period (on {{date}}). The scheduled changes will take effect starting with the next billing period.",
   "content_en_sha1_hash": "ddbb27e480c0c23b15dbd458d2153e888aa6bdda",
   "created_at": "2026-07-27T13:07:33.866Z",
-  "updated_at": "2026-07-27T13:13:55.421Z",
+  "updated_at": "2026-07-31T15:04:17.660Z",
   "comment": {
     "text": "Informational warning text within a `StorageWarning` component used in billing panels and cancellation dialogs. It notifies users that subscription changes are pending, with {{date}} representing the end date of the current billing period.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 230,
+      "line_number": 232,
       "context": "locale: language,\n },\n ),\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n {\n locale: language,",
       "module": "/libs/ui-kit"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 285,
+      "line_number": 291,
       "context": "\"DATE_MED\",\n { locale: i18n.language },\n ),\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n { locale: i18n.language },\n ),",
       "module": "/packages/client"
     }

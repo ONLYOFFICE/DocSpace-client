@@ -273,7 +273,9 @@ export const messageActions = ({
         break;
       }
       case PluginActions.saveSettings:
-        updatePlugin(pluginName, null, message.settings);
+        if (message.settings !== undefined) {
+          updatePlugin(pluginName, null, message.settings);
+        }
         break;
 
       case PluginActions.navigate:

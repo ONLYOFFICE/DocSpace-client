@@ -2330,5 +2330,6 @@
   "YourName": "당신의 이름",
   "YourPrice": "귀하의 요금",
   "YourTurn": "고객님의 차례입니다",
-  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다."
+  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다.",
+  "ReadApiDocumentation": "API 문서 읽기"
 }

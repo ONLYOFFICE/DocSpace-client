@@ -96,7 +96,6 @@
   "PricePerUserMonthDevPackNote": "{{price}} mỗi người dùng / tháng",
   "PricePerUserShort": "{{price}} mỗi người dùng",
   "PromoDescription": "Có được công cụ chỉnh sửa tài liệu đầy đủ tính năng cho hệ sinh thái của bạn. Tạo một tenant để kết nối các trình chỉnh sửa độc lập với bộ nhớ lưu trữ dành cho tài liệu văn bản, bảng tính, bản trình bày và PDF bằng <1>hơn 50 trình kết nối dựng sẵn</1> với nền tảng bạn đang sử dụng. Thêm Dev Pack để có quyền truy cập vào <2>API Tự động hóa</2> và các tùy chọn thương hiệu.",
-  "ReadApiDocumentation": "Đọc tài liệu API",
   "RealtimeCollaborationDescription": "Cùng chỉnh sửa với bình luận, nhắc tên, xem xét, lịch sử phiên bản và trò chuyện tích hợp sẵn.",
   "RealtimeCollaborationTitle": "Cộng tác theo thời gian thực",
   "Rebranding": "Tùy chọn đổi thương hiệu",

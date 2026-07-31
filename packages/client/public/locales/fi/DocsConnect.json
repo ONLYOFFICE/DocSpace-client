@@ -96,7 +96,6 @@
   "PricePerUserMonthDevPackNote": "{{price}} / käyttäjä / kk",
   "PricePerUserShort": "{{price}} / käyttäjä",
   "PromoDescription": "Hanki täysin toimiva asiakirjanmuokkausmoottori omaan ekosysteemiisi. Luo tenantti yhdistääksesi tallennuksesta riippumattomat editorit tekstiasiakirjoille, laskentataulukoille, esityksille ja PDF-tiedostoille käyttämällä <1>yli 50 valmista liitintä</1> käyttämääsi alustaan. Lisää Dev Pack saadaksesi käyttöösi <2>Automaatio-API:n</2> ja brändäysvaihtoehdot.",
-  "ReadApiDocumentation": "Lue API-dokumentaatio",
   "RealtimeCollaborationDescription": "Muokatkaa yhdessä kommenttien, mainintojen, tarkistuksen, versiohistorian ja sisäänrakennetun keskustelun avulla.",
   "RealtimeCollaborationTitle": "Reaaliaikainen yhteistyö",
   "Rebranding": "Brändäysvaihtoehdot",

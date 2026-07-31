@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Shembuj: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Shkruani adresën IP, intervalin, ose hostin",
   "RuleAllow": "Lejo",
+  "RuleAlreadyAdded": "Kjo adresë është shtuar tashmë",
   "RuleDeny": "Ndalo",
   "RuleType": "Lloji i rregullit",
   "SecretKeyLabel": "Çelësi sekret",

@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Nümunələr: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "IP ünvanı, diapazon və ya host daxil edin",
   "RuleAllow": "İcazə ver",
+  "RuleAlreadyAdded": "Bu ünvan artıq əlavə edilib",
   "RuleDeny": "Qadağan et",
   "RuleType": "Qayda növü",
   "SecretKeyLabel": "Gizli açar",

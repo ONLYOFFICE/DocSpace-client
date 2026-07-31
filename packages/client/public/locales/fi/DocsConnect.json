@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Esimerkkejä: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Anna IP-osoite, alue tai isäntä",
   "RuleAllow": "Salli",
+  "RuleAlreadyAdded": "Tämä osoite on jo lisätty",
   "RuleDeny": "Estä",
   "RuleType": "Säännön tyyppi",
   "SecretKeyLabel": "Salainen avain",

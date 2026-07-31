@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Beispiele: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "IP-Adresse, Bereich oder Host eingeben",
   "RuleAllow": "Zulassen",
+  "RuleAlreadyAdded": "Diese Adresse wurde bereits hinzugefügt",
   "RuleDeny": "Verweigern",
   "RuleType": "Regeltyp",
   "SecretKeyLabel": "Geheimer Schlüssel",

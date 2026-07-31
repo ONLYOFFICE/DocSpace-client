@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Παραδείγματα: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Εισαγάγετε διεύθυνση IP, εύρος ή host",
   "RuleAllow": "Αποδοχή",
+  "RuleAlreadyAdded": "Αυτή η διεύθυνση έχει ήδη προστεθεί",
   "RuleDeny": "Απόρριψη",
   "RuleType": "Τύπος κανόνα",
   "SecretKeyLabel": "Μυστικό κλειδί",

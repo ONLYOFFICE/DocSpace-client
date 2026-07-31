@@ -114,6 +114,7 @@
   "RuleAddressExamples": "උදාහරණ: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "IP ලිපිනය, පරාසය, හෝ සත්කාරකයා ඇතුළත් කරන්න",
   "RuleAllow": "අවසර දෙන්න",
+  "RuleAlreadyAdded": "මෙම ලිපිනය දැනටමත් එකතු කර ඇත",
   "RuleDeny": "ප්‍රතික්ෂේප කරන්න",
   "RuleType": "නීතියේ වර්ගය",
   "SecretKeyLabel": "රහස් යතුර",

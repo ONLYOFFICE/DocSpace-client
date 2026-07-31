@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Příklady: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Zadejte IP adresu, rozsah nebo hostitele",
   "RuleAllow": "Povolit",
+  "RuleAlreadyAdded": "Tato adresa již byla přidána",
   "RuleDeny": "Zakázat",
   "RuleType": "Typ pravidla",
   "SecretKeyLabel": "Tajný klíč",

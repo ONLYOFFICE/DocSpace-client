@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Ví dụ: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Nhập địa chỉ IP, dải IP hoặc host",
   "RuleAllow": "Cho phép",
+  "RuleAlreadyAdded": "Địa chỉ này đã được thêm vào",
   "RuleDeny": "Từ chối",
   "RuleType": "Loại quy tắc",
   "SecretKeyLabel": "Khóa bí mật",

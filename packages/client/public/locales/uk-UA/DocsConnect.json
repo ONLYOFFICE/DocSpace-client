@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Приклади: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Введіть IP-адресу, діапазон або хост",
   "RuleAllow": "Дозволити",
+  "RuleAlreadyAdded": "Цю адресу вже додано",
   "RuleDeny": "Заборонити",
   "RuleType": "Тип правила",
   "SecretKeyLabel": "Секретний ключ",

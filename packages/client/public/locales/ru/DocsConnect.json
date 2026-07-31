@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Примеры: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Введите IP-адрес, диапазон или хост",
   "RuleAllow": "Разрешить",
+  "RuleAlreadyAdded": "Этот адрес уже добавлен",
   "RuleDeny": "Запретить",
   "RuleType": "Тип правила",
   "SecretKeyLabel": "Секретный ключ",

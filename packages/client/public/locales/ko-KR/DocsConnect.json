@@ -114,6 +114,7 @@
   "RuleAddressExamples": "예: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "IP 주소, 범위 또는 호스트 입력",
   "RuleAllow": "허용",
+  "RuleAlreadyAdded": "이 주소는 이미 추가되었습니다",
   "RuleDeny": "거부",
   "RuleType": "규칙 유형",
   "SecretKeyLabel": "비밀 키",

@@ -114,6 +114,7 @@
   "RuleAddressExamples": "ຕົວຢ່າງ: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "ໃສ່ທີ່ຢູ່ IP, ຊ່ວງ, ຫຼື ໂຮສ",
   "RuleAllow": "ອະນຸຍາດ",
+  "RuleAlreadyAdded": "ທີ່ຢູ່ນີ້ຖືກເພີ່ມເຂົ້າແລ້ວ",
   "RuleDeny": "ປະຕິເສດ",
   "RuleType": "ປະເພດກົດ",
   "SecretKeyLabel": "ລະຫັດລັບ",

@@ -114,6 +114,7 @@
   "RuleAddressExamples": "Primeri: 192.168.1.10, 192.168.1.0/24, *.example.com, *",
   "RuleAddressPlaceholder": "Vnesite IP naslov, obseg ali gostitelja",
   "RuleAllow": "Dovoli",
+  "RuleAlreadyAdded": "Ta naslov je že bil dodan",
   "RuleDeny": "Zavrni",
   "RuleType": "Vrsta pravila",
   "SecretKeyLabel": "Skrivni ključ",

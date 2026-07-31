@@ -114,6 +114,7 @@
   "RuleAddressExamples": "أمثلة: 192.168.1.10، 192.168.1.0/24، *.example.com، *",
   "RuleAddressPlaceholder": "أدخل عنوان IP أو نطاقًا أو مضيفًا",
   "RuleAllow": "سماح",
+  "RuleAlreadyAdded": "تم إضافة هذا العنوان بالفعل",
   "RuleDeny": "رفض",
   "RuleType": "نوع القاعدة",
   "SecretKeyLabel": "المفتاح السري",

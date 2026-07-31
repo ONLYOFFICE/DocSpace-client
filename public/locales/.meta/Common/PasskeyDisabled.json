@@ -3,7 +3,7 @@
   "content": "Passkey unlock disabled on this device.",
   "content_en_sha1_hash": "110efd4efb8f87df09c35bc0e8e507d9ee93e744",
   "created_at": "2026-07-27T13:07:25.548Z",
-  "updated_at": "2026-07-27T13:27:35.401Z",
+  "updated_at": "2026-07-31T12:36:29.536Z",
   "comment": {
     "text": "Success toast message appearing after a user successfully removes or disables passkey unlock on the current device.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 174,
+      "line_number": 180,
       "context": "if (!userId) return;\n setPasskeyBusy(true);\n void removePasskeyUnlock(userId)\n .then(() => {\n setPasskeyEnrolled(false);\n toastr.success(t(\"Common:PasskeyDisabled\"));\n })\n .finally(() => setPasskeyBusy(false));\n }, [userId, t]);\n \n const refreshKeysFromServer = useCallback(async () => {",
       "module": "/packages/client"
     }

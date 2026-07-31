@@ -78,7 +78,11 @@ const Preview = ({
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const [view, setView] = useState<"editor" | "code">("editor");
   const [token, setToken] = useState<string | null>(null);
-  const [editorError, setEditorError] = useState(false);
+  // "load" — the tenant api.js could not be fetched (typically blocked by CSP
+  // until the page is reloaded), so offering a reload makes sense.
+  // "sign" — the config could not be signed with the tenant secret; a reload
+  // changes nothing, the address or the secret key has to be fixed.
+  const [editorError, setEditorError] = useState<"load" | "sign" | null>(null);
   const [documentReady, setDocumentReady] = useState(false);
   const [previewKey] = useState(
     () => `docs-connect-preview-${Math.random().toString(36).slice(2, 10)}`,
@@ -118,7 +122,7 @@ const Preview = ({
         if (!cancelled) setToken(value);
       })
       .catch(() => {
-        if (!cancelled) setEditorError(true);
+        if (!cancelled) setEditorError("sign");
       });
 
     return () => {
@@ -178,10 +182,21 @@ const Preview = ({
           className={`${styles.previewEditorSlot} ${
             view === "editor" ? "" : styles.previewEditorSlotHidden
           }`}
+          // The editor stays mounted and laid out while another tab is active
+          // so it keeps loading; `inert` takes it out of the tab order and the
+          // accessibility tree meanwhile.
+          inert={view !== "editor"}
         >
           <div className={styles.previewEditor}>
             {editorError ? (
-              <EmptyServerErrorContainer />
+              <EmptyServerErrorContainer
+                withReload={editorError === "load"}
+                description={
+                  editorError === "sign"
+                    ? t("DocsConnect:EditorPreviewFailed")
+                    : undefined
+                }
+              />
             ) : (
               <>
                 {!documentReady ? (
@@ -196,7 +211,7 @@ const Preview = ({
                     config={{ ...config, token }}
                     width="100%"
                     height="100%"
-                    onLoadComponentError={() => setEditorError(true)}
+                    onLoadComponentError={() => setEditorError("load")}
                     events_onDocumentReady={() => setDocumentReady(true)}
                   />
                 ) : null}

@@ -3,7 +3,7 @@
   "content": "Maximum number of bytes that can be downloaded (e.g., 104857600 = 100MB)",
   "content_en_sha1_hash": "b6cc3f47f76b4c9100e99770492626d07e06495a",
   "created_at": "2026-07-27T13:07:48.547Z",
-  "updated_at": "2026-07-30T16:14:11.206Z",
+  "updated_at": "2026-07-31T15:04:17.662Z",
   "comment": {
     "text": "Hint text located under the maximum download size input field in DocsConnect settings, providing instructions on how to format the value using bytes.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 479,
+      "line_number": 482,
       "context": "isDisabled={isBusy}\n scale\n testId=\"docs_connect_settings_limit_input\"\n />\n <Text fontSize=\"12px\" className={styles.settingsHint}>\n {t(\"DocsConnect:MaxDownloadBytesDescription\")}\n </Text>\n </FieldContainer>\n </div>\n </div>",
       "module": "/packages/client"
     }

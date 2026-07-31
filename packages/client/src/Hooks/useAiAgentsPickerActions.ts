@@ -66,10 +66,11 @@ export type TPickedAgent = {
 /**
  * Loads the AI agents list (once, when `enabled` first turns true) and builds
  * the "Choose AI Agent" entry for the chat model picker (`actions` is empty
- * while loading and when at most one agent has a bound profile — the entry
- * is shown only when there is a real choice). `getAgentByRoomId` resolves a
- * loaded agent by its room id — used to restore the picked agent from a
- * thread's persisted context.
+ * while loading and when no agent has a bound profile — picking an agent is a
+ * distinct action even with a single one, since it also switches the request
+ * context to the agent's room). `getAgentByRoomId` resolves a loaded agent by
+ * its room id — used to restore the picked agent from a thread's persisted
+ * context.
  */
 export const useAiAgentsPickerActions = (
   enabled: boolean,
@@ -120,7 +121,7 @@ export const useAiAgentsPickerActions = (
     const pickable = (agents ?? []).flatMap((agent) =>
       agent.profileId ? [{ agent, profileId: agent.profileId }] : [],
     );
-    if (pickable.length <= 1) return [];
+    if (pickable.length === 0) return [];
 
     return [
       {

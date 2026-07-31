@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "Omejitev števila plačanih uporabnikov je bila dosežena.",
   "ReachedOutPayerForPayment": "Za povezavo novega načina plačila stopite v stik s plačnikom",
   "ReactivateLink": "Aktivirati povezavo",
+  "ReadApiDocumentation": "Preberite dokumentacijo API",
   "ReadInstructions": "Beri navodila",
   "ReadOnly": "Samo za branje",
   "ReadyToFillOut": "Pripravljeno za izpolnjevanje",
@@ -2360,6 +2361,5 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
-  "ReadApiDocumentation": "Preberite dokumentacijo API"
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
 }

@@ -1701,6 +1701,7 @@
   "QuotaPaidUserLimitError": "S-a atins limita maximă de utilizatori cu plată.",
   "ReachedOutPayerForPayment": "Pentru a conecta o nouă metodă de plată, contactați Plătitorul",
   "ReactivateLink": "Reactivare link",
+  "ReadApiDocumentation": "Citiți documentația API",
   "ReadInstructions": "Citiți instrucțiuni",
   "ReadOnly": "Doar în citire",
   "ReadyToFillOut": "Gata de completare",
@@ -2384,6 +2385,5 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
-  "ReadApiDocumentation": "Citiți documentația API"
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
 }

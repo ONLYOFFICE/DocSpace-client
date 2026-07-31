@@ -1701,6 +1701,7 @@
   "QuotaPaidUserLimitError": "有料ユーザー数の上限に達しました。",
   "ReachedOutPayerForPayment": "新しい支払い方法を登録するには、支払人にお問い合わせください",
   "ReactivateLink": "リンクを再アクティブ化",
+  "ReadApiDocumentation": "APIドキュメントを読む",
   "ReadInstructions": "説明を読む",
   "ReadOnly": "読み取り専用",
   "ReadyToFillOut": "今すぐ記入できる",
@@ -2384,6 +2385,5 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
-  "ReadApiDocumentation": "APIドキュメントを読む"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
 }

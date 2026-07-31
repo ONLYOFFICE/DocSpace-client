@@ -1701,6 +1701,7 @@
   "QuotaPaidUserLimitError": "Se ha alcanzado el límite de usuarios de pago.",
   "ReachedOutPayerForPayment": "Para vincular un nuevo método de pago, comuníquese con el Pagador",
   "ReactivateLink": "Reactivar enlace",
+  "ReadApiDocumentation": "Leer la documentación de la API",
   "ReadInstructions": "Leer las instrucciones",
   "ReadOnly": "Sólo lectura",
   "ReadyToFillOut": "Listo para rellenar",
@@ -2384,6 +2385,5 @@
   "YourName": "Su nombre",
   "YourPrice": "Su precio",
   "YourTurn": "Su turno",
-  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud.",
-  "ReadApiDocumentation": "Leer la documentación de la API"
+  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud."
 }

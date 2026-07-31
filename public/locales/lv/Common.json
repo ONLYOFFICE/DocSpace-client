@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "Ir sasniegts maksas lietotāju ierobežojums.",
   "ReachedOutPayerForPayment": "Lai pievienotu jaunu apmaksas veidu, lūdzu, sazinieties ar maksātāju",
   "ReactivateLink": "Reaktivizēt saiti",
+  "ReadApiDocumentation": "Lasīt API dokumentāciju",
   "ReadInstructions": "Izlasiet norādījumus",
   "ReadOnly": "Tikai lasīšana",
   "ReadyToFillOut": "Gatavs aizpildīšanai",
@@ -2360,6 +2361,5 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
-  "ReadApiDocumentation": "Lasīt API dokumentāciju"
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
 }

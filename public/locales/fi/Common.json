@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "Maksettu käyttäjien määrän raja on ylitetty.",
   "ReachedOutPayerForPayment": "Liittääksesi uuden maksutavan, ota yhteyttä maksajaan",
   "ReactivateLink": "Aktivoi linkki",
+  "ReadApiDocumentation": "Lue API-dokumentaatio",
   "ReadInstructions": "Lue ohjeet",
   "ReadOnly": "Vain luku",
   "ReadyToFillOut": "Valmis täytettäväksi",
@@ -2360,6 +2361,5 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
-  "ReadApiDocumentation": "Lue API-dokumentaatio"
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
 }

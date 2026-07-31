@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "Kufiri i përdoruesit me pagesë është arritur.\"",
   "ReachedOutPayerForPayment": "Për të lidhur një mënyrë të re pagese, ju lutemi kontaktoni paguesin",
   "ReactivateLink": "Riaktivizo lidhjen",
+  "ReadApiDocumentation": "Lexoni dokumentacionin e API-së",
   "ReadInstructions": "Lexoni udhëzimet",
   "ReadOnly": "Vetëm për lexim",
   "ReadyToFillOut": "Gati për të plotësuar",
@@ -2360,6 +2361,5 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
-  "ReadApiDocumentation": "Lexoni dokumentacionin e API-së"
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
 }

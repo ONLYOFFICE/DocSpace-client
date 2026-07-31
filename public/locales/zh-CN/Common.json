@@ -1701,6 +1701,7 @@
   "QuotaPaidUserLimitError": "已达到付费用户限制。",
   "ReachedOutPayerForPayment": "如需关联新的支付方式，请联系付款者",
   "ReactivateLink": "重新激活链接",
+  "ReadApiDocumentation": "阅读 API 文档",
   "ReadInstructions": "阅读说明",
   "ReadOnly": "只读",
   "ReadyToFillOut": "准备填写",
@@ -2384,6 +2385,5 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
-  "ReadApiDocumentation": "阅读 API 文档"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
 }

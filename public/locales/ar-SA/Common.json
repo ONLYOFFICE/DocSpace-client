@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "تم الوصول إلى الحد المدفوع للمستخدمين.",
   "ReachedOutPayerForPayment": "لربط طريقة دفع جديدة، يرجى التواصل مع الدافع",
   "ReactivateLink": "إعادة تنشيط الرابط",
+  "ReadApiDocumentation": "قراءة توثيق واجهة برمجة التطبيقات",
   "ReadInstructions": "اقرأ التعليمات",
   "ReadOnly": "للقراءة فقط",
   "ReadyToFillOut": "جاهز للتعبئة",
@@ -2360,6 +2361,5 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
-  "ReadApiDocumentation": "قراءة توثيق واجهة برمجة التطبيقات"
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
 }

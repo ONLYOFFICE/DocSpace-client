@@ -1701,6 +1701,7 @@
   "QuotaPaidUserLimitError": "The paid user limit has been reached.",
   "ReachedOutPayerForPayment": "To link a new payment method, please reach out to the payer",
   "ReactivateLink": "Reactivate link",
+  "ReadApiDocumentation": "Read API documentation",
   "ReadInstructions": "Read instructions",
   "ReadOnly": "Read only",
   "ReadyToFillOut": "Ready to fill out",
@@ -2384,6 +2385,5 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request.",
-  "ReadApiDocumentation": "Read API documentation"
+  "YouWillBeContacted": "The sales team will contact you after creating the request."
 }

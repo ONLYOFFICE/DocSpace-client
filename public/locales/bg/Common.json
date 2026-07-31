@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "Лимитът за платени потребители е достигнат.",
   "ReachedOutPayerForPayment": "За да свържете нов начин на плащане, моля свържете се с платеца",
   "ReactivateLink": "Реактивиране на връзката",
+  "ReadApiDocumentation": "Прочетете документацията на API",
   "ReadInstructions": "Прочети инструкции",
   "ReadOnly": "Само за четене",
   "ReadyToFillOut": "Готов за попълване",
@@ -2360,6 +2361,5 @@
   "YourName": "Вашето име",
   "YourPrice": "Вашата цена",
   "YourTurn": "Ваш ред",
-  "YouWillBeContacted": "Търговският екип ще се свърже с вас след създаване на заявката.",
-  "ReadApiDocumentation": "Прочетете документацията на API"
+  "YouWillBeContacted": "Търговският екип ще се свърже с вас след създаване на заявката."
 }

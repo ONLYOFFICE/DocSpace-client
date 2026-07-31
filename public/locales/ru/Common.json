@@ -1701,6 +1701,7 @@
   "QuotaPaidUserLimitError": "Достигнут лимит платных пользователей.",
   "ReachedOutPayerForPayment": "Чтобы привязать новый способ оплаты, пожалуйста, обратитесь к плательщику",
   "ReactivateLink": "Снова активировать ссылку",
+  "ReadApiDocumentation": "Читать документацию по API",
   "ReadInstructions": "Читать руководства",
   "ReadOnly": "Только чтение",
   "ReadyToFillOut": "Готово к заполнению",
@@ -2384,6 +2385,5 @@
   "YourName": "Ваше имя",
   "YourPrice": "Ваша стоимость",
   "YourTurn": "Ваша очередь",
-  "YouWillBeContacted": "Отдел продаж свяжется с вами после создания запроса.",
-  "ReadApiDocumentation": "Читать документацию по API"
+  "YouWillBeContacted": "Отдел продаж свяжется с вами после создания запроса."
 }

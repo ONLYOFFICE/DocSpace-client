@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
       "line_number": 155,
-      "context": "color=\"accent\"\n fontSize=\"13px\"\n fontWeight={600}\n onClick={onReadApiDocs}\n >\n {t(\"ReadApiDocumentation\")}\n </Link>\n </div>\n \n <Tooltip\n anchorSelect={`#${AUTOMATION_API_ANCHOR}`}",
+      "context": "color=\"accent\"\n fontSize=\"13px\"\n fontWeight={600}\n onClick={onReadApiDocs}\n >\n {t(\"Common:ReadApiDocumentation\")}\n </Link>\n </div>\n \n <Tooltip\n anchorSelect={`#${AUTOMATION_API_ANCHOR}`}",
       "module": "/packages/client"
     }
   ],

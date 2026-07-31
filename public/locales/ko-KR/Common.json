@@ -1658,6 +1658,7 @@
   "QuotaPaidUserLimitError": "유료 사용자 한도에 도달했습니다.",
   "ReachedOutPayerForPayment": "새 결제 수단을 연결하려면 지불자에게 문의하세요",
   "ReactivateLink": "링크 재활성화",
+  "ReadApiDocumentation": "API 문서 읽기",
   "ReadInstructions": "설명 보기",
   "ReadOnly": "읽기 전용",
   "ReadyToFillOut": "작성 준비 완료",
@@ -2330,6 +2331,5 @@
   "YourName": "당신의 이름",
   "YourPrice": "귀하의 요금",
   "YourTurn": "고객님의 차례입니다",
-  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다.",
-  "ReadApiDocumentation": "API 문서 읽기"
+  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다."
 }

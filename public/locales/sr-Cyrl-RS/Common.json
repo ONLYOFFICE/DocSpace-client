@@ -1701,6 +1701,7 @@
   "QuotaPaidUserLimitError": "Лимит плаћеног корисника је достигнут.",
   "ReachedOutPayerForPayment": "Да бисте повезали нови начин плаћања, контактирајте платиоца",
   "ReactivateLink": "Поново активирати линк",
+  "ReadApiDocumentation": "Прочитајте АПИ документацију",
   "ReadInstructions": "Прочитај инструкције",
   "ReadOnly": "Само за читање",
   "ReadyToFillOut": "Спремни за попуњавање",
@@ -2384,6 +2385,5 @@
   "YourName": "Ваше име",
   "YourPrice": "Ваша цена",
   "YourTurn": "Ваш ред",
-  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева.",
-  "ReadApiDocumentation": "Прочитајте АПИ документацију"
+  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева."
 }

@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "ගෙවන ලද පරිශීලක සීමාවට ළඟා වී ඇත.",
   "ReachedOutPayerForPayment": "නව ගෙවීමේ ක්‍රමයක් සම්බන්ධ කිරීමට, කරුණාකර ගෙවන්නා හා සම්බන්ධ වන්න",
   "ReactivateLink": "සබැඳිය නැවත සක්‍රීය කරන්න",
+  "ReadApiDocumentation": "API ප්‍රලේඛනය කියවන්න",
   "ReadInstructions": "උපදෙස් කියවන්න",
   "ReadOnly": "කියවීමට පමණි",
   "ReadyToFillOut": "පිරවීමට සූදානම්",
@@ -2360,6 +2361,5 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
-  "ReadApiDocumentation": "API ප්‍රලේඛනය කියවන්න"
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
 }

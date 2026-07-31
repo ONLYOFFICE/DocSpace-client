@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "ຮອດຂີດຈຳກັດຜູ້ໃຊ້ທີ່ຈ່າຍເງິນແລ້ວ.",
   "ReachedOutPayerForPayment": "ເພື່ອເຊື່ອມຕໍ່ວິທີການຊໍາລະໃໝ່, ກະລຸນາຕິດຕໍ່ຜູ້ຈ່າຍເງິນ",
   "ReactivateLink": "ເປີດໃຊ້ງານລິ້ງຄືນ",
+  "ReadApiDocumentation": "ອ່ານເອກະສານ API",
   "ReadInstructions": "ອ່ານຄໍາແນະນໍາ",
   "ReadOnly": "ອ່ານຢ່າງດຽວ",
   "ReadyToFillOut": "ພ້ອມແລ້ວທີ່ຈະຕື່ມຂໍ້ມູນເຂົ້າໄປ",
@@ -2360,6 +2361,5 @@
   "YourName": "ຊື່​ຂອງ​ເຈົ້າ",
   "YourPrice": "ລາຄາຂອງເຈົ້າ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ.",
-  "ReadApiDocumentation": "ອ່ານເອກະສານ API"
+  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ."
 }

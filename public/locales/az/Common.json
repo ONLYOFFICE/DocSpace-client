@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "Ödənişli istifadəçi limitinə çatıldı.",
   "ReachedOutPayerForPayment": "Yeni ödəniş üsulu bağlamaq üçün ödəyici ilə əlaqə saxlayın",
   "ReactivateLink": "Bağlantını yenidən aktiv et",
+  "ReadApiDocumentation": "API sənədləşməsini oxuyun",
   "ReadInstructions": "Təlimatları oxuyun",
   "ReadOnly": "Yalnız oxumaq üçün",
   "ReadyToFillOut": "Doldurmağa hazırdır",
@@ -2360,6 +2361,5 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
-  "ReadApiDocumentation": "API sənədləşməsini oxuyun"
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
 }

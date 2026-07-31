@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "Byl dosažen limit placených uživatelů.",
   "ReachedOutPayerForPayment": "Chcete-li připojit novou platební metodu, kontaktujte platitele",
   "ReactivateLink": "Aktivovat odkaz",
+  "ReadApiDocumentation": "Přečíst dokumentaci API",
   "ReadInstructions": "Přečtěte si pokyny",
   "ReadOnly": "Pouze pro čtení",
   "ReadyToFillOut": "Připraveno k vyplnění",
@@ -2360,6 +2361,5 @@
   "YourName": "Vaše jméno",
   "YourPrice": "Vaše cena",
   "YourTurn": "Jste na řadě",
-  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým.",
-  "ReadApiDocumentation": "Přečíst dokumentaci API"
+  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým."
 }

@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "Досягнуто обмеження кількості платних користувачів.",
   "ReachedOutPayerForPayment": "Щоб прив'язати новий спосіб оплати, будь ласка, зверніться до платника",
   "ReactivateLink": "Повторно активувати посилання",
+  "ReadApiDocumentation": "Читати документацію API",
   "ReadInstructions": "Читати інструкції",
   "ReadOnly": "Лише читання",
   "ReadyToFillOut": "Готово до заповнення",
@@ -2360,6 +2361,5 @@
   "YourName": "Ваше ім’я",
   "YourPrice": "Ваша ціна",
   "YourTurn": "Ваша черга",
-  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів.",
-  "ReadApiDocumentation": "Читати документацію API"
+  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів."
 }

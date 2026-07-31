@@ -1701,6 +1701,7 @@
   "QuotaPaidUserLimitError": "Վճարովի օգտագործողի սահմանաչափը հասել է:",
   "ReachedOutPayerForPayment": "Նոր վճարման եղանակ կապելու համար կապվեք վճարողի հետ",
   "ReactivateLink": "Վերակտիվացնել հղումը",
+  "ReadApiDocumentation": "Կարդալ API փաստաթղթերը",
   "ReadInstructions": "Կարդալ հրահանգները",
   "ReadOnly": "Միայն կարդալու համար",
   "ReadyToFillOut": "Պատրաստ է լրացման",
@@ -2384,6 +2385,5 @@
   "YourName": "Ձեր անունը",
   "YourPrice": "Ձեր գինը",
   "YourTurn": "Ձեր հերթն է",
-  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:",
-  "ReadApiDocumentation": "Կարդալ API փաստաթղթերը"
+  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:"
 }

@@ -1678,6 +1678,7 @@
   "QuotaPaidUserLimitError": "De limiet voor betaalde gebruikers is bereikt.",
   "ReachedOutPayerForPayment": "Neem contact op met de betaler om een nieuwe betaalmethode te koppelen",
   "ReactivateLink": "Heractiveren link",
+  "ReadApiDocumentation": "Lees de API-documentatie",
   "ReadInstructions": "Lees instructies",
   "ReadOnly": "Alleen lezen",
   "ReadyToFillOut": "Klaar om in te vullen",
@@ -2360,6 +2361,5 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
-  "ReadApiDocumentation": "Lees de API-documentatie"
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
 }

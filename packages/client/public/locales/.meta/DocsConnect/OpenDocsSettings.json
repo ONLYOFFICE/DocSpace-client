@@ -1,0 +1,29 @@
+{
+  "key_path": "OpenDocsSettings",
+  "content": "Open {{editorsName}} settings",
+  "content_en_sha1_hash": "5a1eb16251ff3ed300e9d5b3cda6f4695c0c8955",
+  "created_at": "2026-07-30T16:14:09.658Z",
+  "updated_at": "2026-07-30T16:17:40.050Z",
+  "comment": {
+    "text": "Button label that navigates to the settings for a specific document editor; {{editorsName}} is replaced by the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:17:40.050Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 279,
+      "context": "</div>\n <div className={styles.addRuleAction}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"DocsConnect:OpenDocsSettings\", {\n editorsName: getBrandName(\"ProductEditorsName\"),\n })}\n isDisabled={isBusy || isResetting}\n onClick={() =>\n navigate(\"/portal-settings/integration/document-service\")",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

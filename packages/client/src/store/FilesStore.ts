@@ -49,16 +49,11 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/ui-kit/utils/socket";
 
-import {
-  RoomsTypes,
-  isDesktop,
-} from "@docspace/shared/utils";
+import { RoomsTypes, isDesktop } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 import { isSameEntity } from "@docspace/shared/utils/isSameEntity";
 
-import {
-  getCategoryType,
-} from "@docspace/shared/utils/common";
+import { getCategoryType } from "@docspace/shared/utils/common";
 import {
   subscribeFilenameCache,
   getCachedEncryptedFilename,
@@ -68,22 +63,16 @@ import {
   recoverEncryptedFilenames,
 } from "@docspace/shared/services/private-room/encrypted-filename-recovery";
 
-import {
-  LOADER_TIMEOUT,
-  EMPTY_ARRAY,
-} from "@docspace/shared/constants";
+import { LOADER_TIMEOUT, EMPTY_ARRAY } from "@docspace/shared/constants";
 
 import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
 
-
 import debounce from "lodash.debounce";
 import Queue from "queue-promise";
-import {
-  mappingActiveItems,
-} from "SRC_DIR/helpers/filesUtils";
+import { mappingActiveItems } from "SRC_DIR/helpers/filesUtils";
 import {
   getUserFilter,
   setUserFilter,
@@ -102,10 +91,7 @@ import {
 } from "@docspace/shared/utils/filterConstants";
 
 import type { Nullable, TViewAs } from "@docspace/shared/types";
-import type {
-  TFile,
-  TFolder,
-} from "@docspace/shared/api/files/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TPathParts } from "@docspace/shared/types";
 import type { VectorizationStatus } from "@docspace/shared/enums";
@@ -256,9 +242,9 @@ class FilesStore {
 
   // the persisted view value is trusted to be a valid TViewAs
   // (it is only ever written via setViewAs).
-  privateViewAs = (
-    !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table"
-  ) as TViewAs;
+  privateViewAs = (!isDesktop() && storageViewAs !== "tile"
+    ? "row"
+    : storageViewAs || "table") as TViewAs;
 
   dragging = false;
 
@@ -273,6 +259,10 @@ class FilesStore {
   tooltipPageY = 0;
 
   startDrag = false;
+
+  // True while a drag started in the file list hovers the AI chat panel, which
+  // attaches the dragged files to the composer instead of moving them.
+  isChatDropTarget = false;
 
   alreadyFetchingRooms = false;
 
@@ -665,8 +655,7 @@ class FilesStore {
   wsModifyFolderDelete = (opt?: TOptSocket) =>
     wsModifyFolderDeleteImpl(this, opt);
 
-  wsCreatedPDFForm = (option: TOptSocket) =>
-    wsCreatedPDFFormImpl(this, option);
+  wsCreatedPDFForm = (option: TOptSocket) => wsCreatedPDFFormImpl(this, option);
 
   wsChangeFolderAccessRights = (option: TOptSocket) =>
     wsChangeFolderAccessRightsImpl(this, option);
@@ -881,6 +870,11 @@ class FilesStore {
 
   setDragging = (dragging: boolean) => {
     this.dragging = dragging;
+  };
+
+  setIsChatDropTarget = (isChatDropTarget: boolean) => {
+    if (this.isChatDropTarget === isChatDropTarget) return;
+    this.isChatDropTarget = isChatDropTarget;
   };
 
   setTooltipPosition = (tooltipPageX: number, tooltipPageY: number) => {
@@ -1272,7 +1266,7 @@ class FilesStore {
   ) => {
     // the AI quota endpoints are typed with numeric agent
     // ids; string ids pass through unchanged at runtime.
-    const agents = await api.ai.setNewAiAgentQuota(
+    const agents = await api.ai.setCustomAIAgentQuota(
       itemsIDs as number[],
       +quotaSize,
     );
@@ -1309,7 +1303,7 @@ class FilesStore {
     inAgent = false,
     filter: Nullable<TRoomsFilter> = null,
   ) => {
-    const agents = await api.ai.resetNewAiAgentQuota(itemsIDs as number[]);
+    const agents = await api.ai.resetAIAgentQuota(itemsIDs as number[]);
 
     if (!inAgent) {
       await this.fetchAgents(null, filter, false, false);
@@ -1960,6 +1954,21 @@ class FilesStore {
 
   get hasBufferSelection() {
     return !!this.bufferSelection;
+  }
+
+  /**
+   * Items the current drag carries. A buffer selection wins over the checkbox
+   * selection — dragging an unselected row by its name sets it (see
+   * `withFileActions.onMouseDown`), and both `moveDragItems` and the drag
+   * tooltip resolve the payload the same way.
+   */
+  get draggedItems(): TItem[] {
+    return this.bufferSelection ? [this.bufferSelection] : this.selection;
+  }
+
+  /** Dragged files only — folders are not attachable to the AI chat. */
+  get draggedFiles(): TItem[] {
+    return this.draggedItems.filter((item) => !item.isFolder);
   }
 
   get isEmptyFilesList() {

@@ -65,7 +65,6 @@ export default function useFormsTour(showMenu = true) {
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
   const isMobile = currentDeviceType === DeviceType.mobile;
-  const isTablet = currentDeviceType === DeviceType.tablet;
   const pathname = usePathname();
   const pathnameRef = useRef(pathname);
   pathnameRef.current = pathname;
@@ -114,8 +113,8 @@ export default function useFormsTour(showMenu = true) {
   const showSettings = !!(user?.isOwner || user?.isAdmin);
 
   const tourFlags = useMemo<TourStepFlags>(
-    () => ({ canCreate, showLibrary, showSettings, showMenu, isTouch: isTablet }),
-    [canCreate, showLibrary, showSettings, showMenu, isTablet],
+    () => ({ canCreate, showLibrary, showSettings, showMenu }),
+    [canCreate, showLibrary, showSettings, showMenu],
   );
 
   const steps = useMemo(
@@ -172,7 +171,6 @@ export default function useFormsTour(showMenu = true) {
     if (showSettings) {
       routes.push(
         `/forms/settings/billing${qs_suffix}`,
-        `/forms/settings/ai-agent${qs_suffix}`,
         `/forms/settings/access${qs_suffix}`,
         `/forms/settings/collect-data${qs_suffix}`,
       );

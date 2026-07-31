@@ -41,6 +41,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
 import { resetGhostStateGate } from "@docspace/shared/services/encryption/ghost-state-notifier";
 import { clearActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { clearRotationState } from "@docspace/shared/services/encryption/rotation-state";
 import { deleteEncryptionKey } from "@docspace/shared/api/privacy";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -91,6 +92,7 @@ export function useResetKeysFlow({
         keys.map((k) => deleteEncryptionKey(String(k.id))),
       );
       clearActiveKeyId(userId);
+      clearRotationState(userId);
       SecretStorage.lock();
       resetGhostStateGate();
       await refreshKeysFromServer();

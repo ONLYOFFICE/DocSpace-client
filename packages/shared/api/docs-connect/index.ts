@@ -248,6 +248,47 @@ export const getDocsConnectInfo = async (
   };
 };
 
+export type TDocsConnectConnection = {
+  address: string;
+  secret: string;
+  header: string;
+};
+
+export const getDocsConnectConnection =
+  async (): Promise<TDocsConnectConnection | null> => {
+    let tenant: TDocsConnectTenant | null = null;
+    try {
+      tenant = (await request({
+        method: "get",
+        url: `${BASE}/tenant`,
+      })) as TDocsConnectTenant | null;
+    } catch {
+      tenant = null;
+    }
+
+    if (!tenant?.address) {
+      return null;
+    }
+
+    let config: TDocsConnectConfig | null = null;
+    try {
+      config = (await request({
+        method: "get",
+        url: `${BASE}/tenant/config`,
+      })) as TDocsConnectConfig | null;
+    } catch {
+      config = null;
+    }
+
+    const secret = config?.security.secret;
+    const header = config?.security.header;
+    if (!secret || !header) {
+      return null;
+    }
+
+    return { address: tenant.address, secret, header };
+  };
+
 export const startDocsConnectTrial =
   async (): Promise<TDocsConnectInfo | null> => {
     await request({ method: "post", url: `${BASE}/trial` });

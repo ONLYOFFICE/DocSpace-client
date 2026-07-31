@@ -49,7 +49,7 @@ import {
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
 import { SortByFieldName, RoomsProviderType } from "@docspace/shared/enums";
-import { getNewAiAgents } from "@docspace/shared/api/ai";
+import { getAIAgents } from "@docspace/shared/api/ai";
 
 import type { TPortal } from "@docspace/shared/api/portal/types";
 import type { TFilesUsedSpace } from "@docspace/shared/api/files/types";
@@ -191,7 +191,7 @@ class StorageManagement {
         requests.push(
           getUserList(this.userFilterData, userAbortRequests.signal),
           getRooms(this.roomFilterData, roomAbortRequests.signal),
-          getNewAiAgents(this.roomFilterData, roomAbortRequests.signal),
+          getAIAgents(this.roomFilterData, roomAbortRequests.signal),
         );
       }
 
@@ -279,7 +279,7 @@ class StorageManagement {
     type === "user"
       ? requests.push(getUserList(userFilterData))
       : type === "agent"
-        ? requests.push(getNewAiAgents(roomFilterData))
+        ? requests.push(getAIAgents(roomFilterData))
         : requests.push(getRooms(roomFilterData));
 
     try {

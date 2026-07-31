@@ -42,7 +42,6 @@ import { FilterType, FolderType } from "@docspace/shared/enums";
 import { getFilesSettings } from "@/api/files";
 import { getFormsFolder } from "@/api/forms";
 import { getSelf } from "@/api/people";
-import { getDefaultProvider } from "@/api/ai";
 import { getSettings } from "@/api/settings";
 import { getAppSettings } from "@/api/apps";
 import {
@@ -110,11 +109,10 @@ export default async function FormsServerLayout({
   const emplType = filterParams.get("emplType") || "";
   const uid = filterParams.get("uid") || "";
 
-  const [filesSettings, user, defaultProvider, portalSettings, roomData] =
+  const [filesSettings, user, portalSettings, roomData] =
     await Promise.all([
       getFilesSettings(),
       getSelf(),
-      getDefaultProvider(),
       getSettings().catch(() => undefined),
       roomId
         ? getFormsFolder(
@@ -205,7 +203,6 @@ export default async function FormsServerLayout({
         socketUrl,
         filesSettings: filesSettings!,
         user,
-        defaultProvider,
         roomSecurity,
         roomAccess,
         saveFormAsXLSX: Boolean(roomCurrent?.saveFormAsXLSX),

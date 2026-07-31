@@ -45,8 +45,7 @@ import {
   serializeIdentity,
 } from "@docspace/shared/services/encryption/identity";
 import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
-import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
+import { applyNewIdentity } from "@docspace/shared/services/encryption/apply-new-identity";
 import { getEncryptionErrorMessage } from "@docspace/shared/services/encryption/error-i18n";
 import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 import { useEncryption } from "@docspace/shared/context/encryption";
@@ -61,21 +60,10 @@ type Step = "idle" | "passphrase" | "recovery-display";
 type Deps = {
   userId: string | undefined;
   accountLabel?: string;
+  hasExistingKeys?: boolean;
   refreshKeysFromServer: () => Promise<void>;
   onSuccess?: () => void;
   onError?: () => void;
-  /**
-   * Called after the new key is registered on the server but BEFORE the old
-   * SecretStorage entry is overwritten with the new identity. Receives the
-   * old identity (if it was unlocked in SecretStorage) and the new identity.
-   * Any error thrown here is swallowed so key generation still completes.
-   */
-  onBeforeNewKeyActive?: (
-    oldIdentity: IdentityKeyPair | null,
-    newIdentity: IdentityKeyPair,
-    userId: string,
-    newPublicKeyId: string,
-  ) => Promise<void>;
 };
 
 export type GenerateKeyFlow = {
@@ -87,10 +75,10 @@ export type GenerateKeyFlow = {
 export function useGenerateKeyFlow({
   userId,
   accountLabel,
+  hasExistingKeys,
   refreshKeysFromServer,
   onSuccess,
   onError,
-  onBeforeNewKeyActive,
 }: Deps): GenerateKeyFlow {
   const { t } = useTranslation(["Common"]);
   const { suspendAutoLock } = useEncryption();
@@ -101,7 +89,7 @@ export function useGenerateKeyFlow({
   const [mnemonic, setMnemonic] = useState<string | null>(null);
 
   useEffect(() => {
-    if (step !== "recovery-display") return undefined;
+    if (step === "idle") return undefined;
     return suspendAutoLock();
   }, [step, suspendAutoLock]);
 
@@ -117,8 +105,9 @@ export function useGenerateKeyFlow({
       toastr.error(t("Common:EncryptionRequiresHttps"));
       return;
     }
+    if (isPending || step !== "idle") return;
     setStep("passphrase");
-  }, [t]);
+  }, [t, isPending, step]);
 
   const onPassphraseSubmit = useCallback(
     async (input: string) => {
@@ -161,21 +150,15 @@ export function useGenerateKeyFlow({
         privateKeyEnc: serialized.privateKeyEnc,
       };
       await setEncryptionKeys(payload);
-      setActiveKeyId(userId, payload.id);
 
-      // Capture the old identity before overwriting the SecretStorage slot.
-      // The callback may re-wrap DEKs in private rooms using the old key.
-      if (onBeforeNewKeyActive) {
-        const oldIdentity = SecretStorage.getCached(userId);
-        try {
-          await onBeforeNewKeyActive(oldIdentity, keyPair, userId, payload.id);
-        } catch (callbackError) {
-          // Re-wrap errors are reported by the callback; do not abort keygen.
-          console.error("onBeforeNewKeyActive failed:", callbackError);
-        }
-      }
+      await applyNewIdentity({
+        userId,
+        newIdentity: keyPair,
+        newPublicKeyB64: serialized.publicKey,
+        newPublicKeyId: payload.id,
+        activate: !hasExistingKeys,
+      });
 
-      SecretStorage.cacheUnlocked(userId, keyPair);
       await refreshKeysFromServer();
       toastr.success(t("Common:EncryptionKeyGenerated"));
       success = true;
@@ -193,12 +176,12 @@ export function useGenerateKeyFlow({
     passphrase,
     mnemonic,
     userId,
+    hasExistingKeys,
     refreshKeysFromServer,
     reset,
     t,
     onSuccess,
     onError,
-    onBeforeNewKeyActive,
   ]);
 
   const modals = (

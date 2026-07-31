@@ -3,7 +3,7 @@
   "content": "Address",
   "content_en_sha1_hash": "d70f93df5e8f9b55be44fbeee9d203972e3383d4",
   "created_at": "2025-05-19T21:30:42.924Z",
-  "updated_at": "2026-07-27T13:07:50.772Z",
+  "updated_at": "2026-07-30T16:14:11.207Z",
   "comment": {
     "text": "This is a label for a text input field where users enter a company's physical location. It also appears as a label for the company's address in an \"About\" dialog.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
-      "line_number": 110,
+      "line_number": 116,
       "context": "</FieldContainer>\n <FieldContainer\n isVertical\n removeMargin\n labelVisible\n labelText={t(\"Common:Address\")}\n >\n <TextInput\n type={InputType.text}\n value={address}\n onChange={(e) => setAddress(e.target.value)}",
       "module": "/packages/client"
     },

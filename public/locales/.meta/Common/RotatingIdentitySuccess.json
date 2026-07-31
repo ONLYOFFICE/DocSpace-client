@@ -3,7 +3,7 @@
   "content": "Encryption keys have been updated in all your private rooms.",
   "content_en_sha1_hash": "abe36ad4d9dc0477a88e1e76a53feebf4da38aa8",
   "created_at": "2026-06-09T09:42:58.587Z",
-  "updated_at": "2026-06-09T09:44:35.806Z",
+  "updated_at": "2026-07-31T12:36:29.540Z",
   "comment": {
     "text": "Success toast message appearing after encryption keys have been successfully rotated across all private rooms.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useRotateIdentityForRooms.ts",
-      "line_number": 199,
-      "context": "setRotationProgress(null);\n \n // Summary toast.\n if (totalFailed === 0) {\n if (totalDone > 0) {\n toastr.success(t(\"Common:RotatingIdentitySuccess\"));\n }\n // No files → no toast (user had empty rooms or no encrypted files).\n } else if (totalDone > 0) {\n toastr.warning(\n t(\"Common:RotatingIdentityPartialFailure\", {",
+      "line_number": 157,
+      "context": "});\n }\n \n if (summary.filesFailed === 0) {\n if (summary.filesDone > 0) {\n toastr.success(t(\"Common:RotatingIdentitySuccess\"));\n }\n // No files → no toast (user had empty rooms or no encrypted files).\n } else if (summary.filesDone > 0) {\n toastr.warning(\n t(\"Common:RotatingIdentityPartialFailure\", {",
       "module": "/packages/client"
     }
   ],

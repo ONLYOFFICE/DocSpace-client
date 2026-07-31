@@ -152,7 +152,11 @@ export default async function RoomsLayout({
   return (
     <main style={{ width: "100%", height: "100%" }}>
       <RoomsQueryProvider>
-        <DocsStoreProviders initViewAs={initViewAs} myFolderId={roomsId}>
+        <DocsStoreProviders
+          initViewAs={initViewAs}
+          myFolderId={roomsId}
+          canUseAi={!!user && !user.isVisitor}
+        >
           <RoomsQuotaStoreContextProvider>
             <RoomsOperationsStoreContextProvider>
               <RoomsTagsStoreContextProvider>

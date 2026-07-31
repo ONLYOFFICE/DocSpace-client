@@ -41,7 +41,7 @@ import { useTranslation } from "react-i18next";
 
 import FilesSelector from "@docspace/ui-kit/selectors/Files";
 import type { TSelectorItem } from "@docspace/ui-kit/components/selector";
-import useGetIcon from "@docspace/ui-kit/ai-agent/chat/hooks/useGetIcon";
+import useGetIcon from "@docspace/ui-kit/ai-agent/hooks/useGetIcon";
 import { copyToFolder } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,

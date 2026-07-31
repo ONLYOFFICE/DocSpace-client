@@ -243,7 +243,6 @@ export const enum PageType {
   groups = "groups",
   guests = "guests",
   aiSettings = "aiSettings",
-  newAISettings = "new-ai-settings",
 }
 
 export const enum ConflictResolveType {

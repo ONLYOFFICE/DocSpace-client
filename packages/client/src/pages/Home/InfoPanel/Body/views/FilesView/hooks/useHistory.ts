@@ -86,6 +86,13 @@ const addLinksToHistory = (fetchedHistory: TFeed, links: RoomMember[]) => {
   return { ...fetchedHistory, items: historyWithLinks };
 };
 
+const countFeedEntries = <T,>(feedActions: TFeedAction<T>[]) =>
+  feedActions.reduce((count, feed) => count + 1 + feed.related.length, 0);
+
+const getSupportedFeeds = <T extends TFeedData | RoomMember>(
+  feedActions: TFeedAction<T>[],
+) => feedActions.filter((feed) => Boolean(getFeedInfo(feed)));
+
 const parseHistory = (feedActions: TFeedAction<TFeedData | RoomMember>[]) => {
   const parsedFeeds: TSelectionHistory[] = [];
 
@@ -130,6 +137,7 @@ export const useHistory = ({
   const [isLoading, setIsLoading] = React.useState(false);
 
   const abortController = React.useRef<AbortController>(null);
+  const skippedFeedsCount = React.useRef(0);
 
   const fetchHistory = React.useCallback(async () => {
     if (!selection?.id) return;
@@ -167,7 +175,14 @@ export const useHistory = ({
 
       abortController.current = null;
 
-      setTotal(response.total);
+      const supportedItems = getSupportedFeeds(response.items);
+
+      skippedFeedsCount.current =
+        countFeedEntries(response.items) - countFeedEntries(supportedItems);
+
+      const feed = { ...response, items: supportedItems };
+
+      setTotal(response.total - skippedFeedsCount.current);
       setFilter({
         page: 0,
         startIndex: 0,
@@ -180,7 +195,7 @@ export const useHistory = ({
           })
           .then((res) => res.items);
 
-        const historyWithLinks = addLinksToHistory(response, links);
+        const historyWithLinks = addLinksToHistory(feed, links);
 
         // getRoomMembers with filterType 2 (external links)
         // returns link-shaped items, but its return type is RoomMember[].
@@ -192,7 +207,7 @@ export const useHistory = ({
       }
 
       setExternalLinks([]);
-      setHistory(parseHistory(response.items));
+      setHistory(parseHistory(feed.items));
     } catch (error) {
       if (axios.isCancel(error)) return;
       throw error;
@@ -246,7 +261,14 @@ export const useHistory = ({
 
       abortController.current = null;
 
-      let feedWithLinks: ReturnType<typeof addLinksToHistory> = data;
+      const supportedItems = getSupportedFeeds(data.items);
+
+      skippedFeedsCount.current +=
+        countFeedEntries(data.items) - countFeedEntries(supportedItems);
+
+      const feed = { ...data, items: supportedItems };
+
+      let feedWithLinks: ReturnType<typeof addLinksToHistory> = feed;
 
       if (withLinks) {
         const links = await api.rooms
@@ -255,7 +277,7 @@ export const useHistory = ({
           })
           .then((res) => res.items);
 
-        feedWithLinks = addLinksToHistory(data, links);
+        feedWithLinks = addLinksToHistory(feed, links);
 
         // getRoomMembers with filterType 2 (external links)
         // returns link-shaped items, but its return type is RoomMember[].
@@ -280,7 +302,7 @@ export const useHistory = ({
       }
 
       setHistory(mergedHistory);
-      setTotal(data.total);
+      setTotal(data.total - skippedFeedsCount.current);
     } catch (e) {
       if (axios.isCancel(e)) return;
       console.log(e);

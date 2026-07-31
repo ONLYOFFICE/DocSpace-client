@@ -1,0 +1,38 @@
+{
+  "key_path": "DeleteAIAgentTitle",
+  "content": "Delete this agent?",
+  "content_en_sha1_hash": "346fba156dd926e2feaa82d4353a4322146ba0d1",
+  "created_at": "2025-10-27T16:14:31.194Z",
+  "updated_at": "2026-07-07T08:59:21.742Z",
+  "comment": {
+    "text": "This is the title of a confirmation dialog. It appears when a user attempts to delete an AI agent, asking for confirmation.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:05:51.756Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 213,
+      "context": "return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {\n if (isAIAgent) {\n return t(\"Common:DeleteAIAgentTitle\");\n }\n \n if (isTemplate) {\n return `${t(\"Files:DeleteTemplateAction\")}?`;\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/delete-agent-dialog/index.tsx",
+      "line_number": 96,
+      "context": "<ModalDialog\n visible={visible}\n displayType={ModalDialogType.modal}\n onClose={onClose}\n >\n <ModalDialog.Header>{t(\"Common:DeleteAIAgentTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans\n t={t}\n i18nKey=\"DeleteAIAgentDescription\"",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

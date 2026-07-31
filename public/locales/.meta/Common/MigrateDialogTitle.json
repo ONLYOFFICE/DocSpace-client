@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateDialogTitle",
+  "content": "Switch to wallet billing",
+  "content_en_sha1_hash": "7f65a354030f6f48257fb08605949f121e1b794e",
+  "created_at": "2026-06-30T07:32:34.233Z",
+  "updated_at": "2026-07-27T13:07:51.036Z",
+  "comment": {
+    "text": "Dialog title for a modal window that appears when initiating a transition to wallet-based payments.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:38:21.748Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 245,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.aside}\n withBodyScroll\n withFooterBorder\n >\n <ModalDialog.Header>{t(\"MigrateDialogTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.content}>\n <div style={{ marginTop: 16 }}>\n <WalletInfo balance={formatWalletCurrency()} />\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

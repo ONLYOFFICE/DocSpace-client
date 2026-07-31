@@ -20,6 +20,8 @@
   "GetCode": "코드 받기",
   "GetSuitableApp": "적절한 앱을 구하세요.",
   "GetSuitableAppDescription": "Google Authenticator와 같은 호환 앱을 <1>Android</1> 및 <4>iOS</4>에서 사용하거나, Authenticator를 <8>Windows Phone</8>에서 사용하세요.",
+  "InviteLinkQuotaErrorBody": "링크를 통한 등록은 제한이 초과되었으므로 더 이상 이용할 수 없습니다.",
+  "InviteQuotaErrorCustomizedBody": "10초 후에 <1>로그인</1> 페이지로 이동됩니다.",
   "LoginRegistryButton": "참여",
   "Newsletter": "{{organizationName}} 뉴스레터를 구독하고 싶습니다",
   "PassworResetTitle": "이제 새 비밀번호를 설정하실 수 있습니다.",
@@ -31,11 +33,12 @@
   "SetAppButton": "앱 연결",
   "SignUp": "가입하기",
   "SuccessDeactivate": "계정이 성공적으로 비활성화되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
-  "SuccessReactivate": "계정이 성공적으로 재활성화되었습니다. 10초 후에 <1>{{productName}}</1>로 리디렉션됩니다.",
+  "SuccessReactivate": "계정이 성공적으로 재활성화되었습니다. 10초 후에 <1>포털</1>로 리디렉션됩니다.",
   "SuccessRemoved": "고객님의 계정이 성공적으로 제거되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
   "TermsAndConditions": "계속 하는 것은 당사의 <1>이용 약관</1> 및 <2>개인 정보 처리 방침</2>을 이해하고 동의하는 것으로 간주됩니다.",
   "TfaSubTitle": "이 {{productName}}에서 계속 작업하려면 간단한 단계를 따르세요:",
   "TfaTitle": "2단계 인증이 안전한 접근을 위해 활성화되었습니다.",
+  "UserAlreadyInvited": "이미 초대되었습니다. 이메일의 링크를 사용하여 등록을 완료해 주세요.",
   "VerifyConnection": "연결 확인",
   "VerifyConnectionDescription": "아래 필드에 인증 앱에서 생성된 6자리 코드를 입력하여 설정을 완료하세요."
 }

@@ -1,32 +1,41 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
@@ -46,75 +55,36 @@ import { FormsSection } from "@/types/forms";
 
 import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
-import { useFormsListStore } from "../../_store/FormsListStore";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
+import { stripHost } from "../../_utils/thumbnailUrl";
 import FormStatusBadge from "./FormStatusBadge";
 import styles from "./FormsTile.module.scss";
 
 type FormsTileProps = {
   item: TFileItem;
+  originalFile: TFile;
   getIcon: TGetIcon;
 };
 
-const thumbnailCache = new Map<string, string>();
-
-const FormsTile = ({ item, getIcon }: FormsTileProps) => {
+const FormsTile = ({ item, originalFile, getIcon }: FormsTileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { filesSettings } = useFilesSettingsStore();
   const { openForm } = useFormsActions({ t });
   const { getContextMenuModel } = useFormsContextMenu();
-  const { items } = useFormsListStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
 
-  const thumbUrl = item.thumbnailUrl
-    ? item.thumbnailUrl.replace(/^https?:\/\/[^/]+/, "")
-    : "";
-  const [blobThumbnail, setBlobThumbnail] = useState(
-    () => (thumbUrl && thumbnailCache.get(thumbUrl)) || "",
-  );
-
-  useEffect(() => {
-    if (!thumbUrl || item.providerItem) return;
-
-    if (thumbnailCache.has(thumbUrl)) {
-      setBlobThumbnail(thumbnailCache.get(thumbUrl)!);
-      return;
-    }
-
-    let cancelled = false;
-    fetch(thumbUrl, { credentials: "include" })
-      .then((res) => {
-        if (!res.ok) throw new Error(`${res.status}`);
-        return res.blob();
-      })
-      .then((blob) => {
-        if (cancelled) return;
-        const blobUrl = URL.createObjectURL(blob);
-        thumbnailCache.set(thumbUrl, blobUrl);
-        setBlobThumbnail(blobUrl);
-      })
-      .catch(() => {});
-
-    return () => {
-      cancelled = true;
-    };
-  }, [thumbUrl, item.providerItem]);
-
-  useEffect(() => {
-    return () => {
-      setBlobThumbnail("");
-    };
-  }, []);
+  const thumbUrl =
+    !item.providerItem && item.thumbnailUrl
+      ? stripHost(item.thumbnailUrl)
+      : "";
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
 
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;
   const temporaryIcon = getIcon(temporaryExtension, 96, item.contentLength);
-
-  const originalFile = items.find((f) => f.id === item.id);
 
   const getDefaultAction = React.useCallback(
     (file: TFile) => {
@@ -195,7 +165,7 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
           }
           thumbnailClick={openItem}
           temporaryIcon={temporaryIcon}
-          thumbnail={blobThumbnail}
+          thumbnail={thumbUrl}
           contentElement={undefined}
           forwardRef={tileRef}
         >

@@ -1,0 +1,527 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { makeAutoObservable } from "mobx";
+import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import SocketHelper, {
+  SocketCommands,
+  type TOptSocket,
+} from "@docspace/ui-kit/utils/socket";
+
+import i18n from "../i18n";
+
+import type PublicRoomStore from "./PublicRoomStore";
+import type SelectedFolderStore from "./SelectedFolderStore";
+
+/**
+ * A root tree node as returned by `getFoldersTree` from shared/api/files:
+ * `TFolder` extended with the tree-specific fields the API helper
+ * synthesizes before casting its result to `TFolder`.
+ */
+export type TTreeFolder = TFolder & {
+  key?: string;
+  folderClassName?: string;
+  files?: TFile[];
+  folders?: TFolder[] | null;
+  newItems?: number;
+};
+
+class TreeFoldersStore {
+  selectedFolderStore: SelectedFolderStore;
+
+  settingsStore: SettingsStore;
+
+  publicRoomStore: PublicRoomStore;
+
+  treeFolders: TTreeFolder[] = [];
+
+  selectedTreeNode: string[] = [];
+
+  expandedPanelKeys: string[] | null = null;
+
+  rootFoldersTitles: Partial<Record<FolderType, TTreeFolder>> = {};
+
+  isLoadingNodes = false;
+
+  constructor(
+    selectedFolderStore: SelectedFolderStore,
+    settingsStore: SettingsStore,
+    publicRoomStore: PublicRoomStore,
+  ) {
+    makeAutoObservable(this);
+
+    this.selectedFolderStore = selectedFolderStore;
+    this.settingsStore = settingsStore;
+    this.publicRoomStore = publicRoomStore;
+  }
+
+  fetchTreeFolders = async () => {
+    if (this.publicRoomStore.isPublicRoom) return;
+
+    // getFoldersTree is declared as returning TFolder[] in
+    // shared/api/files, but the objects it builds carry the extra tree
+    // fields (key, folderClassName, folders, newItems) captured by
+    // TTreeFolder.
+    const treeFolders = (await getFoldersTree()) as TTreeFolder[];
+
+    treeFolders.forEach((folder) => {
+      switch (folder.rootFolderType) {
+        case FolderType.AIAgents:
+          folder.title = i18n.t("Common:AIAgents");
+          break;
+        case FolderType.USER:
+          folder.title = i18n.t("Common:Files");
+          break;
+        case FolderType.SHARE:
+          folder.title = i18n.t("Common:SharedWithMe");
+          break;
+        case FolderType.Rooms:
+          folder.title = i18n.t("Common:Rooms");
+          break;
+        case FolderType.Archive:
+          folder.title = i18n.t("Common:Archive");
+          break;
+        case FolderType.TRASH:
+          folder.title = i18n.t("Common:TrashSection");
+          break;
+        case FolderType.Favorites:
+          folder.title = i18n.t("Common:Favorites");
+          break;
+        case FolderType.Recent:
+          folder.title = i18n.t("Common:Recent");
+          break;
+        default:
+          break;
+      }
+    });
+
+    this.setRootFoldersTitles(treeFolders);
+    this.setTreeFolders(treeFolders);
+    this.listenTreeFolders(treeFolders);
+    return treeFolders;
+  };
+
+  listenTreeFolders = (treeFolders: TTreeFolder[]) => {
+    const roomParts = treeFolders
+      .filter((f) => {
+        return f.rootFolderType !== FolderType.Recent;
+      })
+      .map((f) => `DIR-${f.id}`)
+      .filter((f) => !SocketHelper?.socketSubscribers.has(f));
+
+    if (roomParts.length > 0) {
+      // SocketHelper?.emit(SocketCommands.Unsubscribe, {
+      //   roomParts: treeFolders.map((f) => `DIR-${f.id}`),
+      //   individual: true,
+      // });
+
+      SocketHelper?.emit(SocketCommands.Subscribe, {
+        roomParts,
+        individual: true,
+      });
+    }
+  };
+
+  updateTreeFoldersItem = (opt?: TOptSocket) => {
+    if (opt?.data && opt?.cmd === "create") {
+      // the socket payload is a file DTO when opt.type is
+      // "file" and a folder DTO otherwise; typed as an intersection so both
+      // branches can access their fields without changing the runtime.
+      const data = JSON.parse(opt.data) as TFile & TFolder;
+
+      const parentId = opt?.type === "file" ? data.folderId : data.parentId;
+
+      const idx = this.treeFolders.findIndex((f) => f.id === parentId);
+
+      if (idx >= 0) {
+        if (opt.type === "file") {
+          this.treeFolders[idx].filesCount++;
+          if (this.treeFolders[idx].files) {
+            this.treeFolders[idx].files.push(data);
+          } else {
+            this.treeFolders[idx].files = [data];
+          }
+        } else {
+          this.treeFolders[idx].foldersCount++;
+          if (this.treeFolders[idx].folders) {
+            this.treeFolders[idx].folders.push(data);
+          } else {
+            this.treeFolders[idx].folders = [data];
+          }
+        }
+      }
+    }
+  };
+
+  resetTreeItemCount = () => {
+    this.treeFolders.map((item) => {
+      return (item.newItems = 0);
+    });
+  };
+
+  setRootFoldersTitles = (treeFolders: TTreeFolder[]) => {
+    treeFolders.forEach((elem) => {
+      this.rootFoldersTitles[elem.rootFolderType] = {
+        ...elem,
+      };
+    });
+  };
+
+  getFoldersTree = () => {
+    if (this.publicRoomStore.isPublicRoom) return;
+
+    getFoldersTree();
+  };
+
+  setTreeFolders = (treeFolders: TTreeFolder[]) => {
+    this.treeFolders = treeFolders;
+  };
+
+  setIsLoadingNodes = (isLoadingNodes: boolean) => {
+    this.isLoadingNodes = isLoadingNodes;
+  };
+
+  setSelectedNode = (node: string[]) => {
+    if (node[0]) {
+      this.selectedTreeNode = node;
+    }
+  };
+
+  setExpandedPanelKeys = (expandedPanelKeys: string[] | null) => {
+    this.expandedPanelKeys = expandedPanelKeys;
+  };
+
+  // updateRootBadge = (id, count) => {
+  //   const index = this.treeFolders.findIndex((x) => x.id === id);
+  //   if (index < 0) return;
+
+  //   this.treeFolders = this.treeFolders.map((f, i) => {
+  //     if (i !== index) return f;
+  //     f.newItems -= count;
+  //     return f;
+  //   });
+  // };
+
+  isMy = (myType: FolderType) => myType === FolderType.USER;
+
+  isCommon = (commonType: FolderType) => commonType === FolderType.COMMON;
+
+  isShare = (shareType: FolderType) => shareType === FolderType.SHARE;
+
+  isRoomRoot = (type: FolderType) => type === FolderType.Rooms;
+
+  getRootFolder = (rootFolderType: FolderType) => {
+    return this.treeFolders.find((x) => x.rootFolderType === rootFolderType);
+  };
+
+  getSubfolders = (folderId: number) => getSubfolders(folderId);
+
+  get myRoomsId() {
+    return this.rootFoldersTitles[FolderType.Rooms]?.id;
+  }
+
+  get archiveRoomsId() {
+    return this.rootFoldersTitles[FolderType.Archive]?.id;
+  }
+
+  get trashFolderInfo() {
+    return this.rootFoldersTitles[FolderType.TRASH];
+  }
+
+  get personalFolderId() {
+    return this.rootFoldersTitles[FolderType.USER]?.id;
+  }
+
+  get isPersonalReadOnly() {
+    return (
+      this.isPersonalRoom &&
+      this.rootFoldersTitles[FolderType.USER]?.security?.Read &&
+      !this.rootFoldersTitles[FolderType.USER]?.security?.Create
+    );
+  }
+
+  get myFolder() {
+    return this.treeFolders.find((x) => x.rootFolderType === FolderType.USER);
+  }
+
+  get sharedWithMeFolder() {
+    return this.treeFolders.find((x) => x.rootFolderType === FolderType.SHARE);
+  }
+
+  get favoritesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Favorites,
+    );
+  }
+
+  get recentFolder() {
+    return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
+  }
+
+  get aiAgentsFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.AIAgents,
+    );
+  }
+
+  get roomsFolder() {
+    return this.treeFolders.find((x) => x.rootFolderType === FolderType.Rooms);
+  }
+
+  get archiveFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Archive,
+    );
+  }
+
+  get templatesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Templates,
+    );
+  }
+
+  get commonFolder() {
+    return this.treeFolders.find((x) => x.rootFolderType === FolderType.COMMON);
+  }
+
+  get recycleBinFolder() {
+    return this.treeFolders.find((x) => x.rootFolderType === FolderType.TRASH);
+  }
+
+  get myFolderId() {
+    return this.myFolder ? this.myFolder.id : null;
+  }
+
+  get commonFolderId() {
+    return this.commonFolder ? this.commonFolder.id : null;
+  }
+
+  get roomsFolderId() {
+    return this.roomsFolder ? this.roomsFolder.id : null;
+  }
+
+  get archiveFolderId() {
+    return this.archiveFolder ? this.archiveFolder.id : null;
+  }
+
+  get recycleBinFolderId() {
+    return this.recycleBinFolder ? this.recycleBinFolder.id : null;
+  }
+
+  get favoritesFolderId() {
+    return this.favoritesFolder ? this.favoritesFolder.id : null;
+  }
+
+  get recentFolderId() {
+    return this.recentFolder ? this.recentFolder.id : null;
+  }
+
+  get aiAgentsFolderId() {
+    return this.aiAgentsFolder ? this.aiAgentsFolder.id : null;
+  }
+
+  get sharedWithMeFolderId() {
+    return this.sharedWithMeFolder ? this.sharedWithMeFolder.id : null;
+  }
+
+  get isPersonalRoom() {
+    return (
+      this.myFolder &&
+      this.myFolder.rootFolderType === this.selectedFolderStore.rootFolderType
+    );
+  }
+
+  get isSharedWithMeFolder() {
+    return (
+      this.sharedWithMeFolder &&
+      this.sharedWithMeFolder.id === this.selectedFolderStore.id
+    );
+  }
+
+  get isSharedWithMeFolderRoot() {
+    return this.selectedFolderStore.rootFolderType === FolderType.SHARE;
+  }
+  get isInSharedFolder() {
+    return !this.isSharedWithMeFolder && this.isSharedWithMeFolderRoot;
+  }
+
+  get isFavoritesFolder() {
+    return (
+      this.favoritesFolder &&
+      this.selectedFolderStore.id === this.favoritesFolder.id
+    );
+  }
+
+  get isTrashFolder() {
+    return (
+      this.recycleBinFolder &&
+      this.selectedFolderStore.id === this.recycleBinFolder.id
+    );
+  }
+
+  get isRecentFolder() {
+    return (
+      this.recentFolder && this.selectedFolderStore.id === this.recentFolder.id
+    );
+  }
+
+  get isPrivacyFolder() {
+    if (this.selectedFolderStore.rootFolderType !== FolderType.Rooms) {
+      return false;
+    }
+    if (this.selectedFolderStore.private === true) {
+      return true;
+    }
+    return !!this.selectedFolderStore.navigationPath?.some(
+      (p) => p.private === true,
+    );
+  }
+
+  get isCommonFolder() {
+    return (
+      this.commonFolder && this.commonFolder.id === this.selectedFolderStore.id
+    );
+  }
+
+  get isRecycleBinFolder() {
+    return (
+      this.recycleBinFolder &&
+      this.selectedFolderStore.id === this.recycleBinFolder.id
+    );
+  }
+
+  get isFlowsFolder() {
+    return window.location.pathname.includes("/flows");
+  }
+
+  get isRoomsFolder() {
+    return (
+      this.roomsFolder && this.selectedFolderStore.id === this.roomsFolder.id
+    );
+  }
+
+  get isAIAgentsFolder() {
+    return (
+      this.aiAgentsFolder &&
+      this.selectedFolderStore.id === this.aiAgentsFolder.id
+    );
+  }
+
+  get isAIAgentsFolderRoot() {
+    return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isFormsFolderRoot() {
+    return FolderType.Forms === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isFormsFolder() {
+    return (
+      FolderType.Forms === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  get isFormRoomRoot() {
+    return (
+      this.selectedFolderStore.roomType === RoomsType.FormRoom ||
+      this.selectedFolderStore.parentRoomType === FolderType.FormRoom
+    );
+  }
+
+  get isRoom() {
+    return (
+      this.roomsFolder &&
+      this.roomsFolder.rootFolderType ===
+        this.selectedFolderStore.rootFolderType
+    );
+  }
+
+  get isArchiveFolder() {
+    return (
+      this.archiveFolder &&
+      this.selectedFolderStore.id === this.archiveFolder.id
+    );
+  }
+
+  get isTemplatesFolderRoot() {
+    return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolder() {
+    return (
+      FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  get isRoomsFolderRoot() {
+    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isArchiveFolderRoot() {
+    return FolderType.Archive === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isVDRRoomRoot() {
+    return (
+      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType ||
+      this.selectedFolderStore.roomType === RoomsType.VirtualDataRoom // need when changing the room settings, because parentRoomType is reset
+    );
+  }
+
+  get isDocumentsFolder() {
+    return FolderType.USER === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isRoot() {
+    return this.selectedFolderStore?.pathParts?.length === 1;
+  }
+
+  get selectedKeys() {
+    const selectedKeys =
+      this.selectedTreeNode.length > 0 &&
+      this.selectedTreeNode[0] !== "@my" &&
+      this.selectedTreeNode[0] !== "@common"
+        ? this.selectedTreeNode
+        : [`${this.selectedFolderStore.id}`];
+    return selectedKeys;
+  }
+}
+
+export default TreeFoldersStore;

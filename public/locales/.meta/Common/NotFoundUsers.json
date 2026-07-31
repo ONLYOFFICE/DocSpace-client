@@ -3,90 +3,97 @@
   "content": "No users found",
   "content_en_sha1_hash": "612eb3c64c413c645d13566a1cfa74199923df23",
   "created_at": "2025-05-19T21:30:46.927Z",
-  "updated_at": "2026-02-19T13:36:32.530Z",
+  "updated_at": "2026-07-07T08:59:21.768Z",
   "comment": {
-    "text": "This translation key is used to display a message when users are not found or not imported. It appears in an empty screen component and serves as the header text of an empty table view, indicating that there are no users to select or import.",
+    "text": "This is an error message or informational text indicating that no users were found, either when searching for users to invite or when displaying a list of accounts in portal settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:16.430Z"
+    "updated_at": "2026-04-11T20:47:41.509Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 558,
-      "context": ");\n } else if (roomId !== -1 && !allowInvitingGuests)\n prevDropDownContent.current = (\n <DropDownItem disabled className={styles.noUsersList}>\n <Text truncate fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">\n {t(\"Common:NotFoundUsers\")}\n </Text>\n </DropDownItem>\n );\n else {\n prevDropDownContent.current = (",
+      "line_number": 577,
+      "context": ");\n } else if (roomId !== -1 && (!allowInvitingGuests || isPrivateRoom))\n prevDropDownContent.current = (\n <DropDownItem disabled className={styles.noUsersList}>\n <Text truncate fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">\n {t(\"Common:NotFoundUsers\")}\n </Text>\n </DropDownItem>\n );\n else {\n prevDropDownContent.current = (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 148,
+      "line_number": 125,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 148,
+      "line_number": 125,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 144,
+      "line_number": 154,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 144,
+      "line_number": 154,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 193,
+      "line_number": 117,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 193,
+      "line_number": 117,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
-      "line_number": 145,
+      "line_number": 155,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
-      "line_number": 145,
+      "line_number": 155,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 206,
+      "line_number": 137,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 206,
+      "line_number": 137,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 204,
+      "line_number": 172,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 204,
+      "line_number": 172,
       "context": ") : (\n <EmptyScreenContainer\n imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteInput.tsx",
+      "line_number": 522,
+      "context": ");\n } else if (!allowInvitingGuests || isPrivateRoom) {\n prevDropDownContent.current = (\n <DropDownItem disabled className={styles.noUsersList}>\n <Text truncate fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\">\n {t(\"Common:NotFoundUsers\")}\n </Text>\n </DropDownItem>\n );\n } else {\n prevDropDownContent.current = (",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -220,35 +227,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' is a less common and potentially incorrect spelling of 'පරිශ්‍රමකරුවන්'. While understandable, it's not the standard term for 'users'.",
-          "suggestion": "පරිශ්‍රමකරුවන්"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'හමු නොවිණි' is grammatically correct and translates to 'not found', a more natural and common phrasing for 'No users found' in Sinhala would be 'නොමැත'.",
-          "suggestion": "නොමැත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Používatelia sa nenašli' is a literal translation but sounds awkward and unnatural. A more idiomatic translation would be 'Neboli nájdení žiadni používatelia' or 'Nenájdení používatelia'.",
-          "suggestion": "Neboli nájdení žiadni používatelia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -260,25 +250,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ниједан корисник пронађен' while technically grammatically correct, sounds awkward and unnatural in Serbian. A more idiomatic translation for 'No users found' would be 'Није пронађено корисника'.",
-          "suggestion": "Није пронађено корисника"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Nijedan korisnik pronađen' is a literal translation and sounds slightly unnatural in Serbian. A more natural phrasing would be 'Nisu pronađeni korisnici'.",
-          "suggestion": "Nisu pronađeni korisnici"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -300,6 +278,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

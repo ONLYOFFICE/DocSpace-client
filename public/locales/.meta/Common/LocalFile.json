@@ -3,16 +3,17 @@
   "content": "Local file",
   "content_en_sha1_hash": "576d5acec6aad78627cf20ce81cec6e4bdbaf44c",
   "created_at": "2025-05-26T07:15:44.820Z",
-  "updated_at": "2025-08-04T07:30:01.749Z",
+  "updated_at": "2026-05-15T14:00:06.961Z",
   "comment": {
-    "text": "This translation key is used for the label of a radio button option that allows users to select \"Local file\" from a list of options. It appears in a dialog or form where users can choose how to restore a backup. Translators should use this key to provide the correct label for their language version.",
+    "text": "This is a radio button label in a backup restoration dialog. It indicates that the user wants to restore a backup from a file stored on their local computer.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:08.494Z"
+    "updated_at": "2026-04-11T20:49:19.598Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 224,
+      "line_number": 234,
       "context": "orientation=\"vertical\"\n fontSize=\"13px\"\n fontWeight={400}\n className={classNames(styles.backupRadioButton, \"backup_radio-button\")}\n options={[\n { id: \"local-file\", value: LOCAL_FILE, label: t(\"Common:LocalFile\") },\n {\n id: \"backup-room\",\n value: BACKUP_ROOM,\n label: t(\"Common:RoomsModule\"),\n },",
       "module": "/packages/shared"
     }
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

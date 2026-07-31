@@ -1,0 +1,29 @@
+{
+  "key_path": "AIFeaturesEnabledDescription",
+  "content": "Detailed transaction history, usage statistics, and service management are available in Billing > Services > AI features.",
+  "content_en_sha1_hash": "0758bdfd70e1f7fe374e5142c55db64b435f670d",
+  "created_at": "2026-07-03T11:07:18.760Z",
+  "updated_at": "2026-07-03T11:14:34.580Z",
+  "comment": {
+    "text": "Description text within an information banner in the AI settings, providing navigation instructions to the billing section.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:14:34.580Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 157,
+      "context": "<InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />\n ) : null}\n </div>\n <Text as=\"div\" fontSize=\"12px\" className={styles.descriptionText}>\n {isEnabled\n ? t(\"Common:AIFeaturesEnabledDescription\")\n : t(\"Common:GetAccessToAIModels\")}\n {isMobile && !isEnabled ? (\n <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />\n ) : null}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

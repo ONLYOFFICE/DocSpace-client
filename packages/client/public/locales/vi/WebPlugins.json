@@ -8,6 +8,8 @@
   "NeedSettings": "Cần vào cài đặt",
   "NoPlugins": "Không có plugin nào được thêm",
   "NotNeedSettings": "Không cần vào cài đặt",
+  "PluginCacheWarningDescription": "Các plugin được lưu vào bộ nhớ đệm dựa trên số phiên bản của chúng. Để đảm bảo các thay đổi của bạn được áp dụng, vui lòng tăng số phiên bản trong tệp <1>package.json</1> của bạn trước khi tải lên. Hệ thống sẽ không cập nhật một plugin nếu phiên bản vẫn giữ nguyên.",
+  "PluginDeletedSuccessfully": "Tiện ích đã bị xóa thành công",
   "PluginIsNotCompatible": "Phiên bản SDK plugin không khớp với phiên bản {{productName}}. Vui lòng cập nhật lên phiên bản tương thích.",
   "PluginLoadedSuccessfully": "Plugin đã được tải thành công",
   "PluginSamples": "Mẫu plugin",

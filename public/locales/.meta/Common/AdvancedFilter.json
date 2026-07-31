@@ -3,18 +3,43 @@
   "content": "Search options",
   "content_en_sha1_hash": "5616c8722256385e28abb27ee4233728e13a8882",
   "created_at": "2025-05-19T21:30:42.953Z",
-  "updated_at": "2026-02-19T13:36:32.680Z",
+  "updated_at": "2026-07-27T13:07:50.729Z",
   "comment": {
-    "text": "AdvancedFilter key is used to display a filter button that allows users to adjust search settings, appearing on the Home page's filter section.",
+    "text": "This is the title for the advanced filter section, appearing above search and filter options in file lists.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:24.997Z"
+    "updated_at": "2026-04-11T21:00:50.712Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1809,
+      "line_number": 1904,
       "context": "onChangeViewAs={onChangeViewAs}\n getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/index.tsx",
+      "line_number": 138,
+      "context": "viewSelectorVisible\n getFilterData={getFilterData}\n userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\", {\n defaultValue: \"Advanced filter\",\n })}\n placeholder={t(\"Common:Search\", { defaultValue: \"Search\" })}\n view={t(\"Common:View\", { defaultValue: \"View\" })}\n filterTitle={t(\"Common:Filter\", { defaultValue: \"Filter\" })}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/index.tsx",
+      "line_number": 149,
+      "context": "viewSelectorVisible\n getFilterData={getFilterData}\n userId=\"\"\n isRecentFolder={!!config.isRecentFolder}\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\", {\n defaultValue: \"Advanced filter\",\n })}\n placeholder={t(\"Common:Search\", { defaultValue: \"Search\" })}\n view={t(\"Common:View\", { defaultValue: \"View\" })}\n filterTitle={t(\"Common:Filter\", { defaultValue: \"Filter\" })}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
+      "line_number": 115,
+      "context": "viewSelectorVisible\n getFilterData={getFilterData}\n userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Common:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/index.tsx",
+      "line_number": 130,
+      "context": "viewSelectorVisible\n getFilterData={getFilterData}\n userId={user?.id ?? \"\"}\n isRecentFolder={false}\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\", {\n defaultValue: \"Advanced filter\",\n })}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Common:Filter\")}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -81,13 +106,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Որոնման ընտրանքներ\" (Qronman entrankner) is a very literal translation of \"Search options\". A more natural and idiomatic Armenian translation might be something like \"Փնտրելու եղանակներ\" (Pntrelu eganak) which translates to 'Search methods' or 'Search ways'. \"Որոնման ընտրանքներ\" sounds a bit clunky and formal.",
-          "suggestion": "Consider using \"Փնտրելու եղանակներ\" (Pntrelu eganak) or a similar phrasing that sounds more natural in Armenian."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,13 +148,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Opções de pesquisa' is Portuguese, not Polish. It translates to 'Search options' in Portuguese.",
-          "suggestion": "The correct Polish translation should be something like 'Opcje wyszukiwania' or 'Możliwości wyszukiwania'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -160,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -211,6 +224,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

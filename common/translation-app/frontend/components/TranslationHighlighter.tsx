@@ -22,7 +22,7 @@ export function tokenizeTranslation(str: string): Token[] {
   // Match:
   // 1. {{variable}} or {variable}
   // 2. HTML tags like <strong>, </strong>, <br />, <a href="...">, etc.
-  const regex = /(\{\{[^{}]+\}\}|\{[^{}]+\}|<\/?[a-zA-Z][^>]*\/?>)/g;
+  const regex = /(\{\{[^{}]+\}\}|\{[^{}]+\}|<\/?\d+>|<\/?[a-zA-Z][^>]*\/?>)/g;
 
   let lastIndex = 0;
   let match;
@@ -37,6 +37,7 @@ export function tokenizeTranslation(str: string): Token[] {
     if (value.startsWith("{")) {
       tokens.push({ type: "variable", value });
     } else {
+      // Numeric React Trans tags <0>, </1> etc. and regular HTML tags
       tokens.push({ type: "htmlTag", value });
     }
 

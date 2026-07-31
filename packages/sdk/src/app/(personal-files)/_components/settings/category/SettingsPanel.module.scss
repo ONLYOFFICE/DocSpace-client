@@ -1,0 +1,48 @@
+@use "@docspace/ui-kit/styles/variables/colors";
+
+// Billing
+
+.billingNotice {
+  color: var(--payment-text-color);
+}
+
+.billingPortalLink {
+  color: var(--payment-text-color);
+  text-decoration: underline dashed;
+}
+
+.billingWrapper {
+  --billing-card-bg: #{colors.$white};
+  --billing-card-shadow: rgba(0, 0, 0, 0.06);
+
+  :global(.dark) & {
+    --billing-card-bg: #{colors.$dark-gray-light};
+    --billing-card-shadow: rgba(255, 255, 255, 0.04);
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+@keyframes billingFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.billingContentWrap {
+  width: 0;
+  min-width: 100%;
+  overflow: hidden;
+}
+
+.billingContent {
+  min-height: 200px;
+  animation: billingFadeIn 0.25s ease-out;
+}

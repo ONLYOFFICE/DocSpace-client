@@ -1,0 +1,21 @@
+{
+  "key_path": "BillingOverview",
+  "content": "Billing Overview",
+  "content_en_sha1_hash": "f47699ff2527d9e1733debd305710db2080f6ca0",
+  "created_at": "2026-07-07T08:58:38.995Z",
+  "updated_at": "2026-07-07T08:58:38.995Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

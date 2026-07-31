@@ -3,22 +3,23 @@
   "content": "Storage period",
   "content_en_sha1_hash": "58eebe4d0ed34f94e0198cff2f9111c9ccc932b0",
   "created_at": "2025-05-19T21:30:52.796Z",
-  "updated_at": "2025-09-17T13:43:01.896Z",
+  "updated_at": "2026-05-15T14:00:06.870Z",
   "comment": {
-    "text": "This translation key is used to display the \"Storage period\" label in various security settings pages. It will appear as a subheader or caption, indicating the duration of stored login history or audit trail data.",
+    "text": "This is a label for a setting that defines how long audit trail and login history data is stored. It appears in the security settings of the portal.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:23.614Z"
+    "updated_at": "2026-04-11T21:21:58.672Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 108,
-      "context": "t={t}\n subHeader={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}",
+      "line_number": 118,
+      "context": "t={t}\n subHeader={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 92,
+      "line_number": 101,
       "context": "<HistoryMainContent\n t={t}\n loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}",
       "module": "/packages/client"
     }
@@ -154,18 +155,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආචයන පරාසය\" does not accurately convey the meaning of \"Storage period.\" \"ආචයන\" relates to actions or occurrences, not storage. A more appropriate translation would relate to the duration of storage.",
-          "suggestion": "Possible suggestions include: నిల్వ කාලය (Nilva Kaalaya) - storage time, or සුරකින කාලය (Surakina Kaalaya) - period of keeping/saving."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Период складиштења\" is understandable, it's a somewhat literal and less natural translation of \"Storage period.\" \"Period čuvanja\" would be more commonly used and idiomatic in Serbian (Cyrillic) to describe a storage period in a settings context.",
-          "suggestion": "Period чувања"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -217,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

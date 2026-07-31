@@ -1,28 +1,39 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import type { TFile as TFileBase } from "@docspace/ui-kit/types";
 
 import type {
   TAvailableShareRights,
@@ -30,19 +41,41 @@ import type {
   TPathParts,
 } from "../../types";
 import type {
+  DistributedTaskStatus,
   EmployeeActivationStatus,
   EmployeeStatus,
   FileFillingFormStatus,
-  FileStatus,
-  FileType,
+  FileOperationStatus,
   FillingFormStatusHistory,
   FolderType,
   RoomsType,
   ShareAccessRights,
-  VectorizationStatus,
 } from "../../enums";
 import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
+
+export type TFile = TFileBase & {
+  encrypted?: boolean;
+};
+
+export type TFileEncryptionInfo = {
+  userKeys: Array<{
+    id: string;
+    userId: string;
+    publicKey: string;
+    privateKeyEnc: string;
+    date: string;
+    cryptoEngineId: string;
+  }>;
+  fileKeys: Array<{
+    userId: string;
+    publicKeyId: string;
+    privateKeyEnc: string;
+    tenantId?: number;
+    fileId?: number;
+    createOn?: string;
+  }>;
+};
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -87,83 +120,12 @@ export type TFileSecurity = {
   Embed: boolean;
   Vectorization: boolean;
   AskAi?: boolean;
+  UpdateXlsx?: boolean;
 };
 
 export type TShareSettings = {
   ExternalLink?: number;
   PrimaryExternalLink?: number;
-};
-
-type TDimensions = {
-  width: number;
-  height: number;
-};
-
-export type TFile = {
-  isFile?: boolean;
-  access: ShareAccessRights;
-  canShare: boolean;
-  comment: string;
-  contentLength: string;
-  created: string;
-  createdBy: TCreatedBy;
-  denyDownload?: boolean;
-  denySharing?: boolean;
-  fileExst: string;
-  fileStatus: FileStatus;
-  fileType: FileType;
-  folderId: number;
-  id: number;
-  parentRoomType?: FolderType;
-  shareSettings?: TShareSettings;
-  mute: boolean;
-  parentShared?: boolean;
-  pureContentLength: number;
-  rootFolderId: number;
-  rootFolderType: FolderType;
-  security: TFileSecurity;
-  shared: boolean;
-  thumbnailStatus: number;
-  title: string;
-  updated: string;
-  updatedBy: TCreatedBy;
-  sharedBy?: TCreatedBy;
-  ownedBy?: TCreatedBy;
-  version: number;
-  versionGroup: number;
-  viewAccessibility: TFileViewAccessibility;
-  viewUrl: string;
-  webUrl: string;
-  shortWebUrl: string;
-  availableShareRights?: TAvailableShareRights;
-  providerId?: number;
-  providerKey?: string;
-  providerItem?: boolean;
-  thumbnailUrl?: string;
-  expired?: string;
-  isForm?: boolean;
-  isFolder?: boolean;
-  formFillingStatus?: FileFillingFormStatus;
-  startFilling?: boolean;
-  isFillingPreparing?: boolean;
-  fileEntryType: number;
-  hasDraft?: boolean;
-  order?: string;
-  lockedBy?: string;
-  originId?: number;
-  originRoomId?: number;
-  originRoomTitle?: string;
-  originTitle?: string;
-  requestToken?: string;
-  isFavorite?: boolean;
-  vectorizationStatus?: VectorizationStatus;
-  expirationDate?: string;
-  sharedForUser?: boolean;
-  external?: boolean;
-  isLinkExpired?: boolean;
-  dimensions?: TDimensions;
-  editingBy?: Record<string, string>;
-  activeEditors?: Record<string, string>;
 };
 
 export type TOpenEditRequest = {
@@ -219,6 +181,8 @@ export type TFolderSecurity = {
   Embed: boolean;
   ChangeOwner: boolean;
   IndexExport: boolean;
+  UpdateXlsx?: boolean;
+  AnalyzeResponses?: boolean;
 };
 
 export type TFolder = {
@@ -248,13 +212,17 @@ export type TFolder = {
   path?: TPathParts[];
   type?: FolderType;
   isFolder?: boolean;
+  /** Present on folders returned inside rooms listings (`GET /files/{id}`
+   * current); consumed by FilesStore (`data.current.inRoom`,
+   * `setInRoomFolder`). */
+  inRoom?: boolean;
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;
   parentShared?: boolean;
   parentRoomType?: FolderType;
   order?: string;
-  isRoom?: false;
+  isRoom?: boolean;
   rootRoomType?: RoomsType;
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
@@ -263,6 +231,7 @@ export type TFolder = {
   sharedForUser?: boolean;
   isLinkExpired?: boolean;
   external?: boolean;
+  originalFormId?: number;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -296,6 +265,7 @@ export type TOperation = {
   id: string;
   processed: string;
   progress: number;
+  status?: FileOperationStatus;
   url?: string;
   files?: TFile[];
 };
@@ -320,6 +290,9 @@ export type TThirdParty = {
   providerKey: string;
   provider_id?: string;
   customer_title?: string;
+  /** Snake-case variant returned by the providers endpoint; read by
+   * FilesActionsStore.setThirdpartyInfo. */
+  provider_key?: string;
 };
 
 export type TThirdParties = TThirdParty[];
@@ -341,6 +314,10 @@ export type TFilesSettings = {
   enableThirdParty: boolean;
   externalShare: boolean;
   externalShareSocialMedia: boolean;
+  defaultShareLinkInternal: boolean;
+  externalShareApplyToDocuments: boolean;
+  externalShareApplyToRooms: boolean;
+  blockExistingLinksOnRestrict: boolean;
   extsArchive: string[];
   extsAudio: string[];
   extsCoAuthoring: string[];
@@ -392,6 +369,12 @@ export type TFilesSettings = {
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
   organizeRoomsGrouping: boolean;
+  /** Whether the room lifetime confirmation dialog is hidden (see PUT files/hideconfirmroomlifetime). */
+  hideConfirmRoomLifetime?: boolean;
+  /** Whether the cancel-operation confirmation dialog is hidden (see PUT files/hideconfirmcanceloperation). */
+  hideConfirmCancelOperation?: boolean;
+  /** Extensions of files that can be vectorized (uploaded to AI rooms). */
+  extsFilesVectorized?: string[];
 };
 
 export type TPresignedUri = {
@@ -477,6 +460,8 @@ export type TDocServiceLocation = {
   docServiceSignatureSecret: string;
   isDefault: boolean;
   docServiceSslVerification: boolean;
+  /** URL of the document server preload frame (returned by GET files/docservice). */
+  docServicePreloadUrl?: string;
 };
 
 export type TFileLink = {
@@ -500,6 +485,10 @@ export type TFileLink = {
     expirationDate?: string | null;
     internal: boolean;
     password?: string;
+    /** Whether the link is disabled (returned for room external links). */
+    disabled?: boolean;
+    /** Whether the link belongs to a room template (returned for room external links). */
+    isTemplate?: boolean;
   };
   subjectType: number;
 };
@@ -594,4 +583,16 @@ export type TDefaultTemplate = {
   fileTitle?: string;
   fileSize?: number;
   viewUrl?: string;
+};
+
+export type UpdateXlsxResponse = {
+  form: TFile;
+  isNewFile: boolean;
+  task: {
+    id: string;
+    percentage: number;
+    isCompleted: boolean;
+    status: DistributedTaskStatus;
+    error: string;
+  };
 };

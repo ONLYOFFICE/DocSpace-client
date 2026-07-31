@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import IntegrationSvgUrl from "PUBLIC_DIR/images/integration.svg?url";
 import IntegrationDarkSvgUrl from "PUBLIC_DIR/images/integration.dark.svg?url";
@@ -31,14 +40,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
-
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Badge } from "@docspace/ui-kit/components/badge";
 
 import { Button } from "@docspace/ui-kit/components/button";
-import { isMobile, NoUserSelect } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -49,75 +56,8 @@ import ExternalDbModal from "./sub-components/ExternalDbModal";
 const EXTERNAL_DB_CONSUMER_NAME = "externaldb";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
-
-const RootContainer = styled.div`
-  box-sizing: border-box;
-  max-width: 700px;
-  width: 100%;
-
-  .third-party-link {
-    font-weight: 600;
-  }
-
-  .third-party-box {
-    margin: 8px 0 20px 0;
-  }
-
-  .third-party-description {
-    line-height: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-  }
-
-  .paid-badge {
-    cursor: auto;
-  }
-
-  .consumers-list-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
-    gap: 20px;
-  }
-
-  .consumer-item-wrapper {
-    box-sizing: border-box;
-    border: ${(props) =>
-      props.theme.client.settings.integration.separatorBorder};
-
-    border-radius: 6px;
-    min-height: 116px;
-    padding-block: 12px 8px;
-    padding-inline: 20px 12px;
-
-    .integration-image {
-      ${NoUserSelect}
-    }
-  }
-
-  .request-block {
-    margin-bottom: 20px;
-    padding: 32px 46px;
-    display: flex;
-    gap: 24px;
-    align-items: center;
-
-    @media (max-width: 882px) {
-      flex-direction: column;
-      align-items: baseline;
-    }
-  }
-
-  .business-plan {
-    grid-column: 1 / -1;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: -4px;
-
-    .paid-badge {
-      cursor: auto;
-    }
-  }
-`;
+import styles from "./ThirdPartyServicesSettings.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 class ThirdPartyServices extends React.Component {
   constructor(props) {
@@ -221,14 +161,14 @@ class ThirdPartyServices extends React.Component {
         {!consumers.length || !tReady ? (
           <ThirdPartyLoader />
         ) : (
-          <RootContainer className="RootContainer">
-            <Text className="third-party-description">
+          <div className={styles.rootContainer}>
+            <Text className={styles.thirdPartyDescription}>
               {t("AuthorizationKeysInfo")}
             </Text>
-            <div className="third-party-box">
+            <div className={styles.thirdPartyBox}>
               {integrationSettingsUrl ? (
                 <Link
-                  className="third-party-link"
+                  className={styles.thirdPartyLink}
                   color={currentColorScheme.main?.accent}
                   isHovered
                   target="_blank"
@@ -239,15 +179,15 @@ class ThirdPartyServices extends React.Component {
                 </Link>
               ) : null}
             </div>
-            <div className="consumer-item-wrapper request-block">
+            <div className={`${styles.consumerItemWrapper} ${styles.requestBlock}`}>
               <img
-                className="integration-image"
+                className={styles.integrationImage}
                 src={imgSrc}
                 alt="integration_icon"
               />
               <Text>
                 {t("IntegrationRequest", {
-                  productName: t("Common:ProductName"),
+                  productName: getBrandName("ProductName"),
                   organizationName: logoText,
                 })}
               </Text>
@@ -261,10 +201,10 @@ class ThirdPartyServices extends React.Component {
                 testId="submit_request_team_button"
               />
             </div>
-            <div className="consumers-list-container">
+            <div className={styles.consumersListContainer}>
               {freeConsumers.map((consumer) => (
                 <div
-                  className="consumer-item-wrapper"
+                  className={styles.consumerItemWrapper}
                   key={consumer.name}
                   data-testid={`${consumer.name}_item`}
                 >
@@ -284,12 +224,12 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ))}
               {!isThirdPartyAvailable ? (
-                <div className="business-plan">
+                <div className={styles.businessPlan}>
                   <Text fontSize="16px" fontWeight={700}>
                     {t("IncludedInBusiness")}
                   </Text>
                   <Badge
-                    className="paid-badge"
+                    className={styles.paidBadge}
                     backgroundColor={
                       theme.isBase
                         ? globalColors.favoritesStatus
@@ -303,7 +243,7 @@ class ThirdPartyServices extends React.Component {
               ) : null}
               {paidConsumers.map((consumer) => (
                 <div
-                  className="consumer-item-wrapper"
+                  className={styles.consumerItemWrapper}
                   key={consumer.name}
                   data-testid={`consumer_${consumer.name}_item`}
                 >
@@ -323,7 +263,7 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ))}
             </div>
-          </RootContainer>
+          </div>
         )}
         {dialogVisible ? (
           selectedConsumer?.name === EXTERNAL_DB_CONSUMER_NAME ? (

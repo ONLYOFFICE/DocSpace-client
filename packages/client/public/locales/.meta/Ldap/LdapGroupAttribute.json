@@ -3,16 +3,17 @@
   "content": "Group Attribute",
   "content_en_sha1_hash": "54b90c8ab3d93c4f565686767f16be46af9c0368",
   "created_at": "2025-05-19T21:30:54.201Z",
-  "updated_at": "2025-08-11T18:11:59.246Z",
+  "updated_at": "2026-05-15T14:00:06.850Z",
   "comment": {
-    "text": "The \"LdapGroupAttribute\" translation key describes a field label used to input group attributes for LDAP integration in the PortalSettings page. It appears on a form where users configure group membership settings. Translators should provide an equivalent description that reads as a clear and concise field label.",
+    "text": "This is a label for an input field where the user specifies the LDAP attribute used to identify groups. It appears in the LDAP integration settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:12.310Z"
+    "updated_at": "2026-04-11T21:17:12.800Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 208,
+      "line_number": 218,
       "context": "<FieldContainer\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.groupAttribute}\n labelText={t(\"LdapGroupAttribute\")}\n isRequired\n tooltipContent={t(\"LdapGroupAttributeTooltip\")}\n dataTestId=\"group_attribute_field_container\"\n >\n <LdapFieldComponent",
       "module": "/packages/client"
     }
@@ -105,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄຸນລັກສະນະກຸ່ມ' is a literal translation of 'attribute' which might not be the most natural or accurate representation of 'Group Attribute' in this context. It might be better to convey the meaning of a property or characteristic of a group.",
-          "suggestion": "Consider a translation like 'ລັກສະນະຂອງກຸ່ມ' (Lak san khong group) which means 'characteristic of a group', or 'ຂໍ້ມູນກຸ່ມ' (khomun group) which means 'group information', depending on the specific context and intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -154,35 +149,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Sinhala translation 'කණ්ඩායම් ගුණාංගය' appears to be a valid transliteration and spelling of 'Group Attribute'. There are no apparent spelling errors.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'කණ්ඩායම් ගුණාංගය' is a technically correct translation, it might sound overly formal or technical for a user interface. A more natural or user-friendly translation might be preferred depending on the context.",
-          "suggestion": "Consider alternatives like 'මණ්ඩල ලක්ෂණය' or 'ගෝචර ලක්ෂණය' for a more accessible feel. The best choice depends on the specific context of the software."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"Atribút Skupina\" is not the best translation of \"Group Attribute\". While \"Atribút\" is correct for 'Attribute', \"Skupina\" directly translates to 'Group' and is redundant. It should be more descriptive of the attribute *of* the group.",
-          "suggestion": "Atribút združenia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -200,13 +178,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Grupni Atribut' is understandable, a more precise and common translation of 'Group Attribute' in a technical context would be 'Atribut Grupe'. The current translation puts the adjective before the noun, which is less idiomatic in Serbian.",
-          "suggestion": "Atribut Grupe"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -224,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Thuộc tính Nhóm' is technically correct, a more natural and commonly used translation for 'Group Attribute' in a technical context would be 'Thuộc tính nhóm' (without the extra 'Nhóm').",
-          "suggestion": "Thuộc tính nhóm"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateAutoRenews",
+  "content": "Then {{price}}/mo auto-renews from your wallet — your card is no longer charged for the plan.",
+  "content_en_sha1_hash": "6724a36264b6b4060c61522092bd3911c6d6adbd",
+  "created_at": "2026-06-30T07:32:34.187Z",
+  "updated_at": "2026-07-27T13:07:51.038Z",
+  "comment": {
+    "text": "Informational text within a step of the MigrateToWalletDialog explaining that auto-renewal will now be charged from the user's wallet instead of their card; includes a {{price}} variable representing the monthly subscription amount.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:39:54.311Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 359,
+      "context": "t(\"MigrateActiveUntil\", { date: initialPaymentDate }),\n <Text\n fontSize=\"13px\"\n color=\"var(--payment-benefits-icons-color)\"\n >\n {t(\"MigrateAutoRenews\", {\n price: formatFuturePaymentCurrency(newSubscriptionAmount),\n })}\n </Text>,\n )}\n </ol>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,16 +3,17 @@
   "content": "This section is empty",
   "content_en_sha1_hash": "2b06a278224aa9ce04d45d59105ba0394f86ef15",
   "created_at": "2025-05-19T21:30:49.289Z",
-  "updated_at": "2025-10-14T00:32:25.198Z",
+  "updated_at": "2026-05-28T15:46:18.577Z",
   "comment": {
-    "text": "This translation key is used to display a message when a section is empty or not found. It appears on an empty screen in the \"ContactsBody\" component, informing the user that the expected data is missing.",
+    "text": "This text appears when a section of the UI, such as a list of contacts or groups, contains no items. It informs the user that the current view is empty.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:39.068Z"
+    "updated_at": "2026-04-11T20:41:05.361Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreenGroups.tsx",
-      "line_number": 97,
+      "line_number": 110,
       "context": "};\n \n const getDescription = () => {\n if (groupsIsFiltered) return t(\"Common:GroupsNotFoundDescription\");\n \n return t(\"Common:ThisSectionIsEmpty\");\n };\n \n const getOptions = () => {\n if (groupsIsFiltered) {\n return [",
       "module": "/packages/client"
     }
@@ -141,20 +142,14 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Secțiunea nu conține niciun element' is a more literal and formal translation than the English \"This section is empty.\"  While technically correct, it lacks the simplicity and naturalness of the English phrase. A more natural Romanian translation would be closer to 'Secțiunea este goală'.",
-          "suggestion": "Secțiunea este goală"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

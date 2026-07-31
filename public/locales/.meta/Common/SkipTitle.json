@@ -3,30 +3,37 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2025-05-19T21:30:48.925Z",
-  "updated_at": "2026-02-19T13:36:32.375Z",
+  "updated_at": "2026-07-07T08:59:21.722Z",
   "comment": {
-    "text": "The translation key \"SkipTitle\" is used to display a label for a \"Skip\" button in various dialogues and forms. It prompts the user to skip or cancel an action, allowing them to move on without making changes.",
+    "text": "This is a button label. It allows the user to skip an action, such as resolving a conflict or dismissing a tip.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:24.670Z"
+    "updated_at": "2026-04-11T20:42:21.985Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
-      "line_number": 335,
+      "line_number": 362,
       "context": "selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}\n skipTitle={t(\"Common:SkipTitle\")}\n skipDescription={skipDescription}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/FormFillingTipsDialog/index.tsx",
-      "line_number": 151,
+      "line_number": 160,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"form-filling_tips_skip\"\n key=\"SkipTitle\"\n label={t(\"Common:SkipTitle\")}\n size={ButtonSize.small}\n onClick={onClose}\n scale\n />\n <Button",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 66,
+      "line_number": 75,
       "context": "selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />\n );\n }",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/conflict-resolve-dialog/index.tsx",
+      "line_number": 105,
+      "context": ": t(\"Common:CreateFileCopy\");\n const duplicateDescription = hasFolders\n ? t(\"Common:CreateFolderDescription\")\n : t(\"Common:CreateDescription\");\n \n const skipTitle = t(\"Common:SkipTitle\");\n const skipDescription = hasFolders\n ? t(\"Common:SkipFolderDescription\")\n : t(\"Common:SkipDescription\");\n \n return (",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -69,13 +76,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Παράλειψη\" (Paráleipsi) is a valid Greek word meaning 'omission' or 'skip', it carries a more formal and technical connotation than the English 'Skip'. It's not the typical word used for a 'Skip' button or function in a user interface.",
-          "suggestion": "Consider alternatives like \"Άνωθεν\" (Ánothen - 'From the top' - often used for skipping to the beginning), \"Παράλειψη\" might be too formal, or a more colloquial term depending on the context of use. Without more context, it's difficult to suggest a perfect replacement."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,13 +100,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Բաց թողնել\" (Bac toghnel) is a valid Armenian word meaning 'to skip' or 'to miss', it's a more verbose translation of the English 'Skip'. 'Skip' is often used as a short, direct action, and a more suitable translation in this context would be a shorter, more direct equivalent, reflecting the brevity of the English word.",
-          "suggestion": "Consider a shorter translation like \"կրկնիչ\" (krknich) or a more context-dependent option if 'Skip' refers to a specific action."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -165,31 +160,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Treci mai departe' translates to 'Go on' or 'Proceed' rather than 'Skip'. While it conveys a similar action, it's not a direct translation.",
-          "suggestion": "Consider 'Sari peste' or 'Omitere' for a more accurate translation of 'Skip'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"මඟහරින්න\" (magaharinna) is a valid Sinhala word meaning 'to avoid' or 'to bypass', it doesn't directly translate to \"Skip\" in the context of a UI element. 'Skip' implies a simple action of moving past something, not necessarily avoiding it. A more accurate translation might be 'ලskip කරන්න' (lskip karanna) which incorporates the English word, or 'වැskip කරන්න' (waskip karanna) or 'දුරුවා හැරන්න' (duruva haeranna) which are more natural-sounding alternatives, depending on the specific context.",
-          "suggestion": "Consider 'ලskip කරන්න' (lskip karanna), 'වැskip කරන්න' (waskip karanna), or 'දුරුවා හැරන්න' (duruva haeranna)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

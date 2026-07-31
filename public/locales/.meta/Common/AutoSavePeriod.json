@@ -3,17 +3,18 @@
   "content": "Autosave period",
   "content_en_sha1_hash": "e3165d0c92736307474c00930ef9cd096f138e55",
   "created_at": "2025-05-26T07:15:40.651Z",
-  "updated_at": "2025-08-04T07:30:01.748Z",
+  "updated_at": "2026-05-15T14:00:06.960Z",
   "comment": {
-    "text": "The \"AutoSavePeriod\" translation key describes the period at which automatic file saves are triggered. This value is used to display a time range in a UI component, likely on a schedule or backup settings page.",
+    "text": "This is a label for a setting that defines how often documents are automatically saved. It appears as a short label next to an input field.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:36.863Z"
+    "updated_at": "2026-04-11T20:58:51.675Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/sub-components/ScheduleComponent/ScheduleComponent.tsx",
-      "line_number": 78,
-      "context": "const renderHelpContent = () => (\n <Text\n className={classNames(styles.scheduleDescription, \"schedule_description\")}\n fontSize=\"12px\"\n >\n {t(\"Common:AutoSavePeriodHelp\", { productName: t(\"Common:ProductName\") })}\n </Text>\n );\n \n return (\n <div",
+      "line_number": 117,
+      "context": "styles.scheduleDescription,\n \"schedule_description\",\n )}\n fontSize=\"12px\"\n >\n {t(\"Common:AutoSavePeriod\")}\n </Text>\n <HelpButton\n className={classNames(\n styles.scheduleHelpButton,\n \"schedule_help-button\",",
       "module": "/packages/shared"
     }
   ],
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

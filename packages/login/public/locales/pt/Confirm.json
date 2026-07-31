@@ -20,6 +20,8 @@
   "GetCode": "Obter código",
   "GetSuitableApp": "Obtenha um aplicativo adequado",
   "GetSuitableAppDescription": "Use a aplicativo compatível como o Google Authenticator para <1>Android</1> e <4>iOS</4>, ou Authenticator para <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "O registo através do link já não está disponível, uma vez que o limite foi excedido.",
+  "InviteQuotaErrorCustomizedBody": "Você será redirecionado para a página de <1>Início de sessão</1> em 10 segundos.",
   "LoginRegistryButton": "Juntar-se",
   "Newsletter": "Quero subscrever a newsletter {{organizationName}}",
   "PassworResetTitle": "Agora pode criar uma nova palavra-chave.",
@@ -36,6 +38,7 @@
   "TermsAndConditions": "Ao continuar, compreende e concorda com os nossos <1>Termos e condições</1> e <2>Declaração de privacidade</2>.",
   "TfaSubTitle": "Siga passos simples para continuar trabalhando neste(a) {{productName}}:",
   "TfaTitle": "Autenticação de dois fatores habilitada para acesso seguro",
+  "UserAlreadyInvited": "Já foi convidado. Por favor, conclua o registo utilizando o link do e-mail.",
   "VerifyConnection": "Verifique a conexão",
   "VerifyConnectionDescription": "Insira o código de 6 dígitos gerado pelo seu aplicativo autenticador no campo abaixo para concluir a configuração."
 }

@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Завантажити файл",
   "HotkeysUploadingObjects": "Передавання елементів",
   "HotkeysZoomIn": "Збільшити",
-  "HotkeysZoomOut": "Зменшити"
+  "HotkeysZoomOut": "Зменшити",
+  "OpenContextMenu": "Відкрити контекстне меню"
 }

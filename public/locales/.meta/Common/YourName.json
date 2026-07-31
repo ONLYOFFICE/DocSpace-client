@@ -1,0 +1,308 @@
+{
+  "key_path": "YourName",
+  "content": "Your name",
+  "content_en_sha1_hash": "ab42293e29e1ffb306c1403dd95144d664853a60",
+  "created_at": "2026-04-11T18:34:14.938Z",
+  "updated_at": "2026-05-15T14:00:06.992Z",
+  "comment": {
+    "text": "This is a placeholder text for an input field where the user enters their name.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:38:36.934Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 201,
+      "context": "name=\"name\"\n type={InputType.text}\n size={InputSize.base}\n scale\n tabIndex={1}\n placeholder={t(\"YourName\")}\n isAutoFocussed\n isDisabled={isLoading}\n value={name}\n onChange={onChangeName}\n testId=\"request_name_input\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:46.544Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "85ba9bab8b02c893"
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:46.544Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "e58fe7d148885138"
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:46.544Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "203faec0f3197204"
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:50.992Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "94c2a92f27a8ac77"
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:50.992Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "7edff59bc6a51000"
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:50.992Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1a8afd9dd100bb99"
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:55.582Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "fe7fa9607a02ff66"
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:55.582Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "c9f11af6ceabd15f"
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:09:55.582Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "d89195efd87e4ee3"
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:00.979Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "7703bd0665f4b07e"
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:00.979Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6b36b5552a711384"
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:00.979Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "9f1e3c6a82a4b89e"
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:03.224Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "66644d9120208a68"
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:03.225Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "12695c9dabd40ce6"
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:03.225Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "96b7f7a9231d488c"
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:07.893Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "e4fc559874f8ab14"
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:07.893Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "92a9cd05b79bf237"
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:07.893Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1395e653a9c29aae"
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:16.629Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b186059749af11c5"
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:16.629Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "75adf7394580c4fd"
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": "2026-05-15T15:04:54.259137Z",
+      "ai_spell_check_verified_at": "2026-04-24T09:10:16.629Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "3ecccdf775a366be"
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:25.478Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1e1d73f808cfd69e"
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:25.478Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "3d5fec5abedb1de7"
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:25.478Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "7b948e478e70bd7e"
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:30.820Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ab821396758ee78d"
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:30.820Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "58c811546321dd8f"
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:30.820Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "7b948e478e70bd7e"
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:36.352Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "e58fe7d148885138"
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:36.352Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6dac486706f1285f"
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:36.352Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "9a4720ca22ad796a"
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:10:40.290Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "80c76cd279496da2"
+    }
+  }
+}

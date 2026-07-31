@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomAIProviderNotConnectedAskAdmin",
+  "content": "Ask your <1>{{productName}} admin</1> to connect and enable an AI provider in the {{productName}} settings to analyze form data with Ask AI, create charts, and uncover insights.",
+  "content_en_sha1_hash": "cfa793f29c8d14123709eaf89813251ffc7e12ec",
+  "created_at": "2026-05-08T19:46:42.474Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
+  "comment": {
+    "text": "Informational text within the AI card in the Form details view, instructing the user to contact their administrator to enable an AI provider. Includes a `{{productName}}` variable and a `<1>` tag for bolding the admin reference.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T19:48:50.606Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
+      "line_number": 110,
+      "context": "return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"FormRoomAIProviderNotConnectedAskAdmin\"\n components={{\n 1: <strong />,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

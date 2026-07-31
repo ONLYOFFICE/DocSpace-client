@@ -1,0 +1,29 @@
+{
+  "key_path": "Last3Months",
+  "content": "Last 3 months",
+  "content_en_sha1_hash": "9f796848d3a8e7e47897c26de7a94cbdea7c2efd",
+  "created_at": "2026-06-25T11:54:51.730Z",
+  "updated_at": "2026-06-25T12:08:19.539Z",
+  "comment": {
+    "text": "Label for an option within a period selection component used to filter billing usage history.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:08:19.539Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
+      "line_number": 98,
+      "context": "values={{ year: current.year - 1 }}\n components={{ 1: hintSpan }}\n />\n );\n case \"last3Months\":\n return t(\"Last3Months\");\n case \"last6Months\":\n return t(\"Last6Months\");\n case \"last12Months\":\n return t(\"Last12Months\");\n default:",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

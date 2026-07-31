@@ -1,0 +1,29 @@
+{
+  "key_path": "AnonymousSupport",
+  "content": "Anonymous support",
+  "content_en_sha1_hash": "8521688d239711fd42f0d7e346d20d2f5f68a31f",
+  "created_at": "2026-07-27T13:07:48.536Z",
+  "updated_at": "2026-07-30T16:14:11.205Z",
+  "comment": {
+    "text": "A setting label in the DocsConnect configuration section of the Portal Settings used to toggle anonymous access features.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:38:24.948Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 418,
+      "context": "</Text>\n </div>\n </div>\n \n <div className={styles.settingsGroup}>\n <Text fontWeight={600}>{t(\"DocsConnect:AnonymousSupport\")}</Text>\n <Text fontSize=\"13px\" className={styles.settingsHint}>\n {t(\"DocsConnect:AnonymousSupportDescription\")}\n </Text>\n <RadioButtonGroup\n className={styles.radioGroup}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

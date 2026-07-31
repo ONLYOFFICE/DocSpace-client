@@ -3,34 +3,35 @@
   "content": "Send request",
   "content_en_sha1_hash": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
   "created_at": "2025-05-19T21:30:48.550Z",
-  "updated_at": "2026-03-26T08:26:58.119Z",
+  "updated_at": "2026-06-02T15:03:00.348Z",
   "comment": {
-    "text": "This translation key is used for the label of a button that sends a request. It appears on various screens, such as in payment settings and registration modals, and should be translated to indicate sending a request or a similar action in different languages.",
+    "text": "Button label. This text appears on a button that, when clicked, sends a request to the system, often related to billing or service upgrades.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:56.114Z"
+    "updated_at": "2026-04-11T20:43:20.465Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/RequestButtonContainer.tsx",
+      "line_number": 74,
+      "context": "onClose={onClose}\n />\n ) : null}\n <Button\n className=\"send-request-button\"\n label={t(\"SendRequest\")}\n size={ButtonSize.medium}\n primary\n isDisabled={isLoading || isDisabled}\n onClick={toDoRequest}\n isLoading={isLoading}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
+      "line_number": 96,
+      "context": "const title = isBalanceInsufficient\n ? t(\"TopUpAndUpgrade\")\n : !hasStorageSubscription\n ? t(\"UpgradeNow\")\n : isExceedingStorageLimit\n ? t(\"SendRequest\")\n : t(\"Update\");\n \n const showNextBillHint =\n hasStorageSubscription &&\n !isDowngradeStoragePlan &&",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 282,
+      "line_number": 293,
       "context": "/>\n ) : (\n <Button\n {...buttonProps}\n size={currentDeviceType === DeviceType.desktop ? \"small\" : \"normal\"}\n label={t(\"Common:SendRequest\")}\n onClick={onSendRequest}\n isDisabled={!isSettingPaid || isError}\n />\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/main-tariff/sub-components/RequestButtonContainer.js",
-      "line_number": 62,
-      "context": "onClose={onClose}\n />\n ) : null}\n <Button\n className=\"send-request-button\"\n label={t(\"Common:SendRequest\")}\n size=\"medium\"\n primary\n isDisabled={isLoading || isDisabled}\n onClick={toDoRequest}\n isLoading={isLoading}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/ButtonContainer.tsx",
-      "line_number": 79,
-      "context": "const { isWaitingCalculation } = usePaymentContext();\n \n const title = !hasStorageSubscription\n ? t(\"Buy\")\n : isExceedingStorageLimit\n ? t(\"Common:SendRequest\")\n : t(\"Common:Update\");\n \n return (\n <div className={styles.buttonWrapper}>\n {hasStorageSubscription &&",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 141,
+      "line_number": 153,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"registration-modal_send\"\n className=\"modal-dialog-button\"\n key=\"RegisterSendBtn\"\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendRequest\")}\n size={ButtonSize.normal}\n scale={false}\n primary\n onClick={onSendRegisterRequest}\n isLoading={loading}",
       "module": "/packages/login"
     }
@@ -166,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -217,6 +218,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

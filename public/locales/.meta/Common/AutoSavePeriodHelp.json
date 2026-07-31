@@ -3,17 +3,18 @@
   "content": "The time shown below corresponds to the time zone set in the {{productName}}.",
   "content_en_sha1_hash": "fc425c15b268cad321e77bf210b8507fc99e1b7e",
   "created_at": "2025-05-26T07:15:40.662Z",
-  "updated_at": "2025-08-04T07:30:01.748Z",
+  "updated_at": "2026-05-15T14:00:06.960Z",
   "comment": {
-    "text": "This translation key is used to provide contextual information about auto-saving periods in a scheduling component. It displays the time shown below in relation to the user's set time zone and is likely found within a schedule or calendar interface.",
+    "text": "This is a help text displayed below the auto-backup schedule settings. It clarifies that the displayed times are based on the time zone configured in the product, where `{{productName}}` will be replaced by the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:33.987Z"
+    "updated_at": "2026-04-11T20:58:50.835Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/sub-components/ScheduleComponent/ScheduleComponent.tsx",
-      "line_number": 78,
-      "context": "const renderHelpContent = () => (\n <Text\n className={classNames(styles.scheduleDescription, \"schedule_description\")}\n fontSize=\"12px\"\n >\n {t(\"Common:AutoSavePeriodHelp\", { productName: t(\"Common:ProductName\") })}\n </Text>\n );\n \n return (\n <div",
+      "line_number": 88,
+      "context": "const renderHelpContent = () => (\n <Text\n className={classNames(styles.scheduleDescription, \"schedule_description\")}\n fontSize=\"12px\"\n >\n {t(\"Common:AutoSavePeriodHelp\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n );\n \n return (\n <div",
       "module": "/packages/shared"
     }
   ],
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

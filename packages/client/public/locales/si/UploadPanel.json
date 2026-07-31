@@ -1,6 +1,10 @@
 {
   "HideInput": "සඟවන්න",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} / {{total}}</0> උඩුගත කෙරිණි. ගබඩා කෝටාව ඉක්මවා ඇත — <1>විස්තර බලන්න</1>.",
+  "QuotaExceededTooltip": "ගබඩා කෝටාව ඉක්මවා ඇත. ඉඩ හළ කරන්න හෝ ඔබගේ සැලැස්ම උසස් කර නැවත උත්සාහ කරන්න.",
   "Ready": "අහවරයි",
-  "UploadingAndConversion": "යොමු කිරීම සහ පරිවර්තනය",
+  "RetryAfterQuotaUpgrade": "කෝටාව උසස් කිරීමෙන් පසු නැවත උත්සාහ කරන්න",
+  "RetryUpload": "නැවත උත්සාහ කරන්න",
+  "UploadingAndConversion": "උඩුගත කිරීම සහ පරිවර්තනය",
   "UploadingError": "ගොනුපත් උඩුගත කිරීමේ දෝෂය"
 }

@@ -20,6 +20,8 @@
   "GetCode": "Dobavi kod",
   "GetSuitableApp": "Preuzmi odgovarajuću aplikaciju",
   "GetSuitableAppDescription": "Koristi kompatibilnu aplikaciju kao što je Google Authenticator za <1>Android</1> i <4>iOS</4>, ili Authenticator za <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Registracija putem linka više nije dostupna jer je limit previšen.",
+  "InviteQuotaErrorCustomizedBody": "Bićete preusmereni na stranicu <1>Prijave</1> za 10 sekundi.",
   "LoginRegistryButton": "Pridruži se",
   "Newsletter": "Želim da se pretplatim na newsletter {{organizationName}}",
   "PassworResetTitle": "Sada možete kreirati novu lozinku.",
@@ -36,6 +38,7 @@
   "TermsAndConditions": "Nastavkom potvrđujete da ste saglasni sa našim <1>Uslovima korišćenja</1> i <2>Izjavom o privatnosti</2>.",
   "TfaSubTitle": "Prati jednostavne korake da nastaviš sa radom u ovom {{productName}}:",
   "TfaTitle": "Dvofaktorska autentifikacija omogućena za siguran pristup",
+  "UserAlreadyInvited": "Već ste pozvani. Molimo vas da dovršite registraciju pomoću veze iz e-poruke.",
   "VerifyConnection": "Proveri vezu",
   "VerifyConnectionDescription": "Unesi 6-cifreni kod koji generiše tvoja aplikacija za autentifikaciju u polje ispod da dovršiš podešavanje."
 }

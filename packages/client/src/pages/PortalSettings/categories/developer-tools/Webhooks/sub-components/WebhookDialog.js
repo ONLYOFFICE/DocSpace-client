@@ -1,65 +1,56 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import isNil from "lodash/isNil";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { getDisabledTriggersForUser, validateUrl } from "../Webhooks.helpers";
+import { validateUrl } from "../Webhooks.helpers";
+
+import styles from "../Webhooks.styled.module.scss";
 
 import { LabledInput } from "./LabledInput";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import TriggersForm from "./TriggersForm";
 
-const StyledWebhookForm = styled.form`
-  margin-top: 7px;
-
-  .margin-0 {
-    margin: 0;
-  }
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  display: flex;
-
-  button {
-    width: 100%;
-  }
-  button:first-of-type {
-    margin-inline-end: 10px;
-  }
-`;
 
 const WebhookDialog = (props) => {
   const {
@@ -70,7 +61,7 @@ const WebhookDialog = (props) => {
     onSubmit,
     webhook,
     additionalId,
-    user,
+    webhookTriggers,
   } = props;
 
   const { t } = useTranslation(["Webhooks", "Common"]);
@@ -199,11 +190,6 @@ const WebhookDialog = (props) => {
     );
   }, [webhook]);
 
-  const disabledTriggers = useMemo(
-    () => getDisabledTriggersForUser(user),
-    [user],
-  );
-
   return (
     <ModalDialog
       visible={visible}
@@ -213,7 +199,7 @@ const WebhookDialog = (props) => {
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledWebhookForm onSubmit={onFormSubmit}>
+        <form className={styles.styledWebhookForm} onSubmit={onFormSubmit}>
           <LabledInput
             id={`${additionalId}-name-input`}
             label={t("WebhookName")}
@@ -262,7 +248,7 @@ const WebhookDialog = (props) => {
             toggleTrigger={toggleTrigger}
             triggerAll={triggerAll}
             onChange={handleOnChangeTriggerAll}
-            disabledTriggers={disabledTriggers}
+            webhookTriggers={webhookTriggers}
           />
           <LabledInput
             id={`${additionalId}-target-id-input`}
@@ -272,7 +258,7 @@ const WebhookDialog = (props) => {
             value={webhookInfo.targetId}
             onChange={onInputChange}
             isDisabled={isLoading}
-            maxLength={36}
+            maxLength={255}
             dataTestId="target-id-input"
           />
           <button
@@ -281,11 +267,11 @@ const WebhookDialog = (props) => {
             hidden
             aria-label="submit"
           />
-        </StyledWebhookForm>
+        </form>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <Footer>
+        <div className={styles.footer}>
           <Button
             id={isSettingsModal ? "save-button" : "create-button"}
             label={
@@ -305,14 +291,15 @@ const WebhookDialog = (props) => {
             testId="webhook_cancel_button"
             onClick={onModalClose}
           />
-        </Footer>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-export default inject(({ userStore }) => {
+export default inject(({ webhooksStore }) => {
   return {
-    user: userStore?.user,
+    webhookTriggers: webhooksStore?.webhookTriggers,
   };
 })(observer(WebhookDialog));
+

@@ -3,16 +3,17 @@
   "content": "New application",
   "content_en_sha1_hash": "3c9a5e52344fe5d1311b3b6f36b19391cf89eac0",
   "created_at": "2025-05-19T21:30:53.916Z",
-  "updated_at": "2025-08-04T07:30:01.422Z",
+  "updated_at": "2026-05-15T14:00:06.818Z",
   "comment": {
-    "text": "This translation key is used for \"New application\" and appears as a header title when editing or accessing OAuth settings. It is displayed on a button in the portal settings UI.",
+    "text": "This is a heading that appears on a page for creating a new application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:44.612Z"
+    "updated_at": "2026-04-11T21:18:44.177Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthSectionHeader/index.tsx",
-      "line_number": 70,
+      "line_number": 75,
       "context": "onClick={onBack}\n className=\"arrow-button\"\n dataTestId=\"arrow_back_button\"\n />\n \n {isEdit ? t(\"EditApp\") : t(\"NewApp\")}\n </div>\n </Heading>\n </HeaderContainer>\n </StyledContainer>\n );",
       "module": "/packages/client"
     }
@@ -148,18 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'නව අයදුම්පත්‍රය' is a literal translation of 'new application', it's not the most natural or idiomatic way to express it in Sinhala.  'අයදුම්පත්‍රය' means 'application'. A more natural translation would be something like 'නව යෝජනා' (New proposal) or 'නව වැඩසටහන්' (New project/scheme), depending on the context of 'application'. Without further context, 'නව අයදුම්පත්' is acceptable but less common.",
-          "suggestion": "Consider 'නව යෝජනා' or 'නව වැඩසටහන්' for improved naturalness, or 'නව අයදුම්පත්' if a very literal translation is preferred."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

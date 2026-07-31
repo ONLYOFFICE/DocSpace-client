@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Vyberte si zo zoznamu",
-  "FileLocked": "Súbor zamknutý",
   "FileProtected": "Súbor je chránený heslom",
-  "FileUnlocked": "Súbor odomknutý",
   "FolderTitleBoxNet": "Priečinok Box",
   "FolderTitleDocuSign": "Účet DocuSign",
   "FolderTitleDropBox": "Priečinok Dropbox",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "Priečinok WebDAV",
   "FolderTitleYandex": "Priečinok Yandex",
   "NewForm": "Formulár PDF",
-  "OwnerChange": "Zmeniť vlastníka",
   "RoleGuestDescriprion": "Hostia majú prístup do miestností, do ktorých boli pozvaní a môžu vytvárať a upravovať dokumenty, ak im boli v miestnosti pridelené príslušné roly.",
   "SearchByHeadOfGroup": "Vyhľadávanie podľa Vedúceho skupiny",
   "SearchByOwner": "Vyhľadávanie podľa vlastníkov",

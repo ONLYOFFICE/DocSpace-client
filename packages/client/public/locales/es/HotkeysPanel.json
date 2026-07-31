@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Cargar archivo",
   "HotkeysUploadingObjects": "Cargando elementos",
   "HotkeysZoomIn": "Ampliar",
-  "HotkeysZoomOut": "Alejar"
+  "HotkeysZoomOut": "Alejar",
+  "OpenContextMenu": "Abrir menú contextual"
 }

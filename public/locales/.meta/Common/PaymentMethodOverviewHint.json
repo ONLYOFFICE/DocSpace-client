@@ -1,0 +1,29 @@
+{
+  "key_path": "PaymentMethodOverviewHint",
+  "content": "Charges from this payment method cover wallet top-ups and your monthly subscription.",
+  "content_en_sha1_hash": "5029160c2a0829534f97ca0a7ae7e452ce36c7f8",
+  "created_at": "2026-07-07T08:59:01.405Z",
+  "updated_at": "2026-07-07T09:00:46.818Z",
+  "comment": {
+    "text": "Small subtext displayed under a linked payment method card in the billing overview, explaining which services are billed through this method.",
+    "is_auto": true,
+    "updated_at": "2026-07-07T09:00:46.818Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/PaymentMethod.tsx",
+      "line_number": 79,
+      "context": "<>\n <div className={styles.paymentLinkedCard}>\n <CardInformation scale withoutMargin />\n </div>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"PaymentMethodOverviewHint\")}\n </Text>\n </>\n ) : (\n <div className={styles.emptyState}>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

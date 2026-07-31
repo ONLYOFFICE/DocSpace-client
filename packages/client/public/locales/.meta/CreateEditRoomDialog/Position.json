@@ -3,17 +3,18 @@
   "content": "Position",
   "content_en_sha1_hash": "cf1c85adba548e8d681255278976584a7e4a44de",
   "created_at": "2025-05-19T21:30:56.819Z",
-  "updated_at": "2025-10-27T16:14:33.239Z",
+  "updated_at": "2026-05-28T15:46:18.525Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Position\" on a UI component, likely in a file management or edit room interface, such as a watermark or viewer info section in a dialog box.",
+    "text": "This is a label for a dropdown menu or radio button group. It refers to the placement of an element, such as a watermark, on a page.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:06.165Z"
+    "updated_at": "2026-04-11T21:04:37.563Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
-      "line_number": 202,
-      "context": "}),\n };\n }\n \n const initialInfoRef = initialInfo.current;\n const [selectedPosition, setSelectedPosition] = useState(\n initialInfoRef.rotate,\n );\n const [textValue, setTextValue] = useState(initialInfoRef.text);\n \n useEffect(() => {",
+      "line_number": 317,
+      "context": "type={InputType.text}\n testId=\"virtual_data_room_watermark_text_input\"\n />\n \n <Text className=\"watermark-title\" fontWeight={600} lineHeight=\"20px\">\n {t(\"Position\")}\n </Text>\n <ComboBox\n selectedOption={selectedPosition}\n options={initialInfoRef?.dataRotate as TOption[]}\n onSelect={onPositionChange}",
       "module": "/packages/client"
     }
   ],
@@ -81,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Պաշտոն\" can mean \"position\", in the context of a room creation/editing dialog, it's not the most natural or accurate translation. It implies an official title or rank, not a location or spatial position.",
-          "suggestion": "Consider using \"Դիրք\" (dirk) or \"Տեղադրություն\" (teghadrut'yun) for a more accurate translation referring to a location or placement."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -154,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

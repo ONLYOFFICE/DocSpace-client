@@ -3,7 +3,12 @@
   "EmptyFormGalleryScreenDescription": "لا يمكن العثور على نتائج تطابق استعلامك",
   "ErrorViewDescription": "المحاولة مرة أخرى لاحقاً",
   "ErrorViewDescriptionNetworkError": "يبدو أنه لا يوجد اتصال بالإنترنت",
+  "ErrorViewHeader": "عارض الصور غير متاح مؤقتًا.",
+  "GalleryTitle": "{{organizationName}} معرض القوالب",
+  "SelectTemplate": "اختر النموذج",
+  "SubmitToGalleryDialogMainInfo": "قم بتقديم القالب الخاص بك إلى المعرض العام ليتمكن الآخرون من استخدامه في أعمالهم. بمجرد أن يجتاز القالب مرحلة المراجعة، سيتم إخطارك ومكافأتك على مساهمتك.",
   "SuggestChanges": "أقترح التغييرات",
   "TemplateInfo": "معلومات النموذج",
+  "UploadGallery": "تحميل في المعرض",
   "ViewAllTemplates": "إظهار كافة القوالب"
 }

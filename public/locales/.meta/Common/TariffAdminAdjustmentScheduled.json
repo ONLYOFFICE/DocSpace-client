@@ -1,0 +1,29 @@
+{
+  "key_path": "TariffAdminAdjustmentScheduled",
+  "content": "Change scheduled: Admin adjustment, {{fromCount}} → {{toCount}}",
+  "content_en_sha1_hash": "89ebfd7b3fb2adbe2c03d3b7746a584edaeb78f0",
+  "created_at": "2026-06-30T07:32:40.566Z",
+  "updated_at": "2026-07-03T11:08:02.939Z",
+  "comment": {
+    "text": "Title of a warning box notifying users about an upcoming change in the administrator quota, where {{fromCount}} is the current count and {{toCount}} is the new count.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:33:39.233Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 309,
+      "context": "{planSuggestion()}\n \n {!isNonProfit && hasScheduledTariffAdminsChange ? (\n <div style={{ marginTop: 16, marginBottom: 12 }}>\n <StorageWarning\n title={t(\"TariffAdminAdjustmentScheduled\", {\n fromCount: currentTariffAdminsCount,\n toCount: nextTariffAdminsCount ?? 0,\n })}\n body={t(\"TariffAdminAdjustmentWarning\", {\n admins: maxCountManagersByQuota,",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

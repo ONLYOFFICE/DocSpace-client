@@ -20,6 +20,8 @@
   "GetCode": "Získať kód",
   "GetSuitableApp": "Získajte vhodnú aplikáciu.",
   "GetSuitableAppDescription": "Použite kompatibilnú aplikáciu, ako napríklad Google Authenticator pre <1>Android</1> a <4>iOS</4>, alebo Authenticator pre <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Registrácia cez odkaz už nie je dostupná, pretože bol prekročený limit.",
+  "InviteQuotaErrorCustomizedBody": "Budete presmerovaní na stránku <1>Prihlásenie</1> o 10 sekúnd.",
   "LoginRegistryButton": "Pripojiť",
   "Newsletter": "Chcem sa prihlásiť na odber noviniek od {{organizationName}}",
   "PassworResetTitle": "Teraz si môžete vytvoriť nové heslo.",
@@ -36,6 +38,7 @@
   "TermsAndConditions": "Pokračovaním beriete na vedomie a súhlasíte s našimi <1>Všeobecnými obchodnými podmienkami</1> a <2>Vyhlásením o ochrane osobných údajov</2>.",
   "TfaSubTitle": "Postupujte podľa jednoduchých krokov, aby ste mohli pokračovať v práci v tomto {{productName}}:",
   "TfaTitle": "Dvojfaktorové overenie povolené pre bezpečný prístup",
+  "UserAlreadyInvited": "Už ste boli pozvaní. Prosím, dokončite registráciu pomocou odkazu z e-mailu.",
   "VerifyConnection": "Overte spojenie",
   "VerifyConnectionDescription": "Zadajte 6-ciferný kód vygenerovaný vašou autentifikačnou aplikáciou do poľa nižšie, aby ste dokončili nastavenie."
 }

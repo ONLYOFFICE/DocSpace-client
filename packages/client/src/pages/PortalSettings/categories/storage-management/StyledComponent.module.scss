@@ -1,0 +1,256 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+// StyledBody
+.body {
+  max-width: 660px;
+
+  :global(.title-container) {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+// StyledMainTitle (Text + margin-bottom)
+.mainTitle {
+  margin-bottom: 16px;
+}
+
+// StyledMainInfo
+.mainInfo {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 6px;
+  column-gap: 24px;
+  row-gap: 12px;
+  padding-right: 12px;
+
+  p {
+    color: var(--settings-storage-management-gray-bg-text);
+  }
+}
+
+// StyledDiscSpaceUsedComponent
+.discSpaceUsed {
+  margin-top: 16px;
+
+  :global(.disk-space_title) {
+    color: var(--settings-storage-management-gray-bg-text);
+  }
+
+  :global(.disk-space_link) {
+    text-decoration: underline;
+  }
+
+  :global(.button-container) {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+
+    :global(.text-container) {
+      display: grid;
+      min-height: 35px;
+
+      :global(.last-update) {
+        color: var(--settings-storage-management-description-color);
+      }
+    }
+
+    @include mixins.mobile {
+      flex-direction: column;
+    }
+  }
+
+  :global(.disk-space_content) {
+    display: grid;
+    grid-template-columns: 1fr 16px;
+    border-radius: 6px;
+
+    :global(.disk-space_size-info) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-inline-end: 8px;
+
+      p {
+        margin-inline-end: 16px;
+      }
+    }
+
+    :global(.disk-space_icon) {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+// StyledDiagramComponent
+.diagramComponent {
+  :global(.diagram_slider),
+  :global(.diagram_description) {
+    margin-top: 16px;
+  }
+
+  :global(.diagram_slider) {
+    width: 100%;
+    max-width: var(--diagram-slider-max-width, 660px);
+    display: flex;
+    background: var(--settings-payment-bg-color);
+    border-radius: 46px;
+    overflow: hidden;
+  }
+
+  :global(.diagram_description) {
+    display: flex;
+    flex-wrap: wrap;
+
+    :global(.diagram_folder-tag) {
+      display: flex;
+      margin-inline-end: 24px;
+      padding-bottom: 8px;
+
+      :global(.tag_text) {
+        margin-inline-start: 4px;
+      }
+    }
+
+    @include mixins.mobile {
+      flex-direction: column;
+    }
+  }
+}
+
+// StyledFolderTagSection — color/width applied via inline style
+.folderTagSection {
+  height: 12px;
+}
+
+// StyledFolderTagColor — color applied via inline style
+.folderTagColor {
+  margin: auto 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-inline-end: 4px;
+}
+
+// StyledStatistics
+.statistics {
+  max-width: 700px;
+
+  :global(.paid-badge) {
+    cursor: auto;
+  }
+
+  :global(.statistics-description) {
+    margin-bottom: 20px;
+  }
+
+  :global(.statistics-container) {
+    margin-bottom: 40px;
+  }
+
+  :global(.item-statistic) {
+    margin-bottom: 4px;
+  }
+
+  :global(.button-element) {
+    margin-top: 20px;
+  }
+}
+
+// StyledBaseQuotaComponent
+.baseQuotaComponent {
+  :global(.quotas_description) {
+    margin-bottom: 20px;
+  }
+
+  :global(.paid-badge) {
+    cursor: auto;
+  }
+
+  :global(.toggle-container) {
+    margin-bottom: 32px;
+
+    :global(.quotas_toggle-button) {
+      position: static;
+    }
+
+    :global(.toggle_label) {
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
+  }
+
+  :global(.category-item-description) {
+    color: var(--settings-storage-management-description-color);
+  }
+
+  &.disabled {
+    :global(.toggle_label) {
+      color: var(--text-disable-color);
+    }
+  }
+}
+
+// StyledSimpleFilesRow
+.simpleFilesRow {
+  :global(.row_content) {
+    gap: 12px;
+    align-items: center;
+    height: 56px;
+
+    :global(.row_name) {
+      width: 100%;
+      overflow: hidden;
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    :global(.user-icon) {
+      :global(.react-svg-icon) {
+        height: 32px;
+        border-radius: 50%;
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 {
+  "ActionsWithFilesDescription": "ستُبرز الشارات نشاط الملفات — التحميلات، أو التعديلات، أو المشاركات — عبر أقسام {{rooms}}، {{shared}}، {{documents}}، و {{aiAgents}}.",
   "AdminSetupRequired": "مطلوب إعداد من المسؤول",
   "Badges": "شارات",
   "DailyFeed": "أخبار {{productName}} اليومية",
@@ -8,6 +9,8 @@
   "LdapEmailTooltip": "تم تحميل حساب المستخدم هذا من LDAP. لم يتم تحديد عنوان البريد الإلكتروني للمستخدم، وقد تم إنشاء العنوان الحالي تلقائيًا ولا يمكن استخدامه لإرسال الإشعارات.",
   "NotConfigured": "غير مهيأ",
   "Notifications": "الإشعارات",
+  "RoomsActivityDescription": "احصل على إشعارات بريد إلكتروني فورية حول الملفات/المجلدات المشتركة الجديدة والنشاط داخل {{rooms}} و {{aiAgents}}.",
+  "RoomUpdateNotify": "المحتوى المشترك، و {{rooms}} ونشاط {{aiAgents}}",
   "SettingUpNotifications": "إعداد الإشعارات",
   "SuccessConnected": "تم توصيل {{serviceName}} بنجاح كقناة إشعارات. ستتلقون الآن التحديثات هناك.",
   "SuccessDisconnected": "تم فصل {{serviceName}} بنجاح كقناة إشعارات. لن يتم إرسال الإشعارات إلى هناك بعد الآن.",

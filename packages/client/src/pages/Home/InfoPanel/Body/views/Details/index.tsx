@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
@@ -30,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
+import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
@@ -39,6 +49,7 @@ import PublicRoomBar from "@docspace/ui-kit/components/public-room-bar";
 import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 
@@ -47,6 +58,8 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
+
+import { FormInfo } from "./sub-components/FormInfo";
 
 import DetailsHelper from "./Details.utils";
 
@@ -105,7 +118,6 @@ const Details = ({
     "Common",
     "Translations",
     "Files",
-    "RoomLogoCover",
   ]);
   const [itemProperties, setItemProperties] = useState<
     ReturnType<DetailsHelper["getPropertyList"]>
@@ -154,7 +166,10 @@ const Details = ({
         selection.fileType === FileType.Presentation ||
         selection.fileType === FileType.Document)
     ) {
-      await createThumbnail?.(selection.id);
+      // createThumbnail expects a TFile but has always been
+      // given the id here — its guards then bail out (file.id undefined);
+      // erased cast preserves that no-op behavior.
+      await createThumbnail?.(selection.id as unknown as TFile);
     }
   }, [selection]);
 
@@ -177,8 +192,15 @@ const Details = ({
         ? selection?.logo
         : getInfoPanelItemIcon?.(selection, 96);
 
+  // isExternalShareRestricted/hasExternalLinks are intentionally omitted: the alert badge is
+  // suppressed anyway by withEditing=true (EditRoom) via RoomIcon's badge render condition.
   const badgeUrl =
     "external" in selection ? getRoomBadgeUrl(selection, 24) : undefined;
+
+  const badgeIconColor =
+    "private" in selection && selection.private === true
+      ? globalColors.lightStatusPositive
+      : undefined;
 
   const isLoadedRoomIcon =
     "logo" in selection && !!(selection.logo?.cover || selection.logo?.large);
@@ -204,7 +226,11 @@ const Details = ({
     selection.isRoom;
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
-  const title = "title" in selection ? selection.title : "";
+  const resolvedTitle = useResolvedFileTitle(
+    selection as { id?: number | string; title?: string; encrypted?: boolean },
+  );
+  const title =
+    "title" in selection ? resolvedTitle || selection.title : "";
 
   return (
     <>
@@ -273,8 +299,10 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl ?? undefined}
+            badgeIconColor={badgeIconColor}
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
+            // When EditRoom is true, RoomIcon hides the badge in favour of the edit affordance.
             withEditing={
               "isRoom" in selection && selection.isRoom
                 ? selection.security.EditRoom
@@ -286,7 +314,7 @@ const Details = ({
       )}
       <div className={commonStyles.subtitle}>
         <Text fontWeight="600" fontSize="14px">
-          {t("Properties")}
+          {t("Common:Properties")}
         </Text>
       </div>
       <div className={commonStyles.properties}>
@@ -303,6 +331,7 @@ const Details = ({
           );
         })}
       </div>
+      <FormInfo selection={selection} />
     </>
   );
 };
@@ -336,6 +365,7 @@ export default inject(
       currentQuotaStore;
 
     const { isAIAgentsFolderRoot } = treeFoldersStore;
+
     return {
       culture,
       createThumbnail,

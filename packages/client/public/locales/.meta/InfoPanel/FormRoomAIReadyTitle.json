@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomAIReadyTitle",
+  "content": "AI analysis is ready",
+  "content_en_sha1_hash": "a1b9bc9da73c64e18374110f3626308346f39af3",
+  "created_at": "2026-05-08T13:10:42.349Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
+  "comment": {
+    "text": "Card title in the Info Panel displayed when AI is connected to a Form Room.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:17:28.747Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
+      "line_number": 87,
+      "context": "<span className={styles.cardTitle}>\n <AIReactSvg className={styles.cardIcon} />\n {aiConnected\n ? isFile\n ? t(\"InfoPanel:FormRoomAIAnalyzeTitle\")\n : t(\"InfoPanel:FormRoomAIReadyTitle\")\n : t(\"InfoPanel:FormRoomAIUnlockTitle\")}\n </span>\n );\n \n const description = useMemo(() => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

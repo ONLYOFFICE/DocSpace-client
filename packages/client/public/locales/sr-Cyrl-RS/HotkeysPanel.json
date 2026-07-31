@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Отпреми датотеку",
   "HotkeysUploadingObjects": "Отпремљивање ставки",
   "HotkeysZoomIn": "Зумирај унутра",
-  "HotkeysZoomOut": "Зумирај напоље"
+  "HotkeysZoomOut": "Зумирај напоље",
+  "OpenContextMenu": "Отвори контекстни мени"
 }

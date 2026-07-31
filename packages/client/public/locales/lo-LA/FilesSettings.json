@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "ຢ່າສະແດງການແຈ້ງເຕືອນການຍົກເລີກອີກ",
-  "DisplayFileExtension": "ສະແດງນາມສະກຸນໄຟລ໌ຕໍ່ໄປກັບຊື່ໄຟລ໌",
-  "OpenSameTab": "ເປີດຕົວບັນນາຈັກ {{organizationName}} ໃນແທັບດຽວກັນ",
-  "OriginalCopy": "ບັນທຶກໄຟລ໌ສຳເນົາໄວ້ໃນຮູບແບບຕົ້ນສະບັບເຊັ່ນດຽວກັນ",
-  "TrashMoveConfirmation": "ສະແດງການແຈ້ງເຕືອນເມື່ອຍ້າຍລາຍການໄປ {{sectionName}}"
+  "DefaultHomepage": "ໜ້າຫຼັກເລີ່ມຕົ້ນ",
+  "GroupByRooms": "ຈັດກຸ່ມຕາມຫ້ອງ",
+  "OpenSameTab": "ເປີດຕົວບັນນາຈັກ {{organizationName}} ໃນແທັບດຽວກັນ"
 }

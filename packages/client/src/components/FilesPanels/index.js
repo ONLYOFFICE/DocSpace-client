@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -38,7 +47,6 @@ import {
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
-import AIAgentsSelector from "@docspace/ui-kit/selectors/AIAgent";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -77,11 +85,11 @@ import {
   DeleteVersionDialog,
   CancelOperationDialog,
   ReducedRightsDialog,
-  SocialAuthWelcomeDialog,
   EditRoomGroupsDialog,
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
 } from "../dialogs";
+import { AIAgentsDialog } from "../dialogs/AIAgentsDialog";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
@@ -98,6 +106,7 @@ import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
+import ExternalSyncDbPanel from "../panels/ExternalSyncDbPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
@@ -106,6 +115,7 @@ import ShareSelector from "../ShareSelector";
 import TemplateGallery from "../TemplateGallery";
 import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 import PluginSelector from "../PluginSelector";
+import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
 
 const Panels = (props) => {
   const {
@@ -184,7 +194,6 @@ const Panels = (props) => {
     reducedRightsVisible,
     removeUserConfirmation,
     assignRolesDialogVisible,
-    socialAuthWelcomeDialogVisible,
     extsFilesVectorized,
     aiAgentSelectorDialogProps,
     setAiAgentSelectorDialogProps,
@@ -199,6 +208,7 @@ const Panels = (props) => {
     arrRoomGroups,
     addRoomToGroupDialogVisible,
     pauseSubmissionsDialogVisible,
+    askAIConnectDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -372,7 +382,7 @@ const Panels = (props) => {
       />
     ),
     aiAgentSelectorDialogProps.visible && (
-      <AIAgentsSelector
+      <AIAgentsDialog
         key="ai-agents-selector"
         onClose={() => setAiAgentSelectorDialogProps(false, null)}
         withPadding
@@ -450,6 +460,7 @@ const Panels = (props) => {
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
     <FillingStatusPanel key="filling-status-panel" />,
+    <ExternalSyncDbPanel key="external-sync-db-panel" />,
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
@@ -486,9 +497,6 @@ const Panels = (props) => {
       <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
     ),
     assignRolesDialogVisible && <AssignRoles key="assign-roles-dialog" />,
-    socialAuthWelcomeDialogVisible && (
-      <SocialAuthWelcomeDialog key="joining-space-dialog" />
-    ),
     <ShareSelector key="share-selector" />,
     templateGalleryVisible && <TemplateGallery key="template-gallery" />,
     isVisibleInfoPanelTemplateGallery && (
@@ -510,6 +518,9 @@ const Panels = (props) => {
     ),
     pauseSubmissionsDialogVisible && (
       <PauseSubmissionsDialog key="pause-submissions-dialog" />
+    ),
+    askAIConnectDialogVisible && (
+      <AskAIConnectDialog key="ask-ai-connect-dialog" />
     ),
   ];
 };
@@ -596,7 +607,6 @@ export default inject(
       reducedRightsData,
       removeUserConfirmation,
       assignRolesDialogData,
-      socialAuthWelcomeDialogVisible,
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
@@ -606,6 +616,7 @@ export default inject(
       setEditRoomGroupsDialogVisible,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
+      askAIConnectDialogVisible,
     } = dialogsStore;
 
     const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
@@ -732,7 +743,6 @@ export default inject(
       reducedRightsVisible: reducedRightsData.visible,
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
-      socialAuthWelcomeDialogVisible,
       extsFilesVectorized,
 
       aiAgentSelectorDialogProps,
@@ -748,6 +758,7 @@ export default inject(
       arrRoomGroups,
       addRoomToGroupDialogVisible,
       pauseSubmissionsDialogVisible,
+      askAIConnectDialogVisible,
     };
   },
 )(observer(Panels));

@@ -1,0 +1,29 @@
+{
+  "key_path": "AIFeatureFormInsights",
+  "content": "Find insights in form data",
+  "content_en_sha1_hash": "6adb620c2fa5f4d4a39c2250a17893d76750e547",
+  "created_at": "2026-06-25T11:54:44.008Z",
+  "updated_at": "2026-06-25T12:32:02.712Z",
+  "comment": {
+    "text": "Label for an AI feature item in a list, describing the capability to analyze form data for insights.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:32:02.712Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog.tsx",
+      "line_number": 118,
+      "context": "{ label: t(\"AIFeatureWriteRewriteTranslate\"), icon: <WriteTagIcon /> },\n { label: t(\"AIFeatureSummarizeDocuments\"), icon: <SummarizeTagIcon /> },\n { label: getConstName(\"OCR\"), icon: <OcrTagIcon /> },\n { label: t(\"AIFeaturePDFForms\"), icon: <PdfFormTagIcon /> },\n { label: t(\"AIFeatureCheckGrammar\"), icon: <GrammarTagIcon /> },\n { label: t(\"AIFeatureFormInsights\"), icon: <InsightsTagIcon /> },\n { label: t(\"AIFeatureWebSearch\"), icon: <WebSearchTagIcon /> },\n ];\n \n return (\n <ModalDialog",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

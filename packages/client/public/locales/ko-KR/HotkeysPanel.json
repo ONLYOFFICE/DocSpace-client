@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "파일 업로드",
   "HotkeysUploadingObjects": "항목 업로드",
   "HotkeysZoomIn": "확대",
-  "HotkeysZoomOut": "축소"
+  "HotkeysZoomOut": "축소",
+  "OpenContextMenu": "컨텍스트 메뉴 열기"
 }

@@ -3,17 +3,18 @@
   "content": "Embedding {{productName}} or its part using JavaScript. Copy the JavaScript code below.",
   "content_en_sha1_hash": "58a5dc751eef7422d7b3bd3ebf9706afd35bb2ee",
   "created_at": "2025-05-19T21:30:54.544Z",
-  "updated_at": "2025-08-04T07:30:01.402Z",
+  "updated_at": "2026-05-15T14:00:06.809Z",
   "comment": {
-    "text": "This translation key is used for describing JavaScript code related to embedding a product using JavaScript. It appears on a page providing code to insert into the UI, and its purpose is to guide users on how to use it correctly.",
+    "text": "This is a descriptive text appearing below a section header, explaining how to embed the product or its parts using JavaScript. It includes a `productName` variable for the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:34.054Z"
+    "updated_at": "2026-04-11T21:15:25.482Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 60,
-      "context": "<CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">\n {`JavaScript ${t(\"CodeTitle\")}`}\n </CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"JavaScriptCodeDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <CodeBlock config={config} scriptUrl={scriptUrl} theme={theme} />\n </CodeWrapper>",
+      "line_number": 70,
+      "context": "<CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">\n {`JavaScript ${t(\"CodeTitle\")}`}\n </CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"JavaScriptCodeDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <CodeBlock config={config} scriptUrl={scriptUrl} theme={theme} />\n </CodeWrapper>",
       "module": "/packages/client"
     }
   ],
@@ -33,18 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'yerləşdirilməsi' is a slightly awkward translation of 'embedding'. A more natural phrasing would be 'JavaScript vasitəsilə {{productName}}-i və ya onun bir hissəsini inteqrasiya etmək' or 'JavaScript vasitəsilə {{productName}}-i və ya onun bir hissəsini daxil etmək'.",
-          "suggestion": "JavaScript vasitəsilə {{productName}}-i və ya onun bir hissəsini inteqrasiya etmək."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'Aşağıdakı' is slightly formal. A more conversational tone might be preferable.",
-          "suggestion": "Qeyd etdiyimiz JavaScript kodunu kopyalayın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -80,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'JavaScriptiä' is not the correct Finnish form. It should be 'JavaScriptia'.",
-          "suggestion": "JavaScriptia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -98,18 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase \"JavaScript-ի միջոցով\" is grammatically awkward. While technically correct, it's less natural in Armenian. A more fluent phrasing would be preferred.",
-          "suggestion": "JavaScript-ի օգտագործման միջոցով"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon after \"JavaScript-ի միջոցով\" feels slightly disjointed. It might be better to rephrase to avoid it.",
-          "suggestion": "JavaScript-ի օգտագործման միջոցով։ Պատճենեք JavaScript կոդը ստորև:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -133,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase \"ຖ່າຍບົດລະຫັດ JavaScript ດ້ານລຸ່ມນີ້\" sounds a bit awkward. 'ຖ່າຍ' implies copying like a photo. A better phrasing would suggest to 'copy' or 'use' the code.",
-          "suggestion": "ໃຊ້ບົດລະຫັດ JavaScript ດ້ານລຸ່ມນີ້"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -175,36 +142,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"spațiului\" (of the space) seems awkward and doesn't quite capture the meaning of \"Embedding.\" A more natural translation would focus on the action of embedding rather than the space itself.",
-          "suggestion": "Integrarea {{productName}} sau a unei părți din acesta cu ajutorul JavaScript."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'කොටසක්' (kotasak) is technically correct but sounds somewhat awkward in this context. A more natural phrasing might be 'කොටසැක' (kotasak) or 'අංගයක්' (angayak).",
-          "suggestion": "Consider using 'කොටසැක' or 'අංගයක්' instead of 'කොටසක්'."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the phrasing 'පහත ජාවාස්ක්‍රිප්ට් කෝඩ්ප්‍රමාණය පිටපත් කරන්න' is a bit long.  It could be more concise.",
-          "suggestion": "Consider rewording to 'පහත ජාවාස්ක්‍රිප්ට් කේත පිටපත් කරන්න.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -222,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'помоц́у' is spelled incorrectly. It should be 'помоћу'.",
-          "suggestion": "помоћу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The use of \"pomoću\" is grammatically correct, but \"uz pomoć\" might be slightly more common and flow better in this context.",
-          "suggestion": "Ugrađivanje {{productName}}-a ili njegovog dela uz pomoć JavaScript. Kopirajte JavaScript kod ispod."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -252,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'представлений' (presented) doesn't quite convey the meaning of 'below' in this context. It sounds more formal than intended.",
-          "suggestion": "Вбудовування простору {{productName}} або його частини за допомогою JavaScript. Скопіюйте код JavaScript, наведений нижче."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

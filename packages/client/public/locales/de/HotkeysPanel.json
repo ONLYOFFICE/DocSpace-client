@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Datei hochladen",
   "HotkeysUploadingObjects": "Hochladen von Elementen",
   "HotkeysZoomIn": "Vergrößern",
-  "HotkeysZoomOut": "Verkleinern"
+  "HotkeysZoomOut": "Verkleinern",
+  "OpenContextMenu": "Kontextmenü öffnen"
 }

@@ -8,6 +8,8 @@
   "NeedSettings": "Potrebujete zadať nastavenia",
   "NoPlugins": "Nie sú pridané žiadne pluginy",
   "NotNeedSettings": "Nemusíte zadávať nastavenia",
+  "PluginCacheWarningDescription": "Pluginy sú ukladané do cache na základe ich verzie. Aby ste zabezpečili aplikáciu vašich zmien, pred nahrávaním prosím zvýšte číslo verzie v súbore <1>package.json</1>. Systém neaktualizuje plugin, ak zostane číslo verzie rovnaké.",
+  "PluginDeletedSuccessfully": "Doplnok bol úspešne odstránený",
   "PluginIsNotCompatible": "Verzia plugin SDK nezodpovedá verzii {{productName}}. Prosím, aktualizujte na kompatibilnú verziu.",
   "PluginLoadedSuccessfully": "Plugin bol úspešne načítaný.",
   "PluginSamples": "Ukážky pluginov",

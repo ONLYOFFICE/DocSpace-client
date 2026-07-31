@@ -20,6 +20,8 @@
   "GetCode": "Obtenir le code",
   "GetSuitableApp": "Obtenir une application appropriée",
   "GetSuitableAppDescription": "Utilisez une application compatible telle que Google Authenticator pour <1>Android</1> et <4>iOS</4> ou Authenticator pour <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "L'inscription via le lien n'est plus disponible, le nombre maximum de participants ayant été atteint.",
+  "InviteQuotaErrorCustomizedBody": "Vous serez redirigé vers la page de <1>Connexion</1> dans 10 secondes.",
   "LoginRegistryButton": "S'inscrire",
   "Newsletter": "Je souhaite m'abonner à la newsletter de {{organizationName}}",
   "PassworResetTitle": "Maintenant, vous pouvez créer un nouveau mot de passe.",
@@ -36,6 +38,7 @@
   "TermsAndConditions": "En continuant, vous comprenez et acceptez nos <1>Termes et conditions</1> et notre <2>Déclaration de confidentialité</2>.",
   "TfaSubTitle": "Suivez les étapes simples pour continuer à travailler dans ce {{productName}} :",
   "TfaTitle": "Authentification à deux facteurs activée pour un accès sécurisé",
+  "UserAlreadyInvited": "Vous avez déjà été invité. Veuillez compléter votre inscription en utilisant le lien figurant dans l'e-mail.",
   "VerifyConnection": "Vérifier la connexion",
   "VerifyConnectionDescription": "Saisissez le code à 6 chiffres généré par votre application d'authentification dans le champ ci-dessous pour terminer la configuration."
 }

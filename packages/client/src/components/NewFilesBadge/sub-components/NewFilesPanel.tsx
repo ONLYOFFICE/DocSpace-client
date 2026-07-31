@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -34,8 +43,8 @@ import type { TNewFiles } from "@docspace/shared/api/rooms/types";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
-	ModalDialog,
-	ModalDialogType,
+  ModalDialog,
+  ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
@@ -45,8 +54,8 @@ import { ButtonKeys } from "@docspace/shared/enums";
 
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import type {
-	NewFilesPanelInjectStore,
-	NewFilesPanelProps,
+  NewFilesPanelInjectStore,
+  NewFilesPanelProps,
 } from "../NewFilesBadge.types";
 
 import { NewFilesPanelLoader } from "./NewFilesPanelLoader";
@@ -57,207 +66,210 @@ import styles from "../new-files-panel.module.scss";
 const MIN_LOADER_TIMER = 500;
 
 export const NewFilesPanelComponent = ({
-	position,
-	folderId,
-	onClose,
+  position,
+  folderId,
+  onClose,
 
-	isRoom,
+  isRoom,
 
-	culture,
-	markAsRead,
+  culture,
+  markAsRead,
 }: NewFilesPanelProps) => {
-	const { t } = useTranslation(["Files"]);
-	const [isLoading, setIsLoading] = React.useState(true);
-	const [isMarkAsReadRunning, setIsMarkAsReadRunning] = React.useState(false);
-	const [data, setData] = React.useState<TNewFiles[]>([]);
+  const { t } = useTranslation(["Files"]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isMarkAsReadRunning, setIsMarkAsReadRunning] = React.useState(false);
+  const [data, setData] = React.useState<TNewFiles[]>([]);
 
-	const requestRunning = React.useRef<boolean>(false);
-	const dataFetched = React.useRef<boolean>(false);
-	const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
+  const requestRunning = React.useRef<boolean>(false);
+  const dataFetched = React.useRef<boolean>(false);
+  const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
 
-	const isRooms = folderId === "rooms";
-	const isAgents = folderId === "agents";
+  const isRooms = folderId === "rooms";
+  const isAgents = folderId === "agents";
 
-	const markAsReadAction = React.useCallback(async () => {
-		if (isMarkAsReadRunning) return;
+  const markAsReadAction = React.useCallback(async () => {
+    if (isMarkAsReadRunning) return;
 
-		setIsMarkAsReadRunning(true);
+    setIsMarkAsReadRunning(true);
 
-		const folderIDs: (string | number)[] = [];
+    const folderIDs: (string | number)[] = [];
 
-		if (isRooms || isAgents) {
-			data.forEach(({ items }) => {
-				items.forEach((item) => {
-					if ("room" in item) folderIDs.push(item.room.id);
-					if ("agent" in item) folderIDs.push(item.agent.id);
-				});
-			});
-		} else {
-			folderIDs.push(folderId);
-		}
+    if (isRooms || isAgents) {
+      data.forEach(({ items }) => {
+        items.forEach((item) => {
+          if ("room" in item) folderIDs.push(item.room.id);
+          if ("agent" in item) folderIDs.push(item.agent.id);
+        });
+      });
+    } else {
+      folderIDs.push(folderId);
+    }
 
-		await markAsRead?.(folderIDs, []);
-		setIsMarkAsReadRunning(false);
+    await markAsRead?.(folderIDs, []);
+    setIsMarkAsReadRunning(false);
 
-		onClose();
-	}, [
-		folderId,
-		isMarkAsReadRunning,
-		isRooms,
-		isAgents,
-		data,
-		markAsRead,
-		onClose,
-	]);
+    onClose();
+  }, [
+    folderId,
+    isMarkAsReadRunning,
+    isRooms,
+    isAgents,
+    data,
+    markAsRead,
+    onClose,
+  ]);
 
-	React.useEffect(() => {
-		return () => {
-			if (timerRef.current) clearTimeout(timerRef.current);
-		};
-	}, []);
+  React.useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
-	React.useEffect(() => {
-		if (!folderId || dataFetched.current || requestRunning.current) return;
+  React.useEffect(() => {
+    if (!folderId || dataFetched.current || requestRunning.current) return;
 
-		const getData = async () => {
-			try {
-				setIsLoading(true);
-				const startLoaderTime = new Date();
+    const getData = async () => {
+      try {
+        setIsLoading(true);
+        const startLoaderTime = new Date();
 
-				const newFiles = isRooms
-					? await api.files.getNewFiles(folderId)
-					: isAgents
-						? await api.files.getNewFilesAgents()
-						: await api.files.getNewFolderFiles(folderId);
+        const newFiles = isRooms
+          ? await api.files.getNewFiles(folderId)
+          : isAgents
+            ? await api.files.getNewFilesAgents()
+            : await api.files.getNewFolderFiles(folderId);
 
-				dataFetched.current = true;
-				requestRunning.current = false;
+        dataFetched.current = true;
+        requestRunning.current = false;
 
-				setData(newFiles);
-				const currentDate = new Date();
+        setData(newFiles);
+        const currentDate = new Date();
 
-				const ms = currentDate.getTime() - startLoaderTime.getTime();
-				if (ms < MIN_LOADER_TIMER) {
-					timerRef.current = setTimeout(() => {
-						setIsLoading(false);
+        const ms = currentDate.getTime() - startLoaderTime.getTime();
+        if (ms < MIN_LOADER_TIMER) {
+          timerRef.current = setTimeout(() => {
+            setIsLoading(false);
 
-						return;
-					}, MIN_LOADER_TIMER - ms);
-				}
+            return;
+          }, MIN_LOADER_TIMER - ms);
+        }
 
-				setIsLoading(false);
-			} catch (e) {
-				requestRunning.current = false;
-				onClose();
-				setIsLoading(false);
-				toastr.error(e as string);
-			}
-		};
+        setIsLoading(false);
+      } catch (e) {
+        requestRunning.current = false;
+        onClose();
+        setIsLoading(false);
+        toastr.error(e as string);
+      }
+    };
 
-		requestRunning.current = true;
+    requestRunning.current = true;
 
-		getData();
-	}, [folderId, isRooms, onClose, setIsLoading]);
+    getData();
+  }, [folderId, isRooms, onClose, setIsLoading]);
 
-	React.useEffect(() => {
-		const onKeyUp = (e: KeyboardEvent) => {
-			if (e.key === ButtonKeys.esc) {
-				return onClose();
-			}
+  React.useEffect(() => {
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (e.key === ButtonKeys.esc) {
+        return onClose();
+      }
 
-			if (e.key === ButtonKeys.enter) {
-				return markAsReadAction();
-			}
-		};
+      if (e.key === ButtonKeys.enter) {
+        return markAsReadAction();
+      }
+    };
 
-		window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("keyup", onKeyUp);
 
-		return () => {
-			window.removeEventListener("keyup", onKeyUp);
-		};
-	}, [markAsReadAction, onClose]);
+    return () => {
+      window.removeEventListener("keyup", onKeyUp);
+    };
+  }, [markAsReadAction, onClose]);
 
-	const isMobileDevice = !isDesktop();
+  const isMobileDevice = !isDesktop();
 
-	const markAsReadButton = (
-		<Button
-			className="mark-as-read-button"
-			scale
-			label={t("MarkRead")}
-			size={isMobileDevice ? ButtonSize.normal : ButtonSize.small}
-			onClick={markAsReadAction}
-			isLoading={isMarkAsReadRunning}
-		/>
-	);
+  const markAsReadButton = (
+    <Button
+      className="mark-as-read-button"
+      scale
+      label={t("MarkRead")}
+      size={isMobileDevice ? ButtonSize.normal : ButtonSize.small}
+      onClick={markAsReadAction}
+      isLoading={isMarkAsReadRunning}
+      testId="mark_as_read_button"
+    />
+  );
 
-	const content = isLoading ? (
-		<NewFilesPanelLoader isRooms={isRooms || isAgents} />
-	) : (
-		data.map(({ date, items }, index) => {
-			return (
-				<NewFilesPanelItem
-					key={date}
-					date={date}
-					items={items}
-					isRooms={isRooms}
-					isAgents={isAgents}
-					isFirst={index === 0}
-					culture={culture}
-					onClose={onClose}
-				/>
-			);
-		})
-	);
+  const content = isLoading ? (
+    <NewFilesPanelLoader isRooms={isRooms || isAgents} />
+  ) : (
+    data.map(({ date, items }, index) => {
+      return (
+        <NewFilesPanelItem
+          key={date}
+          date={date}
+          items={items}
+          isRooms={isRooms}
+          isAgents={isAgents}
+          isFirst={index === 0}
+          culture={culture}
+          onClose={onClose}
+        />
+      );
+    })
+  );
 
-	const panelStyle = {
-		height: `${position.maxHeight}px`,
-		maxHeight: `${position.maxHeight}px`,
-		top: `${position.top}px`,
-		left: `${position.left}px`,
-	};
+  const panelStyle = {
+    height: `${position.maxHeight}px`,
+    maxHeight: `${position.maxHeight}px`,
+    top: `${position.top}px`,
+    left: `${position.left}px`,
+  };
 
-	const panel = (
-		<>
-			<div
-				className={classNames(styles.panel, "new-files-panel")}
-				style={panelStyle}
-			>
-				<Scrollbar autoFocus>{content}</Scrollbar>
-				{markAsReadButton}
-			</div>
-			{!isMobile() ? (
-				<Backdrop visible withoutBackground  onClick={onClose} />
-			) : null}
-		</>
-	);
+  const panel = (
+    <>
+      <div
+        className={classNames(styles.panel, "new-files-panel")}
+        style={panelStyle}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Scrollbar autoFocus>{content}</Scrollbar>
+        {markAsReadButton}
+      </div>
+      {!isMobile() ? (
+        <Backdrop visible withoutBackground onClick={onClose} />
+      ) : null}
+    </>
+  );
 
-	const mobilePanel = (
-		<ModalDialog
-			visible
-			isCloseable
-			onClose={onClose}
-			displayType={ModalDialogType.aside}
-			withFooterBorder
-			withBodyScroll
-		>
-			<ModalDialog.Header>
-				{isRooms ? t("NewInRooms") : isRoom ? t("NewInRoom") : t("NewInFolder")}
-			</ModalDialog.Header>
-			<ModalDialog.Body>{content}</ModalDialog.Body>
-			<ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>
-		</ModalDialog>
-	);
+  const mobilePanel = (
+    <ModalDialog
+      visible
+      isCloseable
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      withFooterBorder
+      withBodyScroll
+    >
+      <ModalDialog.Header>
+        {isRooms ? t("NewInRooms") : isRoom ? t("NewInRoom") : t("NewInFolder")}
+      </ModalDialog.Header>
+      <ModalDialog.Body>{content}</ModalDialog.Body>
+      <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>
+    </ModalDialog>
+  );
 
-	const portal = <Portal element={panel} />;
+  const portal = <Portal element={panel} />;
 
-	return isMobile() ? mobilePanel : portal;
+  return isMobile() ? mobilePanel : portal;
 };
 
 export const NewFilesPanel = inject(
-	({ settingsStore, filesActionsStore }: NewFilesPanelInjectStore) => {
-		const { culture } = settingsStore;
-		const { markAsRead } = filesActionsStore;
+  ({ settingsStore, filesActionsStore }: NewFilesPanelInjectStore) => {
+    const { culture } = settingsStore;
+    const { markAsRead } = filesActionsStore;
 
-		return { culture, markAsRead };
-	},
+    return { culture, markAsRead };
+  },
 )(observer(NewFilesPanelComponent));
+

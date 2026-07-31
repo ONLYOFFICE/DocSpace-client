@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
@@ -31,6 +40,7 @@ import cloneDeep from "lodash/cloneDeep";
 import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import type {
@@ -39,7 +49,7 @@ import type {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
+
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
@@ -48,7 +58,6 @@ import SocketHelper, {
   TChangeWebPluginData,
   SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
-import { IModalDialog } from "@onlyoffice/docspace-plugin-sdk";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -74,6 +83,7 @@ import type {
   TPlugin,
   IPostMessageCallbackMessage,
   IMediaViewerClient,
+  IModalDialog,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -111,6 +121,8 @@ class PluginStore {
   private selectedFolderStore: SelectedFolderStore = {} as SelectedFolderStore;
 
   private userStore: UserStore = {} as UserStore;
+
+  private currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
   plugins: TPlugin[] = [];
 
@@ -165,10 +177,12 @@ class PluginStore {
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
     userStore: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
   ) {
     this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
 
     makeAutoObservable(this);
 
@@ -305,6 +319,10 @@ class PluginStore {
     this.pluginMediaViewerProps = value;
   };
 
+  get isNotPaidPeriod() {
+    return this.currentTariffStatusStore?.isNotPaidPeriod;
+  }
+
   get pluginFloatingOperationsArray(): IFloatingOperationsButtonClient[] {
     return Array.from(this.pluginFloatingOperationsButtons.values());
   }
@@ -373,6 +391,8 @@ class PluginStore {
   };
 
   initPlugins = async () => {
+    if (this.isNotPaidPeriod) return;
+
     const frame = document.createElement("iframe");
     frame.id = "plugin-iframe";
     frame.width = "0px";
@@ -390,6 +410,8 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
+    if (this.isNotPaidPeriod) return;
+
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
@@ -679,8 +701,6 @@ class PluginStore {
       if (typeof status !== "boolean")
         currentStatus = oldPlugin?.enabled || false;
 
-      currentSettings = currentStatus ? settings : "";
-
       const plugin = await api.plugins.updatePlugin(
         name,
         currentStatus,
@@ -722,7 +742,6 @@ class PluginStore {
     if (!plugin) return;
 
     plugin.enabled = false;
-    plugin.settings = "";
 
     this.uninstallPluginCss(plugin);
 
@@ -786,7 +805,8 @@ class PluginStore {
     ctx: IContextMenuItemValidation,
   ) => {
     const keys: string[] = [];
-    const { type, fileExst, userRole, device, security, itemSecurity } = ctx;
+    const { type, fileExst, userRole, device, security, itemSecurity, itemId } =
+      ctx;
 
     if (type && item.fileType && !item.fileType.includes(type)) return;
 
@@ -813,6 +833,9 @@ class PluginStore {
     )
       return;
 
+    if (itemId !== undefined && item.itemId && !item.itemId.includes(itemId))
+      return;
+
     if (item.items && item.items.length > 0) {
       item.items.forEach((subItem) => {
         const validContextMenuItemKeys = this.getValidContextMenuItemKeys(
@@ -832,9 +855,18 @@ class PluginStore {
 
   getContextMenuKeysByType = (
     type: PluginFileType,
-    fileExst?: string,
-    security?: TRoomSecurity | TFolderSecurity,
-    itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity,
+    fileExst?: string | null,
+    security?:
+      | TRoomSecurity
+      | TFolderSecurity
+      | Partial<TRoomSecurity & TFolderSecurity>
+      | null,
+    itemSecurity?:
+      | TFileSecurity
+      | TRoomSecurity
+      | TFolderSecurity
+      | Partial<TFileSecurity & TRoomSecurity & TFolderSecurity>,
+    itemId?: number | string,
   ) => {
     if (this.contextMenuItems.size === 0) return;
 
@@ -854,6 +886,7 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -868,6 +901,7 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -881,6 +915,7 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -895,6 +930,7 @@ class PluginStore {
             fileExst,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -909,6 +945,7 @@ class PluginStore {
             security,
             fileExst,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -1528,4 +1565,3 @@ class PluginStore {
 }
 
 export default PluginStore;
-

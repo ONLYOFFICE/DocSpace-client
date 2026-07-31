@@ -3,7 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Sorğunuza uyğun nəticə tapılmadı",
   "ErrorViewDescription": "Zəhmət olmasa, bir az sonra yenə cəhd edin",
   "ErrorViewDescriptionNetworkError": "Görünür ki, internet bağlantısı yoxdur",
+  "ErrorViewHeader": "Qalereya müvəqqəti olaraq əlçatmazdır",
+  "GalleryTitle": "{{organizationName}} Şablon Qalereyası",
+  "SelectTemplate": "Şablon Seçin",
+  "SubmitToGalleryDialogMainInfo": "Şablonunuzu digərlərinin işlərində istifadə etməsi üçün ictimai qalereyaya təqdim edin. Şablon nəzarət prosesindən keçdikdən sonra, töhfənizə görə sizə bildiriş veriləcək və mükafatlandırılacaqsınız.",
   "SuggestChanges": "Dəyişikliklər təklif edin",
   "TemplateInfo": "Şablon məlumatı",
+  "UploadGallery": "Qalereyə yükləyin",
   "ViewAllTemplates": "Bütün şablonlara baxın"
 }

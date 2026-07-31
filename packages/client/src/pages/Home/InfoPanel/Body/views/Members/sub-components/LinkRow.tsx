@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useState } from "react";
 import copy from "copy-to-clipboard";
@@ -40,7 +49,7 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
@@ -61,20 +70,19 @@ const LinkRow = (props: LinkRowProps) => {
     setDeleteLinkDialogVisible,
     setEmbeddingPanelData,
     isArchiveFolder,
+
     setIsScrollLocked,
     setExternalLink,
     deleteExternalLink,
     item,
+    isExternalShareRestricted,
+    isLinkBlockedByAdmin,
+    isLinkRestrictedByAdmin,
   } = props;
 
   const availableShareRights = item.availableShareRights;
 
-  const { t } = useTranslation([
-    "SharingPanel",
-    "Files",
-    "Settings",
-    "Translations",
-  ]);
+  const { t } = useTranslation(["Files", "Settings", "Translations"]);
 
   const { password, isExpired } = link.sharedTo;
 
@@ -122,6 +130,11 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
+    if (isLinkBlockedByAdmin!(item, link)) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+      onCloseContextMenu();
+      return;
+    }
     copyShareLink(item, link, t as TFunction);
     onCloseContextMenu();
   };
@@ -131,6 +144,30 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const getData = () => {
+    const isRestrictedByAdmin = isLinkRestrictedByAdmin!(item, link);
+
+    if (isRestrictedByAdmin) {
+      return [
+        {
+          key: "copy-link-settings-key",
+          label: t("Common:CopyLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: onCopyExternalLink,
+          disabled: isDisabled,
+        },
+        {
+          key: "delete-link-separator",
+          isSeparator: true,
+        },
+        {
+          key: "delete-link-key",
+          label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+          icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          onClick: onDeleteLink,
+        },
+      ];
+    }
+
     return [
       {
         key: "edit-link-key",
@@ -174,7 +211,8 @@ const LinkRow = (props: LinkRowProps) => {
 
   const editExternalLinkAction = async (newLink: TFileLink) => {
     if (link.sharedTo.isExpired) {
-      newLink.sharedTo.expirationDate = addToDate(now(), 7, "days")?.toISO() ?? null;
+      newLink.sharedTo.expirationDate =
+        addToDate(now(), 7, "days")?.toISO() ?? null;
     }
 
     setLoadingLinks([newLink.sharedTo.id]);
@@ -264,6 +302,10 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyLink = (linkArg: TFileLink) => {
+    if (isLinkBlockedByAdmin!(item, linkArg)) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+      return;
+    }
     copyShareLink(item, linkArg, t);
   };
 
@@ -275,6 +317,7 @@ const LinkRow = (props: LinkRowProps) => {
       onCopyLink={onCopyLink}
       loadingLinks={loadingLinks}
       isArchiveFolder={isArchiveFolder!}
+      isExternalShareRestricted={isExternalShareRestricted}
       changeShareOption={changeShareOption}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
@@ -286,8 +329,17 @@ const LinkRow = (props: LinkRowProps) => {
   );
 };
 
-export default inject<TStore>(
-  ({ dialogsStore, treeFoldersStore, infoPanelStore, publicRoomStore }) => {
+export default inject<TStore, Pick<LinkRowProps, "item">>(
+  (
+    {
+      dialogsStore,
+      treeFoldersStore,
+      infoPanelStore,
+      publicRoomStore,
+      filesSettingsStore,
+    },
+    { item },
+  ) => {
     const { setIsScrollLocked } = infoPanelStore;
 
     const {
@@ -300,8 +352,24 @@ export default inject<TStore>(
 
     const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
+    const {
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToDocuments,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
+
+    const isExternalShareRestricted =
+      isShareRestricted &&
+      (item.rootFolderType === FolderType.Rooms
+        ? externalShareApplyToRooms
+        : externalShareApplyToDocuments);
+
     return {
       isArchiveFolder: isArchiveFolderRoot,
+
+      isExternalShareRestricted,
+      isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
+      isLinkRestrictedByAdmin: filesSettingsStore.isLinkRestrictedByAdmin,
 
       setLinkParams,
       setEditLinkPanelIsVisible,

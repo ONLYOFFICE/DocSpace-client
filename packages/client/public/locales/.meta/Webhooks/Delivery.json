@@ -3,16 +3,17 @@
   "content": "Delivery",
   "content_en_sha1_hash": "9631af52c66f1a5cd964380b009c74efdee01947",
   "created_at": "2025-05-19T21:30:49.687Z",
-  "updated_at": "2025-05-24T02:30:37.678Z",
+  "updated_at": "2026-05-15T14:00:06.832Z",
   "comment": {
-    "text": "This translation key is used for displaying the title of a column in a table related to webhooks, specifically indicating \"Delivery\". It is likely used on a history table page where users view past webhook events.",
+    "text": "Table column header. It indicates the status of a webhook delivery attempt.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:07.939Z"
+    "updated_at": "2026-04-11T21:29:17.811Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableHeader.js",
-      "line_number": 105,
+      "line_number": 114,
       "context": "enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n {\n key: \"Delivery\",\n title: t(\"Delivery\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },",
       "module": "/packages/client"
     }
@@ -99,13 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"전송\" (jeonsong) can mean 'delivery', in the context of webhooks, a more accurate and commonly used translation would be '전달' (jeondal) or '전송' (jeonsong) depending on the specific nuance desired.  '전달' implies conveying something, while '전송' refers to sending data.  '전송' is acceptable but '전달' might be more precise.",
-          "suggestion": "Consider '전달' (jeondal) or keeping '전송' (jeonsong) depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -154,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -201,25 +196,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Đã gửi' translates to 'Sent' or 'Dispatched,' which isn't a direct equivalent of 'Delivery'. 'Delivery' implies the process of delivering something, whereas 'Đã gửi' implies the action of sending something.  A more accurate translation might be 'Giao hàng' or 'Phân phối'.",
-          "suggestion": "Giao hàng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"传递\" (chuan di) can mean delivery, it's a very general term. In the context of webhooks, a more accurate and commonly used translation would be \"交付\" (jiaofu) or \"推送\" (tuisong), which better convey the technical meaning of 'delivery' as in data delivery.",
-          "suggestion": "Consider using \"交付\" (jiaofu) or \"推送\" (tuisong) instead of \"传递\" (chuan di)."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

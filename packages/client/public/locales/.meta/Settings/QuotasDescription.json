@@ -3,16 +3,17 @@
   "content": "Here, you can set storage quota for users and rooms.",
   "content_en_sha1_hash": "efbbb4d56fa28e8b96099485a18c6bc5e107536e",
   "created_at": "2025-05-19T21:30:52.363Z",
-  "updated_at": "2025-11-06T18:29:15.951Z",
+  "updated_at": "2026-05-15T14:00:06.871Z",
   "comment": {
-    "text": "This translation key is used to display a descriptive message about setting storage quotas for users and rooms. It appears in a UI element that manages storage settings, likely in a portal or admin panel.",
+    "text": "This is a descriptive sentence appearing below the \"Quotas\" heading in the Storage Management settings. It explains that this section allows setting storage limits for users and rooms.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:40.606Z"
+    "updated_at": "2026-04-11T21:22:43.740Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
-      "line_number": 83,
+      "line_number": 92,
       "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"quotas_description\">\n {t(\"Settings:QuotasDescription\")}{\" \"}\n {storageManagementUrl ? (\n <Link\n tag=\"a\"\n isHovered={false}\n target=\"_blank\"",
       "module": "/packages/client"
     }
@@ -33,18 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The word 'otaqlar' (rooms) is in the plural form, but it is likely that each room can have its own quota. Using the singular 'otaq' might be more appropriate depending on the intended meaning. If it refers to individual rooms, using the singular is more precise.",
-          "suggestion": "Burada istifadəçi və otaq üçün yaddaş kvotasını təyin edə bilərsiniz."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'yaddaş' is generally understood to mean 'memory'. While it translates to 'storage' in this context, a more specific term for 'storage' might improve clarity. Consider alternatives.",
-          "suggestion": "Burada istifadəçi və otaqlar üçün saxlama kvotasını təyin edə bilərsiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -68,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'αποθ. χώρου' is an abbreviation. While understandable, it's preferable to use the full word for clarity and professionalism.",
-          "suggestion": "Εδώ, μπορείτε να ορίσετε ποσόστωση αποθηκευτικού χώρου για χρήστες και δωμάτια."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -98,18 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'սենյակների' (senyakneri) is technically correct but reads slightly awkwardly. It's the genitive plural of 'սենյակ' (senyak) - room. It would flow better to use the dative plural 'սենյակներում' (senyaknerum) which means 'in rooms'.",
-          "suggestion": "Այստեղ դուք կարող եք սահմանել օգտատերերի և սենյակներում պահեստի չափաբաժին:"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'չափաբաժին' (chapabajin) translates to 'quota' but doesn't fully convey the idea of setting a *limit*. A more accurate and natural sounding translation would include the concept of a *limit*.",
-          "suggestion": "Այստեղ դուք կարող եք սահմանել օգտատերերի և սենյակներում պահեստի սահմանափակում:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -176,23 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"මෙහි ඔබට පරිශ්‍රීලකයින් සහ කාමර සඳහා ආචයන සලාකය සැකසීමට හැකිය.\" is not an accurate translation of \"Here, you can set storage quota for users and rooms.\"  \"ආචයන සලාකය\" doesn't accurately convey \"storage quota\".",
-          "suggestion": "මෙහි ඔබට පරිශ්‍රීලකයින් සහ කාමර සඳහා ගබඩා කොට්ටාව සකසීමට හැකිය."
-        },
-        {
-          "type": "spelling",
-          "description": "The word \"පරිශ්‍රීලකයින්\" might be a misspelling. The more common and accurate term for 'users' is likely 'භාවිතකරුවන්'.",
-          "suggestion": "භාවිතකරුවන්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -210,18 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'складишну' is a misspelling. It should be 'складишну коту'.",
-          "suggestion": "складишну коту"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'поставити' (to set/place) doesn't quite convey the meaning of 'set' in this context. 'подесити' or 'одредити' would be more appropriate.",
-          "suggestion": "подесити или одредити"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -251,13 +202,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, '储存空间额度' (cúnchǔ kōngjiān éndù) is a slightly formal and technical term for \"storage quota.\" A more natural and user-friendly translation might be preferable depending on the target audience and the overall tone of the application.  '存储配额' (cúnchǔ péiké) is a more common alternative.",
-          "suggestion": "您可以设置用户和房间的存储配额。"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -20,6 +20,8 @@
   "GetCode": "Získat kód",
   "GetSuitableApp": "Získejte vhodnou aplikaci",
   "GetSuitableAppDescription": "Použijte kompatibilní aplikaci, jako je Google Authenticator pro <1>Android</1> a <4>iOS</4>, nebo Authenticator pro <8>Windows Phone</8>.",
+  "InviteLinkQuotaErrorBody": "Registrace přes odkaz již není dostupná, protože byl dosažen limit.",
+  "InviteQuotaErrorCustomizedBody": "Za 10 sekund budete přesměrováni na stránku <1>Přihlášení</1>.",
   "LoginRegistryButton": "Připojit se",
   "Newsletter": "Chci se přihlásit k odběru newsletteru {{organizationName}}",
   "PassworResetTitle": "Nyní si můžete vytvořit nové heslo.",
@@ -36,6 +38,7 @@
   "TermsAndConditions": "Pokračováním vyjadřujete porozumění a souhlas s našimi <1>Podmínkami a pravidly</1> a <2>Prohlášením o ochraně osobních údajů</2>.",
   "TfaSubTitle": "Postupujte podle jednoduchých kroků pro pokračování práce v tomto {{productName}}:",
   "TfaTitle": "Dvoufaktorové ověřování povoleno pro zabezpečený přístup",
+  "UserAlreadyInvited": "Již jste byli pozváni. Prosím, dokončete registraci pomocí odkazu z e-mailu.",
   "VerifyConnection": "Ověřte připojení",
   "VerifyConnectionDescription": "Zadejte do pole níže 6místný kód vygenerovaný vaší autentifikační aplikací pro dokončení nastavení."
 }

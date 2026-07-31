@@ -1,7 +1,7 @@
 {
   "HotkeysActions": "Ընտրված միավորների նկատմամբ միջոցներ ձեռք առնել",
   "HotkeysActionsInPreview": "Այլ գործողություններ",
-  "HotkeysApplicationActions": "Հավելվածի գործողություններ ",
+  "HotkeysApplicationActions": "Հավելվածի գործողություններ",
   "HotkeysChangeView": "Անցում ցանցի և ցանկի տեսքի միջև",
   "HotkeysClearAll": "Մաքրել բոլոր ընտրվածքները",
   "HotkeysClose": "Փակել/հետարկել գործողությունը",
@@ -45,5 +45,6 @@
   "HotkeysUploadFile": "Վերբեռնել ֆայլը",
   "HotkeysUploadingObjects": "Միավորների վերբեռնում",
   "HotkeysZoomIn": "Մեծացնել",
-  "HotkeysZoomOut": "Փոքրացնել"
+  "HotkeysZoomOut": "Փոքրացնել",
+  "OpenContextMenu": "Բացել համատեքստի ընտրացանկը"
 }

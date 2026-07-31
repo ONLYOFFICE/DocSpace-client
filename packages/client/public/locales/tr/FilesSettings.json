@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "İptal bildirimini bir daha gösterme",
-  "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle",
-  "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın",
-  "OriginalCopy": "Dosya kopyasını da orijinal türünde kaydet",
-  "TrashMoveConfirmation": "{{sectionName}}'e öğe taşırken bildirim göster"
+  "DefaultHomepage": "Varsayılan Ana Sayfa",
+  "GroupByRooms": "Odalara göre gruplandır",
+  "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın"
 }

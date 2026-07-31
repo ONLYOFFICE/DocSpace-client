@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Những người dùng bị vô hiệu hóa đã được chọn sẽ bị xóa khỏi {{productName}}. Hành động này không thể được hoàn tác.",
   "ActionCannotBeUndoneGuests": "Khách bị vô hiệu hóa đã chọn sẽ bị xóa khỏi {{productName}}. Hành động này không thể được hoàn tác.",
+  "ActionCannotBeUndoneUsers": "Những người dùng bị vô hiệu hóa đã được chọn sẽ bị xóa khỏi {{productName}}. Hành động này không thể được hoàn tác.",
   "CannotReassignFiles": "Nếu bạn xóa nhiều người dùng cùng một lúc, bạn không thể chuyển giao tập tin của họ lại cho người dùng khác.",
   "DeleteGroupGuestsSuccessMessage": "Đã xóa khách thành công.",
   "DeleteGroupUsersSuccessMessage": "Người dùng đã được xóa thành công.",

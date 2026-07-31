@@ -1,33 +1,48 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import React, { useEffect } from "react";
-import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
+import React, { useEffect, useMemo } from "react";
+import {
+  now,
+  parseToDateTime,
+  formatDate,
+  formatDateLocalized,
+  isBefore,
+  isAfter,
+} from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
-import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -37,12 +52,30 @@ import SocketHelper, {
   SocketEvents,
   SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
+import {
+  PORTAL_BASE_THEME_ID,
+  PORTAL_DARK_THEME_ID,
+} from "@docspace/ui-kit/ai-agent/providers/themes";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
+import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+
+import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 import { updateTempContent } from "@docspace/shared/utils/common";
-import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import {
+  AnalyticsEvents,
+  DeviceType,
+  FolderType,
+  IndexedDBStores,
+  InfoPanelEvents,
+  SearchArea,
+} from "@docspace/shared/enums";
+import { setFileView } from "SRC_DIR/helpers/info-panel";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { CategoryType } from "@docspace/shared/constants";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
@@ -63,12 +96,15 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
+import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
+    isAuthenticated,
     loadBaseInfo,
 
     isDesktop,
@@ -97,9 +133,17 @@ const Shell = ({ page = "home", ...rest }) => {
     standalone,
     isGuest,
     setSocialAuthWelcomeDialogVisible,
+    getAIConfig,
+    agentEntityId,
+    isInsideAgentRoom,
+    getAgentRoomId,
+    openResultFile,
+    closeEditorPanel,
+    currentClientView,
+    selectedFolderType,
+    isPrivacyFolder,
+    isAIReady,
   } = rest;
-
-  const theme = useTheme();
 
   useCreateFileError({
     setPortalTariff,
@@ -110,7 +154,7 @@ const Shell = ({ page = "home", ...rest }) => {
   const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   useEffect(() => {
-    if (!logoText) setLogoText(t("Common:OrganizationName"));
+    if (!logoText) setLogoText(getBrandName("OrganizationName"));
   }, [logoText, setLogoText]);
 
   useEffect(() => {
@@ -145,6 +189,10 @@ const Shell = ({ page = "home", ...rest }) => {
 
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-web-plugin",
+    });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-ai-config",
     });
   }, []);
 
@@ -233,6 +281,18 @@ const Shell = ({ page = "home", ...rest }) => {
     };
   }, [userLoginEventId, userId]);
 
+  useEffect(() => {
+    const handleAiConfigChanged = () => {
+      getAIConfig?.();
+    };
+
+    SocketHelper?.on(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
+    };
+  }, [getAIConfig]);
+
   let snackTimer = null;
   let fbInterval = null;
   // let lastCampaignStr = null;
@@ -320,21 +380,26 @@ const Shell = ({ page = "home", ...rest }) => {
 
     // lastCampaignStr = campaignStr;
 
-    const targetDate = to ? formatDateLocalized(to, "DATE_MED", { locale: language }) : "";
+    const targetDate = to
+      ? formatDateLocalized(to, "DATE_MED", { locale: language })
+      : "";
 
     const barConfig = {
       parentElementId: "main-bar",
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${logoText} ${t("Common:ProductName")}`,
+        productName: `${logoText} ${getBrandName("ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
         SnackBar.close();
-        localStorage.setItem(LS_CAMPAIGN_DATE, to ? formatDate(to, DATE_FORMAT) : "");
+        localStorage.setItem(
+          LS_CAMPAIGN_DATE,
+          to ? formatDate(to, DATE_FORMAT) : "",
+        );
       },
       opacity: 1,
       onLoad: () => {
@@ -447,12 +512,17 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userTheme]);
 
   useEffect(() => {
-    if (
-      isLoaded &&
-      localStorage.getItem("showSocialAuthWelcomeDialog") === "true"
-    ) {
-      localStorage.removeItem("showSocialAuthWelcomeDialog");
+    if (isLoaded && localStorage.getItem("socialAuthWelcomeBar") === "true") {
       setSocialAuthWelcomeDialogVisible(true);
+
+      if (localStorage.getItem("portalCreatedEventSent") !== "true") {
+        localStorage.setItem("portalCreatedEventSent", "true");
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.PortalCreated,
+        });
+      }
     }
   }, [isLoaded]);
 
@@ -502,6 +572,26 @@ const Shell = ({ page = "home", ...rest }) => {
     );
   const location = useLocation();
 
+  // Single source of truth for AI chat availability: computed once here in the
+  // host and handed to AiAgentProviders, which shares it with descendants
+  // (Home page, section header) via context / `useIsAiChatAvailable()`. The
+  // chat is offered only on file/room/document views — never on contacts,
+  // profile, settings, the embedded chat view, or the Knowledge /
+  // ResultStorage system folders.
+  const isSettingsPage =
+    location.pathname.includes("settings") &&
+    !location.pathname.includes("settings/plugins");
+
+  const isAiChatAvailable =
+    currentClientView !== "users" &&
+    currentClientView !== "groups" &&
+    currentClientView !== "profile" &&
+    currentClientView !== "chat" &&
+    !isSettingsPage &&
+    !isPrivacyFolder &&
+    selectedFolderType !== FolderType.Knowledge &&
+    selectedFolderType !== FolderType.ResultStorage;
+
   const withoutNavMenu =
     isEditor ||
     pagesWithoutNavMenu ||
@@ -509,7 +599,7 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
-  return (
+  const layout = (
     <Layout>
       {toast}
       <RootTooltip />
@@ -532,6 +622,56 @@ const Shell = ({ page = "home", ...rest }) => {
       </Main>
     </Layout>
   );
+
+  const composerHeader = useMemo(() => <AIActivationBanner />, []);
+
+  // AI chat host callbacks. Web Search settings save on an explicit button
+  // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
+  const aiChatCallbacks = useMemo(
+    () => ({
+      onWebSearchSaved: () =>
+        toastr.success(t("Common:ChangesSavedSuccessfully")),
+    }),
+    [t],
+  );
+
+  // Defer mounting AiAgentProviders until authStore is loaded — otherwise
+  // `standalone` flips after the first render, the providers' useMemo
+  // rebuilds the chat stores, and StoresHydrator refires every fetch
+  // (profiles/threads/servers/web-search/knowledge/...) a second time.
+  return (
+    <SectionNavigationProvider>
+      {isLoaded ? (
+        <AiAgentProviders
+          locale={language}
+          theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
+          isStandalone={standalone}
+          isAvailable={isAiChatAvailable}
+          // Anonymous sessions (login redirect, public room, public preview)
+          // would 401 on every AI call; guests are barred from AI both
+          // server-side (endpoint checks) and by role — a guest can never
+          // hold a chat-capable room role (`UseChat` needs RoomManager /
+          // ContentCreator), so excluding the type is exact. Providers stay
+          // mounted for useStores() consumers; only hydration and the chat
+          // UI are switched off. Viewer-role gating inside agent rooms is
+          // handled by `accessRightsStore.canUseChat` in AIAgentView.
+          canUseAi={isAuthenticated && !isGuest}
+          callbacks={aiChatCallbacks}
+          entityId={agentEntityId}
+          hideProfilePicker={isInsideAgentRoom}
+          getAgentRoomId={getAgentRoomId}
+          openResultFile={openResultFile}
+          closeEditorPanel={closeEditorPanel}
+          composerHeader={standalone ? undefined : composerHeader}
+          composerDisabled={standalone ? undefined : !isAIReady}
+        >
+          {layout}
+        </AiAgentProviders>
+      ) : (
+        layout
+      )}
+    </SectionNavigationProvider>
+  );
 };
 
 const ShellWrapper = inject(
@@ -543,6 +683,10 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
+    selectedFolderStore,
+    treeFoldersStore,
+    aiRoomStore,
+    paymentStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -572,6 +716,7 @@ const ShellWrapper = inject(
       logoText,
       setLogoText,
       standalone,
+      getAIConfig,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -616,6 +761,7 @@ const ShellWrapper = inject(
       },
       language,
       isLoaded,
+      isAuthenticated: authStore.isAuthenticated,
 
       isDesktop: isDesktopClient,
       FirebaseHelper: firebaseHelper,
@@ -632,7 +778,7 @@ const ShellWrapper = inject(
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
-      isAdmin: userStore?.user?.isAdmin,
+      isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
       isGuest: userStore?.user?.isVisitor,
       registrationDate: userStore?.user?.registrationDate,
 
@@ -649,6 +795,47 @@ const ShellWrapper = inject(
       setLogoText,
       standalone,
       setSocialAuthWelcomeDialogVisible,
+      getAIConfig,
+      isAIReady: paymentStore.isAIReady,
+      currentClientView: clientLoadingStore.currentClientView,
+      selectedFolderType: selectedFolderStore.type,
+      isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
+      // Scope the chat to the current location: inside any room (including
+      // its subfolders) the room id wins, elsewhere the currently selected
+      // folder id is used. Only when nothing is selected yet does the chat
+      // stay unscoped (entityId === undefined).
+      agentEntityId:
+        selectedFolderStore.rootRoomId || selectedFolderStore.id
+          ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
+          : undefined,
+      // The composer model picker is hidden only where the model is fixed
+      // by the agent's assigned profile — inside AI agent rooms.
+      isInsideAgentRoom: selectedFolderStore.isAIRoom,
+      getAgentRoomId: () => {
+        const id = selectedFolderStore.rootRoomId;
+        return id ? Number(id) : null;
+      },
+      openResultFile: (fileId) => {
+        if (!selectedFolderStore.isAIRoom) return;
+        const roomId = selectedFolderStore.rootRoomId || selectedFolderStore.id;
+        if (!roomId) return;
+
+        aiRoomStore.setCurrentTab("result");
+        aiRoomStore.setSelectedResultFileId(Number(fileId));
+
+        const filesFilter = FilesFilter.getDefault();
+        filesFilter.folder = String(roomId);
+        filesFilter.searchArea = SearchArea.ResultStorage;
+        const path = getCategoryUrl(CategoryType.AIAgent, roomId);
+        clientLoadingStore.setIsSectionBodyLoading(true, false);
+        window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
+
+        window.dispatchEvent(new CustomEvent(InfoPanelEvents.showInfoPanel));
+        setFileView("info_ai_chat");
+      },
+      closeEditorPanel: () => {
+        aiRoomStore.setSelectedResultFileId(null);
+      },
     };
   },
 )(observer(Shell));
@@ -660,3 +847,4 @@ const Root = () => (
 );
 
 export default Root;
+

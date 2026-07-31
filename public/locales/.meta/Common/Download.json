@@ -3,83 +3,144 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2026-03-20T09:07:45.571Z",
+  "updated_at": "2026-07-28T07:30:59.887Z",
   "comment": {
-    "text": "This translation key is used for the label and icon of a \"Download\" button, typically found on a version history page or in a file listing. The label displays the content's download size when available, and the button triggers an action to download the file. It appears as a clickable element, allowing users to initiate the download process.",
+    "text": "This is a button label that allows users to download a file or a document version.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:37.216Z"
+    "updated_at": "2026-04-11T20:54:45.797Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 127,
+      "line_number": 139,
       "context": "disabled: false,\n icon: EyeIcon,\n },\n {\n key: \"download\",\n label: t(\"Common:Download\"),\n onClick: () => openUrl?.(item.viewUrl, UrlActionType.Download),\n disabled: false,\n icon: DownloadIcon,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 224,
+      "line_number": 233,
       "context": "onClick: onRestoreClick,\n },\n {\n key: \"download\",\n icon: DownloadReactSvgUrl,\n label: `${t(\"Common:Download\")} (${info.contentLength})`,\n onClick: onDownloadAction,\n disabled: !info.security.Download,\n },\n canDeleteVersion &&\n index !== 0 && {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1675,
-      "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 638,
+      "context": "// onLoad: () => self.onLoadLinks(t, item),\n },\n {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n if (isLockedSharedRoom(item as TRoom))\n return self.dialogsStore.setPasswordEntryDialog(\n true,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1675,
-      "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
+      "line_number": 276,
+      "context": "onClick: () => self.filesActionsStore.retryVectorization(selection),\n disabled: !canRetryVectorization,\n },\n {\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () =>\n self.filesActionsStore\n .downloadAction(t(\"Common:ArchivingData\"))\n .catch((err: unknown) => toastr.error(err as string)),",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1675,
-      "context": "isSeparator: true,\n disabled: !item.security?.Download || this.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n this.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
+      "line_number": 95,
+      "context": "isSeparator: true,\n disabled: !item.security?.Download || self.settingsStore.isFrame,\n },\n {\n key: \"public-room_edit\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n self.onClickDownload(item, t);\n },\n disabled: !item.security?.Download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 274,
+      "line_number": 303,
       "context": "case \"download\":\n if (!this.isAvailableOption(\"download\")) return null;\n return {\n id: \"menu-download\",\n label: t(\"Common:Download\"),\n onClick: this.downloadHandle,\n iconUrl: DownloadReactSvgUrl,\n };\n \n case \"downloadAs\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 227,
+      "line_number": 250,
       "context": "scale\n primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n testId={\n isAnonym",
       "module": "/packages/doceditor"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
+      "line_number": 127,
+      "context": "// Download\n if (sec?.Download) {\n moreOptionsItems.push({\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\", { defaultValue: \"Download\" }),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n void listStore.downloadAgent(agent);\n toastr.success(\n t(\"Common:ArchivingData\", { defaultValue: \"Archiving data\" }),",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 282,
+      "context": ": filesSelectionStore.selection.some((k) => !k.security.Download);\n \n return {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(i),\n disabled: isDisabled,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 282,
+      "context": ": filesSelectionStore.selection.some((k) => !k.security.Download);\n \n return {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(i),\n disabled: isDisabled,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 249,
+      "context": "separator1: makeSeparator(\"separator1\"),\n download: canDownload\n ? {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadFile(file.id),\n disabled: false,\n }\n : null,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
+      "line_number": 249,
+      "context": "separator1: makeSeparator(\"separator1\"),\n download: canDownload\n ? {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadFile(file.id),\n disabled: false,\n }\n : null,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/version-history-panel/index.tsx",
+      "line_number": 422,
+      "context": "const canChangeVersionFileHistory = !!fileSecurity?.EditHistory;\n const canDeleteVersion = !!fileSecurity?.Delete;\n \n const anonymousLabel = t(\"Common:Anonymous\");\n const openLabel = t(\"Common:Open\");\n const downloadLabel = t(\"Common:Download\");\n const actionsLabel = t(\"Common:Actions\");\n const editCommentLabel = t(\"Common:EditComment\");\n const restoreLabel = t(\"Common:Restore\");\n const title = useResolvedFileTitle(\n versions && versions.length > 0 ? versions[0] : file,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 236,
+      "context": "},\n { key: \"separator-download\", isSeparator: true },\n {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(item),\n disabled: !room.security?.Download,\n },\n { key: \"separator-restore\", isSeparator: true },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 236,
+      "context": "},\n { key: \"separator-download\", isSeparator: true },\n {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(item),\n disabled: !room.security?.Download,\n },\n { key: \"separator-restore\", isSeparator: true },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_hooks/useRoomContextMenuModel.ts",
+      "line_number": 236,
+      "context": "},\n { key: \"separator-download\", isSeparator: true },\n {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(item),\n disabled: !room.security?.Download,\n },\n { key: \"separator-restore\", isSeparator: true },",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 106,
+      "line_number": 115,
       "context": "onClick: () => funcs.onDuplicate?.(item, t),\n disabled: !item.security.Duplicate,\n },\n {\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => funcs.onClickDownload?.(item, t),\n disabled: !item.security.Download,\n },\n {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 106,
+      "line_number": 115,
       "context": "onClick: () => funcs.onDuplicate?.(item, t),\n disabled: !item.security.Duplicate,\n },\n {\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => funcs.onClickDownload?.(item, t),\n disabled: !item.security.Download,\n },\n {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 106,
+      "line_number": 115,
       "context": "onClick: () => funcs.onDuplicate?.(item, t),\n disabled: !item.security.Duplicate,\n },\n {\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => funcs.onClickDownload?.(item, t),\n disabled: !item.security.Download,\n },\n {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 242,
+      "line_number": 250,
       "context": "className=\"badge download-file icons-group\"\n size={sizeQuickButton}\n onClick={onClickDownload}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:Download\")}\n />\n ) : null}\n {isTemplatesFolder ? (\n <IconButton\n iconName={CreateRoomReactSvgUrl}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 570,
-      "context": "autoMaxWidth\n isLarge\n withBodyScroll\n withoutPadding\n >\n <ModalDialog.Header>{t(\"Common:DownloadAs\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.modalBody}>\n {needPassword ? (\n <PasswordContent",
+      "line_number": 599,
+      "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
+      "line_number": 189,
+      "context": "/>\n <Button\n scale\n size={ButtonSize.small}\n onClick={handleDownloadKit}\n label={t(\"Common:Download\")}\n isDisabled={isLoading}\n />\n <Button\n scale\n size={ButtonSize.small}",
       "module": "/packages/shared"
     }
   ],
@@ -214,7 +275,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -265,6 +326,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

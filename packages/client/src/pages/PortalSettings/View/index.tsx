@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
@@ -30,6 +39,7 @@ import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
+import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
 import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
@@ -39,30 +49,23 @@ import { Component as Backup } from "../categories/data-management";
 import RestoreBackup from "../categories/data-management/backup/restore-backup";
 import { Component as Integration } from "../categories/integration";
 import { Component as DataImport } from "../categories/data-import";
-import { Component as DeveloperTools } from "../categories/developer-tools";
 import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as Services } from "../categories/payments/SaaS/services";
 import { Component as AISettings } from "../categories/ai-settings";
-import AiPage from "../categories/payments/SaaS/services/pages/ai-tools/AiPage";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
 import useIntegration from "../categories/integration/useIntegration";
-import useDeveloperTools from "../categories/developer-tools/useDeveloperTools";
 import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import useServices from "../categories/payments/SaaS/services/useServices";
-import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
-import BackupPage from "../categories/payments/SaaS/services/pages/backup/BackupPage";
-import AdditionalStoragePage from "../categories/payments/SaaS/services/pages/additional-storage/AdditionalStoragePage";
+import { Component as ServicesPage } from "../categories/payments/ServicesPage";
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
@@ -73,11 +76,11 @@ const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("integration")) return "integration";
   if (pathname.includes("data-import")) return "data-import";
   if (pathname.includes("management")) return "management";
-  if (pathname.includes("developer-tools")) return "developer-tools";
   if (pathname.includes("delete-data")) return "delete-data";
   if (pathname.includes("backup")) return "backup-service";
   if (pathname.includes("disk-storage")) return "disk-storage";
   if (pathname.includes("ai-services")) return "ai-services";
+  if (pathname.includes("ai-search")) return "ai-search";
 
   if (pathname.includes("payments")) return "payments";
 
@@ -115,12 +118,6 @@ const View = ({
   defaultTemplatesStore,
 
   clearAbortControllerArr,
-
-  fetchAIProviders,
-  fetchMCPServers,
-  fetchWebSearch,
-  fetchKnowledge,
-  initDefaultProvider,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -155,7 +152,6 @@ const View = ({
     ldapStore,
     common,
     paymentStore,
-    servicesStore,
     currentTariffStatusStore,
     defaultTemplatesStore,
   });
@@ -167,20 +163,8 @@ const View = ({
     ...defaultProps.integration,
   });
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
-  const { getDeveloperToolsInitialValue } = useDeveloperTools(
-    defaultProps.developerTools,
-  );
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
-  const { getServicesInitialValue } = useServices(defaultProps.services);
-  const { getAiSettingsInitialValue } = useAiSettings({
-    fetchAIProviders,
-    initDefaultProvider,
-    fetchMCPServers,
-    fetchWebSearch,
-    fetchKnowledge,
-    standalone: true,
-  });
 
   useEffect(() => {
     clearAbortControllerArrRef.current = clearAbortControllerArr;
@@ -293,9 +277,6 @@ const View = ({
           case "management":
             await init();
             break;
-          case "developer-tools":
-            await getDeveloperToolsInitialValue();
-            break;
           case "delete-data":
             await getDeleteDataInitialValue();
             break;
@@ -306,14 +287,12 @@ const View = ({
             await standaloneInit(t);
             break;
 
-          case "ai-services":
-          case "backup-service":
-          case "disk-storage":
-            await getServicesInitialValue();
-            break;
-
           case "ai-settings":
-            await getAiSettingsInitialValue();
+            if (!settingsStore.standalone) {
+              paymentStore.handleServiceQuota(AI_ENUM);
+              servicesStore.fetchAiPrices();
+              servicesStore.fetchAiModelRestrictions();
+            }
             break;
         }
 
@@ -329,6 +308,7 @@ const View = ({
         }
 
         if (requestId === activeRequestIdRef.current) {
+          setCurrentView(getViewFromPathname(location.pathname));
           setIsPortalSettingsLoading(false);
           setIsLoading(false);
         }
@@ -347,14 +327,16 @@ const View = ({
       {currentView === "integration" ? <Integration /> : null}
       {currentView === "data-import" ? <DataImport /> : null}
       {currentView === "management" ? <StorageManagement /> : null}
-      {currentView === "developer-tools" ? <DeveloperTools /> : null}
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
-      {currentView === "ai-services" ? <AiPage /> : null}
       {currentView === "ai-settings" ? <AISettings /> : null}
-      {currentView === "backup-service" ? <BackupPage /> : null}
-      {currentView === "disk-storage" ? <AdditionalStoragePage /> : null}
+      {currentView === "ai-services" ||
+      currentView === "backup-service" ||
+      currentView === "ai-search" ||
+      currentView === "disk-storage" ? (
+        <ServicesPage />
+      ) : null}
     </LoaderWrapper>
   );
 };
@@ -381,7 +363,6 @@ export const ViewComponent = inject(
     paymentStore,
     servicesStore,
     currentTariffStatusStore,
-    aiSettingsStore,
     defaultTemplatesStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
@@ -430,13 +411,6 @@ export const ViewComponent = inject(
       loadBaseInfo,
 
       clearAbortControllerArr,
-
-      fetchAIProviders: aiSettingsStore.fetchAIProviders,
-      fetchMCPServers: aiSettingsStore.fetchMCPServers,
-      fetchWebSearch: aiSettingsStore.fetchWebSearch,
-      fetchKnowledge: aiSettingsStore.fetchKnowledge,
-      initDefaultProvider: aiSettingsStore.initDefaultProvider,
     };
   },
 )(observer(View));
-

@@ -23,7 +23,7 @@
   "RemoveGuestsDescription": "招待したゲストは、あなたが招待したすべてのルームから削除されます。この操作は元に戻すことはできません。",
   "ResetAuth": "認証のリセット",
   "SendInviteAgain": "改めて招待状を送る",
-  "ShareGuest": "ゲストを共有",
+  "ShareGuest": "ゲスト情報を共有",
   "SSOAccountTooltip": "このユーザーアカウントはSSOからロードされます。ユーザー名とメールアドレスを変更する必要がある場合は、SSOサーバーを参照してください。",
   "StandardLogin": "標準ログイン",
   "SuccessChangeGuestStatus": "ゲストステータスが正常に変更されました",

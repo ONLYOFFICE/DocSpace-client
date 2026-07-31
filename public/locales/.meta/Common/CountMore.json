@@ -1,0 +1,29 @@
+{
+  "key_path": "CountMore",
+  "content": "{{count}} more",
+  "content_en_sha1_hash": "a1b9a849bda23925c054cb24628f450ccee38df8",
+  "created_at": "2026-07-07T08:58:42.333Z",
+  "updated_at": "2026-07-07T09:02:56.616Z",
+  "comment": {
+    "text": "Suffix for a truncated list of upcoming payments in a billing overview card, indicating the number of hidden items via the {{count}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-07-07T09:02:56.616Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/UpcomingPayments.tsx",
+      "line_number": 63,
+      "context": ");\n const upcomingTitles = upcomingPayments.map((item) => item.title);\n const upcomingSummary =\n upcomingTitles.length <= 2\n ? upcomingTitles.join(\" | \")\n : `${upcomingTitles.slice(0, 2).join(\" | \")} | ${t(\"CountMore\", {\n count: upcomingTitles.length - 2,\n })}`;\n \n return (\n <div className={styles.card}>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

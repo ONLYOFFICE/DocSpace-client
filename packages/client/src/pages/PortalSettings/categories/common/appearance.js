@@ -1,30 +1,40 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
+import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
 import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
@@ -49,12 +59,10 @@ import { DeviceType } from "@docspace/shared/enums";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ColorPicker } from "@docspace/ui-kit/components/color-picker";
 
+import classnames from "classnames";
+
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
-import {
-  StyledComponent,
-  StyledTheme,
-  StyledBodyContent,
-} from "./Appearance/StyledApperance";
+import appearanceStyles from "./Appearance/StyledApperance.module.scss";
 import Loader from "./sub-components/loaderAppearance";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import Preview from "./Appearance/preview";
@@ -84,7 +92,7 @@ const Appearance = (props) => {
   const headerEditTheme = t("Settings:EditColorScheme");
 
   const checkImgHover = (
-    <ReactSVG className="check-hover" src={CheckWhiteSvgUrl} />
+    <ReactSVG className={appearanceStyles.checkHover} src={CheckWhiteSvgUrl} />
   );
 
   const [showColorSchemeDialog, setShowColorSchemeDialog] = useState(false);
@@ -560,7 +568,7 @@ const Appearance = (props) => {
       autoMaxHeight
     >
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={appearanceStyles.styledBodyContent}>
           <ColorPicker
             id="buttons-hex"
             onClose={onCloseHexColorPickerButtons}
@@ -570,7 +578,7 @@ const Appearance = (props) => {
             cancelButtonLabel={t("Common:CancelButton")}
             hexCodeLabel={t("Settings:HexCode")}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   ) : (
@@ -604,7 +612,7 @@ const Appearance = (props) => {
       autoMaxHeight
     >
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={appearanceStyles.styledBodyContent}>
           <ColorPicker
             id="accent-hex"
             onClose={onCloseHexColorPickerAccent}
@@ -613,7 +621,7 @@ const Appearance = (props) => {
             applyButtonLabel={t("Common:ApplyButton")}
             cancelButtonLabel={t("Common:CancelButton")}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   ) : (
@@ -659,61 +667,63 @@ const Appearance = (props) => {
         onClickDelete={onClickDeleteModal}
       />
 
-      <StyledComponent
-        colorCheckImg={colorCheckImg}
-        isShowDeleteButton={isShowDeleteButton}
+      <div
+        className={classnames(appearanceStyles.styledComponent, {
+          [appearanceStyles.showDeleteButton]: isShowDeleteButton,
+        })}
+        style={{ "--check-img-color": colorCheckImg }}
       >
-        <div className="header">{t("Common:Color")}</div>
+        <div className={appearanceStyles.header}>{t("Common:Color")}</div>
 
-        <div className="theme-standard-container">
-          <div className="theme-name">{t("Common:Standard")}</div>
+        <div className={appearanceStyles.themeStandardContainer}>
+          <div className={appearanceStyles.themeName}>{t("Common:Standard")}</div>
 
-          <div className="theme-container">
+          <div className={appearanceStyles.themeContainer}>
             {appearanceTheme.map((item) => {
               if (!item.name) return;
               return (
-                <StyledTheme
+                <div
                   key={item.name}
                   id={item.id}
-                  colorCheckImgHover={colorCheckImgHover}
-                  style={{ background: item.main?.accent }}
+                  className={appearanceStyles.styledTheme}
+                  style={{ "--check-hover-color": colorCheckImgHover, background: item.main?.accent }}
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
                   data-testid={`appearance_standard_theme_${item.id}`}
                 >
                   {selectThemeId === item.id ? (
-                    <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
+                    <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
                   ) : null}
 
                   {selectThemeId !== item.id ? checkImgHover : null}
-                </StyledTheme>
+                </div>
               );
             })}
           </div>
         </div>
 
         <div className="theme-custom-container">
-          <div className="theme-name">{t("Common:Custom")}</div>
+          <div className={appearanceStyles.themeName}>{t("Common:Custom")}</div>
 
-          <div className="theme-container">
-            <div className="custom-themes">
+          <div className={appearanceStyles.themeContainer}>
+            <div className={appearanceStyles.customThemes}>
               {appearanceTheme.map((item) => {
                 if (item.name) return;
                 return (
-                  <StyledTheme
+                  <div
                     key={item.id}
                     id={item.id}
-                    style={{ background: item.main?.accent }}
-                    colorCheckImgHover={colorCheckImgHover}
+                    className={appearanceStyles.styledTheme}
+                    style={{ "--check-hover-color": colorCheckImgHover, background: item.main?.accent }}
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
                     data-testid={`appearance_custom_theme_${item.id}`}
                   >
                     {selectThemeId === item.id ? (
-                      <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
+                      <ReactSVG className={appearanceStyles.checkImg} src={CheckWhiteSvgUrl} />
                     ) : null}
                     {selectThemeId !== item.id ? checkImgHover : null}
-                  </StyledTheme>
+                  </div>
                 );
               })}
             </div>
@@ -721,8 +731,9 @@ const Appearance = (props) => {
             <div
               data-tooltip-id="theme-add"
               data-tip="tooltip"
-              className="theme-add"
+              className={appearanceStyles.themeAdd}
               data-testid="appearance_add_theme"
+              style={{ backgroundImage: `url(${PlusThemeSvgUrl})` }}
               onClick={onAddTheme}
             />
             {!abilityAddTheme ? (
@@ -753,7 +764,7 @@ const Appearance = (props) => {
           showSaveButtonDialog={showSaveButtonDialog}
           onSaveColorSchemeDialog={onSaveColorSchemeDialog}
         />
-        <div className="header preview-header">
+        <div className={classnames(appearanceStyles.header, appearanceStyles.previewHeader)}>
           {t("Common:Preview")}
           <HelpButton
             place="right"
@@ -785,7 +796,7 @@ const Appearance = (props) => {
           scaled
         />
 
-        <div className="buttons-container">
+        <div className={appearanceStyles.buttonsContainer}>
           <Button
             className="save button"
             label={t("Common:SaveButton")}
@@ -815,7 +826,7 @@ const Appearance = (props) => {
             />
           ) : null}
         </div>
-      </StyledComponent>
+      </div>
     </>
   );
 };

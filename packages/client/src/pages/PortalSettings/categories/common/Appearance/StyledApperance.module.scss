@@ -1,0 +1,178 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+.styledComponent {
+  width: 100%;
+  max-width: 575px;
+
+  .header {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .previewHeader {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-bottom: 20px;
+  }
+
+  .themeStandardContainer {
+    padding-top: 21px;
+  }
+
+  .themeName {
+    font-size: 15px;
+    line-height: 16px;
+    font-weight: 600;
+  }
+
+  .themeContainer {
+    padding: 12px 0 24px;
+    display: flex;
+  }
+
+  .customThemes {
+    display: flex;
+  }
+
+  .themeAdd {
+    width: 46px;
+    height: 46px;
+    margin-inline-end: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--settings-appearance-theme-add-bg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  :global(.add-theme) {
+    background: var(--settings-appearance-add-theme-bg);
+    padding-top: 16px;
+    padding-inline-start: 16px;
+    box-sizing: border-box;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    padding-top: 24px;
+
+    :global(.button):not(:last-child) {
+      margin-inline-end: 8px;
+    }
+
+    @include mixins.mobile {
+      :global(.button) {
+        width: 100%;
+      }
+    }
+  }
+
+  .checkImg {
+    padding-block: 16px 0;
+    padding-inline: 15px 0;
+
+    svg path {
+      fill: var(--check-img-color);
+    }
+  }
+}
+
+.showDeleteButton {
+  .buttonsContainer {
+    @include mixins.mobile {
+      flex-direction: column;
+      gap: 8px;
+      margin: 0;
+
+      :global(.button):not(:last-child) {
+        margin-inline-end: 0;
+      }
+    }
+  }
+}
+
+.styledTheme {
+  width: 46px;
+  height: 46px;
+  margin-inline-end: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  .checkHover {
+    visibility: hidden;
+  }
+
+  &:hover {
+    .checkHover {
+      padding-block: 16px 0;
+      padding-inline: 15px 0;
+      visibility: visible;
+      opacity: 0.5;
+
+      svg path {
+        fill: var(--check-hover-color);
+      }
+    }
+  }
+}
+
+.styledBodyContent {
+  display: contents;
+
+  :global(.hex-color-picker) {
+    padding-bottom: 0 !important;
+    width: auto !important;
+
+    :global(.react-colorful__saturation) {
+      border-bottom: none;
+
+      :global(.react-colorful__interactive) {
+        width: calc(100% - 16px) !important;
+        height: calc(100% - 16px);
+      }
+    }
+
+    :global(.react-colorful__hue) {
+      :global(.react-colorful__interactive) {
+        width: auto;
+      }
+    }
+  }
+}

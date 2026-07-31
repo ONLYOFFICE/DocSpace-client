@@ -1,6 +1,6 @@
 {
   "LdapAddCertificateToStoreConfirmation": "Bạn có muốn thêm chứng chỉ này vào kho chứng chỉ và tiếp tục nhập người dùng không?",
-  "LdapAdvancedSettings": "Cài Đặt Nâng Cao ",
+  "LdapAdvancedSettings": "Cài Đặt Nâng Cao",
   "LdapAdvancedSettingsTooltip": "Chọn các thuộc tính người dùng mà bạn muốn đồng bộ hóa với máy chủ LDAP của mình.",
   "LdapAttributeMapping": "Ánh xạ thuộc tính",
   "LdapAuthenticationTooltip": "Bật tùy chọn này nếu người dùng hiện tại không có quyền đọc từ máy chủ LDAP và nhập thông tin đăng nhập của người dùng khác có quyền đọc.",
@@ -49,7 +49,7 @@
   "LdapSettingsCertExpired": "Chứng chỉ đã hết hạn",
   "LdapSettingsCertIssuerChaining": "Không có chuỗi nhà phát hành chứng chỉ nào được cung cấp",
   "LdapSettingsCertMalformed": "Chứng chỉ không đúng định dạng",
-  "LdapSettingsCertUnrecognizedError": "Lỗi không xác ",
+  "LdapSettingsCertUnrecognizedError": "Lỗi không xác",
   "LdapSettingsCertUntrustedCa": "Cơ quan cấp đã cấp chứng chỉ này không đáng tin cậy",
   "LdapSettingsCertUntrustedRoot": "Cơ quan cấp chứng chỉ gốc đã cấp chứng chỉ không đáng tin cậy",
   "LdapSettingsIssuerName": "Tên nhà phát hành",

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -36,7 +45,8 @@ import GithubLight from "PUBLIC_DIR/images/thirdparties/github.light.react.svg";
 import GithubDark from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-import { StyledContainer } from "./StyledPluginSDK";
+import styles from "./PluginSDK.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PluginSDK = ({
   systemPluginList,
@@ -46,11 +56,7 @@ const PluginSDK = ({
   theme,
   apiPluginSDKLink,
 }) => {
-  const { t, ready } = useTranslation([
-    "WebPlugins",
-    "VersionHistory",
-    "Common",
-  ]);
+  const { t, ready } = useTranslation(["WebPlugins", "Common"]);
 
   React.useEffect(() => {
     if (ready) setDocumentTitle(t("WebPlugins:PluginSDK"));
@@ -58,7 +64,7 @@ const PluginSDK = ({
 
   const isMobile = currentDeviceType === "mobile";
 
-  const icon = !theme.isBase ? <GithubLight /> : <GithubDark />;
+  const icon = theme.isBase ? <GithubLight /> : <GithubDark />;
 
   const getPluginList = () => {
     if (isLoading) {
@@ -85,21 +91,21 @@ const PluginSDK = ({
     }
 
     const list = systemPluginList.map((p) => (
-      <div key={p.name} className="plugin-list__item">
-        <div className="plugin-list__item-info">
+      <div key={p.name} className={styles.pluginListItem}>
+        <div className={styles.pluginListItemInfo}>
           <img
-            className="plugin-logo"
+            className={styles.pluginLogo}
             src={`${p.iconUrl}/assets/${p.image}?hash=${p.version}`}
             alt="Plugin logo"
           />
-          <div className="plugin-info-container">
+          <div className={styles.pluginInfoContainer}>
             <Text>{p.name}</Text>
-            <Text className="description">
-              {t("VersionHistory:Version")} {p.version}
+            <Text className={styles.description}>
+              {t("Common:VersionShort")} {p.version}
             </Text>
           </div>
         </div>
-        <Text className="description-text" title={p.description}>
+        <Text className={styles.descriptionText} title={p.description}>
           {p.description}
         </Text>
         <Button
@@ -119,20 +125,22 @@ const PluginSDK = ({
   const list = getPluginList();
 
   return (
-    <StyledContainer>
+    <div className={styles.container}>
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ExpandFunctionality")}
       </Text>
       <Text
-        className="description"
+        className={styles.description}
         fontSize="13px"
         fontWeight={400}
         lineHeight="20px"
       >
-        {t("PluginSDKDescription", { productName: t("Common:ProductName") })}
+        {t("PluginSDKDescription", {
+          productName: getBrandName("ProductName"),
+        })}
       </Text>
       <Text
-        className="description"
+        className={styles.description}
         fontSize="13px"
         fontWeight={400}
         lineHeight="20px"
@@ -140,7 +148,7 @@ const PluginSDK = ({
         {t("PluginSDKInstruction")}
       </Text>
       <Button
-        className="read-instructions-button"
+        className={styles.readInstructionsButton}
         label={t("Common:ReadInstructions")}
         primary
         scale={isMobile}
@@ -153,10 +161,10 @@ const PluginSDK = ({
           <Text fontSize="16px" fontWeight={700} lineHeight="22px">
             {t("PluginSamples")}
           </Text>
-          <div className="plugin-list">{list}</div>
+          <div className={styles.pluginList}>{list}</div>
         </>
       ) : null}
-    </StyledContainer>
+    </div>
   );
 };
 
@@ -173,3 +181,4 @@ export default inject(({ pluginStore, settingsStore }) => {
     apiPluginSDKLink,
   };
 })(observer(PluginSDK));
+

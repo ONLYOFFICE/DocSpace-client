@@ -3,16 +3,17 @@
   "content": "Google Drive's Files",
   "content_en_sha1_hash": "03293463a6f92221c71c20964b6eac4df743685f",
   "created_at": "2025-05-19T21:30:51.588Z",
-  "updated_at": "2025-10-03T10:07:11.709Z",
+  "updated_at": "2026-05-15T14:00:06.780Z",
   "comment": {
-    "text": "Google Drive's Files is used to describe a setting or option related to Google Drive files, likely appearing in a settings or configuration area. This key could be used for translations of labels or descriptions about Google Drive file management or export options.",
+    "text": "This is a label for a section in the settings related to data export. It indicates that the exported data will include files from Google Drive.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:08.779Z"
+    "updated_at": "2026-04-11T21:24:04.910Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 133,
+      "line_number": 143,
       "context": "serviceName=\"Google Workspace\"\n usersExportDetails={{\n name: t(\"InfoPanel:Users\"),\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}\n sharedFilesAndFoldersExportDetails={{\n name: t(\"Settings:SharedFilesAndFoldersDetails\"),\n }}\n />",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Google Diskin Faylları\" is a literal translation and doesn't flow naturally in Azerbaijani. While technically correct, it sounds awkward.",
-          "suggestion": "Google Drive-dəki Fayllar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,25 +46,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Soubory na Disku Google' is understandable, it's a very literal translation. A more natural and idiomatic Czech translation for 'Google Drive's Files' would be something like 'Soubory Google Disku' or 'Soubory v Google Disku'. The current translation emphasizes the physical disk, whereas the English phrase refers to files *within* Google Drive.",
-          "suggestion": "Consider 'Soubory Google Disku' or 'Soubory v Google Disku' for a more natural Czech phrasing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Dateien von Google Drive\" is a very literal translation and sounds somewhat unnatural in German. A more idiomatic translation would be \"Google Drive-Dateien\" or \"Dateien in Google Drive\".",
-          "suggestion": "Google Drive-Dateien"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,18 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Google Driven tiedostot' is not the most natural or accurate translation of 'Google Drive's Files'. 'Driven' doesn't accurately convey the meaning of 'Drive' in this context. A more appropriate translation would incorporate 'Pilvet' (clouds) or rephrase the sentence.",
-          "suggestion": "Google Pilven tiedostot"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'tiedostot' is correct for 'files', the phrasing doesn't flow as naturally in Finnish when combined with 'Google' in this context. A more colloquial option might be preferable.",
-          "suggestion": "Google Drive -tiedostot"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -177,30 +149,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'Google Drive හි ගොනු' while understandable, could be more precise. 'හි' indicates possession, implying 'Google Drive's files' in a more literal sense. A more natural translation might convey 'Google Drive Files' as a general topic or a section within Google Drive.",
-          "suggestion": "Google Drive ගොණු (Google Drive Gonu)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Súbory Google Disk\" is understandable, a more accurate and natural translation of \"Google Drive's Files\" would be \"Súbory na Google Disku\". \"Disk\" is often used as a general term, whereas \"na Google Disku\" specifies the location within Google Drive.",
-          "suggestion": "Súbory na Google Disku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -212,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Фајлови на Google Drive-у' is not the most natural or precise translation of 'Google Drive's Files'. While technically correct, a more idiomatic translation would be 'Datoteke Google Drive-a'. The use of 'на' sounds slightly awkward.",
-          "suggestion": "Datoteke Google Drive-a"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Fajlovi na Google Drive-u\" is understandable, a more natural and accurate translation of \"Google Drive's Files\" would be \"Datoteke na Google Drive-u\" or \"Google Drive datoteke\". \"Fajlovi\" more closely translates to 'files' in a general sense, whereas 'Datoteke' is more appropriate for documents/digital files.",
-          "suggestion": "Datoteke na Google Drive-u"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -248,25 +196,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tập tin Google Drive' is technically correct, but less natural than 'Các tệp Google Drive' or simply 'Tệp Google Drive'. While 'Tập tin' is acceptable, 'Các tệp' is more common when referring to a collection of files.",
-          "suggestion": "Các tệp Google Drive"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English content 'Google Drive's Files' is best translated as 'Google 盘文件' or 'Google 云端硬盘文件' to accurately convey the meaning of files within Google Drive, rather than a more literal 'Google Drive 文件'. The latter is understandable but lacks the nuance of referring to the files *within* Google Drive.",
-          "suggestion": "Google 盘文件"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,16 +3,17 @@
   "content": "Delete all backups",
   "content_en_sha1_hash": "5cabdc609272c7a869a9ffb8c11071fd32fff07a",
   "created_at": "2025-05-26T07:15:41.237Z",
-  "updated_at": "2025-08-11T09:02:44.098Z",
+  "updated_at": "2026-05-15T14:00:06.963Z",
   "comment": {
-    "text": "This translation key is used for a button that deletes all backups in an application. When clicked, it triggers a cleanup of backup data, making this text appear on a restore and backup dialog box.",
+    "text": "This is the text for a clickable link that, when activated, deletes all existing backups.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:33.414Z"
+    "updated_at": "2026-04-11T20:57:12.568Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 255,
+      "line_number": 265,
       "context": "onClick={onCleanBackupList}\n fontWeight={600}\n style={{ textDecoration: \"underline dotted\" }}\n dataTestId=\"delete_backups_link\"\n >\n {t(\"Common:ClearBackupList\")}\n </Link>\n </div>\n ) : null}\n \n <div",
       "module": "/packages/shared"
     }
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

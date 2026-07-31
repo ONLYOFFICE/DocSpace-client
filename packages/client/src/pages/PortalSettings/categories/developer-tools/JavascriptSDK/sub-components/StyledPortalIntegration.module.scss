@@ -1,0 +1,161 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as colors;
+
+.sdkContainer {
+  box-sizing: border-box;
+
+  @include mixins.tablet {
+    width: 100%;
+  }
+
+  &.isMobile {
+    width: 100%;
+  }
+
+  :global(.presets-flex) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.categoryHeader {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+
+  @include mixins.tablet {
+    margin-top: 24px;
+  }
+
+  &.isMobile {
+    margin-top: 24px;
+  }
+}
+
+.categoryDescription {
+  box-sizing: border-box;
+  margin-top: 2px;
+  max-width: 700px;
+
+  :global(.sdk-description) {
+    display: inline;
+    line-height: 20px;
+    color: var(--settings-common-description-color);
+  }
+}
+
+.presetsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min(200px, 100%), 1fr));
+  gap: 16px;
+  max-width: fit-content;
+  margin-top: 16px;
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.integrationContainer {
+  :global(.integration-header) {
+    margin-bottom: 8px;
+    margin-top: 36px;
+  }
+
+  :global(.icons) {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  :global(.icons .icon:hover) {
+    cursor: pointer;
+  }
+
+  :global(.link-container) {
+    display: flex;
+    gap: 4px;
+  }
+
+  :global(.link-container .link) {
+    text-decoration: underline;
+    font-weight: 600;
+    line-height: 15px;
+  }
+
+  :global(.link-container .icon-arrow:hover) {
+    cursor: pointer;
+  }
+
+  :global(.link-container .icon-arrow rect) {
+    fill: unset;
+  }
+
+  :global(.link-container .icon-arrow path) {
+    fill: var(--icon-arrow-color);
+  }
+}
+
+.integrationContainer.dark {
+  :global(.icons .icon svg rect) {
+    fill: #{colors.$white};
+    fill-opacity: 0.1;
+  }
+
+  :global(.icons .icon .icon-zoom path) {
+    fill: #{colors.$white};
+  }
+
+  :global(.icons .icon .icon-wordpress path:not(:last-child)) {
+    fill: #{colors.$white};
+  }
+
+  :global(.icons .icon .icon-drupal path:first-child) {
+    fill: #{colors.$white};
+  }
+
+  :global(.icons .icon .icon-drupal path:nth-child(4)),
+  :global(.icons .icon .icon-drupal path:nth-child(5)),
+  :global(.icons .icon .icon-drupal path:nth-child(6)) {
+    fill: #{colors.$light-dark-gray-hover};
+  }
+}

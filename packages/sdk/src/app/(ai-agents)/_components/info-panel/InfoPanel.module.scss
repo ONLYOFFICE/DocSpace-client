@@ -1,0 +1,183 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+// The info panel is now mounted through Section.InfoPanelHeader /
+// Section.InfoPanelBody — Section provides the aside chrome. We only keep
+// inner content styles here.
+
+.bodyRoot {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	height: 100%;
+}
+
+.tabs {
+	flex: 0 0 auto;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	border-bottom: 1px solid var(--info-panel-border-color, rgba(0, 0, 0, 0.08));
+
+	:global(.sticky-indent) {
+		height: 0;
+	}
+
+	:global(.scroll-body) > div {
+		justify-content: center;
+		padding: 0 20px;
+		width: fit-content;
+		min-width: calc(100% - 40px);
+	}
+}
+
+.titleRow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-block: 16px;
+	padding-inline: 20px;
+}
+
+.titleRowIcon {
+	flex: 0 0 auto;
+}
+
+.titleRowName {
+	flex: 1 1 auto;
+	min-width: 0;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 22px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.titleRowMenu {
+	flex: 0 0 auto;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	color: var(--info-panel-members-icon-color, currentColor);
+}
+
+.body {
+	flex: 1 1 auto;
+	overflow-y: auto;
+	padding-block: 0 24px;
+	padding-inline: 20px;
+}
+
+.thumbnail {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding-block: 8px 8px;
+}
+
+.subtitle {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding-block: 24px 16px;
+}
+
+.properties {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 8px;
+	padding-bottom: 20px;
+}
+
+.property {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 120px 1fr;
+	grid-column-gap: 24px;
+	align-items: baseline;
+}
+
+.propertyTitle {
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--info-panel-text-color, inherit);
+}
+
+.propertyContent {
+	max-width: 100%;
+	margin: auto 0;
+	font-weight: 600;
+	font-size: 13px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.propertyLink {
+	composes: propertyContent;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.propertyMuted {
+	composes: propertyContent;
+	font-weight: 400;
+	opacity: 0.6;
+}
+
+.membersList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.memberRow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-block: 8px;
+}
+
+.emptyState {
+	padding: 16px 0;
+	text-align: center;
+}
+
+.historyList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.historyRow {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding-block: 12px;
+	border-bottom: 1px solid var(--info-panel-border-color, rgba(0, 0, 0, 0.06));
+
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+.historyContent {
+	flex: 1 1 auto;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.historyDate {
+	opacity: 0.6;
+}

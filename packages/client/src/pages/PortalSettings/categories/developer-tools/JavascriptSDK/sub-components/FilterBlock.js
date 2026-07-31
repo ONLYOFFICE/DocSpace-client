@@ -1,31 +1,40 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import styled from "styled-components";
+import classNames from "classnames";
 import debounce from "lodash.debounce";
 
 import { FilterType, RoomsType } from "@docspace/shared/enums";
@@ -44,67 +53,9 @@ import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { Text } from "@docspace/ui-kit/components/text";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
-const UserInputContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  .header_aside-panel {
-    max-width: 100% !important;
-  }
-`;
-
-const UserInput = styled.div`
-  width: 100%;
-  width: -moz-available;
-  width: -webkit-fill-available;
-  width: stretch;
-
-  .input-link {
-    height: 32px;
-
-    > input {
-      height: 30px;
-    }
-  }
-`;
-
-const StyledDropDown = styled(DropDown)`
-  ${(props) => props.width && `width: ${props.width}px`};
-  inset-inline-start: 0;
-
-  .list-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 48px;
-
-    .list-item_content {
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-  }
-`;
-
-const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
-  line-height: 16px;
-
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-size: ${(props) =>
-    props.primary ? "14px" : props.info ? "11px" : "12px"};
-  font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
-
-  color: ${(props) =>
-    (props.primary && !props.disabled) || props.info
-      ? props.theme.text.color
-      : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-inline-start: auto`}
-`;
+import styles from "./FilterBlock.module.scss";
 
 const minSearchValue = 3;
 
@@ -319,8 +270,10 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       >
         <Avatar size="min" role="user" source={avatar} />
         <div className="list-item_content">
-          <SearchItemText primary>{displayName}</SearchItemText>
-          <SearchItemText>{email}</SearchItemText>
+          <Text className={classNames(styles.searchItemText, styles.primary)}>
+            {displayName}
+          </Text>
+          <Text className={styles.searchItemText}>{email}</Text>
         </div>
       </DropDownItem>
     );
@@ -394,7 +347,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       <Label className="label" text={t("FileFilter")} />
       <ToggleButton
         className="toggle"
-        label={t("Files:ByAuthor")}
+        label={t("Common:ByAuthor")}
         onChange={toggleAuthor}
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
@@ -408,8 +361,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             label={selectedUser}
           />
         ) : (
-          <UserInputContainer>
-            <UserInput ref={searchRef}>
+          <div className={styles.userInputContainer}>
+            <div className={styles.userInput} ref={searchRef}>
               <TextInput
                 scale
                 onChange={onChangeAuthor}
@@ -421,10 +374,15 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 tabIndex={5}
                 testId="files_author_text_input"
               />
-            </UserInput>
+            </div>
             {author.length >= minSearchValue ? (
-              <StyledDropDown
-                width={searchRef?.current?.offsetWidth}
+              <DropDown
+                className={styles.dropDown}
+                style={
+                  searchRef?.current?.offsetWidth
+                    ? { width: `${searchRef.current.offsetWidth}px` }
+                    : undefined
+                }
                 isDefaultMode={false}
                 open={searchPanelVisible}
                 manualX="16px"
@@ -435,9 +393,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 dataTestId="files_author_dropdown"
               >
                 {usersList.length ? foundUsers : ""}
-              </StyledDropDown>
+              </DropDown>
             ) : null}
-          </UserInputContainer>
+          </div>
         )
       ) : null}
       <ToggleButton
@@ -488,8 +446,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
               label={selectedUser}
             />
           ) : (
-            <UserInputContainer>
-              <UserInput ref={searchRef}>
+            <div className={styles.userInputContainer}>
+              <div className={styles.userInput} ref={searchRef}>
                 <TextInput
                   scale
                   onChange={onChangeAuthor}
@@ -501,10 +459,15 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   tabIndex={5}
                   testId="author_text_input"
                 />
-              </UserInput>
+              </div>
               {author.length >= minSearchValue ? (
-                <StyledDropDown
-                  width={searchRef?.current?.offsetWidth}
+                <DropDown
+                  className={styles.dropDown}
+                  style={
+                    searchRef?.current?.offsetWidth
+                      ? { width: `${searchRef.current.offsetWidth}px` }
+                      : undefined
+                  }
                   isDefaultMode={false}
                   open={searchPanelVisible}
                   manualX="16px"
@@ -515,9 +478,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   {...dropDownMaxHeight}
                 >
                   {usersList.length ? foundUsers : ""}
-                </StyledDropDown>
+                </DropDown>
               ) : null}
-            </UserInputContainer>
+            </div>
           )}
 
           <Checkbox
@@ -559,3 +522,4 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     </>
   );
 };
+

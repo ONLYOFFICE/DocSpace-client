@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import axios, {
   type InternalAxiosRequestConfig,
@@ -35,6 +44,8 @@ import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { isOAuthFrame, requestAuthToken } from "./oauthToken";
+import { frameCallEvent } from "./common";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix, timeout: apiTimeout } = apiConf;
@@ -81,6 +92,14 @@ class AxiosClient {
   client: AxiosInstance | null = null;
 
   authToken: string | null = null;
+
+  private oauthReady: Promise<void> | null = null;
+
+  private oauthRefreshing: Promise<string | null> | null = null;
+
+  private oauthGeneration = 0;
+
+  private oauthUnavailable = false;
 
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
@@ -136,10 +155,20 @@ class AxiosClient {
         const urlParams = new URLSearchParams(window.location.search);
         const publicRoomKey = urlParams.get("key") || urlParams.get("share");
 
+        if (isOAuthFrame()) {
+          config.withCredentials = false;
+          return this.ensureOAuthToken().then(() => {
+            if (this.authToken) {
+              config.headers = config.headers || {};
+              config.headers["Authorization"] = `Bearer ${this.authToken}`;
+            }
+            return config;
+          });
+        }
+
         if (publicRoomKey) {
           config.headers = config.headers || {};
           config.headers["Request-Token"] = publicRoomKey;
-          config.headers["Authorization"] = `Bearer ${publicRoomKey}`;
         } else {
           const cookie = getCookie("asc_auth_key");
           const token = cookie || this.authToken;
@@ -185,6 +214,68 @@ class AxiosClient {
 
   setAuthToken = (token: string | null) => {
     this.authToken = token;
+    this.oauthGeneration += 1;
+    if (token) this.oauthUnavailable = false;
+  };
+
+  getOAuthToken = async (): Promise<string | null> => {
+    if (typeof window !== "undefined" && isOAuthFrame())
+      await this.ensureOAuthToken();
+    return this.authToken;
+  };
+
+  refreshOAuthToken = (): Promise<string | null> => {
+    if (typeof window === "undefined" || !isOAuthFrame())
+      return Promise.resolve(null);
+    if (this.oauthRefreshing !== null) return this.oauthRefreshing;
+
+    this.oauthGeneration += 1;
+    this.oauthRefreshing = requestAuthToken()
+      .then((token) => {
+        if (token) {
+          this.authToken = token;
+          this.oauthUnavailable = false;
+        } else {
+          frameCallEvent({
+            event: "onAuthError",
+            data: { code: "TOKEN_REFRESH_FAILED", message: "unauthorized" },
+          });
+        }
+        return token;
+      })
+      .finally(() => {
+        this.oauthRefreshing = null;
+      });
+
+    return this.oauthRefreshing;
+  };
+
+  private ensureOAuthToken = (): Promise<void> => {
+    if (this.authToken) return Promise.resolve();
+    if (this.oauthUnavailable) return Promise.resolve();
+    if (this.oauthReady !== null) return this.oauthReady;
+
+    const generation = this.oauthGeneration;
+    const ready = requestAuthToken()
+      .then((token) => {
+        if (generation !== this.oauthGeneration) return;
+        if (token) {
+          this.authToken = token;
+          this.oauthUnavailable = false;
+        } else {
+          this.oauthUnavailable = true;
+          frameCallEvent({
+            event: "onAuthError",
+            data: { code: "TOKEN_UNAVAILABLE", message: "unauthorized" },
+          });
+        }
+      })
+      .finally(() => {
+        if (this.oauthReady === ready) this.oauthReady = null;
+      });
+
+    this.oauthReady = ready;
+    return ready;
   };
 
   setWithCredentialsStatus = (state: boolean) => {
@@ -286,6 +377,34 @@ class AxiosClient {
             if (options.skipUnauthorized) return Promise.resolve();
 
             if (options.skipLogout) return Promise.reject(error);
+
+            if (isOAuthFrame()) {
+              const opts = options as TReqOption &
+                AxiosRequestConfig & { _oauthRetried?: boolean };
+
+              const signalAuthError = (): Promise<void> => {
+                frameCallEvent({
+                  event: "onAuthError",
+                  data: { code: "UNAUTHORIZED", message: "unauthorized" },
+                });
+                return Promise.reject(error);
+              };
+
+              if (opts._oauthRetried) return signalAuthError();
+
+              opts._oauthRetried = true;
+
+              return this.refreshOAuthToken().then((token) => {
+                if (token)
+                  return this.request<T>(
+                    opts,
+                    skipRedirect,
+                    isOAuth,
+                  ) as unknown as Promise<void>;
+
+                return Promise.reject(error);
+              });
+            }
 
             console.log("debug is SDK frame", window?.ClientConfig?.isFrame);
 

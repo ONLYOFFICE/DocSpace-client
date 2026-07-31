@@ -1,202 +1,233 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { cookies, headers } from "next/headers";
-import Script from "next/script";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 
 import {
-	getData,
-	validatePublicRoomKey,
-	getDeepLinkSettings,
+  getData,
+  validatePublicRoomKey,
+  getDeepLinkSettings,
 } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import OAuthEditor from "@/components/OAuthEditor";
 import FilePassword from "@/components/file-password";
-import { TFrameConfig } from "@docspace/shared/types/Frame";
+import type { TFrameConfig, TFrameTheme } from "@docspace/shared/types/Frame";
 
 const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
-	fileId: undefined,
-	fileid: undefined,
-	version: undefined,
-	doc: undefined,
-	action: undefined,
-	share: undefined,
-	editorType: undefined,
-	withTool: undefined,
+  fileId: undefined,
+  fileid: undefined,
+  version: undefined,
+  doc: undefined,
+  action: undefined,
+  share: undefined,
+  editorType: undefined,
+  withoutGoBackText: undefined,
+  withTool: undefined,
 };
 
 async function Page(props: RootPageProps) {
-	const { searchParams: sp } = props;
-	const searchParams = await sp;
-	const {
-		fileId,
-		fileid,
-		version,
-		doc,
-		action,
-		share,
-		editorType,
-		error,
-		locale,
-		theme,
-		is_file,
-		editorGoBack,
-		isSDK,
-		withTool,
-	} = searchParams ?? initialSearchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
+  const {
+    fileId,
+    fileid,
+    version,
+    doc,
+    action,
+    share,
+    editorType,
+    error,
+    locale,
+    theme,
+    is_file,
+    editorGoBack,
+    returnUrl,
+    withoutGoBackText,
+    isSDK,
+    withTool,
+  } = searchParams ?? initialSearchParams;
 
-	const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
-		frameId: "",
-		mode: "",
-		src: "",
-		editorCustomization: { uiTheme: theme },
-		editorGoBack,
-		editorType,
-		id: fileId,
-		locale,
-		requestToken: share,
-		theme,
-		is_file,
-		isSDK,
-	};
+  const baseSdkConfig: TFrameConfig & {
+    is_file?: boolean;
+    isSDK?: boolean;
+    withoutGoBackText?: boolean;
+  } = {
+    frameId: "",
+    src: "",
+    editorCustomization: { uiTheme: theme },
+    editorGoBack,
+    returnUrl,
+    withoutGoBackText,
+    editorType,
+    id: fileId,
+    locale,
+    requestToken: share,
+    theme: theme as TFrameTheme,
+    is_file,
+    isSDK,
+  };
 
-	const cookieStore = await cookies();
-	const hdrs = await headers();
+  const cookieStore = await cookies();
+  const hdrs = await headers();
 
-	const hostname = hdrs.get("x-forwarded-host");
+  const hostname = hdrs.get("x-forwarded-host");
 
-	logger.info(
-		`fileId: ${fileId ?? fileid}, action: ${action ?? "not set"}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, version: ${version ?? "not set"}, editorType: ${editorType ?? "not set"}, doc: ${doc ?? "not set"}, url: ${hostname} Start open file at edit`,
-	);
+  logger.info(
+    `fileId: ${fileId ?? fileid}, action: ${action ?? "not set"}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, version: ${version ?? "not set"}, editorType: ${editorType ?? "not set"}, doc: ${doc ?? "not set"}, url: ${hostname} Start open file at edit`,
+  );
 
-	let type = editorType;
+  let type = editorType;
 
-	const ua = hdrs.get("user-agent");
-	if (ua && !type) {
-		const { isMobile } = getSelectorsByUserAgent(ua);
+  const ua = hdrs.get("user-agent");
+  if (ua && !type) {
+    const { isMobile } = getSelectorsByUserAgent(ua);
 
-		if (isMobile) {
-			type = "mobile";
+    if (isMobile) {
+      type = "mobile";
 
-			logger.debug(
-				`file: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open mobile view`,
-			);
-		}
-	}
+      logger.debug(
+        `file: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open mobile view`,
+      );
+    }
+  }
 
-	logger.debug(
-		`fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Start get data for open file`,
-	);
+  logger.debug(
+    `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Start get data for open file`,
+  );
 
-	const data = await getData(
-		fileId ?? fileid ?? "",
-		version,
-		doc,
-		action,
-		share,
-		type,
-		withTool,
-	);
+  const data = await getData(
+    fileId ?? fileid ?? "",
+    version,
+    doc,
+    action,
+    share,
+    type,
+    withTool,
+  );
 
-	if (data.error?.status === "access-denied" && share) {
-		const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
-		if (!roomData) {
-			logger.error(
-				`fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Wrong share key`,
-			);
-			return;
-		}
-		const { status } = roomData.response;
+  const isOAuth =
+    (searchParams as { auth?: string } | undefined)?.auth === "oauth";
 
-		if (status === ValidationStatus.Password) {
-			logger.debug(
-				`fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open file password component`,
-			);
-			return (
-				<FilePassword validationData={roomData.response} shareKey={share} />
-			);
-		}
-	}
+  if (isOAuth && !data.config) {
+    return (
+      <OAuthEditor
+        fileId={fileId ?? fileid ?? ""}
+        version={version}
+        doc={doc}
+        action={action}
+        editorType={type}
+        baseSdkConfig={baseSdkConfig}
+      />
+    );
+  }
 
-	const deepLinkSettings = isSDK ? null : await getDeepLinkSettings();
+  if (data.error?.status === "access-denied" && share) {
+    const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
+    if (!roomData) {
+      logger.error(
+        `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Wrong share key`,
+      );
+      return;
+    }
+    const { status } = roomData.response;
 
-	if (data.error?.status === "not-found" && error) {
-		data.error.message = error;
-	}
+    if (status === ValidationStatus.Password) {
+      logger.debug(
+        `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open file password component`,
+      );
+      return (
+        <FilePassword validationData={roomData.response} shareKey={share} />
+      );
+    }
+  }
 
-	let url = data.config?.editorUrl ?? data.error?.editorUrl;
-	const urlQuery = url?.includes("?") ? `?${url.split("?")[1]}` : "";
-	url = url?.replace(urlQuery, "");
+  const isEmbedded = editorType === "embedded";
+  const deepLinkSettings =
+    isSDK || isEmbedded ? null : await getDeepLinkSettings();
 
-	if (url && !url.endsWith("/")) url += "/";
+  if (data.error?.status === "not-found" && error) {
+    data.error.message = error;
+  }
 
-	const docApiUrl = `${url}web-apps/apps/api/documents/api.js${urlQuery}`;
+  let url = data.config?.editorUrl ?? data.error?.editorUrl;
+  const urlQuery = url?.includes("?") ? `?${url.split("?")[1]}` : "";
+  url = url?.replace(urlQuery, "");
 
-	if (isSDK) {
-		delete data.config?.editorConfig?.embedded?.embedUrl;
-		delete data.config?.editorConfig?.embedded?.shareUrl;
-	}
+  if (url && !url.endsWith("/")) url += "/";
 
-	if (urlQuery) {
-		if (data.config?.editorUrl) {
-			data.config.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
-		}
+  const docApiUrl = `${url}web-apps/apps/api/documents/api.js${urlQuery}`;
 
-		if (data.error?.editorUrl) {
-			data.error.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
-		}
-	}
+  if (isSDK) {
+    delete data.config?.editorConfig?.embedded?.embedUrl;
+    delete data.config?.editorConfig?.embedded?.shareUrl;
+  }
 
-	logger.debug(
-		`fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, docApiUrl: ${docApiUrl}, url: ${hostname} Open file`,
-	);
+  if (urlQuery) {
+    if (data.config?.editorUrl) {
+      data.config.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
+    }
 
-	return (
-		<>
-			{url ? (
-				<Script
-					id="onlyoffice-api-script"
-					strategy="beforeInteractive"
-					src={docApiUrl}
-				/>
-			) : null}
-			<Root
-				{...data}
-				shareKey={share}
-				baseSdkConfig={baseSdkConfig}
-				deepLinkSettings={deepLinkSettings?.handlingMode}
-			/>
-		</>
-	);
+    if (data.error?.editorUrl) {
+      data.error.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
+    }
+  }
+
+  logger.debug(
+    `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, docApiUrl: ${docApiUrl}, url: ${hostname} Open file`,
+  );
+
+  return (
+    <>
+      {url ? (
+        <script id="onlyoffice-api-script" async src={docApiUrl} />
+      ) : null}
+      <Root
+        {...data}
+        shareKey={share}
+        baseSdkConfig={baseSdkConfig}
+        deepLinkSettings={deepLinkSettings?.handlingMode}
+      />
+    </>
+  );
 }
 
 export default Page;

@@ -1,39 +1,53 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
-
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 import { makeAutoObservable, when } from "mobx";
 import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
+
+import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import {
+  AnalyticsEvents,
+  FolderType,
+  RoomsType,
+  RoomsTypePrivate,
+} from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 import {
   createTemplate,
@@ -46,16 +60,16 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
 import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
 import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
-import {
-  addServersForRoom,
-  deleteServersForRoom,
-} from "@docspace/shared/api/ai";
+import { addEntityMcpServer } from "@docspace/shared/api/ai";
+import { startDbSync } from "@docspace/shared/api/rooms";
+import { DbSyncService } from "@docspace/shared/services/db-sync.service";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { calculateRoomLogoParams } from "@docspace/ui-kit/utils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import FilesStore from "./FilesStore";
+import type { TActionItem } from "./FilesActionsStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import DialogsStore from "./DialogsStore";
@@ -73,26 +87,6 @@ class CreateEditRoomStore {
 
   onClose: Nullable<VoidFunction> = null;
 
-  filesStore: Nullable<FilesStore> = null;
-
-  tagsStore: Nullable<TagsStore> = null;
-
-  selectedFolderStore: Nullable<SelectedFolderStore> = null;
-
-  filesActionsStore: Nullable<FilesActionsStore> = null;
-
-  thirdPartyStore: Nullable<ThirdPartyStore> = null;
-
-  settingsStore: Nullable<SettingsStore> = null;
-
-  currentQuotaStore: Nullable<CurrentQuotasStore> = null;
-
-  clientLoadingStore: Nullable<ClientLoadingStore> = null;
-
-  dialogsStore: Nullable<DialogsStore> = null;
-
-  avatarEditorDialogStore: Nullable<AvatarEditorDialogStore> = null;
-
   watermarksSettings: TWatermark = {} as TWatermark;
 
   initialWatermarksSettings: TWatermark | { enabled: boolean } =
@@ -102,30 +96,25 @@ class CreateEditRoomStore {
 
   selectedRoomType: Nullable<RoomsType> = null;
 
+  openContext: string = "";
+
+  setOpenContext = (context: string) => {
+    this.openContext = context;
+  };
+
   constructor(
-    filesStore: FilesStore,
-    filesActionsStore: FilesActionsStore,
-    selectedFolderStore: SelectedFolderStore,
-    tagsStore: TagsStore,
-    thirdPartyStore: ThirdPartyStore,
-    settingsStore: SettingsStore,
-    currentQuotaStore: CurrentQuotasStore,
-    clientLoadingStore: ClientLoadingStore,
-    dialogsStore: DialogsStore,
-    avatarEditorDialogStore: AvatarEditorDialogStore,
+    public filesStore: FilesStore,
+    public filesActionsStore: FilesActionsStore,
+    public selectedFolderStore: SelectedFolderStore,
+    public tagsStore: TagsStore,
+    public thirdPartyStore: ThirdPartyStore,
+    public settingsStore: SettingsStore,
+    public currentQuotaStore: CurrentQuotasStore,
+    public clientLoadingStore: ClientLoadingStore,
+    public dialogsStore: DialogsStore,
+    public avatarEditorDialogStore: AvatarEditorDialogStore,
   ) {
     makeAutoObservable(this);
-
-    this.filesStore = filesStore;
-    this.tagsStore = tagsStore;
-    this.selectedFolderStore = selectedFolderStore;
-    this.filesActionsStore = filesActionsStore;
-    this.thirdPartyStore = thirdPartyStore;
-    this.settingsStore = settingsStore;
-    this.currentQuotaStore = currentQuotaStore;
-    this.clientLoadingStore = clientLoadingStore;
-    this.dialogsStore = dialogsStore;
-    this.avatarEditorDialogStore = avatarEditorDialogStore;
   }
 
   setSelectedRoomType = (type: RoomsType) => {
@@ -251,6 +240,9 @@ class CreateEditRoomStore {
     t: TFunction,
     newParams: TRoomParams,
     room: TRoom,
+    options?: {
+      cb?: (room: TRoom) => void;
+    },
   ) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
@@ -372,8 +364,10 @@ class CreateEditRoomStore {
         toastr.error(e as string);
       }
 
-      if (Object.keys(editRoomParams).length)
-        await api.rooms.editRoom(room.id, editRoomParams);
+      if (Object.keys(editRoomParams).length) {
+        const updatedRoom = await api.rooms.editRoom(room.id, editRoomParams);
+        options?.cb?.(updatedRoom);
+      }
 
       if (isOwnerChanged) {
         requests.push(changeRoomOwner(t, roomOwner.id));
@@ -402,6 +396,13 @@ class CreateEditRoomStore {
       if (requests.length) {
         await Promise.all(requests);
       }
+
+      if (
+        (isSendFormToExternalDBChanged && sendFormToExternalDB) ||
+        (isSaveFormAsXLSXChanged && saveFormAsXLSX)
+      ) {
+        this.syncWithDatabase(room.id, t);
+      }
     } catch (e) {
       toastr.error(e as string);
     }
@@ -418,21 +419,13 @@ class CreateEditRoomStore {
 
     setRoomCreated(true);
 
-    const {
-      title,
-      icon,
-      tags,
-      invitations,
-      roomType,
-      isAvailable,
-      quota,
-      logo,
-    } = roomParams;
+    const { title, icon, tags, invitations, isAvailable, quota, logo } =
+      roomParams;
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
-          color: (cover as { color: string }).color,
+          cover: cover.cover,
+          color: cover.color,
         }
       : logo
         ? {
@@ -524,7 +517,7 @@ class CreateEditRoomStore {
       await this.onOpenNewRoom({
         id: progressData.templateId,
         title,
-        roomType,
+        roomType: item.roomType,
         rootFolderType: FolderType.RoomTemplates,
       } as unknown as TRoom);
     }
@@ -585,6 +578,9 @@ class CreateEditRoomStore {
       prompt,
       providerId,
       modelId,
+      isPrivate,
+      saveFormAsXLSX,
+      sendFormToExternalDB,
     } = roomParams;
 
     const isThirdparty = storageLocation.isThirdparty;
@@ -598,8 +594,8 @@ class CreateEditRoomStore {
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
-          color: (cover as { color: string }).color,
+          cover: cover.cover,
+          color: cover.color,
         }
       : logo
         ? {
@@ -607,9 +603,34 @@ class CreateEditRoomStore {
             color: (logo as { color: string }).color,
           }
         : null;
+
+    // RoomsTypePrivate (13) is a client-only virtual type for UI.
+    // Server expects CustomRoom (5) with private: true flag.
+    const isPrivateRoom = isPrivate || type === RoomsTypePrivate;
+    const serverRoomType = isPrivateRoom ? RoomsType.CustomRoom : type;
+
+    if (isPrivateRoom) {
+      const userStore = this.filesStore!.userStore;
+      let keys = userStore?.encryptionKeys;
+
+      if (!keys || keys.length === 0) {
+        try {
+          keys = (await userStore?.getEncryptionKeys?.()) ?? null;
+        } catch {
+          keys = null;
+        }
+      }
+
+      if (!keys || keys.length === 0) {
+        toastr.error(t("Common:EncryptionKeysRequiredForPrivateRoom"));
+        return;
+      }
+    }
+
     const createRoomData = {
       roomId,
-      roomType: type,
+      roomType: serverRoomType,
+      private: isPrivateRoom,
       title: title || t("Common:NewRoom"),
       ...(isThirdPartyRoom && {
         createAsNewFolder: createAsNewFolder ?? true,
@@ -638,6 +659,8 @@ class CreateEditRoomStore {
           modelId,
         },
       }),
+      saveFormAsXLSX,
+      sendFormToExternalDB,
     };
 
     this.setIsLoading(true);
@@ -688,7 +711,13 @@ class CreateEditRoomStore {
         );
 
       if (roomParams.mcpServers) {
-        addServersForRoom(room.id, roomParams.mcpServers);
+        // Servers are keyed by name in the chat-lib model; the service
+        // resolves the stored config (system or portal-level copy) itself.
+        Promise.all(
+          roomParams.mcpServers.map((name) =>
+            addEntityMcpServer(name, String(room.id)),
+          ),
+        ).catch((err) => console.error(err));
       }
 
       if (processCreatingRoomFromData) {
@@ -699,12 +728,27 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room.id, selections, room).catch(
-          (error) => console.error(error),
-        );
+        // selections are FilesStore view-model items (TItem);
+        // FilesActionsStore still types this input with its own minimal
+        // TActionItem — erased cast (type-only).
+        preparingDataForCopyingToRoom(
+          room.id,
+          selections as unknown as TActionItem[],
+          room,
+        ).catch((error) => console.error(error));
       }
 
       await this.onOpenNewRoom(room);
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.RoomCreated,
+        id: room.id,
+        roomType: room.roomType,
+        parentId: room.parentId,
+        context: this.openContext,
+      });
+
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
     } catch (err) {
@@ -785,7 +829,11 @@ class CreateEditRoomStore {
 
     setIsSectionBodyLoading(true);
 
-    const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
+    const isFormRoom = room.roomType === RoomsType.FormRoom;
+    const path = getCategoryUrl(
+      isFormRoom ? CategoryType.Form : CategoryType.SharedRoom,
+      room.id,
+    );
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
@@ -800,6 +848,81 @@ class CreateEditRoomStore {
       openMembersTab();
     }
   };
+
+  syncWithDatabase = async (roomId: number, t: TFunction) => {
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
+
+    try {
+      const res = await startDbSync(roomId);
+
+      if (!res) return;
+
+      if (res.isCompleted) {
+        DbSyncService.assertTaskSucceeded(res);
+        toastr.success(t("Files:SyncWithDatabaseSuccess"));
+        return;
+      }
+
+      const basePayload = {
+        operation: OPERATIONS_NAME.syncDatabase,
+        label: t("Files:SyncWithDatabase"),
+        operationId: roomId,
+        showPanel: () => this.dialogsStore.setIsSyncDbPanelVisible(true),
+      };
+
+      setSecondaryProgressBarData({ ...basePayload, percent: 0 });
+
+      const finalTask = await DbSyncService.poll(roomId, (progress) => {
+        setSecondaryProgressBarData({
+          ...basePayload,
+          percent: progress.percentage ?? 0,
+          completed: progress.isCompleted ?? false,
+          alert: false,
+        });
+      }).catch((error) => {
+        clearSecondaryProgressData(roomId, OPERATIONS_NAME.syncDatabase);
+        throw error;
+      });
+
+      this.dialogsStore.setSyncDbForms({
+        operationId: roomId,
+        forms: finalTask.forms,
+      });
+
+      const { forms } = finalTask;
+      const successCount = forms.filter((f) => f.success).length;
+      const errorCount = forms.filter((f) => !f.success && !!f.error).length;
+      const total = forms.length;
+      const pendingCount = total - successCount;
+
+      const statusLabel = t("Files:SyncWithDatabaseStatus", {
+        success: successCount,
+        total,
+      });
+      const pendingLabel =
+        pendingCount > 0
+          ? t("Files:SyncWithDatabasePending", { count: pendingCount })
+          : undefined;
+
+      setSecondaryProgressBarData({
+        ...basePayload,
+        label: statusLabel,
+        description: pendingLabel,
+        percent: 100,
+        completed: true,
+        alert: errorCount > 0,
+      });
+
+      if (errorCount === 0) {
+        toastr.success(t("Files:SyncWithDatabaseSuccess"));
+      }
+    } catch (error) {
+      toastr.error(t("Files:SyncWithDatabaseError"));
+      console.error(error);
+    }
+  };
 }
 
 export default CreateEditRoomStore;
+

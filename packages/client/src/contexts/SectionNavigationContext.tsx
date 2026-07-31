@@ -1,0 +1,126 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import React, { createContext, useContext, useRef, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
+
+/**
+ * Top-level sections. Everything not matched here is treated as home ("/").
+ */
+const SECTION_PREFIXES = [
+  "/portal-settings",
+  "/developer-tools",
+  "/accounts",
+  "/dashboard",
+  "/forms",
+  "/ai-files",
+  "/ai-forms",
+  "/ai-arbiter",
+  "/ai-rooms",
+] as const;
+
+function getSectionPrefix(pathname: string): string {
+  const match = SECTION_PREFIXES.find((prefix) => pathname.startsWith(prefix));
+  return match ?? "/";
+}
+
+type SectionNavigationContextValue = {
+  navigateBack: () => void;
+};
+
+const SectionNavigationContext =
+  createContext<SectionNavigationContextValue | null>(null);
+
+export const SectionNavigationProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const stackRef = useRef<string[]>([]);
+  const prevSectionRef = useRef<string>(getSectionPrefix(location.pathname));
+  const prevPathRef = useRef<string>(location.pathname + location.search);
+
+  useEffect(() => {
+    const currentSection = getSectionPrefix(location.pathname);
+
+    if (currentSection !== prevSectionRef.current) {
+      // Store the full previous path (not just the section prefix) so that
+      // "Back" returns to the exact page we left — e.g. a specific agent
+      // chat (/ai-agents/:id/chat) or the agents list (/ai-agents/filter),
+      // instead of collapsing every non-prefixed route to "/".
+      stackRef.current.push(prevPathRef.current);
+      prevSectionRef.current = currentSection;
+    }
+
+    prevPathRef.current = location.pathname + location.search;
+  }, [location.pathname, location.search]);
+
+  const navigateBack = () => {
+    const prev = stackRef.current.pop();
+
+    // When we have a recorded origin (the path we were on before entering the
+    // current section) return there. Otherwise — e.g. after a page reload or a
+    // direct deep-link into the section, when no boundary crossing was observed
+    // — fall back to the home section instead of `navigate(-1)`, which would
+    // step backwards through the in-section tree history one entry at a time.
+    const target = prev ?? "/";
+
+    prevSectionRef.current = getSectionPrefix(target);
+    prevPathRef.current = target;
+    navigate(target);
+  };
+
+  return (
+    <SectionNavigationContext.Provider value={{ navigateBack }}>
+      {children}
+    </SectionNavigationContext.Provider>
+  );
+};
+
+export const useSectionNavigation = (): SectionNavigationContextValue => {
+  const ctx = useContext(SectionNavigationContext);
+
+  if (!ctx) {
+    throw new Error(
+      "useSectionNavigation must be used within SectionNavigationProvider",
+    );
+  }
+
+  return ctx;
+};
+

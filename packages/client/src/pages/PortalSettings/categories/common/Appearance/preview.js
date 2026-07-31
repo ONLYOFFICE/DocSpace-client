@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import PlusPreviewSvgUrl from "PUBLIC_DIR/images/plus.preview.svg?url";
 import { useState, useEffect, useLayoutEffect } from "react";
@@ -31,25 +40,67 @@ import { ContextMenuButton } from "@docspace/ui-kit/components/context-menu-butt
 
 import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 
+import classnames from "classnames";
+
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import {
-  StyledComponent,
-  StyledFloatingButton,
-  IconBox,
-  StyledMobilePreview,
-} from "./StyledPreview";
+import { useInterfaceDirection } from "@docspace/ui-kit/context/InterfaceDirectionContext";
+import previewStyles from "./StyledPreview.module.scss";
+
+const buildPreviewVars = (themePreview, colorPreview, isViewTablet) => {
+  const isLight = themePreview === "Light";
+
+  return {
+    "--preview-color": colorPreview,
+    "--preview-menu-bg": isLight
+      ? globalColors.grayLight
+      : globalColors.darkGrayLight,
+    "--preview-menu-width": isViewTablet ? "61px" : "251px",
+    "--preview-menu-padding": isViewTablet ? "15px 0 0" : "21px 0 17px",
+    "--preview-line-bg": isLight
+      ? globalColors.grayLightMid
+      : globalColors.grayDarkStrong,
+    "--preview-notice-stroke": isLight ? "none" : globalColors.darkGrayLight,
+    "--preview-section-bg": isLight ? globalColors.white : globalColors.black,
+    "--preview-section-width": isViewTablet ? "100%" : "56%",
+    "--preview-section-flex-tablet-display": isViewTablet ? "flex" : "initial",
+    "--preview-section-flex-tablet-justify": isViewTablet
+      ? "space-between"
+      : "initial",
+    "--preview-section-tile-padding-inline": isViewTablet ? "20px 0" : "20px",
+    "--preview-loaders-theme-bg": isLight
+      ? globalColors.white
+      : globalColors.grayDark,
+    "--preview-select-bg": isLight ? globalColors.white : globalColors.black,
+    "--preview-border-color": isLight
+      ? globalColors.grayStrong
+      : globalColors.grayDarkStrong,
+    "--preview-tile-width": isViewTablet ? "64%" : "auto",
+    "--preview-background": isLight
+      ? globalColors.white
+      : globalColors.darkGrayLight,
+    "--preview-only-tile-name-width": isViewTablet ? "66%" : "auto",
+    "--preview-color-loaders-fill": isLight ? colorPreview : globalColors.white,
+    "--preview-pin-fill": isLight ? colorPreview : globalColors.white,
+    "--preview-tile-text-bg": isLight
+      ? globalColors.grayStrong
+      : globalColors.grayDark,
+    "--preview-mobile-border": isLight
+      ? `1px solid ${globalColors.grayStrong}`
+      : `1px solid ${globalColors.grayDarkStrong}`,
+  };
+};
 
 const Preview = (props) => {
   const {
     previewAccent,
     themePreview,
-    selectThemeId,
     withBorder = true,
     withTileActions = true,
     floatingButtonClass,
     colorCheckImg,
   } = props;
+  const { isRTL } = useInterfaceDirection();
   const [colorPreview, setColorPreview] = useState(previewAccent);
   const [isViewTablet, setIsViewTablet] = useState(false);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -76,13 +127,12 @@ const Preview = (props) => {
     return () => {
       window.removeEventListener("resize", onCheckView);
     };
-  });
+  }, []);
 
   return isSmallWindow || isMobile() ? (
-    <StyledMobilePreview
-      selectThemeId={selectThemeId}
-      themePreview={themePreview}
-      colorPreview={colorPreview}
+    <div
+      className={previewStyles.styledMobilePreview}
+      style={buildPreviewVars(themePreview, colorPreview)}
     >
       <div className="preview_mobile-header">
         <RectangleSkeleton
@@ -180,33 +230,28 @@ const Preview = (props) => {
           />
         </div>
       </div>
-      <StyledFloatingButton
-        className={
-          floatingButtonClass
-            ? `${floatingButtonClass} floating-button`
-            : "floating-button"
-        }
-        colorPreview={colorPreview}
-        themePreview={themePreview}
-        selectThemeId={selectThemeId}
+      <div
+        className={classnames(
+          previewStyles.styledFloatingButton,
+          floatingButtonClass ? `${floatingButtonClass} floating-button` : "floating-button",
+        )}
+        style={{ "--preview-color": colorPreview }}
       >
-        <IconBox
-          colorPreview={colorPreview}
-          themePreview={themePreview}
-          selectThemeId={selectThemeId}
-          colorCheckImg={colorCheckImg}
+        <div
+          className={previewStyles.iconBox}
+          style={{ "--check-img-color": colorCheckImg }}
         >
           <ButtonPlusIcon />
-        </IconBox>
-      </StyledFloatingButton>
-    </StyledMobilePreview>
+        </div>
+      </div>
+    </div>
   ) : (
-    <StyledComponent
-      colorPreview={colorPreview}
-      themePreview={themePreview}
-      selectThemeId={selectThemeId}
-      isViewTablet={isViewTablet}
-      withBorder={withBorder}
+    <div
+      className={classnames(previewStyles.styledComponent, {
+        [previewStyles.withBorder]: withBorder,
+        [previewStyles.rtl]: isRTL,
+      })}
+      style={buildPreviewVars(themePreview, colorPreview, isViewTablet)}
     >
       <div className="menu border-color">
         {!isViewTablet ? (
@@ -577,24 +622,20 @@ const Preview = (props) => {
         </div>
 
         {isViewTablet ? (
-          <StyledFloatingButton
-            className={floatingButtonClass}
-            colorPreview={colorPreview}
-            themePreview={themePreview}
-            selectThemeId={selectThemeId}
+          <div
+            className={classnames(previewStyles.styledFloatingButton, floatingButtonClass)}
+            style={{ "--preview-color": colorPreview }}
           >
-            <IconBox
-              colorPreview={colorPreview}
-              themePreview={themePreview}
-              selectThemeId={selectThemeId}
-              colorCheckImg={colorCheckImg}
+            <div
+              className={previewStyles.iconBox}
+              style={{ "--check-img-color": colorCheckImg }}
             >
               <ButtonPlusIcon />
-            </IconBox>
-          </StyledFloatingButton>
+            </div>
+          </div>
         ) : null}
       </div>
-    </StyledComponent>
+    </div>
   );
 };
 

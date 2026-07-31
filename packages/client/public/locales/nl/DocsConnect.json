@@ -49,6 +49,7 @@
   "DownloadReport": "Rapport downloaden",
   "DropInIntegrationDescription": "Docs API en WOPI, 40+ kant-en-klare connectors, en voorbeelden voor elke taal.",
   "DropInIntegrationTitle": "Kant-en-klare integratie",
+  "EditorPreviewFailed": "Kan de editorpreview niet laden. Controleer het tenantadres en de secret key.",
   "Editors": "Editors",
   "EditorsSubtitleStat": "Documenteditors met volledige rechten",
   "EditorUsage": "Editorgebruik",

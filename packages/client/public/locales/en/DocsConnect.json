@@ -49,6 +49,7 @@
   "DownloadReport": "Download report",
   "DropInIntegrationDescription": "Docs API and WOPI, 40+ ready connectors, and samples for every language.",
   "DropInIntegrationTitle": "Drop-in integration",
+  "EditorPreviewFailed": "Failed to load the editor preview. Check the tenant address and secret key.",
   "Editors": "Editors",
   "EditorsSubtitleStat": "Document editors with full permissions",
   "EditorUsage": "Editor usage",

@@ -49,6 +49,7 @@
   "DownloadReport": "Скачать отчет",
   "DropInIntegrationDescription": "API Docs и WOPI, более 40 готовых коннекторов и примеры для любого языка программирования.",
   "DropInIntegrationTitle": "Готовая интеграция",
+  "EditorPreviewFailed": "Не удалось загрузить предпросмотр редактора. Проверьте адрес тенанта и секретный ключ.",
   "Editors": "Редакторы",
   "EditorsSubtitleStat": "Редакторы документов с полными правами",
   "EditorUsage": "Использование редакторов",

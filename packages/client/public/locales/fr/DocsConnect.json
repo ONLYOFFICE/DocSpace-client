@@ -49,6 +49,7 @@
   "DownloadReport": "Télécharger le rapport",
   "DropInIntegrationDescription": "Docs API et WOPI, plus de 40 connecteurs prêts à l'emploi, et des exemples pour chaque langage.",
   "DropInIntegrationTitle": "Intégration clé en main",
+  "EditorPreviewFailed": "Échec du chargement de l'aperçu de l'éditeur. Vérifiez l'adresse du tenant et la clé secrète.",
   "Editors": "Éditeurs",
   "EditorsSubtitleStat": "Éditeurs de documents avec toutes les autorisations",
   "EditorUsage": "Utilisation des éditeurs",

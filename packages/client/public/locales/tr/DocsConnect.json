@@ -49,6 +49,7 @@
   "DownloadReport": "Raporu indir",
   "DropInIntegrationDescription": "Docs API ve WOPI, 40'tan fazla hazır bağlayıcı ve her dil için örnekler.",
   "DropInIntegrationTitle": "Anında entegrasyon",
+  "EditorPreviewFailed": "Düzenleyici önizlemesi yüklenemedi. Tenant adresini ve gizli anahtarı kontrol edin.",
   "Editors": "Düzenleyiciler",
   "EditorsSubtitleStat": "Tam izinlere sahip belge düzenleyicileri",
   "EditorUsage": "Düzenleyici kullanımı",

@@ -49,6 +49,7 @@
   "DownloadReport": "تنزيل التقرير",
   "DropInIntegrationDescription": "واجهة برمجة تطبيقات Docs API وWOPI، وأكثر من 40 موصلًا جاهزًا، وأمثلة لكل لغة برمجة.",
   "DropInIntegrationTitle": "تكامل جاهز للاستخدام",
+  "EditorPreviewFailed": "فشل تحميل معاينة المحرر. تحقق من عنوان المستأجر والمفتاح السري.",
   "Editors": "المحررون",
   "EditorsSubtitleStat": "محررو المستندات ذوو الصلاحيات الكاملة",
   "EditorUsage": "استخدام المحررين",

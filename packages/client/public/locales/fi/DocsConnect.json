@@ -49,6 +49,7 @@
   "DownloadReport": "Lataa raportti",
   "DropInIntegrationDescription": "Docs API ja WOPI, yli 40 valmista liitintä sekä esimerkkejä jokaiselle kielelle.",
   "DropInIntegrationTitle": "Valmis integraatio",
+  "EditorPreviewFailed": "Editorin esikatselun lataaminen epäonnistui. Tarkista tenantin osoite ja salainen avain.",
   "Editors": "Editorit",
   "EditorsSubtitleStat": "Asiakirjaeditorit täysillä oikeuksilla",
   "EditorUsage": "Editorien käyttö",

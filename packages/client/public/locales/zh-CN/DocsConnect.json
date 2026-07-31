@@ -49,6 +49,7 @@
   "DownloadReport": "下载报告",
   "DropInIntegrationDescription": "文档 API 和 WOPI，40 多个现成连接器，以及各种语言的示例代码。",
   "DropInIntegrationTitle": "即插即用集成",
+  "EditorPreviewFailed": "编辑器预览加载失败。请检查租户地址和密钥。",
   "Editors": "编辑者",
   "EditorsSubtitleStat": "拥有完整权限的文档编辑者",
   "EditorUsage": "编辑者使用情况",

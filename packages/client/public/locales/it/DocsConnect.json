@@ -49,6 +49,7 @@
   "DownloadReport": "Scarica report",
   "DropInIntegrationDescription": "API Docs e WOPI, oltre 40 connettori pronti all'uso ed esempi per ogni linguaggio.",
   "DropInIntegrationTitle": "Integrazione pronta all'uso",
+  "EditorPreviewFailed": "Impossibile caricare l'anteprima dell'editor. Controlla l'indirizzo del tenant e la chiave segreta.",
   "Editors": "Editor",
   "EditorsSubtitleStat": "Editor di documenti con autorizzazioni complete",
   "EditorUsage": "Utilizzo editor",

@@ -1858,6 +1858,7 @@
   "RemoveFromFavorites": "Remove from favorites",
   "RemoveFromList": "Remove from list",
   "RemoveSubscription": "Remove subscription",
+  "RemoveSubscriptionConfirm": "Your previous subscription details will be removed. To use {{service}} again, you'll need to configure a new subscription.",
   "RemoveTag": "<1>{{tag}}</1> tag removed.",
   "RemoveUserFromEncryptedRoomWarning": "Remove this user from the encrypted room? Their wrapped key will be removed from every existing file, so they can no longer download new copies. However, anything they already decrypted on their device may still be accessible to them. For full revocation you must rotate the room's content.",
   "Rename": "Rename",

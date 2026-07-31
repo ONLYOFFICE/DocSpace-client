@@ -111,7 +111,6 @@
   "BillingCycleRestartNote": "Your monthly billing cycle will restart today. The next payment of <1>{{amount}}</1> will be charged <2>on {{date}}</2>.",
   "NextMonthlyBillNote": "Your next monthly bill will be <1>{{amount}}</1> starting from <2>{{date}}</2>",
   "CancelPlanConfirm": "Are you sure you want to cancel your current {{service}} subscription?",
-  "RemoveSubscriptionConfirm": "Your previous subscription details will be removed. To use {{service}} again, you'll need to configure a new subscription.",
   "YourCurrentPlanLabel": "Your current subscription:",
   "ChangeScheduled": "The change has been scheduled",
   "DemoCode": "Demo code",

@@ -3,7 +3,7 @@
   "content": "Passphrase updated successfully",
   "content_en_sha1_hash": "11e93747079f8c39992ec54dbc41a0d63161562d",
   "created_at": "2026-05-24T17:27:34.731Z",
-  "updated_at": "2026-06-09T09:43:10.924Z",
+  "updated_at": "2026-07-31T12:36:29.541Z",
   "comment": {
     "text": "Success toast message appearing after a user successfully updates or rotates their passphrase in the keys management section.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useRotatePassphraseFlow.tsx",
-      "line_number": 101,
-      "context": "privateKeyEnc: updated.privateKeyEnc,\n });\n setActiveKeyId(userId, target.id);\n SecretStorage.lock();\n await refreshKeysFromServer();\n toastr.success(t(\"Common:PassphraseUpdated\"));\n reset();\n } catch (e) {\n // Network / API errors and the actual \"invalid passphrase\" case both\n // landed here previously, so a network glitch looked like a wrong\n // passphrase. getEncryptionErrorMessage classifies it correctly.",
+      "line_number": 102,
+      "context": "});\n if (getActiveKeyId(userId) === target.id) {\n SecretStorage.lock();\n }\n await refreshKeysFromServer();\n toastr.success(t(\"Common:PassphraseUpdated\"));\n reset();\n } catch (e) {\n // Network / API errors and the actual \"invalid passphrase\" case both\n // landed here previously, so a network glitch looked like a wrong\n // passphrase. getEncryptionErrorMessage classifies it correctly.",
       "module": "/packages/client"
     }
   ],

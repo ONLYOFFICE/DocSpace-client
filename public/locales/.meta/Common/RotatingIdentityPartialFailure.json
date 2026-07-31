@@ -1,20 +1,20 @@
 {
   "key_path": "RotatingIdentityPartialFailure",
-  "content": "{{count}} files in your private rooms could not be re-encrypted. Please try reopening these rooms or contact support.",
-  "content_en_sha1_hash": "582fe3b841393b40b2d31deb1c8d58d06bf259e3",
-  "created_at": "2026-06-09T09:42:58.572Z",
-  "updated_at": "2026-06-09T09:44:48.532Z",
+  "content": "{{count}} files could not be moved to the new key yet. They remain accessible with your previous key. You can retry from Keys management.",
+  "content_en_sha1_hash": "3917120de18c7fffd61a50995dad07e008174b5a",
+  "created_at": "2026-07-31T12:36:15.714Z",
+  "updated_at": "2026-07-31T12:37:35.810Z",
   "comment": {
-    "text": "Warning toast message appearing when a subset of files fails to re-encrypt during identity rotation; {{count}} represents the number of failed files.",
+    "text": "Warning toast notification appearing during identity rotation when some files fail to migrate; {{count}} represents the number of failed files.",
     "is_auto": true,
-    "updated_at": "2026-06-09T09:44:48.532Z",
+    "updated_at": "2026-07-31T12:37:35.810Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useRotateIdentityForRooms.ts",
-      "line_number": 204,
-      "context": "toastr.success(t(\"Common:RotatingIdentitySuccess\"));\n }\n // No files → no toast (user had empty rooms or no encrypted files).\n } else if (totalDone > 0) {\n toastr.warning(\n t(\"Common:RotatingIdentityPartialFailure\", {\n count: totalFailed,\n }),\n );\n } else {\n toastr.error(t(\"Common:RotatingIdentityFailed\"));",
+      "line_number": 162,
+      "context": "toastr.success(t(\"Common:RotatingIdentitySuccess\"));\n }\n // No files → no toast (user had empty rooms or no encrypted files).\n } else if (summary.filesDone > 0) {\n toastr.warning(\n t(\"Common:RotatingIdentityPartialFailure\", {\n count: summary.filesFailed,\n }),\n );\n } else {\n toastr.error(t(\"Common:RotatingIdentityFailed\"));",
       "module": "/packages/client"
     }
   ],

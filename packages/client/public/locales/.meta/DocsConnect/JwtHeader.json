@@ -3,7 +3,7 @@
   "content": "JWT header",
   "content_en_sha1_hash": "8312d8848e24c566a42aade809aa3d0c545feaa2",
   "created_at": "2026-07-27T13:07:48.483Z",
-  "updated_at": "2026-07-30T16:14:11.204Z",
+  "updated_at": "2026-07-31T15:04:17.662Z",
   "comment": {
     "text": "Label for a text input and information field in the DocsConnect settings, identifying the header component of a JSON Web Token.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 313,
+      "line_number": 320,
       "context": "value={tenant.address ?? \"\"}\n onCopy={onCopy}\n copyTitle={t(\"Common:CopyToClipboard\")}\n />\n <InfoField\n label={t(\"DocsConnect:JwtHeader\")}\n value={config.security.header}\n onCopy={onCopy}\n copyTitle={t(\"Common:CopyToClipboard\")}\n />\n <InfoField",
       "module": "/packages/client"
     }

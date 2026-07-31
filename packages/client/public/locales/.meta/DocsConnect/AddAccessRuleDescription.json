@@ -3,7 +3,7 @@
   "content": "Control which IP addresses, ranges, or hosts can access {{service}}",
   "content_en_sha1_hash": "c5aef7075f9c5b4c1405fdfab317695f35407990",
   "created_at": "2026-07-27T13:07:48.543Z",
-  "updated_at": "2026-07-30T16:14:11.209Z",
+  "updated_at": "2026-07-31T15:04:17.667Z",
   "comment": {
     "text": "Description text in a modal dialog body explaining how to restrict access via IP addresses, ranges, or hosts; {{service}} represents the name of the service.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
-      "line_number": 90,
+      "line_number": 104,
       "context": ">\n <ModalDialog.Header>{t(\"DocsConnect:AddAccessRule\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.addRuleBody}>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:AddAccessRuleDescription\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <FieldContainer\n isVertical",
       "module": "/packages/client"
     }

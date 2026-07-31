@@ -3,7 +3,7 @@
   "content": "Your encryption identity was reset. Generate a new key to set encryption up again.",
   "content_en_sha1_hash": "e78416c498e150cfe040908fd690ee1979da8ba4",
   "created_at": "2026-05-24T17:27:37.200Z",
-  "updated_at": "2026-05-24T17:31:41.914Z",
+  "updated_at": "2026-07-31T12:36:29.540Z",
   "comment": {
     "text": "Success toast message appearing after a successful encryption identity reset.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useResetKeysFlow.tsx",
-      "line_number": 104,
+      "line_number": 106,
       "context": "if (failures > 0) {\n toastr.warning(\n t(\"Common:ResetEncryptionKeysPartialFailure\", { count: failures }),\n );\n } else {\n toastr.success(t(\"Common:ResetEncryptionKeysSuccess\"));\n }\n } catch (error) {\n console.error(\"Identity reset failed:\", error);\n toastr.error(t(\"Common:ResetEncryptionKeysFailed\"));\n } finally {",
       "module": "/packages/client"
     }

@@ -74,7 +74,11 @@ import {
   PORTAL_DARK_THEME_ID,
 } from "@docspace/ui-kit/ai-agent/providers/themes";
 
-import { useAgentsAIConfigStore, useAiRoomStore } from "../../_store";
+import {
+  useAgentsAIConfigStore,
+  useAgentsUserStore,
+  useAiRoomStore,
+} from "../../_store";
 import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 import useOpenResultFile from "../../_hooks/useOpenResultFile";
 
@@ -121,6 +125,9 @@ const AiAgentsAiChatProviders = ({
   const { isBase } = useTheme();
   const aiRoomStore = useAiRoomStore();
   const { portalSettings } = useAgentsCommonData();
+  // SSR user snapshot (AgentsUserStore is constructed with it) — `null`
+  // means an anonymous SDK embed.
+  const { user } = useAgentsUserStore();
   const openResultFile = useOpenResultFile();
 
   const params = useParams();
@@ -149,6 +156,10 @@ const AiAgentsAiChatProviders = ({
       theme={isBase ? PORTAL_BASE_THEME_ID : PORTAL_DARK_THEME_ID}
       locale={i18n.language}
       isStandalone={isStandalone}
+      // Anonymous SDK embeds must not fire /api/2.0/ai fetches (401 spam).
+      // Guests are intentionally NOT excluded here — the agents surface is
+      // left untouched for now.
+      canUseAi={!!user}
       entityId={entityId}
       getAgentRoomId={getAgentRoomId}
       openResultFile={openResultFile}

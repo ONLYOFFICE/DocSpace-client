@@ -711,7 +711,7 @@ class CreateEditRoomStore {
         );
 
       if (roomParams.mcpServers) {
-        // Servers are keyed by name in the new-ai model; the service
+        // Servers are keyed by name in the chat-lib model; the service
         // resolves the stored config (system or portal-level copy) itself.
         Promise.all(
           roomParams.mcpServers.map((name) =>

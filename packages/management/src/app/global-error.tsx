@@ -46,6 +46,10 @@ import type {
   TSettings,
 } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
+import {
+  canReloadOnChunkError,
+  scheduleChunkErrorReload,
+} from "@docspace/shared/utils/chunk-load-error";
 
 import useTheme from "@/hooks/useTheme";
 import useDeviceType from "@/hooks/useDeviceType";
@@ -53,10 +57,19 @@ import useI18N from "@/hooks/useI18N";
 
 import pkg from "../../package.json";
 
+const CHUNK_RELOAD_KEY = "management.retry-chunk-reload";
+
 export default function GlobalError({ error }: { error: Error }) {
   const [settings, setSettings] = useState<TSettings>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setError] = useState<boolean>(false);
+  const [isReloading] = useState<boolean>(() =>
+    canReloadOnChunkError(error, CHUNK_RELOAD_KEY),
+  );
+
+  useLayoutEffect(() => {
+    if (isReloading) scheduleChunkErrorReload(CHUNK_RELOAD_KEY);
+  }, [isReloading]);
 
   const { i18n } = useI18N({ settings });
   const { currentDeviceType } = useDeviceType();
@@ -80,8 +93,11 @@ export default function GlobalError({ error }: { error: Error }) {
   }, []);
 
   useLayoutEffect(() => {
+    if (isReloading) return;
     getData();
-  }, [getData]);
+  }, [getData, isReloading]);
+
+  if (isReloading) return null;
 
   if (isError) return;
 

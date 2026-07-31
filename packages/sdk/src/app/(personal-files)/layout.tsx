@@ -122,7 +122,11 @@ export default async function DocsLayout({
   return (
     <main style={{ width: "100%", height: "100%" }}>
       <QueryProvider>
-        <DocsStoreProviders initViewAs={initViewAs} myFolderId={myFolderId}>
+        <DocsStoreProviders
+          initViewAs={initViewAs}
+          myFolderId={myFolderId}
+          canUseAi={!!user && !user.isVisitor}
+        >
           {children}
         </DocsStoreProviders>
       </QueryProvider>

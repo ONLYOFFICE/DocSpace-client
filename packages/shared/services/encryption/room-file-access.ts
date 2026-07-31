@@ -38,6 +38,7 @@
 // embedded in the wrap blob and resolved against roomMemberKeys at unwrap.
 
 import { unwrapDEK, wrapDEK, inspectWrap } from "./hpke";
+import { wipeDek } from "./file-keys";
 import { NoAccessError, AuthenticationError } from "./errors";
 import {
   getKeyMismatchHandler,
@@ -62,6 +63,7 @@ export async function unwrapDekForCurrentUser(params: {
   fileId: number;
   onKeyChange?: KeyMismatchResolver;
   senderDisplayName?: string;
+  currentPublicKeyId?: string;
 }): Promise<Uint8Array> {
   const {
     fileKeys,
@@ -71,6 +73,7 @@ export async function unwrapDekForCurrentUser(params: {
     fileId,
     onKeyChange,
     senderDisplayName,
+    currentPublicKeyId,
   } = params;
 
   if (!Number.isFinite(fileId) || fileId <= 0) {
@@ -86,47 +89,62 @@ export async function unwrapDekForCurrentUser(params: {
     throw new NoAccessError(currentUserId);
   }
 
+  const ordered = currentPublicKeyId
+    ? [...myEntries].sort(
+        (a, b) =>
+          Number(b.publicKeyId === currentPublicKeyId) -
+          Number(a.publicKeyId === currentPublicKeyId),
+      )
+    : myEntries;
+
   let lastError: unknown = null;
-  for (const myEntry of myEntries) {
+  for (const myEntry of ordered) {
     const inspection = inspectWrap(myEntry.privateKeyEnc);
     const senderUserId = inspection.senderUserId;
 
-    const senderEntry = roomMemberKeys.find(
+    const senderCandidates = roomMemberKeys.filter(
       (k) => String(k.userId) === String(senderUserId),
     );
-    if (!senderEntry) {
+    if (senderCandidates.length === 0) {
       lastError = new AuthenticationError(
         `wrap claims sender ${senderUserId} but no public key was provided`,
       );
       continue;
     }
 
-    try {
-      await verifySenderKeyAgainstTofu(
-        currentUserId,
-        senderUserId,
-        senderEntry.publicKey,
-        onKeyChange,
-        senderDisplayName,
-      );
-    } catch (e) {
-      lastError = e;
-      continue;
-    }
+    for (const candidate of senderCandidates) {
+      const senderPubBytes = decodeBase64(candidate.publicKey);
 
-    const senderPubBytes = decodeBase64(senderEntry.publicKey);
+      let dek: Uint8Array;
+      try {
+        dek = await unwrapDEK({
+          wrapped: myEntry.privateKeyEnc,
+          recipientPrivateKey: currentIdentity.privateKey,
+          recipientUserId: currentUserId,
+          expectedSenderPublicKey: senderPubBytes,
+          expectedSenderUserId: senderUserId,
+          fileId,
+        });
+      } catch (e) {
+        lastError = e;
+        continue;
+      }
 
-    try {
-      return await unwrapDEK({
-        wrapped: myEntry.privateKeyEnc,
-        recipientPrivateKey: currentIdentity.privateKey,
-        recipientUserId: currentUserId,
-        expectedSenderPublicKey: senderPubBytes,
-        expectedSenderUserId: senderUserId,
-        fileId,
-      });
-    } catch (e) {
-      lastError = e;
+      try {
+        await verifySenderKeyAgainstTofu(
+          currentUserId,
+          senderUserId,
+          candidate.publicKey,
+          onKeyChange,
+          senderDisplayName,
+        );
+      } catch (e) {
+        wipeDek(dek);
+        lastError = e;
+        continue;
+      }
+
+      return dek;
     }
   }
 

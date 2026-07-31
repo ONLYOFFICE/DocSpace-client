@@ -50,7 +50,7 @@ interface AddRuleDialogProps {
   visible: boolean;
   existingAddresses: string[];
   onClose: () => void;
-  onAdd: (type: "allow" | "deny", value: string) => void;
+  onAdd: (type: "allow" | "deny", value: string) => Promise<boolean>;
 }
 
 const normalize = (value: string) => value.trim().toLowerCase();
@@ -64,6 +64,7 @@ const AddRuleDialog = ({
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const [ruleType, setRuleType] = useState<"allow" | "deny">("allow");
   const [address, setAddress] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   const ruleTypeOptions = [
     { key: "allow", label: t("DocsConnect:RuleAllow") },
@@ -77,11 +78,16 @@ const AddRuleDialog = ({
       (existing) => normalize(existing) === normalize(trimmedAddress),
     );
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!trimmedAddress || isDuplicate) return;
 
-    onAdd(ruleType, trimmedAddress);
-    onClose();
+    setIsSaving(true);
+    try {
+      const ok = await onAdd(ruleType, trimmedAddress);
+      if (ok) onClose();
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -145,13 +151,15 @@ const AddRuleDialog = ({
           scale
           size={ButtonSize.normal}
           label={t("Common:AddButton")}
-          isDisabled={!trimmedAddress || isDuplicate}
+          isLoading={isSaving}
+          isDisabled={!trimmedAddress || isDuplicate || isSaving}
           onClick={onSubmit}
         />
         <Button
           scale
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
+          isDisabled={isSaving}
           onClick={onClose}
         />
       </ModalDialog.Footer>

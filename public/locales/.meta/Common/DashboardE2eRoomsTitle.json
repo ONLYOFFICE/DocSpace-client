@@ -3,7 +3,7 @@
   "content": "Rooms E2E",
   "content_en_sha1_hash": "9364fc6e4de01f4ccd1c2448ceab9c7de94a9a7c",
   "created_at": "2026-06-09T09:42:38.869Z",
-  "updated_at": "2026-07-27T13:07:50.600Z",
+  "updated_at": "2026-07-28T07:30:59.811Z",
   "comment": {
     "text": "Title for the navigation menu item, app catalog entry, and iframe header representing end-to-end encrypted rooms; appears as a short noun label.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 511,
+      "line_number": 512,
       "context": "}\n };\n \n const e2eRoomsItem: NavMenuItem = {\n id: E2E_ROOMS_ID,\n label: t(\"Common:DashboardE2eRoomsTitle\"),\n icon: CatalogPrivateReactSvgUrl,\n onClick: handleE2eRoomsClick,\n children: e2eRoomsEnabled\n ? [\n {",
       "module": "/packages/client"
     },

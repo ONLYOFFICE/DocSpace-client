@@ -53,10 +53,7 @@ import SocketHelper, {
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
-import type {
-  TAIConfig,
-  TDefaultProvider,
-} from "@docspace/shared/api/ai/types";
+import type { TAIConfig } from "@docspace/shared/api/ai/types";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { Layout as DocspaceFilesLayout } from "@/app/(docspace)/_components/layout";
@@ -105,7 +102,6 @@ export type AiAgentsCommonData = {
   socketUrl: string;
   filesSettings: TFilesSettings;
   user: TUser | undefined;
-  defaultProvider: TDefaultProvider | undefined;
   portalSettings: TSettings | undefined;
   initialViewAs: TViewAs;
   // SSR snapshots for store construction — see AiAgentsStoreProviders.

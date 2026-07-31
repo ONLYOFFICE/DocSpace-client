@@ -3,7 +3,7 @@
   "content": "Form owner",
   "content_en_sha1_hash": "7022aa4d3edf4428c9fb1db5c36d5affdb524284",
   "created_at": "2025-05-19T21:30:57.171Z",
-  "updated_at": "2026-07-28T11:25:41.897Z",
+  "updated_at": "2026-07-28T07:30:59.932Z",
   "comment": {
     "text": "This is a label identifying the creator or primary manager of a form. It appears next to an avatar and name in the completed form's details.",
     "is_auto": true,

@@ -1107,7 +1107,10 @@ const SectionFilterContent = ({
       connectedThirdParty.push(item.provider_key);
     });
 
-    const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
+    const showThirdPartyFilter =
+      connectedThirdParty.length > 0 && !isTemplatesFolder && !isFormsSection;
+
+    const isLastTypeOptionsRooms = !showThirdPartyFilter && !tags?.length;
 
     const folders = !isRecentFolder
       ? [
@@ -1415,7 +1418,7 @@ const SectionFilterContent = ({
           isMultiSelect: true,
         }));
 
-        const isLast = connectedThirdParty.length === 0;
+        const isLast = !showThirdPartyFilter;
 
         filterOptions.push({
           key: FilterGroups.roomFilterTags,
@@ -1428,7 +1431,7 @@ const SectionFilterContent = ({
         filterOptions.push(...tagsOptions);
       }
 
-      if (connectedThirdParty.length > 0 && !isTemplatesFolder) {
+      if (showThirdPartyFilter) {
         const thirdPartyOptions = connectedThirdParty.map((thirdParty) => {
           const key = Object.entries(RoomsProviderType).find(
             (item) => item[0] === thirdParty,

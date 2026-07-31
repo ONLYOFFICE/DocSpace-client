@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -101,6 +101,7 @@ const Statistics = ({
   allConnectorsUrl,
 }: StatisticsProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
+  const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -147,10 +148,15 @@ const Statistics = ({
   const onCopy = (value: string) => copyToClipboard?.(value, t);
 
   const onCancelChange = async () => {
+    if (isCancelChangeLoading) return;
+
+    setIsCancelChangeLoading(true);
     try {
       await cancelScheduledChange?.();
     } catch (e) {
       toastr.error(e as Error);
+    } finally {
+      setIsCancelChangeLoading(false);
     }
   };
 
@@ -291,6 +297,7 @@ const Statistics = ({
                 })
           }
           onCancelChange={onCancelChange}
+          isCancelLoading={isCancelChangeLoading}
         />
       ) : null}
 

@@ -3,7 +3,7 @@
   "content": "Docs Connect activated",
   "content_en_sha1_hash": "c8345980285966f55355223cde233f417973cce5",
   "created_at": "2026-07-27T13:07:08.164Z",
-  "updated_at": "2026-07-27T13:35:35.765Z",
+  "updated_at": "2026-07-31T15:04:17.733Z",
   "comment": {
     "text": "Title within a card on the AI Paywall Complete page, appearing when the Docs Connect integration is successfully activated.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 434,
+      "line_number": 439,
       "context": "<div className={styles.cardBody}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {admins\n ? t(\"PlanActivated\", { planName: plan })\n : isDocsConnect\n ? t(\"DocsConnectCallbackSuccess\")\n : isWalletOnly\n ? t(\"WalletTopUpSuccessTitle\")\n : t(\"AIPaywallCallbackSuccess\")}\n </Text>\n {admins ? (",
       "module": "/libs/ui-kit"
     }

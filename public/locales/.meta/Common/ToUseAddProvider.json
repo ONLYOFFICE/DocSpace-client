@@ -3,7 +3,7 @@
   "content": "To use {{value}}, make sure to connect at least one {{aiProvider}} first.",
   "content_en_sha1_hash": "7ac37664b2a8a6b4459dada1c0cb3184e8fd4a9b",
   "created_at": "2025-12-17T14:56:14.846Z",
-  "updated_at": "2026-07-28T07:30:59.884Z",
+  "updated_at": "2026-07-30T16:14:11.194Z",
   "comment": {
     "text": "This is a tooltip text that appears when a user tries to use an AI-powered feature (like AI Knowledge, Web Search AI, or an MCP server) without having any AI providers connected. It informs the user that they need to connect an AI provider first. `{{value}}` is the name of the feature, and `{{aiProvider}}` is the general term for an AI provider.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 265,
+      "line_number": 270,
       "context": "<div\n className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 285,
+      "line_number": 290,
       "context": "<div\n className={generalStyles.search}\n data-tooltip-id={tooltipId}\n data-tooltip-content={\n !hasAIProviders\n ? t(\"Common:ToUseAddProvider\", {\n value: t(\"Common:Knowledge\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }",
       "module": "/packages/sdk"
     }

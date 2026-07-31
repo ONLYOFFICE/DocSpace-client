@@ -278,6 +278,6 @@ describe("TOFU key mismatch — integration via MSW + real IDB", () => {
     const recheckNew = await tofu.checkKey(BOB_ID, pubB64(bobNew));
     expect(recheckNew.kind).toBe("match");
     const recheckOld = await tofu.checkKey(BOB_ID, pubB64(bobOld));
-    expect(recheckOld.kind).toBe("mismatch");
+    expect(recheckOld.kind).toBe("match");
   });
 });

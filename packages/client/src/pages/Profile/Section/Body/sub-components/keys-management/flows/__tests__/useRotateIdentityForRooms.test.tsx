@@ -54,6 +54,7 @@ vi.mock(
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getRooms } from "@docspace/shared/api/rooms";
 import { rotateOwnIdentityForRoom } from "@docspace/shared/services/private-room/room-encryption";
+import { setActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
 
 import { useRotateIdentityForRooms } from "../useRotateIdentityForRooms";
@@ -358,5 +359,159 @@ describe("useRotateIdentityForRooms", () => {
     // Room 10 threw so counted as failure (totalFailed=1); room 20 had 1 success.
     // totalDone=1, totalFailed=1 → partial failure warning.
     expect(toastr.warning).toHaveBeenCalledTimes(1);
+  });
+
+  it("coalesces a second trigger into the in-flight run (no double rotation)", async () => {
+    let releaseRoom: (() => void) | null = null;
+    vi.mocked(getRooms).mockResolvedValue(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      makeRoomsResponse([{ id: 10, private: true }]) as any,
+    );
+    vi.mocked(rotateOwnIdentityForRoom).mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          releaseRoom = () => resolve([{ fileId: 1, success: true }]);
+        }),
+    );
+
+    const { result } = renderHook(() => useRotateIdentityForRooms());
+
+    let first: Promise<unknown> = Promise.resolve();
+    let second: Promise<unknown> = Promise.resolve();
+    await act(async () => {
+      first = result.current.rotateForAllRooms(
+        makeIdentity(),
+        makeIdentity(),
+        "user1",
+        "test-key-id",
+      );
+      await Promise.resolve();
+      await Promise.resolve();
+      second = result.current.rotateForAllRooms(
+        makeIdentity(),
+        makeIdentity(),
+        "user1",
+        "test-key-id-2",
+      );
+      await Promise.resolve();
+      releaseRoom?.();
+      await Promise.all([first, second]);
+    });
+
+    expect(rotateOwnIdentityForRoom).toHaveBeenCalledTimes(1);
+    expect(toastr.success).toHaveBeenCalledTimes(1);
+  });
+
+  it("mirrors progress into the global secondary progress bar and completes it", async () => {
+    vi.mocked(getRooms).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      makeRoomsResponse([{ id: 10, private: true }]) as any,
+    );
+    vi.mocked(rotateOwnIdentityForRoom).mockResolvedValue([
+      { fileId: 1, success: true },
+    ]);
+    const setSecondaryProgressBarData = vi.fn();
+
+    const { result } = renderHook(() =>
+      useRotateIdentityForRooms({ setSecondaryProgressBarData }),
+    );
+
+    await act(async () => {
+      await result.current.rotateForAllRooms(
+        makeIdentity(),
+        makeIdentity(),
+        "user1",
+        "test-key-id",
+      );
+    });
+
+    expect(setSecondaryProgressBarData).toHaveBeenCalledWith(
+      expect.objectContaining({
+        operation: "roomReencryption",
+        operationId: "keyRotation_test-key-id",
+      }),
+    );
+    expect(setSecondaryProgressBarData).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        percent: 100,
+        completed: true,
+        alert: false,
+      }),
+    );
+  });
+
+  it("keeps the resume checkpoint on partial failure and clears it on success", async () => {
+    localStorage.clear();
+    vi.mocked(getRooms).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      makeRoomsResponse([{ id: 10, private: true }]) as any,
+    );
+    vi.mocked(rotateOwnIdentityForRoom).mockResolvedValueOnce([
+      { fileId: 1, success: false, error: "boom" },
+    ]);
+
+    const { result } = renderHook(() => useRotateIdentityForRooms());
+
+    await act(async () => {
+      await result.current.rotateForAllRooms(
+        makeIdentity(),
+        makeIdentity(),
+        "user1",
+        "test-key-id",
+      );
+    });
+
+    const raw = localStorage.getItem("encryption-rotation-state:user1");
+    expect(raw).not.toBeNull();
+    expect(JSON.parse(raw!)).toMatchObject({
+      newKeyId: "test-key-id",
+      newPublicKeyId: "test-key-id",
+      roomsTotal: 1,
+      roomsDone: 1,
+      failedRoomIds: [10],
+    });
+
+    vi.mocked(getRooms).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      makeRoomsResponse([{ id: 10, private: true }]) as any,
+    );
+    vi.mocked(rotateOwnIdentityForRoom).mockResolvedValueOnce([
+      { fileId: 1, success: true, skipped: true },
+    ]);
+    await act(async () => {
+      await result.current.rotateForAllRooms(
+        makeIdentity(),
+        makeIdentity(),
+        "user1",
+        "test-key-id",
+      );
+    });
+    expect(localStorage.getItem("encryption-rotation-state:user1")).toBeNull();
+  });
+
+  it("records the EXPLICIT oldKeyId in the checkpoint, not the active key (resume path)", async () => {
+    localStorage.clear();
+    setActiveKeyId("user1", "new-key-id");
+    vi.mocked(getRooms).mockResolvedValueOnce(
+      // biome-ignore lint/suspicious/noExplicitAny: test mock
+      makeRoomsResponse([{ id: 10, private: true }]) as any,
+    );
+    vi.mocked(rotateOwnIdentityForRoom).mockResolvedValueOnce([
+      { fileId: 1, success: false, error: "boom" },
+    ]);
+
+    const { result } = renderHook(() => useRotateIdentityForRooms());
+    await act(async () => {
+      await result.current.rotateForAllRooms(
+        makeIdentity(),
+        makeIdentity(),
+        "user1",
+        "new-key-id",
+        "the-real-old-key-id",
+      );
+    });
+
+    const raw = localStorage.getItem("encryption-rotation-state:user1");
+    expect(JSON.parse(raw!).oldKeyId).toBe("the-real-old-key-id");
   });
 });

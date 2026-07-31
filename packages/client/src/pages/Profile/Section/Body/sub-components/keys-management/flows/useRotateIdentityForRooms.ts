@@ -38,26 +38,34 @@ import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { getRooms } from "@docspace/shared/api/rooms";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { RoomSearchArea, RoomsType } from "@docspace/shared/enums";
-import { rotateOwnIdentityForRoom } from "@docspace/shared/services/private-room/room-encryption";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { getActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import type { IdentityKeyPair } from "@docspace/shared/services/encryption/types";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
+
+import {
+  isRotationRunning,
+  runRotationForAllRooms,
+  RoomListingError,
+  RotationConflictError,
+  isRotationRunningFor,
+  rotationSignature,
+  type RewrapSummary,
+  type RotationProgressSnapshot,
+} from "./rotation-runner";
 
 /**
  * Progress state for the identity rotation across private rooms.
  * `null` means idle; a value means rotation is in progress or just finished.
  */
-export type RotationProgress = {
-  /** Rooms processed so far. */
-  roomsDone: number;
-  /** Total private rooms found. */
-  roomsTotal: number;
-  /** Cumulative file progress across all rooms. */
-  filesDone: number;
-  filesTotal: number;
-} | null;
+export type RotationProgress = RotationProgressSnapshot | null;
+
+export type SecondaryProgressSetter = (data: {
+  operation: string;
+  operationId: string;
+  percent?: number;
+  completed?: boolean;
+  alert?: boolean;
+}) => void;
 
 export type RotateIdentityForRoomsHook = {
   /** Current rotation progress — null when idle. */
@@ -72,17 +80,18 @@ export type RotateIdentityForRoomsHook = {
     newIdentity: IdentityKeyPair,
     currentUserId: string,
     newPublicKeyId: string,
-  ) => Promise<void>;
+    oldKeyId?: string,
+  ) => Promise<RewrapSummary | null>;
 };
 
-/**
- * Fetches all private rooms (paginated) and runs rotateOwnIdentityForRoom on
- * each, accumulating progress and showing summary toasts when done.
- *
- * This hook is intentionally side-effect-free during render; `rotateForAllRooms`
- * is the only entry point.
- */
-export function useRotateIdentityForRooms(): RotateIdentityForRoomsHook {
+type Deps = {
+  setSecondaryProgressBarData?: SecondaryProgressSetter;
+};
+
+export function useRotateIdentityForRooms(
+  deps: Deps = {},
+): RotateIdentityForRoomsHook {
+  const { setSecondaryProgressBarData } = deps;
   const { t } = useTranslation(["Common"]);
   const [rotationProgress, setRotationProgress] =
     useState<RotationProgress>(null);
@@ -93,123 +102,96 @@ export function useRotateIdentityForRooms(): RotateIdentityForRoomsHook {
       newIdentity: IdentityKeyPair,
       currentUserId: string,
       newPublicKeyId: string,
-    ) => {
+      oldKeyId?: string,
+    ): Promise<RewrapSummary | null> => {
       if (!oldIdentity) {
         // No unlocked identity before generation — nothing to re-wrap.
-        return;
+        return null;
       }
 
-      // Collect all private rooms across pages.
-      const privateRooms: TRoom[] = [];
-      const filter = RoomsFilter.clean();
-      filter.type = String(RoomsType.CustomRoom);
-      filter.searchArea = RoomSearchArea.Active;
-      filter.pageCount = 100;
-      filter.page = 0;
+      const signature = rotationSignature(currentUserId, newPublicKeyId);
+      const coalescedDuplicate = isRotationRunningFor(signature);
+      const operationId = `keyRotation_${newPublicKeyId}`;
+
+      const reportProgress = (progress: RotationProgressSnapshot) => {
+        setRotationProgress(progress);
+        const percent =
+          progress.filesTotal > 0
+            ? Math.floor((progress.filesDone / progress.filesTotal) * 100)
+            : progress.roomsTotal > 0
+              ? Math.floor((progress.roomsDone / progress.roomsTotal) * 100)
+              : 0;
+        setSecondaryProgressBarData?.({
+          operation: OPERATIONS_NAME.roomReencryption,
+          operationId,
+          percent,
+        });
+      };
 
       try {
-        let hasMore = true;
-        while (hasMore) {
-          // eslint-disable-next-line no-await-in-loop
-          const result = await getRooms(filter);
-          const batch = result.folders.filter(
-            (r: TRoom) => r.private === true,
-          );
-          privateRooms.push(...batch);
-
-          const fetched = result.startIndex + result.folders.length;
-          hasMore = fetched < result.total;
-          filter.page += 1;
-        }
-      } catch (err) {
-        console.error("Failed to list private rooms for key rotation:", err);
-        toastr.error(t("Common:RotatingIdentityFailed"));
-        return;
-      }
-
-      if (privateRooms.length === 0) {
-        // No private rooms — nothing to do.
-        return;
-      }
-
-      // Initialise progress so the UI can show a spinner.
-      setRotationProgress({
-        roomsDone: 0,
-        roomsTotal: privateRooms.length,
-        filesDone: 0,
-        filesTotal: 0,
-      });
-
-      let totalFiles = 0;
-      let totalDone = 0;
-      let totalFailed = 0;
-
-      for (let i = 0; i < privateRooms.length; i++) {
-        const room = privateRooms[i];
-        try {
-          // eslint-disable-next-line no-await-in-loop
-          const results = await rotateOwnIdentityForRoom(room.id, {
-            currentUserId,
-            oldIdentity,
-            newIdentity,
-            newPublicKeyId,
-            onProgress: (done, total) => {
-              totalFiles = Math.max(totalFiles, total);
-              setRotationProgress({
-                roomsDone: i,
-                roomsTotal: privateRooms.length,
-                filesDone: totalDone + done,
-                filesTotal:
-                  totalFiles +
-                  // estimate remaining rooms as 0 files so progress doesn't
-                  // jump backwards when a later room has fewer files.
-                  0,
-              });
-            },
-          });
-
-          const failed = results.filter((r) => !r.success).length;
-          totalFailed += failed;
-          const roomFileDone = results.length;
-          totalDone += roomFileDone;
-          totalFiles += roomFileDone;
-        } catch (err) {
-          console.error(
-            `Identity rotation failed for room ${room.id}:`,
-            err,
-          );
-          // Count as a failed room but continue with others.
-          totalFailed += 1;
-        }
-
-        setRotationProgress({
-          roomsDone: i + 1,
-          roomsTotal: privateRooms.length,
-          filesDone: totalDone,
-          filesTotal: totalFiles,
+        const summary = await runRotationForAllRooms({
+          oldIdentity,
+          newIdentity,
+          currentUserId,
+          oldKeyId: oldKeyId ?? getActiveKeyId(currentUserId) ?? "",
+          newPublicKeyId,
+          onProgress: reportProgress,
         });
-      }
 
-      // Clear progress so the UI returns to idle state.
-      setRotationProgress(null);
+        setRotationProgress(null);
 
-      // Summary toast.
-      if (totalFailed === 0) {
-        if (totalDone > 0) {
-          toastr.success(t("Common:RotatingIdentitySuccess"));
+        if (coalescedDuplicate) return summary;
+
+        if (summary.roomsTotal > 0) {
+          setSecondaryProgressBarData?.({
+            operation: OPERATIONS_NAME.roomReencryption,
+            operationId,
+            percent: 100,
+            completed: true,
+            alert: summary.filesFailed > 0,
+          });
         }
-        // No files → no toast (user had empty rooms or no encrypted files).
-      } else if (totalDone > 0) {
-        toastr.warning(
-          t("Common:RotatingIdentityPartialFailure", {
-            count: totalFailed,
-          }),
-        );
-      } else {
+
+        if (summary.filesFailed === 0) {
+          if (summary.filesDone > 0) {
+            toastr.success(t("Common:RotatingIdentitySuccess"));
+          }
+          // No files → no toast (user had empty rooms or no encrypted files).
+        } else if (summary.filesDone > 0) {
+          toastr.warning(
+            t("Common:RotatingIdentityPartialFailure", {
+              count: summary.filesFailed,
+            }),
+          );
+        } else {
+          toastr.error(t("Common:RotatingIdentityFailed"));
+        }
+
+        return summary;
+      } catch (err) {
+        setRotationProgress(null);
+        if (err instanceof RotationConflictError) {
+          console.warn(err.message);
+          toastr.warning(t("Common:RotatingIdentityFailed"));
+          return null;
+        }
+        if (err instanceof RoomListingError) {
+          console.error(err.message, err.cause);
+        } else {
+          console.error("Identity rotation failed:", err);
+        }
         toastr.error(t("Common:RotatingIdentityFailed"));
+        setSecondaryProgressBarData?.({
+          operation: OPERATIONS_NAME.roomReencryption,
+          operationId,
+          percent: 100,
+          completed: true,
+          alert: true,
+        });
+        return null;
       }
     },
-    [t],
+    [t, setSecondaryProgressBarData],
   );
 
   return { rotationProgress, rotateForAllRooms };

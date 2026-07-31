@@ -35,10 +35,16 @@
 
 type Store = Map<string, unknown>;
 
+export type MockUpgradeEvent = {
+  oldVersion: number;
+  newVersion: number | null;
+};
+
 class MockOpenRequest {
   result: MockDB | null = null;
+  transaction: MockTransaction | null = null;
   error: Error | null = null;
-  onupgradeneeded: (() => void) | null = null;
+  onupgradeneeded: ((event: MockUpgradeEvent) => void) | null = null;
   onsuccess: (() => void) | null = null;
   onerror: (() => void) | null = null;
   onblocked: (() => void) | null = null;
@@ -130,28 +136,44 @@ class MockDB {
   }
 }
 
-const dbs = new Map<string, { store: Store; storeNames: Set<string> }>();
+const dbs = new Map<
+  string,
+  { store: Store; storeNames: Set<string>; version: number }
+>();
 
 export function resetMockIDB(): void {
   dbs.clear();
 }
 
+export function seedMockIDB(
+  name: string,
+  version: number,
+  storeName: string,
+  records: { userId: string }[],
+): void {
+  const store: Store = new Map();
+  for (const r of records) store.set(r.userId, r);
+  dbs.set(name, { store, storeNames: new Set([storeName]), version });
+}
+
 export const mockIDB = {
-  open(name: string, _version: number): MockOpenRequest {
+  open(name: string, version = 1): MockOpenRequest {
     const req = new MockOpenRequest();
     let entry = dbs.get(name);
-    const isFresh = !entry;
     if (!entry) {
-      entry = { store: new Map(), storeNames: new Set() };
+      entry = { store: new Map(), storeNames: new Set(), version: 0 };
       dbs.set(name, entry);
     }
+    const upgradeFrom = entry.version < version ? entry.version : null;
     const db = new MockDB(entry.store, entry.storeNames);
     queueMicrotask(() => {
-      if (isFresh) {
-        req.result = db;
-        req.onupgradeneeded?.();
-      }
       req.result = db;
+      if (upgradeFrom !== null) {
+        req.transaction = new MockTransaction(entry.store);
+        req.onupgradeneeded?.({ oldVersion: upgradeFrom, newVersion: version });
+        req.transaction = null;
+        entry.version = version;
+      }
       req.onsuccess?.();
     });
     return req;

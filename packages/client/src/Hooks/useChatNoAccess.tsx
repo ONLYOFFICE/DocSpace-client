@@ -35,7 +35,7 @@
 
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 
 import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
@@ -100,8 +100,7 @@ export const useChatNoAccess = ({
 }: ChatNoAccessStoreProps) => {
   const navigate = useNavigate();
 
-  const { useProfilesStore } = useStores();
-  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  const hasAiProfiles = useHasAiProfiles();
   const aiReady = standalone ? hasAiProfiles : !!isAIReady;
 
   const activation = useAIActivation({

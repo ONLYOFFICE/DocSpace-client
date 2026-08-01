@@ -1715,6 +1715,7 @@
   "RemoveFromFavorites": "Odstrániť z obľúbených",
   "RemoveFromList": "Odstrániť zo zoznamu",
   "RemoveSubscription": "Odstrániť predplatné",
+  "RemoveSubscriptionConfirm": "Údaje o vašom predchádzajúcom predplatnom budú odstránené. Ak chcete {{service}} opäť používať, budete musieť nastaviť nové predplatné.",
   "RemoveTag": "<1>{{tag}}</1> tag odstránený.",
   "RemoveUserFromEncryptedRoomWarning": "Odstrániť tohto používateľa zo zašifrovanej miestnosti? Jeho zabalený kľúč bude odstránený z každého existujúceho súboru, takže už nebude môcť sťahovať nové kópie. Čokoľvek, čo už dešifroval na svojom zariadení, mu však môže zostať dostupné. Pre úplné odvolanie musíte otočiť obsah miestnosti.",
   "Rename": "Premenovať",

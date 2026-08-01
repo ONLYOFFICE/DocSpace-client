@@ -103,7 +103,6 @@
   "Remaining": "Rămase",
   "RemainingBalanceAfter": "Sold rămas după achiziție: {{amount}}",
   "RemainingCreditsAfter": "Credite rămase după achiziție: {{amount}}",
-  "RemoveSubscriptionConfirm": "Detaliile abonamentului dvs. anterior vor fi eliminate. Pentru a utiliza din nou {{service}}, va trebui să configurați un nou abonament.",
   "RenewsOnWithUpdate": "Se reînnoiește pe {{date}} — {{price}}/lună (Utilizatori: {{count}})",
   "ReportGenerationHint": "Generarea raportului poate dura ceva timp. Odată finalizat, va fi salvat în {{sectionName}}.",
   "ResetAccessRulesTitle": "Resetare reguli de acces",

@@ -1762,6 +1762,7 @@
   "RemoveFromFavorites": "从收藏中移除",
   "RemoveFromList": "从列表中移除",
   "RemoveSubscription": "移除订阅",
+  "RemoveSubscriptionConfirm": "您之前的订阅详情将被移除。若要再次使用{{service}}，您需要配置新的订阅。",
   "RemoveTag": "<1>{{tag}}</1> 标签已移除。",
   "RemoveUserFromEncryptedRoomWarning": "要将此用户从加密房间中移除吗？其密钥封装将从每个现有文件中删除，使其无法再下载新副本。但是，其设备上已解密的内容可能仍可访问。若要完全撤销访问，您必须轮换房间内容。",
   "Rename": "重命名",

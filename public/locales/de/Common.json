@@ -1762,6 +1762,7 @@
   "RemoveFromFavorites": "Aus Favoriten entfernen",
   "RemoveFromList": "Aus Liste entfernen",
   "RemoveSubscription": "Abonnement entfernen",
+  "RemoveSubscriptionConfirm": "Die Details Ihres vorherigen Abonnements werden entfernt. Um {{service}} erneut zu nutzen, müssen Sie ein neues Abonnement konfigurieren.",
   "RemoveTag": "<1>{{tag}}</1> Tag entfernt.",
   "RemoveUserFromEncryptedRoomWarning": "Diesen Benutzer aus dem verschlüsselten Raum entfernen? Sein umhüllter Schlüssel wird aus jeder vorhandenen Datei entfernt, sodass er keine neuen Kopien mehr herunterladen kann. Alles, was er jedoch bereits auf seinem Gerät entschlüsselt hat, bleibt ihm möglicherweise zugänglich. Für eine vollständige Sperrung müssen Sie den Rauminhalt rotieren.",
   "Rename": "Umbenennen",

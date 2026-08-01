@@ -103,7 +103,6 @@
   "Remaining": "残り",
   "RemainingBalanceAfter": "購入後の残高：{{amount}}",
   "RemainingCreditsAfter": "購入後の残りクレジット：{{amount}}",
-  "RemoveSubscriptionConfirm": "以前のサブスクリプション情報は削除されます。{{service}}を再度利用するには、新しいサブスクリプションを設定する必要があります。",
   "RenewsOnWithUpdate": "{{date}}に更新 — {{price}}/月（ユーザー数：{{count}}）",
   "ReportGenerationHint": "レポートの生成にはしばらく時間がかかる場合があります。準備ができ次第、{{sectionName}}に保存されます。",
   "ResetAccessRulesTitle": "アクセスルールをリセット",

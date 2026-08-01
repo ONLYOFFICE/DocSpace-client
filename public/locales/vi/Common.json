@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Xóa khỏi danh sách yêu thích",
   "RemoveFromList": "Xóa khỏi danh sách",
   "RemoveSubscription": "Xóa đăng ký",
+  "RemoveSubscriptionConfirm": "Thông tin gói đăng ký trước đây của bạn sẽ bị xóa. Để sử dụng lại {{service}}, bạn cần thiết lập một gói đăng ký mới.",
   "RemoveTag": "<1>{{tag}}</1> thẻ đã bị xóa.",
   "RemoveUserFromEncryptedRoomWarning": "Xoá người dùng này khỏi phòng được mã hoá? Khoá bọc của họ sẽ bị xoá khỏi mọi tập tin hiện có, do đó họ không thể tải xuống bản sao mới. Tuy nhiên, bất cứ thứ gì họ đã giải mã trên thiết bị của họ vẫn có thể truy cập được. Để thu hồi hoàn toàn, bạn phải xoay vòng nội dung của phòng.",
   "Rename": "Đổi tên",

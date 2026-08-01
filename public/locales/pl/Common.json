@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Usuń z ulubionych",
   "RemoveFromList": "Usuń z listy",
   "RemoveSubscription": "Usuń subskrypcję",
+  "RemoveSubscriptionConfirm": "Szczegóły Twojej poprzedniej subskrypcji zostaną usunięte. Aby ponownie korzystać z {{service}}, musisz skonfigurować nową subskrypcję.",
   "RemoveTag": "<1>{{tag}}</1> tag usunięty.",
   "RemoveUserFromEncryptedRoomWarning": "Usunąć tego użytkownika z zaszyfrowanego pokoju? Jego zawinięty klucz zostanie usunięty z każdego istniejącego pliku, więc nie będzie już mógł pobierać nowych kopii. Jednak wszystko, co ta osoba już odszyfruje na swoim urządzeniu, może nadal być dla niej dostępne. Pełne odwołanie dostępu wymaga rotacji zawartości pokoju.",
   "Rename": "Zmień nazwę",

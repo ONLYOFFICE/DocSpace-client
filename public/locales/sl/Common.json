@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Odstrani iz priljubljenih",
   "RemoveFromList": "Odstrani iz seznama",
   "RemoveSubscription": "Odstrani naročnino",
+  "RemoveSubscriptionConfirm": "Podrobnosti vaše prejšnje naročnine bodo odstranjene. Za ponovno uporabo {{service}} boste morali konfigurirati novo naročnino.",
   "RemoveTag": "<1>{{tag}}</1> oznaka je odstranjena.",
   "RemoveUserFromEncryptedRoomWarning": "Odstraniti tega uporabnika iz šifrirane sobe? Njihov ovit ključ bo odstranjen iz vsake obstoječe datoteke, zato ne morejo več prenašati novih kopij. Vse, kar so že dešifrirali na svoji napravi, pa jim je morda še vedno dostopno. Za popoln preklic morate zamenjati vsebino sobe.",
   "Rename": "Preimenuj",

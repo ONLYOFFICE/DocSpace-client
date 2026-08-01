@@ -1762,6 +1762,7 @@
   "RemoveFromFavorites": "Rimuovi dai preferiti",
   "RemoveFromList": "Rimuovere dalla lista",
   "RemoveSubscription": "Rimuovi abbonamento",
+  "RemoveSubscriptionConfirm": "I dettagli del tuo abbonamento precedente verranno rimossi. Per utilizzare nuovamente {{service}}, dovrai configurare un nuovo abbonamento.",
   "RemoveTag": "Rimosso il tag <1>{{tag}}</1>.",
   "RemoveUserFromEncryptedRoomWarning": "Rimuovere questo utente dalla stanza cifrata? Il key wrap verrà rimosso da ogni file esistente, impedendo il download di nuove copie. Tuttavia, tutto ciò che è già stato decifrato sul proprio dispositivo potrebbe rimanere accessibile. Per una revoca completa è necessario ruotare il contenuto della stanza.",
   "Rename": "Rinomina",

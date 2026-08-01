@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Favorilerden kaldır",
   "RemoveFromList": "Listeden kaldır",
   "RemoveSubscription": "Aboneliği kaldır",
+  "RemoveSubscriptionConfirm": "Önceki abonelik bilgileriniz kaldırılacaktır. {{service}} hizmetini tekrar kullanmak için yeni bir abonelik yapılandırmanız gerekecektir.",
   "RemoveTag": "<1>{{tag}}</1> etiketi kaldırıldı.",
   "RemoveUserFromEncryptedRoomWarning": "Bu kullanıcıyı şifrelenmiş odadan kaldırmak istiyor musunuz? Sarmalı anahtar mevcut her dosyadan kaldırılacak ve yeni kopyaları artık indiremeyecekler. Ancak cihazlarında önceden şifresi çözülmüş içeriklere hâlâ erişimleri olabilir. Tam iptal için odanın içeriğini döndürmeniz gerekir.",
   "Rename": "Yeniden adlandır",

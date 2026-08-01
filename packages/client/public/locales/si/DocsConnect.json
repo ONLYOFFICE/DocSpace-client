@@ -103,7 +103,6 @@
   "Remaining": "ඉතිරි",
   "RemainingBalanceAfter": "මිලදී ගැනීමෙන් පසු ඉතිරි ශේෂය: {{amount}}",
   "RemainingCreditsAfter": "මිලදී ගැනීමෙන් පසු ඉතිරි ක්‍රෙඩිට්: {{amount}}",
-  "RemoveSubscriptionConfirm": "ඔබේ පෙර දායකත්ව විස්තර ඉවත් කරනු ලැබේ. {{service}} නැවත භාවිතා කිරීමට, ඔබට නව දායකත්වයක් සකසන්න සිදුවනු ඇත.",
   "RenewsOnWithUpdate": "{{date}} දිනදී අලුත් වේ — {{price}}/මාසය (පරිශීලකයින්: {{count}})",
   "ReportGenerationHint": "වාර්තාව ජනනය වීමට යම් කාලයක් ගතවිය හැක. සූදානම් වූ පසු, එය {{sectionName}} හි සුරැකෙනු ඇත.",
   "ResetAccessRulesTitle": "ප්‍රවේශ නීති නැවත සකසන්න",

@@ -1762,6 +1762,7 @@
   "RemoveFromFavorites": "Eliminare din Favorite",
   "RemoveFromList": "Șterge din lista",
   "RemoveSubscription": "Elimină abonamentul",
+  "RemoveSubscriptionConfirm": "Detaliile abonamentului dvs. anterior vor fi eliminate. Pentru a utiliza din nou {{service}}, va trebui să configurați un nou abonament.",
   "RemoveTag": "<1>{{tag}}</1> eticheta eliminată.",
   "RemoveUserFromEncryptedRoomWarning": "Eliminați acest utilizator din camera criptată? Cheia sa învelită va fi eliminată din fiecare fișier existent, astfel încât să nu mai poată descărca copii noi. Cu toate acestea, orice a decriptat deja pe dispozitivul său poate fi în continuare accesibil. Pentru revocarea completă trebuie să rotiți conținutul camerei.",
   "Rename": "Redenumire",

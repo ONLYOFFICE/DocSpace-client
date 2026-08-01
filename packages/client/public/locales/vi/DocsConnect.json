@@ -103,7 +103,6 @@
   "Remaining": "Còn lại",
   "RemainingBalanceAfter": "Số dư còn lại sau khi mua: {{amount}}",
   "RemainingCreditsAfter": "Tín dụng còn lại sau khi mua: {{amount}}",
-  "RemoveSubscriptionConfirm": "Thông tin gói đăng ký trước đây của bạn sẽ bị xóa. Để sử dụng lại {{service}}, bạn cần thiết lập một gói đăng ký mới.",
   "RenewsOnWithUpdate": "Gia hạn vào {{date}} — {{price}}/tháng (Người dùng: {{count}})",
   "ReportGenerationHint": "Báo cáo có thể mất một chút thời gian để tạo. Khi sẵn sàng, báo cáo sẽ được lưu vào {{sectionName}}.",
   "ResetAccessRulesTitle": "Đặt lại quy tắc truy cập",

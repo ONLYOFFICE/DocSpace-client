@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Favoritlərdən sil",
   "RemoveFromList": "Siyahıdan sil",
   "RemoveSubscription": "Abunəliyi sil",
+  "RemoveSubscriptionConfirm": "Əvvəlki abunəlik təfərrüatlarınız silinəcək. {{service}}-dən yenidən istifadə etmək üçün yeni abunəlik konfiqurasiya etməlisiniz.",
   "RemoveTag": "<1>{{tag}}</1> etiket silindi.",
   "RemoveUserFromEncryptedRoomWarning": "Bu istifadəçini şifrəli otaqdan çıxarmaq istəyirsiniz? Onların sarılmış açarı hər mövcud fayldan silinəcək, belə ki onlar artıq yeni nüsxə endirə bilməyəcək. Lakin cihazlarında artıq deşifrə etdikləri hər şey onlar üçün əlçatan qala bilər. Tam ləğvetmə üçün otağın məzmununu döndərməlisiniz.",
   "Rename": "Adını dəyiş",

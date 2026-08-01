@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Poista suosikeista",
   "RemoveFromList": "Poista listalta",
   "RemoveSubscription": "Poista tilaus",
+  "RemoveSubscriptionConfirm": "Aiemman tilauksesi tiedot poistetaan. Käyttääksesi {{service}}-palvelua uudelleen sinun täytyy määrittää uusi tilaus.",
   "RemoveTag": "<1>{{tag}}</1> tunniste poistettu.",
   "RemoveUserFromEncryptedRoomWarning": "Poistetaanko tämä käyttäjä salatusta huoneesta? Heidän kääritty avaimensa poistetaan jokaisesta olemassa olevasta tiedostosta, joten he eivät enää voi ladata uusia kopioita. Kaikki, minkä he ovat jo purkuunsalannut laitteellaan, saattaa kuitenkin olla heille edelleen saatavilla. Täydellinen peruutus edellyttää huoneen sisällön kierrättämistä.",
   "Rename": "Nimeä uudelleen",

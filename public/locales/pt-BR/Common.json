@@ -1762,6 +1762,7 @@
   "RemoveFromFavorites": "Remover dos Favoritos",
   "RemoveFromList": "Remover da lista",
   "RemoveSubscription": "Remover assinatura",
+  "RemoveSubscriptionConfirm": "Os detalhes da sua assinatura anterior serão removidos. Para usar o {{service}} novamente, você precisará configurar uma nova assinatura.",
   "RemoveTag": "<1>{{tag}}</1> tag removido.",
   "RemoveUserFromEncryptedRoomWarning": "Remover este usuário da sala criptografada? O envelope de chave dele será removido de todos os arquivos existentes, para que ele não possa mais baixar novas cópias. No entanto, qualquer coisa que ele já tiver descriptografado no dispositivo pode ainda estar acessível. Para revogação completa, você deve fazer a rotação do conteúdo da sala.",
   "Rename": "Renomear",

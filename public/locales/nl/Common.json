@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Verwijder uit favorieten",
   "RemoveFromList": "Verwijder uit de lijst",
   "RemoveSubscription": "Abonnement verwijderen",
+  "RemoveSubscriptionConfirm": "Uw vorige abonnementsgegevens worden verwijderd. Om {{service}} opnieuw te gebruiken, moet u een nieuw abonnement configureren.",
   "RemoveTag": "<1>{{tag}}</1> tag verwijderd.",
   "RemoveUserFromEncryptedRoomWarning": "Deze gebruiker uit de versleutelde kamer verwijderen? Hun omhulde sleutel wordt verwijderd uit elk bestaand bestand, zodat zij geen nieuwe kopieën meer kunnen downloaden. Alles wat zij echter al hebben ontsleuteld op hun apparaat kan voor hen nog steeds toegankelijk zijn. Voor volledige intrekking moet u de inhoud van de kamer roteren.",
   "Rename": "Hernoemen",

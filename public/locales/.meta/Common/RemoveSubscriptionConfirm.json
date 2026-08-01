@@ -14,8 +14,14 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/RemoveSubscriptionDialog/index.tsx",
       "line_number": 85,
-      "context": "<ModalDialog.Header>\n {t(\"Common:RemoveSubscription\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:RemoveSubscriptionConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "context": "<ModalDialog.Header>\n {t(\"Common:RemoveSubscription\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"Common:RemoveSubscriptionConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "line_number": 77,
+      "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"RemoveSubscriptionConfirm\", {\n service: t(\"AdditionalDiskStorage\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

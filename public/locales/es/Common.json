@@ -1762,6 +1762,7 @@
   "RemoveFromFavorites": "Quitar de favoritos",
   "RemoveFromList": "Quitar de la lista",
   "RemoveSubscription": "Eliminar suscripción",
+  "RemoveSubscriptionConfirm": "Se eliminarán los detalles de su suscripción anterior. Para volver a usar {{service}}, deberá configurar una nueva suscripción.",
   "RemoveTag": "<1>{{tag}}</1> etiqueta eliminada.",
   "RemoveUserFromEncryptedRoomWarning": "¿Eliminar a este usuario de la sala cifrada? Su clave envuelta se eliminará de todos los archivos existentes, por lo que ya no podrá descargar nuevas copias. Sin embargo, cualquier contenido que ya haya descifrado en su dispositivo podría seguir siendo accesible para él. Para una revocación completa, debe rotar el contenido de la sala.",
   "Rename": "Renombrar",

@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Fshini nga të preferuarat",
   "RemoveFromList": "Fshini nga lista",
   "RemoveSubscription": "Hiqni abonimin",
+  "RemoveSubscriptionConfirm": "Detajet e abonimit tuaj të mëparshëm do të hiqen. Për të përdorur përsëri {{service}}, do t'ju duhet të konfiguroni një abonim të ri.",
   "RemoveTag": "<1>{{tag}}</1> etiketa e hiqur.",
   "RemoveUserFromEncryptedRoomWarning": "Të hiqet ky përdorues nga dhoma e enkriptuar? Mbështjellësi i çelësit të tyre do të hiqet nga çdo skedar ekzistues, kështu që ata nuk mund të shkarkojnë kopje të reja. Megjithatë, çdo gjë që kanë dekriptuar tashmë në pajisjen e tyre mund të jetë ende e aksesueshme për ta. Për revokimin e plotë duhet të rrotulloni përmbajtjen e dhomës.",
   "Rename": "Riemërtoni",

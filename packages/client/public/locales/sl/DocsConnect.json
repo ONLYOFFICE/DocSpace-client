@@ -103,7 +103,6 @@
   "Remaining": "Preostalo",
   "RemainingBalanceAfter": "Preostalo stanje po nakupu: {{amount}}",
   "RemainingCreditsAfter": "Preostali krediti po nakupu: {{amount}}",
-  "RemoveSubscriptionConfirm": "Podrobnosti vaše prejšnje naročnine bodo odstranjene. Za ponovno uporabo {{service}} boste morali konfigurirati novo naročnino.",
   "RenewsOnWithUpdate": "Obnovi se dne {{date}} — {{price}}/mesec (Uporabniki: {{count}})",
   "ReportGenerationHint": "Ustvarjanje poročila lahko traja nekaj časa. Ko bo pripravljeno, bo shranjeno v {{sectionName}}.",
   "ResetAccessRulesTitle": "Ponastavi pravila dostopa",

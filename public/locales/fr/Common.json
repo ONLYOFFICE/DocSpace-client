@@ -1762,6 +1762,7 @@
   "RemoveFromFavorites": "Retirer des favoris",
   "RemoveFromList": "Retirer de la liste",
   "RemoveSubscription": "Supprimer l'abonnement",
+  "RemoveSubscriptionConfirm": "Les détails de votre abonnement précédent seront supprimés. Pour utiliser à nouveau {{service}}, vous devrez configurer un nouvel abonnement.",
   "RemoveTag": "<1>{{tag}}</1> balise supprimée.",
   "RemoveUserFromEncryptedRoomWarning": "Retirer cet utilisateur de la salle chiffrée ? Son enveloppe de clé sera supprimée de chaque fichier existant, de sorte qu'il ne pourra plus télécharger de nouvelles copies. Toutefois, tout ce qu'il a déjà déchiffré sur son appareil peut rester accessible. Pour une révocation complète, vous devez faire pivoter le contenu de la salle.",
   "Rename": "Renommer",

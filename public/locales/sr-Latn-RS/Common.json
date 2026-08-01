@@ -1762,6 +1762,7 @@
   "RemoveFromFavorites": "Ukloni iz omiljenog",
   "RemoveFromList": "Ukloni sa liste",
   "RemoveSubscription": "Ukloni pretplatu",
+  "RemoveSubscriptionConfirm": "Detalji vaše prethodne pretplate biće uklonjeni. Da biste ponovo koristili {{service}}, moraćete da podesite novu pretplatu.",
   "RemoveTag": "<1>{{tag}}</1> oznaka je uklonjena.",
   "RemoveUserFromEncryptedRoomWarning": "Ukloniti ovog korisnika iz šifrovane sobe? Njihov omotani ključ biće uklonjen iz svakog postojećeg fajla, tako da više ne mogu preuzimati nove kopije. Međutim, sve što su već dešifrovali na svom uređaju može im i dalje biti dostupno. Za potpuno opozivanje morate rotirati sadržaj sobe.",
   "Rename": "Preimenuj",

@@ -1738,6 +1738,7 @@
   "RemoveFromFavorites": "Noņemt no izlases",
   "RemoveFromList": "Noņemt no saraksta",
   "RemoveSubscription": "Noņemt abonementu",
+  "RemoveSubscriptionConfirm": "Jūsu iepriekšējā abonementa dati tiks noņemti. Lai atkal izmantotu {{service}}, jums būs jākonfigurē jauns abonements.",
   "RemoveTag": "<1>{{tag}}</1> tag noņemts.",
   "RemoveUserFromEncryptedRoomWarning": "Noņemt šo lietotāju no šifrētās telpas? Viņu aplauztā atslēga tiks noņemta no katra esoša faila, tāpēc viņi vairs nevarēs lejupielādēt jaunas kopijas. Tomēr viss, ko viņi jau atšifrēja savā ierīcē, var joprojām būt viņiem pieejams. Pilnīgai atsaukšanai jums jārotē telpas saturs.",
   "Rename": "Pārnamedot",

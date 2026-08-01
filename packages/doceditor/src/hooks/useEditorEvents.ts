@@ -89,8 +89,11 @@ import { isMobile } from "react-device-detect";
 
 import {
   getCurrentDocumentVersion,
+  getFormsSectionFolderUrl,
   isFormRole,
+  isFormRoomFile,
   setDocumentTitle,
+  toFormsSectionUrl,
 } from "@/utils";
 
 import type {
@@ -362,7 +365,7 @@ const useEditorEvents = ({
                   actionsOverride: true,
                   apiConfig: {
                     origin: window.location.origin,
-                    baseUrl: "/api/2.0/new-ai",
+                    baseUrl: "/api/2.0/ai",
                     routes: DEFAULT_SERVER_API_ROUTES,
                   } satisfies ServerAPIConfig,
                 });
@@ -529,12 +532,19 @@ const useEditorEvents = ({
     } else {
       const backUrl = config?.editorConfig?.customization?.goback?.url;
 
-      if (backUrl) window.location.replace(backUrl);
+      if (!backUrl) return;
+
+      window.location.replace(
+        isFormRoomFile(fileInfo)
+          ? (toFormsSectionUrl(backUrl, fileInfo?.folderId) ?? backUrl)
+          : backUrl,
+      );
     }
   }, [
     sdkConfig?.editorGoBack,
     sdkConfig?.returnUrl,
     config?.editorConfig?.customization?.goback?.url,
+    fileInfo,
   ]);
 
   const getDefaultFileName = React.useCallback(
@@ -1080,9 +1090,7 @@ const useEditorEvents = ({
 
           sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
 
-          const url = new URL(`${window.location.origin}/rooms/shared/filter`);
-          url.searchParams.set("folder", fileInfo!.folderId.toString());
-          window.location.replace(url.toString());
+          window.location.replace(getFormsSectionFolderUrl(fileInfo!.folderId));
         })
         .otherwise(() => {
           console.error("Unknown start filling mode");

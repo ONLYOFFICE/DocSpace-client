@@ -3,7 +3,7 @@
   "content": "Lock now",
   "content_en_sha1_hash": "9217b30d55ad7174390b857ba950775631207e17",
   "created_at": "2026-05-24T17:27:32.011Z",
-  "updated_at": "2026-06-09T09:43:10.922Z",
+  "updated_at": "2026-07-31T12:36:29.538Z",
   "comment": {
     "text": "Button label used to initiate the immediate locking of encryption keys within the keys management section.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 205,
-      "context": "size={ButtonSize.small}\n onClick={() => {\n lock();\n toastr.success(t(\"Common:EncryptionLocked\"));\n }}\n label={t(\"Common:LockNow\")}\n isDisabled={busy}\n />\n ) : null}\n </div>\n {isRotating && rotationProgress ? (",
+      "line_number": 418,
+      "context": "setDeviceRemembered(false);\n toastr.success(t(\"Common:EncryptionLocked\"));\n }}\n dataTestId=\"lock_now_link\"\n >\n {t(\"Common:LockNow\")}\n </Link>\n </div>\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     }
   ],

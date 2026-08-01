@@ -1,0 +1,29 @@
+{
+  "key_path": "ViewerUsage",
+  "content": "Viewer usage",
+  "content_en_sha1_hash": "71c1c597628cb1569d7f869b75900d9bb8369d28",
+  "created_at": "2026-07-27T13:07:48.503Z",
+  "updated_at": "2026-08-01T15:33:49.643Z",
+  "comment": {
+    "text": "Label for a metric in the statistics dashboard indicating the number of viewers currently used against the allowed limit.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:42:59.449Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 578,
+      "context": "t={t}\n />\n <UsageBlock\n title={t(\"DocsConnect:LiveViewer\")}\n subtitle={t(\"DocsConnect:LiveViewerSubtitle\")}\n usageLabel={t(\"DocsConnect:ViewerUsage\")}\n usage={tenantInfo.stats.viewer}\n limit={tenantInfo.usersLimit.view}\n t={t}\n />\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

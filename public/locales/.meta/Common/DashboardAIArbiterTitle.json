@@ -3,7 +3,7 @@
   "content": "AI Arbiter",
   "content_en_sha1_hash": "542571c512268a0755f7361f633efe00b416b5cf",
   "created_at": "2026-05-20T10:00:00.000Z",
-  "updated_at": "2026-07-07T08:59:21.684Z",
+  "updated_at": "2026-07-28T07:30:59.811Z",
   "comment": {
     "text": "Title for the AI Arbiter app catalog entry on the Dashboard modules page.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 515,
+      "line_number": 491,
       "context": "}\n };\n \n const aiArbiterItem: NavMenuItem = {\n id: AI_ARBITER_ID,\n label: t(\"Common:DashboardAIArbiterTitle\"),\n icon: CatalogAiArbiterReactSvgUrl,\n onClick: handleAiArbiterClick,\n };\n \n const handleE2eRoomsClick = async () => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 144,
+      "line_number": 133,
       "context": "alwaysOn: false,\n },\n {\n id: \"ai-arbiter\",\n icon: <CatalogAiArbiterIcon />,\n title: t(\"Common:DashboardAIArbiterTitle\"),\n description: t(\"Common:DashboardAIArbiterDescription\"),\n href: \"/ai-arbiter\",\n supported: true,\n alwaysOn: false,\n },",
       "module": "/packages/client"
     },

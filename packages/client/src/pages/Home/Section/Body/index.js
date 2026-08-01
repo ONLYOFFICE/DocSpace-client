@@ -52,6 +52,11 @@ import {
   VDRIndexingAction,
   RoomsType,
 } from "@docspace/shared/enums";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import {
+  useAttachHostFilesToChat,
+  CHAT_ATTACHMENT_LIMIT,
+} from "@docspace/ui-kit/ai-agent/providers/files";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import ClientSearchProgress from "./ClientSearchProgress";
@@ -66,6 +71,9 @@ import NoAccessContainer from "../../../../components/EmptyContainer/NoAccessCon
 
 const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
 const sectionClass = "section-wrapper-content";
+// The AI chat panel region (Section.ChatPanel). Dropping a file-list drag here
+// attaches the dragged files to the chat composer instead of moving them.
+const chatPanelSelector = "#ChatPanelWrapper";
 
 let currentDroppable = null;
 let droppableSeparator = null;
@@ -123,7 +131,11 @@ const SectionBodyContent = (props) => {
     setEditRoomGroupsDialogVisible,
     isFilterOrSearchActive,
     isRoomsFolder,
+    draggedFiles,
+    setIsChatDropTarget,
   } = props;
+
+  const attachFilesToChat = useAttachHostFilesToChat();
 
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
@@ -247,6 +259,10 @@ const SectionBodyContent = (props) => {
       return;
     }
 
+    setIsChatDropTarget(
+      draggedFiles.length > 0 && !!wrapperElement.closest(chatPanelSelector),
+    );
+
     droppableSeparator && droppableSeparator.remove();
 
     const droppable = wrapperElement.closest(".droppable");
@@ -356,6 +372,9 @@ const SectionBodyContent = (props) => {
   const onMouseUp = (e) => {
     clearEdgeScrollingTimer();
     setStartDrag(false);
+    setIsChatDropTarget(false);
+
+    const droppedOnChatPanel = !!e.target.closest(chatPanelSelector);
 
     setTimeout(() => {
       isDragActive = false;
@@ -363,6 +382,26 @@ const SectionBodyContent = (props) => {
       document.body.classList.remove("drag-cursor");
       droppableSeparator && droppableSeparator.remove();
     }, 0);
+
+    if (droppedOnChatPanel) {
+      // A folder-only drag lands here as a no-op: nothing to attach, and the
+      // panel is not a `.droppable`, so the move path below must not run either.
+      if (isDragActive && draggedFiles.length > 0) {
+        attachFilesToChat(draggedFiles)
+          .then(({ skipped }) => {
+            // The composer caps attachments, so say what did not fit instead
+            // of letting the extra files disappear without a word.
+            if (skipped > 0) {
+              toastr.warning(
+                t("Common:AttachFilesLimit", { limit: CHAT_ATTACHMENT_LIMIT }),
+              );
+            }
+          })
+          .catch((error) => toastr.error(error));
+      }
+
+      return;
+    }
 
     const treeElem = e.target.closest(".tree-drag");
     const treeDataValue = treeElem?.dataset?.value;
@@ -555,6 +594,8 @@ export default inject(
       isEmptyPage,
       isErrorRoomNotAvailable,
       isErrorAIAgentNotAvailable,
+      draggedFiles,
+      setIsChatDropTarget,
     } = filesStore;
 
     const {
@@ -586,8 +627,10 @@ export default inject(
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
       viewAs,
+      draggedFiles,
       setSelection,
       setBufferSelection,
+      setIsChatDropTarget,
       tooltipPageX,
       tooltipPageY,
       setHotkeyCaretStart,

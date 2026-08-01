@@ -75,6 +75,7 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import { InstallAiFormsDialog } from "SRC_DIR/pages/Dashboard/InstallModuleDialog";
 import { InstallAiArbiterDialog } from "SRC_DIR/pages/Dashboard/InstallAiArbiterDialog";
 import { EnableAiRoomsDialog } from "SRC_DIR/pages/Dashboard/EnableAiRoomsDialog";
+import { isAppTemporarilyDisabled } from "SRC_DIR/helpers/disabled-apps";
 
 import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
@@ -528,7 +529,12 @@ const NewArticle = ({
       { item: aiRoomsItem, enabled: aiRoomsEnabled },
       { item: aiFormsItem, enabled: aiFormsEnabled },
       { item: aiAgentsItem, enabled: aiAgentsEnabled },
-      { item: aiArbiterItem, enabled: aiArbiterEnabled },
+      // Hidden while the arbiter is temporarily disabled: showing it in the
+      // "available" group would offer an install flow for a product that
+      // cannot run on the new AI stack.
+      ...(isAppTemporarilyDisabled(AI_ARBITER_ID)
+        ? []
+        : [{ item: aiArbiterItem, enabled: aiArbiterEnabled }]),
       { item: e2eRoomsItem, enabled: e2eRoomsEnabled },
     ];
 

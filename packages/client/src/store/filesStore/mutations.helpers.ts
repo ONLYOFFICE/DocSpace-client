@@ -168,7 +168,7 @@ export function removeFilesImpl(
     (newFilter.page + 1) * newFilter.pageCount - deleteCount;
   newFilter.pageCount = deleteCount;
   if (isRooms) {
-    const req = isAIAgentsFolder ? api.ai.getNewAiAgents : api.rooms.getRooms;
+    const req = isAIAgentsFolder ? api.ai.getAIAgents : api.rooms.getRooms;
     return req(newFilter as TRoomsFilter)
       .then((res) => {
         const folders = folderIds

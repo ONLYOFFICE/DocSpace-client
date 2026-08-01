@@ -1,0 +1,29 @@
+{
+  "key_path": "TrialDaysRemaining",
+  "content": "~ {{count}} days remaining",
+  "content_en_sha1_hash": "1958dc739acea4a80635c1046fd420bc0001d407",
+  "created_at": "2026-07-27T13:07:48.487Z",
+  "updated_at": "2026-08-01T15:33:49.641Z",
+  "comment": {
+    "text": "Text label in the Tenant Panel statistics indicating the remaining trial period duration, where {{count}} represents the number of days left.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:48:32.588Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 421,
+      "context": "<Text fontSize=\"12px\" className={styles.muted}>\n {expired\n ? t(\"DocsConnect:TrialDaysRemainingExpired\", {\n count: daysLeft,\n })\n : t(\"DocsConnect:TrialDaysRemaining\", { count: daysLeft })}\n </Text>\n </div>\n </div>\n ) : (\n <div className={styles.detailCard}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

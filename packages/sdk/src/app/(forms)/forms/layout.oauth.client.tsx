@@ -39,7 +39,6 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { FilterType, FolderType } from "@docspace/shared/enums";
 import { getSettingsFiles, getFolder } from "@docspace/shared/api/files";
 import { getUser } from "@docspace/shared/api/people";
-import { getDefaultProvider } from "@docspace/shared/api/ai";
 import { getSettings } from "@docspace/shared/api/settings";
 import { getAppSettings } from "@docspace/shared/api/apps";
 
@@ -97,11 +96,10 @@ async function loadCommonData(): Promise<FormsCommonData | null> {
     pathname.endsWith("/completed-forms") ||
     pathname.endsWith("/completed-forms/");
 
-  const [filesSettings, user, defaultProvider, portalSettings, roomData] =
+  const [filesSettings, user, portalSettings, roomData] =
     await Promise.all([
       getSettingsFiles(),
       getUser().catch(() => undefined),
-      getDefaultProvider().catch(() => undefined),
       getSettings().catch(() => undefined),
       roomId
         ? getFolder(roomId, formsFolderFilter(25)).catch(() => undefined)
@@ -157,7 +155,6 @@ async function loadCommonData(): Promise<FormsCommonData | null> {
     socketUrl,
     filesSettings,
     user,
-    defaultProvider,
     roomSecurity,
     roomAccess,
     saveFormAsXLSX: Boolean(roomCurrent?.saveFormAsXLSX),

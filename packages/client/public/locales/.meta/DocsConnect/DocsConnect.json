@@ -1,0 +1,143 @@
+{
+  "key_path": "DocsConnect",
+  "content": "Docs Connect",
+  "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
+  "created_at": "2026-07-27T13:07:48.460Z",
+  "updated_at": "2026-08-01T15:33:49.581Z",
+  "comment": {
+    "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:24:45.199Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 232,
+      "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),\n })",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 232,
+      "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),\n })",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 107,
+      "context": "const docsName = `${organizationName} ${getBrandName(\"ProductEditorsName\")}`;\n \n return [\n {\n id: \"docs-connect\",\n title: t(\"DocsConnect:DocsConnect\"),\n description: t(\"DocsConnect:CardDescription\", { productName: docsName }),\n path: \"/developer-tools/docs-connect\",\n featured: true,\n linkTitle: t(\"DocsConnect:GetStarted\"),\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
+      "line_number": 74,
+      "context": "}\n };\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/developer-tools/docs-connect\"))\n return t(\"DocsConnect:DocsConnect\");\n if (pathname.includes(\"/developer-tools/api-keys\")) return t(\"Settings:ApiKeys\");\n if (pathname.includes(\"/developer-tools/javascript-sdk/\")) {\n const slug = pathname.split(\"/developer-tools/javascript-sdk/\")[1]?.replace(/\\/$/, \"\");\n if (slug === \"docspace\") return getBrandName(\"ProductName\");\n const title = getSdkPresetTitle(slug, t);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 416,
+      "context": "isDoubleFooterLine={insufficientFunds || isDevPackUpgrade || isUpgrade}\n >\n <ModalDialog.Header>\n {isEditActive\n ? t(\"Common:EditSubscription\")\n : t(\"DocsConnect:DocsConnect\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.walletCard}>\n <div className={styles.walletIcon} aria-hidden>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/CancelPlanDialog/index.tsx",
+      "line_number": 110,
+      "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:CancelPlanConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"DocsConnect:YourCurrentPlanLabel\")}{\" \"}\n {formatCurrencyValue(i18n.language, monthlyCharge, currency, 2)}{\" \"}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/index.tsx",
+      "line_number": 102,
+      "context": "useEffect(() => {\n fetchInfo?.();\n }, [fetchInfo]);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"DocsConnect:DocsConnect\"));\n }, [ready, t]);\n \n // Docs Connect renders its own in-body header (title + badge / context menu),\n // so hide the standard sticky section header — same approach as the overview.\n useEffect(() => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 89,
+      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n <Text as=\"p\" className={styles.description}>\n <Trans\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/RemoveSubscriptionDialog/index.tsx",
+      "line_number": 86,
+      "context": "{t(\"Common:RemoveSubscription\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:RemoveSubscriptionConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/index.tsx",
+      "line_number": 187,
+      "context": "return (\n <div className={styles.panel} data-testid=\"docs_connect_panel\">\n <div className={styles.header}>\n <div className={styles.titleRow}>\n <Text fontSize=\"18px\" fontWeight={700} lineHeight=\"24px\">\n {t(\"DocsConnect:DocsConnect\")}\n </Text>\n {isTrial ? (\n <>\n <ContextMenuButton\n displayType={ContextMenuButtonDisplayType.dropdown}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 276,
+      "context": "ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 276,
+      "context": "ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 343,
+      "context": "title={scheduledChangeTitle}\n body={\n isCancellation\n ? t(\"Common:PlanCancellationBillingPeriodNote\", {\n date: scheduledChangeDate,\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: scheduledChangeDate,\n })\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
+      "line_number": 105,
+      "context": "<ModalDialog.Header>{t(\"DocsConnect:AddAccessRule\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.addRuleBody}>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:AddAccessRuleDescription\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <FieldContainer\n isVertical\n removeMargin",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog.tsx",
+      "line_number": 73,
+      "context": "<ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.confirmDialogBody}>\n <Text fontWeight={600}>\n {t(\"DocsConnect:SwitchToEditorsQuestion\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:SwitchToEditorsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog.tsx",
+      "line_number": 73,
+      "context": "<ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.confirmDialogBody}>\n <Text fontWeight={600}>\n {t(\"DocsConnect:SwitchToEditorsQuestion\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:SwitchToEditorsDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 107,
+      "context": "</div>\n <div className={styles.grid}>\n <Card\n className={styles.featured}\n icon={<DocsConnectSvg />}\n title={t(\"DocsConnect:DocsConnect\")}\n description={t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n })}\n url=\"/developer-tools/docs-connect\"\n color={globalColors.docsConnectAccent}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
+      "line_number": 65,
+      "context": "return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");\n if (pathname.includes(\"/billing/addons/docs-connect\"))\n return t(\"DocsConnect:DocsConnect\");\n if (pathname.includes(\"/billing/addons\")) return t(\"Common:Addons\");\n return t(\"Common:Billing\");\n };\n \n const isSubPage = (pathname: string): boolean => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
+      "line_number": 134,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n isHuge\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"DocsConnect:DocsConnect\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.intro}>\n <Text as=\"h3\" className={styles.subtitle}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 643,
+      "context": "{\n id: \"portal-settings_catalog-services-docs-connect\",\n key: \"10-3-4\",\n icon: \"\",\n link: \"docs-connect\",\n tKey: \"DocsConnect:DocsConnect\",\n },\n ],\n },\n ],\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

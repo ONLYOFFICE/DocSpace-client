@@ -3,7 +3,7 @@
   "content": "Collaborate with trusted teammates without ever sharing your password.",
   "content_en_sha1_hash": "b315edb62a28b4debd49471df8585d386cd4ddca",
   "created_at": "2026-06-09T09:42:54.418Z",
-  "updated_at": "2026-06-09T09:59:25.185Z",
+  "updated_at": "2026-07-28T07:30:59.797Z",
   "comment": {
     "text": "A bullet point in a list of security benefits displayed within the empty state view of a Private Room.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyPrivateRoomView.tsx",
-      "line_number": 65,
-      "context": "const { isBase } = useTheme();\n \n const items = [\n t(\"Common:PrivateRoomEmptyBenefitE2EE\"),\n t(\"Common:PrivateRoomEmptyBenefitAEAD\"),\n t(\"Common:PrivateRoomEmptyBenefitHPKE\"),\n t(\"Common:PrivateRoomEmptyBenefitKDF\"),\n ];\n \n const onCreateFolder = useCallback(() => {\n const event: Event & { payload?: unknown } = new Event(Events.CREATE);",
+      "line_number": 78,
+      "context": "const { isBase } = useTheme();\n \n const items = [\n t(\"Common:PrivateRoomEmptyBenefitE2EE\"),\n t(\"Common:PrivateRoomEmptyBenefitAEAD\"),\n t(\"Common:PrivateRoomEmptyBenefitHPKE\"),\n t(\"Common:PrivateRoomEmptyBenefitKDF\"),\n ];\n \n const dispatchCreate = useCallback(\n (extension?: string) => {",
       "module": "/packages/client"
     },
     {

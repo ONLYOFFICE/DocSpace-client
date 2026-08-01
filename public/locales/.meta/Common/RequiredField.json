@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2026-07-07T08:59:21.713Z",
+  "updated_at": "2026-07-28T07:30:59.828Z",
   "comment": {
     "text": "Error text. This message appears when a required input field is left empty or invalid, indicating that the user must provide information to proceed.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 470,
+      "line_number": 467,
       "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
       "module": "/packages/client"
     },
@@ -62,7 +62,7 @@
     {
       "file_path": "/packages/client/src/store/CreateEditAgentStore.ts",
       "line_number": 336,
-      "context": "const standalone = this.settingsStore?.standalone;\n \n // Standalone binds the agent to a chat-lib profile (profileId); SaaS binds\n // it to a provider/model. Either selection is mandatory before we create.\n if (standalone ? !profileId : !modelId) {\n toastr.error(t(\"Common:RequiredField\"));\n return;\n }\n \n const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;",
+      "context": "const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;\n \n // The agent is bound to a chat-lib profile (profileId), which is\n // mandatory before we create.\n if (!profileId) {\n toastr.error(t(\"Common:RequiredField\"));\n return;\n }\n \n const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;",
       "module": "/packages/client"
     },
     {
@@ -103,13 +103,13 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 580,
+      "line_number": 583,
       "context": "const onChangeLdapLoginCheckbox = () =>\n setIsLdapLoginChecked(!isLdapLoginChecked);\n \n const errorMessage = () => {\n if (!password.trim()) {\n return t(\"Common:RequiredField\");\n }\n if (emailFromInvitation) {\n return errorText || t(\"Common:RequiredField\");\n }\n };",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 580,
+      "line_number": 583,
       "context": "const onChangeLdapLoginCheckbox = () =>\n setIsLdapLoginChecked(!isLdapLoginChecked);\n \n const errorMessage = () => {\n if (!password.trim()) {\n return t(\"Common:RequiredField\");\n }\n if (emailFromInvitation) {\n return errorText || t(\"Common:RequiredField\");\n }\n };",
       "module": "/packages/login"
     },
@@ -133,13 +133,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/sub-components/SetAgentParams.tsx",
-      "line_number": 431,
+      "line_number": 429,
       "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_store/CreateEditAgentStore.tsx",
-      "line_number": 337,
+      "line_number": 342,
       "context": "const cover = dialogsStore.cover;\n \n const { tags, title, icon, logo, prompt, profileId, quota } = agentParams;\n \n if (!profileId) {\n toastr.error(t(\"Common:RequiredField\"));\n return null;\n }\n \n const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;\n const tagsToAddList = tags.map((tag) => tag.name);",
       "module": "/packages/sdk"
     },

@@ -206,6 +206,31 @@ describe("orchestrateEncryptedUpload — setItemLabel (encrypting phase)", () =>
     expect(result.aborted).toBe(false);
   });
 
+  it("never sends the plaintext file name to the upload session", async () => {
+    const { startUploadSession } = await import("../../../api/files");
+
+    const file = makeFile("Secret quarterly report.docx", 128);
+    await orchestrateEncryptedUpload({
+      files: [file],
+      folderId: 1,
+      roomId: 10,
+      identity: makeIdentity() as never,
+      userId: "user-1",
+      publicKey: "base64pubkey==",
+      publicKeyId: "key-1",
+    });
+
+    expect(startUploadSession).toHaveBeenCalledTimes(1);
+    const args = vi.mocked(startUploadSession).mock.calls[0];
+
+    expect(args[1]).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.docx$/,
+    );
+
+    const serialized = JSON.stringify(args);
+    expect(serialized).not.toContain("Secret quarterly report");
+  });
+
   it("does not throw when setItemLabel is omitted from uploadStore", async () => {
     const file = makeFile("nolabel.txt", 16);
     const result = await orchestrateEncryptedUpload({

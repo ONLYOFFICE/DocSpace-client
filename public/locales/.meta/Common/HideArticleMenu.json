@@ -3,7 +3,7 @@
   "content": "Hide menu",
   "content_en_sha1_hash": "93066aecf8f75fbb8e34e32fb582d55ae44b9cb5",
   "created_at": "2025-05-19T21:30:45.764Z",
-  "updated_at": "2026-07-07T08:59:21.642Z",
+  "updated_at": "2026-07-27T13:07:50.559Z",
   "comment": {
     "text": "This is a button label and tooltip content for an action that hides a menu or sidebar. It appears as a short label.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/AppsSidebar/index.tsx",
-      "line_number": 155,
+      "line_number": 157,
       "context": "const { t } = useTranslation([\"Common\"]);\n const navigate = useNavigate();\n const { isBase } = useTheme();\n const isMobile = currentDeviceType === DeviceType.mobile;\n const collapseLabel = showText\n ? t(\"Common:HideArticleMenu\")\n : t(\"Common:ShowArticleMenu\");\n \n const fullLogo = getLogoUrl(\n WhiteLabelLogoType.LightSmall,\n !isBase,",
       "module": "/packages/client"
     },

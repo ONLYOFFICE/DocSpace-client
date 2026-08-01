@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2026-06-01T21:20:14.454Z",
-  "updated_at": "2026-07-07T08:59:21.682Z",
+  "updated_at": "2026-07-28T07:30:59.810Z",
   "comment": {
     "text": "Title for a navigation menu item, an app catalog entry, and the page title for the AI Files section. It is a noun used as a short label.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewArticle/index.tsx",
-      "line_number": 287,
+      "line_number": 263,
       "context": "const sharedWithMeHasNew =\n sharedWithMeNewItems > 0 && sharedWithMeFolderId != null;\n \n const aiFilesItem: NavMenuItem = {\n id: AI_FILES_ID,\n label: t(\"Common:DashboardFilesTitle\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => navigate(\"/ai-files\"),\n children: aiFilesEnabled\n ? [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 99,
+      "line_number": 97,
       "context": "return [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:DashboardFilesTitle\"),\n description: t(\"Common:DashboardFilesDescription\"),\n href: \"/ai-files\",\n supported: true,\n alwaysOn: true,\n },",
       "module": "/packages/client"
     },
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 154,
-      "context": "const moduleItems: ModuleItem[] = [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:DashboardFilesTitle\"),\n description: t(\"Common:DashboardFilesDescription\"),\n installed: !isGuest,\n href: \"/rooms/personal/filter\",\n },\n {",
+      "line_number": 161,
+      "context": "const moduleItems: ModuleItem[] = [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:DashboardFilesTitle\"),\n description: t(\"Common:DashboardFilesDescription\"),\n installed: true,\n href: isGuest ? \"/shared-with-me/filter\" : \"/rooms/personal/filter\",\n },\n {",
       "module": "/packages/client"
     }
   ],

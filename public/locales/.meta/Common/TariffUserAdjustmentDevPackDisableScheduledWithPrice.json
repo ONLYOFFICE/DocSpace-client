@@ -1,0 +1,35 @@
+{
+  "key_path": "TariffUserAdjustmentDevPackDisableScheduledWithPrice",
+  "content": "Change scheduled: Users {{fromCount}} → {{toCount}}  |  Dev Pack will be disabled  |  {{price}}/month",
+  "content_en_sha1_hash": "805505c1fbcfc8db5c8466311fb3058577d26ded",
+  "created_at": "2026-07-29T00:00:00.000Z",
+  "updated_at": "2026-08-01T15:33:49.636Z",
+  "comment": {
+    "text": "Title of a warning component shown when both the user count changes and the Dev Pack add-on is switched off at the end of the current billing period; {{fromCount}} is the current number of users, {{toCount}} is the number of users of the next period, and {{price}} is the formatted monthly cost of the next period.",
+    "is_auto": false,
+    "updated_at": "2026-07-29T00:00:00.000Z",
+    "model": null
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 153,
+      "context": "const getScheduledChangeTitle = () => {\n if (isCancellation) return t(\"Common:SubscriptionCancellation\");\n \n if (devPackDisabling) {\n return usersAdjusting\n ? t(\"Common:TariffUserAdjustmentDevPackDisableScheduledWithPrice\", {\n fromCount: planUsers,\n toCount: scheduledChange?.nextUsers,\n price: nextMonthlyPrice,\n })\n : t(\"Common:TariffDevPackDisableScheduledWithPrice\", {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 178,
+      "context": "const getScheduledChangeTitle = () => {\n if (isCancellation) return t(\"Common:SubscriptionCancellation\");\n \n if (devPackDisabling)\n return usersAdjusting\n ? t(\"Common:TariffUserAdjustmentDevPackDisableScheduledWithPrice\", {\n fromCount: planUsers,\n toCount: scheduledChange?.nextUsers,\n price: nextMonthlyPrice,\n })\n : t(\"Common:TariffDevPackDisableScheduledWithPrice\", {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

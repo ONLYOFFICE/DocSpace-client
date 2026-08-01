@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectCurrentTariffPlan",
+  "content": "Current subscription: {{price}}/month (Users:{{count}})",
+  "content_en_sha1_hash": "3eaf6fb3cd0446dbf2edab0efa5d2b1a9cd8c7a0",
+  "created_at": "2026-07-27T13:07:08.184Z",
+  "updated_at": "2026-08-01T15:33:49.800Z",
+  "comment": {
+    "text": "Summary label in the billing section displaying current subscription details, including monthly {{price}} and user {{count}}.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:35:09.237Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 535,
+      "context": "price: formatWalletCurrency(item.price.value, 0),\n });\n } else if (hasScheduledChange) {\n docsConnectPrice = t(\"ChangeShedule\");\n } else {\n docsConnectPrice = t(\"DocsConnectCurrentTariffPlan\", {\n price: formatWalletCurrency(\n docsConnectState?.tariffPrice ?? 0,\n 2,\n ),\n count: docsConnectState?.tariffUsers ?? 0,",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

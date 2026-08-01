@@ -1,0 +1,29 @@
+{
+  "key_path": "EditorUsage",
+  "content": "Editor usage",
+  "content_en_sha1_hash": "d8bf6cdcf8e2867dfcc1f60a2f82265cda30ef8b",
+  "created_at": "2026-07-27T13:07:48.501Z",
+  "updated_at": "2026-08-01T15:33:49.643Z",
+  "comment": {
+    "text": "Label in a statistics card indicating the number of editor licenses currently in use.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:22:49.613Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 570,
+      "context": "</div>\n <div className={styles.twoCards}>\n <UsageBlock\n title={t(\"DocsConnect:Editors\")}\n subtitle={t(\"DocsConnect:EditorsSubtitleStat\")}\n usageLabel={t(\"DocsConnect:EditorUsage\")}\n usage={tenantInfo.stats.editor}\n limit={tenantInfo.usersLimit.edit}\n t={t}\n />\n <UsageBlock",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

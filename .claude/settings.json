@@ -28,7 +28,8 @@
       "Bash(grep -v \"^$\")",
       "Bash(grep -v \"^en$\")",
       "Bash(grep -v \"^\\\\.meta$\")",
-      "Bash(pnpm --filter @docspace/client exec vitest run src/store/contextOptionsStore)"
+      "Bash(pnpm --filter @docspace/client exec vitest run src/store/contextOptionsStore)",
+      "Bash(sort -u -t: -k2)"
     ]
   }
 }

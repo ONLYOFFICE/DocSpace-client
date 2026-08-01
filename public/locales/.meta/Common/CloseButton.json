@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2026-07-07T08:59:21.724Z",
+  "updated_at": "2026-07-28T07:30:59.837Z",
   "comment": {
     "text": "This is the label for a button that closes a dialog window, such as a conversion dialog, a password dialog, or a \"Get Code\" dialog.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useGoBackAndClose.ts",
-      "line_number": 128,
+      "line_number": 132,
       "context": "// and should navigate back to the originating listing.\n const close =\n showClose && (!sdkConfig?.isSDK || !!sdkConfig?.returnUrl)\n ? {\n visible: true,\n text: t(\"Common:CloseButton\"),\n }\n : undefined;\n \n return { goBack, close };\n };",
       "module": "/packages/doceditor"
     },
@@ -78,20 +78,8 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
-      "line_number": 209,
-      "context": "<IconButton\n iconName={ArrowLeftReactSvgUrl}\n size={16}\n onClick={closePanel}\n tooltipId=\"close-panel-tooltip\"\n tooltipContent={t(\"Common:CloseButton\")}\n />\n )}\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:AIAgent\")}\n </Text>",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
-      "line_number": 209,
-      "context": "<IconButton\n iconName={ArrowLeftReactSvgUrl}\n size={16}\n onClick={closePanel}\n tooltipId=\"close-panel-tooltip\"\n tooltipContent={t(\"Common:CloseButton\")}\n />\n )}\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:AIAgent\")}\n </Text>",
-      "module": "/packages/sdk"
-    },
-    {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
-      "line_number": 146,
+      "line_number": 145,
       "context": "beforeTimeout: 15000,\n targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });",
       "module": "/packages/sdk"
     },

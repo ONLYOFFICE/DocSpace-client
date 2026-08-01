@@ -92,8 +92,11 @@ type Store = Map<string, unknown>;
 
 class MockOpenRequest {
   result: MockDB | null = null;
+  transaction: MockTransaction | null = null;
   error: Error | null = null;
-  onupgradeneeded: (() => void) | null = null;
+  onupgradeneeded:
+    | ((event: { oldVersion: number; newVersion: number | null }) => void)
+    | null = null;
   onsuccess: (() => void) | null = null;
   onerror: (() => void) | null = null;
   onblocked: (() => void) | null = null;
@@ -192,7 +195,7 @@ function resetMockIDB(): void {
 }
 
 const mockIDB = {
-  open(name: string, _version: number): MockOpenRequest {
+  open(name: string, version = 1): MockOpenRequest {
     const req = new MockOpenRequest();
     let entry = dbs.get(name);
     const isFresh = !entry;
@@ -202,11 +205,12 @@ const mockIDB = {
     }
     const db = new MockDB(entry.store, entry.storeNames);
     queueMicrotask(() => {
-      if (isFresh) {
-        req.result = db;
-        req.onupgradeneeded?.();
-      }
       req.result = db;
+      if (isFresh) {
+        req.transaction = new MockTransaction(entry.store);
+        req.onupgradeneeded?.({ oldVersion: 0, newVersion: version });
+        req.transaction = null;
+      }
       req.onsuccess?.();
     });
     return req;
@@ -710,6 +714,105 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
   });
 
+  it("does NOT add a second wrap for a member who already has one (one row per user)", async () => {
+    const bobKeys = [
+      bob,
+      await generateIdentityKeyPair(),
+      await generateIdentityKeyPair(),
+    ];
+    const BOB_KEY_IDS = ["bob-key-1", "bob-key-2", "bob-key-3"];
+
+    const wraps = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [
+        { userId: ALICE, publicKey: pubB64(alice), publicKeyId: "alice-key" },
+        {
+          userId: BOB,
+          publicKey: pubB64(bobKeys[0]),
+          publicKeyId: BOB_KEY_IDS[0],
+        },
+      ],
+      fileId: FILE_ID,
+    });
+
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: wraps,
+      userKeys: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { id: "alice-key", userId: ALICE, publicKey: pubB64(alice) },
+    ]);
+    getFilePublicKeysMock.mockResolvedValue([
+      { id: "alice-key", userId: ALICE, publicKey: pubB64(alice) },
+      ...bobKeys.map((kp, i) => ({
+        id: BOB_KEY_IDS[i],
+        userId: BOB,
+        publicKey: pubB64(kp),
+      })),
+    ]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+      onKeyChange: vi.fn().mockResolvedValue("accept"),
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
+  });
+
+  it("backfills a member with NO envelope, using exactly one (newest) key", async () => {
+    const bobOldKey = bob;
+    const bobNewKey = await generateIdentityKeyPair();
+
+    const wraps = await wrapDekForRecipients({
+      dek,
+      senderIdentity: alice,
+      senderUserId: ALICE,
+      recipients: [
+        { userId: ALICE, publicKey: pubB64(alice), publicKeyId: "alice-key" },
+      ],
+      fileId: FILE_ID,
+    });
+
+    getFolderMock.mockResolvedValue({
+      files: singleFile(FILE_ID),
+      folders: [],
+    });
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: wraps,
+      userKeys: [],
+    });
+    getRoomEncryptionKeysMock.mockResolvedValue([
+      { id: "alice-key", userId: ALICE, publicKey: pubB64(alice) },
+    ]);
+    getFilePublicKeysMock.mockResolvedValue([
+      { id: "alice-key", userId: ALICE, publicKey: pubB64(alice) },
+      { id: "bob-old", userId: BOB, publicKey: pubB64(bobOldKey) },
+      { id: "bob-new", userId: BOB, publicKey: pubB64(bobNewKey) },
+    ]);
+
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+      currentUserId: ALICE,
+      identity: alice,
+      onKeyChange: vi.fn().mockResolvedValue("accept"),
+    });
+
+    expect(result.fileResults).toEqual([{ fileId: FILE_ID, success: true }]);
+    const [, posted] = setFileEncryptionKeysMock.mock.calls[0];
+    const bobEntries = (posted as ServerAccessKeyDto[]).filter(
+      (k) => String(k.userId) === BOB,
+    );
+    expect(bobEntries).toHaveLength(1);
+    expect(bobEntries[0].publicKeyId).toBe("bob-new");
+  });
+
   it("reports the file as failed (NOT silent) when server rejects setFileEncryptionKeys", async () => {
     // Symmetric to the addMembersToEncryptedRoom guard above. Any HTTP error
     // on `PUT /files/{id}/access` must surface in `fileResults`, never just
@@ -1122,7 +1225,7 @@ describe("rotateOwnIdentityForRoom", () => {
     expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
   });
 
-  it("re-wraps Alice's own entry with the new identity, preserving Bob's untouched", async () => {
+  it("replaces Alice's own entry (one wrap per user), leaving Bob's untouched", async () => {
     getFolderMock.mockResolvedValue({
       files: singleFile(FILE_ID),
       folders: [],
@@ -1149,15 +1252,17 @@ describe("rotateOwnIdentityForRoom", () => {
     const bobOriginal = initialWraps.find(
       (k) => String(k.userId) === BOB,
     )!;
-    const aliceNewEntry = (posted as ServerAccessKeyDto[]).find(
-      (k) => String(k.userId) === ALICE,
-    )!;
-    const bobAfter = (posted as ServerAccessKeyDto[]).find(
-      (k) => String(k.userId) === BOB,
-    )!;
 
+    const postedKeys = posted as ServerAccessKeyDto[];
+    expect(postedKeys).toHaveLength(2);
+
+    const aliceEntries = postedKeys.filter((k) => String(k.userId) === ALICE);
+    expect(aliceEntries).toHaveLength(1);
+    expect(aliceEntries[0].publicKeyId).toBe(ALICE_KEY_ID);
+    expect(aliceEntries[0].privateKeyEnc).not.toBe(aliceOriginal.privateKeyEnc);
+
+    const bobAfter = postedKeys.find((k) => String(k.userId) === BOB)!;
     expect(bobAfter.privateKeyEnc).toBe(bobOriginal.privateKeyEnc);
-    expect(aliceNewEntry.privateKeyEnc).not.toBe(aliceOriginal.privateKeyEnc);
   });
 
   it("posts the rotated entry with the provided newPublicKeyId, never empty (regression)", async () => {
@@ -1178,11 +1283,11 @@ describe("rotateOwnIdentityForRoom", () => {
 
     expect(result).toEqual([{ fileId: FILE_ID, success: true }]);
     const [, posted] = setFileEncryptionKeysMock.mock.calls[0];
-    const aliceEntry = (posted as ServerAccessKeyDto[]).find(
-      (k) => String(k.userId) === ALICE,
+    const aliceNewEntry = (posted as ServerAccessKeyDto[]).find(
+      (k) => String(k.userId) === ALICE && k.publicKeyId === ALICE_KEY_ID,
     );
-    expect(aliceEntry?.publicKeyId).toBe(ALICE_KEY_ID);
-    expect(aliceEntry?.publicKeyId).not.toBe("");
+    expect(aliceNewEntry).toBeDefined();
+    expect(aliceNewEntry?.publicKeyId).not.toBe("");
   });
 
   it("returns an error when fileKeys is missing", async () => {
@@ -1230,6 +1335,7 @@ describe("rotateOwnIdentityForRoom", () => {
     expect(result).toHaveLength(1);
     expect(result[0].success).toBe(false);
     expect(result[0].error).toBeTruthy();
+    expect(result[0].unreadable).toBe(true);
     expect(setFileEncryptionKeysMock).not.toHaveBeenCalled();
   });
 

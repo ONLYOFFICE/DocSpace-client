@@ -101,27 +101,24 @@ export async function bootstrapEncryption(
   const acknowledge = page.locator("#recoveryPhraseAcknowledged");
   await expect(acknowledge).toBeVisible({ timeout: 5000 });
 
-  const words = await page.locator("[class*='wordText']").allTextContents();
+  const recoveryDialog = page.getByRole("dialog");
+  const phraseText = await recoveryDialog
+    .locator("[class*='phraseBox']")
+    .textContent();
+  const words = (phraseText ?? "").trim().split(/\s+/);
   expect(words).toHaveLength(24);
 
+  // The acknowledge checkbox stays disabled until the phrase is saved
+  // (printed, downloaded, or copied). Download is the only save action
+  // that works reliably headless.
+  const downloadPromise = page.waitForEvent("download");
+  await recoveryDialog
+    .getByRole("button", { name: "Download", exact: true })
+    .click();
+  await downloadPromise;
+
   await acknowledge.check();
-  const recoveryDialog = page.getByRole("dialog");
   await recoveryDialog.getByRole("button", { name: "Continue" }).click();
-
-  const quizInputs = recoveryDialog.locator('input[name^="quiz-input-"]');
-  await expect(quizInputs.first()).toBeVisible({ timeout: 5000 });
-  const inputCount = await quizInputs.count();
-  for (let i = 0; i < inputCount; i++) {
-    const label = await recoveryDialog
-      .locator(`label[for="quiz-input-${i}"]`)
-      .textContent();
-    const match = label?.match(/#(\d+)/);
-    expect(match).toBeTruthy();
-    const wordIndex = Number.parseInt(match![1], 10) - 1;
-    await quizInputs.nth(i).fill(words[wordIndex]);
-  }
-
-  await recoveryDialog.getByRole("button", { name: "Verify" }).click();
 
   await expect
     .poll(() => handleRef.current?.getKeys().length ?? 0, {

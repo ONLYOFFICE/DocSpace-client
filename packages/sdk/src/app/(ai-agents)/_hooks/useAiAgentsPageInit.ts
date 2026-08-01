@@ -73,7 +73,6 @@ import {
   useAgentLoadingStore,
   useAiRoomStore,
 } from "../_store";
-import { modelCache } from "../_components/create-agent-dialog/sub-components/modelCache";
 
 type Options = {
   isDefaultAgentsQuotaSet?: boolean;
@@ -81,8 +80,8 @@ type Options = {
 };
 
 /**
- * Wires per-route MobX stores together and injects React-only deps (router,
- * model cache) into CreateEditAgentStore. Runs once on mount.
+ * Wires per-route MobX stores together and injects React-only deps (router)
+ * into CreateEditAgentStore. Runs once on mount.
  */
 export const useAiAgentsPageInit = (options: Options = {}) => {
   const router = useRouter();
@@ -103,10 +102,6 @@ export const useAiAgentsPageInit = (options: Options = {}) => {
     [router],
   );
 
-  const clearModelCache = React.useCallback(() => {
-    modelCache.clear();
-  }, []);
-
   React.useEffect(() => {
     createEditAgentStore.configure({
       dialogsStore,
@@ -116,7 +111,6 @@ export const useAiAgentsPageInit = (options: Options = {}) => {
       isDefaultAgentsQuotaSet: options.isDefaultAgentsQuotaSet,
       isDefaultRoomsQuotaSet: options.isDefaultRoomsQuotaSet,
       navigateToAgent,
-      clearModelCache,
     });
   }, [
     createEditAgentStore,
@@ -127,7 +121,6 @@ export const useAiAgentsPageInit = (options: Options = {}) => {
     options.isDefaultAgentsQuotaSet,
     options.isDefaultRoomsQuotaSet,
     navigateToAgent,
-    clearModelCache,
   ]);
 };
 

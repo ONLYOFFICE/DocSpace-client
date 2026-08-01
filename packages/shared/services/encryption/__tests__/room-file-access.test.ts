@@ -43,6 +43,7 @@ import {
   type RoomMemberPublicKey,
 } from "../room-file-access";
 import { NoAccessError, AuthenticationError } from "../errors";
+import { getTofuStore, resetTofuStores } from "../tofu-store";
 import { type IdentityKeyPair, type ServerAccessKeyDto } from "../types";
 import { arrayBufferToBase64 } from "../utils";
 
@@ -255,5 +256,211 @@ describe("roomFileAccess wrap → unwrap → revoke roundtrip", () => {
       });
       expect(out).toEqual(dek);
     });
+  });
+});
+
+describe("multi-key user (several concurrent registered keys)", () => {
+  const KEY_IDS = ["alice-key-1", "alice-key-2", "alice-key-3"];
+
+  let aliceKeys: IdentityKeyPair[];
+  let bob: IdentityKeyPair;
+  let carol: IdentityKeyPair;
+  let dek: Uint8Array;
+  let roomMemberKeys: RoomMemberPublicKey[];
+  let wraps: ServerAccessKeyDto[][];
+
+  beforeAll(async () => {
+    resetTofuStores();
+    aliceKeys = [
+      await generateIdentityKeyPair(),
+      await generateIdentityKeyPair(),
+      await generateIdentityKeyPair(),
+    ];
+    bob = await generateIdentityKeyPair();
+    carol = await generateIdentityKeyPair();
+    dek = generateDEK();
+
+    roomMemberKeys = [
+      ...aliceKeys.map((kp, i) => ({
+        userId: ALICE_ID,
+        publicKey: pubB64(kp),
+        publicKeyId: KEY_IDS[i],
+      })),
+      { userId: BOB_ID, publicKey: pubB64(bob) },
+      { userId: CAROL_ID, publicKey: pubB64(carol) },
+    ];
+
+    wraps = [];
+    for (let i = 0; i < aliceKeys.length; i++) {
+      wraps.push(
+        await wrapDekForRecipients({
+          dek,
+          senderIdentity: aliceKeys[i],
+          senderUserId: ALICE_ID,
+          recipients: [
+            {
+              userId: ALICE_ID,
+              publicKey: pubB64(aliceKeys[i]),
+              publicKeyId: KEY_IDS[i],
+            },
+            { userId: BOB_ID, publicKey: pubB64(bob) },
+            { userId: CAROL_ID, publicKey: pubB64(carol) },
+          ],
+          fileId: FILE_ID,
+        }),
+      );
+    }
+
+    const tofu = getTofuStore(ALICE_ID);
+    for (const kp of aliceKeys) {
+      await tofu.acceptKey(ALICE_ID, pubB64(kp));
+    }
+  });
+
+  it("every key opens its own wrap, regardless of member-list order", async () => {
+    for (let i = 0; i < aliceKeys.length; i++) {
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: wraps[i],
+        roomMemberKeys,
+        currentUserId: ALICE_ID,
+        currentIdentity: aliceKeys[i],
+        fileId: FILE_ID,
+      });
+      expect(out).toEqual(dek);
+
+      const reversed = await unwrapDekForCurrentUser({
+        fileKeys: wraps[i],
+        roomMemberKeys: [...roomMemberKeys].reverse(),
+        currentUserId: ALICE_ID,
+        currentIdentity: aliceKeys[i],
+        fileId: FILE_ID,
+      });
+      expect(reversed).toEqual(dek);
+    }
+  });
+
+  it("REGRESSION: a wrap by the newest key opens even though older keys are listed first", async () => {
+    const out = await unwrapDekForCurrentUser({
+      fileKeys: wraps[wraps.length - 1],
+      roomMemberKeys,
+      currentUserId: ALICE_ID,
+      currentIdentity: aliceKeys[aliceKeys.length - 1],
+      fileId: FILE_ID,
+    });
+    expect(out).toEqual(dek);
+  });
+
+  it("a file carrying wraps for several of the user's keys opens with any of them", async () => {
+    const combined = wraps.flatMap((w) =>
+      w.filter((k) => String(k.userId) === ALICE_ID),
+    );
+    for (let i = 0; i < aliceKeys.length; i++) {
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: combined,
+        roomMemberKeys,
+        currentUserId: ALICE_ID,
+        currentIdentity: aliceKeys[i],
+        fileId: FILE_ID,
+      });
+      expect(out).toEqual(dek);
+
+      const shuffled = await unwrapDekForCurrentUser({
+        fileKeys: [...combined].reverse(),
+        roomMemberKeys,
+        currentUserId: ALICE_ID,
+        currentIdentity: aliceKeys[i],
+        fileId: FILE_ID,
+      });
+      expect(shuffled).toEqual(dek);
+    }
+  });
+
+  it("currentPublicKeyId hint (correct, stale, or absent) never breaks the unwrap", async () => {
+    const combined = wraps.flatMap((w) =>
+      w.filter((k) => String(k.userId) === ALICE_ID),
+    );
+    for (const hint of [KEY_IDS[1], "no-such-key-id", undefined]) {
+      const out = await unwrapDekForCurrentUser({
+        fileKeys: combined,
+        roomMemberKeys,
+        currentUserId: ALICE_ID,
+        currentIdentity: aliceKeys[1],
+        fileId: FILE_ID,
+        currentPublicKeyId: hint,
+      });
+      expect(out).toEqual(dek);
+    }
+  });
+
+  it("peer side: resolver fires at most once per unwrap across N sender candidates", async () => {
+    const first = await unwrapDekForCurrentUser({
+      fileKeys: wraps[0],
+      roomMemberKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: FILE_ID,
+    });
+    expect(first).toEqual(dek);
+
+    let calls = 0;
+    const out = await unwrapDekForCurrentUser({
+      fileKeys: wraps[1],
+      roomMemberKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: FILE_ID,
+      onKeyChange: async () => {
+        calls += 1;
+        return "accept";
+      },
+    });
+    expect(out).toEqual(dek);
+    expect(calls).toBe(1);
+
+    calls = 0;
+    await unwrapDekForCurrentUser({
+      fileKeys: wraps[1],
+      roomMemberKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: FILE_ID,
+      onKeyChange: async () => {
+        calls += 1;
+        return "accept";
+      },
+    });
+    expect(calls).toBe(0);
+
+    const oldAgain = await unwrapDekForCurrentUser({
+      fileKeys: wraps[0],
+      roomMemberKeys,
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: FILE_ID,
+      onKeyChange: async () => {
+        throw new Error("must not prompt for an already-trusted key");
+      },
+    });
+    expect(oldAgain).toEqual(dek);
+  });
+
+  it("peer side: refusing the key change withholds the DEK", async () => {
+    await unwrapDekForCurrentUser({
+      fileKeys: wraps[0],
+      roomMemberKeys,
+      currentUserId: CAROL_ID,
+      currentIdentity: carol,
+      fileId: FILE_ID,
+    });
+    await expect(
+      unwrapDekForCurrentUser({
+        fileKeys: wraps[2],
+        roomMemberKeys,
+        currentUserId: CAROL_ID,
+        currentIdentity: carol,
+        fileId: FILE_ID,
+        onKeyChange: async () => "refuse",
+      }),
+    ).rejects.toBeInstanceOf(AuthenticationError);
   });
 });

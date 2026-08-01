@@ -28,7 +28,7 @@ COPY common/tests/package.json ./common/tests/package.json
 COPY packages/login/package.json ./packages/login/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
 COPY libs/ui-kit/package.json ./libs/ui-kit/package.json
-COPY libs/ui-kit/onlyoffice-docspace-api-sdk-*.tgz ./libs/ui-kit/
+COPY libs/ui-kit/*.tgz ./libs/ui-kit/
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile

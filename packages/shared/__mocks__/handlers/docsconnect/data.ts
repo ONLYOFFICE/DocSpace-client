@@ -44,6 +44,8 @@ export type DocsConnectPreset =
   | "paid"
   | "paidDevPack"
   | "scheduled"
+  | "scheduledDevPackDisable"
+  | "scheduledDevPackDisableWithUsers"
   | "scheduledCancel"
   | "deactivated"
   | "canceled";
@@ -177,13 +179,16 @@ export const docsConnectWalletBalanceSuccess = (
 });
 
 export const docsConnectDevPackEnabled = (preset: DocsConnectPreset) =>
-  preset === "paidDevPack";
+  preset === "paidDevPack" ||
+  preset === "scheduledDevPackDisable" ||
+  preset === "scheduledDevPackDisableWithUsers";
 
 type TWalletQuotaMock = {
   id: number;
   quantity: number;
   wallet: boolean;
   nextQuantity?: number | null;
+  nextQuota?: number | null;
   dueDate?: string | null;
   state?: number;
 };
@@ -212,6 +217,28 @@ const walletQuotas = (preset: DocsConnectPreset): TWalletQuotaMock[] => {
           id: DOCS_CONNECT_SERVICE_ID,
           quantity: DOCS_CONNECT_PLAN_USERS,
           nextQuantity: 30,
+          dueDate: DOCS_CONNECT_PAID_END,
+          wallet: true,
+        },
+      ];
+    case "scheduledDevPackDisable":
+      return [
+        {
+          id: DOCS_CONNECT_DEVPACK_SERVICE_ID,
+          quantity: DOCS_CONNECT_PLAN_USERS,
+          nextQuantity: DOCS_CONNECT_PLAN_USERS,
+          nextQuota: DOCS_CONNECT_SERVICE_ID,
+          dueDate: DOCS_CONNECT_PAID_END,
+          wallet: true,
+        },
+      ];
+    case "scheduledDevPackDisableWithUsers":
+      return [
+        {
+          id: DOCS_CONNECT_DEVPACK_SERVICE_ID,
+          quantity: DOCS_CONNECT_PLAN_USERS,
+          nextQuantity: 40,
+          nextQuota: DOCS_CONNECT_SERVICE_ID,
           dueDate: DOCS_CONNECT_PAID_END,
           wallet: true,
         },

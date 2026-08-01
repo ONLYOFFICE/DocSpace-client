@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2026-07-31T15:04:17.647Z",
+  "updated_at": "2026-08-01T15:33:49.597Z",
   "comment": {
     "text": "This is a label for the \"Editor\" access right, indicating a user has full editing permissions. It appears in various contexts, such as user role selections and descriptions of document access levels.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Preview.tsx",
-      "line_number": 152,
+      "line_number": 156,
       "context": "type={TabsTypes.Secondary}\n withoutStickyIntend\n items={[\n {\n id: \"editor\",\n name: t(\"Common:Editor\"),\n iconName: DocumentsReactSvgUrl,\n content: null,\n },\n {\n id: \"code\",",
       "module": "/packages/client"
     },

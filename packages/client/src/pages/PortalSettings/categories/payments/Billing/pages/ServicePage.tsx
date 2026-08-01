@@ -161,6 +161,8 @@ const ServicePage = (props: ServicePageProps) => {
         ? {
             nextUsers: scheduledChange.nextUsers,
             dueDate: scheduledChange.dueDate,
+            nextDevPackEnabled: scheduledChange.nextDevPackEnabled,
+            scheduledOnDevPack: scheduledChange.scheduledOnDevPack,
           }
         : null,
       deactivated: isPaid && (docsConnectInfo.deactivated ?? false),

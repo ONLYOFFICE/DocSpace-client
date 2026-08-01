@@ -3,7 +3,7 @@
   "content": "Calculate your subscription",
   "content_en_sha1_hash": "9fdcddc508b0b0b4620a83ccc85259183d71d35c",
   "created_at": "2026-07-27T13:07:48.508Z",
-  "updated_at": "2026-07-27T14:33:44.132Z",
+  "updated_at": "2026-08-01T15:33:49.624Z",
   "comment": {
     "text": "Heading for the subscription calculation section within the DocsConnect Buy Plan panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 475,
+      "line_number": 469,
       "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.calculateTitle}\n >\n {t(\"DocsConnect:CalculateYourPlan\")}\n </Text>\n \n <div className={styles.usersBlock}>\n <Text fontSize=\"13px\" className={styles.usersTitle}>\n {t(\"DocsConnect:NumberOfUsers\")}",
       "module": "/packages/client"
     }

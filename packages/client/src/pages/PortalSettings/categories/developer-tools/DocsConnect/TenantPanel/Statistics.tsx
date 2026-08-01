@@ -153,7 +153,7 @@ const Statistics = ({
   const devPackDisabling =
     scheduledChange != null &&
     !isCancellation &&
-    devPackEnabled &&
+    scheduledChange.scheduledOnDevPack &&
     !nextDevPackEnabled;
   const usersAdjusting =
     scheduledChange != null && scheduledChange.nextUsers !== planUsers;
@@ -183,6 +183,8 @@ const Statistics = ({
         : t("Common:TariffDevPackDisableScheduledWithPrice", {
             price: nextMonthlyPrice,
           });
+
+    if (!usersAdjusting) return t("Common:ChangeShedule");
 
     return t("Common:TariffUserAdjustmentScheduledWithPrice", {
       fromCount: planUsers,

@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-01T15:33:49.581Z",
+  "updated_at": "2026-08-01T16:25:17.795Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -62,7 +62,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/RemoveSubscriptionDialog/index.tsx",
       "line_number": 86,
-      "context": "{t(\"Common:RemoveSubscription\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:RemoveSubscriptionConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "context": "{t(\"Common:RemoveSubscription\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"Common:RemoveSubscriptionConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     },
     {

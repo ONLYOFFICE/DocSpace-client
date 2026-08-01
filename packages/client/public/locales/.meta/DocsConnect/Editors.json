@@ -3,7 +3,7 @@
   "content": "Editors",
   "content_en_sha1_hash": "ed63036d8730b34c2af3aa53fe984d9883388a1c",
   "created_at": "2026-07-27T13:07:48.500Z",
-  "updated_at": "2026-07-31T15:04:17.666Z",
+  "updated_at": "2026-08-01T15:33:49.643Z",
   "comment": {
     "text": "Title for a usage block in the statistics panel, representing the number of users with editor permissions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 543,
+      "line_number": 568,
       "context": "{t(\"DocsConnect:UserActivitySubtitle\")}\n </Text>\n </div>\n <div className={styles.twoCards}>\n <UsageBlock\n title={t(\"DocsConnect:Editors\")}\n subtitle={t(\"DocsConnect:EditorsSubtitleStat\")}\n usageLabel={t(\"DocsConnect:EditorUsage\")}\n usage={tenantInfo.stats.editor}\n limit={tenantInfo.usersLimit.edit}\n t={t}",
       "module": "/packages/client"
     }

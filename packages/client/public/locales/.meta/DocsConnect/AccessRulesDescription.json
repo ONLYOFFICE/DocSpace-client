@@ -3,7 +3,7 @@
   "content": "Configure allow/deny rules for IP addresses, IP ranges, or hosts.",
   "content_en_sha1_hash": "39988406d909293425b790aa2028e23b2d0a5c92",
   "created_at": "2026-07-27T13:07:48.540Z",
-  "updated_at": "2026-07-31T15:04:17.663Z",
+  "updated_at": "2026-08-01T15:33:49.635Z",
   "comment": {
     "text": "Hint text appearing under the \"Access Rules\" setting label in the DocsConnect panel to explain the purpose of configuring IP-based restrictions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 508,
+      "line_number": 525,
       "context": "</Text>\n \n <div className={styles.settingsGroup}>\n <Text fontWeight={600}>{t(\"DocsConnect:AccessRules\")}</Text>\n <Text fontSize=\"13px\" className={styles.settingsHint}>\n {t(\"DocsConnect:AccessRulesDescription\")}\n </Text>\n </div>\n \n {rules.length > 0 ? (\n <div className={styles.rulesList}>",
       "module": "/packages/client"
     }

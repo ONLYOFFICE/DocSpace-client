@@ -3,7 +3,7 @@
   "content": "{{price}} per user / month",
   "content_en_sha1_hash": "80d99f9483ace4248b1a836b3c89a784d6b1838f",
   "created_at": "2026-07-27T13:07:48.495Z",
-  "updated_at": "2026-07-31T15:04:17.735Z",
+  "updated_at": "2026-08-01T15:33:49.809Z",
   "comment": {
     "text": "A price information label showing the monthly rate per user, where {{price}} is the formatted currency amount.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 197,
+      "line_number": 235,
       "context": ": onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),\n })\n : t(\"DocsConnect:FromPricePerUserMonthNote\", {\n price: formatCurrency(basePricePerUser, 0),\n })",
       "module": "/libs/ui-kit"
     }

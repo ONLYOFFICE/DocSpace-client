@@ -3,7 +3,7 @@
   "content": "Please use the desktop site to preview the editor",
   "content_en_sha1_hash": "db8a96dbc6df0f303f72f4d971c905590d81ba3a",
   "created_at": "2026-07-27T13:07:48.534Z",
-  "updated_at": "2026-07-31T15:04:17.661Z",
+  "updated_at": "2026-08-01T15:33:49.632Z",
   "comment": {
     "text": "Description text within an Empty View that appears when attempting to preview the editor on a mobile device.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Preview.tsx",
-      "line_number": 172,
+      "line_number": 176,
       "context": "{isMobileView ? (\n view === \"editor\" ? (\n <EmptyView\n icon={<DesktopOnlyIcon />}\n title={t(\"DocsConnect:PreviewDesktopOnlyTitle\")}\n description={t(\"DocsConnect:PreviewDesktopOnlyDescription\")}\n options={null}\n />\n ) : null\n ) : (\n <div",
       "module": "/packages/client"
     }

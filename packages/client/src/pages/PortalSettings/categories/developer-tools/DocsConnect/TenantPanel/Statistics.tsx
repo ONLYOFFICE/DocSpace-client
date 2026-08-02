@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -101,6 +101,7 @@ const Statistics = ({
   allConnectorsUrl,
 }: StatisticsProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
+  const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -144,13 +145,89 @@ const Statistics = ({
     scheduledChange != null && scheduledChange.nextUsers === 0;
   const deactivated = !isTrial && (info.deactivated ?? false);
 
+  const nextDevPackEnabled =
+    scheduledChange?.nextDevPackEnabled ?? devPackEnabled;
+  const nextPricePerUser =
+    (prices?.pricePerUser ?? 0) +
+    (nextDevPackEnabled ? (prices?.devPackPrice ?? 0) : 0);
+  const devPackDisabling =
+    scheduledChange != null &&
+    !isCancellation &&
+    scheduledChange.scheduledOnDevPack &&
+    !nextDevPackEnabled;
+  const usersAdjusting =
+    scheduledChange != null && scheduledChange.nextUsers !== planUsers;
+
+  const nextMonthlyPrice = formatCurrencyValue(
+    i18n.language,
+    (scheduledChange?.nextUsers ?? 0) * nextPricePerUser,
+    currency,
+    2,
+  );
+  const scheduledChangeDate = formatDateLocalized(
+    scheduledChange?.dueDate ?? "",
+    "DATE_MED",
+    { locale: i18n.language },
+  );
+
+  const getScheduledChangeTitle = () => {
+    if (isCancellation) return t("Common:SubscriptionCancellation");
+
+    if (devPackDisabling)
+      return usersAdjusting
+        ? t("Common:TariffUserAdjustmentDevPackDisableScheduledWithPrice", {
+            fromCount: planUsers,
+            toCount: scheduledChange?.nextUsers,
+            price: nextMonthlyPrice,
+          })
+        : t("Common:TariffDevPackDisableScheduledWithPrice", {
+            price: nextMonthlyPrice,
+          });
+
+    if (!usersAdjusting) return t("Common:ChangeShedule");
+
+    return t("Common:TariffUserAdjustmentScheduledWithPrice", {
+      fromCount: planUsers,
+      toCount: scheduledChange?.nextUsers,
+      price: nextMonthlyPrice,
+    });
+  };
+
+  const scheduledChangeTitle = getScheduledChangeTitle();
+
+  const getSubscriptionNote = () => {
+    if (!scheduledChange)
+      return t("Common:RenewsOnDate", {
+        date: formatDocsConnectDate(tenant.endDate),
+      });
+
+    if (isCancellation)
+      return t("DocsConnect:CancellationOn", { date: scheduledChangeDate });
+
+    if (devPackDisabling)
+      return t("Common:RenewsOnDate", { date: scheduledChangeDate });
+
+    return t("DocsConnect:RenewsOnWithUpdate", {
+      date: scheduledChangeDate,
+      price: nextMonthlyPrice,
+      count: scheduledChange.nextUsers,
+    });
+  };
+
+  const subscriptionNote = getSubscriptionNote();
+
   const onCopy = (value: string) => copyToClipboard?.(value, t);
 
   const onCancelChange = async () => {
+    if (isCancelChangeLoading) return;
+
+    setIsCancelChangeLoading(true);
     try {
       await cancelScheduledChange?.();
     } catch (e) {
       toastr.error(e as Error);
+    } finally {
+      setIsCancelChangeLoading(false);
     }
   };
 
@@ -258,39 +335,19 @@ const Statistics = ({
 
       {scheduledChange ? (
         <StorageWarning
-          title={
-            isCancellation
-              ? t("Common:SubscriptionCancellation")
-              : t("Common:TariffUserAdjustmentScheduledWithPrice", {
-                  fromCount: planUsers,
-                  toCount: scheduledChange.nextUsers,
-                  price: formatCurrencyValue(
-                    i18n.language,
-                    scheduledChange.nextUsers * pricePerUser,
-                    currency,
-                    2,
-                  ),
-                })
-          }
+          title={scheduledChangeTitle}
           body={
             isCancellation
               ? t("Common:PlanCancellationBillingPeriodNote", {
-                  date: formatDateLocalized(
-                    scheduledChange.dueDate,
-                    "DATE_MED",
-                    { locale: i18n.language },
-                  ),
+                  date: scheduledChangeDate,
                   service: t("DocsConnect:DocsConnect"),
                 })
               : t("Common:ScheduledChangeBillingPeriodNote", {
-                  date: formatDateLocalized(
-                    scheduledChange.dueDate,
-                    "DATE_MED",
-                    { locale: i18n.language },
-                  ),
+                  date: scheduledChangeDate,
                 })
           }
           onCancelChange={onCancelChange}
+          isCancelLoading={isCancelChangeLoading}
         />
       ) : null}
 
@@ -386,32 +443,7 @@ const Statistics = ({
                     fontWeight={400}
                     className={styles.tariffNote}
                   >
-                    {scheduledChange
-                      ? isCancellation
-                        ? t("DocsConnect:CancellationOn", {
-                            date: formatDateLocalized(
-                              scheduledChange.dueDate,
-                              "DATE_MED",
-                              { locale: i18n.language },
-                            ),
-                          })
-                        : t("DocsConnect:RenewsOnWithUpdate", {
-                            date: formatDateLocalized(
-                              scheduledChange.dueDate,
-                              "DATE_MED",
-                              { locale: i18n.language },
-                            ),
-                            price: formatCurrencyValue(
-                              i18n.language,
-                              scheduledChange.nextUsers * pricePerUser,
-                              currency,
-                              2,
-                            ),
-                            count: scheduledChange.nextUsers,
-                          })
-                      : t("Common:RenewsOnDate", {
-                          date: formatDocsConnectDate(tenant.endDate),
-                        })}
+                    {subscriptionNote}
                   </Text>
                 </Text>
               )}

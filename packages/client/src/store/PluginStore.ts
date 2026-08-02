@@ -687,25 +687,27 @@ class PluginStore {
   updatePlugin = async (
     name: string,
     status: boolean | null,
-    settings: string,
+    settings?: string | null,
     t?: TTranslation,
   ) => {
     try {
-      let currentSettings = settings;
-      let currentStatus = Boolean(status);
-
       const oldPlugin = this.pluginList.find((p) => p.name === name);
 
-      if (!currentSettings) currentSettings = oldPlugin?.settings || "";
+      const currentSettings = settings ?? oldPlugin?.settings ?? "";
 
-      if (typeof status !== "boolean")
-        currentStatus = oldPlugin?.enabled || false;
+      const currentStatus =
+        typeof status === "boolean" ? status : (oldPlugin?.enabled ?? false);
 
       const plugin = await api.plugins.updatePlugin(
         name,
         currentStatus,
         currentSettings,
       );
+
+      if (oldPlugin)
+        runInAction(() => {
+          oldPlugin.settings = currentSettings;
+        });
 
       if (typeof status !== "boolean") return plugin;
 

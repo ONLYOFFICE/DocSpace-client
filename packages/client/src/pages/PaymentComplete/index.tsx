@@ -44,9 +44,13 @@ import styles from "./PaymentComplete.module.scss";
 
 type PaymentCompleteProps = {
   currentColorScheme?: TColorScheme;
+  docsConnectUrl?: string;
 };
 
-const PaymentComplete = ({ currentColorScheme }: PaymentCompleteProps) => {
+const PaymentComplete = ({
+  currentColorScheme,
+  docsConnectUrl,
+}: PaymentCompleteProps) => {
   const bgPattern = getBgPattern(currentColorScheme?.id);
 
   return (
@@ -54,7 +58,7 @@ const PaymentComplete = ({ currentColorScheme }: PaymentCompleteProps) => {
       className={styles.wrapper}
       style={{ "--bg-pattern": bgPattern } as React.CSSProperties}
     >
-      <AiPaywallCompletePage />
+      <AiPaywallCompletePage docsConnectUrl={docsConnectUrl} />
     </div>
   );
 };
@@ -63,9 +67,13 @@ export const Component = inject(
   ({
     settingsStore,
   }: {
-    settingsStore: { currentColorScheme?: TColorScheme };
+    settingsStore: {
+      currentColorScheme?: TColorScheme;
+      docsConnectUrl?: string;
+    };
   }) => ({
     currentColorScheme: settingsStore.currentColorScheme,
+    docsConnectUrl: settingsStore.docsConnectUrl,
   }),
 )(observer(PaymentComplete));
 

@@ -3,7 +3,7 @@
   "content": "Use these editors in {{productName}}",
   "content_en_sha1_hash": "1160a4810b4237aeb69b7b68f18c1e3ef230f91e",
   "created_at": "2026-07-30T16:14:09.817Z",
-  "updated_at": "2026-07-30T16:16:11.209Z",
+  "updated_at": "2026-08-01T15:33:49.633Z",
   "comment": {
     "text": "A label in the DocsConnect settings group indicating that selected editors will be used within the {{productName}}, where {{productName}} represents the brand name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 302,
+      "line_number": 309,
       "context": "</div>\n ) : (\n <div className={styles.connectionGroup}>\n <div className={styles.settingsGroup}>\n <Text fontWeight={600}>\n {t(\"DocsConnect:UseEditorsInProduct\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" className={styles.settingsHint}>\n {t(\"DocsConnect:DocsConnectionDescription\", {",
       "module": "/packages/client"
     }

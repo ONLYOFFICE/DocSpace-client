@@ -59,7 +59,6 @@ const PluginDialog = ({
   pluginName,
 
   setSettingsPluginDialogVisible,
-  setCurrentSettingsDialogPlugin,
   updatePluginStatus,
 
   setPluginDialogVisible,
@@ -91,7 +90,6 @@ const PluginDialog = ({
       message,
       pluginName,
       setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin,
       updatePluginStatus,
       setPluginDialogVisible,
       setPluginDialogProps,
@@ -116,7 +114,6 @@ const PluginDialog = ({
             message,
             pluginName,
             setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin,
             updatePluginStatus,
             setPluginDialogVisible,
             setPluginDialogProps,
@@ -214,7 +211,6 @@ export default inject(({ pluginStore }) => {
   const {
     pluginDialogProps,
     setSettingsPluginDialogVisible,
-    setCurrentSettingsDialogPlugin,
     updatePluginStatus,
 
     setPluginDialogVisible,
@@ -231,7 +227,6 @@ export default inject(({ pluginStore }) => {
   return {
     ...pluginDialogProps,
     setSettingsPluginDialogVisible,
-    setCurrentSettingsDialogPlugin,
     updatePluginStatus,
 
     setPluginDialogVisible,

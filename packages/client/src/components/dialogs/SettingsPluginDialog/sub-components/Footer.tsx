@@ -33,21 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
-
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Component, IButton } from "@onlyoffice/docspace-plugin-sdk";
 
 import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
 import styles from "../SettingsPluginDialog.module.scss";
 import { FooterProps } from "../SettingsPluginDialog.types";
-
-const PluginComponentButton =
-  PluginComponent as unknown as React.ComponentType<{
-    component: Component;
-    pluginName: string;
-    updatePlugin: FooterProps["updatePlugin"];
-  }>;
 
 const Footer = ({
   t,
@@ -58,11 +49,10 @@ const Footer = ({
   modalRequestRunning,
   setModalRequestRunning,
   onCloseAction,
-  updatePlugin,
 }: FooterProps) => {
   return (
     <div className={styles.footer}>
-      <PluginComponentButton
+      <PluginComponent
         component={
           {
             ...saveButtonProps,
@@ -81,7 +71,6 @@ const Footer = ({
           } as Component
         }
         pluginName={pluginName}
-        updatePlugin={updatePlugin}
       />
       <Button
         scale
@@ -95,4 +84,3 @@ const Footer = ({
 };
 
 export default Footer;
-

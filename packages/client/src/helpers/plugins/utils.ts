@@ -207,7 +207,7 @@ export const messageActions = ({
       case PluginActions.showModal:
         if (message.modalDialogProps) {
           setPluginDialogVisible?.(true);
-          setPluginDialogProps?.({ ...message.modalDialogProps });
+          setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
         }
         break;
 

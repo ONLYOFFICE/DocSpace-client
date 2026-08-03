@@ -37,12 +37,12 @@ import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import type {
   ButtonGroup,
-  Component,
   IBox,
   ICheckbox,
   IComboBox,
   IFrame,
   IIconButton,
+  IImage,
   IInput,
   ILabel,
   ILink,
@@ -86,7 +86,7 @@ const PLUGIN_IFRAME_TITLE = "Plugin iframe";
 
 const PropsContext = React.createContext<TPropsContext>({} as TPropsContext);
 
-export const PluginComponent = inject(
+const PluginComponentBase = inject(
   ({ pluginStore }: { pluginStore: PluginStore }) => {
     const {
       getPluginIconUrl,
@@ -202,12 +202,9 @@ export const PluginComponent = inject(
       const getElement = (): React.ReactElement | null | undefined => {
         const componentName = component.component;
 
-        const PluginComponentRecursive =
-          PluginComponent as unknown as React.ComponentType<TPluginComponentOwnProps>;
-
         switch (componentName) {
           case PluginComponents.box: {
-            const boxProps = elementProps as IBox;
+            const boxProps = (elementProps ?? {}) as IBox;
 
             const {
               widthProp,
@@ -223,7 +220,7 @@ export const PluginComponent = inject(
               className,
               children,
               ...cssLayoutProps
-            } = boxProps || {};
+            } = boxProps;
 
             const elementStyles: React.CSSProperties = {
               width: widthProp,
@@ -241,7 +238,7 @@ export const PluginComponent = inject(
 
             const childrenComponents = children?.map((item, index) => {
               return (
-                <PluginComponentRecursive
+                <PluginComponent
                   key={`${pluginName}-box-${item.component}-${index}`}
                   component={item}
                   pluginName={pluginName}
@@ -314,7 +311,6 @@ export const PluginComponent = inject(
               onChange,
               onBlur,
               onFocus,
-              // TODO: fix the type mismatch for children instead of dropping it
               children: _children,
               ...restProps
             } = elementProps as IInput;
@@ -364,12 +360,7 @@ export const PluginComponent = inject(
               }
 
               const message = await onClick();
-              if (message)
-                messageActions({
-                  ...sharedMessageParams,
-                  message,
-                  updatePlugin,
-                });
+              if (message) messageActions({ ...sharedMessageParams, message });
 
               setIsRequestRunning?.(false);
               setModalRequestRunning?.(false);
@@ -436,9 +427,13 @@ export const PluginComponent = inject(
           }
 
           case PluginComponents.img: {
+            const { alt, style, ...restProps } = elementProps as IImage;
+
             return (
               <img
-                {...(elementProps as React.ImgHTMLAttributes<HTMLImageElement>)}
+                {...restProps}
+                alt={alt ?? "Plugin"}
+                style={style as React.CSSProperties}
               />
             );
           }
@@ -507,6 +502,9 @@ export const PluginComponent = inject(
   ),
 );
 
+export const PluginComponent =
+  PluginComponentBase as unknown as React.ComponentType<TPluginComponentOwnProps>;
+
 const WrappedComponent = ({
   pluginName,
   component,
@@ -553,10 +551,7 @@ const WrappedComponent = ({
 
   return (
     <PropsContext value={contextValue}>
-      {React.createElement(
-        PluginComponent as unknown as React.ComponentType<TPluginComponentOwnProps>,
-        { component, pluginName },
-      )}
+      <PluginComponent component={component} pluginName={pluginName} />
     </PropsContext>
   );
 };

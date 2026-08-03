@@ -109,14 +109,17 @@ export type {
 };
 
 //Extended client-side types
-export interface IFloatingOperationsButtonClient extends IFloatingOperationsButton {
+export interface IFloatingOperationsButtonClient
+  extends IFloatingOperationsButton {
   pluginName: string;
 }
 
-export interface IContextMenuItemClient extends Omit<
-  IContextMenuItem,
-  "onClick"
-> {
+export interface IModalDialogClient extends IModalDialog {
+  pluginName: string;
+}
+
+export interface IContextMenuItemClient
+  extends Omit<IContextMenuItem, "onClick"> {
   pluginName: string;
   items?: Omit<IContextMenuItemClient, "items">[];
   onClick?: (
@@ -137,10 +140,8 @@ export interface IEventListenerItemClient extends IEventListenerItem {
   pluginName: string;
 }
 
-interface IInfoPanelItemSubMenuClient extends Omit<
-  IInfoPanelSubMenu,
-  "onClick"
-> {
+interface IInfoPanelItemSubMenuClient
+  extends Omit<IInfoPanelSubMenu, "onClick"> {
   onClick: (id: number) => Promise<IMessage | void>;
 }
 
@@ -251,6 +252,6 @@ export interface TMessageActionsParams {
   updateEventListenerItems?: PluginStore["updateEventListenerItems"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];
-  setPluginMediaViewerVisible: PluginStore["setPluginMediaViewerVisible"];
-  setPluginMediaViewerProps: PluginStore["setPluginMediaViewerProps"];
+  setPluginMediaViewerVisible?: PluginStore["setPluginMediaViewerVisible"];
+  setPluginMediaViewerProps?: PluginStore["setPluginMediaViewerProps"];
 }

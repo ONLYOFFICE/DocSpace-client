@@ -83,7 +83,7 @@ import type {
   TPlugin,
   IPostMessageCallbackMessage,
   IMediaViewerClient,
-  IModalDialog,
+  IModalDialogClient,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -157,7 +157,7 @@ class PluginStore {
     IFloatingOperationsButtonClient
   > = new Map();
 
-  pluginDialogProps: null | IModalDialog = null;
+  pluginDialogProps: null | IModalDialogClient = null;
 
   pluginSelectorProps: null | TSelectorProps = null;
 
@@ -285,7 +285,7 @@ class PluginStore {
     this.pluginSelectorProps = value;
   };
 
-  setPluginDialogProps = (value: null | IModalDialog) => {
+  setPluginDialogProps = (value: null | IModalDialogClient) => {
     this.pluginDialogProps = value;
   };
 

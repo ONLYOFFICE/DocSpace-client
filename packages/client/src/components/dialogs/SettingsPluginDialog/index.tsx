@@ -62,7 +62,6 @@ const SettingsPluginDialog = ({
 
   onClose,
   onDelete,
-  updatePlugin,
 }: SettingsPluginDialogProps) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 
@@ -159,7 +158,6 @@ const SettingsPluginDialog = ({
           setModalRequestRunning={setModalRequestRunning}
           onCloseAction={onCloseAction}
           modalRequestRunning={modalRequestRunning}
-          updatePlugin={updatePlugin}
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -175,7 +173,6 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     setCurrentSettingsDialogPlugin,
     setDeletePluginDialogVisible,
     setDeletePluginDialogProps,
-    updatePlugin,
   } = pluginStore;
 
   const { pluginOptions, standalone } = settingsStore;
@@ -209,10 +206,8 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     withDelete,
     pluginSettings,
     settingsPluginDialogVisible,
-    updatePlugin,
 
     onClose,
     onDelete,
   };
 })(observer(SettingsPluginDialog));
-

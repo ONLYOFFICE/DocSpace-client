@@ -92,7 +92,7 @@
   "AIAgentNotificationsDisabled": "Benachrichtigungen deaktiviert",
   "AIAgentNotificationsEnabled": "Benachrichtigungen aktiviert",
   "AIAgentPinLimitMessage": "Sie können nicht mehr als 10 {{aiAgents}} oben anheften. Entfernen Sie einige, die derzeit angeheftet sind.",
-  "AIAgentPinned": "angeheftet",
+  "AIAgentPinned": "KI-Agent angepinnt",
   "AIAgents": "KI-Agenten",
   "AIAgentsCardDescription": "Richten Sie KI-Helfer ein, die Ihre Dateien kennen. Teilen Sie sie mit Ihrem Team und nutzen Sie sie raumübergreifend, um Fragen zu beantworten oder Aufgaben in Ihrem Namen auszuführen.",
   "AIAgentsDescription": "Richten Sie einen personalisierten Assistenten für Ihr Team ein, indem Sie eine Wissensdatenbank hinzufügen, das ideale Modell auswählen und einen {{mcpServer}} verbinden.",

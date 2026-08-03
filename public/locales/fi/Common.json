@@ -92,7 +92,7 @@
   "AIAgentNotificationsDisabled": "ilmoitukset poistettu käytöstä",
   "AIAgentNotificationsEnabled": "ilmoitukset käytössä",
   "AIAgentPinLimitMessage": "Et voi kiinnittää yli 10 {{aiAgents}} ylös. Irrota joitakin, jotka on tällä hetkellä kiinnitetty.",
-  "AIAgentPinned": "kiinnitetty",
+  "AIAgentPinned": "AI-agentti kiinnitetty",
   "AIAgents": "AI-agentit",
   "AIAgentsCardDescription": "Määritä AI-avustajia, jotka tuntevat tiedostosi. Jaa ne tiimisi kanssa ja käytä niitä eri huoneissa vastaamaan kysymyksiin tai suorittamaan tehtäviä puolestasi.",
   "AIAgentsDescription": "Määritä personoitu avustaja tiimillesi lisäämällä tietopankin, valitsemalla ihanteellisen mallin ja yhdistämällä {{mcpServer}}.",

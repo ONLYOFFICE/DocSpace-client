@@ -92,7 +92,7 @@
   "AIAgentNotificationsDisabled": "Notifiche disattivate",
   "AIAgentNotificationsEnabled": "Notifiche abilitate",
   "AIAgentPinLimitMessage": "Non è possibile fissare più di 10 {{aiAgents}} in cima. Sfilate alcuni che sono attualmente fissati.",
-  "AIAgentPinned": "fissato",
+  "AIAgentPinned": "Agente IA bloccato",
   "AIAgents": "Agenti IA",
   "AIAgentsCardDescription": "Configura assistenti IA che conoscono i tuoi file. Condividili con il tuo team e usali nelle stanze per rispondere alle domande o eseguire attività per tuo conto.",
   "AIAgentsDescription": "Configura un assistente personalizzato per il tuo team aggiungendo una base di conoscenza, selezionando il modello ideale e collegando un {{mcpServer}}.",

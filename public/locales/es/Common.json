@@ -92,7 +92,7 @@
   "AIAgentNotificationsDisabled": "notificaciones desactivadas",
   "AIAgentNotificationsEnabled": "Notificaciones de habilitadas",
   "AIAgentPinLimitMessage": "No puede anclar más de 10 {{aiAgents}} en la parte superior. Desancle algunos que estén actualmente anclados.",
-  "AIAgentPinned": "anclado",
+  "AIAgentPinned": "Agente de IA fijado",
   "AIAgents": "Agentes de IA",
   "AIAgentsCardDescription": "Configure asistentes de IA que conozcan sus archivos. Compártalos con su equipo y úselos en todas las salas para responder preguntas o ejecutar tareas en su nombre.",
   "AIAgentsDescription": "Configura un asistente personalizado para tu equipo añadiendo una base de conocimiento, seleccionando el modelo ideal y conectando un {{mcpServer}}.",

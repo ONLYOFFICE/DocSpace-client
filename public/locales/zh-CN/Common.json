@@ -92,7 +92,7 @@
   "AIAgentNotificationsDisabled": "通知已禁用",
   "AIAgentNotificationsEnabled": "通知已启用",
   "AIAgentPinLimitMessage": "您最多只能将 10 个 {{aiAgents}} 固定在顶部。请取消固定一些当前已固定的项目。",
-  "AIAgentPinned": "固定",
+  "AIAgentPinned": "AI 代理已固定",
   "AIAgents": "AI 智能体",
   "AIAgentsCardDescription": "设置了解您文件的 AI 助手。与您的团队共享，并在各个房间中使用它们来回答问题或代您执行任务。",
   "AIAgentsDescription": "通过添加知识库、选择理想模型并连接 {{mcpServer}}，为您的团队设置个性化助手。",

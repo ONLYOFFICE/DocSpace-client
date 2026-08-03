@@ -92,7 +92,7 @@
   "AIAgentNotificationsDisabled": "bildirişlər deaktiv edildi",
   "AIAgentNotificationsEnabled": "bildirişlər aktivləşdirilib",
   "AIAgentPinLimitMessage": "10-dan çoxunu {{aiAgents}} yuxarıya yapışdıra bilməzsiniz. Hazırda yapışdırılmış bəzilərini yapışdırmaqdan çıxarın.",
-  "AIAgentPinned": "pinlənmiş",
+  "AIAgentPinned": "AI agenti bərkidildi",
   "AIAgents": "Süni intellekt agentləri",
   "AIAgentsCardDescription": "Fayllarınızı bilən AI köməkçiləri qurun. Onları komandanızla paylaşın və sualları cavablandırmaq və ya sizin adınıza tapşırıqları yerinə yetirmək üçün otaqlar arasında istifadə edin.",
   "AIAgentsDescription": "Komandanız üçün şəxsi köməkçi qurmaq üçün bilik bazası əlavə edərək, ideal modeli seçərək və bir {{mcpServer}} qoşaraq.",

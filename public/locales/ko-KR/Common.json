@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "알림 비활성화됨",
   "AIAgentNotificationsEnabled": "알림 활성화됨",
   "AIAgentPinLimitMessage": "{{aiAgents}}를 상단에 10개 이상 고정할 수 없습니다. 현재 고정된 일부를 고정 해제하십시오.",
-  "AIAgentPinned": "고정됨",
+  "AIAgentPinned": "AI 에이전트가 고정됨",
   "AIAgents": "AI 에이전트",
   "AIAgentsCardDescription": "내 파일을 알고 있는 AI 도우미를 설정하세요. 팀과 공유하고 여러 룸에서 사용하여 질문에 답하거나 사용자를 대신해 작업을 실행할 수 있습니다.",
   "AIAgentsDescription": "지식 기반을 추가하고, 이상적인 모델을 선택하고, {{mcpServer}}를 연결하여 팀을 위한 개인화된 비서를 설정하세요.",

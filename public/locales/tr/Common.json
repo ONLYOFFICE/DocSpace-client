@@ -92,7 +92,7 @@
   "AIAgentNotificationsDisabled": "bildirimleri devre dışı",
   "AIAgentNotificationsEnabled": "bildirimleri etkinleştirildi",
   "AIAgentPinLimitMessage": "En üste 10'dan fazla {{aiAgents}} sabitleyemezsiniz. Sabitlenmiş olanlardan bazılarını sabitlemeyi kaldırın.",
-  "AIAgentPinned": "sabitlendi",
+  "AIAgentPinned": "AI ajanı sabitlendi",
   "AIAgents": "Yapay zeka ajanları",
   "AIAgentsCardDescription": "Dosyalarınızı bilen AI yardımcıları kurun. Bunları ekibinizle paylaşın ve sizin adınıza soruları yanıtlamak veya görevleri çalıştırmak için odalar arasında kullanın.",
   "AIAgentsDescription": "Ekibiniz için kişiselleştirilmiş bir asistan kurmak üzere bir bilgi tabanı ekleyin, ideal modeli seçin ve bir {{mcpServer}} bağlayın.",

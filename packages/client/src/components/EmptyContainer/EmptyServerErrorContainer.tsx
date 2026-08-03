@@ -42,7 +42,17 @@ import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.se
 import EmptyScreenServerErrorDarkSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.dark.svg";
 import ReloadArrowsSvg from "PUBLIC_DIR/images/icons/10/reload.arrows.svg";
 
-const EmptyServerErrorContainer = () => {
+type EmptyServerErrorContainerProps = {
+  /** Overrides the default generic server error description */
+  description?: string;
+  /** Hide the reload action when reloading the page cannot fix the error */
+  withReload?: boolean;
+};
+
+const EmptyServerErrorContainer = ({
+  description,
+  withReload = true,
+}: EmptyServerErrorContainerProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
 
@@ -67,8 +77,8 @@ const EmptyServerErrorContainer = () => {
     <EmptyView
       icon={icon}
       title={t("Common:SomethingWentWrong")}
-      description={t("Common:ServerErrorEmptyDescription")}
-      options={options}
+      description={description ?? t("Common:ServerErrorEmptyDescription")}
+      options={withReload ? options : null}
     />
   );
 };

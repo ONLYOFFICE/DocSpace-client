@@ -67,9 +67,11 @@ import { notFound } from "next/navigation";
 
 import BillingForm from "@/app/(personal-files)/_components/settings/category/BillingForm";
 
-import { AIProvider } from "../../../_components/ai-settings/providers";
-import { MCPServers } from "../../../_components/ai-settings/servers";
-import { Search } from "../../../_components/ai-settings/search";
+import {
+  McpServers,
+  WebSearch,
+} from "@docspace/ui-kit/ai-agent/settings";
+
 import { Knowledge } from "../../../_components/ai-settings/knowledge";
 import { useAgentsUserStore } from "../../../_store/AgentsUserStore";
 import { useAgentsCommonData } from "../../../_store/AgentsCommonDataContext";
@@ -85,12 +87,10 @@ const TabClient = observer(({ tab }: Props) => {
     case "billing":
       if (standalone) return null;
       return <BillingForm user={user} />;
-    case "providers":
-      return <AIProvider />;
     case "servers":
-      return <MCPServers standalone={standalone} />;
+      return <McpServers />;
     case "search":
-      return <Search />;
+      return <WebSearch />;
     case "knowledge":
       return <Knowledge />;
     default:

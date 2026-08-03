@@ -3,7 +3,7 @@
   "content": "This device",
   "content_en_sha1_hash": "fa5a6dd9d2493c6f5548920a1e7d609a80b0ef24",
   "created_at": "2026-05-24T17:27:41.525Z",
-  "updated_at": "2026-07-27T13:07:50.840Z",
+  "updated_at": "2026-07-31T12:36:29.533Z",
   "comment": {
     "text": "A short label for a badge used to identify the current device in a list of devices.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 130,
+      "line_number": 134,
       "context": "backgroundColor={globalColors.secondGreen}\n maxWidth=\"none\"\n />\n {isCurrentDevice ? (\n <Badge\n label={t(\"Common:ThisDevice\")}\n backgroundColor={globalColors.lightBlueMain}\n maxWidth=\"none\"\n />\n ) : canSwitchActive ? (\n <Button",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 346,
-      "context": ") : null}\n </div>\n {hasKeys ? (\n <div className={styles.deviceSection}>\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Common:ThisDevice\")}\n </Text>\n <AutoLockSetting />\n {passkeyPlatformOk || passkeyEnrolled ? (\n <div className={styles.deviceRow}>\n <ToggleButton",
+      "line_number": 367,
+      "context": "</div>\n ) : null}\n {hasKeys ? (\n <div className={styles.deviceSection}>\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Common:ThisDevice\")}\n </Text>\n <AutoLockSetting />\n {passkeyPlatformOk || passkeyEnrolled ? (\n <div className={styles.toggleRow}>\n <ToggleButton",
       "module": "/packages/client"
     }
   ],

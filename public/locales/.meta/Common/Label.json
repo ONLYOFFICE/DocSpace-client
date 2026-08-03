@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-07-27T13:07:50.610Z",
+  "updated_at": "2026-07-31T12:36:29.382Z",
   "comment": {
     "text": "This is a label for an input field. It prompts the user to enter a name for a group or a room.",
     "is_auto": true,
@@ -91,7 +91,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1563,
+      "line_number": 1566,
       "context": "const commonOptions = [];\n \n const name = {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\"),\n default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
       "module": "/packages/client"
     },
@@ -129,12 +129,6 @@
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
       "line_number": 160,
       "context": "const getSortData = React.useCallback(\n () => [\n {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\", { defaultValue: \"Name\" }),\n default: true,\n },\n {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 506,
-      "context": "isDisabled={variant === \"update\" || isRequestRunning}\n dataTestId=\"provider-type-combobox\"\n />\n </FieldContainer>\n <FieldContainer\n labelText={t(\"Common:Label\")}\n labelVisible\n isVertical\n removeMargin\n isRequired\n >",
       "module": "/packages/sdk"
     },
     {

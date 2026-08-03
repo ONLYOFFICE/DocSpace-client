@@ -39,7 +39,6 @@ import type { NextRequest } from "next/server";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 
 import {
-  AGENT_ID_HEADER,
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
   LOCALE_HEADER,
@@ -199,15 +198,6 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  if (request.nextUrl.pathname === "/chat") {
-    const agentId = searchParams.get("agentId") ?? "";
-
-    requestHeaders.set(AGENT_ID_HEADER, agentId);
-    requestHeaders.set(FILTER_HEADER, searchParams.toString());
-
-    return NextResponse.next({ request: { headers: requestHeaders } });
-  }
-
   if (request.nextUrl.pathname.includes("public-room")) {
     const validationResult = await handlePublicRoomValidation(
       request,
@@ -279,7 +269,6 @@ export const config = {
     "/public-room/password",
     "/forms",
     "/forms/:path*",
-    "/chat",
     "/personal-files",
     "/personal-files/:path*",
     "/ai-agents",

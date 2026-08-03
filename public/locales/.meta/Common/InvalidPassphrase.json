@@ -3,7 +3,7 @@
   "content": "Invalid passphrase",
   "content_en_sha1_hash": "92ec89d57abc58876087cda1faa362e046564a2b",
   "created_at": "2026-05-24T17:27:29.929Z",
-  "updated_at": "2026-06-09T09:43:10.923Z",
+  "updated_at": "2026-07-31T12:36:29.539Z",
   "comment": {
     "text": "Error message or toast notification displayed when a passphrase fails verification during encryption key import or rotation.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useDeleteKeyFlow.tsx",
-      "line_number": 117,
+      "line_number": 121,
       "context": "await refreshKeysFromServer();\n toastr.success(t(\"Common:EncryptionKeyDeleted\"));\n setVerifying(null);\n } catch (error) {\n if (error instanceof InvalidPassphraseError) {\n setPassphraseError(t(\"Common:InvalidPassphrase\"));\n } else {\n toastr.error(getEncryptionErrorMessage(t, error));\n console.error(\"Key deletion failed:\", error);\n setVerifying(null);\n }",
       "module": "/packages/client"
     },
@@ -25,8 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useImportKeyFlow.tsx",
-      "line_number": 133,
+      "line_number": 153,
       "context": "toastr.success(t(\"Common:EncryptionKeyImported\"));\n reset();\n } catch (error) {\n const message =\n error instanceof InvalidPassphraseError\n ? t(\"Common:InvalidPassphrase\")\n : getEncryptionErrorMessage(t, error);\n toastr.error(message);\n console.error(\"Import passphrase verification failed:\", error);\n } finally {\n setIsPending(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useSwitchKeyFlow.tsx",
+      "line_number": 232,
+      "context": "}\n await refreshKeysFromServer();\n refreshPendingState();\n } catch (error) {\n if (error instanceof InvalidPassphraseError) {\n setPassphraseError(t(\"Common:InvalidPassphrase\"));\n } else {\n toastr.error(getEncryptionErrorMessage(t, error));\n console.error(\"Switch key re-encryption failed:\", error);\n setTargetRow(null);\n }",
       "module": "/packages/client"
     },
     {

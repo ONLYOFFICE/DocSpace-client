@@ -3,7 +3,7 @@
   "content": "Price",
   "content_en_sha1_hash": "3e8248e32edfca0c629622b5b669c2d9ce4d0917",
   "created_at": "2026-07-27T13:07:48.492Z",
-  "updated_at": "2026-07-27T14:06:53.407Z",
+  "updated_at": "2026-08-01T15:33:49.642Z",
   "comment": {
     "text": "Label in a detail row of the DocsConnect statistics panel, preceding the cost value.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 449,
+      "line_number": 481,
       "context": "/>\n </div>\n <Text fontWeight={600}>{planUsers}</Text>\n </div>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"DocsConnect:Price\")}</Text>\n <Text fontWeight={600}>\n {devPackEnabled ? (\n <Trans\n t={t}\n i18nKey=\"DocsConnect:PricePerUserDevPackShortRich\"",
       "module": "/packages/client"
     }

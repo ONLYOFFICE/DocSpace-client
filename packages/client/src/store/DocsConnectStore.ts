@@ -47,7 +47,14 @@ import {
   updateDocsConnectConfig,
   startDocsConnectReport,
   getDocsConnectReportStatus,
+  getDocsConnectConnection,
 } from "@docspace/shared/api/docs-connect";
+import type { TDocsConnectConnection } from "@docspace/shared/api/docs-connect";
+import {
+  changeDocumentServiceLocation,
+  getDocumentServiceLocation,
+} from "@docspace/shared/api/files";
+import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 import type {
   TDocsConnectInfo,
   TDocsConnectConfigUpdate,
@@ -92,6 +99,10 @@ class DocsConnectStore {
   cancelPlanDialogVisible: boolean = false;
 
   removeSubscriptionDialogVisible: boolean = false;
+
+  documentService: Nullable<TDocServiceLocation> = null;
+
+  connection: Nullable<TDocsConnectConnection> = null;
 
   isReportGenerating: boolean = false;
 
@@ -321,7 +332,9 @@ class DocsConnectStore {
 
   cancelScheduledChange = async () => {
     const info = await cancelDocsConnectScheduledChange(
-      this.info?.devPackEnabled ?? false,
+      this.info?.scheduledChange?.scheduledOnDevPack ??
+        this.info?.devPackEnabled ??
+        false,
     );
     runInAction(() => {
       this.info = info;
@@ -399,6 +412,88 @@ class DocsConnectStore {
 
     copy(value);
     toastr.success(t("Common:Copied"));
+  };
+
+  fetchDocumentService = async () => {
+    try {
+      const result = await getDocumentServiceLocation();
+      runInAction(() => {
+        this.documentService = result;
+      });
+    } catch {
+      // ignore: absence of doc service info only affects the Reset button state
+    }
+  };
+
+  fetchConnection = async () => {
+    try {
+      const result = await getDocsConnectConnection();
+      runInAction(() => {
+        this.connection = result;
+      });
+    } catch {
+      // ignore: absence of connection data only hides the "connect editors" banner
+    }
+  };
+
+  get connectionData(): Nullable<TDocsConnectConnection> {
+    const address = this.info?.tenant.address ?? this.connection?.address;
+    const secret = this.info?.config.security.secret ?? this.connection?.secret;
+    const header = this.info?.config.security.header ?? this.connection?.header;
+    if (!address || !secret || !header) return null;
+
+    return { address, secret, header };
+  }
+
+  get isConnectedToPortal() {
+    const address = this.connectionData?.address;
+    const current = this.documentService?.docServiceUrl;
+    if (!address || !current) return false;
+
+    const normalize = (value: string) =>
+      value
+        .replace(/^https?:\/\//i, "")
+        .replace(/\/+$/, "")
+        .toLowerCase();
+
+    return normalize(current) === normalize(address);
+  }
+
+  applyToDocumentService = async () => {
+    const data = this.connectionData;
+    if (!data) throw new Error("DocsConnect connection data is incomplete");
+
+    const url = /^https?:\/\//i.test(data.address)
+      ? data.address
+      : `https://${data.address}`;
+    const portalUrl = window.location.origin;
+
+    const result = await changeDocumentServiceLocation(
+      url,
+      data.secret,
+      data.header,
+      url,
+      portalUrl,
+      true,
+    );
+    runInAction(() => {
+      this.documentService = result;
+    });
+    return result;
+  };
+
+  resetDocumentService = async () => {
+    const result = await changeDocumentServiceLocation(
+      null,
+      null,
+      null,
+      null,
+      null,
+      true,
+    );
+    runInAction(() => {
+      this.documentService = result;
+    });
   };
 
   copySecretKey = (t: TTranslation) => {

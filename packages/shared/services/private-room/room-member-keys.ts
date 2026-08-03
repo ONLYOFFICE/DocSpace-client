@@ -40,20 +40,30 @@ export async function loadRoomMemberKeys(
   roomId: number | string,
 ): Promise<{
   keyByUserId: Map<string, string>;
+  keysByUserId: Map<string, RoomMemberPublicKey[]>;
   list: RoomMemberPublicKey[];
 }> {
   const keys = await getRoomEncryptionKeys(roomId);
   const keyByUserId = new Map<string, string>();
+  const keysByUserId = new Map<string, RoomMemberPublicKey[]>();
   const list: RoomMemberPublicKey[] = [];
   if (Array.isArray(keys)) {
     for (const k of keys) {
       if (!k?.userId || !k?.publicKey) continue;
       const id = String(k.userId);
+      const entry: RoomMemberPublicKey = {
+        userId: id,
+        publicKey: k.publicKey,
+        publicKeyId: k.id,
+      };
       keyByUserId.set(id, k.publicKey);
-      list.push({ userId: id, publicKey: k.publicKey, publicKeyId: k.id });
+      const bucket = keysByUserId.get(id);
+      if (bucket) bucket.push(entry);
+      else keysByUserId.set(id, [entry]);
+      list.push(entry);
     }
   }
-  return { keyByUserId, list };
+  return { keyByUserId, keysByUserId, list };
 }
 
 export async function loadRoomMemberKeysSafe(

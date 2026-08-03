@@ -107,8 +107,6 @@ const detectTabFromPath = (pathname: string) => {
 
 type TAISettingsProps = {
   fetchKnowledge?: AISettingsStore["fetchKnowledge"];
-  fetchAIProviders?: AISettingsStore["fetchAIProviders"];
-  initDefaultProvider?: AISettingsStore["initDefaultProvider"];
   currentDeviceType?: DeviceType;
   standalone?: boolean;
   isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
@@ -117,8 +115,6 @@ type TAISettingsProps = {
 
 const AISettings = ({
   fetchKnowledge,
-  fetchAIProviders,
-  initDefaultProvider,
   currentDeviceType,
   standalone,
   isAiToolsServiceOn,
@@ -129,13 +125,8 @@ const AISettings = ({
   const { t } = useTranslation(["Common"]);
 
   const initKnowledge = React.useCallback(async () => {
-    await Promise.all([fetchKnowledge?.(), fetchAIProviders?.()]);
-  }, [fetchKnowledge, fetchAIProviders]);
-
-  const initAIProviders = React.useCallback(async () => {
-    await fetchAIProviders?.();
-    await initDefaultProvider?.();
-  }, [fetchAIProviders, initDefaultProvider]);
+    await fetchKnowledge?.();
+  }, [fetchKnowledge]);
 
   const { useProfilesStore } = useStores();
   const profiles = useProfilesStore((s) => s.profiles);
@@ -163,20 +154,13 @@ const AISettings = ({
   }, [gateNonAiModelsTabs, currentTabId, navigate]);
 
   // Load the data a tab needs when it becomes active. Standalone Knowledge is
-  // the only functional client tab; SaaS model assignment needs the providers.
+  // the only tab fed from this package's store; the rest are chat-lib pages
+  // that fetch their own data from the Node AI service.
   React.useEffect(() => {
     if (gateNonAiModelsTabs) return;
 
     if (standalone && currentTabId === TAB_IDS.KNOWLEDGE) initKnowledge();
-    if (!standalone && currentTabId === TAB_IDS.MODEL_ASSIGNMENT)
-      initAIProviders();
-  }, [
-    standalone,
-    currentTabId,
-    gateNonAiModelsTabs,
-    initKnowledge,
-    initAIProviders,
-  ]);
+  }, [standalone, currentTabId, gateNonAiModelsTabs, initKnowledge]);
 
   const navigateToTab = (id: string) => {
     navigate(`${BASE_PATH}/${id}`);
@@ -258,15 +242,12 @@ const AISettings = ({
 
 export const Component = inject(
   ({ aiSettingsStore, settingsStore, paymentStore }: TStore) => {
-    const { fetchKnowledge, fetchAIProviders, initDefaultProvider } =
-      aiSettingsStore;
+    const { fetchKnowledge } = aiSettingsStore;
     const { currentDeviceType, standalone } = settingsStore;
     const { isAiToolsServiceOn, isCardLinkedToPortal } = paymentStore;
 
     return {
       fetchKnowledge,
-      fetchAIProviders,
-      initDefaultProvider,
       currentDeviceType,
       standalone,
       isAiToolsServiceOn,

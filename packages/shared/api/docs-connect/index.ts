@@ -101,6 +101,7 @@ type TTariffQuota = {
   id?: number;
   quantity?: number;
   nextQuantity?: number | null;
+  nextQuota?: number | null;
   dueDate?: string | null;
   wallet?: boolean;
   state?: number;
@@ -112,6 +113,23 @@ const QUOTA_STATE_OVERDUE = 1;
 const EMPTY_TARIFF_STATE: TDocsConnectTariffState = {
   scheduledChange: null,
   deactivated: false,
+};
+
+const resolveNextDevPack = ({
+  nextQuota,
+  baseId,
+  devpackId,
+  fallback,
+}: {
+  nextQuota?: number | null;
+  baseId?: number;
+  devpackId?: number;
+  fallback: boolean;
+}): boolean => {
+  if (nextQuota == null) return fallback;
+  if (devpackId != null && nextQuota === devpackId) return true;
+  if (baseId != null && nextQuota === baseId) return false;
+  return fallback;
 };
 
 const fetchTariffState = async (
@@ -147,15 +165,24 @@ const fetchTariffState = async (
     return { scheduledChange: null, deactivated: true };
   }
 
-  const quotaWithChange = [devpackQuota, baseQuota].find(
+  const scheduleQuota = [devpackQuota, baseQuota].find(
     (q) => q && (q.nextQuantity ?? -1) >= 0,
   );
 
-  if (quotaWithChange) {
+  if (scheduleQuota) {
+    const scheduledOnDevPack = scheduleQuota === devpackQuota;
+
     return {
       scheduledChange: {
-        nextUsers: quotaWithChange.nextQuantity ?? 0,
-        dueDate: quotaWithChange.dueDate ?? "",
+        nextUsers: scheduleQuota.nextQuantity ?? 0,
+        dueDate: scheduleQuota.dueDate ?? "",
+        nextDevPackEnabled: resolveNextDevPack({
+          nextQuota: scheduleQuota.nextQuota,
+          baseId,
+          devpackId,
+          fallback: scheduledOnDevPack,
+        }),
+        scheduledOnDevPack,
       },
       deactivated: false,
     };
@@ -248,6 +275,47 @@ export const getDocsConnectInfo = async (
   };
 };
 
+export type TDocsConnectConnection = {
+  address: string;
+  secret: string;
+  header: string;
+};
+
+export const getDocsConnectConnection =
+  async (): Promise<TDocsConnectConnection | null> => {
+    let tenant: TDocsConnectTenant | null = null;
+    try {
+      tenant = (await request({
+        method: "get",
+        url: `${BASE}/tenant`,
+      })) as TDocsConnectTenant | null;
+    } catch {
+      tenant = null;
+    }
+
+    if (!tenant?.address) {
+      return null;
+    }
+
+    let config: TDocsConnectConfig | null = null;
+    try {
+      config = (await request({
+        method: "get",
+        url: `${BASE}/tenant/config`,
+      })) as TDocsConnectConfig | null;
+    } catch {
+      config = null;
+    }
+
+    const secret = config?.security.secret;
+    const header = config?.security.header;
+    if (!secret || !header) {
+      return null;
+    }
+
+    return { address: tenant.address, secret, header };
+  };
+
 export const startDocsConnectTrial =
   async (): Promise<TDocsConnectInfo | null> => {
     await request({ method: "post", url: `${BASE}/trial` });
@@ -304,9 +372,9 @@ export const cancelDocsConnectPlan = async (
 };
 
 export const cancelDocsConnectScheduledChange = async (
-  devPackEnabled: boolean,
+  scheduledOnDevPack: boolean,
 ): Promise<TDocsConnectInfo | null> => {
-  const product = devPackEnabled
+  const product = scheduledOnDevPack
     ? DOCS_CLOUD_DEVPACK_PRODUCT
     : DOCS_CLOUD_PRODUCT;
 
@@ -354,7 +422,7 @@ export const buyDocsConnectPlan = async (
   const isDecrease = users < currentUsers;
 
   const quantity = disablingDevPack
-    ? { [DOCS_CLOUD_DEVPACK_PRODUCT]: 0 }
+    ? { [DOCS_CLOUD_PRODUCT]: users }
     : { [product]: isDecrease ? users : users - currentUsers };
 
   const productQuantityType =

@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-07-27T13:07:50.620Z",
+  "updated_at": "2026-07-31T12:36:29.390Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/select-chat/index.tsx",
-      "line_number": 240,
-      "context": "onClick: onSaveToFileAction,\n },\n { key: \"separator\", isSeparator: true },\n {\n key: \"remove\",\n label: t(\"Delete\"),\n iconNode: <RemoveSvg />,\n onClick: onDelete,\n },\n ];\n }, [onDelete, onRenameToggle, onSaveToFileAction, t]);",
-      "module": "/libs/ui-kit"
-    },
     {
       "file_path": "/libs/ui-kit/components/image-editor/ButtonDelete/index.tsx",
       "line_number": 95,
@@ -121,8 +115,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 166,
-      "context": "className={styles.actionButton}\n iconName={TrashReactSvgUrl}\n size={16}\n onClick={handleDelete}\n isDisabled={isDeleting}\n title={t(\"Common:Delete\")}\n />\n </div>\n </div>\n <div className={styles.keyItemContent}>\n {createdDate && (",
+      "line_number": 170,
+      "context": "className={styles.actionButton}\n iconName={TrashReactSvgUrl}\n size={16}\n onClick={handleDelete}\n isDisabled={isDeleting}\n title={t(\"Common:Delete\")}\n />\n </div>\n </div>\n {createdDate ? (\n <>",
       "module": "/packages/client"
     },
     {
@@ -252,30 +246,6 @@
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/dialogs/delete/index.tsx",
-      "line_number": 152,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Delete\")}\n scale\n onClick={onSubmit}\n isLoading={loading}\n testId=\"delete-provider-button\"\n />",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/providers/Tile.tsx",
-      "line_number": 116,
-      "context": "icon: SettingsIcon,\n onClick: () => onSettingsClick(item),\n },\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n onClick: () => onDeleteClick(item.id),\n icon: CatalogTrashReactSvgUrl,\n },\n ];\n };",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/dialogs/delete/index.tsx",
-      "line_number": 110,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Delete\")}\n scale\n onClick={onSubmitAction}\n isLoading={loading}\n testId=\"delete-mcp-button\"\n />",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/servers/mcp-tile/index.tsx",
-      "line_number": 115,
-      "context": "icon: SettingsIcon,\n onClick: () => onSettingsClick?.(item),\n },\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n onClick: () => onDeleteClick?.(item.id),\n icon: CatalogTrashReactSvgUrl,\n },\n ];\n };",
-      "module": "/packages/sdk"
-    },
-    {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/delete-agent-dialog/index.tsx",
       "line_number": 113,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Delete\")}\n scale\n onClick={onConfirm}\n testId=\"delete-agent-modal_submit\"\n />\n <Button",
@@ -313,13 +283,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 282,
+      "line_number": 261,
       "context": "\"separator-after-custom\": makeSeparator(\"separator-after-custom\"),\n delete: canDelete\n ? {\n id: \"option_delete\",\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => deleteFromList(file.id),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsContextMenu.ts",
-      "line_number": 282,
+      "line_number": 261,
       "context": "\"separator-after-custom\": makeSeparator(\"separator-after-custom\"),\n delete: canDelete\n ? {\n id: \"option_delete\",\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => deleteFromList(file.id),\n disabled: false,\n }\n : null,",
       "module": "/packages/sdk"
     },

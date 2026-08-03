@@ -215,7 +215,6 @@ const AgentsListPage = ({ initialSearch, section }: Props) => {
         <CreateAgentEvent
           visible={dialogsStore.createAgentDialogVisible}
           onClose={() => dialogsStore.setCreateAgentDialogVisible(false)}
-          portalMcpServerId={aiConfigStore.aiConfig?.portalMcpServerId}
         />
       ) : null}
 

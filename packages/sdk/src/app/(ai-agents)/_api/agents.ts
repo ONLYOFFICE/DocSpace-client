@@ -69,12 +69,6 @@ export {
   getAIAgent,
   getAIAgents,
   deleteAIAgent,
-  getDefaultProvider,
-  getModels,
-  addServersForRoom,
-  getServersListForRoom,
-  deleteServersForRoom,
-  getProviders,
   getAIConfig,
 } from "@docspace/shared/api/ai";
 
@@ -82,6 +76,5 @@ export type {
   TAgent,
   TAgentLogo,
   TChatSettings,
-  TDefaultProvider,
   TAIConfig,
 } from "@docspace/shared/api/ai/types";

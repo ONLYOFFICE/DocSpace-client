@@ -93,10 +93,10 @@ describe("FilesStore.fetchRooms — characterization", () => {
 describe("FilesStore.fetchAgents — characterization", () => {
   afterEach(() => vi.restoreAllMocks());
 
-  it("requests AI agents via api.ai.getNewAiAgents and fills folders", async () => {
+  it("requests AI agents via api.ai.getAIAgents and fills folders", async () => {
     const store = createTestFilesStore();
     const getAgents = vi
-      .spyOn(api.ai, "getNewAiAgents")
+      .spyOn(api.ai, "getAIAgents")
       .mockResolvedValue(roomsPayload([room(3)]) as never);
 
     await store.fetchAgents(0);
@@ -173,7 +173,7 @@ describe("FilesStore.fetchRooms / fetchAgents — last-page clamp", () => {
   it("fetchAgents re-requests when the page is beyond the last page", async () => {
     const store = createTestFilesStore();
     const getAgents = vi
-      .spyOn(api.ai, "getNewAiAgents")
+      .spyOn(api.ai, "getAIAgents")
       .mockResolvedValue(highTotalPayload() as never);
 
     const filter = store.roomsFilter.clone();

@@ -3,7 +3,7 @@
   "content": "Purchase failed",
   "content_en_sha1_hash": "52c2cea69019b94235e7e021e6b7d6a38e2068b5",
   "created_at": "2026-07-27T13:07:08.062Z",
-  "updated_at": "2026-07-27T13:38:00.408Z",
+  "updated_at": "2026-07-31T15:04:17.734Z",
   "comment": {
     "text": "Title for an error card on the AI paywall completion page, appearing when a DocsConnect-related purchase fails.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 529,
+      "line_number": 548,
       "context": "</div>\n \n <div className={styles.cardBody}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isDocsConnect\n ? t(\"DocsConnectCallbackErrorTitle\")\n : isWalletOnly\n ? t(\"WalletTopUpErrorTitle\")\n : t(\"AIPaywallCallbackError\")}\n </Text>",
       "module": "/libs/ui-kit"
     }

@@ -126,7 +126,7 @@
   "SyncWithDatabaseStatus": "Sinkronizuar: {{success}} nga {{total}}",
   "SyncWithDatabaseSuccess": "Të gj formularët do të sinkronizohen me databën e jashtme sfond",
   "TableName": "Emri i tabelës",
-  "Template": "Шаблон",
+  "Template": "Shabllon",
   "TemplateAvailable": "Modelo i disponueshëm për të gjithë.",
   "TemplateAvailableDescription": "Të gjithë {{productName}} dhe administratorët e Dhoma do të jenë në gjendje të krijojnë dhoma duke përdorur këtë model.",
   "TemplateName": "Emri i Modulit",

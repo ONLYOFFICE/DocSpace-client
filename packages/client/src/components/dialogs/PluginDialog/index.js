@@ -174,6 +174,7 @@ const PluginDialog = ({
       onClose={onCloseAction}
       withoutPadding={withoutBodyPadding}
       withoutHeaderMargin={withoutHeaderMargin}
+      dataTestId="plugin_modal"
       {...rest}
     >
       <ModalDialog.Header>{dialogHeaderProps}</ModalDialog.Header>

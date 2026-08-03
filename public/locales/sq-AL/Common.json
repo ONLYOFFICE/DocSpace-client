@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "Njoftimet e janë fiksuar",
   "AIAgentNotificationsEnabled": "Njoftimet e aktivizuara",
   "AIAgentPinLimitMessage": "Nuk mund të fiksoni më shumë se 10 {{aiAgents}} në krye. Hiqni fiksimin nga disa që janë fiksuar aktualisht.",
-  "AIAgentPinned": "i fiksuar",
+  "AIAgentPinned": "Agjenti i AI u gozhdua",
   "AIAgents": "Agjentë IA",
   "AIAgentsCardDescription": "Konfiguroni ndihmës IA që njohin skedarët tuaj. Ndajini me ekipin tuaj dhe përdorini nëpër dhoma për t'iu përgjigjur pyetjeve ose për të kryer detyra në emrin tuaj.",
   "AIAgentsDescription": "Krijoni një asistent personal për ekipin tuaj duke shtuar një bazë të dijeve, duke zgjedhur modelin ideal dhe duke lidhur një {{mcpServer}}.",

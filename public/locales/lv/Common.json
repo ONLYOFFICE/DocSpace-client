@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "paziņojumi atspīdzināti",
   "AIAgentNotificationsEnabled": "paziņojumi iespērti",
   "AIAgentPinLimitMessage": "Jūs nevarat fiksēt vairāk par 10 {{aiAgents}} uz augšdaļas. Atvienojiet dažus, kas pašlaik ir fiksēti.",
-  "AIAgentPinned": "fiksēts",
+  "AIAgentPinned": "Piesprausts AI aģents",
   "AIAgents": "MI aģenti",
   "AIAgentsCardDescription": "Iestatiet MI palīgus, kas pārzina jūsu failus. Kopīgojiet tos ar savu komandu un izmantojiet tos visās telpās, lai atbildētu uz jautājumiem vai izpildītu uzdevumus jūsu vārdā.",
   "AIAgentsDescription": "Izveidojiet personalizētu asistantu savai komandai, pievienojot zināšanu bāzi, izvēlot ideālo modeli un savienojot ar {{mcpServer}}.",

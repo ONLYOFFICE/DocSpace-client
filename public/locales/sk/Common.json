@@ -89,7 +89,7 @@
   "AIAgentNotificationsDisabled": "Upozornenia vypnuté",
   "AIAgentNotificationsEnabled": "Upozornenia zapnuté",
   "AIAgentPinLimitMessage": "Nemôžete pripínať viac ako 10 {{aiAgents}} na vrch. Odpínajte niektoré, ktoré sú momentálne pripnuté.",
-  "AIAgentPinned": "pripnuté",
+  "AIAgentPinned": "Agent AI pripnutý",
   "AIAgents": "AI agenti",
   "AIAgentsCardDescription": "Nastavte AI pomocníkov, ktorí poznajú vaše súbory. Zdieľajte ich s tímom a používajte ich naprieč miestnosťami na zodpovedanie otázok alebo vykonávanie úloh vo vašom mene.",
   "AIAgentsDescription": "Nastavte personalizovaného asistentu pre váš tím pridaním základnej znalosti, výberom ideálneho modelu a pripojením {{mcpServer}}.",

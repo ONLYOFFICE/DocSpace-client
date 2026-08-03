@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "Notificările dezactivate",
   "AIAgentNotificationsEnabled": "Notificări activate",
   "AIAgentPinLimitMessage": "Nu puteți pini mai mult de 10 {{aiAgents}} în partea de sus. Depiniți unele care sunt în prezent pinate.",
-  "AIAgentPinned": "fixat",
+  "AIAgentPinned": "Agent AI fixat",
   "AIAgents": "Agenți de inteligență artificială",
   "AIAgentsCardDescription": "Configurați asistenți IA care vă cunosc fișierele. Partajați-i cu echipa dvs. și folosiți-i în toate sălile pentru a răspunde la întrebări sau a executa sarcini în numele dvs.",
   "AIAgentsDescription": "Configurați un asistent personalizat pentru echipa dumneavoastră adăugând o bază de cunoștințe, selectând modelul ideal și conectând un {{mcpServer}}.",

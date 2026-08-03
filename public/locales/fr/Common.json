@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "notifications désactivées",
   "AIAgentNotificationsEnabled": "Notifications activées",
   "AIAgentPinLimitMessage": "Vous ne pouvez pas épingler plus de 10 {{aiAgents}} en haut. Dépinglez certains qui sont actuellement épinglés.",
-  "AIAgentPinned": "épinglé",
+  "AIAgentPinned": "Agent IA épinglé",
   "AIAgents": "Agents IA",
   "AIAgentsCardDescription": "Configurez des assistants IA qui connaissent vos fichiers. Partagez-les avec votre équipe et utilisez-les dans toutes les salles pour répondre à des questions ou exécuter des tâches en votre nom.",
   "AIAgentsDescription": "Configurez un assistant personnalisé pour votre équipe en ajoutant une base de connaissances, en sélectionnant le modèle idéal et en connectant un {{mcpServer}}.",

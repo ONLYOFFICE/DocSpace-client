@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "Powiadomienia wyłączone",
   "AIAgentNotificationsEnabled": "Powiadomienia włączone",
   "AIAgentPinLimitMessage": "Nie można przypiąć więcej niż 10 {{aiAgents}} do góry. Odpięć niektórych, które są obecnie przypięte.",
-  "AIAgentPinned": "Przypięty",
+  "AIAgentPinned": "Agent AI przypięty",
   "AIAgents": "Agenci AI",
   "AIAgentsCardDescription": "Skonfiguruj asystentów AI, którzy znają Twoje pliki. Udostępniaj je swojemu zespołowi i korzystaj z nich w różnych pokojach, aby odpowiadać na pytania lub wykonywać zadania w Twoim imieniu.",
   "AIAgentsDescription": "Ustaw spersonalisanego asystenta dla swojego zespołu, dodając bazę wiedzy, wybierając idealny model i łącząc {{mcpServer}}.",

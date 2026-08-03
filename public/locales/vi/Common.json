@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "Thông báo đã bị tắt",
   "AIAgentNotificationsEnabled": "Thông báo đã được bật",
   "AIAgentPinLimitMessage": "Bạn không thể ghim quá 10 {{aiAgents}} lên đầu. Vui lòng bỏ ghim một số mục đang được ghim.",
-  "AIAgentPinned": "được ghim",
+  "AIAgentPinned": "Đặc vụ AI đã được ghim",
   "AIAgents": "Các tác nhân AI",
   "AIAgentsCardDescription": "Thiết lập các trợ lý AI hiểu rõ tệp của bạn. Chia sẻ chúng với nhóm của bạn và sử dụng chúng trên các phòng để trả lời câu hỏi hoặc thực hiện các tác vụ thay cho bạn.",
   "AIAgentsDescription": "Thiết lập trợ lý cá nhân hóa cho nhóm của bạn bằng cách thêm cơ sở kiến thức, chọn mô hình lý tưởng và kết nối với {{mcpServer}}.",

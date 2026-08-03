@@ -91,7 +91,7 @@
   "AIAgentNotificationsDisabled": "の通知を無効にする",
   "AIAgentNotificationsEnabled": "通知が有効になっています",
   "AIAgentPinLimitMessage": "{{aiAgents}}をトップに10個以上ピン留めすることはできません。現在ピン留めされているものをいくつか解除してください。",
-  "AIAgentPinned": "をピン留め",
+  "AIAgentPinned": "AI エージェントが固定されました",
   "AIAgents": "AIエージェント",
   "AIAgentsCardDescription": "あなたのファイルを把握するAIヘルパーを設定しましょう。チームと共有し、ルームをまたいで利用することで、質問への回答や、あなたに代わってタスクを実行できます。",
   "AIAgentsDescription": "チーム専用のナレッジベースを追加し、最適なモデルを選択し、{{mcpServer}}を接続することで、パーソナライズされたアシスタントを設定します。",

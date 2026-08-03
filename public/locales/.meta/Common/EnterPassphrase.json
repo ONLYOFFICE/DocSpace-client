@@ -3,7 +3,7 @@
   "content": "Enter passphrase",
   "content_en_sha1_hash": "383189b344d3c80fce2ba7294da05786dfff8951",
   "created_at": "2026-05-24T17:27:26.896Z",
-  "updated_at": "2026-07-27T13:07:50.931Z",
+  "updated_at": "2026-07-31T12:36:29.596Z",
   "comment": {
     "text": "Dialog title for a modal window that appears when the user is prompted to provide an existing passphrase.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 207,
-      "context": "displayType={ModalDialogType.modal}\n isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {isNew ? t(\"Common:CreatePassphrase\") : t(\"Common:EnterPassphrase\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>",
+      "line_number": 212,
+      "context": "isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {title ??\n (isNew ? t(\"Common:CreatePassphrase\") : t(\"Common:EnterPassphrase\"))}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>",
       "module": "/packages/shared"
     }
   ],

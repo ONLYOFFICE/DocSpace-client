@@ -416,13 +416,7 @@ const BuyPlanPanel = ({
             : t("DocsConnect:DocsConnect")}
         </ModalDialog.Header>
         <ModalDialog.Body>
-          <div
-            className={
-              devPackTurnedOff
-                ? `${styles.body} ${styles.bodyScheduled}`
-                : styles.body
-            }
-          >
+          <div className={styles.body}>
             <div className={styles.walletCard}>
               <div className={styles.walletIcon} aria-hidden>
                 <WalletSvg />
@@ -491,7 +485,6 @@ const BuyPlanPanel = ({
                   price: formatCurrency(pricePerUser),
                 })}
                 onChange={setUsers}
-                isDisabled={devPackTurnedOff}
                 minusDisabled={isDevPackUpgrade}
                 minusTooltipId={
                   isDevPackUpgrade ? USERS_MINUS_TOOLTIP_ID : undefined
@@ -576,16 +569,7 @@ const BuyPlanPanel = ({
               </div>
             </div>
 
-            {isEditActive && !hasChanges ? null : devPackTurnedOff ? (
-              <div className={styles.scheduledNote}>
-                <StorageWarning
-                  body={t("DocsConnect:DevPackDisableScheduledNote", {
-                    date: periodEndDateLocalized,
-                    service: t("DocsConnect:DocsConnect"),
-                  })}
-                />
-              </div>
-            ) : (
+            {isEditActive && !hasChanges ? null : (
               <>
                 <Text
                   fontSize="16px"
@@ -693,14 +677,6 @@ const BuyPlanPanel = ({
                       </>
                     ) : (
                       <>
-                        {devPackTurnedOff
-                          ? summaryRow(
-                              t("DocsConnect:DevPackDisabledLabel"),
-                              t("DocsConnect:MinusPricePerUser", {
-                                price: formatCurrency(devPackPrice),
-                              }),
-                            )
-                          : null}
                         {usersChanged
                           ? summaryRow(
                               t("DocsConnect:UserAdjustmentLabel"),

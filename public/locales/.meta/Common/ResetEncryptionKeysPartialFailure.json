@@ -3,7 +3,7 @@
   "content": "Reset finished, but {{count}} key(s) could not be deleted on the server. Try again later.",
   "content_en_sha1_hash": "bfe7c78e70513e1c4820354a817b41a40eb82f87",
   "created_at": "2026-05-24T17:27:37.187Z",
-  "updated_at": "2026-05-24T17:32:03.171Z",
+  "updated_at": "2026-07-31T12:36:29.539Z",
   "comment": {
     "text": "Warning toast message appearing when an encryption key reset completes but some keys failed to delete. The {{count}} variable represents the number of failed keys.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useResetKeysFlow.tsx",
-      "line_number": 101,
+      "line_number": 103,
       "context": "await refreshKeysFromServer();\n \n const failures = results.filter((r) => r.status === \"rejected\").length;\n if (failures > 0) {\n toastr.warning(\n t(\"Common:ResetEncryptionKeysPartialFailure\", { count: failures }),\n );\n } else {\n toastr.success(t(\"Common:ResetEncryptionKeysSuccess\"));\n }\n } catch (error) {",
       "module": "/packages/client"
     }

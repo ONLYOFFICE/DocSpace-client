@@ -27,6 +27,7 @@ const progressStore = () => ({
   secondaryProgressDataStore: {
     setSecondaryProgressBarData: vi.fn(),
     clearSecondaryProgressData: vi.fn(),
+    isOperationStopped: vi.fn(() => false),
   },
 });
 

@@ -40,7 +40,7 @@ import {
   removeFiles,
   deleteVersionFile,
 } from "@docspace/shared/api/files";
-import { AnalyticsEvents } from "@docspace/shared/enums";
+import { AnalyticsEvents, FileOperationStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import {
@@ -189,7 +189,22 @@ self: FilesActionStore,
             operationId,
           };
 
-          await self.uploadDataStore.loopFilesOperations(data, pbData);
+          const operationResult =
+            await self.uploadDataStore.loopFilesOperations(data, pbData);
+
+          // The operation can stop before it processed the whole
+          // request — the user hit cancel on the progress button, or the server
+          // reported it canceled. Only a subset of `fileIds`/`folderIds` was
+          // actually removed and we cannot tell which, so the optimistic
+          // `removeFiles` below would drop the untouched items from the list too
+          // (with a select-all delete that empties the page). Refetch instead
+          // and let the server say what survived.
+          const isCanceled =
+            operationResult?.status === FileOperationStatus.Canceled ||
+            secondaryProgressDataStore.isOperationStopped(
+              operationName,
+              operationId,
+            );
 
           const showToast = () => {
             if (isRecycleBinFolder) {
@@ -203,6 +218,9 @@ self: FilesActionStore,
           if (self.dialogsStore.isFolderActions) {
             self.updateCurrentFolder(false, operationId, operationName, true);
             showToast();
+          } else if (isCanceled) {
+            self.filesStore.setSelected("close");
+            await self.updateCurrentFolder(false, operationId, operationName);
           } else {
             self.updateFilesAfterDelete(operationId, operationName);
 
@@ -224,7 +242,7 @@ self: FilesActionStore,
             );
           }
 
-          if (fileIds.length) {
+          if (fileIds.length && !isCanceled) {
             window.dataLayer = window.dataLayer || [];
             selection
               .filter((item) => fileIds.includes(item.id))

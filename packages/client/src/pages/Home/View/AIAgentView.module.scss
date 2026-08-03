@@ -39,4 +39,9 @@
   :global(div:has(> div > [style*="--chat-welcome-color"])) {
     margin-bottom: 18px;
   }
+
+  :global(#chat-toolbar) {
+    --chat-toolbar-padding-block: 16px;
+    --chat-toolbar-padding-inline: 10px 20px;
+  }
 }

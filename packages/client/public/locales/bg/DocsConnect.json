@@ -103,7 +103,6 @@
   "Remaining": "Оставащи",
   "RemainingBalanceAfter": "Оставащ баланс след покупка: {{amount}}",
   "RemainingCreditsAfter": "Оставащи кредити след покупка: {{amount}}",
-  "RemoveSubscriptionConfirm": "Данните за предишния ви абонамент ще бъдат премахнати. За да използвате {{service}} отново, ще трябва да настроите нов абонамент.",
   "RenewsOnWithUpdate": "Подновява се на {{date}} — {{price}}/месец (Потребители: {{count}})",
   "ReportGenerationHint": "Генерирането на отчета може да отнеме известно време. След като е готов, той ще бъде запазен в {{sectionName}}.",
   "ResetAccessRulesTitle": "Нулиране на правилата за достъп",

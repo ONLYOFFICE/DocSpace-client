@@ -103,7 +103,6 @@
   "Remaining": "Մնացած",
   "RemainingBalanceAfter": "Մնացորդը գնումից հետո՝ {{amount}}",
   "RemainingCreditsAfter": "Մնացած կրեդիտները գնումից հետո՝ {{amount}}",
-  "RemoveSubscriptionConfirm": "Ձեր նախորդ բաժանորդագրության մանրամասները կհեռացվեն: {{service}}-ից նորից օգտվելու համար ձեզ անհրաժեշտ կլինի կազմաձևել նոր բաժանորդագրություն:",
   "RenewsOnWithUpdate": "Երկարաձգվում է {{date}}-ին — {{price}}/ամիս (Օգտատերեր՝ {{count}})",
   "ReportGenerationHint": "Հաշվետվության ստեղծումը կարող է ժամանակ պահանջել: Պատրաստ լինելուն պես այն կպահվի {{sectionName}}-ում:",
   "ResetAccessRulesTitle": "Վերականգնել մուտքի կանոնները",

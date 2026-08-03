@@ -103,7 +103,6 @@
   "Remaining": "Verbleibend",
   "RemainingBalanceAfter": "Verbleibender Saldo nach dem Kauf: {{amount}}",
   "RemainingCreditsAfter": "Verbleibendes Guthaben nach dem Kauf: {{amount}}",
-  "RemoveSubscriptionConfirm": "Die Details Ihres vorherigen Abonnements werden entfernt. Um {{service}} erneut zu nutzen, müssen Sie ein neues Abonnement konfigurieren.",
   "RenewsOnWithUpdate": "Verlängerung am {{date}} — {{price}}/Monat (Benutzer: {{count}})",
   "ReportGenerationHint": "Die Erstellung des Berichts kann einige Zeit in Anspruch nehmen. Sobald er fertig ist, wird er in {{sectionName}} gespeichert.",
   "ResetAccessRulesTitle": "Zugriffsregeln zurücksetzen",

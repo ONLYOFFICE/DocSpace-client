@@ -103,7 +103,6 @@
   "Remaining": "ຍັງເຫຼືອ",
   "RemainingBalanceAfter": "ຍອດເງິນທີ່ເຫຼືອຫຼັງການຊື້: {{amount}}",
   "RemainingCreditsAfter": "ເຄຣດິດທີ່ເຫຼືອຫຼັງການຊື້: {{amount}}",
-  "RemoveSubscriptionConfirm": "ລາຍລະອຽດການສະໝັກໃຊ້ກ່ອນໜ້ານີ້ຂອງທ່ານຈະຖືກລຶບອອກ. ເພື່ອໃຊ້ {{service}} ອີກຄັ້ງ, ທ່ານຈະຕ້ອງຕັ້ງຄ່າການສະໝັກໃຊ້ໃໝ່.",
   "RenewsOnWithUpdate": "ຕໍ່ອາຍຸໃນວັນທີ {{date}} — {{price}}/ເດືອນ (ຜູ້ໃຊ້: {{count}})",
   "ReportGenerationHint": "ການສ້າງລາຍງານອາດໃຊ້ເວລາໜ້ອຍໜຶ່ງ. ເມື່ອສຳເລັດແລ້ວ, ມັນຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}.",
   "ResetAccessRulesTitle": "ຣີເຊັດກົດການເຂົ້າເຖິງ",

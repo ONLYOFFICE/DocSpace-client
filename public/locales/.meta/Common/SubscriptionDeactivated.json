@@ -3,7 +3,7 @@
   "content": "Subscription deactivated — non-payment",
   "content_en_sha1_hash": "6244400f48c757281fab42d54dc81d4c61f933c3",
   "created_at": "2026-04-10T13:53:45.694Z",
-  "updated_at": "2026-08-01T15:33:49.637Z",
+  "updated_at": "2026-08-01T16:25:17.819Z",
   "comment": {
     "text": "This is a status message displayed when a subscription has been deactivated due to non-payment, specifically for storage plan changes.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 265,
+      "context": "<span className={styles.deactivatedBannerIcon} aria-hidden=\"true\">\n <AlertIcon />\n </span>\n <div className={styles.deactivatedBannerText}>\n <Text className={styles.deactivatedTitle}>\n {t(\"SubscriptionDeactivated\")}\n </Text>\n <Text className={styles.deactivatedDescription}>\n {t(\"SubscriptionDeactivatedDescription\")}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 285,
@@ -20,7 +26,7 @@
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
       "line_number": 194,
-      "context": "priceValue?: number,\n ) => {\n switch (serviceName) {\n case TOTAL_SIZE:\n if (previousStoragePlanSize && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }",
+      "context": "priceValue?: number,\n ) => {\n switch (serviceName) {\n case TOTAL_SIZE:\n if (isShowPreviousStoragePlan && !isStorageDeactivationVisited) {\n return t(\"SubscriptionDeactivated\");\n }\n \n if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }",
       "module": "/libs/ui-kit"
     },
     {

@@ -103,7 +103,6 @@
   "Remaining": "剩余",
   "RemainingBalanceAfter": "购买后剩余余额：{{amount}}",
   "RemainingCreditsAfter": "购买后剩余积分：{{amount}}",
-  "RemoveSubscriptionConfirm": "您之前的订阅详情将被移除。若要再次使用{{service}}，您需要配置新的订阅。",
   "RenewsOnWithUpdate": "将于 {{date}} 续订 — {{price}}/月（用户数：{{count}}）",
   "ReportGenerationHint": "报告生成可能需要一些时间。生成完成后，将保存到{{sectionName}}中。",
   "ResetAccessRulesTitle": "重置访问规则",

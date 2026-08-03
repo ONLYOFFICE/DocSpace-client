@@ -16,18 +16,32 @@
     margin-inline: -16px -8px;
   }
 
-  --chat-header-top: calc(var(--section-header-height) + var(--section-submenu-height));
+  --chat-header-top: calc(
+    var(--section-header-height) + var(--section-submenu-height)
+  );
 
   @include mixins.tablet-and-below {
-    --chat-header-top: calc(var(--section-header-height-tablet) + var(--section-submenu-height));
+    --chat-header-top: calc(
+      var(--section-header-height-tablet) + var(--section-submenu-height)
+    );
   }
 
   @include mixins.mobile {
-    --chat-header-top: calc(var(--section-header-height-mobile) + var(--section-submenu-height));
+    --chat-header-top: calc(
+      var(--section-header-height-mobile) + var(--section-submenu-height)
+    );
+  }
+
+  :global(.aui-root > div:has(> .chat-viewport--empty)) {
+    grid-template-rows: 2fr auto auto 8fr auto;
   }
 
   :global(div:has(> div > [style*="--chat-welcome-color"])) {
-    margin-bottom: 0 !important;
-    margin-top: 32px !important;
+    margin-bottom: 18px;
+  }
+
+  :global(#chat-toolbar) {
+    --chat-toolbar-padding-block: 16px;
+    --chat-toolbar-padding-inline: 20px;
   }
 }

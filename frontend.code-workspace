@@ -319,6 +319,31 @@
             "tooltip": "🛠️ Start the \"dev update e2e screenshots (client)\" task"
           },
           {
+            "label": "Client E2E run UI — plugins only",
+            "task": "Test | Test e2e run ui (client plugins)",
+            "tooltip": "🛠️ Start the \"test run UI (client, __tests__/plugins only)\" task"
+          },
+          {
+            "label": "Client E2E start docker — plugins only",
+            "task": "Test | Test e2e docker start (client plugins)",
+            "tooltip": "🛠️ Start the \"local e2e tests in docker (client, __tests__/plugins only)\" task"
+          },
+          {
+            "label": "Client E2E update screenshots — plugins only",
+            "task": "Test | Test e2e docker update-screenshots (client plugins)",
+            "tooltip": "🛠️ Start the \"update e2e screenshots (client, __tests__/plugins only)\" task"
+          },
+          {
+            "label": "Client E2E dev docker — plugins only",
+            "task": "Test | Test e2e docker dev (client plugins)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (client, __tests__/plugins only)\" task"
+          },
+          {
+            "label": "Client E2E dev update screenshots — plugins only",
+            "task": "Test | Test e2e docker dev update-screenshots (client plugins)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (client, __tests__/plugins only)\" task"
+          },
+          {
             "label": "Client E2E clear docker",
             "task": "Test | Test e2e docker clear (client)",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"

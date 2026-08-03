@@ -53,6 +53,13 @@ async function openContextMenu(
   const menuButton = row.getByTestId("context-menu-button").first();
   await expect(menuButton).toBeVisible();
   await menuButton.click();
+
+  // The menu opens under the parked cursor, so whichever item lands beneath it
+  // fires onMouseEnter and auto-expands its submenu. Park the pointer on a leaf
+  // item instead: it resets activeItems, collapsing every submenu.
+  const leafItem = page.getByTestId("context-menu-sample-basic").first();
+  await expect(leafItem).toBeVisible();
+  await leafItem.hover();
 }
 
 test.describe("Context Menu Sample Plugin", () => {

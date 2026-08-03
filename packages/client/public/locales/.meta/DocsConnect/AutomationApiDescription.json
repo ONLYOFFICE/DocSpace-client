@@ -1,0 +1,29 @@
+{
+  "key_path": "AutomationApiDescription",
+  "content": "Connect your own integrations and workflows",
+  "content_en_sha1_hash": "ebe6a2d2605f636824056004f5ba16f72069500b",
+  "created_at": "2026-07-27T13:07:48.512Z",
+  "updated_at": "2026-08-01T15:33:49.625Z",
+  "comment": {
+    "text": "Secondary description text for the Automation API feature within the plan selection panel.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:36:07.565Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 552,
+      "context": "<div>\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"DocsConnect:AutomationApi\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.secondaryText}>\n {t(\"DocsConnect:AutomationApiDescription\")}\n </Text>\n </div>\n </div>\n <div className={styles.devPackFeature}>\n <div className={styles.devPackFeatureIcon} aria-hidden>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

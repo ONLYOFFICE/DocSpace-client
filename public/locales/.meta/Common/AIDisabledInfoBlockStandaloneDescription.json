@@ -1,0 +1,29 @@
+{
+  "key_path": "AIDisabledInfoBlockStandaloneDescription",
+  "content": "AI capabilities are currently turned off, which means this agent can’t process chats or tasks. Connect your own AI service to unlock advanced features in {{productName}}.",
+  "content_en_sha1_hash": "4237f79a7117c22de53d1d53a9dbcf53a353051b",
+  "created_at": "2026-06-25T11:54:43.975Z",
+  "updated_at": "2026-07-28T07:30:59.964Z",
+  "comment": {
+    "text": "Informational text within a chat info block displayed when AI features are disabled. It explains why the agent cannot process tasks and includes the {{productName}} variable for the product name.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:32:43.315Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
+      "line_number": 90,
+      "context": ");\n \n const bodyText = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"AIDisabledInfoBlockStandaloneDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n // saas admin\n .with([false, true], () =>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

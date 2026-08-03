@@ -1,0 +1,29 @@
+{
+  "key_path": "ModelAssignment",
+  "content": "Model assignment",
+  "content_en_sha1_hash": "b2e4906c1118624ba2e228da186f72b2788737b3",
+  "created_at": "2026-06-25T11:54:53.109Z",
+  "updated_at": "2026-07-28T07:30:59.883Z",
+  "comment": {
+    "text": "Tab label in the AI settings section of Portal Settings, displayed when the model assignment tab is active.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:06:07.891Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 191,
+      "context": "content: standalone ? <AiModels /> : <AiModelsSaas />,\n onClick: makeOnClick(TAB_IDS.AI_MODELS),\n },\n {\n id: TAB_IDS.MODEL_ASSIGNMENT,\n name: t(\"Common:ModelAssignment\"),\n content: <ModelAssignment />,\n onClick: makeOnClick(TAB_IDS.MODEL_ASSIGNMENT),\n isDisabled: disableNonAiModels,\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

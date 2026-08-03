@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Zgjidhni nga lista",
-  "FileLocked": "Skedari u kyç",
   "FileProtected": "Skedari është i mbrojtur me fjalëkalim",
-  "FileUnlocked": "Skedari u zhbllokua",
   "FolderTitleBoxNet": "Drejtoria e kutisë",
   "FolderTitleDocuSign": "Llogaria DocuSign",
   "FolderTitleDropBox": "Drejtoria e Dropbox-it",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "Drejtori WebDAV",
   "FolderTitleYandex": "Drejtoria Yandex",
   "NewForm": "Formulari PDF",
-  "OwnerChange": "Ndryshoni pronarin",
   "RoleGuestDescriprion": "Vizitorët mund të hyjnë në dhomat ku janë ftuar, si dhe të krijojnë dhe modifikojnë dokumente nëse u janë caktuar rolet e duhura në dhomë.\"",
   "SearchByHeadOfGroup": "Kërkoni sipas kreut të grupit",
   "SearchByOwner": "Kërkoni sipas pronarëve",

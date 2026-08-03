@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Valitse listalta",
-  "FileLocked": "Tiedosto lukittu",
   "FileProtected": "Tiedosto on suojattu salasanalla",
-  "FileUnlocked": "Lukitus poistettu",
   "FolderTitleBoxNet": "Laatikkohakemisto",
   "FolderTitleDocuSign": "DocuSign-tili",
   "FolderTitleDropBox": "Dropbox-hakemisto",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "WebDAV-hakemisto",
   "FolderTitleYandex": "Yandex-hakemisto",
   "NewForm": "PDF-lomake",
-  "OwnerChange": "Vaihda omistaja",
   "RoleGuestDescriprion": "Vieraat pääsevät huoneisiin, joihin heidät on kutsuttu, jonka lisäksi he voivat luoda ja muokata asiakirjoja, jos heille on lisätty tarvittavat huoneen roolit.",
   "SearchByHeadOfGroup": "Hae ryhmän päällikön mukaan",
   "SearchByOwner": "Haku Omistajien mukaan",

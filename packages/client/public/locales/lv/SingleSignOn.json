@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Pievienot sertifikātu",
-  "AdvancedSettings": "Papildu iestatījumi",
   "AdvancedSettingsTooltip": "Slēpt noklusējuma autentifikācijas lapu un automātiski novirzīt uz SSO pakalpojumu.",
   "AttributeMatching": "Atribūtu kartēšana",
   "AttributeMatchingTooltip": "Vienotās pierakstīšanās atribūtu atbilstība ierakstiem sadaļā Konti (Accounts).",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Lejupielādēt SP metadatu XML",
   "Encryption": "Šifrēšana",
   "GenerateCertificate": "Ģenerēt jaunu pašparakstītu sertifikātu",
-  "Hide": "Slēpt",
   "HideAdditionalParameters": "Slēpt papildu iestatījumus",
   "HideAuthPage": "Slēpt autentifikācijas lapu",
   "idpAuthRequest": "Verificēt autentifikācijas atbilžu parakstus",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Identitātes nodrošinātāja entītijas ID (izdevēja URL)",
   "ServiceProviderSettings": "{{organizationName}} SP iestatījumi",
   "ServiceProviderSettingsDescription": "Konfigurējiet pakalpojumu sniedzēja iestatījumus un pievienojiet SP sertifikātus vienreizējai pierakstīšanai.",
-  "Show": "Rādīt",
   "ShowAdditionalParameters": "Rādīt papildu iestatījumus",
   "Signing": "Parakstīšana",
   "SigningAndEncryption": "Parakstīšana un šifrēšana",

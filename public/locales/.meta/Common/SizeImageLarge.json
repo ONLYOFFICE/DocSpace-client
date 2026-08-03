@@ -3,7 +3,7 @@
   "content": "The image size is too large, please select another image.",
   "content_en_sha1_hash": "70aa576311994ef2eb1361f70f15d79707597c1f",
   "created_at": "2025-05-19T21:30:48.898Z",
-  "updated_at": "2026-04-12T18:13:27.416Z",
+  "updated_at": "2026-07-28T07:30:59.846Z",
   "comment": {
     "text": "Toast message. This error message appears when a user attempts to upload an image file that exceeds the allowed size limit for a watermark, an AI server icon, or an OAuth client logo.",
     "is_auto": true,
@@ -13,27 +13,27 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ImageWatermark.tsx",
-      "line_number": 199,
+      "line_number": 217,
       "context": ".catch((error) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n };\n \n const onScaleChange = (item: TOption) => {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useIcon.tsx",
-      "line_number": 69,
-      "context": "const file =\n e.target.files && e.target.files?.length > 0 && e.target.files[0];\n \n if (file && file.type === \"image/svg+xml\") {\n if (file.size > ONE_MEGABYTE)\n return toastr.error(t(\"Common:SizeImageLarge\"));\n \n const reader = new FileReader();\n reader.onloadend = () => {\n if (reader.result && typeof reader.result === \"string\")\n setIcon(reader.result);",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 103,
+      "line_number": 112,
       "context": "const file =\n e.target.files && e.target.files?.length > 0 && e.target.files[0];\n \n if (file && file.type === \"image/svg+xml\") {\n if (file.size > ONE_MEGABYTE)\n return toastr.error(t(\"Common:SizeImageLarge\"));\n \n const reader = new FileReader();\n reader.onloadend = () => {\n if (reader.result && typeof reader.result === \"string\")\n changeValue(\"logo\", reader.result);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/AvatarEditorDialogStore.js",
-      "line_number": 207,
-      "context": ".catch((error) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:NotSupportedFormat\"));",
+      "file_path": "/packages/client/src/store/AvatarEditorDialogStore.ts",
+      "line_number": 252,
+      "context": ".catch((error) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n return undefined;\n });\n } catch (error) {\n console.error(error);",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_store/AvatarEditorStore.tsx",
+      "line_number": 240,
+      "context": ".catch((error: unknown) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n return undefined;\n });\n } catch (error) {\n console.error(error);",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

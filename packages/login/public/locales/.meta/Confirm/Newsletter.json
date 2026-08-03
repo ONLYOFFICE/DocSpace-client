@@ -3,7 +3,7 @@
   "content": "I want to subscribe to the {{organizationName}} newsletter",
   "content_en_sha1_hash": "c2523a0f39579a0e89f6536c419daebc365c6295",
   "created_at": "2025-05-19T21:30:57.372Z",
-  "updated_at": "2026-04-11T21:30:12.646Z",
+  "updated_at": "2026-05-15T14:00:06.914Z",
   "comment": {
     "text": "This is a checkbox label on a registration form, allowing users to opt-in to receive newsletters from the specified organization. `{{organizationName}}` will be replaced with the name of the organization.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 123,
+      "line_number": 132,
       "context": "}: RegistrationFormProps) => {\n const { t } = useTranslation([\"Confirm\", \"Common\"]);\n \n const { linkData } = useContext(ConfirmRouteContext);\n \n const newsletter = t(\"Newsletter\", {\n organizationName,\n });\n \n const termsConditionsComponent = (\n <div className=\"terms-conditions\">",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

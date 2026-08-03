@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "اختر من القائمة",
-  "FileLocked": "الملف مقفل",
   "FileProtected": "الملف محمي بكلمة مرور",
-  "FileUnlocked": "تم إلغاء قفل الملف",
   "FolderTitleBoxNet": "مجلد Box",
   "FolderTitleDocuSign": "حساب DocuSign",
   "FolderTitleDropBox": "مجلد Dropbox",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "مجلد WebDAV",
   "FolderTitleYandex": "دليل Yandex",
   "NewForm": "نموذج PDF",
-  "OwnerChange": "تغيير المالك",
   "RoleGuestDescriprion": "يمكن للضيوف الوصول إلى الغرف التي تمت دعوتهم إليها، وكذلك إنشاء وتعديل المستندات إذا تم تعيين الأدوار المناسبة لهم في الغرفة.",
   "SearchByHeadOfGroup": "البحث حسب رئيس المجموعة",
   "SearchByOwner": "البحث حسب المالك",

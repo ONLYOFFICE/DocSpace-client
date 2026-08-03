@@ -1,37 +1,42 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate } from "react-router";
-
-import useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
-import useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
-import useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
@@ -40,7 +45,10 @@ import type { Nullable } from "@docspace/shared/types";
 import type { TError } from "@docspace/shared/utils/axiosClient";
 
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
-import { clearTextSelection } from "@docspace/shared/utils/copy";
+import {
+  clearTextSelection,
+  isEditableElementFocused,
+} from "@docspace/shared/utils/copy";
 import { TopLoaderService as TopLoadingIndicator } from "@docspace/ui-kit/components";
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -48,15 +56,13 @@ import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
-import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, SearchArea } from "@docspace/shared/enums";
+import { SearchArea } from "@docspace/shared/enums";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
-import type DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
-import type AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { AIAgentView } from "SRC_DIR/pages/Home/View/AIAgentView";
 
@@ -73,6 +79,7 @@ import OformsStore from "SRC_DIR/store/OformsStore";
 type ViewProps = UseContactsProps &
   UseFilesProps &
   UseProfileBodyProps & {
+    getEncryptionKeys: UserStore["getEncryptionKeys"];
     setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
     setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
     setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
@@ -89,13 +96,8 @@ type ViewProps = UseContactsProps &
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
 
-    aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
-    setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
-
     canUseChat: AccessRightsStore["canUseChat"];
 
-    aiConfig: SettingsStore["aiConfig"];
-    resultId: AiRoomStore["resultId"];
     setHotkeyCaret: FilesStore["setHotkeyCaret"];
     currentExtensionGallery: OformsStore["currentExtensionGallery"];
   };
@@ -164,17 +166,13 @@ const View = ({
 
   setNotificationChannels,
   checkTg,
-
-  aiAgentSelectorDialogProps,
-  setAiAgentSelectorDialogProps,
+  getEncryptionKeys,
 
   canUseChat,
-  aiConfig,
-  resultId,
 }: ViewProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation(["Files", "Common", "AIRoom"]);
+  const { t } = useTranslation(["Common", "Files"]);
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
@@ -212,6 +210,7 @@ const View = ({
   }, []);
 
   const [isLoading, setIsLoading] = React.useState(false);
+  const getViewRequestIdRef = React.useRef(0);
 
   const prevCurrentViewRef = React.useRef(currentView);
   const prevCategoryType = React.useRef<number>(getCategoryType(location));
@@ -267,37 +266,11 @@ const View = ({
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
     getTfaType: getTfaType!,
     checkTg: checkTg!,
+    getEncryptionKeys: getEncryptionKeys!,
   });
-
-  const [roomId, setRoomId] = React.useState(() => {
-    return new URLSearchParams(location.search).get("folder");
-  });
-
-  React.useLayoutEffect(() => {
-    const roomId = new URLSearchParams(location.search).get("folder");
-    setRoomId(roomId);
-  }, [location.search]);
-
-  const toolsSettings = useToolsSettings({
-    agentId: roomId ?? "",
-    aiConfig,
-    chatSettings: selectedFolderStore.chatSettings,
-  });
-
-  const initChats = useInitChats({
-    agentId: roomId ?? "",
-  });
-
-  const { initMessages, ...messagesSettings } = useInitMessages(roomId ?? "");
-
-  const { initTools } = toolsSettings;
-  const { fetchChats } = initChats;
 
   const getFilesRef = React.useRef(getFiles);
   const fetchContactsRef = React.useRef(fetchContacts);
-  const initChatsRef = React.useRef(fetchChats);
-  const initToolsRef = React.useRef(initTools);
-  const initMessagesRef = React.useRef(initMessages);
 
   const animationStartedRef = React.useRef(false);
 
@@ -400,18 +373,6 @@ const View = ({
     }
   }, [isLoading, showHeaderLoader]);
 
-  React.useEffect(() => {
-    initChatsRef.current = fetchChats;
-  }, [fetchChats]);
-
-  React.useEffect(() => {
-    initToolsRef.current = initTools;
-  }, [initTools]);
-
-  React.useEffect(() => {
-    initMessagesRef.current = initMessages;
-  }, [initMessages]);
-
   const showToastAccess = useEventCallback(() => {
     if (
       selectedFolderStore.isFolder &&
@@ -440,6 +401,9 @@ const View = ({
 
   React.useEffect(() => {
     const getView = async () => {
+      const requestId = ++getViewRequestIdRef.current;
+      const isStale = () => getViewRequestIdRef.current !== requestId;
+
       try {
         abortControllers.current.usersAbortController?.abort();
         abortControllers.current.groupsAbortController?.abort();
@@ -460,12 +424,11 @@ const View = ({
 
           view = "profile";
         } else if (isChatPage) {
-          await Promise.all([
-            getFilesRef.current(),
-            initToolsRef.current(),
-            initChatsRef.current(),
-            initMessagesRef.current(),
-          ]);
+          try {
+            await getFilesRef.current();
+          } catch {
+            // chat renders without file data
+          }
 
           view = "chat";
 
@@ -483,6 +446,10 @@ const View = ({
           clearFiles();
         }
 
+        // A newer getView() run has since started (and aborted this one's
+        // requests) — let it own the loading state instead of stomping on it.
+        if (isStale()) return;
+
         if (view) {
           setCurrentView(view);
           setCurrentClientView(view);
@@ -496,8 +463,16 @@ const View = ({
       } catch (error) {
         console.log(error);
         if ((error as Error).message === "canceled") {
+          // Only a superseded run should stay silent here; if this is still
+          // the latest run, nothing else will clear the loading indicator.
+          if (isStale()) return;
+
+          setIsChangePageRequestRunning(false);
+          setIsLoading(false);
           return;
         }
+
+        if (isStale()) return;
 
         const typedError = error as TError;
 
@@ -530,7 +505,8 @@ const View = ({
 
     const scroll = document.getElementsByClassName("section-body");
 
-    if (scroll && scroll[0]) {
+    // Don't steal focus while the user is typing (e.g. the search input).
+    if (scroll && scroll[0] && !isEditableElementFocused()) {
       const firstChild = scroll[0] as HTMLElement;
       firstChild.focus();
       setHotkeyCaret(null);
@@ -548,12 +524,12 @@ const View = ({
       toastr.info(
         <Trans
           t={t}
-          ns="AIRoom"
+          ns="Common"
           i18nKey="AgentInViewModeWarning"
           components={{
             strong: <strong />,
           }}
-          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("AIRoom:AIChat") }}
+          values={{ aiAgent: t("Common:AIAgent"), aiChat: t("Common:AIChat") }}
         />,
       );
     }
@@ -563,28 +539,6 @@ const View = ({
     showBodyLoader,
     t,
   ]);
-
-  const attachmentFile = React.useMemo(
-    () => aiAgentSelectorDialogProps?.file,
-    [aiAgentSelectorDialogProps?.file],
-  );
-
-  const onClearAttachmentFile = React.useCallback(() => {
-    setAiAgentSelectorDialogProps(false, null);
-  }, [setAiAgentSelectorDialogProps]);
-  // console.log("currentView", currentView);
-
-  const getResultStorageId = () => {
-    if (!selectedFolderStore.isAIRoom) return null;
-
-    if (resultId) return resultId;
-
-    return (
-      selectedFolderStore.folders?.find(
-        (folder) => folder.type === FolderType.ResultStorage,
-      )?.id || null
-    );
-  };
 
   const shouldRedirectToResultStorage =
     currentView === "chat" &&
@@ -614,17 +568,7 @@ const View = ({
               currentView={currentView}
             />
           ) : currentView === "chat" || selectedFolderStore.isAIRoom ? (
-            <AIAgentView
-              currentView={currentView}
-              isViewLoading={isLoading}
-              roomId={roomId}
-              attachmentFile={attachmentFile}
-              onClearAttachmentFile={onClearAttachmentFile}
-              toolsSettings={toolsSettings}
-              initChats={initChats}
-              messagesSettings={messagesSettings}
-              getResultStorageId={getResultStorageId}
-            />
+            <AIAgentView currentView={currentView} />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
           ) : (
@@ -653,14 +597,8 @@ export const ViewComponent = inject(
     setup,
     authStore,
     telegramStore,
-    dialogsStore,
     accessRightsStore,
-    settingsStore,
-    aiRoomStore,
   }: TStore) => {
-    const { resultId } = aiRoomStore;
-    const { aiConfig } = settingsStore;
-
     const { canUseChat } = accessRightsStore;
 
     const { usersStore, groupsStore } = peopleStore;
@@ -733,9 +671,6 @@ export const ViewComponent = inject(
 
     const { checkTg } = telegramStore;
 
-    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
-      dialogsStore;
-
     return {
       setContactsTab,
       getUsersList,
@@ -772,6 +707,7 @@ export const ViewComponent = inject(
       currentExtensionGallery,
 
       userId: userStore?.user?.id,
+      getEncryptionKeys: userStore?.getEncryptionKeys,
 
       selectedFolderStore,
 
@@ -798,12 +734,7 @@ export const ViewComponent = inject(
       setNotificationChannels,
       checkTg,
 
-      aiAgentSelectorDialogProps,
-      setAiAgentSelectorDialogProps,
-
       canUseChat,
-      aiConfig,
-      resultId,
     };
   },
 )(observer(View));

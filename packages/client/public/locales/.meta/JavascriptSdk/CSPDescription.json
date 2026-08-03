@@ -3,7 +3,7 @@
   "content": "Enter the address of the service where you'd like to embed or connect your {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "a26d626ec3c5f0e569e9b657e92364de7923d62c",
   "created_at": "2025-06-08T12:02:20.095Z",
-  "updated_at": "2026-04-11T21:16:02.937Z",
+  "updated_at": "2026-05-15T15:37:40.258Z",
   "comment": {
     "text": "This is a descriptive text displayed below a header in the Developer Tools settings. It explains where users can embed or connect their ONLYOFFICE DocSpace, with `{{organizationName}}` representing the user's organization name and `{{productName}}` representing \"DocSpace\".",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 178,
-      "context": "<>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: getBrandName(\"ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n <HelpButton\n className=\"csp-helpbutton\"",
+      "line_number": 145,
+      "context": "<>\n <div className={styles.categoryHeader}>\n {t(\"CSPHeader\", { productName: getBrandName(\"ProductName\") })}\n </div>\n <div className={classNames(styles.container, styles.descriptionHolder)}>\n {t(\"CSPDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n <HelpButton\n className=\"csp-helpbutton\"",
       "module": "/packages/client"
     }
   ],
@@ -77,7 +77,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,

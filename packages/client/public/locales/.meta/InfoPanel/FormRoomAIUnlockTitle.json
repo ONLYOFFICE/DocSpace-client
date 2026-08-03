@@ -3,7 +3,7 @@
   "content": "Unlock the power of AI",
   "content_en_sha1_hash": "c4674fef67806f6b97a7311347925e9464cb2148",
   "created_at": "2026-05-08T13:10:42.353Z",
-  "updated_at": "2026-05-08T19:46:45.001Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
   "comment": {
     "text": "Title in the Info Panel displayed when AI is not connected, serving as a call to action to enable AI features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
-      "line_number": 79,
+      "line_number": 88,
       "context": "<AIReactSvg className={styles.cardIcon} />\n {aiConnected\n ? isFile\n ? t(\"InfoPanel:FormRoomAIAnalyzeTitle\")\n : t(\"InfoPanel:FormRoomAIReadyTitle\")\n : t(\"InfoPanel:FormRoomAIUnlockTitle\")}\n </span>\n );\n \n const description = useMemo(() => {\n if (aiConnected) {",
       "module": "/packages/client"
     }

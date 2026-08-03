@@ -1,0 +1,29 @@
+{
+  "key_path": "Rebranding",
+  "content": "Rebranding options",
+  "content_en_sha1_hash": "d84670aba690ceafdab75a0304f5044accdd8300",
+  "created_at": "2026-07-27T13:07:48.512Z",
+  "updated_at": "2026-08-01T15:33:49.625Z",
+  "comment": {
+    "text": "Feature label within the DocsConnect subscription plan panel, representing an available customization option.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:03:11.262Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 562,
+      "context": "<div className={styles.devPackFeatureIcon} aria-hidden>\n <RebrandingSvg />\n </div>\n <div>\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"DocsConnect:Rebranding\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.secondaryText}>\n {t(\"DocsConnect:RebrandingDescription\")}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

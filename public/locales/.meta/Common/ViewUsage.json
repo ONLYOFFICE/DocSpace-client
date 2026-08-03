@@ -1,0 +1,47 @@
+{
+  "key_path": "ViewUsage",
+  "content": "View usage",
+  "content_en_sha1_hash": "972c8f47b5573786cca057ddc67ea96af3504eef",
+  "created_at": "2026-06-25T11:55:00.363Z",
+  "updated_at": "2026-08-01T15:33:49.796Z",
+  "comment": {
+    "text": "Clickable link label in the billing wallet section that navigates the user to their resource usage details.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:56:13.136Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "line_number": 91,
+      "context": "color=\"accent\"\n fontWeight={600}\n className={styles.cardLink}\n dataTestId=\"overview_view_usage_link\"\n >\n {t(\"ViewUsage\")}\n </Link>\n ) : null}\n </div>\n );\n };",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 184,
+      "context": "const contextMenuItems = scheduledChange\n ? [\n {\n key: \"usage\",\n label: t(\"Common:ViewUsage\"),\n iconNode: <StatisticsIcon />,\n onClick: onViewUsage,\n },\n ]\n : [",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 184,
+      "context": "const contextMenuItems = scheduledChange\n ? [\n {\n key: \"usage\",\n label: t(\"Common:ViewUsage\"),\n iconNode: <StatisticsIcon />,\n onClick: onViewUsage,\n },\n ]\n : [",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 298,
+      "context": "color=\"accent\"\n className={styles.viewUsageLink}\n dataTestId=\"wallet_view_usage_link\"\n fontWeight={600}\n >\n {t(\"ViewUsage\")}\n </Link>\n ) : null}\n </div>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

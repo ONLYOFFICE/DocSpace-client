@@ -3,7 +3,7 @@
   "content": "AI tools service successfully enabled.",
   "content_en_sha1_hash": "9a62f200a7539e34bc3515218fda64241b53fa78",
   "created_at": "2026-04-10T13:53:44.701Z",
-  "updated_at": "2026-05-08T13:10:45.732Z",
+  "updated_at": "2026-07-27T13:07:51.051Z",
   "comment": {
     "text": "This is a toast message confirming that the AI tools service has been successfully activated or enabled.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 366,
-      "context": "const getSuccessMessage = () => {\n if (confirmActionType === BACKUP_SERVICE) {\n return t(\"BackupServiceEnabled\");\n }\n if (confirmActionType === AI_ENUM) {\n return t(\"AIToolsEnabled\");\n }\n };\n \n try {\n const result = await paymentApi.changeTenantWalletServiceState({",
+      "line_number": 388,
+      "context": "setIsConfirmDialogVisible(false);\n };\n \n const getServiceSuccessMessage = (id: string) => {\n if (id === BACKUP_SERVICE) return t(\"BackupServiceEnabled\");\n if (id === AI_ENUM) return t(\"AIToolsEnabled\");\n return undefined;\n };\n \n const applyServiceStateChange = async (id: string, enabled: boolean) => {\n const raw: ChangeWalletServiceStateRequestDto = {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 174,
+      "line_number": 181,
       "context": "toastr.error(t(\"UnexpectedError\"));\n changeServiceState(AI_ENUM);\n return;\n }\n \n if (!isAiToolsServiceOn) toastr.success(t(\"AIToolsEnabled\"));\n \n await getAIConfig?.();\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));",
       "module": "/libs/ui-kit"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

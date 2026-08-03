@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 // @ts-nocheck
 
@@ -87,10 +96,25 @@ const DATE = "date";
 const TAGS = "tags";
 const LOCATION = "location";
 const AREA = "area";
+const PARENT_ID = "parentId";
+const FOLDER_TYPE = "folderType";
 
 // TODO: add next params
 // subjectGroup bool
 // subjectID
+
+// The `folderType` URL value can be a single string ("5"), a repeated-key
+// array (["16", "19"]) or a comma-joined string ("16,19") — normalize all
+// three into a number list for the API (`List<FolderType>` on the server).
+const parseFolderTypes = (value: unknown): number[] | null => {
+  if (value == null) return null;
+
+  const list = (Array.isArray(value) ? value : String(value).split(","))
+    .map(Number)
+    .filter((item) => !Number.isNaN(item));
+
+  return list.length ? list : null;
+};
 
 const getOtherSearchParams = () => {
   const searchParams = new URLSearchParams(window.location.search);
@@ -118,6 +142,8 @@ const getOtherSearchParams = () => {
     TAGS,
     LOCATION,
     AREA,
+    PARENT_ID,
+    FOLDER_TYPE,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -190,6 +216,10 @@ class FilesFilter {
   key: string | null = null;
 
   location: FilterLocation | null = null;
+
+  parentId: number | string | null;
+
+  folderType: number[] | null = null;
 
   static getDefault(
     options: {
@@ -298,6 +328,9 @@ class FilesFilter {
       sharedBy,
     );
 
+    if (urlFilter[PARENT_ID]) newFilter.parentId = urlFilter[PARENT_ID];
+    newFilter.folderType = parseFolderTypes(urlFilter[FOLDER_TYPE]);
+
     return newFilter;
   }
 
@@ -322,6 +355,7 @@ class FilesFilter {
     key = DEFAULT_KEY,
     location = DEFAULT_LOCATION,
     sharedBy = DEFAULT_SHARED_BY_TYPE,
+    parentId: number | string | null = null,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -343,6 +377,7 @@ class FilesFilter {
     this.key = key;
     this.location = location;
     this.sharedBy = sharedBy;
+    this.parentId = parentId;
   }
 
   getStartIndex = () => {
@@ -384,9 +419,9 @@ class FilesFilter {
       filterType ||
       (search ?? "").trim() ||
       authorType ||
-      applyFilterOption !== ApplyFilterOption.All
-        ? withSubfolders
-        : false;
+      (applyFilterOption != null && applyFilterOption !== ApplyFilterOption.All)
+        ? (withSubfolders ?? "false")
+        : "false";
 
     const userIdOrGroupId =
       authorType && authorType.includes("_")
@@ -411,6 +446,8 @@ class FilesFilter {
       searchArea,
       location,
       sharedBy,
+      parentId: this.parentId,
+      folderType: this.folderType,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -461,6 +498,8 @@ class FilesFilter {
     if (searchArea) dtoFilter[SEARCH_AREA] = searchArea;
     if (key) dtoFilter[KEY] = key;
     if (location) dtoFilter[LOCATION] = location;
+    if (this.parentId != null) dtoFilter[PARENT_ID] = this.parentId;
+    if (this.folderType != null) dtoFilter[FOLDER_TYPE] = this.folderType;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -494,7 +533,7 @@ class FilesFilter {
   }
 
   clone() {
-    return new FilesFilter(
+    const filter = new FilesFilter(
       this.page,
       this.pageCount,
       this.total,
@@ -515,7 +554,12 @@ class FilesFilter {
       this.key,
       this.location,
       this.sharedBy,
+      this.parentId,
     );
+
+    filter.folderType = this.folderType ? [...this.folderType] : null;
+
+    return filter;
   }
 
   equals(filter: FilesFilter) {
@@ -537,7 +581,8 @@ class FilesFilter {
       this.extension === filter.extension &&
       this.searchArea === filter.searchArea &&
       this.location === filter.location &&
-      this.sharedBy === filter.sharedBy;
+      this.sharedBy === filter.sharedBy &&
+      String(this.folderType ?? "") === String(filter.folderType ?? "");
 
     return equals;
   }

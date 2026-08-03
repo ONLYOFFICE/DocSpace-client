@@ -3,7 +3,7 @@
   "content": "New agent",
   "content_en_sha1_hash": "d200d92a331aabd52dfb0d7911c95be2fdd35eab",
   "created_at": "2025-10-27T16:14:17.785Z",
-  "updated_at": "2026-05-08T13:10:45.496Z",
+  "updated_at": "2026-07-31T12:36:29.352Z",
   "comment": {
     "text": "This is a button label or an item in a dropdown list. It allows users to create a new AI agent.",
     "is_auto": true,
@@ -13,33 +13,69 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/utils/hooks/useAgentsHelper.tsx",
-      "line_number": 184,
+      "line_number": 199,
       "context": "// if (withCreate && security.Create) {\n //   setTotal(total + 1);\n //   const createItem: TSelectorItem = {\n //     isCreateNewItem: true,\n //     label: createDefineLabel ?? t(\"NewAgent\"),\n //     id: \"create-room-item\",\n //     key: \"create-room-item\",\n //     hotkey: \"r\",\n //     // isRoomsOnly,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 733,
-      "context": "/>\n ) : isAIAgentsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-agent-button\")}\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onCreateAgent}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled || aiConfig.aiReadyNeedReset}\n size=\"small\"\n primary",
+      "line_number": 816,
+      "context": "/>\n ) : isAIAgentsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-agent-button\")}\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onMainButtonAgentClick}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 733,
-      "context": "/>\n ) : isAIAgentsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-agent-button\")}\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onCreateAgent}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled || aiConfig.aiReadyNeedReset}\n size=\"small\"\n primary",
+      "line_number": 816,
+      "context": "/>\n ) : isAIAgentsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-agent-button\")}\n id=\"rooms-shared_create-agent-button\"\n label={t(\"Common:NewAgent\")}\n onClick={onMainButtonAgentClick}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3770,
-      "context": "const options = isAIAgentsFolder\n ? [\n {\n key: \"new-agent\",\n label: t(\"Common:NewAgent\"),\n onClick: this.onCreateAgent,\n icon: CatalogAIAgentsReactSvgUrl,\n },\n ]\n : isRoomsFolder",
+      "file_path": "/packages/client/src/helpers/getSectionCreateButton.ts",
+      "line_number": 110,
+      "context": "if (!model || model.length === 0) return HIDDEN;\n \n return {\n showMainButton: true,\n mainButtonProps: {\n text: t(\"Common:NewAgent\"),\n isDropdown: false,\n model: [],\n onAction: () => onCreateAgent(),\n },\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
+      "line_number": 342,
+      "context": "const agentItems = React.useMemo<QuickActionItem[]>(\n () => [\n {\n id: \"quick-new-agent\",\n icon: <CreateAgentIcon />,\n label: t(\"Common:NewAgent\"),\n onClick: () => dispatchCreateAgent(currentFolderId),\n },\n ],\n [t, currentFolderId],\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1885,
+      "context": "const agentsMainButtonProps = React.useMemo(\n () => ({\n isDropdown: false,\n model: [],\n onAction: onCreateAgentFromFilter,\n text: t(\"Common:NewAgent\"),\n }),\n [t, onCreateAgentFromFilter],\n );\n \n if (showFilterLoader) return <FilterLoader />;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 408,
+      "context": "const options: (TContextOption | null)[] = isAIAgentsFolder\n ? [\n {\n key: \"new-agent\",\n label: t(\"Common:NewAgent\"),\n onClick: self.onCreateAgent,\n icon: CatalogAIAgentsReactSvgUrl,\n },\n ]\n : isFormsFolder",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditAgentStore.ts",
-      "line_number": 325,
-      "context": "color: (logo as { color: string }).color,\n }\n : null;\n \n const createAgentData = {\n title: title || t(\"Common:NewAgent\"),\n \n ...(quotaLimit && {\n quota: +quotaLimit,\n }),",
+      "line_number": 357,
+      "context": "color: (logo as { color: string }).color,\n }\n : null;\n \n const baseAgentData = {\n title: title || t(\"Common:NewAgent\"),\n \n ...(quotaLimit && {\n quota: +quotaLimit,\n }),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
+      "line_number": 179,
+      "context": "const mainButtonProps = React.useMemo<MainButtonProps>(\n () => ({\n isDropdown: false,\n model: [],\n onAction: onCreate,\n text: t(\"Common:NewAgent\", { defaultValue: \"New agent\" }),\n }),\n [t, onCreate],\n );\n \n const quickActionItems = React.useMemo<QuickActionItem[]>(",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
+      "line_number": 179,
+      "context": "const mainButtonProps = React.useMemo<MainButtonProps>(\n () => ({\n isDropdown: false,\n model: [],\n onAction: onCreate,\n text: t(\"Common:NewAgent\", { defaultValue: \"New agent\" }),\n }),\n [t, onCreate],\n );\n \n const quickActionItems = React.useMemo<QuickActionItem[]>(",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_store/CreateEditAgentStore.tsx",
+      "line_number": 359,
+      "context": "color: (logo as { color?: string }).color,\n }\n : null;\n \n const createAgentData: TCreateAgentWithProfileData = {\n title: title || t(\"Common:NewAgent\"),\n profileId,\n prompt: prompt ?? \"\",\n ...(quotaLimit && { quota: Number(quotaLimit) }),\n ...logoCover,\n ...(tagsToAddList.length && { tags: tagsToAddList }),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -173,7 +209,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

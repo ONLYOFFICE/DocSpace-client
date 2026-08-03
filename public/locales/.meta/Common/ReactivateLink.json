@@ -3,7 +3,7 @@
   "content": "Reactivate link",
   "content_en_sha1_hash": "f271b20a28fc605f08783c87c682440e160ccd0f",
   "created_at": "2026-02-18T14:56:09.264Z",
-  "updated_at": "2026-04-12T03:27:22.333Z",
+  "updated_at": "2026-05-15T14:00:06.937Z",
   "comment": {
     "text": "This is a button label that appears when a shared link has expired. Clicking it reactivates the link, making it accessible again.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 182,
+      "line_number": 191,
       "context": "fontSize=\"12px\"\n color={globalColors.lightBlueMain}\n onClick={onReactivate}\n dataTestId=\"expired_combo_box_remove_link\"\n >\n {t(\"Common:ReactivateLink\")}\n </Link>\n </Text>\n ) : (\n <Text\n className={styles.expireText}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

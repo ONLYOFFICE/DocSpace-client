@@ -1,6 +1,6 @@
 {
-  "AgentCreated": "Kreiran AI Agent",
-  "AgentDeleted": "AI Agent Obrisan",
+  "AgentCreated": "AI Agent kreiran",
+  "AgentDeleted": "AI Agent obrisan",
   "AgentUpdated": "Agent AI ažuriran",
   "Before": "Pre",
   "CreateWebhook": "Kreiraj webhook",
@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "Zaglavlje POST zahteva je uspešno kopirano u privremenu memoriju",
   "RequestPostBody": "Telo POST zahteva",
   "RequestPostHeader": "Zaglavlje POST zahteva",
-  "ResetKey": "Reset ključ",
   "Response": "Odgovor",
   "ResponseBodyCopied": "Telo odgovora POST zahteva uspešno kopirano u privremenu memoriju",
   "ResponseHeaderCopied": "Zaglavlje odgovora POST zahteva uspešno kopirano u privremenu memoriju",

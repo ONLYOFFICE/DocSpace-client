@@ -3,7 +3,7 @@
   "content": "Client-Side Encryption",
   "content_en_sha1_hash": "b8e10276e48f038db512681466dbafb12118bd5c",
   "created_at": "2025-05-26T07:15:40.353Z",
-  "updated_at": "2026-04-11T20:59:23.762Z",
+  "updated_at": "2026-05-15T14:00:06.925Z",
   "comment": {
     "text": "This is a label for a checkbox or radio button in the Amazon S3 storage settings. It refers to a method of encrypting data on the client side before it's sent to Amazon S3.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/amazon-settings/AmazonSettings.tsx",
-      "line_number": 91,
+      "line_number": 100,
       "context": "const serviceUrlPlaceholder = t(\"Common:ServiceUrl\");\n const SSEPlaceholder = t(\"Common:ServerSideEncryptionMethod\");\n const useHttpPlaceholder = t(\"Common:UseHttp\");\n const serverSideEncryption = t(\"Common:AmazonSSE\");\n const clientSideEncryption = t(\"Common:AmazonCSE\");\n \n const sseKms = \"SSE-KMS\";\n const sseS3 = \"SSE-S3\";\n \n const availableEncryptions = [",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

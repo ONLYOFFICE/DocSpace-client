@@ -3,7 +3,7 @@
   "content": "The selected guests will be moved to the {{membersSection}} section and assigned the User type. Users have their own {{documentsSection}} section, are able to create and edit files, but aren't able to create rooms.",
   "content_en_sha1_hash": "1dde646a293ab068dcf80ea51f4242d063d9863f",
   "created_at": "2025-05-19T21:30:56.916Z",
-  "updated_at": "2026-04-11T21:04:05.418Z",
+  "updated_at": "2026-07-07T08:59:21.717Z",
   "comment": {
     "text": "This is a message displayed in a dialog when changing the type of multiple selected guests to \"User\". It explains the implications of this change, with `{{membersSection}}` referring to a section name (e.g., \"Members\") and `{{documentsSection}}` referring to a section name (e.g., \"My Documents\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/getChangeTypeKey.ts",
-      "line_number": 34,
+      "line_number": 69,
       "context": "[EmployeeType.Owner]: \"\",\n },\n multiple: {\n [EmployeeType.RoomAdmin]: `${t(\"ChangeGuestsTypeToManagerMulti\", values)}`,\n [EmployeeType.Admin]: `${t(\"ChangeGuestsTypeToAdminMulti\", values)}`,\n [EmployeeType.User]: `${t(\"ChangeGuestsTypeMessageMulti\", values)}`,\n [EmployeeType.Guest]: \"\",\n [EmployeeType.Owner]: \"\",\n },\n };\n return translateKey[isSingle ? \"single\" : \"multiple\"][type];",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

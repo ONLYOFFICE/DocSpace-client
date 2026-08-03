@@ -1,34 +1,44 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
 import React from "react";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
+import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
   TGetColorTheme,
@@ -46,6 +56,15 @@ import type { TThemeProvider } from "@docspace/ui-kit/providers/theme";
 import { ApiProvider } from "@docspace/ui-kit/providers/api";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import {
+  isOAuthFrame,
+  requestAuthToken,
+} from "@docspace/shared/utils/oauthToken";
+import {
+  setAuthToken,
+  setWithCredentialsStatus,
+} from "@docspace/shared/api/client";
+import { installOAuthFetchInterceptor } from "@docspace/shared/utils/oauthFetchInterceptor";
 import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 
 import {
@@ -69,12 +88,13 @@ export type TContextData = {
   locale?: string;
   portalCultures: string[];
   authToken?: string;
-  initialLocaleResources?: Record<string, string>;
+  initialLocaleResources?: TTranslations;
 };
 
 export type TProviders = {
   children: React.ReactNode;
   contextData: TContextData;
+  oauthFrame?: boolean;
 };
 
 const getApiUrl = () => {
@@ -87,21 +107,15 @@ const getApiUrl = () => {
   return combineUrl(origin, proxy);
 };
 
-const Providers = ({ children, contextData }: TProviders) => {
+const Providers = ({ children, contextData, oauthFrame }: TProviders) => {
   const { user, settings, systemTheme, colorTheme, locale } = contextData;
 
   const requestedLng =
     locale || user?.cultureName || settings?.culture || "en";
 
   const [translations, setTranslations] = React.useState(() => {
-    const base = createInitialTranslations();
     const preloaded = contextData.initialLocaleResources;
-    if (preloaded && requestedLng !== "en") {
-      const next = new Map(base);
-      next.set(requestedLng, new Map([["Common", preloaded]]));
-      return next;
-    }
-    return base;
+    return preloaded ?? createInitialTranslations();
   });
 
   React.useEffect(() => {
@@ -138,8 +152,39 @@ const Providers = ({ children, contextData }: TProviders) => {
     document.body.classList.add(themeClass);
   }, []);
 
+  const oauthActive =
+    oauthFrame ?? (typeof window !== "undefined" && isOAuthFrame());
+
+  const [oauthToken, setOauthToken] = React.useState<string | null>(
+    oauthActive ? null : "",
+  );
+
+  React.useEffect(() => {
+    if (!oauthActive) return undefined;
+
+    let cancelled = false;
+    setWithCredentialsStatus(false);
+    installOAuthFetchInterceptor();
+
+    requestAuthToken().then((token) => {
+      if (cancelled) return;
+      if (token) setAuthToken(token);
+      setOauthToken(token ?? "");
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [oauthActive]);
+
   const apiUrl = getApiUrl();
-  const apiKey = getCookie("asc_auth_key") || contextData.authToken || "";
+  const apiKey = oauthActive
+    ? (oauthToken ?? "")
+    : getCookie("asc_auth_key") || contextData.authToken || "";
+
+  if (oauthActive && oauthToken === null) {
+    return null;
+  }
 
   return (
     <ApiProvider url={apiUrl} apiKey={apiKey} initSocket={false}>
@@ -160,6 +205,7 @@ const Providers = ({ children, contextData }: TProviders) => {
               <SDKConfigProvider>
                 {children}
                 <Toast isSSR />
+                <RootTooltip />
               </SDKConfigProvider>
             </ErrorProvider>
           </ThemeProvider>

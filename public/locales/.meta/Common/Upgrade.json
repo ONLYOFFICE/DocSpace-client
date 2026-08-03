@@ -1,0 +1,59 @@
+{
+  "key_path": "Upgrade",
+  "content": "Upgrade",
+  "content_en_sha1_hash": "a6f47e00e036c5589eb12e237894b37fb015d365",
+  "created_at": "2026-07-27T13:07:40.599Z",
+  "updated_at": "2026-08-01T15:33:49.631Z",
+  "comment": {
+    "text": "Button label and link text in the billing section used to prompt users to purchase a new plan or upgrade their current subscription.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:09:39.443Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 376,
+      "context": "</Text>\n </div>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:Upgrade\")}\n onClick={onBuyPlan}\n />\n </div>\n ) : (\n <Text className={styles.sectionTitle}>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 376,
+      "context": "</Text>\n </div>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:Upgrade\")}\n onClick={onBuyPlan}\n />\n </div>\n ) : (\n <Text className={styles.sectionTitle}>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 518,
+      "context": "e.stopPropagation();\n onClick?.(item.id!);\n }}\n dataTestId=\"docs_connect_buy_plan_link\"\n >\n {t(\"Upgrade\")}\n </Link>\n </>\n );\n } else if (isTrial) {\n docsConnectPrice = t(\"DocsConnectTrialDaysLeft\", {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 911,
+      "context": "isEditActive\n ? isScheduled\n ? t(\"Common:ScheduleChange\")\n : insufficientFunds\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\")\n : insufficientFunds\n ? info.deactivated\n ? t(\"Common:TopUpAndPay\")\n : t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\")",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 911,
+      "context": "isEditActive\n ? isScheduled\n ? t(\"Common:ScheduleChange\")\n : insufficientFunds\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\")\n : insufficientFunds\n ? info.deactivated\n ? t(\"Common:TopUpAndPay\")\n : t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\")",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 329,
+      "context": "</div>\n <Button\n primary\n className={styles.bannerButton}\n size={ButtonSize.small}\n label={t(\"Common:Upgrade\")}\n onClick={() => openBuyPlan?.(\"trial\")}\n testId=\"docs_connect_trial_upgrade_button\"\n />\n </div>\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

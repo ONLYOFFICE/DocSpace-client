@@ -1,3 +1,38 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -7,6 +42,7 @@ import {
   TOnFilter,
 } from "@docspace/ui-kit/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import { getFilterType } from "@docspace/ui-kit/components/filter/Filter.utils";
 import {
   FilterGroups,
@@ -24,27 +60,42 @@ import { PAGE_COUNT } from "@/utils/constants";
 type useFilesFiltersProps = {
   filesFilter: string;
   shareKey?: string;
+  currentFolderId?: string | number;
   filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
+  setClearSearch: (value: boolean) => void;
 };
 
 export default function useFilesFilter({
   filesFilter,
   shareKey,
+  currentFolderId,
   filesViewAs,
   setFilesViewAs,
+  setClearSearch,
 }: useFilesFiltersProps) {
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const [filter, setFilter] = React.useState<FilesFilter>(
-    FilesFilter.getFilter({ search: `?${filesFilter}`, pathname } as Location)!,
+  const parseFromLocation = React.useCallback(
+    (loc: Pick<Location, "search" | "pathname">) => {
+      const next = FilesFilter.getFilter(loc as Location)!;
+      if (currentFolderId != null) {
+        next.folder = String(currentFolderId);
+      }
+      return next;
+    },
+    [currentFolderId],
+  );
+
+  const [filter, setFilter] = React.useState<FilesFilter>(() =>
+    parseFromLocation({ search: `?${filesFilter}`, pathname }),
   );
 
   React.useEffect(() => {
-    setFilter(FilesFilter.getFilter(window.location)!);
-  }, [searchParams]);
+    setFilter(parseFromLocation(window.location));
+  }, [searchParams, parseFromLocation]);
 
   const onClearFilter = React.useCallback(() => {
     const defaultFilter = FilesFilter.getDefault();
@@ -58,8 +109,12 @@ export default function useFilesFilter({
 
     const urlFilter = defaultFilter.toUrlParams();
 
-    window.history.pushState(null, "", urlFilter);
-  }, [filter.folder, shareKey]);
+    window.history.pushState(null, "", `?${urlFilter}`);
+
+    frameCallEvent({ event: "onFilterSearch", data: { search: "" } });
+
+    setClearSearch(true);
+  }, [filter.folder, shareKey, setClearSearch]);
 
   const onSearch = React.useCallback(
     (value: string) => {
@@ -74,6 +129,8 @@ export default function useFilesFilter({
       const urlFilter = modifiedFilter.toUrlParams();
 
       window.history.pushState(null, "", `?${urlFilter}`);
+
+      frameCallEvent({ event: "onFilterSearch", data: { search: value } });
     },
     [filter],
   );
@@ -234,6 +291,25 @@ export default function useFilesFilter({
   const getSelectedFilterData = React.useCallback(() => {
     const filterValues: TItem[] = [];
 
+    const sp = new URLSearchParams(window.location.search);
+    const tagsRaw = sp.get("tags");
+    if (tagsRaw) {
+      try {
+        const parsed = JSON.parse(tagsRaw);
+        if (Array.isArray(parsed)) {
+          parsed.forEach((tag: string) => {
+            filterValues.push({
+              key: `tag-${tag}`,
+              label: tag,
+              group: FilterGroups.roomFilterTags,
+            });
+          });
+        }
+      } catch {
+        // ignore
+      }
+    }
+
     if (filter.filterType) {
       let label = "";
 
@@ -283,7 +359,7 @@ export default function useFilesFilter({
     }
 
     return filterValues;
-  }, [filter.filterType, t]);
+  }, [filter.filterType, t, searchParams]);
 
   const initSelectedFilterData = React.useMemo(
     () => getSelectedFilterData(),
@@ -295,13 +371,13 @@ export default function useFilesFilter({
       {
         id: "view-switch_rows",
         value: "row",
-        label: t("Files:ViewList"),
+        label: t("Common:ViewList"),
         icon: <ViewRowsReactSvg />,
       },
       {
         id: "view-switch_tiles",
         value: "tile",
-        label: t("Files:ViewTiles"),
+        label: t("Common:ViewTiles"),
         icon: <ViewTilesReactSvg />,
       },
     ];
@@ -319,7 +395,7 @@ export default function useFilesFilter({
   }, [setFilesViewAs, filesViewAs]);
 
   const removeSelectedItem = React.useCallback(
-    ({ group }: { key: string | number; group?: FilterGroups }) => {
+    ({ key, group }: { key: string | number; group?: FilterGroups }) => {
       const newFilter = filter.clone();
 
       if (group === FilterGroups.filterType) {
@@ -337,9 +413,36 @@ export default function useFilesFilter({
 
       setFilter(newFilter);
 
-      const urlFilter = newFilter.toUrlParams();
+      const sp = new URLSearchParams(newFilter.toUrlParams());
 
-      window.history.pushState(null, "", `?${urlFilter}`);
+      if (group === FilterGroups.roomFilterTags) {
+        const tagsRaw = window.location.search
+          ? new URLSearchParams(window.location.search).get("tags")
+          : null;
+        if (tagsRaw) {
+          try {
+            const parsed = JSON.parse(tagsRaw);
+            if (Array.isArray(parsed)) {
+              const removed = String(key).replace(/^tag-/, "");
+              const remaining = parsed.filter((t: string) => t !== removed);
+              if (remaining.length) {
+                sp.set("tags", JSON.stringify(remaining));
+              } else {
+                sp.delete("tags");
+              }
+            }
+          } catch {
+            sp.delete("tags");
+          }
+        }
+      } else {
+        const existingTags = new URLSearchParams(window.location.search).get(
+          "tags",
+        );
+        if (existingTags) sp.set("tags", existingTags);
+      }
+
+      window.history.pushState(null, "", `?${sp.toString()}`);
     },
     [filter],
   );
@@ -365,3 +468,4 @@ export default function useFilesFilter({
     initSelectedFilterData,
   };
 }
+

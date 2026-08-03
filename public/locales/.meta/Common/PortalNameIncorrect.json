@@ -1,35 +1,14 @@
 {
-  "key_path": "PortalNameIncorrect",
-  "content": "Incorrect account name",
-  "content_en_sha1_hash": "514e507c4bfba26b6fec61ecedbb846fb1c81756",
-  "created_at": "2025-05-19T21:30:52.239Z",
-  "updated_at": "2026-04-23T17:24:01.925Z",
   "comment": {
     "text": "Error message displayed when the entered portal name does not meet the validation requirements (e.g., contains invalid characters).",
     "is_auto": true,
     "updated_at": "2026-04-11T20:46:17.112Z",
     "model": "google/gemini-2.5-flash"
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 263,
-      "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 263,
-      "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 226,
-      "context": "minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):\n return setError(t(\"Common:PortalNameIncorrect\"));\n \n default:\n setError(null);\n }\n return validName.test(value);",
-      "module": "/packages/shared"
-    }
-  ],
+  "content": "Incorrect account name",
+  "content_en_sha1_hash": "514e507c4bfba26b6fec61ecedbb846fb1c81756",
+  "created_at": "2025-05-19T21:30:52.239Z",
+  "key_path": "PortalNameIncorrect",
   "languages": {
     "en": {
       "ai_translated": false,
@@ -161,7 +140,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -223,5 +202,26 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     }
-  }
+  },
+  "updated_at": "2026-06-15T19:31:56.086Z",
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 301,
+      "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"Common:PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 301,
+      "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"Common:PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 236,
+      "context": "minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):\n return setError(t(\"Common:PortalNameIncorrect\"));\n \n default:\n setError(null);\n }\n return validName.test(value);",
+      "module": "/packages/shared"
+    }
+  ]
 }

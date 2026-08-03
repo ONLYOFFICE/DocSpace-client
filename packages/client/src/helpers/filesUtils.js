@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import CloudServicesGoogleDriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.google.drive.react.svg?url";
 import CloudServicesBoxReactSvgUrl from "PUBLIC_DIR/images/cloud.services.box.react.svg?url";
@@ -85,6 +94,43 @@ export const getDefaultFileName = (format) => {
       return i18n.t("Common:NewPDFForm");
     default:
       return i18n.t("Common:NewFolder");
+  }
+};
+
+export const getDefaultFileTestIdPrefix = (format) => {
+  switch (format) {
+    case "docx":
+      return "new_document";
+    case "xlsx":
+      return "new_spreadsheet";
+    case "pptx":
+      return "new_presentation";
+    case "pdf":
+      return "new_pdf_form";
+    default:
+      return "new_folder";
+  }
+};
+
+export const getPluginFileTestIdPrefix = (extension) =>
+  extension ? `new_${extension.replace(/^\./, "")}` : "new_folder";
+
+export const getCreateModalEntityType = (extension) => {
+  switch (extension) {
+    case "docx":
+      return "document";
+    case "xlsx":
+      return "spreadsheet";
+    case "pptx":
+      return "presentation";
+    case "pdf":
+      return "pdf-form";
+    case "":
+    case null:
+    case undefined:
+      return "folder";
+    default:
+      return null;
   }
 };
 
@@ -189,31 +235,6 @@ export const connectedCloudsTypeIcon = (key) => {
   }
 };
 
-export const calculateRoomLogoParams = (img, x, y, zoom) => {
-  let imgWidth;
-  let imgHeight;
-  let dimensions;
-  if (img.width > img.height) {
-    imgWidth = Math.min(1280, img.width);
-    imgHeight = Math.round(img.height / (img.width / imgWidth));
-    dimensions = Math.round(imgHeight / zoom);
-  } else {
-    imgHeight = Math.min(1280, img.height);
-    imgWidth = Math.round(img.width / (img.height / imgHeight));
-    dimensions = Math.round(imgWidth / zoom);
-  }
-
-  const croppedX = Math.round(x * imgWidth - dimensions / 2);
-  const croppedY = Math.round(y * imgHeight - dimensions / 2);
-
-  return {
-    x: croppedX,
-    y: croppedY,
-    width: dimensions,
-    height: dimensions,
-  };
-};
-
 export const removeSeparator = (options) => {
   const newOptions = options.map((o, index) => {
     if (index === 0 && o.includes("separator")) {
@@ -262,6 +283,7 @@ export const getOperationsProgressTitle = (type, progress) => {
     upload,
     convert,
     deleteVersionFile,
+    roomReencryption,
   } = OPERATIONS_NAME;
   switch (type) {
     case trash:
@@ -283,13 +305,16 @@ export const getOperationsProgressTitle = (type, progress) => {
     case upload:
       if (progress > 0 && progress < 100)
         return i18n.t("Files:UploadingProgress", { progress });
-      return i18n.t("Files:Uploading");
+      return i18n.t("Common:Uploading");
     case convert:
       return i18n.t("Files:Converting");
     case deleteVersionFile:
       return i18n.t("Files:DeletingVersion");
+    case roomReencryption:
+      return i18n.t("Common:ReEncryptingFiles");
 
     default:
       return i18n.t("Files:OtherProcesses");
   }
 };
+

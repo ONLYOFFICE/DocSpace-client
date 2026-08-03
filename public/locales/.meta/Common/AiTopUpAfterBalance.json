@@ -1,0 +1,29 @@
+{
+  "key_path": "AiTopUpAfterBalance",
+  "content": "After top-up",
+  "content_en_sha1_hash": "19e14d2648f1b2a75fcc0ccfd92f491c18ee8c84",
+  "created_at": "2026-05-15T13:59:46.478Z",
+  "updated_at": "2026-05-15T14:01:23.239Z",
+  "comment": {
+    "text": "Label in the AI top-up dialog indicating the balance amount that will be available after the transaction is completed.",
+    "is_auto": true,
+    "updated_at": "2026-05-15T14:01:23.239Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AiSimpleTopUpDialog.tsx",
+      "line_number": 230,
+      "context": "{t(\"AiTopUpMinimum\", { amount: MIN_AMOUNT })}\n </Text>\n \n <div className={styles.afterRow}>\n <Text fontSize=\"13px\" className={styles.balanceRowLabel}>\n {t(\"AiTopUpAfterBalance\")}\n </Text>\n <Text\n fontSize=\"13px\"\n fontWeight={700}\n className={styles.afterValue}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

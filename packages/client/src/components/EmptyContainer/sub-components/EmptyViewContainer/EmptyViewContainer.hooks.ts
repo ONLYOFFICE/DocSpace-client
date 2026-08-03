@@ -1,31 +1,41 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import { useMemo, useCallback } from "react";
-import { useNavigate, LinkProps } from "react-router";
+import { useMemo, useCallback, useRef } from "react";
+import { useNavigate, useLocation, LinkProps } from "react-router";
+import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -40,11 +50,13 @@ import {
 } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import type { TTranslation } from "@docspace/shared/types";
 import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
 
 import {
   getDescription,
@@ -78,11 +90,18 @@ export const useEmptyView = (
     isPortalAdmin,
     aiReady,
     standalone,
+    isCardLinkedToPortal,
+    isPayer,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
 ) => {
   const { isBase } = useTheme();
+
+  const hasAiProfiles = useHasAiProfiles();
+  const isAiReady = standalone ? hasAiProfiles : aiReady;
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -105,9 +124,12 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName,
     );
     const title = getTitle(
       type,
@@ -123,7 +145,7 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
-      aiReady,
+      isAiReady,
       standalone,
       isPortalAdmin,
     );
@@ -138,6 +160,8 @@ export const useEmptyView = (
       rootFolderType,
       security,
       isResultsTab,
+      isKnowledgeTab,
+      isAIRoom,
     );
 
     return { description, title, icon };
@@ -156,6 +180,12 @@ export const useEmptyView = (
     isAIRoom,
     isKnowledgeTab,
     isResultsTab,
+    isAiReady,
+    standalone,
+    isPortalAdmin,
+    isPayer,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
   ]);
 
   return emptyViewOptions;
@@ -198,10 +228,37 @@ export const useOptions = (
     aiReady,
     standalone,
     isPortalAdmin,
+    isGracePeriod,
+    knowledgeId,
+    startUpload,
+    createFoldersTree,
+    isCardLinkedToPortal,
+    isPayer,
+    enableAIService,
+    getAIConfig,
+    refreshCurrentFolder,
+    refreshPaymentInfo,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const getTrashSection = () => {
+    if (pathname.includes("/ai-agents/trash")) return "agents";
+    if (pathname.includes("/forms/trash")) return "forms";
+    if (pathname.includes("/rooms/trash")) return "rooms";
+    return "personal";
+  };
+
+  const trashSectionRef = useRef<"personal" | "rooms" | "forms" | "agents">(
+    "personal",
+  );
+  if (pathname.includes("/trash")) trashSectionRef.current = getTrashSection();
+  const trashSection = trashSectionRef.current;
+
+  const hasAiProfiles = useHasAiProfiles();
+  const isAiReady = standalone ? hasAiProfiles : aiReady;
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -229,13 +286,58 @@ export const useOptions = (
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
+  const onGoToForms = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
+    newFilter.searchArea = RoomSearchArea.Forms;
+
+    return {
+      to: {
+        pathname: "/forms/filter",
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
+
+  const onGoToAgents = useCallback((): LinkProps => {
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
+    newFilter.searchArea = RoomSearchArea.AIAgents;
+
+    return {
+      to: {
+        pathname: getCategoryUrl(CategoryType.AIAgents),
+        search: newFilter.toUrlParams(userId, false),
+      },
+    };
+  }, [userId]);
+
   const onGoToServices = useCallback(() => {
     return navigate("/portal-settings/payments/services");
   }, []);
 
   const onGoToAIProviderSettings = useCallback(() => {
-    return navigate("/portal-settings/ai-settings/providers");
+    return navigate("/portal-settings/ai-settings/ai-models");
   }, []);
+
+  const {
+    onActivateAI,
+    onTopUpAndActivateAI,
+    onShowAIBenefits,
+    onDialogActivate,
+    onAIActivated,
+    isActivating,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+  } = useAIActivation({
+    enableAIService,
+    getAIConfig,
+    refreshCurrentFolder,
+    refreshPaymentInfo,
+    isCardLinkedToPortal,
+    parentId: selectedFolder?.id,
+    context: "empty_state",
+  });
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -265,19 +367,27 @@ export const useOptions = (
       return;
     }
 
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: selectedFolder?.id, context: "empty_state" },
+    }) as CustomEvent & { payload?: { startRoomType: RoomsType } };
+    // In the "Forms" section only Form Filling Rooms can be created.
+    if (window.location.pathname.startsWith("/forms")) {
+      event.payload = { startRoomType: RoomsType.FormRoom };
+    }
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible]);
+  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const onCreateAIAgent = useCallback(() => {
-    if (isWarningRoomsDialog) {
+    if (isGracePeriod) {
       setQuotaWarningDialogVisible(true);
       return;
     }
 
-    const event = new Event(Events.AGENT_CREATE);
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: { parentId: selectedFolder?.id, context: "empty_state" },
+    });
     window.dispatchEvent(event);
-  }, []);
+  }, [isGracePeriod, setQuotaWarningDialogVisible, selectedFolder?.id]);
 
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
@@ -305,7 +415,14 @@ export const useOptions = (
       filterParam: FilesSelectorFilterTypes | FilterType | string,
       openRoot: boolean = true,
     ) => {
-      setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
+      // type-only cast — this hook's signature also accepts a
+      // plain string; every actual caller passes a FilesSelectorFilterTypes /
+      // FilterType value, which is what the store expects.
+      setSelectFileFormRoomDialogVisible?.(
+        true,
+        filterParam as FilesSelectorFilterTypes | FilterType,
+        openRoot,
+      );
     },
     [setSelectFileFormRoomDialogVisible],
   );
@@ -313,6 +430,35 @@ export const useOptions = (
   const uploadFromDocspaceAiKnowledge = useCallback(() => {
     setSelectFileAiKnowledgeDialogVisible?.(true);
   }, [setSelectFileAiKnowledgeDialogVisible]);
+
+  // Device upload for the agent knowledge tab. The new-concept client has no
+  // article main button (its hidden `.custom-file-input-article` that
+  // `onUploadAction` relies on), so build a transient file input and upload
+  // straight into the knowledge folder (`knowledgeId`) — same target the SDK
+  // knowledge device upload uses.
+  const uploadFromDeviceAiKnowledge = useCallback(() => {
+    if (!knowledgeId) return;
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.multiple = true;
+    input.style.display = "none";
+
+    input.onchange = async (e) => {
+      try {
+        const files = await getFilesFromEvent(e);
+        const tree = await createFoldersTree(t, files);
+        if (tree.length > 0) startUpload(tree, knowledgeId, t);
+      } catch (err) {
+        toastr.error(err as string, undefined, 0, true);
+      } finally {
+        input.remove();
+      }
+    };
+
+    document.body.appendChild(input);
+    input.click();
+  }, [knowledgeId, createFoldersTree, startUpload, t]);
 
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
@@ -341,7 +487,15 @@ export const useOptions = (
   const createAndCopySharedLink = useCallback(() => {
     if (!selectedFolder) return;
 
-    onCreateAndCopySharedLink?.(selectedFolder, t);
+    // TSelectedFolder (id: number | null) is consumed by the
+    // ContextOptionsStore item view-model type — the cast keeps the original
+    // unchecked call from the .js era.
+    onCreateAndCopySharedLink?.(
+      selectedFolder as unknown as Parameters<
+        NonNullable<typeof onCreateAndCopySharedLink>
+      >[0],
+      t,
+    );
   }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
   const onOpenAccessSettings = () => {
@@ -366,6 +520,7 @@ export const useOptions = (
           onCreate,
           uploadFromDocspace,
           uploadFromDocspaceAiKnowledge,
+          uploadFromDeviceAiKnowledge,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
@@ -374,10 +529,15 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onGoToForms,
+          onGoToAgents,
           onOpenAccessSettings,
           onCreateAIAgent,
           onGoToServices,
           onGoToAIProviderSettings,
+          onTopUpAndActivateAI,
+          onActivateAI,
+          onShowAIBenefits,
         },
         logoText,
         isVisitor,
@@ -385,9 +545,13 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
-        aiReady,
+        isAiReady,
         standalone,
         isPortalAdmin,
+        trashSection,
+        isCardLinkedToPortal,
+        isPayer,
+        isActivating,
       ),
     [
       type,
@@ -404,6 +568,7 @@ export const useOptions = (
       onOpenAccessSettings,
       uploadFromDocspace,
       uploadFromDocspaceAiKnowledge,
+      uploadFromDeviceAiKnowledge,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,
@@ -413,15 +578,32 @@ export const useOptions = (
       navigate,
       onGoToPersonal,
       onGoToShared,
+      onGoToForms,
+      onGoToAgents,
+      trashSection,
       isVisitor,
       isFrame,
       logoText,
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      isAiReady,
+      standalone,
+      isPortalAdmin,
+      isCardLinkedToPortal,
+      isPayer,
+      isActivating,
     ],
   );
 
-  return options;
+  return {
+    options,
+    aiFeaturesDialogVisible,
+    onCloseAIFeaturesDialog,
+    onDialogActivate,
+    simpleTopUpDialogVisible,
+    onCloseSimpleTopUpDialog,
+    onAIActivated,
+    isActivating,
+  };
 };
-

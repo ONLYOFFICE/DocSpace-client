@@ -11,7 +11,7 @@
   "DeleteProfileSuccessDescription": "Contul dvs {{productName}} a fost dezactivat cu succes. Proprietarul sau administratorul {{productName}} poate șterge definitiv contul dvs dezactivat.",
   "DeleteProfileSuccessMessage": "Contul dvs a fost șters cu succes.",
   "DeleteProfileSuccessMessageInfo": "Vă invităm să luați la cunoștință <1>Politica de confidențialitate</1> ca să aflați mai multe despre suprimarea contului și datelor asociate contului.",
-  "EmailAndPasswordCopiedToClipboard": "Adresa de e-mail și parola sunt copiate în clipboard  ",
+  "EmailAndPasswordCopiedToClipboard": "Adresa de e-mail și parola sunt copiate în clipboard",
   "EnterAppCodeDescription": "Introduceți un cod de verificare din șase cifre gererat cu aplicația dvs. Dacă nu aveți acces la telefonul dvs, folosiți un cod de rezervă.",
   "EnterAppCodeTitle": "Introduceți codul din aplicația de autentificare",
   "EnterCodePlaceholder": "Introduceți codul",
@@ -38,6 +38,7 @@
   "TermsAndConditions": "Dacă continuați, acceptați că sunteți de acord cu <1>Termenii si conditiile de utilizare</1> și <2>Politica de confidentialitate</2> a companiei.",
   "TfaSubTitle": "Urmați aceste pașii simpli pentru a continua să lucrați în acest {{productName}}:",
   "TfaTitle": "Autentificarea cu doi factori este activată pentru accesul securizat",
+  "UserAlreadyInvited": "Ați fost deja invitat. Vă rugăm să finalizați înregistrarea folosind linkul din e-mail.",
   "VerifyConnection": "Verificați conexiunea",
   "VerifyConnectionDescription": "Introduceți codul din 6 cifre generat de aplicația dvs de autentificare în câmpul de mai jos pentru a finaliza configurarea."
 }

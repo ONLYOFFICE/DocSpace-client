@@ -1,0 +1,29 @@
+{
+  "key_path": "EnableAIFeatures",
+  "content": "Enable AI features",
+  "content_en_sha1_hash": "0e973d7c99717332ecc709cfeab0fc0f788380ae",
+  "created_at": "2026-06-25T11:54:49.386Z",
+  "updated_at": "2026-07-27T13:07:51.055Z",
+  "comment": {
+    "text": "Title of a toggle section in the billing settings used to activate or deactivate AI services.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:13:22.037Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 274,
+      "context": ") : null}\n \n <ServiceToggleSection\n isEnabled={isAiToolsServiceOn}\n onToggle={onToggleChange}\n title={t(\"EnableAIFeatures\")}\n description={t(\"EnableAIFeaturesDescription\")}\n testId=\"service-ai-toggle-button\"\n isDisabled={isDisabled}\n withBottomMargin={withBottomMargin}\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

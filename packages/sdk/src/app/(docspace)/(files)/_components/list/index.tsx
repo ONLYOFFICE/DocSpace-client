@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 import React from "react";
 import { observer } from "mobx-react";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -62,6 +71,14 @@ const List = ({
   shareKey,
   total: totalProp,
   current,
+  currentUserId,
+  withoutFavorite,
+  infoPanelVisible,
+  allowedContextOptions,
+  allowedFolderContextOptions,
+  emptyView,
+  isPrivate,
+  hasEncryptionKeys,
 }: ListProps) => {
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
@@ -71,7 +88,7 @@ const List = ({
   const { setIsEmptyList, filesViewAs, setFilesViewAs, currentDeviceType } =
     useSettingsStore();
   const filesListStore = useFilesListStore();
-  const { setItems, setRootFolderType } = filesListStore;
+  const { setItems, setRootFolderType, setPathParts, setCurrentFolder } = filesListStore;
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
   const navigationStore = useNavigationStore();
 
@@ -90,7 +107,8 @@ const List = ({
     filesSettings,
   });
 
-  const rootFolderType = filesListStore.rootFolderType ?? current.rootFolderType;
+  const rootFolderType =
+    filesListStore.rootFolderType ?? current.rootFolderType;
   const rootFolderTypeRef = React.useRef(rootFolderType);
   rootFolderTypeRef.current = rootFolderType;
 
@@ -101,6 +119,11 @@ const List = ({
     isRecentSection: rootFolderType === FolderType.Recent,
     isTrashSection: rootFolderType === FolderType.TRASH,
     isDocsSection: rootFolderType === FolderType.USER,
+    isShareSection: rootFolderType === FolderType.SHARE,
+    withoutFavorite,
+    allowedContextOptions,
+    allowedFolderContextOptions,
+    isPrivate,
   });
 
   const [filter, setFilter] = React.useState<FilesFilter>(
@@ -110,15 +133,18 @@ const List = ({
     } as Location)!,
   );
   const [filesList, setFilesList] = React.useState<(TFolderItem | TFileItem)[]>(
-    [...folders.map(convertFolderToItem), ...files.map((file) => convertFileToItem(file))],
+    [
+      ...folders.map(convertFolderToItem),
+      ...files.map((file) => convertFileToItem(file)),
+    ],
   );
   const [total, setTotal] = React.useState<number>(totalProp);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(
     filesList.length < total,
   );
-  const [currentFolderId, setCurrentFolderId] = React.useState<
-    string | number
-  >(current.id);
+  const [currentFolderId, setCurrentFolderId] = React.useState<string | number>(
+    current.id,
+  );
 
   const requestRunning = React.useRef(false);
   const isInit = React.useRef(false);
@@ -142,6 +168,13 @@ const List = ({
     requestRunning.current = true;
     const newFilter = FilesFilter.getFilter(window.location)!;
 
+    const urlHasFolder = new URLSearchParams(window.location.search).has(
+      "folder",
+    );
+    if (!urlHasFolder) {
+      newFilter.folder = String(currentFolderId);
+    }
+
     newFilter.page = 0;
     newFilter.pageCount = PAGE_COUNT;
 
@@ -160,10 +193,12 @@ const List = ({
         folders: newFolders,
         total: newTotal,
         current: newCurrent,
+        pathParts: newPathParts,
       } = res;
 
       if (newCurrent?.id) {
         setCurrentFolderId(newCurrent.id);
+        navigationStore.setCurrentFolderId(newCurrent.id);
       }
 
       if (newCurrent?.title) {
@@ -175,12 +210,16 @@ const List = ({
         rootFolderTypeRef.current = newCurrent.rootFolderType;
       }
 
+      setPathParts(newPathParts ?? null);
+      if (newCurrent) setCurrentFolder(newCurrent);
+
       const newItems = [
         ...newFolders.map(convertFolderToItem),
         ...newFiles.map((file) =>
           convertFileToItem(file, {
             isRecentSection: rootFolderTypeRef.current === FolderType.Recent,
-            isFavoritesSection: rootFolderTypeRef.current === FolderType.Favorites,
+            isFavoritesSection:
+              rootFolderTypeRef.current === FolderType.Favorites,
           }),
         ),
       ];
@@ -204,6 +243,8 @@ const List = ({
     navigationStore,
     setCurrentFolderId,
     setRootFolderType,
+    setPathParts,
+    setCurrentFolder,
   ]);
 
   const fetchMoreFiles = React.useCallback(async () => {
@@ -280,9 +321,20 @@ const List = ({
     setRootFolderType(current.rootFolderType);
   }, [current.rootFolderType, setRootFolderType]);
 
-  const visibleItems = filesListStore.items.length > 0 ? filesListStore.items : filesList;
+  React.useEffect(() => {
+    setCurrentFolder(current);
+  }, [current, setCurrentFolder]);
+
+  const visibleItems =
+    filesListStore.items.length > 0 ? filesListStore.items : filesList;
 
   if (visibleItems.length === 0) {
+    // Filtered searches always use the standard EmptyView ("no results"
+    // copy is generic). Override only fires when the folder itself is
+    // empty, so private rooms can swap in their E2EE benefits view.
+    if (!filter.isFiltered() && emptyView) {
+      return <>{emptyView}</>;
+    }
     return (
       <EmptyView
         current={current}
@@ -302,6 +354,9 @@ const List = ({
         fetchMoreFiles={fetchMoreFiles}
         filesLength={visibleItems.length}
         getIcon={getIcon}
+        isPrivate={isPrivate}
+        hasEncryptionKeys={hasEncryptionKeys}
+        currentUserId={currentUserId}
       />
     );
   }
@@ -327,6 +382,11 @@ const List = ({
         timezone={timezone}
         displayFileExtension={displayFileExtension}
         fetchMoreFiles={fetchMoreFiles}
+        currentUserId={currentUserId}
+        infoPanelVisible={infoPanelVisible}
+        isPrivate={isPrivate}
+        hasEncryptionKeys={hasEncryptionKeys}
+        rootFolderType={rootFolderType}
       />
     );
   }
@@ -340,6 +400,9 @@ const List = ({
       timezone={timezone}
       displayFileExtension={displayFileExtension}
       fetchMoreFiles={fetchMoreFiles}
+      isPrivate={isPrivate}
+      hasEncryptionKeys={hasEncryptionKeys}
+      currentUserId={currentUserId}
     />
   );
 };

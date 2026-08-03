@@ -2,30 +2,24 @@
   "key_path": "ReviewAccountDetails",
   "content": "Please take a moment to review your account details:",
   "content_en_sha1_hash": "f9bcd9e44c5ea626e9028da56100bd8e43de65b8",
-  "created_at": "2025-05-19T21:30:50.036Z",
-  "updated_at": "2026-04-11T21:48:30.675Z",
+  "created_at": "2026-06-02T22:18:00.435Z",
+  "updated_at": "2026-07-07T08:59:21.757Z",
   "comment": {
-    "text": "This is a line of text in a dialog box, prompting the user to check their account information after social authentication.",
+    "text": "Instructional text within the SocialAuthWelcomeDialog that precedes the display of user account information.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:27:07.210Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-02T22:21:49.393Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 113,
-      "context": "ref={imageRef}\n />\n </div>\n \n <Text className=\"welcome-text\" textAlign=\"center\">\n {t(\"SocialAuthWelcomeDialog:ReviewAccountDetails\")}\n </Text>\n \n <div className=\"account-details\">\n <StyledInfoRow className=\"welcome-product-name\">\n <Text className=\"welcome-text\">",
+      "line_number": 145,
+      "context": "ref={imageRef}\n />\n </div>\n \n <Text className=\"welcome-text\" textAlign=\"center\">\n {t(\"SocialAuthWelcomeDialog:ReviewAccountDetails\")}\n </Text>\n \n <div className=\"account-details\">\n <div className={`${styles.infoRow} welcome-product-name`}>\n <Text className=\"welcome-text\">",
       "module": "/packages/client"
     }
   ],
   "languages": {
     "en": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -88,15 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_script",
-          "description": "Translation for hy-AM contains only Latin/ASCII characters — likely untranslated",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:29.441Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -108,15 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \":\" but translation ends with \"。\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:48:30.667Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -162,6 +140,12 @@
       "approved_at": null
     },
     "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

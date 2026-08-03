@@ -2,18 +2,18 @@
   "key_path": "NoMCPServersDescription",
   "content": "Please connect {{mcpServers}} in {{productName}} settings to use them in the {{aiAgent}}.",
   "content_en_sha1_hash": "cb7d0b5345d622db847157a2457d0c1cff8e3cce",
-  "created_at": "2025-12-19T10:16:33.807Z",
-  "updated_at": "2026-04-11T20:47:54.950Z",
+  "created_at": "2026-06-01T21:20:26.047Z",
+  "updated_at": "2026-07-27T13:07:51.097Z",
   "comment": {
-    "text": "This is an empty state description that appears when no MCP servers are connected. It instructs the user to connect servers in the settings to use them with the AI Agent. `{{mcpServers}}` refers to \"MCP servers\", `{{productName}}` is the product's brand name, and `{{aiAgent}}` is the AI Agent feature.",
+    "text": "Empty screen description instructing the user to configure MCP servers in the product settings. Includes placeholders for the server title, product name, and AI agent name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:47:54.950Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-01T21:34:42.865Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 231,
+      "line_number": 228,
       "context": ")\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n productName: getBrandName(\"ProductName\"),\n aiAgent: t(\"AIAgent\"),\n })}\n searchEmptyScreenImage={",
       "module": "/libs/ui-kit"
     }

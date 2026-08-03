@@ -1,5 +1,40 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
 import React from "react";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
@@ -9,19 +44,16 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-type ReducedRightsDialogProps = {
-  visible: boolean;
-  adminName: string;
-  currentDeviceType: DeviceType;
-  setReducedRightsData: (visible: boolean, admin?: string) => void;
-};
+import { useStores } from "SRC_DIR/store/useStore";
 
-const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
-  visible,
-  adminName,
-  currentDeviceType,
-  setReducedRightsData,
-}) => {
+// Track D reference example: store consumption via useStores() instead of
+// the inject() HOC; observer() is still required for reactivity.
+const ReducedRightsDialog: React.FC = () => {
+  const { dialogsStore, settingsStore } = useStores();
+  const { reducedRightsData, setReducedRightsData } = dialogsStore;
+  const { currentDeviceType } = settingsStore;
+  const { visible, adminName } = reducedRightsData;
+
   const { t } = useTranslation(["Common", "Files"]);
 
   const onCloseDialog = () => {
@@ -61,7 +93,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
             t={t}
             ns="Files"
             i18nKey="PersonalContentRemovalNotice"
-            values={{ sectionName: t("Common:MyDocuments") }}
+            values={{ sectionName: t("Common:Files") }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />
         </Text>
@@ -82,7 +114,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
         />
         <Button
           key="RedirectButton"
-          label={t("Common:MyDocuments")}
+          label={t("Common:Files")}
           size={ButtonSize.normal}
           onClick={onRedirect}
           scale={currentDeviceType === DeviceType.mobile}
@@ -92,15 +124,5 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   );
 };
 
-export default inject(({ dialogsStore, settingsStore }: TStore) => {
-  const { reducedRightsData, setReducedRightsData } = dialogsStore;
-  const { currentDeviceType } = settingsStore;
-
-  return {
-    visible: reducedRightsData.visible,
-    adminName: reducedRightsData.adminName,
-    currentDeviceType,
-    setReducedRightsData,
-  };
-})(observer(ReducedRightsDialog));
+export default observer(ReducedRightsDialog);
 

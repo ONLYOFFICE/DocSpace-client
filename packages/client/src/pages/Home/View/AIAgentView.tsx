@@ -1,117 +1,82 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2026
+ * Copyright (C) Ascensio System SIA, 2009-2026
  *
- * This program is a free software product.
- * You can redistribute it and/or modify it under the terms
- * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
- * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
- * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
- * any third-party rights.
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
  *
- * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
- * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
- * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
  *
- * The  interactive user interfaces in modified source and object code versions of the Program must
- * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
  *
- * Pursuant to Section 7(b) of the License you must retain the original Product logo when
- * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
- * trademark law for use of our trademarks.
+ * No trademark rights are granted under this License.
  *
- * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
- * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
- * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Activity, useCallback } from "react";
+import { Activity } from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
+import { useStores } from "@onlyoffice/ai-chat";
 
-import type { TFile } from "@docspace/ui-kit/types";
-import type useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useToolsSettings";
-import type useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
-import type useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
-import Chat from "@docspace/ui-kit/ai-agent/chat";
-import type { AuthStore } from "@docspace/shared/store/AuthStore";
-import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import type { TUser } from "@docspace/shared/api/people/types";
+import NewChat from "@docspace/ui-kit/ai-agent/new-chat";
+
+import styles from "./AIAgentView.module.scss";
 
 import NoAccessContainer, {
   NoAccessContainerType,
 } from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
 import { SectionBodyContent } from "SRC_DIR/pages/Home/Section";
-import type FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
-import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+  type ChatNoAccessStoreProps,
+} from "SRC_DIR/Hooks/useChatNoAccess";
 import type FilesStore from "SRC_DIR/store/FilesStore";
 import type ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
-import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
-import AiRoomStore from "SRC_DIR/store/AiRoomStore";
-import { useScroll } from "./useScroll";
-import styles from "./AIAgentView.module.scss";
+import { usePanelExclusivity } from "./usePanelExclusivity";
 
-type Props = {
+type Props = ChatNoAccessStoreProps & {
   currentView: string;
-  isViewLoading: boolean;
-  roomId: null | string;
-  attachmentFile: null | TFile;
-  getResultStorageId: () => null | number;
-  onClearAttachmentFile: VoidFunction;
-  toolsSettings: ReturnType<typeof useToolsSettings>;
-  initChats: ReturnType<typeof useInitChats>;
-  messagesSettings: Omit<ReturnType<typeof useInitMessages>, "initMessages">;
-
   isErrorAIAgentNotAvailable?: FilesStore["isErrorAIAgentNotAvailable"];
   showArticleLoader?: ClientLoadingStore["showArticleLoader"];
-  showHeaderLoader?: ClientLoadingStore["showHeaderLoader"];
   showBodyLoader?: ClientLoadingStore["showBodyLoader"];
-  userAvatar?: TUser["avatar"];
-  getIcon?: FilesSettingsStore["getIcon"];
-  chatSettings?: SelectedFolderStore["chatSettings"];
-  isAdmin?: AuthStore["isAdmin"];
-  aiConfig?: SettingsStore["aiConfig"];
   canUseChat?: AccessRightsStore["canUseChat"];
-
-  setMediaViewerVisible?: MediaViewerDataStore["setMediaViewerVisible"];
-  setAiPlaylistImages?: AiRoomStore["setAiPlaylistImages"];
+  infoPanelStore?: TStore["infoPanelStore"];
 };
 
-const AIAgentViewComponent = ({
-  currentView,
-  isErrorAIAgentNotAvailable,
-  showArticleLoader,
-  showHeaderLoader,
-  showBodyLoader,
-  userAvatar,
-  isViewLoading,
-  roomId,
-  getIcon,
-  chatSettings,
-  attachmentFile,
-  onClearAttachmentFile,
-  toolsSettings,
-  initChats,
-  messagesSettings,
-  isAdmin,
-  aiConfig,
-  getResultStorageId,
-  canUseChat,
-  setMediaViewerVisible,
-  setAiPlaylistImages,
-}: Props) => {
-  const navigate = useNavigate();
-  const scrollRef = useScroll();
+const AIAgentViewComponent = (props: Props) => {
+  const {
+    currentView,
+    isErrorAIAgentNotAvailable,
+    showArticleLoader,
+    showBodyLoader,
+    canUseChat,
+    infoPanelStore,
+  } = props;
 
-  const goToWebSearchSettings = useCallback(() => {
-    navigate("/portal-settings/ai-settings/search");
-  }, [navigate]);
+  const { aiReady, noAccessProps, topUpDialog } = useChatNoAccess(props);
 
-  const goToAISettings = useCallback(() => {
-    navigate("/portal-settings/ai-settings/providers");
-  }, [navigate]);
+  usePanelExclusivity(infoPanelStore);
 
   if (
     currentView === "chat" &&
@@ -130,97 +95,39 @@ const AIAgentViewComponent = ({
     <>
       {shouldRenderChat ? (
         <Activity mode={currentView === "chat" ? "visible" : "hidden"}>
-          <Chat
-            className={styles.aiAgentChat}
-            useExternalScroll={true}
-            externalScrollRef={scrollRef}
-            internalInit={false}
-            userAvatar={userAvatar!}
-            agentId={isViewLoading && !showHeaderLoader ? "-1" : roomId!}
-            getIcon={getIcon!}
-            selectedModel={chatSettings?.modelId ?? ""}
-            isLoading={showBodyLoader}
-            attachmentFile={attachmentFile}
-            clearAttachmentFile={onClearAttachmentFile}
-            toolsSettings={toolsSettings}
-            initChats={initChats}
-            messagesSettings={messagesSettings}
-            isAdmin={isAdmin}
-            aiReady={aiConfig?.aiReady || false}
-            modelAliases={aiConfig?.modelAliases}
-            standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
-            getResultStorageId={getResultStorageId}
-            multimodal={
-              chatSettings?.capabilities?.vision !== false
-                ? chatSettings?.multimodal
-                : undefined
-            }
-            setMediaViewerVisible={setMediaViewerVisible}
-            setAiPlaylistImages={setAiPlaylistImages}
-            goToWebSearchSettings={goToWebSearchSettings}
-            goToAISettings={goToAISettings}
-            allowAttachFiles
-            allowManageTools
-            allowSelectChat
-            persistDraft
-          />
+          {/* `chat-container` reuses the Section rule that drops the body's
+              vertical padding while a chat is visible (see Section.module.scss,
+              `:has(.chat-container...)`) — without it the 19px top padding
+              shows up as a gap between the tabs and the chat. */}
+          <div
+            className={`${styles.aiAgentChat} chat-container`}
+            data-chat-active={currentView === "chat" ? "" : undefined}
+          >
+            <NewChat isAgents aiReady={aiReady} noAccessProps={noAccessProps} />
+          </div>
         </Activity>
       ) : null}
 
       {shouldRenderFiles ? <SectionBodyContent /> : null}
+
+      {topUpDialog}
     </>
   );
 };
 
-export const AIAgentView = inject(
-  ({
-    filesStore,
-    clientLoadingStore,
-    userStore,
-    filesSettingsStore,
-    selectedFolderStore,
-    authStore,
-    settingsStore,
-    dialogsStore,
-    accessRightsStore,
-    mediaViewerDataStore,
-    aiRoomStore,
-  }: TStore) => {
-    const { isErrorAIAgentNotAvailable } = filesStore;
+export const AIAgentView = inject((stores: TStore) => {
+  const { filesStore, clientLoadingStore, accessRightsStore, infoPanelStore } =
+    stores;
+  const { isErrorAIAgentNotAvailable } = filesStore;
+  const { showArticleLoader, showBodyLoader } = clientLoadingStore;
+  const { canUseChat } = accessRightsStore;
 
-    const { showArticleLoader, showHeaderLoader, showBodyLoader } =
-      clientLoadingStore;
-
-    const { setMediaViewerVisible } = mediaViewerDataStore;
-
-    const { user } = userStore;
-
-    const { getIcon } = filesSettingsStore;
-
-    const { chatSettings } = selectedFolderStore;
-
-    const { isAdmin } = authStore;
-
-    const { aiConfig } = settingsStore;
-
-    const { canUseChat } = accessRightsStore;
-
-    const { setAiPlaylistImages } = aiRoomStore;
-
-    return {
-      isErrorAIAgentNotAvailable,
-      showArticleLoader,
-      showHeaderLoader,
-      showBodyLoader,
-      userAvatar: user?.avatar,
-      getIcon,
-      chatSettings,
-      isAdmin,
-      aiConfig,
-      canUseChat,
-
-      setMediaViewerVisible,
-      setAiPlaylistImages,
-    };
-  },
-)(observer(AIAgentViewComponent));
+  return {
+    ...mapChatNoAccessStores(stores),
+    isErrorAIAgentNotAvailable,
+    showArticleLoader,
+    showBodyLoader,
+    canUseChat,
+    infoPanelStore,
+  };
+})(observer(AIAgentViewComponent));

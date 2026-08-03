@@ -3,7 +3,7 @@
   "content": "or drop file here",
   "content_en_sha1_hash": "a14bf554e59e9cd5cf0f303dcfd839a050b061d2",
   "created_at": "2025-05-19T21:30:44.718Z",
-  "updated_at": "2026-04-23T17:24:01.940Z",
+  "updated_at": "2026-05-15T14:00:06.806Z",
   "comment": {
     "text": "This is a secondary text label within a file upload dropzone. It appears when a user can drag and drop a single file into the designated area.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/uploader/index.tsx",
-      "line_number": 413,
+      "line_number": 422,
       "context": "return getCommonTranslation(\"DropzoneFolderSecondary\");\n }\n if (!folderMode && multipleMode) {\n return getCommonTranslation(\"DropzoneFilesSecondary\");\n }\n return getCommonTranslation(\"DropzoneTitleSecondary\");\n };\n \n return (\n <div className={styles.uploaderContainer} style={{ width, height }}>\n <Dropzone",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 222,
+      "line_number": 231,
       "context": "return t(\"Common:DropzoneFolderSecondary\");\n }\n if (!isFolderUpload && isMultipleUpload) {\n return t(\"Common:DropzoneFilesSecondary\");\n }\n return t(\"Common:DropzoneTitleSecondary\");\n };\n \n const [config, setConfig] = useState({\n src: window.location.origin,\n mode: \"uploader\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/Dropzone.tsx",
-      "line_number": 50,
+      "line_number": 59,
       "context": "isDisabled={isDisabled}\n isLoading={isLoading}\n onDrop={onDrop}\n accept={[\".zip\"]}\n linkMainText={t(\"Common:Upload\")}\n linkSecondaryText={t(\"Common:DropzoneTitleSecondary\")}\n exstsText=\"(ZIP)\"\n dataTestId={dataTestId}\n />\n );\n };",
       "module": "/packages/client"
     }
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

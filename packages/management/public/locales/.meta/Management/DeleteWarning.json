@@ -3,7 +3,7 @@
   "content": "The last full access space cannot be deleted",
   "content_en_sha1_hash": "b684b6f8185450f454f665f01f5c551f723dd323",
   "created_at": "2025-05-19T21:30:57.434Z",
-  "updated_at": "2026-04-11T21:31:51.799Z",
+  "updated_at": "2026-05-15T14:00:06.973Z",
   "comment": {
     "text": "This is an error message displayed as a toast notification. It informs the user that they cannot delete the last remaining space with full access rights.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/multiple/spaces-row.tsx",
-      "line_number": 75,
+      "line_number": 84,
       "context": "<ReactSVG id={item.domain} src={DefaultLogoUrl} className=\"logo-icon\" />\n );\n \n const onDelete = () => {\n if (portals.length === 1) {\n return toastr.error(t(\"Management:DeleteWarning\"));\n }\n setCurrentPortal(item);\n setDeletePortalDialogVisible(true);\n };",
       "module": "/packages/management"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.496195Z"
+      "approved_at": "2026-05-15T15:04:54.651494Z"
     },
     "si": {
       "ai_translated": false,

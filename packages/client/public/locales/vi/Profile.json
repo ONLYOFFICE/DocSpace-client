@@ -18,7 +18,7 @@
   "MyProfile": "Hồ sơ của tôi",
   "NotificationsChannels": "Kênh thông báo",
   "ProviderSuccessfullyConnected": "Đã kết nối nhà cung cấp thành công",
-  "ProviderSuccessfullyDisconnected": " Đã ngắt kết nối nhà cung cấp thành công",
+  "ProviderSuccessfullyDisconnected": "Đã ngắt kết nối nhà cung cấp thành công",
   "SendAgain": "Gửi lại",
   "ShowBackupCodes": "Hiển thị mã dự phòng",
   "SuccessLogout": "Kết nối hoạt động đã được đăng xuất: {{platform}}, {{browser}}",
@@ -27,5 +27,5 @@
   "TelegramAccountDisconnect": "Ngắt kết nối Telegram",
   "TelegramAccountDisconnectDescription": "Tài khoản @{{username}} của bạn đang được kết nối để nhận thông báo từ telegram. Bạn có thể ngắt kết nối khỏi tài khoản này. Trong trường hợp đó, bạn sẽ không nhận được thông báo.",
   "TerminateAllSessions": "Chấm dứt tất cả các phiên ngoại trừ phiên hiện tại",
-  "TwoFactorDescription": " Xác thực hai yếu tố qua ứng dụng tạo mã đã được quản trị viên bật cho tất cả người dùng."
+  "TwoFactorDescription": "Xác thực hai yếu tố qua ứng dụng tạo mã đã được quản trị viên bật cho tất cả người dùng."
 }

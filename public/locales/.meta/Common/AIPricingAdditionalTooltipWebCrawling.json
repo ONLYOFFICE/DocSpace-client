@@ -3,7 +3,7 @@
   "content": "<1>Web crawling</1> — AI visits and extracts content from specific web pages to analyze or use in your request.",
   "content_en_sha1_hash": "98684e75f26ea8ba9283384c5d83d304159b8df3",
   "created_at": "2026-04-10T13:53:44.388Z",
-  "updated_at": "2026-04-11T21:00:02.243Z",
+  "updated_at": "2026-05-15T14:00:07.016Z",
   "comment": {
     "text": "This is a tooltip explaining \"Web crawling\" as an AI feature. It appears when the user hovers over the \"Web crawling\" option in the AI pricing section. The `<1>` tag highlights \"Web crawling\" in bold.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 204,
-      "context": "}}\n />\n <br />\n <CommonTrans\n \n i18nKey=\"AIPricingAdditionalTooltipWebCrawling\"\n components={{\n 1: <strong />,\n }}\n />\n </>",
+      "line_number": 196,
+      "context": "1: <strong />,\n }}\n />\n <br />\n <CommonTrans\n i18nKey=\"AIPricingAdditionalTooltipWebCrawling\"\n components={{\n 1: <strong />,\n }}\n />\n </>",
       "module": "/libs/ui-kit"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

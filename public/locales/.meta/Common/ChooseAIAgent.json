@@ -2,18 +2,18 @@
   "key_path": "ChooseAIAgent",
   "content": "Choose an {{aiAgent}}",
   "content_en_sha1_hash": "13c16f38542b31392b1e38f68dd875f7e7bff25a",
-  "created_at": "2025-12-19T10:16:20.006Z",
-  "updated_at": "2026-05-08T13:10:45.745Z",
+  "created_at": "2026-06-01T21:20:12.245Z",
+  "updated_at": "2026-06-01T21:44:11.296Z",
   "comment": {
-    "text": "This is the title for a dialog or selector, prompting the user to pick an AI agent. The `{{aiAgent}}` variable will be replaced with the localized term for \"AI Agent\".",
+    "text": "InfoBar title prompting the user to select an AI agent. The {{aiAgent}} variable represents the specific agent type.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:57:21.050Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-06-01T21:44:11.296Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 238,
+      "line_number": 247,
       "context": "const infoBarData = useMemo(() => {\n if (externalInfoBarData) return externalInfoBarData;\n \n return {\n title: t(\"ChooseAIAgent\", {\n aiAgent: t(\"AIAgent\"),\n }),\n icon: <InfoIconSvgUrl />,\n onClose: () => setWithInfo((prev) => !prev),\n description: t(\"ChooseAIAgentDescription\"),",
       "module": "/libs/ui-kit"
     }

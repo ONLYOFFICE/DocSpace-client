@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterSetupFailed",
+  "content": "Setup failed",
+  "content_en_sha1_hash": "6a5df03125b9dc30e1995ebaf45f941e983e7774",
+  "created_at": "2026-05-24T17:27:18.585Z",
+  "updated_at": "2026-05-24T18:43:36.108Z",
+  "comment": {
+    "text": "Header in the wizard overlay that appears when the AI Arbiter setup process fails.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:43:36.108Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 655,
+      "context": "const header = (() => {\n switch (phase) {\n case \"done\":\n return t(\"Common:ArbiterReadyTitle\");\n case \"failed\":\n return t(\"Common:ArbiterSetupFailed\");\n default:\n return t(\"Common:ArbiterSetupTitle\");\n }\n })();",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

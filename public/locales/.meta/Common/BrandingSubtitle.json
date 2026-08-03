@@ -3,7 +3,7 @@
   "content": "Use this option to provide on-brand experience to users.",
   "content_en_sha1_hash": "af0e4b897992b3cd3dfa107a17d4b8837acdc69d",
   "created_at": "2025-05-26T07:15:40.986Z",
-  "updated_at": "2026-04-11T20:58:10.047Z",
+  "updated_at": "2026-05-15T14:00:06.776Z",
   "comment": {
     "text": "This is a descriptive subtitle displayed on the Branding settings page. It explains the purpose of the branding options to the user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/branding.js",
-      "line_number": 101,
+      "line_number": 110,
       "context": ">\n {!isWhiteLabelLoaded && !isBrandNameLoaded ? (\n <LoaderBrandingSubtitle />\n ) : (\n <div className=\"category-description\">\n {t(\"Common:BrandingSubtitle\")}\n </div>\n )}\n <BrandName />\n <hr />\n <WhiteLabel />",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

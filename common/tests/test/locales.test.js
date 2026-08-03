@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { describe, it, expect, beforeAll } from "vitest";
 const fs = require("fs");
@@ -62,12 +71,7 @@ const BASE_LANGUAGES = [
 ];
 
 const forbiddenElements = ["ONLYOFFICE", "DOCSPACE"];
-const skipForbiddenKeys = [
-  "OrganizationName",
-  "ProductName",
-  "ProductEditorsName",
-  "OnlyofficeDesktopEditors",
-];
+const skipForbiddenKeys = [];
 
 // Brand/product keys and constants — injected at runtime, not in JSON locale files.
 // Skip these in per-language completeness and forbidden-elements checks.
@@ -100,6 +104,37 @@ function clearWrongKeys(entries, label) {
   });
 
   console.log(`Cleared ${total} ${label}.`);
+}
+
+/**
+ * Trim leading/trailing whitespace from translation values when
+ * TRIM_WRONG_VALUES=true. Accepts entries already resolved to { filePath, key }.
+ *
+ * @param {Array<{filePath: string, key: string}>} entries
+ * @param {string} label - Description for console output (e.g. "whitespace values")
+ */
+function trimWrongValues(entries, label) {
+  if (process.env.TRIM_WRONG_VALUES !== "true" || entries.length === 0) return;
+
+  const grouped = {};
+  entries.forEach(({ filePath, key }) => {
+    if (!grouped[filePath]) grouped[filePath] = [];
+    grouped[filePath].push(key);
+  });
+
+  let total = 0;
+  Object.entries(grouped).forEach(([fp, keys]) => {
+    const content = JSON.parse(fs.readFileSync(fp, "utf8"));
+    keys.forEach((k) => {
+      if (typeof content[k] === "string" && content[k] !== content[k].trim()) {
+        content[k] = content[k].trim();
+        total += 1;
+      }
+    });
+    fs.writeFileSync(fp, `${JSON.stringify(content, null, 2)}\n`);
+  });
+
+  console.log(`Trimmed ${total} ${label}.`);
 }
 
 /**
@@ -221,15 +256,18 @@ beforeAll(() => {
 
   i18nFiles = javascripts.filter(
     (filePath) =>
-      filePath.endsWith("/i18n.js") || filePath.endsWith("/i18n.ts"),
+      filePath.endsWith(convertPathToOS("/i18n.js")) ||
+      filePath.endsWith(convertPathToOS("/i18n.ts")),
   );
 
   console.log(
     `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`,
   );
 
+  // `t(`, `t?.(`, and the TS non-null-assertion forms `t!(` / `i18n!.t!(`
+  // that appear in converted .ts stores.
   const pattern1 =
-    "[.{\\s\\(]t\\??\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
+    "[.{\\s\\(]t[!?]?\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
   const pattern2 = 'i18nKey="([a-zA-Z0-9_.:-]+)"';
   const pattern3 = 'tKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern4 = 'getTitle\\("([a-zA-Z0-9_.:-]+)"\\)';
@@ -237,9 +275,13 @@ beforeAll(() => {
   const pattern6 = 'titleKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern7 = 'translationKey:\\s"([a-zA-Z0-9_.:-]+)"';
   const pattern8 = 'labelKey:\\s"([a-zA-Z0-9_.:-]+)"';
+  // aiT — alias for the i18n `t` from the @onlyoffice/ai-chat bundle
+  // (e.g. `const { t: aiT } = useI18n()`).
+  const pattern9 =
+    "aiT\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
 
   const regexp = new RegExp(
-    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})|(${pattern7})|(${pattern8})`,
+    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})|(${pattern7})|(${pattern8})|(${pattern9})`,
     "gm",
   );
 
@@ -284,7 +326,18 @@ beforeAll(() => {
     const matches = [...jsFileText.matchAll(regexp)];
 
     const translationKeys = matches
-      .map((m) => m[2] || m[4] || m[6] || m[8] || m[10] || m[12] || m[14] || m[16])
+      .map(
+        (m) =>
+          m[2] ||
+          m[4] ||
+          m[6] ||
+          m[8] ||
+          m[10] ||
+          m[12] ||
+          m[14] ||
+          m[16] ||
+          m[18],
+      )
       .filter((m) => m != null);
 
     if (translationKeys.length === 0) return;
@@ -355,7 +408,7 @@ beforeAll(() => {
 
     moduleFolders.push({
       path: wsPath,
-      isCommon: wsPath.includes("public/locales"),
+      isCommon: wsPath.includes(path.join("public", "locales")),
       availableLanguages: t?.languages,
       appliedJsTranslationKeys: j?.translationKeys,
     });
@@ -885,10 +938,8 @@ describe("Locales Tests", () => {
     let i = 0;
     const forbiddenEntries = [];
 
-    moduleFolders.forEach((module) => {
-      if (!module.availableLanguages || module.isCommon) return;
-
-      module.availableLanguages.forEach((lng) => {
+    const checkLanguages = (languages) => {
+      languages.forEach((lng) => {
         const translationItems = lng.translations
           .filter((elem) => !skipForbiddenKeys.includes(elem.key))
           .filter((f) => {
@@ -914,7 +965,14 @@ describe("Locales Tests", () => {
           forbiddenEntries.push({ filePath: lng.path, key: t.key });
         });
       });
+    };
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+      checkLanguages(module.availableLanguages);
     });
+
+    checkLanguages(commonTranslations);
 
     clearWrongKeys(forbiddenEntries, "forbidden value keys");
 
@@ -1018,6 +1076,46 @@ describe("Locales Tests", () => {
     clearWrongKeys(emptyEntries, "empty translation keys");
 
     expect(exists, message).toBe(false);
+  });
+
+  it("TrailingWhitespaceTest: Verify that translation values have no leading or trailing whitespace that the English source does not have.", () => {
+    // Some English values intentionally end with a space because an inline
+    // element (link, button) is concatenated after them (e.g. SDKDescription:
+    // "...refer to the "). Those translations legitimately keep the whitespace.
+    // So we only flag a translation when its English counterpart is itself
+    // free of surrounding whitespace — i.e. the whitespace was added by mistake.
+    const enValues = new Map();
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          enValues.set(`${file.namespace}:${t.key}`, t.value);
+        });
+      });
+
+    let message =
+      "Next translation values have leading/trailing whitespace absent from the English source:\r\n\r\n";
+    let i = 0;
+    const whitespaceEntries = [];
+
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        if (typeof t.value !== "string" || !t.value.length) return;
+        if (t.value === t.value.trim()) return;
+
+        const enValue = enValues.get(`${file.namespace}:${t.key}`);
+        // No English counterpart, or English itself has surrounding
+        // whitespace (intentional concatenation) — skip.
+        if (enValue === undefined || enValue !== enValue.trim()) return;
+
+        message += `${++i}. Language '${file.language}' key '${file.namespace}:${t.key}' (Path '${file.path}')\r\n  Value: '${t.value}'\r\n\r\n`;
+        whitespaceEntries.push({ filePath: file.path, key: t.key });
+      });
+    });
+
+    trimWrongValues(whitespaceEntries, "whitespace translation values");
+
+    expect(whitespaceEntries.length, message).toBe(0);
   });
 
   it("NotFoundEnKey: No English key variants: Verify that there are no translation keys in languages other than English that are not present in the English translation files.", () => {
@@ -1349,7 +1447,7 @@ describe("Locales Tests", () => {
           .filter((ns) => ns && ns !== "");
 
         // Find the corresponding public/locales directory for this i18n file
-        const packagePath = i18nFile.replace(/\/src\/.*$/, "");
+        const packagePath = i18nFile.replace(/[\\/]src[\\/].*$/, "");
         const packageLocalesPath = path.join(
           packagePath,
           "public",
@@ -2094,6 +2192,117 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
+  it("NativeLetterPresenceTest: Verify that every translation contains at least one letter from the language's alphabet.", () => {
+    // Each language's "alphabet" — a regex that must match at least once in the stripped
+    // translation value. After removing {{variables}} and <HTML/React tags> the remaining
+    // text must contain at least one native letter.  This catches values that consist
+    // entirely of digits, punctuation, or technical symbols with no human-readable text
+    // in the target language (e.g. a Russian value of "100% done" with no Cyrillic).
+    //
+    // Non-Latin-script languages: the regex covers their Unicode block.
+    // Latin-script languages: any [a-zA-Z] letter suffices; the test still catches
+    // purely-numeric or symbol-only values such as a translation that strips to "42".
+
+    const LANG_ALPHABET = {
+      // Non-Latin scripts
+      "ar-SA":      /[؀-ۿ]/,
+      "el-GR":      /[Ͱ-Ͽ]/,
+      "hy-AM":      /[԰-֏]/,
+      "ja-JP":      /[぀-ヿ一-鿿]/,
+      "ko-KR":      /[가-힯ᄀ-ᇿ]/,
+      "lo-LA":      /[຀-໿]/,
+      "si":         /[඀-෿]/,
+      "zh-CN":      /[一-鿿]/,
+      // Cyrillic
+      "bg":         /[Ѐ-ӿ]/,
+      "ru":         /[Ѐ-ӿ]/,
+      "sr-Cyrl-RS": /[Ѐ-ӿ]/,
+      "uk-UA":      /[Ѐ-ӿ]/,
+      // Latin-script — any Latin letter
+      "az":         /[a-zA-Z]/,
+      "cs":         /[a-zA-Z]/,
+      "de":         /[a-zA-Z]/,
+      "es":         /[a-zA-Z]/,
+      "fi":         /[a-zA-Z]/,
+      "fr":         /[a-zA-Z]/,
+      "it":         /[a-zA-Z]/,
+      "lv":         /[a-zA-Z]/,
+      "nl":         /[a-zA-Z]/,
+      "pl":         /[a-zA-Z]/,
+      "pt":         /[a-zA-Z]/,
+      "pt-BR":      /[a-zA-Z]/,
+      "ro":         /[a-zA-Z]/,
+      "sk":         /[a-zA-Z]/,
+      "sl":         /[a-zA-Z]/,
+      "sq-AL":      /[a-zA-Z]/,
+      "sr-Latn-RS": /[a-zA-Z]/,
+      "tr":         /[a-zA-Z]/,
+      "vi":         /[a-zA-Z]/,
+    };
+
+    // Minimum stripped-text length to bother checking.
+    // Values shorter than this are likely abbreviations, numbers, or symbols.
+    const MIN_STRIPPED_LEN = 8;
+
+    function stripMarkup(text) {
+      return text
+        .replace(/\{\{[^}]+\}\}/g, "")
+        .replace(/<[^>]*>/g, "")
+        .replace(/&[a-zA-Z]+;/g, "");
+    }
+
+    // Build EN reference for "equals English" exemption (brand names, tech terms).
+    const enByNsKey = {};
+    translationFiles
+      .filter((f) => f.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          enByNsKey[`${file.namespace}|${t.key}`] = t.value;
+        });
+      });
+
+    let message =
+      "Next translation values contain no letters from the language's alphabet:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const wrongKeys = [];
+
+    for (const [lang, alphabetRegex] of Object.entries(LANG_ALPHABET)) {
+      const langFiles = translationFiles.filter((f) => f.language === lang);
+
+      langFiles.forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!t.value) return;
+
+          const stripped = stripMarkup(t.value).trim();
+
+          // Skip short values — numbers, abbreviations, symbols
+          if (stripped.length < MIN_STRIPPED_LEN) return;
+
+          // Skip if identical to English (case-insensitive) — brand names, product names, technical terms
+          const enVal = enByNsKey[`${file.namespace}|${t.key}`];
+          if (enVal && t.value.toLowerCase() === enVal.toLowerCase()) return;
+
+          // At least one native letter must be present
+          if (alphabetRegex.test(stripped)) return;
+
+          message +=
+            `${++i}. lng='${lang}' key='${file.namespace}:${t.key}'\r\n` +
+            `  Value: '${t.value.substring(0, 150)}'\r\n\r\n`;
+          errorsCount++;
+          wrongKeys.push({ language: lang, key: `${file.namespace}:${t.key}` });
+        });
+      });
+    }
+
+    clearWrongKeys(
+      resolveTranslationEntries(wrongKeys),
+      "no-native-letter translation keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
   it("ForeignScriptContaminationTest: Verify that translations do not contain characters from unrelated scripts.", () => {
     // Each language has a set of ALLOWED Unicode script ranges.
     // Any character outside ASCII + allowed ranges (after stripping markup) is contamination.
@@ -2114,6 +2323,40 @@ describe("Locales Tests", () => {
       "bg":          [[0x0400, 0x04FF]], // Cyrillic
       "sr-Cyrl-RS":  [[0x0400, 0x04FF]], // Cyrillic
     };
+
+    // Latin-script languages need no native ranges beyond commonAllowed,
+    // except a few extras: Vietnamese diacritics and Azerbaijani schwa.
+    // Anything else (e.g. Cyrillic inside a German string) is contamination.
+    const latinExtraRanges = [
+      [0x0250, 0x02AF], // IPA Extensions (Azerbaijani schwa, U+0259)
+      [0x02B0, 0x02FF], // Spacing Modifier Letters
+      [0x1E00, 0x1EFF], // Latin Extended Additional (Vietnamese)
+    ];
+    const latinLanguages = [
+      "en",
+      "az",
+      "cs",
+      "de",
+      "es",
+      "fi",
+      "fr",
+      "it",
+      "lv",
+      "nl",
+      "pl",
+      "pt",
+      "pt-BR",
+      "ro",
+      "sk",
+      "sl",
+      "sq-AL",
+      "sr-Latn-RS",
+      "tr",
+      "vi",
+    ];
+    for (const lang of latinLanguages) {
+      scriptRanges[lang] = latinExtraRanges;
+    }
 
     // Common ranges allowed for ALL languages (Latin for markup/brands, general punctuation, etc.)
     const commonAllowed = [
@@ -2502,6 +2745,42 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
+  it("UnicodeEscapedValuesTest: Verify that translation files use readable Unicode characters instead of \\uXXXX escape sequences.", () => {
+    // JSON files must store non-ASCII characters directly in UTF-8, not as \uXXXX
+    // escape sequences. Escaped forms are invisible in code review, harder to spot
+    // translation errors in, and typically produced by json.dumps() without
+    // ensure_ascii=False or similar tooling mistakes.
+    const unicodeEscapePattern = /\\u[0-9a-fA-F]{4}/;
+
+    let message =
+      "Next translation files contain \\uXXXX escape sequences instead of readable Unicode characters.\r\n" +
+      "Re-save the file in UTF-8 with unescaped characters (e.g. ensure_ascii=False in Python).\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+
+    translationFiles.forEach((file) => {
+      const rawContent = fs.readFileSync(file.path, "utf8");
+
+      if (!unicodeEscapePattern.test(rawContent)) return;
+
+      const escapedLines = rawContent
+        .split("\n")
+        .map((line, idx) => ({ line, lineNo: idx + 1 }))
+        .filter(({ line }) => unicodeEscapePattern.test(line))
+        .slice(0, 3)
+        .map(
+          ({ line, lineNo }) =>
+            `    line ${lineNo}: ${line.trim().substring(0, 80)}`,
+        )
+        .join("\r\n");
+
+      message += `${++i}. ${file.language}/${file.fileName}\r\n${escapedLines}\r\n\r\n`;
+      errorsCount++;
+    });
+
+    expect(errorsCount, message).toBe(0);
+  });
+
   it("DuplicateKeysAcrossNamespacesTest: Verify that the same translation key does not appear in multiple namespaces.", () => {
     // Duplicate keys across namespaces cause confusion: it's unclear which
     // translation is actually used, and changes to one copy may not propagate
@@ -2533,6 +2812,256 @@ describe("Locales Tests", () => {
     });
 
     expect(duplicates.length, message).toBe(0);
+  });
+
+  it("CommonNamespacePrefixTest: Verify that keys from the Common namespace are referenced with the 'Common:' prefix when the default namespace is not Common.", () => {
+    // Common is a shared namespace. Unlike a component-specific namespace, it is
+    // almost never the *default* namespace where a key is used: stores and helpers
+    // receive `t` from a caller whose default namespace is something else (e.g.
+    // "Files"), and most components declare their own namespace first in
+    // useTranslation([...]). i18next has no fallbackNS here, so an unprefixed
+    // `t("Open")` is looked up ONLY in that default namespace, never in Common.
+    // When it isn't found, i18next renders the raw key — which is exactly how the
+    // French context menu ended up showing "Open" instead of "Ouvrir".
+    //
+    // Every Common key is unique to Common (see DuplicateKeysAcrossNamespacesTest),
+    // so an unprefixed usage of a Common key is safe ONLY when the file's default
+    // namespace is itself Common. In every other case the key MUST be written as
+    // "Common:<Key>". The fix is always the same: add the "Common:" prefix.
+
+    const commonKeys = new Set(
+      translationFiles
+        .filter((file) => file.language === "en" && file.namespace === "Common")
+        .flatMap((file) => file.translations.map((t) => t.key)),
+    );
+
+    // App-level defaultNS per package, read from the i18n config files. Some apps
+    // (e.g. sdk) set `defaultNS: "Common"`, which makes unprefixed Common keys
+    // resolve correctly everywhere in that package — those must not be flagged.
+    const packageDefaultNs = {};
+    i18nFiles.forEach((i18nPath) => {
+      const content = fs.readFileSync(i18nPath, "utf8");
+      const nsMatch = content.match(
+        /defaultNS:\s*["'`]([A-Za-z0-9_]+)["'`]/,
+      );
+      const pkgMatch = i18nPath.match(
+        new RegExp(`(.*\\${path.sep}packages\\${path.sep}[^\\${path.sep}]+)\\${path.sep}`),
+      );
+      if (pkgMatch) packageDefaultNs[pkgMatch[1]] = nsMatch ? nsMatch[1] : null;
+    });
+
+    const getPackageDefaultNs = (filePath) => {
+      const pkg = Object.keys(packageDefaultNs).find((p) =>
+        filePath.startsWith(p + path.sep),
+      );
+      return pkg ? packageDefaultNs[pkg] : null;
+    };
+
+    // Determine a file's effective default translation namespace:
+    //  - useCommonTranslation / getCommonTranslation -> Common (ui-kit helpers)
+    //  - first namespace in useTranslation([...]) / withTranslation([...])
+    //  - otherwise the package's app-level defaultNS (e.g. "Common" in sdk)
+    //  - null when `t` is received externally (stores, helpers) in a package whose
+    //    defaultNS is not Common — prefix is then mandatory.
+    const getDefaultNamespace = (text, filePath) => {
+      if (/useCommonTranslation|getCommonTranslation/.test(text)) return "Common";
+      const useMatch = text.match(
+        /useTranslation\(\s*\[?\s*["'`]([A-Za-z0-9_]+)["'`]/,
+      );
+      if (useMatch) return useMatch[1];
+      const withMatch = text.match(
+        /withTranslation\(\s*\[?\s*["'`]([A-Za-z0-9_]+)["'`]/,
+      );
+      if (withMatch) return withMatch[1];
+      return getPackageDefaultNs(filePath);
+    };
+
+    // Extract translation keys used in a single file. Re-parsed here (instead of
+    // reusing jsFile.translationKeys) because that shared array is mutated per
+    // module in beforeAll and would attribute every module key to its first file.
+    // i18nKey is handled separately because <Trans i18nKey="X" ns="Common"> resolves
+    // X against the explicit ns prop — no "Common:" prefix is needed there.
+    const keyRegexps = [
+      /[.{\s(]t\??\.?\(\s*["'`]([a-zA-Z0-9_.:\s{}/-]+)["'`]\s*[),]/gm,
+      /tKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+      /getTitle\("([a-zA-Z0-9_.:-]+)"\)/gm,
+      /getCommonTranslation\(\s*"([a-zA-Z0-9_.:-]+)"[\s,)]/gm,
+      /titleKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+      /translationKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+      /labelKey:\s"([a-zA-Z0-9_.:-]+)"/gm,
+    ];
+
+    // Does the JSX opening tag containing the match at `index` carry an explicit
+    // `ns="..."` attribute? If so, the key is resolved against that namespace and
+    // a "Common:" prefix is not the relevant fix.
+    const hasExplicitNs = (text, index) => {
+      const tagStart = text.lastIndexOf("<", index);
+      const tagEnd = text.indexOf(">", index);
+      if (tagStart === -1 || tagEnd === -1) return false;
+      return /\bns=["'`][A-Za-z0-9_]+["'`]/.test(text.slice(tagStart, tagEnd));
+    };
+
+    const extractKeys = (text) => {
+      const keys = new Set();
+      keyRegexps.forEach((re) => {
+        for (const m of text.matchAll(re)) {
+          if (m[1]) keys.add(m[1]);
+        }
+      });
+      // i18nKey="X" — skip occurrences whose tag sets an explicit ns prop.
+      for (const m of text.matchAll(/i18nKey="([a-zA-Z0-9_.:-]+)"/gm)) {
+        if (m[1] && !hasExplicitNs(text, m.index)) keys.add(m[1]);
+      }
+      return keys;
+    };
+
+    const violations = [];
+
+    javascriptFiles.forEach((jsFile) => {
+      // ui-kit is a separate submodule with its own Common-bound translation hook.
+      if (jsFile.path.includes(convertPathToOS("libs/ui-kit"))) return;
+
+      const text = fs.readFileSync(jsFile.path, "utf8");
+
+      // When the file's default namespace is Common, unprefixed Common keys
+      // resolve correctly — no prefix required.
+      if (getDefaultNamespace(text, jsFile.path) === "Common") return;
+
+      const offendingKeys = [...extractKeys(text)]
+        .filter((key) => !key.includes(":")) // unprefixed usages only
+        .filter((key) => commonKeys.has(key)) // that belong to Common
+        .sort();
+
+      if (offendingKeys.length === 0) return;
+
+      violations.push({ path: jsFile.path, keys: offendingKeys });
+    });
+
+    let message =
+      "The following Common-namespace keys are used without the 'Common:' prefix.\r\n" +
+      "They will NOT resolve (i18next renders the raw key) unless the file's default\r\n" +
+      "namespace is Common. Prefix each key with 'Common:' (e.g. t(\"Common:Open\")):\r\n\r\n";
+
+    let i = 0;
+    violations.forEach((v) => {
+      message += `${++i}. File: ${v.path}\r\n   Keys: ${v.keys
+        .map((k) => `"${k}"`)
+        .join(", ")}\r\n\r\n`;
+    });
+
+    expect(violations.length, message).toBe(0);
+  });
+
+  it("UiKitCommonResolverPrefixTest: Verify that keys resolved through ui-kit's Common-default helpers carry an explicit namespace prefix.", () => {
+    // CommonNamespacePrefixTest skips libs/ui-kit (the submodule has its own
+    // Common-bound translation helpers). This test guards that blind spot.
+    //
+    // ui-kit resolves translations in two Common-defaulting ways:
+    //   1. getCommonTranslation(key) / useCommonTranslation() — look an unprefixed
+    //      key up ONLY in the Common namespace.
+    //   2. helpers shaped `const translate = t ?? getCommonTranslation` — `translate`
+    //      is EITHER getCommonTranslation (Common) OR a `t` the caller passed, whose
+    //      default namespace can be anything (e.g. a Files-bound `t`).
+    //
+    // An unprefixed key is therefore unsafe whenever:
+    //   (A) it is resolved in Common but the key lives in another namespace — e.g.
+    //       translate("RoomFilesLifetime") (Files). It is NEVER found and the raw key
+    //       is rendered.
+    //   (B) it flows through the `t ?? getCommonTranslation` fallback at all — even a
+    //       Common key like "Days" breaks once a non-Common `t` is supplied.
+    // The fix is always the same: prefix the key with its namespace
+    // ("Files:RoomFilesLifetime", "Common:Days").
+
+    // key -> Set(namespaces) across the English locale files.
+    const keyNamespaces = new Map();
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!keyNamespaces.has(t.key)) keyNamespaces.set(t.key, new Set());
+          keyNamespaces.get(t.key).add(file.namespace);
+        });
+      });
+    const isKnownKey = (k) => keyNamespaces.has(k);
+    const isCommonKey = (k) =>
+      keyNamespaces.has(k) && keyNamespaces.get(k).has("Common");
+
+    const uiKitFiles = getAllFiles(path.join(BASE_DIR, "libs", "ui-kit"), [
+      "node_modules",
+      convertPathToOS(".next"),
+      convertPathToOS("/dist"),
+      convertPathToOS(path.join("ui-kit", "locales")),
+    ]).filter(
+      (filePath) =>
+        filePath &&
+        /\.(ts|tsx)$/.test(filePath) &&
+        !filePath.includes(".test.") &&
+        !filePath.includes(".stories."),
+    );
+
+    const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const violations = [];
+
+    uiKitFiles.forEach((filePath) => {
+      const text = fs.readFileSync(filePath, "utf8");
+
+      // (A) Direct getCommonTranslation("Key"): resolves in Common only, so a bare
+      //     key that is defined in some OTHER namespace is always broken.
+      for (const m of text.matchAll(
+        /getCommonTranslation\(\s*["'`]([a-zA-Z0-9_.:-]+)["'`]/g,
+      )) {
+        const key = m[1];
+        if (key.includes(":")) continue;
+        if (isKnownKey(key) && !isCommonKey(key)) {
+          violations.push({
+            path: filePath,
+            key,
+            why: `resolved in Common but defined in [${[
+              ...keyNamespaces.get(key),
+            ].join(", ")}]`,
+          });
+        }
+      }
+
+      // (B) `const <alias> = ... ?? getCommonTranslation`: every key passed to
+      //     <alias> must be prefixed, because <alias> may be an external `t`.
+      //     [^;\n]* keeps the match on the assignment line so the alias name is the
+      //     variable, not an enclosing multi-line function declaration.
+      const aliases = new Set();
+      for (const m of text.matchAll(
+        /(?:const|let)\s+([A-Za-z_$][\w$]*)\s*=\s*[^;\n]*\?\?\s*getCommonTranslation\b/g,
+      )) {
+        aliases.add(m[1]);
+      }
+      aliases.forEach((alias) => {
+        const callRe = new RegExp(
+          `\\b${escapeRe(alias)}\\(\\s*["'\`]([a-zA-Z0-9_.:-]+)["'\`]`,
+          "g",
+        );
+        for (const m of text.matchAll(callRe)) {
+          const key = m[1];
+          if (key.includes(":")) continue;
+          if (isKnownKey(key)) {
+            violations.push({
+              path: filePath,
+              key,
+              why: `passed to \`${alias}\` (t ?? getCommonTranslation) without a namespace prefix`,
+            });
+          }
+        }
+      });
+    });
+
+    let message =
+      "The following keys are resolved through ui-kit Common-default helpers without\r\n" +
+      "a namespace prefix. They render as raw keys (always, for non-Common keys; or\r\n" +
+      "whenever a non-Common `t` is supplied to a `t ?? getCommonTranslation` helper).\r\n" +
+      'Prefix each with its namespace (e.g. "Files:RoomFilesLifetime", "Common:Days"):\r\n\r\n';
+    violations.forEach((v, i) => {
+      message += `${i + 1}. ${v.path}\r\n   "${v.key}" — ${v.why}\r\n\r\n`;
+    });
+
+    expect(violations.length, message).toBe(0);
   });
 });
 

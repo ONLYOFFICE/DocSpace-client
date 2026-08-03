@@ -1,0 +1,35 @@
+{
+  "key_path": "CreateFormSet",
+  "content": "Create Form Set",
+  "content_en_sha1_hash": "5c266be0e2451747828508884538e488e1806f2d",
+  "created_at": "2026-06-25T19:30:28.607Z",
+  "updated_at": "2026-07-28T11:44:10.651Z",
+  "comment": {
+    "text": "Button label in the Forms section header used to initiate the creation of a new collection of forms.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:42:57.187Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 1070,
+      "context": "warningText,\n warningIcon: isRoomStorageQuotaExceeded\n ? WarningQuotaExceededUrl\n : undefined,\n actions: isFormsSection\n ? t(\"Common:CreateFormSet\")\n : isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 417,
+      "context": "]\n : isFormsFolder\n ? [\n {\n key: \"create-form-set\",\n label: t(\"Common:CreateFormSet\"),\n onClick: self.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n {\n key: \"template-gallery\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

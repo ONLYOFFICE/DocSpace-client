@@ -3,7 +3,7 @@
   "content": "Webhooks Guide",
   "content_en_sha1_hash": "426d1aa73a91fb4aa937d1af4f1bdc8b411b5146",
   "created_at": "2025-05-19T21:30:49.890Z",
-  "updated_at": "2026-04-11T21:28:03.173Z",
+  "updated_at": "2026-05-15T15:37:40.271Z",
   "comment": {
     "text": "This is a link label that, when clicked, opens a guide about webhooks.",
     "is_auto": true,
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

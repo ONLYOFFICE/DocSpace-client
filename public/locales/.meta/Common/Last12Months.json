@@ -1,0 +1,29 @@
+{
+  "key_path": "Last12Months",
+  "content": "Last 12 months",
+  "content_en_sha1_hash": "0245d916ff7c124577899bd355d8ac6058ecf0b2",
+  "created_at": "2026-06-25T11:54:51.719Z",
+  "updated_at": "2026-06-25T12:08:35.850Z",
+  "comment": {
+    "text": "Option label in a period selection dropdown used to filter billing usage data.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:08:35.850Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
+      "line_number": 102,
+      "context": "case \"last3Months\":\n return t(\"Last3Months\");\n case \"last6Months\":\n return t(\"Last6Months\");\n case \"last12Months\":\n return t(\"Last12Months\");\n default:\n return null;\n }\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

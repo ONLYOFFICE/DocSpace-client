@@ -3,7 +3,7 @@
   "content": "Your account has been successfully removed. In 10 seconds you will be redirected to the <1>site</1>.",
   "content_en_sha1_hash": "ded5fa686d70c749e7d37045876d5285b2515f6e",
   "created_at": "2025-05-19T21:30:57.400Z",
-  "updated_at": "2026-04-11T21:30:02.459Z",
+  "updated_at": "2026-05-15T14:00:06.911Z",
   "comment": {
     "text": "This is a success message displayed after a user's account has been removed. It informs the user about the successful removal and an automatic redirection to the main site after 10 seconds. The `<1>site</1>` tag represents a clickable link to the main site.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalRemove/page.client.tsx",
-      "line_number": 93,
+      "line_number": 102,
       "context": "window.location.href = \"/\";\n };\n \n return isRemoved ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessRemoved\" ns=\"Confirm\">\n Your account has been successfully removed. In 10 seconds you will be\n redirected to the\n <Link isHovered href={url} dataTestId=\"redirect_site_link\">\n site\n </Link>",
       "module": "/packages/login"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     },
     "si": {
       "ai_translated": false,

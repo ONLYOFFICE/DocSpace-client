@@ -4,5 +4,8 @@
   "ContinueToProduct": "Vazhdoni te {{productName}}",
   "GeneratedPassword": "Fjalëkalimi i gjeneruar",
   "ProductNameDetail": "Emri i {{productName}}",
-  "ReviewAccountDetails": "Ju lutemi, merrni një moment për të rishikuar detajet e llogarisë suaj:"
+  "ReviewAccountDetails": "Ju lutemi, merrni një moment për të rishikuar detajet e llogarisë suaj:",
+  "SetEmailPassword": "Vendos fjalëkalimin",
+  "WelcomeSubtitle": "Hapësira juaj u krijua me sukses. Rishikoni detajet e profilit tuaj dhe filloni të punoni.",
+  "YourProfileDetails": "Detajet e profilit tuaj"
 }

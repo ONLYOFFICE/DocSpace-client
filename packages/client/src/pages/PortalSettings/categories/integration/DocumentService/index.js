@@ -1,34 +1,44 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Link } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -41,6 +51,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 import styles from "./index.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import ApplyToPortalDialog from "../../developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog";
 
 const URL_REGEX =
   /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
@@ -53,11 +64,17 @@ const DocumentService = ({
   documentServiceSettingsUrl,
   initialDocumentServiceData,
   showPortalSettingsLoader,
+  apiBasicLink,
+  docsConnectConnection,
+  fetchDocsConnectConnection,
+  applyDocsConnectToPortal,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
+  const [connectDialogVisible, setConnectDialogVisible] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
 
   const [docServiceUrl, setDocServiceUrl] = useState("");
   const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
@@ -87,6 +104,10 @@ const DocumentService = ({
   useEffect(() => {
     setDocumentTitle(t("DocumentService"));
   }, [t]);
+
+  useEffect(() => {
+    fetchDocsConnectConnection?.();
+  }, [fetchDocsConnectConnection]);
 
   useEffect(() => {
     if (initialDocumentServiceData) {
@@ -213,6 +234,55 @@ const DocumentService = ({
       .finally(() => setResetIsLoading(false));
   };
 
+  const onConnectDocsConnect = async () => {
+    setIsConnecting(true);
+    try {
+      const result = await applyDocsConnectToPortal();
+
+      setIsDefaultSettings(result?.isDefault || false);
+      setPortalUrl(result?.docServicePortalUrl);
+      setAuthHeader(result?.docServiceSignatureHeader);
+      setSecretKey(
+        result?.docServiceSignatureSecret ?? docsConnectConnection?.secret,
+      );
+      setInternalUrl(result?.docServiceUrlInternal);
+      setDocServiceUrl(result?.docServiceUrl);
+      setIsDisabledCertificat(!result?.docServiceSslVerification || false);
+
+      setInitPortalUrl(result?.docServicePortalUrl);
+      setInitSecretKey(
+        result?.docServiceSignatureSecret ?? docsConnectConnection?.secret,
+      );
+      setInitAuthHeader(result?.docServiceSignatureHeader);
+      setInitDocServiceUrl(result?.docServiceUrl);
+      setInitInternalUrl(result?.docServiceUrlInternal);
+      setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
+
+      setSecretKeyVersion((v) => v + 1);
+      toastr.success(t("Common:ChangesSavedSuccessfully"));
+      setConnectDialogVisible(false);
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  const normalizeAddress = (value) =>
+    (value ?? "")
+      .replace(/^https?:\/\//i, "")
+      .replace(/\/+$/, "")
+      .toLowerCase();
+
+  const isConnectedToDocsConnect =
+    !!docsConnectConnection?.address &&
+    !!docServiceUrl &&
+    normalizeAddress(docServiceUrl) ===
+      normalizeAddress(docsConnectConnection.address);
+
+  const showConnectEditorsBanner =
+    !!docsConnectConnection && !isConnectedToDocsConnect;
+
   const isFormEmpty =
     !docServiceUrl && !internalUrl && !portalUrl && !authHeader && !secretKey;
   const allInputsValid =
@@ -256,6 +326,52 @@ const DocumentService = ({
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>
+        {showConnectEditorsBanner ? (
+          <div className={styles.docsConnectPromo}>
+            <div className={styles.docsConnectPromoText}>
+              <Text className={styles.docsConnectPromoTitle}>
+                {t("Settings:DocsConnectReadyTitle")}
+              </Text>
+              <Text className={styles.docsConnectPromoDescription}>
+                {t("Settings:DocsConnectReadyDescription", {
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                })}
+              </Text>
+            </div>
+            <Button
+              className={styles.docsConnectPromoButton}
+              size={ButtonSize.small}
+              primary
+              label={t("Settings:ConnectEditors")}
+              onClick={() => setConnectDialogVisible(true)}
+              isDisabled={isSaveLoading || isResetLoading || isConnecting}
+              dataTestId="docs_connect_connect_editors"
+            />
+          </div>
+        ) : (
+          <div className={styles.docsConnectPromo}>
+            <div className={styles.docsConnectPromoText}>
+              <Text className={styles.docsConnectPromoTitle}>
+                {t("Settings:DocsConnectPromoTitle")}
+              </Text>
+              <Text className={styles.docsConnectPromoDescription}>
+                {t("Settings:DocsConnectPromoDescription", {
+                  organizationName: getBrandName("OrganizationName"),
+                  editorsName: getBrandName("ProductEditorsName"),
+                })}
+              </Text>
+            </div>
+            <Button
+              className={styles.docsConnectPromoButton}
+              size={ButtonSize.small}
+              primary
+              label={t("Common:LearnMore")}
+              onClick={() => window.open(apiBasicLink, "_blank")}
+            />
+          </div>
+        )}
+
         <div className={styles.formInputs}>
           <div className={styles.inputWrapper}>
             <Label
@@ -304,6 +420,7 @@ const DocumentService = ({
             <PasswordInput
               key={secretKeyVersion}
               id="secretKey"
+              inputName="secret_key"
               type="password"
               simpleView
               tabIndex={2}
@@ -434,16 +551,31 @@ const DocumentService = ({
           cancelButtonDataTestId="default_settings_button"
         />
       </Styled.LocationForm>
+
+      {connectDialogVisible ? (
+        <ApplyToPortalDialog
+          visible
+          isSaving={isConnecting}
+          onApply={onConnectDocsConnect}
+          onClose={() => setConnectDialogVisible(false)}
+        />
+      ) : null}
     </Styled.Location>
   );
 };
 
 export default inject(
-  ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
+  ({
+    settingsStore,
+    filesSettingsStore,
+    clientLoadingStore,
+    docsConnectStore,
+  }) => {
     const {
       currentColorScheme,
       documentServiceSettingsUrl,
       currentDeviceType,
+      apiBasicLink,
     } = settingsStore;
     const {
       changeDocumentServiceLocation,
@@ -458,6 +590,10 @@ export default inject(
       currentDeviceType,
       showPortalSettingsLoader,
       initialDocumentServiceData,
+      apiBasicLink,
+      docsConnectConnection: docsConnectStore.connectionData,
+      fetchDocsConnectConnection: docsConnectStore.fetchConnection,
+      applyDocsConnectToPortal: docsConnectStore.applyToDocumentService,
     };
   },
 )(observer(DocumentService));

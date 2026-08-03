@@ -3,7 +3,7 @@
   "content": "User statistics",
   "content_en_sha1_hash": "886d9a23018d67df3ac3b18222e9f6bd7b18c42a",
   "created_at": "2025-09-19T15:39:07.580Z",
-  "updated_at": "2026-04-11T20:54:13.041Z",
+  "updated_at": "2026-05-15T14:00:06.942Z",
   "comment": {
     "text": "This is the title of a dialog window that displays information about user statistics.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/UserStatisticsDialog/index.tsx",
-      "line_number": 59,
+      "line_number": 68,
       "context": "onClose={onClose}\n visible={isVisible}\n isLoading={isLoading}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"EditUserStatistics\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.modalBodyContent}>\n <div className={styles.textContainer}>\n <Text lineHeight=\"20px\">{t(\"EditAccessInfo\")}</Text>\n <Text lineHeight=\"20px\" fontWeight={600}>",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

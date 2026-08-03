@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Изберете от списъка",
-  "FileLocked": "Файлът е заключен",
   "FileProtected": "Файлът е защитен с парола",
-  "FileUnlocked": "Файлът е отключен",
   "FolderTitleBoxNet": "Box директория",
   "FolderTitleDocuSign": "DocuSign профил",
   "FolderTitleDropBox": "Dropbox директория",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "WebDAV директория",
   "FolderTitleYandex": "Yandex директория",
   "NewForm": "PDF формуляр",
-  "OwnerChange": "Смени собственик",
   "RoleGuestDescriprion": "Гостите имат достъп до стаите, в които са поканени, както и да създават и редактират документи, ако са им назначени съответните роли в стаята.",
   "SearchByHeadOfGroup": "Търсене по Ръководител на група",
   "SearchByOwner": "Търсене по собственици",

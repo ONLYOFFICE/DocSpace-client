@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useState, useEffect, useMemo } from "react";
 import { useEventLog } from "../sub-components/useEventLog";
@@ -122,8 +131,8 @@ const Manager = (props) => {
     { key: "AZ", label: t("Common:Title") },
     { key: "Type", label: t("Common:Type") },
     { key: "Size", label: t("Common:Size") },
-    { key: "DateAndTimeCreation", label: t("Files:ByCreation") },
-    { key: "Author", label: t("Files:ByAuthor") },
+    { key: "DateAndTimeCreation", label: t("Common:ByCreation") },
+    { key: "Author", label: t("Common:ByAuthor") },
   ];
 
   const dataSortOrder = [
@@ -440,7 +449,9 @@ const Manager = (props) => {
       description={t("CustomDescription", {
         productName: getBrandName("ProductName"),
       })}
-      header={t("CreateSamplePortal", { productName: getBrandName("ProductName") })}
+      header={t("CreateSamplePortal", {
+        productName: getBrandName("ProductName"),
+      })}
     >
       <Container>
         <PreviewBlock
@@ -481,7 +492,7 @@ const Manager = (props) => {
           </ControlsSection>
 
           <ControlsSection>
-            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+            <CategorySubHeader>{t("Common:InterfaceElements")}</CategorySubHeader>
 
             <CheckboxGroup>
               <LabelGroup>
@@ -576,7 +587,7 @@ const Manager = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("SearchFilterAndSort")}
+                  label={t("Common:SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
                   dataTestId="show_filter_checkbox"
@@ -587,8 +598,8 @@ const Manager = (props) => {
                   size={12}
                   tooltipContent={
                     <TooltipContent
-                      title={t("SearchBlock")}
-                      description={t("ManagerSearchBlockDescription")}
+                      title={t("Common:SearchBlock")}
+                      description={t("Common:ManagerSearchBlockDescription")}
                       img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     />
                   }
@@ -598,7 +609,7 @@ const Manager = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("Header")}
+                  label={t("Common:Header")}
                   onChange={onChangeShowHeader}
                   isChecked={config.showHeader}
                   dataTestId="show_header_checkbox"
@@ -610,8 +621,8 @@ const Manager = (props) => {
                   size={12}
                   tooltipContent={
                     <TooltipContent
-                      title={t("Header")}
-                      description={t("HeaderDescription", {
+                      title={t("Common:Header")}
+                      description={t("Common:HeaderDescription", {
                         productName: getBrandName("ProductName"),
                       })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
@@ -787,9 +798,9 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
   withTranslation([
     "JavascriptSdk",
     "Files",
-    "EmbeddingPanel",
     "Common",
     "Files",
     "Translations",
   ])(observer(Manager)),
 );
+

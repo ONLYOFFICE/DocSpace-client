@@ -52,7 +52,7 @@
   "LdapSettingsCertUnrecognizedError": "Нераспознанная ошибка",
   "LdapSettingsCertUntrustedCa": "Центр сертификации, выдавший сертификат, не является доверенным",
   "LdapSettingsCertUntrustedRoot": "Корневой центр сертификации, выдавший сертификат, не является доверенным",
-  "LdapSettingsIssuerName": "Название эмитента",
+  "LdapSettingsIssuerName": "Название издателя сертификата",
   "LdapSettingsSerialNumber": "Серийный номер",
   "LdapSettingsSubjectName": "Название субъекта",
   "LdapSettingsUniqueHash": "Уникальный хеш",

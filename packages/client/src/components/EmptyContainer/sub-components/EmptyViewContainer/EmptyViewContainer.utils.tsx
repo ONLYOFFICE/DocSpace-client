@@ -1,30 +1,41 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
+import React from "react";
 import { match, P } from "ts-pattern";
+import { Trans } from "react-i18next";
 
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
@@ -113,6 +124,8 @@ import type {
   UploadType,
 } from "./EmptyViewContainer.types";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { Text } from "@docspace/ui-kit/components";
+import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 export const isUser = (access: AccessType) => {
   return (
@@ -161,7 +174,7 @@ export const getFolderDescription = (
       }),
     )
     .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
-      t("EmptyView:DefaultFolderDescription"),
+      t("Common:DefaultFolderDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isUser)], () =>
       t("Common:UserEmptyDescription"),
@@ -182,10 +195,10 @@ export const getRoomDescription = (
 
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsUserTitle", {
+    ? t("Common:EmptyAIAgentsUserTitle", {
         aiAgents: t("Common:AIAgents"),
       })
-    : t("EmptyView:EmptyAIAgentsTitle", {
+    : t("Common:EmptyAIAgentsTitle", {
         aiAgent: t("Common:AIAgent"),
       });
 };
@@ -201,20 +214,24 @@ const getAIAgentsAIDisabledTitle = (
         aiProvider: t("Common:AIProvider"),
       }),
     )
-    .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),
-    )
-    .otherwise(() =>
-      t("EmptyView:EmptyAIAgentsAIDisabledUserTitle", {
+    .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
+    // standalone user
+    .with([true, false], () =>
+      t("Common:EmptyAIAgentsAIDisabledUserTitle", {
         aiAgents: t("Common:AIAgents"),
       }),
-    );
+    )
+    // saas user
+    .otherwise(() => t("Common:AIFeaturesNotActive"));
 };
 
 const getAIAgentsAIDisabledDescription = (
   t: TTranslation,
   standalone: boolean,
   isPortalAdmin: boolean,
+  isPayer?: boolean,
+  walletCustomerEmail?: string | null,
+  walletCustomerDisplayName?: string | null,
 ) => {
   return match([standalone, isPortalAdmin])
     .with([true, true], () =>
@@ -223,16 +240,49 @@ const getAIAgentsAIDisabledDescription = (
         aiChats: t("Common:AIChats"),
       }),
     )
-    .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
+    .with([false, true], () => {
+      const payerLabel = walletCustomerDisplayName || walletCustomerEmail;
+
+      return (
+        <>
+          <Text as="span">
+            {t("Common:EmptyAIAgentsNotActiveYetDescription")}
+          </Text>
+          <Text as="span" style={{ display: "block", marginTop: "8px" }}>
+            {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
+          </Text>
+          {!isPayer && payerLabel ? (
+            <Text as="span" style={{ display: "block", marginTop: "8px" }}>
+              <Trans
+                i18nKey="Common:EmptyAIAgentsNotActiveYetContactPayer"
+                values={{ payerContact: payerLabel }}
+                components={{
+                  1:
+                    walletCustomerEmail && !walletCustomerDisplayName ? (
+                      <Link
+                        type={LinkType.action}
+                        href={`mailto:${walletCustomerEmail}`}
+                        color="accent"
+                      />
+                    ) : (
+                      <Text as="span" />
+                    ),
+                }}
+              />
+            </Text>
+          ) : null}
+        </>
+      );
+    })
+    .with([true, false], () =>
+      t("Common:EmptyAIAgentsAIDisabledDescription", {
         productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>
-      t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
+      t("Common:EmptyAIDisabledContactAdminDesc", {
         productName: getBrandName("ProductName"),
-        aiAgents: t("Common:AIAgents"),
       }),
     );
 };
@@ -242,10 +292,10 @@ const getAIAgentsAIEnabledDescription = (
   access: AccessType,
 ) => {
   return isUser(access)
-    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription", {
+    ? t("Common:EmptyAIAgentsAIEnabledUserDescription", {
         aiAgents: t("Common:AIAgents"),
       })
-    : t("EmptyView:EmptyAIAgentsDescription", {
+    : t("Common:EmptyAIAgentsDescription", {
         mcpServer: t("Common:MCPServer"),
       });
 };
@@ -255,18 +305,28 @@ export const getRootDescription = (
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
-  security: Nullable<TFolderSecurity>,
+  security: Nullable<
+    TFolderSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   standalone: boolean,
   aiReady: boolean,
   isPortalAdmin: boolean,
+  isPayer?: boolean,
+  walletCustomerEmail?: string | null,
+  walletCustomerDisplayName?: string | null,
 ) => {
   return match([rootFolderType, access])
-    .with(
-      [FolderType.AIAgents, P._],
-      () =>
-        aiReady
-          ? getAIAgentsAIEnabledDescription(t, access)
-          : getAIAgentsAIDisabledDescription(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+    .with([FolderType.AIAgents, P._], () =>
+      aiReady
+        ? getAIAgentsAIEnabledDescription(t, access)
+        : getAIAgentsAIDisabledDescription(
+            t,
+            standalone,
+            isPortalAdmin,
+            isPayer,
+            walletCustomerEmail,
+            walletCustomerDisplayName,
+          ),
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -277,6 +337,9 @@ export const getRootDescription = (
     .with([FolderType.RoomTemplates, P._], () =>
       t("EmptyView:EmptyTemplatesDescription"),
     )
+    .with([FolderType.Forms, P._], () =>
+      t("Files:RoomEmptyContainerDescription"),
+    )
     .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
       <>
         <span>{t("Common:RoomEmptyAtTheMoment")}</span>
@@ -285,19 +348,19 @@ export const getRootDescription = (
       </>
     ))
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
-      t("EmptyView:DefaultFolderDescription"),
+      t("Common:DefaultFolderDescription"),
     )
     .with([FolderType.SHARE, P._], () =>
-      t("EmptyView:EmptyShareDescription", {
+      t("Common:EmptyShareDescription", {
         productName: getBrandName("ProductName"),
       }),
     )
-    .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
+    .with([FolderType.Recent, P._], () => t("Common:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
-      t("EmptyView:EmptyFavoritesDescription"),
+      t("Common:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
-      t("Files:ArchiveEmptyScreen", {
+      t("Common:ArchiveEmptyScreen", {
         productName: getBrandName("ProductName"),
       }),
     )
@@ -305,7 +368,7 @@ export const getRootDescription = (
       t("Files:ArchiveEmptyScreenUser"),
     )
     .with([FolderType.TRASH, P._], () =>
-      t("Files:TrashFunctionalityDescription", {
+      t("Common:TrashFunctionalityDescription", {
         sectionName: t("Common:TrashSection"),
       }),
     )
@@ -389,12 +452,10 @@ export const getRootTitle = (
   isPortalAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with(
-      [FolderType.AIAgents, P._],
-      () =>
-        aiReady
-          ? getAIAgentsAIEnabledTitle(t, access)
-          : getAIAgentsAIDisabledTitle(t, true, isPortalAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
+    .with([FolderType.AIAgents, P._], () =>
+      aiReady
+        ? getAIAgentsAIEnabledTitle(t, access)
+        : getAIAgentsAIDisabledTitle(t, standalone, isPortalAdmin),
     )
     .with(
       [
@@ -418,13 +479,18 @@ export const getRootTitle = (
     .with([FolderType.RoomTemplates, P._], () =>
       t("EmptyView:EmptyTemplatesTitle"),
     )
+    .with([FolderType.Forms, P._], () =>
+      t("Common:EmptyRootRoomHeader", {
+        productName: getBrandName("ProductName"),
+      }),
+    )
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )
-    .with([FolderType.SHARE, P._], () => t("EmptyView:EmptyShareTitle"))
-    .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
-    .with([FolderType.Recent, P._], () => t("EmptyView:NoRecentFilesHereYet"))
-    .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
+    .with([FolderType.SHARE, P._], () => t("Common:EmptyShareTitle"))
+    .with([FolderType.Favorites, P._], () => t("Common:EmptyFavoritesTitle"))
+    .with([FolderType.Recent, P._], () => t("Common:NoRecentFilesHereYet"))
+    .with([FolderType.Archive, P._], () => t("Common:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");
 };
@@ -434,7 +500,9 @@ export const getFolderIcon = (
   isBaseTheme: boolean,
   access: AccessType,
   folderType: Nullable<FolderType>,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isResultsTab?: boolean,
 ) => {
   return match([roomType, folderType, access])
@@ -473,7 +541,9 @@ export const getRoomIcon = (
   type: RoomsType,
   isBaseTheme: boolean,
   access: AccessType,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isResultsTab?: boolean,
 ) => {
   return match([type, access])
@@ -682,6 +752,9 @@ export const getRootIcon = (
         <EmptyRoomsRootUserDarkIcon />
       ),
     )
+    .with([FolderType.Forms, P._], () =>
+      isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
+    )
     .with([FolderType.USER, ShareAccessRights.None], () =>
       isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,
     )
@@ -712,7 +785,9 @@ export const getRootIcon = (
 
 export const helperOptions = (
   actions: OptionActions,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isFrame?: boolean,
 ) => {
   const createInviteOption = (title: string, description: string) => {
@@ -755,12 +830,16 @@ export const helperOptions = (
     title: string,
     description: string,
     uploadType: UploadType,
+    isKnowledge?: boolean,
   ) => ({
     title,
     description,
     icon: <UploadDevicePDFFormIcon />,
     key: "create-form",
-    onClick: () => actions.onUploadAction(uploadType),
+    onClick: () =>
+      isKnowledge
+        ? actions.uploadFromDeviceAiKnowledge()
+        : actions.onUploadAction(uploadType),
     disabled: !security?.Create,
   });
 
@@ -789,3 +868,4 @@ export const helperOptions = (
     createUploadFromDeviceOption,
   };
 };
+

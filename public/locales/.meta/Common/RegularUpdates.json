@@ -3,7 +3,7 @@
   "content": "Regular updates",
   "content_en_sha1_hash": "aaa02e450b3541560dd03ab597a76ba6f7886caf",
   "created_at": "2026-02-18T14:56:09.862Z",
-  "updated_at": "2026-04-13T14:59:05.974Z",
+  "updated_at": "2026-05-15T14:00:06.958Z",
   "comment": {
     "text": "This is a short label describing a benefit of the product, indicating that the software receives frequent updates.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
-      "line_number": 113,
+      "line_number": 122,
       "context": "description: t(\"UpgradeToProBannerItemScalabilityDescr\"),\n };\n \n const regularUpdates = {\n imag: RegularUpdatesReactSvgUrl,\n title: t(\"RegularUpdates\"),\n description: t(\"RegularUpdatesDescription\"),\n };\n \n const customization = {\n imag: CustomizationReactSvgUrl,",
       "module": "/packages/shared"
     }

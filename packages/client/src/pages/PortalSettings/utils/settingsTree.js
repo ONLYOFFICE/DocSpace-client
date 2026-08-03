@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { PageType } from "@docspace/shared/enums";
 
@@ -47,7 +56,7 @@ export const settingsTree = [
         key: "0-0",
         icon: "",
         link: "general",
-        tKey: "SettingsGeneral",
+        tKey: "Common:SettingsGeneral",
         isCategory: true,
         children: [
           {
@@ -254,6 +263,13 @@ export const settingsTree = [
             link: "lifetime",
             tKey: "SessionLifetime",
           },
+          {
+            id: "portal-settings_catalog-access-control",
+            key: "1-0-9",
+            icon: "",
+            link: "access-control",
+            tKey: "AccessControl",
+          },
         ],
       },
       {
@@ -261,7 +277,7 @@ export const settingsTree = [
         key: "1-1",
         icon: "",
         link: "access-rights",
-        tKey: "AccessRights",
+        tKey: "Common:AccessRights",
         isCategory: true,
         children: [
           {
@@ -295,7 +311,7 @@ export const settingsTree = [
     key: "2",
     type: PageType.backup,
     link: "backup",
-    tKey: "Backup",
+    tKey: "Common:Backup",
     isHeader: true,
     children: [
       {
@@ -303,7 +319,7 @@ export const settingsTree = [
         key: "2-0",
         icon: "",
         link: "data-backup",
-        tKey: "Backup",
+        tKey: "Common:Backup",
         isCategory: true,
       },
       {
@@ -311,7 +327,7 @@ export const settingsTree = [
         key: "2-1",
         icon: "",
         link: "auto-backup",
-        tKey: "AutoBackup",
+        tKey: "Common:AutoBackup",
         isCategory: true,
       },
     ],
@@ -402,7 +418,7 @@ export const settingsTree = [
         key: "4-3",
         icon: "",
         link: "plugins",
-        tKey: "Plugins",
+        tKey: "Common:Plugins",
         isCategory: true,
       },
       {
@@ -484,37 +500,44 @@ export const settingsTree = [
   {
     id: "portal-settings_catalog-ai-settings",
     key: "7",
-    type: PageType.aiSettings,
     link: "ai-settings",
     tKey: "AISettings",
+    type: PageType.aiSettings,
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-ai-settings-providers",
+        id: "portal-settings_catalog-ai-settings-ai-models",
         key: "7-0",
-        link: "providers",
+        link: "ai-models",
         tKey: "AISettings",
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-ai-settings-servers",
+        id: "portal-settings_catalog-ai-settings-model-assignment",
         key: "7-1",
-        link: "servers",
+        link: "model-assignment",
         tKey: "AISettings",
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-ai-settings-search",
+        id: "portal-settings_catalog-ai-settings-mcp-servers",
         key: "7-2",
-        link: "search",
+        link: "mcp-servers",
+        tKey: "AISettings",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-ai-settings-web-search",
+        key: "7-3",
+        link: "web-search",
         tKey: "AISettings",
         isCategory: true,
       },
       {
         id: "portal-settings_catalog-ai-settings-knowledge",
-        key: "7-3",
+        key: "7-4",
         link: "knowledge",
-        tKey: "AIRoom:Knowledge",
+        tKey: "Common:Knowledge",
         isCategory: true,
       },
     ],
@@ -548,6 +571,7 @@ export const settingsTree = [
     key: "10",
     type: PageType.payments,
     link: "payments",
+    alternativeUrl: "/billing/overview",
     tKey: "Common:PaymentsTitle",
     isHeader: true,
     children: [
@@ -564,7 +588,7 @@ export const settingsTree = [
         key: "10-1",
         icon: "",
         link: "payment-method",
-        tKey: "PaymentMethod",
+        tKey: "Common:PaymentMethod",
         isCategory: true,
       },
       {
@@ -572,7 +596,7 @@ export const settingsTree = [
         key: "10-2",
         icon: "",
         link: "wallet",
-        tKey: "Wallet",
+        tKey: "Common:Wallet",
         isCategory: true,
       },
       {
@@ -582,6 +606,43 @@ export const settingsTree = [
         link: "services",
         tKey: "Services",
         isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-services-ai-services",
+            key: "10-3-0",
+            icon: "",
+            link: "ai-services",
+            tKey: "Common:AIFeatures",
+          },
+          {
+            id: "portal-settings_catalog-services-backup",
+            key: "10-3-1",
+            icon: "",
+            link: "backup",
+            tKey: "Common:AdditionalBackup",
+          },
+          {
+            id: "portal-settings_catalog-services-disk-storage",
+            key: "10-3-2",
+            icon: "",
+            link: "disk-storage",
+            tKey: "Common:AdditionalDiskStorage",
+          },
+          {
+            id: "portal-settings_catalog-services-ai-search",
+            key: "10-3-3",
+            icon: "",
+            link: "ai-search",
+            tKey: "Common:AISearch",
+          },
+          {
+            id: "portal-settings_catalog-services-docs-connect",
+            key: "10-3-4",
+            icon: "",
+            link: "docs-connect",
+            tKey: "DocsConnect:DocsConnect",
+          },
+        ],
       },
     ],
   },
@@ -729,4 +790,3 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
-

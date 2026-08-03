@@ -1,0 +1,29 @@
+{
+  "key_path": "AIAgentsNonAdminDescription",
+  "content": "Creating AI agents is available for administrators only. Ask a workspace administrator to set up agents for your team.",
+  "content_en_sha1_hash": "0a73a16c3adbe90e7079787b171e4a869128d176",
+  "created_at": "2026-05-24T17:26:34.080Z",
+  "updated_at": "2026-07-07T08:59:21.781Z",
+  "comment": {
+    "text": "Description text in an EmptyView shown to users without administrative permissions when accessing the AI Agents page.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T19:00:32.955Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiAgents/index.tsx",
+      "line_number": 234,
+      "context": "if (!canManageAgents) {\n return (\n <EmptyView\n title={t(\"Common:DashboardAIChatAgentsTitle\")}\n description={t(\"Common:AIAgentsNonAdminDescription\")}\n icon={\n theme?.isBase !== false ? (\n <AiAgentsLightIcon />\n ) : (\n <AiAgentsDarkIcon />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
   "content_en_sha1_hash": "88ee3565e7278333f18e98758425d1d926d181c4",
   "created_at": "2025-05-19T21:30:56.920Z",
-  "updated_at": "2026-04-11T21:04:03.284Z",
+  "updated_at": "2026-07-07T08:59:21.716Z",
   "comment": {
     "text": "This is a message displayed in a dialog when changing multiple guests' user type to \"Admin\". It informs the user about the new user type and the permissions associated with it. `{{membersSection}}` refers to a section name, `{{secondType}}` is the new user type (\"Admin\"), `{{productName}}` is the product name, and `{{documentsSection}}` is another section name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/getChangeTypeKey.ts",
-      "line_number": 33,
+      "line_number": 68,
       "context": "[EmployeeType.Guest]: \"\",\n [EmployeeType.Owner]: \"\",\n },\n multiple: {\n [EmployeeType.RoomAdmin]: `${t(\"ChangeGuestsTypeToManagerMulti\", values)}`,\n [EmployeeType.Admin]: `${t(\"ChangeGuestsTypeToAdminMulti\", values)}`,\n [EmployeeType.User]: `${t(\"ChangeGuestsTypeMessageMulti\", values)}`,\n [EmployeeType.Guest]: \"\",\n [EmployeeType.Owner]: \"\",\n },\n };",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

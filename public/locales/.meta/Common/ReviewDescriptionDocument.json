@@ -3,7 +3,7 @@
   "content": "Viewing, reviewing, commenting.",
   "content_en_sha1_hash": "b4d8b6b8ce37549c9885b62e2e1334d954aff902",
   "created_at": "2025-09-29T18:22:08.487Z",
-  "updated_at": "2026-04-13T09:04:54.115Z",
+  "updated_at": "2026-05-15T14:00:06.935Z",
   "comment": {
     "text": "This is a short description of document access rights, displayed in a dropdown menu or similar UI element. It indicates that the user has permissions to view, review, and comment on the document.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 635,
+      "line_number": 644,
       "context": "{ fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Review },\n () => t(\"Common:ReviewDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Comment },\n () => t(\"Common:CommentDescriptionDocument\"),\n )",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

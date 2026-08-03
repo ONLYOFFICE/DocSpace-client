@@ -1,0 +1,29 @@
+{
+  "key_path": "GetAccessToAIModels",
+  "content": "Get access to a wide range of AI models through OpenRouter integration",
+  "content_en_sha1_hash": "709e24db73d11778ad74923671b3e4648eb18088",
+  "created_at": "2026-07-03T11:07:35.868Z",
+  "updated_at": "2026-07-03T11:11:16.028Z",
+  "comment": {
+    "text": "Description text within the AI features banner, displayed when AI features are currently disabled.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:11:16.028Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 158,
+      "context": ") : null}\n </div>\n <Text as=\"div\" fontSize=\"12px\" className={styles.descriptionText}>\n {isEnabled\n ? t(\"Common:AIFeaturesEnabledDescription\")\n : t(\"Common:GetAccessToAIModels\")}\n {isMobile && !isEnabled ? (\n <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />\n ) : null}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -44,38 +53,28 @@ import {
   ArticleMainButtonContent,
 } from "./components/Article";
 import ArticleWrapper from "./components/ArticleWrapper";
+import ClientArticleSidebar from "./components/ClientArticleSidebar";
+import AccountsSidebar from "./components/AccountsSidebar";
+import DeveloperToolsSidebar from "./components/DeveloperToolsSidebar";
+import BillingSidebar from "./components/BillingSidebar";
+import { SdkFrameProvider } from "./components/SdkFrameHost/SdkFrameContext";
+import SdkFrameHost from "./components/SdkFrameHost/SdkFrameHost";
+import sdkHostStyles from "./components/SdkFrameHost/SdkFrameHost.module.scss";
 
 const ClientArticle = React.memo(
   ({
-    withMainButton,
     showArticleLoader,
     isInfoPanelVisible,
     isAccountsArticle,
     isDeveloperToolsArticle,
+    isBillingArticle,
+    withMainButton,
   }) => {
-    return (
-      <ArticleWrapper
-        isInfoPanelVisible={isInfoPanelVisible}
-        withMainButton={withMainButton}
-        showArticleLoader={showArticleLoader && !isDeveloperToolsArticle}
-        showBackButton={isAccountsArticle || isDeveloperToolsArticle}
-      >
-        <Article.Header>
-          <ArticleHeaderContent />
-        </Article.Header>
+    if (isAccountsArticle) return <AccountsSidebar />;
+    if (isDeveloperToolsArticle) return <DeveloperToolsSidebar />;
+    if (isBillingArticle) return <BillingSidebar />;
 
-        <Article.MainButton>
-          <ArticleMainButtonContent />
-        </Article.MainButton>
-
-        <Article.Body>
-          <ArticleBodyContent
-            isAccountsArticle={isAccountsArticle}
-            isDeveloperToolsArticle={isDeveloperToolsArticle}
-          />
-        </Article.Body>
-      </ArticleWrapper>
-    );
+    return <ClientArticleSidebar />;
   },
 );
 
@@ -88,8 +87,9 @@ const ClientContent = (props) => {
     isAuthenticated,
     user,
     isEncryption,
-    encryptionKeys,
-    setEncryptionKeys,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
     showMenu,
@@ -125,26 +125,28 @@ const ClientContent = (props) => {
       regDesktop(
         user,
         isEncryption,
-        encryptionKeys,
-        setEncryptionKeys,
+        legacyEncryptionKeys,
+        setLegacyEncryptionKeys,
+        updateLegacyEncryptionKeys,
         isEditor,
         null,
         t,
       );
-      //   console.log(
-      //     "%c%s",
-      //     "color: green; font: 1.2em bold;",
-      //     "Current keys is: ",
-      //     encryptionKeys
-      //   );
+      console.log(
+        "%c%s",
+        "color: green; font: 1.2em bold;",
+        "Current keys is: ",
+        legacyEncryptionKeys,
+      );
     }
   }, [
     t,
     isAuthenticated,
     user,
     isEncryption,
-    encryptionKeys,
-    setEncryptionKeys,
+    legacyEncryptionKeys,
+    setLegacyEncryptionKeys,
+    updateLegacyEncryptionKeys,
     isLoaded,
     isDesktop,
   ]);
@@ -163,8 +165,16 @@ const ClientContent = (props) => {
       location.state?.fromUrl?.includes("/accounts"));
   const isDeveloperToolsArticle =
     location.pathname.includes("/developer-tools");
+  const isBillingArticle = location.pathname.startsWith("/billing");
+  const isNewArticle =
+    location.pathname.startsWith("/ai-files") ||
+    location.pathname.startsWith("/ai-rooms") ||
+    location.pathname.startsWith("/ai-forms") ||
+    location.pathname.startsWith("/agents") ||
+    location.pathname.startsWith("/ai-arbiter") ||
+    location.pathname.startsWith("/dashboard");
   const withMainButton =
-    isAccountsArticle || isDeveloperToolsArticle
+    isAccountsArticle || isDeveloperToolsArticle || isBillingArticle
       ? currentDeviceType !== DeviceType.desktop
       : true;
 
@@ -172,19 +182,7 @@ const ClientContent = (props) => {
     <>
       <FilesPanels />
       <GlobalEvents />
-      {isFrame ? (
-        showMenu && (
-          <ClientArticle
-            isInfoPanelVisible={isInfoPanelVisible}
-            withMainButton={withMainButton}
-            setIsHeaderLoading={setIsHeaderLoading}
-            setIsFilterLoading={setIsFilterLoading}
-            showArticleLoader={showArticleLoader}
-            isAccountsArticle={isAccountsArticle}
-            isDeveloperToolsArticle={isDeveloperToolsArticle}
-          />
-        )
-      ) : (
+      {(!isFrame || showMenu) && (
         <ClientArticle
           isInfoPanelVisible={isInfoPanelVisible}
           withMainButton={withMainButton}
@@ -193,9 +191,22 @@ const ClientContent = (props) => {
           showArticleLoader={showArticleLoader}
           isAccountsArticle={isAccountsArticle}
           isDeveloperToolsArticle={isDeveloperToolsArticle}
+          isBillingArticle={isBillingArticle}
+          forceNewArticle={!isFrame && isNewArticle}
         />
       )}
-      <Outlet />
+      {isNewArticle ? (
+        <SdkFrameProvider>
+          <div className={sdkHostStyles.contentCell}>
+            <SdkFrameHost />
+            <div className={sdkHostStyles.outletLayer}>
+              <Outlet />
+            </div>
+          </div>
+        </SdkFrameProvider>
+      ) : (
+        <Outlet />
+      )}
     </>
   );
 };
@@ -214,8 +225,9 @@ export const Client = inject(
       frameConfig,
       isFrame,
       isDesktopClient,
-      encryptionKeys,
-      setEncryptionKeys,
+      legacyEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       isEncryptionSupport,
       enablePlugins,
       isDesktopClientInit,
@@ -247,7 +259,7 @@ export const Client = inject(
       showMenu: frameConfig?.showMenu,
       user: userStore.user,
       isAuthenticated: authStore.isAuthenticated,
-      encryptionKeys,
+      legacyEncryptionKeys,
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
@@ -255,7 +267,8 @@ export const Client = inject(
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
-      setEncryptionKeys,
+      setLegacyEncryptionKeys,
+      updateLegacyEncryptionKeys,
       showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];
@@ -268,3 +281,4 @@ export const Client = inject(
     };
   },
 )(withTranslation("Common")(observer(ClientContent)));
+

@@ -3,7 +3,7 @@
   "content": "Filling was stopped by <1>{{userName}}</1>",
   "content_en_sha1_hash": "093cefe1472a16419b884b4d52a6896fc3d841fb",
   "created_at": "2025-05-19T21:30:45.782Z",
-  "updated_at": "2026-04-11T20:51:16.245Z",
+  "updated_at": "2026-05-15T14:00:06.931Z",
   "comment": {
     "text": "This is a history entry describing when a form filling process was stopped. It appears in a list of form filling history events, with `{{userName}}` representing the name of the user who stopped the filling.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
-      "line_number": 57,
+      "line_number": 66,
       "context": "\"Common:HistorySubmittedPartDescription\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (\n <Trans\n t={t}\n i18nKey=\"HistoryStopDate\"\n ns=\"Common\"\n values={{ userName: stoppedByUserName }}\n components={{ 1: <strong title={stoppedByUserName} /> }}\n />\n ),",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

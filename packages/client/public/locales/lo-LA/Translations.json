@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "ເລືອກຈາກບັນຊີລາຍຊື່",
-  "FileLocked": "ໄຟລ໌ ລັອກ",
   "FileProtected": "ໄຟລ໌ຖືກປ້ອງກັນດ້ວຍລະຫັດຜ່ານ",
-  "FileUnlocked": "ໄຟລ໌ ປົດລັອກ",
   "FolderTitleBoxNet": "ໂຟນເດີ Box",
   "FolderTitleDocuSign": "ບັນຊີ DocuSign",
   "FolderTitleDropBox": "ໄດເລກະທໍລີ Dropbox",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "ໄດເລກະທໍລີ WebDAV",
   "FolderTitleYandex": "ໄດເລກະທໍລີ Yandex",
   "NewForm": "ແບບຟອມ PDF",
-  "OwnerChange": "ປ່ຽນເຈົ້າຂອງ",
   "RoleGuestDescriprion": "ແຂກສາມາດເຂົ້າເຖິງຫ້ອງທີ່ຖືກເຊີນເຂົ້າໄດ້, ນອກຈາກນັ້ນຍັງສາມາດສ້າງ ແລະ ແກ້ໄຂເອກະສານໄດ້ຖ້າຖືກມອບບົດບາດທີ່ເຫມາະສົມໃນຫ້ອງນັ້ນໆ.",
   "SearchByHeadOfGroup": "ຄົ້ນຫາໂດຍຫົວຫນ້າກຸ່ມ",
   "SearchByOwner": "ຄົ້ນຫາໂດຍເຈົ້າຂອງ",

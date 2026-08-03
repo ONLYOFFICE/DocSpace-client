@@ -3,7 +3,7 @@
   "content": "<1>Available limit under current plan:</1> {{amount}}",
   "content_en_sha1_hash": "af7ce86f804a4b2e0bd398705d8d726320d4a33a",
   "created_at": "2026-04-10T13:53:41.945Z",
-  "updated_at": "2026-04-11T20:58:46.440Z",
+  "updated_at": "2026-05-15T14:00:06.992Z",
   "comment": {
     "text": "This is a line of text within a dialog, indicating the remaining storage limit under the current plan. `{{amount}}` is a placeholder for the specific storage size (e.g., \"10 GB\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
-      "line_number": 137,
+      "line_number": 146,
       "context": "}}\n />\n </Text>\n <Text>\n <CommonTrans\n i18nKey=\"AvailableLimit\"\n \n values={{\n amount: getConvertedSize(t, maxTotalSizeByQuota!),\n }}\n components={{",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

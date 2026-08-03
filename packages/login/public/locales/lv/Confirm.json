@@ -38,6 +38,7 @@
   "TermsAndConditions": "Turpinot jūs saprotat un piekrītat mūsu <1>Noteikumiem un nosacījumiem</1> un <2>Paziņojumam par konfidencialitāti </2>.",
   "TfaSubTitle": "Sekojiet vienkāršiem soļiem, lai turpinātu darbu šajā {{productName}}:",
   "TfaTitle": "Divu faktoru autentifikācija aktivizēta drošai piekļuvei",
+  "UserAlreadyInvited": "Jūs jau esat uzaicināts. Lūdzu, pabeidziet reģistrāciju, izmantojot saiti no e-pasta.",
   "VerifyConnection": "Pārbaudīt savienojumu",
   "VerifyConnectionDescription": "Ievadiet 6 ciparu kodu, kas ģenerēts ar jūsu autentifikācijas lietotni, zemāk esošajā laukā, lai pabeigtu iestatīšanu."
 }

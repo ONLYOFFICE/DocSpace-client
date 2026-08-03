@@ -3,7 +3,7 @@
   "content": "No {{aiAgents}} available",
   "content_en_sha1_hash": "b566b268709ead1672687007ae9803ab6450e7ab",
   "created_at": "2025-12-19T10:16:33.576Z",
-  "updated_at": "2026-05-08T13:10:45.745Z",
+  "updated_at": "2026-05-15T14:00:07.035Z",
   "comment": {
     "text": "This is an error message displayed when no AI agents are available. The `{{aiAgents}}` variable will be replaced with the localized term for \"AI Agents\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 268,
+      "line_number": 277,
       "context": "<EmptyScreenAIAgentsSelectorLight />\n ) : (\n <EmptyScreenAIAgentsSelectorDark />\n )\n }\n emptyScreenHeader={t(\"NoAIAgents\", {\n aiAgents: t(\"AIAgents\"),\n })}\n emptyScreenDescription={t(\"NoAIAgentsDescription\")}\n searchEmptyScreenImage={\n isBase ? (",
       "module": "/libs/ui-kit"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

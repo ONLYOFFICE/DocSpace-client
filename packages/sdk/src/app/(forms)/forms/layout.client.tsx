@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
@@ -30,12 +39,22 @@ import React from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 import Section from "@docspace/ui-kit/components/section";
-import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
+import {
+  BlankPdfIcon,
+  GeneratePdfAiIcon,
+  CreateFromTextIcon,
+  CreateFromTemplateIcon,
+} from "@docspace/ui-kit/components/quick-actions/icons";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
+import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   frameCallbackData,
   frameCallEvent,
@@ -58,12 +77,11 @@ import {
   settingsSubSectionToPath,
 } from "../_utils/sectionFromPathname";
 import { appendRoomParams } from "../_utils/formsUrl";
+import { libraryUrl } from "../_utils/libraryUrl";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 // LibraryNavigationStore removed — library uses URL routing now
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
-import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
-import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import useInitCommonStores, {
   type CommonData,
@@ -72,25 +90,21 @@ import useFormsData from "../_hooks/useFormsData";
 import { FormsDataProvider } from "../_context/FormsDataContext";
 import useFolderActions from "../_hooks/useFolderActions";
 import useFormsSocket from "../_hooks/useFormsSocket";
-import useFormEventHooks from "../_hooks/useFormEventHooks";
 import useEditorGuard from "../_hooks/useEditorGuard";
 
-import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import { useFormsProgressStore } from "../_store/FormsProgressStore";
 import useTourSandbox from "../_hooks/useTourSandbox";
-import FormsSidebar from "../_components/sidebar";
 import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
 import FormsEditor from "../_components/forms-editor";
 import FormsHeader from "../_components/forms-header";
+import FormsFilter from "../_components/forms-filter";
+import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
+import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
 
-const AiChatPanel = dynamic(() => import("../_components/ai-chat-panel"), {
-  ssr: false,
-});
-const AiChatButton = dynamic(() => import("../_components/ai-chat-button"), {
-  ssr: false,
-});
 const CreateFormDialog = dynamic(
   () => import("../_components/create-form-dialog"),
   { ssr: false },
@@ -118,6 +132,9 @@ import {
 } from "../_utils/mockFormFiles";
 import styles from "../_components/forms-layout/FormsLayout.module.scss";
 
+// Minimum width the section content area may shrink to.
+const MIN_SECTION_WIDTH = 400;
+
 type FormsShellProps = {
   commonData: CommonData & { authToken: string };
   children: React.ReactNode;
@@ -135,16 +152,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     inProgressFolder,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
-    isSidebarOpen,
-    closeSidebar,
   } = formsNavigationStore;
   // libraryNav removed — library uses URL routing now
-  const aiStore = useFormsAiAgentStore();
-  const dbSettingsStore = useFormsDbSettingsStore();
-  const { sendToDb } = dbSettingsStore;
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
-  const { roomId, socketUrl, hasManagementAccess } = formsSettingsStore;
+  const { roomId, socketUrl, doneFolderId } = formsSettingsStore;
   const formsListStore = useFormsListStore();
   const { items, folders, isLoading } = formsListStore;
   const tourStore = useFormsTourStore();
@@ -160,18 +172,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   );
   const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
 
-  const { headerOffset, headerHeight, frameHeaderVars } =
-    useFrameHeaderConfig();
-
-  const isChatPanelOnLeft =
-    aiStore.isPanelVisible &&
-    !!aiStore.currentAgentId &&
-    hasManagementAccess &&
-    !editingFile &&
-    aiStore.panelPosition === "left";
-
-  const formsHeaderOffset = isChatPanelOnLeft ? 0 : headerOffset;
-  const chatPanelHeaderOffset = isChatPanelOnLeft ? headerOffset : 0;
+  const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
   const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
     async () => {},
@@ -179,8 +180,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
 
   const authTokenSet = React.useRef(false);
   React.useEffect(() => {
+    if (authTokenSet.current || isOAuthFrame()) return;
+
     const token = commonData.authToken;
-    if (token && !authTokenSet.current) {
+    if (token) {
       authTokenSet.current = true;
       const secure = window.location.protocol === "https:" ? "; Secure" : "";
       document.cookie = `asc_auth_key=${token}; path=/; SameSite=Lax${secure}`;
@@ -299,18 +302,9 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     if (roomId) ids.add(String(roomId));
     if (completedFolder) ids.add(String(completedFolder.id));
     if (inProgressFolder) ids.add(String(inProgressFolder.id));
-    if (aiStore.doneFolderId) ids.add(String(aiStore.doneFolderId));
-    for (const key of Object.keys(aiStore.folderAgentsMap)) {
-      ids.add(key);
-    }
+    if (doneFolderId) ids.add(String(doneFolderId));
     return [...ids];
-  }, [
-    roomId,
-    completedFolder,
-    inProgressFolder,
-    aiStore.doneFolderId,
-    aiStore.folderAgentsMap,
-  ]);
+  }, [roomId, completedFolder, inProgressFolder, doneFolderId]);
 
   const socketFileIds = React.useMemo(() => items.map((f) => f.id), [items]);
 
@@ -325,43 +319,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     fetchSection,
     refreshAfterMutation,
   );
-  useFormEventHooks(hasManagementAccess ? aiStore : null, socketUrl);
-
 
   const isEditing = Boolean(editingFile);
 
   useEditorGuard(isEditing);
-
-  // Single-overlay coordination: only one of {sidebar drawer, AI panel, editor}
-  // can be active at a time on mobile. Also close the sidebar when leaving
-  // mobile so no stale overlay stays rendered.
-  React.useEffect(() => {
-    if (currentDeviceType !== DeviceType.mobile && isSidebarOpen) {
-      closeSidebar();
-    }
-  }, [currentDeviceType, isSidebarOpen, closeSidebar]);
-
-  const prevSidebarOpen = React.useRef(isSidebarOpen);
-  React.useEffect(() => {
-    if (!prevSidebarOpen.current && isSidebarOpen && aiStore.isPanelVisible) {
-      aiStore.closePanel();
-    }
-    prevSidebarOpen.current = isSidebarOpen;
-  }, [isSidebarOpen, aiStore]);
-
-  const prevPanelVisible = React.useRef(aiStore.isPanelVisible);
-  React.useEffect(() => {
-    if (!prevPanelVisible.current && aiStore.isPanelVisible && isSidebarOpen) {
-      closeSidebar();
-    }
-    prevPanelVisible.current = aiStore.isPanelVisible;
-  }, [aiStore.isPanelVisible, isSidebarOpen, closeSidebar]);
-
-  React.useEffect(() => {
-    if (isEditing && isSidebarOpen) {
-      closeSidebar();
-    }
-  }, [isEditing, isSidebarOpen, closeSidebar]);
 
   const prevIsLoading = React.useRef(isLoading);
   const pendingEditorClose = React.useRef(false);
@@ -381,47 +342,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     void tourStore.hydrateForUser(String(user.id));
   }, [user?.id, tourStore]);
 
-  React.useEffect(() => {
-    if (!roomId || !user?.id || !hasManagementAccess) return;
-
-    let cancelled = false;
-    let idleId: number | undefined;
-    let timeoutId: number | undefined;
-    const win = window as Window & {
-      requestIdleCallback?: (
-        cb: () => void,
-        opts?: { timeout: number },
-      ) => number;
-      cancelIdleCallback?: (id: number) => void;
-    };
-
-    (async () => {
-      await aiStore.initForRoom(roomId, user.id);
-      if (cancelled) return;
-
-      const runAutoEnable = () => {
-        if (!cancelled) aiStore.autoEnableIfAvailable();
-      };
-
-      if (win.requestIdleCallback) {
-        idleId = win.requestIdleCallback(runAutoEnable, { timeout: 2000 });
-      } else {
-        timeoutId = window.setTimeout(runAutoEnable, 2000);
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-      if (idleId !== undefined) win.cancelIdleCallback?.(idleId);
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
-    };
-  }, [roomId, user?.id, aiStore, hasManagementAccess]);
-
-  React.useEffect(() => {
-    if (!roomId || !user?.id || !hasManagementAccess || !sendToDb) return;
-    aiStore.initAskFromDBAgent();
-  }, [roomId, user?.id, aiStore, hasManagementAccess, sendToDb]);
-
   const prevPathname = React.useRef(pathname);
   const prevCompletedFolderShell = React.useRef(completedFolder);
   const prevInProgressFolderShell = React.useRef(inProgressFolder);
@@ -435,6 +355,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     prevPathname.current = pathname;
     prevCompletedFolderShell.current = completedFolder;
     prevInProgressFolderShell.current = inProgressFolder;
+
+    if (sectionChanged || folderChanged) {
+      formsListStore.setSearchValue("");
+    }
 
     if (sectionChanged) {
       // Navigation within settings sub-pages should not trigger full section-change logic
@@ -505,35 +429,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         }
       }
     }
-
-    if (sectionChanged || folderChanged) {
-      if (hasManagementAccess && !tourStore.isRunning) {
-        aiStore.clearOverride();
-      }
-
-      if (
-        activeSection === FormsSection.Settings &&
-        hasManagementAccess &&
-        !tourStore.isRunning
-      ) {
-        aiStore.closePanel();
-      }
-
-      if (
-        sectionChanged &&
-        activeSection !== FormsSection.CompletedForms &&
-        hasManagementAccess
-      ) {
-        aiStore.setCurrentFolder(null);
-      }
-    }
   }, [
     pathname,
     completedFolder,
     inProgressFolder,
     activeSection,
-    hasManagementAccess,
-    aiStore,
     formsListStore,
   ]);
 
@@ -571,6 +471,84 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   } = useFolderActions(fetchSection, refreshAfterMutation);
   const progressStore = useFormsProgressStore();
   uploadFilesDirectRef.current = uploadFilesToFolder;
+
+  const { t } = useTranslation(["Common"]);
+  const canCreateForms = !!formsSettingsStore.folderSecurity?.Create;
+  const showQuickActions =
+    activeSection === FormsSection.MyForms &&
+    canCreateForms;
+
+  const isFilterableSection =
+    activeSection === FormsSection.MyForms ||
+    activeSection === FormsSection.InProgress ||
+    activeSection === FormsSection.CompletedForms;
+  const isInsideSubfolder = !!completedFolder || !!inProgressFolder;
+  const showFilter =
+    isFilterableSection && !isEditing && !isInsideSubfolder;
+  const showFilterMainButton =
+    activeSection === FormsSection.MyForms && canCreateForms;
+
+  const filterMenuModel = React.useMemo<ContextMenuModel[]>(
+    () => [
+      {
+        id: "filter-upload-forms",
+        key: "upload-forms",
+        label: t("Common:UploadPDFForm"),
+        icon: ActionsUploadReactSvgUrl,
+        onClick: onUploadFiles,
+      },
+      {
+        id: "filter-create-blank-form",
+        key: "create-blank-form",
+        label: t("Common:NewPDFForm"),
+        icon: FormPlusReactSvgUrl,
+        onClick: onCreateBlankForm,
+      },
+    ],
+    [t, onUploadFiles, onCreateBlankForm],
+  );
+
+  const filterMainButtonProps = React.useMemo<MainButtonProps | undefined>(
+    () =>
+      showFilterMainButton
+        ? {
+            isDropdown: true,
+            model: filterMenuModel,
+            text: t("Common:New"),
+          }
+        : undefined,
+    [showFilterMainButton, filterMenuModel, t],
+  );
+
+  const quickActionItems = React.useMemo<QuickActionItem[]>(
+    () => [
+      {
+        id: "quick-blank-pdf",
+        icon: <BlankPdfIcon />,
+        label: t("Common:NewPDFForm"),
+        onClick: onCreateBlankForm,
+      },
+      {
+        id: "quick-generate-ai",
+        icon: <GeneratePdfAiIcon />,
+        label: t("Common:GenerateWithAI"),
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
+      },
+      {
+        id: "quick-from-text",
+        icon: <CreateFromTextIcon />,
+        label: t("Common:FromTextFile"),
+        onClick: () => toastr.info(t("Common:UnderDevelopment")),
+      },
+      {
+        id: "quick-use-template",
+        icon: <CreateFromTemplateIcon />,
+        label: t("Common:UseTemplate"),
+        onClick: () => router.push(libraryUrl({})),
+      },
+    ],
+    [t, onCreateBlankForm, router],
+  );
 
   const formsDataValue = React.useMemo(
     () => ({ fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation }),
@@ -632,7 +610,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     formsListStore.setIsLoading(false);
   }, [activeSection, completedFolder, tourStore.isRunning, formsListStore]);
 
-  const rootRef = React.useRef<HTMLDivElement>(null);
   const isSettings = activeSection === FormsSection.Settings;
 
   if (!isReady) {
@@ -642,36 +619,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   return (
     <div
       className={styles.root}
-      ref={rootRef}
       style={
         {
           "--min-section-width": `${MIN_SECTION_WIDTH}px`,
         } as React.CSSProperties
       }
     >
-      {showMenu && <FormsSidebar />}
-      {showMenu && (
-        <Backdrop
-          visible={
-            isSidebarOpen && currentDeviceType === DeviceType.mobile
-          }
-          onClick={closeSidebar}
-          zIndex={220}
-          withBackground
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      )}
-      <AiChatPanel
-        rootRef={rootRef}
-        headerOffset={chatPanelHeaderOffset}
-        headerHeight={headerHeight}
-      />
       <div className={styles.sectionArea} style={frameHeaderVars}>
         <Section
           withBodyScroll={!isEditing}
@@ -687,12 +640,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           currentDeviceType={currentDeviceType}
         >
           <Section.SectionHeader>
-            <FormsHeader
-              onUploadFiles={onUploadFiles}
-              onCreateBlankForm={onCreateBlankForm}
-              showMenu={showMenu}
-              headerOffset={formsHeaderOffset}
-            />
+            <FormsHeader headerOffset={headerOffset} />
           </Section.SectionHeader>
           <Section.SectionBody>
             {isEditing && (
@@ -700,12 +648,23 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             )}
             <FormsDataProvider value={formsDataValue}>
               <div style={{ display: isEditing ? "none" : undefined }}>
+                {showQuickActions && (
+                  <QuickActions
+                    items={quickActionItems}
+                    className={styles.quickActions}
+                  />
+                )}
+                {showFilter && (
+                  <FormsFilter
+                    showMainButton={showFilterMainButton}
+                    mainButtonProps={filterMainButtonProps}
+                  />
+                )}
                 {children}
               </div>
             </FormsDataProvider>
           </Section.SectionBody>
         </Section>
-        <AiChatButton shiftUp={progressStore.icon !== null} />
         {progressStore.icon !== null && (
           <div className={styles.floatingButtonContainer}>
             <FloatingButton

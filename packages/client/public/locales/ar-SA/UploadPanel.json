@@ -1,6 +1,10 @@
 {
   "HideInput": "اخفاء",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} من أصل {{total}}</0> تم رفعه. تم تجاوز حصة التخزين — <1>عرض التفاصيل</1>.",
+  "QuotaExceededTooltip": "تم تجاوز حصة التخزين. أفرغ مساحة أو قم بترقية خطتك، ثم أعد المحاولة.",
   "Ready": "تم",
+  "RetryAfterQuotaUpgrade": "أعد المحاولة بعد ترقية الحصة",
+  "RetryUpload": "إعادة المحاولة",
   "UploadingAndConversion": "التحميل والتحويل",
   "UploadingError": "خطأ في التحميل"
 }

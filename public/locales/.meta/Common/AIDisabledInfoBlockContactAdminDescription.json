@@ -1,0 +1,29 @@
+{
+  "key_path": "AIDisabledInfoBlockContactAdminDescription",
+  "content": "Contact the {{productName}} admin to activate AI features and chat with your agents, access their knowledge base, and let them run tasks across your apps.",
+  "content_en_sha1_hash": "f34703e39762ea33e2a6f341081770aa02ed23ac",
+  "created_at": "2026-06-25T11:54:43.964Z",
+  "updated_at": "2026-07-28T07:30:59.964Z",
+  "comment": {
+    "text": "Description text in an information block within the AI agent chat, shown when AI features are disabled; includes {{productName}} as the brand name.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:33:01.114Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
+      "line_number": 159,
+      "context": "</>\n ),\n )\n // standalone/saas user\n .otherwise(() =>\n t(\"AIDisabledInfoBlockContactAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n \n return (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

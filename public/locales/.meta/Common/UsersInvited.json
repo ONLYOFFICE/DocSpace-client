@@ -3,7 +3,7 @@
   "content": "Users invited",
   "content_en_sha1_hash": "72c2af47b22442f2b4c2dd3ce416b620691f6ca7",
   "created_at": "2025-05-19T21:30:49.475Z",
-  "updated_at": "2026-04-23T17:24:01.883Z",
+  "updated_at": "2026-07-07T08:59:21.764Z",
   "comment": {
     "text": "This is a toast message confirming that users have been successfully invited. It appears after an invitation process is completed.",
     "is_auto": true,
@@ -13,9 +13,33 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 430,
-      "context": "setIsNewUserByCurrentUser(true);\n }\n setIsLoading(false);\n \n onClose();\n toastr.success(t(\"Common:UsersInvited\"));\n \n if (result?.warning) {\n toastr.warning(result?.warning);\n }",
+      "line_number": 489,
+      "context": "setIsLoading(false);\n \n onClose();\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n if (result?.warning) {\n toastr.warning(result?.warning);\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
+      "line_number": 489,
+      "context": "setIsLoading(false);\n \n onClose();\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n if (result?.warning) {\n toastr.warning(result?.warning);\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
+      "line_number": 489,
+      "context": "setIsLoading(false);\n \n onClose();\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n if (result?.warning) {\n toastr.warning(result?.warning);\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_hooks/usePrivateInviteFlow.ts",
+      "line_number": 186,
+      "context": "count: failures.length,\n }),\n );\n } else if (result.skippedMembers.length === 0) {\n // Zero skipped and zero file failures → fully successful invite.\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n // Silent follow-up: backfill envelopes for members who registered\n // their keypair after the initial invite (their pre-existing files\n // would otherwise stay inaccessible). Fire-and-forget; skip when",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/index.tsx",
+      "line_number": 680,
+      "context": "setIsLoading(false);\n \n handleClose();\n if (!onInviteSubmitted) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n if (result?.warning) {\n toastr.warning(result.warning);\n }",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -149,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

@@ -1,19 +1,19 @@
 {
   "key_path": "AgentDeleted",
-  "content": "AI Agent Deleted",
-  "content_en_sha1_hash": "ac362a1f6d3e03d9bfa7411bac6cad32d1a12f64",
-  "created_at": "2026-03-31T15:18:27.261Z",
-  "updated_at": "2026-04-27T12:45:07.507Z",
+  "content": "AI agent deleted",
+  "content_en_sha1_hash": "decbdce88a420695f01593021a590b0e08f8571b",
+  "created_at": "2026-05-25T18:26:16.909Z",
+  "updated_at": "2026-05-25T18:43:58.240Z",
   "comment": {
-    "text": "This is a toast message indicating that an AI agent has been successfully removed.",
+    "text": "A label describing the webhook event triggered when an AI agent is removed from the system.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:29:23.412Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-25T18:43:58.240Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 99,
+      "line_number": 108,
       "context": "case WebhookTriggers.AgentCreated:\n return t(\"AgentCreated\");\n case WebhookTriggers.AgentUpdated:\n return t(\"AgentUpdated\");\n case WebhookTriggers.AgentDeleted:\n return t(\"AgentDeleted\");\n case WebhookTriggers.FileDownloaded:\n return t(\"FileDownloaded\");\n case WebhookTriggers.FolderDownloaded:\n return t(\"FolderDownloaded\");\n default:",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

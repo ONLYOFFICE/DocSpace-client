@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Aggiungi certificato",
-  "AdvancedSettings": "Impostazioni avanzate",
   "AdvancedSettingsTooltip": "Nascondi la pagina di autenticazione predefinita e reindirizza automaticamente al servizio SSO.",
   "AttributeMatching": "Mappatura attributi",
   "AttributeMatchingTooltip": "La corrispondenza degli attributi Single Sign-On con le voci della sezione 'Account'.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Scarica SP file XML per metadati",
   "Encryption": "Crittografia",
   "GenerateCertificate": "Genera nuovo certificato autofirmato",
-  "Hide": "Nascondi",
   "HideAdditionalParameters": "Nascondi le impostazioni avanzate",
   "HideAuthPage": "Nascondi pagina di autenticazione",
   "idpAuthRequest": "Verifica firma delle risposte di autenticazione",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "ID entità del provider di identità (URL dell’emittente)",
   "ServiceProviderSettings": "Impostazioni di {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Configura le impostazioni del fornitore di servizi e aggiungi certificati SP per Single Sign-On.",
-  "Show": "Mostra",
   "ShowAdditionalParameters": "Mostra le impostazioni avanzate",
   "Signing": "Firma",
   "SigningAndEncryption": "Firma e crittografia",

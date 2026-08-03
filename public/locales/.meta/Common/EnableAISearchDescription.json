@@ -1,0 +1,41 @@
+{
+  "key_path": "EnableAISearchDescription",
+  "content": "Use an AI search engine to enhance AI chats with real-time information from the internet",
+  "content_en_sha1_hash": "95508dc5b7a8d13ec445920f3df57faaee0a2d8b",
+  "created_at": "2026-07-04T11:29:48.487Z",
+  "updated_at": "2026-07-27T13:07:51.051Z",
+  "comment": {
+    "text": "Explanatory text within a confirmation dialog body and as a description for a service toggle section, detailing the benefits of enabling AI search.",
+    "is_auto": true,
+    "updated_at": "2026-07-04T11:31:47.823Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 551,
+      "context": "onClose={() => updateDialogVisibility(AI_SEARCH_ENUM, false)}\n onConfirm={onConfirmEnableAITools}\n title={t(\"ActivateAIFeatures\")}\n bodyText={[\n t(\"AISearchRequiresAIFeatures\"),\n t(\"EnableAISearchDescription\"),\n ]}\n acceptLabel={t(\"Activate\")}\n />\n ) : null}\n {isConfirmDialogVisible && confirmActionType ? (",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "line_number": 246,
+      "context": "<ServiceToggleSection\n isEnabled={isAiSearchServiceOn}\n onToggle={onToggleChange}\n title={t(\"AISearch\")}\n description={t(\"EnableAISearchDescription\")}\n testId=\"service-ai-search-toggle-button\"\n isDisabled={isDisabled}\n withBottomMargin={withBottomMargin}\n />",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
+      "line_number": 246,
+      "context": "<ServiceToggleSection\n isEnabled={isAiSearchServiceOn}\n onToggle={onToggleChange}\n title={t(\"AISearch\")}\n description={t(\"EnableAISearchDescription\")}\n testId=\"service-ai-search-toggle-button\"\n isDisabled={isDisabled}\n withBottomMargin={withBottomMargin}\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Detailed instructions in our <2>Help Center.</2>",
   "content_en_sha1_hash": "da5b51706c22d9a2ca72b7fb29ea0f882301180f",
   "created_at": "2025-05-19T21:30:52.880Z",
-  "updated_at": "2026-04-11T21:21:51.894Z",
+  "updated_at": "2026-05-15T15:37:40.285Z",
   "comment": {
     "text": "This is a sentence fragment that appears in a dialog box, providing a link to the Help Center for more information about third-party service integration. The `<2>` tag represents a clickable link to the Help Center.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
       "line_number": 74,
-      "context": "selectedConsumer.instruction,\n <div style={{ boxSizing: \"border-box\", margin: 0 }} />,\n );\n \n this.helpCenterDescription = (\n <Trans t={t} i18nKey=\"ThirdPartyBodyDescription\" ns=\"Settings\">\n Detailed instructions in our{\" \"}\n <Link\n id=\"help-center-link\"\n color={theme.client.settings.integration.linkColor}\n isHovered={false}",
+      "context": "selectedConsumer.instruction,\n <div style={{ boxSizing: \"border-box\", margin: 0 }} />,\n );\n \n this.helpCenterDescription = (\n <Trans t={t} i18nKey=\"ThirdPartyBodyDescription\" ns=\"Settings\">\n Detailed instructions in our{\" \"}\n <Link\n id=\"help-center-link\"\n color=\"var(--settings-integration-link-color)\"\n isHovered={false}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

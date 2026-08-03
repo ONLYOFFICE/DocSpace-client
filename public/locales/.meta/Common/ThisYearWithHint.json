@@ -1,0 +1,29 @@
+{
+  "key_path": "ThisYearWithHint",
+  "content": "This year <1>({{year}})</1>",
+  "content_en_sha1_hash": "493508f09ef2637dffc32a5ebb504e236b4333ec",
+  "created_at": "2026-06-25T11:54:58.977Z",
+  "updated_at": "2026-06-25T11:59:49.638Z",
+  "comment": {
+    "text": "Label for a selectable period option in a dropdown, displaying \"This year\" followed by the current year in parentheses; the `<1>` tag wraps the `year` variable to apply hint-style formatting.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:59:49.638Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/sub-components/PeriodSelect.tsx",
+      "line_number": 84,
+      "context": "/>\n );\n case \"thisYear\":\n return (\n <CommonTrans\n i18nKey=\"ThisYearWithHint\"\n values={{ year: current.year }}\n components={{ 1: hintSpan }}\n />\n );\n case \"lastYear\":",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

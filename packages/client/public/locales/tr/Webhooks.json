@@ -1,7 +1,7 @@
 {
-  "AgentCreated": "Yapay Zeka Ajanı Oluşturuldu",
-  "AgentDeleted": "Yapay Zeka Ajanı Silindi",
-  "AgentUpdated": "Yapay Zeka Aracısı Güncellendi",
+  "AgentCreated": "Yapay Zeka Ajanı oluşturuldu",
+  "AgentDeleted": "Yapay Zeka Ajanı silindi",
+  "AgentUpdated": "Yapay Zeka Aracısı güncellendi",
   "Before": "Önce",
   "CreateWebhook": "Webhook oluştur",
   "DeleteHint": "Webhook kalıcı olarak silinecek.\nBu işlemi geri alamazsınız.",
@@ -57,7 +57,6 @@
   "RequestHeaderCopied": "POST istek başlığı başarıyla panoya kopyalandı",
   "RequestPostBody": "POST istek gövdesi",
   "RequestPostHeader": "POST istek başlığı",
-  "ResetKey": "Resetleme anahtarı",
   "Response": "Yanıt",
   "ResponseBodyCopied": "POST yanıt gövdesi başarıyla panoya kopyalandı",
   "ResponseHeaderCopied": "POST yanıt başlığı başarıyla panoya kopyalandı",

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
@@ -111,6 +120,7 @@ const InviteInput = ({
   usersList,
   setUsersList,
   allowInvitingGuests,
+  isPrivateRoom,
 }) => {
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
@@ -267,7 +277,13 @@ const InviteInput = ({
       const users =
         roomId === -1
           ? await getUserList(filter)
-          : await getMembersList(AccountsSearchArea.Any, roomId, filter);
+          : await getMembersList(
+              isPrivateRoom
+                ? AccountsSearchArea.People
+                : AccountsSearchArea.Any,
+              roomId,
+              filter,
+            );
 
       setUsersList(
         roomId === -1
@@ -326,9 +342,9 @@ const InviteInput = ({
     const isDisabled = status === EmployeeStatus.Disabled;
 
     if (isDisabled) {
-      toastr.warning(t("UsersCannotBeAdded"));
+      toastr.warning(t("Common:UsersCannotBeAdded"));
     } else if (shared) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     } else {
       const guestWrongRoleInAgent =
         isVisitor &&
@@ -450,6 +466,8 @@ const InviteInput = ({
       return;
     }
 
+    if (isPrivateRoom) return;
+
     const items = toUserItems(inputValue);
 
     const filteredItems = items
@@ -512,7 +530,7 @@ const InviteInput = ({
       });
 
     if (filteredItems.length !== items.length) {
-      toastr.warning(t("UsersAlreadyAdded"));
+      toastr.warning(t("Common:UsersAlreadyAdded"));
     }
 
     if (!filteredItems.length) {
@@ -548,11 +566,11 @@ const InviteInput = ({
       return prevDropDownContent.current;
     }
 
-    if (partsLength === 1 && !!usersList.length) {
+    if (partsLength === 1 && usersList.length) {
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
-    } else if (roomId !== -1 && !allowInvitingGuests)
+    } else if (roomId !== -1 && (!allowInvitingGuests || isPrivateRoom))
       prevDropDownContent.current = (
         <DropDownItem disabled className={styles.noUsersList}>
           <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
@@ -600,7 +618,7 @@ const InviteInput = ({
       );
     }
     return prevDropDownContent.current;
-  }, [usersList, inputValue, selectedAccess]);
+  }, [usersList, inputValue, selectedAccess, isPrivateRoom]);
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
@@ -631,7 +649,7 @@ const InviteInput = ({
   return (
     <>
       <Heading className={styles.subHeader}>
-        {t("AddManually")}
+        {t("Common:AddManually")}
         {!hideSelector ? (
           <Link
             className={classNames(styles.styledLink, "link-list")}
@@ -641,7 +659,7 @@ const InviteInput = ({
             onClick={openUsersPanel}
             dataTestId="invite_panel_choose_from_list_link"
           >
-            {t("Translations:ChooseFromList")}
+            {t("Common:ChooseFromList")}
           </Link>
         ) : null}
       </Heading>
@@ -656,10 +674,10 @@ const InviteInput = ({
               productName: getBrandName("ProductName"),
             })
           : !allowInvitingGuests
-            ? t("InviteToRoomManuallyInfoMembers", {
+            ? t("Common:InviteToRoomManuallyInfoMembers", {
                 productName: getBrandName("ProductName"),
               })
-            : t("InviteToRoomManuallyInfoGuest", {
+            : t("Common:InviteToRoomManuallyInfoGuest", {
                 productName: getBrandName("ProductName"),
               })}
       </Text>
@@ -719,8 +737,8 @@ const InviteInput = ({
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
                 : !allowInvitingGuests
-                  ? t("InviteToRoomAddPlaceholder")
-                  : t("InviteToRoomSearchPlaceholder")
+                  ? t("Common:InviteToRoomAddPlaceholder")
+                  : t("Common:InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             onKeyDown={onKeyDown}
@@ -814,3 +832,4 @@ export default inject(
     ),
   ),
 );
+

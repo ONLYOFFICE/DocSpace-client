@@ -1,6 +1,5 @@
 {
   "AddCertificate": "ເພີ່ມໃບຢັ້ງຢືນ",
-  "AdvancedSettings": "ຕັ້ງ​ຄ່າ​ຂັ້ນ​ສູງ",
   "AdvancedSettingsTooltip": "ເຊື່ອງໜ້າການພິສູດຢືນຢັນເລີ່ມຕົ້ນ ແລະ ປ່ຽນເສັ້ນທາງໄປຫາ ບໍລິການ SSO ໂດຍອັດຕະໂນມັດ.",
   "AttributeMatching": "ການສ້າງແຜນທີ່ຄຸນລັກສະນະ",
   "AttributeMatchingTooltip": "ການຕອບສະ ໜອງ ຂອງຄຸນລັກສະນະການເຂົ້າສູ່ລະບົບດຽວຕໍ່ກັບລາຍການຂອງພາກສ່ວນ 'ບັນຊີ'.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "ດາວໂຫລດ SP metadata XML",
   "Encryption": "ການເຂົ້າລະຫັດ",
   "GenerateCertificate": "ສ້າງໃບຢັ້ງຢືນການເຊັນດ້ວຍຕົນເອງໃຫມ່",
-  "Hide": "ເຊື່ອງ",
   "HideAdditionalParameters": "ເຊື່ອງການຕັ້ງຄ່າຂັ້ນສູງ",
   "HideAuthPage": "ເຊື່ອງໜ້າເຂົ້າສູ່ລະບົບ",
   "idpAuthRequest": "ຢືນຢັນລາຍເຊັນຂອງການຕອບຮັບການກວດສອບສິດ",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "Identity Provider Entity Id (Issuer URL)",
   "ServiceProviderSettings": "{{organizationName}} SP ການຕັ້ງຄ່າ",
   "ServiceProviderSettingsDescription": "ຕັ້ງຄ່າການຕັ້ງຄ່າຜູ້ໃຫ້ບໍລິການ ແລະເພີ່ມໃບຢັ້ງຢືນ SP ສຳລັບການເຂົ້າສູ່ລະບົບຄັ້ງດຽວ.",
-  "Show": "ສະແດງ",
   "ShowAdditionalParameters": "ສະແດງການຕັ້ງຄ່າຂັ້ນສູງ",
   "Signing": "ເຊັນຊື່",
   "SigningAndEncryption": "ການ​ລົງ​ນາມ​ແລະ​ການ​ເຂົ້າ​ລະ​ຫັດ​",

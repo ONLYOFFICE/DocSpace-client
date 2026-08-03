@@ -1,31 +1,40 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import {
   getPaymentSettings,
@@ -36,6 +45,8 @@ import {
   getServicesQuotas,
   getServiceQuota,
   getLicenseQuota,
+  setServiceState,
+  getWalletBalance,
 } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
@@ -56,8 +67,20 @@ import {
 } from "@docspace/shared/api/portal/types";
 
 import { AI_ENUM, BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+import { applyServiceQuotaToMap } from "@docspace/ui-kit/billing/utils/parsers";
+import {
+  getCardLinkedOnFreeTariff,
+  getCardLinkedOnNonProfit,
+  getIsCardLinkedToPortal,
+  getIsCardMissingOrInactive,
+  getIsPayer,
+  getWalletBalanceAmount,
+  getWalletBalanceCurrency,
+  formatPaymentDate,
+} from "@docspace/ui-kit/billing/utils/paymentSelectors";
 import type { DateTime } from "luxon";
-import { formatDate as formatDateUtil } from "@docspace/ui-kit/utils/date";
+
+import { PersistenceKeys, removePersisted } from "./utils/persistence";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -80,6 +103,22 @@ class PaymentStore {
   settingsStore: SettingsStore | null = null;
 
   licenseQuota: TLicenseQuota | null = null;
+
+  walletBalanceData: TBalance | null = null;
+
+  get walletBalance(): number {
+    return getWalletBalanceAmount(this.walletBalanceData);
+  }
+
+  get walletCodeCurrency(): string {
+    return getWalletBalanceCurrency(this.walletBalanceData);
+  }
+
+  fetchWalletBalance = async (isRefresh?: boolean) => {
+    const res = await getWalletBalance(isRefresh);
+    if (res) this.walletBalanceData = res;
+    return this.walletBalance;
+  };
 
   salesEmail = "";
 
@@ -123,14 +162,10 @@ class PaymentStore {
   }
 
   get isPayer() {
-    if (!this.userStore || !this.currentTariffStatusStore) return;
-
-    const { user } = this.userStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-
-    if (!user || !walletCustomerEmail) return false;
-
-    return user.email === walletCustomerEmail;
+    return getIsPayer(
+      this.userStore?.user?.email,
+      this.currentTariffStatusStore?.walletCustomerEmail,
+    );
   }
 
   setIsUpdatingBasicSettings = (isUpdatingBasicSettings: boolean) => {
@@ -140,23 +175,41 @@ class PaymentStore {
   get cardLinkedOnFreeTariff() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    const { isFreeTariff } = this.currentQuotaStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-
-    return isFreeTariff && !!walletCustomerEmail;
+    return getCardLinkedOnFreeTariff(
+      this.currentQuotaStore.isFreeTariff,
+      this.currentTariffStatusStore.walletCustomerEmail,
+    );
   }
 
   get cardLinkedOnNonProfit() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-    const { isNonProfit } = this.currentQuotaStore;
+    return getCardLinkedOnNonProfit(
+      this.currentQuotaStore.isNonProfit,
+      this.currentTariffStatusStore.walletCustomerEmail,
+    );
+  }
 
-    if (!isNonProfit) return false;
+  get isCardLinkedToPortal() {
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    if (!walletCustomerEmail) return false;
+    return getIsCardLinkedToPortal({
+      isNonProfit: this.currentQuotaStore.isNonProfit,
+      isFreeTariff: this.currentQuotaStore.isFreeTariff,
+      walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+    });
+  }
 
-    return true;
+  get isCardMissingOrInactive() {
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return true;
+
+    return getIsCardMissingOrInactive({
+      isNonProfit: this.currentQuotaStore.isNonProfit,
+      isFreeTariff: this.currentQuotaStore.isFreeTariff,
+      walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+      walletCustomerStatusNotActive:
+        this.currentTariffStatusStore.walletCustomerStatusNotActive,
+    });
   }
 
   get storageSizeIncrement() {
@@ -189,16 +242,15 @@ class PaymentStore {
     return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
   }
 
-  formatDate = (date: DateTime, timeType?: "start" | "end") => {
-    if (!timeType) {
-      return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
-    }
+  get isAIReady() {
+    return (
+      Boolean(this.isAiToolsServiceOn) ||
+      Boolean(settingsStore.aiConfig?.aiReady)
+    );
+  }
 
-    const dateStr = formatDateUtil(date, "yyyy-MM-dd", { locale: "en" });
-    const timeTypeValue = timeType === "start" ? "00:00:00" : "23:59:59";
-
-    return `${dateStr}T${timeTypeValue}`;
-  };
+  formatDate = (date: DateTime, timeType?: "start" | "end") =>
+    formatPaymentDate(date, timeType);
 
   handleServiceQuota = async (serviceName = BACKUP_SERVICE) => {
     const abortController = new AbortController();
@@ -206,28 +258,32 @@ class PaymentStore {
 
     const service = await getServiceQuota(serviceName, abortController.signal);
 
-    const feature = service.features[0];
-
-    const featureWithPrice = {
-      ...feature,
-      price: service.price,
-      serviceName: service.serviceName,
-    } as TServiceFeatureWithPrice;
-
-    const existingEntry = Array.from(
-      this.servicesQuotasFeatures.entries(),
-    ).find(
-      ([, value]) =>
-        (value as TServiceFeatureWithPrice).serviceName === service.serviceName,
-    );
-
-    const key = existingEntry
-      ? existingEntry[0]
-      : service.features[0].id.toString();
-
-    this.servicesQuotasFeatures.set(key, featureWithPrice);
+    runInAction(() => {
+      applyServiceQuotaToMap(
+        service,
+        this.servicesQuotasFeatures as Parameters<
+          typeof applyServiceQuotaToMap
+        >[1],
+      );
+    });
 
     return service.serviceName;
+  };
+
+  enableAIService = async (onSuccess?: () => void | Promise<void>) => {
+    const feature = this.servicesQuotasFeatures.get(AI_ENUM);
+    if (feature) {
+      this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: true });
+    }
+    try {
+      await setServiceState({ service: AI_ENUM, enabled: true });
+      await onSuccess?.();
+    } catch (e) {
+      if (feature) {
+        this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: false });
+      }
+      toastr.error(e as Error);
+    }
   };
 
   standaloneBasicSettings = async (t: TTranslation) => {
@@ -349,8 +405,8 @@ class PaymentStore {
         return;
       }
 
-      toastr.success(t("ActivateLicenseActivated"));
-      localStorage.removeItem("enterpriseAlertClose");
+      toastr.success(t("Common:ActivateLicenseActivated"));
+      removePersisted(PersistenceKeys.enterpriseAlertClose);
 
       await getPaymentInfo();
       await this.settingsStore?.getSettings();

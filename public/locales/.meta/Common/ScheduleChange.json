@@ -1,0 +1,35 @@
+{
+  "key_path": "ScheduleChange",
+  "content": "Schedule change",
+  "content_en_sha1_hash": "f547e0efa074cbec44c3fb7a440f54db07ed8d88",
+  "created_at": "2026-06-30T15:41:40.701Z",
+  "updated_at": "2026-08-01T15:33:49.630Z",
+  "comment": {
+    "text": "Button label used to confirm a change in the billing schedule during a quota or plan downgrade.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T15:42:19.615Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
+      "line_number": 1491,
+      "context": "getConfirmButtonLabel = (t: TTranslation) => {\n const { isFreeTariff, maxCountManagersByQuota } = this.quotas;\n const isDowngrade =\n !isFreeTariff && this.managersCount < maxCountManagersByQuota;\n if (isDowngrade) return t(\"ScheduleChange\");\n \n const isTheSameCount =\n !isFreeTariff && this.managersCount === maxCountManagersByQuota;\n const dueTodayAmount = this.tariffDueTodayAmount ?? this.totalPrice;\n const isBalanceInsufficient = this.walletBalance < dueTodayAmount;",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 908,
+      "context": "scale\n size={ButtonSize.normal}\n label={\n isEditActive\n ? isScheduled\n ? t(\"Common:ScheduleChange\")\n : insufficientFunds\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\")\n : insufficientFunds\n ? info.deactivated",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

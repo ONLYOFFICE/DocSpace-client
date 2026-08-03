@@ -3,7 +3,7 @@
   "content": "Upload from {{productName}}",
   "content_en_sha1_hash": "252a750aa281d129a14c2dd82d20fb5352f42391",
   "created_at": "2025-05-19T21:30:56.552Z",
-  "updated_at": "2026-05-08T13:10:45.493Z",
+  "updated_at": "2026-07-28T07:30:59.792Z",
   "comment": {
     "text": "This is a button label for uploading files. It indicates that files will be uploaded from the specified product, where `{{productName}}` will be replaced by the brand name (e.g., \"ONLYOFFICE DocSpace\").",
     "is_auto": true,
@@ -13,39 +13,45 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 404,
+      "line_number": 480,
       "context": "newUploadActions[0].label = t(\"EmptyView:UploadDeviceOptionTitle\");\n const uploadFromDocspace = {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n onClick: onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 285,
+      "line_number": 324,
       "context": "t(\"EmptyView:ManageAccess\"),\n t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 285,
+      "line_number": 324,
       "context": "t(\"EmptyView:ManageAccess\"),\n t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 285,
+      "line_number": 324,
       "context": "t(\"EmptyView:ManageAccess\"),\n t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 92,
+      "line_number": 101,
       "context": "const getOptions = () => {\n const selectOption = [\n {\n key: \"upload-from-docspace\",\n label: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n onClick: () => setIsSelectorVisible(true),\n disabled: false,\n icon: UploadIcon,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3747,
-      "context": "return [\n {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n onClick: this.onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n },",
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 366,
+      "context": "return [\n {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n onClick: self.onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n },",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/index.tsx",
+      "line_number": 148,
+      "context": "!isFiltered && current.type === FolderType.Knowledge;\n \n const uploadOptions: EmptyViewOptionsType = [\n {\n key: \"knowledge-empty-upload-from-docspace\",\n title: t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Upload from {{productName}}\",\n }),\n description: t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:Files\"),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -179,7 +185,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

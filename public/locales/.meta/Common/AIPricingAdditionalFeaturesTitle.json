@@ -3,7 +3,7 @@
   "content": "Additional features",
   "content_en_sha1_hash": "fc84b18d0dab0aa628a6e36517176e9f4332bf9d",
   "created_at": "2026-04-10T13:53:44.358Z",
-  "updated_at": "2026-04-11T21:00:03.939Z",
+  "updated_at": "2026-05-15T14:00:07.016Z",
   "comment": {
     "text": "This is a section title on the AI service pricing page. It labels a list of extra features included with the service.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 179,
-      "context": "</div>\n \n <div className={styles.pricingSection}>\n <div className={styles.pricingSectionHeader}>\n <Text className={styles.pricingSectionTitle}>\n {t(\"AIPricingAdditionalFeaturesTitle\")}\n </Text>\n <HelpButton\n iconName={HelpReactSvgUrl}\n style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={",
+      "line_number": 174,
+      "context": "</div>\n \n <div className={styles.pricingSection}>\n <div className={styles.pricingSectionHeader}>\n <Text className={styles.pricingSectionTitle}>\n {t(\"AIPricingAdditionalFeaturesTitle\")}\n </Text>\n <HelpButton\n iconNode={<HelpReactSvg />}\n style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={",
       "module": "/libs/ui-kit"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

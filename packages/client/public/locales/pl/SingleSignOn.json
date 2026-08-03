@@ -1,6 +1,5 @@
 {
   "AddCertificate": "Dodaj certyfikat",
-  "AdvancedSettings": "Ustawienia zaawansowane",
   "AdvancedSettingsTooltip": "Ukryj domyślną stronę uwierzytelniania i automatycznie kieruj do usługi pojedynczego logowania.",
   "AttributeMatching": "Mapowanie atrybutów",
   "AttributeMatchingTooltip": "Zgodność atrybutów pojedynczego logowania (Single Sign-On) z wpisami w sekcji „Konta”.",
@@ -11,7 +10,6 @@
   "DownloadMetadataXML": "Pobierz XML z metadanymi SP",
   "Encryption": "Szyfrowanie",
   "GenerateCertificate": "Wygeneruj nowy certyfikat z podpisem własnym",
-  "Hide": "Ukryj",
   "HideAdditionalParameters": "Ukryj ustawienia zaawansowane",
   "HideAuthPage": "Ukryj stronę uwierzytelniania",
   "idpAuthRequest": "Zweryfikuj podpis odpowiedzi autoryzacji",
@@ -32,7 +30,6 @@
   "ProviderURLTooltip": "ID podmiotu dostawcy tożsamości (adres URL wystawcy)",
   "ServiceProviderSettings": "Ustawienia usługodawcy {{organizationName}}",
   "ServiceProviderSettingsDescription": "Skonfiguruj ustawienia usługodawcy i dodaj jego certyfikaty dla pojedynczego logowania.",
-  "Show": "Pokaż",
   "ShowAdditionalParameters": "Pokaż ustawienia zaawansowane",
   "Signing": "Podpisywanie",
   "SigningAndEncryption": "Podpisywanie i szyfrowanie",

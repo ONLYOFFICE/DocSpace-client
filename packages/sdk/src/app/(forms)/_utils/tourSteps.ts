@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
@@ -44,7 +53,6 @@ export type TourStepFlags = {
   showLibrary: boolean;
   showSettings: boolean;
   showMenu: boolean;
-  isTouch: boolean;
 };
 
 function isAbortError(err: unknown) {
@@ -56,66 +64,6 @@ function silenceNonAbort(err: unknown) {
     // eslint-disable-next-line no-console
     console.warn("[forms tour] waitForElement failed:", err);
   }
-}
-
-function openContextMenu(signal?: AbortSignal): Promise<void> {
-  const tile = document.querySelector('[data-testid="tile"]') as HTMLElement | null;
-  if (!tile) return Promise.resolve();
-
-  const rect = tile.getBoundingClientRect();
-  const event = new MouseEvent("contextmenu", {
-    bubbles: true,
-    cancelable: true,
-    clientX: rect.left + rect.width / 2,
-    clientY: rect.top + rect.height / 2,
-    button: 2,
-  });
-  tile.dispatchEvent(event);
-
-  return waitForElement("#option_view", 3000, signal)
-    .then(() => {})
-    .catch(silenceNonAbort);
-}
-
-function contextMenuStep(
-  targetId: string,
-  title: string,
-  content: string,
-  page: string,
-  callbacks?: TourStepCallbacks,
-): Step {
-  return {
-    target: `#${targetId}`,
-    spotlightTarget: () => {
-      const item = document.querySelector(`#${targetId}`);
-      const ul = item?.closest("ul");
-      return (ul as HTMLElement) ?? null;
-    },
-    spotlightPadding: 8,
-    placement: "auto" as const,
-    content,
-    title,
-    data: { page } satisfies TourStepData,
-    skipBeacon: true,
-    before: async () => {
-      const signal = callbacks?.getSignal();
-      await waitForElement('[data-tour="forms-grid"]', 3000, signal).catch(
-        silenceNonAbort,
-      );
-      if (!document.querySelector(`#${targetId}`)) {
-        await openContextMenu(signal);
-      }
-      await waitForElement(`#${targetId}`, 3000, signal).catch(silenceNonAbort);
-      document
-        .querySelector(`#${targetId}`)
-        ?.classList.add("tour-outline-item");
-    },
-    after: () => {
-      document
-        .querySelector(".tour-outline-item")
-        ?.classList.remove("tour-outline-item");
-    },
-  };
 }
 
 function navSectionStep(
@@ -178,7 +126,7 @@ function navSectionStep(
 }
 
 function settingsStep(
-  subSection: "billing" | "ai-agent" | "access" | "collect-data",
+  subSection: "billing" | "access" | "collect-data",
   title: string,
   content: string,
   callbacks?: TourStepCallbacks,
@@ -220,13 +168,12 @@ export function getTourSteps(
     showLibrary = true,
     showSettings = true,
     showMenu = true,
-    isTouch = false,
   } = flags ?? {};
 
   return [
     navSectionStep(
       "my-forms",
-      t("Common:MyForms"),
+      t("Common:DashboardFormsTitle"),
       t(
         "Common:TourMyForms",
         "This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.",
@@ -244,18 +191,6 @@ export function getTourSteps(
       data: { page: "/forms/my-forms" } satisfies TourStepData,
       skipBeacon: true,
     },
-    canCreate &&
-      !isTouch &&
-      contextMenuStep(
-        "option_ask-from-db",
-        t("Common:TourCtxAskFromDBTitle", "Ask from DB"),
-        t(
-          "Common:TourCtxAskFromDB",
-          "Chat with the AI agent about this form using data from a connected database.",
-        ),
-        "/forms/my-forms",
-        callbacks,
-      ),
     navSectionStep(
       "in-progress",
       t("Common:InProgress"),
@@ -314,16 +249,6 @@ export function getTourSteps(
         t(
           "Common:TourBilling",
           "Manage your subscription plan and payment details for this forms room.",
-        ),
-        callbacks,
-      ),
-    showSettings &&
-      settingsStep(
-        "ai-agent",
-        t("Common:AIAgent"),
-        t(
-          "Common:TourAiAgent",
-          "Enable the AI agent to automatically process submitted forms, extract data, and assist with form review.",
         ),
         callbacks,
       ),

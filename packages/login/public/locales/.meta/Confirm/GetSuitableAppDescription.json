@@ -3,7 +3,7 @@
   "content": "Use a compatible app such as Google Authenticator for <1>Android</1> and <4>iOS</4>, or Authenticator for <8>Windows Phone</8>.",
   "content_en_sha1_hash": "58350911d2d350f58fa31e920a507137a0364f3f",
   "created_at": "2025-08-12T19:46:18.446Z",
-  "updated_at": "2026-04-11T21:30:15.987Z",
+  "updated_at": "2026-05-15T14:00:06.912Z",
   "comment": {
     "text": "This is a descriptive text providing instructions for users to download a compatible authenticator app. It appears during two-factor authentication setup and includes links to Android, iOS, and Windows Phone app stores.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 173,
+      "line_number": 182,
       "context": "</div>\n <div className=\"description-text\">\n <Text fontWeight={600}>{t(\"GetSuitableApp\")}</Text>\n <Trans\n t={t}\n i18nKey=\"GetSuitableAppDescription\"\n ns=\"Confirm\"\n components={{\n 1: (\n <Link\n key=\"android-link\"",
       "module": "/packages/login"
     }
@@ -26,7 +26,7 @@
       "approved_at": null
     },
     "ru": {
-      "approved_at": "2026-05-04T13:03:19.470988Z"
+      "approved_at": "2026-05-15T15:04:54.629887Z"
     }
   }
 }

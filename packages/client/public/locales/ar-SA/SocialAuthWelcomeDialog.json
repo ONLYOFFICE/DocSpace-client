@@ -4,5 +4,8 @@
   "ContinueToProduct": "تابع إلى {{productName}}",
   "GeneratedPassword": "كلمة مرور مُنشأة",
   "ProductNameDetail": "اسم {{productName}}",
-  "ReviewAccountDetails": "الرجاء تخصيص لحظة لمراجعة تفاصيل حسابك:"
+  "ReviewAccountDetails": "الرجاء تخصيص لحظة لمراجعة تفاصيل حسابك:",
+  "SetEmailPassword": "تعيين كلمة المرور",
+  "WelcomeSubtitle": "تم إنشاء مساحتك بنجاح. راجع تفاصيل ملفك الشخصي وابدأ العمل.",
+  "YourProfileDetails": "تفاصيل ملفك الشخصي"
 }

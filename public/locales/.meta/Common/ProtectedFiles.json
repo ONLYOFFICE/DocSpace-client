@@ -3,7 +3,7 @@
   "content": "Protected files",
   "content_en_sha1_hash": "8fc834540fa832640cdb544ad1edfaa397a8daa0",
   "created_at": "2025-05-19T21:30:47.531Z",
-  "updated_at": "2026-04-12T03:45:07.527Z",
+  "updated_at": "2026-05-15T14:00:06.947Z",
   "comment": {
     "text": "This is a header text for a bar indicating that the file is protected. It appears within a download dialog when a user attempts to download a password-protected file.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordContent.tsx",
-      "line_number": 103,
+      "line_number": 110,
       "context": "className={styles.downloadDialogPasswordContent}\n data-testid=\"password-content\"\n >\n {barIsVisible ? (\n <PublicRoomBar\n headerText={t(\"Common:ProtectedFiles\")}\n bodyText={t(\"Common:FileProtectionMessage\")}\n iconName={InfoSvgUrl}\n onClose={onClose}\n />\n ) : null}",
       "module": "/packages/shared"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

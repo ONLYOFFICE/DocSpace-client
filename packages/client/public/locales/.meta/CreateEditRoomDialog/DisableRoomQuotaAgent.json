@@ -3,7 +3,7 @@
   "content": "Disable quota for this agent",
   "content_en_sha1_hash": "fd5154101e66376cb087fa58af6438c76bdde902",
   "created_at": "2025-11-03T12:10:33.180Z",
-  "updated_at": "2026-04-11T21:04:48.325Z",
+  "updated_at": "2026-07-07T08:59:21.689Z",
   "comment": {
     "text": "Checkbox label. Disables the storage quota for a specific agent (user or group) within a room.",
     "is_auto": true,
@@ -13,9 +13,15 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
-      "line_number": 69,
+      "line_number": 78,
       "context": "label={t(\"Common:StorageQuota\")}\n description={\n isAgent ? t(\"StorageDescriptionAgent\") : t(\"StorageDescription\")\n }\n checkboxLabel={\n isAgent ? t(\"DisableRoomQuotaAgent\") : t(\"DisableRoomQuota\")\n }\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n initialSize={isEdit || isTemplate ? defaultValue.current : defaultQuota!}\n isDisabled={\n isLoading ||",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/room-quota/index.tsx",
+      "line_number": 114,
+      "context": "defaultValue: \"Set a storage quota for this room.\",\n })\n }\n checkboxLabel={\n isAgent\n ? t(\"CreateEditRoomDialog:DisableRoomQuotaAgent\", {\n defaultValue: \"Disable storage quota for this agent\",\n })\n : t(\"CreateEditRoomDialog:DisableRoomQuota\", {\n defaultValue: \"Disable storage quota\",\n })",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -24,6 +30,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     }
   }
 }

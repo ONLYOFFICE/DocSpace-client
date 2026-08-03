@@ -493,6 +493,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
+      window.removeEventListener(Events.CHANGE_QUOTA, onChangeQuota);
       window.removeEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (!isAIAgents() && enablePlugins) {
@@ -521,6 +522,7 @@ const GlobalEvents = ({
     onCreateGroup,
     onEditGroup,
     onChangeUserType,
+    onChangeQuota,
     onSaveAsTemplate,
     onCreatePluginFileDialog,
     enablePlugins,

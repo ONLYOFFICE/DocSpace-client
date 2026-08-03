@@ -33,8 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useMemo } from "react";
-
+import React, { useEffect, useMemo, useCallback, useState } from "react";
 import { Outlet, useLocation, useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -62,6 +61,7 @@ import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 
 import { updateTempContent } from "@docspace/shared/utils/common";
 import {
@@ -79,7 +79,7 @@ import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
+
 import { handleCopy } from "@docspace/shared/utils/copy";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -89,6 +89,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
+import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
 
 import config from "PACKAGE_FILE";
 
@@ -682,6 +683,60 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const composerHeader = useMemo(() => <AIActivationBanner />, []);
 
+  // Agent picked in the model picker (or restored from an opened thread's
+  // persisted context): the picker shows the agent's name while its profile
+  // drives every request, and sends carry the agent's room as the request
+  // context — the conversation itself stays in the current location.
+  const [pickedAgent, setPickedAgent] = useState(null);
+
+  // "Choose AI Agent" entry (with the agents submenu) for the model picker;
+  // empty until agents are loaded and unless there is more than one of them.
+  const { actions: profilePickerActions, getAgentByRoomId } =
+    useAiAgentsPickerActions(isLoaded && isAiChatAvailable, setPickedAgent);
+
+  // Re-derive the picked agent from the opened thread's persisted context:
+  // agent threads restore their agent (alias + request context), plain
+  // threads drop it. An agent missing from the loaded list still restores
+  // the request context — only the picker alias is skipped.
+  const onThreadContextChange = useCallback(
+    (contextEntityId) => {
+      if (!contextEntityId) {
+        setPickedAgent(null);
+        return;
+      }
+      setPickedAgent(
+        getAgentByRoomId(contextEntityId) ?? { entityId: contextEntityId },
+      );
+    },
+    [getAgentByRoomId],
+  );
+
+  // Picking a plain profile row returns the chat to the current-location
+  // scope; entering an AI agent room does the same — there the room itself
+  // fixes both the entity and the profile (the picker is hidden).
+  const onProfilePickerSelect = useCallback((profile, actionId) => {
+    if (!actionId) setPickedAgent(null);
+  }, []);
+
+  useEffect(() => {
+    if (isInsideAgentRoom) setPickedAgent(null);
+  }, [isInsideAgentRoom]);
+
+  // Talking to a picked agent keeps the conversation where the user is:
+  // history and uploads stay under the current location's entity, and only
+  // the request context (agent tools, workspace steering, profile fallback)
+  // targets the agent's room via contextEntityId.
+  const chatContextEntityId =
+    !isInsideAgentRoom && pickedAgent ? pickedAgent.entityId : undefined;
+
+  const chatPickerAlias = useMemo(
+    () =>
+      !isInsideAgentRoom && pickedAgent?.profileId && pickedAgent?.title
+        ? { profileId: pickedAgent.profileId, label: pickedAgent.title }
+        : null,
+    [isInsideAgentRoom, pickedAgent],
+  );
+
   // AI chat host callbacks. Web Search settings save on an explicit button
   // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
   const aiChatCallbacks = useMemo(
@@ -715,7 +770,12 @@ const Shell = ({ page = "home", ...rest }) => {
           canUseAi={isAuthenticated && !isGuest}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
+          contextEntityId={chatContextEntityId}
           hideProfilePicker={isInsideAgentRoom}
+          profilePickerActions={profilePickerActions}
+          profilePickerAlias={chatPickerAlias}
+          onProfilePickerSelect={onProfilePickerSelect}
+          onThreadContextChange={onThreadContextChange}
           getAgentRoomId={getAgentRoomId}
           openResultFile={openResultFile}
           closeEditorPanel={closeEditorPanel}
@@ -916,4 +976,3 @@ const Root = () => (
 );
 
 export default Root;
-

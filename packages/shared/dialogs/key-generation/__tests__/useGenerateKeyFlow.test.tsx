@@ -62,7 +62,7 @@ vi.mock("../RecoveryPhraseDisplayModal", () => ({
 }));
 
 vi.mock("@docspace/ui-kit/components/toast", () => ({
-  toastr: { success: vi.fn(), error: vi.fn() },
+  toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
 }));
 
 vi.mock("@docspace/shared/services/encryption/identity", () => ({
@@ -72,8 +72,8 @@ vi.mock("@docspace/shared/services/encryption/identity", () => ({
 vi.mock("@docspace/shared/services/encryption/recovery", () => ({
   generateRecoveryMnemonic: vi.fn(),
 }));
-vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
-  SecretStorage: { cacheUnlocked: vi.fn(), lock: vi.fn() },
+vi.mock("@docspace/shared/services/encryption/apply-new-identity", () => ({
+  applyNewIdentity: vi.fn(),
 }));
 vi.mock("@docspace/shared/api/privacy", () => ({
   setEncryptionKeys: vi.fn(),
@@ -88,7 +88,7 @@ import {
   serializeIdentity,
 } from "@docspace/shared/services/encryption/identity";
 import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
-import { SecretStorage } from "@docspace/shared/services/encryption/secret-storage";
+import { applyNewIdentity } from "@docspace/shared/services/encryption/apply-new-identity";
 import { setEncryptionKeys } from "@docspace/shared/api/privacy";
 
 import {
@@ -97,10 +97,7 @@ import {
 } from "../useGenerateKeyFlow";
 
 let latest: GenerateKeyFlow;
-const Harness = (deps: {
-  userId: string | undefined;
-  refreshKeysFromServer: () => Promise<void>;
-}) => {
+const Harness = (deps: Parameters<typeof useGenerateKeyFlow>[0]) => {
   latest = useGenerateKeyFlow(deps);
   return <>{latest.modals}</>;
 };
@@ -135,11 +132,11 @@ describe("useGenerateKeyFlow", () => {
   });
 
   describe("entry branch", () => {
-    it("opens the passphrase modal regardless of existing keys", () => {
+    it("opens the passphrase modal directly regardless of existing keys (no gate)", async () => {
       render(
-        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
+        <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
       );
-      act(() => latest.request());
+      await act(async () => latest.request());
       expect(captured.passphrase).not.toBeNull();
     });
   });
@@ -149,7 +146,7 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId={undefined} refreshKeysFromServer={vi.fn()} />,
       );
-      act(() => latest.request());
+      await act(async () => latest.request());
 
       await act(async () => {
         await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
@@ -167,7 +164,7 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
-      act(() => latest.request());
+      await act(async () => latest.request());
 
       await act(async () => {
         await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
@@ -187,7 +184,7 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
-      act(() => latest.request());
+      await act(async () => latest.request());
 
       await act(async () => {
         await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
@@ -207,7 +204,7 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={refresh} />,
       );
-      act(() => latest.request());
+      await act(async () => latest.request());
       await act(async () => {
         await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
           "secret",
@@ -234,7 +231,7 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
-      act(() => latest.request());
+      await act(async () => latest.request());
       await act(async () => {
         await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
           "secret",
@@ -251,14 +248,14 @@ describe("useGenerateKeyFlow", () => {
       );
     });
 
-    it("caches the unlocked identity AFTER the API write but BEFORE refresh", async () => {
+    it("applies the new identity AFTER the API write but BEFORE refresh", async () => {
       happyMocks();
       const callOrder: string[] = [];
       vi.mocked(setEncryptionKeys).mockImplementationOnce((async () => {
         callOrder.push("api");
       }) as never);
-      vi.mocked(SecretStorage.cacheUnlocked).mockImplementationOnce(() => {
-        callOrder.push("cache");
+      vi.mocked(applyNewIdentity).mockImplementationOnce(async () => {
+        callOrder.push("apply");
       });
       const refresh = vi.fn().mockImplementation(async () => {
         callOrder.push("refresh");
@@ -267,7 +264,7 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={refresh} />,
       );
-      act(() => latest.request());
+      await act(async () => latest.request());
       await act(async () => {
         await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
           "secret",
@@ -277,7 +274,56 @@ describe("useGenerateKeyFlow", () => {
         await (captured.recovery!.onConfirm as () => Promise<void>)();
       });
 
-      expect(callOrder).toEqual(["api", "cache", "refresh"]);
+      expect(callOrder).toEqual(["api", "apply", "refresh"]);
+    });
+
+    it("registers INACTIVE (activate=false) when the account already has keys", async () => {
+      happyMocks();
+      render(
+        <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+      await act(async () => {
+        await (captured.recovery!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(applyNewIdentity).toHaveBeenCalledWith(
+        expect.objectContaining({
+          userId: "42",
+          newIdentity: dummyKeyPair,
+          newPublicKeyB64: "pub-base64",
+          activate: false,
+        }),
+      );
+    });
+
+    it("activates (activate=true) in the zero-keys bootstrap case", async () => {
+      happyMocks();
+      render(
+        <Harness
+          userId="42"
+          hasExistingKeys={false}
+          refreshKeysFromServer={vi.fn()}
+        />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+      await act(async () => {
+        await (captured.recovery!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(applyNewIdentity).toHaveBeenCalledWith(
+        expect.objectContaining({ activate: true }),
+      );
     });
 
     it("clears state via reset() on API error so the user can retry", async () => {
@@ -287,7 +333,7 @@ describe("useGenerateKeyFlow", () => {
       render(
         <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
       );
-      act(() => latest.request());
+      await act(async () => latest.request());
       await act(async () => {
         await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
           "secret",

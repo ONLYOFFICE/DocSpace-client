@@ -3,7 +3,7 @@
   "content": "Encryption key deleted successfully",
   "content_en_sha1_hash": "2b6b7c1de594d006493bbbd23f3f3dc10f6aeac7",
   "created_at": "2026-05-24T17:27:26.533Z",
-  "updated_at": "2026-06-09T09:43:10.922Z",
+  "updated_at": "2026-07-31T12:36:29.538Z",
   "comment": {
     "text": "Success toast message appearing after an encryption key has been successfully deleted.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useDeleteKeyFlow.tsx",
-      "line_number": 113,
-      "context": "if (getActiveKeyId(userId) === verifying.id) {\n clearActiveKeyId(userId);\n }\n SecretStorage.lock();\n await refreshKeysFromServer();\n toastr.success(t(\"Common:EncryptionKeyDeleted\"));\n setVerifying(null);\n } catch (error) {\n if (error instanceof InvalidPassphraseError) {\n setPassphraseError(t(\"Common:InvalidPassphrase\"));\n } else {",
+      "line_number": 117,
+      "context": "if (userId) {\n await getTofuStore(userId).forgetKey(userId, verifying.publicKey);\n }\n SecretStorage.lock();\n await refreshKeysFromServer();\n toastr.success(t(\"Common:EncryptionKeyDeleted\"));\n setVerifying(null);\n } catch (error) {\n if (error instanceof InvalidPassphraseError) {\n setPassphraseError(t(\"Common:InvalidPassphrase\"));\n } else {",
       "module": "/packages/client"
     }
   ],

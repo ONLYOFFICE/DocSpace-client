@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-07-28T07:30:59.825Z",
+  "updated_at": "2026-07-31T12:36:29.390Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -115,8 +115,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 166,
-      "context": "className={styles.actionButton}\n iconName={TrashReactSvgUrl}\n size={16}\n onClick={handleDelete}\n isDisabled={isDeleting}\n title={t(\"Common:Delete\")}\n />\n </div>\n </div>\n <div className={styles.keyItemContent}>\n {createdDate && (",
+      "line_number": 170,
+      "context": "className={styles.actionButton}\n iconName={TrashReactSvgUrl}\n size={16}\n onClick={handleDelete}\n isDisabled={isDeleting}\n title={t(\"Common:Delete\")}\n />\n </div>\n </div>\n {createdDate ? (\n <>",
       "module": "/packages/client"
     },
     {

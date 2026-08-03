@@ -98,6 +98,7 @@ describe("FilesActionsStore — actions (batch 4)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });

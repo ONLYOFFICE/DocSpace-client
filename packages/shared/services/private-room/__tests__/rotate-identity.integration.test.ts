@@ -182,17 +182,17 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
     const stored = filesHandle.current!.getFile(fileId);
     expect(stored.fileKeys).toHaveLength(2);
 
-    const aliceEntry = stored.fileKeys.find((k) => k.userId === ALICE_ID)!;
-    const bobEntry = stored.fileKeys.find((k) => k.userId === BOB_ID)!;
+    const aliceEntries = stored.fileKeys.filter((k) => k.userId === ALICE_ID);
+    expect(aliceEntries).toHaveLength(1);
+    expect(aliceEntries[0].publicKeyId).toBe(ALICE_NEW_KEY_ID);
+    expect(aliceEntries[0].privateKeyEnc).not.toBe(aliceOldWrap.privateKeyEnc);
 
-    expect(aliceEntry.privateKeyEnc).not.toBe(aliceOldWrap.privateKeyEnc);
+    const bobEntry = stored.fileKeys.find((k) => k.userId === BOB_ID)!;
     expect(bobEntry.privateKeyEnc).toBe(bobWrap.privateKeyEnc);
 
     const recoveredDek = await unwrapDekForCurrentUser({
       fileKeys: stored.fileKeys,
-      roomMemberKeys: [
-        { userId: ALICE_ID, publicKey: pubB64(aliceNew) },
-      ],
+      roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(aliceNew) }],
       currentUserId: ALICE_ID,
       currentIdentity: aliceNew,
       fileId,
@@ -206,7 +206,66 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
     expect(puts[0].url).toMatch(/\/files\/555\/access$/);
   });
 
-  it("pins new identity to TOFU only when all files are re-wrapped", async () => {
+  it("skips files already carrying the new key's wrap (idempotent resume)", async () => {
+    const aliceOld = await generateIdentityKeyPair();
+    const aliceNew = await generateIdentityKeyPair();
+    const dek = generateDEK();
+    const fileId = 557;
+
+    const oldWrap = await wrapDekForRecipients({
+      dek,
+      senderIdentity: aliceOld,
+      senderUserId: ALICE_ID,
+      recipients: [{ userId: ALICE_ID, publicKey: pubB64(aliceOld) }],
+      fileId,
+    });
+    const newWrap = await wrapDekForRecipients({
+      dek,
+      senderIdentity: aliceNew,
+      senderUserId: ALICE_ID,
+      recipients: [
+        {
+          userId: ALICE_ID,
+          publicKey: pubB64(aliceNew),
+          publicKeyId: ALICE_NEW_KEY_ID,
+        },
+      ],
+      fileId,
+    });
+
+    filesHandle.current!.setFiles([
+      {
+        id: fileId,
+        title: "already-rotated.docx",
+        encrypted: true,
+        fileKeys: [...oldWrap, ...newWrap],
+      },
+    ]);
+    accessHandle.current!.setRoomKeys(ROOM_ID, [
+      {
+        id: "1",
+        userId: ALICE_ID,
+        publicKey: pubB64(aliceOld),
+        privateKeyEnc: "",
+      },
+    ]);
+
+    const result = await rotateOwnIdentityForRoom(ROOM_ID, {
+      currentUserId: ALICE_ID,
+      oldIdentity: aliceOld,
+      newIdentity: aliceNew,
+      newPublicKeyId: ALICE_NEW_KEY_ID,
+    });
+
+    expect(result).toEqual([{ fileId, success: true, skipped: true }]);
+
+    const puts = filesHandle.current!
+      .getRequests()
+      .filter((r) => r.method === "PUT");
+    expect(puts).toHaveLength(0);
+  });
+
+  it("pins new identity to TOFU up front (proof-of-possession)", async () => {
     const aliceOld = await generateIdentityKeyPair();
     const aliceNew = await generateIdentityKeyPair();
     const dek = generateDEK();
@@ -261,7 +320,7 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
     expect(tofuResult.kind).toBe("match");
   });
 
-  it("does not pin new identity to TOFU when at least one file fails", async () => {
+  it("pins new identity to TOFU even when a file fails (additive wraps keep the old key usable)", async () => {
     const aliceOld = await generateIdentityKeyPair();
     const aliceNew = await generateIdentityKeyPair();
     const aliceOther = await generateIdentityKeyPair();
@@ -323,7 +382,7 @@ describe("rotateOwnIdentityForRoom — integration via MSW", () => {
       ALICE_ID,
       pubB64(aliceNew),
     );
-    expect(tofuResult.kind).not.toBe("match");
+    expect(tofuResult.kind).toBe("match");
 
     const puts = filesHandle.current!
       .getRequests()

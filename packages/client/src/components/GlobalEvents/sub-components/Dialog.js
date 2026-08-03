@@ -82,11 +82,7 @@ const Dialog = ({
 
   const hasError = Boolean(errorText) || isError;
 
-  const getTestIdPrefix = useCallback(() => {
-    if (testIdPrefix) return testIdPrefix;
-    if (!title) return "dialog";
-    return title.toLowerCase().replace(/\s+/g, "_");
-  }, [testIdPrefix, title]);
+  const idPrefix = testIdPrefix || "dialog";
 
   const onCancelAction = useCallback(
     (e) => {
@@ -196,6 +192,7 @@ const Dialog = ({
       onClose={onCloseAction}
       onSubmit={withForm ? onSaveAction : undefined}
       zIndex={405}
+      dataTestId={`${idPrefix}_dialog`}
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -219,7 +216,7 @@ const Dialog = ({
             onFocus={onFocus}
             isDisabled={isDisabled}
             maxLength={165}
-            testId={`${getTestIdPrefix()}_text_input`}
+            testId={`${idPrefix}_text_input`}
           />
         </FieldContainer>
         {isCreateDialog && extension ? (
@@ -236,7 +233,7 @@ const Dialog = ({
               label={t("Common:DontAskAgain")}
               isChecked={isChecked}
               onChange={onChangeCheckbox}
-              dataTestId={`${getTestIdPrefix()}_dont_ask_again`}
+              dataTestId={`${idPrefix}_dont_ask_again`}
             />
           </div>
         ) : null}
@@ -247,7 +244,7 @@ const Dialog = ({
             options={options}
             selectedOption={selectedOption}
             onSelect={onSelect}
-            dataTestId={`${getTestIdPrefix()}_combobox`}
+            dataTestId={`${idPrefix}_combobox`}
           />
         ) : null}
       </ModalDialog.Body>
@@ -268,7 +265,7 @@ const Dialog = ({
           isLoading={isDisabled}
           isDisabled={isCreateDisabled || isDisabled || isError}
           onClick={withForm ? undefined : onSaveAction}
-          testId={`${getTestIdPrefix()}_save_button`}
+          testId={`${idPrefix}_save_button`}
         />
         <Button
           className="cancel-button"
@@ -283,7 +280,7 @@ const Dialog = ({
           scale
           isDisabled={isDisabled}
           onClick={onCancelAction}
-          testId={`${getTestIdPrefix()}_cancel_button`}
+          testId={`${idPrefix}_cancel_button`}
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -410,7 +410,15 @@ class SecondaryProgressDataStore {
           ? updatedItems[itemIndex]
           : updatedItems[updatedItems.length - 1];
 
-      if (progressInfo.completed && !progressInfo.alert && currentOperation) {
+      // A stopped item is one the user terminated: later `completed`
+      // updates (the finalizers still run after the poll loop unwinds) must not
+      // report it as a success.
+      if (
+        progressInfo.completed &&
+        !progressInfo.alert &&
+        currentOperation &&
+        !currentOperation.stopped
+      ) {
         this.showToast(currentOperation, operation);
       }
       if (
@@ -519,6 +527,27 @@ class SecondaryProgressDataStore {
 
       this.secondaryOperationsArray = [...newSecondaryOperationsArray];
     }
+  };
+
+  /** True when the given operation item was terminated by the user, i.e. the
+   * server stopped mid-flight and an unknown subset of the requested items is
+   * still there. Callers use it to refetch instead of applying their optimistic
+   * "everything I asked for is gone" update. */
+  isOperationStopped = (
+    operation: TOperationName,
+    operationId?: string | number,
+  ) => {
+    const operationObject = this.secondaryOperationsArray.find(
+      (obj) => obj.operation === operation,
+    );
+
+    if (!operationObject) return false;
+
+    if (operationId === undefined) return !!operationObject.stopped;
+
+    return !!operationObject.items.find(
+      (item) => item.operationId === operationId,
+    )?.stopped;
   };
 
   findOperationById = (

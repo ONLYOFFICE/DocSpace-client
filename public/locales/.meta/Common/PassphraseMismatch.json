@@ -3,7 +3,7 @@
   "content": "Passphrases do not match",
   "content_en_sha1_hash": "42a0ba82992be92edb99d0ae3a35c75971c1ab9c",
   "created_at": "2026-05-24T17:27:34.691Z",
-  "updated_at": "2026-07-27T13:07:50.849Z",
+  "updated_at": "2026-07-31T12:36:29.542Z",
   "comment": {
     "text": "Error text in a dialog that appears when the entered passphrase and the confirmation passphrase are not identical.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 353,
+      "line_number": 359,
       "context": "labelVisible={false}\n removeMargin\n hasError={!!confirmPassphrase && passphrase !== confirmPassphrase}\n errorMessage={\n confirmPassphrase && passphrase !== confirmPassphrase\n ? t(\"Common:PassphraseMismatch\")\n : \"\"\n }\n errorMessageWidth=\"100%\"\n className={styles.inputWrapper}\n >",
       "module": "/packages/shared"
     }

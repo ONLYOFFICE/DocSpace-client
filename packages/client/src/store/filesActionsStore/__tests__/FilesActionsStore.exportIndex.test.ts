@@ -44,6 +44,7 @@ describe("FilesActionsStore — export-index & version delete (batch 12)", () =>
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });
@@ -59,6 +60,7 @@ describe("FilesActionsStore — export-index & version delete (batch 12)", () =>
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
       versionHistoryStore: {

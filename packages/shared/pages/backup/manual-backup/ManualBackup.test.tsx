@@ -13,6 +13,7 @@ import { selectedStorages, mockThirdPartyAccounts } from "../mockData";
 
 vi.mock("../../../api/portal", () => ({
   startBackup: vi.fn().mockResolvedValue(undefined),
+  saveDeposite: vi.fn().mockResolvedValue("ok"),
 }));
 
 vi.mock("@docspace/ui-kit/components/toast", () => ({
@@ -422,6 +423,78 @@ describe("ManualBackup", () => {
     expect(consoleErrorSpy).toHaveBeenCalledWith(error);
 
     consoleErrorSpy.mockRestore();
+  });
+
+  describe("paid copy with insufficient wallet balance", () => {
+    const paidProps = {
+      ...defaultProps,
+      isBackupPaid: true,
+      isFreeBackupsLimitReached: true,
+      backupServicePrice: 10,
+      walletBalance: 2.5,
+      walletCodeCurrency: "EUR",
+      isPayer: true,
+      isCardLinked: true,
+    };
+
+    it("tops up the wallet and then creates the copy", async () => {
+      const saveDeposite = vi
+        .spyOn(portalApi, "saveDeposite")
+        .mockResolvedValue("ok");
+      const fetchWalletBalance = vi.fn().mockResolvedValue(10);
+
+      render(
+        <ManualBackup
+          {...paidProps}
+          fetchWalletBalance={fetchWalletBalance}
+        />,
+      );
+
+      const createButton = screen.getByText("Common:TopUpAndMakeCopy");
+
+      await userEvent.click(createButton);
+
+      // 10 - 2.5, rounded up to the next whole unit
+      expect(saveDeposite).toHaveBeenCalledWith(8, "EUR");
+      expect(fetchWalletBalance).toHaveBeenCalledWith(true);
+      expect(portalApi.startBackup).toHaveBeenCalledWith(
+        `${BackupStorageType.TemporaryModuleType}`,
+        null,
+        false,
+        false,
+      );
+    });
+
+    it("does not create the copy when the top-up fails", async () => {
+      const saveDeposite = vi
+        .spyOn(portalApi, "saveDeposite")
+        .mockRejectedValue(new Error("card declined"));
+
+      render(<ManualBackup {...paidProps} />);
+
+      await userEvent.click(screen.getByText("Common:TopUpAndMakeCopy"));
+
+      expect(saveDeposite).toHaveBeenCalled();
+      expect(portalApi.startBackup).not.toHaveBeenCalled();
+    });
+
+    it("keeps the plain button when the balance is enough", () => {
+      render(<ManualBackup {...paidProps} walletBalance={12} />);
+
+      expect(screen.getByText("Common:Create")).toBeInTheDocument();
+    });
+
+    it("keeps the plain button for a non-payer", () => {
+      render(<ManualBackup {...paidProps} isPayer={false} />);
+
+      expect(screen.getByText("Common:Create")).toBeInTheDocument();
+    });
+
+    it("keeps the plain button when no card is linked", () => {
+      render(<ManualBackup {...paidProps} isCardLinked={false} />);
+
+      expect(screen.getByText("Common:Create")).toBeInTheDocument();
+    });
   });
 
   it("sets up and cleans up socket listeners", () => {

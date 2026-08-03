@@ -78,6 +78,8 @@ interface ThirdPartyStorageModuleProps {
   buttonSize?: ButtonSize;
   isBackupPaid?: boolean;
   isFreeBackupsLimitReached?: boolean;
+  copyButtonLabel?: string;
+  isToppingUp?: boolean;
   thirdPartyStorage: SelectedStorageType[];
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
@@ -122,6 +124,8 @@ const ThirdPartyStorageModule = ({
   isThirdPartyAvailable,
   isBackupPaid,
   isFreeBackupsLimitReached,
+  copyButtonLabel,
+  isToppingUp,
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -189,6 +193,8 @@ const ThirdPartyStorageModule = ({
     selectedId,
     buttonSize,
     onMakeCopyIntoStorage,
+    copyButtonLabel,
+    isToppingUp,
     t,
     isValidForm,
     isNeedFilePath,

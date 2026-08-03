@@ -67,6 +67,8 @@ interface SelectelStorageProps {
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
   onMakeCopyIntoStorage: () => Promise<void>;
+  copyButtonLabel?: string;
+  isToppingUp?: boolean;
   setRequiredFormSettings: (arr: string[]) => void;
   setIsThirdStorageChanged: (changed: boolean) => void;
   addValueInFormSettings: (name: string, value: string) => void;
@@ -89,6 +91,8 @@ const SelectelStorage = ({
   errorsFieldsBeforeSafe,
   t,
   onMakeCopyIntoStorage,
+  copyButtonLabel,
+  isToppingUp,
   setCompletedFormFields,
   addValueInFormSettings,
   setRequiredFormSettings,
@@ -138,10 +142,13 @@ const SelectelStorage = ({
       >
         <Button
           id="create-copy"
-          label={t("Common:CreateCopy")}
+          label={copyButtonLabel ?? t("Common:CreateCopy")}
           onClick={onMakeCopyIntoStorage}
           primary
-          isDisabled={!isValidForm || !isMaxProgress || isDisabled}
+          isDisabled={
+            !isValidForm || !isMaxProgress || isDisabled || isToppingUp
+          }
+          isLoading={isToppingUp}
           size={buttonSize}
           testId="selectel_create_copy_button"
         />

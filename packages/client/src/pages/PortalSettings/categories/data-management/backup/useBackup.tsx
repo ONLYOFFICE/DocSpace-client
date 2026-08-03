@@ -74,6 +74,7 @@ export type UseBackupProps = {
   isBackupPaid?: CurrentQuotasStore["isBackupPaid"];
   maxFreeBackups?: CurrentQuotasStore["maxFreeBackups"];
   handleServiceQuota?: PaymentStore["handleServiceQuota"];
+  fetchWalletBalance?: PaymentStore["fetchWalletBalance"];
   fetchPayerInfo?: CurrentTariffStatusStore["fetchPayerInfo"];
   setBackupsCount?: BackupStore["setBackupsCount"];
   setIsInited?: BackupStore["setIsInited"];
@@ -100,6 +101,7 @@ const useBackup = ({
   isBackupPaid,
   maxFreeBackups,
   handleServiceQuota,
+  fetchWalletBalance,
   fetchPayerInfo,
   setBackupsCount,
   setIsInited,
@@ -160,6 +162,7 @@ const useBackup = ({
 
         optionalRequests.push(handleServiceQuota?.());
         optionalRequests.push(fetchPayerInfo?.());
+        optionalRequests.push(fetchWalletBalance?.());
       }
 
       const [account, backupStorage, storageRegionsS3, backupsCount] =
@@ -194,6 +197,7 @@ const useBackup = ({
     setBackupsCount,
     setIsInited,
     handleServiceQuota,
+    fetchWalletBalance,
     fetchPayerInfo,
     setIsEmptyContentBeforeLoader,
   ]);

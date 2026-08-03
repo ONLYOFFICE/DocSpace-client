@@ -80,6 +80,8 @@ interface AmazonStorageProps {
     module?: string,
   ) => void;
   onMakeCopyIntoStorage: () => Promise<void>;
+  copyButtonLabel?: string;
+  isToppingUp?: boolean;
   isThirdPartyAvailable: boolean;
 }
 
@@ -97,6 +99,8 @@ const AmazonStorage = ({
   selectedStorage,
   errorsFieldsBeforeSafe,
   onMakeCopyIntoStorage,
+  copyButtonLabel,
+  isToppingUp,
   setCompletedFormFields,
   deleteValueFormSetting,
   addValueInFormSettings,
@@ -149,10 +153,13 @@ const AmazonStorage = ({
       >
         <Button
           id="create-copy"
-          label={t("Common:CreateCopy")}
+          label={copyButtonLabel ?? t("Common:CreateCopy")}
           onClick={onMakeCopyIntoStorage}
           primary
-          isDisabled={!isValidForm || !isMaxProgress || isDisabled}
+          isDisabled={
+            !isValidForm || !isMaxProgress || isDisabled || isToppingUp
+          }
+          isLoading={isToppingUp}
           size={buttonSize}
           testId="amazon_create_copy_button"
         />

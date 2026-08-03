@@ -69,6 +69,8 @@ interface RackspaceStorageProps {
   addValueInFormSettings: (name: string, value: string) => void;
   setRequiredFormSettings: (arr: string[]) => void;
   onMakeCopyIntoStorage: () => Promise<void>;
+  copyButtonLabel?: string;
+  isToppingUp?: boolean;
   setIsThirdStorageChanged: (changed: boolean) => void;
   setCompletedFormFields: (
     values: Record<string, string>,
@@ -93,6 +95,8 @@ const RackspaceStorage = ({
   setRequiredFormSettings,
   setCompletedFormFields,
   onMakeCopyIntoStorage,
+  copyButtonLabel,
+  isToppingUp,
   t,
   isThirdPartyAvailable,
 }: RackspaceStorageProps) => {
@@ -138,10 +142,13 @@ const RackspaceStorage = ({
       >
         <Button
           id="create-copy"
-          label={t("Common:CreateCopy")}
+          label={copyButtonLabel ?? t("Common:CreateCopy")}
           onClick={onMakeCopyIntoStorage}
           primary
-          isDisabled={!isValidForm || !isMaxProgress || isDisabled}
+          isDisabled={
+            !isValidForm || !isMaxProgress || isDisabled || isToppingUp
+          }
+          isLoading={isToppingUp}
           size={buttonSize}
           testId="racspace_create_copy_button"
         />

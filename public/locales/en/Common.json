@@ -2291,6 +2291,7 @@
   "TopUp": "Top up",
   "TopUpAndActivate": "Top up & activate",
   "TopUpBeforeNextPayment": "Top up {{amount}} before {{date}} to cover your next payment.",
+  "TopUpAndMakeCopy": "Top up & Make copy",
   "TopUpAndPay": "Top up & Pay",
   "TopUpAndRenew": "Top up & Renew",
   "TopUpAndUpgrade": "Top up & Upgrade",

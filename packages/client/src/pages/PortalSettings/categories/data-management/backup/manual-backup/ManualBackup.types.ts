@@ -52,6 +52,7 @@ export interface InjectedManualBackupProps
   setIsInited: (inited: boolean) => void;
   isBackupPaid: boolean;
   setIsEmptyContentBeforeLoader: (value: boolean) => void;
+  fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
 }
 
 export type ExternalManualBackupProps = Pick<

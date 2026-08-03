@@ -180,4 +180,8 @@ export interface ManualBackupProps {
 
 	isThirdPartyAvailable?: boolean;
 	backupServicePrice?: number;
+	walletBalance?: number;
+	walletCodeCurrency?: string;
+	isCardLinked?: boolean;
+	fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
 }

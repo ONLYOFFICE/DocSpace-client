@@ -34,7 +34,7 @@
  */
 
 import { inject, observer } from "mobx-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
@@ -97,6 +97,7 @@ const ServicePage = (props: ServicePageProps) => {
     cancelScheduledChange,
   } = props;
   useTranslation(["DocsConnect", "Common"]);
+  const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -160,6 +161,8 @@ const ServicePage = (props: ServicePageProps) => {
         ? {
             nextUsers: scheduledChange.nextUsers,
             dueDate: scheduledChange.dueDate,
+            nextDevPackEnabled: scheduledChange.nextDevPackEnabled,
+            scheduledOnDevPack: scheduledChange.scheduledOnDevPack,
           }
         : null,
       deactivated: isPaid && (docsConnectInfo.deactivated ?? false),
@@ -167,10 +170,15 @@ const ServicePage = (props: ServicePageProps) => {
     };
 
     const onCancelChange = async () => {
+      if (isCancelChangeLoading) return;
+
+      setIsCancelChangeLoading(true);
       try {
         await cancelScheduledChange?.();
       } catch (e) {
         toastr.error(e as Error);
+      } finally {
+        setIsCancelChangeLoading(false);
       }
     };
 
@@ -187,6 +195,7 @@ const ServicePage = (props: ServicePageProps) => {
           onCancelPlan={() => openCancelPlanDialog?.()}
           onRemovePlan={() => openRemoveSubscriptionDialog?.()}
           onCancelChange={onCancelChange}
+          isCancelChangeLoading={isCancelChangeLoading}
         />
         {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
         {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}

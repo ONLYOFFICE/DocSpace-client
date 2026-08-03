@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-07-28T07:30:59.807Z",
+  "updated_at": "2026-08-01T15:33:49.511Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -121,7 +121,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 362,
+      "line_number": 367,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"",
       "module": "/packages/client"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 346,
+      "line_number": 512,
       "context": "onSaveClick={onSaveGeneral}\n onCancelClick={onCancelGeneral}\n saveButtonDisabled={!isGeneralValid}\n showReminder={hasChangesGeneral}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n isSaving={isSavingGeneral}\n displaySettings\n />",
       "module": "/packages/client"
     },
@@ -199,7 +199,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 456,
+      "line_number": 540,
       "context": "</div>\n \n <SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading",
       "module": "/packages/client"
     },
@@ -325,7 +325,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 381,
+      "line_number": 386,
       "context": "</div>\n <div className={styles.buttonContainer}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:SaveButton\")}\n scale={false}\n onClick={onSave}\n isLoading={saveRequestRunning}\n isDisabled={isSaveDisabled}\n testId=\"knowledge-save-button\"",
       "module": "/packages/sdk"
     },

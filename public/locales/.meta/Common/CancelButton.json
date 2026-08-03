@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-07-28T07:30:59.808Z",
+  "updated_at": "2026-08-01T15:33:49.513Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -733,7 +733,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 952,
+      "line_number": 928,
       "context": "testId=\"docs_connect_buy_plan_submit\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n isDisabled={submitting && !waitingPayment}\n />\n </div>\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -745,14 +745,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 347,
+      "line_number": 513,
       "context": "onCancelClick={onCancelGeneral}\n saveButtonDisabled={!isGeneralValid}\n showReminder={hasChangesGeneral}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n isSaving={isSavingGeneral}\n displaySettings\n />\n \n <Text fontSize=\"16px\" fontWeight={700}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
-      "line_number": 137,
-      "context": "onClick={onSubmit}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );",
+      "line_number": 161,
+      "context": "onClick={onSubmit}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={onClose}\n />\n </ModalDialog.Footer>\n </ModalDialog>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ApplyToPortalDialog.tsx",
+      "line_number": 98,
+      "context": "onClick={onApply}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={onClose}\n />\n </ModalDialog.Footer>\n </ModalDialog>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/ResetRulesDialog.tsx",
+      "line_number": 84,
+      "context": "onClick={onReset}\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isSaving}\n onClick={onClose}\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
     {
@@ -1339,7 +1351,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 401,
+      "line_number": 407,
       "context": "<Button\n scale\n key=\"CancelButton\"\n onClick={handleCancel}\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n isDisabled={isLoading}\n tabIndex={5}\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/shared"
     },

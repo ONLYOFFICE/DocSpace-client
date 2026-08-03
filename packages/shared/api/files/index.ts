@@ -1643,11 +1643,11 @@ export async function getDocumentServiceLocation(
 }
 
 export async function changeDocumentServiceLocation(
-  docServiceUrl: string,
-  secretKey: string,
-  authHeader: string,
-  internalUrl: string,
-  portalUrl: string,
+  docServiceUrl: string | null,
+  secretKey: string | null,
+  authHeader: string | null,
+  internalUrl: string | null,
+  portalUrl: string | null,
   sslVerification: boolean,
 ) {
   const res = (await request({

@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-26T07:15:43.935Z",
-  "updated_at": "2026-07-27T13:07:50.932Z",
+  "updated_at": "2026-07-31T12:36:29.596Z",
   "comment": {
     "text": "This is a button label. Clicking it generates a logo based on the provided text input.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 230,
+      "line_number": 236,
       "context": "isHovered\n onClick={handleGeneratePassword}\n dataTestId=\"generate_passphrase_link\"\n tabIndex={1}\n >\n {t(\"Common:GenerateLogoButton\")}\n </Link>\n </div>\n ) : null}\n \n <FieldContainer",
       "module": "/packages/shared"
     },

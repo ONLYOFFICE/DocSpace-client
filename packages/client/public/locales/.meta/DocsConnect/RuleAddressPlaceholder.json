@@ -3,7 +3,7 @@
   "content": "Enter IP address, range, or host",
   "content_en_sha1_hash": "a08d5c2687a611aedc7b669ddae22b1f1a1fba80",
   "created_at": "2026-07-27T13:07:48.544Z",
-  "updated_at": "2026-07-27T13:58:18.576Z",
+  "updated_at": "2026-07-31T15:04:17.668Z",
   "comment": {
     "text": "Placeholder for a text input field in the \"Add Rule\" dialog within DocsConnect settings, indicating the required format for network addresses.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/AddRuleDialog.tsx",
-      "line_number": 116,
-      "context": ">\n <TextInput\n type={InputType.text}\n value={address}\n onChange={(e) => setAddress(e.target.value)}\n placeholder={t(\"DocsConnect:RuleAddressPlaceholder\")}\n scale\n />\n <Text fontSize=\"12px\" className={styles.settingsHint}>\n {t(\"DocsConnect:RuleAddressExamples\")}\n </Text>",
+      "line_number": 138,
+      "context": ">\n <TextInput\n type={InputType.text}\n value={address}\n onChange={(e) => setAddress(e.target.value)}\n placeholder={t(\"DocsConnect:RuleAddressPlaceholder\")}\n hasError={isDuplicate}\n scale\n />\n <Text fontSize=\"12px\" className={styles.settingsHint}>\n {t(\"DocsConnect:RuleAddressExamples\")}",
       "module": "/packages/client"
     }
   ],

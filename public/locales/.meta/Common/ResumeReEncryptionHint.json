@@ -1,20 +1,20 @@
 {
-  "key_path": "EncryptionRewrapSkipped",
-  "content": "Existing private rooms were not re-encrypted because the previous key was locked. Use your previous passphrase or recovery phrase to restore access to them.",
-  "content_en_sha1_hash": "fdfd6720277e096a0368f7f3cee0d3916bc7bfe1",
-  "created_at": "2026-07-27T13:07:11.836Z",
-  "updated_at": "2026-07-27T13:31:10.891Z",
+  "key_path": "ResumeReEncryptionHint",
+  "content": "Some files in your private rooms are still encrypted with your previous key. Resume re-encryption to finish moving them to the new key.",
+  "content_en_sha1_hash": "9e3d77c36e1970ec25faaaa0f9a4c6cd778f736d",
+  "created_at": "2026-07-31T12:36:15.680Z",
+  "updated_at": "2026-07-31T12:38:20.998Z",
   "comment": {
-    "text": "Warning toast message appearing during key rotation if existing private rooms could not be re-encrypted due to a locked previous key.",
+    "text": "Informative text hint within a banner that appears when a key rotation process is pending and requires the user to resume re-encryption.",
     "is_auto": true,
-    "updated_at": "2026-07-27T13:31:10.891Z",
+    "updated_at": "2026-07-31T12:38:20.998Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 198,
-      "context": "newIdentity: IdentityKeyPair,\n currentUserId: string,\n newPublicKeyId: string,\n ) => {\n if (!oldIdentity) {\n if (hasKeys) toastr.warning(t(\"Common:EncryptionRewrapSkipped\"));\n return;\n }\n await rotateForAllRooms(\n oldIdentity,\n newIdentity,",
+      "line_number": 337,
+      "context": ") : null}\n </div>\n {switchKey.pendingState && !switchKey.isDismissed && !isRotating ? (\n <div className={styles.resumeSection} data-testid=\"resume_rotation_banner\">\n <span className={styles.resetHint}>\n {t(\"Common:ResumeReEncryptionHint\")}\n </span>\n <div className={styles.resumeActions}>\n <Button\n size={ButtonSize.small}\n onClick={() => {",
       "module": "/packages/client"
     }
   ],

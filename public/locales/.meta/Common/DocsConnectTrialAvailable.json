@@ -3,7 +3,7 @@
   "content": "Free trial available | Then from {{price}} per user / month",
   "content_en_sha1_hash": "eedb97ee0742b5e987d534480fae89b80af99801",
   "created_at": "2026-07-27T13:07:08.246Z",
-  "updated_at": "2026-07-27T13:33:45.890Z",
+  "updated_at": "2026-08-01T15:33:49.799Z",
   "comment": {
     "text": "Informational label within a service item list for non-subscribers, indicating trial availability and subsequent monthly cost. The {{price}} variable represents the formatted currency amount per user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 494,
+      "line_number": 499,
       "context": "</>\n ) : undefined;\n \n let docsConnectPrice;\n if (!subscribed) {\n docsConnectPrice = t(\"DocsConnectTrialAvailable\", {\n price: formatWalletCurrency(item.price.value, 0),\n });\n } else if (trialExpired) {\n docsConnectPrice = (\n <>",
       "module": "/libs/ui-kit"
     }

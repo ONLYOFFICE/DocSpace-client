@@ -324,6 +324,36 @@
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
           },
           {
+            "label": "─────── Plugins ───────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Plugins E2E run UI",
+            "task": "Test | Test e2e run ui (plugins)",
+            "tooltip": "🛠️ Start the \"test run UI (plugins)\" task"
+          },
+          {
+            "label": "Plugins E2E start docker",
+            "task": "Test | Test e2e docker start (plugins)",
+            "tooltip": "🛠️ Start the \"local plugins e2e tests in docker\" task"
+          },
+          {
+            "label": "Plugins E2E update screenshots",
+            "task": "Test | Test e2e docker update-screenshots (plugins)",
+            "tooltip": "🛠️ Start the \"update e2e screenshots (plugins)\" task"
+          },
+          {
+            "label": "Plugins E2E dev docker",
+            "task": "Test | Test e2e docker dev (plugins)",
+            "tooltip": "🛠️ Start the \"dev plugins e2e tests in docker (rebuild from sources)\" task"
+          },
+          {
+            "label": "Plugins E2E dev update screenshots",
+            "task": "Test | Test e2e docker dev update-screenshots (plugins)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (plugins)\" task"
+          },
+          {
             "label": "──────── Login ────────",
             "task": "separator",
             "tooltip": ""

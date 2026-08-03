@@ -42,7 +42,7 @@ import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import styles from "./confirm-wrapper.module.scss";
 
 const ConfirmWrapper = (props) => {
-  const { children, currentColorScheme, height } = props;
+  const { children, currentColorScheme, height, hideBackground } = props;
   const bgPattern = getBgPattern(currentColorScheme?.id);
   const computedHeight = height
     ? height
@@ -57,7 +57,9 @@ const ConfirmWrapper = (props) => {
 
   const content = (
     <>
-      <div className={styles.bgBlock} style={bgBlockStyle} />
+      {hideBackground ? null : (
+        <div className={styles.bgBlock} style={bgBlockStyle} />
+      )}
       {children}
     </>
   );

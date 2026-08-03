@@ -103,7 +103,6 @@
   "Remaining": "남음",
   "RemainingBalanceAfter": "구매 후 남은 잔액: {{amount}}",
   "RemainingCreditsAfter": "구매 후 남은 크레딧: {{amount}}",
-  "RemoveSubscriptionConfirm": "이전 구독 정보가 삭제됩니다. {{service}}를 다시 사용하려면 새 구독을 설정해야 합니다.",
   "RenewsOnWithUpdate": "{{date}}에 갱신 — {{price}}/월 (사용자: {{count}}명)",
   "ReportGenerationHint": "보고서 생성에는 다소 시간이 걸릴 수 있습니다. 준비되면 {{sectionName}}에 저장됩니다.",
   "ResetAccessRulesTitle": "액세스 규칙 초기화",

@@ -103,7 +103,6 @@
   "Remaining": "Оставшиеся",
   "RemainingBalanceAfter": "Остаток баланса после покупки: {{amount}}",
   "RemainingCreditsAfter": "Остаток кредитов после покупки: {{amount}}",
-  "RemoveSubscriptionConfirm": "Данные предыдущей подписки будут удалены. Чтобы снова использовать {{service}}, вам нужно будет настроить новую подписку.",
   "RenewsOnWithUpdate": "Продление {{date}} — {{price}}/месяц (Пользователи: {{count}})",
   "ReportGenerationHint": "Формирование отчета может занять некоторое время. Как только он будет готов, он будет сохранен в {{sectionName}}.",
   "ResetAccessRulesTitle": "Сбросить правила доступа",

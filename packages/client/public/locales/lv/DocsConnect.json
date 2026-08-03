@@ -103,7 +103,6 @@
   "Remaining": "Atlikušie",
   "RemainingBalanceAfter": "Atlikušais atlikums pēc pirkuma: {{amount}}",
   "RemainingCreditsAfter": "Atlikušie kredīti pēc pirkuma: {{amount}}",
-  "RemoveSubscriptionConfirm": "Jūsu iepriekšējā abonementa dati tiks noņemti. Lai atkal izmantotu {{service}}, jums būs jākonfigurē jauns abonements.",
   "RenewsOnWithUpdate": "Atjaunosies {{date}} — {{price}}/mēnesī (Lietotāji: {{count}})",
   "ReportGenerationHint": "Atskaites sagatavošana var aizņemt zināmu laiku. Kad tā būs gatava, tā tiks saglabāta sadaļā {{sectionName}}.",
   "ResetAccessRulesTitle": "Atiestatīt piekļuves noteikumus",

@@ -103,7 +103,6 @@
   "Remaining": "Remaining",
   "RemainingBalanceAfter": "Remaining balance after purchase: {{amount}}",
   "RemainingCreditsAfter": "Remaining credits after purchase: {{amount}}",
-  "RemoveSubscriptionConfirm": "Your previous subscription details will be removed. To use {{service}} again, you'll need to configure a new subscription.",
   "RenewsOnWithUpdate": "Renews on {{date}} — {{price}}/month (Users: {{count}})",
   "ReportGenerationHint": "The report may take some time to generate. Once ready, it will be saved to {{sectionName}}.",
   "ResetAccessRulesTitle": "Reset access rules",

@@ -103,7 +103,6 @@
   "Remaining": "Restante",
   "RemainingBalanceAfter": "Saldo restante após a compra: {{amount}}",
   "RemainingCreditsAfter": "Créditos restantes após a compra: {{amount}}",
-  "RemoveSubscriptionConfirm": "Os detalhes da sua assinatura anterior serão removidos. Para usar o {{service}} novamente, você precisará configurar uma nova assinatura.",
   "RenewsOnWithUpdate": "Renova em {{date}} — {{price}}/mês (Usuários: {{count}})",
   "ReportGenerationHint": "O relatório pode levar algum tempo para ser gerado. Assim que estiver pronto, será salvo em {{sectionName}}.",
   "ResetAccessRulesTitle": "Redefinir regras de acesso",

@@ -35,13 +35,25 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import type { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
-import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/ui-kit/components/modal-dialog";
 import { Portal } from "@docspace/ui-kit/components/portal";
+
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
+
 import styles from "./PluginDialog.module.scss";
+import type { PluginDialogProps } from "./PluginDialog.types";
+
+const DISPLAY_TYPE_MAP: Record<string, ModalDialogType> = {
+  modal: ModalDialogType.modal,
+  aside: ModalDialogType.aside,
+};
 
 const PluginDialog = ({
   isVisible,
@@ -54,6 +66,7 @@ const PluginDialog = ({
   onLoad,
   eventListeners,
 
+  displayType,
   fullScreen,
 
   pluginName,
@@ -71,7 +84,7 @@ const PluginDialog = ({
   updateEventListenerItems,
   updateFileItems,
   ...rest
-}) => {
+}: PluginDialogProps) => {
   const [dialogHeaderProps, setDialogHeaderProps] =
     React.useState(dialogHeader);
   const [dialogBodyProps, setDialogBodyProps] = React.useState(dialogBody);
@@ -80,50 +93,38 @@ const PluginDialog = ({
 
   const [modalRequestRunning, setModalRequestRunning] = React.useState(false);
 
-  const functionsRef = React.useRef([]);
+  const functionsRef = React.useRef<EventListener[]>([]);
+
+  const sharedMessageParams = {
+    pluginName,
+    setSettingsPluginDialogVisible,
+    updatePluginStatus,
+    setPluginDialogVisible,
+    setPluginDialogProps,
+    updateContextMenuItems,
+    updateInfoPanelItems,
+    updateMainButtonItems,
+    updateProfileMenuItems,
+    updateEventListenerItems,
+    updateFileItems,
+  };
 
   const onCloseAction = async () => {
     if (modalRequestRunning) return;
     const message = await onClose();
 
-    messageActions({
-      message,
-      pluginName,
-      setSettingsPluginDialogVisible,
-      updatePluginStatus,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-    });
+    if (message) messageActions({ ...sharedMessageParams, message });
   };
 
   React.useEffect(() => {
     if (eventListeners) {
       eventListeners.forEach((e) => {
-        const onAction = async (evt) => {
+        const onAction = async (evt: Event) => {
           setModalRequestRunning(true);
           const message = await e.onAction(evt);
           setModalRequestRunning(false);
 
-          messageActions({
-            message,
-            pluginName,
-            setSettingsPluginDialogVisible,
-            updatePluginStatus,
-            setPluginDialogVisible,
-            setPluginDialogProps,
-            updateContextMenuItems,
-            updateInfoPanelItems,
-            updateMainButtonItems,
-            updateProfileMenuItems,
-            updateEventListenerItems,
-            updateFileItems,
-          });
+          if (message) messageActions({ ...sharedMessageParams, message });
         };
 
         functionsRef.current.push(onAction);
@@ -160,10 +161,12 @@ const PluginDialog = ({
     <div className={styles.fullScreen}>
       <WrappedComponent
         pluginName={pluginName}
-        component={{
-          component: PluginComponents.box,
-          props: dialogBodyProps,
-        }}
+        component={
+          {
+            component: PluginComponents.box,
+            props: dialogBodyProps,
+          } satisfies BoxGroup
+        }
         setModalRequestRunning={setModalRequestRunning}
         modalRequestRunning={modalRequestRunning}
       />
@@ -174,6 +177,7 @@ const PluginDialog = ({
       onClose={onCloseAction}
       withoutPadding={withoutBodyPadding}
       withoutHeaderMargin={withoutHeaderMargin}
+      displayType={DISPLAY_TYPE_MAP[displayType]}
       dataTestId="plugin_modal"
       {...rest}
     >
@@ -181,10 +185,12 @@ const PluginDialog = ({
       <ModalDialog.Body>
         <WrappedComponent
           pluginName={pluginName}
-          component={{
-            component: PluginComponents.box,
-            props: dialogBodyProps,
-          }}
+          component={
+            {
+              component: PluginComponents.box,
+              props: dialogBodyProps,
+            } satisfies BoxGroup
+          }
           setModalRequestRunning={setModalRequestRunning}
           modalRequestRunning={modalRequestRunning}
         />
@@ -193,10 +199,12 @@ const PluginDialog = ({
         <ModalDialog.Footer>
           <WrappedComponent
             pluginName={pluginName}
-            component={{
-              component: PluginComponents.box,
-              props: dialogFooterProps,
-            }}
+            component={
+              {
+                component: PluginComponents.box,
+                props: dialogFooterProps,
+              } satisfies BoxGroup
+            }
             setModalRequestRunning={setModalRequestRunning}
             modalRequestRunning={modalRequestRunning}
           />
@@ -208,7 +216,7 @@ const PluginDialog = ({
   return <Portal element={dialog} appendTo={rootElement} visible={isVisible} />;
 };
 
-export default inject(({ pluginStore }) => {
+export default inject(({ pluginStore }: TStore) => {
   const {
     pluginDialogProps,
     setSettingsPluginDialogVisible,

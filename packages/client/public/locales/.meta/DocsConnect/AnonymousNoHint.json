@@ -1,0 +1,29 @@
+{
+  "key_path": "AnonymousNoHint",
+  "content": "(Only authenticated users can access documents)",
+  "content_en_sha1_hash": "a0e11856cc7057502b8dd8d1b969677b944204d9",
+  "created_at": "2026-07-27T13:07:48.538Z",
+  "updated_at": "2026-08-01T15:33:49.635Z",
+  "comment": {
+    "text": "Explanatory subtext for a radio button label in the DocsConnect settings, appearing alongside the \"No\" option.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:38:53.397Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 474,
+      "context": "value: \"no\",\n label: (\n <>\n {t(\"Common:No\")}{\" \"}\n <span className={styles.radioHint}>\n {t(\"DocsConnect:AnonymousNoHint\")}\n </span>\n </>\n ),\n },\n ]}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -47,15 +47,6 @@
   --payment-backgroud-color-warning: var(--dev-tools-card-bg);
 }
 
-.scheduledNote {
-  margin-top: auto;
-  --text-size: 12px;
-}
-
-.bodyScheduled {
-  padding-bottom: 4px;
-}
-
 .footerHint {
   color: var(--text-color);
   margin-bottom: 8px;
@@ -213,6 +204,12 @@
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.summaryLabelWithHint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .summaryLabel {

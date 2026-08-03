@@ -3,7 +3,7 @@
   "content": "Move to",
   "content_en_sha1_hash": "349f807a5e5497d0e5f0e5eb83dd8a59d2dd2c7d",
   "created_at": "2025-05-19T21:30:46.631Z",
-  "updated_at": "2026-07-07T08:59:21.676Z",
+  "updated_at": "2026-07-27T13:07:50.589Z",
   "comment": {
     "text": "This is a button label or menu item that initiates the action of moving a selected file or folder to a different location.",
     "is_auto": true,
@@ -24,15 +24,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 2329,
-      "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 252,
+      "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => onShowEditingToast(t)\n : () => self.onMoveAction(item),\n disabled: false,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 2329,
-      "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
+      "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
+      "line_number": 293,
+      "context": "onClick: self.onClickDownloadAs,\n disabled: !hasDownloadAccess || !canConvertSelected,\n },\n {\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: allFilesIsEditing\n ? () => onShowEditingToast(t)\n : self.onMoveAction,\n disabled: isRecycleBinFolder || !canMove,",
       "module": "/packages/client"
     },
     {

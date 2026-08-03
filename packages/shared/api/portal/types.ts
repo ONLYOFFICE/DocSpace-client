@@ -42,6 +42,7 @@ export type TQuotas = {
   wallet?: boolean;
   dueDate?: string;
   nextQuantity?: number;
+  nextQuota?: number;
   state?: QuotaState;
 };
 

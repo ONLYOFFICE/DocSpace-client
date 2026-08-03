@@ -1,0 +1,29 @@
+{
+  "key_path": "EnableWopi",
+  "content": "Enable WOPI protocol",
+  "content_en_sha1_hash": "01bce6459c023a5b50f3bc5ea16349ade83d7ae6",
+  "created_at": "2026-07-27T13:07:48.535Z",
+  "updated_at": "2026-08-01T15:33:49.633Z",
+  "comment": {
+    "text": "Label for a toggle switch in the DocsConnect settings used to activate or deactivate the WOPI protocol.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:21:38.302Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 418,
+      "context": "<div className={styles.toggleGroup}>\n <Text fontWeight={600}>{t(\"DocsConnect:Wopi\")}</Text>\n <div className={styles.toggleCard}>\n <div className={styles.toggleControl}>\n <ToggleButton\n label={t(\"DocsConnect:EnableWopi\")}\n fontWeight={600}\n isChecked={general.wopiEnabled}\n isDisabled={isBusy}\n dataTestId=\"docs_connect_wopi_toggle\"\n onChange={() =>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

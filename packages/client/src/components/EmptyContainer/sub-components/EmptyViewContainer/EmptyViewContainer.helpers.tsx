@@ -419,7 +419,7 @@ export const getOptions = (
   };
 
   const createAIAgent = {
-    title: t("Common:CreateNewAIAgent"),
+    title: t("Common:CreateAIAgentTitle"),
     description: t("Common:CreateAIAgentDescription", {
       aiAgent: t("Common:AIAgent"),
     }),
@@ -582,6 +582,7 @@ export const getOptions = (
         inviteRootRoom,
         migrationData,
       ])
+      .with([FolderType.Forms, P._, true], () => [])
       .with([FolderType.Forms, P._, P._], () => [createRoom])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,

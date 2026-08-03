@@ -65,6 +65,17 @@ export type TDocsConnectStat = {
   criticalRemaining: boolean;
 };
 
+export type TDocsConnectReportStatus = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: number;
+  resultFileId: number;
+  resultFileName: string;
+  resultFileUrl: string;
+};
+
 export type TDocsConnectTenantInfo = {
   license: { valid: string; trial: boolean; buildDate: string };
   server: { version: string; packageType: string; date: string };
@@ -96,6 +107,8 @@ export type TDocsConnectDevPackCalculation = {
 export type TDocsConnectScheduledChange = {
   nextUsers: number;
   dueDate: string;
+  nextDevPackEnabled: boolean;
+  scheduledOnDevPack: boolean;
 };
 
 export type TDocsConnectTariffState = {

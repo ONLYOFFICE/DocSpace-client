@@ -3,7 +3,7 @@
   "content": "Activate AI features to chat with your agents, access their knowledge base, and let them run tasks across your apps. AI usage is billed from your wallet balance.",
   "content_en_sha1_hash": "ec198306f25ed7482e385989ffda2857318e547e",
   "created_at": "2026-06-25T11:54:43.953Z",
-  "updated_at": "2026-07-04T11:30:22.035Z",
+  "updated_at": "2026-07-28T07:30:59.964Z",
   "comment": {
     "text": "Informational paragraph within a chat info block that explains the benefits of enabling AI features and notifies users about billing via their wallet balance.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-info-block/index.tsx",
-      "line_number": 72,
+      "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
+      "line_number": 84,
       "context": "? t(\"AIFeaturesAreCurrentlyDisabled\")\n : t(\"AIFeaturesNotActive\");\n \n // shared intro for the SaaS admin variants: what AI gives + wallet notice\n const activateIntro = (\n <Text as=\"span\">{`${t(\"AIDisabledInfoBlockActivateWalletDescription\")} `}</Text>\n );\n \n const bodyText = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>",
       "module": "/libs/ui-kit"
     }

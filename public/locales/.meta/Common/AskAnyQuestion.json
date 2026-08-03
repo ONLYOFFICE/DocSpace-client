@@ -3,7 +3,7 @@
   "content": "Ask any question or describe what you need",
   "content_en_sha1_hash": "cb371f58ba7bd9cee288e201235823685af0420e",
   "created_at": "2026-03-31T15:18:04.590Z",
-  "updated_at": "2026-07-04T11:30:22.036Z",
+  "updated_at": "2026-07-31T12:36:29.639Z",
   "comment": {
     "text": "This is a placeholder text for a chat input field, prompting users to type their queries or requests for the AI assistant.",
     "is_auto": true,
@@ -12,15 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/index.tsx",
-      "line_number": 332,
-      "context": "wrapperClassName={classNames({\n [styles.chatInputTextAreaWrapper]: true,\n [styles.chatInputTextAreaWrapperFiles]:\n selectedFiles.length > 0 && !hideAttachments,\n })}\n placeholder={t(\"AskAnyQuestion\")}\n isChatMode\n fontSize={15}\n isDisabled={!aiReady}\n onKeyDown={onKeyEnter}\n dataTestId=\"chat-input-textarea\"",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/libs/ui-kit/ai-agent/providers/index.tsx",
-      "line_number": 289,
-      "context": "entityId,\n // Hide \"Always allow\" only for generate tools (matched by full name).\n hideToolAllowAlways: GENERATE_TOOL_NAMES,\n onToolCallApproveResult,\n composerActionSendSize: 32,\n composerPlaceholder: t(\"AskAnyQuestion\"),\n }),\n [\n composerActions,\n composerHeader,\n composerDisabled,",
+      "line_number": 542,
+      "context": "onProfilePickerSelect,\n // Hide \"Always allow\" only for generate tools (matched by full name).\n hideToolAllowAlways: GENERATE_TOOL_NAMES,\n onToolCallApproveResult,\n composerActionSendSize: 32,\n composerPlaceholder: t(\"AskAnyQuestion\"),\n webSearchSaveMode: \"button\",\n // Route drag-and-drop through the portal-upload + attach flow (same as\n // the \"Upload from device\" button) instead of the library's in-memory\n // default, so dropped DOCX/PDF/XLSX are supported too.\n onDropFiles,",
       "module": "/libs/ui-kit"
     }
   ],

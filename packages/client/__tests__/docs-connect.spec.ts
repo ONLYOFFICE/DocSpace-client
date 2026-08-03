@@ -53,7 +53,7 @@ import type { WorkerFixture } from "@docspace/shared/__mocks__/e2e";
 
 test.use({ timezoneId: "UTC" });
 
-const DOCS_CONNECT_ROUTE = "/portal-settings/developer-tools/docs-connect";
+const DOCS_CONNECT_ROUTE = "/developer-tools/docs-connect";
 const FROZEN_NOW_MS = new Date(DOCS_CONNECT_FROZEN_NOW).getTime();
 const FIRST_RENDER_TIMEOUT = 15_000;
 
@@ -340,6 +340,74 @@ test.describe("Docs Connect", () => {
 
       expect(body.quantity).toEqual({ docscloud: null });
       expect(body.productQuantityType).toBe(0);
+    });
+
+    test("renders scheduled Dev Pack disable and cancels it", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      usePreset(mockRequest, "scheduledDevPackDisable");
+
+      await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}`);
+
+      await expect(page.getByTestId("docs_connect_panel")).toBeVisible({
+        timeout: FIRST_RENDER_TIMEOUT,
+      });
+
+      await expect(
+        page.getByText("Change scheduled: Dev Pack will be disabled"),
+      ).toBeVisible();
+      await expect(page.getByText("$100.00/month")).toBeVisible();
+      await expect(page.getByText("Renews on 21 Jul 2026")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "docs-connect",
+        "scheduled-devpack-disable.png",
+      ]);
+
+      const updateWalletRequest = page.waitForRequest(
+        (request) =>
+          request.method() === "PUT" &&
+          request.url().includes(PATH_UPDATE_WALLET),
+      );
+
+      await page.getByText("Cancel change").click();
+
+      const body = (await updateWalletRequest).postDataJSON() as {
+        quantity: Record<string, number | null>;
+        productQuantityType: number;
+      };
+
+      expect(body.quantity).toEqual({ docsclouddevpack: null });
+      expect(body.productQuantityType).toBe(0);
+    });
+
+    test("renders scheduled Dev Pack disable with a user adjustment", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      usePreset(mockRequest, "scheduledDevPackDisableWithUsers");
+
+      await page.goto(`${baseUrl}${DOCS_CONNECT_ROUTE}`);
+
+      await expect(page.getByTestId("docs_connect_panel")).toBeVisible({
+        timeout: FIRST_RENDER_TIMEOUT,
+      });
+
+      await expect(
+        page.getByText("Change scheduled: Users 50 → 40"),
+      ).toBeVisible();
+      await expect(page.getByText("Dev Pack will be disabled")).toBeVisible();
+      await expect(page.getByText("$80.00/month")).toBeVisible();
+
+      await expect(page).toHaveScreenshot([
+        "desktop",
+        "docs-connect",
+        "scheduled-devpack-disable-users.png",
+      ]);
     });
 
     test("renders scheduled cancellation state", async ({

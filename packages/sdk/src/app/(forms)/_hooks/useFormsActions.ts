@@ -59,7 +59,6 @@ import type { EditorAction } from "../_store/FormsNavigationStore";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 
-import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsDeleteDialogStore } from "../_store/FormsDeleteDialogStore";
@@ -73,7 +72,6 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
   const { sdkConfig } = useSDKConfig();
   const filesSettingsStore = useFilesSettingsStore();
   const { openEditor } = useFormsNavigationStore();
-  const { closePanel } = useFormsAiAgentStore();
   const formsListStore = useFormsListStore();
   const deleteDialogStore = useFormsDeleteDialogStore();
   const progressStore = useFormsProgressStore();
@@ -110,14 +108,12 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
         return;
       }
 
-      closePanel();
       openEditor(file, action);
     },
     [
       sdkConfig?.events?.onFileManagerClick,
       sdkConfig?.openEditorInSameTab,
       filesSettingsStore.filesSettings?.openEditorInSameTab,
-      closePanel,
       openEditor,
     ],
   );

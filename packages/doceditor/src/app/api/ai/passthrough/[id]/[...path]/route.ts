@@ -64,7 +64,7 @@ type RouteContext = {
 
 const resolveProfile = async (id: string): Promise<TProfile | null> => {
   const [request] = await createRequest(
-    [`/new-ai/profiles/get-by-id?id=${encodeURIComponent(id)}`],
+    [`/ai/profiles/get-by-id?id=${encodeURIComponent(id)}`],
     [["Content-Type", "application/json;charset=utf-8"]],
     "GET",
   );

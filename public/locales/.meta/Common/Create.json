@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2026-07-07T08:59:21.678Z",
+  "updated_at": "2026-07-28T07:30:59.807Z",
   "comment": {
     "text": "This is a dialog title for creating various entities like agents, groups, or rooms. It appears at the top of the respective creation dialogs.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
-      "line_number": 187,
-      "context": "/>\n ) : null}\n <div className={styles.buttonsBlockContainer}>\n <Button\n primary\n label={isGenerateTool ? t(\"Create\") : t(\"Allow\")}\n onClick={() => onClickAction(ToolsPermission.Allow)}\n scale={isMobile()}\n size={ButtonSize.normal}\n data-testid=\"allow-button\"\n />",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/CreateAgentDialog.tsx",
-      "line_number": 220,
+      "line_number": 210,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"shared_create-agent-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n primary\n scale\n isDisabled={isAgentTitleChanged || isWrongTitle || !isProfileSelected}\n isLoading={isLoading}\n type=\"submit\"",
       "module": "/packages/client"
     },
@@ -31,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 404,
+      "line_number": 426,
       "context": "{roomParams.type && !isTemplate ? (\n <ModalDialog.Footer>\n <Button\n id=\"shared_create-room-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size=\"normal\"\n primary\n scale\n isDisabled={isRoomTitleChanged || isWrongTitle}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
@@ -60,9 +54,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 1766,
-      "context": "navigate?: unknown,\n ): ContextMenuModel[] => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => this.onCreateTemplate(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
+      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
+      "line_number": 79,
+      "context": "): ContextMenuModel[]=> {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => self.onCreateTemplate(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
       "module": "/packages/client"
     },
     {
@@ -79,7 +73,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/create-agent-dialog/index.tsx",
-      "line_number": 256,
+      "line_number": 250,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"shared_create-agent-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n primary\n scale\n isDisabled={isAgentTitleChanged || isWrongTitle || !isProfileSelected}\n isLoading={isLoading}\n type=\"submit\"",
       "module": "/packages/sdk"
     },

@@ -41,21 +41,17 @@ import { runInAction } from "mobx";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
 import { useFormsTourStore } from "../_store/FormsTourStore";
-import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
 import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 
 type Snapshot = {
-  aiAgentEnabled?: boolean;
-  askFromDBAgentId?: number | null;
   sendToDb?: boolean;
   userAccess?: number | null;
 };
 
 export default function useTourSandbox(fetchSection: () => void) {
   const tourStore = useFormsTourStore();
-  const aiStore = useFormsAiAgentStore();
   const dbSettingsStore = useFormsDbSettingsStore();
   const formsSettingsStore = useFormsSettingsStore();
   const formsListStore = useFormsListStore();
@@ -72,14 +68,6 @@ export default function useTourSandbox(fetchSection: () => void) {
       runInAction(() => {
         const snapshot: Snapshot = {};
 
-        if (!aiStore.aiAgentEnabled) {
-          snapshot.aiAgentEnabled = aiStore.aiAgentEnabled;
-          aiStore.aiAgentEnabled = true;
-        }
-        if (!aiStore.askFromDBAgentId) {
-          snapshot.askFromDBAgentId = aiStore.askFromDBAgentId;
-          aiStore.askFromDBAgentId = -999;
-        }
         if (!dbSettingsStore.sendToDb) {
           snapshot.sendToDb = dbSettingsStore.sendToDb;
           dbSettingsStore.setSendToDb(true);
@@ -103,12 +91,6 @@ export default function useTourSandbox(fetchSection: () => void) {
 
       if (!snapshot) return;
       runInAction(() => {
-        if ("aiAgentEnabled" in snapshot) {
-          aiStore.aiAgentEnabled = snapshot.aiAgentEnabled as boolean;
-        }
-        if ("askFromDBAgentId" in snapshot) {
-          aiStore.askFromDBAgentId = snapshot.askFromDBAgentId as number | null;
-        }
         if ("sendToDb" in snapshot) {
           dbSettingsStore.setSendToDb(snapshot.sendToDb as boolean);
         }
@@ -119,7 +101,6 @@ export default function useTourSandbox(fetchSection: () => void) {
     }
   }, [
     tourStore.isRunning,
-    aiStore,
     dbSettingsStore,
     formsSettingsStore,
     formsListStore,

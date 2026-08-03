@@ -1,0 +1,29 @@
+{
+  "key_path": "EditorPreviewFailed",
+  "content": "Failed to load the editor preview. Check the tenant address and secret key.",
+  "content_en_sha1_hash": "7778e7114bd6e292b87fa5310cda9b14e1fb5303",
+  "created_at": "2026-07-27T13:07:48.533Z",
+  "updated_at": "2026-07-27T14:23:13.008Z",
+  "comment": {
+    "text": "Error text displayed in the DocsConnect preview area when the editor fails to load due to incorrect configuration settings.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:23:13.008Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Preview.tsx",
+      "line_number": 196,
+      "context": "{editorError ? (\n <EmptyServerErrorContainer\n withReload={editorError === \"load\"}\n description={\n editorError === \"sign\"\n ? t(\"DocsConnect:EditorPreviewFailed\")\n : undefined\n }\n />\n ) : (\n <>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

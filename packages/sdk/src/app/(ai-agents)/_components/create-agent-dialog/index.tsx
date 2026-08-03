@@ -79,7 +79,6 @@ import MCPServersSelector from "@docspace/ui-kit/selectors/MCPServers";
 import TagHandler from "../../_helpers/TagHandler";
 import SetAgentParams from "./sub-components/SetAgentParams";
 import { useMCP } from "./hooks/useMCP";
-import { modelCache } from "./sub-components/modelCache";
 
 type CreateAgentDialogProps = {
   visible: boolean;
@@ -88,7 +87,6 @@ type CreateAgentDialogProps = {
   onCreate: (params: TAgentParams) => void;
   fetchedTags: string[];
   isLoading: boolean;
-  portalMcpServerId: string;
   folderFormValidation?: RegExp;
   maxImageUploadSize?: number;
 };
@@ -100,7 +98,6 @@ const CreateAgentDialog = ({
   onCreate,
   fetchedTags,
   isLoading,
-  portalMcpServerId,
   folderFormValidation,
   maxImageUploadSize,
 }: CreateAgentDialogProps) => {
@@ -148,7 +145,6 @@ const CreateAgentDialog = ({
   } = useMCP({
     agentParams,
     setAgentParams: setAgentParamsAction,
-    portalMcpServerId,
   });
 
   const setAgentTags = React.useCallback(
@@ -200,7 +196,6 @@ const CreateAgentDialog = ({
 
   const onCloseDialog = async () => {
     if (isLoading) return;
-    modelCache.clear();
     onClose();
   };
 
@@ -240,7 +235,6 @@ const CreateAgentDialog = ({
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
-          portalMcpServerId={portalMcpServerId}
           onClickAction={onClickAction}
           selectedServers={selectedServers}
           setSelectedServers={setSelectedServers}

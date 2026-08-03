@@ -51,7 +51,6 @@ import {
   settingsSubSectionToPath,
 } from "../../_utils/sectionFromPathname";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
-import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsTourStore } from "../../_store/FormsTourStore";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { createMockRoomMembers } from "../../_utils/mockFormFiles";
@@ -82,7 +81,6 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { roomId } = useFormsSettingsStore();
-  const aiStore = useFormsAiAgentStore();
   const tourStore = useFormsTourStore();
   const activeSubSection = settingsSubSectionFromPathname(pathname);
 
@@ -109,14 +107,9 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
     getRoomMembers(roomId, {})
       .then((res) => {
         setMembers(res.items);
-
-        // Sync agent members when access list changes
-        if (aiStore.aiAgentEnabled) {
-          aiStore.syncAllAgentMembers();
-        }
       })
       .catch(() => {});
-  }, [roomId, aiStore, tourStore.showMockItems]);
+  }, [roomId, tourStore.showMockItems]);
 
   React.useEffect(() => {
     if (!roomId || tourStore.showMockItems) return;
@@ -159,11 +152,6 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
       {
         id: SettingsSubSection.Billing,
         name: t("Common:Billing"),
-        content: wrappedContent,
-      },
-      {
-        id: SettingsSubSection.AiAgent,
-        name: t("Common:AIAgent"),
         content: wrappedContent,
       },
       {

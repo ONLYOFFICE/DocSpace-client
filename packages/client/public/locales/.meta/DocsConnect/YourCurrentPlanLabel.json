@@ -1,0 +1,29 @@
+{
+  "key_path": "YourCurrentPlanLabel",
+  "content": "Your current subscription:",
+  "content_en_sha1_hash": "15007e011945d466fc202170df78439e7de78907",
+  "created_at": "2026-07-27T13:07:48.531Z",
+  "updated_at": "2026-07-27T13:41:34.930Z",
+  "comment": {
+    "text": "Label in the Cancel Plan dialog that precedes the formatted monthly charge amount.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:41:34.930Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/CancelPlanDialog/index.tsx",
+      "line_number": 114,
+      "context": "{t(\"DocsConnect:CancelPlanConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"DocsConnect:YourCurrentPlanLabel\")}{\" \"}\n {formatCurrencyValue(i18n.language, monthlyCharge, currency, 2)}{\" \"}\n <Text\n as=\"span\"\n fontSize=\"13px\"\n fontWeight={400}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

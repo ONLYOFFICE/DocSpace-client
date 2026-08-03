@@ -66,6 +66,7 @@ import {
 } from "@docspace/ui-kit/components/avatar";
 
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
+import { isFormRoomFile } from "@/utils";
 
 import type { CompletedFormProps } from "./CompletedForm.types";
 import { getFolderUrl } from "./CompletedForm.helper";
@@ -119,13 +120,20 @@ export const CompletedForm = ({
     window.open(completedForm.viewUrl, "_self");
   };
 
+  const isFormRoom = isFormRoomFile(completedForm);
+
   const gotoCompleteFolder = () => {
-    const url = getFolderUrl(completedForm.folderId, false);
+    const url = getFolderUrl(
+      completedForm.folderId,
+      false,
+      undefined,
+      isFormRoom,
+    );
     window.location.assign(url);
   };
 
   const handleBackToRoom = () => {
-    const url = getFolderUrl(roomId, isAnonym, share);
+    const url = getFolderUrl(roomId, isAnonym, share, isFormRoom);
     window.location.assign(url);
   };
 

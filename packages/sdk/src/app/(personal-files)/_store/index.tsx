@@ -61,10 +61,12 @@ export const DocsStoreProviders = ({
   children,
   initViewAs = "row",
   myFolderId,
+  canUseAi,
 }: {
   children: React.ReactNode;
   initViewAs?: TViewAs;
   myFolderId?: number | string;
+  canUseAi?: boolean;
 }) => {
   return (
     <SettingsStoreContextProvider initData={{ viewAs: initViewAs }}>
@@ -84,6 +86,7 @@ export const DocsStoreProviders = ({
                                 <VersionHistoryStoreContextProvider>
                                   <PersonalFilesAiAgentProviders
                                     myFolderId={myFolderId}
+                                    canUseAi={canUseAi}
                                   >
                                     {children}
                                   </PersonalFilesAiAgentProviders>

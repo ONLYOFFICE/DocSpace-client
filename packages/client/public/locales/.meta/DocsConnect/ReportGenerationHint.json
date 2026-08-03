@@ -1,0 +1,29 @@
+{
+  "key_path": "ReportGenerationHint",
+  "content": "The report may take some time to generate. Once ready, it will be saved to {{sectionName}}.",
+  "content_en_sha1_hash": "22a43619e49e69311ec9018fd96a30a07fe18120",
+  "created_at": "2026-07-27T13:07:48.506Z",
+  "updated_at": "2026-08-01T15:33:49.644Z",
+  "comment": {
+    "text": "Informational text displayed while a report is being generated. The {{sectionName}} variable refers to the destination section (e.g., \"Files\") where the completed report will be stored.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:59:13.384Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 595,
+      "context": "onClick={() => downloadReport?.()}\n isLoading={isReportGenerating}\n />\n {isReportGenerating ? (\n <Text fontSize=\"13px\" className={styles.muted}>\n {t(\"DocsConnect:ReportGenerationHint\", {\n sectionName: t(\"Common:Files\"),\n })}\n </Text>\n ) : null}\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

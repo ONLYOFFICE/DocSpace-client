@@ -366,16 +366,39 @@ const BuyPlanPanel = ({
     }
   };
 
-  const summaryRow = (label: string, value: React.ReactNode) => (
+  const summaryRow = (
+    label: string,
+    value: React.ReactNode,
+    tooltip?: string,
+  ) => (
     <div className={styles.summaryRow}>
-      <Text fontSize="14px" fontWeight={400} className={styles.summaryLabel}>
-        {label}
-      </Text>
+      {tooltip ? (
+        <div className={styles.summaryLabelWithHint}>
+          <Text
+            fontSize="14px"
+            fontWeight={400}
+            className={styles.summaryLabel}
+          >
+            {label}
+          </Text>
+          <HelpButton
+            size={12}
+            tooltipContent={tooltip}
+            tooltipMaxWidth="320px"
+          />
+        </div>
+      ) : (
+        <Text fontSize="14px" fontWeight={400} className={styles.summaryLabel}>
+          {label}
+        </Text>
+      )}
       <Text fontSize="14px" fontWeight={600} className={styles.summaryValue}>
         {value}
       </Text>
     </div>
   );
+
+  const usersTooltip = t("DocsConnect:PlanUsersTooltip", { count: users });
 
   return (
     <>
@@ -393,13 +416,7 @@ const BuyPlanPanel = ({
             : t("DocsConnect:DocsConnect")}
         </ModalDialog.Header>
         <ModalDialog.Body>
-          <div
-            className={
-              devPackTurnedOff
-                ? `${styles.body} ${styles.bodyScheduled}`
-                : styles.body
-            }
-          >
+          <div className={styles.body}>
             <div className={styles.walletCard}>
               <div className={styles.walletIcon} aria-hidden>
                 <WalletSvg />
@@ -468,7 +485,6 @@ const BuyPlanPanel = ({
                   price: formatCurrency(pricePerUser),
                 })}
                 onChange={setUsers}
-                isDisabled={devPackTurnedOff}
                 minusDisabled={isDevPackUpgrade}
                 minusTooltipId={
                   isDevPackUpgrade ? USERS_MINUS_TOOLTIP_ID : undefined
@@ -553,16 +569,7 @@ const BuyPlanPanel = ({
               </div>
             </div>
 
-            {isEditActive && !hasChanges ? null : devPackTurnedOff ? (
-              <div className={styles.scheduledNote}>
-                <StorageWarning
-                  body={t("DocsConnect:DevPackDisableScheduledNote", {
-                    date: periodEndDateLocalized,
-                    service: t("DocsConnect:DocsConnect"),
-                  })}
-                />
-              </div>
-            ) : (
+            {isEditActive && !hasChanges ? null : (
               <>
                 <Text
                   fontSize="16px"
@@ -580,7 +587,11 @@ const BuyPlanPanel = ({
                               t("DocsConnect:UserAdjustmentLabel"),
                               `${currentUsers} → ${users}`,
                             )
-                          : summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
+                          : summaryRow(
+                              t("DocsConnect:PlanUsers"),
+                              `${users}`,
+                              usersTooltip,
+                            )}
                         {usersChanged && users > currentUsers
                           ? summaryRow(
                               t("DocsConnect:AdditionalUsers"),
@@ -666,20 +677,16 @@ const BuyPlanPanel = ({
                       </>
                     ) : (
                       <>
-                        {devPackTurnedOff
-                          ? summaryRow(
-                              t("DocsConnect:DevPackDisabledLabel"),
-                              t("DocsConnect:MinusPricePerUser", {
-                                price: formatCurrency(devPackPrice),
-                              }),
-                            )
-                          : null}
                         {usersChanged
                           ? summaryRow(
                               t("DocsConnect:UserAdjustmentLabel"),
                               `${currentUsers} → ${users}`,
                             )
-                          : summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
+                          : summaryRow(
+                              t("DocsConnect:PlanUsers"),
+                              `${users}`,
+                              usersTooltip,
+                            )}
                         {usersChanged && users > currentUsers
                           ? summaryRow(
                               t("DocsConnect:AdditionalUsers"),
@@ -769,7 +776,11 @@ const BuyPlanPanel = ({
                     )
                   ) : (
                     <>
-                      {summaryRow(t("DocsConnect:PlanUsers"), `${users}`)}
+                      {summaryRow(
+                        t("DocsConnect:PlanUsers"),
+                        `${users}`,
+                        usersTooltip,
+                      )}
                       {summaryRow(
                         t("DocsConnect:BasePricePerUser"),
                         formatCurrency(pricePerUser),

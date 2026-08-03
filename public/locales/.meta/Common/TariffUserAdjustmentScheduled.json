@@ -1,0 +1,29 @@
+{
+  "key_path": "TariffUserAdjustmentScheduled",
+  "content": "Change scheduled: User adjustment, {{fromCount}} → {{toCount}}",
+  "content_en_sha1_hash": "90153db5b52c6bbab4f08ec6beb650d93f63230c",
+  "created_at": "2026-07-27T13:07:38.291Z",
+  "updated_at": "2026-08-01T15:33:49.809Z",
+  "comment": {
+    "text": "Title for a warning notification about an upcoming change to the number of allowed users, where {{fromCount}} is the current user count and {{toCount}} is the new user count.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:11:59.447Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 165,
+      "context": "});\n }\n \n if (!usersAdjusting) return t(\"Common:ChangeShedule\");\n \n return t(\"Common:TariffUserAdjustmentScheduled\", {\n fromCount: planUsers,\n toCount: scheduledChange?.nextUsers,\n });\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

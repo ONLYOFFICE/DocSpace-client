@@ -3,7 +3,7 @@
   "content": "Activating AI features",
   "content_en_sha1_hash": "260634f6b08f499cc06a569e05181447941f6901",
   "created_at": "2026-05-15T13:59:45.971Z",
-  "updated_at": "2026-07-04T11:30:22.058Z",
+  "updated_at": "2026-07-31T15:04:17.732Z",
   "comment": {
     "text": "A step label in a progress sequence on the AI paywall completion page, representing the stage where AI features are being enabled.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 163,
-      "context": "}, []);\n \n const activateWalletService = service ? resolveWalletService(service) : null;\n \n const getActivateStepLabel = () =>\n isAIService(service) ? t(\"AIPaywallCallbackStepActivate\") : \"\";\n \n const isWalletOnly = type === \"wallet\";\n \n const formattedAmount = formatCurrencyValue(language, amount, currency, 2);",
+      "line_number": 189,
+      "context": "const activateWalletService =\n service && !isDocsConnect ? resolveWalletService(service) : null;\n \n const getActivateStepLabel = () =>\n isAIService(service)\n ? t(\"AIPaywallCallbackStepActivate\")\n : isDocsConnect\n ? t(\"DocsConnectCallbackStepActivate\")\n : \"\";\n \n const isWalletOnly = type === \"wallet\" && !isDocsConnect;",
       "module": "/libs/ui-kit"
     }
   ],

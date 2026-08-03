@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -135,8 +135,6 @@ const GlobalEvents = ({
 
   const { useProfilesStore } = useStores();
   const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
-
-  const eventHandlersList = useRef([]);
 
   const onCreate = useCallback((e) => {
     const { payload } = e;
@@ -453,6 +451,8 @@ const GlobalEvents = ({
   }, [handleCreatePDFFormFile]);
 
   useEffect(() => {
+    const pluginEventHandlers = [];
+
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
     window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
@@ -473,12 +473,12 @@ const GlobalEvents = ({
       if (eventListenerItemsList) {
         eventListenerItemsList.forEach((item) => {
           const eventHandler = (e) => {
-            item.eventHandler(e);
+            item.value.eventHandler(e);
           };
 
-          eventHandlersList.current.push(eventHandler);
+          pluginEventHandlers.push(eventHandler);
 
-          window.addEventListener(item.eventType, eventHandler);
+          window.addEventListener(item.value.eventType, eventHandler);
         });
       }
     }
@@ -493,6 +493,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
+      window.removeEventListener(Events.CHANGE_QUOTA, onChangeQuota);
       window.removeEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (!isAIAgents() && enablePlugins) {
@@ -504,8 +505,8 @@ const GlobalEvents = ({
         if (eventListenerItemsList) {
           eventListenerItemsList.forEach((item, index) => {
             window.removeEventListener(
-              item.eventType,
-              eventHandlersList.current[index],
+              item.value.eventType,
+              pluginEventHandlers[index],
             );
           });
         }
@@ -521,9 +522,11 @@ const GlobalEvents = ({
     onCreateGroup,
     onEditGroup,
     onChangeUserType,
+    onChangeQuota,
     onSaveAsTemplate,
     onCreatePluginFileDialog,
     enablePlugins,
+    eventListenerItemsList,
   ]);
 
   return [

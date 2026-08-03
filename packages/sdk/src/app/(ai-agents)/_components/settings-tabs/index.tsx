@@ -44,13 +44,7 @@ import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import { useAgentsUserStore } from "../../_store/AgentsUserStore";
 import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 
-const VALID_TABS = [
-  "billing",
-  "providers",
-  "servers",
-  "search",
-  "knowledge",
-] as const;
+const VALID_TABS = ["billing", "servers", "search", "knowledge"] as const;
 type TabId = (typeof VALID_TABS)[number];
 
 const getTabIdFromPath = (path: string | null, defaultTab: TabId): TabId => {
@@ -74,7 +68,7 @@ export const SettingsTabs = observer(function SettingsTabs() {
   const standalone = Boolean(portalSettings?.standalone);
 
   const canSeeBilling = !standalone && Boolean(user?.isAdmin || user?.isOwner);
-  const defaultTab: TabId = standalone ? "providers" : "billing";
+  const defaultTab: TabId = standalone ? "servers" : "billing";
   const currentTabId = getTabIdFromPath(pathname, defaultTab);
 
   const items: TTabItem[] = [
@@ -87,7 +81,6 @@ export const SettingsTabs = observer(function SettingsTabs() {
           },
         ]
       : []),
-    { id: "providers", name: t("Common:AIProvider"), content: null },
     { id: "servers", name: t("Common:MCPSettingTitle"), content: null },
     { id: "search", name: t("Common:WebSearchAI"), content: null },
     { id: "knowledge", name: t("Common:Knowledge"), content: null },

@@ -3,7 +3,7 @@
   "content": "Active",
   "content_en_sha1_hash": "a733b809d2f1233496ab516eed0f3ef75cf3791a",
   "created_at": "2025-05-19T21:30:42.902Z",
-  "updated_at": "2026-06-15T19:31:56.026Z",
+  "updated_at": "2026-07-31T12:36:29.436Z",
   "comment": {
     "text": "This is a short label indicating an active status for a user or item, often used in filters or status displays.",
     "is_auto": true,
@@ -36,22 +36,16 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
-      "line_number": 123,
-      "context": "return (\n <div className={styles.keyItem}>\n <div className={styles.keyItemHeader}>\n <div className={styles.keyItemBadges}>\n <Badge\n label={t(\"Common:Active\")}\n backgroundColor={globalColors.secondGreen}\n maxWidth=\"none\"\n />\n {isCurrentDevice ? (\n <Badge",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/sub-components/UsageBlock.tsx",
+      "line_number": 92,
+      "context": "{`${usage.active} / ${limit}`}\n </Text>\n </div>\n <ProgressBar percent={percent} className={styles.usageProgress} />\n <div className={styles.statRow}>\n <StatColumn value={usage.active} label={t(\"Common:Active\")} />\n <StatColumn value={usage.internal} label={t(\"DocsConnect:Internal\")} />\n <StatColumn value={usage.external} label={t(\"DocsConnect:External\")} />\n <StatColumn\n value={usage.remaining}\n label={t(\"DocsConnect:Remaining\")}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Information.tsx",
-      "line_number": 138,
-      "context": "resizable: false,\n minWidth: 120,\n },\n {\n key: \"active\",\n title: t(\"Common:Active\"),\n enable: true,\n resizable: true,\n minWidth: 60,\n },\n {",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docs-cloud)/docs-cloud/_tabs/Information.tsx",
-      "line_number": 138,
-      "context": "resizable: false,\n minWidth: 120,\n },\n {\n key: \"active\",\n title: t(\"Common:Active\"),\n enable: true,\n resizable: true,\n minWidth: 60,\n },\n {",
-      "module": "/packages/sdk"
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysList.tsx",
+      "line_number": 128,
+      "context": "{t(\"People:UserStatus\")}\n </Text>\n <div className={styles.statusRow}>\n <div className={styles.keyItemBadges}>\n <Badge\n label={t(\"Common:Active\")}\n backgroundColor={globalColors.secondGreen}\n maxWidth=\"none\"\n />\n {isCurrentDevice ? (\n <Badge",
+      "module": "/packages/client"
     }
   ],
   "languages": {

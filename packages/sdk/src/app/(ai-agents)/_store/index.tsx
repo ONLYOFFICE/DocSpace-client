@@ -65,9 +65,9 @@
 // - Read-only fetchers (Tags, AIConfig, Quota) use inflight-promise de-dup
 //   so concurrent callers share one in-flight request and idempotent re-mounts
 //   skip the round-trip.
-// - List/search fetchers (AgentsListStore, AISettingsStore.checkUnavailableProviders)
-//   use AbortController because their results are cancellable and the
-//   in-flight request can be invalidated by a newer filter.
+// - List/search fetchers (AgentsListStore) use AbortController because
+//   their results are cancellable and the in-flight request can be
+//   invalidated by a newer filter.
 
 import React from "react";
 

@@ -3,7 +3,7 @@
   "content": "This link is blocked by admin and won't work for external users",
   "content_en_sha1_hash": "d0082eb9e225eee86e2f72201d1ba794b4ac17a4",
   "created_at": "2026-06-02T08:43:21.584Z",
-  "updated_at": "2026-07-07T08:59:21.640Z",
+  "updated_at": "2026-07-27T13:07:50.556Z",
   "comment": {
     "text": "Error toast message appearing when a user attempts to copy or use a share link that has been restricted by an administrator.",
     "is_auto": true,
@@ -36,21 +36,21 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 764,
-      "context": "this.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 234,
+      "context": "self.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 764,
-      "context": "this.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 234,
+      "context": "self.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 764,
-      "context": "this.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
+      "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
+      "line_number": 234,
+      "context": "self.filesSettingsStore.isLinkBlockedByAdmin(\n item as { rootFolderType: FolderType },\n itemLink,\n )\n ) {\n toastr.error(t(\"Common:LinkBlockedByAdminWarning\"));\n return;\n }\n \n copyToBuffer(itemLink.sharedTo.shareLink);",
       "module": "/packages/client"
     },
     {

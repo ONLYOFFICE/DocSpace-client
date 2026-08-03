@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2026-07-07T08:59:21.651Z",
+  "updated_at": "2026-08-01T16:25:17.752Z",
   "comment": {
     "text": "This is a button label that resets all applied filters to their default state, clearing any search criteria or selections.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 498,
+      "line_number": 518,
       "context": "onClick={onClearFilter}\n textDecoration=\"underline dotted\"\n dataTestId=\"clear_filter_button\"\n className={styles.clearFilter}\n >\n {t(\"ClearFilter\")}\n </Link>\n ) : null}\n </div>\n );",
       "module": "/libs/ui-kit"
     },
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 152,
+      "line_number": 177,
       "context": "const options = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n },\n ];",
       "module": "/packages/client"
     },

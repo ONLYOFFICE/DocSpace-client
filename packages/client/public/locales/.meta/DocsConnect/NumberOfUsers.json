@@ -1,0 +1,29 @@
+{
+  "key_path": "NumberOfUsers",
+  "content": "Number of users",
+  "content_en_sha1_hash": "a3344f619c44e5c66bc48c40d8d22ddd0eca1e8b",
+  "created_at": "2026-07-27T13:07:48.508Z",
+  "updated_at": "2026-08-01T15:33:49.624Z",
+  "comment": {
+    "text": "Label for a quantity picker in the DocsConnect Buy Plan panel, representing the user count to be selected.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:11:16.389Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 474,
+      "context": "{t(\"DocsConnect:CalculateYourPlan\")}\n </Text>\n \n <div className={styles.usersBlock}>\n <Text fontSize=\"13px\" className={styles.usersTitle}>\n {t(\"DocsConnect:NumberOfUsers\")}\n </Text>\n <QuantityPicker\n className={styles.quantityPicker}\n value={users}\n minValue={minUsers}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

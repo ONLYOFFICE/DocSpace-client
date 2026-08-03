@@ -38,6 +38,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
+import { getPluginFileTestIdPrefix } from "SRC_DIR/helpers/filesUtils";
 
 import Dialog from "./sub-components/Dialog";
 
@@ -195,6 +196,7 @@ const CreatePluginFile = ({
       t={t}
       visible={visible}
       title={title}
+      testIdPrefix={getPluginFileTestIdPrefix(extension)}
       startValue={startValue}
       onSave={onSaveAction}
       onChange={onChangeAction}

@@ -93,7 +93,28 @@ export const docsCloudEndpointHandlers = (
   ),
   http.post(apiUrl(port, PATH_DOCS_CONNECT_TRIAL), () => jsonResponse(true)),
   http.post(apiUrl(port, PATH_DOCS_CONNECT_REPORT), () =>
-    jsonResponse(DOCS_CONNECT_REPORT_URL),
+    jsonResponse({
+      id: "DocumentBuilderTask_1",
+      error: "",
+      percentage: 0,
+      isCompleted: false,
+      status: 0,
+      resultFileId: 0,
+      resultFileName: "",
+      resultFileUrl: "",
+    }),
+  ),
+  http.get(apiUrl(port, PATH_DOCS_CONNECT_REPORT), () =>
+    jsonResponse({
+      id: "DocumentBuilderTask_1",
+      error: "",
+      percentage: 100,
+      isCompleted: true,
+      status: 2,
+      resultFileId: 26,
+      resultFileName: "DocsCloud Quota Report.xlsx",
+      resultFileUrl: DOCS_CONNECT_REPORT_URL,
+    }),
   ),
   http.post(apiUrl(port, PATH_DOCS_CONNECT_CALC_DEVPACK), () =>
     jsonResponse(docsConnectDevPackCalcSuccess(50)),

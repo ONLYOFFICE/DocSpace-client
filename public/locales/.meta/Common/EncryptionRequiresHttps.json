@@ -3,7 +3,7 @@
   "content": "Encryption is unavailable: this feature requires a secure HTTPS connection.",
   "content_en_sha1_hash": "b6283c95e632585f9c10518d49e7196f396b493c",
   "created_at": "2026-05-24T17:27:26.726Z",
-  "updated_at": "2026-06-25T19:31:02.912Z",
+  "updated_at": "2026-07-31T12:36:29.404Z",
   "comment": {
     "text": "Error message displayed when encryption cannot be used because the connection is not secure (HTTP instead of HTTPS).",
     "is_auto": true,
@@ -13,26 +13,32 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 172,
-      "context": "});\n \n const setRoomType = (newRoomType) => {\n if (newRoomType === RoomsTypePrivate) {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n if (!encryptionKeys || encryptionKeys.length === 0) {\n setKeyConfirmVisible(true);\n return;",
+      "line_number": 179,
+      "context": "if (!isTemplateItem || !roomParams.isPrivate) return;\n if (encryptionKeys && encryptionKeys.length > 0) return;\n if (keyAutoPromptedRef.current) return;\n keyAutoPromptedRef.current = true;\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n onCloseRef.current?.();\n return;\n }\n setKeyConfirmVisible(true);\n }, [isTemplateItem, roomParams.isPrivate, encryptionKeys, t]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
+      "line_number": 179,
+      "context": "if (!isTemplateItem || !roomParams.isPrivate) return;\n if (encryptionKeys && encryptionKeys.length > 0) return;\n if (keyAutoPromptedRef.current) return;\n keyAutoPromptedRef.current = true;\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n onCloseRef.current?.();\n return;\n }\n setKeyConfirmVisible(true);\n }, [isTemplateItem, roomParams.isPrivate, encryptionKeys, t]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/flows/useImportKeyFlow.tsx",
-      "line_number": 86,
+      "line_number": 101,
       "context": "setImported(null);\n }, []);\n \n const request = useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n fileInputRef.current?.click();\n }, [t]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/create-room/PrivateCreateRoomDialog.tsx",
-      "line_number": 93,
+      "line_number": 94,
       "context": "refreshKeysFromServer,\n });\n \n const promptKeySetup = React.useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n setKeyConfirmVisible(true);\n }, [t]);",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/key-generation/useGenerateKeyFlow.tsx",
-      "line_number": 115,
-      "context": "setMnemonic(null);\n }, []);\n \n const request = useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n setStep(\"passphrase\");\n }, [t]);",
+      "line_number": 105,
+      "context": "setMnemonic(null);\n }, []);\n \n const request = useCallback(() => {\n if (!globalThis.crypto?.subtle) {\n toastr.error(t(\"Common:EncryptionRequiresHttps\"));\n return;\n }\n if (isPending || step !== \"idle\") return;\n setStep(\"passphrase\");\n }, [t, isPending, step]);",
       "module": "/packages/shared"
     },
     {

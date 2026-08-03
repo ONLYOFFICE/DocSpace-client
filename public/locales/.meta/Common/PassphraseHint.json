@@ -3,7 +3,7 @@
   "content": "Enter your passphrase for this device to decrypt your private key.",
   "content_en_sha1_hash": "506eb52d39e73462e4710924db8592fe6d600581",
   "created_at": "2026-05-24T17:27:34.662Z",
-  "updated_at": "2026-06-15T19:31:56.199Z",
+  "updated_at": "2026-07-31T12:36:29.596Z",
   "comment": {
     "text": "Description text in a passphrase modal or dialog that instructs the user to provide their passphrase for private key decryption.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 160,
-      "context": "<ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>\n {isNew\n ? t(\"Common:CreatePassphraseHint\")\n : t(\"Common:PassphraseHint\")}\n </Text>\n \n <div className={styles.passphraseField}>\n {isNew ? (\n <div className={styles.generateRow}>",
+      "line_number": 221,
+      "context": "<div className={styles.container}>\n <Text className={styles.description}>\n {description ??\n (isNew\n ? t(\"Common:CreatePassphraseHint\")\n : t(\"Common:PassphraseHint\"))}\n </Text>\n \n <div className={styles.passphraseField}>\n {isNew ? (\n <div className={styles.generateRow}>",
       "module": "/packages/shared"
     }
   ],

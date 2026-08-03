@@ -59,10 +59,9 @@ import ThirdPartyComponent from "../History/HistoryBlockContent/ThirdParty";
 import Members from "../Members";
 import Share from "../Share";
 import Plugin from "../Plugin";
-import AIChat from "../AIChat";
 
 import { useHistory } from "./hooks/useHistory";
-import { usePlugin } from "./hooks/usePlugin";
+import { usePlugin } from "SRC_DIR/pages/Home/InfoPanel/hooks/usePlugin";
 import { useMembers } from "./hooks/useMembers";
 import { useShare } from "./hooks/useShare";
 import { useDetails } from "./hooks/useDetails";
@@ -379,7 +378,13 @@ const FilesView = ({
     }
 
     if (isPlugin)
-      return <Plugin selection={selection} infoPanelItem={infoPanelItem} />;
+      return (
+        <Plugin
+          key={infoPanelItem?.key}
+          selection={selection}
+          infoPanelItem={infoPanelItem}
+        />
+      );
 
     return value;
   };

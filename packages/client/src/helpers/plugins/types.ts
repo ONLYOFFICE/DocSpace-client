@@ -118,6 +118,11 @@ export interface IContextMenuItemClient extends Omit<
   onClick?: (
     id: number | string,
   ) => Promise<IMessage> | Promise<void> | IMessage | void;
+  /**
+   * Restricts the item to the listed file, folder or room identifiers.
+   * Not declared by the SDK yet, so it is typed on the client side.
+   */
+  itemId?: (number | string)[];
 }
 
 export interface IMainButtonItemClient extends IMainButtonItem {

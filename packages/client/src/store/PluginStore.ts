@@ -864,7 +864,7 @@ class PluginStore {
   };
 
   getValidContextMenuItemKeys = (
-    item: IContextMenuItem,
+    item: IContextMenuItemClient,
     ctx: IContextMenuItemValidation,
   ) => {
     const keys: string[] = [];

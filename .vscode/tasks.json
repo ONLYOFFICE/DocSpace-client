@@ -532,6 +532,21 @@
       }
     },
     {
+      "label": "Test | Jest:translations:missing-keys",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:only-missing-keys ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:translations:clear-wrong",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; CLEAR_WRONG_VALUES=true FIX_MOVED_KEYS=true npm run test:locales ; npm run open-report",
@@ -1537,6 +1552,17 @@
       "label": "Translation App | translation stats",
       "type": "shell",
       "command": "node '${workspaceFolder}/common/scripts/translation-stats.js'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | translation stats (missing keys)",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js' --no-meta --missing",
       "group": "build",
       "presentation": {
         "reveal": "always",

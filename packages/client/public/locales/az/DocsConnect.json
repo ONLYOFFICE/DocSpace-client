@@ -103,7 +103,6 @@
   "Remaining": "Qalan",
   "RemainingBalanceAfter": "Alışdan sonra qalan balans: {{amount}}",
   "RemainingCreditsAfter": "Alışdan sonra qalan kreditlər: {{amount}}",
-  "RemoveSubscriptionConfirm": "Əvvəlki abunəlik təfərrüatlarınız silinəcək. {{service}}-dən yenidən istifadə etmək üçün yeni abunəlik konfiqurasiya etməlisiniz.",
   "RenewsOnWithUpdate": "{{date}} tarixində yenilənir — {{price}}/ay (İstifadəçilər: {{count}})",
   "ReportGenerationHint": "Hesabatın hazırlanması bir qədər vaxt apara bilər. Hazır olduqda, o, {{sectionName}} bölməsində saxlanılacaq.",
   "ResetAccessRulesTitle": "Giriş qaydalarını sıfırla",

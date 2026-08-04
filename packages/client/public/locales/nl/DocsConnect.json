@@ -103,7 +103,6 @@
   "Remaining": "Resterend",
   "RemainingBalanceAfter": "Resterend saldo na aankoop: {{amount}}",
   "RemainingCreditsAfter": "Resterende tegoeden na aankoop: {{amount}}",
-  "RemoveSubscriptionConfirm": "Uw vorige abonnementsgegevens worden verwijderd. Om {{service}} opnieuw te gebruiken, moet u een nieuw abonnement configureren.",
   "RenewsOnWithUpdate": "Wordt verlengd op {{date}} — {{price}}/maand (Gebruikers: {{count}})",
   "ReportGenerationHint": "Het genereren van het rapport kan enige tijd duren. Zodra het klaar is, wordt het opgeslagen in {{sectionName}}.",
   "ResetAccessRulesTitle": "Toegangsregels opnieuw instellen",

@@ -103,7 +103,6 @@
   "Remaining": "Jäljellä",
   "RemainingBalanceAfter": "Jäljellä oleva saldo oston jälkeen: {{amount}}",
   "RemainingCreditsAfter": "Jäljellä olevat krediitit oston jälkeen: {{amount}}",
-  "RemoveSubscriptionConfirm": "Aiemman tilauksesi tiedot poistetaan. Käyttääksesi {{service}}-palvelua uudelleen sinun täytyy määrittää uusi tilaus.",
   "RenewsOnWithUpdate": "Uusiutuu {{date}} — {{price}}/kk (Käyttäjiä: {{count}})",
   "ReportGenerationHint": "Raportin luominen voi kestää hetken. Kun se on valmis, se tallennetaan kohteeseen {{sectionName}}.",
   "ResetAccessRulesTitle": "Palauta käyttöoikeussäännöt",

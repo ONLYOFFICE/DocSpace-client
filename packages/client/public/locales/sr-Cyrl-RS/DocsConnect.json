@@ -103,7 +103,6 @@
   "Remaining": "Преостало",
   "RemainingBalanceAfter": "Преостали салдо након куповине: {{amount}}",
   "RemainingCreditsAfter": "Преостали кредити након куповине: {{amount}}",
-  "RemoveSubscriptionConfirm": "Детаљи ваше претходне претплате ће бити уклоњени. Да бисте поново користили {{service}}, мораћете да подесите нову претплату.",
   "RenewsOnWithUpdate": "Обнавља се {{date}} — {{price}}/мес. (Корисници: {{count}})",
   "ReportGenerationHint": "Генерисање извештаја може потрајати неко време. Када буде спреман, биће сачуван у {{sectionName}}.",
   "ResetAccessRulesTitle": "Ресетуј правила приступа",

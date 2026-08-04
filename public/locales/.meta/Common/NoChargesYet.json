@@ -1,0 +1,29 @@
+{
+  "key_path": "NoChargesYet",
+  "content": "No charges yet",
+  "content_en_sha1_hash": "60a43d28c8763c51f8237869d046bb475afaae6c",
+  "created_at": "2026-08-01T16:24:55.839Z",
+  "updated_at": "2026-08-01T16:31:56.226Z",
+  "comment": {
+    "text": "Empty state placeholder text in the Month-to-Date spend section, appearing when no billing transactions have been recorded for the current period.",
+    "is_auto": true,
+    "updated_at": "2026-08-01T16:31:56.226Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "line_number": 164,
+      "context": "{items.length > 0 ? (\n renderRows(items)\n ) : (\n <div className={styles.spendSectionEmpty}>\n <Text fontSize=\"12px\" fontWeight={600} className={styles.mutedTitle}>\n {t(\"NoChargesYet\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {emptyDescription}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

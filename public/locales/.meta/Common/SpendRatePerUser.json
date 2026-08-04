@@ -1,0 +1,29 @@
+{
+  "key_path": "SpendRatePerUser",
+  "content": "{{price}}/user",
+  "content_en_sha1_hash": "187bf77eb07247ac1152dc7e51428a23f498ac46",
+  "created_at": "2026-08-01T16:25:06.355Z",
+  "updated_at": "2026-08-01T16:28:07.730Z",
+  "comment": {
+    "text": "Text label used in service usage details to indicate the cost per individual user, where {{price}} represents a numeric value.",
+    "is_auto": true,
+    "updated_at": "2026-08-01T16:28:07.730Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/utils/serviceUsage.ts",
+      "line_number": 71,
+      "context": "case STORAGE_ENUM:\n return t(\"Common:SpendRatePerGB\", { price });\n case DOCS_CONNECT:\n case DOCS_CONNECT_SERVICE:\n case DOCS_CONNECT_DEVPACK_SERVICE:\n return t(\"Common:SpendRatePerUser\", { price });\n default:\n return \"\";\n }\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

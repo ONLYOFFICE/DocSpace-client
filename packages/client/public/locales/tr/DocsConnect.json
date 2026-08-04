@@ -103,7 +103,6 @@
   "Remaining": "Kalan",
   "RemainingBalanceAfter": "Satın alma sonrası kalan bakiye: {{amount}}",
   "RemainingCreditsAfter": "Satın alma sonrası kalan krediler: {{amount}}",
-  "RemoveSubscriptionConfirm": "Önceki abonelik bilgileriniz kaldırılacaktır. {{service}} hizmetini tekrar kullanmak için yeni bir abonelik yapılandırmanız gerekecektir.",
   "RenewsOnWithUpdate": "{{date}} tarihinde yenilenir — {{price}}/ay (Kullanıcı: {{count}})",
   "ReportGenerationHint": "Raporun oluşturulması biraz zaman alabilir. Hazır olduğunda {{sectionName}} bölümüne kaydedilecektir.",
   "ResetAccessRulesTitle": "Erişim kurallarını sıfırla",

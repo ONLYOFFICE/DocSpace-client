@@ -68,7 +68,11 @@ const RowView = (props: ModelSettingsRowViewProps) => {
     isAiToolsServiceOn,
   } = props;
 
-  const models = aiToolsPrices?.chat ?? [];
+  const models = [
+    ...(aiToolsPrices?.chat ?? []),
+    ...(aiToolsPrices?.image ?? []),
+  ];
+
   const { t } = useTranslation(["Common"]);
 
   const onToggle = async (modelId: string, enabled: boolean) => {
@@ -93,9 +97,14 @@ const RowView = (props: ModelSettingsRowViewProps) => {
         {models.map((m) => {
           const enabled = aiModelAvailabilityMap?.get(m.id) ?? true;
           const isUpdating = aiModelAvailabilityUpdatingSet?.has(m.id) ?? false;
-          const inputPrice = formatAiModelsCurrency?.(m.price.prompt) ?? "";
+          const inputPrice =
+            m.price?.prompt != null
+              ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
+              : "";
           const outputPrice =
-            formatAiModelsCurrency?.(m.price.completion) ?? "";
+            m.price?.completion != null
+              ? (formatAiModelsCurrency?.(m.price.completion) ?? "")
+              : "";
 
           const onRowClick = () => {
             if (m.link) window.open(m.link, "_blank", "noopener,noreferrer");

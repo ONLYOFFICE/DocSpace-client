@@ -103,7 +103,6 @@
   "Remaining": "Të mbetur",
   "RemainingBalanceAfter": "Bilanci i mbetur pas blerjes: {{amount}}",
   "RemainingCreditsAfter": "Kreditet e mbetura pas blerjes: {{amount}}",
-  "RemoveSubscriptionConfirm": "Detajet e abonimit tuaj të mëparshëm do të hiqen. Për të përdorur përsëri {{service}}, do t'ju duhet të konfiguroni një abonim të ri.",
   "RenewsOnWithUpdate": "Rinovohet më {{date}} — {{price}}/muaj (Përdorues: {{count}})",
   "ReportGenerationHint": "Gjenerimi i raportit mund të marrë njëfarë kohe. Kur të jetë gati, do të ruhet te {{sectionName}}.",
   "ResetAccessRulesTitle": "Rivendos rregullat e aksesit",

@@ -129,6 +129,11 @@ export type UseHistoryProps = {
   scrollToTop: () => void;
 };
 
+type TDayFilter = {
+  selectionId: Nullable<number | string>;
+  day: Nullable<string>;
+};
+
 export const useHistory = ({
   selection,
 
@@ -142,7 +147,17 @@ export const useHistory = ({
 
   const [total, setTotal] = React.useState(0);
 
-  const [historyDay, setHistoryDay] = React.useState<Nullable<string>>(null);
+  const [dayFilter, setDayFilter] = React.useState<TDayFilter>({
+    selectionId: null,
+    day: null,
+  });
+
+  const selectionId = selection?.id ?? null;
+
+  // The picked day belongs to the item it was picked for, so switching the
+  // selection drops the filter instead of carrying it over to the new history
+  const historyDay =
+    dayFilter.selectionId === selectionId ? dayFilter.day : null;
 
   const [history, setHistory] = React.useState<TSelectionHistory[]>([]);
 
@@ -240,14 +255,16 @@ export const useHistory = ({
   ]);
 
   const selectHistoryDay = useEventCallback((day: Nullable<string>) => {
-    setHistoryDay(day);
+    setDayFilter({ selectionId, day });
 
     fetchHistory(day)
       .then(() => scrollToTop())
       .catch((error) => console.log(error));
   });
 
-  const resetHistoryDay = useEventCallback(() => setHistoryDay(null));
+  const resetHistoryDay = useEventCallback(() =>
+    setDayFilter({ selectionId: null, day: null }),
+  );
 
   const fetchMoreHistory = async () => {
     if (!selection?.id) return;

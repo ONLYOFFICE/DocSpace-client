@@ -59,6 +59,7 @@ const HistoryToolbar = ({
 
   getRoomHistoryReport,
   markRoomHistoryReportPageLeft,
+  resetRoomHistoryReportPageLeft,
   isRoomHistoryReportDownloading,
   setIsScrollLocked,
   currentUserId,
@@ -66,9 +67,13 @@ const HistoryToolbar = ({
 }: HistoryToolbarProps & InjectedHistoryToolbarProps) => {
   const { i18n } = useTranslation();
 
+  // A report that finishes while the user is away must not steal the tab, but
+  // coming back before it finishes makes the auto-open wanted again
   useEffect(() => {
+    resetRoomHistoryReportPageLeft();
+
     return () => markRoomHistoryReportPageLeft();
-  }, [markRoomHistoryReportPageLeft]);
+  }, [markRoomHistoryReportPageLeft, resetRoomHistoryReportPageLeft]);
 
   const onExportHistory = (dateRange?: TFolderLogReportDateRange) => {
     getRoomHistoryReport(roomId, dateRange);
@@ -111,6 +116,7 @@ export default inject<TStore, HistoryToolbarProps, InjectedHistoryToolbarProps>(
     const {
       getRoomHistoryReport,
       markRoomHistoryReportPageLeft,
+      resetRoomHistoryReportPageLeft,
       isRoomHistoryReportDownloading,
       setIsScrollLocked,
     } = infoPanelStore;
@@ -118,6 +124,7 @@ export default inject<TStore, HistoryToolbarProps, InjectedHistoryToolbarProps>(
     return {
       getRoomHistoryReport,
       markRoomHistoryReportPageLeft,
+      resetRoomHistoryReportPageLeft,
       isRoomHistoryReportDownloading,
       setIsScrollLocked,
       currentUserId: userStore?.user?.id,

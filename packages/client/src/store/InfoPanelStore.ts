@@ -130,6 +130,10 @@ class InfoPanelStore {
       this.roomHistoryReportPageLeft = true;
   };
 
+  resetRoomHistoryReportPageLeft = () => {
+    this.roomHistoryReportPageLeft = false;
+  };
+
   private resetRoomHistoryReportState = () => {
     this.roomHistoryReportPageLeft = false;
     this.setRoomHistoryReportDownloading(false);
@@ -177,7 +181,7 @@ class InfoPanelStore {
         await pollUntil(async () => {
           task = await getFolderLogReportStatus(folderId);
 
-          return !task || task.isCompleted || !!task.error;
+          return !!task?.isCompleted || !!task?.error;
         }, controller.signal);
       }
 

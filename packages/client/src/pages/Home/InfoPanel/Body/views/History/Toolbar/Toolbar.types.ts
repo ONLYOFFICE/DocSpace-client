@@ -50,6 +50,7 @@ export type InjectedHistoryToolbarProps = Pick<
   TStore["infoPanelStore"],
   | "getRoomHistoryReport"
   | "markRoomHistoryReportPageLeft"
+  | "resetRoomHistoryReportPageLeft"
   | "isRoomHistoryReportDownloading"
   | "setIsScrollLocked"
 > & {

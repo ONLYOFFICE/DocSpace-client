@@ -20,7 +20,7 @@
  *
  * No trademark rights are granted under this License.
  *
- * All non-code elements of the Project's GUI elements, including illustrations,
+ * All non-code elements of the Product, including illustrations,
  * icon sets, and technical writing content, are licensed under the
  * Creative Commons Attribution-ShareAlike 4.0 International License:
  * https://creativecommons.org/licenses/by-sa/4.0/legalcode

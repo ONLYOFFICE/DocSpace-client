@@ -31,7 +31,7 @@
     "@babel/runtime": "7.28.3",
     "@docspace/shared": "workspace:*",
     "@docspace/ui-kit": "workspace:*",
-    "axios": "1.15.2",
+    "axios": "^1.19.0",
     "classnames": "2.5.1",
     "date-and-time": "3.6.0",
     "i18next": "23.7.19",
@@ -53,7 +53,7 @@
     "winston-daily-rotate-file": "5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.25.8",
+    "@babel/core": "^7.29.7",
     "@babel/plugin-proposal-export-default-from": "7.25.8",
     "@babel/plugin-transform-class-properties": "7.25.9",
     "@babel/plugin-transform-runtime": "7.25.7",
@@ -71,7 +71,7 @@
     "@types/react-dom": "19.2.3",
     "cross-env": "^10.1.0",
     "css-minimizer-webpack-plugin": "^7.0.4",
-    "prettier": "^3.8.1",
+    "prettier": "^3.9.6",
     "sass": "1.79.6",
     "shx": "0.4.0",
     "terser-webpack-plugin": "5.3.16",

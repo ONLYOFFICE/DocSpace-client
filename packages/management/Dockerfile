@@ -12,7 +12,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g pnpm@10.33.0
+RUN npm install -g pnpm@11.19.0
 
 WORKDIR /app
 

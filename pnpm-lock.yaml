@@ -557,7 +557,7 @@ importers:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-joyride:
-        specifier: ^3.0.0
+        specifier: ^3.2.0
         version: 3.2.0(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-markdown:
         specifier: ^10.1.0

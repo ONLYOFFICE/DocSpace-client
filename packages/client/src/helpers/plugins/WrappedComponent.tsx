@@ -465,17 +465,14 @@ const WrappedComponent = ({
   const updatePropsContext = (
     newContextProps: NonNullable<IMessage["contextProps"]>,
   ) => {
-    const newProps = { ...contextProps };
-
     newContextProps.forEach(({ name, props }) => {
       if (saveButton && name === saveButton.contextName) {
         setSaveButtonProps?.((val) => ({ ...val, props }) as ButtonGroup);
-      } else {
-        newProps[name] = props;
+        return;
       }
-    });
 
-    setContextProps(newProps);
+      setContextProps((prev) => ({ ...prev, [name]: props }));
+    });
   };
 
   const contextValue = useMemo(

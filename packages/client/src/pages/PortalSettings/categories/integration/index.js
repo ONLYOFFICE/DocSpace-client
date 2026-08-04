@@ -69,8 +69,6 @@ const IntegrationWrapper = (props) => {
   } = props;
   const navigate = useNavigate();
 
-  const [currentTabId, setCurrentTabId] = useState();
-
   const defaultProps = createDefaultHookSettingsProps({
     setup,
     currentQuotaStore,
@@ -157,10 +155,16 @@ const IntegrationWrapper = (props) => {
     });
   }
 
-  useEffect(() => {
+  const getCurrentTabId = () => {
     const path = window.location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab && data.length) setCurrentTabId(currentTab.id);
+    return data.find((item) => path.includes(item.id))?.id;
+  };
+
+  const [currentTabId, setCurrentTabId] = useState(getCurrentTabId);
+
+  useEffect(() => {
+    const tabId = getCurrentTabId();
+    if (tabId) setCurrentTabId(tabId);
   }, [location.pathname]);
 
   const onSelect = (e) => {

@@ -307,13 +307,15 @@ const Settings = ({
           <div className={styles.settingsGroup}>
             <Text fontWeight={600}>
               {t("DocsConnect:UseEditorsInProduct", {
-                productName: getBrandName("ProductName"),
+                organizationName: getBrandName("OrganizationName"),
+                editorsName: getBrandName("ProductEditorsName"),
               })}
             </Text>
             <Text fontSize="13px" className={styles.settingsHint}>
               {t("DocsConnect:DocsConnectionDescription", {
                 service: t("DocsConnect:DocsConnect"),
-                productName: getBrandName("ProductName"),
+                organizationName: getBrandName("OrganizationName"),
+                editorsName: getBrandName("ProductEditorsName"),
               })}
             </Text>
           </div>

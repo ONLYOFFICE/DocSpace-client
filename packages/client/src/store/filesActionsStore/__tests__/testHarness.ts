@@ -131,6 +131,7 @@ const defaultFakes = (): FakeStores => ({
     secondaryProgressDataStore: {
       setSecondaryProgressBarData: vi.fn(),
       clearSecondaryProgressData: vi.fn(),
+      isOperationStopped: vi.fn(() => false),
     },
     primaryProgressDataStore: {
       setPrimaryProgressBarData: vi.fn(),

@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsTrashRestoreARoom",
+  "content": "Restore a room",
+  "content_en_sha1_hash": "94da4e83547d4caa4710a8095118e69a3849994b",
+  "created_at": "2026-08-04T09:58:55.221Z",
+  "updated_at": "2026-08-04T09:58:56.426Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 524,
+      "context": "name: t(\"AiSuggestions:RoomsTrashFindADeletedFileOrFolder\"),\n prompt: t(\"AiSuggestions:RoomsTrashFindADeletedFileOrFolderPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashRestoreARoom\"),\n prompt: t(\"AiSuggestions:RoomsTrashRestoreARoomPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashDeletePermanently\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

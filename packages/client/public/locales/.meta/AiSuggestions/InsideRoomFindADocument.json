@@ -1,0 +1,28 @@
+{
+  "key_path": "InsideRoomFindADocument",
+  "content": "Find a document",
+  "content_en_sha1_hash": "8b5750dca16f53260bf67e487673a6f69ccd194c",
+  "created_at": "2026-08-04T09:58:55.186Z",
+  "updated_at": "2026-08-04T09:58:56.400Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 138,
+      "context": "name: t(\"AiSuggestions:InsideRoomOrganizeContent\"),\n prompt: t(\"AiSuggestions:InsideRoomOrganizeContentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomFindADocument\"),\n prompt: t(\"AiSuggestions:InsideRoomFindADocumentPrompt\"),\n },\n {\n name: t(\"AiSuggestions:InsideRoomChangeNameAndTags\"),\n prompt: t(\"AiSuggestions:InsideRoomChangeNameAndTagsPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

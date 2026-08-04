@@ -1,0 +1,28 @@
+{
+  "key_path": "FormSpaceResultsSummarizeResults",
+  "content": "Summarize results",
+  "content_en_sha1_hash": "633db35b380df7ccfc3aacbcca8886d87efb5fd8",
+  "created_at": "2026-08-04T09:58:55.156Z",
+  "updated_at": "2026-08-04T09:58:56.401Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 162,
+      "context": "// \"Complete and results\" is a single section in the spec, so the in-progress\n // and the done folders of a Form Space share one list.\n const formSpaceResults: SuggestionEntry[] = [\n {\n name: t(\"AiSuggestions:FormSpaceResultsSummarizeResults\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsSummarizeResultsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriods\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriodsPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "InsideRoomOrganizeContentPrompt",
+  "content": "Propose a clear folder structure for the current room and show the move plan before applying changes. If this information is not provided, ask me for the preferred grouping rules and confirmation before moving anything.",
+  "content_en_sha1_hash": "7ced601ddc7a98b767f4d8ed0b2c324fdcb63bd2",
+  "created_at": "2026-08-04T09:58:55.187Z",
+  "updated_at": "2026-08-04T09:58:56.400Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 134,
+      "context": "name: t(\"AiSuggestions:InsideRoomSummarizeRoom\"),\n prompt: t(\"AiSuggestions:InsideRoomSummarizeRoomPrompt\"),\n },\n {\n name: t(\"AiSuggestions:InsideRoomOrganizeContent\"),\n prompt: t(\"AiSuggestions:InsideRoomOrganizeContentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomFindADocument\"),\n prompt: t(\"AiSuggestions:InsideRoomFindADocumentPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

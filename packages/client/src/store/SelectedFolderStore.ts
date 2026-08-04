@@ -100,10 +100,9 @@ export type TSelectedFolder = NonFunctionProperties<
 >;
 
 export type TSetSelectedFolder = {
-  [key in NonFunctionPropertyNames<
-    SelectedFolderStore,
-    ExcludeTypes
-  >]?: TSelectedFolder[key];
+  [
+    key in NonFunctionPropertyNames<SelectedFolderStore, ExcludeTypes>
+  ]?: TSelectedFolder[key];
 };
 
 class SelectedFolderStore {
@@ -314,7 +313,10 @@ class SelectedFolderStore {
   }
 
   get isRootFolder() {
-    return this.pathParts && this.pathParts.length <= 1;
+    return (
+      this.id === this.rootFolderId ||
+      (this.pathParts && this.pathParts.length <= 1)
+    );
   }
 
   toDefault = () => {

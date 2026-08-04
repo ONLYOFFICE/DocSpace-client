@@ -1,0 +1,28 @@
+{
+  "key_path": "FormsRecentRecentResultsPrompt",
+  "content": "Show recent results across recent Form Spaces in a concise, structured view. If this information is not provided, ask me for the form or space, date range, segments, and metrics to include.",
+  "content_en_sha1_hash": "66bddf6920d0340ef791365b2a0d138ec3a7ab63",
+  "created_at": "2026-08-04T09:58:55.168Z",
+  "updated_at": "2026-08-04T09:58:56.453Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 679,
+      "context": "name: t(\"AiSuggestions:FormsRecentSummarizeRecentSpaces\"),\n prompt: t(\"AiSuggestions:FormsRecentSummarizeRecentSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsRecentRecentResults\"),\n prompt: t(\"AiSuggestions:FormsRecentRecentResultsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsRecentWhereActionIsNeeded\"),\n prompt: t(\"AiSuggestions:FormsRecentWhereActionIsNeededPrompt\"),\n requires: \"roomAdmin\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

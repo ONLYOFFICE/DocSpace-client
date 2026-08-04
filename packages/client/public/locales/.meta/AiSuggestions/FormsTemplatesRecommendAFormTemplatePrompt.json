@@ -1,0 +1,28 @@
+{
+  "key_path": "FormsTemplatesRecommendAFormTemplatePrompt",
+  "content": "Find a form template across available form templates and return the most relevant results. If this information is not provided, ask me for the use case, target respondents, and information to collect.",
+  "content_en_sha1_hash": "967a60c1d3016be19092dac70ce25752811b528c",
+  "created_at": "2026-08-04T09:58:55.175Z",
+  "updated_at": "2026-08-04T09:58:56.456Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 718,
+      "context": "// +\n formsTemplates: [\n {\n name: t(\"AiSuggestions:FormsTemplatesRecommendAFormTemplate\"),\n prompt: t(\"AiSuggestions:FormsTemplatesRecommendAFormTemplatePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesCreateASpaceFromATemplate\"),\n prompt: t(\n \"AiSuggestions:FormsTemplatesCreateASpaceFromATemplatePrompt\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

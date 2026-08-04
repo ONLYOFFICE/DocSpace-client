@@ -51,6 +51,7 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import QuantityPicker from "@docspace/ui-kit/components/quantity-picker";
 import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import SalesDepartmentRequestDialog from "@docspace/ui-kit/billing/dialogs/SalesDepartmentRequestDialog";
 import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 
 import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
@@ -144,6 +145,7 @@ const BuyPlanPanel = ({
   const [submitting, setSubmitting] = useState(false);
   const [waitingPayment, setWaitingPayment] = useState(false);
   const [topUpDialogVisible, setTopUpDialogVisible] = useState(false);
+  const [requestDialogVisible, setRequestDialogVisible] = useState(false);
   const [devPackCalc, setDevPackCalc] =
     useState<TDocsConnectDevPackCalculation | null>(null);
   const [calcLoading, setCalcLoading] = useState(false);
@@ -172,7 +174,7 @@ const BuyPlanPanel = ({
     const isUp =
       isDocsConnectPaid(info) && curUsers > 0 && devPack && !curDevPack;
 
-    if (!isUp) {
+    if (!isUp || users > MAX_USERS) {
       setDevPackCalc(null);
       return undefined;
     }
@@ -209,6 +211,7 @@ const BuyPlanPanel = ({
   const currentDevPack = info.devPackEnabled ?? false;
 
   const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
+  const isOverLimit = users > MAX_USERS;
 
   const onToggleDevPack = () => {
     setDevPack((prev) => {
@@ -255,20 +258,23 @@ const BuyPlanPanel = ({
   const prorationFactor =
     periodDays > 0 ? Math.min(1, remainingDays / periodDays) : 0;
 
-  const calcPending = isDevPackUpgrade && (calcLoading || devPackCalc === null);
+  const calcPending =
+    !isOverLimit && isDevPackUpgrade && (calcLoading || devPackCalc === null);
   const devPackCharge = devPackCalc?.amount ?? 0;
   const unusedCredit = isDevPackUpgrade
     ? Math.max(0, Math.round((totalMonthly - devPackCharge) * 100) / 100)
     : 0;
 
   const addedUsers = Math.max(0, users - currentUsers);
-  const chargeNow = isEditActive
-    ? isDevPackUpgrade
-      ? devPackCharge
-      : isUpgrade
-        ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
-        : 0
-    : users * perUser;
+  const chargeNow = isOverLimit
+    ? 0
+    : isEditActive
+      ? isDevPackUpgrade
+        ? devPackCharge
+        : isUpgrade
+          ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
+          : 0
+      : users * perUser;
 
   const remainingCredits = availableCredits - chargeNow;
   const insufficientFunds = chargeNow > 0 && remainingCredits < 0;
@@ -298,6 +304,8 @@ const BuyPlanPanel = ({
     abortControllerRef.current?.abort();
     closeBuyPlan?.();
   };
+
+  const onSendRequest = () => setRequestDialogVisible(true);
 
   const onOpenWallet = () =>
     window.open(
@@ -398,7 +406,18 @@ const BuyPlanPanel = ({
     </div>
   );
 
-  const usersTooltip = t("DocsConnect:PlanUsersTooltip", { count: users });
+  const usersTooltip = t("DocsConnect:PlanUsersTooltip", {
+    count: isOverLimit ? MAX_USERS : users,
+  });
+
+  if (requestDialogVisible) {
+    return (
+      <SalesDepartmentRequestDialog
+        visible={requestDialogVisible}
+        onClose={() => setRequestDialogVisible(false)}
+      />
+    );
+  }
 
   return (
     <>
@@ -408,7 +427,9 @@ const BuyPlanPanel = ({
         onClose={onClose}
         withBodyScroll
         withFooterBorder
-        isDoubleFooterLine={insufficientFunds || isDevPackUpgrade || isUpgrade}
+        isDoubleFooterLine={
+          !isOverLimit && (insufficientFunds || isDevPackUpgrade || isUpgrade)
+        }
       >
         <ModalDialog.Header>
           {isEditActive
@@ -579,7 +600,34 @@ const BuyPlanPanel = ({
                   {t("Common:OrderSummary")}
                 </Text>
                 <div className={styles.summaryCard}>
-                  {isEditActive ? (
+                  {isOverLimit ? (
+                    <>
+                      {summaryRow(
+                        t("DocsConnect:PlanUsers"),
+                        `${MAX_USERS}+`,
+                        usersTooltip,
+                      )}
+                      {summaryRow(
+                        t("DocsConnect:BasePricePerUser"),
+                        formatCurrency(pricePerUser),
+                      )}
+                      {summaryRow(
+                        t("DocsConnect:DevPackPerUser"),
+                        formatCurrency(devPack ? devPackPrice : 0),
+                      )}
+                      <hr className={styles.summaryDivider} />
+                      <Text
+                        fontSize="14px"
+                        fontWeight={600}
+                        className={styles.uponRequestNote}
+                      >
+                        {t("DocsConnect:UsersUponRequest", {
+                          count: MAX_USERS,
+                          service: t("DocsConnect:DocsConnect"),
+                        })}
+                      </Text>
+                    </>
+                  ) : isEditActive ? (
                     isDevPackUpgrade ? (
                       <>
                         {usersChanged
@@ -815,7 +863,7 @@ const BuyPlanPanel = ({
                     </>
                   )}
                 </div>
-                {isScheduled ? (
+                {isOverLimit ? null : isScheduled ? (
                   <StorageWarning
                     body={t("Common:ScheduledChangeBillingPeriodNote", {
                       date: periodEndDateLocalized,
@@ -851,7 +899,7 @@ const BuyPlanPanel = ({
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
-          {insufficientFunds ? (
+          {isOverLimit ? null : insufficientFunds ? (
             <Text
               fontSize="13px"
               fontWeight={400}
@@ -909,22 +957,26 @@ const BuyPlanPanel = ({
               scale
               size={ButtonSize.normal}
               label={
-                isEditActive
-                  ? isScheduled
-                    ? t("Common:ScheduleChange")
+                isOverLimit
+                  ? t("Common:SendRequest")
+                  : isEditActive
+                    ? isScheduled
+                      ? t("Common:ScheduleChange")
+                      : insufficientFunds
+                        ? t("DocsConnect:TopUpAndBuy")
+                        : t("Common:Upgrade")
                     : insufficientFunds
-                      ? t("DocsConnect:TopUpAndBuy")
+                      ? info.deactivated
+                        ? t("Common:TopUpAndPay")
+                        : t("DocsConnect:TopUpAndBuy")
                       : t("Common:Upgrade")
-                  : insufficientFunds
-                    ? info.deactivated
-                      ? t("Common:TopUpAndPay")
-                      : t("DocsConnect:TopUpAndBuy")
-                    : t("Common:Upgrade")
               }
-              onClick={onBuy}
+              onClick={isOverLimit ? onSendRequest : onBuy}
               isLoading={submitting}
               isDisabled={
-                submitting || calcPending || (isEditActive && !hasChanges)
+                isOverLimit
+                  ? false
+                  : submitting || calcPending || (isEditActive && !hasChanges)
               }
               testId="docs_connect_buy_plan_submit"
             />

@@ -60,6 +60,7 @@ const ManualBackupWrapper = ({
   isEmptyContentBeforeLoader,
   isInitialLoading,
   setIsEmptyContentBeforeLoader,
+  fetchWalletBalance,
   ...props
 }: ManualBackupWrapperProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
@@ -83,6 +84,7 @@ const ManualBackupWrapper = ({
     if (progress === 100 && isBackupPaid) {
       const backupsCount = await getBackupsCount();
       setBackupsCount(backupsCount);
+      await fetchWalletBalance?.(true);
     }
 
     setDownloadingProgress(progress);
@@ -96,6 +98,7 @@ const ManualBackupWrapper = ({
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
       setDownloadingProgress={updateDownloadingProgress}
       isBackupPaid={isBackupPaid}
+      fetchWalletBalance={fetchWalletBalance}
       {...props}
     />
   );
@@ -162,7 +165,13 @@ export default inject(
       isInitialError,
     } = backup;
 
-    const { isPayer, backupServicePrice } = paymentStore;
+    const {
+      isPayer,
+      backupServicePrice,
+      walletBalance,
+      walletCodeCurrency,
+      isCardLinkedToPortal,
+    } = paymentStore;
     const {
       newPath,
       basePath,
@@ -200,7 +209,7 @@ export default inject(
 
     const pageIsDisabled = isManagement()
       ? portals?.length === 1 || !backupPageEnable
-      : !backupPageEnable;
+      : false;
 
     // TODO: fix may be an empty object!!!
     const removeItem = (selectedThirdPartyAccount ??
@@ -309,8 +318,14 @@ export default inject(
       backupServicePrice,
       isFreeBackupsLimitReached,
 
+      walletBalance,
+      walletCodeCurrency,
+      isCardLinked: isCardLinkedToPortal,
+      fetchWalletBalance: paymentStore.fetchWalletBalance,
+
       // clientLoadingStore
       isInitialLoading: showPortalSettingsLoader,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));
+

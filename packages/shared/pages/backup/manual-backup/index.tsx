@@ -35,7 +35,7 @@
 
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
@@ -44,7 +44,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { RadioButton } from "@docspace/ui-kit/components/radio-button";
-import { startBackup } from "../../../api/portal";
+import { saveDeposite, startBackup } from "../../../api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
 import StatusMessage from "@docspace/ui-kit/components/status-message";
@@ -196,6 +196,10 @@ const ManualBackup = ({
   isFreeBackupsLimitReached = false,
   setBackupProgressWarning,
   backupProgressWarning,
+  walletBalance = 0,
+  walletCodeCurrency,
+  isCardLinked = false,
+  fetchWalletBalance,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -208,6 +212,55 @@ const ManualBackup = ({
 
   const [showCancelOperation, setShowCancelOperation] = useState(false);
   const [isCancelOperation, setIsCancelOperation] = useState(false);
+  const [isToppingUp, setIsToppingUp] = useState(false);
+
+  const isChargeableBackup = isBackupPaid && isFreeBackupsLimitReached;
+  const isBalanceInsufficient =
+    isChargeableBackup &&
+    !!backupServicePrice &&
+    walletBalance < backupServicePrice;
+
+  const isTopUpBeforeCopy = isBalanceInsufficient && isPayer && isCardLinked;
+
+  const isCopyBlocked = isBalanceInsufficient && !isPayer;
+
+  // Memoized: StatusMessage replays its show animation whenever the message
+  // identity changes, so a fresh element on every render makes it blink.
+  const insufficientFundsMessage = useMemo(
+    () =>
+      isCopyBlocked
+        ? getPaymentError(
+            t,
+            false,
+            walletCustomerEmail ?? "",
+            backupServicePrice ?? 0,
+          )
+        : "",
+    [isCopyBlocked, t, walletCustomerEmail, backupServicePrice],
+  );
+
+  const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);
+
+  const copyButtonLabel = isTopUpBeforeCopy
+    ? t("Common:TopUpAndMakeCopy")
+    : undefined;
+
+  const topUpIfNeeded = async () => {
+    if (!isTopUpBeforeCopy) return true;
+
+    setIsToppingUp(true);
+
+    try {
+      await saveDeposite(topUpAmount, walletCodeCurrency || "USD");
+      await fetchWalletBalance?.(true);
+      return true;
+    } catch (error) {
+      toastr.error(error as Error);
+      return false;
+    } finally {
+      setIsToppingUp(false);
+    }
+  };
 
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
@@ -270,6 +323,8 @@ const ManualBackup = ({
   ]);
 
   const onMakeTemporaryBackup = async () => {
+    if (!(await topUpIfNeeded())) return;
+
     setErrorMessage("");
     setBackupProgressError("");
     setBackupProgressWarning("");
@@ -339,6 +394,8 @@ const ManualBackup = ({
     selectedStorageId?: string,
     selectedStorageTitle?: string,
   ) => {
+    if (!(await topUpIfNeeded())) return;
+
     clearLocalStorage();
 
     setErrorMessage("");
@@ -412,6 +469,9 @@ const ManualBackup = ({
     isMaxProgress,
     onMakeCopy,
     buttonSize,
+    copyButtonLabel,
+    isToppingUp,
+    isCopyBlocked,
   };
 
   const onCancelOperation = async () => {
@@ -428,9 +488,9 @@ const ManualBackup = ({
 
   if (isInitialLoading) return <DataBackupLoader />;
 
-  const mainDisabled = !isMaxProgress || pageIsDisabled;
+  const mainDisabled = !isMaxProgress || pageIsDisabled || isCopyBlocked;
   const additionalDisabled =
-    !isMaxProgress || isNotPaidPeriod || pageIsDisabled;
+    !isMaxProgress || isNotPaidPeriod || pageIsDisabled || isCopyBlocked;
   const isDownloadButton =
     temporaryLink && temporaryLink.length > 0 && isMaxProgress;
   const isCreateButtonDisabled = mainDisabled && !isDownloadButton;
@@ -438,8 +498,13 @@ const ManualBackup = ({
   return (
     <div className={styles.manualBackup} data-testid="manual-backup-wrapper">
       <StatusMessage
-        message={errorMessage || errorInformation || backupProgressWarning}
-        isWarning={!!backupProgressWarning}
+        message={
+          errorMessage ||
+          insufficientFundsMessage ||
+          errorInformation ||
+          backupProgressWarning
+        }
+        isWarning={!!backupProgressWarning && !insufficientFundsMessage}
       />
       <div
         className={classNames(
@@ -504,10 +569,11 @@ const ManualBackup = ({
               >
                 <Button
                   id="create-button"
-                  label={t("Common:Create")}
+                  label={copyButtonLabel ?? t("Common:Create")}
                   onClick={onMakeTemporaryBackup}
                   primary
-                  isDisabled={mainDisabled}
+                  isDisabled={mainDisabled || isToppingUp}
+                  isLoading={isToppingUp}
                   size={buttonSize}
                   testId="create_temporary_backup_button"
                 />

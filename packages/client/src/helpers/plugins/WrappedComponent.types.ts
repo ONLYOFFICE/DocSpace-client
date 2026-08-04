@@ -66,21 +66,7 @@ export type TButtonElementProps = IButton & {
 
 export type TPluginStoreInjected = {
   getPluginIconUrl: PluginStore["getPluginIconUrl"];
-  setSettingsPluginDialogVisible: PluginStore["setSettingsPluginDialogVisible"];
-  updatePluginStatus: PluginStore["updatePluginStatus"];
-  setPluginDialogVisible: PluginStore["setPluginDialogVisible"];
-  updateContextMenuItems: PluginStore["updateContextMenuItems"];
-  updateInfoPanelItems: PluginStore["updateInfoPanelItems"];
-  setPluginDialogProps: PluginStore["setPluginDialogProps"];
-  updateMainButtonItems: PluginStore["updateMainButtonItems"];
-  updateProfileMenuItems: PluginStore["updateProfileMenuItems"];
-  updateEventListenerItems: PluginStore["updateEventListenerItems"];
-  updateFileItems: PluginStore["updateFileItems"];
-  updatePlugin: PluginStore["updatePlugin"];
-  setPluginSelectorVisible: PluginStore["setPluginSelectorVisible"];
-  setPluginSelectorProps: PluginStore["setPluginSelectorProps"];
-  setPluginMediaViewerVisible: PluginStore["setPluginMediaViewerVisible"];
-  setPluginMediaViewerProps: PluginStore["setPluginMediaViewerProps"];
+  dispatchMessage: PluginStore["dispatchMessage"];
 };
 
 export type TPluginComponentOwnProps = {

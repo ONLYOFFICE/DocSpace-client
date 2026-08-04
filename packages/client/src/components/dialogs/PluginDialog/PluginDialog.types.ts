@@ -46,14 +46,5 @@ export type TPluginDialogEventListener = {
 export type PluginDialogProps = Omit<IModalDialogClient, "eventListeners"> & {
   isVisible: boolean;
   eventListeners?: TPluginDialogEventListener[];
-  setSettingsPluginDialogVisible: PluginStore["setSettingsPluginDialogVisible"];
-  updatePluginStatus: PluginStore["updatePluginStatus"];
-  setPluginDialogVisible: PluginStore["setPluginDialogVisible"];
-  setPluginDialogProps: PluginStore["setPluginDialogProps"];
-  updateContextMenuItems: PluginStore["updateContextMenuItems"];
-  updateInfoPanelItems: PluginStore["updateInfoPanelItems"];
-  updateMainButtonItems: PluginStore["updateMainButtonItems"];
-  updateProfileMenuItems: PluginStore["updateProfileMenuItems"];
-  updateEventListenerItems: PluginStore["updateEventListenerItems"];
-  updateFileItems: PluginStore["updateFileItems"];
+  dispatchMessage: PluginStore["dispatchMessage"];
 };

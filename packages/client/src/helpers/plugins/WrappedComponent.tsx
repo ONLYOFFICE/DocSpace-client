@@ -61,7 +61,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
 import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
-import { Button } from "@docspace/ui-kit/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { ComboBox } from "@docspace/ui-kit/components/combobox";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
@@ -70,7 +70,7 @@ import { Link } from "@docspace/ui-kit/components/link";
 import type PluginStore from "SRC_DIR/store/PluginStore";
 
 import { PluginComponents } from "./enums";
-import { borderToStyle, messageActions } from "./utils";
+import { borderToStyle } from "./utils";
 import type {
   TAllComponentProps,
   TButtonElementProps,
@@ -80,51 +80,24 @@ import type {
   TPropsContext,
   TWrappedComponentProps,
 } from "./WrappedComponent.types";
-import { TMessageActionsParams } from "./types";
 
 const PLUGIN_IFRAME_TITLE = "Plugin iframe";
+
+const BUTTON_SIZE_MAP: Partial<Record<string, ButtonSize>> = {
+  "extra-small": ButtonSize.extraSmall,
+  extraSmall: ButtonSize.extraSmall,
+  small: ButtonSize.small,
+  normal: ButtonSize.normal,
+  medium: ButtonSize.medium,
+};
 
 const PropsContext = React.createContext<TPropsContext>({} as TPropsContext);
 
 const PluginComponentBase = inject(
   ({ pluginStore }: { pluginStore: PluginStore }) => {
-    const {
-      getPluginIconUrl,
-      updatePluginStatus,
-      setSettingsPluginDialogVisible,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-      updatePlugin,
-      setPluginSelectorVisible,
-      setPluginSelectorProps,
-      setPluginMediaViewerProps,
-      setPluginMediaViewerVisible,
-    } = pluginStore;
+    const { getPluginIconUrl, dispatchMessage } = pluginStore;
 
-    return {
-      getPluginIconUrl,
-      updatePluginStatus,
-      setSettingsPluginDialogVisible,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-      updatePlugin,
-      setPluginSelectorVisible,
-      setPluginSelectorProps,
-      setPluginMediaViewerProps,
-      setPluginMediaViewerVisible,
-    };
+    return { getPluginIconUrl, dispatchMessage };
   },
 )(
   observer(
@@ -132,21 +105,7 @@ const PluginComponentBase = inject(
       component,
       pluginName,
       getPluginIconUrl,
-      setSettingsPluginDialogVisible,
-      updatePluginStatus,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-      updatePlugin,
-      setPluginSelectorVisible,
-      setPluginSelectorProps,
-      setPluginMediaViewerProps,
-      setPluginMediaViewerVisible,
+      dispatchMessage,
     }: TPluginComponentProps) => {
       const [elementProps, setElementProps] =
         React.useState<TAllComponentProps>(component.props);
@@ -178,26 +137,13 @@ const PluginComponentBase = inject(
         setElementProps(component.props);
       }, [component.props]);
 
-      const sharedMessageParams: Omit<TMessageActionsParams, "message"> = {
-        setElementProps,
-        pluginName,
-        setSettingsPluginDialogVisible,
-        updatePlugin,
-        updatePluginStatus,
-        updatePropsContext,
-        setPluginDialogVisible,
-        setPluginDialogProps,
-        updateContextMenuItems,
-        updateInfoPanelItems,
-        updateMainButtonItems,
-        updateProfileMenuItems,
-        updateEventListenerItems,
-        updateFileItems,
-        setPluginSelectorVisible,
-        setPluginSelectorProps,
-        setPluginMediaViewerProps,
-        setPluginMediaViewerVisible,
-      };
+      const dispatch = (message: IMessage | void) =>
+        dispatchMessage({
+          message,
+          pluginName,
+          setElementProps,
+          updatePropsContext,
+        });
 
       const getElement = (): React.ReactElement | null | undefined => {
         const componentName = component.component;
@@ -271,7 +217,7 @@ const PluginComponentBase = inject(
 
             const onChangeAction = () => {
               const message = onChange();
-              if (message) messageActions({ ...sharedMessageParams, message });
+              dispatch(message);
             };
 
             return <Checkbox {...restProps} onChange={onChangeAction} />;
@@ -282,7 +228,7 @@ const PluginComponentBase = inject(
 
             const onChangeAction = () => {
               const message = onChange();
-              if (message) messageActions({ ...sharedMessageParams, message });
+              dispatch(message);
             };
 
             return <ToggleButton {...restProps} onChange={onChangeAction} />;
@@ -300,7 +246,7 @@ const PluginComponentBase = inject(
               e: React.ChangeEvent<HTMLTextAreaElement>,
             ) => {
               const message = onChange(e.target.value);
-              if (message) messageActions({ ...sharedMessageParams, message });
+              dispatch(message);
             };
 
             return <Textarea {...restProps} onChange={onChangeAction} />;
@@ -323,9 +269,7 @@ const PluginComponentBase = inject(
                   | React.FocusEvent<HTMLInputElement>,
               ) => {
                 if (!eventHandler) return;
-                const message = eventHandler(e.target.value);
-                if (message)
-                  messageActions({ ...sharedMessageParams, message });
+                dispatch(eventHandler(e.target.value));
               };
 
             return (
@@ -349,6 +293,7 @@ const PluginComponentBase = inject(
               setSettingsModalRequestRunning,
               onCloseAction,
               onClick,
+              size,
               ...rest
             } = elementProps as TButtonElementProps;
 
@@ -360,7 +305,7 @@ const PluginComponentBase = inject(
               }
 
               const message = await onClick();
-              if (message) messageActions({ ...sharedMessageParams, message });
+              dispatch(message);
 
               setIsRequestRunning?.(false);
               setModalRequestRunning?.(false);
@@ -384,7 +329,8 @@ const PluginComponentBase = inject(
 
             return (
               <Button
-                {...(rest as unknown as React.ComponentProps<typeof Button>)}
+                {...rest}
+                size={BUTTON_SIZE_MAP[size]}
                 isLoading={isLoading}
                 isDisabled={isDisabled}
                 onClick={onClickAction}
@@ -400,7 +346,7 @@ const PluginComponentBase = inject(
             ) => {
               if (!onSelect) return;
               const message = onSelect(option as IComboBox["options"][number]);
-              if (message) messageActions({ ...sharedMessageParams, message });
+              dispatch(message);
             };
 
             return (
@@ -449,7 +395,7 @@ const PluginComponentBase = inject(
             const onClickAction = async () => {
               if (!onClick) return;
               const message = await onClick();
-              if (message) messageActions({ ...sharedMessageParams, message });
+              dispatch(message);
             };
 
             const icon = iconName
@@ -479,7 +425,7 @@ const PluginComponentBase = inject(
             const onClickAction = async () => {
               if (!onClick) return;
               const message = await onClick();
-              if (message) messageActions({ ...sharedMessageParams, message });
+              dispatch(message);
             };
 
             return (

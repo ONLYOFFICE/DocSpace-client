@@ -84,6 +84,7 @@ import type {
   IPostMessageCallbackMessage,
   IMediaViewerClient,
   IModalDialogClient,
+  TMessageActionsParams,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -107,12 +108,14 @@ const origin =
 const proxy = window.ClientConfig?.proxy?.url || proxyURL;
 const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
-type TDispatchMessage = {
+type TDispatchMessage = Pick<
+  TMessageActionsParams,
+  | "pluginName"
+  | "setElementProps"
+  | "updateCreateDialogProps"
+  | "updatePropsContext"
+> & {
   message: IMessage | void;
-  pluginName: string;
-  setElementProps?: React.Dispatch<unknown>;
-  updateCreateDialogProps?: React.Dispatch<unknown>;
-  updatePropsContext?: (props: unknown) => void;
 };
 
 class PluginStore {
@@ -279,9 +282,7 @@ class PluginStore {
     this.pluginSelectorVisible = value;
   };
 
-  setPluginSelectorProps = (
-    value: null | (TSelectorProps & { pluginName: string }),
-  ) => {
+  setPluginSelectorProps = (value: null | TSelectorProps) => {
     this.pluginSelectorProps = value;
   };
 

@@ -45,12 +45,11 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
-import { messageActions } from "SRC_DIR/helpers/plugins/utils";
 
 import styles from "./PluginDialog.module.scss";
 import type { PluginDialogProps } from "./PluginDialog.types";
 
-const DISPLAY_TYPE_MAP: Record<string, ModalDialogType> = {
+const DISPLAY_TYPE_MAP: Partial<Record<string, ModalDialogType>> = {
   modal: ModalDialogType.modal,
   aside: ModalDialogType.aside,
 };
@@ -71,18 +70,7 @@ const PluginDialog = ({
 
   pluginName,
 
-  setSettingsPluginDialogVisible,
-  updatePluginStatus,
-
-  setPluginDialogVisible,
-  setPluginDialogProps,
-
-  updateContextMenuItems,
-  updateInfoPanelItems,
-  updateMainButtonItems,
-  updateProfileMenuItems,
-  updateEventListenerItems,
-  updateFileItems,
+  dispatchMessage,
   ...rest
 }: PluginDialogProps) => {
   const [dialogHeaderProps, setDialogHeaderProps] =
@@ -95,25 +83,11 @@ const PluginDialog = ({
 
   const functionsRef = React.useRef<EventListener[]>([]);
 
-  const sharedMessageParams = {
-    pluginName,
-    setSettingsPluginDialogVisible,
-    updatePluginStatus,
-    setPluginDialogVisible,
-    setPluginDialogProps,
-    updateContextMenuItems,
-    updateInfoPanelItems,
-    updateMainButtonItems,
-    updateProfileMenuItems,
-    updateEventListenerItems,
-    updateFileItems,
-  };
-
   const onCloseAction = async () => {
     if (modalRequestRunning) return;
     const message = await onClose();
 
-    if (message) messageActions({ ...sharedMessageParams, message });
+    dispatchMessage({ message, pluginName });
   };
 
   React.useEffect(() => {
@@ -124,7 +98,7 @@ const PluginDialog = ({
           const message = await e.onAction(evt);
           setModalRequestRunning(false);
 
-          if (message) messageActions({ ...sharedMessageParams, message });
+          dispatchMessage({ message, pluginName });
         };
 
         functionsRef.current.push(onAction);
@@ -217,35 +191,10 @@ const PluginDialog = ({
 };
 
 export default inject(({ pluginStore }: TStore) => {
-  const {
-    pluginDialogProps,
-    setSettingsPluginDialogVisible,
-    updatePluginStatus,
-
-    setPluginDialogVisible,
-    setPluginDialogProps,
-
-    updateContextMenuItems,
-    updateInfoPanelItems,
-    updateMainButtonItems,
-    updateProfileMenuItems,
-    updateEventListenerItems,
-    updateFileItems,
-  } = pluginStore;
+  const { pluginDialogProps, dispatchMessage } = pluginStore;
 
   return {
     ...pluginDialogProps,
-    setSettingsPluginDialogVisible,
-    updatePluginStatus,
-
-    setPluginDialogVisible,
-    setPluginDialogProps,
-
-    updateContextMenuItems,
-    updateInfoPanelItems,
-    updateMainButtonItems,
-    updateProfileMenuItems,
-    updateEventListenerItems,
-    updateFileItems,
+    dispatchMessage,
   };
 })(observer(PluginDialog));

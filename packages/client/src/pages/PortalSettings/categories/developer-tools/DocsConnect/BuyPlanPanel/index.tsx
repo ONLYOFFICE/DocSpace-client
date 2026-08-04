@@ -555,6 +555,15 @@ const BuyPlanPanel = ({
 
   const footerHint = renderFooterHint();
 
+  if (requestDialogVisible) {
+    return (
+      <SalesDepartmentRequestDialog
+        visible={requestDialogVisible}
+        onClose={() => setRequestDialogVisible(false)}
+      />
+    );
+  }
+
   return (
     <>
       <ModalDialog
@@ -1009,12 +1018,6 @@ const BuyPlanPanel = ({
           language={i18n.language}
           service=""
           minValue={String(topUpRequired)}
-        />
-      ) : null}
-      {requestDialogVisible ? (
-        <SalesDepartmentRequestDialog
-          visible={requestDialogVisible}
-          onClose={() => setRequestDialogVisible(false)}
         />
       ) : null}
     </>

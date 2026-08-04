@@ -21,6 +21,10 @@ allowBuilds:
   sharp: true
 
 minimumReleaseAgeExclude:
+  # Vendored tarball (libs/ui-kit/onlyoffice-ai-chat-*.tgz), never published to
+  # npm, so the age check 404s on the registry. Listed without a version so it
+  # survives tarball bumps; the artifact is committed and reviewed in ui-kit.
+  - '@onlyoffice/ai-chat'
   - '@rolldown/binding-android-arm64@1.2.2'
   - '@rolldown/binding-linux-arm-gnueabihf@1.2.2'
   - '@rolldown/binding-linux-arm64-musl@1.2.2'

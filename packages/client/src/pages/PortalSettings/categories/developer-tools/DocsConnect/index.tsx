@@ -130,7 +130,11 @@ const DocsConnect = ({
     return (
       <>
         <PromoPage canceled />
-        {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
+        {buyPlanPanelVisible ? (
+          <BillingRoot config={paymentConfig}>
+            <BuyPlanPanel />
+          </BillingRoot>
+        ) : null}
       </>
     );
   }

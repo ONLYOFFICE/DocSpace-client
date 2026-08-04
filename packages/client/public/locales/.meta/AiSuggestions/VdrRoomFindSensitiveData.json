@@ -1,0 +1,28 @@
+{
+  "key_path": "VdrRoomFindSensitiveData",
+  "content": "Find sensitive data",
+  "content_en_sha1_hash": "7276eb818fe2f3d1703ad246b103cb71993d1b9c",
+  "created_at": "2026-08-04T09:58:55.227Z",
+  "updated_at": "2026-08-04T09:58:56.436Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 602,
+      "context": "collaborationRoom: insideRoom,\n \n // +\n vdrRoom: [\n {\n name: t(\"AiSuggestions:VdrRoomFindSensitiveData\"),\n prompt: t(\"AiSuggestions:VdrRoomFindSensitiveDataPrompt\"),\n },\n {\n name: t(\"AiSuggestions:VdrRoomOrganizeVDRDocuments\"),\n prompt: t(\"AiSuggestions:VdrRoomOrganizeVDRDocumentsPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

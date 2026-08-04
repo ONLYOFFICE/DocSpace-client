@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesTrashWhatSInTrash",
+  "content": "What's in Trash",
+  "content_en_sha1_hash": "3e508b2651b3a765076a262a26ef5bd5c75304ad",
+  "created_at": "2026-08-04T09:58:55.141Z",
+  "updated_at": "2026-08-04T09:58:56.408Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 294,
+      "context": "],\n \n // +\n filesTrash: [\n {\n name: t(\"AiSuggestions:FilesTrashWhatSInTrash\"),\n prompt: t(\"AiSuggestions:FilesTrashWhatSInTrashPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashFindADeletedFile\"),\n prompt: t(\"AiSuggestions:FilesTrashFindADeletedFilePrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "FormSpaceResultsFindCommonAnswersPrompt",
+  "content": "Identify recurring answers and themes across completed submissions and show their frequency. If this information is not provided, ask me for the form, date range, respondent segment, and questions to include.",
+  "content_en_sha1_hash": "c3ebf188d68d5f0b2c1f7738660ae5fc4c17ae5a",
+  "created_at": "2026-08-04T09:58:55.153Z",
+  "updated_at": "2026-08-04T09:58:56.402Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 180,
+      "context": "name: t(\"AiSuggestions:FormSpaceResultsShowKeyMetrics\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsShowKeyMetricsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswersPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

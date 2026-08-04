@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesSelectedFileConvertFilePrompt",
+  "content": "Convert the selected file to another format. Ask me for the target format and keep the original file unchanged.",
+  "content_en_sha1_hash": "aa6f0d44abe07ff634e2f831c9d3c390dfa36e0c",
+  "created_at": "2026-08-04T09:58:55.130Z",
+  "updated_at": "2026-08-04T09:58:56.411Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 350,
+      "context": "name: t(\"AiSuggestions:FilesSelectedFileConvertToATable\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileConvertToATablePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesSelectedFileConvertFile\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileConvertFilePrompt\"),\n },\n {\n name: t(\n \"AiSuggestions:FilesSelectedFileCreateAPresentationFromTheFile\",\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

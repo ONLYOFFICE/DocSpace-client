@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesRecentSummarizeRecentFilesPrompt",
+  "content": "Summarize the files in the current Recent list and highlight their main topics, decisions, tasks, and deadlines. If this information is not provided, ask me for the desired scope, focus, and summary length.",
+  "content_en_sha1_hash": "b5135cbd0cc074d1fb7371db970aae6d33124b33",
+  "created_at": "2026-08-04T09:58:55.129Z",
+  "updated_at": "2026-08-04T09:58:56.406Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 257,
+      "context": "// +\n filesRecent: [\n {\n name: t(\"AiSuggestions:FilesRecentSummarizeRecentFiles\"),\n prompt: t(\"AiSuggestions:FilesRecentSummarizeRecentFilesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesRecentFindRecentFilesByTopic\"),\n prompt: t(\"AiSuggestions:FilesRecentFindRecentFilesByTopicPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsTemplatesRecommendARoomTemplate",
+  "content": "Recommend a room template",
+  "content_en_sha1_hash": "5ff075955960da54bdd2b945497e2ca50d381ce3",
+  "created_at": "2026-08-04T09:58:55.216Z",
+  "updated_at": "2026-08-04T09:58:56.424Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 465,
+      "context": "],\n \n // +\n roomsTemplates: [\n {\n name: t(\"AiSuggestions:RoomsTemplatesRecommendARoomTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesRecommendARoomTemplatePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsTemplatesCreateARoomFromATemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesCreateARoomFromATemplatePrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesTrashWhatCanBeDeletedPermanentlyPrompt",
+  "content": "Review items in Trash and identify what appears safe to delete permanently without deleting anything yet. If this information is not provided, ask me for the exact items and confirmation before any destructive action.",
+  "content_en_sha1_hash": "5392dd89160784cde98c0d6312adfbb5265dedda",
+  "created_at": "2026-08-04T09:58:55.141Z",
+  "updated_at": "2026-08-04T09:58:56.409Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 307,
+      "context": "name: t(\"AiSuggestions:FilesTrashRestoreSelectedItems\"),\n prompt: t(\"AiSuggestions:FilesTrashRestoreSelectedItemsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashWhatCanBeDeletedPermanently\"),\n prompt: t(\"AiSuggestions:FilesTrashWhatCanBeDeletedPermanentlyPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashEmptyTrash\"),\n prompt: t(\"AiSuggestions:FilesTrashEmptyTrashPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

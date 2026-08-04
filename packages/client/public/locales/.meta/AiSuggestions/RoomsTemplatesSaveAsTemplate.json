@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsTemplatesSaveAsTemplate",
+  "content": "Save as template",
+  "content_en_sha1_hash": "e438319cba9a62ebf3bedfae2f7c1d57a2785c0e",
+  "created_at": "2026-08-04T09:58:55.217Z",
+  "updated_at": "2026-08-04T09:58:56.424Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 483,
+      "context": "name: t(\"AiSuggestions:RoomsTemplatesUpdateTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesUpdateTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTemplatesSaveAsTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesSaveAsTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n ],",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "FormSpaceSummarizeSpace",
+  "content": "Summarize space",
+  "content_en_sha1_hash": "860190d98777ea292372cf8e1ed368a9f9f15346",
+  "created_at": "2026-08-04T09:58:55.158Z",
+  "updated_at": "2026-08-04T09:58:56.464Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 772,
+      "context": "],\n \n // +\n formSpace: [\n {\n name: t(\"AiSuggestions:FormSpaceSummarizeSpace\"),\n prompt: t(\"AiSuggestions:FormSpaceSummarizeSpacePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceCreateAFormWithAI\"),\n prompt: t(\"AiSuggestions:FormSpaceCreateAFormWithAIPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

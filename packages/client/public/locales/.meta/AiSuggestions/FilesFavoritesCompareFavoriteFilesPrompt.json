@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesFavoritesCompareFavoriteFilesPrompt",
+  "content": "Compare my favorite files and highlight the most meaningful similarities, differences, and conflicts. If this information is not provided, ask me for the items, groups, or periods to compare and the comparison criteria.",
+  "content_en_sha1_hash": "c08287d3cffda09d9b0c96401ed9c016a3d9fd3c",
+  "created_at": "2026-08-04T09:58:55.109Z",
+  "updated_at": "2026-08-04T09:58:56.408Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 283,
+      "context": "\"AiSuggestions:FilesFavoritesFindInformationInFavoritesPrompt\",\n ),\n },\n {\n name: t(\"AiSuggestions:FilesFavoritesCompareFavoriteFiles\"),\n prompt: t(\"AiSuggestions:FilesFavoritesCompareFavoriteFilesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFavoritesCopyToAFolder\"),\n prompt: t(\"AiSuggestions:FilesFavoritesCopyToAFolderPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

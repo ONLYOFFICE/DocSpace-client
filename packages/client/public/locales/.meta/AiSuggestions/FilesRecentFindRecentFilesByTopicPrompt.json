@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesRecentFindRecentFilesByTopicPrompt",
+  "content": "Find files in the current Recent list that match a topic and explain why each result is relevant. If this information is not provided, ask me for the search term and any useful filters such as owner, date, type, or status.",
+  "content_en_sha1_hash": "84d5f0473cba3f5cb639243e361bcec697d49e9e",
+  "created_at": "2026-08-04T09:58:55.127Z",
+  "updated_at": "2026-08-04T09:58:56.407Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 261,
+      "context": "name: t(\"AiSuggestions:FilesRecentSummarizeRecentFiles\"),\n prompt: t(\"AiSuggestions:FilesRecentSummarizeRecentFilesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesRecentFindRecentFilesByTopic\"),\n prompt: t(\"AiSuggestions:FilesRecentFindRecentFilesByTopicPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesRecentOrganizeRecentFiles\"),\n prompt: t(\"AiSuggestions:FilesRecentOrganizeRecentFilesPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

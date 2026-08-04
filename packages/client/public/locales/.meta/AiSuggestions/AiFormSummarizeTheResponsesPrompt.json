@@ -1,0 +1,28 @@
+{
+  "key_path": "AiFormSummarizeTheResponsesPrompt",
+  "content": "Summarize the answers filled into the attached form and highlight the key facts, decisions, and dates. If this information is not provided, ask me for the desired scope, focus, and summary length.",
+  "content_en_sha1_hash": "0e7db4481e32c63528bfeadbd5ef3720f0822e3f",
+  "created_at": "2026-08-04T09:58:55.106Z",
+  "updated_at": "2026-08-04T09:58:56.468Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 834,
+      "context": "name: t(\"AiSuggestions:AiFormCheckTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormCheckTheAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormSummarizeTheResponses\"),\n prompt: t(\"AiSuggestions:AiFormSummarizeTheResponsesPrompt\"),\n },\n ],\n \n default: [],\n // `satisfies` (rather than an annotation) keeps the literal section keys",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesFavoritesCopyToAFolder",
+  "content": "Copy to a folder",
+  "content_en_sha1_hash": "89e5f13b2ac3c768e30a84e9a625a9d41ea0382d",
+  "created_at": "2026-08-04T09:58:55.109Z",
+  "updated_at": "2026-08-04T09:58:56.408Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 286,
+      "context": "{\n name: t(\"AiSuggestions:FilesFavoritesCompareFavoriteFiles\"),\n prompt: t(\"AiSuggestions:FilesFavoritesCompareFavoriteFilesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFavoritesCopyToAFolder\"),\n prompt: t(\"AiSuggestions:FilesFavoritesCopyToAFolderPrompt\"),\n },\n ],\n \n // +",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

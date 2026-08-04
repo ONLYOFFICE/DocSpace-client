@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsFindRoomsByParticipantPrompt",
+  "content": "Find rooms that include a specific participant. Ask me for the person’s name or email address and, if needed, their role.",
+  "content_en_sha1_hash": "a5dddc902fd5859872729deb030d2f7e267b5fb1",
+  "created_at": "2026-08-04T09:58:55.205Z",
+  "updated_at": "2026-08-04T09:58:56.421Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 401,
+      "context": "name: t(\"AiSuggestions:RoomsHelpMeChooseARoomType\"),\n prompt: t(\"AiSuggestions:RoomsHelpMeChooseARoomTypePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsFindRoomsByParticipant\"),\n prompt: t(\"AiSuggestions:RoomsFindRoomsByParticipantPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsFindARoomByFile\"),\n prompt: t(\"AiSuggestions:RoomsFindARoomByFilePrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

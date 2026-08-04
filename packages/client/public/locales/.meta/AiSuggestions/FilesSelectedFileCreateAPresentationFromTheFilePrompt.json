@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesSelectedFileCreateAPresentationFromTheFilePrompt",
+  "content": "Create a presentation based on the selected file and show the proposed slide outline before generating it. If this information is not provided, ask me for the audience, purpose, preferred length, and visual style.",
+  "content_en_sha1_hash": "d72dc4974d38c6e75368143f41a63c09e3eddd42",
+  "created_at": "2026-08-04T09:58:55.132Z",
+  "updated_at": "2026-08-04T09:58:56.411Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 357,
+      "context": "{\n name: t(\n \"AiSuggestions:FilesSelectedFileCreateAPresentationFromTheFile\",\n ),\n prompt: t(\n \"AiSuggestions:FilesSelectedFileCreateAPresentationFromTheFilePrompt\",\n ),\n },\n {\n name: t(\"AiSuggestions:FilesSelectedFileTranslateAndSaveACopy\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileTranslateAndSaveACopyPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

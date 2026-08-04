@@ -43,7 +43,6 @@ import { InputBlock } from "@docspace/ui-kit/components/input-block";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
-import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
@@ -57,6 +56,8 @@ const URL_REGEX =
   /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
+const SECRET_KEY_MASK_CHAR = "•";
+const SECRET_KEY_MASK = SECRET_KEY_MASK_CHAR.repeat(16);
 
 const DocumentService = ({
   changeDocumentServiceLocation,
@@ -81,7 +82,7 @@ const DocumentService = ({
 
   const [isDisabledCertificat, setIsDisabledCertificat] = useState(false);
 
-  const [secretKey, setSecretKey] = useState("");
+  const [secretKey, setSecretKey] = useState(SECRET_KEY_MASK);
   const [authHeader, setAuthHeader] = useState("");
 
   const [portalUrl, setPortalUrl] = useState("");
@@ -90,11 +91,10 @@ const DocumentService = ({
   const [internalUrlIsValid, setInternalUrlIsValid] = useState(true);
 
   const [isDefaultSettings, setIsDefaultSettings] = useState(false);
-  const [secretKeyVersion, setSecretKeyVersion] = useState(0);
   const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
 
   const [initPortalUrl, setInitPortalUrl] = useState("");
-  const [initSecretKey, setInitSecretKey] = useState("");
+  const [initSecretKey, setInitSecretKey] = useState(SECRET_KEY_MASK);
   const [initAuthHeader, setInitAuthHeader] = useState("");
   const [initDocServiceUrl, setInitDocServiceUrl] = useState("");
   const [initInternalUrl, setInitInternalUrl] = useState("");
@@ -109,25 +109,33 @@ const DocumentService = ({
     fetchDocsConnectConnection?.();
   }, [fetchDocsConnectConnection]);
 
+  const applySecretKey = (value) => {
+    const nextValue = value || SECRET_KEY_MASK;
+    setSecretKey(nextValue);
+    setInitSecretKey(nextValue);
+  };
+
   useEffect(() => {
     if (initialDocumentServiceData) {
       const result = initialDocumentServiceData;
       setIsDefaultSettings(result?.isDefault || false);
       setPortalUrl(result?.docServicePortalUrl);
-      setSecretKey(result?.docServiceSignatureSecret);
+      applySecretKey(result?.docServiceSignatureSecret);
       setAuthHeader(result?.docServiceSignatureHeader);
       setInternalUrl(result?.docServiceUrlInternal);
       setDocServiceUrl(result?.docServiceUrl);
       setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
       setInitPortalUrl(result?.docServicePortalUrl);
-      setInitSecretKey(result?.docServiceSignatureSecret);
       setInitAuthHeader(result?.docServiceSignatureHeader);
       setInitDocServiceUrl(result?.docServiceUrl);
       setInitInternalUrl(result?.docServiceUrlInternal);
       setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
     }
   }, [initialDocumentServiceData]);
+
+  const isSecretKeyMasked = secretKey === SECRET_KEY_MASK;
+  const secretKeyToSave = isSecretKeyMasked ? undefined : secretKey;
 
   const onChangeDocServiceUrl = (e) => {
     setDocServiceUrl(e.target.value);
@@ -144,7 +152,14 @@ const DocumentService = ({
   };
 
   const onChangeSecretKey = (e) => {
-    setSecretKey(e.target.value);
+    const { value } = e.target;
+
+    if (isSecretKeyMasked) {
+      setSecretKey(value.split(SECRET_KEY_MASK_CHAR).join(""));
+      return;
+    }
+
+    setSecretKey(value);
   };
 
   const onChangeIsShowAdvancedSettings = () => {
@@ -169,7 +184,7 @@ const DocumentService = ({
 
     changeDocumentServiceLocation(
       docServiceUrl,
-      secretKey,
+      secretKeyToSave,
       authHeader ?? initAuthHeader,
       internalUrl,
       portalUrl,
@@ -181,14 +196,12 @@ const DocumentService = ({
         setIsDefaultSettings(result?.isDefault || false);
         setPortalUrl(result?.docServicePortalUrl);
         setAuthHeader(result?.docServiceSignatureHeader);
-        // API omits secret key from response for security; preserve current value
-        setSecretKey(result?.docServiceSignatureSecret ?? secretKey);
+        applySecretKey(result?.docServiceSignatureSecret);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
         setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitSecretKey(result?.docServiceSignatureSecret ?? secretKey); // keep in sync with secretKey above
         setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
         setInitInternalUrl(result?.docServiceUrlInternal);
@@ -213,13 +226,12 @@ const DocumentService = ({
         setIsDefaultSettings(result?.isDefault || false);
         setPortalUrl(result?.docServicePortalUrl);
         setAuthHeader(result?.docServiceSignatureHeader);
-        setSecretKey(result?.docServiceSignatureSecret || "");
+        applySecretKey(result?.docServiceSignatureSecret);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
         setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitSecretKey(result?.docServiceSignatureSecret || "");
         setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
         setInitInternalUrl(result?.docServiceUrlInternal);
@@ -228,7 +240,6 @@ const DocumentService = ({
         );
 
         setIsShowAdvancedSettings(false);
-        setSecretKeyVersion((v) => v + 1);
       })
       .catch((e) => toastr.error(e))
       .finally(() => setResetIsLoading(false));
@@ -242,7 +253,7 @@ const DocumentService = ({
       setIsDefaultSettings(result?.isDefault || false);
       setPortalUrl(result?.docServicePortalUrl);
       setAuthHeader(result?.docServiceSignatureHeader);
-      setSecretKey(
+      applySecretKey(
         result?.docServiceSignatureSecret ?? docsConnectConnection?.secret,
       );
       setInternalUrl(result?.docServiceUrlInternal);
@@ -250,15 +261,11 @@ const DocumentService = ({
       setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
       setInitPortalUrl(result?.docServicePortalUrl);
-      setInitSecretKey(
-        result?.docServiceSignatureSecret ?? docsConnectConnection?.secret,
-      );
       setInitAuthHeader(result?.docServiceSignatureHeader);
       setInitDocServiceUrl(result?.docServiceUrl);
       setInitInternalUrl(result?.docServiceUrlInternal);
       setInitIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
-      setSecretKeyVersion((v) => v + 1);
       toastr.success(t("Common:ChangesSavedSuccessfully"));
       setConnectDialogVisible(false);
     } catch (e) {
@@ -284,7 +291,11 @@ const DocumentService = ({
     !!docsConnectConnection && !isConnectedToDocsConnect;
 
   const isFormEmpty =
-    !docServiceUrl && !internalUrl && !portalUrl && !authHeader && !secretKey;
+    !docServiceUrl &&
+    !internalUrl &&
+    !portalUrl &&
+    !authHeader &&
+    !secretKeyToSave;
   const allInputsValid =
     docServiceUrlIsValid && internalUrlIsValid && portalUrlIsValid;
 
@@ -417,19 +428,18 @@ const DocumentService = ({
                 {`(${t("Settings:DocumentServiceSecretKeySubtitle")})`}
               </Text>
             </div>
-            <PasswordInput
-              key={secretKeyVersion}
+            <InputBlock
               id="secretKey"
-              inputName="secret_key"
-              type="password"
-              simpleView
+              name="secret_key"
+              type={isSecretKeyMasked ? "password" : "text"}
+              autoComplete="off"
               tabIndex={2}
               scale
-              inputValue={secretKey}
+              noIcon
+              value={secretKey}
               onChange={onChangeSecretKey}
               isDisabled={isSaveLoading || isResetLoading}
-              className={styles.passwordInput}
-              testId="secret_key_input"
+              dataTestId="secret_key_input"
             />
             <Text className={styles.subtitle}>
               {t("Settings:DocumentServiceSecretKeySubtitle")}

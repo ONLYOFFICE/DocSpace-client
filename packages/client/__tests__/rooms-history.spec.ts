@@ -34,8 +34,9 @@
  */
 
 import type { Page } from "@playwright/test";
-import { RoomsType } from "@docspace/ui-kit/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/ui-kit/enums";
 import {
+  selfByTypeHandler,
   settingsHandler,
   TypeSettings,
   filesSettingsHandler,
@@ -65,6 +66,17 @@ const ROOM_CONTENT_URL = `/rooms/shared/${ROOM_ID}/filter?folder=${ROOM_ID}`;
 const FIXED_NOW = "2026-03-18T10:00:00.000Z";
 
 const REPORT_URL = "/products/files/httphandlers/filehandler.ashx?report=42";
+
+// The room mocks are created by the signed-in administrator, so the role checks
+// need a room owned by somebody else
+const OTHER_ROOM_OWNER = {
+  id: "another-room-owner-id",
+  displayName: "Room Owner",
+  avatarSmall: "",
+  profileUrl: "",
+  hasAvatar: false,
+  isAnonim: false,
+};
 
 const FEEDS = [
   { id: 1, date: "2026-03-18T09:00:00.000Z", title: "Gamma" },
@@ -557,6 +569,64 @@ test.describe("Rooms — info panel history", () => {
       await expect(toast).toContainText("The maximum file size is exceeded");
 
       await expect(exportButton).toBeEnabled();
+    });
+
+    test("should hide the export for a viewer room role", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      mockRequest.use(
+        roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID, {
+          roomType: RoomsType.VirtualDataRoom,
+          access: ShareAccessRights.ReadOnly,
+          createdBy: OTHER_ROOM_OWNER,
+        }),
+      );
+
+      await openHistoryPanel(page, baseUrl);
+
+      await expect(page.getByTestId("info_history_toolbar")).toBeVisible();
+      await expect(page.getByTestId("info_history_calendar")).toBeVisible();
+      await expect(page.getByTestId("info_history_export")).toBeHidden();
+    });
+
+    test("should keep the export for an editor room role", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      mockRequest.use(
+        roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID, {
+          roomType: RoomsType.VirtualDataRoom,
+          access: ShareAccessRights.Editing,
+          createdBy: OTHER_ROOM_OWNER,
+        }),
+      );
+
+      await openHistoryPanel(page, baseUrl);
+
+      await expect(page.getByTestId("info_history_export")).toBeVisible();
+    });
+
+    test("should hide the export for the guest type", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      mockRequest.use(
+        selfByTypeHandler(TEST_PORT, "visitor"),
+        roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID, {
+          roomType: RoomsType.VirtualDataRoom,
+          access: ShareAccessRights.RoomManager,
+          createdBy: OTHER_ROOM_OWNER,
+        }),
+      );
+
+      await openHistoryPanel(page, baseUrl);
+
+      await expect(page.getByTestId("info_history_calendar")).toBeVisible();
+      await expect(page.getByTestId("info_history_export")).toBeHidden();
     });
   });
 });

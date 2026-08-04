@@ -33,33 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { ShareAccessRights } from "@docspace/shared/enums";
-import type { Nullable } from "@docspace/shared/types";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
-export type HistoryToolbarProps = {
-  roomId: number | string;
-  roomAccess: Nullable<ShareAccessRights>;
-  roomCreatedById?: string;
-  roomCreationDate?: string;
-  selectedDay: Nullable<string>;
+import type { CanExportRoomHistoryArgs } from "./Toolbar.types";
 
-  onSelectDay: (day: Nullable<string>) => void;
-};
+const HISTORY_REPORT_ACCESS: ShareAccessRights[] = [
+  ShareAccessRights.RoomManager,
+  ShareAccessRights.Editing,
+  ShareAccessRights.Collaborator,
+];
 
-export type InjectedHistoryToolbarProps = Pick<
-  TStore["infoPanelStore"],
-  | "getRoomHistoryReport"
-  | "markRoomHistoryReportPageLeft"
-  | "isRoomHistoryReportDownloading"
-  | "setIsScrollLocked"
-> & {
-  currentUserId?: string;
-  isVisitor?: boolean;
-};
+export const canExportRoomHistory = ({
+  roomAccess,
+  roomCreatedById,
+  currentUserId,
+  isVisitor,
+}: CanExportRoomHistoryArgs) => {
+  if (isVisitor) return false;
 
-export type CanExportRoomHistoryArgs = {
-  roomAccess: Nullable<ShareAccessRights>;
-  roomCreatedById?: string;
-  currentUserId?: string;
-  isVisitor?: boolean;
+  if (roomCreatedById && roomCreatedById === currentUserId) return true;
+
+  return roomAccess !== null && HISTORY_REPORT_ACCESS.includes(roomAccess);
 };

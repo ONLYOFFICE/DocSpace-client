@@ -46,10 +46,13 @@ import type {
   HistoryToolbarProps,
   InjectedHistoryToolbarProps,
 } from "./Toolbar.types";
+import { canExportRoomHistory } from "./Toolbar.utils";
 import styles from "./Toolbar.module.scss";
 
 const HistoryToolbar = ({
   roomId,
+  roomAccess,
+  roomCreatedById,
   roomCreationDate,
   selectedDay,
   onSelectDay,
@@ -58,6 +61,8 @@ const HistoryToolbar = ({
   markRoomHistoryReportPageLeft,
   isRoomHistoryReportDownloading,
   setIsScrollLocked,
+  currentUserId,
+  isVisitor,
 }: HistoryToolbarProps & InjectedHistoryToolbarProps) => {
   const { i18n } = useTranslation();
 
@@ -71,6 +76,13 @@ const HistoryToolbar = ({
 
   const roomCreatedDate = parseToDateTime(roomCreationDate);
 
+  const canExport = canExportRoomHistory({
+    roomAccess,
+    roomCreatedById,
+    currentUserId,
+    isVisitor,
+  });
+
   return (
     <div className={styles.toolbar} data-testid="info_history_toolbar">
       <DateFilter
@@ -81,19 +93,21 @@ const HistoryToolbar = ({
         setIsScrollLocked={setIsScrollLocked}
       />
 
-      <ExportMenu
-        key={roomId}
-        isReportGenerating={isRoomHistoryReportDownloading}
-        earliestDate={roomCreatedDate}
-        locale={i18n.language}
-        onExport={onExportHistory}
-      />
+      {canExport ? (
+        <ExportMenu
+          key={roomId}
+          isReportGenerating={isRoomHistoryReportDownloading}
+          earliestDate={roomCreatedDate}
+          locale={i18n.language}
+          onExport={onExportHistory}
+        />
+      ) : null}
     </div>
   );
 };
 
 export default inject<TStore, HistoryToolbarProps, InjectedHistoryToolbarProps>(
-  ({ infoPanelStore }: TStore) => {
+  ({ infoPanelStore, userStore }: TStore) => {
     const {
       getRoomHistoryReport,
       markRoomHistoryReportPageLeft,
@@ -106,6 +120,8 @@ export default inject<TStore, HistoryToolbarProps, InjectedHistoryToolbarProps>(
       markRoomHistoryReportPageLeft,
       isRoomHistoryReportDownloading,
       setIsScrollLocked,
+      currentUserId: userStore?.user?.id,
+      isVisitor: userStore?.user?.isVisitor,
     };
   },
 )(observer(HistoryToolbar as FC<HistoryToolbarProps>));

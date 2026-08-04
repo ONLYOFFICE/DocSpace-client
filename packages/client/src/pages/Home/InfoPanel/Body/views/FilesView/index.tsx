@@ -435,6 +435,8 @@ const FilesView = ({
       {historyRoom ? (
         <HistoryToolbar
           roomId={historyRoom.id}
+          roomAccess={historyRoom.access}
+          roomCreatedById={historyRoom.createdBy?.id}
           roomCreationDate={historyRoom.created}
           selectedDay={historyDay}
           onSelectDay={selectHistoryDay}

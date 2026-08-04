@@ -69,6 +69,12 @@ export const ExportDateRange = ({
 
   useClickOutside(containerRef, closeCalendar);
 
+  const onOutsideFieldsClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLElement).closest(`.${styles.calendar}`)) return;
+
+    closeCalendar();
+  };
+
   const { isMobileView, isShrunk, height, refreshPlacement } =
     useCalendarViewport(containerRef);
 
@@ -97,10 +103,13 @@ export const ExportDateRange = ({
     <div
       ref={containerRef}
       className={styles.container}
+      onClick={onOutsideFieldsClick}
       data-testid="info_history_export_date_range"
     >
       {edges.map(({ edge, label }) => {
-        const openCalendar = () => {
+        const openCalendar = (event: React.MouseEvent) => {
+          event.stopPropagation();
+
           refreshPlacement();
           setOpenedEdge(edge);
         };

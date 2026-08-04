@@ -78,6 +78,7 @@ export interface RoomsModuleProps {
   isFreeBackupsLimitReached?: boolean;
   copyButtonLabel?: string;
   isToppingUp?: boolean;
+  isCopyBlocked?: boolean;
 
   toDefault: VoidFunction;
   setBasePath: (folders: TBreadCrumb[]) => void;
@@ -107,6 +108,7 @@ const RoomsModule = ({
   isFreeBackupsLimitReached,
   copyButtonLabel,
   isToppingUp,
+  isCopyBlocked,
 }: RoomsModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -166,7 +168,7 @@ const RoomsModule = ({
     }
   };
 
-  const isModuleDisabled = !isMaxProgress || isStartCopy;
+  const isModuleDisabled = !isMaxProgress || isStartCopy || isCopyBlocked;
 
   const formProps = useMemo(
     () => ({

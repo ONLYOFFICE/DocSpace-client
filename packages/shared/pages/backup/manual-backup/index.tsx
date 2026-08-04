@@ -35,7 +35,7 @@
 
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
@@ -221,6 +221,23 @@ const ManualBackup = ({
     walletBalance < backupServicePrice;
 
   const isTopUpBeforeCopy = isBalanceInsufficient && isPayer && isCardLinked;
+
+  const isCopyBlocked = isBalanceInsufficient && !isPayer;
+
+  // Memoized: StatusMessage replays its show animation whenever the message
+  // identity changes, so a fresh element on every render makes it blink.
+  const insufficientFundsMessage = useMemo(
+    () =>
+      isCopyBlocked
+        ? getPaymentError(
+            t,
+            false,
+            walletCustomerEmail ?? "",
+            backupServicePrice ?? 0,
+          )
+        : "",
+    [isCopyBlocked, t, walletCustomerEmail, backupServicePrice],
+  );
 
   const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);
 
@@ -454,6 +471,7 @@ const ManualBackup = ({
     buttonSize,
     copyButtonLabel,
     isToppingUp,
+    isCopyBlocked,
   };
 
   const onCancelOperation = async () => {
@@ -470,9 +488,9 @@ const ManualBackup = ({
 
   if (isInitialLoading) return <DataBackupLoader />;
 
-  const mainDisabled = !isMaxProgress || pageIsDisabled;
+  const mainDisabled = !isMaxProgress || pageIsDisabled || isCopyBlocked;
   const additionalDisabled =
-    !isMaxProgress || isNotPaidPeriod || pageIsDisabled;
+    !isMaxProgress || isNotPaidPeriod || pageIsDisabled || isCopyBlocked;
   const isDownloadButton =
     temporaryLink && temporaryLink.length > 0 && isMaxProgress;
   const isCreateButtonDisabled = mainDisabled && !isDownloadButton;
@@ -480,8 +498,13 @@ const ManualBackup = ({
   return (
     <div className={styles.manualBackup} data-testid="manual-backup-wrapper">
       <StatusMessage
-        message={errorMessage || errorInformation || backupProgressWarning}
-        isWarning={!!backupProgressWarning}
+        message={
+          errorMessage ||
+          insufficientFundsMessage ||
+          errorInformation ||
+          backupProgressWarning
+        }
+        isWarning={!!backupProgressWarning && !insufficientFundsMessage}
       />
       <div
         className={classNames(

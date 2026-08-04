@@ -70,6 +70,7 @@ interface GoogleCloudStorageProps {
   onMakeCopyIntoStorage: () => Promise<void>;
   copyButtonLabel?: string;
   isToppingUp?: boolean;
+  isCopyBlocked?: boolean;
   setCompletedFormFields: (
     values: Record<string, string>,
     module?: string,
@@ -90,6 +91,7 @@ const GoogleCloudStorage = ({
   onMakeCopyIntoStorage,
   copyButtonLabel,
   isToppingUp,
+  isCopyBlocked,
   t,
   isNeedFilePath,
   errorsFieldsBeforeSafe,
@@ -147,7 +149,11 @@ const GoogleCloudStorage = ({
           onClick={onMakeCopyIntoStorage}
           primary
           isDisabled={
-            !isValidForm || !isMaxProgress || isDisabled || isToppingUp
+            !isValidForm ||
+            !isMaxProgress ||
+            isDisabled ||
+            isToppingUp ||
+            isCopyBlocked
           }
           isLoading={isToppingUp}
           size={buttonSize}

@@ -71,6 +71,7 @@ interface RackspaceStorageProps {
   onMakeCopyIntoStorage: () => Promise<void>;
   copyButtonLabel?: string;
   isToppingUp?: boolean;
+  isCopyBlocked?: boolean;
   setIsThirdStorageChanged: (changed: boolean) => void;
   setCompletedFormFields: (
     values: Record<string, string>,
@@ -97,6 +98,7 @@ const RackspaceStorage = ({
   onMakeCopyIntoStorage,
   copyButtonLabel,
   isToppingUp,
+  isCopyBlocked,
   t,
   isThirdPartyAvailable,
 }: RackspaceStorageProps) => {
@@ -146,7 +148,11 @@ const RackspaceStorage = ({
           onClick={onMakeCopyIntoStorage}
           primary
           isDisabled={
-            !isValidForm || !isMaxProgress || isDisabled || isToppingUp
+            !isValidForm ||
+            !isMaxProgress ||
+            isDisabled ||
+            isToppingUp ||
+            isCopyBlocked
           }
           isLoading={isToppingUp}
           size={buttonSize}

@@ -209,7 +209,7 @@ export default inject(
 
     const pageIsDisabled = isManagement()
       ? portals?.length === 1 || !backupPageEnable
-      : !backupPageEnable;
+      : false;
 
     // TODO: fix may be an empty object!!!
     const removeItem = (selectedThirdPartyAccount ??

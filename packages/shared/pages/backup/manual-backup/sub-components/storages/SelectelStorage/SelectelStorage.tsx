@@ -69,6 +69,7 @@ interface SelectelStorageProps {
   onMakeCopyIntoStorage: () => Promise<void>;
   copyButtonLabel?: string;
   isToppingUp?: boolean;
+  isCopyBlocked?: boolean;
   setRequiredFormSettings: (arr: string[]) => void;
   setIsThirdStorageChanged: (changed: boolean) => void;
   addValueInFormSettings: (name: string, value: string) => void;
@@ -93,6 +94,7 @@ const SelectelStorage = ({
   onMakeCopyIntoStorage,
   copyButtonLabel,
   isToppingUp,
+  isCopyBlocked,
   setCompletedFormFields,
   addValueInFormSettings,
   setRequiredFormSettings,
@@ -146,7 +148,11 @@ const SelectelStorage = ({
           onClick={onMakeCopyIntoStorage}
           primary
           isDisabled={
-            !isValidForm || !isMaxProgress || isDisabled || isToppingUp
+            !isValidForm ||
+            !isMaxProgress ||
+            isDisabled ||
+            isToppingUp ||
+            isCopyBlocked
           }
           isLoading={isToppingUp}
           size={buttonSize}

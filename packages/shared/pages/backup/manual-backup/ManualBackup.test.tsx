@@ -490,6 +490,29 @@ describe("ManualBackup", () => {
       expect(screen.getByText("Common:Create")).toBeInTheDocument();
     });
 
+    it("blocks the copy for a non-payer and explains why", () => {
+      render(<ManualBackup {...paidProps} isPayer={false} />);
+
+      expect(
+        screen.getByText("InsufficientFundsWithContact"),
+      ).toBeInTheDocument();
+      expect(screen.getByText("Common:Create").closest("button")).toBeDisabled();
+      expect(screen.getByLabelText("Common:RoomsModule")).toBeDisabled();
+      expect(screen.getByLabelText("Common:ThirdPartyResource")).toBeDisabled();
+      expect(screen.getByLabelText("Common:ThirdPartyStorage")).toBeDisabled();
+    });
+
+    it("does not block the copy for the payer", () => {
+      render(<ManualBackup {...paidProps} />);
+
+      expect(
+        screen.queryByText("InsufficientFundsWithContact"),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText("Common:TopUpAndMakeCopy").closest("button"),
+      ).not.toBeDisabled();
+    });
+
     it("keeps the plain button when no card is linked", () => {
       render(<ManualBackup {...paidProps} isCardLinked={false} />);
 

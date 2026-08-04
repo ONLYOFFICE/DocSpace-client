@@ -70,6 +70,7 @@ interface ThirdPartyModuleProps {
 	isFreeBackupsLimitReached?: boolean;
 	copyButtonLabel?: string;
 	isToppingUp?: boolean;
+	isCopyBlocked?: boolean;
 
 	connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
 	isTheSameThirdPartyAccount: boolean;
@@ -140,6 +141,7 @@ const ThirdPartyModule = ({
 	isFreeBackupsLimitReached,
 	copyButtonLabel,
 	isToppingUp,
+	isCopyBlocked,
 }: ThirdPartyModuleProps) => {
 	const isMountRef = useRef(false);
 	const folderRef = useRef("");
@@ -191,7 +193,7 @@ const ThirdPartyModule = ({
 		setIsStartCopy(false);
 	};
 
-	const isModuleDisabled = !isMaxProgress || isStartCopy;
+	const isModuleDisabled = !isMaxProgress || isStartCopy || isCopyBlocked;
 
 	const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
 

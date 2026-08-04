@@ -25,6 +25,9 @@ overrides:
   # Single mobx instance across the workspace (libs/ui-kit submodule pins 6.13.5)
   mobx: "6.16.1"
   mobx-react: "9.2.2"
+  # Single react instance across the workspace; react-router 8 needs >=19.2.7
+  react: "19.2.8"
+  react-dom: "19.2.8"
   on-headers: "^1.1.0"
   "@types/react": "19.2.10"
   "@types/react-dom": "19.2.3"
@@ -63,3 +66,8 @@ overrides:
   form-data: ">=4.0.6"
   vite: ">=8.0.16"
   "@babel/core": ">=7.29.6 <8"
+  # Inherited libvips CVEs; pulled in transitively by next
+  sharp: ">=0.35.0"
+  # Guards against libs/ui-kit submodule drift until its pointer is bumped;
+  # every manifest now pins 8.3.0 directly, so this can be dropped afterwards
+  react-router: "8.3.0"

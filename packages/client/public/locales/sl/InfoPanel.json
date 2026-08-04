@@ -12,7 +12,7 @@
   "FormRoomAIModalConnect": "Poveži z bazo podatkov",
   "FormRoomAIModalDescription": "Povežite se z bazo podatkov za anal v zbranih odgovorov s funkcijo \"Vprašaj umetno inteligenco\". Lahkojujete tudi brez postavlj vpraš le tej obrazci.",
   "FormRoomAIModalTitle": "Pridobite boljše vpoglede",
-  "FormRoomAINotConnectedDescription": "Shrani odgov kot strukturirane podatke. V nastavit so omogočiteronizijoฐาน s bazo, odklenešizo pomočjo AI sjo \"Vprašaj umetno inteligenco\".",
+  "FormRoomAINotConnectedDescription": "Shranite odgovore kot strukturirane podatke. Omogočite sinhronizacijo z bazo podatkov v nastavitvah sobe, da odklenete analizo s pomočjo AI s funkcijo Ask AI.",
   "FormRoomAIProviderNotConnected": "Povežite ponudnika AI v nastavitvah {{productName}}, da analizirate podatke obrazca z \"Vprašaj umetno inteligenco\", ustvarjate diagrame in pridobivate vpoglede.",
   "FormRoomAIProviderNotConnectedAskAdmin": "Prosite <1>skrbnika {{productName}}</1>, da poveže in omogoči ponudnika AI v nastavitvah {{productName}}, da analizirate podatke obrazca z \"Vprašaj umetno inteligenco\", ustvarjate diagrame in pridobivate vpoglede.",
   "FormRoomAIReadyDescriptionFile": "Zahtevajte od AI, da razvije odgovore iz tega obrazca, ustvari uvid in vizualizira podatke.",

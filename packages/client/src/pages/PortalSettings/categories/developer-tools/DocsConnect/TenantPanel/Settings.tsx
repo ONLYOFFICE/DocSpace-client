@@ -93,6 +93,13 @@ interface SettingsProps {
 
 const onlyDigits = (value: string) => value.replace(/\D/g, "");
 
+// `-webkit-text-security` is non-standard and missing in browsers older than
+// Firefox 114, where it would silently render the secret key in clear text.
+const SUPPORTS_TEXT_SECURITY =
+  typeof CSS !== "undefined" &&
+  typeof CSS.supports === "function" &&
+  CSS.supports("-webkit-text-security", "disc");
+
 const Settings = ({
   info,
   copyToClipboard,
@@ -300,13 +307,15 @@ const Settings = ({
           <div className={styles.settingsGroup}>
             <Text fontWeight={600}>
               {t("DocsConnect:UseEditorsInProduct", {
-                productName: getBrandName("ProductName"),
+                organizationName: getBrandName("OrganizationName"),
+                editorsName: getBrandName("ProductEditorsName"),
               })}
             </Text>
             <Text fontSize="13px" className={styles.settingsHint}>
               {t("DocsConnect:DocsConnectionDescription", {
                 service: t("DocsConnect:DocsConnect"),
-                productName: getBrandName("ProductName"),
+                organizationName: getBrandName("OrganizationName"),
+                editorsName: getBrandName("ProductEditorsName"),
               })}
             </Text>
           </div>
@@ -362,7 +371,14 @@ const Settings = ({
         >
           <div className={styles.secretField}>
             <TextInput
-              type={secretRevealed ? InputType.text : InputType.password}
+              // A text input avoids the browser password-manager prompt, and the
+              // value is masked with CSS instead. Where that CSS is unsupported
+              // we fall back to a real password input rather than leak the key.
+              type={
+                secretRevealed || SUPPORTS_TEXT_SECURITY
+                  ? InputType.text
+                  : InputType.password
+              }
               value={general.secret}
               onChange={(e) =>
                 setGeneral((prev) => ({ ...prev, secret: e.target.value }))
@@ -370,7 +386,13 @@ const Settings = ({
               isDisabled={isBusy}
               scale
               withBorder={false}
-              className={styles.secretInput}
+              autoComplete="off"
+              spellCheck={false}
+              className={`${styles.secretInput} ${
+                !secretRevealed && SUPPORTS_TEXT_SECURITY
+                  ? styles.secretMasked
+                  : ""
+              }`}
               testId="docs_connect_settings_secret_input"
             />
             <div className={styles.secretIcons}>
@@ -551,6 +573,7 @@ const Settings = ({
       {addRuleDialogVisible ? (
         <AddRuleDialog
           visible
+          existingAddresses={rules.map((rule) => rule.value)}
           onClose={() => setAddRuleDialogVisible(false)}
           onAdd={onAddRule}
         />

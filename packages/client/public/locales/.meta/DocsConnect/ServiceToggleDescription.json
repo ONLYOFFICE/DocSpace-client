@@ -3,7 +3,7 @@
   "content": "Embed {{productName}} editors into your app with cloud-hosted tenants and your own API keys.",
   "content_en_sha1_hash": "7e67dfc50f79c4f4436f52d3ba0818c53c285379",
   "created_at": "2026-07-27T13:07:48.496Z",
-  "updated_at": "2026-07-27T13:56:33.794Z",
+  "updated_at": "2026-08-01T15:33:49.809Z",
   "comment": {
     "text": "Description for a service toggle component explaining how to embed editors using cloud-hosted tenants and API keys; includes a {{productName}} variable representing the specific product name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 202,
+      "line_number": 242,
       "context": "})\n : t(\"DocsConnect:FromPricePerUserMonthNote\", {\n price: formatCurrency(basePricePerUser, 0),\n })\n }\n description={t(\"DocsConnect:ServiceToggleDescription\", {\n productName: docsName,\n })}\n />\n )}",
       "module": "/libs/ui-kit"
     }

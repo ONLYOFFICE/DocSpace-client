@@ -3,7 +3,7 @@
   "content": "Renews on {{date}} — {{price}}/month (Users: {{count}})",
   "content_en_sha1_hash": "e9df02d812b634b0217948e301db704db146aad0",
   "created_at": "2026-07-27T13:07:48.489Z",
-  "updated_at": "2026-07-27T13:59:36.408Z",
+  "updated_at": "2026-08-01T15:33:49.637Z",
   "comment": {
     "text": "A text label in the Tenant Panel statistics displaying upcoming renewal details, including a formatted {{date}}, monthly {{price}}, and number of users ({{count}}).",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 398,
-      "context": "scheduledChange.dueDate,\n \"DATE_MED\",\n { locale: i18n.language },\n ),\n })\n : t(\"DocsConnect:RenewsOnWithUpdate\", {\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n { locale: i18n.language },\n ),",
+      "line_number": 210,
+      "context": "return t(\"DocsConnect:CancellationOn\", { date: scheduledChangeDate });\n \n if (devPackDisabling)\n return t(\"Common:RenewsOnDate\", { date: scheduledChangeDate });\n \n return t(\"DocsConnect:RenewsOnWithUpdate\", {\n date: scheduledChangeDate,\n price: nextMonthlyPrice,\n count: scheduledChange.nextUsers,\n });\n };",
       "module": "/packages/client"
     }
   ],

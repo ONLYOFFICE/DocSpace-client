@@ -1,0 +1,28 @@
+{
+  "key_path": "AiFormShowTheFieldsPrompt",
+  "content": "List the fields of the attached form with their type, whether they are required, and the value each one currently holds. If this information is not provided, ask me for the desired level of detail.",
+  "content_en_sha1_hash": "b52eaf0fedcbd2ede082da78691ee16d6e5689fd",
+  "created_at": "2026-08-04T09:58:55.105Z",
+  "updated_at": "2026-08-04T09:58:56.467Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 822,
+      "context": "name: t(\"AiSuggestions:AiFormAnalyzeTheForm\"),\n prompt: t(\"AiSuggestions:AiFormAnalyzeTheFormPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormShowTheFields\"),\n prompt: t(\"AiSuggestions:AiFormShowTheFieldsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormWhatIsStillEmpty\"),\n prompt: t(\"AiSuggestions:AiFormWhatIsStillEmptyPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

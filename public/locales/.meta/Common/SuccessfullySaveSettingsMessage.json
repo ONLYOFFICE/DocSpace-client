@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2026-07-30T16:14:11.196Z",
+  "updated_at": "2026-08-01T15:33:49.612Z",
   "comment": {
     "text": "This is a toast message confirming that settings have been successfully saved or updated. It appears briefly after a user makes changes to settings, such as the appearance theme.",
     "is_auto": true,
@@ -115,19 +115,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 158,
+      "line_number": 165,
       "context": "const onApplyToPortal = async () => {\n setIsApplying(true);\n try {\n await applyToDocumentService?.();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n setApplyDialogVisible(false);\n } catch (e) {\n toastr.error(e as Error);\n } finally {\n setIsApplying(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 158,
+      "line_number": 165,
       "context": "const onApplyToPortal = async () => {\n setIsApplying(true);\n try {\n await applyToDocumentService?.();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n setApplyDialogVisible(false);\n } catch (e) {\n toastr.error(e as Error);\n } finally {\n setIsApplying(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 158,
+      "line_number": 165,
       "context": "const onApplyToPortal = async () => {\n setIsApplying(true);\n try {\n await applyToDocumentService?.();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n setApplyDialogVisible(false);\n } catch (e) {\n toastr.error(e as Error);\n } finally {\n setIsApplying(false);",
       "module": "/packages/client"
     },

@@ -34,7 +34,6 @@
  */
 
 @use "@docspace/ui-kit/styles/mixins";
-@use "@docspace/ui-kit/styles/variables/colors" as *;
 
 .location {
   display: flex;
@@ -52,7 +51,7 @@
   max-width: 700px;
   padding: 16px;
   border-radius: 6px;
-  background-color: $gray-light;
+  background-color: var(--info-block-background);
 
   @include mixins.mobile {
     flex-direction: column;

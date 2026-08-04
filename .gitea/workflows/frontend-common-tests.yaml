@@ -10,7 +10,6 @@ name: Frontend common tests
 
 env:
   NODE_VERSION: 24.x
-  PNPM_VERSION: 10.30.0
 
 jobs:
   # Detect changes to optimize job execution
@@ -241,9 +240,8 @@ jobs:
           path: "."
           ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Install pnpm
+        # Version comes from the "packageManager" field in package.json
         uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:

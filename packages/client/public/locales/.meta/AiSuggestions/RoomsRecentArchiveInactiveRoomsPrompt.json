@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsRecentArchiveInactiveRoomsPrompt",
+  "content": "Archive inactive rooms across the current Recent rooms only after showing the impact and requesting confirmation. If this information is not provided, ask me for the exact items and confirmation before any destructive action.",
+  "content_en_sha1_hash": "03fecccc58fbdf272bc42463268b471f6897f307",
+  "created_at": "2026-08-04T09:58:55.207Z",
+  "updated_at": "2026-08-04T09:58:56.422Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 440,
+      "context": "prompt: t(\"AiSuggestions:RoomsRecentReviewAccessInRecentRoomsPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsRecentArchiveInactiveRooms\"),\n prompt: t(\"AiSuggestions:RoomsRecentArchiveInactiveRoomsPrompt\"),\n requires: \"roomAdmin\",\n },\n ],\n \n // +",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

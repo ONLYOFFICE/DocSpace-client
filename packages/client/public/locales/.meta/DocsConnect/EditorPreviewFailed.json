@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Preview.tsx",
-      "line_number": 183,
-      "context": "view === \"editor\" ? \"\" : styles.previewHidden\n }`}\n >\n {editorError ? (\n <Text className={styles.muted}>\n {t(\"DocsConnect:EditorPreviewFailed\")}\n </Text>\n ) : (\n <>\n {!documentReady ? (\n <div className={styles.previewLoader}>",
+      "line_number": 196,
+      "context": "{editorError ? (\n <EmptyServerErrorContainer\n withReload={editorError === \"load\"}\n description={\n editorError === \"sign\"\n ? t(\"DocsConnect:EditorPreviewFailed\")\n : undefined\n }\n />\n ) : (\n <>",
       "module": "/packages/client"
     }
   ],

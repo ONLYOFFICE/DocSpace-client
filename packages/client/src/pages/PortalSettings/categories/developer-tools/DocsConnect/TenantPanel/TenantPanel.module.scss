@@ -241,6 +241,10 @@
   min-width: 0;
 }
 
+.secretMasked {
+  -webkit-text-security: disc;
+}
+
 .secretIcons {
   display: flex;
   align-items: center;
@@ -354,11 +358,28 @@
 }
 
 .preview {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 24px;
   width: 100%;
   padding-top: 20px;
+}
+
+.previewEditorSlot {
+  width: 100%;
+}
+
+// Keeps the editor mounted, sized and rendered while another tab is active —
+// it is only moved out of the viewport. `display: none` / `visibility: hidden`
+// / a zero-height clip would let the browser stop rendering the iframe and
+// blank out an editor that is still loading. Offsetting upwards never creates
+// reachable overflow, so no scrollbars appear.
+.previewEditorSlotHidden {
+  position: absolute;
+  top: -99999px;
+  inset-inline-start: 0;
+  pointer-events: none;
 }
 
 .previewEditor {
@@ -377,10 +398,6 @@
   align-items: center;
   justify-content: center;
   background-color: var(--background-color);
-}
-
-.previewHidden {
-  display: none;
 }
 
 .demoCode {

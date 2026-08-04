@@ -1,0 +1,28 @@
+{
+  "key_path": "FormsTrashFindADeletedFormPrompt",
+  "content": "Find a deleted form in Forms Trash and return the most relevant results. If this information is not provided, ask me for the search term and any useful filters such as owner, date, type, or status.",
+  "content_en_sha1_hash": "3f06e7ea9037134941be092c9668e95f4996c622",
+  "created_at": "2026-08-04T09:58:55.181Z",
+  "updated_at": "2026-08-04T09:58:56.463Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 754,
+      "context": "prompt: t(\"AiSuggestions:FormsTrashWhatSDeletedPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashFindADeletedForm\"),\n prompt: t(\"AiSuggestions:FormsTrashFindADeletedFormPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashRestoreSelectedItems\"),\n prompt: t(\"AiSuggestions:FormsTrashRestoreSelectedItemsPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

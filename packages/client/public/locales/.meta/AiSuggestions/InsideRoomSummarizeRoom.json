@@ -1,0 +1,28 @@
+{
+  "key_path": "InsideRoomSummarizeRoom",
+  "content": "Summarize room",
+  "content_en_sha1_hash": "fe49de322dc97f7736d73518b70bf50be409c5b1",
+  "created_at": "2026-08-04T09:58:55.189Z",
+  "updated_at": "2026-08-04T09:58:56.400Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 129,
+      "context": "// The base \"inside a room\" rows. Every room type shows them, and the\n // per-type sections below only add their own rows on top, so the list is\n // kept in one place instead of being repeated four times.\n const insideRoom: SuggestionEntry[] = [\n {\n name: t(\"AiSuggestions:InsideRoomSummarizeRoom\"),\n prompt: t(\"AiSuggestions:InsideRoomSummarizeRoomPrompt\"),\n },\n {\n name: t(\"AiSuggestions:InsideRoomOrganizeContent\"),\n prompt: t(\"AiSuggestions:InsideRoomOrganizeContentPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

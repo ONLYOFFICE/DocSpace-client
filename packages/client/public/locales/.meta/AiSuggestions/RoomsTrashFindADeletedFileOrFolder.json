@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsTrashFindADeletedFileOrFolder",
+  "content": "Find a deleted file or folder",
+  "content_en_sha1_hash": "aa3a5a2831d966bdc8759fd3c9da409aba92b354",
+  "created_at": "2026-08-04T09:58:55.220Z",
+  "updated_at": "2026-08-04T09:58:56.426Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 519,
+      "context": "name: t(\"AiSuggestions:RoomsTrashWhatSDeleted\"),\n prompt: t(\"AiSuggestions:RoomsTrashWhatSDeletedPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashFindADeletedFileOrFolder\"),\n prompt: t(\"AiSuggestions:RoomsTrashFindADeletedFileOrFolderPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashRestoreARoom\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

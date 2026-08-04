@@ -3,7 +3,7 @@
   "content": "You are using a free trial of {{organizationName}} Docs Connect",
   "content_en_sha1_hash": "60890b4ff35e4130227dd1b979ee15e79d2b323c",
   "created_at": "2026-07-27T13:07:48.478Z",
-  "updated_at": "2026-07-27T13:49:01.158Z",
+  "updated_at": "2026-08-01T15:33:49.638Z",
   "comment": {
     "text": "Banner title displayed on the statistics page during a free trial period, incorporating the organization name via {{organizationName}}.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 233,
+      "line_number": 310,
       "context": "</Text>\n </>\n ) : (\n <>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"DocsConnect:TrialBannerTitle\", {\n organizationName: getBrandName(\"OrganizationName\"),\n })}\n </Text>\n <Text fontSize=\"12px\" className={styles.muted}>\n {t(\"DocsConnect:TrialBannerDescription\", {",
       "module": "/packages/client"
     }

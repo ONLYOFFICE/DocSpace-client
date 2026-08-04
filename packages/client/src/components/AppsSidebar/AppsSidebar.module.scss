@@ -73,6 +73,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  block-size: 28px;
+  inline-size: 28px;
+  flex-shrink: 0;
 
   // On desktop: show burger logo by default, swap to collapse button on hover.
   @include mixins.desktop {

@@ -18,6 +18,7 @@ const progressStore = (extra: Record<string, unknown> = {}) => ({
   secondaryProgressDataStore: {
     setSecondaryProgressBarData: vi.fn(),
     clearSecondaryProgressData: vi.fn(),
+    isOperationStopped: vi.fn(() => false),
     setItemsSelectionLength: vi.fn(),
     setItemsSelectionTitle: vi.fn(),
   },

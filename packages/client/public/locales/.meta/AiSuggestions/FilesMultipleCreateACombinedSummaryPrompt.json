@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesMultipleCreateACombinedSummaryPrompt",
+  "content": "Create one concise summary of the selected files, combining repeated points and preserving important differences. If this information is not provided, ask me for the scope, focus, and criteria for the analysis.",
+  "content_en_sha1_hash": "557dc7559f2ab04a63a3e26de926ccee84da6cf2",
+  "created_at": "2026-08-04T09:58:55.124Z",
+  "updated_at": "2026-08-04T09:58:56.420Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 385,
+      "context": "name: t(\"AiSuggestions:FilesMultipleCompareSelectedFiles\"),\n prompt: t(\"AiSuggestions:FilesMultipleCompareSelectedFilesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCreateACombinedSummary\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateACombinedSummaryPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleConvertSelectedFiles\"),\n prompt: t(\"AiSuggestions:FilesMultipleConvertSelectedFilesPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

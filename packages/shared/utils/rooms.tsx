@@ -97,7 +97,7 @@ const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
     withCover: false,
     previewIcon: null,
     saveFormAsXLSX: true,
-    sendFormToExternalDB: false,
+    sendFormToExternalDB: true,
   };
 
   return startRoomParams;

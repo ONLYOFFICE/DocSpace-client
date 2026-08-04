@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-07-30T16:14:11.140Z",
+  "updated_at": "2026-08-01T16:25:17.750Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 615,
+      "line_number": 622,
       "context": "scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"ReportSaveLocation\", {\n sectionName: t(\"Files\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
       "module": "/libs/ui-kit"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 564,
+      "line_number": 596,
       "context": "isLoading={isReportGenerating}\n />\n {isReportGenerating ? (\n <Text fontSize=\"13px\" className={styles.muted}>\n {t(\"DocsConnect:ReportGenerationHint\", {\n sectionName: t(\"Common:Files\"),\n })}\n </Text>\n ) : null}\n </div>",
       "module": "/packages/client"
     },
@@ -259,7 +259,7 @@
     },
     {
       "file_path": "/packages/client/src/store/DocsConnectStore.ts",
-      "line_number": 362,
+      "line_number": 364,
       "context": "};\n \n private finishReport = (resultFileUrl?: string) => {\n toastr.success(\n i18n.t(\"Common:ReportSaveLocation\", {\n sectionName: i18n.t(\"Common:Files\"),\n }),\n );\n if (!this.reportPageLeft && resultFileUrl) {\n setTimeout(() => window.open(resultFileUrl, \"_blank\"), 100); // hack for ios\n }",
       "module": "/packages/client"
     },

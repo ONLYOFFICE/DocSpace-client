@@ -127,6 +127,8 @@ const AddonsPage = (props: AddonsPageProps) => {
         tariffUsers: 0,
         scheduledUsers: null,
         scheduledDate: "",
+        nextDevPackEnabled: false,
+        scheduledOnDevPack: false,
         deactivated: false,
         canceled: false,
       };
@@ -155,6 +157,11 @@ const AddonsPage = (props: AddonsPageProps) => {
       tariffUsers,
       scheduledUsers: docsConnectInfo.scheduledChange?.nextUsers ?? null,
       scheduledDate: docsConnectInfo.scheduledChange?.dueDate ?? "",
+      nextDevPackEnabled:
+        docsConnectInfo.scheduledChange?.nextDevPackEnabled ??
+        docsConnectInfo.devPackEnabled,
+      scheduledOnDevPack:
+        docsConnectInfo.scheduledChange?.scheduledOnDevPack ?? false,
       deactivated: docsConnectInfo.deactivated ?? false,
       canceled: isDocsConnectCanceled(docsConnectInfo),
     };

@@ -677,6 +677,12 @@ const BuyPlanPanel = ({
                       </>
                     ) : (
                       <>
+                        {devPackTurnedOff
+                          ? summaryRow(
+                              t("DocsConnect:DevPack"),
+                              t("Common:Disabled"),
+                            )
+                          : null}
                         {usersChanged
                           ? summaryRow(
                               t("DocsConnect:UserAdjustmentLabel"),

@@ -103,7 +103,6 @@
   "Remaining": "المتبقي",
   "RemainingBalanceAfter": "الرصيد المتبقي بعد الشراء: {{amount}}",
   "RemainingCreditsAfter": "الرصيد المتبقي بعد الشراء: {{amount}}",
-  "RemoveSubscriptionConfirm": "سيتم إزالة تفاصيل اشتراكك السابق. لاستخدام {{service}} مرة أخرى، ستحتاج إلى إعداد اشتراك جديد.",
   "RenewsOnWithUpdate": "يتم التجديد في {{date}} — {{price}}/الشهر (المستخدمون: {{count}})",
   "ReportGenerationHint": "قد يستغرق إنشاء التقرير بعض الوقت. بمجرد جاهزيته، سيتم حفظه في {{sectionName}}.",
   "ResetAccessRulesTitle": "إعادة تعيين قواعد الوصول",

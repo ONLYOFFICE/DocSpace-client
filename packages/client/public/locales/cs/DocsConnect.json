@@ -103,7 +103,6 @@
   "Remaining": "Zbývající",
   "RemainingBalanceAfter": "Zbývající zůstatek po nákupu: {{amount}}",
   "RemainingCreditsAfter": "Zbývající kredity po nákupu: {{amount}}",
-  "RemoveSubscriptionConfirm": "Podrobnosti vašeho předchozího předplatného budou odstraněny. Chcete-li službu {{service}} znovu používat, budete muset nastavit nové předplatné.",
   "RenewsOnWithUpdate": "Obnoví se dne {{date}} — {{price}}/měsíc (Uživatelé: {{count}})",
   "ReportGenerationHint": "Generování zprávy může chvíli trvat. Jakmile bude připravena, uloží se do {{sectionName}}.",
   "ResetAccessRulesTitle": "Obnovit pravidla přístupu",

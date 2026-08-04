@@ -75,7 +75,10 @@ const TableView = (props: ModelSettingsTableViewProps) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const models = aiToolsPrices?.chat ?? [];
+  const models = [
+    ...(aiToolsPrices?.chat ?? []),
+    ...(aiToolsPrices?.image ?? []),
+  ];
 
   const onToggle = async (modelId: string, enabled: boolean) => {
     await setAiModelAvailability?.(modelId, enabled);
@@ -118,8 +121,16 @@ const TableView = (props: ModelSettingsTableViewProps) => {
               key={m.id}
               modelId={m.id}
               title={m.alias}
-              inputPrice={formatAiModelsCurrency?.(m.price.prompt) ?? ""}
-              outputPrice={formatAiModelsCurrency?.(m.price.completion) ?? ""}
+              inputPrice={
+                m.price?.prompt != null
+                  ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
+                  : ""
+              }
+              outputPrice={
+                m.price?.completion != null
+                  ? (formatAiModelsCurrency?.(m.price.completion) ?? "")
+                  : ""
+              }
               enabled={aiModelAvailabilityMap?.get(m.id) ?? true}
               isUpdating={aiModelAvailabilityUpdatingSet?.has(m.id) ?? false}
               onToggle={onToggle}

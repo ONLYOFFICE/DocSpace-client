@@ -112,6 +112,9 @@ export const getDefaultFileTestIdPrefix = (format) => {
   }
 };
 
+export const getPluginFileTestIdPrefix = (extension) =>
+  extension ? `new_${extension.replace(/^\./, "")}` : "new_folder";
+
 export const getCreateModalEntityType = (extension) => {
   switch (extension) {
     case "docx":

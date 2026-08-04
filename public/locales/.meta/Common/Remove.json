@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2026-08-01T15:33:49.550Z",
+  "updated_at": "2026-08-01T16:25:17.779Z",
   "comment": {
     "text": "This is a button label that confirms the removal of an item, such as a guest from a room, a user, or a subscription.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "line_number": 87,
+      "context": "<ModalDialog.Footer>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Remove\")}\n onClick={onRemove}\n testId=\"remove_storage_subscription_button\"\n />\n <Button\n scale",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
       "line_number": 206,

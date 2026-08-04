@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-08-01T15:33:49.513Z",
+  "updated_at": "2026-08-01T16:25:17.760Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -21,6 +21,12 @@
       "file_path": "/libs/ui-kit/ai-agent/providers/files/save-dialog.tsx",
       "line_number": 221,
       "context": "currentFolderId=\"\"\n rootFolderType={FolderType.USER}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SaveButton\", { defaultValue: \"Save\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader={t(\"Common:FileName\", { defaultValue: \"File name\" })}\n currentFooterInputValue={stripDocxExt(defaultName)}\n getFilesArchiveError={() => \"\"}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "line_number": 94,
+      "context": "testId=\"remove_storage_subscription_button\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"CancelButton\")}\n onClick={onClose}\n testId=\"cancel_remove_storage_subscription_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/libs/ui-kit"
     },
     {

@@ -39,7 +39,6 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
 import type { InfoPanelViewType } from "SRC_DIR/store/InfoPanelStore";
 
 import { InfoPanelView } from "./index";
@@ -147,6 +146,21 @@ export function getAvailableInfoPanelTabs({
     const hasRoomType = "roomType" in selection && !!selection.roomType;
     const fileExst = "fileExst" in selection ? (selection.fileExst ?? "") : "";
 
+    const viewAccessibility =
+      fileExst && "viewAccessibility" in selection
+        ? selection.viewAccessibility
+        : null;
+
+    const isImage =
+      !!viewAccessibility &&
+      !viewAccessibility.MediaView &&
+      viewAccessibility.ImageView;
+
+    const isVideo =
+      !!viewAccessibility &&
+      viewAccessibility.MediaView &&
+      !viewAccessibility.ImageView;
+
     for (const item of infoPanelItemsList) {
       if (!item.value.filesType) {
         tabs.push(`info_plugin-${item.key}`);
@@ -154,6 +168,16 @@ export function getAvailableInfoPanelTabs({
       }
 
       if (hasRoomType && item.value.filesType.includes(PluginFileType.room)) {
+        tabs.push(`info_plugin-${item.key}`);
+        continue;
+      }
+
+      if (isImage && item.value.filesType.includes(PluginFileType.image)) {
+        tabs.push(`info_plugin-${item.key}`);
+        continue;
+      }
+
+      if (isVideo && item.value.filesType.includes(PluginFileType.video)) {
         tabs.push(`info_plugin-${item.key}`);
         continue;
       }
@@ -169,7 +193,7 @@ export function getAvailableInfoPanelTabs({
         continue;
       }
 
-      if (item.value.filesType.includes(PluginFileType.folder)) {
+      if (!fileExst && item.value.filesType.includes(PluginFileType.folder)) {
         tabs.push(`info_plugin-${item.key}`);
       }
     }

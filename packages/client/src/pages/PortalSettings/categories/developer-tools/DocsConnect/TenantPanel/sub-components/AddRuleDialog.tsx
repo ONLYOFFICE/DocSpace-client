@@ -48,11 +48,19 @@ import styles from "../TenantPanel.module.scss";
 
 interface AddRuleDialogProps {
   visible: boolean;
+  existingAddresses: string[];
   onClose: () => void;
   onAdd: (type: "allow" | "deny", value: string) => Promise<boolean>;
 }
 
-const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
+const normalize = (value: string) => value.trim().toLowerCase();
+
+const AddRuleDialog = ({
+  visible,
+  existingAddresses,
+  onClose,
+  onAdd,
+}: AddRuleDialogProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const [ruleType, setRuleType] = useState<"allow" | "deny">("allow");
   const [address, setAddress] = useState("");
@@ -63,13 +71,19 @@ const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
     { key: "deny", label: t("DocsConnect:RuleDeny") },
   ];
 
+  const trimmedAddress = address.trim();
+  const isDuplicate =
+    trimmedAddress !== "" &&
+    existingAddresses.some(
+      (existing) => normalize(existing) === normalize(trimmedAddress),
+    );
+
   const onSubmit = async () => {
-    const value = address.trim();
-    if (!value) return;
+    if (!trimmedAddress || isDuplicate) return;
 
     setIsSaving(true);
     try {
-      const ok = await onAdd(ruleType, value);
+      const ok = await onAdd(ruleType, trimmedAddress);
       if (ok) onClose();
     } finally {
       setIsSaving(false);
@@ -114,12 +128,15 @@ const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
             removeMargin
             labelVisible
             labelText={t("Common:Address")}
+            hasError={isDuplicate}
+            errorMessage={t("DocsConnect:RuleAlreadyAdded")}
           >
             <TextInput
               type={InputType.text}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder={t("DocsConnect:RuleAddressPlaceholder")}
+              hasError={isDuplicate}
               scale
             />
             <Text fontSize="12px" className={styles.settingsHint}>
@@ -135,7 +152,7 @@ const AddRuleDialog = ({ visible, onClose, onAdd }: AddRuleDialogProps) => {
           size={ButtonSize.normal}
           label={t("Common:AddButton")}
           isLoading={isSaving}
-          isDisabled={!address.trim() || isSaving}
+          isDisabled={!trimmedAddress || isDuplicate || isSaving}
           onClick={onSubmit}
         />
         <Button

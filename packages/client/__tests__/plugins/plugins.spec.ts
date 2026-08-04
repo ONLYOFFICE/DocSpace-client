@@ -1,0 +1,241 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import {
+  filesSettingsHandler,
+  selfActivationStatusHandler,
+  settingsHandler,
+  TypeSettings,
+  webPluginsAddHandler,
+  webPluginsHandler,
+  webPluginsUpdateHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { expect, test, TEST_PORT } from "../fixtures/base";
+
+test.describe("Plugins", () => {
+  test.beforeEach(async ({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithPlugins),
+      filesSettingsHandler(TEST_PORT),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+    );
+  });
+
+  test("should navigate to plugins page and display empty state", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const emptyView = page.getByTestId("empty-screen-container");
+    await expect(emptyView).toBeVisible();
+
+    await expectScreenshot(page, ["desktop", "plugins", "plugins-empty.png"]);
+
+    const emptyTitle = page.getByText(/No plugins/i);
+    await expect(emptyTitle).toBeVisible();
+  });
+
+  test("should display plugins list with data", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const pluginsList = page.locator('[data-testid^="plugin_test-plugin"]');
+    await expect(pluginsList).toHaveCount(2);
+
+    const plugin1 = page.getByTestId("plugin_test-plugin-one");
+    await expect(plugin1).toBeVisible();
+    await expect(
+      plugin1.getByText("Test Plugin One for e2e testing"),
+    ).toBeVisible();
+    await expect(plugin1.getByText("1.1.0")).toBeVisible();
+
+    const plugin3 = page.getByTestId("plugin_test-plugin-three");
+    await expect(plugin3).toBeVisible();
+    await expect(
+      plugin3.getByText("Test Plugin Three for e2e testing"),
+    ).toBeVisible();
+    await expect(plugin3.getByText("1.3.0")).toBeVisible();
+  });
+
+  test("should upload .zip plugin when upload is enabled", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const pluginsListBefore = page.locator(
+      '[data-testid^="plugin_test-plugin"]',
+    );
+    await expect(pluginsListBefore).toHaveCount(2);
+
+    const dropzone = page.getByTestId("upload_plugin_dropzone");
+    await expect(dropzone).toBeVisible();
+    const dropzoneInput = dropzone.getByTestId("dropzone-input");
+
+    mockRequest.use(webPluginsAddHandler(TEST_PORT));
+
+    await dropzoneInput.setInputFiles({
+      name: "dummy.zip",
+      mimeType: "application/zip",
+      buffer: Buffer.from("dummy zip data"),
+    });
+
+    const pluginsListAfter = page.locator(
+      '[data-testid^="plugin_test-plugin"]',
+    );
+    await expect(pluginsListAfter).toHaveCount(3);
+
+    const plugin2 = page.getByTestId("plugin_test-plugin-two");
+    await expect(plugin2).toBeVisible();
+  });
+
+  test("should toggle plugin enabled state", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const plugin1 = page.getByTestId("plugin_test-plugin-one");
+    await expect(plugin1).toBeVisible();
+
+    const toggleSwitch = plugin1.getByTestId("enable_plugin_toggle_button");
+    await expect(toggleSwitch).toBeVisible();
+
+    const toggleSwitchInput = toggleSwitch.getByTestId("toggle-button-input");
+    await expect(toggleSwitchInput).toBeChecked();
+
+    mockRequest.use(webPluginsUpdateHandler(TEST_PORT));
+
+    await toggleSwitch.click();
+
+    await expect(toggleSwitchInput).not.toBeChecked();
+
+    await toggleSwitch.click();
+
+    await expect(toggleSwitchInput).toBeChecked();
+  });
+
+  test("should delete plugin successfully", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const pluginsListBefore = page.locator(
+      '[data-testid^="plugin_test-plugin"]',
+    );
+    await expect(pluginsListBefore).toHaveCount(2);
+
+    const plugin3 = page.getByTestId("plugin_test-plugin-three");
+    await expect(plugin3).toBeVisible();
+
+    const settingsButton = plugin3.getByTestId("open_settings_icon_button");
+    await expect(settingsButton).toBeVisible();
+    await settingsButton.click();
+
+    const deleteButton = page.getByTestId("settings_delete_plugin_button");
+    await expect(deleteButton).toBeVisible();
+    await deleteButton.click();
+
+    const confirmDeleteButton = page.getByTestId(
+      "confirm_delete_plugin_button",
+    );
+
+    await expect(confirmDeleteButton).toBeVisible();
+    await confirmDeleteButton.click();
+
+    const pluginsListAfter = page.locator(
+      '[data-testid^="plugin_test-plugin"]',
+    );
+    await expect(pluginsListAfter).toHaveCount(1);
+    await expect(plugin3).not.toBeVisible();
+  });
+
+  test("should display plugin information correctly", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(webPluginsHandler(TEST_PORT, "withData"));
+
+    await page.goto(`${baseUrl}/portal-settings/integration/plugins`);
+
+    await expect(page.locator(".settings-section_header")).toBeVisible();
+
+    const plugin1 = page.getByTestId("plugin_test-plugin-one");
+    await expect(plugin1).toBeVisible();
+
+    await expect(
+      plugin1.getByRole("heading", { name: "test-plugin-one" }),
+    ).toBeVisible();
+
+    const versionBadge = plugin1.getByTestId(
+      "plugin_version_test-plugin-one_badge",
+    );
+    await expect(versionBadge).toBeVisible();
+    await expect(versionBadge).toContainText("1.1.0");
+  });
+
+});
+

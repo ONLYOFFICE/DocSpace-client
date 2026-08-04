@@ -82,7 +82,7 @@ const RemoveSubscriptionDialog = ({
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text fontSize="13px">
-          {t("DocsConnect:RemoveSubscriptionConfirm", {
+          {t("Common:RemoveSubscriptionConfirm", {
             service: t("DocsConnect:DocsConnect"),
           })}
         </Text>

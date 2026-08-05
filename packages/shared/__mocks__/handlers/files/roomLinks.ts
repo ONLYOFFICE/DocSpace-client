@@ -98,7 +98,12 @@ export const roomContentHandler = (
   port: string,
   roomId: number | string,
   fileId: number | string,
-  currentOverrides: Record<string, unknown> = {},
+  {
+    security: securityOverrides,
+    ...currentOverrides
+  }: Record<string, unknown> & {
+    security?: Record<string, boolean>;
+  } = {},
 ) =>
   http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/files/${roomId}`,
@@ -224,7 +229,9 @@ export const roomContentHandler = (
               Embed: true,
               ChangeOwner: true,
               IndexExport: false,
+              HistoryExport: true,
               UseChat: false,
+              ...securityOverrides,
             },
             title: "Public Room",
             access: 0,

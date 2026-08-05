@@ -33,13 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { ShareAccessRights } from "@docspace/shared/enums";
 import type { Nullable } from "@docspace/shared/types";
 
 export type HistoryToolbarProps = {
   roomId: number | string;
-  roomAccess: Nullable<ShareAccessRights>;
-  roomCreatedById?: string;
+  canExportHistory: boolean;
   roomCreationDate?: string;
   selectedDay: Nullable<string>;
 
@@ -53,14 +51,4 @@ export type InjectedHistoryToolbarProps = Pick<
   | "resetRoomHistoryReportPageLeft"
   | "isRoomHistoryReportDownloading"
   | "setIsScrollLocked"
-> & {
-  currentUserId?: string;
-  isVisitor?: boolean;
-};
-
-export type CanExportRoomHistoryArgs = {
-  roomAccess: Nullable<ShareAccessRights>;
-  roomCreatedById?: string;
-  currentUserId?: string;
-  isVisitor?: boolean;
-};
+>;

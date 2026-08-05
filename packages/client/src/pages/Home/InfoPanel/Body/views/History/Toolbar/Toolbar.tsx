@@ -46,13 +46,11 @@ import type {
   HistoryToolbarProps,
   InjectedHistoryToolbarProps,
 } from "./Toolbar.types";
-import { canExportRoomHistory } from "./Toolbar.utils";
 import styles from "./Toolbar.module.scss";
 
 const HistoryToolbar = ({
   roomId,
-  roomAccess,
-  roomCreatedById,
+  canExportHistory,
   roomCreationDate,
   selectedDay,
   onSelectDay,
@@ -62,8 +60,6 @@ const HistoryToolbar = ({
   resetRoomHistoryReportPageLeft,
   isRoomHistoryReportDownloading,
   setIsScrollLocked,
-  currentUserId,
-  isVisitor,
 }: HistoryToolbarProps & InjectedHistoryToolbarProps) => {
   const { i18n } = useTranslation();
 
@@ -81,13 +77,6 @@ const HistoryToolbar = ({
 
   const roomCreatedDate = parseToDateTime(roomCreationDate);
 
-  const canExport = canExportRoomHistory({
-    roomAccess,
-    roomCreatedById,
-    currentUserId,
-    isVisitor,
-  });
-
   return (
     <div className={styles.toolbar} data-testid="info_history_toolbar">
       <DateFilter
@@ -98,7 +87,7 @@ const HistoryToolbar = ({
         setIsScrollLocked={setIsScrollLocked}
       />
 
-      {canExport ? (
+      {canExportHistory ? (
         <ExportMenu
           key={roomId}
           isReportGenerating={isRoomHistoryReportDownloading}
@@ -112,7 +101,7 @@ const HistoryToolbar = ({
 };
 
 export default inject<TStore, HistoryToolbarProps, InjectedHistoryToolbarProps>(
-  ({ infoPanelStore, userStore }: TStore) => {
+  ({ infoPanelStore }: TStore) => {
     const {
       getRoomHistoryReport,
       markRoomHistoryReportPageLeft,
@@ -127,8 +116,6 @@ export default inject<TStore, HistoryToolbarProps, InjectedHistoryToolbarProps>(
       resetRoomHistoryReportPageLeft,
       isRoomHistoryReportDownloading,
       setIsScrollLocked,
-      currentUserId: userStore?.user?.id,
-      isVisitor: userStore?.user?.isVisitor,
     };
   },
 )(observer(HistoryToolbar as FC<HistoryToolbarProps>));

@@ -181,6 +181,7 @@ export type TFolderSecurity = {
   Embed: boolean;
   ChangeOwner: boolean;
   IndexExport: boolean;
+  HistoryExport: boolean;
   UpdateXlsx?: boolean;
   AnalyzeResponses?: boolean;
 };

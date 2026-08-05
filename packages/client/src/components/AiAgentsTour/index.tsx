@@ -45,6 +45,10 @@ import type AiAgentsTourStore from "SRC_DIR/store/AiAgentsTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import {
+  getTourAudience,
+  type TourAudience,
+} from "SRC_DIR/components/Tour/audience";
 import WelcomeTourDialog, {
   type TourFeature,
 } from "SRC_DIR/components/Tour/WelcomeTourDialog";
@@ -59,6 +63,7 @@ import { getTourSteps, type TourStepFlags } from "./tourSteps";
 type AiAgentsTourProps = {
   aiAgentsTourStore: AiAgentsTourStore;
   userId?: string;
+  audience: TourAudience;
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
@@ -76,6 +81,7 @@ type AiAgentsTourProps = {
 const AiAgentsTour = ({
   aiAgentsTourStore,
   userId,
+  audience,
   currentDeviceType,
   isFrame,
   firstLoad,
@@ -107,6 +113,7 @@ const AiAgentsTour = ({
 
   const flags = useMemo<TourStepFlags>(
     () => ({
+      audience,
       isDesktop,
       canCreate,
       showFilter,
@@ -117,6 +124,7 @@ const AiAgentsTour = ({
       hasTrash,
     }),
     [
+      audience,
       isDesktop,
       canCreate,
       showFilter,
@@ -140,12 +148,20 @@ const AiAgentsTour = ({
     "ai agents tour",
   );
 
+  // Configuring an agent and choosing who may use it are the owner's cards;
+  // everyone else gets what using a ready-made agent gives them.
+  const isAdminAudience = audience === "admin";
+
   const features = useMemo<TourFeature[]>(
     () => [
       {
         icon: AiAgentsReactSvgUrl,
-        title: t("AiAgentsTour:FeatureAgentsTitle"),
-        description: t("AiAgentsTour:FeatureAgents"),
+        title: isAdminAudience
+          ? t("AiAgentsTour:FeatureAgentsTitle")
+          : t("AiAgentsTour:FeatureUseAgentsTitle"),
+        description: isAdminAudience
+          ? t("AiAgentsTour:FeatureAgents")
+          : t("AiAgentsTour:FeatureUseAgents"),
       },
       {
         icon: KnowledgeReactSvgUrl,
@@ -159,11 +175,15 @@ const AiAgentsTour = ({
       },
       {
         icon: SecurityReactSvgUrl,
-        title: t("AiAgentsTour:FeatureControlTitle"),
-        description: t("AiAgentsTour:FeatureControl"),
+        title: isAdminAudience
+          ? t("AiAgentsTour:FeatureControlTitle")
+          : t("AiAgentsTour:FeatureAgentAccessTitle"),
+        description: isAdminAudience
+          ? t("AiAgentsTour:FeatureControl")
+          : t("AiAgentsTour:FeatureAgentAccess"),
       },
     ],
-    [t],
+    [t, isAdminAudience],
   );
 
   if (isFrame || !userId) return null;
@@ -204,7 +224,6 @@ const AiAgentsTour = ({
 
 export default inject(
   ({
-    authStore,
     userStore,
     settingsStore,
     filesStore,
@@ -221,17 +240,18 @@ export default inject(
       isRoot,
     } = treeFoldersStore;
 
-    const { isAdmin, isRoomAdmin } = authStore;
+    const audience = getTourAudience(userStore?.user);
 
     return {
       aiAgentsTourStore,
       userId: userStore?.user?.id,
+      audience,
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
       isAiAgentsRoot:
         isAIAgentsFolderRoot && isRoot && !publicRoomStore.isPublicRoom,
-      canCreateRooms: isAdmin || isRoomAdmin,
+      canCreateRooms: audience === "admin",
       aiReady: !!settingsStore.aiConfig?.aiReady,
       showFilter: !filesStore.isEmptyPage,
       hasItems: filesStore.filesList?.length > 0,

@@ -44,6 +44,10 @@ import type FormsTourStore from "SRC_DIR/store/FormsTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import {
+  getTourAudience,
+  type TourAudience,
+} from "SRC_DIR/components/Tour/audience";
 import WelcomeTourDialog, {
   type TourFeature,
 } from "SRC_DIR/components/Tour/WelcomeTourDialog";
@@ -58,6 +62,7 @@ import { getTourSteps, type TourStepFlags } from "./tourSteps";
 type FormsTourProps = {
   formsTourStore: FormsTourStore;
   userId?: string;
+  audience: TourAudience;
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
@@ -73,6 +78,7 @@ type FormsTourProps = {
 const FormsTour = ({
   formsTourStore,
   userId,
+  audience,
   currentDeviceType,
   isFrame,
   firstLoad,
@@ -94,6 +100,7 @@ const FormsTour = ({
 
   const flags = useMemo<TourStepFlags>(
     () => ({
+      audience,
       isDesktop,
       canCreate,
       canUseTemplates,
@@ -103,6 +110,7 @@ const FormsTour = ({
       hasForms,
     }),
     [
+      audience,
       isDesktop,
       canCreate,
       canUseTemplates,
@@ -125,6 +133,10 @@ const FormsTour = ({
     "forms tour",
   );
 
+  // Collecting responses and exporting results are the collection owner's side
+  // of the job; a filler gets the two cards that describe theirs.
+  const isAdmin = audience === "admin";
+
   const features = useMemo<TourFeature[]>(
     () => [
       {
@@ -134,8 +146,12 @@ const FormsTour = ({
       },
       {
         icon: FormFillReactSvgUrl,
-        title: t("FormsTour:FeatureCollectTitle"),
-        description: t("FormsTour:FeatureCollect"),
+        title: isAdmin
+          ? t("FormsTour:FeatureCollectTitle")
+          : t("FormsTour:FeatureFillOutTitle"),
+        description: isAdmin
+          ? t("FormsTour:FeatureCollect")
+          : t("FormsTour:FeatureFillOut"),
       },
       {
         icon: TemplateReactSvgUrl,
@@ -144,11 +160,15 @@ const FormsTour = ({
       },
       {
         icon: DownloadReactSvgUrl,
-        title: t("FormsTour:FeatureExportTitle"),
-        description: t("FormsTour:FeatureExport"),
+        title: isAdmin
+          ? t("FormsTour:FeatureExportTitle")
+          : t("FormsTour:FeatureFillPrivacyTitle"),
+        description: isAdmin
+          ? t("FormsTour:FeatureExport")
+          : t("FormsTour:FeatureFillPrivacy"),
       },
     ],
-    [t],
+    [t, isAdmin],
   );
 
   if (isFrame || !userId) return null;
@@ -189,7 +209,6 @@ const FormsTour = ({
 
 export default inject(
   ({
-    authStore,
     userStore,
     settingsStore,
     filesStore,
@@ -200,18 +219,20 @@ export default inject(
   }: TStore) => {
     const { roomsFolder, isFormsFolder, isRoot } = treeFoldersStore;
 
-    const { isAdmin, isRoomAdmin } = authStore;
+    const audience = getTourAudience(userStore?.user);
+    const isAdminAudience = audience === "admin";
 
     return {
       formsTourStore,
       userId: userStore?.user?.id,
+      audience,
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
       isFormsRoot: isFormsFolder && isRoot && !publicRoomStore.isPublicRoom,
       // Same gate as the rooms creation banner / sidebar Templates item.
-      canCreate: (isAdmin || isRoomAdmin) && !!roomsFolder,
-      canUseTemplates: isAdmin || isRoomAdmin,
+      canCreate: isAdminAudience && !!roomsFolder,
+      canUseTemplates: isAdminAudience,
       showFilter: !filesStore.isEmptyPage,
       hasItems: filesStore.filesList?.length > 0,
       isTableView: filesStore.viewAs === "table",

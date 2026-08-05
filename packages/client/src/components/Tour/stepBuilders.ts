@@ -55,6 +55,59 @@ function silenceNonAbort(logLabel: string) {
 export const sidebarSelector = (id: string) => `[data-item-id="${id}"]`;
 
 /**
+ * How long a step's `before` hook waits for its target.
+ *
+ * `useTour` filters the step list against the DOM the moment the tour starts,
+ * so a step that runs at all normally has its target on screen already and the
+ * wait resolves on the first tick. The budget is only there for anchors that a
+ * `prepare` call reveals — keep it short, because every millisecond of it is a
+ * spinner the user stares at when the element never shows up.
+ */
+export const STEP_TARGET_TIMEOUT = 1500;
+
+/** Mirrors react-joyride's own visibility test (display/visibility chain). */
+function isVisible(element: Element): boolean {
+  let node: Element | null = element;
+
+  while (node && node !== document.body) {
+    if (node instanceof HTMLElement) {
+      const { display, visibility } = getComputedStyle(node);
+      if (display === "none" || visibility === "hidden") return false;
+    }
+    node = node.parentElement;
+  }
+
+  return element.isConnected;
+}
+
+/**
+ * Whether a step's target resolves to a visible element right now. Handles
+ * both selector and resolver targets, so `useTour` can drop steps whose anchor
+ * isn't on the page — an empty file list, a control this role never sees —
+ * instead of stalling on them and then killing the tour.
+ */
+export function isStepTargetPresent(step: Step): boolean {
+  const { target } = step;
+  let element: Element | null = null;
+
+  if (typeof target === "function") {
+    try {
+      element = target();
+    } catch {
+      return false;
+    }
+  } else if (typeof target === "string") {
+    element = document.querySelector(target);
+  } else if (target instanceof HTMLElement) {
+    element = target;
+  } else if (target && "current" in target) {
+    element = target.current;
+  }
+
+  return !!element && isVisible(element);
+}
+
+/**
  * Spotlight a sidebar NavMenu item (or the whole list containing it, for a
  * nested "quick access" block). Adds/removes the accent outline class.
  */
@@ -81,7 +134,7 @@ export function navItemStep(
     skipBeacon: true,
     before: async () => {
       const signal = callbacks?.getSignal();
-      await waitForElement(selector, 10000, signal).catch(
+      await waitForElement(selector, STEP_TARGET_TIMEOUT, signal).catch(
         silenceNonAbort(logLabel),
       );
       if (!spotlightList) {
@@ -123,7 +176,7 @@ export function elementStep(
     before: async () => {
       const signal = callbacks?.getSignal();
       prepare?.();
-      await waitForElement(target, 10000, signal).catch(
+      await waitForElement(target, STEP_TARGET_TIMEOUT, signal).catch(
         silenceNonAbort(logLabel),
       );
     },
@@ -182,7 +235,7 @@ export function fileItemStep(
     skipBeacon: true,
     before: async () => {
       const signal = callbacks?.getSignal();
-      await waitForElement(rowSelector, 10000, signal).catch(
+      await waitForElement(rowSelector, STEP_TARGET_TIMEOUT, signal).catch(
         silenceNonAbort(logLabel),
       );
     },

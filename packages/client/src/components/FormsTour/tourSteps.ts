@@ -37,6 +37,7 @@ import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
+import type { TourAudience } from "SRC_DIR/components/Tour/audience";
 import {
   navItemStep,
   elementStep,
@@ -54,6 +55,12 @@ const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
 export type TourStepFlags = {
+  // Which tour to build. Admins run collections: they open a form space, put
+  // the blank form in it and invite fillers. Users and guests are on the other
+  // end — they were let into a space to fill the form out — so the steps about
+  // creating spaces, saving templates and emptying Trash are dropped for them
+  // and the shared anchors are worded from the filler's side.
+  audience: TourAudience;
   isDesktop: boolean;
   canCreate: boolean;
   canUseTemplates: boolean;
@@ -75,6 +82,7 @@ export function getTourSteps(
   flags: TourStepFlags,
 ): Step[] {
   const {
+    audience,
     isDesktop,
     canCreate,
     canUseTemplates,
@@ -84,6 +92,10 @@ export function getTourSteps(
     hasForms,
   } = flags;
 
+  // Creating a form space is a room-admin power; everyone else only ever fills
+  // in the forms inside the spaces they were added to.
+  const isAdmin = audience === "admin";
+
   // The quick-access sub-items are nested under Forms and rendered expanded
   // while the section is active. Skipped on tablet: the collapsed icon-only
   // sidebar flattens sub-items into the main list.
@@ -91,24 +103,35 @@ export function getTourSteps(
 
   return [
     // 1. Where am I — the mental model that trips people up: this list holds
-    // form spaces (one per collection), not individual PDF files.
+    // form spaces (one per collection), not individual PDF files. That holds
+    // for both audiences; what differs is which side of the collection they
+    // are on, so each gets its own framing of the same list.
     hasForms &&
       navItemStep(
         sidebarSelector("forms"),
         t("Common:Forms"),
-        {
-          text: t("FormsTour:FormsIntro"),
-          points: [
-            t("FormsTour:FormsIntroSpaces"),
-            t("FormsTour:FormsIntroPersonal"),
-          ],
-        },
+        isAdmin
+          ? {
+              text: t("FormsTour:FormsIntro"),
+              points: [
+                t("FormsTour:FormsIntroSpaces"),
+                t("FormsTour:FormsIntroPersonal"),
+              ],
+            }
+          : {
+              text: t("FormsTour:FormsIntroFiller"),
+              points: [
+                t("FormsTour:FormsIntroFillerFill"),
+                t("FormsTour:FormsIntroFillerPrivacy"),
+              ],
+            },
         callbacks,
         LOG_LABEL,
       ),
 
     // 2. Create — the two ways to start a collection.
-    canCreate &&
+    isAdmin &&
+      canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-actions"]',
@@ -127,7 +150,8 @@ export function getTourSteps(
     // 3. The form-space tile — the whole collection flow in one step, plus the
     // two result-export options that are set at creation time and are easy to
     // miss (Common:CollectResultsInXlsx / Common:ExportResultsToDatabase).
-    canCreate &&
+    isAdmin &&
+      canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-form-room"]',
@@ -146,7 +170,8 @@ export function getTourSteps(
 
     // 4. Space templates — reuse a configured space instead of setting the same
     // options up again. Same admin gate as the banner itself.
-    canCreate &&
+    isAdmin &&
+      canCreate &&
       showFilter &&
       canUseTemplates &&
       elementStep(
@@ -163,6 +188,8 @@ export function getTourSteps(
       ),
 
     // 5. A real form space row: the per-space actions users most often want.
+    // Inviting people, editing the space and saving it as a template are only
+    // in an admin's context menu, so a filler is told what is really in theirs.
     hasItems &&
       fileItemStep(
         FIRST_ITEM_SELECTOR,
@@ -171,7 +198,9 @@ export function getTourSteps(
           text: t("FormsTour:FormsItem"),
           points: [
             t("FormsTour:FormsItemOpen"),
-            t("FormsTour:FormsItemContextMenu"),
+            isAdmin
+              ? t("FormsTour:FormsItemContextMenu")
+              : t("FormsTour:FormsItemMemberMenu"),
             t("FormsTour:FormsItemPin"),
           ],
         },
@@ -182,18 +211,31 @@ export function getTourSteps(
     // 6. Info panel — members and roles. The Form filler role is the one worth
     // explaining: fillers see only their own submissions
     // (Common:RoleFormFillerFormRoomDescription).
+    // For a filler the same panel answers a different question — who is running
+    // this collection and whether anyone else can read what they submitted —
+    // so the privacy point stays and the role-assigning one goes.
     isDesktop &&
       elementStep(
         "#info-panel-toggle--open",
-        t("FormsTour:FormsInfoPanelTitle"),
-        {
-          text: t("FormsTour:FormsInfoPanel"),
-          points: [
-            t("FormsTour:FormsInfoPanelFillers"),
-            t("FormsTour:FormsInfoPanelPrivacy"),
-            t("FormsTour:FormsInfoPanelHistory"),
-          ],
-        },
+        isAdmin
+          ? t("FormsTour:FormsInfoPanelTitle")
+          : t("FormsTour:FormsInfoPanelMemberTitle"),
+        isAdmin
+          ? {
+              text: t("FormsTour:FormsInfoPanel"),
+              points: [
+                t("FormsTour:FormsInfoPanelFillers"),
+                t("FormsTour:FormsInfoPanelPrivacy"),
+                t("FormsTour:FormsInfoPanelHistory"),
+              ],
+            }
+          : {
+              text: t("FormsTour:FormsInfoPanelMember"),
+              points: [
+                t("FormsTour:FormsInfoPanelPrivacy"),
+                t("FormsTour:FormsInfoPanelHistory"),
+              ],
+            },
         callbacks,
         LOG_LABEL,
       ),
@@ -259,8 +301,10 @@ export function getTourSteps(
         LOG_LABEL,
       ),
 
-    // 11. Trash — deleting a space is recoverable, which is worth saying.
-    showQuickAccess &&
+    // 11. Trash — deleting a space is recoverable, which is worth saying. Only
+    // an admin can delete a space, so nobody else needs the step.
+    isAdmin &&
+      showQuickAccess &&
       navItemStep(
         sidebarSelector("forms-trash"),
         t("FormsTour:FormsTrashTitle"),

@@ -45,6 +45,10 @@ import type FilesTourStore from "SRC_DIR/store/FilesTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import {
+  getTourAudience,
+  type TourAudience,
+} from "SRC_DIR/components/Tour/audience";
 import WelcomeTourDialog, {
   type TourFeature,
 } from "SRC_DIR/components/Tour/WelcomeTourDialog";
@@ -59,6 +63,7 @@ import { getTourSteps, type TourStepFlags } from "./tourSteps";
 type FilesTourProps = {
   filesTourStore: FilesTourStore;
   userId?: string;
+  audience: TourAudience;
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
@@ -77,6 +82,7 @@ type FilesTourProps = {
 const FilesTour = ({
   filesTourStore,
   userId,
+  audience,
   currentDeviceType,
   isFrame,
   firstLoad,
@@ -101,6 +107,7 @@ const FilesTour = ({
 
   const flags = useMemo<TourStepFlags>(
     () => ({
+      audience,
       isDesktop,
       canCreate,
       showFilter,
@@ -113,6 +120,7 @@ const FilesTour = ({
       trashId,
     }),
     [
+      audience,
       isDesktop,
       canCreate,
       showFilter,
@@ -223,13 +231,14 @@ export default inject(
       isRoot,
     } = treeFoldersStore;
 
-    const isVisitor = userStore?.user?.isVisitor;
-    const hasMyDocuments = !!myFolder && !isVisitor;
+    const audience = getTourAudience(userStore?.user);
+    const hasMyDocuments = !!myFolder && audience !== "guest";
     const sharedWithMeId = sharedWithMeFolder?.id;
 
     return {
       filesTourStore,
       userId: userStore?.user?.id,
+      audience,
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,

@@ -37,6 +37,7 @@ import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
+import type { TourAudience } from "SRC_DIR/components/Tour/audience";
 import {
   navItemStep,
   elementStep,
@@ -59,6 +60,13 @@ const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
 export type TourStepFlags = {
+  // Which tour to build. Files is the one section where an admin and a paid
+  // user get exactly the same page — a personal space is a personal space — so
+  // the wording never forks here. Guests are the odd ones out: they have no
+  // personal space and no Trash at all, which is why the section is normally
+  // out of their reach entirely. The audience is threaded through anyway so a
+  // guest who does land here is not offered things they cannot do.
+  audience: TourAudience;
   isDesktop: boolean;
   canCreate: boolean;
   showFilter: boolean;
@@ -83,6 +91,7 @@ export function getTourSteps(
   flags: TourStepFlags,
 ): Step[] {
   const {
+    audience,
     isDesktop,
     canCreate,
     showFilter,
@@ -94,6 +103,9 @@ export function getTourSteps(
     favoritesId,
     trashId,
   } = flags;
+
+  // Guests own no files, so nothing that creates or deletes applies to them.
+  const canOwnFiles = audience !== "guest";
 
   // The quick-access sub-items are nested under My documents and rendered
   // expanded while the section is active. Skipped on tablet: the collapsed
@@ -120,7 +132,8 @@ export function getTourSteps(
     // 2. Create — the quick-action tiles, named by what they produce. Upload
     // is mentioned here too: the header "+" button only renders on an empty
     // page (isPlusButtonVisible), so it can't be spotlighted in this tour.
-    canCreate &&
+    canOwnFiles &&
+      canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-actions"]',
@@ -140,7 +153,8 @@ export function getTourSteps(
     // 3. AI chat tile — the least discoverable, most differentiating feature.
     // It is the fifth tile, so it may sit in the clipped second row; expand
     // the banner first so the spotlight lands on something visible.
-    canCreate &&
+    canOwnFiles &&
+      canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-ai-chat"]',
@@ -274,7 +288,8 @@ export function getTourSteps(
       ),
 
     // 12. Trash — restore, and the fact that it empties itself.
-    showQuickAccess &&
+    canOwnFiles &&
+      showQuickAccess &&
       trashId &&
       navItemStep(
         sidebarSelector(trashId),

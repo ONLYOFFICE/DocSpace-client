@@ -37,6 +37,7 @@ import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
+import type { TourAudience } from "SRC_DIR/components/Tour/audience";
 import {
   navItemStep,
   elementStep,
@@ -55,6 +56,12 @@ const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
 export type TourStepFlags = {
+  // Which tour to build. Admins get the room-owner story (create a room, pick a
+  // type, invite members, archive it when it is done); users and guests get the
+  // member's story, where a room is somewhere they were let into and their role
+  // decides what they may do. The steps that only exist for one of them are
+  // dropped outright, and the anchors both share get their own wording.
+  audience: TourAudience;
   isDesktop: boolean;
   canCreate: boolean;
   canUseTemplates: boolean;
@@ -77,6 +84,7 @@ export function getTourSteps(
   flags: TourStepFlags,
 ): Step[] {
   const {
+    audience,
     isDesktop,
     canCreate,
     canUseTemplates,
@@ -87,6 +95,10 @@ export function getTourSteps(
     archiveId,
   } = flags;
 
+  // Room creation, templates, archiving and the room Trash are room-admin
+  // powers; everyone else only ever joins rooms someone else set up.
+  const isAdmin = audience === "admin";
+
   // The quick-access sub-items are nested under Rooms and rendered expanded
   // while the section is active. Skipped on tablet: the collapsed icon-only
   // sidebar flattens sub-items into the main list.
@@ -94,17 +106,27 @@ export function getTourSteps(
 
   return [
     // 1. Where am I — a room is not a folder; the difference is members+roles.
+    // The admin owns that difference, a member lives with it, so the same
+    // anchor carries two different explanations.
     roomsId &&
       navItemStep(
         sidebarSelector(roomsId),
         t("Common:Rooms"),
-        {
-          text: t("RoomsTour:TourRooms"),
-          points: [
-            t("RoomsTour:TourRoomsMembers"),
-            t("RoomsTour:TourRoomsPersonal"),
-          ],
-        },
+        isAdmin
+          ? {
+              text: t("RoomsTour:TourRooms"),
+              points: [
+                t("RoomsTour:TourRoomsMembers"),
+                t("RoomsTour:TourRoomsPersonal"),
+              ],
+            }
+          : {
+              text: t("RoomsTour:TourRoomsMember"),
+              points: [
+                t("RoomsTour:TourRoomsMemberRole"),
+                t("RoomsTour:TourRoomsMemberScope"),
+              ],
+            },
         callbacks,
         LOG_LABEL,
       ),
@@ -112,7 +134,8 @@ export function getTourSteps(
     // 2. Create — the room-type tiles, named by what each type is for. Picking
     // the right type up front matters: the type fixes what members can do and
     // cannot be changed afterwards.
-    canCreate &&
+    isAdmin &&
+      canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-actions"]',
@@ -131,7 +154,8 @@ export function getTourSteps(
 
     // 3. VDR — the type users least often understand, and the reason to choose
     // Rooms over a plain shared folder for sensitive files.
-    canCreate &&
+    isAdmin &&
+      canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-vdr-room"]',
@@ -151,7 +175,8 @@ export function getTourSteps(
     // setup over (structure, tags, logo, roles), which is the fastest path for
     // teams that spin up similar rooms repeatedly. It is the fifth tile, so it
     // may sit in the clipped second row; expand the banner first.
-    canCreate &&
+    isAdmin &&
+      canCreate &&
       showFilter &&
       canUseTemplates &&
       elementStep(
@@ -170,7 +195,10 @@ export function getTourSteps(
         expandQuickActions,
       ),
 
-    // 5. A real room row: the per-room actions users most often hunt for.
+    // 5. A real room row: the per-room actions users most often hunt for. The
+    // context menu is where the audiences part company — inviting, editing and
+    // archiving are only in an admin's menu, so the member wording promises
+    // nothing they will not find there.
     hasItems &&
       fileItemStep(
         FIRST_ITEM_SELECTOR,
@@ -179,7 +207,9 @@ export function getTourSteps(
           text: t("RoomsTour:TourRoomItem"),
           points: [
             t("RoomsTour:TourRoomItemOpen"),
-            t("RoomsTour:TourRoomItemContextMenu"),
+            isAdmin
+              ? t("RoomsTour:TourRoomItemContextMenu")
+              : t("RoomsTour:TourRoomItemMemberMenu"),
             t("RoomsTour:TourRoomItemPin"),
           ],
         },
@@ -188,19 +218,32 @@ export function getTourSteps(
       ),
 
     // 6. Info panel — members, roles and the access links all live here. This
-    // is the single most useful control in the section.
+    // is the single most useful control in the section. For an admin it is a
+    // control panel (invite, change a role, mint a link); for a member it is a
+    // read-only "who else is here and what happened" view, so it gets its own
+    // title as well as its own body.
     isDesktop &&
       elementStep(
         "#info-panel-toggle--open",
-        t("RoomsTour:RoomsInfoPanelTitle"),
-        {
-          text: t("RoomsTour:RoomsInfoPanel"),
-          points: [
-            t("RoomsTour:RoomsInfoPanelMembers"),
-            t("RoomsTour:RoomsInfoPanelLinks"),
-            t("RoomsTour:RoomsInfoPanelHistory"),
-          ],
-        },
+        isAdmin
+          ? t("RoomsTour:RoomsInfoPanelTitle")
+          : t("RoomsTour:RoomsInfoPanelMemberTitle"),
+        isAdmin
+          ? {
+              text: t("RoomsTour:RoomsInfoPanel"),
+              points: [
+                t("RoomsTour:RoomsInfoPanelMembers"),
+                t("RoomsTour:RoomsInfoPanelLinks"),
+                t("RoomsTour:RoomsInfoPanelHistory"),
+              ],
+            }
+          : {
+              text: t("RoomsTour:RoomsInfoPanelMember"),
+              points: [
+                t("RoomsTour:RoomsInfoPanelMemberRoles"),
+                t("RoomsTour:RoomsInfoPanelHistory"),
+              ],
+            },
         callbacks,
         LOG_LABEL,
       ),
@@ -263,8 +306,10 @@ export function getTourSteps(
         LOG_LABEL,
       ),
 
-    // 11. Archive — where finished rooms go, and why it is not deletion.
-    showQuickAccess &&
+    // 11. Archive — where finished rooms go, and why it is not deletion. Only
+    // a room admin can archive, so the step is pointless for anyone else.
+    isAdmin &&
+      showQuickAccess &&
       archiveId &&
       navItemStep(
         sidebarSelector(archiveId),
@@ -279,8 +324,10 @@ export function getTourSteps(
         LOG_LABEL,
       ),
 
-    // 12. Trash — deleting a room is recoverable, which is worth saying.
-    showQuickAccess &&
+    // 12. Trash — deleting a room is recoverable, which is worth saying. Also
+    // admin-only: nobody else can delete a room in the first place.
+    isAdmin &&
+      showQuickAccess &&
       navItemStep(
         sidebarSelector("rooms-trash"),
         t("RoomsTour:RoomsTrashTitle"),

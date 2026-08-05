@@ -37,6 +37,7 @@ import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
+import type { TourAudience } from "SRC_DIR/components/Tour/audience";
 import {
   navItemStep,
   elementStep,
@@ -54,6 +55,11 @@ const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
 export type TourStepFlags = {
+  // Which tour to build. Admins configure agents — instructions, knowledge
+  // base, model, who may use them. Users and guests consume agents somebody
+  // else configured, so the creation and Trash steps are dropped for them and
+  // the shared anchors describe using an agent rather than owning one.
+  audience: TourAudience;
   isDesktop: boolean;
   canCreate: boolean;
   showFilter: boolean;
@@ -79,6 +85,7 @@ export function getTourSteps(
   flags: TourStepFlags,
 ): Step[] {
   const {
+    audience,
     isDesktop,
     canCreate,
     showFilter,
@@ -88,6 +95,10 @@ export function getTourSteps(
     hasRecent,
     hasTrash,
   } = flags;
+
+  // Creating and deleting agents is a room-admin power; everyone else only
+  // uses the agents they were given access to.
+  const isAdmin = audience === "admin";
 
   // The quick-access sub-items are nested under AI Agents and rendered expanded
   // while the section is active. Skipped on tablet: the collapsed icon-only
@@ -103,14 +114,26 @@ export function getTourSteps(
       navItemStep(
         sidebarSelector(aiAgentsId),
         t("Common:AIAgents"),
-        {
-          text: t("AiAgentsTour:AgentsIntro"),
-          points: [
-            t("AiAgentsTour:AgentsIntroTabs"),
-            t("AiAgentsTour:AgentsIntroResults"),
-            t("AiAgentsTour:AgentsIntroShare"),
-          ],
-        },
+        isAdmin
+          ? {
+              text: t("AiAgentsTour:AgentsIntro"),
+              points: [
+                t("AiAgentsTour:AgentsIntroTabs"),
+                t("AiAgentsTour:AgentsIntroResults"),
+                t("AiAgentsTour:AgentsIntroShare"),
+              ],
+            }
+          : {
+              // Same mental model, told from the using end: the last point
+              // replaces "share it with your team" with where the list they
+              // are looking at comes from.
+              text: t("AiAgentsTour:AgentsIntroUser"),
+              points: [
+                t("AiAgentsTour:AgentsIntroTabs"),
+                t("AiAgentsTour:AgentsIntroResults"),
+                t("AiAgentsTour:AgentsIntroUserAccess"),
+              ],
+            },
         callbacks,
         LOG_LABEL,
       ),
@@ -119,7 +142,8 @@ export function getTourSteps(
     // spotlighting the banner is the same as spotlighting the tile. The points
     // name what the create dialog actually asks for: AI Instructions,
     // Knowledge, Profile (model) and MCP.
-    canCreate &&
+    isAdmin &&
+      canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-actions"]',
@@ -145,7 +169,11 @@ export function getTourSteps(
           text: t("AiAgentsTour:AgentsItem"),
           points: [
             t("AiAgentsTour:AgentsItemOpen"),
-            t("AiAgentsTour:AgentsItemContextMenu"),
+            // Editing, inviting and duplicating are admin entries; a user's
+            // menu is short, so say what is actually in it.
+            isAdmin
+              ? t("AiAgentsTour:AgentsItemContextMenu")
+              : t("AiAgentsTour:AgentsItemMemberMenu"),
             t("AiAgentsTour:AgentsItemPin"),
           ],
         },
@@ -156,18 +184,30 @@ export function getTourSteps(
     // 4. Info panel — for an agent it offers Members / History / Details (see
     // helpers/info-panel/tabs.ts). Agents have no public external link, only a
     // members link, so the copy must not promise link sharing with outsiders.
+    // Granting access is the owner's half of that panel; for everyone else it
+    // answers "who else uses this agent and what changed in it".
     isDesktop &&
       elementStep(
         "#info-panel-toggle--open",
-        t("AiAgentsTour:AgentsInfoPanelTitle"),
-        {
-          text: t("AiAgentsTour:AgentsInfoPanel"),
-          points: [
-            t("AiAgentsTour:AgentsInfoPanelMembers"),
-            t("AiAgentsTour:AgentsInfoPanelViewOnly"),
-            t("AiAgentsTour:AgentsInfoPanelHistory"),
-          ],
-        },
+        isAdmin
+          ? t("AiAgentsTour:AgentsInfoPanelTitle")
+          : t("AiAgentsTour:AgentsInfoPanelMemberTitle"),
+        isAdmin
+          ? {
+              text: t("AiAgentsTour:AgentsInfoPanel"),
+              points: [
+                t("AiAgentsTour:AgentsInfoPanelMembers"),
+                t("AiAgentsTour:AgentsInfoPanelViewOnly"),
+                t("AiAgentsTour:AgentsInfoPanelHistory"),
+              ],
+            }
+          : {
+              text: t("AiAgentsTour:AgentsInfoPanelMember"),
+              points: [
+                t("AiAgentsTour:AgentsInfoPanelMemberRoles"),
+                t("AiAgentsTour:AgentsInfoPanelHistory"),
+              ],
+            },
         callbacks,
         LOG_LABEL,
       ),
@@ -233,8 +273,10 @@ export function getTourSteps(
         LOG_LABEL,
       ),
 
-    // 9. Trash — deleting an agent is recoverable, which is worth saying.
-    showQuickAccess &&
+    // 9. Trash — deleting an agent is recoverable, which is worth saying. Only
+    // an admin can delete one, so nobody else needs the step.
+    isAdmin &&
+      showQuickAccess &&
       hasTrash &&
       navItemStep(
         sidebarSelector("agents-trash"),

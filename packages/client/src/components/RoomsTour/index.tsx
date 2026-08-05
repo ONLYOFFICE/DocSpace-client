@@ -44,6 +44,10 @@ import type RoomsTourStore from "SRC_DIR/store/RoomsTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import {
+  getTourAudience,
+  type TourAudience,
+} from "SRC_DIR/components/Tour/audience";
 import WelcomeTourDialog, {
   type TourFeature,
 } from "SRC_DIR/components/Tour/WelcomeTourDialog";
@@ -58,6 +62,7 @@ import { getTourSteps, type TourStepFlags } from "./tourSteps";
 type RoomsTourProps = {
   roomsTourStore: RoomsTourStore;
   userId?: string;
+  audience: TourAudience;
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
@@ -74,6 +79,7 @@ type RoomsTourProps = {
 const RoomsTour = ({
   roomsTourStore,
   userId,
+  audience,
   currentDeviceType,
   isFrame,
   firstLoad,
@@ -96,6 +102,7 @@ const RoomsTour = ({
 
   const flags = useMemo<TourStepFlags>(
     () => ({
+      audience,
       isDesktop,
       canCreate,
       canUseTemplates,
@@ -106,6 +113,7 @@ const RoomsTour = ({
       archiveId,
     }),
     [
+      audience,
       isDesktop,
       canCreate,
       canUseTemplates,
@@ -129,6 +137,11 @@ const RoomsTour = ({
     "rooms tour",
   );
 
+  // Two of the four cards promise room-admin powers (handing out roles, minting
+  // access links). Members get the same slots filled with what the section
+  // actually does for them.
+  const isAdmin = audience === "admin";
+
   const features = useMemo<TourFeature[]>(
     () => [
       {
@@ -138,13 +151,21 @@ const RoomsTour = ({
       },
       {
         icon: UserReactSvgUrl,
-        title: t("RoomsTour:FeatureMembersTitle"),
-        description: t("RoomsTour:FeatureMembers"),
+        title: isAdmin
+          ? t("RoomsTour:FeatureMembersTitle")
+          : t("RoomsTour:FeatureMemberRoleTitle"),
+        description: isAdmin
+          ? t("RoomsTour:FeatureMembers")
+          : t("RoomsTour:FeatureMemberRole"),
       },
       {
         icon: SharedReactSvgUrl,
-        title: t("RoomsTour:FeatureAccessTitle"),
-        description: t("RoomsTour:FeatureAccess"),
+        title: isAdmin
+          ? t("RoomsTour:FeatureAccessTitle")
+          : t("RoomsTour:FeatureMemberWorkTitle"),
+        description: isAdmin
+          ? t("RoomsTour:FeatureAccess")
+          : t("RoomsTour:FeatureMemberWork"),
       },
       {
         icon: SecurityReactSvgUrl,
@@ -152,7 +173,7 @@ const RoomsTour = ({
         description: t("RoomsTour:FeatureRoomSecurity"),
       },
     ],
-    [t],
+    [t, isAdmin],
   );
 
   if (isFrame || !userId) return null;
@@ -193,7 +214,6 @@ const RoomsTour = ({
 
 export default inject(
   ({
-    authStore,
     userStore,
     settingsStore,
     filesStore,
@@ -210,11 +230,13 @@ export default inject(
       isRoot,
     } = treeFoldersStore;
 
-    const { isAdmin, isRoomAdmin } = authStore;
+    const audience = getTourAudience(userStore?.user);
+    const isAdminAudience = audience === "admin";
 
     return {
       roomsTourStore,
       userId: userStore?.user?.id,
+      audience,
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
@@ -222,8 +244,8 @@ export default inject(
         isRoomsFolderRoot && isRoot && !publicRoomStore.isPublicRoom,
       // Only room admins / admins see the rooms creation banner and the
       // Templates sidebar item (same gate as ClientArticleSidebar).
-      canCreate: (isAdmin || isRoomAdmin) && !!roomsFolder,
-      canUseTemplates: isAdmin || isRoomAdmin,
+      canCreate: isAdminAudience && !!roomsFolder,
+      canUseTemplates: isAdminAudience,
       showFilter: !filesStore.isEmptyPage,
       hasItems: filesStore.filesList?.length > 0,
       isTableView: filesStore.viewAs === "table",

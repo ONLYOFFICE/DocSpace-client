@@ -44,6 +44,7 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type TourStore from "SRC_DIR/store/TourStore";
 
 import TourTooltip from "./TourTooltip";
+import { isStepTargetPresent } from "./stepBuilders";
 
 export type TourStepCallbacks = {
   getSignal: () => AbortSignal | undefined;
@@ -52,9 +53,8 @@ export type TourStepCallbacks = {
 /**
  * Shared react-joyride driver for the section onboarding tours. Owns the tour
  * lifecycle (a fresh AbortSignal per step, teardown, and completion on
- * end/skip/close/target-not-found) and returns the portal-ready <Tour/>
- * element plus stable `callbacks` a section's step builder threads into each
- * step's `before` hook.
+ * end/skip/close) and returns the portal-ready <Tour/> element plus stable
+ * `callbacks` a section's step builder threads into each step's `before` hook.
  *
  * `buildSteps(callbacks)` is called on every render; memoize its inputs in the
  * caller so the steps array is stable.
@@ -84,7 +84,33 @@ export default function useTour(
     [],
   );
 
-  const steps = buildSteps(callbacks);
+  const liveSteps = buildSteps(callbacks);
+
+  // The step list handed to react-joyride is frozen for the length of a run.
+  //
+  // On the transition into `isRunning` every step is checked against the DOM
+  // and the ones whose anchor isn't there are dropped — an empty file list has
+  // no row to spotlight, a guest has no Trash item. Without that they would be
+  // handed to joyride anyway, and each missing anchor costs a spinner while the
+  // `before` hook waits it out before the step is abandoned.
+  //
+  // Freezing matters as much as filtering: the flags feeding `buildSteps` keep
+  // changing while the tour runs (the list finishes loading, the view switches),
+  // and a step list that grows or shrinks mid-run shifts joyride's index, which
+  // lands the user on a different step than the one they clicked Next for.
+  const stepsRef = useRef<Step[]>(liveSteps);
+  const wasRunningRef = useRef(false);
+
+  if (tourStore.isRunning !== wasRunningRef.current) {
+    wasRunningRef.current = tourStore.isRunning;
+    stepsRef.current = tourStore.isRunning
+      ? liveSteps.filter(isStepTargetPresent)
+      : liveSteps;
+  } else if (!tourStore.isRunning) {
+    stepsRef.current = liveSteps;
+  }
+
+  const steps = stepsRef.current;
 
   const { on, Tour } = useJoyride({
     continuous: true,
@@ -101,8 +127,11 @@ export default function useTour(
       blockTargetInteraction: true,
       skipScroll: true,
       zIndex: 10000,
-      beforeTimeout: 15000,
-      targetWaitTimeout: 15000,
+      // Backstops, not the normal path: the steps were filtered against the
+      // DOM at start and each `before` hook has its own short budget
+      // (STEP_TARGET_TIMEOUT). Anything longer here is dead spinner time.
+      beforeTimeout: 3000,
+      targetWaitTimeout: 2000,
     },
     locale: {
       back: t("Common:Back"),
@@ -118,6 +147,15 @@ export default function useTour(
       tourStore.completeTour();
     }
   }, [isMobileView, tourStore]);
+
+  // Every anchor was filtered out, so there is nothing to show. react-joyride
+  // never starts on an empty step list, which would leave the tour flagged as
+  // running forever — close it out instead.
+  useEffect(() => {
+    if (tourStore.isRunning && steps.length === 0) {
+      tourStore.completeTour();
+    }
+  }, [tourStore, tourStore.isRunning, steps.length]);
 
   useEffect(() => {
     if (!tourStore.isRunning) {
@@ -171,15 +209,26 @@ export default function useTour(
       }
     });
 
+    // An anchor that was on screen when the tour started has gone (a list
+    // reloaded, a panel closed, the view switched). react-joyride moves on to
+    // the next step by itself, and walks off the end into TOUR_END if none of
+    // the remaining ones resolve either — so the only job here is to drop the
+    // outline the abandoned step left behind and let the tour carry on.
+    // Ending the tour on the user because one step lost its anchor is exactly
+    // what this must not do.
     const unsubTargetNotFound = on(EVENTS.TARGET_NOT_FOUND, (data) => {
       if (process.env.NODE_ENV !== "production") {
         // eslint-disable-next-line no-console
         console.warn(
-          `[${logLabel}] target not found, ending tour:`,
+          `[${logLabel}] target not found, skipping step:`,
           data.step?.target,
         );
       }
-      stopTour();
+
+      stepAbortRef.current?.abort();
+      stepAbortRef.current = null;
+      currentSignalRef.current = undefined;
+      clearOutline();
     });
 
     return () => {

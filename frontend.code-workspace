@@ -233,6 +233,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
           },
           {
+            "label": "Test translations: missing keys",
+            "task": "Test | Jest:translations:missing-keys",
+            "tooltip": "🛠️ Check missing keys and missing locale files across ALL languages, not only the base ones"
+          },
+          {
             "label": "Test translations: clear wrong values",
             "task": "Test | Jest:translations:clear-wrong",
             "tooltip": "🛠️ Run translation tests with CLEAR_WRONG_VALUES=true — clears bad variables, tags and forbidden values"
@@ -562,6 +567,11 @@
             "label": "Translation Stats",
             "task": "Translation App | translation stats",
             "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
+          },
+          {
+            "label": "Translation Stats (missing keys)",
+            "task": "Translation App | translation stats (missing keys)",
+            "tooltip": "📊 List every missing key per language and package"
           },
           {
             "label": "Translation Stats (Markdown)",

@@ -33,59 +33,54 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+@use "../../toolbar-mixins" as toolbar;
 
-import { TSelection } from "./ContextButton";
+$action-icon-size: 12px;
 
-import RoomsItemHeader from "./RoomsItemTitle";
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+.button {
+  @include toolbar.plain-button;
 
-const ItemTitle = ({
-  infoPanelSelection,
+  gap: 8px;
+  min-width: 0;
+  padding-block: 2px;
+}
 
-  isNoItem,
+.icon {
+  @include toolbar.action-icon($action-icon-size);
+}
 
-  isGallery,
-  isContacts,
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 16px;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
+.reset {
+  flex-shrink: 0;
+}
 
-  if (isPlugin && !isPluginHeaderVisible) return null;
+.calendar {
+  @include toolbar.calendar-popup;
+  @include toolbar.popup-top;
 
-  if (isNoItem || isContacts || isGallery) return null;
+  // Flush with the trigger, which starts at the toolbar's content edge.
+  inset-inline-start: toolbar.$body-padding-start;
 
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
-    );
+  &.mobile {
+    @include toolbar.calendar-popup-mobile;
+  }
+}
 
-  return <RoomsItemHeader selection={infoPanelSelection} />;
-};
-
-export default ItemTitle;

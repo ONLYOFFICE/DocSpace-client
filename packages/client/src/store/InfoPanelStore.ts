@@ -35,18 +35,29 @@
 
 import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
+import {
+  getFolderLogReportStatus,
+  startFolderLogReport,
+} from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { FolderType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { pollUntil } from "@docspace/ui-kit/billing/utils/stripe-flow";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TLogo } from "@docspace/ui-kit/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import {
+  TDocumentBuilderTask,
+  TFile,
+  TFolder,
+  TFolderLogReportDateRange,
+} from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
@@ -60,6 +71,7 @@ import {
   InfoPanelView,
 } from "SRC_DIR/helpers/info-panel";
 
+import i18n from "../i18n";
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
 import FilesSettingsStore from "./FilesSettingsStore";
@@ -70,8 +82,7 @@ import TreeFoldersStore from "./TreeFoldersStore";
 export type InfoPanelViewType = InfoPanelView | `info_plugin-${string}`;
 
 type TSelection =
-  | Nullable<TRoom | TFolder | TFile>
-  | Array<TRoom | TFolder | TFile>;
+  Nullable<TRoom | TFolder | TFile> | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
   isVisible = false;
@@ -102,9 +113,90 @@ class InfoPanelStore {
 
   shareChanged = false;
 
+  isRoomHistoryReportDownloading = false;
+
+  roomHistoryReportPageLeft = false;
+
   constructor(public userStore: UserStore) {
     makeAutoObservable(this);
   }
+
+  setRoomHistoryReportDownloading = (value: boolean) => {
+    this.isRoomHistoryReportDownloading = value;
+  };
+
+  markRoomHistoryReportPageLeft = () => {
+    if (this.isRoomHistoryReportDownloading)
+      this.roomHistoryReportPageLeft = true;
+  };
+
+  resetRoomHistoryReportPageLeft = () => {
+    this.roomHistoryReportPageLeft = false;
+  };
+
+  private resetRoomHistoryReportState = () => {
+    this.roomHistoryReportPageLeft = false;
+    this.setRoomHistoryReportDownloading(false);
+  };
+
+  private finishRoomHistoryReport = (resultFileUrl?: string) => {
+    const { openOnNewPage } = this.filesSettingsStore;
+
+    toastr.success(
+      i18n.t("Common:ReportSaveLocation", {
+        sectionName: i18n.t("Common:Files"),
+      }),
+    );
+
+    if (!this.roomHistoryReportPageLeft && resultFileUrl) {
+      const url = combineUrl(window.ClientConfig?.proxy?.url, resultFileUrl);
+
+      setTimeout(
+        () => window.open(url, openOnNewPage ? "_blank" : "_self"),
+        100,
+      ); // hack for ios
+    }
+
+    this.resetRoomHistoryReportState();
+  };
+
+  getRoomHistoryReport = async (
+    folderId: number | string,
+    dateRange?: TFolderLogReportDateRange,
+  ) => {
+    if (this.isRoomHistoryReportDownloading) return;
+
+    this.roomHistoryReportPageLeft = false;
+    this.setRoomHistoryReportDownloading(true);
+
+    const controller = new AbortController();
+
+    try {
+      let task: Nullable<TDocumentBuilderTask> = await startFolderLogReport(
+        folderId,
+        dateRange,
+      );
+
+      if (!task?.isCompleted && !task?.error) {
+        await pollUntil(async () => {
+          task = await getFolderLogReportStatus(folderId);
+
+          return !!task?.isCompleted || !!task?.error;
+        }, controller.signal);
+      }
+
+      if (task?.error) {
+        toastr.error(task.error);
+        this.resetRoomHistoryReportState();
+        return;
+      }
+
+      this.finishRoomHistoryReport(task?.resultFileUrl);
+    } catch (error) {
+      toastr.error(error as TData);
+      this.resetRoomHistoryReportState();
+    }
+  };
 
   setIsVisible = (visiable: boolean) => {
     const selectedFolderIsAgentOrFolderInAgent =
@@ -291,8 +383,9 @@ class InfoPanelStore {
       ? this.filesStore.selection.length === 1
         ? this.filesStore.selection[0]
         : this.filesStore.selection
-      : (this.filesStore.bufferSelection ??
-        { ...this.selectedFolderStore })) as unknown as TSelection;
+      : (this.filesStore.bufferSelection ?? {
+          ...this.selectedFolderStore,
+        })) as unknown as TSelection;
 
     if (!selection) return null;
 

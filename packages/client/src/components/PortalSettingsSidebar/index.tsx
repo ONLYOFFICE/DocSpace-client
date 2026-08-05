@@ -230,6 +230,7 @@ const PortalSettingsSidebar = ({
       variant="secondary"
       isNavLoading={isNavLoading}
       hideBack={isNotPaidPeriod}
+      withDevTools
     />
   );
 };

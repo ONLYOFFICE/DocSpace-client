@@ -33,59 +33,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+import type { DateTime } from "luxon";
 
-import { TSelection } from "./ContextButton";
+import type { Nullable } from "@docspace/shared/types";
+import type { TFolderLogReportDateRange } from "@docspace/shared/api/files/types";
 
-import RoomsItemHeader from "./RoomsItemTitle";
+export enum ExportScope {
+  AllHistory = "all-history",
+  DateRange = "date-range",
+}
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+export type ExportMenuProps = {
+  isReportGenerating: boolean;
+  earliestDate?: Nullable<DateTime>;
+  locale: string;
 
-const ItemTitle = ({
-  infoPanelSelection,
-
-  isNoItem,
-
-  isGallery,
-  isContacts,
-
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
-
-  if (isPlugin && !isPluginHeaderVisible) return null;
-
-  if (isNoItem || isContacts || isGallery) return null;
-
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
-    );
-
-  return <RoomsItemHeader selection={infoPanelSelection} />;
+  onExport: (dateRange?: TFolderLogReportDateRange) => void;
 };
-
-export default ItemTitle;

@@ -38,7 +38,9 @@ import axios from "axios";
 
 import api from "@docspace/shared/api";
 import { formatDate, parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { RoomsType } from "@docspace/shared/enums";
+import type { Nullable } from "@docspace/shared/types";
 import {
   TFile,
   TFileLink,
@@ -86,6 +88,12 @@ const addLinksToHistory = (fetchedHistory: TFeed, links: RoomMember[]) => {
   return { ...fetchedHistory, items: historyWithLinks };
 };
 
+const getDayFilter = (day: Nullable<string>) => {
+  const toDate = parseToDateTime(day)?.endOf("day").toUTC().toISO();
+
+  return toDate ? { toDate } : {};
+};
+
 const countFeedEntries = <T,>(feedActions: TFeedAction<T>[]) =>
   feedActions.reduce((count, feed) => count + 1 + feed.related.length, 0);
 
@@ -117,12 +125,20 @@ export type UseHistoryProps = {
   selection: TRoom | TFile | TFolder;
 
   setExternalLinks: PublicRoomStore["setExternalLinks"];
+
+  scrollToTop: () => void;
+};
+
+type TDayFilter = {
+  selectionId: Nullable<number | string>;
+  day: Nullable<string>;
 };
 
 export const useHistory = ({
   selection,
 
   setExternalLinks,
+  scrollToTop,
 }: UseHistoryProps) => {
   const [filter, setFilter] = React.useState({
     page: 0,
@@ -130,6 +146,18 @@ export const useHistory = ({
   });
 
   const [total, setTotal] = React.useState(0);
+
+  const [dayFilter, setDayFilter] = React.useState<TDayFilter>({
+    selectionId: null,
+    day: null,
+  });
+
+  const selectionId = selection?.id ?? null;
+
+  // The picked day belongs to the item it was picked for, so switching the
+  // selection drops the filter instead of carrying it over to the new history
+  const historyDay =
+    dayFilter.selectionId === selectionId ? dayFilter.day : null;
 
   const [history, setHistory] = React.useState<TSelectionHistory[]>([]);
 
@@ -139,7 +167,7 @@ export const useHistory = ({
   const abortController = React.useRef<AbortController>(null);
   const skippedFeedsCount = React.useRef(0);
 
-  const fetchHistory = React.useCallback(async () => {
+  const fetchHistory = React.useCallback(async (day?: Nullable<string>) => {
     if (!selection?.id) return;
 
     setIsFirstLoading(true);
@@ -164,11 +192,13 @@ export const useHistory = ({
         roomType,
       );
 
+    const dayFilter = getDayFilter(day === undefined ? historyDay : day);
+
     try {
       const response = await api.rooms.getHistory(
         selectionType,
         selection.id,
-        { page: 0, startIndex: 0, count: PAGE_COUNT },
+        { page: 0, startIndex: 0, count: PAGE_COUNT, ...dayFilter },
         abortController.current.signal,
         selectionRequestToken,
       );
@@ -220,8 +250,21 @@ export const useHistory = ({
     "isRoom" in selection && selection.isRoom,
     "roomType" in selection && selection.roomType,
     "requestToken" in selection && selection.requestToken,
+    historyDay,
     setExternalLinks,
   ]);
+
+  const selectHistoryDay = useEventCallback((day: Nullable<string>) => {
+    setDayFilter({ selectionId, day });
+
+    fetchHistory(day)
+      .then(() => scrollToTop())
+      .catch((error) => console.log(error));
+  });
+
+  const resetHistoryDay = useEventCallback(() =>
+    setDayFilter({ selectionId: null, day: null }),
+  );
 
   const fetchMoreHistory = async () => {
     if (!selection?.id) return;
@@ -254,7 +297,7 @@ export const useHistory = ({
       const data = await api.rooms.getHistory(
         selectionType,
         selection.id,
-        { page, startIndex, count: PAGE_COUNT },
+        { page, startIndex, count: PAGE_COUNT, ...getDayFilter(historyDay) },
         abortController.current.signal,
         requestToken,
       );
@@ -324,6 +367,10 @@ export const useHistory = ({
     isFirstLoading,
     fetchHistory,
     fetchMoreHistory,
+
+    historyDay,
+    selectHistoryDay,
+    resetHistoryDay,
 
     abortController,
   };

@@ -67,12 +67,12 @@ type FilesTourProps = {
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
-  isPersonalRoot: boolean;
+  isFilesRoot: boolean;
   canCreate: boolean;
   showFilter: boolean;
   hasItems: boolean;
   isTableView: boolean;
-  myDocumentsId: string | null;
+  sectionId: string | null;
   sharedId: string | null;
   recentId: string | null;
   favoritesId: string | null;
@@ -86,12 +86,12 @@ const FilesTour = ({
   currentDeviceType,
   isFrame,
   firstLoad,
-  isPersonalRoot,
+  isFilesRoot,
   canCreate,
   showFilter,
   hasItems,
   isTableView,
-  myDocumentsId,
+  sectionId,
   sharedId,
   recentId,
   favoritesId,
@@ -113,7 +113,7 @@ const FilesTour = ({
       showFilter,
       hasItems,
       isTableView,
-      myDocumentsId,
+      sectionId,
       sharedId,
       recentId,
       favoritesId,
@@ -126,7 +126,7 @@ const FilesTour = ({
       showFilter,
       hasItems,
       isTableView,
-      myDocumentsId,
+      sectionId,
       sharedId,
       recentId,
       favoritesId,
@@ -146,37 +146,56 @@ const FilesTour = ({
     "files tour",
   );
 
+  // A guest owns no files here: no personal space to create in and no Trash to
+  // restore from. Their cards describe the section they actually get — the
+  // files other people shared with them.
+  const isGuest = audience === "guest";
+
   const features = useMemo<TourFeature[]>(
     () => [
       {
         icon: DocumentsReactSvgUrl,
-        title: t("FilesTour:FeatureDocumentsTitle"),
-        description: t("FilesTour:FeatureDocuments"),
+        title: isGuest
+          ? t("FilesTour:FeatureGuestDocumentsTitle")
+          : t("FilesTour:FeatureDocumentsTitle"),
+        description: isGuest
+          ? t("FilesTour:FeatureGuestDocuments")
+          : t("FilesTour:FeatureDocuments"),
       },
       {
         icon: SharedReactSvgUrl,
-        title: t("FilesTour:FeatureSharingTitle"),
-        description: t("FilesTour:FeatureSharing"),
+        title: isGuest
+          ? t("FilesTour:FeatureGuestSharedTitle")
+          : t("FilesTour:FeatureSharingTitle"),
+        description: isGuest
+          ? t("FilesTour:FeatureGuestShared")
+          : t("FilesTour:FeatureSharing"),
       },
       {
         icon: SearchReactSvgUrl,
         title: t("FilesTour:FeatureOrganizeTitle"),
-        description: t("FilesTour:FeatureOrganize"),
+        description: isGuest
+          ? t("FilesTour:FeatureGuestOrganize")
+          : t("FilesTour:FeatureOrganize"),
       },
       {
         icon: SecurityReactSvgUrl,
-        title: t("FilesTour:FeatureSecurityTitle"),
-        description: t("FilesTour:FeatureSecurity"),
+        title: isGuest
+          ? t("FilesTour:FeatureGuestAccessTitle")
+          : t("FilesTour:FeatureSecurityTitle"),
+        description: isGuest
+          ? t("FilesTour:FeatureGuestAccess")
+          : t("FilesTour:FeatureSecurity"),
       },
     ],
-    [t],
+    [t, isGuest],
   );
 
   if (isFrame || !userId) return null;
 
   const welcomeVisible =
     !firstLoad &&
-    isPersonalRoot &&
+    isFilesRoot &&
     filesTourStore.isHydrated &&
     !filesTourStore.tourCompleted &&
     !filesTourStore.isRunning;
@@ -228,6 +247,7 @@ export default inject(
       favoritesFolderId,
       recycleBinFolderId,
       isPersonalRoom,
+      isSharedWithMeFolder,
       isRoot,
     } = treeFoldersStore;
 
@@ -242,8 +262,15 @@ export default inject(
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
-      isPersonalRoot:
-        isPersonalRoom && isRoot && !publicRoomStore.isPublicRoom,
+      // Where the tour is allowed to open: the root of the Files section.
+      // For everyone with a personal space that root is My documents. A guest
+      // has none — the sidebar points their Files item at Shared with me
+      // instead — so that folder is their section root and the tour has to
+      // accept it, or it can never open for them at all.
+      isFilesRoot:
+        !publicRoomStore.isPublicRoom &&
+        ((isPersonalRoom && isRoot) ||
+          (!hasMyDocuments && !!isSharedWithMeFolder)),
       canCreate: !!myFolder?.security?.Create,
       showFilter: !filesStore.isEmptyPage,
       hasItems: filesStore.filesList?.length > 0,
@@ -251,8 +278,14 @@ export default inject(
       // Sidebar anchors (ClientArticleSidebar → NavMenu data-item-id). Item
       // ids of tree sections are their folder ids, so they mirror the same
       // gating the sidebar itself applies (Trash is hidden from guests).
-      myDocumentsId:
-        hasMyDocuments && myFolderId != null ? String(myFolderId) : null,
+      //
+      // The section item is keyed by the My documents folder id when there is
+      // one, and by the literal "files" when there is not — the exact fallback
+      // ClientArticleSidebar uses to build the item for a guest.
+      sectionId:
+        hasMyDocuments && myFolderId != null
+          ? String(myFolderId)
+          : (sharedWithMeId != null ? "files" : null),
       sharedId: sharedWithMeId != null ? String(sharedWithMeId) : null,
       recentId: recentFolderId != null ? String(recentFolderId) : null,
       favoritesId: favoritesFolderId != null ? String(favoritesFolderId) : null,

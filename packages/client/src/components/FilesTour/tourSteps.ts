@@ -78,7 +78,13 @@ export type TourStepFlags = {
   isTableView: boolean;
   // Sidebar anchors: NavMenu renders `data-item-id` per item, the ids of the
   // tree-folder items are their folder ids (null — item is absent).
-  myDocumentsId: string | null;
+  //
+  // `sectionId` is the top-level Files item. For everyone with a personal
+  // space that is `myDocumentsId`; a guest has none, so the sidebar falls back
+  // to the literal id "files" and points the item at Shared with me
+  // (ClientArticleSidebar). Anchoring on `sectionId` is what keeps the guest's
+  // quick-access steps reachable — `myDocumentsId` is null for them.
+  sectionId: string | null;
   sharedId: string | null;
   recentId: string | null;
   favoritesId: string | null;
@@ -97,7 +103,7 @@ export function getTourSteps(
     showFilter,
     hasItems,
     isTableView,
-    myDocumentsId,
+    sectionId,
     sharedId,
     recentId,
     favoritesId,
@@ -107,24 +113,39 @@ export function getTourSteps(
   // Guests own no files, so nothing that creates or deletes applies to them.
   const canOwnFiles = audience !== "guest";
 
-  // The quick-access sub-items are nested under My documents and rendered
-  // expanded while the section is active. Skipped on tablet: the collapsed
-  // icon-only sidebar flattens sub-items into the main list.
-  const showQuickAccess = isDesktop && !!myDocumentsId;
+  // The quick-access sub-items are nested under the Files section item and
+  // rendered expanded while the section is active. Skipped on tablet: the
+  // collapsed icon-only sidebar flattens sub-items into the main list.
+  //
+  // Anchored on the section item, not on My documents: a guest's section has
+  // no personal folder, but it does have the Shared/Recent/Favorites children
+  // this tour is mostly about.
+  const showQuickAccess = isDesktop && !!sectionId;
 
   return [
-    // 1. Where am I — the personal space, and how it differs from Rooms.
-    myDocumentsId &&
+    // 1. Where am I. Two different sections share this anchor: the personal
+    // space for everyone who has one, and — for a guest, who does not — the
+    // same item standing in for Shared with me. The step describes whichever
+    // one the user actually got.
+    sectionId &&
       navItemStep(
-        sidebarSelector(myDocumentsId),
+        sidebarSelector(sectionId),
         t("Common:Files"),
-        {
-          text: t("FilesTour:TourMyDocuments"),
-          points: [
-            t("FilesTour:TourMyDocumentsPrivate"),
-            t("FilesTour:TourMyDocumentsShare"),
-          ],
-        },
+        canOwnFiles
+          ? {
+              text: t("FilesTour:TourMyDocuments"),
+              points: [
+                t("FilesTour:TourMyDocumentsPrivate"),
+                t("FilesTour:TourMyDocumentsShare"),
+              ],
+            }
+          : {
+              text: t("FilesTour:TourGuestFiles"),
+              points: [
+                t("FilesTour:TourGuestFilesNoStorage"),
+                t("FilesTour:TourGuestFilesAccess"),
+              ],
+            },
         callbacks,
         LOG_LABEL,
       ),
@@ -258,13 +279,23 @@ export function getTourSteps(
         LOG_LABEL,
       ),
 
-    // 10. Shared with me — files other people gave you access to.
+    // 10. Shared with me — files other people gave you access to. For a guest
+    // this is the section they landed in rather than one shortcut among
+    // several, so it is worth saying that their access is what someone else
+    // granted, and can change.
     showQuickAccess &&
       sharedId &&
       navItemStep(
         sidebarSelector(sharedId),
         t("FilesTour:TourSharedTitle"),
-        t("FilesTour:TourShared"),
+        canOwnFiles
+          ? t("FilesTour:TourShared")
+          : {
+              text: t("FilesTour:TourGuestShared"),
+              points: [
+                t("FilesTour:TourGuestSharedRights"),
+              ],
+            },
         callbacks,
         LOG_LABEL,
       ),

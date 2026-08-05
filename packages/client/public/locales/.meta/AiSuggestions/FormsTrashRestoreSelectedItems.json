@@ -1,0 +1,28 @@
+{
+  "key_path": "FormsTrashRestoreSelectedItems",
+  "content": "Restore selected items",
+  "content_en_sha1_hash": "d9a62d99ac3d3aad87c1bbbb08e29f30c65a52b5",
+  "created_at": "2026-08-04T09:58:55.182Z",
+  "updated_at": "2026-08-04T09:58:56.463Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 758,
+      "context": "name: t(\"AiSuggestions:FormsTrashFindADeletedForm\"),\n prompt: t(\"AiSuggestions:FormsTrashFindADeletedFormPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashRestoreSelectedItems\"),\n prompt: t(\"AiSuggestions:FormsTrashRestoreSelectedItemsPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashDeletePermanently\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

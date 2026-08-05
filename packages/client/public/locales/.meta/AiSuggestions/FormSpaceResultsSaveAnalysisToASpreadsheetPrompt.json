@@ -1,0 +1,28 @@
+{
+  "key_path": "FormSpaceResultsSaveAnalysisToASpreadsheetPrompt",
+  "content": "Save the current analysis as a structured spreadsheet with clear columns and source references. If this information is not provided, ask me for the fields or columns to include and the preferred output format.",
+  "content_en_sha1_hash": "80688f4c41a2cc3d3c6d128f63425ca04cbedaff",
+  "created_at": "2026-08-04T09:58:55.155Z",
+  "updated_at": "2026-08-04T09:58:56.403Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 198,
+      "context": "requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheet\"),\n prompt: t(\n \"AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheetPrompt\",\n ),\n requires: \"create\",\n },\n ];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

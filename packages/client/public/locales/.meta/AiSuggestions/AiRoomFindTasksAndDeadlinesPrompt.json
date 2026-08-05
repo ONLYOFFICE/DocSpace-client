@@ -1,0 +1,28 @@
+{
+  "key_path": "AiRoomFindTasksAndDeadlinesPrompt",
+  "content": "Find tasks and deadlines across the available documents and return the most relevant results. If this information is not provided, ask me for the documents to include and the relevant time range.",
+  "content_en_sha1_hash": "26e5c195357c06307042383ceb58e682e8557fc2",
+  "created_at": "2026-08-04T09:58:55.098Z",
+  "updated_at": "2026-08-04T09:58:56.427Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 554,
+      "context": "name: t(\"AiSuggestions:AiRoomFindADocument\"),\n prompt: t(\"AiSuggestions:AiRoomFindADocumentPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomFindTasksAndDeadlines\"),\n prompt: t(\"AiSuggestions:AiRoomFindTasksAndDeadlinesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomCompareDocuments\"),\n prompt: t(\"AiSuggestions:AiRoomCompareDocumentsPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

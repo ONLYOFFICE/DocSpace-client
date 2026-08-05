@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesMultipleCompareSelectedFilesPrompt",
+  "content": "Compare the selected files and highlight meaningful similarities, differences, changes, and conflicts. If this information is not provided, ask me for the items, groups, or periods to compare and the comparison criteria.",
+  "content_en_sha1_hash": "d93f6d9ebafe2e7997f2ac6be0e0c55b9025ae89",
+  "created_at": "2026-08-04T09:58:55.121Z",
+  "updated_at": "2026-08-04T09:58:56.420Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 381,
+      "context": "name: t(\"AiSuggestions:FilesMultipleCollectDataIntoATable\"),\n prompt: t(\"AiSuggestions:FilesMultipleCollectDataIntoATablePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCompareSelectedFiles\"),\n prompt: t(\"AiSuggestions:FilesMultipleCompareSelectedFilesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCreateACombinedSummary\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateACombinedSummaryPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

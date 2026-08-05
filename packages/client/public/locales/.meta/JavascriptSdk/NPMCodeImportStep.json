@@ -3,16 +3,17 @@
   "content": "Import the package in your project:",
   "content_en_sha1_hash": "5fe6d0342268dd7609b0f79d4c0aec73f4fede5c",
   "created_at": "2025-05-19T21:30:54.601Z",
-  "updated_at": "2025-08-04T07:30:01.403Z",
+  "updated_at": "2026-05-15T14:00:06.809Z",
   "comment": {
-    "text": "\"Import the package in your project. This translation is used in a UI component that prompts users to enter an import statement.\"",
+    "text": "This is a static text label that appears on the Developer Tools page, instructing users to import a package into their project.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:29.152Z"
+    "updated_at": "2026-04-11T21:14:57.547Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 84,
+      "line_number": 94,
       "context": "heightTextArea={32}\n isReadOnly\n enableCopy\n />\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeImportStep\")}\n </Text>\n <Textarea\n value=\"import SDK from '@onlyoffice/docspace-sdk-js';\"\n heightTextArea={32}\n isReadOnly",
       "module": "/packages/client"
     }
@@ -27,30 +28,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"قوموا باستيراد الحزمة في مشروعكم:\" is a bit formal and could be improved for better user experience. While technically correct, it's not the most natural phrasing. A more common and approachable phrasing could be considered.",
-          "suggestion": "استوردوا الحزمة في مشروعكم"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon (:) at the end of the Arabic sentence is common but may feel slightly abrupt in a UI context. Consider removing it or replacing it with a more subtle visual cue if the platform allows.",
-          "suggestion": "استوردوا الحزمة في مشروعكم"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'layihənizə' is slightly unnatural in this context. While technically correct, 'proyektinizə' would be more common and idiomatic when referring to a software project.",
-          "suggestion": "Paketi proyektinizə idxal edin:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -165,23 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පැකේජය' (package) is spelled correctly. However, ensure it's the preferred terminology in Sinhala for software packages in this context.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is grammatically correct, but could be slightly more natural. While 'ඔබේ ව්‍යාපෘතියට පැකේජය ආනයනය කරන්න:' is understandable, a more common phrasing might be 'ඔබේ ව්‍යාපෘතියේ පැකේජය ආගෙන එන්න' (Import the package into your project) or 'ඔබේ ව්‍යාපෘතියේ පැකේජය එකතු කරන්න' (Add the package to your project).",
-          "suggestion": "ඔබේ ව්‍යාපෘතියේ පැකේජය ආගෙන එන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -199,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Увези пакет у свој пројекат:\" literally translates to 'Bring the package into your project'.  'Import' is the correct technical term for this action in a programming context. 'Uvezi' implies physical transport, not code inclusion.",
-          "suggestion": "Убаци пакет у свој пројекат:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -229,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Nhập gói trong dự án của bạn:\" is not the most natural or accurate translation of \"Import the package in your project:\". \"Nhập\" can imply physically importing something. A more appropriate translation would convey the meaning of including the package using a javascript import statement.",
-          "suggestion": "Thêm gói vào dự án của bạn:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

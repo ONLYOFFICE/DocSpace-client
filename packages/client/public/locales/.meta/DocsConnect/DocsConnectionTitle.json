@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectionTitle",
+  "content": "{{organizationName}} {{editorsName}} connection",
+  "content_en_sha1_hash": "58f3fd51a86a43ec05467c2cdf8c08f46c178b91",
+  "created_at": "2026-07-30T16:14:09.571Z",
+  "updated_at": "2026-08-01T15:33:49.632Z",
+  "comment": {
+    "text": "Header title in the DocsConnect settings panel identifying the connection using the organization's brand name ({{organizationName}}) and the product editors' brand name ({{editorsName}}).",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:18:30.629Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 255,
+      "context": "};\n \n return (\n <div className={styles.settings}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"DocsConnect:DocsConnectionTitle\", {\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

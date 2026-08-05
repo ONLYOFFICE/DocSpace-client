@@ -3,16 +3,17 @@
   "content": "The number of rooms is about to be exceeded: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "09aca6c9765ec43ab2c1d51435aa82f9f8ed4eea",
   "created_at": "2025-05-19T21:30:54.127Z",
-  "updated_at": "2025-11-18T14:41:49.668Z",
+  "updated_at": "2026-05-15T14:00:06.618Z",
   "comment": {
-    "text": "This translation key is used to display a warning message when the number of rooms is about to exceed a certain threshold. It is intended for use in a quota or limit indicator within the Quotas Bar component (e.g., /packages/client/src/components/MainBar/QuotasBar.js, line 234).",
+    "text": "This is a header for a quota bar, indicating that the number of rooms created is nearing or has reached the maximum allowed. `{{currentValue}}` is the current number of rooms, and `{{maxValue}}` is the maximum allowed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:22.758Z"
+    "updated_at": "2026-04-11T21:17:39.064Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 241,
+      "line_number": 251,
       "context": "};\n const getQuotaInfo = () => {\n switch (type) {\n case QuotaBarTypes.RoomsTariff:\n return {\n header: t(\"RoomQuotaHeader\", { currentValue, maxValue }),\n description: getRoomsTariffDescription(),\n };\n case QuotaBarTypes.RoomsTariffLimit:\n return {\n header: t(\"RoomQuotaHeaderLimit\", { currentValue, maxValue }),",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'على وشك أن يتجاوز' literally translates to 'about to exceed.' While understandable, a more natural and commonly used phrasing in Saudi Arabic might be 'يتجاوز الحد' or 'يقترب من الحد الأقصى'.",
-          "suggestion": "عدد الغرف يقترب من الحد الأقصى: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,47 +64,19 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Las salas están a punto de excederse\" is not the most natural or accurate way to express \"The number of rooms is about to be exceeded.\" It literally translates to 'The rooms are about to exceed themselves,' which doesn't convey the intended meaning of reaching a limit. A better translation would emphasize the reaching of a quota or limit.",
-          "suggestion": "Las habitaciones están a punto de alcanzar el límite: {{currentValue}} / {{maxValue}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation maintains the same placeholders as the original, which is good. However, consistency in using 'salas' vs. 'habitaciones' across the application would be beneficial. While both are acceptable, choosing one and sticking to it improves user experience.",
-          "suggestion": "Consider using 'habitaciones' consistently if that is the preferred term within the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Huoneet täyttyvät pian' doesn't fully convey the meaning of 'The number of rooms is about to be exceeded'. It translates to 'The rooms are about to be filled soon'. While related, it lacks the emphasis on exceeding a limit.",
-          "suggestion": "Huoneiden määrä ylittyy pian: {{currentValue}} / {{maxValue}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The original English content uses variables {{currentValue}} and {{maxValue}}. The Finnish translation also incorporates these variables, which is appropriate for localization but should be consistently applied.",
-          "suggestion": "No change needed, maintains consistency with the English original."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase \"Salles est sur le point d’être dépassée\" is grammatically incorrect. \"Salles\" is feminine plural, so the verb should be \"Salles est sur le point d’être dépassées\".",
-          "suggestion": "Salles est sur le point d’être dépassées : {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -127,13 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"このルームは、もうすぐ制限を超えます：{{currentValue}} / {{maxValue}}\" is a bit too literal and sounds unnatural in Japanese. 'Room' is not explicitly needed, and 'もうすぐ' could be improved.",
-          "suggestion": "部屋の利用可能数に上限に近づいています：{{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -151,25 +112,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Tūlīt tiks pārsniegtas telpas: {{currentValue}} / {{maxValue}}\" is a literal translation that doesn't quite convey the intended meaning of \"The number of rooms is about to be exceeded.\" A more natural Latvian phrasing would be something like \"Telpu skaits tuvojas maksimālajam limitam: {{currentValue}} / {{maxValue}}\" or \"Gaišs telpu limiti: {{currentValue}} / {{maxValue}}\"",
-          "suggestion": "Telpu skaits tuvojas maksimālajam limitam: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The sentence structure \"Kamers staat op het punt overschreden te worden\" is grammatically awkward and unnatural in Dutch. The verb 'staan' doesn't quite fit the context.",
-          "suggestion": "Een betere formulering zou zijn: \"Het aantal kamers staat op het punt overschreden te worden\" or \"Er staat een aantal kamers overschreden te worden\" or \"Het aantal kamers dreigt overschreden te worden\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -181,49 +130,26 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Salas que estão prestes a ser excedidas' is a literal translation, but sounds awkward in Portuguese. A more natural phrasing would convey the sense of nearing the limit.",
-          "suggestion": "Consider 'Número de salas está próximo do limite: {{currentValue}} / {{maxValue}}' or 'Limite de salas quase atingido: {{currentValue}} / {{maxValue}}'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'As salas estão prestes a ser excedidos' is grammatically incorrect and doesn't accurately convey the meaning of 'The number of rooms is about to be exceeded'. The verb 'exceder' needs to agree with the plural subject 'salas'. Also, the phrase is a bit awkward.",
-          "suggestion": "As salas estão prestes a atingir o limite: {{currentValue}} / {{maxValue}}"
-        },
-        {
-          "type": "grammar",
-          "description": "The verb 'estar' should agree with the subject 'salas'.  'salas estão' is correct, but the phrasing is clunky.",
-          "suggestion": "As salas estão prestes a atingir o limite: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Cota sălilor\" translates more literally to \"Room quota\" but might be slightly awkward in Romanian. A more natural phrasing would depend on the intended nuance. It's possible \"Numărul de camere\" (Number of rooms) would be more understandable.",
-          "suggestion": "Consider \"Numărul de camere este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -246,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'соба' should be 'соби'. It's plural, matching the context of 'number of rooms'.",
-          "suggestion": "Број соби ц́е ускоро бити прекорачен: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -264,13 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Odalar aşılmak üzere: {{currentValue}} / {{maxValue}}' while conveying the general idea, isn't the most natural or idiomatic way to express \"The number of rooms is about to be exceeded.\" A more accurate translation would be something like \"Oda sayısı aşıma yakın: {{currentValue}} / {{maxValue}}\" or \"Oda sayısı sınırın üzerinde: {{currentValue}} / {{maxValue}}\".",
-          "suggestion": "Oda sayısı aşıma yakın: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -282,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'about to be exceeded' implies a warning or approaching limit. The Vietnamese translation 'sắp vượt quá' directly translates to 'about to exceed,' but might not fully convey the warning aspect. A more suitable translation might include a word suggesting a limit is approaching, like 'gần vượt quá' (nearly exceeding).",
-          "suggestion": "Gần vượt quá: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { Navigate } from "react-router";
 
@@ -38,6 +47,7 @@ import { PLUGIN_SECTION_ROUTE } from "SRC_DIR/helpers/plugins/constants";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
+import ProtectedAppRoute from "../components/ProtectedAppRoute";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
@@ -122,46 +132,6 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "ai-agents",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/chat",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "ai-agents/:agent/filter",
-            element: (
-              <PrivateRoute requireAIServices>
-                <ViewComponent />
-              </PrivateRoute>
-            ),
-          },
-          {
             path: "recent",
             element: (
               <PrivateRoute>
@@ -226,6 +196,54 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "rooms/recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/favorite",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/favorite/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/trash",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "rooms/trash/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/shared",
             element: (
               <PrivateRoute>
@@ -251,6 +269,86 @@ const ClientRoutes = [
           },
           {
             path: "rooms/shared/:room/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/:room",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/:room/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/favorites",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/favorites/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/trash",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "forms/trash/filter",
             element: (
               <PrivateRoute>
                 <ViewComponent />
@@ -331,6 +429,94 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "ai-agents",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/favorites",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/favorites/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/trash",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/trash/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:id",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:id/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "ai-agents/:id/chat",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: PLUGIN_SECTION_ROUTE,
             async lazy() {
               const { Component } = await componentLoader(
@@ -359,6 +545,142 @@ const ClientRoutes = [
         ),
       },
       ...generalClientRoutes,
+      {
+        path: "/ai-files",
+        async lazy() {
+          const { AiFiles } = await componentLoader(
+            () => import("SRC_DIR/pages/AiFiles"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-files">
+                <ErrorBoundary>
+                  <AiFiles />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-forms",
+        async lazy() {
+          const { AiForms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiForms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-forms">
+                <ErrorBoundary>
+                  <AiForms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-arbiter",
+        async lazy() {
+          const { AiArbiter } = await componentLoader(
+            () => import("SRC_DIR/pages/AiArbiter"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-arbiter">
+                <ErrorBoundary>
+                  <AiArbiter />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/agents",
+        async lazy() {
+          const { AiAgents } = await componentLoader(
+            () => import("SRC_DIR/pages/AiAgents"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <AiAgents />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/ai-rooms",
+        async lazy() {
+          const { AiRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/AiRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="ai-rooms">
+                <ErrorBoundary>
+                  <AiRooms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/e2e-rooms",
+        async lazy() {
+          const { E2eRooms } = await componentLoader(
+            () => import("SRC_DIR/pages/E2eRooms"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ProtectedAppRoute appId="e2e-rooms">
+                <ErrorBoundary>
+                  <E2eRooms />
+                </ErrorBoundary>
+              </ProtectedAppRoute>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
+      {
+        path: "/dashboard",
+        async lazy() {
+          const { Dashboard } = await componentLoader(
+            () => import("SRC_DIR/pages/Dashboard"),
+          );
+
+          const Component = () => (
+            <PrivateRoute>
+              <ErrorBoundary>
+                <Dashboard />
+              </ErrorBoundary>
+            </PrivateRoute>
+          );
+
+          return { Component };
+        },
+      },
     ],
   },
   {
@@ -643,6 +965,25 @@ const ClientRoutes = [
     },
   },
   {
+    path: "/no-access",
+    async lazy() {
+      const { default: NoAccessContainer, NoAccessContainerType } =
+        await componentLoader(
+          () => import("SRC_DIR/components/EmptyContainer/NoAccessContainer"),
+        );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <NoAccessContainer type={NoAccessContainerType.Account} />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
+  },
+  {
     path: "/error/offline",
     async lazy() {
       const { ErrorOfflineContainer } = await componentLoader(
@@ -660,7 +1001,24 @@ const ClientRoutes = [
       return { Component };
     },
   },
+  {
+    path: "/billing/payment-complete",
+    async lazy() {
+      const { Component: PaymentComplete } = await componentLoader(
+        () => import("SRC_DIR/pages/PaymentComplete"),
+      );
+
+      const Component = () => (
+        <PrivateRoute>
+          <ErrorBoundary>
+            <PaymentComplete />
+          </ErrorBoundary>
+        </PrivateRoute>
+      );
+
+      return { Component };
+    },
+  },
 ];
 
 export default ClientRoutes;
-

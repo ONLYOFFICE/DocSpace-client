@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomCollectionTitle",
+  "content": "Response collection",
+  "content_en_sha1_hash": "c39f0dd08476916ea9c210dd73f0cd58ed21f804",
+  "created_at": "2026-05-08T13:10:42.364Z",
+  "updated_at": "2026-05-15T14:00:06.729Z",
+  "comment": {
+    "text": "Card title in the Info Panel details view that labels the section for the collection of responses.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:15:44.646Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
+      "line_number": 76,
+      "context": "const { collectionConnected, isRoom, canEditRoom } = state;\n \n const title = (\n <span className={styles.cardTitle}>\n <SpreadsheetReactSvg className={styles.cardIcon} />\n {t(\"InfoPanel:FormRoomCollectionTitle\")}\n </span>\n );\n \n const description = useMemo(() => {\n if (collectionConnected) {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

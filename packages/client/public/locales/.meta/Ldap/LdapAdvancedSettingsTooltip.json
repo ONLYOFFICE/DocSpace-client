@@ -3,16 +3,17 @@
   "content": "Choose user attributes which you want to be synchronized with your LDAP server.",
   "content_en_sha1_hash": "dec832695169557933b47b02e558945a055dace1",
   "created_at": "2025-05-19T21:30:54.165Z",
-  "updated_at": "2025-08-11T18:11:59.236Z",
+  "updated_at": "2026-05-15T14:00:06.845Z",
   "comment": {
-    "text": "Choose user attributes which you want to be synchronized with your LDAP server. This tooltip appears on a component in the PortalSettings page, providing context for users configuring attribute mapping for their LDAP integration.",
+    "text": "This is a tooltip that appears when hovering over the help button next to \"Attribute Mapping\" in the LDAP settings. It explains the purpose of attribute mapping.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:16.802Z"
+    "updated_at": "2026-04-11T21:17:24.232Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 127,
+      "line_number": 137,
       "context": "<Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapAttributeMapping\")}\n </Text>\n <HelpButton\n dataTestId=\"attribute_mapping_help_button\"\n tooltipContent={t(\"LdapAdvancedSettingsTooltip\")}\n />\n </div>\n <div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}",
       "module": "/packages/client"
     }
@@ -27,35 +28,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"اختر ميزات المستخدم التي تريد مزامنتها مع خادم LDAP الخاص بك\" is a literal translation of \"Choose user attributes\". A more natural and accurate translation would convey the meaning of 'attributes' as characteristics or properties. The term 'ميزات' (features) doesn't fully capture the nuance of user attributes in this context.",
-          "suggestion": "اختر خصائص المستخدم التي تريد مزامنتها مع خادم LDAP الخاص بك."
-        },
-        {
-          "type": "spelling",
-          "description": "While technically not an error, using 'LDAP' directly in Arabic can appear slightly awkward. Consider transliterating to 'إل داب' or a more standard transliteration depending on the preferred style guide.",
-          "suggestion": "اختر خصائص المستخدم التي تريد مزامنتها مع خادم إل داب الخاص بك."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'sinxronizasiya' is a transliteration and not the most natural way to express 'synchronize' in Azerbaijani. While understandable, it lacks fluency.",
-          "suggestion": "Choose 'uyğunlaşdırmaq' or 'səviyyələşdirmək' which are more common and natural translations of 'synchronize' in this context."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'LDAP serverinizlə sinxronizasiya etmək istədiyiniz istifadəçi xüsusiyyətlərini seçin' is grammatically correct but could be improved for better flow. The passive voice ('which you want to be synchronized') feels slightly unnatural.",
-          "suggestion": "Consider restructuring the sentence: 'Hansı istifadəçi xüsusiyyətlərinin LDAP serverinizlə uyğunlaşdırılmasını istəyirsiniz?' or 'LDAP serverinizlə hansı istifadəçi xüsusiyyətlərinin uyğunlaşdırılmasını istəyirsiniz?'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -103,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'սինխրոնիզացնել' is a transliteration of 'synchronize' and should ideally be replaced with a more Armenian equivalent. While understandable, it might be perceived as less natural.",
-          "suggestion": "Ընտրեք օգտվողի հատկանիշները, որոնք ցանկանում եք համապատասխանեցնել ձեր LDAP սերվերի հետ:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -127,30 +100,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'LDAP 서버와 동기화하려는 사용자 속성을 선택합니다.' is a bit literal and could be more natural-sounding in Korean. While technically correct, it lacks fluency.",
-          "suggestion": "LDAP 서버와 동기화할 사용자 속성을 선택하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ຊິງໂຄນ' is likely a typo and doesn't accurately convey the meaning of 'synchronized'. It seems like a combination of words.",
-          "suggestion": "ເລືອກຄຸນລັກສະນະຂອງຜູ້ໃຊ້ທີ່ທ່ານຕ້ອງການໃຫ້ຊິງຂໍ້ມູນກັບເຄື່ອງແມ່ຂ່າຍ LDAP ຂອງທ່ານ።"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ຊິງຂໍ້ມູນ' is a more accurate translation of 'synchronized' in this context. While 'ຊິງໂຄນ' exists, it's not commonly used for data synchronization.",
-          "suggestion": "ເລືອກຄຸນລັກສະນະຂອງຜູ້ໃຊ້ທີ່ທ່ານຕ້ອງການໃຫ້ຊິງຂໍ້ມູນກັບເຄື່ອງແມ່ຂ່າຍ LDAP ຂອງທ່ານ።"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -193,23 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශීලක' is misspelled. The correct spelling is 'පරිශ්රමික'.",
-          "suggestion": "පරිශ්රමික"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow. The current structure reads a bit awkwardly.",
-          "suggestion": "ඔබේ LDAP සේවකය සමඟ සමමුහුර්ත කිරීමට අවශ්‍ය පරිශ්රමික ගුණාංගයන් තෝරන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

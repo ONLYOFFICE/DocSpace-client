@@ -4,7 +4,7 @@
   "DisableGuestDescription": "Nếu bạn vô hiệu hóa khách này, họ sẽ không thể đăng nhập vào {{productName}}.",
   "DisableGuests": "Vô hiệu hóa khách",
   "DisableGuestsDescription": "Nếu bạn vô hiệu hóa những khách này, họ sẽ không thể đăng nhập vào {{productName}}.",
-  "DisableGuestsGeneralDescription": "Sau này bạn có thể xóa hoặc kích hoạt khách đã bị vô hiệu hóa nếu cần. ",
+  "DisableGuestsGeneralDescription": "Sau này bạn có thể xóa hoặc kích hoạt khách đã bị vô hiệu hóa nếu cần.",
   "DisableUser": "Vô hiệu hóa người dùng",
   "DisableUserDescription": "Nếu bạn Vô hiệu hóa người dùng này, họ sẽ không thể đăng nhập vào {{productName}}, trong khi tài liệu và dữ liệu của họ sẽ vẫn còn nguyên vẹn.",
   "DisableUsers": "Vô hiệu hóa người dùng",

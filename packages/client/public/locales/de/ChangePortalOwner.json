@@ -4,7 +4,6 @@
   "ChangeInstruction": "Um den {{productName}}-Besitzer zu ändern, wählen Sie bitte unten den Namen des neuen Besitzers.",
   "ChangeOwner": "{{productName}}-Besitzer ändern",
   "ChangeUser": "Benutzer ändern",
-  "DeactivateOrDeletePortal": "{{productName}} deaktivieren oder löschen",
   "DoTheSame": "Machen Sie dasselbe wie die Administratoren",
   "ManagePortal": "{{productName}} einrichten",
   "ManageUser": "Benutzerprofile verwalten",

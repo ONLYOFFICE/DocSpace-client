@@ -3,17 +3,18 @@
   "content": "Logo",
   "content_en_sha1_hash": "83fce8327410848c9eb609acb21732c7c0fec96a",
   "created_at": "2025-05-19T21:30:54.562Z",
-  "updated_at": "2025-08-04T07:30:01.410Z",
+  "updated_at": "2026-05-28T15:46:18.605Z",
   "comment": {
-    "text": "The \"Logo\" translation key is used to display the label for a button or element that toggles the visibility of a logo in the UI. It appears in a dialog related to developer tools and is used to provide a clear and concise user interface. The translation will be applied to this label.",
+    "text": "This is a checkbox label. It controls whether a logo is displayed on a button.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:32.327Z"
+    "updated_at": "2026-04-11T21:15:19.623Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 100,
-      "context": "const setButtonText = (e) => {\n setButtonValue(e.target.value);\n debouncedSetConfig(\"buttonText\", e.target.value);\n };\n \n const toggleWithLogo = () => {\n setConfig((oldConfig) => ({\n ...oldConfig,\n buttonWithLogo: !config.buttonWithLogo,\n }));\n };",
+      "line_number": 157,
+      "context": "tabIndex={3}\n testId=\"button_mode_text_input\"\n />\n <Checkbox\n className=\"checkbox\"\n label={t(\"Logo\")}\n onChange={toggleWithLogo}\n isChecked={config.buttonWithLogo}\n dataTestId=\"button_mode_logo_checkbox\"\n />\n </ControlsGroup>",
       "module": "/packages/client"
     }
   ],
@@ -111,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Logotips' is a valid Latvian word, it's a plural form. The English 'Logo' is singular. A more accurate singular translation would be 'Logotips'.",
-          "suggestion": "Logotips"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -154,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -177,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Логотип' is a valid Serbian (Cyrillic) word for 'Logo', it's a more formal or complete translation. In this context, given the key 'JavascriptSdk:Logo', simply 'Лого' might be more appropriate to maintain brevity and consistency with the English source.",
-          "suggestion": "Consider using 'Лого' as a potentially more concise and contextually fitting translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Logotip\" is a valid Serbian word for \"Logo\", it's a more formal and technical term. Depending on the context, a more common or colloquial translation might be preferred.  \"Logo\" is often used directly in Serbian, particularly in digital environments.",
-          "suggestion": "Consider whether \"Logo\" (as is) or a more colloquial alternative might be more appropriate based on the brand's voice and target audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

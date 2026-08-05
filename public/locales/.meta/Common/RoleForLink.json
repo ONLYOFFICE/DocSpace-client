@@ -3,23 +3,30 @@
   "content": "Role for link",
   "content_en_sha1_hash": "69c2c795dae8fa5a3e6f70b13ed8b5690d284d62",
   "created_at": "2025-08-26T11:15:03.689Z",
-  "updated_at": "2026-02-19T13:36:32.535Z",
+  "updated_at": "2026-07-07T08:59:21.771Z",
   "comment": {
-    "text": "Label for a dropdown or selection field within an Edit Link Panel, indicating the role or permission associated with the link. This text helps users specify who can access the link. It appears in the RoleLinkBlock component.",
+    "text": "This is a label for a dropdown menu or selection field that allows users to choose a role or permission level for a shared link. It appears in panels related to link settings or editing.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:17:27.556Z"
+    "updated_at": "2026-04-11T20:44:34.802Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/LinkSettingsPanel/index.tsx",
-      "line_number": 172,
+      "line_number": 182,
       "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:RoleForLink\")}\n </Text>\n <LinkRolesDropdown\n currentAccess={currentAccess}\n accesses={filteredAccesses}\n linkSelectedAccess={linkSelectedAccess}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/link-settings-panel/index.tsx",
+      "line_number": 210,
+      "context": "<Text\n fontSize=\"16px\"\n fontWeight={700}\n className={styles.linkSettingsText}\n >\n {t(\"Common:RoleForLink\")}\n </Text>\n <LinkRolesDropdown\n currentAccess={currentAccess}\n accesses={filteredAccesses}\n linkSelectedAccess={linkSelectedAccess}",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/RoleLinkBlock/RoleLinkBlock.tsx",
-      "line_number": 58,
-      "context": "};\n \n return (\n <RoleLinkBlockWrapper>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:RoleForLink\")}\n </Text>\n <AccessRightSelect\n fillIcon\n scaledOptions\n fixedDirection",
+      "line_number": 67,
+      "context": "};\n \n return (\n <div className={styles.roleLinkBlockWrapper}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:RoleForLink\")}\n </Text>\n <AccessRightSelect\n fillIcon\n scaledOptions\n fixedDirection",
       "module": "/packages/shared"
     }
   ],
@@ -141,7 +148,15 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Uses 'Função' (function/what it does) instead of 'Papel' (role/permission level). In Portuguese technical UI terminology for document collaboration, 'Papel' is the standard term for access roles. 'Função' is ambiguous and may mislead users about what the field controls.",
+          "suggestion": "Papel do link",
+          "checked_at": "2026-04-13T08:46:09.510Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -154,7 +169,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -213,7 +228,15 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English uses 'Role' (角色), but the Chinese translation uses '权限' (permissions/access rights). While related, these have different meanings. The code context shows 'LinkRolesDropdown' and 'RoleLinkBlockWrapper', confirming this is specifically about roles, not generic permissions.",
+          "suggestion": "链接的角色",
+          "checked_at": "2026-04-13T08:46:41.062Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     }
   }

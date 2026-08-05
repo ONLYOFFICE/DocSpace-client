@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesFolderFindEmptyFoldersPrompt",
+  "content": "Find empty folders inside the current folder and show their locations without deleting them. If this information is not provided, ask me for the folder depth and any locations to exclude.",
+  "content_en_sha1_hash": "80253b8d8c7bb1242d6ab1262d83fe38549dbbf6",
+  "created_at": "2026-08-04T09:58:55.116Z",
+  "updated_at": "2026-08-04T09:58:56.410Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 331,
+      "context": "name: t(\"AiSuggestions:FilesFolderOrganizeThisFolder\"),\n prompt: t(\"AiSuggestions:FilesFolderOrganizeThisFolderPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFolderFindEmptyFolders\"),\n prompt: t(\"AiSuggestions:FilesFolderFindEmptyFoldersPrompt\"),\n },\n ],\n \n filesSelectedFile: [\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

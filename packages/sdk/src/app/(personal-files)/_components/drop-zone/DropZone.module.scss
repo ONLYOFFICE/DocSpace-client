@@ -1,0 +1,19 @@
+// Applied alongside the ui-kit DragAndDrop root class. Override its
+// `height: 100%` / `margin-inline-start: -2px` so the drop zone keeps filling
+// the flex column without the row-oriented offset, and never paints a tint
+// (no `dragging` prop is passed, but be explicit).
+.dropZone {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	min-width: 0;
+	height: auto;
+	margin-inline-start: 0;
+	overflow: hidden;
+
+	&,
+	&:not(.dragging) {
+		background: none !important;
+	}
+}

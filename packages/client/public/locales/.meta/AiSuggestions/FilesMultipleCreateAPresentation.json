@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesMultipleCreateAPresentation",
+  "content": "Create a presentation",
+  "content_en_sha1_hash": "febc2fd74310111778c1df69b256329c1e19521c",
+  "created_at": "2026-08-04T09:58:55.124Z",
+  "updated_at": "2026-08-04T09:58:56.411Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 368,
+      "context": "},\n ],\n \n filesMultiple: [\n {\n name: t(\"AiSuggestions:FilesMultipleCreateAPresentation\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateAPresentationPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCreateACombinedReport\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateACombinedReportPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

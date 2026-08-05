@@ -1,8 +1,8 @@
 {
-  "DocumentConverted": "Документ преобразован в {{title}}, чтобы его можно было редактировать",
+  "DocumentConverted": "Документ преобразован в формат {{title}} для возможности его редактирования",
   "DocumentsFileType": "документы",
   "ErrorConnectionLost": "Соединение потеряно",
-  "FileLocation": "Открыть расположение файла",
+  "FileLocation": "Расположение открытого файла",
   "ImageFileType": "изображения",
   "MailMergeFileType": "Выбрать файлы в формате XLSX",
   "SelectFilesType": "Выбрать файлы типа: {{fileType}}",

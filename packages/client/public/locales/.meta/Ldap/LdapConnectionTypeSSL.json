@@ -3,16 +3,17 @@
   "content": "SSL",
   "content_en_sha1_hash": "78bb8826fcc2504583e625386c238563e6207595",
   "created_at": "2025-05-19T21:30:54.186Z",
-  "updated_at": "2025-08-11T18:11:59.241Z",
+  "updated_at": "2026-05-15T14:00:06.848Z",
   "comment": {
-    "text": "This translation key is used to display \"SSL\" as a label for a checkbox option in a LDAP connection settings page. The checkbox determines whether SSL encryption should be enabled for an LDAP connection.",
+    "text": "This is a radio button label for an LDAP connection type. It indicates that the connection uses SSL encryption.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:14.301Z"
+    "updated_at": "2026-04-11T21:17:17.434Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/Checkboxes.js",
-      "line_number": 116,
+      "line_number": 125,
       "context": "key={ConnectionType.SSL}\n value={ConnectionType.SSL}\n isChecked={isSslEnabled}\n onChange={onChangeSsl}\n isDisabled={!isLdapEnabled || isUIDisabled}\n label={t(\"LdapConnectionTypeSSL\")}\n testId=\"type_ssl_radio_button\"\n />\n <HelpButton\n tooltipContent={t(\"LdapConnectionTypeSSLTooltip\")}\n dataTestId=\"type_ssl_help_button\"",
       "module": "/packages/client"
     }
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

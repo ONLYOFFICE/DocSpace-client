@@ -3,17 +3,18 @@
   "content": "Standard",
   "content_en_sha1_hash": "2dfa66079d9b7229409430972fd5f1567d78a3b6",
   "created_at": "2025-05-19T21:30:49.027Z",
-  "updated_at": "2026-03-26T08:26:58.125Z",
+  "updated_at": "2026-05-15T15:37:40.238Z",
   "comment": {
-    "text": "This translation key is used to display the \"Standard\" theme name in a portal settings category. It appears as part of the \"Appearance\" section and is displayed below a button that toggles its visibility.",
+    "text": "This is a label for a theme option in the appearance settings. It refers to the default or standard visual theme.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:52.879Z"
+    "updated_at": "2026-04-11T20:42:12.088Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 669,
-      "context": "isShowDeleteButton={isShowDeleteButton}\n >\n <div className=\"header\">{t(\"Common:Color\")}</div>\n \n <div className=\"theme-standard-container\">\n <div className=\"theme-name\">{t(\"Common:Standard\")}</div>\n \n <div className=\"theme-container\">\n {appearanceTheme.map((item) => {\n if (!item.name) return;\n return (",
+      "line_number": 679,
+      "context": "style={{ \"--check-img-color\": colorCheckImg }}\n >\n <div className={appearanceStyles.header}>{t(\"Common:Color\")}</div>\n \n <div className={appearanceStyles.themeStandardContainer}>\n <div className={appearanceStyles.themeName}>{t(\"Common:Standard\")}</div>\n \n <div className={appearanceStyles.themeContainer}>\n {appearanceTheme.map((item) => {\n if (!item.name) return;\n return (",
       "module": "/packages/client"
     }
   ],
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -165,25 +166,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Standardno' is an adverbial form, while the English 'Standard' is a noun. This translation doesn't accurately convey the meaning of the English term in this context. A more appropriate translation would likely be 'Standard' (as a direct borrowing) or 'Norma' (if referring to a set of rules/guidelines).",
-          "suggestion": "Consider using 'Standard' or 'Norma' depending on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Стандард' is a phonetic transcription of the English word 'Standard' but it is not the officially accepted Serbian term for 'Standard'.",
-          "suggestion": "The correct Serbian (Cyrillic) translation is 'Стандард'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -1,0 +1,56 @@
+{
+  "key_path": "Vectorization",
+  "content": "Vectorization",
+  "content_en_sha1_hash": "7931aa02a8abd743ba5a4eb62663710441cb75ec",
+  "created_at": "2025-10-27T16:14:30.919Z",
+  "updated_at": "2026-07-27T13:07:50.736Z",
+  "comment": {
+    "text": "This is a button label in the file context menu and header, allowing users to retry the vectorization process for a selected file.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:07:45.273Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/KnowledgeBaseSaas.tsx",
+      "line_number": 134,
+      "context": "className={styles.icon}\n // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix\n dangerouslySetInnerHTML={{ __html: item.image }}\n />\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Vectorization\")}\n </Text>\n </div>\n \n <div className={styles.rowRight}>\n <Text fontSize=\"13px\" className={styles.price}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 409,
+      "context": "disabled: false,\n },\n {\n id: \"option_vectorization\",\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => self.filesActionsStore.retryVectorization([item]),\n disabled: !item.security?.Vectorization,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
+      "line_number": 269,
+      "context": "onClick: () => self.onCreateRoom(null, true),\n disabled: !canCreateRoom,\n },\n {\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => self.filesActionsStore.retryVectorization(selection),\n disabled: !canRetryVectorization,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
+      "line_number": 510,
+      "context": "};\n case \"vectorization\":\n if (!this.isAvailableOption(\"vectorization\")) return null;\n return {\n id: \"menu-vectorization\",\n label: t(\"Common:Vectorization\"),\n iconUrl: RefreshReactSvgUrl,\n onClick: this.retryVectorization,\n };\n default:\n break;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 592,
+      "context": "const getVectorizationItem = useCallback(\n (i: TFileItem) => {\n return {\n id: \"option_vectorization\",\n key: \"vectorization\",\n label: t(\"Common:Vectorization\"),\n icon: RefreshReactSvgUrl,\n onClick: () => onRetryVectorization?.(i),\n disabled: !onRetryVectorization || !i.security?.Vectorization,\n };\n },",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsRecentReviewAccessInRecentRooms",
+  "content": "Review access in recent rooms",
+  "content_en_sha1_hash": "f2420c5a379611b604f05cff0f1d98ebaf19ff86",
+  "created_at": "2026-08-04T09:58:55.207Z",
+  "updated_at": "2026-08-04T09:58:56.422Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 434,
+      "context": "{\n name: t(\"AiSuggestions:RoomsRecentWhereMyActionIsNeeded\"),\n prompt: t(\"AiSuggestions:RoomsRecentWhereMyActionIsNeededPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsRecentReviewAccessInRecentRooms\"),\n prompt: t(\"AiSuggestions:RoomsRecentReviewAccessInRecentRoomsPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsRecentArchiveInactiveRooms\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

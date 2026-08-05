@@ -1,0 +1,35 @@
+{
+  "key_path": "ArbiterResetConfigurationTitle",
+  "content": "Reset AI Arbiter configuration",
+  "content_en_sha1_hash": "abd8dba2da54d635cc993fb533cb1cf784695528",
+  "created_at": "2026-05-24T17:27:18.460Z",
+  "updated_at": "2026-05-24T18:47:37.380Z",
+  "comment": {
+    "text": "Dialog title and button tooltip for the action of resetting the AI Arbiter configuration.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:47:37.380Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/ResetPanelDialog.tsx",
+      "line_number": 89,
+      "context": "onCancel();\n };\n \n return (\n <ModalDialog visible={visible} onClose={handleClose} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:ArbiterResetConfigurationTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {phase === \"confirm\" ? (\n <Text as=\"p\">\n {expertCount === 1\n ? t(\"Common:ArbiterResetMessage_one\", { count: expertCount })",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/ai-arbiter/page.client.tsx",
+      "line_number": 200,
+      "context": "<div className={styles.layout}>\n <button\n type=\"button\"\n className={styles.resetFab}\n onClick={() => setResetDialogVisible(true)}\n title={t(\"Common:ArbiterResetConfigurationTitle\")}\n >\n {t(\"Common:ArbiterResetConfiguration\")}\n </button>\n \n <div className={styles.pageHeader}>",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

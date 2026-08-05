@@ -1,0 +1,28 @@
+{
+  "key_path": "FormSpaceResultsCreateAPresentation",
+  "content": "Create a presentation",
+  "content_en_sha1_hash": "febc2fd74310111778c1df69b256329c1e19521c",
+  "created_at": "2026-08-04T09:58:55.150Z",
+  "updated_at": "2026-08-04T09:58:56.403Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 191,
+      "context": "{\n name: t(\"AiSuggestions:FormSpaceResultsConvertToATableOrChart\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsConvertToATableOrChartPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCreateAPresentation\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCreateAPresentationPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheet\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

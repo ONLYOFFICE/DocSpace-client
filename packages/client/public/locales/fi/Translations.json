@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Valitse listalta",
-  "FileLocked": "Asiakirjat. Lukittu",
   "FileProtected": "Tiedosto on suojattu salasanalla",
-  "FileUnlocked": "Asiakirjat. Lukitus poistettu",
   "FolderTitleBoxNet": "Laatikkohakemisto",
   "FolderTitleDocuSign": "DocuSign-tili",
   "FolderTitleDropBox": "Dropbox-hakemisto",
@@ -13,12 +10,11 @@
   "FolderTitleWebDav": "WebDAV-hakemisto",
   "FolderTitleYandex": "Yandex-hakemisto",
   "NewForm": "PDF-lomake",
-  "OwnerChange": "Vaihda omistaja",
   "RoleGuestDescriprion": "Vieraat pääsevät huoneisiin, joihin heidät on kutsuttu, jonka lisäksi he voivat luoda ja muokata asiakirjoja, jos heille on lisätty tarvittavat huoneen roolit.",
   "SearchByHeadOfGroup": "Hae ryhmän päällikön mukaan",
   "SearchByOwner": "Haku Omistajien mukaan",
   "SubNewForm": "Tyhjä",
-  "SubNewFormFile": "Luo tekstitiedostosta",
+  "SubNewFormFile": "Tekstitiedostosta",
   "ThirdPartyInfo": "Muuta kolmannen osapuolen tietoja",
   "ThirdPartyTitle": "Kolmannen osapuolen palvelut",
   "TrashItemsDeleteSuccess": "Valitut elementit poistettiin onnistuneesti {{sectionName}}-osiosta"

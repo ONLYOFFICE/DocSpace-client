@@ -42,6 +42,10 @@
     background-color: var(--background-color);
 }
 
+.featured {
+    grid-column: span 2;
+}
+
 .cardIcon {
     display: flex;
     align-items: center;

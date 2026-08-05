@@ -3,22 +3,23 @@
   "content": "Delete user",
   "content_en_sha1_hash": "9afe6c7b95fe53a75b43a157827c9ff2fec371b0",
   "created_at": "2025-05-19T21:30:56.667Z",
-  "updated_at": "2025-10-13T13:22:35.576Z",
+  "updated_at": "2026-05-15T14:00:06.677Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Delete user\" in a delete profile ever dialog, likely as the label for a button that initiates the deletion process. It appears on a file line (118) in /packages/client/src/components/dialogs/DeleteProfileEverDialog/index.tsx, suggesting its use in a UI component related to deleting user data.",
+    "text": "This is a button label that appears in a dialog or context menu, allowing the user to remove an account from the system.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:28.185Z"
+    "updated_at": "2026-04-11T21:06:02.558Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/index.tsx",
-      "line_number": 118,
-      "context": "const needReassignData = true;\n \n const onlyGuests = usersToDelete.every((user) => user.isVisitor);\n \n const onDeleteUser = React.useCallback(\n (id: string) => {\n if (isRequestRunning) return;\n \n setIsRequestRunning(true);",
+      "line_number": 278,
+      "context": ">\n <ModalDialog.Header>\n {onlyOneUser\n ? isGuests\n ? t(\"DeleteGuest\")\n : t(\"DeleteUser\")\n : isGuests\n ? t(\"DeleteGuests\")\n : t(\"DeletingUsers\")}\n </ModalDialog.Header>\n <ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 258,
+      "line_number": 268,
       "context": "id: \"option_delete-user\",\n key: option,\n icon: TrashReactSvgUrl,\n label: item.isVisitor\n ? t(\"DeleteProfileEverDialog:DeleteGuest\")\n : t(\"DeleteProfileEverDialog:DeleteUser\"),\n onClick: () => this.toggleDeleteProfileEverDialog([item]),\n };\n \n case \"details\":\n return {",
       "module": "/packages/client"
     }
@@ -154,23 +155,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පරිශ්‍රීලකයා මක්නන\" is not an accurate translation of \"Delete user.\"  \"මක්නන\" typically means 'to erase' or 'to remove' but is often used in a more informal or incomplete context.  A more accurate and formal translation would be needed.",
-          "suggestion": "වෙනත් පරිශ්‍රීලකයකු මකන්න (Venath parishiilayakunu makanna) - Delete another user; or පරිශ්‍රීලකයා මකන්න (Parishiilayakunu makanna) - Delete the user."
-        },
-        {
-          "type": "spelling",
-          "description": "The word \"මක්නන\" in the Sinhala translation, while potentially used, is not the standard spelling. A more widely accepted spelling may exist depending on the context and dialect.",
-          "suggestion": "Check for the precise spelling of the verb relating to deletion within a relevant Sinhala dictionary."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -188,25 +178,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Обриши корисника\" is understandable, a more accurate and common translation of 'Delete user' in a user interface context would be \"Избриши корисника\". 'Обриши' generally implies a physical wiping or erasing, while 'Избриши' specifically refers to deleting data.",
-          "suggestion": "Избриши корисника"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Delete user\" can have multiple accurate Serbian translations depending on the context. \"Obriši korisnika\" is a literal translation that could be interpreted as \"Delete the user\" (as opposed to \"Delete a user\", or \"Delete users\"). A more neutral and generally applicable translation might be \"Izbriši korisnika\" or \"Briši korisnika\".",
-          "suggestion": "Consider using \"Izbriši korisnika\" or \"Briši korisnika\" for a more accurate and context-neutral translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

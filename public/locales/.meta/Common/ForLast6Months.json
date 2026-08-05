@@ -1,0 +1,29 @@
+{
+  "key_path": "ForLast6Months",
+  "content": "For last 6 months <1>({{startDate}} — {{endDate}})</1>",
+  "content_en_sha1_hash": "9345e7f33f6f57bc5806dca1ad822f279f10c759",
+  "created_at": "2026-06-25T11:54:50.516Z",
+  "updated_at": "2026-08-01T16:25:17.918Z",
+  "comment": {
+    "text": "Label in the billing usage section indicating the selected timeframe, featuring a formatted date range (`startDate` — `endDate`) inside the `<1>` tag.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:11:55.022Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "line_number": 152,
+      "context": "components={{ 1: dateRangeSpan }}\n />\n ),\n last6Months: (\n <CommonTrans\n i18nKey=\"ForLast6Months\"\n values={{ startDate, endDate }}\n components={{ 1: dateRangeSpan }}\n />\n ),\n last12Months: (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

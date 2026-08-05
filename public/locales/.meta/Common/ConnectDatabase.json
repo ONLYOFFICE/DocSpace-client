@@ -1,0 +1,35 @@
+{
+  "key_path": "ConnectDatabase",
+  "content": "Connect a database",
+  "content_en_sha1_hash": "dd870a9cfeccc3d404c5fb5fa50dbbac43a39eab",
+  "created_at": "2026-05-08T13:10:26.255Z",
+  "updated_at": "2026-05-28T15:46:18.492Z",
+  "comment": {
+    "text": "Button label and clickable link used to initiate the process of connecting an external database.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:11:33.691Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AIAgentsDialog/index.tsx",
+      "line_number": 118,
+      "context": "textDecoration=\"underline\"\n fontWeight={600}\n color=\"accent\"\n onClick={handleConnectDatabase}\n >\n {t(\"ConnectDatabase\")}\n </Link>\n </>\n ),\n }\n : undefined;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
+      "line_number": 178,
+      "context": "return (\n <ActionButton\n as={Link}\n reloadDocument\n icon={<GridSvg />}\n label={t(\"Common:ConnectDatabase\")}\n to=\"/portal-settings/integration/third-party-services?consumer=externaldb\"\n />\n );\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

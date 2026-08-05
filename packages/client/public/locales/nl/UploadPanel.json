@@ -1,6 +1,10 @@
 {
   "HideInput": "Verbergen",
+  "QuotaExceededDuringUpload": "<0>{{uploaded}} van {{total}}</0> geüpload. Opslagquotum overschreden — <1>details bekijken</1>.",
+  "QuotaExceededTooltip": "Opslagquotum overschreden. Maak ruimte vrij of upgrade uw abonnement en probeer het opnieuw.",
   "Ready": "Gereed",
+  "RetryAfterQuotaUpgrade": "Opnieuw proberen na vergroting van het quotum",
+  "RetryUpload": "Opnieuw proberen",
   "UploadingAndConversion": "Uploaden & Conversie",
   "UploadingError": "Fout bij uploaden"
 }

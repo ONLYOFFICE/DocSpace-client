@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "De geselecteerde uitgeschakelde gebruikers worden verwijderd uit {{productName}}. Deze actie kan niet ongedaan worden gemaakt.",
   "ActionCannotBeUndoneGuests": "De geselecteerde uitgeschakelde gasten worden verwijderd uit {{productName}}. Deze actie kan niet ongedaan worden gemaakt.",
+  "ActionCannotBeUndoneUsers": "De geselecteerde uitgeschakelde gebruikers worden verwijderd uit {{productName}}. Deze actie kan niet ongedaan worden gemaakt.",
   "CannotReassignFiles": "Als u meerdere gebruikers tegelijk verwijdert, kunt u hun bestanden niet opnieuw toewijzen aan andere gebruikers.",
   "DeleteGroupGuestsSuccessMessage": "Gasten zijn succesvol verwijderd.",
   "DeleteGroupUsersSuccessMessage": "Gebruikers zijn met succes verwijderd.",

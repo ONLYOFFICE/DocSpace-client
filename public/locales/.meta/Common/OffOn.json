@@ -1,0 +1,29 @@
+{
+  "key_path": "OffOn",
+  "content": "Off/On",
+  "content_en_sha1_hash": "80992795b814b85328bd3dd85a4a30f6c24dbf19",
+  "created_at": "2026-07-03T11:07:43.118Z",
+  "updated_at": "2026-07-03T11:09:45.578Z",
+  "comment": {
+    "text": "Table column header label used to indicate whether a setting is enabled or disabled.",
+    "is_auto": true,
+    "updated_at": "2026-07-03T11:09:45.578Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TableView/TableHeader.tsx",
+      "line_number": 85,
+      "context": "resizable: true,\n minWidth: 90,\n },\n {\n key: \"OffOn\",\n title: t(\"Common:OffOn\"),\n enable: true,\n resizable: true,\n minWidth: 76,\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

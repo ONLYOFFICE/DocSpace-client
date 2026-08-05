@@ -8,13 +8,13 @@
   "NeedSettings": "Ayarları girmeniz gerekiyor",
   "NoPlugins": "Hiçbir eklenti eklenmedi",
   "NotNeedSettings": "Ayarlara girmenize gerek yok",
+  "PluginCacheWarningDescription": "Eklentiler, sürüm numaralarına göre önbelleğe alınır. Değişikliklerinizin uygulanması için lütfen yüklemeden önce <1>package.json</1> dosyanızdaki sürüm numarasını artırın. Sistem, sürüm aynı kalırsa eklentiyi güncellemez.",
+  "PluginDeletedSuccessfully": "Eklenti başarıyla silindi",
   "PluginIsNotCompatible": "Eklenti SDK sürümü, {{productName}} sürümüyle eşleşmiyor. Lütfen uyumlu bir sürüme güncelleyin.",
   "PluginLoadedSuccessfully": "Eklenti başarıyla yüklendi",
   "PluginSamples": "Eklenti örnekleri",
   "PluginSDK": "Eklenti SDK'sı",
   "PluginSDKDescription": "Eklenti SDK'sını kullanarak {{productName}} işlevselliğinizi genişletebilir, üçüncü taraf hizmetlerine bağlanabilir veya mevcut kullanıcı deneyimini geliştirebilirsiniz. Burada GitHub'da bulunan kod kaynağına sahip eklenti örneklerini bulabilirsiniz.",
   "PluginSDKInstruction": "Kendi eklentilerinizi nasıl oluşturacağınızla ilgili ayrıntılı talimatlar için düğmeye tıklayın.",
-  "UploadDescription": "{{productName}}'in işlevselliğini ekstra özelliklerle genişletmek için eklentiler ekleyebilirsiniz. Eklenti yükle'ye tıklayın veya dosyayı ZIP arşivine bırakın.",
-  "PluginCacheWarningDescription": "Eklentiler, sürüm numaralarına göre önbelleğe alınır. Değişikliklerinizin uygulanması için lütfen yüklemeden önce <1>package.json</1> dosyanızdaki sürüm numarasını artırın. Sistem, sürüm aynı kalırsa eklentiyi güncellemez.",
-  "PluginDeletedSuccessfully": "Eklenti başarıyla silindi"
+  "UploadDescription": "{{productName}}'in işlevselliğini ekstra özelliklerle genişletmek için eklentiler ekleyebilirsiniz. Eklenti yükle'ye tıklayın veya dosyayı ZIP arşivine bırakın."
 }

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { Navigate, useLocation } from "react-router";
@@ -34,7 +43,7 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 import { generalRoutes } from "./general";
 
 import { ViewComponent } from "../pages/PortalSettings/View";
-import { PLUGIN_SECTION_ROUTE } from 'SRC_DIR/helpers/plugins/constants'
+import { PLUGIN_SECTION_ROUTE } from "SRC_DIR/helpers/plugins/constants";
 
 const DevToolsRedirect = () => {
   const location = useLocation();
@@ -44,6 +53,25 @@ const DevToolsRedirect = () => {
   );
   return <Navigate to={newPath} replace />;
 };
+
+const PaymentsRedirect = inject(({ settingsStore }) => ({
+  standalone: settingsStore.standalone,
+}))(
+  observer(({ standalone }) => {
+    const location = useLocation();
+
+    if (standalone) return <ViewComponent />;
+
+    let newPath = location.pathname.replace(
+      /^\/portal-settings\/payments/,
+      "/billing",
+    );
+    newPath = newPath.replace(/^\/billing\/portal-payments/, "/billing/tariff-plan");
+    newPath = newPath.replace(/^\/billing\/services/, "/billing/addons");
+
+    return <Navigate to={`${newPath}${location.search}`} replace />;
+  }),
+);
 
 const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
   aiServicesEnabled: settingsStore.aiServicesEnabled,
@@ -91,9 +119,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { BrandName } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Branding/brandName"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Branding/brandName"),
         );
 
         return { Component: BrandName };
@@ -104,9 +130,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { WhiteLabel } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Branding/whitelabel"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Branding/whitelabel"),
         );
 
         return { Component: WhiteLabel };
@@ -117,9 +141,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { CompanyInfoSettings } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Branding/companyInfoSettings"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Branding/companyInfoSettings"),
         );
 
         return { Component: CompanyInfoSettings };
@@ -130,9 +152,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { AdditionalResources } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Branding/additionalResources"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Branding/additionalResources"),
         );
 
         return { Component: AdditionalResources };
@@ -143,9 +163,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { LanguageAndTimeZoneSettings } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/language-and-time-zone"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Customization/language-and-time-zone"),
         );
 
         return { Component: LanguageAndTimeZoneSettings };
@@ -156,9 +174,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { WelcomePageSettings } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/welcome-page-settings"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Customization/welcome-page-settings"),
         );
 
         return { Component: WelcomePageSettings };
@@ -169,9 +185,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { DNSSettings } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/dns-settings"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Customization/dns-settings"),
         );
 
         return { Component: DNSSettings };
@@ -182,9 +196,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { PortalRenaming } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/portal-renaming"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Customization/portal-renaming"),
         );
 
         return { Component: PortalRenaming };
@@ -195,9 +207,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { ConfigureDeepLink } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/configure-deep-link"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Customization/configure-deep-link"),
         );
 
         return { Component: ConfigureDeepLink };
@@ -208,9 +218,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { AdManagement } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ad-management"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Customization/ad-management"),
         );
 
         return { Component: AdManagement };
@@ -221,9 +229,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { AiServicesManagement } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ai-services-management"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/common/Customization/ai-services-management"),
         );
 
         return { Component: AiServicesManagement };
@@ -250,9 +256,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { TfaSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/tfa"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/tfa"),
         );
 
         return { Component: TfaSection };
@@ -263,9 +267,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { PasswordStrengthSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/passwordStrength"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/passwordStrength"),
         );
 
         return { Component: PasswordStrengthSection };
@@ -276,12 +278,21 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { TrustedMailSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/trustedMail"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/trustedMail"),
         );
 
         return { Component: TrustedMailSection };
+      },
+    },
+    {
+      path: "security/access-portal/access-control",
+      async lazy() {
+        const { AccessControlSection } = await componentLoader(
+          () =>
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/accessControl"),
+        );
+
+        return { Component: AccessControlSection };
       },
     },
     {
@@ -289,9 +300,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { DevToolsAccessSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/devToolsAccess"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/devToolsAccess"),
         );
 
         return { Component: DevToolsAccessSection };
@@ -302,9 +311,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { InvitationSettingsSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/invitationSettings"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/invitationSettings"),
         );
 
         return { Component: InvitationSettingsSection };
@@ -315,9 +322,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { IpSecuritySection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/ipSecurity"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/ipSecurity"),
         );
 
         return { Component: IpSecuritySection };
@@ -328,9 +333,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { BruteForceProtectionSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/bruteForceProtection"),
         );
 
         return { Component: BruteForceProtectionSection };
@@ -341,9 +344,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { AdminMessageSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/adminMessage"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/adminMessage"),
         );
 
         return { Component: AdminMessageSection };
@@ -354,9 +355,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { SessionLifetimeSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/sessionLifetime"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/security/access-portal/sessionLifetime"),
         );
 
         return { Component: SessionLifetimeSection };
@@ -366,12 +365,12 @@ const PortalSettingsRoutes = {
       path: "ai-settings",
       element: (
         <ProtectedAISettingsRoute>
-          <Navigate to="ai-settings/providers" replace />
+          <Navigate to="/portal-settings/ai-settings/ai-models" replace />
         </ProtectedAISettingsRoute>
       ),
     },
     {
-      path: "ai-settings/providers",
+      path: "ai-settings/ai-models",
       element: (
         <ProtectedAISettingsRoute>
           <ViewComponent />
@@ -379,7 +378,7 @@ const PortalSettingsRoutes = {
       ),
     },
     {
-      path: "ai-settings/servers",
+      path: "ai-settings/model-assignment",
       element: (
         <ProtectedAISettingsRoute>
           <ViewComponent />
@@ -387,7 +386,15 @@ const PortalSettingsRoutes = {
       ),
     },
     {
-      path: "ai-settings/search",
+      path: "ai-settings/mcp-servers",
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
+    },
+    {
+      path: "ai-settings/web-search",
       element: (
         <ProtectedAISettingsRoute>
           <ViewComponent />
@@ -439,9 +446,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { SettingsContainerSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer"),
         );
 
         return { Component: SettingsContainerSection };
@@ -452,9 +457,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { SyncContainerSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer"),
         );
 
         return { Component: SyncContainerSection };
@@ -465,9 +468,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { SPSettingsSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"),
         );
 
         return { Component: SPSettingsSection };
@@ -478,9 +479,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { ProviderMetadataSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"),
         );
 
         return { Component: ProviderMetadataSection };
@@ -498,32 +497,8 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "payments/portal-payments",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/wallet",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/payment-method",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services/ai-services",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services/backup",
-      element: <ViewComponent />,
-    },
-    {
-      path: "payments/services/disk-storage",
-      element: <ViewComponent />,
+      path: "payments/*",
+      element: <PaymentsRedirect />,
     },
     {
       path: "management/disk-space",
@@ -534,9 +509,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { QuotaPerRoomComponentSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom"),
         );
 
         return { Component: QuotaPerRoomComponentSection };
@@ -547,9 +520,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { QuotaPerUserComponentSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser"),
         );
 
         return { Component: QuotaPerUserComponentSection };
@@ -560,9 +531,7 @@ const PortalSettingsRoutes = {
       async lazy() {
         const { QuotaPerAIAgentComponentSection } = await componentLoader(
           () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent"
-            ),
+            import("SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent"),
         );
 
         return { Component: QuotaPerAIAgentComponentSection };
@@ -621,3 +590,4 @@ const PortalSettingsRoutes = {
 };
 
 export default PortalSettingsRoutes;
+

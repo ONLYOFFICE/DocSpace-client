@@ -2,19 +2,20 @@
   "key_path": "NoMCPServersDescription",
   "content": "Please connect {{mcpServers}} in {{productName}} settings to use them in the {{aiAgent}}.",
   "content_en_sha1_hash": "cb7d0b5345d622db847157a2457d0c1cff8e3cce",
-  "created_at": "2025-12-19T10:16:33.807Z",
-  "updated_at": "2025-12-22T09:41:52.033Z",
+  "created_at": "2026-06-01T21:20:26.047Z",
+  "updated_at": "2026-07-27T13:07:51.097Z",
   "comment": {
-    "text": "This text explains to the user that they need to connect Minecraft server(s) within the application settings to enable them for use with the AI agent. It appears in a screen displaying a lack of configured Minecraft servers. Translators should understand \"mcpServers\" refers to the Minecraft server configuration setting.",
+    "text": "Empty screen description instructing the user to configure MCP servers in the product settings. Includes placeholders for the server title, product name, and AI agent name.",
     "is_auto": true,
-    "updated_at": "2025-12-22T09:41:52.033Z"
+    "updated_at": "2026-06-01T21:34:42.865Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/selectors/MCPServers/index.tsx",
-      "line_number": 173,
-      "context": "isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl\n }\n emptyScreenHeader={t(\"Common:NoMCPServers\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"Common:NoMCPServersDescription\", {\n mcpServers: t(\"Common:MCPSettingTitle\"),\n productName: t(\"Common:ProductName\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n searchEmptyScreenImage={",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
+      "line_number": 228,
+      "context": ")\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n productName: getBrandName(\"ProductName\"),\n aiAgent: t(\"AIAgent\"),\n })}\n searchEmptyScreenImage={",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

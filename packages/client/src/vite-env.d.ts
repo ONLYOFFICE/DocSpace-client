@@ -56,3 +56,5 @@ declare module "*.module.scss" {
 // Global constants injected by Vite's define config
 declare const VERSION: string;
 declare const BUILD_AT: string;
+// Per-language md5 of the combined locale bundle, used as a ?hash= cache-buster.
+declare const COMBINED_LOCALE_HASHES: Record<string, string>;

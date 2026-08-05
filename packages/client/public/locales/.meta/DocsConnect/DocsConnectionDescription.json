@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectionDescription",
+  "content": "Connect this {{service}} instance to your {{organizationName}} {{editorsName}} in one click. All required settings will be applied and saved automatically.",
+  "content_en_sha1_hash": "140e41459b2f4f69b919c00914018c0b21d3ced8",
+  "created_at": "2026-07-30T16:14:09.568Z",
+  "updated_at": "2026-08-04T09:58:56.506Z",
+  "comment": {
+    "text": "Informational hint text in the settings panel describing the automated connection process between a service and the editors. Includes {{service}} (the name of the service being connected) and {{organizationName}} {{editorsName}} (the brand name of the editors).",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:18:55.530Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 315,
+      "context": "organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" className={styles.settingsHint}>\n {t(\"DocsConnect:DocsConnectionDescription\", {\n service: t(\"DocsConnect:DocsConnect\"),\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

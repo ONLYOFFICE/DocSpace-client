@@ -3,16 +3,17 @@
   "content": "Restore to",
   "content_en_sha1_hash": "55a3efe467e20e4698ed5e79684c4b701ff485cb",
   "created_at": "2025-05-19T21:30:47.920Z",
-  "updated_at": "2025-05-26T07:57:32.172Z",
+  "updated_at": "2026-05-15T14:00:06.609Z",
   "comment": {
-    "text": "This translation key is used to display a button or dialog title indicating that files can be restored from a previous state. It appears in UI components related to file management and selection, such as the FilesSelector component.",
+    "text": "This is a button label. It appears in a dialog when restoring a file or folder, indicating the action of restoring to a specific location.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:41.340Z"
+    "updated_at": "2026-04-11T20:44:50.112Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 49,
+      "line_number": 59,
       "context": "isRestore?: boolean,\n isFormRoom?: boolean,\n isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {",
       "module": "/packages/client"
     }
@@ -35,9 +36,11 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Bərpa edin\" is a general imperative form meaning \"Restore\" or \"Repair\". It doesn't directly translate \"Restore to\". A more accurate translation would consider the context of what is being restored to.",
-          "suggestion": "Possible alternatives depending on context: \"Xətaya qaytarın\" (Restore to error), \"Əvvəlki vəziyyətə qaytarın\" (Restore to previous state), or a more context-specific translation."
+          "type": "missing_content",
+          "description": "The translation 'Bərpa et' only means 'Restore' and completely omits the 'to' preposition that indicates restoring to a specific destination/location. The English phrase specifically denotes choosing a target location for restoration, which is essential context from the code usage. The translation loses this critical meaning.",
+          "suggestion": "Bir yerə bərpa et (restore to a place) or similar phrasing that includes the destination element",
+          "checked_at": "2026-04-13T09:12:16.132Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -69,25 +72,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Restaurar en\" is a possible translation, it's not the most natural or accurate rendering of \"Restore to.\" \"Restaurar a\" would be a more common and idiomatic choice.",
-          "suggestion": "Restaurar a"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Restore to' implies returning something to a previous state or location. 'Palauta' generally means 'return' and lacks the 'to' context. A more accurate translation would incorporate the destination or state of restoration.",
-          "suggestion": "Palauta alkuperäiseen tilaan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +90,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Վերականգնել\" (Verakannel) translates to \"Restore\" or \"Recover,\" but the English phrase \"Restore to\" implies restoring something *to* a specific state or location. \"Վերականգնել\" doesn't convey the 'to' aspect. A more accurate translation would capture the destination of the restoration.",
-          "suggestion": "Consider alternatives like \"Վերականգնել դեպի\" (Verakannel depi) which translates to \"Restore to/towards,\" but a more context-dependent and nuanced translation would be best. Without more context, it's difficult to provide a perfect suggestion."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,13 +108,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"다음으로 복원:\" doesn't fully capture the meaning of \"Restore to\". \"다음으로 복원:\" translates to \"Restore next:\". \"Restore to\" implies restoring something to a specific state or location, which isn't conveyed.",
-          "suggestion": "Consider a translation like \"원래 상태로 복원:\" (Return to original state:) or \"~로 복원:\" (~Restoration:), where ~ represents the target state or location."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -138,8 +117,10 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ຟື້ນຟູເປັນ' can be interpreted as 'restore to', it's not the most natural or accurate translation of 'Restore to'. It's a bit literal and lacks nuance. A more idiomatic translation would depend on the context of 'Restore to'.",
-          "suggestion": "Consider alternative translations like 'ສືບສານ' (inherit), 'ຕັ້ງຄືນ' (reset), 'ກວດແກ້' (recover), or 'ສົ່ງຄືນ' (return), depending on the specific meaning of 'Restore to' in the original English."
+          "description": "The preposition 'ເປັນ' (meaning 'to be/become') is semantically inappropriate. In Lao, restoring to a destination requires a directional preposition like 'ໄປ' (to) or 'ໄປຍັງ' (to/at), not 'ເປັນ'. This changes the meaning from 'restore to [a location]' to 'restore to be' or 'restore as', which is incorrect in this file restoration context.",
+          "suggestion": "ຟື້ນຟູໄປ or ຟື້ນຟູໄປຍັງ",
+          "checked_at": "2026-04-13T09:13:08.219Z",
+          "checked_by": "claude-code/haiku"
         }
       ],
       "approved_at": null
@@ -177,37 +158,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Restaurare la' is a literal translation of 'Restore to', it doesn't convey the intended meaning in many contexts. 'Restore to' often implies a return to a previous state or a designated location. A more accurate and idiomatic translation would depend on the specific context of use. Without further context, a more appropriate translation might be 'Reîntoarcere la', 'Repunerea la', or 'Restabilire la'.",
-          "suggestion": "Consider context. Possible alternatives: 'Reîntoarcere la', 'Repunerea la', 'Restabilire la'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Восстановить к\" is a literal translation of \"Restore to\" but might not be the most natural or accurate way to express the concept in Russian. \"Restore to\" often implies restoring something *to a previous state or condition*, not simply 'to' a point. A more suitable translation would depend on the context, but options like \"восстановить до\", \"вернуться к\", or \"восстановить до прежнего состояния\" might be better.",
-          "suggestion": "Consider alternatives like \"восстановить до\", \"вернуться к\", or \"восстановить до прежнего состояния\" depending on the specific context."
-        }
-      ],
-      "approved_at": null
+      "ai_spell_check_issues": [],
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මෙයට ප්‍රත්‍යර්පණය\" is not an accurate translation of \"Restore to\". \"ප්‍රත්‍යර්පණය\" primarily means 'reflection' or 'reproduction', not 'restore'. It doesn't convey the meaning of reverting to a previous state or condition.",
-          "suggestion": "A more accurate translation would depend on the specific context, but options could include: \" නැවත යථා තත්ත්වයට පත් කිරීම\" (naewatha yatha taththwathwa petha kirimu - restoring to original condition), \" නැවත ස්ථානගත කිරීම\" (naewatha sthaanagama kirimu - restoring to a location), or a more literal translation like \"ආපනවා\" (aapnawaa - to return/restore)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,13 +188,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Поврати на\" while technically meaning 'return to', doesn't fully capture the nuance of 'Restore to'. 'Restore to' implies a return to a previous state or configuration, whereas 'Поврати на' is a more general 'return to'. A more accurate translation might be something like 'Врати на' which leans more towards a restoration.",
-          "suggestion": "Врати на"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -243,13 +200,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation \"Şuraya geri yükle\" is a literal translation of 'Restore to' but doesn't convey the intended meaning. It implies restoring *something* to a specific location, whereas 'Restore to' often implies restoring a system or data to a previous state. A more appropriate translation would depend on the context, but a potential alternative could be 'Önceki haline geri yükle' (Restore to previous state).",
-          "suggestion": "Consider 'Önceki haline geri yükle' or a context-specific alternative."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -265,6 +216,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

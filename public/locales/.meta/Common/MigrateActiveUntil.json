@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateActiveUntil",
+  "content": "Active until {{date}}",
+  "content_en_sha1_hash": "29f7a973bafe3b54c0bfd1271ea5f79ec47ff6fa",
+  "created_at": "2026-06-30T07:32:34.164Z",
+  "updated_at": "2026-07-27T13:07:51.038Z",
+  "comment": {
+    "text": "Informational text within the Migrate to Wallet dialog indicating when the current subscription remains valid, including a {{date}} variable for the specific end date.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:40:38.704Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 354,
+      "context": "</div>,\n )}\n \n {renderStep(\n 3,\n t(\"MigrateActiveUntil\", { date: initialPaymentDate }),\n <Text\n fontSize=\"13px\"\n color=\"var(--payment-benefits-icons-color)\"\n >\n {t(\"MigrateAutoRenews\", {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

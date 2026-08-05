@@ -1,0 +1,29 @@
+{
+  "key_path": "AIModels",
+  "content": "AI models",
+  "content_en_sha1_hash": "220092c06f1f9360a057116ef150a29af9e15c34",
+  "created_at": "2026-06-25T11:54:44.239Z",
+  "updated_at": "2026-07-28T07:30:59.883Z",
+  "comment": {
+    "text": "Tab title and menu item label in the AI settings section that refers to the collection of available AI models.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:28:38.134Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
+      "line_number": 185,
+      "context": "const disableNonAiModels = gateNonAiModelsTabs;\n \n const data: TTabItem[] = [\n {\n id: TAB_IDS.AI_MODELS,\n name: t(\"Common:AIModels\"),\n content: standalone ? <AiModels /> : <AiModelsSaas />,\n onClick: makeOnClick(TAB_IDS.AI_MODELS),\n },\n {\n id: TAB_IDS.MODEL_ASSIGNMENT,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

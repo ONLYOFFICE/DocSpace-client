@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomCollectionNotConnectedDescription",
+  "content": "Data collection is not set up. Configure this feature in room settings to automatically save form responses as a table.",
+  "content_en_sha1_hash": "62a5ce1caa337b87ef847cc247e3f8c465e59732",
+  "created_at": "2026-05-08T13:10:42.375Z",
+  "updated_at": "2026-05-15T14:00:06.729Z",
+  "comment": {
+    "text": "Informational text in the Room Info Panel that appears when data collection is not configured, instructing the user to enable it via room settings.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:16:05.926Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
+      "line_number": 86,
+      "context": "if (collectionConnected) {\n if (isRoom)\n return t(\"InfoPanel:FormRoomCollectionConnectedDescriptionRoom\");\n return t(\"InfoPanel:FormRoomCollectionConnectedDescription\");\n }\n return t(\"InfoPanel:FormRoomCollectionNotConnectedDescription\");\n }, [collectionConnected, isRoom, t]);\n \n const renderAction = () => {\n if (collectionConnected) {\n if (!isFormFile(selection)) return null;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesMultipleConvertSelectedFilesPrompt",
+  "content": "Convert the selected files to another format. Ask me for the target format and whether to use it for all files. Keep the original files unchanged.",
+  "content_en_sha1_hash": "e317e3e66f48d11452f38ff206162b7836ab9c33",
+  "created_at": "2026-08-04T09:58:55.122Z",
+  "updated_at": "2026-08-04T09:58:56.420Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 389,
+      "context": "name: t(\"AiSuggestions:FilesMultipleCreateACombinedSummary\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateACombinedSummaryPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleConvertSelectedFiles\"),\n prompt: t(\"AiSuggestions:FilesMultipleConvertSelectedFilesPrompt\"),\n },\n ],\n \n // +\n rooms: [",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

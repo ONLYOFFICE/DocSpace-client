@@ -1,0 +1,28 @@
+{
+  "key_path": "AiFormCheckTheAnswersPrompt",
+  "content": "Check the answers in the attached form for missing, inconsistent, or implausible values, and explain each finding without changing the file. If this information is not provided, ask me for the required fields and validation rules.",
+  "content_en_sha1_hash": "6edf04c02847e740f08d03cd143d43bb3a51076c",
+  "created_at": "2026-08-04T09:58:55.104Z",
+  "updated_at": "2026-08-04T09:58:56.467Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 830,
+      "context": "name: t(\"AiSuggestions:AiFormWhatIsStillEmpty\"),\n prompt: t(\"AiSuggestions:AiFormWhatIsStillEmptyPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCheckTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormCheckTheAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormSummarizeTheResponses\"),\n prompt: t(\"AiSuggestions:AiFormSummarizeTheResponsesPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

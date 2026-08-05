@@ -26,38 +26,14 @@
       }
     },
     {
-      "label": "Backend | build CE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | run CE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
       "label": "Backend | run CE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
+        }
+      },
       "type": "shell",
       "group": {
         "kind": "build",
@@ -75,39 +51,10 @@
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
       "options": {
         "env": {
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build EE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | run EE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -e enterprise",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -123,12 +70,14 @@
     {
       "label": "Backend | run EE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
-      "type": "shell",
       "options": {
         "env": {
-          "APP_EDITION": "enterprise"
+          "APP_EDITION": "enterprise",
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -143,102 +92,13 @@
     {
       "label": "Backend | run EE - full (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
-      "type": "shell",
       "options": {
         "env": {
           "APP_EDITION": "enterprise",
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | rebuild EE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build EE + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build EE + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -i -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build EE + dnsmasq + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -i -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build DE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | run DE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -e developer",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -254,12 +114,14 @@
     {
       "label": "Backend | run DE (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
-      "type": "shell",
       "options": {
         "env": {
-          "APP_EDITION": "developer"
+          "APP_EDITION": "developer",
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -273,88 +135,14 @@
     },
     {
       "label": "Backend | run DE - full (Aspire)",
-      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; SKIP_CLIENT=true dotnet run --launch-profile development",
-      "type": "shell",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
       "options": {
         "env": {
           "APP_EDITION": "developer",
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
         }
       },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | rebuild DE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build DE + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build DE + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -i -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build DE + dnsmasq + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -i -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build SAAS + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -e enterprise",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -370,6 +158,12 @@
     {
       "label": "Backend | run SAAS (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev --APP_HOSTING_STANDALONE false",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false"
+        }
+      },
       "type": "shell",
       "group": {
         "kind": "build",
@@ -385,12 +179,14 @@
     {
       "label": "Backend | run SAAS - full (Aspire)",
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development --APP_HOSTING_STANDALONE false",
-      "type": "shell",
       "options": {
         "env": {
-          "SKIP_CLIENT": "true"
+          "SKIP_CLIENT": "true",
+          "STORYBOOK": "false",
+          "APP_EDITION": "developer"
         }
       },
+      "type": "shell",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -404,115 +200,10 @@
     },
     {
       "label": "Backend | clear Aspire (Docker)",
-      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker rm && docker volume prune -f && docker network prune -f",
+      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker rm && docker volume ls --format '{{.Name}}' | grep -E '^docspace' | xargs -r docker volume rm && docker volume prune -f && docker network prune -f",
       "windows": {
-        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; docker volume prune -f; docker network prune -f"
+        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; $v = docker volume ls --format '{{.Name}}' | Where-Object { $_ -match '^docspace' }; if ($v) { $v | ForEach-Object { docker volume rm $_ } }; docker volume prune -f; docker network prune -f"
       },
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | run SAAS + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -s -d -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build SAAS + dnsmasq + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -i -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | rebuild SAAS + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -f -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | clear",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/clear.backend.docker.py",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | stop",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/stop.backend.docker.py",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | restart",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/restart.backend.docker.py",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | start",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/start.backend.docker.py",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -547,6 +238,51 @@
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update ui-kit lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-ui-kit-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update translation-app lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-translation-app-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update all lock files",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-ui-kit-lock ; pnpm run update-translation-app-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
       },
       "presentation": {
         "reveal": "always",
@@ -706,6 +442,36 @@
       }
     },
     {
+      "label": "Frontend | deploy run",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../publish/web ; trap 'kill 0' EXIT ; (cd login && node server.js) & (cd editor && node server.js) & (cd management && node server.js) & (cd sdk && node server.js) & npx serve client -s -l 5001",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | storybook (ui-kit)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | storybook",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run storybook",
@@ -766,6 +532,36 @@
       }
     },
     {
+      "label": "Test | Jest:translations:missing-keys",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:only-missing-keys ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:translations:clear-wrong",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; CLEAR_WRONG_VALUES=true FIX_MOVED_KEYS=true npm run test:locales ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:images",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; npm run open-report",
@@ -799,6 +595,21 @@
       "label": "Test | Jest:ascii",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:ascii ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:license",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:license ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -874,6 +685,36 @@
       "label": "Test | Jest:unit:ui-kit",
       "type": "shell",
       "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm test",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:client",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Vitest:store",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run test:store",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1084,6 +925,81 @@
       "label": "Test | Test e2e docker dev update-screenshots (client)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:ui:plugins",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:plugins ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker update-screenshots (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:plugins:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev:plugins ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (client plugins)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev:plugins:update-screenshots",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1585,6 +1501,139 @@
         "panel": "new",
         "focus": true,
         "close": false
+      }
+    },
+    {
+      "label": "Translation App | start",
+      "type": "shell",
+      "command": "bash '${workspaceFolder}/common/translation-app/run.translation-app.sh'",
+      "windows": {
+        "command": "cmd /c '${workspaceFolder}\\common\\translation-app\\run.translation-app.bat'"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Translation App | start (skip meta)",
+      "type": "shell",
+      "command": "bash '${workspaceFolder}/common/translation-app/run.translation-app.sh' --skip-meta",
+      "windows": {
+        "command": "cmd /c '${workspaceFolder}\\common\\translation-app\\run.translation-app.bat' --skip-meta"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Screenshot Comparison | start",
+      "type": "shell",
+      "command": "bash '${workspaceFolder}/common/screenshot-comparison-app/run.screenshot-comparison.sh'",
+      "windows": {
+        "command": "cmd /c '${workspaceFolder}\\common\\screenshot-comparison-app\\run.screenshot-comparison.bat'"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Translation App | translation stats",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | translation stats (missing keys)",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js' --no-meta --missing",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | translation stats (Markdown)",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js' --md='${workspaceFolder}/translation-stats.md'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (no LLM)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js --no-llm",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (LLM)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (LLM + recheck)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js --recheck",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | clear meta issues",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm run clear-meta-issues",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | update metadata",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
       }
     }
   ]

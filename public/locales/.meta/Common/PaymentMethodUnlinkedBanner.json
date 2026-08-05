@@ -1,0 +1,29 @@
+{
+  "key_path": "PaymentMethodUnlinkedBanner",
+  "content": "<1>Payment method unlinked.</1> To add one, please follow this link. <2>Add payment method</2>",
+  "content_en_sha1_hash": "6d69d028c7ae1e2658ab5da6f3b8b0c42c30bd90",
+  "created_at": "2026-06-25T11:54:54.733Z",
+  "updated_at": "2026-06-25T12:02:41.053Z",
+  "comment": {
+    "text": "An alert banner in the billing section that appears when no payment method is connected to the account. Tag <1> applies bold styling to the status message, and tag <2> represents the clickable link text.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:02:41.053Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/unlinked-card-banner/index.tsx",
+      "line_number": 66,
+      "context": "<div className={styles.banner}>\n <PluginIncompatibleSvg className={styles.icon} />\n <Text as=\"span\" fontSize=\"12px\" lineHeight=\"16px\" className={styles.text}>\n {isPayer ? (\n <CommonTrans\n i18nKey=\"PaymentMethodUnlinkedBanner\"\n components={{\n 1: <Text as=\"span\" fontWeight={600} />,\n 2: (\n <Link\n as=\"span\"",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

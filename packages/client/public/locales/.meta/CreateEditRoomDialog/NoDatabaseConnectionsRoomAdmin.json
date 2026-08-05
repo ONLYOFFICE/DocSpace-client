@@ -1,0 +1,29 @@
+{
+  "key_path": "NoDatabaseConnectionsRoomAdmin",
+  "content": "Database connections are configured by an administrator. Once a database is set up, you’ll be able to enable export here.",
+  "content_en_sha1_hash": "4abdf12ed35f86c74ce4eed5d0d4674658404b5a",
+  "created_at": "2026-04-23T17:24:00.045Z",
+  "updated_at": "2026-05-15T14:00:06.660Z",
+  "comment": {
+    "text": "Informational text in the Integration Bar of the Create/Edit Room dialog. It appears for room administrators when no database connection is configured, explaining that an administrator must set up a database to enable export functionality.",
+    "is_auto": true,
+    "updated_at": "2026-04-23T17:43:16.148Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FormRoomBlock/IntegrationBar.tsx",
+      "line_number": 72,
+      "context": "? t(\"NeedMoreIntegrations\")\n : t(\"NoDatabaseConnections\");\n \n const descriptionText =\n isRoomAdmin && !hasDatabaseConnection\n ? t(\"NoDatabaseConnectionsRoomAdmin\")\n : hasDatabaseConnection\n ? t(\"NeedMoreIntegrationsDescription\")\n : t(\"ConfigureDatabaseConnection\");\n \n const handleClose = hasDatabaseConnection",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

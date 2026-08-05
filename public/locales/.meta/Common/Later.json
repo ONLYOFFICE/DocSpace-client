@@ -3,23 +3,30 @@
   "content": "Later",
   "content_en_sha1_hash": "56e2f5d3634ea4aac5b56f1548e92680dd4cdd05",
   "created_at": "2025-05-19T21:30:46.093Z",
-  "updated_at": "2026-03-20T09:07:45.489Z",
+  "updated_at": "2026-07-31T12:36:29.409Z",
   "comment": {
-    "text": "The translation key \"Later\" is used to display a button label that indicates proceeding with an action after a later time. It appears as a button in various dialog contexts, such as a modal footer, prompting the user to confirm their decision and schedule it for later.",
+    "text": "This is a button label. It allows the user to dismiss a dialog or postpone an action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:43.698Z"
+    "updated_at": "2026-04-11T20:50:19.632Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreatedPDFFormDialog/CreatedPDFFormDialog.tsx",
-      "line_number": 128,
+      "line_number": 148,
       "context": "/>\n <Button\n tabIndex={0}\n onClick={onClose}\n size={ButtonSize.normal}\n label={t(\"Common:Later\")}\n testId=\"created_pdf_form_dialog_later\"\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
+      "line_number": 359,
+      "context": "fontSize=\"13px\"\n isHovered\n onClick={switchKey.dismiss}\n dataTestId=\"resume_rotation_dismiss_link\"\n >\n {t(\"Common:Later\")}\n </Link>\n </div>\n </div>\n ) : null}\n {hasKeys ? (",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/shared/dialogs/assign-roles-dialog/index.tsx",
-      "line_number": 68,
-      "context": "size={ButtonSize.normal}\n scale\n />\n <Button\n onClick={onClose}\n label={t(\"Common:Later\")}\n size={ButtonSize.normal}\n scale\n />\n </ModalDialog.Footer>\n </ModalDialog>",
+      "line_number": 78,
+      "context": "scale\n testId=\"submit_assign_role_button\"\n />\n <Button\n onClick={onClose}\n label={t(\"Common:Later\")}\n size={ButtonSize.normal}\n scale\n testId=\"assign_role_later_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/shared"
     }
   ],
@@ -154,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -205,6 +212,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

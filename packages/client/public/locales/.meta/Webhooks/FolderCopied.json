@@ -3,13 +3,21 @@
   "content": "Folder copied",
   "content_en_sha1_hash": "643764d99bc0210701d64f7db763c2f2e3dedb99",
   "created_at": "2025-05-19T21:30:49.747Z",
-  "updated_at": "2025-05-24T02:24:32.439Z",
+  "updated_at": "2026-05-15T14:00:06.834Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message indicating that a folder has been successfully duplicated.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:28:56.797Z",
+    "model": "google/gemini-2.5-flash"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 82,
+      "context": "case WebhookTriggers.FolderDeleted:\n return t(\"FolderDeleted\");\n case WebhookTriggers.FolderRestored:\n return t(\"FolderRestored\");\n case WebhookTriggers.FolderCopied:\n return t(\"FolderCopied\");\n case WebhookTriggers.FolderMoved:\n return t(\"FolderMoved\");\n case WebhookTriggers.RoomCreated:\n return t(\"Files:RoomCreated\");\n case WebhookTriggers.RoomUpdated:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -141,18 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩරය පිටපත් කරන ලදී.' is a literal translation of 'Folder copied'. While understandable, a more natural Sinhala phrasing would be preferred. 'පිටපත් කරන ලදී' implies copying, not necessarily a folder being copied. A better translation would emphasize the act of moving or creating a folder.",
-          "suggestion": "ෆෝල්ඩරය ගමන්කිරීම් / ෆෝල්ඩරය සාදාගන්නා ලදී."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -170,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Фасцикла копирана\" is not the most natural or accurate translation of \"Folder copied.\" \"Фасцикла\" (fascikla) translates to 'folder' but sounds somewhat formal in this context. A more common and natural translation would be \"Премештена фасцикла\" or \"Копирана фасцикла\".",
-          "suggestion": "Премештена фасцикла"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Fascikla' is likely misspelled. The correct spelling is probably 'Foldera'.",
-          "suggestion": "Foldera"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -210,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

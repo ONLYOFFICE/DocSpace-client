@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomAIReadyDescriptionFile",
+  "content": "Ask AI to explore responses from this form, generate insights, and visualize the data.",
+  "content_en_sha1_hash": "ded1f385b15d3766af39712aad4369135182370e",
+  "created_at": "2026-05-08T13:10:42.360Z",
+  "updated_at": "2026-05-15T14:00:06.728Z",
+  "comment": {
+    "text": "Description text in the Info Panel that appears when AI is connected and a file is selected, explaining the AI's capabilities for analyzing form responses and visualizing data.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:18:41.256Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
+      "line_number": 95,
+      "context": ");\n \n const description = useMemo(() => {\n if (aiConnected) {\n if (isDone) return t(\"InfoPanel:FormRoomAIReadyDescriptionFolder\");\n if (isFile) return t(\"InfoPanel:FormRoomAIReadyDescriptionFile\");\n return t(\"InfoPanel:FormRoomAIReadyDescriptionRoom\");\n }\n \n if (!aiReady) {\n if (isAdmin) {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
@@ -36,11 +45,18 @@ import {
 } from "@docspace/ui-kit/utils/date";
 
 import {
+  AnalyticsEvents,
   EmployeeType,
   ShareAccessRights,
   RoomsType,
 } from "@docspace/shared/enums";
-import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { LOADER_TIMEOUT, OPERATIONS_NAME } from "@docspace/shared/constants";
+import uniqueid from "lodash/uniqueId";
+import {
+  addMembersToEncryptedRoom,
+  backfillEncryptedFilesForRoomMembers,
+} from "@docspace/shared/services/private-room/room-encryption";
+import { requireUnlock } from "@docspace/shared/services/encryption/secret-storage";
 
 import { Button } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -58,6 +74,7 @@ import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions"
 import PeopleSelector from "@docspace/ui-kit/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
@@ -105,6 +122,7 @@ const InvitePanel = ({
   hasGuests,
   culture,
   currentUserId,
+  setSecondaryProgressBarData,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -258,8 +276,12 @@ const InvitePanel = ({
   }, [allowInvitingGuests]);
 
   useEffect(() => {
+    if (selectedRoom?.private) {
+      setShowGuestsTab(false);
+      return;
+    }
     if (typeof hasGuests === "boolean") setShowGuestsTab(hasGuests);
-  }, [hasGuests]);
+  }, [hasGuests, selectedRoom?.private]);
 
   useEffect(() => {
     if (roomId === -1) {
@@ -416,20 +438,161 @@ const InvitePanel = ({
     try {
       setIsLoading(true);
       const isRooms = roomId !== -1;
+      const isPrivateInvite = isRooms && !!selectedRoom?.private;
+
+      const newMembers = isPrivateInvite
+        ? inviteItems
+            .filter((item) => item.id && !item.isGroup)
+            .map((item) => ({
+              id: item.id,
+              displayName: item.displayName || item.email,
+            }))
+        : [];
+
+      let identity = null;
+      if (isPrivateInvite && newMembers.length > 0) {
+        identity = await requireUnlock(String(currentUserId));
+        if (!identity) {
+          setIsLoading(false);
+          toastr.error(t("Common:EncryptionLockedAddMembers"));
+          return;
+        }
+      }
+
       const result = !isRooms
         ? await api.people.inviteUsers(data)
         : await api.rooms.setRoomSecurity(roomId, data);
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.UserInvited,
+          count: invitations.length,
+          context: "invite_panel",
+        });
+      } else {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.RoomShared,
+          roomId,
+          count: invitations.length,
+          context: "invite_panel",
+          parentId: selectedRoom?.parentId,
+        });
       }
       setIsLoading(false);
 
       onClose();
-      toastr.success(t("Common:UsersInvited"));
+
+      if (!isPrivateInvite) {
+        toastr.success(t("Common:UsersInvited"));
+      }
 
       if (result?.warning) {
         toastr.warning(result?.warning);
+      }
+
+      if (isPrivateInvite && identity && newMembers.length > 0) {
+        const operationId = uniqueid("operation_");
+
+        setSecondaryProgressBarData({
+          operation: OPERATIONS_NAME.roomReencryption,
+          percent: 0,
+          operationId,
+        });
+
+        addMembersToEncryptedRoom(roomId, newMembers, {
+          currentUserId: String(currentUserId),
+          identity,
+          onProgress: (processed, total) => {
+            const percent = Math.floor((processed / total) * 100);
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent,
+              operationId,
+            });
+          },
+        })
+          .then(({ fileResults, skippedMembers }) => {
+            const failures = fileResults.filter((r) => !r.success);
+            const hasAlert =
+              failures.length > 0 || skippedMembers.length > 0;
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent: 100,
+              completed: true,
+              alert: hasAlert,
+              operationId,
+            });
+
+            if (skippedMembers.length > 0) {
+              const formatName = (m) =>
+                m.displayName ||
+                newMembers.find((n) => n.id === m.id)?.displayName ||
+                m.id;
+              const noKeyNames = skippedMembers
+                .filter((m) => m.reason === "no-key")
+                .map(formatName);
+              const mismatchNames = skippedMembers
+                .filter((m) => m.reason === "key-mismatch-refused")
+                .map(formatName);
+              if (noKeyNames.length > 0) {
+                toastr.warning(
+                  t("Common:EncryptedSkippedNoKeys", {
+                    users: noKeyNames.join(", "),
+                  }),
+                );
+              }
+              if (mismatchNames.length > 0) {
+                toastr.warning(
+                  t("Common:EncryptedSkippedKeyMismatch", {
+                    users: mismatchNames.join(", "),
+                  }),
+                );
+              }
+            }
+
+            if (failures.length > 0) {
+              toastr.warning(
+                t("Common:EncryptedReencryptPartialFailure", {
+                  count: failures.length,
+                }),
+              );
+            } else if (skippedMembers.length === 0) {
+              toastr.success(t("Common:UsersInvited"));
+            }
+
+            // Silent follow-up: also re-wrap for any previously-invited
+            // members who registered their keypair after the fact (their old
+            // files would otherwise stay locked out indefinitely).
+            void backfillEncryptedFilesForRoomMembers(roomId, {
+              currentUserId: String(currentUserId),
+              identity,
+              onKeyChange: async () => "refuse",
+            }).catch((error) => {
+              console.error(
+                "[ENCRYPTION] Post-invite backfill failed:",
+                error,
+              );
+            });
+          })
+          .catch((error) => {
+            console.error(
+              "Failed to re-encrypt file keys for new members:",
+              error,
+            );
+            toastr.error(t("Common:EncryptedReencryptFailed"));
+            setSecondaryProgressBarData({
+              operation: OPERATIONS_NAME.roomReencryption,
+              percent: 100,
+              completed: true,
+              alert: true,
+              operationId,
+            });
+          });
+      } else if (isPrivateInvite) {
+        toastr.success(t("Common:UsersInvited"));
       }
 
       updateInfoPanelMembers();
@@ -475,7 +638,7 @@ const InvitePanel = ({
       return unique;
     }, []);
 
-    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
+    if (items.length > filtered.length) toastr.warning(t("Common:UsersAlreadyAdded"));
 
     return filtered;
   };
@@ -694,28 +857,32 @@ const InvitePanel = ({
     }
   };
 
+  const isPrivateRoom = !!selectedRoom?.private;
+
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
-        <ExternalLinks
-          t={t}
-          shareLinks={shareLinks}
-          setShareLinks={setShareLinks}
-          getInfo={getInfo}
-          roomType={roomType}
-          onChangeExternalLinksVisible={onChangeExternalLinksVisible}
-          externalLinksVisible={externalLinksVisible}
-          setActiveLink={setActiveLink}
-          activeLink={activeLink}
-          isMobileView={isMobileView}
-          setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
-          onSelectAccess={onSelectAccess}
-          copyLink={copyLink}
-          editLink={editLink}
-          isLinksToggling={isLinksToggling}
-          setIsLinksToggling={setIsLinksToggling}
-          setInviteContactsLink={setInviteContactsLink}
-        />
+        {isPrivateRoom ? null : (
+          <ExternalLinks
+            t={t}
+            shareLinks={shareLinks}
+            setShareLinks={setShareLinks}
+            getInfo={getInfo}
+            roomType={roomType}
+            onChangeExternalLinksVisible={onChangeExternalLinksVisible}
+            externalLinksVisible={externalLinksVisible}
+            setActiveLink={setActiveLink}
+            activeLink={activeLink}
+            isMobileView={isMobileView}
+            setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
+            onSelectAccess={onSelectAccess}
+            copyLink={copyLink}
+            editLink={editLink}
+            isLinksToggling={isLinksToggling}
+            setIsLinksToggling={setIsLinksToggling}
+            setInviteContactsLink={setInviteContactsLink}
+          />
+        )}
 
         <InviteInput
           t={t}
@@ -730,6 +897,7 @@ const InvitePanel = ({
           setInputValue={setInputValue}
           usersList={usersList}
           setUsersList={setUsersList}
+          isPrivateRoom={isPrivateRoom}
         />
         {hasInvitedUsers ? (
           <ItemsList
@@ -758,6 +926,7 @@ const InvitePanel = ({
     hasInvitedUsers,
     invitePanelBodyRef,
     setInviteContactsLink,
+    isPrivateRoom,
   ]);
 
   const closeUsersPanel = () => {
@@ -817,7 +986,13 @@ const InvitePanel = ({
   const access = defaultAccess ?? ShareAccessRights.ReadOnly;
 
   const filteredAccesses =
-    roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
+    roomType === -1
+      ? accessOptions
+      : roomType === RoomsType.AIRoom
+        ? filterNotReadOnlyOptions(accessOptions).filter(
+            (o) => !o.isSeparator && !o.disabled,
+          )
+        : filterPaidRoleOptions(accessOptions);
 
   const onSubmitLinkSettingsPanel = (defaultLink) => {
     if (roomId === -1) {
@@ -875,7 +1050,7 @@ const InvitePanel = ({
             onAccessRightsChange={() => {}}
             isMultiSelect
             disableDisabledUsers
-            withGroups
+            withGroups={!isPrivateRoom}
             roomId={roomId}
             isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
@@ -972,7 +1147,7 @@ const InvitePanel = ({
           isDisabled={hasErrors || !hasInvitedUsers}
           primary
           onClick={onClickSend}
-          label={t("SendInvitation")}
+          label={t("Common:SendInvitation")}
           isLoading={isLoading}
           testId="invite_panel_send_button"
         />
@@ -1000,6 +1175,7 @@ export default inject(
     currentQuotaStore,
     userStore,
     peopleStore,
+    uploadDataStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -1053,6 +1229,8 @@ export default inject(
       hasGuests,
       culture,
       currentUserId: userStore.user.id,
+      setSecondaryProgressBarData:
+        uploadDataStore.secondaryProgressDataStore.setSecondaryProgressBarData,
     };
   },
 )(

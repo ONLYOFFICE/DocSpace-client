@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
@@ -32,20 +41,39 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { FolderType } from "@docspace/shared/enums";
 import {
   FilesRow,
   FilesRowWrapper,
 } from "@docspace/shared/components/files-row";
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
+import { EncryptedItemIconWrapper } from "@docspace/shared/components/encrypted-item-icon";
+import { useDecryptedFilename } from "@/app/(docspace)/_hooks/useDecryptedFilename";
 import Badges from "@docspace/shared/components/badges";
+import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import EditorsTooltip from "../../editors-tooltip";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
+import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import useFavoritesActions from "@/app/(docspace)/_hooks/useFavoritesActions";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
+import { ShareContext } from "../../../../_contexts/ShareContext";
+import { CopyShareLinkContext } from "../../../../_contexts/CopyShareLinkContext";
+import { InfoContext } from "../../../../_contexts/InfoContext";
+import { DeleteContext } from "../../../../_contexts/DeleteContext";
+import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
+import { RenameContext } from "../../../../_contexts/RenameContext";
+import { VersionHistoryContext } from "../../../../_contexts/VersionHistoryContext";
+import { ConvertContext } from "../../../../_contexts/ConvertContext";
+import { AskAIContext } from "../../../../_contexts/AskAIContext";
+import type { TFileItem, TFolderItem } from "../../../../_hooks/useItemList";
 import { generateFilesItemValue } from "../../../_utils";
+import { DragContext } from "../../../../_contexts/DragContext";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
@@ -60,18 +88,94 @@ const Row = observer(
     timezone,
     displayFileExtension,
     isSSR,
+    isPrivate,
+    hasEncryptionKeys,
+    currentUserId,
   }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
+    const filesListStore = useFilesListStore();
+    const { filesSettings } = useFilesSettingsStore();
     const { isItemActive } = useActiveItemsStore();
+    const isExtsCustomFilter =
+      "fileExst" in item
+        ? (filesSettings?.extsWebCustomFilterEditing ?? []).includes(
+            item.fileExst,
+          )
+        : false;
+
+    // Use the observable item from MobX store so isFavorite changes are reactive
+    const storeItem = filesListStore.items.find((i) => i.id === item.id);
+    const observableItem = storeItem ?? item;
+
+    const decryptedTitle = useDecryptedFilename(
+      item.id,
+      item.title,
+      "encrypted" in item ? item.encrypted : false,
+    );
 
     const { t } = useTranslation(["Common"]);
     const { isBase } = useTheme();
-    const { openFile } = useFilesActions({ t });
+    const { openFile, lockFile } = useFilesActions({ t });
+    const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });
+    const onShareClick = React.useContext(ShareContext);
+    const onCopyShareLink = React.useContext(CopyShareLinkContext);
+    const onInfoClick = React.useContext(InfoContext);
+    const deleteCtx = React.useContext(DeleteContext);
+    const fileOpsCtx = React.useContext(FileOperationsContext);
+    const renameCtx = React.useContext(RenameContext);
+    const onShowVersionHistory = React.useContext(VersionHistoryContext);
+    const onConvert = React.useContext(ConvertContext);
+    const onAskAI = React.useContext(AskAIContext);
 
-    const { getContextMenuModel } = useContextMenuModel({ item });
+    const { getContextMenuModel } = useContextMenuModel({
+      item: observableItem,
+      onShareClick: onShareClick ?? undefined,
+      onInfoClick: onInfoClick ?? undefined,
+      onDeleteClick: deleteCtx?.deleteItem,
+      onCopyClick: fileOpsCtx?.copyItem,
+      onMoveClick: fileOpsCtx?.moveItem,
+      onDuplicateClick: fileOpsCtx?.duplicateItem,
+      onRestoreClick: fileOpsCtx?.restoreItem,
+      onRenameClick: renameCtx?.renameItem,
+      onShowVersionHistoryClick: onShowVersionHistory ?? undefined,
+      onAskAI: onAskAI ?? undefined,
+    });
 
     const element = (
-      <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+      <EncryptedItemIconWrapper
+        encrypted={!!("encrypted" in item && (item as TFileItem).encrypted)}
+        hasEncryptionKeys={hasEncryptionKeys ?? true}
+        isRoom={false}
+      >
+        <RoomIcon
+          logo={"isRoom" in item && item.isRoom ? item.roomLogo : item.icon}
+          color={
+            "isRoom" in item && item.isRoom ? item.roomIconColor : undefined
+          }
+          title={decryptedTitle}
+          showDefault={
+            "isRoom" in item && item.isRoom ? !item.hasRoomImage : false
+          }
+        />
+      </EncryptedItemIconWrapper>
+    );
+
+    const onClickFavorite = () => {
+      if (observableItem.isFavorite) {
+        removeFromFavorites(observableItem);
+      } else {
+        markAsFavorite(observableItem);
+      }
+    };
+
+    const onClickLock = () => {
+      if (!observableItem.isFolder) {
+        lockFile(observableItem as TFileItem);
+      }
+    };
+
+    const editorsTooltip = (
+      <EditorsTooltip item={observableItem} currentUserId={currentUserId} />
     );
 
     const badgesComponent = (
@@ -79,16 +183,51 @@ const Row = observer(
         className={styles.badgesComponent}
         t={t}
         themeIsBase={isBase}
-        item={item}
+        item={observableItem}
         viewAs="row"
         showNew={false}
+        isExtsCustomFilter={isExtsCustomFilter}
+        editorsTooltip={editorsTooltip}
         onFilesClick={() => {
-          if (!item.isFolder) {
-            openFile(item);
+          if (!observableItem.isFolder) {
+            openFile(observableItem);
           }
         }}
+        onClickFavorite={onClickFavorite}
+        onClickLock={onClickLock}
+        setConvertDialogVisible={
+          !observableItem.isFolder && onConvert
+            ? () => onConvert(observableItem as TFileItem)
+            : undefined
+        }
+        onShowVersionHistory={
+          !observableItem.isFolder && onShowVersionHistory
+            ? () => onShowVersionHistory(observableItem as TFileItem)
+            : undefined
+        }
       />
     );
+
+    const handleCopyShareLink = React.useCallback(() => {
+      onCopyShareLink?.(observableItem);
+    }, [onCopyShareLink, observableItem]);
+
+    const isTrashFolder = filesListStore.rootFolderType === FolderType.TRASH;
+
+    const quickButtonsComponent = (
+      <QuickButtons
+        t={t}
+        item={observableItem}
+        viewAs="row"
+        onClickFavorite={onClickFavorite}
+        onClickLock={onClickLock}
+        onClickShare={onCopyShareLink ? handleCopyShareLink : undefined}
+        openShareTab={onCopyShareLink ? handleCopyShareLink : undefined}
+        isTrashFolder={isTrashFolder}
+      />
+    );
+
+    const dragCtx = React.useContext(DragContext);
 
     const onContextClick = (isRightMouseButtonClick?: boolean) => {
       if (isRightMouseButtonClick && filesSelectionStore.selection.length > 1) {
@@ -104,7 +243,11 @@ const Row = observer(
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const inProgress = isItemActive(item);
 
-    const value = generateFilesItemValue(item, false, index);
+    const isDroppable =
+      item.isFolder &&
+      "security" in item &&
+      (item as TFolderItem).security?.MoveTo === true;
+    const value = generateFilesItemValue(item, isDroppable, index);
 
     return (
       <FilesRowWrapper
@@ -115,18 +258,41 @@ const Row = observer(
         isIndexEditingMode={false}
         isIndexUpdated={false}
         showHotkeyBorder={false}
-        isHighlight={false}
+        isHighlight={filesListStore.highlightFileId === item.id}
         className={classNames(styles.rowWrapper, "row-wrapper")}
       >
         <DragAndDrop
-          data-title={item.title}
-          className="files-item"
+          data-title={decryptedTitle}
+          className={classNames("files-item", { droppable: isDroppable })}
           value={value}
+          dragging={isDroppable && !!dragCtx?.isDragging}
+          onDrop={
+            dragCtx
+              ? (files) => {
+                  if (isDroppable)
+                    dragCtx.onFilesDroppedToFolder(files, item.id as number);
+                  else dragCtx.onFilesDroppedToCurrentFolder(files);
+                }
+              : undefined
+          }
+          onDragOver={
+            dragCtx
+              ? (isDragActive: boolean) => {
+                  if (isDragActive && isDroppable)
+                    dragCtx.onFolderDragOver(item.title);
+                  else dragCtx.onFolderDragLeave();
+                }
+              : undefined
+          }
+          onDragLeave={dragCtx ? () => dragCtx.onFolderDragLeave() : undefined}
+          // @ts-expect-error: native onMouseDown with event arg passed via ...rest to root div
+          onMouseDown={(e: MouseEvent) => dragCtx?.onItemMouseDown(e, item)}
         >
           <FilesRow
             key={item.id}
             checked={isChecked}
             mode="modern"
+            withoutBorder
             isIndexEditingMode={false}
             folderCategory={false}
             isActive={false}
@@ -143,6 +309,7 @@ const Row = observer(
             contextOptions={contextMenuModel}
             getContextModel={getContextMenuModel}
             badgesComponent={badgesComponent}
+            contentElement={quickButtonsComponent}
             inProgress={inProgress}
           >
             <RowContent
@@ -160,3 +327,4 @@ const Row = observer(
 );
 
 export { Row };
+

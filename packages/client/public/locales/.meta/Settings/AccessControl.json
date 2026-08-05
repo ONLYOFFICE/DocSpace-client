@@ -1,0 +1,41 @@
+{
+  "key_path": "AccessControl",
+  "content": "Access Control",
+  "content_en_sha1_hash": "8cee105dc9286540eb8273e1a66712fc79c398e3",
+  "created_at": "2026-06-02T08:43:23.365Z",
+  "updated_at": "2026-06-02T08:55:26.739Z",
+  "comment": {
+    "text": "Section header in the Portal Settings menu that labels the category for managing access permissions.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T08:55:26.739Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
+      "line_number": 154,
+      "context": "withoutExternalLink={!helpCenterDomain}\n >\n <Text className=\"subtitle\">{t(\"PortalSecurityTitle\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"Settings:AccessControl\")}\n </Text>\n <AccessControlSection />\n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
+      "line_number": 66,
+      "context": "};\n \n return (\n <MainContainer withoutExternalLink={withoutExternalLink}>\n <CategoryItem\n title={t(\"Settings:AccessControl\")}\n subtitle={\n <Trans i18nKey=\"AccessControlMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/access-control\"\n onClickLink={onClickLink}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 271,
+      "context": "{\n id: \"portal-settings_catalog-access-control\",\n key: \"1-0-9\",\n icon: \"\",\n link: \"access-control\",\n tKey: \"AccessControl\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-access-rights\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

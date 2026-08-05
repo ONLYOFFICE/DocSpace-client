@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Seçilen devre dışı kullanıcılar {{productName}}'den kaldırılacak. Bu eylem geri alınamaz.",
   "ActionCannotBeUndoneGuests": "Seçilen devre dışı bırakılmış konuklar {{productName}} üzerinden kaldırılacaktır. Bu işlem geri alınamaz.",
+  "ActionCannotBeUndoneUsers": "Seçilen devre dışı kullanıcılar {{productName}}'den kaldırılacak. Bu eylem geri alınamaz.",
   "CannotReassignFiles": "Birden fazla kullanıcıyı aynı anda silerseniz, onların dosyalarını diğer kullanıcılara yeniden atayamazsınız.",
   "DeleteGroupGuestsSuccessMessage": "Konuklar başarıyla silindi.",
   "DeleteGroupUsersSuccessMessage": "Kullanıcılar başarıyla silindi.",

@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesShowFileStructurePrompt",
+  "content": "Show the files and folders in My documents and briefly explain how they are organized. If this information is not provided, ask me for the scope, time range, and desired level of detail.",
+  "content_en_sha1_hash": "87f76ee8776503730eac9d225daf65da26eed01c",
+  "created_at": "2026-08-04T09:58:55.136Z",
+  "updated_at": "2026-08-04T09:58:56.403Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 209,
+      "context": "return {\n // +\n files: [\n {\n name: t(\"AiSuggestions:FilesShowFileStructure\"),\n prompt: t(\"AiSuggestions:FilesShowFileStructurePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesOrganizeFilesIntoFolders\"),\n prompt: t(\"AiSuggestions:FilesOrganizeFilesIntoFoldersPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

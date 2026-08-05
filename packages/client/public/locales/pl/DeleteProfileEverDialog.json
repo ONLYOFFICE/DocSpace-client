@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Wybrani wyłączeni użytkownicy zostaną usunięci z {{productName}}. Nie będziesz w stanie cofnąć tego działania.",
   "ActionCannotBeUndoneGuests": "Wybrani wyłączeni goście zostaną usunięci z {{productName}}. Nie można cofnąć tej czynności.",
+  "ActionCannotBeUndoneUsers": "Wybrani wyłączeni użytkownicy zostaną usunięci z {{productName}}. Nie będziesz w stanie cofnąć tego działania.",
   "CannotReassignFiles": "Jeśli usuniesz kilku użytkowników jednocześnie, nie będziesz w stanie przypisać ich plików innym użytkownikom.",
   "DeleteGroupGuestsSuccessMessage": "Goście zostali pomyślnie usunięci.",
   "DeleteGroupUsersSuccessMessage": "Użytkownicy zostali pomyślnie usunięci.",

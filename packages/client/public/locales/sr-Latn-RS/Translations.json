@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "Izaberi sa liste",
-  "FileLocked": "Datoteka zaključana",
   "FileProtected": "Datoteka je zaštićena lozinkom",
-  "FileUnlocked": "Datoteka otključana",
   "FolderTitleBoxNet": "Box direktorijum",
   "FolderTitleDocuSign": "DocuSign nalog",
   "FolderTitleDropBox": "Dropbox direktorijum",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "WebDAV direktorijum",
   "FolderTitleYandex": "Yandex direktorijum",
   "NewForm": "PDF obrazac",
-  "OwnerChange": "Promeni vlasnika",
   "RoleGuestDescriprion": "Gosti mogu pristupiti sobama u koje su pozvani, kao i kreirati i uređivati dokumente ako su im dodeljene odgovarajuće uloge u sobi.",
   "SearchByHeadOfGroup": "Pretraga po Vođi grupe",
   "SearchByOwner": "Pretražuj po Vlasnicima",

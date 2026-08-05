@@ -3,29 +3,36 @@
   "content": "Access denied",
   "content_en_sha1_hash": "64343a83ad8c0b8e2789c32ca5ab1eb6abb614e0",
   "created_at": "2025-05-19T21:30:42.816Z",
-  "updated_at": "2025-11-03T12:10:35.418Z",
+  "updated_at": "2026-05-15T14:00:06.916Z",
   "comment": {
-    "text": "This translation key displays a message indicating that access has been denied, used when the user lacks permissions to perform an action. It is displayed in an error container within the login component and can also be triggered by OAuth errors, such as client permission denial.",
+    "text": "This is an error message indicating that a user does not have the necessary permissions to access a specific resource or perform an action. It appears in various contexts, including restricted access pages, route confirmation, and OAuth2 authentication errors.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:29.396Z"
+    "updated_at": "2026-04-11T21:01:38.907Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/errors/AccessRestricted.tsx",
+      "line_number": 54,
+      "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\", {\n productName: getBrandName(\"ProductName\") ?? \"\",\n })}\n />\n </div>",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 68,
+      "line_number": 77,
       "context": "user &&\n !user.isAdmin &&\n !user.isOwner &&\n !user.isRoomAdmin\n ) {\n throw new Error(t(\"Common:AccessDenied\"));\n }\n \n const value = useMemo(\n () => ({\n linkData: stateData?.linkData ?? {},",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 128,
+      "line_number": 137,
       "context": "case OAuth2ErrorKey.client_disabled_error:\n return t(\"Errors:OAuthApplicationDisabled\");\n case OAuth2ErrorKey.client_not_found_error:\n return t(\"Errors:OAuthApplicationEmpty\");\n case OAuth2ErrorKey.client_permission_denied_error:\n return t(\"Common:AccessDenied\");\n case OAuth2ErrorKey.missing_client_id_error:\n return t(\"Errors:OAuthClientEmpty\");\n case OAuth2ErrorKey.something_went_wrong_error:\n return t(\"Common:UnknownError\");\n case OAuth2ErrorKey.missing_asc_cookie_error:",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/components/errors/AccessRestricted.tsx",
-      "line_number": 44,
-      "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n </div>",
+      "line_number": 54,
+      "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n </div>",
       "module": "/packages/shared"
     }
   ],
@@ -39,13 +46,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'المحاولة مرفوضة' (Al-muhawala marfuda) literally translates to 'The attempt is rejected'. While it conveys a similar meaning to 'Access denied,' it's not the most accurate or idiomatic translation for this context. 'Access denied' often implies restricted access to a resource or system, and a more suitable translation might be something like 'الوصول ممنوع' (al-wusool mamnoo').",
-          "suggestion": "الوصول ممنوع"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -105,13 +106,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation starts with a space.",
-          "suggestion": "Remove the leading space."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -165,36 +160,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Romanian translation contains a leading space.",
-          "suggestion": "Acces refuzat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ප්‍රවේශය' (pravesaya) is correctly spelled. However, some may prefer 'ආප Zugang' (aapaa pravesa) for a slightly more colloquial feel. This is a stylistic preference, not a definitive error.",
-          "suggestion": "Consider 'ආප Zugang' (aapaa pravesa) as an alternative, but 'ප්‍රවේශය' is acceptable."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි' (pravesaya pratikshepitaai) is a literal translation of 'Access denied', a more natural-sounding translation might be 'ඔබට ප්‍රවේශයක් නැත' (obata pravesa naetha).",
-          "suggestion": "Consider 'ඔබට ප්‍රවේශයක් නැත' (obata pravesa naetha) for improved naturalness."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -212,13 +190,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Приступ одбијен\" while conveying a similar meaning, is not the most natural or common way to express \"Access denied\" in Serbian. \"Приступ одбијен\" translates more literally to 'Access rejected' or 'Approach denied'.",
-          "suggestion": "A more natural translation would be \"Забрањен приступ\" (Zabranjen pristup) or \"Немате права приступа\" (Nemate prava pristupa)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -246,6 +218,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

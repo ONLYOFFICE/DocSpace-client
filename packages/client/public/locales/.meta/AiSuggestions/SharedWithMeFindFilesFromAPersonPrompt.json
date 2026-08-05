@@ -1,0 +1,28 @@
+{
+  "key_path": "SharedWithMeFindFilesFromAPersonPrompt",
+  "content": "Find files from a person across files shared with me and return the most relevant results. If this information is not provided, ask me for the person's name and an optional date range or file type.",
+  "content_en_sha1_hash": "6464846c56c25406a0acb30fc68333b9ce98e98f",
+  "created_at": "2026-08-04T09:58:55.225Z",
+  "updated_at": "2026-08-04T09:58:56.406Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 245,
+      "context": "name: t(\"AiSuggestions:SharedWithMeWhatNeedsMyAction\"),\n prompt: t(\"AiSuggestions:SharedWithMeWhatNeedsMyActionPrompt\"),\n },\n {\n name: t(\"AiSuggestions:SharedWithMeFindFilesFromAPerson\"),\n prompt: t(\"AiSuggestions:SharedWithMeFindFilesFromAPersonPrompt\"),\n },\n {\n name: t(\"AiSuggestions:SharedWithMeCopyToMyFiles\"),\n prompt: t(\"AiSuggestions:SharedWithMeCopyToMyFilesPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

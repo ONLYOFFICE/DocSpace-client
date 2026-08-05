@@ -3,34 +3,53 @@
   "content": "Archiving data",
   "content_en_sha1_hash": "0b71d55f4a461ddcbdf534bd0d205365234b8127",
   "created_at": "2025-05-19T21:30:43.080Z",
-  "updated_at": "2026-03-20T09:07:45.695Z",
+  "updated_at": "2026-07-27T13:07:50.854Z",
   "comment": {
-    "text": "This translation key is used as a label for a download action button in the context of archiving data. When clicked, this button initiates the archiving process.",
+    "text": "This text appears as a temporary message (e.g., in a toast notification or status bar) while files or folders are being prepared for download. It indicates that the system is compressing or packaging the data.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:20.677Z"
+    "updated_at": "2026-04-11T20:59:05.748Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 724,
-      "context": "const { openUrl } = this.settingsStore;\n const { downloadAction } = this.filesActionsStore;\n \n isFile\n ? openUrl(viewUrl, UrlActionType.Download)\n : downloadAction(t(\"Common:ArchivingData\"), item).catch((err) =>\n toastr.error(err),\n );\n };\n \n onClickDownloadAs = () => {",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 492,
+      "context": "} else if (isFile) {\n // the original .js passed viewUrl through unchecked\n // (files always carry it) — the non-null assertion keeps that behavior.\n openUrl(viewUrl!, UrlActionType.Download);\n } else {\n downloadAction(t(\"Common:ArchivingData\"), item).catch((err: unknown) =>\n toastr.error(err as string),\n );\n }\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 724,
-      "context": "const { openUrl } = this.settingsStore;\n const { downloadAction } = this.filesActionsStore;\n \n isFile\n ? openUrl(viewUrl, UrlActionType.Download)\n : downloadAction(t(\"Common:ArchivingData\"), item).catch((err) =>\n toastr.error(err),\n );\n };\n \n onClickDownloadAs = () => {",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
+      "line_number": 492,
+      "context": "} else if (isFile) {\n // the original .js passed viewUrl through unchecked\n // (files always carry it) — the non-null assertion keeps that behavior.\n openUrl(viewUrl!, UrlActionType.Download);\n } else {\n downloadAction(t(\"Common:ArchivingData\"), item).catch((err: unknown) =>\n toastr.error(err as string),\n );\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/groupContextOptions.helpers.ts",
+      "line_number": 280,
+      "context": "key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () =>\n self.filesActionsStore\n .downloadAction(t(\"Common:ArchivingData\"))\n .catch((err: unknown) => toastr.error(err as string)),\n disabled: !hasDownloadAccess,\n },\n {\n key: \"download-as\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 85,
+      "line_number": 95,
       "context": "private openCopyPanel = () => this.dialogsStore.setCopyPanelVisible(true);\n \n private downloadHandle = () =>\n this.filesActionsStore\n .downloadAction(this.t(\"Common:ArchivingData\"))\n ?.catch((err) => toastr.error(err));\n \n private downloadAsHandle = () =>\n this.dialogsStore.setDownloadDialogVisible(true);",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
+      "line_number": 132,
+      "context": "label: t(\"Common:Download\", { defaultValue: \"Download\" }),\n icon: DownloadReactSvgUrl,\n onClick: () => {\n void listStore.downloadAgent(agent);\n toastr.success(\n t(\"Common:ArchivingData\", { defaultValue: \"Archiving data\" }),\n );\n },\n });\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useDownloadFiles.ts",
+      "line_number": 113,
+      "context": "replace: true,\n isFrame: true,\n frameConfig: sdkConfig,\n });\n } else {\n toastr.error(t(\"Common:ArchivingData\"), undefined, 0, true);\n }\n } catch (error) {\n removeActiveItems(activeFileIds, folderIds);\n \n const passwordError = getDownloadPasswordError(",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 142,
+      "line_number": 149,
       "context": "i18nKey=\"PasswordProtectedFiles\"\n components={{ 1: <span /> }}\n />\n );\n const translations = {\n label: t(\"Common:ArchivingData\"),\n error: t(\"Common:ErrorInternalServer\"),\n passwordError,\n };\n \n return translations;",
       "module": "/packages/shared"
     }
@@ -117,13 +136,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"데이터 아카이브 중\" literally translates to \"Archiving data (in progress)\" or \"Data is being archived.\" While not entirely wrong, it's more specific than the English \"Archiving data\", which simply refers to the action itself. It implies an ongoing process.",
-          "suggestion": "Consider alternatives like \"데이터 보관\" (Data Storage), \"데이터 백업\" (Data Backup), or \"아카이브 데이터\" (Archive Data) depending on the precise meaning intended by 'Archiving data'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -172,18 +185,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"දත්ත සංරක්‍ෂණය වෙමින්\" translates to \"data is being archived\" or \"data is archiving\". While not strictly incorrect, it implies an ongoing process. \"Archiving data\" is a statement of fact, not an ongoing action. A more direct and accurate translation would be something like \"දත්ත காப்பீடு\" (dathā kāppīmu) or \"දත්ත காப்பீடு කෙරේ\" (dathā kāppīmu kerē).",
-          "suggestion": "Consider \"දත්ත காப்பீடு\" (dathā kāppīmu) for a more direct translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -229,6 +236,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

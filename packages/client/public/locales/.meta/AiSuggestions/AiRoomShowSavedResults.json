@@ -1,0 +1,28 @@
+{
+  "key_path": "AiRoomShowSavedResults",
+  "content": "Show saved results",
+  "content_en_sha1_hash": "c9de44fd40cb4fa0c65ddb06858b856a7c9633a7",
+  "created_at": "2026-08-04T09:58:55.098Z",
+  "updated_at": "2026-08-04T09:58:56.434Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 585,
+      "context": "name: t(\"AiSuggestions:AiRoomTranslateADocument\"),\n prompt: t(\"AiSuggestions:AiRoomTranslateADocumentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomShowSavedResults\"),\n prompt: t(\"AiSuggestions:AiRoomShowSavedResultsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomAddToTheKnowledgeBase\"),\n prompt: t(\"AiSuggestions:AiRoomAddToTheKnowledgeBasePrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

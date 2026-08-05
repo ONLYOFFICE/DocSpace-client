@@ -23,6 +23,7 @@ import NamespaceModal from "@/components/NamespaceModal";
 import TranslationErrorModal from "@/components/TranslationErrorModal";
 import LLMValidationProgressModal from "@/components/LLMValidationProgressModal";
 import ThemeToggle from "@/components/ThemeToggle";
+import AiDebugPanel from "@/components/AiDebugPanel";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -34,6 +35,7 @@ export default function ProjectPage() {
 
   const [isNamespaceModalOpen, setIsNamespaceModalOpen] =
     useState<boolean>(false);
+  const [aiDebugOpen, setAiDebugOpen] = useState(false);
   const [namespaceForContextMenu, setNamespaceForContextMenu] = useState<
     string | null
   >(null);
@@ -589,7 +591,7 @@ export default function ProjectPage() {
     projectError || languagesError || namespacesError || translationsError;
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6" style={{ paddingBottom: aiDebugOpen ? 320 : undefined }}>
       {/* Header */}
       <div className="mb-4">
         <div className="flex items-center justify-between mb-4">
@@ -639,11 +641,28 @@ export default function ProjectPage() {
                   </option>
                   {models.map((model) => (
                     <option key={model.name} value={model.name}>
-                      {model.name}
+                      {model.displayName || model.name}
                     </option>
                   ))}
                 </select>
               )}
+
+              {/* AI Debug panel toggle */}
+              <button
+                onClick={() => setAiDebugOpen((v) => !v)}
+                title="Toggle AI debug panel"
+                className={`ml-2 flex items-center gap-1 text-xs px-2 py-0.5 rounded border transition-colors ${
+                  aiDebugOpen
+                    ? "bg-primary-600 border-primary-500 text-white"
+                    : "border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-primary-400 hover:text-primary-500"
+                }`}
+              >
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>AI debug</span>
+              </button>
             </div>
           </div>
         </div>
@@ -877,6 +896,9 @@ export default function ProjectPage() {
           progress={llmValidationProgress}
         />
       )}
+
+      {/* AI Debug Panel — fixed bottom, full-width */}
+      <AiDebugPanel isOpen={aiDebugOpen} onClose={() => setAiDebugOpen(false)} />
     </div>
   );
 }

@@ -1,0 +1,41 @@
+{
+  "key_path": "EmptyAIDisabledContactAdminDesc",
+  "content": "Contact the {{productName}} admin to activate AI features and create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
+  "content_en_sha1_hash": "2c76fe852205b22948431eb702d965e812ec49bc",
+  "created_at": "2026-06-25T11:54:49.014Z",
+  "updated_at": "2026-07-28T07:30:59.800Z",
+  "comment": {
+    "text": "Description text on an empty state or \"no access\" screen that appears when AI features are disabled for a user. It includes the {{productName}} variable, which represents the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:13:50.500Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 155,
+      "context": "aiAgents: t(\"AIAgents\"),\n }),\n )\n // saas user\n .otherwise(() =>\n t(\"EmptyAIDisabledContactAdminDesc\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n \n const goToAIProviderSettings = {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 152,
+      "context": "</>\n );\n } else {\n // saas user — same text as the empty AI agents view\n titleRoomNoAccess = t(\"Common:AIFeaturesNotActive\");\n descriptionRoomNoAccess = t(\"Common:EmptyAIDisabledContactAdminDesc\", {\n productName,\n });\n }\n \n const goToSettings = (event) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 284,
+      "context": "productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\"),\n }),\n )\n .otherwise(() =>\n t(\"Common:EmptyAIDisabledContactAdminDesc\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

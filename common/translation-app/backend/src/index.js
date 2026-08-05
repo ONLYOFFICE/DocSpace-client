@@ -3,6 +3,7 @@ const cors = require("@fastify/cors");
 const { Server: SocketIOServer } = require("socket.io");
 const { serverConfig } = require("./config/config");
 const { initializeMetadata } = require("./startup/initMetadata");
+const { abortCurrentTranslation } = require("./routes/ollama");
 
 // Initialize Fastify with logger
 const server = fastify(serverConfig);
@@ -34,6 +35,11 @@ async function registerPlugins() {
 
       socket.on("disconnect", () => {
         console.log("Client disconnected:", socket.id);
+      });
+
+      socket.on("translation:debug:stop", () => {
+        console.log("Stop requested by client:", socket.id);
+        abortCurrentTranslation();
       });
     });
   });

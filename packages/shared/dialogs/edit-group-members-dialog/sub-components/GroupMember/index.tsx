@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { decode } from "he";
 import { use, useMemo, useState } from "react";
@@ -31,6 +40,7 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -68,7 +78,7 @@ import { getUserRoleOptions } from "../../../../utils/room-members/getUserRoleOp
 
 import { EditGroupMembersDialogContext } from "../../EditGroupMembersDialog.provider";
 
-import * as Styled from "./index.styled";
+import styles from "./GroupMember.module.scss";
 
 interface GroupMemberProps {
 	member: TGroupMemberInvitedInRoom;
@@ -167,10 +177,13 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 	};
 
 	return (
-		<Styled.GroupMember isExpect={isExpect} key={user.id}>
+		<div
+			className={`${styles.groupMember}${isExpect ? ` ${styles.groupMemberExpect}` : ""}`}
+			key={user.id}
+		>
 			<Avatar
 				role={avatarRole}
-				className="avatar"
+				className={styles.avatar}
 				size={AvatarSize.min}
 				userName={isExpect ? "" : user.displayName}
 				source={
@@ -182,26 +195,28 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 				}
 			/>
 
-			<div className="user_body-wrapper">
-				<div className="info">
-					<div className="info-box">
+			<div className={styles.userBodyWrapper}>
+				<div className={styles.info}>
+					<div className={styles.infoBox}>
 						<Text
-							className="name"
+							className={styles.name}
 							data-tooltip-id={`userTooltip_${Math.random()}`}
 							noSelect
 						>
 							{decode(user.displayName)}
 						</Text>
-						{isExpect ? <Styled.StyledSendClockIcon /> : null}
+						{isExpect ? (
+							<SendClockIcon className={styles.sendClockIcon} />
+						) : null}
 					</div>
-					<Text className="email" noSelect>
+					<Text className={styles.email} noSelect>
 						<span dir="auto">{typeLabel}</span> |{" "}
 						<span dir="ltr">{user.email}</span>
 					</Text>
 				</div>
 			</div>
 
-			<div className="individual-rights-tooltip">
+			<div className={styles.individualRightsTooltip}>
 				{hasIndividualRightsInRoom ? (
 					<HelpButton
 						place="left"
@@ -219,7 +234,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 			</div>
 
 			{selectedAccessRight && options ? (
-				<div className="role-wrapper">
+				<div className={styles.roleWrapper}>
 					{member.canEditAccess ? (
 						<AccessRightSelect
 							className="role-combobox"
@@ -239,7 +254,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 						/>
 					) : (
 						<Text
-							className="disabled-role-combobox"
+							className={styles.disabledRoleCombobox}
 							title={t("Common:Role")}
 							fontWeight={600}
 							noSelect
@@ -251,7 +266,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 					)}
 				</div>
 			) : null}
-		</Styled.GroupMember>
+		</div>
 	);
 };
 

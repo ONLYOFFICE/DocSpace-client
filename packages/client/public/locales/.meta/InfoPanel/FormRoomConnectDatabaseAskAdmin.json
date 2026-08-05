@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomConnectDatabaseAskAdmin",
+  "content": "Ask your <1>{{productName}} admin</1> to connect a database in Integrations to analyze form data with Ask AI, create charts, and uncover insights.",
+  "content_en_sha1_hash": "fc8e5ed16256e4a9b7f89c15c4ab19b515e174d8",
+  "created_at": "2026-05-08T19:46:42.499Z",
+  "updated_at": "2026-05-15T14:00:06.729Z",
+  "comment": {
+    "text": "Informational text in the AI Card of the Form Info panel, instructing users to contact an administrator to enable database integrations. The `productName` variable is part of a bolded phrase.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T19:48:31.737Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
+      "line_number": 128,
+      "context": "return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"FormRoomConnectDatabaseAskAdmin\"\n components={{\n 1: <strong />,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -24,6 +24,7 @@ import argparse
 import json
 import sys
 import os
+import urllib.parse
 from pathlib import Path
 import importlib.util
 
@@ -134,7 +135,86 @@ def prepare_docbuilder_env(reexec_if_needed: bool = False):
         pass
 
 
-def parse_translation_data(translation_data: dict) -> tuple:
+PROJECT_LOCALES_MAP = {
+    'Common': 'public/locales',
+    'Client': 'packages/client/public/locales',
+    'DocEditor': 'packages/doceditor/public/locales',
+    'Login': 'packages/login/public/locales',
+    'Management': 'packages/management/public/locales',
+}
+
+
+def find_repo_root() -> Path | None:
+    """Find the repository root by walking up from the script directory."""
+    current = Path(__file__).resolve().parent
+    while current != current.parent:
+        if (current / '.git').exists():
+            return current
+        current = current.parent
+    return None
+
+
+def get_google_translate_lang(lang_code: str) -> str:
+    """Convert DocSpace language code to Google Translate language code."""
+    # Chinese variants need the full code
+    if lang_code.startswith('zh-'):
+        return lang_code
+    # For most others, just use the language part before the region
+    return lang_code.split('-')[0]
+
+
+def build_google_translate_url(text: str, source_lang: str, target_lang: str) -> str:
+    """Build a Google Translate URL for the given text."""
+    sl = get_google_translate_lang(source_lang)
+    tl = get_google_translate_lang(target_lang)
+    # Truncate to avoid overly long URLs
+    truncated = text[:500] if len(text) > 500 else text
+    params = urllib.parse.urlencode({
+        'sl': sl, 'tl': tl, 'text': truncated, 'op': 'translate'
+    })
+    return f"https://translate.google.com/?{params}"
+
+
+def load_meta_issues(repo_root: Path, project_name: str, namespace: str,
+                     key: str, language: str) -> list:
+    """Load validation issues from .meta file for a specific key and language."""
+    locales_rel = PROJECT_LOCALES_MAP.get(project_name)
+    if not locales_rel:
+        return []
+
+    sanitized_key = key.replace('.', '_')
+    meta_file = repo_root / locales_rel / '.meta' / namespace / f"{sanitized_key}.json"
+
+    if not meta_file.exists():
+        return []
+
+    try:
+        meta_data = json.loads(meta_file.read_text(encoding='utf-8'))
+        lang_data = meta_data.get('languages', {}).get(language, {})
+        return lang_data.get('ai_spell_check_issues', [])
+    except (json.JSONDecodeError, OSError):
+        return []
+
+
+def format_issues(issues: list) -> str:
+    """Format validation issues into a readable string."""
+    parts = []
+    for issue in issues:
+        desc = issue.get('description', '')
+        if desc:
+            parts.append(desc)
+            continue
+        # Fallback: use type + suggestion
+        issue_type = issue.get('type', 'unknown').replace('_', ' ').capitalize()
+        suggestion = issue.get('suggestion', '')
+        text = issue_type
+        if suggestion:
+            text += f": {suggestion}"
+        parts.append(text)
+    return " | ".join(parts)
+
+
+def parse_translation_data(translation_data: dict, repo_root: Path = None) -> tuple:
     """
     Parse translation JSON and extract fields for form generation.
 
@@ -152,11 +232,24 @@ def parse_translation_data(translation_data: dict) -> tuple:
     # Iterate through namespaces and keys
     for namespace, keys in untranslated_keys.items():
         for key, data in keys.items():
+            base_val = data.get("baseValue", "")
+
+            # Load meta issues for this key
+            error_text = ""
+            if repo_root:
+                issues = load_meta_issues(repo_root, project_name, namespace, key, language)
+                error_text = format_issues(issues)
+
+            # Build Google Translate URL
+            translate_url = build_google_translate_url(base_val, base_language, language) if base_val else ""
+
             field = {
                 "name": f"{namespace}.{key}",
-                "placeholder": data.get("baseValue", ""),
+                "placeholder": base_val,
                 "default": data.get("targetValue", ""),
-                "label": data.get("comment", "")
+                "label": data.get("comment", ""),
+                "error": error_text,
+                "translate_url": translate_url,
             }
             fields.append(field)
 
@@ -219,19 +312,38 @@ def build_form(title: str, fields: list, pdf_path: str, base_language: str = "en
             paragraph.AddElement(run)
             document.Push(paragraph)
 
-            paragraph = api.CreateParagraph()
-            run = api.CreateRun()
-            run.AddText(comment)
-            run.SetItalic(True)
-            run.SetHighlight("yellow")
-            paragraph.AddElement(run)
-            document.Push(paragraph)
+            if comment:
+                paragraph = api.CreateParagraph()
+                run = api.CreateRun()
+                run.AddText(comment)
+                run.SetItalic(True)
+                run.SetHighlight("yellow")
+                paragraph.AddElement(run)
+                document.Push(paragraph)
 
-            # 2) Line: Source: with field
+            # Error from .meta (if any)
+            error = str(f.get("error") or "")
+            if error:
+                paragraph = api.CreateParagraph()
+                run = api.CreateRun()
+                run.AddText(f"\u26A0 {error}")
+                run.SetBold(True)
+                run.SetColor(204, 0, 0)
+                paragraph.AddElement(run)
+                document.Push(paragraph)
+
+            # 2) Line: Source: with field + Google Translate link
             paragraph = api.CreateParagraph()
             run = api.CreateRun()
-            run.AddText(f"Source ({base_language.upper()}):")
+            run.AddText(f"Source ({base_language.upper()}):  ")
             paragraph.AddElement(run)
+
+            # Google Translate clickable hyperlink
+            translate_url = f.get("translate_url", "")
+            if translate_url:
+                hyperlink = api.CreateHyperlink(translate_url, "Google Translate \u2197", "Open in Google Translate")
+                paragraph.AddElement(hyperlink)
+
             document.Push(paragraph)
 
             paragraph = api.CreateParagraph()
@@ -325,8 +437,13 @@ def main():
               file=sys.stderr)
         sys.exit(2)
 
+    # Find repository root for .meta files
+    repo_root = find_repo_root()
+    if repo_root:
+        print(f"Repository root: {repo_root}")
+
     # Parse translation data
-    title, fields = parse_translation_data(data)
+    title, fields = parse_translation_data(data, repo_root=repo_root)
 
     # Generate output path
     project_name = data.get("projectName", "translation")

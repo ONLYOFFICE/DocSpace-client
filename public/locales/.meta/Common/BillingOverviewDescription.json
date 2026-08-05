@@ -1,0 +1,29 @@
+{
+  "key_path": "BillingOverviewDescription",
+  "content": "A snapshot of your wallet, subscription, add-ons, and upcoming charges. Open a section on the left for full details.",
+  "content_en_sha1_hash": "d7467f88df96b1ec2689cad198025440d022140f",
+  "created_at": "2026-07-07T08:58:39.047Z",
+  "updated_at": "2026-07-07T09:03:17.684Z",
+  "comment": {
+    "text": "Sub-header text on the Billing Overview page providing an introductory summary of account details and navigation instructions.",
+    "is_auto": true,
+    "updated_at": "2026-07-07T09:03:17.684Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/index.tsx",
+      "line_number": 93,
+      "context": "<div className={styles.header}>\n <Text fontSize=\"23px\" fontWeight={700}>\n {t(\"Billing\")}\n </Text>\n <Text className={styles.headerDescription}>\n {t(\"BillingOverviewDescription\")}\n </Text>\n </div>\n \n {!isInitOverviewPage ? (\n <OverviewLoader />",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

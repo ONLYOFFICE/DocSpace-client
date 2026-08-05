@@ -3,16 +3,17 @@
   "content": "Mail",
   "content_en_sha1_hash": "92379cbb8ecf696194b47b619a87e9e4f9a75db2",
   "created_at": "2025-05-19T21:30:54.238Z",
-  "updated_at": "2025-08-11T18:11:59.237Z",
+  "updated_at": "2026-05-15T14:00:06.845Z",
   "comment": {
-    "text": "This translation key is used as the label for a field that allows users to specify mail addresses associated with LDAP integration. It appears in a form within the Portal Settings category of an application, typically prompting users to select or enter a mail address.",
+    "text": "This is a label for an input field in the LDAP attribute mapping settings. It identifies the field where users configure the mapping for email addresses.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:07.590Z"
+    "updated_at": "2026-04-11T21:16:59.804Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 181,
+      "line_number": 191,
       "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.mail}\n labelText={t(\"LdapMail\")}\n isRequired\n dataTestId=\"mail_field_container\"\n >\n <LdapFieldComponent\n name={MAIL}",
       "module": "/packages/client"
     }
@@ -51,13 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'E-Mail' is a common and acceptable translation for 'Mail' in German, it is a loanword. A more native German term might be considered depending on the context, though 'E-Mail' is widely understood. Given the key likely refers to a technical setting, 'E-Mail' is acceptable.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Էլ․հասցե' is a transliteration of 'E-mail' rather than a direct translation of 'Mail'. While understandable, it's not the most natural or common Armenian word for 'Mail'. A more accurate and common translation would be 'դեպոզիտ' (depozit) or 'անվամբեր' (anvamber), although the best choice might depend on the specific context.",
-          "suggestion": "Consider 'դեպոզիտ' (depozit) or 'անվամբեր' (anvamber) as alternatives, or clarify the context to determine the best translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,13 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບົດຕິ໋ງ' translates to 'setting' or 'configuration' rather than 'mail'. This is not an accurate translation of the English word 'Mail'.",
-          "suggestion": "The appropriate Lao translation for 'Mail' would likely be 'ອີເມລ໌' (email) or a more descriptive term depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,25 +130,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Correspondência' while technically meaning 'Correspondence,' isn't the most natural or common translation for 'Mail' in this context (likely referring to email). 'Email' or 'Correio Eletrónico' would be more appropriate.",
-          "suggestion": "Correio Eletrónico or Email"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Correspondência\" can mean 'correspondence' or 'mail', it's not the most common or natural translation for 'Mail' in the context of LDAP configuration.  'Email' would be a more standard and accurate translation.",
-          "suggestion": "Email"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -178,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -189,13 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Pošta\" can mean \"mail\" in Slovak, in the context of LDAP configuration related to mail services, \"Email\" or a more specific term like \"Emailová služba\" would be a more accurate and understandable translation.",
-          "suggestion": "Email"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -207,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Мејл' is a phonetic transcription of the English word 'Mail'. While understandable, a more standard and accurate translation would be 'Пошта'.",
-          "suggestion": "Пошта"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Mejl' for 'Mail' is a colloquial and potentially dated term. While understood, it's not the standard or most accurate translation. A more appropriate translation would be 'Pošta'.",
-          "suggestion": "Pošta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

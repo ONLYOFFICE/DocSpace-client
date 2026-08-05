@@ -3,148 +3,263 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2026-03-31T15:18:45.858Z",
+  "updated_at": "2026-07-27T13:07:50.553Z",
   "comment": {
-    "text": "This translation key \"MeLabel\" is used to display a user's name when they have ownership rights or are the current room owner in various UI components, such as dialogs and templates. The text appears next to the username in a bold font and indicates that the user has specific permissions or access.",
+    "text": "This label appears next to a user's name to indicate that the user is the current user. It is displayed in parentheses.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:32.004Z"
+    "updated_at": "2026-04-11T20:48:49.275Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 648,
+      "context": ">\n {Encoder.htmlDecode(label ?? \"\")}\n </Text>\n {!isGroup && String(id) === currentUserId ? (\n <Text className={styles.isMeLabel} fontWeight={600} fontSize=\"14px\">\n ({t(\"MeLabel\")})\n </Text>\n ) : null}\n {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}\n </div>\n {!isGroup ? (",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/ChangeRoomOwner/index.tsx",
-      "line_number": 90,
+      "line_number": 99,
       "context": "<div className={styles.changeOwnerDisplayName}>\n <Text fontWeight={600} fontSize=\"13px\">\n {userName}\n </Text>\n {roomOwner.id === currentUserId ? (\n <Text className={styles.meLabel}>({t(\"Common:MeLabel\")})</Text>\n ) : null}\n </div>\n </div>\n \n {canChangeOwner ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 169,
+      "line_number": 179,
       "context": "<div className={styles.templateAccessDisplayName}>\n <Text fontWeight={600} fontSize=\"13px\">\n {userName}\n </Text>\n <Text className={styles.meLabel}>\n ({t(\"Common:MeLabel\")})\n </Text>\n </div>\n </>\n ) : (\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/Item.tsx",
-      "line_number": 106,
-      "context": "<div className=\"invite-input-item\">\n <Text truncate className=\"invite-input-text\">\n {Encoder.htmlDecode(name ?? \"\")}\n </Text>\n <Text truncate className=\"invite-input-text_me\">\n {item.isOwner ? `(${t(\"Common:MeLabel\")})` : null}\n </Text>\n </div>\n </StyledInviteUserBody>\n {canDelete ? (\n <ReactSVG",
+      "line_number": 115,
+      "context": "<div className=\"invite-input-item\">\n <Text truncate className=\"invite-input-text\">\n {Encoder.htmlDecode(name ?? \"\")}\n </Text>\n <Text truncate className=\"invite-input-text_me\">\n {item.isOwner ? `(${t(\"Common:MeLabel\")})` : null}\n </Text>\n </div>\n </div>\n {canDelete ? (\n <ReactSVG",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/HOCs/withBadges.js",
-      "line_number": 211,
+      "line_number": 222,
       "context": "if (!currentEditingBy) return undefined;\n \n const userNames = Object.entries(currentEditingBy)\n .map(([userId, user]) => {\n if (currentUserId && userId === currentUserId) {\n return t(\"Common:MeLabel\");\n }\n return user;\n })\n .join(\", \");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/HOCs/withContent.js",
-      "line_number": 99,
+      "line_number": 108,
       "context": "const createdDate = this.getStatusByDate(true);\n const lastOpenedDate = getCorrectDate(locale, lastOpened);\n \n const fileOwner =\n createdBy &&\n ((viewer?.id === createdBy.id && t(\"Common:MeLabel\")) ||\n createdBy.displayName);\n \n const accessToEdit =\n access === ShareAccessRights.FullAccess || // only badges?\n access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
-      "line_number": 157,
+      "line_number": 167,
       "context": "className={styles.isMeLabel}\n fontWeight={700}\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n {isPending ? (\n <Badges withoutPaid statusType={userSelection.statusType} />\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Users/RowView/UserContent.tsx",
-      "line_number": 128,
+      "line_number": 137,
       "context": ": displayName?.trim()\n ? displayName\n : email}\n {isMe?.(id) ? (\n <Text as=\"div\" className=\"me-label\" fontWeight=\"600\" fontSize=\"13px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n </Link>\n <Badges\n statusType={statusType}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/Users/TableView/TableRow.tsx",
-      "line_number": 331,
+      "line_number": 336,
       "context": ": displayName?.trim()\n ? displayName\n : email}\n {isMe?.(id) ? (\n <Text className=\"me-label\" fontWeight=\"600\" fontSize=\"13px\">\n ({t(\"Common:MeLabel\")})\n </Text>\n ) : null}\n </Text>\n <Badges\n statusType={statusType}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 723,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 723,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 723,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 723,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 723,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 723,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 723,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 723,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 454,
+      "line_number": 464,
       "context": "if (user) {\n if (user.id === userId) {\n filterValues.push({\n key: FilterKeys.me,\n group: FilterGroups.filterInviter,\n label: t(\"Common:MeLabel\"),\n });\n } else {\n filterValues.push({\n key: user.id,\n group: FilterGroups.filterInviter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 454,
+      "line_number": 464,
       "context": "if (user) {\n if (user.id === userId) {\n filterValues.push({\n key: FilterKeys.me,\n group: FilterGroups.filterInviter,\n label: t(\"Common:MeLabel\"),\n });\n } else {\n filterValues.push({\n key: user.id,\n group: FilterGroups.filterInviter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 454,
+      "line_number": 464,
       "context": "if (user) {\n if (user.id === userId) {\n filterValues.push({\n key: FilterKeys.me,\n group: FilterGroups.filterInviter,\n label: t(\"Common:MeLabel\"),\n });\n } else {\n filterValues.push({\n key: user.id,\n group: FilterGroups.filterInviter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 454,
+      "line_number": 464,
       "context": "if (user) {\n if (user.id === userId) {\n filterValues.push({\n key: FilterKeys.me,\n group: FilterGroups.filterInviter,\n label: t(\"Common:MeLabel\"),\n });\n } else {\n filterValues.push({\n key: user.id,\n group: FilterGroups.filterInviter,",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 264,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 264,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 264,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 264,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 264,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-filter/useAgentsFilter.tsx",
+      "line_number": 264,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n {\n id: \"filter_author-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterSubject,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 214,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.filterAuthor,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n ];\n \n if (!config.hideAuthor && !isCollaborator && !isVisitor) {\n authorOptions.push({",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 214,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.filterAuthor,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n ];\n \n if (!config.hideAuthor && !isCollaborator && !isVisitor) {\n authorOptions.push({",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 214,
+      "context": "},\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,\n group: FilterGroups.filterAuthor,\n label: t(\"Common:MeLabel\", { defaultValue: \"Me\" }),\n },\n ];\n \n if (!config.hideAuthor && !isCollaborator && !isVisitor) {\n authorOptions.push({",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/change-room-owner/index.tsx",
+      "line_number": 134,
+      "context": "<Text fontWeight={600} fontSize=\"13px\">\n {userName}\n </Text>\n {roomOwner.id === currentUserId ? (\n <Text className={styles.meLabel}>\n ({t(\"Common:MeLabel\", { defaultValue: \"Me\" })})\n </Text>\n ) : null}\n </div>\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/sub-components/TableViewRow.tsx",
+      "line_number": 180,
+      "context": ");\n \n const fileOwner =\n item.createdBy &&\n ((currentUserId && currentUserId === item.createdBy.id\n ? t(\"Common:MeLabel\")\n : item.createdBy.displayName) ??\n \"\");\n \n const fileSize = \"contentLength\" in item ? item.contentLength : \"\";\n const fileType =",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
+      "line_number": 224,
+      "context": "<div className={styles.userBody}>\n <div className={styles.nameWrapper}>\n <Text className={styles.userName}>{displayName}</Text>\n {isMe ? (\n <span className={styles.meLabel}>\n &nbsp;{`(${t(\"Common:MeLabel\")})`}\n </span>\n ) : null}\n </div>\n {typeLabel ? (\n <Text className={styles.userSubtitle} truncate>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 254,
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 254,
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 254,
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 254,
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 254,
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-filter/useRoomsFilter.tsx",
+      "line_number": 254,
+      "context": "},\n {\n id: \"filter_owner-me\",\n key: FilterKeys.me,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:MeLabel\"),\n },\n {\n id: \"filter_owner-user\",\n key: FilterKeys.user,\n group: FilterGroups.roomFilterOwner,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/filling-role-process/sub-components/role-step/RoleStep.tsx",
-      "line_number": 96,
+      "line_number": 105,
       "context": "<TooltipContainer as=\"h5\" title={roleName} className={styles.roleTitle}>\n {roleName}\n </TooltipContainer>\n <p className={styles.userName}>\n {userName}{\" \"}\n {currentUserId === user.id ? `(${t(\"Common:MeLabel\")})` : null}\n </p>\n {hasMoreThanOneHistory ? (\n <ArrowIcon\n onClick={toggleCollapse}\n className={classNames(styles.arrow, {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/filling-role-selector/FillingRoleSelector.tsx",
-      "line_number": 81,
+      "line_number": 90,
       "context": "/>\n <div className={styles.info}>\n <h5>\n {decode(role.user.displayName)} &nbsp;\n {currentUserId === role.user.id ? (\n <span className={styles.me}>({t(\"Common:MeLabel\")})</span>\n ) : null}\n </h5>\n <span>{role.name}</span>\n </div>\n <CrossIcon",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 217,
+      "line_number": 225,
       "context": ": null}\n </Text>\n )}\n \n {currentUser?.id === user.id ? (\n <div className=\"me-label\">&nbsp;{`(${t(\"Common:MeLabel\")})`}</div>\n ) : null}\n </div>\n {!(\"isGroup\" in user && user.isGroup) ? (\n <div className=\"role-email\" style={{ display: \"flex\" }}>\n <Text",
       "module": "/packages/shared"
     }
@@ -261,13 +376,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation \"A mim\" does not accurately convey the meaning of \"Me\". \"Me\" is a reflexive pronoun indicating the person being acted upon. \"A mim\" is a dative pronoun and is not the correct equivalent for this context.",
-          "suggestion": "Eu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -286,7 +395,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -337,6 +446,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

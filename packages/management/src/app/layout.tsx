@@ -1,28 +1,39 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import path from "path";
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -30,6 +41,8 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
+import ChunkRetryScript from "@docspace/shared/components/chunk-retry-script";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
 
@@ -49,6 +62,8 @@ import { ManagementDialogs } from "@/dialogs";
 import "@/styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
 import { logger } from "../../logger.mjs";
+
+const MANAGEMENT_NAMESPACES = ["Management"] as const;
 
 export default async function RootLayout({
   children,
@@ -73,9 +88,21 @@ export default async function RootLayout({
     redirect(`${baseURL}/${settings}`);
   }
 
+  if (settings && !settings.standalone) {
+    logger.info("Management layout not available: SaaS mode");
+
+    redirect(`${baseURL}/error/403`);
+  }
+
+  if (!settings || !user) {
+    logger.info("Management layout error/403: settings or user unavailable");
+
+    redirect(`${baseURL}/error/403`);
+  }
+
   if (
-    (user && !user.isAdmin && !user.isOwner) ||
-    (settings && settings.limitedAccessSpace) ||
+    (!user.isAdmin && !user.isOwner) ||
+    settings.limitedAccessSpace ||
     !portalTariff
   ) {
     logger.info("Management layout error/403");
@@ -92,6 +119,21 @@ export default async function RootLayout({
     settings.culture = cookieLng.value;
   }
 
+  const locale =
+    user?.cultureName ??
+    (typeof settings === "object" ? settings?.culture : undefined) ??
+    "en";
+
+  const translations = await loadTranslationsForLocale(locale, {
+    namespaces: MANAGEMENT_NAMESPACES,
+    appLocalesDir:
+      process.env.NEXT_APP_LOCALES_DIR ??
+      path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir:
+      process.env.NEXT_SHARED_LOCALES_DIR ??
+      path.join(process.cwd(), "../../public/locales"),
+  });
+
   const { openSource } = portalTariff;
 
   return (
@@ -105,6 +147,7 @@ export default async function RootLayout({
           href="/logo.ashx?logotype=3"
         />
         <meta charSet="utf-8" />
+        <ChunkRetryScript />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
@@ -120,11 +163,13 @@ export default async function RootLayout({
             settings,
             systemTheme: systemTheme?.value as ThemeKeys,
             colorTheme,
+            locale,
+            translations,
           }}
         >
           <Toast isSSR />
-          <ManagementDialogs settings={settings!} user={user!} />
-          <LayoutWrapper portals={portals!} isCommunity={openSource}>
+          <ManagementDialogs settings={settings} user={user} />
+          <LayoutWrapper portals={portals} isCommunity={openSource}>
             {children}
           </LayoutWrapper>
         </Providers>
@@ -133,3 +178,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

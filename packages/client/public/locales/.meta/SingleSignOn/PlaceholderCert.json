@@ -3,28 +3,29 @@
   "content": "Paste or type text",
   "content_en_sha1_hash": "02f3028a3ce8d031866a3dd4465234dcb4a7c713",
   "created_at": "2025-05-19T21:30:50.118Z",
-  "updated_at": "2025-08-12T19:46:26.210Z",
+  "updated_at": "2026-05-15T14:00:06.859Z",
   "comment": {
-    "text": "This translation key is used as a placeholder text in modal dialogs and form fields, instructing users to paste or type text into the provided field. It appears in various UI elements, such as text areas and labels, within application settings and certificate management pages.",
+    "text": "This is a placeholder text for a text area where users can paste or type certificate information. It appears in modals for adding Identity Provider (IdP) and Service Provider (SP) certificates in the Single Sign-On settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:11.947Z"
+    "updated_at": "2026-04-11T21:26:39.099Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddIdpCertificateModal.js",
-      "line_number": 70,
+      "line_number": 79,
       "context": "className=\"text-area\"\n id=\"idp-certificate\"\n name=\"idpCertificate\"\n onChange={setInput}\n value={idpCertificate}\n placeholder={t(\"PlaceholderCert\")}\n heightTextArea=\"72px\"\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddSpCertificateModal.js",
-      "line_number": 90,
+      "line_number": 99,
       "context": "className=\"text-area\"\n name=\"spCertificate\"\n onChange={setInput}\n value={spCertificate}\n isDisabled={isGeneratedCertificate}\n placeholder={t(\"PlaceholderCert\")}\n heightTextArea=\"72px\"\n />\n \n <Text isBold className=\"text-area-label\">\n {t(\"PrivateKey\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddSpCertificateModal.js",
-      "line_number": 90,
+      "line_number": 99,
       "context": "className=\"text-area\"\n name=\"spCertificate\"\n onChange={setInput}\n value={spCertificate}\n isDisabled={isGeneratedCertificate}\n placeholder={t(\"PlaceholderCert\")}\n heightTextArea=\"72px\"\n />\n \n <Text isBold className=\"text-area-label\">\n {t(\"PrivateKey\")}",
       "module": "/packages/client"
     }
@@ -39,13 +40,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'لصق أو كتابة نص' while technically accurate, doesn't quite capture the nuance of 'Paste or type text' in a UI context. A more natural phrasing might be something along the lines of 'أدخل النص ولصقه'.",
-          "suggestion": "أدخل النص ولصقه"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -63,13 +58,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vkládání nebo psaní textu' is a literal translation but doesn't quite capture the intended meaning of 'Paste or type text' in a UI context. It sounds slightly formal and less natural.",
-          "suggestion": "Vložte nebo napište text"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -117,13 +106,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"テキストを貼り付ける、または入力してください\" is overly literal and slightly unnatural. While technically correct, a more natural phrasing would be preferable for user experience.",
-          "suggestion": "テキストを貼り付け、または入力してください"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,13 +118,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ພິມ' (phim) is typically used for typing. While understandable, 'ນິ້ຳ' (nim) which means 'write' or 'input' is often preferred in this context.",
-          "suggestion": "ວາງ ຫຼື ນິ້ຳ ຂໍ້ຄວາມ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -184,18 +161,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"පෙළ ලියන්න හෝ අලවන්න\" doesn't perfectly capture the meaning of \"Paste or type text\". \"අලවන්න\" implies pasting something already existing, whereas \"type\" refers to creating new text. A more accurate translation would need to encompass both creation and pasting.",
-          "suggestion": "පෙළ ටයිප් කරන්න හෝ అతిක්ක කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -213,13 +184,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Налепи или куцај текст\" is not the most natural or accurate translation of \"Paste or type text\". \"Налепи\" (Nalepi) implies sticking something, not pasting text. \"Куцај\" (Kucaj) means to type manually, which is overly literal.",
-          "suggestion": "Лепи или унеси текст"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -247,6 +212,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

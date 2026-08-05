@@ -3,16 +3,17 @@
   "content": "Generate New Self-Signed Certificate",
   "content_en_sha1_hash": "f8c8d1050f78ee5b1b7950f3eb401a6f5e677f78",
   "created_at": "2025-05-19T21:30:50.081Z",
-  "updated_at": "2025-08-12T19:46:26.211Z",
+  "updated_at": "2026-05-15T14:00:06.859Z",
   "comment": {
-    "text": "This translation key is used to display the label for a button that generates a new self-signed certificate. It appears in an action component and prompts users to open or generate a certificate.",
+    "text": "This is a button label. Clicking it generates a new self-signed certificate for Single Sign-On (SSO) configuration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:16.920Z"
+    "updated_at": "2026-04-11T21:26:54.475Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddSpCertificateModal.js",
-      "line_number": 77,
+      "line_number": 86,
       "context": "className=\"generate\"\n isHovered\n onClick={onGenerate}\n type=\"action\"\n >\n {t(\"GenerateCertificate\")}\n </Link>\n <Text isBold className=\"text-area-label\">\n {t(\"OpenCertificate\")}\n </Text>",
       "module": "/packages/client"
     }
@@ -27,25 +28,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'إنشاء شهادة جديدة موقعة ذاتيًا ' while understandable, isn't the most natural or common way to express 'Generate New Self-Signed Certificate' in Arabic (Saudi Arabia). A more idiomatic translation might be preferred.",
-          "suggestion": "توليد شهادة ذاتية التوقيع جديدة (Tolīd Shahādah Dhātiyyat al-Tawqī‘ Jadīdah)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Yeni İmzalı Sertifikat yaradın\" directly translates to \"Create Signed Certificate\" instead of \"Generate New Self-Signed Certificate\". It's missing the crucial detail of 'New' and 'Self-Signed'.",
-          "suggestion": "Yeni Öz-İmzalı Sertifikat yarat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'վկայական' (vkayakan) is generally used for 'certificate'. While technically correct, 'ձևական' (devakan) might be more accurate in a technical context referring to a form or document, but 'վկայական' is acceptable.",
-          "suggestion": "Consider 'ձևական' for increased accuracy, but 'վկայական' is understandable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,18 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ໃບ' (bai) can be interpreted as 'leaf' or 'certificate'. While commonly used for 'certificate', it's not the most precise term in this context.  A more specific term might improve clarity.",
-          "suggestion": "Consider using 'ໃບຮັບຮອງ' (bai ruap hong) for 'certificate', which directly translates to 'confirmation' or 'certificate'."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure could be slightly improved for a more natural flow in Lao.  Adding a particle to soften the command might be beneficial.",
-          "suggestion": "Consider restructuring to: 'ສ້າງໃບຮັບຮອງການເຊັນດ້ວຍຕົນເອງໃຫມ່ດ້ວຍ' (Sang bai ruap hong kan sen duay ton eng mai duay)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -146,13 +118,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Nieuw Zelfondertekend Certificaat Genereren' is a literal translation but sounds slightly awkward in Dutch. A more natural phrasing would be 'Genereer Nieuw Zelfondertekend Certificaat' or 'Maak een Nieuw Zelfondertekend Certificaat'.",
-          "suggestion": "Genereer Nieuw Zelfondertekend Certificaat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -176,31 +142,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'semnătură automată' while technically correct, is not the most natural or commonly used Romanian equivalent for 'self-signed' in the context of certificates. It sounds a bit literal and could be confusing to users.",
-          "suggestion": "A better translation would be 'certificat auto-semnat' or 'certificat generat automat'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word ' ස්වයං' (swayan) is a valid word, but in this context, 'පෞද්ගලික' (paugandhika) might be more readily understood by users as 'self-signed'.",
-          "suggestion": "නව පෞද්ගලික අත්සනක් සහිත සහතිකයක් උත්පාදනය කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -218,25 +172,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Генериши нови самопотписани сертификат\" is a bit clunky and less natural than other phrasing options for \"Generate New Self-Signed Certificate.\" A more natural translation might be \"Креирај нови самопотписани сертификат\" or \"Иницијализирај нови самопотписани сертификат\". The original suggests an imperative action, which may be appropriate, but consider alternatives based on the user interface context.",
-          "suggestion": "Креирај нови самопотписани сертификат"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'sertifikat' is a valid Serbian word for 'certificate', but it's often preferred to use the more established 'diploma' in technical contexts, especially when dealing with digital certificates.",
-          "suggestion": "Generiši novi samopotpisani diplomа"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -248,13 +190,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"з власним підписом\" is a more literal translation of \"self-signed.\" A more natural and concise translation would be \"самопідписаний\".",
-          "suggestion": "Створити новий самопідписаний сертифікат"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -264,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

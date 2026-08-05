@@ -3,17 +3,18 @@
   "content": "Time zone",
   "content_en_sha1_hash": "eea79afd832854a3b24153b928ee9c62c7457dbe",
   "created_at": "2025-05-19T21:30:52.951Z",
-  "updated_at": "2025-09-17T13:43:01.728Z",
+  "updated_at": "2026-05-15T14:00:06.771Z",
   "comment": {
-    "text": "Time zone description is used to display a time zone option for user selection in the portal settings page. This translation key will appear as a dropdown or list of options within the category settings, allowing users to select their preferred time zone. It should reflect the actual name and value associated with each time zone.",
+    "text": "This is a label for a setting that allows users to select their time zone. It appears in the portal settings under the \"Language and Time Zone\" section.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:16.880Z"
+    "updated_at": "2026-04-11T21:21:46.866Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 81,
-      "context": "let timezoneFromSessionStorage = \"\";\n let timezoneDefaultFromSessionStorage = \"\";\n \n const settingNames = [\"language\", \"timezone\"];\n \n const LanguageAndTimeZoneComponent = (props) => {\n const {\n i18n,\n language,\n rawTimezones,\n portalTimeZoneId,",
+      "line_number": 499,
+      "context": "{isBetaLang ? <BetaBadge place=\"right-start\" /> : null}\n </div>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerTimezone\"\n labelText={`${t(\"TimeZone\")}`}\n isVertical\n >\n <ComboBox\n tabIndex={2}\n id=\"comboBoxTimezone\"",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'وحدة زمنية' (Wahda Zamaniyyah) is technically 'time unit', it's not the standard or most natural translation for 'Time zone' in a settings context. 'Time zone' refers to a geographical region with a specific time, not just a unit of time.",
-          "suggestion": "النطاق الزمني"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -154,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -205,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

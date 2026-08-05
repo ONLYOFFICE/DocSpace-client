@@ -1,6 +1,5 @@
 {
   "ChangePasswordSuccess": "Şifre başarıyla değiştirildi",
-  "CodeTitle": "Kod tarafınıza e-posta olarak gönderildi",
   "ConfirmEmailChange": "E-posta adresinizi değiştirmeyi onaylayın",
   "ConfirmEmailChangeText": "{{productName}} hesabınızdaki e-posta adresini değiştirmek istediğinizi belirttiniz. Devam etmek için, lütfen mevcut kimlik bilgilerinizle giriş yapın.",
   "ErrorInvalidText": "10 saniye içinde <1>{{productName}}</1> yönlendirileceksiniz",
@@ -12,7 +11,7 @@
   "PasswordRecoveryTitle": "Şifre kurtarma",
   "RecoverAccess": "Erişimi kurtar",
   "RecoverContactEmailPlaceholder": "İletişim e-postası",
-  "RecoverTextBody": "Eğer hesabınıza giriş yapamıyorsanız veya yeni kullanıcı olarak kayıt olmak istiyorsanız, portal yöneticisi ile iletişime geçin. ",
+  "RecoverTextBody": "Eğer hesabınıza giriş yapamıyorsanız veya yeni kullanıcı olarak kayıt olmak istiyorsanız, portal yöneticisi ile iletişime geçin.",
   "Register": "Kayıt",
   "RegisterTextBodyAfterDomainsList": "Kayıt olmak için e-postanızı girin ve Talep gönder'e tıklayın. Tarafınıza bir aktivasyon bağlantısı gönderilecektir.",
   "RegisterTextBodyBeforeDomainsList": "Buradan e-posta adresi sahibi olan kullanıcılara kayıt mümkündür",

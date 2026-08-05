@@ -1,0 +1,29 @@
+{
+  "key_path": "PriceDetailsNextBill",
+  "content": "Your next monthly bill will be <1>{{price}}</1> starting from <2>{{date}}</2>",
+  "content_en_sha1_hash": "81ba59cbc5c2053c966d25cdaedc7aec5a693b97",
+  "created_at": "2026-06-30T07:32:36.736Z",
+  "updated_at": "2026-07-03T11:08:02.942Z",
+  "comment": {
+    "text": "Informational text in the Price Details dialog that specifies the upcoming monthly billing amount (<1>{{price}}</1>) and its start date (<2>{{date}}</2>).",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:34:27.160Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "line_number": 215,
+      "context": "})}\n />\n ) : (\n <Text fontSize=\"13px\">\n <CommonTrans\n i18nKey=\"PriceDetailsNextBill\"\n values={{\n price: formatPaymentCurrency(totalPrice),\n date: paymentDate,\n }}\n components={{",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

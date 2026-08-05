@@ -1,0 +1,666 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import type { ReactNode } from "react";
+
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { terminateOperation } from "@docspace/shared/api/files";
+import type { TFolder, TOperation } from "@docspace/shared/api/files/types";
+import type { TTranslation } from "@docspace/shared/types";
+
+import type { TFunction } from "i18next";
+import { makeAutoObservable } from "mobx";
+import { Trans } from "react-i18next";
+
+import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
+import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
+
+import i18n from "../i18n";
+
+import type MediaViewerDataStore from "./MediaViewerDataStore";
+import type TreeFoldersStore from "./TreeFoldersStore";
+
+type TOperationName = (typeof OPERATIONS_NAME)[keyof typeof OPERATIONS_NAME];
+
+type TOperationError = string | { message?: string; error?: string };
+
+export type TSecondaryProgressInfo = {
+  operationId?: string | number;
+  serverOperationId?: string;
+  operationIds?: (string | number)[];
+  alert?: boolean;
+  completed?: boolean;
+  stopped?: boolean;
+  skipToast?: boolean;
+  percent?: number;
+  label?: string;
+  title?: string;
+  itemsCount?: number;
+  isFolder?: boolean;
+  error?: TOperationError;
+  destFolderInfo?: TFolder;
+  /** Current server operation snapshot; set by UploadDataStore and
+   * FilesActionsStore while polling operation progress. */
+  currentFile?: TOperation;
+};
+
+export type TSecondaryProgressData = TSecondaryProgressInfo & {
+  operation: TOperationName;
+  showPanel?: ((visible: boolean) => void) | null;
+  description?: string;
+};
+
+export type TSecondaryOperation = {
+  operation: TOperationName;
+  showPanel?: ((visible: boolean) => void) | null;
+  description?: string;
+  alert?: boolean;
+  stopped?: boolean;
+  items: TSecondaryProgressInfo[];
+  label?: string;
+  completed?: boolean;
+  percent?: number;
+};
+
+class SecondaryProgressDataStore {
+  percent = 0;
+
+  itemsSelectionLength = 0;
+
+  itemsSelectionTitle: string | null = null;
+
+  isDownload = false;
+
+  secondaryOperationsArray: TSecondaryOperation[] = [];
+
+  treeFoldersStore: TreeFoldersStore;
+
+  mediaViewerDataStore: MediaViewerDataStore;
+
+  constructor(
+    treeFoldersStore: TreeFoldersStore,
+    mediaViewerDataStore: MediaViewerDataStore,
+  ) {
+    this.treeFoldersStore = treeFoldersStore;
+    this.mediaViewerDataStore = mediaViewerDataStore;
+    makeAutoObservable(this);
+  }
+
+  get secondaryActiveOperations() {
+    // .slice() returns a new reference on each mutation so MobX inject
+    // shallow comparison detects the change and triggers a re-render.
+    return this.secondaryOperationsArray.slice();
+  }
+
+  get isSecondaryProgressVisbile() {
+    return this.secondaryOperationsArray.length > 0;
+  }
+
+  showToast = async (
+    currentOperation: TSecondaryProgressInfo,
+    operation: TOperationName,
+    isSuccess = true,
+  ) => {
+    if (
+      operation !== OPERATIONS_NAME.copy &&
+      operation !== OPERATIONS_NAME.duplicate &&
+      operation !== OPERATIONS_NAME.move &&
+      operation !== OPERATIONS_NAME.trash
+    )
+      return;
+
+    if (
+      !currentOperation ||
+      (!currentOperation.title && !currentOperation.itemsCount)
+    )
+      return;
+
+    const { error, title, itemsCount, destFolderInfo, isFolder } =
+      currentOperation;
+
+    const getError = () => {
+      const errorMessage = error;
+
+      if (typeof errorMessage === "string") return errorMessage;
+
+      // the old JS threw here when `error` was nullish and
+      // isSuccess=false; the non-null assertions keep that runtime unchanged.
+      if (errorMessage!.message) return errorMessage?.message;
+
+      if (errorMessage!.error) return errorMessage!.error;
+    };
+
+    if (!isSuccess && !getError()) {
+      return;
+    }
+
+    // the Trans `t` prop requires a branded i18next TFunction;
+    // this wrapper only injects default namespaces, so the cast is safe.
+    const t = ((key: string, options?: Record<string, unknown>) =>
+      i18n.t(key, { ...options, ns: ["Files", "Common"] })) as TTranslation &
+      TFunction<"Common", undefined> &
+      TFunction<"translation", undefined>;
+
+    let toastTranslation: ReactNode = "";
+
+    // createFolderNavigation is still .js — the cast mirrors
+    // its real signature (trailing params are unused here, exactly as before).
+    const { url, state } = await (
+      createFolderNavigation as unknown as (
+        item?: TFolder,
+      ) => Promise<{ url: string; state: { title?: string } }>
+    )(destFolderInfo);
+
+    const onClickLocation = () => {
+      toastr.clear();
+
+      const { visible, setMediaViewerData } = this.mediaViewerDataStore;
+
+      if (visible) {
+        setMediaViewerData({ visible: false, id: null });
+      }
+
+      if (window.ClientConfig?.isFrame) return;
+
+      window.DocSpace.navigate(url, { state });
+    };
+
+    const commonComponents = {
+      1: (
+        <Link
+          tag="a"
+          onClick={onClickLocation}
+          target={LinkTarget.blank}
+          textDecoration="underline"
+          color="accent"
+        />
+      ),
+      2: <span style={{ fontWeight: "600" }} />,
+    };
+
+    if (currentOperation.itemsCount === 1) {
+      const commonProps = {
+        title,
+        folderName: state.title,
+      };
+
+      if (
+        operation === OPERATIONS_NAME.move ||
+        operation === OPERATIONS_NAME.trash
+      ) {
+        toastTranslation = isSuccess ? (
+          isFolder ? (
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="MoveFolderItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          ) : (
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="MoveItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          )
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="ErrorMoveItem"
+            components={commonComponents}
+            values={commonProps}
+          />
+        );
+      }
+
+      if (operation === OPERATIONS_NAME.copy) {
+        toastTranslation = isSuccess ? (
+          isFolder ? (
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="CopyFolderItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          ) : (
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="CopyItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          )
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="ErrorCopyItem"
+            components={commonComponents}
+            values={commonProps}
+          />
+        );
+      }
+
+      if (operation === OPERATIONS_NAME.duplicate) {
+        toastTranslation = isSuccess ? (
+          isFolder ? (
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="DuplicateFolderItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          ) : (
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="DuplicateItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          )
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="ErrorDuplicateItem"
+            components={commonComponents}
+            values={commonProps}
+          />
+        );
+      }
+    }
+
+    if ((itemsCount ?? 0) > 1) {
+      const commonProps = {
+        qty: itemsCount,
+        folderName: state.title,
+      };
+
+      if (
+        operation === OPERATIONS_NAME.move ||
+        operation === OPERATIONS_NAME.trash
+      ) {
+        toastTranslation = isSuccess ? (
+          <Trans
+            t={t}
+            ns="Common"
+            i18nKey="MoveItems"
+            components={commonComponents}
+            values={commonProps}
+          />
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="ErrorMoveItems"
+            components={commonComponents}
+            values={commonProps}
+          />
+        );
+      }
+
+      if (operation === OPERATIONS_NAME.copy) {
+        toastTranslation = isSuccess ? (
+          <Trans
+            t={t}
+            ns="Common"
+            i18nKey="CopyItems"
+            components={commonComponents}
+            values={commonProps}
+          />
+        ) : (
+          <Trans t={t} i18nKey="ErrorCopyItems">
+            {commonProps}
+            {commonComponents}
+          </Trans>
+        );
+      }
+    }
+
+    if (error) {
+      const message = getError();
+
+      toastTranslation = (
+        <>
+          {toastTranslation}
+          <br />
+          {message}
+        </>
+      );
+    }
+
+    isSuccess
+      ? toastr.success(toastTranslation)
+      : toastr.error(toastTranslation, null, 0, true);
+  };
+
+  setSecondaryProgressBarData = (
+    secondaryProgressData: TSecondaryProgressData,
+  ) => {
+    const { operation, showPanel, description, ...progressInfo } =
+      secondaryProgressData;
+
+    if (!operation) return;
+
+    const operationIndex = this.secondaryOperationsArray.findIndex(
+      (object) => object.operation === operation,
+    );
+
+    if (operationIndex !== -1) {
+      const operationObject = this.secondaryOperationsArray[operationIndex];
+      const itemIndex = operationObject.items.findIndex(
+        (item) => item.operationId === progressInfo.operationId,
+      );
+
+      let items = [...operationObject.items];
+
+      if (itemIndex !== -1) {
+        items[itemIndex] = {
+          ...operationObject.items[itemIndex],
+          ...progressInfo,
+        };
+      } else {
+        items = [...items, progressInfo];
+      }
+
+      const updatedItems = items;
+
+      const isCompleted = updatedItems.every((item) => item.completed);
+
+      const currentOperation =
+        itemIndex !== -1
+          ? updatedItems[itemIndex]
+          : updatedItems[updatedItems.length - 1];
+
+      // A stopped item is one the user terminated: later `completed`
+      // updates (the finalizers still run after the poll loop unwinds) must not
+      // report it as a success.
+      if (
+        progressInfo.completed &&
+        !progressInfo.alert &&
+        currentOperation &&
+        !currentOperation.stopped
+      ) {
+        this.showToast(currentOperation, operation);
+      }
+      if (
+        progressInfo.completed &&
+        progressInfo.alert &&
+        !progressInfo.skipToast &&
+        currentOperation
+      ) {
+        this.showToast(currentOperation, operation, false);
+      }
+
+      this.secondaryOperationsArray.splice(operationIndex, 1, {
+        ...operationObject,
+        ...(progressInfo.label && { label: progressInfo.label }),
+        ...(description !== undefined && { description }),
+        alert: progressInfo.alert,
+        stopped: progressInfo.stopped || operationObject.stopped,
+        items: updatedItems,
+        completed: isCompleted,
+        percent: progressInfo.percent,
+        ...(progressInfo.label && { label: progressInfo.label }),
+      });
+    } else {
+      const progress = {
+        operation,
+        showPanel,
+        description,
+        alert: progressInfo.alert,
+        stopped: progressInfo.stopped,
+        items: [progressInfo],
+        label: progressInfo.label ?? getOperationsProgressTitle(operation),
+        completed: progressInfo.completed,
+        percent: progressInfo.percent,
+      };
+
+      this.secondaryOperationsArray = [
+        ...this.secondaryOperationsArray,
+        progress,
+      ];
+    }
+  };
+
+  setItemsSelectionTitle = (itemsSelectionTitle: string | null) => {
+    this.itemsSelectionTitle = itemsSelectionTitle;
+  };
+
+  setItemsSelectionLength = (itemsSelectionLength: number) => {
+    this.itemsSelectionLength = itemsSelectionLength;
+  };
+
+  clearSecondaryProgressData = (
+    operationId?: string | number | null,
+    operation?: TOperationName,
+  ) => {
+    if (!operationId && !operation) {
+      const incompleteOperations = this.secondaryOperationsArray.filter(
+        (item) => !item.completed,
+      );
+
+      this.secondaryOperationsArray.splice(
+        0,
+        this.secondaryOperationsArray.length,
+        ...incompleteOperations,
+      );
+
+      return;
+    }
+
+    const operationIndex = this.secondaryOperationsArray.findIndex(
+      (obj) => obj.operation === operation,
+    );
+
+    if (operationIndex === -1) return;
+
+    const operationObject = this.secondaryOperationsArray[operationIndex];
+
+    if (operationId) {
+      const itemIndex = operationObject.items.findIndex(
+        (item) => item.operationId === operationId,
+      );
+      if (itemIndex === -1) return;
+
+      const newItems = operationObject.items.filter(
+        (item) => item.operationId !== operationId,
+      );
+
+      if (newItems.length === 0) {
+        const newSecondaryOperationsArray =
+          this.secondaryOperationsArray.filter(
+            (_, index) => index !== operationIndex,
+          );
+
+        this.secondaryOperationsArray = [...newSecondaryOperationsArray];
+      } else {
+        const newSecondaryOperationsArray = this.secondaryOperationsArray.map(
+          (item, index) =>
+            index === operationIndex ? { ...item, items: newItems } : item,
+        );
+
+        this.secondaryOperationsArray = [...newSecondaryOperationsArray];
+      }
+    } else {
+      const newSecondaryOperationsArray = this.secondaryOperationsArray.filter(
+        (_, index) => index !== operationIndex,
+      );
+
+      this.secondaryOperationsArray = [...newSecondaryOperationsArray];
+    }
+  };
+
+  /** True when the given operation item was terminated by the user, i.e. the
+   * server stopped mid-flight and an unknown subset of the requested items is
+   * still there. Callers use it to refetch instead of applying their optimistic
+   * "everything I asked for is gone" update. */
+  isOperationStopped = (
+    operation: TOperationName,
+    operationId?: string | number,
+  ) => {
+    const operationObject = this.secondaryOperationsArray.find(
+      (obj) => obj.operation === operation,
+    );
+
+    if (!operationObject) return false;
+
+    if (operationId === undefined) return !!operationObject.stopped;
+
+    return !!operationObject.items.find(
+      (item) => item.operationId === operationId,
+    )?.stopped;
+  };
+
+  findOperationById = (
+    itemId: string | number,
+  ): {
+    operation: TOperationName | "";
+    item?: TSecondaryProgressInfo;
+    label?: string;
+  } => {
+    const operation = this.secondaryOperationsArray.find((process) => {
+      return process.items.some(
+        (item) => item.operationIds && item.operationIds.includes(itemId),
+      );
+    });
+
+    if (!operation)
+      return {
+        operation: "",
+        label: "",
+      };
+
+    const operationItem = operation.items.find(
+      (item) => item.operationIds && item.operationIds.includes(itemId),
+    );
+
+    return {
+      operation: operation.operation,
+      item: operationItem,
+      label: operation.label,
+    };
+  };
+
+  terminateItem = async (
+    operation: TOperationName,
+    item: TSecondaryProgressInfo,
+  ) => {
+    try {
+      // both call sites guard on item.serverOperationId before
+      // calling; the assertion keeps the unguarded runtime call identical.
+      await terminateOperation(item.serverOperationId!);
+      this.setSecondaryProgressBarData({
+        operation,
+        operationId: item.operationId,
+        alert: true,
+        completed: true,
+        stopped: true,
+        skipToast: true,
+      });
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+
+  cancelSecondaryOperationById = async (
+    operation: TOperationName,
+    operationId: string | number,
+  ) => {
+    const op = this.secondaryOperationsArray.find(
+      (o) => o.operation === operation,
+    );
+    if (!op) return;
+
+    const item = op.items.find((i) => i.operationId === operationId);
+    if (!item || !item.serverOperationId || item.completed) return;
+
+    const terminated = await this.terminateItem(operation, item);
+    if (terminated) {
+      toastr.success(i18n.t("Common:OperationStopped"));
+    }
+  };
+
+  cancelSecondaryOperation = async () => {
+    const activeOperations = this.secondaryOperationsArray.filter(
+      (op) => !op.completed,
+    );
+
+    const results = await Promise.all(
+      activeOperations.map(async (op) => {
+        const activeItems = op.items.filter(
+          (item) => item.serverOperationId && !item.completed,
+        );
+
+        const itemResults = await Promise.all(
+          activeItems.map((item) =>
+            this.terminateItem(op.operation, item),
+          ),
+        );
+
+        return itemResults.some(Boolean);
+      }),
+    );
+
+    if (results.some(Boolean)) {
+      toastr.success(i18n.t("Common:OperationStopped"));
+    }
+  };
+
+  get secondaryOperationsStopped() {
+    return this.secondaryOperationsArray.some((op) => op.stopped);
+  }
+
+  get secondaryOperationsAlert() {
+    return this.secondaryOperationsArray.some((op) => op.alert && !op.stopped);
+  }
+
+  get secondaryOperationsCompleted() {
+    return (
+      this.secondaryOperationsArray.length > 0 &&
+      this.secondaryOperationsArray.every((op) => op.completed)
+    );
+  }
+}
+
+export default SecondaryProgressDataStore;

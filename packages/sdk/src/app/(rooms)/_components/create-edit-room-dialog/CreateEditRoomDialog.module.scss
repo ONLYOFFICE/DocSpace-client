@@ -1,0 +1,79 @@
+@use "@docspace/ui-kit/styles/mixins";
+
+.body {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding-top: 16px;
+}
+
+.logoNameRow {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 16px;
+}
+
+.nameInputWrapper {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.inputLabel {
+	margin-bottom: 4px;
+}
+
+.errorText {
+	color: var(--input-error-border-color);
+}
+
+.tagsSection {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.tagsList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.ownerSection {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.ownerDisplay {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 4px;
+}
+
+.privacyRow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px;
+	border-radius: 6px;
+	background: var(--row-hover-background, rgba(0, 0, 0, 0.04));
+}
+
+.privacyIcon {
+	flex: 0 0 auto;
+	display: flex;
+}
+
+.privacyText {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.privacyDescription {
+	color: var(--text-secondary, rgba(0, 0, 0, 0.6));
+}

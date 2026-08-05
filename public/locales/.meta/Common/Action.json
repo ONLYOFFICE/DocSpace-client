@@ -3,22 +3,23 @@
   "content": "Action",
   "content_en_sha1_hash": "97c89a4d6630adeb18fa12ba9976a31413fe293e",
   "created_at": "2025-05-19T21:30:42.859Z",
-  "updated_at": "2025-09-01T14:09:50.153Z",
+  "updated_at": "2026-05-15T14:00:06.870Z",
   "comment": {
-    "text": "The translation key \"Action\" is used to display the English content \"Action\", which likely serves as a title or header in a UI element, possibly in a table header or a settings page, guiding users to take a specific action.",
+    "text": "Table header. It labels a column displaying the type of action performed in audit trails or login history.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:28.239Z"
+    "updated_at": "2026-04-11T21:01:31.737Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
-      "line_number": 68,
+      "line_number": 77,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"Action\",\n title: t(\"Common:Action\"),\n enable: true,\n resizable: true,\n default: true,\n onChange: this.onColumnChange,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/TableView/TableHeader.js",
-      "line_number": 61,
+      "line_number": 70,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"Action\",\n title: t(\"Common:Action\"),\n enable: true,\n resizable: true,\n onChange: this.onColumnChange,\n },\n ];",
       "module": "/packages/client"
     }
@@ -75,13 +76,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Tapahtuma\" can mean event, it doesn't accurately convey the meaning of 'Action' in this context. 'Action' often implies something being done or a move, whereas 'Tapahtuma' primarily describes an occurrence or happening.",
-          "suggestion": "Consider alternatives like \"Toiminta\" (activity, operation) or \"Tekeminen\" (doing) depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -160,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -211,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

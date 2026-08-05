@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterStartSetupWizard",
+  "content": "Start setup wizard",
+  "content_en_sha1_hash": "86f4606fba25a309d541985e05763647c50259fe",
+  "created_at": "2026-05-24T17:27:18.644Z",
+  "updated_at": "2026-05-24T18:42:18.540Z",
+  "comment": {
+    "text": "Button label that initiates the AI Arbiter configuration process on the introductory screen.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:42:18.540Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/IntroBackdrop.tsx",
+      "line_number": 70,
+      "context": "<button\n type=\"button\"\n className={styles.startBtn}\n onClick={onStart}\n >\n {t(\"Common:ArbiterStartSetupWizard\")}\n </button>\n ) : null}\n </div>\n );\n }",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

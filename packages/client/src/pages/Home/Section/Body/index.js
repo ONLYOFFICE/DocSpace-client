@@ -39,7 +39,6 @@ import { observer, inject } from "mobx-react";
 
 import {
   clearEdgeScrollingTimer,
-  getFormFillingTipsStorageName,
   isMobile,
   isTablet,
   onEdgeScrolling,
@@ -47,11 +46,7 @@ import {
 
 import { isElementInViewport } from "@docspace/shared/utils/common";
 import { EMPTY_ARRAY } from "@docspace/shared/constants";
-import {
-  DeviceType,
-  VDRIndexingAction,
-  RoomsType,
-} from "@docspace/shared/enums";
+import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   useAttachHostFilesToChat,
@@ -116,12 +111,6 @@ const SectionBodyContent = (props) => {
     changeIndex,
     isErrorRoomNotAvailable,
     getSelectedFolder,
-    welcomeFormFillingTipsVisible,
-    formFillingTipsVisible,
-    roomType,
-    userId,
-    onEnableFormFillingGuid,
-    isArchiveFolderRoot,
     setDropTargetPreview,
     aiConfig,
     isInsideKnowledge,
@@ -140,25 +129,6 @@ const SectionBodyContent = (props) => {
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
   }, []);
-
-  useEffect(() => {
-    const storageName = getFormFillingTipsStorageName(userId);
-
-    const closedFormFillingTips = localStorage.getItem(storageName);
-
-    if (isMobile()) {
-      return window.localStorage.setItem(storageName, "true");
-    }
-
-    if (
-      roomType === RoomsType.FormRoom &&
-      !closedFormFillingTips &&
-      userId &&
-      !isArchiveFolderRoot
-    ) {
-      onEnableFormFillingGuid(t, roomType);
-    }
-  }, [roomType, onEnableFormFillingGuid]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -536,11 +506,7 @@ const SectionBodyContent = (props) => {
   )
     return <KnowledgeDisabledContainer />;
 
-  if (
-    isEmptyFilesList &&
-    !welcomeFormFillingTipsVisible &&
-    !formFillingTipsVisible
-  ) {
+  if (isEmptyFilesList) {
     if (roomsFilterGroupId && !isFilterOrSearchActive && isRoomsFolder) {
       const onManageGroups = () => {
         setEditRoomGroupsDialogVisible?.(true);
@@ -571,8 +537,6 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
-    userStore,
-    contextOptionsStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -598,15 +562,10 @@ export default inject(
       setIsChatDropTarget,
     } = filesStore;
 
-    const {
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
-      setEditRoomGroupsDialogVisible,
-    } = dialogsStore;
+    const { setEditRoomGroupsDialogVisible } = dialogsStore;
 
     const { roomsFilter } = filesStore;
 
-    const { onEnableFormFillingGuid } = contextOptionsStore;
     const { primaryProgressDataStore, uploaded } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
 
@@ -618,11 +577,9 @@ export default inject(
       isEmptyFilesList,
       setDragging,
       folderId: selectedFolderStore.id,
-      roomType: selectedFolderStore.roomType,
       selectedFolderChatSettings: selectedFolderStore.chatSettings,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
-      isArchiveFolderRoot: treeFoldersStore.isArchiveFolderRoot,
       isRoomsFolder: treeFoldersStore.isRoomsFolder,
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
@@ -648,10 +605,6 @@ export default inject(
       isErrorAIAgentNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
       isInsideKnowledge: selectedFolderStore.isInsideKnowledge,
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
-      userId: userStore?.user?.id,
-      onEnableFormFillingGuid,
       setDropTargetPreview,
       roomsFilterGroupId: roomsFilter?.groupId,
       setEditRoomGroupsDialogVisible,
@@ -669,7 +622,7 @@ export default inject(
     };
   },
 )(
-  withTranslation(["Files", "Common", "Translations", "FormFillingTipsDialog"])(
+  withTranslation(["Files", "Common", "Translations"])(
     withHotkeys(withLoader(observer(SectionBodyContent))()),
   ),
 );

@@ -40,8 +40,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { FileTile as FileTileComponent } from "@docspace/ui-kit/components/tiles/file-tile";
 import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
@@ -101,8 +100,6 @@ const FileTile = (props) => {
     openUser,
     isBlockingOperation,
     showStorageInfo,
-    setRefMap,
-    deleteRefMap,
     dataTestId,
     setDropTargetPreview,
     selectedFolderTitle,
@@ -134,22 +131,6 @@ const FileTile = (props) => {
 
   const { thumbnailUrl, providerItem } = item;
   const isDragDisabled = dragging && !isDragging;
-
-  useEffect(() => {
-    if (!tileRef?.current) return;
-
-    if (item?.isPDF) {
-      setRefMap(GuidanceRefKey.Pdf, tileRef);
-    }
-    if (item?.type === FolderType.Done) {
-      setRefMap(GuidanceRefKey.Ready, tileRef);
-    }
-
-    return () => {
-      deleteRefMap(GuidanceRefKey.Pdf);
-      deleteRefMap(GuidanceRefKey.Ready);
-    };
-  }, [setRefMap, deleteRefMap]);
 
   useEffect(() => {
     if (dragging) {
@@ -357,7 +338,6 @@ export default inject(
       filesStore,
       treeFoldersStore,
       infoPanelStore,
-      guidanceStore,
       currentQuotaStore,
     },
     { item },
@@ -365,8 +345,6 @@ export default inject(
     const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
-
-    const { setRefMap, deleteRefMap } = guidanceStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
@@ -386,8 +364,6 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      setRefMap,
-      deleteRefMap,
       openUser: infoPanelStore.openUser,
       showStorageInfo,
     };

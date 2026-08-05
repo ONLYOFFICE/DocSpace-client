@@ -1103,7 +1103,6 @@
   "GhostStateDetected": "Vaša šifrovacia identita na tomto zariadení nedokáže rozbaliť niektoré súbory. Iní členovia mohli zmeniť svoje kľúče alebo vaša identita môže byť nesynchronizovaná. <0>Otvorte správu kľúčov</0> na opätovné overenie alebo resetovanie.",
   "Gigabyte": "GB",
   "GoBack": "Vráťte sa späť",
-  "GotIt": "Rozumiem",
   "GoToMyRooms": "Prejdite do miestnosti",
   "GoToRoom": "prejsť do miestnosti",
   "GoToSection": "Prejsť do {{sectionName}}",

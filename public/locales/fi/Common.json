@@ -1103,7 +1103,6 @@
   "GhostStateDetected": "Tämän laitteen salausidentiteettisi ei pysty avaamaan joitakin tiedostoja. Muut jäsenet ovat saattaneet vaihtaa avaimiaan tai identiteettisi voi olla epäsynkronoitu. <0>Avaa avainten hallinta</0> uudelleenvahvistusta tai palautusta varten.",
   "Gigabyte": "GB",
   "GoBack": "Palaa",
-  "GotIt": "Selvä",
   "GoToMyRooms": "Mene huoneisiin",
   "GoToRoom": "Mene huoneeseen",
   "GoToSection": "Siirry {{sectionName}}-osioon",

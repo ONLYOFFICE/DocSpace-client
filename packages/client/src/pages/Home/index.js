@@ -196,8 +196,6 @@ const PureHome = observer((props) => {
     isErrorChecking,
     setOperationCancelVisible,
     hideConfirmCancelOperation,
-    welcomeFormFillingTipsVisible,
-    formFillingTipsVisible,
     chatFiles,
 
     allowInvitingGuests,
@@ -604,11 +602,7 @@ const PureHome = observer((props) => {
   sectionProps.pluginShowCancelButton = pluginShowCancelButton;
 
   const hasVisibleContent =
-    !isEmptyPage ||
-    welcomeFormFillingTipsVisible ||
-    formFillingTipsVisible ||
-    showFilterLoader ||
-    roomsFilterGroupId;
+    !isEmptyPage || showFilterLoader || roomsFilterGroupId;
 
   const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
@@ -932,9 +926,6 @@ export const Component = inject(
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
-    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
-      dialogsStore;
-
     const { isRoomAdmin, isAdmin } = authStore;
 
     const {
@@ -1056,8 +1047,6 @@ export const Component = inject(
       isEmptyGroups,
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
 
       secondaryActiveOperations,
       secondaryOperationsCompleted,

@@ -82,12 +82,6 @@
       "line_number": 144,
       "context": "zIndex: 10000,\n beforeTimeout: 15000,\n targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },",
       "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
-      "line_number": 396,
-      "context": "<div className=\"button-container\">\n {currentStep !== 0 ? (\n <Button\n id=\"form-filling_tips_back\"\n key=\"TipsBack\"\n label={t(\"Common:Back\")}\n size={ButtonSize.extraSmall}\n onClick={onPrev}\n />\n ) : null}\n <Button",
-      "module": "/packages/shared"
     }
   ],
   "languages": {

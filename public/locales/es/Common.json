@@ -1103,7 +1103,6 @@
   "GhostStateDetected": "Su identidad de cifrado en este dispositivo no puede desempaquetar algunos archivos. Es posible que otros miembros hayan cambiado sus claves, o que su identidad esté desincronizada. <0>Abrir la gestión de claves</0> para volver a verificar o restablecer.",
   "Gigabyte": "GB",
   "GoBack": "Volver",
-  "GotIt": "Entendido",
   "GoToMyRooms": "Ir a Salas",
   "GoToRoom": "ir a la sala",
   "GoToSection": "Ir a {{sectionName}}",

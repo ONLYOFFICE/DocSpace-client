@@ -1103,7 +1103,6 @@
   "GhostStateDetected": "La sua identità di cifratura su questo dispositivo non riesce a sbloccare alcuni file. Altri membri potrebbero aver modificato le loro chiavi, oppure la sua identità potrebbe non essere sincronizzata. <0>Apri la gestione chiavi</0> per verificare nuovamente o ripristinare.",
   "Gigabyte": "GB",
   "GoBack": "Torna indietro",
-  "GotIt": "Capito",
   "GoToMyRooms": "Vai alle stanze",
   "GoToRoom": "vai nella stanza",
   "GoToSection": "Vai a {{sectionName}}",

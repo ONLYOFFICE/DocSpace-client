@@ -144,7 +144,6 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     contactsTab,
-    setRefMap,
     setTemplateGalleryVisible,
     templateGalleryAvailable,
 
@@ -835,7 +834,6 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
-          setRefMap={setRefMap}
         />
       )}
 
@@ -905,7 +903,6 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
-    guidanceStore,
     aiRoomStore,
     filesSettingsStore,
     currentTariffStatusStore,
@@ -914,7 +911,6 @@ export default inject(
   }) => {
     const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
-    const { setRefMap } = guidanceStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -1040,7 +1036,6 @@ export default inject(
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       contactsTab: peopleStore.usersStore.contactsTab,
-      setRefMap,
       setTemplateGalleryVisible,
       templateGalleryAvailable,
 

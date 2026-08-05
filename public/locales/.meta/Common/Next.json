@@ -22,12 +22,6 @@
       "line_number": 147,
       "context": "},\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });\n \n useEffect(() => {",
       "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
-      "line_number": 405,
-      "context": ") : null}\n <Button\n id=\"form-filling_tips_next\"\n key=\"TipsNext\"\n primary\n label={isLastStep ? t(\"Common:GotIt\") : t(\"Common:Next\")}\n size={ButtonSize.extraSmall}\n onClick={isLastStep ? onClose : onNext}\n />\n </div>\n </div>",
-      "module": "/packages/shared"
     }
   ],
   "languages": {

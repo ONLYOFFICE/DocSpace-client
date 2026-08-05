@@ -50,7 +50,6 @@ import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
-import GuidanceStore from "./GuidanceStore";
 import FilesTourStore from "./FilesTourStore";
 import RoomsTourStore from "./RoomsTourStore";
 import FormsTourStore from "./FormsTourStore";
@@ -200,7 +199,6 @@ const filesStore = new FilesStore(
   aiRoomStore,
 );
 
-const guidanceStore = new GuidanceStore();
 const filesTourStore = new FilesTourStore();
 const roomsTourStore = new RoomsTourStore();
 const formsTourStore = new FormsTourStore();
@@ -327,7 +325,6 @@ const contextOptionsStore = new ContextOptionsStore(
   userStore,
   indexingStore,
   clientLoadingStore,
-  guidanceStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -488,7 +485,6 @@ const store = {
 
   brandingStore,
 
-  guidanceStore,
   filesTourStore,
   roomsTourStore,
   formsTourStore,

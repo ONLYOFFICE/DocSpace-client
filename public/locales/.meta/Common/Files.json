@@ -336,12 +336,6 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 126,
-      "context": "{\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Files\"),\n }),\n key: \"form-filling-uploading\",\n placement: \"side\",\n position: [\n {",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
       "line_number": 516,
       "context": "styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n settingsFileSelector={settingsFileSelector}",

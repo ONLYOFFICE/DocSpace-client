@@ -1103,7 +1103,6 @@
   "GhostStateDetected": "Vaš identitet za šifrovanje na ovom uređaju ne može da raspakuje neke fajlove. Ostali članovi možda su promenili svoje ključeve ili vaš identitet možda nije sinhronizovan. <0>Otvorite upravljanje ključevima</0> radi ponovne verifikacije ili resetovanja.",
   "Gigabyte": "GB",
   "GoBack": "Idi nazad",
-  "GotIt": "Razumem",
   "GoToMyRooms": "Idi u sobe",
   "GoToRoom": "idi u sobu",
   "GoToSection": "Idi na {{sectionName}}",

@@ -1103,7 +1103,6 @@
   "GhostStateDetected": "Twoja tożsamość szyfrowania na tym urządzeniu nie może odszyfrować niektórych plików. Inni użytkownicy mogli zmienić swoje klucze lub Twoja tożsamość może być niezsynchronizowana. <0>Otwórz zarządzanie kluczami</0>, aby ponownie zweryfikować lub zresetować.",
   "Gigabyte": "GB",
   "GoBack": "Wróć",
-  "GotIt": "Rozumiem",
   "GoToMyRooms": "Przejdź do pokoi",
   "GoToRoom": "przejdź do pokoju",
   "GoToSection": "Przejdź do {{sectionName}}",

@@ -1103,7 +1103,6 @@
   "GhostStateDetected": "Bu cihazda şifreleme kimliğiniz bazı dosyaları açamıyor. Diğer üyeler anahtarlarını değiştirmiş olabilir ya da kimliğiniz eşitleme dışında kalmış olabilir. Yeniden doğrulamak veya sıfırlamak için <0>anahtar yönetimini açın</0>.",
   "Gigabyte": "GB",
   "GoBack": "Geri git",
-  "GotIt": "Anladım",
   "GoToMyRooms": "Odalarıma git",
   "GoToRoom": "odaya git",
   "GoToSection": "{{sectionName}} bölümüne git",

@@ -52,9 +52,11 @@ import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 
 import ItemTitle from "../../sub-components/ItemTitle";
+import commonStyles from "../../helpers/Common.module.scss";
 
 import Details from "../Details";
 import History from "../History";
+import HistoryToolbar from "../History/Toolbar";
 import ThirdPartyComponent from "../History/HistoryBlockContent/ThirdParty";
 import Members from "../Members";
 import Share from "../Share";
@@ -135,6 +137,12 @@ const FilesView = ({
     infoPanelItemsList,
   );
 
+  const scrollContext = React.use(ScrollbarContext);
+
+  const scrollToTop = React.useCallback(() => {
+    scrollContext?.parentScrollbar?.scrollToTop();
+  }, []);
+
   const {
     history,
     total: historyTotal,
@@ -143,10 +151,14 @@ const FilesView = ({
     isFirstLoading: historyIsFirstLoading,
     fetchHistory,
     fetchMoreHistory,
+    historyDay,
+    selectHistoryDay,
+    resetHistoryDay,
     abortController,
   } = useHistory({
     selection,
     setExternalLinks: setExternalLinks!,
+    scrollToTop,
   });
 
   const {
@@ -159,12 +171,6 @@ const FilesView = ({
     isFolder: isFolder(selection),
     generatePrimaryLink,
   });
-
-  const scrollContext = React.use(ScrollbarContext);
-
-  const scrollToTop = React.useCallback(() => {
-    scrollContext?.parentScrollbar?.scrollToTop();
-  }, []);
 
   const {
     members,
@@ -318,6 +324,10 @@ const FilesView = ({
   }, [isLoadingSuspense, onEndAnimation]);
 
   React.useEffect(() => {
+    if (currentView !== InfoPanelView.infoHistory) resetHistoryDay();
+  }, [currentView, resetHistoryDay]);
+
+  React.useEffect(() => {
     if (currentView === value && selection.id?.toString() === prevSelectionId) {
       return;
     }
@@ -391,6 +401,13 @@ const FilesView = ({
 
   const isRoomMembersPanel = value === InfoPanelView.infoMembers;
 
+  const historyRoom =
+    currentView === InfoPanelView.infoHistory &&
+    isRoom(selection) &&
+    !isThirdParty
+      ? selection
+      : null;
+
   const roomMembersProps = isRoomMembersPanel
     ? {
         isRoomMembersPanel,
@@ -411,7 +428,20 @@ const FilesView = ({
     : {};
 
   return (
-    <div data-testid="info_panel_files_view_container">
+    <div
+      className={historyRoom ? commonStyles.withHistoryToolbar : undefined}
+      data-testid="info_panel_files_view_container"
+    >
+      {historyRoom ? (
+        <HistoryToolbar
+          roomId={historyRoom.id}
+          canExportHistory={historyRoom.security?.HistoryExport ?? false}
+          roomCreationDate={historyRoom.created}
+          selectedDay={historyDay}
+          onSelectDay={selectHistoryDay}
+        />
+      ) : null}
+
       <ItemTitle
         infoPanelSelection={
           isRoomMembersPanel

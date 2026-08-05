@@ -33,59 +33,64 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+@use "../../toolbar-mixins" as toolbar;
 
-import { TSelection } from "./ContextButton";
+// Pinned so the range calendar can be centered over the popup by pure CSS —
+// it matches the ui-kit default and keeps the width out of the layout math.
+$calendar-width: 362px;
+$icon-inline-padding: 8px;
+$input-vertical-padding: 5px;
 
-import RoomsItemHeader from "./RoomsItemTitle";
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
 
-const ItemTitle = ({
-  infoPanelSelection,
+.calendarIcon {
+  display: flex;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
 
-  isNoItem,
+// Splits the read-only value from the calendar trigger, as in the mockup. The
+// icon block is only as tall as the text line, so the rule is stretched over
+// the vertical padding of a base-size input to span the whole field.
+.iconDivider {
+  --input-block-icon-start: #{$icon-inline-padding};
 
-  isGallery,
-  isContacts,
+  position: relative;
 
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
+  &::before {
+    content: "";
+    position: absolute;
+    inset-block: -$input-vertical-padding;
+    inset-inline-start: 0;
+    width: 1px;
+    background: var(--input-border-color);
+  }
+}
 
-  if (isPlugin && !isPluginHeaderVisible) return null;
+.calendar {
+  @include toolbar.calendar-popup;
 
-  if (isNoItem || isContacts || isGallery) return null;
+  --calendar-width: #{$calendar-width};
 
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
-    );
+  top: 100%;
+  // Centered over the popup instead of anchored to the focused field, so
+  // switching between From and To never nudges the calendar sideways.
+  inset-inline-start: calc((100% - #{$calendar-width}) / 2);
 
-  return <RoomsItemHeader selection={infoPanelSelection} />;
-};
-
-export default ItemTitle;
+  &.mobile {
+    @include toolbar.calendar-popup-mobile;
+  }
+}

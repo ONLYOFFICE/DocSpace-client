@@ -9,7 +9,7 @@
       "Bash(git checkout:*)",
       "Bash(git check-ignore:*)",
       "Bash(node common/scripts/translation-stats.js:*)",
-      "Read(~/.claude/skills/**)"
+      "Read(~/.claude/**)"
     ]
   },
   "enabledPlugins": {

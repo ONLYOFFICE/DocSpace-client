@@ -53,6 +53,7 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import QuantityPicker from "@docspace/ui-kit/components/quantity-picker";
 import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
 import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
+import { isInsufficientFundsError } from "@docspace/ui-kit/billing/utils/insufficientFunds";
 
 import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
@@ -365,7 +366,18 @@ const BuyPlanPanel = ({
           : t("DocsConnect:PlanPurchased"),
       );
     } catch (error) {
-      if (!controller?.signal.aborted) toastr.error(error as Error);
+      if (!controller?.signal.aborted) {
+        if (isInsufficientFundsError(error)) {
+          toastr.error(
+            isPayer
+              ? t("Common:InsufficientFundsCheckCredits")
+              : t("Common:InsufficientFundsContactPayerShort"),
+            t("Common:InsufficientFunds"),
+          );
+        } else {
+          toastr.error(error as Error);
+        }
+      }
     } finally {
       setWaitingPayment(false);
       setSubmitting(false);

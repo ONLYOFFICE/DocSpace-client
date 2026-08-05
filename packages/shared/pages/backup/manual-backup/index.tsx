@@ -223,7 +223,8 @@ const ManualBackup = ({
 
   const isTopUpBeforeCopy = isBalanceInsufficient && isPayer && isCardLinked;
 
-  const isTopUpDialogBeforeCopy = !isCardLinked && !!onOpenTopUpDialog;
+  const isTopUpDialogBeforeCopy =
+    isBalanceInsufficient && !isCardLinked && !!onOpenTopUpDialog;
 
   const isCopyBlocked = isBalanceInsufficient && isCardLinked && !isPayer;
 

@@ -1,38 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node -e ':*)",
-      "Bash(node -e ' *)",
-      "Bash(python3)",
-      "Bash(python3 -c ':*)",
-      "Bash(python3 -c ' *)",
-      "Bash(python3 -)",
-      "Bash(pip install *)",
       "Bash(npx vitest:*)",
-      "Bash(node_modules/.bin/vitest run *)",
       "Bash(pnpm tsc:*)",
       "Bash(npx tsc:*)",
-      "Bash(../../node_modules/.pnpm/node_modules/.bin/biome check *)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git checkout *)",
-      "Bash(git check-ignore *)",
-      "Bash(node common/scripts/translation-stats.js)",
-      "Bash(node common/scripts/translation-stats.js --md)",
-      "Bash(node src/scripts/verify-translations-spell-check.js --recheck --no-llm)",
-      "Bash(node src/scripts/save-meta-keys-usage.js)",
-      "Bash(node src/scripts/apply-spell-check-fixes.js --dry-run --types=incorrect_translation,missing_content,wrong_language,missing_tag,missing_variable)",
-      "Bash(node src/scripts/apply-spell-check-fixes.js --types=incorrect_translation,missing_content,wrong_language,missing_tag,missing_variable)",
-      "Bash(awk '{print $1}')",
-      "Bash(echo \"EXIT: $?\")",
-      "Bash(grep -v \"^$\")",
-      "Bash(grep -v \"^en$\")",
-      "Bash(grep -v \"^\\\\.meta$\")",
-      "Bash(pnpm --filter @docspace/client exec vitest run src/store/contextOptionsStore)",
-      "Bash(sort -u -t: -k2)"
-    ],
-    "additionalDirectories": [
-      "../packages/client/__tests__"
+      "Bash(git checkout:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(node common/scripts/translation-stats.js:*)",
+      "Read(~/.claude/**)"
     ]
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true
   }
 }

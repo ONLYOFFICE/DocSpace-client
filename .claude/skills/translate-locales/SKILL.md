@@ -1,3 +1,8 @@
+---
+name: translate-locales
+description: Translate new or broken i18n keys across all supported languages in the DocSpace monorepo. Use when locale tests fail, translation-stats reports missing keys, or the user asks to translate/fix locale keys in bulk.
+---
+
 # Translate / fix broken locale keys
 
 Translate new or broken i18n keys across all supported languages in the DocSpace monorepo.

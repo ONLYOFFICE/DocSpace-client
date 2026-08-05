@@ -1,8 +1,14 @@
+---
+name: translate-key
+description: Translate (or re-translate) a single i18n key across all supported languages. Use when the user asks to translate, fix, or verify a specific locale key like Namespace:KeyName, optionally for specific languages only.
+argument-hint: Namespace:KeyName [lang1,lang2,...]
+---
+
 # Translate / verify a specific locale key
 
 Translate (or re-translate) a single i18n key across all supported languages.
 
-Usage: `/translate-key Namespace:KeyName`  
+Usage: `/translate-key Namespace:KeyName`
 Or to target specific languages: `/translate-key Namespace:KeyName de,fr,ru`
 
 `$ARGUMENTS` contains the raw input — parse it as `<Namespace:Key> [lang1,lang2,...]`.

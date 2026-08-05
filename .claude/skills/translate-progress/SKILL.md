@@ -1,3 +1,8 @@
+---
+name: translate-progress
+description: Show how many locale keys are still missing across all workspaces and languages. Use when the user asks about translation progress, coverage, or which keys are untranslated.
+---
+
 # Translation progress check
 
 Show how many locale keys are still missing across all workspaces and languages.

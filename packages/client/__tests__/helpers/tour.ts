@@ -56,11 +56,13 @@ export const armTour = async (page: Page, key: string) => {
   );
 };
 
-// TourTooltip is the only dialog that renders a "current / total" progress
-// counter (see TourTooltip.tsx `.progress`), so matching on that text is a
+// TourTooltip is the only dialog that carries a step-progress bar (see
+// TourTooltip.tsx `.progress`, a dot per step), so matching on that role is a
 // stable way to grab it without relying on generated CSS module class names.
 export const tourTooltip = (page: Page) =>
-  page.locator('[role="dialog"]:visible').filter({ hasText: /\d+\s*\/\s*\d+/ });
+  page
+    .locator('[role="dialog"]:visible')
+    .filter({ has: page.locator('[role="progressbar"]') });
 
 /**
  * Clicks through every step of a running tour, screenshotting each one

@@ -64,7 +64,6 @@ type FilesTourProps = {
   canCreate: boolean;
   showFilter: boolean;
   hasItems: boolean;
-  isTableView: boolean;
   sectionId: string | null;
   sharedId: string | null;
   recentId: string | null;
@@ -84,7 +83,6 @@ const FilesTour = ({
   canCreate,
   showFilter,
   hasItems,
-  isTableView,
   sectionId,
   sharedId,
   recentId,
@@ -102,7 +100,6 @@ const FilesTour = ({
       canCreate,
       showFilter,
       hasItems,
-      isTableView,
       sectionId,
       sharedId,
       recentId,
@@ -115,7 +112,6 @@ const FilesTour = ({
       canCreate,
       showFilter,
       hasItems,
-      isTableView,
       sectionId,
       sharedId,
       recentId,
@@ -195,7 +191,6 @@ export default inject(
       canCreate: !!myFolder?.security?.Create,
       showFilter: !filesStore.isEmptyPage,
       hasItems: filesStore.filesList?.length > 0,
-      isTableView: filesStore.viewAs === "table",
       // Sidebar anchors (ClientArticleSidebar → NavMenu data-item-id). Item
       // ids of tree sections are their folder ids, so they mirror the same
       // gating the sidebar itself applies (Trash is hidden from guests).
@@ -206,7 +201,9 @@ export default inject(
       sectionId:
         hasMyDocuments && myFolderId != null
           ? String(myFolderId)
-          : (sharedWithMeId != null ? "files" : null),
+          : sharedWithMeId != null
+            ? "files"
+            : null,
       sharedId: sharedWithMeId != null ? String(sharedWithMeId) : null,
       recentId: recentFolderId != null ? String(recentFolderId) : null,
       favoritesId: favoritesFolderId != null ? String(favoritesFolderId) : null,

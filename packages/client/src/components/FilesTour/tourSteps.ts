@@ -41,23 +41,53 @@ import type { TourAudience } from "SRC_DIR/components/Tour/audience";
 import {
   navItemStep,
   elementStep,
-  fileItemStep,
+  elementGroupStep,
+  menuStep,
+  hoverRevealStep,
   sidebarSelector,
   expandQuickActions,
 } from "SRC_DIR/components/Tour/stepBuilders";
 
 const LOG_LABEL = "files tour";
 
-// The first item of the file list, in whichever view is active (only one of
-// the three is mounted at a time).
+// The quick-action tiles for the four file formats, in banner order. The AI
+// chat tile shares their container and gets a step of its own, so the spotlight
+// covers this run of tiles rather than the whole banner.
+const CREATE_TILE_SELECTORS = [
+  '[data-testid="quick-docx"]',
+  '[data-testid="quick-xlsx"]',
+  '[data-testid="quick-pptx"]',
+  '[data-testid="quick-pdf"]',
+];
+
+// The "New" button in the filter bar, and the menu it opens.
 //
-// In the table view neither row wrapper has geometry: both the row
-// (TableRow.module.scss `.tableRow`) and the drag wrapper
-// (StyledTable.module.scss `.styledDragAndDrop`) are `display: contents`, so a
-// naive spotlight lands on a 0x0 point in the corner. `fileItemStep` detects
-// that and falls back to the row's widest cell.
-const FIRST_ITEM_SELECTOR =
-  '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
+// MainButton keeps its click handler on the box inside the test-id wrapper, so
+// the trigger points one level in while the spotlight takes the whole button.
+// The menu is portalled to the body and only mounted while open (ContextMenu
+// unmounts on exit) — with the tour blocking every other interaction it is the
+// only one that can be up.
+const NEW_BUTTON_SELECTOR = '[data-testid="main-button"]';
+const NEW_BUTTON_TRIGGER_SELECTOR = '[data-testid="main-button"] > *';
+const NEW_MENU_SELECTOR = ".p-contextmenu";
+
+// The search field itself. Not `#filter_search-input`: SearchInput puts that id
+// on the block around the field, and the "New" button lives in there too — a
+// spotlight on the block would light up the button along with the search line.
+const SEARCH_SELECTOR = "#filter_search-input .search-input-block";
+
+// The share button of the first file that has one, in whichever view is active
+// (only one of the three is mounted at a time). `querySelector` takes the first
+// match in document order, so a leading row without the button — a folder, an
+// item this user cannot share — is stepped over instead of dropping the step.
+//
+// In the table view an unshared file keeps this button hidden until the row is
+// hovered, which is why the step that points at it is a `hoverRevealStep`.
+const SHARE_ICON_SELECTOR = [
+  '[data-testid^="table-row-"] .badge.copy-link',
+  '[data-testid^="files_row_"] .badge.copy-link',
+  '[data-testid^="tile_"] .badge.copy-link',
+].join(", ");
 
 export type TourStepFlags = {
   // Which tour to build. Files is the one section where an admin and a paid
@@ -73,9 +103,6 @@ export type TourStepFlags = {
   // Whether the file list has at least one item — steps that point at a row
   // are skipped on an empty folder.
   hasItems: boolean;
-  // Table view is the only one that renders a column header (and its column
-  // picker); the row/tile views don't.
-  isTableView: boolean;
   // Sidebar anchors: NavMenu renders `data-item-id` per item, the ids of the
   // tree-folder items are their folder ids (null — item is absent).
   //
@@ -102,7 +129,6 @@ export function getTourSteps(
     canCreate,
     showFilter,
     hasItems,
-    isTableView,
     sectionId,
     sharedId,
     recentId,
@@ -110,7 +136,7 @@ export function getTourSteps(
     trashId,
   } = flags;
 
-  // Guests own no files, so nothing that creates or deletes applies to them.
+  // Guests own no files, so nothing that creates applies to them.
   const canOwnFiles = audience !== "guest";
 
   // The quick-access sub-items are nested under the Files section item and
@@ -119,220 +145,113 @@ export function getTourSteps(
   //
   // Anchored on the section item, not on My documents: a guest's section has
   // no personal folder, but it does have the Shared/Recent/Favorites children
-  // this tour is mostly about.
+  // the closing step is about.
   const showQuickAccess = isDesktop && !!sectionId;
 
-  return [
-    // 1. Where am I. Two different sections share this anchor: the personal
-    // space for everyone who has one, and — for a guest, who does not — the
-    // same item standing in for Shared with me. The step describes whichever
-    // one the user actually got.
-    sectionId &&
-      navItemStep(
-        sidebarSelector(sectionId),
-        t("Common:Files"),
-        canOwnFiles
-          ? {
-              text: t("FilesTour:TourMyDocuments"),
-              points: [
-                t("FilesTour:TourMyDocumentsPrivate"),
-                t("FilesTour:TourMyDocumentsShare"),
-              ],
-            }
-          : {
-              text: t("FilesTour:TourGuestFiles"),
-              points: [
-                t("FilesTour:TourGuestFilesNoStorage"),
-                t("FilesTour:TourGuestFilesAccess"),
-              ],
-            },
-        callbacks,
-        LOG_LABEL,
-      ),
+  // The section's sub-items, each named by the sidebar's own label so the
+  // wording in the tooltip is the wording on screen. One sentence each, read as
+  // a single paragraph; an item the sidebar doesn't render (a guest has no
+  // Trash) drops its sentence.
+  const places = [
+    sharedId &&
+      t("FilesTour:TourPlacesShared", {
+        sectionName: t("Common:SharedWithMe"),
+      }),
+    recentId &&
+      t("FilesTour:TourPlacesRecent", { sectionName: t("Common:Recent") }),
+    favoritesId &&
+      t("FilesTour:TourPlacesFavorites", {
+        sectionName: t("Common:Favorites"),
+      }),
+    trashId &&
+      t("FilesTour:TourPlacesTrash", {
+        sectionName: t("Common:TrashSection"),
+      }),
+  ].filter(Boolean) as string[];
 
-    // 2. Create — the quick-action tiles, named by what they produce. Upload
-    // is mentioned here too: the header "+" button only renders on an empty
-    // page (isPlusButtonVisible), so it can't be spotlighted in this tour.
+  // Any one of the sub-items will do as the tooltip's anchor: the spotlight
+  // covers the whole sub-list they share (`spotlightList`).
+  const placesAnchorId = sharedId ?? recentId ?? favoritesId ?? trashId;
+
+  return [
+    // 1. Create — the four format tiles, named by what they produce.
     canOwnFiles &&
       canCreate &&
       showFilter &&
-      elementStep(
+      elementGroupStep(
         '[data-testid="quick-actions"]',
-        t("FilesTour:TourActionsTitle"),
-        {
-          text: t("FilesTour:TourActions"),
-          points: [
-            t("FilesTour:TourActionsFormats"),
-            t("FilesTour:TourActionsPdfForm"),
-            t("FilesTour:TourActionsDragDrop"),
-          ],
-        },
+        CREATE_TILE_SELECTORS,
+        t("FilesTour:TourCreateAnythingTitle"),
+        t("FilesTour:TourCreateAnything"),
         callbacks,
         LOG_LABEL,
       ),
 
-    // 3. AI chat tile — the least discoverable, most differentiating feature.
-    // It is the fifth tile, so it may sit in the clipped second row; expand
-    // the banner first so the spotlight lands on something visible.
+    // 2. AI chat tile — the least discoverable, most differentiating feature.
+    // It is the fifth tile, so it may sit in the clipped second row; expand the
+    // banner first so the spotlight lands on something visible.
     canOwnFiles &&
       canCreate &&
       showFilter &&
       elementStep(
         '[data-testid="quick-ai-chat"]',
-        t("FilesTour:TourAiChatTitle"),
-        t("FilesTour:TourAiChat"),
+        t("FilesTour:TourAiAssistantTitle"),
+        t("FilesTour:TourAiAssistant", { sectionName: t("Common:Files") }),
         callbacks,
         LOG_LABEL,
         6,
         expandQuickActions,
       ),
 
-    // 4. A real file row: the per-item actions users most often hunt for.
-    hasItems &&
-      fileItemStep(
-        FIRST_ITEM_SELECTOR,
-        t("FilesTour:TourFileItemTitle"),
-        {
-          text: t("FilesTour:TourFileItem"),
-          points: [
-            t("FilesTour:TourFileItemOpen"),
-            t("FilesTour:TourFileItemContextMenu"),
-            t("FilesTour:TourFileItemSelect"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 5. Info panel — sharing, versions and activity all live here.
-    isDesktop &&
-      elementStep(
-        "#info-panel-toggle--open",
-        t("FilesTour:TourInfoPanelTitle"),
-        {
-          text: t("FilesTour:TourInfoPanel"),
-          points: [
-            t("FilesTour:TourInfoPanelShare"),
-            t("FilesTour:TourInfoPanelHistory"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 6. Search — scoped, so it is worth saying what it covers.
-    showFilter &&
-      elementStep(
-        "#filter_search-input",
-        t("FilesTour:TourSearchTitle"),
-        {
-          text: t("FilesTour:TourSearch"),
-          points: [
-            t("FilesTour:TourSearchFilters"),
-            t("FilesTour:TourSearchContent"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 7. Advanced filter — narrowing by type/author, not just by name.
-    showFilter &&
-      elementStep(
-        "#filter-button",
-        t("FilesTour:TourFilesFilterTitle"),
-        {
-          text: t("FilesTour:TourFilesFilter"),
-          points: [
-            t("FilesTour:TourFilesFilterTypes"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 8. Sorting, and the column/tile layout switch next to it.
-    showFilter &&
-      isDesktop &&
-      elementStep(
-        "#sort-by-button",
-        t("FilesTour:TourSortTitle"),
-        {
-          text: t("FilesTour:TourSort"),
-          points: [
-            t("FilesTour:TourSortView"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 9. Table column picker — rendered by the table header only, so this
-    // step is skipped in the row/tile views.
-    isTableView &&
-      isDesktop &&
-      elementStep(
-        '[data-testid="settings-block"]',
-        t("FilesTour:TourColumnsTitle"),
-        t("FilesTour:TourColumns"),
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 10. Shared with me — files other people gave you access to. For a guest
-    // this is the section they landed in rather than one shortcut among
-    // several, so it is worth saying that their access is what someone else
-    // granted, and can change.
-    showQuickAccess &&
-      sharedId &&
-      navItemStep(
-        sidebarSelector(sharedId),
-        t("FilesTour:TourSharedTitle"),
-        canOwnFiles
-          ? t("FilesTour:TourShared")
-          : {
-              text: t("FilesTour:TourGuestShared"),
-              points: [
-                t("FilesTour:TourGuestSharedRights"),
-              ],
-            },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 11. Recent + Favorites — the two shortcuts that save the most clicks.
-    showQuickAccess &&
-      recentId &&
-      navItemStep(
-        sidebarSelector(recentId),
-        t("FilesTour:TourRecentTitle"),
-        {
-          text: t("FilesTour:TourRecent"),
-          points: favoritesId
-            ? [
-                t("FilesTour:TourRecentFavorites"),
-              ]
-            : undefined,
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 12. Trash — restore, and the fact that it empties itself.
+    // 3. Uploading, which lives in the "New" menu — so the step opens it and
+    // spotlights the menu rather than the button that hides it.
     canOwnFiles &&
-      showQuickAccess &&
-      trashId &&
-      navItemStep(
-        sidebarSelector(trashId),
-        t("FilesTour:TourTrashTitle"),
-        {
-          text: t("FilesTour:TourTrash"),
-          points: [
-            t("FilesTour:TourTrashAutoClean"),
-          ],
-        },
+      canCreate &&
+      showFilter &&
+      isDesktop &&
+      menuStep(
+        NEW_BUTTON_TRIGGER_SELECTOR,
+        NEW_MENU_SELECTOR,
+        t("FilesTour:TourBringFilesTitle"),
+        t("FilesTour:TourBringFiles"),
         callbacks,
         LOG_LABEL,
+        // The button and its menu read as one thing, so they share a spotlight.
+        [NEW_BUTTON_SELECTOR],
+      ),
+
+    // 4. Search, with the filter, sort and view controls that sit beside it.
+    showFilter &&
+      elementStep(
+        SEARCH_SELECTOR,
+        t("FilesTour:TourFindFastTitle"),
+        t("FilesTour:TourFindFast"),
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 5. The share button on a row — the per-item action users hunt for most.
+    hasItems &&
+      hoverRevealStep(
+        SHARE_ICON_SELECTOR,
+        t("FilesTour:TourShareTitle"),
+        t("FilesTour:TourShare"),
+        callbacks,
+        LOG_LABEL,
+        4,
+      ),
+
+    // 6. The sidebar sub-items: what each of the section's shortcuts holds.
+    showQuickAccess &&
+      placesAnchorId &&
+      places.length > 0 &&
+      navItemStep(
+        sidebarSelector(placesAnchorId),
+        t("FilesTour:TourPlacesTitle"),
+        places.join(" "),
+        callbacks,
+        LOG_LABEL,
+        true,
       ),
   ].filter(Boolean) as Step[];
 }

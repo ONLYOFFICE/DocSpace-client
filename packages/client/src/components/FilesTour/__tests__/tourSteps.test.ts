@@ -41,11 +41,19 @@ import { getTourSteps, type TourStepFlags } from "../tourSteps";
 /** Echo the key back, so a step can be identified by the key it rendered. */
 const t = ((key: string) => key) as unknown as TFunction;
 
-const targets = (flags: TourStepFlags) =>
-  getTourSteps(t, undefined, flags).map((step) => step.target);
+const steps = (flags: TourStepFlags) => getTourSteps(t, undefined, flags);
 
-const titles = (flags: TourStepFlags) =>
-  getTourSteps(t, undefined, flags).map((step) => step.title);
+const targets = (flags: TourStepFlags) =>
+  steps(flags).map((step) => step.target);
+
+const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
+
+const SEARCH_TARGET = "#filter_search-input .search-input-block";
+
+const SHARE_ICON_TARGET =
+  '[data-testid^="table-row-"] .badge.copy-link, ' +
+  '[data-testid^="files_row_"] .badge.copy-link, ' +
+  '[data-testid^="tile_"] .badge.copy-link';
 
 /**
  * A guest on the Files section: no personal space and no Trash, so the sidebar
@@ -58,7 +66,6 @@ const guestFlags: TourStepFlags = {
   canCreate: false,
   showFilter: true,
   hasItems: true,
-  isTableView: true,
   sectionId: "files",
   sharedId: "10",
   recentId: "11",
@@ -74,67 +81,145 @@ const ownerFlags: TourStepFlags = {
   trashId: "13",
 };
 
+describe("getTourSteps — owner", () => {
+  it("walks create, AI chat, upload, search, sharing and the sidebar", () => {
+    expect(targets(ownerFlags)).toEqual([
+      '[data-testid="quick-actions"]',
+      '[data-testid="quick-ai-chat"]',
+      ".p-contextmenu",
+      SEARCH_TARGET,
+      SHARE_ICON_TARGET,
+      '[data-item-id="10"]',
+    ]);
+  });
+
+  it("spotlights the four format tiles, not the whole banner", () => {
+    // The AI chat tile shares the banner and has its own step, so the create
+    // step's spotlight has to stop at the fourth tile.
+    const [create] = steps(ownerFlags);
+
+    expect(create.spotlightTarget).toBeTypeOf("function");
+  });
+
+  it("lights up the New button together with the menu it opens", () => {
+    const upload = steps(ownerFlags).find(
+      (step) => step.target === ".p-contextmenu",
+    );
+
+    expect(upload?.spotlightTarget).toBeTypeOf("function");
+  });
+
+  it("can show the sharing step on a row that hides it until hover", () => {
+    // The share button is `display: none` outside `:hover` in the table view, so
+    // the step has to reveal it — the plain visibility check dropped it every
+    // time and the step was never shown.
+    const share = steps(ownerFlags).find(
+      (step) => step.target === SHARE_ICON_TARGET,
+    );
+
+    expect(share?.data).toEqual({
+      revealsTarget: true,
+      presence: SHARE_ICON_TARGET,
+    });
+  });
+
+  it("keeps the upload step even though its menu is closed", () => {
+    // The step is what opens the menu, so `isStepTargetPresent` has to be told
+    // to leave it alone — without the flag the start-of-run filter drops it.
+    const upload = steps(ownerFlags).find(
+      (step) => step.target === ".p-contextmenu",
+    );
+
+    expect(upload?.data).toEqual({ revealsTarget: true });
+  });
+
+  it("names every sidebar shortcut it points at, in one paragraph", () => {
+    const places = steps(ownerFlags).at(-1);
+
+    expect(places?.title).toBe("FilesTour:TourPlacesTitle");
+    // Shared with me, Recent, Favorites and Trash — one sentence each, run
+    // together rather than broken into bullets.
+    expect(places?.content).toBe(
+      "FilesTour:TourPlacesShared FilesTour:TourPlacesRecent " +
+        "FilesTour:TourPlacesFavorites FilesTour:TourPlacesTrash",
+    );
+    // The spotlight covers the sub-list the anchor item belongs to.
+    expect(places?.spotlightTarget).toBeTypeOf("function");
+  });
+
+  it("drops the Trash point when there is no Trash item", () => {
+    const withTrash = steps(ownerFlags).at(-1);
+    const withoutTrash = steps({ ...ownerFlags, trashId: null }).at(-1);
+
+    expect(withTrash?.content).toContain("FilesTour:TourPlacesTrash");
+    expect(withoutTrash?.content).not.toContain("FilesTour:TourPlacesTrash");
+  });
+});
+
 describe("getTourSteps — guest", () => {
   it("builds a tour instead of an empty step list", () => {
     // The bug this guards: every guest step was gated behind a personal-space
     // id the guest never has, so the tour opened with nothing to show and
     // closed itself immediately.
-    expect(getTourSteps(t, undefined, guestFlags).length).toBeGreaterThan(0);
+    expect(steps(guestFlags).length).toBeGreaterThan(0);
   });
 
-  it("anchors the section step on the sidebar's guest item id", () => {
-    expect(targets(guestFlags)).toContain('[data-item-id="files"]');
-  });
-
-  it("keeps the quick-access steps a guest actually has", () => {
-    const guestTargets = targets(guestFlags);
-
-    expect(guestTargets).toContain('[data-item-id="10"]');
-    expect(guestTargets).toContain('[data-item-id="11"]');
-  });
-
-  it("describes the section as shared files, not a personal space", () => {
-    const guestTitles = titles(guestFlags);
-
-    expect(guestTitles).toContain("Common:Files");
-    // The owner wording promises files "you own" and a Trash to restore from.
-    expect(guestTitles).not.toContain("FilesTour:TourTrashTitle");
-  });
-
-  it("offers nothing that creates or deletes", () => {
+  it("offers nothing that creates", () => {
     const guestTargets = targets(guestFlags);
 
     expect(guestTargets).not.toContain('[data-testid="quick-actions"]');
     expect(guestTargets).not.toContain('[data-testid="quick-ai-chat"]');
-    // Trash is hidden from guests by the sidebar itself.
-    expect(guestTargets.some((target) => target === '[data-item-id="13"]')).toBe(
-      false,
-    );
+    expect(guestTargets).not.toContain(".p-contextmenu");
   });
 
   it("still covers the tools a guest can use on someone else's files", () => {
     const guestTargets = targets(guestFlags);
 
-    expect(guestTargets).toContain("#filter_search-input");
-    expect(guestTargets).toContain("#info-panel-toggle--open");
-    expect(guestTargets).toContain("#sort-by-button");
+    expect(guestTargets).toContain(SEARCH_TARGET);
+    expect(guestTargets).toContain(SHARE_ICON_TARGET);
+    // Their sidebar shortcuts, anchored on Shared with me.
+    expect(guestTargets).toContain('[data-item-id="10"]');
+  });
+
+  it("keeps Trash out of the sidebar step", () => {
+    const places = steps(guestFlags).at(-1);
+
+    expect(titles(guestFlags)).toContain("FilesTour:TourPlacesTitle");
+    expect(places?.content).not.toContain("FilesTour:TourPlacesTrash");
   });
 });
 
-describe("getTourSteps — owner", () => {
-  it("keeps the create and Trash steps the guest tour drops", () => {
-    const ownerTargets = targets(ownerFlags);
+describe("getTourSteps — what the page allows", () => {
+  it("drops everything in the filter bar on an empty page", () => {
+    // No filter bar and no banner: no search, no create tiles, no New button.
+    const emptyPage = targets({
+      ...ownerFlags,
+      showFilter: false,
+      hasItems: false,
+    });
 
-    expect(ownerTargets).toContain('[data-testid="quick-actions"]');
-    expect(ownerTargets).toContain('[data-item-id="13"]');
-    expect(ownerTargets).toContain('[data-item-id="5"]');
+    expect(emptyPage).toEqual(['[data-item-id="10"]']);
+  });
+
+  it("drops the sharing step when the folder has no items", () => {
+    expect(targets({ ...ownerFlags, hasItems: false })).not.toContain(
+      SHARE_ICON_TARGET,
+    );
+  });
+
+  it("drops the sidebar and the New menu on a narrow screen", () => {
+    // Tablet collapses the sidebar to icons (sub-items are flattened away) and
+    // the filter bar renders no New button.
+    const tablet = targets({ ...ownerFlags, isDesktop: false });
+
+    expect(tablet).not.toContain('[data-item-id="10"]');
+    expect(tablet).not.toContain(".p-contextmenu");
   });
 
   it("drops the whole sidebar block when the section item is missing", () => {
-    // Nothing to anchor on: no section item means no quick-access steps.
-    const noSidebar = targets({ ...ownerFlags, sectionId: null });
-
-    expect(noSidebar).not.toContain('[data-item-id="10"]');
-    expect(noSidebar).not.toContain('[data-item-id="5"]');
+    // Nothing to anchor on: no section item means no sub-item step.
+    expect(targets({ ...ownerFlags, sectionId: null })).not.toContain(
+      '[data-item-id="10"]',
+    );
   });
 });

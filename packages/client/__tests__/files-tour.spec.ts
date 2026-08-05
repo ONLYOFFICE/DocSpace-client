@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Page } from "@playwright/test";
+
 import {
   settingsHandler,
   TypeSettings,
@@ -46,6 +48,45 @@ import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 const TOUR_KEY = "files_tour_pending";
 // My documents, from packages/shared/__mocks__/handlers/files/root.ts
 const MY_DOCUMENTS_URL = "/rooms/personal/filter?folder=12764";
+
+// The tour, step by step (FilesTour/tourSteps.ts): create tiles, AI chat, the
+// New menu, search, a row's share button, the sidebar shortcuts.
+const CREATE_STEP = 1;
+const NEW_MENU_STEP = 3;
+const SEARCH_STEP = 4;
+const SHARE_STEP = 5;
+
+// The dropdown MainButton opens, portalled to the body.
+const NEW_MENU = ".p-contextmenu";
+// The share button on the first row that has one — hidden until the row is
+// hovered, which the tour's step stands in for.
+const SHARE_BUTTON = '[data-testid^="table-row-"] .badge.copy-link';
+
+/** Arms the tour and lands on the section that starts it by itself. */
+const startTour = async (page: Page, baseUrl: string) => {
+  // The first visit sets an origin so localStorage is reachable.
+  await page.goto(`${baseUrl}${MY_DOCUMENTS_URL}`);
+  await armTour(page, TOUR_KEY);
+  await page.goto(`${baseUrl}${MY_DOCUMENTS_URL}`);
+
+  await expect(tourTooltip(page)).toBeVisible();
+};
+
+/** Which step is up, read off the tooltip's own progress bar. */
+const currentStep = (page: Page) =>
+  tourTooltip(page).locator('[role="progressbar"]');
+
+/** Walks forward with the keyboard until `step` is the one on screen. */
+const goToStep = async (page: Page, step: number) => {
+  for (let i = CREATE_STEP; i < step; i += 1) {
+    await page.keyboard.press("ArrowRight");
+  }
+
+  await expect(currentStep(page)).toHaveAttribute(
+    "aria-valuenow",
+    String(step),
+  );
+};
 
 test.describe("Files tour", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -62,13 +103,92 @@ test.describe("Files tour", () => {
   }) => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 
-    // First visit sets an origin so localStorage is reachable; the reload after
-    // arming the tour is what lands on a section that starts it by itself.
-    await page.goto(`${baseUrl}${MY_DOCUMENTS_URL}`);
-    await armTour(page, TOUR_KEY);
-    await page.goto(`${baseUrl}${MY_DOCUMENTS_URL}`);
+    await startTour(page, baseUrl);
 
     await walkTour(page, ["desktop", "files-tour", "admin"]);
+  });
+
+  test("opens the New menu for its step and puts it away afterwards", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    // Uploading lives in the New menu, so the step opens it — nothing else in
+    // the tour clicks anything on the page.
+    await expect(page.locator(NEW_MENU)).toBeHidden();
+
+    await goToStep(page, NEW_MENU_STEP);
+
+    await expect(page.locator(NEW_MENU)).toBeVisible();
+    await expect(
+      page.locator(NEW_MENU).getByText("Upload files").first(),
+    ).toBeVisible();
+
+    await page.keyboard.press("ArrowRight");
+
+    await expect(currentStep(page)).toHaveAttribute(
+      "aria-valuenow",
+      String(SEARCH_STEP),
+    );
+    // Left open, it would sit on top of the next step's target.
+    await expect(page.locator(NEW_MENU)).toBeHidden();
+  });
+
+  test("reveals the share button the row keeps hidden until hover", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    // The regression this guards: the button is `display: none` outside
+    // `:hover`, so the step pointing at it was dropped and never shown.
+    await expect(page.locator(SHARE_BUTTON).first()).toBeHidden();
+
+    await goToStep(page, SHARE_STEP);
+
+    await expect(page.locator(SHARE_BUTTON).first()).toBeVisible();
+
+    await page.keyboard.press("ArrowLeft");
+
+    await expect(page.locator(SHARE_BUTTON).first()).toBeHidden();
+  });
+
+  test("walks with the arrow keys and survives a click on the backdrop", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    await goToStep(page, 2);
+    await page.keyboard.press("ArrowLeft");
+    await expect(currentStep(page)).toHaveAttribute(
+      "aria-valuenow",
+      String(CREATE_STEP),
+    );
+
+    // A stray click beside the tooltip used to end the tour outright.
+    await page.mouse.click(10, 10);
+
+    await expect(tourTooltip(page)).toBeVisible();
+    await expect(currentStep(page)).toHaveAttribute(
+      "aria-valuenow",
+      String(CREATE_STEP),
+    );
+
+    // Esc is still the keyboard way out.
+    await page.keyboard.press("Escape");
+
+    await expect(tourTooltip(page)).toBeHidden();
   });
 
   // There is no guest variant to walk here: a visitor hitting the personal

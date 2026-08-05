@@ -42,7 +42,11 @@ import { useJoyride, EVENTS, STATUS, ACTIONS, type Step } from "react-joyride";
 import type TourStore from "SRC_DIR/store/TourStore";
 
 import TourTooltip from "./TourTooltip";
-import { isStepTargetPresent } from "./stepBuilders";
+import {
+  isStepTargetPresent,
+  removeRevealedControl,
+  removeUnionSpotlight,
+} from "./stepBuilders";
 
 export type TourStepCallbacks = {
   getSignal: () => AbortSignal | undefined;
@@ -109,7 +113,7 @@ export default function useTour(
 
   const steps = stepsRef.current;
 
-  const { on, Tour } = useJoyride({
+  const { controls, on, Tour } = useJoyride({
     continuous: true,
     steps,
     run: isMobileView ? false : tourStore.isRunning,
@@ -120,7 +124,10 @@ export default function useTour(
     floatingOptions: { hideArrow: true },
     options: {
       overlayColor: "rgba(0, 0, 0, 0.5)",
-      overlayClickAction: "close",
+      // A click on the backdrop does nothing: the tour is a few steps long and
+      // losing it to a stray click beside the tooltip is worse than having to
+      // aim for the close button. Esc still ends it (`dismissKeyAction`).
+      overlayClickAction: false,
       blockTargetInteraction: true,
       skipScroll: true,
       zIndex: 10000,
@@ -143,6 +150,30 @@ export default function useTour(
       tourStore.completeTour();
     }
   }, [isMobileView, tourStore]);
+
+  // Keyboard walking: the arrows step back and forth, which is what a keyboard
+  // user reaches for first. Enter and Space already work — the focus trap puts
+  // them on the tooltip's own Next button — and Esc closes the tour through
+  // joyride's `dismissKeyAction`, so neither is handled here.
+  useEffect(() => {
+    if (!tourStore.isRunning) return undefined;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.altKey || event.metaKey) return;
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        controls.next();
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        controls.prev();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [controls, tourStore.isRunning]);
 
   // Every anchor was filtered out, so there is nothing to show. react-joyride
   // never starts on an empty step list, which would leave the tour flagged as
@@ -169,17 +200,24 @@ export default function useTour(
   }, []);
 
   useEffect(() => {
-    const clearOutline = () => {
+    // Whatever the steps put on the page for their own sake: the accent outline
+    // on a sidebar item, the stand-in node a grouped spotlight measures into,
+    // the class standing in for a hover. A step's `after` hook normally takes
+    // its own down, but a tour that ends on the step — closed, skipped, anchor
+    // gone — never gets there.
+    const clearStepArtifacts = () => {
       document
         .querySelector(".tour-outline-item")
         ?.classList.remove("tour-outline-item");
+      removeUnionSpotlight();
+      removeRevealedControl();
     };
 
     const stopTour = () => {
       stepAbortRef.current?.abort();
       stepAbortRef.current = null;
       currentSignalRef.current = undefined;
-      clearOutline();
+      clearStepArtifacts();
       tourStore.completeTour();
     };
 
@@ -224,7 +262,7 @@ export default function useTour(
       stepAbortRef.current?.abort();
       stepAbortRef.current = null;
       currentSignalRef.current = undefined;
-      clearOutline();
+      clearStepArtifacts();
     });
 
     return () => {

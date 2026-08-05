@@ -87,6 +87,16 @@ function isVisible(element: Element): boolean {
  * instead of stalling on them and then killing the tour.
  */
 export function isStepTargetPresent(step: Step): boolean {
+  // A step that reveals its own target — a menu it clicks open, a control the
+  // row only shows on hover — can't be judged by how the page looks now. When
+  // it names something whose mere presence proves it is worth running, that is
+  // what gets checked (existence only: the target is hidden, not absent).
+  if (step.data?.revealsTarget) {
+    const { presence } = step.data as { presence?: string };
+
+    return presence ? !!document.querySelector(presence) : true;
+  }
+
   const { target } = step;
   let element: Element | null = null;
 
@@ -181,6 +191,191 @@ export function elementStep(
       );
     },
   };
+}
+
+/** Id of the stand-in node that carries a multi-element spotlight rect. */
+const UNION_SPOTLIGHT_ID = "tour-spotlight-union";
+
+/**
+ * An empty node covering the union of `selectors`' boxes, so a spotlight can
+ * cover a run of siblings — the four create tiles — without lighting up the
+ * whole container they share with something the tour highlights separately.
+ * react-joyride resolves `spotlightTarget` down to one element and reads its
+ * rect, so the rect has to belong to a real node.
+ *
+ * Positioned `fixed`, which is both what `getBoundingClientRect` measures and
+ * what joyride's own fixed-target path expects. Recomputed on every call:
+ * joyride re-resolves the target on scroll and resize.
+ *
+ * Falls back to the anchor when nothing measurable is on the page, so a
+ * degenerate rect never sends the spotlight to the viewport corner.
+ */
+function unionSpotlight(selectors: string[], anchorSelector: string) {
+  const anchor = document.querySelector<HTMLElement>(anchorSelector);
+
+  const rects = selectors
+    .map((selector) => document.querySelector(selector))
+    .filter((element): element is Element => !!element && isVisible(element))
+    .map((element) => element.getBoundingClientRect())
+    .filter((rect) => rect.width > 0 && rect.height > 0);
+
+  if (!rects.length) return anchor;
+
+  const top = Math.min(...rects.map((rect) => rect.top));
+  const left = Math.min(...rects.map((rect) => rect.left));
+  const height = Math.max(...rects.map((rect) => rect.bottom)) - top;
+  const width = Math.max(...rects.map((rect) => rect.right)) - left;
+
+  let node = document.getElementById(UNION_SPOTLIGHT_ID);
+
+  if (!node) {
+    node = document.createElement("div");
+    node.id = UNION_SPOTLIGHT_ID;
+    node.setAttribute("aria-hidden", "true");
+    node.style.position = "fixed";
+    node.style.pointerEvents = "none";
+    document.body.appendChild(node);
+  }
+
+  node.style.top = `${top}px`;
+  node.style.left = `${left}px`;
+  node.style.width = `${width}px`;
+  node.style.height = `${height}px`;
+
+  return node;
+}
+
+/** Drops the stand-in node once its step is done with it. */
+export function removeUnionSpotlight() {
+  document.getElementById(UNION_SPOTLIGHT_ID)?.remove();
+}
+
+/**
+ * Like `elementStep`, but the spotlight covers only the `members` inside the
+ * target. The tooltip still anchors on `target`, so a group of siblings can be
+ * highlighted without the container around them.
+ */
+export function elementGroupStep(
+  target: string,
+  members: string[],
+  title: string,
+  body: StepBody,
+  callbacks: TourStepCallbacks | undefined,
+  logLabel: string,
+  spotlightPadding = 6,
+  prepare?: () => void,
+): Step {
+  return {
+    ...elementStep(
+      target,
+      title,
+      body,
+      callbacks,
+      logLabel,
+      spotlightPadding,
+      prepare,
+    ),
+    spotlightTarget: () => unionSpotlight(members, target),
+    after: removeUnionSpotlight,
+  };
+}
+
+/**
+ * Spotlight a menu the step opens itself: `before` clicks the trigger, `after`
+ * clicks it again to put the menu away.
+ *
+ * Both hooks check whether the menu is up first. The trigger toggles, and a
+ * step's hooks run again when the user walks back through the tour — a blind
+ * second click would close the very menu the step is about to spotlight.
+ */
+export function menuStep(
+  triggerSelector: string,
+  menuSelector: string,
+  title: string,
+  body: StepBody,
+  callbacks: TourStepCallbacks | undefined,
+  logLabel: string,
+  // Extra selectors the spotlight takes in alongside the menu — pass the button
+  // that opens it to light up the pair as one region.
+  spotlightWith: string[] = [],
+  spotlightPadding = 4,
+): Step {
+  const isOpen = () => !!document.querySelector(menuSelector);
+  const toggle = () =>
+    document.querySelector<HTMLElement>(triggerSelector)?.click();
+
+  return {
+    target: menuSelector,
+    spotlightTarget: spotlightWith.length
+      ? () => unionSpotlight([menuSelector, ...spotlightWith], menuSelector)
+      : undefined,
+    spotlightPadding,
+    placement: "auto" as const,
+    content: stepContent(body),
+    title,
+    skipBeacon: true,
+    // The menu only exists while this step runs, so the start-of-run DOM check
+    // has to leave it alone (see `isStepTargetPresent`).
+    data: { revealsTarget: true },
+    before: async () => {
+      const signal = callbacks?.getSignal();
+      if (!isOpen()) toggle();
+      await waitForElement(menuSelector, STEP_TARGET_TIMEOUT, signal).catch(
+        silenceNonAbort(logLabel),
+      );
+    },
+    after: () => {
+      if (isOpen()) toggle();
+      removeUnionSpotlight();
+    },
+  };
+}
+
+/**
+ * The class that stands in for a pointer the tour cannot fake, paired with the
+ * rule in TourTooltip.module.scss.
+ */
+const REVEAL_CLASS = "tour-reveal-hidden-control";
+
+/**
+ * Spotlight a control a row only shows while the pointer is over it — ui-kit's
+ * table row keeps the "share" button at `display: none` outside `:hover`, and
+ * `:hover` cannot be simulated from script. The step marks the control instead,
+ * and the paired CSS rule reveals it for as long as the step is up.
+ */
+export function hoverRevealStep(
+  target: string,
+  title: string,
+  body: StepBody,
+  callbacks: TourStepCallbacks | undefined,
+  logLabel: string,
+  spotlightPadding = 4,
+): Step {
+  return {
+    target,
+    spotlightPadding,
+    placement: "auto" as const,
+    content: stepContent(body),
+    title,
+    skipBeacon: true,
+    // Hidden rather than absent: the DOM check has to look for it, not at it.
+    data: { revealsTarget: true, presence: target },
+    before: async () => {
+      const signal = callbacks?.getSignal();
+      document.querySelector(target)?.classList.add(REVEAL_CLASS);
+      await waitForElement(target, STEP_TARGET_TIMEOUT, signal).catch(
+        silenceNonAbort(logLabel),
+      );
+    },
+    after: () => {
+      removeRevealedControl();
+    },
+  };
+}
+
+/** Puts a control revealed by `hoverRevealStep` back the way it was. */
+export function removeRevealedControl() {
+  document.querySelector(`.${REVEAL_CLASS}`)?.classList.remove(REVEAL_CLASS);
 }
 
 /**

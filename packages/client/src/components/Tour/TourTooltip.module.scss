@@ -159,3 +159,12 @@
   outline-offset: -2px;
   border-radius: 3px;
 }
+
+// Stands in for a pointer the tour cannot fake: a row's quick actions are kept
+// at `display: none` until it is hovered (ui-kit's TableRow does this to
+// `.create-share-link`), and `:hover` can't be set from script. The step
+// pointing at such a control marks it with this class — `!important` because the
+// rule it overrides is just as specific.
+:global(.tour-reveal-hidden-control) {
+  display: block !important;
+}

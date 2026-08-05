@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesTrashRestoreSelectedItemsPrompt",
+  "content": "Restore selected items in Trash and show what will be restored before applying the action. If this information is not provided, ask me for the exact items to restore and the destination if applicable.",
+  "content_en_sha1_hash": "dc736c168189791dc0e16427109e062b406479ef",
+  "created_at": "2026-08-04T09:58:55.140Z",
+  "updated_at": "2026-08-04T09:58:56.408Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 303,
+      "context": "name: t(\"AiSuggestions:FilesTrashFindADeletedFile\"),\n prompt: t(\"AiSuggestions:FilesTrashFindADeletedFilePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashRestoreSelectedItems\"),\n prompt: t(\"AiSuggestions:FilesTrashRestoreSelectedItemsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashWhatCanBeDeletedPermanently\"),\n prompt: t(\"AiSuggestions:FilesTrashWhatCanBeDeletedPermanentlyPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key_path": "AiRoomAddToTheKnowledgeBasePrompt",
+  "content": "Add the selected files to the knowledge base and confirm what became available for answers. If this information is not provided, ask me for the files to add.",
+  "content_en_sha1_hash": "b87935e16d26b6abf567b944103c1f3f74283c1b",
+  "created_at": "2026-08-04T09:58:55.089Z",
+  "updated_at": "2026-08-04T09:58:56.436Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 590,
+      "context": "name: t(\"AiSuggestions:AiRoomShowSavedResults\"),\n prompt: t(\"AiSuggestions:AiRoomShowSavedResultsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomAddToTheKnowledgeBase\"),\n prompt: t(\"AiSuggestions:AiRoomAddToTheKnowledgeBasePrompt\"),\n requires: \"create\",\n },\n ],\n \n customRoom: insideRoom,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

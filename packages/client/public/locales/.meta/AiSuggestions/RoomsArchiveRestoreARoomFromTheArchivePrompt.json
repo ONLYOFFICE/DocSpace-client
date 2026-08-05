@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsArchiveRestoreARoomFromTheArchivePrompt",
+  "content": "Restore the selected room from the archive after showing its name and current access settings. If this information is not provided, ask me for the exact items to restore and the destination if applicable.",
+  "content_en_sha1_hash": "054c17b5333ebe8bb7894fee2b639819d8461f0e",
+  "created_at": "2026-08-04T09:58:55.199Z",
+  "updated_at": "2026-08-04T09:58:56.425Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 501,
+      "context": "name: t(\"AiSuggestions:RoomsArchiveFindARoomInTheArchive\"),\n prompt: t(\"AiSuggestions:RoomsArchiveFindARoomInTheArchivePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsArchiveRestoreARoomFromTheArchive\"),\n prompt: t(\"AiSuggestions:RoomsArchiveRestoreARoomFromTheArchivePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsArchiveDeleteAnArchivedRoom\"),\n prompt: t(\"AiSuggestions:RoomsArchiveDeleteAnArchivedRoomPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

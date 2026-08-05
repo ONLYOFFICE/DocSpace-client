@@ -1,0 +1,28 @@
+{
+  "key_path": "AiFormShowTheFields",
+  "content": "Show the form fields",
+  "content_en_sha1_hash": "311b360a535b6d2b69d57d314feabe4aabefb58d",
+  "created_at": "2026-08-04T09:58:55.104Z",
+  "updated_at": "2026-08-04T09:58:56.466Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 821,
+      "context": "{\n name: t(\"AiSuggestions:AiFormAnalyzeTheForm\"),\n prompt: t(\"AiSuggestions:AiFormAnalyzeTheFormPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormShowTheFields\"),\n prompt: t(\"AiSuggestions:AiFormShowTheFieldsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormWhatIsStillEmpty\"),\n prompt: t(\"AiSuggestions:AiFormWhatIsStillEmptyPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

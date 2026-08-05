@@ -1,0 +1,28 @@
+{
+  "key_path": "FilesFavoritesSummarizeFavoritesPrompt",
+  "content": "Summarize my favorite files and highlight their main topics, decisions, tasks, and risks. If this information is not provided, ask me for the desired scope, focus, and summary length.",
+  "content_en_sha1_hash": "08a4a802e128945b60775ad283891cc3259066b2",
+  "created_at": "2026-08-04T09:58:55.112Z",
+  "updated_at": "2026-08-04T09:58:56.407Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 273,
+      "context": "// +\n filesFavorites: [\n {\n name: t(\"AiSuggestions:FilesFavoritesSummarizeFavorites\"),\n prompt: t(\"AiSuggestions:FilesFavoritesSummarizeFavoritesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFavoritesFindInformationInFavorites\"),\n prompt: t(\n \"AiSuggestions:FilesFavoritesFindInformationInFavoritesPrompt\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

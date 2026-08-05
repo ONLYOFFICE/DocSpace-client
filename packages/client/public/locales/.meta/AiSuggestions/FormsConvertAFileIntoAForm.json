@@ -1,0 +1,28 @@
+{
+  "key_path": "FormsConvertAFileIntoAForm",
+  "content": "Convert a file into a form",
+  "content_en_sha1_hash": "d40923803d0f379ce449ac7c5e65fceec3e90619",
+  "created_at": "2026-08-04T09:58:55.159Z",
+  "updated_at": "2026-08-04T09:58:56.450Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 665,
+      "context": "name: t(\"AiSuggestions:FormsCreateAFormWithAI\"),\n prompt: t(\"AiSuggestions:FormsCreateAFormWithAIPrompt\"),\n requires: \"contentCreator\",\n },\n {\n name: t(\"AiSuggestions:FormsConvertAFileIntoAForm\"),\n prompt: t(\"AiSuggestions:FormsConvertAFileIntoAFormPrompt\"),\n requires: \"contentCreator\",\n },\n ],",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

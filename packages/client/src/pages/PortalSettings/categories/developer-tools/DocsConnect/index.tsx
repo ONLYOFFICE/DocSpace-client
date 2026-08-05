@@ -126,18 +126,11 @@ const DocsConnect = ({
 
   if (!info) return <PromoPage />;
 
-  if (isDocsConnectCanceled(info)) {
-    return (
-      <>
-        <PromoPage canceled />
-        {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
-      </>
-    );
-  }
+  const canceled = isDocsConnectCanceled(info);
 
   return (
     <BillingRoot config={paymentConfig}>
-      <TenantPanel />
+      {canceled ? <PromoPage canceled /> : <TenantPanel />}
       {buyPlanPanelVisible ? <BuyPlanPanel /> : null}
       {cancelPlanDialogVisible ? <CancelPlanDialog /> : null}
       {removeSubscriptionDialogVisible ? <RemoveSubscriptionDialog /> : null}

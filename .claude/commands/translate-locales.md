@@ -2,17 +2,38 @@
 
 Translate new or broken i18n keys across all supported languages in the DocSpace monorepo.
 
-## Step 1 — find what's broken
+## Step 1 — find what's missing or broken
 
-Run the translation tests and capture the output:
+### A. Missing keys — fastest, machine-readable
+
+```bash
+node common/scripts/translation-stats.js --no-meta --missing
+```
+
+Lists every `Namespace:Key` that exists for `en` but is absent for a language, grouped by language and package, plus namespace files missing entirely (`no locale file: X.json`). Narrow it with `--lang=tr,ko-KR`, or use `--json` and read `languages[].missingByPackage`.
+
+### B. Missing keys + broken values — the test suite
 
 ```bash
 cd common/tests && npx vitest run test/locales.test.js 2>&1
 ```
 
-Parse the failures. Each failure identifies a `lng`, a `key` (format `Namespace:KeyName`), and a description of the problem (wrong/missing variables, unpaired brackets, wrong script, untranslated text, etc.).
+Relevant failures:
 
-If there are no test failures and the user asked to translate **specific keys**, skip to Step 2 with those keys.
+- `NotTranslatedOnAllLanguages` — keys absent (or empty) in **any** language
+- `MissingLocaleFilesTest` — namespace file absent for a language
+- `NotTranslatedOnBaseLanguages` — same, restricted to the 12 base languages
+- everything else — broken values: wrong/missing variables, unpaired brackets, wrong script, untranslated long strings, …
+
+For missing keys only, without the rest of the suite:
+
+```bash
+cd common/tests && npm run test:only-missing-keys
+```
+
+Each failure identifies a language, a key (`Namespace:KeyName`), and the problem.
+
+If nothing fails and the user asked to translate **specific keys**, skip to Step 2 with those keys.
 
 ## Step 2 — resolve workspace and file paths
 
@@ -105,22 +126,24 @@ Frame each translation as:
 
 Use the Edit tool to replace only the affected key values in the JSON files. Do not touch other keys. Preserve JSON indentation and trailing commas consistent with the rest of the file.
 
+If a namespace file is missing for a language entirely, create it with the full set of translated keys, matching the key order of the English file.
+
 ## Step 6 — verify
 
-Re-run the tests:
+Re-run the tests and confirm the coverage report is clean:
 
 ```bash
 cd common/tests && npx vitest run test/locales.test.js 2>&1
+node common/scripts/translation-stats.js --no-meta
 ```
 
-If failures remain, fix them following the same process. Report the final result to the user.
+`translation-stats.js` must report `Miss` = 0 for every language. If failures remain, fix them following the same process. Report the final result to the user.
 
 ## Supported languages
 
 All languages present under each workspace's `locales/` directory must be translated — currently:
 `ar-SA, az, bg, cs, de, el-GR, es, fi, fr, hy-AM, it, ja-JP, ko-KR, lo-LA, lv, nl, pl, pt, pt-BR, ro, ru, si, sk, sl, sq-AL, sr-Cyrl-RS, sr-Latn-RS, tr, uk-UA, vi, zh-CN`
 
-The test suite (`NotTranslatedOnBaseLanguages`) only enforces:
-`de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru, sr-Cyrl-RS, sr-Latn-RS, zh-CN`
+`NotTranslatedOnBaseLanguages` only enforces `de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru, sr-Cyrl-RS, sr-Latn-RS, zh-CN`. The remaining 19 languages are covered by `NotTranslatedOnAllLanguages` — never treat a green `NotTranslatedOnBaseLanguages` as proof that all languages are done.
 
-— but the remaining languages must be translated too. A clean test run does not mean all languages are covered.
+Not covered by any test: `libs/ui-kit/locales/` — the ui-kit is a git submodule, and its locale gaps have to be fixed in the `docspace-ui-kit-react` repository.

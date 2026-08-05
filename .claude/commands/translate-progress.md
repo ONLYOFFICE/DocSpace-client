@@ -1,68 +1,77 @@
 # Translation progress check
 
-Show how many locale keys are still missing across all workspaces.
+Show how many locale keys are still missing across all workspaces and languages.
 
-## Step 1 — run the tests
+## Step 1 — get the coverage report
 
 ```bash
-cd common/tests && npx vitest run test/locales.test.js 2>&1
+node common/scripts/translation-stats.js --no-meta
 ```
 
-## Step 2 — parse and summarize
+The `Miss` column is the number of keys that exist for `en` but are absent for that language. `Pct` is coverage. A language is done only when `Miss` = 0.
 
-From the output, extract all `NotTranslatedOnBaseLanguages` failures and count:
+Add `--no-meta` unless the user also wants the spell-check / metadata sections (they are slower to compute).
 
-- Total failing languages
-- Total failing keys per language
-- List of unique missing keys
+## Step 2 — list the actual missing keys
 
-## Step 3 — cross-check all languages (not just base)
-
-For each unique missing key found in Step 2, resolve its namespace file path using this table:
-
-| Namespace | Path |
-|-----------|------|
-| `Common` | `public/locales/{lang}/Common.json` |
-| `Settings`, `Services`, `Payments` | `packages/client/public/locales/{lang}/Settings.json` etc. |
-| *everything else* | `packages/client/public/locales/{lang}/{Namespace}.json` |
-
-Then run a quick Python check across **all** supported languages to see which ones are missing those keys:
-
-```python
-import json, os
-
-keys   = [...]   # unique missing keys from Step 2
-ns_dir = "..."   # resolved locales dir for the namespace
-
-langs = sorted([d for d in os.listdir(ns_dir) if os.path.isdir(os.path.join(ns_dir, d)) and not d.startswith('.')])
-for lang in langs:
-    f = os.path.join(ns_dir, lang, f"{namespace}.json")
-    if not os.path.exists(f):
-        continue
-    with open(f) as fh:
-        data = json.load(fh)
-    missing = [k for k in keys if k not in data]
-    status = f"✓ done" if not missing else f"✗ missing {len(missing)}"
-    print(f"{lang:15s} {status}")
+```bash
+node common/scripts/translation-stats.js --no-meta --missing
 ```
+
+Output is grouped by language and package:
+
+```
+  tr — common (26 keys)
+    Common:ArbiterAttachFile
+    ...
+
+  lo-LA — client (264 keys)
+    no locale file: AiSuggestions.json
+    AiSuggestions:AiRoomAddToTheKnowledgeBase
+    ...
+```
+
+Narrow the scope when the user asked about specific languages or packages:
+
+```bash
+node common/scripts/translation-stats.js --no-meta --missing --lang=tr,ko-KR --package=common
+```
+
+For machine-readable output use `--json` and read `languages[].missingByPackage` (a `{ package: ["Namespace:Key", …] }` map) or `packages[].languages[].missingKeyIds`.
+
+## Step 3 — cross-check with the tests
+
+```bash
+cd common/tests && npm run test:only-missing-keys
+```
+
+Runs `NotTranslatedOnAllLanguages` (keys absent or empty in any language) and `MissingLocaleFilesTest` (namespace file absent for a language). These two must agree with Step 2; a disagreement means one of the two tools has a bug worth reporting.
+
+Note: `NotTranslatedOnBaseLanguages` only checks `de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru, sr-Cyrl-RS, sr-Latn-RS, zh-CN`. A green result there says nothing about the other 19 languages.
 
 ## Step 4 — report
 
-Print a summary table:
+Summarize per namespace and language, e.g.:
 
 ```
-Namespace: Settings  (19 keys)
+Common  (26 keys missing in 19 languages)
 
 Language        Status
 ──────────────────────────────
-ar-SA           ✗ missing 19
-az              ✗ missing 19
-bg              ✓ done
-cs              ✗ missing 3
+ar-SA           ✗ missing 26
+bg              ✗ missing 26
 de              ✓ done
 ...
 
-Done: 8 / 31   Pending: 23
+Done: 12 / 31   Pending: 19
 ```
 
-If all languages are complete, print: **All translations complete.**
+Call out separately:
+- languages where a whole namespace file is missing (they need the file created, not just keys added)
+- the `Same` column from Step 1 — keys whose value is byte-identical to English, i.e. likely copied rather than translated
+
+If every language reports `Miss` = 0, print: **All translations complete.**
+
+## Out of scope
+
+`libs/ui-kit/locales/` is not measured by `translation-stats.js` and not covered by the locales tests — the ui-kit is a git submodule and its gaps must be fixed in the `docspace-ui-kit-react` repository. To check it manually, compare `libs/ui-kit/locales/en/*.json` against the other language folders.

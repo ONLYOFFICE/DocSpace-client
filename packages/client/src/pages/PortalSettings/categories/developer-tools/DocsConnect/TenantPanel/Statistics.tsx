@@ -46,6 +46,7 @@ import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import { getDocsConnectScheduleFlags } from "@docspace/ui-kit/billing/utils/docs-connect";
 import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
@@ -56,7 +57,11 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
-import { formatDocsConnectDate, getDocsConnectTrialState } from "../utils";
+import {
+  formatDocsConnectDate,
+  getDocsConnectPricePerUser,
+  getDocsConnectTrialState,
+} from "../utils";
 
 import InfoField from "./sub-components/InfoField";
 import UsageBlock from "./sub-components/UsageBlock";
@@ -111,7 +116,7 @@ const Statistics = ({
 
   if (!info) return null;
 
-  const { tenant, config, tenantInfo, prices, wallet } = info;
+  const { tenant, config, tenantInfo, wallet } = info;
   const {
     isTrial,
     startDate: trialStart,
@@ -135,28 +140,23 @@ const Statistics = ({
 
   const currency = wallet?.currency ?? "USD";
   const { devPackEnabled } = info;
-  const pricePerUser =
-    (prices?.pricePerUser ?? 0) +
-    (devPackEnabled ? (prices?.devPackPrice ?? 0) : 0);
+  const pricePerUser = getDocsConnectPricePerUser(info);
   const planUsers = tenant.payment?.quantity ?? 0;
   const monthlyCharge = planUsers * pricePerUser;
   const scheduledChange = isTrial ? null : (info.scheduledChange ?? null);
-  const isCancellation =
-    scheduledChange != null && scheduledChange.nextUsers === 0;
   const deactivated = !isTrial && (info.deactivated ?? false);
 
   const nextDevPackEnabled =
     scheduledChange?.nextDevPackEnabled ?? devPackEnabled;
-  const nextPricePerUser =
-    (prices?.pricePerUser ?? 0) +
-    (nextDevPackEnabled ? (prices?.devPackPrice ?? 0) : 0);
-  const devPackDisabling =
-    scheduledChange != null &&
-    !isCancellation &&
-    scheduledChange.scheduledOnDevPack &&
-    !nextDevPackEnabled;
-  const usersAdjusting =
-    scheduledChange != null && scheduledChange.nextUsers !== planUsers;
+  const nextPricePerUser = getDocsConnectPricePerUser(info, nextDevPackEnabled);
+  const { isCancellation, devPackDisabling, usersAdjusting } =
+    getDocsConnectScheduleFlags({
+      hasSubscription: !isTrial,
+      currentUsers: planUsers,
+      scheduledUsers: scheduledChange?.nextUsers ?? null,
+      scheduledOnDevPack: scheduledChange?.scheduledOnDevPack ?? false,
+      nextDevPackEnabled,
+    });
 
   const nextMonthlyPrice = formatCurrencyValue(
     i18n.language,

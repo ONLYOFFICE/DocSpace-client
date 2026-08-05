@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomsFindRoomsByParticipant",
+  "content": "Find rooms by participant",
+  "content_en_sha1_hash": "d4ee79a6aecd8c391769cd1e1ca65ef8c0e5c641",
+  "created_at": "2026-08-04T09:58:55.204Z",
+  "updated_at": "2026-08-04T09:58:56.420Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 400,
+      "context": "{\n name: t(\"AiSuggestions:RoomsHelpMeChooseARoomType\"),\n prompt: t(\"AiSuggestions:RoomsHelpMeChooseARoomTypePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsFindRoomsByParticipant\"),\n prompt: t(\"AiSuggestions:RoomsFindRoomsByParticipantPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsFindARoomByFile\"),\n prompt: t(\"AiSuggestions:RoomsFindARoomByFilePrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

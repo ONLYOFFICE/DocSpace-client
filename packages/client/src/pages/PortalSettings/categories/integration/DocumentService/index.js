@@ -431,7 +431,7 @@ const DocumentService = ({
             <InputBlock
               id="secretKey"
               name="secret_key"
-              type={isSecretKeyMasked ? "password" : "text"}
+              type="text"
               autoComplete="off"
               tabIndex={2}
               scale

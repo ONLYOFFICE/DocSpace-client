@@ -117,6 +117,7 @@ interface BuyPlanPanelProps {
   isCardMissingOrInactive?: boolean;
   isPayer?: boolean;
   walletCustomerEmail?: string | null;
+  walletCustomerDisplayName?: string | null;
   fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
   fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
   closeBuyPlan?: () => void;
@@ -132,6 +133,7 @@ const BuyPlanPanel = ({
   isCardMissingOrInactive,
   isPayer,
   walletCustomerEmail,
+  walletCustomerDisplayName,
   fetchPayerInfo,
   fetchWalletBalance,
   closeBuyPlan,
@@ -873,16 +875,25 @@ const BuyPlanPanel = ({
                 t={t}
                 ns="Common"
                 i18nKey="InsufficientCreditsContactPayer"
-                values={{ email: walletCustomerEmail }}
+                values={{
+                  payerContact: walletCustomerDisplayName || walletCustomerEmail,
+                }}
                 components={{
-                  1: (
-                    <Link
-                      tag="a"
-                      color="accent"
-                      href={`mailto:${walletCustomerEmail}`}
-                      dataTestId="docs_connect_contact_payer_link"
-                    />
-                  ),
+                  1:
+                    walletCustomerEmail && !walletCustomerDisplayName ? (
+                      <Link
+                        tag="a"
+                        color="accent"
+                        href={`mailto:${walletCustomerEmail}`}
+                        dataTestId="docs_connect_contact_payer_link"
+                      />
+                    ) : (
+                      <Text
+                        as="span"
+                        fontWeight={600}
+                        dataTestId="docs_connect_contact_payer_name"
+                      />
+                    ),
                 }}
               />
             </Text>
@@ -1001,6 +1012,8 @@ export default inject(
     isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,
     isPayer: paymentStore.isPayer,
     walletCustomerEmail: currentTariffStatusStore.walletCustomerEmail,
+    walletCustomerDisplayName:
+      currentTariffStatusStore.walletCustomerInfo?.displayName,
     fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
     fetchWalletBalance: paymentStore.fetchWalletBalance,
     closeBuyPlan: docsConnectStore.closeBuyPlan,

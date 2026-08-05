@@ -183,5 +183,6 @@ export interface ManualBackupProps {
 	walletBalance?: number;
 	walletCodeCurrency?: string;
 	isCardLinked?: boolean;
+	onOpenTopUpDialog?: () => void;
 	fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
 }

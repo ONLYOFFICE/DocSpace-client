@@ -200,6 +200,7 @@ const ManualBackup = ({
   walletCodeCurrency,
   isCardLinked = false,
   fetchWalletBalance,
+  onOpenTopUpDialog,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -222,7 +223,9 @@ const ManualBackup = ({
 
   const isTopUpBeforeCopy = isBalanceInsufficient && isPayer && isCardLinked;
 
-  const isCopyBlocked = isBalanceInsufficient && !isPayer;
+  const isTopUpDialogBeforeCopy = !isCardLinked && !!onOpenTopUpDialog;
+
+  const isCopyBlocked = isBalanceInsufficient && isCardLinked && !isPayer;
 
   // Memoized: StatusMessage replays its show animation whenever the message
   // identity changes, so a fresh element on every render makes it blink.
@@ -241,11 +244,17 @@ const ManualBackup = ({
 
   const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);
 
-  const copyButtonLabel = isTopUpBeforeCopy
-    ? t("Common:TopUpAndMakeCopy")
-    : undefined;
+  const copyButtonLabel =
+    isTopUpBeforeCopy || isTopUpDialogBeforeCopy
+      ? t("Common:TopUpAndMakeCopy")
+      : undefined;
 
   const topUpIfNeeded = async () => {
+    if (isTopUpDialogBeforeCopy) {
+      onOpenTopUpDialog?.();
+      return false;
+    }
+
     if (!isTopUpBeforeCopy) return true;
 
     setIsToppingUp(true);

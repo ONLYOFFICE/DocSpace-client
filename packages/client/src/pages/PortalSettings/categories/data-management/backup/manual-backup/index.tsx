@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -41,7 +41,9 @@ import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import { getBackupsCount } from "@docspace/shared/api/backup";
+import { BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
 
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import type {
@@ -61,9 +63,14 @@ const ManualBackupWrapper = ({
   isInitialLoading,
   setIsEmptyContentBeforeLoader,
   fetchWalletBalance,
+  language,
+  refreshPayerInfo,
+  refreshBackupService,
   ...props
 }: ManualBackupWrapperProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
+
+  const [isTopUpVisible, setIsTopUpVisible] = useState(false);
 
   useLayoutEffect(() => {
     setDocumentTitle(t("Common:DataBackup"));
@@ -91,16 +98,33 @@ const ManualBackupWrapper = ({
   };
 
   return (
-    <ManualBackup
-      isNotPaidPeriod={isNotPaidPeriod}
-      isInitialLoading={isInitialLoading}
-      isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
-      setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
-      setDownloadingProgress={updateDownloadingProgress}
-      isBackupPaid={isBackupPaid}
-      fetchWalletBalance={fetchWalletBalance}
-      {...props}
-    />
+    <>
+      <ManualBackup
+        isNotPaidPeriod={isNotPaidPeriod}
+        isInitialLoading={isInitialLoading}
+        isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+        setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+        setDownloadingProgress={updateDownloadingProgress}
+        isBackupPaid={isBackupPaid}
+        fetchWalletBalance={fetchWalletBalance}
+        onOpenTopUpDialog={() => setIsTopUpVisible(true)}
+        {...props}
+      />
+      {isTopUpVisible ? (
+        <ClientSimpleTopUpDialog
+          visible={isTopUpVisible}
+          onClose={() => setIsTopUpVisible(false)}
+          onConfirm={async () => {
+            await Promise.all([
+              refreshPayerInfo?.(true),
+              refreshBackupService?.(),
+            ]);
+          }}
+          service={BACKUP_SERVICE}
+          language={language}
+        />
+      ) : null}
+    </>
   );
 };
 
@@ -116,6 +140,7 @@ export default inject(
     currentQuotaStore,
     paymentStore,
     clientLoadingStore,
+    authStore,
   }: TStore) => {
     const {
       accounts,
@@ -171,6 +196,7 @@ export default inject(
       walletBalance,
       walletCodeCurrency,
       isCardLinkedToPortal,
+      handleServiceQuota,
     } = paymentStore;
     const {
       newPath,
@@ -192,7 +218,8 @@ export default inject(
       setDeleteThirdPartyDialogVisible,
     } = dialogsStore;
 
-    const { isNotPaidPeriod, walletCustomerEmail } = currentTariffStatusStore;
+    const { isNotPaidPeriod, walletCustomerEmail, fetchPayerInfo } =
+      currentTariffStatusStore;
 
     const {
       providers,
@@ -204,6 +231,7 @@ export default inject(
       currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
+    const { language } = authStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
 
@@ -322,6 +350,10 @@ export default inject(
       walletCodeCurrency,
       isCardLinked: isCardLinkedToPortal,
       fetchWalletBalance: paymentStore.fetchWalletBalance,
+
+      language,
+      refreshPayerInfo: fetchPayerInfo,
+      refreshBackupService: handleServiceQuota,
 
       // clientLoadingStore
       isInitialLoading: showPortalSettingsLoader,

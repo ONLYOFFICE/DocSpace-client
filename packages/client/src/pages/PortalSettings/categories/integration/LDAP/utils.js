@@ -33,12 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+const LDAP_URL = "/portal-settings/integration/ldap";
+
 export const onChangeUrl = () => {
   const currentUrl = window.location.href.replace(window.location.origin, "");
 
-  const newUrl = "/portal-settings/integration/ldap";
+  if (!currentUrl.startsWith(`${LDAP_URL}/`)) return;
 
-  if (newUrl === currentUrl) return;
-
-  return newUrl;
+  return LDAP_URL;
 };

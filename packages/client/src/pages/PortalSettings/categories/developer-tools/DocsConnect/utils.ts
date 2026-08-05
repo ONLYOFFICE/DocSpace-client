@@ -58,6 +58,34 @@ export const isDocsConnectCanceled = (info: TDocsConnectInfo): boolean =>
   info.scheduledChange == null &&
   (info.tenant.payment?.quantity ?? 0) === 0;
 
+export const getDocsConnectPricePerUser = (
+  info: TDocsConnectInfo,
+  devPackEnabled: boolean = info.devPackEnabled,
+): number =>
+  (info.prices?.pricePerUser ?? 0) +
+  (devPackEnabled ? (info.prices?.devPackPrice ?? 0) : 0);
+
+export type TDocsConnectScheduledState = {
+  scheduledUsers: number | null;
+  scheduledDate: string;
+  nextDevPackEnabled: boolean;
+  scheduledOnDevPack: boolean;
+};
+
+export const getDocsConnectScheduledState = (
+  info: TDocsConnectInfo,
+  hasSubscription: boolean = true,
+): TDocsConnectScheduledState => {
+  const change = hasSubscription ? (info.scheduledChange ?? null) : null;
+
+  return {
+    scheduledUsers: change?.nextUsers ?? null,
+    scheduledDate: change?.dueDate ?? "",
+    nextDevPackEnabled: change?.nextDevPackEnabled ?? info.devPackEnabled,
+    scheduledOnDevPack: change?.scheduledOnDevPack ?? false,
+  };
+};
+
 const base64UrlEncode = (bytes: Uint8Array): string => {
   let binary = "";
   bytes.forEach((byte) => {

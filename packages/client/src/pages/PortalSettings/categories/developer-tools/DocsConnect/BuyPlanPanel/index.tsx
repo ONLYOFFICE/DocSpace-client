@@ -42,6 +42,7 @@ import { useApi } from "@docspace/ui-kit/providers/api";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
@@ -113,6 +114,8 @@ interface BuyPlanPanelProps {
     signal: AbortSignal;
   }) => Promise<boolean>;
   isCardMissingOrInactive?: boolean;
+  isPayer?: boolean;
+  walletCustomerEmail?: string | null;
   fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
   fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
   closeBuyPlan?: () => void;
@@ -126,6 +129,8 @@ const BuyPlanPanel = ({
   switchToDevPack,
   buyPlanViaStripe,
   isCardMissingOrInactive,
+  isPayer,
+  walletCustomerEmail,
   fetchPayerInfo,
   fetchWalletBalance,
   closeBuyPlan,
@@ -273,6 +278,7 @@ const BuyPlanPanel = ({
   const remainingCredits = availableCredits - chargeNow;
   const insufficientFunds = chargeNow > 0 && remainingCredits < 0;
   const topUpRequired = Math.ceil(chargeNow - availableCredits);
+  const isTopUpUnavailable = insufficientFunds && !isPayer;
 
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);
@@ -845,7 +851,30 @@ const BuyPlanPanel = ({
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
-          {insufficientFunds ? (
+          {isTopUpUnavailable ? (
+            <Text
+              fontSize="13px"
+              fontWeight={400}
+              className={styles.footerHint}
+            >
+              <Trans
+                t={t}
+                ns="Common"
+                i18nKey="InsufficientCreditsContactPayer"
+                values={{ email: walletCustomerEmail }}
+                components={{
+                  1: (
+                    <Link
+                      tag="a"
+                      color="accent"
+                      href={`mailto:${walletCustomerEmail}`}
+                      dataTestId="docs_connect_contact_payer_link"
+                    />
+                  ),
+                }}
+              />
+            </Text>
+          ) : insufficientFunds ? (
             <Text
               fontSize="13px"
               fontWeight={400}
@@ -906,10 +935,10 @@ const BuyPlanPanel = ({
                 isEditActive
                   ? isScheduled
                     ? t("Common:ScheduleChange")
-                    : insufficientFunds
+                    : insufficientFunds && !isTopUpUnavailable
                       ? t("DocsConnect:TopUpAndBuy")
                       : t("Common:Upgrade")
-                  : insufficientFunds
+                  : insufficientFunds && !isTopUpUnavailable
                     ? info.deactivated
                       ? t("Common:TopUpAndPay")
                       : t("DocsConnect:TopUpAndBuy")
@@ -918,7 +947,10 @@ const BuyPlanPanel = ({
               onClick={onBuy}
               isLoading={submitting}
               isDisabled={
-                submitting || calcPending || (isEditActive && !hasChanges)
+                submitting ||
+                calcPending ||
+                (isEditActive && !hasChanges) ||
+                isTopUpUnavailable
               }
               testId="docs_connect_buy_plan_submit"
             />
@@ -955,6 +987,8 @@ export default inject(
     switchToDevPack: docsConnectStore.switchToDevPack,
     buyPlanViaStripe: docsConnectStore.buyPlanViaStripe,
     isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,
+    isPayer: paymentStore.isPayer,
+    walletCustomerEmail: currentTariffStatusStore.walletCustomerEmail,
     fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
     fetchWalletBalance: paymentStore.fetchWalletBalance,
     closeBuyPlan: docsConnectStore.closeBuyPlan,

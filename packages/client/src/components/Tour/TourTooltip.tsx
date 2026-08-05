@@ -52,7 +52,6 @@ export default function TourTooltip({
   backProps,
   closeProps,
   primaryProps,
-  skipProps,
   tooltipProps,
 }: TooltipRenderProps) {
   const stopPropagation = (e: React.MouseEvent) => {
@@ -61,7 +60,6 @@ export default function TourTooltip({
 
   const titleId = useId();
   const descId = useId();
-  const hasSkip = !!skipProps?.title && index < size - 1;
 
   return (
     <div
@@ -90,17 +88,23 @@ export default function TourTooltip({
       ) : null}
 
       <div className={styles.footer}>
-        <span className={styles.progress}>
-          {index + 1} / {size}
-        </span>
-        <div className={styles.buttons}>
-          {hasSkip ? (
-            <Button
-              label={skipProps.title}
-              size={ButtonSize.extraSmall}
-              onClick={skipProps.onClick}
+        <div
+          className={styles.progress}
+          role="progressbar"
+          aria-valuenow={index + 1}
+          aria-valuemin={1}
+          aria-valuemax={size}
+          aria-label={`${index + 1} / ${size}`}
+        >
+          {Array.from({ length: size }, (_, i) => (
+            <span
+              // eslint-disable-next-line react/no-array-index-key
+              key={i}
+              className={i === index ? styles.dotCurrent : styles.dot}
             />
-          ) : null}
+          ))}
+        </div>
+        <div className={styles.buttons}>
           {index > 0 ? (
             <Button
               label={backProps.title}

@@ -38,8 +38,6 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useJoyride, EVENTS, STATUS, ACTIONS, type Step } from "react-joyride";
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import type TourStore from "SRC_DIR/store/TourStore";
 
@@ -65,7 +63,6 @@ export default function useTour(
   isMobileView: boolean,
   logLabel: string,
 ) {
-  const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
 
   const stepAbortRef = useRef<AbortController | null>(null);
@@ -118,10 +115,10 @@ export default function useTour(
     run: isMobileView ? false : tourStore.isRunning,
     scrollToFirstStep: false,
     tooltipComponent: TourTooltip,
+    // The tooltip reads as a free-floating card, so it carries no arrow toward
+    // its anchor — the spotlight is what ties it to the target.
+    floatingOptions: { hideArrow: true },
     options: {
-      arrowColor: isBase ? globalColors.white : globalColors.black,
-      arrowBase: 18,
-      arrowSize: 8,
       overlayColor: "rgba(0, 0, 0, 0.5)",
       overlayClickAction: "close",
       blockTargetInteraction: true,
@@ -138,7 +135,6 @@ export default function useTour(
       close: t("Common:CloseButton"),
       last: t("Common:Done"),
       next: t("Common:Next"),
-      skip: t("Common:Skip"),
     },
   });
 

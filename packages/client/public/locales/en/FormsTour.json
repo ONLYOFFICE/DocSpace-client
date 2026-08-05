@@ -1,16 +1,4 @@
 {
-  "FeatureCollect": "Send one link and let many people fill the form out — every submission is saved as its own copy.",
-  "FeatureCollectTitle": "Collect responses",
-  "FeatureExport": "Results can pile up into a spreadsheet automatically, or flow straight into your own database.",
-  "FeatureExportTitle": "Get the results out",
-  "FeatureFillOut": "Open a form, fill in the fields, and submit it — no downloads and no extra software.",
-  "FeatureFillOutTitle": "Fill forms in the browser",
-  "FeatureFillPrivacy": "Every submission is a separate copy, so the other people filling the same form never see it.",
-  "FeatureFillPrivacyTitle": "Your answers stay yours",
-  "FeatureForms": "Turn a PDF into an interactive form with fields people fill out right in the browser.",
-  "FeatureFormsTitle": "Ready-to-fill PDF forms",
-  "FeatureGallery": "Start from a ready-made form in the gallery instead of building one from scratch.",
-  "FeatureGalleryTitle": "Start from a template",
   "FormsColumns": "Click the gear to choose the columns you care about — tags, owner, or the date of the last activity.",
   "FormsColumnsTitle": "Customize the columns",
   "FormsCreate": "Two ways to start collecting, depending on whether this is a new form or a routine you repeat.",
@@ -54,6 +42,5 @@
   "FormsTemplatesKeeps": "A template keeps the blank form, the roles, the tags, and the result settings.",
   "FormsTemplatesTitle": "Space templates",
   "FormsTrash": "Deleted form spaces land in Trash, so a wrong click is not the end. Restore one from there, or empty Trash to free up space.",
-  "FormsTrashTitle": "Trash",
-  "FormsWelcomeTitle": "Welcome to Forms"
+  "FormsTrashTitle": "Trash"
 }

@@ -62,65 +62,59 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
+
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 
 import AppPromoDialog from "./AppPromoDialog";
 import { getAppPromoContent } from "./configs";
 
-// One localStorage flag per app — "this user has already seen <app>'s promo".
-const seenKey = (appId: AppId) => `app-promo-seen:${appId}`;
-
-const hasSeen = (appId: AppId): boolean => {
-  try {
-    return localStorage.getItem(seenKey(appId)) === "true";
-  } catch {
-    // Private mode / storage disabled — fall back to always navigating.
-    return true;
-  }
-};
-
-const markSeen = (appId: AppId): void => {
-  try {
-    localStorage.setItem(seenKey(appId), "true");
-  } catch {
-    // No-op: a failed write just means the promo may show again.
-  }
-};
-
 type UseAppPromo = {
   // Wrap any app-launch navigation. Returns true when it handled the click by
-  // opening the promo (caller must NOT navigate); false when the user has
-  // already seen it (caller proceeds with its own navigation).
+  // opening the promo (caller must NOT navigate); false when the app has no
+  // promo content at all (caller proceeds with its own navigation).
   maybeShowPromo: (appId: AppId) => boolean;
   // Render once in the page tree — the promo modal itself.
   promoDialog: React.ReactElement | null;
 };
 
 /**
- * Drives the first-run "introduce this app" promo. Call `maybeShowPromo(appId)`
- * from every entry point that opens an app (dashboard card, sidebar item). On
- * the first click it shows the promo and returns true (intercepting the
- * navigation); the promo's "Open …" button persists the seen flag and runs the
- * navigation. The close icon / backdrop dismisses without navigating.
+ * Drives the "introduce this app" promo. Call `maybeShowPromo(appId)` from every
+ * entry point that opens an app (dashboard card, sidebar item). It shows the
+ * promo on every click — there is no "already seen" state — and returns true to
+ * intercept the navigation; the promo's "Open …" button then runs it. The close
+ * icon / backdrop dismisses without navigating. Apps with no promo content
+ * return false so the caller navigates itself.
  *
  * @param navigate  Performs the actual navigation for `appId` once the promo is
- *                  confirmed (or immediately, if already seen).
+ *                  confirmed.
+ * @param requestTour  Arms `appId`'s onboarding tour, which its section starts
+ *                  once it has loaded. Given one, the promo offers "Take a
+ *                  tour" next to "Open …" for every app whose content carries a
+ *                  `tourLabel`; left out (or on mobile, where no tour runs) the
+ *                  button isn't shown at all.
  */
-export const useAppPromo = (navigate: (appId: AppId) => void): UseAppPromo => {
+export const useAppPromo = (
+  navigate: (appId: AppId) => void,
+  requestTour?: (appId: AppId) => void,
+): UseAppPromo => {
   const { t } = useTranslation(["Common", "Settings"]);
   const [activeAppId, setActiveAppId] = React.useState<AppId | null>(null);
+  const isMobile = useIsMobile();
 
   const navigateRef = React.useRef(navigate);
   navigateRef.current = navigate;
+
+  const requestTourRef = React.useRef(requestTour);
+  requestTourRef.current = requestTour;
 
   // Per-app promo content with all texts already localized.
   const promoContent = React.useMemo(() => getAppPromoContent(t), [t]);
 
   const maybeShowPromo = React.useCallback(
     (appId: AppId): boolean => {
-      // No promo content for this app, or the user already saw it → let the
-      // caller navigate normally.
-      if (!promoContent[appId] || hasSeen(appId)) return false;
+      // No promo content for this app → let the caller navigate normally.
+      if (!promoContent[appId]) return false;
       setActiveAppId(appId);
       return true;
     },
@@ -133,9 +127,18 @@ export const useAppPromo = (navigate: (appId: AppId) => void): UseAppPromo => {
 
   const onOpen = React.useCallback(() => {
     if (!activeAppId) return;
-    markSeen(activeAppId);
     const appId = activeAppId;
     setActiveAppId(null);
+    navigateRef.current(appId);
+  }, [activeAppId]);
+
+  // Same as "Open …", with the app's tour armed first: the section starts it
+  // itself once it has loaded, so the request has to be in before we navigate.
+  const onTakeTour = React.useCallback(() => {
+    if (!activeAppId) return;
+    const appId = activeAppId;
+    setActiveAppId(null);
+    requestTourRef.current?.(appId);
     navigateRef.current(appId);
   }, [activeAppId]);
 
@@ -147,6 +150,7 @@ export const useAppPromo = (navigate: (appId: AppId) => void): UseAppPromo => {
       content={content}
       onClose={onClose}
       onOpen={onOpen}
+      onTakeTour={requestTour && !isMobile ? onTakeTour : undefined}
     />
   ) : null;
 

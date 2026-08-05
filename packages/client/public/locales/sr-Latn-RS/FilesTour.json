@@ -1,12 +1,4 @@
 {
-  "FeatureDocuments": "Kreirajte i uređujte dokumente, tabele, prezentacije i PDF obrasce direktno u pregledaču.",
-  "FeatureDocumentsTitle": "Radite sa dokumentima",
-  "FeatureOrganize": "Pronađite sve za nekoliko sekundi pomoću pretrage, filtera, omiljenih i liste nedavnih fajlova.",
-  "FeatureOrganizeTitle": "Sve na svom mestu",
-  "FeatureSecurity": "Fleksibilna prava pristupa štite vaše fajlove, a izbrisane stavke mogu se vratiti iz korpe.",
-  "FeatureSecurityTitle": "Čuvajte svoje podatke bezbedno",
-  "FeatureSharing": "Dodelite pristup svojim fajlovima i zajedno sa drugima uređujte dokumente u realnom vremenu.",
-  "FeatureSharingTitle": "Delite i sarađujte",
   "TourActions": "Kreirajte fajl tačno tamo gde se nalazite — odmah se otvara u uređivaču, bez preuzimanja.",
   "TourActionsDragDrop": "Za otpremanje, prevucite fajlove ili foldere direktno na listu.",
   "TourActionsFormats": "Dokumenti, tabele i prezentacije su potpuno usklađeni sa Office formatima.",
@@ -45,6 +37,5 @@
   "TourSortView": "Ikona pored prebacuje između prikaza liste i pločica.",
   "TourTrash": "Izbrisani fajlovi završavaju u korpi, tako da pogrešan klik nije kraj.",
   "TourTrashAutoClean": "Vratite stavku na mesto gde je bila ili ispraznite korpu da oslobodite prostor.",
-  "TourTrashTitle": "Korpa",
-  "TourWelcomeTitle": "Dobro došli u {{productName}}!"
+  "TourTrashTitle": "Korpa"
 }

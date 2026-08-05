@@ -1,12 +1,4 @@
 {
-  "FeatureDocuments": "Crea e modifica documenti, fogli di calcolo, presentazioni e moduli PDF direttamente nel browser.",
-  "FeatureDocumentsTitle": "Lavora con i documenti",
-  "FeatureOrganize": "Trova tutto in pochi secondi con la ricerca, i filtri, i preferiti e l'elenco dei file recenti.",
-  "FeatureOrganizeTitle": "Tutto in ordine",
-  "FeatureSecurity": "I diritti di accesso flessibili proteggono i tuoi file e gli elementi eliminati possono essere ripristinati dal cestino.",
-  "FeatureSecurityTitle": "Proteggi i tuoi dati",
-  "FeatureSharing": "Concedi l'accesso ai tuoi file e modifica i documenti insieme ad altri in tempo reale.",
-  "FeatureSharingTitle": "Condividi e collabora",
   "TourActions": "Crea un file proprio dove ti trovi: si apre subito nell'editor, senza bisogno di scaricarlo.",
   "TourActionsDragDrop": "Per caricare, trascina file o cartelle direttamente nell'elenco.",
   "TourActionsFormats": "Documenti, fogli di calcolo e presentazioni sono pienamente compatibili con i formati Office.",
@@ -45,6 +37,5 @@
   "TourSortView": "L'icona accanto passa dalla visualizzazione a elenco a quella a riquadri.",
   "TourTrash": "I file eliminati finiscono nel cestino, quindi un clic sbagliato non è la fine.",
   "TourTrashAutoClean": "Ripristina un elemento nella sua posizione originale, oppure svuota il cestino per liberare spazio.",
-  "TourTrashTitle": "Cestino",
-  "TourWelcomeTitle": "Benvenuto in {{productName}}!"
+  "TourTrashTitle": "Cestino"
 }

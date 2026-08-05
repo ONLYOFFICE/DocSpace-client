@@ -37,7 +37,7 @@ import TourStore from "./TourStore";
 
 class AiAgentsTourStore extends TourStore {
   constructor() {
-    super("ai_agents_tour_completed");
+    super("ai_agents_tour_pending");
   }
 }
 

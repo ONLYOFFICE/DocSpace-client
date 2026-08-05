@@ -37,43 +37,30 @@ import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
-// Mirrors packages/client/src/store/TourStore.ts `tourKey`.
-export const tourStorageKey = (prefix: string, userId: string) =>
-  `${prefix}_${userId}`;
-
-export const clearTourCompleted = async (
-  page: Page,
-  prefix: string,
-  userId: string,
-) => {
+/**
+ * Arms a section's tour the way the product does it.
+ *
+ * A tour is never shown on its own: the app's promo modal on the dashboard
+ * requests it (its "Take a tour" button), and the section host starts it once
+ * the section has loaded. `TourStore.requestTour` records the request under this
+ * key so it survives the navigation to the section — which is exactly the hook
+ * these specs use, instead of driving the dashboard promo, so each one stays
+ * focused on the walkthrough it is about.
+ *
+ * `key` is the concrete store's key (e.g. `files_tour_pending`).
+ */
+export const armTour = async (page: Page, key: string) => {
   await page.evaluate(
-    (key) => window.localStorage.removeItem(key),
-    tourStorageKey(prefix, userId),
+    (storageKey) => window.localStorage.setItem(storageKey, "true"),
+    key,
   );
 };
-
-// All four section tours (Files/Rooms/Forms/AiAgents) mount their
-// WelcomeTourDialog unconditionally on Home, and ModalDialog keeps every
-// instance's markup in the DOM with a normal (non-zero, non-`display:none`)
-// box even while hidden — it hides via a transform, which Playwright's
-// `:visible` heuristic does not see through. So instead of trying to find
-// "the one that's actually visible", each caller passes the exact welcome
-// title its own tour uses (e.g. "Welcome to Rooms") — only that one dialog
-// can ever match it.
-export const welcomeDialog = (page: Page, title: string) =>
-  page.locator('[role="dialog"]').filter({ hasText: title });
 
 // TourTooltip is the only dialog that renders a "current / total" progress
 // counter (see TourTooltip.tsx `.progress`), so matching on that text is a
 // stable way to grab it without relying on generated CSS module class names.
 export const tourTooltip = (page: Page) =>
   page.locator('[role="dialog"]:visible').filter({ hasText: /\d+\s*\/\s*\d+/ });
-
-export const startTour = async (page: Page, title: string) => {
-  const dialog = welcomeDialog(page, title);
-  await expect(dialog).toBeVisible();
-  await dialog.getByRole("button", { name: "Take a tour" }).click();
-};
 
 /**
  * Clicks through every step of a running tour, screenshotting each one

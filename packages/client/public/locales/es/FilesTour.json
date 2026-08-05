@@ -1,12 +1,4 @@
 {
-  "FeatureDocuments": "Cree y edite documentos, hojas de cálculo, presentaciones y formularios PDF directamente en su navegador.",
-  "FeatureDocumentsTitle": "Trabaje con documentos",
-  "FeatureOrganize": "Encuentre lo que necesita en segundos con la búsqueda, los filtros, los favoritos y la lista de archivos recientes.",
-  "FeatureOrganizeTitle": "Todo organizado",
-  "FeatureSecurity": "Los permisos de acceso flexibles protegen sus archivos, y los elementos eliminados se pueden restaurar desde la papelera.",
-  "FeatureSecurityTitle": "Proteja sus datos",
-  "FeatureSharing": "Conceda acceso a sus archivos y coedite documentos con otros en tiempo real.",
-  "FeatureSharingTitle": "Comparta y colabore",
   "TourActions": "Cree un archivo justo donde está: se abre de inmediato en el editor, sin necesidad de descargarlo.",
   "TourActionsDragDrop": "Para subir archivos o carpetas, arrástrelos directamente a la lista.",
   "TourActionsFormats": "Los documentos, las hojas de cálculo y las presentaciones son totalmente compatibles con los formatos de Office.",
@@ -45,6 +37,5 @@
   "TourSortView": "El icono contiguo cambia entre la vista de lista y la de mosaicos.",
   "TourTrash": "Los archivos eliminados van a la papelera, así que un clic equivocado no es el final.",
   "TourTrashAutoClean": "Restaure un elemento a su ubicación original, o vacíe la papelera para liberar espacio.",
-  "TourTrashTitle": "Papelera",
-  "TourWelcomeTitle": "¡Bienvenido a {{productName}}!"
+  "TourTrashTitle": "Papelera"
 }

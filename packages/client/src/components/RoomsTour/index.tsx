@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -44,18 +44,11 @@ import type RoomsTourStore from "SRC_DIR/store/RoomsTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import {
   getTourAudience,
   type TourAudience,
 } from "SRC_DIR/components/Tour/audience";
-import WelcomeTourDialog, {
-  type TourFeature,
-} from "SRC_DIR/components/Tour/WelcomeTourDialog";
-
-import RoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
-import UserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
-import SharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
-import SecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
 
@@ -66,6 +59,7 @@ type RoomsTourProps = {
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
+  isSectionLoading: boolean;
   isRoomsRoot: boolean;
   canCreate: boolean;
   canUseTemplates: boolean;
@@ -83,6 +77,7 @@ const RoomsTour = ({
   currentDeviceType,
   isFrame,
   firstLoad,
+  isSectionLoading,
   isRoomsRoot,
   canCreate,
   canUseTemplates,
@@ -95,10 +90,6 @@ const RoomsTour = ({
   const { t } = useTranslation(["RoomsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
-
-  useEffect(() => {
-    if (userId) roomsTourStore.hydrateForUser(userId);
-  }, [userId, roomsTourStore]);
 
   const flags = useMemo<TourStepFlags>(
     () => ({
@@ -137,79 +128,15 @@ const RoomsTour = ({
     "rooms tour",
   );
 
-  // Two of the four cards promise room-admin powers (handing out roles, minting
-  // access links). Members get the same slots filled with what the section
-  // actually does for them.
-  const isAdmin = audience === "admin";
-
-  const features = useMemo<TourFeature[]>(
-    () => [
-      {
-        icon: RoomsReactSvgUrl,
-        title: t("RoomsTour:FeatureTypesTitle"),
-        description: t("RoomsTour:FeatureTypes"),
-      },
-      {
-        icon: UserReactSvgUrl,
-        title: isAdmin
-          ? t("RoomsTour:FeatureMembersTitle")
-          : t("RoomsTour:FeatureMemberRoleTitle"),
-        description: isAdmin
-          ? t("RoomsTour:FeatureMembers")
-          : t("RoomsTour:FeatureMemberRole"),
-      },
-      {
-        icon: SharedReactSvgUrl,
-        title: isAdmin
-          ? t("RoomsTour:FeatureAccessTitle")
-          : t("RoomsTour:FeatureMemberWorkTitle"),
-        description: isAdmin
-          ? t("RoomsTour:FeatureAccess")
-          : t("RoomsTour:FeatureMemberWork"),
-      },
-      {
-        icon: SecurityReactSvgUrl,
-        title: t("RoomsTour:FeatureRoomSecurityTitle"),
-        description: t("RoomsTour:FeatureRoomSecurity"),
-      },
-    ],
-    [t, isAdmin],
+  usePendingTour(
+    roomsTourStore,
+    !firstLoad && !isSectionLoading && isRoomsRoot,
+    isMobileView,
   );
 
   if (isFrame || !userId) return null;
 
-  const welcomeVisible =
-    !firstLoad &&
-    isRoomsRoot &&
-    roomsTourStore.isHydrated &&
-    !roomsTourStore.tourCompleted &&
-    !roomsTourStore.isRunning;
-
-  const onStart = () => {
-    if (isMobileView) {
-      roomsTourStore.completeTour();
-      return;
-    }
-    roomsTourStore.startTour();
-  };
-
-  const onSkip = () => {
-    roomsTourStore.completeTour();
-  };
-
-  return (
-    <>
-      <WelcomeTourDialog
-        visible={welcomeVisible}
-        title={t("RoomsTour:RoomsWelcomeTitle")}
-        features={features}
-        canTakeTour={!isMobileView}
-        onStart={onStart}
-        onSkip={onSkip}
-      />
-      {Tour ? createPortal(Tour, document.body) : null}
-    </>
-  );
+  return Tour ? createPortal(Tour, document.body) : null;
 };
 
 export default inject(
@@ -240,6 +167,9 @@ export default inject(
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
+      // Nothing in the section is behind a loader any more, so the anchors the
+      // steps point at are the ones actually on screen.
+      isSectionLoading: clientLoadingStore.showBodyLoader,
       isRoomsRoot:
         isRoomsFolderRoot && isRoot && !publicRoomStore.isPublicRoom,
       // Only room admins / admins see the rooms creation banner and the

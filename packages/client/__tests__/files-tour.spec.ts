@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   settingsHandler,
   TypeSettings,
@@ -41,14 +40,12 @@ import {
   selfByTypeHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { expect, test, TEST_PORT } from "./fixtures/base";
-import { clearTourCompleted, startTour, walkTour, welcomeDialog } from "./helpers/tour";
+import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
 // packages/client/src/store/FilesTourStore.ts
-const TOUR_KEY_PREFIX = "files_tour_completed";
+const TOUR_KEY = "files_tour_pending";
 // My documents, from packages/shared/__mocks__/handlers/files/root.ts
 const MY_DOCUMENTS_URL = "/rooms/personal/filter?folder=12764";
-// FilesTour/index.tsx: t("FilesTour:TourWelcomeTitle", { productName: ... })
-const WELCOME_TITLE = "Welcome to DocSpace!";
 
 test.describe("Files tour", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -65,16 +62,12 @@ test.describe("Files tour", () => {
   }) => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 
-    // First visit sets an origin so localStorage is reachable; the reload
-    // after clearing the flag is what actually lands with the tour unseen.
+    // First visit sets an origin so localStorage is reachable; the reload after
+    // arming the tour is what lands on a section that starts it by itself.
     await page.goto(`${baseUrl}${MY_DOCUMENTS_URL}`);
-    await clearTourCompleted(page, TOUR_KEY_PREFIX, "admin-user-id");
+    await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${MY_DOCUMENTS_URL}`);
 
-    await expect(welcomeDialog(page, WELCOME_TITLE)).toBeVisible();
-    await expectScreenshot(page, ["desktop", "files-tour", "admin-welcome.png"]);
-
-    await startTour(page, WELCOME_TITLE);
     await walkTour(page, ["desktop", "files-tour", "admin"]);
   });
 
@@ -92,12 +85,13 @@ test.describe("Files tour", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "visitor"));
 
     await page.goto(`${baseUrl}${MY_DOCUMENTS_URL}`);
+    await armTour(page, TOUR_KEY);
+    await page.goto(`${baseUrl}${MY_DOCUMENTS_URL}`);
 
-    await expect(
-      page.getByRole("button", { name: "Take a tour" }),
-    ).not.toBeVisible();
     await expect(
       page.getByText("Sorry, the resource is not currently accessible."),
     ).toBeVisible();
+    // Armed and still nothing runs: there is no section here to walk through.
+    await expect(tourTooltip(page)).toBeHidden();
   });
 });

@@ -1,12 +1,4 @@
 {
-  "FeatureDocuments": "ドキュメント、スプレッドシート、プレゼンテーション、PDFフォームをブラウザで直接作成・編集できます。",
-  "FeatureDocumentsTitle": "ドキュメントの操作",
-  "FeatureOrganize": "検索、フィルター、お気に入り、最近使ったファイルの一覧で、必要なものをすぐに見つけられます。",
-  "FeatureOrganizeTitle": "整理整頓",
-  "FeatureSecurity": "柔軟なアクセス権限でファイルを保護し、削除したアイテムはゴミ箱から復元できます。",
-  "FeatureSecurityTitle": "データの安全性",
-  "FeatureSharing": "ファイルへのアクセス権を付与し、他のユーザーとリアルタイムでドキュメントを共同編集できます。",
-  "FeatureSharingTitle": "共有と共同作業",
   "TourActions": "今いる場所でそのままファイルを作成できます。ダウンロードは不要で、すぐにエディターで開きます。",
   "TourActionsDragDrop": "アップロードするには、ファイルやフォルダを一覧にドラッグしてください。",
   "TourActionsFormats": "ドキュメント、スプレッドシート、プレゼンテーションはOffice形式と完全に互換性があります。",
@@ -45,6 +37,5 @@
   "TourSortView": "隣のアイコンで、リスト表示とタイル表示を切り替えられます。",
   "TourTrash": "削除したファイルはゴミ箱に移動するので、誤ってクリックしても取り返せます。",
   "TourTrashAutoClean": "アイテムを元の場所に復元したり、ゴミ箱を空にして容量を空けたりできます。",
-  "TourTrashTitle": "ゴミ箱",
-  "TourWelcomeTitle": "{{productName}}へようこそ！"
+  "TourTrashTitle": "ゴミ箱"
 }

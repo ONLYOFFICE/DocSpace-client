@@ -1,12 +1,4 @@
 {
-  "FeatureDocuments": "Créez et modifiez des documents, des feuilles de calcul, des présentations et des formulaires PDF directement dans votre navigateur.",
-  "FeatureDocumentsTitle": "Travaillez avec des documents",
-  "FeatureOrganize": "Trouvez tout en quelques secondes grâce à la recherche, aux filtres, aux favoris et à la liste des fichiers récents.",
-  "FeatureOrganizeTitle": "Restez organisé",
-  "FeatureSecurity": "Des droits d'accès flexibles protègent vos fichiers, et les éléments supprimés peuvent être restaurés depuis la corbeille.",
-  "FeatureSecurityTitle": "Protégez vos données",
-  "FeatureSharing": "Accordez l'accès à vos fichiers et coéditez des documents avec d'autres en temps réel.",
-  "FeatureSharingTitle": "Partagez et collaborez",
   "TourActions": "Créez un fichier là où vous êtes : il s'ouvre immédiatement dans l'éditeur, sans téléchargement.",
   "TourActionsDragDrop": "Pour importer, faites glisser des fichiers ou des dossiers directement dans la liste.",
   "TourActionsFormats": "Les documents, feuilles de calcul et présentations sont entièrement compatibles avec les formats Office.",
@@ -45,6 +37,5 @@
   "TourSortView": "L'icône voisine permet de basculer entre l'affichage en liste et en tuiles.",
   "TourTrash": "Les fichiers supprimés arrivent dans la corbeille : un clic malheureux n'est donc pas irréversible.",
   "TourTrashAutoClean": "Restaurez un élément à son emplacement d'origine, ou videz la corbeille pour libérer de l'espace.",
-  "TourTrashTitle": "Corbeille",
-  "TourWelcomeTitle": "Bienvenue dans {{productName}} !"
+  "TourTrashTitle": "Corbeille"
 }

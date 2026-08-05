@@ -33,30 +33,22 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import type FilesTourStore from "SRC_DIR/store/FilesTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import {
   getTourAudience,
   type TourAudience,
 } from "SRC_DIR/components/Tour/audience";
-import WelcomeTourDialog, {
-  type TourFeature,
-} from "SRC_DIR/components/Tour/WelcomeTourDialog";
-
-import DocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
-import SharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
-import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
-import SecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
 
@@ -67,6 +59,7 @@ type FilesTourProps = {
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
+  isSectionLoading: boolean;
   isFilesRoot: boolean;
   canCreate: boolean;
   showFilter: boolean;
@@ -86,6 +79,7 @@ const FilesTour = ({
   currentDeviceType,
   isFrame,
   firstLoad,
+  isSectionLoading,
   isFilesRoot,
   canCreate,
   showFilter,
@@ -100,10 +94,6 @@ const FilesTour = ({
   const { t } = useTranslation(["FilesTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
-
-  useEffect(() => {
-    if (userId) filesTourStore.hydrateForUser(userId);
-  }, [userId, filesTourStore]);
 
   const flags = useMemo<TourStepFlags>(
     () => ({
@@ -146,87 +136,15 @@ const FilesTour = ({
     "files tour",
   );
 
-  // A guest owns no files here: no personal space to create in and no Trash to
-  // restore from. Their cards describe the section they actually get — the
-  // files other people shared with them.
-  const isGuest = audience === "guest";
-
-  const features = useMemo<TourFeature[]>(
-    () => [
-      {
-        icon: DocumentsReactSvgUrl,
-        title: isGuest
-          ? t("FilesTour:FeatureGuestDocumentsTitle")
-          : t("FilesTour:FeatureDocumentsTitle"),
-        description: isGuest
-          ? t("FilesTour:FeatureGuestDocuments")
-          : t("FilesTour:FeatureDocuments"),
-      },
-      {
-        icon: SharedReactSvgUrl,
-        title: isGuest
-          ? t("FilesTour:FeatureGuestSharedTitle")
-          : t("FilesTour:FeatureSharingTitle"),
-        description: isGuest
-          ? t("FilesTour:FeatureGuestShared")
-          : t("FilesTour:FeatureSharing"),
-      },
-      {
-        icon: SearchReactSvgUrl,
-        title: t("FilesTour:FeatureOrganizeTitle"),
-        description: isGuest
-          ? t("FilesTour:FeatureGuestOrganize")
-          : t("FilesTour:FeatureOrganize"),
-      },
-      {
-        icon: SecurityReactSvgUrl,
-        title: isGuest
-          ? t("FilesTour:FeatureGuestAccessTitle")
-          : t("FilesTour:FeatureSecurityTitle"),
-        description: isGuest
-          ? t("FilesTour:FeatureGuestAccess")
-          : t("FilesTour:FeatureSecurity"),
-      },
-    ],
-    [t, isGuest],
+  usePendingTour(
+    filesTourStore,
+    !firstLoad && !isSectionLoading && isFilesRoot,
+    isMobileView,
   );
 
   if (isFrame || !userId) return null;
 
-  const welcomeVisible =
-    !firstLoad &&
-    isFilesRoot &&
-    filesTourStore.isHydrated &&
-    !filesTourStore.tourCompleted &&
-    !filesTourStore.isRunning;
-
-  const onStart = () => {
-    if (isMobileView) {
-      filesTourStore.completeTour();
-      return;
-    }
-    filesTourStore.startTour();
-  };
-
-  const onSkip = () => {
-    filesTourStore.completeTour();
-  };
-
-  return (
-    <>
-      <WelcomeTourDialog
-        visible={welcomeVisible}
-        title={t("FilesTour:TourWelcomeTitle", {
-          productName: getBrandName("ProductName"),
-        })}
-        features={features}
-        canTakeTour={!isMobileView}
-        onStart={onStart}
-        onSkip={onSkip}
-      />
-      {Tour ? createPortal(Tour, document.body) : null}
-    </>
-  );
+  return Tour ? createPortal(Tour, document.body) : null;
 };
 
 export default inject(
@@ -262,6 +180,9 @@ export default inject(
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
+      // Nothing in the section is behind a loader any more, so the anchors the
+      // steps point at are the ones actually on screen.
+      isSectionLoading: clientLoadingStore.showBodyLoader,
       // Where the tour is allowed to open: the root of the Files section.
       // For everyone with a personal space that root is My documents. A guest
       // has none — the sidebar points their Files item at Shared with me

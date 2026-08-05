@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -45,18 +45,11 @@ import type AiAgentsTourStore from "SRC_DIR/store/AiAgentsTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import {
   getTourAudience,
   type TourAudience,
 } from "SRC_DIR/components/Tour/audience";
-import WelcomeTourDialog, {
-  type TourFeature,
-} from "SRC_DIR/components/Tour/WelcomeTourDialog";
-
-import AiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-import KnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
-import ChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-arbiter.react.svg?url";
-import SecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/security.react.svg?url";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
 
@@ -67,6 +60,7 @@ type AiAgentsTourProps = {
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
+  isSectionLoading: boolean;
   isAiAgentsRoot: boolean;
   canCreateRooms: boolean;
   aiReady: boolean;
@@ -85,6 +79,7 @@ const AiAgentsTour = ({
   currentDeviceType,
   isFrame,
   firstLoad,
+  isSectionLoading,
   isAiAgentsRoot,
   canCreateRooms,
   aiReady,
@@ -106,10 +101,6 @@ const AiAgentsTour = ({
   const { useProfilesStore } = useStores();
   const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
   const canCreate = (aiReady || hasAiProfiles) && canCreateRooms;
-
-  useEffect(() => {
-    if (userId) aiAgentsTourStore.hydrateForUser(userId);
-  }, [userId, aiAgentsTourStore]);
 
   const flags = useMemo<TourStepFlags>(
     () => ({
@@ -148,78 +139,15 @@ const AiAgentsTour = ({
     "ai agents tour",
   );
 
-  // Configuring an agent and choosing who may use it are the owner's cards;
-  // everyone else gets what using a ready-made agent gives them.
-  const isAdminAudience = audience === "admin";
-
-  const features = useMemo<TourFeature[]>(
-    () => [
-      {
-        icon: AiAgentsReactSvgUrl,
-        title: isAdminAudience
-          ? t("AiAgentsTour:FeatureAgentsTitle")
-          : t("AiAgentsTour:FeatureUseAgentsTitle"),
-        description: isAdminAudience
-          ? t("AiAgentsTour:FeatureAgents")
-          : t("AiAgentsTour:FeatureUseAgents"),
-      },
-      {
-        icon: KnowledgeReactSvgUrl,
-        title: t("AiAgentsTour:FeatureKnowledgeTitle"),
-        description: t("AiAgentsTour:FeatureKnowledge"),
-      },
-      {
-        icon: ChatReactSvgUrl,
-        title: t("AiAgentsTour:FeatureChatTitle"),
-        description: t("AiAgentsTour:FeatureChat"),
-      },
-      {
-        icon: SecurityReactSvgUrl,
-        title: isAdminAudience
-          ? t("AiAgentsTour:FeatureControlTitle")
-          : t("AiAgentsTour:FeatureAgentAccessTitle"),
-        description: isAdminAudience
-          ? t("AiAgentsTour:FeatureControl")
-          : t("AiAgentsTour:FeatureAgentAccess"),
-      },
-    ],
-    [t, isAdminAudience],
+  usePendingTour(
+    aiAgentsTourStore,
+    !firstLoad && !isSectionLoading && isAiAgentsRoot,
+    isMobileView,
   );
 
   if (isFrame || !userId) return null;
 
-  const welcomeVisible =
-    !firstLoad &&
-    isAiAgentsRoot &&
-    aiAgentsTourStore.isHydrated &&
-    !aiAgentsTourStore.tourCompleted &&
-    !aiAgentsTourStore.isRunning;
-
-  const onStart = () => {
-    if (isMobileView) {
-      aiAgentsTourStore.completeTour();
-      return;
-    }
-    aiAgentsTourStore.startTour();
-  };
-
-  const onSkip = () => {
-    aiAgentsTourStore.completeTour();
-  };
-
-  return (
-    <>
-      <WelcomeTourDialog
-        visible={welcomeVisible}
-        title={t("AiAgentsTour:AgentsWelcomeTitle")}
-        features={features}
-        canTakeTour={!isMobileView}
-        onStart={onStart}
-        onSkip={onSkip}
-      />
-      {Tour ? createPortal(Tour, document.body) : null}
-    </>
-  );
+  return Tour ? createPortal(Tour, document.body) : null;
 };
 
 export default inject(
@@ -249,6 +177,9 @@ export default inject(
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
+      // Nothing in the section is behind a loader any more, so the anchors the
+      // steps point at are the ones actually on screen.
+      isSectionLoading: clientLoadingStore.showBodyLoader,
       isAiAgentsRoot:
         isAIAgentsFolderRoot && isRoot && !publicRoomStore.isPublicRoom,
       canCreateRooms: audience === "admin",

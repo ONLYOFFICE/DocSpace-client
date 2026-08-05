@@ -34,7 +34,6 @@
  */
 
 import { http } from "msw";
-import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { BASE_URL, API_PREFIX } from "@docspace/shared/__mocks__/e2e/utils";
 import {
   settingsHandler,
@@ -42,18 +41,16 @@ import {
   selfActivationStatusHandler,
   selfByTypeHandler,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test, TEST_PORT } from "./fixtures/base";
-import { clearTourCompleted, startTour, walkTour, welcomeDialog } from "./helpers/tour";
+import { test, TEST_PORT } from "./fixtures/base";
+import { armTour, walkTour } from "./helpers/tour";
 
 // packages/client/src/store/FormsTourStore.ts
-const TOUR_KEY_PREFIX = "forms_tour_completed";
+const TOUR_KEY = "forms_tour_pending";
 const FORMS_URL = "/forms/filter";
-// FormsTour/index.tsx: t("FormsTour:FormsWelcomeTitle") — same for every audience
-const WELCOME_TITLE = "Welcome to Forms";
 
 // `files/rooms*` (roomListHandler) always reports rootFolderType: 14 (Rooms)
 // regardless of query params, so the shared mock can't be reused as-is here:
-// FormsTour's own welcomeVisible/isFormsRoot gate needs rootFolderType: 36
+// FormsTour's own isFormsRoot gate needs rootFolderType: 36
 // (FolderType.Forms) — see TreeFoldersStore.isFormsFolder. This handler
 // stands in a single form room so the list isn't empty either.
 const formsRoomListHandler = (port: string) =>
@@ -144,14 +141,12 @@ test.describe("Forms tour", () => {
   }) => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 
+    // First visit sets an origin so localStorage is reachable; the reload after
+    // arming the tour is what lands on a section that starts it by itself.
     await page.goto(`${baseUrl}${FORMS_URL}`);
-    await clearTourCompleted(page, TOUR_KEY_PREFIX, "admin-user-id");
+    await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${FORMS_URL}`);
 
-    await expect(welcomeDialog(page, WELCOME_TITLE)).toBeVisible();
-    await expectScreenshot(page, ["desktop", "forms-tour", "admin-welcome.png"]);
-
-    await startTour(page, WELCOME_TITLE);
     await walkTour(page, ["desktop", "forms-tour", "admin"]);
   });
 
@@ -163,13 +158,9 @@ test.describe("Forms tour", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
 
     await page.goto(`${baseUrl}${FORMS_URL}`);
-    await clearTourCompleted(page, TOUR_KEY_PREFIX, "regular-user-id");
+    await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${FORMS_URL}`);
 
-    await expect(welcomeDialog(page, WELCOME_TITLE)).toBeVisible();
-    await expectScreenshot(page, ["desktop", "forms-tour", "filler-welcome.png"]);
-
-    await startTour(page, WELCOME_TITLE);
     await walkTour(page, ["desktop", "forms-tour", "filler"]);
   });
 });

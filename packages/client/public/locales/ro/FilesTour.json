@@ -1,12 +1,4 @@
 {
-  "FeatureDocuments": "Creați și editați documente, foi de calcul, prezentări și formulare PDF direct în browser.",
-  "FeatureDocumentsTitle": "Lucrați cu documente",
-  "FeatureOrganize": "Găsiți orice în câteva secunde cu ajutorul căutării, filtrelor, favoritelor și listei de fișiere recente.",
-  "FeatureOrganizeTitle": "Totul organizat",
-  "FeatureSecurity": "Drepturile de acces flexibile vă protejează fișierele, iar elementele șterse pot fi restaurate din coșul de gunoi.",
-  "FeatureSecurityTitle": "Păstrați-vă datele în siguranță",
-  "FeatureSharing": "Acordați acces la fișierele dvs. și editați documente împreună cu alții în timp real.",
-  "FeatureSharingTitle": "Partajați și colaborați",
   "TourActions": "Creați un fișier chiar acolo unde vă aflați – se deschide imediat în editor, fără să fie nevoie de descărcare.",
   "TourActionsDragDrop": "Pentru a încărca, trageți fișiere sau foldere direct în listă.",
   "TourActionsFormats": "Documentele, foile de calcul și prezentările sunt complet compatibile cu formatele Office.",
@@ -45,6 +37,5 @@
   "TourSortView": "Pictograma de lângă comută între vizualizarea ca listă și cea cu dale.",
   "TourTrash": "Fișierele șterse ajung în coșul de gunoi, așa că un clic greșit nu este sfârșitul.",
   "TourTrashAutoClean": "Restaurați un element în locul în care se afla sau goliți coșul de gunoi pentru a elibera spațiu.",
-  "TourTrashTitle": "Coș de gunoi",
-  "TourWelcomeTitle": "Bine ați venit la {{productName}}!"
+  "TourTrashTitle": "Coș de gunoi"
 }

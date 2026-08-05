@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -44,18 +44,11 @@ import type FormsTourStore from "SRC_DIR/store/FormsTourStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
+import usePendingTour from "SRC_DIR/components/Tour/usePendingTour";
 import {
   getTourAudience,
   type TourAudience,
 } from "SRC_DIR/components/Tour/audience";
-import WelcomeTourDialog, {
-  type TourFeature,
-} from "SRC_DIR/components/Tour/WelcomeTourDialog";
-
-import FormReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.form.react.svg?url";
-import FormFillReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
-import TemplateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
 
@@ -66,6 +59,7 @@ type FormsTourProps = {
   currentDeviceType: DeviceType;
   isFrame: boolean;
   firstLoad: boolean;
+  isSectionLoading: boolean;
   isFormsRoot: boolean;
   canCreate: boolean;
   canUseTemplates: boolean;
@@ -82,6 +76,7 @@ const FormsTour = ({
   currentDeviceType,
   isFrame,
   firstLoad,
+  isSectionLoading,
   isFormsRoot,
   canCreate,
   canUseTemplates,
@@ -93,10 +88,6 @@ const FormsTour = ({
   const { t } = useTranslation(["FormsTour", "Common"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
-
-  useEffect(() => {
-    if (userId) formsTourStore.hydrateForUser(userId);
-  }, [userId, formsTourStore]);
 
   const flags = useMemo<TourStepFlags>(
     () => ({
@@ -133,78 +124,15 @@ const FormsTour = ({
     "forms tour",
   );
 
-  // Collecting responses and exporting results are the collection owner's side
-  // of the job; a filler gets the two cards that describe theirs.
-  const isAdmin = audience === "admin";
-
-  const features = useMemo<TourFeature[]>(
-    () => [
-      {
-        icon: FormReactSvgUrl,
-        title: t("FormsTour:FeatureFormsTitle"),
-        description: t("FormsTour:FeatureForms"),
-      },
-      {
-        icon: FormFillReactSvgUrl,
-        title: isAdmin
-          ? t("FormsTour:FeatureCollectTitle")
-          : t("FormsTour:FeatureFillOutTitle"),
-        description: isAdmin
-          ? t("FormsTour:FeatureCollect")
-          : t("FormsTour:FeatureFillOut"),
-      },
-      {
-        icon: TemplateReactSvgUrl,
-        title: t("FormsTour:FeatureGalleryTitle"),
-        description: t("FormsTour:FeatureGallery"),
-      },
-      {
-        icon: DownloadReactSvgUrl,
-        title: isAdmin
-          ? t("FormsTour:FeatureExportTitle")
-          : t("FormsTour:FeatureFillPrivacyTitle"),
-        description: isAdmin
-          ? t("FormsTour:FeatureExport")
-          : t("FormsTour:FeatureFillPrivacy"),
-      },
-    ],
-    [t, isAdmin],
+  usePendingTour(
+    formsTourStore,
+    !firstLoad && !isSectionLoading && isFormsRoot,
+    isMobileView,
   );
 
   if (isFrame || !userId) return null;
 
-  const welcomeVisible =
-    !firstLoad &&
-    isFormsRoot &&
-    formsTourStore.isHydrated &&
-    !formsTourStore.tourCompleted &&
-    !formsTourStore.isRunning;
-
-  const onStart = () => {
-    if (isMobileView) {
-      formsTourStore.completeTour();
-      return;
-    }
-    formsTourStore.startTour();
-  };
-
-  const onSkip = () => {
-    formsTourStore.completeTour();
-  };
-
-  return (
-    <>
-      <WelcomeTourDialog
-        visible={welcomeVisible}
-        title={t("FormsTour:FormsWelcomeTitle")}
-        features={features}
-        canTakeTour={!isMobileView}
-        onStart={onStart}
-        onSkip={onSkip}
-      />
-      {Tour ? createPortal(Tour, document.body) : null}
-    </>
-  );
+  return Tour ? createPortal(Tour, document.body) : null;
 };
 
 export default inject(
@@ -229,6 +157,9 @@ export default inject(
       currentDeviceType: settingsStore.currentDeviceType,
       isFrame: settingsStore.isFrame,
       firstLoad: clientLoadingStore.firstLoad,
+      // Nothing in the section is behind a loader any more, so the anchors the
+      // steps point at are the ones actually on screen.
+      isSectionLoading: clientLoadingStore.showBodyLoader,
       isFormsRoot: isFormsFolder && isRoot && !publicRoomStore.isPublicRoom,
       // Same gate as the rooms creation banner / sidebar Templates item.
       canCreate: isAdminAudience && !!roomsFolder,

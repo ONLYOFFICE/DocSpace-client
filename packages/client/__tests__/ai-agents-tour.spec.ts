@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   settingsHandler,
   TypeSettings,
@@ -41,14 +40,12 @@ import {
   selfByTypeHandler,
   aiAgentsHandler,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test, TEST_PORT } from "./fixtures/base";
-import { clearTourCompleted, startTour, walkTour, welcomeDialog } from "./helpers/tour";
+import { test, TEST_PORT } from "./fixtures/base";
+import { armTour, walkTour } from "./helpers/tour";
 
 // packages/client/src/store/AiAgentsTourStore.ts
-const TOUR_KEY_PREFIX = "ai_agents_tour_completed";
+const TOUR_KEY = "ai_agents_tour_pending";
 const AI_AGENTS_URL = "/ai-agents/filter";
-// AiAgentsTour/index.tsx: t("AiAgentsTour:AgentsWelcomeTitle") — same for every audience
-const WELCOME_TITLE = "Welcome to AI agents";
 
 test.describe("AI Agents tour", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -66,14 +63,12 @@ test.describe("AI Agents tour", () => {
   }) => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 
+    // First visit sets an origin so localStorage is reachable; the reload after
+    // arming the tour is what lands on a section that starts it by itself.
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
-    await clearTourCompleted(page, TOUR_KEY_PREFIX, "admin-user-id");
+    await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
-    await expect(welcomeDialog(page, WELCOME_TITLE)).toBeVisible();
-    await expectScreenshot(page, ["desktop", "ai-agents-tour", "admin-welcome.png"]);
-
-    await startTour(page, WELCOME_TITLE);
     await walkTour(page, ["desktop", "ai-agents-tour", "admin"]);
   });
 
@@ -85,13 +80,9 @@ test.describe("AI Agents tour", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
 
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
-    await clearTourCompleted(page, TOUR_KEY_PREFIX, "regular-user-id");
+    await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
-    await expect(welcomeDialog(page, WELCOME_TITLE)).toBeVisible();
-    await expectScreenshot(page, ["desktop", "ai-agents-tour", "user-welcome.png"]);
-
-    await startTour(page, WELCOME_TITLE);
     await walkTour(page, ["desktop", "ai-agents-tour", "user"]);
   });
 });

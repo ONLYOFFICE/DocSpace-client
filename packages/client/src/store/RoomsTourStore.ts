@@ -37,7 +37,7 @@ import TourStore from "./TourStore";
 
 class RoomsTourStore extends TourStore {
   constructor() {
-    super("rooms_tour_completed");
+    super("rooms_tour_pending");
   }
 }
 

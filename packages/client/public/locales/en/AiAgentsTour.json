@@ -36,18 +36,5 @@
   "AgentsSearchScope": "Search covers agent names, not the messages inside their chats.",
   "AgentsSearchTitle": "Search agents",
   "AgentsTrash": "Deleted agents land in Trash, so a wrong click is not the end. Restore one from there, or empty Trash to free up space.",
-  "AgentsTrashTitle": "Trash",
-  "AgentsWelcomeTitle": "Welcome to AI agents",
-  "FeatureAgentAccess": "You get the agents that were shared with you, with the model and tools already chosen.",
-  "FeatureAgentAccessTitle": "Only what you need",
-  "FeatureAgents": "Set an agent's role, tone, and tasks once, then let your whole team put it to work.",
-  "FeatureAgentsTitle": "Assistants you configure",
-  "FeatureChat": "Ask an agent about your files in chat, and let it save what it produces for you.",
-  "FeatureChatTitle": "Chat and get results",
-  "FeatureControl": "Choose the model each agent runs on, and control who is allowed to use it.",
-  "FeatureControlTitle": "Stay in control",
-  "FeatureKnowledge": "Add documents as a knowledge base and answers come from your own content.",
-  "FeatureKnowledgeTitle": "Grounded in your files",
-  "FeatureUseAgents": "Each agent already knows its role and tasks — pick the one that fits and start working.",
-  "FeatureUseAgentsTitle": "Assistants ready to use"
+  "AgentsTrashTitle": "Trash"
 }

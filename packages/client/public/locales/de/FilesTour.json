@@ -1,12 +1,4 @@
 {
-  "FeatureDocuments": "Erstellen und bearbeiten Sie Dokumente, Tabellen, Präsentationen und PDF-Formulare direkt im Browser.",
-  "FeatureDocumentsTitle": "Mit Dokumenten arbeiten",
-  "FeatureOrganize": "Finden Sie alles in Sekunden mit Suche, Filtern, Favoriten und der Liste der zuletzt geöffneten Dateien.",
-  "FeatureOrganizeTitle": "Alles im Blick",
-  "FeatureSecurity": "Flexible Zugriffsrechte schützen Ihre Dateien, und gelöschte Elemente können aus dem Papierkorb wiederhergestellt werden.",
-  "FeatureSecurityTitle": "Ihre Daten in Sicherheit",
-  "FeatureSharing": "Gewähren Sie Zugriff auf Ihre Dateien und bearbeiten Sie Dokumente in Echtzeit gemeinsam mit anderen.",
-  "FeatureSharingTitle": "Teilen und zusammenarbeiten",
   "TourActions": "Erstellen Sie eine Datei direkt dort, wo Sie sind – sie öffnet sich sofort im Editor, ohne Download.",
   "TourActionsDragDrop": "Zum Hochladen ziehen Sie Dateien oder Ordner einfach in die Liste.",
   "TourActionsFormats": "Dokumente, Tabellen und Präsentationen sind vollständig mit den Office-Formaten kompatibel.",
@@ -45,6 +37,5 @@
   "TourSortView": "Das Symbol daneben wechselt zwischen Listen- und Kachelansicht.",
   "TourTrash": "Gelöschte Dateien landen im Papierkorb – ein Fehlklick ist also nicht das Ende.",
   "TourTrashAutoClean": "Stellen Sie ein Element an seinem ursprünglichen Ort wieder her oder leeren Sie den Papierkorb, um Speicherplatz freizugeben.",
-  "TourTrashTitle": "Papierkorb",
-  "TourWelcomeTitle": "Willkommen bei {{productName}}!"
+  "TourTrashTitle": "Papierkorb"
 }

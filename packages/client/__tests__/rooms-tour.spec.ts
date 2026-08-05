@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   settingsHandler,
   TypeSettings,
@@ -42,19 +41,17 @@ import {
   roomListHandler,
   TypeRoomList,
 } from "@docspace/shared/__mocks__/handlers";
-import { expect, test, TEST_PORT } from "./fixtures/base";
-import { clearTourCompleted, startTour, walkTour, welcomeDialog } from "./helpers/tour";
+import { test, TEST_PORT } from "./fixtures/base";
+import { armTour, walkTour } from "./helpers/tour";
 
 // packages/client/src/store/RoomsTourStore.ts
-const TOUR_KEY_PREFIX = "rooms_tour_completed";
+const TOUR_KEY = "rooms_tour_pending";
 // Rooms root — no `folder` query param: unlike Personal Files, the root
 // listing is fetched via `files/rooms*` (roomListHandler), not by numeric
 // folder id, so adding `?folder=2002` here would misroute the fetch onto the
 // generic `files/:id` folder handler instead (see rooms-context-menu.spec.ts
 // for the same bare-root pattern).
 const ROOMS_URL = "/rooms/shared/";
-// RoomsTour/index.tsx: t("RoomsTour:RoomsWelcomeTitle") — same for every audience
-const WELCOME_TITLE = "Welcome to Rooms";
 
 test.describe("Rooms tour", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -72,14 +69,12 @@ test.describe("Rooms tour", () => {
   }) => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 
+    // First visit sets an origin so localStorage is reachable; the reload after
+    // arming the tour is what lands on a section that starts it by itself.
     await page.goto(`${baseUrl}${ROOMS_URL}`);
-    await clearTourCompleted(page, TOUR_KEY_PREFIX, "admin-user-id");
+    await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${ROOMS_URL}`);
 
-    await expect(welcomeDialog(page, WELCOME_TITLE)).toBeVisible();
-    await expectScreenshot(page, ["desktop", "rooms-tour", "admin-welcome.png"]);
-
-    await startTour(page, WELCOME_TITLE);
     await walkTour(page, ["desktop", "rooms-tour", "admin"]);
   });
 
@@ -91,13 +86,9 @@ test.describe("Rooms tour", () => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
 
     await page.goto(`${baseUrl}${ROOMS_URL}`);
-    await clearTourCompleted(page, TOUR_KEY_PREFIX, "regular-user-id");
+    await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${ROOMS_URL}`);
 
-    await expect(welcomeDialog(page, WELCOME_TITLE)).toBeVisible();
-    await expectScreenshot(page, ["desktop", "rooms-tour", "member-welcome.png"]);
-
-    await startTour(page, WELCOME_TITLE);
     await walkTour(page, ["desktop", "rooms-tour", "member"]);
   });
 });

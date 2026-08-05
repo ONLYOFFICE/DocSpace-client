@@ -1,19 +1,4 @@
 {
-  "FeatureDocuments": "Create and edit documents, spreadsheets, presentations, and PDF forms right in your browser.",
-  "FeatureDocumentsTitle": "Work with documents",
-  "FeatureGuestAccess": "What you can do with a file depends on the rights its owner granted you.",
-  "FeatureGuestAccessTitle": "Access on your side",
-  "FeatureGuestDocuments": "Open documents, spreadsheets, presentations, and PDF forms right in your browser.",
-  "FeatureGuestDocumentsTitle": "View and edit shared files",
-  "FeatureGuestOrganize": "Find anything in seconds with search, filters, favorites, and the list of recent files.",
-  "FeatureGuestShared": "Files and folders other people gave you access to are collected in one place.",
-  "FeatureGuestSharedTitle": "Everything shared with you",
-  "FeatureOrganize": "Find anything in seconds with search, filters, favorites, and the list of recent files.",
-  "FeatureOrganizeTitle": "Stay organized",
-  "FeatureSecurity": "Flexible access rights protect your files, and deleted items can be restored from Trash.",
-  "FeatureSecurityTitle": "Keep your data safe",
-  "FeatureSharing": "Grant access to your files and co-edit documents with others in real time.",
-  "FeatureSharingTitle": "Share and collaborate",
   "TourActions": "Create a file right where you are — it opens in the editor immediately, no download needed.",
   "TourActionsDragDrop": "To upload, drag files or folders straight onto the list.",
   "TourActionsFormats": "Documents, spreadsheets, and presentations are fully compatible with Office formats.",
@@ -57,6 +42,5 @@
   "TourSortView": "The icon next to it switches between the list and tile layouts.",
   "TourTrash": "Deleted files land in Trash, so a wrong click is not the end.",
   "TourTrashAutoClean": "Restore an item to where it was, or empty Trash to free up space.",
-  "TourTrashTitle": "Trash",
-  "TourWelcomeTitle": "Welcome to {{productName}}!"
+  "TourTrashTitle": "Trash"
 }

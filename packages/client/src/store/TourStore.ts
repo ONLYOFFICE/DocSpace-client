@@ -60,60 +60,59 @@ const safeRemove = (key: string): void => {
 };
 
 /**
- * Per-section onboarding tour state, persisted per user in localStorage.
- * Concrete stores (files/rooms) supply the storage key prefix so each section's
- * completion is tracked independently.
+ * Per-section onboarding tour state.
+ *
+ * A tour never opens on its own. It is asked for from outside the section — the
+ * app promo on the dashboard — via `requestTour`, and the section's tour host
+ * starts it once the section it walks through is on screen. That request is
+ * persisted because it is made on another route, so it has to survive the
+ * navigation (including a full page load) to the section; concrete stores
+ * (files/rooms/…) supply the storage key so each section is tracked
+ * independently.
  */
 class TourStore {
   isRunning = false;
 
-  tourCompleted = false;
+  /** The user asked for this tour; the section host starts it when ready. */
+  isPending = false;
 
-  isHydrated = false;
+  private _pendingKey: string;
 
-  private _completedKeyPrefix: string;
-
-  private _userKey: string | undefined = undefined;
-
-  constructor(completedKeyPrefix: string) {
-    this._completedKeyPrefix = completedKeyPrefix;
+  constructor(pendingKey: string) {
+    this._pendingKey = pendingKey;
     makeObservable(this, {
       isRunning: observable,
-      tourCompleted: observable,
-      isHydrated: observable,
-      hydrateForUser: action,
+      isPending: observable,
+      hydratePending: action,
+      requestTour: action,
       startTour: action,
       completeTour: action,
-      resetTour: action,
     });
   }
 
-  private tourKey = (userKey?: string) =>
-    userKey ? `${this._completedKeyPrefix}_${userKey}` : this._completedKeyPrefix;
+  // Only ever raises the flag: with storage unavailable (private mode) the
+  // write in `requestTour` silently fails, and the in-memory request — which
+  // survives an in-app navigation on its own — must not be cleared by the
+  // read-back finding nothing.
+  hydratePending = (): void => {
+    if (safeGet(this._pendingKey) === "true") this.isPending = true;
+  };
 
-  hydrateForUser = (userKey: string): void => {
-    if (!userKey) return;
-    this._userKey = userKey;
-
-    const scoped = safeGet(this.tourKey(userKey));
-    this.tourCompleted = scoped === "true";
-    this.isHydrated = true;
+  requestTour = () => {
+    this.isPending = true;
+    safeSet(this._pendingKey, "true");
   };
 
   startTour = () => {
+    this.isPending = false;
+    safeRemove(this._pendingKey);
     this.isRunning = true;
   };
 
   completeTour = () => {
     this.isRunning = false;
-    this.tourCompleted = true;
-    safeSet(this.tourKey(this._userKey), "true");
-  };
-
-  resetTour = () => {
-    this.isRunning = false;
-    this.tourCompleted = false;
-    safeRemove(this.tourKey(this._userKey));
+    this.isPending = false;
+    safeRemove(this._pendingKey);
   };
 }
 

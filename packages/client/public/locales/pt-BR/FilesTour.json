@@ -1,12 +1,4 @@
 {
-  "FeatureDocuments": "Crie e edite documentos, planilhas, apresentações e formulários PDF diretamente no navegador.",
-  "FeatureDocumentsTitle": "Trabalhe com documentos",
-  "FeatureOrganize": "Encontre tudo em segundos com a pesquisa, os filtros, os favoritos e a lista de arquivos recentes.",
-  "FeatureOrganizeTitle": "Tudo organizado",
-  "FeatureSecurity": "Direitos de acesso flexíveis protegem seus arquivos, e itens excluídos podem ser restaurados da lixeira.",
-  "FeatureSecurityTitle": "Mantenha seus dados seguros",
-  "FeatureSharing": "Conceda acesso aos seus arquivos e edite documentos em conjunto com outras pessoas em tempo real.",
-  "FeatureSharingTitle": "Compartilhe e colabore",
   "TourActions": "Crie um arquivo exatamente onde você está: ele abre no editor imediatamente, sem precisar baixar nada.",
   "TourActionsDragDrop": "Para enviar, arraste arquivos ou pastas direto para a lista.",
   "TourActionsFormats": "Documentos, planilhas e apresentações são totalmente compatíveis com os formatos do Office.",
@@ -45,6 +37,5 @@
   "TourSortView": "O ícone ao lado alterna entre os layouts de lista e de blocos.",
   "TourTrash": "Os arquivos excluídos vão para a lixeira, então um clique errado não é o fim.",
   "TourTrashAutoClean": "Restaure um item para o local original, ou esvazie a lixeira para liberar espaço.",
-  "TourTrashTitle": "Lixeira",
-  "TourWelcomeTitle": "Bem-vindo ao {{productName}}!"
+  "TourTrashTitle": "Lixeira"
 }

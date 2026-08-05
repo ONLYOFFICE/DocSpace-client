@@ -106,12 +106,13 @@ type DashboardProps = ChatNoAccessStoreProps & {
   isGuest: boolean;
   showLoader: boolean;
   currentDeviceType?: TStore["settingsStore"]["currentDeviceType"];
+  requestAppTour: (appId: AppId) => void;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
 
 const Dashboard = (props: DashboardProps) => {
-  const { isGuest, showLoader, currentDeviceType } = props;
+  const { isGuest, showLoader, currentDeviceType, requestAppTour } = props;
   const { t } = useTranslation(["Common", "OAuth"]);
   useDocumentTitle("Common:Overview");
   const [searchParams] = useSearchParams();
@@ -128,13 +129,13 @@ const Dashboard = (props: DashboardProps) => {
   );
   const createItems = useCreateActions(myFolderId, isGuest);
 
-  // First-run "introduce this app" promo. The clicked card's href is stashed in
-  // a ref so the promo's confirm callback can navigate to it after the user
-  // sees the promo. Apps without promo content fall straight through to navigate.
+  // "Introduce this app" promo, shown on every card click. The clicked card's
+  // href is stashed in a ref so the promo's confirm callback can navigate to it
+  // afterwards. Apps without promo content fall straight through to navigate.
   const promoHrefRef = React.useRef<string | undefined>(undefined);
   const { maybeShowPromo, promoDialog } = useAppPromo(() => {
     if (promoHrefRef.current) navigate(promoHrefRef.current);
-  });
+  }, requestAppTour);
 
   // The dashboard renders its own content (no SDK iframe). Tell the
   // persistent host to drop the previous app's frame so it doesn't linger
@@ -274,8 +275,8 @@ const Dashboard = (props: DashboardProps) => {
                       mod={mod}
                       onClick={() => {
                         promoHrefRef.current = mod.href;
-                        // Show the app's promo on first open; it navigates on
-                        // confirm. Already-seen / no-promo apps navigate directly.
+                        // Show the app's promo; it navigates on confirm.
+                        // Apps with no promo content navigate directly.
                         if (maybeShowPromo(mod.id as AppId)) return;
                         if (mod.href) navigate(mod.href);
                       }}
@@ -320,13 +321,34 @@ const Dashboard = (props: DashboardProps) => {
 };
 
 const DashboardConnected = inject((stores: TStore) => {
-  const { userStore, clientLoadingStore, settingsStore } = stores;
+  const {
+    userStore,
+    clientLoadingStore,
+    settingsStore,
+    filesTourStore,
+    roomsTourStore,
+    formsTourStore,
+    aiAgentsTourStore,
+  } = stores;
+
+  // The app cards an onboarding tour can be started from. An app that isn't
+  // here simply gets no "Take a tour" button in its promo.
+  const appTourStores = {
+    "ai-files": filesTourStore,
+    "ai-rooms": roomsTourStore,
+    "ai-forms": formsTourStore,
+    "ai-agents": aiAgentsTourStore,
+  } as const;
 
   return {
     ...mapChatNoAccessStores(stores),
     isGuest: userStore.user?.isVisitor ?? false,
     showLoader: clientLoadingStore.showArticleLoader,
     currentDeviceType: settingsStore.currentDeviceType,
+    requestAppTour: (appId: AppId) => {
+      if (appId in appTourStores)
+        appTourStores[appId as keyof typeof appTourStores].requestTour();
+    },
   };
 })(observer(Dashboard));
 

@@ -31,5 +31,8 @@
       "Bash(pnpm --filter @docspace/client exec vitest run src/store/contextOptionsStore)",
       "Bash(sort -u -t: -k2)"
     ]
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
   }
 }

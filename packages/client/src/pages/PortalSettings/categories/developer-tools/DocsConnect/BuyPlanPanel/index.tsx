@@ -241,6 +241,9 @@ const BuyPlanPanel = ({
     : devPack
       ? DEVPACK_MIN_USERS
       : MIN_USERS;
+  const minusBlockedByDevPackUpgrade =
+    isDevPackUpgrade && users <= currentUsers;
+  const isMinusDisabled = devPack && users <= minUsers;
 
   const periodEndDate = info.tenant.endDate ?? "";
   const periodEndDateLocalized = formatDateLocalized(
@@ -650,12 +653,14 @@ const BuyPlanPanel = ({
                 })}
                 onChange={setUsers}
                 isDisabled={submitting}
-                minusDisabled={isDevPackUpgrade}
+                minusDisabled={isMinusDisabled}
                 minusTooltipId={
-                  isDevPackUpgrade ? USERS_MINUS_TOOLTIP_ID : undefined
+                  minusBlockedByDevPackUpgrade
+                    ? USERS_MINUS_TOOLTIP_ID
+                    : undefined
                 }
               />
-              {isDevPackUpgrade ? (
+              {minusBlockedByDevPackUpgrade ? (
                 <Tooltip
                   id={USERS_MINUS_TOOLTIP_ID}
                   place="bottom"

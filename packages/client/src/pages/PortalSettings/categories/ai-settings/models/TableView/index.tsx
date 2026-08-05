@@ -126,11 +126,15 @@ const TableView = (props: ModelSettingsTableViewProps) => {
                   ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
                   : ""
               }
-              outputPrice={
-                m.price?.completion != null
-                  ? (formatAiModelsCurrency?.(m.price.completion) ?? "")
-                  : ""
-              }
+              outputPrice={(() => {
+                const outputValue =
+                  m.price?.completion ??
+                  ("image" in m.price ? m.price.image : undefined);
+
+                return outputValue != null
+                  ? (formatAiModelsCurrency?.(outputValue) ?? "")
+                  : "";
+              })()}
               enabled={aiModelAvailabilityMap?.get(m.id) ?? true}
               isUpdating={aiModelAvailabilityUpdatingSet?.has(m.id) ?? false}
               onToggle={onToggle}

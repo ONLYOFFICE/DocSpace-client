@@ -700,6 +700,7 @@ const BuyPlanPanel = ({
                   className={styles.toggleButton}
                   isChecked={devPack}
                   onChange={onToggleDevPack}
+                  isDisabled={submitting}
                   dataTestId="docs_connect_devpack_toggle"
                 />
               </div>

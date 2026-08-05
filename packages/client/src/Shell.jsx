@@ -158,9 +158,14 @@ const Shell = ({ page = "home", ...rest }) => {
   } = rest;
 
   const [searchParams] = useSearchParams();
+  const location = useLocation();
 
   const folderType = searchParams.get("folderType");
   const searchArea = searchParams.get("searchArea");
+
+  // The Overview (dashboard) page sits outside the Files/Rooms sections, so
+  // its chat suggestions are resolved by route rather than by folder context.
+  const isOverview = location.pathname.startsWith("/dashboard");
 
   const { t, ready } = useTranslation([
     "Common",
@@ -186,6 +191,7 @@ const Shell = ({ page = "home", ...rest }) => {
           isAdmin,
           isRoomAdmin,
           isGuest,
+          isOverview,
         },
         t,
       ),
@@ -199,6 +205,7 @@ const Shell = ({ page = "home", ...rest }) => {
       isAdmin,
       isRoomAdmin,
       isGuest,
+      isOverview,
       folderType,
       searchArea,
       t,
@@ -628,7 +635,6 @@ const Shell = ({ page = "home", ...rest }) => {
     ) : (
       <Toast />
     );
-  const location = useLocation();
 
   // Single source of truth for AI chat availability: computed once here in the
   // host and handed to AiAgentProviders, which shares it with descendants

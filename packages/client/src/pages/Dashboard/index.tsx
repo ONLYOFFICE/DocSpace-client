@@ -69,8 +69,12 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
+import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
+import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import ChatPanelView from "@docspace/ui-kit/components/section/sub-components/ChatPanel";
 
 import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
 import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.react.svg";
@@ -80,6 +84,11 @@ import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
+import {
+  useChatNoAccess,
+  mapChatNoAccessStores,
+  type ChatNoAccessStoreProps,
+} from "SRC_DIR/Hooks/useChatNoAccess";
 
 import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
@@ -93,14 +102,16 @@ import { useCreateActions } from "./hooks/useCreateActions";
 import { useMyFolderId } from "./hooks/useMyFolderId";
 import styles from "./Dashboard.module.scss";
 
-interface DashboardProps {
+type DashboardProps = ChatNoAccessStoreProps & {
   isGuest: boolean;
   showLoader: boolean;
-}
+  currentDeviceType?: TStore["settingsStore"]["currentDeviceType"];
+};
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
 
-const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
+const Dashboard = (props: DashboardProps) => {
+  const { isGuest, showLoader, currentDeviceType } = props;
   const { t } = useTranslation(["Common", "OAuth"]);
   useDocumentTitle("Common:Overview");
   const [searchParams] = useSearchParams();
@@ -129,6 +140,25 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
   // persistent host to drop the previous app's frame so it doesn't linger
   // behind the dashboard.
   useSdkFrame({ appId: "dashboard", enabled: false });
+
+  // AI chat panel, mirroring the Home page: the "AI Chat" quick action opens
+  // the shared panel (AiChatStore), which the dashboard hosts itself since it
+  // doesn't render inside a Section.
+  const {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+    topUpDialog: aiChatTopUpDialog,
+  } = useChatNoAccess(props);
+
+  const aiChatPanel = useAiChatPanel(true, {
+    aiReady: aiChatReady,
+    noAccessProps: aiChatNoAccessProps,
+  });
+
+  const isDesktop = useIsDesktop();
+  const isAiChatFullscreen =
+    aiChatPanel.isChatPanelVisible &&
+    (aiChatPanel.isChatPanelFullscreen || !isDesktop);
 
   // The dashboard has no async content to load, so finish the sidebar's
   // Overview item progress animation immediately (other pages dispatch this
@@ -190,92 +220,115 @@ const Dashboard = ({ isGuest, showLoader }: DashboardProps) => {
   ].filter((mod) => mod.installed);
 
   return (
-    <div className={styles.dashboard}>
-      <div className={styles.dashboardInner}>
-        <Header />
-        <ProfileCard />
+    <div
+      className={styles.dashboardLayout}
+      data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
+    >
+      <div className={styles.dashboard} inert={isAiChatFullscreen}>
+        <Scrollbar className={styles.dashboardScrollbar}>
+          <div className={styles.dashboardInner}>
+            <Header />
+            <ProfileCard />
 
-        <section className={styles.section}>
-          <Text fontSize="18px" fontWeight={700} lineHeight="24px">
-            <Trans
-              t={t}
-              ns="Common"
-              i18nKey="CreateNewOrUpload"
-              components={{
-                1: (
-                  <Link
-                    id={UPLOAD_LINK_ID}
-                    type={LinkType.action}
-                    color="accent"
-                    isHovered
-                    isSemitransparent={isGuest}
-                    fontSize="18px"
-                    fontWeight={700}
-                    lineHeight="24px"
-                    onClick={isGuest ? undefined : openUploadDialog}
-                  />
-                ),
-              }}
-            />
-          </Text>
-          {isGuest ? (
-            <Tooltip
-              id={`${UPLOAD_LINK_ID}-tooltip`}
-              anchorSelect={`#${UPLOAD_LINK_ID}`}
-              place="bottom"
-              getContent={() => <GuestRestrictionTooltip />}
-            />
-          ) : null}
-          <QuickActions items={createItems} className={styles.quickActions} />
-        </section>
-
-        {moduleItems.length > 0 ? (
-          <section className={styles.section}>
-            <Text className={styles.sectionTitle}>{t("OAuth:Apps")}</Text>
-            <div className={styles.modulesGrid}>
-              {moduleItems.map((mod) => (
-                <ModuleCard
-                  key={mod.id}
-                  mod={mod}
-                  onClick={() => {
-                    promoHrefRef.current = mod.href;
-                    // Show the app's promo on first open; it navigates on
-                    // confirm. Already-seen / no-promo apps navigate directly.
-                    if (maybeShowPromo(mod.id as AppId)) return;
-                    if (mod.href) navigate(mod.href);
+            <section className={styles.section}>
+              <Text fontSize="18px" fontWeight={700} lineHeight="24px">
+                <Trans
+                  t={t}
+                  ns="Common"
+                  i18nKey="CreateNewOrUpload"
+                  components={{
+                    1: (
+                      <Link
+                        id={UPLOAD_LINK_ID}
+                        type={LinkType.action}
+                        color="accent"
+                        isHovered
+                        isSemitransparent={isGuest}
+                        fontSize="18px"
+                        fontWeight={700}
+                        lineHeight="24px"
+                        onClick={isGuest ? undefined : openUploadDialog}
+                      />
+                    ),
                   }}
                 />
-              ))}
+              </Text>
+              {isGuest ? (
+                <Tooltip
+                  id={`${UPLOAD_LINK_ID}-tooltip`}
+                  anchorSelect={`#${UPLOAD_LINK_ID}`}
+                  place="bottom"
+                  getContent={() => <GuestRestrictionTooltip />}
+                />
+              ) : null}
+              <QuickActions items={createItems} className={styles.quickActions} />
+            </section>
+
+            {moduleItems.length > 0 ? (
+              <section className={styles.section}>
+                <Text className={styles.sectionTitle}>{t("OAuth:Apps")}</Text>
+                <div className={styles.modulesGrid}>
+                  {moduleItems.map((mod) => (
+                    <ModuleCard
+                      key={mod.id}
+                      mod={mod}
+                      onClick={() => {
+                        promoHrefRef.current = mod.href;
+                        // Show the app's promo on first open; it navigates on
+                        // confirm. Already-seen / no-promo apps navigate directly.
+                        if (maybeShowPromo(mod.id as AppId)) return;
+                        if (mod.href) navigate(mod.href);
+                      }}
+                    />
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            <IntegrationsCard />
+            <DevToolsCard />
             </div>
-          </section>
+        </Scrollbar>
+
+        {progress.isUploading ? (
+          <FloatingButton
+            icon="upload"
+            percent={progress.percent}
+            completed={progress.completed}
+            alert={progress.alert}
+            showCancelButton={progress.completed || progress.alert}
+            clearUploadedFilesHistory={clearProgress}
+          />
         ) : null}
 
-        <IntegrationsCard />
-        <DevToolsCard />
+        {promoDialog}
       </div>
 
-      {progress.isUploading ? (
-        <FloatingButton
-          icon="upload"
-          percent={progress.percent}
-          completed={progress.completed}
-          alert={progress.alert}
-          showCancelButton={progress.completed || progress.alert}
-          clearUploadedFilesHistory={clearProgress}
-        />
-      ) : null}
+      <ChatPanelView
+        isVisible={aiChatPanel.isChatPanelVisible}
+        setIsVisible={(visible) => {
+          if (!visible) aiChatPanel.closeChatPanel();
+        }}
+        currentDeviceType={currentDeviceType}
+      >
+        {aiChatPanel.chatPanelContent}
+      </ChatPanelView>
 
-      {promoDialog}
+      {aiChatTopUpDialog}
     </div>
   );
 };
 
-const DashboardConnected = inject<TStore>(
-  ({ userStore, clientLoadingStore }) => ({
+const DashboardConnected = inject((stores: TStore) => {
+  const { userStore, clientLoadingStore, settingsStore } = stores;
+
+  return {
+    ...mapChatNoAccessStores(stores),
     isGuest: userStore.user?.isVisitor ?? false,
     showLoader: clientLoadingStore.showArticleLoader,
-  }),
-)(observer(Dashboard));
+    currentDeviceType: settingsStore.currentDeviceType,
+  };
+})(observer(Dashboard));
 
 export { DashboardConnected as Dashboard };
 

@@ -97,6 +97,12 @@ export type SuggestionContext = {
   isRoomAdmin?: boolean;
   /** Guest (visitor): read-only participant. */
   isGuest?: boolean;
+  /**
+   * The Overview (dashboard) page. It lives outside the Files/Rooms sections,
+   * so no folder context applies — the flag short-circuits the folder-based
+   * resolution entirely.
+   */
+  isOverview?: boolean;
 };
 
 const hasAccess = (
@@ -202,6 +208,35 @@ export const getSuggestionsBySection = (t: TTranslation) => {
   ];
 
   return {
+    // The Overview (dashboard) page: "create with AI" starters. The dashboard
+    // has no folder context, so every chip targets the user's My documents
+    // ("create it in Files"). All rows are for any user — guests never reach
+    // them because the chat itself is unavailable to guests.
+    overview: [
+      {
+        name: t("AiSuggestions:OverviewCreateADocumentFromADescription"),
+        prompt: t(
+          "AiSuggestions:OverviewCreateADocumentFromADescriptionPrompt",
+        ),
+      },
+      {
+        name: t("AiSuggestions:OverviewCreateASpreadsheetForMyTask"),
+        prompt: t("AiSuggestions:OverviewCreateASpreadsheetForMyTaskPrompt"),
+      },
+      {
+        name: t("AiSuggestions:OverviewCreateAPresentationOnATopic"),
+        prompt: t("AiSuggestions:OverviewCreateAPresentationOnATopicPrompt"),
+      },
+      {
+        name: t("AiSuggestions:OverviewPrepareADocumentForPDF"),
+        prompt: t("AiSuggestions:OverviewPrepareADocumentForPDFPrompt"),
+      },
+      {
+        name: t("AiSuggestions:OverviewFindATemplateFromTheLibrary"),
+        prompt: t("AiSuggestions:OverviewFindATemplateFromTheLibraryPrompt"),
+      },
+    ],
+
     // +
     files: [
       {
@@ -964,7 +999,12 @@ export const resolveSuggestionSection = ({
   isFolder,
   isRootFolder,
   searchArea,
+  isOverview,
 }: SuggestionContext): SuggestionSection => {
+  // The dashboard is not a Files/Rooms section — the selected-folder state is
+  // whatever lingered from the previous location, so it must not be consulted.
+  if (isOverview) return "overview";
+
   if (isFolder && !isRootFolder && isNil(roomType)) {
     return nestedFolderSection(selectedFolderType);
   }

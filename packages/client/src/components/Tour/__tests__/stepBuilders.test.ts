@@ -101,7 +101,9 @@ describe("isStepTargetPresent", () => {
   it("rejects a detached element", () => {
     const detached = document.createElement("div");
 
-    expect(isStepTargetPresent({ target: detached } as Step)).toBe(false);
+    expect(
+      isStepTargetPresent({ target: detached, content: "body" }),
+    ).toBe(false);
   });
 
   it("resolves function targets, and survives one that throws", () => {

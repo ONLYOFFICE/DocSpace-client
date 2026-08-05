@@ -33,59 +33,50 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+@use "@docspace/ui-kit/styles/mixins";
+@use "./toolbar-mixins" as toolbar;
 
-import { TSelection } from "./ContextButton";
+$body-padding-end: 3px;
+$body-padding-start-mobile: 16px;
+$body-padding-end-mobile: 8px;
 
-import RoomsItemHeader from "./RoomsItemTitle";
+// The scroll body reserves a gutter for the scrollbar track, so bleeding to the
+// panel edge has to cancel that gutter on top of the body padding.
+$scroll-gutter: var(--scrollbar-padding-inline-end, 17px);
+$scroll-gutter-mobile: var(--scrollbar-padding-inline-end-mobile, 8px);
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+@mixin full-bleed($padding-start, $padding-end, $gutter) {
+  margin-inline-start: -$padding-start;
+  margin-inline-end: calc(-1 * (#{$padding-end} + #{$gutter}));
+  padding-inline: $padding-start;
+}
 
-const ItemTitle = ({
-  infoPanelSelection,
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 101;
 
-  isNoItem,
+  box-sizing: border-box;
+  height: var(--info-panel-history-toolbar-height);
+  background: var(--info-panel-toolbar-background-color);
 
-  isGallery,
-  isContacts,
+  @include full-bleed(
+    toolbar.$body-padding-start,
+    $body-padding-end,
+    $scroll-gutter
+  );
 
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 
-  if (isPlugin && !isPluginHeaderVisible) return null;
-
-  if (isNoItem || isContacts || isGallery) return null;
-
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
+  @include mixins.mobile {
+    @include full-bleed(
+      $body-padding-start-mobile,
+      $body-padding-end-mobile,
+      $scroll-gutter-mobile
     );
-
-  return <RoomsItemHeader selection={infoPanelSelection} />;
-};
-
-export default ItemTitle;
+  }
+}

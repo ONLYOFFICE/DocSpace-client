@@ -33,59 +33,18 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { SearchProps } from "../Search";
+import type { DateTime } from "luxon";
 
-import { TSelection } from "./ContextButton";
+import type { Nullable } from "@docspace/shared/types";
 
-import RoomsItemHeader from "./RoomsItemTitle";
+export type RangeEdge = "fromDate" | "toDate";
 
-type ItemTitleProps = {
-  infoPanelSelection?: TSelection;
-  isNoItem?: boolean;
-  isGallery?: boolean;
-  isContacts?: boolean;
-  isPlugin?: boolean;
-  isPluginHeaderVisible?: boolean;
-} & (
-  | {
-      isRoomMembersPanel: true;
-      searchProps: SearchProps;
-    }
-  | {
-      isRoomMembersPanel?: undefined;
-      searchProps?: undefined;
-    }
-);
+export type TExportDateRange = Record<RangeEdge, DateTime>;
 
-const ItemTitle = ({
-  infoPanelSelection,
+export type ExportDateRangeProps = {
+  dateRange: TExportDateRange;
+  earliestDate?: Nullable<DateTime>;
+  locale: string;
 
-  isNoItem,
-
-  isGallery,
-  isContacts,
-
-  isRoomMembersPanel,
-  isPluginHeaderVisible,
-  isPlugin,
-  searchProps,
-}: ItemTitleProps) => {
-  if (!infoPanelSelection) return null;
-
-  if (isPlugin && !isPluginHeaderVisible) return null;
-
-  if (isNoItem || isContacts || isGallery) return null;
-
-  if (isRoomMembersPanel)
-    return (
-      <RoomsItemHeader
-        selection={infoPanelSelection}
-        isRoomMembersPanel={isRoomMembersPanel}
-        searchProps={searchProps}
-      />
-    );
-
-  return <RoomsItemHeader selection={infoPanelSelection} />;
+  onChange: (dateRange: TExportDateRange) => void;
 };
-
-export default ItemTitle;

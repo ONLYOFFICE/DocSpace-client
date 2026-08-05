@@ -35,6 +35,7 @@
 
 import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import type {
   ButtonGroup,
   IBox,
@@ -107,6 +108,8 @@ const PluginComponentBase = inject(
       getPluginIconUrl,
       dispatchMessage,
     }: TPluginComponentProps) => {
+      const { t } = useTranslation("Common");
+
       const [elementProps, setElementProps] =
         React.useState<TAllComponentProps>(component.props);
 
@@ -235,12 +238,8 @@ const PluginComponentBase = inject(
           }
 
           case PluginComponents.textArea: {
-            const {
-              onChange,
-              // TODO: fix the type mismatch for copyInfoText instead of dropping it
-              copyInfoText: _copyInfoText,
-              ...restProps
-            } = elementProps as ITextArea;
+            const { onChange, copyInfoText, ...restProps } =
+              elementProps as ITextArea;
 
             const onChangeAction = (
               e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -249,7 +248,15 @@ const PluginComponentBase = inject(
               dispatch(message);
             };
 
-            return <Textarea {...restProps} onChange={onChangeAction} />;
+            return (
+              <Textarea
+                {...restProps}
+                copyInfoText={
+                  copyInfoText ? t("Common:CopiedToClipboard") : undefined
+                }
+                onChange={onChangeAction}
+              />
+            );
           }
 
           case PluginComponents.input: {

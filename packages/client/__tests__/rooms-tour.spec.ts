@@ -33,16 +33,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Page } from "@playwright/test";
+
 import {
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
   roomListHandler,
+  roomMembersHandlers,
   TypeRoomList,
 } from "@docspace/shared/__mocks__/handlers";
-import { test, TEST_PORT } from "./fixtures/base";
-import { armTour, walkTour } from "./helpers/tour";
+import { expect, test, TEST_PORT } from "./fixtures/base";
+import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
 // packages/client/src/store/RoomsTourStore.ts
 const TOUR_KEY = "rooms_tour_pending";
@@ -52,6 +55,52 @@ const TOUR_KEY = "rooms_tour_pending";
 // generic `files/:id` folder handler instead (see rooms-context-menu.spec.ts
 // for the same bare-root pattern).
 const ROOMS_URL = "/rooms/shared/";
+
+// First room of the mock list (getRoomList index 0) — the one the member step
+// opens the info panel on.
+const FIRST_ROOM_ID = 33;
+// Admin user id from the settings/self mocks, used as that room's owner.
+const ADMIN_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+
+// The info panel's outer wrapper, mounted only while the panel is open.
+const INFO_PANEL = ".info-panel";
+// The empty screen's action list, which is what the closing step points into.
+const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
+
+// Step titles, from public/locales/en/RoomsTour.json. Steps are addressed by
+// title rather than by index: which ones survive depends on the audience and
+// on settings (the grouping row only renders when room grouping is on), so an
+// index would quietly point at a different step as those flags move.
+const MEMBERS_STEP = "Work together";
+const CREATE_FIRST_STEP = "Now make it yours";
+
+const roomOwnerMembers = () =>
+  roomMembersHandlers(TEST_PORT, FIRST_ROOM_ID, {
+    initial: [{ id: ADMIN_ID, displayName: "Administrator", access: 0 }],
+  });
+
+/** Arms the tour and lands on the section that starts it by itself. */
+const startTour = async (page: Page, baseUrl: string) => {
+  // The first visit sets an origin so localStorage is reachable.
+  await page.goto(`${baseUrl}${ROOMS_URL}`);
+  await armTour(page, TOUR_KEY);
+  await page.goto(`${baseUrl}${ROOMS_URL}`);
+
+  await expect(tourTooltip(page)).toBeVisible();
+};
+
+/** Walks forward with the keyboard until the step titled `title` is up. */
+const goToStep = async (page: Page, title: string, maxSteps = 12) => {
+  const tooltip = tourTooltip(page);
+
+  for (let i = 0; i < maxSteps; i += 1) {
+    if (await tooltip.getByText(title, { exact: true }).isVisible()) return;
+    await page.keyboard.press("ArrowRight");
+    await expect(tooltip).toBeVisible();
+  }
+
+  throw new Error(`step "${title}" never came up`);
+};
 
 test.describe("Rooms tour", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -67,13 +116,9 @@ test.describe("Rooms tour", () => {
     mockRequest,
     baseUrl,
   }) => {
-    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"), ...roomOwnerMembers());
 
-    // First visit sets an origin so localStorage is reachable; the reload after
-    // arming the tour is what lands on a section that starts it by itself.
-    await page.goto(`${baseUrl}${ROOMS_URL}`);
-    await armTour(page, TOUR_KEY);
-    await page.goto(`${baseUrl}${ROOMS_URL}`);
+    await startTour(page, baseUrl);
 
     await walkTour(page, ["desktop", "rooms-tour", "admin"]);
   });
@@ -83,12 +128,97 @@ test.describe("Rooms tour", () => {
     mockRequest,
     baseUrl,
   }) => {
-    mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      ...roomOwnerMembers(),
+    );
 
-    await page.goto(`${baseUrl}${ROOMS_URL}`);
-    await armTour(page, TOUR_KEY);
-    await page.goto(`${baseUrl}${ROOMS_URL}`);
+    await startTour(page, baseUrl);
 
     await walkTour(page, ["desktop", "rooms-tour", "member"]);
+  });
+
+  test("opens the info panel for the member step and puts it away afterwards", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...roomOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+
+    // The panel belongs to the user, not to the tour: it starts closed, the
+    // step borrows it, and stepping off has to hand it back.
+    await expect(page.locator(INFO_PANEL)).toBeHidden();
+
+    await goToStep(page, MEMBERS_STEP);
+
+    await expect(page.locator(INFO_PANEL)).toBeVisible();
+    await expect(
+      page.locator(INFO_PANEL).getByText("Administrator").first(),
+    ).toBeVisible();
+
+    await page.keyboard.press("ArrowLeft");
+
+    await expect(page.locator(INFO_PANEL)).toBeHidden();
+  });
+});
+
+// A portal that has no rooms of its own renders neither the quick-actions
+// banner nor the filter bar, which would cut the tour down to its sidebar
+// steps. The section is stood in for instead (SRC_DIR/api/tourDemo), so these
+// walk the same tour against a list that came from nowhere.
+test.describe("Rooms tour on an empty portal", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      // No list type — the handler answers with an empty room list.
+      roomListHandler(TEST_PORT),
+    );
+  });
+
+  test("admin sees the walkthrough against a stood-in section", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    // The stand-in rooms are named after their own types, which is also what
+    // the first step is about.
+    await expect(
+      page.getByRole("main").getByText("Collaboration room").first(),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "rooms-tour", "empty"]);
+  });
+
+  test("hands the section back before the closing step", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    // The regression this guards: the stand-in rooms outliving the tour that
+    // put them there. The closing step drops them on purpose, so the user is
+    // looking at their own empty portal — and at the button that fixes it —
+    // while the tour is still there to explain it.
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(
+      page.getByRole("main").getByText("Collaboration room"),
+    ).toHaveCount(0);
   });
 });

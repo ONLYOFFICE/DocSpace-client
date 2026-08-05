@@ -37,45 +37,72 @@ import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
-import type { TourAudience } from "SRC_DIR/components/Tour/audience";
 import {
   navItemStep,
   elementStep,
-  fileItemStep,
+  elementGroupStep,
+  revealStep,
   sidebarSelector,
   expandQuickActions,
 } from "SRC_DIR/components/Tour/stepBuilders";
 
 const LOG_LABEL = "rooms tour";
 
+// The room-type tiles, in the banner order the quick-actions hook builds them
+// (VDR first). The template and AI chat tiles share their container and get a
+// step each, so the spotlight covers this run of tiles rather than the banner.
+const ROOM_TYPE_TILE_SELECTORS = [
+  '[data-testid="quick-vdr-room"]',
+  '[data-testid="quick-collaboration-room"]',
+  '[data-testid="quick-public-room"]',
+  '[data-testid="quick-custom-room"]',
+];
+
+// The room-grouping row above the list ("All rooms", the group chips, and the
+// button that creates the first group). ui-kit renders it behind three gates —
+// the grouping setting, the rooms root, and no active filter — so the step is
+// dropped by the start-of-run DOM check whenever it is not on screen.
+const GROUPS_SELECTOR = ".group-tags";
+
 // The first room of the list, in whichever view is active (only one of the
-// three is mounted at a time). Same wrappers as the files list — in the table
-// view the row has no geometry of its own (`display: contents`), which
-// `fileItemStep` handles by falling back to the row's widest cell.
+// three is mounted at a time).
 const FIRST_ITEM_SELECTOR =
   '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
 
+// The info panel's outer wrapper (ui-kit Section/InfoPanel keeps this plain
+// class alongside its CSS-module one). Only mounted while the panel is open,
+// which is why the step that points at it opens it first.
+const INFO_PANEL_SELECTOR = ".info-panel";
+
+// The first action of the empty screen, which on the rooms root is "create a
+// room" (EmptyViewContainer.helpers builds the list as
+// [createRoom, inviteRootRoom, migrationData]). ui-kit's EmptyView gives its
+// options no testid of their own, so the anchor is positional.
+const EMPTY_SCREEN_CREATE_SELECTOR =
+  '[data-testid="empty-view-body"] > *:first-child';
+
 export type TourStepFlags = {
-  // Which tour to build. Admins get the room-owner story (create a room, pick a
-  // type, invite members, archive it when it is done); users and guests get the
-  // member's story, where a room is somewhere they were let into and their role
-  // decides what they may do. The steps that only exist for one of them are
-  // dropped outright, and the anchors both share get their own wording.
-  audience: TourAudience;
   isDesktop: boolean;
+  // Room creation and templates are room-admin powers; everyone else only ever
+  // joins rooms someone else set up, so those steps are dropped for them.
   canCreate: boolean;
   canUseTemplates: boolean;
   showFilter: boolean;
-  // Whether the room list has at least one room — steps that point at a row
-  // are skipped on an empty section.
+  // Whether the room list has at least one room — the step that points at a
+  // row (and at the panel describing it) is skipped on an empty section.
   hasItems: boolean;
-  // Table view is the only one that renders a column header (and its column
-  // picker); the row/tile views don't.
-  isTableView: boolean;
-  // Sidebar anchors. The Rooms parent item id is the tree folder id; the
+  // Sidebar anchor: the Rooms parent item id is the tree folder id, and its
   // quick-access sub-items use static string ids ("rooms-recent" etc.).
   roomsId: string | null;
-  archiveId: string | null;
+  // Opens the info panel on the first room's member list, and puts back what
+  // it changed. Supplied by the host component, which holds the stores.
+  infoPanelHooks?: { reveal: () => void; restore: () => void };
+  // Whether the section the tour is walking through is stood in for. The
+  // closing step exists only then: it drops the stand-in and hands the user
+  // over to the real "create a room" button on the empty screen they are
+  // about to be left looking at.
+  isDemo: boolean;
+  demoHooks?: { reveal: () => void; restore: () => void };
 };
 
 export function getTourSteps(
@@ -84,20 +111,16 @@ export function getTourSteps(
   flags: TourStepFlags,
 ): Step[] {
   const {
-    audience,
     isDesktop,
     canCreate,
     canUseTemplates,
     showFilter,
     hasItems,
-    isTableView,
     roomsId,
-    archiveId,
+    infoPanelHooks,
+    isDemo,
+    demoHooks,
   } = flags;
-
-  // Room creation, templates, archiving and the room Trash are room-admin
-  // powers; everyone else only ever joins rooms someone else set up.
-  const isAdmin = audience === "admin";
 
   // The quick-access sub-items are nested under Rooms and rendered expanded
   // while the section is active. Skipped on tablet: the collapsed icon-only
@@ -105,235 +128,119 @@ export function getTourSteps(
   const showQuickAccess = isDesktop && !!roomsId;
 
   return [
-    // 1. Where am I — a room is not a folder; the difference is members+roles.
-    // The admin owns that difference, a member lives with it, so the same
-    // anchor carries two different explanations.
-    roomsId &&
-      navItemStep(
-        sidebarSelector(roomsId),
-        t("Common:Rooms"),
-        isAdmin
-          ? {
-              text: t("RoomsTour:TourRooms"),
-              points: [
-                t("RoomsTour:TourRoomsMembers"),
-                t("RoomsTour:TourRoomsPersonal"),
-              ],
-            }
-          : {
-              text: t("RoomsTour:TourRoomsMember"),
-              points: [
-                t("RoomsTour:TourRoomsMemberRole"),
-                t("RoomsTour:TourRoomsMemberScope"),
-              ],
-            },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 2. Create — the room-type tiles, named by what each type is for. Picking
-    // the right type up front matters: the type fixes what members can do and
-    // cannot be changed afterwards.
-    isAdmin &&
-      canCreate &&
+    // 1. The room types, named by what each one is for. Picking the right type
+    // up front matters: the type fixes what members can do and cannot be
+    // changed afterwards. With six tiles the banner clips to its first row, so
+    // every tile step expands it before measuring anything.
+    canCreate &&
       showFilter &&
-      elementStep(
+      elementGroupStep(
         '[data-testid="quick-actions"]',
-        t("RoomsTour:TourCreateTitle"),
-        {
-          text: t("RoomsTour:TourCreate"),
-          points: [
-            t("RoomsTour:TourCreateCollaboration"),
-            t("RoomsTour:TourCreatePublic"),
-            t("RoomsTour:TourCreateCustom"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 3. VDR — the type users least often understand, and the reason to choose
-    // Rooms over a plain shared folder for sensitive files.
-    isAdmin &&
-      canCreate &&
-      showFilter &&
-      elementStep(
-        '[data-testid="quick-vdr-room"]',
-        t("RoomsTour:TourVdrTitle"),
-        {
-          text: t("RoomsTour:TourVdr"),
-          points: [
-            t("RoomsTour:TourVdrRestrictions"),
-            t("RoomsTour:TourVdrWatermark"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 4. Templates tile — creating a room from a template carries the whole
-    // setup over (structure, tags, logo, roles), which is the fastest path for
-    // teams that spin up similar rooms repeatedly. It is the fifth tile, so it
-    // may sit in the clipped second row; expand the banner first.
-    isAdmin &&
-      canCreate &&
-      showFilter &&
-      canUseTemplates &&
-      elementStep(
-        '[data-testid="quick-use-template"]',
-        t("RoomsTour:TourTemplatesTitle"),
-        {
-          text: t("RoomsTour:TourTemplates"),
-          points: [
-            t("RoomsTour:TourTemplatesSave"),
-            t("RoomsTour:TourTemplatesReuse"),
-          ],
-        },
+        ROOM_TYPE_TILE_SELECTORS,
+        t("RoomsTour:RoomsTypesTitle"),
+        // Each type is named by the label its own tile carries (the same
+        // Common keys `useQuickActions` builds the banner from), so the
+        // tooltip and the tiles under the spotlight never drift apart.
+        t("RoomsTour:RoomsTypes", {
+          collaboration: t("Common:CollaborationRoomTitle"),
+          vdr: t("Common:VirtualDataRoom"),
+          publicRoom: t("Common:PublicRoom"),
+          custom: t("Common:CustomRoomTitle"),
+        }),
         callbacks,
         LOG_LABEL,
         6,
         expandQuickActions,
       ),
 
-    // 5. A real room row: the per-room actions users most often hunt for. The
-    // context menu is where the audiences part company — inviting, editing and
-    // archiving are only in an admin's menu, so the member wording promises
-    // nothing they will not find there.
+    // 2. Templates — the fastest path for teams that spin up similar rooms
+    // repeatedly, and the least obvious of the tiles.
+    canCreate &&
+      canUseTemplates &&
+      showFilter &&
+      elementStep(
+        '[data-testid="quick-use-template"]',
+        t("RoomsTour:RoomsTemplatesTitle"),
+        t("RoomsTour:RoomsTemplates"),
+        callbacks,
+        LOG_LABEL,
+        6,
+        expandQuickActions,
+      ),
+
+    // 3. AI chat — the same tile, and the same thing to say about it, as in the
+    // files tour; the wording is shared rather than duplicated per namespace.
+    showFilter &&
+      elementStep(
+        '[data-testid="quick-ai-chat"]',
+        t("FilesTour:TourAiAssistantTitle"),
+        t("FilesTour:TourAiAssistant", { sectionName: t("Common:Rooms") }),
+        callbacks,
+        LOG_LABEL,
+        6,
+        expandQuickActions,
+      ),
+
+    // 4. Room groups — the row of chips above the list.
+    showFilter &&
+      elementStep(
+        GROUPS_SELECTOR,
+        t("RoomsTour:RoomsGroupsTitle"),
+        t("RoomsTour:RoomsGroups"),
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 5. Members — the single most useful thing in the section, and the one
+    // that makes a room a room. The step opens the info panel on the first
+    // room's member list and lights up the row and the panel together.
     hasItems &&
-      fileItemStep(
-        FIRST_ITEM_SELECTOR,
-        t("RoomsTour:TourRoomItemTitle"),
-        {
-          text: t("RoomsTour:TourRoomItem"),
-          points: [
-            t("RoomsTour:TourRoomItemOpen"),
-            isAdmin
-              ? t("RoomsTour:TourRoomItemContextMenu")
-              : t("RoomsTour:TourRoomItemMemberMenu"),
-            t("RoomsTour:TourRoomItemPin"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 6. Info panel — members, roles and the access links all live here. This
-    // is the single most useful control in the section. For an admin it is a
-    // control panel (invite, change a role, mint a link); for a member it is a
-    // read-only "who else is here and what happened" view, so it gets its own
-    // title as well as its own body.
-    isDesktop &&
-      elementStep(
-        "#info-panel-toggle--open",
-        isAdmin
-          ? t("RoomsTour:RoomsInfoPanelTitle")
-          : t("RoomsTour:RoomsInfoPanelMemberTitle"),
-        isAdmin
-          ? {
-              text: t("RoomsTour:RoomsInfoPanel"),
-              points: [
-                t("RoomsTour:RoomsInfoPanelMembers"),
-                t("RoomsTour:RoomsInfoPanelLinks"),
-                t("RoomsTour:RoomsInfoPanelHistory"),
-              ],
-            }
-          : {
-              text: t("RoomsTour:RoomsInfoPanelMember"),
-              points: [
-                t("RoomsTour:RoomsInfoPanelMemberRoles"),
-                t("RoomsTour:RoomsInfoPanelHistory"),
-              ],
-            },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 7. Search — scoped to the room list, so it is worth saying what it covers.
-    showFilter &&
-      elementStep(
-        "#filter_search-input",
-        t("RoomsTour:RoomsSearchTitle"),
-        {
-          text: t("RoomsTour:RoomsSearch"),
-          points: [
-            t("RoomsTour:RoomsSearchScope"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 8. Advanced filter — tags are the rooms-specific part worth teaching.
-    showFilter &&
-      elementStep(
-        "#filter-button",
-        t("RoomsTour:TourFilterTitle"),
-        {
-          text: t("RoomsTour:TourFilter"),
-          points: [
-            t("RoomsTour:TourFilterTags"),
-          ],
-        },
-        callbacks,
-        LOG_LABEL,
-      ),
-
-    // 9. Table column picker — rendered by the table header only, so this step
-    // is skipped in the row/tile views.
-    isTableView &&
       isDesktop &&
-      elementStep(
-        '[data-testid="settings-block"]',
-        t("RoomsTour:RoomsColumnsTitle"),
-        t("RoomsTour:RoomsColumns"),
+      infoPanelHooks &&
+      revealStep(
+        INFO_PANEL_SELECTOR,
+        t("RoomsTour:RoomsMembersTitle"),
+        t("RoomsTour:RoomsMembers"),
         callbacks,
         LOG_LABEL,
+        infoPanelHooks,
+        [FIRST_ITEM_SELECTOR],
+        FIRST_ITEM_SELECTOR,
       ),
 
-    // 10. Recent / Favorites — the shortcuts that save the most clicks once
-    // the room list grows.
+    // 6. The sidebar sub-items: what each of the section's shortcuts holds.
+    // Each is named by the sidebar's own label, so the wording in the tooltip
+    // is the wording on screen and the names are not translated twice.
     showQuickAccess &&
       navItemStep(
         sidebarSelector("rooms-recent"),
-        t("RoomsTour:RoomsQuickAccessTitle"),
-        {
-          text: t("RoomsTour:RoomsQuickAccess"),
-          points: [
-            t("RoomsTour:RoomsQuickAccessFavorites"),
-          ],
-        },
+        t("RoomsTour:RoomsPlacesTitle"),
+        t("RoomsTour:RoomsPlaces", {
+          recent: t("Common:Recent"),
+          favorites: t("Common:Favorites"),
+          trash: t("Common:TrashSection"),
+          templates: t("Common:Templates"),
+          archive: t("Common:Archive"),
+        }),
         callbacks,
         LOG_LABEL,
+        true,
       ),
 
-    // 11. Archive — where finished rooms go, and why it is not deletion. Only
-    // a room admin can archive, so the step is pointless for anyone else.
-    isAdmin &&
-      showQuickAccess &&
-      archiveId &&
-      navItemStep(
-        sidebarSelector(archiveId),
-        t("RoomsTour:RoomsArchiveTitle"),
-        {
-          text: t("RoomsTour:RoomsArchive"),
-          points: [
-            t("RoomsTour:RoomsArchiveRestore"),
-          ],
-        },
+    // 7. Only when the section was stood in for. The stand-in rooms are the
+    // last thing the user saw, and dropping them lands them on the empty
+    // screen — so rather than let that happen behind their back, the closing
+    // step does it deliberately and points at the button that starts the real
+    // thing. `restore` is a no-op: the section is the user's own from here on.
+    isDemo &&
+      demoHooks &&
+      revealStep(
+        EMPTY_SCREEN_CREATE_SELECTOR,
+        t("RoomsTour:RoomsCreateFirstTitle"),
+        t("RoomsTour:RoomsCreateFirst"),
         callbacks,
         LOG_LABEL,
-      ),
-
-    // 12. Trash — deleting a room is recoverable, which is worth saying. Also
-    // admin-only: nobody else can delete a room in the first place.
-    isAdmin &&
-      showQuickAccess &&
-      navItemStep(
-        sidebarSelector("rooms-trash"),
-        t("RoomsTour:RoomsTrashTitle"),
-        t("RoomsTour:RoomsTrash"),
-        callbacks,
-        LOG_LABEL,
+        demoHooks,
       ),
   ].filter(Boolean) as Step[];
 }

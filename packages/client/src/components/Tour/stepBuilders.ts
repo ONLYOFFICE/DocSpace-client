@@ -332,6 +332,62 @@ export function menuStep(
 }
 
 /**
+ * Spotlight something the step brings on screen itself through the stores
+ * rather than through the DOM — the info panel is opened by selecting an item
+ * and switching a tab, an empty screen is brought back by reloading a section.
+ * Neither is a click on a single element the way `menuStep`'s trigger is.
+ *
+ * `reveal`/`restore` come from the tour's host component, which is the only
+ * place with the stores in hand. `restore` has to put back whatever `reveal`
+ * changed, because the user can walk back out of the step as easily as
+ * forward; pass a no-op when the step is meant to leave its change standing.
+ *
+ * `presence` names an element whose being on the page proves the step is worth
+ * running at all (a room row, for a panel that describes a room) — the target
+ * itself is not on screen when the tour starts, so it cannot be the thing
+ * checked. Leave it out for a step that is always worth running.
+ */
+export function revealStep(
+  target: string,
+  title: string,
+  body: StepBody,
+  callbacks: TourStepCallbacks | undefined,
+  logLabel: string,
+  hooks: { reveal: () => void; restore: () => void },
+  // Extra selectors the spotlight takes in alongside the panel — pass the row
+  // the panel is describing to light up the pair as one region.
+  spotlightWith: string[] = [],
+  presence?: string,
+  spotlightPadding = 4,
+): Step {
+  return {
+    target,
+    spotlightTarget: spotlightWith.length
+      ? () => unionSpotlight([target, ...spotlightWith], target)
+      : undefined,
+    spotlightPadding,
+    placement: "auto" as const,
+    content: stepContent(body),
+    title,
+    skipBeacon: true,
+    // The panel is only up while this step runs, so the start-of-run DOM check
+    // has to look at `presence` instead (see `isStepTargetPresent`).
+    data: { revealsTarget: true, presence },
+    before: async () => {
+      const signal = callbacks?.getSignal();
+      hooks.reveal();
+      await waitForElement(target, STEP_TARGET_TIMEOUT, signal).catch(
+        silenceNonAbort(logLabel),
+      );
+    },
+    after: () => {
+      hooks.restore();
+      removeUnionSpotlight();
+    },
+  };
+}
+
+/**
  * The class that stands in for a pointer the tour cannot fake, paired with the
  * rule in TourTooltip.module.scss.
  */

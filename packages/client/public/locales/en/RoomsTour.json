@@ -1,6 +1,8 @@
 {
   "RoomsCreateFirst": "Pick a type, invite the people you work with, and drop in your files. It takes a minute — and everything you have just seen starts working on your own documents.",
   "RoomsCreateFirstTitle": "Now make it yours",
+  "RoomsEmpty": "The rooms you have just seen were a preview. Rooms someone invites you to show up in this list, and everything you have been shown works the same way in them.",
+  "RoomsEmptyTitle": "Your list is empty for now",
   "RoomsGroups": "Organize rooms by specific features to quickly find what you need. Create groups and switch between them right above the list.",
   "RoomsGroupsTitle": "Group your rooms",
   "RoomsMembers": "Every room has its member list in the Info panel. Add portal contacts and set a role for each member — from viewing files to managing the entire room.",

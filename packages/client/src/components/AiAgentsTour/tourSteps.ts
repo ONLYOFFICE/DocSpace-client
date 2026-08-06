@@ -75,6 +75,11 @@ const FILTER_BUTTON_SELECTOR = "#filter-button";
 const EMPTY_SCREEN_CREATE_SELECTOR =
   '[data-testid="empty-view-body"] > *:first-child';
 
+// The empty screen itself, for the closing step of anyone with no action on it
+// to point at. Nothing is offered to somebody who cannot manage agents, so the
+// body may hold no options at all — the screen around them always exists.
+const EMPTY_SCREEN_SELECTOR = '[data-testid="empty-view"]';
+
 export type TourStepFlags = {
   // Which tour to build. Admins configure agents — instructions, knowledge
   // base, model, who may use them. Users and guests consume agents somebody
@@ -267,22 +272,35 @@ export function getTourSteps(
     // on is a step away from its first agent. A portal without it has just been
     // shown a section it cannot have yet, and the honest ending is to name the
     // one thing standing in the way rather than to pretend it was never
-    // pretending. `restore` is a no-op either way: the section is the user's
-    // own from here on.
+    // pretending.
+    //
+    // Somebody who does not administer the portal gets neither button — the
+    // empty screen is bare for them — so their ending names what the empty list
+    // means and who fills it instead. `restore` is a no-op in every case: the
+    // section is the user's own from here on.
     isStandIn &&
-      !!emptyScreenAction &&
       demoHooks &&
-      revealStep(
-        EMPTY_SCREEN_CREATE_SELECTOR,
-        emptyScreenAction === "create"
-          ? t("AiAgentsTour:AgentStartTitle")
-          : t("AiAgentsTour:AgentSwitchOnTitle"),
-        emptyScreenAction === "create"
-          ? t("AiAgentsTour:AgentStart")
-          : t("AiAgentsTour:AgentSwitchOn"),
-        callbacks,
-        LOG_LABEL,
-        demoHooks,
-      ),
+      (emptyScreenAction
+        ? revealStep(
+            EMPTY_SCREEN_CREATE_SELECTOR,
+            emptyScreenAction === "create"
+              ? t("AiAgentsTour:AgentStartTitle")
+              : t("AiAgentsTour:AgentSwitchOnTitle"),
+            emptyScreenAction === "create"
+              ? t("AiAgentsTour:AgentStart")
+              : t("AiAgentsTour:AgentSwitchOn"),
+            callbacks,
+            LOG_LABEL,
+            demoHooks,
+          )
+        : !isAdmin &&
+          revealStep(
+            EMPTY_SCREEN_SELECTOR,
+            t("AiAgentsTour:AgentEmptyTitle"),
+            t("AiAgentsTour:AgentEmpty"),
+            callbacks,
+            LOG_LABEL,
+            demoHooks,
+          )),
   ].filter(Boolean) as Step[];
 }

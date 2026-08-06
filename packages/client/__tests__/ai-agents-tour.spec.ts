@@ -71,6 +71,10 @@ const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
 const CREATE_STEP = "Give it a job";
 const CREATE_FIRST_STEP = "Now build your own";
 const SWITCH_ON_STEP = "Switch it on and see for real";
+// The closing step of anyone with no button on the empty screen to be sent at —
+// the stand-in is dropped the same way, but what is left under the spotlight is
+// the bare screen rather than an action.
+const EMPTY_LIST_STEP = "Your list is empty for now";
 
 const agentOwnerMembers = () =>
   roomMembersHandlers(TEST_PORT, AGENT_ID, {
@@ -227,6 +231,73 @@ test.describe("AI Agents tour on an empty portal", () => {
     await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
     await expect(
       page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toHaveCount(0);
+  });
+
+  test("user gets the stood-in section too, not a one-step tour", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // The regression this guards: the stand-in was once admins-only, which left
+    // everybody else with the sidebar step and nothing else — nothing about
+    // what an agent row does, and nothing about who else works with it.
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+    );
+
+    await startTour(page, baseUrl);
+
+    await expect(
+      page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "ai-agents-tour", "user-empty"]);
+  });
+
+  test("guest gets the stood-in section too, not a one-step tour", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "visitor"),
+      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+    );
+
+    await startTour(page, baseUrl);
+
+    await expect(
+      page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "ai-agents-tour", "guest-empty"]);
+  });
+
+  test("closes on the empty list rather than a create button they do not have", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      aiAgentsHandler(TEST_PORT, { canCreate: false }),
+    );
+
+    await startTour(page, baseUrl);
+    await goToStep(page, EMPTY_LIST_STEP);
+
+    // Handed back the same way an admin's is — the stand-in agents are gone and
+    // the user is looking at their own empty portal — but the step names what
+    // the empty list means instead of sending them at an action that is not
+    // theirs, so "Now build your own" never comes up for them.
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(
+      page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toHaveCount(0);
+    await expect(
+      tourTooltip(page).getByText(CREATE_FIRST_STEP, { exact: true }),
     ).toHaveCount(0);
   });
 });

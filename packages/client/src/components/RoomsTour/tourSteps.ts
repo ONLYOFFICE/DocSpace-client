@@ -81,6 +81,11 @@ const INFO_PANEL_SELECTOR = ".info-panel";
 const EMPTY_SCREEN_CREATE_SELECTOR =
   '[data-testid="empty-view-body"] > *:first-child';
 
+// The empty screen itself, for the closing step of anyone with no action on it
+// to point at. Nothing is offered to somebody who cannot create a room, so the
+// body may hold no options at all — the screen around them always exists.
+const EMPTY_SCREEN_SELECTOR = '[data-testid="empty-view"]';
+
 export type TourStepFlags = {
   isDesktop: boolean;
   // Room creation and templates are room-admin powers; everyone else only ever
@@ -230,17 +235,33 @@ export function getTourSteps(
     // 7. Only when the section was stood in for. The stand-in rooms are the
     // last thing the user saw, and dropping them lands them on the empty
     // screen — so rather than let that happen behind their back, the closing
-    // step does it deliberately and points at the button that starts the real
-    // thing. `restore` is a no-op: the section is the user's own from here on.
+    // step does it deliberately. `restore` is a no-op either way: the section
+    // is the user's own from here on.
+    //
+    // What it points at, and what it says, is whatever that screen actually
+    // offers. Somebody who can create a room is a click away from everything
+    // they were just shown, so the step lands on that button. Somebody who
+    // cannot has no button there at all — the honest ending for them is to name
+    // what the empty list means and who fills it, rather than to send them at
+    // an action that is not theirs.
     isDemo &&
       demoHooks &&
-      revealStep(
-        EMPTY_SCREEN_CREATE_SELECTOR,
-        t("RoomsTour:RoomsCreateFirstTitle"),
-        t("RoomsTour:RoomsCreateFirst"),
-        callbacks,
-        LOG_LABEL,
-        demoHooks,
-      ),
+      (canCreate
+        ? revealStep(
+            EMPTY_SCREEN_CREATE_SELECTOR,
+            t("RoomsTour:RoomsCreateFirstTitle"),
+            t("RoomsTour:RoomsCreateFirst"),
+            callbacks,
+            LOG_LABEL,
+            demoHooks,
+          )
+        : revealStep(
+            EMPTY_SCREEN_SELECTOR,
+            t("RoomsTour:RoomsEmptyTitle"),
+            t("RoomsTour:RoomsEmpty"),
+            callbacks,
+            LOG_LABEL,
+            demoHooks,
+          )),
   ].filter(Boolean) as Step[];
 }

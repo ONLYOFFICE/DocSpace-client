@@ -173,11 +173,14 @@ const RoomsTour = ({
     if (tourDemo.isActive || hasItems) return;
     if (isMobileView || firstLoad || isSectionLoading || !isRoomsRoot) return;
     if (!user) return;
-    // Only for someone who can act on what the stand-in section shows. A
-    // member with no rooms has nothing to be shown and nothing to do about it
-    // — the closing step would send them at a button they do not have.
-    if (!canCreate) return;
 
+    // Whatever the audience. Somebody who cannot create a room has the most to
+    // gain from this and the least without it: their empty section renders
+    // neither the banner nor the filter bar, so their tour is one sidebar step
+    // — nothing about what a room row does, and nothing about the member list
+    // that is the whole point of the section for them. The closing step is what
+    // keeps that honest: it forks on `canCreate` and names the empty list for
+    // anyone who has no "create a room" button to be sent at.
     tourDemo.activate({
       list: "rooms",
       // The rooms tour never walks into a room, so the stand-in list is the
@@ -215,7 +218,6 @@ const RoomsTour = ({
     isSectionLoading,
     isRoomsRoot,
     user,
-    canCreate,
     reloadSection,
     t,
   ]);

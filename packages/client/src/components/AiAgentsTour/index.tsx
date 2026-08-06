@@ -288,12 +288,13 @@ const AiAgentsTour = ({
     if (isMobileView || firstLoad || isSectionLoading || !isAiAgentsRoot)
       return;
     if (!user) return;
-    // Only for someone who can act on what the stand-in section shows. Somebody
-    // who cannot create an agent has nothing to do about an empty list, and the
-    // steps the stand-in brings with it would all end in a dead end. The test
-    // is what the user is allowed to do, not what the portal has switched on —
-    // AI being off is the very thing the stand-in below covers for.
-    if (!canCreateRooms) return;
+
+    // Whatever the audience. Somebody who cannot create an agent has the most
+    // to gain from this and the least without it: their empty section renders
+    // neither the banner nor the filter bar, so their tour is one sidebar step
+    // — nothing about what an agent row does, and nothing about the member list
+    // that says who else uses it. The closing step is what keeps that honest:
+    // it names the empty list for anyone with no button on that screen.
 
     // Before the list, because the list is downstream of it: with AI off the
     // section renders neither the banner nor the filter bar, and the reload
@@ -344,7 +345,6 @@ const AiAgentsTour = ({
     isSectionLoading,
     isAiAgentsRoot,
     user,
-    canCreateRooms,
     standInForAi,
     reloadSection,
     t,

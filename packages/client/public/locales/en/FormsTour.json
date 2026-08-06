@@ -8,6 +8,8 @@
   "FormsDemoFeedback": "Client feedback",
   "FormsDemoOnboarding": "Employee onboarding",
   "FormsDemoTimeOff": "Time off requests",
+  "FormsEmpty": "The spaces you have just seen were a preview. A form space appears in this list as soon as someone invites you to fill a form in, and the form is waiting for you inside it.",
+  "FormsEmptyTitle": "Your list is empty for now",
   "FormsInProgress": "The moment someone opens the form they get a copy of their own, saved into {{inProgress}} as they type — nothing is lost if they close the tab, and nothing counts as an answer until they submit. Anyone you invite as {{formFiller}} sees only their own copy, never anyone else's.",
   "FormsInProgressTitle": "Started, not finished",
   "FormsItem": "Every row is a whole collection. Open one to work inside it, pin the ones you are running, or use the three dots to invite people, copy the link that opens the form, and save the setup as a template.",

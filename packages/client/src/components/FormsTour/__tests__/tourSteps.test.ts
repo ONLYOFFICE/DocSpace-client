@@ -46,6 +46,7 @@ const steps = (flags: TourStepFlags) => getTourSteps(t, undefined, flags);
 const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
 
 const EMPTY_SCREEN_TARGET = '[data-testid="empty-view-body"] > *:first-child';
+const EMPTY_SCREEN = '[data-testid="empty-view"]';
 
 const hooks = () => ({ reveal: vi.fn(), restore: vi.fn() });
 
@@ -73,6 +74,13 @@ const fillerFlags: TourStepFlags = {
   canCreate: false,
   canUseTemplates: false,
 };
+
+/**
+ * The same person on a portal with no spaces at all, whose list is stood in
+ * for. The empty screen offers them nothing — creating a space is not theirs to
+ * do — so the closing step has somewhere else to point.
+ */
+const fillerDemoFlags: TourStepFlags = { ...fillerFlags, isStandIn: true };
 
 describe("getTourSteps — room admin", () => {
   it("walks the section, then the inside of a space, then the sidebar", () => {
@@ -297,5 +305,31 @@ describe("getTourSteps — what the page allows", () => {
     expect(steps(adminFlags).at(-1)?.title).toBe("FormsTour:FormsPlacesTitle");
 
     document.body.innerHTML = "";
+  });
+
+  it("closes a stood-in run on the empty list itself for a filler", () => {
+    // Their section was stood in for too — otherwise their tour is the sidebar
+    // step and nothing else — so it still has to be handed back in the open.
+    // What they are left looking at is a bare empty screen, so that is what the
+    // step names rather than a button they do not have.
+    document.body.innerHTML = `<div data-testid="empty-view"></div>`;
+    const emptyScreen = document.querySelector(EMPTY_SCREEN);
+
+    const closing = steps(fillerDemoFlags).at(-1)!;
+
+    expect(closing.title).toBe("FormsTour:FormsEmptyTitle");
+    expect(closing.content).toBe("FormsTour:FormsEmpty");
+    expect((closing.target as () => Element | null)()).toBe(emptyScreen);
+    // Still the step that drops the stand-in, so the section is the user's own
+    // by the time the tour is over.
+    expect(closing.before).toBeTypeOf("function");
+
+    document.body.innerHTML = "";
+  });
+
+  it("never sends a filler at the create button", () => {
+    expect(titles(fillerDemoFlags)).not.toContain(
+      "FormsTour:FormsCreateFirstTitle",
+    );
   });
 });

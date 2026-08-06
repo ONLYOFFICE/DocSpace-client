@@ -237,10 +237,13 @@ const FormsTour = ({
     if (isMobileView || firstLoad || isSectionLoading || !isFormsRoot) return;
     if (!user) return;
 
-    // Standing in for the list is only for someone who can act on what it
-    // shows: the closing step it brings with it points at a "create" button
-    // that anyone else does not have.
-    const standInForList = !hasItems && canCreate;
+    // Whatever the audience. A form filler with no spaces yet has the most to
+    // gain from this and the least without it: their empty section renders
+    // neither the banner nor the filter bar, so their tour is one sidebar step
+    // — nothing about what a space holds, and nothing about the form inside it.
+    // The closing step is what keeps that honest: it forks on `canCreate` and
+    // names the empty list for anyone who has no "create" button to be sent at.
+    const standInForList = !hasItems;
 
     tourDemo.activate({
       // Form spaces are rooms with a search area of their own, so the list they
@@ -290,7 +293,6 @@ const FormsTour = ({
     isSectionLoading,
     isFormsRoot,
     user,
-    canCreate,
     reloadSection,
     t,
   ]);

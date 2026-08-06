@@ -73,6 +73,10 @@ const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
 // index would quietly point at a different step as those flags move.
 const MEMBERS_STEP = "Work together";
 const CREATE_FIRST_STEP = "Now make it yours";
+// The closing step of anyone with no create button to be sent at — the stand-in
+// is dropped the same way, but what is left under the spotlight is the bare
+// empty screen rather than an action.
+const EMPTY_LIST_STEP = "Your list is empty for now";
 
 const roomOwnerMembers = () =>
   roomMembersHandlers(TEST_PORT, FIRST_ROOM_ID, {
@@ -243,6 +247,76 @@ test.describe("Rooms tour on an empty portal", () => {
     await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
     await expect(
       page.getByRole("main").getByText("Collaboration room"),
+    ).toHaveCount(0);
+  });
+
+  test("user gets the stood-in section too, not a one-step tour", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // The regression this guards: the stand-in was once admins-only, which left
+    // everybody else with the sidebar step and nothing else — no row, no member
+    // list, which is the whole of what the section is for to them.
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      ...roomOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+
+    await expect(
+      page.getByRole("main").getByText("Collaboration room").first(),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "rooms-tour", "user-empty"]);
+  });
+
+  test("guest gets the stood-in section too, not a one-step tour", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "visitor"),
+      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      ...roomOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+
+    await expect(
+      page.getByRole("main").getByText("Collaboration room").first(),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "rooms-tour", "guest-empty"]);
+  });
+
+  test("closes on the empty list rather than a create button they do not have", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      roomListHandler(TEST_PORT, undefined, { canCreate: false }),
+      ...roomOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+    await goToStep(page, EMPTY_LIST_STEP);
+
+    // Handed back the same way an admin's is — the stand-in rooms are gone and
+    // the user is looking at their own empty portal — but the step names what
+    // the empty list means instead of sending them at an action that is not
+    // theirs, so "Now make it yours" never comes up for them.
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(
+      page.getByRole("main").getByText("Collaboration room"),
+    ).toHaveCount(0);
+    await expect(
+      tourTooltip(page).getByText(CREATE_FIRST_STEP, { exact: true }),
     ).toHaveCount(0);
   });
 });

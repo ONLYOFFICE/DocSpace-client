@@ -46,6 +46,7 @@ const steps = (flags: TourStepFlags) => getTourSteps(t, undefined, flags);
 const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
 
 const EMPTY_SCREEN_TARGET = '[data-testid="empty-view-body"] > *:first-child';
+const EMPTY_SCREEN = '[data-testid="empty-view"]';
 
 const hooks = () => ({ reveal: vi.fn(), restore: vi.fn() });
 
@@ -76,6 +77,13 @@ const userFlags: TourStepFlags = {
   canCreate: false,
   emptyScreenAction: null,
 };
+
+/**
+ * The same person on a portal with no agents at all, whose list is stood in
+ * for. The empty screen offers them nothing — creating an agent is not theirs
+ * to do — so the closing step has somewhere else to point.
+ */
+const userDemoFlags: TourStepFlags = { ...userFlags, isStandIn: true };
 
 describe("getTourSteps — admin", () => {
   it("walks what an agent is, building one, using one, and finding it again", () => {
@@ -212,14 +220,41 @@ describe("getTourSteps — what the page allows", () => {
     document.body.innerHTML = "";
   });
 
-  it("keeps the closing step away from anyone the empty screen offers nothing", () => {
+  it("keeps the create button away from an admin the empty screen offers none", () => {
     // The banner lets a room admin create an agent, but the empty screen only
     // offers a button to a portal admin — so the step that sends them at it has
-    // a gate of its own.
+    // a gate of its own, and there is nothing else to send an admin at.
     expect(titles({ ...demoFlags, emptyScreenAction: null })).toHaveLength(6);
     expect(titles({ ...demoFlags, emptyScreenAction: null }).at(-1)).toBe(
       "AiAgentsTour:AgentPlacesTitle",
     );
+  });
+
+  it("closes a stood-in run on the empty list itself for someone who cannot create", () => {
+    // Their section was stood in for too — otherwise their tour is the sidebar
+    // step and nothing else — so it still has to be handed back in the open.
+    // What they are left looking at is a bare empty screen, so that is what the
+    // step names rather than a button they do not have.
+    document.body.innerHTML = `<div data-testid="empty-view"></div>`;
+    const emptyScreen = document.querySelector(EMPTY_SCREEN);
+
+    const closing = steps(userDemoFlags).at(-1)!;
+
+    expect(closing.title).toBe("AiAgentsTour:AgentEmptyTitle");
+    expect(closing.content).toBe("AiAgentsTour:AgentEmpty");
+    expect((closing.target as () => Element | null)()).toBe(emptyScreen);
+    // Still the step that drops the stand-in, so the section is the user's own
+    // by the time the tour is over.
+    expect(closing.before).toBeTypeOf("function");
+
+    document.body.innerHTML = "";
+  });
+
+  it("never sends someone who cannot create an agent at the create button", () => {
+    const userTitles = titles(userDemoFlags);
+
+    expect(userTitles).not.toContain("AiAgentsTour:AgentStartTitle");
+    expect(userTitles).not.toContain("AiAgentsTour:AgentSwitchOnTitle");
   });
 
   it("closes on activation, not on creation, when AI is off for the portal", () => {

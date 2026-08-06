@@ -83,6 +83,11 @@ const DEMO_SPACE_SELECTOR = `${itemSelector(
 const EMPTY_SCREEN_CREATE_SELECTOR =
   '[data-testid="empty-view-body"] > *:first-child';
 
+// The empty screen itself, for the closing step of anyone with no action on it
+// to point at. Nothing is offered to somebody who cannot create a space, so the
+// body may hold no options at all — the screen around them always exists.
+const EMPTY_SCREEN_SELECTOR = '[data-testid="empty-view"]';
+
 export type TourStepFlags = {
   isDesktop: boolean;
   // Creating a form space and saving one as a template are room-admin powers;
@@ -290,17 +295,33 @@ export function getTourSteps(
     // 9. Only when the list was stood in for. The stand-in spaces are the last
     // thing the user saw, and dropping them lands them on the empty screen —
     // so rather than let that happen behind their back, the closing step does
-    // it deliberately and points at the button that starts the real thing.
-    // `restore` is a no-op: the section is the user's own from here on.
+    // it deliberately. `restore` is a no-op either way: the section is the
+    // user's own from here on.
+    //
+    // What it points at, and what it says, is whatever that screen actually
+    // offers. Somebody who can create a space is a click away from everything
+    // they were just shown, so the step lands on that button. A form filler has
+    // no button there at all — the honest ending for them is to name what the
+    // empty list means and who fills it, rather than to send them at an action
+    // that is not theirs.
     isStandIn &&
       demoHooks &&
-      revealStep(
-        EMPTY_SCREEN_CREATE_SELECTOR,
-        t("FormsTour:FormsCreateFirstTitle"),
-        t("FormsTour:FormsCreateFirst"),
-        callbacks,
-        LOG_LABEL,
-        demoHooks,
-      ),
+      (canCreate
+        ? revealStep(
+            EMPTY_SCREEN_CREATE_SELECTOR,
+            t("FormsTour:FormsCreateFirstTitle"),
+            t("FormsTour:FormsCreateFirst"),
+            callbacks,
+            LOG_LABEL,
+            demoHooks,
+          )
+        : revealStep(
+            EMPTY_SCREEN_SELECTOR,
+            t("FormsTour:FormsEmptyTitle"),
+            t("FormsTour:FormsEmpty"),
+            callbacks,
+            LOG_LABEL,
+            demoHooks,
+          )),
   ].filter(Boolean) as Step[];
 }

@@ -8,6 +8,8 @@
   "AgentDemoContracts": "Contract reviewer",
   "AgentDemoOnboarding": "Onboarding buddy",
   "AgentDemoSupport": "Support desk assistant",
+  "AgentEmpty": "The agents you have just seen were a preview. Agents show up in this list as soon as someone gives you access to one, ready to be put to work.",
+  "AgentEmptyTitle": "Your list is empty for now",
   "AgentFind": "Type a name to narrow the list — search looks at agent names, not at the messages inside their chats. Open the filter when the name is not what you remember, and find one by tag, by owner, or by who was let in.",
   "AgentFindTitle": "Picking one out later",
   "AgentPlacesRecent": "{{recent}} and {{favorites}} keep the agents you actually work with at the top of the sidebar.",

@@ -62,6 +62,10 @@ const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
 // a different step as those flags move.
 const BLANK_FORM_STEP = "The form everyone opens";
 const CREATE_FIRST_STEP = "Now make it yours";
+// The closing step of anyone with no create button to be sent at — the stand-in
+// is dropped the same way, but what is left under the spotlight is the bare
+// empty screen rather than an action.
+const EMPTY_LIST_STEP = "Your list is empty for now";
 
 // The first stand-in space the demo puts up on an empty portal
 // (FormsTour:FormsDemoOnboarding), and the three things waiting inside it
@@ -330,6 +334,73 @@ test.describe("Forms tour on an empty portal", () => {
     await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
     await expect(
       page.getByRole("main").getByText(DEMO_SPACE_TITLE),
+    ).toHaveCount(0);
+  });
+
+  test("user gets the stood-in section too, not a one-step tour", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // The regression this guards: the stand-in was once admins-only, which left
+    // everybody else with the sidebar step and nothing else — nothing about
+    // what a space holds, and nothing about the form waiting inside it.
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      formsRoomListHandler(TEST_PORT, { empty: true, canCreate: false }),
+    );
+
+    await startTour(page, baseUrl);
+
+    await expect(
+      page.getByRole("main").getByText(DEMO_SPACE_TITLE).first(),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "forms-tour", "user-empty"]);
+  });
+
+  test("guest gets the stood-in section too, not a one-step tour", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "visitor"),
+      formsRoomListHandler(TEST_PORT, { empty: true, canCreate: false }),
+    );
+
+    await startTour(page, baseUrl);
+
+    await expect(
+      page.getByRole("main").getByText(DEMO_SPACE_TITLE).first(),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "forms-tour", "guest-empty"]);
+  });
+
+  test("closes on the empty list rather than a create button they do not have", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      formsRoomListHandler(TEST_PORT, { empty: true, canCreate: false }),
+    );
+
+    await startTour(page, baseUrl);
+    await goToStep(page, EMPTY_LIST_STEP);
+
+    // Handed back the same way an admin's is — the stand-in spaces are gone and
+    // the user is looking at their own empty portal — but the step names what
+    // the empty list means instead of sending them at an action that is not
+    // theirs, so "Now make it yours" never comes up for them.
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(
+      page.getByRole("main").getByText(DEMO_SPACE_TITLE),
+    ).toHaveCount(0);
+    await expect(
+      tourTooltip(page).getByText(CREATE_FIRST_STEP, { exact: true }),
     ).toHaveCount(0);
   });
 });

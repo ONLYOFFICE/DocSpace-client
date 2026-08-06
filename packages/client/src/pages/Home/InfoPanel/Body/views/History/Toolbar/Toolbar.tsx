@@ -33,12 +33,15 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, type FC } from "react";
+import { type FC } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { parseToDateTime } from "@docspace/ui-kit/utils/date";
 import type { TFolderLogReportDateRange } from "@docspace/shared/api/files/types";
+
+import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
+import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";
 
 import { DateFilter } from "./sub-components/DateFilter";
 import { ExportMenu } from "./sub-components/ExportMenu";
@@ -56,20 +59,12 @@ const HistoryToolbar = ({
   onSelectDay,
 
   getRoomHistoryReport,
-  markRoomHistoryReportPageLeft,
-  resetRoomHistoryReportPageLeft,
-  isRoomHistoryReportDownloading,
+  isRoomHistoryReportBuilding,
   setIsScrollLocked,
 }: HistoryToolbarProps & InjectedHistoryToolbarProps) => {
   const { i18n } = useTranslation();
 
-  // A report that finishes while the user is away must not steal the tab, but
-  // coming back before it finishes makes the auto-open wanted again
-  useEffect(() => {
-    resetRoomHistoryReportPageLeft();
-
-    return () => markRoomHistoryReportPageLeft();
-  }, [markRoomHistoryReportPageLeft, resetRoomHistoryReportPageLeft]);
+  useReportPageLeft(ReportType.RoomHistory);
 
   const onExportHistory = (dateRange?: TFolderLogReportDateRange) => {
     getRoomHistoryReport(roomId, dateRange);
@@ -90,7 +85,7 @@ const HistoryToolbar = ({
       {canExportHistory ? (
         <ExportMenu
           key={roomId}
-          isReportGenerating={isRoomHistoryReportDownloading}
+          isReportGenerating={isRoomHistoryReportBuilding}
           earliestDate={roomCreatedDate}
           locale={i18n.language}
           onExport={onExportHistory}
@@ -104,17 +99,13 @@ export default inject<TStore, HistoryToolbarProps, InjectedHistoryToolbarProps>(
   ({ infoPanelStore }: TStore) => {
     const {
       getRoomHistoryReport,
-      markRoomHistoryReportPageLeft,
-      resetRoomHistoryReportPageLeft,
-      isRoomHistoryReportDownloading,
+      isRoomHistoryReportBuilding,
       setIsScrollLocked,
     } = infoPanelStore;
 
     return {
       getRoomHistoryReport,
-      markRoomHistoryReportPageLeft,
-      resetRoomHistoryReportPageLeft,
-      isRoomHistoryReportDownloading,
+      isRoomHistoryReportBuilding,
       setIsScrollLocked,
     };
   },

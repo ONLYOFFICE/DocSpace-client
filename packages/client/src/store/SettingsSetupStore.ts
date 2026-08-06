@@ -56,7 +56,6 @@ import type { TfaStore } from "@docspace/shared/store/TfaStore";
 import type { SelectedConsumer } from "SRC_DIR/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/ExternalDbModal/ExternalDbModal.types";
 import SelectionStore from "./SelectionStore";
 import type { ThirdPartyStore } from "./ThirdPartyStore";
-import type FilesSettingsStore from "./FilesSettingsStore";
 import type DocumentBuilderReportStore from "./DocumentBuilderReportStore";
 import { ReportType } from "./DocumentBuilderReportStore";
 
@@ -126,8 +125,6 @@ class SettingsSetupStore {
   tfaStore: TfaStore;
 
   thirdPartyStore: ThirdPartyStore;
-
-  filesSettingsStore: FilesSettingsStore;
 
   documentBuilderReportStore: DocumentBuilderReportStore;
 
@@ -240,7 +237,6 @@ class SettingsSetupStore {
     authStore: AuthStore,
     settingsStore: SettingsStore,
     thirdPartyStore: ThirdPartyStore,
-    filesSettingsStore: FilesSettingsStore,
     documentBuilderReportStore: DocumentBuilderReportStore,
   ) {
     this.selectionStore = new SelectionStore(this);
@@ -248,7 +244,6 @@ class SettingsSetupStore {
     this.tfaStore = tfaStore;
     this.settingsStore = settingsStore;
     this.thirdPartyStore = thirdPartyStore;
-    this.filesSettingsStore = filesSettingsStore;
     this.documentBuilderReportStore = documentBuilderReportStore;
     makeAutoObservable(this);
   }
@@ -679,24 +674,6 @@ class SettingsSetupStore {
       start: api.settings.startAuditTrailReport,
       getStatus: api.settings.getAuditTrailReportStatus,
     });
-  };
-
-  markLoginHistoryReportPageLeft = () => {
-    this.documentBuilderReportStore.markReportPageLeft(ReportType.LoginHistory);
-  };
-
-  resetLoginHistoryReportPageLeft = () => {
-    this.documentBuilderReportStore.resetReportPageLeft(
-      ReportType.LoginHistory,
-    );
-  };
-
-  markAuditTrailReportPageLeft = () => {
-    this.documentBuilderReportStore.markReportPageLeft(ReportType.AuditTrail);
-  };
-
-  resetAuditTrailReportPageLeft = () => {
-    this.documentBuilderReportStore.resetReportPageLeft(ReportType.AuditTrail);
   };
 
   setGreetingTitle = async (greetingTitle: string) => {

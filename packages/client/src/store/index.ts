@@ -175,7 +175,6 @@ const setupStore = new SettingsSetupStore(
   authStore,
   settingsStore,
   thirdPartyStore,
-  filesSettingsStore,
   documentBuilderReportStore,
 );
 

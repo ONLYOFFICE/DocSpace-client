@@ -39,6 +39,10 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
 
 import { Consumer } from "@docspace/ui-kit/utils";
+
+import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
+import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";
+
 import { Table } from "./TableView/TableView";
 import HistoryRowContainer from "./RowView/HistoryRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
@@ -52,8 +56,6 @@ const LoginHistory = (props) => {
     viewAs,
     getLoginHistoryReport,
     isLoginHistoryReportBuilding,
-    markLoginHistoryReportPageLeft,
-    resetLoginHistoryReportPageLeft,
     // getLifetimeAuditSettings,
     setLifetimeAuditSettings,
     securityLifetime,
@@ -63,6 +65,8 @@ const LoginHistory = (props) => {
     currentColorScheme,
   } = props;
 
+  useReportPageLeft(ReportType.LoginHistory);
+
   useEffect(() => {
     setDocumentTitle(t("LoginHistoryTitle"));
 
@@ -70,12 +74,7 @@ const LoginHistory = (props) => {
 
     //  getLifetimeAuditSettings();
 
-    resetLoginHistoryReportPageLeft();
-
-    return () => {
-      markLoginHistoryReportPageLeft();
-      resetIsInit();
-    };
+    return () => resetIsInit();
   }, []);
 
   const getContent = () => {
@@ -136,8 +135,6 @@ export default inject(
       viewAs,
       getLoginHistoryReport,
       isLoginHistoryReportBuilding,
-      markLoginHistoryReportPageLeft,
-      resetLoginHistoryReportPageLeft,
       getLifetimeAuditSettings,
       setLifetimeAuditSettings,
       securityLifetime,
@@ -161,8 +158,6 @@ export default inject(
       viewAs,
       getLoginHistoryReport,
       isLoginHistoryReportBuilding,
-      markLoginHistoryReportPageLeft,
-      resetLoginHistoryReportPageLeft,
       isAuditAvailable,
       resetIsInit,
       tfaEnabled,

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
@@ -60,6 +60,14 @@ export type TReportRequests = {
   start: () => Promise<Nullable<TDocumentBuilderTask>>;
   getStatus: () => Promise<Nullable<TDocumentBuilderTask>>;
 };
+
+// How long the client keeps watching a task before it stops polling. The
+// builder is not cancelled — it keeps running on the server and still saves the
+// file, so giving up only means the user has to pick the file up themselves.
+export const REPORT_BUILD_TIMEOUT_MS = 10 * 60 * 1000;
+
+const getSaveLocationText = () =>
+  i18n.t("Common:ReportSaveLocation", { sectionName: i18n.t("Common:Files") });
 
 class DocumentBuilderReportStore {
   private filesSettingsStore: FilesSettingsStore;
@@ -93,17 +101,28 @@ class DocumentBuilderReportStore {
     this.resetReportPageLeft(type);
     this.buildingReports.add(type);
 
+    // The timeout is driven by the abort signal rather than by pollUntil's own
+    // one, because pollUntil rejects with an untranslatable Error while giving
+    // up on a still-running builder is not something to report as a failure.
     const abortController = new AbortController();
+    const timeoutId = window.setTimeout(
+      () => abortController.abort(),
+      REPORT_BUILD_TIMEOUT_MS,
+    );
 
     try {
       let task = await requests.start();
 
       if (!task?.isCompleted && !task?.error) {
-        await pollUntil(async () => {
-          task = await requests.getStatus();
+        await pollUntil(
+          async () => {
+            task = await requests.getStatus();
 
-          return !!task?.isCompleted || !!task?.error;
-        }, abortController.signal);
+            return !!task?.isCompleted || !!task?.error;
+          },
+          abortController.signal,
+          { timeoutMs: Number.POSITIVE_INFINITY },
+        );
       }
 
       if (task?.error) {
@@ -111,25 +130,36 @@ class DocumentBuilderReportStore {
         return;
       }
 
-      this.openBuiltReport(type, task?.resultFileUrl);
+      if (!task?.isCompleted) {
+        toastr.info(getSaveLocationText());
+        return;
+      }
+
+      this.finishReport(type, task.resultFileUrl);
     } catch (error) {
       toastr.error(error as TData);
     } finally {
-      this.buildingReports.delete(type);
+      window.clearTimeout(timeoutId);
+
+      runInAction(() => {
+        this.buildingReports.delete(type);
+        this.abandonedReports.delete(type);
+      });
     }
   };
 
-  private openBuiltReport = (type: TReportType, resultFileUrl?: string) => {
-    toastr.success(
-      i18n.t("Common:ReportSaveLocation", {
-        sectionName: i18n.t("Common:Files"),
-      }),
-    );
-
-    if (this.abandonedReports.has(type) || !resultFileUrl) {
-      this.abandonedReports.delete(type);
+  private finishReport = (type: TReportType, resultFileUrl?: string) => {
+    if (!resultFileUrl) {
+      toastr.error(i18n.t("Common:SomethingWentWrong"));
       return;
     }
+
+    toastr.success(getSaveLocationText());
+
+    // The toast is all the user gets once they have left the page the report
+    // was started from — opening the file would pull them out of wherever they
+    // navigated to.
+    if (this.abandonedReports.has(type)) return;
 
     const { openOnNewPage } = this.filesSettingsStore;
     const url = combineUrl(window.ClientConfig?.proxy?.url, resultFileUrl);

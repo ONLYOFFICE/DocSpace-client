@@ -118,19 +118,11 @@ class InfoPanelStore {
     makeAutoObservable(this);
   }
 
-  get isRoomHistoryReportDownloading() {
+  get isRoomHistoryReportBuilding() {
     return this.documentBuilderReportStore.isReportBuilding(
       ReportType.RoomHistory,
     );
   }
-
-  markRoomHistoryReportPageLeft = () => {
-    this.documentBuilderReportStore.markReportPageLeft(ReportType.RoomHistory);
-  };
-
-  resetRoomHistoryReportPageLeft = () => {
-    this.documentBuilderReportStore.resetReportPageLeft(ReportType.RoomHistory);
-  };
 
   getRoomHistoryReport = (
     folderId: number | string,

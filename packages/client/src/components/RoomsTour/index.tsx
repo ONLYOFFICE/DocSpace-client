@@ -38,7 +38,11 @@ import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { DeviceType } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 
 import type RoomsTourStore from "SRC_DIR/store/RoomsTourStore";
 import type FilesStore from "SRC_DIR/store/FilesStore";
@@ -175,16 +179,29 @@ const RoomsTour = ({
     if (!canCreate) return;
 
     tourDemo.activate({
+      // The rooms tour never walks into a room, so the stand-in list is the
+      // whole of what it borrows — and it only ever borrows it when the real
+      // one came back empty.
+      standInForList: true,
       // Each stand-in room is named after its own type, with the very keys the
       // banner's tiles are built from — so the demo adds no strings of its own
-      // to translate. Listed in `DEMO_ROOM_TYPES` order.
-      roomTitles: [
-        t("Common:CollaborationRoomTitle"),
-        t("Common:VirtualDataRoom"),
-        t("Common:PublicRoom"),
-        t("Common:CustomRoomTitle"),
+      // to translate — and listed in the order those tiles sit in.
+      rooms: [
+        {
+          roomType: RoomsType.EditingRoom,
+          title: t("Common:CollaborationRoomTitle"),
+        },
+        {
+          roomType: RoomsType.VirtualDataRoom,
+          title: t("Common:VirtualDataRoom"),
+        },
+        { roomType: RoomsType.PublicRoom, title: t("Common:PublicRoom") },
+        { roomType: RoomsType.CustomRoom, title: t("Common:CustomRoomTitle") },
       ],
       owner: user as unknown as TCreatedBy,
+      // What the members step is about: a room is people with different
+      // reaches into it.
+      memberAccess: [ShareAccessRights.Editing, ShareAccessRights.ReadOnly],
     });
 
     void reloadSection();

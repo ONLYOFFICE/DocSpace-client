@@ -34,6 +34,8 @@
  */
 
 import { http } from "msw";
+import type { Page } from "@playwright/test";
+
 import { BASE_URL, API_PREFIX } from "@docspace/shared/__mocks__/e2e/utils";
 import {
   settingsHandler,
@@ -41,24 +43,44 @@ import {
   selfActivationStatusHandler,
   selfByTypeHandler,
 } from "@docspace/shared/__mocks__/handlers";
-import { test, TEST_PORT } from "./fixtures/base";
-import { armTour, walkTour } from "./helpers/tour";
+import { expect, test, TEST_PORT } from "./fixtures/base";
+import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
 // packages/client/src/store/FormsTourStore.ts
 const TOUR_KEY = "forms_tour_pending";
 const FORMS_URL = "/forms/filter";
 
+// The single form space of the non-empty mock list.
+const FIRST_SPACE_ID = 501;
+
+// The empty screen's action list, which is what the closing step points into.
+const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
+
+// Step titles, from public/locales/en/FormsTour.json. Steps are addressed by
+// title rather than by index: which ones survive depends on the audience and
+// on whether the section was stood in for, so an index would quietly point at
+// a different step as those flags move.
+const BLANK_FORM_STEP = "The form everyone opens";
+const CREATE_FIRST_STEP = "Now make it yours";
+
+// The first stand-in space the demo puts up on an empty portal
+// (FormsTour:FormsDemoOnboarding), and the three things waiting inside it
+// (SRC_DIR/api/tourDemo/data — DEMO_SPACE_ITEM_IDS).
+const DEMO_SPACE_TITLE = "Employee onboarding";
+const DEMO_BLANK_FORM = "#file_-1102";
+const DEMO_IN_PROGRESS = "#folder_-1100";
+const DEMO_COMPLETE = "#folder_-1101";
+
 // `files/rooms*` (roomListHandler) always reports rootFolderType: 14 (Rooms)
 // regardless of query params, so the shared mock can't be reused as-is here:
 // FormsTour's own isFormsRoot gate needs rootFolderType: 36
-// (FolderType.Forms) — see TreeFoldersStore.isFormsFolder. This handler
-// stands in a single form room so the list isn't empty either.
-const formsRoomListHandler = (port: string) =>
+// (FolderType.Forms) — see TreeFoldersStore.isFormsFolder.
+const formsRoomListHandler = (port: string, { empty = false } = {}) =>
   http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms*`, () => {
     const current = {
       parentId: 0,
       filesCount: 0,
-      foldersCount: 1,
+      foldersCount: empty ? 0 : 1,
       new: 0,
       mute: false,
       pinned: false,
@@ -79,51 +101,89 @@ const formsRoomListHandler = (port: string) =>
       parentRoomType: 36,
     };
 
+    const folders = empty
+      ? []
+      : [
+          {
+            parentId: 36,
+            filesCount: 1,
+            foldersCount: 0,
+            new: 0,
+            mute: false,
+            tags: [],
+            logo: {
+              original: "",
+              large: "",
+              medium: "",
+              small: "",
+              color: "61C059",
+            },
+            pinned: false,
+            roomType: 1, // RoomsType.FormRoom
+            isRoom: true,
+            private: false,
+            indexing: false,
+            denyDownload: false,
+            inRoom: true,
+            usedSpace: 15000,
+            fileEntryType: 1,
+            id: FIRST_SPACE_ID,
+            rootFolderId: 36,
+            canShare: true,
+            security: {
+              Read: true,
+              Create: true,
+              Delete: true,
+              EditRoom: true,
+            },
+            title: "Customer feedback",
+            access: 0,
+            shared: false,
+            created: "2025-01-15T12:00:00.000Z",
+            updated: "2025-01-15T12:00:00.000Z",
+            rootFolderType: 36,
+            parentRoomType: 36,
+          },
+        ];
+
     return new Response(
       JSON.stringify({
         response: {
           files: [],
-          folders: [
-            {
-              parentId: 36,
-              filesCount: 1,
-              foldersCount: 0,
-              new: 0,
-              mute: false,
-              tags: [],
-              logo: { original: "", large: "", medium: "", small: "", color: "61C059" },
-              pinned: false,
-              roomType: 1, // RoomsType.FormRoom
-              isRoom: true,
-              private: false,
-              indexing: false,
-              denyDownload: false,
-              inRoom: true,
-              usedSpace: 15000,
-              fileEntryType: 1,
-              id: 501,
-              rootFolderId: 36,
-              canShare: true,
-              security: { Read: true, Create: true, Delete: true, EditRoom: true },
-              title: "Customer feedback",
-              access: 0,
-              shared: false,
-              created: "2025-01-15T12:00:00.000Z",
-              updated: "2025-01-15T12:00:00.000Z",
-              rootFolderType: 36,
-              parentRoomType: 36,
-            },
-          ],
+          folders,
           current,
           pathParts: [{ id: 36, title: "Forms" }],
           startIndex: 0,
-          count: 1,
-          total: 1,
+          count: folders.length,
+          total: folders.length,
           new: 0,
         },
       }),
     );
   });
+
+/** Arms the tour and lands on the section that starts it by itself. */
+const startTour = async (page: Page, baseUrl: string) => {
+  // The first visit sets an origin so localStorage is reachable.
+  await page.goto(`${baseUrl}${FORMS_URL}`);
+  await armTour(page, TOUR_KEY);
+  await page.goto(`${baseUrl}${FORMS_URL}`);
+
+  await expect(tourTooltip(page)).toBeVisible();
+};
+
+/** Walks forward with the keyboard until the step titled `title` is up. */
+const goToStep = async (page: Page, title: string, maxSteps = 12) => {
+  const tooltip = tourTooltip(page);
+
+  for (let i = 0; i < maxSteps; i += 1) {
+    if (await tooltip.getByText(title, { exact: true }).isVisible()) return;
+    await page.keyboard.press("ArrowRight");
+    await expect(tooltip).toBeVisible();
+  }
+
+  throw new Error(`step "${title}" never came up`);
+};
 
 test.describe("Forms tour", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -141,11 +201,7 @@ test.describe("Forms tour", () => {
   }) => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 
-    // First visit sets an origin so localStorage is reachable; the reload after
-    // arming the tour is what lands on a section that starts it by itself.
-    await page.goto(`${baseUrl}${FORMS_URL}`);
-    await armTour(page, TOUR_KEY);
-    await page.goto(`${baseUrl}${FORMS_URL}`);
+    await startTour(page, baseUrl);
 
     await walkTour(page, ["desktop", "forms-tour", "admin"]);
   });
@@ -157,10 +213,93 @@ test.describe("Forms tour", () => {
   }) => {
     mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
 
-    await page.goto(`${baseUrl}${FORMS_URL}`);
-    await armTour(page, TOUR_KEY);
-    await page.goto(`${baseUrl}${FORMS_URL}`);
+    await startTour(page, baseUrl);
 
+    // Nothing that creates a space, and no Templates in the sidebar step — the
+    // sidebar does not render that item for them either.
     await walkTour(page, ["desktop", "forms-tour", "filler"]);
+  });
+});
+
+// A portal with no form spaces of its own renders neither the quick-actions
+// banner nor the filter bar, which would cut the tour down to its sidebar
+// step. The section is stood in for instead (SRC_DIR/api/tourDemo), so these
+// walk the same tour against a list that came from nowhere.
+test.describe("Forms tour on an empty portal", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      formsRoomListHandler(TEST_PORT, { empty: true }),
+    );
+  });
+
+  test("admin sees the walkthrough against a stood-in section", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    // The stand-in spaces are named after the collections people actually run,
+    // which is what the opening step is about.
+    await expect(
+      page.getByRole("main").getByText(DEMO_SPACE_TITLE).first(),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "forms-tour", "empty"]);
+  });
+
+  test("walks into a stand-in space and back out again", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    await goToStep(page, BLANK_FORM_STEP);
+
+    // The point of the whole block: the blank form and the two folders an
+    // answer travels between, which a real space only grows once someone has
+    // started filling one in.
+    await expect(page.locator(DEMO_BLANK_FORM)).toBeVisible();
+    await expect(page.locator(DEMO_IN_PROGRESS)).toBeVisible();
+    await expect(page.locator(DEMO_COMPLETE)).toBeVisible();
+
+    // Stepping back out of the block has to return to the section, or the
+    // step before it would point at an anchor that is no longer on the page.
+    await page.keyboard.press("ArrowLeft");
+
+    await expect(page.locator(DEMO_BLANK_FORM)).toBeHidden();
+    await expect(
+      page.getByRole("main").getByText(DEMO_SPACE_TITLE).first(),
+    ).toBeVisible();
+  });
+
+  test("hands the section back before the closing step", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+
+    await startTour(page, baseUrl);
+
+    await expect(page.locator(EMPTY_SCREEN)).toBeHidden();
+
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    // The regression this guards: the stand-in spaces outliving the tour that
+    // put them there. The closing step drops them on purpose, so the user is
+    // looking at their own empty portal — and at the button that fixes it —
+    // while the tour is still there to explain it.
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(
+      page.getByRole("main").getByText(DEMO_SPACE_TITLE),
+    ).toHaveCount(0);
   });
 });

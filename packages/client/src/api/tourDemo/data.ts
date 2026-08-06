@@ -33,17 +33,17 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import {
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { FolderType, RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import type {
   TRoom,
   TRoomSecurity,
   RoomMember,
 } from "@docspace/shared/api/rooms/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type {
+  TFile,
+  TFolder,
+  TGetFolder,
+} from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TCreatedBy } from "@docspace/shared/types";
 
@@ -57,25 +57,73 @@ import type { TCreatedBy } from "@docspace/shared/types";
  */
 const DEMO_ID_BASE = -1000;
 
-/** One room per type, in the order their tiles sit in the quick-actions banner. */
-export const DEMO_ROOM_TYPES = [
-  RoomsType.EditingRoom,
-  RoomsType.VirtualDataRoom,
-  RoomsType.PublicRoom,
-  RoomsType.CustomRoom,
-] as const;
+/** One stand-in room: what it is, and what the list calls it. */
+export type TourDemoRoom = {
+  roomType: RoomsType;
+  title: string;
+};
 
 export type TourDemoConfig = {
   /**
-   * Titles for the demo rooms, one per `DEMO_ROOM_TYPES` entry. Passed in
-   * rather than built here: each room is named after its own type, and those
-   * names are the `Common` keys the banner's tiles already use, so the demo
-   * needs no translation surface of its own.
+   * The stand-in rooms, in list order. Built by the tour rather than here:
+   * what a section's list should be standing in for is the tour's business,
+   * and the titles are its translations to hold.
    */
-  roomTitles: string[];
+  rooms: TourDemoRoom[];
+  /**
+   * Whether the section's own list is replaced by them.
+   *
+   * Off, the stand-in rooms are still built — a tour that walks into one needs
+   * something to walk into — but the list the user sees stays their own. That
+   * is the line the demo does not cross: a portal with rooms of its own never
+   * sees a room it does not have *in its list*.
+   */
+  standInForList: boolean;
   /** The signed-in user, who owns every demo room — real data, not invented. */
   owner: TCreatedBy;
+  /**
+   * The stand-in members every demo room shares, after the owner. Which roles
+   * are worth showing differs by section — a room has editors and viewers, a
+   * form space has the people filling the form in — so the tour picks them.
+   */
+  memberAccess: ShareAccessRights[];
+  /**
+   * What the inside of a stand-in room is made of, when the tour walks into
+   * one. Only the forms tour does, and only the two system folders need
+   * naming — the blank form is named after the space it belongs to.
+   */
+  contents?: {
+    inProgressTitle: string;
+    completeTitle: string;
+  };
 };
+
+/**
+ * The ids of the stand-in form space and of the three things inside it. Fixed
+ * rather than derived: the tour only ever walks into the first space, and steps
+ * anchor on these ids through the row's `folder_{id}` / `file_{id}` element id,
+ * which is the one handle that holds in all three views.
+ *
+ * `space` is the first room `buildDemoRooms` lays down (`DEMO_ID_BASE - 0`) and
+ * the one `tourDemo.space` hands back — the step that walks in points at that
+ * row, so the space the user is looking at is the space they end up inside.
+ */
+export const DEMO_SPACE_ITEM_IDS = {
+  space: DEMO_ID_BASE,
+  inProgress: DEMO_ID_BASE - 100,
+  complete: DEMO_ID_BASE - 101,
+  form: DEMO_ID_BASE - 102,
+} as const;
+
+/**
+ * The timestamp every stand-in entity is created and updated at.
+ *
+ * Read at build time rather than fixed, because the list renders it: the epoch
+ * put a literal "1/1/1970" in the Modified column of every demo row, which is
+ * the one thing on screen that gives the pretence away. A room the tour claims
+ * you could have made a moment ago should not be older than the product.
+ */
+const demoTimestamp = () => new Date().toISOString();
 
 /** Everything a room admin can do, which is what the demo rooms' owner is. */
 const fullSecurity: TRoomSecurity = {
@@ -115,14 +163,16 @@ export function buildDemoRooms(
   current: TFolder,
   config: TourDemoConfig,
 ): TRoom[] {
-  const now = new Date(0).toISOString();
+  const now = demoTimestamp();
 
-  return DEMO_ROOM_TYPES.map((roomType, index) => ({
+  return config.rooms.map(({ roomType, title }, index) => ({
     id: DEMO_ID_BASE - index,
     parentId: current.id,
     rootFolderId: current.id,
-    rootFolderType: FolderType.Rooms,
-    title: config.roomTitles[index] ?? "",
+    // The section names its own root — Rooms and Forms are separate ones, and
+    // a room filed under the wrong root is a room in the wrong section.
+    rootFolderType: current.rootFolderType ?? FolderType.Rooms,
+    title,
     roomType,
     filesCount: 0,
     foldersCount: 0,
@@ -147,24 +197,28 @@ export function buildDemoRooms(
 }
 
 /**
- * The member list of a demo room: the signed-in user as its owner, plus two
- * stand-ins that give the roles something to sit against.
+ * What each stand-in member is called, by the role they hold.
  *
- * The stand-ins are addresses rather than names on purpose — an invented
- * person's name would be a user-facing string with nowhere to be translated,
- * and `example.com` is the reserved documentation domain, so nothing here can
- * be mistaken for a real contact.
+ * Addresses rather than names on purpose — an invented person's name would be
+ * a user-facing string with nowhere to be translated, and `example.com` is the
+ * reserved documentation domain, so nothing here can be mistaken for a real
+ * contact.
+ */
+const MEMBER_ADDRESS: Partial<Record<ShareAccessRights, string>> = {
+  [ShareAccessRights.Editing]: "editor@example.com",
+  [ShareAccessRights.ReadOnly]: "viewer@example.com",
+  [ShareAccessRights.FormFilling]: "filler@example.com",
+};
+
+/**
+ * The member list of a demo room: the signed-in user as its owner, plus the
+ * stand-ins the tour asked for, which give the roles something to sit against.
  */
 export function buildDemoMembers(config: TourDemoConfig): RoomMember[] {
-  const asUser = (
-    id: string,
-    displayName: string,
-    email: string,
-    isVisitor: boolean,
-  ) =>
+  const asUser = (id: string, email: string, isVisitor: boolean) =>
     ({
       id,
-      displayName,
+      displayName: email,
       email,
       isVisitor,
       avatar: "",
@@ -172,45 +226,225 @@ export function buildDemoMembers(config: TourDemoConfig): RoomMember[] {
       hasAvatar: false,
     }) as unknown as TUser;
 
-  const items: RoomMember[] = [
-    {
-      access: ShareAccessRights.FullAccess,
-      canEditAccess: false,
-      isLocked: false,
-      isOwner: true,
-      subjectType: 0,
-      sharedTo: {
-        ...config.owner,
-        isVisitor: false,
-      } as unknown as TUser,
+  const owner: RoomMember = {
+    access: ShareAccessRights.FullAccess,
+    canEditAccess: false,
+    isLocked: false,
+    isOwner: true,
+    subjectType: 0,
+    sharedTo: {
+      ...config.owner,
+      isVisitor: false,
+    } as unknown as TUser,
+  };
+
+  return [
+    owner,
+    ...config.memberAccess.map((access, index) => {
+      const email = MEMBER_ADDRESS[access] ?? "member@example.com";
+
+      return {
+        access,
+        canEditAccess: true,
+        isLocked: false,
+        isOwner: false,
+        subjectType: 0,
+        // Whoever only ever reads or fills something in is a guest as far as
+        // the panel's badge is concerned.
+        sharedTo: asUser(
+          `${DEMO_ID_BASE}-member-${index}`,
+          email,
+          access !== ShareAccessRights.Editing,
+        ),
+      } satisfies RoomMember;
+    }),
+  ];
+}
+
+/** Everything anyone can do to something inside a room they administer. */
+const fullFolderSecurity = {
+  Read: true,
+  Create: true,
+  Delete: true,
+  EditRoom: false,
+  Rename: true,
+  CopyTo: true,
+  Copy: true,
+  MoveTo: true,
+  Move: true,
+  Pin: false,
+  Mute: false,
+  EditAccess: false,
+  Duplicate: true,
+  Download: true,
+  CopySharedLink: true,
+  Reconnect: false,
+  CreateRoomFrom: false,
+  CopyLink: true,
+  Embed: false,
+  ChangeOwner: false,
+  IndexExport: false,
+  HistoryExport: false,
+};
+
+/**
+ * The inside of a stand-in form space: the blank form, and the two system
+ * folders the answers move between.
+ *
+ * This is the part of the section the tour cannot borrow from the portal. A
+ * form space only grows its `In progress` and `Complete` folders once a form
+ * has been uploaded and started, so walking a real space would show a
+ * different room to every user — and an empty one to anybody who has not
+ * collected anything yet, which is exactly who the tour is for.
+ *
+ * `room` and `sectionRoot` are the objects the rest of the demo already built
+ * from the server's own answer, so the ids, the path and the owner are the
+ * same ones the section is really using.
+ */
+export function buildDemoSpaceContents(
+  room: TRoom,
+  sectionRoot: TFolder,
+  config: TourDemoConfig,
+): TGetFolder {
+  const now = demoTimestamp();
+
+  const folder = (id: number, title: string, type: FolderType) =>
+    ({
+      parentId: room.id,
+      filesCount: 0,
+      foldersCount: 0,
+      new: 0,
+      mute: false,
+      pinned: false,
+      private: false,
+      indexing: false,
+      denyDownload: false,
+      fileEntryType: 1,
+      id,
+      rootFolderId: sectionRoot.id,
+      rootFolderType: sectionRoot.rootFolderType,
+      parentRoomType: FolderType.FormRoom,
+      canShare: false,
+      security: fullFolderSecurity,
+      title,
+      type,
+      access: ShareAccessRights.None,
+      shared: false,
+      created: now,
+      createdBy: config.owner,
+      updated: now,
+      updatedBy: config.owner,
+      isFolder: true,
+    }) as unknown as TFolder;
+
+  // The blank form, named after the collection it belongs to — so the demo
+  // needs no string of its own for it.
+  const form = {
+    folderId: room.id,
+    version: 1,
+    versionGroup: 1,
+    contentLength: "0 KB",
+    pureContentLength: 0,
+    fileStatus: 0,
+    mute: false,
+    viewUrl: "",
+    webUrl: "",
+    fileType: 10,
+    fileExst: ".pdf",
+    comment: "",
+    thumbnailUrl: "",
+    thumbnailStatus: 1,
+    isForm: true,
+    startFilling: false,
+    viewAccessibility: {
+      ImageView: false,
+      MediaView: false,
+      WebView: true,
+      WebEdit: true,
+      WebReview: false,
+      WebCustomFilterEditing: false,
+      WebRestrictedEditing: false,
+      WebComment: false,
+      CoAuhtoring: false,
+      CanConvert: false,
+      MustConvert: false,
     },
-    {
-      access: ShareAccessRights.Editing,
-      canEditAccess: true,
-      isLocked: false,
-      isOwner: false,
-      subjectType: 0,
-      sharedTo: asUser(
-        `${DEMO_ID_BASE}-editor`,
-        "editor@example.com",
-        "editor@example.com",
-        false,
-      ),
+    fileEntryType: 2,
+    id: DEMO_SPACE_ITEM_IDS.form,
+    rootFolderId: sectionRoot.id,
+    rootFolderType: sectionRoot.rootFolderType,
+    parentRoomType: FolderType.FormRoom,
+    canShare: true,
+    security: {
+      Read: true,
+      Comment: false,
+      FillForms: true,
+      Review: false,
+      Edit: true,
+      Delete: true,
+      CustomFilter: false,
+      Rename: true,
+      ReadHistory: true,
+      Lock: false,
+      EditHistory: false,
+      Copy: true,
+      Move: true,
+      Duplicate: true,
+      SubmitToFormGallery: false,
+      Download: true,
+      Convert: false,
+      CreateRoomFrom: false,
+      CopyLink: true,
+      Embed: false,
+      EditForm: true,
+      StartFilling: true,
+      OpenForm: true,
+      FillingStatus: true,
+      Vectorization: false,
     },
-    {
-      access: ShareAccessRights.ReadOnly,
-      canEditAccess: true,
-      isLocked: false,
-      isOwner: false,
-      subjectType: 0,
-      sharedTo: asUser(
-        `${DEMO_ID_BASE}-viewer`,
-        "viewer@example.com",
-        "viewer@example.com",
-        true,
-      ),
-    },
+    title: `${room.title}.pdf`,
+    access: ShareAccessRights.None,
+    shared: false,
+    created: now,
+    createdBy: config.owner,
+    updated: now,
+    updatedBy: config.owner,
+    shortWebUrl: "",
+  } as unknown as TFile;
+
+  // In progress before Complete, which is the order a submission travels in
+  // and the order the room itself lists them.
+  const folders = [
+    folder(
+      DEMO_SPACE_ITEM_IDS.inProgress,
+      config.contents?.inProgressTitle ?? "",
+      FolderType.InProgress,
+    ),
+    folder(
+      DEMO_SPACE_ITEM_IDS.complete,
+      config.contents?.completeTitle ?? "",
+      FolderType.Done,
+    ),
   ];
 
-  return items;
+  return {
+    files: [form],
+    folders,
+    // The room is the folder the section is now in — the same object the list
+    // handed over, so its id, owner and permissions do not have to be invented
+    // a second time.
+    current: {
+      ...room,
+      filesCount: 1,
+      foldersCount: folders.length,
+    } as unknown as TFolder,
+    pathParts: [
+      { id: sectionRoot.id, title: sectionRoot.title },
+      { id: room.id, title: room.title },
+    ],
+    startIndex: 0,
+    count: folders.length + 1,
+    total: folders.length + 1,
+    new: 0,
+  };
 }

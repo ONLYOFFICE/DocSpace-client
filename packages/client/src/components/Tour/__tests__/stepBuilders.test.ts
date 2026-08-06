@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import type { Step } from "react-joyride";
 
 import {
@@ -44,6 +44,9 @@ import {
   menuStep,
   hoverRevealStep,
   fileItemStep,
+  revealStep,
+  NAVIGATION_TARGET_TIMEOUT,
+  STEP_TARGET_TIMEOUT,
 } from "../stepBuilders";
 
 const LOG_LABEL = "test tour";
@@ -434,5 +437,170 @@ describe("hoverRevealStep", () => {
     mount('<div data-testid="table-row-0"></div>');
 
     expect(isStepTargetPresent(step())).toBe(false);
+  });
+});
+
+describe("file-list row anchors", () => {
+  /**
+   * The shape a file list actually renders. The id every view puts on a row
+   * sits on the drag-and-drop wrapper; ui-kit's own table row is nested inside
+   * it and carries the `data-testid`. Both are `display: contents`, so the only
+   * nodes with a box are the cells two levels down.
+   */
+  const mountTableRow = () => {
+    mount(`
+      <div id="folder_-1000">
+        <div data-testid="table-row-0">
+          <div class="name-cell"><span>Employee onboarding</span></div>
+          <div class="modified-cell"></div>
+        </div>
+      </div>
+    `);
+
+    withRect("#folder_-1000", { top: 0, left: 0, width: 0, height: 0 });
+    withRect('[data-testid="table-row-0"]', {
+      top: 0,
+      left: 0,
+      width: 0,
+      height: 0,
+    });
+    withRect(".name-cell", { top: 120, left: 390, width: 600, height: 48 });
+    withRect(".modified-cell", { top: 120, left: 990, width: 260, height: 48 });
+  };
+
+  const rowStep = (selector: string) =>
+    fileItemStep(selector, "title", "body", undefined, LOG_LABEL);
+
+  it("lays a row out against its cells, however deep the boxless wrappers go", () => {
+    // The regression: the search stopped one level below the anchor, which for
+    // a row named by its id found nothing but the second `display: contents`
+    // wrapper — 0×0 at (0,0) exactly like the first. Joyride laid the step out
+    // against that and parked the tooltip in the corner of the viewport with
+    // nothing under the spotlight.
+    mountTableRow();
+
+    const step = rowStep("#folder_-1000");
+    const cell = document.querySelector(".name-cell");
+
+    expect((step.target as () => HTMLElement | null)()).toBe(cell);
+    expect(spotlight(step)).toBe(cell);
+  });
+
+  it("lands on the same cell whichever way the row is named", () => {
+    // The two names sit a level apart, and a step points at whichever one its
+    // section knows the row by — the anchor has to come out the same.
+    mountTableRow();
+
+    const step = rowStep('[data-testid="table-row-0"]');
+
+    expect((step.target as () => HTMLElement | null)()).toBe(
+      document.querySelector(".name-cell"),
+    );
+  });
+
+  it("leaves a row that can be measured alone", () => {
+    // The rows and tiles views render an ordinary box, which is the anchor.
+    mount('<div data-testid="tile_0"><span class="title">Space</span></div>');
+    withRect('[data-testid="tile_0"]', {
+      top: 80,
+      left: 40,
+      width: 220,
+      height: 180,
+    });
+    withRect(".title", { top: 240, left: 48, width: 200, height: 20 });
+
+    const step = rowStep('[data-testid="tile_0"]');
+
+    expect((step.target as () => HTMLElement | null)()).toBe(
+      document.querySelector('[data-testid="tile_0"]'),
+    );
+  });
+
+  it("keeps the row itself when nothing under it measures either", () => {
+    // Giving up would drop a step whose target is on the page; a leaf that
+    // measures nothing is no worse an anchor than none at all.
+    mount('<div id="folder_-1000"><div data-testid="table-row-0"></div></div>');
+
+    const step = rowStep("#folder_-1000");
+
+    expect((step.target as () => HTMLElement | null)()).toBe(
+      document.querySelector("#folder_-1000"),
+    );
+  });
+});
+
+describe("revealStep", () => {
+  const TARGET = "#late-arrival";
+
+  /**
+   * How long the step actually waited before giving up. The wait is swallowed
+   * on purpose (a missing anchor must not kill the tour), so the elapsed time
+   * is the only thing that says which budget was used.
+   */
+  const waitedFor = async (hooks: Parameters<typeof revealStep>[5]) => {
+    vi.useFakeTimers();
+
+    try {
+      const step = revealStep(TARGET, "title", "body", undefined, LOG_LABEL, hooks);
+
+      let settled = false;
+      const pending = step.before?.(HOOK_DATA).then(() => {
+        settled = true;
+      });
+
+      // Nothing ever mounts `TARGET`, so the wait runs its full budget.
+      await vi.advanceTimersByTimeAsync(STEP_TARGET_TIMEOUT + 1);
+      const settledAtOrdinary = settled;
+
+      await vi.advanceTimersByTimeAsync(NAVIGATION_TARGET_TIMEOUT);
+      await pending;
+
+      return { settledAtOrdinary, settled };
+    } finally {
+      vi.useRealTimers();
+    }
+  };
+
+  it("gives a navigating reveal room for the route change to land", async () => {
+    // The regression: a reveal that navigates was held to the ordinary budget,
+    // so the wait expired before the section had finished fetching. Joyride
+    // then laid the step out against a target that never arrived and pinned
+    // the tooltip to the corner with nothing under the spotlight.
+    const { settledAtOrdinary, settled } = await waitedFor({
+      reveal: () => {},
+      restore: () => {},
+      navigates: true,
+    });
+
+    expect(settledAtOrdinary).toBe(false);
+    expect(settled).toBe(true);
+  });
+
+  it("keeps the short budget for a reveal that only opens what is already there", async () => {
+    // A panel the stores open is on screen within a tick; making everyone wait
+    // the navigation budget would be seconds of staring at a spinner.
+    const { settledAtOrdinary } = await waitedFor({
+      reveal: () => {},
+      restore: () => {},
+    });
+
+    expect(settledAtOrdinary).toBe(true);
+  });
+
+  it("is not overruled by joyride's own caps", async () => {
+    // The budgets above only decide anything if joyride is still waiting when
+    // they expire. `beforeTimeout` and `targetWaitTimeout` are its own caps on
+    // the same wait, and the shorter of the two wins — set below the step
+    // budget they silently undo it, and the step is laid out against a target
+    // that has not arrived yet. That is the corner-tooltip bug, and it is
+    // invisible from inside `revealStep`, so the invariant is asserted here.
+    const { JOYRIDE_TIMEOUTS } = await import("../useTour");
+
+    expect(JOYRIDE_TIMEOUTS.beforeTimeout).toBeGreaterThan(
+      NAVIGATION_TARGET_TIMEOUT,
+    );
+    expect(JOYRIDE_TIMEOUTS.targetWaitTimeout).toBeGreaterThan(
+      NAVIGATION_TARGET_TIMEOUT,
+    );
   });
 });

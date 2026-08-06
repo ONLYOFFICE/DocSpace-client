@@ -61,10 +61,24 @@ function removeWaiter(w: Waiter) {
   }
 }
 
+/**
+ * `document.querySelector`, but a malformed selector is a miss rather than a
+ * throw. The waiters share one observer pass, so a selector that cannot be
+ * parsed would otherwise escape the loop below and strand every other waiter in
+ * it, on a page that may well contain what they were waiting for.
+ */
+function match(selector: string): Element | null {
+  try {
+    return document.querySelector(selector);
+  } catch {
+    return null;
+  }
+}
+
 function checkWaiters() {
   for (let i = waiters.length - 1; i >= 0; i--) {
     const w = waiters[i];
-    const el = document.querySelector(w.selector);
+    const el = match(w.selector);
     if (el) {
       cleanupWaiter(w);
       waiters.splice(i, 1);
@@ -99,7 +113,7 @@ export function waitForElement(
       return;
     }
 
-    const el = document.querySelector(selector);
+    const el = match(selector);
     if (el) {
       resolve(el);
       return;

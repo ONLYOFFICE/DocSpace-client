@@ -46,11 +46,32 @@ import {
   isStepTargetPresent,
   removeRevealedControl,
   removeUnionSpotlight,
+  NAVIGATION_TARGET_TIMEOUT,
 } from "./stepBuilders";
 
 export type TourStepCallbacks = {
   getSignal: () => AbortSignal | undefined;
 };
+
+/**
+ * react-joyride's own caps on how long it waits for a step's `before` hook and
+ * for the step's target.
+ *
+ * Backstops, not the normal path: the steps are filtered against the DOM at the
+ * start of a run, and each `before` hook has a budget of its own
+ * (`STEP_TARGET_TIMEOUT`, or `NAVIGATION_TARGET_TIMEOUT` for a step whose
+ * reveal changes the route).
+ *
+ * Both must clear the longest of those budgets, because these caps win:
+ * whichever expires first is when the step is laid out, however long the hook
+ * was still prepared to wait. Set below the step budget they silently undo it —
+ * the tooltip ends up positioned against a target that never arrived, which
+ * parks it in the corner of the screen with nothing under the spotlight.
+ */
+export const JOYRIDE_TIMEOUTS = {
+  beforeTimeout: NAVIGATION_TARGET_TIMEOUT + 1000,
+  targetWaitTimeout: NAVIGATION_TARGET_TIMEOUT + 1000,
+} as const;
 
 /**
  * Shared react-joyride driver for the section onboarding tours. Owns the tour
@@ -131,11 +152,7 @@ export default function useTour(
       blockTargetInteraction: true,
       skipScroll: true,
       zIndex: 10000,
-      // Backstops, not the normal path: the steps were filtered against the
-      // DOM at start and each `before` hook has its own short budget
-      // (STEP_TARGET_TIMEOUT). Anything longer here is dead spinner time.
-      beforeTimeout: 3000,
-      targetWaitTimeout: 2000,
+      ...JOYRIDE_TIMEOUTS,
     },
     locale: {
       back: t("Common:Back"),

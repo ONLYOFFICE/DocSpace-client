@@ -36,31 +36,72 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { interceptRoute } from "@docspace/shared/api/client";
-import type { TGetRooms } from "@docspace/shared/api/rooms/types";
+import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
+import type { TFolder } from "@docspace/shared/api/files/types";
 
-import { buildDemoRooms, buildDemoMembers, type TourDemoConfig } from "./data";
+import {
+  buildDemoRooms,
+  buildDemoMembers,
+  buildDemoSpaceContents,
+  type TourDemoConfig,
+} from "./data";
 
-/** `/files/rooms` — the room list of the section the tour walks through. */
-const ROOMS_LIST_ROUTE = /\/files\/rooms(\?|$)/;
+/**
+ * The api module is not consistent about the leading slash — `getRooms` asks
+ * for `/files/rooms`, `getExternalLinks` for `files/rooms/{id}/links` — so
+ * every pattern here has to allow both. A route anchored on the slash silently
+ * misses half the requests it was written for.
+ */
+const route = (pattern: string) => new RegExp(`(?:^|/)files/${pattern}`);
 
-/** `/files/rooms/{id}/share` — a room's members, and its external links. */
-const ROOM_MEMBERS_ROUTE = /\/files\/rooms\/[^/]+\/share(\?|$)/;
+/** `files/rooms` — the room list of the section the tour walks through. */
+const ROOMS_LIST_ROUTE = route("rooms(\\?|$)");
 
-/** `/files/rooms/{id}/history` — the activity feed of a room. */
-const ROOM_HISTORY_ROUTE = /\/files\/rooms\/[^/]+\/history(\?|$)/;
+/**
+ * Everything else is claimed for negative ids only. Every id the server hands
+ * out is positive, so none of these can take over a room or a folder the
+ * portal actually has — a demo id is the only thing they match.
+ */
+
+/** `files/rooms/{id}` — one room, asked about by id. */
+const ROOM_INFO_ROUTE = route("rooms/(-\\d+)(\\?|$)");
+
+/** `files/rooms/{id}/share` — a room's members. */
+const ROOM_MEMBERS_ROUTE = route("rooms/-\\d+/share(\\?|$)");
+
+/**
+ * `files/rooms/{id}/links` — a room's external links, which is what a form
+ * space shares to be filled in. Fetched by `fetchFilesImpl` the moment a form
+ * room is opened, and awaited inside the same promise as the folder itself —
+ * so a stand-in space that cannot answer it fails the whole load and lands the
+ * user on the "room not available" screen.
+ */
+const ROOM_LINKS_ROUTE = route("rooms/-\\d+/links(\\?|$)");
+
+/** `files/{file|folder}/{id}/log` — the activity feed of a room or folder. */
+const ROOM_HISTORY_ROUTE = route("(?:file|folder)/-\\d+/log(\\?|$)");
+
+/** `files/{id}` — the contents of a folder. */
+const DEMO_FOLDER_ROUTE = route("(-\\d+)(\\?|$)");
 
 const matches = (route: RegExp) => (config: { url?: string }) =>
   !!config.url && route.test(config.url);
 
+const idFromRoute = (route: RegExp, url?: string) => {
+  const id = url?.match(route)?.[1];
+  return id ? Number(id) : null;
+};
+
 /**
- * The rooms tour on a portal that has no rooms yet.
+ * A section tour on a portal that has nothing in that section yet.
  *
- * An empty Rooms section renders neither the quick-actions banner nor the
- * filter bar (`isEmptyPage` gates both), so a tour there would be reduced to
- * its sidebar steps — nothing about creating a room, nothing about what a room
- * row does, nothing about members. Rather than teach a stripped-down section,
- * the tour borrows a portal: while it runs, the room requests are answered
- * locally instead of going to the server.
+ * Both room-backed sections — Rooms and Forms — go through `/files/rooms`, and
+ * an empty one renders neither the quick-actions banner nor the filter bar
+ * (`isEmptyPage` gates both), so a tour there would be reduced to its sidebar
+ * steps — nothing about creating anything, nothing about what a row does,
+ * nothing about members. Rather than teach a stripped-down section, the tour
+ * borrows a portal: while it runs, the room requests are answered locally
+ * instead of going to the server.
  *
  * The interception is the same one the Playwright suite uses on its own
  * requests — `interceptRoute` claims a URL and returns the body the server
@@ -79,6 +120,9 @@ const matches = (route: RegExp) => (config: { url?: string }) =>
  *  - react-joyride blocks every click outside its spotlight, so while the tour
  *    runs the demo rooms cannot be opened, selected or acted on.
  *
+ * The forms tour goes one step further and walks into a stand-in space, so the
+ * contents of a demo room are answered locally too (`DEMO_FOLDER_ROUTE`).
+ *
  * The tour hands the section back by dropping the mocks and reloading it,
  * which is what the closing step does before pointing at the real "create a
  * room" button.
@@ -86,15 +130,42 @@ const matches = (route: RegExp) => (config: { url?: string }) =>
 class TourDemo {
   config: TourDemoConfig | null = null;
 
+  /**
+   * The folder the section itself lives in, and the stand-in rooms built under
+   * it — both taken from the answer the list transform saw, so walking into a
+   * demo room does not have to invent a second version of either.
+   */
+  private sectionRoot: TFolder | null = null;
+
+  private rooms: TRoom[] = [];
+
   /** Undoes every `interceptRoute` call made by `activate`. */
   private teardown: (() => void)[] = [];
 
   constructor() {
-    makeAutoObservable<this, "teardown">(this, { teardown: false });
+    makeAutoObservable<this, "teardown" | "sectionRoot" | "rooms">(this, {
+      teardown: false,
+      sectionRoot: false,
+      rooms: false,
+    });
   }
 
   get isActive() {
     return this.config !== null;
+  }
+
+  /** Whether the section's own list is the one being shown. */
+  get isStandingInForList() {
+    return this.config?.standInForList ?? false;
+  }
+
+  /**
+   * The stand-in room a tour walks into, addressed directly rather than read
+   * off the list — the list may be the user's own, and it is the one thing
+   * about the section that changes underfoot while the tour navigates.
+   */
+  get space() {
+    return this.rooms[0] ?? null;
   }
 
   activate = (config: TourDemoConfig) => {
@@ -109,7 +180,9 @@ class TourDemo {
       // carries the folder the section is in, its ids and its path, and every
       // one of those has to stay genuine — a fabricated `current` is how a
       // stand-in list turns into a section that thinks it is somewhere else.
-      // Only `folders` is swapped, on a response that is otherwise real.
+      // Only `folders` is swapped, on a response that is otherwise real, and
+      // only when the tour is standing in for the list at all. The rooms are
+      // built either way: that is where the space a tour walks into comes from.
       interceptRoute({
         match: matches(ROOMS_LIST_ROUTE),
         transform: (data) => {
@@ -118,6 +191,11 @@ class TourDemo {
           if (!rooms?.current) return data;
 
           const folders = buildDemoRooms(rooms.current, config);
+
+          this.sectionRoot = rooms.current;
+          this.rooms = folders;
+
+          if (!config.standInForList) return data;
 
           return {
             ...envelope,
@@ -130,17 +208,36 @@ class TourDemo {
           };
         },
       }),
+      // One room, for the panels that ask about it by id rather than reading
+      // it off the list they were handed.
+      interceptRoute({
+        match: matches(ROOM_INFO_ROUTE),
+        fulfill: (request) => {
+          const id = idFromRoute(ROOM_INFO_ROUTE, request.url);
+          const room = this.rooms.find((item) => item.id === id);
+
+          return { response: room ?? null };
+        },
+      }),
+      // `{ total, response }` rather than a bare list: the client turns any
+      // payload carrying a top-level `total` into `{ total, items }`, which is
+      // the `TGetRoomMembers` the caller reads.
       interceptRoute({
         match: matches(ROOM_MEMBERS_ROUTE),
         fulfill: (request) => {
-          // `filterType=2` asks for the room's external links, which a demo
-          // room has none of; the caller reads an empty list as "no links yet".
+          // `filterType=2` asks for the shares made through a link, which a
+          // demo room has none of; the caller reads an empty list as "none yet".
           const isLinks = /[?&]filterType=2(&|$)/.test(request.url ?? "");
-          if (isLinks) return { total: 0, response: [] };
+          const items = isLinks ? [] : buildDemoMembers(config);
 
-          const items = buildDemoMembers(config);
           return { total: items.length, response: items };
         },
+      }),
+      // No links yet, which is also what a space looks like the moment it is
+      // created — the tour talks about sharing one rather than showing one.
+      interceptRoute({
+        match: matches(ROOM_LINKS_ROUTE),
+        fulfill: () => ({ response: [] }),
       }),
       // History is answered empty rather than invented: its entries go through
       // `getSupportedFeeds`/`parseHistory` and are rendered by a feed
@@ -151,12 +248,31 @@ class TourDemo {
         match: matches(ROOM_HISTORY_ROUTE),
         fulfill: () => ({ total: 0, response: [] }),
       }),
+      // What is inside a stand-in space. Unlike the list, there is no real
+      // answer to build this one on: the server has never heard of the room
+      // being asked about, so the whole envelope is the demo's — which is why
+      // it is fulfilled rather than transformed.
+      interceptRoute({
+        match: matches(DEMO_FOLDER_ROUTE),
+        fulfill: (request) => {
+          const id = idFromRoute(DEMO_FOLDER_ROUTE, request.url);
+          const room = this.rooms.find((item) => item.id === id);
+
+          if (!room || !this.sectionRoot) return { response: null };
+
+          return {
+            response: buildDemoSpaceContents(room, this.sectionRoot, config),
+          };
+        },
+      }),
     ];
   };
 
   deactivate = () => {
     this.teardown.forEach((remove) => remove());
     this.teardown = [];
+    this.sectionRoot = null;
+    this.rooms = [];
 
     runInAction(() => {
       this.config = null;

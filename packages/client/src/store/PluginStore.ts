@@ -147,6 +147,8 @@ class PluginStore {
 
   isInit = false;
 
+  isLoaded = false;
+
   settingsPluginDialogVisible = false;
 
   currentSettingsDialogPlugin: null | { pluginName: string } = null;
@@ -401,8 +403,15 @@ class PluginStore {
     this.isInit = isInit;
   };
 
+  setIsLoaded = (isLoaded: boolean) => {
+    this.isLoaded = isLoaded;
+  };
+
   initPlugins = async () => {
-    if (this.isNotPaidPeriod) return;
+    if (this.isNotPaidPeriod) {
+      this.setIsLoaded(true);
+      return;
+    }
 
     const frame = document.createElement("iframe");
     frame.id = "plugin-iframe";
@@ -421,7 +430,10 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
-    if (this.isNotPaidPeriod) return;
+    if (this.isNotPaidPeriod) {
+      this.setIsLoaded(true);
+      return;
+    }
 
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
@@ -443,6 +455,8 @@ class PluginStore {
         return;
       }
       console.log(e);
+    } finally {
+      this.setIsLoaded(true);
     }
   };
 

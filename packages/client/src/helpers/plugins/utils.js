@@ -51,7 +51,7 @@ import {
   setFileView,
   setRoomsView,
 } from "../info-panel";
-import { PLUGIN_SECTION_URL_PART } from "./constants";
+import { isPluginSectionPath } from "./navigation";
 
 export const messageActions = ({
   message,
@@ -340,9 +340,7 @@ export const messageActions = ({
   });
 };
 
-export const isPluginPage = () => {
-  return window.location.pathname.includes(PLUGIN_SECTION_URL_PART);
-};
+export const isPluginPage = () => isPluginSectionPath(window.location.pathname);
 
 export const getPluginUrl = (url, file) => {
   const splittedURL = url.split("/");

@@ -42,7 +42,8 @@ import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
 import { DefaultPageRedirect } from "SRC_DIR/pages/Home/DefaultPageRedirect";
-import { PLUGIN_SECTION_ROUTE } from "SRC_DIR/helpers/plugins/constants";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
+import { getPluginSectionRoute } from "SRC_DIR/helpers/plugins/navigation";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
@@ -517,10 +518,10 @@ const ClientRoutes = [
             ),
           },
           {
-            path: PLUGIN_SECTION_ROUTE,
+            path: getPluginSectionRoute(Section.Files),
             async lazy() {
               const { Component } = await componentLoader(
-                () => import("SRC_DIR/components/ArticlePlugin/PluginSection"),
+                () => import("SRC_DIR/components/PluginSection"),
               );
 
               const WrappedComponent = () => (

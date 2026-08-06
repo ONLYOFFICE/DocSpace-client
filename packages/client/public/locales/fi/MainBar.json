@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Kun raja on saavutettu, kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeudet. Voidaksesi lisätä pääkäyttäjiä, <1>klikkaa tästä</1>päivittääksesi tilauksesi.",
   "UserTariffLimitHeader": "Pääkäyttäjien määrän raja on saavutettu: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeude. Voidaksesi lisätä pääkäyttäjiä, ota yhteyttä {{productName}} pääkäyttäjään päivittääksesi tilauksesi.",
-  "UserTariffReachedForAdmins": "Kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeudet. Voidaksesi lisätä pääkäyttäjiä, <1>klikkaa tästä</1>päivittääksesi tilauksesi."
+  "UserTariffReachedForAdmins": "Kaikille käyttäjille lisätään ainoastaan Käyttäjäoikeudet. Voidaksesi lisätä pääkäyttäjiä, <1>klikkaa tästä</1>päivittääksesi tilauksesi.",
+  "WalletLowBalanceContactPayer": "Ota yhteyttä maksajaan (<1>{{payerContact}}</1>), jotta hän lataa lompakon ja maksullisten palveluiden käyttö ei keskeydy.",
+  "WalletLowBalanceDescription": "Lataa lompakkoasi välttääksesi maksullisten palveluiden keskeytykset. <1>Lisää saldoa</1>",
+  "WalletLowBalanceHeader": "Kreditisi ovat vähissä: {{balance}}"
 }

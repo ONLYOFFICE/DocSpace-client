@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Khi đạt đến giới hạn, tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy <1>nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn.",
   "UserTariffLimitHeader": "Đã đạt đến giới hạn số lượng quản trị viên: {{currentValue}}/ {{maxValue}}",
   "UserTariffReached": "Tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy liên hệ với quản trị viên {{productName}} để nâng cấp gói dịch vụ.",
-  "UserTariffReachedForAdmins": "Tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy <1>nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn."
+  "UserTariffReachedForAdmins": "Tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy <1>nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn.",
+  "WalletLowBalanceContactPayer": "Hãy liên hệ với Bên thanh toán (<1>{{payerContact}}</1>) để nạp tiền vào ví và tránh gián đoạn các dịch vụ trả phí.",
+  "WalletLowBalanceDescription": "Nạp tiền vào ví để tránh gián đoạn các dịch vụ trả phí. <1>Nạp tiền</1>",
+  "WalletLowBalanceHeader": "Tín dụng của bạn sắp hết: {{balance}}"
 }

@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Pasi të arrihet kufiri, të gjithë përdoruesit do të shtohen vetëm me lejet e përdoruesit. Për të qenë në gjendje të shtoni administratorë të tjerë, <1>kliko këtu</1> për të përmirësuar planin tuaj tarifor.",
   "UserTariffLimitHeader": "Është arritur kufiri për numrin e administratorëve: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Të gjithë përdoruesit do të shtohen vetëm me lejet e përdoruesit. Për të qenë në gjendje të shtoni administratorë të tjerë, kontaktoni administratorin e {{productName}} për të përmirësuar planin tarifor.",
-  "UserTariffReachedForAdmins": "Të gjithë përdoruesit do të shtohen vetëm me lejet e përdoruesit. Për të qenë në gjendje të shtoni administratorë të tjerë, <1>kliko këtu</1> për të përmirësuar planin tuaj tarifor."
+  "UserTariffReachedForAdmins": "Të gjithë përdoruesit do të shtohen vetëm me lejet e përdoruesit. Për të qenë në gjendje të shtoni administratorë të tjerë, <1>kliko këtu</1> për të përmirësuar planin tuaj tarifor.",
+  "WalletLowBalanceContactPayer": "Kontaktoni Paguesin (<1>{{payerContact}}</1>) për të mbushur portofolin dhe për të shmangur ndërprerjet e shërbimeve me pagesë.",
+  "WalletLowBalanceDescription": "Mbushni portofolin tuaj për të shmangur ndërprerjet e shërbimeve me pagesë. <1>Mbusheni</1>",
+  "WalletLowBalanceHeader": "Kreditet tuaja po mbarojnë: {{balance}}"
 }

@@ -37,11 +37,12 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import { interceptRoute } from "@docspace/shared/api/client";
 import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
+import type { TFolder, TGetFolder } from "@docspace/shared/api/files/types";
 
 import {
   buildDemoRooms,
   buildDemoMembers,
+  buildDemoSharedFiles,
   buildDemoSpaceContents,
   type TourDemoConfig,
 } from "./data";
@@ -92,6 +93,16 @@ const ROOM_HISTORY_ROUTE = route("(?:file|folder)/-\\d+/log(\\?|$)");
 /** `files/{id}` — the contents of a folder. */
 const DEMO_FOLDER_ROUTE = route("(-\\d+)(\\?|$)");
 
+/**
+ * `files/{id}` for a folder the portal really has — the one route the demo
+ * claims that is not restricted to negative ids, because Shared with me is a
+ * plain folder of the user's own and its list comes back under its own id.
+ *
+ * Built from the config rather than fixed for that reason, and anchored so that
+ * `files/4` is claimed while `files/4/anything` is left alone.
+ */
+const listFolderRoute = (id: number) => route(`${id}(\\?|$)`);
+
 const matches = (route: RegExp) => (config: { url?: string }) =>
   !!config.url && route.test(config.url);
 
@@ -103,7 +114,8 @@ const idFromRoute = (route: RegExp, url?: string) => {
 /**
  * A section tour on a portal that has nothing in that section yet.
  *
- * Every list-backed section — Rooms, Forms and AI Agents — renders neither the
+ * Every list-backed section — Rooms, Forms, AI Agents, and the Shared with me
+ * a guest gets in place of a personal space — renders neither the
  * quick-actions banner nor the filter bar while it is empty (`isEmptyPage`
  * gates both), so a tour there would be reduced to its sidebar steps — nothing
  * about creating anything, nothing about what a row does, nothing about
@@ -121,6 +133,11 @@ const idFromRoute = (route: RegExp, url?: string) => {
  * from the answer's `folders.length` when the section loads and cleared again
  * by the `filesList` computed, so a non-empty answer brings the banner, the
  * filter bar and the table header back without a single override.
+ *
+ * Which array is swapped depends on what the section lists: rooms arrive in
+ * `folders` under a list endpoint of their own, shared files in `files` under
+ * the ordinary `files/{id}` of the folder they are in — see `standInForRooms`
+ * and `standInForFolder`.
  *
  * Two things keep the pretence contained:
  *  - it is only ever switched on when the real list came back empty, so a
@@ -183,7 +200,19 @@ class TourDemo {
       this.config = config;
     });
 
-    this.teardown = [
+    this.teardown =
+      config.list === "shared"
+        ? this.standInForFolder(config)
+        : this.standInForRooms(config);
+  };
+
+  /**
+   * A section whose list is rooms: Rooms, Forms and AI Agents. Everything a
+   * stand-in room can be asked about is answered here, because a room the
+   * server has never heard of cannot be asked about anywhere else.
+   */
+  private standInForRooms = (config: TourDemoConfig) => {
+    return [
       // The list is the one request that still goes to the server: its answer
       // carries the folder the section is in, its ids and its path, and every
       // one of those has to stay genuine — a fabricated `current` is how a
@@ -272,6 +301,48 @@ class TourDemo {
 
           return {
             response: buildDemoSpaceContents(room, this.sectionRoot, config),
+          };
+        },
+      }),
+    ];
+  };
+
+  /**
+   * A section whose list is files: Shared with me, which is the Files section a
+   * guest is given in place of a personal space.
+   *
+   * One route and one transform is the whole of it. There is no room to be
+   * asked about by id, nothing to walk into and no member list — a shared file
+   * is just a file — so the only thing standing in is the `files` array of a
+   * folder that is otherwise entirely the portal's own.
+   */
+  private standInForFolder = (config: TourDemoConfig) => {
+    if (config.folderId == null) return [];
+
+    const FOLDER_ROUTE = listFolderRoute(config.folderId);
+
+    return [
+      interceptRoute({
+        match: matches(FOLDER_ROUTE),
+        transform: (data) => {
+          const envelope = data as { response?: TGetFolder } | null;
+          const folder = envelope?.response;
+          if (!folder?.current) return data;
+
+          this.sectionRoot = folder.current;
+
+          if (!config.standInForList) return data;
+
+          const files = buildDemoSharedFiles(folder.current, config);
+
+          return {
+            ...envelope,
+            response: {
+              ...folder,
+              files,
+              count: files.length,
+              total: files.length,
+            },
           };
         },
       }),

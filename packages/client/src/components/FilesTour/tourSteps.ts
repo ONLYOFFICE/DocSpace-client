@@ -42,10 +42,13 @@ import {
   navItemStep,
   elementStep,
   elementGroupStep,
+  fileItemStep,
   menuStep,
   hoverRevealStep,
+  revealStep,
   sidebarSelector,
   expandQuickActions,
+  type RevealHooks,
 } from "SRC_DIR/components/Tour/stepBuilders";
 
 const LOG_LABEL = "files tour";
@@ -89,14 +92,46 @@ const SHARE_ICON_SELECTOR = [
   '[data-testid^="tile_"] .badge.copy-link',
 ].join(", ");
 
+// The first row of the list, in whichever view is active (only one of the three
+// is mounted at a time). In the table view the wrapper is `display: contents`,
+// which is what `fileItemStep` resolves around.
+const FIRST_ITEM_SELECTOR =
+  '[data-testid="table-row-0"], [data-testid="files_row_0"], [data-testid="tile_0"]';
+
+// The table header, and the two columns in it that a Shared with me has and no
+// other file list does. Table view only: the row and tile views carry no
+// columns at all, so the start-of-run DOM check drops the step there.
+//
+// Each column is named twice — its heading and its cell in the first row — so
+// the spotlight covers the columns down to the values in them rather than only
+// the words at the top of them. A column the user has switched off contributes
+// neither, and `unionSpotlight` skips what it cannot measure.
+const TABLE_HEADER_SELECTOR = '[data-testid="table-header"]';
+const SHARED_COLUMN_SELECTORS = [
+  '[data-testid="column-SharedByShareWithMe"]',
+  '[data-testid="column-AccessLevelShareWithMe"]',
+  '[data-testid="shared-with-me-cell-shared-by-0"]',
+  '[data-testid="shared-with-me-cell-access-level-0"]',
+];
+
+// The empty screen, which is what a Shared with me that was stood in for is
+// left showing once the stand-in files are dropped.
+const EMPTY_SCREEN_SELECTOR = '[data-testid="empty-view"]';
+
 export type TourStepFlags = {
-  // Which tour to build. Files is the one section where an admin and a paid
-  // user get exactly the same page — a personal space is a personal space — so
-  // the wording never forks here. Guests are the odd ones out: they have no
-  // personal space and no Trash at all, which is why the section is normally
-  // out of their reach entirely. The audience is threaded through anyway so a
-  // guest who does land here is not offered things they cannot do.
+  // Who the tour is talking to. Files is the one section where an admin and a
+  // paid user get exactly the same page — a personal space is a personal space
+  // — so the wording never forks here. What a guest gets is not a variant of
+  // this page at all but another one (`isSharedWithMe`); the audience is still
+  // threaded through so that anyone who does land on a personal space without
+  // owning it is not offered things they cannot do.
   audience: TourAudience;
+  // Which of the two roots the Files section opened on. Everyone with a
+  // personal space starts at My documents; a guest has none, so the sidebar
+  // points their Files item at Shared with me and that folder is their root —
+  // a different page with a different point, which is why it gets a step list
+  // of its own rather than the personal one with the create steps dropped.
+  isSharedWithMe: boolean;
   isDesktop: boolean;
   canCreate: boolean;
   showFilter: boolean;
@@ -116,42 +151,41 @@ export type TourStepFlags = {
   recentId: string | null;
   favoritesId: string | null;
   trashId: string | null;
+  // Whether the list the tour is walking is stood in for. Only a Shared with
+  // me is: it is the one Files root that can be empty and still be the whole
+  // of what its user has. The closing step exists only then — it drops the
+  // stand-in files itself rather than letting the section empty out behind the
+  // user's back the moment the tour is over.
+  isDemo?: boolean;
+  demoHooks?: RevealHooks;
 };
 
-export function getTourSteps(
+/**
+ * The step that names the section's sidebar shortcuts.
+ *
+ * Shared by both roots: the sidebar item is the same one either way, with the
+ * same children under it — only their number differs, and each is named by the
+ * sidebar's own label so the wording in the tooltip is the wording on screen.
+ *
+ * Null when there is nothing to point at: a tablet (the collapsed icon-only
+ * sidebar flattens sub-items into the main list), no section item, or no
+ * sub-item the sidebar renders.
+ */
+function placesStep(
   t: TFunction,
   callbacks: TourStepCallbacks | undefined,
   flags: TourStepFlags,
-): Step[] {
-  const {
-    audience,
-    isDesktop,
-    canCreate,
-    showFilter,
-    hasItems,
-    sectionId,
-    sharedId,
-    recentId,
-    favoritesId,
-    trashId,
-  } = flags;
+): Step | null {
+  const { isDesktop, sectionId, sharedId, recentId, favoritesId, trashId } =
+    flags;
 
-  // Guests own no files, so nothing that creates applies to them.
-  const canOwnFiles = audience !== "guest";
-
-  // The quick-access sub-items are nested under the Files section item and
-  // rendered expanded while the section is active. Skipped on tablet: the
-  // collapsed icon-only sidebar flattens sub-items into the main list.
-  //
   // Anchored on the section item, not on My documents: a guest's section has
   // no personal folder, but it does have the Shared/Recent/Favorites children
-  // the closing step is about.
-  const showQuickAccess = isDesktop && !!sectionId;
+  // this step is about.
+  if (!isDesktop || !sectionId) return null;
 
-  // The section's sub-items, each named by the sidebar's own label so the
-  // wording in the tooltip is the wording on screen. One sentence each, read as
-  // a single paragraph; an item the sidebar doesn't render (a guest has no
-  // Trash) drops its sentence.
+  // One sentence each, read as a single paragraph; an item the sidebar doesn't
+  // render (a guest has no Trash) drops its sentence.
   const places = [
     sharedId &&
       t("FilesTour:TourPlacesShared", {
@@ -171,7 +205,33 @@ export function getTourSteps(
 
   // Any one of the sub-items will do as the tooltip's anchor: the spotlight
   // covers the whole sub-list they share (`spotlightList`).
-  const placesAnchorId = sharedId ?? recentId ?? favoritesId ?? trashId;
+  const anchorId = sharedId ?? recentId ?? favoritesId ?? trashId;
+
+  if (!anchorId || places.length === 0) return null;
+
+  return navItemStep(
+    sidebarSelector(anchorId),
+    t("FilesTour:TourPlacesTitle"),
+    places.join(" "),
+    callbacks,
+    LOG_LABEL,
+    true,
+  );
+}
+
+/**
+ * The Files tour proper: a personal space, and everything that can be made in
+ * it.
+ */
+function getPersonalSteps(
+  t: TFunction,
+  callbacks: TourStepCallbacks | undefined,
+  flags: TourStepFlags,
+): Step[] {
+  const { audience, isDesktop, canCreate, showFilter, hasItems } = flags;
+
+  // Guests own no files, so nothing that creates applies to them.
+  const canOwnFiles = audience !== "guest";
 
   return [
     // 1. Create — the four format tiles, named by what they produce.
@@ -242,16 +302,99 @@ export function getTourSteps(
       ),
 
     // 6. The sidebar sub-items: what each of the section's shortcuts holds.
-    showQuickAccess &&
-      placesAnchorId &&
-      places.length > 0 &&
-      navItemStep(
-        sidebarSelector(placesAnchorId),
-        t("FilesTour:TourPlacesTitle"),
-        places.join(" "),
+    placesStep(t, callbacks, flags),
+  ].filter(Boolean) as Step[];
+}
+
+/**
+ * The tour a guest gets, on the Shared with me that stands in for their Files
+ * section.
+ *
+ * A different page and a different point: there is no banner and no "New"
+ * button here for anyone, guest or not, and nothing in the list belongs to the
+ * person looking at it. So every step is about somebody else's file — where it
+ * came from, what may be done with it, and how to find it again.
+ */
+function getSharedWithMeSteps(
+  t: TFunction,
+  callbacks: TourStepCallbacks | undefined,
+  flags: TourStepFlags,
+): Step[] {
+  const { showFilter, hasItems, isDemo, demoHooks } = flags;
+
+  return [
+    // 1. What the section is: files that arrived rather than files that were
+    // made. Anchored on the first row, which is the whole of the answer.
+    hasItems &&
+      fileItemStep(
+        FIRST_ITEM_SELECTOR,
+        t("FilesTour:TourSharedListTitle"),
+        t("FilesTour:TourSharedList", {
+          sectionName: t("Common:SharedWithMe"),
+        }),
         callbacks,
         LOG_LABEL,
-        true,
+      ),
+
+    // 2. The two columns this list has and no other does, named by the labels
+    // the header itself carries. The spotlight covers the pair down to the
+    // first row's values, so what the tooltip talks about is what is lit up.
+    hasItems &&
+      elementGroupStep(
+        TABLE_HEADER_SELECTOR,
+        SHARED_COLUMN_SELECTORS,
+        t("FilesTour:TourSharedAccessTitle"),
+        t("FilesTour:TourSharedAccess", {
+          sharedBy: t("Common:SharedBy"),
+          accessLevel: t("Common:AccessLevel"),
+        }),
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 3. Search, with the filter, sort and view controls beside it — the same
+    // bar, and the same thing to say about it, as on a personal space.
+    showFilter &&
+      elementStep(
+        SEARCH_SELECTOR,
+        t("FilesTour:TourFindFastTitle"),
+        t("FilesTour:TourFindFast"),
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 4. The sidebar sub-items: what each of the section's shortcuts holds.
+    placesStep(t, callbacks, flags),
+
+    // 5. Only when the list was stood in for. The stand-in files are the last
+    // thing the user saw, and dropping them lands them on the empty screen — so
+    // rather than let that happen behind their back, the closing step does it
+    // deliberately and says what will fill it. `restore` is a no-op: the
+    // section is the user's own from here on.
+    isDemo &&
+      demoHooks &&
+      revealStep(
+        EMPTY_SCREEN_SELECTOR,
+        t("FilesTour:TourSharedEmptyTitle"),
+        t("FilesTour:TourSharedEmpty"),
+        callbacks,
+        LOG_LABEL,
+        demoHooks,
       ),
   ].filter(Boolean) as Step[];
+}
+
+/**
+ * The Files section has two roots — a personal space for everyone who has one,
+ * Shared with me for a guest who has not — and they are different enough
+ * pages that each gets its own walkthrough.
+ */
+export function getTourSteps(
+  t: TFunction,
+  callbacks: TourStepCallbacks | undefined,
+  flags: TourStepFlags,
+): Step[] {
+  return flags.isSharedWithMe
+    ? getSharedWithMeSteps(t, callbacks, flags)
+    : getPersonalSteps(t, callbacks, flags);
 }

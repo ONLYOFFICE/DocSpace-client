@@ -33,7 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { FolderType, RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FileType,
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import type {
   TRoom,
   TRoomSecurity,
@@ -64,6 +69,20 @@ export type TourDemoRoom = {
 };
 
 /**
+ * One stand-in file in a list of files somebody else shared.
+ *
+ * `access` is what the signed-in user was given on it, not what the sharer
+ * holds — that is the column the tour is about.
+ */
+export type TourDemoFile = {
+  /** The name without its extension, which `fileExst` carries. */
+  title: string;
+  fileExst: string;
+  fileType: FileType;
+  access: ShareAccessRights;
+};
+
+/**
  * Which endpoint the section's list comes back on.
  *
  * Rooms and Forms are both answered by `files/rooms`; the agents section has an
@@ -72,8 +91,12 @@ export type TourDemoRoom = {
  * the server named — so only the route the demo claims differs, and an agent is
  * a room as far as everything downstream is concerned (`RoomsType.AIRoom` under
  * `FolderType.AIAgents`).
+ *
+ * `shared` is the odd one out: Shared with me is a plain folder, so its list
+ * comes back on `files/{id}` under the portal's own id and the rows arrive in
+ * `files` rather than in `folders`.
  */
-export type TourDemoList = "rooms" | "agents";
+export type TourDemoList = "rooms" | "agents" | "shared";
 
 export type TourDemoConfig = {
   /** The endpoint whose answer the stand-in rows are put into. */
@@ -82,8 +105,22 @@ export type TourDemoConfig = {
    * The stand-in rooms, in list order. Built by the tour rather than here:
    * what a section's list should be standing in for is the tour's business,
    * and the titles are its translations to hold.
+   *
+   * Left out by a section that lists files rather than rooms.
    */
-  rooms: TourDemoRoom[];
+  rooms?: TourDemoRoom[];
+  /**
+   * The stand-in files, in list order — the `shared` list's counterpart to
+   * `rooms`.
+   */
+  files?: TourDemoFile[];
+  /**
+   * The folder the stand-in files are put into. The room lists come back on an
+   * endpoint that names itself, but a file list is answered by `files/{id}`
+   * under an id only the portal knows, so the route the demo claims for the
+   * `shared` list has to be built from it.
+   */
+  folderId?: number;
   /**
    * Whether the section's own list is replaced by them.
    *
@@ -99,8 +136,10 @@ export type TourDemoConfig = {
    * The stand-in members every demo room shares, after the owner. Which roles
    * are worth showing differs by section — a room has editors and viewers, a
    * form space has the people filling the form in — so the tour picks them.
+   *
+   * Left out by a list of files, which has no members to speak of.
    */
-  memberAccess: ShareAccessRights[];
+  memberAccess?: ShareAccessRights[];
   /**
    * What the inside of a stand-in room is made of, when the tour walks into
    * one. Only the forms tour does, and only the two system folders need
@@ -179,7 +218,7 @@ export function buildDemoRooms(
 ): TRoom[] {
   const now = demoTimestamp();
 
-  return config.rooms.map(({ roomType, title }, index) => ({
+  return (config.rooms ?? []).map(({ roomType, title }, index) => ({
     id: DEMO_ID_BASE - index,
     parentId: current.id,
     rootFolderId: current.id,
@@ -254,7 +293,7 @@ export function buildDemoMembers(config: TourDemoConfig): RoomMember[] {
 
   return [
     owner,
-    ...config.memberAccess.map((access, index) => {
+    ...(config.memberAccess ?? []).map((access, index) => {
       const email = MEMBER_ADDRESS[access] ?? "member@example.com";
 
       return {
@@ -273,6 +312,141 @@ export function buildDemoMembers(config: TourDemoConfig): RoomMember[] {
       } satisfies RoomMember;
     }),
   ];
+}
+
+/**
+ * Who shared the stand-in files.
+ *
+ * An address rather than a name, for the same reason the members are addresses
+ * (see `MEMBER_ADDRESS`) — and one person rather than several, because the
+ * column the tour points at is about where a file came from, not about how many
+ * people it could have come from.
+ */
+const SHARED_BY_ADDRESS = "colleague@example.com";
+
+/**
+ * What a guest may do with a file that was shared with them, by the access they
+ * were given. Everything that would act on somebody else's file — renaming it,
+ * moving it, passing it on — stays off whatever the level: those are the
+ * owner's to do, and a demo row that offered them would be teaching a lie.
+ */
+const sharedFileSecurity = (access: ShareAccessRights) => ({
+  Read: true,
+  Edit: access === ShareAccessRights.Editing,
+  Comment:
+    access === ShareAccessRights.Comment ||
+    access === ShareAccessRights.Editing,
+  Review: false,
+  FillForms: false,
+  CustomFilter: false,
+  ReadHistory: false,
+  EditHistory: false,
+  Download: true,
+  Delete: false,
+  Rename: false,
+  Lock: false,
+  Copy: false,
+  Move: false,
+  Duplicate: false,
+  Convert: false,
+  SubmitToFormGallery: false,
+  CreateRoomFrom: false,
+  CopyLink: false,
+  Embed: false,
+  EditForm: false,
+  StartFilling: false,
+  OpenForm: false,
+  FillingStatus: false,
+  Vectorization: false,
+});
+
+/**
+ * The stand-in files of a Shared with me that has nothing in it yet.
+ *
+ * This is the section a guest lives in — they have no personal space and
+ * nothing of their own anywhere — so an empty one leaves the tour with the
+ * sidebar and nothing else: no row to point at, and no filter bar either
+ * (`isEmptyPage` gates it). The three files stand in for what the section is
+ * for, and carry the two things it exists to show: who a file came from, and
+ * what the guest may do with it.
+ *
+ * `current` is the folder the server itself named, so the files sit under the
+ * ids the section actually lives at.
+ */
+export function buildDemoSharedFiles(
+  current: TFolder,
+  config: TourDemoConfig,
+): TFile[] {
+  const now = demoTimestamp();
+
+  const sharedBy = {
+    id: `${DEMO_ID_BASE}-shared-by`,
+    displayName: SHARED_BY_ADDRESS,
+    avatar: "",
+    avatarSmall: "",
+    hasAvatar: false,
+    profileUrl: "",
+    isAnonim: false,
+  } as unknown as TCreatedBy;
+
+  return (config.files ?? []).map(
+    ({ title, fileExst, fileType, access }, index) => {
+      const canEdit = access === ShareAccessRights.Editing;
+
+      return {
+        id: DEMO_ID_BASE - index,
+        folderId: current.id,
+        rootFolderId: current.id,
+        // The section names its own root, so a stand-in file cannot end up
+        // filed as somebody's personal document.
+        rootFolderType: current.rootFolderType ?? FolderType.SHARE,
+        title: `${title}${fileExst}`,
+        fileExst,
+        fileType,
+        version: 1,
+        versionGroup: 1,
+        contentLength: "0 KB",
+        pureContentLength: 0,
+        fileStatus: 0,
+        mute: false,
+        comment: "",
+        viewUrl: "",
+        webUrl: "",
+        shortWebUrl: "",
+        thumbnailUrl: "",
+        thumbnailStatus: 1,
+        fileEntryType: 2,
+        // What was shared with the user is not theirs to pass on, which is also
+        // what keeps the row's share button off a demo row.
+        canShare: false,
+        shared: false,
+        sharedForUser: false,
+        parentShared: false,
+        // The one person in this section who is not the signed-in user: they
+        // own every file in it, and the list says so in two columns.
+        sharedBy,
+        createdBy: sharedBy,
+        updatedBy: sharedBy,
+        created: now,
+        updated: now,
+        access,
+        security: sharedFileSecurity(access),
+        viewAccessibility: {
+          ImageView: false,
+          MediaView: false,
+          WebView: true,
+          WebEdit: canEdit,
+          WebReview: false,
+          WebCustomFilterEditing: false,
+          WebRestrictedEditing: false,
+          WebComment: canEdit || access === ShareAccessRights.Comment,
+          CoAuhtoring: canEdit,
+          CanConvert: false,
+          MustConvert: false,
+        },
+      };
+    },
+  ) as unknown as TFile[];
 }
 
 /** Everything anyone can do to something inside a room they administer. */

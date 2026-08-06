@@ -33,14 +33,21 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { DeviceType } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  FileType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
+import type { TCreatedBy } from "@docspace/shared/types";
+import type { UserStore } from "@docspace/shared/store/UserStore";
 
 import type FilesTourStore from "SRC_DIR/store/FilesTourStore";
+import type FilesStore from "SRC_DIR/store/FilesStore";
 import useTour, {
   type TourStepCallbacks,
 } from "SRC_DIR/components/Tour/useTour";
@@ -49,11 +56,14 @@ import {
   getTourAudience,
   type TourAudience,
 } from "SRC_DIR/components/Tour/audience";
+import { tourDemo } from "SRC_DIR/api/tourDemo";
 
 import { getTourSteps, type TourStepFlags } from "./tourSteps";
 
 type FilesTourProps = {
   filesTourStore: FilesTourStore;
+  filesStore: FilesStore;
+  user: UserStore["user"];
   userId?: string;
   audience: TourAudience;
   currentDeviceType: DeviceType;
@@ -61,6 +71,8 @@ type FilesTourProps = {
   firstLoad: boolean;
   isSectionLoading: boolean;
   isFilesRoot: boolean;
+  isSharedWithMeRoot: boolean;
+  sharedFolderId: number | null;
   canCreate: boolean;
   showFilter: boolean;
   hasItems: boolean;
@@ -73,6 +85,8 @@ type FilesTourProps = {
 
 const FilesTour = ({
   filesTourStore,
+  filesStore,
+  user,
   userId,
   audience,
   currentDeviceType,
@@ -80,6 +94,8 @@ const FilesTour = ({
   firstLoad,
   isSectionLoading,
   isFilesRoot,
+  isSharedWithMeRoot,
+  sharedFolderId,
   canCreate,
   showFilter,
   hasItems,
@@ -93,9 +109,153 @@ const FilesTour = ({
   const isMobileView = currentDeviceType === DeviceType.mobile;
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
+  // The section's own filter is passed back rather than left to default: it is
+  // what says which folder is being listed, and a default one would reload My
+  // documents underneath a tour standing in Shared with me.
+  const reloadSection = useCallback(
+    () =>
+      filesStore.fetchFiles(
+        sharedFolderId,
+        filesStore.filter,
+        true,
+        false,
+        true,
+      ),
+    [filesStore, sharedFolderId],
+  );
+
+  // Hands the section back: the mocks come down and the real (empty) list is
+  // fetched again, which is what puts the empty screen up. The closing step
+  // does this on purpose, to say what will fill it.
+  const endDemo = useCallback(() => {
+    if (!tourDemo.isActive) return;
+    tourDemo.deactivate();
+    void reloadSection();
+  }, [reloadSection]);
+
+  const demoHooks = useMemo(
+    // Nothing to restore afterwards: the section is already the user's own
+    // again by the time this step is done with it.
+    () => ({ reveal: endDemo, restore: () => {} }),
+    [endDemo],
+  );
+
+  /**
+   * Whether the list the tour is about to walk will be stood in for.
+   *
+   * Read during render rather than off `tourDemo`, because the demo is armed in
+   * an effect: on the render where the tour request arrives it is not up yet,
+   * and a readiness gate that asked `tourDemo` would call the section ready and
+   * start the tour against the empty page the reload is on its way to replace.
+   * Its only anchor is the sidebar item, so that is a one-step tour — and one
+   * that ends itself the moment the reload re-renders the item underneath it.
+   *
+   * Only this root: a personal space that is empty still has its banner and its
+   * "New" button, which is most of what the tour there is about.
+   */
+  const willStandIn =
+    isSharedWithMeRoot && !hasItems && sharedFolderId !== null && !!user;
+
+  // A guest whose Shared with me is empty has nothing anywhere — no personal
+  // space to fall back on — and the section shows them a tour reduced to its
+  // one sidebar step, so the list is stood in for while the tour runs. Armed on
+  // the pending request, before `usePendingTour` starts anything: the reload
+  // has to have landed by the time joyride freezes the step list against the
+  // DOM.
+  useEffect(() => {
+    if (!filesTourStore.isPending || filesTourStore.isRunning) return;
+    if (tourDemo.isActive) return;
+    if (isMobileView || firstLoad || isSectionLoading) return;
+    // The same test as `willStandIn`, plus the narrowing TypeScript needs to
+    // hand these two to the config below.
+    if (!willStandIn || sharedFolderId === null || !user) return;
+
+    tourDemo.activate({
+      // Shared with me is a plain folder, so its list is the ordinary
+      // `files/{id}` of the folder itself rather than a list endpoint.
+      list: "shared",
+      folderId: sharedFolderId,
+      // The tour never opens a shared file — that is the editor, a different
+      // application — so the stand-in list is the whole of what it borrows, and
+      // only ever when the real one came back empty.
+      standInForList: true,
+      // Three files named after what they are, with the very keys the create
+      // tiles are built from, so the demo adds no strings of its own to
+      // translate. Each carries a different access level, which is the point of
+      // the column the tour stops at.
+      files: [
+        {
+          title: t("Common:Document"),
+          fileExst: ".docx",
+          fileType: FileType.Document,
+          access: ShareAccessRights.Editing,
+        },
+        {
+          title: t("Common:Spreadsheet"),
+          fileExst: ".xlsx",
+          fileType: FileType.Spreadsheet,
+          access: ShareAccessRights.Comment,
+        },
+        {
+          title: t("Common:Presentation"),
+          fileExst: ".pptx",
+          fileType: FileType.Presentation,
+          access: ShareAccessRights.ReadOnly,
+        },
+      ],
+      // Required of every demo, and unused here: nothing in this list belongs
+      // to the signed-in user, so the stand-in files name their sharer instead.
+      owner: user as unknown as TCreatedBy,
+    });
+
+    void reloadSection();
+  }, [
+    filesTourStore.isPending,
+    filesTourStore.isRunning,
+    willStandIn,
+    isMobileView,
+    firstLoad,
+    isSectionLoading,
+    sharedFolderId,
+    user,
+    reloadSection,
+    t,
+  ]);
+
+  // A tour that ends while a step is still up — closed, skipped, its anchor
+  // gone — never reaches that step's `after`, so the stand-in files would
+  // outlive the tour that put them there. `endDemo` is a no-op when there is
+  // nothing to hand back.
+  const hasStarted = useRef(false);
+
+  useEffect(() => {
+    if (filesTourStore.isRunning) {
+      hasStarted.current = true;
+      return;
+    }
+
+    if (!hasStarted.current) return;
+    hasStarted.current = false;
+
+    endDemo();
+  }, [filesTourStore.isRunning, endDemo]);
+
+  // The effect above only fires while this component is around to see the tour
+  // stop. Leaving the section takes it down instead — and the interceptors are
+  // module state, so they would outlive it and keep answering for a section the
+  // user has already walked away from. Whatever mounts next fetches its own
+  // list, so there is nothing to reload here.
+  useEffect(
+    () => () => {
+      if (tourDemo.isActive) tourDemo.deactivate();
+    },
+    [],
+  );
+
   const flags = useMemo<TourStepFlags>(
     () => ({
       audience,
+      isSharedWithMe: isSharedWithMeRoot,
       isDesktop,
       canCreate,
       showFilter,
@@ -105,9 +265,12 @@ const FilesTour = ({
       recentId,
       favoritesId,
       trashId,
+      isDemo: tourDemo.isActive,
+      demoHooks,
     }),
     [
       audience,
+      isSharedWithMeRoot,
       isDesktop,
       canCreate,
       showFilter,
@@ -117,6 +280,7 @@ const FilesTour = ({
       recentId,
       favoritesId,
       trashId,
+      demoHooks,
     ],
   );
 
@@ -134,7 +298,12 @@ const FilesTour = ({
 
   usePendingTour(
     filesTourStore,
-    !firstLoad && !isSectionLoading && isFilesRoot,
+    // `willStandIn` holds from the render the request arrives on until the
+    // stand-in files land (it is `!hasItems` that drops it), so the tour cannot
+    // start against the page in between. A stand-in that never lands leaves the
+    // request armed for the next visit rather than spending it on a page with
+    // nothing to show.
+    !firstLoad && !isSectionLoading && isFilesRoot && !willStandIn,
     isMobileView,
   );
 
@@ -169,8 +338,19 @@ export default inject(
     const hasMyDocuments = !!myFolder && audience !== "guest";
     const sharedWithMeId = sharedWithMeFolder?.id;
 
+    // The guest's Files root. `isSharedWithMeFolder` alone is not it: anyone
+    // can open Shared with me from the sidebar, but only for someone without a
+    // personal space is it the section the tour belongs to.
+    const isSharedWithMeRoot = !hasMyDocuments && !!isSharedWithMeFolder;
+
     return {
       filesTourStore,
+      // The stand-in list is fetched back through this when the tour hands the
+      // section over.
+      filesStore,
+      // Required of every demo config; nothing in a shared list is the user's,
+      // so it is the sharer the stand-in files name.
+      user: userStore?.user,
       userId: userStore?.user?.id,
       audience,
       currentDeviceType: settingsStore.currentDeviceType,
@@ -186,8 +366,12 @@ export default inject(
       // accept it, or it can never open for them at all.
       isFilesRoot:
         !publicRoomStore.isPublicRoom &&
-        ((isPersonalRoom && isRoot) ||
-          (!hasMyDocuments && !!isSharedWithMeFolder)),
+        ((isPersonalRoom && isRoot) || isSharedWithMeRoot),
+      // Which of the two roots it is, which is what picks the step list.
+      isSharedWithMeRoot: isSharedWithMeRoot && !publicRoomStore.isPublicRoom,
+      // The folder the stand-in files go into. A system folder, so always a
+      // number — the demo builds the route it claims out of it.
+      sharedFolderId: typeof sharedWithMeId === "number" ? sharedWithMeId : null,
       canCreate: !!myFolder?.security?.Create,
       showFilter: !filesStore.isEmptyPage,
       hasItems: filesStore.filesList?.length > 0,

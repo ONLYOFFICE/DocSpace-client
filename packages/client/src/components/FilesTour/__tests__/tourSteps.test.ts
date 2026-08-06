@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import type { TFunction } from "i18next";
 
 import { getTourSteps, type TourStepFlags } from "../tourSteps";
@@ -55,6 +55,8 @@ const SHARE_ICON_TARGET =
   '[data-testid^="files_row_"] .badge.copy-link, ' +
   '[data-testid^="tile_"] .badge.copy-link';
 
+const TABLE_HEADER_TARGET = '[data-testid="table-header"]';
+
 /**
  * A guest on the Files section: no personal space and no Trash, so the sidebar
  * keys the section item by the literal "files" and points it at Shared with
@@ -62,6 +64,7 @@ const SHARE_ICON_TARGET =
  */
 const guestFlags: TourStepFlags = {
   audience: "guest",
+  isSharedWithMe: false,
   isDesktop: true,
   canCreate: false,
   showFilter: true,
@@ -71,6 +74,19 @@ const guestFlags: TourStepFlags = {
   recentId: "11",
   favoritesId: "12",
   trashId: null,
+};
+
+/** The same guest, on the root their section actually opens at. */
+const sharedFlags: TourStepFlags = {
+  ...guestFlags,
+  isSharedWithMe: true,
+};
+
+/** That root with its list stood in for, which is the empty-portal case. */
+const sharedDemoFlags: TourStepFlags = {
+  ...sharedFlags,
+  isDemo: true,
+  demoHooks: { reveal: vi.fn(), restore: vi.fn() },
 };
 
 const ownerFlags: TourStepFlags = {
@@ -186,6 +202,75 @@ describe("getTourSteps — guest", () => {
 
     expect(titles(guestFlags)).toContain("FilesTour:TourPlacesTitle");
     expect(places?.content).not.toContain("FilesTour:TourPlacesTrash");
+  });
+});
+
+describe("getTourSteps — guest on Shared with me", () => {
+  it("walks what arrived, who sent it, finding it again and the sidebar", () => {
+    expect(titles(sharedFlags)).toEqual([
+      "FilesTour:TourSharedListTitle",
+      "FilesTour:TourSharedAccessTitle",
+      "FilesTour:TourFindFastTitle",
+      "FilesTour:TourPlacesTitle",
+    ]);
+  });
+
+  it("offers nothing that creates, uploads or shares", () => {
+    // None of it is on this page for anyone — there is no banner and no "New"
+    // button here — and none of it is a guest's to do anyway.
+    const sharedTitles = titles(sharedFlags);
+
+    expect(sharedTitles).not.toContain("FilesTour:TourCreateAnythingTitle");
+    expect(sharedTitles).not.toContain("FilesTour:TourBringFilesTitle");
+    expect(sharedTitles).not.toContain("FilesTour:TourShareTitle");
+  });
+
+  it("spotlights the two columns rather than the whole header", () => {
+    const columns = steps(sharedFlags)[1];
+
+    expect(columns.target).toBe(TABLE_HEADER_TARGET);
+    // Shared by and Access level: the tooltip talks about the pair, so the
+    // spotlight covers the pair.
+    expect(columns.spotlightTarget).toBeTypeOf("function");
+  });
+
+  it("names both columns by the labels the header itself carries", () => {
+    const columns = steps(sharedFlags)[1];
+
+    expect(columns.content).toBe("FilesTour:TourSharedAccess");
+    expect(columns.title).toBe("FilesTour:TourSharedAccessTitle");
+  });
+
+  it("keeps Trash out of the sidebar step", () => {
+    const places = steps(sharedFlags).at(-1);
+
+    expect(places?.content).not.toContain("FilesTour:TourPlacesTrash");
+  });
+
+  it("drops the row steps when nothing has been shared yet", () => {
+    // An empty list renders no rows and no filter bar, so all that is left is
+    // the sidebar — which is the very reason the list is stood in for.
+    expect(
+      titles({ ...sharedFlags, hasItems: false, showFilter: false }),
+    ).toEqual(["FilesTour:TourPlacesTitle"]);
+  });
+
+  it("closes on the empty screen only when the list was stood in for", () => {
+    expect(titles(sharedFlags)).not.toContain("FilesTour:TourSharedEmptyTitle");
+    expect(titles(sharedDemoFlags).at(-1)).toBe(
+      "FilesTour:TourSharedEmptyTitle",
+    );
+  });
+
+  it("drops the stand-in itself instead of waiting for the target", () => {
+    // The empty screen is not on the page when the tour starts — the stand-in
+    // files are — so the start-of-run DOM check has to leave the step alone.
+    const closing = steps(sharedDemoFlags).at(-1);
+
+    expect(closing?.data).toEqual({
+      revealsTarget: true,
+      presence: undefined,
+    });
   });
 });
 

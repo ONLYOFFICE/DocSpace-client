@@ -55,7 +55,6 @@ import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import commonStyles from "../../helpers/Common.module.scss";
@@ -81,16 +80,15 @@ type RoomsItemHeaderProps = {
 
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
-  isRoomMembersPanel?: boolean;
   hasExternalLinks?: boolean;
   isExternalShareRestricted?: boolean;
 } & (
   | {
-      roomsView: InfoPanelView.infoMembers;
+      isRoomMembersPanel: true;
       searchProps: SearchProps;
     }
   | {
-      roomsView?: InfoPanelStore["roomsView"];
+      isRoomMembersPanel?: undefined;
       searchProps?: undefined;
     }
 );
@@ -112,12 +110,7 @@ const RoomsItemHeader = ({
   hasExternalLinks,
   isExternalShareRestricted,
 }: RoomsItemHeaderProps) => {
-  const { t } = useTranslation([
-    "Files",
-    "Common",
-    "Translations",
-    "InfoPanel",
-  ]);
+  const { t } = useTranslation(["Files", "Common", "Translations"]);
 
   const [showSearchBlock, setShowSearchBlock] = useState(false);
 
@@ -324,7 +317,7 @@ export default inject(
     publicRoomStore,
     avatarEditorDialogStore,
   }: TStore) => {
-    const { roomsView, setIsMobileHidden } = infoPanelStore;
+    const { setIsMobileHidden } = infoPanelStore;
 
     const {
       displayFileExtension,
@@ -344,7 +337,6 @@ export default inject(
       isShareRestricted;
 
     return {
-      roomsView,
       setIsMobileHidden,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,

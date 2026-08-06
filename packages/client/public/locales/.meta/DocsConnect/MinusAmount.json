@@ -3,7 +3,7 @@
   "content": "−{{amount}}",
   "content_en_sha1_hash": "d2cb10024999b244f344e93da5a13cbf5cb153b9",
   "created_at": "2026-07-27T13:07:48.526Z",
-  "updated_at": "2026-08-01T15:33:49.627Z",
+  "updated_at": "2026-08-05T16:32:00.288Z",
   "comment": {
     "text": "A text label in the Buy Plan panel displaying unused credits as a negative currency value, where {{amount}} is the formatted monetary amount.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 650,
+      "line_number": 823,
       "context": "<Text\n fontSize=\"14px\"\n fontWeight={600}\n className={styles.creditValue}\n >\n {t(\"DocsConnect:MinusAmount\", {\n amount: formatCurrency(unusedCredit),\n })}\n </Text>\n )}\n </div>",
       "module": "/packages/client"
     }

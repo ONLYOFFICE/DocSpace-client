@@ -3,16 +3,17 @@
   "content": "Start from a form template",
   "content_en_sha1_hash": "4442f402e5fe2c3d5fe3d65a90a7e1edb662493b",
   "created_at": "2026-08-04T09:58:55.170Z",
-  "updated_at": "2026-08-04T09:58:56.449Z",
+  "updated_at": "2026-08-05T17:26:30.644Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option used to initiate form creation from a template.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:26:30.644Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 655,
+      "line_number": 690,
       "context": "name: t(\"AiSuggestions:FormsCreateAFormSpace\"),\n prompt: t(\"AiSuggestions:FormsCreateAFormSpacePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsStartFromAFormTemplate\"),\n prompt: t(\"AiSuggestions:FormsStartFromAFormTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsCreateAFormWithAI\"),",
       "module": "/packages/client"
     }

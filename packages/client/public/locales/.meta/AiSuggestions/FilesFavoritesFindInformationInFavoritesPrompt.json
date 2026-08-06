@@ -3,16 +3,17 @@
   "content": "Find specific information across my favorite files. Ask me what I’m looking for, then show the relevant files and summarize what you found.",
   "content_en_sha1_hash": "a0fd7c21d9d40365442586dd2e8e4ad53b225360",
   "created_at": "2026-08-04T09:58:55.111Z",
-  "updated_at": "2026-08-04T09:58:56.407Z",
+  "updated_at": "2026-08-05T18:21:14.148Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt within an AI suggestion item describing how to search through and summarize information from favorite files.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:21:14.148Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 278,
+      "line_number": 313,
       "context": "prompt: t(\"AiSuggestions:FilesFavoritesSummarizeFavoritesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFavoritesFindInformationInFavorites\"),\n prompt: t(\n \"AiSuggestions:FilesFavoritesFindInformationInFavoritesPrompt\",\n ),\n },\n {\n name: t(\"AiSuggestions:FilesFavoritesCompareFavoriteFiles\"),\n prompt: t(\"AiSuggestions:FilesFavoritesCompareFavoriteFilesPrompt\"),",
       "module": "/packages/client"
     }

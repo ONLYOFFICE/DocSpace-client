@@ -1335,6 +1335,139 @@ describe("Locales Tests", () => {
     },
   );
 
+  /**
+   * Group the English translation files by their `public/locales` root, and list
+   * every language folder that sits next to `en` in that root.
+   *
+   * Language folders are read from disk instead of being derived from
+   * `translationFiles` so that a namespace file which is missing entirely for a
+   * language is still detected.
+   *
+   * Note: `libs/ui-kit/locales` is intentionally out of scope — it lives in the
+   * docspace-ui-kit-react submodule and cannot be fixed from this repository.
+   *
+   * @returns {Array<{localesDir: string, languages: string[], namespaces: object[]}>}
+   */
+  const getLocaleRoots = () => {
+    const roots = new Map();
+
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        const localesDir = path.dirname(path.dirname(file.path));
+
+        if (!roots.has(localesDir)) {
+          const languages = fs
+            .readdirSync(localesDir, { withFileTypes: true })
+            .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
+            .map((entry) => entry.name)
+            .filter((language) => language !== "en")
+            .sort();
+
+          roots.set(localesDir, { localesDir, languages, namespaces: [] });
+        }
+
+        roots.get(localesDir).namespaces.push(file);
+      });
+
+    return [...roots.values()];
+  };
+
+  // Both this and NotTranslatedOnAllLanguages report pending translation work
+  // rather than a code defect, so they are skipped on pre-push (see
+  // `test:lefthook`) — the same way NotTranslatedOnBaseLanguages is.
+  const skipAllLanguagesTest = process.env.SKIP_ALL_LANGUAGES_TEST === "true";
+
+  (skipAllLanguagesTest ? it.skip : it)("MissingLocaleFilesTest: Verify that every namespace file present for 'en' also exists for all other languages.", () => {
+    const missingFiles = [];
+
+    getLocaleRoots().forEach(({ localesDir, languages, namespaces }) => {
+      languages.forEach((lng) => {
+        namespaces.forEach((file) => {
+          const expectedPath = path.join(localesDir, lng, file.fileName);
+
+          if (fs.existsSync(expectedPath)) return;
+
+          missingFiles.push({
+            language: lng,
+            namespace: file.namespace,
+            keysCount: file.translations.length,
+            expectedPath,
+          });
+        });
+      });
+    });
+
+    let message =
+      `Next namespace files exist for 'en' but are missing for other languages:\r\n\r\n`;
+
+    missingFiles.forEach((f, index) => {
+      message +=
+        `${index + 1}. Language '${f.language}', namespace '${f.namespace}' ` +
+        `(Count: ${f.keysCount}). Expected path '${f.expectedPath}'\r\n`;
+    });
+
+    expect(missingFiles.length === 0, message).toBe(true);
+  });
+
+  // Unlike NotTranslatedOnBaseLanguages, this covers every language folder, not
+  // only BASE_LANGUAGES.
+  (skipAllLanguagesTest ? it.skip : it)(
+    "NotTranslatedOnAllLanguages: Verify that all English translation keys are present in every supported language, not only in the base ones.",
+    () => {
+      let message = `Next keys are not translated in all supported languages:\r\n\r\n`;
+
+      let exists = false;
+      let i = 0;
+
+      getLocaleRoots().forEach(({ localesDir, languages, namespaces }) => {
+        // namespace → keys expected from the English source
+        const expectedKeys = namespaces.map((file) => ({
+          namespace: file.namespace,
+          keys: file.translations
+            .filter((t) => !brandNameKeys.has(t.key))
+            .map((t) => t.key),
+        }));
+
+        languages.forEach((lng) => {
+          const notFoundKeys = [];
+
+          expectedKeys.forEach(({ namespace, keys }) => {
+            const lngFile = translationFiles.find(
+              (file) =>
+                file.language === lng &&
+                file.namespace === namespace &&
+                path.dirname(path.dirname(file.path)) === localesDir,
+            );
+
+            const translatedKeys = new Set(
+              (lngFile?.translations ?? [])
+                .filter((t) => t.value !== "")
+                .map((t) => t.key),
+            );
+
+            keys.forEach((key) => {
+              if (translatedKeys.has(key)) return;
+              notFoundKeys.push(`${namespace}:${key}`);
+            });
+          });
+
+          if (!notFoundKeys.length) return;
+
+          exists = true;
+
+          message +=
+            `${++i}. Language '${lng}' (Count: ${notFoundKeys.length}). ` +
+            `Path '${path.join(localesDir, lng)}' Keys:\r\n\r\n`;
+
+          message += notFoundKeys.sort().join("\r\n") + "\r\n\r\n";
+        });
+      });
+
+      expect(exists, message).toBe(false);
+    },
+  );
+
   it("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
     let message = "The following keys are using incorrect namespaces:\r\n\r\n";
     let incorrectUsages = [];

@@ -3,16 +3,17 @@
   "content": "Create a room from a template",
   "content_en_sha1_hash": "bf250bddf480d66bf0fd9fc75988f2a63fe7daa6",
   "created_at": "2026-08-04T09:58:55.213Z",
-  "updated_at": "2026-08-04T09:58:56.424Z",
+  "updated_at": "2026-08-05T16:49:18.327Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion item that initiates the process of generating a new room using a predefined template.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:49:18.327Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 469,
+      "line_number": 504,
       "context": "{\n name: t(\"AiSuggestions:RoomsTemplatesRecommendARoomTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesRecommendARoomTemplatePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsTemplatesCreateARoomFromATemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesCreateARoomFromATemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTemplatesExplainThisTemplate\"),",
       "module": "/packages/client"
     }

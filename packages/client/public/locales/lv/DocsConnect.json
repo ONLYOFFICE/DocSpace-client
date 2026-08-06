@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Izmantot šos redaktorus {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Sekojiet unikālo lietotāju aktivitātei",
   "UserAdjustmentLabel": "Lietotāju pielāgošana",
+  "UsersUponRequest": "{{service}} abonements vairāk nekā {{count}} lietotājiem ir pieejams pēc pieprasījuma.",
   "ViewerUsage": "Skatītāju izmantošana",
   "WalletInsufficient": "Pieejamie kredīti: {{amount}} | Nepietiek līdzekļu",
   "Wopi": "WOPI",

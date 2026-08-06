@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "在 {{organizationName}} {{editorsName}} 中使用这些编辑器",
   "UserActivitySubtitle": "跟踪独立用户活动",
   "UserAdjustmentLabel": "用户数调整",
+  "UsersUponRequest": "超过 {{count}} 位用户的 {{service}} 订阅可根据需求提供。",
   "ViewerUsage": "查看者使用情况",
   "WalletInsufficient": "可用积分：{{amount}} | 余额不足",
   "Wopi": "WOPI",

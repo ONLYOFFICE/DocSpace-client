@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "استخدام هذه المحررات في {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "تتبع نشاط المستخدمين الفريدين",
   "UserAdjustmentLabel": "تعديل المستخدمين",
+  "UsersUponRequest": "يتوفر اشتراك {{service}} لأكثر من {{count}} مستخدم عند الطلب.",
   "ViewerUsage": "استخدام المشاهدين",
   "WalletInsufficient": "الرصيد المتاح: {{amount}} | رصيد غير كافٍ",
   "Wopi": "WOPI",

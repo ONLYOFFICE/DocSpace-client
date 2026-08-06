@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Deze editors gebruiken in {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Volg unieke gebruikersactiviteit",
   "UserAdjustmentLabel": "Gebruikersaanpassing",
+  "UsersUponRequest": "Een {{service}}-abonnement voor meer dan {{count}} gebruikers is op aanvraag beschikbaar.",
   "ViewerUsage": "Viewergebruik",
   "WalletInsufficient": "Beschikbare tegoeden: {{amount}} | Onvoldoende saldo",
   "Wopi": "WOPI",

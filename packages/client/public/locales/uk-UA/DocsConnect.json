@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Використовувати ці редактори в {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Відстежуйте унікальну активність користувачів",
   "UserAdjustmentLabel": "Коригування кількості користувачів",
+  "UsersUponRequest": "Підписка {{service}} для понад {{count}} користувачів доступна на запит.",
   "ViewerUsage": "Використання переглядачів",
   "WalletInsufficient": "Доступні кредити: {{amount}} | Недостатньо коштів",
   "Wopi": "WOPI",

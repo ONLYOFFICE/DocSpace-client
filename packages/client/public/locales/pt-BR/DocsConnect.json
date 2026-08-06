@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Usar estes editores no {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Acompanhe a atividade de usuários únicos",
   "UserAdjustmentLabel": "Ajuste de usuários",
+  "UsersUponRequest": "Uma assinatura do {{service}} para mais de {{count}} usuários está disponível sob consulta.",
   "ViewerUsage": "Uso de visualizadores",
   "WalletInsufficient": "Créditos disponíveis: {{amount}} | Fundos insuficientes",
   "Wopi": "WOPI",

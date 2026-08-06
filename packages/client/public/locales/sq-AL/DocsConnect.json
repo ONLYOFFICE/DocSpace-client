@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Përdor këta redaktues në {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Ndiqni aktivitetin unik të përdoruesve",
   "UserAdjustmentLabel": "Rregullim përdoruesish",
+  "UsersUponRequest": "Një abonim {{service}} për më shumë se {{count}} përdorues është i disponueshëm me kërkesë.",
   "ViewerUsage": "Përdorimi i shikuesve",
   "WalletInsufficient": "Kreditet e disponueshme: {{amount}} | Fonde të pamjaftueshme",
   "Wopi": "WOPI",

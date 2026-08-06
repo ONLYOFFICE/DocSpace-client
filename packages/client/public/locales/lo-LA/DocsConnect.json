@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "ໃຊ້ຕົວແກ້ໄຂເຫຼົ່ານີ້ໃນ {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "ຕິດຕາມກິດຈະກຳຜູ້ໃຊ້ສະເພາະຄົນ",
   "UserAdjustmentLabel": "ການປັບຈຳນວນຜູ້ໃຊ້",
+  "UsersUponRequest": "ການສະໝັກໃຊ້ {{service}} ສຳລັບຜູ້ໃຊ້ຫຼາຍກວ່າ {{count}} ຄົນ ມີໃຫ້ຕາມການຮ້ອງຂໍ.",
   "ViewerUsage": "ການໃຊ້ງານຜູ້ຊົມ",
   "WalletInsufficient": "ເຄຣດິດທີ່ມີ: {{amount}} | ເງິນບໍ່ພຽງພໍ",
   "Wopi": "WOPI",

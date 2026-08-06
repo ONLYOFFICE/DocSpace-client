@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Sử dụng các trình chỉnh sửa này trong {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Theo dõi hoạt động riêng biệt của người dùng",
   "UserAdjustmentLabel": "Điều chỉnh người dùng",
+  "UsersUponRequest": "Gói đăng ký {{service}} cho hơn {{count}} người dùng được cung cấp theo yêu cầu.",
   "ViewerUsage": "Mức sử dụng xem",
   "WalletInsufficient": "Tín dụng khả dụng: {{amount}} | Không đủ số dư",
   "Wopi": "WOPI",

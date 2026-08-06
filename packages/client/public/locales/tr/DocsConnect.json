@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Bu düzenleyicileri {{organizationName}} {{editorsName}}'da kullan",
   "UserActivitySubtitle": "Benzersiz kullanıcı etkinliğini izleyin",
   "UserAdjustmentLabel": "Kullanıcı ayarı",
+  "UsersUponRequest": "{{count}} kullanıcıdan fazlası için {{service}} aboneliği talep üzerine sunulmaktadır.",
   "ViewerUsage": "Görüntüleyici kullanımı",
   "WalletInsufficient": "Mevcut krediler: {{amount}} | Yetersiz bakiye",
   "Wopi": "WOPI",

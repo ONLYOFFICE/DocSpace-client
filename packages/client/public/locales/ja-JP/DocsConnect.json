@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "これらのエディタを{{organizationName}} {{editorsName}}で使用する",
   "UserActivitySubtitle": "ユニークユーザーのアクティビティを追跡",
   "UserAdjustmentLabel": "ユーザー数の調整",
+  "UsersUponRequest": "{{count}}人を超えるユーザー向けの{{service}}サブスクリプションはお問い合わせに応じて提供されます。",
   "ViewerUsage": "閲覧者の利用状況",
   "WalletInsufficient": "利用可能なクレジット：{{amount}} | 残高不足",
   "Wopi": "WOPI",

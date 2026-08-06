@@ -33,27 +33,41 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-/**
- * Ensures the URL is absolute by prepending "/" if it has no scheme or leading slash.
- */
-export const toAbsoluteUrl = (url: string): string =>
-  url.startsWith("http") || url.startsWith("/") ? url : `/${url}`;
 
-export const PAYMENT_ROUTES = {
-  portalPayments: `/billing/tariff-plan`,
-  services: `/billing/addons`,
-  aiServices: `/billing/addons/ai-services`,
-  aiSearch: `/billing/addons/ai-search`,
-  backup: `/billing/addons/backup`,
-  diskStorage: `/billing/addons/disk-storage`,
-  docsConnect: `/billing/addons/docs-connect`,
-  paymentMethod: `/billing/payment-method`,
-  wallet: `/portal-settings/payments/wallet`,
-  usage: `/portal-settings/payments/usage`,
-} as const;
+import { useNavigate } from "react-router";
+import { Trans, useTranslation } from "react-i18next";
 
-export function getTwoDotsReplacing(translation: string) {
-  const newTranslation = translation;
+import { Link } from "@docspace/ui-kit/components/link";
+import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
 
-  return newTranslation.replace(/\..$/, ".");
-}
+import { PAYMENT_ROUTES } from "../utils";
+
+/** Shown to admins who are not the payer: the card is not theirs to manage. */
+const PayerOnlyWarning = () => {
+  const navigate = useNavigate();
+  const { t } = useTranslation(["Common"]);
+
+  return (
+    <WarningComponent
+      title={
+        <Trans
+          t={t}
+          i18nKey="OnlyPayerCanManageSection"
+          ns="Common"
+          components={{
+            1: (
+              <Link
+                key="learn-more-link"
+                tag="a"
+                color="accent"
+                onClick={() => navigate(PAYMENT_ROUTES.paymentMethod)}
+              />
+            ),
+          }}
+        />
+      }
+    />
+  );
+};
+
+export default PayerOnlyWarning;

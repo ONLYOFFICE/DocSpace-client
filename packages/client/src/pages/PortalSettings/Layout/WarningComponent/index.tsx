@@ -49,7 +49,6 @@ import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments
 
 type InjectedProps = {
   isPayer?: boolean;
-  isPayerInfoLoaded?: boolean;
   isBackupPaid?: boolean;
   backupsCount?: number;
   maxFreeBackups?: number;
@@ -63,7 +62,6 @@ type InjectedProps = {
 
 const Warning = ({
   isPayer,
-  isPayerInfoLoaded,
   isBackupPaid,
   backupsCount = 0,
   maxFreeBackups = 0,
@@ -87,30 +85,8 @@ const Warning = ({
     setIsTopUpVisible(true);
   };
 
-  const onClickLearnMore = () => {
-    const servicePageUrl = combineUrl(
-      "/portal-settings",
-      "payments",
-      "/payment-method",
-    );
-
-    window.DocSpace.navigate(servicePageUrl);
-  };
-
   const isBackupRoute =
     typeof pathname === "string" && pathname.includes("portal-settings/backup");
-
-  const isPaymentsServiceRoute =
-    typeof pathname === "string" &&
-    pathname.includes("portal-settings/payments/services/");
-
-  const isPortalPaymentsRoute =
-    typeof pathname === "string" &&
-    pathname.includes("portal-settings/payments/portal-payments");
-
-  const isWalletRoute =
-    typeof pathname === "string" &&
-    pathname.includes("portal-settings/payments/wallet");
 
   React.useEffect(() => {
     if (!isBackupPaid || isNotPaidPeriod) return;
@@ -202,36 +178,6 @@ const Warning = ({
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
-  if (
-    (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
-    !isPayer &&
-    isCardLinkedToPortal
-  ) {
-    if (!isPayerInfoLoaded) return null;
-
-    return (
-      <WarningComponent
-        title={
-          <Trans
-            t={t}
-            i18nKey="OnlyPayerCanManageSection"
-            ns="Common"
-            components={{
-              1: (
-                <Link
-                  key="learn-more-link"
-                  tag="a"
-                  color="accent"
-                  onClick={onClickLearnMore}
-                />
-              ),
-            }}
-          />
-        }
-      />
-    );
-  }
-
   if (!isBackupPaid || !isBackupRoute || !warningText) return null;
 
   return (
@@ -263,16 +209,15 @@ export default inject(
       backupServicePrice,
       walletCodeCurrency,
     } = paymentStore;
-    const { isNotPaidPeriod, isPayerInfoLoaded } = currentTariffStatusStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
     return {
       isPayer,
-      isPayerInfoLoaded,
       isBackupPaid,
       backupsCount,
       isInited,
-          maxFreeBackups,
+      maxFreeBackups,
       isNotPaidPeriod,
       isCardLinkedToPortal,
       backupServicePrice,

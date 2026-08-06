@@ -172,11 +172,11 @@ export default inject<
   ActivateAIDialogOwnProps,
   ActivateAIDialogInjectedProps
 >(({ userStore, paymentStore }) => {
-  const { isAdmin } = userStore.user ?? {};
+  const { isAdmin, isOwner } = userStore.user ?? {};
   const { isCardMissingOrInactive } = paymentStore;
 
   return {
-    isAdmin,
+    isAdmin: isAdmin || isOwner,
     isCardMissingOrInactive,
   };
 })(observer(ActivateAIDialogComponent));

@@ -249,13 +249,19 @@ const QuotasBar = ({
     );
   };
   const getWalletLowBalanceDescription = () => {
-    if (!isPayer)
+    if (!isPayer) {
+      const payerContact = walletCustomerDisplayName || walletCustomerEmail;
+
+      // The phrasing puts the contact in brackets, so without one it would read
+      // "Contact the Payer () to ...". The header alone still states the problem.
+      if (!payerContact) return null;
+
       return (
         <Trans
           t={t}
           i18nKey="WalletLowBalanceContactPayer"
           values={{
-            payerContact: walletCustomerDisplayName || walletCustomerEmail,
+            payerContact,
           }}
           components={{
             1:
@@ -272,6 +278,7 @@ const QuotasBar = ({
           }}
         />
       );
+    }
 
     return (
       <Trans

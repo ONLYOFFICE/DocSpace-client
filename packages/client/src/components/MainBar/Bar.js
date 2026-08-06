@@ -54,6 +54,8 @@ import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-compo
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
 
+const WALLET_LOW_BALANCE_CLOSED = "walletLowBalanceClosed";
+
 const Bar = (props) => {
   const {
     t,
@@ -129,6 +131,15 @@ const Bar = (props) => {
   const { loadLanguagePath } = getBannerAttribute();
 
   const onCloseQuota = (currentBar) => {
+    // The tariff bars stay closed for good — they are resolved by an upgrade.
+    // A low balance is cyclical, so its dismissal is kept per session instead:
+    // it survives a reload of the same dip, but a later dip is announced again.
+    if (currentBar === QuotaBarTypes.WalletLowBalance) {
+      sessionStorage.setItem(WALLET_LOW_BALANCE_CLOSED, "true");
+      setBarVisible((value) => ({ ...value, walletLowBalance: false }));
+      return;
+    }
+
     const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
 
     const closed =
@@ -187,9 +198,6 @@ const Bar = (props) => {
         break;
       case QuotaBarTypes.PersonalUserQuota:
         setBarVisible((value) => ({ ...value, personalUserQuota: false }));
-        break;
-      case QuotaBarTypes.WalletLowBalance:
-        setBarVisible((value) => ({ ...value, walletLowBalance: false }));
         break;
       default:
         break;
@@ -300,7 +308,7 @@ const Bar = (props) => {
       if (!closed.includes(QuotaBarTypes.PersonalUserQuota)) {
         setBarVisible((value) => ({ ...value, personalUserQuota: true }));
       }
-      if (!closed.includes(QuotaBarTypes.WalletLowBalance)) {
+      if (!sessionStorage.getItem(WALLET_LOW_BALANCE_CLOSED)) {
         setBarVisible((value) => ({ ...value, walletLowBalance: true }));
       }
     } else {
@@ -319,7 +327,7 @@ const Bar = (props) => {
         storageAndUserTariffLimit: isAdmin || isRoomAdmin,
         confirmEmail: true,
         personalUserQuota: isAdmin || isUser || isRoomAdmin,
-        walletLowBalance: true,
+        walletLowBalance: !sessionStorage.getItem(WALLET_LOW_BALANCE_CLOSED),
       });
     }
 
@@ -349,8 +357,27 @@ const Bar = (props) => {
     updateBanner();
   }, [t]);
 
+  // The backend re-arms its own notification once the balance recovers, so the
+  // dismissal is dropped on the same edge. Guarded on the true -> false
+  // transition: the initial value is false too, and clearing on that would let a
+  // reload resurrect a banner the user had already closed for the current dip.
+  const wasLowBalance = React.useRef(false);
+
+  useEffect(() => {
+    if (walletLowBalance) {
+      wasLowBalance.current = true;
+      return;
+    }
+
+    if (!wasLowBalance.current) return;
+    wasLowBalance.current = false;
+
+    sessionStorage.removeItem(WALLET_LOW_BALANCE_CLOSED);
+    setBarVisible((value) => ({ ...value, walletLowBalance: true }));
+  }, [walletLowBalance]);
+
   const getCurrentBar = () => {
-    if (walletLowBalance && barVisible.walletLowBalance) {
+    if (isAdmin && walletLowBalance && barVisible.walletLowBalance) {
       return {
         type: QuotaBarTypes.WalletLowBalance,
         maxValue: null,
@@ -660,4 +687,3 @@ export default inject(
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));
-

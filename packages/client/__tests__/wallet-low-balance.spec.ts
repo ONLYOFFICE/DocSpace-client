@@ -213,7 +213,8 @@ test.describe("Wallet low balance banner", () => {
     await expect(page.getByTestId("table-body")).toBeVisible();
     await expect(header).toBeHidden();
 
-    wsMock.emitSocketEvent("s:wallet-low-balance", { amount: 0.6 });
+    // The hub emits an empty payload: the balance is re-read over REST.
+    wsMock.emitSocketEvent("s:wallet-low-balance", {});
 
     await expect(header).toBeVisible();
 

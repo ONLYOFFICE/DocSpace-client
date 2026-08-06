@@ -261,10 +261,6 @@ const Shell = ({ page = "home", ...rest }) => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-ai-config",
     });
-
-    SocketHelper?.emit(SocketCommands.Subscribe, {
-      roomParts: "wallet",
-    });
   }, []);
 
   useEffect(() => {
@@ -364,9 +360,19 @@ const Shell = ({ page = "home", ...rest }) => {
     };
   }, [getAIConfig]);
 
+  // The quota room is shared by every user, but the balance is admin-only data:
+  // the settings response exposes walletLowBalance to admins alone, so the socket
+  // event must be gated the same way or a regular user would see the banner until
+  // the next reload and get a rejected balance request.
   useEffect(() => {
+    if (!isAdmin) return;
+
     const handleWalletLowBalance = async () => {
-      await fetchWalletBalance?.(true);
+      try {
+        await fetchWalletBalance?.(true);
+      } catch (e) {
+        console.error(e);
+      }
 
       setWalletLowBalance?.(true);
     };
@@ -376,13 +382,19 @@ const Shell = ({ page = "home", ...rest }) => {
     return () => {
       SocketHelper?.off(SocketEvents.WalletLowBalance, handleWalletLowBalance);
     };
-  }, [setWalletLowBalance, fetchWalletBalance]);
+  }, [isAdmin, setWalletLowBalance, fetchWalletBalance]);
 
   useEffect(() => {
+    if (!isAdmin) return;
+
     const handleTopUpWallet = async () => {
       setWalletLowBalance?.(false);
 
-      await fetchWalletBalance?.(true);
+      try {
+        await fetchWalletBalance?.(true);
+      } catch (e) {
+        console.error(e);
+      }
     };
 
     SocketHelper?.on(SocketEvents.TopUpWallet, handleTopUpWallet);
@@ -390,7 +402,7 @@ const Shell = ({ page = "home", ...rest }) => {
     return () => {
       SocketHelper?.off(SocketEvents.TopUpWallet, handleTopUpWallet);
     };
-  }, [setWalletLowBalance]);
+  }, [isAdmin, setWalletLowBalance, fetchWalletBalance]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -909,7 +921,9 @@ const ShellWrapper = inject(
       loadBaseInfo: async () => {
         await init(false, i18n);
 
-        if (settingsStore.walletLowBalance) paymentStore.fetchWalletBalance();
+        if (settingsStore.walletLowBalance) {
+          paymentStore.fetchWalletBalance().catch((e) => console.error(e));
+        }
 
         setModuleInfo(config.homepage, "home");
         setProductVersion(config.version);
@@ -1017,4 +1031,3 @@ const Root = () => (
 );
 
 export default Root;
-

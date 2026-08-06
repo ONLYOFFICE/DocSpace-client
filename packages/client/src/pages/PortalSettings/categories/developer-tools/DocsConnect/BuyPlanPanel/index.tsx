@@ -115,6 +115,7 @@ interface BuyPlanPanelProps {
     signal: AbortSignal;
   }) => Promise<boolean>;
   isCardMissingOrInactive?: boolean;
+  isCardLinkedToPortal?: boolean;
   isPayer?: boolean;
   walletCustomerEmail?: string | null;
   walletCustomerDisplayName?: string | null;
@@ -131,6 +132,7 @@ const BuyPlanPanel = ({
   switchToDevPack,
   buyPlanViaStripe,
   isCardMissingOrInactive,
+  isCardLinkedToPortal,
   isPayer,
   walletCustomerEmail,
   walletCustomerDisplayName,
@@ -281,7 +283,8 @@ const BuyPlanPanel = ({
   const remainingCredits = availableCredits - chargeNow;
   const insufficientFunds = chargeNow > 0 && remainingCredits < 0;
   const topUpRequired = Math.ceil(chargeNow - availableCredits);
-  const isTopUpUnavailable = insufficientFunds && !isPayer;
+  const isTopUpUnavailable =
+    insufficientFunds && !!isCardLinkedToPortal && !isPayer;
 
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);
@@ -877,7 +880,8 @@ const BuyPlanPanel = ({
                 i18nKey="InsufficientCreditsForSubscription"
                 values={{
                   service: t("DocsConnect:DocsConnect"),
-                  payerContact: walletCustomerDisplayName || walletCustomerEmail,
+                  payerContact:
+                    walletCustomerDisplayName || walletCustomerEmail,
                 }}
                 components={{
                   1:
@@ -1011,6 +1015,7 @@ export default inject(
     switchToDevPack: docsConnectStore.switchToDevPack,
     buyPlanViaStripe: docsConnectStore.buyPlanViaStripe,
     isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,
+    isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
     isPayer: paymentStore.isPayer,
     walletCustomerEmail: currentTariffStatusStore.walletCustomerEmail,
     walletCustomerDisplayName:
@@ -1020,3 +1025,4 @@ export default inject(
     closeBuyPlan: docsConnectStore.closeBuyPlan,
   }),
 )(observer(BuyPlanPanel));
+

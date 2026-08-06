@@ -654,7 +654,8 @@ const Shell = ({ page = "home", ...rest }) => {
     !isSettingsPage &&
     !isPrivacyFolder &&
     selectedFolderType !== FolderType.Knowledge &&
-    selectedFolderType !== FolderType.ResultStorage;
+    selectedFolderType !== FolderType.ResultStorage &&
+    selectedRootFolderType !== FolderType.AIAgents;
 
   const withoutNavMenu =
     isEditor ||

@@ -37,6 +37,7 @@ import React from "react";
 import { reaction } from "mobx";
 
 import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 
 import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
@@ -58,14 +59,19 @@ import type InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
  * store passed in by the caller, and closing it uses `setIsVisible(false)`
  * (there is no dedicated `close()`).
  */
-export const usePanelExclusivity = (
-  infoPanelStore: InfoPanelStore,
-  enabled = true,
-) => {
+export const usePanelExclusivity = (infoPanelStore: InfoPanelStore) => {
   const aiChatStore = useAiChatStore();
 
+  const isAiChatAvailable = useIsAiChatAvailable();
+
   React.useEffect(() => {
-    if (!enabled || !infoPanelStore) return undefined;
+    if (!isAiChatAvailable && aiChatStore.isVisible) {
+      aiChatStore.close();
+    }
+  }, [isAiChatAvailable, aiChatStore]);
+
+  React.useEffect(() => {
+    if (!infoPanelStore) return undefined;
 
     const disposers = [
       reaction(
@@ -82,7 +88,7 @@ export const usePanelExclusivity = (
       ),
     ];
     return () => disposers.forEach((dispose) => dispose());
-  }, [enabled, aiChatStore, infoPanelStore]);
+  }, [aiChatStore, infoPanelStore]);
 };
 
 export default usePanelExclusivity;

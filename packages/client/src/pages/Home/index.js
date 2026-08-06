@@ -280,7 +280,7 @@ const PureHome = observer((props) => {
   // AiAgentProviders' context.
   const isAiChatAvailable = useIsAiChatAvailable();
 
-  usePanelExclusivity(infoPanelStore, isAiChatAvailable);
+  usePanelExclusivity(infoPanelStore);
 
   const isAiChatFullscreen =
     isAiChatAvailable &&

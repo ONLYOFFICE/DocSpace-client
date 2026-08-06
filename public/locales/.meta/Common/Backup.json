@@ -3,7 +3,7 @@
   "content": "Backup",
   "content_en_sha1_hash": "dd96994d01e723dd6f9b0bdb6119722dbeb9faf0",
   "created_at": "2025-05-19T21:30:50.645Z",
-  "updated_at": "2026-07-27T13:07:50.603Z",
+  "updated_at": "2026-08-06T11:20:26.615Z",
   "comment": {
     "text": "This is a navigation item or section title in the portal settings, referring to the functionality for creating and managing backups of data.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 61,
+      "line_number": 63,
       "context": "if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))\n return t(\"Common:AIServices\");\n if (pathname.includes(\"/billing/addons/ai-search\"))\n return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");\n if (pathname.includes(\"/billing/addons/docs-connect\"))\n return t(\"DocsConnect:DocsConnect\");\n if (pathname.includes(\"/billing/addons\")) return t(\"Common:Addons\");",
       "module": "/packages/client"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 691,
+      "line_number": 767,
       "context": "operationsCompleted={downloadingProgress === 100}\n operations={[\n {\n label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),",
       "module": "/packages/shared"
     },

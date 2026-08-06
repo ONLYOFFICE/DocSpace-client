@@ -1,0 +1,35 @@
+{
+  "key_path": "InsufficientFundsContactPayerShort",
+  "content": "Contact your Payer to top up the wallet",
+  "content_en_sha1_hash": "7f981afe5d3e28e5921c2c6e0b7ea23f9a8a8ed6",
+  "created_at": "2026-08-06T08:03:51.805Z",
+  "updated_at": "2026-08-06T11:20:26.684Z",
+  "comment": {
+    "text": "Error toast message displayed to non-payer users when an action fails due to insufficient funds.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T08:04:58.454Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "line_number": 361,
+      "context": "} catch (e) {\n if (isInsufficientFundsError(e)) {\n toastr.error(\n isPayer\n ? t(\"InsufficientFundsCheckCredits\")\n : t(\"InsufficientFundsContactPayerShort\"),\n t(\"InsufficientFunds\"),\n );\n } else {\n toastr.error(e as Error);\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 391,
+      "context": "// The balance could have been spent while the panel was open.\n if (isInsufficientFundsError(error)) {\n toastr.error(\n isPayer\n ? t(\"Common:InsufficientFundsCheckCredits\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n t(\"Common:InsufficientFunds\"),\n );\n } else {\n toastr.error(error as Error);\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

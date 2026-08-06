@@ -98,6 +98,8 @@ const SectionHeaderContent = (props) => {
     deviceType,
     isNotPaidPeriod,
     isBackupPaid,
+    maxFreeBackups = 0,
+    backupsCount,
   } = props;
 
   const navigate = useNavigate();
@@ -143,9 +145,12 @@ const SectionHeaderContent = (props) => {
         case "SingleSignOn:ServiceProviderSettings":
         case "SingleSignOn:SpMetadata":
           return isSSOAvailable;
-        case "Backup":
+        case "Common:Backup": {
           if (isNotPaidPeriod) return true;
-          return !isBackupPaid;
+          if (!isBackupPaid) return true;
+          if (maxFreeBackups > 0) return (backupsCount ?? 0) < maxFreeBackups;
+          return false;
+        }
         default:
           return true;
       }
@@ -157,6 +162,8 @@ const SectionHeaderContent = (props) => {
       standalone,
       isNotPaidPeriod,
       isBackupPaid,
+      maxFreeBackups,
+      backupsCount,
     ],
   );
 
@@ -393,13 +400,16 @@ export default inject(
     settingsStore,
     oauthStore,
     currentTariffStatusStore,
+    backup,
   }) => {
     const {
       isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       isBackupPaid,
+      maxFreeBackups,
     } = currentQuotaStore;
+    const { backupsCount } = backup;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
     const { toggleSelector } = setup;
@@ -448,6 +458,8 @@ export default inject(
       deviceType,
       isNotPaidPeriod,
       isBackupPaid,
+      maxFreeBackups,
+      backupsCount,
     };
   },
 )(

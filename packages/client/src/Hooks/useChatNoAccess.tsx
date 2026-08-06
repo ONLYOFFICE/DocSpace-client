@@ -47,14 +47,11 @@ const AI_SETTINGS_URL = "/portal-settings/ai-settings";
 export type ChatNoAccessStoreProps = {
   standalone?: SettingsStore["standalone"];
   isAdmin?: boolean;
-  isPayer?: PaymentStore["isPayer"];
   isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
   isAIReady?: PaymentStore["isAIReady"];
   enableAIService?: PaymentStore["enableAIService"];
   getAIConfig?: SettingsStore["getAIConfig"];
   refreshPaymentInfo?: () => Promise<void> | void;
-  walletCustomerEmail?: string | null;
-  walletCustomerDisplayName?: string | null;
   language?: string;
 };
 
@@ -62,25 +59,19 @@ export const mapChatNoAccessStores = ({
   settingsStore,
   userStore,
   paymentStore,
-  currentTariffStatusStore,
   authStore,
 }: TStore): ChatNoAccessStoreProps => {
   const { standalone, getAIConfig } = settingsStore;
-  const { isPayer, isCardLinkedToPortal, isAIReady, enableAIService } =
-    paymentStore;
-  const { walletCustomerEmail, walletCustomerInfo } = currentTariffStatusStore;
+  const { isCardLinkedToPortal, isAIReady, enableAIService } = paymentStore;
 
   return {
     standalone,
     isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
-    isPayer,
     isCardLinkedToPortal,
     isAIReady,
     enableAIService,
     getAIConfig,
     refreshPaymentInfo: authStore?.getPaymentInfo,
-    walletCustomerEmail,
-    walletCustomerDisplayName: walletCustomerInfo?.displayName,
     language: authStore?.language ?? "en",
   };
 };
@@ -88,14 +79,11 @@ export const mapChatNoAccessStores = ({
 export const useChatNoAccess = ({
   standalone,
   isAdmin,
-  isPayer,
   isCardLinkedToPortal,
   isAIReady,
   enableAIService,
   getAIConfig,
   refreshPaymentInfo,
-  walletCustomerEmail,
-  walletCustomerDisplayName,
   language,
 }: ChatNoAccessStoreProps) => {
   const navigate = useNavigate();
@@ -122,10 +110,7 @@ export const useChatNoAccess = ({
       aiReady,
       standalone: !!standalone,
       isPortalAdmin: !!isAdmin,
-      isPayer,
       isCardLinkedToPortal,
-      walletCustomerEmail,
-      walletCustomerDisplayName,
       onActivateAI: activation.onActivateAI,
       onTopUpAndActivateAI: activation.onTopUpAndActivateAI,
       isActivating: activation.isActivating,
@@ -135,10 +120,7 @@ export const useChatNoAccess = ({
       aiReady,
       standalone,
       isAdmin,
-      isPayer,
       isCardLinkedToPortal,
-      walletCustomerEmail,
-      walletCustomerDisplayName,
       activation.onActivateAI,
       activation.onTopUpAndActivateAI,
       activation.isActivating,

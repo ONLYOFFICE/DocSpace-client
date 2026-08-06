@@ -3,7 +3,7 @@
   "content": "Spending in {{month}}",
   "content_en_sha1_hash": "4ae9ccc46a814a54cceb01ad454791650bf9850f",
   "created_at": "2026-08-01T16:25:06.304Z",
-  "updated_at": "2026-08-01T16:27:42.752Z",
+  "updated_at": "2026-08-06T08:04:20.047Z",
   "comment": {
     "text": "A header label in the billing overview card showing expenditure for a specific period, where {{month}} represents the name of the month.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
-      "line_number": 180,
+      "line_number": 175,
       "context": "<div className={styles.card}>\n <div className={styles.spendRoot}>\n <div className={styles.spendTop}>\n <div className={styles.cardHeader}>\n <Text fontSize=\"14px\" fontWeight={700}>\n {t(\"SpendingInMonth\", { month: monthLabel })}\n </Text>\n {onViewUsage ? (\n <Link\n onClick={onViewUsage}\n textDecoration=\"underline\"",
       "module": "/libs/ui-kit"
     }

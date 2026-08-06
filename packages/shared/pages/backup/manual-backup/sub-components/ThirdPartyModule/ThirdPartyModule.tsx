@@ -68,6 +68,9 @@ interface ThirdPartyModuleProps {
 	buttonSize?: ButtonSize;
 	isBackupPaid?: boolean;
 	isFreeBackupsLimitReached?: boolean;
+	copyButtonLabel?: string;
+	isToppingUp?: boolean;
+	isCopyBlocked?: boolean;
 
 	connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
 	isTheSameThirdPartyAccount: boolean;
@@ -136,6 +139,9 @@ const ThirdPartyModule = ({
 	toDefault,
 	isBackupPaid,
 	isFreeBackupsLimitReached,
+	copyButtonLabel,
+	isToppingUp,
+	isCopyBlocked,
 }: ThirdPartyModuleProps) => {
 	const isMountRef = useRef(false);
 	const folderRef = useRef("");
@@ -187,7 +193,7 @@ const ThirdPartyModule = ({
 		setIsStartCopy(false);
 	};
 
-	const isModuleDisabled = !isMaxProgress || isStartCopy;
+	const isModuleDisabled = !isMaxProgress || isStartCopy || isCopyBlocked;
 
 	const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
 
@@ -241,8 +247,9 @@ const ThirdPartyModule = ({
 						primary
 						size={buttonSize}
 						onClick={handleMakeCopy}
-						label={t("Common:CreateCopy")}
-						isDisabled={isModuleDisabled || selectedFolder === ""}
+						label={copyButtonLabel ?? t("Common:CreateCopy")}
+						isDisabled={isModuleDisabled || selectedFolder === "" || isToppingUp}
+						isLoading={isToppingUp}
 						testId="third_party_create_copy_button"
 					/>
 				) : null}

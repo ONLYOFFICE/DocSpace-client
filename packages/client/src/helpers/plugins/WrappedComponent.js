@@ -166,6 +166,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
           } = elementProps;
 
           elementStyles = {
+            boxSizing: "border-box",
             width: widthProp,
             height: heightProp,
             padding: paddingProp,

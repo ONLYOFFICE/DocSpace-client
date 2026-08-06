@@ -61,8 +61,11 @@ const ADMIN_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 // public/locales/en/AiAgentsTour.json) — proof that the section the tour is
 // walking through is the borrowed one, not the user's empty list.
 const DEMO_AGENT_TITLE = "Support desk assistant";
-// The empty screen's action list, which is what the closing step points into.
-const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
+// The empty screen itself, rather than its action list: nothing is offered to
+// somebody who cannot create an agent, and a body with no options in it has no
+// box of its own — so the list an admin sees is "visible" and theirs is not,
+// while the screen around both always is.
+const EMPTY_SCREEN = '[data-testid="empty-view"]';
 
 // Step titles, from public/locales/en/AiAgentsTour.json. Steps are addressed by
 // title rather than by index: which ones survive depends on the audience and on

@@ -64,8 +64,11 @@ const ADMIN_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 
 // The info panel's outer wrapper, mounted only while the panel is open.
 const INFO_PANEL = ".info-panel";
-// The empty screen's action list, which is what the closing step points into.
-const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
+// The empty screen itself, rather than its action list: nothing is offered to
+// somebody who cannot create a room, and a body with no options in it has no
+// box of its own — so the list an admin sees is "visible" and theirs is not,
+// while the screen around both always is.
+const EMPTY_SCREEN = '[data-testid="empty-view"]';
 
 // Step titles, from public/locales/en/RoomsTour.json. Steps are addressed by
 // title rather than by index: which ones survive depends on the audience and

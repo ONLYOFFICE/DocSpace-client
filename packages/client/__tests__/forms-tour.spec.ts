@@ -53,8 +53,11 @@ const FORMS_URL = "/forms/filter";
 // The single form space of the non-empty mock list.
 const FIRST_SPACE_ID = 501;
 
-// The empty screen's action list, which is what the closing step points into.
-const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
+// The empty screen itself, rather than its action list: nothing is offered to
+// somebody who cannot create a space, and a body with no options in it has no
+// box of its own — so the list an admin sees is "visible" and theirs is not,
+// while the screen around both always is.
+const EMPTY_SCREEN = '[data-testid="empty-view"]';
 
 // Step titles, from public/locales/en/FormsTour.json. Steps are addressed by
 // title rather than by index: which ones survive depends on the audience and

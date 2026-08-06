@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsInProgress",
+  "content": "The moment someone opens the form they get a copy of their own, saved into {{inProgress}} as they type — nothing is lost if they close the tab, and nothing counts as an answer until they submit. Anyone you invite as {{formFiller}} sees only their own copy, never anyone else's.",
+  "content_en_sha1_hash": "a6d1ebd4078be876b83b0e040125e622a2e427aa",
+  "created_at": "2026-08-06T14:20:53.754Z",
+  "updated_at": "2026-08-06T14:43:52.728Z",
+  "comment": {
+    "text": "Description text within an onboarding tour step explaining the auto-save feature of forms; includes variables for a status name (`{{inProgress}}`) and a user role (`{{formFiller}}`).",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:43:52.728Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 258,
+      "context": "// (Common:RoleFormFillerFormRoomDescription).\n showInsideSpace &&\n revealStep(\n IN_PROGRESS_SELECTOR,\n t(\"FormsTour:FormsInProgressTitle\"),\n t(\"FormsTour:FormsInProgress\", {\n inProgress: t(\"Common:InProgress\"),\n formFiller: t(\"Common:RoleFormFiller\"),\n }),\n callbacks,\n LOG_LABEL,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

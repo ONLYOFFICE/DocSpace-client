@@ -68,6 +68,7 @@ import { CategoryType } from "@docspace/shared/constants";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
+import SectionTours from "SRC_DIR/components/Tour/SectionTours";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
 
@@ -193,8 +194,6 @@ const PureHome = observer((props) => {
     isErrorChecking,
     setOperationCancelVisible,
     hideConfirmCancelOperation,
-    welcomeFormFillingTipsVisible,
-    formFillingTipsVisible,
     chatFiles,
 
     allowInvitingGuests,
@@ -281,7 +280,7 @@ const PureHome = observer((props) => {
   // AiAgentProviders' context.
   const isAiChatAvailable = useIsAiChatAvailable();
 
-  usePanelExclusivity(infoPanelStore, isAiChatAvailable);
+  usePanelExclusivity(infoPanelStore);
 
   const isAiChatFullscreen =
     isAiChatAvailable &&
@@ -601,11 +600,7 @@ const PureHome = observer((props) => {
   sectionProps.pluginShowCancelButton = pluginShowCancelButton;
 
   const hasVisibleContent =
-    !isEmptyPage ||
-    welcomeFormFillingTipsVisible ||
-    formFillingTipsVisible ||
-    showFilterLoader ||
-    roomsFilterGroupId;
+    !isEmptyPage || showFilterLoader || roomsFilterGroupId;
 
   const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
@@ -637,6 +632,7 @@ const PureHome = observer((props) => {
         <>
           <DragTooltip />
           <FilesSelectionArea />
+          <SectionTours />
         </>
       )}
       {isPluginPage() ? null : (
@@ -700,6 +696,7 @@ const PureHome = observer((props) => {
                 items={quickActions.items}
                 className={styles.quickActions}
                 isLoading={showFilterLoader}
+                dataTestId="quick-actions"
               />
             </Section.SectionBanner>
           ) : null}
@@ -930,9 +927,6 @@ export const Component = inject(
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
-    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
-      dialogsStore;
-
     const { isRoomAdmin, isAdmin } = authStore;
 
     const {
@@ -1054,8 +1048,6 @@ export const Component = inject(
       isEmptyGroups,
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
 
       secondaryActiveOperations,
       secondaryOperationsCompleted,

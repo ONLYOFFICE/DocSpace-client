@@ -37,7 +37,6 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { MainButtonMobile } from "@docspace/ui-kit/components/main-button-mobile";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
 import styles from "./main-button.module.scss";
 
@@ -50,7 +49,6 @@ const MobileView = ({
   onMainButtonClick,
   isRoomsFolder,
   mainButtonMobileVisible,
-  setRefMap,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
   const mainButtonRef = React.useRef(null);
@@ -58,13 +56,6 @@ const MobileView = ({
   const openButtonToggler = React.useCallback(() => {
     setIsOpenButton((prevState) => !prevState);
   }, []);
-
-  React.useEffect(() => {
-    const buttonElement = mainButtonRef.current?.getButtonElement();
-    if (buttonElement) {
-      setRefMap(GuidanceRefKey.Uploading, buttonElement);
-    }
-  }, [setRefMap]);
 
   return (
     mainButtonMobileVisible && (
@@ -87,15 +78,13 @@ const MobileView = ({
 };
 
 export default inject(
-  ({ uploadDataStore, treeFoldersStore, guidanceStore }) => {
+  ({ uploadDataStore, treeFoldersStore }) => {
     const { isRoomsFolder } = treeFoldersStore;
     const { setUploadPanelVisible } = uploadDataStore;
 
-    const { setRefMap } = guidanceStore;
     return {
       setUploadPanelVisible,
       isRoomsFolder,
-      setRefMap,
     };
   },
 )(observer(MobileView));

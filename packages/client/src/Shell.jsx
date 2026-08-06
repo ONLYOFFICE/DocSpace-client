@@ -654,7 +654,8 @@ const Shell = ({ page = "home", ...rest }) => {
     !isSettingsPage &&
     !isPrivacyFolder &&
     selectedFolderType !== FolderType.Knowledge &&
-    selectedFolderType !== FolderType.ResultStorage;
+    selectedFolderType !== FolderType.ResultStorage &&
+    selectedRootFolderType !== FolderType.AIAgents;
 
   const withoutNavMenu =
     isEditor ||
@@ -858,8 +859,6 @@ const ShellWrapper = inject(
 
     const {
       setConvertPasswordDialogVisible,
-      setFormFillingTipsDialog,
-      formFillingTipsVisible,
 
       setFormCreationInfo,
       setSocialAuthWelcomeDialogVisible,
@@ -892,8 +891,6 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setPreparationPortalDialogVisible,
-      setFormFillingTipsDialog,
-      formFillingTipsVisible,
       isBase,
       setTheme,
       roomsMode,

@@ -3,7 +3,7 @@
   "content": "For {{period}}",
   "content_en_sha1_hash": "6fa271e32aa734f72825fb69453a3519528879e0",
   "created_at": "2026-06-25T11:54:50.691Z",
-  "updated_at": "2026-08-01T16:25:17.911Z",
+  "updated_at": "2026-08-06T08:04:20.057Z",
   "comment": {
     "text": "Caption for billing cards and usage summaries specifying the timeframe for displayed data; {{period}} represents a specific month or time range name.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/index.tsx",
-      "line_number": 141,
+      "line_number": 150,
       "context": "});\n \n const dateRangeSpan = <Text as=\"span\" className={styles.totalRange} />;\n \n const periodCaption: Record<TUsagePeriodKey, ReactNode> = {\n thisMonth: t(\"ForPeriod\", { period: monthText }),\n lastMonth: t(\"ForPeriod\", { period: monthText }),\n last3Months: (\n <CommonTrans\n i18nKey=\"ForLast3Months\"\n values={{ startDate, endDate }}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/index.tsx",
-      "line_number": 141,
+      "line_number": 150,
       "context": "});\n \n const dateRangeSpan = <Text as=\"span\" className={styles.totalRange} />;\n \n const periodCaption: Record<TUsagePeriodKey, ReactNode> = {\n thisMonth: t(\"ForPeriod\", { period: monthText }),\n lastMonth: t(\"ForPeriod\", { period: monthText }),\n last3Months: (\n <CommonTrans\n i18nKey=\"ForLast3Months\"\n values={{ startDate, endDate }}",
       "module": "/libs/ui-kit"
     },

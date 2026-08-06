@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewFindATemplateFromTheLibraryPrompt",
+  "content": "Find the right template for my task in the template library. Ask what I want to create, clarify the purpose and content, then recommend the most suitable options and open the selected template in Files.",
+  "content_en_sha1_hash": "4bc44c682dc2070e5de718866c75039514825299",
+  "created_at": "2026-08-05T16:31:58.706Z",
+  "updated_at": "2026-08-05T17:09:54.347Z",
+  "comment": {
+    "text": "An instructional prompt for the AI assistant that defines its step-by-step workflow for helping users find and open templates from the library.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:09:54.347Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 236,
+      "context": "name: t(\"AiSuggestions:OverviewPrepareADocumentForPDF\"),\n prompt: t(\"AiSuggestions:OverviewPrepareADocumentForPDFPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewFindATemplateFromTheLibrary\"),\n prompt: t(\"AiSuggestions:OverviewFindATemplateFromTheLibraryPrompt\"),\n },\n ],\n \n // +\n files: [",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

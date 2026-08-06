@@ -3,16 +3,17 @@
   "content": "Organize recent files",
   "content_en_sha1_hash": "ce40b52a30c16d852c51b4770607a0ac9950b726",
   "created_at": "2026-08-04T09:58:55.127Z",
-  "updated_at": "2026-08-04T09:58:56.407Z",
+  "updated_at": "2026-08-05T18:04:31.874Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label in the AI suggestions menu used to initiate the organization of recently accessed files.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:04:31.874Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 264,
+      "line_number": 299,
       "context": "{\n name: t(\"AiSuggestions:FilesRecentFindRecentFilesByTopic\"),\n prompt: t(\"AiSuggestions:FilesRecentFindRecentFilesByTopicPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesRecentOrganizeRecentFiles\"),\n prompt: t(\"AiSuggestions:FilesRecentOrganizeRecentFilesPrompt\"),\n },\n ],\n \n // +",
       "module": "/packages/client"
     }

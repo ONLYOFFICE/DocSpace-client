@@ -3,16 +3,17 @@
   "content": "Find a form across my favorite Form Spaces and return the most relevant results. If this information is not provided, ask me for the search term and any useful filters such as owner, date, type, or status.",
   "content_en_sha1_hash": "86b38f5bc6beb46bffd3297fe8fa291e1d9fd377",
   "created_at": "2026-08-04T09:58:55.165Z",
-  "updated_at": "2026-08-04T09:58:56.455Z",
+  "updated_at": "2026-08-05T17:31:31.173Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "An instructional prompt for an AI assistant that defines how to search through favorite Form Spaces and specifies fallback behavior if search criteria are missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:31:31.173Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 710,
+      "line_number": 745,
       "context": "prompt: t(\"AiSuggestions:FormsFavoritesCreateASimilarSpacePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesFindTheFormYouNeed\"),\n prompt: t(\"AiSuggestions:FormsFavoritesFindTheFormYouNeedPrompt\"),\n },\n ],\n \n // +\n formsTemplates: [",
       "module": "/packages/client"
     }

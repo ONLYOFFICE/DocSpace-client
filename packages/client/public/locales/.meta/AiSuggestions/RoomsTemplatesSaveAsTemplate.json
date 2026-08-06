@@ -3,16 +3,17 @@
   "content": "Save as template",
   "content_en_sha1_hash": "e438319cba9a62ebf3bedfae2f7c1d57a2785c0e",
   "created_at": "2026-08-04T09:58:55.217Z",
-  "updated_at": "2026-08-04T09:58:56.424Z",
+  "updated_at": "2026-08-05T16:45:57.671Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label in the AI suggestions menu that allows room administrators to save current settings as a new template.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:45:57.671Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 483,
+      "line_number": 518,
       "context": "name: t(\"AiSuggestions:RoomsTemplatesUpdateTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesUpdateTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTemplatesSaveAsTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesSaveAsTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n ],",
       "module": "/packages/client"
     }

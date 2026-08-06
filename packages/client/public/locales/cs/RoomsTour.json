@@ -1,0 +1,16 @@
+{
+  "RoomsCreateFirst": "Vyberte typ, pozvěte lidi, se kterými pracujete, a vložte své soubory. Zabere to minutu — a všechno, co jste právě viděli, začne fungovat na vašich vlastních dokumentech.",
+  "RoomsCreateFirstTitle": "Teď si to udělejte po svém",
+  "RoomsEmpty": "Místnosti, které jste právě viděli, byly ukázka. Místnosti, do kterých vás někdo pozve, se objeví v tomto seznamu a všechno, co jsme vám ukázali, v nich funguje stejně.",
+  "RoomsEmptyTitle": "Váš seznam je zatím prázdný",
+  "RoomsGroups": "Uspořádejte místnosti podle konkrétních vlastností, abyste rychle našli, co potřebujete. Vytvářejte skupiny a přepínejte mezi nimi hned nad seznamem.",
+  "RoomsGroupsTitle": "Seskupte si místnosti",
+  "RoomsMembers": "Každá místnost má svůj seznam členů v informačním panelu. Přidejte kontakty z portálu a nastavte každému členovi roli — od prohlížení souborů až po správu celé místnosti.",
+  "RoomsMembersTitle": "Pracujte společně",
+  "RoomsPlaces": "{{recent}}, {{favorites}} a {{trash}} shromažďují soubory z vašich místností: nedávno otevřené, označené hvězdičkou a smazané — ty poslední lze ještě obnovit. {{templates}} — vaše šablony místností. {{archive}} — místnosti, ve kterých už nepracujete, kdykoli obnovitelné.",
+  "RoomsPlacesTitle": "Všechno na svém místě",
+  "RoomsTemplates": "Proměňte libovolnou místnost v šablonu — její nastavení, struktura i soubory se uloží. Vytvořte z ní jedním kliknutím novou místnost, zbývá už jen přidat členy.",
+  "RoomsTemplatesTitle": "Využijte znovu to, co funguje",
+  "RoomsTypes": "{{collaboration}} pro týmovou práci, {{vdr}} pro bezpečné sdílení souborů, {{publicRoom}} pro přístup zvenčí, {{custom}} pro vaše vlastní scénáře.",
+  "RoomsTypesTitle": "Místnost pro každý úkol"
+}

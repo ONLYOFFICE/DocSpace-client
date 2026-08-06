@@ -3,16 +3,17 @@
   "content": "Show which fields of the attached form are still empty, mark the required ones, and explain what each of them expects. If this information is not provided, ask me which fields matter most.",
   "content_en_sha1_hash": "ee3a96ac2986760922652282e7b97203431cea89",
   "created_at": "2026-08-04T09:58:55.107Z",
-  "updated_at": "2026-08-04T09:58:56.467Z",
+  "updated_at": "2026-08-05T18:36:30.478Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "An instruction prompt sent to the AI assistant to guide its analysis of empty or required fields within an attached form.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:36:30.478Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 826,
+      "line_number": 861,
       "context": "name: t(\"AiSuggestions:AiFormShowTheFields\"),\n prompt: t(\"AiSuggestions:AiFormShowTheFieldsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormWhatIsStillEmpty\"),\n prompt: t(\"AiSuggestions:AiFormWhatIsStillEmptyPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormCheckTheAnswers\"),\n prompt: t(\"AiSuggestions:AiFormCheckTheAnswersPrompt\"),\n },",
       "module": "/packages/client"
     }

@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Sāciet MI sarunu, lai uzdotu jautājumus, apkopotu dokumentus, radītu tekstus un saņemtu palīdzību darbā — turpat sadaļā {{sectionName}}.",
+  "TourAiAssistantTitle": "Jūsu MI palīgs",
+  "TourBringFiles": "Augšupielādējiet failus no sava datora vai vienkārši ievelciet tos jebkurā vietā šajā logā.",
+  "TourBringFilesTitle": "Atnesiet savus failus",
+  "TourCreateAnything": "Veidojiet dokumentus, izklājlapas, prezentācijas un PDF veidlapas tieši pārlūkprogrammā — bez jebkādas programmatūras.",
+  "TourCreateAnythingTitle": "Izveidojiet jebko",
+  "TourFindFast": "Meklējiet pēc nosaukuma, filtrējiet pēc veida vai autora, kārtojiet sarakstu un pārslēdzieties starp saraksta un elementu skatu.",
+  "TourFindFastTitle": "Ātri atrodiet jebko",
+  "TourPlacesFavorites": "{{sectionName}} — ar zvaigznīti atzīmētie faili.",
+  "TourPlacesRecent": "{{sectionName}} — pie kā esat strādājuši pēdējā laikā.",
+  "TourPlacesShared": "{{sectionName}} — faili, ko citi ir kopīgojuši ar jums.",
+  "TourPlacesTitle": "Viss savā vietā",
+  "TourPlacesTrash": "{{sectionName}} — dzēstie faili, ko vēl varat atjaunot.",
+  "TourShare": "Novietojiet peli virs jebkura faila, lai redzētu ātrās darbības. Noklikšķiniet uz kopīgošanas ikonas, lai piešķirtu piekļuvi sava portāla kontaktpersonām ar dažādiem atļauju līmeņiem — vai izveidojiet ārējo saiti visiem pārējiem.",
+  "TourSharedAccess": "{{sharedBy}} rāda, no kā fails nācis, {{accessLevel}} rāda, ko ar to drīkstat darīt — skatīt, komentēt vai rediģēt. To var mainīt tikai īpašnieks.",
+  "TourSharedAccessTitle": "Kas to kopīgoja un ko jūs varat darīt",
+  "TourSharedEmpty": "Ar jums vēl nekas nav kopīgots. Faili un mapes parādīsies šeit, tiklīdz kāds jums piešķirs tiem piekļuvi.",
+  "TourSharedEmptyTitle": "Jūsu saraksts pagaidām ir tukšs",
+  "TourSharedList": "Viss, kam citi jums piešķir piekļuvi, nonāk sadaļā {{sectionName}}. Atveriet failu, lai strādātu ar to pārlūkprogrammā — oriģināls paliek savā vietā, tāpēc visi vienmēr redz vienu un to pašu versiju.",
+  "TourSharedListTitle": "Kopīgots ar jums",
+  "TourShareTitle": "Kopīgojiet un sadarbojieties"
+}

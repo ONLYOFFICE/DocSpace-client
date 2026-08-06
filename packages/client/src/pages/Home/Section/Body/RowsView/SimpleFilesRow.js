@@ -38,12 +38,10 @@ import React, { useCallback, useMemo } from "react";
 import { isMobile } from "react-device-detect";
 import { withTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/shared/enums";
 import { EMPTY_OBJECT } from "@docspace/shared/constants";
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import {
   FilesRow,
   FilesRowWrapper,
@@ -98,9 +96,6 @@ const SimpleFilesRow = React.memo((props) => {
     isIndexUpdated,
     isFolder,
     isBlockingOperation,
-    isTutorialEnabled,
-    setRefMap,
-    deleteRefMap,
     selectedFolderTitle,
     setDropTargetPreview,
     disableDrag,
@@ -122,22 +117,6 @@ const SimpleFilesRow = React.memo((props) => {
     },
     [changeIndex, item, t],
   );
-
-  React.useEffect(() => {
-    if (!rowRef?.current) return;
-
-    if (item?.isPDF) {
-      setRefMap(GuidanceRefKey.Pdf, rowRef);
-    }
-    if (item?.type === FolderType.Done) {
-      setRefMap(GuidanceRefKey.Ready, rowRef);
-    }
-
-    return () => {
-      deleteRefMap(GuidanceRefKey.Pdf);
-      deleteRefMap(GuidanceRefKey.Ready);
-    };
-  }, [setRefMap, deleteRefMap]);
 
   const element = (
     <ItemIcon
@@ -239,7 +218,7 @@ const SimpleFilesRow = React.memo((props) => {
       }`}
       checked={checkedProps}
       isActive={isActive}
-      showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
+      showHotkeyBorder={showHotkeyBorder}
       isIndexEditingMode={isIndexEditingMode}
       isIndexUpdated={isIndexUpdated}
       isFirstElem={itemIndex === 0}

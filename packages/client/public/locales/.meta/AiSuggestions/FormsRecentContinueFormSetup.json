@@ -3,16 +3,17 @@
   "content": "Continue form setup",
   "content_en_sha1_hash": "c0451b265c447ea245abb6e4364b49d284f0e3be",
   "created_at": "2026-08-04T09:58:55.166Z",
-  "updated_at": "2026-08-04T09:58:56.453Z",
+  "updated_at": "2026-08-05T17:30:08.278Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an actionable AI suggestion item that allows users to resume configuring an incomplete form.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:30:08.278Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 687,
+      "line_number": 722,
       "context": "name: t(\"AiSuggestions:FormsRecentWhereActionIsNeeded\"),\n prompt: t(\"AiSuggestions:FormsRecentWhereActionIsNeededPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsRecentContinueFormSetup\"),\n prompt: t(\"AiSuggestions:FormsRecentContinueFormSetupPrompt\"),\n requires: \"contentCreator\",\n },\n ],",
       "module": "/packages/client"
     }

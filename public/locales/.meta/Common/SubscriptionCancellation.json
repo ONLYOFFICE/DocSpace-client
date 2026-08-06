@@ -3,7 +3,7 @@
   "content": "Subscription cancellation",
   "content_en_sha1_hash": "456f00501390f0982cec7b46a28f73039329035f",
   "created_at": "2026-04-10T13:53:43.513Z",
-  "updated_at": "2026-08-01T15:33:49.631Z",
+  "updated_at": "2026-08-05T16:32:00.289Z",
   "comment": {
     "text": "This is the title of a modal dialog that appears when a user initiates the process of canceling their subscription.",
     "is_auto": true,
@@ -21,12 +21,6 @@
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanCancel.tsx",
       "line_number": 133,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n isLarge\n >\n <ModalDialog.Header>{t(\"SubscriptionCancellation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.cancelDialog}>\n <Text>{t(\"WantToCancelStoragePlan\")}</Text>\n <br />\n <Text as=\"span\">",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 478,
-      "context": "const scheduledTooltip = hasScheduledChange ? (\n <>\n {isCancellation || usersAdjusting ? (\n <Text fontWeight={600} fontSize=\"12px\">\n {isCancellation\n ? t(\"SubscriptionCancellation\")\n : t(\"UserAdjustment\", {\n fromCount: docsConnectState?.tariffUsers ?? 0,\n toCount: scheduledUsers,\n })}\n </Text>",
       "module": "/libs/ui-kit"
     },
     {

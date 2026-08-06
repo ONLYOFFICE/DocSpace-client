@@ -3,16 +3,17 @@
   "content": "Delete an archived room",
   "content_en_sha1_hash": "60ebf0ed134c8048110b67b5204a60255d5689e9",
   "created_at": "2026-08-04T09:58:55.195Z",
-  "updated_at": "2026-08-04T09:58:56.425Z",
+  "updated_at": "2026-08-05T17:04:29.837Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option that triggers the permanent deletion of a room currently in the archive.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:04:29.837Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 505,
+      "line_number": 540,
       "context": "name: t(\"AiSuggestions:RoomsArchiveRestoreARoomFromTheArchive\"),\n prompt: t(\"AiSuggestions:RoomsArchiveRestoreARoomFromTheArchivePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsArchiveDeleteAnArchivedRoom\"),\n prompt: t(\"AiSuggestions:RoomsArchiveDeleteAnArchivedRoomPrompt\"),\n requires: \"roomAdmin\",\n },\n ],",
       "module": "/packages/client"
     }

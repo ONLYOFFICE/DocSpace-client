@@ -190,6 +190,7 @@ export const useQuickActions = (
   const aiChatItems = React.useMemo<QuickActionItem>(
     () => ({
       id: "quick-ai-chat",
+      dataTestId: "quick-ai-chat",
       icon: <AIChatIcon />,
       label: t("Common:AIChat"),
       onClick: openChat,
@@ -201,24 +202,28 @@ export const useQuickActions = (
     () => [
       {
         id: "quick-docx",
+        dataTestId: "quick-docx",
         icon: <CreateDocumentIcon />,
         label: t("Common:Document"),
         onClick: () => dispatchCreate(currentFolderId, "docx", t),
       },
       {
         id: "quick-xlsx",
+        dataTestId: "quick-xlsx",
         icon: <CreateSpreadsheetIcon />,
         label: t("Common:Spreadsheet"),
         onClick: () => dispatchCreate(currentFolderId, "xlsx", t),
       },
       {
         id: "quick-pptx",
+        dataTestId: "quick-pptx",
         icon: <CreatePresentationIcon />,
         label: t("Common:Presentation"),
         onClick: () => dispatchCreate(currentFolderId, "pptx", t),
       },
       {
         id: "quick-pdf",
+        dataTestId: "quick-pdf",
         icon: <BlankPdfIcon />,
         label: getConstName("PDF"),
         onClick: () => dispatchCreate(currentFolderId, "pdf", t),
@@ -236,6 +241,7 @@ export const useQuickActions = (
     () => [
       {
         id: "quick-vdr-room",
+        dataTestId: "quick-vdr-room",
         icon: <QuickVdrRoomIcon />,
         label: t("Common:VirtualDataRoom"),
         onClick: () =>
@@ -243,6 +249,7 @@ export const useQuickActions = (
       },
       {
         id: "quick-collaboration-room",
+        dataTestId: "quick-collaboration-room",
         icon: <QuickCollaborationRoomIcon />,
         label: t("Common:CollaborationRoomTitle"),
         onClick: () =>
@@ -250,6 +257,7 @@ export const useQuickActions = (
       },
       {
         id: "quick-public-room",
+        dataTestId: "quick-public-room",
         icon: <QuickPublicRoomIcon />,
         label: t("Common:PublicRoom"),
         onClick: () =>
@@ -257,6 +265,7 @@ export const useQuickActions = (
       },
       {
         id: "quick-custom-room",
+        dataTestId: "quick-custom-room",
         icon: <QuickCustomRoomIcon />,
         label: t("Common:CustomRoomTitle"),
         onClick: () =>
@@ -265,6 +274,7 @@ export const useQuickActions = (
       // Opens the Templates list (sidebar Rooms → Templates).
       {
         id: "quick-use-template",
+        dataTestId: "quick-use-template",
         icon: <UseRoomTemplateIllustrationIcon />,
         label: t("Files:RoomTemplate"),
         onClick: () => goTemplates(userId),
@@ -279,13 +289,17 @@ export const useQuickActions = (
       // Collect forms → create a Form Filling Room.
       {
         id: "quick-form-room",
+        dataTestId: "quick-form-room",
         icon: <QuickFormRoomIcon />,
         label: t("Common:FormSpaceTitle"),
         onClick: () => dispatchCreateRoom(currentFolderId, RoomsType.FormRoom),
       },
-      // Opens the form templates list (sidebar Forms → Templates).
+      // Opens the form templates list (sidebar Forms → Templates). Note the
+      // in-room tile below reuses this `id` for the OForms gallery; only this
+      // one carries a testid, so the two can never collide in the DOM.
       {
         id: "quick-form-template",
+        dataTestId: "quick-form-space-template",
         icon: <UseRoomTemplateIllustrationIcon />,
         label: t("Common:SpaceTemplate"),
         onClick: () => goFormsTemplates(userId),

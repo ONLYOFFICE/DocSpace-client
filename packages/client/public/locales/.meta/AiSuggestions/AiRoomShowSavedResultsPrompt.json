@@ -3,16 +3,17 @@
   "content": "Show the files you have already generated and saved, newest first, with a short description of each. If this information is not provided, ask me for the date range or file type to narrow the list.",
   "content_en_sha1_hash": "0a658ecbdbbc5799ac4254bc27131fb45003ebd4",
   "created_at": "2026-08-04T09:58:55.099Z",
-  "updated_at": "2026-08-04T09:58:56.434Z",
+  "updated_at": "2026-08-05T18:28:03.363Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt sent to the AI assistant when a user selects the \"Show saved results\" suggestion, specifying how to display and filter previously generated files.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:28:03.363Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 586,
+      "line_number": 621,
       "context": "prompt: t(\"AiSuggestions:AiRoomTranslateADocumentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomShowSavedResults\"),\n prompt: t(\"AiSuggestions:AiRoomShowSavedResultsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomAddToTheKnowledgeBase\"),\n prompt: t(\"AiSuggestions:AiRoomAddToTheKnowledgeBasePrompt\"),\n requires: \"create\",",
       "module": "/packages/client"
     }

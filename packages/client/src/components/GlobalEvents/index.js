@@ -44,7 +44,6 @@ import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 
-import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
 import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
@@ -373,12 +372,8 @@ const GlobalEvents = ({
         );
       }
 
-      const closedFormFillingTips = localStorage.getItem(
-        getFormFillingTipsStorageName(userId),
-      );
-
       setCreatePDFFormFile({
-        visible: closedFormFillingTips,
+        visible: true,
         file,
         localKey,
         onClose: () => {

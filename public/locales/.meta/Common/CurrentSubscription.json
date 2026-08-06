@@ -3,7 +3,7 @@
   "content": "Current subscription",
   "content_en_sha1_hash": "6e5eaffcbb8edb078798ced5a7dd0d69134772ef",
   "created_at": "2026-04-10T13:53:42.384Z",
-  "updated_at": "2026-08-05T16:32:00.370Z",
+  "updated_at": "2026-08-06T08:04:20.050Z",
   "comment": {
     "text": "This is a heading for a section displaying the user's current subscription details, such as storage plan. It appears on the additional storage page.",
     "is_auto": true,
@@ -19,14 +19,14 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 321,
-      "context": "</div>\n \n {isPaid && canceled ? (\n <>\n <Text className={styles.sectionTitle}>\n {t(\"Common:CurrentSubscription\")}\n </Text>\n <div className={styles.noPlanCard}>\n <Text\n fontSize=\"13px\"\n fontWeight={600}",
+      "line_number": 305,
+      "context": "/>\n \n {isPaid && canceled ? (\n <>\n <Text className={styles.sectionTitle}>\n {t(\"Common:CurrentSubscription\")}\n </Text>\n <div className={styles.noPlanCard}>\n <Text\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 321,
-      "context": "</div>\n \n {isPaid && canceled ? (\n <>\n <Text className={styles.sectionTitle}>\n {t(\"Common:CurrentSubscription\")}\n </Text>\n <div className={styles.noPlanCard}>\n <Text\n fontSize=\"13px\"\n fontWeight={600}",
+      "line_number": 305,
+      "context": "/>\n \n {isPaid && canceled ? (\n <>\n <Text className={styles.sectionTitle}>\n {t(\"Common:CurrentSubscription\")}\n </Text>\n <div className={styles.noPlanCard}>\n <Text\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/libs/ui-kit"
     },
     {

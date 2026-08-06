@@ -3,7 +3,7 @@
   "content": "The backup file cannot be saved to the Form Filling room since this room type can only contain PDF forms.",
   "content_en_sha1_hash": "958a8d0ffe13dd2a81d00247f69196aca2a96216",
   "created_at": "2025-05-26T07:15:40.760Z",
-  "updated_at": "2026-06-25T19:31:02.872Z",
+  "updated_at": "2026-08-06T08:04:19.859Z",
   "comment": {
     "text": "Error message. Appears when a user attempts to save a backup file to a Form Filling room, which only supports PDF forms.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/sub-components/RoomsModule/RoomsModule.tsx",
-      "line_number": 170,
-      "context": "const isModuleDisabled = !isMaxProgress || isStartCopy;\n \n const formProps = useMemo(\n () => ({\n isRoomFormAccessible: false,\n message: t(\"Common:BackupNotAllowedInFormRoom\"),\n }),\n [t],\n );\n \n return (",
+      "line_number": 176,
+      "context": "const isModuleDisabled = !isMaxProgress || isStartCopy || isCopyBlocked;\n \n const formProps = useMemo(\n () => ({\n isRoomFormAccessible: false,\n message: t(\"Common:BackupNotAllowedInFormRoom\"),\n }),\n [t],\n );\n \n return (",
       "module": "/packages/shared"
     }
   ],

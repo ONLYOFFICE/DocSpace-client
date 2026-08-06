@@ -3,7 +3,7 @@
   "content": "A {{service}} subscription for more than {{count}} users is available upon request.",
   "content_en_sha1_hash": "23f7c2d122a28fd4405aaa398ca95b43dd0f04cc",
   "created_at": "2026-08-05T16:31:57.457Z",
-  "updated_at": "2026-08-06T06:40:59.064Z",
+  "updated_at": "2026-08-06T11:20:26.685Z",
   "comment": {
     "text": "Informational note in the subscription plan panel regarding custom enterprise-level subscriptions. The {{service}} variable refers to the product name, and {{count}} represents the user limit threshold.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 455,
+      "line_number": 482,
       "context": "<Text\n fontSize=\"14px\"\n fontWeight={600}\n className={styles.uponRequestNote}\n >\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>",
       "module": "/packages/client"
     }

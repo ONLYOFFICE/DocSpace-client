@@ -3,7 +3,7 @@
   "content": "AI services",
   "content_en_sha1_hash": "7452369e2f15817a4414cc5653aa2101c5c608f4",
   "created_at": "2026-03-26T08:26:29.053Z",
-  "updated_at": "2026-07-27T13:07:50.653Z",
+  "updated_at": "2026-08-06T11:20:26.637Z",
   "comment": {
     "text": "This is a short label for a section or feature related to artificial intelligence functionalities within the application. It appears in various contexts, including a dialog for disabling AI services.",
     "is_auto": true,
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 58,
+      "line_number": 60,
       "context": "if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))\n return t(\"Common:AIServices\");\n if (pathname.includes(\"/billing/addons/ai-search\"))\n return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 303,
+      "line_number": 310,
       "context": ": // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites\n t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: getBrandName(\"ProductName\"),\n aiServices: t(\"Common:AIServices\"),\n });\n \n return (\n <StyledContainer>\n {isHeaderVisible ? (",
       "module": "/packages/client"
     }

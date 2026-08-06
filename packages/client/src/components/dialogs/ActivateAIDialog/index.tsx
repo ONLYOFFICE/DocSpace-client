@@ -42,7 +42,6 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ActivateAIDialogOwnProps = {
@@ -54,10 +53,7 @@ type ActivateAIDialogOwnProps = {
 
 type ActivateAIDialogInjectedProps = {
   isAdmin?: boolean;
-  isPayer?: boolean;
   isCardMissingOrInactive?: boolean;
-  payerEmail?: string | null;
-  payerDisplayName?: string | null;
 };
 
 type ActivateAIDialogProps = ActivateAIDialogOwnProps &
@@ -69,17 +65,11 @@ const ActivateAIDialogComponent = ({
   onActivate,
   isActivating,
   isAdmin,
-  isPayer,
   isCardMissingOrInactive,
-  payerEmail,
-  payerDisplayName,
 }: ActivateAIDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const canActivate = isPayer;
-  const canConnectTopayer = !isCardMissingOrInactive && !isPayer && isAdmin;
-
-  const payerLabel = payerDisplayName || payerEmail;
+  const canActivate = isAdmin;
 
   const renderBody = () => {
     if (canActivate) {
@@ -103,38 +93,6 @@ const ActivateAIDialogComponent = ({
           <br />
           {t("Common:AIUsageChargedFromWallet")}
         </>
-      );
-    }
-
-    if (canConnectTopayer) {
-      return (
-        <Trans
-          t={t}
-          i18nKey="ContactPayerToActivateAI"
-          ns="Common"
-          values={{ payerContact: payerLabel }}
-          components={{
-            1: (
-              <Text
-                key="activate-ai-bold"
-                as="span"
-                lineHeight="20px"
-                fontWeight={600}
-              />
-            ),
-            2:
-              payerEmail && !payerDisplayName ? (
-                <Link
-                  key="activate-ai-payer-link"
-                  type={LinkType.action}
-                  color="accent"
-                  href={`mailto:${payerEmail}`}
-                />
-              ) : (
-                <Text key="activate-ai-payer-name" as="span" />
-              ),
-          }}
-        />
       );
     }
 
@@ -213,17 +171,13 @@ export default inject<
   TStore,
   ActivateAIDialogOwnProps,
   ActivateAIDialogInjectedProps
->(({ userStore, paymentStore, currentTariffStatusStore }) => {
-  const { isAdmin } = userStore.user ?? {};
-  const { isPayer, isCardMissingOrInactive } = paymentStore;
-  const { walletCustomerEmail, walletCustomerInfo } = currentTariffStatusStore;
+>(({ userStore, paymentStore }) => {
+  const { isAdmin, isOwner } = userStore.user ?? {};
+  const { isCardMissingOrInactive } = paymentStore;
 
   return {
-    isAdmin,
-    isPayer,
+    isAdmin: isAdmin || isOwner,
     isCardMissingOrInactive,
-    payerEmail: walletCustomerEmail,
-    payerDisplayName: walletCustomerInfo?.displayName,
   };
 })(observer(ActivateAIDialogComponent));
 

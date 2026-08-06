@@ -3,7 +3,7 @@
   "content": "Insufficient funds",
   "content_en_sha1_hash": "0f1b4fb91c31ae1a96b27b0655f5bdfcdeaa048b",
   "created_at": "2026-08-06T08:03:51.763Z",
-  "updated_at": "2026-08-06T08:05:27.899Z",
+  "updated_at": "2026-08-06T11:20:26.684Z",
   "comment": {
     "text": "Error toast title appearing during storage plan upgrades or plan purchases when the account balance is too low.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 388,
+      "line_number": 392,
       "context": "if (isInsufficientFundsError(error)) {\n toastr.error(\n isPayer\n ? t(\"Common:InsufficientFundsCheckCredits\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n t(\"Common:InsufficientFunds\"),\n );\n } else {\n toastr.error(error as Error);\n }\n }",
       "module": "/packages/client"
     }

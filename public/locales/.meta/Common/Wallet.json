@@ -3,7 +3,7 @@
   "content": "Wallet",
   "content_en_sha1_hash": "b60862f4855a392f00cc9f27e0862c0b979075a6",
   "created_at": "2026-04-10T13:53:43.879Z",
-  "updated_at": "2026-08-06T08:04:19.959Z",
+  "updated_at": "2026-08-06T11:20:26.686Z",
   "comment": {
     "text": "This is a navigation item label in the portal settings, referring to the section where users manage their payment information and balance.",
     "is_auto": true,
@@ -19,14 +19,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 643,
+      "line_number": 652,
       "context": "<div className={styles.walletIcon} aria-hidden>\n <WalletSvg />\n </div>\n <div>\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Common:Wallet\")}\n </Text>\n {insufficientFunds ? (\n <Text\n fontSize=\"13px\"\n fontWeight={400}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 52,
-      "context": "import { getDocsConnectTrialState } from \"../../developer-tools/DocsConnect/utils\";\n \n import styles from \"./BillingHeader.module.scss\";\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/billing/wallet\")) return t(\"Common:Wallet\");\n if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))",
+      "line_number": 54,
+      "context": "import PayerOnlyWarning from \"./PayerOnlyWarning\";\n \n import styles from \"./BillingHeader.module.scss\";\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/billing/wallet\")) return t(\"Common:Wallet\");\n if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))",
       "module": "/packages/client"
     },
     {

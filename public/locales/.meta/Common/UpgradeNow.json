@@ -3,7 +3,7 @@
   "content": "Upgrade now",
   "content_en_sha1_hash": "09a80c7a63cdefe5e5c7bccdc6bf4b894b15c07c",
   "created_at": "2026-04-10T13:53:43.815Z",
-  "updated_at": "2026-08-06T08:04:20.045Z",
+  "updated_at": "2026-08-06T11:20:26.784Z",
   "comment": {
     "text": "This is the label for a button that allows users to upgrade their current plan.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
-      "line_number": 106,
-      "context": "const canTopUpAndBuy = isBalanceInsufficient && isPayer;\n \n const title = canTopUpAndBuy\n ? t(\"TopUpAndUpgrade\")\n : !hasStorageSubscription\n ? t(\"UpgradeNow\")\n : isExceedingStorageLimit\n ? t(\"SendRequest\")\n : t(\"Update\");\n \n const showNextBillHint =",
+      "line_number": 107,
+      "context": "const canTopUpAndBuy = isBalanceInsufficient && !isTopUpUnavailable;\n \n const title = canTopUpAndBuy\n ? t(\"TopUpAndUpgrade\")\n : !hasStorageSubscription\n ? t(\"UpgradeNow\")\n : isExceedingStorageLimit\n ? t(\"SendRequest\")\n : t(\"Update\");\n \n const showNextBillHint =",
       "module": "/libs/ui-kit"
     },
     {

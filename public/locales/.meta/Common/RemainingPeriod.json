@@ -3,7 +3,7 @@
   "content": "Remaining period",
   "content_en_sha1_hash": "f5023b8b9e7191d0cd371a3a36ee2dbe6bdf5e2d",
   "created_at": "2026-04-10T13:53:45.647Z",
-  "updated_at": "2026-08-06T08:04:19.962Z",
+  "updated_at": "2026-08-06T11:20:26.689Z",
   "comment": {
     "text": "This is a label in the order summary for a storage plan. It indicates the duration of the current subscription that will be credited when changing the plan.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 945,
+      "line_number": 954,
       "context": "formatCurrency(devPackPrice),\n )\n : null}\n {isUpgrade ? (\n summaryRow(\n t(\"Common:RemainingPeriod\"),\n <>\n {t(\"DocsConnect:DaysCount\", {\n count: remainingDays,\n })}{\" \"}\n <Text",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Additional backups {{currency}} per 1 backup. <1>Details</1>.",
   "content_en_sha1_hash": "61c1739de0cd68050d395928ba75171b890d89e9",
   "created_at": "2026-08-06T08:03:30.564Z",
-  "updated_at": "2026-08-06T08:09:18.982Z",
+  "updated_at": "2026-08-06T11:20:26.674Z",
   "comment": {
     "text": "Informational text within a warning component in Portal Settings displaying the cost per additional backup; includes a `{{currency}}` variable and a clickable `<1>Details</1>` link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/WarningComponent/index.tsx",
-      "line_number": 181,
+      "line_number": 157,
       "context": "components={priceComponents}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"AdditionalBackupsPrice\"\n ns=\"Common\"\n values={priceValues}\n components={priceComponents}\n />\n ),",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Total monthly",
   "content_en_sha1_hash": "5da6b356ce524b604b2f87cc48d8c782f98dfb04",
   "created_at": "2026-07-27T13:07:48.515Z",
-  "updated_at": "2026-08-06T08:04:19.962Z",
+  "updated_at": "2026-08-06T11:20:26.690Z",
   "comment": {
     "text": "Label in the subscription plan summary section indicating the recurring monthly cost.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 1028,
+      "line_number": 1037,
       "context": "<Text\n fontSize=\"14px\"\n fontWeight={600}\n className={styles.summaryValue}\n >\n {t(\"DocsConnect:TotalMonthly\")}\n </Text>\n <Text\n fontSize=\"14px\"\n fontWeight={600}\n className={styles.summaryValue}",
       "module": "/packages/client"
     }

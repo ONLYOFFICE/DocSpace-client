@@ -3,7 +3,7 @@
   "content": "Unused subscription credit",
   "content_en_sha1_hash": "8a9da9a4cc2cb36632952c337c6a95290befa439",
   "created_at": "2026-07-27T13:07:48.526Z",
-  "updated_at": "2026-08-06T08:04:19.961Z",
+  "updated_at": "2026-08-06T11:20:26.689Z",
   "comment": {
     "text": "Summary label in the Buy Plan panel indicating the amount of remaining subscription balance.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 843,
+      "line_number": 852,
       "context": "<Text\n fontSize=\"14px\"\n fontWeight={400}\n className={styles.summaryLabel}\n >\n {t(\"DocsConnect:UnusedSubscriptionCredit\")}\n </Text>\n <Text\n as=\"span\"\n fontSize=\"14px\"\n fontWeight={400}",
       "module": "/packages/client"
     }

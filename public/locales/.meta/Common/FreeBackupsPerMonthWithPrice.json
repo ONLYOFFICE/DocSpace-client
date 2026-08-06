@@ -3,7 +3,7 @@
   "content": "Free backups: {{value}}/{{maxValue}} per current month. Additional backups {{currency}} per 1 backup. <1>Details</1>.",
   "content_en_sha1_hash": "f6141a2d7376cc4659e6d5c22ffe4d5c95dfb3f4",
   "created_at": "2026-08-06T08:03:50.074Z",
-  "updated_at": "2026-08-06T08:06:21.047Z",
+  "updated_at": "2026-08-06T11:20:26.674Z",
   "comment": {
     "text": "Warning message in the Portal Settings layout indicating the current number of free backups used out of the monthly limit and the cost for extra backups. Includes placeholders for usage, maximum allowed, and currency, plus a clickable \"Details\" link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/WarningComponent/index.tsx",
-      "line_number": 173,
+      "line_number": 149,
       "context": "setWarningText(\n maxFreeBackups > 0 ? (\n <Trans\n t={t}\n i18nKey=\"FreeBackupsPerMonthWithPrice\"\n ns=\"Common\"\n values={priceValues}\n components={priceComponents}\n />\n ) : (",
       "module": "/packages/client"
     }

@@ -63,6 +63,7 @@
   "GetStarted": "ابدأ الآن",
   "GetStartedDescription": "أدمج محررات المستندات وجداول البيانات والعروض التقديمية وملفات PDF المستضافة على السحابة — تعاونية ومتوافقة مع MS Office، وبمفاتيحك الخاصة. لا حاجة لتثبيت أي خادم.",
   "GetStartedTitle": "شغّل محررات {{productName}} داخل تطبيقك",
+  "InsufficientCreditsForSubscription": "لا يوجد رصيد كافٍ للاشتراك المحدد في {{service}}. تواصل مع الدافع (<1>{{payerContact}}</1>) لشحن المحفظة، أو اختر عددًا أقل من المستخدمين.",
   "IntegrationOptions": "خيارات التكامل والتعليمات",
   "IntegrationOptionsSubtitle": "أضف Docs إلى أي منظومة (DMS، CMS، LMS، إلخ) - بدون كتابة كود مخصص وبدون ترحيل بيانات.",
   "Internal": "داخلي",

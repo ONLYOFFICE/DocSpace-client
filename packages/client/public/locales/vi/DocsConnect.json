@@ -63,6 +63,7 @@
   "GetStarted": "Bắt đầu",
   "GetStartedDescription": "Nhúng các trình chỉnh sửa Tài liệu, Bảng tính, Bản trình bày và PDF được lưu trữ trên đám mây — có thể cộng tác và tương thích với MS Office, sử dụng khóa của riêng bạn. Không cần cài đặt máy chủ.",
   "GetStartedTitle": "Chạy các trình chỉnh sửa {{productName}} bên trong ứng dụng của bạn",
+  "InsufficientCreditsForSubscription": "Không có đủ tín dụng cho gói đăng ký {{service}} đã chọn. Hãy liên hệ với người thanh toán (<1>{{payerContact}}</1>) để nạp tiền vào ví, hoặc chọn ít người dùng hơn.",
   "IntegrationOptions": "Tùy chọn tích hợp & hướng dẫn",
   "IntegrationOptionsSubtitle": "Kết nối Docs với bất kỳ hệ sinh thái nào (DMS, CMS, LMS, v.v.) - không cần viết mã tùy chỉnh, không cần di chuyển dữ liệu.",
   "Internal": "Nội bộ",

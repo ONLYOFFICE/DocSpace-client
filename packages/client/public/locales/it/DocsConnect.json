@@ -63,6 +63,7 @@
   "GetStarted": "Inizia",
   "GetStartedDescription": "Incorpora editor cloud per Documenti, Fogli di calcolo, Presentazioni e PDF — collaborativi e compatibili con MS Office, con le tue chiavi. Nessun server da installare.",
   "GetStartedTitle": "Esegui gli editor di {{productName}} all'interno della tua app",
+  "InsufficientCreditsForSubscription": "I crediti non sono sufficienti per l'abbonamento a {{service}} selezionato. Contatta il tuo pagatore (<1>{{payerContact}}</1>) per ricaricare il portafoglio oppure seleziona un numero inferiore di utenti.",
   "IntegrationOptions": "Opzioni di integrazione e istruzioni",
   "IntegrationOptionsSubtitle": "Collega Docs a qualsiasi ecosistema (DMS, CMS, LMS, ecc.) - senza codice personalizzato, senza migrazione.",
   "Internal": "Interno",

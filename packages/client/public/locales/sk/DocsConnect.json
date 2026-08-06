@@ -63,6 +63,7 @@
   "GetStarted": "Začať",
   "GetStartedDescription": "Vložte cloudové editory dokumentov, tabuliek, prezentácií a PDF — kolaboratívne a kompatibilné s MS Office, s vlastnými kľúčmi. Žiadny server na inštaláciu.",
   "GetStartedTitle": "Spustite editory {{productName}} priamo vo vašej aplikácii",
+  "InsufficientCreditsForSubscription": "Pre vybrané predplatné {{service}} nie je dostatok kreditov. Kontaktujte svojho platiteľa (<1>{{payerContact}}</1>), aby doplnil peňaženku, alebo vyberte menej používateľov.",
   "IntegrationOptions": "Možnosti integrácie a pokyny",
   "IntegrationOptionsSubtitle": "Pripojte Docs do akéhokoľvek ekosystému (DMS, CMS, LMS atď.) — bez vlastného kódu, bez migrácie.",
   "Internal": "Interné",

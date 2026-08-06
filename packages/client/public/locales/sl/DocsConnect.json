@@ -63,6 +63,7 @@
   "GetStarted": "Začnite",
   "GetStartedDescription": "Vdelajte v oblaku gostovane urejevalnike dokumentov, preglednic, predstavitev in datotek PDF — namenjene sodelovanju in združljive z MS Office, z lastnimi ključi. Brez potrebe po namestitvi strežnika.",
   "GetStartedTitle": "Zaženite urejevalnike {{productName}} znotraj svoje aplikacije",
+  "InsufficientCreditsForSubscription": "Za izbrano naročnino {{service}} ni dovolj kreditov. Obrnite se na svojega plačnika (<1>{{payerContact}}</1>), da napolni denarnico, ali izberite manj uporabnikov.",
   "IntegrationOptions": "Možnosti in navodila za integracijo",
   "IntegrationOptionsSubtitle": "Vključite Docs v kateri koli ekosistem (DMS, CMS, LMS itd.) – brez lastne kode, brez migracije.",
   "Internal": "Notranji",

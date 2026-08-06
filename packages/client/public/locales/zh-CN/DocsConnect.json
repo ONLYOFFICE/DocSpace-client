@@ -63,6 +63,7 @@
   "GetStarted": "开始使用",
   "GetStartedDescription": "嵌入云托管的文档、电子表格、演示文稿和 PDF 编辑器——支持协作，兼容 MS Office，使用您自己的密钥。无需安装服务器。",
   "GetStartedTitle": "在您的应用中运行 {{productName}} 编辑器",
+  "InsufficientCreditsForSubscription": "所选 {{service}} 订阅的积分不足。请联系您的付款人 (<1>{{payerContact}}</1>) 为钱包充值，或减少用户数量。",
   "IntegrationOptions": "集成选项与说明",
   "IntegrationOptionsSubtitle": "将 Docs 接入任何生态系统（DMS、CMS、LMS 等）——无需自定义代码，无需迁移。",
   "Internal": "内部",

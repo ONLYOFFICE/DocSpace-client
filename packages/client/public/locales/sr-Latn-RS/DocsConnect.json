@@ -63,6 +63,7 @@
   "GetStarted": "Počni",
   "GetStartedDescription": "Ugradite uređivače dokumenata, tabela, prezentacija i PDF-ova hostovane u oblaku — kolaborativne i kompatibilne sa MS Office-om, sa sopstvenim ključevima. Nema servera za instalaciju.",
   "GetStartedTitle": "Pokrenite {{productName}} uređivače unutar svoje aplikacije",
+  "InsufficientCreditsForSubscription": "Nema dovoljno kredita za izabranu {{service}} pretplatu. Kontaktirajte svog platioca (<1>{{payerContact}}</1>) da dopuni novčanik ili izaberite manje korisnika.",
   "IntegrationOptions": "Opcije integracije i uputstva",
   "IntegrationOptionsSubtitle": "Povežite Docs sa bilo kojim ekosistemom (DMS, CMS, LMS, itd.) - bez prilagođenog koda, bez migracije.",
   "Internal": "Interno",

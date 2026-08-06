@@ -63,6 +63,7 @@
   "GetStarted": "Începeți",
   "GetStartedDescription": "Încorporați editoare de documente, foi de calcul, prezentări și PDF găzduite în cloud — colaborative și compatibile cu MS Office, cu propriile chei. Fără server de instalat.",
   "GetStartedTitle": "Rulați editoarele {{productName}} în aplicația dvs.",
+  "InsufficientCreditsForSubscription": "Nu există suficiente credite pentru abonamentul {{service}} selectat. Contactați plătitorul dvs. (<1>{{payerContact}}</1>) pentru a alimenta portofelul sau selectați mai puțini utilizatori.",
   "IntegrationOptions": "Opțiuni și instrucțiuni de integrare",
   "IntegrationOptionsSubtitle": "Conectați Docs la orice ecosistem (DMS, CMS, LMS etc.) - fără cod personalizat, fără migrare.",
   "Internal": "Intern",

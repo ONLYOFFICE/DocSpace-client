@@ -63,6 +63,7 @@
   "GetStarted": "Commencer",
   "GetStartedDescription": "Intégrez des éditeurs de documents, feuilles de calcul, présentations et PDF hébergés dans le cloud — collaboratifs et compatibles MS Office, avec vos propres clés. Aucun serveur à installer.",
   "GetStartedTitle": "Exécutez les éditeurs {{productName}} au sein de votre application",
+  "InsufficientCreditsForSubscription": "Les crédits sont insuffisants pour l'abonnement {{service}} sélectionné. Contactez votre payeur (<1>{{payerContact}}</1>) pour recharger le wallet, ou sélectionnez moins d'utilisateurs.",
   "IntegrationOptions": "Options et instructions d'intégration",
   "IntegrationOptionsSubtitle": "Connectez Docs à n'importe quel écosystème (GED, CMS, LMS, etc.) - sans code personnalisé, sans migration.",
   "Internal": "Interne",

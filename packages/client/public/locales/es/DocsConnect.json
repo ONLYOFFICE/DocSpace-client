@@ -63,6 +63,7 @@
   "GetStarted": "Comenzar",
   "GetStartedDescription": "Integre editores de Documentos, Hojas de cálculo, Presentaciones y PDF alojados en la nube — colaborativos y compatibles con MS Office, con sus propias claves. Sin necesidad de instalar ningún servidor.",
   "GetStartedTitle": "Ejecute los editores de {{productName}} dentro de su aplicación",
+  "InsufficientCreditsForSubscription": "No hay créditos suficientes para la suscripción a {{service}} seleccionada. Póngase en contacto con su pagador (<1>{{payerContact}}</1>) para recargar el monedero, o seleccione menos usuarios.",
   "IntegrationOptions": "Opciones de integración e instrucciones",
   "IntegrationOptionsSubtitle": "Conecte Docs a cualquier ecosistema (DMS, CMS, LMS, etc.), sin código personalizado ni migración.",
   "Internal": "Interno",

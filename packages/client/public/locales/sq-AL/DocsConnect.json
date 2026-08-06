@@ -63,6 +63,7 @@
   "GetStarted": "Filloni",
   "GetStartedDescription": "Integroni redaktues Dokumentesh, Fletëllogaritëseje, Prezantimesh dhe PDF-je të pritur në cloud — bashkëpunues dhe të përputhshëm me MS Office, me çelësat tuaj. Pa server për instalim.",
   "GetStartedTitle": "Ekzekutoni redaktuesit e {{productName}} brenda aplikacionit tuaj",
+  "InsufficientCreditsForSubscription": "Nuk ka kredite të mjaftueshme për abonimin e zgjedhur në {{service}}. Kontaktoni paguesin tuaj (<1>{{payerContact}}</1>) për të mbushur portofolin, ose zgjidhni më pak përdorues.",
   "IntegrationOptions": "Opsione & udhëzime integrimi",
   "IntegrationOptionsSubtitle": "Lidhni Docs me çdo ekosistem (DMS, CMS, LMS, etj.) - pa kod të personalizuar, pa migrim.",
   "Internal": "Të brendshëm",

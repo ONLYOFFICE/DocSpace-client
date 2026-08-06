@@ -3,7 +3,7 @@
   "content": "Pay {{amount}} & Upgrade",
   "content_en_sha1_hash": "9e385663f18a91b79a5c708fea866994edb74d54",
   "created_at": "2026-06-30T07:32:36.079Z",
-  "updated_at": "2026-08-01T16:25:17.917Z",
+  "updated_at": "2026-08-05T16:32:00.383Z",
   "comment": {
     "text": "Button label in a billing dialog used to initiate a plan upgrade; {{amount}} represents the formatted monetary amount due.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1563,
+      "line_number": 1568,
       "context": "const isBalanceInsufficient = this.walletBalance < dueTodayAmount;\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n return isBalanceInsufficient\n ? t(\"TopUpAndUpgrade\")\n : t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }\n \n return t(\"UpgradeNow\");",
       "module": "/libs/ui-kit"
     }

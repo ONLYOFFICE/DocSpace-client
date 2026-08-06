@@ -3,16 +3,17 @@
   "content": "Show files and folders currently in Trash, including their type, original location, and deletion date when available. If this information is not provided, ask me for an optional owner, type, or date range to narrow the list.",
   "content_en_sha1_hash": "ec2e4c8b70ca666d9b6fb6ac094495420191d753",
   "created_at": "2026-08-04T09:58:55.142Z",
-  "updated_at": "2026-08-04T09:58:56.408Z",
+  "updated_at": "2026-08-05T17:51:02.622Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "An instructional prompt used within an AI assistant suggestion list to guide users on how to query specific details about items in the Trash.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:51:02.622Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 295,
+      "line_number": 330,
       "context": "// +\n filesTrash: [\n {\n name: t(\"AiSuggestions:FilesTrashWhatSInTrash\"),\n prompt: t(\"AiSuggestions:FilesTrashWhatSInTrashPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesTrashFindADeletedFile\"),\n prompt: t(\"AiSuggestions:FilesTrashFindADeletedFilePrompt\"),\n },",
       "module": "/packages/client"
     }

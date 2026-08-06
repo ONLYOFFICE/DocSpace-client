@@ -3,16 +3,17 @@
   "content": "Find a document in the current room and return the most relevant results. If this information is not provided, ask me for the search term and any useful filters such as owner, date, type, or status.",
   "content_en_sha1_hash": "b7345a24e445df725af4c39fcdaf1d9a242c5921",
   "created_at": "2026-08-04T09:58:55.186Z",
-  "updated_at": "2026-08-04T09:58:56.400Z",
+  "updated_at": "2026-08-05T17:15:27.646Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt for the AI assistant defining how to perform document searches within a room and how to request missing parameters like filters or search terms.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:15:27.646Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 139,
+      "line_number": 145,
       "context": "prompt: t(\"AiSuggestions:InsideRoomOrganizeContentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomFindADocument\"),\n prompt: t(\"AiSuggestions:InsideRoomFindADocumentPrompt\"),\n },\n {\n name: t(\"AiSuggestions:InsideRoomChangeNameAndTags\"),\n prompt: t(\"AiSuggestions:InsideRoomChangeNameAndTagsPrompt\"),\n requires: \"editRoom\",",
       "module": "/packages/client"
     }

@@ -3,16 +3,17 @@
   "content": "Summarize the current folder, including its structure, main topics, important files, tasks, and risks. If this information is not provided, ask me for the desired scope, focus, and summary length.",
   "content_en_sha1_hash": "488ddee3df22901ba556c304c25195da944f5270",
   "created_at": "2026-08-04T09:58:55.119Z",
-  "updated_at": "2026-08-04T09:58:56.409Z",
+  "updated_at": "2026-08-05T18:12:40.856Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional text for an AI suggestion that specifies how to summarize a folder's contents and provides instructions for handling missing details.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:12:40.856Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 319,
+      "line_number": 354,
       "context": "// +\n filesFolder: [\n {\n name: t(\"AiSuggestions:FilesFolderSummarizeThisFolder\"),\n prompt: t(\"AiSuggestions:FilesFolderSummarizeThisFolderPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFolderRenameFolder\"),\n prompt: t(\"AiSuggestions:FilesFolderRenameFolderPrompt\"),\n },",
       "module": "/packages/client"
     }

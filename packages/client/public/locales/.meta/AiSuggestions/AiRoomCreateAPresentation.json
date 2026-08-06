@@ -3,16 +3,17 @@
   "content": "Create a presentation",
   "content_en_sha1_hash": "febc2fd74310111778c1df69b256329c1e19521c",
   "created_at": "2026-08-04T09:58:55.092Z",
-  "updated_at": "2026-08-04T09:58:56.428Z",
+  "updated_at": "2026-08-05T18:33:15.144Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option that initiates the creation of a new presentation.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:33:15.144Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 570,
+      "line_number": 605,
       "context": "name: t(\"AiSuggestions:AiRoomCreateAReport\"),\n prompt: t(\"AiSuggestions:AiRoomCreateAReportPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomCreateAPresentation\"),\n prompt: t(\"AiSuggestions:AiRoomCreateAPresentationPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomCollectDataIntoATable\"),",
       "module": "/packages/client"
     }

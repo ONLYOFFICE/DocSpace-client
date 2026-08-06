@@ -3,7 +3,7 @@
   "content": "Remove subscription",
   "content_en_sha1_hash": "5ab5e9bc925b8f5daa31036b82ac77aadc14684d",
   "created_at": "2026-07-27T13:07:30.369Z",
-  "updated_at": "2026-08-01T16:25:17.817Z",
+  "updated_at": "2026-08-05T16:32:00.290Z",
   "comment": {
     "text": "Button label and dialog title used to initiate the cancellation of an active subscription plan.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 452,
+      "line_number": 454,
       "context": "label={t(\"Common:TopUpAndRenew\")}\n onClick={onEditPlan}\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:RemoveSubscription\")}\n onClick={onRemovePlan}\n />\n </div>\n ) : scheduledChange ? (\n isCancellation ? (",
       "module": "/libs/ui-kit"
     },

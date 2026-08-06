@@ -3,16 +3,17 @@
   "content": "Show forms and Form Spaces currently in Trash, including their type and deletion date when available. If this information is not provided, ask me for an optional owner, type, or date range to narrow the list.",
   "content_en_sha1_hash": "b2081904ffdb0e0c5bf80e9dc93b05a2ca64e59a",
   "created_at": "2026-08-04T09:58:55.183Z",
-  "updated_at": "2026-08-04T09:58:56.460Z",
+  "updated_at": "2026-08-05T17:18:20.668Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "AI instruction prompt used when a user selects a suggestion to view deleted items, specifying how the AI should retrieve details and request additional filters if necessary.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:18:20.668Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 749,
+      "line_number": 784,
       "context": "// +\n formsTrash: [\n {\n name: t(\"AiSuggestions:FormsTrashWhatSDeleted\"),\n prompt: t(\"AiSuggestions:FormsTrashWhatSDeletedPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashFindADeletedForm\"),\n prompt: t(\"AiSuggestions:FormsTrashFindADeletedFormPrompt\"),",
       "module": "/packages/client"
     }

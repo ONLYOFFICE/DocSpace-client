@@ -1,0 +1,29 @@
+{
+  "key_path": "DateRangeTo",
+  "content": "To",
+  "content_en_sha1_hash": "ae79ea1e9c6391a9ed83a2e18a031b835feec0c9",
+  "created_at": "2026-08-05T16:31:20.886Z",
+  "updated_at": "2026-08-05T16:34:00.397Z",
+  "comment": {
+    "text": "Label for the end date in a date range selection, appearing alongside its \"From\" counterpart.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:34:00.397Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/ExportDateRange/ExportDateRange.tsx",
+      "line_number": 85,
+      "context": "const today = now();\n \n const edges: { edge: RangeEdge; label: string }[] = [\n { edge: \"fromDate\", label: t(\"Common:DateRangeFrom\") },\n { edge: \"toDate\", label: t(\"Common:DateRangeTo\") },\n ];\n \n const onDateSet = (date: DateTime) => {\n if (!date || !openedEdge) return;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,16 +3,17 @@
   "content": "Organize this folder",
   "content_en_sha1_hash": "95c03c24625d5268a9925c5d39ec6c561fdfd9d8",
   "created_at": "2026-08-04T09:58:55.116Z",
-  "updated_at": "2026-08-04T09:58:56.409Z",
+  "updated_at": "2026-08-05T18:14:45.278Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion item that, when selected, initiates an automated reorganization of the current folder's contents.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:14:45.278Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 326,
+      "line_number": 361,
       "context": "{\n name: t(\"AiSuggestions:FilesFolderRenameFolder\"),\n prompt: t(\"AiSuggestions:FilesFolderRenameFolderPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFolderOrganizeThisFolder\"),\n prompt: t(\"AiSuggestions:FilesFolderOrganizeThisFolderPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFolderFindEmptyFolders\"),\n prompt: t(\"AiSuggestions:FilesFolderFindEmptyFoldersPrompt\"),",
       "module": "/packages/client"
     }

@@ -140,7 +140,7 @@
   "TrialExpiredDescription": "Nadogradite na plaćenu licencu da biste nastavili da koristite sve funkcije.",
   "TrialExpiredTitle": "Probna licenca je istekla",
   "UnusedSubscriptionCredit": "Neiskorišćeni kredit pretplate",
-  "UnusedSubscriptionCreditTooltip": "Neiskorišćeni deo vaše trenutne pretplate se automatski primenjuje na vašu novu pretplatu. Vaš ciklus naplate će se restartovati danas.",
+  "UnusedSubscriptionCreditTooltip": "<1>Neiskorišćeni deo vaše tekuće pretplate se automatski primenjuje na vašu novu pretplatu.</1><2>Neiskorišćeno: {{amount}}</2><3>Vaš ciklus naplate će se restartovati danas.</3>",
   "UseEditorsInProduct": "Koristi ove uređivače u {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Pratite jedinstvenu aktivnost korisnika",
   "UserAdjustmentLabel": "Prilagođavanje korisnika",

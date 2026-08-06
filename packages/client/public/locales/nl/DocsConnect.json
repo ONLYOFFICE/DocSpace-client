@@ -140,7 +140,7 @@
   "TrialExpiredDescription": "Upgrade naar een betaalde licentie om alle functies te blijven gebruiken.",
   "TrialExpiredTitle": "De proeflicentie is verlopen",
   "UnusedSubscriptionCredit": "Ongebruikt abonnementstegoed",
-  "UnusedSubscriptionCreditTooltip": "Het ongebruikte deel van uw huidige abonnement wordt automatisch verrekend met uw nieuwe abonnement. Uw factureringscyclus start vandaag opnieuw.",
+  "UnusedSubscriptionCreditTooltip": "<1>Het ongebruikte deel van uw huidige abonnement wordt automatisch verrekend met uw nieuwe abonnement.</1><2>Ongebruikt: {{amount}}</2><3>Uw factureringscyclus start vandaag opnieuw.</3>",
   "UseEditorsInProduct": "Deze editors gebruiken in {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Volg unieke gebruikersactiviteit",
   "UserAdjustmentLabel": "Gebruikersaanpassing",

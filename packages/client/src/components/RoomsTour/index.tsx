@@ -241,6 +241,26 @@ const RoomsTour = ({
     endDemo();
   }, [roomsTourStore.isRunning, closeInfoPanel, endDemo]);
 
+  // The effect above only fires while this component is around to see the tour
+  // stop. Leaving the section takes it down instead — and the interceptors are
+  // module state, so they would outlive it and keep answering for a section the
+  // user has already walked away from, while the borrowed info panel would stay
+  // pointed at a stand-in room that no longer exists. Whatever mounts next
+  // fetches its own list, so there is nothing to reload here.
+  //
+  // `closeInfoPanelRef` keeps the current implementation reachable from a
+  // cleanup that must run on unmount and on nothing else.
+  const closeInfoPanelRef = useRef(closeInfoPanel);
+  closeInfoPanelRef.current = closeInfoPanel;
+
+  useEffect(
+    () => () => {
+      if (tourDemo.isActive) tourDemo.deactivate();
+      closeInfoPanelRef.current();
+    },
+    [],
+  );
+
   // Read in the render body rather than inside the memo: a value only `useMemo`
   // reads is a value `observer` does not track, so arming the demo would not
   // re-render the component — and a value missing from the deps is one a cached

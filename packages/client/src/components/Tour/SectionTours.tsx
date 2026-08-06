@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Suspense, lazy, useEffect, type ComponentType } from "react";
+import { Suspense, lazy, useEffect, useRef, type ComponentType } from "react";
 import { inject, observer } from "mobx-react";
 
 import type TourStore from "SRC_DIR/store/TourStore";
@@ -89,7 +89,24 @@ const SectionTours = ({ tourStores, isWanted }: SectionToursProps) => {
     tourStores.forEach((store) => store.hydratePending());
   }, [tourStores]);
 
-  if (!isWanted) return null;
+  // Once a host has been mounted it stays mounted for the life of the page.
+  //
+  // `isWanted` drops on the same store change that ends a tour — `completeTour`
+  // clears `isPending` and `isRunning` together — so releasing the hosts on it
+  // would unmount them in the very commit that told them the tour was over.
+  // Their teardown (drop the demo's interceptors, refetch the real list, hand
+  // the info panel back) runs from an effect that watches `isRunning`, and an
+  // effect belonging to a component React is unmounting never runs: only its
+  // cleanup does. The mocks would come down without the reload that replaces
+  // them, leaving the stand-in rows on screen until the user navigated away.
+  //
+  // Keeping them up costs nothing — a host that is neither pending nor running
+  // renders `null` — and the chunk this gate exists to defer is already loaded
+  // by then, so there is nothing left to save by tearing them down.
+  const wasWanted = useRef(false);
+  if (isWanted) wasWanted.current = true;
+
+  if (!wasWanted.current) return null;
 
   // No fallback: a tour host renders into a portal and shows nothing of its own
   // until it starts, so there is nothing to stand in for while it loads. The

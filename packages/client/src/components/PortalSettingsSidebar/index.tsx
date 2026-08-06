@@ -76,6 +76,7 @@ import {
   getSelectedLinkByKey,
 } from "SRC_DIR/pages/PortalSettings/utils";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
 
 type PortalSettingsSidebarProps = {
   isNotPaidPeriod: boolean;
@@ -231,6 +232,7 @@ const PortalSettingsSidebar = ({
       isNavLoading={isNavLoading}
       hideBack={isNotPaidPeriod}
       withDevTools
+      pluginSection={Section.Settings}
     />
   );
 };

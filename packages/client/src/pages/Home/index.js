@@ -628,8 +628,7 @@ const PureHome = observer((props) => {
 
   return (
     <>
-      {isSettingsPage || isPluginPage() ? null : isContactsPage ||
-        isProfile ? (
+      {isSettingsPage || isPluginPage() ? null : isContactsPage || isProfile ? (
         <>
           <AccountsDialogs />
           {isProfile ? null : <ContactsSelectionArea />}
@@ -640,9 +639,13 @@ const PureHome = observer((props) => {
           <FilesSelectionArea />
         </>
       )}
-      {isPluginPage() ? null : <MediaViewer />}
-      <UploadFileInputs />
-      <CreateButtonMobile />
+      {isPluginPage() ? null : (
+        <>
+          <MediaViewer />
+          <UploadFileInputs />
+          <CreateButtonMobile />
+        </>
+      )}
       {/* When the quick-actions banner shows, switch the Section to the SDK's
           stickyTableHeader mode so the banner renders above the (now in-body,
           sticky) filter. The host is always `display: contents` (no layout

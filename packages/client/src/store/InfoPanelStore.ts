@@ -553,4 +553,3 @@ class InfoPanelStore {
 }
 
 export default InfoPanelStore;
-

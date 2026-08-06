@@ -75,6 +75,7 @@ import {
   GROUPS_ROUTE_WITH_FILTER,
   GUESTS_ROUTE_WITH_FILTER,
 } from "SRC_DIR/helpers/contacts";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
 
 const MEMBERS_ID = "accounts-members";
 const GROUPS_ID = "accounts-groups";
@@ -140,6 +141,7 @@ const AccountsSidebar = ({ isNavLoading }: AccountsSidebarProps) => {
       activeId={activeId}
       variant="secondary"
       isNavLoading={isNavLoading}
+      pluginSection={Section.Accounts}
     />
   );
 };

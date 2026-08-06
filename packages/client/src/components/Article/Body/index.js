@@ -57,10 +57,6 @@ import {
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
-import { Section } from "SRC_DIR/helpers/plugins/enums";
-import { PLUGIN_SECTION_URL_PART } from "SRC_DIR/helpers/plugins/constants";
-import ArticleNavPluginItems from "SRC_DIR/components/ArticlePlugin/ArticleNavPluginItems/ArticleNavPluginItems";
-
 import Banner from "./Banner";
 import NavMenuItems from "./NavMenuItems";
 import AccountsItems from "./AccountsItems";
@@ -411,12 +407,6 @@ const ArticleBodyContent = (props) => {
 
     if (location.pathname.includes(MEDIA_VIEW_URL)) {
       setActiveItemId(rootFolderId);
-      return;
-    }
-
-    if (location.pathname.includes(PLUGIN_SECTION_URL_PART)) {
-      if (activeItemId !== null) setActiveItemId(null);
-      return;
     }
   }, [
     location.pathname,
@@ -425,7 +415,6 @@ const ArticleBodyContent = (props) => {
     archiveFolderId,
     myFolderId,
     favoritesFolderId,
-    sharedWithMeFolderId,
     recycleBinFolderId,
     isVisitor,
     rootFolderId,
@@ -462,30 +451,22 @@ const ArticleBodyContent = (props) => {
   return (
     <>
       {isDeveloperToolsArticle ? (
-        <>
-          <DeveloperToolsItems />
-        </>
+        <DeveloperToolsItems />
       ) : isAccountsArticle ? (
-        <>
-          <AccountsItems
-            onClick={onClick}
-            getLinkData={getLinkData}
-            activeItemId={activeItemId}
-          />
-          <ArticleNavPluginItems section={Section.Accounts} />
-        </>
+        <AccountsItems
+          onClick={onClick}
+          getLinkData={getLinkData}
+          activeItemId={activeItemId}
+        />
       ) : (
-        <>
-          <NavMenuItems
-            activeItemId={activeItemId}
-            onFolderNavigate={() => {
-              setSelection?.([]);
-              setIsLoading(true, !!selectedFolderId);
-              if (currentDeviceType === DeviceType.mobile) toggleArticleOpen();
-            }}
-          />
-          <ArticleNavPluginItems section={Section.Files} />
-        </>
+        <NavMenuItems
+          activeItemId={activeItemId}
+          onFolderNavigate={() => {
+            setSelection?.([]);
+            setIsLoading(true, !!selectedFolderId);
+            if (currentDeviceType === DeviceType.mobile) toggleArticleOpen();
+          }}
+        />
       )}
       {!isDesktopClient &&
       showText &&

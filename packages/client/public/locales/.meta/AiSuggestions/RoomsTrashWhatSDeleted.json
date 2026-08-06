@@ -3,16 +3,17 @@
   "content": "What's deleted",
   "content_en_sha1_hash": "955d906e5a3f0e9b633f0ee33f9f04bf0c500983",
   "created_at": "2026-08-04T09:58:55.222Z",
-  "updated_at": "2026-08-04T09:58:56.425Z",
+  "updated_at": "2026-08-05T16:41:29.527Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "A label for an AI suggestion item in the Rooms Trash section, serving as a title for prompts related to identifying deleted files or folders.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:41:29.527Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 514,
+      "line_number": 549,
       "context": "],\n \n // +\n roomsTrash: [\n {\n name: t(\"AiSuggestions:RoomsTrashWhatSDeleted\"),\n prompt: t(\"AiSuggestions:RoomsTrashWhatSDeletedPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashFindADeletedFileOrFolder\"),",
       "module": "/packages/client"
     }

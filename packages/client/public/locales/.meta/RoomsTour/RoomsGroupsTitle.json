@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsGroupsTitle",
+  "content": "Group your rooms",
+  "content_en_sha1_hash": "88f8a19a710e0231dd7924bdd1a2ea61c039e200",
+  "created_at": "2026-08-06T14:20:52.336Z",
+  "updated_at": "2026-08-06T14:51:54.503Z",
+  "comment": {
+    "text": "Title for an onboarding tour step that introduces the row of chips used to group rooms.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:51:54.503Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 193,
+      "context": "// 4. Room groups — the row of chips above the list.\n showFilter &&\n elementStep(\n GROUPS_SELECTOR,\n t(\"RoomsTour:RoomsGroupsTitle\"),\n t(\"RoomsTour:RoomsGroups\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

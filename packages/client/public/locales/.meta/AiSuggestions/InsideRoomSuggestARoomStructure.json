@@ -3,16 +3,17 @@
   "content": "Suggest a room structure",
   "content_en_sha1_hash": "46a0fd7983431f411b37651ec61bb7c769af546a",
   "created_at": "2026-08-04T09:58:55.188Z",
-  "updated_at": "2026-08-04T09:58:56.400Z",
+  "updated_at": "2026-08-05T17:14:19.245Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option that triggers the generation of a room structure.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:14:19.245Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 147,
+      "line_number": 153,
       "context": "name: t(\"AiSuggestions:InsideRoomChangeNameAndTags\"),\n prompt: t(\"AiSuggestions:InsideRoomChangeNameAndTagsPrompt\"),\n requires: \"editRoom\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomSuggestARoomStructure\"),\n prompt: t(\"AiSuggestions:InsideRoomSuggestARoomStructurePrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomCreateAReportFromTheRoom\"),",
       "module": "/packages/client"
     }

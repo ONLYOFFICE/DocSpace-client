@@ -1,0 +1,29 @@
+{
+  "key_path": "Export",
+  "content": "Export",
+  "content_en_sha1_hash": "f3e4fadb9e370a1e2c0c622c01fc8c77daf93a2c",
+  "created_at": "2026-08-05T16:31:27.497Z",
+  "updated_at": "2026-08-05T16:32:56.325Z",
+  "comment": {
+    "text": "Button label used to trigger the file export process within the history panel toolbar.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:32:56.325Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/ExportMenu/ExportMenu.tsx",
+      "line_number": 169,
+      "context": "<div className={styles.actions}>\n <Button\n className={styles.submitButton}\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Export\")}\n onClick={onExportClick}\n testId=\"info_history_export_submit\"\n />\n \n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

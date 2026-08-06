@@ -47,6 +47,7 @@ export const PAYMENT_ROUTES = {
   backup: `/billing/addons/backup`,
   diskStorage: `/billing/addons/disk-storage`,
   docsConnect: `/billing/addons/docs-connect`,
+  paymentMethod: `/billing/payment-method`,
   wallet: `/portal-settings/payments/wallet`,
   usage: `/portal-settings/payments/usage`,
 } as const;

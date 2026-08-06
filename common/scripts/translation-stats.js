@@ -45,6 +45,7 @@
  *   --lang=fr,ru,de             Show only specific languages
  *   --package=client,login      Show only specific packages
  *   --by-package                Show per-package breakdown instead of summary
+ *   --missing                   List every missing key per language (not just counts)
  *   --json                      Output raw JSON
  *   --md[=file.md]              Write Markdown report (default: translation-stats.md)
  *   --no-meta                   Skip metadata analysis (faster)
@@ -81,6 +82,7 @@ const sortDesc = hasFlag("desc");
 const filterLangs = getArg("lang") ? getArg("lang").split(",").map((s) => s.trim()) : null;
 const filterPkgs = getArg("package") ? getArg("package").split(",").map((s) => s.trim()) : null;
 const byPackage = hasFlag("by-package");
+const showMissing = hasFlag("missing");
 const jsonOutput = hasFlag("json");
 const mdOutput = getArg("md") || (hasFlag("md") ? "translation-stats.md" : null);
 const skipMeta = hasFlag("no-meta");
@@ -318,13 +320,23 @@ async function analyzePackage(pkg) {
       let translatedKeys = 0;
       let sameAsEn = 0;
       let missingKeys = 0;
+      // `Namespace:Key` ids that exist for `en` but not for this language
+      const missingKeyIds = [];
+      // namespaces whose file is absent for this language altogether
+      const missingNamespaces = [];
 
       for (const ns of namespaces) {
         const refNs = refData[ns] || {};
         const langNs = langData[ns] || {};
+
+        if (lang !== REFERENCE_LANG && !(ns in langData)) {
+          missingNamespaces.push(ns);
+        }
+
         for (const key of Object.keys(refNs)) {
           if (!(key in langNs)) {
             missingKeys++;
+            missingKeyIds.push(`${ns}:${key}`);
           } else {
             // Key is present = translated (matches translation system logic in ollama.js)
             translatedKeys++;
@@ -341,6 +353,8 @@ async function analyzePackage(pkg) {
         translatedKeys,
         sameAsEn,
         missingKeys,
+        missingKeyIds,
+        missingNamespaces,
         translatedPct: pct(translatedKeys, totalKeys),
         fileSizeBytes,
         spellIssues: langMeta.total,
@@ -477,13 +491,16 @@ async function main() {
     // Aggregate per language across all packages
     const langAgg = {};
     for (const lang of filteredLangs) {
-      langAgg[lang] = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0, spellByType: {} };
+      langAgg[lang] = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, missingByPackage: {}, fileSizeBytes: 0, spellIssues: 0, spellByType: {} };
       for (const pkg of results) {
         const ls = pkg.langStats.find((s) => s.lang === lang);
         if (!ls) continue;
         langAgg[lang].translatedKeys += ls.translatedKeys;
         langAgg[lang].sameAsEn += ls.sameAsEn;
         langAgg[lang].missingKeys += ls.missingKeys;
+        if (ls.missingKeyIds.length > 0) {
+          langAgg[lang].missingByPackage[pkg.name] = ls.missingKeyIds;
+        }
         langAgg[lang].fileSizeBytes += ls.fileSizeBytes;
         langAgg[lang].spellIssues += ls.spellIssues;
         for (const [t, c] of Object.entries(ls.spellByType || {})) {
@@ -573,6 +590,7 @@ async function main() {
       });
     }
 
+    printMissingKeys(results, filteredLangs);
     printLegend(false);
     return;
   }
@@ -608,6 +626,8 @@ async function main() {
   console.log(`  Average coverage   : ${colorize(String(avgPct) + "%", pctColor(avgPct))}`);
 
   renderTable(sortedAgg, grandTotalKeys, { title: "All packages — aggregated by language" });
+
+  printMissingKeys(results, filteredLangs);
 
   // ─── Issues summary (if any) ────────────────────────────────────────────
   if (!skipMeta) {
@@ -845,6 +865,63 @@ function generateMarkdown(results, aggRows, grandTotalKeys, grandTotalSize, gran
   return lines.join("\n");
 }
 
+/**
+ * List the keys behind the `Miss` column. Without --missing only a one-line
+ * pointer is printed, so a non-zero count is never left unexplained.
+ */
+function printMissingKeys(results, langs) {
+  const totalMissing = results.reduce(
+    (sum, pkg) =>
+      sum +
+      pkg.langStats
+        .filter((ls) => langs.includes(ls.lang))
+        .reduce((s, ls) => s + ls.missingKeys, 0),
+    0
+  );
+
+  if (totalMissing === 0) return;
+
+  if (!showMissing) {
+    console.log(
+      `\n  ${colorize(`${totalMissing} keys are missing.`, "red")} ` +
+      colorize("Pass --missing to list them per language.", "dim")
+    );
+    return;
+  }
+
+  console.log(`\n  ${colorize("MISSING KEYS BY LANGUAGE", "bold")}`);
+  console.log("  " + colorize("─".repeat(50), "dim"));
+
+  for (const lang of langs) {
+    if (lang === REFERENCE_LANG) continue;
+
+    for (const pkg of results) {
+      const ls = pkg.langStats.find((s) => s.lang === lang);
+      if (!ls || ls.missingKeys === 0) continue;
+
+      console.log(
+        `\n  ${colorize(lang, "cyan")} — ${pkg.name} ` +
+        colorize(`(${ls.missingKeys} keys)`, "red")
+      );
+
+      if (ls.missingNamespaces.length > 0) {
+        console.log(
+          `    ${colorize("no locale file:", "yellow")} ` +
+          ls.missingNamespaces.map((ns) => `${ns}.json`).join(", ")
+        );
+      }
+
+      for (const keyId of ls.missingKeyIds) {
+        console.log(`    ${keyId}`);
+      }
+    }
+  }
+
+  console.log("");
+  console.log("  " + colorize("─".repeat(50), "dim"));
+  console.log(`  Total missing: ${colorize(String(totalMissing), "red")}`);
+}
+
 function printLegend(showByPackage) {
   console.log("");
   console.log(colorize("  Columns:", "dim"));
@@ -864,6 +941,7 @@ function printLegend(showByPackage) {
   if (showByPackage) {
     console.log(colorize("    --by-package                show per-package tables", "dim"));
   }
+  console.log(colorize("    --missing                   list every missing key per language", "dim"));
   console.log(colorize("    --json                      machine-readable output", "dim"));
   console.log(colorize("    --md[=file.md]              write Markdown report (default: translation-stats.md)", "dim"));
   console.log(colorize("    --no-meta                   skip metadata (faster)", "dim"));

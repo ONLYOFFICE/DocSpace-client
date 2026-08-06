@@ -3,16 +3,17 @@
   "content": "Show source documents",
   "content_en_sha1_hash": "3e0e3b0eb4db19370f029c1e9f6f2f553bb1cbde",
   "created_at": "2026-08-04T09:58:55.099Z",
-  "updated_at": "2026-08-04T09:58:56.427Z",
+  "updated_at": "2026-08-05T18:27:37.614Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label within the AI Room suggestions menu that, when clicked, displays the original documents used to generate the AI response.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:27:37.614Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 545,
+      "line_number": 580,
       "context": "{\n name: t(\"AiSuggestions:AiRoomSummarizeTheKnowledgeBase\"),\n prompt: t(\"AiSuggestions:AiRoomSummarizeTheKnowledgeBasePrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomShowSourceDocuments\"),\n prompt: t(\"AiSuggestions:AiRoomShowSourceDocumentsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomFindADocument\"),\n prompt: t(\"AiSuggestions:AiRoomFindADocumentPrompt\"),",
       "module": "/packages/client"
     }

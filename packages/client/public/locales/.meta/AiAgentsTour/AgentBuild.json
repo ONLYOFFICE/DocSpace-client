@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentBuild",
+  "content": "Creating an agent is describing a job, not opening a blank chat. The instructions fix what it does and how it replies, the files you attach become the knowledge it answers from, and you pick the model behind it along with the connected tools it may reach for.",
+  "content_en_sha1_hash": "00ced69cda2c8769169fa796f955cc6f20d04c53",
+  "created_at": "2026-08-06T14:20:56.245Z",
+  "updated_at": "2026-08-06T14:28:02.484Z",
+  "comment": {
+    "text": "Description text within an interactive onboarding tour step that explains the process of configuring an AI agent, including its instructions, knowledge base, and model selection.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:28:02.484Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 200,
+      "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-actions\"]',\n t(\"AiAgentsTour:AgentBuildTitle\"),\n t(\"AiAgentsTour:AgentBuild\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 3. An agent row: the per-agent actions people reach for most, none of",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

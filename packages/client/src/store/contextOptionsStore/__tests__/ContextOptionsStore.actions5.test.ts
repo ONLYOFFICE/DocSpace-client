@@ -35,10 +35,6 @@
 
 import { describe, it, expect, vi } from "vitest";
 
-vi.mock("@docspace/shared/components/guidance/configs", () => ({
-  getGuidanceConfig: vi.fn(() => ({ id: "cfg" })),
-}));
-
 import { createTestContextOptionsStore, t } from "./testHarness";
 
 describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
@@ -66,18 +62,6 @@ describe("ContextOptionsStore — action handler delegation (batch 8)", () => {
     expect(setIsVisibleInfoPanelTemplateGallery).toHaveBeenCalledWith(false);
     expect(dispatchEvent).toHaveBeenCalledTimes(1);
     dispatchEvent.mockRestore();
-  });
-
-  it("onEnableFormFillingGuid -> guidanceStore.setConfig + tips dialog", () => {
-    const setConfig = vi.fn();
-    const setWelcomeFormFillingTipsVisible = vi.fn();
-    const store = createTestContextOptionsStore({
-      guidanceStore: { setConfig },
-      dialogsStore: { setWelcomeFormFillingTipsVisible },
-    });
-    store.onEnableFormFillingGuid(t);
-    expect(setConfig).toHaveBeenCalledTimes(1);
-    expect(setWelcomeFormFillingTipsVisible).toHaveBeenCalledWith(true);
   });
 
   it("onClickMakeForm -> uploadDataStore.copyAsAction (make-form conversion)", () => {

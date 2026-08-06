@@ -38,9 +38,7 @@ import { withTranslation } from "react-i18next";
 import React, { useState, useEffect, memo, useCallback, useMemo } from "react";
 
 import { classNames } from "@docspace/shared/utils";
-import { FolderType } from "@docspace/shared/enums";
 import { EMPTY_OBJECT, FUNCTION_EMPTY } from "@docspace/shared/constants";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import withContent from "../../../../../HOCs/withContent";
@@ -108,9 +106,6 @@ const FilesTableRow = memo((props) => {
     displayFileExtension,
     isBlockingOperation,
 
-    isTutorialEnabled,
-    setRefMap,
-    deleteRefMap,
     setDropTargetPreview,
     selectedFolderTitle,
     canCreateSecurity,
@@ -208,29 +203,13 @@ const FilesTableRow = memo((props) => {
       } else {
         setFirsElemChecked(false);
       }
-      if (showHotkeyBorder && !isTutorialEnabled) {
+      if (showHotkeyBorder) {
         setHeaderBorder(true);
       } else {
         setHeaderBorder(false);
       }
     }
-  }, [checkedProps, isActive, showHotkeyBorder, isTutorialEnabled]);
-
-  useEffect(() => {
-    if (!rowRef?.current) return;
-
-    if (item?.isPDF) {
-      setRefMap(GuidanceRefKey.Pdf, rowRef, "firstChildOffset");
-    }
-    if (item?.type === FolderType.Done) {
-      setRefMap(GuidanceRefKey.Ready, rowRef, "firstChildOffset");
-    }
-
-    return () => {
-      deleteRefMap(GuidanceRefKey.Pdf);
-      deleteRefMap(GuidanceRefKey.Ready);
-    };
-  }, [deleteRefMap, setRefMap]);
+  }, [checkedProps, isActive, showHotkeyBorder]);
 
   useEffect(() => {
     if (dragging) {
@@ -318,7 +297,7 @@ const FilesTableRow = memo((props) => {
         checked={checkedProps || isIndexUpdated}
         isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}
-        showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
+        showHotkeyBorder={showHotkeyBorder}
         displayFileExtension={displayFileExtension}
         title={
           item.isFolder

@@ -1,0 +1,29 @@
+{
+  "key_path": "TourCreateAnything",
+  "content": "Create documents, spreadsheets, presentations and PDF forms right in your browser — no software needed.",
+  "content_en_sha1_hash": "ddba049dfd4aac6764886367ea54ec41d09846d5",
+  "created_at": "2026-08-06T14:20:53.789Z",
+  "updated_at": "2026-08-06T14:36:30.463Z",
+  "comment": {
+    "text": "Body text for an onboarding tour step that appears when highlighting the Quick Actions menu to explain the platform's file creation capabilities.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:36:30.463Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 245,
+      "context": "showFilter &&\n elementGroupStep(\n '[data-testid=\"quick-actions\"]',\n CREATE_TILE_SELECTORS,\n t(\"FilesTour:TourCreateAnythingTitle\"),\n t(\"FilesTour:TourCreateAnything\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 2. AI chat tile — the least discoverable, most differentiating feature.",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

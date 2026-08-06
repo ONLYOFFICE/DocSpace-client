@@ -3,16 +3,17 @@
   "content": "Summarize file",
   "content_en_sha1_hash": "ee2bc2a17ea4565a5a91b8057058a2603625b51a",
   "created_at": "2026-08-04T09:58:55.133Z",
-  "updated_at": "2026-08-04T09:58:56.410Z",
+  "updated_at": "2026-08-05T17:58:46.870Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "A label for an AI suggestion option that appears when files are selected, used to trigger a file summarization action.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:58:46.870Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 337,
+      "line_number": 372,
       "context": "},\n ],\n \n filesSelectedFile: [\n {\n name: t(\"AiSuggestions:FilesSelectedFileSummarizeFile\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileSummarizeFilePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesSelectedFileFixGrammar\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileFixGrammarPrompt\"),",
       "module": "/packages/client"
     }

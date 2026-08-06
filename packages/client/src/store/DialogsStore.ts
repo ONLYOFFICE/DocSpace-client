@@ -439,12 +439,6 @@ class DialogsStore {
 
   newFilesPanelFolderId: Nullable<number | string> = null;
 
-  formFillingTipsVisible = false;
-
-  welcomeFormFillingTipsVisible = false;
-
-  guidAnimationVisible = false;
-
   sortedDownloadFiles: TSortedDownloadFiles = {
     other: [],
     password: [],
@@ -1183,20 +1177,8 @@ class DialogsStore {
     this.closeEditIndexDialogVisible = visible;
   };
 
-  setFormFillingTipsDialog = (visible: boolean) => {
-    this.formFillingTipsVisible = visible;
-  };
-
-  setWelcomeFormFillingTipsVisible = (visible: boolean) => {
-    this.welcomeFormFillingTipsVisible = visible;
-  };
-
   setCovers = (covers: Nullable<ICover[]>) => {
     this.covers = covers;
-  };
-
-  setGuidAnimationVisible = (animation: boolean) => {
-    this.guidAnimationVisible = animation;
   };
 
   setRoomCoverDialogProps = (props: IRoomCoverDialogProps) => {

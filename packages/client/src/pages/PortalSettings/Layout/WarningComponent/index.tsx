@@ -41,215 +41,158 @@ import { Trans, useTranslation } from "react-i18next";
 import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
 import { Link } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Text } from "@docspace/ui-kit/components/text";
+import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
+import { BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 
 type InjectedProps = {
   isPayer?: boolean;
-  isPayerInfoLoaded?: boolean;
-  walletCustomerEmail?: string;
-  cardLinkedOnNonProfit?: boolean;
-  cardLinkedOnFreeTariff?: boolean;
   isBackupPaid?: boolean;
   backupsCount?: number;
   maxFreeBackups?: number;
   isInited?: boolean;
-  isBackupServiceOn?: boolean;
   isNotPaidPeriod?: boolean;
   isCardLinkedToPortal?: boolean;
+  backupServicePrice?: number;
+  walletCodeCurrency?: string;
+  language?: string;
 };
 
 const Warning = ({
   isPayer,
-  isPayerInfoLoaded,
-  walletCustomerEmail,
-  cardLinkedOnNonProfit,
-  cardLinkedOnFreeTariff,
   isBackupPaid,
   backupsCount = 0,
   maxFreeBackups = 0,
   isInited,
-  isBackupServiceOn,
   isNotPaidPeriod,
   isCardLinkedToPortal,
+  backupServicePrice = 0,
+  walletCodeCurrency = "",
+  language = "en",
 }: InjectedProps) => {
   const { t, ready } = useTranslation(["Common", "Payments"]);
   const { pathname } = useLocation();
   const [warningText, setWarningText] = React.useState<React.ReactNode>("");
+  const [isTopUpVisible, setIsTopUpVisible] = React.useState(false);
 
-  const onClickServiceUrl = () => {
-    const servicePageUrl = combineUrl(
-      "/portal-settings",
-      "payments",
-      "/services",
-    );
-
-    window.DocSpace.navigate(servicePageUrl);
+  const onClickBackupServiceUrl = () => {
+    window.DocSpace.navigate(PAYMENT_ROUTES.backup);
   };
 
-  const onClickLearnMore = () => {
-    const servicePageUrl = combineUrl(
-      "/portal-settings",
-      "payments",
-      "/payment-method",
-    );
-
-    window.DocSpace.navigate(servicePageUrl);
+  const onClickTopUpAndActivate = () => {
+    setIsTopUpVisible(true);
   };
 
   const isBackupRoute =
     typeof pathname === "string" && pathname.includes("portal-settings/backup");
-
-  const isPaymentsServiceRoute =
-    typeof pathname === "string" &&
-    pathname.includes("portal-settings/payments/services/");
-
-  const isPortalPaymentsRoute =
-    typeof pathname === "string" &&
-    pathname.includes("portal-settings/payments/portal-payments");
-
-  const isWalletRoute =
-    typeof pathname === "string" &&
-    pathname.includes("portal-settings/payments/wallet");
 
   React.useEffect(() => {
     if (!isBackupPaid || isNotPaidPeriod) return;
     if (!isBackupRoute || !isInited) return;
     if (!ready) return;
 
-    const setWarningTextFunc = () => {
-      const connectServiceLink = (
-        <Trans
-          t={t}
-          i18nKey="ConnectService"
-          ns="Common"
-          components={{
-            1: (
-              <Link
-                key="connect-service-link"
-                tag="a"
-                onClick={onClickServiceUrl}
-                color="accent"
-              />
-            ),
-          }}
+    const priceComponents = {
+      1: (
+        <Link
+          key="backup-service-details-link"
+          tag="a"
+          onClick={onClickBackupServiceUrl}
+          color="accent"
         />
-      );
-
-      const connectPayer = (
-        <Trans
-          t={t}
-          i18nKey="ContactToPayer"
-          ns="Common"
-          values={{ email: walletCustomerEmail }}
-          components={{
-            1: (
-              <Link
-                key="contact-payer-link"
-                tag="a"
-                color="accent"
-                href={`mailto:${walletCustomerEmail}`}
-              />
-            ),
-          }}
-        />
-      );
-      let resultText: React.ReactNode = "";
-
-      if (maxFreeBackups > 0) {
-        try {
-          const backupText = t("Common:FreeBackupsPerMonth", {
-            value:
-              backupsCount >= maxFreeBackups ? maxFreeBackups : backupsCount,
-            maxValue: maxFreeBackups,
-          });
-
-          resultText = backupText;
-
-          if (backupsCount >= maxFreeBackups && !isBackupServiceOn) {
-            const additionalInfo = isPayer ? connectServiceLink : connectPayer;
-            resultText = (
-              <>
-                <Text key="backup-text" as="span" fontWeight={600}>
-                  {backupText}
-                </Text>{" "}
-                <Text key="additional-info" as="span">
-                  {additionalInfo}
-                </Text>
-              </>
-            );
-          }
-
-          setWarningText(resultText);
-        } catch (e) {
-          console.error(e);
-        }
-
-        return;
-      }
-
-      resultText = connectServiceLink;
-
-      if (cardLinkedOnNonProfit || cardLinkedOnFreeTariff) {
-        if (isBackupServiceOn) {
-          resultText = "";
-        } else {
-          resultText = isPayer ? connectServiceLink : connectPayer;
-        }
-      }
-
-      setWarningText(resultText);
+      ),
     };
 
-    setWarningTextFunc();
+    const priceValues = {
+      value: backupsCount >= maxFreeBackups ? maxFreeBackups : backupsCount,
+      maxValue: maxFreeBackups,
+      currency: formatCurrencyValue(
+        language,
+        backupServicePrice,
+        walletCodeCurrency,
+        2,
+      ),
+    };
+
+    if (backupServicePrice <= 0) {
+      setWarningText("");
+      return;
+    }
+
+    if (!isCardLinkedToPortal) {
+      setWarningText(
+        <Trans
+          t={t}
+          i18nKey="AdditionalBackupsPriceWithActivation"
+          ns="Common"
+          values={priceValues}
+          components={{
+            1: (
+              <Link
+                key="backup-top-up-link"
+                tag="a"
+                onClick={onClickTopUpAndActivate}
+                color="accent"
+              />
+            ),
+          }}
+        />,
+      );
+      return;
+    }
+
+    setWarningText(
+      maxFreeBackups > 0 ? (
+        <Trans
+          t={t}
+          i18nKey="FreeBackupsPerMonthWithPrice"
+          ns="Common"
+          values={priceValues}
+          components={priceComponents}
+        />
+      ) : (
+        <Trans
+          t={t}
+          i18nKey="AdditionalBackupsPrice"
+          ns="Common"
+          values={priceValues}
+          components={priceComponents}
+        />
+      ),
+    );
   }, [
     ready,
     backupsCount,
     isInited,
-    isBackupServiceOn,
-    cardLinkedOnNonProfit,
-    cardLinkedOnFreeTariff,
-    isPayer,
     isBackupPaid,
     isNotPaidPeriod,
+    backupServicePrice,
+    maxFreeBackups,
+    walletCodeCurrency,
+    language,
+    isCardLinkedToPortal,
   ]);
 
   React.useEffect(() => {
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
-  if (
-    (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
-    !isPayer &&
-    isCardLinkedToPortal
-  ) {
-    if (!isPayerInfoLoaded) return null;
-
-    return (
-      <WarningComponent
-        title={
-          <Trans
-            t={t}
-            i18nKey="OnlyPayerCanManageSection"
-            ns="Common"
-            components={{
-              1: (
-                <Link
-                  key="learn-more-link"
-                  tag="a"
-                  color="accent"
-                  onClick={onClickLearnMore}
-                />
-              ),
-            }}
-          />
-        }
-      />
-    );
-  }
-
   if (!isBackupPaid || !isBackupRoute || !warningText) return null;
 
-  return <WarningComponent title={warningText} />;
+  return (
+    <>
+      <WarningComponent title={warningText} />
+      {isTopUpVisible ? (
+        <ClientSimpleTopUpDialog
+          visible={isTopUpVisible}
+          onClose={() => setIsTopUpVisible(false)}
+          service={BACKUP_SERVICE}
+          language={language}
+        />
+      ) : null}
+    </>
+  );
 };
 
 export default inject(
@@ -258,31 +201,28 @@ export default inject(
     currentTariffStatusStore,
     currentQuotaStore,
     backup,
+    authStore,
   }: TStore) => {
     const {
       isPayer,
-      cardLinkedOnNonProfit,
-      cardLinkedOnFreeTariff,
-      isBackupServiceOn,
       isCardLinkedToPortal,
+      backupServicePrice,
+      walletCodeCurrency,
     } = paymentStore;
-    const { walletCustomerEmail, isNotPaidPeriod, isPayerInfoLoaded } =
-      currentTariffStatusStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
     return {
       isPayer,
-      isPayerInfoLoaded,
-      walletCustomerEmail,
-      cardLinkedOnNonProfit,
-      cardLinkedOnFreeTariff,
       isBackupPaid,
       backupsCount,
       isInited,
-      isBackupServiceOn,
       maxFreeBackups,
       isNotPaidPeriod,
       isCardLinkedToPortal,
+      backupServicePrice,
+      walletCodeCurrency,
+      language: authStore.language,
     };
   },
 )(observer(Warning));

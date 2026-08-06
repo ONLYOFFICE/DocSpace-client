@@ -35,6 +35,10 @@
 
 import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
+import {
+  getFolderLogReportStatus,
+  startFolderLogReport,
+} from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { FolderType } from "@docspace/shared/enums";
@@ -46,7 +50,11 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TLogo } from "@docspace/ui-kit/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import {
+  TFile,
+  TFolder,
+  TFolderLogReportDateRange,
+} from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
@@ -66,12 +74,14 @@ import FilesSettingsStore from "./FilesSettingsStore";
 import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import TreeFoldersStore from "./TreeFoldersStore";
+import DocumentBuilderReportStore, {
+  ReportType,
+} from "./DocumentBuilderReportStore";
 
 export type InfoPanelViewType = InfoPanelView | `info_plugin-${string}`;
 
 type TSelection =
-  | Nullable<TRoom | TFolder | TFile>
-  | Array<TRoom | TFolder | TFile>;
+  Nullable<TRoom | TFolder | TFile> | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
   isVisible = false;
@@ -102,9 +112,27 @@ class InfoPanelStore {
 
   shareChanged = false;
 
+  documentBuilderReportStore = {} as DocumentBuilderReportStore;
+
   constructor(public userStore: UserStore) {
     makeAutoObservable(this);
   }
+
+  get isRoomHistoryReportBuilding() {
+    return this.documentBuilderReportStore.isReportBuilding(
+      ReportType.RoomHistory,
+    );
+  }
+
+  getRoomHistoryReport = (
+    folderId: number | string,
+    dateRange?: TFolderLogReportDateRange,
+  ) => {
+    return this.documentBuilderReportStore.buildReport(ReportType.RoomHistory, {
+      start: () => startFolderLogReport(folderId, dateRange),
+      getStatus: () => getFolderLogReportStatus(folderId),
+    });
+  };
 
   setIsVisible = (visiable: boolean) => {
     const selectedFolderIsAgentOrFolderInAgent =
@@ -291,8 +319,9 @@ class InfoPanelStore {
       ? this.filesStore.selection.length === 1
         ? this.filesStore.selection[0]
         : this.filesStore.selection
-      : (this.filesStore.bufferSelection ??
-        { ...this.selectedFolderStore })) as unknown as TSelection;
+      : (this.filesStore.bufferSelection ?? {
+          ...this.selectedFolderStore,
+        })) as unknown as TSelection;
 
     if (!selection) return null;
 

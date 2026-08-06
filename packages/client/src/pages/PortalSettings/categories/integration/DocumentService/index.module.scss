@@ -138,15 +138,6 @@
       :global(.icon-button) {
         display: none;
       }
-
-      .passwordInput {
-        :global(.icon-button) {
-          background-color: var(--input-bg);
-          display: block;
-          margin: -5px;
-          padding: 5px;
-        }
-      }
     }
 
     .checkbox {
@@ -155,10 +146,6 @@
       svg {
         margin-inline-end: 8px;
       }
-    }
-
-    :global(.password-field-wrapper) {
-      width: 100%;
     }
 
     .groupLabel {

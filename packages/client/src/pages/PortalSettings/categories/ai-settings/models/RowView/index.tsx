@@ -101,9 +101,14 @@ const RowView = (props: ModelSettingsRowViewProps) => {
             m.price?.prompt != null
               ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
               : "";
+
+          const outputValue =
+            m.price?.completion ??
+            ("image" in m.price ? m.price.image : undefined);
+
           const outputPrice =
-            m.price?.completion != null
-              ? (formatAiModelsCurrency?.(m.price.completion) ?? "")
+            outputValue != null
+              ? (formatAiModelsCurrency?.(outputValue) ?? "")
               : "";
 
           const onRowClick = () => {

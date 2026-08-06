@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsPlacesTemplates",
+  "content": "{{templates}} — the space templates you saved.",
+  "content_en_sha1_hash": "cc2a8f6721e44725aa0fa00f6a24894e658b1033",
+  "created_at": "2026-08-06T14:20:53.757Z",
+  "updated_at": "2026-08-06T14:40:58.159Z",
+  "comment": {
+    "text": "A text item in the Forms onboarding tour describing the saved templates section; includes a {{templates}} variable representing the \"Templates\" category label.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:40:58.159Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 160,
+      "context": "t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"FormsTour:FormsPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

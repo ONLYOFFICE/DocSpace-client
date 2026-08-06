@@ -46,7 +46,6 @@ import { Context } from "@docspace/ui-kit/utils/context";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import withContainer from "../../../../../HOCs/withContainer";
 
 import styles from "./TableContainer.module.scss";
 
@@ -76,9 +75,6 @@ const Table = ({
   currentDeviceType,
   onEditIndex,
   isIndexing,
-  isTutorialEnabled,
-  setRefMap,
-  deleteRefMap,
   selectedFolderTitle,
   canCreateSecurity,
   setDropTargetPreview,
@@ -172,9 +168,6 @@ const Table = ({
             ? highlightFile.isExst === !item.fileExst
             : null
         }
-        isTutorialEnabled={isTutorialEnabled}
-        setRefMap={setRefMap}
-        deleteRefMap={deleteRefMap}
         selectedFolderTitle={selectedFolderTitle}
         canCreateSecurity={canCreateSecurity}
         setDropTargetPreview={setDropTargetPreview}
@@ -195,9 +188,6 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
-    isTutorialEnabled,
-    setRefMap,
-    deleteRefMap,
     disableDrag,
   ]);
 
@@ -248,7 +238,6 @@ export default inject(
     tableStore,
     userStore,
     settingsStore,
-    guidanceStore,
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
@@ -284,6 +273,7 @@ export default inject(
       highlightFile,
       filter,
       disableDrag,
+      filesList,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
@@ -294,7 +284,6 @@ export default inject(
       security,
     } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
-    const { setRefMap, deleteRefMap } = guidanceStore;
     const { withContentSelection } = hotkeyStore;
 
     const { primaryProgressDataStore } = uploadDataStore;
@@ -303,6 +292,7 @@ export default inject(
     const canCreateSecurity = security?.Create;
 
     return {
+      list: filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -324,8 +314,6 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      setRefMap,
-      deleteRefMap,
       selectedFolderTitle,
       canCreateSecurity,
       setDropTargetPreview,
@@ -337,4 +325,4 @@ export default inject(
       isAIAgentsFolder,
     };
   },
-)(withContainer(observer(Table)));
+)(observer(Table));

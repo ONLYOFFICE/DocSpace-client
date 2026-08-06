@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsDemoOnboarding",
+  "content": "Employee onboarding",
+  "content_en_sha1_hash": "3ca25ab2eb50124b532d8a3b5537dacbb2b27a6b",
+  "created_at": "2026-08-06T14:20:53.752Z",
+  "updated_at": "2026-08-06T14:45:52.184Z",
+  "comment": {
+    "text": "Title of a form room displayed during the guided demonstration tour.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:45:52.184Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/index.tsx",
+      "line_number": 260,
+      "context": "// named after its own type and the names already exist — a form space\n // has no name of its own to borrow, so these are the tour's own strings.\n rooms: [\n {\n roomType: RoomsType.FormRoom,\n title: t(\"FormsTour:FormsDemoOnboarding\"),\n },\n {\n roomType: RoomsType.FormRoom,\n title: t(\"FormsTour:FormsDemoTimeOff\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

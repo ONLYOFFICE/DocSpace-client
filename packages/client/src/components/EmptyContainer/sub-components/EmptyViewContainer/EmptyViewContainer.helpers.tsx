@@ -121,9 +121,6 @@ export const getDescription = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
-  isPayer?: boolean,
-  walletCustomerEmail?: string | null,
-  walletCustomerDisplayName?: string | null,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -164,9 +161,6 @@ export const getDescription = (
       standalone,
       aiReady,
       isPortalAdmin,
-      isPayer,
-      walletCustomerEmail,
-      walletCustomerDisplayName,
     );
 
   if (isFolder)
@@ -298,7 +292,6 @@ export const getOptions = (
   isPortalAdmin: boolean = false,
   trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
   isCardLinkedToPortal: boolean = false,
-  isPayer?: boolean,
   isActivating: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
@@ -574,7 +567,6 @@ export const getOptions = (
         if (aiReady) return isPortalAdmin ? [createAIAgent] : [];
         if (!isPortalAdmin) return [];
         if (standalone) return [goToAIProviderSettings];
-        if (isCardLinkedToPortal && !isPayer) return [];
         return [activateOrTopUpAI];
       })
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [

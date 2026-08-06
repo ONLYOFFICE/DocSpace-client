@@ -45,7 +45,6 @@ import useId from "./useId";
 
 import { useClickOutside } from "@docspace/ui-kit/utils";
 import { handleAnyClick } from "./event";
-import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
 import { uuid, getTextColor, trimSeparator } from "@docspace/ui-kit/utils";
 
 import { DomHelpers } from "@docspace/ui-kit/utils";
@@ -91,7 +90,6 @@ import type { TRoom } from "../api/rooms/types";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
 import { getFromLocalStorage } from "./getFromLocalStorage";
-import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
@@ -140,8 +138,6 @@ export {
   getFromSessionStorage,
   saveToSessionStorage,
   getFromLocalStorage,
-  getFormFillingTipsStorageName,
-  fakeFormFillingList,
   getCountTilesInRow,
   getSelectFormatTranslation,
   userFilterUtils,

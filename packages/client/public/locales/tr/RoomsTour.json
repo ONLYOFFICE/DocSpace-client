@@ -1,0 +1,16 @@
+{
+  "RoomsCreateFirst": "Bir tür seçin, birlikte çalıştığınız kişileri davet edin ve dosyalarınızı içine bırakın. Bir dakika sürer — ve az önce gördüğünüz her şey kendi belgeleriniz üzerinde çalışmaya başlar.",
+  "RoomsCreateFirstTitle": "Şimdi kendinize göre yapın",
+  "RoomsEmpty": "Az önce gördüğünüz odalar bir ön izlemeydi. Birinin sizi davet ettiği odalar bu listede belirir ve size gösterilen her şey orada da aynı şekilde çalışır.",
+  "RoomsEmptyTitle": "Listeniz şimdilik boş",
+  "RoomsGroups": "İhtiyacınız olanı hızlıca bulmak için odaları belirli özelliklere göre düzenleyin. Gruplar oluşturun ve listenin hemen üstünden aralarında geçiş yapın.",
+  "RoomsGroupsTitle": "Odalarınızı gruplayın",
+  "RoomsMembers": "Her odanın üye listesi Bilgi panelindedir. Portal kişilerini ekleyin ve her üye için bir rol belirleyin — dosyaları görüntülemekten odanın tamamını yönetmeye kadar.",
+  "RoomsMembersTitle": "Birlikte çalışın",
+  "RoomsPlaces": "{{recent}}, {{favorites}} ve {{trash}}, odalarınızdaki dosyaları bir araya getirir: son açılanlar, yıldızlananlar ve silinenler — sonuncular hâlâ geri getirilebilir. {{templates}} — oda şablonlarınız. {{archive}} — artık çalışmadığınız odalar, istediğiniz zaman geri getirilebilir.",
+  "RoomsPlacesTitle": "Her şey yerli yerinde",
+  "RoomsTemplates": "Herhangi bir odayı şablona dönüştürün — ayarları, yapısı ve dosyaları kaydedilir. Tek tıklamayla ondan yeni bir oda oluşturun; geriye yalnızca üye eklemek kalır.",
+  "RoomsTemplatesTitle": "İşe yarayanı yeniden kullanın",
+  "RoomsTypes": "Ekip çalışması için {{collaboration}}, güvenli dosya paylaşımı için {{vdr}}, dışarıdan erişim için {{publicRoom}}, kendi senaryolarınız için {{custom}}.",
+  "RoomsTypesTitle": "Her göreve bir oda"
+}

@@ -3,7 +3,7 @@
   "content": "Your subscription was deactivated because we couldn't process the monthly payment",
   "content_en_sha1_hash": "f1e9c131788e4e9a5b75d39586d7688c742cc825",
   "created_at": "2026-07-27T13:07:37.515Z",
-  "updated_at": "2026-08-01T16:25:17.819Z",
+  "updated_at": "2026-08-05T16:32:00.292Z",
   "comment": {
     "text": "Description text within an alert banner explaining the reason for subscription deactivation due to a failed monthly payment.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 288,
+      "line_number": 290,
       "context": "<div className={styles.deactivatedBannerText}>\n <Text className={styles.deactivatedTitle}>\n {t(\"Common:SubscriptionDeactivated\")}\n </Text>\n <Text className={styles.deactivatedDescription}>\n {t(\"Common:SubscriptionDeactivatedDescription\")}\n </Text>\n </div>\n </div>\n ) : null}",
       "module": "/libs/ui-kit"
     },

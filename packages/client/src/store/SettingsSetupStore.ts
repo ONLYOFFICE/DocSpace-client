@@ -57,6 +57,8 @@ import type { SelectedConsumer } from "SRC_DIR/pages/PortalSettings/categories/i
 import SelectionStore from "./SelectionStore";
 import type { ThirdPartyStore } from "./ThirdPartyStore";
 import type FilesSettingsStore from "./FilesSettingsStore";
+import type DocumentBuilderReportStore from "./DocumentBuilderReportStore";
+import { ReportType } from "./DocumentBuilderReportStore";
 
 const { Filter } = api;
 
@@ -127,6 +129,8 @@ class SettingsSetupStore {
 
   filesSettingsStore: FilesSettingsStore;
 
+  documentBuilderReportStore: DocumentBuilderReportStore;
+
   isInit = false;
 
   logoutDialogVisible = false;
@@ -134,8 +138,6 @@ class SettingsSetupStore {
   logoutAllDialogVisible = false;
 
   viewAs: string = isDesktop() ? "table" : "row";
-
-  isLoadingDownloadReport = false;
 
   security: {
     accessRight: {
@@ -154,7 +156,6 @@ class SettingsSetupStore {
     auditTrail: {
       users: TAuditEvent[];
     };
-    trailReport: string | never[];
   } = {
     accessRight: {
       options: [],
@@ -172,7 +173,6 @@ class SettingsSetupStore {
     auditTrail: {
       users: [],
     },
-    trailReport: [],
   };
 
   headerAction: {
@@ -241,6 +241,7 @@ class SettingsSetupStore {
     settingsStore: SettingsStore,
     thirdPartyStore: ThirdPartyStore,
     filesSettingsStore: FilesSettingsStore,
+    documentBuilderReportStore: DocumentBuilderReportStore,
   ) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
@@ -248,6 +249,7 @@ class SettingsSetupStore {
     this.settingsStore = settingsStore;
     this.thirdPartyStore = thirdPartyStore;
     this.filesSettingsStore = filesSettingsStore;
+    this.documentBuilderReportStore = documentBuilderReportStore;
     makeAutoObservable(this);
   }
 
@@ -269,10 +271,6 @@ class SettingsSetupStore {
       ]);
       this.setIsInit(true);
     }
-  };
-
-  setIsLoadingDownloadReport = (state: boolean) => {
-    this.isLoadingDownloadReport = state;
   };
 
   resetIsInit = () => {
@@ -654,46 +652,55 @@ class SettingsSetupStore {
     }
   };
 
-  getLoginHistoryReport = async () => {
-    const { openOnNewPage } = this.filesSettingsStore;
+  get isLoginHistoryReportBuilding() {
+    return this.documentBuilderReportStore.isReportBuilding(
+      ReportType.LoginHistory,
+    );
+  }
 
-    try {
-      const res = (await api.settings.getLoginHistoryReport()) as string;
-      setTimeout(
-        () => window.open(res, openOnNewPage ? "_blank" : "_self"),
-        100,
-      ); // hack for ios
-      return this.setAuditTrailReport(res);
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
-    }
+  get isAuditTrailReportBuilding() {
+    return this.documentBuilderReportStore.isReportBuilding(
+      ReportType.AuditTrail,
+    );
+  }
+
+  getLoginHistoryReport = () => {
+    return this.documentBuilderReportStore.buildReport(
+      ReportType.LoginHistory,
+      {
+        start: api.settings.startLoginHistoryReport,
+        getStatus: api.settings.getLoginHistoryReportStatus,
+      },
+    );
   };
 
-  getAuditTrailReport = async () => {
-    const { openOnNewPage } = this.filesSettingsStore;
-    try {
-      this.setIsLoadingDownloadReport(true);
-      const res = (await api.settings.getAuditTrailReport()) as string;
-      setTimeout(
-        () => window.open(res, openOnNewPage ? "_blank" : "_self"),
-        100,
-      ); // hack for ios
-      return this.setAuditTrailReport(res);
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
-    } finally {
-      this.setIsLoadingDownloadReport(false);
-    }
+  getAuditTrailReport = () => {
+    return this.documentBuilderReportStore.buildReport(ReportType.AuditTrail, {
+      start: api.settings.startAuditTrailReport,
+      getStatus: api.settings.getAuditTrailReportStatus,
+    });
+  };
+
+  markLoginHistoryReportPageLeft = () => {
+    this.documentBuilderReportStore.markReportPageLeft(ReportType.LoginHistory);
+  };
+
+  resetLoginHistoryReportPageLeft = () => {
+    this.documentBuilderReportStore.resetReportPageLeft(
+      ReportType.LoginHistory,
+    );
+  };
+
+  markAuditTrailReportPageLeft = () => {
+    this.documentBuilderReportStore.markReportPageLeft(ReportType.AuditTrail);
+  };
+
+  resetAuditTrailReportPageLeft = () => {
+    this.documentBuilderReportStore.resetReportPageLeft(ReportType.AuditTrail);
   };
 
   setGreetingTitle = async (greetingTitle: string) => {
     return api.settings.setGreetingSettings(greetingTitle);
-  };
-
-  setAuditTrailReport = (report: string) => {
-    this.security.trailReport = report;
   };
 
   setCurrentSchema = async (id: string) => {

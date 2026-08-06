@@ -58,14 +58,21 @@ const AuditTrail = (props) => {
     getAuditTrailReport,
     securityLifetime,
     isAuditAvailable,
-    isLoadingDownloadReport,
+    isAuditTrailReportBuilding,
+    markAuditTrailReportPageLeft,
+    resetAuditTrailReportPageLeft,
     resetIsInit,
   } = props;
 
   useEffect(() => {
     setDocumentTitle(t("AuditTrailNav"));
 
-    return () => resetIsInit();
+    resetAuditTrailReportPageLeft();
+
+    return () => {
+      markAuditTrailReportPageLeft();
+      resetIsInit();
+    };
   }, []);
 
   const getContent = () => {
@@ -128,7 +135,7 @@ const AuditTrail = (props) => {
         })}
         getReport={getAuditTrailReport}
         isSettingNotPaid={!isAuditAvailable}
-        isLoadingDownloadReport={isLoadingDownloadReport}
+        isLoadingDownloadReport={isAuditTrailReportBuilding}
       />
     )
   );
@@ -141,7 +148,9 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     setLifetimeAuditSettings,
     getAuditTrailReport,
     securityLifetime,
-    isLoadingDownloadReport,
+    isAuditTrailReportBuilding,
+    markAuditTrailReportPageLeft,
+    resetAuditTrailReportPageLeft,
     resetIsInit,
   } = setup;
 
@@ -155,7 +164,9 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     getAuditTrailReport,
     securityLifetime,
     isAuditAvailable,
-    isLoadingDownloadReport,
+    isAuditTrailReportBuilding,
+    markAuditTrailReportPageLeft,
+    resetAuditTrailReportPageLeft,
     resetIsInit,
   };
 })(withTranslation("Settings")(AuditTrail));

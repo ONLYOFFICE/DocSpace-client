@@ -88,6 +88,7 @@ import ImportAccountsStore from "./ImportAccountsStore";
 
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
+import DocumentBuilderReportStore from "./DocumentBuilderReportStore";
 import CampaignsStore from "./CampaignsStore";
 import IndexingStore from "./IndexingStore";
 import EditGroupStore from "./contacts/EditGroupStore";
@@ -165,12 +166,17 @@ const filesSettingsStore = new FilesSettingsStore(
   settingsStore,
 );
 
+const documentBuilderReportStore = new DocumentBuilderReportStore(
+  filesSettingsStore,
+);
+
 const setupStore = new SettingsSetupStore(
   tfaStore,
   authStore,
   settingsStore,
   thirdPartyStore,
   filesSettingsStore,
+  documentBuilderReportStore,
 );
 
 const accessRightsStore = new AccessRightsStore(
@@ -352,6 +358,7 @@ infoPanelStore.filesStore = filesStore;
 infoPanelStore.filesSettingsStore = filesSettingsStore;
 infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
+infoPanelStore.documentBuilderReportStore = documentBuilderReportStore;
 
 const avatarEditorDialogStore = new AvatarEditorDialogStore(
   filesStore,
@@ -430,6 +437,7 @@ const store = {
   servicesStore,
   wizardStore,
   setup: setupStore,
+  documentBuilderReportStore,
   confirm: confirmStore,
   backup: backupStore,
   common: commonStore,

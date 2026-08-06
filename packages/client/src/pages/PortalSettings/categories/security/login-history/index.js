@@ -51,6 +51,9 @@ const LoginHistory = (props) => {
     theme,
     viewAs,
     getLoginHistoryReport,
+    isLoginHistoryReportBuilding,
+    markLoginHistoryReportPageLeft,
+    resetLoginHistoryReportPageLeft,
     // getLifetimeAuditSettings,
     setLifetimeAuditSettings,
     securityLifetime,
@@ -67,7 +70,12 @@ const LoginHistory = (props) => {
 
     //  getLifetimeAuditSettings();
 
-    return () => resetIsInit();
+    resetLoginHistoryReportPageLeft();
+
+    return () => {
+      markLoginHistoryReportPageLeft();
+      resetIsInit();
+    };
   }, []);
 
   const getContent = () => {
@@ -110,6 +118,7 @@ const LoginHistory = (props) => {
           sectionName: t("Common:Files"),
         })}
         getReport={getLoginHistoryReport}
+        isLoadingDownloadReport={isLoginHistoryReportBuilding}
         isSettingNotPaid={!isAuditAvailable}
         tfaEnabled={tfaEnabled}
         currentColorScheme={currentColorScheme}
@@ -126,6 +135,9 @@ export default inject(
       security,
       viewAs,
       getLoginHistoryReport,
+      isLoginHistoryReportBuilding,
+      markLoginHistoryReportPageLeft,
+      resetLoginHistoryReportPageLeft,
       getLifetimeAuditSettings,
       setLifetimeAuditSettings,
       securityLifetime,
@@ -148,6 +160,9 @@ export default inject(
       currentColorScheme,
       viewAs,
       getLoginHistoryReport,
+      isLoginHistoryReportBuilding,
+      markLoginHistoryReportPageLeft,
+      resetLoginHistoryReportPageLeft,
       isAuditAvailable,
       resetIsInit,
       tfaEnabled,

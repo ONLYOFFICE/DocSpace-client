@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Bütün funksiyalardan istifadəni davam etdirmək üçün ödənişli lisenziyaya keçin.",
   "TrialExpiredTitle": "Sınaq lisenziyasının müddəti bitib",
   "UnusedSubscriptionCredit": "İstifadə olunmamış abunəlik krediti",
-  "UnusedSubscriptionCreditTooltip": "Cari abunəliyinizin istifadə olunmamış hissəsi avtomatik olaraq yeni abunəliyinizə tətbiq edilir. Ödəniş dövrünüz bu gün yenidən başlayacaq.",
+  "UnusedSubscriptionCreditTooltip": "<1>Cari abunəliyinizin istifadə olunmamış hissəsi avtomatik olaraq yeni abunəliyinizə tətbiq edilir.</1><2>İstifadə olunmamış: {{amount}}</2><3>Ödəniş dövrünüz bu gün yenidən başlayacaq.</3>",
   "UseEditorsInProduct": "Bu redaktorları {{organizationName}} {{editorsName}}-da istifadə et",
   "UserActivitySubtitle": "Unikal istifadəçi fəaliyyətini izləyin",
   "UserAdjustmentLabel": "İstifadəçi tənzimlənməsi",

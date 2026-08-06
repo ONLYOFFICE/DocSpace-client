@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Führen Sie ein Upgrade auf eine kostenpflichtige Lizenz durch, um alle Funktionen weiterhin nutzen zu können.",
   "TrialExpiredTitle": "Die Testlizenz ist abgelaufen",
   "UnusedSubscriptionCredit": "Nicht genutztes Abonnement-Guthaben",
-  "UnusedSubscriptionCreditTooltip": "Der nicht genutzte Teil Ihres aktuellen Abonnements wird automatisch auf Ihr neues Abonnement angerechnet. Ihr Abrechnungszyklus beginnt heute neu.",
+  "UnusedSubscriptionCreditTooltip": "<1>Der nicht genutzte Teil Ihres aktuellen Abonnements wird automatisch auf Ihr neues Abonnement angerechnet.</1><2>Nicht genutzt: {{amount}}</2><3>Ihr Abrechnungszyklus beginnt heute neu.</3>",
   "UseEditorsInProduct": "Diese Editoren in {{organizationName}} {{editorsName}} verwenden",
   "UserActivitySubtitle": "Verfolgen Sie die eindeutige Benutzeraktivität",
   "UserAdjustmentLabel": "Benutzeranpassung",

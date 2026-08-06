@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Kaloni në një licencë me pagesë për të vazhduar të përdorni të gjitha funksionet.",
   "TrialExpiredTitle": "Licenca e provës ka skaduar",
   "UnusedSubscriptionCredit": "Kredi e papërdorur e abonimit",
-  "UnusedSubscriptionCreditTooltip": "Pjesa e papërdorur e abonimit tuaj aktual aplikohet automatikisht ndaj abonimit tuaj të ri. Cikli juaj i faturimit do të rifillojë sot.",
+  "UnusedSubscriptionCreditTooltip": "<1>Pjesa e papërdorur e abonimit tuaj aktual aplikohet automatikisht ndaj abonimit tuaj të ri.</1><2>E papërdorur: {{amount}}</2><3>Cikli juaj i faturimit do të rifillojë sot.</3>",
   "UseEditorsInProduct": "Përdor këta redaktues në {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Ndiqni aktivitetin unik të përdoruesve",
   "UserAdjustmentLabel": "Rregullim përdoruesish",

@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Nâng cấp lên giấy phép trả phí để tiếp tục sử dụng tất cả các tính năng.",
   "TrialExpiredTitle": "Giấy phép dùng thử đã hết hạn",
   "UnusedSubscriptionCredit": "Tín dụng đăng ký chưa sử dụng",
-  "UnusedSubscriptionCreditTooltip": "Phần chưa sử dụng của gói đăng ký hiện tại sẽ được tự động áp dụng cho gói đăng ký mới của bạn. Chu kỳ thanh toán của bạn sẽ bắt đầu lại từ hôm nay.",
+  "UnusedSubscriptionCreditTooltip": "<1>Phần chưa sử dụng của gói đăng ký hiện tại sẽ được tự động áp dụng cho gói đăng ký mới của bạn.</1><2>Chưa sử dụng: {{amount}}</2><3>Chu kỳ thanh toán của bạn sẽ bắt đầu lại từ hôm nay.</3>",
   "UseEditorsInProduct": "Sử dụng các trình chỉnh sửa này trong {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Theo dõi hoạt động riêng biệt của người dùng",
   "UserAdjustmentLabel": "Điều chỉnh người dùng",

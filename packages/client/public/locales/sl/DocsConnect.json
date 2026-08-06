@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Nadgradite na plačljivo licenco, da lahko še naprej uporabljate vse funkcije.",
   "TrialExpiredTitle": "Preizkusna licenca je potekla",
   "UnusedSubscriptionCredit": "Neizkoriščen kredit naročnine",
-  "UnusedSubscriptionCreditTooltip": "Neizkoriščen del vaše trenutne naročnine se samodejno upošteva pri novi naročnini. Vaš obračunski cikel se danes znova začne.",
+  "UnusedSubscriptionCreditTooltip": "<1>Neizkoriščen del vaše trenutne naročnine se samodejno upošteva pri novi naročnini.</1><2>Neizkoriščeno: {{amount}}</2><3>Vaš obračunski cikel se danes znova začne.</3>",
   "UseEditorsInProduct": "Uporabi te urejevalnike v {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Spremljajte edinstveno aktivnost uporabnikov",
   "UserAdjustmentLabel": "Prilagoditev uporabnikov",

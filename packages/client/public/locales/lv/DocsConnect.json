@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Jauniniet uz maksas licenci, lai turpinātu izmantot visas funkcijas.",
   "TrialExpiredTitle": "Izmēģinājuma licences derīguma termiņš ir beidzies",
   "UnusedSubscriptionCredit": "Neizmantotais abonementa kredīts",
-  "UnusedSubscriptionCreditTooltip": "Jūsu pašreizējā abonementa neizmantotā daļa tiks automātiski ieskaitīta jaunajā abonementā. Jūsu norēķinu cikls sāksies no jauna šodien.",
+  "UnusedSubscriptionCreditTooltip": "<1>Jūsu pašreizējā abonementa neizmantotā daļa tiks automātiski ieskaitīta jaunajā abonementā.</1><2>Neizmantots: {{amount}}</2><3>Jūsu norēķinu cikls sāksies no jauna šodien.</3>",
   "UseEditorsInProduct": "Izmantot šos redaktorus {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Sekojiet unikālo lietotāju aktivitātei",
   "UserAdjustmentLabel": "Lietotāju pielāgošana",

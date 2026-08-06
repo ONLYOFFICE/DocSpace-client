@@ -275,7 +275,7 @@ const BuyPlanPanel = ({
     !isOverLimit && isDevPackUpgrade && (calcLoading || devPackCalc === null);
   const devPackCharge = devPackCalc?.amount ?? 0;
   const unusedCredit = isDevPackUpgrade
-    ? Math.max(0, Math.round((totalMonthly - devPackCharge) * 100) / 100)
+    ? Math.max(0, totalMonthly - devPackCharge)
     : 0;
 
   const addedUsers = Math.max(0, users - currentUsers);
@@ -291,12 +291,20 @@ const BuyPlanPanel = ({
 
   const remainingCredits = availableCredits - chargeNow;
   const insufficientFunds = chargeNow > 0 && remainingCredits < 0;
-  const topUpRequired = Math.ceil(chargeNow - availableCredits);
+  const topUpRequired = Math.max(0, Math.ceil(chargeNow - availableCredits));
   const isTopUpUnavailable =
     insufficientFunds && !!isCardLinkedToPortal && !isPayer;
 
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);
+
+  const formatCurrencyExact = (amount: number) =>
+    new Intl.NumberFormat(i18n.language, {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 10,
+    }).format(amount);
 
   const priceLoader = (
     <Loader
@@ -474,11 +482,7 @@ const BuyPlanPanel = ({
         formatCurrency(devPack ? devPackPrice : 0),
       )}
       <hr className={styles.summaryDivider} />
-      <Text
-        fontSize="14px"
-        fontWeight={600}
-        className={styles.uponRequestNote}
-      >
+      <Text fontSize="14px" fontWeight={600} className={styles.uponRequestNote}>
         {t("DocsConnect:UsersUponRequest", {
           count: MAX_USERS,
           service: t("DocsConnect:DocsConnect"),
@@ -865,9 +869,26 @@ const BuyPlanPanel = ({
                             </Text>
                             <HelpButton
                               size={12}
-                              tooltipContent={t(
-                                "DocsConnect:UnusedSubscriptionCreditTooltip",
-                              )}
+                              tooltipContent={
+                                <Trans
+                                  ns="DocsConnect"
+                                  i18nKey="UnusedSubscriptionCreditTooltip"
+                                  values={{
+                                    amount: formatCurrencyExact(unusedCredit),
+                                  }}
+                                  components={{
+                                    1: <Text fontSize="12px" />,
+                                    2: (
+                                      <Text
+                                        fontSize="12px"
+                                        fontWeight={600}
+                                        className={styles.tooltipAmount}
+                                      />
+                                    ),
+                                    3: <Text fontSize="12px" />,
+                                  }}
+                                />
+                              }
                               tooltipMaxWidth="320px"
                             />
                           </div>
@@ -902,7 +923,7 @@ const BuyPlanPanel = ({
                               fontWeight={600}
                               className={styles.summaryValue}
                             >
-                              {formatCurrency(chargeNow)}
+                              {formatCurrencyExact(chargeNow)}
                             </Text>
                           )}
                         </div>
@@ -1108,3 +1129,4 @@ export default inject(
     closeBuyPlan: docsConnectStore.closeBuyPlan,
   }),
 )(observer(BuyPlanPanel));
+

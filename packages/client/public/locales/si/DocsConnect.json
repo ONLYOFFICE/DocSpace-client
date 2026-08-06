@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "සියලුම විශේෂාංග දිගටම භාවිතා කිරීමට ගෙවන බලපත්‍රයකට උත්ශ්‍රේණි කරන්න.",
   "TrialExpiredTitle": "අත්හදා බැලීමේ බලපත්‍රය කල් ඉකුත් වී ඇත",
   "UnusedSubscriptionCredit": "නොයෙදූ දායකත්ව ණය",
-  "UnusedSubscriptionCreditTooltip": "ඔබේ වත්මන් දායකත්වයේ නොයෙදූ කොටස ස්වයංක්‍රීයව ඔබේ නව දායකත්වයට යොදනු ලැබේ. ඔබේ බිල්පත් චක්‍රය අද යළි ආරම්භ වේ.",
+  "UnusedSubscriptionCreditTooltip": "<1>ඔබේ වත්මන් දායකත්වයේ නොයෙදූ කොටස ස්වයංක්‍රීයව ඔබේ නව දායකත්වයට යොදනු ලැබේ.</1><2>නොයෙදූ: {{amount}}</2><3>ඔබේ බිල්පත් චක්‍රය අද යළි ආරම්භ වේ.</3>",
   "UseEditorsInProduct": "මෙම සංස්කාරක {{organizationName}} {{editorsName}} තුළ භාවිත කරන්න",
   "UserActivitySubtitle": "අනන්‍ය පරිශීලක ක්‍රියාකාරකම් නිරීක්ෂණය කරන්න",
   "UserAdjustmentLabel": "පරිශීලක සංශෝධනය",

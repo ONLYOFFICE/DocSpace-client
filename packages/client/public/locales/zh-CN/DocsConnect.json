@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "升级为付费许可证以继续使用所有功能。",
   "TrialExpiredTitle": "试用许可证已过期",
   "UnusedSubscriptionCredit": "未使用的订阅额度",
-  "UnusedSubscriptionCreditTooltip": "您当前订阅中未使用的部分将自动抵扣新订阅的费用。您的账单周期将从今天重新开始。",
+  "UnusedSubscriptionCreditTooltip": "<1>您当前订阅中未使用的部分将自动抵扣新订阅的费用。</1><2>未使用：{{amount}}</2><3>您的账单周期将从今天重新开始。</3>",
   "UseEditorsInProduct": "在 {{organizationName}} {{editorsName}} 中使用这些编辑器",
   "UserActivitySubtitle": "跟踪独立用户活动",
   "UserAdjustmentLabel": "用户数调整",

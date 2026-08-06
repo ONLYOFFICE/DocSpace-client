@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Passez à une licence payante pour continuer à utiliser toutes les fonctionnalités.",
   "TrialExpiredTitle": "La licence d'essai a expiré",
   "UnusedSubscriptionCredit": "Crédit d'abonnement inutilisé",
-  "UnusedSubscriptionCreditTooltip": "La portion inutilisée de votre abonnement actuel est automatiquement appliquée à votre nouvel abonnement. Votre cycle de facturation redémarrera aujourd'hui.",
+  "UnusedSubscriptionCreditTooltip": "<1>La portion inutilisée de votre abonnement actuel est automatiquement appliquée à votre nouvel abonnement.</1><2>Inutilisé : {{amount}}</2><3>Votre cycle de facturation redémarrera aujourd'hui.</3>",
   "UseEditorsInProduct": "Utiliser ces éditeurs dans {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Suivre l'activité unique des utilisateurs",
   "UserAdjustmentLabel": "Ajustement des utilisateurs",

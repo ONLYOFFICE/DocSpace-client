@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Tüm özellikleri kullanmaya devam etmek için ücretli bir lisansa yükseltin.",
   "TrialExpiredTitle": "Deneme lisansının süresi doldu",
   "UnusedSubscriptionCredit": "Kullanılmamış abonelik kredisi",
-  "UnusedSubscriptionCreditTooltip": "Mevcut aboneliğinizin kullanılmamış kısmı otomatik olarak yeni aboneliğinize uygulanır. Faturalandırma döngünüz bugün yeniden başlayacaktır.",
+  "UnusedSubscriptionCreditTooltip": "<1>Mevcut aboneliğinizin kullanılmamış kısmı otomatik olarak yeni aboneliğinize uygulanır.</1><2>Kullanılmamış: {{amount}}</2><3>Faturalandırma döngünüz bugün yeniden başlayacaktır.</3>",
   "UseEditorsInProduct": "Bu düzenleyicileri {{organizationName}} {{editorsName}}'da kullan",
   "UserActivitySubtitle": "Benzersiz kullanıcı etkinliğini izleyin",
   "UserAdjustmentLabel": "Kullanıcı ayarı",

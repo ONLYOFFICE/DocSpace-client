@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Upgrade to a paid license to continue using all features.",
   "TrialExpiredTitle": "The trial license has expired",
   "UnusedSubscriptionCredit": "Unused subscription credit",
-  "UnusedSubscriptionCreditTooltip": "The unused portion of your current subscription is automatically applied toward your new subscription. Your billing cycle will restart today.",
+  "UnusedSubscriptionCreditTooltip": "<1>The unused portion of your current subscription is automatically applied toward your new subscription.</1><2>Unused: {{amount}}</2><3>Your billing cycle will restart today.</3>",
   "UseEditorsInProduct": "Use these editors in {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Track unique user activity",
   "UserAdjustmentLabel": "User adjustment",

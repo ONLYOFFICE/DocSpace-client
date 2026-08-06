@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "すべての機能を引き続きご利用いただくには、有料ライセンスにアップグレードしてください。",
   "TrialExpiredTitle": "試用ライセンスの有効期限が切れました",
   "UnusedSubscriptionCredit": "未使用のサブスクリプションクレジット",
-  "UnusedSubscriptionCreditTooltip": "現在のサブスクリプションの未使用分は、新しいサブスクリプションに自動的に充当されます。請求サイクルは本日から再開されます。",
+  "UnusedSubscriptionCreditTooltip": "<1>現在のサブスクリプションの未使用分は、新しいサブスクリプションに自動的に充当されます。</1><2>未使用：{{amount}}</2><3>請求サイクルは本日から再開されます。</3>",
   "UseEditorsInProduct": "これらのエディタを{{organizationName}} {{editorsName}}で使用する",
   "UserActivitySubtitle": "ユニークユーザーのアクティビティを追跡",
   "UserAdjustmentLabel": "ユーザー数の調整",

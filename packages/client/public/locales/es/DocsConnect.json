@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "Actualice a una licencia de pago para seguir utilizando todas las funciones.",
   "TrialExpiredTitle": "La licencia de prueba ha caducado",
   "UnusedSubscriptionCredit": "Crédito de suscripción no utilizado",
-  "UnusedSubscriptionCreditTooltip": "La parte no utilizada de su suscripción actual se aplicará automáticamente a su nueva suscripción. Su ciclo de facturación se reiniciará hoy.",
+  "UnusedSubscriptionCreditTooltip": "<1>La parte no utilizada de su suscripción actual se aplicará automáticamente a su nueva suscripción.</1><2>No utilizado: {{amount}}</2><3>Su ciclo de facturación se reiniciará hoy.</3>",
   "UseEditorsInProduct": "Usar estos editores en {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Seguimiento de la actividad de usuarios únicos",
   "UserAdjustmentLabel": "Ajuste de usuarios",

@@ -141,7 +141,7 @@
   "TrialExpiredDescription": "قم بالترقية إلى ترخيص مدفوع لمتابعة استخدام جميع الميزات.",
   "TrialExpiredTitle": "انتهت صلاحية ترخيص التجربة",
   "UnusedSubscriptionCredit": "رصيد الاشتراك غير المستخدم",
-  "UnusedSubscriptionCreditTooltip": "يتم تطبيق الجزء غير المستخدم من اشتراكك الحالي تلقائيًا على اشتراكك الجديد. ستبدأ دورة الفوترة الخاصة بك من جديد اليوم.",
+  "UnusedSubscriptionCreditTooltip": "<1>يتم تطبيق الجزء غير المستخدم من اشتراكك الحالي تلقائيًا على اشتراكك الجديد.</1><2>غير المستخدم: {{amount}}</2><3>ستبدأ دورة الفوترة الخاصة بك من جديد اليوم.</3>",
   "UseEditorsInProduct": "استخدام هذه المحررات في {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "تتبع نشاط المستخدمين الفريدين",
   "UserAdjustmentLabel": "تعديل المستخدمين",

@@ -3,16 +3,17 @@
   "content": "Restore a room in the room Trash and show what will be restored before applying the action. If this information is not provided, ask me for the exact items to restore and the destination if applicable.",
   "content_en_sha1_hash": "37d2e2adc1af0f377819bf45772523bd48fa789a",
   "created_at": "2026-08-04T09:58:55.222Z",
-  "updated_at": "2026-08-04T09:58:56.426Z",
+  "updated_at": "2026-08-05T16:41:57.947Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instruction for the AI assistant that defines how to process requests to restore rooms from the Trash and specifies what information to request if details are missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:41:57.947Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 525,
+      "line_number": 560,
       "context": "prompt: t(\"AiSuggestions:RoomsTrashFindADeletedFileOrFolderPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashRestoreARoom\"),\n prompt: t(\"AiSuggestions:RoomsTrashRestoreARoomPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashDeletePermanently\"),\n prompt: t(\"AiSuggestions:RoomsTrashDeletePermanentlyPrompt\"),",
       "module": "/packages/client"
     }

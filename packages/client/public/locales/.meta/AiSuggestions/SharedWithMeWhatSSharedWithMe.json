@@ -3,16 +3,17 @@
   "content": "What's shared with me",
   "content_en_sha1_hash": "d39f97041444e4dd20d5ac921dc64b375a3127ae",
   "created_at": "2026-08-04T09:58:55.226Z",
-  "updated_at": "2026-08-04T09:58:56.405Z",
+  "updated_at": "2026-08-05T16:38:02.763Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option representing the category of documents shared with the user.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:38:02.763Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 236,
+      "line_number": 271,
       "context": "],\n \n // +\n sharedWithMe: [\n {\n name: t(\"AiSuggestions:SharedWithMeWhatSSharedWithMe\"),\n prompt: t(\"AiSuggestions:SharedWithMeWhatSSharedWithMePrompt\"),\n },\n {\n name: t(\"AiSuggestions:SharedWithMeWhatNeedsMyAction\"),\n prompt: t(\"AiSuggestions:SharedWithMeWhatNeedsMyActionPrompt\"),",
       "module": "/packages/client"
     }

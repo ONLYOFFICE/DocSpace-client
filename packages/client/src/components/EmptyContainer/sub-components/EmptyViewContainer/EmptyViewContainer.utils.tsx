@@ -35,7 +35,6 @@
 
 import React from "react";
 import { match, P } from "ts-pattern";
-import { Trans } from "react-i18next";
 
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
@@ -125,7 +124,6 @@ import type {
 } from "./EmptyViewContainer.types";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import { Text } from "@docspace/ui-kit/components";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
 export const isUser = (access: AccessType) => {
   return (
@@ -229,9 +227,6 @@ const getAIAgentsAIDisabledDescription = (
   t: TTranslation,
   standalone: boolean,
   isPortalAdmin: boolean,
-  isPayer?: boolean,
-  walletCustomerEmail?: string | null,
-  walletCustomerDisplayName?: string | null,
 ) => {
   return match([standalone, isPortalAdmin])
     .with([true, true], () =>
@@ -240,40 +235,16 @@ const getAIAgentsAIDisabledDescription = (
         aiChats: t("Common:AIChats"),
       }),
     )
-    .with([false, true], () => {
-      const payerLabel = walletCustomerDisplayName || walletCustomerEmail;
-
-      return (
-        <>
-          <Text as="span">
-            {t("Common:EmptyAIAgentsNotActiveYetDescription")}
-          </Text>
-          <Text as="span" style={{ display: "block", marginTop: "8px" }}>
-            {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
-          </Text>
-          {!isPayer && payerLabel ? (
-            <Text as="span" style={{ display: "block", marginTop: "8px" }}>
-              <Trans
-                i18nKey="Common:EmptyAIAgentsNotActiveYetContactPayer"
-                values={{ payerContact: payerLabel }}
-                components={{
-                  1:
-                    walletCustomerEmail && !walletCustomerDisplayName ? (
-                      <Link
-                        type={LinkType.action}
-                        href={`mailto:${walletCustomerEmail}`}
-                        color="accent"
-                      />
-                    ) : (
-                      <Text as="span" />
-                    ),
-                }}
-              />
-            </Text>
-          ) : null}
-        </>
-      );
-    })
+    .with([false, true], () => (
+      <>
+        <Text as="span">
+          {t("Common:EmptyAIAgentsNotActiveYetDescription")}
+        </Text>
+        <Text as="span" style={{ display: "block", marginTop: "8px" }}>
+          {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
+        </Text>
+      </>
+    ))
     .with([true, false], () =>
       t("Common:EmptyAIAgentsAIDisabledDescription", {
         productName: getBrandName("ProductName"),
@@ -311,22 +282,12 @@ export const getRootDescription = (
   standalone: boolean,
   aiReady: boolean,
   isPortalAdmin: boolean,
-  isPayer?: boolean,
-  walletCustomerEmail?: string | null,
-  walletCustomerDisplayName?: string | null,
 ) => {
   return match([rootFolderType, access])
     .with([FolderType.AIAgents, P._], () =>
       aiReady
         ? getAIAgentsAIEnabledDescription(t, access)
-        : getAIAgentsAIDisabledDescription(
-            t,
-            standalone,
-            isPortalAdmin,
-            isPayer,
-            walletCustomerEmail,
-            walletCustomerDisplayName,
-          ),
+        : getAIAgentsAIDisabledDescription(t, standalone, isPortalAdmin),
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),

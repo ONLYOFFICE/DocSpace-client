@@ -56,6 +56,7 @@ const UsagePage = () => {
       onDiskStorageClick={() => navigateToRoute(PAYMENT_ROUTES.diskStorage)}
       onBackupClick={() => navigateToRoute(PAYMENT_ROUTES.backup)}
       onAIServicesClick={() => navigateToRoute(PAYMENT_ROUTES.aiServices)}
+      onDocsConnectClick={() => navigateToRoute(PAYMENT_ROUTES.docsConnect)}
     />
   );
 };

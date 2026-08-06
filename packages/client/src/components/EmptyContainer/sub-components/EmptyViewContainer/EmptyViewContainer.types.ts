@@ -121,9 +121,6 @@ export interface InjectedEmptyViewContainerProps
   aiReady?: boolean;
   standalone: SettingsStore["standalone"];
   isCardLinkedToPortal?: boolean;
-  isPayer?: boolean;
-  walletCustomerEmail?: string | null;
-  walletCustomerDisplayName?: string | null;
   enableAIService?: (onSuccess?: () => void | Promise<void>) => Promise<void>;
   getAIConfig?: () => Promise<void>;
   refreshCurrentFolder?: () => Promise<void>;

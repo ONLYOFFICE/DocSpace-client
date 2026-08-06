@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2026-08-01T16:25:17.752Z",
+  "updated_at": "2026-08-05T16:32:00.188Z",
   "comment": {
     "text": "This is a button label that resets all applied filters to their default state, clearing any search criteria or selections.",
     "is_auto": true,
@@ -33,6 +33,12 @@
       "file_path": "/packages/client/src/components/TemplateGallery/TilesContainer/index.tsx",
       "line_number": 142,
       "context": "isHovered\n type={LinkType.action}\n fontWeight=\"600\"\n display=\"flex\"\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/DateFilter/DateFilter.tsx",
+      "line_number": 121,
+      "context": "</button>\n \n {selectedDate ? (\n <IconButton\n className={styles.reset}\n title={t(\"Common:ClearFilter\")}\n iconName={CrossReactSvgUrl}\n color=\"--info-panel-toolbar-icon-color\"\n size={12}\n onClick={onResetClick}\n dataTestId=\"info_history_calendar_reset\"",
       "module": "/packages/client"
     },
     {

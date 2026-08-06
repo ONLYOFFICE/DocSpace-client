@@ -3,16 +3,17 @@
   "content": "Convert a file into a form",
   "content_en_sha1_hash": "d40923803d0f379ce449ac7c5e65fceec3e90619",
   "created_at": "2026-08-04T09:58:55.145Z",
-  "updated_at": "2026-08-04T09:58:56.465Z",
+  "updated_at": "2026-08-05T17:48:35.209Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an option in the AI suggestions menu that describes the action of transforming an existing file into a form.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:48:35.209Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 781,
+      "line_number": 816,
       "context": "name: t(\"AiSuggestions:FormSpaceCreateAFormWithAI\"),\n prompt: t(\"AiSuggestions:FormSpaceCreateAFormWithAIPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceConvertAFileIntoAForm\"),\n prompt: t(\"AiSuggestions:FormSpaceConvertAFileIntoAFormPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceAddAFormFromTheGallery\"),",
       "module": "/packages/client"
     }

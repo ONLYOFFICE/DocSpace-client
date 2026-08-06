@@ -3,16 +3,17 @@
   "content": "Find tasks and deadlines",
   "content_en_sha1_hash": "f18cbc509e630270c6f2cf4832bb9e245063a6e2",
   "created_at": "2026-08-04T09:58:55.097Z",
-  "updated_at": "2026-08-04T09:58:56.427Z",
+  "updated_at": "2026-08-05T18:29:21.936Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label for an AI suggestion that initiates a search for tasks and deadlines within the workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:29:21.936Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 553,
+      "line_number": 588,
       "context": "{\n name: t(\"AiSuggestions:AiRoomFindADocument\"),\n prompt: t(\"AiSuggestions:AiRoomFindADocumentPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomFindTasksAndDeadlines\"),\n prompt: t(\"AiSuggestions:AiRoomFindTasksAndDeadlinesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomCompareDocuments\"),\n prompt: t(\"AiSuggestions:AiRoomCompareDocumentsPrompt\"),",
       "module": "/packages/client"
     }

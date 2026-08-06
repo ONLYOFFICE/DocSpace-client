@@ -3,16 +3,17 @@
   "content": "Find a document",
   "content_en_sha1_hash": "8b5750dca16f53260bf67e487673a6f69ccd194c",
   "created_at": "2026-08-04T09:58:55.095Z",
-  "updated_at": "2026-08-04T09:58:56.427Z",
+  "updated_at": "2026-08-05T18:31:28.259Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option that initiates a document search.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:31:28.259Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 549,
+      "line_number": 584,
       "context": "{\n name: t(\"AiSuggestions:AiRoomShowSourceDocuments\"),\n prompt: t(\"AiSuggestions:AiRoomShowSourceDocumentsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomFindADocument\"),\n prompt: t(\"AiSuggestions:AiRoomFindADocumentPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomFindTasksAndDeadlines\"),\n prompt: t(\"AiSuggestions:AiRoomFindTasksAndDeadlinesPrompt\"),",
       "module": "/packages/client"
     }

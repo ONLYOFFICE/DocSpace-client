@@ -3,16 +3,17 @@
   "content": "Change space name and tags in the current Form Space and show the proposed change before applying it. If this information is not provided, ask me for the new name and tags.",
   "content_en_sha1_hash": "0c9962ce180bf50874c99d815fb673e5e73f9c8e",
   "created_at": "2026-08-04T09:58:55.145Z",
-  "updated_at": "2026-08-04T09:58:56.466Z",
+  "updated_at": "2026-08-05T17:49:13.787Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt for the AI assistant defining how it should handle requests to modify a Form Space's name and tags.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:49:13.787Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 802,
+      "line_number": 837,
       "context": "prompt: t(\"AiSuggestions:FormSpaceStartCollectingResponsesPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceChangeNameAndTags\"),\n prompt: t(\"AiSuggestions:FormSpaceChangeNameAndTagsPrompt\"),\n requires: \"editRoom\",\n },\n ],\n \n // +",
       "module": "/packages/client"
     }

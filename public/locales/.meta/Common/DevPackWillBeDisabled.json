@@ -1,0 +1,29 @@
+{
+  "key_path": "DevPackWillBeDisabled",
+  "content": "Dev Pack will be disabled",
+  "content_en_sha1_hash": "f1e1728c16d0a46f30121193583863e91ef6be7a",
+  "created_at": "2026-08-05T16:31:21.912Z",
+  "updated_at": "2026-08-05T16:33:31.252Z",
+  "comment": {
+    "text": "Alert or status message appearing in the services management section when the Dev Pack feature is scheduled for removal due to subscription changes.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:33:31.252Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 486,
+      "context": "const getScheduledTitles = () => {\n if (isCancellation) return [t(\"SubscriptionCancellation\")];\n \n const titles: string[] = [];\n \n if (devPackDisabling) titles.push(t(\"DevPackWillBeDisabled\"));\n \n if (usersAdjusting)\n titles.push(\n t(\"UserAdjustment\", {\n fromCount: docsConnectState?.tariffUsers ?? 0,",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

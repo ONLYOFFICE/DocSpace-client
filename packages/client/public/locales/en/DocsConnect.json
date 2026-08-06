@@ -63,6 +63,7 @@
   "GetStarted": "Get started",
   "GetStartedDescription": "Embed cloud-hosted Document, Spreadsheet, Presentation and PDF editors — collaborative and MS Office-compatible, with your own keys. No server to install.",
   "GetStartedTitle": "Run {{productName}} editors inside your app",
+  "InsufficientCreditsForSubscription": "There aren't enough credits for the selected {{service}} subscription. Contact your Payer (<1>{{payerContact}}</1>) to top up the wallet, or select fewer users.",
   "IntegrationOptions": "Integration options & instructions",
   "IntegrationOptionsSubtitle": "Plug Docs into any ecosystem (DMS, CMS, LMS, etc.) - no custom code, no migration.",
   "Internal": "Internal",

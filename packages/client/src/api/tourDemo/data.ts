@@ -63,7 +63,21 @@ export type TourDemoRoom = {
   title: string;
 };
 
+/**
+ * Which endpoint the section's list comes back on.
+ *
+ * Rooms and Forms are both answered by `files/rooms`; the agents section has an
+ * endpoint of its own, `ai/agents`, served by the Node AI service. The two
+ * answer in the same shape — the rows arrive in `folders`, under a `current`
+ * the server named — so only the route the demo claims differs, and an agent is
+ * a room as far as everything downstream is concerned (`RoomsType.AIRoom` under
+ * `FolderType.AIAgents`).
+ */
+export type TourDemoList = "rooms" | "agents";
+
 export type TourDemoConfig = {
+  /** The endpoint whose answer the stand-in rows are put into. */
+  list: TourDemoList;
   /**
    * The stand-in rooms, in list order. Built by the tour rather than here:
    * what a section's list should be standing in for is the tour's business,

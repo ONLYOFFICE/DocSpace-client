@@ -243,6 +243,9 @@ const FormsTour = ({
     const standInForList = !hasItems && canCreate;
 
     tourDemo.activate({
+      // Form spaces are rooms with a search area of their own, so the list they
+      // come back on is the ordinary one.
+      list: "rooms",
       standInForList,
       // Three collections anybody recognizes, so the list reads as what the
       // section is for at a glance. Unlike the rooms tour — where each room is

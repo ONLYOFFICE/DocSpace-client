@@ -33,19 +33,72 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { Page } from "@playwright/test";
+
 import {
   settingsHandler,
   TypeSettings,
   selfActivationStatusHandler,
   selfByTypeHandler,
   aiAgentsHandler,
+  aiConfigHandler,
+  roomMembersHandlers,
 } from "@docspace/shared/__mocks__/handlers";
-import { test, TEST_PORT } from "./fixtures/base";
-import { armTour, walkTour } from "./helpers/tour";
+import { expect, test, TEST_PORT } from "./fixtures/base";
+import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
 // packages/client/src/store/AiAgentsTourStore.ts
 const TOUR_KEY = "ai_agents_tour_pending";
 const AI_AGENTS_URL = "/ai-agents/filter";
+
+// The single agent of the mock list (aiAgentsHandler, withListCreate) — the one
+// the access step opens the info panel on.
+const AGENT_ID = 251365;
+// Admin user id from the settings/self mocks, used as that agent's owner.
+const ADMIN_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
+
+// The first stand-in agent (SRC_DIR/api/tourDemo, titles from
+// public/locales/en/AiAgentsTour.json) — proof that the section the tour is
+// walking through is the borrowed one, not the user's empty list.
+const DEMO_AGENT_TITLE = "Support desk assistant";
+// The empty screen's action list, which is what the closing step points into.
+const EMPTY_SCREEN = '[data-testid="empty-view-body"]';
+
+// Step titles, from public/locales/en/AiAgentsTour.json. Steps are addressed by
+// title rather than by index: which ones survive depends on the audience and on
+// what the portal has switched on, so an index would quietly point at a
+// different step as those flags move.
+const CREATE_STEP = "Give it a job";
+const CREATE_FIRST_STEP = "Now build your own";
+const SWITCH_ON_STEP = "Switch it on and see for real";
+
+const agentOwnerMembers = () =>
+  roomMembersHandlers(TEST_PORT, AGENT_ID, {
+    initial: [{ id: ADMIN_ID, displayName: "Administrator", access: 0 }],
+  });
+
+/** Arms the tour and lands on the section that starts it by itself. */
+const startTour = async (page: Page, baseUrl: string) => {
+  // The first visit sets an origin so localStorage is reachable.
+  await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
+  await armTour(page, TOUR_KEY);
+  await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
+
+  await expect(tourTooltip(page)).toBeVisible();
+};
+
+/** Walks forward with the keyboard until the step titled `title` is up. */
+const goToStep = async (page: Page, title: string, maxSteps = 10) => {
+  const tooltip = tourTooltip(page);
+
+  for (let i = 0; i < maxSteps; i += 1) {
+    if (await tooltip.getByText(title, { exact: true }).isVisible()) return;
+    await page.keyboard.press("ArrowRight");
+    await expect(tooltip).toBeVisible();
+  }
+
+  throw new Error(`step "${title}" never came up`);
+};
 
 test.describe("AI Agents tour", () => {
   test.beforeEach(({ mockRequest }) => {
@@ -61,10 +114,11 @@ test.describe("AI Agents tour", () => {
     mockRequest,
     baseUrl,
   }) => {
-    mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...agentOwnerMembers(),
+    );
 
-    // First visit sets an origin so localStorage is reachable; the reload after
-    // arming the tour is what lands on a section that starts it by itself.
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
     await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
@@ -77,12 +131,121 @@ test.describe("AI Agents tour", () => {
     mockRequest,
     baseUrl,
   }) => {
-    mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      ...agentOwnerMembers(),
+    );
 
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
     await armTour(page, TOUR_KEY);
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "user"]);
+  });
+
+  test("the list the user owns is left alone", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // A portal with agents of its own never sees one it does not have: the
+    // stand-in list is only ever put up in place of an empty answer.
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "admin"),
+      ...agentOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+
+    await expect(
+      page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toHaveCount(0);
+  });
+});
+
+test.describe("AI Agents tour on an empty portal", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      // No agents at all — the case the stand-in section exists for.
+      aiAgentsHandler(TEST_PORT),
+      selfByTypeHandler(TEST_PORT, "admin"),
+    );
+  });
+
+  test("admin walks a stood-in section instead of an empty one", async ({
+    page,
+    baseUrl,
+  }) => {
+    await startTour(page, baseUrl);
+
+    // Nothing about creating an agent, nothing about what a row does and
+    // nothing about members would be reachable on the real (empty) page.
+    await expect(
+      page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toBeVisible();
+
+    await walkTour(page, ["desktop", "ai-agents-tour", "empty"]);
+  });
+
+  test("hands the section back before the closing step", async ({
+    page,
+    baseUrl,
+  }) => {
+    await startTour(page, baseUrl);
+    await goToStep(page, CREATE_FIRST_STEP);
+
+    // The step drops the stand-in agents itself and points at the real button
+    // on the empty screen the reload brings up, rather than letting the section
+    // change behind the user's back once the tour is over.
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(
+      page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toHaveCount(0);
+  });
+});
+
+test.describe("AI Agents tour with AI switched off", () => {
+  test.beforeEach(({ mockRequest }) => {
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      selfActivationStatusHandler(TEST_PORT, null, false, true),
+      // Not switched on, so the section renders neither the creation banner nor
+      // the filter bar — and without a stand-in the tour would be two steps.
+      aiConfigHandler(TEST_PORT, true),
+      aiAgentsHandler(TEST_PORT),
+      selfByTypeHandler(TEST_PORT, "admin"),
+    );
+  });
+
+  test("still shows what the section is for", async ({ page, baseUrl }) => {
+    await startTour(page, baseUrl);
+
+    await expect(
+      page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toBeVisible();
+    // The banner is behind `aiReady`, so this step existing at all is the proof
+    // that the stand-in reaches the AI config and not only the list.
+    await goToStep(page, CREATE_STEP);
+  });
+
+  test("closes on switching AI on rather than on creating an agent", async ({
+    page,
+    baseUrl,
+  }) => {
+    await startTour(page, baseUrl);
+    await goToStep(page, SWITCH_ON_STEP);
+
+    // Everything the tour claimed is gone by now — the agents, and the AI
+    // config that made them possible — so what is left under the spotlight is
+    // the portal's own activation button.
+    await expect(page.locator(EMPTY_SCREEN)).toBeVisible();
+    await expect(
+      page.getByRole("main").getByText(DEMO_AGENT_TITLE),
+    ).toHaveCount(0);
+    await expect(
+      tourTooltip(page).getByText(CREATE_FIRST_STEP, { exact: true }),
+    ).toHaveCount(0);
   });
 });

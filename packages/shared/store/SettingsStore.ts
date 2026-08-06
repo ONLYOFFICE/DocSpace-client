@@ -1736,7 +1736,10 @@ class SettingsStore {
     this.setAIConfig(res);
   };
 
-  setAIConfig = (config: TAIConfig) => {
+  // `null` is accepted so a caller that borrowed the config can hand back
+  // exactly what it found, including "nothing was loaded yet" — the field's own
+  // starting value, and the one state a non-null setter could not restore.
+  setAIConfig = (config: Nullable<TAIConfig>) => {
     this.aiConfig = config;
   };
 

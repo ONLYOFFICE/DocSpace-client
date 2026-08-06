@@ -179,6 +179,7 @@ const RoomsTour = ({
     if (!canCreate) return;
 
     tourDemo.activate({
+      list: "rooms",
       // The rooms tour never walks into a room, so the stand-in list is the
       // whole of what it borrows — and it only ever borrows it when the real
       // one came back empty.

@@ -58,6 +58,14 @@ const route = (pattern: string) => new RegExp(`(?:^|/)files/${pattern}`);
 const ROOMS_LIST_ROUTE = route("rooms(\\?|$)");
 
 /**
+ * `ai/agents` — the same list, for the one section that does not come off the
+ * files API: the agents are served by the Node AI service. The envelope is the
+ * room list's own (`{ response: { current, folders, count, total } }`), so the
+ * two routes share a transform and only the pattern differs.
+ */
+const AGENTS_LIST_ROUTE = /(?:^|\/)ai\/agents(\?|$)/;
+
+/**
  * Everything else is claimed for negative ids only. Every id the server hands
  * out is positive, so none of these can take over a room or a folder the
  * portal actually has — a demo id is the only thing they match.
@@ -95,13 +103,13 @@ const idFromRoute = (route: RegExp, url?: string) => {
 /**
  * A section tour on a portal that has nothing in that section yet.
  *
- * Both room-backed sections — Rooms and Forms — go through `/files/rooms`, and
- * an empty one renders neither the quick-actions banner nor the filter bar
- * (`isEmptyPage` gates both), so a tour there would be reduced to its sidebar
- * steps — nothing about creating anything, nothing about what a row does,
- * nothing about members. Rather than teach a stripped-down section, the tour
- * borrows a portal: while it runs, the room requests are answered locally
- * instead of going to the server.
+ * Every list-backed section — Rooms, Forms and AI Agents — renders neither the
+ * quick-actions banner nor the filter bar while it is empty (`isEmptyPage`
+ * gates both), so a tour there would be reduced to its sidebar steps — nothing
+ * about creating anything, nothing about what a row does, nothing about
+ * members. Rather than teach a stripped-down section, the tour borrows a
+ * portal: while it runs, the list requests are answered locally instead of
+ * going to the server.
  *
  * The interception is the same one the Playwright suite uses on its own
  * requests — `interceptRoute` claims a URL and returns the body the server
@@ -184,7 +192,9 @@ class TourDemo {
       // only when the tour is standing in for the list at all. The rooms are
       // built either way: that is where the space a tour walks into comes from.
       interceptRoute({
-        match: matches(ROOMS_LIST_ROUTE),
+        match: matches(
+          config.list === "agents" ? AGENTS_LIST_ROUTE : ROOMS_LIST_ROUTE,
+        ),
         transform: (data) => {
           const envelope = data as { response?: TGetRooms } | null;
           const rooms = envelope?.response;

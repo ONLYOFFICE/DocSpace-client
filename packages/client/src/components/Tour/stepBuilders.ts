@@ -37,7 +37,6 @@ import type { Step } from "react-joyride";
 
 import type { TourStepCallbacks } from "./useTour";
 import { waitForElement } from "./waitForElement";
-import { stepContent, type StepBody } from "./stepContent";
 
 function isAbortError(err: unknown) {
   return err instanceof DOMException && err.name === "AbortError";
@@ -240,7 +239,7 @@ export function isStepTargetPresent(step: Step): boolean {
 export function navItemStep(
   selector: string,
   title: string,
-  body: StepBody,
+  body: string,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   spotlightList = false,
@@ -256,7 +255,7 @@ export function navItemStep(
       : undefined,
     spotlightPadding: 4,
     placement: "auto" as const,
-    content: stepContent(body),
+    content: body,
     title,
     skipBeacon: true,
     before: async () => {
@@ -288,7 +287,7 @@ export function navItemStep(
 export function elementStep(
   target: string,
   title: string,
-  body: StepBody,
+  body: string,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   spotlightPadding = 6,
@@ -298,7 +297,7 @@ export function elementStep(
     target,
     spotlightPadding,
     placement: "auto" as const,
-    content: stepContent(body),
+    content: body,
     title,
     skipBeacon: true,
     before: async () => {
@@ -383,7 +382,7 @@ export function elementGroupStep(
   target: string,
   members: string[],
   title: string,
-  body: StepBody,
+  body: string,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   spotlightPadding = 6,
@@ -416,7 +415,7 @@ export function menuStep(
   triggerSelector: string,
   menuSelector: string,
   title: string,
-  body: StepBody,
+  body: string,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   // Extra selectors the spotlight takes in alongside the menu — pass the button
@@ -435,7 +434,7 @@ export function menuStep(
       : undefined,
     spotlightPadding,
     placement: "auto" as const,
-    content: stepContent(body),
+    content: body,
     title,
     skipBeacon: true,
     // The menu only exists while this step runs, so the start-of-run DOM check
@@ -480,7 +479,7 @@ export function menuStep(
 export function revealStep(
   target: string,
   title: string,
-  body: StepBody,
+  body: string,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   hooks: RevealHooks,
@@ -505,7 +504,7 @@ export function revealStep(
       : () => measurableTarget(target),
     spotlightPadding,
     placement: "auto" as const,
-    content: stepContent(body),
+    content: body,
     title,
     skipBeacon: true,
     // The panel is only up while this step runs, so the start-of-run DOM check
@@ -540,7 +539,7 @@ const REVEAL_CLASS = "tour-reveal-hidden-control";
 export function hoverRevealStep(
   target: string,
   title: string,
-  body: StepBody,
+  body: string,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   spotlightPadding = 4,
@@ -549,7 +548,7 @@ export function hoverRevealStep(
     target,
     spotlightPadding,
     placement: "auto" as const,
-    content: stepContent(body),
+    content: body,
     title,
     skipBeacon: true,
     // Hidden rather than absent: the DOM check has to look for it, not at it.
@@ -586,7 +585,7 @@ export function removeRevealedControl() {
 export function fileItemStep(
   rowSelector: string,
   title: string,
-  body: StepBody,
+  body: string,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   // Same contract as `elementStep`'s: runs before the row is awaited, and has
@@ -603,7 +602,7 @@ export function fileItemStep(
     spotlightTarget: resolve,
     spotlightPadding: 4,
     placement: "auto" as const,
-    content: stepContent(body),
+    content: body,
     title,
     skipBeacon: true,
     before: async () => {

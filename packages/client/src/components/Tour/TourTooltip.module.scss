@@ -92,19 +92,6 @@
   opacity: 0.9;
 }
 
-// Step bodies may add a short list of concrete points under the lead sentence
-// (see stepBuilders → elementStep/navItemStep `points`).
-.points {
-  font-size: 13px;
-  line-height: 20px;
-  opacity: 0.9;
-  margin: 8px 0 0;
-  padding-inline-start: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
 .footer {
   display: flex;
   align-items: center;

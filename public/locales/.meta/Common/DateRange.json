@@ -1,0 +1,29 @@
+{
+  "key_path": "DateRange",
+  "content": "Date range",
+  "content_en_sha1_hash": "c65ea4ae013589923685e6ad069dcf87c153bd0b",
+  "created_at": "2026-08-05T16:31:20.846Z",
+  "updated_at": "2026-08-05T16:34:41.227Z",
+  "comment": {
+    "text": "Label for an option in the Export Menu used to select a specific period of time for exporting history.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:34:41.227Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/ExportMenu/ExportMenu.tsx",
+      "line_number": 93,
+      "context": "label: t(\"InfoPanel:AllHistory\"),\n },\n {\n id: \"info_history_export_date-range\",\n value: ExportScope.DateRange,\n label: t(\"Common:DateRange\"),\n },\n ];\n \n return (\n <div ref={containerRef} className={styles.container}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

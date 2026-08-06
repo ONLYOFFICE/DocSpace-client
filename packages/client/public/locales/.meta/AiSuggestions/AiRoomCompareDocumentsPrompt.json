@@ -3,16 +3,17 @@
   "content": "Compare the available documents and highlight the most meaningful similarities, differences, and conflicts. If this information is not provided, ask me for the documents to compare and the comparison criteria.",
   "content_en_sha1_hash": "177c4637180e3ef38f5221442c4d4824c5e0a9e7",
   "created_at": "2026-08-04T09:58:55.091Z",
-  "updated_at": "2026-08-04T09:58:56.427Z",
+  "updated_at": "2026-08-05T18:33:51.568Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt for the AI feature that appears when initiating a document comparison task, providing specific directions on how to analyze files and handle missing input.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:33:51.568Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 558,
+      "line_number": 593,
       "context": "name: t(\"AiSuggestions:AiRoomFindTasksAndDeadlines\"),\n prompt: t(\"AiSuggestions:AiRoomFindTasksAndDeadlinesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomCompareDocuments\"),\n prompt: t(\"AiSuggestions:AiRoomCompareDocumentsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomFindContradictions\"),\n prompt: t(\"AiSuggestions:AiRoomFindContradictionsPrompt\"),\n },",
       "module": "/packages/client"
     }

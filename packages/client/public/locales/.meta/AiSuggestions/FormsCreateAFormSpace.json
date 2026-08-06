@@ -3,16 +3,17 @@
   "content": "Create a Form Space",
   "content_en_sha1_hash": "121a0808b1b228b3b5f4d71ae924871f1a0532bf",
   "created_at": "2026-08-04T09:58:55.160Z",
-  "updated_at": "2026-08-04T09:58:56.449Z",
+  "updated_at": "2026-08-05T17:35:18.398Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion item that triggers the creation of a new Form Space.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:35:18.398Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 650,
+      "line_number": 685,
       "context": "],\n \n // +\n forms: [\n {\n name: t(\"AiSuggestions:FormsCreateAFormSpace\"),\n prompt: t(\"AiSuggestions:FormsCreateAFormSpacePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsStartFromAFormTemplate\"),",
       "module": "/packages/client"
     }

@@ -3,16 +3,17 @@
   "content": "Find common answers",
   "content_en_sha1_hash": "67b589825507da26eaae6b689d5f49e6fc22bb88",
   "created_at": "2026-08-04T09:58:55.152Z",
-  "updated_at": "2026-08-04T09:58:56.402Z",
+  "updated_at": "2026-08-05T17:42:18.429Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label for an AI suggestion action that analyzes FormSpace results to identify recurring patterns in responses.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:42:18.429Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 179,
+      "line_number": 185,
       "context": "{\n name: t(\"AiSuggestions:FormSpaceResultsShowKeyMetrics\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsShowKeyMetricsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswersPrompt\"),",
       "module": "/packages/client"
     }

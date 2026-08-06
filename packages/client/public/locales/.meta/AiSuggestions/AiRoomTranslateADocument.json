@@ -3,16 +3,17 @@
   "content": "Translate a document",
   "content_en_sha1_hash": "cbcf74f2b1ffed69926193f16097e8ad6b04af13",
   "created_at": "2026-08-04T09:58:55.101Z",
-  "updated_at": "2026-08-04T09:58:56.429Z",
+  "updated_at": "2026-08-05T18:25:29.874Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion action used to initiate document translation.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:25:29.874Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 580,
+      "line_number": 615,
       "context": "name: t(\"AiSuggestions:AiRoomCollectDataIntoATable\"),\n prompt: t(\"AiSuggestions:AiRoomCollectDataIntoATablePrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomTranslateADocument\"),\n prompt: t(\"AiSuggestions:AiRoomTranslateADocumentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomShowSavedResults\"),",
       "module": "/packages/client"
     }

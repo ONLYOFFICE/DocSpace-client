@@ -3,16 +3,17 @@
   "content": "Identify recurring answers and themes across completed submissions and show their frequency. If this information is not provided, ask me for the form, date range, respondent segment, and questions to include.",
   "content_en_sha1_hash": "c3ebf188d68d5f0b2c1f7738660ae5fc4c17ae5a",
   "created_at": "2026-08-04T09:58:55.153Z",
-  "updated_at": "2026-08-04T09:58:56.402Z",
+  "updated_at": "2026-08-05T17:41:54.167Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional text for an AI suggestion feature explaining how recurring themes are identified in form results and what parameters are required if not provided.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:41:54.167Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 180,
+      "line_number": 186,
       "context": "name: t(\"AiSuggestions:FormSpaceResultsShowKeyMetrics\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsShowKeyMetricsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswersPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindUnusualAnswersPrompt\"),\n },",
       "module": "/packages/client"
     }

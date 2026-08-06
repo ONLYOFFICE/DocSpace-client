@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-01T16:25:17.795Z",
+  "updated_at": "2026-08-06T11:20:26.660Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 232,
-      "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),\n })",
+      "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n isPaid\n ? devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
       "line_number": 232,
-      "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),\n })",
+      "context": "? onTopUp\n : isPaid\n ? onCancelPlan\n : onBuyPlan\n }\n title={t(\"DocsConnect:DocsConnect\")}\n priceText={\n isPaid\n ? devPackEnabled\n ? t(\"DocsConnect:PricePerUserMonthDevPackNote\", {\n price: formatCurrency(pricePerUser, 0),",
       "module": "/libs/ui-kit"
     },
     {
@@ -37,8 +37,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 416,
-      "context": "isDoubleFooterLine={insufficientFunds || isDevPackUpgrade || isUpgrade}\n >\n <ModalDialog.Header>\n {isEditActive\n ? t(\"Common:EditSubscription\")\n : t(\"DocsConnect:DocsConnect\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.walletCard}>\n <div className={styles.walletIcon} aria-hidden>",
+      "line_number": 484,
+      "context": "fontWeight={600}\n className={styles.uponRequestNote}\n >\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 484,
+      "context": "fontWeight={600}\n className={styles.uponRequestNote}\n >\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 484,
+      "context": "fontWeight={600}\n className={styles.uponRequestNote}\n >\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
@@ -115,7 +127,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 65,
+      "line_number": 67,
       "context": "return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");\n if (pathname.includes(\"/billing/addons/docs-connect\"))\n return t(\"DocsConnect:DocsConnect\");\n if (pathname.includes(\"/billing/addons\")) return t(\"Common:Addons\");\n return t(\"Common:Billing\");\n };\n \n const isSubPage = (pathname: string): boolean => {",
       "module": "/packages/client"
     },

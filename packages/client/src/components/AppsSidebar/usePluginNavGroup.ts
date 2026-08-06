@@ -52,7 +52,6 @@ export type PluginNavigationItems = NonNullable<
 type UsePluginNavGroupProps = {
   section?: Section;
   items?: PluginNavigationItems | null;
-  dispatchMessage?: PluginStore["dispatchMessage"];
 };
 
 type UsePluginNavGroupResult = {
@@ -72,7 +71,6 @@ const getNavItemId = (itemKey: string) => `${PLUGIN_GROUP_ID}-${itemKey}`;
 export const usePluginNavGroup = ({
   section,
   items,
-  dispatchMessage,
 }: UsePluginNavGroupProps): UsePluginNavGroupResult => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -87,20 +85,14 @@ export const usePluginNavGroup = ({
     if (sectionItems.length === 0) return EMPTY_RESULT;
 
     const navItems = sectionItems.map<NavMenuItem>(({ key, value }) => {
-      const { pluginName, label, icon, onClick } = value;
+      const { label, icon } = value;
       const path = getPluginSectionPath(section, key);
 
       return {
         id: getNavItemId(key),
         label,
         icon,
-        onClick: async () => {
-          const message = await onClick?.();
-
-          if (message) dispatchMessage?.({ message, pluginName });
-
-          navigate(path);
-        },
+        onClick: () => navigate(path),
       };
     });
 
@@ -112,5 +104,5 @@ export const usePluginNavGroup = ({
       pluginGroup: { id: PLUGIN_GROUP_ID, items: navItems },
       activePluginItemId: activeItem && getNavItemId(activeItem.key),
     };
-  }, [section, items, pathname, navigate, dispatchMessage]);
+  }, [section, items, pathname, navigate]);
 };

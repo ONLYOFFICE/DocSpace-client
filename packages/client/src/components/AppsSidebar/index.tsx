@@ -87,7 +87,6 @@ import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-componen
 import { ArticleProfileLoader } from "@docspace/ui-kit/components/article/skeletons";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
 import type { Section } from "SRC_DIR/helpers/plugins/enums";
-import type PluginStore from "SRC_DIR/store/PluginStore";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
@@ -133,7 +132,6 @@ type AppsSidebarViewProps = AppsSidebarProps & {
   articleOpen?: boolean;
   articleButtonItems?: AppsPluginsItems | null;
   articleNavigationItems?: PluginNavigationItems | null;
-  dispatchMessage?: PluginStore["dispatchMessage"];
   toggleArticleOpen?: () => void;
   onBack?: () => void;
   backLabel?: string;
@@ -155,7 +153,6 @@ export const AppsSidebarView = ({
   backLabel,
   articleButtonItems,
   articleNavigationItems,
-  dispatchMessage,
   pluginSection,
   isNavLoading,
   limitedAccessDevToolsForUsers,
@@ -209,7 +206,6 @@ export const AppsSidebarView = ({
   const { pluginGroup, activePluginItemId } = usePluginNavGroup({
     section: pluginSection,
     items: articleNavigationItems,
-    dispatchMessage,
   });
 
   const navGroups = useMemo(
@@ -414,7 +410,6 @@ type AppsSidebarConnectedProps = AppsSidebarProps & {
   toggleArticleOpen?: () => void;
   articleButtonItems?: AppsPluginsItems | null;
   articleNavigationItems?: PluginNavigationItems | null;
-  dispatchMessage?: PluginStore["dispatchMessage"];
   limitedAccessDevToolsForUsers?: boolean;
 };
 
@@ -456,7 +451,6 @@ export default inject<TStore>(
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     articleButtonItems: pluginStore?.articleButtonItemsList,
     articleNavigationItems: pluginStore?.articleNavigationItemsList,
-    dispatchMessage: pluginStore?.dispatchMessage,
     limitedAccessDevToolsForUsers: settingsStore.limitedAccessDevToolsForUsers,
   }),
 )(observer(AppsSidebar));

@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Starten Sie einen KI-Chat, um Fragen zu stellen, Dokumente zusammenzufassen, Texte zu erzeugen und Hilfe bei Ihrer Arbeit zu bekommen – direkt in {{sectionName}}.",
+  "TourAiAssistantTitle": "Ihr KI-Assistent",
+  "TourBringFiles": "Laden Sie Dateien von Ihrem Computer hoch oder ziehen Sie sie einfach an eine beliebige Stelle in diesem Fenster.",
+  "TourBringFilesTitle": "Bringen Sie Ihre Dateien mit",
+  "TourCreateAnything": "Erstellen Sie Dokumente, Tabellen, Präsentationen und PDF-Formulare direkt im Browser – ganz ohne zusätzliche Software.",
+  "TourCreateAnythingTitle": "Erstellen Sie alles",
+  "TourFindFast": "Suchen Sie nach Namen, filtern Sie nach Typ oder Autor, sortieren Sie die Liste und wechseln Sie zwischen Listen- und Kachelansicht.",
+  "TourFindFastTitle": "Finden Sie alles im Nu",
+  "TourPlacesFavorites": "{{sectionName}} – mit Sternchen markierte Dateien.",
+  "TourPlacesRecent": "{{sectionName}} – woran Sie zuletzt gearbeitet haben.",
+  "TourPlacesShared": "{{sectionName}} – Dateien, die andere für Sie freigegeben haben.",
+  "TourPlacesTitle": "Alles an seinem Platz",
+  "TourPlacesTrash": "{{sectionName}} – gelöschte Dateien, die Sie noch wiederherstellen können.",
+  "TourShare": "Fahren Sie mit der Maus über eine Datei, um die Schnellaktionen zu sehen. Klicken Sie auf das Freigabesymbol, um Ihren Portal-Kontakten Zugriff mit unterschiedlichen Berechtigungsstufen zu geben – oder erstellen Sie einen externen Link für alle anderen.",
+  "TourSharedAccess": "{{sharedBy}} sagt, von wem die Datei kommt, {{accessLevel}} sagt, was Sie damit tun dürfen – ansehen, kommentieren oder bearbeiten. Nur der Besitzer kann das ändern.",
+  "TourSharedAccessTitle": "Wer sie freigegeben hat und was Sie tun können",
+  "TourSharedEmpty": "Es wurde noch nichts für Sie freigegeben. Dateien und Ordner erscheinen hier, sobald Ihnen jemand Zugriff darauf gibt.",
+  "TourSharedEmptyTitle": "Ihre Liste ist vorerst leer",
+  "TourSharedList": "Alles, wozu andere Ihnen Zugriff geben, landet in {{sectionName}}. Öffnen Sie eine Datei, um im Browser daran zu arbeiten – das Original bleibt, wo es ist, sodass alle immer dieselbe Version sehen.",
+  "TourSharedListTitle": "Für Sie freigegeben",
+  "TourShareTitle": "Freigeben und zusammenarbeiten"
+}

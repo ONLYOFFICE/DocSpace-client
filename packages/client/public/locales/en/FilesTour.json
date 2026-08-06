@@ -13,11 +13,11 @@
   "TourPlacesTitle": "Everything in its place",
   "TourPlacesTrash": "{{sectionName}} — deleted files you can still restore.",
   "TourShare": "Hover over any file to see quick actions. Click the share icon to grant access to your portal contacts with different permission levels — or create an external link for anyone else.",
-  "TourShareTitle": "Share and collaborate",
   "TourSharedAccess": "{{sharedBy}} says who the file came from, {{accessLevel}} says what you can do with it — view, comment or edit. Only the owner can change that.",
   "TourSharedAccessTitle": "Who shared it, and what you can do",
   "TourSharedEmpty": "Nothing has been shared with you yet. Files and folders will show up here as soon as someone gives you access to them.",
   "TourSharedEmptyTitle": "Your list is empty for now",
   "TourSharedList": "Everything other people give you access to lands in {{sectionName}}. Open a file to work on it in your browser — the original stays where it is, so everyone always sees the same version.",
-  "TourSharedListTitle": "Shared with you"
+  "TourSharedListTitle": "Shared with you",
+  "TourShareTitle": "Share and collaborate"
 }

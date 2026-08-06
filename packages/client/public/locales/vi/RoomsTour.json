@@ -1,0 +1,16 @@
+{
+  "RoomsCreateFirst": "Chọn một loại, mời những người bạn cùng làm việc, rồi thả tệp của bạn vào. Chỉ mất một phút — và mọi thứ bạn vừa xem sẽ bắt đầu chạy trên chính tài liệu của bạn.",
+  "RoomsCreateFirstTitle": "Giờ hãy làm của riêng bạn",
+  "RoomsEmpty": "Những phòng bạn vừa xem chỉ là bản xem trước. Các phòng mà người khác mời bạn vào sẽ hiện trong danh sách này, và mọi thứ vừa được giới thiệu đều hoạt động y như vậy trong đó.",
+  "RoomsEmptyTitle": "Danh sách của bạn hiện đang trống",
+  "RoomsGroups": "Sắp xếp phòng theo những đặc điểm cụ thể để nhanh chóng tìm ra thứ bạn cần. Tạo nhóm và chuyển qua lại giữa chúng ngay phía trên danh sách.",
+  "RoomsGroupsTitle": "Nhóm các phòng của bạn",
+  "RoomsMembers": "Mỗi phòng đều có danh sách thành viên trong Bảng thông tin. Thêm các liên hệ trong cổng thông tin và đặt vai trò cho từng thành viên — từ chỉ xem tệp đến quản lý toàn bộ phòng.",
+  "RoomsMembersTitle": "Làm việc cùng nhau",
+  "RoomsPlaces": "{{recent}}, {{favorites}} và {{trash}} tập hợp tệp từ các phòng của bạn: mới mở gần đây, đã gắn sao và đã xóa — loại cuối vẫn có thể khôi phục. {{templates}} — các mẫu phòng của bạn. {{archive}} — những phòng bạn không còn làm việc nữa, khôi phục được bất cứ lúc nào.",
+  "RoomsPlacesTitle": "Mọi thứ đúng chỗ của nó",
+  "RoomsTemplates": "Biến bất kỳ phòng nào thành mẫu — thiết lập, cấu trúc và tệp của nó đều được lưu lại. Tạo phòng mới từ mẫu chỉ bằng một cú nhấp, việc còn lại chỉ là thêm thành viên.",
+  "RoomsTemplatesTitle": "Dùng lại thứ đã hiệu quả",
+  "RoomsTypes": "{{collaboration}} cho làm việc nhóm, {{vdr}} cho chia sẻ tệp an toàn, {{publicRoom}} cho truy cập từ bên ngoài, {{custom}} cho các kịch bản riêng của bạn.",
+  "RoomsTypesTitle": "Một phòng cho mọi nhiệm vụ"
+}

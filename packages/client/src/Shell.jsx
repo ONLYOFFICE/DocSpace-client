@@ -141,6 +141,8 @@ const Shell = ({ page = "home", ...rest }) => {
     isRoomAdmin,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
+    fetchWalletBalance,
+    setWalletLowBalance,
     agentEntityId,
     isInsideAgentRoom,
     getAgentRoomId,
@@ -252,6 +254,10 @@ const Shell = ({ page = "home", ...rest }) => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-ai-config",
     });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "wallet",
+    });
   }, []);
 
   useEffect(() => {
@@ -350,6 +356,34 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper?.off(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
     };
   }, [getAIConfig]);
+
+  useEffect(() => {
+    const handleWalletLowBalance = async () => {
+      await fetchWalletBalance?.(true);
+
+      setWalletLowBalance?.(true);
+    };
+
+    SocketHelper?.on(SocketEvents.WalletLowBalance, handleWalletLowBalance);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.WalletLowBalance, handleWalletLowBalance);
+    };
+  }, [setWalletLowBalance, fetchWalletBalance]);
+
+  useEffect(() => {
+    const handleTopUpWallet = async () => {
+      setWalletLowBalance?.(false);
+
+      await fetchWalletBalance?.(true);
+    };
+
+    SocketHelper?.on(SocketEvents.TopUpWallet, handleTopUpWallet);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.TopUpWallet, handleTopUpWallet);
+    };
+  }, [setWalletLowBalance]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -870,6 +904,8 @@ const ShellWrapper = inject(
       loadBaseInfo: async () => {
         await init(false, i18n);
 
+        if (settingsStore.walletLowBalance) paymentStore.fetchWalletBalance();
+
         setModuleInfo(config.homepage, "home");
         setProductVersion(config.version);
 
@@ -919,6 +955,8 @@ const ShellWrapper = inject(
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
       isAIReady: paymentStore.isAIReady,
+      fetchWalletBalance: paymentStore.fetchWalletBalance,
+      setWalletLowBalance: settingsStore.setWalletLowBalance,
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
       selectedRoomType: selectedFolderStore.roomType,
@@ -976,3 +1014,4 @@ const Root = () => (
 );
 
 export default Root;
+

@@ -213,6 +213,8 @@ export type TSettings = {
   externalDbEnabled: boolean;
   licenseAgreementsUrl?: string;
   aiEnabled?: boolean;
+  /** True when the wallet is running low; the socket event may have been missed. */
+  walletLowBalance?: boolean;
 };
 
 export type TCustomSchema = {

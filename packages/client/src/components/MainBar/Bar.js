@@ -49,6 +49,8 @@ import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
+
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
 
@@ -92,6 +94,12 @@ const Bar = (props) => {
     isStorageQuotaLimit,
     isRoomsTariffAlmostLimit,
     isRoomsTariffLimit,
+    walletLowBalance,
+    formatWalletCurrency,
+    isPayer,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
+    language,
   } = props;
 
   const navigate = useNavigate();
@@ -111,8 +119,10 @@ const Bar = (props) => {
     roomsAndStorageTariffLimit: false,
     confirmEmail: false,
     personalUserQuota: false,
+    walletLowBalance: false,
   });
 
+  const [isTopUpVisible, setIsTopUpVisible] = useState(false);
   const [htmlLink, setHtmlLink] = useState();
   const [campaigns, setCampaigns] = useState();
 
@@ -178,6 +188,9 @@ const Bar = (props) => {
       case QuotaBarTypes.PersonalUserQuota:
         setBarVisible((value) => ({ ...value, personalUserQuota: false }));
         break;
+      case QuotaBarTypes.WalletLowBalance:
+        setBarVisible((value) => ({ ...value, walletLowBalance: false }));
+        break;
       default:
         break;
     }
@@ -197,6 +210,11 @@ const Bar = (props) => {
   };
 
   const onClickQuota = (type, e) => {
+    if (type === QuotaBarTypes.WalletLowBalance) {
+      setIsTopUpVisible(true);
+      return;
+    }
+
     type === QuotaBarTypes.StorageQuota ||
     type === QuotaBarTypes.PersonalUserQuota
       ? onClickTenantCustomQuota(type)
@@ -282,6 +300,9 @@ const Bar = (props) => {
       if (!closed.includes(QuotaBarTypes.PersonalUserQuota)) {
         setBarVisible((value) => ({ ...value, personalUserQuota: true }));
       }
+      if (!closed.includes(QuotaBarTypes.WalletLowBalance)) {
+        setBarVisible((value) => ({ ...value, walletLowBalance: true }));
+      }
     } else {
       setBarVisible({
         roomsTariff: isAdmin || isRoomAdmin,
@@ -298,6 +319,7 @@ const Bar = (props) => {
         storageAndUserTariffLimit: isAdmin || isRoomAdmin,
         confirmEmail: true,
         personalUserQuota: isAdmin || isUser || isRoomAdmin,
+        walletLowBalance: true,
       });
     }
 
@@ -328,6 +350,14 @@ const Bar = (props) => {
   }, [t]);
 
   const getCurrentBar = () => {
+    if (walletLowBalance && barVisible.walletLowBalance) {
+      return {
+        type: QuotaBarTypes.WalletLowBalance,
+        maxValue: null,
+        currentValue: formatWalletCurrency?.(),
+      };
+    }
+
     if (
       isRoomsTariffAlmostLimit &&
       isStorageTariffAlmostLimit &&
@@ -500,16 +530,31 @@ const Bar = (props) => {
     setMaintenanceExist(true);
   };
 
-  return showQuotasBar ? (
-    <QuotasBar
-      currentColorScheme={currentColorScheme}
-      {...currentBar}
-      onClick={onClickQuota}
-      onClose={onCloseQuota}
-      onClickTenantCustomQuota={onClickTenantCustomQuota}
-      onLoad={onLoad}
-      isAdmin={isAdmin}
+  const topUpDialog = isTopUpVisible ? (
+    <ClientSimpleTopUpDialog
+      visible={isTopUpVisible}
+      onClose={() => setIsTopUpVisible(false)}
+      language={language}
+      service=""
     />
+  ) : null;
+
+  return showQuotasBar ? (
+    <>
+      <QuotasBar
+        currentColorScheme={currentColorScheme}
+        {...currentBar}
+        onClick={onClickQuota}
+        onClose={onCloseQuota}
+        onClickTenantCustomQuota={onClickTenantCustomQuota}
+        onLoad={onLoad}
+        isAdmin={isAdmin}
+        isPayer={isPayer}
+        walletCustomerEmail={walletCustomerEmail}
+        walletCustomerDisplayName={walletCustomerDisplayName}
+      />
+      {topUpDialog}
+    </>
   ) : withActivationBar && barVisible.confirmEmail && tReady ? (
     <ConfirmEmailBar
       userEmail={userEmail}
@@ -529,7 +574,15 @@ const Bar = (props) => {
 };
 
 export default inject(
-  ({ settingsStore, profileActionsStore, userStore, currentQuotaStore }) => {
+  ({
+    settingsStore,
+    profileActionsStore,
+    userStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+    paymentStore,
+    authStore,
+  }) => {
     const { user, withActivationBar, sendActivationLink } = userStore;
 
     const { onPaymentsClick } = profileActionsStore;
@@ -557,6 +610,12 @@ export default inject(
     } = currentQuotaStore;
 
     const { currentColorScheme, setMainBarVisible } = settingsStore;
+
+    const { formatWalletCurrency, isPayer } = paymentStore;
+    const { walletLowBalance } = settingsStore;
+    const { language } = authStore;
+    const { walletCustomerEmail, walletCustomerInfo } =
+      currentTariffStatusStore;
 
     return {
       isAdmin: user?.isAdmin || user?.isOwner,
@@ -591,6 +650,14 @@ export default inject(
       isStorageQuotaLimit,
       isRoomsTariffAlmostLimit,
       isRoomsTariffLimit,
+
+      walletLowBalance,
+      language,
+      formatWalletCurrency,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName: walletCustomerInfo?.displayName,
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));
+

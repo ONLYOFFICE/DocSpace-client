@@ -3,16 +3,17 @@
   "content": "Find a room in the archive",
   "content_en_sha1_hash": "ebf8dfed789cb1499a381ff914377a6345ed02bb",
   "created_at": "2026-08-04T09:58:55.197Z",
-  "updated_at": "2026-08-04T09:58:56.424Z",
+  "updated_at": "2026-08-05T17:03:44.298Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option that triggers a search within the room archive.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:03:44.298Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 496,
+      "line_number": 531,
       "context": "{\n name: t(\"AiSuggestions:RoomsArchiveShowRoomArchive\"),\n prompt: t(\"AiSuggestions:RoomsArchiveShowRoomArchivePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsArchiveFindARoomInTheArchive\"),\n prompt: t(\"AiSuggestions:RoomsArchiveFindARoomInTheArchivePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsArchiveRestoreARoomFromTheArchive\"),\n prompt: t(\"AiSuggestions:RoomsArchiveRestoreARoomFromTheArchivePrompt\"),",
       "module": "/packages/client"
     }

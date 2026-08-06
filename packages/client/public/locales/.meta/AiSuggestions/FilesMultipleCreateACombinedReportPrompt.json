@@ -3,16 +3,17 @@
   "content": "Create one structured report from the selected files, remove repeated information, and identify the source of key facts. If this information is not provided, ask me for the audience, scope, reporting period, and preferred output format.",
   "content_en_sha1_hash": "4b6d0d0cba0048f9cb970948f26df94bf7c46cfa",
   "created_at": "2026-08-04T09:58:55.123Z",
-  "updated_at": "2026-08-04T09:58:56.416Z",
+  "updated_at": "2026-08-05T18:09:00.442Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt for the AI feature used when generating a combined report from multiple selected files, detailing how to process data and what follow-up information to request.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:09:00.442Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 373,
+      "line_number": 408,
       "context": "name: t(\"AiSuggestions:FilesMultipleCreateAPresentation\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateAPresentationPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCreateACombinedReport\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateACombinedReportPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCollectDataIntoATable\"),\n prompt: t(\"AiSuggestions:FilesMultipleCollectDataIntoATablePrompt\"),\n },",
       "module": "/packages/client"
     }

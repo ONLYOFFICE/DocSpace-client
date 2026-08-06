@@ -3,16 +3,17 @@
   "content": "Compare my favorite Form Spaces by purpose, forms, participants, access, and collection status. If this information is not provided, ask me for the items, groups, or periods to compare and the comparison criteria.",
   "content_en_sha1_hash": "3197d843d1b0e6603778a0878b5815d8deee9ac4",
   "created_at": "2026-08-04T09:58:55.163Z",
-  "updated_at": "2026-08-04T09:58:56.454Z",
+  "updated_at": "2026-08-05T17:33:08.168Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "An instruction prompt for the AI assistant used when selecting the option to compare favorite Form Spaces, defining the specific comparison criteria and fallback instructions.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:33:08.168Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 701,
+      "line_number": 736,
       "context": "name: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesCreateASimilarSpace\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCreateASimilarSpacePrompt\"),\n requires: \"roomAdmin\",",
       "module": "/packages/client"
     }

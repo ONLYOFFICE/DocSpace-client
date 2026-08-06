@@ -3,16 +3,17 @@
   "content": "Find empty folders",
   "content_en_sha1_hash": "fce839d7602d162bb23127ef8a0415804e367387",
   "created_at": "2026-08-04T09:58:55.115Z",
-  "updated_at": "2026-08-04T09:58:56.410Z",
+  "updated_at": "2026-08-05T18:15:41.381Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option that triggers a search for folders containing no files within the current directory.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:15:41.381Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 330,
+      "line_number": 365,
       "context": "{\n name: t(\"AiSuggestions:FilesFolderOrganizeThisFolder\"),\n prompt: t(\"AiSuggestions:FilesFolderOrganizeThisFolderPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFolderFindEmptyFolders\"),\n prompt: t(\"AiSuggestions:FilesFolderFindEmptyFoldersPrompt\"),\n },\n ],\n \n filesSelectedFile: [",
       "module": "/packages/client"
     }

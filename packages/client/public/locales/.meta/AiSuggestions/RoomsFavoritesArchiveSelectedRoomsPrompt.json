@@ -3,16 +3,17 @@
   "content": "Archive selected rooms across my favorite rooms only after showing the impact and requesting confirmation. If this information is not provided, ask me for the exact items and confirmation before any destructive action.",
   "content_en_sha1_hash": "f7cf7bb56ed69ecc16da78e9154b10761e40c006",
   "created_at": "2026-08-04T09:58:55.201Z",
-  "updated_at": "2026-08-04T09:58:56.424Z",
+  "updated_at": "2026-08-05T17:01:06.202Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "An instruction prompt for the AI assistant defining the specific constraints and required confirmation steps when performing the task of archiving selected rooms in favorites.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:01:06.202Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 457,
+      "line_number": 492,
       "context": "name: t(\"AiSuggestions:RoomsFavoritesFindAFavoriteRoom\"),\n prompt: t(\"AiSuggestions:RoomsFavoritesFindAFavoriteRoomPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsFavoritesArchiveSelectedRooms\"),\n prompt: t(\"AiSuggestions:RoomsFavoritesArchiveSelectedRoomsPrompt\"),\n requires: \"roomAdmin\",\n },\n ],\n \n // +",
       "module": "/packages/client"
     }

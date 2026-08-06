@@ -3,7 +3,7 @@
   "content": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there.",
   "content_en_sha1_hash": "c0e812cbda982e696e4ea4d91c8c7d55b6033146",
   "created_at": "2025-05-26T07:15:48.804Z",
-  "updated_at": "2026-05-15T14:00:06.960Z",
+  "updated_at": "2026-08-06T08:04:20.023Z",
   "comment": {
     "text": "This is a descriptive text that explains how to save a backup to a third-party cloud storage service. It appears below the option to select a third-party account for backup.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 604,
+      "line_number": 680,
       "context": "testId=\"third_party_resource_radio_button\"\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n newPath={newPath}\n accounts={accounts}",
       "module": "/packages/shared"
     }

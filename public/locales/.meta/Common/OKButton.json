@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-07-28T07:30:59.816Z",
+  "updated_at": "2026-08-06T08:04:19.869Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
-      "line_number": 200,
+      "line_number": 158,
       "context": "testId=\"activate-ai-dialog-cancel-button\"\n />\n </>\n ) : (\n <Button\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"activate-ai-dialog-ok-button\"\n />",
       "module": "/packages/client"
     },

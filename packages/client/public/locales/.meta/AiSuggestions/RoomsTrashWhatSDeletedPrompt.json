@@ -3,16 +3,17 @@
   "content": "Show rooms currently in Trash, including their type, owner, and deletion date when available. If this information is not provided, ask me for an optional owner, type, or date range to narrow the list.",
   "content_en_sha1_hash": "0e030549d0838732a25925f2031e75d875dff154",
   "created_at": "2026-08-04T09:58:55.223Z",
-  "updated_at": "2026-08-04T09:58:56.425Z",
+  "updated_at": "2026-08-05T16:41:09.627Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "An AI assistant instruction describing how it will list deleted rooms and handle requests for specific filters like owner, type, or date range.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:41:09.627Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 515,
+      "line_number": 550,
       "context": "// +\n roomsTrash: [\n {\n name: t(\"AiSuggestions:RoomsTrashWhatSDeleted\"),\n prompt: t(\"AiSuggestions:RoomsTrashWhatSDeletedPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTrashFindADeletedFileOrFolder\"),\n prompt: t(\"AiSuggestions:RoomsTrashFindADeletedFileOrFolderPrompt\"),",
       "module": "/packages/client"
     }

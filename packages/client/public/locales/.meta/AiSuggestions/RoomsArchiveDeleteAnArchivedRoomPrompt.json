@@ -3,16 +3,17 @@
   "content": "Delete an archived room in the room archive only after showing the impact and requesting confirmation. If this information is not provided, ask me for the exact items and confirmation before any destructive action.",
   "content_en_sha1_hash": "037eb048edb39f58500b307f93851877912bfba0",
   "created_at": "2026-08-04T09:58:55.196Z",
-  "updated_at": "2026-08-04T09:58:56.425Z",
+  "updated_at": "2026-08-05T17:04:05.440Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "An instruction for the AI assistant defining the mandatory procedure and safety checks required when deleting rooms from the archive.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:04:05.440Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 506,
+      "line_number": 541,
       "context": "prompt: t(\"AiSuggestions:RoomsArchiveRestoreARoomFromTheArchivePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsArchiveDeleteAnArchivedRoom\"),\n prompt: t(\"AiSuggestions:RoomsArchiveDeleteAnArchivedRoomPrompt\"),\n requires: \"roomAdmin\",\n },\n ],\n \n // +",
       "module": "/packages/client"
     }

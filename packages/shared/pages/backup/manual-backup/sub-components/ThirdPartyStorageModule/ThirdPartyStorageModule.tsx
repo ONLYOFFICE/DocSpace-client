@@ -78,6 +78,9 @@ interface ThirdPartyStorageModuleProps {
   buttonSize?: ButtonSize;
   isBackupPaid?: boolean;
   isFreeBackupsLimitReached?: boolean;
+  copyButtonLabel?: string;
+  isToppingUp?: boolean;
+  isCopyBlocked?: boolean;
   thirdPartyStorage: SelectedStorageType[];
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
@@ -122,6 +125,9 @@ const ThirdPartyStorageModule = ({
   isThirdPartyAvailable,
   isBackupPaid,
   isFreeBackupsLimitReached,
+  copyButtonLabel,
+  isToppingUp,
+  isCopyBlocked,
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -189,6 +195,9 @@ const ThirdPartyStorageModule = ({
     selectedId,
     buttonSize,
     onMakeCopyIntoStorage,
+    copyButtonLabel,
+    isToppingUp,
+    isCopyBlocked,
     t,
     isValidForm,
     isNeedFilePath,
@@ -281,7 +290,9 @@ const ThirdPartyStorageModule = ({
           className={classNames(styles.backupCombo, "backup_combo")}
           advancedOptions={advancedOptions}
           selectedOption={{ key: 0, label: selectedStorageTitle }}
-          isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
+          isDisabled={
+            !isMaxProgress || isStartCopy || !thirdPartyStorage || isCopyBlocked
+          }
           dataTestId="backup_storage_combobox"
           dropDownTestId="backup_storage_dropdown"
         />

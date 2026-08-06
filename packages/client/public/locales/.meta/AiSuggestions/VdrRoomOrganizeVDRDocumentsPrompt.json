@@ -3,16 +3,17 @@
   "content": "Organize the documents in this VDR into a clear folder structure. Ask how they should be grouped or suggest a structure, then confirm before moving files.",
   "content_en_sha1_hash": "0dd63952af856e662a7f76131e79347d74057757",
   "created_at": "2026-08-04T09:58:55.229Z",
-  "updated_at": "2026-08-04T09:58:56.438Z",
+  "updated_at": "2026-08-05T16:35:53.502Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "AI suggestion prompt instructing the AI to organize documents in a VDR into folders by proposing or asking for grouping criteria.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:35:53.502Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 607,
+      "line_number": 642,
       "context": "name: t(\"AiSuggestions:VdrRoomFindSensitiveData\"),\n prompt: t(\"AiSuggestions:VdrRoomFindSensitiveDataPrompt\"),\n },\n {\n name: t(\"AiSuggestions:VdrRoomOrganizeVDRDocuments\"),\n prompt: t(\"AiSuggestions:VdrRoomOrganizeVDRDocumentsPrompt\"),\n requires: \"create\",\n },\n ...insideRoom,\n ],",
       "module": "/packages/client"
     }

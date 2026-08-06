@@ -51,6 +51,17 @@
   }
 }
 
+.payerWarning {
+  display: flex;
+  min-width: 0;
+  flex: 0 1 auto;
+  margin-inline-start: 12px;
+
+  > div {
+    margin-bottom: 0;
+  }
+}
+
 .docsConnectTrialBadge {
   display: inline-flex;
   align-items: center;

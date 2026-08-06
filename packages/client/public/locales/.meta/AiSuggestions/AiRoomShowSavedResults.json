@@ -3,16 +3,17 @@
   "content": "Show saved results",
   "content_en_sha1_hash": "c9de44fd40cb4fa0c65ddb06858b856a7c9633a7",
   "created_at": "2026-08-04T09:58:55.098Z",
-  "updated_at": "2026-08-04T09:58:56.434Z",
+  "updated_at": "2026-08-05T18:28:21.809Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label within an AI suggestions list that triggers the display of previously saved results.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:28:21.809Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 585,
+      "line_number": 620,
       "context": "name: t(\"AiSuggestions:AiRoomTranslateADocument\"),\n prompt: t(\"AiSuggestions:AiRoomTranslateADocumentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomShowSavedResults\"),\n prompt: t(\"AiSuggestions:AiRoomShowSavedResultsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomAddToTheKnowledgeBase\"),\n prompt: t(\"AiSuggestions:AiRoomAddToTheKnowledgeBasePrompt\"),",
       "module": "/packages/client"
     }

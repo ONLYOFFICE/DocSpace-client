@@ -3,7 +3,7 @@
   "content": "Available credits",
   "content_en_sha1_hash": "18001da8d15dc257d0536ba486f2b5d8401f3591",
   "created_at": "2026-04-10T13:53:44.792Z",
-  "updated_at": "2026-08-04T09:58:56.503Z",
+  "updated_at": "2026-08-06T11:20:26.686Z",
   "comment": {
     "text": "This is a label for a numerical value, indicating the remaining balance of AI service credits. It appears within a balance card on the AI tools page.",
     "is_auto": true,
@@ -18,12 +18,6 @@
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 302,
-      "context": "<WalletIcon />\n </span>\n <div className={styles.walletText}>\n <Text className={styles.walletTitle}>{t(\"Common:Wallet\")}</Text>\n <Text className={styles.walletCredits}>\n {t(\"Common:AvailableCredits\")}:{\" \"}\n <span className={styles.creditsValue}>\n {formatCurrency(credits, 2)}\n </span>\n </Text>\n </div>",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
       "line_number": 230,
       "context": ") : null}\n \n <div className={styles.summaryGrid}>\n <div className={`${styles.summaryCard} ${styles.summaryCardBalance}`}>\n <BalanceAmount\n title={t(\"AvailableCredits\")}\n titleFontSize=\"14px\"\n mainFontSize=\"28px\"\n fractionFontSize=\"18px\"\n showRefresh={!isNotPaidPeriod && isCardLinkedToPortal}\n isRefreshing={isRefreshing || isAutoSpinning}",
@@ -31,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 440,
+      "line_number": 666,
       "context": "amount: formatCurrency(availableCredits),\n })}\n </Text>\n ) : (\n <Text fontSize=\"13px\" className={styles.secondaryText}>\n {t(\"Common:AvailableCredits\")}{\" \"}\n <Text\n as=\"span\"\n fontSize=\"13px\"\n fontWeight={600}\n className={styles.accent}",
       "module": "/packages/client"
     }

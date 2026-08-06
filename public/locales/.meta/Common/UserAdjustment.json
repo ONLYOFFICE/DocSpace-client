@@ -3,7 +3,7 @@
   "content": "User adjustment, {{fromCount}} → {{toCount}}",
   "content_en_sha1_hash": "1c6ecbd5783915bcdcbb03104320201172e5c2d6",
   "created_at": "2026-07-27T13:07:41.444Z",
-  "updated_at": "2026-08-01T15:33:49.799Z",
+  "updated_at": "2026-08-05T16:32:00.368Z",
   "comment": {
     "text": "Tooltip text indicating a scheduled change in user count, where {{fromCount}} represents the current number of users and {{toCount}} is the new amount.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 479,
-      "context": "<>\n {isCancellation || usersAdjusting ? (\n <Text fontWeight={600} fontSize=\"12px\">\n {isCancellation\n ? t(\"SubscriptionCancellation\")\n : t(\"UserAdjustment\", {\n fromCount: docsConnectState?.tariffUsers ?? 0,\n toCount: scheduledUsers,\n })}\n </Text>\n ) : null}",
+      "line_number": 490,
+      "context": "if (devPackDisabling) titles.push(t(\"DevPackWillBeDisabled\"));\n \n if (usersAdjusting)\n titles.push(\n t(\"UserAdjustment\", {\n fromCount: docsConnectState?.tariffUsers ?? 0,\n toCount: scheduledUsers,\n }),\n );",
       "module": "/libs/ui-kit"
     }
   ],

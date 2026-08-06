@@ -35,7 +35,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { Trans, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
@@ -43,7 +43,6 @@ import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@docspace/ui-kit/components";
-import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import AIFeaturesDialog from "@docspace/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -57,10 +56,7 @@ const KnowledgeDisabledContainer = (props) => {
     isFrame,
     isAdmin,
     standalone,
-    isPayer,
     isCardLinkedToPortal,
-    walletCustomerEmail,
-    walletCustomerDisplayName,
     enableAIService,
     getAIConfig,
     refreshPaymentInfo,
@@ -108,8 +104,6 @@ const KnowledgeDisabledContainer = (props) => {
           aiAgents: t("Common:AIAgents"),
         });
   } else if (isAdmin) {
-    const payerLabel = walletCustomerDisplayName || walletCustomerEmail;
-
     titleRoomNoAccess = t("Common:EmptyAIAgentsNotActiveYetTitle");
     descriptionRoomNoAccess = (
       <>
@@ -119,31 +113,6 @@ const KnowledgeDisabledContainer = (props) => {
         <Text as="span" style={{ display: "block", marginTop: "8px" }}>
           {t("Common:EmptyAIAgentsNotActiveYetDescriptionLine2")}
         </Text>
-        {!isPayer && payerLabel ? (
-          <Text as="span" style={{ display: "block", marginTop: "8px" }}>
-            <Trans
-              i18nKey="Common:EmptyAIAgentsNotActiveYetContactPayer"
-              values={{ payerContact: payerLabel }}
-              components={{
-                1:
-                  walletCustomerEmail && !walletCustomerDisplayName ? (
-                    <Link
-                      key="knowledge-payer-link"
-                      type={LinkType.action}
-                      href={`mailto:${walletCustomerEmail}`}
-                      color="accent"
-                    />
-                  ) : (
-                    <Text
-                      key="knowledge-payer-name"
-                      as="span"
-                      fontWeight={600}
-                    />
-                  ),
-              }}
-            />
-          </Text>
-        ) : null}
       </>
     );
   } else {
@@ -177,8 +146,6 @@ const KnowledgeDisabledContainer = (props) => {
           title: t("Common:GoToSettings"),
         },
       ];
-
-    if (isCardLinkedToPortal && !isPayer) return [];
 
     const activateOrTopUpAI = isCardLinkedToPortal
       ? {
@@ -239,30 +206,19 @@ const KnowledgeDisabledContainer = (props) => {
 };
 
 export default inject(
-  ({
-    settingsStore,
-    userStore,
-    aiRoomStore,
-    paymentStore,
-    currentTariffStatusStore,
-    authStore,
-  }) => {
+  ({ settingsStore, userStore, aiRoomStore, paymentStore, authStore }) => {
     const { isFrame, theme, standalone, getAIConfig } = settingsStore;
     return {
       theme,
       isFrame,
       standalone,
       isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
-      isPayer: paymentStore?.isPayer,
       isCardLinkedToPortal: paymentStore?.isCardLinkedToPortal,
       isCardMissingOrInactive: paymentStore?.isCardMissingOrInactive,
       enableAIService: paymentStore?.enableAIService,
       getAIConfig,
       refreshPaymentInfo: authStore?.getPaymentInfo,
       language: authStore?.language ?? "en",
-      walletCustomerEmail: currentTariffStatusStore?.walletCustomerEmail,
-      walletCustomerDisplayName:
-        currentTariffStatusStore?.walletCustomerInfo?.displayName,
       setKnowledgeId: aiRoomStore.setKnowledgeId,
       setCurrentTab: aiRoomStore.setCurrentTab,
     };

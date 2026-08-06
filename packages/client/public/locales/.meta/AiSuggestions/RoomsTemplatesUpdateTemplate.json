@@ -3,16 +3,17 @@
   "content": "Update template",
   "content_en_sha1_hash": "5e0a5f19ce31d3e0fe09c9a784f3f0b7dd6ba9b9",
   "created_at": "2026-08-04T09:58:55.218Z",
-  "updated_at": "2026-08-04T09:58:56.424Z",
+  "updated_at": "2026-08-05T16:44:58.410Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Action label in the AI suggestions menu used to initiate the modification of an existing room template.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:44:58.410Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 478,
+      "line_number": 513,
       "context": "{\n name: t(\"AiSuggestions:RoomsTemplatesExplainThisTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesExplainThisTemplatePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsTemplatesUpdateTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesUpdateTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTemplatesSaveAsTemplate\"),",
       "module": "/packages/client"
     }

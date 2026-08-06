@@ -3,16 +3,17 @@
   "content": "Propose how to organize files from the current Recent list into folders without moving anything yet. If this information is not provided, ask me for the preferred grouping rules and confirmation before moving anything.",
   "content_en_sha1_hash": "7c6057cd502e3d64e1932d2c08b1b503d328b122",
   "created_at": "2026-08-04T09:58:55.128Z",
-  "updated_at": "2026-08-04T09:58:56.407Z",
+  "updated_at": "2026-08-05T18:04:16.887Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt for an AI agent that defines its behavior when processing requests to organize recent files into folders, specifically regarding proposing a plan or requesting grouping rules.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:04:16.887Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 265,
+      "line_number": 300,
       "context": "name: t(\"AiSuggestions:FilesRecentFindRecentFilesByTopic\"),\n prompt: t(\"AiSuggestions:FilesRecentFindRecentFilesByTopicPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesRecentOrganizeRecentFiles\"),\n prompt: t(\"AiSuggestions:FilesRecentOrganizeRecentFilesPrompt\"),\n },\n ],\n \n // +\n filesFavorites: [",
       "module": "/packages/client"
     }

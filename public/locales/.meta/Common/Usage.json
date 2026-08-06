@@ -3,7 +3,7 @@
   "content": "Usage",
   "content_en_sha1_hash": "0bb18642b70b9f8a9c12ccf39487328f306b8e19",
   "created_at": "2026-04-10T13:53:45.857Z",
-  "updated_at": "2026-07-27T13:07:50.823Z",
+  "updated_at": "2026-08-06T11:20:26.712Z",
   "comment": {
     "text": "Tab label. This tab displays the user's transaction history and usage details for AI tools.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 56,
+      "line_number": 58,
       "context": "const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/billing/wallet\")) return t(\"Common:Wallet\");\n if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))\n return t(\"Common:AIServices\");\n if (pathname.includes(\"/billing/addons/ai-search\"))\n return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");",
       "module": "/packages/client"
     }

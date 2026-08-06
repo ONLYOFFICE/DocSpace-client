@@ -68,10 +68,7 @@ import { CategoryType } from "@docspace/shared/constants";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
-import FilesTour from "SRC_DIR/components/FilesTour";
-import RoomsTour from "SRC_DIR/components/RoomsTour";
-import FormsTour from "SRC_DIR/components/FormsTour";
-import AiAgentsTour from "SRC_DIR/components/AiAgentsTour";
+import SectionTours from "SRC_DIR/components/Tour/SectionTours";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import {
@@ -634,10 +631,7 @@ const PureHome = observer((props) => {
         <>
           <DragTooltip />
           <FilesSelectionArea />
-          <FilesTour />
-          <RoomsTour />
-          <FormsTour />
-          <AiAgentsTour />
+          <SectionTours />
         </>
       )}
       <MediaViewer />

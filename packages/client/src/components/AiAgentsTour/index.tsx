@@ -403,6 +403,14 @@ const AiAgentsTour = ({
     ? null
     : (realAiReady && "create") || (canActivateAi && "activate") || null;
 
+  // Read in the render body rather than inside the memo: a value only `useMemo`
+  // reads is a value `observer` does not track, so arming the demo would not
+  // re-render the component — and a value missing from the deps is one a cached
+  // memo never picks up even if it did. Here the demo is only ever armed on an
+  // empty list, so the `hasItems` flip that the reload brings happens to
+  // recompute this anyway; the dependency is spelled out so it does not have to.
+  const isStandIn = tourDemo.isStandingInForList;
+
   const flags = useMemo<TourStepFlags>(
     () => ({
       audience,
@@ -415,7 +423,7 @@ const AiAgentsTour = ({
       hasFavorites,
       hasTrash,
       infoPanelHooks,
-      isStandIn: tourDemo.isStandingInForList,
+      isStandIn,
       emptyScreenAction,
       demoHooks,
     }),
@@ -430,6 +438,7 @@ const AiAgentsTour = ({
       hasFavorites,
       hasTrash,
       infoPanelHooks,
+      isStandIn,
       emptyScreenAction,
       demoHooks,
     ],
@@ -456,7 +465,7 @@ const AiAgentsTour = ({
       // have actually landed. Without this the reload above and the start timer
       // race, and joyride can freeze its step list against the empty page the
       // reload is on its way to replace.
-      (!tourDemo.isStandingInForList || hasItems),
+      (!isStandIn || hasItems),
     isMobileView,
   );
 

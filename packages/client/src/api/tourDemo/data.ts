@@ -63,6 +63,17 @@ import type { TCreatedBy } from "@docspace/shared/types";
  */
 const DEMO_ID_BASE = -1000;
 
+/**
+ * How many stand-in rooms the list may hold, which is what separates the two
+ * ranges below: rooms count down from `DEMO_ID_BASE` and the things inside a
+ * room count down from `DEMO_CONTENTS_ID_BASE`, so the two only meet if a tour
+ * asks for more rooms than this. The sections ask for three.
+ */
+const DEMO_ROOM_ID_LIMIT = 100;
+
+/** Where the ids of a stand-in room's contents start, below every room id. */
+const DEMO_CONTENTS_ID_BASE = DEMO_ID_BASE - DEMO_ROOM_ID_LIMIT;
+
 /** One stand-in room: what it is, and what the list calls it. */
 export type TourDemoRoom = {
   roomType: RoomsType;
@@ -164,9 +175,9 @@ export type TourDemoConfig = {
  */
 export const DEMO_SPACE_ITEM_IDS = {
   space: DEMO_ID_BASE,
-  inProgress: DEMO_ID_BASE - 100,
-  complete: DEMO_ID_BASE - 101,
-  form: DEMO_ID_BASE - 102,
+  inProgress: DEMO_CONTENTS_ID_BASE,
+  complete: DEMO_CONTENTS_ID_BASE - 1,
+  form: DEMO_CONTENTS_ID_BASE - 2,
 } as const;
 
 /**
@@ -241,7 +252,12 @@ export function buildDemoRooms(
 ): TRoom[] {
   const now = demoTimestamp();
 
-  return (config.rooms ?? []).map(({ roomType, title }, index) => ({
+  // Past this the room ids run into the ids of the things inside a room, and
+  // the routes keyed on them would answer for the wrong one. No tour comes
+  // close — the sections ask for three — so this is a wall, not a policy.
+  const rooms = (config.rooms ?? []).slice(0, DEMO_ROOM_ID_LIMIT);
+
+  return rooms.map(({ roomType, title }, index) => ({
     id: DEMO_ID_BASE - index,
     parentId: current.id,
     rootFolderId: current.id,

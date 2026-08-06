@@ -241,6 +241,34 @@ const RoomsTour = ({
     endDemo();
   }, [roomsTourStore.isRunning, closeInfoPanel, endDemo]);
 
+  // The effect above only fires while this component is around to see the tour
+  // stop. Leaving the section takes it down instead — and the interceptors are
+  // module state, so they would outlive it and keep answering for a section the
+  // user has already walked away from, while the borrowed info panel would stay
+  // pointed at a stand-in room that no longer exists. Whatever mounts next
+  // fetches its own list, so there is nothing to reload here.
+  //
+  // `closeInfoPanelRef` keeps the current implementation reachable from a
+  // cleanup that must run on unmount and on nothing else.
+  const closeInfoPanelRef = useRef(closeInfoPanel);
+  closeInfoPanelRef.current = closeInfoPanel;
+
+  useEffect(
+    () => () => {
+      if (tourDemo.isActive) tourDemo.deactivate();
+      closeInfoPanelRef.current();
+    },
+    [],
+  );
+
+  // Read in the render body rather than inside the memo: a value only `useMemo`
+  // reads is a value `observer` does not track, so arming the demo would not
+  // re-render the component — and a value missing from the deps is one a cached
+  // memo never picks up even if it did. Here the demo is only ever armed on an
+  // empty list, so the `hasItems` flip that the reload brings happens to
+  // recompute this anyway; the dependency is spelled out so it does not have to.
+  const isDemo = tourDemo.isActive;
+
   const flags = useMemo<TourStepFlags>(
     () => ({
       isDesktop,
@@ -250,7 +278,7 @@ const RoomsTour = ({
       hasItems,
       roomsId,
       infoPanelHooks,
-      isDemo: tourDemo.isActive,
+      isDemo,
       demoHooks,
     }),
     [
@@ -261,6 +289,7 @@ const RoomsTour = ({
       hasItems,
       roomsId,
       infoPanelHooks,
+      isDemo,
       demoHooks,
     ],
   );
@@ -286,7 +315,7 @@ const RoomsTour = ({
       // have actually landed. Without this the reload above and the start
       // timer race, and joyride can freeze its step list against the empty
       // page the reload is on its way to replace.
-      (!tourDemo.isActive || hasItems),
+      (!isDemo || hasItems),
     isMobileView,
   );
 

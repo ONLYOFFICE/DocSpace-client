@@ -366,6 +366,13 @@ class SettingsStore {
 
   aiConfig: Nullable<TAIConfig> = null;
 
+  /** Comes from the settings response, so a missed socket event is recovered. */
+  walletLowBalance = false;
+
+  setWalletLowBalance = (walletLowBalance: boolean) => {
+    this.walletLowBalance = walletLowBalance;
+  };
+
   externalDbEnabled: boolean = false;
 
   constructor() {

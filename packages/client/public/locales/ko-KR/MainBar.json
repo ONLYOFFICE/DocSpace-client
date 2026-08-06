@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "제한에 도달하면 모든 사용자가 사용자 권한으로만 추가됩니다. 관리자를 더 추가하려면 <1>여기를 클릭</1>하여 요금제를 업그레이드하세요.",
   "UserTariffLimitHeader": "관리자 수 제한에 도달했습니다: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "모든 사용자가 사용자 권한으로만 추가됩니다. 관리자를 더 추가하려면 {{productName}} 관리자에게 문의하여 요금제를 업그레이드하세요.",
-  "UserTariffReachedForAdmins": "모든 사용자가 사용자 권한으로만 추가됩니다. 관리자를 더 추가하려면 <1>여기를 클릭</1>하여 요금제를 업그레이드하세요."
+  "UserTariffReachedForAdmins": "모든 사용자가 사용자 권한으로만 추가됩니다. 관리자를 더 추가하려면 <1>여기를 클릭</1>하여 요금제를 업그레이드하세요.",
+  "WalletLowBalanceContactPayer": "지불자(<1>{{payerContact}}</1>)에게 연락하여 지갑을 충전하고 유료 서비스 중단을 방지하세요.",
+  "WalletLowBalanceDescription": "유료 서비스 중단을 방지하려면 지갑을 충전하세요. <1>충전하기</1>",
+  "WalletLowBalanceHeader": "크레딧이 부족합니다: {{balance}}"
 }

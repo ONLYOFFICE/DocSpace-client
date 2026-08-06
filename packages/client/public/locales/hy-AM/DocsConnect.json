@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Օգտագործել այս խմբագրիչները {{organizationName}} {{editorsName}}-ում",
   "UserActivitySubtitle": "Հետևեք եզակի օգտատերերի ակտիվությանը",
   "UserAdjustmentLabel": "Օգտատերերի կարգավորում",
+  "UsersUponRequest": "{{count}}-ից ավելի օգտատերերի համար {{service}} բաժանորդագրությունը հասանելի է հարցման հիման վրա։",
   "ViewerUsage": "Դիտողի օգտագործում",
   "WalletInsufficient": "Հասանելի կրեդիտներ՝ {{amount}} | Անբավարար միջոցներ",
   "Wopi": "WOPI",

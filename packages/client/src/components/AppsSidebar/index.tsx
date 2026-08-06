@@ -112,6 +112,8 @@ export type AppsSidebarProps = {
   onBack?: () => void;
   /** Overrides the section "Back" button caption (secondary variant). */
   backLabel?: string;
+  /** Shows the Developer Tools banner on a secondary sidebar (hidden there by default). */
+  withDevTools?: boolean;
 };
 
 type AppsSidebarViewProps = AppsSidebarProps & {
@@ -144,6 +146,7 @@ export const AppsSidebarView = ({
   articleButtonItems,
   isNavLoading,
   limitedAccessDevToolsForUsers,
+  withDevTools,
 }: AppsSidebarViewProps) => {
   const showBackButton = variant === "secondary" && !hideBack;
   const hideFooter = variant === "secondary";
@@ -175,12 +178,13 @@ export const AppsSidebarView = ({
   const isAdmin = user?.isAdmin ?? false;
   const isOwner = user?.isOwner ?? false;
   // Developer Tools banner mirrors the route guard in Route.private.tsx: hidden
-  // for guests, and for non-admins when access is limited. Hidden entirely on
-  // the secondary sidebars (accounts/dev-tools/settings) via `hideFooter`.
+  // for guests, and for non-admins when access is limited. On the secondary
+  // sidebars (accounts/dev-tools/settings) it is hidden via `hideFooter` unless
+  // the section opts in with `withDevTools` (portal-settings, billing).
   const showDevTools =
     !user?.isVisitor &&
     (isAdmin || isOwner || !limitedAccessDevToolsForUsers);
-  const showDevToolsBar = showDevTools && !hideFooter;
+  const showDevToolsBar = showDevTools && (!hideFooter || !!withDevTools);
   // While the nav skeleton is up, the footer (plugin slots + banner) stays
   // hidden so it doesn't appear ahead of the navigation it sits under.
   const showFooter = !isNavLoading && (hasPluginItems || showDevToolsBar);

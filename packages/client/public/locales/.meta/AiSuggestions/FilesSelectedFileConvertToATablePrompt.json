@@ -3,16 +3,17 @@
   "content": "Convert relevant information from the selected file into a structured table and show the proposed columns first. If this information is not provided, ask me for the fields or columns to include and the preferred output format.",
   "content_en_sha1_hash": "d1eb05a439d8b3032c4e275cf3e482ebd3c79a9d",
   "created_at": "2026-08-04T09:58:55.131Z",
-  "updated_at": "2026-08-04T09:58:56.410Z",
+  "updated_at": "2026-08-05T18:01:29.494Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt for an AI suggestion that appears when converting selected files into a table; it provides detailed instructions on how the AI should process information and handle missing parameters.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:01:29.494Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 346,
+      "line_number": 381,
       "context": "name: t(\"AiSuggestions:FilesSelectedFileFixGrammar\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileFixGrammarPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesSelectedFileConvertToATable\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileConvertToATablePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesSelectedFileConvertFile\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileConvertFilePrompt\"),\n },",
       "module": "/packages/client"
     }

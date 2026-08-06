@@ -3,7 +3,7 @@
   "content": "Wallet",
   "content_en_sha1_hash": "b60862f4855a392f00cc9f27e0862c0b979075a6",
   "created_at": "2026-04-10T13:53:43.879Z",
-  "updated_at": "2026-08-01T15:33:49.623Z",
+  "updated_at": "2026-08-06T08:04:19.959Z",
   "comment": {
     "text": "This is a navigation item label in the portal settings, referring to the section where users manage their payment information and balance.",
     "is_auto": true,
@@ -12,12 +12,6 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 300,
-      "context": "<div className={styles.walletLeft}>\n <span className={styles.walletIcon} aria-hidden=\"true\">\n <WalletIcon />\n </span>\n <div className={styles.walletText}>\n <Text className={styles.walletTitle}>{t(\"Common:Wallet\")}</Text>\n <Text className={styles.walletCredits}>\n {t(\"Common:AvailableCredits\")}:{\" \"}\n <span className={styles.creditsValue}>\n {formatCurrency(credits, 2)}\n </span>",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
       "line_number": 102,
       "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {title ?? t(\"Wallet\")}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: isBalanceInsufficient,\n })}",
@@ -25,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 426,
+      "line_number": 643,
       "context": "<div className={styles.walletIcon} aria-hidden>\n <WalletSvg />\n </div>\n <div>\n <Text fontSize=\"14px\" fontWeight={600}>\n {t(\"Common:Wallet\")}\n </Text>\n {insufficientFunds ? (\n <Text\n fontSize=\"13px\"\n fontWeight={400}",
       "module": "/packages/client"
     },

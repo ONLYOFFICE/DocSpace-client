@@ -9,25 +9,6 @@ ONLYOFFICE DocSpace frontend client - a document collaboration hub built with Re
 ## Common Commands
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Development (full stack - all 5 apps)
-pnpm start
-
-# Development (core apps only - client, login, doceditor)
-pnpm start:lite
-
-# Production build
-pnpm build
-
-# Linting (Biome)
-pnpm lint
-pnpm lint:fix
-
-# Type checking
-pnpm tsc
-
 # Unit tests (shared package, Vitest)
 pnpm test
 
@@ -49,66 +30,13 @@ cd packages/client && pnpm exec playwright test path/to/test.spec.ts
 
 # Update E2E screenshots
 pnpm test:e2e:docker:update-screenshots
-
-# Storybook (component documentation)
-pnpm storybook
-
-# Check circular dependencies
-pnpm check-circular
 ```
 
-## VSCode Tasks
-
-The `frontend.code-workspace` file drives the grouped status-bar buttons
-(Server / Client / Tests / E2E / Tools) via the **VsCodeTaskButtons**
-extension. The wiring is three layers — change all three when adding a button:
-
-1. **`package.json` (root)** — the actual pnpm script (e.g. `test:client`,
-   `test:store`). This is the source of truth; it also works from the CLI.
-2. **`.vscode/tasks.json`** — a VSCode task whose `command` runs the script,
-   e.g. `cd ${workspaceFolder} ; pnpm run test:store`. Its `label` (e.g.
-   `Test | Vitest:store`) is what buttons reference.
-3. **`frontend.code-workspace`** → `settings > VsCodeTaskButtons.tasks` — a
-   button whose `task` field must exactly match a `tasks.json` label. Buttons
-   are grouped (the `Tests` group holds the unit/lint/tsc buttons).
-
-`frontend.code-workspace` is JSONC (trailing commas / comments allowed), so it
-is not parseable as strict JSON.
+VSCode status-bar task buttons have three-layer wiring — see
+`.claude/rules/vscode-tasks.md` (loaded automatically when editing
+`.vscode/tasks.json` or `frontend.code-workspace`).
 
 ## Architecture
-
-### Monorepo Structure
-
-```
-packages/
-├── client/      # Main web application (Vite 6)
-├── login/       # Authentication application
-├── doceditor/   # Document editor application
-├── management/  # Admin management panel
-├── sdk/         # JavaScript SDK for external integrations
-└── shared/      # Shared components, hooks, stores, utilities
-```
-
-### Tech Stack
-
-- **React 19** with React Compiler (babel-plugin-react-compiler)
-- **TypeScript 5.9** (strict mode)
-- **MobX 6** for state management
-- **Styled-Components 5** + SCSS for styling
-- **i18next** for internationalization
-- **Biome** for linting/formatting (replaces ESLint/Prettier)
-
-### Shared Package (`@docspace/shared`)
-
-The shared package is the core dependency for all applications:
-
-- `components/` - 130+ reusable React components
-- `hooks/` - Custom React hooks
-- `store/` - MobX stores (AuthStore, UserStore, SettingsStore, etc.)
-- `api/` - API client and service definitions
-- `utils/` - Utility functions
-- `types/` - TypeScript type definitions
-- `dialogs/` - Modal/dialog components
 
 ### State Management
 
@@ -116,12 +44,6 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 - AuthStore - Authentication state
 - UserStore - User information
 - SettingsStore - Application settings
-
-### Testing
-
-- **Unit Tests**: Vitest in `packages/shared/`, run with `pnpm test`
-- **E2E Tests**: Playwright in `packages/client/__tests__/`, run via Docker
-- **Visual Regression**: Screenshot comparison with 0.16 threshold
 
 ### Build Pipeline
 
@@ -148,22 +70,6 @@ never hardcoded.
 
 Do not add `Co-Authored-By` trailers or any other AI-attribution lines to
 commit messages.
-
-### Pre-push Hooks (Lefthook)
-
-Automatically runs before push:
-1. TypeScript type checking
-2. Biome linting
-3. Translation validation tests
-4. Unit tests
-
-### Biome Configuration
-
-- 80 character line width
-- Double quotes
-- Trailing commas
-- CRLF line endings
-- Strict React and TypeScript rules
 
 ## Internationalization (i18n)
 
@@ -218,17 +124,38 @@ Key rules the tests enforce:
 - Non-English locales must not be identical copies of English for long strings.
 - `sr-Cyrl-RS` must use Cyrillic script exclusively (never Latin).
 
+### Translation completeness
+
+Three tests report keys that exist for `en` but not for another language:
+
+| Test | Scope | npm script |
+|------|-------|------------|
+| `NotTranslatedOnBaseLanguages` | base languages only | `test:only-base-languages` |
+| `NotTranslatedOnAllLanguages` | every language folder | `test:only-all-languages` |
+| `MissingLocaleFilesTest` | namespace files absent for a language | — |
+
+The last two are covered by `test:only-missing-keys`. All three are skipped on
+pre-push (`test:lefthook` sets `SKIP_BASE_LANGUAGES_TEST` and
+`SKIP_ALL_LANGUAGES_TEST`), so pending translation work does not block a push —
+**a green pre-push run does not mean the locales are complete.**
+
+The same data as a report, with the concrete key list:
+
+```bash
+node common/scripts/translation-stats.js --no-meta --missing
+```
+
+`libs/ui-kit/locales/` is out of scope for both the tests and the stats script —
+the ui-kit is a git submodule, so its gaps must be fixed in
+`docspace-ui-kit-react`.
+
 ### Supported languages
 
 `ar-SA, az, bg, cs, de, el-GR, es, fi, fr, hy-AM, it, ja-JP, ko-KR, lo-LA, lv, nl, pl, pt, pt-BR, ro, ru, si, sk, sl, sq-AL, sr-Cyrl-RS, sr-Latn-RS, tr, uk-UA, vi, zh-CN`
 
-Base languages (enforced by tests): `de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru, sr-Cyrl-RS, sr-Latn-RS, zh-CN`
+Base languages: `de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru, sr-Cyrl-RS, sr-Latn-RS, zh-CN`
 
 ## Requirements
-
-- Node.js >= 24
-- pnpm >= 11 (exact version pinned via `packageManager` in package.json)
-- Docker (for E2E tests)
 
 ### pnpm configuration
 

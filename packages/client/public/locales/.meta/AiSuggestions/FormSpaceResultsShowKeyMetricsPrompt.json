@@ -3,16 +3,17 @@
   "content": "Show key metrics across completed submissions in the current Form Space in a concise, structured view. If this information is not provided, ask me for the form or space, date range, segments, and metrics to include.",
   "content_en_sha1_hash": "96e8e125a90d87658c7cf9855def5aca4a8fcf0e",
   "created_at": "2026-08-04T09:58:55.156Z",
-  "updated_at": "2026-08-04T09:58:56.401Z",
+  "updated_at": "2026-08-05T17:39:29.676Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "AI instruction prompt that directs the assistant to generate a structured metrics report from Form Space submissions and specifies what details to request if information is missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:39:29.676Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 176,
+      "line_number": 182,
       "context": "prompt: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReportPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsShowKeyMetrics\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsShowKeyMetricsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswers\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsFindCommonAnswersPrompt\"),\n },",
       "module": "/packages/client"
     }

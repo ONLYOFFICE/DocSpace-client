@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Uporabi te urejevalnike v {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Spremljajte edinstveno aktivnost uporabnikov",
   "UserAdjustmentLabel": "Prilagoditev uporabnikov",
+  "UsersUponRequest": "Naročnina na {{service}} za več kot {{count}} uporabnikov je na voljo po povpraševanju.",
   "ViewerUsage": "Uporaba bralca",
   "WalletInsufficient": "Razpoložljivi krediti: {{amount}} | Nezadostna sredstva",
   "Wopi": "WOPI",

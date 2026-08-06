@@ -62,9 +62,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import { getConstName } from "@docspace/shared/constants/consts";
 import {
+  AIChatIcon,
   BlankPdfIcon,
   CreateDocumentIcon,
   CreatePresentationIcon,
@@ -83,6 +85,8 @@ export const useCreateActions = (
   isGuest: boolean,
 ): QuickActionItem[] => {
   const { t } = useTranslation(["Common"]);
+
+  const openChat = useOpenAiChat();
 
   const disabledProps = React.useMemo(
     () =>
@@ -135,8 +139,21 @@ export const useCreateActions = (
           window.open(makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId), "_blank"),
         ...disabledProps,
       },
+      // Guests can never hold a chat-capable role (AiAgentProviders sets
+      // `canUseAi` to false for them), so the tile is hidden rather than
+      // disabled — the guest tooltip only covers create/upload restrictions.
+      ...(isGuest
+        ? []
+        : [
+            {
+              id: "quick-ai-chat",
+              icon: <AIChatIcon />,
+              label: t("Common:AIChat"),
+              onClick: openChat,
+            },
+          ]),
     ],
-    [t, myFolderId, disabledProps],
+    [t, myFolderId, disabledProps, isGuest, openChat],
   );
 };
 

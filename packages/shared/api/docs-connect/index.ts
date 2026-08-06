@@ -34,7 +34,6 @@
  */
 
 import { request } from "../client";
-import { saveDeposite } from "../portal";
 import type {
   TDocsConnectInfo,
   TDocsConnectTenant,
@@ -59,10 +58,8 @@ const QUANTITY_TYPE_ADD = 1;
 export type BuyDocsConnectPlanData = {
   users: number;
   devPackEnabled: boolean;
-  topUp?: number;
   currentUsers: number;
   currentDevPackEnabled: boolean;
-  currency: string;
 };
 
 type TWalletService = {
@@ -400,15 +397,9 @@ export const buyDocsConnectPlan = async (
   const {
     users,
     devPackEnabled,
-    topUp,
     currentUsers: prevUsers,
     currentDevPackEnabled,
-    currency,
   } = data;
-
-  if (topUp && topUp > 0) {
-    await saveDeposite(topUp, currency);
-  }
 
   const disablingDevPack = currentDevPackEnabled && !devPackEnabled;
 
@@ -455,17 +446,9 @@ export const calculateDocsConnectDevPack = async (
 
 export const switchDocsConnectToDevPack = async ({
   quantity,
-  topUp,
-  currency,
 }: {
   quantity: number;
-  topUp?: number;
-  currency: string;
 }): Promise<TDocsConnectInfo | null> => {
-  if (topUp && topUp > 0) {
-    await saveDeposite(topUp, currency);
-  }
-
   const ok = (await request({
     method: "post",
     url: `${BASE}/switchtodevpack`,

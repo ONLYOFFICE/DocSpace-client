@@ -3,16 +3,17 @@
   "content": "Find a document",
   "content_en_sha1_hash": "8b5750dca16f53260bf67e487673a6f69ccd194c",
   "created_at": "2026-08-04T09:58:55.186Z",
-  "updated_at": "2026-08-04T09:58:56.400Z",
+  "updated_at": "2026-08-05T17:15:51.060Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion option that initiates a document search within a room.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:15:51.060Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 138,
+      "line_number": 144,
       "context": "name: t(\"AiSuggestions:InsideRoomOrganizeContent\"),\n prompt: t(\"AiSuggestions:InsideRoomOrganizeContentPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomFindADocument\"),\n prompt: t(\"AiSuggestions:InsideRoomFindADocumentPrompt\"),\n },\n {\n name: t(\"AiSuggestions:InsideRoomChangeNameAndTags\"),\n prompt: t(\"AiSuggestions:InsideRoomChangeNameAndTagsPrompt\"),",
       "module": "/packages/client"
     }

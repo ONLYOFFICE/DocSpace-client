@@ -3,7 +3,7 @@
   "content": "Your card was saved, but we couldn't complete the purchase. You can retry from Docs Connect.",
   "content_en_sha1_hash": "e109ebeb163a90a9ccbf9b58039901c8a3d1c120",
   "created_at": "2026-07-27T13:07:08.042Z",
-  "updated_at": "2026-07-31T15:04:17.734Z",
+  "updated_at": "2026-08-06T08:04:20.055Z",
   "comment": {
     "text": "Error text on the AI paywall completion page that appears when a transaction fails after a payment method has been successfully saved via Docs Connect.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 556,
+      "line_number": 576,
       "context": ": t(\"AIPaywallCallbackError\")}\n </Text>\n \n <Text fontSize=\"13px\" lineHeight=\"18px\">\n {isDocsConnect\n ? t(\"DocsConnectCallbackErrorHint\")\n : isWalletOnly\n ? t(\"WalletTopUpCallbackErrorHint\")\n : t(\"AIPaywallCallbackErrorHint\")}\n </Text>\n </div>",
       "module": "/libs/ui-kit"
     }

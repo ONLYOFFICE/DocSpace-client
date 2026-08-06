@@ -3,7 +3,7 @@
   "content": "Dev Pack",
   "content_en_sha1_hash": "128b12d9103e57ce04b58dc134fb9061fb0fb9b4",
   "created_at": "2026-07-27T13:07:48.510Z",
-  "updated_at": "2026-08-01T15:33:49.624Z",
+  "updated_at": "2026-08-06T08:04:19.960Z",
   "comment": {
     "text": "Label for a specific subscription plan card within the DocsConnect purchase panel in portal settings.",
     "is_auto": true,
@@ -13,7 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 509,
+      "line_number": 729,
+      "context": "<div className={styles.devPackCard}>\n <div className={styles.devPackHeader}>\n <div>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"DocsConnect:DevPack\")}{\" \"}\n <Text\n as=\"span\"\n fontSize=\"13px\"\n fontWeight={400}\n className={styles.secondaryText}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 729,
       "context": "<div className={styles.devPackCard}>\n <div className={styles.devPackHeader}>\n <div>\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"DocsConnect:DevPack\")}{\" \"}\n <Text\n as=\"span\"\n fontSize=\"13px\"\n fontWeight={400}\n className={styles.secondaryText}",
       "module": "/packages/client"
     }

@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Käytä näitä editoreita {{organizationName}} {{editorsName}}-tuotteessa",
   "UserActivitySubtitle": "Seuraa yksilöllistä käyttäjäaktiivisuutta",
   "UserAdjustmentLabel": "Käyttäjämäärän muutos",
+  "UsersUponRequest": "Yli {{count}} käyttäjän {{service}}-tilaus on saatavilla pyynnöstä.",
   "ViewerUsage": "Katselijoiden käyttö",
   "WalletInsufficient": "Saatavilla olevat krediitit: {{amount}} | Riittämätön saldo",
   "Wopi": "WOPI",

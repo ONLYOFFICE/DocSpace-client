@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Koristi ove uređivače u {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Pratite jedinstvenu aktivnost korisnika",
   "UserAdjustmentLabel": "Prilagođavanje korisnika",
+  "UsersUponRequest": "Pretplata na {{service}} za više od {{count}} korisnika dostupna je na upit.",
   "ViewerUsage": "Korišćenje pregledača",
   "WalletInsufficient": "Dostupni krediti: {{amount}} | Nedovoljno sredstava",
   "Wopi": "WOPI",

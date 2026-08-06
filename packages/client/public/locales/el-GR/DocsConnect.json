@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Χρήση αυτών των επεξεργαστών στο {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Παρακολουθήστε τη δραστηριότητα μοναδικών χρηστών",
   "UserAdjustmentLabel": "Προσαρμογή χρηστών",
+  "UsersUponRequest": "Μια συνδρομή {{service}} για περισσότερους από {{count}} χρήστες είναι διαθέσιμη κατόπιν αιτήματος.",
   "ViewerUsage": "Χρήση θεατών",
   "WalletInsufficient": "Διαθέσιμες πιστώσεις: {{amount}} | Ανεπαρκή κεφάλαια",
   "Wopi": "WOPI",

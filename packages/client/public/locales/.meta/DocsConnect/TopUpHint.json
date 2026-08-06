@@ -3,7 +3,7 @@
   "content": "Your wallet will be topped up by <1>{{amount}}</1> and the selected subscription will be purchased automatically. Top-up amounts are rounded up to the next whole dollar.",
   "content_en_sha1_hash": "57b9d528033ef63e2338439bb377daf541739b0e",
   "created_at": "2026-07-27T13:07:48.518Z",
-  "updated_at": "2026-08-01T15:33:49.630Z",
+  "updated_at": "2026-08-06T08:04:19.958Z",
   "comment": {
     "text": "Footer hint in the plan purchase panel explaining the automatic wallet top-up and subscription process. The `<1>` tag applies bold formatting to the `{{amount}}` currency variable.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 856,
-      "context": "fontWeight={400}\n className={styles.footerHint}\n >\n <Trans\n ns=\"DocsConnect\"\n i18nKey=\"TopUpHint\"\n values={{ amount: formatCurrency(topUpRequired) }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n ) : isDevPackUpgrade ? (",
+      "line_number": 521,
+      "context": "if (insufficientFunds)\n return (\n <Text fontSize=\"13px\" fontWeight={400} className={styles.footerHint}>\n <Trans\n ns=\"DocsConnect\"\n i18nKey=\"TopUpHint\"\n values={{ amount: formatCurrency(topUpRequired) }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n );",
       "module": "/packages/client"
     }
   ],

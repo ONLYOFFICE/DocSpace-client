@@ -3,7 +3,7 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-26T07:15:48.793Z",
-  "updated_at": "2026-07-31T12:36:29.470Z",
+  "updated_at": "2026-08-06T08:04:19.945Z",
   "comment": {
     "text": "This is a label for a filter option or a radio button. It refers to external resources not hosted directly within DocSpace, such as files from third-party cloud storage.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 593,
+      "line_number": 669,
       "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={THIRD_PARTY_RESOURCE}\n key={2}\n isChecked={isCheckedThirdParty}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },

@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "මෙම සංස්කාරක {{organizationName}} {{editorsName}} තුළ භාවිත කරන්න",
   "UserActivitySubtitle": "අනන්‍ය පරිශීලක ක්‍රියාකාරකම් නිරීක්ෂණය කරන්න",
   "UserAdjustmentLabel": "පරිශීලක සංශෝධනය",
+  "UsersUponRequest": "පරිශීලකයින් {{count}} දෙනෙකුට වඩා සඳහා {{service}} දායකත්වයක් ඉල්ලීම මත ලබා ගත හැකිය.",
   "ViewerUsage": "නරඹන්නාගේ භාවිතය",
   "WalletInsufficient": "ලබාගත හැකි ක්‍රෙඩිට්: {{amount}} | ප්‍රමාණවත් මුදල් නැත",
   "Wopi": "WOPI",

@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Používat tyto editory v {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Sledujte aktivitu unikátních uživatelů",
   "UserAdjustmentLabel": "Úprava uživatelů",
+  "UsersUponRequest": "Předplatné {{service}} pro více než {{count}} uživatelů je dostupné na vyžádání.",
   "ViewerUsage": "Využití prohlížečů",
   "WalletInsufficient": "Dostupné kredity: {{amount}} | Nedostatek prostředků",
   "Wopi": "WOPI",

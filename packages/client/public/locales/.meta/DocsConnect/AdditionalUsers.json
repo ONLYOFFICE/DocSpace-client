@@ -3,7 +3,7 @@
   "content": "Additional users",
   "content_en_sha1_hash": "0cb0386d9477d8d9b29539c03cc74f3d65d60ad4",
   "created_at": "2026-07-27T13:07:48.521Z",
-  "updated_at": "2026-08-01T15:33:49.626Z",
+  "updated_at": "2026-08-06T08:04:19.961Z",
   "comment": {
     "text": "Label in a pricing summary row indicating the count of extra users added to the plan, appearing alongside a numeric value (e.g., \"+5\").",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 597,
+      "line_number": 820,
       "context": "`${users}`,\n usersTooltip,\n )}\n {usersChanged && users > currentUsers\n ? summaryRow(\n t(\"DocsConnect:AdditionalUsers\"),\n `+${users - currentUsers}`,\n )\n : null}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 597,
+      "line_number": 820,
       "context": "`${users}`,\n usersTooltip,\n )}\n {usersChanged && users > currentUsers\n ? summaryRow(\n t(\"DocsConnect:AdditionalUsers\"),\n `+${users - currentUsers}`,\n )\n : null}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),",
       "module": "/packages/client"
     }

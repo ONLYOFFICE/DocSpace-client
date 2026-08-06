@@ -3,7 +3,7 @@
   "content": "Top up & Pay",
   "content_en_sha1_hash": "a5f9f9bf71871d6dd01b8aa0966f963de021e46e",
   "created_at": "2026-07-27T13:07:39.105Z",
-  "updated_at": "2026-08-01T15:33:49.631Z",
+  "updated_at": "2026-08-06T08:04:19.958Z",
   "comment": {
     "text": "Button label in the BuyPlan panel that appears when funds are insufficient, prompting users to add balance and complete a payment.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 914,
-      "context": ": insufficientFunds\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\")\n : insufficientFunds\n ? info.deactivated\n ? t(\"Common:TopUpAndPay\")\n : t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\")\n }\n onClick={onBuy}\n isLoading={submitting}",
+      "line_number": 450,
+      "context": "}\n \n if (!insufficientFunds || isTopUpUnavailable) return t(\"Common:Upgrade\");\n \n return info.deactivated\n ? t(\"Common:TopUpAndPay\")\n : t(\"DocsConnect:TopUpAndBuy\");\n };\n \n const submitDisabled = isOverLimit\n ? submitting",
       "module": "/packages/client"
     }
   ],

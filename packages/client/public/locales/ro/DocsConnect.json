@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Utilizați aceste editoare în {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Urmăriți activitatea utilizatorilor unici",
   "UserAdjustmentLabel": "Ajustare utilizatori",
+  "UsersUponRequest": "Un abonament {{service}} pentru mai mult de {{count}} utilizatori este disponibil la cerere.",
   "ViewerUsage": "Utilizare vizualizator",
   "WalletInsufficient": "Credite disponibile: {{amount}} | Fonduri insuficiente",
   "Wopi": "WOPI",

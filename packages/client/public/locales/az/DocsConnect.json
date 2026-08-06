@@ -144,6 +144,7 @@
   "UseEditorsInProduct": "Bu redaktorları {{organizationName}} {{editorsName}}-da istifadə et",
   "UserActivitySubtitle": "Unikal istifadəçi fəaliyyətini izləyin",
   "UserAdjustmentLabel": "İstifadəçi tənzimlənməsi",
+  "UsersUponRequest": "{{count}} istifadəçidən çox olan {{service}} abunəliyi sorğu əsasında mövcuddur.",
   "ViewerUsage": "İzləyici istifadəsi",
   "WalletInsufficient": "Mövcud kreditlər: {{amount}} | Kifayət qədər vəsait yoxdur",
   "Wopi": "WOPI",

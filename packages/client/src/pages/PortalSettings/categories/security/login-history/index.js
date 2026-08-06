@@ -39,6 +39,10 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
 
 import { Consumer } from "@docspace/ui-kit/utils";
+
+import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
+import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";
+
 import { Table } from "./TableView/TableView";
 import HistoryRowContainer from "./RowView/HistoryRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
@@ -51,6 +55,7 @@ const LoginHistory = (props) => {
     theme,
     viewAs,
     getLoginHistoryReport,
+    isLoginHistoryReportBuilding,
     // getLifetimeAuditSettings,
     setLifetimeAuditSettings,
     securityLifetime,
@@ -59,6 +64,8 @@ const LoginHistory = (props) => {
     tfaEnabled,
     currentColorScheme,
   } = props;
+
+  useReportPageLeft(ReportType.LoginHistory);
 
   useEffect(() => {
     setDocumentTitle(t("LoginHistoryTitle"));
@@ -110,6 +117,7 @@ const LoginHistory = (props) => {
           sectionName: t("Common:Files"),
         })}
         getReport={getLoginHistoryReport}
+        isLoadingDownloadReport={isLoginHistoryReportBuilding}
         isSettingNotPaid={!isAuditAvailable}
         tfaEnabled={tfaEnabled}
         currentColorScheme={currentColorScheme}
@@ -126,6 +134,7 @@ export default inject(
       security,
       viewAs,
       getLoginHistoryReport,
+      isLoginHistoryReportBuilding,
       getLifetimeAuditSettings,
       setLifetimeAuditSettings,
       securityLifetime,
@@ -148,6 +157,7 @@ export default inject(
       currentColorScheme,
       viewAs,
       getLoginHistoryReport,
+      isLoginHistoryReportBuilding,
       isAuditAvailable,
       resetIsInit,
       tfaEnabled,

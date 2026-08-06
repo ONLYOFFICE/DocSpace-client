@@ -33,20 +33,22 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { Nullable } from "@docspace/shared/types";
+import { useEffect } from "react";
 
-export type HistoryToolbarProps = {
-  roomId: number | string;
-  canExportHistory: boolean;
-  roomCreationDate?: string;
-  selectedDay: Nullable<string>;
+import { useStore } from "SRC_DIR/store/useStore";
+import type { TReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
 
-  onSelectDay: (day: Nullable<string>) => void;
+/**
+ * Keeps the auto-open behaviour of a document builder report tied to the page
+ * that started it: a report finishing while the user is away must not steal the
+ * tab, but coming back before it finishes makes the auto-open wanted again.
+ */
+export const useReportPageLeft = (type: TReportType) => {
+  const documentBuilderReportStore = useStore("documentBuilderReportStore");
+
+  useEffect(() => {
+    documentBuilderReportStore.resetReportPageLeft(type);
+
+    return () => documentBuilderReportStore.markReportPageLeft(type);
+  }, [documentBuilderReportStore, type]);
 };
-
-export type InjectedHistoryToolbarProps = Pick<
-  TStore["infoPanelStore"],
-  | "getRoomHistoryReport"
-  | "isRoomHistoryReportBuilding"
-  | "setIsScrollLocked"
->;

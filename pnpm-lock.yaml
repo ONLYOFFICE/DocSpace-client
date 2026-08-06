@@ -3493,8 +3493,8 @@ packages:
     version: 3.7.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz':
-    resolution: {integrity: sha512-99RaT/RRoQ4CNL3NIo92n6vZ08ua+sOQCEcn3QOXQeHp7uqxNjtIh/Q++V+nMl/VS0kyJuJDpfkFON5R5TLX6g==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
-    version: 2.1.0
+    resolution: {integrity: sha512-IeZmlqcDDvPCbpuPTSkPDT6k7fkNgvsplMgz1PBIYKte6tqNsQ0KPFwbxc20++Xq2AzxOsdLsdFpKfaf57mGBw==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
+    version: 3.0.0
     hasBin: true
 
   '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
@@ -6116,6 +6116,7 @@ packages:
 
   crypto-js@4.2.0:
     resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
+    deprecated: Active development of CryptoJS has been discontinued. This library is no longer maintained.
 
   crypto-random-string@4.0.0:
     resolution: {integrity: sha512-x8dy3RnvYdlUcPOjkEHqozhiwzKNSq7GcPuXFbnyMOCHxX8V3OgIg/pYuabl2sbUPfIJaeAQB7PMOK8DFIdoRA==}

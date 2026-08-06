@@ -873,9 +873,10 @@ const BuyPlanPanel = ({
             >
               <Trans
                 t={t}
-                ns="Common"
-                i18nKey="InsufficientCreditsContactPayer"
+                ns="DocsConnect"
+                i18nKey="InsufficientCreditsForSubscription"
                 values={{
+                  service: t("DocsConnect:DocsConnect"),
                   payerContact: walletCustomerDisplayName || walletCustomerEmail,
                 }}
                 components={{

@@ -1,0 +1,29 @@
+{
+  "key_path": "BackupTopUpGoToBackup",
+  "content": "Go to Backup",
+  "content_en_sha1_hash": "3e79ce85018d00cea8b3fb4526b43e54029370cd",
+  "created_at": "2026-08-06T08:03:36.033Z",
+  "updated_at": "2026-08-06T08:06:44.079Z",
+  "comment": {
+    "text": "Button label on the AI paywall completion page that redirects users to the Backup section.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T08:06:44.079Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
+      "line_number": 530,
+      "context": "admins\n ? t(\"GoToTariffPlan\")\n : isDocsConnect\n ? t(\"DocsConnectCallbackGoTo\")\n : isBackup\n ? t(\"BackupTopUpGoToBackup\")\n : t(\"WalletTopUpGoToWallet\")\n }\n onClick={onGoToBillingClick}\n testId=\"ai_paywall_go_to_wallet_button\"\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

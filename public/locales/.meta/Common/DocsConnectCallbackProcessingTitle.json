@@ -3,7 +3,7 @@
   "content": "Processing your payment",
   "content_en_sha1_hash": "7883e37eeca1fc3971dea18fa641932952c3b09b",
   "created_at": "2026-07-27T13:07:08.124Z",
-  "updated_at": "2026-07-31T15:04:17.732Z",
+  "updated_at": "2026-08-06T08:04:20.052Z",
   "comment": {
     "text": "A page title displayed during the payment processing stage of a DocsConnect transaction.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 343,
-      "context": "{status === \"processing\" ? (\n <>\n <div className={styles.heroText}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isDocsConnect\n ? t(\"DocsConnectCallbackProcessingTitle\")\n : isWalletOnly\n ? t(\"WalletTopUpCallbackProcessingTitle\")\n : t(\"AIPaywallCallbackProcessing\")}\n </Text>\n <Text lineHeight=\"20px\">",
+      "line_number": 355,
+      "context": "{status === \"processing\" ? (\n <>\n <div className={styles.heroText}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isDocsConnect\n ? t(\"DocsConnectCallbackProcessingTitle\")\n : isBackup\n ? t(\"BackupPaywallCallbackProcessingTitle\")\n : isWalletOnly\n ? t(\"WalletTopUpCallbackProcessingTitle\")\n : t(\"AIPaywallCallbackProcessing\")}",
       "module": "/libs/ui-kit"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Upgrade",
   "content_en_sha1_hash": "a6f47e00e036c5589eb12e237894b37fb015d365",
   "created_at": "2026-07-27T13:07:40.599Z",
-  "updated_at": "2026-08-05T16:32:00.284Z",
+  "updated_at": "2026-08-06T08:04:19.958Z",
   "comment": {
     "text": "Button label and link text in the billing section used to prompt users to purchase a new plan or upgrade their current subscription.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 378,
+      "line_number": 362,
       "context": "</Text>\n </div>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:Upgrade\")}\n onClick={onBuyPlan}\n />\n </div>\n ) : (\n <Text className={styles.sectionTitle}>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 378,
+      "line_number": 362,
       "context": "</Text>\n </div>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:Upgrade\")}\n onClick={onBuyPlan}\n />\n </div>\n ) : (\n <Text className={styles.sectionTitle}>",
       "module": "/libs/ui-kit"
     },
@@ -31,14 +31,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 424,
-      "context": "if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n return insufficientFunds\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds) return t(\"Common:Upgrade\");\n \n return info.deactivated",
+      "line_number": 444,
+      "context": "if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n return insufficientFunds && !isTopUpUnavailable\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds || isTopUpUnavailable) return t(\"Common:Upgrade\");\n \n return info.deactivated",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 424,
-      "context": "if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n return insufficientFunds\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds) return t(\"Common:Upgrade\");\n \n return info.deactivated",
+      "line_number": 444,
+      "context": "if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n return insufficientFunds && !isTopUpUnavailable\n ? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds || isTopUpUnavailable) return t(\"Common:Upgrade\");\n \n return info.deactivated",
       "module": "/packages/client"
     },
     {

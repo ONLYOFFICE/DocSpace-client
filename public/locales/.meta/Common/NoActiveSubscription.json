@@ -3,7 +3,7 @@
   "content": "No active subscription",
   "content_en_sha1_hash": "92f5c89780c2378215c1ba88130e3ae77462289c",
   "created_at": "2026-04-10T13:53:45.478Z",
-  "updated_at": "2026-08-05T16:32:00.370Z",
+  "updated_at": "2026-08-06T08:04:20.050Z",
   "comment": {
     "text": "This is a label indicating the absence of an active subscription. It appears within a subscription card component, specifically when there is no previous storage plan size.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 329,
+      "line_number": 313,
       "context": "<Text\n fontSize=\"13px\"\n fontWeight={600}\n className={styles.noPlanTitle}\n >\n {t(\"Common:NoActiveSubscription\")}\n </Text>\n <Button\n primary\n scale\n size={ButtonSize.small}",
       "module": "/libs/ui-kit"
     }

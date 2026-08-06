@@ -3,7 +3,7 @@
   "content": "{{price}} per user/month",
   "content_en_sha1_hash": "56dfb137787060a6c48cf29c66d12427b6a16e59",
   "created_at": "2026-07-27T13:07:48.509Z",
-  "updated_at": "2026-08-05T16:32:00.286Z",
+  "updated_at": "2026-08-06T08:04:19.960Z",
   "comment": {
     "text": "Label under a pricing slider control that displays the monthly cost per user, where {{price}} is the formatted currency value.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 651,
+      "line_number": 701,
       "context": "minValue={minUsers}\n maxValue={MAX_USERS}\n step={1}\n showSlider\n showPlusSign\n underContorlsTitle={t(\"DocsConnect:PerUserPerMonth\", {\n price: formatCurrency(pricePerUser),\n })}\n onChange={setUsers}\n isDisabled={submitting}\n minusDisabled={isMinusDisabled}",
       "module": "/packages/client"
     }

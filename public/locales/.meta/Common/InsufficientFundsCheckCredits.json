@@ -3,7 +3,7 @@
   "content": "Check your available credits and try again",
   "content_en_sha1_hash": "5f8c66de6da926dd5ed37c15362b2cd67e61058e",
   "created_at": "2026-08-06T08:03:51.782Z",
-  "updated_at": "2026-08-06T11:20:26.684Z",
+  "updated_at": "2026-08-06T14:20:57.619Z",
   "comment": {
     "text": "Error toast message body displayed when a storage upgrade or plan purchase fails due to insufficient credits.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 390,
+      "line_number": 398,
       "context": "if (!controller?.signal.aborted) {\n // The balance could have been spent while the panel was open.\n if (isInsufficientFundsError(error)) {\n toastr.error(\n isPayer\n ? t(\"Common:InsufficientFundsCheckCredits\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n t(\"Common:InsufficientFunds\"),\n );\n } else {\n toastr.error(error as Error);",
       "module": "/packages/client"
     }

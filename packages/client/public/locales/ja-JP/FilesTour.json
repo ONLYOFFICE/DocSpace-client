@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "AIチャットを開始すれば、質問したり、ドキュメントを要約したり、文章を生成したり、仕事の手助けを受けたりできます。すべて{{sectionName}}の中で完結します。",
+  "TourAiAssistantTitle": "あなたのAIアシスタント",
+  "TourBringFiles": "パソコンからファイルをアップロードするか、このウィンドウの好きな場所にドラッグ＆ドロップするだけです。",
+  "TourBringFilesTitle": "ファイルを持ち込む",
+  "TourCreateAnything": "文書、スプレッドシート、プレゼンテーション、PDFフォームをブラウザーで直接作成できます。ソフトのインストールは不要です。",
+  "TourCreateAnythingTitle": "何でも作成",
+  "TourFindFast": "名前で検索し、種類や作成者で絞り込み、リストを並べ替え、リスト表示とタイル表示を切り替えられます。",
+  "TourFindFastTitle": "何でもすばやく見つかる",
+  "TourPlacesFavorites": "{{sectionName}} — スターを付けたファイル。",
+  "TourPlacesRecent": "{{sectionName}} — 最近作業した項目。",
+  "TourPlacesShared": "{{sectionName}} — 他の人があなたに共有したファイル。",
+  "TourPlacesTitle": "すべてがあるべき場所に",
+  "TourPlacesTrash": "{{sectionName}} — 削除済みで、まだ復元できるファイル。",
+  "TourShare": "ファイルにカーソルを合わせるとクイックアクションが表示されます。共有アイコンをクリックすれば、ポータルの連絡先に権限レベルを分けてアクセスを付与できます。それ以外の相手には外部リンクを作成しましょう。",
+  "TourSharedAccess": "{{sharedBy}}はそのファイルが誰から届いたかを、{{accessLevel}}はあなたに何ができるか（閲覧、コメント、編集）を示します。これを変更できるのは所有者だけです。",
+  "TourSharedAccessTitle": "誰が共有し、あなたに何ができるか",
+  "TourSharedEmpty": "まだ何も共有されていません。誰かがアクセス権を付与すると、ファイルやフォルダーがここに表示されます。",
+  "TourSharedEmptyTitle": "リストは今のところ空です",
+  "TourSharedList": "他の人があなたにアクセスを許可したものはすべて{{sectionName}}に届きます。ファイルを開けばブラウザーで作業できます。元のファイルはそのままの場所に残るため、全員が常に同じバージョンを見ることになります。",
+  "TourSharedListTitle": "あなたに共有されたもの",
+  "TourShareTitle": "共有してコラボレーション"
+}

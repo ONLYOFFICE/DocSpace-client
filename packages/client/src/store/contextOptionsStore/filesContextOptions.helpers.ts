@@ -72,7 +72,6 @@ import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
-import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
@@ -90,11 +89,7 @@ import type {
 } from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import {
-  isMobile as isMobileUtils,
-  isLockedSharedRoom,
-  trimSeparator,
-} from "@docspace/shared/utils";
+import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
 import { removeOptions } from "SRC_DIR/helpers/filesUtils";
 import {
   RoomsType,
@@ -294,7 +289,6 @@ export const getFilesContextOptionsImpl = (
   }
 
   const isArchive = item.rootFolderType === FolderType.Archive;
-  const isFormRoom = item.roomType === RoomsType.FormRoom;
   const isAIAgent =
     item.isAIAgent ??
     (item.rootFolderType === FolderType.AIAgents &&
@@ -897,18 +891,6 @@ export const getFilesContextOptionsImpl = (
       icon: AccessEditReactSvgUrl,
       onClick: () => self.onChangeThirdPartyInfo(item.providerKey),
       disabled: false,
-    },
-    {
-      id: "option_short-tour",
-      key: "short-tour",
-      label: t("FormFillingTipsDialog:WelcomeStartTutorial"),
-      icon: HelpCenterReactSvgUrl,
-      onClick: () => self.onEnableFormFillingGuid(t, item.roomType),
-      disabled:
-        isArchive ||
-        !isFormRoom ||
-        isMobileUtils() ||
-        item.id !== self.selectedFolderStore.id,
     },
     {
       id: "option_change-room-owner",

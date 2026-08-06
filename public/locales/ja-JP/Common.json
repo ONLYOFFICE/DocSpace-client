@@ -1111,7 +1111,6 @@
   "GhostStateDetected": "このデバイスの暗号化IDは一部のファイルを復号化できません。他のメンバーがキーを変更したか、IDが同期されていない可能性があります。<0>キー管理を開く</0>と、再確認またはリセットを行えます。",
   "Gigabyte": "GB",
   "GoBack": "戻る",
-  "GotIt": "了解",
   "GoToMyRooms": "「ルーム」へ",
   "GoToRoom": "ルームへ移動する",
   "GoToSection": "{{sectionName}} に移動",

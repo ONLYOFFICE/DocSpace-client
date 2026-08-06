@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Nisni një bisedë me IA për të bërë pyetje, për të përmbledhur dokumente, për të gjeneruar tekste dhe për të marrë ndihmë në punën tuaj — pikërisht brenda {{sectionName}}.",
+  "TourAiAssistantTitle": "Asistenti juaj IA",
+  "TourBringFiles": "Ngarkoni skedarë nga kompjuteri juaj ose thjesht tërhiqini dhe lëshojini kudo brenda kësaj dritareje.",
+  "TourBringFilesTitle": "Sillni skedarët tuaj",
+  "TourCreateAnything": "Krijoni dokumente, fletëllogaritëse, prezantime dhe formularë PDF drejtpërdrejt në shfletues — pa asnjë program.",
+  "TourCreateAnythingTitle": "Krijoni çfarëdo",
+  "TourFindFast": "Kërkoni sipas emrit, filtroni sipas llojit ose autorit, renditni listën dhe kaloni midis pamjes në listë dhe asaj me pllaka.",
+  "TourFindFastTitle": "Gjeni gjithçka shpejt",
+  "TourPlacesFavorites": "{{sectionName}} — skedarët e shënuar me yll.",
+  "TourPlacesRecent": "{{sectionName}} — ajo për të cilën keni punuar së fundmi.",
+  "TourPlacesShared": "{{sectionName}} — skedarët që të tjerët i kanë ndarë me ju.",
+  "TourPlacesTitle": "Gjithçka në vendin e vet",
+  "TourPlacesTrash": "{{sectionName}} — skedarët e fshirë që ende mund t'i rivendosni.",
+  "TourShare": "Kaloni miun mbi çdo skedar për të parë veprimet e shpejta. Klikoni ikonën e ndarjes për t'u dhënë akses kontakteve të portalit tuaj me nivele të ndryshme lejesh — ose krijoni një lidhje të jashtme për këdo tjetër.",
+  "TourSharedAccess": "{{sharedBy}} tregon nga kush ka ardhur skedari, {{accessLevel}} tregon çfarë mund të bëni me të — ta shihni, ta komentoni ose ta redaktoni. Këtë mund ta ndryshojë vetëm pronari.",
+  "TourSharedAccessTitle": "Kush e ndau dhe çfarë mund të bëni",
+  "TourSharedEmpty": "Ende nuk është ndarë asgjë me ju. Skedarët dhe dosjet do të shfaqen këtu sapo dikush t'ju japë akses te ato.",
+  "TourSharedEmptyTitle": "Lista juaj është bosh për momentin",
+  "TourSharedList": "Gjithçka që të tjerët ju japin akses përfundon te {{sectionName}}. Hapni një skedar për të punuar mbi të në shfletues — origjinali mbetet aty ku është, kështu që të gjithë shohin gjithmonë të njëjtin version.",
+  "TourSharedListTitle": "Ndarë me ju",
+  "TourShareTitle": "Ndani dhe bashkëpunoni"
+}

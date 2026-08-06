@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-08-06T08:04:19.840Z",
+  "updated_at": "2026-08-06T14:20:57.499Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 103,
+      "line_number": 105,
       "context": "import type { AppPromoContentMap } from \"./AppPromoDialog.types\";\n \n export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({\n \"ai-files\": {\n title: t(\"Common:Files\"),\n subtitle: t(\"Common:FilesPromoSubtitle\"),\n description: t(\"Common:FilesPromoDescription\"),\n features: [\n {\n Icon: FilesManagementIcon,",
       "module": "/packages/client"
     },
@@ -114,6 +114,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 259,
+      "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,\n ),",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
       "line_number": 55,
       "context": "const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:Files\") }}\n components={{\n 1: (\n <Link\n tag=\"a\"\n href={fileUrl}",
@@ -145,7 +151,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/FilesTileContainer.js",
-      "line_number": 172,
+      "line_number": 170,
       "context": "isDesc={isDesc}\n className=\"tile-container\"\n useReactWindow\n infiniteGrid={InfiniteGrid}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n noSelect={!withContentSelection}\n >\n {filesListNode}\n </TileContainer>\n </FileTileProvider>",
       "module": "/packages/client"
     },
@@ -217,14 +223,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 127,
-      "context": "lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}\n />",
+      "line_number": 131,
+      "context": "lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isAuditTrailReportBuilding}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 110,
-      "context": "securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n tfaEnabled={tfaEnabled}\n currentColorScheme={currentColorScheme}",
+      "line_number": 117,
+      "context": "securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getLoginHistoryReport}\n isLoadingDownloadReport={isLoginHistoryReportBuilding}\n isSettingNotPaid={!isAuditAvailable}\n tfaEnabled={tfaEnabled}",
       "module": "/packages/client"
     },
     {
@@ -264,9 +270,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/InfoPanelStore.ts",
-      "line_number": 147,
-      "context": "private finishRoomHistoryReport = (resultFileUrl?: string) => {\n const { openOnNewPage } = this.filesSettingsStore;\n \n toastr.success(\n i18n.t(\"Common:ReportSaveLocation\", {\n sectionName: i18n.t(\"Common:Files\"),\n }),\n );\n \n if (!this.roomHistoryReportPageLeft && resultFileUrl) {\n const url = combineUrl(window.ClientConfig?.proxy?.url, resultFileUrl);",
+      "file_path": "/packages/client/src/store/DocumentBuilderReportStore.ts",
+      "line_number": 70,
+      "context": "// builder is not cancelled — it keeps running on the server and still saves the\n // file, so giving up only means the user has to pick the file up themselves.\n export const REPORT_BUILD_TIMEOUT_MS = 10 * 60 * 1000;\n \n const getSaveLocationText = () =>\n i18n.t(\"Common:ReportSaveLocation\", { sectionName: i18n.t(\"Common:Files\") });\n \n class DocumentBuilderReportStore {\n private filesSettingsStore: FilesSettingsStore;\n \n private buildingReports = new Set<TReportType>();",
       "module": "/packages/client"
     },
     {
@@ -342,12 +348,6 @@
       "module": "/packages/sdk"
     },
     {
-      "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 126,
-      "context": "{\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Files\"),\n }),\n key: \"form-filling-uploading\",\n placement: \"side\",\n position: [\n {",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
       "line_number": 516,
       "context": "styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n settingsFileSelector={settingsFileSelector}",
@@ -361,7 +361,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 330,
+      "line_number": 326,
       "context": "case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");",
       "module": "/packages/shared"
     }

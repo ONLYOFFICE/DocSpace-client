@@ -3,7 +3,7 @@
   "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
   "created_at": "2025-05-19T21:30:53.320Z",
-  "updated_at": "2026-07-07T08:59:21.917Z",
+  "updated_at": "2026-08-06T14:20:57.654Z",
   "comment": {
     "text": "This is the label for a button that allows users to upload an image, either for a profile avatar or a room logo/cover.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.ts",
-      "line_number": 1270,
+      "line_number": 1252,
       "context": "hasImage: boolean | string | undefined,\n onDelete?: () => () => void,\n ): TModel[] => {\n return [\n {\n label: t(\"Common:UploadPicture\"),\n icon: UploadSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n // the original .js called `ref.current.click()`\n // without null guards; `!` keeps that runtime.\n onClick: (ref?: RefObject<Nullable<HTMLInputElement>>) =>",
       "module": "/packages/client"
     },

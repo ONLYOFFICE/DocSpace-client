@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Inicie uma conversa com a IA para colocar questões, resumir documentos, gerar textos e obter ajuda no seu trabalho — diretamente em {{sectionName}}.",
+  "TourAiAssistantTitle": "O seu assistente de IA",
+  "TourBringFiles": "Carregue ficheiros do seu computador ou basta arrastá-los e largá-los em qualquer ponto desta janela.",
+  "TourBringFilesTitle": "Traga os seus ficheiros",
+  "TourCreateAnything": "Crie documentos, folhas de cálculo, apresentações e formulários PDF diretamente no seu navegador — sem necessidade de qualquer programa.",
+  "TourCreateAnythingTitle": "Crie o que quiser",
+  "TourFindFast": "Pesquise por nome, filtre por tipo ou autor, ordene a lista e alterne entre a vista de lista e de mosaico.",
+  "TourFindFastTitle": "Encontre tudo rapidamente",
+  "TourPlacesFavorites": "{{sectionName}} — ficheiros marcados com estrela.",
+  "TourPlacesRecent": "{{sectionName}} — aquilo em que trabalhou ultimamente.",
+  "TourPlacesShared": "{{sectionName}} — ficheiros que outros partilharam consigo.",
+  "TourPlacesTitle": "Cada coisa no seu lugar",
+  "TourPlacesTrash": "{{sectionName}} — ficheiros eliminados que ainda pode restaurar.",
+  "TourShare": "Passe o cursor sobre qualquer ficheiro para ver as ações rápidas. Clique no ícone de partilha para conceder acesso aos contactos do seu portal com diferentes níveis de permissão — ou crie uma ligação externa para qualquer outra pessoa.",
+  "TourSharedAccess": "{{sharedBy}} indica de quem veio o ficheiro, {{accessLevel}} indica o que pode fazer com ele — ver, comentar ou editar. Só o proprietário pode alterar isso.",
+  "TourSharedAccessTitle": "Quem partilhou e o que pode fazer",
+  "TourSharedEmpty": "Ainda não foi partilhado nada consigo. Ficheiros e pastas aparecerão aqui assim que alguém lhe der acesso.",
+  "TourSharedEmptyTitle": "A sua lista está vazia por agora",
+  "TourSharedList": "Tudo aquilo a que outras pessoas lhe dão acesso chega a {{sectionName}}. Abra um ficheiro para trabalhar nele no navegador — o original permanece onde está, por isso todos veem sempre a mesma versão.",
+  "TourSharedListTitle": "Partilhados consigo",
+  "TourShareTitle": "Partilhe e colabore"
+}

@@ -1111,7 +1111,6 @@
   "GhostStateDetected": "A identidade de criptografia neste dispositivo não consegue desencapsular alguns arquivos. Outros membros podem ter alterado suas chaves ou sua identidade pode estar fora de sincronia. <0>Abrir gerenciamento de chaves</0> para verificar novamente ou redefinir.",
   "Gigabyte": "GB",
   "GoBack": "Voltar",
-  "GotIt": "Entendi",
   "GoToMyRooms": "Ir para minhas salas",
   "GoToRoom": "vá para a sala",
   "GoToSection": "Vá para {{sectionName}}",

@@ -47,8 +47,6 @@ export type HistoryToolbarProps = {
 export type InjectedHistoryToolbarProps = Pick<
   TStore["infoPanelStore"],
   | "getRoomHistoryReport"
-  | "markRoomHistoryReportPageLeft"
-  | "resetRoomHistoryReportPageLeft"
-  | "isRoomHistoryReportDownloading"
+  | "isRoomHistoryReportBuilding"
   | "setIsScrollLocked"
 >;

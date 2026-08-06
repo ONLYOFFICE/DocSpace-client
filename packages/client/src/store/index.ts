@@ -50,7 +50,10 @@ import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
-import GuidanceStore from "./GuidanceStore";
+import FilesTourStore from "./FilesTourStore";
+import RoomsTourStore from "./RoomsTourStore";
+import FormsTourStore from "./FormsTourStore";
+import AiAgentsTourStore from "./AiAgentsTourStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -88,6 +91,7 @@ import ImportAccountsStore from "./ImportAccountsStore";
 
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
+import DocumentBuilderReportStore from "./DocumentBuilderReportStore";
 import CampaignsStore from "./CampaignsStore";
 import IndexingStore from "./IndexingStore";
 import EditGroupStore from "./contacts/EditGroupStore";
@@ -165,12 +169,16 @@ const filesSettingsStore = new FilesSettingsStore(
   settingsStore,
 );
 
+const documentBuilderReportStore = new DocumentBuilderReportStore(
+  filesSettingsStore,
+);
+
 const setupStore = new SettingsSetupStore(
   tfaStore,
   authStore,
   settingsStore,
   thirdPartyStore,
-  filesSettingsStore,
+  documentBuilderReportStore,
 );
 
 const accessRightsStore = new AccessRightsStore(
@@ -196,7 +204,10 @@ const filesStore = new FilesStore(
   aiRoomStore,
 );
 
-const guidanceStore = new GuidanceStore();
+const filesTourStore = new FilesTourStore();
+const roomsTourStore = new RoomsTourStore();
+const formsTourStore = new FormsTourStore();
+const aiAgentsTourStore = new AiAgentsTourStore();
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
@@ -319,7 +330,6 @@ const contextOptionsStore = new ContextOptionsStore(
   userStore,
   indexingStore,
   clientLoadingStore,
-  guidanceStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -352,6 +362,7 @@ infoPanelStore.filesStore = filesStore;
 infoPanelStore.filesSettingsStore = filesSettingsStore;
 infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
+infoPanelStore.documentBuilderReportStore = documentBuilderReportStore;
 
 const avatarEditorDialogStore = new AvatarEditorDialogStore(
   filesStore,
@@ -430,6 +441,7 @@ const store = {
   servicesStore,
   wizardStore,
   setup: setupStore,
+  documentBuilderReportStore,
   confirm: confirmStore,
   backup: backupStore,
   common: commonStore,
@@ -480,7 +492,10 @@ const store = {
 
   brandingStore,
 
-  guidanceStore,
+  filesTourStore,
+  roomsTourStore,
+  formsTourStore,
+  aiAgentsTourStore,
 
   aiRoomStore,
   appsStore,

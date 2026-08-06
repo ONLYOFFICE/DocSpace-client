@@ -42,6 +42,37 @@
   gap: 16px;
 }
 
+// Icon-only repo link in the footer. The footer lays its actions out in a row of
+// 32px-tall buttons, so match that height. IconButton's root is a bare div
+// (line-height: 0, no centering) sized from --icon-button-size, so widening it to
+// a 32px hit area needs the icon explicitly centered — otherwise the mark sits in
+// the top-left corner. `isFill={false}` keeps the GitHub logo's own colors, which
+// also means the kit's `svg { width: 100% }` fill rule doesn't size it here.
+.githubButton {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // IconButton wraps `iconNode` in its own div; keep that wrapper from
+  // reintroducing the offset between the flex box and the svg.
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: column;

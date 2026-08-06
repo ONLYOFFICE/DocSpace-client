@@ -3,7 +3,7 @@
   "content": "Bring AI assistants and agents directly into your workspace.",
   "content_en_sha1_hash": "7115d029a863c5f0e499aa9ffea5d7949901ec0f",
   "created_at": "2026-05-19T19:03:13.691Z",
-  "updated_at": "2026-08-05T16:32:00.257Z",
+  "updated_at": "2026-08-06T14:20:57.592Z",
   "comment": {
     "text": "Description for the AI agents entry in the apps catalog, appearing as a subtitle under the title.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 216,
+      "line_number": 217,
       "context": "},\n {\n id: \"ai-agents\",\n icon: <AiAgentsIcon />,\n title: t(\"Common:DashboardAIChatAgentsTitle\"),\n description: t(\"Common:DashboardAIChatAgentsDescription\"),\n installed: true,\n href: \"/ai-agents/filter\",\n },\n ].filter((mod) => mod.installed);",
       "module": "/packages/client"
     }

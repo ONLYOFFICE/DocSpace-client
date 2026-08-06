@@ -133,6 +133,10 @@ test.describe("AI Agents tour", () => {
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
+      // The list has to come back the way the server would answer it for
+      // somebody who cannot manage agents, or the section puts up a "New agent"
+      // button this walkthrough is specifically about not having.
+      aiAgentsHandler(TEST_PORT, { withListCreate: true, canCreate: false }),
       ...agentOwnerMembers(),
     );
 
@@ -141,6 +145,27 @@ test.describe("AI Agents tour", () => {
     await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
 
     await walkTour(page, ["desktop", "ai-agents-tour", "user"]);
+  });
+
+  test("guest sees the reduced, role-appropriate walkthrough", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // A guest only ever uses the agents they were let into — nothing that
+    // creates one, and an info panel that lists who else uses it rather than
+    // managing access. The list has to agree with that; see the user run above.
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "visitor"),
+      aiAgentsHandler(TEST_PORT, { withListCreate: true, canCreate: false }),
+      ...agentOwnerMembers(),
+    );
+
+    await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
+    await armTour(page, TOUR_KEY);
+    await page.goto(`${baseUrl}${AI_AGENTS_URL}`);
+
+    await walkTour(page, ["desktop", "ai-agents-tour", "guest"]);
   });
 
   test("the list the user owns is left alone", async ({

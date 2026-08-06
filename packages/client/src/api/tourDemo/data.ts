@@ -39,6 +39,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import type {
   TRoom,
   TRoomSecurity,
@@ -206,6 +207,28 @@ const fullSecurity: TRoomSecurity = {
 };
 
 /**
+ * The cover colour of the nth stand-in room.
+ *
+ * A room with no cover of its own is drawn as its initials on a coloured
+ * square, and the colour is part of what makes a row read as a room at all —
+ * without one the list is initials floating on the page.
+ *
+ * The product picks one of these at random when a room is created
+ * (SetRoomParams / SetAgentParams). The tour must not: a colour drawn per run
+ * would make every screenshot comparison a coin toss. So the palette is walked
+ * by list position instead — room 0 is always the first colour, room 1 always
+ * the second — which is as distinct as three real rooms would be and is the
+ * same on every run.
+ *
+ * Returned without the leading `#`, which is the form RoomIcon expects.
+ */
+const demoLogoColor = (index: number) =>
+  globalColors.logoColors[index % globalColors.logoColors.length].replace(
+    "#",
+    "",
+  );
+
+/**
  * The stand-in rooms that go into the real answer in place of its empty list.
  *
  * `current` is the folder the server itself named, so the rooms sit under the
@@ -232,7 +255,13 @@ export function buildDemoRooms(
     new: 0,
     mute: false,
     tags: [],
-    logo: { original: "", big: "", medium: "", small: "", color: undefined },
+    logo: {
+      original: "",
+      large: "",
+      medium: "",
+      small: "",
+      color: demoLogoColor(index),
+    },
     pinned: false,
     private: false,
     inRoom: true,

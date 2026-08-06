@@ -1507,7 +1507,12 @@ export const getCategoryType = (location: { pathname: string }) => {
   const { pathname } = location;
 
   if (pathname.startsWith("/forms")) {
-    const formRoomRegexp = /(forms)\/(\d+)/;
+    // The id is allowed to be negative: the section tour walks the user into a
+    // stand-in form space whose id is negative on purpose (client's
+    // api/tourDemo), and a `\d+` here read `/forms/-1000` as the Forms list
+    // rather than as a room — which left the list's own title, create button
+    // and quick-actions on a page that was standing inside a space.
+    const formRoomRegexp = /(forms)\/(-?\d+)/;
 
     if (formRoomRegexp.test(pathname)) {
       categoryType = CategoryType.Form;

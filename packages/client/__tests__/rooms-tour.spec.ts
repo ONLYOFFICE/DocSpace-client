@@ -123,19 +123,43 @@ test.describe("Rooms tour", () => {
     await walkTour(page, ["desktop", "rooms-tour", "admin"]);
   });
 
-  test("member sees the reduced, role-appropriate walkthrough", async ({
+  test("user (room member) sees the reduced, role-appropriate walkthrough", async ({
     page,
     mockRequest,
     baseUrl,
   }) => {
     mockRequest.use(
       selfByTypeHandler(TEST_PORT, "regular"),
+      // The list has to come back the way the server would answer it for
+      // somebody who cannot create rooms, or the section puts up a "New room"
+      // button this walkthrough is specifically about not having.
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
       ...roomOwnerMembers(),
     );
 
     await startTour(page, baseUrl);
 
-    await walkTour(page, ["desktop", "rooms-tour", "member"]);
+    await walkTour(page, ["desktop", "rooms-tour", "user"]);
+  });
+
+  test("guest sees the reduced, role-appropriate walkthrough", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // A guest only ever works inside rooms somebody let them into: no creating,
+    // and an info panel that lists the members rather than managing them. The
+    // tour's own gate is `getTourAudience` (visitor → "guest"), and the list has
+    // to agree with it — see the user run above.
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "visitor"),
+      roomListHandler(TEST_PORT, TypeRoomList.IsDefault, { canCreate: false }),
+      ...roomOwnerMembers(),
+    );
+
+    await startTour(page, baseUrl);
+
+    await walkTour(page, ["desktop", "rooms-tour", "guest"]);
   });
 
   test("opens the info panel for the member step and puts it away afterwards", async ({

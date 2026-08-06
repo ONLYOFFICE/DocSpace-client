@@ -75,7 +75,16 @@ const DEMO_COMPLETE = "#folder_-1101";
 // regardless of query params, so the shared mock can't be reused as-is here:
 // FormsTour's own isFormsRoot gate needs rootFolderType: 36
 // (FolderType.Forms) — see TreeFoldersStore.isFormsFolder.
-const formsRoomListHandler = (port: string, { empty = false } = {}) =>
+//
+// `canCreate` is `security.Create` on the Forms root, which is what the whole
+// create affordance hangs off (getSectionCreateButton → getFolderModel). The
+// server answers it per role — the list fetched by somebody who only ever fills
+// forms in comes back with `false` — so the runs that stand in as one have to
+// say so, or the section puts up a "Create Form space" button they do not have.
+const formsRoomListHandler = (
+  port: string,
+  { empty = false, canCreate = true } = {},
+) =>
   http.get(`${BASE_URL}:${port}/${API_PREFIX}/files/rooms*`, () => {
     const current = {
       parentId: 0,
@@ -91,7 +100,7 @@ const formsRoomListHandler = (port: string, { empty = false } = {}) =>
       id: 36,
       rootFolderId: 36,
       canShare: false,
-      security: { Read: true, Create: true },
+      security: { Read: true, Create: canCreate },
       title: "Forms",
       access: 0,
       shared: false,
@@ -206,18 +215,39 @@ test.describe("Forms tour", () => {
     await walkTour(page, ["desktop", "forms-tour", "admin"]);
   });
 
-  test("filler sees the reduced, role-appropriate walkthrough", async ({
+  test("user (form filler) sees the reduced, role-appropriate walkthrough", async ({
     page,
     mockRequest,
     baseUrl,
   }) => {
-    mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "regular"),
+      formsRoomListHandler(TEST_PORT, { canCreate: false }),
+    );
 
     await startTour(page, baseUrl);
 
     // Nothing that creates a space, and no Templates in the sidebar step — the
     // sidebar does not render that item for them either.
-    await walkTour(page, ["desktop", "forms-tour", "filler"]);
+    await walkTour(page, ["desktop", "forms-tour", "user"]);
+  });
+
+  test("guest sees the reduced, role-appropriate walkthrough", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // A guest is invited to fill a form in and nothing else, so their
+    // walkthrough is the filler's: no creating a space, no saving one as a
+    // template. The list has to agree — see the user run above.
+    mockRequest.use(
+      selfByTypeHandler(TEST_PORT, "visitor"),
+      formsRoomListHandler(TEST_PORT, { canCreate: false }),
+    );
+
+    await startTour(page, baseUrl);
+
+    await walkTour(page, ["desktop", "forms-tour", "guest"]);
   });
 });
 

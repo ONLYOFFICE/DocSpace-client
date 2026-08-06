@@ -146,6 +146,23 @@ test.describe("Files tour", () => {
     await walkTour(page, ["desktop", "files-tour", "admin"]);
   });
 
+  test("user sees the same personal-space walkthrough", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // Files is the one section where an admin and a paid user get the same
+    // page: a personal space is a personal space, and everything the tour
+    // points at belongs to whoever is standing in it. This run is what holds
+    // that claim — the two screenshot sets are expected to match, and a fork
+    // creeping into the step list would show up here as a diff.
+    mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
+
+    await startTour(page, baseUrl);
+
+    await walkTour(page, ["desktop", "files-tour", "user"]);
+  });
+
   test("opens the New menu for its step and puts it away afterwards", async ({
     page,
     mockRequest,

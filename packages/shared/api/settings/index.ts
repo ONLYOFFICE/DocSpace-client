@@ -71,6 +71,7 @@ import {
   TTelegramCheck,
   TNotificationChannel,
 } from "./types";
+import { TDocumentBuilderTask } from "../files/types";
 
 export async function getSettings(withPassword = false, headers = null) {
   const options: AxiosRequestConfig = {
@@ -248,18 +249,40 @@ export function deleteBruteForceProtection() {
     url: `settings/security/loginSettings`,
   });
 }
-export function getLoginHistoryReport() {
-  return request({
+export async function startLoginHistoryReport() {
+  const res = (await request({
     method: "post",
     url: "/security/audit/login/report",
-  });
+  })) as TDocumentBuilderTask;
+
+  return res;
 }
 
-export function getAuditTrailReport() {
-  return request({
+export async function getLoginHistoryReportStatus() {
+  const res = (await request({
+    method: "get",
+    url: "/security/audit/login/report",
+  })) as Nullable<TDocumentBuilderTask>;
+
+  return res;
+}
+
+export async function startAuditTrailReport() {
+  const res = (await request({
     method: "post",
     url: "/security/audit/events/report",
-  });
+  })) as TDocumentBuilderTask;
+
+  return res;
+}
+
+export async function getAuditTrailReportStatus() {
+  const res = (await request({
+    method: "get",
+    url: "/security/audit/events/report",
+  })) as Nullable<TDocumentBuilderTask>;
+
+  return res;
 }
 
 export async function getPortalTimezones(

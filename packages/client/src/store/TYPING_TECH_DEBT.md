@@ -37,8 +37,6 @@ Line numbers are approximate (as of extraction) — grep the symbol to relocate.
 - `getLifetimeAuditSettings` / `setLifetimeAuditSettings` — untyped; payload mismatches `TCookieSettings`. (~95, ~613)
 - `getAllActiveSessions` / `removeAllActiveSessions` — untyped. (~103, ~864, ~870)
 - `api.people.getListAdmins` — untyped. (~545, ~564)
-- `getLoginHistoryReport` — untyped. (~684)
-- `getAuditTrailReport` — untyped. (~702)
 - `getConsumersList` — untyped. (~763, ~784)
 
 ### `BackupStore.ts`

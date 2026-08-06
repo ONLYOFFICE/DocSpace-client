@@ -247,7 +247,6 @@ class PluginStore {
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
       updateFileItems: this.updateFileItems,
-      updateArticleButtonItems: this.updateArticleButtonItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,

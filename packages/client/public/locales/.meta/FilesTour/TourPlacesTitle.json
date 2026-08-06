@@ -1,0 +1,29 @@
+{
+  "key_path": "TourPlacesTitle",
+  "content": "Everything in its place",
+  "content_en_sha1_hash": "ef9662412435f957d33d1596fc3513ed361ab695",
+  "created_at": "2026-08-06T14:20:53.792Z",
+  "updated_at": "2026-08-06T14:33:37.606Z",
+  "comment": {
+    "text": "Title for an onboarding tour step introducing file organization, appearing before a list of specific locations.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:33:37.606Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 214,
+      "context": "if (!anchorId || places.length === 0) return null;\n \n return navItemStep(\n sidebarSelector(anchorId),\n t(\"FilesTour:TourPlacesTitle\"),\n places.join(\" \"),\n callbacks,\n LOG_LABEL,\n true,\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

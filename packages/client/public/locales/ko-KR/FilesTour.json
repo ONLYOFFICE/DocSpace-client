@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "AI 채팅을 시작해 질문하고, 문서를 요약하고, 텍스트를 생성하고, 업무에 도움을 받으세요. 모두 {{sectionName}} 안에서 가능합니다.",
+  "TourAiAssistantTitle": "나의 AI 어시스턴트",
+  "TourBringFiles": "컴퓨터에서 파일을 업로드하거나, 이 창 어디에나 끌어다 놓기만 하면 됩니다.",
+  "TourBringFilesTitle": "파일을 가져오세요",
+  "TourCreateAnything": "문서, 스프레드시트, 프레젠테이션, PDF 양식을 브라우저에서 바로 만드세요. 별도의 소프트웨어가 필요 없습니다.",
+  "TourCreateAnythingTitle": "무엇이든 만드세요",
+  "TourFindFast": "이름으로 검색하고, 유형이나 작성자로 필터링하고, 목록을 정렬하고, 목록 보기와 타일 보기를 전환하세요.",
+  "TourFindFastTitle": "무엇이든 빠르게 찾기",
+  "TourPlacesFavorites": "{{sectionName}} — 별표를 표시한 파일.",
+  "TourPlacesRecent": "{{sectionName}} — 최근에 작업한 항목.",
+  "TourPlacesShared": "{{sectionName}} — 다른 사람이 공유해 준 파일.",
+  "TourPlacesTitle": "모든 것이 제자리에",
+  "TourPlacesTrash": "{{sectionName}} — 삭제했지만 아직 복원할 수 있는 파일.",
+  "TourShare": "파일 위에 마우스를 올리면 빠른 작업이 나타납니다. 공유 아이콘을 클릭해 포털 연락처에 권한 수준을 달리해 접근을 부여하거나, 그 밖의 사람을 위해 외부 링크를 만드세요.",
+  "TourSharedAccess": "{{sharedBy}}는 파일이 누구에게서 왔는지, {{accessLevel}}은 보기, 댓글, 편집 중 무엇을 할 수 있는지 알려 줍니다. 이는 소유자만 변경할 수 있습니다.",
+  "TourSharedAccessTitle": "누가 공유했고 무엇을 할 수 있는지",
+  "TourSharedEmpty": "아직 공유된 항목이 없습니다. 누군가 접근 권한을 주면 파일과 폴더가 여기에 표시됩니다.",
+  "TourSharedEmptyTitle": "목록이 아직 비어 있습니다",
+  "TourSharedList": "다른 사람이 접근 권한을 준 모든 항목은 {{sectionName}}에 모입니다. 파일을 열면 브라우저에서 바로 작업할 수 있고, 원본은 있던 자리에 그대로 있으므로 모두가 항상 같은 버전을 봅니다.",
+  "TourSharedListTitle": "나와 공유됨",
+  "TourShareTitle": "공유하고 협업하기"
+}

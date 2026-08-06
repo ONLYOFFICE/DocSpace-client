@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsDemoTimeOff",
+  "content": "Time off requests",
+  "content_en_sha1_hash": "9573554d06d9f741ab4548c160ba2297aa20e5fa",
+  "created_at": "2026-08-06T14:20:53.752Z",
+  "updated_at": "2026-08-06T14:45:24.669Z",
+  "comment": {
+    "text": "Title of a step in the onboarding tour for Form Rooms, used as a heading to introduce a specific feature segment.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:45:24.669Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/index.tsx",
+      "line_number": 264,
+      "context": "roomType: RoomsType.FormRoom,\n title: t(\"FormsTour:FormsDemoOnboarding\"),\n },\n {\n roomType: RoomsType.FormRoom,\n title: t(\"FormsTour:FormsDemoTimeOff\"),\n },\n {\n roomType: RoomsType.FormRoom,\n title: t(\"FormsTour:FormsDemoFeedback\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

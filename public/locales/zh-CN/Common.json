@@ -1111,7 +1111,6 @@
   "GhostStateDetected": "此设备上的加密身份无法解密某些文件。其他成员可能已更改了密钥，或者您的身份可能未同步。<0>打开密钥管理</0>以重新验证或重置。",
   "Gigabyte": "GB",
   "GoBack": "返回",
-  "GotIt": "知道了",
   "GoToMyRooms": "转到房间",
   "GoToRoom": "前往房间",
   "GoToSection": "前往{{sectionName}}",

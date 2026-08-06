@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentAccessMember",
+  "content": "The same panel tells you who else works with this agent, the access each of them holds — so you know whom to ask when the setup needs a change — and what has changed in it lately.",
+  "content_en_sha1_hash": "2b50cf5ccab6aaba1408f9105f87454624e9348d",
+  "created_at": "2026-08-06T14:20:56.244Z",
+  "updated_at": "2026-08-06T14:29:12.111Z",
+  "comment": {
+    "text": "A descriptive sentence within an AI Agents onboarding tour step that explains the information provided in the agent's access and members panel.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:29:12.111Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 233,
+      "context": "isAdmin\n ? t(\"AiAgentsTour:AgentAccessTitle\")\n : t(\"AiAgentsTour:AgentAccessMemberTitle\"),\n isAdmin\n ? t(\"AiAgentsTour:AgentAccess\")\n : t(\"AiAgentsTour:AgentAccessMember\"),\n callbacks,\n LOG_LABEL,\n infoPanelHooks,\n [FIRST_ITEM_SELECTOR],\n FIRST_ITEM_SELECTOR,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

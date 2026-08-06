@@ -59,9 +59,6 @@ import {
   getDefaultAccessUser,
 } from "@docspace/shared/utils/getDefaultAccessUser";
 import {
-  getGuidanceConfig,
-} from "@docspace/shared/components/guidance/configs";
-import {
   RoomsType,
   Events,
   FolderType,
@@ -144,7 +141,6 @@ import type PluginStore from "./PluginStore";
 import type InfoPanelStore from "./InfoPanelStore";
 import type IndexingStore from "./IndexingStore";
 import type ClientLoadingStore from "./ClientLoadingStore";
-import type GuidanceStore from "./GuidanceStore";
 
 export type { TContextItem } from "./contextOptionsStore/helpers";
 
@@ -198,8 +194,6 @@ class ContextOptionsStore {
 
   linksIsLoading = false;
 
-  guidanceStore: GuidanceStore;
-
   // `this.onOwnerChange` is referenced by the "owner-change"
   // option below but is not defined anywhere — the option gets
   // `onClick: undefined` at runtime. `declare` keeps that runtime shape
@@ -226,7 +220,6 @@ class ContextOptionsStore {
     userStore: UserStore,
     indexingStore: IndexingStore,
     clientLoadingStore: ClientLoadingStore,
-    guidanceStore: GuidanceStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -248,7 +241,6 @@ class ContextOptionsStore {
     this.userStore = userStore;
     this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
-    this.guidanceStore = guidanceStore;
   }
 
   onOpenFolder = async (item: TContextItem, t: TTranslation) => {
@@ -815,20 +807,6 @@ class ContextOptionsStore {
 
   onEditIndex = () => {
     this.indexingStore.setIsIndexEditingMode(true);
-  };
-
-  // call sites may pass an undefined roomType which the
-  // original .js forwarded as-is (getGuidanceConfig then returns []) — the
-  // cast keeps that behavior.
-  onEnableFormFillingGuid = (t: TTranslation, roomType?: RoomsType) => {
-    const guidanceConfig = getGuidanceConfig(roomType as RoomsType, t);
-
-    if (!guidanceConfig) {
-      return;
-    }
-
-    this.guidanceStore.setConfig(guidanceConfig);
-    this.dialogsStore.setWelcomeFormFillingTipsVisible(true);
   };
 
   onClickRemoveFromRecent = (item: TContextItem, t: TTranslation) => {

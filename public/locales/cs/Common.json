@@ -1111,7 +1111,6 @@
   "GhostStateDetected": "Vaše šifrovací identita na tomto zařízení nemůže rozbalit některé soubory. Ostatní členové mohli změnit své klíče nebo vaše identita není synchronizována. <0>Otevřít správu klíčů</0> pro opětovné ověření nebo resetování.",
   "Gigabyte": "GB",
   "GoBack": "Vrátit se zpět",
-  "GotIt": "Chápu",
   "GoToMyRooms": "Přejít do sekce místnosti",
   "GoToRoom": "jít do pokoje",
   "GoToSection": "Přejít do {{sectionName}}",

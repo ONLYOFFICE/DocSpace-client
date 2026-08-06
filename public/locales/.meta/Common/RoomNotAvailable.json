@@ -3,7 +3,7 @@
   "content": "Room not available",
   "content_en_sha1_hash": "9133dc18fe95f3b8f20a7849bdab1ce0384389ce",
   "created_at": "2025-05-19T21:30:48.227Z",
-  "updated_at": "2026-07-27T13:07:50.702Z",
+  "updated_at": "2026-08-06T14:20:57.598Z",
   "comment": {
     "text": "This is an error message title displayed in a toast notification or an info panel when a user tries to access a Room that is no longer available, often because its link has expired.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
-      "line_number": 268,
+      "line_number": 260,
       "context": "const description = isRoom\n ? t(\"Common:RoomLinkExpired\")\n : t(\"Common:FolderLinkExpired\");\n \n const title = isRoom\n ? t(\"Common:RoomNotAvailable\")\n : t(\"Common:FolderNotAvailable\");\n \n return toastr.error(description, title);\n }",
       "module": "/packages/client"
     },

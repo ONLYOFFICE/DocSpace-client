@@ -1111,7 +1111,6 @@
   "GhostStateDetected": "이 기기의 암호화 ID가 일부 파일의 잠금을 해제하지 못합니다. 다른 멤버가 키를 변경했거나 ID가 동기화되지 않았을 수 있습니다. <0>키 관리 열기</0>를 통해 재확인하거나 초기화하세요.",
   "Gigabyte": "GB",
   "GoBack": "돌아가기",
-  "GotIt": "확인",
   "GoToMyRooms": "방 목록으로 이동",
   "GoToRoom": "방으로 이동",
   "GoToSection": "{{sectionName}}(으)로 이동",

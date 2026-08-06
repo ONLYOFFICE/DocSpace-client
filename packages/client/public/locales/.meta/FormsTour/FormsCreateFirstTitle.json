@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsCreateFirstTitle",
+  "content": "Now make it yours",
+  "content_en_sha1_hash": "53971ce5983bffd660e85f87c0abb8f730a36b76",
+  "created_at": "2026-08-06T14:20:53.751Z",
+  "updated_at": "2026-08-06T14:46:39.956Z",
+  "comment": {
+    "text": "Title for a tutorial step in the onboarding tour, appearing on the empty screen to prompt users to create their first form.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:46:39.956Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 312,
+      "context": "isStandIn &&\n demoHooks &&\n (canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"FormsTour:FormsCreateFirstTitle\"),\n t(\"FormsTour:FormsCreateFirst\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

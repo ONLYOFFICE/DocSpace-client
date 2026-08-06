@@ -1,0 +1,35 @@
+{
+  "key_path": "TourAiAssistantTitle",
+  "content": "Your AI assistant",
+  "content_en_sha1_hash": "12787ee75f40a66c50e93cdc63a48c3af81ac717",
+  "created_at": "2026-08-06T14:20:53.788Z",
+  "updated_at": "2026-08-06T14:37:38.410Z",
+  "comment": {
+    "text": "Title of a feature tour step that introduces the AI chat functionality in both the Files and Rooms sections.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:37:38.410Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 258,
+      "context": "canOwnFiles &&\n canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 181,
+      "context": "// 3. AI chat — the same tile, and the same thing to say about it, as in the\n // files tour; the wording is shared rather than duplicated per namespace.\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Rooms\") }),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

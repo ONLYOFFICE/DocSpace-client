@@ -50,7 +50,10 @@ import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
-import GuidanceStore from "./GuidanceStore";
+import FilesTourStore from "./FilesTourStore";
+import RoomsTourStore from "./RoomsTourStore";
+import FormsTourStore from "./FormsTourStore";
+import AiAgentsTourStore from "./AiAgentsTourStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -201,7 +204,10 @@ const filesStore = new FilesStore(
   aiRoomStore,
 );
 
-const guidanceStore = new GuidanceStore();
+const filesTourStore = new FilesTourStore();
+const roomsTourStore = new RoomsTourStore();
+const formsTourStore = new FormsTourStore();
+const aiAgentsTourStore = new AiAgentsTourStore();
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
@@ -324,7 +330,6 @@ const contextOptionsStore = new ContextOptionsStore(
   userStore,
   indexingStore,
   clientLoadingStore,
-  guidanceStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -487,7 +492,10 @@ const store = {
 
   brandingStore,
 
-  guidanceStore,
+  filesTourStore,
+  roomsTourStore,
+  formsTourStore,
+  aiAgentsTourStore,
 
   aiRoomStore,
   appsStore,

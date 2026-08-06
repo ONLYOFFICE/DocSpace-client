@@ -140,7 +140,7 @@
   "TrialExpiredDescription": "Faceți upgrade la o licență plătită pentru a continua să utilizați toate funcțiile.",
   "TrialExpiredTitle": "Licența de încercare a expirat",
   "UnusedSubscriptionCredit": "Credit neutilizat din abonament",
-  "UnusedSubscriptionCreditTooltip": "Partea neutilizată din abonamentul dvs. actual este aplicată automat la noul dvs. abonament. Ciclul dvs. de facturare va reporni astăzi.",
+  "UnusedSubscriptionCreditTooltip": "<1>Partea neutilizată din abonamentul dvs. actual este aplicată automat la noul dvs. abonament.</1><2>Neutilizat: {{amount}}</2><3>Ciclul dvs. de facturare va reporni astăzi.</3>",
   "UseEditorsInProduct": "Utilizați aceste editoare în {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Urmăriți activitatea utilizatorilor unici",
   "UserAdjustmentLabel": "Ajustare utilizatori",

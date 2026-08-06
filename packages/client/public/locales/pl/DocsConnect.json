@@ -140,7 +140,7 @@
   "TrialExpiredDescription": "Uaktualnij do płatnej licencji, aby dalej korzystać ze wszystkich funkcji.",
   "TrialExpiredTitle": "Licencja próbna wygasła",
   "UnusedSubscriptionCredit": "Niewykorzystany kredyt subskrypcji",
-  "UnusedSubscriptionCreditTooltip": "Niewykorzystana część Twojej obecnej subskrypcji zostanie automatycznie zaliczona na poczet nowej subskrypcji. Twój cykl rozliczeniowy rozpocznie się dzisiaj od nowa.",
+  "UnusedSubscriptionCreditTooltip": "<1>Niewykorzystana część Twojej obecnej subskrypcji zostanie automatycznie zaliczona na poczet nowej subskrypcji.</1><2>Niewykorzystane: {{amount}}</2><3>Twój cykl rozliczeniowy rozpocznie się dzisiaj od nowa.</3>",
   "UseEditorsInProduct": "Używaj tych edytorów w {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Śledź unikalną aktywność użytkowników",
   "UserAdjustmentLabel": "Korekta użytkowników",

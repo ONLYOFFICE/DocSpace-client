@@ -140,7 +140,7 @@
   "TrialExpiredDescription": "Přejděte na placenou licenci a pokračujte v používání všech funkcí.",
   "TrialExpiredTitle": "Platnost zkušební licence vypršela",
   "UnusedSubscriptionCredit": "Nevyužitý kredit z předplatného",
-  "UnusedSubscriptionCreditTooltip": "Nevyužitá část vašeho aktuálního předplatného bude automaticky uplatněna na nové předplatné. Váš fakturační cyklus se dnes restartuje.",
+  "UnusedSubscriptionCreditTooltip": "<1>Nevyužitá část vašeho aktuálního předplatného bude automaticky uplatněna na nové předplatné.</1><2>Nevyužito: {{amount}}</2><3>Váš fakturační cyklus se dnes restartuje.</3>",
   "UseEditorsInProduct": "Používat tyto editory v {{organizationName}} {{editorsName}}",
   "UserActivitySubtitle": "Sledujte aktivitu unikátních uživatelů",
   "UserAdjustmentLabel": "Úprava uživatelů",

@@ -140,7 +140,7 @@
   "TrialExpiredDescription": "모든 기능을 계속 사용하려면 유료 라이선스로 업그레이드하세요.",
   "TrialExpiredTitle": "무료 체험 라이선스가 만료되었습니다",
   "UnusedSubscriptionCredit": "사용하지 않은 구독 크레딧",
-  "UnusedSubscriptionCreditTooltip": "현재 구독에서 사용하지 않은 부분은 새 구독에 자동으로 적용됩니다. 청구 주기는 오늘부터 다시 시작됩니다.",
+  "UnusedSubscriptionCreditTooltip": "<1>현재 구독에서 사용하지 않은 부분은 새 구독에 자동으로 적용됩니다.</1><2>미사용: {{amount}}</2><3>청구 주기는 오늘부터 다시 시작됩니다.</3>",
   "UseEditorsInProduct": "{{organizationName}} {{editorsName}}에서 이 편집기 사용",
   "UserActivitySubtitle": "고유 사용자 활동 추적",
   "UserAdjustmentLabel": "사용자 조정",

@@ -140,7 +140,7 @@
   "TrialExpiredDescription": "Päivitä maksulliseen lisenssiin jatkaaksesi kaikkien ominaisuuksien käyttöä.",
   "TrialExpiredTitle": "Kokeilulisenssi on vanhentunut",
   "UnusedSubscriptionCredit": "Käyttämätön tilauskrediitti",
-  "UnusedSubscriptionCreditTooltip": "Nykyisen tilauksesi käyttämätön osuus hyvitetään automaattisesti uuteen tilaukseesi. Laskutusjaksosi alkaa uudelleen tänään.",
+  "UnusedSubscriptionCreditTooltip": "<1>Nykyisen tilauksesi käyttämätön osuus hyvitetään automaattisesti uuteen tilaukseesi.</1><2>Käyttämätön: {{amount}}</2><3>Laskutusjaksosi alkaa uudelleen tänään.</3>",
   "UseEditorsInProduct": "Käytä näitä editoreita {{organizationName}} {{editorsName}}-tuotteessa",
   "UserActivitySubtitle": "Seuraa yksilöllistä käyttäjäaktiivisuutta",
   "UserAdjustmentLabel": "Käyttäjämäärän muutos",

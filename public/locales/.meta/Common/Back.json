@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2026-07-28T07:30:59.889Z",
+  "updated_at": "2026-08-06T14:20:57.525Z",
   "comment": {
     "text": "Button label. Navigates the user to the previous screen or step in a process.",
     "is_auto": true,
@@ -22,6 +22,12 @@
       "line_number": 206,
       "context": "}\n isFill\n />\n \n <Link {...linkStyles}>\n {withSearch ? t(\"ClearFilter\") || \"\" : t(\"Back\") || \"\"}\n </Link>\n </div>\n ) : null}\n </div>\n </div>",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/Tour/useTour.ts",
+      "line_number": 158,
+      "context": "skipScroll: true,\n zIndex: 10000,\n ...JOYRIDE_TIMEOUTS,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n },\n });",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",

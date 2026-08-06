@@ -3,7 +3,7 @@
   "content": "Create Rooms and start collaborating instantly",
   "content_en_sha1_hash": "3eb13e1be3cc229082936eda518eba4461bf8434",
   "created_at": "2026-06-25T19:30:57.218Z",
-  "updated_at": "2026-07-07T08:59:21.701Z",
+  "updated_at": "2026-08-06T14:20:57.528Z",
   "comment": {
     "text": "Subtitle in a promotional dialog that introduces the Rooms feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 136,
+      "line_number": 139,
       "context": "githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {\n title: t(\"Common:Rooms\"),\n subtitle: t(\"Common:RoomsPromoSubtitle\"),\n description: t(\"Common:RoomsPromoDescription\"),\n features: [\n {\n Icon: CollaborationRoomIcon,\n title: t(\"Common:ColloborationRooms\"),",
       "module": "/packages/client"
     }

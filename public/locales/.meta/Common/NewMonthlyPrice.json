@@ -3,7 +3,7 @@
   "content": "New monthly price",
   "content_en_sha1_hash": "c007dd3cca0268a7851dcba7068cfb09a3376a3f",
   "created_at": "2026-04-10T13:53:45.395Z",
-  "updated_at": "2026-08-06T11:20:26.688Z",
+  "updated_at": "2026-08-06T14:20:57.623Z",
   "comment": {
     "text": "This is a label in an order summary, indicating the updated monthly cost after a change to a storage plan. It appears when a user is downgrading their storage plan and is not exceeding their current storage limit.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 842,
+      "line_number": 846,
       "context": "{summaryRow(\n t(\"DocsConnect:DevPackPerUser\"),\n formatCurrency(devPackPrice),\n )}\n {summaryRow(\n t(\"Common:NewMonthlyPrice\"),\n formatCurrency(totalMonthly),\n )}\n <div className={styles.summaryRow}>\n <div className={styles.totalLabel}>\n <Text",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 842,
+      "line_number": 846,
       "context": "{summaryRow(\n t(\"DocsConnect:DevPackPerUser\"),\n formatCurrency(devPackPrice),\n )}\n {summaryRow(\n t(\"Common:NewMonthlyPrice\"),\n formatCurrency(totalMonthly),\n )}\n <div className={styles.summaryRow}>\n <div className={styles.totalLabel}>\n <Text",
       "module": "/packages/client"
     }

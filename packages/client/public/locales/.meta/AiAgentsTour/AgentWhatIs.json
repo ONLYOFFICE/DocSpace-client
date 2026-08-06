@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentWhatIs",
+  "content": "An AI agent is an assistant you set up once and keep, rather than a chat you open and lose. Each one holds a conversation of its own, a knowledge base built from your documents, and everything it has written for you.",
+  "content_en_sha1_hash": "4bfaf2c0e4bc37d69f9ca4e2e029895b2a340d50",
+  "created_at": "2026-08-06T14:20:56.253Z",
+  "updated_at": "2026-08-06T14:21:47.975Z",
+  "comment": {
+    "text": "Informational text within a guided tour step that explains the concept and functionality of an AI agent.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:21:47.975Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 184,
+      "context": "t(\"AiAgentsTour:AgentWhatIsTitle\"),\n // The same mental model either way — but somebody who cannot add to the\n // list is told where the list they are looking at comes from instead of\n // what an agent keeps for them.\n isAdmin\n ? t(\"AiAgentsTour:AgentWhatIs\")\n : t(\"AiAgentsTour:AgentWhatIsShared\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

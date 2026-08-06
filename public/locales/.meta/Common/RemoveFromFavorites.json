@@ -3,7 +3,7 @@
   "content": "Remove from favorites",
   "content_en_sha1_hash": "b6ddf62b5644450062ee5f53a4c326f908f786f2",
   "created_at": "2026-04-03T21:51:34.655Z",
-  "updated_at": "2026-07-27T13:07:50.872Z",
+  "updated_at": "2026-08-06T14:20:57.661Z",
   "comment": {
     "text": "This is a button label or menu item. It allows users to remove a selected file or folder from their favorites list.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 954,
+      "line_number": 936,
       "context": "isSeparator: true,\n },\n {\n id: \"option_remove-from-favorites\",\n key: \"remove-from-favorites\",\n label: t(\"Common:RemoveFromFavorites\"),\n icon: FavoritesFillReactSvgUrl,\n onClick: () => self.onClickFavorite(\"remove\", [item], t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },

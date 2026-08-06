@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsTemplates",
+  "content": "Collecting the same form every quarter? Save the space as a template — the form, the roles, the tags and the result settings are kept. The next round starts in one click.",
+  "content_en_sha1_hash": "9d26e722a4ef3efa2ca725774e12febe015e1082",
+  "created_at": "2026-08-06T14:20:53.759Z",
+  "updated_at": "2026-08-06T14:38:39.684Z",
+  "comment": {
+    "text": "Description text within an interactive product tour step explaining the benefits of saving a space as a template for recurring tasks.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:38:39.684Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 197,
+      "context": "canUseTemplates &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-form-space-template\"]',\n t(\"FormsTour:FormsTemplatesTitle\"),\n t(\"FormsTour:FormsTemplates\"),\n callbacks,\n LOG_LABEL,\n 6,\n leaveSpace,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

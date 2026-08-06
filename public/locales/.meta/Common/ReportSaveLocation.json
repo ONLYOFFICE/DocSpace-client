@@ -3,7 +3,7 @@
   "content": "The report will be saved to {{sectionName}}",
   "content_en_sha1_hash": "55671fe19ba077a1c4e0ef79f837de41f87ae103",
   "created_at": "2026-04-10T13:53:45.955Z",
-  "updated_at": "2026-08-05T16:32:00.317Z",
+  "updated_at": "2026-08-06T14:20:57.647Z",
   "comment": {
     "text": "This is a descriptive text indicating where a downloaded report will be saved. It appears below a \"Download Report\" button and includes a `{{sectionName}}` variable, which will be replaced by the name of the location where the report is saved (e.g., \"My Documents\").",
     "is_auto": true,
@@ -19,14 +19,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 126,
-      "context": "securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}",
+      "line_number": 130,
+      "context": "securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isAuditTrailReportBuilding}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 109,
-      "context": "lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n tfaEnabled={tfaEnabled}",
+      "line_number": 116,
+      "context": "lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getLoginHistoryReport}\n isLoadingDownloadReport={isLoginHistoryReportBuilding}\n isSettingNotPaid={!isAuditAvailable}",
       "module": "/packages/client"
     },
     {
@@ -36,9 +36,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/InfoPanelStore.ts",
-      "line_number": 146,
-      "context": "private finishRoomHistoryReport = (resultFileUrl?: string) => {\n const { openOnNewPage } = this.filesSettingsStore;\n \n toastr.success(\n i18n.t(\"Common:ReportSaveLocation\", {\n sectionName: i18n.t(\"Common:Files\"),\n }),\n );\n \n if (!this.roomHistoryReportPageLeft && resultFileUrl) {",
+      "file_path": "/packages/client/src/store/DocumentBuilderReportStore.ts",
+      "line_number": 70,
+      "context": "// builder is not cancelled — it keeps running on the server and still saves the\n // file, so giving up only means the user has to pick the file up themselves.\n export const REPORT_BUILD_TIMEOUT_MS = 10 * 60 * 1000;\n \n const getSaveLocationText = () =>\n i18n.t(\"Common:ReportSaveLocation\", { sectionName: i18n.t(\"Common:Files\") });\n \n class DocumentBuilderReportStore {\n private filesSettingsStore: FilesSettingsStore;\n \n private buildingReports = new Set<TReportType>();",
       "module": "/packages/client"
     }
   ],

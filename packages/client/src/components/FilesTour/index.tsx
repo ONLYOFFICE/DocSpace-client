@@ -252,6 +252,14 @@ const FilesTour = ({
     [],
   );
 
+  // Read in the render body rather than inside the memo: a value only `useMemo`
+  // reads is a value `observer` does not track, so arming the demo would not
+  // re-render the component — and a value missing from the deps is one a cached
+  // memo never picks up even if it did. Here the demo is only ever armed on an
+  // empty list, so the `hasItems` flip that the reload brings happens to
+  // recompute this anyway; the dependency is spelled out so it does not have to.
+  const isDemo = tourDemo.isActive;
+
   const flags = useMemo<TourStepFlags>(
     () => ({
       audience,
@@ -265,7 +273,7 @@ const FilesTour = ({
       recentId,
       favoritesId,
       trashId,
-      isDemo: tourDemo.isActive,
+      isDemo,
       demoHooks,
     }),
     [
@@ -280,6 +288,7 @@ const FilesTour = ({
       recentId,
       favoritesId,
       trashId,
+      isDemo,
       demoHooks,
     ],
   );

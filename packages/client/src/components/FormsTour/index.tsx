@@ -116,6 +116,17 @@ const FormsTour = ({
    * negative id as "not a room" and would send the tour back to the section
    * root. Everything else about the trip is ordinary — the route fetches
    * `/files/{id}`, which the demo answers.
+   *
+   * That the demo is what answers it is also the limit of the trip: the url the
+   * tour navigates to (`/forms/-1000?…`) only resolves while the mocks are up.
+   * Reloading the page while standing inside a stand-in space asks the server
+   * about a room it has never heard of, and the section shows "room not
+   * available" — a dead end the user leaves by clicking the section in the
+   * sidebar. Nothing guards against it because nothing sensibly can: a reload
+   * is a fresh application with no tour running, and the alternative — teaching
+   * the router that some negative ids are pretend — would spread the demo into
+   * code that has no other reason to know about it. The tour itself always
+   * leaves the same way it came in (`leaveSpace`), on every path that ends it.
    */
   const enterSpace = useCallback(() => {
     if (sectionLocation.current) return;
@@ -339,6 +350,17 @@ const FormsTour = ({
     [],
   );
 
+  // Read in the render body rather than inside the memo, for two reasons that
+  // are really the same one: a value only `useMemo` reads is a value `observer`
+  // does not track, so the component would stop re-rendering when the demo is
+  // armed — and a value missing from the deps is one a cached memo never picks
+  // up even if it did. This tour arms its demo whatever the section holds
+  // (unlike the other three, which only do it on an empty one), so on a portal
+  // that already has form spaces there is no `hasItems` flip to recompute the
+  // memo behind them, and every step inside the stand-in space would be dropped.
+  const isDemo = tourDemo.isActive;
+  const isStandIn = tourDemo.isStandingInForList;
+
   const flags = useMemo<TourStepFlags>(
     () => ({
       isDesktop,
@@ -347,8 +369,8 @@ const FormsTour = ({
       showFilter,
       hasItems,
       hasForms,
-      isDemo: tourDemo.isActive,
-      isStandIn: tourDemo.isStandingInForList,
+      isDemo,
+      isStandIn,
       spaceHooks,
       demoHooks,
       leaveSpace,
@@ -360,6 +382,8 @@ const FormsTour = ({
       showFilter,
       hasItems,
       hasForms,
+      isDemo,
+      isStandIn,
       spaceHooks,
       demoHooks,
       leaveSpace,
@@ -387,7 +411,7 @@ const FormsTour = ({
       // actually landed. Without this the reload above and the start timer
       // race, and joyride can freeze its step list against the empty page the
       // reload is on its way to replace.
-      (!tourDemo.isStandingInForList || hasItems),
+      (!isStandIn || hasItems),
     isMobileView,
   );
 

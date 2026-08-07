@@ -164,7 +164,7 @@ const AiServicesManagementComponent = ({
   const onSave = async () => {
     if (type === false) {
       try {
-        await Promise.all([handleServiceQuota(AI_ENUM)]);
+        await handleServiceQuota(AI_ENUM);
         setShowDisableDialog(true);
       } catch (e) {
         toastr.error(e as string);

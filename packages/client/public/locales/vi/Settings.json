@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Tích hợp, mở rộng và tự động hóa {{organizationName}} {{productName}} bằng bộ công cụ nhà phát triển đầy đủ của chúng tôi — từ REST API và Embed SDK đến webhooks và ứng dụng OAuth. Chọn một công cụ bên dưới để bắt đầu.",
   "DisableAiServices": "Tắt {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} sẽ bị ẩn đối với tất cả người dùng (lịch sử tương tác vẫn được bảo toàn).",
-  "DisableAiServicesBalance": "Số dư còn lại của bạn (<1>{{balance}}</1>) sẽ được giữ trong tài khoản và sẽ có sẵn để sử dụng nếu bạn chọn bật lại {{aiServices}} trong tương lai.",
   "DisableAiServicesConfirm": "Bạn có thể bật lại {{aiServices}} bất cứ lúc nào. Bạn có chắc chắn muốn tiếp tục không?",
   "DisableAiServicesDescription": "Bằng cách vô hiệu hóa AI của {{organizationName}}, các thay đổi sau sẽ có hiệu lực:",
   "DisableAiServicesServicesDisabled": "{{aiServices}} trả phí sẽ bị vô hiệu hóa.",

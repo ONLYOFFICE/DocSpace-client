@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Интегришите, проширите и аутоматизујте {{organizationName}} {{productName}} користећи наш комплетан скуп алата за програмере — од REST API-ја и Embed SDK-а до вебхукова и OAuth апликација. Изаберите алат испод да започнете.",
   "DisableAiServices": "Искључи {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} ће бити скривено за све кориснике (историја интеракција ће остати сачувана).",
-  "DisableAiServicesBalance": "Ваше преостало стање на рачуну (<1>{{balance}}</1>) остаће на вашем рачуну и биће доступно за употребу ако решите да поново активирате {{aiServices}} у будућности.",
   "DisableAiServicesConfirm": "Можете поново активирати {{aiServices}} у било којем тренутку. Да ли сте сигурни да желите да наставите?",
   "DisableAiServicesDescription": "Искључивањем {{organizationName}} AI, ступиће на снагу следеће промене:",
   "DisableAiServicesServicesDisabled": "Плаћени {{aiServices}} ће бити деактивирани.",

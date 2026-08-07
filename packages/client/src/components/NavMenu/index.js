@@ -54,6 +54,10 @@ import HeaderNav from "./sub-components/header-nav";
 import Header from "./sub-components/header";
 import styles from "./nav.module.scss";
 
+// Minimum scroll delta (px) that counts as a deliberate direction change.
+// Below this the movement is momentum/rubber-band noise rather than a gesture.
+const SCROLL_THRESHOLD = 5;
+
 const NavMenu = (props) => {
   const {
     isAuthenticated,
@@ -91,22 +95,39 @@ const NavMenu = (props) => {
 
   const onScroll = useCallback((e) => {
     const eventTarget = e.target;
-    const currentScrollTop = Math.max(0, eventTarget.scrollTop);
     const scrollHeight = eventTarget.scrollHeight;
     const clientHeight = eventTarget.clientHeight;
 
+    // Clamp to the real scrollable range: iOS rubber-banding reports scrollTop
+    // beyond both ends during overscroll, and those out-of-range values would
+    // otherwise register as direction changes once the bounce settles back.
+    const maxScrollTop = Math.max(0, scrollHeight - clientHeight);
+    const currentScrollTop = Math.min(
+      Math.max(0, eventTarget.scrollTop),
+      maxScrollTop,
+    );
+
     const scrollShift = scrollTopRef.current - currentScrollTop;
+
+    // Ignore sub-threshold jitter without losing the reference point: momentum
+    // scrolling emits a stream of tiny deltas (and iOS re-fires events with an
+    // unchanged scrollTop while the URL bar animates), so reacting to every one
+    // of them would toggle the bar on noise. Keeping scrollTopRef untouched
+    // here lets small deltas accumulate until they add up to a real gesture.
+    if (Math.abs(scrollShift) < SCROLL_THRESHOLD) return;
+
     scrollTopRef.current = currentScrollTop;
 
     const isNearBottom = scrollHeight - (currentScrollTop + clientHeight) < 100;
 
     const isAtTop = currentScrollTop < 20;
 
-    if (isAtTop) {
-      setIsFixed(false);
-    } else if (scrollShift > 0 && !isNearBottom) {
+    // An upward scroll wins over isAtTop: while the bar is pinned it occupies
+    // the first 48px of the scroller, so a gesture that ends near the top still
+    // reports scrollTop < 20 — checking isAtTop first would unpin mid-gesture.
+    if (scrollShift > 0 && !isNearBottom) {
       setIsFixed(true);
-    } else if (scrollShift <= 0) {
+    } else if (isAtTop || scrollShift <= 0) {
       setIsFixed(false);
     }
   }, []);

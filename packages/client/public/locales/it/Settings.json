@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Integrare, estendere e automatizzare {{organizationName}} {{productName}} utilizzando la nostra suite completa di strumenti per sviluppatori: dal REST API e Embed SDK ai webhook e alle app OAuth. Scegli uno strumento qui sotto per iniziare.",
   "DisableAiServices": "Disabilita {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} sarà nascosto per tutti gli utenti (la cronologia delle interazioni rimarrà salvata).",
-  "DisableAiServicesBalance": "Il saldo rimanente (<1>{{balance}}</1>) rimarrà sul suo account e sarà disponibile per l'utilizzo se deciderà di riabilitare {{aiServices}} in futuro.",
   "DisableAiServicesConfirm": "Potete riabilitare {{aiServices}} in qualsiasi momento. Desidera davvero continuare?",
   "DisableAiServicesDescription": "Disattivando l'IA di {{organizationName}}, verranno applicate le seguenti modifiche:",
   "DisableAiServicesServicesDisabled": "I servizi {{aiServices}} a pagamento verranno disattivati.",

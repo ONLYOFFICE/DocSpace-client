@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "ປະສົມປະສານ, ຂະຫຍາຍ, ແລະ ອັດຕະໂນມັດ {{organizationName}} {{productName}} ໂດຍໃຊ້ຊຸດເຄື່ອງມືນັກພັດທະນາທີ່ສົມບູນຂອງພວກເຮົາ — ຕັ້ງແຕ່ REST API ແລະ Embed SDK ເຖິງ webhooks ແລະ OAuth apps. ເລືອກເຄື່ອງມືຂ້າງລຸ່ມເພື່ອເລີ່ມຕົ້ນ.",
   "DisableAiServices": "ປິດການໃຊ້ງານ {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} ຈະຖືກປິດສຳລັບຜູ້ໃຊ້ທຸກຄົນ (ປະຫວັດການໂຕ້ຕອບຍັງຄົງຖືກເກັບຮັກສາໄວ້).",
-  "DisableAiServicesBalance": "ຍອດເງິນທີ່ຍັງເຫຼືອຂອງທ່ານ (<1>{{balance}}</1>) ຈະຢູ່ໃນບັນຊີຂອງທ່ານ ແລະ ຈະສາມາດນຳໃຊ້ໄດ້ ຖ້າທ່ານເລືອກທີ່ຈະເປີດໃຊ້ງານ {{aiServices}} ໃນອະນາຄົດ.",
   "DisableAiServicesConfirm": "ທ່ານສາມາດເປີດໃຊ້ງານ {{aiServices}} ອີກເທື່ອໃດກໍໄດ້. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່ບໍ?",
   "DisableAiServicesDescription": "ໂດຍການປິດການໃຊ້ງານ AI ຂອງ {{organizationName}}, ການປ່ຽນແປງຕໍ່ໄປນີ້ຈະມີຜົນບັງຄັບໃຊ້:",
   "DisableAiServicesServicesDisabled": "ການບໍລິການ {{aiServices}} ທີ່ຈ່າຍເງິນແລ້ວຈະຖືກປິດການນຳໃຊ້.",

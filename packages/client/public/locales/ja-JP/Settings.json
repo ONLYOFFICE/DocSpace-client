@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "{{organizationName}} {{productName}} を、REST API や Embed SDK からウェブフック、OAuth アプリまで、当社のフルセットの開発者ツールを使用して統合、拡張、自動化します。始めるには、以下のツールを選択してください。",
   "DisableAiServices": "{{aiServices}}を無効にする",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} はすべてのユーザーから非表示になります（対話履歴は保持されます）。",
-  "DisableAiServicesBalance": "残高（<1>{{balance}}</1>）はアカウントに保持され、将来{{aiServices}}を再度有効にする場合に利用できます。",
   "DisableAiServicesConfirm": "{{aiServices}}はいつでも再度有効にできます。続行しますか？",
   "DisableAiServicesDescription": "{{organizationName}} AIを無効にすると、以下の変更が適用されます。",
   "DisableAiServicesServicesDisabled": "有料の{{aiServices}}は無効になります。",

@@ -502,7 +502,7 @@
       }
     },
     {
-      "label": "Test | Jest:common",
+      "label": "Test | Vitest:common",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test ; npm run open-report",
       "group": {
@@ -517,7 +517,7 @@
       }
     },
     {
-      "label": "Test | Jest:translations",
+      "label": "Test | Vitest:translations",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; npm run open-report",
       "group": {
@@ -532,7 +532,7 @@
       }
     },
     {
-      "label": "Test | Jest:translations:missing-keys",
+      "label": "Test | Vitest:translations:missing-keys",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:only-missing-keys ; npm run open-report",
       "group": {
@@ -547,7 +547,7 @@
       }
     },
     {
-      "label": "Test | Jest:translations:clear-wrong",
+      "label": "Test | Vitest:translations:clear-wrong",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; CLEAR_WRONG_VALUES=true FIX_MOVED_KEYS=true npm run test:locales ; npm run open-report",
       "group": {
@@ -562,7 +562,7 @@
       }
     },
     {
-      "label": "Test | Jest:images",
+      "label": "Test | Vitest:images",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; npm run open-report",
       "group": {
@@ -577,7 +577,7 @@
       }
     },
     {
-      "label": "Test | Jest:colors",
+      "label": "Test | Vitest:colors",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; npm run open-report",
       "group": {
@@ -592,7 +592,7 @@
       }
     },
     {
-      "label": "Test | Jest:ascii",
+      "label": "Test | Vitest:ascii",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:ascii ; npm run open-report",
       "group": {
@@ -607,7 +607,7 @@
       }
     },
     {
-      "label": "Test | Jest:license",
+      "label": "Test | Vitest:license",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:license ; npm run open-report",
       "group": {
@@ -622,7 +622,7 @@
       }
     },
     {
-      "label": "Test | Jest:dependencies",
+      "label": "Test | Vitest:dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; npm run open-report",
       "group": {
@@ -637,7 +637,7 @@
       }
     },
     {
-      "label": "Test | Jest:dependencies:audit",
+      "label": "Test | Audit:dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm audit --audit-level=moderate",
       "group": {
@@ -652,7 +652,7 @@
       }
     },
     {
-      "label": "Test | Jest:licenses:audit",
+      "label": "Test | Audit:licenses",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run licenses-audit",
       "group": {
@@ -667,7 +667,7 @@
       }
     },
     {
-      "label": "Test | Jest:unit",
+      "label": "Test | Vitest:unit",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test",
       "group": {
@@ -682,7 +682,7 @@
       }
     },
     {
-      "label": "Test | Jest:unit:ui-kit",
+      "label": "Test | Vitest:unit:ui-kit",
       "type": "shell",
       "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm test",
       "group": {
@@ -1059,7 +1059,7 @@
     {
       "label": "Test | Test e2e docker start (login)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/login",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9326 ${workspaceFolder}/playwright-report/login",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1089,7 +1089,7 @@
     {
       "label": "Test | Test e2e docker dev (login)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/login",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9326 ${workspaceFolder}/playwright-report/login",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1164,7 +1164,7 @@
     {
       "label": "Test | Test e2e docker start (SDK)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/sdk",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9328 ${workspaceFolder}/playwright-report/sdk",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1194,7 +1194,7 @@
     {
       "label": "Test | Test e2e docker dev (SDK)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/sdk",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9328 ${workspaceFolder}/playwright-report/sdk",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1269,7 +1269,7 @@
     {
       "label": "Test | Test e2e docker start (management)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/management",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9329 ${workspaceFolder}/playwright-report/management",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1299,7 +1299,7 @@
     {
       "label": "Test | Test e2e docker dev (management)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/management",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9329 ${workspaceFolder}/playwright-report/management",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1374,7 +1374,7 @@
     {
       "label": "Test | Test e2e docker start (editor)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9327 ${workspaceFolder}/playwright-report/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -1404,7 +1404,7 @@
     {
       "label": "Test | Test e2e docker dev (editor)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9327 ${workspaceFolder}/playwright-report/doceditor",
       "group": {
         "kind": "build",
         "isDefault": true

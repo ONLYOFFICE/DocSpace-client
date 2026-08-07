@@ -934,7 +934,7 @@
   "FilesPermissionsDescription": "超越简单共享，提供精细的角色与安全的访问控制。",
   "FilesPermissionsTitle": "高级权限",
   "FilesPromoDescription": "在团队间存储、整理和共享文件，完全可控、即时访问。",
-  "FilesPromoSubtitle": "文件：您处理文档的工作区",
+  "FilesPromoSubtitle": "您处理文档的工作区",
   "FilesQuickSearchDescription": "按内容、类型、作者、日期或标签即时找到任意文件。",
   "FilesQuickSearchTitle": "快速搜索与筛选",
   "FilesRejectedDueToFormat": "{{count}} 个文件因格式不受支持而被拒绝。",

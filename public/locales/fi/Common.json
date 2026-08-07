@@ -934,7 +934,7 @@
   "FilesPermissionsDescription": "Mene pidemmälle kuin pelkkä jakaminen tarkoilla rooleilla ja turvallisella pääsynhallinnalla.",
   "FilesPermissionsTitle": "Edistyneet käyttöoikeudet",
   "FilesPromoDescription": "Tallenna, järjestä ja jaa tiedostoja tiimien kesken täydellä hallinnalla ja välittömällä pääsyllä.",
-  "FilesPromoSubtitle": "Tiedostot: työtilasi asiakirjoille",
+  "FilesPromoSubtitle": "Työtilasi asiakirjoille",
   "FilesQuickSearchDescription": "Löydä mikä tahansa tiedosto heti sisällön, tyypin, tekijän, päivämäärän tai tunnisteiden perusteella.",
   "FilesQuickSearchTitle": "Nopea haku ja suodattimet",
   "FilesRejectedDueToFormat": "{{count}} tiedostoa hylättiin ei-tuetun muodon vuoksi.",

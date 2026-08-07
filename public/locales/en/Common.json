@@ -934,7 +934,7 @@
   "FilesPermissionsDescription": "Go beyond simple sharing with granular roles and secure access control.",
   "FilesPermissionsTitle": "Advanced permissions",
   "FilesPromoDescription": "Store, organize, and share files across teams with full control and instant access.",
-  "FilesPromoSubtitle": "Files: your workspace for documents",
+  "FilesPromoSubtitle": "Your workspace for documents",
   "FilesQuickSearchDescription": "Find any file instantly by content, type, author, date, or tags.",
   "FilesQuickSearchTitle": "Fast search & filters",
   "FilesRejectedDueToFormat": "{{count}} files were rejected due to unsupported format.",

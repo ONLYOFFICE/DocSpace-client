@@ -934,7 +934,7 @@
   "FilesPermissionsDescription": "단순한 공유를 넘어 세분화된 역할과 안전한 액세스 제어를 활용하세요.",
   "FilesPermissionsTitle": "고급 권한",
   "FilesPromoDescription": "완벽한 제어와 즉각적인 액세스로 팀 전체에서 파일을 저장하고, 정리하고, 공유하세요.",
-  "FilesPromoSubtitle": "파일: 문서를 위한 워크스페이스",
+  "FilesPromoSubtitle": "문서를 위한 워크스페이스",
   "FilesQuickSearchDescription": "콘텐츠, 유형, 작성자, 날짜 또는 태그로 어떤 파일이든 즉시 찾으세요.",
   "FilesQuickSearchTitle": "빠른 검색 및 필터",
   "FilesRejectedDueToFormat": "{{count}}개의 파일이 지원되지 않는 형식으로 인해 거부되었습니다.",

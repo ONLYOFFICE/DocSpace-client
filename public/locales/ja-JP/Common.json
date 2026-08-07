@@ -934,7 +934,7 @@
   "FilesPermissionsDescription": "きめ細かな役割と安全なアクセス制御で、シンプルな共有を超えた機能を実現します。",
   "FilesPermissionsTitle": "高度な権限設定",
   "FilesPromoDescription": "完全なコントロールと即時アクセスで、チーム間でファイルを保存、整理、共有します。",
-  "FilesPromoSubtitle": "ファイル: ドキュメントのためのワークスペース",
+  "FilesPromoSubtitle": "ドキュメントのためのワークスペース",
   "FilesQuickSearchDescription": "コンテンツ、種類、作成者、日付、タグから任意のファイルを即座に見つけられます。",
   "FilesQuickSearchTitle": "高速検索とフィルター",
   "FilesRejectedDueToFormat": "{{count}}個のファイルは、サポートされていない形式のため拒否されました。",

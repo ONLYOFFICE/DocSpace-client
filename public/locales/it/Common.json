@@ -934,7 +934,7 @@
   "FilesPermissionsDescription": "Vai oltre la semplice condivisione con ruoli granulari e un controllo degli accessi sicuro.",
   "FilesPermissionsTitle": "Permessi avanzati",
   "FilesPromoDescription": "Archivia, organizza e condividi i file tra i team con il pieno controllo e l'accesso immediato.",
-  "FilesPromoSubtitle": "File: il tuo spazio di lavoro per i documenti",
+  "FilesPromoSubtitle": "Il tuo spazio di lavoro per i documenti",
   "FilesQuickSearchDescription": "Trova qualsiasi file all'istante per contenuto, tipo, autore, data o tag.",
   "FilesQuickSearchTitle": "Ricerca e filtri rapidi",
   "FilesRejectedDueToFormat": "{{count}} file sono stati rifiutati a causa di un formato non supportato.",

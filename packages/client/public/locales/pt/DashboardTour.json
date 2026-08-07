@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Crie algo agora",
   "DashboardOverview": "Esta página está sempre a um clique de distância — abra {{overview}} na barra lateral sempre que quiser voltar aqui.",
   "DashboardOverviewTitle": "Voltar aqui",
-  "DashboardProfile": "Os dados do seu perfil: quem é o proprietário deste portal, com que plano funciona, quanto armazenamento está em uso e o próprio endereço do portal. As ligações aqui presentes permitem-lhe mudar de plano ou editar estas definições.",
+  "DashboardProfile": "O nome do portal e um breve resumo do seu perfil: nome, e-mail e palavra-passe. A partir daqui pode mudar o nome do portal ou alterar a sua palavra-passe.",
   "DashboardProfileTitle": "Os dados do seu perfil",
   "WelcomeDashboardSubtitle": "Tudo começa nesta página",
   "WelcomeDashboardTitle": "Bem-vindo a {{productName}}",

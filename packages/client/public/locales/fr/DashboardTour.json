@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Créez quelque chose maintenant",
   "DashboardOverview": "Cette page est toujours à un clic — ouvrez {{overview}} dans le panneau latéral chaque fois que vous voulez y revenir.",
   "DashboardOverviewTitle": "Revenir ici",
-  "DashboardProfile": "Les informations de votre profil : à qui appartient ce portail, le forfait sur lequel il fonctionne, l'espace de stockage utilisé et l'adresse du portail elle-même. Les liens présents ici vous permettent de changer de forfait ou de modifier ces paramètres.",
+  "DashboardProfile": "Le nom du portail et un bref résumé de votre profil : nom, e-mail et mot de passe. D'ici, vous pouvez renommer le portail ou modifier votre mot de passe.",
   "DashboardProfileTitle": "Les informations de votre profil",
   "WelcomeDashboardSubtitle": "Tout commence sur cette page",
   "WelcomeDashboardTitle": "Bienvenue sur {{productName}}",

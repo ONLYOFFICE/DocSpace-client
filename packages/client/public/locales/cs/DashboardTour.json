@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Vytvořte teď něco",
   "DashboardOverview": "Tato stránka je vždy na jedno kliknutí — kdykoli se sem budete chtít vrátit, otevřete v postranním panelu {{overview}}.",
   "DashboardOverviewTitle": "Návrat sem",
-  "DashboardProfile": "Údaje vašeho profilu: kdo tento portál vlastní, na jakém tarifu běží, kolik úložiště je využito a samotná adresa portálu. Odkazy zde vám umožní změnit tarif nebo upravit tato nastavení.",
+  "DashboardProfile": "Název portálu a stručný přehled vašeho profilu: jméno, e-mail a heslo. Odsud můžete portál přejmenovat nebo změnit heslo.",
   "DashboardProfileTitle": "Údaje vašeho profilu",
   "WelcomeDashboardSubtitle": "Všechno začíná na této stránce",
   "WelcomeDashboardTitle": "Vítejte v {{productName}}",

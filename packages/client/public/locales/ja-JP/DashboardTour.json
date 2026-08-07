@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "今すぐ何か作ってみる",
   "DashboardOverview": "このページはいつでもワンクリックで開けます。戻りたくなったら、サイドバーの{{overview}}を開いてください。",
   "DashboardOverviewTitle": "ここへ戻るには",
-  "DashboardProfile": "プロフィールの詳細です。このポータルの所有者、利用中の料金プラン、使用済みのストレージ容量、そしてポータルのアドレスそのもの。ここにあるリンクから、プランの変更やこれらの設定の編集ができます。",
+  "DashboardProfile": "ポータル名とプロフィールの概要（名前、メールアドレス、パスワード）です。ここからポータル名の変更やパスワードの変更ができます。",
   "DashboardProfileTitle": "プロフィールの詳細",
   "WelcomeDashboardSubtitle": "すべてはこのページから始まります",
   "WelcomeDashboardTitle": "{{productName}}へようこそ",

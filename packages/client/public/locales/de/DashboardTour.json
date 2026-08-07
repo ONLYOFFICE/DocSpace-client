@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Erstellen Sie jetzt etwas",
   "DashboardOverview": "Diese Seite ist immer nur einen Klick entfernt – öffnen Sie {{overview}} in der Seitenleiste, wann immer Sie hierher zurückkehren möchten.",
   "DashboardOverviewTitle": "Hierher zurückkommen",
-  "DashboardProfile": "Ihre Profildaten: wem dieses Portal gehört, mit welchem Tarif es läuft, wie viel Speicherplatz belegt ist und die Portaladresse selbst. Über die Links hier können Sie Ihren Tarif wechseln oder diese Einstellungen bearbeiten.",
+  "DashboardProfile": "Der Portalname und eine kurze Übersicht Ihres Profils: Name, E-Mail und Passwort. Von hier aus können Sie das Portal umbenennen oder Ihr Passwort ändern.",
   "DashboardProfileTitle": "Ihre Profildaten",
   "WelcomeDashboardSubtitle": "Alles beginnt auf dieser Seite",
   "WelcomeDashboardTitle": "Willkommen bei {{productName}}",

@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "现在就动手创建",
   "DashboardOverview": "这个页面永远只有一次点击之遥——想回到这里时，打开侧边栏中的 {{overview}} 即可。",
   "DashboardOverviewTitle": "回到这里",
-  "DashboardProfile": "你的资料详情：这个门户归谁所有、运行在哪个套餐上、已用了多少存储空间，以及门户地址本身。这里的链接可以让你更换套餐或修改这些设置。",
+  "DashboardProfile": "门户名称和你的个人资料简要信息：姓名、邮箱和密码。在这里可以重命名门户或修改密码。",
   "DashboardProfileTitle": "你的资料详情",
   "WelcomeDashboardSubtitle": "一切都从这个页面开始",
   "WelcomeDashboardTitle": "欢迎使用 {{productName}}",

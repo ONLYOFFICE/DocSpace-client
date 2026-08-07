@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Şimdi bir şey oluşturun",
   "DashboardOverview": "Bu sayfa her zaman bir tık uzaklıktadır — buraya dönmek istediğinizde kenar çubuğundaki {{overview}} bölümünü açın.",
   "DashboardOverviewTitle": "Buraya geri dönmek",
-  "DashboardProfile": "Profil bilgileriniz: bu portalın sahibi kim, hangi tarife planıyla çalışıyor, ne kadar depolama kullanılıyor ve portalın adresinin kendisi. Buradaki bağlantılar tarifenizi değiştirmenize veya bu ayarları düzenlemenize olanak tanır.",
+  "DashboardProfile": "Portal adı ve profilinizin kısa bir özeti: adınız, e-postanız ve parolanız. Buradan portalı yeniden adlandırabilir veya parolanızı değiştirebilirsiniz.",
   "DashboardProfileTitle": "Profil bilgileriniz",
   "WelcomeDashboardSubtitle": "Her şey bu sayfada başlar",
   "WelcomeDashboardTitle": "{{productName}} platformuna hoş geldiniz",

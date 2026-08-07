@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Creați ceva acum",
   "DashboardOverview": "Această pagină este mereu la un clic distanță — deschideți {{overview}} în bara laterală ori de câte ori vreți să reveniți la ea.",
   "DashboardOverviewTitle": "Revenirea aici",
-  "DashboardProfile": "Datele profilului dumneavoastră: cine deține acest portal, pe ce plan tarifar funcționează, cât spațiu de stocare este folosit și adresa portalului. Legăturile de aici vă permit să schimbați planul sau să editați aceste setări.",
+  "DashboardProfile": "Numele portalului și un scurt rezumat al profilului dumneavoastră: nume, e-mail și parolă. De aici puteți redenumi portalul sau vă puteți schimba parola.",
   "DashboardProfileTitle": "Datele profilului dumneavoastră",
   "WelcomeDashboardSubtitle": "Totul începe pe această pagină",
   "WelcomeDashboardTitle": "Bun venit în {{productName}}",

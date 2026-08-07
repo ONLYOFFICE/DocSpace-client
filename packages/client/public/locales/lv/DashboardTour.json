@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Izveidojiet kaut ko tagad",
   "DashboardOverview": "Šī lapa vienmēr ir viena klikšķa attālumā — atveriet {{overview}} sānjoslā ikreiz, kad vēlaties šeit atgriezties.",
   "DashboardOverviewTitle": "Atgriešanās šeit",
-  "DashboardProfile": "Jūsu profila dati: kam pieder šis portāls, ar kādu tarifa plānu tas darbojas, cik daudz krātuves ir izmantots un pati portāla adrese. Šeit esošās saites ļauj mainīt plānu vai rediģēt šos iestatījumus.",
+  "DashboardProfile": "Portāla nosaukums un īss jūsu profila kopsavilkums: vārds, e-pasts un parole. No šejienes varat pārdēvēt portālu vai nomainīt paroli.",
   "DashboardProfileTitle": "Jūsu profila dati",
   "WelcomeDashboardSubtitle": "Viss sākas šajā lapā",
   "WelcomeDashboardTitle": "Laipni lūdzam {{productName}}",

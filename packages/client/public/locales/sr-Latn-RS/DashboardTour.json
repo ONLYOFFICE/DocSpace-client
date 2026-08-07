@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Napravite nešto odmah",
   "DashboardOverview": "Ova stranica je uvek udaljena jedan klik — otvorite {{overview}} u bočnoj traci kad god poželite da joj se vratite.",
   "DashboardOverviewTitle": "Povratak ovde",
-  "DashboardProfile": "Podaci vašeg profila: ko je vlasnik ovog portala, na kom tarifnom planu radi, koliko skladišta je zauzeto i sama adresa portala. Veze ovde vam omogućavaju da promenite plan ili izmenite ova podešavanja.",
+  "DashboardProfile": "Naziv portala i kratak pregled vašeg profila: ime, imejl i lozinka. Odavde možete preimenovati portal ili promeniti lozinku.",
   "DashboardProfileTitle": "Podaci vašeg profila",
   "WelcomeDashboardSubtitle": "Sve počinje na ovoj stranici",
   "WelcomeDashboardTitle": "Dobrodošli u {{productName}}",

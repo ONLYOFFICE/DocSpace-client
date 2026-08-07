@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Maak nu iets",
   "DashboardOverview": "Deze pagina is altijd één klik verwijderd — open {{overview}} in het zijpaneel wanneer u hier weer terug wilt komen.",
   "DashboardOverviewTitle": "Hier weer terugkomen",
-  "DashboardProfile": "De gegevens van uw profiel: van wie dit portaal is, op welk abonnement het draait, hoeveel opslag er in gebruik is en het portaaladres zelf. Met de links hier kunt u van abonnement wisselen of deze instellingen bewerken.",
+  "DashboardProfile": "De portaalnaam en een kort overzicht van uw profiel: naam, e-mail en wachtwoord. Vanaf hier kunt u het portaal hernoemen of uw wachtwoord wijzigen.",
   "DashboardProfileTitle": "De gegevens van uw profiel",
   "WelcomeDashboardSubtitle": "Alles begint op deze pagina",
   "WelcomeDashboardTitle": "Welkom bij {{productName}}",

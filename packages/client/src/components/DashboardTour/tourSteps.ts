@@ -113,7 +113,7 @@ export function getTourSteps(
 
   return [
     // 1. The profile card: what the details on it actually are. The card is a
-    // grid of labelled fields (portal name, owner, plan, storage) that a
+    // grid of labelled fields (portal name, name, email, password) that a
     // first-time user has no reason to read, so the step names them.
     hasProfileCard &&
       elementStep(

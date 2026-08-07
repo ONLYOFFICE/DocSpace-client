@@ -5,7 +5,7 @@
   "DashboardCreateTitle": "Krijoni diçka tani",
   "DashboardOverview": "Kjo faqe është gjithmonë vetëm një klikim larg — hapni {{overview}} në shiritin anësor sa herë që doni të ktheheni te ajo.",
   "DashboardOverviewTitle": "Kthimi këtu",
-  "DashboardProfile": "Të dhënat e profilit tuaj: kush e zotëron këtë portal, me çfarë plani tarifor punon, sa hapësirë ruajtjeje është në përdorim dhe vetë adresa e portalit. Lidhjet këtu ju lejojnë të ndryshoni planin ose të modifikoni këto cilësime.",
+  "DashboardProfile": "Emri i portalit dhe një përmbledhje e shkurtër e profilit tuaj: emri, e-maili dhe fjalëkalimi. Nga këtu mund ta riemërtoni portalin ose të ndryshoni fjalëkalimin.",
   "DashboardProfileTitle": "Të dhënat e profilit tuaj",
   "WelcomeDashboardSubtitle": "Gjithçka fillon në këtë faqe",
   "WelcomeDashboardTitle": "Mirë se vini në {{productName}}",

@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2026-08-06T14:20:57.491Z",
+  "updated_at": "2026-08-07T15:05:26.405Z",
   "comment": {
     "text": "This is a noun referring to the \"Trash\" section where deleted files are stored. It appears as a label in various UI components, often as part of a longer sentence or as a section name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 168,
+      "line_number": 170,
       "context": "t(\"AiAgentsTour:AgentPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n hasTrash &&\n t(\"AiAgentsTour:AgentPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];\n \n return [\n // 1. What an agent is, which is the one thing everything else rests on: not\n // a chat window you open and lose, but a thing you set up and keep. The",
       "module": "/packages/client"
     },
@@ -139,13 +139,13 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 202,
+      "line_number": 204,
       "context": "t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n trashId &&\n t(\"FilesTour:TourPlacesTrash\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n ].filter(Boolean) as string[];\n \n // Any one of the sub-items will do as the tooltip's anchor: the spotlight\n // covers the whole sub-list they share (`spotlightList`).",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 163,
+      "line_number": 165,
       "context": "}),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"FormsTour:FormsPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];\n \n // The block of steps that runs inside a space. It walks into a stand-in one\n // rather than into the user's: a real space grows its `In progress` and\n // `Complete` folders only once a form has been uploaded and started, so on a",
       "module": "/packages/client"
     },
@@ -175,8 +175,8 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 226,
-      "context": "sidebarSelector(\"rooms-recent\"),\n t(\"RoomsTour:RoomsPlacesTitle\"),\n t(\"RoomsTour:RoomsPlaces\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n trash: t(\"Common:TrashSection\"),\n templates: t(\"Common:Templates\"),\n archive: t(\"Common:Archive\"),\n }),\n callbacks,\n LOG_LABEL,",
+      "line_number": 235,
+      "context": "createElement(TourList, {\n items: [\n t(\"RoomsTour:RoomsPlacesFiles\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n trash: t(\"Common:TrashSection\"),\n }),\n t(\"RoomsTour:RoomsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"RoomsTour:RoomsPlacesArchive\", {",
       "module": "/packages/client"
     },
     {

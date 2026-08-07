@@ -3,7 +3,7 @@
   "content": "Already working in another platform? Connect it here and keep the editors you have just seen, right inside the tools your team already uses — no custom code and nothing to move over.",
   "content_en_sha1_hash": "26910020d4be4b85bc61a56a819e1c8f7f0bd4c1",
   "created_at": "2026-08-07T00:00:00.000Z",
-  "updated_at": "2026-08-07T00:00:00.000Z",
+  "updated_at": "2026-08-07T15:05:26.413Z",
   "comment": {
     "text": "Description text for an onboarding tour step about the integrations card on the dashboard: the editors can be connected to a platform the team already uses, with no custom code and no data migration.",
     "is_auto": false,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
       "line_number": 171,
-      "context": "hasIntegrations &&\n elementStep(\n INTEGRATIONS_SELECTOR,\n t(\"DashboardTour:DashboardIntegrationsTitle\"),\n t(\"DashboardTour:DashboardIntegrations\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "context": "// user may already be running, without moving anything into this one.\n hasIntegrations &&\n elementStep(\n INTEGRATIONS_SELECTOR,\n t(\"DashboardTour:DashboardIntegrationsTitle\"),\n t(\"DashboardTour:DashboardIntegrations\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 5. The way back. The dashboard is a page users leave and have to be able",
       "module": "/packages/client"
     }
   ],

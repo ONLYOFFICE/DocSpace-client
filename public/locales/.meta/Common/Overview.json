@@ -3,7 +3,7 @@
   "content": "Overview",
   "content_en_sha1_hash": "0efc2e6be4c23b9a513d7ce0dcff8ed80e8912e7",
   "created_at": "2026-06-01T21:20:38.341Z",
-  "updated_at": "2026-08-07T10:52:44.570Z",
+  "updated_at": "2026-08-07T15:05:26.410Z",
   "comment": {
     "text": "Navigation menu label for the main overview section. It appears as a short title in sidebars or lists.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
-      "line_number": 163,
+      "line_number": 183,
       "context": "// because a page reached from a sidebar item is easy to think of as a\n // landing screen shown once.\n navItemStep(\n OVERVIEW_ITEM_SELECTOR,\n t(\"DashboardTour:DashboardOverviewTitle\"),\n t(\"DashboardTour:DashboardOverview\", { overview: t(\"Common:Overview\") }),\n callbacks,\n LOG_LABEL,\n ),\n ].filter(Boolean) as Step[];\n }",
       "module": "/packages/client"
     },

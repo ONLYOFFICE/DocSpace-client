@@ -3,7 +3,7 @@
   "content": "{{archive}} — rooms you no longer work in, restorable anytime.",
   "content_en_sha1_hash": "ad28c324281f210b7833bf5893786d282384c09b",
   "created_at": "2026-08-06T14:20:52.338Z",
-  "updated_at": "2026-08-06T14:50:49.854Z",
+  "updated_at": "2026-08-07T15:05:26.433Z",
   "comment": {
     "text": "Bullet in a product tour step describing the Archive sidebar shortcut. The placeholder is the Archive navigation label.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 0,
-      "context": "",
+      "line_number": 240,
+      "context": "trash: t(\"Common:TrashSection\"),\n }),\n t(\"RoomsTour:RoomsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"RoomsTour:RoomsPlacesArchive\", {\n archive: t(\"Common:Archive\"),\n }),\n ],\n }),\n callbacks,",
       "module": "/packages/client"
     }
   ],

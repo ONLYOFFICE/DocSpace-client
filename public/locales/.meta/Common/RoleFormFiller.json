@@ -3,7 +3,7 @@
   "content": "Form filler",
   "content_en_sha1_hash": "36309bd9112093f7939d015f5678b7699adce63e",
   "created_at": "2025-05-19T21:30:48.030Z",
-  "updated_at": "2026-08-06T14:20:57.513Z",
+  "updated_at": "2026-08-07T15:05:26.426Z",
   "comment": {
     "text": "This is a label for a user role. It identifies a user who can fill out forms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 260,
+      "line_number": 262,
       "context": "revealStep(\n IN_PROGRESS_SELECTOR,\n t(\"FormsTour:FormsInProgressTitle\"),\n t(\"FormsTour:FormsInProgress\", {\n inProgress: t(\"Common:InProgress\"),\n formFiller: t(\"Common:RoleFormFiller\"),\n }),\n callbacks,\n LOG_LABEL,\n spaceHooks,\n ),",
       "module": "/packages/client"
     },

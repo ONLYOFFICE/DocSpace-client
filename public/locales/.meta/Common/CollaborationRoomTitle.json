@@ -3,7 +3,7 @@
   "content": "Collaboration room",
   "content_en_sha1_hash": "020e5e753e7a2509b4e791bcc1a8abc08bb1e51d",
   "created_at": "2025-05-19T21:30:43.513Z",
-  "updated_at": "2026-08-06T14:20:57.519Z",
+  "updated_at": "2026-08-07T15:05:26.432Z",
   "comment": {
     "text": "This is a label for a type of room in DocSpace, specifically an \"Editing Room\" where multiple users can collaborate on documents. It appears in room selection menus and settings.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 150,
+      "line_number": 152,
       "context": "t(\"RoomsTour:RoomsTypesTitle\"),\n // Each type is named by the label its own tile carries (the same\n // Common keys `useQuickActions` builds the banner from), so the\n // tooltip and the tiles under the spotlight never drift apart.\n t(\"RoomsTour:RoomsTypes\", {\n collaboration: t(\"Common:CollaborationRoomTitle\"),\n vdr: t(\"Common:VirtualDataRoom\"),\n publicRoom: t(\"Common:PublicRoom\"),\n custom: t(\"Common:CustomRoomTitle\"),\n }),\n callbacks,",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Everything you can work with",
   "content_en_sha1_hash": "7a29d96cdd66cedade1f4079b4940d34aab5a41c",
   "created_at": "2026-08-07T10:52:39.925Z",
-  "updated_at": "2026-08-07T10:58:24.047Z",
+  "updated_at": "2026-08-07T15:05:26.413Z",
   "comment": {
     "text": "Title for an element group in the dashboard onboarding tour, introducing the available applications.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
-      "line_number": 150,
+      "line_number": 158,
       "context": "// to get something done.\n appIds.length > 0 &&\n elementGroupStep(\n APPS_SECTION_SELECTOR,\n appIds.map(appCardSelector),\n t(\"DashboardTour:DashboardAppsTitle\"),\n t(\"DashboardTour:DashboardApps\"),\n callbacks,\n LOG_LABEL,\n ),",
       "module": "/packages/client"
     }

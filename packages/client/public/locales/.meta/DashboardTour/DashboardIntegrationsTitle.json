@@ -3,7 +3,7 @@
   "content": "Working with other platforms",
   "content_en_sha1_hash": "1e40e8f40328f6fe03836010e75261de670b3a1a",
   "created_at": "2026-08-07T00:00:00.000Z",
-  "updated_at": "2026-08-07T00:00:00.000Z",
+  "updated_at": "2026-08-07T15:05:26.413Z",
   "comment": {
     "text": "Title of an onboarding tour step that points at the integrations card on the dashboard, where the user can connect the editors to another platform they already use (Nextcloud, Confluence, Moodle, and so on).",
     "is_auto": false,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
       "line_number": 170,
-      "context": "hasIntegrations &&\n elementStep(\n INTEGRATIONS_SELECTOR,\n t(\"DashboardTour:DashboardIntegrationsTitle\"),\n t(\"DashboardTour:DashboardIntegrations\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "context": "// the step is what says it is not: the same editors, inside a platform the\n // user may already be running, without moving anything into this one.\n hasIntegrations &&\n elementStep(\n INTEGRATIONS_SELECTOR,\n t(\"DashboardTour:DashboardIntegrationsTitle\"),\n t(\"DashboardTour:DashboardIntegrations\"),\n callbacks,\n LOG_LABEL,\n ),",
       "module": "/packages/client"
     }
   ],

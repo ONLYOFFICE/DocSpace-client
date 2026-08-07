@@ -1,0 +1,29 @@
+{
+  "key_path": "Subscriptions",
+  "content": "Subscriptions",
+  "content_en_sha1_hash": "5697fd85adbd13bf85f28712f9a136e80cc8067e",
+  "created_at": "2026-08-01T16:25:07.010Z",
+  "updated_at": "2026-08-06T08:04:20.047Z",
+  "comment": {
+    "text": "Section label in the monthly spending summary that categorizes expenses related to active service plans.",
+    "is_auto": true,
+    "updated_at": "2026-08-01T16:27:17.167Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "line_number": 231,
+      "context": "<div className={styles.spendList}>\n {[\n {\n key: \"subscriptions\",\n items: subscriptions,\n label: t(\"Subscriptions\"),\n sectionTotal: subscriptionsTotal,\n dotClass: styles.spendDotSubs,\n emptyDescription: t(\"SubscriptionsEmptyDesc\"),\n },\n {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

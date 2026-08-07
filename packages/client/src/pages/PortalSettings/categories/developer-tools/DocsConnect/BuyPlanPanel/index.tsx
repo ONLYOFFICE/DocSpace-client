@@ -42,6 +42,7 @@ import { useApi } from "@docspace/ui-kit/providers/api";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
@@ -51,7 +52,9 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import QuantityPicker from "@docspace/ui-kit/components/quantity-picker";
 import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import SalesDepartmentRequestDialog from "@docspace/ui-kit/billing/dialogs/SalesDepartmentRequestDialog";
 import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
+import { isInsufficientFundsError } from "@docspace/ui-kit/billing/utils/insufficientFunds";
 
 import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
 import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
@@ -113,6 +116,10 @@ interface BuyPlanPanelProps {
     signal: AbortSignal;
   }) => Promise<boolean>;
   isCardMissingOrInactive?: boolean;
+  isCardLinkedToPortal?: boolean;
+  isPayer?: boolean;
+  walletCustomerEmail?: string | null;
+  walletCustomerDisplayName?: string | null;
   fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
   fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
   closeBuyPlan?: () => void;
@@ -126,6 +133,10 @@ const BuyPlanPanel = ({
   switchToDevPack,
   buyPlanViaStripe,
   isCardMissingOrInactive,
+  isCardLinkedToPortal,
+  isPayer,
+  walletCustomerEmail,
+  walletCustomerDisplayName,
   fetchPayerInfo,
   fetchWalletBalance,
   closeBuyPlan,
@@ -144,6 +155,7 @@ const BuyPlanPanel = ({
   const [submitting, setSubmitting] = useState(false);
   const [waitingPayment, setWaitingPayment] = useState(false);
   const [topUpDialogVisible, setTopUpDialogVisible] = useState(false);
+  const [requestDialogVisible, setRequestDialogVisible] = useState(false);
   const [devPackCalc, setDevPackCalc] =
     useState<TDocsConnectDevPackCalculation | null>(null);
   const [calcLoading, setCalcLoading] = useState(false);
@@ -172,7 +184,7 @@ const BuyPlanPanel = ({
     const isUp =
       isDocsConnectPaid(info) && curUsers > 0 && devPack && !curDevPack;
 
-    if (!isUp) {
+    if (!isUp || users > MAX_USERS) {
       setDevPackCalc(null);
       return undefined;
     }
@@ -209,6 +221,7 @@ const BuyPlanPanel = ({
   const currentDevPack = info.devPackEnabled ?? false;
 
   const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
+  const isOverLimit = users > MAX_USERS;
 
   const onToggleDevPack = () => {
     setDevPack((prev) => {
@@ -238,6 +251,9 @@ const BuyPlanPanel = ({
     : devPack
       ? DEVPACK_MIN_USERS
       : MIN_USERS;
+  const minusBlockedByDevPackUpgrade =
+    isDevPackUpgrade && users <= currentUsers;
+  const isMinusDisabled = devPack && users <= minUsers;
 
   const periodEndDate = info.tenant.endDate ?? "";
   const periodEndDateLocalized = formatDateLocalized(
@@ -255,27 +271,40 @@ const BuyPlanPanel = ({
   const prorationFactor =
     periodDays > 0 ? Math.min(1, remainingDays / periodDays) : 0;
 
-  const calcPending = isDevPackUpgrade && (calcLoading || devPackCalc === null);
+  const calcPending =
+    !isOverLimit && isDevPackUpgrade && (calcLoading || devPackCalc === null);
   const devPackCharge = devPackCalc?.amount ?? 0;
   const unusedCredit = isDevPackUpgrade
-    ? Math.max(0, Math.round((totalMonthly - devPackCharge) * 100) / 100)
+    ? Math.max(0, totalMonthly - devPackCharge)
     : 0;
 
   const addedUsers = Math.max(0, users - currentUsers);
-  const chargeNow = isEditActive
-    ? isDevPackUpgrade
-      ? devPackCharge
-      : isUpgrade
-        ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
-        : 0
-    : users * perUser;
+  const chargeNow = isOverLimit
+    ? 0
+    : isEditActive
+      ? isDevPackUpgrade
+        ? devPackCharge
+        : isUpgrade
+          ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
+          : 0
+      : users * perUser;
 
   const remainingCredits = availableCredits - chargeNow;
   const insufficientFunds = chargeNow > 0 && remainingCredits < 0;
-  const topUpRequired = Math.ceil(chargeNow - availableCredits);
+  const topUpRequired = Math.max(0, Math.ceil(chargeNow - availableCredits));
+  const isTopUpUnavailable =
+    insufficientFunds && !!isCardLinkedToPortal && !isPayer;
 
   const formatCurrency = (amount: number) =>
     formatCurrencyValue(i18n.language, amount, currency, 2);
+
+  const formatCurrencyExact = (amount: number) =>
+    new Intl.NumberFormat(i18n.language, {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 10,
+    }).format(amount);
 
   const priceLoader = (
     <Loader
@@ -298,6 +327,8 @@ const BuyPlanPanel = ({
     abortControllerRef.current?.abort();
     closeBuyPlan?.();
   };
+
+  const onSendRequest = () => setRequestDialogVisible(true);
 
   const onOpenWallet = () =>
     window.open(
@@ -359,7 +390,19 @@ const BuyPlanPanel = ({
           : t("DocsConnect:PlanPurchased"),
       );
     } catch (error) {
-      if (!controller?.signal.aborted) toastr.error(error as Error);
+      if (!controller?.signal.aborted) {
+        // The balance could have been spent while the panel was open.
+        if (isInsufficientFundsError(error)) {
+          toastr.error(
+            isPayer
+              ? t("Common:InsufficientFundsCheckCredits")
+              : t("Common:InsufficientFundsContactPayerShort"),
+            t("Common:InsufficientFunds"),
+          );
+        } else {
+          toastr.error(error as Error);
+        }
+      }
     } finally {
       setWaitingPayment(false);
       setSubmitting(false);
@@ -398,7 +441,194 @@ const BuyPlanPanel = ({
     </div>
   );
 
-  const usersTooltip = t("DocsConnect:PlanUsersTooltip", { count: users });
+  const usersTooltip = t("DocsConnect:PlanUsersTooltip", {
+    count: isOverLimit ? MAX_USERS : users,
+  });
+
+  const getSubmitLabel = () => {
+    if (isOverLimit) return t("Common:SendRequest");
+
+    if (isEditActive) {
+      if (isScheduled) return t("Common:ScheduleChange");
+
+      return insufficientFunds && !isTopUpUnavailable
+        ? t("DocsConnect:TopUpAndBuy")
+        : t("Common:Upgrade");
+    }
+
+    if (!insufficientFunds || isTopUpUnavailable) return t("Common:Upgrade");
+
+    return info.deactivated
+      ? t("Common:TopUpAndPay")
+      : t("DocsConnect:TopUpAndBuy");
+  };
+
+  const submitDisabled = isOverLimit
+    ? submitting
+    : submitting ||
+      calcPending ||
+      (isEditActive && !hasChanges) ||
+      isTopUpUnavailable;
+
+  const renderOverLimitSummary = () => (
+    <>
+      {summaryRow(t("DocsConnect:PlanUsers"), `${MAX_USERS}+`, usersTooltip)}
+      {summaryRow(
+        t("DocsConnect:BasePricePerUser"),
+        formatCurrency(pricePerUser),
+      )}
+      {summaryRow(
+        t("DocsConnect:DevPackPerUser"),
+        formatCurrency(devPack ? devPackPrice : 0),
+      )}
+      <hr className={styles.summaryDivider} />
+      <Text fontSize="14px" fontWeight={600} className={styles.uponRequestNote}>
+        {t("DocsConnect:UsersUponRequest", {
+          count: MAX_USERS,
+          service: t("DocsConnect:DocsConnect"),
+        })}
+      </Text>
+    </>
+  );
+
+  const renderFooterHint = () => {
+    if (isOverLimit) return null;
+
+    if (isTopUpUnavailable)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          <Trans
+            t={t}
+            ns="DocsConnect"
+            i18nKey="InsufficientCreditsForSubscription"
+            values={{
+              service: t("DocsConnect:DocsConnect"),
+              payerContact: walletCustomerDisplayName || walletCustomerEmail,
+            }}
+            components={{
+              1:
+                walletCustomerEmail && !walletCustomerDisplayName ? (
+                  <Link
+                    tag="a"
+                    color="accent"
+                    href={`mailto:${walletCustomerEmail}`}
+                    dataTestId="docs_connect_contact_payer_link"
+                  />
+                ) : (
+                  <Text
+                    as="span"
+                    fontWeight={600}
+                    dataTestId="docs_connect_contact_payer_name"
+                  />
+                ),
+            }}
+          />
+        </Text>
+      );
+
+    if (insufficientFunds)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          <Trans
+            ns="DocsConnect"
+            i18nKey="TopUpHint"
+            values={{ amount: formatCurrency(topUpRequired) }}
+            components={{ 1: <Text as="span" fontWeight={600} /> }}
+          />
+        </Text>
+      );
+
+    if (isDevPackUpgrade)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          <Trans
+            ns="DocsConnect"
+            i18nKey="BillingCycleRestartNote"
+            values={{
+              amount: formatCurrency(totalMonthly),
+              date: nextBillingDateLocalized,
+            }}
+            components={{
+              1: <Text as="span" fontWeight={600} />,
+              2: <Text as="span" fontWeight={600} />,
+            }}
+          />
+        </Text>
+      );
+
+    if (isUpgrade)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          <Trans
+            ns="DocsConnect"
+            i18nKey="NextMonthlyBillNote"
+            values={{
+              amount: formatCurrency(totalMonthly),
+              date: nextBillingDateLocalized,
+            }}
+            components={{
+              1: <Text as="span" fontWeight={600} />,
+              2: <Text as="span" fontWeight={600} />,
+            }}
+          />
+        </Text>
+      );
+
+    return null;
+  };
+
+  const renderSummaryHint = () => {
+    if (isOverLimit) return null;
+
+    if (isScheduled)
+      return (
+        <StorageWarning
+          body={t("Common:ScheduledChangeBillingPeriodNote", {
+            date: periodEndDateLocalized,
+          })}
+        />
+      );
+
+    if (insufficientFunds)
+      return (
+        <Text
+          fontSize="12px"
+          className={`${styles.errorText} ${styles.summaryHint}`}
+          textAlign="right"
+        >
+          {t("Common:WalletTopUpRequired", {
+            currency: formatCurrency(topUpRequired),
+          })}
+        </Text>
+      );
+
+    return (
+      <Text
+        fontSize="12px"
+        className={`${styles.secondaryText} ${styles.summaryHint}`}
+        textAlign="right"
+      >
+        {isEditActive
+          ? t("DocsConnect:RemainingBalanceAfter", {
+              amount: formatCurrency(remainingCredits),
+            })
+          : t("DocsConnect:RemainingCreditsAfter", {
+              amount: formatCurrency(remainingCredits),
+            })}
+      </Text>
+    );
+  };
+
+  const footerHint = renderFooterHint();
+
+  if (requestDialogVisible) {
+    return (
+      <SalesDepartmentRequestDialog
+        visible={requestDialogVisible}
+        onClose={() => setRequestDialogVisible(false)}
+      />
+    );
+  }
 
   return (
     <>
@@ -408,7 +638,7 @@ const BuyPlanPanel = ({
         onClose={onClose}
         withBodyScroll
         withFooterBorder
-        isDoubleFooterLine={insufficientFunds || isDevPackUpgrade || isUpgrade}
+        isDoubleFooterLine={footerHint !== null}
       >
         <ModalDialog.Header>
           {isEditActive
@@ -485,12 +715,15 @@ const BuyPlanPanel = ({
                   price: formatCurrency(pricePerUser),
                 })}
                 onChange={setUsers}
-                minusDisabled={isDevPackUpgrade}
+                isDisabled={submitting}
+                minusDisabled={isMinusDisabled}
                 minusTooltipId={
-                  isDevPackUpgrade ? USERS_MINUS_TOOLTIP_ID : undefined
+                  minusBlockedByDevPackUpgrade
+                    ? USERS_MINUS_TOOLTIP_ID
+                    : undefined
                 }
               />
-              {isDevPackUpgrade ? (
+              {minusBlockedByDevPackUpgrade ? (
                 <Tooltip
                   id={USERS_MINUS_TOOLTIP_ID}
                   place="bottom"
@@ -535,6 +768,7 @@ const BuyPlanPanel = ({
                   className={styles.toggleButton}
                   isChecked={devPack}
                   onChange={onToggleDevPack}
+                  isDisabled={submitting}
                   dataTestId="docs_connect_devpack_toggle"
                 />
               </div>
@@ -579,7 +813,9 @@ const BuyPlanPanel = ({
                   {t("Common:OrderSummary")}
                 </Text>
                 <div className={styles.summaryCard}>
-                  {isEditActive ? (
+                  {isOverLimit ? (
+                    renderOverLimitSummary()
+                  ) : isEditActive ? (
                     isDevPackUpgrade ? (
                       <>
                         {usersChanged
@@ -633,9 +869,26 @@ const BuyPlanPanel = ({
                             </Text>
                             <HelpButton
                               size={12}
-                              tooltipContent={t(
-                                "DocsConnect:UnusedSubscriptionCreditTooltip",
-                              )}
+                              tooltipContent={
+                                <Trans
+                                  ns="DocsConnect"
+                                  i18nKey="UnusedSubscriptionCreditTooltip"
+                                  values={{
+                                    amount: formatCurrencyExact(unusedCredit),
+                                  }}
+                                  components={{
+                                    1: <Text fontSize="12px" />,
+                                    2: (
+                                      <Text
+                                        fontSize="12px"
+                                        fontWeight={600}
+                                        className={styles.tooltipAmount}
+                                      />
+                                    ),
+                                    3: <Text fontSize="12px" />,
+                                  }}
+                                />
+                              }
                               tooltipMaxWidth="320px"
                             />
                           </div>
@@ -670,13 +923,19 @@ const BuyPlanPanel = ({
                               fontWeight={600}
                               className={styles.summaryValue}
                             >
-                              {formatCurrency(chargeNow)}
+                              {formatCurrencyExact(chargeNow)}
                             </Text>
                           )}
                         </div>
                       </>
                     ) : (
                       <>
+                        {devPackTurnedOff
+                          ? summaryRow(
+                              t("DocsConnect:DevPack"),
+                              t("Common:Disabled"),
+                            )
+                          : null}
                         {usersChanged
                           ? summaryRow(
                               t("DocsConnect:UserAdjustmentLabel"),
@@ -809,117 +1068,22 @@ const BuyPlanPanel = ({
                     </>
                   )}
                 </div>
-                {isScheduled ? (
-                  <StorageWarning
-                    body={t("Common:ScheduledChangeBillingPeriodNote", {
-                      date: periodEndDateLocalized,
-                    })}
-                  />
-                ) : insufficientFunds ? (
-                  <Text
-                    fontSize="12px"
-                    className={`${styles.errorText} ${styles.summaryHint}`}
-                    textAlign="right"
-                  >
-                    {t("Common:WalletTopUpRequired", {
-                      currency: formatCurrency(topUpRequired),
-                    })}
-                  </Text>
-                ) : (
-                  <Text
-                    fontSize="12px"
-                    className={`${styles.secondaryText} ${styles.summaryHint}`}
-                    textAlign="right"
-                  >
-                    {isEditActive
-                      ? t("DocsConnect:RemainingBalanceAfter", {
-                          amount: formatCurrency(remainingCredits),
-                        })
-                      : t("DocsConnect:RemainingCreditsAfter", {
-                          amount: formatCurrency(remainingCredits),
-                        })}
-                  </Text>
-                )}
+                {renderSummaryHint()}
               </>
             )}
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
-          {insufficientFunds ? (
-            <Text
-              fontSize="13px"
-              fontWeight={400}
-              className={styles.footerHint}
-            >
-              <Trans
-                ns="DocsConnect"
-                i18nKey="TopUpHint"
-                values={{ amount: formatCurrency(topUpRequired) }}
-                components={{ 1: <Text as="span" fontWeight={600} /> }}
-              />
-            </Text>
-          ) : isDevPackUpgrade ? (
-            <Text
-              fontSize="13px"
-              fontWeight={400}
-              className={styles.footerHint}
-            >
-              <Trans
-                ns="DocsConnect"
-                i18nKey="BillingCycleRestartNote"
-                values={{
-                  amount: formatCurrency(totalMonthly),
-                  date: nextBillingDateLocalized,
-                }}
-                components={{
-                  1: <Text as="span" fontWeight={600} />,
-                  2: <Text as="span" fontWeight={600} />,
-                }}
-              />
-            </Text>
-          ) : isUpgrade ? (
-            <Text
-              fontSize="13px"
-              fontWeight={400}
-              className={styles.footerHint}
-            >
-              <Trans
-                ns="DocsConnect"
-                i18nKey="NextMonthlyBillNote"
-                values={{
-                  amount: formatCurrency(totalMonthly),
-                  date: nextBillingDateLocalized,
-                }}
-                components={{
-                  1: <Text as="span" fontWeight={600} />,
-                  2: <Text as="span" fontWeight={600} />,
-                }}
-              />
-            </Text>
-          ) : null}
+          {footerHint}
           <div className={styles.footerButtons}>
             <Button
               primary
               scale
               size={ButtonSize.normal}
-              label={
-                isEditActive
-                  ? isScheduled
-                    ? t("Common:ScheduleChange")
-                    : insufficientFunds
-                      ? t("DocsConnect:TopUpAndBuy")
-                      : t("Common:Upgrade")
-                  : insufficientFunds
-                    ? info.deactivated
-                      ? t("Common:TopUpAndPay")
-                      : t("DocsConnect:TopUpAndBuy")
-                    : t("Common:Upgrade")
-              }
-              onClick={onBuy}
+              label={getSubmitLabel()}
+              onClick={isOverLimit ? onSendRequest : onBuy}
               isLoading={submitting}
-              isDisabled={
-                submitting || calcPending || (isEditActive && !hasChanges)
-              }
+              isDisabled={submitDisabled}
               testId="docs_connect_buy_plan_submit"
             />
             <Button
@@ -955,8 +1119,14 @@ export default inject(
     switchToDevPack: docsConnectStore.switchToDevPack,
     buyPlanViaStripe: docsConnectStore.buyPlanViaStripe,
     isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,
+    isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
+    isPayer: paymentStore.isPayer,
+    walletCustomerEmail: currentTariffStatusStore.walletCustomerEmail,
+    walletCustomerDisplayName:
+      currentTariffStatusStore.walletCustomerInfo?.displayName,
     fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
     fetchWalletBalance: paymentStore.fetchWalletBalance,
     closeBuyPlan: docsConnectStore.closeBuyPlan,
   }),
 )(observer(BuyPlanPanel));
+

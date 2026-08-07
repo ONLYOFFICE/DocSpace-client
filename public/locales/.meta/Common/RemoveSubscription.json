@@ -3,7 +3,7 @@
   "content": "Remove subscription",
   "content_en_sha1_hash": "5ab5e9bc925b8f5daa31036b82ac77aadc14684d",
   "created_at": "2026-07-27T13:07:30.369Z",
-  "updated_at": "2026-08-01T15:33:49.632Z",
+  "updated_at": "2026-08-06T08:04:19.963Z",
   "comment": {
     "text": "Button label and dialog title used to initiate the cancellation of an active subscription plan.",
     "is_auto": true,
@@ -12,15 +12,27 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/billing/dialogs/RemoveStorageSubscription.tsx",
+      "line_number": 72,
+      "context": "displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n <Text fontSize=\"21px\" isBold>\n {t(\"RemoveSubscription\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"RemoveSubscriptionConfirm\", {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 386,
+      "context": "primary\n onClick={openUpgradeDialog}\n isDisabled={isDisabled}\n />\n <Button\n label={t(\"RemoveSubscription\")}\n size={ButtonSize.small}\n onClick={() => setIsRemovePreviousPlanVisible(true)}\n />\n </div>\n ) : !isScheduled || currentStoragePlanSize ? (",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
-      "line_number": 452,
+      "line_number": 438,
       "context": "label={t(\"Common:TopUpAndRenew\")}\n onClick={onEditPlan}\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:RemoveSubscription\")}\n onClick={onRemovePlan}\n />\n </div>\n ) : scheduledChange ? (\n isCancellation ? (",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/RemoveSubscriptionDialog/index.tsx",
       "line_number": 81,
-      "context": "displayType={ModalDialogType.modal}\n onClose={() => closeRemoveSubscriptionDialog?.()}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"Common:RemoveSubscription\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:RemoveSubscriptionConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),",
+      "context": "displayType={ModalDialogType.modal}\n onClose={() => closeRemoveSubscriptionDialog?.()}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"Common:RemoveSubscription\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"Common:RemoveSubscriptionConfirm\", {\n service: t(\"DocsConnect:DocsConnect\"),",
       "module": "/packages/client"
     }
   ],

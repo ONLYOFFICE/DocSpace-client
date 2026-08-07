@@ -44,14 +44,7 @@ import {
 } from "SRC_DIR/Hooks/useChatNoAccess";
 
 const AIActivationBannerBase = (props: ChatNoAccessStoreProps) => {
-  const {
-    standalone,
-    isAdmin,
-    isPayer,
-    isAIReady,
-    walletCustomerEmail,
-    walletCustomerDisplayName,
-  } = props;
+  const { standalone, isAdmin, isAIReady } = props;
 
   const { activation } = useChatNoAccess(props);
 
@@ -63,9 +56,6 @@ const AIActivationBannerBase = (props: ChatNoAccessStoreProps) => {
     <ChatInfoBlock
       standalone={!!standalone}
       isPortalAdmin={!!isAdmin}
-      isPayer={isPayer}
-      walletCustomerEmail={walletCustomerEmail}
-      walletCustomerDisplayName={walletCustomerDisplayName}
       onActivateAI={activation.onActivateAI}
       onShowAIBenefits={activation.onShowAIBenefits}
       isActivating={activation.isActivating}

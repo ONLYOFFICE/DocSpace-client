@@ -90,7 +90,9 @@ const FormRoomBlock = ({
         id="send-form-to-external-db"
         title={t("Common:ExportResultsToDatabase")}
         description={t("Common:ExportResultsToDatabaseDescription")}
-        isChecked={roomParams.sendFormToExternalDB || false}
+        isChecked={
+          (roomParams.sendFormToExternalDB && hasDatabaseConnection) || false
+        }
         onCheckedChange={onSendFormToExternalDBChange}
         isDisabled={isDisabled || !hasDatabaseConnection}
       />

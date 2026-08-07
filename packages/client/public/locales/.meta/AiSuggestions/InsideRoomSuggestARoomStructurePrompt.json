@@ -1,0 +1,29 @@
+{
+  "key_path": "InsideRoomSuggestARoomStructurePrompt",
+  "content": "Suggest a room structure in the current room and explain the recommendation briefly. If this information is not provided, ask me for the room purpose, content types, participants, and access model.",
+  "content_en_sha1_hash": "3f865c15fb0b9f860b5060fa912ab9c4a3a20bb4",
+  "created_at": "2026-08-04T09:58:55.188Z",
+  "updated_at": "2026-08-05T17:13:55.013Z",
+  "comment": {
+    "text": "An instruction sent to the AI model that defines how it should suggest a room structure and what follow-up questions to ask if specific details are missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:13:55.013Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 154,
+      "context": "prompt: t(\"AiSuggestions:InsideRoomChangeNameAndTagsPrompt\"),\n requires: \"editRoom\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomSuggestARoomStructure\"),\n prompt: t(\"AiSuggestions:InsideRoomSuggestARoomStructurePrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:InsideRoomCreateAReportFromTheRoom\"),\n prompt: t(\"AiSuggestions:InsideRoomCreateAReportFromTheRoomPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -83,6 +83,7 @@ const current = {
     Embed: false,
     ChangeOwner: false,
     IndexExport: false,
+    HistoryExport: true,
   },
   title: "Rooms",
   access: 0,
@@ -175,6 +176,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         Reconnect: false,
         UseChat: false,
       },
@@ -248,6 +250,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         Reconnect: false,
         UseChat: false,
       },
@@ -321,6 +324,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "New room",
@@ -393,6 +397,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "New room",
@@ -465,6 +470,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "New room",
@@ -537,6 +543,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "New room",
@@ -609,6 +616,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "New room",
@@ -681,6 +689,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "New room",
@@ -753,6 +762,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "s",
@@ -825,6 +835,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "2 (2) (1)",
@@ -897,6 +908,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "2 (2) (2)",
@@ -969,6 +981,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "3 (1) (1) (1)",
@@ -1041,6 +1054,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "3 (3)",
@@ -1113,6 +1127,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "3 (3) (1)",
@@ -1185,6 +1200,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "fdsf",
@@ -1257,6 +1273,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: false,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "fdsf (1)",
@@ -1329,6 +1346,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk",
@@ -1401,6 +1419,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1)",
@@ -1473,6 +1492,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1) (1)",
@@ -1545,6 +1565,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1) (1) (1)",
@@ -1617,6 +1638,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1) (1) (1) (1)",
@@ -1689,6 +1711,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1) (1) (1) (1) (1)",
@@ -1761,6 +1784,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1) (1) (1) (1) (1) (1)",
@@ -1833,6 +1857,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1) (1) (2)",
@@ -1905,6 +1930,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1) (1) (2) (1)",
@@ -1977,6 +2003,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "kk (1) (1) (2) (1) (1)",
@@ -2049,6 +2076,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "Marketing Room 1",
@@ -2121,6 +2149,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "Marketing Room 2",
@@ -2193,6 +2222,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "Marketing Room 3",
@@ -2265,6 +2295,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "Engineering Room 1",
@@ -2337,6 +2368,7 @@ const getRoomList = (filtered: boolean = false) => {
         Embed: true,
         ChangeOwner: true,
         IndexExport: false,
+        HistoryExport: true,
         UseChat: false,
       },
       title: "Engineering Room 2",
@@ -2423,6 +2455,7 @@ const getRoomSecurity = (
           EditRoom: true,
           Embed: true,
           IndexExport: true,
+          HistoryExport: true,
           Move: true,
           MoveTo: true,
           Mute: true,
@@ -2448,6 +2481,7 @@ const getRoomSecurity = (
           EditRoom: false,
           Embed: false,
           IndexExport: false,
+          HistoryExport: true,
           Move: true,
           MoveTo: true,
           Mute: true,
@@ -2473,6 +2507,7 @@ const getRoomSecurity = (
           EditRoom: false,
           Embed: false,
           IndexExport: true,
+          HistoryExport: true,
           Move: true,
           MoveTo: true,
           Mute: true,
@@ -2503,6 +2538,7 @@ const getRoomSecurity = (
           EditRoom: true,
           Embed: true,
           IndexExport: true,
+          HistoryExport: true,
           Move: false,
           MoveTo: true,
           Mute: true,
@@ -2528,6 +2564,7 @@ const getRoomSecurity = (
           EditRoom: false,
           Embed: false,
           IndexExport: false,
+          HistoryExport: true,
           Move: false,
           MoveTo: true,
           Mute: true,
@@ -2553,6 +2590,7 @@ const getRoomSecurity = (
           EditRoom: true,
           Embed: true,
           IndexExport: true,
+          HistoryExport: true,
           Move: true,
           MoveTo: true,
           Mute: true,
@@ -2968,29 +3006,65 @@ const getContextMenuRoomList = ({
   };
 };
 
+/**
+ * Overrides `Create` on the Rooms root the list came back under.
+ *
+ * That one flag is what the whole create affordance hangs off — the "New room"
+ * header button and the create tiles both read it (getSectionCreateButton →
+ * getFolderModel → `security.Create`) — and the server answers it per role: the
+ * room list fetched by someone who cannot create rooms comes back with
+ * `Create: false`. `current` here is a single shared object that says `true`,
+ * so a test standing in as anybody else has to say otherwise.
+ */
+const withRootCreate = <T extends { current: { security?: object } }>(
+  list: T,
+  canCreate?: boolean,
+): T => {
+  if (canCreate === undefined) return list;
+
+  return {
+    ...list,
+    current: {
+      ...list.current,
+      security: { ...list.current.security, Create: canCreate },
+    },
+  };
+};
+
 export const roomListResolver = (
   roomListType?: TypeRoomList,
   params?: {
     access?: ShareAccessRights;
     inRoom?: boolean;
     isDocAdmin?: boolean;
+    canCreate?: boolean;
   },
 ) => {
+  const canCreate = params?.canCreate;
+
   if (roomListType === TypeRoomList.IsFiltered) {
-    return new Response(JSON.stringify({ response: getRoomList(true) }));
+    return new Response(
+      JSON.stringify({ response: withRootCreate(getRoomList(true), canCreate) }),
+    );
   }
 
   if (roomListType === TypeRoomList.IsDefault) {
-    return new Response(JSON.stringify({ response: getRoomList() }));
+    return new Response(
+      JSON.stringify({ response: withRootCreate(getRoomList(), canCreate) }),
+    );
   }
 
   if (roomListType === TypeRoomList.ContextMenu) {
     return new Response(
-      JSON.stringify({ response: getContextMenuRoomList(params ?? {}) }),
+      JSON.stringify({
+        response: withRootCreate(getContextMenuRoomList(params ?? {}), canCreate),
+      }),
     );
   }
 
-  return new Response(JSON.stringify({ response: getEmptyRoomList() }));
+  return new Response(
+    JSON.stringify({ response: withRootCreate(getEmptyRoomList(), canCreate) }),
+  );
 };
 
 export const roomListHandler = (
@@ -3000,6 +3074,11 @@ export const roomListHandler = (
     access?: ShareAccessRights;
     inRoom?: boolean;
     isDocAdmin?: boolean;
+    /**
+     * `security.Create` on the Rooms root. Left out, the payload's own value
+     * stands.
+     */
+    canCreate?: boolean;
   },
 ) => {
   let baseUrl;

@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Limitə çatdıqdan sonra bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox administrator əlavə etmək üçün <1>buraya klikləyin</1> ilə tarif planınızı təkmilləşdirin.",
   "UserTariffLimitHeader": "Administrator limitinə çatıldı: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox idarəçi əlavə etmək üçün tarif planını təkmilləşdirmək üçün {{productName}} administratoru ilə əlaqə saxlayın.",
-  "UserTariffReachedForAdmins": "Bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox administrator əlavə etmək üçün <1>buraya klikləyin</1> ilə tarif planınızı təkmilləşdirin."
+  "UserTariffReachedForAdmins": "Bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə olunacaq. Daha çox administrator əlavə etmək üçün <1>buraya klikləyin</1> ilə tarif planınızı təkmilləşdirin.",
+  "WalletLowBalanceContactPayer": "Cüzdanı doldurmaq və ödənişli xidmətlərdə fasilələrin qarşısını almaq üçün Ödəyici (<1>{{payerContact}}</1>) ilə əlaqə saxlayın.",
+  "WalletLowBalanceDescription": "Ödənişli xidmətlərdə fasilələrin qarşısını almaq üçün cüzdanınızı doldurun. <1>Balansı artır</1>",
+  "WalletLowBalanceHeader": "Kreditləriniz azalır: {{balance}}"
 }

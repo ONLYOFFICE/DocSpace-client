@@ -3,7 +3,7 @@
   "content": "Third-party storage",
   "content_en_sha1_hash": "f9863ef0415f207037f70275c921c5f88e760b2e",
   "created_at": "2025-05-19T21:30:49.279Z",
-  "updated_at": "2026-05-15T15:37:40.189Z",
+  "updated_at": "2026-08-06T08:04:19.881Z",
   "comment": {
     "text": "This is a label for a toggle or radio button. It refers to an external storage service, like Google Drive or Dropbox, that can be integrated with ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 645,
+      "line_number": 721,
       "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"third-party-storage\"\n label={t(\"Common:ThirdPartyStorage\")}\n name={THIRD_PARTY_STORAGE}\n key={3}\n isChecked={isCheckedThirdPartyStorage}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },

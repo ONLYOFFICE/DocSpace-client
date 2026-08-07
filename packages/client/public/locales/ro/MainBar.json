@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Odată ce limita a fost atinsă, toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori,  <1>apăsați aici</1> pentru a schimba planul tarifar.",
   "UserTariffLimitHeader": "Limita maximă permisă de administratori a fost atinsă: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori în continuare, contactați administratorul {{productName}}  pentru a schimba planul tarifar.",
-  "UserTariffReachedForAdmins": "Toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori în continuare,  <1>apăsați aici</1> pentru a schimba planul tarifar."
+  "UserTariffReachedForAdmins": "Toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori în continuare,  <1>apăsați aici</1> pentru a schimba planul tarifar.",
+  "WalletLowBalanceContactPayer": "Contactați Plătitorul (<1>{{payerContact}}</1>) pentru a alimenta portofelul și a evita întreruperile serviciilor plătite.",
+  "WalletLowBalanceDescription": "Alimentați portofelul pentru a evita întreruperile serviciilor plătite. <1>Alimentare</1>",
+  "WalletLowBalanceHeader": "Creditele dvs. sunt pe terminate: {{balance}}"
 }

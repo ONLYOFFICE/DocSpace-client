@@ -143,9 +143,14 @@
   }
 }
 
+.withHistoryToolbar {
+  --info-panel-history-toolbar-height: 44px;
+  --info-panel-title-offset: var(--info-panel-history-toolbar-height);
+}
+
 .title {
   position: sticky;
-  top: 0;
+  top: var(--info-panel-title-offset, 0px);
   z-index: 100;
   padding-block: 24px;
   padding-inline: 20px 0;
@@ -162,6 +167,7 @@
 
   :global(.info_title-icons) {
     display: flex;
+    align-items: center;
     margin-inline-start: auto;
     gap: 14px;
     :global(.icon) {

@@ -3,7 +3,7 @@
   "content": "The report will be saved to {{sectionName}}",
   "content_en_sha1_hash": "55671fe19ba077a1c4e0ef79f837de41f87ae103",
   "created_at": "2026-04-10T13:53:45.955Z",
-  "updated_at": "2026-08-01T15:33:49.674Z",
+  "updated_at": "2026-08-06T14:20:57.647Z",
   "comment": {
     "text": "This is a descriptive text indicating where a downloaded report will be saved. It appears below a \"Download Report\" button and includes a `{{sectionName}}` variable, which will be replaced by the name of the location where the report is saved (e.g., \"My Documents\").",
     "is_auto": true,
@@ -13,26 +13,32 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 614,
+      "line_number": 621,
       "context": "isDisabled={isNotPaidPeriod}\n scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"ReportSaveLocation\", {\n sectionName: t(\"Files\"),\n })}\n </Text>\n </div>\n </>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 126,
-      "context": "securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}",
+      "line_number": 130,
+      "context": "securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isAuditTrailReportBuilding}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 109,
-      "context": "lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n tfaEnabled={tfaEnabled}",
+      "line_number": 116,
+      "context": "lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getLoginHistoryReport}\n isLoadingDownloadReport={isLoginHistoryReportBuilding}\n isSettingNotPaid={!isAuditAvailable}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/DocsConnectStore.ts",
-      "line_number": 363,
+      "line_number": 400,
       "context": "});\n };\n \n private finishReport = (resultFileUrl?: string) => {\n toastr.success(\n i18n.t(\"Common:ReportSaveLocation\", {\n sectionName: i18n.t(\"Common:Files\"),\n }),\n );\n if (!this.reportPageLeft && resultFileUrl) {\n setTimeout(() => window.open(resultFileUrl, \"_blank\"), 100); // hack for ios",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/DocumentBuilderReportStore.ts",
+      "line_number": 70,
+      "context": "// builder is not cancelled — it keeps running on the server and still saves the\n // file, so giving up only means the user has to pick the file up themselves.\n export const REPORT_BUILD_TIMEOUT_MS = 10 * 60 * 1000;\n \n const getSaveLocationText = () =>\n i18n.t(\"Common:ReportSaveLocation\", { sectionName: i18n.t(\"Common:Files\") });\n \n class DocumentBuilderReportStore {\n private filesSettingsStore: FilesSettingsStore;\n \n private buildingReports = new Set<TReportType>();",
       "module": "/packages/client"
     }
   ],

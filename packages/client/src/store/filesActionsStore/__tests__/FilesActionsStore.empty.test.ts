@@ -30,6 +30,7 @@ describe("FilesActionsStore — empty operations (batch 7)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });
@@ -49,6 +50,7 @@ describe("FilesActionsStore — empty operations (batch 7)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });

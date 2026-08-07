@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceResultsCreateAResultsReportPrompt",
+  "content": "Create a structured report from completed form responses, including key metrics, findings, and actionable conclusions. If this information is not provided, ask me for the audience, scope, reporting period, and preferred output format.",
+  "content_en_sha1_hash": "a921387bff5fc5a976824b61b483f978f1b99a4a",
+  "created_at": "2026-08-04T09:58:55.152Z",
+  "updated_at": "2026-08-05T17:42:54.519Z",
+  "comment": {
+    "text": "AI prompt instruction that directs the AI to generate a structured report from completed form responses when this suggestion is selected.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:42:54.519Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 177,
+      "context": "name: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriods\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriodsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReport\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReportPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsShowKeyMetrics\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsShowKeyMetricsPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesFavoritesFindInformationInFavorites",
+  "content": "Find information in favorites",
+  "content_en_sha1_hash": "b52c7c93d8e7003e7615c088885aa3d9dfaeab1c",
+  "created_at": "2026-08-04T09:58:55.110Z",
+  "updated_at": "2026-08-05T18:21:31.579Z",
+  "comment": {
+    "text": "Label for an AI suggestion action that allows users to search for specific details within their favorites list.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:21:31.579Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 311,
+      "context": "{\n name: t(\"AiSuggestions:FilesFavoritesSummarizeFavorites\"),\n prompt: t(\"AiSuggestions:FilesFavoritesSummarizeFavoritesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFavoritesFindInformationInFavorites\"),\n prompt: t(\n \"AiSuggestions:FilesFavoritesFindInformationInFavoritesPrompt\",\n ),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

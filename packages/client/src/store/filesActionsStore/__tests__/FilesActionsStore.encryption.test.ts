@@ -22,6 +22,7 @@ describe("FilesActionsStore — encrypted ops guard (batch 18)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });
@@ -37,6 +38,7 @@ describe("FilesActionsStore — encrypted ops guard (batch 18)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData: vi.fn(),
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });
@@ -52,6 +54,7 @@ describe("FilesActionsStore — encrypted ops guard (batch 18)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData: vi.fn(),
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });

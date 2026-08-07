@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceResultsCreateAResultsReport",
+  "content": "Create a results report",
+  "content_en_sha1_hash": "346394857634d34df506b8f4a2e0d203e2cf3d01",
+  "created_at": "2026-08-04T09:58:55.151Z",
+  "updated_at": "2026-08-05T17:43:10.352Z",
+  "comment": {
+    "text": "Button label in the AI suggestions menu that initiates the generation of a report based on form space results.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:43:10.352Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 176,
+      "context": "{\n name: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriods\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriodsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReport\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReportPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsShowKeyMetrics\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

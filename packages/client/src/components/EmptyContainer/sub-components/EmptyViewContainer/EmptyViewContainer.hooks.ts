@@ -91,9 +91,6 @@ export const useEmptyView = (
     aiReady,
     standalone,
     isCardLinkedToPortal,
-    isPayer,
-    walletCustomerEmail,
-    walletCustomerDisplayName,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
@@ -127,9 +124,6 @@ export const useEmptyView = (
       isAiReady,
       standalone,
       isPortalAdmin,
-      isPayer,
-      walletCustomerEmail,
-      walletCustomerDisplayName,
     );
     const title = getTitle(
       type,
@@ -183,9 +177,6 @@ export const useEmptyView = (
     isAiReady,
     standalone,
     isPortalAdmin,
-    isPayer,
-    walletCustomerEmail,
-    walletCustomerDisplayName,
   ]);
 
   return emptyViewOptions;
@@ -233,7 +224,6 @@ export const useOptions = (
     startUpload,
     createFoldersTree,
     isCardLinkedToPortal,
-    isPayer,
     enableAIService,
     getAIConfig,
     refreshCurrentFolder,
@@ -550,7 +540,6 @@ export const useOptions = (
         isPortalAdmin,
         trashSection,
         isCardLinkedToPortal,
-        isPayer,
         isActivating,
       ),
     [
@@ -591,7 +580,6 @@ export const useOptions = (
       standalone,
       isPortalAdmin,
       isCardLinkedToPortal,
-      isPayer,
       isActivating,
     ],
   );

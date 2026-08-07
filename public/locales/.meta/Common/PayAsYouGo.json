@@ -1,0 +1,29 @@
+{
+  "key_path": "PayAsYouGo",
+  "content": "Pay as you go",
+  "content_en_sha1_hash": "e4f8a5f9308381432f783c42e8096023d81c4cdc",
+  "created_at": "2026-08-01T16:24:58.179Z",
+  "updated_at": "2026-08-06T08:04:20.047Z",
+  "comment": {
+    "text": "A section label in the billing overview representing the usage-based pricing model.",
+    "is_auto": true,
+    "updated_at": "2026-08-01T16:31:13.520Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "line_number": 239,
+      "context": "emptyDescription: t(\"SubscriptionsEmptyDesc\"),\n },\n {\n key: \"payAsYouGo\",\n items: payAsYouGo,\n label: t(\"PayAsYouGo\"),\n sectionTotal: payAsYouGoTotal,\n dotClass: styles.spendDotPayg,\n emptyDescription: t(\"PayAsYouGoEmptyDesc\"),\n },\n ]",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

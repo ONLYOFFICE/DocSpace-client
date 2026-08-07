@@ -84,6 +84,28 @@ export type TReqOption = {
   skipForbidden?: boolean;
 };
 
+/**
+ * A request the client handles itself rather than passing straight through —
+ * the same idea as Playwright's `page.route`, and the same two ways of doing
+ * it: answer in place of the server, or let the request go and rewrite what
+ * comes back.
+ *
+ * Both work on the raw payload, i.e. what sits in `data`, so they deal in the
+ * envelope the real endpoint uses (`{ response }`, plus `total` for the list
+ * endpoints) — `request` unwraps the result exactly as it unwraps a real one.
+ *
+ * Prefer `transform` whenever the real answer is worth having: rewriting one
+ * field of a genuine response cannot get the other fields wrong, and a
+ * fabricated payload always can.
+ */
+export type TRouteMock = {
+  match: (config: InternalAxiosRequestConfig) => boolean;
+  /** Answer without sending anything. */
+  fulfill?: (config: InternalAxiosRequestConfig) => unknown | Promise<unknown>;
+  /** Send as usual, then rewrite the payload that came back. */
+  transform?: (data: unknown, config: InternalAxiosRequestConfig) => unknown;
+};
+
 class AxiosClient {
   isSSR = false;
 
@@ -92,6 +114,8 @@ class AxiosClient {
   client: AxiosInstance | null = null;
 
   authToken: string | null = null;
+
+  private routeMocks: TRouteMock[] = [];
 
   private oauthReady: Promise<void> | null = null;
 
@@ -104,6 +128,71 @@ class AxiosClient {
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
   }
+
+  /**
+   * Take over the requests `mock.match` claims, for as long as the returned
+   * function has not been called. Nothing is intercepted until something
+   * registers, so the cost of this when no mock is up is one empty-array check
+   * per request.
+   */
+  interceptRoute = (mock: TRouteMock) => {
+    this.routeMocks.push(mock);
+
+    return () => {
+      this.routeMocks = this.routeMocks.filter((item) => item !== mock);
+    };
+  };
+
+  /**
+   * Answers the request from a registered mock by swapping in an adapter — the
+   * one place axios lets a request be resolved without going to the network,
+   * and the reason this hangs off the request interceptor rather than the
+   * response one (by then the request has already been sent).
+   */
+  private applyRouteMock = (config: InternalAxiosRequestConfig) => {
+    if (!this.routeMocks.length) return false;
+
+    const mock = this.routeMocks.find(
+      (item) => item.fulfill && item.match(config),
+    );
+    if (!mock?.fulfill) return false;
+
+    const { fulfill } = mock;
+
+    config.adapter = async () =>
+      ({
+        data: await fulfill(config),
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config,
+      }) as AxiosResponse;
+
+    return true;
+  };
+
+  /**
+   * Hands a real response to the mock that claimed it, so it can rewrite the
+   * payload. Runs on the way back, which is the whole point: everything the
+   * mock does not touch is what the server actually said.
+   */
+  private applyRouteTransform = (response: AxiosResponse) => {
+    if (!this.routeMocks.length) return response;
+
+    const mock = this.routeMocks.find(
+      (item) =>
+        item.transform &&
+        item.match(response.config as InternalAxiosRequestConfig),
+    );
+    if (!mock?.transform) return response;
+
+    response.data = mock.transform(
+      response.data,
+      response.config as InternalAxiosRequestConfig,
+    );
+
+    return response;
+  };
 
   initCSR = () => {
     this.isSSR = false;
@@ -152,6 +241,10 @@ class AxiosClient {
       (config: InternalAxiosRequestConfig) => {
         if (typeof window === "undefined") return config;
 
+        // A mocked request never leaves the browser, so it needs none of the
+        // auth work below — and must not wait on an OAuth token to be issued.
+        if (this.applyRouteMock(config)) return config;
+
         const urlParams = new URLSearchParams(window.location.search);
         const publicRoomKey = urlParams.get("key") || urlParams.get("share");
 
@@ -181,6 +274,8 @@ class AxiosClient {
         return config;
       },
     );
+
+    this.client.interceptors.response.use(this.applyRouteTransform);
   };
 
   initSSR = (headersParam: Record<string, string>) => {
@@ -467,10 +562,8 @@ class AxiosClient {
       return Promise.reject(error);
     };
     return this.client?.(options).then(onSuccess).catch(onError) as
-      | Promise<T>
-      | undefined;
+      Promise<T> | undefined;
   };
 }
 
 export default AxiosClient;
-

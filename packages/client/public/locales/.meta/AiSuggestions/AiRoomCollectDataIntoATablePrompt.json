@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomCollectDataIntoATablePrompt",
+  "content": "Extract comparable data from the available documents and combine it into one structured table. If this information is not provided, ask me for the fields or columns to include and the preferred output format.",
+  "content_en_sha1_hash": "e96deb73ebe705a04a2cfa6c66d57a67146d2a48",
+  "created_at": "2026-08-04T09:58:55.090Z",
+  "updated_at": "2026-08-05T18:34:39.505Z",
+  "comment": {
+    "text": "Instructional prompt for the \"Collect data into a table\" AI suggestion, describing how the feature extracts and structures information from documents.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:34:39.505Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 611,
+      "context": "prompt: t(\"AiSuggestions:AiRoomCreateAPresentationPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomCollectDataIntoATable\"),\n prompt: t(\"AiSuggestions:AiRoomCollectDataIntoATablePrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomTranslateADocument\"),\n prompt: t(\"AiSuggestions:AiRoomTranslateADocumentPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

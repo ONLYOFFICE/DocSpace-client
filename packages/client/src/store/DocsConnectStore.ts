@@ -50,6 +50,7 @@ import {
   getDocsConnectConnection,
 } from "@docspace/shared/api/docs-connect";
 import type { TDocsConnectConnection } from "@docspace/shared/api/docs-connect";
+import { saveDeposite } from "@docspace/shared/api/portal";
 import {
   changeDocumentServiceLocation,
   getDocumentServiceLocation,
@@ -107,6 +108,8 @@ class DocsConnectStore {
   isReportGenerating: boolean = false;
 
   reportPageLeft: boolean = false;
+
+  depositedTopUp: number = 0;
 
   constructor(
     settingsStore: SettingsStore,
@@ -194,6 +197,38 @@ class DocsConnectStore {
     this.refreshPortalState();
   };
 
+  private setInfo = (info: Nullable<TDocsConnectInfo>) => {
+    if (!info) return;
+
+    runInAction(() => {
+      this.info = info;
+    });
+  };
+
+  private refreshInfo = () =>
+    getDocsConnectInfo(true)
+      .then(this.setInfo)
+      .catch(() => {});
+
+  private topUpWallet = async (topUp?: number) => {
+    const amount = Math.round(((topUp ?? 0) - this.depositedTopUp) * 100) / 100;
+    if (amount <= 0) return;
+
+    await saveDeposite(amount, this.info?.wallet?.currency ?? "USD");
+    runInAction(() => {
+      this.depositedTopUp += amount;
+    });
+  };
+
+  private applyPurchase = (info: Nullable<TDocsConnectInfo>) => {
+    runInAction(() => {
+      this.info = info;
+      this.depositedTopUp = 0;
+    });
+    this.closeBuyPlan();
+    this.refreshPortalState();
+  };
+
   buyPlan = async ({
     users,
     devPack,
@@ -204,25 +239,28 @@ class DocsConnectStore {
     topUp?: number;
   }) => {
     const isPaid = this.info ? isDocsConnectPaid(this.info) : false;
+    const currentUsers =
+      !isPaid || this.info?.deactivated
+        ? 0
+        : (this.info?.tenant.payment?.quantity ?? 0);
+    const currentDevPackEnabled = isPaid
+      ? (this.info?.devPackEnabled ?? false)
+      : false;
 
-    const info = await buyDocsConnectPlan({
-      users,
-      devPackEnabled: devPack,
-      topUp,
-      currentUsers:
-        !isPaid || this.info?.deactivated
-          ? 0
-          : (this.info?.tenant.payment?.quantity ?? 0),
-      currentDevPackEnabled: isPaid
-        ? (this.info?.devPackEnabled ?? false)
-        : false,
-      currency: this.info?.wallet?.currency ?? "USD",
-    });
-    runInAction(() => {
-      this.info = info;
-    });
-    this.closeBuyPlan();
-    this.refreshPortalState();
+    try {
+      await this.topUpWallet(topUp);
+
+      const info = await buyDocsConnectPlan({
+        users,
+        devPackEnabled: devPack,
+        currentUsers,
+        currentDevPackEnabled,
+      });
+      this.applyPurchase(info);
+    } catch (error) {
+      await this.refreshInfo();
+      throw error;
+    }
   };
 
   buyPlanViaStripe = async ({
@@ -308,16 +346,15 @@ class DocsConnectStore {
     quantity: number;
     topUp?: number;
   }) => {
-    const info = await switchDocsConnectToDevPack({
-      quantity,
-      topUp,
-      currency: this.info?.wallet?.currency ?? "USD",
-    });
-    runInAction(() => {
-      this.info = info;
-    });
-    this.closeBuyPlan();
-    this.refreshPortalState();
+    try {
+      await this.topUpWallet(topUp);
+
+      const info = await switchDocsConnectToDevPack({ quantity });
+      this.applyPurchase(info);
+    } catch (error) {
+      await this.refreshInfo();
+      throw error;
+    }
   };
 
   cancelPlan = async () => {

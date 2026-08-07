@@ -66,6 +66,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
@@ -77,15 +78,20 @@ import styles from "./AppPromoDialog.module.scss";
 
 /**
  * Generic, reusable "introduce this app" promo modal. It owns only the layout
- * (heading + feature list on the left, illustration on the right, two footer
- * actions); every app passes its own `content`. Shown the first time a user
- * opens an app — the seen flag is managed by `useAppPromo`, not here.
+ * (heading + feature list on the left, illustration on the right, the footer
+ * actions); every app passes its own `content`. Shown every time a user opens an
+ * app from the dashboard — visibility is driven by `useAppPromo`, not here.
+ *
+ * This is also where a section's onboarding tour is offered: "Take a tour"
+ * opens the app and walks the user through it, and is left out when no tour
+ * can run (see `onTakeTour`).
  */
 const AppPromoDialog = ({
   visible,
   content,
   onClose,
   onOpen,
+  onTakeTour,
 }: AppPromoDialogProps) => {
   const { isBase } = useTheme();
 
@@ -97,6 +103,7 @@ const AppPromoDialog = ({
     IllustrationLight,
     IllustrationDark,
     openLabel,
+    tourLabel,
     githubLabel,
     githubUrl,
   } = content;
@@ -165,12 +172,25 @@ const AppPromoDialog = ({
           onClick={onOpen}
           testId="app-promo-open"
         />
-        <Button
-          size={ButtonSize.normal}
-          label={githubLabel}
-          icon={<GithubIcon />}
+        {onTakeTour && tourLabel ? (
+          <Button
+            size={ButtonSize.normal}
+            label={tourLabel}
+            onClick={onTakeTour}
+            testId="app-promo-take-tour"
+          />
+        ) : null}
+        {/* Icon-only: the repo link is a tertiary action, so it gets the mark
+            alone. `githubLabel` stays as its accessible name / hover title. */}
+        <IconButton
+          className={styles.githubButton}
+          iconNode={<GithubIcon />}
+          size={20}
+          isClickable
+          isFill={false}
+          title={githubLabel}
           onClick={onGithubClick}
-          testId="app-promo-github"
+          dataTestId="app-promo-github"
         />
       </ModalDialog.Footer>
     </ModalDialog>

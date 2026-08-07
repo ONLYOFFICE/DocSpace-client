@@ -1,0 +1,29 @@
+{
+  "key_path": "PayAsYouGoEmptyDesc",
+  "content": "Backups and AI usage will appear here",
+  "content_en_sha1_hash": "53263a64cda46b9ca435cfaac4c9e0224f99c9e2",
+  "created_at": "2026-08-01T16:24:58.195Z",
+  "updated_at": "2026-08-06T08:04:20.047Z",
+  "comment": {
+    "text": "Placeholder text in the billing overview section that appears when no data for backups or AI usage has been recorded under the PayAsYouGo category.",
+    "is_auto": true,
+    "updated_at": "2026-08-01T16:30:49.799Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
+      "line_number": 242,
+      "context": "key: \"payAsYouGo\",\n items: payAsYouGo,\n label: t(\"PayAsYouGo\"),\n sectionTotal: payAsYouGoTotal,\n dotClass: styles.spendDotPayg,\n emptyDescription: t(\"PayAsYouGoEmptyDesc\"),\n },\n ]\n // Empty sections drop to the bottom.\n .sort(\n (a, b) =>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

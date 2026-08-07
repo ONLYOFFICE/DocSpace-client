@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsTemplatesShowTemplateFields",
+  "content": "Show template fields",
+  "content_en_sha1_hash": "70b6cef95eedb452fb89ee0b6e49e82e2ae5c007",
+  "created_at": "2026-08-04T09:58:55.177Z",
+  "updated_at": "2026-08-05T17:22:13.159Z",
+  "comment": {
+    "text": "Label for an AI suggestion item that triggers the display of template fields within a form.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:22:13.159Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 770,
+      "context": "\"AiSuggestions:FormsTemplatesAdaptTheTemplateToTheTaskPrompt\",\n ),\n requires: \"contentCreator\",\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesShowTemplateFields\"),\n prompt: t(\"AiSuggestions:FormsTemplatesShowTemplateFieldsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesSaveAsTemplate\"),\n prompt: t(\"AiSuggestions:FormsTemplatesSaveAsTemplatePrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

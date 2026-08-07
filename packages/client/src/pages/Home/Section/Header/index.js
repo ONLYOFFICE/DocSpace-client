@@ -51,7 +51,6 @@ import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/ui-kit/components/navigation";
-import NewChatButton from "@docspace/ui-kit/ai-agent/new-chat-button";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
@@ -84,7 +83,6 @@ import {
   getLifetimePeriodTranslation,
   getCategoryType,
 } from "@docspace/shared/utils/common";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -190,10 +188,6 @@ const SectionHeaderContent = (props) => {
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
-    guidAnimationVisible,
-    setGuidAnimationVisible,
-    setRefMap,
-    deleteRefMap,
     isPersonalReadOnly,
     isPrivacyFolder,
     showTemplateBadge,
@@ -236,7 +230,6 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
-  const isAiChatView = currentClientView === "chat";
 
   // The "Forms" section reuses the Rooms folder; detect it from the route to
   // adjust section labels (title, create-button caption) accordingly. This is
@@ -252,24 +245,6 @@ const SectionHeaderContent = (props) => {
   // the crumb to /rooms/shared/... and switch the section to Rooms.
   const isFormsRoute = location.pathname.startsWith("/forms");
   const currentGroupName = currentGroup?.name;
-
-  const addButtonRefCallback = React.useCallback(
-    (ref) => {
-      if (ref) {
-        setRefMap(GuidanceRefKey.Uploading, ref);
-      }
-    },
-    [setRefMap],
-  );
-
-  const buttonRefCallback = React.useCallback(
-    (ref) => {
-      if (ref) {
-        setRefMap(GuidanceRefKey.Share, ref);
-      }
-    },
-    [setRefMap],
-  );
 
   const { getContactsMenuItems, onContactsChange } = useContactsHeader({
     setUsersSelected,
@@ -324,27 +299,6 @@ const SectionHeaderContent = (props) => {
     }
     // setIsInfoPanelVisible(!isInfoPanelVisible);
   }, [hideInfoPanelEvent, isInfoPanelVisible, showInfoPanel]);
-
-  const contextButtonAnimation = React.useCallback(
-    (setAnimationClasses) => {
-      setAnimationClasses(["guid-animation-after"]);
-
-      const beforeTimer = setTimeout(() => {
-        setAnimationClasses(["guid-animation-after", "guid-animation-before"]);
-      }, 1000);
-
-      const removeTimer = setTimeout(() => {
-        setAnimationClasses([]);
-        setGuidAnimationVisible(false);
-      }, 3000);
-
-      return () => {
-        clearTimeout(beforeTimer);
-        clearTimeout(removeTimer);
-      };
-    },
-    [setGuidAnimationVisible],
-  );
 
   const getContextOptionsFolder = React.useCallback(() => {
     if (isProfile) return getUserContextOptions();
@@ -918,13 +872,6 @@ const SectionHeaderContent = (props) => {
     return [];
   }, [isContactsInsideGroupPage, t]);
 
-  React.useEffect(() => {
-    return () => {
-      deleteRefMap(GuidanceRefKey.Share);
-      deleteRefMap(GuidanceRefKey.Uploading);
-    };
-  }, [deleteRefMap]);
-
   const isCurrentRoom = isRoom;
 
   const insideTheRoom =
@@ -1108,11 +1055,6 @@ const SectionHeaderContent = (props) => {
               badgeLabel={badgeLabel}
               onContextOptionsClick={onContextOptionsClick}
               onLogoClick={onLogoClick}
-              buttonRef={buttonRefCallback}
-              addButtonRef={addButtonRefCallback}
-              contextButtonAnimation={contextButtonAnimation}
-              guidAnimationVisible={guidAnimationVisible}
-              setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
@@ -1122,7 +1064,6 @@ const SectionHeaderContent = (props) => {
                   className={styles.analyzeResponsesButton}
                 />
               }
-              newChatButton={isAiChatView ? <NewChatButton /> : undefined}
             />
             {showSignInButton ? (
               <Button
@@ -1181,7 +1122,6 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
-    guidanceStore,
     aiRoomStore,
     profileActionsStore,
     mediaViewerDataStore,
@@ -1211,8 +1151,6 @@ export default inject(
       selection: filesSelection,
     } = filesStore;
 
-    const { setRefMap, deleteRefMap } = guidanceStore;
-
     const {
       setIsSectionBodyLoading,
       showHeaderLoader,
@@ -1239,9 +1177,6 @@ export default inject(
     const {
       setReorderDialogVisible,
       setCloseEditIndexDialogVisible,
-      welcomeFormFillingTipsVisible,
-      setGuidAnimationVisible,
-      guidAnimationVisible,
     } = dialogsStore;
 
     const {
@@ -1493,11 +1428,6 @@ export default inject(
       infoPanelRoom: infoPanelRoomSelection,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
-      welcomeFormFillingTipsVisible,
-      guidAnimationVisible,
-      setGuidAnimationVisible,
-      setRefMap,
-      deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
 
       isAIRoom,
@@ -1544,4 +1474,3 @@ export default inject(
     "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
-

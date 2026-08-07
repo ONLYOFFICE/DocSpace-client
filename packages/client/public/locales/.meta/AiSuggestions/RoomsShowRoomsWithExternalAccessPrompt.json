@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsShowRoomsWithExternalAccessPrompt",
+  "content": "Show rooms accessible to guests, external users, or through public links. Ask whether I want all rooms or a specific room type.",
+  "content_en_sha1_hash": "51646a58b9a2d076f6e2396f78c34effa9129708",
+  "created_at": "2026-08-04T09:58:55.212Z",
+  "updated_at": "2026-08-05T16:51:26.889Z",
+  "comment": {
+    "text": "AI prompt instruction describing a command to filter rooms by external accessibility and requesting clarification regarding room types.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:51:26.889Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 448,
+      "context": "name: t(\"AiSuggestions:RoomsShowRoomsIManage\"),\n prompt: t(\"AiSuggestions:RoomsShowRoomsIManagePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsShowRoomsWithExternalAccess\"),\n prompt: t(\"AiSuggestions:RoomsShowRoomsWithExternalAccessPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsSuggestRoomsToArchive\"),\n prompt: t(\"AiSuggestions:RoomsSuggestRoomsToArchivePrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Rooms removed",
   "content_en_sha1_hash": "b7f6fbe672117d78dda530804dc9a74efcd4e510",
   "created_at": "2025-05-19T21:30:56.133Z",
-  "updated_at": "2026-07-27T13:07:50.649Z",
+  "updated_at": "2026-08-04T09:58:56.386Z",
   "comment": {
     "text": "This is a toast message confirming the successful removal of multiple rooms. It appears after a user deletes several rooms.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/delete.helpers.ts",
-      "line_number": 681,
+      "line_number": 699,
       "context": "items.push(item.id);\n });\n \n const translations = {\n successRemoveRoom: t(\"Common:RoomRemoved\"),\n successRemoveRooms: t(\"Common:RoomsRemoved\"),\n };\n \n self.deleteItemAction(items, \"\", translations, null, null, true);\n };",
       "module": "/packages/client"
     },

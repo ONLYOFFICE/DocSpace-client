@@ -73,6 +73,7 @@ import {
   SearchArea,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { editAIAgent } from "@docspace/shared/api/ai";
 import { CategoryType } from "@docspace/shared/constants";
 
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
@@ -145,6 +146,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setWalletLowBalance,
     agentEntityId,
     isInsideAgentRoom,
+    canEditAgentRoom,
     getAgentRoomId,
     openResultFile,
     closeEditorPanel,
@@ -766,10 +768,27 @@ const Shell = ({ page = "home", ...rest }) => {
 
   // Picking a plain profile row returns the chat to the current-location
   // scope; entering an AI agent room does the same — there the room itself
-  // fixes both the entity and the profile (the picker is hidden).
-  const onProfilePickerSelect = useCallback((profile, actionId) => {
-    if (!actionId) setPickedAgent(null);
-  }, []);
+  // fixes the entity.
+  //
+  // Inside an AI agent room the picker is an editable combo for users who may
+  // edit the room. A pick there must persist for that specific agent, not
+  // just the session: the chat lib keeps entity-scoped picks session-local
+  // (never hits the API), so the host rebinds the agent's Chat-action profile
+  // via PUT /ai/agents/:id — the exact path the Edit-agent dialog uses. A
+  // pick always carries `actionId === undefined` here (agent-picker actions
+  // are suppressed in agent rooms), so no extra guard is needed.
+  const onProfilePickerSelect = useCallback(
+    (profile, actionId) => {
+      if (!actionId) setPickedAgent(null);
+
+      if (isInsideAgentRoom && !actionId && profile?.id && agentEntityId) {
+        editAIAgent(Number(agentEntityId), { profileId: profile.id }).catch(
+          (err) => toastr.error(err),
+        );
+      }
+    },
+    [isInsideAgentRoom, agentEntityId],
+  );
 
   useEffect(() => {
     if (isInsideAgentRoom) setPickedAgent(null);
@@ -824,8 +843,20 @@ const Shell = ({ page = "home", ...rest }) => {
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}
-          hideProfilePicker={isInsideAgentRoom}
-          profilePickerActions={profilePickerActions}
+          // The picker area is always present (an explicit `false` also
+          // overrides the lib's entityId default-hide heuristic — the chat
+          // is always entity-scoped here). Inside an AI agent room the
+          // room's assigned profile drives the chat: users without the
+          // EditRoom right see it as a read-only label, managers get an
+          // interactive picker to change it. `isAgentRoom` keeps the
+          // room-assignment-wins reset on scope switches even though the
+          // picker is no longer hidden there.
+          hideProfilePicker={false}
+          profilePickerReadOnly={isInsideAgentRoom && !canEditAgentRoom}
+          isAgentRoom={isInsideAgentRoom}
+          profilePickerActions={
+            isInsideAgentRoom ? undefined : profilePickerActions
+          }
           profilePickerAlias={chatPickerAlias}
           onProfilePickerSelect={onProfilePickerSelect}
           onThreadContextChange={onThreadContextChange}
@@ -992,9 +1023,14 @@ const ShellWrapper = inject(
         selectedFolderStore.rootRoomId || selectedFolderStore.id
           ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
           : undefined,
-      // The composer model picker is hidden only where the model is fixed
-      // by the agent's assigned profile — inside AI agent rooms.
+      // Inside AI agent rooms the model is fixed by the agent's assigned
+      // profile. It is shown in the composer as a read-only label, or — for
+      // users who may edit the room — an interactive picker to change it.
       isInsideAgentRoom: selectedFolderStore.isAIRoom,
+      // EditRoom is the room-manager right; viewers (EditRoom === false, or
+      // security not resolved yet) get the read-only label. Both room and
+      // sub-folder security view-models carry EditRoom.
+      canEditAgentRoom: selectedFolderStore.security?.EditRoom === true,
       getAgentRoomId: () => {
         const id = selectedFolderStore.rootRoomId;
         return id ? Number(id) : null;

@@ -96,7 +96,6 @@ newInstance
       "Files",
       "Errors",
       "Translations",
-      "FormFillingTipsDialog",
       "Settings",
       "DocsConnect",
     ],

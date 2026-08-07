@@ -3,7 +3,7 @@
   "content": "Copy link",
   "content_en_sha1_hash": "2f84eea5d45da4f1ce1760b85db18a854f4e1b39",
   "created_at": "2025-05-19T21:30:43.782Z",
-  "updated_at": "2026-07-27T13:07:50.720Z",
+  "updated_at": "2026-08-06T14:20:57.604Z",
   "comment": {
     "text": "Button label. This action copies a shareable link to the clipboard.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 492,
+      "line_number": 486,
       "context": "disabled: false,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => self.onCopyLink(item, t),\n disabled: item.isTemplate\n ? false\n : (!item.isRoom && item.canShare) ||",
       "module": "/packages/client"
     },

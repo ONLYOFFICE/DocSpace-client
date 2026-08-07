@@ -1,0 +1,29 @@
+{
+  "key_path": "TourShare",
+  "content": "Hover over any file to see quick actions. Click the share icon to grant access to your portal contacts with different permission levels — or create an external link for anyone else.",
+  "content_en_sha1_hash": "d9429fa0aa0958782f335cde7223c1d416b9626c",
+  "created_at": "2026-08-06T14:20:53.793Z",
+  "updated_at": "2026-08-06T14:32:55.573Z",
+  "comment": {
+    "text": "Instructional text for an onboarding tour step explaining how to use the share icon to manage internal permissions and create external links.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:32:55.573Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 298,
+      "context": "// 5. The share button on a row — the per-item action users hunt for most.\n hasItems &&\n hoverRevealStep(\n SHARE_ICON_SELECTOR,\n t(\"FilesTour:TourShareTitle\"),\n t(\"FilesTour:TourShare\"),\n callbacks,\n LOG_LABEL,\n 4,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

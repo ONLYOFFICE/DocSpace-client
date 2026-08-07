@@ -1,0 +1,16 @@
+{
+  "RoomsCreateFirst": "Izberite vrsto, povabite ljudi, s katerimi delate, in vanjo odložite svoje datoteke. Traja minuto — in vse, kar ste pravkar videli, začne delovati na vaših lastnih dokumentih.",
+  "RoomsCreateFirstTitle": "Zdaj naredite svojo",
+  "RoomsEmpty": "Sobe, ki ste jih pravkar videli, so bile predogled. Sobe, v katere vas nekdo povabi, se pojavijo na tem seznamu, in vse, kar ste videli, v njih deluje enako.",
+  "RoomsEmptyTitle": "Vaš seznam je zaenkrat prazen",
+  "RoomsGroups": "Sobe uredite po določenih značilnostih, da hitro najdete, kar potrebujete. Ustvarite skupine in preklapljajte med njimi tik nad seznamom.",
+  "RoomsGroupsTitle": "Združite svoje sobe",
+  "RoomsMembers": "Vsaka soba ima svoj seznam članov v informacijskem panelu. Dodajte stike portala in vsakemu članu določite vlogo — od ogleda datotek do upravljanja celotne sobe.",
+  "RoomsMembersTitle": "Delajte skupaj",
+  "RoomsPlaces": "{{recent}}, {{favorites}} in {{trash}} zbirajo datoteke iz vaših sob: nedavno odprte, označene z zvezdico in izbrisane — te zadnje je še mogoče obnoviti. {{templates}} — vaše predloge sob. {{archive}} — sobe, v katerih ne delate več, obnovljive kadar koli.",
+  "RoomsPlacesTitle": "Vse na svojem mestu",
+  "RoomsTemplates": "Katero koli sobo spremenite v predlogo — njene nastavitve, struktura in datoteke se shranijo. Iz nje z enim klikom ustvarite novo sobo, preostane le še dodajanje članov.",
+  "RoomsTemplatesTitle": "Znova uporabite tisto, kar deluje",
+  "RoomsTypes": "{{collaboration}} za timsko delo, {{vdr}} za varno deljenje datotek, {{publicRoom}} za zunanji dostop, {{custom}} za vaše lastne scenarije.",
+  "RoomsTypesTitle": "Soba za vsako nalogo"
+}

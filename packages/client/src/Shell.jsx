@@ -859,8 +859,6 @@ const ShellWrapper = inject(
 
     const {
       setConvertPasswordDialogVisible,
-      setFormFillingTipsDialog,
-      formFillingTipsVisible,
 
       setFormCreationInfo,
       setSocialAuthWelcomeDialogVisible,
@@ -893,8 +891,6 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setPreparationPortalDialogVisible,
-      setFormFillingTipsDialog,
-      formFillingTipsVisible,
       isBase,
       setTheme,
       roomsMode,

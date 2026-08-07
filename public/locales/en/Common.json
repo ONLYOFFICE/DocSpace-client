@@ -1111,7 +1111,6 @@
   "GhostStateDetected": "Your encryption identity on this device cannot unwrap some files. Other members may have changed their keys, or your identity may be out of sync. <0>Open key management</0> to re-verify or reset.",
   "Gigabyte": "GB",
   "GoBack": "Go back",
-  "GotIt": "Got it",
   "GoToMyRooms": "Go to rooms",
   "GoToRoom": "go to the room",
   "GoToSection": "Go to {{sectionName}}",

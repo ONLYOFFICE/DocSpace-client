@@ -3,7 +3,7 @@
   "content": "Shared by",
   "content_en_sha1_hash": "a5fe3b3e382690e112e5d06a9d9588409cdd93a3",
   "created_at": "2026-06-03T09:30:00.102Z",
-  "updated_at": "2026-07-27T13:07:50.705Z",
+  "updated_at": "2026-08-06T14:20:57.511Z",
   "comment": {
     "text": "Column header, field label, or filter group header indicating the user who shared a file or folder.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 348,
+      "context": "elementGroupStep(\n TABLE_HEADER_SELECTOR,\n SHARED_COLUMN_SELECTORS,\n t(\"FilesTour:TourSharedAccessTitle\"),\n t(\"FilesTour:TourSharedAccess\", {\n sharedBy: t(\"Common:SharedBy\"),\n accessLevel: t(\"Common:AccessLevel\"),\n }),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
       "line_number": 272,

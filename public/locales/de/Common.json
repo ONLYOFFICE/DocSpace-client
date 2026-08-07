@@ -1111,7 +1111,6 @@
   "GhostStateDetected": "Ihre Verschlüsselungsidentität auf diesem Gerät kann einige Dateien nicht entpacken. Andere Mitglieder haben möglicherweise ihre Schlüssel geändert, oder Ihre Identität ist nicht mehr synchron. <0>Schlüsselverwaltung öffnen</0>, um diese zu überprüfen oder zurückzusetzen.",
   "Gigabyte": "GB",
   "GoBack": "Zurück",
-  "GotIt": "Verstanden",
   "GoToMyRooms": "Zu Räume",
   "GoToRoom": "Zum Raum gehen",
   "GoToSection": "Zu {{sectionName}} gehen",

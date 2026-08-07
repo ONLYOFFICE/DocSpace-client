@@ -83,7 +83,6 @@ import {
   getLifetimePeriodTranslation,
   getCategoryType,
 } from "@docspace/shared/utils/common";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -189,10 +188,6 @@ const SectionHeaderContent = (props) => {
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
-    guidAnimationVisible,
-    setGuidAnimationVisible,
-    setRefMap,
-    deleteRefMap,
     isPersonalReadOnly,
     isPrivacyFolder,
     showTemplateBadge,
@@ -251,24 +246,6 @@ const SectionHeaderContent = (props) => {
   const isFormsRoute = location.pathname.startsWith("/forms");
   const currentGroupName = currentGroup?.name;
 
-  const addButtonRefCallback = React.useCallback(
-    (ref) => {
-      if (ref) {
-        setRefMap(GuidanceRefKey.Uploading, ref);
-      }
-    },
-    [setRefMap],
-  );
-
-  const buttonRefCallback = React.useCallback(
-    (ref) => {
-      if (ref) {
-        setRefMap(GuidanceRefKey.Share, ref);
-      }
-    },
-    [setRefMap],
-  );
-
   const { getContactsMenuItems, onContactsChange } = useContactsHeader({
     setUsersSelected,
     setGroupsSelected,
@@ -322,27 +299,6 @@ const SectionHeaderContent = (props) => {
     }
     // setIsInfoPanelVisible(!isInfoPanelVisible);
   }, [hideInfoPanelEvent, isInfoPanelVisible, showInfoPanel]);
-
-  const contextButtonAnimation = React.useCallback(
-    (setAnimationClasses) => {
-      setAnimationClasses(["guid-animation-after"]);
-
-      const beforeTimer = setTimeout(() => {
-        setAnimationClasses(["guid-animation-after", "guid-animation-before"]);
-      }, 1000);
-
-      const removeTimer = setTimeout(() => {
-        setAnimationClasses([]);
-        setGuidAnimationVisible(false);
-      }, 3000);
-
-      return () => {
-        clearTimeout(beforeTimer);
-        clearTimeout(removeTimer);
-      };
-    },
-    [setGuidAnimationVisible],
-  );
 
   const getContextOptionsFolder = React.useCallback(() => {
     if (isProfile) return getUserContextOptions();
@@ -916,13 +872,6 @@ const SectionHeaderContent = (props) => {
     return [];
   }, [isContactsInsideGroupPage, t]);
 
-  React.useEffect(() => {
-    return () => {
-      deleteRefMap(GuidanceRefKey.Share);
-      deleteRefMap(GuidanceRefKey.Uploading);
-    };
-  }, [deleteRefMap]);
-
   const isCurrentRoom = isRoom;
 
   const insideTheRoom =
@@ -1106,11 +1055,6 @@ const SectionHeaderContent = (props) => {
               badgeLabel={badgeLabel}
               onContextOptionsClick={onContextOptionsClick}
               onLogoClick={onLogoClick}
-              buttonRef={buttonRefCallback}
-              addButtonRef={addButtonRefCallback}
-              contextButtonAnimation={contextButtonAnimation}
-              guidAnimationVisible={guidAnimationVisible}
-              setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
@@ -1178,7 +1122,6 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
-    guidanceStore,
     aiRoomStore,
     profileActionsStore,
     mediaViewerDataStore,
@@ -1208,8 +1151,6 @@ export default inject(
       selection: filesSelection,
     } = filesStore;
 
-    const { setRefMap, deleteRefMap } = guidanceStore;
-
     const {
       setIsSectionBodyLoading,
       showHeaderLoader,
@@ -1236,9 +1177,6 @@ export default inject(
     const {
       setReorderDialogVisible,
       setCloseEditIndexDialogVisible,
-      welcomeFormFillingTipsVisible,
-      setGuidAnimationVisible,
-      guidAnimationVisible,
     } = dialogsStore;
 
     const {
@@ -1490,11 +1428,6 @@ export default inject(
       infoPanelRoom: infoPanelRoomSelection,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
-      welcomeFormFillingTipsVisible,
-      guidAnimationVisible,
-      setGuidAnimationVisible,
-      setRefMap,
-      deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
 
       isAIRoom,

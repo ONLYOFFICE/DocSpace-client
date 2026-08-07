@@ -1,0 +1,16 @@
+{
+  "RoomsCreateFirst": "Escolha um tipo, convide as pessoas com quem trabalha e coloque lá os seus ficheiros. Demora um minuto — e tudo o que acabou de ver começa a funcionar nos seus próprios documentos.",
+  "RoomsCreateFirstTitle": "Agora torne-a sua",
+  "RoomsEmpty": "As salas que acabou de ver eram uma pré-visualização. As salas para as quais alguém o convidar aparecem nesta lista, e tudo o que lhe foi mostrado funciona nelas da mesma forma.",
+  "RoomsEmptyTitle": "A sua lista está vazia por agora",
+  "RoomsGroups": "Organize as salas por características específicas para encontrar rapidamente o que precisa. Crie grupos e alterne entre eles mesmo por cima da lista.",
+  "RoomsGroupsTitle": "Agrupe as suas salas",
+  "RoomsMembers": "Cada sala tem a sua lista de membros no painel de informação. Adicione contactos do portal e defina um papel para cada membro — desde ver ficheiros até gerir a sala inteira.",
+  "RoomsMembersTitle": "Trabalhem em conjunto",
+  "RoomsPlaces": "{{recent}}, {{favorites}} e {{trash}} reúnem ficheiros das suas salas: abertos recentemente, marcados com estrela e eliminados — estes últimos ainda podem ser restaurados. {{templates}} — os seus modelos de sala. {{archive}} — salas em que já não trabalha, restauráveis a qualquer momento.",
+  "RoomsPlacesTitle": "Cada coisa no seu lugar",
+  "RoomsTemplates": "Transforme qualquer sala num modelo — as suas definições, estrutura e ficheiros ficam guardados. Crie a partir dele uma nova sala num clique, só falta acrescentar membros.",
+  "RoomsTemplatesTitle": "Reutilize o que funciona",
+  "RoomsTypes": "{{collaboration}} para trabalho em equipa, {{vdr}} para partilha segura de ficheiros, {{publicRoom}} para acesso externo, {{custom}} para os seus próprios cenários.",
+  "RoomsTypesTitle": "Uma sala para cada tarefa"
+}

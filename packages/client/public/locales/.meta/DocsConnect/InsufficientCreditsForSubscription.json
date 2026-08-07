@@ -3,7 +3,7 @@
   "content": "There aren't enough credits for the selected {{service}} subscription. Contact your Payer (<1>{{payerContact}}</1>) to top up the wallet, or select fewer users.",
   "content_en_sha1_hash": "f989d6b66202258df49b2f1e98bf398abc4f30db",
   "created_at": "2026-08-06T11:20:23.572Z",
-  "updated_at": "2026-08-06T11:20:59.535Z",
+  "updated_at": "2026-08-06T14:20:57.620Z",
   "comment": {
     "text": "Error text in the panel footer that appears when credits are insufficient for a selected subscription. It includes the {{service}} name and the <1>{{payerContact}}</1> contact information within a tag.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 499,
+      "line_number": 503,
       "context": "return (\n <Text fontSize=\"13px\" fontWeight={400} className={styles.footerHint}>\n <Trans\n t={t}\n ns=\"DocsConnect\"\n i18nKey=\"InsufficientCreditsForSubscription\"\n values={{\n service: t(\"DocsConnect:DocsConnect\"),\n payerContact: walletCustomerDisplayName || walletCustomerEmail,\n }}\n components={{",
       "module": "/packages/client"
     }

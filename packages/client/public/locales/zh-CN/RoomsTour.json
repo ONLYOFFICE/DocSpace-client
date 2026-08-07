@@ -1,0 +1,16 @@
+{
+  "RoomsCreateFirst": "选择一种类型，邀请与你共事的人，再把文件放进去。只需一分钟——你刚刚看到的一切就会开始作用于你自己的文档。",
+  "RoomsCreateFirstTitle": "现在做一个属于你的",
+  "RoomsEmpty": "你刚刚看到的房间只是预览。别人邀请你加入的房间会出现在这个列表中，向你演示过的一切在那里同样适用。",
+  "RoomsEmptyTitle": "你的列表暂时是空的",
+  "RoomsGroups": "按特定特征整理房间，快速找到你需要的内容。创建分组，并在列表上方直接切换。",
+  "RoomsGroupsTitle": "为房间分组",
+  "RoomsMembers": "每个房间的成员列表都在信息面板中。添加门户联系人，并为每位成员设置角色——从仅查看文件到管理整个房间。",
+  "RoomsMembersTitle": "协同工作",
+  "RoomsPlaces": "{{recent}}、{{favorites}} 和 {{trash}} 汇集来自各房间的文件：最近打开的、已加星标的和已删除的——后者仍可恢复。{{templates}} — 你的房间模板。{{archive}} — 你不再使用的房间，随时可以恢复。",
+  "RoomsPlacesTitle": "各归其位",
+  "RoomsTemplates": "把任意房间变成模板——它的设置、结构和文件都会保存下来。一键即可由此创建新房间，剩下的只是添加成员。",
+  "RoomsTemplatesTitle": "复用行之有效的做法",
+  "RoomsTypes": "{{collaboration}} 用于团队协作，{{vdr}} 用于安全的文件共享，{{publicRoom}} 用于对外开放，{{custom}} 用于你自己的场景。",
+  "RoomsTypesTitle": "每项任务都有合适的房间"
+}

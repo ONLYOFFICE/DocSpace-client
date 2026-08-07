@@ -52,11 +52,25 @@
     width: 100vw;
   }
 
+  // The nav bar and the section's sticky header share a single scroller
+  // (#customScrollBar wraps the whole app on mobile). Toggling this element
+  // between `relative` and `fixed` pulled it out of flow, which shrank
+  // scrollHeight by --header-height and made the browser clamp/shift scrollTop.
+  // The next scroll event then reported the opposite direction, flipping
+  // isFixed back — a feedback loop that read as flicker on iOS, where momentum
+  // scrolling delivers events continuously and never lets it settle.
+  //
+  // `sticky` keeps the element in flow in both states, so scrollHeight is
+  // constant and no toggle can perturb scrollTop. Unpinned it scrolls away
+  // normally; pinned it detaches at top: 0 without ever leaving the flow.
   &.isFixed {
     @include mixins.tablet-and-below {
-      position: fixed;
+      position: sticky;
       top: 0;
-      z-index: 201;
+      // Above the section's sticky header (201). Both are in flow and the nav
+      // bar precedes it in DOM order, so an equal z-index would let the section
+      // header paint over the nav bar during the overlap.
+      z-index: 202;
     }
   }
 }

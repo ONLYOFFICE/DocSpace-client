@@ -1111,7 +1111,6 @@
   "GhostStateDetected": "Votre identité de chiffrement sur cet appareil ne parvient pas à déverrouiller certains fichiers. D'autres membres ont peut-être modifié leurs clés, ou votre identité est peut-être désynchronisée. <0>Ouvrir la gestion des clés</0> pour revérifier ou réinitialiser.",
   "Gigabyte": "Go",
   "GoBack": "Retourner",
-  "GotIt": "Compris",
   "GoToMyRooms": "Aller dans les salles",
   "GoToRoom": "Aller à la salle",
   "GoToSection": "Accéder à {{sectionName}}",

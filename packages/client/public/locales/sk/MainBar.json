@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Po dosiahnutí limitu budú všetci používatelia pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, <1>kliknite sem</1> a aktualizujte svoj tarifný plán.",
   "UserTariffLimitHeader": "Limit počtu administrátorov je dosiahnutý: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Všetci používatelia budú pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, obráťte sa na administrátora {{productName}}, aby vám zvýšil tarifný plán.",
-  "UserTariffReachedForAdmins": "Všetci používatelia budú pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, <1>kliknite sem</1> a aktualizujte svoj tarifný plán."
+  "UserTariffReachedForAdmins": "Všetci používatelia budú pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, <1>kliknite sem</1> a aktualizujte svoj tarifný plán.",
+  "WalletLowBalanceContactPayer": "Kontaktujte platiteľa (<1>{{payerContact}}</1>), aby doplnil peňaženku a predišli ste prerušeniam platených služieb.",
+  "WalletLowBalanceDescription": "Doplňte peňaženku, aby ste predišli prerušeniam platených služieb. <1>Doplniť</1>",
+  "WalletLowBalanceHeader": "Vaše kredity dochádzajú: {{balance}}"
 }

@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Kada se dostigne limit, svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine, <1>kliknite ovde</1> da biste nadogradili vaš tarifni plan.",
   "UserTariffLimitHeader": "Dostignut je limit za broj admina: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine, kontaktirajte {{productName}} administratora da biste nadogradili tarifni plan.",
-  "UserTariffReachedForAdmins": "Svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine, <1>kliknite ovde</1> da biste nadogradili vaš tarifni plan."
+  "UserTariffReachedForAdmins": "Svi korisnici će biti dodati sa samo Korisničkim dozvolama. Da biste mogli dalje da dodajete admine, <1>kliknite ovde</1> da biste nadogradili vaš tarifni plan.",
+  "WalletLowBalanceContactPayer": "Kontaktirajte Platioca (<1>{{payerContact}}</1>) da dopuni novčanik i izbegnite prekide plaćenih usluga.",
+  "WalletLowBalanceDescription": "Dopunite novčanik da biste izbegli prekide plaćenih usluga. <1>Dopuni</1>",
+  "WalletLowBalanceHeader": "Vaši krediti su pri kraju: {{balance}}"
 }

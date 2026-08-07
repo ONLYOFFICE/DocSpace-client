@@ -508,6 +508,10 @@ test.describe("Rooms — info panel history", () => {
       mockRequest.use(
         ...folderHistoryReportHandlers(TEST_PORT, ROOM_ID, {
           pollsBeforeComplete: 1,
+          // A task that completes without one is a failure the store reports
+          // as such (DocumentBuilderReportStore.finishReport), so the file the
+          // polling ends on has to be there for the success toast to be.
+          resultFileUrl: REPORT_URL,
           handle,
         }),
       );

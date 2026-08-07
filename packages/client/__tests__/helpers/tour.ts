@@ -38,6 +38,18 @@ import { expect } from "@playwright/test";
 import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 
 /**
+ * The moment every tour run is taken at.
+ *
+ * The stand-in entities a tour walks through are stamped with the wall clock
+ * (`SRC_DIR/api/tourDemo/data` — `demoTimestamp`), so their `Last activity`
+ * column renders whatever time the run happened at and every screenshot
+ * disagrees with the one taken before it. The clock is fixed rather than the
+ * column masked: the timestamp is part of what those rows look like, and the
+ * date is the same shape as the fixed ones the list mocks already return.
+ */
+const TOUR_FIXED_NOW = "2025-01-15T12:00:00.000Z";
+
+/**
  * Arms a section's tour the way the product does it.
  *
  * A tour is never shown on its own: the app's promo modal on the dashboard
@@ -47,9 +59,17 @@ import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
  * these specs use, instead of driving the dashboard promo, so each one stays
  * focused on the walkthrough it is about.
  *
+ * The clock is fixed here too: this is the one call every tour spec makes
+ * between landing on an origin and navigating into the section the tour runs
+ * in, which is the last moment before anything a screenshot covers is
+ * rendered. `setFixedTime` rather than `install` — only `Date` is frozen, so
+ * joyride's own timers still run.
+ *
  * `key` is the concrete store's key (e.g. `files_tour_pending`).
  */
 export const armTour = async (page: Page, key: string) => {
+  await page.clock.setFixedTime(new Date(TOUR_FIXED_NOW));
+
   await page.evaluate(
     (storageKey) => window.localStorage.setItem(storageKey, "true"),
     key,
@@ -63,6 +83,18 @@ export const tourTooltip = (page: Page) =>
   page
     .locator('[role="dialog"]:visible')
     .filter({ has: page.locator('[role="progressbar"]') });
+
+/**
+ * How long a step is given to come up.
+ *
+ * A step whose anchor has to be navigated to is laid out only once react-joyride
+ * has waited it out, and joyride's own cap on that wait is
+ * `JOYRIDE_TIMEOUTS.targetWaitTimeout` (SRC_DIR/components/Tour/useTour) —
+ * 9s, well past the default expect timeout. Nothing is on screen while it
+ * waits, so a shorter wait here reports a tour that is still coming as a tour
+ * that is not there.
+ */
+const TOOLTIP_TIMEOUT = 10000;
 
 /**
  * Clicks through every step of a running tour, screenshotting each one
@@ -81,7 +113,7 @@ export const walkTour = async (
   let step = 0;
 
   for (; step < maxSteps; step += 1) {
-    await expect(tooltip).toBeVisible();
+    await expect(tooltip).toBeVisible({ timeout: TOOLTIP_TIMEOUT });
     // Let the spotlight/tooltip finish positioning against the (possibly
     // just-scrolled-into-view) target before capturing.
     await page.waitForTimeout(300);

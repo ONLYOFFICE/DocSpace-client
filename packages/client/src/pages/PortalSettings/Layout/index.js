@@ -58,6 +58,7 @@ const Layout = ({
   enablePlugins,
   isInitPlugins,
   initPlugins,
+  setIsPortalSettingsLoading,
 
   currentDeviceType,
 }) => {
@@ -67,6 +68,10 @@ const Layout = ({
     const sel = window.getSelection?.();
     if (sel?.rangeCount) sel.removeAllRanges();
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (isPluginPage()) setIsPortalSettingsLoading(false);
+  }, [location.pathname, setIsPortalSettingsLoading]);
 
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
@@ -106,6 +111,7 @@ export default inject(
     settingsStore,
     setup,
     pluginStore,
+    clientLoadingStore,
   }) => {
     const { language } = authStore;
     const { addUsers } = setup.headerAction;
@@ -116,6 +122,7 @@ export default inject(
       currentDeviceType,
     } = settingsStore;
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
+    const { setIsPortalSettingsLoading } = clientLoadingStore;
 
     return {
       language,
@@ -125,6 +132,7 @@ export default inject(
       enablePlugins,
       isInitPlugins,
       initPlugins,
+      setIsPortalSettingsLoading,
 
       currentDeviceType,
     };

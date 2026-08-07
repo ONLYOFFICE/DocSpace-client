@@ -3,7 +3,7 @@
   "content": "AI usage is billed from your available credits. If available credits run too low, AI requests will not be processed.",
   "content_en_sha1_hash": "a58d78f5db89b2c68d36b590c09c769e11444492",
   "created_at": "2026-06-25T11:54:49.396Z",
-  "updated_at": "2026-07-27T13:07:51.055Z",
+  "updated_at": "2026-08-07T10:52:45.141Z",
   "comment": {
     "text": "Subtext for a service toggle in the AI tools settings, explaining how usage affects available credits and the consequences of low balances.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 275,
+      "line_number": 225,
       "context": "<ServiceToggleSection\n isEnabled={isAiToolsServiceOn}\n onToggle={onToggleChange}\n title={t(\"EnableAIFeatures\")}\n description={t(\"EnableAIFeaturesDescription\")}\n testId=\"service-ai-toggle-button\"\n isDisabled={isDisabled}\n withBottomMargin={withBottomMargin}\n />",
       "module": "/libs/ui-kit"
     }

@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardProfile",
+  "content": "Your profile details: who owns this portal, the plan it runs on, how much storage is in use, and the portal address itself. The links here let you change your plan or edit these settings.",
+  "content_en_sha1_hash": "770faca2a952622bd6293bcbaeaf8447fb3e428d",
+  "created_at": "2026-08-07T10:52:39.928Z",
+  "updated_at": "2026-08-07T10:55:52.722Z",
+  "comment": {
+    "text": "Description text for an onboarding tour step that explains the contents of the Profile Card and available actions within it.",
+    "is_auto": true,
+    "updated_at": "2026-08-07T10:55:52.722Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
+      "line_number": 122,
+      "context": "// first-time user has no reason to read, so the step names them.\n hasProfileCard &&\n elementStep(\n PROFILE_CARD_SELECTOR,\n t(\"DashboardTour:DashboardProfileTitle\"),\n t(\"DashboardTour:DashboardProfile\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 2. The quick actions, as an invitation rather than a description: create",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
   "content_en_sha1_hash": "59fd5325bfe26e9733559605cfce51d27cfe98de",
   "created_at": "2026-04-10T13:53:44.328Z",
-  "updated_at": "2026-08-06T08:04:19.949Z",
+  "updated_at": "2026-08-07T10:52:44.792Z",
   "comment": {
     "text": "This text displays the pricing for AI model usage, showing the cost per million input tokens and output tokens. `{{inputPrice}}` and `{{outputPrice}}` are numerical values representing these costs.",
     "is_auto": true,
@@ -11,12 +11,6 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
-    {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
-      "line_number": 350,
-      "context": "({model.provider})\n </Text>\n ) : null}\n </div>\n <Text className={styles.payForItemTextMuted}>\n {t(\"AIModelPrice\", {\n inputPrice: safeFormatAiModelsCurrency(\n model?.price?.prompt ?? 0,\n ),\n outputPrice: safeFormatAiModelsCurrency(\n model?.price?.completion ?? 0,",
-      "module": "/libs/ui-kit"
-    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/RowView/index.tsx",
       "line_number": 148,

@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardApps",
+  "content": "These are our products, each built to take a different kind of work off your hands — documents, collaboration, data collection and AI assistance. Open any of them and you will get a short tour of that section too.",
+  "content_en_sha1_hash": "c16f7cf71785a8ac524775594864be850d1fe7cc",
+  "created_at": "2026-08-07T10:52:39.924Z",
+  "updated_at": "2026-08-07T10:58:53.127Z",
+  "comment": {
+    "text": "Description text for a step in the dashboard's interactive onboarding tour, explaining the purpose of the available apps and notifying users that opening them initiates further guided tours.",
+    "is_auto": true,
+    "updated_at": "2026-08-07T10:58:53.127Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
+      "line_number": 151,
+      "context": "appIds.length > 0 &&\n elementGroupStep(\n APPS_SECTION_SELECTOR,\n appIds.map(appCardSelector),\n t(\"DashboardTour:DashboardAppsTitle\"),\n t(\"DashboardTour:DashboardApps\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 4. The way back. The dashboard is a page users leave and have to be able",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

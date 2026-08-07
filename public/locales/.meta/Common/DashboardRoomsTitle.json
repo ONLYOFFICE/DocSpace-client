@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2026-06-01T21:20:14.514Z",
-  "updated_at": "2026-08-06T14:20:57.517Z",
+  "updated_at": "2026-08-07T10:52:44.607Z",
   "comment": {
     "text": "Navigation menu label, app catalog title, and page title for the AI Rooms section; appears as a short noun.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 200,
+      "line_number": 271,
       "context": "href: isGuest ? \"/shared-with-me/filter\" : \"/rooms/personal/filter\",\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:DashboardRoomsTitle\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n installed: true,\n href: \"/rooms/shared/filter\",\n },\n {",
       "module": "/packages/client"
     }

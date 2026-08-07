@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-08-06T16:57:12.686Z",
+  "updated_at": "2026-08-07T10:52:44.737Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -25,19 +25,19 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 356,
+      "line_number": 276,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 356,
+      "line_number": 276,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 356,
+      "line_number": 276,
       "context": ") {\n changeServiceState(AI_SEARCH_ENUM);\n }\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(id);\n }\n };\n \n const onCloseGracePeriodModal = () => {",
       "module": "/libs/ui-kit"
     },
@@ -61,20 +61,14 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 176,
+      "line_number": 161,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(AI_ENUM);\n return;\n }\n \n if (!isAiToolsServiceOn) toastr.success(t(\"AIToolsEnabled\"));",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 176,
+      "line_number": 161,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(AI_ENUM);\n return;\n }\n \n if (!isAiToolsServiceOn) toastr.success(t(\"AIToolsEnabled\"));",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallPage.tsx",
-      "line_number": 246,
-      "context": "onCompleted?.();\n } catch (e) {\n console.error(\"[ai-paywall] onEnableAI flow failed\", e);\n if (isMountedRef.current) {\n toastr.error(t(\"UnexpectedError\"));\n setWaitingPhase(\"idle\");\n }\n }\n };",
       "module": "/libs/ui-kit"
     },
     {
@@ -105,12 +99,6 @@
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
       "line_number": 326,
       "context": "},\n });\n const res = walletRes?.data?.response;\n \n if (res === false) {\n throw new Error(t(\"UnexpectedError\"));\n }\n \n if (isNewSubscription) {\n await fetchPortalTariff!(true);",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/AiSimpleTopUpDialog.tsx",
-      "line_number": 154,
-      "context": "toastr.success(t(\"AIServiceTopUpSuccess\"));\n \n onClose();\n } catch (e) {\n console.error(\"[ai-simple-topup] failed\", e);\n toastr.error(t(\"UnexpectedError\"));\n } finally {\n setIsLoading(false);\n }\n };",
       "module": "/libs/ui-kit"
     },
     {
@@ -193,20 +181,14 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
-      "line_number": 620,
-      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n aiPaywallInit = async (t: TTranslation) => {\n const { initWalletPayerAndBalance } = this.paymentStore;",
+      "line_number": 505,
+      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n servicesInit = async (t: TTranslation) => {\n const isRefresh = window.location.href.includes(\"complete=true\");",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
-      "line_number": 620,
-      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n aiPaywallInit = async (t: TTranslation) => {\n const { initWalletPayerAndBalance } = this.paymentStore;",
-      "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
-      "line_number": 620,
-      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n aiPaywallInit = async (t: TTranslation) => {\n const { initWalletPayerAndBalance } = this.paymentStore;",
+      "line_number": 505,
+      "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n servicesInit = async (t: TTranslation) => {\n const isRefresh = window.location.href.includes(\"complete=true\");",
       "module": "/libs/ui-kit"
     },
     {
@@ -301,8 +283,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/BillingForm.tsx",
-      "line_number": 93,
-      "context": "setRenderTarget(\"paywall\");\n }\n } catch (e) {\n console.error(\"[ai-billing-content] bootstrap failed\", e);\n if (!cancelled) {\n toastr.error(t(\"Common:UnexpectedError\"));\n setRenderTarget(\"paywall\");\n }\n }\n })();",
+      "line_number": 77,
+      "context": "AI_ENUM,\n integrationUrl,\n );\n } catch (e) {\n console.error(\"[ai-billing-content] bootstrap failed\", e);\n if (!cancelled) toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (!cancelled) setIsLoading(false);\n }\n })();",
       "module": "/packages/sdk"
     },
     {

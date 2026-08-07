@@ -92,6 +92,16 @@
   opacity: 0.9;
 }
 
+/** A list-shaped step body (see TourList). */
+.list {
+  margin: 0;
+  padding-inline-start: 18px;
+
+  li:not(:last-child) {
+    margin-block-end: 6px;
+  }
+}
+
 .footer {
   display: flex;
   align-items: center;

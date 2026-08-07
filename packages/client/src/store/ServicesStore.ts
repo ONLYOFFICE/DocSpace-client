@@ -36,30 +36,20 @@
 import { makeAutoObservable, observable } from "mobx";
 import axios from "axios";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
-import { TTranslation } from "@docspace/shared/types";
-
 import PaymentStore from "./PaymentStore";
-import { TBalance } from "@docspace/shared/api/portal/types";
+
 import {
   getAiPrices,
   getAiModelRestrictions,
   setAiModelRestrictions,
-  getServiceQuotaBalance,
 } from "@docspace/shared/api/portal";
-import { getBackupsCount } from "@docspace/shared/api/backup";
+
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { formatterCurrencyWithoutTranction } from "@docspace/ui-kit/billing/wallet/utils";
-import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import {
-  AI_ENUM,
-  BACKUP_SERVICE,
-  STORAGE_ENUM,
-} from "@docspace/ui-kit/billing/constants";
+
 import { parseAiPrices } from "@docspace/ui-kit/billing/utils/parsers";
 import type { TAiToolsPrices } from "@docspace/ui-kit/billing/types";
 

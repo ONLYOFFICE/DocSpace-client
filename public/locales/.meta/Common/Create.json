@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2026-07-28T07:30:59.807Z",
+  "updated_at": "2026-08-06T08:04:19.861Z",
   "comment": {
     "text": "This is a dialog title for creating various entities like agents, groups, or rooms. It appears at the top of the respective creation dialogs.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 263,
+      "line_number": 260,
       "context": "id={\n createEntityType\n ? `shared_create-${createEntityType}-modal_submit`\n : undefined\n }\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
       "module": "/packages/client"
     },
@@ -103,8 +103,8 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 507,
-      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-button\"\n label={t(\"Common:Create\")}\n onClick={onMakeTemporaryBackup}\n primary\n isDisabled={mainDisabled}\n size={buttonSize}\n testId=\"create_temporary_backup_button\"",
+      "line_number": 582,
+      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-button\"\n label={copyButtonLabel ?? t(\"Common:Create\")}\n onClick={onMakeTemporaryBackup}\n primary\n isDisabled={mainDisabled || isToppingUp}\n isLoading={isToppingUp}\n size={buttonSize}",
       "module": "/packages/shared"
     }
   ],

@@ -36,9 +36,16 @@
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
-import AxiosClient, { TReqOption } from "../utils/axiosClient";
+import AxiosClient, { TReqOption, TRouteMock } from "../utils/axiosClient";
 
 const client = new AxiosClient();
+
+/**
+ * Answer matching requests locally instead of sending them, the way
+ * `page.route` does in the Playwright suite. Returns the function that takes
+ * the mock back down again.
+ */
+export const interceptRoute = (mock: TRouteMock) => client.interceptRoute(mock);
 
 export const initSSR = (headers: Record<string, string>) => {
   client.initSSR(headers);

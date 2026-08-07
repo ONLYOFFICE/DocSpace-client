@@ -45,8 +45,6 @@ import {
 } from "@docspace/shared/enums";
 
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
-import { Guidance } from "@docspace/shared/components/guidance";
-import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -81,7 +79,6 @@ import {
   DeletePluginDialog,
   ShareFolderDialog,
   RoomLogoCoverDialog,
-  FormFillingTipsDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
   ReducedRightsDialog,
@@ -175,7 +172,6 @@ const Panels = (props) => {
     resetQuotaItem,
     isShowWarningDialog,
     roomLogoCoverDialogVisible,
-    welcomeFormFillingTipsVisible,
     passwordEntryDialogDate,
     closeEditIndexDialogVisible,
     conversionVisible,
@@ -184,12 +180,6 @@ const Panels = (props) => {
     setStopFillingDialogVisible,
     stopFillingDialogData,
     operationCancelVisible,
-    setFormFillingTipsDialog,
-    formFillingTipsVisible,
-    viewAs,
-    userId,
-    getRefElement,
-    config,
     isShareFormData,
     reducedRightsVisible,
     removeUserConfirmation,
@@ -284,11 +274,6 @@ const Panels = (props) => {
       resetQuotaItem();
     };
   }, [isShowWarningDialog]);
-
-  const onCloseGuidance = () => {
-    setFormFillingTipsDialog(false);
-    window.localStorage.setItem(getFormFillingTipsStorageName(userId), "true");
-  };
 
   return [
     settingsPluginDialogVisible && (
@@ -475,18 +460,6 @@ const Panels = (props) => {
     operationCancelVisible && (
       <CancelOperationDialog key="cancel-operation-dialog" />
     ),
-    welcomeFormFillingTipsVisible ? (
-      <FormFillingTipsDialog key="form-filling_tips_dialog" />
-    ) : null,
-    formFillingTipsVisible ? (
-      <Guidance
-        key="form-filling-tips-guidance"
-        viewAs={viewAs}
-        onClose={onCloseGuidance}
-        getRefElement={getRefElement}
-        config={config}
-      />
-    ) : null,
     isShareFormData.visible && (
       <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
     ),
@@ -537,8 +510,6 @@ export default inject(
     currentQuotaStore,
     filesActionsStore,
     filesStore,
-    userStore,
-    guidanceStore,
     filesSettingsStore,
     oformsStore,
   }) => {
@@ -560,7 +531,6 @@ export default inject(
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
-      welcomeFormFillingTipsVisible,
 
       createMasterForm,
       selectFileDialogVisible,
@@ -601,8 +571,6 @@ export default inject(
       stopFillingDialogData,
       operationCancelVisible,
 
-      setFormFillingTipsDialog,
-      formFillingTipsVisible,
       isShareFormData,
       reducedRightsData,
       removeUserConfirmation,
@@ -619,7 +587,7 @@ export default inject(
       askAIConnectDialogVisible,
     } = dialogsStore;
 
-    const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
+    const { setArrRoomGroups, arrRoomGroups } = filesStore;
 
     const { extsFilesVectorized } = filesSettingsStore;
 
@@ -644,8 +612,6 @@ export default inject(
       pluginDialogVisible,
       pluginSelectorVisible,
     } = pluginStore;
-
-    const { getRefElement, config } = guidanceStore;
 
     const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
       oformsStore;
@@ -722,7 +688,6 @@ export default inject(
       templateAccessSettingsVisible,
 
       setQuotaWarningDialogVisible,
-      welcomeFormFillingTipsVisible,
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,
@@ -733,12 +698,6 @@ export default inject(
       setStopFillingDialogVisible,
       stopFillingDialogData,
       operationCancelVisible,
-      setFormFillingTipsDialog,
-      formFillingTipsVisible,
-      viewAs,
-      userId: userStore?.user?.id,
-      getRefElement,
-      config,
       isShareFormData,
       reducedRightsVisible: reducedRightsData.visible,
       removeUserConfirmation: removeUserConfirmation.visible,

@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsRecentReviewAccessInRecentRoomsPrompt",
+  "content": "Review participants and roles in the current Recent rooms and flag external, excessive, or inconsistent access. If this information is not provided, ask me for the intended users, roles, and access policy.",
+  "content_en_sha1_hash": "00e4bffe812402893bdcf60565b0b23c79a358c7",
+  "created_at": "2026-08-04T09:58:55.208Z",
+  "updated_at": "2026-08-05T16:55:16.511Z",
+  "comment": {
+    "text": "A descriptive prompt within an AI suggestion item that instructs the assistant to audit participant roles and access levels in recently accessed rooms.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:55:16.511Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 470,
+      "context": "name: t(\"AiSuggestions:RoomsRecentWhereMyActionIsNeeded\"),\n prompt: t(\"AiSuggestions:RoomsRecentWhereMyActionIsNeededPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsRecentReviewAccessInRecentRooms\"),\n prompt: t(\"AiSuggestions:RoomsRecentReviewAccessInRecentRoomsPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsRecentArchiveInactiveRooms\"),\n prompt: t(\"AiSuggestions:RoomsRecentArchiveInactiveRoomsPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

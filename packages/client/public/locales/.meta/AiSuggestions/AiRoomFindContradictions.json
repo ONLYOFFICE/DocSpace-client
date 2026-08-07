@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomFindContradictions",
+  "content": "Find contradictions",
+  "content_en_sha1_hash": "9d9ff4dce1ea5123ce26dd772aa1c0da7caba6a8",
+  "created_at": "2026-08-04T09:58:55.096Z",
+  "updated_at": "2026-08-05T18:30:22.278Z",
+  "comment": {
+    "text": "Label for an AI-powered action used to identify discrepancies or conflicting information within documents.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:30:22.278Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 596,
+      "context": "{\n name: t(\"AiSuggestions:AiRoomCompareDocuments\"),\n prompt: t(\"AiSuggestions:AiRoomCompareDocumentsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomFindContradictions\"),\n prompt: t(\"AiSuggestions:AiRoomFindContradictionsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomCreateAReport\"),\n prompt: t(\"AiSuggestions:AiRoomCreateAReportPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

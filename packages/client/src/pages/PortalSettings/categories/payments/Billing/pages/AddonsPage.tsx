@@ -45,6 +45,8 @@ import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import config from "PACKAGE_FILE";
 
 import {
+  getDocsConnectPricePerUser,
+  getDocsConnectScheduledState,
   getDocsConnectTrialState,
   isDocsConnectCanceled,
 } from "../../../developer-tools/DocsConnect/utils";
@@ -127,6 +129,8 @@ const AddonsPage = (props: AddonsPageProps) => {
         tariffUsers: 0,
         scheduledUsers: null,
         scheduledDate: "",
+        nextDevPackEnabled: false,
+        scheduledOnDevPack: false,
         deactivated: false,
         canceled: false,
       };
@@ -138,11 +142,7 @@ const AddonsPage = (props: AddonsPageProps) => {
       isTrial && !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
 
     const tariffUsers = docsConnectInfo.tenant?.payment?.quantity ?? 0;
-    const pricePerUser =
-      (docsConnectInfo.prices?.pricePerUser ?? 0) +
-      (docsConnectInfo.devPackEnabled
-        ? (docsConnectInfo.prices?.devPackPrice ?? 0)
-        : 0);
+    const pricePerUser = getDocsConnectPricePerUser(docsConnectInfo);
 
     return {
       subscribed: true,
@@ -153,8 +153,7 @@ const AddonsPage = (props: AddonsPageProps) => {
       trialEndDate: endDate,
       tariffPrice: tariffUsers * pricePerUser,
       tariffUsers,
-      scheduledUsers: docsConnectInfo.scheduledChange?.nextUsers ?? null,
-      scheduledDate: docsConnectInfo.scheduledChange?.dueDate ?? "",
+      ...getDocsConnectScheduledState(docsConnectInfo),
       deactivated: docsConnectInfo.deactivated ?? false,
       canceled: isDocsConnectCanceled(docsConnectInfo),
     };

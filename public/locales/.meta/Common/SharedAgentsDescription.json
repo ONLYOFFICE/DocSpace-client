@@ -3,7 +3,7 @@
   "content": "Eliminate duplicated work and reuse knowledge across teams.",
   "content_en_sha1_hash": "e321948707378ad73d6ec0c05b0f31c9af906eb2",
   "created_at": "2026-06-25T19:30:57.660Z",
-  "updated_at": "2026-07-07T08:59:21.705Z",
+  "updated_at": "2026-08-06T14:20:57.531Z",
   "comment": {
     "text": "Description text within an app promotion dialog explaining the benefits of the Shared Agents feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 216,
+      "line_number": 221,
       "context": "description: t(\"Common:DocumentAwareAIDescription\"),\n },\n {\n Icon: SharedAgentsIcon,\n title: t(\"Common:SharedAgents\"),\n description: t(\"Common:SharedAgentsDescription\"),\n },\n {\n Icon: CustomStackIcon,\n title: t(\"Common:CustomAIStack\"),\n description: t(\"Common:CustomAIStackDescription\"),",
       "module": "/packages/client"
     }

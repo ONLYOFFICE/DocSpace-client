@@ -139,6 +139,7 @@ const BillingSidebar = ({ isNotPaidPeriod }: BillingSidebarProps) => {
       variant="secondary"
       onBack={onBack}
       backLabel={backLabel}
+      withDevTools
     />
   );
 };

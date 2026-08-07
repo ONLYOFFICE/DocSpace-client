@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsGroups",
+  "content": "Organize rooms by specific features to quickly find what you need. Create groups and switch between them right above the list.",
+  "content_en_sha1_hash": "190ae994db26c6c654107ec995010268121dc558",
+  "created_at": "2026-08-06T14:20:52.336Z",
+  "updated_at": "2026-08-06T14:52:16.384Z",
+  "comment": {
+    "text": "Instructional description within a guided tour explaining how to use room group chips located above the list.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:52:16.384Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 194,
+      "context": "// 4. Room groups — the row of chips above the list.\n showFilter &&\n elementStep(\n GROUPS_SELECTOR,\n t(\"RoomsTour:RoomsGroupsTitle\"),\n t(\"RoomsTour:RoomsGroups\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 5. Members — the single most useful thing in the section, and the one",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

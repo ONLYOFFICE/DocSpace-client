@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Sual vermək, sənədləri qısaca ümumiləşdirmək, mətnlər yaratmaq və işinizdə kömək almaq üçün süni intellekt söhbəti başladın — birbaşa {{sectionName}} bölməsində.",
+  "TourAiAssistantTitle": "Sizin süni intellekt köməkçiniz",
+  "TourBringFiles": "Faylları kompüterinizdən yükləyin və ya sadəcə bu pəncərənin istənilən yerinə sürüşdürüb buraxın.",
+  "TourBringFilesTitle": "Fayllarınızı gətirin",
+  "TourCreateAnything": "Sənədləri, cədvəlləri, təqdimatları və PDF formalarını birbaşa brauzerdə yaradın — heç bir proqram tələb olunmur.",
+  "TourCreateAnythingTitle": "İstədiyinizi yaradın",
+  "TourFindFast": "Ada görə axtarın, növə və ya müəllifə görə süzün, siyahını sıralayın və siyahı ilə plitə görünüşü arasında keçid edin.",
+  "TourFindFastTitle": "Hər şeyi tez tapın",
+  "TourPlacesFavorites": "{{sectionName}} — ulduzla işarələnmiş fayllar.",
+  "TourPlacesRecent": "{{sectionName}} — son vaxtlar üzərində işlədikləriniz.",
+  "TourPlacesShared": "{{sectionName}} — başqalarının sizinlə paylaşdığı fayllar.",
+  "TourPlacesTitle": "Hər şey öz yerində",
+  "TourPlacesTrash": "{{sectionName}} — hələ də bərpa edə biləcəyiniz silinmiş fayllar.",
+  "TourShare": "Sürətli əməliyyatları görmək üçün kursoru istənilən faylın üzərinə gətirin. Portal kontaktlarınıza müxtəlif icazə səviyyələri ilə giriş vermək üçün paylaşma nişanına klikləyin — və ya qalan hər kəs üçün xarici keçid yaradın.",
+  "TourSharedAccess": "{{sharedBy}} faylın kimdən gəldiyini, {{accessLevel}} isə onunla nə edə biləcəyinizi göstərir — baxmaq, şərh yazmaq və ya redaktə etmək. Bunu yalnız sahibi dəyişə bilər.",
+  "TourSharedAccessTitle": "Kim paylaşıb və nə edə bilərsiniz",
+  "TourSharedEmpty": "Sizinlə hələ heç nə paylaşılmayıb. Kimsə sizə giriş verən kimi fayllar və qovluqlar burada görünəcək.",
+  "TourSharedEmptyTitle": "Siyahınız hələlik boşdur",
+  "TourSharedList": "Başqalarının sizə giriş verdiyi hər şey {{sectionName}} bölməsinə düşür. Brauzerdə üzərində işləmək üçün faylı açın — orijinal olduğu yerdə qalır, ona görə də hamı həmişə eyni versiyanı görür.",
+  "TourSharedListTitle": "Sizinlə paylaşılanlar",
+  "TourShareTitle": "Paylaşın və birlikdə işləyin"
+}

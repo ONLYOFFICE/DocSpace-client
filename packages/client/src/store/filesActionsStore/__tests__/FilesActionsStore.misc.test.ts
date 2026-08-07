@@ -35,6 +35,7 @@ describe("FilesActionsStore — misc methods (batch 9)", () => {
           setItemsSelectionTitle,
           setSecondaryProgressBarData: vi.fn(),
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });
@@ -74,6 +75,7 @@ describe("FilesActionsStore — misc methods (batch 9)", () => {
         secondaryProgressDataStore: {
           setSecondaryProgressBarData,
           clearSecondaryProgressData: vi.fn(),
+          isOperationStopped: vi.fn(() => false),
         },
       },
     });

@@ -3,7 +3,7 @@
   "content": "By services",
   "content_en_sha1_hash": "d371ec541868205a212f8ef9555883a71c2f0cdf",
   "created_at": "2026-06-25T11:54:46.327Z",
-  "updated_at": "2026-08-01T16:25:17.919Z",
+  "updated_at": "2026-08-06T08:04:20.070Z",
   "comment": {
     "text": "Tab label in the spending breakdown component used to switch the view to data grouped by service type.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
-      "line_number": 290,
+      "line_number": 307,
       "context": "})}\n </div>\n );\n \n const items: TTabItem[] = [\n { id: \"services\", name: t(\"ByServices\"), content: null },\n { id: \"month\", name: t(\"ByMonth\"), content: null },\n ];\n \n return (\n <div className={styles.breakdown}>",
       "module": "/libs/ui-kit"
     }

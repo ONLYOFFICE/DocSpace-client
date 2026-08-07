@@ -40,6 +40,7 @@ import { inject, observer } from "mobx-react";
 import Section from "@docspace/ui-kit/components/section";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { BillingRoot } from "@docspace/ui-kit/billing";
+import { DeviceType } from "@docspace/shared/enums";
 
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
 import ErrorBoundary from "SRC_DIR/components/ErrorBoundaryWrapper";
@@ -48,7 +49,10 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
 
 import BillingHeader from "./BillingHeader";
+import PayerOnlyWarning from "./PayerOnlyWarning";
 import { PAYMENT_ROUTES } from "../utils";
+
+import styles from "./Wrapper.module.scss";
 
 interface WrapperProps {
   language?: string;
@@ -57,6 +61,10 @@ interface WrapperProps {
   openOnNewPage?: boolean;
   user?: TPaymentUser;
   fetchDocsConnectInfo?: () => Promise<unknown>;
+  isPayer?: boolean;
+  isPayerInfoLoaded?: boolean;
+  isCardLinkedToPortal?: boolean;
+  currentDeviceType?: DeviceType;
 }
 
 const BillingWrapperComponent = ({
@@ -66,8 +74,20 @@ const BillingWrapperComponent = ({
   openOnNewPage,
   user,
   fetchDocsConnectInfo,
+  isPayer,
+  isPayerInfoLoaded,
+  isCardLinkedToPortal,
+  currentDeviceType,
 }: WrapperProps) => {
   const location = useLocation();
+
+  const showPayerOnlyWarning =
+    location.pathname.includes("/billing/wallet") &&
+    isPayerInfoLoaded &&
+    !isPayer &&
+    isCardLinkedToPortal;
+
+  const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const paymentConfig = useMemo(
     () => ({
@@ -101,10 +121,18 @@ const BillingWrapperComponent = ({
       <ErrorBoundary>
         <SectionWrapper withBodyScroll viewAs="settings" settingsStudio>
           <Section.SectionHeader>
-            <BillingHeader />
+            <BillingHeader
+              withPayerOnlyWarning={showPayerOnlyWarning && isDesktop}
+            />
           </Section.SectionHeader>
 
           <Section.SectionBody>
+            {showPayerOnlyWarning && !isDesktop ? (
+              <div className={styles.payerWarning}>
+                <PayerOnlyWarning />
+              </div>
+            ) : null}
+
             <BillingRoot config={paymentConfig}>
               <Outlet />
             </BillingRoot>
@@ -122,12 +150,18 @@ export const Component = inject(
     userStore,
     filesSettingsStore,
     docsConnectStore,
+    paymentStore,
+    currentTariffStatusStore,
   }: TStore) => {
     const { logoText, walletHelpUrl } = settingsStore;
     const { user } = userStore;
     const { openOnNewPage } = filesSettingsStore;
 
     return {
+      isPayer: paymentStore.isPayer,
+      isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
+      isPayerInfoLoaded: currentTariffStatusStore.isPayerInfoLoaded,
+      currentDeviceType: settingsStore.currentDeviceType,
       logoText,
       walletHelpUrl,
       openOnNewPage,

@@ -68,6 +68,7 @@ import {
 
 import { AI_ENUM, BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
 import { applyServiceQuotaToMap } from "@docspace/ui-kit/billing/utils/parsers";
+import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
 import {
   getCardLinkedOnFreeTariff,
   getCardLinkedOnNonProfit,
@@ -119,6 +120,14 @@ class PaymentStore {
     if (res) this.walletBalanceData = res;
     return this.walletBalance;
   };
+
+  formatWalletCurrency = (item: number | null = null, fractionDigits = 2) =>
+    formatCurrencyValue(
+      authStore.language ?? "en",
+      item ?? this.walletBalance,
+      this.walletCodeCurrency || "USD",
+      fractionDigits,
+    );
 
   salesEmail = "";
 

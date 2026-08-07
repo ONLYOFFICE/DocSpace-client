@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsEmpty",
+  "content": "The rooms you have just seen were a preview. Rooms someone invites you to show up in this list, and everything you have been shown works the same way in them.",
+  "content_en_sha1_hash": "e5e4f8580427151f3a1d796c427baa8ca0ba12f1",
+  "created_at": "2026-08-06T14:20:52.335Z",
+  "updated_at": "2026-08-06T14:53:03.642Z",
+  "comment": {
+    "text": "Description text within a guided tour step shown on the empty rooms screen, explaining how invited rooms will appear and function in this list.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:53:03.642Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 261,
+      "context": "demoHooks,\n )\n : revealStep(\n EMPTY_SCREEN_SELECTOR,\n t(\"RoomsTour:RoomsEmptyTitle\"),\n t(\"RoomsTour:RoomsEmpty\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )),\n ].filter(Boolean) as Step[];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

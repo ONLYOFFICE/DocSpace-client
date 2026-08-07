@@ -62,6 +62,7 @@ export type TRoomSecurity = {
   CreateRoomFrom: boolean;
   Embed: boolean;
   IndexExport: boolean;
+  HistoryExport: boolean;
   Reconnect: boolean;
   Read: boolean;
   Create: boolean;

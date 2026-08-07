@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsFavoritesCreateASimilarSpace",
+  "content": "Create a similar space",
+  "content_en_sha1_hash": "e36346d7ed5f1fe859be429186f4e1c28c6bed04",
+  "created_at": "2026-08-04T09:58:55.163Z",
+  "updated_at": "2026-08-05T17:32:45.531Z",
+  "comment": {
+    "text": "Button label within an AI suggestions list used to initiate the creation of a new space based on an existing one.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:32:45.531Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 739,
+      "context": "{\n name: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesCreateASimilarSpace\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCreateASimilarSpacePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesFindTheFormYouNeed\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

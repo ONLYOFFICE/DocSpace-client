@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-08-01T16:25:17.760Z",
+  "updated_at": "2026-08-06T14:20:57.515Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/providers/files/attach-dialog.tsx",
-      "line_number": 163,
+      "line_number": 189,
       "context": "currentFolderId=\"\"\n rootFolderType={FolderType.USER}\n disabledItems={[]}\n filterParam=\"ALL\"\n submitButtonLabel={t(\"Common:SelectAction\", { defaultValue: \"Select\" })}\n cancelButtonLabel={t(\"Common:CancelButton\", { defaultValue: \"Cancel\" })}\n descriptionText=\"\"\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n getFilesArchiveError={() => \"\"}",
       "module": "/libs/ui-kit"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/ButtonContainer.tsx",
-      "line_number": 153,
+      "line_number": 193,
       "context": "isWaitingCalculation\n }\n testId=\"storage_plan_upgrade_ok_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}",
       "module": "/libs/ui-kit"
     },
@@ -187,7 +187,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
-      "line_number": 190,
+      "line_number": 148,
       "context": "scale\n isLoading={isActivating}\n testId=\"activate-ai-dialog-activate-button\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n isDisabled={isActivating}\n testId=\"activate-ai-dialog-cancel-button\"",
       "module": "/packages/client"
     },
@@ -559,8 +559,8 @@
     },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 281,
-      "context": "id={\n createEntityType\n ? `shared_create-${createEntityType}-modal_cancel`\n : undefined\n }\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n isDisabled={isDisabled}\n onClick={onCancelAction}\n testId={`${getTestIdPrefix()}_cancel_button`}",
+      "line_number": 278,
+      "context": "id={\n createEntityType\n ? `shared_create-${createEntityType}-modal_cancel`\n : undefined\n }\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n isDisabled={isDisabled}\n onClick={onCancelAction}\n testId={`${idPrefix}_cancel_button`}",
       "module": "/packages/client"
     },
     {
@@ -645,6 +645,12 @@
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
       "line_number": 176,
       "context": "size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_comment_save_button\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n onClick={onCancel}\n size={ButtonSize.extraSmall}\n testId=\"info_panel_details_comment_cancel_button\"\n />\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/ExportMenu/ExportMenu.tsx",
+      "line_number": 176,
+      "context": "testId=\"info_history_export_submit\"\n />\n \n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={closePopup}\n testId=\"info_history_export_cancel\"\n />\n </div>\n </div>",
       "module": "/packages/client"
     },
     {
@@ -739,7 +745,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 928,
+      "line_number": 1092,
       "context": "testId=\"docs_connect_buy_plan_submit\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n isDisabled={submitting && !waitingPayment}\n />\n </div>\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -751,7 +757,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 513,
+      "line_number": 515,
       "context": "onCancelClick={onCancelGeneral}\n saveButtonDisabled={!isGeneralValid}\n showReminder={hasChangesGeneral}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n isSaving={isSavingGeneral}\n displaySettings\n />\n \n <Text fontSize=\"16px\" fontWeight={700}>",
       "module": "/packages/client"
     },
@@ -937,13 +943,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 120,
+      "line_number": 124,
       "context": "productName: getBrandName(\"ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 103,
+      "line_number": 110,
       "context": "loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}",
       "module": "/packages/client"
     },

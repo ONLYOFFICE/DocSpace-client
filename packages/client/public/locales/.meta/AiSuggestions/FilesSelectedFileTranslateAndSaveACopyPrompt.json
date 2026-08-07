@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesSelectedFileTranslateAndSaveACopyPrompt",
+  "content": "Translate the selected file and save the translation as a separate copy without changing the original. If this information is not provided, ask me for the target language and output file name.",
+  "content_en_sha1_hash": "956b513f84363654ef8edd025926d38550f5ed2a",
+  "created_at": "2026-08-04T09:58:55.135Z",
+  "updated_at": "2026-08-05T17:57:04.910Z",
+  "comment": {
+    "text": "Instruction prompt sent to the AI when a user selects the file translation option, specifying how to handle the output and what details to request if information is missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:57:04.910Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 397,
+      "context": "\"AiSuggestions:FilesSelectedFileCreateAPresentationFromTheFilePrompt\",\n ),\n },\n {\n name: t(\"AiSuggestions:FilesSelectedFileTranslateAndSaveACopy\"),\n prompt: t(\"AiSuggestions:FilesSelectedFileTranslateAndSaveACopyPrompt\"),\n },\n ],\n \n filesMultiple: [\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

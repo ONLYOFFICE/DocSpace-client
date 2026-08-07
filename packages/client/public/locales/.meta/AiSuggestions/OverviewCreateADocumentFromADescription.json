@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewCreateADocumentFromADescription",
+  "content": "Create a document from a description",
+  "content_en_sha1_hash": "bb3f17db49fa4b5f3cbde13c7c8ba9cc315597b2",
+  "created_at": "2026-08-05T16:31:58.680Z",
+  "updated_at": "2026-08-05T17:12:43.116Z",
+  "comment": {
+    "text": "Label for an AI suggestion chip that describes the action of generating a new document based on a text description.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:12:43.116Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 217,
+      "context": "// has no folder context, so every chip targets the user's My documents\n // (\"create it in Files\"). All rows are for any user — guests never reach\n // them because the chat itself is unavailable to guests.\n overview: [\n {\n name: t(\"AiSuggestions:OverviewCreateADocumentFromADescription\"),\n prompt: t(\n \"AiSuggestions:OverviewCreateADocumentFromADescriptionPrompt\",\n ),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsPlacesTitle",
+  "content": "Everything in its place",
+  "content_en_sha1_hash": "ef9662412435f957d33d1596fc3513ed361ab695",
+  "created_at": "2026-08-06T14:20:53.757Z",
+  "updated_at": "2026-08-06T14:40:22.948Z",
+  "comment": {
+    "text": "A tooltip title for a sidebar item used during the onboarding tour to highlight specific interface sections.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:40:22.948Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 287,
+      "context": "// the sidebar's own label so the wording in the tooltip is the wording on\n // screen and the names are not translated twice.\n showQuickAccess &&\n navItemStep(\n sidebarSelector(\"forms-recent\"),\n t(\"FormsTour:FormsPlacesTitle\"),\n places.join(\" \"),\n callbacks,\n LOG_LABEL,\n true,\n leaveSpace,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -33,16 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  now,
-  parseToDateTime,
-  formatDate,
-  formatDateLocalized,
-  isBefore,
-  isAfter,
-} from "@docspace/ui-kit/utils/date";
-import { Outlet, useLocation } from "react-router";
+import React, { useEffect, useMemo, useCallback, useState } from "react";
+import { Outlet, useLocation, useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -53,6 +45,14 @@ import SocketHelper, {
   SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
 import {
+  now,
+  parseToDateTime,
+  formatDate,
+  formatDateLocalized,
+  isBefore,
+  isAfter,
+} from "@docspace/ui-kit/utils/date";
+import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
 } from "@docspace/ui-kit/ai-agent/providers/themes";
@@ -61,9 +61,8 @@ import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
 import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
+import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 
-import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
-import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
@@ -73,19 +72,25 @@ import {
   InfoPanelEvents,
   SearchArea,
 } from "@docspace/shared/enums";
-import { setFileView } from "SRC_DIR/helpers/info-panel";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { editAIAgent } from "@docspace/shared/api/ai";
 import { CategoryType } from "@docspace/shared/constants";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
+
 import { handleCopy } from "@docspace/shared/utils/copy";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import "@docspace/shared/styles/theme.scss";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { setFileView } from "SRC_DIR/helpers/info-panel";
+import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
+import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
+import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
 
 import config from "PACKAGE_FILE";
 
@@ -101,7 +106,6 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
@@ -134,8 +138,12 @@ const Shell = ({ page = "home", ...rest }) => {
     setLogoText,
     standalone,
     isGuest,
+    isAdmin,
+    isRoomAdmin,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
+    fetchWalletBalance,
+    setWalletLowBalance,
     agentEntityId,
     isInsideAgentRoom,
     canEditAgentRoom,
@@ -144,17 +152,75 @@ const Shell = ({ page = "home", ...rest }) => {
     closeEditorPanel,
     currentClientView,
     selectedFolderType,
+    selectedRoomType,
+    selectedRootFolderType,
+    selectedIsFolder,
+    selectedIsRootFolder,
+    selectedSecurity,
     isPrivacyFolder,
     isAIReady,
   } = rest;
+
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
+
+  const folderType = searchParams.get("folderType");
+  const searchArea = searchParams.get("searchArea");
+
+  // The Overview (dashboard) page sits outside the Files/Rooms sections, so
+  // its chat suggestions are resolved by route rather than by folder context.
+  const isOverview = location.pathname.startsWith("/dashboard");
+
+  const { t, ready } = useTranslation([
+    "Common",
+    "SmartBanner",
+    "AiSuggestions",
+  ]);
+
+  // A set rather than a flat list: while files are attached in the composer,
+  // the chat provider swaps the location chips for the file / form ones (it
+  // owns the attachments state).
+  const aiSuggestions = useMemo(
+    () =>
+      getSuggestionSet(
+        {
+          folderType,
+          searchArea,
+          selectedFolderType,
+          roomType: selectedRoomType,
+          rootFolderType: selectedRootFolderType,
+          isFolder: selectedIsFolder,
+          isRootFolder: selectedIsRootFolder,
+          security: selectedSecurity,
+          isAdmin,
+          isRoomAdmin,
+          isGuest,
+          isOverview,
+        },
+        t,
+      ),
+    [
+      selectedRoomType,
+      selectedFolderType,
+      selectedRootFolderType,
+      selectedIsFolder,
+      selectedIsRootFolder,
+      selectedSecurity,
+      isAdmin,
+      isRoomAdmin,
+      isGuest,
+      isOverview,
+      folderType,
+      searchArea,
+      t,
+    ],
+  );
 
   useCreateFileError({
     setPortalTariff,
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
   });
-
-  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   useEffect(() => {
     if (!logoText) setLogoText(getBrandName("OrganizationName"));
@@ -295,6 +361,50 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper?.off(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
     };
   }, [getAIConfig]);
+
+  // The quota room is shared by every user, but the balance is admin-only data:
+  // the settings response exposes walletLowBalance to admins alone, so the socket
+  // event must be gated the same way or a regular user would see the banner until
+  // the next reload and get a rejected balance request.
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    const handleWalletLowBalance = async () => {
+      try {
+        await fetchWalletBalance?.(true);
+      } catch (e) {
+        console.error(e);
+      }
+
+      setWalletLowBalance?.(true);
+    };
+
+    SocketHelper?.on(SocketEvents.WalletLowBalance, handleWalletLowBalance);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.WalletLowBalance, handleWalletLowBalance);
+    };
+  }, [isAdmin, setWalletLowBalance, fetchWalletBalance]);
+
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    const handleTopUpWallet = async () => {
+      setWalletLowBalance?.(false);
+
+      try {
+        await fetchWalletBalance?.(true);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    SocketHelper?.on(SocketEvents.TopUpWallet, handleTopUpWallet);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.TopUpWallet, handleTopUpWallet);
+    };
+  }, [isAdmin, setWalletLowBalance, fetchWalletBalance]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -573,7 +683,6 @@ const Shell = ({ page = "home", ...rest }) => {
     ) : (
       <Toast />
     );
-  const location = useLocation();
 
   // Single source of truth for AI chat availability: computed once here in the
   // host and handed to AiAgentProviders, which shares it with descendants
@@ -593,7 +702,8 @@ const Shell = ({ page = "home", ...rest }) => {
     !isSettingsPage &&
     !isPrivacyFolder &&
     selectedFolderType !== FolderType.Knowledge &&
-    selectedFolderType !== FolderType.ResultStorage;
+    selectedFolderType !== FolderType.ResultStorage &&
+    selectedRootFolderType !== FolderType.AIAgents;
 
   const withoutNavMenu =
     isEditor ||
@@ -755,6 +865,7 @@ const Shell = ({ page = "home", ...rest }) => {
           closeEditorPanel={closeEditorPanel}
           composerHeader={standalone ? undefined : composerHeader}
           composerDisabled={standalone ? undefined : !isAIReady}
+          suggestions={aiSuggestions}
         >
           {layout}
         </AiAgentProviders>
@@ -825,8 +936,6 @@ const ShellWrapper = inject(
 
     const {
       setConvertPasswordDialogVisible,
-      setFormFillingTipsDialog,
-      formFillingTipsVisible,
 
       setFormCreationInfo,
       setSocialAuthWelcomeDialogVisible,
@@ -842,6 +951,10 @@ const ShellWrapper = inject(
     return {
       loadBaseInfo: async () => {
         await init(false, i18n);
+
+        if (settingsStore.walletLowBalance) {
+          paymentStore.fetchWalletBalance().catch((e) => console.error(e));
+        }
 
         setModuleInfo(config.homepage, "home");
         setProductVersion(config.version);
@@ -859,8 +972,6 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setPreparationPortalDialogVisible,
-      setFormFillingTipsDialog,
-      formFillingTipsVisible,
       isBase,
       setTheme,
       roomsMode,
@@ -870,6 +981,10 @@ const ShellWrapper = inject(
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
       isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
+      // Room admin — the role that may create rooms and form spaces; gates
+      // the room / forms AI suggestions that the spec limits to owners and
+      // managers.
+      isRoomAdmin: authStore.isRoomAdmin,
       isGuest: userStore?.user?.isVisitor,
       registrationDate: userStore?.user?.registrationDate,
 
@@ -888,8 +1003,17 @@ const ShellWrapper = inject(
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
       isAIReady: paymentStore.isAIReady,
+      fetchWalletBalance: paymentStore.fetchWalletBalance,
+      setWalletLowBalance: settingsStore.setWalletLowBalance,
       currentClientView: clientLoadingStore.currentClientView,
       selectedFolderType: selectedFolderStore.type,
+      selectedRoomType: selectedFolderStore.roomType,
+      selectedRootFolderType: selectedFolderStore.rootFolderType,
+      selectedIsFolder: selectedFolderStore.isFolder,
+      selectedIsRootFolder: selectedFolderStore.isRootFolder,
+      // Drives which AI suggestions the current user is offered: actions the
+      // rights of the opened folder / room do not allow are filtered out.
+      selectedSecurity: selectedFolderStore.security,
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
       // Scope the chat to the current location: inside any room (including
       // its subfolders) the room id wins, elsewhere the currently selected
@@ -943,4 +1067,3 @@ const Root = () => (
 );
 
 export default Root;
-

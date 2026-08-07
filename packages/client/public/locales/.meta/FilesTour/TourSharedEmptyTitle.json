@@ -1,0 +1,29 @@
+{
+  "key_path": "TourSharedEmptyTitle",
+  "content": "Your list is empty for now",
+  "content_en_sha1_hash": "6825ed70df352332c3cafd4f841d5d1adf5e2597",
+  "created_at": "2026-08-06T14:20:53.795Z",
+  "updated_at": "2026-08-06T14:31:02.385Z",
+  "comment": {
+    "text": "Title for an empty state screen displayed during the Files tour when no shared files are present in the user's list.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:31:02.385Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 378,
+      "context": "// section is the user's own from here on.\n isDemo &&\n demoHooks &&\n revealStep(\n EMPTY_SCREEN_SELECTOR,\n t(\"FilesTour:TourSharedEmptyTitle\"),\n t(\"FilesTour:TourSharedEmpty\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

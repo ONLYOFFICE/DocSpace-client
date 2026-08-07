@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsOpenSpace",
+  "content": "Let's open this one and see how a collection is put together. Inside every form space are the same three things: the form itself, the answers still being written, and the ones already in.",
+  "content_en_sha1_hash": "a94c7834105474deba014aeb5dd492b4a2fe1052",
+  "created_at": "2026-08-06T14:20:53.755Z",
+  "updated_at": "2026-08-06T14:42:13.744Z",
+  "comment": {
+    "text": "Description text for a step in an interactive product tour that explains the contents of a form space during a guided walkthrough.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:42:13.744Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 229,
+      "context": "// stepping back into it from step 5 has to come back out.\n showInsideSpace &&\n fileItemStep(\n DEMO_SPACE_SELECTOR,\n t(\"FormsTour:FormsOpenSpaceTitle\"),\n t(\"FormsTour:FormsOpenSpace\"),\n callbacks,\n LOG_LABEL,\n leaveSpace,\n NAVIGATION_TARGET_TIMEOUT,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

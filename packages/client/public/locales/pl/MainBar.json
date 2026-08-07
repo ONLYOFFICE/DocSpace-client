@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Po osiągnięciu limitu wszyscy użytkownicy będą dodawani tylko z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów, <1>kliknij tutaj</1> i uaktualnij swój plan cenowy.",
   "UserTariffLimitHeader": "Osiągnięto limit liczby administratorów: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Wszyscy użytkownicy będą dodawani wyłącznie z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów, skontaktuj się z administratorem {{productName}} w celu uaktualnienia planu cenowego.",
-  "UserTariffReachedForAdmins": "Wszyscy użytkownicy będą dodawani wyłącznie z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów, <1>kliknij tutaj</1> i uaktualnij swój plan cenowy."
+  "UserTariffReachedForAdmins": "Wszyscy użytkownicy będą dodawani wyłącznie z uprawnieniami użytkownika. Aby móc dodać kolejnych administratorów, <1>kliknij tutaj</1> i uaktualnij swój plan cenowy.",
+  "WalletLowBalanceContactPayer": "Skontaktuj się z płatnikiem (<1>{{payerContact}}</1>), aby doładował portfel i uniknąć przerw w działaniu płatnych usług.",
+  "WalletLowBalanceDescription": "Doładuj portfel, aby uniknąć przerw w działaniu płatnych usług. <1>Doładuj</1>",
+  "WalletLowBalanceHeader": "Twoje kredyty są na wyczerpaniu: {{balance}}"
 }

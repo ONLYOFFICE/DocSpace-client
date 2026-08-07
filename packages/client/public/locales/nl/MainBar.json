@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Zodra de limiet is bereikt, worden alle gebruikers uitsluitend met gebruikersrechten toegevoegd. Om meer beheerders toe te kunnen voegen, <1>klik hier</1> om uw tariefplan te upgraden.",
   "UserTariffLimitHeader": "De limiet voor het aantal beheerders is bereikt: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Alle gebruikers worden uitsluitend met gebruikersrechten toegevoegd. Om meer admins toe te kunnen voegen, neemt u contact op met de {{productName}} beheerder om het tariefplan te upgraden.",
-  "UserTariffReachedForAdmins": "Alle gebruikers worden uitsluitend met gebruikersrechten toegevoegd. Om meer beheerders toe te kunnen voegen, <1>klik hier</1> om uw tariefplan te upgraden."
+  "UserTariffReachedForAdmins": "Alle gebruikers worden uitsluitend met gebruikersrechten toegevoegd. Om meer beheerders toe te kunnen voegen, <1>klik hier</1> om uw tariefplan te upgraden.",
+  "WalletLowBalanceContactPayer": "Neem contact op met de Betaler (<1>{{payerContact}}</1>) om de portemonnee aan te vullen en onderbrekingen van betaalde diensten te voorkomen.",
+  "WalletLowBalanceDescription": "Vul uw portemonnee aan om onderbrekingen van betaalde diensten te voorkomen. <1>Aanvullen</1>",
+  "WalletLowBalanceHeader": "Uw credits raken op: {{balance}}"
 }

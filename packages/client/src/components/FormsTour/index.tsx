@@ -294,7 +294,14 @@ const FormsTour = ({
       },
     });
 
-    if (standInForList) void reloadSection();
+    // Fetched whether or not the list is being stood in for. The stand-in
+    // space the tour walks into is built by the list interceptor, off the
+    // `current` folder of a real answer (tourDemo.standInForRooms), so a list
+    // that was loaded before the mocks went up leaves `tourDemo.space` null —
+    // and `enterSpace` a no-op, which strands every step that stands inside a
+    // space. The response is passed through untouched when the list is the
+    // user's own, so this costs a request and changes nothing on screen.
+    void reloadSection();
   }, [
     formsTourStore.isPending,
     formsTourStore.isRunning,

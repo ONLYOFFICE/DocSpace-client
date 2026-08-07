@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "دمج وتوسيع وأتمتة {{organizationName}} {{productName}} باستخدام مجموعة أدوات المطورين الكاملة لدينا — بدءاً من REST API و Embed SDK وصولاً إلى webhooks وتطبيقات OAuth. اختر أداة أدناه للبدء.",
   "DisableAiServices": "تعطيل {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "سيتم إخفاء {{aiAgents}} لجميع المستخدمين (سيظل سجل التفاعل محفوظًا).",
-  "DisableAiServicesBalance": "سيبقى رصيدك المتبقي (<1>{{balance}}</1>) في حسابك وسيكون متاحًا للاستخدام إذا اخترت إعادة تفعيل {{aiServices}} في المستقبل.",
   "DisableAiServicesConfirm": "يمكنك إعادة تفعيل {{aiServices}} في أي وقت. هل أنت متأكد أنك تريد المتابعة؟",
   "DisableAiServicesDescription": "عند تعطيل {{organizationName}} AI، ستدخل التغييرات التالية حيز التنفيذ:",
   "DisableAiServicesServicesDisabled": "سيتم إلغاء تنشيط خدمات {{aiServices}} المدفوعة.",

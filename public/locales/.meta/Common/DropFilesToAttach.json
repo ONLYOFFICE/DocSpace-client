@@ -3,7 +3,7 @@
   "content": "Drop files here to attach them",
   "content_en_sha1_hash": "86654e9072e3785905907ca47c85bce0a060a976",
   "created_at": "2026-07-31T12:35:55.580Z",
-  "updated_at": "2026-08-06T14:20:57.610Z",
+  "updated_at": "2026-08-06T16:57:12.699Z",
   "comment": {
     "text": "Instructional label for the drag-and-drop zone within the AI chat panel, used to prompt users to upload files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/index.js",
-      "line_number": 589,
+      "line_number": 586,
       "context": "sectionProps.startDropPreview = startDropPreview;\n \n sectionProps.isChatPanelAvailable = isAiChatAvailable;\n sectionProps.isChatPanelVisible = aiChatPanel.isChatPanelVisible;\n sectionProps.chatPanelDropTargetLabel = isChatDropTarget\n ? t(\"Common:DropFilesToAttach\")\n : undefined;\n sectionProps.setIsChatPanelVisible = (visible) => {\n if (!visible) aiChatPanel.closeChatPanel();\n };\n // In fullscreen the #section is collapsed to zero width but stays mounted, so",
       "module": "/packages/client"
     }

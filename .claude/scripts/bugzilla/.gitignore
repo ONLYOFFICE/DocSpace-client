@@ -1,0 +1,5 @@
+# Personal, never commit: real host/assignee live here (key stays in Keychain).
+config.local.json
+
+# Downloaded bug attachments (default target is the home cache, but guard anyway).
+attachments/

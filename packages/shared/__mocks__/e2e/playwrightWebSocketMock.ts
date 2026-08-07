@@ -34,7 +34,12 @@
  */
 
 import type { Page, WebSocketRoute } from "@playwright/test";
-import { ExportChatEventData, TOptSocket } from "@docspace/ui-kit/utils/socket";
+import {
+  ExportChatEventData,
+  TOptSocket,
+  TTopUpWalletData,
+  TWalletLowBalanceData,
+} from "@docspace/ui-kit/utils/socket";
 
 type ServerMessage =
   | string
@@ -45,6 +50,8 @@ type ServerMessage =
 type SocketEventData =
   | TOptSocket
   | ExportChatEventData
+  | TTopUpWalletData
+  | TWalletLowBalanceData
   | { roomParts: string | string[] }
   | { message: string };
 

@@ -3,7 +3,7 @@
   "content": "Search by name, filter by type or author, sort the list and switch between list and tile view.",
   "content_en_sha1_hash": "380b585630079df2fa04bca6081be9f790b1b413",
   "created_at": "2026-08-06T14:20:53.790Z",
-  "updated_at": "2026-08-06T14:35:33.139Z",
+  "updated_at": "2026-08-07T15:05:26.423Z",
   "comment": {
     "text": "Instructional text for an onboarding tour step explaining how to use the search bar and its adjacent controls, including filters, sorting, and view mode toggles.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 288,
+      "line_number": 290,
       "context": "// 4. Search, with the filter, sort and view controls that sit beside it.\n showFilter &&\n elementStep(\n SEARCH_SELECTOR,\n t(\"FilesTour:TourFindFastTitle\"),\n t(\"FilesTour:TourFindFast\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 5. The share button on a row — the per-item action users hunt for most.",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 288,
+      "line_number": 290,
       "context": "// 4. Search, with the filter, sort and view controls that sit beside it.\n showFilter &&\n elementStep(\n SEARCH_SELECTOR,\n t(\"FilesTour:TourFindFastTitle\"),\n t(\"FilesTour:TourFindFast\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 5. The share button on a row — the per-item action users hunt for most.",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Confirm that you are not a robot",
   "content_en_sha1_hash": "3aab2c84eba713b9e899821400ca17067061fc52",
   "created_at": "2025-05-19T21:30:57.292Z",
-  "updated_at": "2026-07-27T13:07:50.894Z",
+  "updated_at": "2026-08-07T15:05:26.535Z",
   "comment": {
     "text": "This is an error message displayed when a CAPTCHA challenge fails during login, password recovery, or access recovery, indicating that the user's attempt to prove they are not a robot was unsuccessful.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 341,
+      "line_number": 342,
       "context": "type={captcha.captchaType}\n publicKey={reCaptchaPublicKey}\n themeMode={isBase ? \"light\" : \"dark\"}\n visible={captcha.isVisible}\n hasError={captcha.isError}\n errorText={t(\"Errors:LoginWithBruteForceCaptcha\")}\n onTokenChange={captcha.onTokenChange}\n resetSignal={captcha.resetSignal}\n />\n ) : null}\n </div>",
       "module": "/packages/shared"
     }

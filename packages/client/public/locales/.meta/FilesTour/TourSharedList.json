@@ -3,7 +3,7 @@
   "content": "Everything other people give you access to lands in {{sectionName}}. Open a file to work on it in your browser — the original stays where it is, so everyone always sees the same version.",
   "content_en_sha1_hash": "0b0faa9cf93ca931073fe844378e5bccf03d3dd8",
   "created_at": "2026-08-06T14:20:53.796Z",
-  "updated_at": "2026-08-06T14:30:42.542Z",
+  "updated_at": "2026-08-07T15:05:26.423Z",
   "comment": {
     "text": "Body text for a step in the Files tour explaining how shared files are accessed, featuring a variable {{sectionName}} that represents the name of the shared section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 332,
+      "line_number": 334,
       "context": "// made. Anchored on the first row, which is the whole of the answer.\n hasItems &&\n fileItemStep(\n FIRST_ITEM_SELECTOR,\n t(\"FilesTour:TourSharedListTitle\"),\n t(\"FilesTour:TourSharedList\", {\n sectionName: t(\"Common:SharedWithMe\"),\n }),\n callbacks,\n LOG_LABEL,\n ),",
       "module": "/packages/client"
     }

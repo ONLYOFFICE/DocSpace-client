@@ -3,7 +3,7 @@
   "content": "Nothing has been shared with you yet. Files and folders will show up here as soon as someone gives you access to them.",
   "content_en_sha1_hash": "2cb4bd869d827b1325b11e6a5ca7cb12650a95f4",
   "created_at": "2026-08-06T14:20:53.795Z",
-  "updated_at": "2026-08-06T14:31:21.285Z",
+  "updated_at": "2026-08-07T15:05:26.424Z",
   "comment": {
     "text": "Placeholder text for an empty state within a guided tour step, informing the user that shared files and folders will appear here once access is granted.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 379,
+      "line_number": 381,
       "context": "isDemo &&\n demoHooks &&\n revealStep(\n EMPTY_SCREEN_SELECTOR,\n t(\"FilesTour:TourSharedEmptyTitle\"),\n t(\"FilesTour:TourSharedEmpty\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n ),\n ].filter(Boolean) as Step[];",
       "module": "/packages/client"
     }

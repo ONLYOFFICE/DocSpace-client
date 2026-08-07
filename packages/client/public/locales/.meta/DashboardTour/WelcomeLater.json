@@ -1,0 +1,29 @@
+{
+  "key_path": "WelcomeLater",
+  "content": "Maybe later",
+  "content_en_sha1_hash": "27ad1d8334221366694c7acdd70fb380857d1e6e",
+  "created_at": "2026-08-07T10:52:39.931Z",
+  "updated_at": "2026-08-07T10:53:21.084Z",
+  "comment": {
+    "text": "Button label in the dashboard welcome dialog used to dismiss the tour prompt without starting it.",
+    "is_auto": true,
+    "updated_at": "2026-08-07T10:53:21.084Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/WelcomeDialog/WelcomeDialog.tsx",
+      "line_number": 114,
+      "context": "onClick={onTakeTour}\n testId=\"dashboard-welcome-take-tour\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"DashboardTour:WelcomeLater\")}\n onClick={onClose}\n testId=\"dashboard-welcome-later\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

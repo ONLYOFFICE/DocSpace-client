@@ -3,7 +3,7 @@
   "content": "Upload files from your computer or simply drag and drop them anywhere in this window.",
   "content_en_sha1_hash": "73b7966b7bab6da496b9e0314c47b67b47fce106",
   "created_at": "2026-08-06T14:20:53.788Z",
-  "updated_at": "2026-08-06T14:37:15.444Z",
+  "updated_at": "2026-08-07T15:05:26.423Z",
   "comment": {
     "text": "Description text for a guided tour step that explains how to upload files using the \"New\" menu.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 276,
+      "line_number": 278,
       "context": "isDesktop &&\n menuStep(\n NEW_BUTTON_TRIGGER_SELECTOR,\n NEW_MENU_SELECTOR,\n t(\"FilesTour:TourBringFilesTitle\"),\n t(\"FilesTour:TourBringFiles\"),\n callbacks,\n LOG_LABEL,\n // The button and its menu read as one thing, so they share a spotlight.\n [NEW_BUTTON_SELECTOR],\n ),",
       "module": "/packages/client"
     }

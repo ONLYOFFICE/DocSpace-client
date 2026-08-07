@@ -36,6 +36,8 @@
 import { describe, it, expect, vi } from "vitest";
 import type { TFunction } from "i18next";
 
+import { bullets } from "SRC_DIR/components/Tour/__tests__/bullets";
+
 import { getTourSteps, type TourStepFlags } from "../tourSteps";
 
 /** Echo the key back, so a step can be identified by the key it rendered. */
@@ -149,16 +151,17 @@ describe("getTourSteps — owner", () => {
     expect(upload?.data).toEqual({ revealsTarget: true });
   });
 
-  it("names every sidebar shortcut it points at, in one paragraph", () => {
+  it("names every sidebar shortcut it points at, one bullet each", () => {
     const places = steps(ownerFlags).at(-1);
 
     expect(places?.title).toBe("FilesTour:TourPlacesTitle");
-    // Shared with me, Recent, Favorites and Trash — one sentence each, run
-    // together rather than broken into bullets.
-    expect(places?.content).toBe(
-      "FilesTour:TourPlacesShared FilesTour:TourPlacesRecent " +
-        "FilesTour:TourPlacesFavorites FilesTour:TourPlacesTrash",
-    );
+    // Shared with me, Recent, Favorites and Trash — a bullet apiece.
+    expect(bullets(places)).toEqual([
+      "FilesTour:TourPlacesShared",
+      "FilesTour:TourPlacesRecent",
+      "FilesTour:TourPlacesFavorites",
+      "FilesTour:TourPlacesTrash",
+    ]);
     // The spotlight covers the sub-list the anchor item belongs to.
     expect(places?.spotlightTarget).toBeTypeOf("function");
   });
@@ -167,8 +170,8 @@ describe("getTourSteps — owner", () => {
     const withTrash = steps(ownerFlags).at(-1);
     const withoutTrash = steps({ ...ownerFlags, trashId: null }).at(-1);
 
-    expect(withTrash?.content).toContain("FilesTour:TourPlacesTrash");
-    expect(withoutTrash?.content).not.toContain("FilesTour:TourPlacesTrash");
+    expect(bullets(withTrash)).toContain("FilesTour:TourPlacesTrash");
+    expect(bullets(withoutTrash)).not.toContain("FilesTour:TourPlacesTrash");
   });
 });
 

@@ -3,7 +3,7 @@
   "content": "{{sharedBy}} says who the file came from, {{accessLevel}} says what you can do with it — view, comment or edit. Only the owner can change that.",
   "content_en_sha1_hash": "5311ba7a647c2d61e9727d3751501867952fb110",
   "created_at": "2026-08-06T14:20:53.794Z",
-  "updated_at": "2026-08-06T14:32:13.157Z",
+  "updated_at": "2026-08-07T15:05:26.423Z",
   "comment": {
     "text": "A descriptive text within an onboarding tour step explaining file sharing columns; {{sharedBy}} represents the person who shared the file, and {{accessLevel}} represents the user's permission level.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 347,
+      "line_number": 349,
       "context": "hasItems &&\n elementGroupStep(\n TABLE_HEADER_SELECTOR,\n SHARED_COLUMN_SELECTORS,\n t(\"FilesTour:TourSharedAccessTitle\"),\n t(\"FilesTour:TourSharedAccess\", {\n sharedBy: t(\"Common:SharedBy\"),\n accessLevel: t(\"Common:AccessLevel\"),\n }),\n callbacks,\n LOG_LABEL,",
       "module": "/packages/client"
     }

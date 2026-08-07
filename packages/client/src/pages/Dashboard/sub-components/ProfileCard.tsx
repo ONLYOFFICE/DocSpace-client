@@ -131,7 +131,11 @@ const ProfileCardComponent = ({
 
   return (
     <>
-      <div className={styles.profileCard}>
+      {/* Anchor for the dashboard tour's first step. On the card's own root, so
+          it is present exactly when the card is — the tour reads the DOM to
+          decide whether that step exists at all, and this card is both
+          admin-only and dismissable. */}
+      <div data-tour-id="dashboard-profile" className={styles.profileCard}>
         <IconButton
           className={styles.profileCardClose}
           iconName={CrossReactSvgUrl}

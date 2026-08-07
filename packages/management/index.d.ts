@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TColorScheme, TTheme } from "@docspace/shared/themes";
+import type { TColorScheme, TTheme } from "@docspace/ui-kit/providers/theme/themes";
 
 declare global {
   declare module "resize-image" {

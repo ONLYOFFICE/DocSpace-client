@@ -3,6 +3,8 @@
   "DashboardAppsTitle": "Tout ce avec quoi vous pouvez travailler",
   "DashboardCreate": "Créez votre premier document ici même — choisissez un type et commencez à écrire. Il sera enregistré dans {{files}}, où vous pourrez le retrouver à tout moment.",
   "DashboardCreateTitle": "Créez quelque chose maintenant",
+  "DashboardIntegrations": "Vous travaillez déjà dans une autre plateforme ? Connectez-la ici et retrouvez les éditeurs que vous venez de voir directement dans les outils que votre équipe utilise déjà — sans code sur mesure ni migration de données.",
+  "DashboardIntegrationsTitle": "Travailler avec d'autres plateformes",
   "DashboardOverview": "Cette page est toujours à un clic — ouvrez {{overview}} dans le panneau latéral chaque fois que vous voulez y revenir.",
   "DashboardOverviewTitle": "Revenir ici",
   "DashboardProfile": "Le nom du portail et un bref résumé de votre profil : nom, e-mail et mot de passe. D'ici, vous pouvez renommer le portail ou modifier votre mot de passe.",

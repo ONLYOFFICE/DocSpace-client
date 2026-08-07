@@ -3,6 +3,8 @@
   "DashboardAppsTitle": "Sve sa čime možete da radite",
   "DashboardCreate": "Napravite svoj prvi dokument upravo ovde — izaberite vrstu i počnite da pišete. Biće sačuvan u odeljku {{files}}, gde ga možete naći u svakom trenutku.",
   "DashboardCreateTitle": "Napravite nešto odmah",
+  "DashboardIntegrations": "Već radite u drugoj platformi? Povežite je ovde i uređivači koje ste upravo videli biće vam dostupni direktno u alatkama koje vaš tim već koristi — bez posebnog koda i bez preseljenja podataka.",
+  "DashboardIntegrationsTitle": "Rad sa drugim platformama",
   "DashboardOverview": "Ova stranica je uvek udaljena jedan klik — otvorite {{overview}} u bočnoj traci kad god poželite da joj se vratite.",
   "DashboardOverviewTitle": "Povratak ovde",
   "DashboardProfile": "Naziv portala i kratak pregled vašeg profila: ime, imejl i lozinka. Odavde možete preimenovati portal ili promeniti lozinku.",

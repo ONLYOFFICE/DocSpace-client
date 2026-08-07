@@ -3,6 +3,8 @@
   "DashboardAppsTitle": "Everything you can work with",
   "DashboardCreate": "Create your first document right here — pick a type and start writing. It will be saved to {{files}}, where you can find it any time.",
   "DashboardCreateTitle": "Create something now",
+  "DashboardIntegrations": "Already working in another platform? Connect it here and keep the editors you have just seen, right inside the tools your team already uses — no custom code and nothing to move over.",
+  "DashboardIntegrationsTitle": "Working with other platforms",
   "DashboardOverview": "This page is always one click away — open {{overview}} in the sidebar whenever you want to come back to it.",
   "DashboardOverviewTitle": "Coming back here",
   "DashboardProfile": "The portal name and a short summary of your profile: your name, email and password. From here you can rename the portal or change your password.",

@@ -13,6 +13,7 @@ const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
 const PROFILE_TARGET = '[data-tour-id="dashboard-profile"]';
 const CREATE_TARGET = '[data-tour-id="dashboard-create"]';
 const APPS_TARGET = '[data-tour-id="dashboard-apps"]';
+const INTEGRATIONS_TARGET = '[data-tour-id="dashboard-integrations"]';
 const OVERVIEW_TARGET = '[data-item-id="dashboard"]';
 
 /** The four cards the dashboard renders today, in grid order. */
@@ -22,6 +23,7 @@ const ALL_APPS = ["ai-files", "ai-rooms", "ai-forms", "ai-agents"];
 const fullFlags: TourStepFlags = {
   hasProfileCard: true,
   appIds: ALL_APPS,
+  hasIntegrations: true,
 };
 
 describe("dashboard tour steps", () => {
@@ -30,6 +32,7 @@ describe("dashboard tour steps", () => {
       PROFILE_TARGET,
       CREATE_TARGET,
       APPS_TARGET,
+      INTEGRATIONS_TARGET,
       OVERVIEW_TARGET,
     ]);
   });
@@ -39,18 +42,59 @@ describe("dashboard tour steps", () => {
     const flags = { ...fullFlags, hasProfileCard: false };
 
     expect(titles(flags)).not.toContain("DashboardTour:DashboardProfileTitle");
-    expect(steps(flags)).toHaveLength(3);
+    expect(steps(flags)).toHaveLength(4);
   });
 
   it("keeps the create and overview steps whatever else is missing", () => {
     // Neither depends on anything optional: the quick actions are always
     // rendered, and the Overview item is what the page was reached from.
-    const bare = steps({ hasProfileCard: false, appIds: [] });
+    const bare = steps({
+      hasProfileCard: false,
+      appIds: [],
+      hasIntegrations: false,
+    });
 
     expect(bare.map((step) => step.target)).toEqual([
       CREATE_TARGET,
       OVERVIEW_TARGET,
     ]);
+  });
+
+  describe("the integrations step", () => {
+    it("sits between the apps row and the sidebar", () => {
+      // It is about what to do after the products have been introduced, and
+      // the Overview step is the tour's hand-off — so it goes second to last.
+      const targets = steps(fullFlags).map((step) => step.target);
+
+      expect(targets.indexOf(INTEGRATIONS_TARGET)).toBe(
+        targets.indexOf(OVERVIEW_TARGET) - 1,
+      );
+      expect(targets.indexOf(INTEGRATIONS_TARGET)).toBeGreaterThan(
+        targets.indexOf(APPS_TARGET),
+      );
+    });
+
+    it("is dropped when the card is not on the page", () => {
+      const flags = { ...fullFlags, hasIntegrations: false };
+
+      expect(titles(flags)).not.toContain(
+        "DashboardTour:DashboardIntegrationsTitle",
+      );
+      expect(steps(flags)).toHaveLength(4);
+    });
+
+    it("still comes before the sidebar when the apps row is missing", () => {
+      // The two are independent: an empty grid must not pull the integrations
+      // step out of its place at the end.
+      const flags = { ...fullFlags, appIds: [] };
+
+      expect(steps(flags).map((step) => step.target)).toEqual([
+        PROFILE_TARGET,
+        CREATE_TARGET,
+        INTEGRATIONS_TARGET,
+        OVERVIEW_TARGET,
+      ]);
+    });
   });
 
   describe("the apps step", () => {

@@ -117,6 +117,9 @@ const DashboardTour = ({
         '[data-tour-id="dashboard-profile"]',
       ),
       appIds,
+      hasIntegrations: !!document.querySelector(
+        '[data-tour-id="dashboard-integrations"]',
+      ),
     };
   }, []);
 

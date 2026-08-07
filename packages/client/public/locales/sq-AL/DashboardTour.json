@@ -3,6 +3,8 @@
   "DashboardAppsTitle": "Gjithçka me të cilën mund të punoni",
   "DashboardCreate": "Krijoni dokumentin tuaj të parë pikërisht këtu — zgjidhni një lloj dhe filloni të shkruani. Do të ruhet te {{files}}, ku mund ta gjeni në çdo kohë.",
   "DashboardCreateTitle": "Krijoni diçka tani",
+  "DashboardIntegrations": "Punoni tashmë në një platformë tjetër? Lidheni këtu dhe redaktorët që sapo patë do t'i keni drejtpërdrejt në mjetet që ekipi juaj përdor tashmë — pa kod të posaçëm dhe pa zhvendosur asgjë.",
+  "DashboardIntegrationsTitle": "Puna me platforma të tjera",
   "DashboardOverview": "Kjo faqe është gjithmonë vetëm një klikim larg — hapni {{overview}} në shiritin anësor sa herë që doni të ktheheni te ajo.",
   "DashboardOverviewTitle": "Kthimi këtu",
   "DashboardProfile": "Emri i portalit dhe një përmbledhje e shkurtër e profilit tuaj: emri, e-maili dhe fjalëkalimi. Nga këtu mund ta riemërtoni portalin ose të ndryshoni fjalëkalimin.",

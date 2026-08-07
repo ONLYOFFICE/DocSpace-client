@@ -55,6 +55,7 @@ const LOG_LABEL = "dashboard tour";
 const PROFILE_CARD_SELECTOR = '[data-tour-id="dashboard-profile"]';
 const CREATE_SECTION_SELECTOR = '[data-tour-id="dashboard-create"]';
 const APPS_SECTION_SELECTOR = '[data-tour-id="dashboard-apps"]';
+const INTEGRATIONS_SELECTOR = '[data-tour-id="dashboard-integrations"]';
 
 /**
  * One app card, by its own id.
@@ -88,10 +89,17 @@ export type TourStepFlags = {
    * Empty means no step.
    */
   appIds: string[];
+  /**
+   * Whether the integrations card is on the page. It renders unconditionally
+   * today, but it is a collapsible card whose anchor sits on a wrapper the tour
+   * reads from the DOM like every other — so a future condition on it costs a
+   * dropped step rather than a step pointing at nothing.
+   */
+  hasIntegrations: boolean;
 };
 
 /**
- * The dashboard tour: four steps over what is already on the page.
+ * The dashboard tour: five steps over what is already on the page.
  *
  * Simpler than the section tours by nature, and deliberately so. Those walk a
  * list that has to be fetched, is empty for a new portal, and has to be stood in
@@ -109,7 +117,7 @@ export function getTourSteps(
   callbacks: TourStepCallbacks | undefined,
   flags: TourStepFlags,
 ): Step[] {
-  const { hasProfileCard, appIds } = flags;
+  const { hasProfileCard, appIds, hasIntegrations } = flags;
 
   return [
     // 1. The profile card: what the details on it actually are. The card is a
@@ -153,7 +161,19 @@ export function getTourSteps(
         LOG_LABEL,
       ),
 
-    // 4. The way back. The dashboard is a page users leave and have to be able
+    // 4. The integrations card, which reads as an ad and is skipped as one —
+    // the step is what says it is not: the same editors, inside a platform the
+    // user may already be running, without moving anything into this one.
+    hasIntegrations &&
+      elementStep(
+        INTEGRATIONS_SELECTOR,
+        t("DashboardTour:DashboardIntegrationsTitle"),
+        t("DashboardTour:DashboardIntegrations"),
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 5. The way back. The dashboard is a page users leave and have to be able
     // to return to, and the Overview item is how — worth a step of its own
     // because a page reached from a sidebar item is easy to think of as a
     // landing screen shown once.

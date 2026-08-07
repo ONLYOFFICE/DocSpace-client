@@ -3,6 +3,8 @@
   "DashboardAppsTitle": "使えるものすべて",
   "DashboardCreate": "最初のドキュメントをここで作成しましょう。種類を選んで書き始めるだけです。作成したものは{{files}}に保存され、いつでも見つけられます。",
   "DashboardCreateTitle": "今すぐ何か作ってみる",
+  "DashboardIntegrations": "すでに他のプラットフォームをお使いですか？ここから接続すれば、今ご覧いただいたエディターを、チームがすでに使っているツールの中でそのまま利用できます。独自の開発もデータの移行も不要です。",
+  "DashboardIntegrationsTitle": "他のプラットフォームとの連携",
   "DashboardOverview": "このページはいつでもワンクリックで開けます。戻りたくなったら、サイドバーの{{overview}}を開いてください。",
   "DashboardOverviewTitle": "ここへ戻るには",
   "DashboardProfile": "ポータル名とプロフィールの概要（名前、メールアドレス、パスワード）です。ここからポータル名の変更やパスワードの変更ができます。",

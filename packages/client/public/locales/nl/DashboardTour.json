@@ -3,6 +3,8 @@
   "DashboardAppsTitle": "Alles waarmee u kunt werken",
   "DashboardCreate": "Maak hier meteen uw eerste document — kies een type en begin te schrijven. Het wordt opgeslagen in {{files}}, waar u het altijd terugvindt.",
   "DashboardCreateTitle": "Maak nu iets",
+  "DashboardIntegrations": "Werkt u al in een ander platform? Koppel het hier en gebruik de editors die u zojuist zag rechtstreeks in de tools die uw team al gebruikt — zonder maatwerkcode en zonder migratie.",
+  "DashboardIntegrationsTitle": "Werken met andere platforms",
   "DashboardOverview": "Deze pagina is altijd één klik verwijderd — open {{overview}} in het zijpaneel wanneer u hier weer terug wilt komen.",
   "DashboardOverviewTitle": "Hier weer terugkomen",
   "DashboardProfile": "De portaalnaam en een kort overzicht van uw profiel: naam, e-mail en wachtwoord. Vanaf hier kunt u het portaal hernoemen of uw wachtwoord wijzigen.",

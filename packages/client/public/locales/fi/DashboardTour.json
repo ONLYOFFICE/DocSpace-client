@@ -3,6 +3,8 @@
   "DashboardAppsTitle": "Kaikki, minkä kanssa voit työskennellä",
   "DashboardCreate": "Luo ensimmäinen asiakirjasi tässä — valitse tyyppi ja ala kirjoittaa. Se tallentuu osioon {{files}}, josta löydät sen milloin tahansa.",
   "DashboardCreateTitle": "Luo jotakin nyt",
+  "DashboardIntegrations": "Työskenteletkö jo toisessa alustassa? Yhdistä se tästä, niin juuri näkemäsi editorit ovat käytettävissä suoraan niissä työkaluissa, joita tiimisi jo käyttää – ilman räätälöityä koodia ja ilman tietojen siirtoa.",
+  "DashboardIntegrationsTitle": "Työskentely muiden alustojen kanssa",
   "DashboardOverview": "Tämä sivu on aina yhden klikkauksen päässä — avaa {{overview}} sivupalkista aina, kun haluat palata tänne.",
   "DashboardOverviewTitle": "Tänne palaaminen",
   "DashboardProfile": "Portaalin nimi ja lyhyt yhteenveto profiilistasi: nimi, sähköposti ja salasana. Täältä voit nimetä portaalin uudelleen tai vaihtaa salasanasi.",

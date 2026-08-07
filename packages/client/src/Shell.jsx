@@ -750,6 +750,14 @@ const Shell = ({ page = "home", ...rest }) => {
     () => ({
       onWebSearchSaved: () =>
         toastr.success(t("Common:ChangesSavedSuccessfully")),
+      // The widget hydrates its stores from mount effects that can't await,
+      // so failures there reach us only through this callback. Without it a
+      // failed profiles load looks like a portal with no AI models
+      // configured. `context` names the failing step (e.g. "profiles:init").
+      onError: ({ type, error, context }) => {
+        console.error(`[ai-agent] ${context ?? type} failed`, error);
+        toastr.error(t("Common:UnexpectedError"));
+      },
     }),
     [t],
   );

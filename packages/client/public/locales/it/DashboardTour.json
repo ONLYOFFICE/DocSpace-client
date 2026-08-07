@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Questi sono i nostri prodotti, ciascuno creato per togliervi di mano un tipo di lavoro diverso: documenti, collaborazione, raccolta dati e assistenza IA. Apritene uno qualsiasi e riceverete anche una breve panoramica di quella sezione.",
+  "DashboardAppsTitle": "Tutto ciò con cui potete lavorare",
+  "DashboardCreate": "Create qui il vostro primo documento: scegliete un tipo e iniziate a scrivere. Verrà salvato in {{files}}, dove potrete ritrovarlo in qualsiasi momento.",
+  "DashboardCreateTitle": "Create qualcosa adesso",
+  "DashboardOverview": "Questa pagina è sempre a un clic di distanza: aprite {{overview}} nella barra laterale ogni volta che volete tornarci.",
+  "DashboardOverviewTitle": "Tornare qui",
+  "DashboardProfile": "I dati del vostro profilo: chi è il proprietario di questo portale, con quale piano funziona, quanto spazio di archiviazione è in uso e l'indirizzo stesso del portale. I collegamenti qui presenti vi permettono di cambiare piano o di modificare queste impostazioni.",
+  "DashboardProfileTitle": "I dati del vostro profilo",
+  "WelcomeDashboardSubtitle": "Tutto comincia da questa pagina",
+  "WelcomeDashboardTitle": "Benvenuti in {{productName}}",
+  "WelcomeDescription": "Create documenti, collaborate nelle stanze, raccogliete dati con i moduli e lasciate che sia l'IA a leggere: tutto da un unico posto. Fate un breve tour e vi mostreremo ogni cosa.",
+  "WelcomeLater": "Forse più tardi"
+}

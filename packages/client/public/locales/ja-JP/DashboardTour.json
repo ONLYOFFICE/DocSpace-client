@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "これらは私たちの製品です。それぞれが異なる種類の仕事を引き受けます。ドキュメント、コラボレーション、データ収集、そしてAIによる支援です。どれかを開けば、そのセクションについても短いツアーが始まります。",
+  "DashboardAppsTitle": "使えるものすべて",
+  "DashboardCreate": "最初のドキュメントをここで作成しましょう。種類を選んで書き始めるだけです。作成したものは{{files}}に保存され、いつでも見つけられます。",
+  "DashboardCreateTitle": "今すぐ何か作ってみる",
+  "DashboardOverview": "このページはいつでもワンクリックで開けます。戻りたくなったら、サイドバーの{{overview}}を開いてください。",
+  "DashboardOverviewTitle": "ここへ戻るには",
+  "DashboardProfile": "プロフィールの詳細です。このポータルの所有者、利用中の料金プラン、使用済みのストレージ容量、そしてポータルのアドレスそのもの。ここにあるリンクから、プランの変更やこれらの設定の編集ができます。",
+  "DashboardProfileTitle": "プロフィールの詳細",
+  "WelcomeDashboardSubtitle": "すべてはこのページから始まります",
+  "WelcomeDashboardTitle": "{{productName}}へようこそ",
+  "WelcomeDescription": "ドキュメントを作成し、ルームで共同作業し、フォームでデータを集め、読み込みはAIに任せる。そのすべてが一つの場所で完結します。短いツアーで一通りご案内します。",
+  "WelcomeLater": "また後で"
+}

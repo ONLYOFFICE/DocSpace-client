@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Das sind unsere Produkte, von denen Ihnen jedes eine andere Art von Arbeit abnimmt – Dokumente, Zusammenarbeit, Datenerfassung und KI-Unterstützung. Öffnen Sie eines davon, und Sie bekommen auch für diesen Bereich eine kurze Tour.",
+  "DashboardAppsTitle": "Alles, womit Sie arbeiten können",
+  "DashboardCreate": "Erstellen Sie Ihr erstes Dokument direkt hier – wählen Sie einen Typ und beginnen Sie zu schreiben. Es wird in {{files}} gespeichert, wo Sie es jederzeit wiederfinden.",
+  "DashboardCreateTitle": "Erstellen Sie jetzt etwas",
+  "DashboardOverview": "Diese Seite ist immer nur einen Klick entfernt – öffnen Sie {{overview}} in der Seitenleiste, wann immer Sie hierher zurückkehren möchten.",
+  "DashboardOverviewTitle": "Hierher zurückkommen",
+  "DashboardProfile": "Ihre Profildaten: wem dieses Portal gehört, mit welchem Tarif es läuft, wie viel Speicherplatz belegt ist und die Portaladresse selbst. Über die Links hier können Sie Ihren Tarif wechseln oder diese Einstellungen bearbeiten.",
+  "DashboardProfileTitle": "Ihre Profildaten",
+  "WelcomeDashboardSubtitle": "Alles beginnt auf dieser Seite",
+  "WelcomeDashboardTitle": "Willkommen bei {{productName}}",
+  "WelcomeDescription": "Erstellen Sie Dokumente, arbeiten Sie in Räumen zusammen, sammeln Sie Daten mit Formularen und überlassen Sie das Lesen der KI – alles an einem Ort. Machen Sie eine kurze Tour, wir zeigen Ihnen alles.",
+  "WelcomeLater": "Vielleicht später"
+}

@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Ovo su naši proizvodi, svaki napravljen da sa vas skine drugu vrstu posla — dokumente, saradnju, prikupljanje podataka i pomoć AI. Otvorite bilo koji od njih i dobićete kratak obilazak i tog odeljka.",
+  "DashboardAppsTitle": "Sve sa čime možete da radite",
+  "DashboardCreate": "Napravite svoj prvi dokument upravo ovde — izaberite vrstu i počnite da pišete. Biće sačuvan u odeljku {{files}}, gde ga možete naći u svakom trenutku.",
+  "DashboardCreateTitle": "Napravite nešto odmah",
+  "DashboardOverview": "Ova stranica je uvek udaljena jedan klik — otvorite {{overview}} u bočnoj traci kad god poželite da joj se vratite.",
+  "DashboardOverviewTitle": "Povratak ovde",
+  "DashboardProfile": "Podaci vašeg profila: ko je vlasnik ovog portala, na kom tarifnom planu radi, koliko skladišta je zauzeto i sama adresa portala. Veze ovde vam omogućavaju da promenite plan ili izmenite ova podešavanja.",
+  "DashboardProfileTitle": "Podaci vašeg profila",
+  "WelcomeDashboardSubtitle": "Sve počinje na ovoj stranici",
+  "WelcomeDashboardTitle": "Dobrodošli u {{productName}}",
+  "WelcomeDescription": "Pravite dokumente, sarađujte u sobama, prikupljajte podatke obrascima i prepustite čitanje AI — sve sa jednog mesta. Prođite kratak obilazak i pokazaćemo vam sve.",
+  "WelcomeLater": "Možda kasnije"
+}

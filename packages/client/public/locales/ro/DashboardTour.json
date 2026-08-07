@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Acestea sunt produsele noastre, fiecare creat ca să vă ia de pe umeri un alt fel de muncă — documente, colaborare, colectare de date și ajutor din partea IA. Deschideți oricare dintre ele și veți primi un tur scurt și pentru acea secțiune.",
+  "DashboardAppsTitle": "Tot ce puteți folosi",
+  "DashboardCreate": "Creați-vă primul document chiar aici — alegeți un tip și începeți să scrieți. Va fi salvat în {{files}}, unde îl puteți găsi oricând.",
+  "DashboardCreateTitle": "Creați ceva acum",
+  "DashboardOverview": "Această pagină este mereu la un clic distanță — deschideți {{overview}} în bara laterală ori de câte ori vreți să reveniți la ea.",
+  "DashboardOverviewTitle": "Revenirea aici",
+  "DashboardProfile": "Datele profilului dumneavoastră: cine deține acest portal, pe ce plan tarifar funcționează, cât spațiu de stocare este folosit și adresa portalului. Legăturile de aici vă permit să schimbați planul sau să editați aceste setări.",
+  "DashboardProfileTitle": "Datele profilului dumneavoastră",
+  "WelcomeDashboardSubtitle": "Totul începe pe această pagină",
+  "WelcomeDashboardTitle": "Bun venit în {{productName}}",
+  "WelcomeDescription": "Creați documente, colaborați în săli, colectați date cu formulare și lăsați IA să citească în locul dumneavoastră — totul dintr-un singur loc. Faceți un tur rapid și vă arătăm tot.",
+  "WelcomeLater": "Poate mai târziu"
+}

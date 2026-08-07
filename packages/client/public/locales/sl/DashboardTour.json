@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "To so naši izdelki, vsak od njih je narejen tako, da od vas prevzame drugačno vrsto dela — dokumente, sodelovanje, zbiranje podatkov in pomoč umetne inteligence. Odprite katerega koli in dobili boste kratek vodnik tudi po tem razdelku.",
+  "DashboardAppsTitle": "Vse, s čimer lahko delate",
+  "DashboardCreate": "Svoj prvi dokument ustvarite kar tukaj — izberite vrsto in začnite pisati. Shranil se bo v razdelek {{files}}, kjer ga lahko kadar koli najdete.",
+  "DashboardCreateTitle": "Ustvarite nekaj zdaj",
+  "DashboardOverview": "Ta stran je vedno le en klik stran — odprite {{overview}} v stranski vrstici, kadar koli se želite vrniti nanjo.",
+  "DashboardOverviewTitle": "Vrnitev sem",
+  "DashboardProfile": "Podatki vašega profila: kdo je lastnik tega portala, na katerem tarifnem načrtu teče, koliko shrambe je v uporabi in sam naslov portala. Povezave tukaj vam omogočajo zamenjavo načrta ali urejanje teh nastavitev.",
+  "DashboardProfileTitle": "Podatki vašega profila",
+  "WelcomeDashboardSubtitle": "Vse se začne na tej strani",
+  "WelcomeDashboardTitle": "Dobrodošli v {{productName}}",
+  "WelcomeDescription": "Ustvarjajte dokumente, sodelujte v sobah, zbirajte podatke z obrazci in prepustite branje umetni inteligenci — vse z enega mesta. Prehodite kratek vodnik in vse vam pokažemo.",
+  "WelcomeLater": "Morda kasneje"
+}

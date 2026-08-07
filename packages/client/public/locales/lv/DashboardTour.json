@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Šie ir mūsu produkti, un katrs no tiem ir veidots tā, lai pārņemtu citu jūsu darba daļu — dokumentus, sadarbību, datu vākšanu un MI palīdzību. Atveriet jebkuru no tiem, un saņemsiet īsu apskati arī par to sadaļu.",
+  "DashboardAppsTitle": "Viss, ar ko varat strādāt",
+  "DashboardCreate": "Izveidojiet savu pirmo dokumentu turpat šeit — izvēlieties veidu un sāciet rakstīt. Tas tiks saglabāts sadaļā {{files}}, kur to varēsiet atrast jebkurā brīdī.",
+  "DashboardCreateTitle": "Izveidojiet kaut ko tagad",
+  "DashboardOverview": "Šī lapa vienmēr ir viena klikšķa attālumā — atveriet {{overview}} sānjoslā ikreiz, kad vēlaties šeit atgriezties.",
+  "DashboardOverviewTitle": "Atgriešanās šeit",
+  "DashboardProfile": "Jūsu profila dati: kam pieder šis portāls, ar kādu tarifa plānu tas darbojas, cik daudz krātuves ir izmantots un pati portāla adrese. Šeit esošās saites ļauj mainīt plānu vai rediģēt šos iestatījumus.",
+  "DashboardProfileTitle": "Jūsu profila dati",
+  "WelcomeDashboardSubtitle": "Viss sākas šajā lapā",
+  "WelcomeDashboardTitle": "Laipni lūdzam {{productName}}",
+  "WelcomeDescription": "Veidojiet dokumentus, sadarbojieties telpās, vāciet datus ar veidlapām un ļaujiet MI lasīt jūsu vietā — viss no vienas vietas. Dodieties īsā apskatē, un mēs jums visu parādīsim.",
+  "WelcomeLater": "Varbūt vēlāk"
+}

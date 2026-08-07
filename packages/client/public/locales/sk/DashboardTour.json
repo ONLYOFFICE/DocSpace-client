@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Toto sú naše produkty, každý z nich vznikol preto, aby za vás prevzal iný druh práce — dokumenty, spoluprácu, zber údajov a pomoc AI. Otvorte ktorýkoľvek z nich a dostanete krátku prehliadku aj tej sekcie.",
+  "DashboardAppsTitle": "Všetko, s čím môžete pracovať",
+  "DashboardCreate": "Vytvorte svoj prvý dokument priamo tu — vyberte typ a začnite písať. Uloží sa do sekcie {{files}}, kde ho kedykoľvek nájdete.",
+  "DashboardCreateTitle": "Vytvorte teraz niečo",
+  "DashboardOverview": "Táto stránka je vždy na jedno kliknutie — kedykoľvek sa sem budete chcieť vrátiť, otvorte v bočnom paneli {{overview}}.",
+  "DashboardOverviewTitle": "Návrat sem",
+  "DashboardProfile": "Údaje vášho profilu: kto tento portál vlastní, na akom tarifnom pláne beží, koľko úložiska je využitého a samotná adresa portálu. Odkazy tu vám umožnia zmeniť plán alebo upraviť tieto nastavenia.",
+  "DashboardProfileTitle": "Údaje vášho profilu",
+  "WelcomeDashboardSubtitle": "Všetko sa začína na tejto stránke",
+  "WelcomeDashboardTitle": "Vitajte v {{productName}}",
+  "WelcomeDescription": "Vytvárajte dokumenty, spolupracujte v miestnostiach, zbierajte údaje pomocou formulárov a čítanie nechajte na AI — všetko z jedného miesta. Prejdite si krátku prehliadku a všetko vám ukážeme.",
+  "WelcomeLater": "Možno neskôr"
+}

@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "To są nasze produkty, każdy stworzony po to, by zdjąć z ciebie inny rodzaj pracy — dokumenty, współpracę, zbieranie danych i pomoc AI. Otwórz dowolny z nich, a dostaniesz krótki przewodnik również po tej sekcji.",
+  "DashboardAppsTitle": "Wszystko, z czym możesz pracować",
+  "DashboardCreate": "Utwórz swój pierwszy dokument właśnie tutaj — wybierz typ i zacznij pisać. Zapisze się w sekcji {{files}}, gdzie znajdziesz go w każdej chwili.",
+  "DashboardCreateTitle": "Utwórz coś teraz",
+  "DashboardOverview": "Ta strona jest zawsze o jedno kliknięcie stąd — otwórz {{overview}} w panelu bocznym, kiedy tylko zechcesz tu wrócić.",
+  "DashboardOverviewTitle": "Powrót tutaj",
+  "DashboardProfile": "Dane twojego profilu: kto jest właścicielem tego portalu, na jakim planie taryfowym działa, ile pamięci masowej jest zajęte i sam adres portalu. Linki tutaj pozwalają zmienić plan lub edytować te ustawienia.",
+  "DashboardProfileTitle": "Dane twojego profilu",
+  "WelcomeDashboardSubtitle": "Wszystko zaczyna się na tej stronie",
+  "WelcomeDashboardTitle": "Witamy w {{productName}}",
+  "WelcomeDescription": "Twórz dokumenty, współpracuj w pokojach, zbieraj dane za pomocą formularzy i pozwól AI czytać za ciebie — wszystko z jednego miejsca. Przejdź krótki przewodnik, a pokażemy ci wszystko.",
+  "WelcomeLater": "Może później"
+}

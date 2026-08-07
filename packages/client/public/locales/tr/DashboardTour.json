@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Bunlar bizim ürünlerimiz; her biri işinizin farklı bir bölümünü üstlenmek için tasarlandı — belgeler, iş birliği, veri toplama ve yapay zeka desteği. Herhangi birini açtığınızda o bölüm için de kısa bir tur alırsınız.",
+  "DashboardAppsTitle": "Çalışabileceğiniz her şey",
+  "DashboardCreate": "İlk belgenizi tam burada oluşturun — bir tür seçin ve yazmaya başlayın. Belge {{files}} bölümüne kaydedilir ve orada istediğiniz zaman bulabilirsiniz.",
+  "DashboardCreateTitle": "Şimdi bir şey oluşturun",
+  "DashboardOverview": "Bu sayfa her zaman bir tık uzaklıktadır — buraya dönmek istediğinizde kenar çubuğundaki {{overview}} bölümünü açın.",
+  "DashboardOverviewTitle": "Buraya geri dönmek",
+  "DashboardProfile": "Profil bilgileriniz: bu portalın sahibi kim, hangi tarife planıyla çalışıyor, ne kadar depolama kullanılıyor ve portalın adresinin kendisi. Buradaki bağlantılar tarifenizi değiştirmenize veya bu ayarları düzenlemenize olanak tanır.",
+  "DashboardProfileTitle": "Profil bilgileriniz",
+  "WelcomeDashboardSubtitle": "Her şey bu sayfada başlar",
+  "WelcomeDashboardTitle": "{{productName}} platformuna hoş geldiniz",
+  "WelcomeDescription": "Belgeler oluşturun, odalarda birlikte çalışın, formlarla veri toplayın ve okumayı yapay zekaya bırakın — hepsi tek bir yerden. Kısa bir tur yapın, size her şeyi gösterelim.",
+  "WelcomeLater": "Belki daha sonra"
+}

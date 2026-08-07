@@ -8,7 +8,7 @@
   "DashboardProfile": "Your profile details: who owns this portal, the plan it runs on, how much storage is in use, and the portal address itself. The links here let you change your plan or edit these settings.",
   "DashboardProfileTitle": "Your profile details",
   "WelcomeDashboardSubtitle": "Everything starts on this page",
-  "WelcomeDescription": "Create documents, collaborate in rooms, collect data with forms and let AI do the reading — all from one place. Take a quick tour and we will show you around.",
   "WelcomeDashboardTitle": "Welcome to {{productName}}",
+  "WelcomeDescription": "Create documents, collaborate in rooms, collect data with forms and let AI do the reading — all from one place. Take a quick tour and we will show you around.",
   "WelcomeLater": "Maybe later"
 }

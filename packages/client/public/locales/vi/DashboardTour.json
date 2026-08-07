@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Đây là các sản phẩm của chúng tôi, mỗi sản phẩm được tạo ra để gánh giúp bạn một loại công việc khác nhau — tài liệu, cộng tác, thu thập dữ liệu và trợ giúp bằng AI. Mở bất kỳ sản phẩm nào, bạn cũng sẽ được tham quan nhanh phần đó.",
+  "DashboardAppsTitle": "Mọi thứ bạn có thể dùng để làm việc",
+  "DashboardCreate": "Hãy tạo tài liệu đầu tiên của bạn ngay tại đây — chọn một loại và bắt đầu viết. Tài liệu sẽ được lưu vào {{files}}, nơi bạn có thể tìm lại bất cứ lúc nào.",
+  "DashboardCreateTitle": "Tạo một thứ gì đó ngay bây giờ",
+  "DashboardOverview": "Trang này luôn chỉ cách một cú nhấp — mở {{overview}} ở thanh bên bất cứ khi nào bạn muốn quay lại đây.",
+  "DashboardOverviewTitle": "Quay lại đây",
+  "DashboardProfile": "Thông tin hồ sơ của bạn: ai sở hữu cổng thông tin này, đang chạy trên gói cước nào, đã dùng bao nhiêu dung lượng lưu trữ và chính địa chỉ của cổng thông tin. Các liên kết ở đây cho phép bạn đổi gói cước hoặc chỉnh sửa các thiết lập này.",
+  "DashboardProfileTitle": "Thông tin hồ sơ của bạn",
+  "WelcomeDashboardSubtitle": "Mọi thứ đều bắt đầu từ trang này",
+  "WelcomeDashboardTitle": "Chào mừng đến với {{productName}}",
+  "WelcomeDescription": "Tạo tài liệu, cộng tác trong các phòng, thu thập dữ liệu bằng biểu mẫu và để AI lo việc đọc — tất cả từ một nơi. Hãy tham quan nhanh và chúng tôi sẽ giới thiệu mọi thứ cho bạn.",
+  "WelcomeLater": "Có thể để sau"
+}

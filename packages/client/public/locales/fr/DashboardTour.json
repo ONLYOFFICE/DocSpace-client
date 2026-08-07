@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "Voici nos produits, chacun conçu pour vous décharger d'un type de travail différent : documents, collaboration, collecte de données et assistance IA. Ouvrez l'un d'eux et vous aurez également une courte visite de cette section.",
+  "DashboardAppsTitle": "Tout ce avec quoi vous pouvez travailler",
+  "DashboardCreate": "Créez votre premier document ici même — choisissez un type et commencez à écrire. Il sera enregistré dans {{files}}, où vous pourrez le retrouver à tout moment.",
+  "DashboardCreateTitle": "Créez quelque chose maintenant",
+  "DashboardOverview": "Cette page est toujours à un clic — ouvrez {{overview}} dans le panneau latéral chaque fois que vous voulez y revenir.",
+  "DashboardOverviewTitle": "Revenir ici",
+  "DashboardProfile": "Les informations de votre profil : à qui appartient ce portail, le forfait sur lequel il fonctionne, l'espace de stockage utilisé et l'adresse du portail elle-même. Les liens présents ici vous permettent de changer de forfait ou de modifier ces paramètres.",
+  "DashboardProfileTitle": "Les informations de votre profil",
+  "WelcomeDashboardSubtitle": "Tout commence sur cette page",
+  "WelcomeDashboardTitle": "Bienvenue sur {{productName}}",
+  "WelcomeDescription": "Créez des documents, collaborez dans des salles, collectez des données avec des formulaires et laissez l'IA se charger de la lecture — le tout depuis un seul endroit. Faites une visite rapide et nous vous montrerons tout.",
+  "WelcomeLater": "Peut-être plus tard"
+}

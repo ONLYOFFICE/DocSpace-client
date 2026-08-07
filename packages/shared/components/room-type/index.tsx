@@ -115,9 +115,9 @@ const RoomType = ({
 
       <div className="choose_room-info_wrapper">
         <div className="choose_room-title">
-          <Text className="choose_room-title-text">{t(room.title)}</Text>
+          <Text className="choose_room-title-text">{room.title}</Text>
         </div>
-        <Text className="choose_room-description">{t(room.description)}</Text>
+        <Text className="choose_room-description">{room.description}</Text>
       </div>
 
       <IconButton
@@ -137,7 +137,7 @@ const RoomType = ({
         [styles.disabled]: disabled,
       })}
       id={id}
-      title={disabled ? "" : t(room.title)}
+      title={disabled ? "" : room.title}
       onClick={onClick}
       data-tooltip-id={disabled ? "create-room-tooltip" : undefined}
       data-testid="room-type-list-item"
@@ -149,7 +149,7 @@ const RoomType = ({
     <TooltipContainer
       as="div"
       id={id}
-      title={t(room.title)}
+      title={room.title}
       onClick={onClick}
       className={classNames(styles.roomType, styles.dropDownButton, {
         [styles.isOpen]: isOpen,
@@ -163,7 +163,7 @@ const RoomType = ({
     <TooltipContainer
       as="div"
       id={id}
-      title={t(room.title)}
+      title={room.title}
       onClick={onClick}
       data-selected-id={selectedId}
       className={classNames(styles.roomType, styles.dropDownItem, {
@@ -177,7 +177,7 @@ const RoomType = ({
     <TooltipContainer
       as="div"
       id={id}
-      title={t(room.title)}
+      title={room.title}
       data-selected-id={selectedId}
       className={classNames(styles.roomType, styles.displayItem, {
         [styles.isOpen]: isOpen,

@@ -52,10 +52,10 @@ const TOUR_KEY = "dashboard_tour_pending";
 const DASHBOARD_URL = "/dashboard";
 
 // The per-user "has been offered the welcome" flag
-// (DashboardTourStore.welcomeKey) and the admin id the mocks sign in as, which
-// is what that key is suffixed with.
+// (DashboardTourStore.welcomeKey). Only the prefix is known here: the suffix is
+// the signed-in user's id, which differs per mocked user type — so the flag is
+// spent through the UI rather than written by hand under a guessed key.
 const WELCOME_SEEN_PREFIX = "dashboard_welcome_seen";
-const ADMIN_ID = "66faa6e4-f133-11ea-b126-00ffeec8b4ef";
 
 // packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx —
 // dismissing the card is the one thing that changes which steps a tour has, and
@@ -108,12 +108,37 @@ const startTour = async (page: Page, baseUrl: string) => {
   await expect(tourTooltip(page)).toBeVisible();
 };
 
-/** Marks the welcome as already offered to the signed-in admin. */
+/**
+ * Spends the welcome offer for whoever is signed in, by closing the modal the
+ * way a user would.
+ *
+ * Deliberately not a `localStorage.setItem`: the flag is keyed on the user id,
+ * and the mocked user types do not share one — writing it by hand under a
+ * guessed id leaves the real key unset, which shows up as a welcome that will
+ * not go away rather than as a missing key. Letting the app write it keys the
+ * flag correctly by construction.
+ */
 const markWelcomeSeen = async (page: Page) => {
-  await page.evaluate(
-    ([prefix, id]) => window.localStorage.setItem(`${prefix}_${id}`, "true"),
-    [WELCOME_SEEN_PREFIX, ADMIN_ID],
-  );
+  await expect(welcomeDialog(page)).toBeVisible();
+  await page.locator(WELCOME_LATER).click();
+  await expect(welcomeDialog(page)).toHaveCount(0);
+
+  // The click only proves the modal closed; assert it also reached storage, so
+  // a regression in the write surfaces here and not as a puzzling failure in
+  // whatever the caller goes on to check.
+  await expect
+    .poll(() =>
+      page.evaluate(
+        (prefix) =>
+          Object.keys(window.localStorage).some(
+            (key) =>
+              key.startsWith(`${prefix}_`) &&
+              window.localStorage.getItem(key) === "true",
+          ),
+        WELCOME_SEEN_PREFIX,
+      ),
+    )
+    .toBe(true);
 };
 
 /** Walks forward with the keyboard until the step titled `title` is up. */

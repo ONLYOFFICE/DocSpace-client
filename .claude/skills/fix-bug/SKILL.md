@@ -1,4 +1,5 @@
 ---
+name: fix-bug
 description: Fix one Bugzilla bug end-to-end (route → locate → fix → test → gate → confirm → commit)
 argument-hint: "<bugId>"
 ---

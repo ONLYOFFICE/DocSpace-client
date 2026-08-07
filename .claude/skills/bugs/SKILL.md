@@ -1,4 +1,5 @@
 ---
+name: bugs
 description: List Bugzilla bugs (assignee / product / component / status filters)
 argument-hint: "[assignee=email] [product=DocSpace] [component=API] [status=NEW,REOPENED] [changed-since=YYYY-MM-DD] [limit=N] | <saved-search URL>"
 ---

@@ -1,4 +1,5 @@
 ---
+name: bug
 description: Read one Bugzilla bug in full — fields, description, comments, attachments
 argument-hint: "<bugId>[,<bugId>...]"
 ---

@@ -147,5 +147,5 @@ const AccountsSidebar = ({ isNavLoading }: AccountsSidebarProps) => {
 };
 
 export default inject<TStore>(({ clientLoadingStore }) => ({
-  isNavLoading: clientLoadingStore.showBodyLoader,
+  isNavLoading: clientLoadingStore.showArticleLoader,
 }))(observer(AccountsSidebar));

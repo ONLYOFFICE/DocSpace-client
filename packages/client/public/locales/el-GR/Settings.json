@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Συνδέστε, επεκτείνετε και αυτοματοποιείτε το {{organizationName}} {{productName}} χρησιμοποιώντας το πλήρες πακέτο εργαλείων προγραμματιστή μας — από REST API και Embed SDK έως webhooks και εφαρμογές OAuth. Επιλέξτε ένα εργαλείο παρακάτω για να ξεκινήσετε.",
   "DisableAiServices": "Απενεργοποίηση {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} θα είναι κρυμμένο για όλους τους χρήστες (το ιστορικό αλληλεπίδρασης θα παραμείνει διατηρημένο).",
-  "DisableAiServicesBalance": "Το υπόλοιπό σας (<1>{{balance}}</1>) θα παραμείνει στον λογαριασμό σας και θα είναι διαθέσιμο για χρήση εάν επιλέξετε να ενεργοποιήσετε ξανά {{aiServices}} στο μέλλον.",
   "DisableAiServicesConfirm": "Μπορείτε να ενεργοποιήσετε ξανά τα {{aiServices}} οποιαδήποτε στιγμή. Είστε βέβαιοι ότι θέλετε να συνεχίσετε;",
   "DisableAiServicesDescription": "Απενεργοποιώντας το AI του {{organizationName}}, θα εφαρμοστούν οι ακόλουθες αλλαγές:",
   "DisableAiServicesServicesDisabled": "Οι πληρωμένες {{aiServices}} θα απενεργοποιηθούν.",

@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "අපගේ සම්පූර්ණ සංවර්ධක මෙවලම් කට්ටලය භාවිතා කරමින් {{organizationName}} {{productName}} අනුකලනය කරන්න, පුළුල් කරන්න, සහ ස්වයංක්‍රීය කරන්න — REST API සහ Embed SDK සිට webhooks සහ OAuth apps දක්වා. ආරම්භ කිරීමට පහත මෙවලමක් තෝරන්න.",
   "DisableAiServices": "{{aiServices}} අක්‍රිය කරන්න",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} සියලුම පරිශීලකයින් සඳහා සඟවා ඇත (අන්තර්ක්‍රියා ඉතිහාසය සංරක්ෂිතව පවතිනු ඇත).",
-  "DisableAiServicesBalance": "ඔබගේ ඉතිරි ශේෂය (<1>{{balance}}</1>) ඔබගේ ගිණුමේ පවතිනු ඇති අතර අනාගතයේදී {{aiServices}} නැවත සක්‍රිය කිරීමට ඔබ තෝරා ගන්නේ නම් එය භාවිතය සඳහා ලබා ගත හැකිය.",
   "DisableAiServicesConfirm": "ඔබට {{aiServices}} ඕනෑම වේලාවක නැවත සක්‍රිය කළ හැකිය. ඔබට ඉදිරියට යාමට විශ්වාසද?",
   "DisableAiServicesDescription": "{{organizationName}} AI අක්‍රිය කිරීම මගින්, පහත වෙනස්කම් ක්‍රියාත්මක වේ:",
   "DisableAiServicesServicesDisabled": "ගෙවීම් කර ඇති {{aiServices}} අක්‍රිය කරනු ඇත.",

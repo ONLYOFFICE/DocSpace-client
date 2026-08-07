@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Integrirajte, razširite in avtomatizirajte {{organizationName}} {{productName}} z našo celotno paleto orodij za programerje — od REST API in Embed SDK do webhookov in OAuth aplikacij. Izberite orodje pod spalom, da začnete.",
   "DisableAiServices": "Onemkliti {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} bo skrit za vse uporabnike (zgodovina interakcij bo ohranjena).",
-  "DisableAiServicesBalance": "Vaš preostali stanje (<1>{{balance}}</1>) bo ostal na vašem računu in bo na voljo za uporabo, če se v prihodnosti odločite za ponovno aktiviranje {{aiServices}}.",
   "DisableAiServicesConfirm": "Lahko ponovno vključite {{aiServices}} kadar koli. Ali ste prepričani, da želite nadaljevati?",
   "DisableAiServicesDescription": "Z onemogočenjem AI za {{organizationName}} bodo v veljavi naslednje spremembe:",
   "DisableAiServicesServicesDisabled": "Plačane {{aiServices}} bodo deaktivirane.",

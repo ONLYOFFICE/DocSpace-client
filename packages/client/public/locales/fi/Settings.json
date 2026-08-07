@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Integroi, laajenna ja automatisoi {{organizationName}} {{productName}} käyttämällä koko kehittäjätyökalupakkiamme — REST API:sta ja Embed SDK:sta webhooks- ja OAuth-sovelluksiin. Valitse alla oleva työkalu aloittaaksesi.",
   "DisableAiServices": "Poista käytöstä {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} piilotetaan kaikille käyttäjille (vuorovaikutushistoria säilyy).",
-  "DisableAiServicesBalance": "Jäljellä oleva saldo (<1>{{balance}}</1>) pysyy tililläsi ja on käytettävissä, jos päätät uudelleenaktivoida {{aiServices}} tulevaisuudessa.",
   "DisableAiServicesConfirm": "Voit uudelleenaktivoida {{aiServices}} milloin tahansa. Oletko varma, että haluat jatkaa?",
   "DisableAiServicesDescription": "Poistamalla käytöstä {{organizationName}} AI, seuraavat muutokset tulevat voimaan:",
   "DisableAiServicesServicesDisabled": "Maksulliset {{aiServices}} poistetaan käytöstä.",

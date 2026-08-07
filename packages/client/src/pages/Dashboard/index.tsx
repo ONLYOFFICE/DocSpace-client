@@ -69,8 +69,10 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
@@ -81,6 +83,8 @@ import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.r
 import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
 import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 
+import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
@@ -90,6 +94,8 @@ import {
   type ChatNoAccessStoreProps,
 } from "SRC_DIR/Hooks/useChatNoAccess";
 
+import { WelcomeDialog } from "./WelcomeDialog";
+import { DashboardTourHost } from "./DashboardTourHost";
 import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
 import { IntegrationsCard } from "./sub-components/IntegrationsCard";
@@ -107,12 +113,31 @@ type DashboardProps = ChatNoAccessStoreProps & {
   showLoader: boolean;
   currentDeviceType?: TStore["settingsStore"]["currentDeviceType"];
   requestAppTour: (appId: AppId) => void;
+  userId?: string;
+  /** False until the welcome has been shown to this user (and dismissed). */
+  isWelcomeSeen: boolean;
+  /** Reads `isWelcomeSeen` back for `userId` — the flag is per-user. */
+  hydrateWelcome: (userId?: string) => void;
+  /** Marks the welcome as shown, whether the tour was taken from it or not. */
+  dismissWelcome: (userId?: string) => void;
+  /** Arms the dashboard's own tour, which `DashboardTour` then starts. */
+  requestDashboardTour: () => void;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
 
 const Dashboard = (props: DashboardProps) => {
-  const { isGuest, showLoader, currentDeviceType, requestAppTour } = props;
+  const {
+    isGuest,
+    showLoader,
+    currentDeviceType,
+    requestAppTour,
+    userId,
+    isWelcomeSeen,
+    hydrateWelcome,
+    dismissWelcome,
+    requestDashboardTour,
+  } = props;
   const { t } = useTranslation(["Common", "OAuth"]);
   useDocumentTitle("Common:Overview");
   const [searchParams] = useSearchParams();
@@ -141,6 +166,52 @@ const Dashboard = (props: DashboardProps) => {
   // persistent host to drop the previous app's frame so it doesn't linger
   // behind the dashboard.
   useSdkFrame({ appId: "dashboard", enabled: false });
+
+  const isMobile = currentDeviceType === DeviceType.mobile;
+
+  // The welcome flag is per-user and lives in storage, so it has to be read
+  // back once the signed-in user is known. Keyed on `userId` rather than run
+  // once: the same page survives a user switch on this route.
+  React.useEffect(() => {
+    hydrateWelcome(userId);
+  }, [hydrateWelcome, userId]);
+
+  /**
+   * Whether the welcome is on screen, which two different things can ask for:
+   * the first visit (the stored flag) and the help button (this state). Local
+   * rather than derived from the store alone, because reopening it deliberately
+   * must not depend on un-dismissing a flag that means "has been offered once".
+   */
+  const [isWelcomeOpen, setIsWelcomeOpen] = React.useState(false);
+
+  /**
+   * The first-visit offer, made once to a user who can actually be walked
+   * through the page afterwards.
+   *
+   * Not on mobile, where no tour runs at all (`useTour` refuses to) — and the
+   * flag is deliberately left unspent there rather than dismissed, so somebody
+   * whose first visit was on a phone still gets the offer on their desktop.
+   * Behind the loader for the same reason the tour is: the modal introduces the
+   * page, and the page is a skeleton until then.
+   */
+  const isFirstVisit = !isWelcomeSeen && !showLoader && !isMobile;
+
+  const showWelcome = isFirstVisit || isWelcomeOpen;
+
+  const onWelcomeClose = React.useCallback(() => {
+    setIsWelcomeOpen(false);
+    // Spends the first-visit offer. A no-op once already spent, so closing a
+    // modal reopened from the help button costs nothing.
+    dismissWelcome(userId);
+  }, [dismissWelcome, userId]);
+
+  // Both buttons dismiss; this one arms the tour on the way out. The host below
+  // is what starts it, once the page has settled.
+  const onWelcomeTakeTour = React.useCallback(() => {
+    setIsWelcomeOpen(false);
+    dismissWelcome(userId);
+    requestDashboardTour();
+  }, [dismissWelcome, userId, requestDashboardTour]);
 
   // AI chat panel, mirroring the Home page: the "AI Chat" quick action opens
   // the shared panel (AiChatStore), which the dashboard hosts itself since it
@@ -226,12 +297,27 @@ const Dashboard = (props: DashboardProps) => {
       data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
     >
       <div className={styles.dashboard} inert={isAiChatFullscreen}>
+        {/* Outside the Scrollbar so it stays pinned to the corner instead of
+            scrolling away with the content. Not on mobile: it reopens the
+            welcome, whose only offer is a tour that cannot run there. */}
+        {!isMobile ? (
+          <IconButton
+            className={styles.helpButton}
+            iconName={QuestionReactSvgUrl}
+            size={16}
+            isClickable
+            title={t("Common:WelcomeStartTour")}
+            onClick={() => setIsWelcomeOpen(true)}
+            dataTestId="dashboard-open-welcome"
+          />
+        ) : null}
+
         <Scrollbar className={styles.dashboardScrollbar}>
           <div className={styles.dashboardInner}>
             <Header />
             <ProfileCard />
 
-            <section className={styles.section}>
+            <section data-tour-id="dashboard-create" className={styles.section}>
               <Text fontSize="18px" fontWeight={700} lineHeight="24px">
                 <Trans
                   t={t}
@@ -266,7 +352,7 @@ const Dashboard = (props: DashboardProps) => {
             </section>
 
             {moduleItems.length > 0 ? (
-              <section className={styles.section}>
+              <section data-tour-id="dashboard-apps" className={styles.section}>
                 <Text className={styles.sectionTitle}>{t("OAuth:Apps")}</Text>
                 <div className={styles.modulesGrid}>
                   {moduleItems.map((mod) => (
@@ -303,6 +389,15 @@ const Dashboard = (props: DashboardProps) => {
         ) : null}
 
         {promoDialog}
+
+        {showWelcome ? (
+          <WelcomeDialog
+            onTakeTour={onWelcomeTakeTour}
+            onClose={onWelcomeClose}
+          />
+        ) : null}
+
+        <DashboardTourHost />
       </div>
 
       <ChatPanelView
@@ -329,6 +424,7 @@ const DashboardConnected = inject((stores: TStore) => {
     roomsTourStore,
     formsTourStore,
     aiAgentsTourStore,
+    dashboardTourStore,
   } = stores;
 
   // The app cards an onboarding tour can be started from. An app that isn't
@@ -349,6 +445,13 @@ const DashboardConnected = inject((stores: TStore) => {
       if (appId in appTourStores)
         appTourStores[appId as keyof typeof appTourStores].requestTour();
     },
+    // The welcome flag is per-user, so the id is passed through rather than read
+    // inside the store — which has no view of who is signed in.
+    userId: userStore.user?.id,
+    isWelcomeSeen: dashboardTourStore.isWelcomeSeen,
+    hydrateWelcome: dashboardTourStore.hydrateWelcome,
+    dismissWelcome: dashboardTourStore.dismissWelcome,
+    requestDashboardTour: dashboardTourStore.requestTour,
   };
 })(observer(Dashboard));
 

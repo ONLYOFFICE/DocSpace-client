@@ -1,0 +1,14 @@
+{
+  "DashboardApps": "These are our products, each built to take a different kind of work off your hands — documents, collaboration, data collection and AI assistance. Open any of them and you will get a short tour of that section too.",
+  "DashboardAppsTitle": "Everything you can work with",
+  "DashboardCreate": "Create your first document right here — pick a type and start writing. It will be saved to {{files}}, where you can find it any time.",
+  "DashboardCreateTitle": "Create something now",
+  "DashboardOverview": "This page is always one click away — open {{overview}} in the sidebar whenever you want to come back to it.",
+  "DashboardOverviewTitle": "Coming back here",
+  "DashboardProfile": "Your profile details: who owns this portal, the plan it runs on, how much storage is in use, and the portal address itself. The links here let you change your plan or edit these settings.",
+  "DashboardProfileTitle": "Your profile details",
+  "WelcomeDashboardSubtitle": "Everything starts on this page",
+  "WelcomeDescription": "Create documents, collaborate in rooms, collect data with forms and let AI do the reading — all from one place. Take a quick tour and we will show you around.",
+  "WelcomeDashboardTitle": "Welcome to {{productName}}",
+  "WelcomeLater": "Maybe later"
+}

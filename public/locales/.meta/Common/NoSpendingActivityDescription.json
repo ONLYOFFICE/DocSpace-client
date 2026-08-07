@@ -3,7 +3,7 @@
   "content": "Usage-based services and subscription charges will appear here automatically",
   "content_en_sha1_hash": "3348abe1831acb8f166986bc0f77da5b29e89c91",
   "created_at": "2026-06-25T11:54:53.712Z",
-  "updated_at": "2026-08-01T16:25:17.903Z",
+  "updated_at": "2026-08-06T08:04:20.047Z",
   "comment": {
     "text": "Description text for an empty state in the spending breakdown section, informing users that future usage and subscription costs will be automatically listed here once they occur.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
-      "line_number": 210,
+      "line_number": 205,
       "context": "className={styles.mutedTitle}\n >\n {t(\"NoSpendingActivity\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoSpendingActivityDescription\")}\n </Text>\n </div>\n </div>\n ) : (\n <>",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
-      "line_number": 179,
+      "line_number": 193,
       "context": "const emptyView = (\n <EmptyView\n icon={isBase ? <NoSpendingIcon /> : <NoSpendingDarkIcon />}\n title={t(\"NoSpendingActivity\")}\n description={t(\"NoSpendingActivityDescription\")}\n options={null}\n />\n );\n \n const skeleton = (",
       "module": "/libs/ui-kit"
     }

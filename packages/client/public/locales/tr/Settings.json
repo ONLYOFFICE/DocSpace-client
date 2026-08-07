@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Geliştirici araçlarımızın tüm yelpazesini kullanarak {{organizationName}} {{productName}}'i entegre edin, genişletin ve otomatikleştirin — REST API ve Embed SDK'dan web kancalarına ve OAuth uygulamalarına kadar. Başlamak için aşağıdaki araçlardan birini seçin.",
   "DisableAiServices": "{{aiServices}}'i Devre Dışı Bırak",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} tüm kullanıcılar için gizlenecektir (etkileşim geçmişi korunmaya devam edecektir).",
-  "DisableAiServicesBalance": "Kalan bakiyeniz (<1>{{balance}}</1>) hesabınızda kalacak ve gelecekte {{aiServices}} özelliğini yeniden etkinleştirmeniz durumunda kullanıma hazır olacaktır.",
   "DisableAiServicesConfirm": "{{aiServices}}'i istediğiniz zaman yeniden etkinleştirebilirsiniz. Devam etmek istediğinizden emin misiniz?",
   "DisableAiServicesDescription": "{{organizationName}} AI'yı devre dışı bırakarak, aşağıdaki değişiklikler yürürlüğe girecektir:",
   "DisableAiServicesServicesDisabled": "Ücretli {{aiServices}} devre dışı bırakılacaktır.",

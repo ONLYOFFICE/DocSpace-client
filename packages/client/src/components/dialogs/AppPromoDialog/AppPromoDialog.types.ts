@@ -92,7 +92,15 @@ export type AppPromoContent = {
   IllustrationDark: SvgComponent;
   /** Primary action label (e.g. "Open Files"). */
   openLabel: string;
-  /** Secondary action label (e.g. "View on GitHub"). */
+  /**
+   * "Take a tour" label. Set only for apps that have an onboarding tour — the
+   * button is left out entirely for the ones that don't.
+   */
+  tourLabel?: string;
+  /**
+   * Accessible name / hover title for the icon-only repo action (e.g. "View on
+   * GitHub"). Not rendered as visible text.
+   */
   githubLabel: string;
   /** Public GitHub repo URL opened by the secondary action. */
   githubUrl: string;
@@ -104,8 +112,14 @@ export type AppPromoDialogProps = {
   content: AppPromoContent;
   /** Fired by the close icon / backdrop — dismiss without navigating. */
   onClose: () => void;
-  /** Fired by the primary "Open …" button — persist the seen flag and navigate. */
+  /** Fired by the primary "Open …" button — navigate to the app. */
   onOpen: () => void;
+  /**
+   * Fired by the "Take a tour" button — open the app and walk the user through
+   * it. Omitted when no tour can run (no tour for this app, or mobile), which
+   * also hides the button.
+   */
+  onTakeTour?: () => void;
 };
 
 // The promo content keyed by app, so callers just pass an `AppId`.

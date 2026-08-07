@@ -3,16 +3,17 @@
   "content": "What needs my action",
   "content_en_sha1_hash": "f0709a698bb0337ea6951799b2113889d7e5e512",
   "created_at": "2026-08-04T09:58:55.225Z",
-  "updated_at": "2026-08-04T09:58:56.406Z",
+  "updated_at": "2026-08-05T16:38:57.353Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion item used to identify shared files that require user attention.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:38:57.353Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 240,
+      "line_number": 275,
       "context": "{\n name: t(\"AiSuggestions:SharedWithMeWhatSSharedWithMe\"),\n prompt: t(\"AiSuggestions:SharedWithMeWhatSSharedWithMePrompt\"),\n },\n {\n name: t(\"AiSuggestions:SharedWithMeWhatNeedsMyAction\"),\n prompt: t(\"AiSuggestions:SharedWithMeWhatNeedsMyActionPrompt\"),\n },\n {\n name: t(\"AiSuggestions:SharedWithMeFindFilesFromAPerson\"),\n prompt: t(\"AiSuggestions:SharedWithMeFindFilesFromAPersonPrompt\"),",
       "module": "/packages/client"
     }

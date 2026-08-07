@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Ինտեգրեք, ընդլայնեք և ավտոմատացրեք {{organizationName}} {{productName}}՝ օգտագործելով մեր ամբողջական զարգացնող գործիքների հավաքածուն՝ REST API-ից և Embed SDK-ից մինչև webhooks և OAuth հավելվածներ։ Սկսելու համար ընտրեք ներքևի գործիքներից մեկը։",
   "DisableAiServices": "Անջատել {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} բոլոր օգտատերերի համար թաքնված կլինի (փոխազդակցության պատմությունը կմնա պահպանված)։",
-  "DisableAiServicesBalance": "Ձեր մնացորդային հաշվեկշիռը (<1>{{balance}}</1>) կմնա ձեր հաշվին և հասանելի կլինի օգտագործման, եթե ապագայում որոշեք նորից միացնել {{aiServices}}-ը:",
   "DisableAiServicesConfirm": "Դուք կարող եք վերականգնել {{aiServices}} ցանկացած պահի։ Հաստատե՞ք, որ ցանկանում եք շարունակել։",
   "DisableAiServicesDescription": "{{organizationName}} ԱԲ-ը անջատելու դեպքում ուժի մեջ կմտնեն հետևյալ փոփոխությունները։",
   "DisableAiServicesServicesDisabled": "Վճարովի {{aiServices}}-ը անակտիվ կդարձվի։",

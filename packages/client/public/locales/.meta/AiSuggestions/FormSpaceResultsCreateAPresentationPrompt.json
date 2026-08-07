@@ -3,16 +3,17 @@
   "content": "Create a presentation across completed submissions in the current Form Space and show the proposed result before creating it. If this information is not provided, ask me for the audience, purpose, preferred length, and visual style.",
   "content_en_sha1_hash": "694fa3553717854683da67408541d3a8ff338057",
   "created_at": "2026-08-04T09:58:55.151Z",
-  "updated_at": "2026-08-04T09:58:56.403Z",
+  "updated_at": "2026-08-05T17:43:45.401Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt for an AI feature that directs the model to generate a presentation from completed form submissions and request additional details if they are missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:43:45.401Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 192,
+      "line_number": 198,
       "context": "name: t(\"AiSuggestions:FormSpaceResultsConvertToATableOrChart\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsConvertToATableOrChartPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCreateAPresentation\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCreateAPresentationPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheet\"),\n prompt: t(",
       "module": "/packages/client"
     }

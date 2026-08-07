@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Start een AI-chat om vragen te stellen, documenten samen te vatten, teksten te genereren en hulp bij uw werk te krijgen — meteen in {{sectionName}}.",
+  "TourAiAssistantTitle": "Uw AI-assistent",
+  "TourBringFiles": "Upload bestanden vanaf uw computer of sleep ze gewoon naar een willekeurige plek in dit venster.",
+  "TourBringFilesTitle": "Breng uw bestanden mee",
+  "TourCreateAnything": "Maak documenten, spreadsheets, presentaties en PDF-formulieren rechtstreeks in uw browser — er is geen software nodig.",
+  "TourCreateAnythingTitle": "Maak wat u maar wilt",
+  "TourFindFast": "Zoek op naam, filter op type of auteur, sorteer de lijst en wissel tussen lijst- en tegelweergave.",
+  "TourFindFastTitle": "Vind alles razendsnel",
+  "TourPlacesFavorites": "{{sectionName}} — bestanden met een ster.",
+  "TourPlacesRecent": "{{sectionName}} — waaraan u de laatste tijd hebt gewerkt.",
+  "TourPlacesShared": "{{sectionName}} — bestanden die anderen met u hebben gedeeld.",
+  "TourPlacesTitle": "Alles op zijn plek",
+  "TourPlacesTrash": "{{sectionName}} — verwijderde bestanden die u nog kunt herstellen.",
+  "TourShare": "Beweeg de muis over een bestand om de snelle acties te zien. Klik op het deelpictogram om contacten van uw portaal toegang te geven met verschillende rechtenniveaus — of maak een externe link voor iedereen daarbuiten.",
+  "TourSharedAccess": "{{sharedBy}} geeft aan van wie het bestand komt, {{accessLevel}} geeft aan wat u ermee mag doen — bekijken, becommentariëren of bewerken. Alleen de eigenaar kan dat wijzigen.",
+  "TourSharedAccessTitle": "Wie het heeft gedeeld en wat u kunt doen",
+  "TourSharedEmpty": "Er is nog niets met u gedeeld. Bestanden en mappen verschijnen hier zodra iemand u er toegang toe geeft.",
+  "TourSharedEmptyTitle": "Uw lijst is voorlopig leeg",
+  "TourSharedList": "Alles waartoe anderen u toegang geven, komt terecht in {{sectionName}}. Open een bestand om er in uw browser aan te werken — het origineel blijft waar het is, zodat iedereen altijd dezelfde versie ziet.",
+  "TourSharedListTitle": "Met u gedeeld",
+  "TourShareTitle": "Deel en werk samen"
+}

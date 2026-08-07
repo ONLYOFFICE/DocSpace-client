@@ -3,16 +3,17 @@
   "content": "Summarize my favorite rooms, including their purpose, participants, key content, and current status. If this information is not provided, ask me for the desired scope, focus, and summary length.",
   "content_en_sha1_hash": "0f8aa4d17753260a4103ae027ffe2da98bc1bc5a",
   "created_at": "2026-08-04T09:58:55.203Z",
-  "updated_at": "2026-08-04T09:58:56.423Z",
+  "updated_at": "2026-08-05T16:59:35.221Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Detailed instruction text that serves as the full prompt when selecting the \"Summarize my favorite rooms\" AI suggestion.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:59:35.221Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 449,
+      "line_number": 484,
       "context": "// +\n roomsFavorites: [\n {\n name: t(\"AiSuggestions:RoomsFavoritesSummarizeFavoriteRooms\"),\n prompt: t(\"AiSuggestions:RoomsFavoritesSummarizeFavoriteRoomsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsFavoritesFindAFavoriteRoom\"),\n prompt: t(\"AiSuggestions:RoomsFavoritesFindAFavoriteRoomPrompt\"),\n },",
       "module": "/packages/client"
     }

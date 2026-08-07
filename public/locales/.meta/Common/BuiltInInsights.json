@@ -3,7 +3,7 @@
   "content": "Built-in insights",
   "content_en_sha1_hash": "51a8ffbef4fce6c0e5a3af08fbdb07b73a89c533",
   "created_at": "2026-06-25T19:30:57.513Z",
-  "updated_at": "2026-07-07T08:59:21.704Z",
+  "updated_at": "2026-08-06T14:20:57.530Z",
   "comment": {
     "text": "Title of a feature item within the AppPromoDialog, serving as a heading for integrated analytical capabilities.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 188,
+      "line_number": 192,
       "context": "title: t(\"Common:CentralizedData\"),\n description: t(\"Common:CentralizedDataDescription\"),\n },\n {\n Icon: BuiltInIcon,\n title: t(\"Common:BuiltInInsights\"),\n description: t(\"Common:BuiltInInsightsDescription\"),\n },\n ],\n IllustrationLight: FormsPreviewLight,\n IllustrationDark: FormsPreviewDark,",
       "module": "/packages/client"
     }

@@ -46,6 +46,8 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 
 import { getDocsConnectTrialState } from "../../developer-tools/DocsConnect/utils";
 
+import PayerOnlyWarning from "./PayerOnlyWarning";
+
 import styles from "./BillingHeader.module.scss";
 
 const getTitle = (pathname: string, t: (key: string) => string): string => {
@@ -77,9 +79,14 @@ const isSubPage = (pathname: string): boolean => {
 
 interface BillingHeaderProps {
   docsConnectInfo?: TDocsConnectInfo | null;
+  /** Desktop only: on narrower screens the page shows it above the content. */
+  withPayerOnlyWarning?: boolean;
 }
 
-const BillingHeader = ({ docsConnectInfo }: BillingHeaderProps) => {
+const BillingHeader = ({
+  docsConnectInfo,
+  withPayerOnlyWarning,
+}: BillingHeaderProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation(["Common", "DocsConnect"]);
@@ -117,6 +124,11 @@ const BillingHeader = ({ docsConnectInfo }: BillingHeaderProps) => {
       <Heading type="content" truncate>
         {title}
       </Heading>
+      {withPayerOnlyWarning ? (
+        <div className={styles.payerWarning}>
+          <PayerOnlyWarning />
+        </div>
+      ) : null}
       {isDocsConnectPage && docsConnectEndDate && !docsConnectPaid ? (
         <span
           className={classNames(styles.docsConnectTrialBadge, {

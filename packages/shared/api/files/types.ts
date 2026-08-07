@@ -181,6 +181,7 @@ export type TFolderSecurity = {
   Embed: boolean;
   ChangeOwner: boolean;
   IndexExport: boolean;
+  HistoryExport: boolean;
   UpdateXlsx?: boolean;
   AnalyzeResponses?: boolean;
 };
@@ -583,6 +584,22 @@ export type TDefaultTemplate = {
   fileTitle?: string;
   fileSize?: number;
   viewUrl?: string;
+};
+
+export type TFolderLogReportDateRange = {
+  from: string;
+  to: string;
+};
+
+export type TDocumentBuilderTask = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: DistributedTaskStatus;
+  resultFileId: number | string;
+  resultFileName: string;
+  resultFileUrl: string;
 };
 
 export type UpdateXlsxResponse = {

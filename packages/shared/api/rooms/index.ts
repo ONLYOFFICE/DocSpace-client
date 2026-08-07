@@ -163,7 +163,13 @@ export function updateFileMemberAccess(id, data) {
 export function getHistory(
   selectionType: "file" | "folder",
   id: number | string,
-  filter: { page: number; startIndex: number; count: number },
+  filter: {
+    page: number;
+    startIndex: number;
+    count: number;
+    fromDate?: string;
+    toDate?: string;
+  },
   signal: Nullable<AbortSignal> = null,
   requestToken?: string,
 ) {

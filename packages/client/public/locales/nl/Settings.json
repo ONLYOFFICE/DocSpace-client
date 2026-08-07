@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Integreer, breid en automatiseer {{organizationName}} {{productName}} met onze volledige suite ontwikkelaarstools — van REST API en Embed SDK tot webhooks en OAuth-apps. Kies hieronder een tool om te beginnen.",
   "DisableAiServices": "Schakel {{aiServices}} uit",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} zal voor alle gebruikers verborgen zijn (de interactiegeschiedenis blijft behouden).",
-  "DisableAiServicesBalance": "Uw resterende saldo (<1>{{balance}}</1>) blijft op uw rekening staan en staat beschikbaar voor gebruik mocht u {{aiServices}} in de toekomst opnieuw inschakelen.",
   "DisableAiServicesConfirm": "U kunt {{aiServices}} op elk moment opnieuw inschakelen. Weet u zeker dat u wilt doorgaan?",
   "DisableAiServicesDescription": "Door het uitschakelen van {{organizationName}} AI treden de volgende wijzigingen in werking:",
   "DisableAiServicesServicesDisabled": "De betaalde {{aiServices}} worden gedeactiveerd.",

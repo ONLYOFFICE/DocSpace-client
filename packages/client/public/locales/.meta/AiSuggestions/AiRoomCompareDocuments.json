@@ -3,16 +3,17 @@
   "content": "Compare documents",
   "content_en_sha1_hash": "b96ca9634f57ecd2e32b047690f73535c4b661f9",
   "created_at": "2026-08-04T09:58:55.090Z",
-  "updated_at": "2026-08-04T09:58:56.427Z",
+  "updated_at": "2026-08-05T18:34:09.001Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion item used to initiate the document comparison feature.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:34:09.001Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 557,
+      "line_number": 592,
       "context": "{\n name: t(\"AiSuggestions:AiRoomFindTasksAndDeadlines\"),\n prompt: t(\"AiSuggestions:AiRoomFindTasksAndDeadlinesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomCompareDocuments\"),\n prompt: t(\"AiSuggestions:AiRoomCompareDocumentsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomFindContradictions\"),\n prompt: t(\"AiSuggestions:AiRoomFindContradictionsPrompt\"),",
       "module": "/packages/client"
     }

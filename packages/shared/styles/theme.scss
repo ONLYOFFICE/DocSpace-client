@@ -2027,6 +2027,10 @@
   --info-panel-name-color: #{$gray-dark};
   --info-panel-border-color: #{$gray-light-mid};
   --info-panel-background-color: #{$white};
+  --info-panel-toolbar-background-color: #{$gray-light};
+  --info-panel-toolbar-button-hover-color: #{$gray-light-mid};
+  --info-panel-toolbar-button-selected-color: #{$light-gray-selected};
+  --info-panel-toolbar-icon-color: #{$light-gray-dark};
   --info-panel-text-color: #{$black};
   --info-panel-details-border-color: #{$gray-light-mid};
   --info-panel-group-text-color: #{$gray};
@@ -2057,6 +2061,10 @@
   --info-panel-name-color: #{$gray};
   --info-panel-border-color: #{$gray-dark-strong};
   --info-panel-background-color: #{$black};
+  --info-panel-toolbar-background-color: #{$dark-gray-light};
+  --info-panel-toolbar-button-hover-color: #{$light-dark-gray-hover};
+  --info-panel-toolbar-button-selected-color: #{$gray-dark-strong};
+  --info-panel-toolbar-icon-color: #{$dark-gray-dark};
   --info-panel-text-color: #{$white};
   --info-panel-details-border-color: #{$gray-dark-strong};
   --info-panel-group-text-color: #{$gray-dark};

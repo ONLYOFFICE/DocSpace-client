@@ -3,16 +3,17 @@
   "content": "Show rooms with external access",
   "content_en_sha1_hash": "20f37814e5a005d40131eb70a5a2adc459166a7c",
   "created_at": "2026-08-04T09:58:55.211Z",
-  "updated_at": "2026-08-04T09:58:56.421Z",
+  "updated_at": "2026-08-05T16:51:50.428Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion item used to filter or identify rooms with external access enabled.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:51:50.428Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 412,
+      "line_number": 447,
       "context": "{\n name: t(\"AiSuggestions:RoomsShowRoomsIManage\"),\n prompt: t(\"AiSuggestions:RoomsShowRoomsIManagePrompt\"),\n },\n {\n name: t(\"AiSuggestions:RoomsShowRoomsWithExternalAccess\"),\n prompt: t(\"AiSuggestions:RoomsShowRoomsWithExternalAccessPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsSuggestRoomsToArchive\"),",
       "module": "/packages/client"
     }

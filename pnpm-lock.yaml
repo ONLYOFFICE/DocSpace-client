@@ -121,8 +121,8 @@ importers:
         specifier: 1.15.1
         version: 1.15.1
       '@onlyoffice/ai-chat':
-        specifier: file:onlyoffice-ai-chat-0.5.21-docspace.1.tgz
-        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.21-docspace.1.tgz(10617ac1f54ed00dcd6e86015df92a47)
+        specifier: file:onlyoffice-ai-chat-0.5.42.tgz
+        version: file:libs/ui-kit/onlyoffice-ai-chat-0.5.42.tgz(10617ac1f54ed00dcd6e86015df92a47)
       '@onlyoffice/docspace-api-sdk':
         specifier: file:onlyoffice-docspace-api-sdk-3.7.0.tgz
         version: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -556,6 +556,9 @@ importers:
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react-joyride:
+        specifier: ^3.2.0
+        version: 3.2.0(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.2.10)(react@19.2.8)(supports-color@8.1.1)
@@ -650,6 +653,9 @@ importers:
       '@types/react':
         specifier: 19.2.10
         version: 19.2.10
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.10)
       '@types/react-virtualized':
         specifier: 9.21.30
         version: 9.21.30
@@ -3388,9 +3394,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.21-docspace.1.tgz':
-    resolution: {integrity: sha512-vJpY+DKDvkd99cQ901O+bywu+hKD+PLFwwnYk/kRWbXTouYKCXGSozPhPOiNCZftyZZJhQxCFqRz1Dp7BPItJw==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.21-docspace.1.tgz}
-    version: 0.5.21-docspace.1
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.42.tgz':
+    resolution: {integrity: sha512-v04FNsTC4PBKEmUU1DJq2w9rKf/scK6NUzlN1mtT9TqEoA2KIgJYmkBxlPUDc1jO19BBXZDSpJO7aBCG+5gFAw==, tarball: file:libs/ui-kit/onlyoffice-ai-chat-0.5.42.tgz}
+    version: 0.5.42
     peerDependencies:
       '@anthropic-ai/sdk': ^0.60.0
       '@assistant-ui/react': ^0.11.0
@@ -6110,6 +6116,7 @@ packages:
 
   crypto-js@4.2.0:
     resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
+    deprecated: Active development of CryptoJS has been discontinued. This library is no longer maintained.
 
   crypto-random-string@4.0.0:
     resolution: {integrity: sha512-x8dy3RnvYdlUcPOjkEHqozhiwzKNSq7GcPuXFbnyMOCHxX8V3OgIg/pYuabl2sbUPfIJaeAQB7PMOK8DFIdoRA==}
@@ -12226,7 +12233,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@22.7.8':
     optional: true
 
-  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.21-docspace.1.tgz(10617ac1f54ed00dcd6e86015df92a47)':
+  '@onlyoffice/ai-chat@file:libs/ui-kit/onlyoffice-ai-chat-0.5.42.tgz(10617ac1f54ed00dcd6e86015df92a47)':
     dependencies:
       '@assistant-ui/react': 0.11.58(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
       assistant-stream: 0.2.47

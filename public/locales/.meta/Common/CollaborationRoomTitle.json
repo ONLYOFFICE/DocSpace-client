@@ -3,7 +3,7 @@
   "content": "Collaboration room",
   "content_en_sha1_hash": "020e5e753e7a2509b4e791bcc1a8abc08bb1e51d",
   "created_at": "2025-05-19T21:30:43.513Z",
-  "updated_at": "2026-07-28T07:30:59.872Z",
+  "updated_at": "2026-08-06T14:20:57.519Z",
   "comment": {
     "text": "This is a label for a type of room in DocSpace, specifically an \"Editing Room\" where multiple users can collaborate on documents. It appears in room selection menus and settings.",
     "is_auto": true,
@@ -18,9 +18,21 @@
       "module": "/libs/ui-kit"
     },
     {
+      "file_path": "/packages/client/src/components/RoomsTour/index.tsx",
+      "line_number": 196,
+      "context": "// banner's tiles are built from — so the demo adds no strings of its own\n // to translate — and listed in the order those tiles sit in.\n rooms: [\n {\n roomType: RoomsType.EditingRoom,\n title: t(\"Common:CollaborationRoomTitle\"),\n },\n {\n roomType: RoomsType.VirtualDataRoom,\n title: t(\"Common:VirtualDataRoom\"),\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 150,
+      "context": "t(\"RoomsTour:RoomsTypesTitle\"),\n // Each type is named by the label its own tile carries (the same\n // Common keys `useQuickActions` builds the banner from), so the\n // tooltip and the tiles under the spotlight never drift apart.\n t(\"RoomsTour:RoomsTypes\", {\n collaboration: t(\"Common:CollaborationRoomTitle\"),\n vdr: t(\"Common:VirtualDataRoom\"),\n publicRoom: t(\"Common:PublicRoom\"),\n custom: t(\"Common:CustomRoomTitle\"),\n }),\n callbacks,",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 247,
-      "context": "dispatchCreateRoom(currentFolderId, RoomsType.VirtualDataRoom),\n },\n {\n id: \"quick-collaboration-room\",\n icon: <QuickCollaborationRoomIcon />,\n label: t(\"Common:CollaborationRoomTitle\"),\n onClick: () =>\n dispatchCreateRoom(currentFolderId, RoomsType.EditingRoom),\n },\n {\n id: \"quick-public-room\",",
+      "line_number": 254,
+      "context": "},\n {\n id: \"quick-collaboration-room\",\n dataTestId: \"quick-collaboration-room\",\n icon: <QuickCollaborationRoomIcon />,\n label: t(\"Common:CollaborationRoomTitle\"),\n onClick: () =>\n dispatchCreateRoom(currentFolderId, RoomsType.EditingRoom),\n },\n {\n id: \"quick-public-room\",",
       "module": "/packages/client"
     },
     {

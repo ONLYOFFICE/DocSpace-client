@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Rozpocznij czat z AI, aby zadawać pytania, streszczać dokumenty, generować teksty i uzyskiwać pomoc w pracy — bezpośrednio w sekcji {{sectionName}}.",
+  "TourAiAssistantTitle": "Twój asystent AI",
+  "TourBringFiles": "Wgraj pliki z komputera albo po prostu przeciągnij i upuść je w dowolnym miejscu tego okna.",
+  "TourBringFilesTitle": "Przynieś swoje pliki",
+  "TourCreateAnything": "Twórz dokumenty, arkusze kalkulacyjne, prezentacje i formularze PDF prosto w przeglądarce — bez żadnego oprogramowania.",
+  "TourCreateAnythingTitle": "Twórz cokolwiek",
+  "TourFindFast": "Wyszukuj po nazwie, filtruj po typie lub autorze, sortuj listę i przełączaj się między widokiem listy a kafelków.",
+  "TourFindFastTitle": "Znajdź wszystko błyskawicznie",
+  "TourPlacesFavorites": "{{sectionName}} — pliki oznaczone gwiazdką.",
+  "TourPlacesRecent": "{{sectionName}} — nad czym pracowałeś ostatnio.",
+  "TourPlacesShared": "{{sectionName}} — pliki, które udostępnili ci inni.",
+  "TourPlacesTitle": "Wszystko na swoim miejscu",
+  "TourPlacesTrash": "{{sectionName}} — usunięte pliki, które wciąż możesz przywrócić.",
+  "TourShare": "Najedź na dowolny plik, aby zobaczyć szybkie akcje. Kliknij ikonę udostępniania, aby nadać dostęp kontaktom z twojego portalu na różnych poziomach uprawnień — albo utwórz link zewnętrzny dla wszystkich pozostałych.",
+  "TourSharedAccess": "{{sharedBy}} mówi, od kogo pochodzi plik, {{accessLevel}} mówi, co możesz z nim zrobić — wyświetlać, komentować lub edytować. Zmienić to może tylko właściciel.",
+  "TourSharedAccessTitle": "Kto udostępnił i co możesz zrobić",
+  "TourSharedEmpty": "Nic jeszcze nie zostało ci udostępnione. Pliki i foldery pojawią się tutaj, gdy tylko ktoś nada ci do nich dostęp.",
+  "TourSharedEmptyTitle": "Twoja lista jest na razie pusta",
+  "TourSharedList": "Wszystko, do czego inni dają ci dostęp, trafia do sekcji {{sectionName}}. Otwórz plik, aby pracować nad nim w przeglądarce — oryginał zostaje na swoim miejscu, więc wszyscy zawsze widzą tę samą wersję.",
+  "TourSharedListTitle": "Udostępnione tobie",
+  "TourShareTitle": "Udostępniaj i współpracuj"
+}

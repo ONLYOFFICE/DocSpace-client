@@ -3,16 +3,17 @@
   "content": "Create a form with AI",
   "content_en_sha1_hash": "bb0141e01da3415672f6165f410e8f3b271931ca",
   "created_at": "2026-08-04T09:58:55.146Z",
-  "updated_at": "2026-08-04T09:58:56.464Z",
+  "updated_at": "2026-08-05T17:47:49.821Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label within the AI suggestions menu that initiates the automated form generation process.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:47:49.821Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 776,
+      "line_number": 811,
       "context": "{\n name: t(\"AiSuggestions:FormSpaceSummarizeSpace\"),\n prompt: t(\"AiSuggestions:FormSpaceSummarizeSpacePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceCreateAFormWithAI\"),\n prompt: t(\"AiSuggestions:FormSpaceCreateAFormWithAIPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceConvertAFileIntoAForm\"),",
       "module": "/packages/client"
     }

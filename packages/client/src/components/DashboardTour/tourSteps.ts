@@ -131,7 +131,7 @@ export function getTourSteps(
       CREATE_SECTION_SELECTOR,
       t("DashboardTour:DashboardCreateTitle"),
       t("DashboardTour:DashboardCreate", {
-        files: t("Common:DashboardFilesTitle"),
+        files: t("Common:Files"),
       }),
       callbacks,
       LOG_LABEL,

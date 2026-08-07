@@ -260,7 +260,7 @@ const Dashboard = (props: DashboardProps) => {
     {
       id: "ai-files",
       icon: <CatalogFolderIcon />,
-      title: t("Common:DashboardFilesTitle"),
+      title: t("Common:Files"),
       description: t("Common:DashboardFilesDescription"),
       installed: true,
       href: isGuest ? "/shared-with-me/filter" : "/rooms/personal/filter",
@@ -268,7 +268,7 @@ const Dashboard = (props: DashboardProps) => {
     {
       id: "ai-rooms",
       icon: <CatalogRoomsIcon />,
-      title: t("Common:DashboardRoomsTitle"),
+      title: t("Common:Rooms"),
       description: t("Common:DashboardRoomsDescription"),
       installed: true,
       href: "/rooms/shared/filter",
@@ -276,7 +276,7 @@ const Dashboard = (props: DashboardProps) => {
     {
       id: "ai-forms",
       icon: <CatalogDocumentsIcon />,
-      title: t("Common:DashboardFormsTitle"),
+      title: t("Common:Forms"),
       description: t("Common:DashboardFormsDescription"),
       installed: true,
       href: "/forms/filter",
@@ -284,7 +284,7 @@ const Dashboard = (props: DashboardProps) => {
     {
       id: "ai-agents",
       icon: <AiAgentsIcon />,
-      title: t("Common:DashboardAIChatAgentsTitle"),
+      title: t("Common:AIAgents"),
       description: t("Common:DashboardAIChatAgentsDescription"),
       installed: true,
       href: "/ai-agents/filter",

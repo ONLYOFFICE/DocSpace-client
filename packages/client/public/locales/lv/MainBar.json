@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Kad limits ir sasniegts, visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus, <1>noklikšķiniet šeit</1>, lai jauninātu savu tarifu plānu.",
   "UserTariffLimitHeader": "Ir sasniegts administratoru skaita ierobežojums: {{currentValue}}/{{maxValue}}",
   "UserTariffReached": "Visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus, sazinieties ar {{productName}} administratoru, lai jauninātu tarifu plānu.",
-  "UserTariffReachedForAdmins": "Visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus, <1>noklikšķiniet šeit</1>, lai jauninātu savu tarifu plānu."
+  "UserTariffReachedForAdmins": "Visi lietotāji tiks pievienoti tikai ar lietotāja atļaujām. Lai varētu pievienot citus administratorus, <1>noklikšķiniet šeit</1>, lai jauninātu savu tarifu plānu.",
+  "WalletLowBalanceContactPayer": "Sazinieties ar maksātāju (<1>{{payerContact}}</1>), lai papildinātu maku un izvairītos no maksas pakalpojumu pārtraukumiem.",
+  "WalletLowBalanceDescription": "Papildiniet savu maku, lai izvairītos no maksas pakalpojumu pārtraukumiem. <1>Papildināt</1>",
+  "WalletLowBalanceHeader": "Jūsu kredīti tuvojas beigām: {{balance}}"
 }

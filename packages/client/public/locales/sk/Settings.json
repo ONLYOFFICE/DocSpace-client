@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Integrujte, rozširote a automatizujte {{organizationName}} {{productName}} pomocou našej kompletnej súpravy nástrojov pre vývojárov — od REST API a Embed SDK až po webhooks a OAuth aplikácie. Vyberte si nástroj nižšie, aby ste začali.",
   "DisableAiServices": "Vypnúť {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} bude skryté pre všetkých používateľov (interakčná história zostane zachovaná).",
-  "DisableAiServicesBalance": "Zostávajúce saldo (<1>{{balance}}</1>) zostane na vašom účte a bude k dispozícii na použitie, ak si rozhodnete v budúcnosti opätčne zapnúť {{aiServices}}.",
   "DisableAiServicesConfirm": "Moholate {{aiServices}} kedykoľvek reaktívizovať. Ste si istí, že chcete pokračovať?",
   "DisableAiServicesDescription": "Po vypnutí AI pre {{organizationName}} vstúpi v platnosť nasledovné zmeny:",
   "DisableAiServicesServicesDisabled": "Platené {{aiServices}} budú deaktivované.",

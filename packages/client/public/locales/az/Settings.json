@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "{{organizationName}} {{productName}} platformasını REST API və Embed SDK-dan webhooks və OAuth tətbiqlərinə qədər olan tam developer alətləri dəstimizlə inteqrasiya edin, genişləndirin və avtomatlaşdırın. Başlamaq üçün aşağıdakı alətlərdən birini seçin.",
   "DisableAiServices": "{{aiServices}} işlətməni dayandırmaq",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} bütün istifadəçilər üçün gizlədiləcək (interaksiya tarixi qorunub saxlanılacaq).",
-  "DisableAiServicesBalance": "Qalıq balansınız (<1>{{balance}}</1>) hesabınızda qalacaq və gələcəkdə {{aiServices}} yenidən aktivləşdirməyi seçsəniz, istifadə üçün mövcud olacaq.",
   "DisableAiServicesConfirm": "{{aiServices}} vasitəsini istənilən vaxt yenidən aktiv edə bilərsiniz. Davam etmək istədiyinizə əminsiniz?",
   "DisableAiServicesDescription": "{{organizationName}} AI-ni deaktiv etməklə, aşağıdakı dəyişikliklər qüvvəyə minəcək:",
   "DisableAiServicesServicesDisabled": "Ödənişli {{aiServices}} deaktivasiya ediləcək.",

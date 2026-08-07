@@ -41,7 +41,6 @@ import { observer } from "mobx-react";
 import { MemoryRouter } from "react-router";
 
 import { BillingRoot } from "@docspace/ui-kit/billing";
-import AiPaywallPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallPage";
 import AiPageLoader from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPageLoader";
 import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
 import { AI_TOOLS, AI_ENUM } from "@docspace/ui-kit/billing/constants";
@@ -55,44 +54,29 @@ import AiBillingDashboard from "./AiBillingDashboard";
 
 const PAYMENT_CALLBACK_PATH = "/billing/payment-complete";
 
-type RenderTarget = "loading" | "paywall" | "dashboard";
-
 const AiBillingContent = observer(
   ({ integrationUrl }: { integrationUrl?: string }) => {
     const { t } = useTranslation();
     const servicesStore = useServicesStore();
 
-    const [renderTarget, setRenderTarget] =
-      React.useState<RenderTarget>("loading");
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
       let cancelled = false;
 
       (async () => {
         try {
-          const hadTopUp = await servicesStore.aiPaywallInit(t);
-
-          if (cancelled) return;
-
-          if (hadTopUp) {
-            await servicesStore.initServiceData(
-              t,
-              AI_TOOLS,
-              AI_ENUM,
-              integrationUrl,
-            );
-
-            if (cancelled) return;
-            setRenderTarget("dashboard");
-          } else {
-            setRenderTarget("paywall");
-          }
+          await servicesStore.initServiceData(
+            t,
+            AI_TOOLS,
+            AI_ENUM,
+            integrationUrl,
+          );
         } catch (e) {
           console.error("[ai-billing-content] bootstrap failed", e);
-          if (!cancelled) {
-            toastr.error(t("Common:UnexpectedError"));
-            setRenderTarget("paywall");
-          }
+          if (!cancelled) toastr.error(t("Common:UnexpectedError"));
+        } finally {
+          if (!cancelled) setIsLoading(false);
         }
       })();
 
@@ -104,24 +88,11 @@ const AiBillingContent = observer(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const onPaywallCompleted = React.useCallback(() => {
-      setRenderTarget("dashboard");
-    }, []);
-
-    if (renderTarget === "loading") {
+    if (isLoading) {
       return <AiPageLoader />;
     }
 
-    if (renderTarget === "dashboard") {
-      return <AiBillingDashboard integrationUrl={integrationUrl} />;
-    }
-
-    return (
-      <AiPaywallPage
-        integrationUrl={integrationUrl}
-        onCompleted={onPaywallCompleted}
-      />
-    );
+    return <AiBillingDashboard integrationUrl={integrationUrl} />;
   },
 );
 

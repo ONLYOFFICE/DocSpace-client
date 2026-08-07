@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Integrējiet, paplašiniet un automatizējiet {{organizationName}} {{productName}} ar mūsu pilnu sēriju izstrādātāja rīku — no REST API un Embed SDK līdz webhooks un OAuth lietotnēm. Izvēlieties rīku zemāk, lai sāktu.",
   "DisableAiServices": "Atslēgt {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} tiks paslēpts visiem lietotājiem (interakciju vēsture tiks saglabāta).",
-  "DisableAiServicesBalance": "Jūsu paliktais saldosums (<1>{{balance}}</1>) paliks jūsu kontā un būs pieejams lietošanai, ja nākotē izvēlēsiet atjaunot {{aiServices}}.",
   "DisableAiServicesConfirm": "Jūs varat atjaunot {{aiServices}} jebkurā laikā. Vai esat droši, ka vēlaties turpināt?",
   "DisableAiServicesDescription": "Izslēdzot {{organizationName}} MI, tiks veikti šādi grozījumi:",
   "DisableAiServicesServicesDisabled": "Maksas {{aiServices}} tiks deaktivētas.",

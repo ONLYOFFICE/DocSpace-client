@@ -51,9 +51,6 @@ const DisableAiServicesDialogComponent = ({
   onContinue,
   isLoading,
   isAiToolsServiceOn = false,
-  aiServiceBalance = 0,
-  aiServiceCodeCurrency = "USD",
-  formatAiServiceCurrency = (amount) => `${amount}`,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -98,33 +95,12 @@ const DisableAiServicesDialogComponent = ({
           <ul className={styles.effectsList}>
             {effects.map((text) => (
               <li key={text} className={styles.effectItem}>
-                <span className={styles.effectBullet}>
-                  •
-                </span>
+                <span className={styles.effectBullet}>•</span>
                 {text}
               </li>
             ))}
           </ul>
         </Text>
-        {isAiToolsServiceOn && (
-          <Text fontSize="13px" fontWeight={400} className={styles.balance}>
-            <Trans
-              t={t}
-              i18nKey="DisableAiServicesBalance"
-              values={{
-                balance: formatAiServiceCurrency(
-                  aiServiceBalance,
-                  3,
-                  aiServiceCodeCurrency,
-                ),
-                aiServices: t("Common:AIServices"),
-              }}
-              components={{
-                1: <strong key="balance-strong" />,
-              }}
-            />
-          </Text>
-        )}
         <Text
           fontSize="13px"
           fontWeight={isAiToolsServiceOn ? 700 : 400}
@@ -164,22 +140,15 @@ DisableAiServicesDialogComponent.propTypes = {
   onContinue: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   isAiToolsServiceOn: PropTypes.bool,
-  aiServiceBalance: PropTypes.number,
-  aiServiceCodeCurrency: PropTypes.string,
-  formatAiServiceCurrency: PropTypes.func,
 };
 
-const DisableAiServicesDialog = inject(({ servicesStore, paymentStore }) => {
-  const { aiServiceBalance, aiServiceCodeCurrency, formatAiServiceCurrency } =
-    servicesStore;
+const DisableAiServicesDialog = inject(({ paymentStore }) => {
   const { isAiToolsServiceOn } = paymentStore;
 
   return {
     isAiToolsServiceOn,
-    aiServiceBalance,
-    aiServiceCodeCurrency,
-    formatAiServiceCurrency,
   };
 })(observer(DisableAiServicesDialogComponent));
 
 export default DisableAiServicesDialog;
+

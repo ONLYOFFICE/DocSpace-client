@@ -2305,6 +2305,7 @@
   "WebSearchPriceNote": "{{price}} / リクエスト、{{provider}}",
   "Website": "ウェブサイト",
   "WelcomeAiChatDescription": "アクションを選択するか、質問してください",
+  "WelcomeAiChatTitle": "ドキュメントのためのAIアシスタント",
   "WelcomeFeature1": "テンプレートまたはゼロからPDFフォームを作成",
   "WelcomeFeature1Title": "スマートフォームの作成",
   "WelcomeFeature2": "進捗と提出状況を即座に監視できます",

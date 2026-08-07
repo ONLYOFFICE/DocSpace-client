@@ -2305,6 +2305,7 @@
   "WebSearchPriceNote": "{{price}} / 요청, {{provider}}",
   "Website": "웹사이트",
   "WelcomeAiChatDescription": "작업을 선택하거나 질문하세요",
+  "WelcomeAiChatTitle": "문서를 위한 AI 어시스턴트",
   "WelcomeFeature1": "템플릿 또는 처음부터 PDF 양식 만들기",
   "WelcomeFeature1Title": "스마트 양식 생성",
   "WelcomeFeature2": "진행 상황과 제출 현황을 실시간으로 모니터링하세요",

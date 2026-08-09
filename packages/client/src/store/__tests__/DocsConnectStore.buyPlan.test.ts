@@ -78,6 +78,7 @@ import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTar
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import DocsConnectStore from "../DocsConnectStore";
+import type DocumentBuilderReportStore from "../DocumentBuilderReportStore";
 
 const PRICE_PER_USER = 2;
 const DEV_PACK_PRICE = 3;
@@ -140,6 +141,7 @@ const createStore = (info: TDocsConnectInfo) => {
     {
       fetchPortalQuota: vi.fn().mockResolvedValue(null),
     } as unknown as CurrentQuotasStore,
+    {} as DocumentBuilderReportStore,
   );
 
   store.info = info;

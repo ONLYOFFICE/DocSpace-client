@@ -34,8 +34,10 @@
  */
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { TLicenseQuota } from "../../../../../api/portal/types";
 import { createLicenseQuotaReport } from "../../../../../api/management";
+import { openUrlWithFallbackToast } from "../../../../../utils/openUrlWithFallbackToast";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 type TUserStatisticsDialogProps = {
@@ -47,6 +49,7 @@ export const useUserStatisticsDialog = ({
   licenseQuota,
   openOnNewPage,
 }: TUserStatisticsDialogProps) => {
+  const { t } = useTranslation("Common");
   const [visible, setVisible] = useState(false);
 
   const open = () => setVisible(true);
@@ -55,7 +58,17 @@ export const useUserStatisticsDialog = ({
   const downloadAndOpenReport = async () => {
     try {
       const url = await createLicenseQuotaReport();
-      window.open(url, openOnNewPage ? "_blank" : "_self");
+      openUrlWithFallbackToast({
+        url,
+        openOnNewPage: openOnNewPage ?? false,
+        t,
+        texts: {
+          // the endpoint answers with a URL only, so the report is named after
+          // the dialog it was requested from
+          fileName: t("Common:EditUserStatistics"),
+          sectionName: t("Common:Files"),
+        },
+      });
     } catch (error) {
       toastr.error(error!);
     }

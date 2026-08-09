@@ -498,6 +498,48 @@ test.describe("Rooms — info panel history", () => {
       expect(handle.current?.getStartRequestCount()).toBe(1);
     });
 
+    test("should offer an open link when the browser blocks the popup", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      const handle = reportHandle();
+
+      mockRequest.use(
+        ...folderHistoryReportHandlers(TEST_PORT, ROOM_ID, {
+          pollsBeforeComplete: 0,
+          resultFileUrl: REPORT_URL,
+          handle,
+        }),
+      );
+
+      await page.addInitScript(() => {
+        window.open = () => null;
+      });
+
+      await openHistoryPanel(page, baseUrl);
+
+      await exportHistory(page);
+
+      const toast = page.getByTestId("toast-content").first();
+
+      await expect(toast).toBeVisible();
+      await expect(toast).toContainText("file exported to Files");
+
+      const openLink = toast.getByRole("link", { name: "History report.xlsx" });
+      await expect(openLink).toHaveAttribute("target", "_blank");
+
+      const popupPromise = page.waitForEvent("popup");
+
+      await openLink.click();
+
+      const reportPopup = await popupPromise;
+
+      expect(reportPopup.url()).toContain("report=42");
+
+      await reportPopup.close();
+    });
+
     test("should poll the task status until the report is ready", async ({
       page,
       baseUrl,

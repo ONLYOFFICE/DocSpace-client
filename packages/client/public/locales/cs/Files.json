@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Index exportní místnosti",
   "ExportRoomIndexAlreadyInProgressError": "Export indexu místnosti již probíhá. Se spuštěním nového exportu počkejte, dokud nebude aktuální export dokončen.",
   "FileDownloadingIsRestricted": "Stahování souborů je v této místnosti omezeno.",
-  "FileExportDestination": "Soubor <1>{{fileName}}</1> byl exportován do {{sectionName}}",
   "FileRenamed": "Dokument '{{oldTitle}}' je přejmenován na '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Po přesunutí souborů do {{sectionName}}.",
   "FinalizeVersion": "Dokončit verzi",

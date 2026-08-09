@@ -51,7 +51,7 @@ export const showSuccessExportRoomIndexToast = (
     <Trans
       t={t as TFunction}
       i18nKey="FileExportDestination"
-      ns="Files"
+      ns="Common"
       values={{ fileName, sectionName: t("Common:Files") }}
       components={{
         1: (

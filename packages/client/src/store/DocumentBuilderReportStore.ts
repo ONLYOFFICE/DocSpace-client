@@ -36,6 +36,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { openUrlWithFallbackToast } from "@docspace/shared/utils/openUrlWithFallbackToast";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { pollUntil } from "@docspace/ui-kit/billing/utils/stripe-flow";
 import type { TDocumentBuilderTask } from "@docspace/shared/api/files/types";
@@ -49,6 +50,7 @@ export const ReportType = {
   RoomHistory: "roomHistory",
   LoginHistory: "loginHistory",
   AuditTrail: "auditTrail",
+  DocsConnect: "docsConnect",
 } as const;
 
 export type TReportType = (typeof ReportType)[keyof typeof ReportType];
@@ -135,7 +137,7 @@ class DocumentBuilderReportStore {
         return;
       }
 
-      this.finishReport(type, task.resultFileUrl);
+      this.finishReport(type, task);
     } catch (error) {
       toastr.error(error as TData);
     } finally {
@@ -148,24 +150,25 @@ class DocumentBuilderReportStore {
     }
   };
 
-  private finishReport = (type: TReportType, resultFileUrl?: string) => {
-    if (!resultFileUrl) {
+  private finishReport = (type: TReportType, task: TDocumentBuilderTask) => {
+    if (!task.resultFileUrl) {
       toastr.error(i18n.t("Common:SomethingWentWrong"));
       return;
     }
 
-    toastr.success(getSaveLocationText());
-
-    // The toast is all the user gets once they have left the page the report
-    // was started from — opening the file would pull them out of wherever they
-    // navigated to.
-    if (this.abandonedReports.has(type)) return;
-
-    const { openOnNewPage } = this.filesSettingsStore;
-    const url = combineUrl(window.ClientConfig?.proxy?.url, resultFileUrl);
-
-    // hack for ios
-    setTimeout(() => window.open(url, openOnNewPage ? "_blank" : "_self"), 100);
+    openUrlWithFallbackToast({
+      url: combineUrl(window.ClientConfig?.proxy?.url, task.resultFileUrl),
+      openOnNewPage: this.filesSettingsStore.openOnNewPage,
+      // Auto-opening a report whose page was left would pull the user out of
+      // wherever they navigated to — the fallback toast leaves it up to them.
+      skipAutoOpen: this.abandonedReports.has(type),
+      t: i18n.t,
+      texts: {
+        success: getSaveLocationText(),
+        fileName: task.resultFileName,
+        sectionName: i18n.t("Common:Files"),
+      },
+    });
   };
 }
 

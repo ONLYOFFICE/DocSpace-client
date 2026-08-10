@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "ປິດຕົວກອງແບບກຳນົດເອງແລ້ວ.",
   "FileCustomFilterEnabled": "ເປີດໃຊ້ຕົວກອງແບບກຳນົດເອງແລ້ວ.",
   "FileDeletedCount": "ເອກະສານຖືກລົບອອກແລ້ວ ({{count}}).",
+  "FileExportDestination": "<1>{{fileName}}</1> ໄຟລ໌ສົ່ງອອກສູ່ {{sectionName}}",
   "FileExtension": "ນາມສະກຸນໄຟລ໌",
   "FileFormatNotAllowed": "ໄຟລ໌ນີ້ບໍ່ສາມາດອັບໂຫຼດໄດ້ ເນື່ອງຈາກຮູບແບບຂອງມັນບໍ່ໄດ້ຮອງຮັບ.",
   "FileInfo": "ຂໍ້ມູນໄຟລ໌",

@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "අභිරුචි පෙරහන අබල කර ඇත.",
   "FileCustomFilterEnabled": "අභිරුචි පෙරහන සක්‍රීය කර ඇත.",
   "FileDeletedCount": "ගොනු ඉවත් කරණ ලදි ({{count}}).",
+  "FileExportDestination": "<1>{{fileName}}</1> ගොනුව {{sectionName}} වෙත අපනයනය කෙරිණි",
   "FileExtension": "ගොනු දිගුව",
   "FileFormatNotAllowed": "මෙම ගොනුව උඩුගත කළ නොහැක, මන්ද එහි ආකෘතිය අනුමත නොවන බැවිනි.",
   "FileInfo": "ගොනු තොරතුරු",

@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Filtri i personalizuar është çaktivizuar.",
   "FileCustomFilterEnabled": "Filtri i personalizuar është aktivizuar.",
   "FileDeletedCount": "Skedarët u hoqën ({{count}}).",
+  "FileExportDestination": "Skedari <1>{{fileName}}</1> u eksportua në {{sectionName}}",
   "FileExtension": "Zgjatimi i skedarit",
   "FileFormatNotAllowed": "Ky skedar nuk mund të ngarkohet sepse formati i tij nuk lejohet.",
   "FileInfo": "Informacion skedari",

@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Filtrul particularizat a fost dezactivat.",
   "FileCustomFilterEnabled": "Filtrul particularizat a fost activat.",
   "FileDeletedCount": "Fişiere au fost eliminate ({{count}}).",
+  "FileExportDestination": "Fișierul <1>{{fileName}}</1> a fost exportat în secțiunea {{sectionName}}",
   "FileExtension": "Extensie de fișier",
   "FileFormatNotAllowed": "Acest fișier nu poate fi încărcat deoarece formatul său nu este permis.",
   "FileInfo": "Informații despre fișier",

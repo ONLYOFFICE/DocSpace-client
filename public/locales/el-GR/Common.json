@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Το προσαρμοσμένο φίλτρο απενεργοποιήθηκε.",
   "FileCustomFilterEnabled": "Το προσαρμοσμένο φίλτρο ενεργοποιήθηκε.",
   "FileDeletedCount": "Διαγραφή αρχείων ({{count}}).",
+  "FileExportDestination": "Το αρχείο <1>{{fileName}}</1> εξήχθη στο {{sectionName}}",
   "FileExtension": "Επέκταση αρχείου",
   "FileFormatNotAllowed": "Αυτό το αρχείο δεν μπορεί να υποβληθεί επειδή η μορφή του δεν είναι επιτρεπτή.",
   "FileInfo": "Πληροφορίες αρχείου",

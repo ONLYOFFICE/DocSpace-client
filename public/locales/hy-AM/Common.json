@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Հատուկ ֆիլտրը  անջատված է:",
   "FileCustomFilterEnabled": "Հատուկ ֆիլտրը  միացված է:",
   "FileDeletedCount": "Ֆայլերը հեռացվել են ({{count}}):",
+  "FileExportDestination": "<1>{{fileName}}</1> ֆայլ արտահանվել է {{sectionName}}",
   "FileExtension": "Ֆայլի ընդլայնում",
   "FileFormatNotAllowed": "Այս ֆայլը չի կարող վերբեռնվել, քանի որ դրա ֆորմատը թույլատրված չէ։",
   "FileInfo": "Ֆայլի տեղեկատվություն",

@@ -256,12 +256,12 @@ export async function createFile(
       };
     }
 
-    if (!fileRes.ok && fileRes.status !== 403) {
+    const file = await fileRes.json().catch(() => undefined);
+
+    if (!file || (!fileRes.ok && !file.error)) {
       logger.error(`POST /files/${parentId}/file failed: ${fileRes.status}`);
       return;
     }
-
-    const file = await fileRes.json();
 
     if (file.error) {
       const hdrs = await headers();
@@ -279,10 +279,10 @@ export async function createFile(
           ? file.error
           : {
               message: file.error?.message,
-              status: file.error?.statusCode,
+              status: file.error?.statusCode ?? fileRes.status,
               type: file.error?.type,
               stack: file.error?.stack,
-              statusCode: file?.statusCode,
+              statusCode: file?.statusCode ?? fileRes.status,
             }
         : undefined,
     };
@@ -862,4 +862,3 @@ export async function getData(
     return { error };
   }
 }
-

@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "This is the form itself — exactly what everyone who follows your link opens. Upload a PDF form you already have, or build one from the template gallery without leaving the space.",
+  "FormsBlank": "This is the form itself — exactly what everyone who follows your link opens. Upload a PDF form you already have, or build one from the template gallery without leaving the workspace.",
   "FormsBlankTitle": "The form everyone opens",
   "FormsComplete": "A submitted copy lands in {{complete}} and stays there, one per person. Switch on result collection and every answer also becomes a row in a spreadsheet — one column per field, ready to sort or chart.",
   "FormsCompleteTitle": "Answers, collected",

@@ -94,7 +94,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-files",
       icon: <CatalogFolderIcon />,
-      title: t("Common:DashboardFilesTitle"),
+      title: t("Common:Files"),
       description: t("Common:DashboardFilesDescription"),
       href: "/ai-files",
       supported: true,
@@ -103,7 +103,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-rooms",
       icon: <CatalogRoomsIcon />,
-      title: t("Common:DashboardRoomsTitle"),
+      title: t("Common:Rooms"),
       description: t("Common:DashboardRoomsDescription"),
       href: "/ai-rooms",
       supported: true,
@@ -112,7 +112,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-forms",
       icon: <CatalogDocumentsIcon />,
-      title: t("Common:DashboardFormsTitle"),
+      title: t("Common:Forms"),
       description: t("Common:DashboardFormsDescription"),
       href: "/ai-forms",
       supported: true,
@@ -121,7 +121,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-agents",
       icon: <AiAgentsIcon />,
-      title: t("Common:DashboardAIChatAgentsTitle"),
+      title: t("Common:AIAgents"),
       description: t("Common:DashboardAIChatAgentsDescription"),
       href: "/agents",
       supported: true,

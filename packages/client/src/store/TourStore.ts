@@ -35,7 +35,13 @@
 
 import { makeObservable, observable, action } from "mobx";
 
-const safeGet = (key: string): string | null => {
+/**
+ * localStorage that answers rather than throws when it is unavailable — private
+ * browsing, storage disabled, quota spent. Exported because the tour state is
+ * not the only thing kept this way: `DashboardTourStore` persists a flag of its
+ * own (whether the welcome has been shown) and has to be as forgiving about it.
+ */
+export const safeGet = (key: string): string | null => {
   try {
     return localStorage.getItem(key);
   } catch {
@@ -43,7 +49,7 @@ const safeGet = (key: string): string | null => {
   }
 };
 
-const safeSet = (key: string, value: string): void => {
+export const safeSet = (key: string, value: string): void => {
   try {
     localStorage.setItem(key, value);
   } catch {
@@ -51,7 +57,7 @@ const safeSet = (key: string, value: string): void => {
   }
 };
 
-const safeRemove = (key: string): void => {
+export const safeRemove = (key: string): void => {
   try {
     localStorage.removeItem(key);
   } catch {

@@ -33,11 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
 import type { TourAudience } from "SRC_DIR/components/Tour/audience";
+import TourList from "SRC_DIR/components/Tour/TourList";
 import {
   navItemStep,
   elementStep,
@@ -155,9 +157,9 @@ export function getTourSteps(
     null;
   const showQuickAccess = isDesktop && !!quickAccessAnchor;
 
-  // One sentence per shortcut, read as a single paragraph, each named by the
-  // sidebar's own label so the wording in the tooltip is the wording on screen.
-  // Only the ones that exist are named.
+  // One bullet per shortcut, each named by the sidebar's own label so the
+  // wording in the tooltip is the wording on screen. Only the ones that exist
+  // are named.
   const places = [
     (hasRecent || hasFavorites) &&
       t("AiAgentsTour:AgentPlacesRecent", {
@@ -251,13 +253,13 @@ export function getTourSteps(
         LOG_LABEL,
       ),
 
-    // 6. The sidebar sub-items, in one paragraph.
+    // 6. The sidebar sub-items, one bullet each.
     showQuickAccess &&
       places.length > 0 &&
       navItemStep(
         sidebarSelector(quickAccessAnchor as string),
         t("AiAgentsTour:AgentPlacesTitle"),
-        places.join(" "),
+        createElement(TourList, { items: places }),
         callbacks,
         LOG_LABEL,
         true,

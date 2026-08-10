@@ -33,4 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-module.exports = {};
+export { default as WelcomeDialog } from "./WelcomeDialog";
+export { default } from "./WelcomeDialog";
+export type { WelcomeDialogProps } from "./WelcomeDialog";

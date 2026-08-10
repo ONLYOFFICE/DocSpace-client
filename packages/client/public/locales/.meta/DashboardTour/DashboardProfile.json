@@ -1,0 +1,29 @@
+{
+  "key_path": "DashboardProfile",
+  "content": "The portal name and a short summary of your profile: your name, email and password. From here you can rename the portal or change your password.",
+  "content_en_sha1_hash": "32e8d771e8c0197e8301b4ce6daae615aa72c28a",
+  "created_at": "2026-08-07T10:52:39.928Z",
+  "updated_at": "2026-08-07T15:05:26.413Z",
+  "comment": {
+    "text": "Description text for an onboarding tour step that explains what the Profile Card on the dashboard shows (portal name, user name, email, password) and the actions available on it (rename the portal, change the password).",
+    "is_auto": true,
+    "updated_at": "2026-08-07T00:00:00.000Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
+      "line_number": 130,
+      "context": "// first-time user has no reason to read, so the step names them.\n hasProfileCard &&\n elementStep(\n PROFILE_CARD_SELECTOR,\n t(\"DashboardTour:DashboardProfileTitle\"),\n t(\"DashboardTour:DashboardProfile\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 2. The quick actions, as an invitation rather than a description: create",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

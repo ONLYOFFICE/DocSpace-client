@@ -1,0 +1,16 @@
+{
+  "DashboardApps": "这些是我们的产品，每一个都为你分担一类不同的工作——文档、协作、数据收集和 AI 辅助。打开其中任意一个，你也会获得该板块的简短导览。",
+  "DashboardAppsTitle": "你可以使用的一切",
+  "DashboardCreate": "就在这里创建你的第一个文档——选择一种类型，然后开始写。它会保存到 {{files}}，你随时都能在那里找到它。",
+  "DashboardCreateTitle": "现在就动手创建",
+  "DashboardIntegrations": "已经在使用其他平台？在这里接入即可，把你刚刚看到的编辑器直接用在团队现有的工具里——无需定制开发，也不用迁移数据。",
+  "DashboardIntegrationsTitle": "与其他平台协作",
+  "DashboardOverview": "这个页面永远只有一次点击之遥——想回到这里时，打开侧边栏中的 {{overview}} 即可。",
+  "DashboardOverviewTitle": "回到这里",
+  "DashboardProfile": "门户名称和你的个人资料简要信息：姓名、邮箱和密码。在这里可以重命名门户或修改密码。",
+  "DashboardProfileTitle": "你的资料详情",
+  "WelcomeDashboardSubtitle": "一切都从这个页面开始",
+  "WelcomeDashboardTitle": "欢迎使用 {{productName}}",
+  "WelcomeDescription": "创建文档、在房间中协作、用表单收集数据，再把阅读交给 AI——这一切都在同一个地方完成。花点时间快速导览，我们带你熟悉一遍。",
+  "WelcomeLater": "以后再说"
+}

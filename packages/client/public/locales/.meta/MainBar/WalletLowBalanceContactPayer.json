@@ -3,7 +3,7 @@
   "content": "Contact the Payer (<1>{{payerContact}}</1>) to top up the wallet and avoid interruptions to paid services.",
   "content_en_sha1_hash": "5a62d89fc84df09e664210220655b87dad7bd463",
   "created_at": "2026-08-06T16:57:08.210Z",
-  "updated_at": "2026-08-06T16:58:04.061Z",
+  "updated_at": "2026-08-07T10:52:44.603Z",
   "comment": {
     "text": "Informational text in the QuotasBar that appears when the wallet balance is low. The `<1>` tag wraps the `{{payerContact}}` variable, which represents the payer's name or email.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 256,
-      "context": "const getWalletLowBalanceDescription = () => {\n if (!isPayer)\n return (\n <Trans\n t={t}\n i18nKey=\"WalletLowBalanceContactPayer\"\n values={{\n payerContact: walletCustomerDisplayName || walletCustomerEmail,\n }}\n components={{\n 1:",
+      "line_number": 262,
+      "context": "if (!payerContact) return null;\n \n return (\n <Trans\n t={t}\n i18nKey=\"WalletLowBalanceContactPayer\"\n values={{\n payerContact,\n }}\n components={{\n 1:",
       "module": "/packages/client"
     }
   ],

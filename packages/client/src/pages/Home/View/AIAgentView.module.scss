@@ -32,9 +32,9 @@
     );
   }
 
-  :global(.aui-root > div:has(> .chat-viewport--empty)) {
-    grid-template-rows: 2fr auto auto 8fr auto;
-  }
+  // :global(.aui-root > div:has(> .chat-viewport--empty)) {
+  //   grid-template-rows: 2fr auto auto 8fr auto;
+  // }
 
   :global(div:has(> div > [style*="--chat-welcome-color"])) {
     margin-bottom: 18px;

@@ -110,7 +110,7 @@ const getPersonalSrc = (
 
 const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardRoomsTitle");
+  useDocumentTitle("Common:Rooms");
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   // Default (no `?section=`) is the rooms list.
@@ -157,7 +157,7 @@ const AiRooms = ({ roomsFolderId }: AiRoomsProps) => {
   const apiRef = useSdkFrame({
     appId,
     enabled: true,
-    title: t("Common:DashboardRoomsTitle"),
+    title: t("Common:Rooms"),
     getSrc: () =>
       isGroup
         ? getGroupSrc(targetRef.current)

@@ -44,6 +44,7 @@ export const getSelectFormatTranslation = (
   logoText: string,
 ): string => {
   const getTranslatedType = (key: string, typeToLowerCase = true) => {
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: keys are declared as literals at the call sites below
     let type = t(key);
 
     if (typeToLowerCase) type = type.toLowerCase();

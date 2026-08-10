@@ -108,6 +108,8 @@ class DocsConnectStore {
 
   depositedTopUp: number = 0;
 
+  isPortalConnectionAvailable: boolean = false;
+
   private documentBuilderReportStore: DocumentBuilderReportStore;
 
   constructor(

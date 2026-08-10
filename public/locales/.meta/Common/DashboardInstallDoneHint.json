@@ -3,7 +3,7 @@
   "content": "The module is now ready to use.",
   "content_en_sha1_hash": "b56564d78bde6d72a9cc9e444cecf825f52e9d07",
   "created_at": "2026-05-19T19:03:13.883Z",
-  "updated_at": "2026-07-07T08:59:21.782Z",
+  "updated_at": "2026-08-07T15:05:26.470Z",
   "comment": {
     "text": "Confirmation text in the module installation dialog that appears once a module installation is successfully completed.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
       "line_number": 218,
-      "context": "visible={visible}\n onClose={onClose}\n onInstalled={onInstalled}\n moduleTitle={t(\"Common:DashboardFormsTitle\")}\n confirmBody={confirmBody}\n doneHint={t(\"Common:DashboardInstallDoneHint\")}\n steps={steps}\n onInstall={handleInstall}\n onCleanup={handleCleanup}\n skipConfirm={skipConfirm}\n />",
+      "context": "visible={visible}\n onClose={onClose}\n onInstalled={onInstalled}\n moduleTitle={t(\"Common:Forms\")}\n confirmBody={confirmBody}\n doneHint={t(\"Common:DashboardInstallDoneHint\")}\n steps={steps}\n onInstall={handleInstall}\n onCleanup={handleCleanup}\n skipConfirm={skipConfirm}\n />",
       "module": "/packages/client"
     }
   ],

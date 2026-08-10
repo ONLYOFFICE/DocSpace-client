@@ -3,7 +3,7 @@
   "content": "Turn any room into a template — its settings, structure and files are saved. Create a new room from it in a click, all that's left is to add members.",
   "content_en_sha1_hash": "c7ddb842be3587567f58cebe36e7899afe7282f0",
   "created_at": "2026-08-06T14:20:52.339Z",
-  "updated_at": "2026-08-06T14:49:55.021Z",
+  "updated_at": "2026-08-07T15:05:26.433Z",
   "comment": {
     "text": "Descriptive text for a step in an onboarding tour that explains how to create room templates, appearing when highlighting the \"quick use template\" element.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 169,
+      "line_number": 171,
       "context": "canUseTemplates &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-use-template\"]',\n t(\"RoomsTour:RoomsTemplatesTitle\"),\n t(\"RoomsTour:RoomsTemplates\"),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,\n ),",
       "module": "/packages/client"
     }

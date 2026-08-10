@@ -89,6 +89,7 @@ interface SettingsProps {
   resetDocumentService?: () => Promise<void>;
   fetchDocumentService?: () => Promise<void>;
   isConnectedToPortal?: boolean;
+  isPortalConnectionAvailable?: boolean;
 }
 
 const onlyDigits = (value: string) => value.replace(/\D/g, "");
@@ -108,6 +109,7 @@ const Settings = ({
   resetDocumentService,
   fetchDocumentService,
   isConnectedToPortal,
+  isPortalConnectionAvailable,
 }: SettingsProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const navigate = useNavigate();
@@ -146,8 +148,8 @@ const Settings = ({
   const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
-    fetchDocumentService?.();
-  }, [fetchDocumentService]);
+    if (isPortalConnectionAvailable) fetchDocumentService?.();
+  }, [fetchDocumentService, isPortalConnectionAvailable]);
 
   if (!info) return null;
 
@@ -251,95 +253,99 @@ const Settings = ({
 
   return (
     <div className={styles.settings}>
-      <Text fontSize="16px" fontWeight={700}>
-        {t("DocsConnect:DocsConnectionTitle", {
-          organizationName: getBrandName("OrganizationName"),
-          editorsName: getBrandName("ProductEditorsName"),
-        })}
-      </Text>
+      {isPortalConnectionAvailable ? (
+        <>
+          <Text fontSize="16px" fontWeight={700}>
+            {t("DocsConnect:DocsConnectionTitle", {
+              organizationName: getBrandName("OrganizationName"),
+              editorsName: getBrandName("ProductEditorsName"),
+            })}
+          </Text>
 
-      {isConnectedToPortal ? (
-        <div className={styles.connectionGroup}>
-          <div className={styles.connectedBanner}>
-            <img
-              src={CheckRoundReactSvgUrl}
-              alt=""
-              className={styles.connectedBannerIcon}
-            />
-            <Text fontSize="13px">
-              <Trans
-                ns="DocsConnect"
-                i18nKey="ConnectedBanner"
-                values={{
-                  organizationName: getBrandName("OrganizationName"),
-                  editorsName: getBrandName("ProductEditorsName"),
-                  service: t("DocsConnect:DocsConnect"),
-                }}
-                components={{ 1: <Text as="span" fontWeight={600} /> }}
-              />
-            </Text>
-          </div>
-          <div className={styles.addRuleAction}>
-            <Button
-              primary
-              size={ButtonSize.small}
-              label={t("DocsConnect:OpenDocsSettings", {
-                editorsName: getBrandName("ProductEditorsName"),
-              })}
-              isDisabled={isBusy || isResetting}
-              onClick={() =>
-                navigate("/portal-settings/integration/document-service")
-              }
-              testId="docs_connect_open_docs_settings"
-            />
-            <Button
-              size={ButtonSize.small}
-              label={t("Common:Reset")}
-              isDisabled={isBusy || isResetting}
-              isLoading={isResetting}
-              onClick={onResetPortal}
-              testId="docs_connect_reset_portal"
-            />
-          </div>
-        </div>
-      ) : (
-        <div className={styles.connectionGroup}>
-          <div className={styles.settingsGroup}>
-            <Text fontWeight={600}>
-              {t("DocsConnect:UseEditorsInProduct", {
-                organizationName: getBrandName("OrganizationName"),
-                editorsName: getBrandName("ProductEditorsName"),
-              })}
-            </Text>
-            <Text fontSize="13px" className={styles.settingsHint}>
-              {t("DocsConnect:DocsConnectionDescription", {
-                service: t("DocsConnect:DocsConnect"),
-                organizationName: getBrandName("OrganizationName"),
-                editorsName: getBrandName("ProductEditorsName"),
-              })}
-            </Text>
-          </div>
-          <div className={styles.addRuleAction}>
-            <Button
-              primary
-              size={ButtonSize.small}
-              label={t("DocsConnect:ConnectToDocs", {
-                organizationName: getBrandName("OrganizationName"),
-                editorsName: getBrandName("ProductEditorsName"),
-              })}
-              isDisabled={isBusy || isResetting || !canApplyToPortal}
-              onClick={() => setApplyDialogVisible(true)}
-              testId="docs_connect_apply_to_portal"
-            />
-            <Button
-              size={ButtonSize.small}
-              label={t("Common:Reset")}
-              isDisabled
-              testId="docs_connect_reset_portal"
-            />
-          </div>
-        </div>
-      )}
+          {isConnectedToPortal ? (
+            <div className={styles.connectionGroup}>
+              <div className={styles.connectedBanner}>
+                <img
+                  src={CheckRoundReactSvgUrl}
+                  alt=""
+                  className={styles.connectedBannerIcon}
+                />
+                <Text fontSize="13px">
+                  <Trans
+                    ns="DocsConnect"
+                    i18nKey="ConnectedBanner"
+                    values={{
+                      organizationName: getBrandName("OrganizationName"),
+                      editorsName: getBrandName("ProductEditorsName"),
+                      service: t("DocsConnect:DocsConnect"),
+                    }}
+                    components={{ 1: <Text as="span" fontWeight={600} /> }}
+                  />
+                </Text>
+              </div>
+              <div className={styles.addRuleAction}>
+                <Button
+                  primary
+                  size={ButtonSize.small}
+                  label={t("DocsConnect:OpenDocsSettings", {
+                    editorsName: getBrandName("ProductEditorsName"),
+                  })}
+                  isDisabled={isBusy || isResetting}
+                  onClick={() =>
+                    navigate("/portal-settings/integration/document-service")
+                  }
+                  testId="docs_connect_open_docs_settings"
+                />
+                <Button
+                  size={ButtonSize.small}
+                  label={t("Common:Reset")}
+                  isDisabled={isBusy || isResetting}
+                  isLoading={isResetting}
+                  onClick={onResetPortal}
+                  testId="docs_connect_reset_portal"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className={styles.connectionGroup}>
+              <div className={styles.settingsGroup}>
+                <Text fontWeight={600}>
+                  {t("DocsConnect:UseEditorsInProduct", {
+                    organizationName: getBrandName("OrganizationName"),
+                    editorsName: getBrandName("ProductEditorsName"),
+                  })}
+                </Text>
+                <Text fontSize="13px" className={styles.settingsHint}>
+                  {t("DocsConnect:DocsConnectionDescription", {
+                    service: t("DocsConnect:DocsConnect"),
+                    organizationName: getBrandName("OrganizationName"),
+                    editorsName: getBrandName("ProductEditorsName"),
+                  })}
+                </Text>
+              </div>
+              <div className={styles.addRuleAction}>
+                <Button
+                  primary
+                  size={ButtonSize.small}
+                  label={t("DocsConnect:ConnectToDocs", {
+                    organizationName: getBrandName("OrganizationName"),
+                    editorsName: getBrandName("ProductEditorsName"),
+                  })}
+                  isDisabled={isBusy || isResetting || !canApplyToPortal}
+                  onClick={() => setApplyDialogVisible(true)}
+                  testId="docs_connect_apply_to_portal"
+                />
+                <Button
+                  size={ButtonSize.small}
+                  label={t("Common:Reset")}
+                  isDisabled
+                  testId="docs_connect_reset_portal"
+                />
+              </div>
+            </div>
+          )}
+        </>
+      ) : null}
 
       <Text fontSize="16px" fontWeight={700}>
         {t("Common:SettingsGeneral")}
@@ -611,5 +617,6 @@ export default inject(({ docsConnectStore }: TStore) => ({
   resetDocumentService: docsConnectStore.resetDocumentService,
   fetchDocumentService: docsConnectStore.fetchDocumentService,
   isConnectedToPortal: docsConnectStore.isConnectedToPortal,
+  isPortalConnectionAvailable: docsConnectStore.isPortalConnectionAvailable,
 }))(observer(Settings));
 

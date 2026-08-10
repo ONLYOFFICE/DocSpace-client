@@ -30,11 +30,10 @@ cd packages/client && pnpm exec playwright test path/to/test.spec.ts
 
 # Update E2E screenshots
 pnpm test:e2e:docker:update-screenshots
-```
 
-VSCode status-bar task buttons have three-layer wiring — see
-`.claude/rules/vscode-tasks.md` (loaded automatically when editing
-`.vscode/tasks.json` or `frontend.code-workspace`).
+# Translation tests (run after any locale changes)
+cd common/tests && npx vitest run test/locales.test.js
+```
 
 ## Architecture
 
@@ -56,6 +55,24 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 
 - Client (Vite): `http://localhost:5001` — served behind nginx proxy at port 8092
 - Static assets (images, fonts, scripts): served by nginx from `/var/www/public/` at `/static/` prefix
+- Other dev ports: login 5011, doceditor 5013, management 5015, sdk 5099;
+  Storybook: shared 8082, ui-kit 6006; E2E serve: client 5110, login 5111,
+  sdk 5112, doceditor 5113, management 5115; Playwright reports 9325–9329
+- Backend is a **sibling repo**: `../server` (run via VSCode tasks →
+  `cd ../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev`
+  with `SKIP_CLIENT=true`; `APP_EDITION` unset = CE, `enterprise`/`developer`
+  for EE/DE). `pnpm deploy` writes to `../publish/web`; SSR apps expect
+  `../buildtools/config` for appsettings
+
+### ui-kit git submodule
+
+`libs/ui-kit` is a git submodule (`docspace-ui-kit-react`, branch `develop`)
+and a pnpm workspace member. Its code is fixed in the ui-kit repo, never here.
+Bumping the pointer: `git -C libs/ui-kit pull` on develop, then
+`git add libs/ui-kit && git commit -m "Update ui-kit"` (only the gitlink is
+committed; root `pnpm-lock.yaml` only when ui-kit deps changed — then run
+`pnpm install` first). The submodule's own lockfile is refreshed with
+`pnpm run update-ui-kit-lock` and committed in the ui-kit repo.
 
 ## Code Quality
 
@@ -63,116 +80,68 @@ MobX stores in `packages/shared/store/` are injected via React context. Main sto
 
 All files committed to the repository — source code, comments, docs, Markdown,
 commit messages, and planning notes — must be written in English. User-facing
-strings are the only exception and must go through the i18n system (see below),
-never hardcoded.
+strings are the only exception and must go through the i18n system, never
+hardcoded.
+
+### License headers
+
+Every new source file (`.ts`, `.tsx`, `.js`, `.jsx`; `.scss` by convention)
+must start with the standard AGPL header — copy it from any neighboring file,
+or run `python3 common/scripts/update-license-headers.py` to fix headers in
+bulk. Enforced for `.ts/.tsx/.js/.jsx` by `common/tests/test/license.test.js`
+in the pre-push gate (tests, stories, configs and `.d.ts` are exempt); its
+allowlist JSONs freeze pre-existing debt and must only ever shrink — see
+`.claude/rules/source-checks.md` for details.
 
 ### Commit messages
 
 Do not add `Co-Authored-By` trailers or any other AI-attribution lines to
 commit messages.
 
+### Git hooks (lefthook)
+
+`lefthook.yml` runs a blocking pre-push gate — five sequential commands, any
+failure aborts the push:
+
+1. `pnpm run tsc` — type checking, all packages
+2. `pnpm run lint` — Biome, all packages
+3. `npm --prefix ./common/tests run test:lefthook` — locale, asset, color,
+   license-header and dependency checks (translation-completeness suites are
+   skipped here, so a green push does **not** mean locales are complete)
+4. `pnpm run test` — shared unit tests
+5. `pnpm run test:client` — client unit tests (incl. store tests)
+
+Expect a push to take several minutes. To debug a blocked push, run the
+failing command individually. Never bypass the gate with `git push --no-verify`.
+
+CI lives in Gitea Actions (`.gitea/workflows/frontend-common-tests.yaml`) but
+is **manual-dispatch only** — there is no automatic PR/push CI, so the
+pre-push gate is the only automatic check. CI additionally covers what
+lefthook skips: full locale completeness, `pnpm licenses-audit`, and all
+Playwright E2E suites.
+
 ## Internationalization (i18n)
 
-### Locale file locations
+User-facing strings always go through `t()`. **Never hardcode brand names or
+product names** — neither in code nor in translation strings. Pass them as
+`{{variables}}` via `getBrandName()` (`@docspace/shared/constants/brands`),
+`getConstName()` (`@docspace/shared/constants/consts`) or `getCultureLabel()`
+(`@docspace/shared/constants/cultures`).
 
-| Namespace | Locale files |
-|-----------|-------------|
-| `Common` | `public/locales/{lang}/Common.json` |
-| `ChangeLinkTypeDialog`, `CompletedForm`, `DeepLink`, `Editor` | `packages/doceditor/public/locales/{lang}/{Namespace}.json` |
-| `Confirm`, `Consent`, `Errors`, `Login`, `TenantList`, `Wizard` | `packages/login/public/locales/{lang}/{Namespace}.json` |
-| `Management` | `packages/management/public/locales/{lang}/Management.json` |
-| *everything else* | `packages/client/public/locales/{lang}/{Namespace}.json` |
+Full reference (locale file locations, test rules, completeness reports,
+supported languages) is in `.claude/rules/i18n.md`, loaded automatically when
+editing locale files. For translation work use the `translate-locales`,
+`translate-key` and `translate-progress` skills.
 
-Meta files (translator context + code usage examples) live at the same path under `.meta/{Namespace}/{Key}.json`.
+## Detailed rules (auto-loaded by path)
 
-### Brand names, constants and culture labels
-
-`public/locales/.constants/` holds three locale-independent JSON files. They are excluded from translation linting and must **never** be accessed via `t()` — each has its own getter:
-
-| File | Content | Getter | Import |
-|------|---------|--------|--------|
-| `brands.json` | Product/brand names (`DocSpace`, `ONLYOFFICE`, …) | `getBrandName(key)` | `@docspace/shared/constants/brands` |
-| `consts.json` | Technical abbreviations (`LDAP`, `PDF`, `OCR`, `BETA`, …) | `getConstName(key)` | `@docspace/shared/constants/consts` |
-| `cultures.json` | Language display names in native script (`Русский`, `Deutsch`, …) | `getCultureLabel(code)` | `@docspace/shared/constants/cultures` |
-
-Per-language overrides use a `-{lang}` suffix inside the JSON (e.g. `"OCR-ru": "Распознавание текста"`).
-
-**Never hardcode brand names** in translation strings. Pass them as `{{variables}}`:
-
-```tsx
-import { getBrandName } from "@docspace/shared/constants/brands";
-import { getConstName } from "@docspace/shared/constants/consts";
-
-t("Common:SomeKey", { productName: getBrandName("ProductName") })
-```
-
-```json
-"SomeKey": "Expand your {{productName}} with premium modules"
-```
-
-### Translation tests
-
-Run after any locale changes:
-
-```bash
-cd common/tests && npx vitest run test/locales.test.js
-```
-
-Key rules the tests enforce:
-- All locale JSON files must use raw UTF-8 characters, **not** `\uXXXX` escape sequences (e.g. write Cyrillic directly, not `к`). This happens when writing JSON with Python's `json.dumps()` without `ensure_ascii=False`.
-- Translation strings must not contain hardcoded brand names (`ONLYOFFICE`, `DOCSPACE`). Use `{{productName}}` variables passed via `getBrandName()`.
-- Non-English locales must not be identical copies of English for long strings.
-- `sr-Cyrl-RS` must use Cyrillic script exclusively (never Latin).
-
-### Translation completeness
-
-Three tests report keys that exist for `en` but not for another language:
-
-| Test | Scope | npm script |
-|------|-------|------------|
-| `NotTranslatedOnBaseLanguages` | base languages only | `test:only-base-languages` |
-| `NotTranslatedOnAllLanguages` | every language folder | `test:only-all-languages` |
-| `MissingLocaleFilesTest` | namespace files absent for a language | — |
-
-The last two are covered by `test:only-missing-keys`. All three are skipped on
-pre-push (`test:lefthook` sets `SKIP_BASE_LANGUAGES_TEST` and
-`SKIP_ALL_LANGUAGES_TEST`), so pending translation work does not block a push —
-**a green pre-push run does not mean the locales are complete.**
-
-The same data as a report, with the concrete key list:
-
-```bash
-node common/scripts/translation-stats.js --no-meta --missing
-```
-
-`libs/ui-kit/locales/` is out of scope for both the tests and the stats script —
-the ui-kit is a git submodule, so its gaps must be fixed in
-`docspace-ui-kit-react`.
-
-### Supported languages
-
-`ar-SA, az, bg, cs, de, el-GR, es, fi, fr, hy-AM, it, ja-JP, ko-KR, lo-LA, lv, nl, pl, pt, pt-BR, ro, ru, si, sk, sl, sq-AL, sr-Cyrl-RS, sr-Latn-RS, tr, uk-UA, vi, zh-CN`
-
-Base languages: `de, es, fr, hy-AM, it, ja-JP, pt-BR, ro, ru, sr-Cyrl-RS, sr-Latn-RS, zh-CN`
-
-## Requirements
-
-### pnpm configuration
-
-All pnpm settings live in `pnpm-workspace.yaml` (`overrides`, `allowBuilds`, …) —
-since pnpm 11 `.npmrc` is read for auth/registry only, and the `pnpm` field in
-`package.json` is ignored.
-
-Dependencies with install/postinstall scripts must be listed explicitly in
-`allowBuilds` with a `true`/`false` value. An unreviewed package fails the
-install with `ERR_PNPM_IGNORED_BUILDS` (`strictDepBuilds` is on by default), and
-pnpm appends it to `pnpm-workspace.yaml` as a placeholder. Resolve placeholders
-with `pnpm approve-builds` or by editing the file.
-
-`packageManager` in `package.json` is the single source of truth for the pnpm
-version: CI (`pnpm/action-setup`) reads it, and the Dockerfiles pin the same
-version in `npm install -g pnpm@…` — bump them together.
-
-## Settings and Permissions
-
-When adding entries to `.claude/settings.json` permissions, never include absolute paths (e.g. `/Users/username/...` or `/home/username/...`). All allowed commands must use paths relative to the project root or generic glob patterns. Entries with hardcoded absolute paths or specific commit hashes must not be added.
+| Rule | Loaded when editing |
+|------|---------------------|
+| `.claude/rules/client-architecture.md` | `packages/client/src/**`, `packages/shared/**` |
+| `.claude/rules/source-checks.md` | `packages/**`, `libs/ui-kit/**`, `public/images/**` |
+| `.claude/rules/unit-tests.md` | `**/*.test.*`, `**/__tests__/**` (unit), vitest configs |
+| `.claude/rules/i18n.md` | `public/locales/**`, `common/tests/**` |
+| `.claude/rules/e2e-tests.md` | `packages/client/__tests__/**`, `packages/shared/__mocks__/**` |
+| `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |
+| `.claude/rules/claude-settings.md` | `.claude/settings*.json` |
+| `.claude/rules/vscode-tasks.md` | `.vscode/**`, `frontend.code-workspace` |

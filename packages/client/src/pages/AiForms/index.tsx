@@ -106,7 +106,7 @@ const AiForms = ({
   fetchAppSettings,
 }: AiFormsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardFormsTitle");
+  useDocumentTitle("Common:Forms");
   const [searchParams, setSearchParams] = useSearchParams();
   const [settingsChecked, setSettingsChecked] = React.useState(false);
   const [showSetupDialog, setShowSetupDialog] = React.useState(false);
@@ -143,7 +143,7 @@ const AiForms = ({
   const apiRef = useSdkFrame({
     appId: "ai-forms",
     enabled: frameEnabled,
-    title: t("Common:DashboardFormsTitle"),
+    title: t("Common:Forms"),
     getSrc: () => {
       const sp = searchParamsRef.current;
       const basePath =

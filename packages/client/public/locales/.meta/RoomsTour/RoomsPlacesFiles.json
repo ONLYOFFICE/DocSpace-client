@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsPlacesFiles",
+  "content": "{{recent}}, {{favorites}} and {{trash}} gather files from your rooms: recently opened, starred and deleted.",
+  "content_en_sha1_hash": "048506c445b4ea50ed11dbbf17efc55fbb65d5ac",
+  "created_at": "2026-08-06T14:20:52.338Z",
+  "updated_at": "2026-08-07T15:05:26.433Z",
+  "comment": {
+    "text": "Bullet in a product tour step: the sidebar shortcuts that gather files from rooms. Placeholders are the Recent, Favorites and Trash navigation labels.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:50:49.854Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 232,
+      "context": "navItemStep(\n sidebarSelector(\"rooms-recent\"),\n t(\"RoomsTour:RoomsPlacesTitle\"),\n createElement(TourList, {\n items: [\n t(\"RoomsTour:RoomsPlacesFiles\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n trash: t(\"Common:TrashSection\"),\n }),\n t(\"RoomsTour:RoomsPlacesTemplates\", {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

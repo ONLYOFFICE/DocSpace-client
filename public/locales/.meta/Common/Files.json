@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-08-06T14:20:57.499Z",
+  "updated_at": "2026-08-07T15:05:26.412Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -27,6 +27,12 @@
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
       "line_number": 301,
       "context": "const childFolders = [sharedFolder, recentFolder, favFolder];\n if (!isVisitor && myDocsFolder) childFolders.push(trashFolder);\n \n mainItems.push({\n id: myDocsFolder ? String(myDocsFolder.id) : \"files\",\n label: myDocsFolder ? myDocsFolder.title : t(\"Common:Files\"),\n icon: getCatalogIconUrlByType(FolderType.USER),\n onClick: primaryFolder\n ? goFolder(primaryFolder.id, primaryFolder.rootFolderType)\n : undefined,\n ...sectionBadge(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
+      "line_number": 142,
+      "context": "// from an empty portal to something in it.\n elementStep(\n CREATE_SECTION_SELECTOR,\n t(\"DashboardTour:DashboardCreateTitle\"),\n t(\"DashboardTour:DashboardCreate\", {\n files: t(\"Common:Files\"),\n }),\n callbacks,\n LOG_LABEL,\n ),",
       "module": "/packages/client"
     },
     {
@@ -115,8 +121,20 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 259,
+      "line_number": 261,
       "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,\n ),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 263,
+      "context": "const sharedWithMeHasNew =\n sharedWithMeNewItems > 0 && sharedWithMeFolderId != null;\n \n const aiFilesItem: NavMenuItem = {\n id: AI_FILES_ID,\n label: t(\"Common:Files\"),\n icon: CatalogFolderReactSvgUrl,\n onClick: () => navigate(\"/ai-files\"),\n children: aiFilesEnabled\n ? [\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
+      "line_number": 97,
+      "context": "return [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:Files\"),\n description: t(\"Common:DashboardFilesDescription\"),\n href: \"/ai-files\",\n supported: true,\n alwaysOn: true,\n },",
       "module": "/packages/client"
     },
     {
@@ -126,9 +144,21 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/AiFiles/index.tsx",
+      "line_number": 130,
+      "context": "}\n };\n \n const AiFiles = ({ myFolderId }: AiFilesProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:Files\");\n const [searchParams, setSearchParams] = useSearchParams();\n const section = searchParams.get(\"section\") ?? \"\";\n const lastSdkSectionRef = React.useRef<string | null>(null);\n \n const searchParamsRef = React.useRef(searchParams);",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useUploadToMyDocuments.tsx",
       "line_number": 232,
       "context": "if (uploaded > 0) {\n showSuccessToast(\n t as TFunction,\n uploaded,\n firstFileName,\n t(\"Common:Files\"),\n onOpenFiles,\n );\n }\n if (failed > 0) {\n toastr.error(t(\"Common:ErrorUploadingFiles\", { count: failed }));",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 263,
+      "context": "const moduleItems: ModuleItem[] = [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:Files\"),\n description: t(\"Common:DashboardFilesDescription\"),\n installed: true,\n href: isGuest ? \"/shared-with-me/filter\" : \"/rooms/personal/filter\",\n },\n {",
       "module": "/packages/client"
     },
     {

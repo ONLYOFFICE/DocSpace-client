@@ -33,10 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
+import TourList from "SRC_DIR/components/Tour/TourList";
 import {
   navItemStep,
   elementStep,
@@ -147,10 +149,10 @@ export function getTourSteps(
   const showQuickAccess = isDesktop && hasForms;
 
   // The section's sub-items, each named by the sidebar's own label so the
-  // wording in the tooltip is the wording on screen. One sentence each, read as
-  // a single paragraph; Templates is behind the same admin gate in the sidebar
-  // (ClientArticleSidebar) as here, so for everyone else its sentence drops
-  // rather than pointing at an item they do not have.
+  // wording in the tooltip is the wording on screen. One bullet each; Templates
+  // is behind the same admin gate in the sidebar (ClientArticleSidebar) as
+  // here, so for everyone else its bullet drops rather than pointing at an item
+  // they do not have.
   const places = [
     t("FormsTour:FormsPlacesRecent", {
       recent: t("Common:Recent"),
@@ -285,7 +287,7 @@ export function getTourSteps(
       navItemStep(
         sidebarSelector("forms-recent"),
         t("FormsTour:FormsPlacesTitle"),
-        places.join(" "),
+        createElement(TourList, { items: places }),
         callbacks,
         LOG_LABEL,
         true,

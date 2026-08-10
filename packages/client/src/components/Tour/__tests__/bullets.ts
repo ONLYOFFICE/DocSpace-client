@@ -33,4 +33,22 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-module.exports = "test-file-stub";
+import { isValidElement } from "react";
+import type { Step } from "react-joyride";
+
+/**
+ * The bullets a `TourList` step body was built from.
+ *
+ * A places step carries its text as a rendered `TourList` rather than a
+ * string, so a test that wants to know which shortcuts got named reads the
+ * items back off the element instead of matching a joined sentence. Returns
+ * `[]` for a step whose body is plain prose, so a caller can assert the
+ * absence of a bullet without knowing which shape the step used.
+ */
+export function bullets(step: Step | undefined | null): string[] {
+  const content = step?.content;
+  if (!isValidElement(content)) return [];
+
+  const { items } = content.props as { items?: unknown };
+  return Array.isArray(items) ? (items as string[]) : [];
+}

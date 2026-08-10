@@ -33,11 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
 import type { TourAudience } from "SRC_DIR/components/Tour/audience";
+import TourList from "SRC_DIR/components/Tour/TourList";
 import {
   navItemStep,
   elementStep,
@@ -184,7 +186,7 @@ function placesStep(
   // this step is about.
   if (!isDesktop || !sectionId) return null;
 
-  // One sentence each, read as a single paragraph; an item the sidebar doesn't
+  // One sentence each, read as a bulleted list; an item the sidebar doesn't
   // render (a guest has no Trash) drops its sentence.
   const places = [
     sharedId &&
@@ -212,7 +214,7 @@ function placesStep(
   return navItemStep(
     sidebarSelector(anchorId),
     t("FilesTour:TourPlacesTitle"),
-    places.join(" "),
+    createElement(TourList, { items: places }),
     callbacks,
     LOG_LABEL,
     true,

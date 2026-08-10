@@ -111,6 +111,8 @@ class DocsConnectStore {
 
   depositedTopUp: number = 0;
 
+  isPortalConnectionAvailable: boolean = false;
+
   constructor(
     settingsStore: SettingsStore,
     currentTariffStatusStore: CurrentTariffStatusStore,

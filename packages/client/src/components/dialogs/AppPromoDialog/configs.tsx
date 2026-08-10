@@ -168,7 +168,7 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
   },
   "ai-forms": {
-    title: t("Common:DashboardFormsTitle"),
+    title: t("Common:Forms"),
     subtitle: t("Common:FormsPromoSubtitle"),
     description: t("Common:FormsPromoDescription"),
     features: [

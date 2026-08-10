@@ -65,6 +65,11 @@
 // `tourLabel` is what marks an app as having an onboarding tour to offer; leave
 // it out for an app that has none.
 //
+// Feature icons come in as React components (svgr), but the illustrations are
+// imported with `?url` on purpose: each one is a ~1 MB SVG wrapping a base64
+// PNG, and as a component it would be inlined into the JS chunk. `?url` keeps
+// them as files served by nginx from /static/ and fetched on demand.
+//
 // Texts are localized here via literal `t("Common:Key")` calls so the locales
 // scanner captures the keys; the dialog receives already-resolved strings.
 
@@ -74,29 +79,29 @@ import FilesManagementIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.re
 import FilesSearchIcon from "PUBLIC_DIR/images/search.react.svg";
 import FilesPermissionsIcon from "PUBLIC_DIR/images/edit.index.react.svg";
 import FilesAccessIcon from "PUBLIC_DIR/images/security.react.svg";
-import FilesPreviewLight from "PUBLIC_DIR/images/app-promo/files.preview.light.svg";
-import FilesPreviewDark from "PUBLIC_DIR/images/app-promo/files.preview.dark.svg";
+import filesPreviewLightUrl from "PUBLIC_DIR/images/app-promo/files.preview.light.svg?url";
+import filesPreviewDarkUrl from "PUBLIC_DIR/images/app-promo/files.preview.dark.svg?url";
 
 import CollaborationRoomIcon from "PUBLIC_DIR/images/pencil.react.svg";
 import PublicRoomIcon from "PUBLIC_DIR/images/universe.react.svg";
 import VDRRoomIcon from "PUBLIC_DIR/images/vdr.room.react.svg";
 import CustomRoomIcon from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg";
-import RoomsPreviewLight from "PUBLIC_DIR/images/app-promo/rooms.preview.light.svg";
-import RoomsPreviewDark from "PUBLIC_DIR/images/app-promo/rooms.preview.dark.svg";
+import roomsPreviewLightUrl from "PUBLIC_DIR/images/app-promo/rooms.preview.light.svg?url";
+import roomsPreviewDarkUrl from "PUBLIC_DIR/images/app-promo/rooms.preview.dark.svg?url";
 
 import AIPoweredIcon from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg";
 import SharingIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg";
 import DataIcon from "PUBLIC_DIR/images/data.icon.react.svg";
 import BuiltInIcon from "PUBLIC_DIR/images/stats.react.svg";
-import FormsPreviewLight from "PUBLIC_DIR/images/app-promo/forms.preview.light.svg";
-import FormsPreviewDark from "PUBLIC_DIR/images/app-promo/forms.preview.dark.svg";
+import formsPreviewLightUrl from "PUBLIC_DIR/images/app-promo/forms.preview.light.svg?url";
+import formsPreviewDarkUrl from "PUBLIC_DIR/images/app-promo/forms.preview.dark.svg?url";
 
 import GenerateIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 import SharedAgentsIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg";
 import CustomStackIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg";
 import MCPIcon from "PUBLIC_DIR/images/icons/16/catalog.devtools-api.react.svg";
-import AgentsPreviewLight from "PUBLIC_DIR/images/app-promo/agents.preview.light.svg";
-import AgentsPreviewDark from "PUBLIC_DIR/images/app-promo/agents.preview.dark.svg";
+import agentsPreviewLightUrl from "PUBLIC_DIR/images/app-promo/agents.preview.light.svg?url";
+import agentsPreviewDarkUrl from "PUBLIC_DIR/images/app-promo/agents.preview.dark.svg?url";
 
 import type { AppPromoContentMap } from "./AppPromoDialog.types";
 
@@ -127,8 +132,8 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
         description: t("Common:AccessControlDescription"),
       },
     ],
-    IllustrationLight: FilesPreviewLight,
-    IllustrationDark: FilesPreviewDark,
+    illustrationLight: filesPreviewLightUrl,
+    illustrationDark: filesPreviewDarkUrl,
     openLabel: t("Common:Open"),
     tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
@@ -160,8 +165,8 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
         description: t("Common:CustomRoomsDesctiprion"),
       },
     ],
-    IllustrationLight: RoomsPreviewLight,
-    IllustrationDark: RoomsPreviewDark,
+    illustrationLight: roomsPreviewLightUrl,
+    illustrationDark: roomsPreviewDarkUrl,
     openLabel: t("Common:Open"),
     tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
@@ -193,8 +198,8 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
         description: t("Common:BuiltInInsightsDescription"),
       },
     ],
-    IllustrationLight: FormsPreviewLight,
-    IllustrationDark: FormsPreviewDark,
+    illustrationLight: formsPreviewLightUrl,
+    illustrationDark: formsPreviewDarkUrl,
     openLabel: t("Common:Open"),
     tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
@@ -231,8 +236,8 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
         description: t("Common:MCPIntegrationDescription"),
       },
     ],
-    IllustrationLight: AgentsPreviewLight,
-    IllustrationDark: AgentsPreviewDark,
+    illustrationLight: agentsPreviewLightUrl,
+    illustrationDark: agentsPreviewDarkUrl,
     openLabel: t("Common:Open"),
     tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),

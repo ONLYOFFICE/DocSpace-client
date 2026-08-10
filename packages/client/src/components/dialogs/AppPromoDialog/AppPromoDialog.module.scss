@@ -193,10 +193,10 @@
 }
 
 .illustration {
-  // Inline SVG (not <img>), so object-fit doesn't apply. Pin it to the top of
-  // the wrapper at full width; its natural aspect ratio sets the height and the
-  // wrapper's overflow:hidden crops whatever spills past the feature-list
-  // height — no empty space below, image bleeds toward the footer.
+  // Pin it to the top of the wrapper at full width; its natural aspect ratio
+  // sets the height (so no object-fit) and the wrapper's overflow:hidden crops
+  // whatever spills past the feature-list height — no empty space below, image
+  // bleeds toward the footer.
   position: absolute;
   top: 0;
   left: 0;

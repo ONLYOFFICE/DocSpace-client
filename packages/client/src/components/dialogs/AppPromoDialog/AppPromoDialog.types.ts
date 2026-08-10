@@ -86,10 +86,14 @@ export type AppPromoContent = {
   description: string;
   /** Feature rows (the screenshot shows four). */
   features: AppPromoFeature[];
-  /** Right-column illustration for the light theme. */
-  IllustrationLight: SvgComponent;
-  /** Right-column illustration for the dark theme. */
-  IllustrationDark: SvgComponent;
+  /**
+   * Right-column illustration for the light theme. A URL, not a component:
+   * the illustrations are ~1 MB SVGs, so they are imported with `?url` and
+   * rendered as `<img>` instead of being inlined into the JS chunk.
+   */
+  illustrationLight: string;
+  /** Right-column illustration for the dark theme. Same `?url` rule. */
+  illustrationDark: string;
   /** Primary action label (e.g. "Open Files"). */
   openLabel: string;
   /**

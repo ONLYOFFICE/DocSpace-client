@@ -100,15 +100,15 @@ const AppPromoDialog = ({
     subtitle,
     description,
     features,
-    IllustrationLight,
-    IllustrationDark,
+    illustrationLight,
+    illustrationDark,
     openLabel,
     tourLabel,
     githubLabel,
     githubUrl,
   } = content;
 
-  const Illustration = isBase ? IllustrationLight : IllustrationDark;
+  const illustration = isBase ? illustrationLight : illustrationDark;
   const GithubIcon = isBase ? GithubLightIcon : GithubDarkIcon;
 
   const onGithubClick = React.useCallback(() => {
@@ -158,7 +158,7 @@ const AppPromoDialog = ({
               ))}
             </ul>
             <div className={styles.illustrationWrap} aria-hidden="true">
-              <Illustration className={styles.illustration} />
+              <img src={illustration} alt="" className={styles.illustration} />
             </div>
           </div>
         </div>

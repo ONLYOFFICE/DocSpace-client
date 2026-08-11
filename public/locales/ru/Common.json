@@ -2107,7 +2107,7 @@
   "Thinking": "Обработка",
   "ThirdPartyDisconnectPrompt": "Вы уверены, что хотите удалить {{service}}? Это не повлияет на вашу учетную запись {{account}}.",
   "ThirdPartyResource": "Сторонний ресурс",
-  "ThirdPartyResourceDescription": "Резервную копию можно сохранить в стороннюю учетную запись (Dropbox, Box.com, OneDrive или Google Drive). Вам необходимо подключить свою стороннюю учетную запись (Dropbox, Box.com, OneDrive или Google Drive), прежде чем вы сможете сохранить там свою резервную копию.",
+  "ThirdPartyResourceDescription": "Резервную копию можно сохранить в стороннюю учетную запись (Dropbox, Box, OneDrive или Google Drive). Вам необходимо подключить свою стороннюю учетную запись (Dropbox, Box, OneDrive или Google Drive), прежде чем вы сможете сохранить там свою резервную копию.",
   "ThirdPartyStorage": "Стороннее хранилище",
   "ThirdPartyStorageDescription": "Используйте сторонние сервисы в качестве хранилища данных для этой комнаты. Вы можете создать новую папку или выбрать существующую в подключенном хранилище.",
   "ThisDevice": "Это устройство",

@@ -2107,7 +2107,7 @@
   "Thinking": "Réflexion",
   "ThirdPartyDisconnectPrompt": "Êtes-vous sûr de vouloir supprimer le {{service}} ? Cela n'affectera en aucun cas votre compte {{account}}.",
   "ThirdPartyResource": "Ressource tierce",
-  "ThirdPartyResourceDescription": "La sauvegarde peut être enregistrée sur votre compte tiers (Dropbox, Box.com, OneDrive ou Google Drive). Il vous faut connecter votre compte tiers (Dropbox, Box.com, OneDrive ou Google Drive) avant de pouvoir y enregistrer votre sauvegarde.",
+  "ThirdPartyResourceDescription": "La sauvegarde peut être enregistrée sur votre compte tiers (Dropbox, Box, OneDrive ou Google Drive). Il vous faut connecter votre compte tiers (Dropbox, Box, OneDrive ou Google Drive) avant de pouvoir y enregistrer votre sauvegarde.",
   "ThirdPartyStorage": "Stockage tiers",
   "ThirdPartyStorageDescription": "Utilisez des services tiers comme espace de stockage des données pour cette salle. Vous pouvez créer un nouveau dossier ou sélectionner un dossier existant dans l'espace de stockage connecté.",
   "ThisDevice": "Cet appareil",

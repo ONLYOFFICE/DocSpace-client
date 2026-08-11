@@ -2107,7 +2107,7 @@
   "Thinking": "Düşünür...",
   "ThirdPartyDisconnectPrompt": "{{service}} xidmətini silmək istədiyinizə əminsiniz? Bu, {{account}} hesabınıza heç bir şəkildə təsir etməyəcək.",
   "ThirdPartyResource": "Üçüncü tərəf resursu",
-  "ThirdPartyResourceDescription": "Ehtiyat nüsxələr üçüncü tərəf hesablarda da (Dropbox, Box.com, OneDrive və ya Google Drive) saxlana bilər. Buna görə də, ehtiyat nüsxələrinizi yadda saxlaya bilmək üçün əvvəlcə öz üçüncü tərəf hesabınızı (Dropbox, Box.com, OneDrive və ya Google Drive) ilə əlaqələndirməlisiniz.",
+  "ThirdPartyResourceDescription": "Ehtiyat nüsxələr üçüncü tərəf hesablarda da (Dropbox, Box, OneDrive və ya Google Drive) saxlana bilər. Buna görə də, ehtiyat nüsxələrinizi yadda saxlaya bilmək üçün əvvəlcə öz üçüncü tərəf hesabınızı (Dropbox, Box, OneDrive və ya Google Drive) ilə əlaqələndirməlisiniz.",
   "ThirdPartyStorage": "Üçüncü tərəf saxlama yeri",
   "ThirdPartyStorageDescription": "Bu otaq üçün məlumat yaddaşı kimi üçüncü tərəf xidmətlərindən istifadə edin. Əlaqələndirilmiş yaddaşda yeni qovluq yarada və ya mövcud olanı seçə bilərsiniz.",
   "ThisDevice": "Bu cihaz",

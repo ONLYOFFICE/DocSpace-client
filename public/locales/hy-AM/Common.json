@@ -2107,7 +2107,7 @@
   "Thinking": "Մտածում է",
   "ThirdPartyDisconnectPrompt": "Իսկապե՞ս ուզում եք հեռացնել {{service}}-ը: Սա որևէ կերպ չի ազդի ձեր {{account}} հաշվի վրա:",
   "ThirdPartyResource": "Երրորդ կողմի ռեսուրս",
-  "ThirdPartyResourceDescription": "Պահուստավորումը կարող է պահպանվել ձեր երրորդ կողմի հաշվում (Dropbox, Box.com, OneDrive կամ Google Drive): Դուք պետք է միացնեք ձեր երրորդ կողմի հաշիվը (Dropbox, Box.com, OneDrive կամ Google Drive), նախքան Դուք կկարողանաք այնտեղ պահել Ձեր պահուստային պատճենը:",
+  "ThirdPartyResourceDescription": "Պահուստավորումը կարող է պահպանվել ձեր երրորդ կողմի հաշվում (Dropbox, Box, OneDrive կամ Google Drive): Դուք պետք է միացնեք ձեր երրորդ կողմի հաշիվը (Dropbox, Box, OneDrive կամ Google Drive), նախքան Դուք կկարողանաք այնտեղ պահել Ձեր պահուստային պատճենը:",
   "ThirdPartyStorage": "Երրորդ կողմի պահեստավորում",
   "ThirdPartyStorageDescription": "Օգտագործեք երրորդ կողմի ծառայություններն որպես տվյալների պահեստ այս սենյակի համար: Դուք կարող եք ստեղծել նոր թղթապանակ կամ ընտրել առկա թղթապանակը միացված պահեստում:",
   "ThisDevice": "Այս սարքը",

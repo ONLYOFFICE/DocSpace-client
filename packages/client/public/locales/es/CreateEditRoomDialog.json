@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Indización automática",
   "AutomaticIndexingDescription": "Active la indización automática para indexar archivos y carpetas por número de serie. La ordenación por número se establecerá de forma predeterminada para todos los usuarios.",
   "ChooseRoomType": "Elegir el tipo de sala",
+  "ChooseSetType": "Elegir el tipo de conjunto",
   "ConfigureDatabaseConnection": "Configure la conexión a la base de datos en Integración → Servicios de terceros",
   "CreateRoomConfirmation": "¿Continuar sin conectar el almacenamiento?\nHa seleccionado una opción de almacenamiento de terceros que aún no está conectada. Si continúa sin conectar el servicio, esta opción no se añadirá.",
   "CreateRoomWatermarksConfirmation": "No ha establecido ninguna marca de agua para los documentos de esta sala. Siempre puede añadir una marca de agua en los ajustes de edición de la sala. ¿Continuar sin marca de agua?",

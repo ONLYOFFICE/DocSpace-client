@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Automatyczne indeksowanie",
   "AutomaticIndexingDescription": "Włącz automatyczne indeksowanie, aby indeksować pliki i katalogi według numeru seryjnego. Sortowanie według numeru zostanie ustawione jako domyślne dla wszystkich użytkowników.",
   "ChooseRoomType": "Wybierz rodzaj pokoju",
+  "ChooseSetType": "Wybierz rodzaj zestawu",
   "ConfigureDatabaseConnection": "Skonfiguruj połączenie z bazą danych w Integracje → Usługi firm trzecich",
   "CreateRoomConfirmation": "Kontynuować bez podłączania pamięci?\nWybrano pamięć podmiotu trzeciego, która nie jest jeszcze podłączona. Jeśli będziesz kontynuować bez podłączenia usługi, dana opcja nie zostanie dodana.",
   "CreateRoomWatermarksConfirmation": "Nie ustawiono znaku wodnego, który ma być stosowany do dokumentów w tym pokoju. Zawsze możesz dodać znak wodny w ustawieniach edycji pokoju. Kontynuować bez znaku wodnego?",

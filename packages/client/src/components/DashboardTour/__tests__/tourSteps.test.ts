@@ -14,6 +14,7 @@ const PROFILE_TARGET = '[data-tour-id="dashboard-profile"]';
 const CREATE_TARGET = '[data-tour-id="dashboard-create"]';
 const APPS_TARGET = '[data-tour-id="dashboard-apps"]';
 const INTEGRATIONS_TARGET = '[data-tour-id="dashboard-integrations"]';
+const DEVTOOLS_TARGET = '[data-tour-id="dashboard-devtools"]';
 const OVERVIEW_TARGET = '[data-item-id="dashboard"]';
 
 /** The four cards the dashboard renders today, in grid order. */
@@ -24,6 +25,7 @@ const fullFlags: TourStepFlags = {
   hasProfileCard: true,
   appIds: ALL_APPS,
   hasIntegrations: true,
+  hasDevTools: true,
 };
 
 describe("dashboard tour steps", () => {
@@ -33,6 +35,7 @@ describe("dashboard tour steps", () => {
       CREATE_TARGET,
       APPS_TARGET,
       INTEGRATIONS_TARGET,
+      DEVTOOLS_TARGET,
       OVERVIEW_TARGET,
     ]);
   });
@@ -42,7 +45,7 @@ describe("dashboard tour steps", () => {
     const flags = { ...fullFlags, hasProfileCard: false };
 
     expect(titles(flags)).not.toContain("DashboardTour:DashboardProfileTitle");
-    expect(steps(flags)).toHaveLength(4);
+    expect(steps(flags)).toHaveLength(5);
   });
 
   it("keeps the create and overview steps whatever else is missing", () => {
@@ -52,6 +55,7 @@ describe("dashboard tour steps", () => {
       hasProfileCard: false,
       appIds: [],
       hasIntegrations: false,
+      hasDevTools: false,
     });
 
     expect(bare.map((step) => step.target)).toEqual([
@@ -61,13 +65,14 @@ describe("dashboard tour steps", () => {
   });
 
   describe("the integrations step", () => {
-    it("sits between the apps row and the sidebar", () => {
-      // It is about what to do after the products have been introduced, and
-      // the Overview step is the tour's hand-off — so it goes second to last.
+    it("sits between the apps row and the developer tools", () => {
+      // It is about what to do after the products have been introduced, and it
+      // is still addressed to the same person — so it comes before the developer
+      // tools, which are not.
       const targets = steps(fullFlags).map((step) => step.target);
 
       expect(targets.indexOf(INTEGRATIONS_TARGET)).toBe(
-        targets.indexOf(OVERVIEW_TARGET) - 1,
+        targets.indexOf(DEVTOOLS_TARGET) - 1,
       );
       expect(targets.indexOf(INTEGRATIONS_TARGET)).toBeGreaterThan(
         targets.indexOf(APPS_TARGET),
@@ -80,7 +85,7 @@ describe("dashboard tour steps", () => {
       expect(titles(flags)).not.toContain(
         "DashboardTour:DashboardIntegrationsTitle",
       );
-      expect(steps(flags)).toHaveLength(4);
+      expect(steps(flags)).toHaveLength(5);
     });
 
     it("still comes before the sidebar when the apps row is missing", () => {
@@ -92,8 +97,59 @@ describe("dashboard tour steps", () => {
         PROFILE_TARGET,
         CREATE_TARGET,
         INTEGRATIONS_TARGET,
+        DEVTOOLS_TARGET,
         OVERVIEW_TARGET,
       ]);
+    });
+  });
+
+  describe("the developer tools step", () => {
+    it("is the last thing on the page, before the sidebar hand-off", () => {
+      // It sits where the card does — below the integrations, at the bottom of
+      // the page — and the Overview step is the tour's hand-off, so nothing
+      // about the page may come after it.
+      const targets = steps(fullFlags).map((step) => step.target);
+
+      expect(targets.indexOf(DEVTOOLS_TARGET)).toBe(
+        targets.indexOf(OVERVIEW_TARGET) - 1,
+      );
+      expect(targets.indexOf(DEVTOOLS_TARGET)).toBeGreaterThan(
+        targets.indexOf(INTEGRATIONS_TARGET),
+      );
+    });
+
+    it("is dropped when the card is not on the page", () => {
+      const flags = { ...fullFlags, hasDevTools: false };
+
+      expect(titles(flags)).not.toContain(
+        "DashboardTour:DashboardDevToolsTitle",
+      );
+      expect(steps(flags)).toHaveLength(5);
+    });
+
+    it("keeps its place at the end when the integrations card is missing", () => {
+      // The two cards are independent, and the DOM order the step list mirrors
+      // does not change when one of them is absent.
+      const flags = { ...fullFlags, hasIntegrations: false };
+
+      expect(steps(flags).map((step) => step.target)).toEqual([
+        PROFILE_TARGET,
+        CREATE_TARGET,
+        APPS_TARGET,
+        DEVTOOLS_TARGET,
+        OVERVIEW_TARGET,
+      ]);
+    });
+
+    it("names the brand through a variable rather than in the string", () => {
+      // The card's own title does the same (`getBrandName("OrganizationName")`);
+      // a brand name baked into a translation string fails the locale tests.
+      const [devToolsStep] = steps(fullFlags).filter(
+        (step) => step.target === DEVTOOLS_TARGET,
+      );
+
+      expect(devToolsStep.title).toBe("DashboardTour:DashboardDevToolsTitle");
+      expect(devToolsStep.content).toBe("DashboardTour:DashboardDevTools");
     });
   });
 

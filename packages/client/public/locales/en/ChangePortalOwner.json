@@ -1,13 +1,13 @@
 {
   "AppointAdmin": "Appoint administrators",
   "BackupPortal": "Backup the workspace data",
-  "ChangeInstruction": "To change the workspace owner, please choose the name of the new owner below.",
-  "ChangeOwner": "Change the workspace owner",
+  "ChangeInstruction": "To change {{productName}} owner, please choose the name of the new owner below.",
+  "ChangeOwner": "Change {{productName}} owner",
   "ChangeUser": "Change user",
   "DoTheSame": "Do the same as administrators",
   "ManagePortal": "Manage the workspace configuration",
   "ManageUser": "Manage user accounts",
-  "NewPortalOwner": "New workspace owner",
-  "PortalOwnerCan": "The workspace owner can:",
+  "NewPortalOwner": "New {{productName}} owner",
+  "PortalOwnerCan": "The {{productName}} owner can:",
   "SetAccessRights": "Set access rights"
 }

@@ -1,7 +1,7 @@
 {
   "AccountWillBeCreated": "A {{productName}} account will be created for <1>{{email}}</1>. Please complete your registration:",
-  "ConfirmOwnerPortalSuccessMessage": "The workspace owner has been successfully changed. You will be redirected in 10 seconds.",
-  "ConfirmOwnerPortalTitle": "Please confirm you want to change the workspace owner to {{newOwner}}.",
+  "ConfirmOwnerPortalSuccessMessage": "{{productName}} owner has been successfully changed. You will be redirected in 10 seconds.",
+  "ConfirmOwnerPortalTitle": "Please confirm you want to change {{productName}} owner to {{newOwner}}.",
   "ConnectApp": "Connect the app",
   "ConnectAppDescription": "Scan the provided QR code using your authenticator app. Alternatively, manually enter the given secret key into your app: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Your current mobile phone number",

@@ -2106,7 +2106,7 @@
   "Thinking": "思考中…",
   "ThirdPartyDisconnectPrompt": "{{service}} を削除してもよろしいですか？これは {{account}} アカウントには影響しません。",
   "ThirdPartyResource": "サードパーティーリソース",
-  "ThirdPartyResourceDescription": "バックアップは、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に保存できます。バックアップを保存できるようになる前に、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に接続する必要があります。",
+  "ThirdPartyResourceDescription": "バックアップは、サードパーティーアカウント（Dropbox、Box、OneDrive、Google Drive）に保存できます。バックアップを保存できるようになる前に、サードパーティーアカウント（Dropbox、Box、OneDrive、Google Drive）に接続する必要があります。",
   "ThirdPartyStorage": "第三者ストレージ",
   "ThirdPartyStorageDescription": "このルームのデータ保存先として、サードパーティのサービスを利用します。接続されたストレージ内に、新しいフォルダを作成するか、既存のフォルダを選択できます。",
   "ThisDevice": "このデバイス",

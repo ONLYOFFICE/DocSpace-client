@@ -2106,7 +2106,7 @@
   "Thinking": "ກຳລັງຄິດ",
   "ThirdPartyDisconnectPrompt": "ທ່ານແນ່ໃຈຫຼືບໍ່ວ່າຕ້ອງການລຶບ {{service}}? ສິ່ງນີ້ຈະບໍ່ສົ່ງຜົນກະທົບຕໍ່ບັນຊີ {{account}} ຂອງທ່ານໃນທາງໃດທາງໜຶ່ງ.",
   "ThirdPartyResource": "ຊັບພະຍາກອນພາກສ່ວນທີສາມ",
-  "ThirdPartyResourceDescription": "ສາມາດບັນທຶກຂໍ້ມູນສຳຮອງໄວ້ໃນບັນຊີພາກສ່ວນທີສາມຂອງທ່ານ (Dropbox, Box.com, OneDrive ຫຼື Google Drive). ທ່ານຕ້ອງເຊື່ອມຕໍ່ບັນຊີພາກສ່ວນທີສາມຂອງທ່ານ (Dropbox, Box.com, OneDrive ຫຼື Google Drive). ກ່ອນທີ່ທ່ານຈະສາມາດບັນທຶກການ ສໍາຮອງຂໍ້ມູນ ຂອງທ່ານ ຢູ່ທີ່ນັ້ນ.",
+  "ThirdPartyResourceDescription": "ສາມາດບັນທຶກຂໍ້ມູນສຳຮອງໄວ້ໃນບັນຊີພາກສ່ວນທີສາມຂອງທ່ານ (Dropbox, Box, OneDrive ຫຼື Google Drive). ທ່ານຕ້ອງເຊື່ອມຕໍ່ບັນຊີພາກສ່ວນທີສາມຂອງທ່ານ (Dropbox, Box, OneDrive ຫຼື Google Drive). ກ່ອນທີ່ທ່ານຈະສາມາດບັນທຶກການ ສໍາຮອງຂໍ້ມູນ ຂອງທ່ານ ຢູ່ທີ່ນັ້ນ.",
   "ThirdPartyStorage": "ພາກສ່ວນທີສາມ ການ​ເກັບ​ຮັກ​ສາ",
   "ThirdPartyStorageDescription": "ໃຊ້ການບໍລິການພາກສ່ວນທີສາມເປັນບ່ອນເກັບຂໍ້ມູນສໍາລັບຫ້ອງນີ້. ທ່ານສາມາດສ້າງໂຟນເດີໃໝ່ ຫຼື ເລືອກໂຟນເດີທີ່ມີຢູ່ແລ້ວໃນບ່ອນເກັບຂໍ້ມູນທີ່ເຊື່ອມຕໍ່.",
   "ThisDevice": "ອຸປະກອນນີ້",

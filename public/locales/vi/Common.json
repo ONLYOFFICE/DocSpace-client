@@ -2106,7 +2106,7 @@
   "Thinking": "Suy nghĩ",
   "ThirdPartyDisconnectPrompt": "Bạn có chắc chắn muốn xóa {{service}} không? Điều này sẽ không ảnh hưởng đến tài khoản {{account}} của bạn.",
   "ThirdPartyResource": "Tài nguyên của bên thứ ba",
-  "ThirdPartyResourceDescription": "Bản sao lưu có thể được lưu vào tài khoản bên thứ ba của bạn (Dropbox, Box.com, OneDrive hoặc Google Drive). Bạn cần kết nối tài khoản bên thứ ba (Dropbox, Box.com, OneDrive hoặc Google Drive) trước khi bạn có thể lưu bản sao lưu của mình ở đó.",
+  "ThirdPartyResourceDescription": "Bản sao lưu có thể được lưu vào tài khoản bên thứ ba của bạn (Dropbox, Box, OneDrive hoặc Google Drive). Bạn cần kết nối tài khoản bên thứ ba (Dropbox, Box, OneDrive hoặc Google Drive) trước khi bạn có thể lưu bản sao lưu của mình ở đó.",
   "ThirdPartyStorage": "Lưu trữ của bên thứ ba",
   "ThirdPartyStorageDescription": "Sử dụng dịch vụ của bên thứ ba làm nơi lưu trữ dữ liệu cho phòng này. Bạn có thể tạo thư mục mới hoặc chọn thư mục đã có trong bộ nhớ được kết nối.",
   "ThisDevice": "Thiết bị này",

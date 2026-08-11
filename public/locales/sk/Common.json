@@ -2106,7 +2106,7 @@
   "Thinking": "Premýšľanie",
   "ThirdPartyDisconnectPrompt": "Ste si istí, že chcete odstrániť {{service}}? Toto nijako neovplyvní váš účet {{account}}.",
   "ThirdPartyResource": "Zdroj tretej strany",
-  "ThirdPartyResourceDescription": "Zálohované údaje môžete uložiť na účet tretej strany (Dropbox, Box.com, OneDrive alebo Disk Google). Najskôr musíte pripojiť svoj účet tretej strany (Dropbox, Box.com, OneDrive alebo Disk Google), než si tam budete môcť uložiť zálohované údaje.",
+  "ThirdPartyResourceDescription": "Zálohované údaje môžete uložiť na účet tretej strany (Dropbox, Box, OneDrive alebo Disk Google). Najskôr musíte pripojiť svoj účet tretej strany (Dropbox, Box, OneDrive alebo Disk Google), než si tam budete môcť uložiť zálohované údaje.",
   "ThirdPartyStorage": "Úložisko tretích strán",
   "ThirdPartyStorageDescription": "Použite služby tretích strán ako úložisko dát pre túto miestnosť. V pripojenom úložisku môžete vytvoriť nový priečinok alebo vybrať existujúci.",
   "ThisDevice": "Toto zariadenie",

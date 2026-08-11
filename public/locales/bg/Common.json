@@ -2106,7 +2106,7 @@
   "Thinking": "Мислене",
   "ThirdPartyDisconnectPrompt": "Сигурни ли сте, че искате да премахнете {{service}}? Това няма да повлияе по никакъв начин на вашия акаунт {{account}}.",
   "ThirdPartyResource": "Ресурс на трета страна",
-  "ThirdPartyResourceDescription": "Архивното копие може да бъде запазено във вашия профил от трета страна (Dropbox, Box.com, OneDrive или Google Drive). Трябва да свържете своя профил от трета страна (Dropbox, Box.com, OneDrive или Google Drive) преди да можете да запазите резервното си копие там.",
+  "ThirdPartyResourceDescription": "Архивното копие може да бъде запазено във вашия профил от трета страна (Dropbox, Box, OneDrive или Google Drive). Трябва да свържете своя профил от трета страна (Dropbox, Box, OneDrive или Google Drive) преди да можете да запазите резервното си копие там.",
   "ThirdPartyStorage": "Съхранение от трета страна",
   "ThirdPartyStorageDescription": "Използвайте услуги на трети страни като хранилище за данни за тази стая. Можете да създадете нова папка или да изберете съществуваща в свързаното хранилище.",
   "ThisDevice": "Това устройство",

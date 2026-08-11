@@ -2106,7 +2106,7 @@
   "Thinking": "Elaborazione",
   "ThirdPartyDisconnectPrompt": "Sei sicuro di voler rimuovere {{service}}? Questo non influirà in alcun modo sul tuo account {{account}}.",
   "ThirdPartyResource": "Risorsa di terze parti",
-  "ThirdPartyResourceDescription": "Il backup può essere salvato sul tuo account di terze parti (Dropbox, Box.com, OneDrive o Google Drive). Devi collegare il tuo account di terze parti (Dropbox, Box.com, OneDrive o Google Drive) prima che tu possa salvare lì il tuo backup.",
+  "ThirdPartyResourceDescription": "Il backup può essere salvato sul tuo account di terze parti (Dropbox, Box, OneDrive o Google Drive). Devi collegare il tuo account di terze parti (Dropbox, Box, OneDrive o Google Drive) prima che tu possa salvare lì il tuo backup.",
   "ThirdPartyStorage": "Archiviazione di terze parti",
   "ThirdPartyStorageDescription": "Utilizza servizi di terze parti come spazio di archiviazione dati per questa stanza. Puoi creare una nuova cartella o selezionare quella esistente nello storage connesso.",
   "ThisDevice": "Questo dispositivo",

@@ -2106,7 +2106,7 @@
   "Thinking": "Думаю...",
   "ThirdPartyDisconnectPrompt": "Ви впевнені, що хочете видалити {{service}}? Це ніяк не вплине на ваш обліковий запис {{account}}.",
   "ThirdPartyResource": "Сторонній ресурс",
-  "ThirdPartyResourceDescription": "Резервну копію можна зберегти в сторонньому обліковому записі (Dropbox, Box.com, OneDrive або Google Диск). Вам потрібно підключити сторонній обліковий запис (Dropbox, Box.com, OneDrive або Google Диск), перш ніж ви зможете зберегти там резервну копію.",
+  "ThirdPartyResourceDescription": "Резервну копію можна зберегти в сторонньому обліковому записі (Dropbox, Box, OneDrive або Google Диск). Вам потрібно підключити сторонній обліковий запис (Dropbox, Box, OneDrive або Google Диск), перш ніж ви зможете зберегти там резервну копію.",
   "ThirdPartyStorage": "Стороннє сховище",
   "ThirdPartyStorageDescription": "Використовуйте сторонні служби як сховище даних для цієї кімнати. Ви можете створити нову папку або вибрати існуючу у під’єднаному сховищі.",
   "ThisDevice": "Цей пристрій",

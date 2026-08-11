@@ -2106,7 +2106,7 @@
   "Thinking": "Düşünüyor...",
   "ThirdPartyDisconnectPrompt": "{{service}} hizmetini kaldırmak istediğinizden emin misiniz? Bu işlem {{account}} hesabınızı hiçbir şekilde etkilemeyecektir.",
   "ThirdPartyResource": "Üçüncü taraf kaynak",
-  "ThirdPartyResourceDescription": "Yedekleme, üçüncü taraf hesabınıza (Dropbox, Box.com, OneDrive veya Google Drive) kaydedilebilir. Üçüncü taraf hesabınızı öncelikle (Dropbox, Box.com, OneDrive veya Google Drive) bağlamanız gerekir, böylelikle yedeğinizi oraya kaydedebileceksiniz.",
+  "ThirdPartyResourceDescription": "Yedekleme, üçüncü taraf hesabınıza (Dropbox, Box, OneDrive veya Google Drive) kaydedilebilir. Üçüncü taraf hesabınızı öncelikle (Dropbox, Box, OneDrive veya Google Drive) bağlamanız gerekir, böylelikle yedeğinizi oraya kaydedebileceksiniz.",
   "ThirdPartyStorage": "Üçüncü taraf depolama",
   "ThirdPartyStorageDescription": "Bu oda için veri depolama olarak üçüncü taraf hizmetleri kullanın. Bağlı depolama alanında yeni bir klasör oluşturabilir veya mevcut olanı seçebilirsiniz.",
   "ThisDevice": "Bu cihaz",

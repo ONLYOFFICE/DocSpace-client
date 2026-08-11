@@ -33,8 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TDocumentBuilderTask } from "../files/types";
-
 export type TDocsConnectTenant = {
   address?: string;
   modifiedDate?: string;
@@ -66,8 +64,6 @@ export type TDocsConnectStat = {
   remaining: number;
   criticalRemaining: boolean;
 };
-
-export type TDocsConnectReportStatus = TDocumentBuilderTask;
 
 export type TDocsConnectTenantInfo = {
   license: { valid: string; trial: boolean; buildDate: string };

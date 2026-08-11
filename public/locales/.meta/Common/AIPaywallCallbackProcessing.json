@@ -3,7 +3,7 @@
   "content": "Setting up your AI balance",
   "content_en_sha1_hash": "61e067ddac35b68cce56aa33bea6ec24b79bb312",
   "created_at": "2026-05-15T13:59:45.939Z",
-  "updated_at": "2026-07-31T15:04:17.732Z",
+  "updated_at": "2026-08-06T08:04:20.052Z",
   "comment": {
     "text": "Page title shown on the AI paywall completion screen during the AI balance setup process.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 346,
-      "context": "<Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isDocsConnect\n ? t(\"DocsConnectCallbackProcessingTitle\")\n : isWalletOnly\n ? t(\"WalletTopUpCallbackProcessingTitle\")\n : t(\"AIPaywallCallbackProcessing\")}\n </Text>\n <Text lineHeight=\"20px\">\n {isDocsConnect\n ? t(\"DocsConnectCallbackProcessingHint\")\n : isWalletOnly",
+      "line_number": 360,
+      "context": "? t(\"DocsConnectCallbackProcessingTitle\")\n : isBackup\n ? t(\"BackupPaywallCallbackProcessingTitle\")\n : isWalletOnly\n ? t(\"WalletTopUpCallbackProcessingTitle\")\n : t(\"AIPaywallCallbackProcessing\")}\n </Text>\n <Text lineHeight=\"20px\">\n {isDocsConnect\n ? t(\"DocsConnectCallbackProcessingHint\")\n : isBackup",
       "module": "/libs/ui-kit"
     }
   ],

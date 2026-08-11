@@ -24,14 +24,101 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/ui-kit/styles/mixins";
 @use "@docspace/ui-kit/styles/variables/colors" as *;
+
+// Dashboard content + the AI chat panel side by side. The panel (ui-kit
+// `ChatPanel`, 400px, flex-shrink: 0) renders inline on desktop and as a
+// fixed full-screen overlay on tablet/mobile via its own CSS.
+.dashboardLayout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Tablet/mobile: the panel's own CSS switches it to `position: fixed; inset: 0`
+// (the full viewport), which would put its left edge under the article
+// sidebar. Pin it to the inline end instead and leave the sidebar edge
+// visible — same geometry as the Home page (see Home.module.scss).
+@include mixins.tablet-and-below {
+  .dashboardLayout :global(.chat-panel) {
+    inset-inline-start: auto;
+    max-width: calc(100vw - 69px);
+  }
+}
+
+@include mixins.mobile {
+  .dashboardLayout :global(.chat-panel) {
+    inset-inline-start: 0;
+    max-width: 100vw;
+  }
+}
+
+// Chat fullscreen: collapse the dashboard content (it stays mounted, marked
+// `inert` by the host) and let the panel fill the section, leaving the
+// article sidebar visible. Mirrors the Home page's `ai-fullscreen` layout
+// mode (see Home.module.scss).
+.dashboardLayout[data-layout-mode="ai-fullscreen"] {
+  .dashboard {
+    flex: 0 0 0;
+    min-width: 0;
+    width: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  :global(.chat-panel) {
+    flex: 1 1 auto;
+    max-width: 100%;
+    border-inline-start: none;
+
+    @include mixins.not-mobile {
+      width: calc(100% - var(--ai-sidebar-width, 0px));
+    }
+  }
+}
+
+// Width of the article sidebar the fullscreen chat leaves visible. A copy of
+// the Home page's rules (Home.module.scss): they target the global
+// `.main-container`, but live in the lazily-loaded Home chunk, which is not
+// necessarily loaded when the dashboard is opened directly.
+@include mixins.not-mobile {
+  :global(.main-container) {
+    --ai-sidebar-width: 0px;
+  }
+
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-desktop-width, 252px);
+  }
+
+  :global(.main-container):has(
+    :global(#article-container[data-show-text="false"])
+  ) {
+    --ai-sidebar-width: var(--article-tablet-width-collapsed, 60px);
+  }
+}
 
 .dashboard {
   position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
   width: 100%;
   height: 100%;
+  // Scrolling is owned by the ui-kit Scrollbar inside (same thin auto-hiding
+  // thumb as Section bodies, with its own edge padding) — a native scrollbar
+  // here would sit flush against the chat panel border. The DashboardLoader
+  // shares this class without the inner Scrollbar, so keep the native
+  // fallback: it only engages when content actually overflows.
   overflow-y: auto;
   box-sizing: border-box;
+}
+
+// Sizes the inner Scrollbar holder; the custom scrollbar needs explicit
+// dimensions (it doesn't grow from content).
+.dashboardScrollbar {
+  width: 100%;
+  height: 100%;
 }
 
 .dashboardInner {
@@ -42,6 +129,30 @@
   max-width: 1180px;
   padding: 20px;
   box-sizing: border-box;
+}
+
+// Reopens the welcome modal. Pinned to the top-right of the page rather than
+// placed in the plan header, where it read as one more link in a row of links.
+// Sits above the Scrollbar (which owns the whole box below it) so it stays put
+// while the content scrolls under it.
+.helpButton {
+  position: absolute;
+  top: 20px;
+  // Logical inset, so the button follows the page to the left edge in RTL.
+  inset-inline-end: 20px;
+  z-index: 1;
+
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+
+  &:hover {
+    background: var(--dropdown-item-hover-background-color);
+  }
 }
 
 // Plan header

@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewCreateADocumentFromADescriptionPrompt",
+  "content": "Create a document from a description. Ask me for the purpose, audience, key points, tone, and preferred length, then create it in Files.",
+  "content_en_sha1_hash": "262cae526f617bab3ccce98fb438f0d8c3c84796",
+  "created_at": "2026-08-05T16:31:58.684Z",
+  "updated_at": "2026-08-05T17:12:24.265Z",
+  "comment": {
+    "text": "Instructional text in the AI suggestions overview explaining how the \"Create a document from a description\" feature operates.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:12:24.265Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 219,
+      "context": "// them because the chat itself is unavailable to guests.\n overview: [\n {\n name: t(\"AiSuggestions:OverviewCreateADocumentFromADescription\"),\n prompt: t(\n \"AiSuggestions:OverviewCreateADocumentFromADescriptionPrompt\",\n ),\n },\n {\n name: t(\"AiSuggestions:OverviewCreateASpreadsheetForMyTask\"),\n prompt: t(\"AiSuggestions:OverviewCreateASpreadsheetForMyTaskPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

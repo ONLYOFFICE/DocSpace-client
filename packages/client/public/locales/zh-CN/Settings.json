@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "使用我们全套的开发工具——从 REST API 和嵌入式 SDK 到 Webhooks 和 OAuth 应用——来集成、扩展和自动化 {{organizationName}} {{productName}}。请在下方选择一个工具开始。",
   "DisableAiServices": "禁用 {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} 将对所有用户隐藏（交互历史记录将保留）。",
-  "DisableAiServicesBalance": "您剩余的余额（<1>{{balance}}</1>）将保留在您的账户中，如果您将来选择重新启用{{aiServices}}，该余额可供使用。",
   "DisableAiServicesConfirm": "您可以随时重新启用{{aiServices}}。您确定要继续吗？",
   "DisableAiServicesDescription": "禁用 {{organizationName}} AI 后，将生效以下更改：",
   "DisableAiServicesServicesDisabled": "付费的 {{aiServices}} 将被停用。",

@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-08-04T09:58:56.356Z",
+  "updated_at": "2026-08-07T15:05:26.412Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -42,14 +42,50 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 171,
+      "context": "tourLabel: t(\"Common:WelcomeStartTour\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-forms\": {\n title: t(\"Common:Forms\"),\n subtitle: t(\"Common:FormsPromoSubtitle\"),\n description: t(\"Common:FormsPromoDescription\"),\n features: [\n {\n Icon: AIPoweredIcon,",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 611,
+      "line_number": 603,
       "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n agents: {\n link: actions.onGoToAgents(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:AIAgents\"),",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 324,
+      "context": "}\n };\n \n const aiFormsItem: NavMenuItem = {\n id: AI_FORMS_ID,\n label: t(\"Common:Forms\"),\n icon: FormFileReactSvgUrl,\n onClick: handleAiFormsClick,\n children: aiFormsEnabled\n ? [\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
+      "line_number": 115,
+      "context": "alwaysOn: false,\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n href: \"/ai-forms\",\n supported: true,\n alwaysOn: false,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiForms/index.tsx",
+      "line_number": 109,
+      "context": "roomId,\n ensureAppsLoaded,\n fetchAppSettings,\n }: AiFormsProps) => {\n const { t } = useTranslation([\"Common\"]);\n useDocumentTitle(\"Common:Forms\");\n const [searchParams, setSearchParams] = useSearchParams();\n const [settingsChecked, setSettingsChecked] = React.useState(false);\n const [showSetupDialog, setShowSetupDialog] = React.useState(false);\n const lastSdkSectionRef = React.useRef<string | null>(null);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 279,
+      "context": "href: \"/rooms/shared/filter\",\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n installed: true,\n href: \"/forms/filter\",\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallAiFormsDialog.tsx",
+      "line_number": 216,
+      "context": "return (\n <InstallModuleDialog\n visible={visible}\n onClose={onClose}\n onInstalled={onInstalled}\n moduleTitle={t(\"Common:Forms\")}\n confirmBody={confirmBody}\n doneHint={t(\"Common:DashboardInstallDoneHint\")}\n steps={steps}\n onInstall={handleInstall}\n onCleanup={handleCleanup}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 806,
+      "line_number": 762,
       "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");",
       "module": "/packages/client"
     },
@@ -58,6 +94,18 @@
       "line_number": 86,
       "context": "{\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n ];\n \n return options.filter((option) => !unavailableOptions.includes(option.key));",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
+      "line_number": 120,
+      "context": "const activeSubfolder = completedFolder ?? inProgressFolder;\n \n const getSectionTitle = React.useCallback(() => {\n switch (activeSection) {\n case FormsSection.MyForms:\n return t(\"Common:Forms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 176,
+      "context": "} = flags ?? {};\n \n return [\n navSectionStep(\n \"my-forms\",\n t(\"Common:Forms\"),\n t(\n \"Common:TourMyForms\",\n \"This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.\",\n ),\n showMenu,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",

@@ -3,7 +3,7 @@
   "content": "+{{count}} more",
   "content_en_sha1_hash": "8b304163e61e758089b032041410144f9db0c0c1",
   "created_at": "2026-06-01T21:20:38.448Z",
-  "updated_at": "2026-08-01T15:33:49.583Z",
+  "updated_at": "2026-08-07T15:05:26.473Z",
   "comment": {
     "text": "Text label in the Integrations card indicating the number of additional items available, where {{count}} represents the number of remaining connectors.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationsCard.tsx",
-      "line_number": 140,
-      "context": "href={allConnectorsUrl}\n target=\"_blank\"\n rel=\"noopener noreferrer\"\n >\n <Text as=\"p\" className={styles.integrationName} isBold>\n {t(\"Common:PlusMore\", { count: 20 })}\n </Text>\n <span className={styles.integrationLink}>\n {t(\"Common:ViewAll\")}\n <ArrowIcon aria-hidden=\"true\" className={styles.integrationArrow} />\n </span>",
+      "line_number": 145,
+      "context": "href={allConnectorsUrl}\n target=\"_blank\"\n rel=\"noopener noreferrer\"\n >\n <Text as=\"p\" className={styles.integrationName} isBold>\n {t(\"Common:PlusMore\", { count: 20 })}\n </Text>\n <span className={styles.integrationLink}>\n {t(\"Common:ViewAll\")}\n <ArrowIcon\n aria-hidden=\"true\"",
       "module": "/packages/client"
     },
     {

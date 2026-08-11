@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Scegliete un tipo, invitate le persone con cui lavorate e inseritevi i vostri file. Ci vuole un minuto, e tutto ciò che avete appena visto inizia a funzionare sui vostri documenti.",
+  "RoomsCreateFirstTitle": "Ora rendetela vostra",
+  "RoomsEmpty": "Le stanze che avete appena visto erano un'anteprima. Le stanze a cui qualcuno vi invita compaiono in questo elenco, e tutto ciò che vi è stato mostrato funziona allo stesso modo al loro interno.",
+  "RoomsEmptyTitle": "Il vostro elenco per ora è vuoto",
+  "RoomsGroups": "Organizzate le stanze in base a caratteristiche specifiche per trovare rapidamente ciò che vi serve. Create gruppi e passate dall'uno all'altro proprio sopra l'elenco.",
+  "RoomsGroupsTitle": "Raggruppate le vostre stanze",
+  "RoomsMembers": "Ogni stanza ha il proprio elenco di membri nel pannello delle informazioni. Aggiungete i contatti del portale e assegnate un ruolo a ciascun membro, dalla semplice visualizzazione dei file alla gestione dell'intera stanza.",
+  "RoomsMembersTitle": "Lavorate insieme",
+  "RoomsPlacesArchive": "{{archive}}: le stanze in cui non lavorate più, ripristinabili in qualsiasi momento.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} e {{trash}} raccolgono i file delle vostre stanze: aperti di recente, contrassegnati con una stella ed eliminati.",
+  "RoomsPlacesTemplates": "{{templates}}: i vostri modelli di stanza.",
+  "RoomsPlacesTitle": "Ogni cosa al suo posto",
+  "RoomsTemplates": "Trasformate qualsiasi stanza in un modello: le sue impostazioni, la sua struttura e i suoi file vengono salvati. Createne una nuova con un clic, non resta che aggiungere i membri.",
+  "RoomsTemplatesTitle": "Riutilizzate ciò che funziona",
+  "RoomsTypes": "{{collaboration}} per il lavoro di squadra, {{vdr}} per la condivisione sicura dei file, {{publicRoom}} per l'accesso esterno, {{custom}} per i vostri scenari.",
+  "RoomsTypesTitle": "Una stanza per ogni attività"
+}

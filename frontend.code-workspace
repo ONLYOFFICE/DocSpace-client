@@ -214,68 +214,68 @@
           },
           {
             "label": "Test all common tests",
-            "task": "Test | Jest:common",
-            "tooltip": "🛠️ Start the \"Test | Jest:common\" task"
+            "task": "Test | Vitest:common",
+            "tooltip": "🛠️ Start the \"Test | Vitest:common\" task"
           },
           {
             "label": "Test ascii (common)",
-            "task": "Test | Jest:ascii",
-            "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
+            "task": "Test | Vitest:ascii",
+            "tooltip": "🛠️ Start the \"Test | Vitest:ascii\" task"
           },
           {
             "label": "Test license headers (common)",
-            "task": "Test | Jest:license",
-            "tooltip": "🛠️ Start the \"Test | Jest:license\" task"
+            "task": "Test | Vitest:license",
+            "tooltip": "🛠️ Start the \"Test | Vitest:license\" task"
           },
           {
             "label": "Test translations (common)",
-            "task": "Test | Jest:translations",
-            "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
+            "task": "Test | Vitest:translations",
+            "tooltip": "🛠️ Start the \"Test | Vitest:translations\" task"
           },
           {
             "label": "Test translations: missing keys",
-            "task": "Test | Jest:translations:missing-keys",
+            "task": "Test | Vitest:translations:missing-keys",
             "tooltip": "🛠️ Check missing keys and missing locale files across ALL languages, not only the base ones"
           },
           {
             "label": "Test translations: clear wrong values",
-            "task": "Test | Jest:translations:clear-wrong",
+            "task": "Test | Vitest:translations:clear-wrong",
             "tooltip": "🛠️ Run translation tests with CLEAR_WRONG_VALUES=true — clears bad variables, tags and forbidden values"
           },
           {
             "label": "Test images (common)",
-            "task": "Test | Jest:images",
-            "tooltip": "🛠️ Start the \"Test | Jest:images\" task"
+            "task": "Test | Vitest:images",
+            "tooltip": "🛠️ Start the \"Test | Vitest:images\" task"
           },
           {
             "label": "Test colors (common)",
-            "task": "Test | Jest:colors",
-            "tooltip": "🛠️ Start the \"Test | Jest:colors\" task"
+            "task": "Test | Vitest:colors",
+            "tooltip": "🛠️ Start the \"Test | Vitest:colors\" task"
           },
           {
             "label": "Test deps check (common)",
-            "task": "Test | Jest:dependencies",
-            "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
+            "task": "Test | Vitest:dependencies",
+            "tooltip": "🛠️ Start the \"Test | Vitest:dependencies\" task"
           },
           {
             "label": "Test deps audit (common)",
-            "task": "Test | Jest:dependencies:audit",
-            "tooltip": "🛠️ Start the \"Test | Jest:dependencies:audit\" task"
+            "task": "Test | Audit:dependencies",
+            "tooltip": "🛠️ Start the \"Test | Audit:dependencies\" task"
           },
           {
             "label": "Test licenses audit (common)",
-            "task": "Test | Jest:licenses:audit",
-            "tooltip": "🛠️ Start the \"Test | Jest:licenses:audit\" task"
+            "task": "Test | Audit:licenses",
+            "tooltip": "🛠️ Start the \"Test | Audit:licenses\" task"
           },
           {
             "label": "Test unit",
-            "task": "Test | Jest:unit",
-            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
+            "task": "Test | Vitest:unit",
+            "tooltip": "🛠️ Start the \"Test | Vitest:unit\" task"
           },
           {
             "label": "Test unit:ui-kit",
-            "task": "Test | Jest:unit:ui-kit",
-            "tooltip": "🛠️ Start the \"Test | Jest:unit:ui-kit\" task"
+            "task": "Test | Vitest:unit:ui-kit",
+            "tooltip": "🛠️ Start the \"Test | Vitest:unit:ui-kit\" task"
           },
           {
             "label": "Test vitest (client)",

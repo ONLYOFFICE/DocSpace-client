@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Zgjidhni një lloj, ftoni njerëzit me të cilët punoni dhe hidhni brenda skedarët tuaj. Zgjat një minutë — dhe gjithçka që sapo patë fillon të funksionojë mbi dokumentet tuaja.",
+  "RoomsCreateFirstTitle": "Tani bëjeni tuajën",
+  "RoomsEmpty": "Dhomat që sapo patë ishin një paraparje. Dhomat ku ju fton dikush shfaqen në këtë listë, dhe gjithçka që ju është treguar funksionon njësoj në to.",
+  "RoomsEmptyTitle": "Lista juaj është bosh për momentin",
+  "RoomsGroups": "Organizoni dhomat sipas veçorive të caktuara për të gjetur shpejt atë që ju duhet. Krijoni grupe dhe kaloni midis tyre pikërisht mbi listë.",
+  "RoomsGroupsTitle": "Grupojini dhomat tuaja",
+  "RoomsMembers": "Çdo dhomë e ka listën e anëtarëve në panelin e informacionit. Shtoni kontakte të portalit dhe caktoni një rol për secilin anëtar — nga shikimi i skedarëve deri te administrimi i gjithë dhomës.",
+  "RoomsMembersTitle": "Punoni së bashku",
+  "RoomsPlacesArchive": "{{archive}} — dhomat në të cilat nuk punoni më, të rikthyeshme në çdo kohë.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} dhe {{trash}} mbledhin skedarë nga dhomat tuaja: të hapur së fundmi, të shënuar me yll dhe të fshirë.",
+  "RoomsPlacesTemplates": "{{templates}} — modelet tuaja të dhomave.",
+  "RoomsPlacesTitle": "Gjithçka në vendin e vet",
+  "RoomsTemplates": "Kthejeni çdo dhomë në një model — cilësimet, struktura dhe skedarët e saj ruhen. Krijoni prej tij një dhomë të re me një klikim, mbetet vetëm të shtoni anëtarët.",
+  "RoomsTemplatesTitle": "Ripërdorni atë që funksionon",
+  "RoomsTypes": "{{collaboration}} për punën në ekip, {{vdr}} për ndarjen e sigurt të skedarëve, {{publicRoom}} për akses nga jashtë, {{custom}} për skenarët tuaj.",
+  "RoomsTypesTitle": "Një dhomë për çdo detyrë"
+}

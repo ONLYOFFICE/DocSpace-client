@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewCreateASpreadsheetForMyTaskPrompt",
+  "content": "Create a spreadsheet for my task. Ask what I need to track or calculate, which fields to include, and how the result should be organized, then create it in Files.",
+  "content_en_sha1_hash": "ebbee54cf4eef9c5cacb4a3d04861a73a1eca5bb",
+  "created_at": "2026-08-05T16:31:58.699Z",
+  "updated_at": "2026-08-05T17:10:40.635Z",
+  "comment": {
+    "text": "Instructional text within an AI suggestion item describing how the feature automates spreadsheet creation based on user requirements and saves the result to Files.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:10:40.635Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 224,
+      "context": "\"AiSuggestions:OverviewCreateADocumentFromADescriptionPrompt\",\n ),\n },\n {\n name: t(\"AiSuggestions:OverviewCreateASpreadsheetForMyTask\"),\n prompt: t(\"AiSuggestions:OverviewCreateASpreadsheetForMyTaskPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewCreateAPresentationOnATopic\"),\n prompt: t(\"AiSuggestions:OverviewCreateAPresentationOnATopicPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

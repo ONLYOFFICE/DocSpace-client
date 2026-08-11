@@ -3,16 +3,17 @@
   "content": "Summarize favorite spaces",
   "content_en_sha1_hash": "b012fc3ff997d37a1002a3e8ae7df6974a790f3b",
   "created_at": "2026-08-04T09:58:55.165Z",
-  "updated_at": "2026-08-04T09:58:56.454Z",
+  "updated_at": "2026-08-05T17:31:04.976Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "A button label or menu item in the AI suggestions list that initiates an AI-generated summary of the user's favorite spaces.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:31:04.976Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 696,
+      "line_number": 731,
       "context": "],\n \n // +\n formsFavorites: [\n {\n name: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpacesPrompt\"),",
       "module": "/packages/client"
     }

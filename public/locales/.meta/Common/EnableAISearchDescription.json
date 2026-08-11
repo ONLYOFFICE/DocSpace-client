@@ -3,7 +3,7 @@
   "content": "Use an AI search engine to enhance AI chats with real-time information from the internet",
   "content_en_sha1_hash": "95508dc5b7a8d13ec445920f3df57faaee0a2d8b",
   "created_at": "2026-07-04T11:29:48.487Z",
-  "updated_at": "2026-08-01T16:25:17.907Z",
+  "updated_at": "2026-08-07T10:52:45.137Z",
   "comment": {
     "text": "Explanatory text within a confirmation dialog body and as a description for a service toggle section, detailing the benefits of enabling AI search.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 557,
-      "context": "onClose={() => updateDialogVisibility(AI_SEARCH_ENUM, false)}\n onConfirm={onConfirmEnableAITools}\n title={t(\"ActivateAIFeatures\")}\n bodyText={[\n t(\"AISearchRequiresAIFeatures\"),\n t(\"EnableAISearchDescription\"),\n ]}\n acceptLabel={t(\"Activate\")}\n />\n ) : null}\n {isConfirmDialogVisible && confirmActionType ? (",
+      "line_number": 454,
+      "context": "onClose={() => updateDialogVisibility(AI_SEARCH_ENUM, false)}\n onConfirm={onConfirmEnableAITools}\n title={t(\"ActivateAIFeatures\")}\n bodyText={[\n t(\"AISearchRequiresAIFeatures\"),\n t(\"EnableAISearchDescription\"),\n ]}\n acceptLabel={t(\"Activate\")}\n />\n ) : null}\n {isTopUpBalanceVisible ? (",
       "module": "/libs/ui-kit"
     },
     {

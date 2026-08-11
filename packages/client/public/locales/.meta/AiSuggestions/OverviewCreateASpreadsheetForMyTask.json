@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewCreateASpreadsheetForMyTask",
+  "content": "Create a spreadsheet for my task",
+  "content_en_sha1_hash": "02e859417571c6ced376d5a93118f6cfd1eeaf25",
+  "created_at": "2026-08-05T16:31:58.695Z",
+  "updated_at": "2026-08-05T17:11:02.382Z",
+  "comment": {
+    "text": "Label for an AI suggestion option in the overview that initiates spreadsheet creation.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:11:02.382Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 223,
+      "context": "prompt: t(\n \"AiSuggestions:OverviewCreateADocumentFromADescriptionPrompt\",\n ),\n },\n {\n name: t(\"AiSuggestions:OverviewCreateASpreadsheetForMyTask\"),\n prompt: t(\"AiSuggestions:OverviewCreateASpreadsheetForMyTaskPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewCreateAPresentationOnATopic\"),\n prompt: t(\"AiSuggestions:OverviewCreateAPresentationOnATopicPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewPrepareADocumentForPDFPrompt",
+  "content": "Prepare a PDF-ready document. Ask me for the purpose, content, page format, and visual requirements, then create the source document in Files and prepare it for PDF export.",
+  "content_en_sha1_hash": "388e604aa04615d902af20987ce63aca38e23509",
+  "created_at": "2026-08-05T16:31:58.714Z",
+  "updated_at": "2026-08-05T17:08:59.754Z",
+  "comment": {
+    "text": "Instructional prompt for an AI suggestion that details the specific steps the assistant must follow to prepare a document for PDF export.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:08:59.754Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 232,
+      "context": "name: t(\"AiSuggestions:OverviewCreateAPresentationOnATopic\"),\n prompt: t(\"AiSuggestions:OverviewCreateAPresentationOnATopicPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewPrepareADocumentForPDF\"),\n prompt: t(\"AiSuggestions:OverviewPrepareADocumentForPDFPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewFindATemplateFromTheLibrary\"),\n prompt: t(\"AiSuggestions:OverviewFindATemplateFromTheLibraryPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

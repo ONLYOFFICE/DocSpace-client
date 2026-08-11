@@ -464,20 +464,6 @@ export async function getWalletBalance(
   }) as TBalance;
 }
 
-export async function getServiceQuotaBalance(
-  refresh?: boolean,
-  signal?: AbortSignal,
-) {
-  const params = refresh ? { refresh: true } : {};
-
-  return request({
-    method: "get",
-    url: `/portal/payment/customer/aibalance`,
-    params,
-    signal,
-  }) as TBalance;
-}
-
 export async function getAiPrices(signal?: AbortSignal) {
   return request({
     method: "get",
@@ -513,8 +499,6 @@ export async function saveDeposite(amount: number, currency: string) {
     },
   }) as string;
 }
-
-
 
 export async function startTransactionHistoryReport(
   startDate: string,

@@ -102,50 +102,59 @@ const IntegrationsCardComponent = ({
   ];
 
   return (
-    <CollapsibleCard
-      title={t("Common:AlreadyUsingAnotherPlatform")}
-      description={t("Common:IntegrationsDescription", {
-        productName: getBrandName("ProductName"),
-      })}
-      defaultOpen
-    >
-      <div className={styles.integrationsGrid}>
-        {platforms.map((platform) => (
+    // Anchor for the dashboard tour, on a wrapper rather than on the card:
+    // `CollapsibleCard` takes a fixed set of props and forwards no `data-*`.
+    // The wrapper stays put when the card is collapsed, so the spotlight
+    // follows the card down to its header instead of the step disappearing.
+    <div data-tour-id="dashboard-integrations">
+      <CollapsibleCard
+        title={t("Common:AlreadyUsingAnotherPlatform")}
+        description={t("Common:IntegrationsDescription", {
+          productName: getBrandName("ProductName"),
+        })}
+        defaultOpen
+      >
+        <div className={styles.integrationsGrid}>
+          {platforms.map((platform) => (
+            <a
+              key={platform.id}
+              className={styles.integrationTile}
+              href={platform.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Text as="p" className={styles.integrationName}>
+                {platform.name}
+              </Text>
+              <span className={styles.integrationLink}>
+                {t("Common:Connect")}
+                <ArrowIcon
+                  aria-hidden="true"
+                  className={styles.integrationArrow}
+                />
+              </span>
+            </a>
+          ))}
           <a
-            key={platform.id}
-            className={styles.integrationTile}
-            href={platform.url}
+            className={`${styles.integrationTile} ${styles.integrationTileMore}`}
+            href={allConnectorsUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Text as="p" className={styles.integrationName}>
-              {platform.name}
+            <Text as="p" className={styles.integrationName} isBold>
+              {t("Common:PlusMore", { count: 20 })}
             </Text>
             <span className={styles.integrationLink}>
-              {t("Common:Connect")}
+              {t("Common:ViewAll")}
               <ArrowIcon
                 aria-hidden="true"
                 className={styles.integrationArrow}
               />
             </span>
           </a>
-        ))}
-        <a
-          className={`${styles.integrationTile} ${styles.integrationTileMore}`}
-          href={allConnectorsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Text as="p" className={styles.integrationName} isBold>
-            {t("Common:PlusMore", { count: 20 })}
-          </Text>
-          <span className={styles.integrationLink}>
-            {t("Common:ViewAll")}
-            <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
-          </span>
-        </a>
-      </div>
-    </CollapsibleCard>
+        </div>
+      </CollapsibleCard>
+    </div>
   );
 };
 

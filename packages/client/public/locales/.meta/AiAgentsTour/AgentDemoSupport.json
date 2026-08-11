@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentDemoSupport",
+  "content": "Support desk assistant",
+  "content_en_sha1_hash": "5f0cd5b569808ebc8d69e0eee132d15e0605af85",
+  "created_at": "2026-08-06T14:20:56.247Z",
+  "updated_at": "2026-08-06T14:26:49.243Z",
+  "comment": {
+    "text": "Title of an AI Room in the feature tour, serving as the name for a specific demonstration agent.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:26:49.243Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/index.tsx",
+      "line_number": 321,
+      "context": "// already exist — an agent is named after its job, so these are the\n // tour's own strings.\n rooms: [\n {\n roomType: RoomsType.AIRoom,\n title: t(\"AiAgentsTour:AgentDemoSupport\"),\n },\n {\n roomType: RoomsType.AIRoom,\n title: t(\"AiAgentsTour:AgentDemoOnboarding\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

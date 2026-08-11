@@ -27,5 +27,8 @@
   "UserTariffAlmostReachedForAdmins": "Quando o limite for atingido, todos os utilizadores serão adicionados apenas com permissões de utilizador. Para poder adicionar mais administradores, <1>clique aqui</1> para atualizar o seu plano tarifário.",
   "UserTariffLimitHeader": "Foi atingido o limite para o número de administradores: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Todos os utilizadores serão adicionados apenas com permissões de Utilizador. Para poder adicionar mais administradores, contacte o administrador {{productName}} para atualizar o plano tarifário.",
-  "UserTariffReachedForAdmins": "Todos os utilizadores serão adicionados apenas com permissões de utilizador. Para poder adicionar mais administradores, <1>clique aqui</1> para atualizar o seu plano tarifário."
+  "UserTariffReachedForAdmins": "Todos os utilizadores serão adicionados apenas com permissões de utilizador. Para poder adicionar mais administradores, <1>clique aqui</1> para atualizar o seu plano tarifário.",
+  "WalletLowBalanceContactPayer": "Contacte o Pagador (<1>{{payerContact}}</1>) para recarregar a carteira e evitar interrupções nos serviços pagos.",
+  "WalletLowBalanceDescription": "Recarregue a sua carteira para evitar interrupções nos serviços pagos. <1>Recarregar</1>",
+  "WalletLowBalanceHeader": "Os seus créditos estão a esgotar-se: {{balance}}"
 }

@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsMembers",
+  "content": "Every room has its member list in the Info panel. Add portal contacts and set a role for each member — from viewing files to managing the entire room.",
+  "content_en_sha1_hash": "9b69b15a73cb47855c75d4e60ab117361b4f4e69",
+  "created_at": "2026-08-06T14:20:52.337Z",
+  "updated_at": "2026-08-07T15:05:26.433Z",
+  "comment": {
+    "text": "Instructional text for an onboarding tour step explaining how to manage room members and assign roles within the Info panel.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:51:33.292Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 210,
+      "context": "isDesktop &&\n infoPanelHooks &&\n revealStep(\n INFO_PANEL_SELECTOR,\n t(\"RoomsTour:RoomsMembersTitle\"),\n t(\"RoomsTour:RoomsMembers\"),\n callbacks,\n LOG_LABEL,\n infoPanelHooks,\n [FIRST_ITEM_SELECTOR],\n FIRST_ITEM_SELECTOR,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -47,6 +47,7 @@ export const useDocumentTitle = (titleI18nKey: string) => {
     const organizationName = getBrandName("OrganizationName");
 
     if (titleI18nKey) {
+      // biome-ignore lint/plugin/no-dynamic-i18n-key: callers pass literal keys captured by the locales scanner
       title = `${t(titleI18nKey)} - ${organizationName}`;
     } else {
       title = organizationName;

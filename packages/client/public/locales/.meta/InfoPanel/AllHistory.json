@@ -1,0 +1,29 @@
+{
+  "key_path": "AllHistory",
+  "content": "All history",
+  "content_en_sha1_hash": "62009bc1fa9281b6a7815d9f074cfc847cb3c1f8",
+  "created_at": "2026-08-05T16:31:56.222Z",
+  "updated_at": "2026-08-06T06:41:54.869Z",
+  "comment": {
+    "text": "Menu option label in the export dropdown used to select the entire history period for data export.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T06:41:54.869Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/ExportMenu/ExportMenu.tsx",
+      "line_number": 88,
+      "context": "const exportScopeOptions = [\n {\n id: \"info_history_export_all\",\n value: ExportScope.AllHistory,\n label: t(\"InfoPanel:AllHistory\"),\n },\n {\n id: \"info_history_export_date-range\",\n value: ExportScope.DateRange,\n label: t(\"Common:DateRange\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

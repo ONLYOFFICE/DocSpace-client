@@ -3,16 +3,17 @@
   "content": "Restore selected items in Forms Trash and show what will be restored before applying the action. If this information is not provided, ask me for the exact items to restore and the destination if applicable.",
   "content_en_sha1_hash": "6dbcaf77620c33a1efb1005d8cc8b8e499a58482",
   "created_at": "2026-08-04T09:58:55.182Z",
-  "updated_at": "2026-08-04T09:58:56.464Z",
+  "updated_at": "2026-08-05T17:19:18.916Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "An AI prompt instruction that directs the assistant on how to handle restoration requests from the Forms Trash and how to proceed if details are missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:19:18.916Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 759,
+      "line_number": 794,
       "context": "prompt: t(\"AiSuggestions:FormsTrashFindADeletedFormPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashRestoreSelectedItems\"),\n prompt: t(\"AiSuggestions:FormsTrashRestoreSelectedItemsPrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTrashDeletePermanently\"),\n prompt: t(\"AiSuggestions:FormsTrashDeletePermanentlyPrompt\"),",
       "module": "/packages/client"
     }

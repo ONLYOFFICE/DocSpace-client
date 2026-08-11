@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Choisissez un type, invitez les personnes avec qui vous travaillez et déposez-y vos fichiers. Cela prend une minute — et tout ce que vous venez de voir se met à fonctionner sur vos propres documents.",
+  "RoomsCreateFirstTitle": "À vous de la personnaliser",
+  "RoomsEmpty": "Les salles que vous venez de voir n'étaient qu'un aperçu. Les salles auxquelles quelqu'un vous invite apparaissent dans cette liste, et tout ce qui vous a été montré y fonctionne de la même façon.",
+  "RoomsEmptyTitle": "Votre liste est vide pour l'instant",
+  "RoomsGroups": "Organisez les salles selon des caractéristiques précises pour trouver rapidement ce dont vous avez besoin. Créez des groupes et passez de l'un à l'autre juste au-dessus de la liste.",
+  "RoomsGroupsTitle": "Groupez vos salles",
+  "RoomsMembers": "Chaque salle a sa liste de membres dans le panneau d'information. Ajoutez des contacts du portail et définissez un rôle pour chaque membre — de la simple consultation des fichiers à la gestion de toute la salle.",
+  "RoomsMembersTitle": "Travaillez ensemble",
+  "RoomsPlacesArchive": "{{archive}} — les salles dans lesquelles vous ne travaillez plus, restaurables à tout moment.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} et {{trash}} rassemblent les fichiers de vos salles : récemment ouverts, marqués d'une étoile et supprimés.",
+  "RoomsPlacesTemplates": "{{templates}} — vos modèles de salle.",
+  "RoomsPlacesTitle": "Chaque chose à sa place",
+  "RoomsTemplates": "Transformez n'importe quelle salle en modèle — ses paramètres, sa structure et ses fichiers sont enregistrés. Créez-en une nouvelle en un clic, il ne reste plus qu'à ajouter des membres.",
+  "RoomsTemplatesTitle": "Réutilisez ce qui fonctionne",
+  "RoomsTypes": "{{collaboration}} pour le travail d'équipe, {{vdr}} pour le partage sécurisé de fichiers, {{publicRoom}} pour l'accès externe, {{custom}} pour vos propres scénarios.",
+  "RoomsTypesTitle": "Une salle pour chaque tâche"
+}

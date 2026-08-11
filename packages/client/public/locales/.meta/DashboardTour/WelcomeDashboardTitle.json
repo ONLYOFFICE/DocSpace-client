@@ -1,0 +1,29 @@
+{
+  "key_path": "WelcomeDashboardTitle",
+  "content": "Welcome to {{productName}}",
+  "content_en_sha1_hash": "aca54bc00694fe8488fc161e8a78ca1ec1a29e4c",
+  "created_at": "2026-08-07T10:52:39.931Z",
+  "updated_at": "2026-08-07T10:54:32.108Z",
+  "comment": {
+    "text": "Title of the welcome modal dialog shown on the dashboard, containing the {{productName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-08-07T10:54:32.108Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/WelcomeDialog/WelcomeDialog.tsx",
+      "line_number": 84,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"DashboardTour:WelcomeDashboardTitle\", { productName })}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {/* Decorative: the greeting beside it already says what this is. */}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

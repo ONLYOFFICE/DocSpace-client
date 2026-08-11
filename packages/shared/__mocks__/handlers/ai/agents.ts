@@ -320,7 +320,7 @@ const successListWithCreate = {
 					ExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
 					PrimaryExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
 				},
-				title: "Plugin SDK",
+				title: "AI agent",
 				access: 0,
 				sharedBy: {
 					id: "4a515a15-d4d6-4b8e-828e-e0586f18f3a3",
@@ -723,7 +723,7 @@ const getListWithCreate = ({
 							"None",
 						],
 					},
-					title: "Plugin SDK",
+					title: "AI agent",
 					access,
 					sharedBy: {
 						id: "4a515a15-d4d6-4b8e-828e-e0586f18f3a3",
@@ -909,33 +909,71 @@ const getListWithCreate = ({
 	};
 };
 
+/**
+ * Overrides `Create` on the section root the list came back under.
+ *
+ * That one flag is what the whole create affordance hangs off — the "New agent"
+ * header button and the create tile both read it (getSectionCreateButton →
+ * getFolderModel → `security.Create`) — and the server answers it per role: an
+ * agent list fetched by someone who cannot manage agents comes back with
+ * `Create: false`. The canned payloads here all say `true`, so a test standing
+ * in as anybody else has to say otherwise.
+ */
+const withRootCreate = <T,>(payload: T, canCreate?: boolean): T => {
+	if (canCreate === undefined) return payload;
+
+	const list = payload as unknown as {
+		response: { current: { security: Record<string, boolean> } };
+	};
+
+	return {
+		...list,
+		response: {
+			...list.response,
+			current: {
+				...list.response.current,
+				security: { ...list.response.current.security, Create: canCreate },
+			},
+		},
+	} as unknown as T;
+};
+
 export const aiAgentsResolver = ({
 	withCreate,
 	withListCreate,
 	aiAccess,
 	inRoom = true,
 	isDocAdmin,
+	canCreate,
 }: {
 	withCreate?: boolean;
 	withListCreate?: boolean;
 	aiAccess?: ShareAccessRights;
 	inRoom?: boolean;
 	isDocAdmin?: boolean;
+	canCreate?: boolean;
 }) => {
 	if (aiAccess !== undefined) {
 		return new Response(
 			JSON.stringify(
-				getListWithCreate({ access: aiAccess, inRoom, isDocAdmin }),
+				withRootCreate(
+					getListWithCreate({ access: aiAccess, inRoom, isDocAdmin }),
+					canCreate,
+				),
 			),
 		);
 	}
 	if (withCreate) {
-		return new Response(JSON.stringify(successEmptyWithCreate));
+		return new Response(
+			JSON.stringify(withRootCreate(successEmptyWithCreate, canCreate)),
+		);
 	}
 	if (withListCreate) {
-		return new Response(JSON.stringify(successListWithCreate));
+		return new Response(
+			JSON.stringify(withRootCreate(successListWithCreate, canCreate)),
+		);
 	}
-	return new Response(JSON.stringify(successEmpty));
+	return new Response(JSON.stringify(withRootCreate(successEmpty, canCreate)));
 };
 
 export const aiAgentsHandler = (
@@ -946,12 +984,18 @@ export const aiAgentsHandler = (
 		aiAccess,
 		inRoom,
 		isDocAdmin,
+		canCreate,
 	}: {
 		withCreate?: boolean;
 		withListCreate?: boolean;
 		aiAccess?: ShareAccessRights;
 		inRoom?: boolean;
 		isDocAdmin?: boolean;
+		/**
+		 * `security.Create` on the AI agents root. Left out, the payload's own
+		 * value stands.
+		 */
+		canCreate?: boolean;
 	} = {},
 ) => {
 	return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
@@ -961,6 +1005,7 @@ export const aiAgentsHandler = (
 			aiAccess,
 			inRoom,
 			isDocAdmin,
+			canCreate,
 		});
 	});
 };

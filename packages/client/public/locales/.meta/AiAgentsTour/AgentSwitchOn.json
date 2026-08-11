@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentSwitchOn",
+  "content": "The agents you have just walked through were a preview — this portal has no AI switched on yet. That button is the whole of what stands between you and the first real one.",
+  "content_en_sha1_hash": "e89aa01616730e669b5adaa5657c2d2151992247",
+  "created_at": "2026-08-06T14:20:56.252Z",
+  "updated_at": "2026-08-07T15:05:26.410Z",
+  "comment": {
+    "text": "Instructional text within an onboarding tour step that appears when no AI agents are enabled, explaining how to activate them using a button.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:22:23.613Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 293,
+      "context": "emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStartTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )\n : !isAdmin &&",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

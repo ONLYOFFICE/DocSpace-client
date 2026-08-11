@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentSwitchOnTitle",
+  "content": "Switch it on and see for real",
+  "content_en_sha1_hash": "5479df5497afe816b2bff64455a5d258a94dcd4c",
+  "created_at": "2026-08-06T14:20:56.253Z",
+  "updated_at": "2026-08-07T15:05:26.409Z",
+  "comment": {
+    "text": "Title of a step in the AI Agents onboarding tour, shown when instructing the user to enable an agent feature.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:22:01.834Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 290,
+      "context": "(emptyScreenAction\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStartTitle\")\n : t(\"AiAgentsTour:AgentSwitchOnTitle\"),\n emptyScreenAction === \"create\"\n ? t(\"AiAgentsTour:AgentStart\")\n : t(\"AiAgentsTour:AgentSwitchOn\"),\n callbacks,\n LOG_LABEL,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

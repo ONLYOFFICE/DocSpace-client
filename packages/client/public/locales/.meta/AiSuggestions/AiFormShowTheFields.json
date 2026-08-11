@@ -3,16 +3,17 @@
   "content": "Show the form fields",
   "content_en_sha1_hash": "311b360a535b6d2b69d57d314feabe4aabefb58d",
   "created_at": "2026-08-04T09:58:55.104Z",
-  "updated_at": "2026-08-04T09:58:56.466Z",
+  "updated_at": "2026-08-06T06:39:28.934Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion item that, when selected, instructs the AI to identify and display specific fields within a form.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T06:39:28.934Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 821,
+      "line_number": 856,
       "context": "{\n name: t(\"AiSuggestions:AiFormAnalyzeTheForm\"),\n prompt: t(\"AiSuggestions:AiFormAnalyzeTheFormPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormShowTheFields\"),\n prompt: t(\"AiSuggestions:AiFormShowTheFieldsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiFormWhatIsStillEmpty\"),\n prompt: t(\"AiSuggestions:AiFormWhatIsStillEmptyPrompt\"),",
       "module": "/packages/client"
     }

@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Elija un tipo, invite a las personas con las que trabaja y añada sus archivos. Se tarda un minuto, y todo lo que acaba de ver empieza a funcionar con sus propios documentos.",
+  "RoomsCreateFirstTitle": "Ahora hágalo suyo",
+  "RoomsEmpty": "Las salas que acaba de ver eran una vista previa. Las salas a las que alguien le invite aparecerán en esta lista, y todo lo que se le ha mostrado funciona igual en ellas.",
+  "RoomsEmptyTitle": "Su lista está vacía por ahora",
+  "RoomsGroups": "Organice las salas por características concretas para encontrar rápidamente lo que necesita. Cree grupos y cambie entre ellos justo encima de la lista.",
+  "RoomsGroupsTitle": "Agrupe sus salas",
+  "RoomsMembers": "Cada sala tiene su lista de miembros en el panel de información. Añada contactos del portal y asigne un rol a cada miembro, desde ver archivos hasta gestionar toda la sala.",
+  "RoomsMembersTitle": "Trabajen juntos",
+  "RoomsPlacesArchive": "{{archive}}: salas en las que ya no trabaja, restaurables en cualquier momento.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} y {{trash}} reúnen archivos de sus salas: abiertos recientemente, marcados con estrella y eliminados.",
+  "RoomsPlacesTemplates": "{{templates}}: sus plantillas de sala.",
+  "RoomsPlacesTitle": "Cada cosa en su sitio",
+  "RoomsTemplates": "Convierta cualquier sala en una plantilla: se guardan su configuración, su estructura y sus archivos. Cree una sala nueva a partir de ella con un clic y solo le quedará añadir miembros.",
+  "RoomsTemplatesTitle": "Reutilice lo que funciona",
+  "RoomsTypes": "{{collaboration}} para el trabajo en equipo, {{vdr}} para compartir archivos de forma segura, {{publicRoom}} para el acceso externo y {{custom}} para sus propios escenarios.",
+  "RoomsTypesTitle": "Una sala para cada tarea"
+}

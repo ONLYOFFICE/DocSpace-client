@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Növü seçin, birlikdə işlədiyiniz adamları dəvət edin və fayllarınızı ora qoyun. Bir dəqiqə çəkir — və indicə gördüyünüz hər şey öz sənədləriniz üzərində işləməyə başlayır.",
+  "RoomsCreateFirstTitle": "İndi onu özünüzünkü edin",
+  "RoomsEmpty": "İndicə gördüyünüz otaqlar ilkin baxış idi. Kiminsə sizi dəvət etdiyi otaqlar bu siyahıda görünür və sizə göstərilən hər şey orada da eyni cür işləyir.",
+  "RoomsEmptyTitle": "Siyahınız hələlik boşdur",
+  "RoomsGroups": "Lazım olanı tez tapmaq üçün otaqları müəyyən əlamətlərə görə nizamlayın. Qruplar yaradın və siyahının düz üstündən onlar arasında keçid edin.",
+  "RoomsGroupsTitle": "Otaqlarınızı qruplaşdırın",
+  "RoomsMembers": "Hər otağın üzv siyahısı Məlumat panelindədir. Portal kontaktlarını əlavə edin və hər üzv üçün rol təyin edin — fayllara baxmaqdan bütün otağı idarə etməyə qədər.",
+  "RoomsMembersTitle": "Birlikdə işləyin",
+  "RoomsPlacesArchive": "{{archive}} — artıq işləmədiyiniz otaqlar, istənilən vaxt bərpa edilə bilər.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} və {{trash}} otaqlarınızdakı faylları bir yerə toplayır: son açılanlar, ulduzla işarələnənlər və silinənlər.",
+  "RoomsPlacesTemplates": "{{templates}} — otaq şablonlarınız.",
+  "RoomsPlacesTitle": "Hər şey öz yerində",
+  "RoomsTemplates": "İstənilən otağı şablona çevirin — onun parametrləri, quruluşu və faylları saxlanılır. Ondan bir kliklə yeni otaq yaradın, geriyə yalnız üzv əlavə etmək qalır.",
+  "RoomsTemplatesTitle": "İşə yarayanı təkrar istifadə edin",
+  "RoomsTypes": "Komanda işi üçün {{collaboration}}, faylların təhlükəsiz paylaşımı üçün {{vdr}}, kənardan giriş üçün {{publicRoom}}, öz ssenariləriniz üçün {{custom}}.",
+  "RoomsTypesTitle": "Hər tapşırığa bir otaq"
+}

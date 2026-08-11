@@ -1,0 +1,167 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/variables/colors";
+
+.tooltip {
+  background-color: var(--tooltip-bg-color, var(--background-color));
+  border-radius: 11px;
+  color: var(--tooltip-text-color, var(--text-color));
+  padding: 20px;
+  max-width: min(340px, calc(100vw - 32px));
+  min-width: min(240px, calc(100vw - 32px));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow:
+    0px 2px 8px rgba(0, 0, 0, 0.08),
+    0px 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: colors.$gray;
+
+  &:hover {
+    color: colors.$light-gray-dark;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  padding-inline-end: 24px;
+}
+
+.content {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  opacity: 0.9;
+}
+
+/** A list-shaped step body (see TourList). */
+.list {
+  margin: 0;
+  padding-inline-start: 18px;
+
+  li:not(:last-child) {
+    margin-block-end: 6px;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+// Step indicator: one dot per step, the current one drawn as an accent ring.
+// The 4px gap pairs with the current dot's 2px margin so the spacing between
+// any two dots reads the same whether one of them carries the ring.
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+// The dot itself is 7x7; the current step's ring is drawn outside it, so that
+// one measures 9x9 overall without the dot shrinking.
+.dot,
+.dotCurrent {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.dot {
+  background-color: var(--tooltip-text-color, var(--text-color));
+  opacity: 0.15;
+}
+
+// Hollow centre with an accent ring. The ring is a box-shadow, which takes no
+// layout space — the margin reserves the 2px it paints so neighbouring dots
+// keep their spacing.
+.dotCurrent {
+  background-color: var(--tooltip-bg-color, var(--background-color));
+  box-shadow: 0 0 0 2px var(--accent-button);
+  margin: 2px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+:global(.tour-outline-item) {
+  outline: 2px solid var(--accent-button);
+  outline-offset: -2px;
+  border-radius: 3px;
+}
+
+// Stands in for a pointer the tour cannot fake: a row's quick actions are kept
+// at `display: none` until it is hovered (ui-kit's TableRow does this to
+// `.create-share-link`), and `:hover` can't be set from script. The step
+// pointing at such a control marks it with this class — `!important` because the
+// rule it overrides is just as specific.
+:global(.tour-reveal-hidden-control) {
+  display: block !important;
+}

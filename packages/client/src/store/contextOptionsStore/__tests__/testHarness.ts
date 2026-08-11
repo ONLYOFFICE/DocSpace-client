@@ -94,7 +94,6 @@ const defaultFakes = () => ({
   userStore: { user: { id: "user-1", isAdmin: false, isOwner: false } },
   indexingStore: {},
   clientLoadingStore: {},
-  guidanceStore: {},
 });
 
 const ORDER = [
@@ -117,7 +116,6 @@ const ORDER = [
   "userStore",
   "indexingStore",
   "clientLoadingStore",
-  "guidanceStore",
 ] as const;
 
 export const createTestContextOptionsStore = (

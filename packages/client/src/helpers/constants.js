@@ -105,6 +105,7 @@ export const QuotaBarTypes = Object.freeze({
   PersonalUserQuota: "personal-user-quota",
   StorageQuota: "tenant-custom-quota",
   StorageQuotaLimit: "tenant-custom-quota-limit",
+  WalletLowBalance: "wallet-low-balance",
 });
 
 export const BINDING_POST = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";

@@ -3,16 +3,17 @@
   "content": "Scan the selected VDR documents for personal, financial, confidential, or otherwise sensitive information and report the findings without changing files. If this information is not provided, ask me for the data categories or compliance rules to check.",
   "content_en_sha1_hash": "3726b200218f9d7aa50a7005fd4741ee86421b18",
   "created_at": "2026-08-04T09:58:55.228Z",
-  "updated_at": "2026-08-04T09:58:56.436Z",
+  "updated_at": "2026-08-05T16:36:42.899Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional prompt for an AI assistant when performing a sensitive data scan in a VDR room, specifying the scanning criteria and fallback instructions.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:36:42.899Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 603,
+      "line_number": 638,
       "context": "// +\n vdrRoom: [\n {\n name: t(\"AiSuggestions:VdrRoomFindSensitiveData\"),\n prompt: t(\"AiSuggestions:VdrRoomFindSensitiveDataPrompt\"),\n },\n {\n name: t(\"AiSuggestions:VdrRoomOrganizeVDRDocuments\"),\n prompt: t(\"AiSuggestions:VdrRoomOrganizeVDRDocumentsPrompt\"),\n requires: \"create\",",
       "module": "/packages/client"
     }

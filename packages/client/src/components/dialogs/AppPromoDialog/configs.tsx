@@ -62,6 +62,8 @@
 // Per-app promo content. The generic `AppPromoDialog` is layout-only; each app
 // drops an entry here. To add another app's promo, import its four feature
 // icons + light/dark illustration and append a new key — nothing else changes.
+// `tourLabel` is what marks an app as having an onboarding tour to offer; leave
+// it out for an app that has none.
 //
 // Texts are localized here via literal `t("Common:Key")` calls so the locales
 // scanner captures the keys; the dialog receives already-resolved strings.
@@ -128,6 +130,7 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
     IllustrationLight: FilesPreviewLight,
     IllustrationDark: FilesPreviewDark,
     openLabel: t("Common:Open"),
+    tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
   },
@@ -160,11 +163,12 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
     IllustrationLight: RoomsPreviewLight,
     IllustrationDark: RoomsPreviewDark,
     openLabel: t("Common:Open"),
+    tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
   },
   "ai-forms": {
-    title: t("Common:DashboardFormsTitle"),
+    title: t("Common:Forms"),
     subtitle: t("Common:FormsPromoSubtitle"),
     description: t("Common:FormsPromoDescription"),
     features: [
@@ -192,6 +196,7 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
     IllustrationLight: FormsPreviewLight,
     IllustrationDark: FormsPreviewDark,
     openLabel: t("Common:Open"),
+    tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
   },
@@ -229,6 +234,7 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
     IllustrationLight: AgentsPreviewLight,
     IllustrationDark: AgentsPreviewDark,
     openLabel: t("Common:Open"),
+    tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
   },

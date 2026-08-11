@@ -3,7 +3,7 @@
   "content": "Includes {{count}} unique editors and {{count}} unique viewers per month. A user takes a seat the first time they open a document and keeps it until the end of the period.",
   "content_en_sha1_hash": "21ed963759b69de86ba6bef3e266e4f40045f8dc",
   "created_at": "2026-07-27T13:07:48.491Z",
-  "updated_at": "2026-08-01T15:33:49.623Z",
+  "updated_at": "2026-08-06T14:20:57.619Z",
   "comment": {
     "text": "Tooltip content for a HelpButton that explains how monthly editor and viewer limits are calculated, using {{count}} to represent the number of users.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 401,
-      "context": "{value}\n </Text>\n </div>\n );\n \n const usersTooltip = t(\"DocsConnect:PlanUsersTooltip\", { count: users });\n \n return (\n <>\n <ModalDialog\n visible={visible}",
+      "line_number": 444,
+      "context": "{value}\n </Text>\n </div>\n );\n \n const usersTooltip = t(\"DocsConnect:PlanUsersTooltip\", {\n count: isOverLimit ? MAX_USERS : users,\n });\n \n const getSubmitLabel = () => {\n if (isOverLimit) return t(\"Common:SendRequest\");",
       "module": "/packages/client"
     },
     {

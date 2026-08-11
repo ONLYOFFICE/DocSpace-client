@@ -1,0 +1,29 @@
+{
+  "key_path": "TourCreateAnythingTitle",
+  "content": "Create anything",
+  "content_en_sha1_hash": "be63ce70880267158711cb0a15bc1a21a3606faf",
+  "created_at": "2026-08-06T14:20:53.789Z",
+  "updated_at": "2026-08-07T15:05:26.422Z",
+  "comment": {
+    "text": "Title for an onboarding tour step that highlights the quick actions menu.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:35:53.671Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 246,
+      "context": "canCreate &&\n showFilter &&\n elementGroupStep(\n '[data-testid=\"quick-actions\"]',\n CREATE_TILE_SELECTORS,\n t(\"FilesTour:TourCreateAnythingTitle\"),\n t(\"FilesTour:TourCreateAnything\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

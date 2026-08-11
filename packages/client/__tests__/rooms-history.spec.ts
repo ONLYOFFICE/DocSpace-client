@@ -273,6 +273,48 @@ test.describe("Rooms — info panel history", () => {
       ]);
     });
 
+    test("should allow picking the room creation day itself", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      const handle = historyHandle();
+
+      // a creation time past midnight used to disable the whole creation day,
+      // because it was passed to the calendar as the minimum date as-is
+      mockRequest.use(
+        roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID, {
+          roomType: RoomsType.VirtualDataRoom,
+          created: "2026-03-10T09:00:00.000Z",
+        }),
+        folderHistoryHandler(TEST_PORT, ROOM_ID, { feeds: FEEDS, handle }),
+      );
+
+      await openHistoryPanel(page, baseUrl);
+
+      const datePicker = await openCalendar(page);
+      const dayBefore = datePicker.getByRole("button", {
+        name: "9",
+        exact: true,
+      });
+      const creationDay = datePicker.getByRole("button", {
+        name: "10",
+        exact: true,
+      });
+
+      await expect(dayBefore).toBeDisabled();
+      await expect(creationDay).toBeEnabled();
+
+      await creationDay.click();
+
+      await expect(page.getByTestId("info_history_calendar")).toHaveText(
+        "Mar 10, 2026",
+      );
+      expect(handle.current?.getLastRequest()?.toDate).toBe(
+        "2026-03-10T23:59:59.999Z",
+      );
+    });
+
     test("should request the whole history back when the day is cleared", async ({
       page,
       baseUrl,

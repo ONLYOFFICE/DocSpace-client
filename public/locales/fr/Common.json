@@ -1939,7 +1939,6 @@
   "SetPassword": "Définir le mot de passe",
   "SetQuotaStorageLimit": "Définissez un quota pour définir la limite de stockage.",
   "SetTemplateDescription": "Créez un ensemble à partir d'un modèle. Les paramètres, les utilisateurs, les dossiers et les formulaires seront copiés depuis le modèle sélectionné.",
-  "SetTemplateTitle": "Modèle d'ensemble",
   "Settings": "Paramètres",
   "SettingsGeneral": "Général",
   "SetToDefault": "Définir la valeur par défaut",

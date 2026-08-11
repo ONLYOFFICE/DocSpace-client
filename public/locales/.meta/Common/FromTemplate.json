@@ -14,7 +14,7 @@
     {
       "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
       "line_number": 13,
-      "context": "isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:SetTemplateTitle\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:",
+      "context": "isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:FromTemplate\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:",
       "module": "/libs/ui-kit"
     },
     {
@@ -26,7 +26,7 @@
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 48,
-      "context": "isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:SetTemplateTitle\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:",
+      "context": "isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:FromTemplate\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:",
       "module": "/packages/shared"
     }
   ],

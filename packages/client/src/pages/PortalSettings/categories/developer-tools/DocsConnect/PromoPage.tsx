@@ -89,37 +89,50 @@ const PromoPage = ({
         {t("DocsConnect:DocsConnect")}
       </Heading>
 
-      <Text as="p" className={styles.description}>
-        <Trans
-          t={t}
-          i18nKey="PromoDescription"
-          ns="DocsConnect"
-          components={{
-            1: (
-              <Link
-                className={styles.link}
-                type={LinkType.page}
-                href={allConnectorsUrl}
-                target={LinkTarget.blank}
-                color="accent"
-              />
-            ),
-            2: (
-              <Link
-                className={styles.link}
-                id={AUTOMATION_API_ANCHOR}
-                type={LinkType.action}
-                color="accent"
-              />
-            ),
-          }}
-        />
-      </Text>
+      {canceled ? (
+        <div className={styles.canceledText}>
+          <Text as="p" className={styles.canceledTitle}>
+            {t("DocsConnect:SubscriptionCanceledTitle", {
+              service: t("DocsConnect:DocsConnect"),
+            })}
+          </Text>
+          <Text as="p" className={styles.description}>
+            {t("DocsConnect:SubscriptionCanceledDescription")}
+          </Text>
+        </div>
+      ) : (
+        <>
+          <Text as="p" className={styles.description}>
+            <Trans
+              t={t}
+              i18nKey="PromoDescription"
+              ns="DocsConnect"
+              components={{
+                1: (
+                  <Link
+                    className={styles.link}
+                    type={LinkType.page}
+                    href={allConnectorsUrl}
+                    target={LinkTarget.blank}
+                    color="accent"
+                  />
+                ),
+                2: (
+                  <Link
+                    className={styles.link}
+                    id={AUTOMATION_API_ANCHOR}
+                    type={LinkType.action}
+                    color="accent"
+                  />
+                ),
+              }}
+            />
+          </Text>
 
-      {canceled ? null : (
-        <Text as="p" className={styles.trialNote}>
-          {t("DocsConnect:TrialAvailable")}
-        </Text>
+          <Text as="p" className={styles.trialNote}>
+            {t("DocsConnect:TrialAvailable")}
+          </Text>
+        </>
       )}
 
       <div className={styles.actions}>
@@ -127,7 +140,7 @@ const PromoPage = ({
           <Button
             primary
             size={ButtonSize.small}
-            label={t("DocsConnect:Buy")}
+            label={t("Common:RenewSubscription")}
             onClick={() => openBuyPlan?.("edit")}
             isDisabled={!canManage}
             className={styles.buyButton}
@@ -156,29 +169,31 @@ const PromoPage = ({
         </Link>
       </div>
 
-      <Tooltip
-        anchorSelect={`#${AUTOMATION_API_ANCHOR}`}
-        place="bottom-start"
-        clickable
-        maxWidth="280px"
-      >
-        <div className={styles.tooltipBox}>
-          <Text fontSize="12px" lineHeight="16px">
-            {t("DocsConnect:AutomationApiTooltip")}
-          </Text>
-          <Link
-            type={LinkType.page}
-            href={docsConnectUrl}
-            target={LinkTarget.blank}
-            color="accent"
-            fontSize="13px"
-            fontWeight={600}
-            isHovered
-          >
-            {t("DocsConnect:CheckExamples")}
-          </Link>
-        </div>
-      </Tooltip>
+      {canceled ? null : (
+        <Tooltip
+          anchorSelect={`#${AUTOMATION_API_ANCHOR}`}
+          place="bottom-start"
+          clickable
+          maxWidth="280px"
+        >
+          <div className={styles.tooltipBox}>
+            <Text fontSize="12px" lineHeight="16px">
+              {t("DocsConnect:AutomationApiTooltip")}
+            </Text>
+            <Link
+              type={LinkType.page}
+              href={docsConnectUrl}
+              target={LinkTarget.blank}
+              color="accent"
+              fontSize="13px"
+              fontWeight={600}
+              isHovered
+            >
+              {t("DocsConnect:CheckExamples")}
+            </Link>
+          </div>
+        </Tooltip>
+      )}
     </div>
   );
 };

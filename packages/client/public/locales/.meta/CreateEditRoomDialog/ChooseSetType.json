@@ -1,42 +1,24 @@
 {
-  "key_path": "FromTemplate",
-  "content": "From template",
-  "content_en_sha1_hash": "00c3e6cfbaa52740f50102742f3efa926a33d341",
-  "created_at": "2025-05-19T21:30:45.596Z",
-  "updated_at": "2026-07-28T11:44:10.621Z",
+  "key_path": "ChooseSetType",
+  "content": "Choose set type",
+  "content_en_sha1_hash": "dfa926bbaee9bb477b27d785e448edb5eed0cf33",
+  "created_at": "2026-08-11T00:00:00.000Z",
+  "updated_at": "2026-08-11T00:00:00.000Z",
   "comment": {
-    "text": "This text appears as a header label in a dialog when creating a new room from a template. It indicates that the user is in the process of creating a room based on a pre-existing template.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T20:51:49.310Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "Dialog title shown when creating a new item from the Forms section, where the user picks a set type instead of a room type.",
+    "is_auto": false,
+    "updated_at": "2026-08-11T00:00:00.000Z",
+    "model": null
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
-      "line_number": 13,
-      "context": "isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:FromTemplate\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:",
-      "module": "/libs/ui-kit"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 368,
-      "context": "isMultiSelect={false}\n withHeader\n headerProps={{\n onBackClick: onCloseCreateFromTemplateDialog,\n onCloseClick: onCloseCreateFromTemplateDialog,\n headerLabel: t(\"Common:FromTemplate\"),\n withoutBackButton: false,\n withoutBorder: false,\n }}\n withSearch\n emptyScreenHeader={t(\"Common:EmptyTemplatesRoomsHeader\")}",
+      "line_number": 322,
+      "context": "const chooseTypeHeader = isFormsCreate\n ? t(\"ChooseSetType\")\n : t(\"ChooseRoomType\");\n \n const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : t(\"Common:CreateRoom\");",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 48,
-      "context": "isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:FromTemplate\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:",
-      "module": "/packages/shared"
     }
   ],
   "languages": {
-    "en": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
@@ -68,6 +50,12 @@
       "approved_at": null
     },
     "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "en": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -161,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -166,7 +166,43 @@ describe("openUrlWithFallbackToast", () => {
     flushOpen();
 
     expect(openSpy).toHaveBeenCalledWith(URL, "_self");
+    expect(toastr.success).toHaveBeenCalledTimes(1);
     expect(toastr.success).toHaveBeenCalledWith(TEXTS.success);
+  });
+
+  it("shows the success toast before a same-tab navigation starts", () => {
+    openUrlWithFallbackToast({
+      url: URL,
+      openOnNewPage: false,
+      t: T,
+      texts: TEXTS,
+    });
+
+    expect(toastr.success).toHaveBeenCalledWith(TEXTS.success);
+    expect(openSpy).not.toHaveBeenCalled();
+
+    flushOpen();
+
+    expect(openSpy).toHaveBeenCalledWith(URL, "_self");
+    expect(toastr.success).toHaveBeenCalledTimes(1);
+  });
+
+  it("falls back to the file toast when the open attempt throws", () => {
+    openSpy.mockImplementation(() => {
+      throw new Error("blocked");
+    });
+
+    openUrlWithFallbackToast({
+      url: URL,
+      openOnNewPage: true,
+      t: T,
+      texts: TEXTS,
+    });
+    flushOpen();
+
+    const content = getFallbackToastCall();
+    render(content);
+    expect(screen.getByText(TEXTS.fileName)).toHaveAttribute("href", URL);
   });
 
   it("skips the open attempt and goes straight to the file toast", () => {

@@ -65,18 +65,33 @@ type TOpenUrlWithFallbackToastOptions = {
   texts: TOpenUrlFallbackTexts;
 };
 
-const showFallbackToast = (
-  url: string,
-  openOnNewPage: boolean,
-  t: TTranslation,
-  texts: TOpenUrlFallbackTexts,
-) => {
-  toastr.success(
+type TShowFileExportToastOptions = {
+  url: string;
+  openOnNewPage: boolean;
+  t: TTranslation;
+  fileName: string;
+  sectionName: string;
+  /** Keep the toast until the user dismisses it and highlight the link. */
+  persistent?: boolean;
+};
+
+/**
+ * Toast naming an exported file and linking to it.
+ */
+export const showFileExportToast = ({
+  url,
+  openOnNewPage,
+  t,
+  fileName,
+  sectionName,
+  persistent = false,
+}: TShowFileExportToastOptions) => {
+  const message = (
     <Trans
       t={t as TFunction}
       i18nKey="FileExportDestination"
       ns="Common"
-      values={{ fileName: texts.fileName, sectionName: texts.sectionName }}
+      values={{ fileName, sectionName }}
       components={{
         1: (
           <Link
@@ -85,19 +100,39 @@ const showFallbackToast = (
             target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
             rel="noreferrer"
             color="accent"
-            isHovered
+            isHovered={persistent}
             // toastr wraps custom content in a plain div, so react-toastify
             // never injects closeToast into it — clearing all toasts is the
             // only way to dismiss from here
-            onClick={() => toastr.clear()}
+            onClick={persistent ? () => toastr.clear() : undefined}
           />
         ),
       }}
-    />,
-    undefined,
-    0,
-    true,
+    />
   );
+
+  if (!persistent) {
+    toastr.success(message);
+    return;
+  }
+
+  toastr.success(message, undefined, 0, true);
+};
+
+const showFallbackToast = (
+  url: string,
+  openOnNewPage: boolean,
+  t: TTranslation,
+  texts: TOpenUrlFallbackTexts,
+) => {
+  showFileExportToast({
+    url,
+    openOnNewPage,
+    t,
+    fileName: texts.fileName,
+    sectionName: texts.sectionName,
+    persistent: true,
+  });
 };
 
 /**
@@ -118,14 +153,22 @@ export const openUrlWithFallbackToast = ({
     return;
   }
 
-  setTimeout(() => {
-    const opened = window.open(url, openOnNewPage ? "_blank" : "_self");
+  // "_self" navigation is never popup-blocked, so its outcome is known in
+  // advance — the toast has to be mounted before the page starts unloading
+  if (!openOnNewPage && texts.success) toastr.success(texts.success);
 
-    // "_self" navigation is never popup-blocked, so a null there does not
-    // mean the open failed
-    if (!openOnNewPage || opened) {
-      if (texts.success) toastr.success(texts.success);
-      return;
+  setTimeout(() => {
+    try {
+      const opened = window.open(url, openOnNewPage ? "_blank" : "_self");
+
+      if (!openOnNewPage) return;
+
+      if (opened) {
+        if (texts.success) toastr.success(texts.success);
+        return;
+      }
+    } catch {
+      // a blocked open rejected with an exception instead of a null result
     }
 
     showFallbackToast(url, openOnNewPage, t, texts);

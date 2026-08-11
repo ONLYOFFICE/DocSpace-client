@@ -165,7 +165,8 @@ class DocumentBuilderReportStore {
       t: i18n.t,
       texts: {
         success: getSaveLocationText(),
-        fileName: task.resultFileName,
+        fileName:
+          task.resultFileName || i18n.t("Common:DownloadReportBtnText"),
         sectionName: i18n.t("Common:Files"),
       },
     });

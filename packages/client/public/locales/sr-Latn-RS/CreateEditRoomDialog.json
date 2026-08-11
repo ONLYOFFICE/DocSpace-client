@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Automatsko indeksiranje",
   "AutomaticIndexingDescription": "Omogućite automatsko indeksiranje za indeksiranje fajlova i fascikli prema serijskom broju. Sortiranje po broju će biti postavljeno kao podrazumevano za sve korisnike.",
   "ChooseRoomType": "Izaberi tip sobe",
+  "ChooseSetType": "Izaberi tip skupa",
   "ConfigureDatabaseConnection": "Konfigurišite konekciju sa bazom podataka u Integracije → Usluge trećih strana",
   "CreateRoomConfirmation": "Želite li da nastavite bez povezivanja memorijskog prostora?\nIzabrali ste opciju skladištenja treće strane koja još uvek nije povezana. Ako nastavite bez povezivanja usluge, ova opcija neće biti dodata.",
   "CreateRoomWatermarksConfirmation": "Niste postavili vodeni žig koji će se primeniti na dokumente u ovoj sobi. Uvek možete dodati vodeni žig u postavkama uređivanja sobe. Nastaviti bez vodenog žiga?",

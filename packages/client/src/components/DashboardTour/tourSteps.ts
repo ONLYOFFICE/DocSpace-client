@@ -36,6 +36,8 @@
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
+import { getBrandName } from "@docspace/shared/constants/brands";
+
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
 import {
   navItemStep,
@@ -56,6 +58,7 @@ const PROFILE_CARD_SELECTOR = '[data-tour-id="dashboard-profile"]';
 const CREATE_SECTION_SELECTOR = '[data-tour-id="dashboard-create"]';
 const APPS_SECTION_SELECTOR = '[data-tour-id="dashboard-apps"]';
 const INTEGRATIONS_SELECTOR = '[data-tour-id="dashboard-integrations"]';
+const DEVTOOLS_SELECTOR = '[data-tour-id="dashboard-devtools"]';
 
 /**
  * One app card, by its own id.
@@ -96,10 +99,17 @@ export type TourStepFlags = {
    * dropped step rather than a step pointing at nothing.
    */
   hasIntegrations: boolean;
+  /**
+   * Whether the developer-tools card is on the page. Same shape as
+   * `hasIntegrations`: rendered unconditionally today, read from the DOM anyway
+   * so a future condition on it costs a dropped step rather than a step
+   * pointing at nothing.
+   */
+  hasDevTools: boolean;
 };
 
 /**
- * The dashboard tour: five steps over what is already on the page.
+ * The dashboard tour: six steps over what is already on the page.
  *
  * Simpler than the section tours by nature, and deliberately so. Those walk a
  * list that has to be fetched, is empty for a new portal, and has to be stood in
@@ -117,7 +127,7 @@ export function getTourSteps(
   callbacks: TourStepCallbacks | undefined,
   flags: TourStepFlags,
 ): Step[] {
-  const { hasProfileCard, appIds, hasIntegrations } = flags;
+  const { hasProfileCard, appIds, hasIntegrations, hasDevTools } = flags;
 
   return [
     // 1. The profile card: what the details on it actually are. The card is a
@@ -173,7 +183,23 @@ export function getTourSteps(
         LOG_LABEL,
       ),
 
-    // 5. The way back. The dashboard is a page users leave and have to be able
+    // 5. The developer tools, which is the one card on the page whose audience
+    // is not the person the rest of the tour is addressed to — so the step says
+    // who it is for rather than what is in it. A user who does not build
+    // anything can read one sentence and move on; the one who does now knows the
+    // portal has an API side at all, which is the whole point of stopping here.
+    hasDevTools &&
+      elementStep(
+        DEVTOOLS_SELECTOR,
+        t("DashboardTour:DashboardDevToolsTitle"),
+        t("DashboardTour:DashboardDevTools", {
+          productName: getBrandName("ProductName"),
+        }),
+        callbacks,
+        LOG_LABEL,
+      ),
+
+    // 6. The way back. The dashboard is a page users leave and have to be able
     // to return to, and the Overview item is how — worth a step of its own
     // because a page reached from a sidebar item is easy to think of as a
     // landing screen shown once.

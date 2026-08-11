@@ -76,6 +76,7 @@ import {
   getDocsConnectDaysLeft,
   getDocsConnectNextBillingDate,
   getDocsConnectPeriodDays,
+  isDocsConnectCanceled,
   isDocsConnectPaid,
 } from "../utils";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
@@ -83,6 +84,7 @@ import { PAYMENT_ROUTES } from "../../../payments/utils";
 import styles from "./BuyPlanPanel.module.scss";
 
 const MIN_USERS = 1;
+const DEFAULT_USERS = 50;
 const DEVPACK_MIN_USERS = 10;
 const MAX_USERS = 999;
 const USERS_MINUS_TOOLTIP_ID = "docs_connect_users_minus_tooltip";
@@ -144,14 +146,17 @@ const BuyPlanPanel = ({
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const { paymentApi } = useApi();
 
+  const [devPack, setDevPack] = useState<boolean>(
+    info?.devPackEnabled || (info?.previousPlan?.devPackEnabled ?? false),
+  );
   const [users, setUsers] = useState<number>(() => {
-    const initial = info?.tenant.payment?.quantity ?? 50;
-    const min = info?.devPackEnabled ? DEVPACK_MIN_USERS : MIN_USERS;
+    const initial =
+      info?.tenant.payment?.quantity ||
+      info?.previousPlan?.users ||
+      DEFAULT_USERS;
+    const min = devPack ? DEVPACK_MIN_USERS : MIN_USERS;
     return Math.max(initial, min);
   });
-  const [devPack, setDevPack] = useState<boolean>(
-    info?.devPackEnabled ?? false,
-  );
   const [submitting, setSubmitting] = useState(false);
   const [waitingPayment, setWaitingPayment] = useState(false);
   const [topUpDialogVisible, setTopUpDialogVisible] = useState(false);
@@ -221,6 +226,7 @@ const BuyPlanPanel = ({
   const currentDevPack = info.devPackEnabled ?? false;
 
   const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
+  const isRenew = isDocsConnectCanceled(info);
   const isOverLimit = users > MAX_USERS;
 
   const onToggleDevPack = () => {
@@ -456,7 +462,8 @@ const BuyPlanPanel = ({
         : t("Common:Upgrade");
     }
 
-    if (!insufficientFunds || isTopUpUnavailable) return t("Common:Upgrade");
+    if (!insufficientFunds || isTopUpUnavailable)
+      return isRenew ? t("Common:RenewSubscription") : t("Common:Upgrade");
 
     return info.deactivated
       ? t("Common:TopUpAndPay")
@@ -641,9 +648,11 @@ const BuyPlanPanel = ({
         isDoubleFooterLine={footerHint !== null}
       >
         <ModalDialog.Header>
-          {isEditActive
-            ? t("Common:EditSubscription")
-            : t("DocsConnect:DocsConnect")}
+          {isRenew
+            ? t("Common:RenewSubscription")
+            : isEditActive
+              ? t("Common:EditSubscription")
+              : t("DocsConnect:DocsConnect")}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.body}>
@@ -696,7 +705,11 @@ const BuyPlanPanel = ({
               fontWeight={700}
               className={styles.calculateTitle}
             >
-              {t("DocsConnect:CalculateYourPlan")}
+              {isRenew
+                ? t("DocsConnect:PreviousPlanTitle", {
+                    service: t("DocsConnect:DocsConnect"),
+                  })
+                : t("DocsConnect:CalculateYourPlan")}
             </Text>
 
             <div className={styles.usersBlock}>

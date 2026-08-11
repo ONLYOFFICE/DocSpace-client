@@ -59,7 +59,6 @@
   "ExportRoomIndex": "导出房间索引",
   "ExportRoomIndexAlreadyInProgressError": "房间索引导出已在进行中。请等待当前导出完成后再开始新的导出。",
   "FileDownloadingIsRestricted": "在此房间内的下载文件受到限制。",
-  "FileExportDestination": "<1>{{fileName}}</1>文件已导出至{{sectionName}}",
   "FileRenamed": "文档'{{oldTitle}}'已重命名为'{{newTitle}}'",
   "FilesMovedToTrashNotice": "之后文件将被移至{{sectionName}}。",
   "FinalizeVersion": "最终版本",

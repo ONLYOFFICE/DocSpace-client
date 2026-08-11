@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Prilagojen filter onemogočen",
   "FileCustomFilterEnabled": "Prilagojen filter omogočen",
   "FileDeletedCount": "Datoteke odstranjene ({{count}})",
+  "FileExportDestination": "Datoteka <1>{{fileName}}</1> izvožena v {{sectionName}}",
   "FileExtension": "Končnica datoteke",
   "FileFormatNotAllowed": "Ta datoteka se ne more nalagati, saj ni dovoljen njen format.",
   "FileInfo": "Informacije o datoteki",

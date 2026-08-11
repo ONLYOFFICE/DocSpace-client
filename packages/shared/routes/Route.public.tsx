@@ -38,6 +38,7 @@ import { Navigate, useLocation } from "react-router";
 import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
 import { isPublicPreview, isPublicRoom } from "../utils/common";
+import { isPortalNotFoundRedirectClaimed } from "../utils/portalNotFound";
 
 import type { PublicRouteProps } from "./Routers.types";
 
@@ -54,6 +55,11 @@ export const PublicRoute = (props: PublicRouteProps) => {
   const location = useLocation();
 
   const renderComponent = () => {
+    // See PrivateRoute: on a deleted portal the login redirect below is what
+    // closes the reload loop, and the wrong-portal-name redirect is already
+    // under way.
+    if (isPortalNotFoundRedirectClaimed()) return null;
+
     const isPreparationPortalUrl = location.pathname === "/preparation-portal";
     const isDeactivationPortalUrl = location.pathname === "/unavailable";
     const isPortalRestriction = location.pathname === "/access-restricted";

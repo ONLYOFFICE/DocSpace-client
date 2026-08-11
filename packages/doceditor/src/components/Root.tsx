@@ -390,6 +390,10 @@ const Root = ({
           filesSettings={filesSettings as SelectFolderDialogProps["filesSettings"]}
           fileSaveAsExtension={extensionSelectorFolderDialog}
           selectedFolderId={selectedFolderId}
+          disabledCreatePublicRoom={
+            !filesSettings.externalShare &&
+            filesSettings.externalShareApplyToRooms
+          }
         />
       ) : null}
       {selectFileDialogVisible && fileInfo ? (

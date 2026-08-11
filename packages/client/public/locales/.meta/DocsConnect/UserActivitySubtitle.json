@@ -3,7 +3,7 @@
   "content": "Track unique user activity",
   "content_en_sha1_hash": "14eaf440974e33af8947b17123f33581c6f4a5eb",
   "created_at": "2026-07-27T13:07:48.499Z",
-  "updated_at": "2026-08-01T15:33:49.643Z",
+  "updated_at": "2026-08-10T12:23:10.564Z",
   "comment": {
     "text": "Subtitle in the statistics dashboard providing a description for the user activity metric.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 563,
+      "line_number": 560,
       "context": "fontWeight={700}\n >\n {t(\"DocsConnect:ActivityForPeriod\")}\n </Heading>\n <Text fontSize=\"13px\" className={styles.muted}>\n {t(\"DocsConnect:UserActivitySubtitle\")}\n </Text>\n </div>\n <div className={styles.twoCards}>\n <UsageBlock\n title={t(\"DocsConnect:Editors\")}",
       "module": "/packages/client"
     }

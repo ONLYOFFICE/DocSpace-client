@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Εξαγωγή ευρετηρίου δωματίου",
   "ExportRoomIndexAlreadyInProgressError": "Η εξαγωγή ευρετηρίου δωματίου βρίσκεται ήδη σε εξέλιξη. Περιμένετε μέχρι να ολοκληρωθεί η τρέχουσα εξαγωγή για να ξεκινήσετε τη νέα.",
   "FileDownloadingIsRestricted": "Η λήψη αρχείων είναι περιορισμένη σε αυτό το δωμάτιο.",
-  "FileExportDestination": "Το αρχείο <1>{{fileName}}</1> εξήχθη στο {{sectionName}}",
   "FileRenamed": "Το έγγραφο «{{oldTitle}}» μετονομάστηκε σε '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Μετά τη μετακίνηση των αρχείων στο {{sectionName}}.",
   "FinalizeVersion": "Οριστικοποίηση έκδοσης",

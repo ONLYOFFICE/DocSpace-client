@@ -59,7 +59,6 @@
   "ExportRoomIndex": "ນໍາອອກຄໍາຊ້ອນຫ້ອງ",
   "ExportRoomIndexAlreadyInProgressError": "ການສົ່ງອອກຕົວຊີ້ບອກຫ້ອງ ກຳ ລັງດຳເນີນຢູ່ແລ້ວ ກະລຸນາລໍຖ້າຈົນກວ່າການສົ່ງອອກປັດຈຸບັນ ສຳເລັດແລ້ວກ່ອນທີ່ຈະເລີ່ມຕົ້ນການສົ່ງອອກໃໝ່.",
   "FileDownloadingIsRestricted": "ການດາວໂຫຼດໄຟລ໌ຖືກຈຳກັດຢູ່ໃນຫ້ອງນີ້.",
-  "FileExportDestination": "<1>{{fileName}}</1> ໄຟລ໌ສົ່ງອອກສູ່ {{sectionName}}",
   "FileRenamed": "ເອກະສານ '{{oldTitle}}' ຖືກປ່ຽນຊື່ເປັນ '{{newTitle}}'",
   "FilesMovedToTrashNotice": "ຫຼັງຈາກໄຟລ໌ຈະຖືກຍ້າຍໄປ {{sectionName}}.",
   "FinalizeVersion": "ສະບັບສຸດທ້າຍ",

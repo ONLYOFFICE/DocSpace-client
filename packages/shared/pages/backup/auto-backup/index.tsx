@@ -183,6 +183,7 @@ const AutomaticBackup = ({
   isBackupPaid,
   backupProgressWarning,
   setBackupProgressWarning,
+  disabledCreatePublicRoom = false,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -543,6 +544,7 @@ const AutomaticBackup = ({
                 isError={isError}
                 setIsError={setIsError}
                 isBackupPaid={isBackupPaid}
+                disabledCreatePublicRoom={disabledCreatePublicRoom}
               />
             ) : null}
           </div>

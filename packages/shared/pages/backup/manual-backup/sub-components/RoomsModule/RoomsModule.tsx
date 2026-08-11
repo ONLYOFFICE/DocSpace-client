@@ -79,6 +79,7 @@ export interface RoomsModuleProps {
   copyButtonLabel?: string;
   isToppingUp?: boolean;
   isCopyBlocked?: boolean;
+  disabledCreatePublicRoom?: boolean;
 
   toDefault: VoidFunction;
   setBasePath: (folders: TBreadCrumb[]) => void;
@@ -109,6 +110,7 @@ const RoomsModule = ({
   copyButtonLabel,
   isToppingUp,
   isCopyBlocked,
+  disabledCreatePublicRoom,
 }: RoomsModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -202,6 +204,7 @@ const RoomsModule = ({
           onSelectFolder={onSelectFolder}
           withoutInitPath={!selectedFolder}
           currentDeviceType={currentDeviceType}
+          disabledCreatePublicRoom={disabledCreatePublicRoom}
           filesSelectorSettings={settingsFileSelector}
           setBackupToPublicRoomVisible={setBackupToPublicRoomVisible}
           {...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}

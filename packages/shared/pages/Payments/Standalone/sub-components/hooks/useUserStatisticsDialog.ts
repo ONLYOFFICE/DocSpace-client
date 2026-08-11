@@ -34,8 +34,10 @@
  */
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { TLicenseQuota } from "../../../../../api/portal/types";
 import { createLicenseQuotaReport } from "../../../../../api/management";
+import { openUrlWithExportToast } from "../../../../../utils/openUrlWithExportToast";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 type TUserStatisticsDialogProps = {
@@ -47,17 +49,34 @@ export const useUserStatisticsDialog = ({
   licenseQuota,
   openOnNewPage,
 }: TUserStatisticsDialogProps) => {
+  const { t } = useTranslation("Common");
   const [visible, setVisible] = useState(false);
+  const [isReportLoading, setIsReportLoading] = useState(false);
 
   const open = () => setVisible(true);
   const close = () => setVisible(false);
 
   const downloadAndOpenReport = async () => {
+    setIsReportLoading(true);
+
     try {
       const url = await createLicenseQuotaReport();
-      window.open(url, openOnNewPage ? "_blank" : "_self");
+
+      openUrlWithExportToast({
+        url,
+        openOnNewPage: openOnNewPage ?? false,
+        t,
+        texts: {
+          // the endpoint answers with a URL only, so the report is named after
+          // the dialog it was requested from
+          fileName: t("Common:EditUserStatistics"),
+          sectionName: t("Common:Files"),
+        },
+      });
     } catch (error) {
       toastr.error(error!);
+    } finally {
+      setIsReportLoading(false);
     }
   };
 
@@ -72,6 +91,7 @@ export const useUserStatisticsDialog = ({
 
   return {
     isUserStatisticsVisible: visible,
+    isReportLoading,
     openUserStatistics: open,
     closeUserStatistics: close,
     downloadAndOpenReport,

@@ -53,7 +53,6 @@ import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
-import { Component as AISettings } from "../categories/ai-settings";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -66,6 +65,17 @@ import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettin
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
 import { Component as ServicesPage } from "../categories/payments/ServicesPage";
+
+// Loaded on demand: the AI settings category statically imports the ai-agent
+// settings pages from @onlyoffice/ai-chat, and this View is part of the entry
+// graph (routes/portalSettings.js imports ViewComponent statically) — a
+// static import here would drag the chat stack onto the initial-load
+// critical path. The chunk is fetched only when the tab is opened.
+const AISettings = React.lazy(() =>
+  import("../categories/ai-settings").then((m) => ({
+    default: m.Component,
+  })),
+);
 
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
@@ -330,7 +340,12 @@ const View = ({
       {currentView === "delete-data" ? <DeleteData /> : null}
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
-      {currentView === "ai-settings" ? <AISettings /> : null}
+      {currentView === "ai-settings" ? (
+        // No fallback: LoaderWrapper above already covers loading states.
+        <React.Suspense fallback={null}>
+          <AISettings />
+        </React.Suspense>
+      ) : null}
       {currentView === "ai-services" ||
       currentView === "backup-service" ||
       currentView === "ai-search" ||

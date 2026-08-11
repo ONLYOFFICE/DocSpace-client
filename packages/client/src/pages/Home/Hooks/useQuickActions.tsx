@@ -319,7 +319,7 @@ export const useQuickActions = (
       {
         id: "quick-blank-pdf-form",
         icon: <BlankPdfIcon />,
-        label: t("Translations:NewForm"),
+        label: t("Common:BlankPDFForm"),
         onClick: () => dispatchCreate(currentFolderId, "pdf", t),
       },
     ];

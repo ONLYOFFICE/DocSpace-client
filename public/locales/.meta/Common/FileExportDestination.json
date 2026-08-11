@@ -1,27 +1,26 @@
 {
-  "key_path": "DocumentServiceSecretKeySubtitle",
-  "content": "Leave blank to disable",
-  "content_en_sha1_hash": "32bb716ab049c4ff0b5daab2d35c5b63348ca85b",
-  "created_at": "2025-05-19T21:30:51.416Z",
-  "updated_at": "2026-08-10T12:23:10.676Z",
+  "key_path": "FileExportDestination",
+  "content": "<1>{{fileName}}</1> file exported to {{sectionName}}",
+  "content_en_sha1_hash": "7d984189a627bf8b057fab0ddda7546b4b6c7397",
+  "created_at": "2026-08-10T12:21:59.922Z",
+  "updated_at": "2026-08-10T12:23:10.350Z",
   "comment": {
-    "text": "This is a subtitle for a password input field, indicating that leaving the field empty will disable the associated secret key functionality.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:24:16.875Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 429,
-      "context": "<Label\n htmlFor=\"secretKey\"\n text={t(\"Settings:DocumentServiceSecretKey\")}\n />\n <Text className={styles.labelSubtitle}>\n {`(${t(\"Settings:DocumentServiceSecretKeySubtitle\")})`}\n </Text>\n </div>\n <InputBlock\n id=\"secretKey\"\n name=\"secret_key\"",
+      "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
+      "line_number": 53,
+      "context": "openOnNewPage: boolean,\n ) => {\n const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Common\"\n values={{ fileName, sectionName: t(\"Common:Files\") }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 429,
-      "context": "<Label\n htmlFor=\"secretKey\"\n text={t(\"Settings:DocumentServiceSecretKey\")}\n />\n <Text className={styles.labelSubtitle}>\n {`(${t(\"Settings:DocumentServiceSecretKeySubtitle\")})`}\n </Text>\n </div>\n <InputBlock\n id=\"secretKey\"\n name=\"secret_key\"",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/utils/openUrlWithFallbackToast.tsx",
+      "line_number": 77,
+      "context": "texts: TOpenUrlFallbackTexts,\n ) => {\n toastr.success(\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Common\"\n values={{ fileName: texts.fileName, sectionName: texts.sectionName }}\n components={{\n 1: (\n <Link",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -155,7 +154,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +169,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +211,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

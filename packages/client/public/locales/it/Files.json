@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Esporta indice stanza",
   "ExportRoomIndexAlreadyInProgressError": "L'esportazione dell'indice della stanza è già in corso. Attendi il completamento dell'esportazione in corso per avviare quella nuova.",
   "FileDownloadingIsRestricted": "In questa stanza il download dei file è limitato.",
-  "FileExportDestination": "File <1>{{fileName}}</1> esportato in {{sectionName}}",
   "FileRenamed": "Il documento '{{oldTitle}}' è stato rinominato in '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Successivamente i file verranno spostati in {{sectionName}}.",
   "FinalizeVersion": "Finalizza versione",

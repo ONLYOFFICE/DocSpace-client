@@ -319,8 +319,12 @@ const CreateRoomDialog = ({
 
   const isTemplate = !roomParams.type && !isTemplateSelected;
 
+  const chooseTypeHeader = isFormsCreate
+    ? t("ChooseSetType")
+    : t("ChooseRoomType");
+
   const dialogHeader = !roomParams.type
-    ? t("ChooseRoomType")
+    ? chooseTypeHeader
     : t("Common:CreateRoom");
 
   return (

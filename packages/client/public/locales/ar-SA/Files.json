@@ -59,7 +59,6 @@
   "ExportRoomIndex": "تصدير فهرس الغرفة",
   "ExportRoomIndexAlreadyInProgressError": "تصدير فهرس الغرفة قيد التقدم بالفعل. يرجى الانتظار حتى يتم الانتهاء من التصدير الحالي لبدء تصدير جديد.",
   "FileDownloadingIsRestricted": "تنزيل الملفات مقيد في هذه الغرفة.",
-  "FileExportDestination": "تم تصدير ملف <1>{{fileName}}</1> إلى {{sectionName}}",
   "FileRenamed": "تمت إعادة تسمية المستند \"{{oldTitle}}\" إلى \"{{newTitle}}\"",
   "FilesMovedToTrashNotice": "بعد ذلك سيتم نقل الملفات إلى {{sectionName}}.",
   "FinalizeVersion": "النسخة النهائية",

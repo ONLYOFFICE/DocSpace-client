@@ -3,7 +3,7 @@
   "content": "Your Docs Connect editors are ready",
   "content_en_sha1_hash": "1f6ef5f4d11b1fd609e81ee1e6d3b6513d5ee0e6",
   "created_at": "2026-07-30T16:14:06.987Z",
-  "updated_at": "2026-08-05T16:32:00.305Z",
+  "updated_at": "2026-08-10T12:23:10.668Z",
   "comment": {
     "text": "A title for an informational banner in the integration settings that appears when Docs Connect editors are successfully configured.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 344,
-      "context": "<Styled.LocationForm onSubmit={onSubmit}>\n {showConnectEditorsBanner ? (\n <div className={styles.docsConnectPromo}>\n <div className={styles.docsConnectPromoText}>\n <Text className={styles.docsConnectPromoTitle}>\n {t(\"Settings:DocsConnectReadyTitle\")}\n </Text>\n <Text className={styles.docsConnectPromoDescription}>\n {t(\"Settings:DocsConnectReadyDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),",
+      "line_number": 345,
+      "context": "<Styled.LocationForm onSubmit={onSubmit}>\n {!isDocsConnectAvailable ? null : showConnectEditorsBanner ? (\n <div className={styles.docsConnectPromo}>\n <div className={styles.docsConnectPromoText}>\n <Text className={styles.docsConnectPromoTitle}>\n {t(\"Settings:DocsConnectReadyTitle\")}\n </Text>\n <Text className={styles.docsConnectPromoDescription}>\n {t(\"Settings:DocsConnectReadyDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),",
       "module": "/packages/client"
     }
   ],

@@ -38,6 +38,7 @@ import { Nullable } from "../../types";
 export type TUserStatisticsDialogProps = {
   isVisible: boolean;
   isLoading?: boolean;
+  isReportLoading?: boolean;
   onClose: VoidFunction;
   statistics: Nullable<TUserQuotaStatistics>;
   onDownloadAndReport: VoidFunction;

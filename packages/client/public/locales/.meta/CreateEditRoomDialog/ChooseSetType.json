@@ -1,30 +1,24 @@
 {
-  "key_path": "FileExportDestination",
-  "content": "<1>{{fileName}}</1> file exported to {{sectionName}}",
-  "content_en_sha1_hash": "7d984189a627bf8b057fab0ddda7546b4b6c7397",
-  "created_at": "2025-05-19T21:30:55.676Z",
-  "updated_at": "2026-06-25T19:31:02.944Z",
+  "key_path": "ChooseSetType",
+  "content": "Choose set type",
+  "content_en_sha1_hash": "dfa926bbaee9bb477b27d785e448edb5eed0cf33",
+  "created_at": "2026-08-11T00:00:00.000Z",
+  "updated_at": "2026-08-11T00:00:00.000Z",
   "comment": {
-    "text": "This is a toast message confirming a file export. It appears briefly after a file is successfully exported, indicating the `fileName` and the `sectionName` where it was saved.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:09:34.750Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "Dialog title shown when creating a new item from the Forms section, where the user picks a set type instead of a room type.",
+    "is_auto": false,
+    "updated_at": "2026-08-11T00:00:00.000Z",
+    "model": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
-      "line_number": 53,
-      "context": "openOnNewPage: boolean,\n ) => {\n const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:Files\") }}\n components={{\n 1: (\n <Link",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
+      "line_number": 322,
+      "context": "const chooseTypeHeader = isFormsCreate\n ? t(\"ChooseSetType\")\n : t(\"ChooseRoomType\");\n \n const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : t(\"Common:CreateRoom\");",
       "module": "/packages/client"
     }
   ],
   "languages": {
-    "en": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
@@ -56,6 +50,12 @@
       "approved_at": null
     },
     "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "en": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

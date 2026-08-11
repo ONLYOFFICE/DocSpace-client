@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Exporter l'index de la salle",
   "ExportRoomIndexAlreadyInProgressError": "L'exportation de l'index des salles est déjà en cours. Veuillez attendre que l'exportation en cours soit terminée pour commencer la nouvelle exportation.",
   "FileDownloadingIsRestricted": "Le téléchargement de fichiers est limité dans cette salle.",
-  "FileExportDestination": "Fichier <1>{{fileName}}</1> exporté vers {{sectionName}}",
   "FileRenamed": "Le document '{{oldTitle}}' est renommé en '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Après, les fichiers seront déplacés vers {{sectionName}}.",
   "FinalizeVersion": "Finaliser la version",

@@ -59,7 +59,6 @@
   "ExportRoomIndex": "ルームインデックスを エクスポートする",
   "ExportRoomIndexAlreadyInProgressError": "ルームインデックスのエクスポートはすでに進行中です。新しいエクスポートを開始する前に、現在のエクスポートが完了するまでお待ちください。",
   "FileDownloadingIsRestricted": "このルームではファイルのダウンロードが制限されています。",
-  "FileExportDestination": "<1>{{fileName}}</1> ファイルを {{sectionName}} にエクスポートしました",
   "FileRenamed": "ドキュメント'{{oldTitle}}'の名前が'{{newTitle}}'に変更されます。'",
   "FilesMovedToTrashNotice": "ファイルは{{sectionName}}に移動されます。",
   "FinalizeVersion": "最終版",

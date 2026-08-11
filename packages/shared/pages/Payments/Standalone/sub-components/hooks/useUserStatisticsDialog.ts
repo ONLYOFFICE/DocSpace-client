@@ -37,7 +37,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TLicenseQuota } from "../../../../../api/portal/types";
 import { createLicenseQuotaReport } from "../../../../../api/management";
-import { openUrlWithFallbackToast } from "../../../../../utils/openUrlWithFallbackToast";
+import { openUrlWithExportToast } from "../../../../../utils/openUrlWithExportToast";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 type TUserStatisticsDialogProps = {
@@ -62,14 +62,11 @@ export const useUserStatisticsDialog = ({
     try {
       const url = await createLicenseQuotaReport();
 
-      openUrlWithFallbackToast({
+      openUrlWithExportToast({
         url,
         openOnNewPage: openOnNewPage ?? false,
         t,
         texts: {
-          success: t("Common:ReportSaveLocation", {
-            sectionName: t("Common:Files"),
-          }),
           // the endpoint answers with a URL only, so the report is named after
           // the dialog it was requested from
           fileName: t("Common:EditUserStatistics"),

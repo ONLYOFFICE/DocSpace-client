@@ -61,18 +61,17 @@ vi.mock("react-i18next", () => ({
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import {
-  openUrlWithFallbackToast,
+  openUrlWithExportToast,
   OPEN_URL_DELAY_MS,
-} from "./openUrlWithFallbackToast";
+} from "./openUrlWithExportToast";
 
 const URL = "https://portal.example.com/doceditor?fileId=42";
 
 const T = ((key: string) => key) as unknown as Parameters<
-  typeof openUrlWithFallbackToast
+  typeof openUrlWithExportToast
 >[0]["t"];
 
 const TEXTS = {
-  success: "Saved to Documents",
   fileName: "report.xlsx",
   sectionName: "Documents",
 };
@@ -81,7 +80,7 @@ let openSpy: ReturnType<typeof vi.fn>;
 
 const flushOpen = () => vi.advanceTimersByTime(OPEN_URL_DELAY_MS);
 
-const getFallbackToastCall = () => {
+const getExportToastCall = () => {
   expect(toastr.success).toHaveBeenCalledTimes(1);
   const call = vi.mocked(toastr.success).mock.calls[0];
   expect(call[1]).toBeUndefined();
@@ -102,9 +101,9 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe("openUrlWithFallbackToast", () => {
-  it("opens a new tab and shows the plain success toast", () => {
-    openUrlWithFallbackToast({
+describe("openUrlWithExportToast", () => {
+  it("opens a new tab and still names the file in a persistent toast", () => {
+    openUrlWithExportToast({
       url: URL,
       openOnNewPage: true,
       t: T,
@@ -112,37 +111,8 @@ describe("openUrlWithFallbackToast", () => {
     });
 
     expect(openSpy).not.toHaveBeenCalled();
-    flushOpen();
 
-    expect(openSpy).toHaveBeenCalledWith(URL, "_blank");
-    expect(toastr.success).toHaveBeenCalledWith(TEXTS.success);
-  });
-
-  it("shows no toast on success when no success text is given", () => {
-    openUrlWithFallbackToast({
-      url: URL,
-      openOnNewPage: true,
-      t: T,
-      texts: { fileName: TEXTS.fileName, sectionName: TEXTS.sectionName },
-    });
-    flushOpen();
-
-    expect(openSpy).toHaveBeenCalledWith(URL, "_blank");
-    expect(toastr.success).not.toHaveBeenCalled();
-  });
-
-  it("falls back to a persistent toast naming the file when the popup is blocked", () => {
-    openSpy.mockReturnValue(null);
-
-    openUrlWithFallbackToast({
-      url: URL,
-      openOnNewPage: true,
-      t: T,
-      texts: TEXTS,
-    });
-    flushOpen();
-
-    const content = getFallbackToastCall();
+    const content = getExportToastCall();
     render(content);
 
     const link = screen.getByText(TEXTS.fileName);
@@ -150,63 +120,76 @@ describe("openUrlWithFallbackToast", () => {
     expect(link).toHaveAttribute("target", "_blank");
     expect(screen.getByText(TEXTS.sectionName, { exact: false })).toBeVisible();
 
-    fireEvent.click(link);
-    expect(toastr.clear).toHaveBeenCalled();
+    flushOpen();
+    expect(openSpy).toHaveBeenCalledWith(URL, "_blank");
   });
 
-  it("treats a null result of a same-tab navigation as a success", () => {
+  it("shows the same toast when the popup is blocked", () => {
     openSpy.mockReturnValue(null);
 
-    openUrlWithFallbackToast({
+    openUrlWithExportToast({
       url: URL,
-      openOnNewPage: false,
+      openOnNewPage: true,
       t: T,
       texts: TEXTS,
     });
     flushOpen();
 
-    expect(openSpy).toHaveBeenCalledWith(URL, "_self");
-    expect(toastr.success).toHaveBeenCalledTimes(1);
-    expect(toastr.success).toHaveBeenCalledWith(TEXTS.success);
+    render(getExportToastCall());
+    expect(screen.getByText(TEXTS.fileName)).toHaveAttribute("href", URL);
   });
 
-  it("shows the success toast before a same-tab navigation starts", () => {
-    openUrlWithFallbackToast({
-      url: URL,
-      openOnNewPage: false,
-      t: T,
-      texts: TEXTS,
-    });
-
-    expect(toastr.success).toHaveBeenCalledWith(TEXTS.success);
-    expect(openSpy).not.toHaveBeenCalled();
-
-    flushOpen();
-
-    expect(openSpy).toHaveBeenCalledWith(URL, "_self");
-    expect(toastr.success).toHaveBeenCalledTimes(1);
-  });
-
-  it("falls back to the file toast when the open attempt throws", () => {
+  it("shows the same toast when the open attempt throws", () => {
     openSpy.mockImplementation(() => {
       throw new Error("blocked");
     });
 
-    openUrlWithFallbackToast({
+    openUrlWithExportToast({
       url: URL,
       openOnNewPage: true,
       t: T,
       texts: TEXTS,
     });
-    flushOpen();
 
-    const content = getFallbackToastCall();
-    render(content);
+    expect(() => flushOpen()).not.toThrow();
+
+    render(getExportToastCall());
     expect(screen.getByText(TEXTS.fileName)).toHaveAttribute("href", URL);
   });
 
-  it("skips the open attempt and goes straight to the file toast", () => {
-    openUrlWithFallbackToast({
+  it("mounts the toast before a same-tab navigation starts", () => {
+    openUrlWithExportToast({
+      url: URL,
+      openOnNewPage: false,
+      t: T,
+      texts: TEXTS,
+    });
+
+    expect(toastr.success).toHaveBeenCalledTimes(1);
+    expect(openSpy).not.toHaveBeenCalled();
+
+    flushOpen();
+
+    expect(openSpy).toHaveBeenCalledWith(URL, "_self");
+    expect(toastr.success).toHaveBeenCalledTimes(1);
+  });
+
+  it("dismisses the toast when the file link is clicked", () => {
+    openUrlWithExportToast({
+      url: URL,
+      openOnNewPage: true,
+      t: T,
+      texts: TEXTS,
+    });
+
+    render(getExportToastCall());
+    fireEvent.click(screen.getByText(TEXTS.fileName));
+
+    expect(toastr.clear).toHaveBeenCalled();
+  });
+
+  it("skips the open attempt but keeps the toast", () => {
+    openUrlWithExportToast({
       url: URL,
       openOnNewPage: true,
       skipAutoOpen: true,
@@ -217,13 +200,12 @@ describe("openUrlWithFallbackToast", () => {
 
     expect(openSpy).not.toHaveBeenCalled();
 
-    const content = getFallbackToastCall();
-    render(content);
+    render(getExportToastCall());
     expect(screen.getByText(TEXTS.fileName)).toHaveAttribute("href", URL);
   });
 
   it("keeps the file link in the same tab when new pages are turned off", () => {
-    openUrlWithFallbackToast({
+    openUrlWithExportToast({
       url: URL,
       openOnNewPage: false,
       skipAutoOpen: true,
@@ -232,7 +214,7 @@ describe("openUrlWithFallbackToast", () => {
     });
     flushOpen();
 
-    render(getFallbackToastCall());
+    render(getExportToastCall());
     expect(screen.getByText(TEXTS.fileName)).toHaveAttribute("target", "_self");
   });
 });

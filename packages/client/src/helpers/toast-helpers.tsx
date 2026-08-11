@@ -40,7 +40,7 @@ import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 import { TFolder } from "@docspace/shared/api/files/types";
-import { showFileExportToast } from "@docspace/shared/utils/openUrlWithFallbackToast";
+import { showFileExportToast } from "@docspace/shared/utils/openUrlWithExportToast";
 
 export const showSuccessExportRoomIndexToast = (
   t: TTranslation,

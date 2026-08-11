@@ -537,10 +537,19 @@ test.describe("Rooms — info panel history", () => {
 
       await popup.close();
 
+      // the file opened on its own, and the toast still names it and links to
+      // it so the report can be found again later
+      const toast = page.getByTestId("toast-content").first();
+
+      await expect(toast).toContainText("file exported to Files");
+      await expect(
+        toast.getByRole("link", { name: "History report.xlsx" }),
+      ).toHaveAttribute("target", "_blank");
+
       expect(handle.current?.getStartRequestCount()).toBe(1);
     });
 
-    test("should offer an open link when the browser blocks the popup", async ({
+    test("should offer the same open link when the browser blocks the popup", async ({
       page,
       baseUrl,
       mockRequest,
@@ -605,6 +614,8 @@ test.describe("Rooms — info panel history", () => {
       const exportButton = page.getByTestId("info_history_export");
       const loader = page.locator("#info_history-export-loader");
 
+      const popupPromise = page.waitForEvent("popup");
+
       await exportHistory(page);
 
       await expect(loader).toBeVisible();
@@ -613,7 +624,9 @@ test.describe("Rooms — info panel history", () => {
       const toast = page.getByTestId("toast-content").first();
 
       await expect(toast).toBeVisible();
-      await expect(toast).toContainText("The report will be saved to");
+      await expect(toast).toContainText("file exported to Files");
+
+      await (await popupPromise).close();
 
       await expect(loader).toBeHidden();
       await expect(exportButton).toBeEnabled();

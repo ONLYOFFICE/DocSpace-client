@@ -36,7 +36,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { openUrlWithFallbackToast } from "@docspace/shared/utils/openUrlWithFallbackToast";
+import { openUrlWithExportToast } from "@docspace/shared/utils/openUrlWithExportToast";
 import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { pollUntil } from "@docspace/ui-kit/billing/utils/stripe-flow";
 import type { TDocumentBuilderTask } from "@docspace/shared/api/files/types";
@@ -156,15 +156,14 @@ class DocumentBuilderReportStore {
       return;
     }
 
-    openUrlWithFallbackToast({
+    openUrlWithExportToast({
       url: combineUrl(window.ClientConfig?.proxy?.url, task.resultFileUrl),
       openOnNewPage: this.filesSettingsStore.openOnNewPage,
       // Auto-opening a report whose page was left would pull the user out of
-      // wherever they navigated to — the fallback toast leaves it up to them.
+      // wherever they navigated to — the toast leaves it up to them.
       skipAutoOpen: this.abandonedReports.has(type),
       t: i18n.t,
       texts: {
-        success: getSaveLocationText(),
         fileName:
           task.resultFileName || i18n.t("Common:DownloadReportBtnText"),
         sectionName: i18n.t("Common:Files"),

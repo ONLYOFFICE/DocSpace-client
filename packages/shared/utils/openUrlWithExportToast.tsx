@@ -47,22 +47,20 @@ import { TTranslation } from "../types";
 // from the resolved promise chain
 export const OPEN_URL_DELAY_MS = 100;
 
-export type TOpenUrlFallbackTexts = {
-  /** Plain toast shown when the auto-open worked; omit to show none. */
-  success?: string;
-  /** Name of the saved file — it becomes the link inside the fallback toast. */
+export type TFileExportTexts = {
+  /** Name of the saved file — it becomes the link inside the toast. */
   fileName: string;
   /** Section the file was saved to. */
   sectionName: string;
 };
 
-type TOpenUrlWithFallbackToastOptions = {
+type TOpenUrlWithExportToastOptions = {
   url: string;
   openOnNewPage: boolean;
-  /** Skip the window.open attempt and go straight to the fallback toast. */
+  /** Announce the file without trying to open it. */
   skipAutoOpen?: boolean;
   t: TTranslation;
-  texts: TOpenUrlFallbackTexts;
+  texts: TFileExportTexts;
 };
 
 type TShowFileExportToastOptions = {
@@ -119,12 +117,26 @@ export const showFileExportToast = ({
   toastr.success(message, undefined, 0, true);
 };
 
-const showFallbackToast = (
-  url: string,
-  openOnNewPage: boolean,
-  t: TTranslation,
-  texts: TOpenUrlFallbackTexts,
-) => {
+/**
+ * Opens a URL produced outside of a user gesture (after polling, a long await,
+ * etc.) and always announces the file with a persistent toast linking to it.
+ *
+ * The toast is unconditional on purpose. A browser may block such window.open
+ * calls as popups, and the link is what saves that case — clicking it is a
+ * user gesture the popup blocker never interferes with. Showing it only on a
+ * rejected open would make the outcome of the same action look different every
+ * time, and the plain "saved to Documents" toast of the successful path named
+ * neither the file nor a way back to it.
+ */
+export const openUrlWithExportToast = ({
+  url,
+  openOnNewPage,
+  skipAutoOpen = false,
+  t,
+  texts,
+}: TOpenUrlWithExportToastOptions) => {
+  // announced up front: a "_self" open starts unloading the page, so a toast
+  // mounted after it would never make it onto the screen
   showFileExportToast({
     url,
     openOnNewPage,
@@ -133,44 +145,15 @@ const showFallbackToast = (
     sectionName: texts.sectionName,
     persistent: true,
   });
-};
 
-/**
- * Opens a URL produced outside of a user gesture (after polling, a long await,
- * etc.). A browser may block such window.open calls as popups, so when the
- * attempt is rejected the user gets a persistent toast with a real link —
- * clicking it is a user gesture the popup blocker never interferes with.
- */
-export const openUrlWithFallbackToast = ({
-  url,
-  openOnNewPage,
-  skipAutoOpen = false,
-  t,
-  texts,
-}: TOpenUrlWithFallbackToastOptions) => {
-  if (skipAutoOpen) {
-    showFallbackToast(url, openOnNewPage, t, texts);
-    return;
-  }
-
-  // "_self" navigation is never popup-blocked, so its outcome is known in
-  // advance — the toast has to be mounted before the page starts unloading
-  if (!openOnNewPage && texts.success) toastr.success(texts.success);
+  if (skipAutoOpen) return;
 
   setTimeout(() => {
     try {
-      const opened = window.open(url, openOnNewPage ? "_blank" : "_self");
-
-      if (!openOnNewPage) return;
-
-      if (opened) {
-        if (texts.success) toastr.success(texts.success);
-        return;
-      }
+      window.open(url, openOnNewPage ? "_blank" : "_self");
     } catch {
-      // a blocked open rejected with an exception instead of a null result
+      // a blocked open rejects with an exception instead of a null result;
+      // either way the toast already leads to the file
     }
-
-    showFallbackToast(url, openOnNewPage, t, texts);
   }, OPEN_URL_DELAY_MS);
 };

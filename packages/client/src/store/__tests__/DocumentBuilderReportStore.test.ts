@@ -44,8 +44,8 @@ vi.mock("../../i18n", () => ({
   default: { t: (key: string) => key },
 }));
 
-vi.mock("@docspace/shared/utils/openUrlWithFallbackToast", () => ({
-  openUrlWithFallbackToast: vi.fn(),
+vi.mock("@docspace/shared/utils/openUrlWithExportToast", () => ({
+  openUrlWithExportToast: vi.fn(),
 }));
 
 // The real pollUntil sleeps between attempts; the store's contract is only that
@@ -63,7 +63,7 @@ vi.mock("@docspace/ui-kit/billing/utils/stripe-flow", () => ({
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { pollUntil } from "@docspace/ui-kit/billing/utils/stripe-flow";
-import { openUrlWithFallbackToast } from "@docspace/shared/utils/openUrlWithFallbackToast";
+import { openUrlWithExportToast } from "@docspace/shared/utils/openUrlWithExportToast";
 import type { TDocumentBuilderTask } from "@docspace/shared/api/files/types";
 
 import DocumentBuilderReportStore, {
@@ -75,7 +75,6 @@ const RESULT_URL = "/products/files/doceditor?fileId=42";
 const PROXY_URL = "https://portal.example.com";
 
 const REPORT_TEXTS = {
-  success: "Common:ReportSaveLocation",
   fileName: "report.xlsx",
   sectionName: "Common:Files",
 };
@@ -121,7 +120,7 @@ describe("DocumentBuilderReportStore", () => {
 
     expect(start).toHaveBeenCalledTimes(1);
     expect(getStatus).toHaveBeenCalledTimes(2);
-    expect(openUrlWithFallbackToast).toHaveBeenCalledWith({
+    expect(openUrlWithExportToast).toHaveBeenCalledWith({
       url: `${PROXY_URL}${RESULT_URL}`,
       openOnNewPage: true,
       skipAutoOpen: false,
@@ -141,7 +140,7 @@ describe("DocumentBuilderReportStore", () => {
 
     expect(pollUntil).not.toHaveBeenCalled();
     expect(getStatus).not.toHaveBeenCalled();
-    expect(openUrlWithFallbackToast).toHaveBeenCalledWith(
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
       expect.objectContaining({ openOnNewPage: false }),
     );
   });
@@ -196,7 +195,7 @@ describe("DocumentBuilderReportStore", () => {
     await Promise.all([first, second]);
   });
 
-  it("hands a report whose page was left over to the fallback toast", async () => {
+  it("announces a report whose page was left without opening it", async () => {
     const store = makeStore();
 
     let resolveTask: (task: TDocumentBuilderTask) => void = () => {};
@@ -215,7 +214,7 @@ describe("DocumentBuilderReportStore", () => {
 
     await build;
 
-    expect(openUrlWithFallbackToast).toHaveBeenCalledWith(
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
       expect.objectContaining({ skipAutoOpen: true }),
     );
   });
@@ -240,7 +239,7 @@ describe("DocumentBuilderReportStore", () => {
 
     await build;
 
-    expect(openUrlWithFallbackToast).toHaveBeenCalledWith(
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
       expect.objectContaining({ skipAutoOpen: false }),
     );
   });
@@ -255,7 +254,7 @@ describe("DocumentBuilderReportStore", () => {
       getStatus: vi.fn(),
     });
 
-    expect(openUrlWithFallbackToast).toHaveBeenCalledWith(
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
       expect.objectContaining({ skipAutoOpen: false }),
     );
   });
@@ -271,7 +270,7 @@ describe("DocumentBuilderReportStore", () => {
     });
 
     expect(toastr.error).toHaveBeenCalledWith("Boom");
-    expect(openUrlWithFallbackToast).not.toHaveBeenCalled();
+    expect(openUrlWithExportToast).not.toHaveBeenCalled();
     expect(store.isReportBuilding(ReportType.LoginHistory)).toBe(false);
   });
 
@@ -284,7 +283,7 @@ describe("DocumentBuilderReportStore", () => {
     });
 
     expect(toastr.error).toHaveBeenCalledWith("Common:SomethingWentWrong");
-    expect(openUrlWithFallbackToast).not.toHaveBeenCalled();
+    expect(openUrlWithExportToast).not.toHaveBeenCalled();
   });
 
   it("points at the save location when it gives up on a still-running task", async () => {
@@ -297,7 +296,7 @@ describe("DocumentBuilderReportStore", () => {
 
     expect(toastr.info).toHaveBeenCalledWith("Common:ReportSaveLocation");
     expect(toastr.error).not.toHaveBeenCalled();
-    expect(openUrlWithFallbackToast).not.toHaveBeenCalled();
+    expect(openUrlWithExportToast).not.toHaveBeenCalled();
   });
 
   it("clears the building flag when a request throws", async () => {
@@ -337,8 +336,8 @@ describe("DocumentBuilderReportStore", () => {
       getStatus: vi.fn(),
     });
 
-    expect(openUrlWithFallbackToast).toHaveBeenCalledTimes(1);
-    expect(openUrlWithFallbackToast).toHaveBeenCalledWith(
+    expect(openUrlWithExportToast).toHaveBeenCalledTimes(1);
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
       expect.objectContaining({ skipAutoOpen: false }),
     );
   });

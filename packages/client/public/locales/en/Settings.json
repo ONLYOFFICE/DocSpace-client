@@ -18,7 +18,7 @@
   "Admins": "Admins",
   "AdminsMessage": "Administrator Message Settings",
   "AdminsMessageMobileDescription": "Administrator Message Settings is a way to contact the portal administrator.",
-  "AdminsMessageSettingDescription": "Enable this option to display the workspace administrator contact form on the Sign In page.",
+  "AdminsMessageSettingDescription": "Enable this option to display the {{productName}} administrator contact form on the Sign In page.",
   "AIAgentQuotaDisabled": "AI agent quota has been successfully disabled.",
   "AIAgentQuotaEnabled": "AI agent quota has been successfully enabled.",
   "AiServicesManagement": "{{aiServices}} Management",

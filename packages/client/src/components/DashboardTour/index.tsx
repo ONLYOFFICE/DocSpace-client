@@ -120,6 +120,9 @@ const DashboardTour = ({
       hasIntegrations: !!document.querySelector(
         '[data-tour-id="dashboard-integrations"]',
       ),
+      hasDevTools: !!document.querySelector(
+        '[data-tour-id="dashboard-devtools"]',
+      ),
     };
   }, []);
 

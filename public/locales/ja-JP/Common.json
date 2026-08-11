@@ -332,6 +332,7 @@
   "BillingPaymentMethodCardDesc": "連携されたカードと支払者の詳細",
   "BillingPortalNotice": "請求およびサブスクリプション管理の詳細については、ポータルにアクセスしてください。",
   "BillingWalletCardDesc": "残高、チャージ、および取引履歴",
+  "BlankPDFForm": "空白のPDFフォーム",
   "BlockedByAdmin": "管理者によりブロックされています",
   "BlockFile": "ブロック",
   "Bonus": "ボーナス",

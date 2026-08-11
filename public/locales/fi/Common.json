@@ -332,6 +332,7 @@
   "BillingPaymentMethodCardDesc": "Liitetty kortti ja maksajan tiedot",
   "BillingPortalNotice": "Voit hallinnoida laskutusta ja tilauksia kokonaisu vierailemalla portaalissa.",
   "BillingWalletCardDesc": "Saldo, lataus ja tilitapahtumahistoria",
+  "BlankPDFForm": "Tyhjä PDF-lomake",
   "BlockedByAdmin": "Järjestelmänvalvoja on estänyt",
   "BlockFile": "Lukitse",
   "Bonus": "Bonus",

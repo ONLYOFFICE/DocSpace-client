@@ -332,6 +332,7 @@
   "BillingPaymentMethodCardDesc": "Détails de la carte liée et du payeur",
   "BillingPortalNotice": "Pour la gestion complète de la facturation et des abonnements, veuillez consulter le portail.",
   "BillingWalletCardDesc": "Solde, recharge et historique des transactions",
+  "BlankPDFForm": "Formulaire PDF vide",
   "BlockedByAdmin": "Bloqué par l'administrateur",
   "BlockFile": "Bloquer",
   "Bonus": "Bonus",

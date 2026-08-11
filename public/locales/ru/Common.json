@@ -332,6 +332,7 @@
   "BillingPaymentMethodCardDesc": "Привязанная карта и данные плательщика",
   "BillingPortalNotice": "Для управления биллингом и подписками, пожалуйста, посетите портал.",
   "BillingWalletCardDesc": "Баланс, пополнение и история транзакций",
+  "BlankPDFForm": "Пустая PDF-форма",
   "BlockedByAdmin": "Заблокировано администратором",
   "BlockFile": "Заблокировать",
   "Bonus": "Бонус",

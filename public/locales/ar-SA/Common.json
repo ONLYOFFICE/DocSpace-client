@@ -508,7 +508,7 @@
   "CreateFolderDescription": "سيكون هناك مجلدان مختلفان في الوجهة",
   "CreateFormFillingRoom": "إنشاء غرفة تعبئة النماذج",
   "CreateFormSet": "إنشاء مجموعة نماذج",
-  "CreateFormSpace": "إنشاء مساحة نماذج",
+  "CreateFormSpace": "مساحة نماذج جديدة",
   "CreateGroup": "إنشاء مجموعة",
   "CreateMasterFormFromFile": "إنشاء نموذج PDF من ملف",
   "CreateNewOrUpload": "إنشاء جديد أو <1>رفع ملفك</1>",

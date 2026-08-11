@@ -508,7 +508,7 @@
   "CreateFolderDescription": "コピー先には2つの異なるフォルダが作成されます",
   "CreateFormFillingRoom": "フォーム記入ルームを作成",
   "CreateFormSet": "フォームセットを作成",
-  "CreateFormSpace": "フォームスペースを作成する",
+  "CreateFormSpace": "新しいフォームスペース",
   "CreateGroup": "グループの作成",
   "CreateMasterFormFromFile": "ファイルからPDFフォームを作成する",
   "CreateNewOrUpload": "新規作成または<1>ファイルをアップロード</1>",

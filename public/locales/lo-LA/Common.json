@@ -508,7 +508,7 @@
   "CreateFolderDescription": "ຈະມີໂຟນເດີສອງໂຕແຍກຕ່າງຫາກຢູ່ທີ່ຈຸດຫມາຍປາຍທາງ",
   "CreateFormFillingRoom": "ສ້າງຫ້ອງຕື່ມຂໍ້ມູນແບບຟອມ",
   "CreateFormSet": "ສ້າງຊຸດແບບຟອມ",
-  "CreateFormSpace": "ສ້າງສະເປສແບບຟອມ",
+  "CreateFormSpace": "ສະເປສແບບຟອມໃໝ່",
   "CreateGroup": "ສ້າງກຸ່ມ",
   "CreateMasterFormFromFile": "ສ້າງແບບຟອມ PDF ຈາກໄຟລ໌",
   "CreateNewOrUpload": "ສ້າງໃໝ່ ຫຼື <1>ອັບໂຫລດໄຟລ໌ຂອງທ່ານ</1>",

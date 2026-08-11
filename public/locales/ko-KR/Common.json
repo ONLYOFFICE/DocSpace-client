@@ -508,7 +508,7 @@
   "CreateFolderDescription": "대상 위치에 두 개의 서로 다른 폴더가 생성됩니다",
   "CreateFormFillingRoom": "양식 작성 룸 생성",
   "CreateFormSet": "양식 세트 만들기",
-  "CreateFormSpace": "양식 공간 생성",
+  "CreateFormSpace": "새 양식 공간",
   "CreateGroup": "그룹 생성",
   "CreateMasterFormFromFile": "파일에서 PDF 양식 만들기",
   "CreateNewOrUpload": "새로 만들기 또는 <1>파일 업로드</1>",

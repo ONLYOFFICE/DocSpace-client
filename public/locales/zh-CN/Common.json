@@ -508,7 +508,7 @@
   "CreateFolderDescription": "目标位置中将有两个不同的文件夹",
   "CreateFormFillingRoom": "创建填表房间",
   "CreateFormSet": "创建表单集",
-  "CreateFormSpace": "创建表单空间",
+  "CreateFormSpace": "新建表单空间",
   "CreateGroup": "创建群组",
   "CreateMasterFormFromFile": "从文件创建 PDF 表单",
   "CreateNewOrUpload": "新建或<1>上传您的文件</1>",

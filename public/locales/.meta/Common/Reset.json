@@ -3,7 +3,7 @@
   "content": "Reset",
   "content_en_sha1_hash": "44c57abd888a66b36d4b7c902134063e4a097223",
   "created_at": "2025-05-19T21:30:53.995Z",
-  "updated_at": "2026-08-01T15:33:49.559Z",
+  "updated_at": "2026-08-10T12:23:10.173Z",
   "comment": {
     "text": "This is a button label that resets settings or a template to their default values.",
     "is_auto": true,
@@ -25,19 +25,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 297,
+      "line_number": 301,
       "context": "}\n testId=\"docs_connect_open_docs_settings\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:Reset\")}\n isDisabled={isBusy || isResetting}\n isLoading={isResetting}\n onClick={onResetPortal}\n testId=\"docs_connect_reset_portal\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 297,
+      "line_number": 301,
       "context": "}\n testId=\"docs_connect_open_docs_settings\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:Reset\")}\n isDisabled={isBusy || isResetting}\n isLoading={isResetting}\n onClick={onResetPortal}\n testId=\"docs_connect_reset_portal\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 297,
+      "line_number": 301,
       "context": "}\n testId=\"docs_connect_open_docs_settings\"\n />\n <Button\n size={ButtonSize.small}\n label={t(\"Common:Reset\")}\n isDisabled={isBusy || isResetting}\n isLoading={isResetting}\n onClick={onResetPortal}\n testId=\"docs_connect_reset_portal\"\n />",
       "module": "/packages/client"
     },

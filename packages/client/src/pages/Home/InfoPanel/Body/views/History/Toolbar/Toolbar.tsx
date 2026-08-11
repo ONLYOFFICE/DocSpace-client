@@ -37,7 +37,7 @@ import { type FC } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { parseToDateTime } from "@docspace/ui-kit/utils/date";
+import { startOf } from "@docspace/ui-kit/utils/date";
 import type { TFolderLogReportDateRange } from "@docspace/shared/api/files/types";
 
 import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
@@ -70,7 +70,7 @@ const HistoryToolbar = ({
     getRoomHistoryReport(roomId, dateRange);
   };
 
-  const roomCreatedDate = parseToDateTime(roomCreationDate);
+  const roomCreatedDate = startOf(roomCreationDate, "day");
 
   return (
     <div className={styles.toolbar} data-testid="info_history_toolbar">

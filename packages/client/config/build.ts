@@ -116,18 +116,47 @@ export const getBuildConfig = (
             test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-i18next|scheduler|mobx|mobx-react|styled-components)/,
             priority: 90,
           },
-          // Everything else from node_modules in a single vendor chunk.
+          // Everything else from node_modules in a single vendor chunk —
+          // except the deps below, which are only reachable through lazy
+          // routes / dynamic imports. `vendor` is statically reachable from
+          // the entry, so it is modulepreloaded; capturing a lazy dep here
+          // would drag it onto the critical path. Excluded modules match no
+          // group and fall back to automatic chunking, which keeps the
+          // `import()` / lazy-route boundary.
+          //
+          // The list (verify with `grep` before extending — a dep imported by
+          // any eager module gains nothing from being excluded):
+          //   shiki      — 252 TextMate grammars (~8MB), lazy highlighter in
+          //                @onlyoffice/ai-chat
+          //   heic2any   — emscripten HEIC decoder (~1.3MB), MediaViewer only
+          //   AI stack   — @onlyoffice/ai-chat and its externalized peers
+          //                (openai/anthropic/genai/mistral SDKs, assistant-ui,
+          //                radix, zustand, katex); reached only from the lazy
+          //                Home/Dashboard/PortalSettings AI pages
+          //   markdown   — react-markdown + unified/remark/rehype pipeline;
+          //                used by the AI chat and lazy DebugInfo only
+          //   codemirror — JavascriptSDK settings page (lazy) and ai-chat
           {
             name: "vendor",
-            test: /[\\/]node_modules[\\/]/,
+            test: (id: string) =>
+              /[\\/]node_modules[\\/]/.test(id) &&
+              !/[\\/](shiki|@shikijs|react-shiki|heic2any|@onlyoffice[\\/]ai-chat|openai|@anthropic-ai|@mistralai|@google[\\/]genai|@assistant-ui|assistant-stream|@radix-ui|zustand|katex|rehype-[\w-]+|remark-[\w-]+|react-markdown|micromark[\w-]*|mdast-util-[\w-]+|hast-util-[\w-]+|hastscript|unist-[\w-]+|unified|vfile[\w-]*|codemirror|@codemirror|@uiw)[\\/]/.test(
+                id,
+              ),
             priority: 10,
           },
           // Our shared package + the ui-kit submodule (libs/ui-kit) reused
           // across routes — one chunk instead of dozens of tiny per-component
           // files (color-picker, slider, table, icon SVGs, …).
+          // ui-kit's ai-agent subtree is excluded for the same reason as the
+          // AI deps above: it statically imports @onlyoffice/ai-chat and is
+          // itself only reached from lazy AI pages — captured here it would
+          // pull the whole chat UI into the preloaded `shared` chunk.
           {
             name: "shared",
-            test: /([\\/]packages[\\/]shared|[\\/]libs[\\/]ui-kit)[\\/]/,
+            test: (id: string) =>
+              /([\\/]packages[\\/]shared|[\\/]libs[\\/]ui-kit)[\\/]/.test(id) &&
+              !/[\\/]libs[\\/]ui-kit[\\/]ai-agent[\\/]/.test(id),
             priority: 5,
           },
         ],

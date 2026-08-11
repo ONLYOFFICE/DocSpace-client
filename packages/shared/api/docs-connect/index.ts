@@ -41,11 +41,12 @@ import type {
   TDocsConnectTenantInfo,
   TDocsConnectPrices,
   TDocsConnectTariffState,
+  TDocsConnectPreviousPlan,
   TDocsConnectWallet,
   TDocsConnectConfigUpdate,
   TDocsConnectDevPackCalculation,
-  TDocsConnectReportStatus,
 } from "./types";
+import type { TDocumentBuilderTask } from "../files/types";
 
 const BASE = "/settings/docscloud";
 
@@ -110,6 +111,32 @@ const QUOTA_STATE_OVERDUE = 1;
 const EMPTY_TARIFF_STATE: TDocsConnectTariffState = {
   scheduledChange: null,
   deactivated: false,
+  previousPlan: null,
+};
+
+const quotaDueTime = (quota?: TTariffQuota): number => {
+  const ms = quota?.dueDate ? new Date(quota.dueDate).getTime() : Number.NaN;
+  return Number.isNaN(ms) ? 0 : ms;
+};
+
+const resolvePreviousPlan = (
+  baseQuota?: TTariffQuota,
+  devpackQuota?: TTariffQuota,
+): TDocsConnectPreviousPlan | null => {
+  const paid = [devpackQuota, baseQuota].filter(
+    (quota): quota is TTariffQuota => (quota?.quantity ?? 0) > 0,
+  );
+
+  if (paid.length === 0) return null;
+
+  const latest = paid.reduce((acc, quota) =>
+    quotaDueTime(quota) > quotaDueTime(acc) ? quota : acc,
+  );
+
+  return {
+    users: latest.quantity ?? 0,
+    devPackEnabled: latest === devpackQuota,
+  };
 };
 
 const resolveNextDevPack = ({
@@ -154,12 +181,13 @@ const fetchTariffState = async (
 
   const baseQuota = quotaOf(baseId);
   const devpackQuota = quotaOf(devpackId);
+  const previousPlan = resolvePreviousPlan(baseQuota, devpackQuota);
 
   if (
     baseQuota?.state === QUOTA_STATE_OVERDUE ||
     devpackQuota?.state === QUOTA_STATE_OVERDUE
   ) {
-    return { scheduledChange: null, deactivated: true };
+    return { scheduledChange: null, deactivated: true, previousPlan };
   }
 
   const scheduleQuota = [devpackQuota, baseQuota].find(
@@ -182,10 +210,11 @@ const fetchTariffState = async (
         scheduledOnDevPack,
       },
       deactivated: false,
+      previousPlan,
     };
   }
 
-  return EMPTY_TARIFF_STATE;
+  return { ...EMPTY_TARIFF_STATE, previousPlan };
 };
 
 const fetchWallet = async (
@@ -269,6 +298,8 @@ export const getDocsConnectInfo = async (
     devPackEnabled,
     scheduledChange: tariffState.scheduledChange,
     deactivated: tariffState.deactivated,
+    previousPlan:
+      (tenant.payment?.quantity ?? 0) > 0 ? null : tariffState.previousPlan,
   };
 };
 
@@ -330,19 +361,19 @@ export const updateDocsConnectConfig = async (
 };
 
 export const startDocsConnectReport =
-  async (): Promise<TDocsConnectReportStatus | null> => {
+  async (): Promise<TDocumentBuilderTask | null> => {
     return (await request({
       method: "post",
       url: `${BASE}/tenant/quota/report`,
-    })) as TDocsConnectReportStatus | null;
+    })) as TDocumentBuilderTask | null;
   };
 
 export const getDocsConnectReportStatus =
-  async (): Promise<TDocsConnectReportStatus | null> => {
+  async (): Promise<TDocumentBuilderTask | null> => {
     return (await request({
       method: "get",
       url: `${BASE}/tenant/quota/report`,
-    })) as TDocsConnectReportStatus | null;
+    })) as TDocumentBuilderTask | null;
   };
 
 export const cancelDocsConnectPlan = async (

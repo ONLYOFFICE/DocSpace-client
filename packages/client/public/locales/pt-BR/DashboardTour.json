@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "Estes são os nossos produtos, cada um criado para tirar das suas mãos um tipo diferente de trabalho — documentos, colaboração, coleta de dados e ajuda da IA. Abra qualquer um deles e você também vai receber um tour rápido daquela seção.",
+  "DashboardAppsTitle": "Tudo com que você pode trabalhar",
+  "DashboardCreate": "Crie seu primeiro documento aqui mesmo — escolha um tipo e comece a escrever. Ele será salvo em {{files}}, onde você pode encontrá-lo a qualquer momento.",
+  "DashboardCreateTitle": "Crie algo agora",
+  "DashboardDevTools": "Está criando algo próprio? Tudo aqui é para isso: uma API para controlar o portal a partir do seu código, um SDK para incorporar os editores no seu próprio aplicativo, plugins, webhooks e chaves. Nada disso é necessário para usar o {{productName}} no dia a dia.",
+  "DashboardDevToolsTitle": "Para desenvolvedores",
+  "DashboardIntegrations": "Já trabalha em outra plataforma? Conecte-a aqui e mantenha os editores que você acabou de ver diretamente nas ferramentas que sua equipe já usa — sem código personalizado e sem migração de dados.",
+  "DashboardIntegrationsTitle": "Trabalhando com outras plataformas",
+  "DashboardOverview": "Esta página está sempre a um clique — abra {{overview}} na barra lateral sempre que quiser voltar para cá.",
+  "DashboardOverviewTitle": "Voltando para cá",
+  "DashboardProfile": "O nome do portal e um breve resumo do seu perfil: nome, e-mail e senha. Daqui você pode renomear o portal ou alterar sua senha.",
+  "DashboardProfileTitle": "Os dados do seu perfil",
+  "WelcomeDashboardSubtitle": "Tudo começa nesta página",
+  "WelcomeDashboardTitle": "Bem-vindo ao {{productName}}",
+  "WelcomeDescription": "Crie documentos, colabore em salas, colete dados com formulários e deixe a IA fazer a leitura — tudo em um só lugar. Faça um tour rápido e mostramos tudo para você.",
+  "WelcomeLater": "Talvez mais tarde"
+}

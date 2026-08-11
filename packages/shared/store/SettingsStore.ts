@@ -104,6 +104,7 @@ import {
 } from "../utils/common";
 import { applyCustomStyles } from "../utils/customStyles";
 import FirebaseHelper from "../utils/firebase";
+import { claimPortalNotFoundRedirect } from "../utils/portalNotFound";
 
 const themes = {
   Dark,
@@ -365,6 +366,13 @@ class SettingsStore {
   abortControllerArr: Nullable<AbortController>[] = [];
 
   aiConfig: Nullable<TAIConfig> = null;
+
+  /** Comes from the settings response, so a missed socket event is recovered. */
+  walletLowBalance = false;
+
+  setWalletLowBalance = (walletLowBalance: boolean) => {
+    this.walletLowBalance = walletLowBalance;
+  };
 
   externalDbEnabled: boolean = false;
 
@@ -1094,6 +1102,12 @@ class SettingsStore {
         const url = new URL(wrongportalname);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
+
+        // Claim the navigation before it starts: PrivateRoute and the request
+        // layer both react to the same deletion by redirecting to the login
+        // page, which would cancel it.
+        claimPortalNotFoundRedirect();
+
         return window.location.replace(url);
       }
 

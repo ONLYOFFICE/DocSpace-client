@@ -173,6 +173,10 @@ const DataBackup = ({
       settingsFileSelector={{
         filesSettings: filesSettings as unknown as FilesSettingsDto,
       }}
+      disabledCreatePublicRoom={
+        !filesSettings?.externalShare &&
+        !!filesSettings?.externalShareApplyToRooms
+      }
       defaultRegion={defaultRegion}
       downloadingProgress={downloadingProgress}
       temporaryLink={temporaryLink}

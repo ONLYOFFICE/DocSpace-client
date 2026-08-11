@@ -67,6 +67,7 @@ export const TariffTitleContainer = ({
 
   const {
     isUserStatisticsVisible,
+    isReportLoading,
     openUserStatistics,
     closeUserStatistics,
     downloadAndOpenReport,
@@ -263,6 +264,7 @@ export const TariffTitleContainer = ({
         isVisible={isUserStatisticsVisible}
         statistics={usersStatistics}
         onClose={closeUserStatistics}
+        isReportLoading={isReportLoading}
         onDownloadAndReport={downloadAndOpenReport}
       />
     </div>

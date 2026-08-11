@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import type { ReactNode } from "react";
 import type { Step } from "react-joyride";
 
 import type { TourStepCallbacks } from "./useTour";
@@ -239,7 +240,7 @@ export function isStepTargetPresent(step: Step): boolean {
 export function navItemStep(
   selector: string,
   title: string,
-  body: string,
+  body: ReactNode,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   spotlightList = false,
@@ -287,7 +288,7 @@ export function navItemStep(
 export function elementStep(
   target: string,
   title: string,
-  body: string,
+  body: ReactNode,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   spotlightPadding = 6,
@@ -382,7 +383,7 @@ export function elementGroupStep(
   target: string,
   members: string[],
   title: string,
-  body: string,
+  body: ReactNode,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   spotlightPadding = 6,
@@ -415,7 +416,7 @@ export function menuStep(
   triggerSelector: string,
   menuSelector: string,
   title: string,
-  body: string,
+  body: ReactNode,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   // Extra selectors the spotlight takes in alongside the menu — pass the button
@@ -432,6 +433,14 @@ export function menuStep(
     spotlightTarget: spotlightWith.length
       ? () => unionSpotlight([menuSelector, ...spotlightWith], menuSelector)
       : undefined,
+    // The trigger is what gets scrolled into view, not the menu.
+    //
+    // A dropdown is positioned against its trigger and floats above the scroll
+    // container rather than inside it, so scrolling to the menu itself either
+    // does nothing (it is already wherever the trigger put it) or drags the
+    // trigger out from under it. Centring the trigger keeps the pair together,
+    // and the menu opens on screen because the thing it hangs off is.
+    scrollTarget: triggerSelector,
     spotlightPadding,
     placement: "auto" as const,
     content: body,
@@ -479,7 +488,7 @@ export function menuStep(
 export function revealStep(
   target: string,
   title: string,
-  body: string,
+  body: ReactNode,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   hooks: RevealHooks,
@@ -539,7 +548,7 @@ const REVEAL_CLASS = "tour-reveal-hidden-control";
 export function hoverRevealStep(
   target: string,
   title: string,
-  body: string,
+  body: ReactNode,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   spotlightPadding = 4,
@@ -585,7 +594,7 @@ export function removeRevealedControl() {
 export function fileItemStep(
   rowSelector: string,
   title: string,
-  body: string,
+  body: ReactNode,
   callbacks: TourStepCallbacks | undefined,
   logLabel: string,
   // Same contract as `elementStep`'s: runs before the row is awaited, and has

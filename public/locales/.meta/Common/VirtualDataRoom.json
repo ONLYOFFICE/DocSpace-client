@@ -3,7 +3,7 @@
   "content": "Virtual Data Room",
   "content_en_sha1_hash": "29f2e3affa77388673134388754b5295d908047b",
   "created_at": "2025-05-19T21:30:49.548Z",
-  "updated_at": "2026-08-06T14:20:57.520Z",
+  "updated_at": "2026-08-07T15:05:26.432Z",
   "comment": {
     "text": "This is a label for a type of room. It appears in various places, such as when displaying room types or filtering rooms.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 151,
+      "line_number": 153,
       "context": "// Each type is named by the label its own tile carries (the same\n // Common keys `useQuickActions` builds the banner from), so the\n // tooltip and the tiles under the spotlight never drift apart.\n t(\"RoomsTour:RoomsTypes\", {\n collaboration: t(\"Common:CollaborationRoomTitle\"),\n vdr: t(\"Common:VirtualDataRoom\"),\n publicRoom: t(\"Common:PublicRoom\"),\n custom: t(\"Common:CustomRoomTitle\"),\n }),\n callbacks,\n LOG_LABEL,",
       "module": "/packages/client"
     },

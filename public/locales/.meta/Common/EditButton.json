@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2026-08-06T14:20:57.572Z",
+  "updated_at": "2026-08-10T12:23:10.168Z",
   "comment": {
     "text": "This is a button label. It allows users to edit settings, such as auto-payments or submission configurations.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
-      "line_number": 163,
+      "line_number": 167,
       "context": "<IconButton\n className={styles.profileCardEdit}\n iconName={PencilReactSvgUrl}\n size={12}\n onClick={handleEditPortalName}\n title={t(\"Common:EditButton\")}\n />\n </span>\n </div>\n \n <div className={styles.profileCardField}>",
       "module": "/packages/client"
     },
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 460,
+      "line_number": 457,
       "context": "fontWeight={600}\n textDecoration=\"underline dashed\"\n onClick={() => openBuyPlan?.(\"edit\")}\n dataTestId=\"docs_connect_edit_subscription_link\"\n >\n {t(\"Common:EditButton\")}\n </Link>\n )}\n </div>\n <div className={styles.detailRows}>\n <div className={styles.detailRow}>",
       "module": "/packages/client"
     },

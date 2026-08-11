@@ -81,7 +81,20 @@ type ModuleCardProps = {
 
 export const ModuleCard = ({ mod, onClick }: ModuleCardProps) => {
   return (
-    <button type="button" className={styles.moduleCard} onClick={onClick}>
+    // The dashboard tour lights up every app card as one region, and it measures
+    // the union of the elements its step names one selector at a time — so each
+    // card is addressable on its own (`dashboard-app-card-{id}`) rather than all
+    // of them sharing one value. A shared value would resolve to the first card
+    // alone and spotlight only Files.
+    //
+    // On the cards rather than on the grid around them, so the section heading
+    // above stays outside the spotlight.
+    <button
+      type="button"
+      data-tour-id={`dashboard-app-card-${mod.id}`}
+      className={styles.moduleCard}
+      onClick={onClick}
+    >
       <div className={styles.moduleHeader}>
         <span className={styles.moduleIcon} data-installed={mod.installed}>
           {mod.icon}

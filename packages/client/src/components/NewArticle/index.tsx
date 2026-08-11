@@ -260,7 +260,7 @@ const NewArticle = ({
 
     const aiFilesItem: NavMenuItem = {
       id: AI_FILES_ID,
-      label: t("Common:DashboardFilesTitle"),
+      label: t("Common:Files"),
       icon: CatalogFolderReactSvgUrl,
       onClick: () => navigate("/ai-files"),
       children: aiFilesEnabled
@@ -321,7 +321,7 @@ const NewArticle = ({
 
     const aiFormsItem: NavMenuItem = {
       id: AI_FORMS_ID,
-      label: t("Common:DashboardFormsTitle"),
+      label: t("Common:Forms"),
       icon: FormFileReactSvgUrl,
       onClick: handleAiFormsClick,
       children: aiFormsEnabled
@@ -384,7 +384,7 @@ const NewArticle = ({
 
     const aiRoomsItem: NavMenuItem = {
       id: AI_ROOMS_ID,
-      label: t("Common:DashboardRoomsTitle"),
+      label: t("Common:Rooms"),
       icon: CatalogRoomsReactSvgUrl,
       onClick: aiRoomsEnabled
         ? () => navigate("/ai-rooms?section=rooms")
@@ -440,7 +440,7 @@ const NewArticle = ({
 
     const aiAgentsItem: NavMenuItem = {
       id: AI_AGENTS_ID,
-      label: t("Common:DashboardAIChatAgentsTitle"),
+      label: t("Common:AIAgents"),
       icon: CatalogAiAgentsReactSvgUrl,
       onClick: handleAiAgentsClick,
       children: aiAgentsEnabled && canManageAgents

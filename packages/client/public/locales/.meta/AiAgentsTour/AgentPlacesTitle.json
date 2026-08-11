@@ -3,7 +3,7 @@
   "content": "Kept within reach",
   "content_en_sha1_hash": "ad1791c1b946a2b1ac79ee266e697431e0be5b4e",
   "created_at": "2026-08-06T14:20:56.249Z",
-  "updated_at": "2026-08-06T14:24:54.635Z",
+  "updated_at": "2026-08-07T15:05:26.409Z",
   "comment": {
     "text": "Title for an onboarding tour step introducing the sidebar's quick access sub-items, followed by a list of available places.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 259,
-      "context": "// 6. The sidebar sub-items, in one paragraph.\n showQuickAccess &&\n places.length > 0 &&\n navItemStep(\n sidebarSelector(quickAccessAnchor as string),\n t(\"AiAgentsTour:AgentPlacesTitle\"),\n places.join(\" \"),\n callbacks,\n LOG_LABEL,\n true,\n ),",
+      "line_number": 261,
+      "context": "// 6. The sidebar sub-items, one bullet each.\n showQuickAccess &&\n places.length > 0 &&\n navItemStep(\n sidebarSelector(quickAccessAnchor as string),\n t(\"AiAgentsTour:AgentPlacesTitle\"),\n createElement(TourList, { items: places }),\n callbacks,\n LOG_LABEL,\n true,\n ),",
       "module": "/packages/client"
     }
   ],

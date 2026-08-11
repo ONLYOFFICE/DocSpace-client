@@ -3,7 +3,7 @@
   "content": "Favorites",
   "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-08-06T14:20:57.493Z",
+  "updated_at": "2026-08-07T15:05:26.407Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 165,
-      "context": "// Only the ones that exist are named.\n const places = [\n (hasRecent || hasFavorites) &&\n t(\"AiAgentsTour:AgentPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n hasTrash &&\n t(\"AiAgentsTour:AgentPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];",
+      "line_number": 167,
+      "context": "// are named.\n const places = [\n (hasRecent || hasFavorites) &&\n t(\"AiAgentsTour:AgentPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n hasTrash &&\n t(\"AiAgentsTour:AgentPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];",
       "module": "/packages/client"
     },
     {
@@ -37,14 +37,14 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 198,
+      "line_number": 200,
       "context": "}),\n recentId &&\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n favoritesId &&\n t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n trashId &&\n t(\"FilesTour:TourPlacesTrash\", {\n sectionName: t(\"Common:TrashSection\"),\n }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 157,
-      "context": "// (ClientArticleSidebar) as here, so for everyone else its sentence drops\n // rather than pointing at an item they do not have.\n const places = [\n t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
+      "line_number": 159,
+      "context": "// here, so for everyone else its bullet drops rather than pointing at an item\n // they do not have.\n const places = [\n t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
       "module": "/packages/client"
     },
     {
@@ -73,8 +73,8 @@
     },
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 225,
-      "context": "navItemStep(\n sidebarSelector(\"rooms-recent\"),\n t(\"RoomsTour:RoomsPlacesTitle\"),\n t(\"RoomsTour:RoomsPlaces\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n trash: t(\"Common:TrashSection\"),\n templates: t(\"Common:Templates\"),\n archive: t(\"Common:Archive\"),\n }),\n callbacks,",
+      "line_number": 234,
+      "context": "t(\"RoomsTour:RoomsPlacesTitle\"),\n createElement(TourList, {\n items: [\n t(\"RoomsTour:RoomsPlacesFiles\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n trash: t(\"Common:TrashSection\"),\n }),\n t(\"RoomsTour:RoomsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
       "module": "/packages/client"
     },
     {

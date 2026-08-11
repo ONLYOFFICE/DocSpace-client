@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Export index de sală",
   "ExportRoomIndexAlreadyInProgressError": "Exportul indexului de sală este deja în desfășurare. Vă rugăm să așteptați până când exportul curent este încheiat înainte de a începe un export nou.",
   "FileDownloadingIsRestricted": "Descărcarea fişierelor este restricționată în această sală.",
-  "FileExportDestination": "Fișierul <1>{{fileName}}</1> a fost exportat în secțiunea {{sectionName}}",
   "FileRenamed": "Documentul '{{oldTitle}}' este redenumit în '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Fișierele vor fi mutate ulterior în {{sectionName}}.",
   "FinalizeVersion": "Finalizarea versiunii",

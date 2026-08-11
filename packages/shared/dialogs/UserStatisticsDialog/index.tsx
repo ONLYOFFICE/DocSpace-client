@@ -45,6 +45,7 @@ import { UserStatisticsInfo } from "./sub-components/UserStatisticsInfo";
 const UserStatisticsDialog = ({
   onClose,
   isLoading,
+  isReportLoading,
   isVisible,
   statistics,
   docspaceFaqUrl,
@@ -101,6 +102,7 @@ const UserStatisticsDialog = ({
           label={t("DownloadAndOpenReport")}
           size={ButtonSize.normal}
           primary
+          isLoading={isReportLoading}
           onClick={onDownloadAndReport}
           testId="download_and_open_report_button"
         />

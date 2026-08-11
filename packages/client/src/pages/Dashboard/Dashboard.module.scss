@@ -131,6 +131,30 @@
   box-sizing: border-box;
 }
 
+// Reopens the welcome modal. Pinned to the top-right of the page rather than
+// placed in the plan header, where it read as one more link in a row of links.
+// Sits above the Scrollbar (which owns the whole box below it) so it stays put
+// while the content scrolls under it.
+.helpButton {
+  position: absolute;
+  top: 20px;
+  // Logical inset, so the button follows the page to the left edge in RTL.
+  inset-inline-end: 20px;
+  z-index: 1;
+
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+
+  &:hover {
+    background: var(--dropdown-item-hover-background-color);
+  }
+}
+
 // Plan header
 .planHeader {
   display: flex;

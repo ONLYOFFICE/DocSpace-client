@@ -3,7 +3,7 @@
   "content": "Your credits are running low. Add more credits to avoid interruptions to AI features.",
   "content_en_sha1_hash": "28e26a88e90d5b704d1ac45b4a503b55e104c1d1",
   "created_at": "2026-06-25T11:54:52.722Z",
-  "updated_at": "2026-07-27T13:07:51.055Z",
+  "updated_at": "2026-08-07T10:52:45.141Z",
   "comment": {
     "text": "Warning message on the AI tools page that appears when the user's credit balance is nearly depleted, advising them to top up to avoid service interruptions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 283,
+      "line_number": 233,
       "context": "withBottomMargin={withBottomMargin}\n />\n \n {isAiToolsServiceOn && isLowWalletBalance ? (\n <Text fontSize=\"15px\" fontWeight={600} className={styles.lowBalance}>\n {t(\"LowCreditsBalance\")}\n </Text>\n ) : null}\n \n {withoutWallet ? null : (\n <>",
       "module": "/libs/ui-kit"
     }

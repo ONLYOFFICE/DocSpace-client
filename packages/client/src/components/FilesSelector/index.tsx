@@ -167,6 +167,7 @@ const FilesSelectorWrapper = ({
   headerProps,
 
   withCreate,
+  disabledCreatePublicRoom,
   folderIsShared,
   checkCreating,
   isMultiSelect,
@@ -630,6 +631,7 @@ const FilesSelectorWrapper = ({
       withCreate={
         (isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
       }
+      disabledCreatePublicRoom={disabledCreatePublicRoom}
       filesSettings={filesSettings as unknown as FilesSettingsDto}
       headerProps={headerProps}
       formProps={formProps}
@@ -738,7 +740,13 @@ export default inject(
       setSelected,
       filesSettingsStore,
     } = filesStore;
-    const { getIcon, filesSettings, externalShare } = filesSettingsStore;
+    const {
+      getIcon,
+      filesSettings,
+      externalShare,
+      isExternalShareRestricted,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, infoPanelSelection } =
       infoPanelStore;
 
@@ -853,6 +861,8 @@ export default inject(
       setBackupToPublicRoomVisible,
       currentDeviceType,
       isExternalShareEnabled: externalShare,
+      disabledCreatePublicRoom:
+        isExternalShareRestricted && externalShareApplyToRooms,
       getIcon,
 
       roomsFolderId,

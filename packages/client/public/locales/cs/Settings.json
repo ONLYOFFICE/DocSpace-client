@@ -113,7 +113,6 @@
   "DeveloperToolsDescription": "Integrovat, rozšířit a automatizovat {{organizationName}} {{productName}} pomocí našeho kompletního balíčku nástrojů pro vývojáře — od REST API a Embed SDK po webhooks a OAuth aplikace. Vyberte si níže uvedený nástroj, abyste začali.",
   "DisableAiServices": "Zakázat {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} bude skryto pro všechny uživatele (interakční historie zůstane zachována).",
-  "DisableAiServicesBalance": "Váš zbývající zůstatek (<1>{{balance}}</1>) zůstane na vašem účtu a bude k dispozici pro použití, pokud se rozhodnete v budoucnu znovu aktivovat {{aiServices}}.",
   "DisableAiServicesConfirm": "Je možné znovu aktivovat {{aiServices}} kdykoli. Jste si jisti, že chcete pokračovat?",
   "DisableAiServicesDescription": "Po deaktivaci {{organizationName}} AI, následující změny platí:",
   "DisableAiServicesServicesDisabled": "Platné {{aiServices}} budou deaktivovány.",

@@ -3,7 +3,7 @@
   "content": "Now make it yours",
   "content_en_sha1_hash": "53971ce5983bffd660e85f87c0abb8f730a36b76",
   "created_at": "2026-08-06T14:20:52.335Z",
-  "updated_at": "2026-08-06T14:53:28.602Z",
+  "updated_at": "2026-08-07T15:05:26.433Z",
   "comment": {
     "text": "A title for a step in the Rooms onboarding tour, appearing when guiding users to create their first room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
-      "line_number": 252,
+      "line_number": 267,
       "context": "isDemo &&\n demoHooks &&\n (canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"RoomsTour:RoomsCreateFirst\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )",
       "module": "/packages/client"
     }

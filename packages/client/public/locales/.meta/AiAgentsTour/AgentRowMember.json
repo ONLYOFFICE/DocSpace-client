@@ -3,7 +3,7 @@
   "content": "Click the name to start talking to it, and pin the ones you use daily so they stay at the top of the list. The three dots hold the rest: open the agent, or copy a link for a colleague who already has access.",
   "content_en_sha1_hash": "ac867e5341bc633f7e9788c3567cce5d59b973b7",
   "created_at": "2026-08-06T14:20:56.250Z",
-  "updated_at": "2026-08-06T14:23:41.041Z",
+  "updated_at": "2026-08-07T15:05:26.408Z",
   "comment": {
     "text": "Instructional text within a guided tour step explaining how to interact with an agent entry in the list, such as clicking, pinning, or using the context menu.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 212,
+      "line_number": 214,
       "context": "// entries; a user's menu is short, so it is described separately.\n hasItems &&\n fileItemStep(\n FIRST_ITEM_SELECTOR,\n t(\"AiAgentsTour:AgentRowTitle\"),\n isAdmin ? t(\"AiAgentsTour:AgentRow\") : t(\"AiAgentsTour:AgentRowMember\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 4. Who may use the agent. The step opens the info panel on the first",
       "module": "/packages/client"
     }

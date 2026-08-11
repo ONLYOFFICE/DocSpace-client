@@ -3,7 +3,7 @@
   "content": "Monthly charge",
   "content_en_sha1_hash": "d2346d4cf441579a47664e402c197e2b8bc0fb68",
   "created_at": "2026-06-25T11:54:53.163Z",
-  "updated_at": "2026-08-06T08:04:19.965Z",
+  "updated_at": "2026-08-10T12:23:10.560Z",
   "comment": {
     "text": "A label in a billing summary card that indicates the recurring monthly cost for an additional storage plan.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 511,
+      "line_number": 508,
       "context": ")}\n </Text>\n </div>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>\n {t(\"Common:MonthlyCharge\")}\n </Text>\n <Text fontWeight={600}>\n {formatCurrencyValue(\n i18n.language,\n monthlyCharge,",
       "module": "/packages/client"
     }

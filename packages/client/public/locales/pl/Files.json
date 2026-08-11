@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Eksportuj indeks pokoju",
   "ExportRoomIndexAlreadyInProgressError": "Eksport indeksu pokoju jest już w toku. Poczekaj, aż bieżący eksport zostanie zakończony, aby rozpocząć nowy.",
   "FileDownloadingIsRestricted": "Pobieranie plików jest ograniczone w tym pomieszczeniu.",
-  "FileExportDestination": "Plik <1>{{fileName}}</1> został wyeksportowany do {{sectionName}}",
   "FileRenamed": "Nazwa dokumentu '{{oldTitle}}' została zmieniona na '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Po przeniesieniu plików do {{sectionName}}.",
   "FinalizeVersion": "Sfinalizuj wersję",

@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Pielāgotais filtrs deaktivēts.",
   "FileCustomFilterEnabled": "Pielāgotais filtrs aktivēts.",
   "FileDeletedCount": "Faili noņemti ({{count}}).",
+  "FileExportDestination": "Fails <1>{{fileName}}</1> eksportēts uz {{sectionName}}",
   "FileExtension": "Faila paplašinājums",
   "FileFormatNotAllowed": "Šo failu nevar augšupielādēt, jo tā formāts nav atļauts.",
   "FileInfo": "Dokumenta informācija",

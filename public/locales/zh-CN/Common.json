@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "自定义过滤器已禁用。",
   "FileCustomFilterEnabled": "自定义过滤器已启用。",
   "FileDeletedCount": "文件已删除 ({{count}})。",
+  "FileExportDestination": "<1>{{fileName}}</1>文件已导出至{{sectionName}}",
   "FileExtension": "文件扩展名",
   "FileFormatNotAllowed": "由于其格式不受支持，此文件无法上传。",
   "FileInfo": "文件信息",

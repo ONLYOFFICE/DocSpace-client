@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Export room index",
   "ExportRoomIndexAlreadyInProgressError": "Room index export is already in progress. Please wait until the current export is completed to start the new one.",
   "FileDownloadingIsRestricted": "File downloading is restricted in this room.",
-  "FileExportDestination": "<1>{{fileName}}</1> file exported to {{sectionName}}",
   "FileRenamed": "The document '{{oldTitle}}' is renamed to '{{newTitle}}'",
   "FilesMovedToTrashNotice": "After files will be moved to {{sectionName}}.",
   "FinalizeVersion": "Finalize version",

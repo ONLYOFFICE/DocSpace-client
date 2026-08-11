@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Персонализиран филтър деактивиран.",
   "FileCustomFilterEnabled": "Персонализиран филтър активиран.",
   "FileDeletedCount": "Файлове премахнати ({{count}}).",
+  "FileExportDestination": "Файл <1>{{fileName}}</1> е експортиран в {{sectionName}}",
   "FileExtension": "Разширение на файла",
   "FileFormatNotAllowed": "Този файл не може да бъде качен, защото форматът му не е разрешен.",
   "FileInfo": "Информация за файла",

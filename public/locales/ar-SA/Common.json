@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "تم تعطيل الفِلتر المخصص.",
   "FileCustomFilterEnabled": "تم تمكين الفِلتر المخصص.",
   "FileDeletedCount": "تم إزالة الملفات ({{count}}).",
+  "FileExportDestination": "تم تصدير ملف <1>{{fileName}}</1> إلى {{sectionName}}",
   "FileExtension": "امتداد الملف",
   "FileFormatNotAllowed": "لا يمكن تحميل هذا الملف لأن صيغته غير مدعومة.",
   "FileInfo": "معلومات الملف",

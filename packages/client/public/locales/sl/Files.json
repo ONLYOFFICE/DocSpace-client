@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Izvozi indeks sobe",
   "ExportRoomIndexAlreadyInProgressError": "Izvoz indeksa sobe že poteka. Počakajte, da se trenutni izvoz zaključi, preden začnete novega.",
   "FileDownloadingIsRestricted": "Prenos datotek je v tej sobi omejen.",
-  "FileExportDestination": "Datoteka <1>{{fileName}}</1> izvožena v {{sectionName}}",
   "FileRenamed": "Dokument '{{oldTitle}}' je preimenovan v '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Po premiku datotek v {{sectionName}}.",
   "FinalizeVersion": "Dokončaj različico",

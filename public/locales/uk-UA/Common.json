@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Спеціальний фільтр вимкнено.",
   "FileCustomFilterEnabled": "Спеціальний фільтр увімкнено.",
   "FileDeletedCount": "Файли видалено ({{count}}).",
+  "FileExportDestination": "Файл <1>{{fileName}}</1> експортовано до {{sectionName}}",
   "FileExtension": "Розширення файлу",
   "FileFormatNotAllowed": "Цей файл не може бути завантажений, оскільки його формат не підтримується.",
   "FileInfo": "Інформація про файл",

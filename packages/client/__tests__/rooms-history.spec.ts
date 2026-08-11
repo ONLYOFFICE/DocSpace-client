@@ -537,7 +537,58 @@ test.describe("Rooms — info panel history", () => {
 
       await popup.close();
 
+      // the file opened on its own, and the toast still names it and links to
+      // it so the report can be found again later
+      const toast = page.getByTestId("toast-content").first();
+
+      await expect(toast).toContainText("file exported to Files");
+      await expect(
+        toast.getByRole("link", { name: "History report.xlsx" }),
+      ).toHaveAttribute("target", "_blank");
+
       expect(handle.current?.getStartRequestCount()).toBe(1);
+    });
+
+    test("should offer the same open link when the browser blocks the popup", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      const handle = reportHandle();
+
+      mockRequest.use(
+        ...folderHistoryReportHandlers(TEST_PORT, ROOM_ID, {
+          pollsBeforeComplete: 0,
+          resultFileUrl: REPORT_URL,
+          handle,
+        }),
+      );
+
+      await page.addInitScript(() => {
+        window.open = () => null;
+      });
+
+      await openHistoryPanel(page, baseUrl);
+
+      await exportHistory(page);
+
+      const toast = page.getByTestId("toast-content").first();
+
+      await expect(toast).toBeVisible();
+      await expect(toast).toContainText("file exported to Files");
+
+      const openLink = toast.getByRole("link", { name: "History report.xlsx" });
+      await expect(openLink).toHaveAttribute("target", "_blank");
+
+      const popupPromise = page.waitForEvent("popup");
+
+      await openLink.click();
+
+      const reportPopup = await popupPromise;
+
+      expect(reportPopup.url()).toContain("report=42");
+
+      await reportPopup.close();
     });
 
     test("should poll the task status until the report is ready", async ({
@@ -563,6 +614,8 @@ test.describe("Rooms — info panel history", () => {
       const exportButton = page.getByTestId("info_history_export");
       const loader = page.locator("#info_history-export-loader");
 
+      const popupPromise = page.waitForEvent("popup");
+
       await exportHistory(page);
 
       await expect(loader).toBeVisible();
@@ -571,7 +624,9 @@ test.describe("Rooms — info panel history", () => {
       const toast = page.getByTestId("toast-content").first();
 
       await expect(toast).toBeVisible();
-      await expect(toast).toContainText("The report will be saved to");
+      await expect(toast).toContainText("file exported to Files");
+
+      await (await popupPromise).close();
 
       await expect(loader).toBeHidden();
       await expect(exportButton).toBeEnabled();

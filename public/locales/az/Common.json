@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Xüsusi filtr deaktiv edildi.",
   "FileCustomFilterEnabled": "Xüsusi filtr aktiv edildi.",
   "FileDeletedCount": "Fayllar silindi ({{count}}).",
+  "FileExportDestination": "<1>{{fileName}}</1> faylı {{sectionName}} bölməsinə ixrac edildi",
   "FileExtension": "Fayl uzantısı",
   "FileFormatNotAllowed": "Bu fayl, formatı icazə verilmədiyi üçün yüklənilə bilməz.",
   "FileInfo": "Fayl məlumatı",

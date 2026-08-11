@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Експорт індексу кімнати",
   "ExportRoomIndexAlreadyInProgressError": "Експорт індексу кімнати вже відбувається. Дочекайтеся закінчення поточного експорту, щоб почати новий.",
   "FileDownloadingIsRestricted": "Завантаження файлів у цій кімнаті обмежено.",
-  "FileExportDestination": "Файл <1>{{fileName}}</1> експортовано до {{sectionName}}",
   "FileRenamed": "Документ \"{{oldTitle}}\" перейменовано на \"{{newTitle}}\"",
   "FilesMovedToTrashNotice": "Після того, як файли будуть переміщені до {{sectionName}}.",
   "FinalizeVersion": "Фіналізувати версію",

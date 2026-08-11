@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Експортиране индекс на стая",
   "ExportRoomIndexAlreadyInProgressError": "Експортирането на индекса на стаите вече е в ход. Моля, изчакайте, докато текущото експортиране приключи, за да започнете новото.",
   "FileDownloadingIsRestricted": "Изтеглянето на файлове е ограничено в тази стая.",
-  "FileExportDestination": "Файл <1>{{fileName}}</1> е експортиран в {{sectionName}}",
   "FileRenamed": "Документът '{{oldTitle}}' е преименуван на '{{newTitle}}'",
   "FilesMovedToTrashNotice": "След като файловете бъдат преместени в {{sectionName}}.",
   "FinalizeVersion": "Финализираща версия",

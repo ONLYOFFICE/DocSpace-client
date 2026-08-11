@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Indexation automatique",
   "AutomaticIndexingDescription": "Activez l'indexation automatique pour indexer les fichiers et les dossiers par numéro de série. Le tri par numéro sera défini par défaut pour tous les utilisateurs.",
   "ChooseRoomType": "Choisir le type de salle",
+  "ChooseSetType": "Choisir le type d'ensemble",
   "ConfigureDatabaseConnection": "Configurer la connexion à la base de données dans Intégration → Services tiers",
   "CreateRoomConfirmation": "Poursuivre sans connecter le stockage ?\nVous avez sélectionné une option de stockage de tiers qui n’est pas encore connectée. Si vous continuez sans connecter le service, cette option ne sera pas ajoutée.",
   "CreateRoomWatermarksConfirmation": "Vous n'avez pas défini de filigrane à appliquer aux documents de cette salle. Vous pouvez toujours ajouter un filigrane dans les paramètres d'édition de la salle. Continuer sans filigrane ?",

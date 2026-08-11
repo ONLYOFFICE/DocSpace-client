@@ -1939,7 +1939,6 @@
   "SetPassword": "비밀번호 설정",
   "SetQuotaStorageLimit": "스토리지 제한을 정의하려면 할당량을 설정하세요.",
   "SetTemplateDescription": "템플릿으로 세트를 만드세요. 선택한 템플릿에서 설정, 사용자, 폴더 및 양식이 복사됩니다.",
-  "SetTemplateTitle": "세트 템플릿",
   "Settings": "설정",
   "SettingsGeneral": "일반",
   "SetToDefault": "기본값으로 설정",

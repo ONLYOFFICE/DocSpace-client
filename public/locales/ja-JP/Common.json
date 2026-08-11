@@ -1939,7 +1939,6 @@
   "SetPassword": "パスワードを設定する",
   "SetQuotaStorageLimit": "ストレージ容量を定義するために、容量制限を設定してください。",
   "SetTemplateDescription": "テンプレートからセットを作成します。設定、ユーザー、フォルダ、フォームは選択したテンプレートからコピーされます。",
-  "SetTemplateTitle": "セットテンプレート",
   "Settings": "設定",
   "SettingsGeneral": "一般",
   "SetToDefault": "デフォルトに設定する",

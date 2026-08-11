@@ -1,6 +1,6 @@
 {
   "ActionCannotBeUndoneGuests": "The selected disabled guests will be removed from the workspace. This action cannot be undone.",
-  "ActionCannotBeUndoneUsers": "The selected disabled users will be removed from workspace. This action cannot be undone.",
+  "ActionCannotBeUndoneUsers": "The selected disabled users will be removed from the workspace. This action cannot be undone.",
   "CannotReassignFiles": "If you delete multiple users at once, you cannot reassign their files to other users.",
   "DeleteGroupGuestsSuccessMessage": "Guests have been successfully deleted.",
   "DeleteGroupUsersSuccessMessage": "Users have been successfully deleted.",

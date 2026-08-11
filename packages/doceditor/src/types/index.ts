@@ -365,6 +365,7 @@ export interface SelectFolderDialogProps {
   filesSettings: FilesSettingsDto;
   fileSaveAsExtension?: string;
   selectedFolderId?: string | number;
+  disabledCreatePublicRoom?: boolean;
 }
 
 export interface SelectFileDialogProps {

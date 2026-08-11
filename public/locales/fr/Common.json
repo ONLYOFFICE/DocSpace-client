@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Filtre personnalisé désactivé.",
   "FileCustomFilterEnabled": "Filtre personnalisé activé.",
   "FileDeletedCount": "Fichiers supprimés ({{count}}).",
+  "FileExportDestination": "Fichier <1>{{fileName}}</1> exporté vers {{sectionName}}",
   "FileExtension": "Extension de fichier",
   "FileFormatNotAllowed": "Ce fichier ne peut pas être téléchargé car son format n'est pas autorisé.",
   "FileInfo": "Informations sur le fichier",

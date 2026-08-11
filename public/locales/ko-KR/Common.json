@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "사용자 지정 필터 비활성화됨.",
   "FileCustomFilterEnabled": "사용자 지정 필터 활성화됨.",
   "FileDeletedCount": "파일 제거됨 ({{count}}).",
+  "FileExportDestination": "<1>{{fileName}}</1> 파일이 {{sectionName}}(으)로 내보내졌습니다",
   "FileExtension": "파일 확장자",
   "FileFormatNotAllowed": "이 파일은 형식이 허용되지 않아 업로드할 수 없습니다.",
   "FileInfo": "파일 정보",

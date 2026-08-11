@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Vie huoneen indeksi",
   "ExportRoomIndexAlreadyInProgressError": "Huoneen indeksin vienti on jo käynnissä. Ole hyvä ja odota kunnes vienti on suoritettu aloittaaksesi uusi.",
   "FileDownloadingIsRestricted": "Tiedostojen lataus on rajoitettu tässä huoneessa.",
-  "FileExportDestination": "Tiedosto <1>{{fileName}}</1> vietiin {{sectionName}}-osioon",
   "FileRenamed": "Asiakirja '{{oldTitle}}' on nimetty uudelleen muotoon '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Tiedostot siirretään {{sectionName}}-osioon.",
   "FinalizeVersion": "Viimeistele versio",

@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Пользовательский фильтр отключен.",
   "FileCustomFilterEnabled": "Пользовательский фильтр включен.",
   "FileDeletedCount": "Файлы удалены ({{count}}).",
+  "FileExportDestination": "Файл <1>{{fileName}}</1> экспортирован в {{sectionName}}",
   "FileExtension": "Расширение файла",
   "FileFormatNotAllowed": "Невозможно загрузить данный файл, поскольку этот формат не поддерживается.",
   "FileInfo": "Информация о файле",

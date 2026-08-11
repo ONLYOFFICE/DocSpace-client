@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Otaq indeksini ixrac edin",
   "ExportRoomIndexAlreadyInProgressError": "Otaq indeksinin ixracı artıq davam edir. Yenisini başlamazdan əvvəl cari ixracın tamamlanmasını gözləyin.",
   "FileDownloadingIsRestricted": "Bu otaqda faylların endirilməsi məhdudlaşdırılıb.",
-  "FileExportDestination": "<1>{{fileName}}</1> faylı {{sectionName}} bölməsinə ixrac edildi",
   "FileRenamed": "'{{oldTitle}}' sənəd adı '{{newTitle}}'adına dəyişdirildi",
   "FilesMovedToTrashNotice": "Fayllar {{sectionName}} bölməsinə köçürüləndən sonra.",
   "FinalizeVersion": "Versiyanı formalaşdır",

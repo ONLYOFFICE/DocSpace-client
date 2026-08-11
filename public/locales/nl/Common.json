@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Aangepast filter uitgeschakeld.",
   "FileCustomFilterEnabled": "Aangepast filter ingeschakeld.",
   "FileDeletedCount": "Bestanden verwijderd ({{count}}).",
+  "FileExportDestination": "Bestand <1>{{fileName}}</1> geëxporteerd naar {{sectionName}}",
   "FileExtension": "Bestandsextensie",
   "FileFormatNotAllowed": "Dit bestand kan niet worden geüpload omdat het formaat niet is toegestaan.",
   "FileInfo": "Bestandsinformatie",

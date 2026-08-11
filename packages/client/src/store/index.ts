@@ -417,6 +417,7 @@ const docsConnectStore = new DocsConnectStore(
   settingsStore,
   currentTariffStatusStore,
   currentQuotaStore,
+  documentBuilderReportStore,
 );
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);

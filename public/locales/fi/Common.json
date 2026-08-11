@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Mukautettu suodatin pois käytöstä.",
   "FileCustomFilterEnabled": "Mukautettu suodatin käytössä.",
   "FileDeletedCount": "Tiedostot poistettu ({{count}}).",
+  "FileExportDestination": "Tiedosto <1>{{fileName}}</1> vietiin {{sectionName}}-osioon",
   "FileExtension": "Tiedostotunniste",
   "FileFormatNotAllowed": "Tämän tiedoston lataaminen ei onnistu, koska sen formaatti ei ole sallittu.",
   "FileInfo": "Tiedot tiedostosta",

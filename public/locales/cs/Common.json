@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Vlastní filtr deaktivován.",
   "FileCustomFilterEnabled": "Vlastní filtr aktivován.",
   "FileDeletedCount": "Soubory odstraněny ({{count}}).",
+  "FileExportDestination": "Soubor <1>{{fileName}}</1> byl exportován do {{sectionName}}",
   "FileExtension": "Přípona souboru",
   "FileFormatNotAllowed": "Tento soubor nelze nahrát, protože jeho formát není povolen.",
   "FileInfo": "Informace o souboru",

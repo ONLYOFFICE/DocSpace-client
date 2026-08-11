@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Exporteer kamer index",
   "ExportRoomIndexAlreadyInProgressError": "De export van de kamer index is al bezig. Wacht tot de huidige export is voltooid om de nieuwe export te starten.",
   "FileDownloadingIsRestricted": "Het downloaden van bestanden is in deze kamer beperkt.",
-  "FileExportDestination": "Bestand <1>{{fileName}}</1> geëxporteerd naar {{sectionName}}",
   "FileRenamed": "Het document '{{oldTitle}}' is hernoemd naar '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Na het verplaatsen van bestanden naar {{sectionName}}.",
   "FinalizeVersion": "Versie afronden",

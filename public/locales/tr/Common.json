@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Özel Filtre devre dışı.",
   "FileCustomFilterEnabled": "Özel Filtre etkin.",
   "FileDeletedCount": "Dosyalar kaldırıldı ({{count}}).",
+  "FileExportDestination": "<1>{{fileName}}</1> dosyası {{sectionName}} bölümüne aktarıldı",
   "FileExtension": "Dosya uzantısı",
   "FileFormatNotAllowed": "Bu dosya, formatı izin verilmediği için yüklenemiyor.",
   "FileInfo": "Dosya Bilgisi",

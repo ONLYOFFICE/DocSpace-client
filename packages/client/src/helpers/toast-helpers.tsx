@@ -40,6 +40,7 @@ import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 import { TFolder } from "@docspace/shared/api/files/types";
+import { showFileExportToast } from "@docspace/shared/utils/openUrlWithExportToast";
 
 export const showSuccessExportRoomIndexToast = (
   t: TTranslation,
@@ -47,26 +48,13 @@ export const showSuccessExportRoomIndexToast = (
   fileUrl: string,
   openOnNewPage: boolean,
 ) => {
-  const toastMessage = (
-    <Trans
-      t={t as TFunction}
-      i18nKey="FileExportDestination"
-      ns="Files"
-      values={{ fileName, sectionName: t("Common:Files") }}
-      components={{
-        1: (
-          <Link
-            tag="a"
-            href={fileUrl}
-            target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
-            color="accent"
-          />
-        ),
-      }}
-    />
-  );
-
-  toastr.success(toastMessage);
+  showFileExportToast({
+    url: fileUrl,
+    openOnNewPage,
+    t,
+    fileName,
+    sectionName: t("Common:Files"),
+  });
 };
 
 export const showSuccessCreateFolder = (

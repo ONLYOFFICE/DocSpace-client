@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "カスタムフィルターが無効です。",
   "FileCustomFilterEnabled": "カスタムフィルターが有効です。",
   "FileDeletedCount": "ファイルが削除されました ({{count}})。",
+  "FileExportDestination": "<1>{{fileName}}</1> ファイルを {{sectionName}} にエクスポートしました",
   "FileExtension": "ファイル拡張子",
   "FileFormatNotAllowed": "このファイルは、許可されていない形式のため、アップロードできません。",
   "FileInfo": "ファイル情報",

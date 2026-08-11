@@ -907,6 +907,7 @@
   "FileCustomFilterDisabled": "Niestandardowy filtr wyłączony.",
   "FileCustomFilterEnabled": "Niestandardowy filtr włączony.",
   "FileDeletedCount": "Pliki usunięte ({{count}}).",
+  "FileExportDestination": "Plik <1>{{fileName}}</1> został wyeksportowany do {{sectionName}}",
   "FileExtension": "Rozszerzenie pliku",
   "FileFormatNotAllowed": "Ten plik nie może zostać przesłany, ponieważ jego format nie jest dozwolony.",
   "FileInfo": "Informacje o pliku",

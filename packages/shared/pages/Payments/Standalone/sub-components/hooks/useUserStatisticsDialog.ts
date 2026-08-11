@@ -51,18 +51,25 @@ export const useUserStatisticsDialog = ({
 }: TUserStatisticsDialogProps) => {
   const { t } = useTranslation("Common");
   const [visible, setVisible] = useState(false);
+  const [isReportLoading, setIsReportLoading] = useState(false);
 
   const open = () => setVisible(true);
   const close = () => setVisible(false);
 
   const downloadAndOpenReport = async () => {
+    setIsReportLoading(true);
+
     try {
       const url = await createLicenseQuotaReport();
+
       openUrlWithFallbackToast({
         url,
         openOnNewPage: openOnNewPage ?? false,
         t,
         texts: {
+          success: t("Common:ReportSaveLocation", {
+            sectionName: t("Common:Files"),
+          }),
           // the endpoint answers with a URL only, so the report is named after
           // the dialog it was requested from
           fileName: t("Common:EditUserStatistics"),
@@ -71,6 +78,8 @@ export const useUserStatisticsDialog = ({
       });
     } catch (error) {
       toastr.error(error!);
+    } finally {
+      setIsReportLoading(false);
     }
   };
 
@@ -85,6 +94,7 @@ export const useUserStatisticsDialog = ({
 
   return {
     isUserStatisticsVisible: visible,
+    isReportLoading,
     openUserStatistics: open,
     closeUserStatistics: close,
     downloadAndOpenReport,

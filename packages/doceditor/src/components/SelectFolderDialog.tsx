@@ -57,6 +57,7 @@ const SelectFolderDialog = ({
 
 	fileSaveAsExtension,
 	selectedFolderId,
+	disabledCreatePublicRoom,
 }: SelectFolderDialogProps) => {
 	const { t } = useTranslation(["Common", "Editor"]);
 	// const sessionPath = sessionStorage.getItem("filesSelectorPath");
@@ -116,6 +117,7 @@ const SelectFolderDialog = ({
 			parentId={0}
 			getIsDisabled={getIsDisabled}
 			withCreate
+			disabledCreatePublicRoom={disabledCreatePublicRoom}
 			formProps={formProps}
 			withAIAgentsTreeFolder
 		/>

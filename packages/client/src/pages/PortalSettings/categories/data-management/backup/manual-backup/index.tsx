@@ -230,7 +230,12 @@ export default inject(
     const { isBackupPaid, isThirdPartyAvailable, maxFreeBackups } =
       currentQuotaStore;
 
-    const { getIcon, filesSettings } = filesSettingsStore;
+    const {
+      getIcon,
+      filesSettings,
+      isExternalShareRestricted,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
     const { language } = authStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
@@ -334,6 +339,8 @@ export default inject(
       openConnectWindow,
       // filesSettingsStore
       settingsFileSelector,
+      disabledCreatePublicRoom:
+        isExternalShareRestricted && externalShareApplyToRooms,
 
       setBackupsCount,
 

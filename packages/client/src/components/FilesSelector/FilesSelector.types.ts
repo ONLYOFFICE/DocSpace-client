@@ -61,6 +61,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 	setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
 	getIcon: (size: number, fileExst: string) => string;
 	isExternalShareEnabled: boolean;
+	disabledCreatePublicRoom?: boolean;
 
 	onClose?: () => void;
 

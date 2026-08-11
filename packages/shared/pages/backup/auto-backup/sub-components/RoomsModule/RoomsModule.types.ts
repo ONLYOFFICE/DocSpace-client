@@ -51,6 +51,7 @@ export interface RoomsModuleProps extends ScheduleComponentProps {
 	isLoadingData: boolean;
 	settingsFileSelector: FilesSelectorSettings;
 	currentDeviceType?: DeviceType;
+	disabledCreatePublicRoom?: boolean;
 	setIsError: (error: boolean) => void;
 
 	// filesSelectorInput

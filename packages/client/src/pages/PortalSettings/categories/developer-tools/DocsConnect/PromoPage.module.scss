@@ -55,6 +55,18 @@
   color: var(--dev-tools-text);
 }
 
+.canceledText {
+  display: flex;
+  flex-direction: column;
+}
+
+.canceledTitle {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--dev-tools-text);
+}
+
 .trialNote {
   font-size: 13px;
   line-height: 20px;

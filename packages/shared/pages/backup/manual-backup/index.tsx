@@ -194,6 +194,7 @@ const ManualBackup = ({
   backupServicePrice,
   isBackupPaid = false,
   isFreeBackupsLimitReached = false,
+  disabledCreatePublicRoom = false,
   setBackupProgressWarning,
   backupProgressWarning,
   walletBalance = 0,
@@ -655,6 +656,7 @@ const ManualBackup = ({
             maxWidth={maxWidth}
             isBackupPaid={isBackupPaid}
             isFreeBackupsLimitReached={isFreeBackupsLimitReached}
+            disabledCreatePublicRoom={disabledCreatePublicRoom}
           />
         ) : null}
       </div>

@@ -93,6 +93,7 @@ const FilesSelectorInput = ({
   checkCreating,
   openRoot,
   formProps,
+  disabledCreatePublicRoom,
   dataTestId,
   withAIAgentsTreeFolder,
 }: FilesSelectorInputProps) => {
@@ -223,6 +224,7 @@ const FilesSelectorInput = ({
       getIsDisabled={getIsDisabledAction}
       withCreate={withCreate}
       formProps={formProps}
+      disabledCreatePublicRoom={disabledCreatePublicRoom}
       // default
       parentId={0}
       disabledItems={[]}

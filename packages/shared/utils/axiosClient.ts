@@ -46,6 +46,7 @@ import { combineUrl } from "./combineUrl";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { isOAuthFrame, requestAuthToken } from "./oauthToken";
 import { frameCallEvent } from "./common";
+import { isPortalNotFoundRedirectClaimed } from "./portalNotFound";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix, timeout: apiTimeout } = apiConf;
@@ -465,7 +466,8 @@ class AxiosClient {
 
       if (!this.isSSR) {
         const w = window as unknown as { __redirectToLogin?: boolean };
-        if (w.__redirectToLogin) return Promise.resolve();
+        if (w.__redirectToLogin || isPortalNotFoundRedirectClaimed())
+          return Promise.resolve();
 
         switch (error.response?.status) {
           case 401: {
@@ -514,6 +516,12 @@ class AxiosClient {
 
             w.__redirectToLogin = true;
             this.request(opt)?.then(() => {
+              // Re-check: the guard at the top of onError ran before the
+              // logout roundtrip, and /settings may have answered 404 in the
+              // meantime. The wrong-portal-name navigation started by that
+              // 404 must not be cancelled with a trip to the login page.
+              if (isPortalNotFoundRedirectClaimed()) return;
+
               this.setWithCredentialsStatus(false);
               window.location.href = `${loginURL}?authError=true`;
             });

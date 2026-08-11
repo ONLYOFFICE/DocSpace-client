@@ -2106,7 +2106,7 @@
   "Thinking": "Se gândește...",
   "ThirdPartyDisconnectPrompt": "Sigur doriţi să eliminaţi {{service}}? Acest lucru nu va afecta în niciun fel contul dvs {{account}}.",
   "ThirdPartyResource": "Resursă terță parte",
-  "ThirdPartyResourceDescription": "Puteți salva o copie de rezervă prin intermediul contului de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive). Trebuie să vă conectați cu contul de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive) înainte de a crea o copie de rezervă acolo.",
+  "ThirdPartyResourceDescription": "Puteți salva o copie de rezervă prin intermediul contului de stocare de la terți (Dropbox, Box, OneDrive sau Google Drive). Trebuie să vă conectați cu contul de stocare de la terți (Dropbox, Box, OneDrive sau Google Drive) înainte de a crea o copie de rezervă acolo.",
   "ThirdPartyStorage": "Stocare de la terți",
   "ThirdPartyStorageDescription": "Utilizaţi servicii terțe de stocare a datelor pentru această sală. Puteți crea un folder nou sau selectați unul existent din spaţiul de stocare conectat.",
   "ThisDevice": "Acest dispozitiv",

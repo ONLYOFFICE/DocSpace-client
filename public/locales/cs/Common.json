@@ -2106,7 +2106,7 @@
   "Thinking": "Přemýšlení",
   "ThirdPartyDisconnectPrompt": "Jste si jisti, že chcete odebrat {{service}}? Tím nijak neovlivníte svůj účet {{account}}.",
   "ThirdPartyResource": "Zdroj třetí strany",
-  "ThirdPartyResourceDescription": "Zálohu lze uložit na účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google). Předtím, než tam budete moci zálohu uložit, musíte účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google) propojit.",
+  "ThirdPartyResourceDescription": "Zálohu lze uložit na účet třetí strany (Dropbox, Box, OneDrive nebo Disk Google). Předtím, než tam budete moci zálohu uložit, musíte účet třetí strany (Dropbox, Box, OneDrive nebo Disk Google) propojit.",
   "ThirdPartyStorage": "Úložiště třetích stran",
   "ThirdPartyStorageDescription": "Jako úložiště dat pro tuto místnost použijte služby třetích stran. V připojeném úložišti můžete vytvořit novou složku nebo vybrat již existující.",
   "ThisDevice": "Toto zařízení",

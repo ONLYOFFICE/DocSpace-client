@@ -2107,7 +2107,7 @@
   "Thinking": "Denken",
   "ThirdPartyDisconnectPrompt": "Möchten Sie {{service}} wirklich entfernen? Dies hat keinerlei Auswirkungen auf Ihr {{account}}-Konto.",
   "ThirdPartyResource": "Ressource eines Drittanbieters",
-  "ThirdPartyResourceDescription": "Die Sicherungskopie kann in Ihrem Konto bei einem Drittanbieter (Dropbox, Box.com, OneDrive oder Google Drive) gespeichert werden. Sie müssen Ihr Konto (Dropbox, Box.com, OneDrive oder Google Drive) verbinden, bevor Sie Ihr Backup dort speichern können.",
+  "ThirdPartyResourceDescription": "Die Sicherungskopie kann in Ihrem Konto bei einem Drittanbieter (Dropbox, Box, OneDrive oder Google Drive) gespeichert werden. Sie müssen Ihr Konto (Dropbox, Box, OneDrive oder Google Drive) verbinden, bevor Sie Ihr Backup dort speichern können.",
   "ThirdPartyStorage": "Drittanbieter-Speicher",
   "ThirdPartyStorageDescription": "Verwenden Sie Drittanbieterdienste als Datenspeicher für diesen Raum. Sie können einen neuen Ordner erstellen oder einen vorhandenen im verbundenen Speicher auswählen.",
   "ThisDevice": "Dieses Gerät",

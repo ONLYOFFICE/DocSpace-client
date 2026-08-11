@@ -2107,7 +2107,7 @@
   "Thinking": "Razmišljam",
   "ThirdPartyDisconnectPrompt": "Da li ste sigurni da želite da uklonite {{service}}? Ovo neće ni na koji način uticati na vaš {{account}} nalog.",
   "ThirdPartyResource": "Resurs treće strane",
-  "ThirdPartyResourceDescription": "Rezervna kopija se može sačuvati na vaš nalog treće strane (Dropbox, Box.com, OneDrive ili Google Drive). Morate povezati svoj nalog treće strane (Dropbox, Box.com, OneDrive ili Google Drive) pre nego što budete mogli sačuvati svoju rezervnu kopiju tamo.",
+  "ThirdPartyResourceDescription": "Rezervna kopija se može sačuvati na vaš nalog treće strane (Dropbox, Box, OneDrive ili Google Drive). Morate povezati svoj nalog treće strane (Dropbox, Box, OneDrive ili Google Drive) pre nego što budete mogli sačuvati svoju rezervnu kopiju tamo.",
   "ThirdPartyStorage": "Skladište treće strane",
   "ThirdPartyStorageDescription": "Koristite usluge trećih strana kao skladište podataka za ovu sobu. Možete kreirati novu fasciklu ili izabrati postojeću u povezanom skladištu.",
   "ThisDevice": "Ovaj uređaj",

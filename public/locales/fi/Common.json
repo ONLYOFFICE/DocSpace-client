@@ -2107,7 +2107,7 @@
   "Thinking": "Ajattelu",
   "ThirdPartyDisconnectPrompt": "Haluatko varmasti poistaa {{service}}? Tämä ei vaikuta {{account}}-tililläsi millään tavalla.",
   "ThirdPartyResource": "Kolmannen osapuolen resurssi",
-  "ThirdPartyResourceDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tilillesi (Dropbox, Box.com, OneDrive tai Google Drive). Sinun on yhdistettävä kolmannen osapuolen tilisi (Dropbox, Box.com, OneDrive tai Google Drive), ennen kuin voit tallentaa varmuuskopiosi sinne.",
+  "ThirdPartyResourceDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tilillesi (Dropbox, Box, OneDrive tai Google Drive). Sinun on yhdistettävä kolmannen osapuolen tilisi (Dropbox, Box, OneDrive tai Google Drive), ennen kuin voit tallentaa varmuuskopiosi sinne.",
   "ThirdPartyStorage": "Kolmannen osapuolen tallennus",
   "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita tallennustilana tälle huoneelle. Voit luoda uuden kansion tai valita olemassa olevan yhdistetystä tallennustilasta.",
   "ThisDevice": "Tämä laite",

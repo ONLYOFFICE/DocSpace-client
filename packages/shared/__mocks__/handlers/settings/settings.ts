@@ -52,6 +52,7 @@ export enum TypeSettings {
   EnableAdmMess = "enableAdmMess",
   WithHCaptcha = "withHCaptcha",
   Connected = "connected",
+  PortalNotFound = "portalNotFound",
 }
 
 export const settingsWizzard = {
@@ -706,6 +707,9 @@ export const settingsResolver = (
     return new Response(JSON.stringify(settingsWithPlugins));
   if (type === TypeSettings.Connected)
     return new Response(JSON.stringify(settingsConnected));
+  // A deleted portal: the API no longer knows this tenant at all.
+  if (type === TypeSettings.PortalNotFound)
+    return new Response(null, { status: 404 });
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

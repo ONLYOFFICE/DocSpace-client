@@ -74,6 +74,7 @@ export interface ManualBackupProps {
 	isInitialLoading: boolean;
 	settingsFileSelector: FilesSelectorSettings;
 	isEmptyContentBeforeLoader: boolean;
+	disabledCreatePublicRoom?: boolean;
 
 	// backup store
 	isValidForm?: boolean;

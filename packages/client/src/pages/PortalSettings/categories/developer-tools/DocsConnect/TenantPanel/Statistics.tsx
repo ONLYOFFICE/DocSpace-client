@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -57,6 +57,9 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
+import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";
+import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
+
 import {
   formatDocsConnectDate,
   getDocsConnectPricePerUser,
@@ -77,7 +80,6 @@ interface StatisticsProps {
   cancelScheduledChange?: () => Promise<void>;
   copyToClipboard?: (value: string, t: TTranslation) => void;
   downloadReport?: () => void;
-  markReportPageLeft?: () => void;
   isReportGenerating?: boolean;
   nextcloudUrl?: string;
   owncloudUrl?: string;
@@ -95,7 +97,6 @@ const Statistics = ({
   cancelScheduledChange,
   copyToClipboard,
   downloadReport,
-  markReportPageLeft,
   isReportGenerating,
   nextcloudUrl,
   owncloudUrl,
@@ -108,11 +109,7 @@ const Statistics = ({
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
 
-  useEffect(() => {
-    return () => {
-      markReportPageLeft?.();
-    };
-  }, [markReportPageLeft]);
+  useReportPageLeft(ReportType.DocsConnect);
 
   if (!info) return null;
 
@@ -649,7 +646,6 @@ export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   cancelScheduledChange: docsConnectStore.cancelScheduledChange,
   copyToClipboard: docsConnectStore.copyToClipboard,
   downloadReport: docsConnectStore.downloadReport,
-  markReportPageLeft: docsConnectStore.markReportPageLeft,
   isReportGenerating: docsConnectStore.isReportGenerating,
   nextcloudUrl: settingsStore.nextcloudUrl,
   owncloudUrl: settingsStore.owncloudUrl,

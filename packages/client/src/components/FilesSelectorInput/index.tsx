@@ -55,7 +55,12 @@ export default inject<
     filesSelectorInput;
 
   const { currentDeviceType } = settingsStore;
-  const { getIcon, filesSettings } = filesSettingsStore;
+  const {
+    getIcon,
+    filesSettings,
+    isExternalShareRestricted,
+    externalShareApplyToRooms,
+  } = filesSettingsStore;
   const { setBackupToPublicRoomVisible } = dialogsStore;
 
   const filesSelectorSettings = {
@@ -74,6 +79,8 @@ export default inject<
     currentDeviceType,
     filesSelectorSettings,
     setBackupToPublicRoomVisible,
+    disabledCreatePublicRoom:
+      isExternalShareRestricted && externalShareApplyToRooms,
   };
 })(
   observer(

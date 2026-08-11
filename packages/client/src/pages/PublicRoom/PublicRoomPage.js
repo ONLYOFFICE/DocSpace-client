@@ -81,11 +81,12 @@ const PublicRoomPage = (props) => {
     onOpenSignInWindow,
     windowIsOpen,
     isAuthenticated,
+    culture,
   } = props;
 
   const location = useLocation();
 
-  const { t, ready } = useTranslation(["Common"]);
+  const { t, i18n, ready } = useTranslation(["Common"]);
 
   useSDK({ frameConfig, setFrameConfig, isLoading });
 
@@ -113,11 +114,25 @@ const PublicRoomPage = (props) => {
     }
   };
 
+  // Anonymous visits boot i18n in the browser language and only switch to the
+  // portal culture once settings arrive (AuthStore.init). The toast below is a
+  // one-shot snapshot handed to toastr, so building it before that switch
+  // lands leaves it in the browser language for good, while the rest of the
+  // page re-renders in the portal culture.
+  const isPortalCultureApplied = !culture || i18n.language === culture;
+
   useEffect(() => {
     const toastIsDisabled =
       sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === access?.toString();
 
-    if (!access || !ready || toastIsDisabled || isFrame || isAuthenticated)
+    if (
+      !access ||
+      !ready ||
+      !isPortalCultureApplied ||
+      toastIsDisabled ||
+      isFrame ||
+      isAuthenticated
+    )
       return;
 
     const roomMode = getAccessTranslation().toLowerCase();
@@ -160,7 +175,14 @@ const PublicRoomPage = (props) => {
     );
 
     toastr.info(toastText);
-  }, [access, ready, roomType, parentRoomType, isAuthenticated]);
+  }, [
+    access,
+    ready,
+    isPortalCultureApplied,
+    roomType,
+    parentRoomType,
+    isAuthenticated,
+  ]);
 
   const sectionProps = {
     isSecondaryProgressVisbile,
@@ -222,7 +244,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
-    const { frameConfig, setFrameConfig, isFrame } = settingsStore;
+    const { frameConfig, setFrameConfig, isFrame, culture } = settingsStore;
     const {
       isLoaded,
       roomStatus,
@@ -274,6 +296,7 @@ export default inject(
       frameConfig,
       setFrameConfig,
       isFrame,
+      culture,
       access,
       roomType,
       parentRoomType,

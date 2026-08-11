@@ -44,6 +44,10 @@ vi.mock("../../i18n", () => ({
   default: { t: (key: string) => key },
 }));
 
+vi.mock("@docspace/shared/utils/openUrlWithExportToast", () => ({
+  openUrlWithExportToast: vi.fn(),
+}));
+
 // The real pollUntil sleeps between attempts; the store's contract is only that
 // it keeps calling `check` until it returns true or the signal aborts.
 vi.mock("@docspace/ui-kit/billing/utils/stripe-flow", () => ({
@@ -59,6 +63,7 @@ vi.mock("@docspace/ui-kit/billing/utils/stripe-flow", () => ({
 
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { pollUntil } from "@docspace/ui-kit/billing/utils/stripe-flow";
+import { openUrlWithExportToast } from "@docspace/shared/utils/openUrlWithExportToast";
 import type { TDocumentBuilderTask } from "@docspace/shared/api/files/types";
 
 import DocumentBuilderReportStore, {
@@ -69,7 +74,10 @@ import type FilesSettingsStore from "../FilesSettingsStore";
 const RESULT_URL = "/products/files/doceditor?fileId=42";
 const PROXY_URL = "https://portal.example.com";
 
-const IOS_OPEN_DELAY_MS = 100;
+const REPORT_TEXTS = {
+  fileName: "report.xlsx",
+  sectionName: "Common:Files",
+};
 
 const makeTask = (task: Partial<TDocumentBuilderTask> = {}) =>
   ({
@@ -88,19 +96,9 @@ const makeStore = (openOnNewPage = true) =>
     openOnNewPage,
   } as FilesSettingsStore);
 
-/** Lets the "hack for ios" setTimeout inside finishReport fire. */
-const flushOpen = () =>
-  new Promise((resolve) => {
-    setTimeout(resolve, IOS_OPEN_DELAY_MS + 50);
-  });
-
-let openSpy: ReturnType<typeof vi.fn>;
-
 beforeEach(() => {
   vi.clearAllMocks();
 
-  openSpy = vi.fn();
-  window.open = openSpy as unknown as typeof window.open;
   window.ClientConfig = { proxy: { url: PROXY_URL } } as Window["ClientConfig"];
 });
 
@@ -109,7 +107,7 @@ afterEach(() => {
 });
 
 describe("DocumentBuilderReportStore", () => {
-  it("polls until the task completes, then announces and opens the file", async () => {
+  it("polls until the task completes, then opens the file", async () => {
     const store = makeStore();
 
     const start = vi.fn().mockResolvedValue(makeTask({ isCompleted: false }));
@@ -119,12 +117,16 @@ describe("DocumentBuilderReportStore", () => {
       .mockResolvedValueOnce(makeTask());
 
     await store.buildReport(ReportType.AuditTrail, { start, getStatus });
-    await flushOpen();
 
     expect(start).toHaveBeenCalledTimes(1);
     expect(getStatus).toHaveBeenCalledTimes(2);
-    expect(toastr.success).toHaveBeenCalledWith("Common:ReportSaveLocation");
-    expect(openSpy).toHaveBeenCalledWith(`${PROXY_URL}${RESULT_URL}`, "_blank");
+    expect(openUrlWithExportToast).toHaveBeenCalledWith({
+      url: `${PROXY_URL}${RESULT_URL}`,
+      openOnNewPage: true,
+      skipAutoOpen: false,
+      t: expect.any(Function),
+      texts: REPORT_TEXTS,
+    });
     expect(store.isReportBuilding(ReportType.AuditTrail)).toBe(false);
   });
 
@@ -135,11 +137,12 @@ describe("DocumentBuilderReportStore", () => {
     const getStatus = vi.fn();
 
     await store.buildReport(ReportType.LoginHistory, { start, getStatus });
-    await flushOpen();
 
     expect(pollUntil).not.toHaveBeenCalled();
     expect(getStatus).not.toHaveBeenCalled();
-    expect(openSpy).toHaveBeenCalledWith(`${PROXY_URL}${RESULT_URL}`, "_self");
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
+      expect.objectContaining({ openOnNewPage: false }),
+    );
   });
 
   it("exposes the building flag reactively while the report runs", async () => {
@@ -158,7 +161,6 @@ describe("DocumentBuilderReportStore", () => {
     expect(store.isReportBuilding(ReportType.RoomHistory)).toBe(true);
 
     await build;
-    await flushOpen();
 
     dispose();
 
@@ -191,10 +193,9 @@ describe("DocumentBuilderReportStore", () => {
 
     resolveFirst(makeTask());
     await Promise.all([first, second]);
-    await flushOpen();
   });
 
-  it("announces but does not open a report whose page was left", async () => {
+  it("announces a report whose page was left without opening it", async () => {
     const store = makeStore();
 
     let resolveTask: (task: TDocumentBuilderTask) => void = () => {};
@@ -212,10 +213,10 @@ describe("DocumentBuilderReportStore", () => {
     resolveTask(makeTask());
 
     await build;
-    await flushOpen();
 
-    expect(toastr.success).toHaveBeenCalledWith("Common:ReportSaveLocation");
-    expect(openSpy).not.toHaveBeenCalled();
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
+      expect.objectContaining({ skipAutoOpen: true }),
+    );
   });
 
   it("opens the file again when the user comes back before it is ready", async () => {
@@ -237,9 +238,10 @@ describe("DocumentBuilderReportStore", () => {
     resolveTask(makeTask());
 
     await build;
-    await flushOpen();
 
-    expect(openSpy).toHaveBeenCalledTimes(1);
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
+      expect.objectContaining({ skipAutoOpen: false }),
+    );
   });
 
   it("does not mark a report as left when it is not building", async () => {
@@ -251,9 +253,10 @@ describe("DocumentBuilderReportStore", () => {
       start: vi.fn().mockResolvedValue(makeTask()),
       getStatus: vi.fn(),
     });
-    await flushOpen();
 
-    expect(openSpy).toHaveBeenCalledTimes(1);
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
+      expect.objectContaining({ skipAutoOpen: false }),
+    );
   });
 
   it("reports the server-side error and opens nothing", async () => {
@@ -265,11 +268,9 @@ describe("DocumentBuilderReportStore", () => {
         .fn()
         .mockResolvedValue(makeTask({ isCompleted: false, error: "Boom" })),
     });
-    await flushOpen();
 
     expect(toastr.error).toHaveBeenCalledWith("Boom");
-    expect(toastr.success).not.toHaveBeenCalled();
-    expect(openSpy).not.toHaveBeenCalled();
+    expect(openUrlWithExportToast).not.toHaveBeenCalled();
     expect(store.isReportBuilding(ReportType.LoginHistory)).toBe(false);
   });
 
@@ -280,11 +281,9 @@ describe("DocumentBuilderReportStore", () => {
       start: vi.fn().mockResolvedValue(makeTask({ resultFileUrl: "" })),
       getStatus: vi.fn(),
     });
-    await flushOpen();
 
     expect(toastr.error).toHaveBeenCalledWith("Common:SomethingWentWrong");
-    expect(toastr.success).not.toHaveBeenCalled();
-    expect(openSpy).not.toHaveBeenCalled();
+    expect(openUrlWithExportToast).not.toHaveBeenCalled();
   });
 
   it("points at the save location when it gives up on a still-running task", async () => {
@@ -294,12 +293,10 @@ describe("DocumentBuilderReportStore", () => {
       start: vi.fn().mockResolvedValue(makeTask({ isCompleted: false })),
       getStatus: vi.fn().mockResolvedValue(makeTask({ isCompleted: false })),
     });
-    await flushOpen();
 
     expect(toastr.info).toHaveBeenCalledWith("Common:ReportSaveLocation");
-    expect(toastr.success).not.toHaveBeenCalled();
     expect(toastr.error).not.toHaveBeenCalled();
-    expect(openSpy).not.toHaveBeenCalled();
+    expect(openUrlWithExportToast).not.toHaveBeenCalled();
   });
 
   it("clears the building flag when a request throws", async () => {
@@ -338,8 +335,10 @@ describe("DocumentBuilderReportStore", () => {
       start: vi.fn().mockResolvedValue(makeTask()),
       getStatus: vi.fn(),
     });
-    await flushOpen();
 
-    expect(openSpy).toHaveBeenCalledTimes(1);
+    expect(openUrlWithExportToast).toHaveBeenCalledTimes(1);
+    expect(openUrlWithExportToast).toHaveBeenCalledWith(
+      expect.objectContaining({ skipAutoOpen: false }),
+    );
   });
 });

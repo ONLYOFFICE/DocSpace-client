@@ -74,7 +74,8 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
 
-import i18n from "../i18n";
+import type DocumentBuilderReportStore from "./DocumentBuilderReportStore";
+import { ReportType } from "./DocumentBuilderReportStore";
 
 export type BuyPlanMode = "trial" | "edit";
 
@@ -105,25 +106,23 @@ class DocsConnectStore {
 
   connection: Nullable<TDocsConnectConnection> = null;
 
-  isReportGenerating: boolean = false;
-
-  reportPageLeft: boolean = false;
-
   depositedTopUp: number = 0;
 
   isPortalConnectionAvailable: boolean = false;
+
+  private documentBuilderReportStore: DocumentBuilderReportStore;
 
   constructor(
     settingsStore: SettingsStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
     currentQuotaStore: CurrentQuotasStore,
+    documentBuilderReportStore: DocumentBuilderReportStore,
   ) {
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
-    makeAutoObservable(this, {
-      reportPageLeft: false,
-    });
+    this.documentBuilderReportStore = documentBuilderReportStore;
+    makeAutoObservable(this);
   }
 
   refreshPortalState = () => {
@@ -390,61 +389,17 @@ class DocsConnectStore {
     });
   };
 
-  private resetReportState = () => {
-    this.reportPageLeft = false;
-    runInAction(() => {
-      this.isReportGenerating = false;
-    });
-  };
-
-  private finishReport = (resultFileUrl?: string) => {
-    toastr.success(
-      i18n.t("Common:ReportSaveLocation", {
-        sectionName: i18n.t("Common:Files"),
-      }),
+  get isReportGenerating() {
+    return this.documentBuilderReportStore.isReportBuilding(
+      ReportType.DocsConnect,
     );
-    if (!this.reportPageLeft && resultFileUrl) {
-      setTimeout(() => window.open(resultFileUrl, "_blank"), 100); // hack for ios
-    }
-    this.resetReportState();
-  };
+  }
 
-  markReportPageLeft = () => {
-    if (this.isReportGenerating) this.reportPageLeft = true;
-  };
-
-  downloadReport = async () => {
-    if (this.isReportGenerating) return;
-
-    this.reportPageLeft = false;
-    runInAction(() => {
-      this.isReportGenerating = true;
+  downloadReport = () =>
+    this.documentBuilderReportStore.buildReport(ReportType.DocsConnect, {
+      start: startDocsConnectReport,
+      getStatus: getDocsConnectReportStatus,
     });
-
-    const controller = new AbortController();
-
-    try {
-      let status = await startDocsConnectReport();
-
-      if (!status?.isCompleted && !status?.error) {
-        await pollUntil(async () => {
-          status = await getDocsConnectReportStatus();
-          return !!status?.isCompleted || !!status?.error;
-        }, controller.signal);
-      }
-
-      if (status?.error) {
-        toastr.error(status.error);
-        this.resetReportState();
-        return;
-      }
-
-      this.finishReport(status?.resultFileUrl);
-    } catch (error) {
-      toastr.error(error as Error);
-      this.resetReportState();
-    }
-  };
 
   copyToClipboard = (value: string, t: TTranslation) => {
     if (!value) return;

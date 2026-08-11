@@ -58,6 +58,7 @@ export interface AutomaticBackupProps {
 	isInitialLoading: boolean;
 	isEmptyContentBeforeLoader: boolean;
 	settingsFileSelector: FilesSelectorSettings;
+	disabledCreatePublicRoom?: boolean;
 	buttonSize?: ButtonSize;
 	removeItem: ThirdPartyAccountType;
 	isNeedFilePath?: boolean;

@@ -10,6 +10,9 @@
   // where a declaration after a nested rule changes meaning (`mixed-decls`).
   margin-inline: -20px -3px;
 
+  // Declared before the media-query mixins below: Sass warns (mixed-decls) when
+  // a plain declaration follows a nested rule, since CSS is about to stop
+  // hoisting it above them.
   --chat-header-top: calc(
     var(--section-header-height) + var(--section-submenu-height)
   );

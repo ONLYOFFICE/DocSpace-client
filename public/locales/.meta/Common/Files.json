@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-08-07T15:05:26.412Z",
+  "updated_at": "2026-08-10T12:23:10.038Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -140,7 +140,7 @@
     {
       "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
       "line_number": 55,
-      "context": "const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:Files\") }}\n components={{\n 1: (\n <Link\n tag=\"a\"\n href={fileUrl}",
+      "context": "const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Common\"\n values={{ fileName, sectionName: t(\"Common:Files\") }}\n components={{\n 1: (\n <Link\n tag=\"a\"\n href={fileUrl}",
       "module": "/packages/client"
     },
     {
@@ -217,7 +217,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 596,
+      "line_number": 593,
       "context": "isLoading={isReportGenerating}\n />\n {isReportGenerating ? (\n <Text fontSize=\"13px\" className={styles.muted}>\n {t(\"DocsConnect:ReportGenerationHint\", {\n sectionName: t(\"Common:Files\"),\n })}\n </Text>\n ) : null}\n </div>",
       "module": "/packages/client"
     },
@@ -294,14 +294,14 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/DocsConnectStore.ts",
-      "line_number": 401,
-      "context": "};\n \n private finishReport = (resultFileUrl?: string) => {\n toastr.success(\n i18n.t(\"Common:ReportSaveLocation\", {\n sectionName: i18n.t(\"Common:Files\"),\n }),\n );\n if (!this.reportPageLeft && resultFileUrl) {\n setTimeout(() => window.open(resultFileUrl, \"_blank\"), 100); // hack for ios\n }",
+      "file_path": "/packages/client/src/store/DocumentBuilderReportStore.ts",
+      "line_number": 72,
+      "context": "// builder is not cancelled — it keeps running on the server and still saves the\n // file, so giving up only means the user has to pick the file up themselves.\n export const REPORT_BUILD_TIMEOUT_MS = 10 * 60 * 1000;\n \n const getSaveLocationText = () =>\n i18n.t(\"Common:ReportSaveLocation\", { sectionName: i18n.t(\"Common:Files\") });\n \n class DocumentBuilderReportStore {\n private filesSettingsStore: FilesSettingsStore;\n \n private buildingReports = new Set<TReportType>();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/DocumentBuilderReportStore.ts",
-      "line_number": 70,
+      "line_number": 72,
       "context": "// builder is not cancelled — it keeps running on the server and still saves the\n // file, so giving up only means the user has to pick the file up themselves.\n export const REPORT_BUILD_TIMEOUT_MS = 10 * 60 * 1000;\n \n const getSaveLocationText = () =>\n i18n.t(\"Common:ReportSaveLocation\", { sectionName: i18n.t(\"Common:Files\") });\n \n class DocumentBuilderReportStore {\n private filesSettingsStore: FilesSettingsStore;\n \n private buildingReports = new Set<TReportType>();",
       "module": "/packages/client"
     },
@@ -387,6 +387,12 @@
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
       "line_number": 641,
       "context": "\"backup-description module-documents\",\n { [styles.disabled]: additionalDisabled },\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n newPath={newPath}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/hooks/useUserStatisticsDialog.ts",
+      "line_number": 69,
+      "context": "t,\n texts: {\n // the endpoint answers with a URL only, so the report is named after\n // the dialog it was requested from\n fileName: t(\"Common:EditUserStatistics\"),\n sectionName: t(\"Common:Files\"),\n },\n });\n } catch (error) {\n toastr.error(error!);\n }",
       "module": "/packages/shared"
     },
     {

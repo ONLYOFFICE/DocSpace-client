@@ -433,6 +433,14 @@ export function menuStep(
     spotlightTarget: spotlightWith.length
       ? () => unionSpotlight([menuSelector, ...spotlightWith], menuSelector)
       : undefined,
+    // The trigger is what gets scrolled into view, not the menu.
+    //
+    // A dropdown is positioned against its trigger and floats above the scroll
+    // container rather than inside it, so scrolling to the menu itself either
+    // does nothing (it is already wherever the trigger put it) or drags the
+    // trigger out from under it. Centring the trigger keeps the pair together,
+    // and the menu opens on screen because the thing it hangs off is.
+    scrollTarget: triggerSelector,
     spotlightPadding,
     placement: "auto" as const,
     content: body,

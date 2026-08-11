@@ -59,7 +59,6 @@
   "ExportRoomIndex": "Экспортировать индекс комнаты",
   "ExportRoomIndexAlreadyInProgressError": "Экспорт индекса комнат уже выполняется. Пожалуйста, подождите, пока текущий экспорт будет завершен, чтобы начать новый.",
   "FileDownloadingIsRestricted": "Загрузка файлов в этой комнате ограничена.",
-  "FileExportDestination": "Файл <1>{{fileName}}</1> экспортирован в {{sectionName}}",
   "FileRenamed": "Документ '{{oldTitle}}' переименован в '{{newTitle}}'",
   "FilesMovedToTrashNotice": "После этого файлы будут перемещены в раздел {{sectionName}}.",
   "FinalizeVersion": "Сформировать версию",

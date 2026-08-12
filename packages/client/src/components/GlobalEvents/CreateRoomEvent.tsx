@@ -55,6 +55,7 @@ import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+import type OformsStore from "SRC_DIR/store/OformsStore";
 
 import { CreateRoomDialog } from "../dialogs";
 
@@ -69,6 +70,8 @@ type CreateRoomEventProps = {
 
   processCreatingRoomFromData: FilesActionStore["processCreatingRoomFromData"];
   setProcessCreatingRoomFromData: FilesActionStore["setProcessCreatingRoomFromData"];
+
+  setFormTemplateForNewRoom: OformsStore["setFormTemplateForNewRoom"];
 
   fetchTags: TagsStore["fetchTags"];
 
@@ -134,6 +137,7 @@ const CreateRoomEvent = ({
   isCorrectWatermark,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
+  setFormTemplateForNewRoom,
   selectionItems,
   setSelectedRoomType,
   getThirdPartyIcon,
@@ -200,6 +204,10 @@ const CreateRoomEvent = ({
     return () => {
       setCreateRoomDialogVisible(false);
       setCover();
+      // Drop any Forms-root gallery pick that never became a room. A successful
+      // creation has already consumed it, so this only matters on cancel --
+      // without it the template would land in the next room the user creates.
+      setFormTemplateForNewRoom(null);
     };
   }, []);
 
@@ -258,6 +266,7 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     userStore,
+    oformsStore,
   }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
@@ -325,6 +334,7 @@ export default inject(
       processCreatingRoomFromData,
       setSelectedRoomType,
       setProcessCreatingRoomFromData,
+      setFormTemplateForNewRoom: oformsStore.setFormTemplateForNewRoom,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
       encryptionKeys,

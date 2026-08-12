@@ -42,7 +42,7 @@ import { useApi } from "@docspace/ui-kit/providers/api";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
@@ -80,6 +80,7 @@ import {
   isDocsConnectPaid,
 } from "../utils";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
+import { brandingRedirectUrl } from "../../../common/Branding/constants";
 
 import styles from "./BuyPlanPanel.module.scss";
 
@@ -125,6 +126,7 @@ interface BuyPlanPanelProps {
   fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
   fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
   closeBuyPlan?: () => void;
+  docsConnectUrl?: string;
 }
 
 const BuyPlanPanel = ({
@@ -142,6 +144,7 @@ const BuyPlanPanel = ({
   fetchPayerInfo,
   fetchWalletBalance,
   closeBuyPlan,
+  docsConnectUrl,
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const { paymentApi } = useApi();
@@ -345,6 +348,12 @@ const BuyPlanPanel = ({
       ),
       "_blank",
     );
+
+  const rebrandingUrl = combineUrl(
+    window.ClientConfig?.proxy?.url,
+    config.homepage,
+    brandingRedirectUrl,
+  );
 
   const onTopUpConfirm = async () => {
     await switchToDevPack?.({ quantity: users, topUp: 0 });
@@ -792,9 +801,17 @@ const BuyPlanPanel = ({
                     <AutomationApiSvg />
                   </div>
                   <div>
-                    <Text fontSize="12px" fontWeight={600}>
+                    <Link
+                      type={LinkType.page}
+                      href={docsConnectUrl}
+                      target={LinkTarget.blank}
+                      fontSize="13px"
+                      fontWeight={600}
+                      textDecoration="underline"
+                      dataTestId="docs_connect_automation_api_link"
+                    >
                       {t("DocsConnect:AutomationApi")}
-                    </Text>
+                    </Link>
                     <Text fontSize="12px" className={styles.secondaryText}>
                       {t("DocsConnect:AutomationApiDescription")}
                     </Text>
@@ -805,9 +822,17 @@ const BuyPlanPanel = ({
                     <RebrandingSvg />
                   </div>
                   <div>
-                    <Text fontSize="12px" fontWeight={600}>
+                    <Link
+                      type={LinkType.page}
+                      href={rebrandingUrl}
+                      target={LinkTarget.blank}
+                      fontSize="13px"
+                      fontWeight={600}
+                      textDecoration="underline"
+                      dataTestId="docs_connect_rebranding_link"
+                    >
                       {t("DocsConnect:Rebranding")}
-                    </Text>
+                    </Link>
                     <Text fontSize="12px" className={styles.secondaryText}>
                       {t("DocsConnect:RebrandingDescription")}
                     </Text>
@@ -1124,7 +1149,12 @@ const BuyPlanPanel = ({
 };
 
 export default inject(
-  ({ docsConnectStore, paymentStore, currentTariffStatusStore }: TStore) => ({
+  ({
+    docsConnectStore,
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+  }: TStore) => ({
     visible: docsConnectStore.buyPlanPanelVisible,
     info: docsConnectStore.info,
     buyPlan: docsConnectStore.buyPlan,
@@ -1140,6 +1170,7 @@ export default inject(
     fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
     fetchWalletBalance: paymentStore.fetchWalletBalance,
     closeBuyPlan: docsConnectStore.closeBuyPlan,
+    docsConnectUrl: settingsStore.docsConnectUrl,
   }),
 )(observer(BuyPlanPanel));
 

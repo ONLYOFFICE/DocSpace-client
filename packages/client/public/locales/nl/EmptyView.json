@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "U kunt een sjabloon maken van een kamer in de Kamer sectie",
   "EmptyTemplatesTitle": "Hier zijn nog geen sjablonen",
   "EmptyViewDescription": "Aan de slag met snelle acties:",
-  "FormFolderDefaultDescription": "Plaats hier PDF formulieren of upload ze vanaf {{productName}} of apparaat.",
   "FormFolderDefaultTitle": "Hier zijn nog geen formulieren",
   "FormFolderDefaultUserDescription": "De formulieren die door de beheerders zijn geüpload, worden hier weergegeven.",
   "FormFolderDefaultUserTitle": "Nog geen formulieren in deze map",
   "FormRoomEmptyTitle": "Welkom in de kamer voor het invullen van Formulieren",
   "InviteNewUsers": "Nodig nieuwe gebruikers uit",
-  "InviteRootRoomDescription": "Stuur een uitnodiging om nieuwe leden toe te voegen aan uw {{productName}}",
   "InviteUsersOptionDescription": "Voeg deelnemers toe om samen te bewerken in een ruimte",
   "ManageAccess": "Beheer toegang",
   "MigrationDataDescription": "Verplaats uw gegevens naar {{productName}} vanuit {{organizationName}} Workspace, Google Workspace of Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Uploaden vanaf uw Apparaat",
   "UploadDevicePDFFormOptionDescription": "Upload een gereed PDF formulier naar de kamer vanaf uw apparaat.",
   "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
-  "UploadFromPortalTitle": "Uploaden van {{productName}}",
-  "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
   "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
 }

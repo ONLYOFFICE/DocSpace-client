@@ -1,5 +1,4 @@
 {
-  "DeleteAllGroupDescription": "Одабране групе ће бити обрисане. Корисници у групама неће бити уклоњени са {{productName}}-а. Да ли сте сигурни да желите да наставите?",
   "DeleteAllGroupsTitle": "Обриши групе",
   "DeleteFiles": "Управо ћеш преместити <strong>фајлове ({{filesCount}})</strong> у {{trashSection}}.",
   "DeleteFilesAndFolders": "Управо ћеш обрисати <strong>фајлове ({{filesCount}})</strong> и <strong>фолдере ({{foldersCount}})</strong> у {{trashSection}}.",
@@ -7,7 +6,6 @@
   "DeleteFilesForever": "Спремате се да обришете <strong>фајлове ({{filesCount}})</strong>.",
   "DeleteFolders": "Спремате се да преместите <strong>фасцикле ({{foldersCount}})</strong> у {{trashSection}}.",
   "DeleteFoldersForever": "Спремате се да обришете <strong>фасцикле ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "Група {{groupName}} ће бити обрисана. Корисници у групи неће бити уклоњени са {{productName}}-а. Да ли сте сигурни да желите да наставите?",
   "DeleteGroupTitle": "Обриши групу",
   "DeleteItem": "Управо ћеш преместити <strong>{{name}}</strong> у {{trashSection}}.",
   "DeleteItemForeverConfirm": "Спремате се да обришете <strong>{{name}}</strong>.",

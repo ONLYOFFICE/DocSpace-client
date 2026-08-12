@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "ඔබ Room කොටසෙහි කාමරයකින් අච්චුවක් නිර්මාණය කළ හැකිය.",
   "EmptyTemplatesTitle": "මේ වන විට සැකිලි නොමැත.",
   "EmptyViewDescription": "ඉක්මන් ක්‍රියාකාරකම් සමඟ ආරම්භ කරන්න:",
-  "FormFolderDefaultDescription": "PDF ආකෘති මෙහි පහත දැමූවන් හෝ {{productName}} හෝ ඔබේ උපකරණයෙන් උඩුගත කරන්න.",
   "FormFolderDefaultTitle": "කිසිදු පෝරමයක් මෙහි තවමත් නැත.",
   "FormFolderDefaultUserDescription": "පරිපාලකවරු විසින් උඩුගත කරන ලද ආකෘතීන් මෙහි දිස්වනු ඇත.",
   "FormFolderDefaultUserTitle": "මෙම ෆෝල්ඩරයේ තවමත් පෝරම නොමැත",
   "FormRoomEmptyTitle": "ආයුබෝවන්! ආකෘති පිරවුම් කාමරයට සාදරයෙන් පිළිගන්නවා.",
   "InviteNewUsers": "නව පරිශීලකයින් ආරාධනා කරන්න",
-  "InviteRootRoomDescription": "ඔබේ {{productName}} වෙත නව සාමාජිකයන් එක් කිරීමට ආරාධනාවක් යවන්න.",
   "InviteUsersOptionDescription": "කාමරයේ ඒකාබද්ධ සංස්කරණය සඳහා සාමාජිකයන් එක් කරන්න",
   "ManageAccess": "ප්‍රවේශය කළමනාකරණය කරන්න",
   "MigrationDataDescription": "{{organizationName}} Workspace, Google Workspace, හෝ Nextcloud වෙතින් ඔබේ දත්ත {{productName}} වෙත මාරු කරන්න.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "ඔබේ උපකරණයෙන් උඩුගත කරන්න",
   "UploadDevicePDFFormOptionDescription": "ඔබේ උපකරණයෙන් සූදානම් PDF ආකෘතියක් කාමරයට උඩුගත කරන්න.",
   "UploadDevicePDFFormOptionTitle": "උපාංගයෙන් උඩුගත කරන්න",
-  "UploadFromPortalTitle": "{{productName}} වෙතින් උඩුගත කරන්න",
-  "UploadPDFFormOptionDescription": "{{productName}} හි ඇති පෙරනිර්මාණය කරන ලද PDF ආකෘතියක් තෝරාගෙන එය කාමරයට උඩුගත කරන්න.",
   "VirtualDataRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, අන්තර්ජාල දත්ත කාමරයට!"
 }

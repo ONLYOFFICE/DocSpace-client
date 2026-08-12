@@ -1,11 +1,9 @@
 {
   "AppointAdmin": "Ορισμός διαχειριστών",
-  "BackupPortal": "Διαφυλάξτε τα δεδομένα {{productName}}",
   "ChangeInstruction": "Για να αλλάξετε τον ιδιοκτήτη του {{productName}}, επιλέξτε το όνομα του νέου ιδιοκτήτη παρακάτω.",
   "ChangeOwner": "Αλλαγή ιδιοκτήτη {{productName}}",
   "ChangeUser": "Αλλαγή χρήστη",
   "DoTheSame": "Κάντε το ίδιο με τους διαχειριστές",
-  "ManagePortal": "Διαχειριστείτε ρυθμίσεις {{productName}}",
   "ManageUser": "Διαχειριστείτε λογαριασμούς χρηστών",
   "NewPortalOwner": "Νέος ιδιοκτήτης {{productName}}",
   "PortalOwnerCan": "Ο ιδιοκτήτης {{productName}} μπορεί:",

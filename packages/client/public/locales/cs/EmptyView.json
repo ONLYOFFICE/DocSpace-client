@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Šablonu můžete vytvořit z místnosti v části Místnost.",
   "EmptyTemplatesTitle": "Zatím zde nejsou žádné šablony",
   "EmptyViewDescription": "Začněte s rychlými akcemi:",
-  "FormFolderDefaultDescription": "Vložte sem formuláře PDF nebo je nahrajte z {{productName}} nebo zařízení.",
   "FormFolderDefaultTitle": "Zatím zde nejsou žádné formuláře",
   "FormFolderDefaultUserDescription": "Zde se objeví formuláře nahrané správci.",
   "FormFolderDefaultUserTitle": "V této složce zatím nejsou žádné formuláře",
   "FormRoomEmptyTitle": "Vítejte v místnosti pro vyplňování formulářů",
   "InviteNewUsers": "Pozvání nových uživatelů",
-  "InviteRootRoomDescription": "Odeslání pozvánky k přidání nových členů do vašeho {{productName}}",
   "InviteUsersOptionDescription": "Přidání členů pro společné úpravy v místnosti",
   "ManageAccess": "Spravovat přístup",
   "MigrationDataDescription": "Přesuňte svá data do {{productName}} z Workspace {{organizationName}}, Google Workspace nebo Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Nahrávání ze zařízení",
   "UploadDevicePDFFormOptionDescription": "Nahrajte do místnosti připravený PDF formulář ze svého zařízení.",
   "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
-  "UploadFromPortalTitle": "Nahrát z {{productName}}",
-  "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
   "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"
 }

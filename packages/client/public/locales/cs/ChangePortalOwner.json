@@ -1,11 +1,9 @@
 {
   "AppointAdmin": "Jmenování administrátorů",
-  "BackupPortal": "Zálohovat data {{productName}}",
   "ChangeInstruction": "Chcete-li změnit vlastníka prostoru {{productName}}, vyberte níže jméno nového vlastníka.",
   "ChangeOwner": "Změna vlastníka prostoru {{productName}}",
   "ChangeUser": "Změna uživatele",
   "DoTheSame": "Postupujte stejně jako správci",
-  "ManagePortal": "Spravovat konfiguraci {{productName}}",
   "ManageUser": "Spravovat uživatelské účty",
   "NewPortalOwner": "Nový majitel {{productName}}",
   "PortalOwnerCan": "Majitel {{productName}} může:",

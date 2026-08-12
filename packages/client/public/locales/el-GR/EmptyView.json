@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Μπορείτε να δημιουργήσετε ένα πρότυπο από ένα δωμάτιο στην ενότητα Δωμάτιο",
   "EmptyTemplatesTitle": "Δεν υπάρχουν ακόμη πρότυπα εδώ",
   "EmptyViewDescription": "Ξεκινήστε με γρήγορες ενέργειες:",
-  "FormFolderDefaultDescription": "Αποθέστε φόρμες PDF εδώ ή μεταφορτώστε από {{productName}} ή τη συσκευή.",
   "FormFolderDefaultTitle": "Δεν υπάρχουν ακόμα φόρμες εδώ",
   "FormFolderDefaultUserDescription": "Οι φόρμες που έχουν ανεβάσει οι διαχειριστές θα εμφανιστούν εδώ.",
   "FormFolderDefaultUserTitle": "Δεν υπάρχουν ακόμα φόρμες σε αυτόν τον φάκελο",
   "FormRoomEmptyTitle": "Καλώς ήρθατε στην δωμάτιο συμπλήρωσης φορμών",
   "InviteNewUsers": "Πρόσκληση νέων χρηστών",
-  "InviteRootRoomDescription": "Στείλτε μια πρόσκληση για να προσθέσετε νέα μέλη στο {{productName}}",
   "InviteUsersOptionDescription": "Προσθέστε μέλη για κοινή επεξεργασία στην δωμάτιο",
   "ManageAccess": "Διαχείριση πρόσβασης",
   "MigrationDataDescription": "Μεταφέρετε τα δεδομένα σας στο {{productName}} από το Workspace της {{organizationName}}, το Google Workspace ή το Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Μεταφόρτωση από τη συσκευή σας",
   "UploadDevicePDFFormOptionDescription": "Μεταφορτώστε μια έτοιμη φόρμα PDF στο δωμάτιο από τη συσκευή σας.",
   "UploadDevicePDFFormOptionTitle": "Μεταφόρτωση από τη συσκευή",
-  "UploadFromPortalTitle": "Μεταφόρτωση από {{productName}}",
-  "UploadPDFFormOptionDescription": "Επιλέξτε μια έτοιμη φόρμα PDF που είναι διαθέσιμη στο {{productName}} και μεταφορτώστε την στο δωμάτιο.",
   "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων"
 }

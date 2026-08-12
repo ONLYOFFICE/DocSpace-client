@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Puteți crea șablonul de sală în secțiunea Sală",
   "EmptyTemplatesTitle": "Niciun șablon deocamdată aici",
   "EmptyViewDescription": "Începeţi cu acţiuni rapide:",
-  "FormFolderDefaultDescription": "Glisați și fixați formulare PDF aici sau încărcați  de pe {{productName}} sau de pe dispozitivul.",
   "FormFolderDefaultTitle": "Niciun formular deocamdată aici",
   "FormFolderDefaultUserDescription": "Formularele încărcate de administratorul vor fi afișate aici.",
   "FormFolderDefaultUserTitle": "Niciun formular în acest folder deocamdată",
   "FormRoomEmptyTitle": "Bun venit în Sala de completare a formularelor",
   "InviteNewUsers": "Invitați utilizatori noi",
-  "InviteRootRoomDescription": "Trimiteți o invitație pentru a adăuga noi membri la {{productName}}",
   "InviteUsersOptionDescription": "Adăugați membrii pentru editarea colaborativă în sală.",
   "ManageAccess": "Gestionare acces",
   "MigrationDataDescription": "Transferați datele spre {{productName}} din {{organizationName}} Workspace, Google Workspace sau Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Încărcare de pe dispozitivul dvs",
   "UploadDevicePDFFormOptionDescription": "Încărcați un formular PDF pregătit în sala de pe dispozitivul dvs.",
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
-  "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
-  "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
   "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
 }

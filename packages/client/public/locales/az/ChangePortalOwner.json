@@ -1,11 +1,9 @@
 {
   "AppointAdmin": "Administratorları təyin edin",
-  "BackupPortal": "{{productName}} məlumatlarını yedəkləyin",
   "ChangeInstruction": "{{productName}} sahibini dəyişmək üçün lütfən, aşağıda yeni sahibin adını seçin.",
   "ChangeOwner": "{{productName}} sahibini dəyişdirin",
   "ChangeUser": "İstifadəçini dəyişdirin",
   "DoTheSame": "Administratorlarla da eyni şeyi edin",
-  "ManagePortal": "{{productName}} konfiqurasiyasını idarə edin",
   "ManageUser": "İstifadəçi hesablarını idarə edin",
   "NewPortalOwner": "Yeni {{productName}} sahibi",
   "PortalOwnerCan": "{{productName}} sahibi edə bilər:",

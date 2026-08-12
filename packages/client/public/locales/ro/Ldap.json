@@ -70,6 +70,5 @@
   "LdapUserFilter": "Filtru de utilizator",
   "LdapUserFilterTooltip": "Folosiți filtru de căutare LDAP pentru a selecta utilizatorii pentru importul.",
   "LdapUserQuotaTooltip": "Pentru stabilirea cotei de stocare pentru acest utilizator, adăugați atributul în repertoarul LDAP (de exemplu, UsersQuotaLimit) și introduceți o valoare întreagă pentru acest atribut. Cota va fi afișată în octeți. Aici, indicați numai numele atributului. Acest atribut va fi aplicat numai la prima configurare și poate fi modificat manual mai târziu în secțiunea {{contactsName}}.",
-  "LdapUsersType": "Tip utilizator",
-  "LdapUserTypeTooltip": "Toți utilizatorii vor fi adăugate în {{productName}} cu tipul selectat."
+  "LdapUsersType": "Tip utilizator"
 }

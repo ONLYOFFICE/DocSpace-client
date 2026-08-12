@@ -4,7 +4,6 @@
   "ConfigurationDescription": "Lai mainītu adreses iestatījumus, domēns ir jāsavieno ar pašreizējo IP adresi. Pārliecinieties, ka jums ir piekļuve domēna iestatījumiem, lai to varētu izdarīt. Pēc domēna savienošanas izveidojiet {{productName}} nosaukumu. Vēlāk varat mainīt izveidoto {{productName}} nosaukumu, izmantojot telpas iestatījumus.",
   "ConfigurationHeader": "Pašreizējā telpu konfigurācija",
   "CreateSpaceDescription": "Domēns ir veiksmīgi savienots ar IP adresi. Lai rediģētu telpas adreses iestatījumus, jums ir jāiestata turpmākais {{productName}} nosaukums",
-  "CreatingPortal": "Jauna {{productName}} izveide",
   "CurrentSpace": "Pašreizējā telpa",
   "DecryptStorage": "Atšifrēt krātuvi",
   "DecryptWarningDialogContent": "Atšifrēšanas procesa laikā visas krātuves kļūs nepieejamas. Vai tiešām vēlaties turpināt?",

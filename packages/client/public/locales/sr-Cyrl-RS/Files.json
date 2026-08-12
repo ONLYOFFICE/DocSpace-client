@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Век трајања почиње од датума креирања фајла. Неки фајлови у овој соби премашују предложени век трајања и биће обрисани када омогућите ову поставку.",
   "LifetimeDialogDescriptionHeader": "Старији фајлови који премашују век трајања ће бити обрисани",
   "LinkDeletedSuccessfully": "Линк обрисан успешно",
-  "LinkForPortalUsers": "Линк за {{productName}} кориснике",
   "LinkSuccessfullyCreatedAndCopied": "Линк успешно креиран и копиран у привремену меморију",
   "MarkAsRevision": "Означи као ревизија",
   "MarkAsVersion": "Означи као верзија",

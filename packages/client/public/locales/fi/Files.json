@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Käyttöiän laskenta alkaa tiedoston luontipäivämäärästä. Jotkut tämän huoneen tiedostot ylittävät esitetyn käyttöiän ja poistetaan, kun otat asetuksen käyttöön.",
   "LifetimeDialogDescriptionHeader": "Vanhat käyttöiän ylittäneet tiedostot poistetaan",
   "LinkDeletedSuccessfully": "Linkki onnistuneesti poistettu",
-  "LinkForPortalUsers": "Linkki {{productName}}:n käyttäjiin",
   "LinkSuccessfullyCreatedAndCopied": "Linkki onnistuneesti luotu ja kopioitu leikepöydälle",
   "MarkAsRevision": "Merkitse versioksi",
   "MarkAsVersion": "Merkitse versioksi",

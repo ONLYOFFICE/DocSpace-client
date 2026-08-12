@@ -4,7 +4,6 @@
   "ConfigurationDescription": "Duhet të lidhni domenin tuaj me IP-në tuaj aktuale për të ndryshuar cilësimet e adresës. Ju lutem sigurohuni që të keni akses në cilësimet e domenit për ta bërë këtë. Pas lidhjes së domenit, krijoni një emër {{productName}}. Ju mund ta ndryshoni emrin e krijuar {{productName}} më vonë duke përdorur cilësimet e hapësirës.",
   "ConfigurationHeader": "Konfigurimi aktual i hapësirës",
   "CreateSpaceDescription": "Ju keni lidhur me sukses domenin tuaj me adresën tuaj IP. Për të modifikuar cilësimet e adresës së hapësirës, ​​duhet të vendosni emrin e ardhshëm të {{productName}}",
-  "CreatingPortal": "Krijimi i {{productName}} i ri",
   "CurrentSpace": "Hapësira aktuale",
   "DecryptStorage": "Dekriptoni hapësirën e ruajtjes",
   "DecryptWarningDialogContent": "Të gjitha hapësirat do të bëhen të padisponueshme gjatë procesit të dekriptimit. Jeni i sigurt që dëshironi të vazhdoni?",

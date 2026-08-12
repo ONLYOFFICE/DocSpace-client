@@ -1,6 +1,5 @@
 {
   "DeletePlugin": "Izdzēst pielikni",
-  "DeletePluginDescription": "Šis spraudnis vairs nebūs pieejams {{productName}} lietotājiem. Vai tiešām vēlaties turpināt?",
   "DeletePluginTitle": "Vai izdzēst pielikni?",
   "ExpandFunctionality": "Izvērst funkcionalitāti, izmantojot pieliknes SDK",
   "GoToRepo": "Doties uz repozitoriju",
@@ -14,7 +13,5 @@
   "PluginLoadedSuccessfully": "Papildinājums ielādēts veiksmīgi",
   "PluginSamples": "Spraudņu paraugi",
   "PluginSDK": "Pievienotājprogrammas SDK",
-  "PluginSDKDescription": "Izmantojot spraudņa SDK, varat paplašināt savu {{productName}} funkcionalitāti, savienot trešās puses pakalpojumus vai uzlabot esošo lietotāja pieredzi. Šeit jūs varat atrast spraudņu paraugus ar koda avotu, kas pieejams GitHub.",
-  "PluginSDKInstruction": "Noklikšķiniet uz pogas, lai iegūtu detalizētus norādījumus par to, kā izveidot savus spraudņus.",
-  "UploadDescription": "Varat pievienot spraudņus, lai paplašinātu {{productName}} funkcionalitāti ar papildu funkcijām. Noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu ZIP arhīvā."
+  "PluginSDKInstruction": "Noklikšķiniet uz pogas, lai iegūtu detalizētus norādījumus par to, kā izveidot savus spraudņus."
 }

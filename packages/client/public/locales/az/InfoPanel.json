@@ -16,8 +16,6 @@
   "FormRoomAIModalDescription": "Bütün toplanmış cavabları \"AI-ə soruşun\" ilə təhlil etmək üçün verilənlər bazasını qoşun. Onsuz davam edə və yalnız bu forma haqqında soruşa bilərsiniz.",
   "FormRoomAIModalTitle": "Daha yaxşı məlumatlar əldə edin",
   "FormRoomAINotConnectedDescription": "Cavabları strukturlaşdırılmış məlumat kimi saxlayın. AI ilə Soruşun funksiyası ilə süni intellekt əsaslı təhlilin kilidini açmaq üçün otaq parametrlərində verilənlər bazası sinxronizasiyasını aktivləşdirin.",
-  "FormRoomAIProviderNotConnected": "Forma məlumatlarını «AI-ə soruşun» ilə təhlil etmək, qrafiklər yaratmaq və anlayışlar əldə etmək üçün {{productName}} parametrlərinizdə AI provayderi qoşun.",
-  "FormRoomAIProviderNotConnectedAskAdmin": "Forma məlumatlarını «AI-ə soruşun» ilə təhlil etmək, qrafiklər yaratmaq və anlayışlar əldə etmək üçün {{productName}} parametrlərində AI provayderi qoşmağı və aktivləşdirməyi <1>{{productName}} administratorunuzdan</1> xahiş edin.",
   "FormRoomAIReadyDescriptionFile": "Süni intellektdən bu formadakı cavabları araşdırmağı, dəyərli məlumatlar əldə etməyi və məlumatları vizuallaşdırmağı xahiş edin.",
   "FormRoomAIReadyDescriptionFolder": "Formalardan gələn cavablar burada qoşulmuş verilənlər bazasında saxlanılır. Məlumatları AI ilə təhlil etmək üçün müəyyən bir formu açın və «AI-ə soruşun» düyməsini basın.",
   "FormRoomAIReadyDescriptionRoom": "«AI-ə soruşun» ilə məlumatları təhlil edin, qrafiklər yaradın və anlayışlar əldə edin. Başlamaq üçün bir forma seçin və «AI-ə soruşun» düyməsini basın.",

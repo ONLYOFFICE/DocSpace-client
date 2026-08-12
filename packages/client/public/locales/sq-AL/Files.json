@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Numërimi mbrapsht i jetëgjatësisë fillon në datën e krijimit të skedarit. Disa skedarë në këtë dhomë tejkalojnë jetëgjatësinë e propozuar dhe do të fshihen sapo të aktivizoni cilësimin.",
   "LifetimeDialogDescriptionHeader": "Skedarët e vjetër me jetëgjatësi të tejkaluar do të fshihen",
   "LinkDeletedSuccessfully": "Lidhja u fshi me sukses",
-  "LinkForPortalUsers": "Lidhja për përdoruesit e {{productName}}",
   "LinkSuccessfullyCreatedAndCopied": "LIdhja u krijua me sukses dhe u kopjua në kujtesën e fragmenteve",
   "MarkAsRevision": "Shënoni si rishikim",
   "MarkAsVersion": "Shënoni si verion",

@@ -16,8 +16,6 @@
   "FormRoomAIModalDescription": "Pripojte databázu na analýzu všetkých zhromaždených odpovedí pomocou \"Opýtať sa AI\". Môžete pokračovať aj bez nej a pýtať sa len na tento formulár.",
   "FormRoomAIModalTitle": "Získajte lepšie informácie",
   "FormRoomAINotConnectedDescription": "Ukladajte odpovede ako štruktúrované údaje. V nastaveniach miestnosti zapnite synchronizáciu databázy, aby ste odomkli analýzu s podporou AI pomocou \"Opýtať sa AI\".",
-  "FormRoomAIProviderNotConnected": "Pripojte poskytovateľa AI v nastaveniach {{productName}}, aby ste mohli analyzovať údaje formulárov pomocou \"Opýtať sa AI\", vytvárať grafy a objavovať prehľady.",
-  "FormRoomAIProviderNotConnectedAskAdmin": "Požiadajte <1>správcu {{productName}}</1>, aby pripojil a povolil poskytovateľa AI v nastaveniach {{productName}}, aby ste mohli analyzovať údaje formulárov pomocou \"Opýtať sa AI\", vytvárať grafy a objavovať prehľady.",
   "FormRoomAIReadyDescriptionFile": "Požiadajte AI, aby preskúmala odpovede z tohto formulára, vygenerovala poznatky a vizualizovala údaje.",
   "FormRoomAIReadyDescriptionFolder": "Odpovede z formulárov sa ukladajú sem v prepojenom databáze. Ak chcete údaje analyzovať pomocou AI, otvorte konkrétny formulár a kliknite na \"Opýtať sa AI\".",
   "FormRoomAIReadyDescriptionRoom": "Analyzujte pomocou \"Opýtať sa AI\", vytvárajte grafy a odhaľujte poznatky. Vyberte formulár a kliknite na \"Opýtať sa AI\", aby ste sa mohli začať.",

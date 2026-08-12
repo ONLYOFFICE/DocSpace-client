@@ -19,6 +19,5 @@
   "RegistrationEmailWatermark": "E-pasts",
   "RememberHelper": "Noklusējuma sesijas ilgums ir 20 minūtes. Atzīmējiet šo opciju, lai iestatītu to uz vienu gadu. Lai iestatītu savu vērtību, dodieties uz Iestatījumi.",
   "SignInLDAP": "Pierakstieties: {{ldap_domain}}",
-  "SignInLdapHelper": "Izmantojiet akreditācijas datus korporatīvajam domēnam",
-  "UserIsAlreadyRegistered": "Lietotājs <1>{{email}}</1> jau ir reģistrēts šajā {{productName}}, ievadiet savu paroli vai dodieties atpakaļ, lai turpinātu ar citu e-pasta adresi."
+  "SignInLdapHelper": "Izmantojiet akreditācijas datus korporatīvajam domēnam"
 }

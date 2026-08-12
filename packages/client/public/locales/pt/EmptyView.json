@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Pode criar um templates a partir de uma sala na secção Sala",
   "EmptyTemplatesTitle": "Ainda não tem templates aqui",
   "EmptyViewDescription": "Comece com ações rápidas:",
-  "FormFolderDefaultDescription": "Solte os formulários em PDF aqui ou faça upload do {{productName}} ou do dispositivo.",
   "FormFolderDefaultTitle": "Ainda não há formulários aqui",
   "FormFolderDefaultUserDescription": "Os formulários carregados pelos administradores aparecerão aqui.",
   "FormFolderDefaultUserTitle": "Ainda não há formulários nesta pasta",
   "FormRoomEmptyTitle": "Bem-vindo à sala de preenchimento de formulários",
   "InviteNewUsers": "Convidar novos utilizadores",
-  "InviteRootRoomDescription": "Enviar um convite para adicionar novos membros ao seu {{productName}}",
   "InviteUsersOptionDescription": "Adicione membros para edição conjunta na sala",
   "ManageAccess": "Gerenciar acesso",
   "MigrationDataDescription": "Transfira seus dados para o {{productName}} a partir do Workspace {{organizationName}}, Google Workspace ou Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Carregar do seu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carregue um formulário PDF pronto para a sala a partir do seu dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
-  "UploadFromPortalTitle": "Fazer upload de {{productName}}",
-  "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
   "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"
 }

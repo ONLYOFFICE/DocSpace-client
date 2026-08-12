@@ -1,11 +1,9 @@
 {
   "AppointAdmin": "Priraďte administrátorov",
-  "BackupPortal": "Zálohovať dáta {{productName}}",
   "ChangeInstruction": "Ak chcete zmeniť vlastníka {{productName}}, nižšie vyberte meno nového vlastníka.",
   "ChangeOwner": "Zmeniť vlastníka {{productName}}",
   "ChangeUser": "Zmeniť používateľa",
   "DoTheSame": "Robte to, čo robia administrátori",
-  "ManagePortal": "Spravovať konfiguráciu {{productName}}",
   "ManageUser": "Spravovať používateľské účty",
   "NewPortalOwner": "Nový vlastník {{productName}}",
   "PortalOwnerCan": "Vlastník {{productName}} môže:",

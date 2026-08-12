@@ -16,8 +16,6 @@
   "FormRoomAIModalDescription": "Verbinden Sie eine Datenbank, um alle gesammelten Antworten mit \"KI fragen\" zu analysieren. Sie können auch ohne sie fortfahren und nur Fragen zu diesem Formular stellen.",
   "FormRoomAIModalTitle": "Bessere Erkenntnisse gewinnen",
   "FormRoomAINotConnectedDescription": "Speichern Sie Antworten als strukturierte Daten. Aktivieren Sie die Datenbanksynchronisierung in den Raumeinstellungen, um die KI-gestützte Analyse mit \"KI fragen\" freizuschalten.",
-  "FormRoomAIProviderNotConnected": "Verbinden Sie einen KI-Anbieter in den {{productName}}-Einstellungen, um Formulardaten mit \"KI fragen\" zu analysieren, Diagramme zu erstellen und Erkenntnisse zu gewinnen.",
-  "FormRoomAIProviderNotConnectedAskAdmin": "Bitten Sie Ihren <1>{{productName}}-Administrator</1>, einen KI-Anbieter in den {{productName}}-Einstellungen zu verbinden und zu aktivieren, um Formulardaten mit \"KI fragen\" zu analysieren, Diagramme zu erstellen und Erkenntnisse zu gewinnen.",
   "FormRoomAIReadyDescriptionFile": "Fragen Sie die KI, um Antworten aus diesem Formular zu untersuchen, Erkenntnisse zu gewinnen und die Daten zu visualisieren.",
   "FormRoomAIReadyDescriptionFolder": "Antworten aus Formularen werden hier in einer verknüpften Datenbank gespeichert. Um Daten mit KI zu analysieren, öffnen Sie ein bestimmtes Formular und klicken Sie auf \"KI fragen\".",
   "FormRoomAIReadyDescriptionRoom": "Analysieren Sie Daten mit \"KI fragen\", erstellen Sie Diagramme und gewinnen Sie Erkenntnisse. Wählen Sie ein Formular aus und klicken Sie auf \"KI fragen\"', um zu beginnen.",

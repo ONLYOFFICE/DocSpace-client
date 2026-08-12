@@ -1,11 +1,9 @@
 {
   "AppointAdmin": "Նշանակեք ադմինիստրատորներ",
-  "BackupPortal": "Պահուստային {{productName}}-ի տվյալները",
   "ChangeInstruction": "{{productName}}-ի սեփականատիրոջը փոխելու համար խնդրում ենք ստորև ընտրել նոր սեփականատիրոջ անունը:",
   "ChangeOwner": "Փոխել {{productName}}-ի տնօրինողին",
   "ChangeUser": "Փոխել օգտվողին",
   "DoTheSame": "Արեք նույնը, ինչ ադմինիստրատորները",
-  "ManagePortal": "Կառավարել {{productName}}-ի կազմաձևումը",
   "ManageUser": "Կառավարել օգտվողների հաշիվները",
   "NewPortalOwner": "{{productName}}-ի նոր սեփականատեր",
   "PortalOwnerCan": "{{productName}}-ի տնօրինողը կարող է",

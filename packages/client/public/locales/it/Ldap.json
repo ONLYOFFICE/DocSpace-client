@@ -70,6 +70,5 @@
   "LdapUserFilter": "Filtro utente",
   "LdapUserFilterTooltip": "Utilizza il filtro di ricerca LDAP per selezionare gli utenti che devono essere importati.",
   "LdapUserQuotaTooltip": "Per impostare una quota di archiviazione per l'utente, aggiungi un attributo nella directory LDAP (ad esempio, UsersQuotaLimit) e inserisci un valore intero per questo attributo. Verrà visualizzato il valore della quota in byte. Specifica solo il nome dell'attributo. Questo attributo sarà applicato solo durante la prima configurazione e potrà essere modificato manualmente in seguito nella sezione {{contactsName}}.",
-  "LdapUsersType": "Tipo di utenti",
-  "LdapUserTypeTooltip": "Tutti gli utenti verranno aggiunti a {{productName}} con il tipo selezionato."
+  "LdapUsersType": "Tipo di utenti"
 }

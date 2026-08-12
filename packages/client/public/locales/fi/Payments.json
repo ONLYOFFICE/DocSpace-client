@@ -5,7 +5,6 @@
   "ChooseNewPlan": "Haluaisitko valita uuden hinnoitteluohjelman?",
   "GracePeriodActive": "Armoajanjakso on voimassa <1>ajalta {{fromDate}} aina {{byDate}} asti</1> (jäljellä päiviä: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "Ei voi lisätä uusia käyttäjiä eikä luoda uusia huoneita. Lisenssi on vanhentunut.",
-  "LicenseGracePeriodInfo": "Tämän aikana ylläpitäjät eivät voi luoda uusia huoneita tai lisätä uusia käyttäjiä. Kun sietokausi päättyy, {{productName}} ei ole käytettävissä ennen kuin uusi lisenssi aktivoidaan.",
   "NewRoomWillExceedLimit": "Tämän huoneen luominen ei ole mahdollista, koska huoneiden määrän raja, joka kuuluu tilaukseesi, on saavutettu.",
   "NewUsersWillExceedMembersLimit": "Uusien maksettujen käyttäjien lisääminen ei ole mahdollista, koska tilaukseesi kuuluvien pääkäyttäjien määrän raja on saavutettu.",
   "NotPossibleRoomRestoring": "Tämän huoneen palauttaminen ei ole mahdollista, koska tilaukseesi kuuluvien huoneiden määrän raja on saavutettu.",

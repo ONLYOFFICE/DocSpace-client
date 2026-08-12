@@ -4,7 +4,6 @@
   "ConfigurationDescription": "Ünvan parametrlərini dəyişmək üçün domeninizi mövcud IP-yə qoşmalısınız. Zəhmət olmasa, bunu etmək üçün, domen parametrlərinə girişiniz olduğundan əmin olun. Domeni birləşdirdikdən sonra {{productName}} adını yaradın. Yaradılmış {{productName}} adını daha sonra boşluq parametrlərindən istifadə edərək dəyişə bilərsiniz.",
   "ConfigurationHeader": "Cari sahə konfiqurasiyası",
   "CreateSpaceDescription": "Domeninizi IP ünvanınızla uğurla əlaqələndirdiniz. Domen ünvanı parametrlərini redaktə etmək üçün gələcək {{productName}} adını təyin etməlisiniz",
-  "CreatingPortal": "Yeni {{productName}} yaradılır",
   "CurrentSpace": "Cari sahə",
   "DecryptStorage": "Yaddaşın şifrəsini açın",
   "DecryptWarningDialogContent": "Şifrənin açılması prosesi zamanı bütün sahələr əlçatmaz olacaq. Davam etmək istədiyinizə əminsiniz?",

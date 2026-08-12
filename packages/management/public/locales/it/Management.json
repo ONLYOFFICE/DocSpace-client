@@ -4,7 +4,6 @@
   "ConfigurationDescription": "Devi connettere il tuo dominio al tuo IP attuale per modificare le impostazioni dell'indirizzo. Assicurati di avere accesso alle impostazioni del dominio per poterlo fare. Dopo aver connesso il dominio, crea un nome {{productName}}. È possibile modificare il nome {{productName}} creato successivamente utilizzando le impostazioni dello spazio.",
   "ConfigurationHeader": "Configurazione dello spazio attuale",
   "CreateSpaceDescription": "Hai collegato con successo il tuo dominio al tuo indirizzo IP. Per modificare le impostazioni dell'indirizzo dello spazio è necessario impostare il futuro nome di {{productName}}",
-  "CreatingPortal": "Creazione di un nuovo {{productName}}",
   "CurrentSpace": "Spazio attuale",
   "DecryptStorage": "Decrittare l’archivio",
   "DecryptWarningDialogContent": "Tutti gli spazi non saranno disponibili durante il processo di decrittografia. Sei sicuro di voler continuare?",

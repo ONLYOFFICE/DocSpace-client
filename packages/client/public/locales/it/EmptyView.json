@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Puoi creare un modello da una stanza nella sezione Stanza.",
   "EmptyTemplatesTitle": "Nessun modello presente",
   "EmptyViewDescription": "Inizia con azioni rapide:",
-  "FormFolderDefaultDescription": "Trascina qui i moduli PDF o caricali da {{productName}} o dal dispositivo.",
   "FormFolderDefaultTitle": "Nessun modulo qui ancora",
   "FormFolderDefaultUserDescription": "I moduli caricati dagli amministratori verranno visualizzati qui.",
   "FormFolderDefaultUserTitle": "Nessun modulo ancora in questa cartella",
   "FormRoomEmptyTitle": "Benvenuti nella Stanza di compilazione dei moduli",
   "InviteNewUsers": "Invita nuovi utenti",
-  "InviteRootRoomDescription": "Manda un invito per aggiungere nuovi membri a {{productName}}",
   "InviteUsersOptionDescription": "Aggiungi membri del per la modifica congiunta nella stanza",
   "ManageAccess": "Gestisci l'accesso",
   "MigrationDataDescription": "Trasferisci i tuoi dati in {{productName}} da Workspace {{organizationName}}, Google Workspace o Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Carica dal tuo dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carica un modulo PDF pronto nella stanza dal tuo dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carica dal dispositivo",
-  "UploadFromPortalTitle": "Carica da {{productName}}",
-  "UploadPDFFormOptionDescription": "Seleziona un modulo PDF pronto disponibile in {{productName}} e caricalo nella stanza.",
   "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room"
 }

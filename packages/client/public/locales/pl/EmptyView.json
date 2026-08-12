@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Możesz utworzyć szablon z pokoju w sekcji Pokój",
   "EmptyTemplatesTitle": "Brak szablonów",
   "EmptyViewDescription": "Rozpocznij od szybkich działań:",
-  "FormFolderDefaultDescription": "Upuść formularze PDF tutaj lub prześlij je z {{productName}} bądź urządzenia.",
   "FormFolderDefaultTitle": "Brak formularzy",
   "FormFolderDefaultUserDescription": "Tutaj pojawią się formularze przesłane przez administratorów.",
   "FormFolderDefaultUserTitle": "Brak formularzy w tym katalogu",
   "FormRoomEmptyTitle": "Witaj w pokoju do wypełniania formularzy",
   "InviteNewUsers": "Zaproś nowych użytkowników",
-  "InviteRootRoomDescription": "Wyślij zaproszenia, aby dodać nowych członków do {{productName}}",
   "InviteUsersOptionDescription": "Dodaj członków do wspólnej edycji w pokoju",
   "ManageAccess": "Zarządzaj dostępem",
   "MigrationDataDescription": "Przenieś swoje dane do {{productName}} z Workspace {{organizationName}}, Google Workspace lub Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Prześlij ze swojego urządzenia",
   "UploadDevicePDFFormOptionDescription": "Prześlij gotowy formularz PDF do pokoju ze swojego urządzenia.",
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
-  "UploadFromPortalTitle": "Prześlij z {{productName}}",
-  "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
   "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
 }

@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Обратното броене на целия живот започва от датата на създаване на файла. Някои файлове в тази стая надвишават предложения живот и ще бъдат изтрити, след като активирате настройката.",
   "LifetimeDialogDescriptionHeader": "По-старите файлове с надвишен живот ще бъдат изтрити",
   "LinkDeletedSuccessfully": "Линкът е изтрит успешно",
-  "LinkForPortalUsers": "Линк за {{productName}} потребители",
   "LinkSuccessfullyCreatedAndCopied": "Линкът беше успешно създаден и копиран в клипборда",
   "MarkAsRevision": "Маркирай за ревизия",
   "MarkAsVersion": "Маркирай като версия",

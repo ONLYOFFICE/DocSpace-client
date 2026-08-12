@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Դուք կարող եք սենյակից ստեղծել կաղապար «Սենյակներ» բաժնում։",
   "EmptyTemplatesTitle": "Այստեղ կաղապարներ դեռ չկան",
   "EmptyViewDescription": "Սկսել արագ գործողություններից՝",
-  "FormFolderDefaultDescription": "Թողեք PDF ձևերը այստեղ կամ վերբեռնեք {{productName}}-ից կամ սարքից:",
   "FormFolderDefaultTitle": "Այստեղ դեռ ձևեր չկան",
   "FormFolderDefaultUserDescription": "Ադմինիստրատորների կողմից վերբեռնված ձևերը կհայտնվեն այստեղ:",
   "FormFolderDefaultUserTitle": "Այս թղթապանակում դեռ ձևեր չկան",
   "FormRoomEmptyTitle": "Բարի գալուստ Ձևաթղթերի լրացման սենյակ",
   "InviteNewUsers": "Հրավիրեք նոր օգտատերերի",
-  "InviteRootRoomDescription": "Ուղարկեք հրավեր՝ ձեր {{productName}}-ին նոր անդամներ ավելացնելու համար",
   "InviteUsersOptionDescription": "Ավելացնել պորտալի անդամներ սենյակում համատեղ խմբագրման համար",
   "ManageAccess": "Կառավարել մուտքը",
   "MigrationDataDescription": "Փոխանցեք ձեր տվյալները {{productName}} {{organizationName}} Workspace-ից, Google Workspace-ից կամ Nextcloud-ից։",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Վերբեռնեք ձեր Սարքից",
   "UploadDevicePDFFormOptionDescription": "Վերբեռնեք պատրաստի PDF ձևը սենյակ ձեր սարքից:",
   "UploadDevicePDFFormOptionTitle": "Վերբեռնել սարքից",
-  "UploadFromPortalTitle": "Վերբեռնում {{productName}}-ից",
-  "UploadPDFFormOptionDescription": "Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն սենյակ:",
   "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ"
 }

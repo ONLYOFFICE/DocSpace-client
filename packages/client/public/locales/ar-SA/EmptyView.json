@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "يمكنكم إنشاء قالب من غرفة موجودة ضمن قسم الغرف.",
   "EmptyTemplatesTitle": "لا توجد قوالب هنا بعد.",
   "EmptyViewDescription": "ابدأ بالإجراءات السريعة:",
-  "FormFolderDefaultDescription": "أسقط نماذج PDF هنا أو قم بتحميلها من {{productName}} أو من الجهاز.",
   "FormFolderDefaultTitle": "لا توجد نماذج هنا حتى الآن",
   "FormFolderDefaultUserDescription": "ستظهر هنا النماذج التي تم تحميلها من قبل المسؤولين.",
   "FormFolderDefaultUserTitle": "لا توجد نماذج في هذا المجلد حتى الآن",
   "FormRoomEmptyTitle": "مرحبًا بك في غرفة تعبئة النموذج",
   "InviteNewUsers": "دعوة مستخدمين جدد",
-  "InviteRootRoomDescription": "إرسال دعوة لإضافة أعضاء جدد إلى {{productName}}",
   "InviteUsersOptionDescription": "إضافة أعضاء للتحرير المشترك في الغرفة.",
   "ManageAccess": "إدارة الوصول",
   "MigrationDataDescription": "نقلوا بياناتكم إلى {{productName}} من {{organizationName}} Workspace أو Google Workspace أو Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "تحميل من جهازك",
   "UploadDevicePDFFormOptionDescription": "قم بتحميل نموذج PDF جاهز إلى الغرفة من جهازك.",
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
-  "UploadFromPortalTitle": "تحميل من {{productName}}",
-  "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة.",
   "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
 }

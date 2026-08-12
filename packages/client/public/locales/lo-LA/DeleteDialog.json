@@ -1,5 +1,4 @@
 {
-  "DeleteAllGroupDescription": "ຄະນະກຸ່ມທີ່ຖືກເລືອກຈະຖືກລົບອອກ. ຜູ້ໃຊ້ຢູ່ໃນກຸ່ມຈະບໍ່ຖືກຖອນອອກຈາກ {{productName}}. ທ່ານຕ້ອງການດໍາເນີນຕໍ່ບໍ?",
   "DeleteAllGroupsTitle": "ລົບລ້າງກຸ່ມ",
   "DeleteFiles": "ທ່ານກຳລັງຈະຍ້າຍ <strong>ໄຟລ໌ ({{filesCount}})</strong> ໄປໃສ່ {{trashSection}}.",
   "DeleteFilesAndFolders": "ທ່ານກຳລັງຈະລຶບ <strong>files ({{filesCount}})</strong> ແລະ <strong>folders ({{foldersCount}})</strong> ໄປໃສ່ {{trashSection}}.",
@@ -7,7 +6,6 @@
   "DeleteFilesForever": "ທ່ານກຳລັງຈະລຶບ <strong>ໄຟລ໌ ({{filesCount}})</strong>.",
   "DeleteFolders": "ທ່ານກຳລັງຈະຍ້າຍ <strong>ໂຟນເດີ ({{foldersCount}})</strong> ໄປໃສ່ {{trashSection}}.",
   "DeleteFoldersForever": "ທ່ານກຳລັງຈະລຶບ <strong>ໂຟນເດີ ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "ຄຸ້ມກຸ່ມ {{groupName}} ຈະຖືກລົບອອກ. ຜູ້ໃຊ້ໃນກຸ່ມນີ້ຈະບໍ່ຖືກຖອນອອກຈາກ {{productName}}. ທ່ານຕ້ອງການດໍາເນີນຕໍ່ບໍ?",
   "DeleteGroupTitle": "ລົບກຸ່ມ",
   "DeleteItem": "ທ່ານກຳລັງຈະຍ້າຍ <strong>{{name}}</strong> ໄປໃສ່ {{trashSection}}.",
   "DeleteItemForeverConfirm": "ທ່ານກຳລັງຈະລຶບ <strong>{{name}}</strong>.",

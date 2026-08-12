@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Odštevanje življenjske dobe se začne z datumom ustvarjanja datoteke. Nekatere datoteke v tej sobi presegajo predlagano življenjsko dobo in bodo izbrisane, ko to omogočite v nastavitvah.",
   "LifetimeDialogDescriptionHeader": "Starejše datoteke s prekoračeno življenjsko dobo bodo izbrisane",
   "LinkDeletedSuccessfully": "Povezava je bila uspešno izbrisana",
-  "LinkForPortalUsers": "Povezava za {{productName}} uporabnike",
   "LinkSuccessfullyCreatedAndCopied": "Povezava je bila uspešno ustvarjena in kopirana v odložišče",
   "MarkAsRevision": "Označi kot revizijo",
   "MarkAsVersion": "Označi kot verzijo",

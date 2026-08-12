@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Մշտական լիցենզիայի հետհաշվարկը սկսվում է ֆայլի ստեղծման ամսաթվից: Այս սենյակի որոշ ֆայլեր գերազանցում են առաջարկվող ժամկետը և կջնջվեն, երբ միացնեք կարգավորումը:",
   "LifetimeDialogDescriptionHeader": "Ավելի հին ֆայլերը, որոնց ժամկետը գերազանցել է, կջնջվեն",
   "LinkDeletedSuccessfully": "Հղումը հաջողությամբ ջնջվեց",
-  "LinkForPortalUsers": "Հղում {{productName}}-ի օգտագործողների համար",
   "LinkSuccessfullyCreatedAndCopied": "Հղումը հաջողությամբ ստեղծվեց և պատճենվեց սեղմատախտակում",
   "MarkAsRevision": "Նշել որպես վերանայում",
   "MarkAsVersion": "Նշել որպես տարբերակ",

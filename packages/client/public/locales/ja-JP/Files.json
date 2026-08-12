@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "ファイル作成日より有効期限のカウントダウンが始まります。このルーム内の一部のファイルは、提案された有効期限を超過しており、設定を有効にすると削除されます。",
   "LifetimeDialogDescriptionHeader": "有効期限を過ぎた古いファイルは削除されます。",
   "LinkDeletedSuccessfully": "リンクは正常に削除されました",
-  "LinkForPortalUsers": "{{productName}}のユーザー用リンク",
   "LinkSuccessfullyCreatedAndCopied": "リンクが正常に作成され、クリップボードにコピーされました",
   "MarkAsRevision": "修正マーク",
   "MarkAsVersion": "バージョンとしてマークする",

@@ -70,6 +70,5 @@
   "LdapUserFilter": "ຕົວປ່ຽນແກ້ໄຂຜູ້ໃຊ້",
   "LdapUserFilterTooltip": "ໃຊ້ຕົວຕອງການຄົ້ນຫາ LDAP ເພື່ອເລືອກຜູ້ໃຊ້ທີ່ຕ້ອງໄດ້ຮັບການນຳເຂົ້າ.",
   "LdapUserQuotaTooltip": "ເພື່ອຕັ້ງໂຄຕ້າການເກັບຮັກສາສຳລັບຜູ້ໃຊ້, ໃຫ້ເພີ່ມ attribute ໃນ LDAP directory (ຕົວຢ່າງ, UsersQuotaLimit) ແລະ ປ້ອນຄ່າເປັນຈຳນວນເຕັມສຳລັບ attribute ນີ້. ມັນຈະສະແດງຄ່າໂຄຕ້າເປັນ bytes. ຢູ່ບ່ອນນີ້, ໃຫ້ລະບຸພຽງແຕ່ຊື່ attribute ເທົ່ານັ້ນ. Attribute ນີ້ຈະຖືກນຳໃຊ້ໃນລະຫວ່າງການຕັ້ງຄ່າຄັ້ງທຳອິດເທົ່ານັ້ນ ແລະ ສາມາດປ່ຽນແປງດ້ວຍຕົນເອງໃນພາຍຫຼັງໄດ້ໃນສ່ວນ {{contactsName}}.",
-  "LdapUsersType": "ນຳໃຊ້ພິມ",
-  "LdapUserTypeTooltip": "ຜູ້ໃຊ້ທັງໝົດຈະຖືກເພີ່ມເຂົ້າສູ່ {{productName}} ດ້ວຍປະເພດທີ່ເລືອກໄວ້."
+  "LdapUsersType": "ນຳໃຊ້ພິມ"
 }

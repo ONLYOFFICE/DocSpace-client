@@ -1,5 +1,4 @@
 {
-  "DeleteAllGroupDescription": "سيتم حذف المجموعات المحددة. لن تتم إزالة المستخدمين في المجموعات من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteAllGroupsTitle": "حذف المجموعات",
   "DeleteFiles": "أنتم على وشك نقل <strong>ملفات ({{filesCount}})</strong> إلى {{trashSection}}.",
   "DeleteFilesAndFolders": "أنتم على وشك نقل <strong>الملفات ({{filesCount}})</strong> و<strong>المجلدات ({{foldersCount}})</strong> إلى {{trashSection}}.",
@@ -7,7 +6,6 @@
   "DeleteFilesForever": "أنتم على وشك حذف <strong>ملفات ({{filesCount}})</strong>.",
   "DeleteFolders": "أنتم على وشك نقل <strong>مجلدات ({{foldersCount}})</strong> إلى {{trashSection}}.",
   "DeleteFoldersForever": "أنتم على وشك حذف <strong>مجلدات ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "سيتم حذف المجموعة {{groupName}}. لن تتم إزالة المستخدمين في المجموعة من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteGroupTitle": "حذف المجموعة",
   "DeleteItem": "أنتم على وشك نقل <strong>{{name}}</strong> إلى {{trashSection}}.",
   "DeleteItemForeverConfirm": "أنتم على وشك حذف <strong>{{name}}</strong>.",

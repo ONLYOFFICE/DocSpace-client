@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Yaşam süresi geri sayımı dosya oluşturma tarihinde başlar. Bu odadaki bazı dosyalar önerilen yaşam süresini aşıyor ve ayarı etkinleştirdiğinizde silinecektir.",
   "LifetimeDialogDescriptionHeader": "Yaşam süresini aşmış eski dosyalar silinecek",
   "LinkDeletedSuccessfully": "Bağlantı başarıyla silindi",
-  "LinkForPortalUsers": "{{productName}} kullanıcıları için bağlantı",
   "LinkSuccessfullyCreatedAndCopied": "Bağlantı başarıyla oluşturuldu ve panoya kopyalandı",
   "MarkAsRevision": "Düzeltme olarak işaretle",
   "MarkAsVersion": "Sürüm olarak işaretle",

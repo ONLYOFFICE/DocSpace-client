@@ -3,7 +3,7 @@
   "content": "Renew subscription",
   "content_en_sha1_hash": "9f8e65758249c349385d2ddcf458f3f056c64837",
   "created_at": "2026-08-12T11:00:34.750Z",
-  "updated_at": "2026-08-12T11:05:21.627Z",
+  "updated_at": "2026-08-12T14:02:21.315Z",
   "comment": {
     "text": "Button label used to initiate the renewal of an existing DocsConnect subscription.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 466,
+      "line_number": 475,
       "context": "? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds || isTopUpUnavailable)\n return isRenew ? t(\"Common:RenewSubscription\") : t(\"Common:Upgrade\");\n \n return info.deactivated\n ? t(\"Common:TopUpAndPay\")\n : t(\"DocsConnect:TopUpAndBuy\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 466,
+      "line_number": 475,
       "context": "? t(\"DocsConnect:TopUpAndBuy\")\n : t(\"Common:Upgrade\");\n }\n \n if (!insufficientFunds || isTopUpUnavailable)\n return isRenew ? t(\"Common:RenewSubscription\") : t(\"Common:Upgrade\");\n \n return info.deactivated\n ? t(\"Common:TopUpAndPay\")\n : t(\"DocsConnect:TopUpAndBuy\");\n };",
       "module": "/packages/client"
     },

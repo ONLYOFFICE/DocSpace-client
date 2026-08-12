@@ -3,7 +3,7 @@
   "content": "Your next monthly bill will be <1>{{amount}}</1> starting from <2>{{date}}</2>",
   "content_en_sha1_hash": "779f781b5c977780fa47862a581caa37a277ea74",
   "created_at": "2026-07-27T13:07:48.529Z",
-  "updated_at": "2026-08-12T11:00:51.573Z",
+  "updated_at": "2026-08-12T14:02:21.316Z",
   "comment": {
     "text": "Footer hint in the subscription plan panel informing users of their upcoming billing amount and date; <1> represents a formatted currency value and <2> is a localized date.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 571,
+      "line_number": 580,
       "context": "if (isUpgrade)\n return (\n <Text fontSize=\"13px\" fontWeight={400} className={styles.footerHint}>\n <Trans\n ns=\"DocsConnect\"\n i18nKey=\"NextMonthlyBillNote\"\n values={{\n amount: formatCurrency(totalMonthly),\n date: nextBillingDateLocalized,\n }}\n components={{",
       "module": "/packages/client"
     }

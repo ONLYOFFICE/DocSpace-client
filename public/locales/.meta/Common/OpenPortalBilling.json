@@ -3,7 +3,7 @@
   "content": "Go to workspace billing",
   "content_en_sha1_hash": "6b3af9f2c2b24c533463820e291cc808a1552a2d",
   "created_at": "2026-08-12T11:00:30.637Z",
-  "updated_at": "2026-08-12T11:10:36.513Z",
+  "updated_at": "2026-08-12T14:02:21.317Z",
   "comment": {
     "text": "Tooltip for an external link icon and a clickable text link that navigates the user to the workspace billing page.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 698,
+      "line_number": 707,
       "context": "iconNode={<ExternalLinkSvg />}\n size={16}\n isFill\n isClickable\n onClick={onOpenWallet}\n title={t(\"Common:OpenPortalBilling\")}\n dataTestId=\"open_wallet_button\"\n />\n </div>\n \n <Text",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Send request",
   "content_en_sha1_hash": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
   "created_at": "2025-05-19T21:30:48.550Z",
-  "updated_at": "2026-08-12T11:00:51.564Z",
+  "updated_at": "2026-08-12T14:02:21.309Z",
   "comment": {
     "text": "Button label. This text appears on a button that, when clicked, sends a request to the system, often related to billing or service upgrades.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 455,
+      "line_number": 464,
       "context": "const usersTooltip = t(\"DocsConnect:PlanUsersTooltip\", {\n count: isOverLimit ? MAX_USERS : users,\n });\n \n const getSubmitLabel = () => {\n if (isOverLimit) return t(\"Common:SendRequest\");\n \n if (isEditActive) {\n if (isScheduled) return t(\"Common:ScheduleChange\");\n \n return insufficientFunds && !isTopUpUnavailable",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Your previous {{service}} plan",
   "content_en_sha1_hash": "52fea8dc23e905809ef7bab6e47425bb69b4b840",
   "created_at": "2026-08-12T11:00:48.750Z",
-  "updated_at": "2026-08-12T11:36:52.870Z",
+  "updated_at": "2026-08-12T14:02:21.317Z",
   "comment": {
     "text": "A heading in the plan renewal panel that identifies the user's prior subscription, where {{service}} represents the name of the service.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 709,
+      "line_number": 718,
       "context": "fontSize=\"16px\"\n fontWeight={700}\n className={styles.calculateTitle}\n >\n {isRenew\n ? t(\"DocsConnect:PreviousPlanTitle\", {\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"DocsConnect:CalculateYourPlan\")}\n </Text>",
       "module": "/packages/client"
     }

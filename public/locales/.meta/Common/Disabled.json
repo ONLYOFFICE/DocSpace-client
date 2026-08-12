@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:44.535Z",
-  "updated_at": "2026-08-12T11:00:51.537Z",
+  "updated_at": "2026-08-12T14:02:21.283Z",
   "comment": {
     "text": "This label indicates that a user account, a setting, or a feature is inactive or turned off. It appears in various contexts, such as user lists, radio button options, or status indicators.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 949,
+      "line_number": 974,
       "context": ") : (\n <>\n {devPackTurnedOff\n ? summaryRow(\n t(\"DocsConnect:DevPack\"),\n t(\"Common:Disabled\"),\n )\n : null}\n {usersChanged\n ? summaryRow(\n t(\"DocsConnect:UserAdjustmentLabel\"),",
       "module": "/packages/client"
     },

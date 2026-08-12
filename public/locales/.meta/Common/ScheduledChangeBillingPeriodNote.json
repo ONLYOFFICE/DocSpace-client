@@ -3,7 +3,7 @@
   "content": "Your current subscription remains unchanged until the end of your billing period (on {{date}}). The scheduled changes will take effect starting with the next billing period.",
   "content_en_sha1_hash": "ddbb27e480c0c23b15dbd458d2153e888aa6bdda",
   "created_at": "2026-07-27T13:07:33.866Z",
-  "updated_at": "2026-08-12T11:00:51.573Z",
+  "updated_at": "2026-08-12T14:02:21.316Z",
   "comment": {
     "text": "Informational warning text within a `StorageWarning` component used in billing panels and cancellation dialogs. It notifies users that subscription changes are pending, with {{date}} representing the end date of the current billing period.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 593,
+      "line_number": 602,
       "context": "if (isOverLimit) return null;\n \n if (isScheduled)\n return (\n <StorageWarning\n body={t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: periodEndDateLocalized,\n })}\n />\n );",
       "module": "/packages/client"
     },

@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Başlanıb, bitməyib",
   "FormsItem": "Hər sətir bütöv bir toplamadır. İçində işləmək üçün birini açın, apardıqlarınızı sabitləyin və ya üç nöqtə vasitəsilə adamları dəvət edin, formanı açan keçidi kopyalayın və quraşdırmanı şablon kimi saxlayın.",
   "FormsItemTitle": "Form sahəsi ilə iş",
-  "FormsOpenSpace": "Gəlin bunu açaq və toplamanın necə qurulduğuna baxaq. Hər form sahəsinin içində eyni üç şey var: formanın özü, hələ yazılmaqda olan cavablar və artıq gəlmiş olanlar.",
-  "FormsOpenSpaceTitle": "Sahənin içinə addım atın",
   "FormsPlacesRecent": "{{recent}} və {{favorites}} apardığınız toplamaları əlinizin altında saxlayır.",
   "FormsPlacesTemplates": "{{templates}} — saxladığınız sahə şablonları.",
   "FormsPlacesTitle": "Hər şey öz yerində",

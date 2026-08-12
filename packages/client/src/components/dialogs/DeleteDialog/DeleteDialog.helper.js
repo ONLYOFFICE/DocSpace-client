@@ -57,6 +57,7 @@ export const getDialogContent = (
   isAIAgent,
   isAIAgentsFolderRoot,
   unsubscribe,
+  isPrivacyFolder,
 ) => {
   if (!selection) return null;
 
@@ -133,6 +134,22 @@ export const getDialogContent = (
         />{" "}
         {t("Common:WantToContinue")}
       </>
+    );
+  }
+
+  // A private room bypasses the recycle bin (see delete.helpers.ts), so the note
+  // must not promise Trash or a 30-day grace period.
+  if (isPrivacyFolder) {
+    return isSingle ? (
+      <>
+        <Trans t={t} i18nKey="DeleteItemForeverConfirm" ns="DeleteDialog">
+          You are about to delete{" "}
+          <strong>{{ name: selection[0]?.title }}</strong>.
+        </Trans>{" "}
+        {t("Common:DeleteItemForever")}
+      </>
+    ) : (
+      t("Common:DeleteItemsForever", { itemCount: selection.length })
     );
   }
 

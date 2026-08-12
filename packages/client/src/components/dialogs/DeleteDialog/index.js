@@ -247,6 +247,7 @@ const DeleteDialogComponent = (props) => {
     isAIAgent,
     isAIAgentsFolderRoot,
     unsubscribe,
+    isPrivacyFolder,
   );
 
   const title = getDialogTitle();

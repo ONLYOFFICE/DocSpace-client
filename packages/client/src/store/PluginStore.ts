@@ -578,7 +578,7 @@ class PluginStore {
 
           this.initLocalePlugin(newPlugin);
 
-          this.installPlugin(newPlugin);
+          await this.installPlugin(newPlugin);
 
           if (newPlugin.scopes.includes(PluginScopes.Settings)) {
             newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
@@ -591,7 +591,9 @@ class PluginStore {
         }
       };
 
-      const onError = () => {};
+      const onError = () => {
+        resolve(null);
+      };
 
       const frameDoc = this.pluginFrame?.contentDocument;
       const script = frameDoc?.createElement("script");

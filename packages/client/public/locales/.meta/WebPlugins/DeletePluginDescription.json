@@ -3,11 +3,12 @@
   "content": "This plugin will no longer be available to the workspace users. Are you sure you want to continue?",
   "content_en_sha1_hash": "d8c8a97cfac6bc8221cc2ab48b1a3325957c107a",
   "created_at": "2026-08-12T11:00:45.049Z",
-  "updated_at": "2026-08-12T11:00:51.527Z",
+  "updated_at": "2026-08-12T13:39:15.690Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text of a confirmation dialog appearing when deleting a plugin, warning that the plugin will become unavailable to workspace users.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:39:15.690Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

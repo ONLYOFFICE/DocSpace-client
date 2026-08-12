@@ -3,11 +3,12 @@
   "content": "Visit this workspace after creating",
   "content_en_sha1_hash": "0e05e699dc96bf38a6b9fcf188e23e58dc7ac334",
   "created_at": "2026-08-12T11:00:50.921Z",
-  "updated_at": "2026-08-12T11:00:51.641Z",
+  "updated_at": "2026-08-12T13:41:43.654Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Checkbox label in the \"Create Portal\" dialog that allows users to automatically navigate to the new workspace upon successful creation.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:41:43.654Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

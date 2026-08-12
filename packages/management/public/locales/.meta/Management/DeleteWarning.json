@@ -3,11 +3,12 @@
   "content": "The last full access workspace cannot be deleted",
   "content_en_sha1_hash": "c8e4986c86823fd0230a2643aa7c04b241b01b7b",
   "created_at": "2026-08-12T11:00:50.876Z",
-  "updated_at": "2026-08-12T11:00:51.640Z",
+  "updated_at": "2026-08-12T13:45:27.521Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Error toast message that appears when a user attempts to delete the only remaining workspace with full access permissions.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:45:27.521Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

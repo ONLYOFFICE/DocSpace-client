@@ -3,11 +3,12 @@
   "content": "All workspaces will become unavailable during the decryption process. Are you sure you want to continue?",
   "content_en_sha1_hash": "7753a674f2fc2a6762071e73b7acd67a8d42f8eb",
   "created_at": "2026-08-12T11:00:50.868Z",
-  "updated_at": "2026-08-12T11:00:51.639Z",
+  "updated_at": "2026-08-12T13:46:41.026Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text of a confirmation dialog that appears when initiating the data decryption process to warn users about temporary workspace unavailability.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:46:41.026Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

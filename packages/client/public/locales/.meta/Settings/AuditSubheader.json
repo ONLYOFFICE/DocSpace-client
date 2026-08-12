@@ -3,11 +3,12 @@
   "content": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your workspace.",
   "content_en_sha1_hash": "c297256575afd77d85ffa69dac0db6d074b11b80",
   "created_at": "2026-08-12T11:00:45.461Z",
-  "updated_at": "2026-08-12T11:00:51.601Z",
+  "updated_at": "2026-08-12T13:34:08.640Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text for an empty state screen in the Audit Trail subsection, explaining the purpose of tracking user changes to workspace entities.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:34:08.640Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

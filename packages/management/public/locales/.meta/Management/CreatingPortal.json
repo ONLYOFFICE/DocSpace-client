@@ -3,11 +3,12 @@
   "content": "Creating new workspace",
   "content_en_sha1_hash": "0881f9379b5e4391cd5eaf56b1ad6978d9142541",
   "created_at": "2026-08-12T11:00:50.862Z",
-  "updated_at": "2026-08-12T11:00:51.640Z",
+  "updated_at": "2026-08-12T13:47:42.591Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Modal dialog title shown during the portal creation process; includes the {{productName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:47:42.591Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

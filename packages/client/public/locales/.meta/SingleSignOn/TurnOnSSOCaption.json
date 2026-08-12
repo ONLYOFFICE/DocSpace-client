@@ -3,11 +3,12 @@
   "content": "Enable this option if you want to add users from SSO service to your workspace automatically.",
   "content_en_sha1_hash": "37c2821136042d586955cf66831802b4c5a8237a",
   "created_at": "2026-08-12T11:00:45.261Z",
-  "updated_at": "2026-08-12T11:00:51.597Z",
+  "updated_at": "2026-08-12T13:36:03.278Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Caption for a toggle switch in the Single Sign-On (SSO) integration settings, providing instructions on the effect of enabling the feature.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:36:03.278Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

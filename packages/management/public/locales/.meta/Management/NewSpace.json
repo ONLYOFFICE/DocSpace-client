@@ -3,11 +3,12 @@
   "content": "New workspace",
   "content_en_sha1_hash": "b21b860f611df14a0a7c14f50560aea2f2ce1ee9",
   "created_at": "2026-08-12T11:00:50.899Z",
-  "updated_at": "2026-08-12T11:00:51.640Z",
+  "updated_at": "2026-08-12T13:44:15.991Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label in the header used to initiate the creation of a new workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:44:15.991Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

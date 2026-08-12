@@ -3,11 +3,12 @@
   "content": "Rooms: {{roomCount}} | Users: {{userCount}} | Storage workspace used: {{storageSpace}}",
   "content_en_sha1_hash": "ed2addd1282fae22e3473fcf60c01f6cd5dd55ed",
   "created_at": "2026-08-12T11:00:50.907Z",
-  "updated_at": "2026-08-12T11:00:51.640Z",
+  "updated_at": "2026-08-12T13:43:36.973Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Summary text in a list row displaying workspace statistics, where {{roomCount}} is the number of rooms, {{userCount}} is the total users, and {{storageSpace}} is the used storage amount.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:43:36.973Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

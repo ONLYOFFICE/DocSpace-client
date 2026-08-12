@@ -3,11 +3,12 @@
   "content": "All workspaces will become unavailable during the encryption process. Are you sure you want to continue?",
   "content_en_sha1_hash": "028e58b8b11abef42f87eb0b0205ffaecef722c9",
   "created_at": "2026-08-12T11:00:50.891Z",
-  "updated_at": "2026-08-12T11:00:51.639Z",
+  "updated_at": "2026-08-12T13:44:56.252Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text of a warning modal dialog shown when initiating data encryption to alert users about temporary workspace inaccessibility.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:44:56.252Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

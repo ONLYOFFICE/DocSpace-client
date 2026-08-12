@@ -3,11 +3,12 @@
   "content": "As an owner/admin you can view and manage all API keys in this workspace.",
   "content_en_sha1_hash": "2fe21a82f82b1d52bce1e9c8877fa27390b6e07e",
   "created_at": "2026-08-12T11:00:45.422Z",
-  "updated_at": "2026-08-12T11:00:51.570Z",
+  "updated_at": "2026-08-12T13:34:47.398Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional text on the API Keys settings page describing administrative permissions.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:34:47.398Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

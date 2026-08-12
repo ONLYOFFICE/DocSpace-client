@@ -3,11 +3,12 @@
   "content": "User <1>{{email}}</1> is already registered in this workspace, enter your password or go back to continue with another email.",
   "content_en_sha1_hash": "fe07dff68403780707d8eefcdce3a18dc6915fc6",
   "created_at": "2026-08-12T11:00:50.722Z",
-  "updated_at": "2026-08-12T11:00:51.619Z",
+  "updated_at": "2026-08-12T13:40:38.538Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Error text displayed below the email input when the entered email is already associated with an existing account in the workspace. The `<1>` tags wrap the `{{email}}` variable representing the user's address.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:40:38.538Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

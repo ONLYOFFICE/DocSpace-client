@@ -3,11 +3,12 @@
   "content": "You can add plugins to extend the functionality of the workspace with extra features. Click Upload plugin or drop file in the ZIP archive.",
   "content_en_sha1_hash": "3e20fcea00ec471fec19614133daff5b1edbb940",
   "created_at": "2026-08-12T11:00:45.078Z",
-  "updated_at": "2026-08-12T11:00:51.594Z",
+  "updated_at": "2026-08-12T13:37:49.987Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional text for the plugin upload area explaining how to add features; includes a placeholder for the product name.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:37:49.987Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

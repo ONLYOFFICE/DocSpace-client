@@ -3,11 +3,12 @@
   "content": "You have successfully connected your domain to your IP address. To edit the workspace address settings, you need to set the future {{productName}} name",
   "content_en_sha1_hash": "51781ce1951cfc49b2778e806a3b3da0acca2519",
   "created_at": "2026-08-12T11:00:50.860Z",
-  "updated_at": "2026-08-12T11:00:51.640Z",
+  "updated_at": "2026-08-12T13:48:03.166Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text in a modal dialog informing the user of a successful domain connection and providing instructions for editing workspace settings; includes the {{productName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:48:03.166Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

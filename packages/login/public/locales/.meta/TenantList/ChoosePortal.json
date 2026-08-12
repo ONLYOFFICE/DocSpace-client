@@ -3,11 +3,12 @@
   "content": "Choose your workspace",
   "content_en_sha1_hash": "25171735937b984044534453b95835dff4a585d4",
   "created_at": "2026-08-12T11:00:50.682Z",
-  "updated_at": "2026-08-12T11:00:51.618Z",
+  "updated_at": "2026-08-12T13:41:18.283Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Title of the tenant selection screen prompting the user to select a workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:41:18.283Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

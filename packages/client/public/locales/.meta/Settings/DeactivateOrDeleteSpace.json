@@ -3,11 +3,12 @@
   "content": "Deactivate or delete workspace.",
   "content_en_sha1_hash": "cb8f21560463fd0f4e701f3d9a74b4f9d89a01dc",
   "created_at": "2026-08-12T11:00:45.630Z",
-  "updated_at": "2026-08-12T11:00:51.514Z",
+  "updated_at": "2026-08-12T13:31:28.929Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "A descriptive label in an action list describing the ability to deactivate or delete the workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:31:28.929Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

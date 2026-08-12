@@ -3,11 +3,12 @@
   "content": "The caption for the button used to login into the workspace with the Single Sign-On service",
   "content_en_sha1_hash": "3ed9e15830f48a76904d31a562040a45ec97946f",
   "created_at": "2026-08-12T11:00:45.166Z",
-  "updated_at": "2026-08-12T11:00:51.596Z",
+  "updated_at": "2026-08-12T13:36:37.761Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Tooltip explaining that the custom button label is used to initiate workspace login via Single Sign-On (SSO).",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:36:37.761Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

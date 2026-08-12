@@ -3,11 +3,12 @@
   "content": "You can open the document on the workspace or in the mobile application",
   "content_en_sha1_hash": "39516698eeecfe5c7e06550509b7871df27470c0",
   "created_at": "2026-08-12T11:00:50.610Z",
-  "updated_at": "2026-08-12T11:00:51.615Z",
+  "updated_at": "2026-08-12T13:39:37.337Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Informational text within the deep link component explaining that the document is accessible via both the web workspace and the mobile application.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:39:37.337Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

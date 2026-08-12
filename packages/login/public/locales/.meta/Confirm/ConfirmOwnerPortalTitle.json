@@ -3,11 +3,12 @@
   "content": "Please confirm you want to change {{productName}} owner to {{newOwner}}.",
   "content_en_sha1_hash": "8c346ea9795f0b47dc760d9681e708808d6cbdd0",
   "created_at": "2026-08-12T11:00:50.775Z",
-  "updated_at": "2026-08-12T11:00:51.617Z",
+  "updated_at": "2026-08-12T13:40:16.640Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle in a confirmation screen for transferring portal ownership, containing placeholders for the product name and the new owner's name.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:40:16.640Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

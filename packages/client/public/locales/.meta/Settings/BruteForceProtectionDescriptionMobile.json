@@ -3,11 +3,12 @@
   "content": "To protect the workspace against brute-force attacks, you can set up the limits of unsuccessful login attempts by the user.",
   "content_en_sha1_hash": "8f18329b8f61edb21f5f9289b8071011f87b4222",
   "created_at": "2026-08-12T11:00:45.515Z",
-  "updated_at": "2026-08-12T11:00:51.601Z",
+  "updated_at": "2026-08-12T13:33:36.485Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle for a security category item in the mobile settings menu, explaining the purpose of configuring login attempt limits.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:33:36.485Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

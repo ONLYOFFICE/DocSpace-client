@@ -3,11 +3,12 @@
   "content": "Set an alternative URL address for your workspace. Send your request to our support team to get help with the settings.",
   "content_en_sha1_hash": "225f97dcfc2efb74e45c7f7843984d1afd613c3a",
   "created_at": "2026-08-12T11:00:45.756Z",
-  "updated_at": "2026-08-12T11:00:51.564Z",
+  "updated_at": "2026-08-12T13:32:14.108Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text for the DNS settings category item within the portal customization settings, providing instructions on configuring an alternative workspace URL and contacting support.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T13:32:14.108Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {

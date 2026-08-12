@@ -6,7 +6,6 @@
   "Binding": "Liên kết:",
   "CertificateExist": "Chứng chỉ với cùng loại hành động đã tồn tại",
   "CustomEntryButton": "Chú thích nút đăng nhập tùy chỉnh",
-  "CustomEntryTooltip": "Chú thích cho nút được sử dụng để đăng nhập vào không gian với dịch vụ Đăng nhập một lần",
   "DownloadMetadataXML": "Tải XML metadata SP",
   "Encryption": "Mã hóa",
   "GenerateCertificate": "Tạo chứng chỉ tự ký mới",
@@ -50,10 +49,8 @@
   "spSignResponseRequest": "Ký phản hồi đăng xuất",
   "SPSingleLogoutURL": "URL đăng xuất SP một lần (hỗ trợ POST và chuyển hướng ràng buộc):",
   "SPSingleLogoutURLTooltip": "URL được sử dụng cho đăng xuất một lần ở phía nhà cung cấp danh tính",
-  "SsoIntro": "Phần Đăng nhập một lần cho phép bạn bật/tắt xác thực của bên thứ ba bằng SAML, do đó cung cấp cách truy cập không gian cho người dùng nhanh hơn, dễ dàng hơn và an toàn hơn.",
   "StandardDecryptionAlgorithm": "Thuật toán giải mã mặc định",
   "TurnOnSSO": "Bật xác thực Đăng nhập một lần (SSO)",
-  "TurnOnSSOCaption": "Bật tùy chọn này nếu bạn muốn tự động thêm người dùng từ dịch vụ SSO vào không gian của mình.",
   "UploadXML": "Tải siêu dữ liệu từ XML để tự động điền vào các trường bắt buộc.",
   "UploadXMLPlaceholder": "URL tới Siêu dữ liệu XML IdP",
   "UsedFor": "Sử dụng cho"

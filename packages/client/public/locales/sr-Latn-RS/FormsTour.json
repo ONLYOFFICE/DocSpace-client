@@ -1,5 +1,4 @@
 {
-  "FormsBlank": "Ovo je sam obrazac — tačno ono što otvara svako ko prati vaš link. Otpremite PDF obrazac koji već imate ili napravite novi iz galerije šablona, bez napuštanja prostora.",
   "FormsBlankTitle": "Obrazac koji svi otvaraju",
   "FormsComplete": "Poslata kopija stiže u {{complete}} i ostaje tamo, po jedna po osobi. Uključite prikupljanje rezultata i svaki odgovor postaje i red u tabeli — po jedna kolona za svako polje, spremno za sortiranje ili grafikon.",
   "FormsCompleteTitle": "Prikupljeni odgovori",

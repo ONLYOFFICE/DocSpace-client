@@ -125,7 +125,6 @@
   "TabPlugins": "Sekme Eklentileri",
   "TotalSizeMustBeGreater": "Toplam yükleme boyutu, dosya başına boyut sınırına eşit veya büyük olmalıdır.",
   "UploaderDescription": "Seçilen klasöre dosya yüklemesine izin vermek için bir yükleyici gömün.",
-  "UploaderPresetInfo": "Kullanıcıların kayıt olmadan belgeleri alanınıza yükleyebilmesi için yükleyiciyi gömün. Yükleme için izin verilen dosya türlerini seçin.",
   "UploadFilesDescription": "Kullanıcılar tek tek dosyalar yükleyebilir.",
   "UploadFoldersDescription": "Kullanıcılar yapısıyla birlikte tüm klasörleri yükleyebilir.",
   "UploadLimits": "Yükleme limitleri",

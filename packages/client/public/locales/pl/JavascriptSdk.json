@@ -125,7 +125,6 @@
   "TabPlugins": "Karta z wtyczkami",
   "TotalSizeMustBeGreater": "Całkowity rozmiar przesyłania musi być większy lub równy limitowi rozmiaru pliku.",
   "UploaderDescription": "Wbuduj ładowarkę, aby umożliwić użytkownikom przesyłanie plików do wybranego folderu.",
-  "UploaderPresetInfo": "Wbuduj uploader, aby użytkownicy mogli przesyłać dokumenty do Twojej przestrzeni bez rejestracji. Wybierz dozwolone typy plików do przesyłania.",
   "UploadFilesDescription": "Użytkownicy mogą przesyłać pojedyncze pliki.",
   "UploadFoldersDescription": "Użytkownicy mogą przesyłać całe foldery wraz ze swoją strukturą.",
   "UploadLimits": "Limity przesyłania",

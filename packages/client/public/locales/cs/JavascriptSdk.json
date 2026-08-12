@@ -125,7 +125,6 @@
   "TabPlugins": "Zásuvné moduly karet",
   "TotalSizeMustBeGreater": "Celkový velikost nahrání musí být větší nebo rovna limitu velikosti na soubor.",
   "UploaderDescription": "Integrujte uploader, který uživatelům umožní nahrát soubory do vybrané složky.",
-  "UploaderPresetInfo": "Vložíte uploader, aby uživatelé mohli do vašeho prostoru nahánět dokumenty bez registrace. Vyberte povolené typy souborů pro nahrávání.",
   "UploadFilesDescription": "Uživatelé mohou nahrát jednotlivé soubory.",
   "UploadFoldersDescription": "Uživatelé mohou nahrát celé složky se svou strukturou.",
   "UploadLimits": "Limitní hodnoty nahrávání",

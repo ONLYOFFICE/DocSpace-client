@@ -125,7 +125,6 @@
   "TabPlugins": "Registerkarte “Plugins”",
   "TotalSizeMustBeGreater": "Die Gesamt-Upload-Größe muss größer oder gleich dem Größenlimit pro Datei sein.",
   "UploaderDescription": "Betten Sie einen Uploader ein, damit Benutzer Dateien in den ausgewählten Ordner hochladen können.",
-  "UploaderPresetInfo": "Betten Sie den Uploader ein, damit Benutzer Dokumente in Ihren Bereich hochladen können, ohne sich zu registrieren. Wählen Sie die zulässigen Dateitypen für den Upload.",
   "UploadFilesDescription": "Benutzer können einzelne Dateien hochladen.",
   "UploadFoldersDescription": "Benutzer können ganze Ordner mit ihrer Struktur hochladen.",
   "UploadLimits": "Upload-Limits",

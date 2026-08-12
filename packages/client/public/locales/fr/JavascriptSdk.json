@@ -125,7 +125,6 @@
   "TabPlugins": "Onglet Module complémentaires",
   "TotalSizeMustBeGreater": "La taille totale de l'envoi doit être supérieure ou égale à la limite de taille par fichier.",
   "UploaderDescription": "Intégrer un téléchargeur pour permettre aux utilisateurs de téléverser des fichiers dans le dossier sélectionné.",
-  "UploaderPresetInfo": "Intégrer le téléchargeur afin que les utilisateurs puissent télécharger des documents dans votre espace sans inscription. Choisissez les types de fichiers autorisés pour le téléchargement.",
   "UploadFilesDescription": "Les utilisateurs peuvent télécharger des fichiers individuels.",
   "UploadFoldersDescription": "Les utilisateurs peuvent télécharger des dossiers entiers en conservant leur structure.",
   "UploadLimits": "Limites de téléchargement",

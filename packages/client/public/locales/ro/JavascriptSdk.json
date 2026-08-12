@@ -125,7 +125,6 @@
   "TabPlugins": "Fila Plugin-uri",
   "TotalSizeMustBeGreater": "Dimensiunea totală de încărcare trebuie să fie mai mare sau egală cu limita de dimensiune per fișier.",
   "UploaderDescription": "Integrați un uploader pentru a permite utilizatorilor să încarce fișiere în directorul selectat.",
-  "UploaderPresetInfo": "Integrați uploaderul astfel încât utilizatorii să poată încărca documente în spațiul dvs. fără înregistrare. Selectați tipurile de fișiere permise pentru încărcare.",
   "UploadFilesDescription": "Utilizatorii pot încărca fișiere individuale.",
   "UploadFoldersDescription": "Utilizatorii pot încărca întregi foldere cu structura lor.",
   "UploadLimits": "Limite de încărcare",

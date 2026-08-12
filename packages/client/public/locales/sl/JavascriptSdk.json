@@ -125,7 +125,6 @@
   "TabPlugins": "Vtičniki za zavihke",
   "TotalSizeMustBeGreater": "Skupna velikost nalaganja mora biti večja od ali enaka limiti velikosti na datoteko.",
   "UploaderDescription": "Vgradite orodje za nalaganje, da uporabniki lahko nalagajo datoteke v izbraną mapo.",
-  "UploaderPresetInfo": "Vgradite nalagalo, da uporabniki lahko dokumente v vaš prostor nalagajo brez registracije. Izberite dovoljene tipove datotek za nalaganje.",
   "UploadFilesDescription": "Uporabniki lahko nalagajo individualne datoteke.",
   "UploadFoldersDescription": "Uporabniki lahko nalagajo celotne mape s svojo strukturo.",
   "UploadLimits": "Omejitve za nalaganje",

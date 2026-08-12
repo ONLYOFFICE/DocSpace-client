@@ -1,5 +1,4 @@
 {
-  "FormsBlank": "To jest sam formularz — dokładnie to, co otwiera każdy, kto kliknie twój link. Wgraj formularz PDF, który już masz, albo zbuduj nowy z galerii szablonów, nie opuszczając obszaru.",
   "FormsBlankTitle": "Formularz, który otwierają wszyscy",
   "FormsComplete": "Przesłana kopia trafia do {{complete}} i tam zostaje, po jednej na osobę. Włącz zbieranie wyników, a każda odpowiedź stanie się także wierszem w arkuszu kalkulacyjnym — jedna kolumna na pole, gotowa do sortowania lub przedstawienia na wykresie.",
   "FormsCompleteTitle": "Zebrane odpowiedzi",

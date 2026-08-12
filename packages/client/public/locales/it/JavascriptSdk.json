@@ -125,7 +125,6 @@
   "TabPlugins": "Scheda dei plugin",
   "TotalSizeMustBeGreater": "La dimensione totale del caricamento deve essere maggiore o uguale al limite di dimensione per file.",
   "UploaderDescription": "Incorporare un caricatore per consentire agli utenti di caricare file nella cartella selezionata.",
-  "UploaderPresetInfo": "Incorporare l'uploader in modo che gli utenti possano caricare documenti nel vostro spazio senza registrazione. Scegliere i tipi di file consentiti per il caricamento.",
   "UploadFilesDescription": "Gli utenti possono caricare file singoli.",
   "UploadFoldersDescription": "Gli utenti possono caricare intere cartelle con la loro struttura.",
   "UploadLimits": "Limiti di caricamento",

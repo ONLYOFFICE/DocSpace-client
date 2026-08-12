@@ -33,7 +33,6 @@
   "SetAppButton": "Ligar à app",
   "SignUp": "Inscrever-se",
   "SuccessDeactivate": "A sua conta foi desativada com êxito. Em 10 segundos será redirecionado para o <1>site</1>.",
-  "SuccessReactivate": "A sua conta foi reativada com sucesso. Em 10 segundos será redirecionado para o <1>portal</1>.",
   "SuccessRemoved": "A sua conta foi removida com êxito. Em 10 segundos será redirecionado(a) para o <1>site</1>.",
   "TermsAndConditions": "Ao continuar, compreende e concorda com os nossos <1>Termos e condições</1> e <2>Declaração de privacidade</2>.",
   "TfaSubTitle": "Siga passos simples para continuar trabalhando neste(a) {{productName}}:",

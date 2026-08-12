@@ -125,7 +125,6 @@
   "TabPlugins": "Pestaña Extensiones",
   "TotalSizeMustBeGreater": "El tamaño total de carga debe ser mayor o igual que el límite de tamaño por archivo.",
   "UploaderDescription": "Integrar un cargador para permitir a los usuarios subir archivos a la carpeta seleccionada.",
-  "UploaderPresetInfo": "Incruste el cargador para que los usuarios puedan subir documentos a su espacio sin registro. Elija los tipos de archivo permitidos para la carga.",
   "UploadFilesDescription": "Los usuarios pueden subir archivos individuales.",
   "UploadFoldersDescription": "Los usuarios pueden subir carpetas completas con su estructura.",
   "UploadLimits": "Límites de carga",

@@ -125,7 +125,6 @@
   "TabPlugins": "탭 플러그인",
   "TotalSizeMustBeGreater": "총 업로드 크기는 파일당 크기 제한보다 크거나 같아야 합니다.",
   "UploaderDescription": "선택한 폴더에 파일을 업로드할 수 있는 업로더를 삽입합니다.",
-  "UploaderPresetInfo": "등록 없이 사용자가 공간에 문서를 업로드할 수 있도록 업로더를 삽입하세요. 업로드할 수 있는 파일 형식을 선택하세요.",
   "UploadFilesDescription": "사용자는 개별 파일을 업로드할 수 있습니다.",
   "UploadFoldersDescription": "사용자는 폴더 전체와 그 구조를 업로드할 수 있습니다.",
   "UploadLimits": "업로드 제한",

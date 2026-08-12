@@ -6,7 +6,6 @@
   "Binding": "Metodă de legătură:",
   "CertificateExist": "Există deja un certificat cu același tip de acțiune",
   "CustomEntryButton": "Etichetă de buton de conectare particularizată",
-  "CustomEntryTooltip": "Eticheta butonului pentru conectarea la spaţiul cu sistem de autentificare unică (SSO)",
   "DownloadMetadataXML": "Descărcare metadate XML SP",
   "Encryption": "Criptare",
   "GenerateCertificate": "Generează un nou certificat cu semnătură automată",
@@ -50,10 +49,8 @@
   "spSignResponseRequest": "Semnare răspunsuri de deconectare",
   "SPSingleLogoutURL": "Adresa URL a deconectării unice a furnizorului de servicii (acceptă POST și binding de redirecționare):",
   "SPSingleLogoutURLTooltip": "Adresa URL utilizată pentru deconectarea unică pe partea de furnizor de identitate",
-  "SsoIntro": "Secţiunea Single Sign-On (Autentificare unică) vă permite să activați/să dezactivați autentificarea prin terți folosind SAML, oferind astfel utilizatorilor un mod mai rapid, mai uşor şi mai sigur de accesare a spaţiului.",
   "StandardDecryptionAlgorithm": "Algoritm de decriptare implicit",
   "TurnOnSSO": "Activare autentificare unică (SSO)",
-  "TurnOnSSOCaption": "Activați această opţiune dacă doriţi să adăugaţi automat utilizatori în spaţiul prin serviciu SSO.",
   "UploadXML": "Încărcați metadatele din XML pentru a completa automat câmpurile necesare.",
   "UploadXMLPlaceholder": "Adresa URL la fişierul de metadate XML al furnizorului ID",
   "UsedFor": "Utilizare pentru"

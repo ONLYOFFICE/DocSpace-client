@@ -11,7 +11,6 @@
   "PasswordRecoveryTitle": "Salasanan palautus",
   "RecoverAccess": "Palauta käyttöoikeus",
   "RecoverContactEmailPlaceholder": "Sähköposti yhteydenottoa varten",
-  "RecoverTextBody": "Jos et voi kirjautua sisään nykyisellä tililläsi tai haluat rekisteröityä uutena käyttäjänä, ota yhteyttä portaalin järjestelmänvalvojaan.",
   "Register": "Rekisteröidy",
   "RegisterTextBodyAfterDomainsList": "Rekisteröidy kirjoittamalla sähköpostiosoitteesi ja napsauttamalla Lähetä pyyntö. Sinulle lähetetään aktivointilinkki.",
   "RegisterTextBodyBeforeDomainsList": "Rekisteröityminen on saatavilla käyttäjille, joilla on sähköpostitili osoitteessa",

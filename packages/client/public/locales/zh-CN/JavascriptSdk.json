@@ -125,7 +125,6 @@
   "TabPlugins": "选项卡插件",
   "TotalSizeMustBeGreater": "总上传大小必须大于或等于单个文件大小限制。",
   "UploaderDescription": "嵌入一个上传器，允许用户将文件上传到选定的文件夹。",
-  "UploaderPresetInfo": "嵌入上传器，以便用户无需注册即可将文档上传到您的空间。选择允许上传的文件类型。",
   "UploadFilesDescription": "用户可以上传单个文件。",
   "UploadFoldersDescription": "用户可以上传包含其结构的整个文件夹。",
   "UploadLimits": "上传限制",

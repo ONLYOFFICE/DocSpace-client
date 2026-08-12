@@ -125,7 +125,6 @@
   "TabPlugins": "Plug-ins de guias",
   "TotalSizeMustBeGreater": "O tamanho total do upload deve ser maior ou igual ao limite de tamanho por arquivo.",
   "UploaderDescription": "Incorporar um uploader para permitir que os usuários enviem arquivos para a pasta selecionada.",
-  "UploaderPresetInfo": "Embuta o uploader para que os usuários possam fazer upload de documentos para o seu espaço sem registro. Escolha os tipos de arquivo permitidos para upload.",
   "UploadFilesDescription": "Os usuários podem fazer upload de arquivos individuais.",
   "UploadFoldersDescription": "Os usuários podem fazer upload de pastas inteiras com sua estrutura.",
   "UploadLimits": "Limites de upload",

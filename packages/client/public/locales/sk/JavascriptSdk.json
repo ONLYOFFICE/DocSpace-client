@@ -125,7 +125,6 @@
   "TabPlugins": "Tab Pluginy",
   "TotalSizeMustBeGreater": "Celkový veľkosť nahrávania musí byť väčšia alebo rovná limite veľkosti na súbor.",
   "UploaderDescription": "Vložte uploader, aby používatelia mohli načítať súbory do vybraného adresára.",
-  "UploaderPresetInfo": "Zintegrovajte uploader, aby mohli používatelia nahádzať dokumenty do vášho priestoru bez registrácie. Vyberte povolené typy súborov pre nahrávanie.",
   "UploadFilesDescription": "Používatelia môžu nahrávať jednotlivé súbory.",
   "UploadFoldersDescription": "Používatelia môžu nahrávať celé adresáre so svojou štruktúrou.",
   "UploadLimits": "Limitácie nahrávania",

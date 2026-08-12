@@ -12,7 +12,6 @@
   "TourPlacesShared": "{{sectionName}} — les fichiers que d'autres ont partagés avec vous.",
   "TourPlacesTitle": "Chaque chose à sa place",
   "TourPlacesTrash": "{{sectionName}} — les fichiers supprimés que vous pouvez encore restaurer.",
-  "TourShare": "Survolez un fichier pour voir les actions rapides. Cliquez sur l'icône de partage pour accorder l'accès aux contacts de votre portail avec différents niveaux d'autorisation — ou créez un lien externe pour toute autre personne.",
   "TourSharedAccess": "{{sharedBy}} indique de qui provient le fichier, {{accessLevel}} indique ce que vous pouvez en faire — consulter, commenter ou modifier. Seul le propriétaire peut changer cela.",
   "TourSharedAccessTitle": "Qui l'a partagé, et ce que vous pouvez faire",
   "TourSharedEmpty": "Rien n'a encore été partagé avec vous. Les fichiers et dossiers apparaîtront ici dès que quelqu'un vous y donnera accès.",

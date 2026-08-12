@@ -5,7 +5,6 @@
   "RoomsEmptyTitle": "Votre liste est vide pour l'instant",
   "RoomsGroups": "Organisez les salles selon des caractéristiques précises pour trouver rapidement ce dont vous avez besoin. Créez des groupes et passez de l'un à l'autre juste au-dessus de la liste.",
   "RoomsGroupsTitle": "Groupez vos salles",
-  "RoomsMembers": "Chaque salle a sa liste de membres dans le panneau d'information. Ajoutez des contacts du portail et définissez un rôle pour chaque membre — de la simple consultation des fichiers à la gestion de toute la salle.",
   "RoomsMembersTitle": "Travaillez ensemble",
   "RoomsPlacesArchive": "{{archive}} — les salles dans lesquelles vous ne travaillez plus, restaurables à tout moment.",
   "RoomsPlacesFiles": "{{recent}}, {{favorites}} et {{trash}} rassemblent les fichiers de vos salles : récemment ouverts, marqués d'une étoile et supprimés.",

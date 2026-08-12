@@ -6,7 +6,6 @@
   "Binding": "Saistīšana:",
   "CertificateExist": "Sertifikāts ar tādu pašu darbības tipu jau pastāv",
   "CustomEntryButton": "Pielāgots pieteikšanās pogas paraksts",
-  "CustomEntryTooltip": "Apraksts pogai, ko izmanto, lai pieteiktos telpā, izmantojot vienotās pierakstīšanās pakalpojumu",
   "DownloadMetadataXML": "Lejupielādēt SP metadatu XML",
   "Encryption": "Šifrēšana",
   "GenerateCertificate": "Ģenerēt jaunu pašparakstītu sertifikātu",
@@ -50,10 +49,8 @@
   "spSignResponseRequest": "Izrakstīšanās atbilžu parakstīšana",
   "SPSingleLogoutURL": "SP vienas atteikšanās vietrādis URL (atbalsta POST un novirzīšanas saistīšanu):",
   "SPSingleLogoutURLTooltip": "URL, kas tiek izmantots vienotajai iziet no sistēmas (logout) procedūrai identitātes nodrošinātāja pusē",
-  "SsoIntro": "Vienotās pierakstīšanās sadaļa ļauj iespējot/atspējot trešās puses autentifikāciju, izmantojot SAML, tādējādi nodrošinot lietotājiem ātrāku, vieglāku un drošāku piekļuvi telpai.",
   "StandardDecryptionAlgorithm": "Noklusējuma atšifrēšanas algoritms",
   "TurnOnSSO": "Iespējot vienotās pierakstīšanās autentifikāciju",
-  "TurnOnSSOCaption": "Iespējot šo opciju, ja vēlaties automātiski pievienot lietotājus no SSO pakalpojuma jūsu telpai.",
   "UploadXML": "Ielādēt metadatus no XML, lai automātiski aizpildītu nepieciešamos laukus.",
   "UploadXMLPlaceholder": "IdP metadatu XML URL",
   "UsedFor": "Izmanto priekšmetam"

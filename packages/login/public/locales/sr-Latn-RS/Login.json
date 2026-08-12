@@ -11,7 +11,6 @@
   "PasswordRecoveryTitle": "Oporavak lozinke",
   "RecoverAccess": "Obnovi pristup",
   "RecoverContactEmailPlaceholder": "Kontakt email",
-  "RecoverTextBody": "Ako ne možete da se prijavite sa svojim postojećim nalogom ili želite da se registrujete kao novi korisnik, kontaktirajte administratora portala.",
   "Register": "Registrujte se",
   "RegisterTextBodyAfterDomainsList": "Da biste se registrovali, unesite svoju email adresu i kliknite na Pošalji zahtev. Poruka sa linkom za aktivaciju vašeg naloga biće poslata na navedenu adresu.",
   "RegisterTextBodyBeforeDomainsList": "Registracija je dostupna korisnicima sa email nalogom na",

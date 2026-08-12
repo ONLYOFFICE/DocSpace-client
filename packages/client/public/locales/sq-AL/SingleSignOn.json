@@ -6,7 +6,6 @@
   "Binding": "Lidhja:",
   "CertificateExist": "Certifikata me të njëjtin lloj veprimi ekziston tashmë",
   "CustomEntryButton": "Teksti i personalizuar i butonit të hyrjes",
-  "CustomEntryTooltip": "Përshkrimi për butonin e përdorur për t'u identifikuar në hapësirën me shërbimin Single Sign-On",
   "DownloadMetadataXML": "Shkarkoni të dhënat meta të SP XML",
   "Encryption": "Enkriptimi",
   "GenerateCertificate": "Gjeneroni një certifikatë të re të vetë-nënshkruar",
@@ -50,10 +49,8 @@
   "spSignResponseRequest": "Nënshkrimi i përgjigjeve të daljes",
   "SPSingleLogoutURL": "URL e Single Logout të SP (mbështet lidhjen POST dhe Redirect):",
   "SPSingleLogoutURLTooltip": "URL-ja e përdorur për daljen e vetme në anën e ofruesit të identitetit",
-  "SsoIntro": "Seksioni Single Sign-On ju lejon të aktivizoni/çaktivizoni vërtetimin e palëve të treta duke përdorur SAML, duke ofruar kështu një mënyrë më të shpejtë, më të lehtë dhe më të sigurt për të hyrë në hapësirë ​​për përdoruesit.",
   "StandardDecryptionAlgorithm": "Algoritmi i parazgjedhur i dekriptimit",
   "TurnOnSSO": "Aktivizoni Autentifikimin me Single Sign-on",
-  "TurnOnSSOCaption": "Aktivizoni këtë opsion nëse dëshironi të shtoni automatikisht përdorues nga shërbimi SSO në hapësirën tuaj.",
   "UploadXML": "Ngarkoni meta të dhënat nga XML për të plotësuar automatikisht fushat e kërkuara.",
   "UploadXMLPlaceholder": "URL-ja e XML të metadatas së IdP",
   "UsedFor": "Përdorni për"

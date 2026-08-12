@@ -125,7 +125,6 @@
   "TabPlugins": "Tab Plugins",
   "TotalSizeMustBeGreater": "Tổng kích thước tải lên phải lớn hơn hoặc bằng giới hạn kích thước cho mỗi tệp.",
   "UploaderDescription": "Nhúng một trình tải lên để cho phép người dùng tải tệp lên thư mục đã chọn.",
-  "UploaderPresetInfo": "Nhúng trình tải lên để người dùng có thể tải tài liệu lên không cần đăng ký vào không gian của bạn. Chọn các loại tệp được phép tải lên.",
   "UploadFilesDescription": "Người dùng có thể tải lên các tệp riêng lẻ.",
   "UploadFoldersDescription": "Người dùng có thể tải lên toàn bộ thư mục cùng cấu trúc của nó.",
   "UploadLimits": "Giới hạn tải lên",

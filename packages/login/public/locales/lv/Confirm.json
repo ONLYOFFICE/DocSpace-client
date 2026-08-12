@@ -33,7 +33,6 @@
   "SetAppButton": "Savienot lietotni",
   "SignUp": "Reģistrēties",
   "SuccessDeactivate": "Jūsu konts ir veiksmīgi deaktivizēts. Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>vietni</1>.",
-  "SuccessReactivate": "Jūsu konts ir veiksmīgi atkārtoti aktivizēts. Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>portālu</1>.",
   "SuccessRemoved": "Jūsu konts ir veiksmīgi noņemts. Jūs tiksiet novirzīts uz <1>vietni</1> pēc 10 sekundēm.",
   "TermsAndConditions": "Turpinot jūs saprotat un piekrītat mūsu <1>Noteikumiem un nosacījumiem</1> un <2>Paziņojumam par konfidencialitāti </2>.",
   "TfaSubTitle": "Sekojiet vienkāršiem soļiem, lai turpinātu darbu šajā {{productName}}:",

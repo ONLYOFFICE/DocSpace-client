@@ -12,7 +12,6 @@
   "TourPlacesShared": "{{sectionName}} — başkalarının sizinle paylaştığı dosyalar.",
   "TourPlacesTitle": "Her şey yerli yerinde",
   "TourPlacesTrash": "{{sectionName}} — hâlâ geri getirebileceğiniz silinmiş dosyalar.",
-  "TourShare": "Hızlı eylemleri görmek için herhangi bir dosyanın üzerine gelin. Portal kişilerinize farklı izin düzeyleriyle erişim vermek için paylaşım simgesine tıklayın — ya da diğer herkes için harici bir bağlantı oluşturun.",
   "TourSharedAccess": "{{sharedBy}} dosyanın kimden geldiğini, {{accessLevel}} ise onunla ne yapabileceğinizi söyler — görüntüleme, yorumlama veya düzenleme. Bunu yalnızca sahibi değiştirebilir.",
   "TourSharedAccessTitle": "Kim paylaştı ve neler yapabilirsiniz",
   "TourSharedEmpty": "Sizinle henüz hiçbir şey paylaşılmadı. Biri size erişim verdiği anda dosyalar ve klasörler burada görünecek.",

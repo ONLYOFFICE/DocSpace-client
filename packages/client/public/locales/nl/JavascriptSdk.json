@@ -125,7 +125,6 @@
   "TabPlugins": "Tabblad Plug-ins",
   "TotalSizeMustBeGreater": "De totale uploadgrootte moet groter dan of gelijk zijn aan de limiet per bestand.",
   "UploaderDescription": "Integreer een uploader om gebruikers in staat te stellen bestanden naar de geselecteerde map te uploaden.",
-  "UploaderPresetInfo": "Integreer de uploader zodat gebruikers documenten in uw ruimte kunnen uploaden zonder registratie. Kies de toegestane bestandstypen voor upload.",
   "UploadFilesDescription": "Gebruikers kunnen individuele bestanden uploaden.",
   "UploadFoldersDescription": "Gebruikers kunnen hele mappen met hun structuur uploaden.",
   "UploadLimits": "Uploadlimieten",

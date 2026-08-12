@@ -27,7 +27,7 @@
   "NotifyUsers": "Notify users that the workspace will be unavailable",
   "PortalDeleted": "{{productName}} permanently deleted",
   "PortalName": "{{productName}} name",
-  "PortalStats": "Rooms: {{roomCount}} | Users: {{userCount}} | Storage workspace used: {{storageSpace}}",
+  "PortalStats": "Rooms: {{roomCount}} | Users: {{userCount}} | Storage space used: {{storageSpace}}",
   "RestrictAccess": "Restrict access to managing workspaces",
   "SettingsDisabled": "These settings will be available once the second workspace is created and applied to all your workspaces.",
   "SettingsForAll": "These settings will be effective for all of your workspaces.",

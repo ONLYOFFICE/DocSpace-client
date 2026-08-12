@@ -125,7 +125,6 @@
   "TabPlugins": "Laajennukset-välilehti",
   "TotalSizeMustBeGreater": "Kokonaislatauskoko on oltava suurempi tai yhtä suuri kuin yksittäistiedoston kokoraja.",
   "UploaderDescription": "Upota lataaja mahdollistamaan käyttäjille tiedostojen lataaminen valittuun kansioon.",
-  "UploaderPresetInfo": "Upota lataaja siten, että käyttäjät voivat ladata asiakirjoja tilaasi ilman rekisteröitymistä. Valitse sallitut tiedostotyypit latausta varten.",
   "UploadFilesDescription": "Käyttäjät voivat ladata yksittäisiä tiedostoja.",
   "UploadFoldersDescription": "Käyttäjät voivat ladata kokonaisia kansioita niiden rakenteellaan.",
   "UploadLimits": "Latausrajoitukset",

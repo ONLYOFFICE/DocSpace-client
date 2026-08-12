@@ -33,7 +33,6 @@
   "SetAppButton": "Uygulamaya bağlan",
   "SignUp": "Kaydol",
   "SuccessDeactivate": "Hesabınız başarıyla devre dışı bırakıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz",
-  "SuccessReactivate": "Hesabınız başarıyla yeniden etkinleştirildi. 10 saniye içinde <1>portal</1>'a yönlendirileceksiniz.",
   "SuccessRemoved": "Hesabınız başarıyla kaldırıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz.",
   "TermsAndConditions": "Devam ederek, <1>Şartlar ve koşullar</1> ve <2>Gizlilik bildirimimizi</2> anlıyor ve kabul ediyor olduğunuzu beyan etmiş olursunuz.",
   "TfaSubTitle": "Bu {{productName}}'de çalışmaya devam etmek için basit adımları izleyin:",

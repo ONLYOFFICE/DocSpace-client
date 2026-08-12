@@ -125,7 +125,6 @@
   "TabPlugins": "「プラグイン」タブ",
   "TotalSizeMustBeGreater": "アップロードの合計サイズは、ファイルごとのサイズ制限以上である必要があります。",
   "UploaderDescription": "選択したフォルダーにファイルをアップロードできるようにアップローダーを埋め込みます。",
-  "UploaderPresetInfo": "ユーザーが登録なしでスペースにドキュメントをアップロードできるように、アップローダーを埋め込んでください。アップロードを許可するファイルタイプを選択してください。",
   "UploadFilesDescription": "ユーザーは個別のファイルをアップロードできます。",
   "UploadFoldersDescription": "ユーザーはフォルダ全体とその構造をアップロードできます。",
   "UploadLimits": "アップロード制限",

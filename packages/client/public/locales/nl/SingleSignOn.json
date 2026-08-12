@@ -6,7 +6,6 @@
   "Binding": "Binding:",
   "CertificateExist": "Certificaat met hetzelfde actietype bestaat al",
   "CustomEntryButton": "Aangepaste aanmeldingsknop bijschrift",
-  "CustomEntryTooltip": "Het bijschrift voor de knop die wordt gebruikt om in te loggen in de ruimte met de Single Sign-On dienst",
   "DownloadMetadataXML": "Download SP metadata XML",
   "Encryption": "Versleuteling",
   "GenerateCertificate": "Nieuw Zelfondertekend Certificaat Genereren",
@@ -50,10 +49,8 @@
   "spSignResponseRequest": "Ondertekenen van uitlogreacties",
   "SPSingleLogoutURL": "SP Single Logout URL (ondersteunt POST en Redirect binding):",
   "SPSingleLogoutURLTooltip": "De URL die wordt gebruikt voor het eenmalig uitloggen aan de kant van de Identity provider",
-  "SsoIntro": "In het onderdeel Single Sign-On kunt u de verificatie door derden met behulp van SAML in- en uitschakelen, zodat gebruikers sneller, gemakkelijker en veiliger toegang krijgen tot de ruimte.",
   "StandardDecryptionAlgorithm": "Standaard Ontcijferen Algoritme",
   "TurnOnSSO": "Single Sign-on Verificatie inschakelen",
-  "TurnOnSSOCaption": "Schakel deze optie in als u gebruikers van de SSO-service automatisch wilt toevoegen aan uw ruimte.",
   "UploadXML": "Metagegevens uit XML laden om de vereiste velden automatisch te vullen.",
   "UploadXMLPlaceholder": "URL naar IdP Metadata XML",
   "UsedFor": "Gebruik voor"

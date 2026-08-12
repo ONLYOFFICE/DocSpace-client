@@ -12,7 +12,6 @@
   "TourPlacesShared": "{{sectionName}} — arquivos que outras pessoas compartilharam com você.",
   "TourPlacesTitle": "Cada coisa em seu lugar",
   "TourPlacesTrash": "{{sectionName}} — arquivos excluídos que você ainda pode restaurar.",
-  "TourShare": "Passe o cursor sobre qualquer arquivo para ver as ações rápidas. Clique no ícone de compartilhamento para conceder acesso aos contatos do seu portal com diferentes níveis de permissão — ou crie um link externo para qualquer outra pessoa.",
   "TourSharedAccess": "{{sharedBy}} indica de quem veio o arquivo, {{accessLevel}} indica o que você pode fazer com ele — visualizar, comentar ou editar. Só o proprietário pode alterar isso.",
   "TourSharedAccessTitle": "Quem compartilhou e o que você pode fazer",
   "TourSharedEmpty": "Nada foi compartilhado com você ainda. Arquivos e pastas aparecerão aqui assim que alguém lhe der acesso a eles.",

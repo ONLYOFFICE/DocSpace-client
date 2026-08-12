@@ -153,6 +153,9 @@ type TCreateEventPayload = {
   openEditor?: boolean;
   edit?: boolean;
   isFormsCreate?: boolean;
+  // ROOM_CREATE only: opens the create-room dialog on this preset type and
+  // locks the type chooser (read by GlobalEvents / CreateRoomEvent).
+  startRoomType?: RoomsType;
 };
 
 // the still-.js GlobalEvents component reads these extra

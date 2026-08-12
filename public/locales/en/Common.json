@@ -138,6 +138,7 @@
   "AIPaywallCallbackErrorHint": "Your card was saved, but we couldn't top up your AI balance. You can retry from AI services.",
   "AIPaywallCallbackGoToBilling": "Go to AI services",
   "AIPaywallCallbackKeepOpen": "Please keep this tab open until the process completes.",
+  "AIPaywallCallbackActivated": "AI features activated",
   "AIPaywallCallbackProcessing": "Setting up your AI balance",
   "AIPaywallCallbackProcessingFooter": "Secure transaction powered by Stripe.",
   "AIPaywallCallbackProcessingHint": "We're loading credits and activating AI features. This usually takes a few seconds.",

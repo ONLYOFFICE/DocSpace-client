@@ -1,13 +1,13 @@
 {
   "key_path": "FormsPlacesTrash",
-  "content": "{{trash}} — deleted workspaces, restorable until you empty it.",
-  "content_en_sha1_hash": "22dba6fc97c2fcd2843a5824254c5970f64cb98c",
-  "created_at": "2026-08-12T11:00:47.967Z",
-  "updated_at": "2026-08-12T11:42:25.099Z",
+  "content": "{{trash}} — deleted form spaces, restorable until you empty it.",
+  "content_en_sha1_hash": "f2a33191646c7e05c46142667153af2bcfa73616",
+  "created_at": "2026-08-12T15:15:03.308Z",
+  "updated_at": "2026-08-12T15:21:08.616Z",
   "comment": {
-    "text": "A descriptive text within a guided tour step explaining workspace recovery; {{trash}} is replaced by the name of the trash section.",
+    "text": "Instructional text in a guided tour step describing the Trash section's functionality, where {{trash}} represents the name of the trash area.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:42:25.099Z",
+    "updated_at": "2026-08-12T15:21:08.616Z",
     "model": "gemma4:26b"
   },
   "usage": [

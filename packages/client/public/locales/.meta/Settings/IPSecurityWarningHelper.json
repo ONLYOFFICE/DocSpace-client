@@ -1,13 +1,13 @@
 {
   "key_path": "IPSecurityWarningHelper",
-  "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your space access will be blocked right after you save the settings. The workspace owner will have the space access from any IP address.",
-  "content_en_sha1_hash": "e1644927aa8b66a9c53844a5916f77a478e42cbf",
-  "created_at": "2026-08-12T11:00:46.034Z",
-  "updated_at": "2026-08-12T12:12:52.750Z",
+  "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your workspace access will be blocked right after you save the settings. The workspace owner will have the space access from any IP address.",
+  "content_en_sha1_hash": "f213496521a1f3e7dad787d9cd1c957ae4c6e31b",
+  "created_at": "2026-08-12T15:15:00.882Z",
+  "updated_at": "2026-08-12T15:26:50.787Z",
   "comment": {
-    "text": "Informational warning text in the IP security settings section that explains the risk of losing access if the user's current IP or range is not correctly configured.",
+    "text": "Warning text in the IP security configuration section that alerts users to the risk of losing workspace access if they save restrictions without including their current IP or range.",
     "is_auto": true,
-    "updated_at": "2026-08-12T12:12:52.750Z",
+    "updated_at": "2026-08-12T15:26:50.787Z",
     "model": "gemma4:26b"
   },
   "usage": [

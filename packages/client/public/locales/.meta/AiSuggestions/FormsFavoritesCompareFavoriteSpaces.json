@@ -1,13 +1,13 @@
 {
   "key_path": "FormsFavoritesCompareFavoriteSpaces",
-  "content": "Compare favorite workspaces",
-  "content_en_sha1_hash": "1b38d10f7d38933803d0556ac0d356ba9a23ee24",
-  "created_at": "2026-08-12T11:00:49.844Z",
-  "updated_at": "2026-08-12T11:28:12.739Z",
+  "content": "Compare favorite Form Spaces",
+  "content_en_sha1_hash": "a3a2d8fa6ff41911afde071e65df9ceaf28643e2",
+  "created_at": "2026-08-12T15:15:05.660Z",
+  "updated_at": "2026-08-12T15:19:45.564Z",
   "comment": {
-    "text": "Label for an AI suggestion option that initiates a comparison between the user's favorite workspaces.",
+    "text": "Label for an AI suggestion option that initiates a comparison between selected favorite Form Spaces.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:28:12.739Z",
+    "updated_at": "2026-08-12T15:19:45.564Z",
     "model": "gemma4:26b"
   },
   "usage": [

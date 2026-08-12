@@ -1,13 +1,13 @@
 {
   "key_path": "PortalDeactivationHelper",
-  "content": "If you wish to deactivate this {{productName}}, your space and all information associated with it will be blocked so that no one has access to it for a particular period. To do that, click the Deactivate button. A link to confirm the operation will be sent to the email address of the workspace owner.\nIn case you want to come back to the space and continue using it, you will need to use the second link provided in the confirmation email. So, please, keep this email in a safe place.",
-  "content_en_sha1_hash": "b750aa0066bc21c0f80dc5cbca15cc97b65f7c0d",
-  "created_at": "2026-08-12T11:00:46.191Z",
-  "updated_at": "2026-08-12T12:08:22.323Z",
+  "content": "If you wish to deactivate this {{productName}}, your workspace and all information associated with it will be blocked so that no one has access to it for a particular period. To do that, click the Deactivate button. A link to confirm the operation will be sent to the email address of the workspace owner.\nIn case you want to come back to the space and continue using it, you will need to use the second link provided in the confirmation email. So, please, keep this email in a safe place.",
+  "content_en_sha1_hash": "5769d01564b47d895c6cc51dbece22d5451ddfe9",
+  "created_at": "2026-08-12T15:15:01.086Z",
+  "updated_at": "2026-08-12T15:24:55.764Z",
   "comment": {
-    "text": "Informational helper text in the Portal Settings explaining the consequences and procedure for deactivating the portal; includes a {{productName}} variable representing the product's brand name.",
+    "text": "Instructional helper text in the portal deactivation settings explaining the consequences of deactivation and the reactivation process; includes a {{productName}} variable.",
     "is_auto": true,
-    "updated_at": "2026-08-12T12:08:22.323Z",
+    "updated_at": "2026-08-12T15:24:55.764Z",
     "model": "gemma4:26b"
   },
   "usage": [

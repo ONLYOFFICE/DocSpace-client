@@ -1,13 +1,13 @@
 {
   "key_path": "LanguageAndTimeZoneSettingsNavDescription",
-  "content": "Language and Time Zone Settings is a way to change the language of the whole workspace for all workspace users and to configure the time zone so that all the events of the portal will be shown with the correct date and time.",
-  "content_en_sha1_hash": "f22164c974d928f1234f1004ef72d3b2630188e7",
-  "created_at": "2026-08-12T11:00:46.046Z",
-  "updated_at": "2026-08-12T12:11:01.980Z",
+  "content": "Language and Time Zone Settings is a way to change the language of the whole workspace for all workspace users and to configure the time zone so that all the events of the workspace will be shown with the correct date and time.",
+  "content_en_sha1_hash": "097836047a1dd8571dc7da9707a590521f2c38a1",
+  "created_at": "2026-08-12T15:15:00.897Z",
+  "updated_at": "2026-08-12T15:26:19.792Z",
   "comment": {
-    "text": "Subtitle for a navigation item in the customization navbar, describing the purpose of the language and time zone settings section.",
+    "text": "Subtitle for a navigation category item that describes the purpose of the Language and Time Zone settings section.",
     "is_auto": true,
-    "updated_at": "2026-08-12T12:11:01.980Z",
+    "updated_at": "2026-08-12T15:26:19.792Z",
     "model": "gemma4:26b"
   },
   "usage": [

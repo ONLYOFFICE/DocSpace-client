@@ -1,13 +1,13 @@
 {
   "key_path": "FormsFavoritesSummarizeFavoriteSpaces",
-  "content": "Summarize favorite workspaces",
-  "content_en_sha1_hash": "cc0b8223dd652eb3e2e2197f247ff005e420fbb5",
-  "created_at": "2026-08-12T11:00:49.869Z",
-  "updated_at": "2026-08-12T11:26:57.620Z",
+  "content": "Summarize favorite form spaces",
+  "content_en_sha1_hash": "b80e9cddf2e10c64ee5cba7ecfed18b5e76162f0",
+  "created_at": "2026-08-12T15:15:05.693Z",
+  "updated_at": "2026-08-12T15:18:32.102Z",
   "comment": {
-    "text": "Label for an AI suggestion option that triggers a summary of the user's favorite workspaces.",
+    "text": "Label for an AI suggestion option that triggers a summary of the user's favorite form spaces.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:26:57.620Z",
+    "updated_at": "2026-08-12T15:18:32.102Z",
     "model": "gemma4:26b"
   },
   "usage": [

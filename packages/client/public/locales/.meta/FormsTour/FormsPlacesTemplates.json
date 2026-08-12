@@ -1,13 +1,13 @@
 {
   "key_path": "FormsPlacesTemplates",
-  "content": "{{templates}} — the workspace templates you saved.",
-  "content_en_sha1_hash": "165d45dedf3b08ddc49565b7353e5f95021baf42",
-  "created_at": "2026-08-12T11:00:47.964Z",
-  "updated_at": "2026-08-12T11:42:52.882Z",
+  "content": "{{templates}} — the form space templates you saved.",
+  "content_en_sha1_hash": "74753c008497b423acc15708a50521a68cdd0efd",
+  "created_at": "2026-08-12T15:15:03.303Z",
+  "updated_at": "2026-08-12T15:21:41.607Z",
   "comment": {
-    "text": "A descriptive text within a guided tour step that explains the Templates section; includes a {{templates}} variable representing the label for templates.",
+    "text": "A descriptive text in an onboarding tour step explaining that the specified section contains saved form space templates, where {{templates}} represents the section label.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:42:52.882Z",
+    "updated_at": "2026-08-12T15:21:41.607Z",
     "model": "gemma4:26b"
   },
   "usage": [

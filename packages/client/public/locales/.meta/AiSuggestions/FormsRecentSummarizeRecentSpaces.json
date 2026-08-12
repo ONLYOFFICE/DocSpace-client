@@ -1,13 +1,13 @@
 {
   "key_path": "FormsRecentSummarizeRecentSpaces",
-  "content": "Summarize recent workspaces",
-  "content_en_sha1_hash": "7d89805c60b9ba87aebb52f911c7ed302a2674a8",
-  "created_at": "2026-08-12T11:00:50.025Z",
-  "updated_at": "2026-08-12T11:26:25.740Z",
+  "content": "Summarize recent form spaces",
+  "content_en_sha1_hash": "d743331400fc52075edb3f1cd66742725a7b1747",
+  "created_at": "2026-08-12T15:15:05.889Z",
+  "updated_at": "2026-08-12T15:17:23.373Z",
   "comment": {
-    "text": "Button label for an AI suggestion that triggers a summary of recently accessed workspaces.",
+    "text": "Action label for an AI suggestion that triggers a summary of the most recently accessed form spaces.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:26:25.740Z",
+    "updated_at": "2026-08-12T15:17:23.373Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -1,13 +1,13 @@
 {
   "key_path": "DashboardDevTools",
-  "content": "Building something of your own? Everything here is for that: an API to drive the portal from your code, an SDK to embed the editors in your own app, plugins, webhooks and keys. Nothing you need to touch to use {{productName}} day to day.",
-  "content_en_sha1_hash": "df0854c46f2f5a056e1eb4a9ce82e88fa0fe5ab6",
-  "created_at": "2026-08-12T11:00:49.065Z",
-  "updated_at": "2026-08-12T11:33:06.970Z",
+  "content": "Building something of your own? Everything here is for that: an API to drive the workspace from your code, an SDK to embed the editors in your own app, plugins, webhooks and keys. Nothing you need to touch to use {{productName}} day to day.",
+  "content_en_sha1_hash": "5d8fd0a6c37231126d95cd3abfebfc23c4c9f6e8",
+  "created_at": "2026-08-12T15:15:04.755Z",
+  "updated_at": "2026-08-12T15:20:36.643Z",
   "comment": {
-    "text": "Description for a step in the dashboard onboarding tour that explains the Developer Tools section; includes the {{productName}} variable.",
+    "text": "A description for a step in the dashboard onboarding tour explaining the purpose of Developer Tools; includes a {{productName}} variable representing the brand name.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:33:06.970Z",
+    "updated_at": "2026-08-12T15:20:36.643Z",
     "model": "gemma4:26b"
   },
   "usage": [

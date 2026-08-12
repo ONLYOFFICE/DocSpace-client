@@ -1,13 +1,13 @@
 {
   "key_path": "FormsTemplatesCreateASpaceFromATemplate",
-  "content": "Create a workspace from a template",
-  "content_en_sha1_hash": "bb6803c208280c7383cdef9b9f9333c693acce6e",
-  "created_at": "2026-08-12T11:00:50.058Z",
-  "updated_at": "2026-08-12T11:26:06.891Z",
+  "content": "Create a form space from a template",
+  "content_en_sha1_hash": "cbabb1f78c56826ba06d52ddd9290a0dc020e241",
+  "created_at": "2026-08-12T15:15:05.933Z",
+  "updated_at": "2026-08-12T15:16:31.427Z",
   "comment": {
-    "text": "Label for an AI-suggested action that allows users to initiate workspace creation using a template.",
+    "text": "Label for an AI suggestion option that describes the action of creating a new form space using a template.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:26:06.891Z",
+    "updated_at": "2026-08-12T15:16:31.427Z",
     "model": "gemma4:26b"
   },
   "usage": [

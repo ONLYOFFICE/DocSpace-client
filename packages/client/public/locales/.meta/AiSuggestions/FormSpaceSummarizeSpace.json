@@ -1,13 +1,13 @@
 {
   "key_path": "FormSpaceSummarizeSpace",
-  "content": "Summarize workspace",
-  "content_en_sha1_hash": "519e75101153529f1251d521c25b02d236bb04f7",
-  "created_at": "2026-08-12T11:00:50.000Z",
-  "updated_at": "2026-08-12T11:28:30.500Z",
+  "content": "Summarize Form Space",
+  "content_en_sha1_hash": "04daf493bf22f499648369f7b1915f7505270f4c",
+  "created_at": "2026-08-12T15:15:05.858Z",
+  "updated_at": "2026-08-12T15:20:06.405Z",
   "comment": {
-    "text": "Button label within the AI suggestions menu that triggers a workspace summarization process.",
+    "text": "Label for an AI suggestion option used to initiate the summarization of a Form Space.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:28:30.500Z",
+    "updated_at": "2026-08-12T15:20:06.405Z",
     "model": "gemma4:26b"
   },
   "usage": [

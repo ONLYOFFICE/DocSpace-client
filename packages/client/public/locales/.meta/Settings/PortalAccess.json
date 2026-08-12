@@ -1,13 +1,13 @@
 {
   "key_path": "PortalAccess",
-  "content": "The workspace access",
-  "content_en_sha1_hash": "2fb2cf9dbcf17f79e3f7239b09289bcd28bbe503",
-  "created_at": "2026-08-12T11:00:46.175Z",
-  "updated_at": "2026-08-12T12:09:27.211Z",
+  "content": "Workspace access",
+  "content_en_sha1_hash": "9973694cce2b5a0e8e3cf2806b4042c6deb1332b",
+  "created_at": "2026-08-12T15:15:01.066Z",
+  "updated_at": "2026-08-12T15:25:59.877Z",
   "comment": {
-    "text": "Browser tab title and navigation menu label for the security settings section, including a variable for the product name.",
+    "text": "Page title and navigation label within the security settings that identifies the section for managing workspace access permissions.",
     "is_auto": true,
-    "updated_at": "2026-08-12T12:09:27.211Z",
+    "updated_at": "2026-08-12T15:25:59.877Z",
     "model": "gemma4:26b"
   },
   "usage": [

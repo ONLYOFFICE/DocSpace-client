@@ -1,13 +1,13 @@
 {
   "key_path": "FormsFavoritesCreateASimilarSpacePrompt",
-  "content": "Create a new Form Space based on the structure and settings of the selected favorite workspace. If this information is not provided, ask me for the space name, collection goal, forms, participants, and deadline.",
-  "content_en_sha1_hash": "03c87a1736bcba4479cbeb0bde604ebf332ef211",
-  "created_at": "2026-08-12T11:00:49.857Z",
-  "updated_at": "2026-08-12T11:27:29.498Z",
+  "content": "Create a new Form Space based on the structure and settings of the selected favorite space. If this information is not provided, ask me for the space name, collection goal, forms, participants, and deadline.",
+  "content_en_sha1_hash": "a61bbd77ad7ad350bafff7c9cf5271891f3b2fe4",
+  "created_at": "2026-08-12T15:15:05.677Z",
+  "updated_at": "2026-08-12T15:19:02.369Z",
   "comment": {
-    "text": "AI instruction prompt that directs the assistant to replicate a Form Space from a favorite workspace and specifies which details to request if they are missing.",
+    "text": "AI prompt instructing the assistant to replicate a Form Space's structure and settings from a selected favorite space, including instructions on what information to request if details are missing.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:27:29.498Z",
+    "updated_at": "2026-08-12T15:19:02.369Z",
     "model": "gemma4:26b"
   },
   "usage": [

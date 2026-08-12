@@ -33,14 +33,35 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/variables/colors";
+import { describe, it, expect } from "vitest";
 
-.aiIcon {
-  path {
-    fill: #{colors.$light-blue-main} !important;
-  }
-}
+import type { TFile } from "@docspace/shared/api/files/types";
 
-.text {
-  margin-block: 2px;
-}
+import DialogsStore from "../DialogsStore";
+
+const createStore = () =>
+  new DialogsStore(
+    {} as never,
+    {} as never,
+    {} as never,
+    {} as never,
+    {} as never,
+    {} as never,
+  );
+
+describe("DialogsStore — Ask AI request", () => {
+  it("consumeAskAIFile returns the requested file once and then null", () => {
+    const store = createStore();
+    const file = { id: 1, title: "doc.docx" } as TFile;
+
+    expect(store.askAIFile).toBeNull();
+
+    store.setAskAIFile(file);
+    // MobX wraps the stored object in an observable proxy, so compare by value.
+    expect(store.askAIFile).toEqual(file);
+
+    expect(store.consumeAskAIFile()).toEqual(file);
+    expect(store.askAIFile).toBeNull();
+    expect(store.consumeAskAIFile()).toBeNull();
+  });
+});

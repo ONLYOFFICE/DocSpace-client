@@ -432,10 +432,10 @@ class DialogsStore {
     onClose: null,
   };
 
-  aiAgentSelectorDialogProps: { visible: boolean; file: Nullable<TFile> } = {
-    visible: false,
-    file: null,
-  };
+  // File waiting to be attached to the AI chat composer ("Ask AI"). The
+  // attaching itself needs React hooks from the ai-chat providers, so the
+  // store only records the request and AskAIChatBridge consumes it.
+  askAIFile: Nullable<TFile> = null;
 
   newFilesPanelFolderId: Nullable<number | string> = null;
 
@@ -555,15 +555,17 @@ class DialogsStore {
     this.newFilesPanelFolderId = folderId;
   };
 
-  setAiAgentSelectorDialogProps = (
-    visible: boolean,
-    file?: Nullable<TFile>,
-  ) => {
-    this.aiAgentSelectorDialogProps = {
-      visible,
-      file:
-        file === null ? null : (file ?? this.aiAgentSelectorDialogProps.file),
-    };
+  setAskAIFile = (file: Nullable<TFile>) => {
+    this.askAIFile = file;
+  };
+
+  // Read-and-clear: the same file can be asked about twice in a row (the
+  // observable has to change back to null in between), and a double-invoked
+  // effect must attach only once.
+  consumeAskAIFile = () => {
+    const file = this.askAIFile;
+    this.askAIFile = null;
+    return file;
   };
 
   setEditRoomDialogProps = (props: TEditRoomDialogProps) => {

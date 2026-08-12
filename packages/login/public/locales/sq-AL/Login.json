@@ -19,6 +19,5 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Jetëgjatësia e parazgjedhur e sesionit është 20 minuta. Kontrolloni këtë opsion për ta vendosur atë në 1 vit. Për të vendosur vlerën tuaj, shkoni te Cilësimet.",
   "SignInLDAP": "Identifikohuni në: {{ldap_domain}}",
-  "SignInLdapHelper": "Përdorni kredencialet për domenin e korporatës",
-  "UserIsAlreadyRegistered": "Përdoruesi <1>{{email}}</1> është regjistruar tashmë në këtë {{productName}}, fut fjalëkalimin tënd ose kthehu për të vazhduar me një email tjetër."
+  "SignInLdapHelper": "Përdorni kredencialet për domenin e korporatës"
 }

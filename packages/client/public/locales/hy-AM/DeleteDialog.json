@@ -1,5 +1,4 @@
 {
-  "DeleteAllGroupDescription": "Ընտրված խմբերը կջնջվեն: Խմբերի օգտատերերը չեն հեռացվի {{productName}}-ից: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "DeleteAllGroupsTitle": "Ջնջել խմբերը",
   "DeleteFiles": "Դուք պատրաստվում եք տեղափոխել <strong>ֆայլեր ({{filesCount}})</strong> {{trashSection}}։",
   "DeleteFilesAndFolders": "Դուք պատրաստվում եք ջնջել <strong>ֆայլեր ({{filesCount}})</strong> և <strong>պանակներ ({{foldersCount}})</strong> {{trashSection}}",
@@ -7,7 +6,6 @@
   "DeleteFilesForever": "Դուք պատրաստվում եք ջնջել <strong>ֆայլերը ({{filesCount}})</strong>:",
   "DeleteFolders": "Դուք պատրաստվում եք տեղափոխել <strong>պանակներ ({{foldersCount}})</strong> {{trashSection}}:",
   "DeleteFoldersForever": "Դուք պատրաստվում եք ջնջել <strong>թղթապանակներ ({{foldersCount}})</strong>:",
-  "DeleteGroupDescription": "{{groupName}} խումբը կջնջվի: Խմբի օգտատերերը չեն հեռացվի {{productName}}-ից: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "DeleteGroupTitle": "Ջնջել խմբերը",
   "DeleteItem": "Դուք պատրաստվում եք տեղափոխել <strong>{{name}}</strong> {{trashSection}}։",
   "DeleteItemForeverConfirm": "Դուք պատրաստվում եք ջնջել <strong>{{name}}</strong>-ը։",

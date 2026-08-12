@@ -4,7 +4,6 @@
   "ConfigurationDescription": "Musíte pripojiť svoju doménu k aktuálnej IP adrese, aby ste mohli zmeniť nastavenia adresy. Uistite sa, že máte prístup k nastaveniam domény, aby ste mali možnosť to urobiť. Po pripojení domény vytvorte názov {{productName}}. Vytvorený názov {{productName}} môžete neskôr zmeniť pomocou nastavení priestoru.",
   "ConfigurationHeader": "Aktuálna konfigurácia priestoru",
   "CreateSpaceDescription": "Úspešne ste pripojili doménu k vašej IP adrese. Ak chcete upraviť nastavenia adresy priestoru, musíte nastaviť budúce meno {{productName}}",
-  "CreatingPortal": "Vytvorenie nového priestoru {{productName}}",
   "CurrentSpace": "Aktuálny priestor",
   "DecryptStorage": "Dešifrovať úložisko",
   "DecryptWarningDialogContent": "Počas procesu dešifrovania sa všetky priestory stanú nedostupnými. Ste si istí, že chcete pokračovať?",

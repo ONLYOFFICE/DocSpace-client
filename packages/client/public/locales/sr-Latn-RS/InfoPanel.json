@@ -16,8 +16,6 @@
   "FormRoomAIModalDescription": "Povežite bazu podataka da biste analizirali sve prikupljene odgovore pomoću \"Pitaj AI\". Možete nastaviti bez nje i postavljati pitanja samo o ovom obrascu.",
   "FormRoomAIModalTitle": "Dobijte bolje uvide",
   "FormRoomAINotConnectedDescription": "Čuvajte odgovore kao strukturirane podatke. Omogućite sinhronizaciju baze podataka u podešavanjima sobe da biste otključali AI analizu pomoću \"Pitaj AI\".",
-  "FormRoomAIProviderNotConnected": "Povežite AI provajdera u podešavanjima {{productName}} da biste analizirali podatke obrazaca pomoću \"Pitaj AI\", pravili grafikone i otkrivali uvide.",
-  "FormRoomAIProviderNotConnectedAskAdmin": "Zamolite <1>{{productName}} administratora</1> da poveže i omogući AI provajdera u podešavanjima {{productName}} da biste analizirali podatke obrazaca pomoću \"Pitaj AI\", pravili grafikone i otkrivali uvide.",
   "FormRoomAIReadyDescriptionFile": "Zamolite AI da istraži odgovore iz ovog obrasca, generiše uvide i vizualizuje podatke.",
   "FormRoomAIReadyDescriptionFolder": "Odgovori iz obrazaca čuvaju se ovde u povezanoj bazi podataka. Da biste analizirali podatke pomoću AI, otvorite određeni obrazac i kliknite na \"Pitaj AI\".",
   "FormRoomAIReadyDescriptionRoom": "Analizirajte podatke pomoću \"Pitaj AI\", pravite grafikone i otkrivajte uvide. Izaberite obrazac i kliknite na \"Pitaj AI\" da biste započeli.",

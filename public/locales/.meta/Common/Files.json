@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-08-10T12:23:10.038Z",
+  "updated_at": "2026-08-12T14:02:21.241Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 622,
+      "line_number": 619,
       "context": "scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"ReportSaveLocation\", {\n sectionName: t(\"Files\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
       "module": "/libs/ui-kit"
     },
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
-      "line_number": 142,
+      "line_number": 152,
       "context": "// from an empty portal to something in it.\n elementStep(\n CREATE_SECTION_SELECTOR,\n t(\"DashboardTour:DashboardCreateTitle\"),\n t(\"DashboardTour:DashboardCreate\", {\n files: t(\"Common:Files\"),\n }),\n callbacks,\n LOG_LABEL,\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 105,
+      "line_number": 107,
       "context": "import type { AppPromoContentMap } from \"./AppPromoDialog.types\";\n \n export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({\n \"ai-files\": {\n title: t(\"Common:Files\"),\n subtitle: t(\"Common:FilesPromoSubtitle\"),\n description: t(\"Common:FilesPromoDescription\"),\n features: [\n {\n Icon: FilesManagementIcon,",
       "module": "/packages/client"
     },
@@ -139,8 +139,8 @@
     },
     {
       "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
-      "line_number": 55,
-      "context": "const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Common\"\n values={{ fileName, sectionName: t(\"Common:Files\") }}\n components={{\n 1: (\n <Link\n tag=\"a\"\n href={fileUrl}",
+      "line_number": 56,
+      "context": "showFileExportToast({\n url: fileUrl,\n openOnNewPage,\n t,\n fileName,\n sectionName: t(\"Common:Files\"),\n });\n };\n \n export const showSuccessCreateFolder = (\n t: TTranslation,",
       "module": "/packages/client"
     },
     {
@@ -379,20 +379,20 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 516,
+      "line_number": 517,
       "context": "styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n settingsFileSelector={settingsFileSelector}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 641,
+      "line_number": 643,
       "context": "\"backup-description module-documents\",\n { [styles.disabled]: additionalDisabled },\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n newPath={newPath}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/hooks/useUserStatisticsDialog.ts",
-      "line_number": 69,
-      "context": "t,\n texts: {\n // the endpoint answers with a URL only, so the report is named after\n // the dialog it was requested from\n fileName: t(\"Common:EditUserStatistics\"),\n sectionName: t(\"Common:Files\"),\n },\n });\n } catch (error) {\n toastr.error(error!);\n }",
+      "line_number": 73,
+      "context": "t,\n texts: {\n // the endpoint answers with a URL only, so the report is named after\n // the dialog it was requested from\n fileName: t(\"Common:EditUserStatistics\"),\n sectionName: t(\"Common:Files\"),\n },\n });\n } catch (error) {\n toastr.error(error!);\n } finally {",
       "module": "/packages/shared"
     },
     {

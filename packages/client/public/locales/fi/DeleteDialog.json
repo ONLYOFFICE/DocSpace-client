@@ -1,5 +1,4 @@
 {
-  "DeleteAllGroupDescription": "Valitut ryhmät poistetaan. Ryhmien käyttäjiä ei poisteta {{productName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteAllGroupsTitle": "Poista ryhmiä",
   "DeleteFiles": "Olet siirtämässä <strong>tiedostoja ({{filesCount}})</strong> {{trashSection}}-kohtaan.",
   "DeleteFilesAndFolders": "Olet aikeissa poistaa <strong>tiedostot ({{filesCount}})</strong> ja <strong>kansiot ({{foldersCount}})</strong> {{trashSection}}-osioon.",
@@ -7,7 +6,6 @@
   "DeleteFilesForever": "Olet aikeissa poistaa <strong>tiedostoja ({{filesCount}})</strong>.",
   "DeleteFolders": "Olet siirtämässä <strong>kansioita ({{foldersCount}})</strong> {{trashSection}}-kohtaan.",
   "DeleteFoldersForever": "Olet aikeissa poistaa <strong>kansioita ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "Ryhmä {{groupName}} poistetaan. Ryhmän käyttäjiä ei poisteta {{productName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteGroupTitle": "Poista ryhmä",
   "DeleteItem": "Olet siirtämässä <strong>{{name}}</strong>-kohtaa {{trashSection}}-osioon.",
   "DeleteItemForeverConfirm": "Olet aikeissa poistaa <strong>{{name}}</strong>.",

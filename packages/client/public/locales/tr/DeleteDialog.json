@@ -1,5 +1,4 @@
 {
-  "DeleteAllGroupDescription": "Seçilen gruplar silinecektir. Gruplardaki kullanıcılar {{productName}}'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
   "DeleteAllGroupsTitle": "Grupları sil",
   "DeleteFiles": "Taşımaya hazır oluyorsunuz <strong>dosyaları ({{filesCount}})</strong> {{trashSection}}'a.",
   "DeleteFilesAndFolders": "Silmek üzere olan <strong>dosyalar ({{filesCount}})</strong> ve <strong>klasörler ({{foldersCount}})</strong> {{trashSection}}'a gidecektir.",
@@ -7,7 +6,6 @@
   "DeleteFilesForever": "Silmek üzere olan <strong>dosyalar ({{filesCount}})</strong>.",
   "DeleteFolders": "Taşınmak üzere olan <strong>klasörler ({{foldersCount}})</strong> {{trashSection}}'e gidiyor.",
   "DeleteFoldersForever": "Silmek üzere olan <strong>klasörler ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "Grup {{groupName}} silinecektir. Gruptaki kullanıcılar {{productName}}'den kaldırılmayacaktır. Devam etmek istediğinizden emin misiniz?",
   "DeleteGroupTitle": "Grubu sil",
   "DeleteItem": "Şu anda <strong>{{name}}</strong>'ı {{trashSection}}'a taşıyorsunuz.",
   "DeleteItemForeverConfirm": "Silmek üzere olduğunuz öğe <strong>{{name}}</strong>.",

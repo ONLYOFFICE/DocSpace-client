@@ -1,6 +1,5 @@
 {
   "DeletePlugin": "Supprimer le module complémentaire",
-  "DeletePluginDescription": "Ce module complémentaire ne sera plus disponible pour les utilisateurs de {{productName}}. Etes-vous sûr de vouloir continuer ?",
   "DeletePluginTitle": "Supprimer le module complémentaire ?",
   "ExpandFunctionality": "Étendez les fonctionnalités à l'aide du plugin SDK",
   "GoToRepo": "Aller au dépôt",
@@ -14,7 +13,5 @@
   "PluginLoadedSuccessfully": "Plugin chargé avec succès",
   "PluginSamples": "Exemples de plugins",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKDescription": "En utilisant le plugin SDK vous pouvez étendre les fonctionnalités de votre {{productName}}, connecter des services tiers ou améliorer l'expérience utilisateur existante. Vous trouverez ici des exemples de plugins avec le code source disponible sur GitHub.",
-  "PluginSDKInstruction": "Cliquez sur le bouton pour obtenir des instructions détaillées sur la façon de créer vos propres plugins.",
-  "UploadDescription": "Vous pouvez ajouter des plugins pour étendre la fonctionnalité de {{productName}} avec des fonctions supplémentaires. Cliquez sur « Télécharger le plugin » ou déposez le fichier dans l’archive ZIP."
+  "PluginSDKInstruction": "Cliquez sur le bouton pour obtenir des instructions détaillées sur la façon de créer vos propres plugins."
 }

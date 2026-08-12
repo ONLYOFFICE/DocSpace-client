@@ -1,14 +1,14 @@
 {
   "key_path": "EmptyAIAgentsAIDisabledDescription",
-  "content": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by your {{productName}} admin.",
-  "content_en_sha1_hash": "39dc95677251273fcbab3dcdd56d62e7720a6e59",
-  "created_at": "2025-12-19T13:03:52.163Z",
-  "updated_at": "2026-08-06T08:04:19.854Z",
+  "content": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by {{productName}} admin.",
+  "content_en_sha1_hash": "701783da3c71437be27c05c89eb9c6b6986354b2",
+  "created_at": "2026-08-12T11:00:18.898Z",
+  "updated_at": "2026-08-12T11:21:23.372Z",
   "comment": {
-    "text": "This is a description displayed in an empty state for the AI Agents section. It informs users that AI features are disabled and need to be enabled by an administrator. `{{aiAgents}}` refers to AI assistants, and `{{productName}}` is the name of the product.",
+    "text": "Informational text in empty state screens explaining why AI features are unavailable and how to enable them. Includes variables for the feature name ({{aiAgents}}) and the product brand ({{productName}}).",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:07:13.062Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:21:23.372Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

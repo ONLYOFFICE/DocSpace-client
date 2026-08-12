@@ -4,7 +4,6 @@
   "ConfigurationDescription": "您需要将域名连接到当前 IP 才能更改地址设置。请确保您有权访问域名设置才能执行此操作。连接域名后，创建一个{{productName}}名称。您可以稍后使用空间设置更改创建的{{productName}}名称。",
   "ConfigurationHeader": "当前协作空间配置",
   "CreateSpaceDescription": "您已成功将您的域名连接到您的 IP 地址。要编辑空间地址设置，您需要设置未来的{{productName}}名称",
-  "CreatingPortal": "创建新的{{productName}}",
   "CurrentSpace": "当前协作空间",
   "DecryptStorage": "解密存储",
   "DecryptWarningDialogContent": "解密过程中，所有空间都将不可用。您确定要继续吗？",

@@ -1,14 +1,14 @@
 {
   "key_path": "PreparationPortalDescription",
-  "content": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
-  "content_en_sha1_hash": "60714cd70ca7d13efc48745ab7823e95ca812d51",
-  "created_at": "2025-05-19T21:30:53.442Z",
-  "updated_at": "2026-05-15T14:00:06.959Z",
+  "content": "Once the restoring process is over, you'll be automatically redirected to {{productName}}.",
+  "content_en_sha1_hash": "b7780e427a388e611c5de1871d5e181d3f759751",
+  "created_at": "2026-08-12T11:00:32.499Z",
+  "updated_at": "2026-08-12T11:07:14.429Z",
   "comment": {
-    "text": "This is a progress message displayed while a restoring process is underway. It informs the user that they will be redirected to their product once the process is complete. `{{productName}}` will be replaced with the brand name of the product (e.g., ONLYOFFICE DocSpace).",
+    "text": "Informational text within a progress component on the preparation portal page, shown during the restoration process; includes a {{productName}} variable representing the product brand name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:46:08.756Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:07:14.429Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

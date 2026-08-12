@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "l conto alla rovescia della durata inizia alla data di creazione del file. Alcuni file in questa stanza superano la durata proposta e verranno eliminati una volta abilitata l'impostazione.",
   "LifetimeDialogDescriptionHeader": "I file più vecchi che hanno superato la durata di vita verranno eliminati.",
   "LinkDeletedSuccessfully": "Link eliminato con successo",
-  "LinkForPortalUsers": "Collegamento per gli utenti di {{productName}}",
   "LinkSuccessfullyCreatedAndCopied": "Link creato e copiato con successo negli appunti",
   "MarkAsRevision": "Contrassegna come revisione",
   "MarkAsVersion": "Contrassegna come versione",

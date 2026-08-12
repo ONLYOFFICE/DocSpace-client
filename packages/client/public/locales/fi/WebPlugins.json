@@ -1,6 +1,5 @@
 {
   "DeletePlugin": "Poista liitännäinen",
-  "DeletePluginDescription": "Tämä liitännäinen ei ole enää saatavilla {{productName}}-n käyttäjille. Haluatko varmasti jatkaa?",
   "DeletePluginTitle": "Poistetaanko liitännäinen?",
   "ExpandFunctionality": "Laajenna toimintoja SDK-laajennuksen avulla",
   "GoToRepo": "Siirry arkistoon",
@@ -14,7 +13,5 @@
   "PluginLoadedSuccessfully": "Lisäosa ladattu onnistuneesti",
   "PluginSamples": "Laajennusmallit",
   "PluginSDK": "SDK-laajennus",
-  "PluginSDKDescription": "Käyttämällä SDK-laajennusta voit laajentaa {{productName}}-n toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit lähdekoodin kera.",
-  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen.",
-  "UploadDescription": "Voit lisätä lisäosia laajentaaksesi {{productName}}-n toiminnallisuutta lisätoiminnoilla. Klikkaa Lataa lisäosa tai pudota ZIP-arkisto."
+  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen."
 }

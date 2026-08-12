@@ -4,7 +4,6 @@
   "ConfigurationDescription": "Če želite spremeniti nastavitve naslova, morate svojo domeno povezati s trenutnim IP-jem. Prepričajte se, da imate dostop do nastavitev domene, da lahko to storite. Po povezavi domene ustvarite ime {{productName}}. Ustvarjeno ime {{productName}} lahko pozneje spremenite z nastavitvami prostora.",
   "ConfigurationHeader": "Trenutna konfiguracija prostora",
   "CreateSpaceDescription": "Svojo domeno ste uspešno povezali z vašim IP naslovom. Če želite urediti nastavitve naslova prostora, morate nastaviti bodoče {{productName}} ime",
-  "CreatingPortal": "Ustvarjanje novega {{productName}}",
   "CurrentSpace": "Trenutni prostor",
   "DecryptStorage": "Dešifriraj pomnilnik",
   "DecryptWarningDialogContent": "Med postopkom dešifriranja bodo vsi prostori nedosegljivi. Ste prepričani, da želite nadaljevati?",

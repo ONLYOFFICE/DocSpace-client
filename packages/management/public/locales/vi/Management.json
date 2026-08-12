@@ -4,7 +4,6 @@
   "ConfigurationDescription": "Bạn cần kết nối tên miền của mình với IP hiện tại để thay đổi cài đặt địa chỉ. Xin hãy đảm bảo bạn có quyền truy cập vào cài đặt tên miền để có thể thực hiện điều đó. Sau khi kết nối tên miền, hãy tạo tên {{productName}}. Bạn có thể thay đổi tên {{productName}} đã tạo sau này bằng cách sử dụng cài đặt không gian.",
   "ConfigurationHeader": "Cấu hình không gian hiện tại",
   "CreateSpaceDescription": "Bạn đã kết nối thành công tên miền với địa chỉ IP của mình. Để chỉnh sửa cài đặt địa chỉ không gian, bạn cần đặt tên {{productName}} trong tương lai",
-  "CreatingPortal": "Tạo {{productName}} mới",
   "CurrentSpace": "Không gian hiện tại",
   "DecryptStorage": "Giải mã bộ nhớ",
   "DecryptWarningDialogContent": "Tất cả các không gian sẽ không khả dụng trong quá trình giải mã. Bạn có chắc chắn muốn tiếp tục không?",

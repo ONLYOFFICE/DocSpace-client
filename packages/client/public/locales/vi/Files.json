@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Đếm ngược thời gian tồn tại bắt đầu vào ngày tạo tập tin. Một số tập tin trong phòng này vượt quá thời gian tồn tại đề xuất và sẽ bị xóa sau khi bạn bật cài đặt.",
   "LifetimeDialogDescriptionHeader": "Các tập tin cũ hơn vượt quá thời gian tồn tại sẽ bị xóa",
   "LinkDeletedSuccessfully": "Đã xóa liên kết thành công",
-  "LinkForPortalUsers": "Liên kết dành cho người dùng {{productName}}",
   "LinkSuccessfullyCreatedAndCopied": "Đã tạo và sao chép liên kết thành công vào bộ nhớ tạm",
   "MarkAsRevision": "Đánh dấu là sửa đổi",
   "MarkAsVersion": "Đánh dấu là phiên bản",

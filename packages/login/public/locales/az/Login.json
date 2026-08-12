@@ -19,6 +19,5 @@
   "RegistrationEmailWatermark": "Elektron poçt",
   "RememberHelper": "Susmaya görə sessiya müddəti 20 dəqiqədir. Müddəti 1 ilə uzatmaq üçün qutunu klikləyin. Digər müddəti təyin etmək üçün, Ayarlar bölməsinə keçin.",
   "SignInLDAP": "Daxil olun: {{ldap_domain}}",
-  "SignInLdapHelper": "Korporativ domen üçün etimadnamələrdən istifadə edin",
-  "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu {{productName}}-də qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın."
+  "SignInLdapHelper": "Korporativ domen üçün etimadnamələrdən istifadə edin"
 }

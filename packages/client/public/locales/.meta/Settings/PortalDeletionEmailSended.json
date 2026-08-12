@@ -1,14 +1,14 @@
 {
   "key_path": "PortalDeletionEmailSended",
-  "content": "A link to confirm the operation has been sent to {{ownerEmail}} (the email address of the space owner).",
-  "content_en_sha1_hash": "d504d626fe71c890b6a3d1a8fc891320d7a4c83e",
-  "created_at": "2025-05-19T21:30:52.216Z",
-  "updated_at": "2026-05-15T14:00:06.676Z",
+  "content": "A link to confirm the operation has been sent to {{ownerEmail}} (the email address of the workspace owner).",
+  "content_en_sha1_hash": "db10658ff964bdbfa416be9658bcff615c1c0f6e",
+  "created_at": "2026-08-12T11:00:46.203Z",
+  "updated_at": "2026-08-12T12:07:33.122Z",
   "comment": {
-    "text": "This is a toast message confirming that an email has been sent to the space owner to confirm a portal deletion or deactivation. `{{ownerEmail}}` is the email address of the space owner.",
+    "text": "Success toast message appearing after a confirmation email for portal deletion or deactivation has been sent; includes the {{ownerEmail}} variable representing the workspace owner's email address.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:58.448Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T12:07:33.122Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -161,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -176,6 +176,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -212,12 +218,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

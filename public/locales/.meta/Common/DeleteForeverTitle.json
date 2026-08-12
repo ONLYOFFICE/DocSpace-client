@@ -3,7 +3,7 @@
   "content": "Delete forever?",
   "content_en_sha1_hash": "0e0027aade000ea790cb5c39b96cbcc240beec7d",
   "created_at": "2026-06-03T09:30:00.209Z",
-  "updated_at": "2026-06-03T09:33:17.004Z",
+  "updated_at": "2026-08-12T11:00:51.526Z",
   "comment": {
     "text": "Dialog title for a confirmation modal that appears when emptying the trash or recycle bin to permanently delete items.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
-      "line_number": 80,
-      "context": ": itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });\n \n const header = isEmptyTrash\n ? t(\"Common:DeleteForeverTitle\")\n : t(\"Common:Delete\");\n \n const confirmLabel = isEmptyTrash\n ? t(\"Common:DeleteForeverButton\")\n : t(\"Common:Delete\");",
+      "line_number": 98,
+      "context": "};\n \n const message = getMessage();\n \n const header = isEmptyTrash\n ? t(\"Common:DeleteForeverTitle\")\n : t(\"Common:Delete\");\n \n const confirmLabel = isEmptyTrash\n ? t(\"Common:DeleteForeverButton\")\n : t(\"Common:Delete\");",
       "module": "/packages/sdk"
     }
   ],

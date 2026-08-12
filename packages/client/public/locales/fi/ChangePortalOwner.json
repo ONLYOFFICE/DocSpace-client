@@ -1,11 +1,9 @@
 {
   "AppointAdmin": "Nimeä ylläpitäjät",
-  "BackupPortal": "Varmuuskopioi {{productName}}-n tiedot",
   "ChangeInstruction": "Ole hyvä ja valitse omistajan nimi alta vaihtaaksesi {{productName}}-n omistajan.",
   "ChangeOwner": "Vaihda {{productName}}-omistaja",
   "ChangeUser": "Vaihda käyttäjä",
   "DoTheSame": "Tee sama kuin järjestelmänvalvojat",
-  "ManagePortal": "Hallitse {{productName}}-n asetuksia",
   "ManageUser": "Hallitse käyttäjätilejä",
   "NewPortalOwner": "Uusi {{productName}}-omistaja",
   "PortalOwnerCan": "{{productName}} omistaja voi:",

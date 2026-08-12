@@ -1,14 +1,14 @@
 {
   "key_path": "RolePortalAdminDescription",
-  "content": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
-  "content_en_sha1_hash": "bab4e02ce9aa9451d52b5912286876ff2522a52d",
-  "created_at": "2025-12-16T07:24:33.027Z",
-  "updated_at": "2026-05-15T14:00:06.968Z",
+  "content": "The {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
+  "content_en_sha1_hash": "63c6d12fc53b9549799c4074141e2cfe36abc6b8",
+  "created_at": "2026-08-12T11:00:35.706Z",
+  "updated_at": "2026-08-12T11:04:12.213Z",
   "comment": {
-    "text": "This is a description of the Portal Admin role, displayed when viewing user roles or assigning a new role. It explains the permissions of a Portal Admin, including managing rooms, inviting users, and accessing settings. `{{productName}}` is the product name (e.g., ONLYOFFICE DocSpace), `{{sectionName}}` is the name of a specific section, and `{{agentSection}}` refers to a section related to agents. The `<1>` tag bolds the text within it.",
+    "text": "Description of the Portal Admin role's permissions within user type or access settings; contains variables for {{productName}}, {{sectionName}}, and {{agentSection}}, using <1> to apply bold formatting.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:44:30.049Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:04:12.213Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -106,15 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The scope of the <1> tags differs between English and Korean. In English, only 'In {{agentSection}}' is wrapped in <1> tags (which applies <strong> styling), but in Korean the entire second sentence is wrapped in <1> tags. This causes significantly more text to be bolded than the English version intends.",
-          "suggestion": "<1>{{agentSection}}에서는</1>: 지식 기반 및 액세스 설정을 포함하여 {{agentSection}}을를 생성, 구성 및 관리할 수 있습니다.",
-          "checked_at": "2026-04-13T08:34:19.617Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -163,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -1,7 +1,6 @@
 {
   "ChangeData": "تغيير البيانات وكلمة المرور",
   "ClickButtonBelow": "إذا كنت ترغب في تسجيل الدخول باستخدام بريدك الإلكتروني، يرجى تعيين كلمة مرور خاصة بك. <br/> بمجرد الانتهاء، يرجى النقر فوق الزر أدناه.",
-  "ContinueToProduct": "تابع إلى {{productName}}",
   "GeneratedPassword": "كلمة مرور مُنشأة",
   "ProductNameDetail": "اسم {{productName}}",
   "ReviewAccountDetails": "الرجاء تخصيص لحظة لمراجعة تفاصيل حسابك:",

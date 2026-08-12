@@ -4,7 +4,6 @@
   "ConfigurationDescription": "Debe conectar su dominio a su IP actual para cambiar la configuración de la dirección. Asegúrese de tener acceso a la configuración del dominio para poder hacerlo. Después de conectar el dominio, cree un nombre de {{productName}}. Puede cambiar el nombre del {{productName}} creado más adelante utilizando la configuración del espacio.",
   "ConfigurationHeader": "Configuración del espacio actual",
   "CreateSpaceDescription": "Ha conectado correctamente su dominio a su dirección IP. Para editar la configuración de la dirección del espacio, debe establecer el nombre futuro de {{productName}}",
-  "CreatingPortal": "Creando un nuevo {{productName}}",
   "CurrentSpace": "Espacio actual",
   "DecryptStorage": "Descifrar almacenamiento",
   "DecryptWarningDialogContent": "Todos los espacios quedarán inaccesibles durante el proceso de descifrado. ¿Está seguro de que desea continuar?",

@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Možete kreirati šablon iz sobe u odeljku Sobe.",
   "EmptyTemplatesTitle": "Ovde još uvek nema šablona",
   "EmptyViewDescription": "Započni sa brzim radnjama:",
-  "FormFolderDefaultDescription": "Ubacite PDF formulare ovde ili otpremite sa {{productName}} ili uređaja.",
   "FormFolderDefaultTitle": "Još uvek nema formulara ovde",
   "FormFolderDefaultUserDescription": "Formulari otpremljeni od strane administratora će se pojaviti ovde.",
   "FormFolderDefaultUserTitle": "Još uvek nema formulara u ovom folderu",
   "FormRoomEmptyTitle": "Dobrodošli u prostoriju za Popunjavanje formulara",
   "InviteNewUsers": "Pozovite nove korisnike",
-  "InviteRootRoomDescription": "Pošaljite poziv za dodavanje novih članova u vaš {{productName}}",
   "InviteUsersOptionDescription": "Dodaj članove za zajedničko uređivanje u prostoriji",
   "ManageAccess": "Upravljanje pristupom",
   "MigrationDataDescription": "Prebacite svoje podatke u {{productName}} iz {{organizationName}} Workspace, Google Workspace ili Nextclouda.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Otpremi sa svog Uređaja",
   "UploadDevicePDFFormOptionDescription": "Otpremite spreman PDF formular na prostoriju sa svog uređaja.",
   "UploadDevicePDFFormOptionTitle": "Otpremi sa uređaja",
-  "UploadFromPortalTitle": "Otpremi iz {{productName}}",
-  "UploadPDFFormOptionDescription": "Odaberite spreman PDF formular dostupan u {{productName}} i otpremite ga u prostoriju.",
   "VirtualDataRoomEmptyTitle": "Dobrodošli u Virtuelnu sobu za podatke"
 }

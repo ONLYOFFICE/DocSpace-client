@@ -1,5 +1,4 @@
 {
-  "DeleteAllGroupDescription": "Вибрані групи буде видалено. Користувачів у цих групах не буде видалено з простору {{productName}}. Ви впевнені, що бажаєте продовжити?",
   "DeleteAllGroupsTitle": "Видалити групи",
   "DeleteFiles": "Ви збираєтесь перемістити <strong>файли ({{filesCount}})</strong> до {{trashSection}}.",
   "DeleteFilesAndFolders": "Ви збираєтесь видалити <strong>файли ({{filesCount}})</strong> та <strong>папки ({{foldersCount}})</strong> до {{trashSection}}.",
@@ -7,7 +6,6 @@
   "DeleteFilesForever": "Ви збираєтесь видалити <strong>файли ({{filesCount}})</strong>.",
   "DeleteFolders": "Ви збираєтесь перемістити <strong>папки ({{foldersCount}})</strong> до {{trashSection}}.",
   "DeleteFoldersForever": "Ви збираєтесь видалити <strong>папки ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "Групу {{groupName}} буде видалено. Користувачів у групі не буде видалено з простору {{productName}}. Ви впевнені, що бажаєте продовжити?",
   "DeleteGroupTitle": "Видалити групу",
   "DeleteItem": "Ви збираєтеся перемістити <strong>{{name}}</strong> до {{trashSection}}.",
   "DeleteItemForeverConfirm": "Ви збираєтесь видалити <strong>{{name}}</strong>.",

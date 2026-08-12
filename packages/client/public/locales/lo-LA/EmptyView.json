@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "ທ່ານສາມາດສ້າງແມ່ແບບຈາກຫ້ອງໃນພື້ນທີ່ຫ້ອງໄດ້",
   "EmptyTemplatesTitle": "ບໍ່ມີແມ່ແບບຢູ່ບ່ອນນີ້ເທື່ອ",
   "EmptyViewDescription": "ເລີ່ມຕົ້ນດ້ວຍການກະດຳທີ່ດ່ວນ:",
-  "FormFolderDefaultDescription": "ວາງແບບຟອມ PDF ຢູ່ທີ່ນີ້ ຫຼື ອັບໂຫຼດຈາກ {{productName}} ຫຼື ອຸປະກອນ.",
   "FormFolderDefaultTitle": "ຫາກໍ່ເທົ່ານີ້ເທົ່ານັ້ນ",
   "FormFolderDefaultUserDescription": "ແບບຟອມທີ່ບັນຊາກອນອັບໂຫຼດໄວ້ ຈະປະກົດຢູ່ທີ່ນີ້.",
   "FormFolderDefaultUserTitle": "ເທື່ອ​ຍັງ​ບໍ​ມີ​ແບບຟອມ​ໃດໆ​ໃນ​ໂຟນເດີ​ນີ້",
   "FormRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຕື່ມແບບຟອມ",
   "InviteNewUsers": "ເຊີນຜູ້ໃຊ້​ໃໝ່",
-  "InviteRootRoomDescription": "ສົ່ງ​ເຊີນ​ເພື່ອນ​ເພີ່ມ​ສະມາຊິກ​ໃໝ່​ເຂົ້າ​ສູ່​ {{productName}} ຂອງ​ທ່ານ",
   "InviteUsersOptionDescription": "ເພີ່ມສະມາຊິກເຂົ້າຮ່ວມກວດແກ້ຮ່ວມກັນໃນຫ້ອງ",
   "ManageAccess": "ຈັດການການເຂົ້າເຖິງ",
   "MigrationDataDescription": "ໂອນຂໍ້ມູນຂອງທ່ານໄປຍັງ {{productName}} ຈາກ {{organizationName}} Workspace, Google Workspace, ຫຼື Nextcloud.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "ອັບໂຫຼດຈາກອຸປະກອນຂອງທ່ານ",
   "UploadDevicePDFFormOptionDescription": "ອັບໂຫຼດແບບຟອມ PDF ທີ່ສຳເລັດແລ້ວໄປຍັງຫ້ອງຈາກອຸປະກອນຂອງທ່ານ.",
   "UploadDevicePDFFormOptionTitle": "ອັບໂຫຼດຈາກເຄື່ອງມື",
-  "UploadFromPortalTitle": "ດາວໂຫຼດຈາກ {{productName}}",
-  "UploadPDFFormOptionDescription": "ເລືອກແບບຟອມ PDF ທີ່ກະກຽມໄວ້ແລ້ວໃນ {{productName}} ແລະອັບໂຫຼດມັນໃສ່ຫ້ອງ.",
   "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ"
 }

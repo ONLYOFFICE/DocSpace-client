@@ -5,7 +5,6 @@
   "ChooseNewPlan": "Doriţi să alegeţi un abonament nou?",
   "GracePeriodActive": "Perioada de grație este activă <1>de la {{fromDate}} până la {{byDate}}</1> (zile rămase: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "Nu pot adăuga utilizatori noi și nu pot crea camere noi. Licența a expirat.",
-  "LicenseGracePeriodInfo": "În acest timp, administratorii nu pot crea camere noi sau adăuga utilizatori noi. După expirarea perioadei de grație, {{productName}} va deveni indisponibil până când nu se activează o licență nouă.",
   "NewRoomWillExceedLimit": "Imposibil de creat această sală deoarece limita maximă de săli permisă de planul dvs. actual a fost atinsă.",
   "NewUsersWillExceedMembersLimit": "Imposibil de adăugat utilizatori cu plată noi deoarece limita maximă de administratori permisă de planul dvs. actual a fost atinsă.",
   "NotPossibleRoomRestoring": "Imposibil de restaurat această sală deoarece limita maximă de săli permisă de planul dvs. actual a fost atinsă.",

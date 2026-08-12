@@ -1,14 +1,14 @@
 {
   "key_path": "PreparationPortalTitle",
-  "content": "Portal restoring is underway",
-  "content_en_sha1_hash": "4d21b354c882fba5a868ff44f825eac2c9872eda",
-  "created_at": "2025-05-19T21:30:47.439Z",
-  "updated_at": "2026-07-04T11:30:21.961Z",
+  "content": "The workspace restoring is underway",
+  "content_en_sha1_hash": "de2d6877af538508857ef5061557075c22e18760",
+  "created_at": "2026-08-12T11:00:32.515Z",
+  "updated_at": "2026-08-12T11:06:49.863Z",
   "comment": {
-    "text": "This is a page title or header text displayed when the DocSpace portal is being restored.",
+    "text": "Header title for the preparation portal screen, displayed while a workspace is being restored.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:46:07.941Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:06:49.863Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

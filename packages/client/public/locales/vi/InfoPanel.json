@@ -16,8 +16,6 @@
   "FormRoomAIModalDescription": "Kết nối cơ sở dữ liệu để phân tích tất cả các phản hồi đã thu thập bằng \"Hỏi AI\". Bạn có thể tiếp tục mà không cần kết nối và chỉ hỏi về biểu mẫu này.",
   "FormRoomAIModalTitle": "Nhận thông tin chi tiết tốt hơn",
   "FormRoomAINotConnectedDescription": "Lưu trữ các phản hồi dưới dạng dữ liệu có cấu trúc. Bật đồng bộ hóa cơ sở dữ liệu trong cài đặt phòng để mở khóa phân tích AI với Hỏi AI.",
-  "FormRoomAIProviderNotConnected": "Kết nối nhà cung cấp AI trong cài đặt {{productName}} của bạn để phân tích dữ liệu biểu mẫu bằng \"Hỏi AI\", tạo biểu đồ và khám phá thông tin chuyên sâu.",
-  "FormRoomAIProviderNotConnectedAskAdmin": "Yêu cầu <1>quản trị viên {{productName}}</1> của bạn kết nối và bật nhà cung cấp AI trong cài đặt {{productName}} để phân tích dữ liệu biểu mẫu bằng \"Hỏi AI\", tạo biểu đồ và khám phá thông tin chuyên sâu.",
   "FormRoomAIReadyDescriptionFile": "Yêu cầu AI khám phá các phản từ biểu mẫu này, tạo thông tin chi tiết và trực quan dữ liệu.",
   "FormRoomAIReadyDescriptionFolder": "Các phản hồi từ biểu mẫu được lưu trữ tại đây trong cơ sở dữ liệu đã kết nối. Để phân tích dữ liệu bằng AI, hãy mở một biểu mẫu cụ thể và nhấp vào 'Hỏi AI'.",
   "FormRoomAIReadyDescriptionRoom": "Phân tích dữ liệu bằng \"Hỏi AI\", tạo biểu đồ và khám phá thông tin chuyên sâu. Chọn một biểu mẫu và nhấp vào 'Hỏi AI' để bắt đầu.",

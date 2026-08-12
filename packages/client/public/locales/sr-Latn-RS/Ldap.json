@@ -70,6 +70,5 @@
   "LdapUserFilter": "Korisnički Filter",
   "LdapUserFilterTooltip": "Koristite LDAP filter za pretragu da biste izabrali korisnike koji moraju biti uvezeni.",
   "LdapUserQuotaTooltip": "Da biste postavili skladišnu kvotu za korisnika, dodajte atribut u LDAP direktorijum (na primer, UsersQuotaLimit) i unesite celobrojnu vrednost za ovaj atribut. Kvota će se prikazivati u bajtovima. Ovde navedite samo naziv atributa. Ovaj atribut će biti primenjen samo tokom prvog podešavanja i kasnije se može promeniti ručno u odeljku {{contactsName}}.",
-  "LdapUsersType": "Tip korisnika",
-  "LdapUserTypeTooltip": "Svi korisnici će biti dodati na {{productName}} sa odabranim tipom."
+  "LdapUsersType": "Tip korisnika"
 }

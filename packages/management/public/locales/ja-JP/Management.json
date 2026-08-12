@@ -4,7 +4,6 @@
   "ConfigurationDescription": "アドレス設定を変更するには、ドメインを現在のIPに接続する必要があります。ドメイン設定にアクセスできることを確認してください。ドメインを接続した後、{{productName}}名を作成します。作成した{{productName}}名は後でスペース設定で変更することができます。",
   "ConfigurationHeader": "現在のスペース設定",
   "CreateSpaceDescription": "ドメインとIPアドレスの接続が完了しました。スペースアドレスの設定を編集するには、将来の{{productName}}名を設定する必要があります。",
-  "CreatingPortal": "新しい{{productName}}の作成",
   "CurrentSpace": "現在のスペース",
   "DecryptStorage": "ストレージの暗号を解除する",
   "DecryptWarningDialogContent": "すべてのスペースは復号プロセス中に利用できなくなります。続行してもよろしいですか？",

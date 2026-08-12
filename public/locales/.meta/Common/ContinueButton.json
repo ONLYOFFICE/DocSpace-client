@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2026-08-07T10:52:44.632Z",
+  "updated_at": "2026-08-12T11:00:51.511Z",
   "comment": {
     "text": "This is the label for a button that allows users to proceed with an action, such as confirming a service, closing an editor without saving, or initiating a file conversion.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 332,
+      "line_number": 336,
       "context": "<>\n <ConfirmationModal\n visible={keyConfirmVisible}\n title={t(\"Common:PrivateRoomKeyRequiredTitle\")}\n message={t(\"Common:PrivateRoomKeyRequiredDescription\")}\n confirmLabel={t(\"Common:ContinueButton\")}\n onConfirm={onConfirmGenerateKey}\n onCancel={onCancelGenerateKey}\n zIndex={410}\n />\n {generateKey.modals}",
       "module": "/packages/client"
     },
@@ -133,7 +133,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomPasswordForm/index.tsx",
-      "line_number": 245,
+      "line_number": 255,
       "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={5}\n isLoading={isLoading}\n isDisabled={isLoading}\n onClick={onSubmitAction}\n />",
       "module": "/packages/shared"
     }

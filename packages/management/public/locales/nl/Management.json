@@ -4,7 +4,6 @@
   "ConfigurationDescription": "U moet uw domein verbinden met uw huidige IP om de adresinstellingen te wijzigen. Zorg ervoor dat u toegang hebt tot de domeininstellingen om dat te kunnen doen. Nadat u het domein hebt verbonden, maakt u een {{productName}} naam. U kunt de gemaakte {{productName}} naam later wijzigen met behulp van de ruimte instellingen.",
   "ConfigurationHeader": "Huidige ruimte configuratie",
   "CreateSpaceDescription": "U heeft met succes uw domein aan uw IP-adres gekoppeld. Om de ruimte adresinstellingen te bewerken, moet u de toekomstige {{productName}} naam instellen",
-  "CreatingPortal": "Een nieuwe {{productName}} aanmaken",
   "CurrentSpace": "Huidige ruimte",
   "DecryptStorage": "Opslag ontsleutelen",
   "DecryptWarningDialogContent": "Alle ruimtes zullen tijdens het ontsleutelen onbeschikbaar worden. Weet u zeker dat u door wilt gaan?",

@@ -70,6 +70,5 @@
   "LdapUserFilter": "Filtri i përdoruesit",
   "LdapUserFilterTooltip": "Përdorni filtrin e kërkimit LDAP për të zgjedhur përdoruesit që duhet të importohen.",
   "LdapUserQuotaTooltip": "Për të vendosur një kuotë ruajtjeje për përdoruesin, shtoni një atribut në drejtorinë LDAP (për shembull, UsersQuotaLimit) dhe vendosni një vlerë të plotë për këtë atribut. Do të shfaqë vlerën e kuotës në bajt. Këtu, specifikoni vetëm emrin e atributit. Ky atribut do të zbatohet vetëm gjatë konfigurimit të parë dhe më vonë mund të ndryshohet manualisht në seksionin {{contactsName}}.",
-  "LdapUsersType": "Lloji i përdoruesve",
-  "LdapUserTypeTooltip": "Të gjithë përdoruesit do të shtohen në {{productName}} me llojin e zgjedhur."
+  "LdapUsersType": "Lloji i përdoruesve"
 }

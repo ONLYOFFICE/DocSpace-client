@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Numărătoarea inversă pentru durată de viață va începe la data creării fișierului.  Durata de viață a unor fișierelor este mai mică decât durata de viață propusă, astfel aceste fișiere vor fi șterse după activarea acestei setări.",
   "LifetimeDialogDescriptionHeader": "Fișierele mai vechi a căror durata de viață este depășită vor fi șterse",
   "LinkDeletedSuccessfully": "Link-ul a fost șters cu succes",
-  "LinkForPortalUsers": "Linkul pentru utilizatorii {{productName}}",
   "LinkSuccessfullyCreatedAndCopied": "Link-ul a fost creat și copiat cu succes în clipboard",
   "MarkAsRevision": "Marcare ca revizuire",
   "MarkAsVersion": "Marcare ca versiune",

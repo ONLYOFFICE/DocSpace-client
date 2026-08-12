@@ -22,13 +22,11 @@
   "EmptyTemplatesDescription": "Oda bölümünde bir odadan şablon oluşturabilirsiniz",
   "EmptyTemplatesTitle": "Burada henüz şablon yok",
   "EmptyViewDescription": "Hızlı işlemlerle başlayın:",
-  "FormFolderDefaultDescription": "PDF formlarını buraya bırakın veya {{productName}} veya cihazdan yükleyin.",
   "FormFolderDefaultTitle": "Burada henüz form yok",
   "FormFolderDefaultUserDescription": "Yöneticiler tarafından yüklenen formlar burada görünecektir.",
   "FormFolderDefaultUserTitle": "Bu klasörde henüz form yok",
   "FormRoomEmptyTitle": "Form doldurma odasına hoş geldiniz",
   "InviteNewUsers": "Yeni kullanıcıları davet edin",
-  "InviteRootRoomDescription": "{{productName}} ürününüze yeni üyeler eklemek için bir davetiye gönderin",
   "InviteUsersOptionDescription": "Odada ortak düzenleme için üyeleri ekleyin",
   "ManageAccess": "İzini Yönet",
   "MigrationDataDescription": "{{productName}}'e {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan verilerinizi aktarın.",
@@ -45,7 +43,5 @@
   "UploadDeviceOptionTitle": "Cihazınızdan Yükleme",
   "UploadDevicePDFFormOptionDescription": "Hazır bir PDF formunu cihazınızdan odaya yükleyin.",
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
-  "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
-  "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
   "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
 }

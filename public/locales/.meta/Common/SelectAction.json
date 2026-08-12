@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-08-06T14:20:57.507Z",
+  "updated_at": "2026-08-12T14:02:21.249Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 551,
+      "line_number": 548,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
       "module": "/libs/ui-kit"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 341,
+      "line_number": 343,
       "context": "{...withAside}\n withPadding={withPadding}\n onSelect={onSelect}\n items={sortedItems}\n selectedItems={selectedItems}\n submitButtonLabel={submitButtonLabel || t(\"SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={\n isBase ? <EmptyScreenRoomsLight /> : <EmptyScreenRoomsDark />\n }",
       "module": "/libs/ui-kit"
     },
@@ -259,7 +259,7 @@
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelectorInput.tsx",
-      "line_number": 260,
+      "line_number": 262,
       "context": "isLoading={isLoading}\n path={newPath || basePath}\n isDisabled={isDisabled || isLoading}\n hasError={isError || isErrorPath}\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"Common:SelectAction\")}\n />\n <Portal element={<div>{selectorComponent}</div>} />\n </div>\n );\n };",
       "module": "/packages/shared"
     },

@@ -3,7 +3,7 @@
   "content": "Upgrade now",
   "content_en_sha1_hash": "09a80c7a63cdefe5e5c7bccdc6bf4b894b15c07c",
   "created_at": "2026-04-10T13:53:43.815Z",
-  "updated_at": "2026-08-06T11:20:26.784Z",
+  "updated_at": "2026-08-12T14:02:21.387Z",
   "comment": {
     "text": "This is the label for a button that allows users to upgrade their current plan.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1582,
+      "line_number": 1604,
       "context": ": t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }\n \n return t(\"UpgradeNow\");\n };\n \n resetTariffContainerToBasic = () => {\n this.setBasicTariffContainer();\n };",
       "module": "/libs/ui-kit"
     }

@@ -2,8 +2,6 @@
   "ChangeContactType": "連絡先の種類を変更",
   "ChangeGuestsTypeMessage": "ゲスト <strong>{{userName}}</strong> は「{{membersSection}}」セクションに移動され、「ユーザー」タイプに割り当てられます。ユーザーには「{{documentsSection}}」セクションがあり、ファイルの作成や編集は可能ですが、ルームを作成することはできません。",
   "ChangeGuestsTypeMessageMulti": "選択されたゲストは「{{membersSection}}」セクションに移動され、「ユーザー」タイプに割り当てられます。ユーザーには「{{documentsSection}}」セクションが割り当てられ、ファイルの作成や編集は可能ですが、ルームを作成することはできません。",
-  "ChangeGuestsTypeToAdmin": "ゲストの<strong>{{userName}}</strong>さんは {{membersSection}} セクションに移動され、<strong>'{{ secondType }}'</strong> タイプが割り当てられます。{{productName}} 管理者は {{productName}} 設定にアクセスし、部屋を管理およびアーカイブし、新しいユーザーを招待し、彼らのレベル以下の役割を割り当てることができます。{{productName}} 管理者は {{documentsSection}} セクションにアクセスできます。",
-  "ChangeGuestsTypeToAdminMulti": "選択されたゲストは{{membersSection}}セクションに移動し、<strong>'{{ secondType }}'</strong>タイプが割り当てられます。{{productName}}の管理者は{{productName}}の設定にアクセスし、ルームを管理・アーカイブし、新しいユーザーを招待し、自分のレベル以下の役割を割り当てることができます。{{productName}}の管理者は{{documentsSection}}セクションにアクセスできます。",
   "ChangeGuestsTypeToManager": "ゲストの<strong>{{userName}}</strong>さんは {{membersSection}} セクションに移動し、<strong>'{{ secondType }}'</strong> タイプが割り当てられます。ルーム管理者は割り当てられたルームを作成および管理し、新しいユーザーを招待し、ルーム管理者およびそれ以下の役割を割り当てることができます。ルーム管理者は {{documentsSection}} セクションにアクセスできます。",
   "ChangeGuestsTypeToManagerMulti": "選択されたゲストは{{membersSection}}セクションに移動し、<strong>'{{ secondType }}'</strong>タイプが割り当てられます。ルーム管理者は割り当てられたルームを作成および管理し、新しいユーザーを招待し、ルーム管理者およびそれ以下の役割を割り当てることができます。ルーム管理者は{{documentsSection}}セクションにアクセスできます。",
   "ChangeUserTypeButton": "タイプの変更",

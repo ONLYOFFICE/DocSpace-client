@@ -1,14 +1,14 @@
 {
   "key_path": "TwoFactorAuthMobileDescription",
-  "content": "Two-factor authentication is a more secure way for the users to enter the portal. After the credentials are entered, the user will have to enter the code from the SMS received to the mobile phone with the number which was specified at the first portal login or the code from an authentication application.",
-  "content_en_sha1_hash": "17442d3c8dced44f68862422d941606211c022f5",
-  "created_at": "2025-05-19T21:30:53.021Z",
-  "updated_at": "2026-06-02T08:43:27.533Z",
+  "content": "Two-factor authentication is a more secure way for the users to enter the workspace. After the credentials are entered, the user will have to enter the code from the SMS received to the mobile phone with the number which was specified at the first workspace login or the code from an authentication application.",
+  "content_en_sha1_hash": "8697378534536b025d8421bab6d29b90b612b14a",
+  "created_at": "2026-08-12T11:00:46.543Z",
+  "updated_at": "2026-08-12T12:00:16.437Z",
   "comment": {
-    "text": "This is a subtitle for a category item in the portal settings. It describes two-factor authentication, explaining that users will need to enter a code from an SMS or an authenticator app after logging in.",
+    "text": "Subtitle for a category item in the Portal Settings that explains how two-factor authentication works using SMS or an authenticator app.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:36.724Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T12:00:16.437Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

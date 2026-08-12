@@ -71,7 +71,6 @@
   "LifetimeDialogDescription": "Odliczanie okresu ważności rozpoczyna się w dniu utworzenia pliku. Niektóre pliki w tym pokoju przekroczyły swój okres ważności i zostaną usunięte po włączeniu ustawienia.",
   "LifetimeDialogDescriptionHeader": "Starsze pliki, które przekroczyły swój okres ważności, zostaną usunięte",
   "LinkDeletedSuccessfully": "Link został pomyślnie usunięty",
-  "LinkForPortalUsers": "Link dla użytkowników {{productName}}",
   "LinkSuccessfullyCreatedAndCopied": "Link został pomyślnie utworzony i skopiowany do schowka",
   "MarkAsRevision": "Oznacz jako wersję poprawioną",
   "MarkAsVersion": "Oznacz jako wersję",

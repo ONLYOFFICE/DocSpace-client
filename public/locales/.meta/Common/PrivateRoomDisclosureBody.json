@@ -1,13 +1,13 @@
 {
   "key_path": "PrivateRoomDisclosureBody",
-  "content": "Encryption runs entirely in your browser, so files are readable only by the people you invite. You rely on the code your {{productName}} portal serves — lock your session when you are not using it.",
-  "content_en_sha1_hash": "6c721e38ab10d27178f8dab09ae2588bc82aae0b",
-  "created_at": "2026-06-09T09:42:54.324Z",
-  "updated_at": "2026-06-09T10:01:24.219Z",
+  "content": "Encryption runs entirely in your browser, so files are readable only by the people you invite. You rely on the code your {{productName}} serves — lock your session when you are not using it.",
+  "content_en_sha1_hash": "bab17d584c0bd2e38b5ec97647cf24ef70f27744",
+  "created_at": "2026-08-12T11:00:32.849Z",
+  "updated_at": "2026-08-12T11:06:32.775Z",
   "comment": {
-    "text": "Body text within an informational disclosure banner explaining encryption security and session safety; includes a {{productName}} placeholder for the brand name.",
+    "text": "Body text within a disclosure banner explaining encryption security; includes a {{productName}} placeholder for the product brand name.",
     "is_auto": true,
-    "updated_at": "2026-06-09T10:01:24.219Z",
+    "updated_at": "2026-08-12T11:06:32.775Z",
     "model": "gemma4:26b"
   },
   "usage": [

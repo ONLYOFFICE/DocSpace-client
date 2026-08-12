@@ -1,13 +1,13 @@
 {
   "key_path": "EmptyRecentDescription",
-  "content": "All recent files opened in the portal end up in this section. Files are stored for 90 days",
-  "content_en_sha1_hash": "4e5c1bc7601edc7ebec83bfbfa5fdd57e2d6fef0",
-  "created_at": "2026-05-19T19:03:15.516Z",
-  "updated_at": "2026-08-06T08:04:19.855Z",
+  "content": "All recent files opened in the workspace end up in this section. Files are stored for 90 days",
+  "content_en_sha1_hash": "edf230a90642952400a5dc50d3f247546fc8be2a",
+  "created_at": "2026-08-12T11:00:19.462Z",
+  "updated_at": "2026-08-12T11:20:32.261Z",
   "comment": {
-    "text": "Placeholder description text shown in the \"Recent\" files section when it is empty, explaining the purpose of the section and the file retention period.",
+    "text": "Description text for an empty state view in the \"Recent\" section, informing users about where recently opened files are stored and their 90-day retention period.",
     "is_auto": true,
-    "updated_at": "2026-05-19T19:20:00.650Z",
+    "updated_at": "2026-08-12T11:20:32.261Z",
     "model": "gemma4:26b"
   },
   "usage": [

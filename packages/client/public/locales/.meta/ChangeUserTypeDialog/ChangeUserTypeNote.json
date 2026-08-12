@@ -1,14 +1,14 @@
 {
   "key_path": "ChangeUserTypeNote",
-  "content": "<1>Note:</1> you cannot change the type for the {{productName}} admin and for yourself.",
-  "content_en_sha1_hash": "8909a0a799a09837bcdce8e0b8c101795e45033a",
-  "created_at": "2025-05-19T21:30:56.929Z",
-  "updated_at": "2026-05-15T14:00:06.649Z",
+  "content": "<1>Note:</1> you cannot change the type for {{productName}} admin and for yourself.",
+  "content_en_sha1_hash": "ca42cef96c5862c720a0789f8d7450c503b4d463",
+  "created_at": "2026-08-12T11:00:49.207Z",
+  "updated_at": "2026-08-12T11:30:31.648Z",
   "comment": {
-    "text": "This is a note displayed within the \"Change User Type\" dialog. It informs the user that they cannot change the user type for the DocSpace administrator or for their own account. The `{{productName}}` variable will be replaced with the product's brand name.",
+    "text": "Instructional note within the ChangeUserType dialog explaining restrictions on modifying user roles; includes a bolded \"Note:\" prefix and the {{productName}} variable.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:58.032Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:30:31.648Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,13 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
     },
     "sk": {
       "ai_translated": false,
@@ -158,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -194,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "si": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

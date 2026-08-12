@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-10T12:23:10.362Z",
+  "updated_at": "2026-08-12T14:02:21.295Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -37,19 +37,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 488,
+      "line_number": 504,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 488,
+      "line_number": 504,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 488,
+      "line_number": 504,
+      "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 504,
       "context": ")}\n <hr className={styles.summaryDivider} />\n <Text fontSize=\"14px\" fontWeight={600} className={styles.uponRequestNote}>\n {t(\"DocsConnect:UsersUponRequest\", {\n count: MAX_USERS,\n service: t(\"DocsConnect:DocsConnect\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
@@ -68,7 +74,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
       "line_number": 89,
-      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n <Text as=\"p\" className={styles.description}>\n <Trans\n t={t}",
+      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {canceled ? (\n <div className={styles.canceledText}>\n <Text as=\"p\" className={styles.canceledTitle}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 89,
+      "context": "};\n \n return (\n <div className={styles.promo} data-testid=\"docs_connect_promo\">\n <Heading level={HeadingLevel.h1} className={styles.title}>\n {t(\"DocsConnect:DocsConnect\")}\n </Heading>\n \n {canceled ? (\n <div className={styles.canceledText}>\n <Text as=\"p\" className={styles.canceledTitle}>",
       "module": "/packages/client"
     },
     {

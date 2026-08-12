@@ -1,5 +1,4 @@
 {
-  "DeleteAllGroupDescription": "選択したグループは削除されます。グループのユーザーは{{productName}}から削除されません。続けてよろしいですか？",
   "DeleteAllGroupsTitle": "グループの削除",
   "DeleteFiles": "あなたは<strong>ファイル ({{filesCount}})</strong>を{{trashSection}} に移動しようとしています。",
   "DeleteFilesAndFolders": "あなたは<strong>ファイル ({{filesCount}})</strong>と<strong>フォルダー ({{foldersCount}})</strong>を{{trashSection}}に移動しようとしています。",
@@ -7,7 +6,6 @@
   "DeleteFilesForever": "<strong>{{filesCount}}件のファイル</strong>を削除しようとしています。",
   "DeleteFolders": "<strong>{{foldersCount}}個のフォルダー</strong>を{{trashSection}}に移動しようとしています。",
   "DeleteFoldersForever": "<strong>{{foldersCount}}個のフォルダー</strong>を永遠に削除しようとしています。",
-  "DeleteGroupDescription": "{{groupName}} グループが削除されます。グループ内のユーザーは{{productName}}から削除されません。続けてよろしいですか？",
   "DeleteGroupTitle": "グループの削除",
   "DeleteItem": "あなたは<strong>{{name}}</strong>を{{trashSection}}に移動しようとしています。",
   "DeleteItemForeverConfirm": "削除しようとしています：<strong>{{name}}</strong>.",

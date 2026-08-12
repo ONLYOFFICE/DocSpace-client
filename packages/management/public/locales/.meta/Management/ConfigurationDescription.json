@@ -1,14 +1,14 @@
 {
   "key_path": "ConfigurationDescription",
-  "content": "You need to connect your domain to your current IP to change the address settings. Please make sure you have access to the domain settings to be able to do that. After connecting the domain, create a {{productName}} name. You can change the created {{productName}} name later using the space settings.",
-  "content_en_sha1_hash": "6428b4f823da2c4393fa0d6b961f1bfec647cf0a",
-  "created_at": "2025-05-19T21:30:57.414Z",
-  "updated_at": "2026-05-15T14:00:06.973Z",
+  "content": "You need to connect your domain to your current IP to change the address settings. Please make sure you have access to the domain settings to be able to do that. After connecting the domain, create a {{productName}} name. You can change the created {{productName}} name later using the workspace settings.",
+  "content_en_sha1_hash": "6c9e2843309dcfa1c420e32eef07269c6880f8a4",
+  "created_at": "2026-08-12T11:00:50.856Z",
+  "updated_at": "2026-08-12T13:48:50.052Z",
   "comment": {
-    "text": "This is a descriptive text that appears below the \"ConfigurationHeader\" in the space settings. It explains the steps required to connect a domain and create a product name, with `{{productName}}` being replaced by the brand name (e.g., \"DocSpace\").",
+    "text": "Instructional text in the configuration header explaining how to change address settings via domain connection and create a workspace name, including the {{productName}} variable.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:32:01.275Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:48:50.052Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

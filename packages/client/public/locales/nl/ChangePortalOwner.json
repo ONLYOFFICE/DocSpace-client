@@ -1,11 +1,9 @@
 {
   "AppointAdmin": "Beheerders benoemen",
-  "BackupPortal": "Back-up {{productName}} gegevens",
   "ChangeInstruction": "Om de {{productName}} eigenaar te wijzigen, kiest u hieronder de naam van de nieuwe eigenaar.",
   "ChangeOwner": "{{productName}} eigenaar wijzigen",
   "ChangeUser": "Gebruiker wijzigen",
   "DoTheSame": "Doe hetzelfde als beheerders",
-  "ManagePortal": "Beheer {{productName}} configuratie",
   "ManageUser": "Gebruikersaccounts beheren",
   "NewPortalOwner": "Nieuwe {{productName}} eigenaar",
   "PortalOwnerCan": "{{productName}} eigenaar kan:",

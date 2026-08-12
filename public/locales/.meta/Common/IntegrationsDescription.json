@@ -1,13 +1,13 @@
 {
   "key_path": "IntegrationsDescription",
-  "content": "Plug {{productName}} into any ecosystem (DMS, CMS, LMS, etc.) — no custom code, no migration.",
-  "content_en_sha1_hash": "c2f9a0dccee7dc6bba12ba794dcdb58867f83d11",
-  "created_at": "2026-06-01T21:20:38.433Z",
-  "updated_at": "2026-08-07T15:05:26.473Z",
+  "content": "Plug the workspace into any ecosystem (DMS, CMS, LMS, etc.) — no custom code, no migration.",
+  "content_en_sha1_hash": "0eac9e0074f61673c1ddd85406359eb03a4eceb6",
+  "created_at": "2026-08-12T11:00:24.956Z",
+  "updated_at": "2026-08-12T11:16:58.773Z",
   "comment": {
-    "text": "Description text for the Integrations card on the Dashboard, explaining the ease of connecting to other systems. The `{{productName}}` variable represents the brand name.",
+    "text": "Description text for an information card on the Dashboard explaining integration capabilities with external ecosystems.",
     "is_auto": true,
-    "updated_at": "2026-06-01T21:36:43.216Z",
+    "updated_at": "2026-08-12T11:16:58.773Z",
     "model": "gemma4:26b"
   },
   "usage": [
@@ -20,6 +20,12 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

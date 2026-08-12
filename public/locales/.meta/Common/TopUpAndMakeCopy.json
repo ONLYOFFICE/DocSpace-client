@@ -3,7 +3,7 @@
   "content": "Top up & Make copy",
   "content_en_sha1_hash": "1a8346c2f80b5973c66b55c448ae6e0f16d54ecc",
   "created_at": "2026-08-06T08:04:09.135Z",
-  "updated_at": "2026-08-06T08:04:45.019Z",
+  "updated_at": "2026-08-12T11:00:51.635Z",
   "comment": {
     "text": "Button label appearing when the user's wallet balance is insufficient to perform a backup copy, prompting them to add funds first.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 250,
+      "line_number": 251,
       "context": "const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);\n \n const copyButtonLabel =\n isTopUpBeforeCopy || isTopUpDialogBeforeCopy\n ? t(\"Common:TopUpAndMakeCopy\")\n : undefined;\n \n const topUpIfNeeded = async () => {\n if (isTopUpDialogBeforeCopy) {\n onOpenTopUpDialog?.();",
       "module": "/packages/shared"
     }

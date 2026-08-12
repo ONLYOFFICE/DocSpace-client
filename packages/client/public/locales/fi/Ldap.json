@@ -70,6 +70,5 @@
   "LdapUserFilter": "Käyttäjäsuodatin",
   "LdapUserFilterTooltip": "Käytä haussa LDAP-suodatinta valitaksesi käyttäjät, jotka tuodaan.",
   "LdapUserQuotaTooltip": "Asettaaksesi käyttäjälle muistikiintiön, lisää attribuutti LDAP-hakemistossa (esimerkiksi, KäyttäjienKiintiöraja) ja syötä kokonaislukuarvo tälle attribuutille. Se näyttää kiintiöarvon bitteinä. Määrittele tähän vain attribuutin nimi. Tämä attribuutti annetaan vain ensimmäisten asetusten aikana ja voidaan muuttaa myöhemmin manuaalisesti {{contactsName}}-osiossa.",
-  "LdapUsersType": "Käyttäjät-tyyppi",
-  "LdapUserTypeTooltip": "Kaikki käyttäjät lisätään {{productName}}:iin valitun tyypin mukaisesti."
+  "LdapUsersType": "Käyttäjät-tyyppi"
 }

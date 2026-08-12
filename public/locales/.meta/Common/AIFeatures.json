@@ -3,7 +3,7 @@
   "content": "AI features",
   "content_en_sha1_hash": "59f0c687f2560552c920af9e6c0850fc4715bf49",
   "created_at": "2026-06-03T11:45:29.424Z",
-  "updated_at": "2026-08-06T08:04:19.869Z",
+  "updated_at": "2026-08-12T14:02:21.260Z",
   "comment": {
     "text": "Menu item label in the context menu that contains AI-related sub-options.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
-      "line_number": 163,
+      "line_number": 158,
       "context": "//     case DISK_STORAGE:\n //       return t(\"AdditionalStorageInfo\");\n //     case BACKUP_SERVICE:\n //       return t(\"Backups\");\n //     case AI_TOOLS:\n //       return t(\"AIFeatures\");\n //     default:\n //       return service;\n //   }\n // };",
       "module": "/libs/ui-kit"
     },

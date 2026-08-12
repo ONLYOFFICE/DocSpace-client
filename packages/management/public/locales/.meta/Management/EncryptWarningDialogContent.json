@@ -1,14 +1,13 @@
 {
   "key_path": "EncryptWarningDialogContent",
-  "content": "All spaces will become unavailable during the encryption process. Are you sure you want to continue?",
-  "content_en_sha1_hash": "e4ffd51a2b586f696bcb3f491a238a9cf9a70d68",
-  "created_at": "2025-05-19T21:30:57.450Z",
-  "updated_at": "2026-05-15T14:00:06.970Z",
+  "content": "All workspaces will become unavailable during the encryption process. Are you sure you want to continue?",
+  "content_en_sha1_hash": "028e58b8b11abef42f87eb0b0205ffaecef722c9",
+  "created_at": "2026-08-12T11:00:50.891Z",
+  "updated_at": "2026-08-12T11:00:51.639Z",
   "comment": {
-    "text": "This is the content of a confirmation dialog. It appears when a user attempts to encrypt data, warning them that all spaces will be inaccessible during the process.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:31:43.968Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

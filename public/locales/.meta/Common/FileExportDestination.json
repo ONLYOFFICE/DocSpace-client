@@ -3,23 +3,18 @@
   "content": "<1>{{fileName}}</1> file exported to {{sectionName}}",
   "content_en_sha1_hash": "7d984189a627bf8b057fab0ddda7546b4b6c7397",
   "created_at": "2026-08-10T12:21:59.922Z",
-  "updated_at": "2026-08-10T12:23:10.350Z",
+  "updated_at": "2026-08-12T11:18:44.491Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Toast message appearing after a successful file export, containing a clickable filename link and the destination section name.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T11:18:44.491Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
-      "line_number": 53,
-      "context": "openOnNewPage: boolean,\n ) => {\n const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Common\"\n values={{ fileName, sectionName: t(\"Common:Files\") }}\n components={{\n 1: (\n <Link",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/utils/openUrlWithFallbackToast.tsx",
-      "line_number": 77,
-      "context": "texts: TOpenUrlFallbackTexts,\n ) => {\n toastr.success(\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Common\"\n values={{ fileName: texts.fileName, sectionName: texts.sectionName }}\n components={{\n 1: (\n <Link",
+      "file_path": "/packages/shared/utils/openUrlWithExportToast.tsx",
+      "line_number": 90,
+      "context": "persistent = false,\n }: TShowFileExportToastOptions) => {\n const message = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Common\"\n values={{ fileName, sectionName }}\n components={{\n 1: (\n <Link",
       "module": "/packages/shared"
     }
   ],

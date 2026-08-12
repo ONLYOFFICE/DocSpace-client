@@ -1,14 +1,13 @@
 {
   "key_path": "SsoIntro",
-  "content": "The Single Sign-On section allows you to enable/disable third-party authentication using SAML, thereby providing a quicker, easier and more secure way to access the space for users.",
-  "content_en_sha1_hash": "934dd1dc1e384a2a4a53a740d7eba5216ea9f77b",
-  "created_at": "2025-05-19T21:30:50.185Z",
-  "updated_at": "2026-05-15T15:37:40.282Z",
+  "content": "The Single Sign-On section allows you to enable/disable third-party authentication using SAML, thereby providing a quicker, easier and more secure way to access the workspace for users.",
+  "content_en_sha1_hash": "1e86e7e897b4a60538b3cbd4b531301c45d50f78",
+  "created_at": "2026-08-12T11:00:45.254Z",
+  "updated_at": "2026-08-12T11:00:51.596Z",
   "comment": {
-    "text": "This is an introductory paragraph displayed on the Single Sign-On settings page. It explains the purpose of the section, which is to manage third-party authentication via SAML for easier and more secure user access.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:26:16.522Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +205,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

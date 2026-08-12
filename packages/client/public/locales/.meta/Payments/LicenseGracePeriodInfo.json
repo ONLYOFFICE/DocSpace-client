@@ -1,14 +1,14 @@
 {
   "key_path": "LicenseGracePeriodInfo",
-  "content": "During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
-  "content_en_sha1_hash": "036439c191a76a4b6f284fdec3a7d03bd6c5d9ca",
-  "created_at": "2026-02-18T14:56:32.715Z",
-  "updated_at": "2026-06-15T19:31:55.998Z",
+  "content": "During this time, admins are not able to create new rooms or add new users. Once the grace period ends, the workspace will become unavailable until a new license is activated.",
+  "content_en_sha1_hash": "f251c67513d16988ad32150e52c91a269fed3f0f",
+  "created_at": "2026-08-12T11:00:46.838Z",
+  "updated_at": "2026-08-12T11:57:25.025Z",
   "comment": {
-    "text": "This is a paragraph of text within a dialog, informing administrators about restrictions during a license grace period. It appears when the license has expired but a grace period is active, and includes the product name via the `{{productName}}` variable.",
+    "text": "Informational text within an invite quota warning dialog that explains the restrictions and consequences of being in a license grace period.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:19:41.684Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:57:25.025Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -26,6 +26,12 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

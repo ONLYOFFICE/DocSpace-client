@@ -1,14 +1,14 @@
 {
   "key_path": "PortalOwnerCan",
-  "content": "{{productName}} owner can:",
-  "content_en_sha1_hash": "97d7cb6f581a857cc0b100e3288462c1654fe519",
-  "created_at": "2025-05-19T21:30:56.998Z",
-  "updated_at": "2026-05-15T14:00:06.644Z",
+  "content": "The {{productName}} owner can:",
+  "content_en_sha1_hash": "a8617761e6fc8d84b10b46af2cf4a9659cef2888",
+  "created_at": "2026-08-12T11:00:49.266Z",
+  "updated_at": "2026-08-12T11:28:51.953Z",
   "comment": {
-    "text": "This is a list header in a dialog. It introduces a list of actions the portal owner can perform, with `{{productName}}` being replaced by the product's brand name (e.g., ONLYOFFICE DocSpace).",
+    "text": "List header and tooltip in the Change Portal Owner dialog that introduces the permissions available to the {{productName}} owner.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:27.630Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:28:51.953Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

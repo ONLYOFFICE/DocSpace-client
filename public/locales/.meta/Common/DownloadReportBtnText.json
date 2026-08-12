@@ -3,7 +3,7 @@
   "content": "Download report",
   "content_en_sha1_hash": "ca59430707ce8fb813997d7d85dff992c7f66e85",
   "created_at": "2026-04-10T13:53:45.938Z",
-  "updated_at": "2026-08-06T14:20:57.647Z",
+  "updated_at": "2026-08-12T11:00:51.602Z",
   "comment": {
     "text": "This is a button label that allows users to download a report, such as a transaction history or an audit trail.",
     "is_auto": true,
@@ -39,6 +39,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
       "line_number": 115,
       "context": "cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"Common:DownloadReportBtnText\")}\n downloadReportDescription={t(\"Common:ReportSaveLocation\", {\n sectionName: t(\"Common:Files\"),\n })}\n getReport={getLoginHistoryReport}\n isLoadingDownloadReport={isLoginHistoryReportBuilding}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/DocumentBuilderReportStore.ts",
+      "line_number": 168,
+      "context": "// wherever they navigated to — the toast leaves it up to them.\n skipAutoOpen: this.abandonedReports.has(type),\n t: i18n.t,\n texts: {\n fileName:\n task.resultFileName || i18n.t(\"Common:DownloadReportBtnText\"),\n sectionName: i18n.t(\"Common:Files\"),\n },\n });\n };\n }",
       "module": "/packages/client"
     }
   ],

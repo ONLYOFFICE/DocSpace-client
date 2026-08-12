@@ -1,14 +1,14 @@
 {
   "key_path": "IPSecuritySettingDescription",
-  "content": "Configure IP Security to restrict login possibility to select IP addresses. Use either exact IP addresses in the IPv4 format, IP range or CIDR masking. The IP security does not work for space owners, they can access the space from any IP address.",
-  "content_en_sha1_hash": "285f2427eec118d67b6d3cbbf9ebe80d3e4719d1",
-  "created_at": "2025-05-19T21:30:51.733Z",
-  "updated_at": "2026-06-02T08:43:27.532Z",
+  "content": "Configure IP Security to restrict login possibility to select IP addresses. Use either exact IP addresses in the IPv4 format, IP range or CIDR masking. The IP security does not work for workspace owners, they can access the workspace from any IP address.",
+  "content_en_sha1_hash": "2b3cf726cb109d4fc092cfbb28f930a419e229a9",
+  "created_at": "2026-08-12T11:00:46.030Z",
+  "updated_at": "2026-08-12T12:13:31.560Z",
   "comment": {
-    "text": "This is a descriptive text explaining the IP Security feature. It appears below the \"IP Security\" heading in the portal settings and provides details on how to configure IP restrictions for logins, noting that space owners are exempt.",
+    "text": "Description text for the IP Security setting category in the portal security settings, explaining how to configure allowed IP addresses and ranges.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:23:38.865Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T12:13:31.560Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

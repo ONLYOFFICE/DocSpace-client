@@ -3,7 +3,7 @@
   "content": "Top up & Upgrade",
   "content_en_sha1_hash": "7f12b9a72a1ce147ecf9af79a4a075550af1912f",
   "created_at": "2026-06-02T15:02:52.991Z",
-  "updated_at": "2026-08-06T11:20:26.785Z",
+  "updated_at": "2026-08-12T11:00:51.650Z",
   "comment": {
     "text": "Button label shown when the user's balance is insufficient.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1576,
+      "line_number": 1584,
       "context": "const dueTodayAmount = this.tariffDueTodayAmount ?? this.totalPrice;\n const isBalanceInsufficient = this.walletBalance < dueTodayAmount;\n \n if (this.tariffDueTodayAmount !== null && !isTheSameCount) {\n return isBalanceInsufficient\n ? t(\"TopUpAndUpgrade\")\n : t(\"PayAndUpgrade\", {\n amount: this.formatPaymentCurrency(dueTodayAmount),\n });\n }",
       "module": "/libs/ui-kit"
     }

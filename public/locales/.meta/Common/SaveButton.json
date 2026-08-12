@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-08-10T12:23:10.076Z",
+  "updated_at": "2026-08-12T11:00:51.495Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -313,7 +313,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
-      "line_number": 90,
+      "line_number": 91,
       "context": "<FilesSelectorWrapper\n filesSettings={filesSettings}\n {...cancelButtonProps}\n withHeader\n headerProps={{\n headerLabel: t(\"Common:SaveButton\"),\n onCloseClick: onClose,\n }}\n withBreadCrumbs\n withSearch\n withoutBackButton",
       "module": "/packages/doceditor"
     },
@@ -409,7 +409,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 674,
+      "line_number": 676,
       "context": "</div>\n ) : null}\n \n {isChanged || isThirdStorageChanged ? (\n <SaveCancelButtons\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveModuleSettings}\n onCancelClick={onCancelModuleSettings}\n saveButtonDisabled={isSaveCancelDisabled}\n disableRestoreToDefault={isSaveCancelDisabled}",
       "module": "/packages/shared"
     },

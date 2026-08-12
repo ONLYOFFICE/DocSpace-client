@@ -3,7 +3,7 @@
   "content": "Backup: {{progress}}%",
   "content_en_sha1_hash": "67556deadd1d0bbd475e81e5accc92229e607451",
   "created_at": "2025-05-26T07:15:40.772Z",
-  "updated_at": "2026-08-06T08:04:20.024Z",
+  "updated_at": "2026-08-12T11:00:51.635Z",
   "comment": {
     "text": "This is a progress indicator that appears during a backup operation. It shows the current percentage of completion, where `{{progress}}` is a number from 0 to 100.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 696,
+      "line_number": 698,
       "context": "{\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 770,
-      "context": "label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
+      "line_number": 777,
+      "context": "})\n : downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
       "module": "/packages/shared"
     },
     {

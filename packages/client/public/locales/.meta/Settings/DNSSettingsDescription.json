@@ -1,14 +1,13 @@
 {
   "key_path": "DNSSettingsDescription",
-  "content": "Set an alternative URL address for your space. Send your request to our support team to get help with the settings.",
-  "content_en_sha1_hash": "07909a29d7f524535573d7fd44621cfb9130ebf3",
-  "created_at": "2025-05-19T21:30:51.221Z",
-  "updated_at": "2026-05-28T15:46:18.588Z",
+  "content": "Set an alternative URL address for your workspace. Send your request to our support team to get help with the settings.",
+  "content_en_sha1_hash": "225f97dcfc2efb74e45c7f7843984d1afd613c3a",
+  "created_at": "2026-08-12T11:00:45.756Z",
+  "updated_at": "2026-08-12T11:00:51.564Z",
   "comment": {
-    "text": "This is a description for the DNS settings section, explaining that users can set a custom URL for their space and should contact support for assistance.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:24:30.218Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
@@ -169,6 +168,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
@@ -200,12 +205,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

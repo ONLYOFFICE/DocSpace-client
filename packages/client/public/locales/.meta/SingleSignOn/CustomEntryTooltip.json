@@ -1,14 +1,13 @@
 {
   "key_path": "CustomEntryTooltip",
-  "content": "The caption for the button used to login into the space with the Single Sign-On service",
-  "content_en_sha1_hash": "30b2a8cb8d27655e6b1304797109f48d75f5f655",
-  "created_at": "2025-05-19T21:30:50.075Z",
-  "updated_at": "2026-05-15T15:37:40.281Z",
+  "content": "The caption for the button used to login into the workspace with the Single Sign-On service",
+  "content_en_sha1_hash": "3ed9e15830f48a76904d31a562040a45ec97946f",
+  "created_at": "2026-08-12T11:00:45.166Z",
+  "updated_at": "2026-08-12T11:00:51.596Z",
   "comment": {
-    "text": "This is a tooltip that appears when hovering over the input field for the custom Single Sign-On button caption. It explains what the input field is for.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:26:56.957Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +205,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

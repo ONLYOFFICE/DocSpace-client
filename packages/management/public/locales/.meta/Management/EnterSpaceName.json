@@ -1,14 +1,13 @@
 {
   "key_path": "EnterSpaceName",
-  "content": "Enter space name",
-  "content_en_sha1_hash": "774976cb532e46414f6bc13584a87c01deff1ec2",
-  "created_at": "2025-05-19T21:30:57.454Z",
-  "updated_at": "2026-05-28T15:46:18.676Z",
+  "content": "Enter workspace name",
+  "content_en_sha1_hash": "a0bec15b2cbc12eec7bf7aee62431f3d1a0eb4f5",
+  "created_at": "2026-08-12T11:00:50.895Z",
+  "updated_at": "2026-08-12T11:00:51.639Z",
   "comment": {
-    "text": "This is a placeholder text for an input field where the user needs to type in a name for a space or portal.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:31:42.303Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
@@ -155,7 +154,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +169,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

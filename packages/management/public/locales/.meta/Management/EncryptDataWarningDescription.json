@@ -1,14 +1,13 @@
 {
   "key_path": "EncryptDataWarningDescription",
-  "content": "Storage encryption may take time. The spaces will be unavailable during the process. Make sure that you have enough storage and that your data is backed up. Don't forget to disable automatic backups and stop all the running ones. Otherwise, it will be done automatically.",
-  "content_en_sha1_hash": "03a845bcba913449dba261e59a77cd061046bb71",
-  "created_at": "2025-05-19T21:30:57.446Z",
-  "updated_at": "2026-05-15T14:00:06.971Z",
+  "content": "Storage encryption may take time. The workspaces will be unavailable during the process. Make sure that you have enough storage and that your data is backed up. Don't forget to disable automatic backups and stop all the running ones. Otherwise, it will be done automatically.",
+  "content_en_sha1_hash": "d54130337c7ef17b847bcab13869bda72c216e57",
+  "created_at": "2026-08-12T11:00:50.888Z",
+  "updated_at": "2026-08-12T11:00:51.639Z",
   "comment": {
-    "text": "This is a warning message displayed before initiating storage encryption, informing the user about potential downtime, backup requirements, and automatic backup handling.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:31:46.053Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

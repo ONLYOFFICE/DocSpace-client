@@ -3,7 +3,7 @@
   "content": "<1>The unused portion of your current subscription is automatically applied toward your new subscription.</1><2>Unused: {{amount}}</2><3>Your billing cycle will restart today.</3>",
   "content_en_sha1_hash": "23f8bbac53f6c1a37af39eb46972855784f2773e",
   "created_at": "2026-08-06T14:20:54.697Z",
-  "updated_at": "2026-08-06T14:29:58.075Z",
+  "updated_at": "2026-08-12T11:00:51.575Z",
   "comment": {
     "text": "Tooltip for a HelpButton explaining how unused subscription credits transfer to a new plan; contains a formatted currency value in {{amount}}.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 875,
+      "line_number": 888,
       "context": "<HelpButton\n size={12}\n tooltipContent={\n <Trans\n ns=\"DocsConnect\"\n i18nKey=\"UnusedSubscriptionCreditTooltip\"\n values={{\n amount: formatCurrencyExact(unusedCredit),\n }}\n components={{\n 1: <Text fontSize=\"12px\" />,",
       "module": "/packages/client"
     }

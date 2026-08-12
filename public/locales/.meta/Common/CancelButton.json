@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-08-10T12:23:10.044Z",
+  "updated_at": "2026-08-12T11:00:51.499Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -169,7 +169,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 307,
+      "line_number": 309,
       "context": ": {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton: true,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n onCancel,\n }\n : {};\n \n const searchSelectorProps: TSelectorSearch = withSearch",
       "module": "/libs/ui-kit"
     },
@@ -283,7 +283,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 438,
+      "line_number": 442,
       "context": "testId=\"create_room_dialog_save\"\n />\n <Button\n id=\"shared_create-room-modal_cancel\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n isDisabled={isLoading}\n onClick={onCloseAndDisconnectThirdparty}\n testId=\"create_room_dialog_cancel\"",
       "module": "/packages/client"
     },
@@ -313,7 +313,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 301,
+      "line_number": 302,
       "context": "testId=\"delete_dialog_modal_submit\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n testId=\"delete_dialog_modal_cancel\"",
       "module": "/packages/client"
     },
@@ -583,8 +583,8 @@
     },
     {
       "file_path": "/packages/client/src/components/PluginSelector/PluginFilesSelector/PluginFilesSelector.tsx",
-      "line_number": 220,
-      "context": "openRoot={openRoot}\n getIcon={getIcon!}\n withSearch={!!withSearch}\n withBreadCrumbs={!!withBreadCrumbs}\n withCancelButton={!!withCancelButton}\n cancelButtonLabel={cancelButtonLabel ?? t(\"Common:CancelButton\")}\n submitButtonLabel={submitButtonLabel ?? t(\"Common:AddButton\")}\n withCreate={!!withCreate}\n withFooterCheckbox={!!withFooterCheckbox}\n withFooterInput={!!withFooterInput}\n disabledItems={[]}",
+      "line_number": 222,
+      "context": "openRoot={openRoot}\n getIcon={getIcon!}\n withSearch={!!withSearch}\n withBreadCrumbs={!!withBreadCrumbs}\n withCancelButton={!!withCancelButton}\n cancelButtonLabel={cancelButtonLabel ?? t(\"Common:CancelButton\")}\n submitButtonLabel={submitButtonLabel ?? t(\"Common:AddButton\")}\n withCreate={!!withCreate}\n disabledCreatePublicRoom={disabledCreatePublicRoom}\n withFooterCheckbox={!!withFooterCheckbox}\n withFooterInput={!!withFooterInput}",
       "module": "/packages/client"
     },
     {
@@ -595,7 +595,7 @@
     },
     {
       "file_path": "/packages/client/src/components/PluginSelector/PluginRoomSelector/PluginRoomSelector.tsx",
-      "line_number": 160,
+      "line_number": 166,
       "context": ": {};\n \n const cancelButtonProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton: true,\n cancelButtonLabel: cancelButtonLabel ?? t(\"Common:CancelButton\"),\n onCancel,\n }\n : {};\n \n return (",
       "module": "/packages/client"
     },
@@ -733,7 +733,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 1092,
+      "line_number": 1105,
       "context": "testId=\"docs_connect_buy_plan_submit\"\n />\n <Button\n scale\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n isDisabled={submitting && !waitingPayment}\n />\n </div>\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -985,7 +985,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
-      "line_number": 67,
+      "line_number": 68,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const cancelButtonProps: TSelectorCancelButton = {\n withCancelButton: true,\n onCancel: onClose,\n cancelButtonLabel: t(\"Common:CancelButton\"),\n cancelButtonId: \"select-file-modal-cancel\",\n };\n \n const withFooterCheckbox =\n fileSaveAsExtension !== \"zip\" && fileInfo.fileExst !== \"fb2\";",
       "module": "/packages/doceditor"
     },
@@ -1171,13 +1171,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
-      "line_number": 103,
+      "line_number": 121,
       "context": "scale\n onClick={onConfirm}\n isLoading={isLoading}\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 797,
+      "line_number": 799,
       "context": "// initHasNextPage={selectorInitData.hasNextPage}\n submitButtonLabel={getSubmitLabel(\n selectorMode,\n t,\n )}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n withCancelButton\n withBreadCrumbs\n withSearch\n withCreate={!!selectorMode}\n createDefineRoomType={RoomsType.CustomRoom}",
       "module": "/packages/sdk"
     },
@@ -1261,7 +1261,7 @@
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelectorInput.tsx",
-      "line_number": 219,
+      "line_number": 220,
       "context": "isPanelVisible={isPanelVisible}\n rootThirdPartyId={rootThirdPartyId}\n submitButtonLabel={acceptButtonLabel}\n descriptionText={descriptionText ?? \"\"}\n cancelButtonId=\"select-file-modal-cancel\"\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={onClose}\n onSubmit={onSubmit}\n onSetBaseFolderPath={onSetBasePath}\n getIsDisabled={getIsDisabledAction}\n withCreate={withCreate}",
       "module": "/packages/shared"
     },
@@ -1393,7 +1393,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 675,
+      "line_number": 677,
       "context": ") : null}\n \n {isChanged || isThirdStorageChanged ? (\n <SaveCancelButtons\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveModuleSettings}\n onCancelClick={onCancelModuleSettings}\n saveButtonDisabled={isSaveCancelDisabled}\n disableRestoreToDefault={isSaveCancelDisabled}\n displaySettings",
       "module": "/packages/shared"
     },

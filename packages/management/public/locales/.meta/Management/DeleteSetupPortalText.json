@@ -1,14 +1,13 @@
 {
   "key_path": "DeleteSetupPortalText",
-  "content": "You are going to permanently delete the <1>{{domain}}</1> space with all the data and accounts.  A request to delete <1>{{domain}}</1> will be sent to the {{productName}} owner to the email address <1>{{email}}</1>.",
-  "content_en_sha1_hash": "f282835d6f73c55713757f54bfc6d5a08befebc7",
-  "created_at": "2025-05-19T21:30:57.432Z",
-  "updated_at": "2026-05-15T14:00:06.975Z",
+  "content": "You are going to permanently delete the <1>{{domain}}</1> workspace with all the data and accounts.  A request to delete <1>{{domain}}</1> will be sent to {{productName}} owner to the email address <1>{{email}}</1>.",
+  "content_en_sha1_hash": "00c0ab2aaf1d86ac914bac9f8a62281f71602901",
+  "created_at": "2026-08-12T11:00:50.874Z",
+  "updated_at": "2026-08-12T11:00:51.641Z",
   "comment": {
-    "text": "This is the body text of a confirmation dialog that appears when a user attempts to delete their DocSpace portal. It informs the user that the deletion is permanent and that a request will be sent to the owner's email. The variables `{{domain}}`, `{{productName}}`, and `{{email}}` represent the portal's domain, the product name, and the owner's email address, respectively.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:31:52.730Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
@@ -149,7 +148,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

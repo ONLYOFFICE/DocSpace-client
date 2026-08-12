@@ -626,7 +626,9 @@ self: FilesActionStore,
       return;
     }
 
-    if (!isAIAgents() && fileItemsList && enablePlugins) {
+    // an encrypted file stays on the normal open path: the plugin registered
+    // for this extension could only pass ciphertext outside the room
+    if (!isAIAgents() && fileItemsList && enablePlugins && !item.encrypted) {
       // TS cannot track the assignment inside the forEach
       // callback; the erased casts keep the old unchecked reads.
       let currPluginItem: Nullable<TPluginFileItem> = null;

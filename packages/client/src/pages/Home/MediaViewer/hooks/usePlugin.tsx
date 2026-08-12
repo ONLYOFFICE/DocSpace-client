@@ -145,6 +145,10 @@ export const usePlugin = ({
     const item = playlist.find((p) => p.fileId === currentMediaFileId);
     const fileExst = item?.fileExst;
 
+    // plugins fetch the file themselves and cannot decrypt it, so an encrypted
+    // file must not be offered to them from the viewer either
+    if (item?.encrypted) return [];
+
     const pluginContextMenuKeys = [
       ...(getContextMenuKeysByType(PluginFileType.image, fileExst) || []),
       ...(getContextMenuKeysByType(PluginFileType.video, fileExst) || []),

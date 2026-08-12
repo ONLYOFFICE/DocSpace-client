@@ -43,9 +43,12 @@ import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
  * The stand-in entities a tour walks through are stamped with the wall clock
  * (`SRC_DIR/api/tourDemo/data` — `demoTimestamp`), so their `Last activity`
  * column renders whatever time the run happened at and every screenshot
- * disagrees with the one taken before it. The clock is fixed rather than the
+ * disagrees with the one taken before it. The clock is set rather than the
  * column masked: the timestamp is part of what those rows look like, and the
  * date is the same shape as the fixed ones the list mocks already return.
+ *
+ * A run lasts seconds, so setting the clock to this instant is enough to pin
+ * the rendered minute — the clock is deliberately not stopped, see `armTour`.
  */
 const TOUR_FIXED_NOW = "2025-01-15T12:00:00.000Z";
 
@@ -59,16 +62,30 @@ const TOUR_FIXED_NOW = "2025-01-15T12:00:00.000Z";
  * these specs use, instead of driving the dashboard promo, so each one stays
  * focused on the walkthrough it is about.
  *
- * The clock is fixed here too: this is the one call every tour spec makes
+ * The clock is set here too: this is the one call every tour spec makes
  * between landing on an origin and navigating into the section the tour runs
  * in, which is the last moment before anything a screenshot covers is
- * rendered. `setFixedTime` rather than `install` — only `Date` is frozen, so
- * joyride's own timers still run.
+ * rendered.
+ *
+ * `setSystemTime` rather than `setFixedTime`, and the difference is load-
+ * bearing. Under `setFixedTime` the frame timers keep firing but `Date.now()`
+ * is pinned, and joyride's scroll animation measures its own progress as
+ * `(Date.now() - start) / duration` (`scroll@3` — the package behind
+ * `scrollTo`). Pinned, that ratio is always 0, the frame loop never reaches
+ * the end, and the promise joyride awaits before clearing its `scrolling`
+ * flag never resolves. A step stuck mid-scroll renders neither the tooltip
+ * (the lifecycle never leaves `TOOLTIP_BEFORE`) nor the spotlight cutout,
+ * which shows up as a screenshot of nothing but the dimmed backdrop.
+ *
+ * `setSystemTime` starts the clock at the same instant instead of stopping it,
+ * so `demoTimestamp` (SRC_DIR/api/tourDemo/data) still stamps the stand-in
+ * rows deterministically while the few hundred milliseconds a scroll needs
+ * still elapse.
  *
  * `key` is the concrete store's key (e.g. `files_tour_pending`).
  */
 export const armTour = async (page: Page, key: string) => {
-  await page.clock.setFixedTime(new Date(TOUR_FIXED_NOW));
+  await page.clock.setSystemTime(new Date(TOUR_FIXED_NOW));
 
   await page.evaluate(
     (storageKey) => window.localStorage.setItem(storageKey, "true"),

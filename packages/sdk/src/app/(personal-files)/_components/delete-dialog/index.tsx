@@ -42,6 +42,8 @@ import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 
+import { getDeleteVariant } from "./getDeleteVariant";
+
 type DeleteDialogProps = {
   visible: boolean;
   isLoading: boolean;
@@ -49,6 +51,8 @@ type DeleteDialogProps = {
   isTrash: boolean;
   /** Empty-trash variant: trash-wide permanent deletion wording. */
   isEmptyTrash?: boolean;
+  /** The recycle bin is bypassed outside the trash too — e.g. a private room. */
+  isPermanentDelete?: boolean;
   onClose: () => void;
   onConfirm: () => void;
 };
@@ -59,22 +63,36 @@ const DeleteDialog = ({
   itemCount,
   isTrash,
   isEmptyTrash,
+  isPermanentDelete,
   onClose,
   onConfirm,
 }: DeleteDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const message = isEmptyTrash
-    ? t("Common:DeleteForeverNote", {
-        sectionName: t("Common:TrashSection"),
-      })
-    : isTrash
-      ? itemCount === 1
-        ? t("Common:DeleteItemForever")
-        : t("Common:DeleteItemsForever", { itemCount })
-      : itemCount === 1
-        ? t("Common:MoveToTrashItem")
-        : t("Common:MoveToTrashItems", { itemCount });
+  const variant = getDeleteVariant({
+    isEmptyTrash,
+    isPermanent: isTrash || !!isPermanentDelete,
+    itemCount,
+  });
+
+  const getMessage = () => {
+    switch (variant) {
+      case "empty-trash":
+        return t("Common:DeleteForeverNote", {
+          sectionName: t("Common:TrashSection"),
+        });
+      case "permanent-one":
+        return t("Common:DeleteItemForever");
+      case "permanent-many":
+        return t("Common:DeleteItemsForever", { itemCount });
+      case "trash-one":
+        return t("Common:MoveToTrashItem");
+      default:
+        return t("Common:MoveToTrashItems", { itemCount });
+    }
+  };
+
+  const message = getMessage();
 
   const header = isEmptyTrash
     ? t("Common:DeleteForeverTitle")

@@ -11,6 +11,7 @@
   "PasswordRecoveryTitle": "Obnova gesla",
   "RecoverAccess": "Obnova dostopa",
   "RecoverContactEmailPlaceholder": "Kontaktni email",
+  "RecoverTextBody": "Če se ne morete prijaviti z obstoječim računom ali se želite registrirati kot nov uporabnik, se obrnite na skrbnika delovnega prostora.",
   "Register": "Registracija",
   "RegisterTextBodyAfterDomainsList": "Za registracijo vnesite svoj e-mail naslov in kliknite Pošlji zahtevo. Povezava za aktivacijo vam bo poslana.",
   "RegisterTextBodyBeforeDomainsList": "Registracija je na voljo uporabnikom z e-mail računom na",
@@ -18,5 +19,6 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Privzeta življenjska doba seje je 20 minut. Preverite to možnost, če jo želite nastaviti na 1 leto. Če želite nastaviti poljubno vrednost, pojdite v Nastavitve.",
   "SignInLDAP": "Prijavi se v: {{ldap_domain}}",
-  "SignInLdapHelper": "Uporabi poverilnice za domeno podjetja"
+  "SignInLdapHelper": "Uporabi poverilnice za domeno podjetja",
+  "UserIsAlreadyRegistered": "Uporabnik <1>{{email}}</1> je že registriran v tem delovnem prostoru. Vnesite svoje geslo ali se vrnite nazaj in nadaljujte z drugim e-mail naslovom."
 }

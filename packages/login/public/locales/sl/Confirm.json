@@ -33,6 +33,7 @@
   "SetAppButton": "Aplikacija za prijavo",
   "SignUp": "Prijava",
   "SuccessDeactivate": "Vaš račun je bil uspešno ponovno aktiviran. Čez 10 sekund boste preusmerjeni na <1>stran</1>.",
+  "SuccessReactivate": "Vaš račun je bil uspešno ponovno aktiviran. Čez 10 sekund boste preusmerjeni v <1>delovni prostor</1>.",
   "SuccessRemoved": "Vaš račun je bil uspešno odstranjen. Čez 10 sekund boste preusmerjeni na <1>stran</1>.",
   "TermsAndConditions": "Z nadaljevanjem soglašate in razumete ter se strinjate z našimi <1>Pogoji in določili</1> in z <2>Izjavo o zasebnosti</2>.",
   "TfaSubTitle": "Sledite preprostim korakom za nadaljevanje dela v tem {{productName}}:",

@@ -71,6 +71,7 @@
   "LifetimeDialogDescription": "Der Lebensdauer-Countdown beginnt mit dem Erstellungsdatum der Datei. Einige Dateien in diesem Raum überschreiten die vorgeschlagene Lebensdauer und werden gelöscht, sobald Sie die Einstellung aktivieren.",
   "LifetimeDialogDescriptionHeader": "Ältere Dateien mit überschrittener Lebensdauer werden gelöscht",
   "LinkDeletedSuccessfully": "Link erfolgreich gelöscht",
+  "LinkForPortalUsers": "Link für Benutzer des Arbeitsbereichs",
   "LinkSuccessfullyCreatedAndCopied": "Link erfolgreich erstellt und in die Zwischenablage kopiert",
   "MarkAsRevision": "Als Revision markieren",
   "MarkAsVersion": "Als Version markieren",

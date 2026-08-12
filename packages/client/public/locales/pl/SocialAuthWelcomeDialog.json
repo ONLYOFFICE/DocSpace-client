@@ -1,9 +1,11 @@
 {
   "ChangeData": "Zmień dane i hasło",
   "ClickButtonBelow": "Jeśli chcesz logować się za pomocą adresu e-mail, ustaw własne hasło. <br/> Po zakończeniu kliknij przycisk poniżej.",
+  "ContinueToProduct": "Kontynuuj do przestrzeni roboczej",
   "GeneratedPassword": "Wygenerowane hasło",
   "ProductNameDetail": "{{productName}} nazwa",
   "ReviewAccountDetails": "Proszę poświęć chwilę na zapoznanie się ze szczegółami swojego konta:",
   "SetEmailPassword": "Ustaw hasło",
+  "WelcomeSubtitle": "Twoja przestrzeń robocza została pomyślnie utworzona. Sprawdź szczegóły swojego profilu i zacznij pracować.",
   "YourProfileDetails": "Szczegóły profilu"
 }

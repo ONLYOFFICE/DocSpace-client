@@ -12,6 +12,7 @@
   "TourPlacesShared": "{{sectionName}} – Dateien, die andere für Sie freigegeben haben.",
   "TourPlacesTitle": "Alles an seinem Platz",
   "TourPlacesTrash": "{{sectionName}} – gelöschte Dateien, die Sie noch wiederherstellen können.",
+  "TourShare": "Fahren Sie mit der Maus über eine Datei, um die Schnellaktionen zu sehen. Klicken Sie auf das Freigabesymbol, um den Kontakten Ihres Arbeitsbereichs Zugriff mit unterschiedlichen Berechtigungsstufen zu geben – oder erstellen Sie einen externen Link für alle anderen.",
   "TourSharedAccess": "{{sharedBy}} sagt, von wem die Datei kommt, {{accessLevel}} sagt, was Sie damit tun dürfen – ansehen, kommentieren oder bearbeiten. Nur der Besitzer kann das ändern.",
   "TourSharedAccessTitle": "Wer sie freigegeben hat und was Sie tun können",
   "TourSharedEmpty": "Es wurde noch nichts für Sie freigegeben. Dateien und Ordner erscheinen hier, sobald Ihnen jemand Zugriff darauf gibt.",

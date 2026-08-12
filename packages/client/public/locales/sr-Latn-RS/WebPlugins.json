@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Obriši dodatak",
+  "DeletePluginDescription": "Ovaj dodatak više neće biti dostupan korisnicima radnog prostora. Da li ste sigurni da želite da nastavite?",
   "DeletePluginTitle": "Obriši dodatak?",
   "ExpandFunctionality": "Proširi funkcionalnost koristeći Plugin SDK (SDK za dodatke)",
   "GoToRepo": "Idi u repozitorijum",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin uspešno učitan",
   "PluginSamples": "Primeri dodataka",
   "PluginSDK": "Plugin SDK (SDK za dodatke)",
-  "PluginSDKInstruction": "Kliknite na dugme za detaljne instrukcije kako da kreirate sopstvene dodatke."
+  "PluginSDKDescription": "Pomoću Plugin SDK-a (SDK za dodatke) možete proširiti funkcionalnost vašeg radnog prostora, povezati treće strane usluge ili unaprediti postojeće korisničko iskustvo. Ovde možete pronaći uzorke dodataka sa dostupnim izvornim kodom na GitHub-u.",
+  "PluginSDKInstruction": "Kliknite na dugme za detaljne instrukcije kako da kreirate sopstvene dodatke.",
+  "UploadDescription": "Možete dodati dodatke da biste proširili funkcionalnost radnog prostora sa dodatnim mogućnostima. Kliknite na \"Postavi dodatak\" ili prevucite datoteku u ZIP arhivi."
 }

@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Toto je samotný formulár — presne to, čo otvorí každý, kto klikne na váš odkaz. Nahrajte PDF formulár, ktorý už máte, alebo si nejaký zostavte z galérie šablón bez toho, aby ste opustili pracovný priestor.",
   "FormsBlankTitle": "Formulár, ktorý otvárajú všetci",
   "FormsComplete": "Odoslaná kópia pristane v {{complete}} a zostane tam, jedna od každého. Zapnite zber výsledkov a každá odpoveď sa navyše stane riadkom v tabuľke — jeden stĺpec na pole, pripravený na zoradenie alebo do grafu.",
   "FormsCompleteTitle": "Pozbierané odpovede",

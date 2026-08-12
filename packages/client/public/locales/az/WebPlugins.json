@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Plagini silin",
+  "DeletePluginDescription": "Bu plagin artıq iş sahəsi istifadəçiləri üçün əlçatan olmayacaq. Davam etmək istədiyinizə əminsiniz?",
   "DeletePluginTitle": "Plagin silinsin?",
   "ExpandFunctionality": "SDK plaginindən istifadə edərək funksionallığı genişləndirin",
   "GoToRepo": "Anbara gedin",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin yüklandı uğurla",
   "PluginSamples": "Plagin nümunələri",
   "PluginSDK": "Plagin SDK",
-  "PluginSDKInstruction": "Öz plaginlərinizi necə yaratmaq barədə ətraflı təlimatlar üçün düyməni klikləyin."
+  "PluginSDKDescription": "Plugin SDK-dan istifadə edərək, iş sahənizin funksionallığını genişləndirə, üçüncü tərəf xidmətlərinə qoşula və ya mövcud istifadəçi təcrübəsini təkmilləşdirə bilərsiniz. Burada GitHub-da mövcud kod mənbəyi olan plaginlərin nümunələrini tapa bilərsiniz.",
+  "PluginSDKInstruction": "Öz plaginlərinizi necə yaratmaq barədə ətraflı təlimatlar üçün düyməni klikləyin.",
+  "UploadDescription": "İş sahəsinin funksionallığını əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edə bilərsiniz. Plagini yükləyin və ya faylı ZIP arxivinə sürükləyin."
 }

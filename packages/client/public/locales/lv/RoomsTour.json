@@ -5,6 +5,7 @@
   "RoomsEmptyTitle": "Jūsu saraksts pagaidām ir tukšs",
   "RoomsGroups": "Sakārtojiet telpas pēc noteiktām pazīmēm, lai ātri atrastu vajadzīgo. Veidojiet grupas un pārslēdzieties starp tām tieši virs saraksta.",
   "RoomsGroupsTitle": "Grupējiet savas telpas",
+  "RoomsMembers": "Katrai telpai ir savs dalībnieku saraksts informācijas panelī. Pievienojiet darbvietas kontaktpersonas un iestatiet katram dalībniekam lomu — no failu skatīšanas līdz visas telpas pārvaldībai.",
   "RoomsMembersTitle": "Strādājiet kopā",
   "RoomsPlacesArchive": "{{archive}} — telpas, kurās vairs nestrādājat, atjaunojamas jebkurā brīdī.",
   "RoomsPlacesFiles": "{{recent}}, {{favorites}} un {{trash}} apkopo failus no jūsu telpām: nesen atvērtos, ar zvaigznīti atzīmētos un dzēstos.",

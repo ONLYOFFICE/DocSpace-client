@@ -11,6 +11,7 @@
   "PasswordRecoveryTitle": "Recuperarea parolei",
   "RecoverAccess": "Recuperarea accesului la cont",
   "RecoverContactEmailPlaceholder": "E-mail de contact",
+  "RecoverTextBody": "Dacă nu puteți să vă conectați la contul dvs curent sau doriți să vă înregistrați din nou, contactați administratorul spațiului de lucru.",
   "Register": "Înregistrare",
   "RegisterTextBodyAfterDomainsList": "Pentru a vă înregistra, introduceți adresa de e-mail și dați clic pe Trimite solicitarea. Veți primi o scrisoare de activare.",
   "RegisterTextBodyBeforeDomainsList": "Înregistrarea este disponibilă numai utilizatorilor cu un cont e-mail de",
@@ -18,5 +19,6 @@
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "Durata sesiunii implicită este de 20 de minute. Bifați caseta de selectare pentru a prelungi durata până la un an. Pentru stabilirea perioadei personalizate, accesați Setările.",
   "SignInLDAP": "Conectare la: {{ldap_domain}}",
-  "SignInLdapHelper": "Utilizați datele de autentificare pentru domeniul corporativ"
+  "SignInLdapHelper": "Utilizați datele de autentificare pentru domeniul corporativ",
+  "UserIsAlreadyRegistered": "Utilizatorul <1>{{email}}</1> este deja înregistrat în acest spațiu de lucru, introduceţi parola dvs sau reveniți pentru a continua cu un alt e-mail."
 }

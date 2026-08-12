@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "Harta e atributeve",
   "LdapAuthenticationTooltip": "Aktivizoni këtë opsion nëse përdoruesi aktual i Windows nuk ka të drejta për të lexuar nga serveri LDAP dhe fut kredencialet e një përdoruesi tjetër me të drejtat e leximit.",
   "LdapAutoSyncToggle": "Sinkronizimi automatik",
+  "LdapAutoSyncToggleDescription": "Sinkronizimi do t'ju lejojë të ngarkoni të gjitha të dhënat nga hapësira e punës dhe të përditësoni të dhënat e reja pas ndryshimit të cilësimeve. Sinkronizoni sa herë që keni të dhëna të reja për përdoruesit në hapësirën e punës.",
   "LdapAvatar": "Foto e profilit",
   "LdapCertificateConfirm": "Konfirmoni certifikatën",
   "LdapConnectionType": "Lloji i lidhjes",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "FilloniTLS",
   "LdapConnectionTypeStartTlsTooltip": "FilloniTLS ofron një mënyrë për të përmirësuar një lidhje teksti të thjeshtë në një lidhje të koduar (TLS ose SSL) në vend që të përdorni një port të veçantë për komunikim të koduar.",
   "LdapConnectionTypeUnencrypted": "Komunikimi i pakriptuar",
+  "LdapDisclaimer": "Ju lutem, mbani parasysh: emaili i përdoruesit të hapësirës së punës do të merret nga cilësimi 'Atributi i postës'. Nëse mungon, do të formohet në këtë mënyrë: 'Atributi i hyrjes + @ + LDAP Domain'. Në rast se një email i tillë nuk ekziston, përdoruesi nuk do të marrë asnjë njoftim nga hapësira e punës.",
   "LdapGroupAttribute": "Atributi i grupit",
   "LdapGroupAttributeTooltip": "Futni atributin e objektit të grupit i cili specifikon se cilët përdorues përfshin ky grup.",
   "LdapGroupDN": "Grupi DN",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "Futni atributin e objektit që korrespondon me hyrjen e përdoruesit.",
   "LdapLoginTooltip": "Ju lutemi specifikoni përdoruesin e hyrjes që ka të drejta aksesi për leximin e serverit LDAP.",
   "LdapMail": "Postë",
+  "LdapMobileSettingsDescription": "Përdoreni këtë opsion për t'u ofruar përdoruesve tuaj përvojë sipas markës. Këto cilësime do të jenë efektive për të gjitha hapësirat tuaja të punës.",
   "LdapMobileSyncDescription": "Specifikoni informacionin e kompanisë suaj, shtoni lidhje me burimet e jashtme dhe adresat e emailit të shfaqura brenda ndërfaqes së zyrës në internet.",
   "LdapNextSync": "Sinkronizimi i radhës",
   "LdapPasswordTooltip": "Futni fjalëkalimin për përdoruesin me të drejtat e aksesit për të lexuar të dhënat nga serveri LDAP.",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "E vlefshme deri",
   "LdapSyncButton": "Sinkronizoni përdoruesit",
   "LdapSyncCronTitle": "Këtu mund të vendosni sa shpesh dëshironi të sinkronizoni automatikisht përdoruesit e LDAP",
+  "LdapSyncDescription": "Sinkronizimi i të dhënave LDAP është një mënyrë për të sinkronizuar ndryshimet e të dhënave midis hapësirës suaj të punës dhe serverit LDAP. Aktivizoni opsionin \"Auto Sync\" dhe caktoni një periudhë kohore për të përditësuar automatikisht informacionin.",
   "LdapSyncTitle": "Sinkronizoni të dhënat LDAP",
   "LdapToggle": "Autentifikimi LDAP",
   "LdapToggleDescription": "Aktivizoni këtë opsion nëse dëshironi të shtoni automatikisht përdorues nga serveri LDAP në {{productName}}. Përdoruesit e shtuar do të jenë në gjendje të autorizojnë duke përdorur kredencialet e tyre të serverit LDAP. {{productName}} nuk i ruan fjalëkalimet e përdoruesit në nivel lokal dhe do të vërtetojë përdoruesit që dërgojnë hyrjen dhe fjalëkalimin e tyre te serveri LDAP.",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "Filtri i përdoruesit",
   "LdapUserFilterTooltip": "Përdorni filtrin e kërkimit LDAP për të zgjedhur përdoruesit që duhet të importohen.",
   "LdapUserQuotaTooltip": "Për të vendosur një kuotë ruajtjeje për përdoruesin, shtoni një atribut në drejtorinë LDAP (për shembull, UsersQuotaLimit) dhe vendosni një vlerë të plotë për këtë atribut. Do të shfaqë vlerën e kuotës në bajt. Këtu, specifikoni vetëm emrin e atributit. Ky atribut do të zbatohet vetëm gjatë konfigurimit të parë dhe më vonë mund të ndryshohet manualisht në seksionin {{contactsName}}.",
-  "LdapUsersType": "Lloji i përdoruesve"
+  "LdapUsersType": "Lloji i përdoruesve",
+  "LdapUserTypeTooltip": "Të gjithë përdoruesit do të shtohen në hapësirën e punës me llojin e zgjedhur."
 }

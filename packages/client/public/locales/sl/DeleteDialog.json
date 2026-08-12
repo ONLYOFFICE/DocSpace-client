@@ -1,4 +1,5 @@
 {
+  "DeleteAllGroupDescription": "Označene skupine bodo izbrisane. Uporabniki v skupinah ne bodo odstranjeni iz delovnega prostora. Ste prepričani, da želite nadaljevati?",
   "DeleteAllGroupsTitle": "Izbriši skupine",
   "DeleteFiles": "Pohodili boste <strong>datoteke ({{filesCount}})</strong> v {{trashSection}}.",
   "DeleteFilesAndFolders": "Izbrisali boste <strong>datoteke ({{filesCount}})</strong> in <strong>foldere ({{foldersCount}})</strong> v {{trashSection}}.",
@@ -6,6 +7,7 @@
   "DeleteFilesForever": "Brišejo se <strong>datoteke ({{filesCount}})</strong>.",
   "DeleteFolders": "Pohodili boste <strong>map ({{foldersCount}})</strong> v {{trashSection}}.",
   "DeleteFoldersForever": "Brišejo se <strong>foldere ({{foldersCount}})</strong>.",
+  "DeleteGroupDescription": "Skupina {{groupName}} bo izbrisana. Uporabniki v skupini ne bodo odstranjeni iz delovnega prostora. Ste prepričani, da želite nadaljevati?",
   "DeleteGroupTitle": "Izbriši skupino",
   "DeleteItem": "Kmalu boste preselili <strong>{{name}}</strong> v {{trashSection}}.",
   "DeleteItemForeverConfirm": "Brišeš <strong>{{name}}</strong>.",

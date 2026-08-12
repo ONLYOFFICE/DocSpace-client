@@ -6,6 +6,7 @@
   "Binding": "Vinculación:",
   "CertificateExist": "Ya existe un certificado con el mismo tipo de acción.",
   "CustomEntryButton": "Leyenda personalizada del botón de inicio de sesión",
+  "CustomEntryTooltip": "Leyenda del botón utilizado para iniciar sesión en el espacio de trabajo con el servicio de inicio de sesión único.",
   "DownloadMetadataXML": "Descargar XML de metadatos SP",
   "Encryption": "Cifrado",
   "GenerateCertificate": "Generar nuevo certificado autofirmado",
@@ -49,8 +50,10 @@
   "spSignResponseRequest": "Firmar respuestas de cierre de sesión",
   "SPSingleLogoutURL": "URL de cierre de sesión única de SP (compatible con POST y redirección):",
   "SPSingleLogoutURLTooltip": "La URL utilizada para el cierre de sesión único en el lado del proveedor de identidades",
+  "SsoIntro": "La sección de inicio de sesión único le permite habilitar/deshabilitar la autenticación de terceros mediante SAML, proporcionando así una forma más rápida, fácil y segura de acceder al espacio de trabajo para los usuarios.",
   "StandardDecryptionAlgorithm": "Algoritmo de descifrado predeterminado",
   "TurnOnSSO": "Habilitar la autenticación de inicio de sesión único",
+  "TurnOnSSOCaption": "Habilite esta opción si desea añadir usuarios del servicio SSO a su espacio de trabajo automáticamente.",
   "UploadXML": "Cargar metadatos desde XML para rellenar automáticamente los campos obligatorios.",
   "UploadXMLPlaceholder": "URL al XML de metadatos IdP",
   "UsedFor": "Se usa para"

@@ -71,6 +71,7 @@
   "LifetimeDialogDescription": "Kalpošanas laika atskaite sākas faila izveides datumā. Daži faili šajā telpā pārsniedz piedāvāto kalpošanas laiku un tiks izdzēsti, tiklīdz iespējosiet iestatījumu.",
   "LifetimeDialogDescriptionHeader": "Vecāki faili ar pārsniegtu kalpošanas laiku tiks izdzēsti",
   "LinkDeletedSuccessfully": "Saite ir veiksmīgi izdzēsta",
+  "LinkForPortalUsers": "Saite darbvietas lietotājiem",
   "LinkSuccessfullyCreatedAndCopied": "Saite ir veiksmīgi izveidota un kopēta starpliktuvē",
   "MarkAsRevision": "Atzīmēt kā labojumu",
   "MarkAsVersion": "Atzīmēt kā versiju",

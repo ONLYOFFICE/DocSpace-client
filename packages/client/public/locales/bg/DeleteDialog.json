@@ -1,4 +1,5 @@
 {
+  "DeleteAllGroupDescription": "Избраните групи ще бъдат изтрити. Потребителите в групите няма да бъдат премахнати от работното пространство. Сигурни ли сте, че искате да продължите?",
   "DeleteAllGroupsTitle": "Изтрий групи",
   "DeleteFiles": "Предстои да преместите <strong>файлове ({{filesCount}})</strong> в {{trashSection}}.",
   "DeleteFilesAndFolders": "Ще изтриете <strong>файловете ({{filesCount}})</strong> и <strong>папките ({{foldersCount}})</strong> в {{trashSection}}.",
@@ -6,6 +7,7 @@
   "DeleteFilesForever": "Ще изтриете <strong>файлове ({{filesCount}})</strong>.",
   "DeleteFolders": "Предстои да преместите <strong>папки ({{foldersCount}})</strong> в {{trashSection}}.",
   "DeleteFoldersForever": "Ще изтриете <strong>папки ({{foldersCount}})</strong>.",
+  "DeleteGroupDescription": "Групата {{groupName}} ще бъде изтрита. Потребителите в нея няма да бъдат премахнати от работното пространство. Сигурни ли сте, че искате да продължите?",
   "DeleteGroupTitle": "Изтрий група",
   "DeleteItem": "Предстои да преместите <strong>{{name}}</strong> в {{trashSection}}.",
   "DeleteItemForeverConfirm": "Ще изтриете <strong>{{name}}</strong>.",

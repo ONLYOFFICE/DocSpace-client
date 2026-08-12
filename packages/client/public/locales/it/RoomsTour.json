@@ -5,6 +5,7 @@
   "RoomsEmptyTitle": "Il vostro elenco per ora è vuoto",
   "RoomsGroups": "Organizzate le stanze in base a caratteristiche specifiche per trovare rapidamente ciò che vi serve. Create gruppi e passate dall'uno all'altro proprio sopra l'elenco.",
   "RoomsGroupsTitle": "Raggruppate le vostre stanze",
+  "RoomsMembers": "Ogni stanza ha il proprio elenco di membri nel pannello delle informazioni. Aggiungete i contatti dello spazio di lavoro e assegnate un ruolo a ciascun membro, dalla semplice visualizzazione dei file alla gestione dell'intera stanza.",
   "RoomsMembersTitle": "Lavorate insieme",
   "RoomsPlacesArchive": "{{archive}}: le stanze in cui non lavorate più, ripristinabili in qualsiasi momento.",
   "RoomsPlacesFiles": "{{recent}}, {{favorites}} e {{trash}} raccolgono i file delle vostre stanze: aperti di recente, contrassegnati con una stella ed eliminati.",

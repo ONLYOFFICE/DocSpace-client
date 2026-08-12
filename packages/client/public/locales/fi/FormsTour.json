@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Tämä on itse lomake — täsmälleen se, minkä jokainen linkkiäsi seuraava avaa. Lataa jo valmiina oleva PDF-lomake tai rakenna sellainen mallikirjastosta poistumatta työtilasta.",
   "FormsBlankTitle": "Lomake, jonka kaikki avaavat",
   "FormsComplete": "Lähetetty kopio päätyy kohteeseen {{complete}} ja jää sinne, yksi henkilöä kohti. Kytke tulosten keruu päälle, niin jokaisesta vastauksesta tulee myös rivi laskentataulukkoon — yksi sarake kenttää kohti, valmiina lajiteltavaksi tai kaavioitavaksi.",
   "FormsCompleteTitle": "Vastaukset koossa",

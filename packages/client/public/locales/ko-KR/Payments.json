@@ -5,6 +5,7 @@
   "ChooseNewPlan": "새로운 요금제를 선택하시겠습니까?",
   "GracePeriodActive": "유예 기간은 <1>{{fromDate}}부터 {{byDate}}까지</1> 유효합니다 (남은 일수: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "새 사용자를 추가하거나 새 방을 만들 수 없습니다. 라이선스가 만료되었습니다.",
+  "LicenseGracePeriodInfo": "이 기간 동안 관리자는 새 방을 만들거나 새 사용자를 추가할 수 없습니다. 유예 기간이 끝나면, 새 라이선스가 활성화될 때까지 워크스페이스를 사용할 수 없습니다.",
   "NewRoomWillExceedLimit": "현재 사용 중인 요금제에 포함된 룸 수가 한도에 도달했기 때문에 이 룸을 생성할 수 없습니다.",
   "NewUsersWillExceedMembersLimit": "현재 사용 중인 요금제에 포함된 관리자 수가 한도에 도달했기 때문에 새로운 유로 사용자를 추가할 수 없습니다.",
   "NotPossibleRoomRestoring": "현재 사용 중인 요금제에 포함된 룸 수가 한도에 도달했기 때문에 이 룸을 복원할 수 없습니다.",

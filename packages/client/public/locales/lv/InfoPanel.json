@@ -16,6 +16,8 @@
   "FormRoomAIModalDescription": "Pievojiet datubāzi lai \"Pajautāt MI\" analizētuusāktojos atbild. Jūs varatpināt bezāsaut tikai par šo formu",
   "FormRoomAIModalTitle": "Iegūt labāatus",
   "FormRoomAINotConnectedDescription": "Saglabāt atbildes kā strukturētu datu. Iespējot datubāzes sinhronizāciju telpas iestatījumos, varēsiet izmantot MI analīzi ar \"Pajautāt MI\".",
+  "FormRoomAIProviderNotConnected": "Pievienojiet MI pakalpojumu sniedzēju darbvietas iestatījumos, lai analizētu veidlapu datus ar \"Pajautāt MI\", izveidotu diagrammas un atklātu vērtīgu informāciju.",
+  "FormRoomAIProviderNotConnectedAskAdmin": "Lūdziet <1>{{productName}} administratoru</1> pievienot un iespējot MI pakalpojumu sniedzēju darbvietas iestatījumos, lai analizētu veidlapu datus ar \"Pajautāt MI\", izveidotu diagrammas un atklātu vērtīgu informāciju.",
   "FormRoomAIReadyDescriptionFile": "Lūkojiet MI, lai izpētītu šīs formas atbildes, izveidotu secinājumus un vizualizētu datus.",
   "FormRoomAIReadyDescriptionFolder": "Formulāras atbildes tiek glabātas šeit, savienotā datubāzē. Lai analizētu datus ar MI, atveriet konkrētu venaklā un noklikšķiniet uz \"Pajautāt MI\".",
   "FormRoomAIReadyDescriptionRoom": "Analizēj datus ar \"Pajautāt MI\", izveidojiet diagrammas un atklājiet ieskatus. Izvēlieties vematu un noklikšķiniet uz \"Pajautāt MI\", lai sāktu.",

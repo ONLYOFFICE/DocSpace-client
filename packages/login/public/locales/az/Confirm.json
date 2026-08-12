@@ -33,6 +33,7 @@
   "SetAppButton": "Tətbiqə qoşulun",
   "SignUp": "Qeydiyyatdan keçin",
   "SuccessDeactivate": "Hesabınız uğurla deaktiv edildi. 10 saniyə ərzində <1>sayt</1>a yönləndiriləcəksiniz.",
+  "SuccessReactivate": "Hesabınız uğurla yenidən aktivləşdirildi. 10 saniyəyə <1>iş sahəsinə</1> yönləndiriləcəksiniz.",
   "SuccessRemoved": "Hesabınız uğurla silindi. 10 saniyə ərzində <1>sayt</1>a yönləndiriləcəksiniz.",
   "TermsAndConditions": "Davam etməklə siz <1>Qaydalar və şərtlərimizi</1> və <2>Məxfilik bəyanatımızı</2> başa düşür və razılaşırsınız.",
   "TfaSubTitle": "Bu {{productName}} ilə işləməyi davam etdirmək üçün sadə addımları izləyin:",

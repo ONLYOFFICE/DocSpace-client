@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Poista liitännäinen",
+  "DeletePluginDescription": "Tämä liitännäinen ei ole enää saatavilla työtilan käyttäjille. Haluatko varmasti jatkaa?",
   "DeletePluginTitle": "Poistetaanko liitännäinen?",
   "ExpandFunctionality": "Laajenna toimintoja SDK-laajennuksen avulla",
   "GoToRepo": "Siirry arkistoon",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Lisäosa ladattu onnistuneesti",
   "PluginSamples": "Laajennusmallit",
   "PluginSDK": "SDK-laajennus",
-  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen."
+  "PluginSDKDescription": "Käyttämällä SDK-laajennusta voit laajentaa työtilasi toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit lähdekoodin kera.",
+  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen.",
+  "UploadDescription": "Voit lisätä lisäosia laajentaaksesi työtilan toiminnallisuutta lisätoiminnoilla. Klikkaa Lataa lisäosa tai pudota ZIP-arkisto."
 }

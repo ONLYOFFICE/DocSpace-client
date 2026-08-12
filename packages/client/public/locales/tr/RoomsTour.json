@@ -5,6 +5,7 @@
   "RoomsEmptyTitle": "Listeniz şimdilik boş",
   "RoomsGroups": "İhtiyacınız olanı hızlıca bulmak için odaları belirli özelliklere göre düzenleyin. Gruplar oluşturun ve listenin hemen üstünden aralarında geçiş yapın.",
   "RoomsGroupsTitle": "Odalarınızı gruplayın",
+  "RoomsMembers": "Her odanın üye listesi Bilgi panelindedir. Çalışma alanı kişilerini ekleyin ve her üye için bir rol belirleyin — dosyaları görüntülemekten odanın tamamını yönetmeye kadar.",
   "RoomsMembersTitle": "Birlikte çalışın",
   "RoomsPlacesArchive": "{{archive}} — artık çalışmadığınız odalar, istediğiniz zaman geri getirilebilir.",
   "RoomsPlacesFiles": "{{recent}}, {{favorites}} ve {{trash}}, odalarınızdaki dosyaları bir araya getirir: son açılanlar, yıldızlananlar ve silinenler.",

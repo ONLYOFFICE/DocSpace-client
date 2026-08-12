@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Bu, formun kendisi — bağlantınızı açan herkesin gördüğü şey tam olarak budur. Elinizde hazır bir PDF form varsa yükleyin ya da çalışma alanından çıkmadan şablon galerisinden bir tane oluşturun.",
   "FormsBlankTitle": "Herkesin açtığı form",
   "FormsComplete": "Gönderilen bir kopya {{complete}} içine düşer ve orada kalır, kişi başına bir tane. Sonuç toplamayı açtığınızda her yanıt aynı zamanda bir elektronik tablo satırına dönüşür — her alan için bir sütun, sıralamaya ya da grafiğe hazır.",
   "FormsCompleteTitle": "Toplanan yanıtlar",

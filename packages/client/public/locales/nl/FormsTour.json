@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Dit is het formulier zelf — precies wat iedereen die uw link volgt te zien krijgt. Upload een PDF-formulier dat u al hebt, of bouw er een uit de sjabloongalerij zonder de werkruimte te verlaten.",
   "FormsBlankTitle": "Het formulier dat iedereen opent",
   "FormsComplete": "Een ingediende kopie belandt in {{complete}} en blijft daar staan, één per persoon. Zet het verzamelen van resultaten aan en elk antwoord wordt bovendien een rij in een spreadsheet — één kolom per veld, klaar om te sorteren of in een grafiek te zetten.",
   "FormsCompleteTitle": "Antwoorden verzameld",

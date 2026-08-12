@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "属性のマッピング",
   "LdapAuthenticationTooltip": "現在のユーザーに LDAP サーバー からの読み取り権限がない場合は、このオプションを有効にし、読み取り権限を持つ別のユーザーの資格情報を入力してください。",
   "LdapAutoSyncToggle": "自動同期",
+  "LdapAutoSyncToggleDescription": "同期により、ワークスペースからすべてのデータをアップロードし、設定変更後に新しいデータを更新することができます。ワークスペースのユーザーの新しいデータがあるたびに同期してください。",
   "LdapAvatar": "プロフィール写真",
   "LdapCertificateConfirm": "証明書の確認",
   "LdapConnectionType": "接続タイプ",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLSは、暗号化通信用に別のポートを使用する代わりに、プレーンテキスト接続を暗号化（TLSまたはSSL）接続にアップグレードする方法を提供します。",
   "LdapConnectionTypeUnencrypted": "暗号化されていない通信",
+  "LdapDisclaimer": "ワークスペースのユーザーのメールアドレスは「メール属性」設定から取得されます。メール属性がない場合は、「ログイン属性 + @ + LDAPドメイン」で作成されます。このようなメールが存在しない場合、ユーザーはワークスペースの通知を受け取りません。",
   "LdapGroupAttribute": "グループ属性",
   "LdapGroupAttributeTooltip": "このグループに含まれるユーザーを指定するグループオブジェクト属性を入力してください。",
   "LdapGroupDN": "グループDN",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "ユーザーログインに対応するオブジェクト属性を入力してください。",
   "LdapLoginTooltip": "LDAPサーバーの読み取り権限を持つログインユーザーを指定してください。",
   "LdapMail": "メール",
+  "LdapMobileSettingsDescription": "このオプションを使用して、ユーザーにオンブランドのエクスペリエンスを提供します。これらの設定はすべてのワークスペースに有効です。",
   "LdapMobileSyncDescription": "会社情報、外部リソースへのリンクの追加、オンラインオフィスのインターフェイス内に表示されるメールアドレスを指定します。",
   "LdapNextSync": "次の同期",
   "LdapPasswordTooltip": "LDAPサーバーからデータを読み取るアクセス権を持つユーザーのパスワードを入力してください。",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "有効期限",
   "LdapSyncButton": "ユーザーの同期",
   "LdapSyncCronTitle": "ここでLDAPユーザを自動同期する頻度を設定できます",
+  "LdapSyncDescription": "LDAPデータの同期は、ワークスペースとLDAPサーバ間のデータ変更を同期する方法です。「自動同期」オプションを有効にし、自動的に情報を更新する期間を設定します。",
   "LdapSyncTitle": "LDAPデータの同期",
   "LdapToggle": "LDAP認証",
   "LdapToggleDescription": "LDAPサーバーから{{productName}}にユーザーを自動的に追加する場合、このオプションを有効にします。追加されたユーザーは LDAP サーバー 認証情報を使用して認証できます。{{productName}}はユーザのパスワードをローカルに保存せず、LDAPサーバにログイン名とパスワードを送信するユーザを認証します。",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "ユーザーフィルタ",
   "LdapUserFilterTooltip": "検索LDAPフィルタを使用して、インポートするユーザーを選択してください。",
   "LdapUserQuotaTooltip": "ユーザーのストレージ容量制限を設定するには、LDAP ディレクトリに属性（例：UsersQuotaLimit）を追加し、この属性に整数値を入力します。これにより、容量制限の値がバイト単位で表示されます。ここでは、属性名のみを指定します。この属性は最初のセットアップ時にのみ適用され、後で{{contactsName}}セクションで手動で変更することができます。",
-  "LdapUsersType": "ユーザータイプ"
+  "LdapUsersType": "ユーザータイプ",
+  "LdapUserTypeTooltip": "全てのユーザーは選択したタイプでワークスペースに追加されます。"
 }

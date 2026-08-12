@@ -1,4 +1,6 @@
 {
+  "ActionCannotBeUndoneGuests": "Os convidados desativados selecionados serão removidos do espaço de trabalho. Essa ação não pode ser desfeita.",
+  "ActionCannotBeUndoneUsers": "Os usuários desabilitados selecionados serão removidos do espaço de trabalho. Essa ação não pode ser desfeita.",
   "CannotReassignFiles": "Se você excluir vários usuários de uma vez, não poderá reatribuir seus arquivos a outros usuários.",
   "DeleteGroupGuestsSuccessMessage": "Os convidados foram excluídos com êxito.",
   "DeleteGroupUsersSuccessMessage": "Os usuários foram excluídos com sucesso.",

@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Xóa plugin",
+  "DeletePluginDescription": "Plugin này sẽ không còn khả dụng cho người dùng không gian làm việc. Bạn có chắc muốn tiếp tục?",
   "DeletePluginTitle": "Bạn muốn xóa plugin?",
   "ExpandFunctionality": "Mở rộng chức năng bằng Plugin SDK",
   "GoToRepo": "Chuyển đến kho lưu trữ",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin đã được tải thành công",
   "PluginSamples": "Mẫu plugin",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKInstruction": "Nhấp vào nút để xem hướng dẫn chi tiết về cách tạo plugin của riêng bạn."
+  "PluginSDKDescription": "Sử dụng Plugin SDK, bạn có thể mở rộng chức năng không gian làm việc, kết nối các dịch vụ của bên thứ ba hay nâng cao trải nghiệm người dùng hiện có. Tại đây bạn có thể tìm thấy các mẫu plugin với mã nguồn có sẵn trên GitHub.",
+  "PluginSDKInstruction": "Nhấp vào nút để xem hướng dẫn chi tiết về cách tạo plugin của riêng bạn.",
+  "UploadDescription": "Bạn có thể thêm các plugin để mở rộng chức năng của không gian làm việc với các tính năng bổ sung. Hãy nhấp vào Tải plugin lên hoặc kéo thả tập tin vào kho lưu trữ ZIP."
 }

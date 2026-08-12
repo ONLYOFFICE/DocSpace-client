@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Šī ir pati veidlapa — tieši tas, ko atver ikviens, kas seko jūsu saitei. Augšupielādējiet jau esošu PDF veidlapu vai izveidojiet tādu no veidņu galerijas, nepametot darbvietu.",
   "FormsBlankTitle": "Veidlapa, ko atver visi",
   "FormsComplete": "Iesniegtā kopija nonāk sadaļā {{complete}} un paliek tur, viena uz katru cilvēku. Ieslēdziet rezultātu apkopošanu, un katra atbilde kļūs arī par rindu izklājlapā — viena kolonna katram laukam, gatava kārtošanai vai diagrammām.",
   "FormsCompleteTitle": "Savāktās atbildes",

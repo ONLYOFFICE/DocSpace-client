@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "Mapeamento de atributos",
   "LdapAuthenticationTooltip": "Habilite esta opção se o usuário atual não tiver direitos de leitura do servidor LDAP e insira as credenciais de outro usuário com direitos de leitura.",
   "LdapAutoSyncToggle": "Sincronização automática",
+  "LdapAutoSyncToggleDescription": "A sincronização permitirá fazer upload de todos os dados do espaço de trabalho e atualizar os novos dados após alterar as configurações. Sincronize sempre que tiver novos dados de usuários no espaço de trabalho.",
   "LdapAvatar": "Foto de perfil",
   "LdapCertificateConfirm": "Confirmar certificado",
   "LdapConnectionType": "Tipo de conexão",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS oferece uma maneira de atualizar uma conexão de texto simples para uma conexão criptografada (TLS ou SSL) em vez de usar uma porta separada para comunicação criptografada.",
   "LdapConnectionTypeUnencrypted": "Comunicação não criptografada",
+  "LdapDisclaimer": "Por favor, lembre-se: o e-mail do usuário do espaço de trabalho será retirado da configuração 'Atributo de e-mail'. Caso falte, será formado da seguinte forma: 'Atributo Login + @ + Domínio LDAP'. Caso tal e-mail não exista, o usuário não receberá nenhuma notificação do espaço de trabalho.",
   "LdapGroupAttribute": "Atributo de grupo",
   "LdapGroupAttributeTooltip": "Insira o atributo do objeto de grupo que especifica quais usuários esse grupo inclui.",
   "LdapGroupDN": "DN do grupo",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "Insira o atributo do objeto correspondente ao login do usuário.",
   "LdapLoginTooltip": "Especifique o usuário de login que possui direitos de acesso de leitura do servidor LDAP.",
   "LdapMail": "Correspondência",
+  "LdapMobileSettingsDescription": "Use esta opção para fornecer experiência de marca aos seus usuários. Essas configurações serão efetivas para todos os seus espaços de trabalho.",
   "LdapMobileSyncDescription": "Especifique as informações da sua empresa, adicione links para recursos externos e endereços de e-mail exibidos na interface do escritório online.",
   "LdapNextSync": "Próxima sincronização",
   "LdapPasswordTooltip": "Insira a senha do usuário com direitos de acesso para ler dados do servidor LDAP.",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "Válido até",
   "LdapSyncButton": "Sincronizar usuários",
   "LdapSyncCronTitle": "Aqui você pode definir com que frequência deseja sincronizar automaticamente os usuários LDAP",
+  "LdapSyncDescription": "Sincronizar dados LDAP é uma forma de sincronizar alterações de dados entre seu espaço de trabalho e o servidor LDAP. Habilite a opção ‘Auto Sync’ e defina um período de tempo para atualizar automaticamente as informações.",
   "LdapSyncTitle": "Sincronizar dados LDAP",
   "LdapToggle": "Autenticação LDAP",
   "LdapToggleDescription": "Ative esta opção se desejar adicionar usuários do servidor LDAP ao {{productName}} automaticamente. Os usuários adicionados poderão autorizar usando suas credenciais de servidor LDAP. O {{productName}} não salva as senhas dos usuários localmente e autenticará os usuários enviando seu login e senha para o servidor LDAP.",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "Filtro de usuário",
   "LdapUserFilterTooltip": "Utilize o filtro LDAP de pesquisa para selecionar os usuários que devem ser importados.",
   "LdapUserQuotaTooltip": "Para definir uma cota de armazenamento para o usuário, adicione um atributo no diretório LDAP (por exemplo, UsersQuotaLimit) e insira um valor inteiro para esse atributo. Ele exibirá o valor da cota em bytes. Aqui, especifique apenas o nome do atributo. Esse atributo será aplicado apenas durante a primeira configuração e pode ser alterado manualmente na seção {{contactsName}}.",
-  "LdapUsersType": "Tipo de usuário"
+  "LdapUsersType": "Tipo de usuário",
+  "LdapUserTypeTooltip": "Todos os usuários serão adicionados ao espaço de trabalho com o tipo selecionado."
 }

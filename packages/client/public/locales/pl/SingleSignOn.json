@@ -6,6 +6,7 @@
   "Binding": "Powiązanie:",
   "CertificateExist": "Certyfikat o tym samym rodzaju działania już istnieje",
   "CustomEntryButton": "Niestandardowy podpis przycisku logowania",
+  "CustomEntryTooltip": "Podpis dla przycisku służącego do logowania się w przestrzeni roboczej za pomocą usługi pojedynczego logowania",
   "DownloadMetadataXML": "Pobierz XML z metadanymi SP",
   "Encryption": "Szyfrowanie",
   "GenerateCertificate": "Wygeneruj nowy certyfikat z podpisem własnym",
@@ -49,8 +50,10 @@
   "spSignResponseRequest": "Podpisywanie odpowiedzi wylogowania",
   "SPSingleLogoutURL": "Adres URL pojedynczego wylogowania usługodawcy (obsługa powiązań POST i Redirect):",
   "SPSingleLogoutURLTooltip": "URL używany do pojedynczego wylogowania po stronie dostawcy tożsamości",
+  "SsoIntro": "Sekcja pojedynczego logowania umożliwia włączenie/wyłączenie uwierzytelniania przez zewnętrznych dostawców za pomocą SAML, co zapewnia użytkownikom szybszy, łatwiejszy i bezpieczniejszy sposób uzyskania dostępu do przestrzeni roboczej.",
   "StandardDecryptionAlgorithm": "Domyślny algorytm odszyfrowywania",
   "TurnOnSSO": "Włącz uwierzytelnianie za pomocą pojedynczego logowania",
+  "TurnOnSSOCaption": "Włącz tę opcję, jeśli chcesz automatycznie dodawać użytkowników z usługi pojedynczego logowania do swojej przestrzeni roboczej.",
   "UploadXML": "Wczytaj metadane z XML, aby automatycznie wypełnić wymagane pola.",
   "UploadXMLPlaceholder": "Adres URL do XML z metadanymi IdP",
   "UsedFor": "Użyj do"

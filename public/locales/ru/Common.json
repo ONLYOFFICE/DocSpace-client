@@ -1723,6 +1723,7 @@
   "Rename": "Переименовать",
   "RenewalDate": "Дата продления",
   "RenewsOnDate": "Продлевается {{date}}",
+  "RenewSubscription": "Продлить подписку",
   "RenewTheLicense": "Возобновить лицензию",
   "RepeatInvitation": "Повторное приглашение",
   "ReportSaveLocation": "Отчет будет сохранен в {{sectionName}}",

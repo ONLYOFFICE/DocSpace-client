@@ -5,6 +5,7 @@
   "RoomsEmptyTitle": "Vaš seznam je zaenkrat prazen",
   "RoomsGroups": "Sobe uredite po določenih značilnostih, da hitro najdete, kar potrebujete. Ustvarite skupine in preklapljajte med njimi tik nad seznamom.",
   "RoomsGroupsTitle": "Združite svoje sobe",
+  "RoomsMembers": "Vsaka soba ima svoj seznam članov v informacijskem panelu. Dodajte stike delovnega prostora in vsakemu članu določite vlogo — od ogleda datotek do upravljanja celotne sobe.",
   "RoomsMembersTitle": "Delajte skupaj",
   "RoomsPlacesArchive": "{{archive}} — sobe, v katerih ne delate več, obnovljive kadar koli.",
   "RoomsPlacesFiles": "{{recent}}, {{favorites}} in {{trash}} zbirajo datoteke iz vaših sob: nedavno odprte, označene z zvezdico in izbrisane.",

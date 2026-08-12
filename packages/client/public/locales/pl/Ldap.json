@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "Mapowanie atrybutów DOS",
   "LdapAuthenticationTooltip": "Włącz tę opcję, jeśli bieżący użytkownik nie ma uprawnień do odczytu z serwera LDAP i wprowadź dane uwierzytelniające innego użytkownika z uprawnieniami do odczytu.",
   "LdapAutoSyncToggle": "Automatyczna synchronizacja",
+  "LdapAutoSyncToggleDescription": "Synchronizacja umożliwia przesyłanie wszystkich danych z przestrzeni roboczej i aktualizację nowych danych po zmianie ustawień. Synchronizuj za każdym razem, gdy masz nowe dane na temat użytkowników w przestrzeni roboczej.",
   "LdapAvatar": "Zdjęcie profilowe",
   "LdapCertificateConfirm": "Potwierdź certyfikat",
   "LdapConnectionType": "Typ połączenia",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS umożliwia ulepszenie połączenia jawnego do połączenia szyfrowanego (TLS lub SSL) zamiast używania oddzielnego portu do komunikacji szyfrowanej.",
   "LdapConnectionTypeUnencrypted": "Niezaszyfrowana komunikacja",
+  "LdapDisclaimer": "Proszę pamiętać: adres e-mail użytkownika przestrzeni roboczej zostanie pobrany z ustawienia „Atrybut poczty”. Jeśli zostanie on pominięty, zostanie on utworzony w następujący sposób: „Atrybut logowania + @ + domena LDAP”. W przypadku, gdy taki adres e-mail nie istnieje, użytkownik nie otrzyma żadnego powiadomienia z przestrzeni roboczej.",
   "LdapGroupAttribute": "Atrybut grupy",
   "LdapGroupAttributeTooltip": "Wprowadź atrybut obiektu grupy, który określa, jakich użytkowników obejmuje ta grupa.",
   "LdapGroupDN": "Nazwa wyróżniająca grupy",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "Wprowadź atrybut obiektu odpowiadający loginowi użytkownika.",
   "LdapLoginTooltip": "Określ użytkownika loginu, który ma uprawnienia dostępu do odczytu serwera LDAP.",
   "LdapMail": "Poczta",
+  "LdapMobileSettingsDescription": "Użyj tej opcji, aby pokazywać użytkownikom branding marki. Ustawienia te zostaną zastosowane we wszystkich Twoich przestrzeniach roboczych.",
   "LdapMobileSyncDescription": "Udostępnij informacje na temat swojej firmy, dodaj linki do zasobów zewnętrznych i adresy e-mail wyświetlane w interfejsie biura online.",
   "LdapNextSync": "Kolejna synchronizacja",
   "LdapPasswordTooltip": "Wprowadź hasło użytkownika z uprawnieniami dostępu do odczytu danych z serwera LDAP.",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "Obowiązuje do",
   "LdapSyncButton": "Synchronizuj użytkowników",
   "LdapSyncCronTitle": "Tutaj możesz ustawić, jak często chcesz automatycznie synchronizować użytkowników LDAP",
+  "LdapSyncDescription": "Opcja Synchronizuj dane LDAP to sposób na synchronizację zmian danych między przestrzenią roboczą a serwerem LDAP. Włącz opcję automatycznej synchronizacji i wybierz czas, aby automatycznie aktualizować informacje.",
   "LdapSyncTitle": "Synchronizuj dane LDAP",
   "LdapToggle": "Uwierzytelnianie LDAP",
   "LdapToggleDescription": "Włącz tę opcję, jeśli chcesz automatycznie dodać użytkowników z serwera LDAP do {{productName}}. Dodani użytkownicy będą mogli uwierzytelniać się za pomocą swoich poświadczeń serwera LDAP. {{productName}} nie zapisuje haseł użytkowników lokalnie i będzie uwierzytelniać użytkowników, wysyłając ich login i hasło do serwera LDAP.",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "Filtr użytkowników",
   "LdapUserFilterTooltip": "Użyj filtru wyszukiwania LDAP, aby wybrać użytkowników, którzy mają zostać zaimportowani.",
   "LdapUserQuotaTooltip": "Aby skonfigurować limit pamięci dla użytkownika, dodaj atrybut w katalogu LDAP (np. UsersQuotaLimit) i wpisz wartość całkowitą dla danego atrybutu. Wartość limitu zostanie wyświetlona w bajtach. Tutaj określ wyłącznie nazwę atrybutu. Dany atrybut zostanie zastosowany tylko podczas pierwszej konfiguracji i może później zostać zmieniony ręcznie w ustawieniach {{contactsName}}.",
-  "LdapUsersType": "Typ użytkowników"
+  "LdapUsersType": "Typ użytkowników",
+  "LdapUserTypeTooltip": "Wszyscy użytkownicy zostaną dodani do przestrzeni roboczej z wybranym typem."
 }

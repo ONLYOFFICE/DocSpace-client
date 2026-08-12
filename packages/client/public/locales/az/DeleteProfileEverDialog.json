@@ -1,4 +1,6 @@
 {
+  "ActionCannotBeUndoneGuests": "Seçilmiş deaktiv qonaqlar iş sahəsindən silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
+  "ActionCannotBeUndoneUsers": "Seçilmiş deaktiv istifadəçilər iş sahəsindən silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
   "CannotReassignFiles": "Eyni anda birdən çox istifadəçini silsəniz, onların fayllarını başqa istifadəçilərə təyin edə bilməzsiniz.",
   "DeleteGroupGuestsSuccessMessage": "Qonaqlar uğurla silindi.",
   "DeleteGroupUsersSuccessMessage": "İstifadəçilər müvəffəqiyyətlə silinmişdir.",

@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Elimina plugin",
+  "DeletePluginDescription": "Questo plugin non sarà più disponibile per gli utenti dello spazio di lavoro. Sei sicuro di voler continuare?",
   "DeletePluginTitle": "Eliminare il plugin?",
   "ExpandFunctionality": "Espandi le funzionalità utilizzando l'SDK del plugin",
   "GoToRepo": "Vai al repository",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin caricato con successo",
   "PluginSamples": "Esempi di plugin",
   "PluginSDK": "SDK di Plugin",
-  "PluginSDKInstruction": "Fai clic sul pulsante per istruzioni dettagliate su come creare i tuoi plugin."
+  "PluginSDKDescription": "Utilizzando Plugin SDK puoi estendere le funzionalità del tuo spazio di lavoro, connettere servizi di terze parti o migliorare l'esperienza utente esistente. Qui puoi trovare gli esempi di plugin con il codice sorgente disponibile su GitHub.",
+  "PluginSDKInstruction": "Fai clic sul pulsante per istruzioni dettagliate su come creare i tuoi plugin.",
+  "UploadDescription": "Puoi aggiungere plugin per estendere le funzionalità dello spazio di lavoro con funzionalità extra. Fai clic su Carica plugin o rilascia il file nell'archivio ZIP."
 }

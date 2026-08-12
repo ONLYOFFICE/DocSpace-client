@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Usuń wtyczkę",
+  "DeletePluginDescription": "Dana wtyczka nie będzie już dostępna dla użytkowników przestrzeni roboczej. Czy na pewno chcesz kontynuować?",
   "DeletePluginTitle": "Usunąć wtyczkę?",
   "ExpandFunctionality": "Rozszerz funkcjonalność za pomocą zestawu SDK do tworzenia wtyczek",
   "GoToRepo": "Przejdź do repozytorium",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Wtyczka załadowana pomyślnie",
   "PluginSamples": "Próbki wtyczek",
   "PluginSDK": "Zestaw SDK do tworzenia wtyczek",
-  "PluginSDKInstruction": "Kliknij przycisk, aby uzyskać szczegółowe instrukcje na temat tworzenia własnych wtyczek."
+  "PluginSDKDescription": "Dzięki zestawowi SDK do tworzenia wtyczek możesz rozszerzyć funkcjonalność swojej przestrzeni roboczej, podłączyć usługi podmiotów trzecich lub poprawić komfort obsługi dla swoich bieżących użytkowników. Tutaj znajdziesz próbki wtyczek z kodem źródłowym dostępnym na GitHub.",
+  "PluginSDKInstruction": "Kliknij przycisk, aby uzyskać szczegółowe instrukcje na temat tworzenia własnych wtyczek.",
+  "UploadDescription": "Możesz dodawać wtyczki, aby poszerzyć funkcjonalność przestrzeni roboczej o dodatkowe funkcje. Kliknij Prześlij wtyczkę lub upuść plik w archiwum ZIP."
 }

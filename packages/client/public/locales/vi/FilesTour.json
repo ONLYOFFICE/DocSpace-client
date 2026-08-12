@@ -12,6 +12,7 @@
   "TourPlacesShared": "{{sectionName}} — các tệp người khác đã chia sẻ với bạn.",
   "TourPlacesTitle": "Mọi thứ đúng chỗ của nó",
   "TourPlacesTrash": "{{sectionName}} — các tệp đã xóa mà bạn vẫn có thể khôi phục.",
+  "TourShare": "Di chuột lên bất kỳ tệp nào để thấy các thao tác nhanh. Nhấp vào biểu tượng chia sẻ để cấp quyền truy cập cho các liên hệ trong không gian làm việc của bạn với những mức quyền khác nhau — hoặc tạo liên kết bên ngoài cho bất kỳ ai khác.",
   "TourSharedAccess": "{{sharedBy}} cho biết tệp đến từ ai, {{accessLevel}} cho biết bạn có thể làm gì với nó — xem, bình luận hay chỉnh sửa. Chỉ chủ sở hữu mới thay đổi được điều đó.",
   "TourSharedAccessTitle": "Ai đã chia sẻ và bạn có thể làm gì",
   "TourSharedEmpty": "Chưa có gì được chia sẻ với bạn. Tệp và thư mục sẽ hiện ra ở đây ngay khi có người cấp quyền truy cập cho bạn.",

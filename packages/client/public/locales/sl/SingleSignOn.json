@@ -6,6 +6,7 @@
   "Binding": "Vezava:",
   "CertificateExist": "Certifikat z isto vrsto akcije že obstaja",
   "CustomEntryButton": "Prilagojen naslov gumba za prijavo",
+  "CustomEntryTooltip": "Napis za gumb za prijavo v delovni prostor s storitvijo enkratne prijave",
   "DownloadMetadataXML": "Prenesi SP metapodatke v XML",
   "Encryption": "Šifriranje",
   "GenerateCertificate": "Ustvarite nov samopodpisni certifikat",
@@ -49,8 +50,10 @@
   "spSignResponseRequest": "Podpis odjavnih odzivov",
   "SPSingleLogoutURL": "SP URL za enotno odjavo (podporuje vezavo POST in preusmeritve):",
   "SPSingleLogoutURLTooltip": "URL, uporabljen za enkratno odjavo na strani ponudnika identitete",
+  "SsoIntro": "Razdelek z enkratno prijavo vam omogoča, da omogočite/onemogočite avtentikacijo tretjih oseb z uporabo SAML, s čimer zagotovite hitrejši, lažji in varnejši način dostopa do delovnega prostora za uporabnike.",
   "StandardDecryptionAlgorithm": "Privzeto algoritmo za dešifriranje",
   "TurnOnSSO": "Omogoči preverjanje pristnosti enkratne prijave",
+  "TurnOnSSOCaption": "Omogočite to možnost, če želite samodejno dodati uporabnike iz storitve SSO v svoj delovni prostor.",
   "UploadXML": "Naloži metapodatke iz XML, da se samodejno izpolnijo zahtevana polja.",
   "UploadXMLPlaceholder": "URL do IdP Meta podatkov XML",
   "UsedFor": "Uporabi za"

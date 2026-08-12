@@ -1,4 +1,5 @@
 {
+  "DeleteAllGroupDescription": "Atlasītās grupas tiks izdzēstas. Grupu lietotāji netiks noņemti no darbvietas. Vai tiešām vēlaties turpināt?",
   "DeleteAllGroupsTitle": "Izdzēst grupas",
   "DeleteFiles": "Jūs gatavojaties pārvietot <strong>failus ({{filesCount}})</strong> uz {{trashSection}}.",
   "DeleteFilesAndFolders": "Jūs gatavojaties dzēst <strong>failus ({{filesCount}})</strong> un <strong>mapes ({{foldersCount}})</strong> uz {{trashSection}}.",
@@ -6,6 +7,7 @@
   "DeleteFilesForever": "Jūs gatavojaties dzēst <strong>{{filesCount}}}</strong>.",
   "DeleteFolders": "Jūs gatavojaties pārvietot <strong>mapes ({{foldersCount}})</strong> uz {{trashSection}}.",
   "DeleteFoldersForever": "Jūs gatavojaties dzēst <strong>mapes ({{foldersCount}})</strong>.",
+  "DeleteGroupDescription": "Grupa {{groupName}} tiks izdzēsta. Grupas lietotāji netiks noņemti no darbvietas. Vai tiešām vēlaties turpināt?",
   "DeleteGroupTitle": "Izdzēst grupu",
   "DeleteItem": "Jūs gatavojaties pārvietot <strong>{{name}}</strong> uz {{trashSection}}.",
   "DeleteItemForeverConfirm": "Jūs gatavojaties dzēst <strong>{{name}}</strong>.",

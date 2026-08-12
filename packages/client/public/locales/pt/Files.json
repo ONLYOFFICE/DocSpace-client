@@ -71,6 +71,7 @@
   "LifetimeDialogDescription": "A contagem regressiva vitalícia começa na data de criação do arquivo. Alguns arquivos nesta sala excedem o tempo de vida proposto e serão excluídos assim que você ativar a configuração.",
   "LifetimeDialogDescriptionHeader": "Arquivos mais antigos com vida útil excedida serão excluídos",
   "LinkDeletedSuccessfully": "Link excluído com sucesso",
+  "LinkForPortalUsers": "Ligação para utilizadores do espaço de trabalho",
   "LinkSuccessfullyCreatedAndCopied": "Link criado e copiado com sucesso para a área de transferência",
   "MarkAsRevision": "Marcar como revisão",
   "MarkAsVersion": "Marcar como versão",

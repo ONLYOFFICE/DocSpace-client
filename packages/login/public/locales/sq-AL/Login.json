@@ -11,6 +11,7 @@
   "PasswordRecoveryTitle": "Rikuperimi i fjalëkalimit",
   "RecoverAccess": "Rikuperoni aksesin",
   "RecoverContactEmailPlaceholder": "Email kontakti",
+  "RecoverTextBody": "Nëse nuk mund të identifikoheni me llogarinë tuaj ekzistuese ose dëshironi të regjistroheni si përdorues i ri, kontaktoni administratorin e hapësirës së punës.",
   "Register": "Regjistrohuni",
   "RegisterTextBodyAfterDomainsList": "Për t'u regjistruar, shkruani adresën tuaj të emailit dhe klikoni Dërgo kërkesën. Një mesazh me një lidhje për të aktivizuar llogarinë tuaj do të dërgohet në adresën e specifikuar.",
   "RegisterTextBodyBeforeDomainsList": "Regjistrimi është i disponueshëm për përdoruesit me një llogari emaili në",
@@ -18,5 +19,6 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Jetëgjatësia e parazgjedhur e sesionit është 20 minuta. Kontrolloni këtë opsion për ta vendosur atë në 1 vit. Për të vendosur vlerën tuaj, shkoni te Cilësimet.",
   "SignInLDAP": "Identifikohuni në: {{ldap_domain}}",
-  "SignInLdapHelper": "Përdorni kredencialet për domenin e korporatës"
+  "SignInLdapHelper": "Përdorni kredencialet për domenin e korporatës",
+  "UserIsAlreadyRegistered": "Përdoruesi <1>{{email}}</1> është regjistruar tashmë në këtë hapësirë pune, fut fjalëkalimin tënd ose kthehu për të vazhduar me një email tjetër."
 }

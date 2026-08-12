@@ -6,6 +6,7 @@
   "Binding": "Bağlama:",
   "CertificateExist": "Aynı eylem türüne sahip sertifika zaten var",
   "CustomEntryButton": "Özel oturum açma düğmesi başlığı",
+  "CustomEntryTooltip": "Tek Oturum Açma hizmetiyle çalışma alanına giriş yapmak için kullanılan düğmenin başlığı",
   "DownloadMetadataXML": "SP meta veri XML'sini indirin",
   "Encryption": "Şifreleme",
   "GenerateCertificate": "Yeni Kendinden İmzalı Sertifika Oluştur",
@@ -49,8 +50,10 @@
   "spSignResponseRequest": "Çıkış Yanıtlarını İmzala",
   "SPSingleLogoutURL": "SP Tek Oturum Kapatma URL'si (POST ve Yönlendirme bağlamayı destekler):",
   "SPSingleLogoutURLTooltip": "Kimlik sağlayıcı tarafında tek oturum kapatma için kullanılan URL",
+  "SsoIntro": "Tekli Oturum Açma bölümü, SAML kullanarak üçüncü taraf kimlik doğrulamasını etkinleştirmenize/devre dışı bırakmanıza olanak tanır, böylece kullanıcıların çalışma alanına erişmesi için daha hızlı, daha kolay ve daha güvenli bir yol sağlar.",
   "StandardDecryptionAlgorithm": "Varsayılan Şifre Çözme Algoritması",
   "TurnOnSSO": "Tekli Oturum Açma Kimlik Doğrulamasını Etkinleştir",
+  "TurnOnSSOCaption": "SSO hizmetinden çalışma alanınıza otomatik olarak kullanıcı eklemek istiyorsanız bu seçeneği etkinleştirin.",
   "UploadXML": "Gerekli alanları otomatik olarak doldurmak için meta verileri XML'den yükleyin.",
   "UploadXMLPlaceholder": "IdP Meta Veri XML URL'si",
   "UsedFor": "Şunun için kullan"

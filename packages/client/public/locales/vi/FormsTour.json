@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Đây chính là biểu mẫu — đúng thứ mà mọi người mở ra khi theo liên kết của bạn. Hãy tải lên biểu mẫu PDF bạn đã có, hoặc dựng một biểu mẫu từ thư viện mẫu mà không cần rời khỏi không gian làm việc.",
   "FormsBlankTitle": "Biểu mẫu mà mọi người đều mở",
   "FormsComplete": "Bản đã gửi sẽ về {{complete}} và nằm lại đó, mỗi người một bản. Bật thu thập kết quả và mỗi câu trả lời còn trở thành một hàng trong bảng tính — mỗi trường một cột, sẵn sàng để sắp xếp hoặc dựng biểu đồ.",
   "FormsCompleteTitle": "Câu trả lời đã được thu về",

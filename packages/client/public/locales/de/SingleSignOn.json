@@ -6,6 +6,7 @@
   "Binding": "Bindung:",
   "CertificateExist": "Es gibt bereits ein Zertifikat mit gleichem Aktionstyp",
   "CustomEntryButton": "Benutzerdefinierte Beschriftung der Anmeldeschaltfläche",
+  "CustomEntryTooltip": "Die Beschriftung für die Schaltfläche, die für die Anmeldung im Arbeitsbereich mit dem Single Sign-On-Dienst verwendet wird",
   "DownloadMetadataXML": "XML mit SP-Metadaten herunterladen",
   "Encryption": "Verschlüsselung",
   "GenerateCertificate": "Neues selbstsigniertes Zertifikat generieren",
@@ -49,8 +50,10 @@
   "spSignResponseRequest": "Logout-Antworten signieren",
   "SPSingleLogoutURL": "SP Single Logout URL (unterstützt POST und Redirect Bindung):",
   "SPSingleLogoutURLTooltip": "Die URL, die für die einmalige Abmeldung auf der Seite des Identitätsanbieters verwendet wird.",
+  "SsoIntro": "Im Bereich Single Sign-On können Sie die Authentifizierung von Drittanbietern über SAML aktivieren/deaktivieren und so den Nutzern einen schnelleren, einfacheren und sichereren Zugang zum Arbeitsbereich ermöglichen.",
   "StandardDecryptionAlgorithm": "Standardmäßiger Entschlüsselungsalgorithmus",
   "TurnOnSSO": "Single Sign-On-Authentifizierung aktivieren",
+  "TurnOnSSOCaption": "Aktivieren Sie diese Option, wenn Sie Benutzer vom SSO-Dienst automatisch zu Ihrem Arbeitsbereich hinzufügen möchten.",
   "UploadXML": "Laden von Metadaten aus XML zum automatischen Ausfüllen der erforderlichen Felder.",
   "UploadXMLPlaceholder": "URL zu IdP-Metadaten-XML",
   "UsedFor": "Verwenden für"

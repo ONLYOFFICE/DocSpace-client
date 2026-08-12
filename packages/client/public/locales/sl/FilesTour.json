@@ -12,6 +12,7 @@
   "TourPlacesShared": "{{sectionName}} — datoteke, ki so jih drugi delili z vami.",
   "TourPlacesTitle": "Vse na svojem mestu",
   "TourPlacesTrash": "{{sectionName}} — izbrisane datoteke, ki jih še lahko obnovite.",
+  "TourShare": "Z miško se pomaknite na katero koli datoteko, da vidite hitra dejanja. Kliknite ikono deljenja, da odobrite dostop stikom svojega delovnega prostora z različnimi ravnmi dovoljenj — ali ustvarite zunanjo povezavo za vse druge.",
   "TourSharedAccess": "{{sharedBy}} pove, od koga je datoteka prišla, {{accessLevel}} pa, kaj z njo lahko počnete — ogled, komentiranje ali urejanje. To lahko spremeni samo lastnik.",
   "TourSharedAccessTitle": "Kdo jo je delil in kaj lahko počnete",
   "TourSharedEmpty": "Z vami še ni bilo nič deljeno. Datoteke in mape se bodo pojavile tukaj takoj, ko vam nekdo odobri dostop do njih.",

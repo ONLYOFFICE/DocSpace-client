@@ -11,6 +11,7 @@
   "PasswordRecoveryTitle": "パスワード復旧",
   "RecoverAccess": "アクセス回復",
   "RecoverContactEmailPlaceholder": "連絡先メール",
+  "RecoverTextBody": "既存のアカウントでログインできない場合や、新規ユーザーとして登録したい場合は、ワークスペースの管理者にお問い合わせください。",
   "Register": "登録",
   "RegisterTextBodyAfterDomainsList": "登録するには、メールアドレスを入力して「リクエスト送信」をクリックします。指定されたアドレスに、アカウント有効化のためのリンクが添付されたメッセージが送信されます。",
   "RegisterTextBodyBeforeDomainsList": "のメールアカウントをお持ちの方は登録が可能です。",
@@ -18,5 +19,6 @@
   "RegistrationEmailWatermark": "メール",
   "RememberHelper": "デフォルトのセッションライフタイムは20分です。このオプションをチェックすると、1年間に設定されます。独自の値を設定するには、「設定」で設定します。",
   "SignInLDAP": "{{ldap_domain}}にサインインする",
-  "SignInLdapHelper": "企業ドメインの認証情報を使用してください"
+  "SignInLdapHelper": "企業ドメインの認証情報を使用してください",
+  "UserIsAlreadyRegistered": "ユーザー<1>{{email}}</1>はすでにこのワークスペースに登録されています。パスワードを入力するか、前に戻って別のメールアドレスでログインしてください。"
 }

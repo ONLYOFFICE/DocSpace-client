@@ -1,9 +1,11 @@
 {
   "AppointAdmin": "Numire administratori",
+  "BackupPortal": "Creați o copie de rezervă a datelor din spațiul de lucru",
   "ChangeInstruction": "Pentru a schimba proprietarul {{productName}}, alegeţi numele noului proprietar mai jos.",
   "ChangeOwner": "Modificare proprietar {{productName}}",
   "ChangeUser": "Schimbare utilizator",
   "DoTheSame": "Faceţi aceleaşi lucruri ca și administratori",
+  "ManagePortal": "Gestionați configurarea spațiului de lucru",
   "ManageUser": "Gestionați conturile de utilizator",
   "NewPortalOwner": "Proprietarul nou al {{productName}}",
   "PortalOwnerCan": "Proprietarul {{productName}} poate:",

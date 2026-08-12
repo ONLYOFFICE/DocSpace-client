@@ -1,9 +1,11 @@
 {
   "AppointAdmin": "Призначити адміністраторів",
+  "BackupPortal": "Робити резервну копію даних робочого простору",
   "ChangeInstruction": "Щоб змінити власника {{productName}}, виберіть ім’я нового власника нижче.",
   "ChangeOwner": "Змінити власника {{productName}}",
   "ChangeUser": "Змінити користувача",
   "DoTheSame": "Робіть те саме, що й адміністратори",
+  "ManagePortal": "Керувати конфігурацією робочого простору",
   "ManageUser": "Керує обліковими записами користувачів",
   "NewPortalOwner": "Новий власник {{productName}}",
   "PortalOwnerCan": "Власник {{productName}} може:",

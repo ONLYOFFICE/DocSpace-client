@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Este es el formulario en sí: exactamente lo que abre todo el que sigue su enlace. Cargue un formulario PDF que ya tenga o cree uno desde la galería de plantillas sin salir del espacio de trabajo.",
   "FormsBlankTitle": "El formulario que todos abren",
   "FormsComplete": "Cada copia enviada llega a {{complete}} y se queda allí, una por persona. Active la recopilación de resultados y cada respuesta se convertirá además en una fila de una hoja de cálculo: una columna por campo, lista para ordenar o representar en un gráfico.",
   "FormsCompleteTitle": "Respuestas recopiladas",

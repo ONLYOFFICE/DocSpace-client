@@ -11,6 +11,7 @@
   "PasswordRecoveryTitle": "Paroles atgūšana",
   "RecoverAccess": "Atgūt piekļuvi",
   "RecoverContactEmailPlaceholder": "E-pasts saziņai",
+  "RecoverTextBody": "Ja nevarat pieteikties ar savu esošo kontu vai vēlaties reģistrēties kā jauns lietotājs, sazinieties ar darbvietas administratoru.",
   "Register": "Reģistrēties",
   "RegisterTextBodyAfterDomainsList": "Lai reģistrētos, ievadiet savu e-pastu un noklikšķiniet uz Sūtīt pieprasījumu. Jums tiks nosūtīta aktivizācijas saite.",
   "RegisterTextBodyBeforeDomainsList": "Reģistrācija ir pieejama lietotājiem ar e-pasta kontu vietnē",
@@ -18,5 +19,6 @@
   "RegistrationEmailWatermark": "E-pasts",
   "RememberHelper": "Noklusējuma sesijas ilgums ir 20 minūtes. Atzīmējiet šo opciju, lai iestatītu to uz vienu gadu. Lai iestatītu savu vērtību, dodieties uz Iestatījumi.",
   "SignInLDAP": "Pierakstieties: {{ldap_domain}}",
-  "SignInLdapHelper": "Izmantojiet akreditācijas datus korporatīvajam domēnam"
+  "SignInLdapHelper": "Izmantojiet akreditācijas datus korporatīvajam domēnam",
+  "UserIsAlreadyRegistered": "Lietotājs <1>{{email}}</1> jau ir reģistrēts šajā darbvietā, ievadiet savu paroli vai dodieties atpakaļ, lai turpinātu ar citu e-pasta adresi."
 }

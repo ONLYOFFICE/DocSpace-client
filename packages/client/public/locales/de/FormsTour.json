@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Das ist das Formular selbst – genau das, was jede Person öffnet, die Ihrem Link folgt. Laden Sie ein bereits vorhandenes PDF-Formular hoch oder erstellen Sie eines aus der Vorlagengalerie, ohne den Arbeitsbereich zu verlassen.",
   "FormsBlankTitle": "Das Formular, das alle öffnen",
   "FormsComplete": "Eine eingereichte Kopie landet in {{complete}} und bleibt dort, eine pro Person. Schalten Sie die Ergebniserfassung ein, und jede Antwort wird zusätzlich zu einer Zeile in einer Tabelle – eine Spalte pro Feld, bereit zum Sortieren oder Auswerten.",
   "FormsCompleteTitle": "Gesammelte Antworten",

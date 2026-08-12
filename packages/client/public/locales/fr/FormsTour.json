@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "Voici le formulaire lui-même — exactement ce qu'ouvre toute personne qui suit votre lien. Téléversez un formulaire PDF que vous avez déjà, ou créez-en un depuis la galerie de modèles sans quitter l'espace de travail.",
   "FormsBlankTitle": "Le formulaire que tout le monde ouvre",
   "FormsComplete": "Une copie soumise arrive dans {{complete}} et y reste, une par personne. Activez la collecte des résultats et chaque réponse devient aussi une ligne dans une feuille de calcul — une colonne par champ, prête à être triée ou représentée en graphique.",
   "FormsCompleteTitle": "Les réponses, rassemblées",

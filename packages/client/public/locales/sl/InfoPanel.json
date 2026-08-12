@@ -16,6 +16,8 @@
   "FormRoomAIModalDescription": "Povežite se z bazo podatkov za anal v zbranih odgovorov s funkcijo \"Vprašaj umetno inteligenco\". Lahkojujete tudi brez postavlj vpraš le tej obrazci.",
   "FormRoomAIModalTitle": "Pridobite boljše vpoglede",
   "FormRoomAINotConnectedDescription": "Shranite odgovore kot strukturirane podatke. Omogočite sinhronizacijo z bazo podatkov v nastavitvah sobe, da odklenete analizo s pomočjo AI s funkcijo Ask AI.",
+  "FormRoomAIProviderNotConnected": "Povežite ponudnika AI v nastavitvah delovnega prostora, da analizirate podatke obrazca z \"Vprašaj umetno inteligenco\", ustvarjate diagrame in pridobivate vpoglede.",
+  "FormRoomAIProviderNotConnectedAskAdmin": "Prosite <1>skrbnika {{productName}}</1>, da poveže in omogoči ponudnika AI v nastavitvah delovnega prostora, da analizirate podatke obrazca z \"Vprašaj umetno inteligenco\", ustvarjate diagrame in pridobivate vpoglede.",
   "FormRoomAIReadyDescriptionFile": "Zahtevajte od AI, da razvije odgovore iz tega obrazca, ustvari uvid in vizualizira podatke.",
   "FormRoomAIReadyDescriptionFolder": "Odgovori iz obrazcev so shranjeni tukaj v povezani bazi podatkov. Za analizo podatkov z umetno inteligenco odprite določen obrazec in kliknite \"Vprašaj umetno inteligenco\".",
   "FormRoomAIReadyDescriptionRoom": "Analizirajte podatke s funkcijo \"Vprašaj umetno inteligenco\", ustvarjajte grafikone in odkrivajte vpoglede. Izberite obrazec in kliknite \"Vprašaj umetno inteligenco\", da začnete.",

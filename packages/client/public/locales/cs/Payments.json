@@ -5,6 +5,7 @@
   "ChooseNewPlan": "Chcete si vybrat nový cenový tarif?",
   "GracePeriodActive": "Okamžitá lhůta je aktivní <1>od {{fromDate}} do {{byDate}}</1> (zbylo dní: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "Nemohu přidat nové uživatele a vytvořit nové místnosti. Licenční období vypršelo.",
+  "LicenseGracePeriodInfo": "Během tohoto období nemohou administrátoři vytvářet nové místnosti ani přidávat nové uživatele. Jakmile skončí doba odkladu, pracovní prostor bude nedostupný, dokud nebude aktivována nová licence.",
   "NewRoomWillExceedLimit": "Vytvoření této místnosti není možné, protože byl dosažen limit počtu místností zahrnutých do vašeho aktuálního tarifu.",
   "NewUsersWillExceedMembersLimit": "Přidání nových placených uživatelů není možné, protože je dosažen limit pro počet administrátorů zahrnutých ve vašem aktuálním tarifu.",
   "NotPossibleRoomRestoring": "Obnovení této místnosti není možné, protože je dosažen limit pro počet místností zahrnutých ve vašem aktuálním plánu.",

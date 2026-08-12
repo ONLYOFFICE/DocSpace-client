@@ -1,4 +1,5 @@
 {
+  "DeleteAllGroupDescription": "Die ausgewählten Gruppen werden gelöscht. Benutzer in den Gruppen werden nicht aus dem Arbeitsbereich entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteAllGroupsTitle": "Gruppen löschen",
   "DeleteFiles": "Sie sind dabei, <strong>Dateien ({{filesCount}})</strong> in den {{trashSection}} zu verschieben.",
   "DeleteFilesAndFolders": "Sie sind dabei, die <strong>Dateien ({{filesCount}})</strong> und <strong>Ordner ({{foldersCount}})</strong> in den {{trashSection}} zu löschen.",
@@ -6,6 +7,7 @@
   "DeleteFilesForever": "Sie werden <strong>({{filesCount}}) Dateien</strong> löschen.",
   "DeleteFolders": "Sie sind dabei, <strong>Ordner ({{foldersCount}})</strong> in den {{trashSection}} zu verschieben.",
   "DeleteFoldersForever": "Sie werden <strong>({{foldersCount}}) Ordner</strong> löschen.",
+  "DeleteGroupDescription": "Die Gruppe {{groupName}} wird gelöscht. Benutzer in der Gruppe werden nicht aus dem Arbeitsbereich entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteGroupTitle": "Gruppe löschen",
   "DeleteItem": "Sie sind dabei, <strong>{{name}}</strong> in den {{trashSection}} zu verschieben.",
   "DeleteItemForeverConfirm": "Sie werden <strong>{{name}}</strong> löschen.",

@@ -1,4 +1,6 @@
 {
+  "ActionCannotBeUndoneGuests": "Mysafirët e selektuar të çaktivizuar do të hiqen nga hapësira e punës. Ky veprim nuk mund të zhbëhet.",
+  "ActionCannotBeUndoneUsers": "Përdoruesit e selektuar të çaktivizuar do të hiqen nga hapësira e punës. Ky veprim nuk mund të zhbëhet.",
   "CannotReassignFiles": "Në qoftë se fshini disa përdorues njëherësh, nuk mund t'i ricaktoni skedarët e tyre përdoruesve të tjerë.",
   "DeleteGroupGuestsSuccessMessage": "Mysafirët janë fshirë me sukses.",
   "DeleteGroupUsersSuccessMessage": "Përdoruesit janë fshirë me sukses.",

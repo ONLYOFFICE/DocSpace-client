@@ -6,6 +6,7 @@
   "Binding": "Spojenie:",
   "CertificateExist": "Certifikát s rovnakým typom akcie už existuje",
   "CustomEntryButton": "Vlastný popis tlačidla prihlásenia",
+  "CustomEntryTooltip": "Popis tlačidla, ktoré sa používa na prihlásenie do pracovného priestoru so službou jednotného prihlásenia",
   "DownloadMetadataXML": "Stiahnuť SP metadáta XML",
   "Encryption": "Šifrovanie",
   "GenerateCertificate": "Vygenerujte nový certifikát s vlastným podpisom",
@@ -49,8 +50,10 @@
   "spSignResponseRequest": "Podpisovanie odpovedí na odhlásenie",
   "SPSingleLogoutURL": "URL jednorazové odhlásenie SP (podpora spojenia POST a presmerovania):",
   "SPSingleLogoutURLTooltip": "Adresa URL použitá na jednotné odhlásenie na strane poskytovateľa identity",
+  "SsoIntro": "Sekcia jednotného prihlásenia vám umožňuje povoliť/zakázať autentifikáciu od tretej strany pomocou SAML, čím používateľom poskytuje rýchlejší, jednoduchší a bezpečnejší spôsob prístupu k pracovnému priestoru.",
   "StandardDecryptionAlgorithm": "Predvolený algoritmus dešifrovania",
   "TurnOnSSO": "Povoliť autentifikáciu jednotným prihlasovaním",
+  "TurnOnSSOCaption": "Povoľte túto možnosť, ak chcete automaticky pridávať používateľov zo služby SSO do vášho pracovného priestoru.",
   "UploadXML": "Načítajte metadáta z XML a automaticky vyplňte požadované polia.",
   "UploadXMLPlaceholder": "URL do IdP Metadáta XML",
   "UsedFor": "Použiť pre"

@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "Atribūtu kartēšana",
   "LdapAuthenticationTooltip": "Iespējojiet šo opciju, ja pašreizējam lietotājam nav tiesību lasīt no LDAP servera un ievadīt cita lietotāja akreditācijas datus ar lasīšanas tiesībām.",
   "LdapAutoSyncToggle": "Automātiska sinhronizācija",
+  "LdapAutoSyncToggleDescription": "Sinhronizācija ļaus augšupielādēt visus datus no darbvietas un atjaunināt jaunos datus pēc iestatījumu maiņas. Sinhronizējiet katru reizi, kad darbvietā ir jauni dati par lietotājiem.",
   "LdapAvatar": "Profila fotoattēls",
   "LdapCertificateConfirm": "Apstiprināt sertifikātu",
   "LdapConnectionType": "Pieslēguma veids",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS piedāvā veidu, kā vienkāršā teksta savienojumu jaunināt uz šifrētu (TLS vai SSL) savienojumu, nevis izmantot atsevišķu portu šifrētai saziņai.",
   "LdapConnectionTypeUnencrypted": "Nešifrēta saziņa",
+  "LdapDisclaimer": "Ņemiet vērā: darbvietas lietotāja e-pasts tiks ņemts no iestatījuma Pasta atribūts. Ja tas trūkst, tas tiks izveidots šādā veidā: Pieteikšanās atribūts + @ + LDAP domēns. Ja šāds e-pasts nepastāv, lietotājs nesaņems darbvietas paziņojumu.",
   "LdapGroupAttribute": "Grupas atribūts",
   "LdapGroupAttributeTooltip": "Ievadiet grupas objekta atribūtu, kas norāda, kādus lietotājus šī grupa ietver.",
   "LdapGroupDN": "Grupas DN",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "Ievadiet objekta atribūtu, kas atbilst lietotāja pieteikšanās datiem.",
   "LdapLoginTooltip": "Norādiet pieteikšanās lietotāju, kuram ir LDAP servera lasīšanas piekļuves tiesības.",
   "LdapMail": "Pasts",
+  "LdapMobileSettingsDescription": "Izmantojiet šo opciju, lai jūsu lietotājiem nodrošinātu zīmola lietošanas pieredzi. Šie iestatījumi būs spēkā visās jūsu darbvietās.",
   "LdapMobileSyncDescription": "Norādiet sava uzņēmuma informāciju, pievienojiet saites uz ārējiem resursiem un e-pasta adresēm, kas tiek rādītas tiešsaistes biroja interfeisā.",
   "LdapNextSync": "Nākamā sinhronizācija",
   "LdapPasswordTooltip": "Ievadiet paroli lietotājam ar piekļuves tiesībām, lai nolasītu datus no LDAP servera.",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "Derīgs līdz",
   "LdapSyncButton": "Sinhronizēt lietotājus",
   "LdapSyncCronTitle": "Šeit varat iestatīt, cik bieži vēlaties automātiski sinhronizēt LDAP lietotājus",
+  "LdapSyncDescription": "LDAP datu sinhronizēšana ir veids, kā sinhronizēt datu izmaiņas starp jūsu darbvietu un LDAP serveri. Iespējojiet opciju Automātiskā sinhronizācija un iestatiet laika periodu, lai automātiski atjauninātu informāciju.",
   "LdapSyncTitle": "Sinhronizēt LDAP datus",
   "LdapToggle": "LDAP autentifikācija",
   "LdapToggleDescription": "Iespējojiet šo opciju, ja vēlaties {{productName}} automātiski pievienot lietotājus no LDAP servera. Pievienotie lietotāji varēs autorizēties, izmantojot savus LDAP servera akreditācijas datus. {{productName}} nesaglabā lietotāju paroles lokāli un autentificēs lietotājus, kuri sūta savu pieteikumvārdu un paroli uz LDAP serveri.",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "Lietotāju filtrs",
   "LdapUserFilterTooltip": "Izmantojiet meklēšanas LDAP filtru, lai atlasītu importējamos lietotājus.",
   "LdapUserQuotaTooltip": "Lai iestatītu lietotāja krātuves kvotu, pievienojiet atribūtu LDAP direktorijā (piemēram, UsersQuotaLimit) un ievadiet šim atribūtam veselu skaitļa vērtību. Tas parādīs kvotas vērtību baitos. Šeit norādiet tikai atribūta nosaukumu. Šis atribūts tiks lietots tikai pirmās iestatīšanas laikā, un vēlāk to varēs mainīt manuāli sadaļā {{contactsName}}.",
-  "LdapUsersType": "Lietotāju veids"
+  "LdapUsersType": "Lietotāju veids",
+  "LdapUserTypeTooltip": "Visi lietotāji tiks pievienoti darbvietai ar atlasīto tipu."
 }

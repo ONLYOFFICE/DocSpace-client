@@ -11,6 +11,7 @@
   "PasswordRecoveryTitle": "Wachtwoord herstellen",
   "RecoverAccess": "Toegang herstellen",
   "RecoverContactEmailPlaceholder": "Contact e-mail",
+  "RecoverTextBody": "Als u zich niet kunt aanmelden met uw bestaande account of als nieuwe gebruiker wilt worden geregistreerd, neem dan contact op met de beheerder van de werkruimte.",
   "Register": "Registreren",
   "RegisterTextBodyAfterDomainsList": "Om te registreren, voert u uw e-mail in en klikt u op Stuur verzoek. U ontvangt een activatielink.",
   "RegisterTextBodyBeforeDomainsList": "Registratie is mogelijk voor gebruikers met een e-mailaccount bij",
@@ -18,5 +19,6 @@
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "De standaard sessieduur is 20 minuten. Vink deze optie aan om deze in te stellen op 1 jaar. Om uw eigen waarde in te stellen, ga naar Instellingen.",
   "SignInLDAP": "Aanmelden bij: {{ldap_domain}}",
-  "SignInLdapHelper": "Gebruik aanmeldgegevens voor het bedrijfsdomein"
+  "SignInLdapHelper": "Gebruik aanmeldgegevens voor het bedrijfsdomein",
+  "UserIsAlreadyRegistered": "Gebruiker <1>{{email}}</1> is al geregistreerd in deze werkruimte, voer uw wachtwoord in of ga terug om verder te gaan met een andere e-mail."
 }

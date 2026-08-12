@@ -6,6 +6,7 @@
   "Binding": "绑定：",
   "CertificateExist": "具有相同操作类型的证书已存在",
   "CustomEntryButton": "自定义登录按钮标题",
+  "CustomEntryTooltip": "用于通过单点登录服务登录工作区的按钮文本",
   "DownloadMetadataXML": "下载 SP 元数据 XML",
   "Encryption": "加密",
   "GenerateCertificate": "生成新的自签名证书",
@@ -49,8 +50,10 @@
   "spSignResponseRequest": "签署登出响应",
   "SPSingleLogoutURL": "SP 单点登出 URL（支持 POST 和重定向绑定）：",
   "SPSingleLogoutURLTooltip": "用于身份供应商端单点登出的 URL",
+  "SsoIntro": "您可在单点登录部分启用/禁用使用 SAML 的第三方身份验证功能，从而为用户提供更便捷、更安全的工作区访问方式。",
   "StandardDecryptionAlgorithm": "默认解密算法",
   "TurnOnSSO": "启用单点登录认证",
+  "TurnOnSSOCaption": "如果您想将 SSO 服务中的用户自动添加至工作区中，请使用此选项。",
   "UploadXML": "从 XML 中加载元数据以自动填充所需字段。",
   "UploadXMLPlaceholder": "IdP 元数据 XML URL",
   "UsedFor": "用于"

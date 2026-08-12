@@ -1,9 +1,11 @@
 {
   "ChangeData": "Alterar dados e senha",
   "ClickButtonBelow": "Se desejar fazer login usando seu e-mail, defina sua própria senha. <br/> Quando estiver pronto, clique no botão abaixo.",
+  "ContinueToProduct": "Continue para o espaço de trabalho",
   "GeneratedPassword": "Senha gerada",
   "ProductNameDetail": "{{productName}} nome",
   "ReviewAccountDetails": "Por favor, reserve um momento para rever os detalhes da sua conta:",
   "SetEmailPassword": "Definir senha",
+  "WelcomeSubtitle": "O seu espaço de trabalho foi criado com sucesso. Reveja os detalhes do seu perfil e comece a trabalhar.",
   "YourProfileDetails": "Detalhes do seu perfil"
 }

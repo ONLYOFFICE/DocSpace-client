@@ -1,4 +1,5 @@
 {
+  "DeleteAllGroupDescription": "Các nhóm đã được chọn sẽ bị xóa. Người dùng trong các nhóm sẽ không bị xóa khỏi không gian làm việc. Bạn có chắc muốn tiếp tục?",
   "DeleteAllGroupsTitle": "Xóa các nhóm",
   "DeleteFiles": "Bạn sắp di chuyển <strong>các tệp ({{filesCount}})</strong> đến {{trashSection}}.",
   "DeleteFilesAndFolders": "Bạn sắp xóa <strong>các tệp ({{filesCount}})</strong> và <strong>thư mục ({{foldersCount}})</strong> đến {{trashSection}}.",
@@ -6,6 +7,7 @@
   "DeleteFilesForever": "Bạn sắp xóa <strong>các tệp ({{filesCount}})</strong>.",
   "DeleteFolders": "Bạn sắp di chuyển <strong>thư mục ({{foldersCount}})</strong> đến {{trashSection}}.",
   "DeleteFoldersForever": "Bạn sắp xóa <strong>thư mục ({{foldersCount}})</strong>.",
+  "DeleteGroupDescription": "Nhóm {{groupName}} sẽ bị xóa. Người dùng trong nhóm sẽ không bị xóa khỏi không gian làm việc. Bạn có chắc muốn tiếp tục?",
   "DeleteGroupTitle": "Xoá nhóm",
   "DeleteItem": "Bạn sắp di chuyển <strong>{{name}}</strong> đến {{trashSection}}.",
   "DeleteItemForeverConfirm": "Bạn sắp xóa <strong>{{name}}</strong>.",

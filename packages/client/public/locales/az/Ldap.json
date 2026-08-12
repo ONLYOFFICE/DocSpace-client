@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "Xüsusiyyət xəritələşdirilməsi",
   "LdapAuthenticationTooltip": "Cari istifadəçisinin LDAP server oxumaq hüququ yoxdursa, bu seçimi aktivləşdirin və oxumaq hüququ olan başqa istifadəçinin məlumatlarını daxil edin.",
   "LdapAutoSyncToggle": "Avtomatik sinxronizasiya",
+  "LdapAutoSyncToggleDescription": "Sinxronizasiya bütün məlumatların iş sahəsindən yüklənməsinə və parametrlər dəyişdirildikdən sonra yeni məlumatların yenilənməsinə imkan verəcək. İş sahəsində istifadəçilər üçün hər dəfə yeni məlumatınız olduqda sinxronizasiya edin.",
   "LdapAvatar": "Profil şəkli",
   "LdapCertificateConfirm": "Sertifikatı təsdiqləyin",
   "LdapConnectionType": "Bağlantı növü",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS, şifrələnmiş əlaqə üçün ayrıca portdan istifadə etmək əvəzinə, açıq mətn bağlantısını şifrələnmiş (TLS və ya SSL) əlaqəyə yüksəltmək üçün bir yol təqdim edir.",
   "LdapConnectionTypeUnencrypted": "Şifrəsiz əlaqə",
+  "LdapDisclaimer": "Nəzərə alın: iş sahəsi istifadəçisinin e-poçtu 'Mail Atribut' parametrindən alınacaq. Əgər çatışmazsa, o, aşağıdakı kimi yaradılacaq: 'Login Atribut + @ + LDAP Domain'. Əgər belə bir e-poçt yoxdursa, istifadəçiyə heç bir iş sahəsi bildirişi göndərilməyəcək.",
   "LdapGroupAttribute": "Qrup Xüsusiyyəti",
   "LdapGroupAttributeTooltip": "Bu qrupun hansı istifadəçiləri ehtiva etdiyini göstərən qrup obyekti xüsusiyyətini daxil edin.",
   "LdapGroupDN": "DN qrupu",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "İstifadəçinin giriş məlumatına uyğun olan obyekt xüsusiyyətini daxil edin.",
   "LdapLoginTooltip": "Lütfən, LDAP server oxumaq hüququna malik olan Giriş istifadəçisini göstərin.",
   "LdapMail": "E-poçt",
+  "LdapMobileSettingsDescription": "İstifadəçilərinizə brendə xas təcrübə təqdim etmək üçün bu seçimdən istifadə edin. Bu parametrlər bütün iş sahələriniz üçün effektiv olacaq.",
   "LdapMobileSyncDescription": "Şirkət məlumatlarınızı dəqiqləşdirin, xarici resurslara keçidlər əlavə edin və onlayn ofis interfeysində göstərilən e-poçt ünvanlarını daxil edin.",
   "LdapNextSync": "Növbəti sinxronizasiya",
   "LdapPasswordTooltip": "LDAP server məlumatları oxumaq üçün giriş hüququ olan istifadəçinin şifrəsini daxil edin.",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "qədər etibarlıdır",
   "LdapSyncButton": "İstifadəçiləri sinxronizasiya edin",
   "LdapSyncCronTitle": "Burada LDAP istifadəçilərini hansı aralıqla sinxronizasiya etmək istədiyinizi təyin edə bilərsiniz.",
+  "LdapSyncDescription": "LDAP məlumatlarını sinxronizasiya etmək iş sahəniz və LDAP serveri arasında məlumat dəyişikliklərini sinxronizasiya etmək üçün bir yoldur. \"Avtomatik sinxronizasiya\" seçimini aktivləşdirin və məlumatın avtomatik yenilənməsi üçün vaxt təyin edin.",
   "LdapSyncTitle": "LDAP məlumatlarını sinxronizasiya edin",
   "LdapToggle": "LDAP Doğrulama",
   "LdapToggleDescription": "LDAP serverindən {{productName}}-a avtomatik olaraq istifadəçilər əlavə etmək istəyirsinizsə, bu seçimi aktiv edin. Əlavə edilmiş istifadəçilər LDAP server məlumatlarından istifadə edərək avtorizasiya edə biləcəklər. {{productName}} istifadəçi şifrələrini yerli olaraq saxlamır və istifadəçi adları və şifrələrini LDAP serverinə göndərməklə istifadəçilərin autentifikasiyasını həyata keçirir.",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "İstifadəçi Filtri",
   "LdapUserFilterTooltip": "İdxal edilməli olan istifadəçiləri seçmək üçün LDAP axtarış filtrindən istifadə edin.",
   "LdapUserQuotaTooltip": "İstifadəçi üçün yaddaş kvotası təyin etmək üçün LDAP qovluğuna atribut əlavə edin (məsələn, UsersQuotaLimit) və bu atribut üçün tam dəyər daxil edin. O, kvota dəyərini baytla göstərəcək. Burada yalnız atribut adını göstərin. Bu funksiya yalnız ilkin quraşdırma zamanı həyata keçiriləcək və daha sonra {{contactsName}} bölməsində əl ilə dəyişdirilə bilər.",
-  "LdapUsersType": "İstifadəçi növü"
+  "LdapUsersType": "İstifadəçi növü",
+  "LdapUserTypeTooltip": "Bütün istifadəçilər seçilmiş növlə iş sahəsinə əlavə olunacaq."
 }

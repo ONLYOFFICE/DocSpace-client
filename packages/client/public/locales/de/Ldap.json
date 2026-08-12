@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "Attribut-Zuordnung",
   "LdapAuthenticationTooltip": "Aktivieren Sie diese Option, wenn der aktuelle Benutzer nicht die Rechte hat, vom LDAP-Server zu lesen, und geben Sie die Anmeldedaten eines anderen Benutzers mit den Leserechten ein.",
   "LdapAutoSyncToggle": "Auto-Synchronisierung",
+  "LdapAutoSyncToggleDescription": "Die Synchronisierung ermöglicht das Hochladen aller Daten aus dem Arbeitsbereich und die Aktualisierung der neuen Daten nach Änderung der Einstellungen. Synchronisieren Sie jedes Mal, wenn Sie neue Daten über Benutzer im Arbeitsbereich haben.",
   "LdapAvatar": "Profilfoto",
   "LdapCertificateConfirm": "Zertifikat bestätigen",
   "LdapConnectionType": "Verbindungstyp",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS bietet eine Möglichkeit, eine Klartextverbindung in eine verschlüsselte (TLS oder SSL) Verbindung umzuwandeln, anstatt einen separaten Port für die verschlüsselte Kommunikation zu verwenden.",
   "LdapConnectionTypeUnencrypted": "Unverschlüsselte Kommunikation",
+  "LdapDisclaimer": "Bitte beachten Sie: Die E-Mail des Benutzers des Arbeitsbereichs wird aus der Einstellung \"Mail-Attribut\" übernommen. Fehlt sie, wird sie folgendermaßen gebildet: \"Login-Attribut + @ + LDAP-Domäne\". Falls eine solche E-Mail nicht existiert, wird der Benutzer keine Benachrichtigung des Arbeitsbereichs erhalten.",
   "LdapGroupAttribute": "Gruppenattribut",
   "LdapGroupAttributeTooltip": "Geben Sie das Attribut des Gruppenobjekts ein, das angibt, welche Benutzer diese Gruppe umfasst.",
   "LdapGroupDN": "Gruppen-DN",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "Geben Sie das Objektattribut ein, das der Benutzeranmeldung entspricht.",
   "LdapLoginTooltip": "Bitte geben Sie einen Login-Benutzer an, der Leserechte auf dem LDAP-Server hat.",
   "LdapMail": "E-Mail",
+  "LdapMobileSettingsDescription": "Verwenden Sie diese Option, um Ihren Nutzern ein markengerechtes Erlebnis zu bieten. Diese Einstellungen werden für alle Ihre Arbeitsbereiche wirksam sein.",
   "LdapMobileSyncDescription": "Geben Sie Ihre Unternehmensinformationen an, fügen Sie Links zu externen Ressourcen und E-Mail-Adressen hinzu, die in der Benutzeroberfläche angezeigt werden.",
   "LdapNextSync": "Nächste Synchronisierung",
   "LdapPasswordTooltip": "Geben Sie das Kennwort für den Benutzer mit den Zugriffsrechten zum Lesen von Daten vom LDAP-Server.",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "Gültig bis",
   "LdapSyncButton": "Benutzer synchronisieren",
   "LdapSyncCronTitle": "Hier können Sie einstellen, wie oft Sie LDAP-Benutzer automatisch synchronisieren möchten",
+  "LdapSyncDescription": "LDAP-Daten synchronisieren ist eine Möglichkeit, Datenänderungen zwischen Ihrem Arbeitsbereich und dem LDAP-Server zu synchronisieren. Aktivieren Sie die Option \"Automatische Synchronisierung\" und legen Sie einen Zeitraum für die automatische Aktualisierung der Informationen fest.",
   "LdapSyncTitle": "LDAP-Daten synchronisieren",
   "LdapToggle": "LDAP-Authentifizierung",
   "LdapToggleDescription": "Aktivieren Sie diese Option, wenn Sie Benutzer vom LDAP-Server automatisch zu {{productName}} hinzufügen möchten. Die hinzugefügten Benutzer können sich mit ihren LDAP-Server-Anmeldedaten autorisieren. {{productName}} speichert die Benutzerkennwörter nicht lokal und authentifiziert die Benutzer, indem es deren Login und Kennwort an den LDAP-Server sendet.",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "Benutzerfilter",
   "LdapUserFilterTooltip": "Verwenden Sie den LDAP-Suchfilter, um die Benutzer auszuwählen, die importiert werden sollen.",
   "LdapUserQuotaTooltip": "Um die Quo­te für Benutzer festzulegen, fügen Sie ein Attribut im LDAP-Verzeichnis hinzu (z.B. UsersQuotaLimit) und geben Sie einen ganzzahligen Wert für dieses Attribut ein. Der Quo­tewert wird in Bytes angezeigt. Geben Sie hier nur den Attributnamen an. Dieses Attribut wird nur während der ersten Einrichtung angewendet und kann später manuell im Abschnitt \"{{contactsName}}\" geändert werden.",
-  "LdapUsersType": "Benutzertyp"
+  "LdapUsersType": "Benutzertyp",
+  "LdapUserTypeTooltip": "Alle Benutzer werden dem Arbeitsbereich mit dem ausgewählten Typ hinzugefügt."
 }

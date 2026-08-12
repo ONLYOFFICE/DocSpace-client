@@ -11,6 +11,7 @@
   "PasswordRecoveryTitle": "Recuperação de palavra-passe",
   "RecoverAccess": "Recuperar o acesso",
   "RecoverContactEmailPlaceholder": "Email de contacto",
+  "RecoverTextBody": "Se não consegue iniciar sessão com a sua conta ou se quiser registar-se como um novo utilizador, contacte o administrador do espaço de trabalho.",
   "Register": "Registar",
   "RegisterTextBodyAfterDomainsList": "Para registar-se, introduza o seu e-mail e clique em Enviar pedido. Ser-lhe-á enviado uma ligação de ativação.",
   "RegisterTextBodyBeforeDomainsList": "O registo está disponível para os utilizadores com uma conta de e-mail em",
@@ -18,5 +19,6 @@
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "A duração da sessão predefinida é de 20 minutos. Clique nesta opção para configurá-la para 1 ano. Para introduzir um período à sua escolha, aceda às definições.",
   "SignInLDAP": "Entre em: {{ldap_domain}}",
-  "SignInLdapHelper": "Use credenciais para o domínio corporativo"
+  "SignInLdapHelper": "Use credenciais para o domínio corporativo",
+  "UserIsAlreadyRegistered": "O utilizador <1>{{email}}</1> já está registado neste espaço de trabalho, digite a sua palavra-passe ou volte para continuar com outro e-mail."
 }

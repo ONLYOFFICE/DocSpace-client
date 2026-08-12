@@ -1,9 +1,11 @@
 {
   "AppointAdmin": "Imenovanje skrbnikov",
+  "BackupPortal": "Varnostno kopirajte podatke delovnega prostora",
   "ChangeInstruction": "Če želite spremeniti lastnika {{productName}}, spodaj izberite ime novega lastnika.",
   "ChangeOwner": "Zamenjaj lastnika {{productName}}",
   "ChangeUser": "Zamenjaj uporabnika",
   "DoTheSame": "Naredite enako kot skrbniki",
+  "ManagePortal": "Upravljajte konfiguracijo delovnega prostora",
   "ManageUser": "Upravljajte uporabniške račune",
   "NewPortalOwner": "Nov lastnik {{productName}}",
   "PortalOwnerCan": "{{productName}} lastnik lahko:",

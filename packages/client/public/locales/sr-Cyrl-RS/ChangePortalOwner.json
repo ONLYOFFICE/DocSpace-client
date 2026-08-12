@@ -1,9 +1,11 @@
 {
   "AppointAdmin": "Именовање администратора",
+  "BackupPortal": "Резервна копија података радног простора",
   "ChangeInstruction": "Да бисте променили власника {{productName}}-а, изаберите име новог власника испод.",
   "ChangeOwner": "Промени {{productName}} власника",
   "ChangeUser": "Промени корисника",
   "DoTheSame": "Учини исто као администратори",
+  "ManagePortal": "Управљај конфигурацијом радног простора",
   "ManageUser": "Управљај корисничким налозима",
   "NewPortalOwner": "Нови {{productName}} власник",
   "PortalOwnerCan": "Власник {{productName}}-а може:",

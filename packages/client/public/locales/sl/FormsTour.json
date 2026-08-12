@@ -1,4 +1,5 @@
 {
+  "FormsBlank": "To je sam obrazec — točno to, kar odpre vsak, ki sledi vaši povezavi. Naložite obrazec PDF, ki ga že imate, ali ga sestavite iz galerije predlog, ne da bi zapustili delovni prostor.",
   "FormsBlankTitle": "Obrazec, ki ga odprejo vsi",
   "FormsComplete": "Oddana kopija pristane v {{complete}} in tam ostane, po ena na osebo. Vklopite zbiranje rezultatov in vsak odgovor postane tudi vrstica v preglednici — po en stolpec za vsako polje, pripravljeno za razvrščanje ali grafikon.",
   "FormsCompleteTitle": "Zbrani odgovori",

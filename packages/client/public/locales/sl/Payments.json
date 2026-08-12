@@ -5,6 +5,7 @@
   "ChooseNewPlan": "Ali želite izbrati nov cenovni paket?",
   "GracePeriodActive": "Okres odločljivosti je aktiven <1>od {{fromDate}} do {{byDate}}</1> (preostalo dni: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "Nisem mogoče dodajati novih uporabnikov in ustvarjati novih sob. Licenca je potekla.",
+  "LicenseGracePeriodInfo": "V tem času skrbniki ne morejo ustvarjati novih sob ali dodajati novih uporabnikov. Ko poteče prehodno obdobje, bo delovni prostor nedostopen, dokler ni aktivirana nova licenca.",
   "NewRoomWillExceedLimit": "Ustvarjanje te sobe ni mogoče, ker je dosežena omejitev števila sob, ki je določena za vaš trenutni tarifni načrt.",
   "NewUsersWillExceedMembersLimit": "Dodajanje novih plačljivih uporabnikov ni mogoče, ker je dosežena omejitev števila skrbnikov, ki je določena za vaš trenutni tarifni načrt.",
   "NotPossibleRoomRestoring": "Obnovitev te sobe ni mogoča, ker je dosežena omejitev števila sob, ki je določena za vaš trenutni tarifni načrt.",

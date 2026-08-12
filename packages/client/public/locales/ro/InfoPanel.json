@@ -16,6 +16,8 @@
   "FormRoomAIModalDescription": "Conectați o bază de date pentru a analiza toate răspunsurile colectate cu \"Întreabă IA\". Puteți continua fără aceasta și să puneți întrebări doar despre acest formular.",
   "FormRoomAIModalTitle": "Obține informații mai detaliate",
   "FormRoomAINotConnectedDescription": "Stocați răspunsurile ca date struct. Activa sincron bazei date în setările cam pentru debloca bazată pe IA cu \"Întreabă IA\".",
+  "FormRoomAIProviderNotConnected": "Conectați un furnizor IA în setările spațiului de lucru pentru a analiza datele din formulare cu \"Întreabă IA\", a crea grafice și a descoperi informații utile.",
+  "FormRoomAIProviderNotConnectedAskAdmin": "Solicitați <1>administratorului {{productName}}</1> să conecteze și să activeze un furnizor IA în setările spațiului de lucru pentru a analiza datele din formulare cu \"Întreabă IA\", a crea grafice și a descoperi informații utile.",
   "FormRoomAIReadyDescriptionFile": "Întreba IA să exploreze răspunsurile din acest formular, să genereze perspective și să vizualizeze datele.",
   "FormRoomAIReadyDescriptionFolder": "Răspunsurile de la formulare sunt stocate aici, într-o bază de date conectată. Pentru a analiza datele cu ajutorul IA, deschideți un formular specific și faceți clic pe \"Întreabă IA\".",
   "FormRoomAIReadyDescriptionRoom": "Analizați datele cu \"Întreabă IA\", creați grafice și descoperiți perspective noi. Selectați un formular și faceți clic pe \"Întreabă IA\" pentru a începe.",

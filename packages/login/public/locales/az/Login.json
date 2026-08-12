@@ -11,6 +11,7 @@
   "PasswordRecoveryTitle": "Parolun bərpa edilməsi",
   "RecoverAccess": "Girişi bərpa edin",
   "RecoverContactEmailPlaceholder": "Əlaqə üçün e-poçt ünvanı",
+  "RecoverTextBody": "Cari hesabınızla giriş edə bilmirsinizsə və ya yeni istifadəçi kimi qeydiyyatdan keçmək istəyirsinizsə, o zaman iş sahəsi administratoru ilə əlaqə saxlayın.",
   "Register": "Qeydiyyatdan keç",
   "RegisterTextBodyAfterDomainsList": "Qeydiyyatdan keçmək üçün, elektron poçt ünvanını daxil edin və Sorğunu göndər düyməsinə basın.",
   "RegisterTextBodyBeforeDomainsList": "Elektron poçtu olan istifadəçilər üçün qeydiyyat mümkündür",
@@ -18,5 +19,6 @@
   "RegistrationEmailWatermark": "Elektron poçt",
   "RememberHelper": "Susmaya görə sessiya müddəti 20 dəqiqədir. Müddəti 1 ilə uzatmaq üçün qutunu klikləyin. Digər müddəti təyin etmək üçün, Ayarlar bölməsinə keçin.",
   "SignInLDAP": "Daxil olun: {{ldap_domain}}",
-  "SignInLdapHelper": "Korporativ domen üçün etimadnamələrdən istifadə edin"
+  "SignInLdapHelper": "Korporativ domen üçün etimadnamələrdən istifadə edin",
+  "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu iş sahəsində qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın."
 }

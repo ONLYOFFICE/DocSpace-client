@@ -1,9 +1,11 @@
 {
   "ChangeData": "Promeni podatke i lozinku",
   "ClickButtonBelow": "Ako želite da se prijavite koristeći svoju e-poštu, postavite sopstvenu lozinku. <br/> Kada budete spremni, kliknite na dugme ispod.",
+  "ContinueToProduct": "Nastavi na radni prostor",
   "GeneratedPassword": "Generisana lozinka",
   "ProductNameDetail": "Naziv {{productName}}",
   "ReviewAccountDetails": "Molimo vas da odvojite trenutak da pregledate detalje svog naloga:",
   "SetEmailPassword": "Postavite lozinku",
+  "WelcomeSubtitle": "Vaš radni prostor je uspešno kreiran. Pregledajte detalje vašeg profila i počnite da radite.",
   "YourProfileDetails": "Detalji vašeg profila"
 }

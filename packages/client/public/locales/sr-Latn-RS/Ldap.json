@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "Mapiranje Atributa",
   "LdapAuthenticationTooltip": "Omogućite ovu opciju ako trenutni korisnik nema prava na čitanje sa LDAP servera i unesite akreditive drugog korisnika sa pravima čitanja.",
   "LdapAutoSyncToggle": "Automatsko sinhronizovanje",
+  "LdapAutoSyncToggleDescription": "Sinhronizacija će omogućiti otpremanje svih podataka iz radnog prostora i ažuriranje novih podataka nakon promene podešavanja. Sinhronizujte svaki put kada imate nove podatke o korisnicima u radnom prostoru.",
   "LdapAvatar": "Profilna fotografija",
   "LdapCertificateConfirm": "Potvrdi sertifikat",
   "LdapConnectionType": "Tip veze",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS nudi način da se obična tekstualna veza nadogradi na enkriptovanu (TLS ili SSL) vezu umesto korišćenja zasebnog porta za enkriptovanu komunikaciju.",
   "LdapConnectionTypeUnencrypted": "Nekriptovana komunikacija",
+  "LdapDisclaimer": "Molimo, imajte na umu: imejl korisnika radnog prostora će biti uzet iz ‘Mejl Atribut’ podešavanja. Ako nedostaje, biće formiran na sledeći način: ‘Atribut za prijavu + @ + LDAP Domen’. U slučaju da takav mejl ne postoji, korisnik neće primiti obaveštenje iz radnog prostora.",
   "LdapGroupAttribute": "Grupni Atribut",
   "LdapGroupAttributeTooltip": "Unesite atribut objekta grupe koji određuje koje korisnike ova grupa uključuje.",
   "LdapGroupDN": "DN Grupe",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "Unesite atribut objekta koji odgovara korisničkoj prijavi.",
   "LdapLoginTooltip": "Molimo navedite korisnika za Prijavu koji ima prava pristupa za čitanje LDAP servera",
   "LdapMail": "Mejl",
+  "LdapMobileSettingsDescription": "Koristite ovu opciju da svojim korisnicima pružite iskustvo u skladu sa brendom. Ova podešavanja će biti primenjena na sve vaše radne prostore.",
   "LdapMobileSyncDescription": "Navedite informacije o vašoj kompaniji, dodajte linkove ka spoljnim resursima i email adrese koje se prikazuju unutar interfejsa onlajn kancelarije.",
   "LdapNextSync": "Sledeća sinhronizacija",
   "LdapPasswordTooltip": "Unesite lozinku za korisnika sa pravima pristupa za čitanje podataka sa LDAP servera.",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "Validno do",
   "LdapSyncButton": "Sinhronizuj korisnike",
   "LdapSyncCronTitle": "Ovde možete da podesite koliko često želite da automatski sinhronizujete LDAP korisnike",
+  "LdapSyncDescription": "Sinhronizacija LDAP podataka je način za sinhronizaciju promena podataka između vašeg radnog prostora i LDAP servera. Omogućite opciju „Auto Sync“ i postavite vremenski period za automatsko ažuriranje informacija.",
   "LdapSyncTitle": "Sinhronizuj LDAP podatke",
   "LdapToggle": "LDAP Autentifikacija",
   "LdapToggleDescription": "Omogućite ovu opciju ako želite da automatski dodate korisnike sa LDAP servera u ​​{{productName}}. Dodati korisnici će moći da se autorizuju koristeći svoje LDAP server akreditive. {{productName}} ne čuva korisničke lozinke lokalno i proveravaće autentičnost korisnika slanjem njihove prijave i lozinke na LDAP server.",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "Korisnički Filter",
   "LdapUserFilterTooltip": "Koristite LDAP filter za pretragu da biste izabrali korisnike koji moraju biti uvezeni.",
   "LdapUserQuotaTooltip": "Da biste postavili skladišnu kvotu za korisnika, dodajte atribut u LDAP direktorijum (na primer, UsersQuotaLimit) i unesite celobrojnu vrednost za ovaj atribut. Kvota će se prikazivati u bajtovima. Ovde navedite samo naziv atributa. Ovaj atribut će biti primenjen samo tokom prvog podešavanja i kasnije se može promeniti ručno u odeljku {{contactsName}}.",
-  "LdapUsersType": "Tip korisnika"
+  "LdapUsersType": "Tip korisnika",
+  "LdapUserTypeTooltip": "Svi korisnici će biti dodati u radni prostor sa odabranim tipom."
 }

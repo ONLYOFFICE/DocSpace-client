@@ -33,6 +33,7 @@
   "SetAppButton": "App verbinden",
   "SignUp": "Inschrijven",
   "SuccessDeactivate": "Uw account is succesvol gedeactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
+  "SuccessReactivate": "Uw account is succesvol opnieuw geactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>werkruimte</1>.",
   "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
   "TermsAndConditions": "Door verder te gaan, gaat u akkoord met onze <1>Algemene voorwaarden</1> en <2>Privacyverklaring</2>.",
   "TfaSubTitle": "Volg eenvoudige stappen om verder te werken in dit {{productName}}:",

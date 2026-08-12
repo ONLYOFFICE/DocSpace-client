@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Odstrániť plugin",
+  "DeletePluginDescription": "Tento plugin už nebude používateľom pracovného priestoru k dispozícii. Ste si istí, že chcete pokračovať?",
   "DeletePluginTitle": "Odstrániť plugin?",
   "ExpandFunctionality": "Rozšírte funkčnosť pomocou pluginu SDK",
   "GoToRepo": "Prejsť na úložisko",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin bol úspešne načítaný.",
   "PluginSamples": "Ukážky pluginov",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKInstruction": "Kliknutím na tlačidlo získate podrobné pokyny na vytvorenie vlastných pluginov."
+  "PluginSDKDescription": "Pomocou pluginu SDK môžete rozšíriť funkčnosť svojho pracovného priestoru, pripojiť služby tretích strán alebo vylepšiť skúsenosti existujúcich používateľov. Tu nájdete ukážky pluginov so zdrojovým kódom, ktoré sú k dispozícii na GitHub.",
+  "PluginSDKInstruction": "Kliknutím na tlačidlo získate podrobné pokyny na vytvorenie vlastných pluginov.",
+  "UploadDescription": "Môžete pridať pluginy, ktoré rozšíria funkčnosť pracovného priestoru o ďalšie možnosti. Kliknite na Nahrať plugin alebo vložte súbor do archívu ZIP."
 }

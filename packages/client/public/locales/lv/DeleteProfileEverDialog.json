@@ -1,4 +1,6 @@
 {
+  "ActionCannotBeUndoneGuests": "Atlasītie deaktivizētie viesi tiks noņemti no darbvietas. Šo darbību nevarēs atsaukt.",
+  "ActionCannotBeUndoneUsers": "Atlasītie atspējotie lietotāji tiks noņemti no darbvietas. Šo darbību nevarēs atsaukt.",
   "CannotReassignFiles": "Ja vienlaikus izdzēšat vairākus lietotājus, jūs nevarat atkārtoti piešķirt viņu failus citiem lietotājiem.",
   "DeleteGroupGuestsSuccessMessage": "Viesi ir veiksmīgi izdzēsti.",
   "DeleteGroupUsersSuccessMessage": "Lietotāji ir veiksmīgi izdzēsti.",

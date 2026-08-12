@@ -1,4 +1,6 @@
 {
+  "ActionCannotBeUndoneGuests": "Izabrani onemogućeni gosti biće uklonjeni iz radnog prostora. Ova radnja se ne može poništiti.",
+  "ActionCannotBeUndoneUsers": "Izabrani onemogućeni korisnici će biti uklonjeni iz radnog prostora. Ova radnja se ne može opozvati.",
   "CannotReassignFiles": "Ako obrišete više korisnika odjednom, ne možete da dodelite njihove datoteke drugim korisnicima.",
   "DeleteGroupGuestsSuccessMessage": "Gosti su uspešno obrisani.",
   "DeleteGroupUsersSuccessMessage": "Korisnici su uspešno obrisani.",

@@ -5,6 +5,7 @@
   "LdapAttributeMapping": "Özellik eşleme",
   "LdapAuthenticationTooltip": "Geçerli kullanıcısının LDAP sunucusu okuma hakları yoksa bu seçeneği etkinleştirin ve okuma haklarına sahip başka bir kullanıcının kimlik bilgilerini girin.",
   "LdapAutoSyncToggle": "Otomatik senkronizasyon",
+  "LdapAutoSyncToggleDescription": "Senkronizasyon, çalışma alanından tüm verilerin yüklenmesine ve ayarlar değiştirildikten sonra yeni verilerin güncellenmesine olanak sağlayacaktır. Çalışma alanındaki kullanıcılara ilişkin her yeni veriye sahip olduğunuzda senkronizasyon yapın.",
   "LdapAvatar": "Profil fotoğrafı",
   "LdapCertificateConfirm": "Sertifikayı onaylayın",
   "LdapConnectionType": "Bağlantı Tipi",
@@ -13,6 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS, şifreli iletişim için ayrı bir bağlantı noktası kullanmak yerine düz metin bağlantısını şifreli (TLS veya SSL) bağlantıya yükseltmenin bir yolunu sunmaktadır.",
   "LdapConnectionTypeUnencrypted": "Şifrelenmemiş iletişim",
+  "LdapDisclaimer": "Lütfen unutmayın: çalışma alanı kullanıcı e-postası 'Posta Özelliği' ayarından alınacaktır. Eğer bu eksikse, şu şekilde oluşturulacaktır: 'Oturum Açma Özelliği + @ + LDAP Alanı'. Böyle bir e-postanın mevcut olmaması durumunda, kullanıcı çalışma alanından herhangi bir bildirim almayacaktır.",
   "LdapGroupAttribute": "Grup Özelliği",
   "LdapGroupAttributeTooltip": "Bu grubun hangi kullanıcıları içerdiğini belirten grup nesnesi özelliğini girin.",
   "LdapGroupDN": "Grup DN",
@@ -29,6 +31,7 @@
   "LdapLoginAttributeTooltip": "Kullanıcı oturumuna karşılık gelen nesne özelliğini girin.",
   "LdapLoginTooltip": "Lütfen LDAP sunucusu okuma erişim haklarına sahip Login kullanıcısını belirtin.",
   "LdapMail": "Posta",
+  "LdapMobileSettingsDescription": "Kullanıcılarınıza markaya uygun bir deneyim sunmak için bu seçeneği kullanın. Bu ayarlar tüm çalışma alanlarınız için geçerli olacaktır.",
   "LdapMobileSyncDescription": "Şirket bilgilerinizi belirleyin, harici kaynaklara bağlantılar ekleyin ve çevrimiçi ofis arayüzünde görüntülenen e-posta adreslerini ekleyin.",
   "LdapNextSync": "Sonraki senkronizasyon",
   "LdapPasswordTooltip": "LDAP sunucusu veri okuma erişim haklarına sahip kullanıcı için parolayı girin.",
@@ -57,6 +60,7 @@
   "LdapSettingsValidUntil": "Şu tarihe kadar geçerlidir",
   "LdapSyncButton": "Kullanıcıları senkronize edin",
   "LdapSyncCronTitle": "Burada LDAP kullanıcılarını ne sıklıkla otomatik olarak senkronize etmek istediğinizi ayarlayabilirsiniz",
+  "LdapSyncDescription": "LDAP verilerini senkronize etmek, çalışma alanınız ile LDAP sunucusu arasındaki veri değişikliklerini senkronize etmenin bir yoludur. 'Otomatik Senkronizasyon' seçeneğini etkinleştirin ve bilgileri otomatik olarak güncellemek için bir zaman aralığı belirleyin.",
   "LdapSyncTitle": "LDAP verilerini senkronize et",
   "LdapToggle": "LDAP Kimlik Doğrulama",
   "LdapToggleDescription": "LDAP sunucusundan {{productName}} içerisine otomatik olarak kullanıcı eklemek istiyorsanız bu seçeneği etkinleştirin. Eklenen kullanıcılar LDAP sunucusu kimlik bilgilerini kullanarak yetkilendirme yapabilecektir. {{productName}} kullanıcı parolalarını yerel olarak kaydetmez ve kullanıcıların kimlik doğrulamasını kullanıcı adı ve parolalarını LDAP sunucusu göndererek yapar.",
@@ -66,5 +70,6 @@
   "LdapUserFilter": "Kullanıcı Filtresi",
   "LdapUserFilterTooltip": "İçe aktarılması gereken kullanıcıları seçmek için arama LDAP filtresini kullanın.",
   "LdapUserQuotaTooltip": "Kullanıcı için bir depolama kotası ayarlamak için, LDAP dizinine bir özellik ekleyin (örneğin, UsersQuotaLimit) ve bu özellik için bir tamsayı değeri girin. Kota değerini bayt cinsinden gösterecektir. Burada sadece özellik adını belirtin. Bu özellik yalnızca ilk kurulum sırasında uygulanacaktır, daha sonra {{contactsName}} bölümünde manuel olarak değiştirilebilir.",
-  "LdapUsersType": "Kullanıcı tipi"
+  "LdapUsersType": "Kullanıcı tipi",
+  "LdapUserTypeTooltip": "Tüm kullanıcılar çalışma alanına seçilen türle eklenecektir."
 }

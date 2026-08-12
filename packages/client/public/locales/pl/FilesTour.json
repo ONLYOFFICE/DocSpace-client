@@ -12,6 +12,7 @@
   "TourPlacesShared": "{{sectionName}} — pliki, które udostępnili ci inni.",
   "TourPlacesTitle": "Wszystko na swoim miejscu",
   "TourPlacesTrash": "{{sectionName}} — usunięte pliki, które wciąż możesz przywrócić.",
+  "TourShare": "Najedź na dowolny plik, aby zobaczyć szybkie akcje. Kliknij ikonę udostępniania, aby nadać dostęp kontaktom z twojej przestrzeni roboczej na różnych poziomach uprawnień — albo utwórz link zewnętrzny dla wszystkich pozostałych.",
   "TourSharedAccess": "{{sharedBy}} mówi, od kogo pochodzi plik, {{accessLevel}} mówi, co możesz z nim zrobić — wyświetlać, komentować lub edytować. Zmienić to może tylko właściciel.",
   "TourSharedAccessTitle": "Kto udostępnił i co możesz zrobić",
   "TourSharedEmpty": "Nic jeszcze nie zostało ci udostępnione. Pliki i foldery pojawią się tutaj, gdy tylko ktoś nada ci do nich dostęp.",

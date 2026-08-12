@@ -16,6 +16,8 @@
   "FormRoomAIModalDescription": "Připojte databázi pro analýzu všech shromážděných odpovědí pomocí \"Zeptejte se AI\". Můžete pokračovat i bez ní a ptát se pouze na tento formulář.",
   "FormRoomAIModalTitle": "Získejte lepší poznatky",
   "FormRoomAINotConnectedDescription": "Ukládejte odpovědi jako strukturovaná data. Povolte synchronizaci databáze v nastavení místnosti pro odemknutí analýzy s využitím AI pomocí \"Zeptejte se AI\".",
+  "FormRoomAIProviderNotConnected": "Připojte poskytovatele AI v nastavení pracovního prostoru, abyste mohli analyzovat data z formulářů pomocí \"Zeptejte se AI\", vytvářet grafy a získávat poznatky.",
+  "FormRoomAIProviderNotConnectedAskAdmin": "Požádejte <1>správce {{productName}}</1>, aby připojil a povolil poskytovatele AI v nastavení pracovního prostoru, abyste mohli analyzovat data z formulářů pomocí \"Zeptejte se AI\", vytvářet grafy a získávat poznatky.",
   "FormRoomAIReadyDescriptionFile": "Požádejte AI, aby prozkoumala odpovědi z tohoto formuláře, vytvořila poznatky a vizualizovala data.",
   "FormRoomAIReadyDescriptionFolder": "Odpovědi z formulářů jsou zde uloženy v připojené databázi. Pro analýzu dat pomocí AI otevřete konkrétní formulář a klikněte na \"Zeptejte se AI\".",
   "FormRoomAIReadyDescriptionRoom": "Analyzujte data pomocí \"Zeptejte se AI\", vytvářejte grafy a odkrývejte poznatky. Vyberte formulář a klikněte na \"Zeptejte se AI\"', abyste mohli začít.",

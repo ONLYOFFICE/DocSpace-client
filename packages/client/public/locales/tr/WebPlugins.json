@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Eklentiyi sil",
+  "DeletePluginDescription": "Bu eklenti artık çalışma alanı kullanıcıları tarafından kullanılamayacak. Devam etmek istediğinize emin misiniz?",
   "DeletePluginTitle": "Eklenti silinsin mi?",
   "ExpandFunctionality": "Eklenti SDK'sını kullanarak işlevselliği genişletin",
   "GoToRepo": "Depoya git",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Eklenti başarıyla yüklendi",
   "PluginSamples": "Eklenti örnekleri",
   "PluginSDK": "Eklenti SDK'sı",
-  "PluginSDKInstruction": "Kendi eklentilerinizi nasıl oluşturacağınızla ilgili ayrıntılı talimatlar için düğmeye tıklayın."
+  "PluginSDKDescription": "Eklenti SDK'sını kullanarak çalışma alanınızın işlevselliğini genişletebilir, üçüncü taraf hizmetlerine bağlanabilir veya mevcut kullanıcı deneyimini geliştirebilirsiniz. Burada GitHub'da bulunan kod kaynağına sahip eklenti örneklerini bulabilirsiniz.",
+  "PluginSDKInstruction": "Kendi eklentilerinizi nasıl oluşturacağınızla ilgili ayrıntılı talimatlar için düğmeye tıklayın.",
+  "UploadDescription": "Çalışma alanının işlevselliğini ekstra özelliklerle genişletmek için eklentiler ekleyebilirsiniz. Eklenti yükle'ye tıklayın veya dosyayı ZIP arşivine bırakın."
 }

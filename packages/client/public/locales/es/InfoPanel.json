@@ -16,6 +16,8 @@
   "FormRoomAIModalDescription": "Conecte una base de datos para analizar todas las respuestas recopiladas con \"Preguntarle a la IA\". Puede continuar sin ella y preguntar solo sobre este formulario.",
   "FormRoomAIModalTitle": "Obtenga mejores información",
   "FormRoomAINotConnectedDescription": "Almacene las respuestas como datos estructurados. Active la sincronización de la base de datos en la configuración de la sala para desbloquear el análisis de IA con \"Preguntarle a la IA\".",
+  "FormRoomAIProviderNotConnected": "Conecte un proveedor de IA en la configuración del espacio de trabajo para analizar los datos del formulario con \"Preguntarle a la IA\", crear gráficos y descubrir información.",
+  "FormRoomAIProviderNotConnectedAskAdmin": "Pida al <1>administrador de {{productName}}</1> que conecte y habilite un proveedor de IA en la configuración del espacio de trabajo para analizar los datos del formulario con \"Preguntarle a la IA\", crear gráficos y descubrir información.",
   "FormRoomAIReadyDescriptionFile": "Pida a la IA que explore las respuestas de este formulario, genere información y visualice los datos.",
   "FormRoomAIReadyDescriptionFolder": "Las respuestas de los formularios se almacenan aquí en una base de datos conectada. Para analizar datos con IA, abra un formulario específico y haga clic en \"Preguntarle a la IA\".",
   "FormRoomAIReadyDescriptionRoom": "Analice datos con \"Preguntarle a la IA\", cree gráficos y descubra información. Seleccione un formulario y haga clic en \"Preguntarle a la IA\" para comenzar.",

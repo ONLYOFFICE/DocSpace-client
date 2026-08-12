@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "Smazat plugin",
+  "DeletePluginDescription": "Tento zásuvný modul již nebude uživatelům pracovního prostoru k dispozici. Jste si jisti, že chcete pokračovat?",
   "DeletePluginTitle": "Smazat zásuvný modul?",
   "ExpandFunctionality": "Rozšíření funkcí pomocí sady zásuvných modulů SDK",
   "GoToRepo": "Přejít do úložiště",
@@ -13,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin načten úspěšně",
   "PluginSamples": "Ukázky pluginů",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKInstruction": "Kliknutím na tlačítko získáte podrobný návod, jak vytvořit vlastní zásuvné moduly."
+  "PluginSDKDescription": "Pomocí sady Plugin SDK můžete rozšířit funkčnost svého pracovního prostoru, připojit služby třetích stran nebo vylepšit stávající uživatelské prostředí. Zde najdete ukázky zásuvných modulů se zdrojovým kódem, které jsou k dispozici na GitHubu.",
+  "PluginSDKInstruction": "Kliknutím na tlačítko získáte podrobný návod, jak vytvořit vlastní zásuvné moduly.",
+  "UploadDescription": "Můžete přidat zásuvné moduly a rozšířit tak funkčnost pracovního prostoru o další funkce. Klepněte na tlačítko Nahrát zásuvný modul nebo vhoďte soubor do archivu ZIP."
 }

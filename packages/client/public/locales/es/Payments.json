@@ -5,6 +5,7 @@
   "ChooseNewPlan": "¿Desea elegir un nuevo plan de precios?",
   "GracePeriodActive": "El período de gracia está activo <1>desde {{fromDate}} hasta {{byDate}}</1> (días restantes: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "No se pueden añadir nuevos usuarios ni crear nuevas salas. La licencia ha caducado.",
+  "LicenseGracePeriodInfo": "Durante este tiempo, los administradores no pueden crear nuevas salas ni añadir nuevos usuarios. Una vez que el período de gracia finalice, el espacio de trabajo no estará disponible hasta que se active una nueva licencia.",
   "NewRoomWillExceedLimit": "No es posible crear esta sala ya que se ha alcanzado el límite del número de salas que permite su plan actual.",
   "NewUsersWillExceedMembersLimit": "No es posible añadir nuevos usuarios de pago ya que se ha alcanzado el límite del número de administradores que permite su plan actual.",
   "NotPossibleRoomRestoring": "No es posible restaurar esta sala ya que se ha alcanzado el límite para el número de salas que incluye su plan actual.",

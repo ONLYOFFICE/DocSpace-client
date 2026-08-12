@@ -12,6 +12,7 @@
   "TourPlacesShared": "{{sectionName}} — soubory, které s vámi sdíleli ostatní.",
   "TourPlacesTitle": "Všechno na svém místě",
   "TourPlacesTrash": "{{sectionName}} — smazané soubory, které ještě můžete obnovit.",
+  "TourShare": "Najeďte myší na libovolný soubor a uvidíte rychlé akce. Klikněte na ikonu sdílení a udělte přístup kontaktům svého pracovního prostoru s různými úrovněmi oprávnění — nebo vytvořte externí odkaz pro kohokoli dalšího.",
   "TourSharedAccess": "{{sharedBy}} říká, od koho soubor přišel, {{accessLevel}} říká, co s ním smíte dělat — prohlížet, komentovat nebo upravovat. Změnit to může jen vlastník.",
   "TourSharedAccessTitle": "Kdo ho nasdílel a co smíte dělat",
   "TourSharedEmpty": "Zatím s vámi nikdo nic nesdílel. Soubory a složky se tu objeví, jakmile vám k nim někdo dá přístup.",

@@ -36,7 +36,7 @@
   "StorageDescriptionAgent": "Квота хранилища устанавливается для каждого агента. Вы можете изменить это значение или отключить ограничение хранилища.",
   "ThirdPartyStorageComboBoxPlaceholder": "Выберите хранилище",
   "ThirdPartyStorageNoStorageAlert": "Предварительно необходимо подключить соответствующую услугу в разделе «Интеграция». В противном случае подключение будет невозможно.",
-  "ThirdPartyStoragePermanentSettingDescription": "Файлы хранятся в стороннем хранилище {{thirdpartyTitle}} в папке \"{{thirdpartyFolderName}}\". <strong>{{thirdpartyPath}}</strong>",
+  "ThirdPartyStoragePermanentSettingDescription": "Файлы хранятся в стороннем хранилище {{thirdpartyTitle}} в папке \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Для подключения стороннего хранилища необходимо добавить соответствующий сервис в разделе «Интеграция» настроек {{productName}}. Свяжитесь с владельцем или администратором {{productName}}, чтобы включить интеграцию.",
   "UserEmail": "Электронный адрес пользователя",
   "UserIPAddress": "IP-адрес пользователя",

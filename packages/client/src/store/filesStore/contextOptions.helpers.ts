@@ -515,7 +515,9 @@ export const buildContextOptions = (
     if (!isRecycleBinFolder) {
       fileOptions = removeOptions(fileOptions, ["restore"]);
 
-      if (enablePlugins) {
+      // plugins receive only a file id and fetch the bytes themselves, so they
+      // cannot decrypt an encrypted file and must not send it outside the room
+      if (enablePlugins && !isEncrypted) {
         if (
           !item.viewAccessibility!.MediaView &&
           !item.viewAccessibility!.ImageView

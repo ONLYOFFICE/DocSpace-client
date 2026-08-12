@@ -382,6 +382,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   clientLoadingStore,
   dialogsStore,
   avatarEditorDialogStore,
+  oformsStore,
 );
 
 const createEditAgentStore = new CreateEditAgentStore(

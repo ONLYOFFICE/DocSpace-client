@@ -14,7 +14,7 @@
   "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS offers a way to upgrade a plain text connection to an encrypted (TLS or SSL) connection instead of using a separate port for encrypted communication.",
   "LdapConnectionTypeUnencrypted": "Unencrypted communication",
-  "LdapDisclaimer": "Please, keep in mind: the portal user email will be taken from the 'Mail Attribute' setting. If it is missing, it will be formed in the following way: 'Login Attribute + @ + LDAP Domain'. In case such an email does not exist, the user will not receive any workspace notification.",
+  "LdapDisclaimer": "Please, keep in mind: the workspace user email will be taken from the 'Mail Attribute' setting. If it is missing, it will be formed in the following way: 'Login Attribute + @ + LDAP Domain'. In case such an email does not exist, the user will not receive any workspace notification.",
   "LdapGroupAttribute": "Group Attribute",
   "LdapGroupAttributeTooltip": "Enter the group object attribute which specifies what users this group includes.",
   "LdapGroupDN": "Group DN",

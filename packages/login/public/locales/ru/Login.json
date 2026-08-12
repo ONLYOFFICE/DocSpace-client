@@ -7,7 +7,7 @@
   "LDAPUsernamePlaceholder": "Имя пользователя {{ldap_domain}}",
   "MessageAuthorize": "Для продолжения войдите в систему",
   "MessageEmailConfirmed": "Ваш адрес электронной почты успешно активирован.",
-  "MessageSendPasswordRecoveryInstructionsOnEmail": "Пожалуйста, введите адрес электронной почты, указанный при регистрации на портале. Инструкции по восстановлению пароля будут отправлены на этот адрес.",
+  "MessageSendPasswordRecoveryInstructionsOnEmail": "Пожалуйста, введите адрес электронной почты, указанный при регистрации в рабочем пространстве. Инструкции по восстановлению пароля будут отправлены на этот адрес.",
   "PasswordRecoveryTitle": "Восстановление пароля",
   "RecoverAccess": "Восстановить доступ к учетной записи",
   "RecoverContactEmailPlaceholder": "Контактный адрес электронной почты",

@@ -98,7 +98,7 @@
   "AIAgentsCardDescription": "Set up AI helpers that know your files. Share them with your team and use them across rooms to answer questions or run tasks on your behalf.",
   "AIAgentsEmptyScreenTent": "See {{aiAgents}} details here",
   "AIAgentsNonAdminDescription": "Creating AI agents is available for administrators only. Ask a workspace administrator to set up agents for your team.",
-  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} workspace quota exceeded ({{size}}).",
+  "AIAgentSpaceQuotaExceeded": "{{aiAgent}} space quota exceeded ({{size}}).",
   "AIAgentsPinned": "{{aiAgents}} pinned",
   "AIAgentsPromoDescription": "Automate tasks, reduce manual work, and deliver results faster - with full control over your AI.",
   "AIAgentsPromoSubtitle": "AI Agents for your workspace",

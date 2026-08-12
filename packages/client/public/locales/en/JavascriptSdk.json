@@ -137,7 +137,7 @@
   "TabPlugins": "Tab Plugins",
   "TotalSizeMustBeGreater": "Total upload size must be greater than or equal to the per-file size limit.",
   "UploaderDescription": "Embed an uploader to allow users to upload files to the selected folder.",
-  "UploaderPresetInfo": "Embed the uploader so that users can upload documents to your space without registration. Choose the allowed file types for upload.",
+  "UploaderPresetInfo": "Embed the uploader so that users can upload documents to your workspace without registration. Choose the allowed file types for upload.",
   "UploadFilesDescription": "Users can upload individual files.",
   "UploadFoldersDescription": "Users can upload entire folders with their structure.",
   "UploadLimits": "Upload limits",

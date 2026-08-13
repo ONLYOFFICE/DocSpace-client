@@ -191,10 +191,7 @@ class DocsConnectStore {
   };
 
   startTrial = async () => {
-    const info = await startDocsConnectTrial();
-    runInAction(() => {
-      this.info = info;
-    });
+    await startDocsConnectTrial();
     this.refreshPortalState();
   };
 

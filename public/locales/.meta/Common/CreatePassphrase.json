@@ -3,7 +3,7 @@
   "content": "Create passphrase",
   "content_en_sha1_hash": "1e803517a3c9f627e4fbe566aecf6308c371733b",
   "created_at": "2026-05-24T17:27:22.286Z",
-  "updated_at": "2026-07-31T12:36:29.596Z",
+  "updated_at": "2026-08-13T10:58:03.341Z",
   "comment": {
     "text": "Dialog title appearing when a user is setting up a new passphrase.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 212,
+      "line_number": 221,
       "context": "isLoading={!ready}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {title ??\n (isNew ? t(\"Common:CreatePassphrase\") : t(\"Common:EnterPassphrase\"))}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.container}>\n <Text className={styles.description}>",
       "module": "/packages/shared"
     }

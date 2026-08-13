@@ -3,7 +3,7 @@
   "content": "Recent",
   "content_en_sha1_hash": "76eec760c9b6e63eda7e9834fa40bc26d6f58eef",
   "created_at": "2025-08-27T10:14:14.891Z",
-  "updated_at": "2026-08-07T15:05:26.407Z",
+  "updated_at": "2026-08-13T10:58:03.018Z",
   "comment": {
     "text": "This is a label for a folder or category in the file management system. It refers to recently accessed files or documents.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 325,
+      "line_number": 334,
       "context": "children: [\n // Recent/Favorites under Rooms reuse the @recent/@favorites files\n // view, scoped to room content via the room folder types.\n {\n id: \"rooms-recent\",\n label: t(\"Common:Recent\"),\n icon: getCatalogIconUrlByType(FolderType.Recent),\n onClick: goScoped(\n CategoryType.Recent,\n \"/rooms/recent\",\n recentFolderId,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 325,
+      "line_number": 334,
       "context": "children: [\n // Recent/Favorites under Rooms reuse the @recent/@favorites files\n // view, scoped to room content via the room folder types.\n {\n id: \"rooms-recent\",\n label: t(\"Common:Recent\"),\n icon: getCatalogIconUrlByType(FolderType.Recent),\n onClick: goScoped(\n CategoryType.Recent,\n \"/rooms/recent\",\n recentFolderId,",
       "module": "/packages/client"
     },
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 158,
+      "line_number": 148,
       "context": "// is behind the same admin gate in the sidebar (ClientArticleSidebar) as\n // here, so for everyone else its bullet drops rather than pointing at an item\n // they do not have.\n const places = [\n t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),",
       "module": "/packages/client"
     },

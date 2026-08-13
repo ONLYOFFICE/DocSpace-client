@@ -1,7 +1,7 @@
 {
   "Administration": "Quản lý",
   "AllHistory": "Toàn bộ lịch sử",
-  "AndMoreLabel": "và  <1>{{count}} hơn thế nữa</1>",
+  "AndMoreLabel": "và <1>{{count}} hơn thế nữa</1>",
   "Data": "Dữ liệu",
   "ExpectUsers": "Người dùng được mong chờ",
   "ExportHistory": "Xuất lịch sử",

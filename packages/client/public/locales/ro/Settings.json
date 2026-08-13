@@ -160,7 +160,7 @@
   "ExternalSharingRestricted": "Restricționat (Doar utilizatorii spațiului de lucru)",
   "GoogleDriveFiles": "Fișiere din Google Drive",
   "GotAnyProblems": "Aveți probleme? Contactați echipa noastră de <1>suport</1>",
-  "GroupsSectionDescription": "Utilizatorii pe care i-ați selectat  în etapa anterioară vor fi importați în grupurile create în {{serviceName}}. Grupurile vor fi afișate în secțiunea <1>{{sectionName}}</1>.",
+  "GroupsSectionDescription": "Utilizatorii pe care i-ați selectat în etapa anterioară vor fi importați în grupurile create în {{serviceName}}. Grupurile vor fi afișate în secțiunea <1>{{sectionName}}</1>.",
   "HexCode": "Cod hexa",
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Import date din Google Workspace în {{organizationName}} {{productName}} este finalizat!",

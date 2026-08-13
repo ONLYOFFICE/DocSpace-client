@@ -816,7 +816,7 @@
   "EncryptionDecryptAllFailed": "Неуспешно дешифриране на всички избрани файлове",
   "EncryptionDecryptPartialFailed": "Неуспешно дешифриране: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Нямате ключове за криптиране на това устройство. <0>Настройте криптирането</0>, за да получите достъп до криптирани файлове.",
-  "EncryptionDownloadFailed": "Could not download the encrypted file.",
+  "EncryptionDownloadFailed": "Шифрованият файл не можа да бъде изтеглен.",
   "EncryptionError": "Възникна грешка при операцията по криптиране",
   "EncryptionFilePreparing": "Подготвяне на файла за криптиране",
   "EncryptionInvalidKeyFile": "Избраният файл не е валиден ключ за криптиране.",

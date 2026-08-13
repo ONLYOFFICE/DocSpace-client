@@ -816,7 +816,7 @@
   "EncryptionDecryptAllFailed": "Αποτυχία αποκρυπτογράφησης όλων των επιλεγμένων αρχείων",
   "EncryptionDecryptPartialFailed": "Αποτυχία αποκρυπτογράφησης: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Δεν έχετε κλειδιά κρυπτογράφησης σε αυτή τη συσκευή. <0>Ρυθμίστε την κρυπτογράφηση</0> για πρόσβαση σε κρυπτογραφημένα αρχεία.",
-  "EncryptionDownloadFailed": "Could not download the encrypted file.",
+  "EncryptionDownloadFailed": "Δεν ήταν δυνατή η λήψη του κρυπτογραφημένου αρχείου.",
   "EncryptionError": "Παρουσιάστηκε σφάλμα κατά τη λειτουργία κρυπτογράφησης",
   "EncryptionFilePreparing": "Προετοιμασία αρχείου για κρυπτογράφηση",
   "EncryptionInvalidKeyFile": "Το επιλεγμένο αρχείο δεν είναι έγκυρο κλειδί κρυπτογράφησης.",

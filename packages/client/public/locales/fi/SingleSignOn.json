@@ -43,7 +43,7 @@
   "spDecryptStatements": "Pura väitteiden salaus",
   "SPEntityId": "SP Entity Id (linkki metadata XML:ään)",
   "SPEntityIdTooltip": "Palveluntarjoajan XML URL-osoite, joka voidaan ladata ja käyttää identiteetin tarjoajan toimesta tunnistaakseen SP:n yksiselitteisesti",
-  "SpMetadata": "{{organizationName}} SP Metadata",
+  "SpMetadata": "{{organizationName}} SP -metatiedot",
   "SpMetadataDescription": "Käytä palveluntarjoajan metatietoja lisätäksesi {{organizationName}} {{productName}} luotetuksi palveluntarjoajaksi IdP-tiliisi.",
   "spSignExitRequest": "Vahvista uloskirjautumispyynnöt",
   "spSigningAlgorithm": "Allekirjoitusalgoritmi",

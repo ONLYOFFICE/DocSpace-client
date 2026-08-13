@@ -68,7 +68,7 @@
   "Revoke": "Відкликати",
   "RevokeConsent": "Відкликати згоду",
   "RevokeConsentDescription": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службі {{name}}, {{productName}} {{organizationName}} припинить автоматично входити до {{name}}. Ваш обліковий запис в {{name}} не буде видалено.",
-  "RevokeConsentDescriptionGroup": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службах, {{productName}} {{organizationName}} припинить автоматичний вхід.  Ваші облікові записи не буде видалено.",
+  "RevokeConsentDescriptionGroup": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службах, {{productName}} {{organizationName}} припинить автоматичний вхід. Ваші облікові записи не буде видалено.",
   "RevokeConsentLogin": "Якщо ви захочете відновити автоматичний вхід до {{name}} за допомогою {{productName}} {{organizationName}}, вам буде запропоновано надати доступ до даних вашого облікового запису {{productName}}.",
   "RevokeConsentLoginGroup": "Якщо ви захочете відновити автоматичний вхід за допомогою {{productName}} {{organizationName}}, вам буде запропоновано надати доступ до даних вашого облікового запису {{productName}}.",
   "RevokeDialogDescription": "Будь-які інтеграції, в яких використовується цей маркер, втратять доступ до API. Ви не можете скасувати цю дію.",

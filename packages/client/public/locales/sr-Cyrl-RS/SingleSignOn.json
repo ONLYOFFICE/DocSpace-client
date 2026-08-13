@@ -28,7 +28,7 @@
   "PlaceholderCert": "Налепи или куцај текст",
   "PrivateKey": "Приватни кључ",
   "ProviderURLTooltip": "Entitet IdP-а (URL издаваоца)",
-  "ServiceProviderSettings": "Подешавања  SP-а за {{organizationName}}",
+  "ServiceProviderSettings": "Подешавања SP-а за {{organizationName}}",
   "ServiceProviderSettingsDescription": "Конфигуришите подешавања пружаоца услуга и додајте сертификате SP-а за Single Sign-On.",
   "ShowAdditionalParameters": "Прикажи напредна подешавања",
   "Signing": "Потписивање",

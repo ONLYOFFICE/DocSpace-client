@@ -816,7 +816,7 @@
   "EncryptionDecryptAllFailed": "Није успело дешифровање свих изабраних датотека",
   "EncryptionDecryptPartialFailed": "Дешифровање није успело: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Немате кључеве за шифровање на овом уређају. <0>Поставите шифровање</0> да бисте приступили шифрованим датотекама.",
-  "EncryptionDownloadFailed": "Could not download the encrypted file.",
+  "EncryptionDownloadFailed": "Није било могуће преузети шифровану датотеку.",
   "EncryptionError": "Дошло је до грешке током операције шифровања",
   "EncryptionFilePreparing": "Припремање датотеке за шифровање",
   "EncryptionInvalidKeyFile": "Изабрана датотека није важећи кључ за шифровање.",

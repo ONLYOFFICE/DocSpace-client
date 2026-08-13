@@ -43,7 +43,7 @@
   "spDecryptStatements": "Asserties Ontsleutelen",
   "SPEntityId": "SP Entity Id (link naar metadata XML)",
   "SPEntityIdTooltip": "Het XML URL-adres van de dienstverlener dat kan worden gedownload en gebruikt door de Identity provider om de SP eenduidig te identificeren",
-  "SpMetadata": "{{organizationName}} SP Metadata",
+  "SpMetadata": "{{organizationName}} SP-metagegevens",
   "SpMetadataDescription": "Ga naar de Service Provider metadata om {{organizationName}} {{productName}} toe te voegen als vertrouwde Service Provider in uw IdP-account.",
   "spSignExitRequest": "Aanmeldverzoeken voor uitloggen",
   "spSigningAlgorithm": "Ondertekeningsalgoritme",

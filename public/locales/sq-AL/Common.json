@@ -816,7 +816,7 @@
   "EncryptionDecryptAllFailed": "Dështoi deshifrimi i të gjithë skedarëve të zgjedhur",
   "EncryptionDecryptPartialFailed": "Deshifrimi dështoi: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Nuk keni çelësa enkriptimi në këtë pajisje. <0>Konfiguroni enkriptimin</0> për të aksesuar skedarët e enkriptuar.",
-  "EncryptionDownloadFailed": "Could not download the encrypted file.",
+  "EncryptionDownloadFailed": "Skedari i enkriptuar nuk mund të shkarkohej.",
   "EncryptionError": "Ndodhi një gabim gjatë operacionit të enkriptimit",
   "EncryptionFilePreparing": "Përgatitja e skedarit për enkriptim",
   "EncryptionInvalidKeyFile": "Skedari i zgjedhur nuk është një çelës enkriptimi i vlefshëm.",

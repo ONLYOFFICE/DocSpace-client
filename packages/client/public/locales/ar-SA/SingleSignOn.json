@@ -19,7 +19,7 @@
   "idpSignExitRequest": "التحقق من توقيع طلبات الخروج",
   "idpSigningAlgorithm": "خوارزمية التحقق من التوقيع الافتراضية",
   "idpSignResponseRequest": "تحقق من استجابات توقيع تسجيل الخروج",
-  "LogoutEndpointUrl": "عنوان رابط  لنقطة نهاية تسجيل الخروج الفردي لمزود الهوية",
+  "LogoutEndpointUrl": "عنوان رابط لنقطة نهاية تسجيل الخروج الفردي لمزود الهوية",
   "LogoutEndpointUrlTooltip": "عنوان URL المستخدم لتسجيل الخروج الفردي من جانب مزود الخدمة",
   "MetadataLoadError": "لم يتم نقل ملف البيانات الوصفية",
   "NameIDFormat": "تنسيق تعريف الهوية",

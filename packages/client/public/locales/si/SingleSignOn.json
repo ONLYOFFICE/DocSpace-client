@@ -43,7 +43,7 @@
   "spDecryptStatements": "අභිමතයන් විසංකේතනය කරන්න",
   "SPEntityId": "SP එන්ටිටි හැඳුනුම්පත (පාරදත්ත XML වෙත සබැඳියි)",
   "SPEntityIdTooltip": "අනන්‍යතා ප්‍රතිපාදකයාට නිශ්චිතව SP හඳුනා ගැනීමට සේවා ප්‍රතිපාදකයාගේ XML ඒ.ස.නි. ලිපිනය බාගත කර භාවිතා කිරීමට හැකිය",
-  "SpMetadata": "{{organizationName}} SP Metadata",
+  "SpMetadata": "{{organizationName}} SP පාරදත්ත",
   "SpMetadataDescription": "IdP ගිණුමක විශ්වාසවන්ත සේවා සැපයුම්කරුවෙකු ලෙස {{organizationName}} {{productName}} එකතු කිරීම සඳහා Access Service Provider metadata වෙත පිවිසීම.",
   "spSignExitRequest": "Logout ඉල්ලීම් ඩිජිටල් අත්සන් කරන්න",
   "spSigningAlgorithm": "අත්සන් ඇල්ගොරිතම",

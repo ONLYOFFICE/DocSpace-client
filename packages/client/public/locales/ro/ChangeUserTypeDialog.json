@@ -10,8 +10,8 @@
   "ChangeUserTypeMessage": "Utilizatorii de tipul <strong>'{{ firstType }}'</strong> vor fi transferați la tipul <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeNote": "<1>Notă:</1> nu puteți schimba tipul pentru superadministratorul și pentru dvs.",
   "DataReassignmentInfo": "Sălile create de acest utilizator vor fi reatribuite contului dvs. Pentru a reatribui sălile unei alte persoane, faceți clic pe link-ul corespunzător de mai jos.",
-  "DataReassignmentWithFilesDeletion": "Toate fișierele care au fost partajate de acest utilizator  vor fi <1>atribuite automat contului dvs în 30 de zile</1>. Pentru a reatribui sălile/fișierele partajate unei alte persoane, faceți clic pe link-ul corespunzător de mai jos.",
-  "PersonalDataDeletion": "Toate fișierele și dosarele din secțiunea {{sectionName}} a acestui utilizator vor fi  <1>şterse definitiv după 30 de zile</1>.",
+  "DataReassignmentWithFilesDeletion": "Toate fișierele care au fost partajate de acest utilizator vor fi <1>atribuite automat contului dvs în 30 de zile</1>. Pentru a reatribui sălile/fișierele partajate unei alte persoane, faceți clic pe link-ul corespunzător de mai jos.",
+  "PersonalDataDeletion": "Toate fișierele și dosarele din secțiunea {{sectionName}} a acestui utilizator vor fi <1>şterse definitiv după 30 de zile</1>.",
   "SuccessChangeGuestType": "Tip de invitat a fost modificat cu succes",
   "SuccessChangeUserType": "Tipul utilizatorului a fost modificat cu succes"
 }

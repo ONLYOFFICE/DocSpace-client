@@ -43,7 +43,7 @@
   "spDecryptStatements": "Deshifroni pohimet",
   "SPEntityId": "ID-ja e entitetit të SP (lidhja me metadata XML)",
   "SPEntityIdTooltip": "Adresa URL XML e ofruesit të shërbimit e cila mund të shkarkohet dhe përdoret nga ofruesi i identitetit për të identifikuar pa mëdyshje SP",
-  "SpMetadata": "{{organizationName}} SP Metadata",
+  "SpMetadata": "Metadata SP e {{organizationName}}",
   "SpMetadataDescription": "Aksesi në metadata i Ofruesit të Shërbimit për të shtuar {{organizationName}} {{productName}} si një ofrues shërbimi të besuar në llogarinë tënde IdP.",
   "spSignExitRequest": "Nënshkrimi i kërkesave për dalje",
   "spSigningAlgorithm": "Algoritmi i nënshkrimit",

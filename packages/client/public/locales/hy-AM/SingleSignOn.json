@@ -21,7 +21,7 @@
   "idpSignResponseRequest": "Ստուգեք «Ելք»-ի պատասխանների նշանը",
   "LogoutEndpointUrl": "IdP Մեկանգամյա ելքի վերջնակետի URL",
   "LogoutEndpointUrlTooltip": "URL-ն, որն օգտագործվում է Ծառայությունների մատակարարի կողմից առանձին դուրս գալու համար",
-  "MetadataLoadError": "Մետատվյալների ֆայլը չի   փոխանցվել:",
+  "MetadataLoadError": "Մետատվյալների ֆայլը չի փոխանցվել:",
   "NameIDFormat": "NameId ձևաչափ",
   "NewCertificate": "Նոր վկայական",
   "OpenCertificate": "Հանրային վկայական",

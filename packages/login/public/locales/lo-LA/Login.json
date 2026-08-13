@@ -7,7 +7,7 @@
   "LDAPUsernamePlaceholder": "ຊື່ຜູ້ໃຊ້ຂອງ {{ldap_domain}}",
   "MessageAuthorize": "ເຂົ້າສູ່ລະບົບ ເພື່ອດຳເນີນການຕໍ່",
   "MessageEmailConfirmed": "ອິເມວ ຂອງທ່ານຖືກລົງທະບຽນສຳເລັດ",
-  "MessageSendPasswordRecoveryInstructionsOnEmail": "ກະລຸນາໃສ່ອີເມວທີ່ທ່ານໃຊ້ ສຳລັບການລົງທະບຽນ.  ໃນການກູ້ຂໍ້ມູນບັນຊີ, ລະຫັດຜ່ານຈະຖືກສົ່ງໄປຫາທ່ານຜ່ານທາງ ອິເມວ.",
+  "MessageSendPasswordRecoveryInstructionsOnEmail": "ກະລຸນາໃສ່ອີເມວທີ່ທ່ານໃຊ້ ສຳລັບການລົງທະບຽນ. ໃນການກູ້ຂໍ້ມູນບັນຊີ, ລະຫັດຜ່ານຈະຖືກສົ່ງໄປຫາທ່ານຜ່ານທາງ ອິເມວ.",
   "PasswordRecoveryTitle": "ກູ້ຄືນລະຫັດຜ່ານ",
   "RecoverAccess": "ກູ້ຄືນການເຂົ້າເຖິງ",
   "RecoverContactEmailPlaceholder": "ອີເມວຕິດຕໍ່",

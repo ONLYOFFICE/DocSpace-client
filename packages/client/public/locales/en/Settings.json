@@ -188,7 +188,7 @@
   "IPSecuritySettingDescription": "Configure IP Security to restrict login possibility to select IP addresses. Use either exact IP addresses in the IPv4 format, IP range or CIDR masking. The IP security does not work for owners, they can access the workspace from any IP address.",
   "IPSecurityWarningHelper": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your workspace access will be blocked right after you save the settings. The owner will have the workspace access from any IP address.",
   "KeyLifetime": "Key lifetime",
-  "KeyLifetimeDescription": "Set lifetime to automatically deactivate  the secret key after a defined period. Lifetime begins of creation of the key.",
+  "KeyLifetimeDescription": "Set lifetime to automatically deactivate the secret key after a defined period. Lifetime begins of creation of the key.",
   "LanguageAndTimeZoneSettingsNavDescription": "Language and Time Zone Settings is a way to change the language of the whole workspace for all workspace users and to configure the time zone so that all the events of the workspace will be shown with the correct date and time.",
   "LastUpdate": "Last update: {{date}}",
   "LDAP": "LDAP Settings",

@@ -816,7 +816,7 @@
   "EncryptionDecryptAllFailed": "Seçilmiş bütün faylların şifrəsi açıla bilmədi",
   "EncryptionDecryptPartialFailed": "Şifrə açma alınmadı: {{fileNames}}",
   "EncryptionDeviceSetupHint": "Bu cihazda şifrələmə açarlarınız yoxdur. Şifrəli faylara daxil olmaq üçün <0>şifrələməni qurun</0>.",
-  "EncryptionDownloadFailed": "Could not download the encrypted file.",
+  "EncryptionDownloadFailed": "Şifrələnmiş faylı yükləmək mümkün olmadı.",
   "EncryptionError": "Şifrələmə əməliyyatı zamanı xəta baş verdi",
   "EncryptionFilePreparing": "Fayl şifrələnmə üçün hazırlanır",
   "EncryptionInvalidKeyFile": "Seçilmiş fayl etibarlı şifrələmə açarı deyil.",

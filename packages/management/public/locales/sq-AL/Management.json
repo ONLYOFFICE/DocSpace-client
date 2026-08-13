@@ -22,7 +22,7 @@
   "EncryptWarningDialogContent": "Të gjitha hapësirat e punës do të bëhen të padisponueshme gjatë procesit të enkriptimit. Jeni të sigurt që doni të vazhdoni?",
   "EnterDomainName": "Futni emrin e domenit",
   "EnterSpaceName": "Fut emrin e hapësirës së punës",
-  "MoreDetails": "Për më shumë detaje mbi ndalimin e shërbimeve, ju lutem referojuni  <1>{{link}}</1>.",
+  "MoreDetails": "Për më shumë detaje mbi ndalimin e shërbimeve, ju lutem referojuni <1>{{link}}</1>.",
   "NewSpace": "Hapësirë e re pune",
   "NotifyUsers": "Njoftoni përdoruesit që hapësira e punës do të jetë e padisponueshme",
   "PortalDeleted": "Hapësira e punës u fshi përgjithmonë",

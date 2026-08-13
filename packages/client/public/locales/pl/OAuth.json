@@ -69,7 +69,7 @@
   "RevokeConsent": "Wycofaj zgodę",
   "RevokeConsentDescription": "Po wycofaniu zgody na użycie danych autoryzacji {{organizationName}} dla {{productName}} w usłudze {{name}} {{productName}} {{organizationName}} automatycznie przestanie logować się w {{name}}. Twoje konto w {{name}} nie zostanie usunięte.",
   "RevokeConsentDescriptionGroup": "Po wycofaniu zgody na użycie danych autoryzacji {{organizationName}} dla {{productName}} w usługach {{productName}} {{organizationName}} automatycznie przestanie się logować. Twoje konta nie zostaną usunięte.",
-  "RevokeConsentLogin": "Jeśli chcesz odnowić automatyczne logowanie w  {{name}} przy użyciu {{productName}} {{organizationName}}, zostaniesz poproszony(na) o przyznanie dostępu do danych Twojego konta {{productName}}.",
+  "RevokeConsentLogin": "Jeśli chcesz odnowić automatyczne logowanie w {{name}} przy użyciu {{productName}} {{organizationName}}, zostaniesz poproszony(na) o przyznanie dostępu do danych Twojego konta {{productName}}.",
   "RevokeConsentLoginGroup": "Jeśli chcesz odnowić automatyczne logowanie przy użyciu {{productName}} {{organizationName}}, zostaniesz poproszony(na) o przyznanie dostępu do danych Twojego konta {{productName}}.",
   "RevokeDialogDescription": "Wszystkie integracje korzystające z tego tokena utracą dostęp do API. Dane działanie nie może zostać cofnięte.",
   "RevokeDialogEnterToken": "Wprowadź token, aby potwierdzić unieważnienie:",

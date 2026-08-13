@@ -7,7 +7,7 @@
   "Metadata": "Metadata",
   "NeedSettings": "Need enter settings",
   "NoPlugins": "No plugins added",
-  "NotNeedSettings": "Not need enter settings",
+  "NotNeedSettings": "No need to enter settings",
   "PluginCacheWarningDescription": "Plugins are cached based on their version number. To ensure your changes are applied, please increment the version number in your <1>package.json</1> file before uploading. The system will not update a plugin if the version remains the same",
   "PluginDeletedSuccessfully": "Plugin deleted successfully",
   "PluginIsNotCompatible": "The plugin SDK version doesn’t match the {{organizationName}} {{productName}} version. Please update to a compatible version.",

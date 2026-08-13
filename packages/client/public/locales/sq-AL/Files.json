@@ -59,7 +59,7 @@
   "ExportRoomIndex": "Indeksi i dhomës së eksportit",
   "ExportRoomIndexAlreadyInProgressError": "Eksportimi i indeksit të dhomës është tashmë në proces. Ju lutem prisni derisa të përfundojë eksporti aktual për të nisur një të ri.",
   "FileDownloadingIsRestricted": "Shkarkimi i skedarit është i kufizuar në këtë dhomë.",
-  "FileRenamed": "Dokumenti '{{oldTitle}}' është riemëruar në '{{oldTitle}}'",
+  "FileRenamed": "Dokumenti '{{oldTitle}}' është riemëruar në '{{newTitle}}'",
   "FilesMovedToTrashNotice": "Pas kësaj, skedarët do të zhvendosen te {{sectionName}}.",
   "FinalizeVersion": "Versioni përfundimtar",
   "FolderRenamed": "Dosja '{{folderTitle}}' është riemërtuar në '{{newFoldedTitle}}'",

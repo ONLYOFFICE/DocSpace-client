@@ -91,7 +91,7 @@
   "OpenCreatedTemplate": "Deschide șablonul creat",
   "OpenedViaLink": "Deschis cu link: access <strong>\"{{access}}\"</strong>.",
   "OtherProcesses": "Alte procese",
-  "PersonalContentRemovalNotice": "Fișierele și dosarele ale dvs personale din secțiunea {{sectionName}} vor fi <1>șterse<1> deoarece Invitați nu au acces la această secțiune. Fișierele sunt disponibile pentru vizualizare și descărcare <1>timp de 30 zile</1>.",
+  "PersonalContentRemovalNotice": "Fișierele și dosarele ale dvs personale din secțiunea {{sectionName}} vor fi <1>șterse</1> deoarece Invitați nu au acces la această secțiune. Fișierele sunt disponibile pentru vizualizare și descărcare <1>timp de 30 zile</1>.",
   "PersonalFolderErasureWarning": "Tipul de utilizator al dvs s-a schimbat în Invitat. Fişierele personale vor fi şterse după 30 de zile.",
   "RecentlyOpenedTooltip": "A fost deschis recent prin link",
   "RemovedFromRecent": "Eliminat din recent",

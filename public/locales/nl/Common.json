@@ -309,7 +309,7 @@
   "BarMaintenanceDescription": "Onze excuses voor eventuele kortstondige technische problemen in het functioneren van de dienst die kunnen optreden op {{targetDate}} tijdens de update van {{organizationName}} {{productName}}.",
   "BarMaintenanceDisclaimer": "Zorg ervoor dat alle wijzigingen deze dag succesvol worden opgeslagen.",
   "Benefits": "Voordelen",
-  "BetaBadgeDescription": "Let op: u kunt RTL-talen inschakelen voor de werkruimte in de bètamodus. RTL-ondersteuning voor de editors komt binnenkort beschikbaar.",
+  "BetaBadgeDescription": "Let op: u kunt RTL-talen inschakelen voor de werkruimte-interface in de bètamodus. RTL-ondersteuning voor de editors komt binnenkort beschikbaar.",
   "BetaBadgeFeedback": "Als u een bug heeft gevonden, kunt u deze indienen via het <1>forum</1> of contact met ons opnemen via <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL-interface",
   "BilledAISearch": "Gefactureerde AI-zoekopdrachten: {{count}}",

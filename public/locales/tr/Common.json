@@ -74,7 +74,7 @@
   "AddUserToRoom": "Odaya kullanıcı ekle",
   "AdjustStorageToExactAmount": "Depolamayı ihtiyacınız olan tam miktara ayarlayın",
   "AdminAdjustment": "Yönetici ayarı",
-  "AdministratorDescription": "çalışma alanı yapılandırması, oda oluşturma ve yönetimi, çalışma alanı ve sanal odalarda kullanıcıları davet etme ve yönetme yeteneği, erişim haklarını yönetme yeteneği.",
+  "AdministratorDescription": "çalışma alanını yapılandırması, oda oluşturma ve yönetimi, çalışma alanını'te ve sanal odalarda kullanıcıları davet etme ve yönetme yeteneği, erişim haklarını yönetme yeteneği.",
   "AdminsAddedAmount": "+{{admins}} yönetici",
   "AdvancedFilter": "Arama seçenekleri",
   "AdvancedSettings": "Gelişmiş Ayarlar",

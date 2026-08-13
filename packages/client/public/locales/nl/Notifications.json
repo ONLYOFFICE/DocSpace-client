@@ -2,7 +2,7 @@
   "ActionsWithFilesDescription": "Badges markeren de activiteit van bestanden — uploads, bewerkingen of deelacties — in de secties {{rooms}}, {{shared}}, {{documents}} en {{aiAgents}}.",
   "AdminSetupRequired": "Admin setup vereist",
   "Badges": "Badges",
-  "DailyFeed": "Daily {{organizationName}} {{productName}} feed",
+  "DailyFeed": "Dagelijkse {{organizationName}} {{productName}} feed",
   "DailyFeedDescription": "Lees nieuws en gebeurtenissen uit uw {{organizationName}} {{productName}} in een dagelijkse samenvatting.",
   "FileActivityNotify": "Bestandsactiviteit notificaties",
   "IsNotValid": "Is niet geldig",

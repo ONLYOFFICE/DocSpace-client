@@ -32,7 +32,7 @@
   "DeveloperTokenCopied": "Token programisty został pomyślnie skopiowany do schowka.",
   "DisableApplication": "Wyłącz aplikację",
   "DisableApplicationDescription": "Jeśli wyłączysz tę aplikację, wszystkie aktywne zgody i autoryzacja zostaną cofnięte. W razie potrzeby możesz ponownie włączyć wyłączoną aplikację później.",
-  "DisableApplicationNote": "<strong>Uwaga:<strong> wszyscy użytkownicy będą musieli ponownie wypełnić ekran zgody",
+  "DisableApplicationNote": "<strong>Uwaga:</strong> wszyscy użytkownicy będą musieli ponownie wypełnić ekran zgody",
   "DisableApplications": "Wyłącz aplikacje",
   "DisableApplicationsDescription": "Jeśli wyłączysz te aplikacje, wszystkie aktywne zgody i autoryzacja zostaną cofnięte. W razie potrzeby możesz ponownie włączyć wyłączoną aplikację później.",
   "EditApp": "Edytuj aplikację",

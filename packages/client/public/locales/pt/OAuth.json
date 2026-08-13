@@ -32,7 +32,7 @@
   "DeveloperTokenCopied": "Token de desenvolvedor copiado com êxito para a área de transferência",
   "DisableApplication": "Desativar aplicação",
   "DisableApplicationDescription": "Se desativar esta aplicação, todos os consentimentos ativos e autorizações serão revogados. Se necessário, você pode ativar o aplicativo desativado mais tarde.",
-  "DisableApplicationNote": "<strong>Nota:<strong> Que todos os utilizadors sejam novamente obrigados a completar a tela de consentimento",
+  "DisableApplicationNote": "<strong>Nota:</strong> Que todos os utilizadors sejam novamente obrigados a completar a tela de consentimento",
   "DisableApplications": "Desativar aplicações",
   "DisableApplicationsDescription": "Se você desativar esses aplicativos, todos os consentimentos ativos e autorizações serão revogados. Se necessário, você pode ativar o aplicativo desativado mais tarde.",
   "EditApp": "Editar aplicação",

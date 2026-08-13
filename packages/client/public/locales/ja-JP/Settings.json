@@ -137,7 +137,7 @@
   "DocumentServiceHide": "非表示にする",
   "DocumentServiceLocationHeaderHelp": "ドキュメントサービスは、文書の編集を行い、ドキュメントファイルを適切な OfficeOpen XML 形式に変換するためのサーバーサービスです。ドキュメントサービスの場所は、ドキュメントサービスがインストールされているサーバーのアドレスを指定します。",
   "DocumentServiceLocationUrlApi": "文書編集サービスアドレス",
-  "DocumentServiceLocationUrlInternal": "ワークスペース",
+  "DocumentServiceLocationUrlInternal": "ワークスペースからのリクエスト用ドキュメントサービスアドレス",
   "DocumentServiceLocationUrlPortal": "ドキュメントサービスからの内部リクエスト用のワークスペースのアドレス",
   "DocumentServiceSecretKey": "シークレットキー",
   "DocumentServiceSecretKeySubtitle": "無効にするには空白のままにしてください",

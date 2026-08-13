@@ -137,7 +137,7 @@
   "DocumentServiceHide": "Piilota",
   "DocumentServiceLocationHeaderHelp": "Asiakirjapalvelu on palvelinpalvelu, joka mahdollistaa asiakirjan muokkaamisen ja asiakirjatiedoston muuntamisen oikeaan OfficeOpen XML -muotoon. Asiakirjapalvelun sijainti määrittää palvelimen osoitteen, johon asiakirjapalvelut on asennettu.",
   "DocumentServiceLocationUrlApi": "Asiakirjan muokkauspalvelun osoite",
-  "DocumentServiceLocationUrlInternal": "Asiakirjapalveluosoite pyynnöille, jotka tulevat työtilan",
+  "DocumentServiceLocationUrlInternal": "Asiakirjapalveluosoite pyynnöille, jotka tulevat työtilan sta",
   "DocumentServiceLocationUrlPortal": "Työtilan osoite Asiakirjapalvelun sisäisille pyynnöille",
   "DocumentServiceSecretKey": "Salainen avain",
   "DocumentServiceSecretKeySubtitle": "Jätä tyhjäksi ottaaksesi pois käytöstä",

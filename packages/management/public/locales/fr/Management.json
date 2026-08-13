@@ -3,7 +3,7 @@
   "CompleteSetup": "Terminer la configuration",
   "ConfigurationDescription": "Il vous faut connecter votre domaine à votre IP actuelle pour modifier les paramètres de l'adresse. Assurez-vous d'avoir accès aux paramètres du domaine pour pouvoir le faire. Après avoir connecté le domaine, créez un nom pour l'espace de travail. Vous pouvez modifier le nom créé ultérieurement à l'aide des paramètres de l'espace de travail.",
   "ConfigurationHeader": "Configuration actuelle de l'espace de travail",
-  "CreateSpaceDescription": "Vous avez réussi à connecter votre domaine à votre adresse IP. Pour modifier les paramètres de l'adresse de l'espace de travail, il faut définir le nom du futur espace de travail",
+  "CreateSpaceDescription": "Vous avez réussi à connecter votre domaine à votre adresse IP. Pour modifier les paramètres de l'adresse de l'espace, il faut définir le nom du futur espace de travail.",
   "CreatingPortal": "Création d'un nouvel espace de travail",
   "CurrentSpace": "Espace de travail actuel",
   "DecryptStorage": "Déchiffrer le stockage",

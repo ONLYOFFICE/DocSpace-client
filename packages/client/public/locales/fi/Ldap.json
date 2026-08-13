@@ -38,7 +38,7 @@
   "LdapPortNumber": "Porttinumero",
   "LdapPortNumberTooltip": "Syötä LDAP-palvelimen porttinumero.",
   "LdapQuota": "Käyttäjäkiintiö",
-  "LdapQuotaInfo": "Voidaksesi käyttää tätä attribuuttia, ota käyttöön käyttäjäkiintiö <0>Muistin hallinta-asetuksissa<0>",
+  "LdapQuotaInfo": "Voidaksesi käyttää tätä attribuuttia, ota käyttöön käyttäjäkiintiö <0>Muistin hallinta-asetuksissa</0>",
   "LdapSecondName": "Toinen nimi",
   "LdapSendWelcomeLetter": "Lähetä tervetulokirje",
   "LdapSendWelcomeLetterTooltip": "Jos valittu, kaikki käyttäjät saavat tervetulokirjeen. Mahdollinen ainoastaan, kun Postiattribuutti on kartoitettu LDAP:hen.",

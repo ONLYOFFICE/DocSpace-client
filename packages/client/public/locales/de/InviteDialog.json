@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Sprache der Einladung",
-  "InviteMembersManuallyDescription": "Neue Mitglieder persönlich per E-Mail zum Workspace einladen",
+  "InviteMembersManuallyDescription": "Neue Mitglieder persönlich per E-Mail zum Arbeitsbereich einladen",
   "InviteMembersSearchPlaceholder": "Inviter les membres par e-mail",
-  "InviteViaLinkDescriptionAccounts": "Erstellen Sie einen allgemeinen Link für die Selbstautorisierung im Workspace"
+  "InviteViaLinkDescriptionAccounts": "Erstellen Sie einen allgemeinen Link für die Selbstautorisierung im Arbeitsbereich"
 }

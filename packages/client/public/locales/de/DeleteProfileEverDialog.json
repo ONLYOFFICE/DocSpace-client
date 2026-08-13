@@ -12,7 +12,7 @@
   "DeleteUser": "Benutzer löschen",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> wird gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden.",
   "DeletingUsers": "Löschen von Benutzern",
-  "PersonalDataDeletionInfo": "Persönliche Daten, alle persönlichen Dateien und Ordner in den Abschnitten {{sectionNameFirst}} und {{sectionNameSecond}}* der ausgewählten Benutzer werden dauerhaft gelöscht. Dateien und Ordner der ausgewählten Benutzer in gemeinsamen Abschnitten* wie Räumen verbleiben im Workspace.",
+  "PersonalDataDeletionInfo": "Persönliche Daten, alle persönlichen Dateien und Ordner in den Abschnitten {{sectionNameFirst}} und {{sectionNameSecond}}* der ausgewählten Benutzer werden dauerhaft gelöscht. Dateien und Ordner der ausgewählten Benutzer in gemeinsamen Abschnitten* wie Räumen verbleiben im Arbeitsbereich.",
   "PleaseNote": "Bitte beachten:",
   "ReassignDataToAnotherUser": "Daten an einen anderen Benutzer neu zuweisen",
   "SuccessfullyDeleteGuestInfoMessage": "Der Gast wurde erfolgreich gelöscht",

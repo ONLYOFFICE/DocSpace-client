@@ -1,7 +1,7 @@
 {
   "Administration": "الإدارة",
   "AllHistory": "كل السجل",
-  "AndMoreLabel": "و <1> {{count}} المزيد </ 1>",
+  "AndMoreLabel": "و <1> {{count}} المزيد </1>",
   "Data": "بيانات",
   "ExpectUsers": "مستخدمين متوقعين",
   "ExportHistory": "تصدير السجل",

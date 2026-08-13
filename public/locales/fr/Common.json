@@ -1593,6 +1593,7 @@
   "PricePerAdmin": "Prix par administrateur",
   "PricePerGB": "Prix par Go",
   "PrivateOwnerEncryptionHint": "Seuls les utilisateurs qui sont déjà membres de cette salle et qui ont configuré le chiffrement peuvent devenir propriétaire.",
+  "PrivateRoomConvertNotSupported": "Les fichiers nécessitant une conversion ne peuvent pas encore être ouverts dans une salle privée.",
   "PrivateRoomDescription": "Tous les fichiers de cette salle seront chiffrés",
   "PrivateRoomDisclosureBody": "Le chiffrement s'exécute entièrement dans votre navigateur, de sorte que les fichiers ne sont lisibles que par les personnes que vous invitez. Vous faites confiance au code fourni par votre portail {{productName}} — verrouillez votre session lorsque vous ne l'utilisez pas.",
   "PrivateRoomDisclosureDismiss": "Compris",

@@ -3,7 +3,7 @@
   "content": "This item will be moved to Trash.",
   "content_en_sha1_hash": "744540358335d035766a06b08199a0b6f13d73bb",
   "created_at": "2026-04-03T21:51:30.645Z",
-  "updated_at": "2026-06-03T09:30:05.144Z",
+  "updated_at": "2026-08-13T10:58:03.382Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a single item is being moved to the trash.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
-      "line_number": 76,
-      "context": ": isTrash\n ? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });\n \n const header = isEmptyTrash\n ? t(\"Common:DeleteForeverTitle\")\n : t(\"Common:Delete\");",
+      "line_number": 89,
+      "context": "case \"permanent-one\":\n return t(\"Common:DeleteItemForever\");\n case \"permanent-many\":\n return t(\"Common:DeleteItemsForever\", { itemCount });\n case \"trash-one\":\n return t(\"Common:MoveToTrashItem\");\n default:\n return t(\"Common:MoveToTrashItems\", { itemCount });\n }\n };",
       "module": "/packages/sdk"
     }
   ],

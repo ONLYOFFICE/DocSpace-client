@@ -3,7 +3,7 @@
   "content": "Favorites",
   "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-08-07T15:05:26.407Z",
+  "updated_at": "2026-08-13T10:58:03.018Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 336,
+      "line_number": 345,
       "context": "ROOMS_SECTION_FOLDER_TYPES,\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n onClick: goScoped(\n CategoryType.Favorite,\n \"/rooms/favorite\",\n favoritesFolderId,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 336,
+      "line_number": 345,
       "context": "ROOMS_SECTION_FOLDER_TYPES,\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n onClick: goScoped(\n CategoryType.Favorite,\n \"/rooms/favorite\",\n favoritesFolderId,",
       "module": "/packages/client"
     },
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 159,
+      "line_number": 149,
       "context": "// here, so for everyone else its bullet drops rather than pointing at an item\n // they do not have.\n const places = [\n t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),",
       "module": "/packages/client"
     },

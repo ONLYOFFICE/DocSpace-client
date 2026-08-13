@@ -1593,6 +1593,7 @@
   "PricePerAdmin": "Hər admin üçün qiymət",
   "PricePerGB": "GB başına qiymət",
   "PrivateOwnerEncryptionHint": "Yalnız bu otağın üzvü olan və şifrələməni quraşdırmış istifadəçilər sahib ola bilər.",
+  "PrivateRoomConvertNotSupported": "Çevrilməsi tələb olunan fayllar şəxsi otaqda hələ açıla bilmir.",
   "PrivateRoomDescription": "Bu otaqdakı bütün fayllar şifrələnəcək",
   "PrivateRoomDisclosureBody": "Şifrələmə tamamilə brauzerinizdə işləyir, ona görə də faylları yalnız dəvət etdiyiniz insanlar oxuya bilər. Siz {{productName}} portalınızın təqdim etdiyi koda etibar edirsiniz — istifadə etmədiyiniz zaman sessiyanızı kilidləyin.",
   "PrivateRoomDisclosureDismiss": "Anladım",

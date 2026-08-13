@@ -3,7 +3,7 @@
   "content": "Generate PDF forms in seconds or customize templates to save hours.",
   "content_en_sha1_hash": "0f5fe2bf1e6b931b663ef6ea9186249cc00a2d0b",
   "created_at": "2026-06-25T19:30:57.432Z",
-  "updated_at": "2026-08-06T14:20:57.530Z",
+  "updated_at": "2026-08-13T10:58:03.072Z",
   "comment": {
     "text": "Subtext for an AI-powered feature item within a promotional dialog, describing the benefits of automated PDF form generation and template customization.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 178,
+      "line_number": 180,
       "context": "description: t(\"Common:FormsPromoDescription\"),\n features: [\n {\n Icon: AIPoweredIcon,\n title: t(\"Common:AIPowered\"),\n description: t(\"Common:AIPoweredDescription\"),\n },\n {\n Icon: SharingIcon,\n title: t(\"Common:EasySharing\"),\n description: t(\"Common:EasySharingDescription\"),",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Save here",
   "content_en_sha1_hash": "2f59885d38dc68521d61e5eb75fd8f19891f7b1e",
   "created_at": "2025-05-19T21:30:48.310Z",
-  "updated_at": "2026-05-15T14:00:06.612Z",
+  "updated_at": "2026-08-13T10:58:03.047Z",
   "comment": {
     "text": "This is a button label that appears in file selection dialogs, allowing the user to save a file to the currently displayed folder.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
-      "line_number": 100,
+      "line_number": 101,
       "context": "withoutBackButton\n withCancelButton\n disabledItems={[]}\n disabledFolderType={FolderType.ResultStorage as SdkFolderType}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n isPanelVisible={isVisible}",
       "module": "/packages/doceditor"
     },

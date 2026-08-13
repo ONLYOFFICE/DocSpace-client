@@ -3,7 +3,7 @@
   "content": "Your profile details",
   "content_en_sha1_hash": "0feb38a1d878bc335a2db8628884d07df960f227",
   "created_at": "2026-08-07T10:52:39.929Z",
-  "updated_at": "2026-08-07T15:05:26.412Z",
+  "updated_at": "2026-08-13T10:58:03.026Z",
   "comment": {
     "text": "A title for an onboarding tour step that highlights the profile card containing portal information like name, owner, and storage.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
-      "line_number": 129,
+      "line_number": 139,
       "context": "// grid of labelled fields (portal name, name, email, password) that a\n // first-time user has no reason to read, so the step names them.\n hasProfileCard &&\n elementStep(\n PROFILE_CARD_SELECTOR,\n t(\"DashboardTour:DashboardProfileTitle\"),\n t(\"DashboardTour:DashboardProfile\"),\n callbacks,\n LOG_LABEL,\n ),",
       "module": "/packages/client"
     }

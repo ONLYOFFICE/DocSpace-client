@@ -1593,6 +1593,7 @@
   "PricePerAdmin": "每位管理员价格",
   "PricePerGB": "每 GB 价格",
   "PrivateOwnerEncryptionHint": "只有已经是此房间成员并已设置加密的用户才能成为所有者。",
+  "PrivateRoomConvertNotSupported": "私人房间内暂不支持打开需要转换的文件。",
   "PrivateRoomDescription": "此房间中的所有文件将被加密",
   "PrivateRoomDisclosureBody": "加密完全在您的浏览器中运行，因此只有您邀请的人才能读取文件。您信任您的 {{productName}} 门户提供的代码 — 不使用时请锁定会话。",
   "PrivateRoomDisclosureDismiss": "知道了",

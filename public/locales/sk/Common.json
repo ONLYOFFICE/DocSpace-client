@@ -1593,6 +1593,7 @@
   "PricePerAdmin": "Cena za administrátora",
   "PricePerGB": "Cena za GB",
   "PrivateOwnerEncryptionHint": "Vlastníkom sa môžu stať iba používatelia, ktorí už sú členmi tejto miestnosti a majú nastavené šifrovanie.",
+  "PrivateRoomConvertNotSupported": "Súbory, ktoré vyžadujú konverziu, zatiaľ nie je možné otvoriť v súkromnej miestnosti.",
   "PrivateRoomDescription": "Všetky súbory v tejto miestnosti budú zašifrované",
   "PrivateRoomDisclosureBody": "Šifrovanie prebieha úplne vo vašom prehliadači, takže súbory môžu čítať iba ľudia, ktorých pozvete. Spoliehate sa na kód, ktorý poskytuje váš portál {{productName}} — keď reláciu nepoužívate, uzamknite ju.",
   "PrivateRoomDisclosureDismiss": "Rozumiem",

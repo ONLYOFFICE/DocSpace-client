@@ -3,7 +3,7 @@
   "content": "Use recovery phrase",
   "content_en_sha1_hash": "8d7f041d531f2d7ac208f5ce3dcc4a7114eec8e4",
   "created_at": "2026-05-24T17:27:43.016Z",
-  "updated_at": "2026-07-31T12:36:29.536Z",
+  "updated_at": "2026-08-13T10:58:03.279Z",
   "comment": {
     "text": "Button label and modal dialog title used to initiate the process of recovering keys via a recovery phrase.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 321,
+      "line_number": 323,
       "context": "onClick={() => {\n if (!busy) recover.request();\n }}\n dataTestId=\"use_recovery_phrase_link\"\n >\n {t(\"Common:UseRecoveryPhrase\")}\n </Link>\n ) : null}\n </div>\n {isRotating && rotationProgress ? (\n <div className={styles.rotationProgress} role=\"status\">",
       "module": "/packages/client"
     },

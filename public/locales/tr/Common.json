@@ -1593,6 +1593,7 @@
   "PricePerAdmin": "Yönetici başına fiyat",
   "PricePerGB": "GB başına fiyat",
   "PrivateOwnerEncryptionHint": "Yalnızca bu odanın üyesi olan ve şifrelemeyi ayarlamış kullanıcılar sahip olabilir.",
+  "PrivateRoomConvertNotSupported": "Dönüştürme gerektiren dosyalar özel odalarda henüz açılamıyor.",
   "PrivateRoomDescription": "Bu odadaki tüm dosyalar şifrelenecektir",
   "PrivateRoomDisclosureBody": "Şifreleme tamamen tarayıcınızda çalışır, bu nedenle dosyaları yalnızca davet ettiğiniz kişiler okuyabilir. {{productName}} portalınızın sunduğu koda güvenirsiniz — kullanmadığınızda oturumunuzu kilitleyin.",
   "PrivateRoomDisclosureDismiss": "Anladım",

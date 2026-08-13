@@ -1593,6 +1593,7 @@
   "PricePerAdmin": "Giá mỗi quản trị viên",
   "PricePerGB": "Giá mỗi GB",
   "PrivateOwnerEncryptionHint": "Chỉ những người dùng đã là thành viên của phòng này và đã thiết lập mã hoá mới có thể trở thành chủ sở hữu.",
+  "PrivateRoomConvertNotSupported": "Chưa thể mở các tệp cần chuyển đổi trong phòng riêng tư.",
   "PrivateRoomDescription": "Tất cả tập tin trong phòng này sẽ được mã hoá",
   "PrivateRoomDisclosureBody": "Việc mã hóa diễn ra hoàn toàn trong trình duyệt của bạn, vì vậy chỉ những người bạn mời mới có thể đọc tệp. Bạn tin tưởng vào mã mà cổng {{productName}} của bạn cung cấp — hãy khóa phiên của bạn khi không sử dụng.",
   "PrivateRoomDisclosureDismiss": "Đã hiểu",

@@ -138,3 +138,73 @@ describe("FilesActionsStore — plugin file items vs encrypted files", () => {
     expect(openDocEditor).toHaveBeenCalledTimes(1);
   });
 });
+
+// Bug 82880: formats that need conversion before opening (ODS, ODT, PAGES)
+// were handed to the editor anyway, which fails on the encrypted bytes with a
+// generic "error opening file". Conversion runs on the server and cannot be
+// applied to an encrypted file, so the open path has to say so instead.
+describe("FilesActionsStore — opening a file that needs conversion", () => {
+  const odt = (encrypted: boolean) =>
+    ({
+      id: 1,
+      fileExst: ".odt",
+      isFolder: false,
+      viewUrl: "http://x/1",
+      webUrl: "",
+      ...(encrypted ? { encrypted: true } : {}),
+      security: { Download: true, Convert: true },
+      viewAccessibility: { MustConvert: true, WebEdit: true },
+    }) as never;
+
+  const setup = () => {
+    const openDocEditor = vi.fn();
+    const setConvertDialogVisible = vi.fn();
+    const store = createTestFilesActionsStore({
+      filesStore: { openDocEditor, setSelection: vi.fn(), categoryType: 0 },
+      dialogsStore: {
+        setConvertItem: vi.fn(),
+        setConvertDialogData: vi.fn(),
+        setConvertDialogVisible,
+      },
+    });
+    return { store, openDocEditor, setConvertDialogVisible };
+  };
+
+  it("keeps an encrypted file out of both the editor and the converter", async () => {
+    const { store, openDocEditor, setConvertDialogVisible } = setup();
+
+    await store.openItemAction(odt(true), t);
+
+    expect(openDocEditor).not.toHaveBeenCalled();
+    expect(setConvertDialogVisible).not.toHaveBeenCalled();
+  });
+
+  it("still offers conversion for the same format outside a private room", async () => {
+    const { store, openDocEditor, setConvertDialogVisible } = setup();
+
+    await store.openItemAction(odt(false), t);
+
+    expect(setConvertDialogVisible).toHaveBeenCalledWith(true);
+    expect(openDocEditor).not.toHaveBeenCalled();
+  });
+
+  it("still opens an encrypted file that needs no conversion", async () => {
+    const { store, openDocEditor } = setup();
+
+    await store.openItemAction(
+      {
+        id: 2,
+        fileExst: ".docx",
+        isFolder: false,
+        viewUrl: "http://x/2",
+        webUrl: "",
+        encrypted: true,
+        security: { Download: true },
+        viewAccessibility: { WebEdit: true },
+      } as never,
+      t,
+    );
+
+    expect(openDocEditor).toHaveBeenCalledTimes(1);
+  });
+});

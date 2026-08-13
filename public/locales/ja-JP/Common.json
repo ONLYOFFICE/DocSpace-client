@@ -1593,6 +1593,7 @@
   "PricePerAdmin": "管理者あたりの価格",
   "PricePerGB": "1GBあたりの価格",
   "PrivateOwnerEncryptionHint": "このルームのメンバーであり、かつ暗号化を設定済みのユーザーのみが所有者になれます。",
+  "PrivateRoomConvertNotSupported": "変換が必要なファイルはプライベートルームではまだ開けません。",
   "PrivateRoomDescription": "このルーム内のすべてのファイルは暗号化されます",
   "PrivateRoomDisclosureBody": "暗号化はすべてお使いのブラウザー内で実行されるため、ファイルを読めるのは招待した相手だけです。お使いの {{productName}} ポータルが配信するコードを信頼することになります。使用していないときはセッションをロックしてください。",
   "PrivateRoomDisclosureDismiss": "了解しました",

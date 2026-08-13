@@ -3,7 +3,7 @@
   "AdminSetupRequired": "Admin setup required",
   "Badges": "Badges",
   "DailyFeed": "Daily {{productName}} feed",
-  "DailyFeedDescription": "Read news and events from your {{productName}} in a daily digest.",
+  "DailyFeedDescription": "Read news and events from {{productName}} in a daily digest.",
   "FileActivityNotify": "File activity notifications",
   "IsNotValid": "Is not valid",
   "LdapEmailTooltip": "This user account is loaded from LDAP. The user's email address was not specified, and the current one was generated automatically and cannot be used to send notifications.",

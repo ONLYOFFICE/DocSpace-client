@@ -5,7 +5,7 @@
   "created_at": "2026-08-12T11:00:49.253Z",
   "updated_at": "2026-08-12T11:30:08.687Z",
   "comment": {
-    "text": "Action label or menu option within the portal management dialog that initiates a backup of all workspace information.",
+    "text": "Action label or menu option within the workspace management dialog that initiates a backup of all information.",
     "is_auto": true,
     "updated_at": "2026-08-12T11:30:08.687Z",
     "model": "gemma4:26b"

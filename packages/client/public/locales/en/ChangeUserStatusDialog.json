@@ -1,5 +1,5 @@
 {
-  "DisableGeneralDescription": "You can later delete or enable the disabled users if needed. Note that you can’t disable users such as the Owner and yourself.",
+  "DisableGeneralDescription": "You can later delete or enable the disabled users if needed. Note that you can’t disable users such as the owner and yourself.",
   "DisableGuest": "Disable guest",
   "DisableGuestDescription": "If you disable this guest, they won’t be able to log in to {{productName}}.",
   "DisableGuests": "Disable guests",

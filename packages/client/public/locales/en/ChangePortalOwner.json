@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "Appoint administrators",
-  "BackupPortal": "Backup the workspace data",
+  "BackupPortal": "Backup the data",
   "ChangeInstruction": "To change the {{productName}} owner, please choose the name of the new owner below.",
   "ChangeOwner": "Change {{productName}} owner",
   "ChangeUser": "Change user",

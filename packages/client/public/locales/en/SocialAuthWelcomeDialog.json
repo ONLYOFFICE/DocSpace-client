@@ -3,7 +3,7 @@
   "ClickButtonBelow": "If you'd like to log in using your email, please set your own password. <br /> Once ready, please click the button below.",
   "ContinueToProduct": "Continue to the workspace",
   "GeneratedPassword": "Generated password",
-  "ProductNameDetail": "{{productName}} name",
+  "ProductNameDetail": "Workspace name",
   "ReviewAccountDetails": "Please take a moment to review your account details:",
   "SetEmailPassword": "Set password",
   "WelcomeSubtitle": "Your workspace has been created successfully. Review your profile details and start working.",

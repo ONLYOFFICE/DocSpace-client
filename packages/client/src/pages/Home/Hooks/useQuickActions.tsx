@@ -155,6 +155,9 @@ export type UseQuickActionsProps = SectionFlags & {
   // folder (mirrors MainButton.onShowTemplateGallery).
   setTemplateGalleryVisible?: (visible: boolean) => void;
   setOformFromFolderId?: (id: number | string | null) => void;
+  // Makes the gallery create a form space out of the picked template instead of
+  // a file — used by the Forms root tile, which has no folder to create in.
+  setCreateRoomFromTemplate?: (value: boolean) => void;
 };
 
 export type QuickActionsResult = {
@@ -180,6 +183,7 @@ export const useQuickActions = (
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
+    setCreateRoomFromTemplate,
     ...sectionFlags
   } = props;
 
@@ -284,8 +288,8 @@ export const useQuickActions = (
     [t, currentFolderId, userId, aiChatItems],
   );
 
-  const formItems = React.useMemo<QuickActionItem[]>(
-    () => [
+  const formItems = React.useMemo<QuickActionItem[]>(() => {
+    const items: QuickActionItem[] = [
       // Collect forms → create a Form Filling Room.
       {
         id: "quick-form-room",
@@ -304,10 +308,38 @@ export const useQuickActions = (
         label: t("Common:SpaceTemplate"),
         onClick: () => goFormsTemplates(userId),
       },
-      aiChatItems,
-    ],
-    [t, currentFolderId, userId, aiChatItems],
-  );
+    ];
+
+    // The OForms gallery. There is no folder to create a form in at the Forms
+    // root, so `createRoomFromTemplate` makes the picked template produce a
+    // form space built around it (see onCreateTemplateImpl).
+    if (templateGalleryAvailable) {
+      items.push({
+        id: "quick-form-gallery",
+        dataTestId: "quick-form-gallery",
+        icon: <CreateFromTemplateIcon />,
+        label: t("Common:TemplateGallery"),
+        onClick: () => {
+          setCreateRoomFromTemplate?.(true);
+          setTemplateGalleryVisible?.(true);
+          setOformFromFolderId?.(currentFolderId);
+        },
+      });
+    }
+
+    items.push(aiChatItems);
+
+    return items;
+  }, [
+    t,
+    currentFolderId,
+    userId,
+    aiChatItems,
+    templateGalleryAvailable,
+    setCreateRoomFromTemplate,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
+  ]);
 
   // Inside a Form Filling room only PDF forms can be created. A blank PDF form
   // is the same `pdf` create flow as the personal-files PDF tile (dispatchCreate

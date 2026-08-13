@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Rozpoczęte, nieukończone",
   "FormsItem": "Każdy wiersz to cały zbiór. Otwórz jeden, aby pracować w środku, przypnij te, które właśnie prowadzisz, albo przez trzy kropki zaproś osoby, skopiuj link otwierający formularz i zapisz konfigurację jako szablon.",
   "FormsItemTitle": "Praca z obszarem formularzy",
-  "FormsOpenSpace": "Otwórzmy ten i zobaczmy, jak zbudowany jest zbiór. W każdym obszarze formularzy są te same trzy rzeczy: sam formularz, odpowiedzi wciąż pisane oraz te, które już przyszły.",
-  "FormsOpenSpaceTitle": "Wejdź do obszaru",
   "FormsPlacesRecent": "{{recent}} i {{favorites}} trzymają pod ręką zbiory, które prowadzisz.",
   "FormsPlacesTemplates": "{{templates}} — zapisane przez ciebie szablony obszarów.",
   "FormsPlacesTitle": "Wszystko na swoim miejscu",

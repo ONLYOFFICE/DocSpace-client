@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Început, nu terminat",
   "FormsItem": "Fiecare rând este o colectare întreagă. Deschideți una ca să lucrați înăuntru, fixați-le pe cele aflate în derulare sau folosiți cele trei puncte pentru a invita persoane, a copia linkul care deschide formularul și a salva configurarea ca șablon.",
   "FormsItemTitle": "Lucrul cu un spațiu formulare",
-  "FormsOpenSpace": "Hai să îl deschidem pe acesta și să vedem cum este alcătuită o colectare. În fiecare spațiu formulare se află aceleași trei lucruri: formularul propriu-zis, răspunsurile aflate încă în scriere și cele deja sosite.",
-  "FormsOpenSpaceTitle": "Intrați într-un spațiu",
   "FormsPlacesRecent": "{{recent}} și {{favorites}} țin la îndemână colectările pe care le derulați.",
   "FormsPlacesTemplates": "{{templates}} — șabloanele de spațiu pe care le-ați salvat.",
   "FormsPlacesTitle": "Fiecare lucru la locul lui",

@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "You can later delete or enable the disabled users if needed. Note that you can’t disable users such as the owner and yourself.",
   "DisableGuest": "Disable guest",
-  "DisableGuestDescription": "If you disable this guest, they won’t be able to log in to {{productName}}.",
+  "DisableGuestDescription": "If you disable this guest, they won’t be able to log in to the workspace.",
   "DisableGuests": "Disable guests",
-  "DisableGuestsDescription": "If you disable these guests, they won’t be able to log in to {{productName}}.",
+  "DisableGuestsDescription": "If you disable these guests, they won’t be able to log in to the workspace.",
   "DisableGuestsGeneralDescription": "You can later delete or enable the disabled guests if needed.",
   "DisableUser": "Disable user",
-  "DisableUserDescription": "If you Disable this user, they won’t be able to log in to {{productName}}, while their documents and data will remain intact.",
+  "DisableUserDescription": "If you Disable this user, they won’t be able to log in to the workspace, while their documents and data will remain intact.",
   "DisableUsers": "Disable users",
-  "DisableUsersDescription": "If you Disable these users, they won’t be able to log in to {{productName}}, while their documents and data will remain intact.",
+  "DisableUsersDescription": "If you Disable these users, they won’t be able to log in to the workspace, while their documents and data will remain intact.",
   "EnableGuest": "Enable guest",
-  "EnableGuestDescription": "If you enable this guest, they will be able to log in to {{productName}} again.",
+  "EnableGuestDescription": "If you enable this guest, they will be able to log in to the workspace again.",
   "EnableGuests": "Enable guests",
-  "EnableGuestsDescription": "If you enable these guests, they will be able to log in to {{productName}} again.",
+  "EnableGuestsDescription": "If you enable these guests, they will be able to log in to the workspace again.",
   "EnableUser": "Enable user",
-  "EnableUserDescription": "If you enable this user, they will be able to log in to {{productName}} again and access their documents and data.",
+  "EnableUserDescription": "If you enable this user, they will be able to log in to the workspace again and access their documents and data.",
   "EnableUsers": "Enable users",
-  "EnableUsersDescription": "If you enable these users, they will be able to log in to {{productName}} again and access their documents and data."
+  "EnableUsersDescription": "If you enable these users, they will be able to log in to the workspace again and access their documents and data."
 }

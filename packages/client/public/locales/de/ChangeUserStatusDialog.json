@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "Sie können die deaktivierten Benutzer später bei Bedarf löschen oder wieder aktivieren. Beachten Sie, dass Sie Benutzer wie den Eigentümer und sich selbst nicht deaktivieren können.",
   "DisableGuest": "Gast deaktivieren",
-  "DisableGuestDescription": "Wenn Sie diesen Gast deaktivieren, kann er sich nicht mehr bei {{productName}} anmelden.",
+  "DisableGuestDescription": "Wenn Sie diesen Gast deaktivieren, kann er sich nicht mehr beim Workspace anmelden.",
   "DisableGuests": "Gäste deaktivieren",
-  "DisableGuestsDescription": "Wenn Sie diese Gäste deaktivieren, können sie sich nicht mehr bei {{productName}} anmelden.",
+  "DisableGuestsDescription": "Wenn Sie diese Gäste deaktivieren, können sie sich nicht mehr beim Workspace anmelden.",
   "DisableGuestsGeneralDescription": "Sie können die deaktivierten Gäste später löschen oder wieder aktivieren, falls erforderlich.",
   "DisableUser": "Benutzer deaktivieren",
-  "DisableUserDescription": "Wenn Sie diesen Benutzer deaktivieren, kann er sich nicht mehr bei {{productName}} anmelden, während seine Dokumente und Daten intakt bleiben.",
+  "DisableUserDescription": "Wenn Sie diesen Benutzer deaktivieren, kann er sich nicht mehr beim Workspace anmelden, während seine Dokumente und Daten intakt bleiben.",
   "DisableUsers": "Benutzer deaktivieren",
-  "DisableUsersDescription": "Wenn Sie diese Benutzer deaktivieren, können sie sich nicht mehr bei {{productName}} anmelden, während ihre Dokumente und Daten intakt bleiben.",
+  "DisableUsersDescription": "Wenn Sie diese Benutzer deaktivieren, können sie sich nicht mehr beim Workspace anmelden, während ihre Dokumente und Daten intakt bleiben.",
   "EnableGuest": "Gast aktivieren",
-  "EnableGuestDescription": "Wenn Sie diesen Gast aktivieren, kann er sich wieder bei {{productName}} anmelden.",
+  "EnableGuestDescription": "Wenn Sie diesen Gast aktivieren, kann er sich wieder beim Workspace anmelden.",
   "EnableGuests": "Gäste aktivieren",
-  "EnableGuestsDescription": "Wenn Sie diese Gäste aktivieren, können sie sich wieder bei {{productName}} anmelden.",
+  "EnableGuestsDescription": "Wenn Sie diese Gäste aktivieren, können sie sich wieder beim Workspace anmelden.",
   "EnableUser": "Benutzer freigeben",
-  "EnableUserDescription": "Wenn Sie diesen Benutzer aktivieren, kann er sich wieder bei {{productName}} anmelden und auf seine Dokumente und Daten zugreifen.",
+  "EnableUserDescription": "Wenn Sie diesen Benutzer aktivieren, kann er sich wieder beim Workspace anmelden und auf seine Dokumente und Daten zugreifen.",
   "EnableUsers": "Benutzer freischalten",
-  "EnableUsersDescription": "Wenn Sie diese Benutzer freigeben, können sie sich wieder in {{productName}} einloggen und auf ihre Dokumente und Daten zugreifen."
+  "EnableUsersDescription": "Wenn Sie diese Benutzer freigeben, können sie sich wieder in den Workspace einloggen und auf ihre Dokumente und Daten zugreifen."
 }

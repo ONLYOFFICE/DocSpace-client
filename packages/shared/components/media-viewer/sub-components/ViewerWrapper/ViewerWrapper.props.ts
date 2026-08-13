@@ -55,6 +55,7 @@ interface ViewerWrapperProps {
   isPreviewFile?: boolean;
   isPublicFile?: boolean;
   isDecrypting?: boolean;
+  decryptionError?: string;
 
   errorTitle: string;
   headerIcon: string;

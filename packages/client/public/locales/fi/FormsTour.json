@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Aloitettu, ei valmis",
   "FormsItem": "Jokainen rivi on kokonainen keräys. Avaa yksi työskennelläksesi sen sisällä, kiinnitä käynnissä olevat tai kutsu kolmesta pisteestä ihmisiä, kopioi lomakkeen avaava linkki ja tallenna asetukset malliksi.",
   "FormsItemTitle": "Työskentely lomaketilassa",
-  "FormsOpenSpace": "Avataan tämä ja katsotaan, miten keräys on koottu. Jokaisen lomaketilan sisällä on samat kolme asiaa: itse lomake, vielä kirjoitettavana olevat vastaukset ja jo saapuneet.",
-  "FormsOpenSpaceTitle": "Astu tilaan sisään",
   "FormsPlacesRecent": "{{recent}} ja {{favorites}} pitävät käynnissä olevat keräyksesi käden ulottuvilla.",
   "FormsPlacesTemplates": "{{templates}} — tallentamasi tilamallit.",
   "FormsPlacesTitle": "Kaikki paikallaan",

@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "已开始，尚未完成",
   "FormsItem": "每一行都是一整套收集。打开其中一个即可在里面工作，把正在进行的置顶，或通过三个点邀请他人、复制可打开表单的链接，并把配置保存为模板。",
   "FormsItemTitle": "使用表单空间",
-  "FormsOpenSpace": "我们打开这一个，看看一套收集是如何组成的。每个表单空间内部都包含同样的三样东西：表单本身、正在填写中的答复，以及已经收到的答复。",
-  "FormsOpenSpaceTitle": "走进一个空间",
   "FormsPlacesRecent": "{{recent}} 和 {{favorites}} 让你正在进行的收集始终触手可及。",
   "FormsPlacesTemplates": "{{templates}} — 你保存的空间模板。",
   "FormsPlacesTitle": "各归其位",

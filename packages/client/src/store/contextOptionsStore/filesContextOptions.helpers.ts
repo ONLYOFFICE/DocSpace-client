@@ -1257,6 +1257,8 @@ export const getFilesContextOptionsImpl = (
             "update-xlsx-data",
             "share",
             "move",
+            // a one-item "move" category is replaced by this bare option
+            "move-to",
             "copy-to",
             "download",
             "download-encrypted",
@@ -1285,6 +1287,7 @@ export const getFilesContextOptionsImpl = (
             "update-xlsx-data",
             "share",
             "move",
+            "move-to",
             "copy-to",
             "download",
             "download-encrypted",

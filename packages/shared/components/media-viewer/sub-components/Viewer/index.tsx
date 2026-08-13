@@ -53,6 +53,8 @@ import { ImageViewer } from "../ImageViewer";
 import { MobileDetails } from "../MobileDetails";
 import { DesktopDetails } from "../DesktopDetails";
 import { ViewerPlayer } from "../ViewerPlayer";
+import { ViewerLoader } from "../ViewerLoader";
+import { MessageError } from "../MessageError";
 import { PDFViewer } from "../PDFViewer";
 
 import type ViewerProps from "./Viewer.props";
@@ -86,6 +88,8 @@ export const Viewer = (props: ViewerProps) => {
     onSetSelectionFile,
     generateContextMenu,
     pluginViewerContent,
+    isDecrypting,
+    decryptionError,
   } = props;
 
   const timerIDRef = useRef<NodeJS.Timeout>(undefined);
@@ -295,7 +299,18 @@ export const Viewer = (props: ViewerProps) => {
         </>
       ) : null}
 
-      {pluginViewerContent ? (
+      {isDecrypting ? (
+        // A file from a private room has no URL until it is decrypted, so the
+        // media elements below would mount without a source.
+        <ViewerLoader isLoading />
+      ) : decryptionError ? (
+        <MessageError
+          model={contextModel(true)}
+          isMobile={isMobile}
+          onMaskClick={handleMaskClick}
+          errorTitle={decryptionError}
+        />
+      ) : pluginViewerContent ? (
         <PluginViewer
           pluginViewerContent={pluginViewerContent}
           handleMaskClick={handleMaskClick}

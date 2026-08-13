@@ -36,7 +36,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
 
 import {
   ModalDialog,
@@ -46,6 +45,9 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import config from "PACKAGE_FILE";
 
 import EditorsIcon from "PUBLIC_DIR/images/icons/16/docs-connect.editors.react.svg";
 import CollaborationIcon from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg";
@@ -73,7 +75,6 @@ const DocsConnectGetStartedModal = ({
   startTrial,
 }: DocsConnectGetStartedModalProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
-  const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
 
   if (!visible) return null;
@@ -114,10 +115,13 @@ const DocsConnectGetStartedModal = ({
     try {
       await startTrial?.();
       onClose();
-      navigate(DOCS_CONNECT_ROUTE);
+      window.location.href = combineUrl(
+        window.ClientConfig?.proxy?.url,
+        config.homepage,
+        DOCS_CONNECT_ROUTE,
+      );
     } catch (error) {
       toastr.error(error as Error);
-    } finally {
       setSubmitting(false);
     }
   };

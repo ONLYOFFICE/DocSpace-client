@@ -1,7 +1,7 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi } from "vitest";
-import { FileType, FolderType } from "@docspace/shared/enums";
+import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
@@ -30,6 +30,17 @@ const baseFile = (): TItem =>
 
 const encryptedFile = (): TItem =>
   ({ ...baseFile(), id: 2, title: "Secret.docx", encrypted: true }) as TItem;
+
+const baseFolder = (): TItem =>
+  ({
+    id: 5,
+    parentId: 10,
+    title: "New folder",
+    isFolder: true,
+    rootFolderType: FolderType.Rooms,
+    security: { Delete: true, Rename: true, Move: true },
+    viewAccessibility: {},
+  }) as unknown as TItem;
 
 const storeWithPlugin = () =>
   createTestFilesStore({
@@ -64,6 +75,47 @@ describe("getFilesContextOptions — plugin items vs encrypted files", () => {
     store.getFilesContextOptions(encryptedFile());
 
     expect(getContextMenuKeysByType).not.toHaveBeenCalled();
+  });
+
+  it("offers plugin actions on a folder outside a private room", () => {
+    const opts = storeWithPlugin().getFilesContextOptions(baseFolder());
+
+    expect(opts).toContain(PLUGIN_KEY);
+  });
+
+  it("withholds plugin actions from a folder inside a private room", () => {
+    const store = createTestFilesStore({
+      settingsStore: { enablePlugins: true },
+      pluginStore: { getContextMenuKeysByType: () => [PLUGIN_KEY] },
+      userStore: { encryptionKeys: [{ id: "key-1" }] },
+      treeFoldersStore: { isPrivacyFolder: true },
+    });
+
+    expect(store.getFilesContextOptions(baseFolder())).not.toContain(
+      PLUGIN_KEY,
+    );
+  });
+
+  it("withholds plugin actions from a private room itself", () => {
+    const room = {
+      ...baseFolder(),
+      id: 6,
+      title: "Room",
+      roomType: RoomsType.CustomRoom,
+    } as unknown as TItem;
+    const privateRoom = { ...room, private: true } as unknown as TItem;
+
+    const ordinary = storeWithPlugin();
+    ordinary.dialogsStore = { roomGroups: [] } as never;
+    // the gate, not some unrelated room branch, is what removes the key
+    expect(ordinary.getFilesContextOptions(room)).toContain(PLUGIN_KEY);
+
+    const store = storeWithPlugin();
+    // dialogsStore is attached post-construction in the app; the room branch
+    // reads roomGroups off it
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    expect(store.getFilesContextOptions(privateRoom)).not.toContain(PLUGIN_KEY);
   });
 
   it("keeps plugin actions out of an encrypted image or video too", () => {

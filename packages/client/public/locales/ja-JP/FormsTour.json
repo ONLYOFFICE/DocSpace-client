@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "着手済み、未完了",
   "FormsItem": "各行がひとまとまりの収集です。開けば中で作業でき、進行中のものは固定でき、3点メニューからメンバーの招待、フォームを開くリンクのコピー、設定のテンプレート保存ができます。",
   "FormsItemTitle": "フォームスペースでの作業",
-  "FormsOpenSpace": "こちらを開いて、収集がどう組み立てられているか見てみましょう。どのフォームスペースの中にも同じ3つがあります。フォームそのもの、まだ記入中の回答、そしてすでに届いた回答です。",
-  "FormsOpenSpaceTitle": "スペースの中へ",
   "FormsPlacesRecent": "{{recent}} と {{favorites}} は、進行中の収集をすぐ手の届く場所に置いておきます。",
   "FormsPlacesTemplates": "{{templates}} — 保存したスペーステンプレート。",
   "FormsPlacesTitle": "すべてがあるべき場所に",

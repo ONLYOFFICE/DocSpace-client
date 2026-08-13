@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Đã bắt đầu, chưa hoàn tất",
   "FormsItem": "Mỗi hàng là cả một đợt thu thập. Mở một hàng để làm việc bên trong, ghim những đợt đang chạy, hoặc dùng dấu ba chấm để mời người khác, sao chép liên kết mở biểu mẫu và lưu thiết lập thành mẫu.",
   "FormsItemTitle": "Làm việc với một không gian biểu mẫu",
-  "FormsOpenSpace": "Hãy mở cái này ra và xem một đợt thu thập được dựng thế nào. Bên trong mỗi không gian biểu mẫu đều có cùng ba thứ: bản thân biểu mẫu, những câu trả lời còn đang viết, và những câu đã về.",
-  "FormsOpenSpaceTitle": "Bước vào một không gian",
   "FormsPlacesRecent": "{{recent}} và {{favorites}} giữ những đợt thu thập bạn đang chạy trong tầm tay.",
   "FormsPlacesTemplates": "{{templates}} — các mẫu không gian bạn đã lưu.",
   "FormsPlacesTitle": "Mọi thứ đúng chỗ của nó",

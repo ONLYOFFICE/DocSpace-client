@@ -72,10 +72,10 @@ const EMPTY_LIST_STEP = "Your list is empty for now";
 
 // What an admin on a portal that already has form spaces walks through
 // (SRC_DIR/components/FormsTour/tourSteps): the two create tiles, a space row,
-// the way into the stand-in space, the three things inside it, and the sidebar
-// sub-items. Not the closing step — that one only exists when the list itself
-// was stood in for, and this portal's list is its own.
-const ADMIN_STEP_COUNT = 8;
+// the three things inside the stand-in space that row step walks into, and the
+// sidebar sub-items. Not the closing step — that one only exists when the list
+// itself was stood in for, and this portal's list is its own.
+const ADMIN_STEP_COUNT = 7;
 
 // The first stand-in space the demo puts up on an empty portal
 // (FormsTour:FormsDemoOnboarding), and the three things waiting inside it
@@ -233,7 +233,7 @@ test.describe("Forms tour", () => {
     // inside it is the whole point of this tour. It once dropped out silently
     // here — the flags were computed before the demo was armed and a memo held
     // onto them — and every screenshot still matched, because a walkthrough
-    // that is missing four steps in the middle is a walkthrough of four steps
+    // that is missing three steps in the middle is a walkthrough of four steps
     // that all look right.
     expect(steps).toBe(ADMIN_STEP_COUNT);
   });

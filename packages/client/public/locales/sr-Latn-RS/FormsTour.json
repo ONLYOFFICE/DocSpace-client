@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Započeto, ali ne završeno",
   "FormsItem": "Svaki red je cela zbirka. Otvorite jedan da radite unutra, zakačite one koje vodite ili pomoću tri tačke pozovite ljude, kopirajte link koji otvara obrazac i sačuvajte podešavanja kao šablon.",
   "FormsItemTitle": "Rad sa prostorom obrazaca",
-  "FormsOpenSpace": "Otvorimo ovaj i pogledajmo kako je zbirka sastavljena. Unutar svakog prostora obrazaca nalaze se iste tri stvari: sam obrazac, odgovori koji se još pišu i oni koji su već stigli.",
-  "FormsOpenSpaceTitle": "Zakoračite u prostor",
   "FormsPlacesRecent": "{{recent}} i {{favorites}} drže nadohvat ruke zbirke koje vodite.",
   "FormsPlacesTemplates": "{{templates}} — šabloni prostora koje ste sačuvali.",
   "FormsPlacesTitle": "Sve na svom mestu",

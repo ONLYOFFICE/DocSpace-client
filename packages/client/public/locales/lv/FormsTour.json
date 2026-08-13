@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Iesākts, bet nepabeigts",
   "FormsItem": "Katra rinda ir vesela vākšana. Atveriet vienu, lai strādātu tajā, piespraudiet tās, kuras vadāt, vai ar trim punktiem uzaiciniet cilvēkus, nokopējiet saiti, kas atver veidlapu, un saglabājiet iestatījumus kā veidni.",
   "FormsItemTitle": "Darbs ar veidlapu telpu",
-  "FormsOpenSpace": "Atvērsim šo un paskatīsimies, kā ir salikta vākšana. Katras veidlapu telpas iekšienē ir vienas un tās pašas trīs lietas: pati veidlapa, atbildes, kas vēl tiek rakstītas, un tās, kas jau pienākušas.",
-  "FormsOpenSpaceTitle": "Ieejiet telpā",
   "FormsPlacesRecent": "{{recent}} un {{favorites}} tur pa rokai vākšanas, ko jūs vadāt.",
   "FormsPlacesTemplates": "{{templates}} — telpu veidnes, ko esat saglabājuši.",
   "FormsPlacesTitle": "Viss savā vietā",

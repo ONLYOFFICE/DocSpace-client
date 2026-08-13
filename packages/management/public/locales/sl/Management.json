@@ -9,6 +9,8 @@
   "DecryptStorage": "Dešifriraj pomnilnik",
   "DecryptWarningDialogContent": "Med postopkom dešifriranja bodo vsi delovni prostori nedosegljivi. Ste prepričani, da želite nadaljevati?",
   "DeleteEmptyPortalText": "Trajno boste izbrisali delovni prostor <1>{{domain}}</1>. Tega dejanja ne bo mogoče razveljaviti.",
+  "DeleteRequestSuccess": "Zahteva za izbris je bila uspešno poslana na e-poštni naslov lastnika <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Trajno boste izbrisali delovni prostor <1>{{domain}}</1> z vsemi podatki in računi. Zahteva za izbris <1>{{domain}}</1> bo poslana lastniku na e-poštni naslov <1>{{email}}</1>.",
   "DeleteWarning": "Zadnjega delovnega prostora s polnim dostopom ni mogoče izbrisati",
   "DomainName": "Ime domene",
   "DomainNotFound": "Domena ni bila najdena, preverite v nastavitvah DNS",

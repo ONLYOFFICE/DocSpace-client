@@ -37,6 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Виберіть сховище",
   "ThirdPartyStorageNoStorageAlert": "Перед цим необхідно ввімкнути відповідну службу в розділі «Інтеграція». В іншому випадку з’єднання буде неможливим.",
   "ThirdPartyStoragePermanentSettingDescription": "Файли зберігаються в сторонньому сховищі {{thirdpartyTitle}} у папці \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Щоб підключити стороннє сховище, потрібно додати відповідну службу в розділі Інтеграція налаштувань {{productName}}. Зверніться до власника або адміністратора робочого простору, щоб увімкнути інтеграцію.",
   "UserEmail": "Адреса ел. пошти користувача",
   "UserIPAddress": "IP-адреса користувача",
   "UserName": "Ім’я користувача",

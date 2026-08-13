@@ -6,6 +6,7 @@
   "AddedToClipboard": "Pozycje zostały dodane do schowka",
   "AddNewLink": "Dodaj nowy link",
   "AddUsersOrGroupsDescription": "Dodani administratorzy będą mogli tworzyć pokoje za pomocą tego szablonu.",
+  "AddUsersOrGroupsInfo": "Wyświetlani są tutaj tylko <1>administratorzy przestrzeni roboczej</1> i <1>administratorzy pokoi</1>",
   "AddUsersOrGroupsInfoGroups": "Tylko <1>administratorzy pokoi</1> i <1>{{productName}}</1> z wybranych grup będą w stanie tworzyć pokoje za pomocą tego szablonu.",
   "AddUsersOrGroupsTitle": "Dodaj użytkowników lub grupy",
   "AfterFilesWillBeDeletedPermanently": "Następnie pliki zostaną trwale usunięte.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "Analizuj odpowiedzi",
   "ArchiveAction": "Opróżnij archiwum",
   "ArchiveEmptyScreenUser": "Tutaj pojawią się zarchiwizowane pokoje.",
+  "ChangeAgentOwnerSelectorInfo": "Tylko administrator pokoju lub przestrzeni roboczej może zostać właścicielem agenta",
   "ChangeTheAgentOwner": "Zmień właściciela agenta",
   "ClientSearchDecryptingNames": "Odszyfrowywanie nazw plików… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Folder jest zbyt duży. Wyniki wyszukiwania mogą być niepełne.",
@@ -125,6 +127,7 @@
   "TableName": "Nazwa tabeli",
   "Template": "Szablon",
   "TemplateAvailable": "Szablon dostępny dla wszystkich",
+  "TemplateAvailableDescription": "Wszyscy administratorzy przestrzeni roboczej i administratorzy pokoi będą mogli tworzyć pokoje przy użyciu tego szablonu.",
   "TemplateName": "Nazwa szablonu",
   "TemplateOwner": "Właściciel szablonu",
   "TemplateRemoved": "Wybrane szablony pokoi zostały usunięte",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "Plik nie może zostać przeniesiony do tego pokoju. Spróbuj przenieść formularz PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz.",
   "WillBeDeletedPermanently": "{{date}} nastąpi trwałe usunięcie",
-  "YouLeftTheAgent": "Zostawiłeś agenta."
+  "YouLeftTheAgent": "Zostawiłeś agenta.",
+  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>„{{userType}}”</1> przez administratora przestrzeni roboczej <1>{{adminName}}</1>."
 }

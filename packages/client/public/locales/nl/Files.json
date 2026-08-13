@@ -6,6 +6,7 @@
   "AddedToClipboard": "Items toegevoegd aan klembord",
   "AddNewLink": "Voeg nieuwe link toe",
   "AddUsersOrGroupsDescription": "De toegevoegde beheerders kunnen kamers maken met dit sjabloon.",
+  "AddUsersOrGroupsInfo": "Hier worden alleen <1>werkruimtebeheerders</1> en <1>kamerbeheerders</1> weergegeven",
   "AddUsersOrGroupsInfoGroups": "Alleen <1>{{productName}}</1> en <1>Kamerbeheerders</1> van de geselecteerde groepen kunnen kamers maken met dit sjabloon.",
   "AddUsersOrGroupsTitle": "Gebruikers of Groepen toevoegen",
   "AfterFilesWillBeDeletedPermanently": "Na bestanden worden definitief verwijderd.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "Antwoorden analyseren",
   "ArchiveAction": "Archief leegmaken",
   "ArchiveEmptyScreenUser": "Kamers die zijn gearchiveerd verschijnen hier.",
+  "ChangeAgentOwnerSelectorInfo": "Alleen een kamerbeheerder of werkruimtebeheerder kan eigenaar van de agent worden",
   "ChangeTheAgentOwner": "Wijzig de agent eigenaar",
   "ClientSearchDecryptingNames": "Bestandsnamen worden ontsleuteld… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "De map is te groot. De zoekresultaten kunnen onvolledig zijn.",
@@ -125,6 +127,7 @@
   "TableName": "Tabelnaam",
   "Template": "Sjabloon",
   "TemplateAvailable": "Sjabloon beschikbaar voor iedereen",
+  "TemplateAvailableDescription": "Alle werkruimtebeheerders en kamerbeheerders kunnen kamers maken met dit sjabloon.",
   "TemplateName": "Sjabloon Naam",
   "TemplateOwner": "Sjabloon eigenaar",
   "TemplateRemoved": "Geselecteerde kamer sjablonen zijn verwijderd",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "Het bestand kan niet naar deze kamer worden verplaatst. Probeer het {{ organizationName }} PDF formulier te verplaatsen.",
   "WarningMoveToFormRoomServal": "Het verplaatsen van meerdere bestanden naar de kamer voor het invullen van formulieren wordt niet ondersteund. Verplaats één {{ organizationName }} PDF formulier tegelijk.",
   "WillBeDeletedPermanently": "{{date}} wordt definitief verwijderd",
-  "YouLeftTheAgent": "U heeft de agent verlaten"
+  "YouLeftTheAgent": "U heeft de agent verlaten",
+  "YourUserTypeHasChanged": "Uw gebruikerstype is gewijzigd naar <1>“{{userType}}”</1> door werkruimtebeheerder <1>{{adminName}}</1>."
 }

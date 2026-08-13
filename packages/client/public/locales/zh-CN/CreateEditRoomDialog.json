@@ -37,6 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "选择存储空间",
   "ThirdPartyStorageNoStorageAlert": "您需要在此之前于“集成”部分中连接相应服务。否则将无法建立连接。",
   "ThirdPartyStoragePermanentSettingDescription": "文件已存储在第三方 {{thirdpartyTitle}} 存储空间的\"{{thirdpartyFolderName}}\"文件夹中。\n<strong>{{thirdpartyPath}}</strong>",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "要连接第三方存储，您需要在 {{productName}} 设置的“集成”部分中添加相应服务。请联系所有者或工作区管理员以启用该集成。",
   "UserEmail": "用户电子邮件",
   "UserIPAddress": "用户 IP 地址",
   "UserName": "用户名称",

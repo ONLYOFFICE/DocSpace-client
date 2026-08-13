@@ -9,6 +9,8 @@
   "DecryptStorage": "Decriptare stocare",
   "DecryptWarningDialogContent": "În timpul procesului de decriptare toate spațiile de lucru vor deveni indisponibile. Sigur doriți să continuați?",
   "DeleteEmptyPortalText": "Intenționați să ștergeți definitiv spațiul de lucru <1>{{domain}}</1>. Această acțiune nu poate fi anulată.",
+  "DeleteRequestSuccess": "Cererea de ștergere a fost trimisă cu succes la adresa de email a proprietarului <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Sunteți pe punctul de a șterge definitiv spațiul de lucru <1>{{domain}}</1> cu toate datele și conturile. O cerere de ștergere a <1>{{domain}}</1> va fi trimisă proprietarului la adresa de email <1>{{email}}</1>.",
   "DeleteWarning": "Ultimul spaţiu de lucru cu acces complet nu poate fi șters",
   "DomainName": "Nume de domeniu",
   "DomainNotFound": "Domeniul nu a fost găsit, verificați setările DNS",

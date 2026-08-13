@@ -1,9 +1,13 @@
 {
   "AppointAdmin": "Iecelt administratorus",
   "BackupPortal": "Dublēt darbvietas datus",
+  "ChangeInstruction": "Lai mainītu īpašnieku, lūdzu, izvēlieties jaunā īpašnieka vārdu zemāk.",
+  "ChangeOwner": "Mainīt īpašnieku",
   "ChangeUser": "Mainīt lietotāju",
   "DoTheSame": "Dariet to pašu, ko administratori",
   "ManagePortal": "Pārvaldīt darbvietas konfigurāciju",
   "ManageUser": "Pārvaldīt lietotāju kontus",
+  "NewPortalOwner": "Jaunais darbvietas īpašnieks",
+  "PortalOwnerCan": "Darbvietas īpašnieks var:",
   "SetAccessRights": "Iestatīt piekļuves tiesības"
 }

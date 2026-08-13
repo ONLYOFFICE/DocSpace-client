@@ -9,6 +9,8 @@
   "DecryptStorage": "Speicher entschlüsseln",
   "DecryptWarningDialogContent": "Während des Entschlüsselungsvorgangs sind alle Arbeitsbereiche nicht mehr verfügbar. Möchten Sie wirklich fortfahren?",
   "DeleteEmptyPortalText": "Sie sind dabei, den Arbeitsbereich <1>{{domain}}</1> dauerhaft zu löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "DeleteRequestSuccess": "Die Löschanfrage wurde erfolgreich an die E-Mail-Adresse des Besitzers <1>{{email}}</1> gesendet",
+  "DeleteSetupPortalText": "Sie sind dabei, den Workspace <1>{{domain}}</1> mit allen Daten und Konten endgültig zu löschen. Eine Anfrage zum Löschen von <1>{{domain}}</1> wird an den Besitzer an die E-Mail-Adresse <1>{{email}}</1> gesendet.",
   "DeleteWarning": "Der letzte Arbeitsbereich mit Vollzugriff kann nicht gelöscht werden",
   "DomainName": "Domain-Name",
   "DomainNotFound": "Die Domain wird nicht gefunden, bitte überprüfen Sie die DNS-Einstellungen",

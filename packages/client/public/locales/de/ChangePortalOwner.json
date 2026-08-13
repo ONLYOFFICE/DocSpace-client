@@ -1,9 +1,13 @@
 {
   "AppointAdmin": "Verwalter ernennen",
   "BackupPortal": "Backup der Daten des Arbeitsbereichs erstellen",
+  "ChangeInstruction": "Um den Besitzer zu ändern, wählen Sie bitte unten den Namen des neuen Besitzers aus.",
+  "ChangeOwner": "Besitzer ändern",
   "ChangeUser": "Benutzer ändern",
   "DoTheSame": "Machen Sie dasselbe wie die Administratoren",
   "ManagePortal": "Konfiguration des Arbeitsbereichs verwalten",
   "ManageUser": "Benutzerprofile verwalten",
+  "NewPortalOwner": "Neuer Workspace-Besitzer",
+  "PortalOwnerCan": "Der Workspace-Besitzer kann:",
   "SetAccessRights": "Zugriffsrechte festlegen"
 }

@@ -9,6 +9,8 @@
   "DecryptStorage": "Pura tallennustilan salaus",
   "DecryptWarningDialogContent": "Mitään työtiloista ei pysty käyttämään salauksen purkamisen aikana. Oletko varma, että haluat jatkaa?",
   "DeleteEmptyPortalText": "Olet poistamassa pysyvästi työtilaa <1>{{domain}}</1>. Tätä toimintoa ei voi perua.",
+  "DeleteRequestSuccess": "Poistopyyntö lähetettiin onnistuneesti omistajan sähköpostiosoitteeseen <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Olet poistamassa pysyvästi työtilan <1>{{domain}}</1> kaikkine tietoineen ja tileineen. Pyyntö poistaa <1>{{domain}}</1> lähetetään omistajalle sähköpostiosoitteeseen <1>{{email}}</1>.",
   "DeleteWarning": "Viimeistä täysien oikeuksien työtilaa ei voi poistaa",
   "DomainName": "Verkkotunnus",
   "DomainNotFound": "Verkkotunnusta ei löytynyt, ole hyvä ja tarkista DNS-asetukset.",

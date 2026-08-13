@@ -6,6 +6,7 @@
   "AddedToClipboard": "Stavke dodate u privremenu memoriju",
   "AddNewLink": "Dodaj novi link",
   "AddUsersOrGroupsDescription": "Dodati administratori moći će da kreiraju sobe koristeći ovaj šablon.",
+  "AddUsersOrGroupsInfo": "Ovde su prikazani samo <1>administratori radnog prostora</1> i <1>administratori soba</1>",
   "AddUsersOrGroupsInfoGroups": "Samo <1>{{productName}}</1> i <1>administratori soba</1> iz izabranih grupa moći će da kreiraju sobe koristeći ovaj šablon.",
   "AddUsersOrGroupsTitle": "Dodajte korisnike ili grupe.",
   "AfterFilesWillBeDeletedPermanently": "Nakon što se datoteke trajno obrišu.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "Analiraj odgovore",
   "ArchiveAction": "Prazna arhiva",
   "ArchiveEmptyScreenUser": "Sobe koje su arhivirane će se pojaviti ovde.",
+  "ChangeAgentOwnerSelectorInfo": "Samo administrator sobe ili radnog prostora može postati vlasnik agenta",
   "ChangeTheAgentOwner": "Promenite vlasnika agenta",
   "ClientSearchDecryptingNames": "Dešifrovanje naziva datoteka… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Fascikla je prevelika. Rezultati pretrage mogu biti nepotpuni.",
@@ -125,6 +127,7 @@
   "TableName": "Naziv tabele",
   "Template": "Šablon",
   "TemplateAvailable": "Šablon dostupan svima",
+  "TemplateAvailableDescription": "Svi administratori radnog prostora i administratori soba moći će da kreiraju sobe koristeći ovaj šablon.",
   "TemplateName": "Ime šablona",
   "TemplateOwner": "Vlasnik šablona",
   "TemplateRemoved": "Izabrani šabloni soba su obrisani",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "Fajl ne može biti premesten u ovu sobu. Pokušajte da premestite {{ organizationName }} PDF obrazac.",
   "WarningMoveToFormRoomServal": "Premještanje više fajlova u sobu za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme.",
   "WillBeDeletedPermanently": "{{date}} će biti trajno obrisan",
-  "YouLeftTheAgent": "Ostavili ste agenta"
+  "YouLeftTheAgent": "Ostavili ste agenta",
+  "YourUserTypeHasChanged": "Vaš tip korisnika je promenio administrator radnog prostora <1>{{adminName}}</1> u <1>„{{userType}}“</1>."
 }

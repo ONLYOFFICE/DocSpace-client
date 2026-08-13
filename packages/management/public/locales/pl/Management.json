@@ -9,6 +9,8 @@
   "DecryptStorage": "Odszyfruj pamięć",
   "DecryptWarningDialogContent": "Wszystkie przestrzenie robocze będą niedostępne podczas procesu odszyfrowywania. Czy na pewno chcesz kontynuować?",
   "DeleteEmptyPortalText": "Zamierzasz trwale usunąć przestrzeń roboczą <1>{{domain}}</1>. Nie można cofnąć tej czynności.",
+  "DeleteRequestSuccess": "Żądanie usunięcia zostało pomyślnie wysłane na adres e-mail właściciela <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Zamierzasz trwale usunąć przestrzeń roboczą <1>{{domain}}</1> wraz ze wszystkimi danymi i kontami. Żądanie usunięcia <1>{{domain}}</1> zostanie wysłane do właściciela na adres e-mail <1>{{email}}</1>.",
   "DeleteWarning": "Nie można usunąć ostatniej przestrzeni roboczej z pełnym dostępem",
   "DomainName": "Nazwa domeny",
   "DomainNotFound": "Nie znaleziono domeny, sprawdź ustawienia DNS",

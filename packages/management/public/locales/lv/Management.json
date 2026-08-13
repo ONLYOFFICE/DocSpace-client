@@ -9,6 +9,8 @@
   "DecryptStorage": "Atšifrēt krātuvi",
   "DecryptWarningDialogContent": "Atšifrēšanas procesa laikā visas darbvietas kļūs nepieejamas. Vai tiešām vēlaties turpināt?",
   "DeleteEmptyPortalText": "Jūs gatavojaties neatgriezeniski izdzēst darbvietu <1>{{domain}}</1>. Šo darbību nevarēs atsaukt.",
+  "DeleteRequestSuccess": "Dzēšanas pieprasījums tika veiksmīgi nosūtīts uz īpašnieka e-pasta adresi <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Jūs neatgriezeniski dzēsīsiet darbvietu <1>{{domain}}</1> ar visiem datiem un kontiem. Pieprasījums dzēst <1>{{domain}}</1> tiks nosūtīts īpašniekam uz e-pasta adresi <1>{{email}}</1>.",
   "DeleteWarning": "Pēdējo pilnās piekļuves darbvietu nevar izdzēst",
   "DomainName": "Domēna nosaukums",
   "DomainNotFound": "Domēns nav atrasts. Pārbaudiet DNS iestatījumus",

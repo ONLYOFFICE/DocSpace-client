@@ -1,9 +1,13 @@
 {
   "AppointAdmin": "Chỉ định quản trị viên",
   "BackupPortal": "Sao lưu dữ liệu của không gian làm việc",
+  "ChangeInstruction": "Để thay đổi chủ sở hữu, vui lòng chọn tên của chủ sở hữu mới bên dưới.",
+  "ChangeOwner": "Thay đổi chủ sở hữu",
   "ChangeUser": "Thay đổi người dùng",
   "DoTheSame": "Làm tương tự như quản trị viên",
   "ManagePortal": "Quản lý cấu hình không gian làm việc",
   "ManageUser": "Quản lý tài khoản người dùng",
+  "NewPortalOwner": "Chủ sở hữu không gian làm việc mới",
+  "PortalOwnerCan": "Chủ sở hữu không gian làm việc có thể:",
   "SetAccessRights": "Đặt quyền truy cập"
 }

@@ -1,9 +1,13 @@
 {
   "AppointAdmin": "Priraďte administrátorov",
   "BackupPortal": "Zálohovať dáta pracovného priestoru",
+  "ChangeInstruction": "Ak chcete zmeniť majiteľa, vyberte prosím nižšie meno nového majiteľa.",
+  "ChangeOwner": "Zmeniť majiteľa",
   "ChangeUser": "Zmeniť používateľa",
   "DoTheSame": "Robte to, čo robia administrátori",
   "ManagePortal": "Spravovať konfiguráciu pracovného priestoru",
   "ManageUser": "Spravovať používateľské účty",
+  "NewPortalOwner": "Nový majiteľ pracovného priestoru",
+  "PortalOwnerCan": "Majiteľ pracovného priestoru môže:",
   "SetAccessRights": "Nastaviť prístupové práva"
 }

@@ -6,6 +6,7 @@
   "AddedToClipboard": "Đã thêm các mục vào bộ nhớ tạm",
   "AddNewLink": "Thêm liên kết mới",
   "AddUsersOrGroupsDescription": "Quản trị viên đã thêm sẽ có thể tạo phòng bằng mẫu này.",
+  "AddUsersOrGroupsInfo": "Chỉ <1>quản trị viên không gian làm việc</1> và <1>quản trị viên phòng</1> được hiển thị ở đây",
   "AddUsersOrGroupsInfoGroups": "Chỉ <1>{{productName}} </1> và <1> Quản trị viên phòng </1> từ các nhóm đã được chọn mới có thể tạo phòng bằng mẫu này.",
   "AddUsersOrGroupsTitle": "Thêm Người Dùng hoặc Nhóm",
   "AfterFilesWillBeDeletedPermanently": "Sau đó các tập tin sẽ bị xóa vĩnh viễn.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "Phân tích phản hồi",
   "ArchiveAction": "Kho sao lưu trống",
   "ArchiveEmptyScreenUser": "Các phòng đã được sao lưu sẽ xuất hiện ở đây.",
+  "ChangeAgentOwnerSelectorInfo": "Chỉ quản trị viên phòng hoặc quản trị viên không gian làm việc có thể trở thành chủ sở hữu của tác nhân",
   "ChangeTheAgentOwner": "Thay đổi chủ sở hữu đại lý",
   "ClientSearchDecryptingNames": "Đang giải mã tên tệp… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Thư mục quá lớn. Kết quả tìm kiếm có thể không đầy đủ.",
@@ -125,6 +127,7 @@
   "TableName": "Tên bảng",
   "Template": "Mẫu",
   "TemplateAvailable": "Mẫu khả dụng cho tất cả mọi người",
+  "TemplateAvailableDescription": "Tất cả quản trị viên không gian làm việc và quản trị viên phòng sẽ có thể tạo phòng bằng mẫu này.",
   "TemplateName": "Tên Mẫu",
   "TemplateOwner": "Chủ sở hữu mẫu",
   "TemplateRemoved": "Các mẫu phòng được chọn đã bị xóa",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "Không thể di chuyển tập tin đến phòng này. Xin hãy thử di chuyển biểu mẫu PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Không hỗ trợ di chuyển một số tập tin vào phòng Điền Biểu mẫu. Hãy di chuyển từng biểu mẫu PDF {{ organizationName }} mỗi lần.",
   "WillBeDeletedPermanently": "{{date}} sẽ bị xóa vĩnh viễn",
-  "YouLeftTheAgent": "Bạn đã rời khỏi tác nhân."
+  "YouLeftTheAgent": "Bạn đã rời khỏi tác nhân.",
+  "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên không gian làm việc <1>{{adminName}}</1> thay đổi thành <1>“{{userType}}”</1>."
 }

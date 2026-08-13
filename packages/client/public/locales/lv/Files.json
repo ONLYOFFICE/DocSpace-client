@@ -6,6 +6,7 @@
   "AddedToClipboard": "Vienumi pievienoti starpliktuvē",
   "AddNewLink": "Pievienot jaunu saiti",
   "AddUsersOrGroupsDescription": "Pievienotie administratori varēs izveidot telpas, izmantojot šo veidni.",
+  "AddUsersOrGroupsInfo": "Šeit tiek rādīti tikai <1>darbvietas administratori</1> un <1>telpas administratori</1>",
   "AddUsersOrGroupsInfoGroups": "Tikai <1>{{productName}}</1> un atlasīto grupu <1>Telpas administratori</1> varēs izveidot telpas, izmantojot šo veidni.",
   "AddUsersOrGroupsTitle": "Pievienot lietotājus vai grupas",
   "AfterFilesWillBeDeletedPermanently": "Pēc tam faili tiks neatgriezeniski dzēsti.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "Analēt atbild",
   "ArchiveAction": "Vietne izņemta no arhīva",
   "ArchiveEmptyScreenUser": "Šeit tiks parādītas arhivētās telpas.",
+  "ChangeAgentOwnerSelectorInfo": "Tikai telpas vai darbvietas administrators var kļūt par aģenta īpašnieku",
   "ChangeTheAgentOwner": "Izmainīt aģenta īpašnieku",
   "ClientSearchDecryptingNames": "Notiek failu nosaukumu atšifrēšana… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Mape ir pārāk liela. Meklēšanas rezultāti var būt nepilnīgi.",
@@ -125,6 +127,7 @@
   "TableName": "Tabulas nosaukums",
   "Template": "Veidne",
   "TemplateAvailable": "Ikvienam pieejama veidne",
+  "TemplateAvailableDescription": "Visi darbvietas administratori un telpas administratori varēs izveidot telpas, izmantojot šo veidni.",
   "TemplateName": "Veidnes nosaukums",
   "TemplateOwner": "Veidnes īpašnieks",
   "TemplateRemoved": "Atlasītās telpu veidnes ir dzēstas",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "Failu nevar pārvietot uz šo telpu. Mēģiniet pārvietot {{ organizationName }} PDF veidlapu.",
   "WarningMoveToFormRoomServal": "Vairāku failu pārvietošana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus pārvietojiet vienu {{ organizationName }} PDF veidlapu.",
   "WillBeDeletedPermanently": "{{date}} tiks neatgriezeniski dzēsts",
-  "YouLeftTheAgent": "Jūs esat atstājis aģentu."
+  "YouLeftTheAgent": "Jūs esat atstājis aģentu.",
+  "YourUserTypeHasChanged": "Darbvietas administrators <1>{{adminName}}</1> mainīja jūsu lietotāja tipu uz <1>“{{userType}}”</1>."
 }

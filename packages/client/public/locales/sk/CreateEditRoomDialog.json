@@ -37,6 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Vybrať úložisko",
   "ThirdPartyStorageNoStorageAlert": "Najprv musíte pripojiť príslušnú službu v sekcii „Integrácia“. V opačnom prípade pripojenie nebude možné.",
   "ThirdPartyStoragePermanentSettingDescription": "Súbory sú uložené v externom úložisku {{thirdpartyTitle}} v priečinku \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Ak chcete pripojiť úložisko tretej strany, musíte pridať príslušnú službu v sekcii Integrácia v nastaveniach {{productName}}. Obráťte sa na majiteľa alebo správcu pracovného priestoru, aby integráciu zapnul.",
   "UserEmail": "E-mail používateľa",
   "UserIPAddress": "IP adresa používateľa",
   "UserName": "Meno používateľa",

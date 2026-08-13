@@ -6,6 +6,7 @@
   "AddedToClipboard": "Kohteet lisätty leikepöydälle",
   "AddNewLink": "Lisää uusi linkki",
   "AddUsersOrGroupsDescription": "Lisätyt pääkäyttäjät voivat luoda ryhmiä käyttäen tätä mallia.",
+  "AddUsersOrGroupsInfo": "Tässä näytetään vain <1>työtilan järjestelmänvalvojat</1> ja <1>huoneen järjestelmänvalvojat</1>",
   "AddUsersOrGroupsInfoGroups": "Vain <1>{{productName}}</1> and <1>Huoneen pääkäyttäjät</1> valituista ryhmistä voivat luoda huoneita käyttäen tätä mallia.",
   "AddUsersOrGroupsTitle": "Lisää Käyttäjiä tai Ryhmiä",
   "AfterFilesWillBeDeletedPermanently": "Sen jälkeen, kun tiedostot poistetaan lopullisesti.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "Analysoi vastaukset",
   "ArchiveAction": "Tyhjä arkisto",
   "ArchiveEmptyScreenUser": "Arkistoidut huoneet ilmestyvät tähän.",
+  "ChangeAgentOwnerSelectorInfo": "Vain huoneen tai työtilan järjestelmänvalvoja voi tulla agentin omistajaksi",
   "ChangeTheAgentOwner": "Vaihda agentin omistaja",
   "ClientSearchDecryptingNames": "Puretaan tiedostonimien salausta… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Kansio on liian suuri. Hakutulokset voivat olla puutteelliset.",
@@ -125,6 +127,7 @@
   "TableName": "Taulukon nimi",
   "Template": "Malli",
   "TemplateAvailable": "Malli saatavilla kaikille",
+  "TemplateAvailableDescription": "Kaikki työtilan järjestelmänvalvojat ja huoneen järjestelmänvalvojat voivat luoda huoneita tätä mallia käyttäen.",
   "TemplateName": "Mallin nimi",
   "TemplateOwner": "Mallin omistaja",
   "TemplateRemoved": "Valitut huonemallit on poistettu",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "Tiedostoa ei voi kopioida tähän huoneeseen. Ole hyvä ja siirrä {{ organizationName }} PDF-lomake.",
   "WarningMoveToFormRoomServal": "Useiden tiedostojen siirtämistä lomakkeentäyttöhuoneeseen ei tueta. Siirrä yksi {{ organizationName }} PDF-lomake kerrallaan.",
   "WillBeDeletedPermanently": "{{date}} poistetaan lopullisesti",
-  "YouLeftTheAgent": "Olet jättänyt agentin."
+  "YouLeftTheAgent": "Olet jättänyt agentin.",
+  "YourUserTypeHasChanged": "Työtilan järjestelmänvalvoja <1>{{adminName}}</1> vaihtoi käyttäjätyyppisi arvoon <1>”{{userType}}”</1>."
 }

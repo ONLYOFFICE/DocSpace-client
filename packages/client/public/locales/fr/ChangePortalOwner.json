@@ -1,9 +1,13 @@
 {
   "AppointAdmin": "Nommer les administrateurs",
   "BackupPortal": "Sauvegarder les données de l'espace de travail",
+  "ChangeInstruction": "Pour changer de propriétaire, veuillez choisir ci-dessous le nom du nouveau propriétaire.",
+  "ChangeOwner": "Changer de propriétaire",
   "ChangeUser": "Modifier l’utilisateur",
   "DoTheSame": "Faire la même chose que les administrateurs",
   "ManagePortal": "Gérer la configuration de l'espace de travail",
   "ManageUser": "Gérer les comptes d'utilisateurs",
+  "NewPortalOwner": "Nouveau propriétaire de l'espace de travail",
+  "PortalOwnerCan": "Le propriétaire de l'espace de travail peut :",
   "SetAccessRights": "Définir les droits d’accès"
 }

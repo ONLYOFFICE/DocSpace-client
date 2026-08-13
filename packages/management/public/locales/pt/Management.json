@@ -9,6 +9,8 @@
   "DecryptStorage": "Desencripta o armazenamento",
   "DecryptWarningDialogContent": "Todos os espaços de trabalho ficarão indisponíveis durante o processo de desencriptação. Tem a certeza de que quer continuar?",
   "DeleteEmptyPortalText": "Vai eliminar permanentemente o espaço de trabalho <1>{{domain}}</1>. Esta ação não pode ser desfeita.",
+  "DeleteRequestSuccess": "Pedido de eliminação enviado com sucesso para o endereço de e-mail do proprietário <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Vai eliminar permanentemente o espaço de trabalho <1>{{domain}}</1> com todos os dados e contas. Será enviado ao proprietário um pedido para eliminar <1>{{domain}}</1> para o endereço de e-mail <1>{{email}}</1>.",
   "DeleteWarning": "O último espaço de trabalho de acesso total não pode ser eliminado",
   "DomainName": "Nome do domínio",
   "DomainNotFound": "Domínio não encontrado, verifique nas configurações de DNS",

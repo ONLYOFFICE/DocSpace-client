@@ -37,6 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Επιλέξτε αποθηκευτικό χώρο",
   "ThirdPartyStorageNoStorageAlert": "Πριν, πρέπει να συνδέσετε την αντίστοιχη υπηρεσία στην ενότητα «Ενσωμάτωση». Διαφορετικά, η σύνδεση δεν θα είναι δυνατή.",
   "ThirdPartyStoragePermanentSettingDescription": "Τα αρχεία αποθηκεύονται σε έναν αποθηκευτικό χώρο τρίτου μέρους {{thirdpartyTitle}} στον φάκελο \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Για να συνδέσετε αποθηκευτικό χώρο τρίτου μέρους, πρέπει να προσθέσετε την αντίστοιχη υπηρεσία στην ενότητα Ενσωμάτωση των ρυθμίσεων του {{productName}}. Επικοινωνήστε με τον κάτοχο ή τον διαχειριστή του χώρου εργασίας για να ενεργοποιήσει την ενσωμάτωση.",
   "UserEmail": "Email χρήστη",
   "UserIPAddress": "Διεύθυνση IP χρήστη",
   "UserName": "Όνομα χρήστη",

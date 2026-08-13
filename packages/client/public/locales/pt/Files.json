@@ -6,6 +6,7 @@
   "AddedToClipboard": "Itens adicionados à área de transferência",
   "AddNewLink": "Adicionar novo link",
   "AddUsersOrGroupsDescription": "Os administradores adicionados poderão criar salas utilizando este modelo.",
+  "AddUsersOrGroupsInfo": "Apenas os <1>administradores do espaço de trabalho</1> e os <1>administradores de sala</1> são mostrados aqui",
   "AddUsersOrGroupsInfoGroups": "Apenas <1>{{productName}}</1> e <1>Administradores de salas</1> dos grupos selecionados poderão criar salas utilizando este modelo.",
   "AddUsersOrGroupsTitle": "Adicionar Utilizadores ou Grupos",
   "AfterFilesWillBeDeletedPermanently": "será eliminado permanentemente.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "Analisar respostas",
   "ArchiveAction": "Arquivo Vazio",
   "ArchiveEmptyScreenUser": "As salas que foram arquivados, aparecerão aqui.",
+  "ChangeAgentOwnerSelectorInfo": "Apenas um administrador de sala ou do espaço de trabalho pode tornar-se proprietário do agente",
   "ChangeTheAgentOwner": "Mude o proprietário do agente",
   "ClientSearchDecryptingNames": "A desencriptar nomes de ficheiros… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "A pasta é demasiado grande. Os resultados da pesquisa podem estar incompletos.",
@@ -125,6 +127,7 @@
   "TableName": "Nome da tabela",
   "Template": "Template",
   "TemplateAvailable": "Template disponível para todos",
+  "TemplateAvailableDescription": "Todos os administradores do espaço de trabalho e os administradores de sala poderão criar salas utilizando este modelo.",
   "TemplateName": "Nome do Template",
   "TemplateOwner": "Proprietário do Template",
   "TemplateRemoved": "Os templates das salas selecionadas foram eliminados",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "O ficheiro não pode ser movido para esta sala. Tente mover o formulário PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Não há suporte para mover vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} de cada vez.",
   "WillBeDeletedPermanently": "{{date}} será eliminado permanentemente",
-  "YouLeftTheAgent": "Você saiu do agente"
+  "YouLeftTheAgent": "Você saiu do agente",
+  "YourUserTypeHasChanged": "O seu tipo de utilizador foi alterado para <1>“{{userType}}”</1> pelo administrador do espaço de trabalho <1>{{adminName}}</1>."
 }

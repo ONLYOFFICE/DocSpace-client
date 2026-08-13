@@ -1,9 +1,13 @@
 {
   "AppointAdmin": "管理者の選任",
   "BackupPortal": "ワークスペースのデータをバックアップする",
+  "ChangeInstruction": "所有者を変更するには、以下で新しい所有者の名前を選択してください。",
+  "ChangeOwner": "所有者を変更する",
   "ChangeUser": "ユーザーを変更する",
   "DoTheSame": "管理者と同じように行う",
   "ManagePortal": "ワークスペースの構成を管理する",
   "ManageUser": "ユーザーアカウントを管理する",
+  "NewPortalOwner": "新しいワークスペースの所有者",
+  "PortalOwnerCan": "ワークスペースの所有者ができること：",
   "SetAccessRights": "アクセス権を設定する"
 }

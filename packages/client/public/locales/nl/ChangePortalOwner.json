@@ -1,9 +1,13 @@
 {
   "AppointAdmin": "Beheerders benoemen",
   "BackupPortal": "Back-up maken van de gegevens van de werkruimte",
+  "ChangeInstruction": "Om de eigenaar te wijzigen, kiest u hieronder de naam van de nieuwe eigenaar.",
+  "ChangeOwner": "De eigenaar wijzigen",
   "ChangeUser": "Gebruiker wijzigen",
   "DoTheSame": "Doe hetzelfde als beheerders",
   "ManagePortal": "Configuratie van de werkruimte beheren",
   "ManageUser": "Gebruikersaccounts beheren",
+  "NewPortalOwner": "Nieuwe eigenaar van de werkruimte",
+  "PortalOwnerCan": "De eigenaar van de werkruimte kan:",
   "SetAccessRights": "Toegangsrechten instellen"
 }

@@ -37,6 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Одабери складиште",
   "ThirdPartyStorageNoStorageAlert": "Преthодно је потребно да повежете одговарајући сервис у одељку „Интеграција“. У супротном, повезивање неће бити могуће.",
   "ThirdPartyStoragePermanentSettingDescription": "Датотеке се чувају у складишту трец́е стране {{thirdpartyTitle}} у \"{{thirdpartyFolderName}}\" фолдеру.\n<strong>{{thirdpartyPath}}</strong>",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Да бисте повезали складиште треће стране, потребно је да додате одговарајућу услугу у одељку Интеграција у подешавањима {{productName}}. Обратите се власнику или администратору радног простора да укључи интеграцију.",
   "UserEmail": "Кориснички Емаил",
   "UserIPAddress": "Корисничка IP адреса",
   "UserName": "Корисничко име",

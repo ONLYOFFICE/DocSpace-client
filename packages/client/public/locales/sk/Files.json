@@ -6,6 +6,7 @@
   "AddedToClipboard": "Položky pridané do schránky",
   "AddNewLink": "Pridať nový odkaz",
   "AddUsersOrGroupsDescription": "Pridaní administrátori budú môcť vytvárať miestnosti pomocou tejto šablóny.",
+  "AddUsersOrGroupsInfo": "Tu sa zobrazujú iba <1>správcovia pracovného priestoru</1> a <1>administrátori miestností</1>",
   "AddUsersOrGroupsInfoGroups": "Iba <1>{{productName}}</1> a <1> Administrátori miestnosti </1> z vybraných skupín budú môcť vytvárať miestnosti pomocou tejto šablóny.",
   "AddUsersOrGroupsTitle": "Pridať Používateľov alebo Skupiny",
   "AfterFilesWillBeDeletedPermanently": "Po tom, ako budú súbory natrvalo vymazané.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "Analyzovať odpovede",
   "ArchiveAction": "Vyprázdniť archív",
   "ArchiveEmptyScreenUser": "Tu sa zobrazia miestnosti, ktoré boli archivované.",
+  "ChangeAgentOwnerSelectorInfo": "Majiteľom agenta sa môže stať iba administrátor miestnosti alebo správca pracovného priestoru",
   "ChangeTheAgentOwner": "Zmeniť vlastníka agenta",
   "ClientSearchDecryptingNames": "Dešifrovanie názvov súborov… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Priečinok je príliš veľký. Výsledky vyhľadávania môžu byť neúplné.",
@@ -125,6 +127,7 @@
   "TableName": "Názov tabuľky",
   "Template": "Šablóna",
   "TemplateAvailable": "Šablóna dostupná pre všetkých",
+  "TemplateAvailableDescription": "Všetci správcovia pracovného priestoru a administrátori miestností budú môcť pomocou tejto šablóny vytvárať miestnosti.",
   "TemplateName": "Názov šablóny",
   "TemplateOwner": "Vlastník šablóny",
   "TemplateRemoved": "Vybrané šablóny miestností boli odstránené",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "Súbor nie je možné presunúť do tejto miestnosti. Pokúste sa presunúť {{ organizationName }} PDF formulár.",
   "WarningMoveToFormRoomServal": "Presunutie viacerých súborov do miestnosti na vyplnenie formulárov nie je podporované. Premiestňujte jeden {{ organizationName }} PDF formulára naraz.",
   "WillBeDeletedPermanently": "{{date}} bude natrvalo odstránený",
-  "YouLeftTheAgent": "Opustili ste agenta."
+  "YouLeftTheAgent": "Opustili ste agenta.",
+  "YourUserTypeHasChanged": "Váš typ používateľa zmenil správca pracovného priestoru <1>{{adminName}}</1> na <1>„{{userType}}“</1>."
 }

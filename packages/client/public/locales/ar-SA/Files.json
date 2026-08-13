@@ -6,6 +6,7 @@
   "AddedToClipboard": "تم إضافة العناصر إلى الحافظة",
   "AddNewLink": "إضافة رابط جديد",
   "AddUsersOrGroupsDescription": "سيتمكن المسؤولون المضافون من إنشاء غرف باستخدام هذا القالب.",
+  "AddUsersOrGroupsInfo": "يتم عرض <1>مسؤولي مساحة العمل</1> و<1>مسؤولي الغرف</1> فقط هنا",
   "AddUsersOrGroupsInfoGroups": "فقط <1>{{productName}}</1> و<1>مسؤولو الغرف</1> من المجموعات المحددة سيتمكنون من إنشاء غرف باستخدام هذا القالب.",
   "AddUsersOrGroupsTitle": "إضافة مستخدمين أو مجموعات",
   "AfterFilesWillBeDeletedPermanently": "بعد ذلك سيتم حذف الملفات نهائيًا.",
@@ -13,6 +14,7 @@
   "AnalyzeResponses": "تحليل الاستجابات",
   "ArchiveAction": "أرشيف فارغ",
   "ArchiveEmptyScreenUser": "ستظهر هنا الغرف التي تم أرشفتها.",
+  "ChangeAgentOwnerSelectorInfo": "يمكن لمسؤول الغرفة أو مسؤول مساحة العمل فقط أن يصبح مالكًا للوكيل",
   "ChangeTheAgentOwner": "تغيير مالك الوكيل",
   "ClientSearchDecryptingNames": "جارٍ فك تشفير أسماء الملفات… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "المجلد كبير جدًا. قد تكون نتائج البحث غير مكتملة.",
@@ -125,6 +127,7 @@
   "TableName": "اسم الجدول",
   "Template": "قالب",
   "TemplateAvailable": "القالب متاح للجميع",
+  "TemplateAvailableDescription": "سيتمكن جميع مسؤولي مساحة العمل ومسؤولي الغرف من إنشاء غرف باستخدام هذا القالب.",
   "TemplateName": "اسم القالب",
   "TemplateOwner": "مالك القالب",
   "TemplateRemoved": "تم حذف قوالب الغرف المحددة",
@@ -139,5 +142,6 @@
   "WarningMoveToFormRoom": "لا يمكن نقل الملف إلى هذه الغرفة. يُرجى محاولة نقل نموذج PDF الخاص بـ {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "لا يُسمح بنقل أكثر من ملف واحد إلى غرفة تعبئة النماذج. يرجى نقل نماذج PDF من {{ organizationName }} بشكل فردي.",
   "WillBeDeletedPermanently": "سيتم حذف {{date}} نهائيًا",
-  "YouLeftTheAgent": "لقد غادرتم الوكيل"
+  "YouLeftTheAgent": "لقد غادرتم الوكيل",
+  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بك إلى <1>«{{userType}}»</1> بواسطة مسؤول مساحة العمل <1>{{adminName}}</1>."
 }

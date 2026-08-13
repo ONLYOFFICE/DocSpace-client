@@ -3,7 +3,7 @@
   "content": "Please create the first room in {{sectionName}}.",
   "content_en_sha1_hash": "52d0bc357573a2bc6f7486caa5c8d2793a7f50c7",
   "created_at": "2025-10-27T16:14:14.285Z",
-  "updated_at": "2026-07-07T08:59:22.034Z",
+  "updated_at": "2026-08-13T10:58:03.384Z",
   "comment": {
     "text": "This is a descriptive text displayed when no rooms are present in a section. It prompts the user to create the first room, with `{{sectionName}}` being a placeholder for the name of the section (e.g., \"Rooms\").",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 350,
+      "line_number": 352,
       "context": "isBase ? <EmptyScreenRoomsLight /> : <EmptyScreenRoomsDark />\n }\n emptyScreenHeader={emptyScreenHeader ?? t(\"EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"EmptyRoomsDescriptionText\", {\n sectionName: isForms ? t(\"Forms\") : t(\"Rooms\"),\n })\n }\n searchEmptyScreenImage={\n isBase ? (",
       "module": "/libs/ui-kit"
     },

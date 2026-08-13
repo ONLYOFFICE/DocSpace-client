@@ -3,7 +3,7 @@
   "content": "New agent",
   "content_en_sha1_hash": "d200d92a331aabd52dfb0d7911c95be2fdd35eab",
   "created_at": "2025-10-27T16:14:17.785Z",
-  "updated_at": "2026-08-06T14:20:57.498Z",
+  "updated_at": "2026-08-13T10:58:03.024Z",
   "comment": {
     "text": "This is a button label or an item in a dropdown list. It allows users to create a new AI agent.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 356,
+      "line_number": 388,
       "context": "const agentItems = React.useMemo<QuickActionItem[]>(\n () => [\n {\n id: \"quick-new-agent\",\n icon: <CreateAgentIcon />,\n label: t(\"Common:NewAgent\"),\n onClick: () => dispatchCreateAgent(currentFolderId),\n },\n ],\n [t, currentFolderId],\n );",
       "module": "/packages/client"
     },

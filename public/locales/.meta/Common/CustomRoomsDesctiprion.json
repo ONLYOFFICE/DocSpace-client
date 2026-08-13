@@ -3,7 +3,7 @@
   "content": "Adapt workflows and permissions for specific tasks or teams.",
   "content_en_sha1_hash": "4fb76c3e1908f57e55f242ce999422a4bb1f223b",
   "created_at": "2026-06-25T19:30:57.364Z",
-  "updated_at": "2026-08-06T14:20:57.529Z",
+  "updated_at": "2026-08-13T10:58:03.071Z",
   "comment": {
     "text": "Description text for a feature item within a promotional dialog, explaining the utility of Custom Rooms.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 160,
-      "context": "description: t(\"Common:VDRRoomsDescription\"),\n },\n {\n Icon: CustomRoomIcon,\n title: t(\"Common:CustomRoomsTitle\"),\n description: t(\"Common:CustomRoomsDesctiprion\"),\n },\n ],\n IllustrationLight: RoomsPreviewLight,\n IllustrationDark: RoomsPreviewDark,\n openLabel: t(\"Common:Open\"),",
+      "line_number": 162,
+      "context": "description: t(\"Common:VDRRoomsDescription\"),\n },\n {\n Icon: CustomRoomIcon,\n title: t(\"Common:CustomRoomsTitle\"),\n description: t(\"Common:CustomRoomsDesctiprion\"),\n },\n ],\n illustrationLight: RoomsPreviewLight,\n illustrationDark: RoomsPreviewDark,\n openLabel: t(\"Common:Open\"),",
       "module": "/packages/client"
     }
   ],

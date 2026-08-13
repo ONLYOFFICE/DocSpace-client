@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
@@ -44,6 +44,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
+import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -60,7 +61,7 @@ import type { TDocsConnectInfo } from "@docspace/shared/api/docs-connect/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { getDocsConnectTrialState } from "../utils";
-import { DOCS_CONNECT_ROUTE } from "../constants";
+import { DOCS_CONNECT_ROUTE, type TDocsConnectTab } from "../constants";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
 
 import Statistics from "./Statistics";
@@ -74,9 +75,12 @@ interface TenantPanelProps {
   openBuyPlan?: (mode: "trial" | "edit") => void;
   copySecretKey?: (t: TTranslation) => void;
   openCancelPlanDialog?: () => void;
+  isStatisticsRefreshing?: boolean;
+  refreshStatistics?: () => Promise<void>;
+  abortStatisticsRefresh?: () => void;
 }
 
-const getTabFromLocation = () => {
+const getTabFromLocation = (): TDocsConnectTab => {
   const segment = window.location.pathname.split("/").filter(Boolean).pop();
   return segment === "settings" || segment === "preview"
     ? segment
@@ -88,10 +92,24 @@ const TenantPanel = ({
   openBuyPlan,
   copySecretKey,
   openCancelPlanDialog,
+  isStatisticsRefreshing = false,
+  refreshStatistics,
+  abortStatisticsRefresh,
 }: TenantPanelProps) => {
   const { t } = useTranslation(["DocsConnect", "Common"]);
   const navigate = useNavigate();
-  const [selectedTab, setSelectedTab] = useState<string>(getTabFromLocation);
+  const [selectedTab, setSelectedTab] =
+    useState<TDocsConnectTab>(getTabFromLocation);
+
+  useEffect(() => {
+    return () => abortStatisticsRefresh?.();
+  }, [abortStatisticsRefresh]);
+
+  useEffect(() => {
+    if (!isStatisticsRefreshing) {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }
+  }, [selectedTab, isStatisticsRefreshing]);
 
   if (!info) return null;
 
@@ -166,6 +184,7 @@ const TenantPanel = ({
       id: "statistics",
       name: t("DocsConnect:TabStatistics"),
       content: <Statistics />,
+      onClick: () => refreshStatistics?.(),
     },
     {
       id: "settings",
@@ -224,17 +243,22 @@ const TenantPanel = ({
 
       <Tabs
         withoutStickyIntend
+        withAnimation
         items={tabs}
         selectedItemId={selectedTab}
         onSelect={(item) => {
-          setSelectedTab(item.id);
+          const tab = item.id as TDocsConnectTab;
+
+          if (tab !== "statistics") abortStatisticsRefresh?.();
+
+          setSelectedTab(tab);
           window.history.replaceState(
             "",
             "",
             combineUrl(
               window.ClientConfig?.proxy?.url,
               config.homepage,
-              `${DOCS_CONNECT_ROUTE}/${item.id}`,
+              `${DOCS_CONNECT_ROUTE}/${tab}`,
             ),
           );
         }}
@@ -248,4 +272,7 @@ export default inject(({ docsConnectStore }: TStore) => ({
   openBuyPlan: docsConnectStore.openBuyPlan,
   copySecretKey: docsConnectStore.copySecretKey,
   openCancelPlanDialog: docsConnectStore.openCancelPlanDialog,
+  isStatisticsRefreshing: docsConnectStore.isStatisticsRefreshing,
+  refreshStatistics: docsConnectStore.refreshStatistics,
+  abortStatisticsRefresh: docsConnectStore.abortStatisticsRefresh,
 }))(observer(TenantPanel));

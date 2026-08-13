@@ -37,6 +37,8 @@
 // the payment completion page.
 export { DOCS_CONNECT_ROUTE } from "@docspace/ui-kit/billing/constants";
 
+export type TDocsConnectTab = "statistics" | "settings" | "preview";
+
 export const DOCS_CONNECT_PREVIEW = {
   editorType: "word",
   fileType: "docx",

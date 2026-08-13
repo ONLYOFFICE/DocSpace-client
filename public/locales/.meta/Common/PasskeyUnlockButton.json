@@ -3,7 +3,7 @@
   "content": "Unlock with a passkey",
   "content_en_sha1_hash": "108d9035e3ff1c946206dcbd8f84f38ffd33d82b",
   "created_at": "2026-07-27T13:07:25.606Z",
-  "updated_at": "2026-07-31T12:36:29.597Z",
+  "updated_at": "2026-08-13T10:58:03.342Z",
   "comment": {
     "text": "Button label in the passphrase modal used to initiate authentication via a passkey.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 345,
+      "line_number": 355,
       "context": "if (!isLoading && !isPasskeyUnlocking) onPasskeyUnlock();\n }}\n dataTestId=\"passkey_unlock_link\"\n tabIndex={2}\n >\n {t(\"Common:PasskeyUnlockButton\")}\n </Link>\n </div>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }

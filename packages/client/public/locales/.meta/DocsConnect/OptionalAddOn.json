@@ -3,7 +3,7 @@
   "content": "Optional add-on",
   "content_en_sha1_hash": "b5dab5aefdb080bf97c5367b0ec29238f38a86af",
   "created_at": "2026-07-27T13:07:48.511Z",
-  "updated_at": "2026-08-06T14:20:57.622Z",
+  "updated_at": "2026-08-13T10:58:03.216Z",
   "comment": {
     "text": "Secondary text label in the DocsConnect Buy Plan panel indicating that a service is an additional, non-mandatory component.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 749,
+      "line_number": 771,
       "context": "as=\"span\"\n fontSize=\"13px\"\n fontWeight={400}\n className={styles.secondaryText}\n >\n {t(\"DocsConnect:OptionalAddOn\")}\n </Text>\n </Text>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:PlusPerUserPerMonth\", {\n price: formatCurrency(devPackPrice),",
       "module": "/packages/client"
     }

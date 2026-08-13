@@ -6,7 +6,6 @@
   "AddedToClipboard": "Տարրերն ավելացվել են սեղմատախտակին",
   "AddNewLink": "Ավելացնել նոր հղում",
   "AddUsersOrGroupsDescription": "Ավելացված ադմինիստրատորները կկարողանան ստեղծել սենյակներ այս թեմփլեյտով։",
-  "AddUsersOrGroupsInfo": "Միայն <1>{{productName}}</1> և <1>Room admins</1>",
   "AddUsersOrGroupsInfoGroups": "Միայն <1>{{productName}}</1>-ը և <1>սենյակների ադմինները</1> ընտրված խմբերից կկարողանան ստեղծել սենյակներ այս թեմփլեյտով։",
   "AddUsersOrGroupsTitle": "Ավելացնել օգտատերեր կամ խմբեր",
   "AfterFilesWillBeDeletedPermanently": "Հետո ֆայլերն ընդմիշտ կջնջվեն:",
@@ -14,7 +13,6 @@
   "AnalyzeResponses": "Վերլծասխանները",
   "ArchiveAction": "Դատարկ արխիվ",
   "ArchiveEmptyScreenUser": "Սենյակները, որոնք արխիվացված են, կհայտնվեն այստեղ:",
-  "ChangeAgentOwnerSelectorInfo": "Միայն սենյակի ադմինիստրատորը կամ {{productName}} ադմինիստրատորը կարող է դառնալ գործակալի սեփականատերը",
   "ChangeTheAgentOwner": "Փոխել գործակալի սեփականատիրոջը",
   "ClientSearchDecryptingNames": "Ֆայլերի անունների վերծանում… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Պանակը չափազանց մեծ է։ Որոնման արդյունքները կարող են թերի լինել։",
@@ -127,7 +125,6 @@
   "TableName": "Աղյուսակի անուն",
   "Template": "Կաղապար",
   "TemplateAvailable": "Կաղապարները հասանելի են բոլորի համար",
-  "TemplateAvailableDescription": "Բոլոր {{productName}} և Սենյակի ադմինները կկարողանան սենյակներ ստեղծել՝ օգտագործելով այս կաղապարը:",
   "TemplateName": "Կաղապարի Անունը",
   "TemplateOwner": "Կաղապարի տեղծող",
   "TemplateRemoved": "Ընտրված սենյակի կաղապարները ջնջվել են։",
@@ -142,6 +139,5 @@
   "WarningMoveToFormRoom": "Ֆայլը չի կարող տեղափոխվել այս սենյակ: Խնդրում ենք, փորձել տեղափոխել {{ organizationName }} PDF ձևը:",
   "WarningMoveToFormRoomServal": "Մի քանի ֆայլ տեղափոխելը Ձևաթղթերի լրացման սենյակ չի աջակցվում: Միանգամից տեղափոխեք մեկ {{ organizationName }} PDF ձև:",
   "WillBeDeletedPermanently": "{{date}}-ն ընդմիշտ կջնջվի",
-  "YouLeftTheAgent": "Դուք լքել եք գործակալին",
-  "YourUserTypeHasChanged": "Օգտատիրոջ տեսակը փոխվել է <1>«{{userType}}»</1> {{productName}} ադմինի կողմից <1>{{adminName}}</1>"
+  "YouLeftTheAgent": "Դուք լքել եք գործակալին"
 }

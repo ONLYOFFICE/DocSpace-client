@@ -1,13 +1,9 @@
 {
   "AppointAdmin": "පරිපාලකයින් පත් කරන්න",
   "BackupPortal": "වැඩ අවකාශයේ දත්ත උපස්ථ කිරීම",
-  "ChangeInstruction": "{{productName}} හිමිකරු වෙනස් කිරීමට, කරුණාකර පහතින් නව හිමිකරුගේ නම තෝරන්න.",
-  "ChangeOwner": "{{productName}} හිමිකරු සංශෝධනය",
   "ChangeUser": "පරිශ්‍රීලක සංශෝධනය",
   "DoTheSame": "පරිපාලකයින් ලෙසම කරන්න",
   "ManagePortal": "වැඩ අවකාශයේ වින්‍යාසය කළමනාකරණය",
   "ManageUser": "පරිශ්‍රීලක ගිණුම් කළමනාකරණය",
-  "NewPortalOwner": "නව {{productName}} හිමිකරු",
-  "PortalOwnerCan": "{{productName}} හිමිකරුගේ වරප්‍රසාද:",
   "SetAccessRights": "ප්‍රවේශ අයිතීන් සකසන්න"
 }

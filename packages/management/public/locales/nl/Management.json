@@ -9,8 +9,6 @@
   "DecryptStorage": "Opslag ontsleutelen",
   "DecryptWarningDialogContent": "Alle werkruimtes zullen tijdens het ontsleutelen onbeschikbaar worden. Weet u zeker dat u door wilt gaan?",
   "DeleteEmptyPortalText": "U gaat de werkruimte <1>{{domain}}</1> definitief verwijderen. Deze actie kan niet ongedaan worden gemaakt.",
-  "DeleteRequestSuccess": "Verwijderingsverzoek succesvol verzonden naar het e-mailadres van de eigenaar van {{productName}} <1>{{email}}</1>",
-  "DeleteSetupPortalText": "U gaat de werkruimte <1>{{domain}}</1> met alle gegevens en accounts definitief verwijderen. Een verzoek om <1>{{domain}}</1> te verwijderen wordt naar de {{productName}} eigenaar gestuurd op het e-mailadres <1>{{email}}</1>.",
   "DeleteWarning": "De laatste werkruimte met volledige toegang kan niet worden verwijderd",
   "DomainName": "Domeinnaam",
   "DomainNotFound": "Domein niet gevonden, controleer DNS-instellingen",

@@ -6,7 +6,6 @@
   "AddedToClipboard": "Elementi dodani v odložišče",
   "AddNewLink": "Dodajte novo povezavo",
   "AddUsersOrGroupsDescription": "Dodani skrbniki bodo lahko ustvarili sobe s to predlogo.",
-  "AddUsersOrGroupsInfo": "Tukaj je prikazani samo <1>{{productName}}</1> in <1>skrbniki sobe</1>",
   "AddUsersOrGroupsInfoGroups": "Samo <1>{{productName}}</1> in <1>skrbniki sob</1> iz izbranih skupin bodo lahko ustvarili sobe s to predlogo.",
   "AddUsersOrGroupsTitle": "Dodaj uporabnike ali skupine",
   "AfterFilesWillBeDeletedPermanently": "Po tem bodo datoteke trajno izbrisane.",
@@ -14,7 +13,6 @@
   "AnalyzeResponses": "Analiziraj odzive",
   "ArchiveAction": "Prazen arhiv",
   "ArchiveEmptyScreenUser": "Tukaj bodo prikazane sobe, ki so bile arhivirane.",
-  "ChangeAgentOwnerSelectorInfo": "Samo skrbnik sobe ali skrbnik {{productName}} lahko postane lastnik agenta.",
   "ChangeTheAgentOwner": "Spremenite lastnika agenta",
   "ClientSearchDecryptingNames": "Dešifriranje imen datotek… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Mapa je prevelika. Rezultati iskanja so morda nepopolni.",
@@ -127,7 +125,6 @@
   "TableName": "Ime tabele",
   "Template": "Predloga",
   "TemplateAvailable": "Predloga na voljo vsem",
-  "TemplateAvailableDescription": "Vsi skrbniki za {{productName}} in sobo bodo lahko ustvarili sobe s to predlogo.",
   "TemplateName": "Ime predloge",
   "TemplateOwner": "Lastnik predloge",
   "TemplateRemoved": "Izbrane predloge sob so bile izbrisane",
@@ -142,6 +139,5 @@
   "WarningMoveToFormRoom": "Datoteke ni mogoče premakniti v to sobo. Poskusite premakniti obrazec PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Premikanje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Premaknite po en obrazec PDF {{ organizationName }} naenkrat.",
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
-  "YouLeftTheAgent": "Zapustili ste agenta.",
-  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>“{{userType}}”</1> skrbnik za {{productName}} <1>{{adminName}}</1>."
+  "YouLeftTheAgent": "Zapustili ste agenta."
 }

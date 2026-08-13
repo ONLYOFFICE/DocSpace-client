@@ -9,8 +9,6 @@
   "DecryptStorage": "Descifrar almacenamiento",
   "DecryptWarningDialogContent": "Todos los espacios de trabajo quedarán inaccesibles durante el proceso de descifrado. ¿Está seguro de que desea continuar?",
   "DeleteEmptyPortalText": "Va a eliminar permanentemente el espacio de trabajo <1>{{domain}}</1>. Esta acción no se puede deshacer.",
-  "DeleteRequestSuccess": "La solicitud de eliminación se ha enviado correctamente a la dirección de correo electrónico <1>{{email}}</1> del propietario de {{productName}}.",
-  "DeleteSetupPortalText": "Va a eliminar permanentemente el espacio de trabajo <1>{{domain}}</1> con todos los datos y cuentas. Se enviará una solicitud de eliminación de <1>{{domain}}</1> al propietario de {{productName}} a la dirección de correo electrónico <1>{{email}}</1>.",
   "DeleteWarning": "No se puede eliminar el último espacio de trabajo con acceso completo",
   "DomainName": "Nombre de dominio",
   "DomainNotFound": "No se ha encontrado el dominio, verifique la configuración de DNS",

@@ -9,8 +9,6 @@
   "DecryptStorage": "Yaddaşın şifrəsini açın",
   "DecryptWarningDialogContent": "Şifrənin açılması prosesi zamanı bütün iş sahələri əlçatmaz olacaq. Davam etmək istədiyinizə əminsiniz?",
   "DeleteEmptyPortalText": "<1>{{domain}}</1> iş sahəsini həmişəlik siləcəksiniz. Bu əməliyyat geri qaytarıla bilməz.",
-  "DeleteRequestSuccess": "Silinmə sorğusu uğurla {{productName}} adlı istifadəçinin <1>{{email}}</1> e-poçt ünvanına göndərildi",
-  "DeleteSetupPortalText": "Siz bütün məlumatların və hesabların yerləşdiyi <1>{{domain}}</1> iş sahəsini həmişəlik siləcəksiniz. <1>{{domain}}</1> silinməsi üçün sorğu {{productName}} sahibinə <1>{{email}}</1> e-poçt ünvanına göndəriləcək.",
   "DeleteWarning": "Sonuncu tam girişli iş sahəsi silinə bilməz",
   "DomainName": "Domen adı",
   "DomainNotFound": "Domen adı tapılmadı, zəhmət olmasa, DNS parametrlərini yoxlayın",

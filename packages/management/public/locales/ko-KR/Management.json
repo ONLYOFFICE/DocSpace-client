@@ -9,8 +9,6 @@
   "DecryptStorage": "스토리지 복호화",
   "DecryptWarningDialogContent": "복호화 프로세스 중에는 모든 워크스페이스를 사용할 수 없습니다. 그래도 계속하시겠습니까?",
   "DeleteEmptyPortalText": "<1>{{domain}}</1> 워크스페이스를 영구적으로 삭제하려고 합니다. 이 작업은 취소할 수 없습니다.",
-  "DeleteRequestSuccess": "삭제 요청이 {{productName}} 소유자의 이메일 주소(<1>{{email}}</1>)로 전송되었습니다.",
-  "DeleteSetupPortalText": "<1>{{domain}}</1> 워크스페이스를 모든 데이터 및 계정과 함께 영구적으로 삭제하려고 합니다. <1>{{domain}}</1> 삭제 요청이 {{productName}} 소유자에게 이메일(<1>{{email}}</1>)로 전송됩니다.",
   "DeleteWarning": "마지막 전체 액세스 워크스페이스는 삭제할 수 없습니다",
   "DomainName": "도메인 이름",
   "DomainNotFound": "도메인을 찾을 수 없습니다. DNS 설정을 확인하세요",

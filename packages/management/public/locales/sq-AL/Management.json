@@ -9,8 +9,6 @@
   "DecryptStorage": "Dekriptoni hapësirën e ruajtjes",
   "DecryptWarningDialogContent": "Të gjitha hapësirat e punës do të bëhen të padisponueshme gjatë procesit të dekriptimit. Jeni i sigurt që dëshironi të vazhdoni?",
   "DeleteEmptyPortalText": "Ju do të fshini përgjithmonë hapësirën e punës <1>{{domain}}</1>. Ky veprim nuk mund të zhbëhet.",
-  "DeleteRequestSuccess": "Kërkesa për fshirje u dërgua me sukses në adresën e emailit të pronarit të {{productName}} <1>{{email}}</1>",
-  "DeleteSetupPortalText": "Ju do të fshini përgjithmonë hapësirën e punës <1>{{domain}}</1> me të gjitha të dhënat dhe llogaritë. Një kërkesë për të fshirë <1>{{domain}}</1> do t'i dërgohet zotëruesit të {{productName}} në adresën e email-it <1>{{email}}</1>.",
   "DeleteWarning": "Hapësira e fundit e punës me akses të plotë nuk mund të fshihet",
   "DomainName": "Emri i domenit",
   "DomainNotFound": "Domeni nuk u gjet, ju lutemi kontrolloni te cilësimet e DNS",

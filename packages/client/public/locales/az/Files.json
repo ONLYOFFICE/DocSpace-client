@@ -6,7 +6,6 @@
   "AddedToClipboard": "Elementlər mübadilə buferinə əlavə edildi",
   "AddNewLink": "Yeni keçid əlavə edin",
   "AddUsersOrGroupsDescription": "Əlavə edilmiş administratorlar bu şablondan istifadə edərək otaqlar yarada biləcəklər.",
-  "AddUsersOrGroupsInfo": "Burada yalnız <1>{{productName}}</1> və <1>Otaq adminləri</1> görünür",
   "AddUsersOrGroupsInfoGroups": "Bu şablondan istifadə etməklə seçilmiş qruplardan yalnız <1>{{productName}}</1> və <1>Otaq adminləri</1> otaqlar yarada biləcəklər.",
   "AddUsersOrGroupsTitle": "İstifadəçilər və ya Qruplar əlavə edin",
   "AfterFilesWillBeDeletedPermanently": "Sonra fayllar həmişəlik silinəcək.",
@@ -14,7 +13,6 @@
   "AnalyzeResponses": "Cavabları analiz et",
   "ArchiveAction": "Boş arxiv",
   "ArchiveEmptyScreenUser": "Arxivlənmiş otaqlar burada görünəcək.",
-  "ChangeAgentOwnerSelectorInfo": "Ancaq otaq administratorı və ya {{productName}} administratoru agentin sahibi ola bilər.",
   "ChangeTheAgentOwner": "Agent sahibi dəyişdir",
   "ClientSearchDecryptingNames": "Fayl adlarının şifrəsi açılır… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Qovluq çox böyükdür. Axtarış nəticələri natamam ola bilər.",
@@ -127,7 +125,6 @@
   "TableName": "Cədvəl adı",
   "Template": "Şablon",
   "TemplateAvailable": "Şablon hər kəs üçün əlçatandır",
-  "TemplateAvailableDescription": "Bütün {{productName}} və Otaq administratorları bu şablondan istifadə edərək otaqlar yarada biləcəklər.",
   "TemplateName": "Şablon Adı",
   "TemplateOwner": "Şablon sahibi",
   "TemplateRemoved": "Seçilmiş otaq şablonları silindi",
@@ -142,6 +139,5 @@
   "WarningMoveToFormRoom": "Fayl bu otağa köçürülə bilməz. {{ organizationName }} PDF formasını köçürməyə cəhd edin.",
   "WarningMoveToFormRoomServal": "Birdən çox faylın Forma Doldurma otağına köçürülməsi dəstəklənmir. Eyni anda bir {{organizationName }} PDF formasını köçürün.",
   "WillBeDeletedPermanently": "{{date}} həmişəlik silinəcək",
-  "YouLeftTheAgent": "Siz agentdən ayrılıbsınız.",
-  "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib."
+  "YouLeftTheAgent": "Siz agentdən ayrılıbsınız."
 }

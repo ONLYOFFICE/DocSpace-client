@@ -6,7 +6,6 @@
   "AddedToClipboard": "Ставке додате у привремену меморију",
   "AddNewLink": "Додај нови линк",
   "AddUsersOrGroupsDescription": "Додати администратори моћи ће да креирају собе користећи овај шаблон.",
-  "AddUsersOrGroupsInfo": "Овде су приказани само <1>{{productName}}</1> и <1> администратори соба </1>.",
   "AddUsersOrGroupsInfoGroups": "Само <1>{{productName}}</1> и <1>администратори соба</1> из изабраних група моћи ће да креирају собе користећи овај шаблон.",
   "AddUsersOrGroupsTitle": "Додајте кориснике или групе.",
   "AfterFilesWillBeDeletedPermanently": "Након што се датотеке трајно обришу.",
@@ -14,7 +13,6 @@
   "AnalyzeResponses": "Анализирај одговоре",
   "ArchiveAction": "Празна архива",
   "ArchiveEmptyScreenUser": "Собе које су архивиране ће се појавити овде.",
-  "ChangeAgentOwnerSelectorInfo": "Само администратор собе или {{productName}} администратор може постати власник агента",
   "ChangeTheAgentOwner": "Промените власника агента",
   "ClientSearchDecryptingNames": "Дешифровање назива датотека… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Фасцикла је превелика. Резултати претраге могу бити непотпуни.",
@@ -127,7 +125,6 @@
   "TableName": "Назив табеле",
   "Template": "Шаблон",
   "TemplateAvailable": "Шаблон доступан свима",
-  "TemplateAvailableDescription": "Сви корисници {{productName}} и администратори соба моћи ће да креирају собе користећи овај шаблон.",
   "TemplateName": "Име шаблона",
   "TemplateOwner": "Власник шаблона",
   "TemplateRemoved": "Изабрани шаблони соба су обрисани",
@@ -142,6 +139,5 @@
   "WarningMoveToFormRoom": "Фајл не може бити преместен у ову собу. Покушајте да преместите {{ organizationName }} PDF образац.",
   "WarningMoveToFormRoomServal": "Премјештање више фајлова у собу за попуњавање образаца није подржано. Преместите један {{ organizationName }} PDF образац у исто време.",
   "WillBeDeletedPermanently": "{{date }} ће бити трајно обрисан",
-  "YouLeftTheAgent": "Оставили сте агента",
-  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>."
+  "YouLeftTheAgent": "Оставили сте агента"
 }

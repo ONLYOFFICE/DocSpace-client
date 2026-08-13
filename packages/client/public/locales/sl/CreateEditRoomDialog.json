@@ -37,7 +37,6 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Izberi shrambo",
   "ThirdPartyStorageNoStorageAlert": "Predhodno morate povezati ustrezno storitev v razdelku »Integracija«. V nasprotnem primeru povezava ne bo mogoča.",
   "ThirdPartyStoragePermanentSettingDescription": "Datoteke so shranjene v shrambi tretje osebe {{thirdpartyTitle}} v mapi »{{thirdpartyFolderName}}«.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Če želite povezati shrambo tretje osebe, morate dodati ustrezno storitev v razdelku Integracija v nastavitvah {{productName}}. Obrnite se na lastnika ali skrbnika {{productName}}, da omogočite integracijo.",
   "UserEmail": "Uporabnikov Email",
   "UserIPAddress": "Uporabnikov IP naslov",
   "UserName": "Uporabniško ime",

@@ -37,7 +37,6 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Wybierz pamięć",
   "ThirdPartyStorageNoStorageAlert": "Najpierw należy połączyć odpowiednią usługę w sekcji „Integracje”. W przeciwnym razie połączenie nie będzie możliwe.",
   "ThirdPartyStoragePermanentSettingDescription": "Pliki są przechowywane w pamięci zewnętrznej {{thirdpartyTitle}}, w katalogu \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Aby podłączyć pamięć podmiotu trzeciego, musisz dodać odpowiednią usługę w sekcji Integracja, w ustawieniach {{productName}}. Skontaktuj się z właścicielem {{productName}} lub administratorem, aby włączyć integrację.",
   "UserEmail": "Adres e-mail użytkownika",
   "UserIPAddress": "Adres IP użytkownika",
   "UserName": "Nazwa użytkownika",

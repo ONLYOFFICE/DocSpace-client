@@ -9,8 +9,6 @@
   "DecryptStorage": "ストレージの暗号を解除する",
   "DecryptWarningDialogContent": "すべてのワークスペースは復号プロセス中に利用できなくなります。続行してもよろしいですか？",
   "DeleteEmptyPortalText": "<1>{{domain}}</1>のワークスペースを削除しようとしています。この操作は元に戻せません。",
-  "DeleteRequestSuccess": "削除リクエストは、{{productName}}のオーナーの<1>{{email}}</1>メールアドレスまで送信されました",
-  "DeleteSetupPortalText": "すべてのデータとアカウントを含む <1>{{domain}}</1> ワークスペースを恒久的に削除します。 <1>{{domain}}</1> の削除リクエストが、{{productName}} のオーナーのメールアドレス <1>{{email}}</1> に送信されます。",
   "DeleteWarning": "最後のフルアクセスのワークスペースは削除できません。",
   "DomainName": "ドメイン名",
   "DomainNotFound": "ドメインが見つかりません。DNS設定を確認してください。",

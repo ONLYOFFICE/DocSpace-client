@@ -37,7 +37,6 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Chọn bộ nhớ",
   "ThirdPartyStorageNoStorageAlert": "Trước tiên, bạn cần kết nối dịch vụ tương ứng trong phần 'Tích hợp'. Nếu không, kết nối sẽ không thể thực hiện được.",
   "ThirdPartyStoragePermanentSettingDescription": "Các tập tin được lưu trữ trong bộ nhớ của bên thứ ba {{thirdpartyTitle}} trong thư mục \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Để kết nối bộ nhớ của bên thứ ba, bạn cần thêm dịch vụ tương ứng trong phần Tích hợp của cài đặt {{productName}}. Liên hệ với chủ sở hữu hoặc quản trị viên {{productName}} để kích hoạt tích hợp.",
   "UserEmail": "Email người dùng",
   "UserIPAddress": "Địa chỉ IP người dùng",
   "UserName": "Tên người dùng",

@@ -1,13 +1,9 @@
 {
   "AppointAdmin": "Definir administradores",
   "BackupPortal": "Fazer uma cópia de segurança dos dados do espaço de trabalho",
-  "ChangeInstruction": "Para mudar o proprietário do {{productName}}, por favor escolha abaixo o nome do novo proprietário.",
-  "ChangeOwner": "Mudar o proprietário do {{productName}}",
   "ChangeUser": "Mudar o utilizador",
   "DoTheSame": "Faça o mesmo como administrador",
   "ManagePortal": "Gerir a configuração do espaço de trabalho",
   "ManageUser": "Gerir as contas dos utilizadores",
-  "NewPortalOwner": "Novo proprietário do {{productName}}",
-  "PortalOwnerCan": "O Proprietário do {{productName}} pode:",
   "SetAccessRights": "Definir os direitos de acesso"
 }

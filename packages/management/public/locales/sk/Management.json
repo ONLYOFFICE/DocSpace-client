@@ -9,8 +9,6 @@
   "DecryptStorage": "Dešifrovať úložisko",
   "DecryptWarningDialogContent": "Počas procesu dešifrovania sa všetky pracovné priestory stanú nedostupnými. Ste si istí, že chcete pokračovať?",
   "DeleteEmptyPortalText": "Chystáte sa nenávratne vymazať pracovný priestor <1>{{domain}}</1>. Tento krok sa nedá vrátiť späť.",
-  "DeleteRequestSuccess": "Žiadosť o vymazanie bola úspešne odoslaná na e-mail majiteľa {{productName}} <1>{{email}}</1>",
-  "DeleteSetupPortalText": "Chystáte sa natrvalo odstrániť pracovný priestor <1>{{domain}}</1> so všetkými údajmi a účtami. Žiadosť o odstránenie <1>{{domain}}</1> bude odoslaná vlastníkovi {{productName}} na e-mailovú adresu <1>{{email}}</1>.",
   "DeleteWarning": "Posledný pracovný priestor s plným prístupom nie je možné vymazať",
   "DomainName": "Meno domény",
   "DomainNotFound": "Doména nebola nájdená, skontrolujte ju v nastaveniach DNS",

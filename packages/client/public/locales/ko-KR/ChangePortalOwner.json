@@ -1,13 +1,9 @@
 {
   "AppointAdmin": "관리자 지정",
   "BackupPortal": "워크스페이스 데이터 백업",
-  "ChangeInstruction": "{{productName}} 소유자를 변경하려면 아래에서 새 소유자의 이름을 선택하세요.",
-  "ChangeOwner": "{{productName}} 소유자 변경",
   "ChangeUser": "사용자 변경",
   "DoTheSame": "관리자와 동일",
   "ManagePortal": "워크스페이스 구성 관리",
   "ManageUser": "사용자 계정 관리",
-  "NewPortalOwner": "새 {{productName}} 소유자",
-  "PortalOwnerCan": "{{productName}} 소유자가 할 수 있는 것:",
   "SetAccessRights": "액세스 권한 설정"
 }

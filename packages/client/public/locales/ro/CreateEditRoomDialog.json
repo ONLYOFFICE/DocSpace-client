@@ -37,7 +37,6 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Selectaţi stocarea",
   "ThirdPartyStorageNoStorageAlert": "Mai întâi, trebuie să vă conectați cu acest cont de stocare în secţiunea Integrare. Altfel, nu se va stabili o conexiune.",
   "ThirdPartyStoragePermanentSettingDescription": "Fişiere sunt stocate în spaţiul de stocare de la terțe{{thirdpartyTitle}} în folderul \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Pentru a conecta un serviciu terț de stocare, trebuie să adăugaţi serviciul corespunzător în secţiunea Integrare din setările {{productName}}. Contactaţi proprietarul sau administratorul {{productName}} pentru a activa această integrare.",
   "UserEmail": "Adresa de e-mail a utilizatorului",
   "UserIPAddress": "Adresa IP a utilizatorului",
   "UserName": "Nume de utilizator",

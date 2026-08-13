@@ -1,13 +1,9 @@
 {
   "AppointAdmin": "Emëroni administratorë",
   "BackupPortal": "Rezervo të dhënat e hapësirës së punës",
-  "ChangeInstruction": "Për të ndryshuar pronarin e {{productName}}, ju lutem zgjidhni emrin e pronarit të ri më poshtë.",
-  "ChangeOwner": "Ndryshoni pronarin {{productName}}",
   "ChangeUser": "Ndryshoni përdoruesin",
   "DoTheSame": "Bëni njëlloj si administratorët",
   "ManagePortal": "Menaxhoni konfigurimin e hapësirës së punës",
   "ManageUser": "Menaxhoni llogaritë e përdoruesve",
-  "NewPortalOwner": "Pronar i ri {{productName}}",
-  "PortalOwnerCan": "{{productName}} pronari mundet:",
   "SetAccessRights": "Vendosni të drejtat e aksesit"
 }

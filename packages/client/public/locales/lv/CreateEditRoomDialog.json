@@ -37,7 +37,6 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Izvēlieties krātuvi",
   "ThirdPartyStorageNoStorageAlert": "Vispirms attiecīgais pakalpojums ir jāpievieno sadaļā Integrācija (Integration). Pretējā gadījumā savienojums nebūs iespējams.",
   "ThirdPartyStoragePermanentSettingDescription": "Faili tiek glabāti trešās puases {{thirdpartyTitle}} krāvnē mapē \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Lai pievienotu trešās puses krātuvi, jums ir jāpievieno atbilstošais pakalpojums {{productName}} iestatījumu sadaļā Integrācija. Lai iespējotu integrāciju, sazinieties ar {{productName}} īpašnieku vai administratoru.",
   "UserEmail": "Lietotāja e-pasts",
   "UserIPAddress": "Lietotāja IP adrese",
   "UserName": "Lietotājvārds",

@@ -9,8 +9,6 @@
   "DecryptStorage": "Depolama alanını şifrele",
   "DecryptWarningDialogContent": "Şifre çözme işlemi sırasında tüm çalışma alanları kullanılamaz hale gelecektir. Devam etmek istediğinizden emin misiniz?",
   "DeleteEmptyPortalText": "<1>{{domain}}</1> çalışma alanını kalıcı olarak sileceksiniz. Bu eylem geri alınamaz.",
-  "DeleteRequestSuccess": "Silme talebi {{productName}} sahibinin <1>{{email}}</1> e-posta adresine başarıyla gönderildi ",
-  "DeleteSetupPortalText": "<1>{{domain}}</1> çalışma alanını tüm veriler ve hesaplar ile birlikte kalıcı olarak sileceksiniz. <1>{{domain}}</1> alanını silme isteği {{productName}} sahibine <1>{{email}}</1> e-posta adresine gönderilecek.",
   "DeleteWarning": "Son tam erişimli çalışma alanı silinemez",
   "DomainName": "Alan(Domain) adı",
   "DomainNotFound": "Alan adı bulunamadı, lütfen DNS ayarlarını kontrol edin",

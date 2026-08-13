@@ -37,7 +37,6 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Speicher auswählen",
   "ThirdPartyStorageNoStorageAlert": "Zuvor müssen Sie den entsprechenden Dienst im Abschnitt \"Integration\" verbinden. Andernfalls wird die Verbindung nicht möglich sein.",
   "ThirdPartyStoragePermanentSettingDescription": "Die Dateien werden in einem Drittspeicher {{thirdpartyTitle}} im Ordner \"{{thirdpartyFolderName}}\" gespeichert.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Um einen Speicherplatz eines Drittanbieters zu verbinden, müssen Sie den entsprechenden Dienst im Abschnitt Integration der {{productName}}-Einstellungen hinzufügen. Kontaktieren Sie den {{productName}}-Besitzer oder -Administrator, um die Integration zu aktivieren.",
   "UserEmail": "Benutzer-E-Mail",
   "UserIPAddress": "Benutzer-IP-Adresse",
   "UserName": "Benutzername",

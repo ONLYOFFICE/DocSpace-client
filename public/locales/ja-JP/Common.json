@@ -74,7 +74,7 @@
   "AddUserToRoom": "ルームにユーザーを追加",
   "AdjustStorageToExactAmount": "必要な正確な量にストレージを調整してください",
   "AdminAdjustment": "管理者の調整",
-  "AdministratorDescription": "ワークスペースの設定、ルームの作成と管理、ワークスペースやバーチャルルームでのユーザーの招待と管理機能、アクセス権の管理機能。",
+  "AdministratorDescription": "ワークスペースの構成、ルームの作成と管理、ワークスペース内および仮想ルームでのユーザーの招待と管理、アクセス権の管理。",
   "AdminsAddedAmount": "+{{admins}}人の管理者",
   "AdvancedFilter": "検索オプション",
   "AdvancedSettings": "詳細設定",

@@ -74,7 +74,7 @@
   "AddUserToRoom": "Ajouter un utilisateur à la salle",
   "AdjustStorageToExactAmount": "Ajustez le stockage à la quantité exacte dont vous avez besoin",
   "AdminAdjustment": "Ajustement des administrateurs",
-  "AdministratorDescription": "Configuration de l'espace de travail, création et administration de salles, possibilité d’inviter et de gérer des utilisateurs dans l'espace de travail et dans les salles virtuelles, possibilité de gérer les droits d’accès.",
+  "AdministratorDescription": "Configuration de l'espace de travail, création et administration de salles, possibilité d'inviter et de gérer des utilisateurs dans l'espace de travail et dans les salles virtuelles, possibilité de gérer les droits d'accès.",
   "AdminsAddedAmount": "+{{admins}} administrateurs",
   "AdvancedFilter": "Options de recherche",
   "AdvancedSettings": "Paramètres avancés",

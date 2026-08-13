@@ -74,7 +74,7 @@
   "AddUserToRoom": "Gebruiker aan kamer toevoegen",
   "AdjustStorageToExactAmount": "Pas de opslag aan naar de exacte hoeveelheid die u nodig heeft",
   "AdminAdjustment": "Beheerdersaanpassing",
-  "AdministratorDescription": "werkruimte configuratie, kamer aanmaken en beheren, mogelijkheid om gebruikers uit te nodigen en te beheren in werkruimte en in virtuele kamers, mogelijkheid om toegangsrechten te beheren.",
+  "AdministratorDescription": "Configuratie van de werkruimte, aanmaken en beheren van kamers, mogelijkheid om gebruikers uit te nodigen en te beheren in de werkruimte en in virtuele kamers, mogelijkheid om toegangsrechten te beheren.",
   "AdminsAddedAmount": "+{{admins}} beheerders",
   "AdvancedFilter": "Zoekopties",
   "AdvancedSettings": "Geavanceerde Instellingen",

@@ -74,7 +74,7 @@
   "AddUserToRoom": "Thêm người dùng vào phòng",
   "AdjustStorageToExactAmount": "Điều chỉnh dung lượng lưu trữ theo đúng nhu cầu của bạn",
   "AdminAdjustment": "Điều chỉnh quản trị viên",
-  "AdministratorDescription": "Đặt cấu hình không gian làm việc, tạo phòng và quản trị, khả năng mời và quản lý người dùng trong không gian làm việc và trong phòng ảo, khả năng quản lý quyền truy cập.",
+  "AdministratorDescription": "Cấu hình không gian làm việc, tạo và quản lý phòng, khả năng mời và quản lý người dùng trong không gian làm việc và trong các phòng ảo, khả năng quản lý quyền truy cập.",
   "AdminsAddedAmount": "+{{admins}} quản trị viên",
   "AdvancedFilter": "Tùy chọn tìm kiếm",
   "AdvancedSettings": "Cài đặt Nâng cao",

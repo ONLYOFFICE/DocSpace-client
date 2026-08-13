@@ -1051,7 +1051,7 @@
   "GoToTariffPlan": "前往资费套餐",
   "GracePeriodActivatedDescription": "在宽限期内，管理员无法创建新房间和添加新用户。宽限期截止后，工作区将不可用，直到付款完成。",
   "GracePeriodActivatedInfo": "宽限期将于 <1>{{fromDate}} 至 {{byDate}}</1> 间生效（剩余天数：{{delayDaysCount}}）。",
-  "GracePeriodActivatedNotice": "<1>宽限期：{{fromDate}} – {{byDate}}（剩余 {{delayDaysCount}} 天）。</1>在此期间，管理员无法创建房间、AI 智能体或添加用户。{{byDate}} 之后，工作区 将不可用，直到付款完成。",
+  "GracePeriodActivatedNotice": "<1>宽限期：{{fromDate}} – {{byDate}}（剩余 {{delayDaysCount}} 天）。</1>在此期间，管理员无法创建房间、AI 智能体或添加用户。{{byDate}} 之后，工作区将不可用，直到付款完成。",
   "Group": "群组",
   "GroupMaxAvailableRoleWarning": "可以将群组添加到房间，最大角色为{{roleName}}。但是，成功添加群组后，您可以更改群组中各个用户的角色。",
   "Groups": "群组",

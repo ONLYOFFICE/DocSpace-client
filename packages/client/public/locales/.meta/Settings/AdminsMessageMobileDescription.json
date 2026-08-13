@@ -1,13 +1,13 @@
 {
   "key_path": "AdminsMessageMobileDescription",
-  "content": "Administrator Message Settings is a way to contact the workspace administrator.",
-  "content_en_sha1_hash": "9fb532ffad998241d4db210b02a6417ddc0e0559",
-  "created_at": "2026-08-12T11:00:45.341Z",
-  "updated_at": "2026-08-12T13:35:02.765Z",
+  "content": "Administrator Message Settings is a way to contact the Full admin.",
+  "content_en_sha1_hash": "7c20e3d0a30c9970b21a6e7dd658918f31cbfb01",
+  "created_at": "2026-08-13T14:37:15.342Z",
+  "updated_at": "2026-08-13T15:20:20.213Z",
   "comment": {
-    "text": "Subtitle for a category item in the mobile settings menu, explaining the purpose of the Administrator Message Settings feature.",
+    "text": "Subtitle for a category item in the mobile settings menu explaining the purpose of the Administrator Message Settings feature.",
     "is_auto": true,
-    "updated_at": "2026-08-12T13:35:02.765Z",
+    "updated_at": "2026-08-13T15:20:20.213Z",
     "model": "gemma4:26b"
   },
   "usage": [

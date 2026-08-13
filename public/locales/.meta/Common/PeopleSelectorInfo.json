@@ -1,13 +1,13 @@
 {
   "key_path": "PeopleSelectorInfo",
-  "content": "Only a room admin or the {{productName}} admin can become the owner of the room",
-  "content_en_sha1_hash": "49ede6288c65551b5c87eda23d3b479364f3a82e",
-  "created_at": "2026-08-12T11:00:31.952Z",
-  "updated_at": "2026-08-12T14:02:21.280Z",
+  "content": "Only a room or Full admin can become the owner of the room",
+  "content_en_sha1_hash": "885b82df16d2724c5a3721788163c56f05f82008",
+  "created_at": "2026-08-13T14:37:01.422Z",
+  "updated_at": "2026-08-13T14:46:40.770Z",
   "comment": {
-    "text": "Informational text in a people selector, panel, or dialog explaining the permission requirements for changing room ownership; includes the {{productName}} variable representing the brand name.",
+    "text": "Informational text used as a description for an empty state or as info text within the \"Change Room Owner\" panel and dialog to explain which user roles are eligible to become the new owner.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:10:20.216Z",
+    "updated_at": "2026-08-13T14:46:40.770Z",
     "model": "gemma4:26b"
   },
   "usage": [

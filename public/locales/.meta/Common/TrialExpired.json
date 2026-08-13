@@ -3,7 +3,7 @@
   "content": "Trial expired",
   "content_en_sha1_hash": "b4420c2f63be184a11970f1c2fdeaa3108ec551c",
   "created_at": "2025-05-19T21:30:49.343Z",
-  "updated_at": "2026-08-12T11:00:51.505Z",
+  "updated_at": "2026-08-13T14:37:21.670Z",
   "comment": {
     "text": "This is a status label indicating that a trial period has ended. It appears in the tariff bar or payment subscription details.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/index.tsx",
-      "line_number": 209,
+      "line_number": 228,
       "context": ": \"\"\n }`}\n data-testid=\"docs_connect_trial_badge\"\n >\n {expired\n ? t(\"Common:TrialExpired\")\n : t(\"Common:FreeDaysLeft\", { count: daysLeft })}\n </span>\n </>\n ) : (\n <ContextMenuButton",
       "module": "/packages/client"
     },

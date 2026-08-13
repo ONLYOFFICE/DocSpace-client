@@ -1,14 +1,14 @@
 {
   "key_path": "NewPortalOwner",
-  "content": "New {{productName}} owner",
-  "content_en_sha1_hash": "1dbd9dfcd68022a3ab1a7bcc8a0dea635c19ff3c",
-  "created_at": "2025-05-19T21:30:56.996Z",
-  "updated_at": "2026-05-15T14:00:06.644Z",
+  "content": "New workspace owner",
+  "content_en_sha1_hash": "552890470e77afa35a0b3a502acdb716e5851e23",
+  "created_at": "2026-08-13T14:37:19.551Z",
+  "updated_at": "2026-08-13T14:59:17.497Z",
   "comment": {
-    "text": "This text is a label for the new owner in the \"Change Portal Owner\" dialog. It indicates the user who will become the new owner of the portal, with `{{productName}}` being replaced by the product's brand name.",
+    "text": "Label and tooltip within the Change Portal Owner dialog that identifies the person selected as the new workspace owner.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:28.624Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:59:17.497Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

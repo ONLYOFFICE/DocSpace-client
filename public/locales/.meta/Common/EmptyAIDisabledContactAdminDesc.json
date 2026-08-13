@@ -1,13 +1,13 @@
 {
   "key_path": "EmptyAIDisabledContactAdminDesc",
-  "content": "Contact {{productName}} admin to activate AI features and create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
-  "content_en_sha1_hash": "0b3d61b9a1c0226862c6ef3b69b01a3734e30676",
-  "created_at": "2026-08-12T11:00:19.108Z",
-  "updated_at": "2026-08-12T11:20:57.750Z",
+  "content": "Contact the Full admin to activate AI features and create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
+  "content_en_sha1_hash": "ec67dfdd37e60b06382cd19320c802376f50509a",
+  "created_at": "2026-08-13T14:36:48.259Z",
+  "updated_at": "2026-08-13T14:52:16.787Z",
   "comment": {
-    "text": "Description text in empty or no-access screens when AI features are disabled for SaaS users; includes a {{productName}} variable representing the brand name.",
+    "text": "Description text for an empty state or \"no access\" screen shown when AI features are disabled, instructing users to contact an administrator for activation.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:20:57.750Z",
+    "updated_at": "2026-08-13T14:52:16.787Z",
     "model": "gemma4:26b"
   },
   "usage": [

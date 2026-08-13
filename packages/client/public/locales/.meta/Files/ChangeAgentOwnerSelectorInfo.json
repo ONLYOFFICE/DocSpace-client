@@ -1,13 +1,13 @@
 {
   "key_path": "ChangeAgentOwnerSelectorInfo",
-  "content": "Only a room admin or {{productName}} admin can become the owner of the agent",
-  "content_en_sha1_hash": "6e15a7d39826aaa87391a4e118fc0f775fa1f2b2",
-  "created_at": "2026-08-12T11:00:48.090Z",
-  "updated_at": "2026-08-12T11:41:37.529Z",
+  "content": "Only a room admin or Full admin can become the owner of the agent",
+  "content_en_sha1_hash": "1b5ae30c4241bd3dcc456fa39ba3d95943b61f84",
+  "created_at": "2026-08-13T14:37:18.388Z",
+  "updated_at": "2026-08-13T15:06:49.216Z",
   "comment": {
-    "text": "Informational text within the Change Agent Owner panel explaining the permissions required to change ownership; includes a {{productName}} variable representing the brand name.",
+    "text": "Informational text within the Change Room Owner panel that specifies which administrative roles are permitted to change an AI agent's owner.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:41:37.529Z",
+    "updated_at": "2026-08-13T15:06:49.216Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -1,14 +1,14 @@
 {
   "key_path": "DeleteProfileSuccessDescription",
-  "content": "Your {{productName}} account is successfully disabled. The {{productName}} owner or admin can permanently delete your disabled account.",
-  "content_en_sha1_hash": "819078d1e44eea6c816187a8866798c50d4d88d0",
-  "created_at": "2025-05-19T21:30:57.350Z",
-  "updated_at": "2026-05-15T14:00:06.911Z",
+  "content": "Your {{productName}} account is successfully disabled. The owner or Full admin can permanently delete your disabled account.",
+  "content_en_sha1_hash": "025be11ad31ad1ab56ecd33658cb5d1aa2504c20",
+  "created_at": "2026-08-13T14:37:20.905Z",
+  "updated_at": "2026-08-13T15:20:48.888Z",
   "comment": {
-    "text": "This is a success message displayed after a user successfully disables their account. It informs them that the account is disabled and can be permanently deleted by an admin. `{{productName}}` is replaced with the product's brand name.",
+    "text": "Informational text on the profile removal confirmation page shown after an account is successfully disabled; includes the {{productName}} variable representing the brand name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:30:25.898Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:20:48.888Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

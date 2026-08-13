@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-08-12T11:00:51.484Z",
+  "updated_at": "2026-08-13T14:37:21.652Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useFilesHelper.ts",
-      "line_number": 394,
-      "context": "// server path, so it is missing from pathParts. Re-insert it after\n // the root crumb so returning to it keeps searchArea=Forms.\n if (formsSectionRef.current && !isThirdParty) {\n const insertIndex = breadCrumbs.findIndex((bc) => +bc.id === 0) + 1;\n breadCrumbs.splice(insertIndex, 0, {\n label: t(\"Forms\"),\n id: \"forms-section\",\n isRoom: true,\n rootFolderType: FolderType.FillingFormsRoom,\n });\n }",
+      "line_number": 398,
+      "context": "// server path, so it is missing from pathParts. Re-insert it after\n // the root crumb so returning to it keeps searchArea=Forms.\n if (formsSectionRef.current && !isThirdParty) {\n const insertIndex = breadCrumbs.findIndex((bc) => +bc.id === 0) + 1;\n breadCrumbs.splice(insertIndex, 0, {\n label: t(\"Forms\"),\n id: FORMS_SECTION_ID,\n isRoom: true,\n rootFolderType: FORMS_ROOT_FOLDER_TYPE as FolderType,\n });\n }",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 202,
-      "context": "withFormsTreeFolder &&\n !isUserOnly &&\n folder.rootFolderType === FolderType.VirtualRooms\n ) {\n newItems.push({\n label: t(\"Forms\"),\n id: \"forms-section\",\n parentId: folder.parentId!,\n rootFolderType: FolderType.FillingFormsRoom,\n filesCount: folder.filesCount!,\n foldersCount: folder.foldersCount!,",
+      "line_number": 206,
+      "context": "withFormsTreeFolder &&\n !isUserOnly &&\n folder.rootFolderType === FolderType.VirtualRooms\n ) {\n newItems.push({\n label: t(\"Forms\"),\n id: FORMS_SECTION_ID,\n parentId: folder.parentId!,\n rootFolderType: FORMS_ROOT_FOLDER_TYPE as FolderType,\n filesCount: folder.filesCount!,\n foldersCount: folder.foldersCount!,",
       "module": "/libs/ui-kit"
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 388,
+      "line_number": 397,
       "context": "const formsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);\n formsFilter.searchArea = RoomSearchArea.Forms;\n \n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n onClick: go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),\n children: [\n {\n id: \"forms-recent\",",
       "module": "/packages/client"
     },
@@ -73,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 279,
+      "line_number": 290,
       "context": "href: \"/rooms/shared/filter\",\n },\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n installed: true,\n href: \"/forms/filter\",\n },\n {",
       "module": "/packages/client"
     },

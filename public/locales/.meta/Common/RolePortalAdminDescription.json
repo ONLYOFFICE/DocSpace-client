@@ -1,13 +1,13 @@
 {
   "key_path": "RolePortalAdminDescription",
-  "content": "The {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
-  "content_en_sha1_hash": "63c6d12fc53b9549799c4074141e2cfe36abc6b8",
-  "created_at": "2026-08-12T11:00:35.706Z",
-  "updated_at": "2026-08-12T11:04:12.213Z",
+  "content": "Full admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
+  "content_en_sha1_hash": "60612dd4c97d45bcf9913f615cb9d537902222ea",
+  "created_at": "2026-08-13T14:37:05.340Z",
+  "updated_at": "2026-08-13T14:43:55.454Z",
   "comment": {
-    "text": "Description of the Portal Admin role's permissions within user type or access settings; contains variables for {{productName}}, {{sectionName}}, and {{agentSection}}, using <1> to apply bold formatting.",
+    "text": "Description text for the Portal Admin role within access options or user type details; contains placeholders for {{productName}}, {{sectionName}}, and {{agentSection}} along with HTML formatting for line breaks and bolding.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:04:12.213Z",
+    "updated_at": "2026-08-13T14:43:55.454Z",
     "model": "gemma4:26b"
   },
   "usage": [

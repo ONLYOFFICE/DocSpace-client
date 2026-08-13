@@ -1,14 +1,14 @@
 {
   "key_path": "YourUserTypeHasChanged",
-  "content": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
-  "content_en_sha1_hash": "febfdedb85e18cb49938f3ce47eb46b6a5bf2a45",
-  "created_at": "2025-05-19T21:30:56.364Z",
-  "updated_at": "2026-07-07T08:59:21.753Z",
+  "content": "Your user type has been changed to <1>“{{userType}}”</1> by the Full admin <1>{{adminName}}</1>.",
+  "content_en_sha1_hash": "fd173032868daeef49cbca7d9f35cad9cfd49694",
+  "created_at": "2026-08-13T14:37:18.728Z",
+  "updated_at": "2026-08-13T15:05:31.125Z",
   "comment": {
-    "text": "This is a warning message displayed in a dialog. It informs the user that their user type has been changed by an administrator. `{{userType}}` will be replaced with the new user type (e.g., \"Guest\"), `{{productName}}` with the product's brand name, and `{{adminName}}` with the name of the administrator who made the change.",
+    "text": "Body text in a modal dialog notifying the user of a change to their permissions, including the new user type (`userType`) and the name of the performing administrator (`adminName`).",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:07:31.779Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:05:31.125Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

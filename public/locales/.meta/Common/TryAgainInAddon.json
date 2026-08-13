@@ -1,0 +1,29 @@
+{
+  "key_path": "TryAgainInAddon",
+  "content": "Try again in Add-on",
+  "content_en_sha1_hash": "41fc71cc51adaf8f34f2e147f9ddf21bf291c6b4",
+  "created_at": "2026-08-13T14:37:11.731Z",
+  "updated_at": "2026-08-13T14:40:32.624Z",
+  "comment": {
+    "text": "Button label in an error card that appears when add-on activation fails, prompting the user to retry the process within the Add-on interface.",
+    "is_auto": true,
+    "updated_at": "2026-08-13T14:40:32.624Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.tsx",
+      "line_number": 347,
+      "context": "{status === \"error\" ? (\n isActivationError ? (\n <ErrorCard\n title={t(\"AddonActivationFailed\")}\n hint={t(\"AddonActivationFailedHint\")}\n buttonLabel={t(\"TryAgainInAddon\")}\n onGoToServiceClick={onGoToBillingClick}\n />\n ) : (\n <ErrorCard\n title={pageContent.errorTitle ?? t(\"WalletTopUpErrorTitle\")}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

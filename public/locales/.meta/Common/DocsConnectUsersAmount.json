@@ -3,7 +3,7 @@
   "content": "{{count}} users",
   "content_en_sha1_hash": "337a87205590e8f36b55c5f94f1779b0bfa17ae8",
   "created_at": "2026-07-27T13:07:08.309Z",
-  "updated_at": "2026-08-06T08:04:20.054Z",
+  "updated_at": "2026-08-13T14:37:21.815Z",
   "comment": {
     "text": "A text label on the AI tools paywall page indicating the number of users in a DocsConnect subscription; {{count}} represents the numeric value.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 477,
-      "context": "</Text>\n </>\n ) : isDocsConnect ? (\n <>\n <Text as=\"span\" className={styles.adminsAmount}>\n {t(\"DocsConnectUsersAmount\", {\n count: docsConnectUsers,\n })}\n </Text>\n <Text\n fontSize=\"14px\"",
+      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
+      "line_number": 113,
+      "context": "</Text>\n </>\n ) : isDocsConnect ? (\n <>\n <Text as=\"span\" className={styles.adminsAmount}>\n {t(\"DocsConnectUsersAmount\", {\n count: docsConnectUsers,\n })}\n </Text>\n <Text fontSize=\"14px\" className={styles.tariffActivationDetails}>\n {t(\"DocsConnectPricePerMonth\", {",
       "module": "/libs/ui-kit"
     }
   ],

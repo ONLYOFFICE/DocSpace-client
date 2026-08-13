@@ -1,13 +1,13 @@
 {
   "key_path": "FormRoomConnectDatabaseAskAdmin",
-  "content": "Ask the <1>{{productName}} admin</1> to connect a database in Integrations to analyze form data with Ask AI, create charts, and uncover insights.",
-  "content_en_sha1_hash": "626f5b597da5d562f4a79ec87502349caf9b8bff",
-  "created_at": "2026-08-12T11:00:47.751Z",
-  "updated_at": "2026-08-12T11:43:58.710Z",
+  "content": "Ask the <1>Full admin</1> to connect a database in Integrations to analyze form data with Ask AI, create charts, and uncover insights.",
+  "content_en_sha1_hash": "886a805cdeb69e10ee57a949f82411633912b982",
+  "created_at": "2026-08-13T14:37:18.037Z",
+  "updated_at": "2026-08-13T15:07:36.925Z",
   "comment": {
-    "text": "Instructional text within an AI Card in the Form Info panel advising users to contact their administrator to enable database integrations; includes a bolded {{productName}} variable.",
+    "text": "Informational text within the AI Card of the Form Info details panel, instructing users to contact an administrator to enable database integrations; includes a bolded tag <1> for \"Full admin\".",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:43:58.710Z",
+    "updated_at": "2026-08-13T15:07:36.925Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -3,7 +3,7 @@
   "content": "Docs Connect activated",
   "content_en_sha1_hash": "c8345980285966f55355223cde233f417973cce5",
   "created_at": "2026-07-27T13:07:08.164Z",
-  "updated_at": "2026-08-06T08:04:20.053Z",
+  "updated_at": "2026-08-13T14:37:21.813Z",
   "comment": {
     "text": "Title within a card on the AI Paywall Complete page, appearing when the Docs Connect integration is successfully activated.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 455,
-      "context": "<div className={styles.cardBody}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {admins\n ? t(\"PlanActivated\", { planName: plan })\n : isDocsConnect\n ? t(\"DocsConnectCallbackSuccess\")\n : isBackup\n ? t(\"BackupPaywallCallbackSuccess\")\n : isWalletOnly\n ? t(\"WalletTopUpSuccessTitle\")\n : t(\"AIPaywallCallbackSuccess\")}",
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 166,
+      "context": "case PaymentFlavor.DocsConnect:\n return {\n processingTitle: t(\"Common:DocsConnectCallbackProcessingTitle\"),\n processingHint: t(\"Common:DocsConnectCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:DocsConnectCallbackStepActivate\"),\n successTitle: t(\"Common:DocsConnectCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n errorTitle: t(\"Common:DocsConnectCallbackErrorTitle\"),\n errorHint: t(\"Common:DocsConnectCallbackErrorHint\"),\n errorButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),",
       "module": "/libs/ui-kit"
     }
   ],

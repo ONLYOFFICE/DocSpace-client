@@ -1,13 +1,13 @@
 {
   "key_path": "TemplateAvailableDescription",
-  "content": "All the {{productName}} and Room admins will be able to create rooms using this template.",
-  "content_en_sha1_hash": "c26e8adef6b84c35c8994eca1f12d0ca15ebcf03",
-  "created_at": "2026-08-12T11:00:48.379Z",
-  "updated_at": "2026-08-12T11:40:47.510Z",
+  "content": "All the Full admins and room admins will be able to create rooms using this template.",
+  "content_en_sha1_hash": "86905adb91d16f6bc71e8b725b854cfb96866b44",
+  "created_at": "2026-08-13T14:37:18.694Z",
+  "updated_at": "2026-08-13T15:06:12.566Z",
   "comment": {
-    "text": "Description text in a dialog or settings panel explaining that both {{productName}} and Room admins can use this template to create rooms.",
+    "text": "Description text in a dialog or settings panel explaining that Full and room admins have permission to create rooms using this template.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:40:47.510Z",
+    "updated_at": "2026-08-13T15:06:12.566Z",
     "model": "gemma4:26b"
   },
   "usage": [

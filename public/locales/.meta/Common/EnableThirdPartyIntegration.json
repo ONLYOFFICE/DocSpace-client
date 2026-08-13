@@ -1,13 +1,13 @@
 {
   "key_path": "EnableThirdPartyIntegration",
-  "content": "Please ask the {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.",
-  "content_en_sha1_hash": "4cfca434765e08324837d038de3e571cfa2a71b5",
-  "created_at": "2026-08-12T11:00:19.878Z",
-  "updated_at": "2026-08-12T11:19:25.665Z",
+  "content": "Please ask the owner or Full admin to enable the corresponding service in the Integration section of the {{productName}} Settings.",
+  "content_en_sha1_hash": "35cc8028c67a93eba9ed9f8965237dea2c4d0ab5",
+  "created_at": "2026-08-13T14:36:49.060Z",
+  "updated_at": "2026-08-13T14:51:14.318Z",
   "comment": {
-    "text": "Tooltip providing instructions on how to enable third-party services via the settings; includes the {{productName}} variable representing the product brand name.",
+    "text": "Tooltip providing instructions when a third-party integration is disabled; includes the {{productName}} variable representing the product brand name.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:19:25.665Z",
+    "updated_at": "2026-08-13T14:51:14.318Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -1,13 +1,13 @@
 {
   "key_path": "DeleteSetupPortalText",
-  "content": "You are going to permanently delete the <1>{{domain}}</1> workspace with all the data and accounts.  A request to delete <1>{{domain}}</1> will be sent to {{productName}} owner to the email address <1>{{email}}</1>.",
-  "content_en_sha1_hash": "00c0ab2aaf1d86ac914bac9f8a62281f71602901",
-  "created_at": "2026-08-12T11:00:50.874Z",
-  "updated_at": "2026-08-12T13:45:58.155Z",
+  "content": "You are going to permanently delete the <1>{{domain}}</1> workspace with all the data and accounts.  A request to delete <1>{{domain}}</1> will be sent to the owner to the email address <1>{{email}}</1>.",
+  "content_en_sha1_hash": "a202d2aecc2a6156d7e6453c2d2d4943f3684cab",
+  "created_at": "2026-08-13T14:37:20.988Z",
+  "updated_at": "2026-08-13T15:23:27.922Z",
   "comment": {
-    "text": "Confirmation dialog message warning about permanent workspace deletion and the notification process sent to the owner. It includes placeholders for the domain, product name, and email address, using `<1>` tags for formatting specific text segments.",
+    "text": "Warning message in a confirmation dialog for workspace deletion, containing variables for the workspace domain and the owner's email address.",
     "is_auto": true,
-    "updated_at": "2026-08-12T13:45:58.155Z",
+    "updated_at": "2026-08-13T15:23:27.922Z",
     "model": "gemma4:26b"
   },
   "usage": [

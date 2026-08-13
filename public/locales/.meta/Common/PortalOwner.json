@@ -1,14 +1,14 @@
 {
   "key_path": "PortalOwner",
-  "content": "{{productName}} owner",
-  "content_en_sha1_hash": "e8aa10492ad74ad965ab75de5d6375a78839f508",
-  "created_at": "2025-05-19T21:30:47.420Z",
-  "updated_at": "2026-05-24T17:27:49.213Z",
+  "content": "Workspace owner",
+  "content_en_sha1_hash": "7abc92137c7701adfbbe0b027414579250a6c38d",
+  "created_at": "2026-08-13T14:37:01.907Z",
+  "updated_at": "2026-08-13T14:45:40.421Z",
   "comment": {
-    "text": "This is a tooltip text that identifies the owner of the DocSpace portal. It appears when hovering over a user's avatar or name, indicating that the user has full administrative control. `{{productName}}` will be replaced with \"ONLYOFFICE DocSpace\".",
+    "text": "Tooltip content describing a user's role; it serves as the first sentence of a multi-sentence description regarding user permissions.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:46:15.589Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:45:40.421Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

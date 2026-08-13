@@ -178,12 +178,13 @@
     },
     {
       "label": "Backend | run SAAS - full (Aspire)",
-      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development --APP_HOSTING_STANDALONE false",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development --APP_HOSTING_STANDALONE false --APP_EDITOR_TEST true",
       "options": {
         "env": {
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false",
-          "APP_EDITION": "developer"
+          "APP_EDITION": "developer",
+          "APP_EDITOR_VERSION": "9.5.0.142",
         }
       },
       "type": "shell",

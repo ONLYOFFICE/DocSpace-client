@@ -1,13 +1,13 @@
 {
   "key_path": "PreparationPortalTitle",
-  "content": "The workspace restoring is underway",
-  "content_en_sha1_hash": "de2d6877af538508857ef5061557075c22e18760",
-  "created_at": "2026-08-12T11:00:32.515Z",
-  "updated_at": "2026-08-12T11:06:49.863Z",
+  "content": "Workspace restoring is underway",
+  "content_en_sha1_hash": "ac5ab74355f0ad1b1f76f47c2b94eb687c59446e",
+  "created_at": "2026-08-13T14:37:02.035Z",
+  "updated_at": "2026-08-13T14:44:38.672Z",
   "comment": {
-    "text": "Header title for the preparation portal screen, displayed while a workspace is being restored.",
+    "text": "Header title for the Preparation Portal page, displayed during the workspace restoration process.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:06:49.863Z",
+    "updated_at": "2026-08-13T14:44:38.672Z",
     "model": "gemma4:26b"
   },
   "usage": [

@@ -1,13 +1,13 @@
 {
   "key_path": "ChangeUserTypeNote",
-  "content": "<1>Note:</1> you cannot change the type for {{productName}} admin and for yourself.",
-  "content_en_sha1_hash": "ca42cef96c5862c720a0789f8d7450c503b4d463",
-  "created_at": "2026-08-12T11:00:49.207Z",
-  "updated_at": "2026-08-12T11:30:31.648Z",
+  "content": "<1>Note:</1> you cannot change the type for the Full admin and for yourself.",
+  "content_en_sha1_hash": "a41936d9586b5c69a9ce8020531afa7637199588",
+  "created_at": "2026-08-13T14:37:19.497Z",
+  "updated_at": "2026-08-13T15:03:01.746Z",
   "comment": {
-    "text": "Instructional note within the ChangeUserType dialog explaining restrictions on modifying user roles; includes a bolded \"Note:\" prefix and the {{productName}} variable.",
+    "text": "Informational note within the ChangeUserTypeDialog explaining restrictions on changing specific user types. The <1> tag is used to apply bold styling to the \"Note:\" prefix.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:30:31.648Z",
+    "updated_at": "2026-08-13T15:03:01.746Z",
     "model": "gemma4:26b"
   },
   "usage": [

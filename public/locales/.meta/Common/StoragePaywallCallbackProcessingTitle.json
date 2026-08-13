@@ -1,0 +1,29 @@
+{
+  "key_path": "StoragePaywallCallbackProcessingTitle",
+  "content": "Processing your payment",
+  "content_en_sha1_hash": "7883e37eeca1fc3971dea18fa641932952c3b09b",
+  "created_at": "2026-08-13T14:37:09.591Z",
+  "updated_at": "2026-08-13T14:42:01.944Z",
+  "comment": {
+    "text": "Title for a loading screen or dialog shown while the system verifies a disk storage payment.",
+    "is_auto": true,
+    "updated_at": "2026-08-13T14:42:01.944Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 198,
+      "context": "? AI_SEARCH_REDIRECT_URL\n : AI_SERVICES_REDIRECT_URL,\n };\n case PaymentFlavor.DiskStorage:\n return {\n processingTitle: t(\"Common:StoragePaywallCallbackProcessingTitle\"),\n processingHint: t(\"Common:StoragePaywallCallbackProcessingHint\"),\n activateStepLabel: storage\n ? t(\"Common:StoragePaywallCallbackStepActivateAmount\", { storage })\n : t(\"Common:StoragePaywallCallbackStepActivate\"),\n successTitle: t(\"Common:StoragePaywallCallbackSuccess\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

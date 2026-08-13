@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2026-08-12T14:02:21.240Z",
+  "updated_at": "2026-08-13T14:37:21.651Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new room. It appears in various contexts where a user can initiate the creation of a new collaborative space.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/utils/hooks/useRoomsHelper.tsx",
-      "line_number": 265,
+      "line_number": 274,
       "context": "const createRoomType =\n createDefineRoomType ??\n (formsSection ? ApiRoomType.FillingFormsRoom : undefined);\n const createItem: TSelectorItem = {\n isCreateNewItem: true,\n label: createDefineRoomLabel ?? t(\"NewRoom\"),\n id: \"create-room-item\",\n key: \"create-room-item\",\n hotkey: \"r\",\n isRoomsOnly,\n createDefineRoomType: createRoomType,",
       "module": "/libs/ui-kit"
     },

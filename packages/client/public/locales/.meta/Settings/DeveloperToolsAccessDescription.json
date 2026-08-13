@@ -1,13 +1,13 @@
 {
   "key_path": "DeveloperToolsAccessDescription",
-  "content": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click <strong>Save</strong> button.",
-  "content_en_sha1_hash": "558bfb8f4964869b3bef274f2089f8e4ab11af90",
-  "created_at": "2026-04-23T17:23:56.269Z",
-  "updated_at": "2026-06-02T08:43:27.531Z",
+  "content": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and Full admins only, select Disable and click <strong>Save</strong> button.",
+  "content_en_sha1_hash": "6f182804467baa40bc3bd128681b4ca085131b3e",
+  "created_at": "2026-08-13T14:37:15.753Z",
+  "updated_at": "2026-08-13T15:18:22.749Z",
   "comment": {
-    "text": "Help text for the Developer Tools access setting within the Portal Settings security category. It includes the {{productName}} variable and uses a <strong> tag for the \"Save\" button.",
+    "text": "Description text for a security setting in the Portal Settings menu that explains how to control access to the Developer Tools section; includes an HTML <strong> tag for emphasis.",
     "is_auto": true,
-    "updated_at": "2026-04-23T17:44:40.968Z",
+    "updated_at": "2026-08-13T15:18:22.749Z",
     "model": "gemma4:26b"
   },
   "usage": [
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

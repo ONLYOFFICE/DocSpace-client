@@ -1,14 +1,14 @@
 {
   "key_path": "ConfirmOwnerPortalSuccessMessage",
-  "content": "{{productName}} owner has been successfully changed. You will be redirected in 10 seconds.",
-  "content_en_sha1_hash": "ce94e81ee8f269cf229fecdc54803f77e43fcd51",
-  "created_at": "2025-05-19T21:30:57.338Z",
-  "updated_at": "2026-05-15T14:00:06.910Z",
+  "content": "The owner has been successfully changed. You will be redirected in 10 seconds.",
+  "content_en_sha1_hash": "f8ceaf68af513b5c36eb542a40fa14ca577c33c7",
+  "created_at": "2026-08-13T14:37:20.887Z",
+  "updated_at": "2026-08-13T15:22:02.628Z",
   "comment": {
-    "text": "This is a success message displayed after the portal owner has been successfully changed. It informs the user that they will be redirected shortly. `{{productName}}` will be replaced with the actual product name (e.g., ONLYOFFICE DocSpace).",
+    "text": "Success message displayed on the confirmation page after a portal owner change is completed successfully.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:30:33.237Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:22:02.628Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

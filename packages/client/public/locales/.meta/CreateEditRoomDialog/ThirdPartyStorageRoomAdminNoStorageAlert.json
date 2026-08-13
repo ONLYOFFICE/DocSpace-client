@@ -1,14 +1,14 @@
 {
   "key_path": "ThirdPartyStorageRoomAdminNoStorageAlert",
-  "content": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration.",
-  "content_en_sha1_hash": "6d21f17fc8337aa5d64cc41bd098795b12ff02d3",
-  "created_at": "2025-05-19T21:30:56.848Z",
-  "updated_at": "2026-05-15T15:37:40.189Z",
+  "content": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact the owner or Full admin to enable the integration.",
+  "content_en_sha1_hash": "64adb39723613f787b4d25e191083ce243418758",
+  "created_at": "2026-08-13T14:37:19.454Z",
+  "updated_at": "2026-08-13T15:04:35.690Z",
   "comment": {
-    "text": "This is an error message displayed to a room administrator when attempting to connect a third-party storage service, but no such services are configured. It informs them that an administrator needs to enable the integration. `{{productName}}` is the name of the application.",
+    "text": "Informational text within a dialog appearing to room admins when no third-party storage services are configured. Includes the {{productName}} variable representing the product's brand name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:04:25.137Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:04:35.690Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

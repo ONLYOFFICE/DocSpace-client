@@ -1,13 +1,13 @@
 {
   "key_path": "ForQuestionsContactPortalAdmin",
-  "content": "For any questions, please contact {{productName}} admin.",
-  "content_en_sha1_hash": "1d59bf9f2f5e2253d35a6b11e2280d6237c3be8f",
-  "created_at": "2026-08-12T11:00:23.310Z",
-  "updated_at": "2026-08-12T11:18:28.275Z",
+  "content": "For any questions, please contact the Full admin.",
+  "content_en_sha1_hash": "3747cd32390448bbf78e8c42796241b514e00d49",
+  "created_at": "2026-08-13T14:36:52.583Z",
+  "updated_at": "2026-08-13T14:50:51.259Z",
   "comment": {
-    "text": "Text within the ReducedRightsDialog body providing contact instructions; includes the {{productName}} variable representing the product's brand name.",
+    "text": "Informational text within the body of the Reduced Rights dialog providing contact instructions.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:18:28.275Z",
+    "updated_at": "2026-08-13T14:50:51.259Z",
     "model": "gemma4:26b"
   },
   "usage": [

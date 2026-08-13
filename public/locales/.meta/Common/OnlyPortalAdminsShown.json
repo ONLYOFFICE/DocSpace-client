@@ -1,14 +1,14 @@
 {
   "key_path": "OnlyPortalAdminsShown",
-  "content": "Only {{productName}} admins are shown here",
-  "content_en_sha1_hash": "f8a6bcdf8beb69a00c76ffb122523b63fdf29c5d",
-  "created_at": "2026-04-10T13:53:42.827Z",
-  "updated_at": "2026-08-12T14:02:21.396Z",
+  "content": "Only Full admins are shown here",
+  "content_en_sha1_hash": "34680978770f61d5c3cc0f504d12445df6e202f4",
+  "created_at": "2026-08-13T14:36:59.955Z",
+  "updated_at": "2026-08-13T14:47:45.938Z",
   "comment": {
-    "text": "This is an informational text displayed as a tooltip or inline message. It informs the user that the displayed list of contacts is limited to administrators of the product, where `{{productName}}` will be replaced by the actual product name (e.g., ONLYOFFICE DocSpace).",
+    "text": "Informational text in the transaction history view that appears when a role filter is applied, indicating that only users with Full admin privileges are visible.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:47:17.120Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:47:45.938Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

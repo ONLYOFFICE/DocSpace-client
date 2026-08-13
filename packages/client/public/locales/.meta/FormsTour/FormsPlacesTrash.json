@@ -3,7 +3,7 @@
   "content": "{{trash}} — deleted form spaces, restorable until you empty it.",
   "content_en_sha1_hash": "f2a33191646c7e05c46142667153af2bcfa73616",
   "created_at": "2026-08-12T15:15:03.308Z",
-  "updated_at": "2026-08-12T15:21:08.616Z",
+  "updated_at": "2026-08-13T14:37:21.662Z",
   "comment": {
     "text": "Instructional text in a guided tour step describing the Trash section's functionality, where {{trash}} represents the name of the trash area.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 165,
+      "line_number": 155,
       "context": "}),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"FormsTour:FormsPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];\n \n // The block of steps that runs inside a space. It walks into a stand-in one\n // rather than into the user's: a real space grows its `In progress` and\n // `Complete` folders only once a form has been uploaded and started, so on a",
       "module": "/packages/client"
     }

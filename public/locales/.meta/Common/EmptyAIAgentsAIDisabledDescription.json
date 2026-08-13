@@ -1,13 +1,13 @@
 {
   "key_path": "EmptyAIAgentsAIDisabledDescription",
-  "content": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by {{productName}} admin.",
-  "content_en_sha1_hash": "701783da3c71437be27c05c89eb9c6b6986354b2",
-  "created_at": "2026-08-12T11:00:18.898Z",
-  "updated_at": "2026-08-12T11:21:23.372Z",
+  "content": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by the Full admin.",
+  "content_en_sha1_hash": "ef22e271d5428e2252d7c0887307bd00438b88a4",
+  "created_at": "2026-08-13T14:36:48.030Z",
+  "updated_at": "2026-08-13T14:52:59.613Z",
   "comment": {
-    "text": "Informational text in empty state screens explaining why AI features are unavailable and how to enable them. Includes variables for the feature name ({{aiAgents}}) and the product brand ({{productName}}).",
+    "text": "Informational text in an empty state or \"no access\" screen explaining that AI features are disabled until activated by an admin. Includes a variable {{aiAgents}} representing the name of the smart assistants.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:21:23.372Z",
+    "updated_at": "2026-08-13T14:52:59.613Z",
     "model": "gemma4:26b"
   },
   "usage": [

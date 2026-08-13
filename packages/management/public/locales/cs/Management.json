@@ -1,7 +1,7 @@
 {
   "ChangeDomainDescription": "Změna názvu domény může způsobit selhání některých systémů. Po změně názvu domény je třeba znovu nakonfigurovat následující nastavení: pošta, účet, parametry jabberu.",
   "CompleteSetup": "Dokončení nastavení",
-  "ConfigurationDescription": "Chcete-li změnit nastavení adresy, je třeba připojit doménu k aktuální IP adrese. Ujistěte se, že máte přístup k nastavení domény, abyste tento krok mohli provést. Po připojení domény vytvořte název {{productName}}. Vytvořený název {{productName}} můžete později změnit pomocí nastavení pracovního prostoru.",
+  "ConfigurationDescription": "Chcete-li změnit nastavení adresy, je třeba připojit doménu k aktuální IP adrese. Ujistěte se, že máte přístup k nastavení domény, abyste tento krok mohli provést. Po připojení domény vytvořte název pracovního prostoru. Vytvořený název můžete později změnit pomocí nastavení pracovního prostoru.",
   "ConfigurationHeader": "Konfigurace aktuálního pracovního prostoru",
   "CreateSpaceDescription": "Úspěšně jste připojili doménu k vaší IP adrese. Chcete-li upravit nastavení adresy pracovního prostoru, musíte nastavit budoucí název {{productName}}",
   "CreatingPortal": "Vytvoření nového pracovního prostoru",

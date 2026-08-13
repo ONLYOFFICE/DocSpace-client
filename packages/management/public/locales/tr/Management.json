@@ -1,7 +1,7 @@
 {
   "ChangeDomainDescription": "Alan adının değiştirilmesi bazı sistemlerin arızalanmasına neden olabilir. Alan adını değiştirdikten sonra posta, hesap, jabber parametreleri gibi ayarları yeniden yapılandırmanız gerekecektir.",
   "CompleteSetup": "Kurulumu tamamla",
-  "ConfigurationDescription": "Adres ayarlarını değiştirmek için alan adınızı mevcut IP'nize bağlamanız gerekmektedir. Bunu yapabilmek için lütfen alan adı ayarlarına erişiminiz olduğundan emin olun. Alan adını bağladıktan sonra bir {{productName}} adı oluşturun. Oluşturulan {{productName}} adını daha sonra çalışma alanı ayarlarını kullanarak değiştirebilirsiniz.",
+  "ConfigurationDescription": "Adres ayarlarını değiştirmek için alan adınızı mevcut IP'nize bağlamanız gerekmektedir. Bunu yapabilmek için lütfen alan adı ayarlarına erişiminiz olduğundan emin olun. Alan adını bağladıktan sonra bir çalışma alanı adı oluşturun. Oluşturulan adı daha sonra çalışma alanı ayarlarını kullanarak değiştirebilirsiniz.",
   "ConfigurationHeader": "Mevcut çalışma alanı yapılandırması",
   "CreateSpaceDescription": "Alan adınızı IP adresinize başarıyla bağladınız. Çalışma alanı adres ayarlarını düzenlemek için gelecekteki {{productName}} adını ayarlamanız gerekir",
   "CreatingPortal": "Yeni çalışma alanı oluşturma",

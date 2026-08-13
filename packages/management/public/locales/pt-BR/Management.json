@@ -1,7 +1,7 @@
 {
   "ChangeDomainDescription": "Alterar o nome de domínio pode causar algumas falhas no sistema. Depois de alterar o nome de domínio, você precisará reconfigurar as seguintes configurações: email, conta, parâmetros jabber.",
   "CompleteSetup": "Concluir a configuração",
-  "ConfigurationDescription": "Você precisa conectar seu domínio ao seu IP atual para alterar as configurações de endereço. Certifique-se de ter acesso às configurações do domínio para poder fazer isso. Após conectar o domínio, crie um nome {{productName}}. Você pode alterar o nome do {{productName}} criado posteriormente usando as configurações do espaço de trabalho.",
+  "ConfigurationDescription": "Você precisa conectar seu domínio ao seu IP atual para alterar as configurações de endereço. Certifique-se de ter acesso às configurações do domínio para poder fazer isso. Após conectar o domínio, crie um nome para o espaço de trabalho. Você pode alterar o nome criado posteriormente usando as configurações do espaço de trabalho.",
   "ConfigurationHeader": "Configuração do espaço de trabalho atual",
   "CreateSpaceDescription": "Você conectou com sucesso seu domínio ao seu endereço IP. Para editar as configurações de endereço do espaço de trabalho, você precisa definir o nome futuro do {{productName}}",
   "CreatingPortal": "Criando novo espaço de trabalho",

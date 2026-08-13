@@ -1,7 +1,7 @@
 {
   "ChangeDomainDescription": "Domēna nosaukuma maiņa var izraisīt dažu sistēmu kļūmi. Pēc domēna nosaukuma maiņas jums būs jāpārkonfigurē šādi iestatījumi: pasts, konts, Jabber parametri.",
   "CompleteSetup": "Pabeigt iestatīšanu",
-  "ConfigurationDescription": "Lai mainītu adreses iestatījumus, domēns ir jāsavieno ar pašreizējo IP adresi. Pārliecinieties, ka jums ir piekļuve domēna iestatījumiem, lai to varētu izdarīt. Pēc domēna savienošanas izveidojiet {{productName}} nosaukumu. Vēlāk varat mainīt izveidoto {{productName}} nosaukumu, izmantojot darbvietas iestatījumus.",
+  "ConfigurationDescription": "Lai mainītu adreses iestatījumus, domēns ir jāsavieno ar pašreizējo IP adresi. Pārliecinieties, ka jums ir piekļuve domēna iestatījumiem, lai to varētu izdarīt. Pēc domēna savienošanas izveidojiet darbvietas nosaukumu. Vēlāk varat mainīt izveidoto nosaukumu, izmantojot darbvietas iestatījumus.",
   "ConfigurationHeader": "Pašreizējās darbvietas konfigurācija",
   "CreateSpaceDescription": "Domēns ir veiksmīgi savienots ar IP adresi. Lai rediģētu darbvietas adreses iestatījumus, jums ir jāiestata turpmākais {{productName}} nosaukums",
   "CreatingPortal": "Jaunas darbvietas izveide",

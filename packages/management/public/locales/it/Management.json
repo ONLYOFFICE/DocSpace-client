@@ -1,7 +1,7 @@
 {
   "ChangeDomainDescription": "La modifica del nome di dominio potrebbe causare qualche guasto al sistema. Dopo aver modificato il nome del dominio sarà necessario riconfigurare le seguenti impostazioni: parametri mail, account, jabber.",
   "CompleteSetup": "Completa la configurazione",
-  "ConfigurationDescription": "Devi connettere il tuo dominio al tuo IP attuale per modificare le impostazioni dell'indirizzo. Assicurati di avere accesso alle impostazioni del dominio per poterlo fare. Dopo aver connesso il dominio, crea un nome {{productName}}. È possibile modificare il nome {{productName}} creato successivamente utilizzando le impostazioni dello spazio di lavoro.",
+  "ConfigurationDescription": "Devi connettere il tuo dominio al tuo IP attuale per modificare le impostazioni dell'indirizzo. Assicurati di avere accesso alle impostazioni del dominio per poterlo fare. Dopo aver connesso il dominio, crea un nome per lo spazio di lavoro. È possibile modificare il nome creato successivamente utilizzando le impostazioni dello spazio di lavoro.",
   "ConfigurationHeader": "Configurazione dello spazio di lavoro attuale",
   "CreateSpaceDescription": "Hai collegato con successo il tuo dominio al tuo indirizzo IP. Per modificare le impostazioni dell'indirizzo dello spazio di lavoro è necessario impostare il futuro nome di {{productName}}",
   "CreatingPortal": "Creazione di un nuovo spazio di lavoro",

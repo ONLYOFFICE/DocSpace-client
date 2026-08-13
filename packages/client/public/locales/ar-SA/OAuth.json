@@ -79,7 +79,7 @@
   "ScopesHelp": "النطاقات تستخدم لتحديد وصول تطبيقك إلى جميع بيانات المستخدمين، مما يتيح لك تحديد بالضبط نوع الوصول الذي تحتاجه.",
   "Secret": "سر",
   "SecretCopy": "تم نسخ سر العميل إلى الحافظة بنجاح",
-  "SignIn": "تسجيل الدخول باستخدام {{productName}}",
+  "SignIn": "تسجيل الدخول باستخدام {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "دعم ومعلومات قانونية",
   "TermsOfService": "شروط الخدمة",
   "TermsOfServiceURL": "رابط شروط الخدمة",

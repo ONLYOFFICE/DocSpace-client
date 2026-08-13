@@ -105,14 +105,14 @@ export const RecoveryPhraseDisplayModal: React.FC<
       dir: i18n.dir(),
       accountLabel,
       strings: {
-        title: t("Common:RecoveryKitTitle", { productName }),
+        title: t("Common:RecoveryKitTitle", { organizationName: getBrandName("OrganizationName"), productName }),
         subtitle: t("Common:RecoveryKitSubtitle"),
         createdLabel: t("Common:ByCreation"),
         accountLabel: t("Common:Account"),
         phraseLabel: t("Common:RecoveryKitPhraseLabel"),
         whatTitle: t("Common:RecoveryKitWhatTitle"),
         whatText: t("Common:RecoveryKitWhatText", {
-          productName,
+          organizationName: getBrandName("OrganizationName"), productName,
           wordCount,
         }),
         howTitle: t("Common:RecoveryKitHowTitle"),
@@ -123,7 +123,7 @@ export const RecoveryPhraseDisplayModal: React.FC<
         storageTitle: t("Common:RecoveryKitStorageTitle"),
         storageText: t("Common:RecoveryKitStorageText"),
         warning: t("Common:RecoveryPhraseWarning"),
-        footer: t("Common:RecoveryKitFooter", { productName }),
+        footer: t("Common:RecoveryKitFooter", { organizationName: getBrandName("OrganizationName"), productName }),
       },
     });
   }, [words, wordCount, accountLabel, i18n, t]);

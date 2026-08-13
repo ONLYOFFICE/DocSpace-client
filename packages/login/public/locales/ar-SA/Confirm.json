@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "سيتم إنشاء حساب {{productName}} لـ <1>{{email}}</1> يرجى إكمال التسجيل:",
+  "AccountWillBeCreated": "سيتم إنشاء حساب {{organizationName}} {{productName}} لـ <1>{{email}}</1> يرجى إكمال التسجيل:",
   "ConfirmOwnerPortalSuccessMessage": "تم تغيير المالك بنجاح. سيتم إعادة توجيهك بعد 10 ثوانٍ.",
   "ConfirmOwnerPortalTitle": "يرجى تأكيد أنك تريد تغيير المالك إلى {{newOwner}}.",
   "ConnectApp": "ربط التطبيق",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "احذف حسابي",
   "DeleteProfileConfirmation": "انتباه! أنت على وشك حذف حسابك.",
   "DeleteProfileConfirmationInfo": "بالنقر فوق \\ \"حذف حسابي \\\" ، فإنك توافق على <1> سياسة الخصوصية الخاصة بنا. </ 1>",
-  "DeleteProfileSuccessDescription": "تم تعطيل حسابك في {{productName}} بنجاح. يمكن للمالك أو المسؤول العام حذف حسابك المعطل بشكل دائم.",
+  "DeleteProfileSuccessDescription": "تم تعطيل حسابك في {{organizationName}} {{productName}} بنجاح. يمكن للمالك أو المسؤول العام حذف حسابك المعطل بشكل دائم.",
   "DeleteProfileSuccessMessage": "تم حذف حسابك بنجاح.",
   "DeleteProfileSuccessMessageInfo": "راجع <1> سياسة الخصوصية </ 1> لمعرفة المزيد حول حذف حسابك والبيانات المرتبطة به.",
   "EmailAndPasswordCopiedToClipboard": "تم نسخ البريد الإلكتروني وكلمة المرور إلى الحافظة",

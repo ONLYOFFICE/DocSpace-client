@@ -193,7 +193,7 @@
   "LastUpdate": "Poslednje ažuriranje: {{date}}",
   "LDAP": "LDAP Podešavanja",
   "LicenseLimitCounter": "Ograničenje licence za Admine",
-  "LicenseLimitDescription": "Brojač ograničenja licence sastoji se od: već postojećih naloga u {{productName}}-u i novih korisnika koje želite da uvezete. Ako uvezete korisnike koji već imaju nalog u {{productName}}-u, neće biti ponovo brojani u brojaču. Vaša {{productName}} licenca vam dozvoljava da imate maksimalno {{maxLimit}} korisnika.",
+  "LicenseLimitDescription": "Brojač ograničenja licence sastoji se od: već postojećih naloga u radnom prostoru-u i novih korisnika koje želite da uvezete. Ako uvezete korisnike koji već imaju nalog u radnom prostoru-u, neće biti ponovo brojani u brojaču. Vaša {{organizationName}} {{productName}} licenca vam dozvoljava da imate maksimalno {{maxLimit}} korisnika.",
   "Lifetime": "Vreme trajanja (min)",
   "LimitThemesTooltip": "Možete samo kreirati 3 prilagođene teme. Da biste kreirali novu, morate obrisati jednu od prethodnih.",
   "LinksBeforeRestriction": "Izaberite šta će se desiti sa vezama kreiranim pre uvođenja ograničenja:",

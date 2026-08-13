@@ -79,7 +79,7 @@
   "ScopesHelp": "Zakresy służą do ograniczania dostępu Twojej aplikacji do wszystkich danych związanych z użytkownikami i pozwalają dokładnie określić, jakiego rodzaju dostępu potrzebujesz.",
   "Secret": "Sekret",
   "SecretCopy": "Sekret klienta został pomyślnie skopiowany do schowka",
-  "SignIn": "Zaloguj się przez {{productName}}",
+  "SignIn": "Zaloguj się przez {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Pomoc i Informacje prawne",
   "TermsOfService": "Regulamin",
   "TermsOfServiceURL": "URL regulaminu",

@@ -274,7 +274,8 @@ const Consent = ({
               terms of service
             </Link>
             . You can revoke this consent at any time in your{" "}
-            {{ productName: getBrandName("ProductName") }} account settings.
+            {{ organizationName: getBrandName("OrganizationName"),
+				productName: getBrandName("ProductName") }} account settings.
           </Trans>
         </Text>
       </div>

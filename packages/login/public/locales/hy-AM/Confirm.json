@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "{{productName}} հաշիվը կստեղծվի <1>{{email}}</1>-ի համար: Խնդրում ենք լրացնել ձեր գրանցումը՝",
+  "AccountWillBeCreated": "{{organizationName}} {{productName}} հաշիվը կստեղծվի <1>{{email}}</1>-ի համար: Խնդրում ենք լրացնել ձեր գրանցումը՝",
   "ConfirmOwnerPortalSuccessMessage": "Սեփականատերը հաջողությամբ փոխվել է։ Դուք կվերահղվեք 10 վայրկյանից։",
   "ConfirmOwnerPortalTitle": "Խնդրում ենք հաստատել, որ ցանկանում եք սեփականատերը փոխել {{newOwner}}-ի։",
   "ConnectApp": "Միացնել հավելվածը",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Ջնջել իմ հաշիվը",
   "DeleteProfileConfirmation": "Ուշադրություն! Դուք պատրաստվում եք ջնջել Ձեր հաշիվը",
   "DeleteProfileConfirmationInfo": "Սեղմելով \"Ջնջել իմ հաշիվը\" Դուք համաձայն եք մեր <1>գաղտնիության քաղաքականությանը:</1>",
-  "DeleteProfileSuccessDescription": "Ձեր {{productName}} հաշիվը հաջողությամբ անջատվել է։ Սեփականատերը կամ գերադմինիստրատորը կարող է վերջնականապես ջնջել ձեր անջատված հաշիվը։",
+  "DeleteProfileSuccessDescription": "Ձեր {{organizationName}} {{productName}} հաշիվը հաջողությամբ անջատվել է։ Սեփականատերը կամ գերադմինիստրատորը կարող է վերջնականապես ջնջել ձեր անջատված հաշիվը։",
   "DeleteProfileSuccessMessage": "Ձեր հաշիվը հաջողությամբ ջնջվել է",
   "DeleteProfileSuccessMessageInfo": "Տեսեք մեր <1>Գաղտնիության քաղաքականությունը</1>՝ Ձեր հաշիվը ջնջելու և դրա հետ կապված տվյալների մասին ավելին իմանալու համար:",
   "EmailAndPasswordCopiedToClipboard": "Էլփոստը և գաղտնաբառը պատճենվել են սեղմատախտակ",

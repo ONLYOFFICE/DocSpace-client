@@ -10,7 +10,7 @@
   "NotNeedSettings": "Non è necessario inserire le impostazioni",
   "PluginCacheWarningDescription": "I plugin vengono memorizzati nella cache in base al loro numero di versione. Per garantire che le modifiche vengano applicate, si prega di incrementare il numero di versione nel file <1>package.json</1> prima del caricamento. Il sistema non aggiornerà un plugin se la versione rimane la stessa.",
   "PluginDeletedSuccessfully": "Plugin eliminato con successo",
-  "PluginIsNotCompatible": "La versione dell’SDK del plugin non corrisponde alla versione di {{productName}}. Aggiorna a una versione compatibile.",
+  "PluginIsNotCompatible": "La versione dell’SDK del plugin non corrisponde alla versione di {{organizationName}} {{productName}}. Aggiorna a una versione compatibile.",
   "PluginLoadedSuccessfully": "Plugin caricato con successo",
   "PluginSamples": "Esempi di plugin",
   "PluginSDK": "SDK di Plugin",

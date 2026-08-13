@@ -3,7 +3,7 @@
   "DashboardAppsTitle": "使えるものすべて",
   "DashboardCreate": "最初のドキュメントをここで作成しましょう。種類を選んで書き始めるだけです。作成したものは{{files}}に保存され、いつでも見つけられます。",
   "DashboardCreateTitle": "今すぐ何か作ってみる",
-  "DashboardDevTools": "独自の開発をお考えですか？ここにあるものはすべてそのためのものです。コードからワークスペースを操作するAPI、エディターを自社アプリに組み込むSDK、プラグイン、Webhook、そしてキー。{{productName}}を日常的に使うだけなら、どれも触る必要はありません。",
+  "DashboardDevTools": "独自の開発をお考えですか？ここにあるものはすべてそのためのものです。コードからワークスペースを操作するAPI、エディターを自社アプリに組み込むSDK、プラグイン、Webhook、そしてキー。{{organizationName}} {{productName}}を日常的に使うだけなら、どれも触る必要はありません。",
   "DashboardDevToolsTitle": "開発者向け",
   "DashboardIntegrations": "すでに他のプラットフォームをお使いですか？ここから接続すれば、今ご覧いただいたエディターを、チームがすでに使っているツールの中でそのまま利用できます。独自の開発もデータの移行も不要です。",
   "DashboardIntegrationsTitle": "他のプラットフォームとの連携",
@@ -12,7 +12,7 @@
   "DashboardProfile": "ワークスペース名とプロフィールの概要（名前、メールアドレス、パスワード）です。ここからワークスペース名の変更やパスワードの変更ができます。",
   "DashboardProfileTitle": "プロフィールの詳細",
   "WelcomeDashboardSubtitle": "すべてはこのページから始まります",
-  "WelcomeDashboardTitle": "{{productName}}へようこそ",
+  "WelcomeDashboardTitle": "{{organizationName}} {{productName}}へようこそ",
   "WelcomeDescription": "ドキュメントを作成し、ルームで共同作業し、フォームでデータを集め、読み込みはAIに任せる。そのすべてが一つの場所で完結します。短いツアーで一通りご案内します。",
   "WelcomeLater": "また後で"
 }

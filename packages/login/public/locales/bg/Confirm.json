@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "Ще бъде създаден акаунт в {{productName}} за <1>{{email}}</1>. Моля, завършете регистрацията си:",
+  "AccountWillBeCreated": "Ще бъде създаден акаунт в {{organizationName}} {{productName}} за <1>{{email}}</1>. Моля, завършете регистрацията си:",
   "ConfirmOwnerPortalSuccessMessage": "Собственикът беше сменен успешно. Ще бъдете пренасочени след 10 секунди.",
   "ConfirmOwnerPortalTitle": "Моля, потвърдете, че искате да смените собственика на {{newOwner}}.",
   "ConnectApp": "Свържете приложението",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Изтрий моя профил",
   "DeleteProfileConfirmation": "Внимание! На път сте да изтриете профила си.",
   "DeleteProfileConfirmationInfo": "Като натиснете \"Изтрий профила ми\", се съгласявате с нашата <1>Политика за поверителност.</1>",
-  "DeleteProfileSuccessDescription": "Вашият акаунт в {{productName}} беше деактивиран успешно. Собственикът или суперадминистраторът може да изтрие окончателно деактивирания ви акаунт.",
+  "DeleteProfileSuccessDescription": "Вашият акаунт в {{organizationName}} {{productName}} беше деактивиран успешно. Собственикът или суперадминистраторът може да изтрие окончателно деактивирания ви акаунт.",
   "DeleteProfileSuccessMessage": "Профилът Ви беше изтрит успешно.",
   "DeleteProfileSuccessMessageInfo": "Вижте <1>Политиката ни за поверителност</1>, за да научите повече за изтриването на профила Ви и данните, свързани с него.",
   "EmailAndPasswordCopiedToClipboard": "Имейлът и паролата са копирани в клипборда",

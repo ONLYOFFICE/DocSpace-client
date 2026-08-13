@@ -193,7 +193,7 @@
   "LastUpdate": "Pēdējā atjaunināšana: {{date}}",
   "LDAP": "LDAP iestatījumi",
   "LicenseLimitCounter": "Licences ierobežojums Administratori:",
-  "LicenseLimitDescription": "Licenču ierobežojumu skaitītājs sastāv no: jau esošiem kontiem {{productName}} un jauniem lietotājiem, kurus vēlaties importēt. Ja importējat lietotājus, kuriem jau ir {{productName}} konts, tie vairs netiks skaitīti skaitītājā. Jūsu {{productName}} licence ļauj jums uzņemt ne vairāk kā {{maxLimit}} lietotājus.",
+  "LicenseLimitDescription": "Licenču ierobežojumu skaitītājs sastāv no: jau esošiem kontiem darbvietā un jauniem lietotājiem, kurus vēlaties importēt. Ja importējat lietotājus, kuriem jau ir darbvietā konts, tie vairs netiks skaitīti skaitītājā. Jūsu {{organizationName}} {{productName}} licence ļauj jums uzņemt ne vairāk kā {{maxLimit}} lietotājus.",
   "Lifetime": "Kalpošanas laiks (min.)",
   "LimitThemesTooltip": "Varat izveidot tikai trīs pielāgotus dizainus. Lai izveidotu jaunu dizainu, ir jāizdzēš viens no iepriekšējiem dizainiem.",
   "LinksBeforeRestriction": "Izvēlieties, kas notiks ar saitēm, kas izveidotas pirms ierobežojuma:",

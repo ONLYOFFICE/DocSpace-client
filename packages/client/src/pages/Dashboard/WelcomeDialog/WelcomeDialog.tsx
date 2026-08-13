@@ -81,7 +81,7 @@ const WelcomeDialog = ({ onTakeTour, onClose }: WelcomeDialogProps) => {
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("DashboardTour:WelcomeDashboardTitle", { productName })}
+        {t("DashboardTour:WelcomeDashboardTitle", { organizationName: getBrandName("OrganizationName"), productName })}
       </ModalDialog.Header>
 
       <ModalDialog.Body>

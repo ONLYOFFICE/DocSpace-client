@@ -79,7 +79,7 @@
   "ScopesHelp": "Kapsamlar, uygulamanızın kullanıcıyla ilgili verilere erişimini sınırlamak için kullanılır ve tam olarak ne tür bir erişime ihtiyacınız olduğunu belirtmenize olanak sağlar.",
   "Secret": "Sır",
   "SecretCopy": "İstemci gizli bilgisi panoya başarıyla kopyalandı",
-  "SignIn": "{{productName}} ile oturum aç",
+  "SignIn": "{{organizationName}} {{productName}} ile oturum aç",
   "SupportAndLegalInfo": "Destek ve Yasal bilgiler",
   "TermsOfService": "Hizmet Şartları",
   "TermsOfServiceURL": "Hizmet Şartları URL'si",

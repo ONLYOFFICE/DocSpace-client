@@ -1,7 +1,7 @@
 {
   "ChangePasswordSuccess": "Le mot de passe a bien été modifié",
   "ConfirmEmailChange": "Confirmer le changement de votre adresse e-mail",
-  "ConfirmEmailChangeText": "Vous avez demandé à modifier l'adresse e-mail de votre compte de {{productName}}. Pour continuer, veuillez vous connecter avec vos identifiants actuels.",
+  "ConfirmEmailChangeText": "Vous avez demandé à modifier l'adresse e-mail de votre compte de {{organizationName}} {{productName}}. Pour continuer, veuillez vous connecter avec vos identifiants actuels.",
   "ErrorInvalidText": "En 10 secondes, vous serez redirigé vers <1>l'espace de travail</1>",
   "ForgotPassword": "Mot de passe oublié ?",
   "LDAPUsernamePlaceholder": "Nom d'utilisateur de {{ldap_domain}}",

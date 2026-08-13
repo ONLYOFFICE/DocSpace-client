@@ -10,7 +10,7 @@
   "NotNeedSettings": "Није потребно ући у подешавања",
   "PluginCacheWarningDescription": "Плагинови се кеширају на основу броја њихове верзије. Да бисте били сигурни да су ваше измене примењене, молимо вас да повећате број верзије у свом <1>package.json</1> фајлу пре него што га отпремите. Систем неће ажурирати плагин ако верзија остане иста.",
   "PluginDeletedSuccessfully": "Додатак је успешно обрисан",
-  "PluginIsNotCompatible": "Верзија плагин SDK-а се не поклапа са верзијом {{productName}}. Молимо ажурирај на компатибилну верзију.",
+  "PluginIsNotCompatible": "Верзија плагин SDK-а се не поклапа са верзијом {{organizationName}} {{productName}}. Молимо ажурирај на компатибилну верзију.",
   "PluginLoadedSuccessfully": "Плугин успешно учитан",
   "PluginSamples": "Примери додатка",
   "PluginSDK": "Plugin SDK (SDK за додатке)",

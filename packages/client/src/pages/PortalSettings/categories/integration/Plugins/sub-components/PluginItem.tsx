@@ -85,7 +85,8 @@ const PluginItem = ({
   };
 
   const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
-    productName: getBrandName("ProductName"),
+    organizationName: getBrandName("OrganizationName"),
+				productName: getBrandName("ProductName"),
   });
 
   const badgeId = `plugin_version_${name}_badge`;

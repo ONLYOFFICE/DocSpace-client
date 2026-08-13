@@ -10,7 +10,7 @@
   "NotNeedSettings": "ບໍ່ຈຳເປັນຕ້ອງໃສ່ການຕັ້ງຄ່າ",
   "PluginCacheWarningDescription": "ປລັກອິນຈະຖືກເກັບໄວ້ໂດຍອີງຕາມໝາຍເລກເວີຊັນຂອງມັນ. ເພື່ອຮັບປະກັນວ່າການປ່ຽນແປງຂອງທ່ານຖືກນຳໃຊ້, ກະລຸນາເພີ່ມໝາຍເລກເວີຊັນໃນໄຟລ໌ <1>package.json</1> ຂອງທ່ານກ່ອນທີ່ຈະອັບໂຫລດ. ລະບົບຈະບໍ່ອັບເດດປລັກອິນຖ້າເວີຊັນຍັງຄົງຄືເກົ່າ.",
   "PluginDeletedSuccessfully": "ລຶບປລັກອິນສຳເລັດແລ້ວ",
-  "PluginIsNotCompatible": "ເວີຊັນ plugin SDK ບໍ່ກົງກັບເວີຊັນ {{productName}}. ກະລຸນາອັບເດດເປັນເວີຊັນທີ່ເຂົ້າກັນໄດ້.",
+  "PluginIsNotCompatible": "ເວີຊັນ plugin SDK ບໍ່ກົງກັບເວີຊັນ {{organizationName}} {{productName}}. ກະລຸນາອັບເດດເປັນເວີຊັນທີ່ເຂົ້າກັນໄດ້.",
   "PluginLoadedSuccessfully": "ໂຫຼດປລັກອິນສຳເລັດແລ້ວ",
   "PluginSamples": "ຕົວຢ່າງປລັກອິນ",
   "PluginSDK": "ປລັກອິນ SDK",

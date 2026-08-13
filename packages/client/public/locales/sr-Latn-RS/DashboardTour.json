@@ -3,7 +3,7 @@
   "DashboardAppsTitle": "Sve sa čime možete da radite",
   "DashboardCreate": "Napravite svoj prvi dokument upravo ovde — izaberite vrstu i počnite da pišete. Biće sačuvan u odeljku {{files}}, gde ga možete naći u svakom trenutku.",
   "DashboardCreateTitle": "Napravite nešto odmah",
-  "DashboardDevTools": "Pravite nešto svoje? Sve ovde je upravo za to: API za upravljanje radnim prostorom iz vašeg koda, SDK za ugrađivanje uređivača u sopstvenu aplikaciju, priključci, vebhukovi i ključevi. Ništa od ovoga nije potrebno za svakodnevni rad sa {{productName}}.",
+  "DashboardDevTools": "Pravite nešto svoje? Sve ovde je upravo za to: API za upravljanje radnim prostorom iz vašeg koda, SDK za ugrađivanje uređivača u sopstvenu aplikaciju, priključci, vebhukovi i ključevi. Ništa od ovoga nije potrebno za svakodnevni rad sa {{organizationName}} {{productName}}.",
   "DashboardDevToolsTitle": "Za programere",
   "DashboardIntegrations": "Već radite u drugoj platformi? Povežite je ovde i uređivači koje ste upravo videli biće vam dostupni direktno u alatkama koje vaš tim već koristi — bez posebnog koda i bez preseljenja podataka.",
   "DashboardIntegrationsTitle": "Rad sa drugim platformama",
@@ -12,7 +12,7 @@
   "DashboardProfile": "Naziv radnog prostora i kratak pregled vašeg profila: ime, imejl i lozinka. Odavde možete preimenovati radni prostor ili promeniti lozinku.",
   "DashboardProfileTitle": "Podaci vašeg profila",
   "WelcomeDashboardSubtitle": "Sve počinje na ovoj stranici",
-  "WelcomeDashboardTitle": "Dobrodošli u {{productName}}",
+  "WelcomeDashboardTitle": "Dobrodošli u {{organizationName}} {{productName}}",
   "WelcomeDescription": "Pravite dokumente, sarađujte u sobama, prikupljajte podatke obrascima i prepustite čitanje AI — sve sa jednog mesta. Prođite kratak obilazak i pokazaćemo vam sve.",
   "WelcomeLater": "Možda kasnije"
 }

@@ -193,7 +193,7 @@
   "LastUpdate": "Son güncelleme: {{date}}",
   "LDAP": "LDAP Ayarları",
   "LicenseLimitCounter": "Lisans sınırı Yöneticiler:",
-  "LicenseLimitDescription": "Lisans limiti sayacı, {{productName}}’de zaten var olan hesaplar ve içe aktarmak istediğiniz yeni kullanıcılardan oluşur. Zaten bir {{productName}} hesabı olan kullanıcıları içe aktarırsanız, bunlar sayaçta tekrar sayılmayacaktır. {{productName}} lisansınız en fazla {{maxLimit}} kullanıcıya sahip olmanıza izin verir.",
+  "LicenseLimitDescription": "Lisans limiti sayacı, çalışma alanında’de zaten var olan hesaplar ve içe aktarmak istediğiniz yeni kullanıcılardan oluşur. Zaten bir çalışma alanında hesabı olan kullanıcıları içe aktarırsanız, bunlar sayaçta tekrar sayılmayacaktır. {{organizationName}} {{productName}} lisansınız en fazla {{maxLimit}} kullanıcıya sahip olmanıza izin verir.",
   "Lifetime": "Oturum süresi (dk)",
   "LimitThemesTooltip": "Yalnızca 3 özel tema oluşturabilirsiniz. Yeni bir tane oluşturmak için önceki temalardan birini silmeniz gerekir.",
   "LinksBeforeRestriction": "Kısıtlamadan önce oluşturulan bağlantılara ne yapılacağını seçin:",

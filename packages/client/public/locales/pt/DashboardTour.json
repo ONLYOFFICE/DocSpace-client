@@ -3,7 +3,7 @@
   "DashboardAppsTitle": "Tudo aquilo com que pode trabalhar",
   "DashboardCreate": "Crie aqui mesmo o seu primeiro documento — escolha um tipo e comece a escrever. Ficará guardado em {{files}}, onde o pode encontrar a qualquer momento.",
   "DashboardCreateTitle": "Crie algo agora",
-  "DashboardDevTools": "Está a criar algo seu? Tudo aqui é para isso: uma API para controlar o espaço de trabalho a partir do seu código, um SDK para incorporar os editores na sua própria aplicação, plugins, webhooks e chaves. Nada disto é necessário para usar o {{productName}} no dia a dia.",
+  "DashboardDevTools": "Está a criar algo seu? Tudo aqui é para isso: uma API para controlar o espaço de trabalho a partir do seu código, um SDK para incorporar os editores na sua própria aplicação, plugins, webhooks e chaves. Nada disto é necessário para usar o {{organizationName}} {{productName}} no dia a dia.",
   "DashboardDevToolsTitle": "Para programadores",
   "DashboardIntegrations": "Já trabalha noutra plataforma? Ligue-a aqui e mantenha os editores que acabou de ver diretamente nas ferramentas que a sua equipa já utiliza — sem código personalizado e sem migração de dados.",
   "DashboardIntegrationsTitle": "Trabalhar com outras plataformas",
@@ -12,7 +12,7 @@
   "DashboardProfile": "O nome do espaço de trabalho e um breve resumo do seu perfil: nome, e-mail e palavra-passe. A partir daqui pode mudar o nome do espaço de trabalho ou alterar a sua palavra-passe.",
   "DashboardProfileTitle": "Os dados do seu perfil",
   "WelcomeDashboardSubtitle": "Tudo começa nesta página",
-  "WelcomeDashboardTitle": "Bem-vindo a {{productName}}",
+  "WelcomeDashboardTitle": "Bem-vindo a {{organizationName}} {{productName}}",
   "WelcomeDescription": "Crie documentos, colabore em salas, recolha dados com formulários e deixe a IA tratar da leitura — tudo a partir de um só lugar. Faça um tour rápido e mostramos-lhe tudo.",
   "WelcomeLater": "Talvez mais tarde"
 }

@@ -10,7 +10,7 @@
   "NotNeedSettings": "Nav jāievada iestatījumus",
   "PluginCacheWarningDescription": "Spraudņi tiek saglabāti kešatmiņā, pamatojoties uz to versijas numuru. Lai nodrošinātu, ka jūsu izmaiņas tiek piemērotas, lūdzu, palieliniet versijas numuru savā <1>package.json</1> failā pirms augšupielādes. Sistēma neatjauninās spraudni, ja versija paliek tāda pati.",
   "PluginDeletedSuccessfully": "Spraudnis veiksmīgi dzēsts",
-  "PluginIsNotCompatible": "Spraudņa SDK versija nesakrīt ar {{productName}} versiju. Lūdzu, atjauniniet uz saderīgu versiju.",
+  "PluginIsNotCompatible": "Spraudņa SDK versija nesakrīt ar {{organizationName}} {{productName}} versiju. Lūdzu, atjauniniet uz saderīgu versiju.",
   "PluginLoadedSuccessfully": "Papildinājums ielādēts veiksmīgi",
   "PluginSamples": "Spraudņu paraugi",
   "PluginSDK": "Pievienotājprogrammas SDK",

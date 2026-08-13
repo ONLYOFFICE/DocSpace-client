@@ -74,7 +74,8 @@ const AdminsInfoBlock = ({
           tooltipContent={
             <Text fontSize="12px">
               {t("LicenseLimitDescription", {
-                productName: getBrandName("ProductName"),
+                organizationName: getBrandName("OrganizationName"),
+				productName: getBrandName("ProductName"),
                 maxLimit: limitAdmins,
               })}
             </Text>

@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "Your {{productName}} account will be created for <1>{{email}}</1>. Please complete your registration:",
+  "AccountWillBeCreated": "Your {{organizationName}} {{productName}} account will be created for <1>{{email}}</1>. Please complete your registration:",
   "ConfirmOwnerPortalSuccessMessage": "The owner has been successfully changed. You will be redirected in 10 seconds.",
   "ConfirmOwnerPortalTitle": "Please confirm you want to change the owner to {{newOwner}}.",
   "ConnectApp": "Connect the app",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Disable my account",
   "DeleteProfileConfirmation": "Attention! You are about to disable your account.",
   "DeleteProfileConfirmationInfo": "By clicking \"Disable my account\" you agree with our <1>Privacy policy.</1>",
-  "DeleteProfileSuccessDescription": "Your {{productName}} account is successfully disabled. The owner or Full admin can permanently delete your disabled account.",
+  "DeleteProfileSuccessDescription": "Your {{organizationName}} {{productName}} account is successfully disabled. The owner or Full admin can permanently delete your disabled account.",
   "DeleteProfileSuccessMessage": "Your account is disabled",
   "DeleteProfileSuccessMessageInfo": "Please check our <1>Privacy policy</1> to learn more about deleting your account and associated data.",
   "EmailAndPasswordCopiedToClipboard": "Email and password copied to clipboard",

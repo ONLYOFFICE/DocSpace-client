@@ -193,7 +193,7 @@
   "LastUpdate": "Përditësimi i fundit: {{date}}",
   "LDAP": "Cilësimet LDAP",
   "LicenseLimitCounter": "Limiti i licencës për Administratorët:",
-  "LicenseLimitDescription": "Numëruesi i kufirit të licencës përbëhet nga: llogaritë tashmë ekzistuese në {{productName}} dhe përdoruesit e rinj që dëshironi të importoni. Nëse importoni përdorues që tashmë kanë një llogari të {{productName}}, ata nuk do të numërohen përsëri në numërues. Licenca juaj e {{productName}} ju lejon të keni një maksimum prej {{maxLimit}} përdoruesish.",
+  "LicenseLimitDescription": "Numëruesi i kufirit të licencës përbëhet nga: llogaritë tashmë ekzistuese në hapësirën e punës dhe përdoruesit e rinj që dëshironi të importoni. Nëse importoni përdorues që tashmë kanë një llogari të hapësirën e punës, ata nuk do të numërohen përsëri në numërues. Licenca juaj e {{organizationName}} {{productName}} ju lejon të keni një maksimum prej {{maxLimit}} përdoruesish.",
   "Lifetime": "Jetëgjatësia (min)",
   "LimitThemesTooltip": "Mund të krijoni vetëm 3 tema të personalizuara. Për të krijuar një të re, duhet të fshini një nga temat e mëparshme.",
   "LinksBeforeRestriction": "Zgjidhni çfarë ndodh me lidhjet e krijuara përpara kufizimit:",

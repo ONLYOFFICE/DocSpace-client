@@ -10,7 +10,7 @@
   "NotNeedSettings": "Nu trebuie să definiți setările",
   "PluginCacheWarningDescription": "Pluginurile sunt stocate în cache pe baza numărului lor de versiune. Pentru a vă asigura că modificările dumneavoastră sunt aplicate, vă rugăm să incrementați numărul versiunii în fișierul <1>package.json</1> înainte de încărcare. Sistemul nu va actualiza un plugin dacă versiunea rămâne aceeași.",
   "PluginDeletedSuccessfully": "Plugin șters cu succes",
-  "PluginIsNotCompatible": "Versiunea SDK a pluginului nu se potrivește cu versiunea {{productName}}. Vă rugăm să actualizați la o versiune compatibilă.",
+  "PluginIsNotCompatible": "Versiunea SDK a pluginului nu se potrivește cu versiunea {{organizationName}} {{productName}}. Vă rugăm să actualizați la o versiune compatibilă.",
   "PluginLoadedSuccessfully": "Plugin-ul a fost încărcat cu succes.",
   "PluginSamples": "Exemple de plugin-uri",
   "PluginSDK": "Kit de dezvoltare a plugin-urilor",

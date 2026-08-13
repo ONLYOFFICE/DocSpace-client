@@ -10,7 +10,7 @@
   "NotNeedSettings": "සැකසුම් අනවශ්‍යයි",
   "PluginCacheWarningDescription": "ප්ලගීන ඒවායේ අනුවාද අංකය මත පදනම්ව හැඹිලිගත කර ඇත. ඔබගේ වෙනස්කම් අදාළ වන බව සහතික කිරීම සඳහා, උඩුගත කිරීමට පෙර ඔබගේ <1>package.json</1> ගොනුවේ අනුවාද අංකය වැඩි කරන්න. අනුවාදය එලෙසම පවතී නම් පද්ධතිය ප්ලගීනයක් යාවත්කාලීන නොකරනු ඇත.",
   "PluginDeletedSuccessfully": "ප්ලගිනය සාර්ථකව මකා දමන ලදී",
-  "PluginIsNotCompatible": "ප්ලගින SDK අනුවාදය {{productName}} අනුවාදයට නොගැලපේ. කරුණාකර අනුකූල අනුවාදයකට යාවත්කාලීන කරන්න.",
+  "PluginIsNotCompatible": "ප්ලගින SDK අනුවාදය {{organizationName}} {{productName}} අනුවාදයට නොගැලපේ. කරුණාකර අනුකූල අනුවාදයකට යාවත්කාලීන කරන්න.",
   "PluginLoadedSuccessfully": "ප්ලගිනය සාර්ථකව පූරණය විය",
   "PluginSamples": "ප්ලගින් ආදර්ශ",
   "PluginSDK": "ප්ලගින් SDK",

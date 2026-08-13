@@ -193,7 +193,7 @@
   "LastUpdate": "Posledná aktualizácia: {{date}}",
   "LDAP": "Nastavenia LDAP",
   "LicenseLimitCounter": "Limit licencií pre administrátorov:",
-  "LicenseLimitDescription": "Obmedzenie licencie sa počíta takto: už existujúce účty v {{productName}} a nové používatelia, ktorých chcete importovať. Ak importujete používateľov, ktorí už majú účet v {{productName}}, nebudú sa započítavať. Vaša licencia {{productName}} vám umožňuje mať maximálne {{maxLimit}} používateľov.",
+  "LicenseLimitDescription": "Obmedzenie licencie sa počíta takto: už existujúce účty v pracovnom priestore a nové používatelia, ktorých chcete importovať. Ak importujete používateľov, ktorí už majú účet v pracovnom priestore, nebudú sa započítavať. Vaša licencia {{organizationName}} {{productName}} vám umožňuje mať maximálne {{maxLimit}} používateľov.",
   "Lifetime": "Životnosť (min)",
   "LimitThemesTooltip": "Môžete vytvoriť iba 3 vlastné témy. Ak chcete vytvoriť novú, musíte vymazať jednu z predchádzajúcich tém.",
   "LinksBeforeRestriction": "Vyberte, čo sa stane s prepojeniami vytvorenými pred zavedením obmedzenia:",

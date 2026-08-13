@@ -10,7 +10,7 @@
   "NotNeedSettings": "لا حاجة لإدخال الإعدادات",
   "PluginCacheWarningDescription": "تُخزَّن الإضافات بناءً على رقم إصدارها. لضمان تطبيق التغييرات، يرجى زيادة رقم الإصدار في ملف <1>package.json</1> قبل التحميل. لن يقوم النظام بتحديث الإضافة إذا بقي رقم الإصدار كما هو.",
   "PluginDeletedSuccessfully": "تم حذف المكوّن الإضافي بنجاح.",
-  "PluginIsNotCompatible": "إصدار SDK الخاص بالإضافة لا يتوافق مع إصدار {{productName}}. يرجى التحديث إلى إصدار متوافق.",
+  "PluginIsNotCompatible": "إصدار SDK الخاص بالإضافة لا يتوافق مع إصدار {{organizationName}} {{productName}}. يرجى التحديث إلى إصدار متوافق.",
   "PluginLoadedSuccessfully": "تم تحميل الإضافة بنجاح",
   "PluginSamples": "عينات الاضافات",
   "PluginSDK": "SDK الإضافات",

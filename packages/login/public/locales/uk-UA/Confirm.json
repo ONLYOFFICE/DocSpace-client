@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "Для <1>{{email}}</1> буде створено обліковий запис {{productName}}. Завершіть реєстрацію:",
+  "AccountWillBeCreated": "Для <1>{{email}}</1> буде створено обліковий запис {{organizationName}} {{productName}}. Завершіть реєстрацію:",
   "ConfirmOwnerPortalSuccessMessage": "Власника успішно змінено. Ви будете перенаправлені через 10 секунд.",
   "ConfirmOwnerPortalTitle": "Будь ласка, підтвердьте, що ви хочете змінити власника на {{newOwner}}.",
   "ConnectApp": "Підключіть додаток",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Видалити мій обліковий запис",
   "DeleteProfileConfirmation": "Увага! Ви збираєтеся видалити свій обліковий запис.",
   "DeleteProfileConfirmationInfo": "Натискаючи \"Видалити мій обліковий запис\", ви погоджуєтесь із <1>Політикою конфіденційності.</1>",
-  "DeleteProfileSuccessDescription": "Ваш обліковий запис {{productName}} успішно вимкнено. Власник або суперадміністратор може остаточно видалити ваш вимкнений обліковий запис.",
+  "DeleteProfileSuccessDescription": "Ваш обліковий запис {{organizationName}} {{productName}} успішно вимкнено. Власник або суперадміністратор може остаточно видалити ваш вимкнений обліковий запис.",
   "DeleteProfileSuccessMessage": "Ваш обліковий запис успішно видалено.",
   "DeleteProfileSuccessMessageInfo": "Перегляньте <1>Політику конфіденційності</1>, щоб дізнатися більше про видалення облікового запису та пов'язаних із ним даних.",
   "EmailAndPasswordCopiedToClipboard": "Електронну пошту та пароль скопійовано в буфер обміну",

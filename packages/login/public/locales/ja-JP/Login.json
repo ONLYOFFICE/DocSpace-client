@@ -1,7 +1,7 @@
 {
   "ChangePasswordSuccess": "パスワードの変更に成功しました。",
   "ConfirmEmailChange": "メールアドレスの変更をご確認ください",
-  "ConfirmEmailChangeText": "あなたは{{productName}}アカウントのメールアドレスを変更するようにリクエストしました。続行するには、現在の認証情報を使用してサインインしてください。",
+  "ConfirmEmailChangeText": "あなたは{{organizationName}} {{productName}}アカウントのメールアドレスを変更するようにリクエストしました。続行するには、現在の認証情報を使用してサインインしてください。",
   "ErrorInvalidText": "10秒後、<1>ワークスペース</1>にリダイレクトされます。",
   "ForgotPassword": "パスワードをお忘れですか？",
   "LDAPUsernamePlaceholder": "{{ldap_domain}}のユーザーネーム",

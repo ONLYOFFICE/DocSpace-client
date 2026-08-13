@@ -117,7 +117,8 @@ const ProfileRemoveForm = ({
         <FormWrapper>
           <Text>
             {t("DeleteProfileSuccessDescription", {
-              productName: getBrandName("ProductName"),
+              organizationName: getBrandName("OrganizationName"),
+				productName: getBrandName("ProductName"),
             })}
             <br />
             <Trans i18nKey="DeleteProfileSuccessMessageInfo" ns="Confirm" t={t}>

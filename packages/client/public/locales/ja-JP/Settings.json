@@ -193,7 +193,7 @@
   "LastUpdate": "最終更新日：{{date}}",
   "LDAP": "LDAP設定",
   "LicenseLimitCounter": "ライセンス制限 管理者：",
-  "LicenseLimitDescription": "ライセンス制限カウンターは、{{productName}}に既に存在するアカウントと、インポートする新規ユーザーで構成されます。既に{{productName}}アカウントを持っているユーザーをインポートした場合、そのユーザーはカウントされません。現在の{{productName}}ライセンスでは、最大{{maxLimit}}人のユーザーを持つことができます。",
+  "LicenseLimitDescription": "ライセンス制限カウンターは、ワークスペースに既に存在するアカウントと、インポートする新規ユーザーで構成されます。既にワークスペースアカウントを持っているユーザーをインポートした場合、そのユーザーはカウントされません。現在の{{organizationName}} {{productName}}ライセンスでは、最大{{maxLimit}}人のユーザーを持つことができます。",
   "Lifetime": "有効期間（分）",
   "LimitThemesTooltip": "カスタムテーマは3つまでしか作成できません。新しく作成する場合は、以前のテーマを1つ削除する必要があります。",
   "LinksBeforeRestriction": "制限前に作成されたリンクをどう処理するかを選択してください：",

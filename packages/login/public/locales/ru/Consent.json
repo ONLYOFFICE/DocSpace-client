@@ -1,7 +1,7 @@
 {
   "AllowButton": "Разрешить",
-  "ConsentDescription": "Данные <strong>{{displayName}}</strong>, к которым предоставлен доступ, будут регулироваться <6>Политикой конфиденциальности</6> и <6>Условиями использования</6> <strong>{{nameApp}}</strong>. Вы можете отозвать это согласие в любое время в настройках вашей учетной записи {{productName}}.",
-  "ConsentSubHeader": "Приложение <1>{{nameApp}}</1> запрашивает доступ к следующим данным в <strong>вашей учетной записи {{productName}}</strong>:",
+  "ConsentDescription": "Данные <strong>{{displayName}}</strong>, к которым предоставлен доступ, будут регулироваться <6>Политикой конфиденциальности</6> и <6>Условиями использования</6> <strong>{{nameApp}}</strong>. Вы можете отозвать это согласие в любое время в настройках вашей учетной записи {{organizationName}} {{productName}}.",
+  "ConsentSubHeader": "Приложение <1>{{nameApp}}</1> запрашивает доступ к следующим данным в <strong>вашей учетной записи {{organizationName}} {{productName}}</strong>:",
   "DenyButton": "Отклонить",
   "NotYou": "Это не ваши данные?",
   "SignedInAs": "Вы вошли как",

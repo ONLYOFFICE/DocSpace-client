@@ -79,7 +79,7 @@
   "ScopesHelp": "Tvērumi tiek izmantoti, lai ierobežotu lietotnes piekļuvi visiem ar lietotāju saistītajiem datiem, un tie ļaus precīzi norādīt, kāda veida piekļuve jums ir nepieciešama.",
   "Secret": "Slepens",
   "SecretCopy": "Klienta noslēpums ir veiksmīgi kopēts starpliktuvē",
-  "SignIn": "Pierakstīties ar {{productName}}",
+  "SignIn": "Pierakstīties ar {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Atbalsts un juridiskā informācija",
   "TermsOfService": "Pakalpojumu sniegšanas noteikumi",
   "TermsOfServiceURL": "Pakalpojumu sniegšanas noteikumu vietrādis URL",

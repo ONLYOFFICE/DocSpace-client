@@ -193,7 +193,7 @@
   "LastUpdate": "Viimeinen päivitys: {{date}}",
   "LDAP": "LDAP-asetukset",
   "LicenseLimitCounter": "Lisenssiraja Järjestelmänvalvojat:",
-  "LicenseLimitDescription": "Lisenssirajalaskuri koostuu jo olemassa olevista {{productName}}-n tileistä ja uusistä käyttäjistä, jotka haluat tuoda. Jos tuot käyttäjiä, joilla on jo {{productName}}-tili, heitä ei lasketa uudelleen laskuriin. {{productName}}-lisenssilläsi voi olla enintaan {{maxLimit}} käyttäjää.",
+  "LicenseLimitDescription": "Lisenssirajalaskuri koostuu jo olemassa olevista työtilassa-n tileistä ja uusistä käyttäjistä, jotka haluat tuoda. Jos tuot käyttäjiä, joilla on jo työtilassa-tili, heitä ei lasketa uudelleen laskuriin. {{organizationName}} {{productName}}-lisenssilläsi voi olla enintaan {{maxLimit}} käyttäjää.",
   "Lifetime": "Kesto (min)",
   "LimitThemesTooltip": "Voit luoda vain 3 räätälöityä teemaa. Luodaksesi uuden, sinun täytyy poistaa yksi edellisistä teemoista.",
   "LinksBeforeRestriction": "Valitse, mitä tapahtuu ennen rajoitusta luoduille linkeille:",

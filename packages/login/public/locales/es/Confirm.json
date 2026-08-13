@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "Se creará una cuenta de {{productName}} para <1>{{email}}</1>. Por favor, complete su registro:",
+  "AccountWillBeCreated": "Se creará una cuenta de {{organizationName}} {{productName}} para <1>{{email}}</1>. Por favor, complete su registro:",
   "ConfirmOwnerPortalSuccessMessage": "El propietario se ha cambiado correctamente. Se le redirigirá en 10 segundos.",
   "ConfirmOwnerPortalTitle": "Confirme que desea cambiar el propietario a {{newOwner}}.",
   "ConnectApp": "Conecte la aplicación",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Eliminar mi cuenta",
   "DeleteProfileConfirmation": "¡Atención! Usted va a eliminar su cuenta.",
   "DeleteProfileConfirmationInfo": "Al hacer clic en \"Eliminar mi cuenta\", usted acepta <1>nuestra política de privacidad.</1>",
-  "DeleteProfileSuccessDescription": "Su cuenta de {{productName}} se ha deshabilitado correctamente. El propietario o el superadministrador pueden eliminar de forma permanente su cuenta deshabilitada.",
+  "DeleteProfileSuccessDescription": "Su cuenta de {{organizationName}} {{productName}} se ha deshabilitado correctamente. El propietario o el superadministrador pueden eliminar de forma permanente su cuenta deshabilitada.",
   "DeleteProfileSuccessMessage": "Su cuenta ha sido eliminada con éxito.",
   "DeleteProfileSuccessMessageInfo": "Consulte <1>nuestra política de privacidad</1> para saber más sobre la eliminación de su cuenta y los datos asociados a ella.",
   "EmailAndPasswordCopiedToClipboard": "Email y contraseña se han copiado al portapapeles",

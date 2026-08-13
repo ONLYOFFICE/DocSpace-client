@@ -193,7 +193,7 @@
   "LastUpdate": "Poslední aktualizace: {{date}}",
   "LDAP": "Nastavení LDAP",
   "LicenseLimitCounter": "Omezení licence Administrátoři:",
-  "LicenseLimitDescription": "Počítadlo licenčních limitů se skládá z: již existujících účtů v {{productName}} a nových uživatelů, které chcete importovat. Pokud importujete uživatele, kteří již účet v {{productName}} mají, nebudou do počítadla znovu započítáni. Vaše licence {{productName}} vám umožňuje mít maximálně {{maxLimit}} uživatelů.",
+  "LicenseLimitDescription": "Počítadlo licenčních limitů se skládá z: již existujících účtů v pracovním prostoru a nových uživatelů, které chcete importovat. Pokud importujete uživatele, kteří již účet v pracovním prostoru mají, nebudou do počítadla znovu započítáni. Vaše licence {{organizationName}} {{productName}} vám umožňuje mít maximálně {{maxLimit}} uživatelů.",
   "Lifetime": "Životnost (min)",
   "LimitThemesTooltip": "Můžete vytvořit pouze 3 vlastní motivy. Chcete-li vytvořit nové, musíte odstranit jedno z předchozích témat.",
   "LinksBeforeRestriction": "Vyberte, co se stane s odkazy vytvořenými před omezením:",

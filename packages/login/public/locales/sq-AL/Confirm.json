@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "Një llogari e {{productName}} do të krijohet për <1>{{email}}</1>. Ju lutem plotësoni regjistrimin tuaj:",
+  "AccountWillBeCreated": "Një llogari e {{organizationName}} {{productName}} do të krijohet për <1>{{email}}</1>. Ju lutem plotësoni regjistrimin tuaj:",
   "ConfirmOwnerPortalSuccessMessage": "Pronari u ndryshua me sukses. Do të ridrejtoheni brenda 10 sekondave.",
   "ConfirmOwnerPortalTitle": "Ju lutemi konfirmoni që dëshironi të ndryshoni pronarin në {{newOwner}}.",
   "ConnectApp": "Lidhuni me aplikacionin",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Çaktivizoni llogarinë time",
   "DeleteProfileConfirmation": "Kujdes! Jeni gati të çaktivizoni llogarinë tuaj.",
   "DeleteProfileConfirmationInfo": "Duke klikuar \"Çaktivizoni llogarinë time\", ti pranon <1>Politikën tonë të privatësisë.</1>",
-  "DeleteProfileSuccessDescription": "Llogaria juaj {{productName}} u çaktivizua me sukses. Pronari ose superadministratori mund të fshijë përgjithmonë llogarinë tuaj të çaktivizuar.",
+  "DeleteProfileSuccessDescription": "Llogaria juaj {{organizationName}} {{productName}} u çaktivizua me sukses. Pronari ose superadministratori mund të fshijë përgjithmonë llogarinë tuaj të çaktivizuar.",
   "DeleteProfileSuccessMessage": "Llogaria juaj është çaktivizuar",
   "DeleteProfileSuccessMessageInfo": "Ju lutem, kontrolloni <1>Politikën tonë të privatësisë</1> për të mësuar më shumë rreth fshirjes së llogarisë tuaj dhe të dhënave përkatëse.",
   "EmailAndPasswordCopiedToClipboard": "Email-i dhe fjalëkalimi u kopjuan në kujtesën e fragmenteve",

@@ -1,7 +1,7 @@
 {
   "ChangePasswordSuccess": "මුරපදය සාර්ථකව වෙනස් කර ඇත",
   "ConfirmEmailChange": "ඔබගේ විද්‍යුත් තැපැල් වෙනස තහවුරු කරන්න",
-  "ConfirmEmailChangeText": "ඔබ ඔබේ {{productName}} ගිණුමේ විද්‍යුත් තැපැල් ලිපිනය වෙනස් කිරීමට ඉල්ලා ඇත. ඉදිරියට යාමට, කරුණාකර ඔබේ වත්මන් අක්තපත්‍ර භාවිතා කර පුරනය වන්න.",
+  "ConfirmEmailChangeText": "ඔබ ඔබේ {{organizationName}} {{productName}} ගිණුමේ විද්‍යුත් තැපැල් ලිපිනය වෙනස් කිරීමට ඉල්ලා ඇත. ඉදිරියට යාමට, කරුණාකර ඔබේ වත්මන් අක්තපත්‍ර භාවිතා කර පුරනය වන්න.",
   "ErrorInvalidText": "තත්පර 10 කින් ඔබව <1>වැඩ අවකාශය</1> වෙත යොමු කරනු ඇත",
   "ForgotPassword": "ඔබගේ මුරපදය අමතකද?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} හි පරිශීලක නාමය",

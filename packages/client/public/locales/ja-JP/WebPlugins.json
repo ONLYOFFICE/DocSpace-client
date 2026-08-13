@@ -10,7 +10,7 @@
   "NotNeedSettings": "設定入力が不要",
   "PluginCacheWarningDescription": "プラグインはバージョン番号に基づいてキャッシュされます。変更を適用するには、アップロードする前に<1>package.json</1>ファイルのバージョン番号をインクリメントしてください。バージョン番号が同じままである場合、システムはプラグインを更新しません。",
   "PluginDeletedSuccessfully": "プラグインを正常に削除しました。",
-  "PluginIsNotCompatible": "プラグインSDKのバージョンが{{productName}}のバージョンと一致しません。互換性のあるバージョンに更新してください。",
+  "PluginIsNotCompatible": "プラグインSDKのバージョンが{{organizationName}} {{productName}}のバージョンと一致しません。互換性のあるバージョンに更新してください。",
   "PluginLoadedSuccessfully": "プラグインが正常に読み込まれました",
   "PluginSamples": "プラグインのサンプル",
   "PluginSDK": "プラグインSDK",

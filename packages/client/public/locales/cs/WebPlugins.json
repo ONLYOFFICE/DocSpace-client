@@ -10,7 +10,7 @@
   "NotNeedSettings": "Není třeba zadávat nastavení",
   "PluginCacheWarningDescription": "Pluginy jsou ukládány do mezipaměti na základě jejich čísla verze. Aby se zajistilo, že se vaše změny použijí, prosím zvyšte číslo verze ve vašem souboru <1>package.json</1> před nahráním. Systém neaktualizuje plugin, pokud zůstane číslo verze stejné.",
   "PluginDeletedSuccessfully": "Zásuvný modul byl úspěšně odstraněn",
-  "PluginIsNotCompatible": "Verze plugin SDK neodpovídá verzi {{productName}}. Prosím, aktualizujte na kompatibilní verzi.",
+  "PluginIsNotCompatible": "Verze plugin SDK neodpovídá verzi {{organizationName}} {{productName}}. Prosím, aktualizujte na kompatibilní verzi.",
   "PluginLoadedSuccessfully": "Plugin načten úspěšně",
   "PluginSamples": "Ukázky pluginů",
   "PluginSDK": "Plugin SDK",

@@ -75,7 +75,8 @@ export const getRootTitle = (
       return t("Common:EmptyScreenFolder");
     default:
       return t("Common:EmptyRootRoomHeader", {
-        productName: getBrandName("ProductName"),
+        organizationName: getBrandName("OrganizationName"),
+				productName: getBrandName("ProductName"),
       });
   }
 };

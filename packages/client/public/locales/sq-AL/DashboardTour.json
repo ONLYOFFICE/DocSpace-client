@@ -3,7 +3,7 @@
   "DashboardAppsTitle": "Gjithçka me të cilën mund të punoni",
   "DashboardCreate": "Krijoni dokumentin tuaj të parë pikërisht këtu — zgjidhni një lloj dhe filloni të shkruani. Do të ruhet te {{files}}, ku mund ta gjeni në çdo kohë.",
   "DashboardCreateTitle": "Krijoni diçka tani",
-  "DashboardDevTools": "Po ndërtoni diçka tuajën? Gjithçka këtu është pikërisht për këtë: një API për të drejtuar hapësirën e punës nga kodi juaj, një SDK për të futur redaktuesit në aplikacionin tuaj, shtojca, webhook-e dhe çelësa. Asgjë nga këto nuk ju nevojitet për ta përdorur {{productName}} çdo ditë.",
+  "DashboardDevTools": "Po ndërtoni diçka tuajën? Gjithçka këtu është pikërisht për këtë: një API për të drejtuar hapësirën e punës nga kodi juaj, një SDK për të futur redaktuesit në aplikacionin tuaj, shtojca, webhook-e dhe çelësa. Asgjë nga këto nuk ju nevojitet për ta përdorur {{organizationName}} {{productName}} çdo ditë.",
   "DashboardDevToolsTitle": "Për zhvilluesit",
   "DashboardIntegrations": "Punoni tashmë në një platformë tjetër? Lidheni këtu dhe redaktorët që sapo patë do t'i keni drejtpërdrejt në mjetet që ekipi juaj përdor tashmë — pa kod të posaçëm dhe pa zhvendosur asgjë.",
   "DashboardIntegrationsTitle": "Puna me platforma të tjera",
@@ -12,7 +12,7 @@
   "DashboardProfile": "Emri i hapësirës së punës dhe një përmbledhje e shkurtër e profilit tuaj: emri, e-maili dhe fjalëkalimi. Nga këtu mund ta riemërtoni hapësirën e punës ose të ndryshoni fjalëkalimin.",
   "DashboardProfileTitle": "Të dhënat e profilit tuaj",
   "WelcomeDashboardSubtitle": "Gjithçka fillon në këtë faqe",
-  "WelcomeDashboardTitle": "Mirë se vini në {{productName}}",
+  "WelcomeDashboardTitle": "Mirë se vini në {{organizationName}} {{productName}}",
   "WelcomeDescription": "Krijoni dokumente, bashkëpunoni në dhoma, mblidhni të dhëna me formularë dhe lëreni IA-në të lexojë për ju — të gjitha nga një vend i vetëm. Bëni një tur të shpejtë dhe do t'ju tregojmë gjithçka.",
   "WelcomeLater": "Ndoshta më vonë"
 }

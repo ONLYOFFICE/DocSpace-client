@@ -10,7 +10,7 @@
   "NotNeedSettings": "Nije potrebno ući u podešavanja",
   "PluginCacheWarningDescription": "Dodaci se keširaju na osnovu njihovog broja verzije. Kako biste osigurali da se vaše promene primene, molimo povećajte broj verzije u vašoj <1>package.json</1> datoteci pre učitavanja. Sistem neće ažurirati dodatak ako broj verzije ostane isti.",
   "PluginDeletedSuccessfully": "Dodatak je uspešno obrisan",
-  "PluginIsNotCompatible": "Verzija plugin SDK-a se ne poklapa sa verzijom {{productName}}. Molimo ažuriraj na kompatibilnu verziju.",
+  "PluginIsNotCompatible": "Verzija plugin SDK-a se ne poklapa sa verzijom {{organizationName}} {{productName}}. Molimo ažuriraj na kompatibilnu verziju.",
   "PluginLoadedSuccessfully": "Plugin uspešno učitan",
   "PluginSamples": "Primeri dodataka",
   "PluginSDK": "Plugin SDK (SDK za dodatke)",

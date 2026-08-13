@@ -503,7 +503,8 @@ const Shell = ({ page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${logoText} ${getBrandName("ProductName")}`,
+        organizationName: logoText,
+        productName: getBrandName("ProductName"),
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {

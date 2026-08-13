@@ -210,7 +210,8 @@ const PreviewDialog = ({
 									t={t}
 									ns="OAuth"
 									i18nKey="SignIn"
-									values={{ productName: getBrandName("ProductName") }}
+									values={{ organizationName: getBrandName("OrganizationName"),
+				productName: getBrandName("ProductName") }}
 								/>
 							}
 							IconComponent={icon}

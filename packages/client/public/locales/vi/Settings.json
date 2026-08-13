@@ -193,7 +193,7 @@
   "LastUpdate": "Ngày cập nhật cuối cùng: {{date}}",
   "LDAP": "Cài đặt LDAP",
   "LicenseLimitCounter": "Giới hạn bản quyền Quản trị viên:",
-  "LicenseLimitDescription": "Số lượng giới hạn bản quyền bao gồm: tài khoản đã tồn tại trong {{productName}} và người dùng mới mà bạn muốn nhập. Nếu bạn nhập người dùng đã có tài khoản {{productName}}, họ sẽ không được tính lại trong số lượng. Bản quyền {{productName}} cho phép bạn có tối đa {{maxLimit}} người dùng.",
+  "LicenseLimitDescription": "Số lượng giới hạn bản quyền bao gồm: tài khoản đã tồn tại trong không gian làm việc và người dùng mới mà bạn muốn nhập. Nếu bạn nhập người dùng đã có tài khoản không gian làm việc, họ sẽ không được tính lại trong số lượng. Bản quyền {{organizationName}} {{productName}} cho phép bạn có tối đa {{maxLimit}} người dùng.",
   "Lifetime": "Thời gian tồn tại (phút)",
   "LimitThemesTooltip": "Bạn chỉ có thể tạo 3 theme tùy chỉnh. Để tạo một theme mới, bạn phải xóa một trong các theme trước đó.",
   "LinksBeforeRestriction": "Chọn điều gì xảy ra với các liên kết được tạo trước khi áp dụng hạn chế:",

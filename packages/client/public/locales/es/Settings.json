@@ -193,7 +193,7 @@
   "LastUpdate": "Última actualización: {{date}}",
   "LDAP": "Configuración de LDAP",
   "LicenseLimitCounter": "Límite de licencia para Administradores:",
-  "LicenseLimitDescription": "El contador de límite de licencias consta de: cuentas ya existentes en {{productName}} y nuevos usuarios que desea importar. Si importa usuarios que ya tienen una cuenta de {{productName}}, no volverán a contarse en el contador. Su licencia de {{productName}} le permite tener un máximo de {{maxLimit}} usuarios.",
+  "LicenseLimitDescription": "El contador de límite de licencias consta de: cuentas ya existentes en el espacio de trabajo y nuevos usuarios que desea importar. Si importa usuarios que ya tienen una cuenta de el espacio de trabajo, no volverán a contarse en el contador. Su licencia de {{organizationName}} {{productName}} le permite tener un máximo de {{maxLimit}} usuarios.",
   "Lifetime": "Duración (min)",
   "LimitThemesTooltip": "Solo puede crear 3 temas personalizados. Para crear uno nuevo, debe eliminar uno de los temas anteriores.",
   "LinksBeforeRestriction": "Elija qué ocurre con los enlaces creados antes de la restricción:",

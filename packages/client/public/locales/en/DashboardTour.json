@@ -3,7 +3,7 @@
   "DashboardAppsTitle": "Everything you can work with",
   "DashboardCreate": "Create your first document right here — pick a type and start writing. It will be saved to {{files}}, where you can find it any time.",
   "DashboardCreateTitle": "Create something now",
-  "DashboardDevTools": "Building something of your own? Everything here is for that: an API to drive the apps from your code, an SDK to embed the editors in your own app, plugins, webhooks and keys. Nothing you need to touch to use {{productName}} day to day.",
+  "DashboardDevTools": "Building something of your own? Everything here is for that: an API to drive the apps from your code, an SDK to embed the editors in your own app, plugins, webhooks and keys. Nothing you need to touch to use {{organizationName}} {{productName}} day to day.",
   "DashboardDevToolsTitle": "For developers",
   "DashboardIntegrations": "Already working in another platform? Connect it here and keep the editors you have just seen, right inside the tools your team already uses — no custom code and nothing to move over.",
   "DashboardIntegrationsTitle": "Working with other platforms",
@@ -12,7 +12,7 @@
   "DashboardProfile": "The workspace name and a short summary of your profile: your name, email and password. From here you can rename the workspace or change your password.",
   "DashboardProfileTitle": "Your profile details",
   "WelcomeDashboardSubtitle": "Everything starts on this page",
-  "WelcomeDashboardTitle": "Welcome to {{productName}}",
+  "WelcomeDashboardTitle": "Welcome to {{organizationName}} {{productName}}",
   "WelcomeDescription": "Create documents, collaborate in rooms, collect data with forms and let AI do the reading — all from one place. Take a quick tour and we will show you around.",
   "WelcomeLater": "Maybe later"
 }

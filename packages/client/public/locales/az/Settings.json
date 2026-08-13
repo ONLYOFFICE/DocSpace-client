@@ -193,7 +193,7 @@
   "LastUpdate": "Son yeniləmə: {{date}}",
   "LDAP": "LDAP Parametrləri",
   "LicenseLimitCounter": "Lisenziya limiti Administratorlar:",
-  "LicenseLimitDescription": "Lisenziya limiti sayğacı aşağıdakılardan ibarətdir: {{productName}}-də mövcud hesablar və idxal etmək istədiyiniz yeni istifadəçilər. Artıq {{productName}} hesabı olan istifadəçiləri idxal etsəniz, onlar bir daha sayğacda sayılmayacaqlar. {{productName}} lisenziyanız maksimum {{maxLimit}} istifadəçinin mövcud olmasına imkan verir.",
+  "LicenseLimitDescription": "Lisenziya limiti sayğacı aşağıdakılardan ibarətdir: iş sahəsində-də mövcud hesablar və idxal etmək istədiyiniz yeni istifadəçilər. Artıq iş sahəsində hesabı olan istifadəçiləri idxal etsəniz, onlar bir daha sayğacda sayılmayacaqlar. {{organizationName}} {{productName}} lisenziyanız maksimum {{maxLimit}} istifadəçinin mövcud olmasına imkan verir.",
   "Lifetime": "Ömürlük (dəq)",
   "LimitThemesTooltip": "Siz yalnız 3 fərdi mövzu yarada bilərsiniz. Yenisini yaratmaq üçün əvvəlki mövzulardan birini silməlisiniz.",
   "LinksBeforeRestriction": "Məhdudiyyətdən əvvəl yaradılmış keçidlərə nə olacağını seçin:",

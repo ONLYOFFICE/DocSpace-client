@@ -193,7 +193,7 @@
   "LastUpdate": "Ostatnia aktualizacja: {{date}}",
   "LDAP": "Ustawienia LDAP",
   "LicenseLimitCounter": "Limit licencji Administratorzy:",
-  "LicenseLimitDescription": "Licznik limitu licencji składa się z: kont istniejących już w {{productName}} oraz nowych użytkowników, których chcesz zaimportować. Jeśli zaimportujesz użytkowników, którzy mają już konto {{productName}}, nie zostaną oni ponownie uwzględnieni na liczniku. Twoja licencja {{productName}} pozwala Ci mieć maksymalnie {{maxLimit}} użytkowników.",
+  "LicenseLimitDescription": "Licznik limitu licencji składa się z: kont istniejących już w przestrzeni roboczej oraz nowych użytkowników, których chcesz zaimportować. Jeśli zaimportujesz użytkowników, którzy mają już konto przestrzeni roboczej, nie zostaną oni ponownie uwzględnieni na liczniku. Twoja licencja {{organizationName}} {{productName}} pozwala Ci mieć maksymalnie {{maxLimit}} użytkowników.",
   "Lifetime": "Czas trwania (min)",
   "LimitThemesTooltip": "Możesz utworzyć tylko 3 niestandardowe motywy. Aby utworzyć nowy, musisz usunąć jeden z poprzednich motywów.",
   "LinksBeforeRestriction": "Wybierz, co ma się stać z linkami utworzonymi przed wprowadzeniem ograniczenia:",

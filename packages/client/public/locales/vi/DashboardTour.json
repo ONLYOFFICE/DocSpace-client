@@ -3,7 +3,7 @@
   "DashboardAppsTitle": "Mọi thứ bạn có thể dùng để làm việc",
   "DashboardCreate": "Hãy tạo tài liệu đầu tiên của bạn ngay tại đây — chọn một loại và bắt đầu viết. Tài liệu sẽ được lưu vào {{files}}, nơi bạn có thể tìm lại bất cứ lúc nào.",
   "DashboardCreateTitle": "Tạo một thứ gì đó ngay bây giờ",
-  "DashboardDevTools": "Bạn đang xây dựng thứ gì đó của riêng mình? Mọi thứ ở đây đều dành cho điều đó: API để điều khiển không gian làm việc từ mã của bạn, SDK để nhúng trình soạn thảo vào ứng dụng của riêng bạn, plugin, webhook và khóa. Không có thứ nào trong số này là cần thiết để dùng {{productName}} hằng ngày.",
+  "DashboardDevTools": "Bạn đang xây dựng thứ gì đó của riêng mình? Mọi thứ ở đây đều dành cho điều đó: API để điều khiển không gian làm việc từ mã của bạn, SDK để nhúng trình soạn thảo vào ứng dụng của riêng bạn, plugin, webhook và khóa. Không có thứ nào trong số này là cần thiết để dùng {{organizationName}} {{productName}} hằng ngày.",
   "DashboardDevToolsTitle": "Dành cho nhà phát triển",
   "DashboardIntegrations": "Bạn đã làm việc trên một nền tảng khác? Hãy kết nối nó tại đây để dùng chính những trình soạn thảo bạn vừa xem ngay trong các công cụ mà nhóm của bạn đang sử dụng — không cần viết mã riêng và không phải di chuyển dữ liệu.",
   "DashboardIntegrationsTitle": "Làm việc với các nền tảng khác",
@@ -12,7 +12,7 @@
   "DashboardProfile": "Tên không gian làm việc và bản tóm tắt ngắn gọn về hồ sơ của bạn: tên, email và mật khẩu. Từ đây bạn có thể đổi tên không gian làm việc hoặc thay đổi mật khẩu.",
   "DashboardProfileTitle": "Thông tin hồ sơ của bạn",
   "WelcomeDashboardSubtitle": "Mọi thứ đều bắt đầu từ trang này",
-  "WelcomeDashboardTitle": "Chào mừng đến với {{productName}}",
+  "WelcomeDashboardTitle": "Chào mừng đến với {{organizationName}} {{productName}}",
   "WelcomeDescription": "Tạo tài liệu, cộng tác trong các phòng, thu thập dữ liệu bằng biểu mẫu và để AI lo việc đọc — tất cả từ một nơi. Hãy tham quan nhanh và chúng tôi sẽ giới thiệu mọi thứ cho bạn.",
   "WelcomeLater": "Có thể để sau"
 }

@@ -1,7 +1,7 @@
 {
   "ChangePasswordSuccess": "Parola a fost schimbată cu succes",
   "ConfirmEmailChange": "Confirmați schimbarea adresei de e-mail",
-  "ConfirmEmailChangeText": "Ați solicitat schimbarea adresei de e-mail pentru contul dvs. {{productName}}. Pentru a continua, vă rugăm să vă autentificați folosind informații de conectare curente.",
+  "ConfirmEmailChangeText": "Ați solicitat schimbarea adresei de e-mail pentru contul dvs. {{organizationName}} {{productName}}. Pentru a continua, vă rugăm să vă autentificați folosind informații de conectare curente.",
   "ErrorInvalidText": "Veţi fi redirecționat în 10 secunde către <1>spațiul de lucru</1>",
   "ForgotPassword": "Ați uitat parola?",
   "LDAPUsernamePlaceholder": "Nume de utilizator al {{ldap_domain}}",

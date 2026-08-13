@@ -10,7 +10,7 @@
   "NotNeedSettings": "Ni treba vnesti nastavitev",
   "PluginCacheWarningDescription": "Vtičniki se predpomnijo glede na njihovo številko različice. Da bi zagotovili, da se vaše spremembe uporabijo, prosimo, povečajte številko različice v datoteki <1>package.json</1> pred nalaganjem. Sistem ne bo posodobil vtičnika, če številka različice ostane enaka.",
   "PluginDeletedSuccessfully": "Vtičnik je bil uspešno izbrisan",
-  "PluginIsNotCompatible": "Različica SDK-ja za vtičnike ne ustreza različici {{productName}}. Posodobite na združljivo različico.",
+  "PluginIsNotCompatible": "Različica SDK-ja za vtičnike ne ustreza različici {{organizationName}} {{productName}}. Posodobite na združljivo različico.",
   "PluginLoadedSuccessfully": "Vtičnik je bil uspešno naložen.",
   "PluginSamples": "Primeri dodatkov",
   "PluginSDK": "Vtičnik SDK",

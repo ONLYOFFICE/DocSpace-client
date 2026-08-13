@@ -3,7 +3,7 @@
   "DashboardAppsTitle": "Çalışabileceğiniz her şey",
   "DashboardCreate": "İlk belgenizi tam burada oluşturun — bir tür seçin ve yazmaya başlayın. Belge {{files}} bölümüne kaydedilir ve orada istediğiniz zaman bulabilirsiniz.",
   "DashboardCreateTitle": "Şimdi bir şey oluşturun",
-  "DashboardDevTools": "Kendinize ait bir şey mi geliştiriyorsunuz? Buradaki her şey bunun için: çalışma alanını kodunuzdan yönetmek için bir API, editörleri kendi uygulamanıza gömmek için bir SDK, eklentiler, webhook'lar ve anahtarlar. {{productName}}'i günlük kullanmak için bunlara dokunmanıza gerek yok.",
+  "DashboardDevTools": "Kendinize ait bir şey mi geliştiriyorsunuz? Buradaki her şey bunun için: çalışma alanını kodunuzdan yönetmek için bir API, editörleri kendi uygulamanıza gömmek için bir SDK, eklentiler, webhook'lar ve anahtarlar. {{organizationName}} {{productName}}'i günlük kullanmak için bunlara dokunmanıza gerek yok.",
   "DashboardDevToolsTitle": "Geliştiriciler için",
   "DashboardIntegrations": "Zaten başka bir platformda mı çalışıyorsunuz? Onu buradan bağlayın; az önce gördüğünüz düzenleyiciler, ekibinizin hâlihazırda kullandığı araçların içinde yer alsın — özel kod yazmadan ve veri taşımadan.",
   "DashboardIntegrationsTitle": "Diğer platformlarla çalışma",
@@ -12,7 +12,7 @@
   "DashboardProfile": "Çalışma alanı adı ve profilinizin kısa bir özeti: adınız, e-postanız ve parolanız. Buradan çalışma alanını yeniden adlandırabilir veya parolanızı değiştirebilirsiniz.",
   "DashboardProfileTitle": "Profil bilgileriniz",
   "WelcomeDashboardSubtitle": "Her şey bu sayfada başlar",
-  "WelcomeDashboardTitle": "{{productName}} platformuna hoş geldiniz",
+  "WelcomeDashboardTitle": "{{organizationName}} {{productName}} platformuna hoş geldiniz",
   "WelcomeDescription": "Belgeler oluşturun, odalarda birlikte çalışın, formlarla veri toplayın ve okumayı yapay zekaya bırakın — hepsi tek bir yerden. Kısa bir tur yapın, size her şeyi gösterelim.",
   "WelcomeLater": "Belki daha sonra"
 }

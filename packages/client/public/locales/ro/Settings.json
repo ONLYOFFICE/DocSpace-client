@@ -193,7 +193,7 @@
   "LastUpdate": "Ultima actualizare: {{date}}",
   "LDAP": "Setări LDAP",
   "LicenseLimitCounter": "Limita impusă de licență administratori:",
-  "LicenseLimitDescription": "Contorul limitei de licență este format din: conturile deja existente în spațiu {{productName}} și utilizatorii noi pe care doriți să le importați. Dacă importați utilizatorii care au deja un cont {{productName}}, aceștia nu vor fi înregistrate de contorul din nou. Numărul maxim de {{maxLimit}} utilizatori este permis conform licenței dvs {{productName}}.",
+  "LicenseLimitDescription": "Contorul limitei de licență este format din: conturile deja existente în spațiu spațiul de lucru și utilizatorii noi pe care doriți să le importați. Dacă importați utilizatorii care au deja un cont spațiul de lucru, aceștia nu vor fi înregistrate de contorul din nou. Numărul maxim de {{maxLimit}} utilizatori este permis conform licenței dvs {{organizationName}} {{productName}}.",
   "Lifetime": "Durata (min)",
   "LimitThemesTooltip": "Puteţi crea doar 3 teme particularizate. Pentru a crea o temă nouă, trebuie să ştergeţi una dintre temele anterioare.",
   "LinksBeforeRestriction": "Alegeți ce se întâmplă cu linkurile create înainte de restricție:",

@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "{{productName}}-tili luodaan käyttäjälle <1>{{email}}</1>. Ole hyvä ja viimeistele rekisteröitymisesi:",
+  "AccountWillBeCreated": "{{organizationName}} {{productName}}-tili luodaan käyttäjälle <1>{{email}}</1>. Ole hyvä ja viimeistele rekisteröitymisesi:",
   "ConfirmOwnerPortalSuccessMessage": "Omistaja vaihdettiin onnistuneesti. Sinut ohjataan eteenpäin 10 sekunnin kuluttua.",
   "ConfirmOwnerPortalTitle": "Vahvista, että haluat vaihtaa omistajaksi {{newOwner}}.",
   "ConnectApp": "Yhdistä sovellus",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Poista tilini",
   "DeleteProfileConfirmation": "Huomio! Olet poistamassa tilisi.",
   "DeleteProfileConfirmationInfo": "Napsauttamalla \"Poista tilini\", hyväksyt <1>yksityisyyskäytäntömme.</1>",
-  "DeleteProfileSuccessDescription": "{{productName}}-tilisi poistettiin käytöstä onnistuneesti. Omistaja tai pääjärjestelmänvalvoja voi poistaa käytöstä poistetun tilisi pysyvästi.",
+  "DeleteProfileSuccessDescription": "{{organizationName}} {{productName}}-tilisi poistettiin käytöstä onnistuneesti. Omistaja tai pääjärjestelmänvalvoja voi poistaa käytöstä poistetun tilisi pysyvästi.",
   "DeleteProfileSuccessMessage": "Tilisi poistaminen onnistui.",
   "DeleteProfileSuccessMessageInfo": "Katso <1>yksityisyyskäytäntömme</1> jos haluat lisätietoja tilisi ja siihen liittyvien tietojen poistamisesta.",
   "EmailAndPasswordCopiedToClipboard": "Sähköposti ja salasana oon kopioitu leikepöydälle",

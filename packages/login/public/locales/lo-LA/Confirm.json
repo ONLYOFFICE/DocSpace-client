@@ -1,5 +1,5 @@
 {
-  "AccountWillBeCreated": "ບັນຊີ {{productName}} ຈະຖືກສ້າງຂຶ້ນສໍາລັບ <1>{{email}}</1>. ກະລຸນາຕື່ມການລົງທະບຽນຂອງທ່ານ:",
+  "AccountWillBeCreated": "ບັນຊີ {{organizationName}} {{productName}} ຈະຖືກສ້າງຂຶ້ນສໍາລັບ <1>{{email}}</1>. ກະລຸນາຕື່ມການລົງທະບຽນຂອງທ່ານ:",
   "ConfirmOwnerPortalSuccessMessage": "ປ່ຽນເຈົ້າຂອງສຳເລັດແລ້ວ. ທ່ານຈະຖືກນຳໄປໜ້າອື່ນໃນ 10 ວິນາທີ.",
   "ConfirmOwnerPortalTitle": "ກະລຸນາຢືນຢັນວ່າທ່ານຕ້ອງການປ່ຽນເຈົ້າຂອງເປັນ {{newOwner}}.",
   "ConnectApp": "ເຊື່ອມຕໍ່ແອັບຯ",
@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "ລຶບບັນຊີຂອງຂ້ອຍ",
   "DeleteProfileConfirmation": "ຮຽນທ່ານ!ກ່ຽວກັບການລຶບບັນຊີຂອງທ່ານ",
   "DeleteProfileConfirmationInfo": "ໂດຍການກົດປຸ່ມ \"ລຶບບັນຊີຂອງຂ້ອຍ\" ທ່ານເຫັນດີກັບ<1>ນະໂຍບາຍຄວາມເປັນສ່ວ</1>ນຕົວຂອງພວກເຮົາຫູືບໍ່.",
-  "DeleteProfileSuccessDescription": "ບັນຊີ {{productName}} ຂອງທ່ານຖືກປິດການໃຊ້ງານສຳເລັດແລ້ວ. ເຈົ້າຂອງ ຫຼື ຜູ້ດູແລລະບົບສູງສຸດສາມາດລຶບບັນຊີທີ່ຖືກປິດການໃຊ້ງານຂອງທ່ານຢ່າງຖາວອນໄດ້.",
+  "DeleteProfileSuccessDescription": "ບັນຊີ {{organizationName}} {{productName}} ຂອງທ່ານຖືກປິດການໃຊ້ງານສຳເລັດແລ້ວ. ເຈົ້າຂອງ ຫຼື ຜູ້ດູແລລະບົບສູງສຸດສາມາດລຶບບັນຊີທີ່ຖືກປິດການໃຊ້ງານຂອງທ່ານຢ່າງຖາວອນໄດ້.",
   "DeleteProfileSuccessMessage": "ບັນຊີຂອງທ່ານຖືກລຶບອອກແລ້ວ.",
   "DeleteProfileSuccessMessageInfo": "ເບິ່ງ<1>ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ</1>ຂອງພວກເຮົາເພື່ອຮຽນຮູ້ເພີ່ມເຕີມກ່ຽວກັບການລຶບບັນຊີຂອງທ່ານແລະຂໍ້ມູນທີ່ກ່ຽວຂ້ອງ",
   "EmailAndPasswordCopiedToClipboard": "ສຳເນົາອີເມວ ແລະ ລະຫັດຜ່ານໄປທີ່ clipboard",

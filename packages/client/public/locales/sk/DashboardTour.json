@@ -3,7 +3,7 @@
   "DashboardAppsTitle": "Všetko, s čím môžete pracovať",
   "DashboardCreate": "Vytvorte svoj prvý dokument priamo tu — vyberte typ a začnite písať. Uloží sa do sekcie {{files}}, kde ho kedykoľvek nájdete.",
   "DashboardCreateTitle": "Vytvorte teraz niečo",
-  "DashboardDevTools": "Vyvíjate niečo vlastné? Všetko tu je práve na to: API na riadenie pracovného priestoru z vášho kódu, SDK na vloženie editorov do vlastnej aplikácie, pluginy, webhooky a kľúče. Nič z toho nepotrebujete na každodenné používanie {{productName}}.",
+  "DashboardDevTools": "Vyvíjate niečo vlastné? Všetko tu je práve na to: API na riadenie pracovného priestoru z vášho kódu, SDK na vloženie editorov do vlastnej aplikácie, pluginy, webhooky a kľúče. Nič z toho nepotrebujete na každodenné používanie {{organizationName}} {{productName}}.",
   "DashboardDevToolsTitle": "Pre vývojárov",
   "DashboardIntegrations": "Pracujete už v inej platforme? Pripojte ju tu a editory, ktoré ste práve videli, budete mať priamo v nástrojoch, ktoré váš tím už používa — bez vlastného kódu a bez migrácie údajov.",
   "DashboardIntegrationsTitle": "Práca s inými platformami",
@@ -12,7 +12,7 @@
   "DashboardProfile": "Názov pracovného priestoru a stručný prehľad vášho profilu: meno, e-mail a heslo. Odtiaľto môžete pracovný priestor premenovať alebo zmeniť heslo.",
   "DashboardProfileTitle": "Údaje vášho profilu",
   "WelcomeDashboardSubtitle": "Všetko sa začína na tejto stránke",
-  "WelcomeDashboardTitle": "Vitajte v {{productName}}",
+  "WelcomeDashboardTitle": "Vitajte v {{organizationName}} {{productName}}",
   "WelcomeDescription": "Vytvárajte dokumenty, spolupracujte v miestnostiach, zbierajte údaje pomocou formulárov a čítanie nechajte na AI — všetko z jedného miesta. Prejdite si krátku prehliadku a všetko vám ukážeme.",
   "WelcomeLater": "Možno neskôr"
 }

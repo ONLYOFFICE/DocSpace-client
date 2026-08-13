@@ -126,7 +126,8 @@ const SocialAuthWelcomeDialogComponent = ({
     >
       <ModalDialog.Header>
         {t("Common:EmptyRootRoomHeader", {
-          productName: getBrandName("ProductName"),
+          organizationName: getBrandName("OrganizationName"),
+				productName: getBrandName("ProductName"),
         })}
       </ModalDialog.Header>
       <ModalDialog.Body>

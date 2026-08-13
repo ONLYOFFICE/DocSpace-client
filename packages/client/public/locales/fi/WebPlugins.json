@@ -10,7 +10,7 @@
   "NotNeedSettings": "Asetuksia ei tarvitse syöttää",
   "PluginCacheWarningDescription": "Lisäosat välimuistetaan niiden versionumeron perusteella. Jotta muutoksesi tulevat voimaan, lisää versionumeroa <1>package.json</1>-tiedostossasi ennen lataamista. Järjestelmä ei päivitä lisäosaa, jos versio pysyy samana.",
   "PluginDeletedSuccessfully": "Lisäosa poistettu onnistuneesti",
-  "PluginIsNotCompatible": "Lisäosan SDK-versio ei täsmää {{productName}}-version kanssa. Päivitä yhteensopivaan versioon.",
+  "PluginIsNotCompatible": "Lisäosan SDK-versio ei täsmää {{organizationName}} {{productName}}-version kanssa. Päivitä yhteensopivaan versioon.",
   "PluginLoadedSuccessfully": "Lisäosa ladattu onnistuneesti",
   "PluginSamples": "Laajennusmallit",
   "PluginSDK": "SDK-laajennus",

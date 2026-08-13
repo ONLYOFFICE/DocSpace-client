@@ -79,7 +79,7 @@
   "ScopesHelp": "Phạm vi được sử dụng để giới hạn quyền truy cập của ứng dụng vào tất cả dữ liệu liên quan đến người dùng và chúng sẽ cho phép bạn chỉ định chính xác loại quyền truy cập bạn cần.",
   "Secret": "Secret",
   "SecretCopy": "Đã sao chép client secret vào bộ nhớ tạm thành công",
-  "SignIn": "Đăng nhập bằng {{productName}}",
+  "SignIn": "Đăng nhập bằng {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Thông tin hỗ trợ & pháp lý",
   "TermsOfService": "Điều Khoản Dịch Vụ",
   "TermsOfServiceURL": "URL Điều Khoản Dịch Vụ",

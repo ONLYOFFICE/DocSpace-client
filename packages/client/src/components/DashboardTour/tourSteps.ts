@@ -193,7 +193,8 @@ export function getTourSteps(
         DEVTOOLS_SELECTOR,
         t("DashboardTour:DashboardDevToolsTitle"),
         t("DashboardTour:DashboardDevTools", {
-          productName: getBrandName("ProductName"),
+          organizationName: getBrandName("OrganizationName"),
+				productName: getBrandName("ProductName"),
         }),
         callbacks,
         LOG_LABEL,

@@ -111,7 +111,6 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
-                  values={{ productName: getBrandName("ProductName") }}
                   components={{
                     1: <b />,
                     2: <b />,

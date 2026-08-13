@@ -111,6 +111,17 @@ export type TDocsConnectTariffState = {
   previousPlan: TDocsConnectPreviousPlan | null;
 };
 
+export type TDocsConnectServiceIds = {
+  baseId?: number;
+  devpackId?: number;
+};
+
+export type TDocsConnectStatistics = TDocsConnectTariffState & {
+  tenant: TDocsConnectTenant | null;
+  tenantInfo: TDocsConnectTenantInfo | null;
+  devPackEnabled: boolean;
+};
+
 export type TDocsConnectInfo = {
   tenant: TDocsConnectTenant;
   config: TDocsConnectConfig;
@@ -121,6 +132,7 @@ export type TDocsConnectInfo = {
   scheduledChange: TDocsConnectScheduledChange | null;
   deactivated: boolean;
   previousPlan?: TDocsConnectPreviousPlan | null;
+  serviceIds: TDocsConnectServiceIds;
 };
 
 export type TDocsConnectConfigUpdate = {

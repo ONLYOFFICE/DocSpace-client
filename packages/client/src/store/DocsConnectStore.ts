@@ -34,10 +34,12 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 import copy from "copy-to-clipboard";
 
 import {
   getDocsConnectInfo,
+  getDocsConnectStatistics,
   startDocsConnectTrial,
   buyDocsConnectPlan,
   calculateDocsConnectDevPack,
@@ -110,6 +112,10 @@ class DocsConnectStore {
 
   isPortalConnectionAvailable: boolean = false;
 
+  isStatisticsRefreshing: boolean = false;
+
+  statisticsRefreshController: Nullable<AbortController> = null;
+
   private documentBuilderReportStore: DocumentBuilderReportStore;
 
   constructor(
@@ -122,7 +128,9 @@ class DocsConnectStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
     this.documentBuilderReportStore = documentBuilderReportStore;
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      statisticsRefreshController: false,
+    });
   }
 
   refreshPortalState = () => {
@@ -155,6 +163,52 @@ class DocsConnectStore {
     } finally {
       if (initialLoad) this.setIsLoading(false);
     }
+  };
+
+  refreshStatistics = async () => {
+    if (!this.info) return;
+
+    this.abortStatisticsRefresh();
+
+    const controller = new AbortController();
+    this.statisticsRefreshController = controller;
+    this.isStatisticsRefreshing = true;
+
+    try {
+      const patch = await getDocsConnectStatistics(this.info.serviceIds, {
+        signal: controller.signal,
+      });
+
+      runInAction(() => {
+        const { info } = this;
+
+        if (this.statisticsRefreshController !== controller || !info) return;
+
+        this.info = {
+          ...info,
+          ...patch,
+          tenant: patch.tenant ?? info.tenant,
+          tenantInfo: patch.tenantInfo ?? info.tenantInfo,
+        };
+      });
+    } catch (error) {
+      if (!axios.isCancel(error)) toastr.error(error as Error);
+    } finally {
+      if (this.statisticsRefreshController === controller) {
+        this.statisticsRefreshController = null;
+        runInAction(() => {
+          this.isStatisticsRefreshing = false;
+        });
+      }
+    }
+  };
+
+  abortStatisticsRefresh = () => {
+    if (!this.statisticsRefreshController) return;
+
+    this.statisticsRefreshController.abort();
+    this.statisticsRefreshController = null;
+    this.isStatisticsRefreshing = false;
   };
 
   openBuyPlan = (mode: BuyPlanMode) => {

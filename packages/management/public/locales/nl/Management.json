@@ -3,7 +3,7 @@
   "CompleteSetup": "De installatie voltooien",
   "ConfigurationDescription": "U moet uw domein verbinden met uw huidige IP om de adresinstellingen te wijzigen. Zorg ervoor dat u toegang hebt tot de domeininstellingen om dat te kunnen doen. Nadat u het domein hebt verbonden, maakt u een naam voor de werkruimte. U kunt de gemaakte naam later wijzigen met behulp van de instellingen van de werkruimte.",
   "ConfigurationHeader": "Huidige configuratie van de werkruimte",
-  "CreateSpaceDescription": "U heeft met succes uw domein aan uw IP-adres gekoppeld. Om de adresinstellingen van de werkruimte te bewerken, moet u de toekomstige {{productName}} naam instellen",
+  "CreateSpaceDescription": "U heeft met succes uw domein aan uw IP-adres gekoppeld. Om de adresinstellingen van de werkruimte te bewerken, moet u de toekomstige werkruimte naam instellen",
   "CreatingPortal": "Een nieuwe werkruimte aanmaken",
   "CurrentSpace": "Huidige werkruimte",
   "DecryptStorage": "Opslag ontsleutelen",

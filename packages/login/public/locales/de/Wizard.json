@@ -1,5 +1,5 @@
 {
-  "Desc": "Bitte richten Sie die {{productName}}-Registrierungsdaten ein.",
+  "Desc": "Bitte richten Sie die Workspace-Registrierungsdaten ein.",
   "ErrorEmail": "Ungültige E-Mail-Adresse",
   "ErrorInstanceId": "Ungültige Instanz-ID",
   "ErrorLicenseBody": "Lizenz ist ungültig. Wählen Sie die richtige Datei aus.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Lizenzvereinbarung",
   "PlaceholderLicense": "Ihre Lizenzdatei",
   "Timezone": "Zeitzone:",
-  "WelcomeTitle": "Willkommen auf Ihrem {{productName}}!"
+  "WelcomeTitle": "Willkommen in Ihrem Workspace!"
 }

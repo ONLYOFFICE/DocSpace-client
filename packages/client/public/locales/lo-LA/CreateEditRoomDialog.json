@@ -37,7 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "ເລືອກບ່ອນເກັບຂໍ້ມູນ",
   "ThirdPartyStorageNoStorageAlert": "ເມື່ອກ່ອນ, ທ່ານຈໍາເປັນຕ້ອງເຊື່ອມຕໍ່ການບໍລິການທີ່ສອດຄ້ອງກັນໃນສ່ວນ \"ການເຊື່ອມໂຍງ\".",
   "ThirdPartyStoragePermanentSettingDescription": "ໄຟລ໌ຖືກເກັບໄວ້ໃນ ບ່ອນເກັບຂໍ້ມູນຂອງພາກສ່ວນ ທີສາມ {{thirdpartyTitle}} ໃນໂຟນເດີ \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "ເພື່ອເຊື່ອມຕໍ່ພື້ນທີ່ຈັດເກັບຂອງພາກສ່ວນທີສາມ, ທ່ານຕ້ອງເພີ່ມບໍລິການທີ່ກ່ຽວຂ້ອງໃນພາກສ່ວນການເຊື່ອມໂຍງຂອງການຕັ້ງຄ່າ {{productName}}. ຕິດຕໍ່ເຈົ້າຂອງ ຫຼື ຜູ້ດູແລລະບົບສູງສຸດເພື່ອເປີດໃຊ້ການເຊື່ອມໂຍງ.",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "ເພື່ອເຊື່ອມຕໍ່ພື້ນທີ່ຈັດເກັບຂອງພາກສ່ວນທີສາມ, ທ່ານຕ້ອງເພີ່ມບໍລິການທີ່ກ່ຽວຂ້ອງໃນພາກສ່ວນການເຊື່ອມໂຍງຂອງການຕັ້ງຄ່າພື້ນທີ່ເຮັດວຽກ. ຕິດຕໍ່ເຈົ້າຂອງ ຫຼື ຜູ້ດູແລລະບົບສູງສຸດເພື່ອເປີດໃຊ້ການເຊື່ອມໂຍງ.",
   "UserEmail": "ອີເມນຂອງຜູ້ໃຊ້",
   "UserIPAddress": "ທີ່ຢູ່ IP ຂອງຜູ້ໃຊ້",
   "UserName": "ຊື່ຜູ້ໃຊ້",

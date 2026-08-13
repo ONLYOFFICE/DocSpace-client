@@ -3,7 +3,7 @@
   "CompleteSetup": "Quraşdırmanı tamamlayın",
   "ConfigurationDescription": "Ünvan parametrlərini dəyişmək üçün domeninizi mövcud IP-yə qoşmalısınız. Zəhmət olmasa, bunu etmək üçün, domen parametrlərinə girişiniz olduğundan əmin olun. Domeni birləşdirdikdən sonra iş sahəsi adını yaradın. Yaradılmış adı daha sonra iş sahəsi parametrlərindən istifadə edərək dəyişə bilərsiniz.",
   "ConfigurationHeader": "Cari iş sahəsi konfiqurasiyası",
-  "CreateSpaceDescription": "Domeninizi IP ünvanınızla uğurla əlaqələndirdiniz. İş sahəsi ünvanı parametrlərini redaktə etmək üçün gələcək {{productName}} adını təyin etməlisiniz",
+  "CreateSpaceDescription": "Domeninizi IP ünvanınızla uğurla əlaqələndirdiniz. İş sahəsi ünvanı parametrlərini redaktə etmək üçün gələcək iş sahəsi adını təyin etməlisiniz",
   "CreatingPortal": "Yeni iş sahəsi yaradılır",
   "CurrentSpace": "Cari iş sahəsi",
   "DecryptStorage": "Yaddaşın şifrəsini açın",

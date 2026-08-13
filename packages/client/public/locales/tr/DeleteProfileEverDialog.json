@@ -12,7 +12,7 @@
   "DeleteUser": "Kullanıcıyı sil",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> silinecektir. Bu eylem geri alınamaz.",
   "DeletingUsers": "Kullanıcıları silme",
-  "PersonalDataDeletionInfo": "Kişisel veriler, seçili kullanıcıların {{sectionNameFirst}} ve {{sectionNameSecond}} bölümlerindeki* tüm kişisel dosyalar ve klasörler kalıcı olarak silinecektir. Odalar gibi ortak bölümlerde* saklanan seçili kullanıcıların dosya ve klasörleri {{productName}} içinde kalacaktır.",
+  "PersonalDataDeletionInfo": "Kişisel veriler, seçili kullanıcıların {{sectionNameFirst}} ve {{sectionNameSecond}} bölümlerindeki* tüm kişisel dosyalar ve klasörler kalıcı olarak silinecektir. Odalar gibi ortak bölümlerde* saklanan seçili kullanıcıların dosya ve klasörleri çalışma alanında içinde kalacaktır.",
   "PleaseNote": "Lütfen dikkate alınız:",
   "ReassignDataToAnotherUser": "Verileri başka bir kullanıcıya yeniden ata",
   "SuccessfullyDeleteGuestInfoMessage": "Konuk başarıyla silindi",

@@ -12,7 +12,7 @@
   "DeleteUser": "Usuń użytkownika",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> zostanie usunięty. Nie można cofnąć tej czynności.",
   "DeletingUsers": "Usuwanie użytkowników",
-  "PersonalDataDeletionInfo": "Dane osobowe, wszystkie pliki i foldery osobiste w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}}* wybranych użytkowników zostaną trwale usunięte. Pliki i foldery wybranych użytkowników przechowywane w sekcjach wspólnych* takich jak pokoje pozostaną w {{productName}}.",
+  "PersonalDataDeletionInfo": "Dane osobowe, wszystkie pliki i foldery osobiste w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}}* wybranych użytkowników zostaną trwale usunięte. Pliki i foldery wybranych użytkowników przechowywane w sekcjach wspólnych* takich jak pokoje pozostaną w przestrzeni roboczej.",
   "PleaseNote": "Uwaga:",
   "ReassignDataToAnotherUser": "Przypisz dane innemu użytkownikowi",
   "SuccessfullyDeleteGuestInfoMessage": "Gość został pomyślnie usunięty",

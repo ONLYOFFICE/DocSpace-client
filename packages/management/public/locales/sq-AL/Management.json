@@ -3,7 +3,7 @@
   "CompleteSetup": "Plotësoni konfigurimin",
   "ConfigurationDescription": "Duhet të lidhni domenin tuaj me IP-në tuaj aktuale për të ndryshuar cilësimet e adresës. Ju lutem sigurohuni që të keni akses në cilësimet e domenit për ta bërë këtë. Pas lidhjes së domenit, krijoni një emër për hapësirën e punës. Ju mund ta ndryshoni emrin e krijuar më vonë duke përdorur cilësimet e hapësirës së punës.",
   "ConfigurationHeader": "Konfigurimi aktual i hapësirës së punës",
-  "CreateSpaceDescription": "Ju keni lidhur me sukses domenin tuaj me adresën tuaj IP. Për të modifikuar cilësimet e adresës së hapësirës së punës, duhet të vendosni emrin e ardhshëm të {{productName}}",
+  "CreateSpaceDescription": "Ju keni lidhur me sukses domenin tuaj me adresën tuaj IP. Për të modifikuar cilësimet e adresës së hapësirës së punës, duhet të vendosni emrin e ardhshëm të hapësirës së punës",
   "CreatingPortal": "Krijimi i hapësirës së re të punës",
   "CurrentSpace": "Hapësira aktuale e punës",
   "DecryptStorage": "Dekriptoni hapësirën e ruajtjes",

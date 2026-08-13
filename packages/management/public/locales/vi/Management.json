@@ -3,7 +3,7 @@
   "CompleteSetup": "Hoàn thành thiết lập",
   "ConfigurationDescription": "Bạn cần kết nối tên miền của mình với IP hiện tại để thay đổi cài đặt địa chỉ. Xin hãy đảm bảo bạn có quyền truy cập vào cài đặt tên miền để có thể thực hiện điều đó. Sau khi kết nối tên miền, hãy tạo tên không gian làm việc. Bạn có thể thay đổi tên đã tạo sau này bằng cách sử dụng cài đặt không gian làm việc.",
   "ConfigurationHeader": "Cấu hình không gian làm việc hiện tại",
-  "CreateSpaceDescription": "Bạn đã kết nối thành công tên miền với địa chỉ IP của mình. Để chỉnh sửa cài đặt địa chỉ không gian làm việc, bạn cần đặt tên {{productName}} trong tương lai",
+  "CreateSpaceDescription": "Bạn đã kết nối thành công tên miền với địa chỉ IP của mình. Để chỉnh sửa cài đặt địa chỉ không gian làm việc, bạn cần đặt tên không gian làm việc trong tương lai",
   "CreatingPortal": "Tạo không gian làm việc mới",
   "CurrentSpace": "Không gian làm việc hiện tại",
   "DecryptStorage": "Giải mã bộ nhớ",

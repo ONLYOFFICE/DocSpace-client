@@ -12,7 +12,7 @@
   "DeleteUser": "Șterge utilizatorul",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> va fi șters. Această acțiune nu poate fi anulată.",
   "DeletingUsers": "Ștergere utilizatori",
-  "PersonalDataDeletionInfo": "Datele personale, toate fișierele și dosarele personale din secțiunile* {{sectionNameFirst}} și {{sectionNameSecond}} ale utilizatorilor selectați vor fi șterse definitiv. Fișierele și folderele ai utilizatorilor selectate care sunt stocate în secțiunile comune*, cum ar fi săli,  vor rămâne în {{productName}}.",
+  "PersonalDataDeletionInfo": "Datele personale, toate fișierele și dosarele personale din secțiunile* {{sectionNameFirst}} și {{sectionNameSecond}} ale utilizatorilor selectați vor fi șterse definitiv. Fișierele și folderele ai utilizatorilor selectate care sunt stocate în secțiunile comune*, cum ar fi săli,  vor rămâne în spațiul de lucru.",
   "PleaseNote": "Vă rugăm să rețineți că:",
   "ReassignDataToAnotherUser": "Reatribuiți datele unui alt utilizator",
   "SuccessfullyDeleteGuestInfoMessage": "Invitatul a fost șters cu succes",

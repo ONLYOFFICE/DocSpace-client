@@ -12,7 +12,7 @@
   "DeleteUser": "Izbriši uporabnika",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> bo izbrisan. Tega dejanja ni mogoče razveljaviti.",
   "DeletingUsers": "Brisanje uporabnikov",
-  "PersonalDataDeletionInfo": "Osebni podatki, vse osebne datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}}* izbranih uporabnikov bodo trajno izbrisane. Datoteke in mape izbranih uporabnikov v skupnih oddelkih* (kot so sobe) bodo ostale v {{productName}}.",
+  "PersonalDataDeletionInfo": "Osebni podatki, vse osebne datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}}* izbranih uporabnikov bodo trajno izbrisane. Datoteke in mape izbranih uporabnikov v skupnih oddelkih* (kot so sobe) bodo ostale v delovnem prostoru.",
   "PleaseNote": "Prosimo, upoštevajte:",
   "ReassignDataToAnotherUser": "Ponovno dodelite podatke drugemu uporabniku",
   "SuccessfullyDeleteGuestInfoMessage": "Gost je bil uspešno izbrisan",

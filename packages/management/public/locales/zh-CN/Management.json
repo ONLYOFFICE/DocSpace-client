@@ -3,7 +3,7 @@
   "CompleteSetup": "完成设置",
   "ConfigurationDescription": "您需要将域名连接到当前 IP 才能更改地址设置。请确保您有权访问域名设置才能执行此操作。连接域名后，创建一个工作区名称。您可以稍后使用工作区设置更改创建的名称。",
   "ConfigurationHeader": "当前工作区配置",
-  "CreateSpaceDescription": "您已成功将您的域名连接到您的 IP 地址。要编辑工作区地址设置，您需要设置未来的{{productName}}名称",
+  "CreateSpaceDescription": "您已成功将您的域名连接到您的 IP 地址。要编辑工作区地址设置，您需要设置未来的工作区",
   "CreatingPortal": "创建新的工作区",
   "CurrentSpace": "当前工作区",
   "DecryptStorage": "解密存储",

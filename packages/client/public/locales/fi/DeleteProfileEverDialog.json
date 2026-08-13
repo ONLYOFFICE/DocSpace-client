@@ -12,7 +12,7 @@
   "DeleteUser": "Poista käyttäjä",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1>käyttäjä poistetaan. Tätä toimintoa ei voi perua.",
   "DeletingUsers": "Käyttäjien poistaminen",
-  "PersonalDataDeletionInfo": "Henkilötiedot, kaikki henkilökohtaiset tiedostot ja kansiot valittujen käyttäjien osioissa {{sectionNameFirst}} ja {{sectionNameSecond}}* poistetaan pysyvästi. Valittujen käyttäjien tiedostot ja kansiot yhteisissä osioissa*, kuten huoneissa, säilyvät {{productName}}-palvelussa.",
+  "PersonalDataDeletionInfo": "Henkilötiedot, kaikki henkilökohtaiset tiedostot ja kansiot valittujen käyttäjien osioissa {{sectionNameFirst}} ja {{sectionNameSecond}}* poistetaan pysyvästi. Valittujen käyttäjien tiedostot ja kansiot yhteisissä osioissa*, kuten huoneissa, säilyvät työtilassa.",
   "PleaseNote": "Ole hyvä ja huomioi:",
   "ReassignDataToAnotherUser": "Siirrä tiedot toiselle käyttäjälle",
   "SuccessfullyDeleteGuestInfoMessage": "Vieras on onnistuneesti poistettu",

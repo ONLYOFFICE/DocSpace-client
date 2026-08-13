@@ -2,7 +2,7 @@
   "ChangePasswordSuccess": "Heslo bolo úspešne zmenené",
   "ConfirmEmailChange": "Potvrďte zmenu e-mailu",
   "ConfirmEmailChangeText": "Požiadali ste zmenu e-mailovej adresy na účte {{productName}}. Aby ste mohli pokračovať, prihláste sa pomocou vašich aktuálnych prihlasovacích údajov.",
-  "ErrorInvalidText": "O 10 sekúnd budete presmerovaní na <1>{{productName}}</1>",
+  "ErrorInvalidText": "O 10 sekúnd budete presmerovaní na <1>pracovného priestoru</1>",
   "ForgotPassword": "Zabudli ste heslo?",
   "LDAPUsernamePlaceholder": "Používateľské meno {{ldap_domain}}",
   "MessageAuthorize": "Prihláste sa, aby ste mohli pokračovať",

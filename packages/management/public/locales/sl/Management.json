@@ -3,7 +3,7 @@
   "CompleteSetup": "Dokončaj nastavitev",
   "ConfigurationDescription": "Če želite spremeniti nastavitve naslova, morate svojo domeno povezati s trenutnim IP-jem. Prepričajte se, da imate dostop do nastavitev domene, da lahko to storite. Po povezavi domene ustvarite ime delovnega prostora. Ustvarjeno ime lahko pozneje spremenite z nastavitvami delovnega prostora.",
   "ConfigurationHeader": "Trenutna konfiguracija delovnega prostora",
-  "CreateSpaceDescription": "Svojo domeno ste uspešno povezali z vašim IP naslovom. Če želite urediti nastavitve naslova delovnega prostora, morate nastaviti bodoče {{productName}} ime",
+  "CreateSpaceDescription": "Svojo domeno ste uspešno povezali z vašim IP naslovom. Če želite urediti nastavitve naslova delovnega prostora, morate nastaviti bodoče delovnega prostora ime",
   "CreatingPortal": "Ustvarjanje novega delovnega prostora",
   "CurrentSpace": "Trenutni delovni prostor",
   "DecryptStorage": "Dešifriraj pomnilnik",

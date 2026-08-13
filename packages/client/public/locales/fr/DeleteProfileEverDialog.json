@@ -12,7 +12,7 @@
   "DeleteUser": "Supprimer l'utilisateur",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> sera supprimé. Cette action ne peut être annulée.",
   "DeletingUsers": "Suppression d'utilisateurs",
-  "PersonalDataDeletionInfo": "Les données personnelles, tous les fichiers et dossiers personnels des sections {{sectionNameFirst}} et {{sectionNameSecond}}* des utilisateurs sélectionnés, seront définitivement supprimés. Les fichiers et dossiers des utilisateurs sélectionnés conservés dans les sections communes*, telles que les salles, resteront dans {{productName}}.",
+  "PersonalDataDeletionInfo": "Les données personnelles, tous les fichiers et dossiers personnels des sections {{sectionNameFirst}} et {{sectionNameSecond}}* des utilisateurs sélectionnés, seront définitivement supprimés. Les fichiers et dossiers des utilisateurs sélectionnés conservés dans les sections communes*, telles que les salles, resteront dans l'espace de travail.",
   "PleaseNote": "Veuillez noter :",
   "ReassignDataToAnotherUser": "Réaffecter des données à un autre utilisateur",
   "SuccessfullyDeleteGuestInfoMessage": "L'invité a été supprimé avec succès",

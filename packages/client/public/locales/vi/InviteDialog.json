@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Ngôn ngữ mời",
-  "InviteMembersManuallyDescription": "Mời thành viên mới vào {{productName}} trực tiếp qua email",
+  "InviteMembersManuallyDescription": "Mời thành viên mới đến không gian làm việc trực tiếp qua email",
   "InviteMembersSearchPlaceholder": "Mời thành viên qua email",
-  "InviteViaLinkDescriptionAccounts": "Tạo một liên kết universal link để tự ủy quyền trong {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Tạo một liên kết universal link để tự ủy quyền trong không gian làm việc"
 }

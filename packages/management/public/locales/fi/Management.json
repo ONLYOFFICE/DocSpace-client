@@ -3,7 +3,7 @@
   "CompleteSetup": "Viimeistele asennus",
   "ConfigurationDescription": "Sinun täytyy yhdistää verkkotunnuksesi nykyiseen IP:en muuttaaksesi osoiteasetuksia. Ole hyvä ja varmista, että sinulla on pääsy verkkotunnuksen asetuksiin voidaksesi tehdä sen. Verkkotunnuksen yhdistämisen jälkeen luo työtilan nimi. Voit muuttaa luotua nimeä myöhemmin käyttäen työtilan asetuksia.",
   "ConfigurationHeader": "Nykyisen työtilan kokoonpano",
-  "CreateSpaceDescription": "Olet yhdistänyt verkkotunnuksesi onnistuneesti IP-osoitteeseesi. Muokataksesi työtilan osoiteasetuksia sinun täytyy asettaa tuleva {{productName}}-nimi",
+  "CreateSpaceDescription": "Olet yhdistänyt verkkotunnuksesi onnistuneesti IP-osoitteeseesi. Muokataksesi työtilan osoiteasetuksia sinun täytyy asettaa tuleva työtilan",
   "CreatingPortal": "Luodaan uutta työtilaa",
   "CurrentSpace": "Nykyinen työtila",
   "DecryptStorage": "Pura tallennustilan salaus",

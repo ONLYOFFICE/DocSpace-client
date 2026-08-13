@@ -12,7 +12,7 @@
   "DeleteUser": "Dzēst lietotāju",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> tiks izdzēsts. Šo darbību nevar atsaukt.",
   "DeletingUsers": "Lietotāju dzēšana",
-  "PersonalDataDeletionInfo": "Personas dati, visi personīgie faili un mapes izvēlēto lietotāju sadaļās {{sectionNameFirst}} un {{sectionNameSecond}}* tiks neatgriezeniski dzēsti. Izvēlēto lietotāju faili un mapes, kas glabājas kopīgās sadaļās* (piemēram, telpās), paliks {{productName}}.",
+  "PersonalDataDeletionInfo": "Personas dati, visi personīgie faili un mapes izvēlēto lietotāju sadaļās {{sectionNameFirst}} un {{sectionNameSecond}}* tiks neatgriezeniski dzēsti. Izvēlēto lietotāju faili un mapes, kas glabājas kopīgās sadaļās* (piemēram, telpās), paliks darbvietā.",
   "PleaseNote": "Ievērojiet:",
   "ReassignDataToAnotherUser": "Atkārtoti piešķirt datus citam lietotājam",
   "SuccessfullyDeleteGuestInfoMessage": "Viesis ir veiksmīgi izdzēsts",

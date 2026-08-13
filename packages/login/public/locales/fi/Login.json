@@ -2,7 +2,7 @@
   "ChangePasswordSuccess": "Salasanan vaihtaminen onnistui",
   "ConfirmEmailChange": "Vahvista sähköpostiosoitteen muutos",
   "ConfirmEmailChangeText": "Olet pyytänyt muuttamaan sähköpostiosoitteen {{productName}}-tililläsi. Jotta voimme jatkaa, kirjaudu sisään käyttämällä nykyisiä tunnistetietojasi.",
-  "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>{{productName}}</1>",
+  "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>työtila</1>",
   "ForgotPassword": "Unohditko salasanasi?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}}:n käyttäjänimi",
   "MessageAuthorize": "Kirjaudu sisään jatkaaksesi",

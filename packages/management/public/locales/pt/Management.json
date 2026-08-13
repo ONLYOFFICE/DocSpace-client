@@ -3,7 +3,7 @@
   "CompleteSetup": "Conclua a configuração",
   "ConfigurationDescription": "Precisa de ligar o seu domínio ao seu IP atual para alterar as definições de endereço. Certifique-se de ter acesso às definições do domínio para poder fazer isso. Após ligar o domínio, crie um nome para o espaço de trabalho. Pode alterar o nome criado posteriormente usando as definições do espaço de trabalho.",
   "ConfigurationHeader": "Configuração do espaço de trabalho atual",
-  "CreateSpaceDescription": "Ligou com sucesso o seu domínio ao seu endereço IP. Para editar as definições de endereço do espaço de trabalho, precisa de definir o nome futuro do {{productName}}",
+  "CreateSpaceDescription": "Ligou com sucesso o seu domínio ao seu endereço IP. Para editar as definições de endereço do espaço de trabalho, precisa de definir o nome futuro do espaço de trabalho",
   "CreatingPortal": "Criando novo espaço de trabalho",
   "CurrentSpace": "Espaço de trabalho atual",
   "DecryptStorage": "Desencripta o armazenamento",

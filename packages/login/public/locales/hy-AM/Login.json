@@ -2,7 +2,7 @@
   "ChangePasswordSuccess": "Գաղտնաբառը հաջողությամբ փոխվել է",
   "ConfirmEmailChange": "Վերահաստատեք ձեր էլ. փոստի փոփոխությունը",
   "ConfirmEmailChangeText": "Դուք դիմել եք փոխելու ձեր {{productName}} հաշվի էլ. փոստի հասցեն։ Շարունակելու համար, խնդրում ենք մուտք գործել ձեր ընթացիկ մուտքային տվյալներով։",
-  "ErrorInvalidText": "10 վայրկյանից Դուք կվերուղղորդվեք դեպի <1>{{productName}}</1>",
+  "ErrorInvalidText": "10 վայրկյանից Դուք կվերուղղորդվեք դեպի <1>աշխատատարածք</1>",
   "ForgotPassword": "Մոռացե՞լ եք Ձեր գաղտնաբառը․",
   "LDAPUsernamePlaceholder": "{{ldap_domain}}-ի օգտատիրոջ անուն",
   "MessageAuthorize": "Շարունակելու համար մուտք գործեք",

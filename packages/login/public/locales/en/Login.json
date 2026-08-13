@@ -2,7 +2,7 @@
   "ChangePasswordSuccess": "Password has been successfully changed",
   "ConfirmEmailChange": "Confirm your email change",
   "ConfirmEmailChangeText": "You’ve requested to change the email address on your {{productName}} account. To proceed, please sign in using your current credentials.",
-  "ErrorInvalidText": "In 10 seconds you will be redirected to the <1>{{productName}}</1>",
+  "ErrorInvalidText": "In 10 seconds you will be redirected to the <1>the workspace</1>",
   "ForgotPassword": "Forgot your password?",
   "LDAPUsernamePlaceholder": "Username of {{ldap_domain}}",
   "MessageAuthorize": "Log in to continue",

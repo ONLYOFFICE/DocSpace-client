@@ -12,7 +12,7 @@
   "DeleteUser": "ユーザーを削除します",
   "DeleteUserMessage": "{{userCaption}}<1>{{user}}</1>は削除されます。このアクションは元に戻せません。",
   "DeletingUsers": "ユーザーの削除",
-  "PersonalDataDeletionInfo": "選択したユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべての個人ファイルとフォルダは完全に削除されます。ルームなどの共通セクションに保存されているユーザーのファイルとフォルダは {{productName}} に残ります。",
+  "PersonalDataDeletionInfo": "選択したユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべての個人ファイルとフォルダは完全に削除されます。ルームなどの共通セクションに保存されているユーザーのファイルとフォルダは ワークスペース に残ります。",
   "PleaseNote": "ご注意ください：",
   "ReassignDataToAnotherUser": "データを別のユーザーに再割り当てする",
   "SuccessfullyDeleteGuestInfoMessage": "ゲストは正常に削除されました",

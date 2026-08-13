@@ -2,7 +2,7 @@
   "ChangePasswordSuccess": "Şifre başarıyla değiştirildi",
   "ConfirmEmailChange": "E-posta adresinizi değiştirmeyi onaylayın",
   "ConfirmEmailChangeText": "{{productName}} hesabınızdaki e-posta adresini değiştirmek istediğinizi belirttiniz. Devam etmek için, lütfen mevcut kimlik bilgilerinizle giriş yapın.",
-  "ErrorInvalidText": "10 saniye içinde <1>{{productName}}</1> yönlendirileceksiniz",
+  "ErrorInvalidText": "10 saniye içinde <1>çalışma alanı</1> yönlendirileceksiniz",
   "ForgotPassword": "Şifrenizi mi unuttunuz?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} kullanıcı adı",
   "MessageAuthorize": "Devam etmek için giriş yapın",

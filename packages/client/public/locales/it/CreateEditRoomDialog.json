@@ -37,7 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Seleziona spazio di archiviazione",
   "ThirdPartyStorageNoStorageAlert": "Prima è necessario collegare il servizio corrispondente nella sezione \"Integrazione\". Altrimenti la connessione non sarà possibile.",
   "ThirdPartyStoragePermanentSettingDescription": "I file sono archiviati in uno spazio di archiviazione {{thirdpartyTitle}} di terze parti nella cartella \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Per collegare uno spazio di archiviazione di terze parti, devi aggiungere il servizio corrispondente nella sezione Integrazione delle impostazioni di {{productName}}. Contatta il proprietario o il superamministratore per abilitare l'integrazione.",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Per collegare uno spazio di archiviazione di terze parti, devi aggiungere il servizio corrispondente nella sezione Integrazione delle impostazioni dello spazio di lavoro. Contatta il proprietario o il superamministratore per abilitare l'integrazione.",
   "UserEmail": "Email utente",
   "UserIPAddress": "Indirizzo IP utente",
   "UserName": "Nome utente",

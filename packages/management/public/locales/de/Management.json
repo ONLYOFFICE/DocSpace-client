@@ -3,7 +3,7 @@
   "CompleteSetup": "Einrichtung abschließen",
   "ConfigurationDescription": "Sie müssen Ihre Domain mit Ihrer aktuellen IP verbinden, um die Adresseinstellungen zu ändern. Stellen Sie bitte sicher, dass Sie Zugriff auf die Domain-Einstellungen haben, um dies tun zu können. Erstellen Sie nach dem Verbinden der Domain einen Namen für den Arbeitsbereich. Sie können den erstellten Namen später über die Einstellungen des Arbeitsbereichs ändern.",
   "ConfigurationHeader": "Konfiguration des aktuellen Arbeitsbereichs",
-  "CreateSpaceDescription": "Sie haben Ihre Domain erfolgreich mit Ihrer IP-Adresse verbunden. Um die Adresseinstellungen des Arbeitsbereichs zu bearbeiten, müssen Sie den zukünftigen {{productName}}-Namen festlegen",
+  "CreateSpaceDescription": "Sie haben Ihre Domain erfolgreich mit Ihrer IP-Adresse verbunden. Um die Adresseinstellungen des Arbeitsbereichs zu bearbeiten, müssen Sie den zukünftigen Workspace festlegen",
   "CreatingPortal": "Neuen Arbeitsbereich erstellen",
   "CurrentSpace": "Aktueller Arbeitsbereich",
   "DecryptStorage": "Speicher entschlüsseln",

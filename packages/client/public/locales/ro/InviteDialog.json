@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Invitația în limba",
-  "InviteMembersManuallyDescription": "Invitaţi membrii noi în {{productName}} personal prin email",
+  "InviteMembersManuallyDescription": "Invitaţi membrii noi în spațiul de lucru personal prin email",
   "InviteMembersSearchPlaceholder": "Invitaţi membri prin email",
-  "InviteViaLinkDescriptionAccounts": "Creaţi un link universal de auto-autentificare în {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Creaţi un link universal de auto-autentificare în spațiul de lucru"
 }

@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Мова запрошення",
-  "InviteMembersManuallyDescription": "Особисто запрошуйте нових учасників до {{productName}} за допомогою електронної пошти",
+  "InviteMembersManuallyDescription": "Особисто запрошуйте нових учасників до робочого простору за допомогою електронної пошти",
   "InviteMembersSearchPlaceholder": "Запросіть учасників за адресою електронної пошти",
-  "InviteViaLinkDescriptionAccounts": "Створити універсальне посилання для самоавторизації в {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Створити універсальне посилання для самоавторизації у робочому просторі"
 }

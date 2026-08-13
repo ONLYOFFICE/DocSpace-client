@@ -3,7 +3,7 @@
   "CompleteSetup": "Complete the setup",
   "ConfigurationDescription": "You need to connect your domain to your current IP to change the address settings. Please make sure you have access to the domain settings to be able to do that. After connecting the domain, create a name for your workspace. You can change the created name later using the workspace settings.",
   "ConfigurationHeader": "Current workspace configuration",
-  "CreateSpaceDescription": "You have successfully connected your domain to your IP address. To edit the workspace address settings, you need to set the future {{productName}} name",
+  "CreateSpaceDescription": "You have successfully connected your domain to your IP address. To edit the workspace address settings, you need to set the future workspace name",
   "CreatingPortal": "Creating new workspace",
   "CurrentSpace": "Current workspace",
   "DecryptStorage": "Decrypt storage",

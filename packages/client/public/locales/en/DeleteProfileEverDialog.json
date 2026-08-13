@@ -12,7 +12,7 @@
   "DeleteUser": "Delete user",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> will be deleted. This action cannot be undone.",
   "DeletingUsers": "Deleting users",
-  "PersonalDataDeletionInfo": "Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in {{productName}}.",
+  "PersonalDataDeletionInfo": "Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in the workspace.",
   "PleaseNote": "Please note:",
   "ReassignDataToAnotherUser": "Reassign data to another user",
   "SuccessfullyDeleteGuestInfoMessage": "The guest has been successfully deleted",

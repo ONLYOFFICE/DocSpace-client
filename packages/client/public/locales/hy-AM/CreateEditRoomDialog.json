@@ -37,7 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Ընտրել պահեստ",
   "ThirdPartyStorageNoStorageAlert": "Նախ, դուք պետք է միացնեք համապատասխան ծառայությունը \" Ամբողջացում \" բաժնում: Հակառակ դեպքում կապը հնարավոր չի լինի:",
   "ThirdPartyStoragePermanentSettingDescription": "Ֆայլերը պահվում են երրորդ կողմի {{thirdpartyTitle}} պահեստում՝ \"{{thirdpartyFolderName}}\" պանակում:\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Երրորդ կողմի պահոց միացնելու համար անհրաժեշտ է ավելացնել համապատասխան ծառայությունը {{productName}}-ի կարգավորումների Ինտեգրում բաժնում։ Դիմեք սեփականատիրոջը կամ գերադմինիստրատորին՝ ինտեգրումը միացնելու համար։",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Երրորդ կողմի պահոց միացնելու համար անհրաժեշտ է ավելացնել համապատասխան ծառայությունը աշխատատարածքի կարգավորումների Ինտեգրում բաժնում։ Դիմեք սեփականատիրոջը կամ գերադմինիստրատորին՝ ինտեգրումը միացնելու համար։",
   "UserEmail": "Օգտատիրոգ էլ․ հասցե",
   "UserIPAddress": "Օգտատիրոջ IP հասցե",
   "UserName": "Օգտատիրոջ անվանում",

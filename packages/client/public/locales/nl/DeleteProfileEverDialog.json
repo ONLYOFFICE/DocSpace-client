@@ -12,7 +12,7 @@
   "DeleteUser": "Gebruiker verwijderen",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> zal worden verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
   "DeletingUsers": "Gebruikers aan het verwijderen",
-  "PersonalDataDeletionInfo": "Persoonsgegevens, alle persoonlijke bestanden en mappen in de secties {{sectionNameFirst}} en {{sectionNameSecond}}* van geselecteerde gebruikers worden permanent verwijderd. Bestanden en mappen van geselecteerde gebruikers in gemeenschappelijke secties* zoals ruimtes blijven behouden in {{productName}}.",
+  "PersonalDataDeletionInfo": "Persoonsgegevens, alle persoonlijke bestanden en mappen in de secties {{sectionNameFirst}} en {{sectionNameSecond}}* van geselecteerde gebruikers worden permanent verwijderd. Bestanden en mappen van geselecteerde gebruikers in gemeenschappelijke secties* zoals ruimtes blijven behouden in de werkruimte.",
   "PleaseNote": "Let op:",
   "ReassignDataToAnotherUser": "Gegevens opnieuw toewijzen aan een andere gebruiker",
   "SuccessfullyDeleteGuestInfoMessage": "De gast is succesvol verwijderd",

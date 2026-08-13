@@ -3,7 +3,7 @@
   "CompleteSetup": "Completa la configurazione",
   "ConfigurationDescription": "Devi connettere il tuo dominio al tuo IP attuale per modificare le impostazioni dell'indirizzo. Assicurati di avere accesso alle impostazioni del dominio per poterlo fare. Dopo aver connesso il dominio, crea un nome per lo spazio di lavoro. È possibile modificare il nome creato successivamente utilizzando le impostazioni dello spazio di lavoro.",
   "ConfigurationHeader": "Configurazione dello spazio di lavoro attuale",
-  "CreateSpaceDescription": "Hai collegato con successo il tuo dominio al tuo indirizzo IP. Per modificare le impostazioni dell'indirizzo dello spazio di lavoro è necessario impostare il futuro nome di {{productName}}",
+  "CreateSpaceDescription": "Hai collegato con successo il tuo dominio al tuo indirizzo IP. Per modificare le impostazioni dell'indirizzo dello spazio di lavoro è necessario impostare il futuro nome di spazio di lavoro",
   "CreatingPortal": "Creazione di un nuovo spazio di lavoro",
   "CurrentSpace": "Spazio di lavoro attuale",
   "DecryptStorage": "Decrittare l’archivio",

@@ -3,7 +3,7 @@
   "CompleteSetup": "Dokončite nastavenie",
   "ConfigurationDescription": "Musíte pripojiť svoju doménu k aktuálnej IP adrese, aby ste mohli zmeniť nastavenia adresy. Uistite sa, že máte prístup k nastaveniam domény, aby ste mali možnosť to urobiť. Po pripojení domény vytvorte názov pracovného priestoru. Vytvorený názov môžete neskôr zmeniť pomocou nastavení pracovného priestoru.",
   "ConfigurationHeader": "Aktuálna konfigurácia pracovného priestoru",
-  "CreateSpaceDescription": "Úspešne ste pripojili doménu k vašej IP adrese. Ak chcete upraviť nastavenia adresy pracovného priestoru, musíte nastaviť budúci názov {{productName}}",
+  "CreateSpaceDescription": "Úspešne ste pripojili doménu k vašej IP adrese. Ak chcete upraviť nastavenia adresy pracovného priestoru, musíte nastaviť budúci názov pracovného priestoru",
   "CreatingPortal": "Vytvorenie nového pracovného priestoru",
   "CurrentSpace": "Aktuálny pracovný priestor",
   "DecryptStorage": "Dešifrovať úložisko",

@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "邀请语言",
-  "InviteMembersManuallyDescription": "通过电子邮件亲自邀请新成员加入{{productName}}",
+  "InviteMembersManuallyDescription": "通过电子邮件亲自邀请新成员加入工作区",
   "InviteMembersSearchPlaceholder": "通过电子邮件邀请成员",
-  "InviteViaLinkDescriptionAccounts": "在{{productName}}中创建用于自我授权的通用链接"
+  "InviteViaLinkDescriptionAccounts": "在工作区中创建用于自我授权的通用链接"
 }

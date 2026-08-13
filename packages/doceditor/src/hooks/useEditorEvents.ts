@@ -62,8 +62,8 @@ import {
   getProfilesList,
   getProfileAssignments,
 } from "@docspace/shared/api/ai";
-import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
-import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
+// import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
+// import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   CREATED_FORM_KEY,
@@ -344,35 +344,36 @@ const useEditorEvents = ({
               window.history.replaceState(null, "", url.toString());
             };
 
-            const editorOrigin = (() => {
-              try {
-                return config?.editorUrl
-                  ? new URL(config.editorUrl).origin
-                  : "";
-              } catch {
-                return "";
-              }
-            })();
-            const sameOrigin =
-              typeof window !== "undefined" &&
-              editorOrigin === window.location.origin;
+            // const editorOrigin = (() => {
+            //   try {
+            //     return config?.editorUrl
+            //       ? new URL(config.editorUrl).origin
+            //       : "";
+            //   } catch {
+            //     return "";
+            //   }
+            // })();
+            // const sameOrigin =
+            //   typeof window !== "undefined" &&
+            //   editorOrigin === window.location.origin;
 
-            if (sameOrigin) {
-              aiAvailable = true;
-              whenAiReady("Tools", sendTools);
-              whenAiReady("Actions", () => {
-                connector.sendEvent("ai_onCustomInit", {
-                  actionsOverride: true,
-                  apiConfig: {
-                    origin: window.location.origin,
-                    baseUrl: "/api/2.0/ai",
-                    routes: DEFAULT_SERVER_API_ROUTES,
-                  } satisfies ServerAPIConfig,
-                });
-                fireGenerationToolCall();
-                markAiActionsReady();
-              });
-            } else {
+            // if (sameOrigin) {
+            //   aiAvailable = true;
+            //   whenAiReady("Tools", sendTools);
+            //   whenAiReady("Actions", () => {
+            //     connector.sendEvent("ai_onCustomInit", {
+            //       actionsOverride: true,
+            //       apiConfig: {
+            //         origin: window.location.origin,
+            //         baseUrl: "/api/2.0/ai",
+            //         routes: DEFAULT_SERVER_API_ROUTES,
+            //       } satisfies ServerAPIConfig,
+            //     });
+            //     fireGenerationToolCall();
+            //     markAiActionsReady();
+            //   });
+            // } else {
+            {
               const profiles = await getProfilesList();
 
               if (profiles && profiles.length > 0) {

@@ -7,7 +7,7 @@
   "AddNewLink": "Ajouter un nouveau lien",
   "AddUsersOrGroupsDescription": "Les administrateurs ajoutés pourront créer des salles en utilisant ce modèle.",
   "AddUsersOrGroupsInfo": "Seuls les <1>super-administrateurs</1> et les <1>administrateurs de salle</1> sont affichés ici",
-  "AddUsersOrGroupsInfoGroups": "Seuls les <1>{{productName}}</1> et les <1>administrateurs de salles</1> des groupes sélectionnés pourront créer des salles à partir de ce modèle.",
+  "AddUsersOrGroupsInfoGroups": "Seuls les <1>super-administrateurs</1> et les <1>administrateurs de salles</1> des groupes sélectionnés pourront créer des salles à partir de ce modèle.",
   "AddUsersOrGroupsTitle": "Ajouter des utilisateurs ou des groupes",
   "AfterFilesWillBeDeletedPermanently": "Les fichiers suivants seront définitivement supprimés.",
   "AllLinksAreDisabled": "Tous les liens sont désactivés",

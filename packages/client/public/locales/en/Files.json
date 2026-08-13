@@ -7,7 +7,7 @@
   "AddNewLink": "Add new link",
   "AddUsersOrGroupsDescription": "The added administrators will be able to create rooms using this template.",
   "AddUsersOrGroupsInfo": "Only <1>Full admins</1> and <1>room admins</1> are shown here",
-  "AddUsersOrGroupsInfoGroups": "Only <1>{{productName}}</1> and <1>Room admins</1> from the selected groups will be able to create rooms using this template.",
+  "AddUsersOrGroupsInfoGroups": "Only <1>Full admins</1> and <1>room admins</1> from the selected groups will be able to create rooms using this template.",
   "AddUsersOrGroupsTitle": "Add Users or Groups",
   "AfterFilesWillBeDeletedPermanently": "After files will be deleted permanently.",
   "AllLinksAreDisabled": "All links are disabled",

@@ -7,7 +7,7 @@
   "AddNewLink": "Dodaj novi link",
   "AddUsersOrGroupsDescription": "Dodati administratori moći će da kreiraju sobe koristeći ovaj šablon.",
   "AddUsersOrGroupsInfo": "Ovde su prikazani samo <1>superadministratori</1> i <1>administratori soba</1>",
-  "AddUsersOrGroupsInfoGroups": "Samo <1>{{productName}}</1> i <1>administratori soba</1> iz izabranih grupa moći će da kreiraju sobe koristeći ovaj šablon.",
+  "AddUsersOrGroupsInfoGroups": "Samo <1>superadministratori</1> i <1>administratori soba</1> iz izabranih grupa moći će da kreiraju sobe koristeći ovaj šablon.",
   "AddUsersOrGroupsTitle": "Dodajte korisnike ili grupe.",
   "AfterFilesWillBeDeletedPermanently": "Nakon što se datoteke trajno obrišu.",
   "AllLinksAreDisabled": "Svi linkovi su onemogućeni",

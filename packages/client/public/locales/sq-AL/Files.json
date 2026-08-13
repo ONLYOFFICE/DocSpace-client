@@ -7,7 +7,7 @@
   "AddNewLink": "Shtoni një lidhje të re",
   "AddUsersOrGroupsDescription": "Administratorët e shtuar do të jenë në gjendje të krijojnë dhoma duke përdorur këtë model.",
   "AddUsersOrGroupsInfo": "Këtu shfaqen vetëm <1>superadministratorët</1> dhe <1>administratorët e dhomës</1>",
-  "AddUsersOrGroupsInfoGroups": "Vetëm <1>{{productName}}</1> dhe <1>administratorët e dhomës</1> nga grupet e përzgjedhura do të jenë në gjendje të krijojnë dhoma duke përdorur këtë model.",
+  "AddUsersOrGroupsInfoGroups": "Vetëm <1>superadministratorët</1> dhe <1>administratorët e dhomës</1> nga grupet e përzgjedhura do të jenë në gjendje të krijojnë dhoma duke përdorur këtë model.",
   "AddUsersOrGroupsTitle": "Shtoni Përdoruesit ose Grupet",
   "AfterFilesWillBeDeletedPermanently": "Pas kësaj, skedarët do të fshihen përgjithmonë.",
   "AllLinksAreDisabled": "Të gjithë lidhjet janë çaktivizuar",

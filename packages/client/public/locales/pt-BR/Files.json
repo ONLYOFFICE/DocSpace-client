@@ -7,7 +7,7 @@
   "AddNewLink": "Adicionar novo link",
   "AddUsersOrGroupsDescription": "Os administradores adicionados poderão criar salas usando este modelo.",
   "AddUsersOrGroupsInfo": "Apenas os <1>superadministradores</1> e os <1>administradores de sala</1> são exibidos aqui",
-  "AddUsersOrGroupsInfoGroups": "Apenas <1>{{productName}}</1> e <1>Administradores de sala</1> dos grupos selecionados poderão criar salas usando este modelo.",
+  "AddUsersOrGroupsInfoGroups": "Apenas <1>superadministradores</1> e <1>Administradores de sala</1> dos grupos selecionados poderão criar salas usando este modelo.",
   "AddUsersOrGroupsTitle": "Adicionar usuários ou grupos",
   "AfterFilesWillBeDeletedPermanently": "Os arquivos posteriores serão excluídos permanentemente.",
   "AllLinksAreDisabled": "Todos os links estão desativados",

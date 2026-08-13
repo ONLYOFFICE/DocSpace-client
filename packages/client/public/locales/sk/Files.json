@@ -7,7 +7,7 @@
   "AddNewLink": "Pridať nový odkaz",
   "AddUsersOrGroupsDescription": "Pridaní administrátori budú môcť vytvárať miestnosti pomocou tejto šablóny.",
   "AddUsersOrGroupsInfo": "Tu sa zobrazujú iba <1>supersprávcovia</1> a <1>administrátori miestností</1>",
-  "AddUsersOrGroupsInfoGroups": "Iba <1>{{productName}}</1> a <1> Administrátori miestnosti </1> z vybraných skupín budú môcť vytvárať miestnosti pomocou tejto šablóny.",
+  "AddUsersOrGroupsInfoGroups": "Iba <1>supersprávcovia</1> a <1>administrátori miestností</1> z vybraných skupín budú môcť vytvárať miestnosti pomocou tejto šablóny.",
   "AddUsersOrGroupsTitle": "Pridať Používateľov alebo Skupiny",
   "AfterFilesWillBeDeletedPermanently": "Po tom, ako budú súbory natrvalo vymazané.",
   "AllLinksAreDisabled": "Všetky odkazy sú deaktivované",

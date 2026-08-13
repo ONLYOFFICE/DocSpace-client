@@ -7,7 +7,7 @@
   "AddNewLink": "Yeni bağlantı ekle",
   "AddUsersOrGroupsDescription": "Eklenen yöneticiler bu şablonu kullanarak oda oluşturabilir.",
   "AddUsersOrGroupsInfo": "Burada yalnızca <1>süper yöneticiler</1> ve <1>oda yöneticileri</1> gösterilir",
-  "AddUsersOrGroupsInfoGroups": "Sadece seçilen gruplardaki <1>{{productName}}</1> ve <1>Oda yöneticileri</1> bu şablonu kullanarak oda oluşturabilir.",
+  "AddUsersOrGroupsInfoGroups": "Sadece seçilen gruplardaki <1>süper yöneticiler</1> ve <1>Oda yöneticileri</1> bu şablonu kullanarak oda oluşturabilir.",
   "AddUsersOrGroupsTitle": "Kullanıcı veya Grup Ekle",
   "AfterFilesWillBeDeletedPermanently": "Dosyalar kalıcı olarak silindikten sonra.",
   "AllLinksAreDisabled": "Tüm bağlantılar devre dışı bırakıldı",

@@ -7,7 +7,7 @@
   "AddNewLink": "Dodajte novo povezavo",
   "AddUsersOrGroupsDescription": "Dodani skrbniki bodo lahko ustvarili sobe s to predlogo.",
   "AddUsersOrGroupsInfo": "Tu so prikazani samo <1>superskrbniki</1> in <1>skrbniki sob</1>",
-  "AddUsersOrGroupsInfoGroups": "Samo <1>{{productName}}</1> in <1>skrbniki sob</1> iz izbranih skupin bodo lahko ustvarili sobe s to predlogo.",
+  "AddUsersOrGroupsInfoGroups": "Samo <1>superskrbniki</1> in <1>skrbniki sob</1> iz izbranih skupin bodo lahko ustvarili sobe s to predlogo.",
   "AddUsersOrGroupsTitle": "Dodaj uporabnike ali skupine",
   "AfterFilesWillBeDeletedPermanently": "Po tem bodo datoteke trajno izbrisane.",
   "AllLinksAreDisabled": "Vse povezave so onemogočene",

@@ -7,7 +7,7 @@
   "AddNewLink": "新しいリンクの追加",
   "AddUsersOrGroupsDescription": "追加された管理者は、このテンプレートを使用してルームを作成できるようになります。",
   "AddUsersOrGroupsInfo": "ここには<1>スーパー管理者</1>と<1>ルーム管理者</1>のみが表示されます",
-  "AddUsersOrGroupsInfoGroups": "選択されたグループからの<1>{{productName}}</1>と<1>ルーム管理者</1>のみが、このテンプレートを使用してルームを作成できます。",
+  "AddUsersOrGroupsInfoGroups": "選択されたグループからの<1>スーパー管理者</1>と<1>ルーム管理者</1>のみが、このテンプレートを使用してルームを作成できます。",
   "AddUsersOrGroupsTitle": "ユーザーまたはグループを追加",
   "AfterFilesWillBeDeletedPermanently": "ファイルは削除されます。",
   "AllLinksAreDisabled": "すべてのリンクは無効です",

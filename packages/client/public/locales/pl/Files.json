@@ -7,7 +7,7 @@
   "AddNewLink": "Dodaj nowy link",
   "AddUsersOrGroupsDescription": "Dodani administratorzy będą mogli tworzyć pokoje za pomocą tego szablonu.",
   "AddUsersOrGroupsInfo": "Wyświetlani są tutaj tylko <1>superadministratorzy</1> i <1>administratorzy pokoi</1>",
-  "AddUsersOrGroupsInfoGroups": "Tylko <1>administratorzy pokoi</1> i <1>{{productName}}</1> z wybranych grup będą w stanie tworzyć pokoje za pomocą tego szablonu.",
+  "AddUsersOrGroupsInfoGroups": "Tylko <1>superadministratorzy</1> i <1>administratorzy pokoi</1> z wybranych grup będą w stanie tworzyć pokoje za pomocą tego szablonu.",
   "AddUsersOrGroupsTitle": "Dodaj użytkowników lub grupy",
   "AfterFilesWillBeDeletedPermanently": "Następnie pliki zostaną trwale usunięte.",
   "AllLinksAreDisabled": "Wszystkie linki są wyłączone",

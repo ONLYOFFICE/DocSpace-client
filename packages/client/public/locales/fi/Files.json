@@ -7,7 +7,7 @@
   "AddNewLink": "Lisää uusi linkki",
   "AddUsersOrGroupsDescription": "Lisätyt pääkäyttäjät voivat luoda ryhmiä käyttäen tätä mallia.",
   "AddUsersOrGroupsInfo": "Tässä näytetään vain <1>pääjärjestelmänvalvojat</1> ja <1>huoneen järjestelmänvalvojat</1>",
-  "AddUsersOrGroupsInfoGroups": "Vain <1>{{productName}}</1> and <1>Huoneen pääkäyttäjät</1> valituista ryhmistä voivat luoda huoneita käyttäen tätä mallia.",
+  "AddUsersOrGroupsInfoGroups": "Vain <1>pääjärjestelmänvalvojat</1> ja <1>huoneen järjestelmänvalvojat</1> valituista ryhmistä voivat luoda huoneita käyttäen tätä mallia.",
   "AddUsersOrGroupsTitle": "Lisää Käyttäjiä tai Ryhmiä",
   "AfterFilesWillBeDeletedPermanently": "Sen jälkeen, kun tiedostot poistetaan lopullisesti.",
   "AllLinksAreDisabled": "Kaikki linkit ovat poistettu käytöstä",

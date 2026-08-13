@@ -7,7 +7,7 @@
   "AddNewLink": "Adăugarea unui link nou",
   "AddUsersOrGroupsDescription": "Administratorii adăugați vor putea crea săli cu ajutorul acestui șablon.",
   "AddUsersOrGroupsInfo": "Aici sunt afișați doar <1>superadministratorii</1> și <1>administratorii sălii</1>",
-  "AddUsersOrGroupsInfoGroups": "Numai Administratorul <1>{{productName}}</1> și <1>Administratori de sală</1> din grupuri selectate pot crea săli cu ajutorul acestui șablon.",
+  "AddUsersOrGroupsInfoGroups": "Numai <1>superadministratorii</1> și <1>administratorii sălii</1> din grupurile selectate pot crea săli cu ajutorul acestui șablon.",
   "AddUsersOrGroupsTitle": "Adăugare Utilizatori sau Grrupuri",
   "AfterFilesWillBeDeletedPermanently": "Fișierele vor fi şterse definitiv.",
   "AllLinksAreDisabled": "Toate link-uri sunt dezactivate",

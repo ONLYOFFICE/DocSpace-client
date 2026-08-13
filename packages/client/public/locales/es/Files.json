@@ -7,7 +7,7 @@
   "AddNewLink": "Añadir nuevo enlace",
   "AddUsersOrGroupsDescription": "Los administradores añadidos podrán crear salas usando esta plantilla.",
   "AddUsersOrGroupsInfo": "Aquí solo se muestran los <1>superadministradores</1> y los <1>administradores de sala</1>",
-  "AddUsersOrGroupsInfoGroups": "Solo administradores  de <1>{{productName}}</1> y <1>administradores de salas</1> de los grupos seleccionados podrán crear salas usando esta plantilla.",
+  "AddUsersOrGroupsInfoGroups": "Solo los <1>superadministradores</1> y los <1>administradores de sala</1> de los grupos seleccionados podrán crear salas usando esta plantilla.",
   "AddUsersOrGroupsTitle": "Añadir Usuarios o Grupos",
   "AfterFilesWillBeDeletedPermanently": "Después los archivos se eliminarán permanentemente.",
   "AllLinksAreDisabled": "Todos los enlaces están desactivados",

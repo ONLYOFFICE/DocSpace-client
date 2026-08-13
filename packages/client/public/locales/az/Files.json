@@ -7,7 +7,7 @@
   "AddNewLink": "Yeni keçid əlavə edin",
   "AddUsersOrGroupsDescription": "Əlavə edilmiş administratorlar bu şablondan istifadə edərək otaqlar yarada biləcəklər.",
   "AddUsersOrGroupsInfo": "Burada yalnız <1>super administratorlar</1> və <1>otaq adminləri</1> göstərilir",
-  "AddUsersOrGroupsInfoGroups": "Bu şablondan istifadə etməklə seçilmiş qruplardan yalnız <1>{{productName}}</1> və <1>Otaq adminləri</1> otaqlar yarada biləcəklər.",
+  "AddUsersOrGroupsInfoGroups": "Bu şablondan istifadə etməklə seçilmiş qruplardan yalnız <1>super administratorlar</1> və <1>Otaq adminləri</1> otaqlar yarada biləcəklər.",
   "AddUsersOrGroupsTitle": "İstifadəçilər və ya Qruplar əlavə edin",
   "AfterFilesWillBeDeletedPermanently": "Sonra fayllar həmişəlik silinəcək.",
   "AllLinksAreDisabled": "Bütün keçidlər deaktiv edilib",

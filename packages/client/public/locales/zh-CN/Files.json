@@ -7,7 +7,7 @@
   "AddNewLink": "添加新链接",
   "AddUsersOrGroupsDescription": "添加的管理员可使用此模板创建房间。",
   "AddUsersOrGroupsInfo": "此处仅显示<1>超级管理员</1>和<1>房间管理员</1>",
-  "AddUsersOrGroupsInfoGroups": "只有所选群组中的<1>{{productName}}</1>和<1>房间管理员</1>可使用此模板创建房间。",
+  "AddUsersOrGroupsInfoGroups": "只有所选群组中的<1>超级管理员</1>和<1>房间管理员</1>可使用此模板创建房间。",
   "AddUsersOrGroupsTitle": "添加用户或群组",
   "AfterFilesWillBeDeletedPermanently": "之后文件将被永久删除。",
   "AllLinksAreDisabled": "所有链接都已被禁用",

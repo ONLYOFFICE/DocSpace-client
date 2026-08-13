@@ -7,7 +7,7 @@
   "AddNewLink": "Přidat nový odkaz",
   "AddUsersOrGroupsDescription": "Přidaní správci budou moci vytvářet místnosti pomocí této šablony.",
   "AddUsersOrGroupsInfo": "Zde se zobrazují pouze <1>supersprávci</1> a <1>administrátoři místností</1>",
-  "AddUsersOrGroupsInfoGroups": "Pomocí této šablony budou moci vytvářet místnosti pouze <1>{{productName}}</1> a <1>správci místností</1> z vybraných skupin.",
+  "AddUsersOrGroupsInfoGroups": "Pomocí této šablony budou moci vytvářet místnosti pouze <1>supersprávci</1> a <1>správci místností</1> z vybraných skupin.",
   "AddUsersOrGroupsTitle": "Přidání uživatelů nebo skupin",
   "AfterFilesWillBeDeletedPermanently": "Poté budou soubory trvale odstraněny.",
   "AllLinksAreDisabled": "Všechny odkazy jsou zakázány",

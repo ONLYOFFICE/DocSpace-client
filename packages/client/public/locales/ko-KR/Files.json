@@ -7,7 +7,7 @@
   "AddNewLink": "새 링크 추가",
   "AddUsersOrGroupsDescription": "추가된 관리자는 이 템플릿을 사용하여 룸을 생성할 수 있습니다.",
   "AddUsersOrGroupsInfo": "여기에는 <1>슈퍼 관리자</1>와 <1>룸 관리자</1>만 표시됩니다",
-  "AddUsersOrGroupsInfoGroups": "선택한 그룹의 <1>{{productName}}</1> 및 <1>룸 관리자</1>만 이 템플릿을 사용하여 룸을 생성할 수 있습니다.",
+  "AddUsersOrGroupsInfoGroups": "선택한 그룹의 <1>슈퍼 관리자</1> 및 <1>룸 관리자</1>만 이 템플릿을 사용하여 룸을 생성할 수 있습니다.",
   "AddUsersOrGroupsTitle": "사용자 또는 그룹 추가",
   "AfterFilesWillBeDeletedPermanently": "뒤의 파일은 영구적으로 삭제됩니다.",
   "AllLinksAreDisabled": "모든 링크가 비활성화되었습니다",

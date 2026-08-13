@@ -7,7 +7,7 @@
   "AddNewLink": "Neuen Link hinzufügen",
   "AddUsersOrGroupsDescription": "Die hinzugefügten Administratoren können mithilfe dieser Vorlage Räume erstellen.",
   "AddUsersOrGroupsInfo": "Hier werden nur <1>Super-Administratoren</1> und <1>Raum-Admins</1> angezeigt",
-  "AddUsersOrGroupsInfoGroups": "Nur <1>{{productName}}</1> und <1>Raumadministratoren</1> aus den ausgewählten Gruppen können mit dieser Vorlage Räume erstellen.",
+  "AddUsersOrGroupsInfoGroups": "Nur <1>Super-Administratoren</1> und <1>Raumadministratoren</1> aus den ausgewählten Gruppen können mit dieser Vorlage Räume erstellen.",
   "AddUsersOrGroupsTitle": "Benutzer oder Gruppen hinzufügen",
   "AfterFilesWillBeDeletedPermanently": "Danach werden die Dateien dauerhaft gelöscht.",
   "AllLinksAreDisabled": "Alle Links sind deaktiviert",

@@ -7,7 +7,7 @@
   "AddNewLink": "Pievienot jaunu saiti",
   "AddUsersOrGroupsDescription": "Pievienotie administratori varēs izveidot telpas, izmantojot šo veidni.",
   "AddUsersOrGroupsInfo": "Šeit tiek rādīti tikai <1>superadministratori</1> un <1>telpas administratori</1>",
-  "AddUsersOrGroupsInfoGroups": "Tikai <1>{{productName}}</1> un atlasīto grupu <1>Telpas administratori</1> varēs izveidot telpas, izmantojot šo veidni.",
+  "AddUsersOrGroupsInfoGroups": "Tikai <1>superadministratori</1> un atlasīto grupu <1>Telpas administratori</1> varēs izveidot telpas, izmantojot šo veidni.",
   "AddUsersOrGroupsTitle": "Pievienot lietotājus vai grupas",
   "AfterFilesWillBeDeletedPermanently": "Pēc tam faili tiks neatgriezeniski dzēsti.",
   "AllLinksAreDisabled": "Visas saites ir atspējotas",

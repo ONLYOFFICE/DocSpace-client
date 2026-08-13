@@ -7,7 +7,7 @@
   "AddNewLink": "Voeg nieuwe link toe",
   "AddUsersOrGroupsDescription": "De toegevoegde beheerders kunnen kamers maken met dit sjabloon.",
   "AddUsersOrGroupsInfo": "Hier worden alleen <1>superbeheerders</1> en <1>kamerbeheerders</1> weergegeven",
-  "AddUsersOrGroupsInfoGroups": "Alleen <1>{{productName}}</1> en <1>Kamerbeheerders</1> van de geselecteerde groepen kunnen kamers maken met dit sjabloon.",
+  "AddUsersOrGroupsInfoGroups": "Alleen <1>superbeheerders</1> en <1>Kamerbeheerders</1> van de geselecteerde groepen kunnen kamers maken met dit sjabloon.",
   "AddUsersOrGroupsTitle": "Gebruikers of Groepen toevoegen",
   "AfterFilesWillBeDeletedPermanently": "Na bestanden worden definitief verwijderd.",
   "AllLinksAreDisabled": "Alle links zijn uitgeschakeld",

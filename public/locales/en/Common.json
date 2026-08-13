@@ -1043,7 +1043,7 @@
   "GoToMyRooms": "Go to rooms",
   "GoToRoom": "go to the room",
   "GoToSection": "Go to {{sectionName}}",
-  "GoToService": "Go to service",
+  "GoToAddon": "Go to add-on",
   "GoToSettings": "Go to Settings",
   "GoToStripe": "Go to the Stripe",
   "GoToTariffPlan": "Go to tariff plan",

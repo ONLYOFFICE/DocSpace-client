@@ -45,7 +45,6 @@ import {
   fileItemStep,
   revealStep,
   sidebarSelector,
-  NAVIGATION_TARGET_TIMEOUT,
   type RevealHooks,
 } from "SRC_DIR/components/Tour/stepBuilders";
 import { DEMO_SPACE_ITEM_IDS } from "SRC_DIR/api/tourDemo/data";
@@ -68,15 +67,6 @@ const itemSelector = (id: number, isFolder = true) =>
 const BLANK_FORM_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.form, false);
 const IN_PROGRESS_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.inProgress);
 const COMPLETE_SELECTOR = itemSelector(DEMO_SPACE_ITEM_IDS.complete);
-
-// The stand-in space's own row out in the list — the door the tour walks
-// through, and the one it walks through rather than any other, so the space
-// the user is looking at is the space they end up inside. It is the first row
-// of the list (`tourDemo.space` is `rooms[0]`), which is the fallback for the
-// views that give a room row no `folder_{id}` of its own.
-const DEMO_SPACE_SELECTOR = `${itemSelector(
-  DEMO_SPACE_ITEM_IDS.space,
-)}, ${FIRST_ITEM_SELECTOR}`;
 
 // The only action of the Forms empty screen, which is "create a room" — the
 // dialog it opens is already scoped to a form space (EmptyViewContainer.helpers
@@ -215,29 +205,11 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 4. The way in. Steps 5–7 all stand inside a space, and without this one
-    // the tour teleports there between two tooltips: the user is told a row is
-    // a collection, and the next thing they see is the contents of a room they
-    // never opened. So the door is pointed at and named before it is walked
-    // through — and it is the stand-in space's own row that is pointed at, the
-    // one the tour is about to open, not whichever row happens to be first.
-    //
-    // `leaveSpace` rather than `spaceHooks`: this step belongs outside, and
-    // stepping back into it from step 5 has to come back out.
-    showInsideSpace &&
-      fileItemStep(
-        DEMO_SPACE_SELECTOR,
-        t("FormsTour:FormsOpenSpaceTitle"),
-        t("FormsTour:FormsOpenSpace"),
-        callbacks,
-        LOG_LABEL,
-        leaveSpace,
-        NAVIGATION_TARGET_TIMEOUT,
-      ),
-
-    // 5. Inside the space, on the blank form itself: what everyone who follows
+    // 4. Inside the space, on the blank form itself: what everyone who follows
     // the link actually opens, and where the form comes from in the first
-    // place. This is the step that walks the tour in.
+    // place. This is the step that walks the tour in — step 3 has just named
+    // the row as the door, so a step of its own pointing at the same row again
+    // only says the same thing twice.
     showInsideSpace &&
       revealStep(
         BLANK_FORM_SELECTOR,
@@ -248,7 +220,7 @@ export function getTourSteps(
         spaceHooks,
       ),
 
-    // 6. In progress — the half of the answer nobody sees but its author. A
+    // 5. In progress — the half of the answer nobody sees but its author. A
     // copy per person, saved as they go, so a form left half-filled is not
     // lost and not yet counted. This is also where the privacy of the whole
     // thing is worth saying: a Form filler only ever sees their own copy
@@ -266,7 +238,7 @@ export function getTourSteps(
         spaceHooks,
       ),
 
-    // 7. Complete — where a submission lands, and the spreadsheet that adds up
+    // 6. Complete — where a submission lands, and the spreadsheet that adds up
     // all of them. The two result options are set when the space is created
     // (Common:CollectResultsInXlsx / Common:ExportResultsToDatabase), which is
     // why this is the last thing said about the inside.
@@ -280,7 +252,7 @@ export function getTourSteps(
         spaceHooks,
       ),
 
-    // 8. Back out at the section root: the sidebar sub-items, each named by
+    // 7. Back out at the section root: the sidebar sub-items, each named by
     // the sidebar's own label so the wording in the tooltip is the wording on
     // screen and the names are not translated twice.
     showQuickAccess &&
@@ -294,7 +266,7 @@ export function getTourSteps(
         leaveSpace,
       ),
 
-    // 9. Only when the list was stood in for. The stand-in spaces are the last
+    // 8. Only when the list was stood in for. The stand-in spaces are the last
     // thing the user saw, and dropping them lands them on the empty screen —
     // so rather than let that happen behind their back, the closing step does
     // it deliberately. `restore` is a no-op either way: the section is the

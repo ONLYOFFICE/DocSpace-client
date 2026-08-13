@@ -43,7 +43,7 @@ export const getRoomTypeTitleTranslation = (
   isFormSection: boolean = false,
 ) => {
   if (isFormSection)
-    return isTemplate ? t("Common:SetTemplateTitle") : t("Common:FormSetTitle");
+    return isTemplate ? t("Common:FromTemplate") : t("Common:FormSetTitle");
 
   if (isTemplate) return t("Common:FromTemplate");
 

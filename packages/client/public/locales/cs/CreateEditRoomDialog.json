@@ -6,6 +6,7 @@
   "AutomaticIndexing": "Automatické indexování",
   "AutomaticIndexingDescription": "Povolte automatické indexování pro indexování souborů a složek podle sériového čísla. Třídění podle čísla bude nastaveno jako výchozí pro všechny uživatele.",
   "ChooseRoomType": "Výběr typu místnosti",
+  "ChooseSetType": "Výběr typu sady",
   "ConfigureDatabaseConnection": "Konfigurujte připojení k databázi v Integrace → Třetí strany",
   "CreateRoomConfirmation": "Pokračovat bez připojení úložiště?\nVybrali jste možnost úložiště třetí strany, které ještě není připojeno. Pokud budete pokračovat bez připojení služby, tato možnost nebude přidána.",
   "CreateRoomWatermarksConfirmation": "V této místnosti jste nenastavili použití vodoznaku na dokumenty. Vodoznak můžete vždy přidat v nastavení úprav místnosti. Pokračovat bez vodoznaku?",

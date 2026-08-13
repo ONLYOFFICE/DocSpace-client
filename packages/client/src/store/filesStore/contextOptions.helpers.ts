@@ -106,6 +106,12 @@ export const buildContextOptions = (
 
   const { enablePlugins } = deps.settingsStore;
 
+  // Plugins receive only an item id and fetch the content themselves, so they
+  // can neither decrypt it nor be trusted with it: nothing from an encrypted
+  // room may be offered to them, whether it is a file, a folder or the room.
+  const arePluginsAllowed =
+    enablePlugins && !isEncrypted && !isPrivacyFolder && !item.private;
+
   const isThirdPartyFolder =
     item.providerKey && item.id === item.rootFolderId;
 
@@ -515,7 +521,7 @@ export const buildContextOptions = (
     if (!isRecycleBinFolder) {
       fileOptions = removeOptions(fileOptions, ["restore"]);
 
-      if (enablePlugins) {
+      if (arePluginsAllowed) {
         if (
           !item.viewAccessibility!.MediaView &&
           !item.viewAccessibility!.ImageView
@@ -897,7 +903,7 @@ export const buildContextOptions = (
     } else {
       roomOptions = removeOptions(roomOptions, ["unarchive-room"]);
 
-      if (enablePlugins) {
+      if (arePluginsAllowed) {
         const pluginRoomsKeys = deps.pluginStore.getContextMenuKeysByType(
           PluginFileType.room,
           null,
@@ -1065,7 +1071,7 @@ export const buildContextOptions = (
   } else {
     folderOptions = removeOptions(folderOptions, ["restore"]);
 
-    if (enablePlugins) {
+    if (arePluginsAllowed) {
       const pluginFoldersKeys = deps.pluginStore.getContextMenuKeysByType(
         PluginFileType.folder,
         null,

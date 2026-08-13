@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Commencé, pas terminé",
   "FormsItem": "Chaque ligne est une collecte entière. Ouvrez-en une pour travailler à l'intérieur, épinglez celles que vous menez, ou servez-vous des trois points pour inviter des personnes, copier le lien qui ouvre le formulaire et enregistrer la configuration comme modèle.",
   "FormsItemTitle": "Travailler avec un espace de formulaires",
-  "FormsOpenSpace": "Ouvrons celui-ci et voyons comment une collecte est constituée. À l'intérieur de chaque espace de formulaires se trouvent les mêmes trois éléments : le formulaire lui-même, les réponses en cours de rédaction, et celles déjà arrivées.",
-  "FormsOpenSpaceTitle": "Entrez dans un espace",
   "FormsPlacesRecent": "{{recent}} et {{favorites}} gardent à portée de main les collectes que vous menez.",
   "FormsPlacesTemplates": "{{templates}} — les modèles d'espace que vous avez enregistrés.",
   "FormsPlacesTitle": "Chaque chose à sa place",

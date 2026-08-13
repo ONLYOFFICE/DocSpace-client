@@ -612,11 +612,66 @@ export const onRemoveRoomsFromGroupImpl = async (
   }
 };
 
+// Forms root flow: there is no folder to create the form in, so the picked
+// template becomes a Form Filling room built around it.
+//
+// 1. Picking a template requests nothing -- the choice is just recorded and the
+//    create-room dialog opens immediately, preset to FormRoom and prefilled
+//    with the template's name.
+// 2. CreateEditRoomStore creates the form from that template directly inside
+//    the room, once the room exists (see createFormFromTemplate there).
+//
+// Deliberately synchronous: an await here would delay the dialog behind a
+// request, and creating the form up front would leave a stray file behind
+// whenever the user cancels the dialog.
+const onCreateRoomFromTemplateImpl = (self: ContextOptionsStore) => {
+  const {
+    gallerySelected,
+    setTemplateGalleryVisible,
+    setFormTemplateForNewRoom,
+    setGallerySelected,
+  } = self.oformsStore;
+
+  if (!gallerySelected) return;
+
+  const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
+  const title = gallerySelected.attributes.name_form;
+
+  setFormTemplateForNewRoom({ id: gallerySelected.id, title, extension });
+
+  // Consume the selection: it has been handed to the room flow, and leaving it
+  // set would let a stray create fall through to the file-creation branch below
+  // and pop the "new PDF form" naming dialog on top of the room.
+  setGallerySelected(null);
+  // Also clears createRoomFromTemplate.
+  setTemplateGalleryVisible(false);
+
+  const event: TStoreCustomEvent = new CustomEvent(Events.ROOM_CREATE, {
+    detail: { parentId: self.selectedFolderStore.id, context: "template" },
+  });
+  // GlobalEvents.onCreateRoom reads `title` off the event itself (not the
+  // payload) to prefill the room name -- the template's name is a better
+  // starting point than an empty field, and stays editable.
+  event.title = title;
+  event.payload = { startRoomType: RoomsType.FormRoom };
+
+  window.dispatchEvent(event);
+};
+
 export const onCreateTemplateImpl = async (
   self: ContextOptionsStore,
   _navigate?: unknown,
 ) => {
   self.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
+
+  if (self.oformsStore.createRoomFromTemplate)
+    return onCreateRoomFromTemplateImpl(self);
+
+  // Nothing selected means the template was already consumed (the Forms-root
+  // room flow clears it) or nothing was picked at all -- either way there is no
+  // file to create, and going on would open an empty naming dialog.
+  const { gallerySelected } = self.oformsStore;
+  if (!gallerySelected) return;
 
   const extension = self.oformsStore.currentExtensionGallery.replace(".", "");
 
@@ -632,9 +687,7 @@ export const onCreateTemplateImpl = async (
     extension,
     id: -1,
     fromTemplate: true,
-    // the original .js assumed a selected gallery template
-    // here (crashed on null) — the non-null assertion keeps that behavior.
-    title: self.oformsStore.gallerySelected!.attributes.name_form,
+    title: gallerySelected.attributes.name_form,
     openEditor: true,
     edit: true,
   };

@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "시작했지만 아직 끝나지 않음",
   "FormsItem": "각 행이 하나의 완결된 수집입니다. 하나를 열어 그 안에서 작업하고, 진행 중인 것은 고정하고, 점 세 개로 사람을 초대하거나 양식을 여는 링크를 복사하거나 설정을 템플릿으로 저장하세요.",
   "FormsItemTitle": "양식 공간에서 작업하기",
-  "FormsOpenSpace": "이 공간을 열어 하나의 수집이 어떻게 구성되는지 살펴봅시다. 모든 양식 공간 안에는 같은 세 가지가 있습니다. 양식 자체, 아직 작성 중인 응답, 그리고 이미 들어온 응답입니다.",
-  "FormsOpenSpaceTitle": "공간 안으로 들어가기",
   "FormsPlacesRecent": "{{recent}}와 {{favorites}}는 지금 진행 중인 수집을 가까이에 둡니다.",
   "FormsPlacesTemplates": "{{templates}} — 저장해 둔 공간 템플릿.",
   "FormsPlacesTitle": "모든 것이 제자리에",

@@ -231,6 +231,7 @@ const PureHome = observer((props) => {
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
+    setCreateRoomFromTemplate,
 
     infoPanelStore,
   } = props;
@@ -321,6 +322,7 @@ const PureHome = observer((props) => {
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
+    setCreateRoomFromTemplate,
     isDocumentsFolder,
     isRoom,
     isFormRoom,
@@ -1091,6 +1093,7 @@ export const Component = inject(
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
       setOformFromFolderId: oformsStore.setOformFromFolderId,
+      setCreateRoomFromTemplate: oformsStore.setCreateRoomFromTemplate,
 
       isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,

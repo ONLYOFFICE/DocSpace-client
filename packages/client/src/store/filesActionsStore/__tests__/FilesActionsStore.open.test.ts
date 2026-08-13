@@ -87,3 +87,54 @@ describe("FilesActionsStore — open/leave/owner (batch 16)", () => {
     spy.mockRestore();
   });
 });
+
+// Bug 82885: a plugin registered for an extension takes over the plain click
+// on a file, so this path hands the file to the plugin without any menu. For an
+// encrypted file the plugin can only ship ciphertext to a third party, and the
+// file must open normally instead.
+describe("FilesActionsStore — plugin file items vs encrypted files", () => {
+  const docx = (encrypted: boolean) =>
+    ({
+      id: 1,
+      fileExst: ".docx",
+      isFolder: false,
+      viewUrl: "http://x/1",
+      webUrl: "",
+      security: { Download: true },
+      viewAccessibility: { WebEdit: true },
+      ...(encrypted ? { encrypted: true } : {}),
+    }) as never;
+
+  const setup = (onClick: () => void, openDocEditor: () => void) =>
+    createTestFilesActionsStore({
+      settingsStore: {
+        enablePlugins: true,
+        currentDeviceType: "desktop",
+        isFrame: false,
+      },
+      pluginStore: {
+        fileItemsList: [{ key: ".docx", value: { onClick } }],
+      },
+      filesStore: { openDocEditor, setSelection: vi.fn(), categoryType: 0 },
+    });
+
+  it("hands a regular file to the plugin registered for its extension", async () => {
+    const onClick = vi.fn();
+    const openDocEditor = vi.fn();
+
+    await setup(onClick, openDocEditor).openItemAction(docx(false), t);
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(openDocEditor).not.toHaveBeenCalled();
+  });
+
+  it("skips the plugin for an encrypted file and opens the editor instead", async () => {
+    const onClick = vi.fn();
+    const openDocEditor = vi.fn();
+
+    await setup(onClick, openDocEditor).openItemAction(docx(true), t);
+
+    expect(onClick).not.toHaveBeenCalled();
+    expect(openDocEditor).toHaveBeenCalledTimes(1);
+  });
+});

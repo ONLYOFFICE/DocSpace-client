@@ -214,17 +214,24 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
   const organizationName = getBrandName("OrganizationName");
 
   return (
-    <CollapsibleCard
-      title={t("Common:BuildWithProduct", { organizationName })}
-      description={t("Common:BuildWithProductDescription")}
-      defaultOpen
-    >
-      <div className={styles.devToolsGrid}>
-        {tools.map((tool) => (
-          <DevToolTile key={tool.id} tool={tool} />
-        ))}
-      </div>
-    </CollapsibleCard>
+    // Anchor for the dashboard tour, on a wrapper rather than on the card, for
+    // the same reason as `IntegrationsCard`'s: `CollapsibleCard` takes a fixed
+    // set of props and forwards no `data-*`. The wrapper stays put when the card
+    // is collapsed, so the spotlight follows the card down to its header
+    // instead of the step disappearing.
+    <div data-tour-id="dashboard-devtools">
+      <CollapsibleCard
+        title={t("Common:BuildWithProduct", { organizationName })}
+        description={t("Common:BuildWithProductDescription")}
+        defaultOpen
+      >
+        <div className={styles.devToolsGrid}>
+          {tools.map((tool) => (
+            <DevToolTile key={tool.id} tool={tool} />
+          ))}
+        </div>
+      </CollapsibleCard>
+    </div>
   );
 };
 

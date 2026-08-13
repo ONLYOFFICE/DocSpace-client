@@ -102,6 +102,7 @@ import ScrollToTop from "./components/Layout/ScrollToTop";
 import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import { AskAIChatBridge } from "./components/AskAIChatBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
@@ -875,6 +876,7 @@ const Shell = ({ page = "home", ...rest }) => {
           composerDisabled={standalone ? undefined : !isAIReady}
           suggestions={aiSuggestions}
         >
+          <AskAIChatBridge />
           {layout}
         </AiAgentProviders>
       ) : (

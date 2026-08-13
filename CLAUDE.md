@@ -83,6 +83,14 @@ commit messages, and planning notes — must be written in English. User-facing
 strings are the only exception and must go through the i18n system, never
 hardcoded.
 
+### Branch review
+
+Use the `review-branch` skill to review a branch against its parent. It
+resolves the base branch (explicit arg → `git config branch.<name>.reviewBase`
+→ auto-detect) for the client repo **and** the `libs/ui-kit` submodule
+separately — a client diff that is only a gitlink bump means the change under
+review lives in the submodule.
+
 ### License headers
 
 Every new source file (`.ts`, `.tsx`, `.js`, `.jsx`; `.scss` by convention)

@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { findDocsConnectServices } from "@docspace/ui-kit/billing/utils/docs-connect";
 import { request } from "../client";
 import type {
   TDocsConnectInfo,
@@ -41,6 +42,7 @@ import type {
   TDocsConnectTenantInfo,
   TDocsConnectPrices,
   TDocsConnectTariffState,
+  TDocsConnectPreviousPlan,
   TDocsConnectWallet,
   TDocsConnectConfigUpdate,
   TDocsConnectDevPackCalculation,
@@ -50,7 +52,6 @@ import type { TDocumentBuilderTask } from "../files/types";
 const BASE = "/settings/docscloud";
 
 const DOCS_CLOUD_PRODUCT = "docscloud";
-const DOCS_CLOUD_DEVPACK_SERVICE = "docscloud-devpack";
 const DOCS_CLOUD_DEVPACK_PRODUCT = "docsclouddevpack";
 const QUANTITY_TYPE_SET = 0;
 const QUANTITY_TYPE_ADD = 1;
@@ -66,6 +67,7 @@ type TWalletService = {
   id?: number;
   serviceName?: string;
   price?: { value?: number };
+  features?: { id?: string }[];
 };
 type TWalletServicesResponse = TWalletService[] | null;
 type TBalanceResponse = {
@@ -81,13 +83,13 @@ const fetchWalletServices = async (): Promise<TWalletServicesResponse> =>
 const extractPrices = (
   services: TWalletServicesResponse,
 ): TDocsConnectPrices | null => {
-  const priceOf = (name: string) =>
-    services?.find((service) => service.serviceName === name)?.price?.value;
+  const { base: baseService, devPack: devPackService } =
+    findDocsConnectServices(services);
 
-  const base = priceOf(DOCS_CLOUD_PRODUCT);
+  const base = baseService?.price?.value;
   if (base == null) return null;
 
-  const devpack = priceOf(DOCS_CLOUD_DEVPACK_SERVICE);
+  const devpack = devPackService?.price?.value;
   return {
     pricePerUser: base,
     devPackPrice: devpack == null ? 0 : Math.max(0, devpack - base),
@@ -110,6 +112,32 @@ const QUOTA_STATE_OVERDUE = 1;
 const EMPTY_TARIFF_STATE: TDocsConnectTariffState = {
   scheduledChange: null,
   deactivated: false,
+  previousPlan: null,
+};
+
+const quotaDueTime = (quota?: TTariffQuota): number => {
+  const ms = quota?.dueDate ? new Date(quota.dueDate).getTime() : Number.NaN;
+  return Number.isNaN(ms) ? 0 : ms;
+};
+
+const resolvePreviousPlan = (
+  baseQuota?: TTariffQuota,
+  devpackQuota?: TTariffQuota,
+): TDocsConnectPreviousPlan | null => {
+  const paid = [devpackQuota, baseQuota].filter(
+    (quota): quota is TTariffQuota => (quota?.quantity ?? 0) > 0,
+  );
+
+  if (paid.length === 0) return null;
+
+  const latest = paid.reduce((acc, quota) =>
+    quotaDueTime(quota) > quotaDueTime(acc) ? quota : acc,
+  );
+
+  return {
+    users: latest.quantity ?? 0,
+    devPackEnabled: latest === devpackQuota,
+  };
 };
 
 const resolveNextDevPack = ({
@@ -133,11 +161,11 @@ const fetchTariffState = async (
   services: TWalletServicesResponse,
   refresh?: boolean,
 ): Promise<TDocsConnectTariffState> => {
-  const serviceId = (name: string) =>
-    (services ?? []).find((service) => service.serviceName === name)?.id;
+  const { base: baseService, devPack: devPackService } =
+    findDocsConnectServices(services);
 
-  const baseId = serviceId(DOCS_CLOUD_PRODUCT);
-  const devpackId = serviceId(DOCS_CLOUD_DEVPACK_SERVICE);
+  const baseId = baseService?.id;
+  const devpackId = devPackService?.id;
 
   if (baseId == null && devpackId == null) return EMPTY_TARIFF_STATE;
 
@@ -154,12 +182,13 @@ const fetchTariffState = async (
 
   const baseQuota = quotaOf(baseId);
   const devpackQuota = quotaOf(devpackId);
+  const previousPlan = resolvePreviousPlan(baseQuota, devpackQuota);
 
   if (
     baseQuota?.state === QUOTA_STATE_OVERDUE ||
     devpackQuota?.state === QUOTA_STATE_OVERDUE
   ) {
-    return { scheduledChange: null, deactivated: true };
+    return { scheduledChange: null, deactivated: true, previousPlan };
   }
 
   const scheduleQuota = [devpackQuota, baseQuota].find(
@@ -182,10 +211,11 @@ const fetchTariffState = async (
         scheduledOnDevPack,
       },
       deactivated: false,
+      previousPlan,
     };
   }
 
-  return EMPTY_TARIFF_STATE;
+  return { ...EMPTY_TARIFF_STATE, previousPlan };
 };
 
 const fetchWallet = async (
@@ -269,6 +299,8 @@ export const getDocsConnectInfo = async (
     devPackEnabled,
     scheduledChange: tariffState.scheduledChange,
     deactivated: tariffState.deactivated,
+    previousPlan:
+      (tenant.payment?.quantity ?? 0) > 0 ? null : tariffState.previousPlan,
   };
 };
 

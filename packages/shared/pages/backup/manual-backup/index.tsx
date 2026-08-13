@@ -491,6 +491,7 @@ const ManualBackup = ({
     const res = await cancelBackup();
 
     if (!res) {
+      setIsCancelOperation(false);
       setShowCancelOperation(true);
     }
   };
@@ -762,10 +763,14 @@ const ManualBackup = ({
         <OperationsProgressButton
           operationsAlert={Boolean(backupProgressError)}
           operationsCompleted={downloadingProgress === 100}
+          operationsCanceled={isCancelOperation}
           operations={[
             {
-              label:
-                downloadingProgress === 100
+              label: isCancelOperation
+                ? t("Common:CanceledOperation", {
+                    operationName: t("Common:Backup"),
+                  })
+                : downloadingProgress === 100
                   ? t("Common:Backup")
                   : downloadingProgress === 0
                     ? t("Common:PreparingBackup")

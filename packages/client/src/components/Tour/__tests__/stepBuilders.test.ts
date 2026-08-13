@@ -45,6 +45,7 @@ import {
   hoverRevealStep,
   fileItemStep,
   revealStep,
+  scrollTargetIntoView,
   NAVIGATION_TARGET_TIMEOUT,
   STEP_TARGET_TIMEOUT,
 } from "../stepBuilders";
@@ -602,5 +603,126 @@ describe("revealStep", () => {
     expect(JOYRIDE_TIMEOUTS.targetWaitTimeout).toBeGreaterThan(
       NAVIGATION_TARGET_TIMEOUT,
     );
+  });
+});
+
+describe("scrollTargetIntoView", () => {
+  /**
+   * A section the way ui-kit's `Scrollbar` renders one: the `.scroller` is the
+   * node that moves, and its box starts well below the top of the viewport —
+   * the main bar, a campaign banner and the section header are all above it.
+   * That gap is the whole reason this exists (see `scrollTargetIntoView`), so
+   * every case here is measured against a container that has one.
+   */
+  const mountSection = (anchor: { top: number; height: number }) => {
+    mount('<div class="scroller section-scroll"><div id="anchor"></div></div>');
+
+    withRect(".scroller", { top: 100, left: 0, width: 1000, height: 600 });
+    withRect("#anchor", {
+      top: anchor.top,
+      left: 0,
+      width: 1000,
+      height: anchor.height,
+    });
+  };
+
+  const spyOnScroll = () => vi.spyOn(Element.prototype, "scrollIntoView");
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("leaves an anchor the user can already see where it is", async () => {
+    // A tour that re-centres the section on every step moves the ground under
+    // the reader for nothing.
+    mountSection({ top: 300, height: 50 });
+
+    const scrollIntoView = spyOnScroll();
+
+    await scrollTargetIntoView("#anchor");
+
+    expect(scrollIntoView).not.toHaveBeenCalled();
+  });
+
+  it("scrolls an anchor that has gone out through the top of its container", async () => {
+    mountSection({ top: 20, height: 70 });
+
+    const scrollIntoView = spyOnScroll();
+
+    await scrollTargetIntoView("#anchor");
+
+    expect(scrollIntoView).toHaveBeenCalledWith(
+      expect.objectContaining({ block: "center" }),
+    );
+  });
+
+  it("judges the anchor against its container, not against the viewport", async () => {
+    // The regression this fixes in one line: react-joyride reads a target's
+    // viewport top as though it were its offset inside the scroll container, so
+    // everything above the section is added to the scroll. Here the anchor is
+    // comfortably inside the viewport and still pressed against the container's
+    // top edge, where a spotlight would be cut in half — the two spaces have to
+    // be told apart.
+    mountSection({ top: 160, height: 40 });
+
+    const scrollIntoView = spyOnScroll();
+
+    await scrollTargetIntoView("#anchor");
+
+    expect(scrollIntoView).toHaveBeenCalled();
+  });
+
+  it("does nothing when the anchor is not on the page", async () => {
+    mount("");
+
+    const scrollIntoView = spyOnScroll();
+
+    await scrollTargetIntoView("#anchor");
+
+    expect(scrollIntoView).not.toHaveBeenCalled();
+  });
+
+  it("scrolls a boxless file-list row by the cell that has the geometry", async () => {
+    // A `display: contents` row reports 0x0 at (0,0), which would read as an
+    // anchor off the top of the list and scroll the list to its start.
+    mount(
+      '<div class="scroller section-scroll">' +
+        '<div id="folder_-1000"><div data-testid="table-row-0">' +
+        '<div class="name-cell"></div>' +
+        "</div></div></div>",
+    );
+
+    withRect(".scroller", { top: 100, left: 0, width: 1000, height: 600 });
+    withRect("#folder_-1000", { top: 0, left: 0, width: 0, height: 0 });
+    withRect('[data-testid="table-row-0"]', {
+      top: 0,
+      left: 0,
+      width: 0,
+      height: 0,
+    });
+    withRect(".name-cell", { top: 900, left: 0, width: 600, height: 48 });
+
+    const scrollIntoView = spyOnScroll();
+
+    await scrollTargetIntoView("#folder_-1000");
+
+    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(scrollIntoView.mock.instances[0]).toBe(
+      document.querySelector(".name-cell"),
+    );
+  });
+
+  it("is what a step's own hook does before joyride lays it out", async () => {
+    // joyride's scrolling is off (`skipScroll` in useTour), so a builder that
+    // forgets this leaves its step spotlighting a region below the fold.
+    mountSection({ top: 900, height: 40 });
+
+    const scrollIntoView = spyOnScroll();
+
+    await elementStep("#anchor", "title", "body", undefined, LOG_LABEL).before?.(
+      HOOK_DATA,
+    );
+
+    expect(scrollIntoView).toHaveBeenCalled();
   });
 });

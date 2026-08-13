@@ -192,6 +192,15 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
 
   const isDisabled = !isValid || isLoading;
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key !== "Enter" || isDisabled) return;
+      e.preventDefault();
+      handleSubmit();
+    },
+    [handleSubmit, isDisabled],
+  );
+
   const displayedError = externalError || error;
 
   const passphraseHasError =
@@ -276,6 +285,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                 hasError={passphraseHasError}
                 isAutoFocussed
                 autoComplete="new-password"
+                onKeyDown={handleKeyDown}
                 tabIndex={2}
               />
             </FieldContainer>
@@ -380,6 +390,7 @@ export const PassphraseModal: React.FC<PassphraseModalProps> = ({
                   !!confirmPassphrase && passphrase !== confirmPassphrase
                 }
                 autoComplete="new-password"
+                onKeyDown={handleKeyDown}
                 tabIndex={3}
               />
             </FieldContainer>

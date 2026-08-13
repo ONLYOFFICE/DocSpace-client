@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Begonnen, nicht abgeschlossen",
   "FormsItem": "Jede Zeile ist eine ganze Sammlung. Öffnen Sie eine, um darin zu arbeiten, heften Sie die laufenden an oder nutzen Sie die drei Punkte, um Personen einzuladen, den Link zum Formular zu kopieren und die Konfiguration als Vorlage zu speichern.",
   "FormsItemTitle": "Arbeiten mit einem Formular-Space",
-  "FormsOpenSpace": "Öffnen wir diesen hier und sehen wir uns an, wie eine Sammlung aufgebaut ist. In jedem Formular-Space stecken dieselben drei Dinge: das Formular selbst, die Antworten, die gerade geschrieben werden, und die bereits eingegangenen.",
-  "FormsOpenSpaceTitle": "Treten Sie in einen Space ein",
   "FormsPlacesRecent": "{{recent}} und {{favorites}} halten die Sammlungen, die Sie gerade betreiben, griffbereit.",
   "FormsPlacesTemplates": "{{templates}} – die Space-Vorlagen, die Sie gespeichert haben.",
   "FormsPlacesTitle": "Alles an seinem Platz",

@@ -43,6 +43,8 @@ import type {
   TDocsConnectPrices,
   TDocsConnectTariffState,
   TDocsConnectPreviousPlan,
+  TDocsConnectServiceIds,
+  TDocsConnectStatistics,
   TDocsConnectWallet,
   TDocsConnectConfigUpdate,
   TDocsConnectDevPackCalculation,
@@ -93,6 +95,18 @@ const extractPrices = (
   return {
     pricePerUser: base,
     devPackPrice: devpack == null ? 0 : Math.max(0, devpack - base),
+  };
+};
+
+const extractServiceIds = (
+  services: TWalletServicesResponse,
+): TDocsConnectServiceIds => {
+  const { base: baseService, devPack: devPackService } =
+    findDocsConnectServices(services);
+
+  return {
+    baseId: baseService?.id,
+    devpackId: devPackService?.id,
   };
 };
 
@@ -157,15 +171,12 @@ const resolveNextDevPack = ({
   return fallback;
 };
 
-const fetchTariffState = async (
-  services: TWalletServicesResponse,
+const getDocsConnectTariffState = async (
+  serviceIds?: TDocsConnectServiceIds,
   refresh?: boolean,
+  signal?: AbortSignal,
 ): Promise<TDocsConnectTariffState> => {
-  const { base: baseService, devPack: devPackService } =
-    findDocsConnectServices(services);
-
-  const baseId = baseService?.id;
-  const devpackId = devPackService?.id;
+  const { baseId, devpackId } = serviceIds ?? {};
 
   if (baseId == null && devpackId == null) return EMPTY_TARIFF_STATE;
 
@@ -173,6 +184,7 @@ const fetchTariffState = async (
     method: "get",
     url: "/portal/tariff",
     params: refresh ? { refresh: true } : {},
+    signal,
   })) as TTariffResponse;
 
   const quotaOf = (id?: number) =>
@@ -240,11 +252,15 @@ type TPaymentQuotaResponse = {
   features?: { id?: string; value?: unknown }[];
 } | null;
 
-const fetchDevPackEnabled = async (refresh?: boolean): Promise<boolean> => {
+const getDocsConnectDevPackEnabled = async (
+  refresh?: boolean,
+  signal?: AbortSignal,
+): Promise<boolean> => {
   const quota = (await request({
     method: "get",
     url: "/portal/payment/quota",
     params: refresh ? { refresh: true } : {},
+    signal,
   })) as TPaymentQuotaResponse;
 
   return (quota?.features ?? []).some(
@@ -253,18 +269,74 @@ const fetchDevPackEnabled = async (refresh?: boolean): Promise<boolean> => {
   );
 };
 
+const getDocsConnectTenant = async (
+  refresh?: boolean,
+  signal?: AbortSignal,
+): Promise<TDocsConnectTenant | null> =>
+  (await request({
+    method: "get",
+    url: `${BASE}/tenant`,
+    params: refresh ? { refresh: true } : {},
+    signal,
+  })) as TDocsConnectTenant | null;
+
+const getDocsConnectTenantConfig = async (
+  signal?: AbortSignal,
+): Promise<TDocsConnectConfig | null> =>
+  (await request({
+    method: "get",
+    url: `${BASE}/tenant/config`,
+    signal,
+  })) as TDocsConnectConfig | null;
+
+const getDocsConnectTenantInfo = async (
+  refresh?: boolean,
+  signal?: AbortSignal,
+): Promise<TDocsConnectTenantInfo | null> =>
+  (await request({
+    method: "get",
+    url: `${BASE}/tenant/info`,
+    params: refresh ? { refresh: true } : {},
+    signal,
+  })) as TDocsConnectTenantInfo | null;
+
+export type TDocsConnectStatisticsOptions = {
+  refresh?: boolean;
+  signal?: AbortSignal;
+  tenant?: TDocsConnectTenant | null;
+};
+
+export const getDocsConnectStatistics = async (
+  serviceIds?: TDocsConnectServiceIds,
+  { refresh, signal, tenant }: TDocsConnectStatisticsOptions = {},
+): Promise<TDocsConnectStatistics> => {
+  const [currentTenant, tenantInfo, devPackEnabled, tariffState] =
+    await Promise.all([
+      tenant ?? getDocsConnectTenant(refresh, signal),
+      getDocsConnectTenantInfo(refresh, signal),
+      getDocsConnectDevPackEnabled(refresh, signal),
+      getDocsConnectTariffState(serviceIds, refresh, signal),
+    ]);
+
+  return {
+    tenant: currentTenant,
+    tenantInfo,
+    devPackEnabled,
+    scheduledChange: tariffState.scheduledChange,
+    deactivated: tariffState.deactivated,
+    previousPlan:
+      (currentTenant?.payment?.quantity ?? 0) > 0
+        ? null
+        : tariffState.previousPlan,
+  };
+};
+
 export const getDocsConnectInfo = async (
   refresh?: boolean,
 ): Promise<TDocsConnectInfo | null> => {
-  const refreshParams = refresh ? { refresh: true } : {};
-
   let tenant: TDocsConnectTenant | null = null;
   try {
-    tenant = (await request({
-      method: "get",
-      url: `${BASE}/tenant`,
-      params: refreshParams,
-    })) as TDocsConnectTenant | null;
+    tenant = await getDocsConnectTenant(refresh);
   } catch {
     tenant = null;
   }
@@ -273,34 +345,26 @@ export const getDocsConnectInfo = async (
     return null;
   }
 
-  const [config, tenantInfo] = (await Promise.all([
-    request({ method: "get", url: `${BASE}/tenant/config` }),
-    request({
-      method: "get",
-      url: `${BASE}/tenant/info`,
-      params: refreshParams,
-    }),
-  ])) as [TDocsConnectConfig, TDocsConnectTenantInfo];
+  const [config, services] = (await Promise.all([
+    getDocsConnectTenantConfig(),
+    fetchWalletServices(),
+  ])) as [TDocsConnectConfig, TWalletServicesResponse];
 
-  const services = await fetchWalletServices();
+  const serviceIds = extractServiceIds(services);
 
-  const [wallet, devPackEnabled, tariffState] = await Promise.all([
+  const [wallet, statistics] = await Promise.all([
     fetchWallet(refresh),
-    fetchDevPackEnabled(refresh),
-    fetchTariffState(services, refresh),
+    getDocsConnectStatistics(serviceIds, { refresh, tenant }),
   ]);
 
   return {
+    ...statistics,
     tenant,
     config,
-    tenantInfo,
+    tenantInfo: statistics.tenantInfo as TDocsConnectTenantInfo,
     prices: extractPrices(services),
     wallet,
-    devPackEnabled,
-    scheduledChange: tariffState.scheduledChange,
-    deactivated: tariffState.deactivated,
-    previousPlan:
-      (tenant.payment?.quantity ?? 0) > 0 ? null : tariffState.previousPlan,
+    serviceIds,
   };
 };
 
@@ -314,10 +378,7 @@ export const getDocsConnectConnection =
   async (): Promise<TDocsConnectConnection | null> => {
     let tenant: TDocsConnectTenant | null = null;
     try {
-      tenant = (await request({
-        method: "get",
-        url: `${BASE}/tenant`,
-      })) as TDocsConnectTenant | null;
+      tenant = await getDocsConnectTenant();
     } catch {
       tenant = null;
     }
@@ -328,10 +389,7 @@ export const getDocsConnectConnection =
 
     let config: TDocsConnectConfig | null = null;
     try {
-      config = (await request({
-        method: "get",
-        url: `${BASE}/tenant/config`,
-      })) as TDocsConnectConfig | null;
+      config = await getDocsConnectTenantConfig();
     } catch {
       config = null;
     }

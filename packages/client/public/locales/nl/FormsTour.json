@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Begonnen, niet afgerond",
   "FormsItem": "Elke rij is een hele verzameling. Open er een om erin te werken, pin de lopende verzamelingen vast of gebruik de drie puntjes om mensen uit te nodigen, de link te kopiëren waarmee het formulier opent en de configuratie als sjabloon op te slaan.",
   "FormsItemTitle": "Werken met een formulierruimte",
-  "FormsOpenSpace": "Laten we deze openen en kijken hoe een verzameling in elkaar zit. In elke formulierruimte zitten dezelfde drie dingen: het formulier zelf, de antwoorden die nog geschreven worden en de antwoorden die al binnen zijn.",
-  "FormsOpenSpaceTitle": "Stap een ruimte binnen",
   "FormsPlacesRecent": "{{recent}} en {{favorites}} houden de verzamelingen die u draaiende hebt binnen handbereik.",
   "FormsPlacesTemplates": "{{templates}} — de ruimtesjablonen die u hebt opgeslagen.",
   "FormsPlacesTitle": "Alles op zijn plek",

@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Rozpracované, nedokončené",
   "FormsItem": "Každý řádek je celý sběr. Otevřete jeden a pracujte uvnitř, připněte si ty, které právě běží, nebo přes tři tečky pozvěte lidi, zkopírujte odkaz otevírající formulář a uložte nastavení jako šablonu.",
   "FormsItemTitle": "Práce s prostorem pro formuláře",
-  "FormsOpenSpace": "Pojďme tenhle otevřít a podívat se, jak je sběr poskládaný. Uvnitř každého prostoru pro formuláře jsou tytéž tři věci: samotný formulář, odpovědi, které se ještě píší, a ty, které už dorazily.",
-  "FormsOpenSpaceTitle": "Vstupte do prostoru",
   "FormsPlacesRecent": "{{recent}} a {{favorites}} drží po ruce sběry, které právě vedete.",
   "FormsPlacesTemplates": "{{templates}} — šablony prostorů, které jste uložili.",
   "FormsPlacesTitle": "Všechno na svém místě",

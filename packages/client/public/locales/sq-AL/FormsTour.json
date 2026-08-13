@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "E nisur, e papërfunduar",
   "FormsItem": "Çdo rresht është një mbledhje e tërë. Hapni një për të punuar brenda saj, fiksoni ato që keni në vazhdim, ose përdorni tri pikat për të ftuar njerëz, për të kopjuar lidhjen që hap formularin dhe për të ruajtur konfigurimin si model.",
   "FormsItemTitle": "Puna me një hapësirë formularësh",
-  "FormsOpenSpace": "Le ta hapim këtë dhe të shohim si është ndërtuar një mbledhje. Brenda çdo hapësire formularësh janë të njëjtat tri gjëra: vetë formulari, përgjigjet që ende po shkruhen dhe ato që kanë ardhur tashmë.",
-  "FormsOpenSpaceTitle": "Hyni brenda një hapësire",
   "FormsPlacesRecent": "{{recent}} dhe {{favorites}} i mbajnë pranë mbledhjet që keni në vazhdim.",
   "FormsPlacesTemplates": "{{templates}} — modelet e hapësirave që keni ruajtur.",
   "FormsPlacesTitle": "Gjithçka në vendin e vet",

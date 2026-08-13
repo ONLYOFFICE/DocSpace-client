@@ -140,6 +140,11 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   const setFileUrl = setFileUrl_;
 
   const [isDecrypting, setIsDecrypting] = useState(false);
+  // A file that cannot be decrypted has no URL to hand to the player, so the
+  // viewer would sit on a loader forever with the reason only in the console.
+  const [decryptionError, setDecryptionError] = useState<string | undefined>(
+    undefined,
+  );
 
   const [targetFile, setTargetFile] = useState(() => {
     if (!currentFileId) return undefined;
@@ -453,6 +458,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       const controller = new AbortController();
       EncryptedAbortSignalRef.current = controller;
       setIsDecrypting(true);
+      setDecryptionError(undefined);
 
       const { signal } = controller;
       const isStale = () => signal.aborted;
@@ -539,6 +545,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
           }
           console.error("[MediaViewer] Decryption error:", error.message);
           onDecryptionError?.(error.message);
+          setDecryptionError(
+            t("Common:EncryptionDecryptPartialFailed", { fileNames: title }),
+          );
         }
       } finally {
         if (EncryptedAbortSignalRef.current === controller) {
@@ -546,7 +555,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         }
       }
     },
-    [userId, onClose, onDecryptionError],
+    [t, userId, onClose, onDecryptionError],
   );
 
   useEffect(() => {
@@ -571,6 +580,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       onEmptyPlaylistError?.();
       return;
     }
+
+    // a failure belongs to the file that produced it, not to the next one
+    setDecryptionError(undefined);
 
     if (isEncrypted) {
       TiffAbortSignalRef.current?.abort();
@@ -697,6 +709,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       errorTitle={t("Common:MediaError")}
       pluginViewerContent={pluginViewerContent}
       isDecrypting={isDecrypting}
+      decryptionError={decryptionError}
     />
   ) : undefined;
 };

@@ -192,6 +192,110 @@ function isVisible(element: Element): boolean {
 }
 
 /**
+ * The element ui-kit's `Scrollbar` hands its content to — the node that
+ * actually moves when a section scrolls (`Scrollbar.tsx`, `.scroller`).
+ */
+const SCROLLER_SELECTOR = ".scroller";
+
+/**
+ * The share of the scroll container's height, at the top and at the bottom,
+ * that a step's anchor is not left sitting in. Mirrors the margin react-joyride
+ * uses for the same judgement.
+ *
+ * It buys two things at once: an anchor already well inside the container is
+ * left exactly where the user last saw it, because a tour that re-centres the
+ * page on every step moves the ground under the reader for nothing; and an
+ * anchor that is only just inside the edge is still scrolled, because the
+ * spotlight around it would be cut in half by the container's edge.
+ */
+const COMFORTABLE_MARGIN_RATIO = 0.2;
+
+/**
+ * The box a target has to be visible inside: its scroll container, or the
+ * viewport for a target that is not in one (the sidebar's own items on a narrow
+ * screen, anything a section renders outside its `Scrollbar`).
+ */
+function scrollBounds(element: HTMLElement) {
+  const container = element.closest(SCROLLER_SELECTOR);
+
+  if (container) {
+    const { top, bottom, height } = container.getBoundingClientRect();
+
+    return { top, bottom, height };
+  }
+
+  return { top: 0, bottom: window.innerHeight, height: window.innerHeight };
+}
+
+/**
+ * Bring a step's anchor on screen, before react-joyride lays the step out.
+ *
+ * joyride's own scrolling is switched off (`skipScroll` in `useTour`) and cannot
+ * be used for these sections. For a target inside a custom scroll container it
+ * derives the container's `scrollTop` from the target's *viewport* top
+ * (react-joyride's `modules/dom.ts`, `getScrollTo`), which is the same number
+ * only while the container's box starts at the top of the viewport. The branch
+ * that measures the target against the container instead is gated on the
+ * container having a non-zero `offsetTop`, and ui-kit's `Scrollbar` renders its
+ * `.scroller` as `position: absolute; top: 0` inside an absolutely positioned
+ * wrapper — so it is always zero here, and that branch never runs.
+ *
+ * What that costs is an over-scroll by exactly the container's distance from the
+ * top of the viewport, so everything standing above the section (the main bar's
+ * email-activation notice, a campaign banner, on a section the header and the
+ * filter) is added to the scroll and drags the anchor up and out through the top
+ * of the container. Nothing clips the spotlight — it is an SVG over the whole
+ * page — so it goes on drawing the anchor's box where the anchor now is: over
+ * the banner, with the row or card it belongs to no longer on screen.
+ *
+ * `scrollIntoView` sidesteps the arithmetic: the browser scrolls every ancestor
+ * scroll box that needs it, the document included, and it is the same call
+ * whether the section scrolls itself or the page does.
+ *
+ * Synchronous, and deliberately so: the scroll offsets are set by the call
+ * itself, and the next `getBoundingClientRect` — joyride's, when it lays the step
+ * out — reads the settled layout. Waiting a frame first was the obvious thing to
+ * do and the wrong one: a frame is only produced when the browser gets round to
+ * painting, so every step of every tour would hang on the machine being idle.
+ */
+export function scrollTargetIntoView(
+  selector: string,
+  signal?: AbortSignal,
+): void {
+  // The step has been left (walked back out of, or the tour closed) while its
+  // hook was waiting for the anchor: scrolling the section now would move the
+  // page under whatever came next.
+  if (signal?.aborted) return;
+
+  // Through `measurableTarget`, so a `display: contents` file-list row is
+  // scrolled by the cell that has the geometry rather than by a 0x0 rect at
+  // (0,0), which would read as off-screen and scroll to the top of the list.
+  const element = measurableTarget(selector);
+
+  if (!element) return;
+
+  const rect = element.getBoundingClientRect();
+  const bounds = scrollBounds(element);
+  const margin = bounds.height * COMFORTABLE_MARGIN_RATIO;
+
+  if (
+    rect.top >= bounds.top + margin &&
+    rect.bottom <= bounds.bottom - margin
+  ) {
+    return;
+  }
+
+  element.scrollIntoView({
+    block: "center",
+    inline: "nearest",
+    // Instant, not smooth: joyride lays the step out as soon as the hook this
+    // runs in resolves, and there is no reliable way to await a smooth scroll.
+    // The backdrop is already up, so the jump happens under it.
+    behavior: "instant",
+  });
+}
+
+/**
  * Whether a step's target resolves to a visible element right now. Handles
  * both selector and resolver targets, so `useTour` can drop steps whose anchor
  * isn't on the page — an empty file list, a control this role never sees —
@@ -265,6 +369,7 @@ export function navItemStep(
       await waitForElement(selector, STEP_TARGET_TIMEOUT, signal).catch(
         silenceNonAbort(logLabel),
       );
+      scrollTargetIntoView(selector, signal);
       if (!spotlightList) {
         document.querySelector(selector)?.classList.add("tour-outline-item");
       }
@@ -307,6 +412,7 @@ export function elementStep(
       await waitForElement(target, STEP_TARGET_TIMEOUT, signal).catch(
         silenceNonAbort(logLabel),
       );
+      scrollTargetIntoView(target, signal);
     },
   };
 }
@@ -433,14 +539,6 @@ export function menuStep(
     spotlightTarget: spotlightWith.length
       ? () => unionSpotlight([menuSelector, ...spotlightWith], menuSelector)
       : undefined,
-    // The trigger is what gets scrolled into view, not the menu.
-    //
-    // A dropdown is positioned against its trigger and floats above the scroll
-    // container rather than inside it, so scrolling to the menu itself either
-    // does nothing (it is already wherever the trigger put it) or drags the
-    // trigger out from under it. Centring the trigger keeps the pair together,
-    // and the menu opens on screen because the thing it hangs off is.
-    scrollTarget: triggerSelector,
     spotlightPadding,
     placement: "auto" as const,
     content: body,
@@ -451,6 +549,15 @@ export function menuStep(
     data: { revealsTarget: true },
     before: async () => {
       const signal = callbacks?.getSignal();
+      // The trigger is what gets scrolled into view, not the menu, and it is
+      // scrolled before the menu is opened.
+      //
+      // A dropdown is positioned against its trigger and floats above the scroll
+      // container rather than inside it, so scrolling to the menu itself either
+      // does nothing (it is already wherever the trigger put it) or drags the
+      // trigger out from under it. Centring the trigger keeps the pair together,
+      // and the menu opens on screen because the thing it hangs off is.
+      scrollTargetIntoView(triggerSelector, signal);
       if (!isOpen()) toggle();
       await waitForElement(menuSelector, STEP_TARGET_TIMEOUT, signal).catch(
         silenceNonAbort(logLabel),
@@ -525,6 +632,7 @@ export function revealStep(
       await waitForElement(target, timeout, signal).catch(
         silenceNonAbort(logLabel),
       );
+      scrollTargetIntoView(target, signal);
     },
     after: () => {
       hooks.restore();
@@ -568,6 +676,7 @@ export function hoverRevealStep(
       await waitForElement(target, STEP_TARGET_TIMEOUT, signal).catch(
         silenceNonAbort(logLabel),
       );
+      scrollTargetIntoView(target, signal);
     },
     after: () => {
       removeRevealedControl();
@@ -620,6 +729,7 @@ export function fileItemStep(
       await waitForElement(rowSelector, timeout, signal).catch(
         silenceNonAbort(logLabel),
       );
+      scrollTargetIntoView(rowSelector, signal);
     },
   };
 }

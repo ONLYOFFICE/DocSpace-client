@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Začeto, a ne končano",
   "FormsItem": "Vsaka vrstica je celotna zbirka. Odprite eno, da delate v njej, pripnite tiste, ki jih vodite, ali prek treh pik povabite ljudi, kopirajte povezavo, ki odpre obrazec, in shranite nastavitve kot predlogo.",
   "FormsItemTitle": "Delo s prostorom za obrazce",
-  "FormsOpenSpace": "Odprimo tega in poglejmo, kako je zbirka sestavljena. V vsakem prostoru za obrazce so iste tri stvari: sam obrazec, odgovori, ki se še pišejo, in tisti, ki so že prišli.",
-  "FormsOpenSpaceTitle": "Stopite v prostor",
   "FormsPlacesRecent": "{{recent}} in {{favorites}} držita pri roki zbirke, ki jih vodite.",
   "FormsPlacesTemplates": "{{templates}} — predloge prostorov, ki ste jih shranili.",
   "FormsPlacesTitle": "Vse na svojem mestu",

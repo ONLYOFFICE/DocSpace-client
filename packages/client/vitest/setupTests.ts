@@ -64,6 +64,14 @@
 // Keeping both packages on the same base means changes propagate uniformly.
 import "../../shared/vitest/setupTests";
 
+// jsdom has no layout, so it does not implement scrollIntoView either. The tour
+// steps call it from their `before` hooks (stepBuilders → scrollTargetIntoView),
+// which without this throws in every test that walks a step. Inert on purpose:
+// a test that cares whether a target was scrolled to spies on it.
+if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = () => {};
+}
+
 // jsdom does not implement matchMedia. Several client stores read the system
 // theme at module-eval time (SettingsStore → getSystemTheme), so provide an
 // inert stub before any store module is imported by a test.

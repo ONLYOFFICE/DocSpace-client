@@ -57,7 +57,7 @@ const DisableAiServicesDialogComponent = ({
   const effectVars = {
     productName: getBrandName("ProductName"),
     aiSettings: t("AISettings"),
-    aiServices: t("Common:AIServices"),
+    aiServices: t("Common:AIFeatures"),
     aiAgents: t("Common:AIAgents"),
   };
 
@@ -77,7 +77,7 @@ const DisableAiServicesDialogComponent = ({
     >
       <ModalDialog.Header>
         {t("DisableAiServices", {
-          aiServices: t("Common:AIServices"),
+          aiServices: t("Common:AIFeatures"),
         })}
       </ModalDialog.Header>
       <ModalDialog.Body>
@@ -107,7 +107,7 @@ const DisableAiServicesDialogComponent = ({
           className={styles.confirm}
         >
           {t("DisableAiServicesConfirm", {
-            aiServices: t("Common:AIServices"),
+            aiServices: t("Common:AIFeatures"),
           })}
         </Text>
       </ModalDialog.Body>

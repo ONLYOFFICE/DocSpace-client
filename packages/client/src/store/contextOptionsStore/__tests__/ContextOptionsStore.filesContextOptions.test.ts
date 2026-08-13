@@ -229,4 +229,28 @@ describe("ContextOptionsStore.getFilesContextOptions — item kinds", () => {
     };
     expect(menuShape(store.getFilesContextOptions(template as never, t))).toMatchSnapshot();
   });
+
+  // In a private room "Copy" and "Duplicate" are stripped, so the "Move or
+  // copy" category is left with a single child and gets replaced by it
+  // (contextMenuModel collapses one-item groups). A bare "move-to" was not
+  // listed in any display group, so it was appended after "Delete".
+  it("keeps Delete last when the move category collapses to a single item", () => {
+    const store = createTestContextOptionsStore();
+    const folder = {
+      id: 7,
+      parentId: 10,
+      title: "New folder",
+      isFolder: true,
+      rootFolderId: 5,
+      security: {},
+      viewAccessibility: {},
+      contextOptions: ["open", "move", "move-to", "rename", "delete"],
+    };
+
+    const keys = menuShape(store.getFilesContextOptions(folder as never, t))
+      .map((option) => option.key as string)
+      .filter((key) => !key.startsWith("separator"));
+
+    expect(keys).toEqual(["open", "move-to", "rename", "delete"]);
+  });
 });

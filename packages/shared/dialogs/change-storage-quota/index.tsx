@@ -152,9 +152,7 @@ export const ChangeStorageQuotaDialog = ({
             ? t("Common:TurnOffDiskSpaceLimit", {
                 productName: getBrandName("ProductName"),
               })
-            : t("Common:SetDiskSpaceQuota", {
-                productName: getBrandName("ProductName"),
-              })}
+            : t("Common:SetDiskSpaceQuota")}
         </Text>
         {!isDisableQuota ? (
           <QuotaForm

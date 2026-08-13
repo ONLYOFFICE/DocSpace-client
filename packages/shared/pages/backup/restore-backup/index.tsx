@@ -376,9 +376,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           "restore-backup_warning-description",
         )}
       >
-        {t("Common:RestoreBackupWarningText", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("Common:RestoreBackupWarningText")}
       </Text>
       {!standalone ? (
         <Text

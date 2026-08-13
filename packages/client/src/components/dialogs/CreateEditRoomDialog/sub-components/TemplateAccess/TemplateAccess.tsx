@@ -47,7 +47,6 @@ import { TSelectorItem } from "@docspace/ui-kit/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import styles from "./TemplateAccess.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const MAX_AVATARS_COUNT = 3;
 
@@ -142,9 +141,7 @@ const TemplateAccess = ({
 					bodyText={
 						<>
 							<div className={styles.templateAccessDescription}>
-								{t("Files:TemplateAvailableDescription", {
-									productName: getBrandName("ProductName"),
-								})}
+								{t("Files:TemplateAvailableDescription")}
 							</div>
 							<Link
 								className="template-access_link"

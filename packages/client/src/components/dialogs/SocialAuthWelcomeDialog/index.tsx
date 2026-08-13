@@ -248,9 +248,7 @@ const SocialAuthWelcomeDialogComponent = ({
         <Button
           id="continue-to-docspace"
           className="auth-social-button"
-          label={t("SocialAuthWelcomeDialog:ContinueToProduct", {
-            productName: getBrandName("ProductName"),
-          })}
+          label={t("SocialAuthWelcomeDialog:ContinueToProduct")}
           primary
           onClick={onContinueClick}
           scale={currentDeviceType === DeviceType.mobile}

@@ -155,7 +155,7 @@ export const CreatePortalDialog = observer(
         displayType={ModalDialogType.modal}
       >
         <ModalDialog.Header>
-          {t("CreatingPortal", { productName: getBrandName("ProductName") })}
+          {t("CreatingPortal")}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <Text>

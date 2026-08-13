@@ -38,7 +38,6 @@ import { withTranslation } from "react-i18next";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 
 import { Link } from "@docspace/ui-kit/components/link";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ConfirmEmailBar = ({
   t,
@@ -54,7 +53,6 @@ const ConfirmEmailBar = ({
       <SnackBar
         headerText={t("ConfirmEmailHeader", {
           email: userEmail,
-          productName: getBrandName("ProductName"),
         })}
         text={
           <>

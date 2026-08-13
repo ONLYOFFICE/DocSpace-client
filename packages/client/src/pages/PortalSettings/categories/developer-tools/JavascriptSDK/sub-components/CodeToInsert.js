@@ -40,7 +40,6 @@ import { Tabs, TabsTypes } from "@docspace/ui-kit/components/tabs";
 import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const CodeToInsert = ({
 	t,
@@ -56,7 +55,7 @@ export const CodeToInsert = ({
 				{`HTML ${t("CodeTitle")}`}
 			</CategorySubHeader>
 			<Text lineHeight="20px" className="preview-description">
-				{t("HtmlCodeDescription", { productName: getBrandName("ProductName") })}
+				{t("HtmlCodeDescription")}
 			</Text>
 			<Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />
 		</CodeWrapper>
@@ -67,9 +66,7 @@ export const CodeToInsert = ({
 				{`JavaScript ${t("CodeTitle")}`}
 			</CategorySubHeader>
 			<Text lineHeight="20px" className="preview-description">
-				{t("JavaScriptCodeDescription", {
-					productName: getBrandName("ProductName"),
-				})}
+				{t("JavaScriptCodeDescription")}
 			</Text>
 			<CodeBlock config={config} scriptUrl={scriptUrl} theme={theme} />
 		</CodeWrapper>

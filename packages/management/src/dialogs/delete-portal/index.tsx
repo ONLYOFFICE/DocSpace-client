@@ -89,7 +89,6 @@ export const DeletePortalDialog = observer(() => {
             i18nKey="DeleteRequestSuccess"
             ns="Management"
             values={{
-              productName: getBrandName("ProductName"),
               email,
             }}
             components={{
@@ -130,7 +129,6 @@ export const DeletePortalDialog = observer(() => {
               i18nKey="DeleteSetupPortalText"
               ns="Management"
               values={{
-                productName: getBrandName("ProductName"),
                 domain,
                 email,
               }}

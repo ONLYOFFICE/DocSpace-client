@@ -90,9 +90,7 @@ const PortalDeactivation = (props) => {
         {t("PortalDeactivationDescription")}
       </Text>
       <Text className={styles.helper}>
-        {t("PortalDeactivationHelper", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("PortalDeactivationHelper")}
       </Text>
       <div className={styles.buttonWrapper}>
         <Button
@@ -108,7 +106,6 @@ const PortalDeactivation = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              productName: getBrandName("ProductName"),
             })}
             <Link
               className={styles.requestAgainLink}

@@ -674,12 +674,8 @@ const InviteInput = ({
               productName: getBrandName("ProductName"),
             })
           : !allowInvitingGuests
-            ? t("Common:InviteToRoomManuallyInfoMembers", {
-                productName: getBrandName("ProductName"),
-              })
-            : t("Common:InviteToRoomManuallyInfoGuest", {
-                productName: getBrandName("ProductName"),
-              })}
+            ? t("Common:InviteToRoomManuallyInfoMembers")
+            : t("Common:InviteToRoomManuallyInfoGuest")}
       </Text>
       {roomId === -1 || allowInvitingGuests ? (
         <div className={styles.inviteLanguage}>

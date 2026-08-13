@@ -96,7 +96,6 @@ import {
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import { getUserType } from "@docspace/shared/utils/common";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TOption } from "@docspace/ui-kit/components/combobox";
 
 import type { InviteItem } from "../index";
@@ -615,12 +614,8 @@ const InviteInput: React.FC<InviteInputProps> = ({
         })}
       >
         {!allowInvitingGuests
-          ? t("Common:InviteToRoomManuallyInfoMembers", {
-              productName: getBrandName("ProductName"),
-            })
-          : t("Common:InviteToRoomManuallyInfoGuest", {
-              productName: getBrandName("ProductName"),
-            })}
+          ? t("Common:InviteToRoomManuallyInfoMembers")
+          : t("Common:InviteToRoomManuallyInfoGuest")}
       </Text>
 
       <div className={styles.inviteInputContainer} ref={inputsRef}>

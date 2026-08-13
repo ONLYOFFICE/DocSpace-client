@@ -118,7 +118,6 @@ const PortalDeletion = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              productName: getBrandName("ProductName"),
             })}
             <Link
               className={styles.requestAgainLink}

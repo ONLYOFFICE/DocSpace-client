@@ -210,7 +210,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess", { productName: getBrandName("ProductName") });
+        return t("PortalAccess");
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":

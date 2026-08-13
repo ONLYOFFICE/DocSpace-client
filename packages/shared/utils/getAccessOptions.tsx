@@ -171,9 +171,7 @@ export const getAccessOptions = (
 			key: "roomManager",
 			label: t("Common:RoomManager"),
 			description: getRoomAdminDescription(roomType, t),
-			tooltip: t("Common:UserMaxAvailableRoleWarning", {
-				productName: getBrandName("ProductName"),
-			}),
+			tooltip: t("Common:UserMaxAvailableRoleWarning"),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
 			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
@@ -183,9 +181,7 @@ export const getAccessOptions = (
 			key: "agentManager",
 			label: t("Common:AgentManager"),
 			description: getRoomAdminDescription(roomType, t),
-			tooltip: t("Common:UserAgentMaxAvailableRoleWarning", {
-				productName: getBrandName("ProductName"),
-			}),
+			tooltip: t("Common:UserAgentMaxAvailableRoleWarning"),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
 			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
@@ -204,9 +200,7 @@ export const getAccessOptions = (
 			description: getUserDescription(roomType, t),
 			tooltip:
 				roomType === RoomsType.AIRoom
-					? t("Common:GuestAgentMaxAvailableRoleWarning", {
-							productName: getBrandName("ProductName"),
-						})
+					? t("Common:GuestAgentMaxAvailableRoleWarning")
 					: undefined,
 			access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,
 			type: EmployeeType.User,

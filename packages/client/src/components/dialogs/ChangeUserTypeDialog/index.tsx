@@ -221,7 +221,6 @@ const ChangeUserTypeDialog = ({
               i18nKey="ChangeUserTypeNote"
               ns="ChangeUserTypeDialog"
               t={t}
-              values={{ productName: getBrandName("ProductName") }}
               components={{
                 1: <span style={{ fontWeight: 600 }} />,
               }}

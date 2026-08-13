@@ -58,7 +58,6 @@ export const getStepsData = (
     {
       title: t("Common:SelectFile"),
       description: t("Settings:SelectFileDescriptionWorkspace", {
-        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }),
       component: (
@@ -84,9 +83,7 @@ export const getStepsData = (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
           <div>
-            {t("Settings:UsersAreRegistered", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("Settings:UsersAreRegistered")}
           </div>
         </>
       ) : (
@@ -95,9 +92,6 @@ export const getStepsData = (
             t={t}
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
-            values={{
-              productName: getBrandName("ProductName"),
-            }}
             components={{
               1: <b />,
             }}

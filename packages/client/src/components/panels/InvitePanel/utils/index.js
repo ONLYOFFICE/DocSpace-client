@@ -42,7 +42,6 @@ import {
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getTopFreeRole = (t, roomType) => {
 	const accesses = getAccessOptions(t, roomType);
@@ -88,9 +87,7 @@ export const makeFreeRole = (item, t, freeRole) => {
 		? t("Common:GroupMaxAvailableRoleWarning", {
 				roleName: freeRole.label,
 			})
-		: t("Common:UserMaxAvailableRoleWarning", {
-				productName: getBrandName("ProductName"),
-			});
+		: t("Common:UserMaxAvailableRoleWarning");
 	return item;
 };
 
@@ -99,12 +96,8 @@ export const makeViewerRole = (item, t, viewerRole) => {
 
 	item.warning =
 		item.access === ShareAccessRights.RoomManager
-			? t("Common:UserAgentMaxAvailableRoleWarning", {
-					productName: getBrandName("ProductName"),
-				})
-			: t("Common:GuestAgentMaxAvailableRoleWarning", {
-					productName: getBrandName("ProductName"),
-				});
+			? t("Common:UserAgentMaxAvailableRoleWarning")
+			: t("Common:GuestAgentMaxAvailableRoleWarning");
 	item.access = viewerRole.access;
 
 	return item;

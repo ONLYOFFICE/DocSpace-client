@@ -259,9 +259,7 @@ const InvitationSettings = ({
     <>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400" className={styles.contentText}>
-          {t("InvitationSettingsDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("InvitationSettingsDescription")}
         </Text>
 
         {invitationSettingsUrl ? (
@@ -340,9 +338,7 @@ const InvitationSettings = ({
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            {t("InvitationSettingsGuestsDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("InvitationSettingsGuestsDescription")}
           </Text>
         </div>
       </div>

@@ -96,7 +96,7 @@ const WelcomeDialog = ({ onTakeTour, onClose }: WelcomeDialogProps) => {
           </Text>
 
           <Text as="p" className={styles.description}>
-            {t("DashboardTour:WelcomeDescription", { productName })}
+            {t("DashboardTour:WelcomeDescription")}
           </Text>
         </div>
       </ModalDialog.Body>

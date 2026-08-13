@@ -53,9 +53,7 @@ export const getGoogleStepDescription = (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
           <div>
-            {t("Settings:UsersAreRegistered", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("Settings:UsersAreRegistered")}
           </div>
         </>
       ) : (
@@ -64,9 +62,6 @@ export const getGoogleStepDescription = (
             t={t}
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
-            values={{
-              productName: getBrandName("ProductName"),
-            }}
             components={{
               1: <b />,
             }}
@@ -112,9 +107,7 @@ export const getWorkspaceStepDescription = (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
           <div>
-            {t("Settings:UsersAreRegistered", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("Settings:UsersAreRegistered")}
           </div>
         </>
       ) : (
@@ -123,9 +116,6 @@ export const getWorkspaceStepDescription = (
             t={t}
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
-            values={{
-              productName: getBrandName("ProductName"),
-            }}
             components={{
               1: <b />,
             }}

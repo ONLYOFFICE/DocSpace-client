@@ -211,9 +211,7 @@ const BackupListModalDialog = ({
         "restore-backup_warning-description",
       )}
     >
-      {t("Common:RestoreBackupWarningText", {
-        productName: getBrandName("ProductName"),
-      })}{" "}
+      {t("Common:RestoreBackupWarningText")}{" "}
       {!standalone ? (
         <Text
           as="span"

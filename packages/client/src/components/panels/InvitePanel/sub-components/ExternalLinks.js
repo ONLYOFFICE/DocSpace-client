@@ -188,14 +188,10 @@ const ExternalLinks = ({
       : roomType === RoomsType.AIRoom
         ? allowInvitingGuests
           ? t("Common:InviteViaLinkDescriptionAgentGuest")
-          : t("Common:InviteViaLinkDescriptionAgentMembers", {
-              productName: getBrandName("ProductName"),
-            })
+          : t("Common:InviteViaLinkDescriptionAgentMembers")
         : allowInvitingGuests
           ? t("Common:InviteViaLinkDescriptionRoomGuest")
-          : t("Common:InviteViaLinkDescriptionRoomMembers", {
-              productName: getBrandName("ProductName"),
-            });
+          : t("Common:InviteViaLinkDescriptionRoomMembers");
 
   return (
     <div className={styles.externalLink} ref={inputsRef}>

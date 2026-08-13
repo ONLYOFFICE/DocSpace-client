@@ -190,9 +190,7 @@ const ShareFormDialog = ({
       title: t("Common:ShareWithPortalUsers", {
         productName: getBrandName("ProductName"),
       }),
-      description: t("Common:ShareWithPortalUsersDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      description: t("Common:ShareWithPortalUsersDescription"),
       buttonLabel: t("Common:Share"),
       onClick: shareFileToUsers,
       icon: <ShareFileToUsersIcon />,

@@ -65,9 +65,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
         visible={isVisible}
         t={t}
         emailPlaceholderText={t("Common:RegistrationEmail")}
-        textBody={t("PortalUnavailable:AccessingProblemContact", {
-          productName: getBrandName("ProductName"),
-        })}
+        textBody={t("PortalUnavailable:AccessingProblemContact")}
         onClose={onCloseDialog}
       />
       <ErrorContainer
@@ -78,9 +76,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
       >
         <div className={styles.bodyContent}>
           <Text textAlign="center" className="portal-unavailable_text">
-            {t("PortalUnavailable:AccessingProblemContact", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("PortalUnavailable:AccessingProblemContact")}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
           !window.navigator.userAgent.includes("ZoomApps") ? (
@@ -98,9 +94,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             onClick={onClickToContact}
             color="accent"
           >
-            {t("PortalUnavailable:ContactAdministrator", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("PortalUnavailable:ContactAdministrator")}
           </Link>
         </div>
       </ErrorContainer>

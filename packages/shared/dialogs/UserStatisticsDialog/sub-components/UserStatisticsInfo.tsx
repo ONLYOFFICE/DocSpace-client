@@ -95,7 +95,6 @@ export const UserStatisticsInfo = ({
               editingCount: totalUsers,
               count: portalUsers,
               externalCount: externalUsers,
-              productName: getBrandName("ProductName"),
             }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />

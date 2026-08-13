@@ -144,9 +144,7 @@ export const getRootDescription = (
 ) => {
   switch (rootFolderType) {
     case FolderType.SHARE:
-      return t("Common:EmptyShareDescription", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Common:EmptyShareDescription");
     case FolderType.Favorites:
       return t("Common:EmptyFavoritesDescription");
     case FolderType.Recent:

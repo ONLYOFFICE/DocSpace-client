@@ -70,9 +70,7 @@ export const getGoogleStepDescription = (
         </>
       );
     case 4:
-      return t("Settings:ImportSectionDescription", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Settings:ImportSectionDescription");
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
@@ -124,9 +122,7 @@ export const getWorkspaceStepDescription = (
         </>
       );
     case 4:
-      return t("Settings:ImportSectionDescription", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Settings:ImportSectionDescription");
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:

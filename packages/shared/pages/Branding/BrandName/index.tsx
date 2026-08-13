@@ -57,7 +57,6 @@ import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
 
 import { IBrandNameProps } from "./BrandName.types";
 import styles from "./BrandName.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const BrandName = ({
   showNotAvailable,
@@ -165,7 +164,7 @@ export const BrandName = ({
         className={classNames(styles.wlSubtitle, "wl-subtitle")}
         fontSize="13px"
       >
-        {t("BrandNameSubtitle", { productName: getBrandName("ProductName") })}
+        {t("BrandNameSubtitle")}
       </Text>
 
       <div className="settings-block">

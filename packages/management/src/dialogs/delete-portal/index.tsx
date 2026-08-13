@@ -51,7 +51,6 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { deletePortal } from "@docspace/shared/api/management";
 
 import { useStores } from "@/hooks/useStores";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const DeletePortalDialog = observer(() => {
   const router = useRouter();
@@ -80,7 +79,7 @@ export const DeletePortalDialog = observer(() => {
 
       if (res?.removed) {
         toastr.success(
-          t("PortalDeleted", { productName: getBrandName("ProductName") }),
+          t("PortalDeleted"),
         );
         router.refresh();
       } else {
@@ -115,9 +114,7 @@ export const DeletePortalDialog = observer(() => {
       <ModalDialog.Header>
         {isWizardCompleted
           ? t("SubmitDelete")
-          : t("Common:DeletePortal", {
-              productName: getBrandName("ProductName"),
-            })}
+          : t("Common:DeletePortal")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         {isWizardCompleted ? (

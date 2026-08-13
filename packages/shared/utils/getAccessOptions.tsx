@@ -38,7 +38,6 @@ import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
 import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
 import { TFunction } from "i18next";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type AccessOptionType = {
 	key: string | EmployeeType;
@@ -147,7 +146,6 @@ export const getAccessOptions = (
 						1: <strong></strong>,
 					}}
 					values={{
-						productName: getBrandName("ProductName"),
 						sectionName: t("Common:Documents"),
 						agentSection: t("Common:AIAgents"),
 					}}

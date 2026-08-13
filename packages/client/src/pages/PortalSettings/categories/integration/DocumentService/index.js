@@ -490,9 +490,7 @@ const DocumentService = ({
               <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="internalAdress"
-                  text={t("Settings:DocumentServiceLocationUrlInternal", {
-                    productName: getBrandName("ProductName"),
-                  })}
+                  text={t("Settings:DocumentServiceLocationUrlInternal")}
                 />
                 <InputBlock
                   id="internalAdress"

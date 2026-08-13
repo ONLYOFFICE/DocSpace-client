@@ -48,7 +48,6 @@ import { setTenantQuotaSettings } from "../../api/settings";
 
 import { ChangeStorageQuotaDialogProps } from "./ChangeStorageQuotaDialog.types";
 import styles from "./ChangeStorageQuotaDialog.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const ChangeStorageQuotaDialog = ({
   initialSize,
@@ -149,9 +148,7 @@ export const ChangeStorageQuotaDialog = ({
       <ModalDialog.Body>
         <Text className={styles.description}>
           {isDisableQuota
-            ? t("Common:TurnOffDiskSpaceLimit", {
-                productName: getBrandName("ProductName"),
-              })
+            ? t("Common:TurnOffDiskSpaceLimit")
             : t("Common:SetDiskSpaceQuota")}
         </Text>
         {!isDisableQuota ? (

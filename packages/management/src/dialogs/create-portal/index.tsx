@@ -60,7 +60,6 @@ import type { TUser } from "@docspace/shared/api/people/types";
 
 import { useStores } from "@/hooks/useStores";
 import styles from "../dialogs.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const CreatePortalDialog = observer(
   ({
@@ -159,9 +158,7 @@ export const CreatePortalDialog = observer(
         </ModalDialog.Header>
         <ModalDialog.Body>
           <Text>
-            {t("CreateSpaceDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("CreateSpaceDescription")}
           </Text>
           <div className={styles.createPortalInputBlock}>
             <Text
@@ -169,9 +166,7 @@ export const CreatePortalDialog = observer(
               fontWeight="600"
               style={{ paddingBottom: "5px" }}
             >
-              {t("PortalName", {
-                productName: getBrandName("ProductName"),
-              })}
+              {t("PortalName")}
             </Text>
             <TextInput
               testId="create-portal-input"

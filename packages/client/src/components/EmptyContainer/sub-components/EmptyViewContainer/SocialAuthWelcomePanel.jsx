@@ -39,7 +39,6 @@ import { withTranslation } from "react-i18next";
 import { ColumnarInfoBar } from "@docspace/ui-kit/components/columnar-info-bar";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
 
 const SocialAuthWelcomePanel = ({
@@ -56,9 +55,7 @@ const SocialAuthWelcomePanel = ({
 
   const columns = [
     {
-      label: t("SocialAuthWelcomeDialog:ProductNameDetail", {
-        productName: getBrandName("ProductName"),
-      }),
+      label: t("SocialAuthWelcomeDialog:ProductNameDetail"),
       value: (
         <>
           <span>{domain}</span>

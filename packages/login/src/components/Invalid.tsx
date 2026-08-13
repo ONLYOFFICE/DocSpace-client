@@ -50,7 +50,6 @@ import {
   getOAuthMessageKeyTranslation,
 } from "@/utils";
 import { OAuth2ErrorKey } from "@/utils/enums";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const homepage = "/";
 
@@ -93,9 +92,6 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
         <Trans
           t={t}
           i18nKey="ErrorInvalidText"
-          values={{
-            productName: getBrandName("ProductName"),
-          }}
           components={{
             1: (
               <Link

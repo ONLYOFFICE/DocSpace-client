@@ -60,7 +60,6 @@ import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { StartFillingSelectorDialogProps } from "@/types";
 
 import StartFillingSelectorDialog from "./StartFillingSelectDialog";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type SubmitFn = StartFillingSelectorDialogProps["onSubmit"];
 
@@ -187,9 +186,7 @@ const ShareFormDialog = ({
     },
     {
       id: "share-with-users",
-      title: t("Common:ShareWithPortalUsers", {
-        productName: getBrandName("ProductName"),
-      }),
+      title: t("Common:ShareWithPortalUsers"),
       description: t("Common:ShareWithPortalUsersDescription"),
       buttonLabel: t("Common:Share"),
       onClick: shareFileToUsers,

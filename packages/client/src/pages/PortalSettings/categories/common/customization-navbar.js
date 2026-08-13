@@ -91,7 +91,7 @@ const CustomizationNavbar = ({
       />
       {enablePortalRename ? (
         <CategoryItem
-          title={t("PortalRenaming", { productName: getBrandName("ProductName") })}
+          title={t("PortalRenaming")}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}

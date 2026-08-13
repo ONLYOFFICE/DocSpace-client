@@ -135,9 +135,7 @@ export const getStepsData = (
     },
     {
       title: t("Settings:DataImport"),
-      description: t("Settings:ImportSectionDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      description: t("Settings:ImportSectionDescription"),
       component: (
         <ImportStep
           t={t}

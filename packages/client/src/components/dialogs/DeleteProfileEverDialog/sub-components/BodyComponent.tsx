@@ -44,7 +44,6 @@ import { TUser } from "@docspace/shared/api/people/types";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import { TFunction } from "i18next";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type BodyComponentProps = {
   needReassignData: boolean;
@@ -125,7 +124,6 @@ const BodyComponent = ({
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
           {t("PersonalDataDeletionInfo", {
-            productName: getBrandName("ProductName"),
             sectionNameFirst: t("Common:Files"),
             sectionNameSecond: t("Common:TrashSection"),
           })}

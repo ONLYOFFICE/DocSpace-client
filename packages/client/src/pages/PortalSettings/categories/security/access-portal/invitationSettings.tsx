@@ -57,7 +57,6 @@ import { LearnMoreWrapper } from "../StyledSecurity";
 import InvitationLoader from "../sub-components/loaders/invitation-loader";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const InvitationSettings = ({
   t,
@@ -294,7 +293,6 @@ const InvitationSettings = ({
               noSelect
             >
               {t("InviteViaContacts", {
-                productName: getBrandName("ProductName"),
                 sectionName: t("Common:Contacts"),
               })}
             </Text>
@@ -307,7 +305,6 @@ const InvitationSettings = ({
             className={styles.checkboxDescription}
           >
             {t("ContactsInviteNote", {
-              productName: getBrandName("ProductName"),
               sectionName: t("Common:Contacts"),
             })}
           </Text>

@@ -42,7 +42,6 @@ import { Button } from "@docspace/ui-kit/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import { Link } from "@docspace/ui-kit/components/link";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "./PortalUnavailable.module.scss";
 
@@ -70,9 +69,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
       />
       <ErrorContainer
         className="portal-unavailable_container"
-        headerText={t("ErrorUnavailableText", {
-          productName: getBrandName("ProductName"),
-        })}
+        headerText={t("ErrorUnavailableText")}
       >
         <div className={styles.bodyContent}>
           <Text textAlign="center" className="portal-unavailable_text">

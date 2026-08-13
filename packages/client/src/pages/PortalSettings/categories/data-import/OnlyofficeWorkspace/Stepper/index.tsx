@@ -129,7 +129,6 @@ export const getStepsData = (
     {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription", {
-        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }),
       component: (

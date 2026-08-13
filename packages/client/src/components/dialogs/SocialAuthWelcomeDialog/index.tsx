@@ -149,9 +149,7 @@ const SocialAuthWelcomeDialogComponent = ({
           <div className="account-details">
             <div className={`${styles.infoRow} welcome-product-name`}>
               <Text className="welcome-text">
-                {t("SocialAuthWelcomeDialog:ProductNameDetail", {
-                  productName: getBrandName("ProductName"),
-                })}
+                {t("SocialAuthWelcomeDialog:ProductNameDetail")}
               </Text>
               <Text fontWeight="600" truncate className="welcome-text">
                 {baseDomain == "localhost"

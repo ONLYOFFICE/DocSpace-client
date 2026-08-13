@@ -2279,6 +2279,7 @@
   "WalletTopUpCallbackProcessingHint": "We're processing your payment. This usually takes a few seconds.",
   "WalletTopUpCallbackProcessingTitle": "Adding credits to your wallet",
   "WalletTopUpCallbackStep": "Adding {{price}} to your wallet",
+  "WalletTopUpCallbackStepDone": "Wallet topped up by {{price}}",
   "WalletTopUpCallbackSuccessHint": "Added to your wallet and ready to use",
   "WalletTopUpErrorRetry": "Try again in Wallet",
   "WalletTopUpErrorTitle": "Payment failed",

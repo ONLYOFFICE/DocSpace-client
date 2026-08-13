@@ -1604,6 +1604,7 @@
   "PricePerAdmin": "관리자당 가격",
   "PricePerGB": "GB당 가격",
   "PrivateOwnerEncryptionHint": "이미 이 룸의 멤버이고 암호화를 설정한 사용자만 소유자가 될 수 있습니다.",
+  "PrivateRoomConvertNotSupported": "변환이 필요한 파일은 비공개 룸에서 아직 열 수 없습니다.",
   "PrivateRoomDescription": "이 룸의 모든 파일이 암호화됩니다",
   "PrivateRoomDisclosureBody": "암호화는 전적으로 브라우저에서 실행되므로 초대한 사람만 파일을 읽을 수 있습니다. {{productName}} 포털이 제공하는 코드를 신뢰하게 됩니다. 사용하지 않을 때는 세션을 잠그세요.",
   "PrivateRoomDisclosureDismiss": "확인",

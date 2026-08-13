@@ -1604,6 +1604,7 @@
   "PricePerAdmin": "Preço por administrador",
   "PricePerGB": "Preço por GB",
   "PrivateOwnerEncryptionHint": "Apenas usuários que já são membros desta sala e que configuraram a criptografia podem se tornar proprietários.",
+  "PrivateRoomConvertNotSupported": "Os arquivos que precisam de conversão ainda não podem ser abertos em uma sala privada.",
   "PrivateRoomDescription": "Todos os arquivos nesta sala serão criptografados",
   "PrivateRoomDisclosureBody": "A criptografia é executada inteiramente no seu navegador, portanto os arquivos só podem ser lidos pelas pessoas que você convidar. Você confia no código fornecido pelo seu portal {{productName}} — bloqueie sua sessão quando não estiver usando.",
   "PrivateRoomDisclosureDismiss": "Entendi",

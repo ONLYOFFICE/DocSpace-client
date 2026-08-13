@@ -495,6 +495,19 @@ export const buildContextOptions = (
 
       fileOptions.push("download-encrypted");
 
+      // Conversion runs on the server, which only ever sees ciphertext here,
+      // so such a file cannot be opened from a private room by any route.
+      if (mustConvert) {
+        fileOptions = removeOptions(fileOptions, [
+          "view",
+          "pdf-view",
+          "preview",
+          "edit",
+          "open-pdf",
+          "edit-pdf",
+        ]);
+      }
+
       const userKeys = deps.userStore?.encryptionKeys;
       const hasEncryptionKeys =
         Array.isArray(userKeys) && userKeys.length > 0;

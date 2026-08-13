@@ -1604,6 +1604,7 @@
   "PricePerAdmin": "Preț per administrator",
   "PricePerGB": "Preț pe GB",
   "PrivateOwnerEncryptionHint": "Numai utilizatorii care sunt deja membri ai acestei săli și care au configurat criptarea pot deveni proprietari.",
+  "PrivateRoomConvertNotSupported": "Fișierele care necesită conversie nu pot fi deschise încă într-o cameră privată.",
   "PrivateRoomDescription": "Toate fișierele din această cameră vor fi criptate",
   "PrivateRoomDisclosureBody": "Criptarea rulează integral în browserul dvs., astfel încât fișierele pot fi citite doar de persoanele pe care le invitați. Aveți încredere în codul oferit de portalul {{productName}} — blocați-vă sesiunea când nu o utilizați.",
   "PrivateRoomDisclosureDismiss": "Am înțeles",

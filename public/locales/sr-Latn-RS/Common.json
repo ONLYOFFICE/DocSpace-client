@@ -1604,6 +1604,7 @@
   "PricePerAdmin": "Cena po administratoru",
   "PricePerGB": "Cena po GB",
   "PrivateOwnerEncryptionHint": "Vlasnik može postati samo korisnik koji je već član ove sobe i koji je podesio šifrovanje.",
+  "PrivateRoomConvertNotSupported": "Fajlovi koji zahtevaju konverziju još uvek ne mogu da se otvore u privatnoj sobi.",
   "PrivateRoomDescription": "Svi fajlovi u ovoj sobi biće šifrovani",
   "PrivateRoomDisclosureBody": "Šifrovanje se u potpunosti izvršava u vašem pregledaču, pa fajlove mogu da čitaju samo osobe koje pozovete. Oslanjate se na kod koji isporučuje vaš {{productName}} portal — zaključajte sesiju kada je ne koristite.",
   "PrivateRoomDisclosureDismiss": "Razumem",

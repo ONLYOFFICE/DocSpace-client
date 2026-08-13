@@ -1604,6 +1604,7 @@
   "PricePerAdmin": "Price per admin",
   "PricePerGB": "Price per GB",
   "PrivateOwnerEncryptionHint": "Only users who are already members of this room and have set up encryption can become the owner.",
+  "PrivateRoomConvertNotSupported": "Files that need conversion cannot be opened in a private room yet.",
   "PrivateRoomDescription": "All files in this room will be encrypted",
   "PrivateRoomDisclosureBody": "Encryption runs entirely in your browser, so files are readable only by the people you invite. You rely on the code your {{productName}} portal serves — lock your session when you are not using it.",
   "PrivateRoomDisclosureDismiss": "Got it",

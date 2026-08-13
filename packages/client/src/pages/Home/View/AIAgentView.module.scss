@@ -6,6 +6,8 @@
   flex-direction: column;
   min-height: 0;
 
+  // Declarations stay ahead of every nested rule: Sass is aligning with CSS,
+  // where a declaration after a nested rule changes meaning (`mixed-decls`).
   margin-inline: -20px -3px;
 
   // Declared before the media-query mixins below: Sass warns (mixed-decls) when

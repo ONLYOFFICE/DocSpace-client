@@ -33,99 +33,40 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/mixins";
+import { safeGet, safeSet } from "SRC_DIR/store/TourStore";
 
-.bodyContent {
-  display: contents;
+const VISITED_PREFIX = "dashboard_visited";
 
-  :global {
-    .warning-text {
-      margin: 20px 0;
-    }
+/**
+ * Per-user, because a browser is shared: one person having seen the Overview
+ * says nothing about where the next person to sign in should land.
+ */
+const visitedKey = (userId: string) => `${VISITED_PREFIX}_${userId}`;
 
-    .error-label {
-      position: absolute;
-      max-width: 100%;
-    }
+/**
+ * Whether this user has already landed on the Overview (Dashboard) page.
+ *
+ * This is what entry routing turns on: the Overview is the introduction to the
+ * new design, so it wins the first load, and from then on the user's own
+ * Default Homepage setting does. Deliberately *not* the welcome-modal flag —
+ * that one means "has been offered the tour", is left unspent on mobile on
+ * purpose, and must not decide where anyone lands.
+ *
+ * Unknown `userId` reads as visited, so a load that has not resolved the user
+ * yet never spends the one first-visit Overview on nobody's behalf.
+ */
+export const isDashboardVisited = (userId?: string): boolean => {
+  if (!userId) return true;
+  return safeGet(visitedKey(userId)) === "true";
+};
 
-    .field-body {
-      position: relative;
-    }
-  }
-}
-
-.aboutContent {
-  width: 100%;
-  user-select: text;
-
-  .avatar {
-    margin-top: 0;
-    margin-bottom: 16px;
-
-    @include mixins.tablet-and-below {
-      margin-top: 32px;
-    }
-  }
-
-  .rowEl {
-    display: inline-block;
-  }
-
-  .copyright {
-    margin-top: 14px;
-    margin-bottom: 4px;
-    font-weight: 700;
-  }
-
-  .noSelect {
-    @include mixins.no-user-select;
-  }
-
-  .row {
-    line-height: 20px;
-  }
-
-  .telTitle,
-  .addressTitle {
-    display: inline;
-  }
-
-  .selectEl {
-    @include mixins.tablet-and-below {
-      user-select: text;
-    }
-  }
-
-  .telTitle.selectEl {
-    direction: ltr;
-  }
-
-  .programWithVersion {
-    display: inline;
-    direction: ltr;
-  }
-
-  :global(.logo-theme) {
-    svg {
-      g:nth-child(2) {
-        path:nth-child(5) {
-          fill: var(--about-logo-color);
-        }
-
-        path:nth-child(6) {
-          fill: var(--about-logo-color);
-        }
-      }
-    }
-  }
-
-  .logoDocspaceTheme {
-    height: 24px;
-
-    svg {
-      path:nth-child(4) {
-        fill: var(--about-logo-color);
-      }
-    }
-  }
-}
+/**
+ * Records that the user has been on the Overview. Called by the page itself, so
+ * that only actually rendering it counts — being redirected past it does not.
+ *
+ * With storage unavailable the write silently fails and the user keeps landing
+ * on the Overview, which is the pre-existing behaviour rather than a new fault.
+ */
+export const setDashboardVisited = (userId?: string): void => {
+  if (userId) safeSet(visitedKey(userId), "true");
+};

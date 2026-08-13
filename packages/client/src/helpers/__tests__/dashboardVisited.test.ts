@@ -33,99 +33,50 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/mixins";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 
-.bodyContent {
-  display: contents;
+import {
+  isDashboardVisited,
+  setDashboardVisited,
+} from "SRC_DIR/helpers/dashboardVisited";
 
-  :global {
-    .warning-text {
-      margin: 20px 0;
-    }
+describe("dashboardVisited", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
 
-    .error-label {
-      position: absolute;
-      max-width: 100%;
-    }
+  it("reports not visited before the Overview has been reached", () => {
+    expect(isDashboardVisited("user-1")).toBe(false);
+  });
 
-    .field-body {
-      position: relative;
-    }
-  }
-}
+  it("reports visited once recorded, so entry moves to the default homepage", () => {
+    setDashboardVisited("user-1");
 
-.aboutContent {
-  width: 100%;
-  user-select: text;
+    expect(isDashboardVisited("user-1")).toBe(true);
+  });
 
-  .avatar {
-    margin-top: 0;
-    margin-bottom: 16px;
+  it("keeps the flag per user, since a browser is shared", () => {
+    setDashboardVisited("user-1");
 
-    @include mixins.tablet-and-below {
-      margin-top: 32px;
-    }
-  }
+    expect(isDashboardVisited("user-2")).toBe(false);
+  });
 
-  .rowEl {
-    display: inline-block;
-  }
+  it("treats an unknown user as visited, so nobody's first visit is spent", () => {
+    expect(isDashboardVisited(undefined)).toBe(true);
+  });
 
-  .copyright {
-    margin-top: 14px;
-    margin-bottom: 4px;
-    font-weight: 700;
-  }
+  it("records nothing for an unknown user", () => {
+    setDashboardVisited(undefined);
 
-  .noSelect {
-    @include mixins.no-user-select;
-  }
+    expect(isDashboardVisited("user-1")).toBe(false);
+  });
 
-  .row {
-    line-height: 20px;
-  }
+  it("falls back to not visited when storage cannot be read", () => {
+    setDashboardVisited("user-1");
+    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+      throw new Error("storage disabled");
+    });
 
-  .telTitle,
-  .addressTitle {
-    display: inline;
-  }
-
-  .selectEl {
-    @include mixins.tablet-and-below {
-      user-select: text;
-    }
-  }
-
-  .telTitle.selectEl {
-    direction: ltr;
-  }
-
-  .programWithVersion {
-    display: inline;
-    direction: ltr;
-  }
-
-  :global(.logo-theme) {
-    svg {
-      g:nth-child(2) {
-        path:nth-child(5) {
-          fill: var(--about-logo-color);
-        }
-
-        path:nth-child(6) {
-          fill: var(--about-logo-color);
-        }
-      }
-    }
-  }
-
-  .logoDocspaceTheme {
-    height: 24px;
-
-    svg {
-      path:nth-child(4) {
-        fill: var(--about-logo-color);
-      }
-    }
-  }
-}
+    expect(isDashboardVisited("user-1")).toBe(false);
+  });
+});

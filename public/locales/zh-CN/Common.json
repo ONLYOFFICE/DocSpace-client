@@ -296,7 +296,6 @@
   "BackupsAvailable": "备份可用 — 每个备份 {{currency}}",
   "BackupServiceEnabled": "备份服务已成功启用。",
   "BackupsNotAvailable": "备份不可用 — 充值钱包",
-  "BackupTopUpGoToBackup": "前往备份",
   "BadgeAlertDescription": "这个表单中含有几个填写人角色。此类型房间不支持设置多个角色填写表单",
   "BadgeCompletedTitle": "所有成员已填写完表单",
   "BadgeDraftTitle": "将用户分配至角色以开始填写表单",

@@ -297,7 +297,6 @@
   "BackupsAvailable": "Backups available — {{currency}} per backup",
   "BackupServiceEnabled": "Backup service successfully enabled.",
   "BackupsNotAvailable": "Backups unavailable — top up wallet",
-  "BackupTopUpGoToBackup": "Go to Backup",
   "BadgeAlertDescription": "Several roles are specified in this form. Forms with multiple roles are not available for filling in this type of room",
   "BadgeCompletedTitle": "Form is completely filled out by all members",
   "BadgeDraftTitle": "Assign users to roles to begin filling out form",

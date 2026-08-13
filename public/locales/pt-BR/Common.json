@@ -296,7 +296,6 @@
   "BackupsAvailable": "Backups disponíveis — {{currency}} por backup",
   "BackupServiceEnabled": "Serviço de backup habilitado com sucesso.",
   "BackupsNotAvailable": "Backups indisponíveis — recarregar carteira",
-  "BackupTopUpGoToBackup": "Ir para o Backup",
   "BadgeAlertDescription": "Várias funções são especificadas neste formulário. Formulários com múltiplas funções não estão disponíveis para preenchimento neste tipo de sala",
   "BadgeCompletedTitle": "O formulário foi completamente preenchido por todos os membros",
   "BadgeDraftTitle": "Atribua usuários a funções para começar a preencher o formulário",

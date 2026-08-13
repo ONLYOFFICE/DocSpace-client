@@ -296,7 +296,6 @@
   "BackupsAvailable": "Backups verfügbar — {{currency}} pro Backup",
   "BackupServiceEnabled": "Backup-Dienst erfolgreich aktiviert.",
   "BackupsNotAvailable": "Backups nicht verfügbar — Guthaben aufladen",
-  "BackupTopUpGoToBackup": "Zum Backup",
   "BadgeAlertDescription": "In diesem Formular werden mehrere Rollen angegeben. Formulare mit mehreren Rollen stehen für das Ausfüllen in diesem Raumtyp nicht zur Verfügung",
   "BadgeCompletedTitle": "Das Formular wird von allen Mitgliedern vollständig ausgefüllt",
   "BadgeDraftTitle": "Weisen Sie Benutzern Rollen zu, um mit dem Ausfüllen des Formulars zu beginnen",

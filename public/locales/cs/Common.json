@@ -296,7 +296,6 @@
   "BackupsAvailable": "Zálohy jsou dostupné — {{currency}} za zálohu",
   "BackupServiceEnabled": "Zálohovací služba byla úspěšně povolena.",
   "BackupsNotAvailable": "Zálohy nejsou dostupné — doplnit peněženku",
-  "BackupTopUpGoToBackup": "Přejít na Zálohu",
   "BadgeAlertDescription": "V tomto formuláři je uvedeno několik rolí. Formuláře s více rolemi nejsou k dispozici pro vyplnění v tomto typu místnosti.",
   "BadgeCompletedTitle": "Formulář je kompletně vyplněn všemi členy",
   "BadgeDraftTitle": "Přiřazení uživatelů k rolím pro zahájení vyplňování formuláře",

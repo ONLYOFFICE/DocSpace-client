@@ -296,7 +296,6 @@
   "BackupsAvailable": "Vähentämättä saatavilla — {{currency}} per varmuuskopio",
   "BackupServiceEnabled": "Varmuuskopiointipalvelu otettu käyttöön onnistuneesti.",
   "BackupsNotAvailable": "Vähentämätön palautus — täydennä lompakko",
-  "BackupTopUpGoToBackup": "Siirry Varmuuskopioon",
   "BadgeAlertDescription": "Tähän lomakkeeseen on määritelty useita rooleja. Lomakkeet, joilla on useita rooleja eivät ole käytettävissä tämäntyyppisessä huoneessa",
   "BadgeCompletedTitle": "Lomake on täytetty kaikkien jäsenten osalta",
   "BadgeDraftTitle": "Määrää käyttäjiä rooleihin, jotta he pääsevät täyttämään lomakkeen",

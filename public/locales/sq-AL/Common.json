@@ -296,7 +296,6 @@
   "BackupsAvailable": "Arkivimet e disponueshme — {{currency}} për arkivim",
   "BackupServiceEnabled": "Shërbimi i backup-it u aktivizua me sukses.",
   "BackupsNotAvailable": "Arkivimet nuk janë në dispozicion — mbush portofolin",
-  "BackupTopUpGoToBackup": "Shko te Backup",
   "BadgeAlertDescription": "Në këtë formular janë specifikuar disa role. Formularët me role të shumta nuk disponohen për plotësimin e këtij lloji të dhomës",
   "BadgeCompletedTitle": "Formulari është plotësuar plotësisht nga të gjithë anëtarët",
   "BadgeDraftTitle": "Caktoni përdoruesit te rolet për të filluar plotësimin e formularit",

@@ -296,7 +296,6 @@
   "BackupsAvailable": "백업 가능 — 백업당 {{currency}}",
   "BackupServiceEnabled": "백업 서비스 활성화 성공.",
   "BackupsNotAvailable": "백업을 사용할 수 없습니다 — 지갑 충전",
-  "BackupTopUpGoToBackup": "백업으로 이동",
   "BadgeAlertDescription": "이 양식에는 여러 역할이 지정되어 있습니다. 이 타입의 방을 채우는 데 여러 역할이 포함된 양식을 사용할 수 없습니다.",
   "BadgeCompletedTitle": "모든 구성원이 양식 작성을 완료했습니다",
   "BadgeDraftTitle": "사용자를 역할에 할당하여 양식 작성을 시작하세요",

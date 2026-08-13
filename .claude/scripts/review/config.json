@@ -1,0 +1,11 @@
+{
+  "basePatterns": [
+    "release/*",
+    "hotfix/*",
+    "develop",
+    "master"
+  ],
+  "submodules": "auto",
+  "maxCommitsAhead": 500,
+  "maxDiffLines": 3000
+}

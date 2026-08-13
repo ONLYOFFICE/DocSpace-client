@@ -102,6 +102,7 @@ import ScrollToTop from "./components/Layout/ScrollToTop";
 import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import { AskAIChatBridge } from "./components/AskAIChatBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
@@ -815,6 +816,14 @@ const Shell = ({ page = "home", ...rest }) => {
     () => ({
       onWebSearchSaved: () =>
         toastr.success(t("Common:ChangesSavedSuccessfully")),
+      // The widget hydrates its stores from mount effects that can't await,
+      // so failures there reach us only through this callback. Without it a
+      // failed profiles load looks like a portal with no AI models
+      // configured. `context` names the failing step (e.g. "profiles:init").
+      onError: ({ type, error, context }) => {
+        console.error(`[ai-agent] ${context ?? type} failed`, error);
+        toastr.error(t("Common:UnexpectedError"));
+      },
     }),
     [t],
   );
@@ -867,6 +876,7 @@ const Shell = ({ page = "home", ...rest }) => {
           composerDisabled={standalone ? undefined : !isAIReady}
           suggestions={aiSuggestions}
         >
+          <AskAIChatBridge />
           {layout}
         </AiAgentProviders>
       ) : (

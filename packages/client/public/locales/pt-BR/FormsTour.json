@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Começado, não concluído",
   "FormsItem": "Cada linha é uma coleta inteira. Abra uma para trabalhar dentro dela, fixe as que estão em andamento ou use os três pontos para convidar pessoas, copiar o link que abre o formulário e salvar a configuração como modelo.",
   "FormsItemTitle": "Trabalhando com um espaço de formulários",
-  "FormsOpenSpace": "Vamos abrir este e ver como uma coleta é montada. Dentro de todo espaço de formulários existem as mesmas três coisas: o próprio formulário, as respostas ainda sendo escritas e as que já chegaram.",
-  "FormsOpenSpaceTitle": "Entre em um espaço",
   "FormsPlacesRecent": "{{recent}} e {{favorites}} mantêm à mão as coletas que você está conduzindo.",
   "FormsPlacesTemplates": "{{templates}} — os modelos de espaço que você salvou.",
   "FormsPlacesTitle": "Cada coisa em seu lugar",

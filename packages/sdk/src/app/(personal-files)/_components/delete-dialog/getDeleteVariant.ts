@@ -33,14 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/variables/colors";
+/** Which warning the delete confirmation shows. */
+export type TDeleteVariant =
+  | "empty-trash"
+  | "permanent-one"
+  | "permanent-many"
+  | "trash-one"
+  | "trash-many";
 
-.aiIcon {
-  path {
-    fill: #{colors.$light-blue-main} !important;
-  }
-}
-
-.text {
-  margin-block: 2px;
-}
+/**
+ * Deleting is permanent both in the trash and in a private room, where the
+ * recycle bin is bypassed so that encrypted files are not retained. The warning
+ * has to follow the same predicate as the delete call, otherwise it promises a
+ * reversible action and performs an irreversible one.
+ */
+export const getDeleteVariant = ({
+  isEmptyTrash,
+  isPermanent,
+  itemCount,
+}: {
+  isEmptyTrash?: boolean;
+  isPermanent: boolean;
+  itemCount: number;
+}): TDeleteVariant => {
+  if (isEmptyTrash) return "empty-trash";
+  if (isPermanent) return itemCount === 1 ? "permanent-one" : "permanent-many";
+  return itemCount === 1 ? "trash-one" : "trash-many";
+};

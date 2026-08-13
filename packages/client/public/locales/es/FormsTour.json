@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Empezado, no terminado",
   "FormsItem": "Cada fila es una recopilación completa. Abra una para trabajar dentro, ancle las que tenga en marcha o utilice los tres puntos para invitar a personas, copiar el enlace que abre el formulario y guardar la configuración como plantilla.",
   "FormsItemTitle": "Trabajar con un espacio de formularios",
-  "FormsOpenSpace": "Abramos este y veamos cómo se compone una recopilación. Dentro de cada espacio de formularios hay siempre las mismas tres cosas: el formulario, las respuestas que aún se están escribiendo y las que ya han llegado.",
-  "FormsOpenSpaceTitle": "Entre en un espacio",
   "FormsPlacesRecent": "{{recent}} y {{favorites}} mantienen a mano las recopilaciones que tiene en marcha.",
   "FormsPlacesTemplates": "{{templates}}: las plantillas de espacio que ha guardado.",
   "FormsPlacesTitle": "Cada cosa en su sitio",

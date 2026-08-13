@@ -6,7 +6,7 @@
   "AddedToClipboard": "Items added to clipboard",
   "AddNewLink": "Add new link",
   "AddUsersOrGroupsDescription": "The added administrators will be able to create rooms using this template.",
-  "AddUsersOrGroupsInfo": "Only <1>{{productName}}</1> and <1>Room admins</1> are shown here",
+  "AddUsersOrGroupsInfo": "Only <1>Full admins</1> and <1>room admins</1> are shown here",
   "AddUsersOrGroupsInfoGroups": "Only <1>{{productName}}</1> and <1>Room admins</1> from the selected groups will be able to create rooms using this template.",
   "AddUsersOrGroupsTitle": "Add Users or Groups",
   "AfterFilesWillBeDeletedPermanently": "After files will be deleted permanently.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Analyze responses",
   "ArchiveAction": "Empty archive",
   "ArchiveEmptyScreenUser": "Rooms that have been archived will appear here.",
-  "ChangeAgentOwnerSelectorInfo": "Only a room admin or {{productName}} admin can become the owner of the agent",
+  "ChangeAgentOwnerSelectorInfo": "Only a room admin or Full admin can become the owner of the agent",
   "ChangeTheAgentOwner": "Change the agent owner",
   "ClientSearchDecryptingNames": "Decrypting file names… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "The folder is too large. Search results may be incomplete.",
@@ -127,7 +127,7 @@
   "TableName": "Table name",
   "Template": "Template",
   "TemplateAvailable": "Template available to everyone",
-  "TemplateAvailableDescription": "All the {{productName}} and Room admins will be able to create rooms using this template.",
+  "TemplateAvailableDescription": "All the Full admins and room admins will be able to create rooms using this template.",
   "TemplateName": "Template Name",
   "TemplateOwner": "Template owner",
   "TemplateRemoved": "Selected room templates have been deleted",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "YouLeftTheAgent": "You have left the agent",
-  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the Full admin <1>{{adminName}}</1>."
 }

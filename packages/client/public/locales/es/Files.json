@@ -6,7 +6,7 @@
   "AddedToClipboard": "Elementos añadidos al portapapeles",
   "AddNewLink": "Añadir nuevo enlace",
   "AddUsersOrGroupsDescription": "Los administradores añadidos podrán crear salas usando esta plantilla.",
-  "AddUsersOrGroupsInfo": "Aquí solo se muestran los <1>administradores del espacio de trabajo</1> y los <1>administradores de sala</1>",
+  "AddUsersOrGroupsInfo": "Aquí solo se muestran los <1>superadministradores</1> y los <1>administradores de sala</1>",
   "AddUsersOrGroupsInfoGroups": "Solo administradores  de <1>{{productName}}</1> y <1>administradores de salas</1> de los grupos seleccionados podrán crear salas usando esta plantilla.",
   "AddUsersOrGroupsTitle": "Añadir Usuarios o Grupos",
   "AfterFilesWillBeDeletedPermanently": "Después los archivos se eliminarán permanentemente.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Analizar respuestas",
   "ArchiveAction": "Archivo vacío",
   "ArchiveEmptyScreenUser": "Las salas archivadas aparecerán aquí.",
-  "ChangeAgentOwnerSelectorInfo": "Solo un administrador de sala o del espacio de trabajo puede convertirse en propietario del agente",
+  "ChangeAgentOwnerSelectorInfo": "Solo un administrador de sala o superadministrador puede convertirse en propietario del agente",
   "ChangeTheAgentOwner": "Cambiar el propietario del agente",
   "ClientSearchDecryptingNames": "Descifrando nombres de archivos… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "La carpeta es demasiado grande. Los resultados de búsqueda pueden estar incompletos.",
@@ -127,7 +127,7 @@
   "TableName": "Nombre de tabla",
   "Template": "Plantilla",
   "TemplateAvailable": "Plantilla disponible para todos",
-  "TemplateAvailableDescription": "Todos los administradores del espacio de trabajo y los administradores de sala podrán crear salas utilizando esta plantilla.",
+  "TemplateAvailableDescription": "Todos los superadministradores y los administradores de sala podrán crear salas utilizando esta plantilla.",
   "TemplateName": "Nombre de la plantilla",
   "TemplateOwner": "Propietario de la plantilla",
   "TemplateRemoved": "Las plantillas de sala seleccionadas han sido eliminadas",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "No es posible mover varios archivos a la sala para rellenar formularios. Mueva un formulario PDF de {{organizationName}}  a la vez.",
   "WillBeDeletedPermanently": "{{date}} se eliminará permanentemente",
   "YouLeftTheAgent": "Ha abandonado el agente",
-  "YourUserTypeHasChanged": "El administrador del espacio de trabajo <1>{{adminName}}</1> ha cambiado su tipo de usuario a <1>“{{userType}}”</1>."
+  "YourUserTypeHasChanged": "El superadministrador <1>{{adminName}}</1> ha cambiado su tipo de usuario a <1>“{{userType}}”</1>."
 }

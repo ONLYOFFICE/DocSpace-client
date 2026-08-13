@@ -11,7 +11,7 @@
   "PasswordRecoveryTitle": "Rikuperimi i fjalëkalimit",
   "RecoverAccess": "Rikuperoni aksesin",
   "RecoverContactEmailPlaceholder": "Email kontakti",
-  "RecoverTextBody": "Nëse nuk mund të identifikoheni me llogarinë tuaj ekzistuese ose dëshironi të regjistroheni si përdorues i ri, kontaktoni administratorin e hapësirës së punës.",
+  "RecoverTextBody": "Nëse nuk mund të identifikoheni me llogarinë tuaj ekzistuese ose dëshironi të regjistroheni si përdorues i ri, kontaktoni superadministratorin.",
   "Register": "Regjistrohuni",
   "RegisterTextBodyAfterDomainsList": "Për t'u regjistruar, shkruani adresën tuaj të emailit dhe klikoni Dërgo kërkesën. Një mesazh me një lidhje për të aktivizuar llogarinë tuaj do të dërgohet në adresën e specifikuar.",
   "RegisterTextBodyBeforeDomainsList": "Regjistrimi është i disponueshëm për përdoruesit me një llogari emaili në",

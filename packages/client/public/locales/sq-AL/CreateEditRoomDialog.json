@@ -37,7 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Zgjidhni ruajtjen",
   "ThirdPartyStorageNoStorageAlert": "Përpara, ju duhet të lidheni me shërbimin përkatës në seksionin “Integrimi”. Ndryshe, lidhja nuk do të jetë e mundur.",
   "ThirdPartyStoragePermanentSettingDescription": "Skedarët ruhen në një ruajtje të palës së tretë {{thirdpartyTitle}} në folderin \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Për të lidhur një hapësirë ruajtëse të palës së tretë, duhet të shtoni shërbimin përkatës në seksionin Integrimi të cilësimeve të {{productName}}. Kontaktoni pronarin ose administratorin e hapësirës së punës për të aktivizuar integrimin.",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Për të lidhur një hapësirë ruajtëse të palës së tretë, duhet të shtoni shërbimin përkatës në seksionin Integrimi të cilësimeve të {{productName}}. Kontaktoni pronarin ose superadministratorin për të aktivizuar integrimin.",
   "UserEmail": "Posta elektronike e përdoruesit",
   "UserIPAddress": "Adresa IP e Përdoruesit",
   "UserName": "Emri i Përdoruesit",

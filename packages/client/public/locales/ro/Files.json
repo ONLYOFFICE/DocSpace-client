@@ -6,7 +6,7 @@
   "AddedToClipboard": "Elementele sunt adăugate la clipboard",
   "AddNewLink": "Adăugarea unui link nou",
   "AddUsersOrGroupsDescription": "Administratorii adăugați vor putea crea săli cu ajutorul acestui șablon.",
-  "AddUsersOrGroupsInfo": "Aici sunt afișați doar <1>administratorii spațiului de lucru</1> și <1>administratorii sălii</1>",
+  "AddUsersOrGroupsInfo": "Aici sunt afișați doar <1>superadministratorii</1> și <1>administratorii sălii</1>",
   "AddUsersOrGroupsInfoGroups": "Numai Administratorul <1>{{productName}}</1> și <1>Administratori de sală</1> din grupuri selectate pot crea săli cu ajutorul acestui șablon.",
   "AddUsersOrGroupsTitle": "Adăugare Utilizatori sau Grrupuri",
   "AfterFilesWillBeDeletedPermanently": "Fișierele vor fi şterse definitiv.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Analizează răspunsurile",
   "ArchiveAction": "Arhivă goală",
   "ArchiveEmptyScreenUser": "Sălile care au fost arhivate vor apărea aici.",
-  "ChangeAgentOwnerSelectorInfo": "Doar un administrator al sălii sau al spațiului de lucru poate deveni proprietarul agentului",
+  "ChangeAgentOwnerSelectorInfo": "Doar un administrator al sălii sau superadministrator poate deveni proprietarul agentului",
   "ChangeTheAgentOwner": "Schimbare proprietar al agentului",
   "ClientSearchDecryptingNames": "Se decriptează numele fișierelor… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Dosarul este prea mare. Rezultatele căutării pot fi incomplete.",
@@ -127,7 +127,7 @@
   "TableName": "Numele tabelului",
   "Template": "Șablon",
   "TemplateAvailable": "Șablonul este disponibil tuturor",
-  "TemplateAvailableDescription": "Toți administratorii spațiului de lucru și administratorii sălii vor putea crea săli folosind acest șablon.",
+  "TemplateAvailableDescription": "Toți superadministratorii și administratorii sălii vor putea crea săli folosind acest șablon.",
   "TemplateName": "Nume Șablon",
   "TemplateOwner": "Proprietar șablon",
   "TemplateRemoved": "Șabloane de sală selectate au fost șterse",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "Deplasarea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Deplasați câte un formular PDF  {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} va fi şters definitiv",
   "YouLeftTheAgent": "Dvs ați părăsit agentul",
-  "YourUserTypeHasChanged": "Tipul dvs. de utilizator a fost schimbat în <1>„{{userType}}”</1> de către administratorul spațiului de lucru <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Tipul dvs. de utilizator a fost schimbat în <1>„{{userType}}”</1> de către superadministratorul <1>{{adminName}}</1>."
 }

@@ -6,7 +6,7 @@
   "AddedToClipboard": "Elementi aggiunti agli appunti",
   "AddNewLink": "Aggiungi nuovo link",
   "AddUsersOrGroupsDescription": "Gli amministratori aggiunti potranno creare stanze utilizzando questo modello.",
-  "AddUsersOrGroupsInfo": "Qui sono mostrati solo gli <1>amministratori dello spazio di lavoro</1> e gli <1>amministratori della stanza</1>",
+  "AddUsersOrGroupsInfo": "Qui sono mostrati solo gli <1>superamministratori</1> e gli <1>amministratori della stanza</1>",
   "AddUsersOrGroupsInfoGroups": "Solo <1>{{productName}}</1> e <1>gli Amministratori della stanza</1> dei gruppi selezionati potranno creare stanze utilizzando questo modello.",
   "AddUsersOrGroupsTitle": "Aggiungi utenti o gruppi",
   "AfterFilesWillBeDeletedPermanently": "Dopo i file verranno eliminati in modo permanente.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Analizza le risposte",
   "ArchiveAction": "Archivio vuoto",
   "ArchiveEmptyScreenUser": "Le stanze che sono state archiviate appariranno qui.",
-  "ChangeAgentOwnerSelectorInfo": "Solo un amministratore della stanza o dello spazio di lavoro può diventare proprietario dell'agente",
+  "ChangeAgentOwnerSelectorInfo": "Solo un amministratore della stanza o superamministratore può diventare proprietario dell'agente",
   "ChangeTheAgentOwner": "Cambia il proprietario dell’agente",
   "ClientSearchDecryptingNames": "Decrittografia dei nomi dei file… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "La cartella è troppo grande. I risultati della ricerca potrebbero essere incompleti.",
@@ -127,7 +127,7 @@
   "TableName": "Nome tabella",
   "Template": "Modello",
   "TemplateAvailable": "Modello disponibile per tutti",
-  "TemplateAvailableDescription": "Tutti gli amministratori dello spazio di lavoro e gli amministratori della stanza potranno creare stanze utilizzando questo modello.",
+  "TemplateAvailableDescription": "Tutti i superamministratori e gli amministratori della stanza potranno creare stanze utilizzando questo modello.",
   "TemplateName": "Nome del modello",
   "TemplateOwner": "Proprietario del modello",
   "TemplateRemoved": "I modelli di stanza selezionati sono stati eliminati",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "Lo spostamento di più file nella stanza di compilazione dei moduli non è supportato. Sposta un modulo PDF {{ organizationName }} alla volta.",
   "WillBeDeletedPermanently": "{{date}} verrà eliminato definitivamente",
   "YouLeftTheAgent": "Hai lasciato l'agente",
-  "YourUserTypeHasChanged": "Il tuo tipo di utente è stato modificato in <1>“{{userType}}”</1> dall'amministratore dello spazio di lavoro <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Il tuo tipo di utente è stato modificato in <1>“{{userType}}”</1> dal superamministratore <1>{{adminName}}</1>."
 }

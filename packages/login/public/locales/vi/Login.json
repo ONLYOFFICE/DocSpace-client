@@ -11,7 +11,7 @@
   "PasswordRecoveryTitle": "Khôi phục mật khẩu",
   "RecoverAccess": "Khôi phục quyền truy cập",
   "RecoverContactEmailPlaceholder": "Email liên hệ",
-  "RecoverTextBody": "Nếu bạn không thể đăng nhập bằng tài khoản hiện có của mình hoặc muốn đăng ký làm người dùng mới, hãy liên hệ với quản trị viên không gian làm việc.",
+  "RecoverTextBody": "Nếu bạn không thể đăng nhập bằng tài khoản hiện có của mình hoặc muốn đăng ký làm người dùng mới, hãy liên hệ với siêu quản trị viên.",
   "Register": "Đăng ký",
   "RegisterTextBodyAfterDomainsList": "Để đăng ký, hãy nhập email của bạn và nhấp vào Gửi yêu cầu. Liên kết kích hoạt sẽ được gửi đến bạn.",
   "RegisterTextBodyBeforeDomainsList": "Người dùng có thể đăng ký khi có tài khoản email tại",

@@ -6,7 +6,7 @@
   "AddedToClipboard": "Položky přidané do schránky",
   "AddNewLink": "Přidat nový odkaz",
   "AddUsersOrGroupsDescription": "Přidaní správci budou moci vytvářet místnosti pomocí této šablony.",
-  "AddUsersOrGroupsInfo": "Zde se zobrazují pouze <1>správci pracovního prostoru</1> a <1>administrátoři místností</1>",
+  "AddUsersOrGroupsInfo": "Zde se zobrazují pouze <1>supersprávci</1> a <1>administrátoři místností</1>",
   "AddUsersOrGroupsInfoGroups": "Pomocí této šablony budou moci vytvářet místnosti pouze <1>{{productName}}</1> a <1>správci místností</1> z vybraných skupin.",
   "AddUsersOrGroupsTitle": "Přidání uživatelů nebo skupin",
   "AfterFilesWillBeDeletedPermanently": "Poté budou soubory trvale odstraněny.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Analyzovat odpovědi",
   "ArchiveAction": "Prázdný archiv",
   "ArchiveEmptyScreenUser": "Zde se zobrazí místnosti, které byly archivovány.",
-  "ChangeAgentOwnerSelectorInfo": "Vlastníkem agenta se může stát pouze administrátor místnosti nebo správce pracovního prostoru",
+  "ChangeAgentOwnerSelectorInfo": "Vlastníkem agenta se může stát pouze administrátor místnosti nebo supersprávce",
   "ChangeTheAgentOwner": "Změnit vlastníka agenta",
   "ClientSearchDecryptingNames": "Dešifrování názvů souborů… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Složka je příliš velká. Výsledky hledání mohou být neúplné.",
@@ -127,7 +127,7 @@
   "TableName": "Název tabulky",
   "Template": "Šablona",
   "TemplateAvailable": "Šablona je k dispozici všem",
-  "TemplateAvailableDescription": "Všichni správci pracovního prostoru a administrátoři místností budou moci pomocí této šablony vytvářet místnosti.",
+  "TemplateAvailableDescription": "Všichni supersprávci a administrátoři místností budou moci pomocí této šablony vytvářet místnosti.",
   "TemplateName": "Název šablony",
   "TemplateOwner": "Vlastník šablony",
   "TemplateRemoved": "Vybrané šablony místností byly odstraněny",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "Přesunutí několika souborů do místnosti pro vyplňování formulářů není podporováno. Přesunujte PDF formuláře {{ organizationName }} po jednom.",
   "WillBeDeletedPermanently": "{{date}} bude trvale smazáno",
   "YouLeftTheAgent": "Opustili jste agenta.",
-  "YourUserTypeHasChanged": "Váš typ uživatele byl změněn na <1>„{{userType}}“</1> správcem pracovního prostoru <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Váš typ uživatele byl změněn na <1>„{{userType}}“</1> supersprávcem <1>{{adminName}}</1>."
 }

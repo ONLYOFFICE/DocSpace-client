@@ -6,7 +6,7 @@
   "AddedToClipboard": "클립보드에 항목이 추가되었습니다",
   "AddNewLink": "새 링크 추가",
   "AddUsersOrGroupsDescription": "추가된 관리자는 이 템플릿을 사용하여 룸을 생성할 수 있습니다.",
-  "AddUsersOrGroupsInfo": "여기에는 <1>워크스페이스 관리자</1>와 <1>룸 관리자</1>만 표시됩니다",
+  "AddUsersOrGroupsInfo": "여기에는 <1>슈퍼 관리자</1>와 <1>룸 관리자</1>만 표시됩니다",
   "AddUsersOrGroupsInfoGroups": "선택한 그룹의 <1>{{productName}}</1> 및 <1>룸 관리자</1>만 이 템플릿을 사용하여 룸을 생성할 수 있습니다.",
   "AddUsersOrGroupsTitle": "사용자 또는 그룹 추가",
   "AfterFilesWillBeDeletedPermanently": "뒤의 파일은 영구적으로 삭제됩니다.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "응답 분석하기",
   "ArchiveAction": "아카이브 비우기",
   "ArchiveEmptyScreenUser": "아카이브된 방이 여기에 표시됩니다.",
-  "ChangeAgentOwnerSelectorInfo": "룸 관리자 또는 워크스페이스 관리자만 에이전트의 소유자가 될 수 있습니다",
+  "ChangeAgentOwnerSelectorInfo": "룸 관리자 또는 슈퍼 관리자만 에이전트의 소유자가 될 수 있습니다",
   "ChangeTheAgentOwner": "에이전트 소유자 변경",
   "ClientSearchDecryptingNames": "파일 이름 복호화 중… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "폴더가 너무 큽니다. 검색 결과가 불완전할 수 있습니다.",
@@ -127,7 +127,7 @@
   "TableName": "테이블 이름",
   "Template": "템플릿",
   "TemplateAvailable": "누구나 사용할 수 있는 템플릿",
-  "TemplateAvailableDescription": "모든 워크스페이스 관리자와 룸 관리자가 이 템플릿을 사용하여 룸을 만들 수 있습니다.",
+  "TemplateAvailableDescription": "모든 슈퍼 관리자와 룸 관리자가 이 템플릿을 사용하여 룸을 만들 수 있습니다.",
   "TemplateName": "템플릿 이름",
   "TemplateOwner": "템플릿 소유자",
   "TemplateRemoved": "선택한 룸 템플릿이 삭제되었습니다",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "여러 파일을 양식 작성 룸으로 이동하는 것은 지원되지 않습니다. {{ organizationName }} PDF 양식을 한 번에 하나씩 이동하세요.",
   "WillBeDeletedPermanently": "{{date}}이 영구적으로 삭제됩니다",
   "YouLeftTheAgent": "에이전트를 떠나셨습니다.",
-  "YourUserTypeHasChanged": "워크스페이스 관리자 <1>{{adminName}}</1>이(가) 귀하의 사용자 유형을 <1>“{{userType}}”</1>으로 변경했습니다."
+  "YourUserTypeHasChanged": "슈퍼 관리자 <1>{{adminName}}</1>이(가) 귀하의 사용자 유형을 <1>“{{userType}}”</1>으로 변경했습니다."
 }

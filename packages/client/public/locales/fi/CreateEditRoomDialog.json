@@ -37,7 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Valitse muisti",
   "ThirdPartyStorageNoStorageAlert": "Sitä ennen, sinun tulee yhdistää vastaavaan palveluun \"Liittäminen\"-osiossa. Muuten, yhteys ei ole mahdollinen.",
   "ThirdPartyStoragePermanentSettingDescription": "Tiedostot on säilötty kolmannen osapuolen {{thirdpartyTitle}} muistiin \"{{thirdpartyFolderName}}\" -kansioon.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Kolmannen osapuolen tallennustilan yhdistämiseksi sinun on lisättävä vastaava palvelu {{productName}}-asetusten Integraatio-osiossa. Ota yhteyttä omistajaan tai työtilan järjestelmänvalvojaan integraation käyttöön ottamiseksi.",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Kolmannen osapuolen tallennustilan yhdistämiseksi sinun on lisättävä vastaava palvelu {{productName}}-asetusten Integraatio-osiossa. Ota yhteyttä omistajaan tai pääjärjestelmänvalvojaan integraation käyttöön ottamiseksi.",
   "UserEmail": "Käyttäjän sähköposti",
   "UserIPAddress": "Käyttäjän IP-osoite",
   "UserName": "Käyttäjänimi",

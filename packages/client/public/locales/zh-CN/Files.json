@@ -6,7 +6,7 @@
   "AddedToClipboard": "已将项目添加到剪贴板中",
   "AddNewLink": "添加新链接",
   "AddUsersOrGroupsDescription": "添加的管理员可使用此模板创建房间。",
-  "AddUsersOrGroupsInfo": "此处仅显示<1>工作区管理员</1>和<1>房间管理员</1>",
+  "AddUsersOrGroupsInfo": "此处仅显示<1>超级管理员</1>和<1>房间管理员</1>",
   "AddUsersOrGroupsInfoGroups": "只有所选群组中的<1>{{productName}}</1>和<1>房间管理员</1>可使用此模板创建房间。",
   "AddUsersOrGroupsTitle": "添加用户或群组",
   "AfterFilesWillBeDeletedPermanently": "之后文件将被永久删除。",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "分析回复",
   "ArchiveAction": "清空存档",
   "ArchiveEmptyScreenUser": "已存档房间将出现在此处。",
-  "ChangeAgentOwnerSelectorInfo": "只有房间管理员或工作区管理员才能成为智能体的所有者",
+  "ChangeAgentOwnerSelectorInfo": "只有房间管理员或超级管理员才能成为智能体的所有者",
   "ChangeTheAgentOwner": "更改智能体所有者",
   "ClientSearchDecryptingNames": "正在解密文件名… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "文件夹过大，搜索结果可能不完整。",
@@ -127,7 +127,7 @@
   "TableName": "表名",
   "Template": "模板",
   "TemplateAvailable": "模板可供所有人使用",
-  "TemplateAvailableDescription": "所有工作区管理员和房间管理员均可使用此模板创建房间。",
+  "TemplateAvailableDescription": "所有超级管理员和房间管理员均可使用此模板创建房间。",
   "TemplateName": "模板名称",
   "TemplateOwner": "模板所有者",
   "TemplateRemoved": "选定的房间模板已被删除",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "不支持将多个文件移动到表单填写房间。请每次移动一份{{ organizationName }}的 PDF 表单。",
   "WillBeDeletedPermanently": "{{date}} 将被永久删除",
   "YouLeftTheAgent": "您已离开智能体",
-  "YourUserTypeHasChanged": "工作区管理员<1>{{adminName}}</1>已将您的用户类型更改为<1>“{{userType}}”</1>。"
+  "YourUserTypeHasChanged": "超级管理员<1>{{adminName}}</1>已将您的用户类型更改为<1>“{{userType}}”</1>。"
 }

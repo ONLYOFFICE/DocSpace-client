@@ -6,7 +6,7 @@
   "AddedToClipboard": "Ставке додате у привремену меморију",
   "AddNewLink": "Додај нови линк",
   "AddUsersOrGroupsDescription": "Додати администратори моћи ће да креирају собе користећи овај шаблон.",
-  "AddUsersOrGroupsInfo": "Овде су приказани само <1>администратори радног простора</1> и <1>администратори соба</1>",
+  "AddUsersOrGroupsInfo": "Овде су приказани само <1>суперадминистратори</1> и <1>администратори соба</1>",
   "AddUsersOrGroupsInfoGroups": "Само <1>{{productName}}</1> и <1>администратори соба</1> из изабраних група моћи ће да креирају собе користећи овај шаблон.",
   "AddUsersOrGroupsTitle": "Додајте кориснике или групе.",
   "AfterFilesWillBeDeletedPermanently": "Након што се датотеке трајно обришу.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Анализирај одговоре",
   "ArchiveAction": "Празна архива",
   "ArchiveEmptyScreenUser": "Собе које су архивиране ће се појавити овде.",
-  "ChangeAgentOwnerSelectorInfo": "Само администратор собе или радног простора може постати власник агента",
+  "ChangeAgentOwnerSelectorInfo": "Само администратор собе или суперадминистратор може постати власник агента",
   "ChangeTheAgentOwner": "Промените власника агента",
   "ClientSearchDecryptingNames": "Дешифровање назива датотека… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Фасцикла је превелика. Резултати претраге могу бити непотпуни.",
@@ -127,7 +127,7 @@
   "TableName": "Назив табеле",
   "Template": "Шаблон",
   "TemplateAvailable": "Шаблон доступан свима",
-  "TemplateAvailableDescription": "Сви администратори радног простора и администратори соба моћи ће да креирају собе користећи овај шаблон.",
+  "TemplateAvailableDescription": "Сви суперадминистратори и администратори соба моћи ће да креирају собе користећи овај шаблон.",
   "TemplateName": "Име шаблона",
   "TemplateOwner": "Власник шаблона",
   "TemplateRemoved": "Изабрани шаблони соба су обрисани",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "Премјештање више фајлова у собу за попуњавање образаца није подржано. Преместите један {{ organizationName }} PDF образац у исто време.",
   "WillBeDeletedPermanently": "{{date }} ће бити трајно обрисан",
   "YouLeftTheAgent": "Оставили сте агента",
-  "YourUserTypeHasChanged": "Ваш тип корисника је променио администратор радног простора <1>{{adminName}}</1> у <1>„{{userType}}“</1>."
+  "YourUserTypeHasChanged": "Ваш тип корисника је променио суперадминистратор <1>{{adminName}}</1> у <1>„{{userType}}“</1>."
 }

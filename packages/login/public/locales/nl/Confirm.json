@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Verwijder mijn account",
   "DeleteProfileConfirmation": "Let op! U staat op het punt uw account te verwijderen.",
   "DeleteProfileConfirmationInfo": "Door op ‛Mijn account verwijderen‛ te klikken, gaat u akkoord met ons <1>Privacybeleid.</1>",
-  "DeleteProfileSuccessDescription": "Uw {{productName}}-account is succesvol uitgeschakeld. De eigenaar of werkruimtebeheerder kan uw uitgeschakelde account permanent verwijderen.",
+  "DeleteProfileSuccessDescription": "Uw {{productName}}-account is succesvol uitgeschakeld. De eigenaar of superbeheerder kan uw uitgeschakelde account permanent verwijderen.",
   "DeleteProfileSuccessMessage": "Uw account is met succes verwijderd.",
   "DeleteProfileSuccessMessageInfo": "Zie ons <1>Privacybeleid</1> voor meer informatie over het verwijderen van uw account en de gegevens die daaraan gekoppeld zijn.",
   "EmailAndPasswordCopiedToClipboard": "E-mail en wachtwoord gekopieerd naar klembord",

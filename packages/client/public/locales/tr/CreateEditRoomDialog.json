@@ -37,7 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "Depolama seç",
   "ThirdPartyStorageNoStorageAlert": "Öncesinde, \"Entegrasyon\" bölümünden ilgili hizmeti bağlamanız gerekir. Aksi durumda bağlantı mümkün olmayacaktır.",
   "ThirdPartyStoragePermanentSettingDescription": "Dosyalar, \"{{thirdpartyFolderName}}\" klasöründe bir üçüncü taraf olan {{thirdpartyTitle}} deposunda depolanır.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "Üçüncü taraf bir depolama bağlamak için {{productName}} ayarlarının Entegrasyon bölümünde ilgili hizmeti eklemeniz gerekir. Entegrasyonu etkinleştirmek için sahibiyle veya çalışma alanı yöneticisiyle iletişime geçin.",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "Üçüncü taraf bir depolama bağlamak için {{productName}} ayarlarının Entegrasyon bölümünde ilgili hizmeti eklemeniz gerekir. Entegrasyonu etkinleştirmek için sahibiyle veya süper yöneticiyle iletişime geçin.",
   "UserEmail": "Kullanıcı E-postası",
   "UserIPAddress": "Kullanıcı IP Adresi",
   "UserName": "Kullanıcı Adı",

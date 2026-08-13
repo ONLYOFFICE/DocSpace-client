@@ -6,7 +6,7 @@
   "AddedToClipboard": "Artikujt u shtuan në kujtesën e fragmenteve",
   "AddNewLink": "Shtoni një lidhje të re",
   "AddUsersOrGroupsDescription": "Administratorët e shtuar do të jenë në gjendje të krijojnë dhoma duke përdorur këtë model.",
-  "AddUsersOrGroupsInfo": "Këtu shfaqen vetëm <1>administratorët e hapësirës së punës</1> dhe <1>administratorët e dhomës</1>",
+  "AddUsersOrGroupsInfo": "Këtu shfaqen vetëm <1>superadministratorët</1> dhe <1>administratorët e dhomës</1>",
   "AddUsersOrGroupsInfoGroups": "Vetëm <1>{{productName}}</1> dhe <1>administratorët e dhomës</1> nga grupet e përzgjedhura do të jenë në gjendje të krijojnë dhoma duke përdorur këtë model.",
   "AddUsersOrGroupsTitle": "Shtoni Përdoruesit ose Grupet",
   "AfterFilesWillBeDeletedPermanently": "Pas kësaj, skedarët do të fshihen përgjithmonë.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Analizo përgjigjet",
   "ArchiveAction": "Arkivi bosh",
   "ArchiveEmptyScreenUser": "Dhomat që janë akrivuar do të shfaqen këtu.",
-  "ChangeAgentOwnerSelectorInfo": "Vetëm një administrator i dhomës ose i hapësirës së punës mund të bëhet pronar i agjentit",
+  "ChangeAgentOwnerSelectorInfo": "Vetëm një administrator i dhomës ose superadministrator mund të bëhet pronar i agjentit",
   "ChangeTheAgentOwner": "Ndryshoni pronarin e agjentit",
   "ClientSearchDecryptingNames": "Po deshifrohen emrat e skedarëve… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Dosja është shumë e madhe. Rezultatet e kërkimit mund të jenë të paplota.",
@@ -127,7 +127,7 @@
   "TableName": "Emri i tabelës",
   "Template": "Shabllon",
   "TemplateAvailable": "Modelo i disponueshëm për të gjithë.",
-  "TemplateAvailableDescription": "Të gjithë administratorët e hapësirës së punës dhe administratorët e dhomës do të mund të krijojnë dhoma duke përdorur këtë model.",
+  "TemplateAvailableDescription": "Të gjithë superadministratorët dhe administratorët e dhomës do të mund të krijojnë dhoma duke përdorur këtë model.",
   "TemplateName": "Emri i Modulit",
   "TemplateOwner": "Pronari i modelit",
   "TemplateRemoved": "Template të dhoma të zgjedhura janë fshirë",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "Zhvendosja e disa skedarëve në dhomën e plotësimit të formularit nuk mbështetet. Lëvizni një formular PDF {{ organizationName }} në të njëjtën kohë.",
   "WillBeDeletedPermanently": "{{date}} do të fshihet përgjithmonë",
   "YouLeftTheAgent": "Ju e keni lënë agjentin",
-  "YourUserTypeHasChanged": "Tipi i përdoruesit tuaj u ndryshua në <1>“{{userType}}”</1> nga administratori i hapësirës së punës <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Tipi i përdoruesit tuaj u ndryshua në <1>“{{userType}}”</1> nga superadministratori <1>{{adminName}}</1>."
 }

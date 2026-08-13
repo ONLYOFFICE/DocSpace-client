@@ -6,7 +6,7 @@
   "AddedToClipboard": "ເພີ່ມລາຍການໃສ່ຄລິບບອດແລ້ວ",
   "AddNewLink": "ເພີ່ມລິ້ງໃໝ່",
   "AddUsersOrGroupsDescription": "ບັນດາຜູ້ປົກຄອງທີ່ເພີ່ມເຂົ້າມາຈະສາມາດສ້າງຫ້ອງໂດຍໃຊ້ແມ່ແບບນີ້ໄດ້.",
-  "AddUsersOrGroupsInfo": "ສະແດງພຽງແຕ່ <1>ຜູ້ດູແລລະບົບພື້ນທີ່ເຮັດວຽກ</1> ແລະ <1>ຜູ້ດູແລຫ້ອງ</1> ຢູ່ນີ້",
+  "AddUsersOrGroupsInfo": "ສະແດງພຽງແຕ່ <1>ຜູ້ດູແລລະບົບສູງສຸດ</1> ແລະ <1>ຜູ້ດູແລຫ້ອງ</1> ຢູ່ນີ້",
   "AddUsersOrGroupsInfoGroups": "ພຽງແຕ່ <1>{{productName}}</1> ພ້ອມດ້ວຍ <1>ຜູ້ປົກຄອງຫ້ອງ</1> ຈາກກຸ່ມທີ່ເລືອກເທົ່ານັ້ນທີ່ຈະສາມາດສ້າງຫ້ອງໂດຍໃຊ້ແມ່ແບບນີ້ໄດ້.",
   "AddUsersOrGroupsTitle": "ເພີ່ມຜູ້ໃຊ້ຫຼືກຸ່ມ",
   "AfterFilesWillBeDeletedPermanently": "ຫຼັງຈາກ​ໄຟລ໌​ຖືກ​ລົບ​ອອກ​ຢ່າງ​ຖາວອນ.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "ວິເຄາະຄຳຕອບ",
   "ArchiveAction": "ແຟ້ມຈັດເກັບຫວ່າງເປົ່າ",
   "ArchiveEmptyScreenUser": "ຫ້ອງທີ່ຖືກເກັບໄວ້ຈະປາກົດຢູ່ທີ່ນີ້.",
-  "ChangeAgentOwnerSelectorInfo": "ມີພຽງຜູ້ດູແລຫ້ອງ ຫຼື ຜູ້ດູແລລະບົບພື້ນທີ່ເຮັດວຽກເທົ່ານັ້ນທີ່ສາມາດເປັນເຈົ້າຂອງຕົວແທນໄດ້",
+  "ChangeAgentOwnerSelectorInfo": "ມີພຽງຜູ້ດູແລຫ້ອງ ຫຼື ຜູ້ດູແລລະບົບສູງສຸດເທົ່ານັ້ນທີ່ສາມາດເປັນເຈົ້າຂອງຕົວແທນໄດ້",
   "ChangeTheAgentOwner": "ປ່ຽນເຈົ້າຂອງຕົວແທນ",
   "ClientSearchDecryptingNames": "ກຳລັງຖອດລະຫັດຊື່ໄຟລ໌… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "ໂຟນເດີໃຫຍ່ເກີນໄປ. ຜົນການຄົ້ນຫາອາດຈະບໍ່ຄົບຖ້ວນ.",
@@ -127,7 +127,7 @@
   "TableName": "ຊື່ຕາຕະລາງ",
   "Template": "ແມ່ແບບ",
   "TemplateAvailable": "ແມ່ແບບມີໃຫ້ທຸກຄົນ",
-  "TemplateAvailableDescription": "ຜູ້ດູແລລະບົບພື້ນທີ່ເຮັດວຽກ ແລະ ຜູ້ດູແລຫ້ອງທັງໝົດຈະສາມາດສ້າງຫ້ອງໂດຍໃຊ້ແມ່ແບບນີ້ໄດ້.",
+  "TemplateAvailableDescription": "ຜູ້ດູແລລະບົບສູງສຸດ ແລະ ຜູ້ດູແລຫ້ອງທັງໝົດຈະສາມາດສ້າງຫ້ອງໂດຍໃຊ້ແມ່ແບບນີ້ໄດ້.",
   "TemplateName": "ຊື່ແມ່ແບບ",
   "TemplateOwner": "ເຈົ້າຂອງແມ່ແບບ",
   "TemplateRemoved": "ແມ່ແບບຫ້ອງທີ່ເລືອກໄວ້ໄດ້ຖືກລົບອອກແລ້ວ",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "ການເຄື່ອນໄຟລ໌ຫຼາຍໆລູກເຂົ້າຫ້ອງຕື່ມແບບຟອມບໍ່ຖືກສະຫນັບສະຫນູນ ໃຫ້ເຄື່ອນແບບຟອມ PDF {{ organizationName }} ຫນຶ່ງຢ່າງຄັ້ງລະຫນຶ່ງ.",
   "WillBeDeletedPermanently": "{{date}} ຈະຖືກລົບອອກຢ່າງຖາວອນ",
   "YouLeftTheAgent": "ທ່ານໄດ້ອອກຈາກຕົວແທນແລ້ວ",
-  "YourUserTypeHasChanged": "ປະເພດຜູ້ໃຊ້ຂອງທ່ານຖືກປ່ຽນເປັນ <1>“{{userType}}”</1> ໂດຍຜູ້ດູແລລະບົບພື້ນທີ່ເຮັດວຽກ <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "ປະເພດຜູ້ໃຊ້ຂອງທ່ານຖືກປ່ຽນເປັນ <1>“{{userType}}”</1> ໂດຍຜູ້ດູແລລະບົບສູງສຸດ <1>{{adminName}}</1>."
 }

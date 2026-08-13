@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Çaktivizoni llogarinë time",
   "DeleteProfileConfirmation": "Kujdes! Jeni gati të çaktivizoni llogarinë tuaj.",
   "DeleteProfileConfirmationInfo": "Duke klikuar \"Çaktivizoni llogarinë time\", ti pranon <1>Politikën tonë të privatësisë.</1>",
-  "DeleteProfileSuccessDescription": "Llogaria juaj {{productName}} u çaktivizua me sukses. Pronari ose administratori i hapësirës së punës mund të fshijë përgjithmonë llogarinë tuaj të çaktivizuar.",
+  "DeleteProfileSuccessDescription": "Llogaria juaj {{productName}} u çaktivizua me sukses. Pronari ose superadministratori mund të fshijë përgjithmonë llogarinë tuaj të çaktivizuar.",
   "DeleteProfileSuccessMessage": "Llogaria juaj është çaktivizuar",
   "DeleteProfileSuccessMessageInfo": "Ju lutem, kontrolloni <1>Politikën tonë të privatësisë</1> për të mësuar më shumë rreth fshirjes së llogarisë tuaj dhe të dhënave përkatëse.",
   "EmailAndPasswordCopiedToClipboard": "Email-i dhe fjalëkalimi u kopjuan në kujtesën e fragmenteve",

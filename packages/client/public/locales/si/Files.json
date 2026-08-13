@@ -6,7 +6,7 @@
   "AddedToClipboard": "අථක පසුරු පුවරුවට එක් කෙරිණි",
   "AddNewLink": "නව සබැඳියක්",
   "AddUsersOrGroupsDescription": "මෙම සැකිල්ල භාවිතයෙන් එකතු කරන ලද පරිපාලකවරුන් කාමර නිර්මාණය කිරීමට හැකි වනු ඇත.",
-  "AddUsersOrGroupsInfo": "මෙහි පෙන්වන්නේ <1>වැඩ අවකාශයේ පරිපාලකයින්</1> සහ <1>කාමර පරිපාලකයින්</1> පමණි",
+  "AddUsersOrGroupsInfo": "මෙහි පෙන්වන්නේ <1>සුපිරි පරිපාලකයින්</1> සහ <1>කාමර පරිපාලකයින්</1> පමණි",
   "AddUsersOrGroupsInfoGroups": "පමණක් <1>{{productName}}</1> සහ තෝරාගත් සමූහවල <1>කාමර පරිපාලකයන්</1> මෙම සැකිල්ල භාවිතයෙන් කාමර නිර්මාණය කිරීමට හැකි වනු ඇත.",
   "AddUsersOrGroupsTitle": "පරිශීලකයින් හෝ කණ්ඩායම් එක් කරන්න",
   "AfterFilesWillBeDeletedPermanently": "ගොනු ස්ථිරවම මකා දැමූ පසු.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "ප්‍රතිචාර විශ්ලේෂණය කරන්න",
   "ArchiveAction": "සංරක්‍ෂණය හිස්ය",
   "ArchiveEmptyScreenUser": "සංරක්‍ෂිත කාමර මෙහි දිස් වනු ඇත.",
-  "ChangeAgentOwnerSelectorInfo": "නියෝජිතයාගේ හිමිකරු විය හැක්කේ කාමර පරිපාලකයෙකුට හෝ වැඩ අවකාශයේ පරිපාලකයෙකුට පමණි",
+  "ChangeAgentOwnerSelectorInfo": "නියෝජිතයාගේ හිමිකරු විය හැක්කේ කාමර පරිපාලකයෙකුට හෝ සුපිරි පරිපාලකයෙකුට පමණි",
   "ChangeTheAgentOwner": "නියෝජිත හිමිකරු වෙනස් කරන්න",
   "ClientSearchDecryptingNames": "ගොනු නාම විකේතනය කරමින්… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "ෆෝල්ඩරය ඉතා විශාලයි. සෙවුම් ප්‍රතිඵල අසම්පූර්ණ විය හැක.",
@@ -127,7 +127,7 @@
   "TableName": "වගු නාමය",
   "Template": "සැකිල්ල",
   "TemplateAvailable": "සමස්ථ ජනයාටදීම ලබාගත හැකි සැකිල්ල",
-  "TemplateAvailableDescription": "සියලුම වැඩ අවකාශයේ පරිපාලකයින් සහ කාමර පරිපාලකයින්ට මෙම සැකිල්ල භාවිතයෙන් කාමර නිර්මාණය කිරීමට හැකි වේ.",
+  "TemplateAvailableDescription": "සියලුම සුපිරි පරිපාලකයින් සහ කාමර පරිපාලකයින්ට මෙම සැකිල්ල භාවිතයෙන් කාමර නිර්මාණය කිරීමට හැකි වේ.",
   "TemplateName": "සැකිලි නම",
   "TemplateOwner": "ප්‍රාඛ්‍ය හිමිකරු",
   "TemplateRemoved": "තෝරාගත් කාමර සැකිලි මකා දමා ඇත",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "පෝරම් පිරවුම් කාමරයට බොහෝ ගොනු යැවීම සහය නොදක්වයි. එක {{ organizationName }} PDF ආකෘතියක් පමණක් එකවරක් යවන්න.",
   "WillBeDeletedPermanently": "{{date}} ස්ථිරව මකා දැමෙනු ඇත.",
   "YouLeftTheAgent": "ඔබ නියෝජිතයා හැර ගොස් ඇත.",
-  "YourUserTypeHasChanged": "වැඩ අවකාශයේ පරිපාලක <1>{{adminName}}</1> විසින් ඔබේ පරිශීලක වර්ගය <1>“{{userType}}”</1> ලෙස වෙනස් කර ඇත."
+  "YourUserTypeHasChanged": "සුපිරි පරිපාලක <1>{{adminName}}</1> විසින් ඔබේ පරිශීලක වර්ගය <1>“{{userType}}”</1> ලෙස වෙනස් කර ඇත."
 }

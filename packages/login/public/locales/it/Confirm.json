@@ -8,7 +8,7 @@
   "DeleteProfileBtn": "Cancella il mio account",
   "DeleteProfileConfirmation": "Attenzione! Stai per eliminare il tuo account.",
   "DeleteProfileConfirmationInfo": "Facendo clic su \"Elimina il mio account\" accetti la nostra <1>politica sulla privacy.</1>",
-  "DeleteProfileSuccessDescription": "Il tuo account {{productName}} è stato disabilitato correttamente. Il proprietario o l'amministratore dello spazio di lavoro può eliminare definitivamente il tuo account disabilitato.",
+  "DeleteProfileSuccessDescription": "Il tuo account {{productName}} è stato disabilitato correttamente. Il proprietario o il superamministratore può eliminare definitivamente il tuo account disabilitato.",
   "DeleteProfileSuccessMessage": "Il tuo account è stato eliminato con successo.",
   "DeleteProfileSuccessMessageInfo": "Consulta la nostra <1>Informativa sulla privacy</1> per saperne di più sull'eliminazione del tuo account e dei dati ad esso associati.",
   "EmailAndPasswordCopiedToClipboard": "Email e password copiate negli appunti",

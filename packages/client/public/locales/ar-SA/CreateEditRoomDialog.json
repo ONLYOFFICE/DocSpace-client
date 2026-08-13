@@ -37,7 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "حدد المساحة التخزينية",
   "ThirdPartyStorageNoStorageAlert": "قبل ذلك ، تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". خلاف ذلك ، لن يكون الاتصال ممكنًا.",
   "ThirdPartyStoragePermanentSettingDescription": "يتم تخزين الملفات في وحدة تخزين تابعة لجهة خارجية {{thirdpartyTitle}} \\\"{{thirdpartyFolderName}}\\\" مجلد.\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "لتوصيل مساحة تخزين خارجية، عليك إضافة الخدمة المقابلة في قسم التكامل من إعدادات {{productName}}. تواصل مع المالك أو مسؤول مساحة العمل لتفعيل التكامل.",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "لتوصيل مساحة تخزين خارجية، عليك إضافة الخدمة المقابلة في قسم التكامل من إعدادات {{productName}}. تواصل مع المالك أو المسؤول العام لتفعيل التكامل.",
   "UserEmail": "بريد المستخدم الإلكتروني",
   "UserIPAddress": "عنوان IP للمستخدم",
   "UserName": "اسم المستخدم",

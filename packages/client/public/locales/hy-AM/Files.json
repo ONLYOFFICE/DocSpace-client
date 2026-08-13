@@ -6,7 +6,7 @@
   "AddedToClipboard": "Տարրերն ավելացվել են սեղմատախտակին",
   "AddNewLink": "Ավելացնել նոր հղում",
   "AddUsersOrGroupsDescription": "Ավելացված ադմինիստրատորները կկարողանան ստեղծել սենյակներ այս թեմփլեյտով։",
-  "AddUsersOrGroupsInfo": "Այստեղ ցուցադրվում են միայն <1>աշխատատարածքի ադմինիստրատորները</1> և <1>սենյակի ադմինները</1>",
+  "AddUsersOrGroupsInfo": "Այստեղ ցուցադրվում են միայն <1>գերադմինիստրատորները</1> և <1>սենյակի ադմինները</1>",
   "AddUsersOrGroupsInfoGroups": "Միայն <1>{{productName}}</1>-ը և <1>սենյակների ադմինները</1> ընտրված խմբերից կկարողանան ստեղծել սենյակներ այս թեմփլեյտով։",
   "AddUsersOrGroupsTitle": "Ավելացնել օգտատերեր կամ խմբեր",
   "AfterFilesWillBeDeletedPermanently": "Հետո ֆայլերն ընդմիշտ կջնջվեն:",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Վերլծասխանները",
   "ArchiveAction": "Դատարկ արխիվ",
   "ArchiveEmptyScreenUser": "Սենյակները, որոնք արխիվացված են, կհայտնվեն այստեղ:",
-  "ChangeAgentOwnerSelectorInfo": "Միայն սենյակի կամ աշխատատարածքի ադմինիստրատորը կարող է դառնալ գործակալի սեփականատեր",
+  "ChangeAgentOwnerSelectorInfo": "Միայն սենյակի կամ գերադմինիստրատորը կարող է դառնալ գործակալի սեփականատեր",
   "ChangeTheAgentOwner": "Փոխել գործակալի սեփականատիրոջը",
   "ClientSearchDecryptingNames": "Ֆայլերի անունների վերծանում… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Պանակը չափազանց մեծ է։ Որոնման արդյունքները կարող են թերի լինել։",
@@ -127,7 +127,7 @@
   "TableName": "Աղյուսակի անուն",
   "Template": "Կաղապար",
   "TemplateAvailable": "Կաղապարները հասանելի են բոլորի համար",
-  "TemplateAvailableDescription": "Աշխատատարածքի բոլոր ադմինիստրատորները և սենյակի ադմինները կկարողանան ստեղծել սենյակներ այս կաղապարի միջոցով։",
+  "TemplateAvailableDescription": "Գերադմինիստրատորները և սենյակի ադմինները կկարողանան ստեղծել սենյակներ այս կաղապարի միջոցով։",
   "TemplateName": "Կաղապարի Անունը",
   "TemplateOwner": "Կաղապարի տեղծող",
   "TemplateRemoved": "Ընտրված սենյակի կաղապարները ջնջվել են։",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "Մի քանի ֆայլ տեղափոխելը Ձևաթղթերի լրացման սենյակ չի աջակցվում: Միանգամից տեղափոխեք մեկ {{ organizationName }} PDF ձև:",
   "WillBeDeletedPermanently": "{{date}}-ն ընդմիշտ կջնջվի",
   "YouLeftTheAgent": "Դուք լքել եք գործակալին",
-  "YourUserTypeHasChanged": "Ձեր օգտագործողի տեսակը փոխվել է <1>«{{userType}}»</1>-ի՝ աշխատատարածքի ադմինիստրատոր <1>{{adminName}}</1>-ի կողմից։"
+  "YourUserTypeHasChanged": "Ձեր օգտագործողի տեսակը փոխվել է <1>«{{userType}}»</1>-ի՝ գերադմինիստրատոր <1>{{adminName}}</1>-ի կողմից։"
 }

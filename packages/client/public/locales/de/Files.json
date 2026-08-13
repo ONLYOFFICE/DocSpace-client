@@ -6,7 +6,7 @@
   "AddedToClipboard": "Objekte in der Zwischenablage hinzugefügt",
   "AddNewLink": "Neuen Link hinzufügen",
   "AddUsersOrGroupsDescription": "Die hinzugefügten Administratoren können mithilfe dieser Vorlage Räume erstellen.",
-  "AddUsersOrGroupsInfo": "Hier werden nur <1>Workspace-Administratoren</1> und <1>Raum-Admins</1> angezeigt",
+  "AddUsersOrGroupsInfo": "Hier werden nur <1>Super-Administratoren</1> und <1>Raum-Admins</1> angezeigt",
   "AddUsersOrGroupsInfoGroups": "Nur <1>{{productName}}</1> und <1>Raumadministratoren</1> aus den ausgewählten Gruppen können mit dieser Vorlage Räume erstellen.",
   "AddUsersOrGroupsTitle": "Benutzer oder Gruppen hinzufügen",
   "AfterFilesWillBeDeletedPermanently": "Danach werden die Dateien dauerhaft gelöscht.",
@@ -14,7 +14,7 @@
   "AnalyzeResponses": "Antworten analysieren",
   "ArchiveAction": "Leeres Archiv",
   "ArchiveEmptyScreenUser": "Räume, die archiviert wurden, erscheinen hier.",
-  "ChangeAgentOwnerSelectorInfo": "Nur ein Raum-Admin oder Workspace-Administrator kann Besitzer des Agenten werden",
+  "ChangeAgentOwnerSelectorInfo": "Nur ein Raum-Admin oder Super-Administrator kann Besitzer des Agenten werden",
   "ChangeTheAgentOwner": "Agentenbesitzer ändern",
   "ClientSearchDecryptingNames": "Dateinamen werden entschlüsselt… {{decrypted}}/{{total}}",
   "ClientSearchPartialResults": "Der Ordner ist zu groß. Die Suchergebnisse sind möglicherweise unvollständig.",
@@ -127,7 +127,7 @@
   "TableName": "Tabellenname",
   "Template": "Vorlage",
   "TemplateAvailable": "Vorlage für alle verfügbar",
-  "TemplateAvailableDescription": "Alle Workspace-Administratoren und Raum-Admins können mit dieser Vorlage Räume erstellen.",
+  "TemplateAvailableDescription": "Alle Super-Administratoren und Raum-Admins können mit dieser Vorlage Räume erstellen.",
   "TemplateName": "Vorlagenname",
   "TemplateOwner": "Vorlagenbesitzer",
   "TemplateRemoved": "Ausgewählte Raumvorlagen wurden gelöscht",
@@ -143,5 +143,5 @@
   "WarningMoveToFormRoomServal": "Das Verschieben mehrerer Dateien in den Raum zum Ausfüllen von Formularen wird nicht unterstützt. Verschieben Sie jeweils ein {{ organizationName }} PDF-Formular.",
   "WillBeDeletedPermanently": "{{date}} wird dauerhaft gelöscht",
   "YouLeftTheAgent": "Sie haben den Agenten verlassen",
-  "YourUserTypeHasChanged": "Ihr Benutzertyp wurde vom Workspace-Administrator <1>{{adminName}}</1> in <1>„{{userType}}“</1> geändert."
+  "YourUserTypeHasChanged": "Ihr Benutzertyp wurde vom Super-Administrator <1>{{adminName}}</1> in <1>„{{userType}}“</1> geändert."
 }

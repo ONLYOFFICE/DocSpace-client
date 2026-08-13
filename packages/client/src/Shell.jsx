@@ -90,6 +90,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
+import { ModelUpdatedBanner } from "SRC_DIR/pages/Home/View/ModelUpdatedBanner";
 import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
 
 import config from "PACKAGE_FILE";
@@ -877,6 +878,10 @@ const Shell = ({ page = "home", ...rest }) => {
           suggestions={aiSuggestions}
         >
           <AskAIChatBridge />
+          <ModelUpdatedBanner
+            entityId={agentEntityId}
+            isAgentRoom={isInsideAgentRoom}
+          />
           {layout}
         </AiAgentProviders>
       ) : (

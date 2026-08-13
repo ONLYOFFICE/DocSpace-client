@@ -131,6 +131,8 @@
   "AIModels": "AI models",
   "AIModelsDescription": "Access a wide range of AI models through OpenRouter integration",
   "AIModelsWebSearchKnowledgeBase": "Models, Web search, Knowledge base",
+  "AIModelUpdatedDescription": "We've updated the available models. <1>{{model}}</1> has been selected automatically. Review or change the model below.",
+  "AIModelUpdatedTitle": "Model updated",
   "AINewChat": "New chat",
   "AIOpenRouterPricingNote": "<1>OpenRouter pricing</1> + 20% service fee applies to usage",
   "AIPaywallCallbackError": "Something went wrong",

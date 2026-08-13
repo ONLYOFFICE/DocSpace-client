@@ -167,18 +167,26 @@
   align-items: center;
   gap: 8px;
   min-width: 0;
+  // on a narrow screen the badges plus the "Use on this device" button leave no
+  // room for the action icons, so let them move to a line of their own
+  flex-wrap: wrap;
 }
 
 .keyItemBadges {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .keyItemActions {
   display: flex;
   align-items: center;
   gap: 8px;
+  // icons are the last thing that may be squeezed out of view
+  flex-shrink: 0;
+  margin-inline-start: auto;
 }
 
 .keyItemContent {

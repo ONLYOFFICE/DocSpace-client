@@ -1604,6 +1604,7 @@
   "PricePerAdmin": "Preis pro Admin",
   "PricePerGB": "Preis pro GB",
   "PrivateOwnerEncryptionHint": "Nur Benutzer, die bereits Mitglied dieses Raums sind und die Verschlüsselung eingerichtet haben, können Eigentümer werden.",
+  "PrivateRoomConvertNotSupported": "Dateien, die konvertiert werden müssen, können in einem privaten Raum noch nicht geöffnet werden.",
   "PrivateRoomDescription": "Alle Dateien in diesem Raum werden verschlüsselt",
   "PrivateRoomDisclosureBody": "Die Verschlüsselung läuft vollständig in Ihrem Browser, sodass Dateien nur von den von Ihnen eingeladenen Personen gelesen werden können. Sie vertrauen dem Code, den Ihr {{productName}}-Portal bereitstellt — sperren Sie Ihre Sitzung, wenn Sie sie nicht verwenden.",
   "PrivateRoomDisclosureDismiss": "Verstanden",

@@ -3,7 +3,7 @@
   "content": "Passphrase strength",
   "content_en_sha1_hash": "29ff795bc9908162325ebb890c04caf35c401e91",
   "created_at": "2026-07-27T13:07:25.831Z",
-  "updated_at": "2026-07-31T12:36:29.597Z",
+  "updated_at": "2026-08-13T10:58:03.342Z",
   "comment": {
     "text": "Label in the passphrase modal that precedes the dynamically calculated strength value.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 286,
+      "line_number": 296,
       "context": "</FieldContainer>\n \n {strengthResult ? (\n <div className={styles.strengthRow}>\n <Text fontSize=\"12px\" color=\"var(--text-secondary)\">\n {t(\"Common:PassphraseStrengthLabel\")}:{\" \"}\n </Text>\n <Text\n fontSize=\"12px\"\n fontWeight={600}\n color={STRENGTH_COLOR[strengthResult.strength]}",
       "module": "/packages/shared"
     }

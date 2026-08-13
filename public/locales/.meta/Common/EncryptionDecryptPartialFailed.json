@@ -3,7 +3,7 @@
   "content": "Failed to decrypt: {{fileNames}}",
   "content_en_sha1_hash": "745a9188ac06761ccb61228d2d824b9b7e6feb5a",
   "created_at": "2026-06-09T00:00:00.000Z",
-  "updated_at": "2026-06-09T11:32:15.371Z",
+  "updated_at": "2026-08-13T10:58:03.319Z",
   "comment": {
     "text": "Warning toast listing the encrypted files that could not be decrypted while the remaining files were still downloaded as a zip.",
     "is_auto": false,
@@ -16,6 +16,12 @@
       "line_number": 231,
       "context": "});\n triggerFileDownload(zipBlob, zipFileName);\n \n if (failedNames.length > 0) {\n toastr.warning(\n t(\"Common:EncryptionDecryptPartialFailed\", {\n fileNames: failedNames.join(\", \"),\n }),\n );\n }\n } catch (error) {",
       "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/shared/components/media-viewer/MediaViewer.tsx",
+      "line_number": 549,
+      "context": "return;\n }\n console.error(\"[MediaViewer] Decryption error:\", error.message);\n onDecryptionError?.(error.message);\n setDecryptionError(\n t(\"Common:EncryptionDecryptPartialFailed\", { fileNames: title }),\n );\n }\n } finally {\n if (EncryptedAbortSignalRef.current === controller) {\n setIsDecrypting(false);",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

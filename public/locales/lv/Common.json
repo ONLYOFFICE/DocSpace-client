@@ -1604,6 +1604,7 @@
   "PricePerAdmin": "Cena par administratoru",
   "PricePerGB": "Cena par GB",
   "PrivateOwnerEncryptionHint": "Par īpašnieku var kļūt tikai lietotāji, kuri jau ir šīs telpas dalībnieki un ir iestatījuši šifrēšanu.",
+  "PrivateRoomConvertNotSupported": "Failus, kuriem nepieciešama konvertēšana, privātajā telpā vēl nevar atvērt.",
   "PrivateRoomDescription": "Visi faili šajā telpā tiks šifrēti",
   "PrivateRoomDisclosureBody": "Šifrēšana pilnībā darbojas jūsu pārlūkprogrammā, tāpēc failus var lasīt tikai jūsu uzaicinātie cilvēki. Jūs paļaujaties uz kodu, ko nodrošina jūsu {{productName}} portāls — bloķējiet savu sesiju, kad to neizmantojat.",
   "PrivateRoomDisclosureDismiss": "Sapratu",

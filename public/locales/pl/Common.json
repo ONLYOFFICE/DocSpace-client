@@ -1604,6 +1604,7 @@
   "PricePerAdmin": "Cena za administratora",
   "PricePerGB": "Cena za GB",
   "PrivateOwnerEncryptionHint": "Właścicielem mogą zostać wyłącznie użytkownicy, którzy są już członkami tego pokoju i skonfigurowali szyfrowanie.",
+  "PrivateRoomConvertNotSupported": "Plików wymagających konwersji nie można jeszcze otworzyć w pokoju prywatnym.",
   "PrivateRoomDescription": "Wszystkie pliki w tym pokoju będą szyfrowane",
   "PrivateRoomDisclosureBody": "Szyfrowanie odbywa się w całości w przeglądarce, więc pliki mogą odczytać tylko zaproszone przez Ciebie osoby. Polegasz na kodzie dostarczanym przez Twój portal {{productName}} — blokuj sesję, gdy z niej nie korzystasz.",
   "PrivateRoomDisclosureDismiss": "Rozumiem",

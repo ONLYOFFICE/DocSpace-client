@@ -54,6 +54,7 @@ import {
   isPasskeyUnlockAvailable,
   removePasskeyUnlock,
 } from "@docspace/shared/services/encryption/passkey-unlock";
+import { getActiveKeyId } from "@docspace/shared/services/encryption/active-key-preference";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 import { getEncryptionKeys } from "@docspace/shared/api/privacy";
@@ -275,6 +276,7 @@ const KeysManagement = ({
     <div className={styles.sectionBody}>
       <KeysList
         keys={encryptionKeys || []}
+        activeKeyId={getActiveKeyId(userId)}
         onDelete={remove.request}
         onExport={exportFlow.request}
         onRotate={rotate.request}

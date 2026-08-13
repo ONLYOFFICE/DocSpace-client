@@ -17,11 +17,11 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-06-15T19:31:55.992Z",
+  "updated_at": "2026-08-13T10:58:03.102Z",
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 274,
+      "line_number": 275,
       "context": "{isRoomDelete || isTemplate || isAIAgent ? (\n <Checkbox\n style={{ marginTop: \"16px\" }}\n label={\n isAIAgent\n ? t(\"Common:DeleteAIAgentWarning\")\n : isTemplate\n ? t(\"DeleteTemplateWarning\")\n : t(\"Common:DeleteRoomWarning\")\n }\n dataTestId=\"delete_warning_checkbox\"",
       "module": "/packages/client"
     }

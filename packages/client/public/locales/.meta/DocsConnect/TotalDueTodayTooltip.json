@@ -3,7 +3,7 @@
   "content": "Today, you're only paying for the selected amount of users for the remaining days until your billing date. Moving forward, the full amount will be charged once per billing cycle on your regular billing date.",
   "content_en_sha1_hash": "eff0a1abdd4aea7288b6ab5b56a8b60878d07d97",
   "created_at": "2026-07-27T13:07:48.523Z",
-  "updated_at": "2026-08-06T14:20:57.624Z",
+  "updated_at": "2026-08-13T10:58:03.219Z",
   "comment": {
     "text": "Tooltip for a HelpButton in the plan upgrade panel that explains how prorated charges are calculated for the remaining days of the current cycle compared to future billing dates.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 1020,
+      "line_number": 1058,
       "context": "</Text>\n {isUpgrade ? (\n <HelpButton\n size={12}\n tooltipContent={t(\n \"DocsConnect:TotalDueTodayTooltip\",\n )}\n tooltipMaxWidth=\"320px\"\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     }

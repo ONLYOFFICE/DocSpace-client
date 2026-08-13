@@ -3,7 +3,7 @@
   "content": "These {{itemCount}} items will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "d7d4e0a69435ccf62fe4bedee43b8a740d981d18",
   "created_at": "2026-04-03T21:51:27.569Z",
-  "updated_at": "2026-06-03T09:30:05.144Z",
+  "updated_at": "2026-08-13T10:58:03.098Z",
   "comment": {
     "text": "This is a confirmation message in a dialog box, displayed when a user attempts to permanently delete multiple items from the trash. The `{{itemCount}}` variable represents the number of items being deleted.",
     "is_auto": true,
@@ -12,9 +12,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 152,
+      "context": "<strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {t(\"Common:DeleteItemForever\")}\n </>\n ) : (\n t(\"Common:DeleteItemsForever\", { itemCount: selection.length })\n );\n }\n \n if (isRecycleBinFolder || isThirdParty) {\n if (isSingle) {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
-      "line_number": 74,
-      "context": "sectionName: t(\"Common:TrashSection\"),\n })\n : isTrash\n ? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });\n \n const header = isEmptyTrash",
+      "line_number": 87,
+      "context": "sectionName: t(\"Common:TrashSection\"),\n });\n case \"permanent-one\":\n return t(\"Common:DeleteItemForever\");\n case \"permanent-many\":\n return t(\"Common:DeleteItemsForever\", { itemCount });\n case \"trash-one\":\n return t(\"Common:MoveToTrashItem\");\n default:\n return t(\"Common:MoveToTrashItems\", { itemCount });\n }",
       "module": "/packages/sdk"
     }
   ],

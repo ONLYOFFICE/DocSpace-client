@@ -1,23 +1,15 @@
 {
   "key_path": "EnableThirdPartyIntegration",
-  "content": "Please ask the owner or Full admin to enable the corresponding service in the Integration section of the {{productName}} Settings.",
-  "content_en_sha1_hash": "35cc8028c67a93eba9ed9f8965237dea2c4d0ab5",
-  "created_at": "2026-08-13T14:36:49.060Z",
-  "updated_at": "2026-08-13T14:51:14.318Z",
+  "content": "Please ask the owner or Full admin to enable the corresponding service in the Integration section of the workspace Settings.",
+  "content_en_sha1_hash": "4833e13588a99dee0cd1fba69e4867a8837b5e07",
+  "created_at": "2026-08-13T22:44:03.058Z",
+  "updated_at": "2026-08-13T22:44:03.058Z",
   "comment": {
-    "text": "Tooltip providing instructions when a third-party integration is disabled; includes the {{productName}} variable representing the product brand name.",
-    "is_auto": true,
-    "updated_at": "2026-08-13T14:51:14.318Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.tsx",
-      "line_number": 216,
-      "context": "};\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:EnableThirdPartyIntegration\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n );\n };",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

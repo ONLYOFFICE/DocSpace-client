@@ -1,35 +1,15 @@
 {
   "key_path": "TypesAndPrivileges",
-  "content": "<1>Admin account types and their privileges</1> <br> <br> <2>Full admin</2> <br> workspace configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
-  "content_en_sha1_hash": "4cc80033cf158a2a70ca49870ba13569880314df",
-  "created_at": "2026-08-13T14:37:16.751Z",
-  "updated_at": "2026-08-13T15:14:21.189Z",
+  "content": "<1>Admin account types and their privileges</1> <br> <br> <2>Full admin</2> <br> Workspace configuration, room creation and administration, ability to invite and manage users in the workspace and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
+  "content_en_sha1_hash": "bf7d3966b7fc9152ea6ee601c9a4e4f8be794a21",
+  "created_at": "2026-08-13T22:44:30.209Z",
+  "updated_at": "2026-08-13T22:44:30.209Z",
   "comment": {
-    "text": "Tooltip content describing different admin account types and their associated privileges within {{productName}}. It uses HTML tags for formatting (bolding) and line breaks.",
-    "is_auto": true,
-    "updated_at": "2026-08-13T15:14:21.189Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 106,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 118,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 111,
-      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <b />,",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,23 +1,15 @@
 {
   "key_path": "Desc",
-  "content": "Please set up the {{productName}} registration data.",
-  "content_en_sha1_hash": "c7fc53679936995e7ecb0e59d672851680ebeb4e",
-  "created_at": "2025-05-19T21:30:57.202Z",
-  "updated_at": "2026-06-16T16:35:30.037Z",
+  "content": "Please set up the workspace registration data.",
+  "content_en_sha1_hash": "a65c6ba9ebcf2f1f4c7c7b74594fd64a7c9cc8a9",
+  "created_at": "2026-08-13T22:44:34.125Z",
+  "updated_at": "2026-08-13T22:44:34.125Z",
   "comment": {
-    "text": "This is a header text displayed during the initial setup wizard for DocSpace. It prompts the user to configure their registration details, with `{{productName}}` being replaced by the product's brand name.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:31:30.033Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 341,
-      "context": "};\n \n return (\n <div className={styles.wizardContainer}>\n <Text fontWeight={600} fontSize=\"16px\" className={styles.formHeader}>\n {t(\"Wizard:Desc\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <FieldContainer\n className={styles.wizardField}\n isVertical\n labelVisible={false}",
-      "module": "/packages/login"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,23 +1,15 @@
 {
   "key_path": "PortalContinueTitle",
-  "content": "Please confirm that you want to reactivate your {{productName}}.",
-  "content_en_sha1_hash": "b4ea02b637f11634d209f1fb02aba2818a070211",
-  "created_at": "2025-05-19T21:30:57.378Z",
-  "updated_at": "2026-05-15T14:00:06.910Z",
+  "content": "Please confirm that you want to reactivate your workspace.",
+  "content_en_sha1_hash": "6562ad588075431e44a5c80ce3507d7b0f3ee9d8",
+  "created_at": "2026-08-13T22:44:34.286Z",
+  "updated_at": "2026-08-13T22:44:34.286Z",
   "comment": {
-    "text": "This is the title of a confirmation dialog. It appears when a user is reactivating their account and asks them to confirm the action. `{{productName}}` will be replaced with the product's brand name.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:30:09.627Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx",
-      "line_number": 99,
-      "context": "</Trans>\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"PortalContinueTitle\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <div className={styles.buttonsWrapper}>\n <Button",
-      "module": "/packages/login"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

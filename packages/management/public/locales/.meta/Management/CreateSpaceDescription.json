@@ -1,23 +1,15 @@
 {
   "key_path": "CreateSpaceDescription",
-  "content": "You have successfully connected your domain to your IP address. To edit the workspace address settings, you need to set the future {{productName}} name",
-  "content_en_sha1_hash": "51781ce1951cfc49b2778e806a3b3da0acca2519",
-  "created_at": "2026-08-12T11:00:50.860Z",
-  "updated_at": "2026-08-12T13:48:03.166Z",
+  "content": "You have successfully connected your domain to your IP address. To edit the workspace address settings, you need to set the future workspace name",
+  "content_en_sha1_hash": "f8376f060a722a25f36c0efab8c1cb7047c3104e",
+  "created_at": "2026-08-13T22:44:34.322Z",
+  "updated_at": "2026-08-13T22:44:34.322Z",
   "comment": {
-    "text": "Body text in a modal dialog informing the user of a successful domain connection and providing instructions for editing workspace settings; includes the {{productName}} variable.",
-    "is_auto": true,
-    "updated_at": "2026-08-12T13:48:03.166Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 162,
-      "context": "<ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: getBrandName(\"ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"CreateSpaceDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <div className={styles.createPortalInputBlock}>\n <Text",
-      "module": "/packages/management"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

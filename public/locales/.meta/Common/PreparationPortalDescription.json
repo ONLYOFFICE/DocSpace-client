@@ -1,23 +1,15 @@
 {
   "key_path": "PreparationPortalDescription",
-  "content": "Once the restoring process is over, you'll be automatically redirected to {{productName}}.",
-  "content_en_sha1_hash": "b7780e427a388e611c5de1871d5e181d3f759751",
-  "created_at": "2026-08-12T11:00:32.499Z",
-  "updated_at": "2026-08-12T11:07:14.429Z",
+  "content": "Once the restoring process is over, you'll be automatically redirected to the workspace.",
+  "content_en_sha1_hash": "a163a67641584941437540f0667cc20b0399291c",
+  "created_at": "2026-08-13T22:44:15.846Z",
+  "updated_at": "2026-08-13T22:44:15.846Z",
   "comment": {
-    "text": "Informational text within a progress component on the preparation portal page, shown during the restoration process; includes a {{productName}} variable representing the product brand name.",
-    "is_auto": true,
-    "updated_at": "2026-08-12T11:07:14.429Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 163,
-      "context": "const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress\n text={t(\"Common:PreparationPortalDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n percent={percent}\n />\n );",
-      "module": "/packages/shared"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

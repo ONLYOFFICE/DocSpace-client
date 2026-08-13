@@ -1,23 +1,15 @@
 {
   "key_path": "AdministratorDescription",
-  "content": "{{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights.",
-  "content_en_sha1_hash": "fb75adc08ce94edbe31a57607ff6d19a3e2d996d",
-  "created_at": "2026-04-10T13:53:41.804Z",
-  "updated_at": "2026-08-13T14:37:21.806Z",
+  "content": "workspace configuration, room creation and administration, ability to invite and manage users in workspace and in virtual rooms, ability to manage access rights.",
+  "content_en_sha1_hash": "eb187f292856bd3c23510bd5dfa97a31a13d8bfa",
+  "created_at": "2026-08-13T22:43:51.276Z",
+  "updated_at": "2026-08-13T22:43:51.276Z",
   "comment": {
-    "text": "This is a description of the Administrator role's permissions, appearing on a billing or user management page. It lists the administrative capabilities within the product, with `{{productName}}` being replaced by the product's brand name.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:00:51.677Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 155,
-      "context": "{t(\"PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text>\n {t(\"AdministratorDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"RoomAdmin\")}</Text>",
-      "module": "/libs/ui-kit"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

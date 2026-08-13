@@ -1,23 +1,15 @@
 {
   "key_path": "DisableGuestsDescription",
-  "content": "If you disable these guests, they won’t be able to log in to {{productName}}.",
-  "content_en_sha1_hash": "a0962aa99cc36e50610e49a6c158b9dfd0740163",
-  "created_at": "2025-05-19T21:30:56.952Z",
-  "updated_at": "2026-05-15T14:00:06.646Z",
+  "content": "If you disable these guests, they won’t be able to log in to the workspace.",
+  "content_en_sha1_hash": "5f26b287fbbcbc9f3c0521adc768bef17c56060a",
+  "created_at": "2026-08-13T22:44:32.880Z",
+  "updated_at": "2026-08-13T22:44:32.880Z",
   "comment": {
-    "text": "This is a body text within a confirmation dialog. It appears when an administrator is about to disable multiple guest users. The `{{productName}}` variable will be replaced with the product's brand name.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:03:49.013Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 184,
-      "context": "bodyText = onlyOneUser\n ? isGuests\n ? t(\"DisableGuestDescription\", { productName: getBrandName(\"ProductName\") })\n : t(\"DisableUserDescription\", { productName: getBrandName(\"ProductName\") })\n : isGuests\n ? t(\"DisableGuestsDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"DisableUsersDescription\", {\n productName: getBrandName(\"ProductName\"),\n });",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

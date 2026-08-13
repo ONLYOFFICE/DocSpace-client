@@ -1,23 +1,15 @@
 {
   "key_path": "RecoveryKitWhatText",
-  "content": "This {{wordCount}}-word phrase is the only way to restore access to your encrypted files if you forget your passphrase. {{productName}} cannot recover it for you.",
-  "content_en_sha1_hash": "ac5c843307e3ba5e11e587af8b3c661118850b46",
-  "created_at": "2026-07-27T13:07:29.718Z",
-  "updated_at": "2026-07-27T13:16:38.335Z",
+  "content": "This {{wordCount}}-word phrase is the only way to restore access to your encrypted files if you forget your passphrase. {{organizationName}} {{productName}} cannot recover it for you.",
+  "content_en_sha1_hash": "9ae2da3bd0685f5d343466315ea66b1d62740ac7",
+  "created_at": "2026-08-13T22:44:17.573Z",
+  "updated_at": "2026-08-13T22:44:17.573Z",
   "comment": {
-    "text": "Subtitle in a modal dialog explaining the importance of the recovery phrase; contains {{wordCount}} as a number and {{productName}} as the application name.",
-    "is_auto": true,
-    "updated_at": "2026-07-27T13:16:38.335Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
-      "line_number": 114,
-      "context": "subtitle: t(\"Common:RecoveryKitSubtitle\"),\n createdLabel: t(\"Common:ByCreation\"),\n accountLabel: t(\"Common:Account\"),\n phraseLabel: t(\"Common:RecoveryKitPhraseLabel\"),\n whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),\n howText: t(\"Common:RecoveryKitHowText\", {",
-      "module": "/packages/shared"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

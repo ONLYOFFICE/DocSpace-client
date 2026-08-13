@@ -1,23 +1,15 @@
 {
   "key_path": "ConsentDescription",
-  "content": "Data shared with <strong>{{displayName}}</strong> will be governed by <strong>{{nameApp}}</strong> <6>privacy policy</6> and <6>terms of service</6>. You can revoke this consent at any time in your {{productName}} account settings.",
-  "content_en_sha1_hash": "adb9c93b661c124ad0f90e380ee2a371dc3d7df3",
-  "created_at": "2025-05-19T21:30:57.323Z",
-  "updated_at": "2026-05-15T14:00:06.915Z",
+  "content": "Data shared with <strong>{{displayName}}</strong> will be governed by <strong>{{nameApp}}</strong> <6>privacy policy</6> and <6>terms of service</6>. You can revoke this consent at any time in your {{organizationName}} {{productName}} account settings.",
+  "content_en_sha1_hash": "2b282892bc702e579b0d1231408ec43c451795ba",
+  "created_at": "2026-08-13T22:44:34.224Z",
+  "updated_at": "2026-08-13T22:44:34.224Z",
   "comment": {
-    "text": "This is a paragraph of text explaining the data sharing consent. It appears on the consent page and informs the user about the privacy policy and terms of service of the application (`nameApp`) with which data is shared (`displayName`). It also mentions that consent can be revoked in the `productName` account settings.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:30:39.661Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
-      "line_number": 250,
-      "context": "testId=\"consent_deny_button\"\n />\n </div>\n <div className={styles.descriptionContainer}>\n <Text fontWeight={400} fontSize=\"13px\" lineHeight=\"20px\">\n <Trans t={t} i18nKey=\"ConsentDescription\" ns=\"Consent\">\n Data shared with {{ displayName: user.displayName }} will be\n governed by {{ nameApp: client.name }}\n <Link\n className=\"login-link\"\n type={LinkType.page}",
-      "module": "/packages/login"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

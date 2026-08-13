@@ -14,8 +14,6 @@
   "FormsInProgressTitle": "Started, not finished",
   "FormsItem": "Every row is a whole collection. Open one to work inside it, pin the ones you are running, or use the three dots to invite people, copy the link that opens the form, and save the setup as a template.",
   "FormsItemTitle": "Working with a form space",
-  "FormsOpenSpace": "Let's open this one and see how a collection is put together. Inside every form space are the same three things: the form itself, the answers still being written, and the ones already in.",
-  "FormsOpenSpaceTitle": "Step inside a form space",
   "FormsPlacesRecent": "{{recent}} and {{favorites}} keep the collections you are running at hand.",
   "FormsPlacesTemplates": "{{templates}} — the form space templates you saved.",
   "FormsPlacesTitle": "Everything in its place",

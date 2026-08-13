@@ -221,6 +221,10 @@ class PaymentStore {
     });
   }
 
+  get isStripeCheckoutRequired() {
+    return this.isCardMissingOrInactive;
+  }
+
   get storageSizeIncrement() {
     return (
       (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)

@@ -1,23 +1,15 @@
 {
   "key_path": "SessionLifetimeMobileDescription",
-  "content": "Session Lifetime allows to set time (in minutes) before the workspace users will need to enter the workspace credentials again in order to access the workspace.",
-  "content_en_sha1_hash": "5e122157476d0784e0c265a2fb7a3f1d7a8a6013",
-  "created_at": "2026-08-13T14:37:16.551Z",
-  "updated_at": "2026-08-13T15:15:03.335Z",
+  "content": "Session Lifetime allows to set time (in minutes) before workspace users will need to enter their credentials again in order to access the workspace.",
+  "content_en_sha1_hash": "f4feec17b93a7d3f83cf8e65a90258c256a15ff9",
+  "created_at": "2026-08-14T09:26:28.744Z",
+  "updated_at": "2026-08-14T09:26:28.744Z",
   "comment": {
-    "text": "Subtitle for a category item in mobile security settings explaining the duration of user sessions before re-authentication is required.",
-    "is_auto": true,
-    "updated_at": "2026-08-13T15:15:03.335Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 150,
-      "context": "url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"SessionLifetime\")}\n subtitle={t(\"SessionLifetimeMobileDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url=\"/portal-settings/security/access-portal/lifetime\"\n onClickLink={onClickLink}\n />",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

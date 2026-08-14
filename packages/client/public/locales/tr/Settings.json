@@ -276,7 +276,7 @@
   "SendInviteLetter": "Davet mektubu gönder",
   "Services": "Hizmetler",
   "SessionLifetime": "Oturum Ömrü",
-  "SessionLifetimeMobileDescription": "Oturum Ömrü, çalışma alanı kullanıcılarının çalışma alanına tekrar erişebilmeleri için çalışma alanı kimlik bilgilerini yeniden girmeleri gereken süreyi (dakika bazında) ayarlamanıza olanak tanır.",
+  "SessionLifetimeMobileDescription": "Oturum Ömrü, çalışma alanı kullanıcılarının çalışma alanına tekrar erişebilmeleri için kimlik bilgilerini yeniden girmeleri gereken süreyi (dakika bazında) ayarlamanıza olanak tanır.",
   "SessionLifetimeSettingDescription": "Otomatik oturum kapatmadan önceki süreyi tanımlamak için Oturum Ömrü ayarlayın. Kaydettikten sonra tüm kullanıcılar için oturum kapatma işlemi gerçekleştirilecektir.",
   "SetDefaultAIAgentQuota": "Bu çalışma alanındaki {{aiAgents}} için varsayılan depolama kotasını ayarlayın. Daha sonra ayarlarda değiştirilebilir veya her AI ajanı oluşturulurken ayrı ayrı özelleştirilebilir.",
   "SetDefaultRoomQuota": "Bu çalışma alanındaki odalar için varsayılan depolama kotasını ayarlayın. Bu, daha sonra oda yöneticisi tarafından her oda için ayrı ayrı ayarlanabilir.",

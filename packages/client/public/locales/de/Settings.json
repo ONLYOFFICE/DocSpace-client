@@ -276,7 +276,7 @@
   "SendInviteLetter": "Einladungsbrief senden",
   "Services": "Dienste",
   "SessionLifetime": "Lebensdauer der Sitzung",
-  "SessionLifetimeMobileDescription": "Sitzungsdauer erlaubt es, die Zeit (in Minuten) festzulegen, bevor die Benutzer des Arbeitsbereichs die Zugangsdaten des Arbeitsbereichs erneut eingeben müssen, um auf den Arbeitsbereich zugreifen zu können.",
+  "SessionLifetimeMobileDescription": "Sitzungsdauer erlaubt es, die Zeit (in Minuten) festzulegen, bevor die Benutzer des Arbeitsbereichs ihre Zugangsdaten erneut eingeben müssen, um auf den Arbeitsbereich zugreifen zu können.",
   "SessionLifetimeSettingDescription": "Stellen Sie die Sitzungsdauer ein, um die Zeitspanne bis zur automatischen Abmeldung festzulegen. Nach dem Speichern wird die Abmeldung für alle Benutzer durchgeführt.",
   "SetDefaultAIAgentQuota": "Legen Sie das Standard-Speicherkontingent für {{aiAgents}} in diesem Arbeitsbereich fest. Es kann später in den Einstellungen angepasst oder beim Erstellen jedes KI-Agenten individuell angepasst werden.",
   "SetDefaultRoomQuota": "Legen Sie die Standardspeicherquote für Räume in diesem Arbeitsbereich fest. Sie kann später für jeden Raum individuell vom Raumadministrator angepasst werden.",

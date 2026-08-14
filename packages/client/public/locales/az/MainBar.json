@@ -20,7 +20,7 @@
   "StorageAndUserHeader": "Yaddaş və administratorlar limitləri aşmaq üzrədir.",
   "StorageAndUserTariffLimitHeader": "Yaddaş sahəsi və administrator limiti çatdı",
   "StorageLimitHeader": "Yaddaş limitinə çatıldı: {{currentValue}} / {{maxValue}}",
-  "StorageQuotaHeader": "Yaddaş sahəsinin həcmi keçmək üzrədir : {{currentValue}} / {{maxValue}}",
+  "StorageQuotaHeader": "Yaddaş sahəsinin həcmi keçmək üzrədir: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "<1>Yaddaş idarəetmə parametrlərində</1> lazımsız faylları silə və ya kvotanı dəyişə bilərsiniz.",
   "UserQuotaHeader": "Admin sayı keçmək üzrədir: {{currentValue}} / {{maxValue}}.",
   "UserTariffAlmostReached": "Limit çatdıqda bütün istifadəçilər yalnız İstifadəçi icazələri ilə əlavə ediləcək. Daha çox administrator əlavə edə bilmək üçün tarif planını təkmilləşdirmək məqsədilə super administratora müraciət edin.",

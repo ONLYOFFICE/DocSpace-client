@@ -80,7 +80,7 @@
   "AdvancedSettings": "Geavanceerde Instellingen",
   "AgentCover": "Agent-afbeelding",
   "AgentInfo": "Agent informatie",
-  "AgentInViewModeWarning": "U bevindt zich in de <strong>alleen-lezen</strong>-modus voor deze . U kunt de resultaten van de {{aiChat}}-activiteit van andere gebruikers zien.",
+  "AgentInViewModeWarning": "U bevindt zich in de <strong>alleen-lezen</strong>-modus voor deze AI-agent. U kunt de resultaten van de {{aiChat}}-activiteit van andere gebruikers zien.",
   "AgentManager": "Agentmanager",
   "AgentName": "Agent naam",
   "AgentOwner": "Agent eigenaar",

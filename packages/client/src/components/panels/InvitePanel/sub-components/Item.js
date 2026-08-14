@@ -85,25 +85,25 @@ import {
 } from "../utils";
 
 const Item = ({
-	t,
-	item,
-	index,
-	setInviteItems,
-	inviteItems,
-	changeInviteItem,
-	setHasErrors,
-	roomType,
-	isOwner,
-	isAdmin,
-	inputsRef,
-	setIsOpenItemAccess,
-	isMobileView,
-	standalone,
-	isUserTariffLimit,
-	roomId,
-	hideSelector,
-	style,
-	allowInvitingGuests,
+  t,
+  item,
+  index,
+  setInviteItems,
+  inviteItems,
+  changeInviteItem,
+  setHasErrors,
+  roomType,
+  isOwner,
+  isAdmin,
+  inputsRef,
+  setIsOpenItemAccess,
+  isMobileView,
+  standalone,
+  isUserTariffLimit,
+  roomId,
+  hideSelector,
+  style,
+  allowInvitingGuests,
 }) => {
   const {
     avatar,
@@ -269,9 +269,9 @@ const Item = ({
   const saveEdit = async () => {
     if (searchRequestRunning) return;
 
-		if (isSharedUser) {
-			return toastr.warning(t("Common:UsersAlreadyAdded"));
-		}
+    if (isSharedUser) {
+      return toastr.warning(t("Common:UsersAlreadyAdded"));
+    }
 
     const value = inputValue === "" ? name : inputValue;
 
@@ -351,78 +351,78 @@ const Item = ({
         ) : null}
       </div>
 
-			{hasError || hasNotFoundEmail ? (
-				<div className={styles.errorWrapper}>
-					<HelpButton
-						className={styles.helpButton}
-						iconName={InfoEditReactSvgUrl}
-						displayType="auto"
-						offsetRight={0}
-						tooltipContent={
-							hasNotFoundEmail
-								? t("Common:EmailErrorMessageUserNotFound")
-								: t("Common:EmailErrorMessage")
-						}
-						openOnClick={false}
-						size={16}
-						color="--warning-color"
-					/>
-					<DeleteIcon
-						className={classNames(styles.rowIcons, {
-							[styles.isClicked]: true,
-						})}
-						size="medium"
-						onClick={removeItem}
-						data-testid="invite_panel_item_delete_button"
-					/>
-				</div>
-			) : hideSelector ? (
-				<div className={styles.deleteWrapper}>
-					<DeleteIcon
-						className={classNames(styles.rowIcons, {
-							[styles.isClicked]: true,
-						})}
-						size="medium"
-						onClick={removeItem}
-						data-testid="invite_panel_item_delete_button"
-					/>
-				</div>
-			) : (
-				<div className={styles.roleAccess}>
-					{warning ? (
-						<div className={styles.roleWarning}>
-							<HelpButton
-								className={styles.helpButton}
-								tooltipContent={warning}
-								iconName={InfoRoleSvgUrl}
-								size={16}
-							/>
-						</div>
-					) : null}
-					<AccessSelector
-						className="user-access"
-						t={t}
-						roomType={roomType}
-						defaultAccess={defaultAccess?.access}
-						onSelectAccess={selectItemAccess}
-						containerRef={inputsRef}
-						isOwner={isOwner}
-						withRemove
-						filteredAccesses={filteredAccesses}
-						setIsOpenItemAccess={setIsOpenItemAccess}
-						isMobileView={isMobileView}
-						noBorder
-						dataTestId="invite_panel_item_access_selector"
-						{...((roomId === -1 || !avatar || isVisitor) && {
-							isSelectionDisabled: isUserTariffLimit,
-							selectionErrorText: <PaidQuotaLimitError />,
-							availableAccess,
-						})}
-					/>
-				</div>
-			)}
-		</>
-	);
+      {hasError || hasNotFoundEmail ? (
+        <div className={styles.errorWrapper}>
+          <HelpButton
+            className={styles.helpButton}
+            iconName={InfoEditReactSvgUrl}
+            displayType="auto"
+            offsetRight={0}
+            tooltipContent={
+              hasNotFoundEmail
+                ? t("Common:EmailErrorMessageUserNotFound")
+                : t("Common:EmailErrorMessage")
+            }
+            openOnClick={false}
+            size={16}
+            color="--warning-color"
+          />
+          <DeleteIcon
+            className={classNames(styles.rowIcons, {
+              [styles.isClicked]: true,
+            })}
+            size="medium"
+            onClick={removeItem}
+            data-testid="invite_panel_item_delete_button"
+          />
+        </div>
+      ) : hideSelector ? (
+        <div className={styles.deleteWrapper}>
+          <DeleteIcon
+            className={classNames(styles.rowIcons, {
+              [styles.isClicked]: true,
+            })}
+            size="medium"
+            onClick={removeItem}
+            data-testid="invite_panel_item_delete_button"
+          />
+        </div>
+      ) : (
+        <div className={styles.roleAccess}>
+          {warning ? (
+            <div className={styles.roleWarning}>
+              <HelpButton
+                className={styles.helpButton}
+                tooltipContent={warning}
+                iconName={InfoRoleSvgUrl}
+                size={16}
+              />
+            </div>
+          ) : null}
+          <AccessSelector
+            className="user-access"
+            t={t}
+            roomType={roomType}
+            defaultAccess={defaultAccess?.access}
+            onSelectAccess={selectItemAccess}
+            containerRef={inputsRef}
+            isOwner={isOwner}
+            withRemove
+            filteredAccesses={filteredAccesses}
+            setIsOpenItemAccess={setIsOpenItemAccess}
+            isMobileView={isMobileView}
+            noBorder
+            dataTestId="invite_panel_item_access_selector"
+            {...((roomId === -1 || !avatar || isVisitor) && {
+              isSelectionDisabled: isUserTariffLimit,
+              selectionErrorText: <PaidQuotaLimitError />,
+              availableAccess,
+            })}
+          />
+        </div>
+      )}
+    </>
+  );
 
   const okIcon = <CheckIcon className={styles.rowIcons} size="scale" />;
   const cancelIcon = <CrossIcon className={styles.rowIcons} size="scale" />;

@@ -295,7 +295,7 @@
   "StorageManagement": "ආචයන කළමනාකරණය",
   "StorageManagementRegion": "ඔබගේ දත්ත ආරක්ෂිත ප්‍රමිතීන්ට අනුකූල වන ආරක්ෂිත සේවයක මත ගබඩා කර ඇත.",
   "StoragePeriod": "ආචයන කාලසීමාව",
-  "StorageQuotaWarningDescription": "මෙම වැඩ අවකාශය සඳහා ගබඩා කෝටාව සක්‍රීය කර ඇත: {{quotaLimits}} . දත්ත ආනයනය කිරීමේදී සීමාවන් ඇති විය හැක.",
+  "StorageQuotaWarningDescription": "මෙම වැඩ අවකාශය සඳහා ගබඩා කෝටාව සක්‍රීය කර ඇත: {{quotaLimits}}. දත්ත ආනයනය කිරීමේදී සීමාවන් ඇති විය හැක.",
   "StudioTimeLanguageSettings": "භාෂාව සහ වේලා කලාපයේ සැකසුම්",
   "Submit": "යොමන්න",
   "SuccessfullySaveGreetingSettingsMessage": "පිළිගැනීමේ පිටුවේ සැකසුම් සාර්ථකව සුරැකිණි",

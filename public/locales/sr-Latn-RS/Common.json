@@ -80,7 +80,7 @@
   "AdvancedSettings": "Napredna podešavanja",
   "AgentCover": "Naslovna slika agenta",
   "AgentInfo": "Informacije o agentu",
-  "AgentInViewModeWarning": "Vi ste u <strong>samo za pregled</strong> režimu za ovaj . Možete videti rezultate aktivnosti {{aiChat}} drugih korisnika.",
+  "AgentInViewModeWarning": "Vi ste u <strong>samo za pregled</strong> režimu za ovog AI agenta. Možete videti rezultate aktivnosti {{aiChat}} drugih korisnika.",
   "AgentManager": "Upravljanje agentima",
   "AgentName": "Ime agenta",
   "AgentOwner": "Vlasnik agenta",

@@ -1,6 +1,6 @@
 {
   "ChangeContactType": "Promeni tip kontakta",
-  "ChangeGuestsTypeMessage": "Gost <strong>{{userName}}</strong> će biti premešten u odeljak {{membersSection}} i dobiće tip Korisnika. Korisnici imaju sopstveni odeljak za {{documentsSection}} , mogu kreirati i uređivati fajlove, ali ne mogu kreirati sobe.",
+  "ChangeGuestsTypeMessage": "Gost <strong>{{userName}}</strong> će biti premešten u odeljak {{membersSection}} i dobiće tip Korisnika. Korisnici imaju sopstveni odeljak za {{documentsSection}}, mogu kreirati i uređivati fajlove, ali ne mogu kreirati sobe.",
   "ChangeGuestsTypeMessageMulti": "Izabrani gosti će biti premešteni u odeljak {{membersSection}} i dobiće tip Korisnika. Korisnici imaju sopstveni odeljak za {{documentsSection}}, mogu kreirati i uređivati fajlove, ali ne mogu kreirati sobe.",
   "ChangeGuestsTypeToAdmin": "Gost <strong>{{userName}}</strong> biće premešten u {{membersSection}} sekciju i dodeljen mu je <strong>'{{ secondType }}'</strong> tip. Superadministratori mogu pristupiti podešavanjima, upravljati sobama i arhivirati ih, pozivati nove korisnike i dodeljivati uloge ispod svog nivoa. Superadministratori imaju pristup {{documentsSection}} sekciji.",
   "ChangeGuestsTypeToAdminMulti": "Izabrani gosti biće premešteni u {{membersSection}} sekciju i biće im dodeljen <strong>'{{ secondType }}'</strong> tip. Superadministratori mogu pristupiti podešavanjima, upravljati sobama i arhivirati ih, pozivati nove korisnike i dodeljivati uloge ispod svog nivoa. Superadministratori imaju pristup {{documentsSection}} sekciji.",

@@ -80,7 +80,7 @@
   "AdvancedSettings": "Ustawienia zaawansowane",
   "AgentCover": "Okładka agentów",
   "AgentInfo": "Informacje o agencie",
-  "AgentInViewModeWarning": "Jesteś w trybie <strong>wyświetlania tylko do czytania</strong> dla tego . Możesz zobaczyć wyniki aktywności {{aiChat}} innych użytkowników.",
+  "AgentInViewModeWarning": "Jesteś w trybie <strong>wyświetlania tylko do czytania</strong> dla tego agenta AI. Możesz zobaczyć wyniki aktywności {{aiChat}} innych użytkowników.",
   "AgentManager": "Menedżer agentów",
   "AgentName": "Nazwa agenta",
   "AgentOwner": "Właściciel agenta",

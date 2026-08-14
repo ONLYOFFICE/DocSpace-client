@@ -45,10 +45,6 @@ const {
   moduleWorkspaces,
 } = require("../utils/files");
 
-// Pre-existing punctuation-spacing debt, frozen so the checks below can gate
-// new regressions without failing on inherited ones. Must only ever shrink.
-const punctuationAllowlist = require("./locale-punctuation-allowlist.json");
-
 let workspaces = [];
 let translationFiles = [];
 let javascriptFiles = [];
@@ -3231,13 +3227,20 @@ describe("Locales Tests", () => {
   /**
    * Neutralise spans that legitimately contain the punctuation we look for:
    * {{variables}}, URLs, ellipses and file extensions (".zip", ".xlsx").
+   *
+   * Each is replaced by a lowercase letter pair rather than removed. Removing
+   * them would manufacture the very defects we look for ("a .xlsx." collapsing
+   * to "a ."), and an upper-case stand-in would suppress real ones, because the
+   * sentence checks treat a capital before a period as an abbreviation.
    */
+  const NEUTRAL = "zz";
   const neutralise = (value) =>
     value
-      .replace(/\{\{[^}]+\}\}/g, "X")
-      .replace(/https?:\/\/\S+/g, "U")
-      .replace(/\.{2,}/g, " ")
-      .replace(/[^\S\n]\.[a-z0-9]{2,5}(?![a-z0-9])/gi, " ");
+      .replace(/\{\{[^}]+\}\}/g, NEUTRAL)
+      .replace(/https?:\/\/\S+/g, NEUTRAL)
+      .replace(/\.{2,}/g, NEUTRAL)
+      // a file extension, including one that opens the string (".DOCX file")
+      .replace(/(^|[^\S\n])\.[a-z0-9]{2,5}(?![a-z0-9])/gi, `$1${NEUTRAL}`);
 
   it("NewlineConsistencyTest: Verify that translations keep the same number of line breaks as the English source.", () => {
     // A \n in a value is deliberate paragraph structure: the UI renders each
@@ -3348,7 +3351,6 @@ describe("Locales Tests", () => {
     // English has the same spacing (".DOCX file"), the translation may keep it.
     // French legitimately spaces ':', ';', '!' and '?'.
     const enValues = buildEnValues();
-    const allowed = new Set(punctuationAllowlist.spaceBeforePunctuation);
     const found = [];
 
     translationFiles.forEach((file) => {
@@ -3358,8 +3360,6 @@ describe("Locales Tests", () => {
       file.translations.forEach((t) => {
         if (typeof t.value !== "string" || !t.value.length) return;
         const id = `${file.language} ${file.namespace}:${t.key}`;
-        if (allowed.has(id)) return;
-
         const actual = (neutralise(t.value).match(pattern) || []).length;
         if (!actual) return;
 
@@ -3397,11 +3397,22 @@ describe("Locales Tests", () => {
       "ar-SA",
     ]);
     const enValues = buildEnValues();
-    const allowed = new Set(punctuationAllowlist.missingSpaceAfterSentence);
     // A terminator followed straight by a capital. An upper-case letter or digit
-    // in front of it means an abbreviation or a version number, not a sentence.
-    const glued = /(?<![A-Z0-9])[.!?](\p{Lu})/gu;
-    const strip = (value) => neutralise(value).replace(/<[^>]+>/g, "");
+    // in front of it means an abbreviation or a version number, not a sentence —
+    // and the class has to be Unicode-aware, or Cyrillic "В.{{version}}" reads
+    // as a sentence break while Latin "V.{{version}}" does not.
+    // A capital that is itself followed by a period is an abbreviation, not a
+    // new sentence ("z.B. UsersQuotaLimit").
+    const glued = /(?<![\p{Lu}0-9])[.!?](\p{Lu})(?!\.)/gu;
+
+    // Tags that render a break already separate the sentences, and so does a
+    // closing tag butted against the next opening one — those become a space.
+    // Purely inline markup is dropped, so `</1>Text` still reads as glued.
+    const strip = (value) =>
+      neutralise(value)
+        .replace(/<br\s*\/?>|<\/?(?:p|div|li)\b[^>]*>/gi, " ")
+        .replace(/<\/[^>]+><[^/][^>]*>/g, " ")
+        .replace(/<[^>]+>/g, "");
     const found = [];
 
     translationFiles.forEach((file) => {
@@ -3410,8 +3421,6 @@ describe("Locales Tests", () => {
       file.translations.forEach((t) => {
         if (typeof t.value !== "string" || !t.value.length) return;
         const id = `${file.language} ${file.namespace}:${t.key}`;
-        if (allowed.has(id)) return;
-
         const actual = (strip(t.value).match(glued) || []).length;
         if (!actual) return;
 

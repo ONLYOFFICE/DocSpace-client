@@ -30,7 +30,7 @@
   "ApiKeyCopied": "Skopiowano klucz API",
   "APIKeyDeactivated": "Klucz zostanie dezaktywowany po: {{date}}",
   "APIKeyExpired": "Dany klucz API wygasł i nie jest już aktywny",
-  "ApiKeyLifetime": "<1>Ustawiony jest okres ważności.</1>Sekretny klucz zostanie dezaktywowany po: {{days}} dn.",
+  "ApiKeyLifetime": "<1>Ustawiony jest okres ważności.</1> Sekretny klucz zostanie dezaktywowany po: {{days}} dn.",
   "APIKeyMaxDays": "Dni <1>(Maks. {{days}})</1>",
   "ApiKeys": "Klucze API",
   "ApiKeysCardDescription": "Twórz i zarządzaj wszystkimi kluczami API dla {{organizationName}} {{productName}}.",

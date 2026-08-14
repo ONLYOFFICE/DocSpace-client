@@ -133,6 +133,8 @@
   "AIModels": "Mô hình AI",
   "AIModelsDescription": "Truy cập nhiều mô hình AI thông qua tích hợp OpenRouter",
   "AIModelsWebSearchKnowledgeBase": "Mô hình, Tìm kiếm trên web, Cơ sở kiến thức",
+  "AIModelUpdatedDescription": "Chúng tôi đã cập nhật các mô hình khả dụng. <1>{{model}}</1> đã được chọn tự động. Xem lại hoặc thay đổi mô hình bên dưới.",
+  "AIModelUpdatedTitle": "Đã cập nhật mô hình",
   "AINewChat": "Trò chuyện mới",
   "AIOpenRouterPricingNote": "<1>Giá OpenRouter</1> + phí dịch vụ 20% áp dụng cho việc sử dụng",
   "AIPaywallCallbackActivated": "Đã kích hoạt các tính năng AI",

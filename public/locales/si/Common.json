@@ -133,6 +133,8 @@
   "AIModels": "AI මාදිලි",
   "AIModelsDescription": "OpenRouter ඒකාබද්ධතාව හරහා පුළුල් පරාසයක AI ආකෘති වෙත ප්‍රවේශ වන්න",
   "AIModelsWebSearchKnowledgeBase": "ආකෘති, වෙබ් සෙවුම, දැනුම් පදනම",
+  "AIModelUpdatedDescription": "අපි ලබා ගත හැකි ආකෘති යාවත්කාලීන කර ඇත. <1>{{model}}</1> ස්වයංක්‍රීයව තෝරා ගෙන ඇත. පහතින් ආකෘතිය සමාලෝචනය කරන්න හෝ වෙනස් කරන්න.",
+  "AIModelUpdatedTitle": "ආකෘතිය යාවත්කාලීන කරන ලදී",
   "AINewChat": "නව කතාබහ",
   "AIOpenRouterPricingNote": "<1>OpenRouter මිල නියම කිරීම</1> + 20% සේවා ගාස්තුව භාවිතයට අදාළ වේ",
   "AIPaywallCallbackActivated": "AI විශේෂාංග සක්‍රීය කරන ලදී",

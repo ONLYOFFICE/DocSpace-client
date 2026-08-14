@@ -33,56 +33,58 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { aiAgentsHandler } from "./agents";
-import { aiConfigHandler } from "./config";
-import { aiModelsHandler } from "./models";
-import { aiChatDeleteHandler } from "./chat";
-import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
-import {
-  aiVectorizationGetHandler,
-  aiVectorizationPutHandler,
-} from "./vectorization";
-import { aiProvidersDefaultHandler } from "./providersDefault";
-import {
-  aiChatAssignmentsHandler,
-  aiChatDeepModeHandler,
-  aiChatProfilesListHandler,
-  aiChatStoreHandlers,
-  aiChatThreadsListHandler,
-} from "./chatStores";
+"use no memo";
 
-export {
-  aiAgentsHandler,
-  aiConfigHandler,
-  aiModelsHandler,
-  aiChatDeleteHandler,
-  aiRoomsChatsHandler,
-  aiRoomsChatsStreamHandler,
-  aiVectorizationGetHandler,
-  aiVectorizationPutHandler,
-  aiProvidersDefaultHandler,
-  aiChatAssignmentsHandler,
-  aiChatDeepModeHandler,
-  aiChatProfilesListHandler,
-  aiChatStoreHandlers,
-  aiChatThreadsListHandler,
+import { useId } from "react";
+import type { TooltipRenderProps } from "react-joyride";
+import { ReactSVG } from "react-svg";
+
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+
+import styles from "./ModelUpdatedBanner.module.scss";
+
+/**
+ * The "Model updated" card itself — a title, a line of text and a close
+ * button, with none of a tour tooltip's navigation (there is one step and
+ * nowhere to go). Rendered by react-joyride inside its own portal, already
+ * positioned against the composer's model picker.
+ */
+const ModelUpdatedTooltip = ({
+  step,
+  closeProps,
+  tooltipProps,
+}: TooltipRenderProps) => {
+  const titleId = useId();
+  const descriptionId = useId();
+
+  return (
+    <div
+      {...tooltipProps}
+      // Not modal: the composer under the card stays usable.
+      aria-modal={false}
+      role="dialog"
+      aria-labelledby={step.title ? titleId : undefined}
+      aria-describedby={step.content ? descriptionId : undefined}
+      className={styles.tooltip}
+      data-testid="ai-model-updated-tooltip"
+    >
+      <button type="button" className={styles.close} {...closeProps}>
+        <ReactSVG src={CrossReactSvgUrl} />
+      </button>
+
+      {step.title ? (
+        <div id={titleId} className={styles.title}>
+          {step.title}
+        </div>
+      ) : null}
+
+      {step.content ? (
+        <div id={descriptionId} className={styles.content}>
+          {step.content}
+        </div>
+      ) : null}
+    </div>
+  );
 };
 
-export {
-  AI_CHAT_ASSIGNED,
-  AI_CHAT_AUTO_PICKED,
-  AI_CHAT_PROFILES,
-  AiActionType,
-} from "./chatStores";
-export type { AiChatProfile, AssignmentMap } from "./chatStores";
-
-export const aiHandlers = (port: string) => [
-  aiAgentsHandler(port),
-  aiConfigHandler(port),
-  aiModelsHandler(port),
-  aiChatDeleteHandler(port),
-  aiRoomsChatsHandler(port),
-  aiRoomsChatsStreamHandler(port),
-  aiVectorizationGetHandler(port),
-  aiVectorizationPutHandler(port),
-];
+export default ModelUpdatedTooltip;

@@ -33,56 +33,64 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { aiAgentsHandler } from "./agents";
-import { aiConfigHandler } from "./config";
-import { aiModelsHandler } from "./models";
-import { aiChatDeleteHandler } from "./chat";
-import { aiRoomsChatsHandler, aiRoomsChatsStreamHandler } from "./roomsChats";
-import {
-  aiVectorizationGetHandler,
-  aiVectorizationPutHandler,
-} from "./vectorization";
-import { aiProvidersDefaultHandler } from "./providersDefault";
-import {
-  aiChatAssignmentsHandler,
-  aiChatDeepModeHandler,
-  aiChatProfilesListHandler,
-  aiChatStoreHandlers,
-  aiChatThreadsListHandler,
-} from "./chatStores";
+@use "@docspace/ui-kit/styles/variables/colors";
 
-export {
-  aiAgentsHandler,
-  aiConfigHandler,
-  aiModelsHandler,
-  aiChatDeleteHandler,
-  aiRoomsChatsHandler,
-  aiRoomsChatsStreamHandler,
-  aiVectorizationGetHandler,
-  aiVectorizationPutHandler,
-  aiProvidersDefaultHandler,
-  aiChatAssignmentsHandler,
-  aiChatDeepModeHandler,
-  aiChatProfilesListHandler,
-  aiChatStoreHandlers,
-  aiChatThreadsListHandler,
-};
+// The card react-joyride renders in its own portal, already positioned above
+// the composer's model picker — placement, offset and z-index come from the
+// step's options, so this only describes how the card looks.
+.tooltip {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  width: min(430px, calc(100vw - 32px));
+  border-radius: 6px;
+  background-color: var(--tooltip-bg-color, var(--background-color));
+  color: var(--tooltip-text-color, var(--text-color));
+  box-shadow:
+    0px 2px 8px rgba(0, 0, 0, 0.08),
+    0px 8px 24px rgba(0, 0, 0, 0.12);
+}
 
-export {
-  AI_CHAT_ASSIGNED,
-  AI_CHAT_AUTO_PICKED,
-  AI_CHAT_PROFILES,
-  AiActionType,
-} from "./chatStores";
-export type { AiChatProfile, AssignmentMap } from "./chatStores";
+.close {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: colors.$gray;
 
-export const aiHandlers = (port: string) => [
-  aiAgentsHandler(port),
-  aiConfigHandler(port),
-  aiModelsHandler(port),
-  aiChatDeleteHandler(port),
-  aiRoomsChatsHandler(port),
-  aiRoomsChatsStreamHandler(port),
-  aiVectorizationGetHandler(port),
-  aiVectorizationPutHandler(port),
-];
+  &:hover {
+    color: colors.$light-gray-dark;
+  }
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  padding-inline-end: 24px;
+}
+
+.content {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+

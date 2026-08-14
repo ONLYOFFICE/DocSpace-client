@@ -64,7 +64,7 @@ const usePluginUpload = ({ addPlugin }: UsePluginUploadProps) => {
         toastr.error(
           t("PluginIsNotCompatible", {
             organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+            productName: getBrandName("ProductName"),
           }),
         );
       } else {

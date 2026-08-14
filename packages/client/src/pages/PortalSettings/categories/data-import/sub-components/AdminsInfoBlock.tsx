@@ -75,7 +75,7 @@ const AdminsInfoBlock = ({
             <Text fontSize="12px">
               {t("LicenseLimitDescription", {
                 organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+                productName: getBrandName("ProductName"),
                 maxLimit: limitAdmins,
               })}
             </Text>

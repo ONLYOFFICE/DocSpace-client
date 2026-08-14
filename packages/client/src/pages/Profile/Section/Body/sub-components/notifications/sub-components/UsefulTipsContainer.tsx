@@ -76,7 +76,7 @@ const UsefulTipsContainer = ({
       <div className={styles.row}>
         <Text {...textProps} className="subscription-title">
           {t("UsefulTips", { organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName") })}
+            productName: getBrandName("ProductName") })}
         </Text>
         <ToggleButton
           className="useful-tips toggle-btn"
@@ -87,7 +87,7 @@ const UsefulTipsContainer = ({
       </div>
       <Text {...textDescriptionsProps}>
         {t("UsefulTipsDescription", { organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName") })}
+          productName: getBrandName("ProductName") })}
       </Text>
     </div>
   );

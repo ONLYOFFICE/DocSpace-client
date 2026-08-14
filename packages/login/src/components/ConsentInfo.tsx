@@ -91,7 +91,7 @@ const OAuthClientInfo = ({
             i18nKey="ConsentSubHeader"
             ns="Consent"
             values={{ nameApp: name, organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName") }}
+              productName: getBrandName("ProductName") }}
             components={{
               1: (
                 <Link

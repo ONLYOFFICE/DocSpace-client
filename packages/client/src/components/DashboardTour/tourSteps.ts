@@ -194,7 +194,7 @@ export function getTourSteps(
         t("DashboardTour:DashboardDevToolsTitle"),
         t("DashboardTour:DashboardDevTools", {
           organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+          productName: getBrandName("ProductName"),
         }),
         callbacks,
         LOG_LABEL,

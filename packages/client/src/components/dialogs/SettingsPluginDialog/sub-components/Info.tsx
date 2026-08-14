@@ -58,7 +58,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
 
   const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
     organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+    productName: getBrandName("ProductName"),
   });
 
   return (

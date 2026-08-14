@@ -422,7 +422,7 @@ export const getRootTitle = (
       () =>
         t("Common:EmptyRootRoomHeader", {
           organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+          productName: getBrandName("ProductName"),
         }),
     )
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
@@ -434,7 +434,7 @@ export const getRootTitle = (
     .with([FolderType.Forms, P._], () =>
       t("Common:EmptyRootRoomHeader", {
         organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+        productName: getBrandName("ProductName"),
       }),
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>

@@ -96,7 +96,7 @@ export const GreetingUserContainer = ({
 					values={{
 						email,
 						organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+						productName: getBrandName("ProductName"),
 					}}
 					components={{
 						1: (

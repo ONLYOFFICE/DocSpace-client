@@ -107,7 +107,7 @@ export const GreetingLoginContainer = ({
             ns="Login"
             values={{
               organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+              productName: getBrandName("ProductName"),
             }}
           />
         </Text>

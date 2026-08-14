@@ -76,7 +76,7 @@ export const getRootTitle = (
     default:
       return t("Common:EmptyRootRoomHeader", {
         organizationName: getBrandName("OrganizationName"),
-				productName: getBrandName("ProductName"),
+        productName: getBrandName("ProductName"),
       });
   }
 };

@@ -17,6 +17,8 @@
   "EmptyGroupAddedUserOptionDescription": "Add group members and assign the head",
   "EmptyGroupDeleteOptionDescription": "If you don't need this group anymore",
   "EmptyGroupsCreateGroupOptionDescription": "Create a group to add them to the room",
+  "EmptyRootFormsDescription": "Please create the first form space.",
+  "EmptyRootFormsTitle": "No form spaces yet here",
   "EmptyRootRoomUserDescription": "The shared room will appear here.",
   "EmptyRootRoomUserTitle": "There are no rooms here yet",
   "EmptyTemplatesDescription": "You can create a template from a room in the Room section",

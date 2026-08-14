@@ -17,6 +17,8 @@
   "EmptyGroupAddedUserOptionDescription": "Добавьте участников группы и назначьте руководителя",
   "EmptyGroupDeleteOptionDescription": "Если вам больше не нужна эта группа",
   "EmptyGroupsCreateGroupOptionDescription": "Создайте группу, чтобы добавить их в комнату",
+  "EmptyRootFormsDescription": "Пожалуйста, создайте первое пространство форм.",
+  "EmptyRootFormsTitle": "Здесь пока нет пространств форм",
   "EmptyRootRoomUserDescription": "Здесь появится комната, к которой предоставлен доступ.",
   "EmptyRootRoomUserTitle": "Здесь пока нет комнат",
   "EmptyTemplatesDescription": "Вы можете создать шаблон из комнаты в разделе Комнаты",

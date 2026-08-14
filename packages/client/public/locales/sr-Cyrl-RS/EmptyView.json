@@ -17,6 +17,8 @@
   "EmptyGroupAddedUserOptionDescription": "Додајте чланове групе и поставите водитеља",
   "EmptyGroupDeleteOptionDescription": "Ако вам ова група више није потребна",
   "EmptyGroupsCreateGroupOptionDescription": "Креирајте групу да бисте их додали у собу",
+  "EmptyRootFormsDescription": "Молимо вас креирајте први простор образаца.",
+  "EmptyRootFormsTitle": "Овде још увек нема простора образаца",
   "EmptyRootRoomUserDescription": "Дељена соба ће се овде појавити.",
   "EmptyRootRoomUserTitle": "Још увек нема соба овде",
   "EmptyTemplatesDescription": "Можете креирати шаблон из собе у одељку Собе.",

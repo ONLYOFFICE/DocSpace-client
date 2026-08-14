@@ -17,6 +17,8 @@
   "EmptyGroupAddedUserOptionDescription": "Додати учасників групи та назначити головного",
   "EmptyGroupDeleteOptionDescription": "Якщо вам більше не потрібна ця група",
   "EmptyGroupsCreateGroupOptionDescription": "Створіть групу, щоб додати їх до кімнати",
+  "EmptyRootFormsDescription": "Створіть перший простір форм.",
+  "EmptyRootFormsTitle": "Тут ще немає просторів форм",
   "EmptyRootRoomUserDescription": "Тут буде спільна кімната.",
   "EmptyRootRoomUserTitle": "Тут ще немає кімнат",
   "EmptyTemplatesDescription": "Ви можете створити шаблон із кімнати в розділі «Кімната»",

@@ -126,11 +126,6 @@ export interface InjectedEmptyViewContainerProps
   refreshCurrentFolder?: () => Promise<void>;
   refreshPaymentInfo?: () => Promise<void>;
   language?: string;
-  socialAuthWelcomeVisible: boolean;
-  onSocialAuthWelcomeClose: () => void;
-  tenantAlias: string;
-  baseDomain: string | null;
-  socialAuthUser: TStore["userStore"]["user"];
   isGracePeriod: boolean;
   knowledgeId: number | null;
   startUpload: TStore["uploadDataStore"]["startUpload"];

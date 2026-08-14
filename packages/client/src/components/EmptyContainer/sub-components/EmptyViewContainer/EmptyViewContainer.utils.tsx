@@ -122,7 +122,6 @@ import type {
   OptionActions,
   UploadType,
 } from "./EmptyViewContainer.types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import { Text } from "@docspace/ui-kit/components";
 
 export const isUser = (access: AccessType) => {
@@ -293,7 +292,7 @@ export const getRootDescription = (
       t("EmptyView:EmptyTemplatesDescription"),
     )
     .with([FolderType.Forms, P._], () =>
-      t("Files:RoomEmptyContainerDescription"),
+      t("EmptyView:EmptyRootFormsDescription"),
     )
     .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
       <>
@@ -419,11 +418,7 @@ export const getRootTitle = (
           ShareAccessRights.ReadOnly,
         ),
       ],
-      () =>
-        t("Common:EmptyRootRoomHeader", {
-          organizationName: getBrandName("OrganizationName"),
-          productName: getBrandName("ProductName"),
-        }),
+      () => t("Common:EmptyRoomsHeader"),
     )
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserTitle"),
@@ -431,12 +426,7 @@ export const getRootTitle = (
     .with([FolderType.RoomTemplates, P._], () =>
       t("EmptyView:EmptyTemplatesTitle"),
     )
-    .with([FolderType.Forms, P._], () =>
-      t("Common:EmptyRootRoomHeader", {
-        organizationName: getBrandName("OrganizationName"),
-        productName: getBrandName("ProductName"),
-      }),
-    )
+    .with([FolderType.Forms, P._], () => t("EmptyView:EmptyRootFormsTitle"))
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )

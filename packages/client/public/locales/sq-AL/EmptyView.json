@@ -17,6 +17,8 @@
   "EmptyGroupAddedUserOptionDescription": "Shtoni anëtarët e grupit dhe caktoni kreun",
   "EmptyGroupDeleteOptionDescription": "Në qoftë se nuk ju nevojitet më ky grup",
   "EmptyGroupsCreateGroupOptionDescription": "Krijoni një grup për t'i shtuar ato në dhomë",
+  "EmptyRootFormsDescription": "Ju lutemi krijoni hapësirën e parë të formularëve.",
+  "EmptyRootFormsTitle": "Nuk ka ende hapësira formularësh këtu",
   "EmptyRootRoomUserDescription": "Dhoma e përbashkët do të shfaqet këtu.",
   "EmptyRootRoomUserTitle": "Nuk ka ende dhoma këtu",
   "EmptyTemplatesDescription": "Ju mund të krijoni një model nga një dhomë në seksionin Dhoma.",

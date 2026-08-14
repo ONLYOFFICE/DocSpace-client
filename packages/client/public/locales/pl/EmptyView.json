@@ -17,6 +17,8 @@
   "EmptyGroupAddedUserOptionDescription": "Dodaj do grupy członków i przypisz jej lidera",
   "EmptyGroupDeleteOptionDescription": "Jeśli nie potrzebujesz już tej grupy,",
   "EmptyGroupsCreateGroupOptionDescription": "Utwórz grupę, aby dodać jej członków do pokoju",
+  "EmptyRootFormsDescription": "Utwórz pierwszy obszar formularzy.",
+  "EmptyRootFormsTitle": "Brak obszarów formularzy",
   "EmptyRootRoomUserDescription": "Pokój współdzielony pojawi się tutaj.",
   "EmptyRootRoomUserTitle": "Nie ma tu jeszcze żadnych pokoi.",
   "EmptyTemplatesDescription": "Możesz utworzyć szablon z pokoju w sekcji Pokój",

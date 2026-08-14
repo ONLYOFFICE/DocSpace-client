@@ -111,6 +111,7 @@ import externalAIFetch, { abortAllRequests } from "@/utils/aiProxy";
 let docEditor: TDocEditor | null = null;
 
 const useEditorEvents = ({
+  user,
   successAuth,
   fileInfo,
   config,
@@ -282,7 +283,12 @@ const useEditorEvents = ({
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
     if (!aiInitedRef.current) {
-      const connector = docEditor?.createConnector?.();
+      // AI is not available to guests (and anonymous share-link viewers):
+      // don't init the editor's AI plugin for them at all — mirrors the
+      // portal, where guests get no AI chat, and the backend gateway
+      // rejects guest calls anyway.
+      const aiAllowed = Boolean(user) && !user?.isVisitor;
+      const connector = aiAllowed ? docEditor?.createConnector?.() : undefined;
 
       if (connector && !isOAuthFrame()) {
         aiInitedRef.current = true;

@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "このフィルターに一致する取引はありません。別のフィルターをお試しいただくか、フィルターを解除してすべての取引を表示してください。",
   "NotSupportedFormat": "申し訳ありませんが、このファイル形式はサポートされていません",
   "NoUpcomingPayments": "今後の支払いはありません",
-  "NoUpcomingPaymentsDesc": "今月に予定されている支払いはありません。",
   "NoUpcomingPaymentsDescription": "まだアクティブなサブスクリプションや予定されている定期支払いはありません。",
   "NoWalletTransaction": "まだ取引はありません",
   "NoWalletTransactionDescription": "ウォレットの使用を開始すると、支払い履歴がここに表示されます。",

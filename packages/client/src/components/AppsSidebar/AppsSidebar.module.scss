@@ -49,6 +49,10 @@
   justify-content: space-between;
   gap: 8px;
 
+  @include mixins.tablet {
+    padding-inline-start: 20px !important;
+  }
+
   &[data-show-text="false"] {
     justify-content: center;
     padding-inline: 0 !important;

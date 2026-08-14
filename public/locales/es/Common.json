@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "Ninguna transacción coincide con este filtro. Pruebe con otro o elimine el filtro para ver todas las transacciones.",
   "NotSupportedFormat": "Lo sentimos, pero el formato de archivo no se admite",
   "NoUpcomingPayments": "No hay pagos próximos",
-  "NoUpcomingPaymentsDesc": "No hay pagos programados para este mes.",
   "NoUpcomingPaymentsDescription": "Aún no tiene ninguna suscripción activa ni pagos recurrentes programados.",
   "NoWalletTransaction": "Todavía no hay transacciones",
   "NoWalletTransactionDescription": "Una vez que empiece a utilizar el monedero, el historial de pagos se mostrará aquí.",

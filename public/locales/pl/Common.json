@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "Brak transakcji pasujących do tego filtra. Spróbuj innego lub usuń filtr, aby wyświetlić wszystkie transakcje.",
   "NotSupportedFormat": "Niestety, ten format pliku nie jest obsługiwany",
   "NoUpcomingPayments": "Brak nadchodzących płatności",
-  "NoUpcomingPaymentsDesc": "Na ten miesiąc nie zaplanowano żadnych płatności.",
   "NoUpcomingPaymentsDescription": "Nie masz jeszcze żadnych aktywnych subskrypcji ani zaplanowanych płatności cyklicznych.",
   "NoWalletTransaction": "Brak transakcji jeszcze",
   "NoWalletTransactionDescription": "Gdy zaczniesz korzystać z portfela, historia płatności zostanie wyświetlona tutaj.",

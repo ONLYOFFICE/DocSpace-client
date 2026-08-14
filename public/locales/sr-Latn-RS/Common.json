@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "Nema transakcija koje odgovaraju ovom filteru. Probajte drugi ili uklonite filter da biste videli sve transakcije.",
   "NotSupportedFormat": "Izvinjavamo se, ovaj format datoteke nije podržan",
   "NoUpcomingPayments": "Nema predstojećih plaćanja",
-  "NoUpcomingPaymentsDesc": "Za ovaj mesec nisu zakazana plaćanja.",
   "NoUpcomingPaymentsDescription": "Još uvek nemate aktivne pretplate ni zakazana ponavljajuća plaćanja.",
   "NoWalletTransaction": "Još nema transakcija",
   "NoWalletTransactionDescription": "Kada počnete da koristite novčanik, istorija plaćanja će biti prikazana ovde.",

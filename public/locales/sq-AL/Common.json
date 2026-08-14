@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "Asnjë transaksion nuk përputhet me këtë filtër. Provoni një tjetër ose hiqni filtrin për të parë të gjitha transaksionet.",
   "NotSupportedFormat": "Na vjen keq, por ky format skedari nuk mbështetet",
   "NoUpcomingPayments": "Nuk ka pagesa të ardhshme",
-  "NoUpcomingPaymentsDesc": "Nuk ka pagesa të planifikuara për këtë muaj.",
   "NoUpcomingPaymentsDescription": "Ende nuk keni asnjë abonim aktiv ose pagesa të përsëritura të planifikuara.",
   "NoWalletTransaction": "Nuk ka ende transaksione",
   "NoWalletTransactionDescription": "Pasi të filloni të përdorni portofolin, historia e pagesave do të shfaqet këtu.",

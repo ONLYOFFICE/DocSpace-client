@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "Filtru de operații nu a produs rezultate. Încercați un alt filtru sau eliminați filtrul pentru a afișa toate operaţii.",
   "NotSupportedFormat": "Ne pare rău, acest format de fișier nu este acceptat",
   "NoUpcomingPayments": "Nicio plată viitoare",
-  "NoUpcomingPaymentsDesc": "Nu există plăți programate pentru luna aceasta.",
   "NoUpcomingPaymentsDescription": "Nu aveți încă niciun abonament activ sau plăți recurente programate.",
   "NoWalletTransaction": "Nicio operație deocamdată aici",
   "NoWalletTransactionDescription": "Odată ce începeți să utilizați portofelul, istoricul plăților va fi afișat aici.",

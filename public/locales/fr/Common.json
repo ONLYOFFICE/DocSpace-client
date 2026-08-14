@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "Aucune transaction ne correspond à ce filtre. Essayez-en un autre ou supprimez le filtre pour afficher toutes les transactions.",
   "NotSupportedFormat": "Désolé, ce format de fichier n'est pas pris en charge",
   "NoUpcomingPayments": "Aucun paiement à venir",
-  "NoUpcomingPaymentsDesc": "Aucun paiement n'est prévu pour ce mois.",
   "NoUpcomingPaymentsDescription": "Vous n'avez pas encore d'abonnements actifs ni de paiements récurrents programmés.",
   "NoWalletTransaction": "Aucune transaction pour l'instant",
   "NoWalletTransactionDescription": "Une fois que vous aurez commencé à utiliser le wallet, l'historique des paiements s'affichera ici.",

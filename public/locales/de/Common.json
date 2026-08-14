@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "Keine Transaktionen entsprechen diesem Filter. Versuchen Sie einen anderen oder entfernen Sie den Filter, um alle Transaktionen anzuzeigen.",
   "NotSupportedFormat": "Das Dateiformat wird nicht unterstützt",
   "NoUpcomingPayments": "Keine anstehenden Zahlungen",
-  "NoUpcomingPaymentsDesc": "Für diesen Monat sind keine Zahlungen geplant.",
   "NoUpcomingPaymentsDescription": "Sie haben noch keine aktiven Abonnements oder geplanten wiederkehrenden Zahlungen.",
   "NoWalletTransaction": "Noch keine Transaktionen",
   "NoWalletTransactionDescription": "Sobald Sie mit der Nutzung des Wallets beginnen, wird hier der Zahlungsverlauf angezeigt.",

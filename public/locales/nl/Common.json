@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "Geen transacties komen overeen met dit filter. Probeer een andere of verwijder het filter om alle transacties te bekijken.",
   "NotSupportedFormat": "Sorry, deze bestandsindeling wordt niet ondersteund",
   "NoUpcomingPayments": "Geen aankomende betalingen",
-  "NoUpcomingPaymentsDesc": "Er zijn geen betalingen gepland voor deze maand.",
   "NoUpcomingPaymentsDescription": "U heeft nog geen actieve abonnementen of geplande terugkerende betalingen.",
   "NoWalletTransaction": "Nog geen transacties.",
   "NoWalletTransactionDescription": "Zodra u de wallet begint te gebruiken, wordt de betalingsgeschiedenis hier weergegeven.",

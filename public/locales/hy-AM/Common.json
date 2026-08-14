@@ -133,6 +133,8 @@
   "AIModels": "ԱԲ մոդելներ",
   "AIModelsDescription": "Ստացեք հասանելիություն ԱԲ մոդելների լայն շրջանակին OpenRouter ինտեգրման միջոցով",
   "AIModelsWebSearchKnowledgeBase": "Մոդելներ, Վեբ որոնում, Գիտելիքների բազա",
+  "AIModelUpdatedDescription": "Մենք թարմացրել ենք հասանելի մոդելները։ <1>{{model}}</1> մոդելն ընտրվել է ավտոմատ կերպով։ Ստուգեք կամ փոխեք մոդելը ստորև։",
+  "AIModelUpdatedTitle": "Մոդելը թարմացվել է",
   "AINewChat": "Նոր չատ",
   "AIOpenRouterPricingNote": "<1>OpenRouter գնագոյացումը</1> + 20% սպասարկման վճար կիրառվում է օգտագործման նկատմամբ",
   "AIPaywallCallbackActivated": "ԱԲ ֆունկցիաները ակտիվացված են",

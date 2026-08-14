@@ -133,6 +133,8 @@
   "AIModels": "AI 모델",
   "AIModelsDescription": "OpenRouter 통합을 통해 다양한 AI 모델에 액세스하세요",
   "AIModelsWebSearchKnowledgeBase": "모델, 웹 검색, 지식 베이스",
+  "AIModelUpdatedDescription": "사용 가능한 모델을 업데이트했습니다. <1>{{model}}</1> 모델이 자동으로 선택되었습니다. 아래에서 모델을 확인하거나 변경하세요.",
+  "AIModelUpdatedTitle": "모델이 업데이트되었습니다",
   "AINewChat": "새로운 채팅",
   "AIOpenRouterPricingNote": "사용 시 <1>OpenRouter 요금</1>에 20% 서비스 수수료가 부과됩니다",
   "AIPaywallCallbackActivated": "AI 기능이 활성화되었습니다",

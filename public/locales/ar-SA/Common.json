@@ -133,6 +133,8 @@
   "AIModels": "نماذج الذكاء الاصطناعي",
   "AIModelsDescription": "يمكنك الوصول إلى مجموعة واسعة من نماذج الذكاء الاصطناعي عبر تكامل OpenRouter",
   "AIModelsWebSearchKnowledgeBase": "النماذج، البحث على الويب، قاعدة المعرفة",
+  "AIModelUpdatedDescription": "لقد قمنا بتحديث النماذج المتاحة. تم اختيار <1>{{model}}</1> تلقائيًا. راجع النموذج أو غيّره أدناه.",
+  "AIModelUpdatedTitle": "تم تحديث النموذج",
   "AINewChat": "دردشة جديدة",
   "AIOpenRouterPricingNote": "تُطبّق <1>أسعار OpenRouter</1> بالإضافة إلى رسوم خدمة بنسبة 20% على الاستخدام",
   "AIPaywallCallbackActivated": "تم تفعيل ميزات الذكاء الاصطناعي",

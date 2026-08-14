@@ -133,6 +133,8 @@
   "AIModels": "ຮູບແບບ AI",
   "AIModelsDescription": "ເຂົ້າເຖິງ AI ຮຸ່ນຫຼາກຫຼາຍຜ່ານການເຊື່ອມໂຍງ OpenRouter",
   "AIModelsWebSearchKnowledgeBase": "ຮຸ່ນ, ຄົ້ນຫາເວັບ, ຖານຄວາມຮູ້",
+  "AIModelUpdatedDescription": "ພວກເຮົາໄດ້ອັບເດດຮູບແບບທີ່ມີໃຫ້ໃຊ້ແລ້ວ. <1>{{model}}</1> ຖືກເລືອກໂດຍອັດຕະໂນມັດ. ກວດສອບ ຫຼື ປ່ຽນຮູບແບບຢູ່ດ້ານລຸ່ມ.",
+  "AIModelUpdatedTitle": "ອັບເດດຮູບແບບແລ້ວ",
   "AINewChat": "ການສົນທະນາໃໝ່",
   "AIOpenRouterPricingNote": "<1>ລາຄາ OpenRouter</1> + ຄ່າບໍລິການ 20% ນໍາໃຊ້ກັບການໃຊ້ງານ",
   "AIPaywallCallbackActivated": "ເປີດໃຊ້ຄຸນສົມບັດ AI ແລ້ວ",

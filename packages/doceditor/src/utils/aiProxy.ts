@@ -70,10 +70,13 @@ const externalAIFetch = async (
   try {
     let url: string;
 
-    if (e.url.startsWith("[external]/websearch/")) {
-      // Web-search tool requests carry no `model` in the body — the
-      // portal's active provider is resolved server-side by the NewAi
-      // web-search passthrough.
+    // NewAi endpoints addressed by path rather than by profile: their
+    // requests carry no `model` in the body. Web search resolves the
+    // portal's active provider server-side; editor-tools lists and
+    // executes the DocSpace tool catalog.
+    const pathRouted = ["[external]/websearch/", "[external]/editor-tools/"];
+
+    if (pathRouted.some((prefix) => e.url.startsWith(prefix))) {
       url = e.url.replace("[external]", "/api/2.0/ai");
     } else {
       let profileId: string | undefined;

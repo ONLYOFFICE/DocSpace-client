@@ -1,14 +1,14 @@
 {
   "key_path": "RecoverTextBody",
-  "content": "If you can't log in with your existing account or want to be registered as a new user, contact the portal administrator.",
-  "content_en_sha1_hash": "de2b846cda811c7c5f58ab1e83366c62c0511cae",
-  "created_at": "2025-05-19T21:30:57.255Z",
-  "updated_at": "2026-05-15T14:00:06.921Z",
+  "content": "If you can't log in with your existing account or want to be registered as a new user, contact the Full admin.",
+  "content_en_sha1_hash": "10849ba8390de2d0d906b21672d43ccfc60636dc",
+  "created_at": "2026-08-13T14:37:20.823Z",
+  "updated_at": "2026-08-13T15:22:29.430Z",
   "comment": {
-    "text": "This is the main body text within a dialog box. It appears when a user attempts to recover their account, providing instructions if they cannot log in or wish to register as a new user.",
+    "text": "Body text in a recovery dialog providing instructions for users unable to log in or needing new user registration.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:31:07.558Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:22:29.430Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

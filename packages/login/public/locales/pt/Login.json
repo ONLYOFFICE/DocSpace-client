@@ -1,8 +1,8 @@
 {
   "ChangePasswordSuccess": "A palavra-chave foi alterada com êxito",
   "ConfirmEmailChange": "Confirme a alteração do seu e-mail",
-  "ConfirmEmailChangeText": "Você solicitou alterar o endereço de e-mail da sua conta {{productName}}. Para prosseguir, por favor, faça login usando suas credenciais atuais.",
-  "ErrorInvalidText": "Em 10 segundos será redirecionado para a <1>{{productName}}</1>",
+  "ConfirmEmailChangeText": "Você solicitou alterar o endereço de e-mail da sua conta {{organizationName}} {{productName}}. Para prosseguir, por favor, faça login usando suas credenciais atuais.",
+  "ErrorInvalidText": "Em 10 segundos será redirecionado para a <1>espaço de trabalho</1>",
   "ForgotPassword": "Esqueceu-se da senha?",
   "LDAPUsernamePlaceholder": "Nome de usuário de {{ldap_domain}}",
   "MessageAuthorize": "Inicie sessão para continuar",
@@ -11,7 +11,7 @@
   "PasswordRecoveryTitle": "Recuperação de palavra-passe",
   "RecoverAccess": "Recuperar o acesso",
   "RecoverContactEmailPlaceholder": "Email de contacto",
-  "RecoverTextBody": "Se não consegue iniciar sessão com a sua conta ou se quiser registar-se como um novo utilizador, contacte o administrador do portal.",
+  "RecoverTextBody": "Se não consegue iniciar sessão com a sua conta ou se quiser registar-se como um novo utilizador, contacte o superadministrador.",
   "Register": "Registar",
   "RegisterTextBodyAfterDomainsList": "Para registar-se, introduza o seu e-mail e clique em Enviar pedido. Ser-lhe-á enviado uma ligação de ativação.",
   "RegisterTextBodyBeforeDomainsList": "O registo está disponível para os utilizadores com uma conta de e-mail em",
@@ -20,5 +20,5 @@
   "RememberHelper": "A duração da sessão predefinida é de 20 minutos. Clique nesta opção para configurá-la para 1 ano. Para introduzir um período à sua escolha, aceda às definições.",
   "SignInLDAP": "Entre em: {{ldap_domain}}",
   "SignInLdapHelper": "Use credenciais para o domínio corporativo",
-  "UserIsAlreadyRegistered": "O usuário <1>{{email}}</1> já está cadastrado neste {{productName}}, digite sua senha ou volte para continuar com outro e-mail."
+  "UserIsAlreadyRegistered": "O utilizador <1>{{email}}</1> já está registado neste espaço de trabalho, digite a sua palavra-passe ou volte para continuar com outro e-mail."
 }

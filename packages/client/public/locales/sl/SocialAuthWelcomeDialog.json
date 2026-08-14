@@ -1,11 +1,11 @@
 {
   "ChangeData": "Spremenite podatke in geslo",
   "ClickButtonBelow": "Če želite za prijavo uporabiti svoj e-poštni naslov, nastavite svoje geslo. <br/> Ko boste pripravljeni, kliknite gumb spodaj.",
-  "ContinueToProduct": "Nadaljujte z {{productName}}",
+  "ContinueToProduct": "Nadaljujte v delovni prostor",
   "GeneratedPassword": "Ustvarjeno geslo",
-  "ProductNameDetail": "{{productName}} ime",
+  "ProductNameDetail": "Ime delovnega prostora",
   "ReviewAccountDetails": "Prosimo, namenite trenutek za pregled vaših podatkov računa:",
   "SetEmailPassword": "Nastavi geslo",
-  "WelcomeSubtitle": "Vaš prostor je bil uspešno ustvarjen. Preglejte podrobnosti svojega profila in začnite delati.",
+  "WelcomeSubtitle": "Vaš delovni prostor je bil uspešno ustvarjen. Preglejte podrobnosti svojega profila in začnite delati.",
   "YourProfileDetails": "Podrobnosti profila"
 }

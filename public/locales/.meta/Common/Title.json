@@ -3,7 +3,7 @@
   "content": "Title",
   "content_en_sha1_hash": "768e0c1c69573fb588f61f1308a015c11468e05f",
   "created_at": "2025-05-19T21:30:49.298Z",
-  "updated_at": "2026-06-09T09:43:10.847Z",
+  "updated_at": "2026-08-14T14:58:32.729Z",
   "comment": {
     "text": "This is a label for a text input field or a column header, referring to the name of a document, project, or other item.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 530,
-      "context": "{t(\"Common:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"Common:Header\")}\n description={t(\"Common:HeaderDescription\", {",
+      "line_number": 527,
+      "context": "{t(\"Common:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"Common:Header\")}\n description={t(\"Common:HeaderDescription\")}",
       "module": "/packages/client"
     },
     {
@@ -31,19 +31,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 131,
+      "line_number": 130,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Common:ByCreation\") },\n { key: \"Author\", label: t(\"Common:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 131,
+      "line_number": 130,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Common:ByCreation\") },\n { key: \"Author\", label: t(\"Common:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 131,
+      "line_number": 130,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Common:ByCreation\") },\n { key: \"Author\", label: t(\"Common:ByAuthor\") },\n ];",
       "module": "/packages/client"
     },
@@ -67,8 +67,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/EmbeddingPanel/index.tsx",
-      "line_number": 492,
-      "context": "{t(\"Common:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"Common:Header\")}\n description={t(\"Common:HeaderDescription\", {",
+      "line_number": 489,
+      "context": "{t(\"Common:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"Common:Header\")}\n description={t(\"Common:HeaderDescription\")}",
       "module": "/packages/sdk"
     }
   ],

@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Jezik povabila",
-  "InviteMembersManuallyDescription": "Po e-mailu osebno povabite nove člane v {{productName}}",
+  "InviteMembersManuallyDescription": "Po e-mailu osebno povabite nove člane v delovni prostor",
   "InviteMembersSearchPlaceholder": "Povabite člane z e-mailom",
-  "InviteViaLinkDescriptionAccounts": "Ustvari univerzalno povezavo za samodejno avtorizacijo v {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Ustvari univerzalno povezavo za samodejno avtorizacijo v delovnem prostoru"
 }

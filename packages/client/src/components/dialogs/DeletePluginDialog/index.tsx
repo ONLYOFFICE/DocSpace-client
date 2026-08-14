@@ -41,7 +41,6 @@ import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { TTranslation } from "@docspace/shared/types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type Props = {
   isVisible: boolean;
@@ -72,7 +71,7 @@ const DeletePluginDialog = (props: Props) => {
     <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>
       <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("DeletePluginDescription", { productName: getBrandName("ProductName") })}
+        {t("DeletePluginDescription")}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

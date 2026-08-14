@@ -1,0 +1,29 @@
+{
+  "key_path": "StoragePaywallCallbackPricePerMonth",
+  "content": "{{price}} per month",
+  "content_en_sha1_hash": "4b139cc8f08eac86baafb758545e4e88b778b5cc",
+  "created_at": "2026-08-13T14:37:09.559Z",
+  "updated_at": "2026-08-13T14:42:45.306Z",
+  "comment": {
+    "text": "Text label in a payment success card displaying tariff activation details, where {{price}} represents the formatted monthly amount.",
+    "is_auto": true,
+    "updated_at": "2026-08-13T14:42:45.306Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
+      "line_number": 129,
+      "context": "<>\n <Text as=\"span\" className={styles.adminsAmount}>\n +{storage}\n </Text>\n <Text fontSize=\"14px\" className={styles.tariffActivationDetails}>\n {t(\"StoragePaywallCallbackPricePerMonth\", {\n price: formattedMonthlyPrice,\n })}\n </Text>\n </>\n ) : (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

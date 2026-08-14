@@ -55,7 +55,6 @@ import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalRenamingComponent = (props) => {
   const {
@@ -161,7 +160,7 @@ const PortalRenamingComponent = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("PortalRenaming", { productName: getBrandName("ProductName") }),
+      t("PortalRenaming"),
     );
     setPortalName(portalNameInitially);
 
@@ -372,7 +371,7 @@ const PortalRenamingComponent = (props) => {
       {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">
-            {t("PortalRenaming", { productName: getBrandName("ProductName") })}
+            {t("PortalRenaming")}
           </div>
           {!isSettingPaid && !standalone ? (
             <Badge

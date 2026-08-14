@@ -3,7 +3,7 @@
   "content": "This item will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "bc9b11f940706f51e5a6fa996be78b0f399ba112",
   "created_at": "2026-04-03T21:51:27.561Z",
-  "updated_at": "2026-08-13T10:58:03.098Z",
+  "updated_at": "2026-08-12T11:00:51.524Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user attempts to permanently delete a single item from the trash.",
     "is_auto": true,

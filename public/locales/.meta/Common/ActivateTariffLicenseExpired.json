@@ -3,7 +3,7 @@
   "content": "Your license expired on {{date}}",
   "content_en_sha1_hash": "099047a1bc90fe8b80e495c09c43ac0ea7222641",
   "created_at": "2026-02-18T14:55:13.340Z",
-  "updated_at": "2026-08-13T10:58:03.350Z",
+  "updated_at": "2026-08-12T11:00:51.632Z",
   "comment": {
     "text": "This is an error message displayed in bold text, informing the user that their license has expired. The `{{date}}` variable will be replaced with the specific expiration date.",
     "is_auto": true,

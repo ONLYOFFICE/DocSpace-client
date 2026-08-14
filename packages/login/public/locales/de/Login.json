@@ -1,8 +1,8 @@
 {
   "ChangePasswordSuccess": "Passwort wurde erfolgreich geändert",
   "ConfirmEmailChange": "E-Mail-Änderung bestätigen",
-  "ConfirmEmailChangeText": "Sie haben die Änderung der E-Mail-Adresse Ihres {{productName}}-Kontos beantragt. Melden Sie sich bitte mit Ihren aktuellen Anmeldedaten an, um fortzufahren.",
-  "ErrorInvalidText": "In 10 Sekunden werden Sie auf die <1>{{productName}}</1> weitergeleitet",
+  "ConfirmEmailChangeText": "Sie haben die Änderung der E-Mail-Adresse Ihres {{organizationName}} {{productName}}-Kontos beantragt. Melden Sie sich bitte mit Ihren aktuellen Anmeldedaten an, um fortzufahren.",
+  "ErrorInvalidText": "In 10 Sekunden werden Sie auf die <1>Arbeitsbereich</1> weitergeleitet",
   "ForgotPassword": "Kennwort vergessen?",
   "LDAPUsernamePlaceholder": "Benutzername von {{ldap_domain}}",
   "MessageAuthorize": "Bitte einloggen",
@@ -11,7 +11,7 @@
   "PasswordRecoveryTitle": "Kennwort wiederherstellen",
   "RecoverAccess": "Zugriff wiederherstellen",
   "RecoverContactEmailPlaceholder": "E-Mail-Adresse",
-  "RecoverTextBody": "Wenn Sie sich mit Ihren Anmeldeinformationen nicht einloggen können oder ein neues Profil erstellen möchten, wenden Sie sich an den Administrator des Portals.",
+  "RecoverTextBody": "Wenn Sie sich mit Ihren Anmeldeinformationen nicht einloggen können oder ein neues Profil erstellen möchten, wenden Sie sich an den Administrator des Arbeitsbereichs.",
   "Register": "Registrieren",
   "RegisterTextBodyAfterDomainsList": "Für Registrierung geben Sie Ihre E-Mail-Adresse ein und klicken Sie auf Anfrage senden. Der Link zur Aktivierung Ihres Kontos wird an dieser Adresse gesendet.",
   "RegisterTextBodyBeforeDomainsList": "Für Registrierung sollen Benutzer E-Mail-Konten hier haben:",
@@ -20,5 +20,5 @@
   "RememberHelper": "Lebensdauer der Sitzung ist standardmäßig 20 Minuten. Wählen Sie diese Option aus, um den Wert 1 Jahr zu setzen. Für benutzerdefinierte Werte öffnen Sie Einstellungen.",
   "SignInLDAP": "Anmelden bei: {{ldap_domain}}",
   "SignInLdapHelper": "Anmeldedaten für die Unternehmensdomäne verwenden",
-  "UserIsAlreadyRegistered": "Benutzer <1>{{email}}</1> ist bereits in diesem {{productName}} registriert. Geben Sie Ihr Passwort ein oder gehen Sie zurück, um mit einer anderen E-Mail fortzufahren."
+  "UserIsAlreadyRegistered": "Benutzer <1>{{email}}</1> ist bereits in diesem Arbeitsbereich registriert. Geben Sie Ihr Passwort ein oder gehen Sie zurück, um mit einer anderen E-Mail fortzufahren."
 }

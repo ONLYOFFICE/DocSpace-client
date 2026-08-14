@@ -1,20 +1,20 @@
 {
   "key_path": "PersonalUserQuotaDescription",
-  "content": "To upload and create new files and folders, please free up disk space, or contact the {{productName}} administrator to increase the storage quota.",
-  "content_en_sha1_hash": "bd82f05265948b22a11ff3c25bdeb0f4e8cda1c7",
-  "created_at": "2025-05-19T21:30:54.115Z",
-  "updated_at": "2026-08-06T16:57:12.648Z",
+  "content": "To upload and create new files and folders, please free up disk space, or contact the Full admin to increase the storage quota.",
+  "content_en_sha1_hash": "aa75da9b86275b2b6ffad6af7da2061f63da64f4",
+  "created_at": "2026-08-13T14:37:17.374Z",
+  "updated_at": "2026-08-14T14:58:32.667Z",
   "comment": {
-    "text": "This is an error message displayed to a regular user when their personal storage quota is full. It informs them how to free up space or request more from an administrator. `{{productName}}` is replaced with the product's brand name.",
+    "text": "Informational message in the QuotasBar that appears when a user reaches their storage limit, providing instructions on how to free up space or contact an administrator.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:17:44.895Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:11:12.416Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 171,
-      "context": ");\n };\n \n const getPersonalQuotaDescription = () => {\n if (!isAdmin)\n return t(\"PersonalUserQuotaDescription\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return (\n <Trans",
+      "line_number": 161,
+      "context": ");\n };\n \n const getPersonalQuotaDescription = () => {\n if (!isAdmin)\n return t(\"PersonalUserQuotaDescription\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"PersonalUserQuotaAdminsDescription\"",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

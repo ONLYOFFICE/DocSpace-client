@@ -1,20 +1,20 @@
 {
   "key_path": "PayerDescription",
-  "content": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
-  "content_en_sha1_hash": "ae643c9dcf9e1481962468ae67c14eb82395ec04",
-  "created_at": "2026-04-10T13:53:42.922Z",
-  "updated_at": "2026-05-25T18:26:22.320Z",
+  "content": "This user has access to payment details and is the only user who can adjust the quota and make payments. The owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
+  "content_en_sha1_hash": "c56704eb3dafd581cb0cc042e7fc767d6e545065",
+  "created_at": "2026-08-13T14:37:01.191Z",
+  "updated_at": "2026-08-14T14:58:32.939Z",
   "comment": {
-    "text": "This is the content of a tooltip that appears when hovering over an info icon next to the \"Payer\" label. It explains the role and permissions of the paying manager, including how to reassign the role. The `{{productName}}` variable will be replaced with the product's brand name.",
+    "text": "Tooltip content explaining the permissions and responsibilities of a user assigned the \"Payer\" role; includes the {{productName}} variable.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:46:35.446Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:47:02.812Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 145,
-      "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </>\n }",
+      "line_number": 144,
+      "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\")}\n </Text>\n </>\n }\n dataTestId=\"payer_info_help_button\"\n />",
       "module": "/libs/ui-kit"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

@@ -127,9 +127,7 @@ const Main = (props: { apiBasicLink: string }) => {
           <Card
             icon={<EmbedSvg />}
             title={t("Settings:EmbedSDK")}
-            description={t("Settings:EmbedSDKDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            description={t("Settings:EmbedSDKDescription")}
             url="/developer-tools/javascript-sdk"
             color={globalColors.mainOrange}
             linkTitle={t("Settings:StartEmbedding")}
@@ -137,9 +135,7 @@ const Main = (props: { apiBasicLink: string }) => {
           <Card
             icon={<PluginSvg />}
             title={t("WebPlugins:PluginSDK")}
-            description={t("Settings:PluginDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            description={t("Settings:PluginDescription")}
             url="/developer-tools/plugin-sdk"
             color={globalColors.secondGreen}
             linkTitle={t("Common:ReadInstructions")}

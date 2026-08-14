@@ -50,7 +50,6 @@ import {
   ControlsSection,
   RowContainer,
 } from "../presets/StyledPresets";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const MainElementParameter = ({
   t,
@@ -145,9 +144,7 @@ export const MainElementParameter = ({
               scale
               name="button_text"
               onChange={setButtonText}
-              placeholder={t("SelectToPortal", {
-                productName: getBrandName("ProductName"),
-              })}
+              placeholder={t("SelectToPortal")}
               value={buttonValue}
               tabIndex={3}
               testId="button_mode_text_input"

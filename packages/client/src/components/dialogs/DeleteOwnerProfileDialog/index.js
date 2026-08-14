@@ -41,7 +41,6 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { withTranslation } from "react-i18next";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 class DeleteOwnerProfileDialogComponent extends React.Component {
   onClick = () => {
@@ -60,9 +59,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
         <ModalDialog.Header>{t("DeleteProfileTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <Text fontSize="13px">
-            {t("DeleteOwnerRestrictionText", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("DeleteOwnerRestrictionText")}
           </Text>
         </ModalDialog.Body>
         <ModalDialog.Footer>

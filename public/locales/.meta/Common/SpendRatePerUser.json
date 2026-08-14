@@ -3,7 +3,7 @@
   "content": "{{price}}/user",
   "content_en_sha1_hash": "187bf77eb07247ac1152dc7e51428a23f498ac46",
   "created_at": "2026-08-01T16:25:06.355Z",
-  "updated_at": "2026-08-13T10:58:03.423Z",
+  "updated_at": "2026-08-12T14:02:21.399Z",
   "comment": {
     "text": "Text label used in service usage details to indicate the cost per individual user, where {{price}} represents a numeric value.",
     "is_auto": true,

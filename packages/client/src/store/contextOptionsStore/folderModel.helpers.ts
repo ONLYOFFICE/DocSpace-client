@@ -61,7 +61,6 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import { onSuggestOformChanges, onUploadAction } from "./helpers";
 import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
@@ -95,7 +94,6 @@ self: ContextOptionsStore,
     },
   ];
 };
-
 
 export const getRoomsRootContextOptionsImpl = (
 self: ContextOptionsStore,
@@ -156,7 +154,6 @@ self: ContextOptionsStore,
   return { pinOptions, muteOptions };
 };
 
-
 export const getContextOptionsPlusFormRoomImpl = (
 self: ContextOptionsStore,
   t: TTranslation,
@@ -182,9 +179,7 @@ self: ContextOptionsStore,
         id: "personal_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("Common:FromPortal"),
         key: "personal_upload-from-docspace",
         onClick: () =>
           self.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
@@ -211,7 +206,6 @@ self: ContextOptionsStore,
     uploadReadyPDFFrom,
   ];
 };
-
 
 export const getFolderModelImpl = (
 self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
@@ -363,9 +357,7 @@ self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
         id: "actions_upload-files-product",
         className: "main-button_drop-down",
         icon: MoveReactSvgUrl,
-        label: t("EmptyView:UploadFromPortalTitle", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("EmptyView:UploadFromPortalTitle"),
         onClick: self.onShowAiKnowledgeSelectFileDialog,
         key: "upload-files-product",
       },

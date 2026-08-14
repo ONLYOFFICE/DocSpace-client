@@ -40,6 +40,7 @@ import { TConnectingStorage } from "../api/files/types";
 import { FolderType, RoomsType, RoomsTypePrivate } from "../enums";
 
 import { RoomsTypeValues } from "./common";
+import { isPrivateRoomsEnabled } from "./privateRooms";
 
 /**
  * Room types offered as filter options in the "Rooms" section dropdown.
@@ -73,6 +74,19 @@ export const ROOMS_SECTION_FOLDER_TYPES = [
   FolderType.PublicRoom,
   FolderType.VirtualDataRoom,
 ];
+
+/**
+ * Room types the create-room chooser may offer, in catalog order.
+ *
+ * Private rooms are still unreleased, so their card is only offered when the
+ * tester opted in via the `privateRooms` localStorage flag (see
+ * ./privateRooms.ts). Read this per render instead of caching it at module
+ * scope: the flag is flipped from the console at runtime.
+ */
+export const getCreateRoomTypes = () =>
+  isPrivateRoomsEnabled()
+    ? RoomsTypeValues
+    : RoomsTypeValues.filter((type) => type !== RoomsTypePrivate);
 
 const getStartRoomParams = (startRoomType: RoomsType, title: string) => {
   const startRoomParams = {

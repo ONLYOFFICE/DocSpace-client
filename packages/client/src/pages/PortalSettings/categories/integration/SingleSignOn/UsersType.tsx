@@ -43,7 +43,6 @@ import { isMobile } from "@docspace/shared/utils";
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import type { TOption } from "@docspace/ui-kit/components/combobox";
 import StyledInputWrapper from "./styled-containers/StyledInputWrapper";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 interface UsersTypeProps {
   usersType: number;
@@ -82,9 +81,7 @@ const UsersType = (props: UsersTypeProps) => {
       </div>
       <StyledInputWrapper>
         <Text fontWeight={400} fontSize="12px" lineHeight="16px">
-          {t("LdapUserTypeTooltip", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("LdapUserTypeTooltip")}
         </Text>
         <AccessSelector
           className="access-selector"

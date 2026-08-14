@@ -44,7 +44,6 @@ import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@docspace/ui-kit/components";
 import AIFeaturesDialog from "@docspace/ui-kit/billing/services/panels/ai-service/AIFeaturesDialog";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
 import ClientSimpleTopUpDialog from "./sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
@@ -87,8 +86,6 @@ const KnowledgeDisabledContainer = (props) => {
     createAgentOnActivate: false,
   });
 
-  const productName = getBrandName("ProductName");
-
   let titleRoomNoAccess;
   let descriptionRoomNoAccess;
 
@@ -96,11 +93,9 @@ const KnowledgeDisabledContainer = (props) => {
     titleRoomNoAccess = t("Common:KnowledgeUnavailable");
     descriptionRoomNoAccess = isAdmin
       ? t("Common:KnowledgeUnavailableDescription", {
-          productName,
           aiAgents: t("Common:AIAgents"),
         })
       : t("Common:KnowledgeUnavailableDescriptionUser", {
-          productName,
           aiAgents: t("Common:AIAgents"),
         });
   } else if (isAdmin) {
@@ -118,9 +113,7 @@ const KnowledgeDisabledContainer = (props) => {
   } else {
     // saas user — same text as the empty AI agents view
     titleRoomNoAccess = t("Common:AIFeaturesNotActive");
-    descriptionRoomNoAccess = t("Common:EmptyAIDisabledContactAdminDesc", {
-      productName,
-    });
+    descriptionRoomNoAccess = t("Common:EmptyAIDisabledContactAdminDesc");
   }
 
   const goToSettings = (event) => {

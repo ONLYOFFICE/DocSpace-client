@@ -3,7 +3,7 @@
   "content": "Created",
   "content_en_sha1_hash": "accf40c89baa4fa88e6a7ff11e1f805beecafd3f",
   "created_at": "2025-05-19T21:30:55.310Z",
-  "updated_at": "2026-07-27T13:07:50.723Z",
+  "updated_at": "2026-08-14T14:58:32.770Z",
   "comment": {
     "text": "Table header label. It indicates the column for sorting items by their creation date.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 134,
+      "line_number": 133,
       "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Common:ByCreation\") },\n { key: \"Author\", label: t(\"Common:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },",
       "module": "/packages/client"
     },
@@ -56,7 +56,7 @@
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 110,
-      "context": "dir: i18n.dir(),\n accountLabel,\n strings: {\n title: t(\"Common:RecoveryKitTitle\", { productName }),\n subtitle: t(\"Common:RecoveryKitSubtitle\"),\n createdLabel: t(\"Common:ByCreation\"),\n accountLabel: t(\"Common:Account\"),\n phraseLabel: t(\"Common:RecoveryKitPhraseLabel\"),\n whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n productName,",
+      "context": "dir: i18n.dir(),\n accountLabel,\n strings: {\n title: t(\"Common:RecoveryKitTitle\", { organizationName: getBrandName(\"OrganizationName\"), productName }),\n subtitle: t(\"Common:RecoveryKitSubtitle\"),\n createdLabel: t(\"Common:ByCreation\"),\n accountLabel: t(\"Common:Account\"),\n phraseLabel: t(\"Common:RecoveryKitPhraseLabel\"),\n whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n organizationName: getBrandName(\"OrganizationName\"), productName,",
       "module": "/packages/shared"
     }
   ],

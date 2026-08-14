@@ -3,7 +3,7 @@
   "content": "You can't move the folder to its subfolder",
   "content_en_sha1_hash": "506393764de44f23f65ce73e264a120055299986",
   "created_at": "2025-05-19T21:30:46.641Z",
-  "updated_at": "2026-08-13T10:58:03.043Z",
+  "updated_at": "2026-08-12T11:00:51.493Z",
   "comment": {
     "text": "This is an error toast message that appears when a user attempts to move a folder into one of its own subfolders, which is an invalid operation.",
     "is_auto": true,

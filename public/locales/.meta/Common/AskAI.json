@@ -3,7 +3,7 @@
   "content": "Ask AI",
   "content_en_sha1_hash": "8dbaeb8edb74d2923889062eac8ffeac56b9977b",
   "created_at": "2025-10-27T16:14:10.655Z",
-  "updated_at": "2026-08-06T14:20:57.580Z",
+  "updated_at": "2026-08-14T14:58:32.731Z",
   "comment": {
     "text": "This is the label for an action that invokes AI functionality. It appears in a hotkey list and as a context menu option.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/AICard.tsx",
-      "line_number": 148,
+      "line_number": 146,
       "context": "if (aiConnected) {\n if (isFormFile(selection) && selection.security?.AskAi) {\n return (\n <ActionButton\n icon={<AIReactSvg />}\n label={t(\"Common:AskAI\")}\n className={styles.actionButton}\n onClick={() => askAIAction(selection)}\n />\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 500,
+      "line_number": 499,
       "context": "),\n },\n {\n id: \"option_ask-ai\",\n key: \"ask-ai\",\n label: t(\"Common:AskAI\"),\n icon: AISvgUrl,\n onClick: () => self.askAI(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },

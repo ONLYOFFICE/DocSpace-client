@@ -3,7 +3,7 @@
   "content": "Embed cloud-hosted Document, Spreadsheet, Presentation and PDF editors — collaborative and MS Office-compatible, with your own keys. No server to install.",
   "content_en_sha1_hash": "c7fa6b87700654afda31bfd73435b182e414c263",
   "created_at": "2026-07-27T13:07:48.462Z",
-  "updated_at": "2026-07-27T14:17:29.237Z",
+  "updated_at": "2026-08-13T14:37:21.760Z",
   "comment": {
     "text": "Introductory paragraph in the DocsConnect \"Get Started\" modal describing the features and benefits of embedding cloud-hosted editors.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
-      "line_number": 143,
+      "line_number": 147,
       "context": "<div className={styles.intro}>\n <Text as=\"h3\" className={styles.subtitle}>\n {t(\"DocsConnect:GetStartedTitle\", { productName })}\n </Text>\n <Text as=\"p\" className={styles.description}>\n {t(\"DocsConnect:GetStartedDescription\")}\n </Text>\n </div>\n \n <div className={styles.cards}>\n {features.map(({ Icon, title, description }) => (",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Create Form Set",
   "content_en_sha1_hash": "5c266be0e2451747828508884538e488e1806f2d",
   "created_at": "2026-06-25T19:30:28.607Z",
-  "updated_at": "2026-08-06T14:20:57.609Z",
+  "updated_at": "2026-08-14T14:58:32.774Z",
   "comment": {
     "text": "Button label in the Forms section header used to initiate the creation of a new collection of forms.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 417,
+      "line_number": 409,
       "context": "]\n : isFormsFolder\n ? [\n {\n key: \"create-form-set\",\n label: t(\"Common:CreateFormSet\"),\n onClick: self.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n {\n key: \"template-gallery\",",
       "module": "/packages/client"
     }

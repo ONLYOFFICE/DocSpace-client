@@ -3,7 +3,7 @@
   "content": "Your profile details",
   "content_en_sha1_hash": "0feb38a1d878bc335a2db8628884d07df960f227",
   "created_at": "2026-08-07T10:52:39.929Z",
-  "updated_at": "2026-08-13T10:58:03.026Z",
+  "updated_at": "2026-08-12T11:00:51.484Z",
   "comment": {
     "text": "A title for an onboarding tour step that highlights the profile card containing portal information like name, owner, and storage.",
     "is_auto": true,

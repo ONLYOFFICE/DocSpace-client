@@ -3,7 +3,7 @@
   "content": "You’re in <strong>view-only</strong> mode for this AI agent. You can see the results of {{aiChat}} activity from other users.",
   "content_en_sha1_hash": "c77a4b058698563aad2e6983c45e8f7c7ae61b26",
   "created_at": "2026-05-26T17:09:23.365Z",
-  "updated_at": "2026-08-13T10:58:03.187Z",
+  "updated_at": "2026-08-12T11:00:51.561Z",
   "comment": {
     "text": "Info toast message appearing when a user has view-only access to an AI agent. It includes an HTML tag for emphasis and a variable representing the AI chat activity.",
     "is_auto": true,

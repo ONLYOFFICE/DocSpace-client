@@ -1,14 +1,14 @@
 {
   "key_path": "DNSSettingsNavDescription",
-  "content": "DNS Settings is a way to set an alternative URL for your portal.",
-  "content_en_sha1_hash": "3c82bb84a093eda60d3d1f18ddb01ff28bb6e063",
-  "created_at": "2025-05-19T21:30:51.243Z",
-  "updated_at": "2026-05-15T15:37:40.239Z",
+  "content": "DNS Settings is a way to set an alternative URL for your workspace.",
+  "content_en_sha1_hash": "e302809dfeb200a37de127d454ca2bba00c0c671",
+  "created_at": "2026-08-12T11:00:45.767Z",
+  "updated_at": "2026-08-12T13:31:47.918Z",
   "comment": {
-    "text": "This is a subtitle for a navigation item in the portal settings. It describes the purpose of the \"DNS Settings\" section, which allows users to configure a custom URL for their portal.",
+    "text": "Subtitle for a navigation menu item in the customization settings that explains the purpose of the DNS configuration section.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:27.274Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:31:47.918Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

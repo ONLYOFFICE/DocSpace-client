@@ -42,7 +42,6 @@ import { Button } from "@docspace/ui-kit/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/ui-kit/components/error-container/ErrorContainer";
 import { Link } from "@docspace/ui-kit/components/link";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "./PortalUnavailable.module.scss";
 
@@ -65,22 +64,16 @@ const PortalUnavailable = ({ onLogoutClick }) => {
         visible={isVisible}
         t={t}
         emailPlaceholderText={t("Common:RegistrationEmail")}
-        textBody={t("PortalUnavailable:AccessingProblemContact", {
-          productName: getBrandName("ProductName"),
-        })}
+        textBody={t("PortalUnavailable:AccessingProblemContact")}
         onClose={onCloseDialog}
       />
       <ErrorContainer
         className="portal-unavailable_container"
-        headerText={t("ErrorUnavailableText", {
-          productName: getBrandName("ProductName"),
-        })}
+        headerText={t("ErrorUnavailableText")}
       >
         <div className={styles.bodyContent}>
           <Text textAlign="center" className="portal-unavailable_text">
-            {t("PortalUnavailable:AccessingProblemContact", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("PortalUnavailable:AccessingProblemContact")}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
           !window.navigator.userAgent.includes("ZoomApps") ? (
@@ -98,9 +91,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             onClick={onClickToContact}
             color="accent"
           >
-            {t("PortalUnavailable:ContactAdministrator", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("PortalUnavailable:ContactAdministrator")}
           </Link>
         </div>
       </ErrorContainer>

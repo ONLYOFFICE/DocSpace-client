@@ -3,7 +3,7 @@
   "content": "Star files and folders to keep them easily accessible and within reach.",
   "content_en_sha1_hash": "93cf58fd17f758b088070b1be787919168c6f809",
   "created_at": "2025-08-29T14:33:36.168Z",
-  "updated_at": "2026-08-06T08:04:19.855Z",
+  "updated_at": "2026-08-14T14:58:32.653Z",
   "comment": {
     "text": "This is a message displayed when the \"Favorites\" section is empty, explaining how to add items to it.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 321,
-      "context": "productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([FolderType.Recent, P._], () => t(\"Common:EmptyRecentDescription\"))\n .with([FolderType.Favorites, P._], () =>\n t(\"Common:EmptyFavoritesDescription\"),\n )\n .with([FolderType.Archive, ShareAccessRights.None], () =>\n t(\"Common:ArchiveEmptyScreen\", {\n productName: getBrandName(\"ProductName\"),\n }),",
+      "line_number": 313,
+      "context": ".with([FolderType.SHARE, P._], () =>\n t(\"Common:EmptyShareDescription\"),\n )\n .with([FolderType.Recent, P._], () => t(\"Common:EmptyRecentDescription\"))\n .with([FolderType.Favorites, P._], () =>\n t(\"Common:EmptyFavoritesDescription\"),\n )\n .with([FolderType.Archive, ShareAccessRights.None], () =>\n t(\"Common:ArchiveEmptyScreen\"),\n )\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>",
       "module": "/packages/client"
     },
     {
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
-      "line_number": 151,
-      "context": "case FolderType.SHARE:\n return t(\"Common:EmptyShareDescription\", {\n productName: getBrandName(\"ProductName\"),\n });\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesDescription\");\n case FolderType.Recent:\n return t(\"Common:EmptyRecentDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),",
+      "line_number": 150,
+      "context": ") => {\n switch (rootFolderType) {\n case FolderType.SHARE:\n return t(\"Common:EmptyShareDescription\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesDescription\");\n case FolderType.Recent:\n return t(\"Common:EmptyRecentDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/sdk"
     },
     {
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
-      "line_number": 137,
-      "context": "case FolderType.SHARE:\n return t(\"Common:EmptyShareDescription\", {\n productName: getBrandName(\"ProductName\"),\n });\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesDescription\");\n case FolderType.Recent:\n return t(\"Common:EmptyRecentDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),",
+      "line_number": 136,
+      "context": ") => {\n switch (rootFolderType) {\n case FolderType.SHARE:\n return t(\"Common:EmptyShareDescription\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesDescription\");\n case FolderType.Recent:\n return t(\"Common:EmptyRecentDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/sdk"
     }
   ],

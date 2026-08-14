@@ -1,14 +1,14 @@
 {
   "key_path": "SMTPSettingsDescription",
-  "content": "The SMTP settings are needed to set up an email account which will be used to send notifications from the portal using your own SMTP server instead of the one {{organizationName}} uses. Please fill in all the fields and click the 'Save' button. You can use the 'Send Test Mail' button to check if all the settings you entered are correct and work as supposed.",
-  "content_en_sha1_hash": "4bf36a3101ed85c6f1e5966715d026a0cf242ce9",
-  "created_at": "2025-05-19T21:30:52.753Z",
-  "updated_at": "2026-05-15T14:00:06.853Z",
+  "content": "The SMTP settings are needed to set up an email account which will be used to send notifications from the workspace using your own SMTP server instead of the one {{organizationName}} uses. Please fill in all the fields and click the 'Save' button. You can use the 'Send Test Mail' button to check if all the settings you entered are correct and work as supposed.",
+  "content_en_sha1_hash": "cb5dc75babbc37c76694a0a6c9d73c073b22ad8a",
+  "created_at": "2026-08-12T11:00:46.428Z",
+  "updated_at": "2026-08-12T12:05:23.101Z",
   "comment": {
-    "text": "This is a descriptive text explaining the purpose of SMTP settings. It appears on the SMTP settings page and includes a variable `{{organizationName}}` which will be replaced by the name of the organization.",
+    "text": "Instructional text within the SMTP settings section explaining how to configure a custom email server. It includes the variable {{organizationName}}, which represents the organization's name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:04.111Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T12:05:23.101Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

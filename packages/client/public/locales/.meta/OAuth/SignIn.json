@@ -1,20 +1,20 @@
 {
   "key_path": "SignIn",
-  "content": "Sign in with {{productName}}",
-  "content_en_sha1_hash": "fe0a426c94ba375b201a50dc71c51007d0da07a3",
-  "created_at": "2025-05-19T21:30:54.045Z",
-  "updated_at": "2026-05-15T15:37:40.264Z",
+  "content": "Sign in with {{organizationName}} {{productName}}",
+  "content_en_sha1_hash": "79053d19ed900274548277bb6a54147ce0092264",
+  "created_at": "2026-08-13T22:44:30.692Z",
+  "updated_at": "2026-08-14T15:31:46.950Z",
   "comment": {
-    "text": "This is a button label for signing in with an external service. `{{productName}}` will be replaced with the name of the product (e.g., \"Google\", \"Facebook\").",
+    "text": "Button label for a social login button in the OAuth preview dialog, incorporating the organization and product brand names via {{organizationName}} and {{productName}}.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:18:15.077Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:31:46.950Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
       "line_number": 212,
-      "context": "className=\"social-button\"\n label={\n <Trans\n t={t}\n ns=\"OAuth\"\n i18nKey=\"SignIn\"\n values={{ productName: getBrandName(\"ProductName\") }}\n />\n }\n IconComponent={icon}\n onClick={() => {",
+      "context": "className=\"social-button\"\n label={\n <Trans\n t={t}\n ns=\"OAuth\"\n i18nKey=\"SignIn\"\n values={{ organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\") }}\n />\n }\n IconComponent={icon}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

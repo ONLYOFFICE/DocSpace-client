@@ -3,7 +3,7 @@
   "content": "Build with {{organizationName}}",
   "content_en_sha1_hash": "57f6b7253bdb61d642327a73629abc19f33c126d",
   "created_at": "2026-06-01T21:20:38.478Z",
-  "updated_at": "2026-08-13T10:58:03.157Z",
+  "updated_at": "2026-08-12T11:00:51.550Z",
   "comment": {
     "text": "Card title in the DevTools section of the Dashboard, featuring the organization's brand name via the {{organizationName}} variable.",
     "is_auto": true,

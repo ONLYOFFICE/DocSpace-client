@@ -60,7 +60,6 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "SRC_DIR/helpers/filesUtils";
 import { ThirdPartyStore } from "SRC_DIR/store/ThirdPartyStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "../../CreateEditRoomDialog.module.scss";
 
@@ -213,9 +212,7 @@ const ThirdPartyComboBox = ({
 	const getTextTooltip = () => {
 		return (
 			<Text fontSize="12px" noSelect>
-				{t("Common:EnableThirdPartyIntegration", {
-					productName: getBrandName("ProductName"),
-				})}
+				{t("Common:EnableThirdPartyIntegration")}
 			</Text>
 		);
 	};

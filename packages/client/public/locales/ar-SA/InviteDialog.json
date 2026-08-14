@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "لغة الدعوة",
-  "InviteMembersManuallyDescription": "قم بدعوة أعضاء جدد إلى {{productName}} شخصيًا عبر البريد الإلكتروني",
+  "InviteMembersManuallyDescription": "قم بدعوة أعضاء جدد إلى مساحة العمل شخصيًا عبر البريد الإلكتروني",
   "InviteMembersSearchPlaceholder": "دعوة الأعضاء عن طريق البريد الإلكتروني",
-  "InviteViaLinkDescriptionAccounts": "قم بإنشاء ارتباط عالمي للمصادقة الذاتية في {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "قم بإنشاء ارتباط عالمي للمصادقة الذاتية في مساحة العمل"
 }

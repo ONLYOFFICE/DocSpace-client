@@ -3,7 +3,7 @@
   "content": "{{planName}} plan updated",
   "content_en_sha1_hash": "d072992aaddc06db95b3109b8a055ea6d40dc9e2",
   "created_at": "2026-04-10T13:53:42.147Z",
-  "updated_at": "2026-08-13T10:58:03.390Z",
+  "updated_at": "2026-08-14T14:58:32.930Z",
   "comment": {
     "text": "This is a toast message confirming that a user's subscription plan has been successfully updated. `{{planName}}` will be replaced with the name of the updated plan (e.g., \"Business\", \"Enterprise\").",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 130,
+      "line_number": 129,
       "context": "fetchPortalTariff(true),\n fetchBalance(true),\n fetchPortalQuota(true),\n ]);\n toastr.success(\n t(\"BusinessUpdated\", { planName: currentTariffPlanTitle }),\n );\n } catch (e) {\n console.error(e);\n toastr.error(t(\"ErrorNotification\"));\n } finally {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1572,
+      "line_number": 1580,
       "context": "this.fetchBalance(true),\n this.quotas.fetchPortalQuota(true),\n ]);\n \n toastr.success(\n t(\"BusinessUpdated\", { planName: this.quotas.currentTariffPlanTitle }),\n );\n \n return true;\n } catch (e) {\n console.error(e);",
       "module": "/libs/ui-kit"
     }

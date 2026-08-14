@@ -3,7 +3,7 @@
   "content": "Recovery phrase",
   "content_en_sha1_hash": "33d2fd77b6fd28611bb5a0eceaad2cb681947209",
   "created_at": "2026-07-27T13:07:29.597Z",
-  "updated_at": "2026-07-27T13:19:15.066Z",
+  "updated_at": "2026-08-14T14:58:32.893Z",
   "comment": {
     "text": "A label in a modal dialog that identifies the sequence of words used for account recovery.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 112,
-      "context": "strings: {\n title: t(\"Common:RecoveryKitTitle\", { productName }),\n subtitle: t(\"Common:RecoveryKitSubtitle\"),\n createdLabel: t(\"Common:ByCreation\"),\n accountLabel: t(\"Common:Account\"),\n phraseLabel: t(\"Common:RecoveryKitPhraseLabel\"),\n whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n productName,\n wordCount,\n }),",
+      "context": "strings: {\n title: t(\"Common:RecoveryKitTitle\", { organizationName: getBrandName(\"OrganizationName\"), productName }),\n subtitle: t(\"Common:RecoveryKitSubtitle\"),\n createdLabel: t(\"Common:ByCreation\"),\n accountLabel: t(\"Common:Account\"),\n phraseLabel: t(\"Common:RecoveryKitPhraseLabel\"),\n whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n organizationName: getBrandName(\"OrganizationName\"), productName,\n wordCount,\n }),",
       "module": "/packages/shared"
     }
   ],

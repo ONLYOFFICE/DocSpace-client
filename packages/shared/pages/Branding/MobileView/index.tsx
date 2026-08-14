@@ -39,7 +39,6 @@ import { useTranslation } from "react-i18next";
 import { CategoryItem } from "@docspace/ui-kit/components/category-item";
 
 import styles from "./MobileView.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const MobileView = ({
   isSettingPaid,
@@ -77,9 +76,7 @@ export const MobileView = ({
       {displayAbout ? (
         <CategoryItem
           title={t("CompanyInfoSettings")}
-          subtitle={t("BrandingSectionDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          subtitle={t("BrandingSectionDescription")}
           url={`${baseUrl}/branding/company-info`}
           withPaidBadge={!isSettingPaid}
           badgeLabel={t("Paid")}

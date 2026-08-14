@@ -1,20 +1,20 @@
 {
   "key_path": "DocumentServiceLocationUrlInternal",
-  "content": "Document Service address for internal requests from the {{productName}}",
-  "content_en_sha1_hash": "2e77cbaa428ed8b0c1752c38f06e1df3760ca3af",
-  "created_at": "2025-05-19T21:30:51.393Z",
-  "updated_at": "2026-08-10T12:23:10.682Z",
+  "content": "Document Service address for internal requests from the workspace",
+  "content_en_sha1_hash": "6f152acb5467b7df9daade8880cf805c854838af",
+  "created_at": "2026-08-13T22:44:29.428Z",
+  "updated_at": "2026-08-14T15:37:24.267Z",
   "comment": {
-    "text": "This is a label for an input field in the portal settings. It describes the internal network address used by the product for document service requests. `{{productName}}` will be replaced with the product's brand name.",
+    "text": "Label for a text input field in the Document Service integration settings.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:19.446Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:37:24.267Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
       "line_number": 493,
-      "context": "</Text>\n </div>\n <div className={styles.inputWrapper}>\n <Label\n htmlFor=\"internalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlInternal\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n <InputBlock\n id=\"internalAdress\"",
+      "context": "</Text>\n </div>\n <div className={styles.inputWrapper}>\n <Label\n htmlFor=\"internalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlInternal\")}\n />\n <InputBlock\n id=\"internalAdress\"\n type=\"text\"\n autoComplete=\"off\"",
       "module": "/packages/client"
     }
   ],
@@ -169,6 +169,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

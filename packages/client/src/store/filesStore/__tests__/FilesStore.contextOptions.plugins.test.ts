@@ -12,6 +12,11 @@ import type { TItem } from "../types";
 // party (PDF Converter -> convertapi.com) or fails on it (Convert to Markdown).
 // The group-action menu filters against these same contextOptions, so keeping
 // the keys out here closes the single- and multi-selection surfaces at once.
+//
+// The same gate keeps plugin actions away from the contents of a form room: a
+// form room only accepts PDF forms, so a plugin that writes its result back
+// (zip-archives -> "Failed to save zip") cannot succeed there. The form room
+// itself, listed in the Forms section, still gets them.
 
 const PLUGIN_KEY = "plugin-convert-to-pdf";
 
@@ -116,6 +121,63 @@ describe("getFilesContextOptions — plugin items vs encrypted files", () => {
     store.dialogsStore = { roomGroups: [] } as never;
 
     expect(store.getFilesContextOptions(privateRoom)).not.toContain(PLUGIN_KEY);
+  });
+
+  it("keeps plugin actions out of a form room's contents", () => {
+    const store = storeWithPlugin();
+
+    const pdfForm = {
+      ...baseFile(),
+      id: 7,
+      title: "Form.pdf",
+      fileExst: ".pdf",
+      isForm: true,
+      parentRoomType: FolderType.FormRoom,
+    } as unknown as TItem;
+
+    const folderInFormRoom = {
+      ...baseFolder(),
+      id: 8,
+      parentRoomType: FolderType.FormRoom,
+    } as unknown as TItem;
+
+    expect(store.getFilesContextOptions(pdfForm)).not.toContain(PLUGIN_KEY);
+    expect(store.getFilesContextOptions(folderInFormRoom)).not.toContain(
+      PLUGIN_KEY,
+    );
+  });
+
+  it("keeps plugin actions out of items listed inside an opened form room", () => {
+    const getContextMenuKeysByType = vi.fn(() => [PLUGIN_KEY]);
+    const store = createTestFilesStore({
+      settingsStore: { enablePlugins: true },
+      pluginStore: { getContextMenuKeysByType },
+      userStore: { encryptionKeys: [{ id: "key-1" }] },
+      treeFoldersStore: { isFormRoomRoot: true },
+    });
+
+    // system folders of a form room carry no parentRoomType of their own
+    expect(store.getFilesContextOptions(baseFolder())).not.toContain(
+      PLUGIN_KEY,
+    );
+    expect(store.getFilesContextOptions(baseFile())).not.toContain(PLUGIN_KEY);
+    expect(getContextMenuKeysByType).not.toHaveBeenCalled();
+  });
+
+  it("still offers plugin actions on a form room itself", () => {
+    const formRoom = {
+      ...baseFolder(),
+      id: 9,
+      title: "Form space",
+      roomType: RoomsType.FormRoom,
+      rootFolderType: FolderType.Forms,
+      parentRoomType: FolderType.Forms,
+    } as unknown as TItem;
+
+    const store = storeWithPlugin();
+    store.dialogsStore = { roomGroups: [] } as never;
+
+    expect(store.getFilesContextOptions(formRoom)).toContain(PLUGIN_KEY);
   });
 
   it("keeps plugin actions out of an encrypted image or video too", () => {

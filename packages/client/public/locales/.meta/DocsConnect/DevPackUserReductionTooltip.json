@@ -3,7 +3,7 @@
   "content": "User reduction isn't available when upgrading to Dev Pack. Reduce users in your current subscription or after your new subscription becomes active.",
   "content_en_sha1_hash": "020ff66176194496643bb2853990072054b40317",
   "created_at": "2026-07-27T13:07:48.528Z",
-  "updated_at": "2026-08-13T10:58:03.216Z",
+  "updated_at": "2026-08-12T14:02:21.318Z",
   "comment": {
     "text": "Tooltip explaining why user reduction is unavailable during a Dev Pack upgrade and providing instructions on when the action can be performed instead.",
     "is_auto": true,

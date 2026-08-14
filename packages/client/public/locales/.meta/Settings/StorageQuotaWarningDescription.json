@@ -1,20 +1,20 @@
 {
   "key_path": "StorageQuotaWarningDescription",
-  "content": "Storage quota is enabled for this {{productName}}: {{quotaLimits}}. Limitations can occur during data import.",
-  "content_en_sha1_hash": "ce0c51ee29b44d088bd4f16916128d64a83f815c",
-  "created_at": "2025-05-19T21:30:52.803Z",
-  "updated_at": "2026-05-15T14:00:06.699Z",
+  "content": "Storage quota is enabled for this workspace: {{quotaLimits}}. Limitations can occur during data import.",
+  "content_en_sha1_hash": "bade19daacaa712fc61fe64a35b7ba95b762458c",
+  "created_at": "2026-08-12T11:00:46.455Z",
+  "updated_at": "2026-08-14T14:58:32.726Z",
   "comment": {
-    "text": "This is a warning message displayed in a dialog. It informs the user about storage quota limitations for the product, with `{{productName}}` being the product name (e.g., ONLYOFFICE DocSpace) and `{{quotaLimits}}` listing the specific quota restrictions (e.g., \"10 GB\", \"5 users\").",
+    "text": "Text within a warning dialog shown when storage quotas are active for a workspace; includes {{quotaLimits}} representing the specific enabled limits.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:21:57.786Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T12:02:34.602Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 89,
-      "context": "if (quotaLimits.length === 0) {\n return \"\";\n }\n \n return t(\"Settings:StorageQuotaWarningDescription\", {\n quotaLimits: quotaLimits.join(\", \"),\n productName: getBrandName(\"ProductName\"),\n });\n };",
+      "line_number": 87,
+      "context": "if (quotaLimits.length === 0) {\n return \"\";\n }\n \n return t(\"Settings:StorageQuotaWarningDescription\", {\n quotaLimits: quotaLimits.join(\", \"),\n });\n };\n \n return (",
       "module": "/packages/client"
     }
   ],
@@ -25,187 +25,7 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
-    "ar-SA": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "az": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "bg": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "cs": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "de": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "el-GR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "es": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "fi": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "fr": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "hy-AM": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "it": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ja-JP": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ko-KR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "lo-LA": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "lv": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "nl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "pl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "pt": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "pt-BR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "ro": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
     "ru": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
-    },
-    "si": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sk": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sr-Cyrl-RS": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sr-Latn-RS": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "tr": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "uk-UA": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "vi": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

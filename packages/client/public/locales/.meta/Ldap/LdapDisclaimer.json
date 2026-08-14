@@ -1,14 +1,14 @@
 {
   "key_path": "LdapDisclaimer",
-  "content": "Please, keep in mind: the portal user email will be taken from the 'Mail Attribute' setting. If it is missing, it will be formed in the following way: 'Login Attribute + @ + LDAP Domain'. In case such an email does not exist, the user will not receive any portal notification.",
-  "content_en_sha1_hash": "8572743e32379ae667edfb0ddac6d16c85a44092",
-  "created_at": "2025-05-19T21:30:54.199Z",
-  "updated_at": "2026-05-15T14:00:06.851Z",
+  "content": "Please, keep in mind: the workspace user email will be taken from the 'Mail Attribute' setting. If it is missing, it will be formed in the following way: 'Login Attribute + @ + LDAP Domain'. In case such an email does not exist, the user will not receive any workspace notification.",
+  "content_en_sha1_hash": "08acdd1eccf757a1e0f3ebc6ef2df41b2922d5a6",
+  "created_at": "2026-08-12T15:15:02.341Z",
+  "updated_at": "2026-08-12T15:23:11.876Z",
   "comment": {
-    "text": "This is a disclaimer message displayed below the LDAP settings. It informs the user about how email addresses are generated for portal users based on LDAP settings and the implications if an email is not found.",
+    "text": "Informational disclaimer text within the LDAP integration settings section that explains how user emails are constructed from LDAP attributes.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:17:13.860Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T15:23:11.876Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

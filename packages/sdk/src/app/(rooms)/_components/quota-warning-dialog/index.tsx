@@ -50,7 +50,6 @@ import {
   formatDateLocalized,
 } from "@docspace/ui-kit/utils/date";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
@@ -153,12 +152,8 @@ const QuotaWarningDialog = observer(
         <br />
         <Text>
           {standalone
-            ? t("LicenseGracePeriodInfo", {
-                productName: getBrandName("ProductName"),
-              })
-            : t("Common:GracePeriodActivatedDescription", {
-                productName: getBrandName("ProductName"),
-              })}
+            ? t("LicenseGracePeriodInfo")
+            : t("Common:GracePeriodActivatedDescription")}
         </Text>
       </>
     );
@@ -167,9 +162,7 @@ const QuotaWarningDialog = observer(
       <Text>
         {isPaymentPageAvailable
           ? t("ChooseNewPlan")
-          : t("MainBar:ContactToUpgradeTariff", {
-              productName: getBrandName("ProductName"),
-            })}
+          : t("MainBar:ContactToUpgradeTariff")}
       </Text>
     );
 

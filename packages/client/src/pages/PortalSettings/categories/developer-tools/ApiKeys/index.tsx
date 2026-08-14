@@ -58,7 +58,6 @@ import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
 import styles from "./ApiKeys.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ApiKeys = (props: ApiKeysProps) => {
   const {
@@ -166,9 +165,7 @@ const ApiKeys = (props: ApiKeysProps) => {
         })}
       >
         <Text lineHeight="20px" className={styles.apiKeysText}>
-          {t("Settings:ApiKeysDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Settings:ApiKeysDescription")}
         </Text>
         <Text
           className={classNames(

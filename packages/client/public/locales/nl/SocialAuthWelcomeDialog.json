@@ -1,11 +1,11 @@
 {
   "ChangeData": "Wijzig data en wachtwoord",
   "ClickButtonBelow": "Als u wilt inloggen met uw e-mailadres, stel dan uw eigen wachtwoord in. <br/> Klik op de knop hieronder zodra u klaar bent.",
-  "ContinueToProduct": "Ga verder met {{productName}}",
+  "ContinueToProduct": "Ga verder naar de werkruimte",
   "GeneratedPassword": "Gegenereerd wachtwoord",
-  "ProductNameDetail": "{{productName}} naam",
+  "ProductNameDetail": "Werkruimtenaam",
   "ReviewAccountDetails": "Neem even de tijd om uw accountgegevens te bekijken:",
   "SetEmailPassword": "Wachtwoord instellen",
-  "WelcomeSubtitle": "Uw ruimte is succesvol aangemaakt. Bekijk uw profielgegevens en begin met werken.",
+  "WelcomeSubtitle": "Uw werkruimte is succesvol aangemaakt. Bekijk uw profielgegevens en begin met werken.",
   "YourProfileDetails": "Uw profielgegevens"
 }

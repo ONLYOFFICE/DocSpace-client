@@ -2,8 +2,8 @@
   "ActionsWithFilesDescription": "Tunnisteet korostavat tiedostojen toimintaa — lataukset, muokkaukset tai jaetut tiedostot — kaikilla {{rooms}}, {{shared}}, {{documents}} ja {{aiAgents}} -osioilla.",
   "AdminSetupRequired": "Adminin asennus vaaditaan",
   "Badges": "Merkit",
-  "DailyFeed": "Päivittäinen {{productName}}-syöte",
-  "DailyFeedDescription": "Lue uutiset ja tapahtumat {{productName}}-si päivittäisistä uutisista.",
+  "DailyFeed": "Päivittäinen {{organizationName}} {{productName}}-syöte",
+  "DailyFeedDescription": "Lue uutiset ja tapahtumat {{organizationName}} {{productName}}-si päivittäisistä uutisista.",
   "FileActivityNotify": "Tiedoston toimintailmoitukset",
   "IsNotValid": "Ei ole kelvollinen",
   "LdapEmailTooltip": "Tämä käyttäjätili ladataan LDAP:sta. Käyttäjän sähköpostiosoitetta ei ole määritetty, ja nykyinen osoite on luotu automaattisesti eikä sitä voi käyttää ilmoitusten lähettämiseen.",
@@ -14,6 +14,6 @@
   "SettingUpNotifications": "Ilmoitusten määritys",
   "SuccessConnected": "{{serviceName}} on yhdistetty onnistuneesti ilmoituskanavana. Saat sieltä nyt päivityksiä.",
   "SuccessDisconnected": "{{serviceName}} onnistui irrottamaan ilmoituskanavana. Ilmoituksia ei enää lähetetä sinne.",
-  "UsefulTips": "Hyödylliset {{productName}}-vinkit",
-  "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{productName}}-sta"
+  "UsefulTips": "Hyödylliset {{organizationName}} {{productName}}-vinkit",
+  "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{organizationName}} {{productName}}-sta"
 }

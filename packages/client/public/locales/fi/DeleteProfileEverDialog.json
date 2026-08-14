@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndoneGuests": "Valitut käytöstä poistetut vieraat poistetaan {{productName}}. Tätä toimintoa ei voi peruuttaa.",
-  "ActionCannotBeUndoneUsers": "Valitut käytöstä poistetut käyttäjät poistetaan {{productName}}-sta. Tätä toimintoa ei voi peruuttaa.",
+  "ActionCannotBeUndoneGuests": "Valitut käytöstä poistetut vieraat poistetaan työtilasta. Tätä toimintoa ei voi peruuttaa.",
+  "ActionCannotBeUndoneUsers": "Valitut käytöstä poistetut käyttäjät poistetaan työtilasta. Tätä toimintoa ei voi peruuttaa.",
   "CannotReassignFiles": "Jos poistat useita käyttäjiä kerralla, et voi siirtää heidän tiedostojaan muille käyttäjille.",
   "DeleteGroupGuestsSuccessMessage": "Vieraat on poistettu onnistuneesti.",
   "DeleteGroupUsersSuccessMessage": "Käyttäjät on poistettu.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Poista käyttäjä",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1>käyttäjä poistetaan. Tätä toimintoa ei voi perua.",
   "DeletingUsers": "Käyttäjien poistaminen",
-  "PersonalDataDeletionInfo": "Henkilötiedot, kaikki henkilökohtaiset tiedostot ja kansiot valittujen käyttäjien osioissa {{sectionNameFirst}} ja {{sectionNameSecond}}* poistetaan pysyvästi. Valittujen käyttäjien tiedostot ja kansiot yhteisissä osioissa*, kuten huoneissa, säilyvät {{productName}}-palvelussa.",
+  "PersonalDataDeletionInfo": "Henkilötiedot, kaikki henkilökohtaiset tiedostot ja kansiot valittujen käyttäjien osioissa {{sectionNameFirst}} ja {{sectionNameSecond}}* poistetaan pysyvästi. Valittujen käyttäjien tiedostot ja kansiot yhteisissä osioissa*, kuten huoneissa, säilyvät työtilassa.",
   "PleaseNote": "Ole hyvä ja huomioi:",
   "ReassignDataToAnotherUser": "Siirrä tiedot toiselle käyttäjälle",
   "SuccessfullyDeleteGuestInfoMessage": "Vieras on onnistuneesti poistettu",

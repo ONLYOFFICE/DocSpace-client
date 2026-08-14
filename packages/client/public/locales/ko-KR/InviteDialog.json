@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "초대 언어",
-  "InviteMembersManuallyDescription": "이메일을 통해 개인적으로 새 멤버를 {{productName}}에 초대하세요",
+  "InviteMembersManuallyDescription": "이메일을 통해 개인적으로 새 멤버를 워크스페이스에 초대하세요",
   "InviteMembersSearchPlaceholder": "이메일을 통한 멤버 초대",
-  "InviteViaLinkDescriptionAccounts": "{{productName}}에서 자체 인증을 위한 범용 링크 생성"
+  "InviteViaLinkDescriptionAccounts": "워크스페이스에서 자체 인증을 위한 범용 링크 생성"
 }

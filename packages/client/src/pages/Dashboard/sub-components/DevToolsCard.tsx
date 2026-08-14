@@ -123,14 +123,14 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
     {
       id: "embed-sdk",
       title: t("Settings:EmbedSDK"),
-      description: t("Settings:EmbedSDKDescription", { productName }),
+      description: t("Settings:EmbedSDKDescription"),
       path: "/developer-tools/javascript-sdk",
       linkTitle: t("Common:LearnMore"),
     },
     {
       id: "plugins-sdk",
       title: t("WebPlugins:PluginSDK"),
-      description: t("Settings:PluginDescription", { productName }),
+      description: t("Settings:PluginDescription"),
       path: "/developer-tools/plugin-sdk",
       linkTitle: t("Common:LearnMore"),
     },

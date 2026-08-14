@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "To jest sam formularz — dokładnie to, co otwiera każdy, kto kliknie twój link. Wgraj formularz PDF, który już masz, albo zbuduj nowy z galerii szablonów, nie opuszczając obszaru.",
+  "FormsBlank": "To jest sam formularz — dokładnie to, co otwiera każdy, kto kliknie twój link. Wgraj formularz PDF, który już masz, albo zbuduj nowy z galerii szablonów, nie opuszczając przestrzeni roboczej.",
   "FormsBlankTitle": "Formularz, który otwierają wszyscy",
   "FormsComplete": "Przesłana kopia trafia do {{complete}} i tam zostaje, po jednej na osobę. Włącz zbieranie wyników, a każda odpowiedź stanie się także wierszem w arkuszu kalkulacyjnym — jedna kolumna na pole, gotowa do sortowania lub przedstawienia na wykresie.",
   "FormsCompleteTitle": "Zebrane odpowiedzi",
@@ -15,7 +15,7 @@
   "FormsItem": "Każdy wiersz to cały zbiór. Otwórz jeden, aby pracować w środku, przypnij te, które właśnie prowadzisz, albo przez trzy kropki zaproś osoby, skopiuj link otwierający formularz i zapisz konfigurację jako szablon.",
   "FormsItemTitle": "Praca z obszarem formularzy",
   "FormsPlacesRecent": "{{recent}} i {{favorites}} trzymają pod ręką zbiory, które prowadzisz.",
-  "FormsPlacesTemplates": "{{templates}} — zapisane przez ciebie szablony obszarów.",
+  "FormsPlacesTemplates": "{{templates}} — zapisane przez ciebie szablony obszarów formularzy.",
   "FormsPlacesTitle": "Wszystko na swoim miejscu",
   "FormsPlacesTrash": "{{trash}} — usunięte obszary, można je przywrócić, dopóki go nie opróżnisz.",
   "FormsSpace": "Obszar formularzy to jeden zbiór od początku do końca: pusty formularz PDF, osoby, które go wypełniają, i każda odpowiedź, która wraca. Utwórzmy jeden i zajrzyjmy do środka.",

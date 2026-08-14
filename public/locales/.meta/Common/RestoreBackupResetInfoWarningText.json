@@ -1,26 +1,26 @@
 {
   "key_path": "RestoreBackupResetInfoWarningText",
-  "content": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
-  "content_en_sha1_hash": "3531a741576e6d7f3c7d70f497013990e0744339",
-  "created_at": "2025-05-26T07:15:46.918Z",
-  "updated_at": "2026-05-15T14:00:06.961Z",
+  "content": "All current passwords will be reset. Workspace users will get an email with the access restoration link.",
+  "content_en_sha1_hash": "148226528b143e6559e6265c392cc52350adec3d",
+  "created_at": "2026-08-13T22:44:18.707Z",
+  "updated_at": "2026-08-14T15:03:28.162Z",
   "comment": {
-    "text": "This is a warning message displayed during the backup restoration process. It informs the user that all current passwords will be reset and that users will receive an email with an access restoration link. `{{productName}}` will be replaced with the product's brand name.",
+    "text": "Warning text displayed during the backup restoration process to inform users about the consequences of resetting passwords and the subsequent email notifications.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:44:53.013Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:03:28.162Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 391,
-      "context": "styles.restoreBackupWarningLink,\n styles.settingsUnavailable,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n ) : null}\n </>",
+      "line_number": 388,
+      "context": "styles.restoreBackupWarningLink,\n styles.settingsUnavailable,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\")}\n </Text>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 225,
-      "context": "className={classNames(\n styles.restoreBackupWarningLink,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n ) : null}\n </Text>",
+      "line_number": 222,
+      "context": "className={classNames(\n styles.restoreBackupWarningLink,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\")}\n </Text>\n ) : null}\n </Text>\n );",
       "module": "/packages/shared"
     }
   ],
@@ -155,7 +155,13 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
     },
     "sk": {
       "ai_translated": false,
@@ -169,18 +175,16 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'обнушавање' is not valid in standard Serbian. The correct word for 'restoration' in this context is 'обнављање'. This misspelling could confuse users or make the sentence incomprehensible.",
-          "suggestion": "Све тренутне лозинке ће бити ресетоване. {{productName}} корисници ће добити емаил са линком за обнављање приступа.",
-          "checked_at": "2026-04-13T09:17:51.790Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -208,18 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "si": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

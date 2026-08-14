@@ -55,7 +55,6 @@ import styles from "./customization.module.scss";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 import useCommon from "../useCommon";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AdManagementComponent = ({
   isMobileView,
@@ -184,7 +183,7 @@ const AdManagementComponent = ({
         </Text>
       ) : null}
       <Text>
-        {t("AdManagementDescription", { productName: getBrandName("ProductName") })}
+        {t("AdManagementDescription")}
       </Text>
       <RadioButtonGroup
         className={styles.radioButtonGroup}

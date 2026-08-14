@@ -3,7 +3,7 @@
   "content": "Set up your encryption keys in Profile before creating a private room.",
   "content_en_sha1_hash": "a72a5c40597b42602477a7e20502ab346fa4508d",
   "created_at": "2026-05-24T17:27:26.632Z",
-  "updated_at": "2026-08-13T10:58:03.288Z",
+  "updated_at": "2026-08-12T14:02:21.350Z",
   "comment": {
     "text": "Error toast message appearing when a user attempts to create a private room without having encryption keys configured in their Profile.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Manage user accounts",
   "content_en_sha1_hash": "4c26615e9d55a6966098dc09fdacb5ec7c621703",
   "created_at": "2025-05-19T21:30:56.993Z",
-  "updated_at": "2026-05-15T14:00:06.643Z",
+  "updated_at": "2026-08-14T14:58:32.689Z",
   "comment": {
     "text": "This is a menu item label within a dialog, indicating the ability to manage user accounts.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 120,
-      "context": "const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"BackupPortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"DeactivateOrDeleteSpace\", { productName: getBrandName(\"ProductName\") }),",
+      "line_number": 119,
+      "context": "const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\"),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\"),\n t(\"BackupPortal\"),\n t(\"DeactivateOrDeleteSpace\"),\n ];",
       "module": "/packages/client"
     }
   ],

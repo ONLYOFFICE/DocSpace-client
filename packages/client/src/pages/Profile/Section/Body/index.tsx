@@ -43,6 +43,7 @@ import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
@@ -194,14 +195,22 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
         await getFileManagementData();
       },
     },
-    {
-      id: "keys-management",
-      name: t?.("Common:KeysManagement"),
-      content: <KeysManagement />,
-      onClick: async () => {
-        await getEncryptionKeysData();
-      },
-    },
+    // Encryption keys only exist to serve private rooms, so the tab stays
+    // hidden while the feature is unreleased (see
+    // @docspace/shared/utils/privateRooms). The matching route is gated too,
+    // so the tab cannot be reached by URL either.
+    ...(isPrivateRoomsEnabled()
+      ? [
+          {
+            id: "keys-management",
+            name: t?.("Common:KeysManagement"),
+            content: <KeysManagement />,
+            onClick: async () => {
+              await getEncryptionKeysData();
+            },
+          },
+        ]
+      : []),
     {
       id: "interface-theme",
       name: t?.("Common:InterfaceTheme"),

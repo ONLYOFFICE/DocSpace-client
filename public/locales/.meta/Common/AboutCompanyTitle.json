@@ -3,7 +3,7 @@
   "content": "About this program",
   "content_en_sha1_hash": "56fb7336f231f3007d1a564b2c67ede83691a9e3",
   "created_at": "2025-05-19T21:30:42.806Z",
-  "updated_at": "2026-07-07T08:59:21.925Z",
+  "updated_at": "2026-08-14T14:58:32.848Z",
   "comment": {
     "text": "This is the title for the \"About\" dialog, which provides information about the ONLYOFFICE DocSpace program. It also appears as a label for a link that opens this dialog.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 121,
+      "line_number": 120,
       "context": "hasErrorCompanyName ||\n hasErrorEmail ||\n hasErrorPhone ||\n hasErrorSite;\n \n const link = t(\"Common:AboutCompanyTitle\");\n \n const showExample = () => {\n if (!isSettingPaid) return;\n setIsAboutDialogVisible(true);\n };",
       "module": "/packages/shared"
     }

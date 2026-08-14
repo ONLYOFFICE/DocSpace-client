@@ -3,7 +3,7 @@
   "content": "No Docs Connect transactions yet",
   "content_en_sha1_hash": "cd44bb4b3308c674c2f864fdc994b202a1f8ff91",
   "created_at": "2026-07-27T13:07:23.733Z",
-  "updated_at": "2026-08-13T10:58:03.419Z",
+  "updated_at": "2026-08-12T14:02:21.397Z",
   "comment": {
     "text": "Title displayed in the transaction history list when no records exist for the Docs Connect service.",
     "is_auto": true,

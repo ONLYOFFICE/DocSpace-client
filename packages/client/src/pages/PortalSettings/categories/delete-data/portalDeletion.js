@@ -47,7 +47,6 @@ import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import styles from "./StyledDeleteData.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalDeletion = (props) => {
   const {
@@ -69,7 +68,7 @@ const PortalDeletion = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("Common:DeletePortal", { productName: getBrandName("ProductName") }),
+      t("Common:DeletePortal"),
     );
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -118,7 +117,6 @@ const PortalDeletion = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              productName: getBrandName("ProductName"),
             })}
             <Link
               className={styles.requestAgainLink}

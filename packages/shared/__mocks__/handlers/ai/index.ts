@@ -47,7 +47,6 @@ import {
   aiChatAssignmentsHandler,
   aiChatDeepModeHandler,
   aiChatProfilesListHandler,
-  aiChatQuietHandlers,
   aiChatStoreHandlers,
   aiChatThreadsListHandler,
 } from "./chatStores";
@@ -65,7 +64,6 @@ export {
   aiChatAssignmentsHandler,
   aiChatDeepModeHandler,
   aiChatProfilesListHandler,
-  aiChatQuietHandlers,
   aiChatStoreHandlers,
   aiChatThreadsListHandler,
 };

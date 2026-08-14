@@ -154,39 +154,6 @@ export const aiChatThreadsListHandler = (port: string) =>
   );
 
 /**
- * The tool and web-search reads the widget fires alongside the three above.
- * Nothing in these specs looks at them; they are answered only so a failed
- * read does not put an error toast over the notice under test.
- */
-export const aiChatQuietHandlers = (port: string) => [
-  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/tools/list-custom-servers`, () =>
-    HttpResponse.json([]),
-  ),
-  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/tools/list-system-tools`, () =>
-    HttpResponse.json([]),
-  ),
-  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/tools/get-disabled`, () =>
-    HttpResponse.json([]),
-  ),
-  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/tools/get-allow-always`, () =>
-    HttpResponse.json([]),
-  ),
-  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/web-search/is-configured`, () =>
-    HttpResponse.json(false),
-  ),
-  http.get(
-    `${BASE_URL}:${port}/${API_PREFIX}/ai/web-search/get-active-config`,
-    () => HttpResponse.json(null),
-  ),
-  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/prompts/list-folders`, () =>
-    HttpResponse.json([]),
-  ),
-  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/prompts/list`, () =>
-    HttpResponse.json([]),
-  ),
-];
-
-/**
  * Everything the chat widget hydrates from, in one call. Pass the assignment
  * options through; the rest have no knobs worth turning per spec.
  */
@@ -198,5 +165,4 @@ export const aiChatStoreHandlers = (
   aiChatAssignmentsHandler(port, options),
   aiChatDeepModeHandler(port),
   aiChatThreadsListHandler(port),
-  ...aiChatQuietHandlers(port),
 ];

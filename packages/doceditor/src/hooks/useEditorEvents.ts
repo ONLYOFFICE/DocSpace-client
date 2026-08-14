@@ -433,6 +433,11 @@ const useEditorEvents = ({
                 whenAiReady("Actions", () => {
                   connector.sendEvent("ai_onCustomInit", {
                     actionsOverride: true,
+                    // AI settings are managed in DocSpace: hide the plugin's
+                    // own settings entry points entirely (toolbar button and
+                    // the chat window's settings dialog). The composer's
+                    // profile pick stays available.
+                    settingsLock: "removed",
                     profiles: aiProfiles,
                     actions,
                     webSearch,

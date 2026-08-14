@@ -3,7 +3,7 @@
   "content": "Please create the first room in {{sectionName}}.",
   "content_en_sha1_hash": "52d0bc357573a2bc6f7486caa5c8d2793a7f50c7",
   "created_at": "2025-10-27T16:14:14.285Z",
-  "updated_at": "2026-08-13T10:58:03.384Z",
+  "updated_at": "2026-08-12T11:00:51.646Z",
   "comment": {
     "text": "This is a descriptive text displayed when no rooms are present in a section. It prompts the user to create the first room, with `{{sectionName}}` being a placeholder for the name of the section (e.g., \"Rooms\").",
     "is_auto": true,

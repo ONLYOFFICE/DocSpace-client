@@ -3,7 +3,7 @@
   "content": "These items will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "210f25353b01ba80b5f4ad5b6e8835425939e450",
   "created_at": "2025-10-01T15:20:12.341Z",
-  "updated_at": "2026-08-13T10:58:03.099Z",
+  "updated_at": "2026-08-12T11:00:51.525Z",
   "comment": {
     "text": "This is a sentence fragment displayed within a confirmation dialog when a user is about to permanently delete items. It informs the user that the items will be permanently removed from the trash. `{{trashSection}}` will be replaced with the localized name of the trash section.",
     "is_auto": true,

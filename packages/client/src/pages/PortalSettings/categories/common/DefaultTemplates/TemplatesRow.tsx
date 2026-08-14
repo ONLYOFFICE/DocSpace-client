@@ -62,7 +62,6 @@ import { ResetTemplateDialog } from "SRC_DIR/components/dialogs";
 
 import { TFile } from "./TemplatesRow.types";
 import styles from "./DefaultTemplates.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type Props = {
   item: TDefaultTemplateItem;
@@ -98,9 +97,7 @@ const TemplatesRow = ({
     const selectOption = [
       {
         key: "upload-from-docspace",
-        label: t("EmptyView:UploadFromPortalTitle", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("EmptyView:UploadFromPortalTitle"),
         onClick: () => setIsSelectorVisible(true),
         disabled: false,
         icon: UploadIcon,

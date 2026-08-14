@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndoneGuests": "Khách bị vô hiệu hóa đã chọn sẽ bị xóa khỏi {{productName}}. Hành động này không thể được hoàn tác.",
-  "ActionCannotBeUndoneUsers": "Những người dùng bị vô hiệu hóa đã được chọn sẽ bị xóa khỏi {{productName}}. Hành động này không thể được hoàn tác.",
+  "ActionCannotBeUndoneGuests": "Khách bị vô hiệu hóa đã chọn sẽ bị xóa khỏi không gian làm việc. Hành động này không thể được hoàn tác.",
+  "ActionCannotBeUndoneUsers": "Những người dùng bị vô hiệu hóa đã được chọn sẽ bị xóa khỏi không gian làm việc. Hành động này không thể được hoàn tác.",
   "CannotReassignFiles": "Nếu bạn xóa nhiều người dùng cùng một lúc, bạn không thể chuyển giao tập tin của họ lại cho người dùng khác.",
   "DeleteGroupGuestsSuccessMessage": "Đã xóa khách thành công.",
   "DeleteGroupUsersSuccessMessage": "Người dùng đã được xóa thành công.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Xoá người dùng",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> sẽ bị xóa. Hành động này không thể được hoàn tác.",
   "DeletingUsers": "Xóa người dùng",
-  "PersonalDataDeletionInfo": "Dữ liệu cá nhân, tất cả các tệp và thư mục cá nhân trong mục {{sectionNameFirst}} và {{sectionNameSecond}}* của người dùng đã chọn sẽ bị xóa vĩnh viễn. Các tệp và thư mục của người dùng đã chọn được lưu trữ trong mục chung* như phòng sẽ vẫn được giữ lại trong {{productName}}.",
+  "PersonalDataDeletionInfo": "Dữ liệu cá nhân, tất cả các tệp và thư mục cá nhân trong mục {{sectionNameFirst}} và {{sectionNameSecond}}* của người dùng đã chọn sẽ bị xóa vĩnh viễn. Các tệp và thư mục của người dùng đã chọn được lưu trữ trong mục chung* như phòng sẽ vẫn được giữ lại trong không gian làm việc.",
   "PleaseNote": "Xin vui lòng lưu ý:",
   "ReassignDataToAnotherUser": "Chuyển giao lại dữ liệu cho người dùng khác",
   "SuccessfullyDeleteGuestInfoMessage": "Đã xóa khách thành công",

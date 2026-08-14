@@ -3,7 +3,7 @@
   "content": "New document",
   "content_en_sha1_hash": "762b84690217181b9f127d2cfc1991e0892e844a",
   "created_at": "2025-05-19T21:30:46.732Z",
-  "updated_at": "2026-08-13T10:58:03.141Z",
+  "updated_at": "2026-08-13T14:37:21.708Z",
   "comment": {
     "text": "This is the default title for a newly created document, appearing in file lists and as a button label for creating new documents.",
     "is_auto": true,

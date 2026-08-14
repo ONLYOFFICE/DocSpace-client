@@ -3,7 +3,7 @@
   "content": "From <1>{{fromDate}}</1> To <2>{{toDate}}</2>",
   "content_en_sha1_hash": "2beac382b2359cd84f93b1d8ec9aafa6db41a774",
   "created_at": "2026-04-10T13:53:42.532Z",
-  "updated_at": "2026-08-13T10:58:03.418Z",
+  "updated_at": "2026-08-12T14:02:21.396Z",
   "comment": {
     "text": "This is a date range display, showing the start and end dates of a period. `{{fromDate}}` and `{{toDate}}` are placeholders for the actual dates.",
     "is_auto": true,

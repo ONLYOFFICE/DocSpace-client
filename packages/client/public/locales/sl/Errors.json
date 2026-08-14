@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "Prazen odziv",
-  "ErrorUnavailableText": "{{productName}} ni na voljo"
+  "ErrorUnavailableText": "Delovni prostor ni na voljo"
 }

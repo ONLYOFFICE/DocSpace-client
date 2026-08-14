@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Dəvət dili",
-  "InviteMembersManuallyDescription": "E-poçt vasitəsilə {{productName}} məhsuluna yeni üzvləri şəxsən dəvət edin",
+  "InviteMembersManuallyDescription": "E-poçt vasitəsilə iş sahəsi məhsuluna yeni üzvləri şəxsən dəvət edin",
   "InviteMembersSearchPlaceholder": "Üzvləri e-poçtla dəvət edin",
-  "InviteViaLinkDescriptionAccounts": "{{productName}}-də avtorizasiya üçün universal keçid yaradın"
+  "InviteViaLinkDescriptionAccounts": "iş sahəsində avtorizasiya üçün universal keçid yaradın"
 }

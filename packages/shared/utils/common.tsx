@@ -355,9 +355,7 @@ export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
     case EmployeeType.Owner:
       return t("Common:Owner");
     case EmployeeType.Admin:
-      return t("Common:PortalAdmin", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Common:PortalAdmin");
     case EmployeeType.RoomAdmin:
       return t("Common:RoomAdmin");
     case EmployeeType.User:
@@ -1240,9 +1238,7 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", {
-      productName: getBrandName("ProductName"),
-    });
+    return t("Common:PortalAdmin");
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 

@@ -3,7 +3,7 @@
   "content": "PDF Form",
   "content_en_sha1_hash": "d6182f70d8b22eaa5700e3917f6ccb00e1d25bdb",
   "created_at": "2025-05-19T21:30:49.997Z",
-  "updated_at": "2026-08-13T10:58:03.022Z",
+  "updated_at": "2026-08-12T11:00:51.482Z",
   "comment": {
     "text": "This is a button label for creating a new form. It appears in various menus and empty states, offering options to create different types of forms, including PDF forms.",
     "is_auto": true,

@@ -1,13 +1,13 @@
 {
   "key_path": "ChangeTheRoomOwner",
-  "content": "Change the Room Owner",
-  "content_en_sha1_hash": "02a0f3d75f6449e5611f36f91216cb8be76a6efe",
-  "created_at": "2026-06-02T22:17:34.545Z",
-  "updated_at": "2026-07-07T08:59:21.759Z",
+  "content": "Change the room owner",
+  "content_en_sha1_hash": "5f42ce139e83e5ff11db6c8a0f00f2dda51b76df",
+  "created_at": "2026-08-13T14:36:42.148Z",
+  "updated_at": "2026-08-13T14:54:52.512Z",
   "comment": {
-    "text": "Dialog title or panel header used when initiating the process to reassign room ownership.",
+    "text": "Dialog title or panel header used when initiating the process of transferring room ownership.",
     "is_auto": true,
-    "updated_at": "2026-06-02T22:19:26.940Z",
+    "updated_at": "2026-08-13T14:54:52.512Z",
     "model": "gemma4:26b"
   },
   "usage": [
@@ -104,6 +104,12 @@
       "approved_at": null
     },
     "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "To je sam obrazec — točno to, kar odpre vsak, ki sledi vaši povezavi. Naložite obrazec PDF, ki ga že imate, ali ga sestavite iz galerije predlog, ne da bi zapustili prostor.",
+  "FormsBlank": "To je sam obrazec — točno to, kar odpre vsak, ki sledi vaši povezavi. Naložite obrazec PDF, ki ga že imate, ali ga sestavite iz galerije predlog, ne da bi zapustili delovni prostor.",
   "FormsBlankTitle": "Obrazec, ki ga odprejo vsi",
   "FormsComplete": "Oddana kopija pristane v {{complete}} in tam ostane, po ena na osebo. Vklopite zbiranje rezultatov in vsak odgovor postane tudi vrstica v preglednici — po en stolpec za vsako polje, pripravljeno za razvrščanje ali grafikon.",
   "FormsCompleteTitle": "Zbrani odgovori",
@@ -15,7 +15,7 @@
   "FormsItem": "Vsaka vrstica je celotna zbirka. Odprite eno, da delate v njej, pripnite tiste, ki jih vodite, ali prek treh pik povabite ljudi, kopirajte povezavo, ki odpre obrazec, in shranite nastavitve kot predlogo.",
   "FormsItemTitle": "Delo s prostorom za obrazce",
   "FormsPlacesRecent": "{{recent}} in {{favorites}} držita pri roki zbirke, ki jih vodite.",
-  "FormsPlacesTemplates": "{{templates}} — predloge prostorov, ki ste jih shranili.",
+  "FormsPlacesTemplates": "{{templates}} — predloge prostorov za obrazce, ki ste jih shranili.",
   "FormsPlacesTitle": "Vse na svojem mestu",
   "FormsPlacesTrash": "{{trash}} — izbrisani prostori, obnovljivi, dokler ga ne izpraznite.",
   "FormsSpace": "Prostor za obrazce je ena zbirka od začetka do konca: prazen obrazec PDF, ljudje, ki ga izpolnjujejo, in vsak odgovor, ki pride nazaj. Ustvarimo enega in poglejmo vanj.",

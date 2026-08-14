@@ -3,7 +3,7 @@
   "content": "Download report",
   "content_en_sha1_hash": "ca59430707ce8fb813997d7d85dff992c7f66e85",
   "created_at": "2026-04-10T13:53:45.938Z",
-  "updated_at": "2026-08-13T10:58:03.268Z",
+  "updated_at": "2026-08-12T14:02:21.344Z",
   "comment": {
     "text": "This is a button label that allows users to download a report, such as a transaction history or an audit trail.",
     "is_auto": true,

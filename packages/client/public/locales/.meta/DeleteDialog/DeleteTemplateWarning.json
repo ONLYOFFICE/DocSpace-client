@@ -3,7 +3,7 @@
   "content": "I understand the consequences and want to delete the template",
   "content_en_sha1_hash": "cf4d946cfddc8793cb523172d2d13b82092fd4e5",
   "created_at": "2025-09-23T07:24:22.476Z",
-  "updated_at": "2026-08-13T10:58:03.102Z",
+  "updated_at": "2026-08-12T11:00:51.526Z",
   "comment": {
     "text": "This is a checkbox label within a confirmation dialog. It appears when a user attempts to delete a template, requiring them to acknowledge the action before proceeding.",
     "is_auto": true,

@@ -1,0 +1,20 @@
+{
+  "_comment": "Source files that already mixed tab and space indentation before the check existed. This list must only ever shrink -- never add to it.",
+  "mixedIndentation": [
+    "common/tests/utils/files.js",
+    "libs/ui-kit/.storybook/main.ts",
+    "libs/ui-kit/components/operations-progress-button/ProgressBar.tsx",
+    "packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
+    "packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
+    "packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
+    "packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/Loader.tsx",
+    "packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
+    "packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+    "packages/doceditor/src/hooks/useTheme.ts",
+    "packages/login/src/hooks/useTheme.ts",
+    "packages/management/src/hooks/useTheme.ts",
+    "packages/sdk/src/hooks/useTheme.ts",
+    "packages/shared/api/settings/index.ts",
+    "packages/shared/components/info-badge/index.tsx"
+  ]
+}

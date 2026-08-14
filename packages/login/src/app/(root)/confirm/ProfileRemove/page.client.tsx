@@ -112,13 +112,12 @@ const ProfileRemoveForm = ({
     return (
       <>
         <GreetingContainer
-          greetingText={t("Confirm:DeleteProfileSuccessMessage", {
-            productName: getBrandName("ProductName"),
-          })}
+          greetingText={t("Confirm:DeleteProfileSuccessMessage")}
         />
         <FormWrapper>
           <Text>
             {t("DeleteProfileSuccessDescription", {
+              organizationName: getBrandName("OrganizationName"),
               productName: getBrandName("ProductName"),
             })}
             <br />

@@ -12,7 +12,7 @@
   "TourPlacesShared": "{{sectionName}} — tiedostot, jotka muut ovat jakaneet kanssasi.",
   "TourPlacesTitle": "Kaikki paikallaan",
   "TourPlacesTrash": "{{sectionName}} — poistetut tiedostot, jotka voit vielä palauttaa.",
-  "TourShare": "Vie hiiri minkä tahansa tiedoston päälle nähdäksesi pikatoiminnot. Napsauta jakokuvaketta antaaksesi portaalisi yhteystiedoille käyttöoikeuden eri käyttöoikeustasoilla — tai luo ulkoinen linkki kenelle tahansa muulle.",
+  "TourShare": "Vie hiiri minkä tahansa tiedoston päälle nähdäksesi pikatoiminnot. Napsauta jakokuvaketta antaaksesi työtilasi yhteystiedoille käyttöoikeuden eri käyttöoikeustasoilla — tai luo ulkoinen linkki kenelle tahansa muulle.",
   "TourSharedAccess": "{{sharedBy}} kertoo, keneltä tiedosto on tullut, ja {{accessLevel}} kertoo, mitä voit sillä tehdä — katsella, kommentoida tai muokata. Vain omistaja voi muuttaa tätä.",
   "TourSharedAccessTitle": "Kuka jakoi sen ja mitä voit tehdä",
   "TourSharedEmpty": "Kanssasi ei ole vielä jaettu mitään. Tiedostot ja kansiot ilmestyvät tänne heti, kun joku antaa sinulle pääsyn niihin.",

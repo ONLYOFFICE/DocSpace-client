@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "Grupurile selectate vor fi șterse. Utilizatorii care fac parte din grupurile nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
+  "DeleteAllGroupDescription": "Grupurile selectate vor fi șterse. Utilizatorii care fac parte din grupuri nu vor fi eliminați din spațiul de lucru. Sigur doriţi să continuați?",
   "DeleteAllGroupsTitle": "Ștergere grup",
   "DeleteFiles": "Sunteți pe cale să mutați <strong>fișiere ({{filesCount}})</strong> în {{trashSection}}.",
   "DeleteFilesAndFolders": "Sunteți pe cale să ștergeți <strong>fișiere ({{filesCount}})</strong> și <strong>dosare ({{foldersCount}})</strong> și să le mutați în {{trashSection}}.",
@@ -7,7 +7,7 @@
   "DeleteFilesForever": "Sunteți pe cale să ștergeți <strong>({{filesCount}}) fișiere </strong>.",
   "DeleteFolders": "Sunteți pe cale să mutați <strong>({{foldersCount}}) foldere</strong> în {{trashSection}}.",
   "DeleteFoldersForever": "Sunteți pe cale să ștergeți <strong>({{foldersCount}}) foldere</strong>.",
-  "DeleteGroupDescription": "Grupul {{groupName}} va fi șters. Utilizatorii care fac parte din acest grup nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
+  "DeleteGroupDescription": "Grupul {{groupName}} va fi șters. Utilizatorii care fac parte din acest grup nu vor fi eliminați din spațiul de lucru. Sigur doriţi să continuați?",
   "DeleteGroupTitle": "Ștergere grup",
   "DeleteItem": "Sunteți pe cale să mutați <strong>{{name}}</strong> în {{trashSection}} de gunoi.",
   "DeleteItemForeverConfirm": "Sunteți pe cale să ștergeți <strong>{{name}}</strong>.",

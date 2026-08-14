@@ -3,7 +3,7 @@
   "content": "Remaining period",
   "content_en_sha1_hash": "f5023b8b9e7191d0cd371a3a36ee2dbe6bdf5e2d",
   "created_at": "2026-04-10T13:53:45.647Z",
-  "updated_at": "2026-08-13T10:58:03.219Z",
+  "updated_at": "2026-08-12T14:02:21.320Z",
   "comment": {
     "text": "This is a label in the order summary for a storage plan. It indicates the duration of the current subscription that will be credited when changing the plan.",
     "is_auto": true,

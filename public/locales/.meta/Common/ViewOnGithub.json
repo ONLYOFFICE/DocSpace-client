@@ -3,7 +3,7 @@
   "content": "View on GitHub",
   "content_en_sha1_hash": "0c77991f082d3740193c610840de36084ee6b97b",
   "created_at": "2026-06-25T19:30:55.788Z",
-  "updated_at": "2026-08-13T10:58:03.070Z",
+  "updated_at": "2026-08-12T11:00:51.509Z",
   "comment": {
     "text": "Button label in the promotional dialog used to navigate to the project's GitHub repository.",
     "is_auto": true,

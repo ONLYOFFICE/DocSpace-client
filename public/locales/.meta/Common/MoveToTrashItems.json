@@ -3,7 +3,7 @@
   "content": "These {{itemCount}} items will be moved to Trash.",
   "content_en_sha1_hash": "376801e3e09ca786042c3c56c04667dc6dacc5ae",
   "created_at": "2026-04-03T21:51:30.652Z",
-  "updated_at": "2026-08-13T10:58:03.382Z",
+  "updated_at": "2026-08-12T11:00:51.645Z",
   "comment": {
     "text": "This is a confirmation message in a dialog box, informing the user that multiple selected items will be moved to the Trash. `{{itemCount}}` is a number representing how many items will be moved.",
     "is_auto": true,

@@ -2,12 +2,12 @@
   "key_path": "ThirdPartyResourceDescription",
   "content": "Backup can be saved to your third-party account (Dropbox, Box, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box, OneDrive or Google Drive) before you will be able to save your backup there.",
   "content_en_sha1_hash": "4f1bf038301a80b473f28870a20c9fb5ba6f29c6",
-  "created_at": "2026-08-13T10:57:51.684Z",
-  "updated_at": "2026-08-13T10:58:34.915Z",
+  "created_at": "2026-08-12T11:00:40.968Z",
+  "updated_at": "2026-08-12T11:01:43.329Z",
   "comment": {
-    "text": "Instructional text in the auto-backup and manual-backup configuration sections explaining how to use third-party cloud storage and the requirement to connect an account first.",
+    "text": "Informational text in the auto-backup and manual-backup configuration pages explaining how to use third-party cloud storage and the requirement to connect an account first.",
     "is_auto": true,
-    "updated_at": "2026-08-13T10:58:34.915Z",
+    "updated_at": "2026-08-12T11:01:43.329Z",
     "model": "gemma4:26b"
   },
   "usage": [

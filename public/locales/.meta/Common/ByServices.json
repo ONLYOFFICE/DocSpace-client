@@ -3,7 +3,7 @@
   "content": "By services",
   "content_en_sha1_hash": "d371ec541868205a212f8ef9555883a71c2f0cdf",
   "created_at": "2026-06-25T11:54:46.327Z",
-  "updated_at": "2026-08-13T10:58:03.422Z",
+  "updated_at": "2026-08-12T14:02:21.398Z",
   "comment": {
     "text": "Tab label in the spending breakdown component used to switch the view to data grouped by service type.",
     "is_auto": true,

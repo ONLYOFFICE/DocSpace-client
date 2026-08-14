@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2026-08-13T10:58:03.044Z",
+  "updated_at": "2026-08-12T11:00:51.495Z",
   "comment": {
     "text": "This is a button label or dialog title. It prompts the user to choose a file, appearing in contexts like attaching a file to a chat message or selecting a file within a file selector.",
     "is_auto": true,

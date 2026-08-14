@@ -1,4 +1,4 @@
 {
-  "AccessingProblemContact": "この{{productName}}にアクセスできない場合は、管理者までご連絡ください。",
-  "ContactAdministrator": "{{productName}}の管理者までご連絡ください"
+  "AccessingProblemContact": "このワークスペースにアクセスできない場合は、管理者までご連絡ください。",
+  "ContactAdministrator": "スーパー管理者に連絡する"
 }

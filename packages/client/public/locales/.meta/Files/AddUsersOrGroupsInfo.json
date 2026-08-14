@@ -1,14 +1,14 @@
 {
   "key_path": "AddUsersOrGroupsInfo",
-  "content": "Only <1>{{productName}}</1> and <1>Room admins</1> are shown here",
-  "content_en_sha1_hash": "d3dc5f5f10409aae79d6e20dfd3e8141a71a122f",
-  "created_at": "2025-05-19T21:30:55.239Z",
-  "updated_at": "2026-05-15T14:00:06.627Z",
+  "content": "Only <1>Full admins</1> and <1>room admins</1> are shown here",
+  "content_en_sha1_hash": "16e554af2ad6782f0be25b41c67f158d6ee97ed5",
+  "created_at": "2026-08-13T14:37:18.364Z",
+  "updated_at": "2026-08-13T15:07:14.947Z",
   "comment": {
-    "text": "This informational text appears below the search bar when adding users or groups to a room. It clarifies that only users with a {{productName}} account and Room admins are displayed in the search results.",
+    "text": "Informational text displayed under the People tab in the Template Access Selector, where <1> tags denote bolded user roles.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:10:46.091Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:07:14.947Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

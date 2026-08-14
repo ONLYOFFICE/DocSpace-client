@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "Les groupes sélectionnés seront supprimés. Les utilisateurs des groupes ne seront pas supprimés de {{productName}}. Souhaitez-vous vraiment continuer ?",
+  "DeleteAllGroupDescription": "Les groupes sélectionnés seront supprimés. Les utilisateurs des groupes ne seront pas supprimés de l'espace de travail. Souhaitez-vous vraiment continuer ?",
   "DeleteAllGroupsTitle": "Supprimer les groupes",
   "DeleteFiles": "Vous êtes sur le point de déplacer les <strong>fichiers ({{filesCount}})</strong> vers la {{trashSection}}.",
   "DeleteFilesAndFolders": "Vous êtes sur le point de supprimer les <strong>fichiers ({{filesCount}})</strong> et les <strong>dossiers ({{foldersCount}})</strong> vers la {{trashSection}}.",
@@ -7,7 +7,7 @@
   "DeleteFilesForever": "Vous êtes sur le point de supprimer les <strong>fichiers ({{filesCount}})</strong>.",
   "DeleteFolders": "Vous êtes sur le point de déplacer les <strong>dossiers ({{foldersCount}})</strong> vers la {{trashSection}}.",
   "DeleteFoldersForever": "Vous êtes sur le point de supprimer les <strong>dossiers ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "Le groupe {{groupName}} sera supprimé. Les utilisateurs du groupe ne seront pas supprimés de {{productName}}. Souhaitez-vous vraiment continuer ?",
+  "DeleteGroupDescription": "Le groupe {{groupName}} sera supprimé. Les utilisateurs du groupe ne seront pas supprimés de l'espace de travail. Souhaitez-vous vraiment continuer ?",
   "DeleteGroupTitle": "Supprimer le groupe",
   "DeleteItem": "Vous êtes sur le point de déplacer <strong>{{name}}</strong> vers la {{trashSection}}.",
   "DeleteItemForeverConfirm": "Vous êtes sur le point de supprimer <strong>{{name}}</strong>.",

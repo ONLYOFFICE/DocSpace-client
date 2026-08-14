@@ -3,7 +3,7 @@
   "content": "This page is always one click away — open {{overview}} in the sidebar whenever you want to come back to it.",
   "content_en_sha1_hash": "0bd3d08bacebd7d6dec74ba6e2ad0b2cd3e5307c",
   "created_at": "2026-08-07T10:52:39.927Z",
-  "updated_at": "2026-08-13T10:58:03.027Z",
+  "updated_at": "2026-08-12T11:00:51.485Z",
   "comment": {
     "text": "A description within a dashboard onboarding tour step explaining how to access the overview page via the sidebar; {{overview}} is a placeholder for the section name.",
     "is_auto": true,

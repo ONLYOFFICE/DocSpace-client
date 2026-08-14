@@ -1,14 +1,14 @@
 {
   "key_path": "GuestAgentMaxAvailableRoleWarning",
-  "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, {{productName}} admins and Users are eligible for this role.",
-  "content_en_sha1_hash": "bacaf2f76e9af70543835bf7fba7c43feaf4363e",
-  "created_at": "2025-11-20T14:21:54.083Z",
-  "updated_at": "2026-07-07T08:59:21.771Z",
+  "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, Full admins and Users are eligible for this role.",
+  "content_en_sha1_hash": "e21f3e636f2b0d1a18825e95caf57242921a972c",
+  "created_at": "2026-08-13T14:36:53.405Z",
+  "updated_at": "2026-08-13T14:49:31.526Z",
   "comment": {
-    "text": "This is a tooltip or warning message that appears when attempting to assign a guest user the \"Content creator\" role. It explains that guests cannot be assigned this role and lists the eligible user types. The `{{productName}}` variable will be replaced with the product's brand name.",
+    "text": "Tooltip or warning text in the Invite or Members panel that appears when attempting to assign the \"Content creator\" role to a guest user.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:14:12.177Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:49:31.526Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -173,7 +173,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

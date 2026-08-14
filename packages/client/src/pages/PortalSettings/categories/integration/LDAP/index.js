@@ -52,7 +52,6 @@ import { SyncContainerSection } from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
 import { SettingsContainerSection } from "./sub-components/SettingsContainer";
 import LdapLoader from "./sub-components/LdapLoader";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const LDAP = ({
 	ldapSettingsUrl,
@@ -102,7 +101,6 @@ const LDAP = ({
 					i18nKey="LdapIntegrationDescription"
 					ns="Ldap"
 					values={{
-						productName: getBrandName("ProductName"),
 						sectionName: t("Common:Contacts"),
 						link,
 					}}

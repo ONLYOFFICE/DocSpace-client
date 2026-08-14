@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Jazyk pozvánky",
-  "InviteMembersManuallyDescription": "Osobně pozvěte nové členy do {{productName}} prostřednictvím e-mailu",
+  "InviteMembersManuallyDescription": "Osobně pozvěte nové členy do pracovního prostoru prostřednictvím e-mailu",
   "InviteMembersSearchPlaceholder": "Pozvěte nové členy prostřednictvím e-mailu",
-  "InviteViaLinkDescriptionAccounts": "Vytvoření univerzálního odkazu pro samoautorizaci v {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Vytvoření univerzálního odkazu pro samoautorizaci v pracovním prostoru"
 }

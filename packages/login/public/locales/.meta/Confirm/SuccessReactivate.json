@@ -1,14 +1,14 @@
 {
   "key_path": "SuccessReactivate",
-  "content": "Your account has been successfully reactivated. In 10 seconds you will be redirected to the <1>portal</1>.",
-  "content_en_sha1_hash": "195e32502a9fca30b006e6c21cb6247dacd2348c",
-  "created_at": "2025-05-19T21:30:57.398Z",
-  "updated_at": "2026-05-15T14:00:06.910Z",
+  "content": "Your account has been successfully reactivated. In 10 seconds you will be redirected to the <1>workspace</1>.",
+  "content_en_sha1_hash": "24c1742e030a26fc61b57f0adeb1d31b1cf04a1e",
+  "created_at": "2026-08-12T11:00:50.835Z",
+  "updated_at": "2026-08-12T13:39:57.988Z",
   "comment": {
-    "text": "This is a success message displayed after a user's account has been reactivated. It informs the user that they will be redirected to the portal, with `<1>portal</1>` being a clickable link.",
+    "text": "Success message on the confirmation page after account reactivation, notifying the user of an automatic redirect to the <1>workspace</1>.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:30:03.194Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:39:57.988Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
   "content_en_sha1_hash": "cface7c960be4b02ae0e603f24ae30d94c77c924",
   "created_at": "2025-05-19T21:30:56.341Z",
-  "updated_at": "2026-08-13T10:58:03.042Z",
+  "updated_at": "2026-08-12T11:00:51.493Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to move a file that is not an ONLYOFFICE PDF form into a form room. The `{{ organizationName }}` variable will be replaced with the name of the organization.",
     "is_auto": true,

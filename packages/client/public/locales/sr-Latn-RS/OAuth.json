@@ -79,7 +79,7 @@
   "ScopesHelp": "Opsezi se koriste za ograničavanje pristupa vaše aplikacije svim podacima koji se odnose na korisnike i omogućavaju vam da precizirate tačno koji vam je pristup potreban.",
   "Secret": "Tajna",
   "SecretCopy": "Tajni ključ klijenta uspešno kopiran u međumemoriju",
-  "SignIn": "Prijavite se putem {{productName}}",
+  "SignIn": "Prijavite se putem {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Podrška i pravne informacije",
   "TermsOfService": "Uslovi korišćenja",
   "TermsOfServiceURL": "URL uslova korišćenja",

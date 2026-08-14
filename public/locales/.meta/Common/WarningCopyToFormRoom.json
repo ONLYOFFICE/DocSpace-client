@@ -3,7 +3,7 @@
   "content": "The file cannot be copied to this room. Please try to copy the {{organizationName}} PDF form.",
   "content_en_sha1_hash": "a1c3d143cde07c3cc51c27c08a8705ae800f1435",
   "created_at": "2025-05-19T21:30:49.585Z",
-  "updated_at": "2026-08-13T10:58:03.042Z",
+  "updated_at": "2026-08-12T11:00:51.493Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to copy a file that is not an {{organizationName}} PDF form into a form room.",
     "is_auto": true,

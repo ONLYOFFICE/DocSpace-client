@@ -3,7 +3,7 @@
   "content": "Auto-updates & scaling",
   "content_en_sha1_hash": "42fae3985a8ae6f75d47502a8d86d50815e16b70",
   "created_at": "2026-07-27T13:07:48.470Z",
-  "updated_at": "2026-07-27T14:31:46.426Z",
+  "updated_at": "2026-08-13T14:37:21.760Z",
   "comment": {
     "text": "A short label for a feature chip in the DocsConnect onboarding modal, highlighting automated maintenance and scaling capabilities.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
-      "line_number": 107,
+      "line_number": 108,
       "context": "{ Icon: FormatsIcon, label: t(\"DocsConnect:ChipFormats\") },\n { Icon: RebrandingIcon, label: t(\"DocsConnect:ChipWhiteLabel\") },\n { Icon: IntegrationIcon, label: t(\"DocsConnect:ChipAutomationApi\") },\n { Icon: TenantsKeysIcon, label: t(\"DocsConnect:ChipTenantsKeys\") },\n { Icon: CloudIcon, label: t(\"DocsConnect:ChipCloudHosted\") },\n { Icon: AutoUpdatesIcon, label: t(\"DocsConnect:ChipAutoUpdates\") },\n { Icon: PluginsIcon, label: t(\"DocsConnect:ChipPlugins\") },\n ];\n \n const onStartTrial = async () => {\n if (submitting) return;",
       "module": "/packages/client"
     }

@@ -1,14 +1,14 @@
 {
   "key_path": "VisitSpace",
-  "content": "Visit this space after creating",
-  "content_en_sha1_hash": "54bd89fcd2d756ded98952e43b947df87c781040",
-  "created_at": "2025-05-19T21:30:57.483Z",
-  "updated_at": "2026-05-28T15:46:18.677Z",
+  "content": "Visit this workspace after creating",
+  "content_en_sha1_hash": "0e05e699dc96bf38a6b9fcf188e23e58dc7ac334",
+  "created_at": "2026-08-12T11:00:50.921Z",
+  "updated_at": "2026-08-12T13:41:43.654Z",
   "comment": {
-    "text": "This is a checkbox label. It allows the user to choose whether to automatically navigate to the newly created space after the creation process is complete.",
+    "text": "Checkbox label in the \"Create Portal\" dialog that allows users to automatically navigate to the new workspace upon successful creation.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:31:30.890Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:41:43.654Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

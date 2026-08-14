@@ -1,13 +1,13 @@
 {
   "key_path": "FormRoomAIProviderNotConnected",
-  "content": "Connect an AI provider in your {{productName}} settings to analyze form data with Ask AI, create charts, and uncover insights.",
-  "content_en_sha1_hash": "6d172554a384c4449001cd01b565c7c1ccfb6a3d",
-  "created_at": "2026-05-08T19:46:42.472Z",
-  "updated_at": "2026-05-15T14:00:06.728Z",
+  "content": "Connect an AI provider in the workspace settings to analyze form data with Ask AI, create charts, and uncover insights.",
+  "content_en_sha1_hash": "3f0c7aefdaf9c8239c7717577a9894e843f5d132",
+  "created_at": "2026-08-12T11:00:47.727Z",
+  "updated_at": "2026-08-12T11:45:19.083Z",
   "comment": {
-    "text": "Informational text in the AI card within the Form Room Info Panel, appearing when an AI provider is not configured. Includes the {{productName}} variable.",
+    "text": "Informational text within an AI card in the Form Room details panel, displayed to administrators when an AI provider is not yet configured in the workspace settings.",
     "is_auto": true,
-    "updated_at": "2026-05-08T19:49:08.574Z",
+    "updated_at": "2026-08-12T11:45:19.083Z",
     "model": "gemma4:26b"
   },
   "usage": [
@@ -20,6 +20,12 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

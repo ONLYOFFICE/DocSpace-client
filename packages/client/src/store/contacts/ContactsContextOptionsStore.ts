@@ -95,7 +95,6 @@ import SettingsSetupStore from "../SettingsSetupStore";
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
 import TargetUserStore from "./TargetUserStore";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 
@@ -680,9 +679,7 @@ class ContactsConextOptionsStore {
               id: "accounts-add_administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:PortalAdmin", {
-                productName: getBrandName("ProductName"),
-              }),
+              label: t("Common:PortalAdmin"),
               onClick: () => this.inviteUser(EmployeeType.Admin),
               "data-type": EmployeeType.Admin,
               action: EmployeeType.Admin,

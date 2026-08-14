@@ -1,14 +1,14 @@
 {
   "key_path": "ContactAdministrator",
-  "content": "Contact the {{productName}} administrator",
-  "content_en_sha1_hash": "129d3661ec0a3e94ee8109f655b98845c854006e",
-  "created_at": "2025-05-19T21:30:53.449Z",
-  "updated_at": "2026-05-15T15:37:40.290Z",
+  "content": "Contact the Full admin",
+  "content_en_sha1_hash": "235f432a5d6eadc49f8251206cd2fec0204a8eaa",
+  "created_at": "2026-08-13T14:37:17.004Z",
+  "updated_at": "2026-08-13T15:13:59.838Z",
   "comment": {
-    "text": "This is a clickable link within an error message, prompting the user to contact the administrator of the DocSpace product. `{{productName}}` will be replaced with the product's brand name.",
+    "text": "Clickable link on the Portal Unavailable error page instructing users to contact an administrator.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:20:21.807Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:13:59.838Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

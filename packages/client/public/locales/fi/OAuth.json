@@ -79,7 +79,7 @@
   "ScopesHelp": "Laajuuksia käytetään rajoittamaan sovelluksesi pääsyä kaikkiin käyttäjiin liittyviin tietoihin ja niiden avulla voit määrittää tarkalleen millaista käyttöoikeutta tarvitset.",
   "Secret": "Secret",
   "SecretCopy": "Client secret onnistuneesti kopioitu leikepöydälle.",
-  "SignIn": "Kirjaudu sisään sovellukseen {{productName}}",
+  "SignIn": "Kirjaudu sisään sovellukseen {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Tuki & lakitiedot",
   "TermsOfService": "Palvelun ehdot",
   "TermsOfServiceURL": "Palvelun ehdot URL",

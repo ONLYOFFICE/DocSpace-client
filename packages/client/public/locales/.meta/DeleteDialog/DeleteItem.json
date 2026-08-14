@@ -3,7 +3,7 @@
   "content": "You are about to move <strong>{{name}}</strong> to {{trashSection}}.",
   "content_en_sha1_hash": "c403a2ff69c05675813fd3ca9ae2562df4e86005",
   "created_at": "2025-10-01T15:20:12.210Z",
-  "updated_at": "2026-08-13T10:58:03.100Z",
+  "updated_at": "2026-08-12T11:00:51.525Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user attempts to delete an item. It informs the user that the item `{{name}}` will be moved to the `{{trashSection}}`.",
     "is_auto": true,

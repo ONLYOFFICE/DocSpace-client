@@ -1,11 +1,11 @@
 {
   "ChangeData": "Məlumatları və şifrəni dəyiş",
   "ClickButtonBelow": "E-poçtunuzla daxil olmaq istəyirsinizsə, zəhmət olmasa, öz şifrənizi təyin edin. <br/> Hazır olduqdan sonra, zəhmət olmasa, aşağıdakı düyməni sıxın.",
-  "ContinueToProduct": "{{productName}} ilə davam edin",
+  "ContinueToProduct": "İş sahəsinə davam edin",
   "GeneratedPassword": "Yaranmış şifrə",
-  "ProductNameDetail": "{{productName}} adı",
+  "ProductNameDetail": "İş sahəsi adı",
   "ReviewAccountDetails": "Xüsusi hesab məlumatlarınızı nəzərdən keçmək üçün bir dəqiqə vaxt ayırın:",
   "SetEmailPassword": "Şifrə təyin et",
-  "WelcomeSubtitle": "Sahəniz uğurla yaradıldı. Profil məlumatlarınızı nəzərdən keçirin və işə başlayın.",
+  "WelcomeSubtitle": "İş sahəniz uğurla yaradıldı. Profil məlumatlarınızı nəzərdən keçirin və işə başlayın.",
   "YourProfileDetails": "Profil məlumatlarınız"
 }

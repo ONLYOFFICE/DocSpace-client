@@ -3,7 +3,7 @@
   "content": "Your subscription to support and updates has expired",
   "content_en_sha1_hash": "f5833d1780ea3b9e1d44aca439e0e66682bdf6a6",
   "created_at": "2025-05-19T21:30:49.184Z",
-  "updated_at": "2026-08-13T10:58:03.350Z",
+  "updated_at": "2026-08-12T11:00:51.632Z",
   "comment": {
     "text": "This is an alert message displayed when a user's support and update subscription has expired, particularly in the context of a trial license.",
     "is_auto": true,

@@ -1,14 +1,14 @@
 {
   "key_path": "DeleteRequestSuccess",
-  "content": "Deletion request successfully sent to the {{productName}} owner's email address <1>{{email}}</1> ",
-  "content_en_sha1_hash": "b26d8411a71a0cdcb60384157277f1024a7a992a",
-  "created_at": "2025-05-19T21:30:57.430Z",
-  "updated_at": "2026-05-15T14:00:06.975Z",
+  "content": "Deletion request successfully sent to the owner's email address <1>{{email}}</1> ",
+  "content_en_sha1_hash": "738880cc6391bcd3074490c889ea5d3b2b954f00",
+  "created_at": "2026-08-13T14:37:20.984Z",
+  "updated_at": "2026-08-13T15:23:46.229Z",
   "comment": {
-    "text": "This is a toast message confirming that a deletion request has been sent. It appears after a user attempts to delete something, informing them that the request was successfully emailed to the owner. `{{productName}}` is the name of the product (e.g., ONLYOFFICE DocSpace), and `<1>{{email}}</1>` is the owner's email address.",
+    "text": "Success toast message that appears after sending a deletion request, containing the owner's email address within the <1>{{email}}</1> tag.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:31:53.930Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:23:46.229Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

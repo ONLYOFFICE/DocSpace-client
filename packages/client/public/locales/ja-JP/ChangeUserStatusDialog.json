@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "必要に応じて、無効にしたユーザーを削除したり、有効にしたりすることができます。オーナーや自分自身などのユーザーを無効にすることはできません。",
   "DisableGuest": "ゲストを無効にする",
-  "DisableGuestDescription": "このゲストを無効にすると、{{productName}}にログインできなくなります。",
+  "DisableGuestDescription": "このゲストを無効にすると、ワークスペースにログインできなくなります。",
   "DisableGuests": "ゲストを無効にする",
-  "DisableGuestsDescription": "これらのゲストを無効にすると、{{productName}}にログインできなくなります。",
+  "DisableGuestsDescription": "これらのゲストを無効にすると、ワークスペースにログインできなくなります。",
   "DisableGuestsGeneralDescription": "必要に応じて、無効にしたゲストを後で削除したり、有効にしたりすることができます。",
   "DisableUser": "ユーザーを無効にする",
-  "DisableUserDescription": "このユーザーを無効にすると、{{productName}}にログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
+  "DisableUserDescription": "このユーザーを無効にすると、ワークスペースにログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
   "DisableUsers": "ユーザーを無効にする",
-  "DisableUsersDescription": "このユーザーを無効にすると、 {{productName}}にログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
+  "DisableUsersDescription": "このユーザーを無効にすると、 ワークスペースにログインできなくなりますが、ドキュメントやデータはそのまま残ります。",
   "EnableGuest": "ゲストを有効にする",
-  "EnableGuestDescription": "このゲストを有効にすると、ゲストは再び{{productName}}にログインできるようになります。",
+  "EnableGuestDescription": "このゲストを有効にすると、ゲストは再びワークスペースにログインできるようになります。",
   "EnableGuests": "ゲストを有効にする",
-  "EnableGuestsDescription": "これらのゲストを有効にすると、ゲストは再び{{productName}}にログインできるようになります。",
+  "EnableGuestsDescription": "これらのゲストを有効にすると、ゲストは再びワークスペースにログインできるようになります。",
   "EnableUser": "ユーザーを有効にするActivare utilizator",
-  "EnableUserDescription": "このユーザーを有効にすると、再度{{productName}}にログインし、文書やデータにアクセスできるようになります。",
+  "EnableUserDescription": "このユーザーを有効にすると、再度ワークスペースにログインし、文書やデータにアクセスできるようになります。",
   "EnableUsers": "ユーザーを有効にする",
-  "EnableUsersDescription": "このユーザーを有効にすると、再度{{productName}}にログインし、文書やデータにアクセスできるようになります。"
+  "EnableUsersDescription": "このユーザーを有効にすると、再度ワークスペースにログインし、文書やデータにアクセスできるようになります。"
 }

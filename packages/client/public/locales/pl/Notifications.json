@@ -2,8 +2,8 @@
   "ActionsWithFilesDescription": "Odznaki uwydatnią aktywność plików — przesłania, edycje lub udostępnienia — w sekcjach {{rooms}}, {{shared}}, {{documents}} i {{aiAgents}}.",
   "AdminSetupRequired": "Wymagane skonfigurowanie administratora",
   "Badges": "Etykiety",
-  "DailyFeed": "Codzienne aktualności {{productName}}",
-  "DailyFeedDescription": "Czytaj wiadomości i wydarzenia z {{productName}} w codziennym przeglądzie.",
+  "DailyFeed": "Codzienne aktualności {{organizationName}} {{productName}}",
+  "DailyFeedDescription": "Czytaj wiadomości i wydarzenia z {{organizationName}} {{productName}} w codziennym przeglądzie.",
   "FileActivityNotify": "Powiadomienia o aktywności plików",
   "IsNotValid": "Nie jest prawidłowe",
   "LdapEmailTooltip": "To konto użytkownika jest ładowane z LDAP. Adres e-mail użytkownika nie został określony, a aktualny został wygenerowany automatycznie i nie można go użyć do wysyłania powiadomień.",
@@ -14,6 +14,6 @@
   "SettingUpNotifications": "Konfigurowanie powiadomień",
   "SuccessConnected": "{{serviceName}} zostało pomyślnie podłączone jako kanał powiadomień. Teraz będziesz tam otrzymywać aktualizacje.",
   "SuccessDisconnected": "{{serviceName}} zostało pomyślnie odłączone jako kanał powiadomień. Powiadomienia nie będą już tam wysyłane.",
-  "UsefulTips": "Przydatne wskazówki {{productName}}",
-  "UsefulTipsDescription": "Uzyskaj przydatne przewodniki na temat {{productName}}"
+  "UsefulTips": "Przydatne wskazówki {{organizationName}} {{productName}}",
+  "UsefulTipsDescription": "Uzyskaj przydatne przewodniki na temat {{organizationName}} {{productName}}"
 }

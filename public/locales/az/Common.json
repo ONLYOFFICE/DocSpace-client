@@ -1780,7 +1780,7 @@
   "RolePowerUserFormRoomDescription": "Istifadəçilər otağa formalar yükləyə və Tamamlanmış və Prosesdə olan qovluqlara tam giriş əldə edə bilərlər.",
   "RoleReviewer": "Rəyçi",
   "RoleReviewerDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, nəzərdən keçirmək, şərh etmək.",
-  "RoleRoomAdminDescription": "\"Otaq administratorları təyin edilmiş otaqları yarada və idarə edə, yeni istifadəçilər dəvət edə və səviyyələrindən aşağı rolu təyin edə bilərlər. Bütün administratorlar {{sectionName}} bölməsinə daxil olurlar.<br/> <1>{{agentSection}}-da</1>: öz bilik bazalarını və giriş parametrlərini daxil olmaqla, {{agentSection}}-ı yarada və idarə edə bilərlər.\"",
+  "RoleRoomAdminDescription": "Otaq administratorları təyin edilmiş otaqları yarada və idarə edə, yeni istifadəçilər dəvət edə və səviyyələrindən aşağı rolu təyin edə bilərlər. Bütün administratorlar {{sectionName}} bölməsinə daxil olurlar.<br/> <1>{{agentSection}}-da</1>: öz bilik bazalarını və giriş parametrlərini daxil olmaqla, {{agentSection}}-ı yarada və idarə edə bilərlər.",
   "RoleRoomAdminFormRoomDescription": "Otaq administratorları otaqlar yarada və idarə edə, yeni istifadəçiləri dəvət edə və otaq administratoru və ya daha aşağı vəzifələr təyin edə bilər. Otaq administratorları formaları otağa yükləyə, Tamamlanmış və Prosesdə qovluqlarına tam giriş əldə edə bilər.",
   "RoleRoomManagerDescription": "Otaq administratorları təyin olunmuş otaqları idarə edə, yeni istifadəçiləri dəvət edə və səviyyələrindən aşağı rollar təyin edə bilərlər.",
   "RoleViewer": "İzləyici",

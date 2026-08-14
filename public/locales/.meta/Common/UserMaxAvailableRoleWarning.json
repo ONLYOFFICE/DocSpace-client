@@ -3,7 +3,7 @@
   "content": "Guests and Users cannot be assigned as Room managers. Only Room and Full admins are suitable for the specified role.",
   "content_en_sha1_hash": "47c8fbce17ebb60c641f9b5ca8ea9e3d68ea8820",
   "created_at": "2026-08-13T14:37:13.133Z",
-  "updated_at": "2026-08-13T14:38:07.617Z",
+  "updated_at": "2026-08-14T14:58:32.737Z",
   "comment": {
     "text": "Tooltip or warning text in the Invite Panel and Members list explaining that only Admins can be assigned the Room Manager role.",
     "is_auto": true,
@@ -13,32 +13,32 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/utils/index.js",
-      "line_number": 91,
-      "context": "item.access = freeRole.access;\n item.warning = item.isGroup\n ? t(\"Common:GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"Common:UserMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n });\n return item;\n };",
+      "line_number": 90,
+      "context": "item.access = freeRole.access;\n item.warning = item.isGroup\n ? t(\"Common:GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"Common:UserMaxAvailableRoleWarning\");\n return item;\n };\n \n export const makeViewerRole = (item, t, viewerRole) => {\n if (!viewerRole) return item;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 58,
-      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"Common:UserMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },",
+      "line_number": 57,
+      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"Common:UserMaxAvailableRoleWarning\"),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n agentAdmin: {\n key: \"agentAdmin\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/Members/Members.utils.ts",
-      "line_number": 58,
-      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"Common:UserMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },",
+      "line_number": 57,
+      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"Common:UserMaxAvailableRoleWarning\"),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n agentAdmin: {\n key: \"agentAdmin\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/utils/index.ts",
-      "line_number": 138,
-      "context": "item.access = (freeRole as { access: number }).access;\n item.warning = item.isGroup\n ? t(\"Common:GroupMaxAvailableRoleWarning\", {\n roleName: (freeRole as { label: string }).label,\n })\n : t(\"Common:UserMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n });\n return item;\n };",
+      "line_number": 137,
+      "context": "item.access = (freeRole as { access: number }).access;\n item.warning = item.isGroup\n ? t(\"Common:GroupMaxAvailableRoleWarning\", {\n roleName: (freeRole as { label: string }).label,\n })\n : t(\"Common:UserMaxAvailableRoleWarning\");\n return item;\n };\n \n export const makeViewerRole = <T extends InviteItemBase>(\n item: T,",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 174,
-      "context": "},\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"Common:UserMaxAvailableRoleWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,",
+      "line_number": 172,
+      "context": "},\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"Common:UserMaxAvailableRoleWarning\"),\n ...(!standalone && isNone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },",
       "module": "/packages/shared"
     }
   ],

@@ -3,13 +3,21 @@
   "content": "You have successfully connected your domain to your IP address. To edit the workspace address settings, you need to set the future workspace name",
   "content_en_sha1_hash": "f8376f060a722a25f36c0efab8c1cb7047c3104e",
   "created_at": "2026-08-13T22:44:34.322Z",
-  "updated_at": "2026-08-13T22:44:34.322Z",
+  "updated_at": "2026-08-14T15:50:20.857Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text in a modal dialog that appears after a domain is successfully connected to an IP address, providing instructions for editing workspace address settings.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:50:20.857Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
+      "line_number": 161,
+      "context": "<ModalDialog.Header>\n {t(\"CreatingPortal\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"CreateSpaceDescription\")}\n </Text>\n <div className={styles.createPortalInputBlock}>\n <Text\n fontSize=\"13px\"\n fontWeight=\"600\"",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Keys management",
   "content_en_sha1_hash": "f4eb58215579c84cf84072221f16ea905c079271",
   "created_at": "2026-05-24T17:27:30.524Z",
-  "updated_at": "2026-05-24T17:45:39.719Z",
+  "updated_at": "2026-08-14T14:58:32.839Z",
   "comment": {
     "text": "Menu item label in the profile section that navigates to the encryption keys management interface.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
-      "line_number": 199,
-      "context": "await getFileManagementData();\n },\n },\n {\n id: \"keys-management\",\n name: t?.(\"Common:KeysManagement\"),\n content: <KeysManagement />,\n onClick: async () => {\n await getEncryptionKeysData();\n },\n },",
+      "line_number": 206,
+      "context": "// so the tab cannot be reached by URL either.\n ...(isPrivateRoomsEnabled()\n ? [\n {\n id: \"keys-management\",\n name: t?.(\"Common:KeysManagement\"),\n content: <KeysManagement />,\n onClick: async () => {\n await getEncryptionKeysData();\n },\n },",
       "module": "/packages/client"
     }
   ],

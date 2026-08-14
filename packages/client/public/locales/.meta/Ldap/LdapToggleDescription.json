@@ -3,13 +3,21 @@
   "content": "Enable this option if you want to add users from LDAP server to the workspace automatically. The added users will be able to authorize using their LDAP server credentials. The workspace does not save the user passwords locally and will authenticate users sending their login and password to LDAP server.",
   "content_en_sha1_hash": "a33ef81c01d9b9eeb941fb5791197417efb54637",
   "created_at": "2026-08-13T22:44:30.959Z",
-  "updated_at": "2026-08-13T22:44:30.959Z",
+  "updated_at": "2026-08-14T15:28:30.206Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Help text for the LDAP integration toggle switch, explaining the automatic user synchronization and authentication process.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:28:30.206Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleLDAP.js",
+      "line_number": 108,
+      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"LdapToggleDescription\")}\n </Text>\n </div>\n </div>\n );",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

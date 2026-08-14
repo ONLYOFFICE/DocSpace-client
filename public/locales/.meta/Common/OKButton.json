@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-08-06T08:04:19.869Z",
+  "updated_at": "2026-08-14T14:58:32.680Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
-      "line_number": 158,
+      "line_number": 156,
       "context": "testId=\"activate-ai-dialog-cancel-button\"\n />\n </>\n ) : (\n <Button\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"activate-ai-dialog-ok-button\"\n />",
       "module": "/packages/client"
     },
@@ -55,13 +55,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.tsx",
-      "line_number": 81,
+      "line_number": 80,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n isLoading={isRequestRunning}\n testId=\"confirm_delete_plugin_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 194,
+      "line_number": 189,
       "context": "<Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size=\"normal\"\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 109,
+      "line_number": 105,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onCloseDialog}\n scale={currentDeviceType === DeviceType.mobile}\n />",
       "module": "/packages/client"
     },
@@ -115,7 +115,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
-      "line_number": 294,
+      "line_number": 295,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n size={ButtonSize.normal}\n scale\n label={t(\"Common:OKButton\")}\n onClick={onClose}\n testId=\"preview_dialog_ok_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
-      "line_number": 218,
+      "line_number": 211,
       "context": "<Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size={ButtonSize.normal}\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
       "module": "/packages/sdk"
     },
@@ -193,7 +193,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 172,
+      "line_number": 167,
       "context": "/>\n ) : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSaveClick}\n isLoading={isLoading}\n isDisabled={!isDisableQuota ? size.trim() === \"\" : false}",
       "module": "/packages/shared"
     },

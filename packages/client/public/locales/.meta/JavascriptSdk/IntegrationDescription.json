@@ -3,7 +3,7 @@
   "content": "Check ready-to-use workspace integrations",
   "content_en_sha1_hash": "47955e585d056c90a9f8a43bb10c76ac7dee039c",
   "created_at": "2026-08-12T11:00:47.461Z",
-  "updated_at": "2026-08-12T11:48:54.114Z",
+  "updated_at": "2026-08-14T14:58:32.809Z",
   "comment": {
     "text": "Description text under the Integration Examples header in Developer Tools, explaining available workspace integrations; includes a {{productName}} variable.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/Integration.tsx",
-      "line_number": 85,
-      "context": ">\n <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() }, \"integration-header\")}>\n {t(\"IntegrationExamples\")}\n </div>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"IntegrationDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <div className=\"icons\">\n <TooltipContainer\n as=\"div\"\n data-testid=\"integration_zoom_container\"",
+      "line_number": 84,
+      "context": ">\n <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() }, \"integration-header\")}>\n {t(\"IntegrationExamples\")}\n </div>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"IntegrationDescription\")}\n </Text>\n <div className=\"icons\">\n <TooltipContainer\n as=\"div\"\n data-testid=\"integration_zoom_container\"",
       "module": "/packages/client"
     }
   ],

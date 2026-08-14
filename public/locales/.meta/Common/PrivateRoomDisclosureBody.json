@@ -3,13 +3,21 @@
   "content": "Encryption runs entirely in your browser, so files are readable only by the people you invite. You rely on the code your workspace serves — lock your session when you are not using it.",
   "content_en_sha1_hash": "b583152d537390ad081ee18fce95ce9ceedcae6c",
   "created_at": "2026-08-13T22:44:16.232Z",
-  "updated_at": "2026-08-13T22:44:16.232Z",
+  "updated_at": "2026-08-14T15:05:34.210Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text of an informational disclosure banner in private rooms, explaining browser-side encryption and security best practices.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:05:34.210Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/private-shell/DisclosureBanner.tsx",
+      "line_number": 84,
+      "context": "return (\n <div className={styles.banner} role=\"status\" data-test-id=\"private-disclosure-banner\">\n <div className={styles.content}>\n <p className={styles.title}>{t(\"Common:PrivateRoomDisclosureTitle\")}</p>\n <p className={styles.body}>\n {t(\"Common:PrivateRoomDisclosureBody\")}\n </p>\n </div>\n <button\n type=\"button\"\n className={styles.dismiss}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

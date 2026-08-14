@@ -3,7 +3,7 @@
   "content": "Select workspace roles for the imported users: <1>Full admin</1>, <1>Room admin</1> or <1>User</1>. By default, User role is selected for each user. You can manage the roles after the import.",
   "content_en_sha1_hash": "a959290f9ba1ab0c1648cfc0111269c96ccac9d1",
   "created_at": "2026-08-13T14:37:16.526Z",
-  "updated_at": "2026-08-13T15:15:28.624Z",
+  "updated_at": "2026-08-14T14:58:32.784Z",
   "comment": {
     "text": "Instructional text within a step of the workspace import wizard explaining how to assign roles to imported users; use <1> tags to bold specific role names.",
     "is_auto": true,
@@ -13,32 +13,32 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 92,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 90,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 103,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 101,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 97,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 94,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 66,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 64,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />\n {renderTooltip}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
-      "line_number": 66,
-      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: getBrandName(\"ProductName\"),\n }}\n components={{\n 1: <b />,",
+      "line_number": 64,
+      "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n components={{\n 1: <b />,\n }}\n />\n {renderTooltip}",
       "module": "/packages/client"
     }
   ],

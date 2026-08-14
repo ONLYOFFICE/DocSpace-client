@@ -3,13 +3,21 @@
   "content": "To connect a third-party storage, you need to add the corresponding service in the Integration section of workspace settings. Contact the owner or Full admin to enable the integration.",
   "content_en_sha1_hash": "d817d865a2c113ffc2650524dcce5c7afd05bd3a",
   "created_at": "2026-08-13T22:44:32.823Z",
-  "updated_at": "2026-08-13T22:44:32.823Z",
+  "updated_at": "2026-08-14T15:24:08.305Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Informational text in a dialog shown to room administrators when no third-party storage services are configured in the workspace integration settings.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:24:08.305Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.tsx",
+      "line_number": 126,
+      "context": "if (isDisabled) return;\n \n if (!connectItems?.length) {\n const data = isRoomAdmin ? (\n <Text as=\"p\">\n {t(\"ThirdPartyStorageRoomAdminNoStorageAlert\")}\n </Text>\n ) : (\n <Text as=\"p\">\n {t(\"ThirdPartyStorageNoStorageAlert\")}{\" \"}\n <Link",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Select users",
   "content_en_sha1_hash": "8f2012e6097eda31bbf0f7e51ae403b08862e983",
   "created_at": "2025-05-19T21:30:52.552Z",
-  "updated_at": "2026-05-15T14:00:06.778Z",
+  "updated_at": "2026-08-14T14:58:32.784Z",
   "comment": {
     "text": "This is a step title in the data import wizard, indicating the user needs to select specific users for the import process.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 74,
+      "line_number": 73,
       "context": "acceptedExtensions={[\".gz\", \".tar\", \".tar.gz\"]}\n />\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionWorkspace\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,",
       "module": "/packages/client"
     },

@@ -3,13 +3,21 @@
   "content": "The license limit counter consists of: already existing accounts in the workspace and new users that you want to import. If you import users who already have an account in the workspace, they will not be counted again in the counter. Your {{organizationName}} {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
   "content_en_sha1_hash": "933d0e9fccd2c52f414c5322b5811cc7d7536f11",
   "created_at": "2026-08-13T22:44:29.666Z",
-  "updated_at": "2026-08-13T22:44:29.666Z",
+  "updated_at": "2026-08-14T15:34:48.618Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Tooltip content for the license limit help button that explains how the user counter is calculated. It includes placeholders for the organization name, product name, and the maximum user limit.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:34:48.618Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
+      "line_number": 76,
+      "context": "dataTestId=\"license_limit_help_button\"\n place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"LicenseLimitDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n maxLimit: limitAdmins,\n })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

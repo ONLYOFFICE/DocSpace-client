@@ -3,13 +3,21 @@
   "content": "Read news and events from {{organizationName}} {{productName}} in a daily digest.",
   "content_en_sha1_hash": "f236a1be60849bece4436fa8b195d8c411e9412b",
   "created_at": "2026-08-13T22:44:30.722Z",
-  "updated_at": "2026-08-13T22:44:30.722Z",
+  "updated_at": "2026-08-14T15:30:56.727Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Descriptive text for the daily feed subscription toggle in the notifications settings, containing placeholders for the organization and product names.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:30:56.727Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/DailyFeedContainer.tsx",
+      "line_number": 88,
+      "context": "isChecked={dailyFeedSubscriptions}\n dataTestId=\"daily_feed_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"DailyFeedDescription\", { organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\") })}\n </Text>\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

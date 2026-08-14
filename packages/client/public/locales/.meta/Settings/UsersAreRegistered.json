@@ -3,7 +3,7 @@
   "content": "You selected users registered in your workspace, with the roles already set. Please proceed to the next step or go back to select more users.",
   "content_en_sha1_hash": "15146466d482bd38c16b6f6fcd60a9ace9421837",
   "created_at": "2026-08-12T11:00:46.591Z",
-  "updated_at": "2026-08-12T11:59:12.691Z",
+  "updated_at": "2026-08-14T14:58:32.784Z",
   "comment": {
     "text": "Informative description text within a stepper component during the workspace data import process, notifying the user that selected users already have pre-assigned roles.",
     "is_auto": true,
@@ -14,31 +14,31 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
       "line_number": 82,
-      "context": "title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n </>\n ) : (",
+      "context": "title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\")}\n </div>\n </>\n ) : (\n <>\n <Trans",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
       "line_number": 93,
-      "context": "title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n </>\n ) : (",
+      "context": "title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\")}\n </div>\n </>\n ) : (\n <>\n <Trans",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 87,
-      "context": "title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n </>\n ) : (",
+      "line_number": 86,
+      "context": "title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\")}\n </div>\n </>\n ) : (\n <>\n <Trans",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
       "line_number": 56,
-      "context": "case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n </>\n ) : (",
+      "context": "case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\")}\n </div>\n </>\n ) : (\n <>\n <Trans",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
       "line_number": 56,
-      "context": "case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </div>\n </>\n ) : (",
+      "context": "case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\")}\n </div>\n </>\n ) : (\n <>\n <Trans",
       "module": "/packages/client"
     }
   ],

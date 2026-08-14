@@ -3,7 +3,7 @@
   "content": "Plug the workspace into any ecosystem (DMS, CMS, LMS, etc.) — no custom code, no migration.",
   "content_en_sha1_hash": "0eac9e0074f61673c1ddd85406359eb03a4eceb6",
   "created_at": "2026-08-12T11:00:24.956Z",
-  "updated_at": "2026-08-12T11:16:58.773Z",
+  "updated_at": "2026-08-14T14:58:32.757Z",
   "comment": {
     "text": "Description text for an information card on the Dashboard explaining integration capabilities with external ecosystems.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationsCard.tsx",
-      "line_number": 112,
-      "context": "// The wrapper stays put when the card is collapsed, so the spotlight\n // follows the card down to its header instead of the step disappearing.\n <div data-tour-id=\"dashboard-integrations\">\n <CollapsibleCard\n title={t(\"Common:AlreadyUsingAnotherPlatform\")}\n description={t(\"Common:IntegrationsDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n defaultOpen\n >\n <div className={styles.integrationsGrid}>",
+      "line_number": 111,
+      "context": "// The wrapper stays put when the card is collapsed, so the spotlight\n // follows the card down to its header instead of the step disappearing.\n <div data-tour-id=\"dashboard-integrations\">\n <CollapsibleCard\n title={t(\"Common:AlreadyUsingAnotherPlatform\")}\n description={t(\"Common:IntegrationsDescription\")}\n defaultOpen\n >\n <div className={styles.integrationsGrid}>\n {platforms.map((platform) => (\n <a",
       "module": "/packages/client"
     }
   ],

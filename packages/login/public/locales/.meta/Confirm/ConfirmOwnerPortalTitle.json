@@ -3,7 +3,7 @@
   "content": "Please confirm you want to change the owner to {{newOwner}}.",
   "content_en_sha1_hash": "0cbe4cebfcc681bf90194f8f713857a705b6b26a",
   "created_at": "2026-08-13T14:37:20.892Z",
-  "updated_at": "2026-08-13T15:21:13.879Z",
+  "updated_at": "2026-08-14T14:58:32.865Z",
   "comment": {
     "text": "Subtitle on the portal owner change confirmation screen that includes the name of the new owner via the {{newOwner}} variable.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalOwnerChange/page.client.tsx",
-      "line_number": 101,
-      "context": "})}\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"ConfirmOwnerPortalTitle\", {\n newOwner,\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <div className={styles.buttonsWrapper}>",
+      "line_number": 98,
+      "context": "{t(\"ConfirmOwnerPortalSuccessMessage\")}\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"ConfirmOwnerPortalTitle\", {\n newOwner,\n })}\n </Text>\n <div className={styles.buttonsWrapper}>\n <Button",
       "module": "/packages/login"
     }
   ],

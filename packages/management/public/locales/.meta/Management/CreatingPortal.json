@@ -3,7 +3,7 @@
   "content": "Creating new workspace",
   "content_en_sha1_hash": "0881f9379b5e4391cd5eaf56b1ad6978d9142541",
   "created_at": "2026-08-12T11:00:50.862Z",
-  "updated_at": "2026-08-12T13:47:42.591Z",
+  "updated_at": "2026-08-14T14:58:32.914Z",
   "comment": {
     "text": "Modal dialog title shown during the portal creation process; includes the {{productName}} variable.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 158,
-      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: getBrandName(\"ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"CreateSpaceDescription\", {\n productName: getBrandName(\"ProductName\"),",
+      "line_number": 157,
+      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {t(\"CreateSpaceDescription\")}\n </Text>",
       "module": "/packages/management"
     }
   ],

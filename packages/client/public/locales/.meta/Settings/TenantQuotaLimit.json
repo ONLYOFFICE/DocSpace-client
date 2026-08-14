@@ -3,7 +3,7 @@
   "content": "{{tenantQuotaLimit}} for the workspace",
   "content_en_sha1_hash": "f37de375be2d9119fe9ceb5fccb3d1d0bc8b3c3d",
   "created_at": "2026-08-12T11:00:46.475Z",
-  "updated_at": "2026-08-12T12:02:01.041Z",
+  "updated_at": "2026-08-14T14:58:32.726Z",
   "comment": {
     "text": "Informational text within a warning dialog displaying the storage limit; {{tenantQuotaLimit}} represents a formatted size (e.g., \"10 GB\").",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 78,
-      "context": "}),\n );\n }\n if (isTenantCustomQuotaSet) {\n quotaLimits.push(\n t(\"Settings:TenantQuotaLimit\", {\n tenantQuotaLimit: getConvertedSize(t, tenantCustomQuota),\n productName: getBrandName(\"ProductName\"),\n }),\n );\n }",
+      "line_number": 77,
+      "context": "}),\n );\n }\n if (isTenantCustomQuotaSet) {\n quotaLimits.push(\n t(\"Settings:TenantQuotaLimit\", {\n tenantQuotaLimit: getConvertedSize(t, tenantCustomQuota),\n }),\n );\n }",
       "module": "/packages/client"
     }
   ],

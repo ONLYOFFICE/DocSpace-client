@@ -3,13 +3,21 @@
   "content": "Choose whether you want to display links to additional resources in workspace menu.",
   "content_en_sha1_hash": "b2072b167e853706aa9503a4ec4cb014cc52976f",
   "created_at": "2026-08-13T22:43:50.969Z",
-  "updated_at": "2026-08-13T22:43:50.969Z",
+  "updated_at": "2026-08-14T15:16:53.700Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text for a branding setting explaining the visibility of additional resource links in the workspace menu.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:16:53.700Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
+      "line_number": 100,
+      "context": "<div className={styles.additionalHeader}>\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div className={styles.additionalDescription}>\n {t(\"Common:AdditionalResourcesDescription\")}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox\n data-testid=\"show-feedback-support\"\n className={classNames(",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

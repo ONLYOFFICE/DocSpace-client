@@ -3,13 +3,21 @@
   "content": "If you disable these guests, they won’t be able to log in to the workspace.",
   "content_en_sha1_hash": "5f26b287fbbcbc9f3c0521adc768bef17c56060a",
   "created_at": "2026-08-13T22:44:32.880Z",
-  "updated_at": "2026-08-13T22:44:32.880Z",
+  "updated_at": "2026-08-14T15:23:16.033Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text in a confirmation dialog that explains the consequence of disabling multiple guest users.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:23:16.033Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
+      "line_number": 183,
+      "context": "bodyText = onlyOneUser\n ? isGuests\n ? t(\"DisableGuestDescription\")\n : t(\"DisableUserDescription\")\n : isGuests\n ? t(\"DisableGuestsDescription\")\n : t(\"DisableUsersDescription\");\n \n bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")\n : t(\"DisableGeneralDescription\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

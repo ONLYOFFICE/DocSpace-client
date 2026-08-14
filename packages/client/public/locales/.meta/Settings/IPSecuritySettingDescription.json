@@ -3,7 +3,7 @@
   "content": "Configure IP Security to restrict login possibility to select IP addresses. Use either exact IP addresses in the IPv4 format, IP range or CIDR masking. The IP security does not work for owners, they can access the workspace from any IP address.",
   "content_en_sha1_hash": "0688a09da6e8d01b6ab04c1175ecb53bba1f7edd",
   "created_at": "2026-08-13T14:37:16.113Z",
-  "updated_at": "2026-08-13T15:17:46.245Z",
+  "updated_at": "2026-08-14T14:58:32.832Z",
   "comment": {
     "text": "Subtitle for the IP Security setting in the Portal Settings security category, explaining how to restrict access via IPv4, ranges, or CIDR and noting that owners are exempt from these restrictions.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 304,
+      "line_number": 298,
       "context": "<Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"IPSecurity\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"IPSecuritySettingDescription\")}\n </Text>\n \n {ipSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },

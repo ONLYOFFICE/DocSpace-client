@@ -3,7 +3,7 @@
   "content": "For the files in the Common section, a separate room will be created (Common room). Only Full admins will have access to this room. By default, the owner of the room will be the user initiating the import: {{user}} (You).",
   "content_en_sha1_hash": "c9d5a8f4f4090e5a0da0937710b16730e6d1e564",
   "created_at": "2026-08-13T14:37:15.572Z",
-  "updated_at": "2026-08-13T15:19:04.261Z",
+  "updated_at": "2026-08-14T14:58:32.787Z",
   "comment": {
     "text": "Description for the 'Common files' option in the data import step. It explains the creation of a new room and its access rights, including the variable {{user}} representing the user performing the import.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
       "line_number": 261,
-      "context": "{hasCommonFiles ? (\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: getBrandName(\"ProductName\"),\n })}\n exportSection={{\n sectionName: t(\"Common:Common\"),",
+      "context": "{hasCommonFiles ? (\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n })}\n exportSection={{\n sectionName: t(\"Common:Common\"),\n workspace: serviceName,",
       "module": "/packages/client"
     }
   ],

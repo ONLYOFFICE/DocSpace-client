@@ -3,13 +3,21 @@
   "content": "If you enable this user, they will be able to log in to the workspace again and access their documents and data.",
   "content_en_sha1_hash": "b10429bd6d87e25aa9cb4394bc51a3bfad435c3b",
   "created_at": "2026-08-13T22:44:32.899Z",
-  "updated_at": "2026-08-13T22:44:32.899Z",
+  "updated_at": "2026-08-14T15:21:09.960Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text in the ChangeUserStatusDialog explaining the consequences of re-enabling a user's access to the workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:21:09.960Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
+      "line_number": 205,
+      "context": ": t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\")\n : t(\"EnableUserDescription\")\n : isGuests\n ? t(\"EnableGuestsDescription\")\n : t(\"EnableUsersDescription\");\n \n buttonLabelSave = t(\"Common:Enable\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

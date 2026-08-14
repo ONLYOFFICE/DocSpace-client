@@ -3,7 +3,7 @@
   "content": "Workspace access",
   "content_en_sha1_hash": "9973694cce2b5a0e8e3cf2806b4042c6deb1332b",
   "created_at": "2026-08-12T15:15:01.066Z",
-  "updated_at": "2026-08-12T15:25:59.877Z",
+  "updated_at": "2026-08-14T14:58:32.775Z",
   "comment": {
     "text": "Page title and navigation label within the security settings that identifies the section for managing workspace access permissions.",
     "is_auto": true,
@@ -13,26 +13,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 100,
-      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
+      "line_number": 99,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\"),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 54,
-      "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
+      "line_number": 53,
+      "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\"),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
-      "line_number": 88,
-      "context": "useSecurity(defaultProps.security);\n \n const data = [\n {\n id: \"access-portal\",\n name: t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") }),\n content: <AccessPortal />,\n onClick: async () => {\n clearAbortControllerArr();\n await getAccessPortalData();\n },",
+      "line_number": 87,
+      "context": "useSecurity(defaultProps.security);\n \n const data = [\n {\n id: \"access-portal\",\n name: t(\"PortalAccess\"),\n content: <AccessPortal />,\n onClick: async () => {\n clearAbortControllerArr();\n await getAccessPortalData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 212,
-      "context": "return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: getBrandName(\"ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");",
+      "line_number": 211,
+      "context": "return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\");\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");",
       "module": "/packages/client"
     },
     {

@@ -3,13 +3,21 @@
   "content": "Please confirm that you want to reactivate your workspace.",
   "content_en_sha1_hash": "6562ad588075431e44a5c80ce3507d7b0f3ee9d8",
   "created_at": "2026-08-13T22:44:34.286Z",
-  "updated_at": "2026-08-13T22:44:34.286Z",
+  "updated_at": "2026-08-14T15:43:52.844Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle in a confirmation screen that appears when a user is prompted to reactivate a workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:43:52.844Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx",
+      "line_number": 98,
+      "context": "</Trans>\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"PortalContinueTitle\")}\n </Text>\n <div className={styles.buttonsWrapper}>\n <Button\n primary\n scale",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

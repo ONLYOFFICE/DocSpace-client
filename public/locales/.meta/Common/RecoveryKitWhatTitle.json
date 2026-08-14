@@ -3,7 +3,7 @@
   "content": "What is this?",
   "content_en_sha1_hash": "dd8082be77e9211f033a55131c1a6360f12b0e1d",
   "created_at": "2026-07-27T13:07:29.741Z",
-  "updated_at": "2026-07-27T13:16:08.145Z",
+  "updated_at": "2026-08-14T14:58:32.893Z",
   "comment": {
     "text": "Section heading within the recovery phrase display modal that introduces an explanatory text block.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 113,
-      "context": "title: t(\"Common:RecoveryKitTitle\", { productName }),\n subtitle: t(\"Common:RecoveryKitSubtitle\"),\n createdLabel: t(\"Common:ByCreation\"),\n accountLabel: t(\"Common:Account\"),\n phraseLabel: t(\"Common:RecoveryKitPhraseLabel\"),\n whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),",
+      "context": "title: t(\"Common:RecoveryKitTitle\", { organizationName: getBrandName(\"OrganizationName\"), productName }),\n subtitle: t(\"Common:RecoveryKitSubtitle\"),\n createdLabel: t(\"Common:ByCreation\"),\n accountLabel: t(\"Common:Account\"),\n phraseLabel: t(\"Common:RecoveryKitPhraseLabel\"),\n whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n organizationName: getBrandName(\"OrganizationName\"), productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),",
       "module": "/packages/shared"
     }
   ],

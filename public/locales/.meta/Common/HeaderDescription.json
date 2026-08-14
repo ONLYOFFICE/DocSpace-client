@@ -3,13 +3,33 @@
   "content": "You can disable header in the mobile version to limit access to the workspace sections (just like disabling the left menu in the desktop version).",
   "content_en_sha1_hash": "f32553e27467f9623de5706dfaf72a8f0551b71c",
   "created_at": "2026-08-13T22:44:07.472Z",
-  "updated_at": "2026-08-13T22:44:07.472Z",
+  "updated_at": "2026-08-14T15:08:26.028Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Explanatory text for a tooltip or configuration panel description explaining the effect of disabling the header in the mobile version.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:08:26.028Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
+      "line_number": 532,
+      "context": "label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"Common:Header\")}\n description={t(\"Common:HeaderDescription\")}\n dataTestId=\"show_title\"\n />\n <CheckboxElement\n label={t(\"Common:SearchFilterAndSort\")}\n onChange={onTitleChange}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
+      "line_number": 620,
+      "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Common:Header\")}\n description={t(\"Common:HeaderDescription\")}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n />\n }\n dataTestId=\"show_header_help_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/EmbeddingPanel/index.tsx",
+      "line_number": 494,
+      "context": "label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"Common:Header\")}\n description={t(\"Common:HeaderDescription\")}\n dataTestId=\"show_title\"\n />\n <CheckboxElement\n label={t(\"Common:SearchFilterAndSort\")}\n onChange={onTitleChange}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2026-08-13T14:37:21.675Z",
+  "updated_at": "2026-08-14T14:58:32.685Z",
   "comment": {
     "text": "This is the label for a button that allows users to proceed with an action, such as confirming a service, closing an editor without saving, or initiating a file conversion.",
     "is_auto": true,
@@ -61,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/PortalRenamingDialog/index.js",
-      "line_number": 66,
+      "line_number": 65,
       "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"PortalRenamingContinueBtn\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n scale\n primary\n onClick={onSave}\n isLoading={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 117,
+      "line_number": 114,
       "context": "onClick={onClickRedirect}\n scale\n testId=\"continue_change_quota_button\"\n />\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onCloseDialog}\n scale\n testId=\"cancel_continue_change_quota_button\"\n />",
       "module": "/packages/client"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 569,
+      "line_number": 568,
       "context": "<Button\n size={ButtonSize.medium}\n scale\n primary\n label={t(\"Common:ContinueButton\")}\n isLoading={isCreated}\n onClick={onContinueClick}\n testId=\"wizard_continue_button\"\n />\n </div>",
       "module": "/packages/login"
     },

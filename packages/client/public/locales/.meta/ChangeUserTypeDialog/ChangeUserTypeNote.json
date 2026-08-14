@@ -3,7 +3,7 @@
   "content": "<1>Note:</1> you cannot change the type for the Full admin and for yourself.",
   "content_en_sha1_hash": "a41936d9586b5c69a9ce8020531afa7637199588",
   "created_at": "2026-08-13T14:37:19.497Z",
-  "updated_at": "2026-08-13T15:03:01.746Z",
+  "updated_at": "2026-08-14T14:58:32.695Z",
   "comment": {
     "text": "Informational note within the ChangeUserTypeDialog explaining restrictions on changing specific user types. The <1> tag is used to apply bold styling to the \"Note:\" prefix.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
       "line_number": 221,
-      "context": "/>\n </Text>\n {!isCurrentUserOwner ? (\n <Text className={styles.noteText}>\n <Trans\n i18nKey=\"ChangeUserTypeNote\"\n ns=\"ChangeUserTypeDialog\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,",
+      "context": "/>\n </Text>\n {!isCurrentUserOwner ? (\n <Text className={styles.noteText}>\n <Trans\n i18nKey=\"ChangeUserTypeNote\"\n ns=\"ChangeUserTypeDialog\"\n t={t}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}",
       "module": "/packages/client"
     }
   ],

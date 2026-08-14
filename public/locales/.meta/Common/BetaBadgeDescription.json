@@ -3,13 +3,21 @@
   "content": "Please note: you can enable RTL languages for the workspace interface in the beta mode. RTL support for the editors will be available soon.",
   "content_en_sha1_hash": "2c96104118d7c78b6f52c6b1902668ad64f7bd11",
   "created_at": "2026-08-13T22:43:55.072Z",
-  "updated_at": "2026-08-13T22:43:55.072Z",
+  "updated_at": "2026-08-14T15:15:08.369Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Tooltip description for the beta badge, informing users about the beta status of RTL support for the workspace interface and its upcoming availability for editors.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:15:08.369Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/beta-badge/index.tsx",
+      "line_number": 63,
+      "context": "}: BetaBadgeProps) => {\n const { t } = useTranslation([\"Common\", \"Settings\"]);\n \n const tooltipDescription = (\n <>\n {t(\"Common:BetaBadgeDescription\")}\n {!withOutFeedbackLink ? (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"BetaBadgeFeedback\"",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

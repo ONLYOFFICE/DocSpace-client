@@ -3,7 +3,7 @@
   "content": "Save here",
   "content_en_sha1_hash": "2f59885d38dc68521d61e5eb75fd8f19891f7b1e",
   "created_at": "2025-05-19T21:30:48.310Z",
-  "updated_at": "2026-08-12T11:00:51.496Z",
+  "updated_at": "2026-08-14T14:58:32.661Z",
   "comment": {
     "text": "This is a button label that appears in file selection dialogs, allowing the user to save a file to the currently displayed folder.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 103,
+      "line_number": 100,
       "context": "if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t(\"Common:SubmitToGallery\");\n if (filterParam) return t(\"Common:SaveButton\");\n \n return t(\"Common:SaveHereButton\");\n };\n \n export const getIsDisabled = (\n isFirstLoad: boolean,\n isSelectedParentFolder: boolean,",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Select a ready PDF form available in the workspace and upload it to the room.",
   "content_en_sha1_hash": "0e2dfbfe878d94b08c43756b2eb4422d2fc65408",
   "created_at": "2026-08-12T11:00:48.519Z",
-  "updated_at": "2026-08-12T11:37:13.781Z",
+  "updated_at": "2026-08-14T14:58:32.645Z",
   "comment": {
     "text": "Instructional subtext in an empty state view that explains how to select and upload a PDF form from the workspace into the current room.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 320,
-      "context": "const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n FilterType.PDFForm,\n );",
+      "line_number": 318,
+      "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:UploadPDFFormOptionDescription\"),\n FilterType.PDFForm,\n );\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Room list",
   "content_en_sha1_hash": "61e05608df86be266bae6e1183981c8d88c82435",
   "created_at": "2025-05-19T21:30:48.199Z",
-  "updated_at": "2026-08-12T11:00:51.529Z",
+  "updated_at": "2026-08-14T14:58:32.715Z",
   "comment": {
     "text": "This is a label for a list of rooms. It appears as a header in a dialog and as a menu item.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 226,
+      "line_number": 225,
       "context": "};\n case \"room-list\":\n return {\n key: option,\n icon: FolderReactSvgUrl,\n label: t(\"Common:RoomList\"),\n onClick: () => this.openUserRoomList(item),\n };\n case \"enable\":\n return {\n id: \"option_enable\",",
       "module": "/packages/client"
     }

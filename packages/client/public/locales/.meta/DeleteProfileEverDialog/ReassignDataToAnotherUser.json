@@ -3,7 +3,7 @@
   "content": "Reassign data to another user",
   "content_en_sha1_hash": "2bf522106a72613d54369c00781f888c09915907",
   "created_at": "2025-05-19T21:30:56.676Z",
-  "updated_at": "2026-05-15T14:00:06.648Z",
+  "updated_at": "2026-08-14T14:58:32.694Z",
   "comment": {
     "text": "This is a link label within a dialog. It allows an administrator to reassign a user's data to another user before deleting the original user's profile.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 186,
+      "line_number": 176,
       "context": "fontWeight={600}\n isHovered\n onClick={onClickReassignData}\n dataTestId=\"dialog_reassign_data_link\"\n >\n {t(\"DeleteProfileEverDialog:ReassignDataToAnotherUser\")}\n </Link>\n ) : null}\n </>\n );\n };",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Storage quota is enabled for this workspace: {{quotaLimits}}. Limitations can occur during data import.",
   "content_en_sha1_hash": "bade19daacaa712fc61fe64a35b7ba95b762458c",
   "created_at": "2026-08-12T11:00:46.455Z",
-  "updated_at": "2026-08-12T12:02:34.602Z",
+  "updated_at": "2026-08-14T14:58:32.726Z",
   "comment": {
     "text": "Text within a warning dialog shown when storage quotas are active for a workspace; includes {{quotaLimits}} representing the specific enabled limits.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 89,
-      "context": "if (quotaLimits.length === 0) {\n return \"\";\n }\n \n return t(\"Settings:StorageQuotaWarningDescription\", {\n quotaLimits: quotaLimits.join(\", \"),\n productName: getBrandName(\"ProductName\"),\n });\n };",
+      "line_number": 87,
+      "context": "if (quotaLimits.length === 0) {\n return \"\";\n }\n \n return t(\"Settings:StorageQuotaWarningDescription\", {\n quotaLimits: quotaLimits.join(\", \"),\n });\n };\n \n return (",
       "module": "/packages/client"
     }
   ],

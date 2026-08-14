@@ -3,7 +3,7 @@
   "content": "Upload your logo or generate it from text to provide on-brand experience to your users. These settings will affect all of your workspaces.",
   "content_en_sha1_hash": "78fa46ab7b8fae04cec49ba61337e80721e5cc28",
   "created_at": "2026-08-12T11:00:12.286Z",
-  "updated_at": "2026-08-12T11:22:19.090Z",
+  "updated_at": "2026-08-14T14:58:32.898Z",
   "comment": {
     "text": "Subtitle for the WhiteLabel category item in the mobile branding settings menu, describing the logo customization feature and its impact on all workspaces.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 71,
+      "line_number": 70,
       "context": "badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}\n url={`${baseUrl}/branding/white-label`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />",
       "module": "/packages/shared"
     }

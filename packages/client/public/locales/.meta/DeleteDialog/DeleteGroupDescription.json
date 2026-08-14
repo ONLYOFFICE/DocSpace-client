@@ -3,7 +3,7 @@
   "content": "Group {{groupName}} will be deleted. Users in the group will not be removed from the workspace. Are you sure you want to continue?",
   "content_en_sha1_hash": "d31ca109ae37e62bb5f31630583044cf6cd8ba44",
   "created_at": "2026-08-12T11:00:48.970Z",
-  "updated_at": "2026-08-12T11:33:32.047Z",
+  "updated_at": "2026-08-14T14:58:32.712Z",
   "comment": {
     "text": "Body text in a confirmation dialog that appears when deleting a group, containing the {{groupName}} variable to specify the name of the group being removed.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
-      "line_number": 99,
-      "context": "<Text>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"DeleteDialog:DeleteGroupDescription\", {\n productName: getBrandName(\"ProductName\"),\n groupName,\n })}\n </Text>\n </ModalDialog.Body>",
+      "line_number": 96,
+      "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupDescription\")\n : t(\"DeleteDialog:DeleteGroupDescription\", {\n groupName,\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],

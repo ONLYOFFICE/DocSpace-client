@@ -3,7 +3,7 @@
   "content": "Activate",
   "content_en_sha1_hash": "92ef08325a4813563a3110359906076374683282",
   "created_at": "2025-05-19T21:30:42.888Z",
-  "updated_at": "2026-08-13T14:37:21.655Z",
+  "updated_at": "2026-08-14T14:58:32.642Z",
   "comment": {
     "text": "This is the label for a button. Clicking it activates a license after a file has been uploaded.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
-      "line_number": 104,
+      "line_number": 101,
       "context": "type={LinkType.action}\n color=\"accent\"\n textDecoration={\"underline\"}\n onClick={onActivateAI}\n >\n {t(\"Activate\")}\n </Link>\n {/* {\" | \"}\n <Link\n type={LinkType.action}\n color=\"accent\"",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 135,
+      "line_number": 130,
       "context": "// saas admin: activate AI right away (or top up first) + show benefits.\n // The actual logic lives on the client and is passed in via callbacks.\n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Activate\"),\n key: \"activate-ai\",\n onClick: onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({",
       "module": "/libs/ui-kit"
     },
@@ -37,19 +37,19 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
-      "line_number": 138,
+      "line_number": 136,
       "context": "<>\n <Button\n label={\n isCardMissingOrInactive\n ? t(\"Common:TopUpAndActivate\")\n : t(\"Common:Activate\")\n }\n size={ButtonSize.normal}\n onClick={onActivate}\n primary\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
-      "line_number": 153,
+      "line_number": 146,
       "context": "];\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? {\n type: \"button\",\n title: t(\"Common:Activate\"),\n key: \"activate-ai\",\n onClick: onActivateAI,\n isLoading: isActivating,\n }\n : {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 454,
+      "line_number": 444,
       "context": "} as const;\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Common:Activate\"),\n key: \"activate-ai\",\n onClick: actions.onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({",
       "module": "/packages/client"
     },

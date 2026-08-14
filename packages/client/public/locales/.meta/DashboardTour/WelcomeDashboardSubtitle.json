@@ -3,7 +3,7 @@
   "content": "Everything starts on this page",
   "content_en_sha1_hash": "868f1199b06e958c450a63aaa3941881fff1eb25",
   "created_at": "2026-08-07T10:52:39.929Z",
-  "updated_at": "2026-08-07T10:55:02.582Z",
+  "updated_at": "2026-08-14T14:58:32.754Z",
   "comment": {
     "text": "Subtitle in the Welcome Dialog that appears during the dashboard onboarding tour.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/Dashboard/WelcomeDialog/WelcomeDialog.tsx",
       "line_number": 95,
-      "context": "<div className={styles.illustrationWrap} aria-hidden=\"true\">\n <MascotIcon className={styles.illustration} />\n </div>\n \n <Text as=\"h3\" className={styles.subtitle}>\n {t(\"DashboardTour:WelcomeDashboardSubtitle\")}\n </Text>\n \n <Text as=\"p\" className={styles.description}>\n {t(\"DashboardTour:WelcomeDescription\", { productName })}\n </Text>",
+      "context": "<div className={styles.illustrationWrap} aria-hidden=\"true\">\n <MascotIcon className={styles.illustration} />\n </div>\n \n <Text as=\"h3\" className={styles.subtitle}>\n {t(\"DashboardTour:WelcomeDashboardSubtitle\")}\n </Text>\n \n <Text as=\"p\" className={styles.description}>\n {t(\"DashboardTour:WelcomeDescription\")}\n </Text>",
       "module": "/packages/client"
     }
   ],

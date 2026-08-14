@@ -3,13 +3,21 @@
   "content": "Your Brand name will be displayed in invitations, notifications, and other places where your workspace name is referenced.",
   "content_en_sha1_hash": "99344582106eb2c55602f8820270758c450cdffc",
   "created_at": "2026-08-13T22:43:55.516Z",
-  "updated_at": "2026-08-13T22:43:55.516Z",
+  "updated_at": "2026-08-14T15:14:43.944Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle for the Brand Name input field in the branding settings, explaining where the configured name will appear throughout the workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:14:43.944Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
+      "line_number": 167,
+      "context": "<Text\n className={classNames(styles.wlSubtitle, \"wl-subtitle\")}\n fontSize=\"13px\"\n >\n {t(\"BrandNameSubtitle\")}\n </Text>\n \n <div className=\"settings-block\">\n <FieldContainer id=\"fieldContainerBrandName\" isVertical>\n <TextInput",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

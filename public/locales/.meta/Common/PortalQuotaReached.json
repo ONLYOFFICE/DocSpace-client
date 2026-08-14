@@ -3,7 +3,7 @@
   "content": "The workspace quota limit has been reached.",
   "content_en_sha1_hash": "7685cf2920ba0eb54ca8a335b69bbde8022bf8cf",
   "created_at": "2026-08-12T11:00:32.420Z",
-  "updated_at": "2026-08-12T11:08:40.492Z",
+  "updated_at": "2026-08-14T14:58:32.861Z",
   "comment": {
     "text": "Header for a notification bar that appears when the workspace quota limit has been met; includes the `productName` variable.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 81,
-      "context": "return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial\n ? t(\"PortalQuotaReached\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"PortalQuotaLimitWarning\", {\n productName: getBrandName(\"ProductName\"),\n }),",
+      "line_number": 80,
+      "context": "return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial\n ? t(\"PortalQuotaReached\")\n : t(\"PortalQuotaLimitWarning\"),\n };\n }\n };",
       "module": "/packages/doceditor"
     }
   ],

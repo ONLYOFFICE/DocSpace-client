@@ -3,7 +3,7 @@
   "content": "Print this document and keep it in a safe place, or store it in an encrypted vault. Do not leave it in your Downloads folder or unencrypted cloud storage.",
   "content_en_sha1_hash": "63bf2ec444813286aa5e918fd4e6b660c2877d3f",
   "created_at": "2026-07-27T13:07:29.638Z",
-  "updated_at": "2026-07-27T13:18:31.399Z",
+  "updated_at": "2026-08-14T14:58:32.894Z",
   "comment": {
     "text": "Instructional body text within the Recovery Phrase Display modal providing security advice for storing the recovery kit.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 124,
-      "context": "howText: t(\"Common:RecoveryKitHowText\", {\n action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),\n footer: t(\"Common:RecoveryKitFooter\", { productName }),\n },\n });\n }, [words, wordCount, accountLabel, i18n, t]);",
+      "context": "howText: t(\"Common:RecoveryKitHowText\", {\n action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),\n footer: t(\"Common:RecoveryKitFooter\", { organizationName: getBrandName(\"OrganizationName\"), productName }),\n },\n });\n }, [words, wordCount, accountLabel, i18n, t]);",
       "module": "/packages/shared"
     }
   ],

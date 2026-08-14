@@ -3,13 +3,21 @@
   "content": "Sharing with workspace users",
   "content_en_sha1_hash": "43ad679ba23683ddc541b019c5fab01c7a79ed33",
   "created_at": "2026-08-13T22:44:22.078Z",
-  "updated_at": "2026-08-13T22:44:22.078Z",
+  "updated_at": "2026-08-14T15:01:23.452Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Dialog title used when sharing a file with workspace users.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:01:23.452Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
+      "line_number": 189,
+      "context": "icon: <ShareSvg />,\n disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,\n },\n {\n id: \"share-with-users\",\n title: t(\"Common:ShareWithPortalUsers\"),\n description: t(\"Common:ShareWithPortalUsersDescription\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: shareFileToUsers,\n icon: <ShareFileToUsersIcon />,\n // HACK: Hide share option for rooms — remove after implementation is ready",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

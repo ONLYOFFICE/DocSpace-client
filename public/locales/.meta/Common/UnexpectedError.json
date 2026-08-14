@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-08-13T14:37:21.649Z",
+  "updated_at": "2026-08-14T14:58:32.628Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 104,
+      "line_number": 103,
       "context": "return <PaymentMethodLoader />;\n \n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_top\")",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
-      "line_number": 104,
+      "line_number": 103,
       "context": "return <PaymentMethodLoader />;\n \n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(toAbsoluteUrl(cardLinked), \"_top\")",
       "module": "/libs/ui-kit"
     },
@@ -73,7 +73,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 139,
+      "line_number": 138,
       "context": "await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: raw,\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(BACKUP_SERVICE);\n } finally {\n setIsLoading(false);\n }\n };",
       "module": "/libs/ui-kit"
     },
@@ -109,13 +109,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
-      "line_number": 73,
+      "line_number": 72,
       "context": "const [isDisabled, setDisabled] = useState(false);\n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const onRefreshData = async () => {\n setDisabled(true);\n try {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
-      "line_number": 73,
+      "line_number": 72,
       "context": "const [isDisabled, setDisabled] = useState(false);\n const goToStripePortal = () => {\n accountLink\n ? window.open(toAbsoluteUrl(accountLink), \"_blank\")\n : toastr.error(t(\"UnexpectedError\"));\n };\n \n const onRefreshData = async () => {\n setDisabled(true);\n try {",
       "module": "/libs/ui-kit"
     },
@@ -151,13 +151,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 381,
+      "line_number": 380,
       "context": "const checkRes = await paymentApi.getCustomerOperationsReport();\n const response = checkRes?.data\n ?.response as unknown as TransactionHistoryReportResponse;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 381,
+      "line_number": 380,
       "context": "const checkRes = await paymentApi.getCustomerOperationsReport();\n const response = checkRes?.data\n ?.response as unknown as TransactionHistoryReportResponse;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
       "module": "/libs/ui-kit"
     },
@@ -169,19 +169,19 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1307,
+      "line_number": 1311,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1307,
+      "line_number": 1311,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/PaymentStore.ts",
-      "line_number": 1307,
+      "line_number": 1311,
       "context": "try {\n await Promise.all(requests);\n this.setRangeStepByQuota();\n this.setBasicTariffContainer();\n } catch (error) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n return;\n }\n \n this.setIsInitPaymentPage(true);",
       "module": "/libs/ui-kit"
     },
@@ -199,7 +199,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/index.tsx",
-      "line_number": 235,
+      "line_number": 265,
       "context": "error?: string;\n }\n | undefined;\n \n if (!response) {\n reject(new Error(t(\"UnexpectedError\")));\n return;\n }\n if (response.error) {\n reject(new Error(response.error));\n return;",
       "module": "/libs/ui-kit"
     },
@@ -229,7 +229,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 825,
+      "line_number": 826,
       "context": "// so failures there reach us only through this callback. Without it a\n // failed profiles load looks like a portal with no AI models\n // configured. `context` names the failing step (e.g. \"profiles:init\").\n onError: ({ type, error, context }) => {\n console.error(`[ai-agent] ${context ?? type} failed`, error);\n toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
       "module": "/packages/client"
     },
@@ -349,13 +349,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1500,
+      "line_number": 1496,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1500,
+      "line_number": 1496,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     }

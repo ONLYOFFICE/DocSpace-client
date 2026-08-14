@@ -3,7 +3,7 @@
   "content": "As an owner/admin you can view and manage all API keys in this workspace.",
   "content_en_sha1_hash": "2fe21a82f82b1d52bce1e9c8877fa27390b6e07e",
   "created_at": "2026-08-12T11:00:45.422Z",
-  "updated_at": "2026-08-12T13:34:47.398Z",
+  "updated_at": "2026-08-14T14:58:32.791Z",
   "comment": {
     "text": "Instructional text on the API Keys settings page describing administrative permissions.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 169,
-      "context": "className={classNames(styles.apiKeysDescription, {\n withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text\n className={classNames(",
+      "line_number": 168,
+      "context": "className={classNames(styles.apiKeysDescription, {\n withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className={styles.apiKeysText}>\n {t(\"Settings:ApiKeysDescription\")}\n </Text>\n <Text\n className={classNames(\n styles.apiKeysText,\n styles.apiKeysDescriptionText,",
       "module": "/packages/client"
     }
   ],

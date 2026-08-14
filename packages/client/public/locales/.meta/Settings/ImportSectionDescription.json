@@ -3,13 +3,45 @@
   "content": "Select sections for import. They will appear in the corresponding sections of the workspace.",
   "content_en_sha1_hash": "af290f57c4da89d5f4a093fc0a72d54f7a063048",
   "created_at": "2026-08-13T22:44:29.585Z",
-  "updated_at": "2026-08-13T22:44:29.585Z",
+  "updated_at": "2026-08-14T15:36:23.790Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text for a step in the data import wizard. It explains the result of selecting sections and may include the {{organizationName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:36:23.790Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
+      "line_number": 126,
+      "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\"),\n component: (\n <ImportStep\n t={t}\n serviceName=\"Google Workspace\"\n usersExportDetails={{",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 138,
+      "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\"),\n component: (\n <ImportStep\n t={t}\n serviceName=\"Nextcloud\"\n usersExportDetails={{",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
+      "line_number": 131,
+      "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n organizationName: logoText,\n }),\n component: (\n <ImportStep\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
+      "line_number": 73,
+      "context": "/>\n {renderTooltip}\n </>\n );\n case 4:\n return t(\"Settings:ImportSectionDescription\");\n case 5:\n return t(\"Settings:ImportProcessingDescription\");\n case 6:\n return t(\"Settings:ImportCompleteDescriptionGoogle\", {\n productName: getBrandName(\"ProductName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
+      "line_number": 73,
+      "context": "/>\n {renderTooltip}\n </>\n );\n case 4:\n return t(\"Settings:ImportSectionDescription\");\n case 5:\n return t(\"Settings:ImportProcessingDescription\");\n case 6:\n return t(\"Settings:ImportCompleteDescriptionGoogle\", {\n productName: getBrandName(\"ProductName\"),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "Welcome to {{organizationName}} {{productName}}",
   "content_en_sha1_hash": "9f2cde777cb0e1488aaeb2cdbc2e4d83a3f9529c",
   "created_at": "2026-08-13T22:44:32.748Z",
-  "updated_at": "2026-08-13T22:44:32.748Z",
+  "updated_at": "2026-08-14T15:24:26.568Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Title of the welcome dialog shown during the dashboard tour, containing the organization name and product name as variables.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:24:26.568Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/WelcomeDialog/WelcomeDialog.tsx",
+      "line_number": 84,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"DashboardTour:WelcomeDashboardTitle\", { organizationName: getBrandName(\"OrganizationName\"), productName })}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n {/* Decorative: the greeting beside it already says what this is. */}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-08-13T14:37:21.712Z",
+  "updated_at": "2026-08-14T14:58:32.755Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to a help page or settings page for more information about the current feature or setting.",
     "is_auto": true,
@@ -20,37 +20,37 @@
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 121,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 121,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 121,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 121,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 121,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 121,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),",
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
       "module": "/packages/client"
     },
     {
@@ -97,13 +97,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 556,
+      "line_number": 553,
       "context": "target=\"_blank\"\n isHovered\n dataTestId=\"language_and_time_zone_link\"\n href={languageAndTimeZoneSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {settingsBlock}\n <SaveCancelButtons",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 409,
+      "line_number": 408,
       "context": "target=\"_blank\"\n isHovered\n href={renamingSettingsUrl}\n dataTestId=\"portal_renaming_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {settingsBlock}\n <SaveCancelButtons",
       "module": "/packages/client"
     },
@@ -127,7 +127,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 172,
+      "line_number": 168,
       "context": "fontSize=\"13px\"\n fontWeight=\"400\"\n onClick={() => window.open(installationGuidesUrl, \"_blank\")}\n dataTestId=\"csp_info_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n }\n />",
       "module": "/packages/client"
     },
@@ -151,13 +151,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 134,
+      "line_number": 132,
       "context": "target=\"_blank\"\n href={ldapSettingsUrl}\n dataTestId=\"ldap_settings_link\"\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n {isMobileView ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/UploadDescription.tsx",
-      "line_number": 61,
+      "line_number": 60,
       "context": "isHovered\n target={LinkTarget.blank}\n href={pluginsSdkUrl}\n dataTestId=\"api_plugins_sdk_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n );\n };",
       "module": "/packages/client"
     },
@@ -181,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 183,
+      "line_number": 180,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={administratorMessageSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
@@ -193,61 +193,61 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 218,
+      "line_number": 215,
       "context": "color={currentColorScheme?.main?.accent ?? undefined}\n target={LinkTarget.blank}\n isHovered\n href={limitedDevToolsBlockHelpUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 179,
+      "line_number": 178,
       "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 277,
+      "line_number": 274,
       "context": "target={LinkTarget.blank}\n isHovered\n href={invitationSettingsUrl}\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <div className={styles.content}>",
       "module": "/packages/client"
     },
@@ -271,7 +271,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 261,
+      "line_number": 258,
       "context": "target=\"_blank\"\n isHovered\n href={tfaSettingsUrl}\n dataTestId=\"tfa_component_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
@@ -301,7 +301,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 446,
+      "line_number": 443,
       "context": "fontSize=\"13px\"\n color={currentColorScheme?.main?.accent ?? undefined}\n isHovered\n dataTestId=\"automatic_backup_learn_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div",
       "module": "/packages/shared"
     },

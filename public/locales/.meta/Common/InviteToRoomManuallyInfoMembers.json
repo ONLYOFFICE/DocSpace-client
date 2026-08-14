@@ -3,7 +3,7 @@
   "content": "Add existing workspace members to the room.",
   "content_en_sha1_hash": "6dcd5a98b79c02b8aa616061f927f4143534439b",
   "created_at": "2026-08-12T11:00:25.241Z",
-  "updated_at": "2026-08-12T11:15:43.843Z",
+  "updated_at": "2026-08-14T14:58:32.736Z",
   "comment": {
     "text": "Instructional description text in the Invite Panel that appears when guest invitations are disabled, explaining that users can add existing workspace members to a room.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 677,
-      "context": "{roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Common:InviteToRoomManuallyInfoGuest\", {\n productName: getBrandName(\"ProductName\"),\n })}",
+      "line_number": 674,
+      "context": "})}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\")\n : !allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\")\n : t(\"Common:InviteToRoomManuallyInfoGuest\")}\n </Text>\n {roomId === -1 || allowInvitingGuests ? (\n <div className={styles.inviteLanguage}>\n <Text className={styles.invitationLanguage}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteInput.tsx",
-      "line_number": 618,
-      "context": "className={classNames(styles.description, {\n [styles.noAllowInvitingGuests]: !allowInvitingGuests,\n })}\n >\n {!allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Common:InviteToRoomManuallyInfoGuest\", {\n productName: getBrandName(\"ProductName\"),\n })}",
+      "line_number": 617,
+      "context": "className={classNames(styles.description, {\n [styles.noAllowInvitingGuests]: !allowInvitingGuests,\n })}\n >\n {!allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\")\n : t(\"Common:InviteToRoomManuallyInfoGuest\")}\n </Text>\n \n <div className={styles.inviteInputContainer} ref={inputsRef}>\n <div",
       "module": "/packages/sdk"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "All users will be added with User permissions only. To be able to add further admins, contact the Full admin to upgrade the tariff plan.",
   "content_en_sha1_hash": "31bf9618a5df52cbf1e0cbac0d9a93e6e5d23d61",
   "created_at": "2026-08-13T14:37:17.408Z",
-  "updated_at": "2026-08-13T15:08:44.565Z",
+  "updated_at": "2026-08-14T14:58:32.666Z",
   "comment": {
     "text": "Informational message in the Quotas bar that appears when the user limit for the current tariff plan has been reached.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 120,
-      "context": ");\n };\n \n const getUserTariffLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffReached\", { productName: getBrandName(\"ProductName\") });\n \n return (\n <Trans\n t={t}\n i18nKey=\"UserTariffReachedForAdmins\"",
+      "line_number": 115,
+      "context": ");\n };\n \n const getUserTariffLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffReached\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"UserTariffReachedForAdmins\"",
       "module": "/packages/client"
     }
   ],

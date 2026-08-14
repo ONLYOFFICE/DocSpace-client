@@ -3,13 +3,21 @@
   "content": "Data shared with <strong>{{displayName}}</strong> will be governed by <strong>{{nameApp}}</strong> <6>privacy policy</6> and <6>terms of service</6>. You can revoke this consent at any time in your {{organizationName}} {{productName}} account settings.",
   "content_en_sha1_hash": "2b282892bc702e579b0d1231408ec43c451795ba",
   "created_at": "2026-08-13T22:44:34.224Z",
-  "updated_at": "2026-08-13T22:44:34.224Z",
+  "updated_at": "2026-08-14T15:46:37.623Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in a consent screen explaining data sharing and how to revoke consent. It includes links to the privacy policy and terms of service, and uses variables for the user's name, application name, organization name, and product name.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:46:37.623Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
+      "line_number": 250,
+      "context": "testId=\"consent_deny_button\"\n />\n </div>\n <div className={styles.descriptionContainer}>\n <Text fontWeight={400} fontSize=\"13px\" lineHeight=\"20px\">\n <Trans t={t} i18nKey=\"ConsentDescription\" ns=\"Consent\">\n Data shared with {{ displayName: user.displayName }} will be\n governed by {{ nameApp: client.name }}\n <Link\n className=\"login-link\"\n type={LinkType.page}",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

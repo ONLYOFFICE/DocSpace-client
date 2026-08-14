@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2026-08-12T11:00:51.513Z",
+  "updated_at": "2026-08-14T14:58:32.688Z",
   "comment": {
     "text": "Error text. This message appears when a required input field is left empty or invalid, indicating that the user must provide information to proceed.",
     "is_auto": true,
@@ -115,7 +115,7 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 150,
+      "line_number": 148,
       "context": "hasError={isEmailErrorShow}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`, errorText)\n : t(\"Common:RequiredField\")\n } // TODO: Add wrong login server error\n dataTestId=\"email_field\"\n >\n {isLdapLogin ? (\n <TextInput",
       "module": "/packages/login"
     },

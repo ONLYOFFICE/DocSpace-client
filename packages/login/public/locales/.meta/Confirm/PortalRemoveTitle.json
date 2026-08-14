@@ -3,13 +3,21 @@
   "content": "Please confirm that you want to delete your workspace.",
   "content_en_sha1_hash": "8f307cb092fb3b63bc4a45e9ddf147dba4a0a951",
   "created_at": "2026-08-13T22:44:34.290Z",
-  "updated_at": "2026-08-13T22:44:34.290Z",
+  "updated_at": "2026-08-14T15:43:10.420Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle in a confirmation dialog that appears when a user is about to delete a workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:43:10.420Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/PortalRemove/page.client.tsx",
+      "line_number": 112,
+      "context": "</Trans>\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"PortalRemoveTitle\")}\n </Text>\n <div className={styles.buttonsWrapper}>\n <Button\n primary\n scale",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "The Knowledge base is currently disabled. To activate semantic search and document processing for {{aiAgents}}, please contact the Full admin to configure the embeddings provider.",
   "content_en_sha1_hash": "72f44e6bb137115a90a2c714736d3f631400ac1d",
   "created_at": "2026-08-13T14:36:55.279Z",
-  "updated_at": "2026-08-13T14:48:20.660Z",
+  "updated_at": "2026-08-14T14:58:32.641Z",
   "comment": {
     "text": "Informational text within an empty state container displayed when the Knowledge base is disabled; includes a variable {{aiAgents}} representing the AI Agents feature.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
-      "line_number": 102,
-      "context": "descriptionRoomNoAccess = isAdmin\n ? t(\"Common:KnowledgeUnavailableDescription\", {\n productName,\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:KnowledgeUnavailableDescriptionUser\", {\n productName,\n aiAgents: t(\"Common:AIAgents\"),\n });\n } else if (isAdmin) {\n titleRoomNoAccess = t(\"Common:EmptyAIAgentsNotActiveYetTitle\");",
+      "line_number": 98,
+      "context": "titleRoomNoAccess = t(\"Common:KnowledgeUnavailable\");\n descriptionRoomNoAccess = isAdmin\n ? t(\"Common:KnowledgeUnavailableDescription\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:KnowledgeUnavailableDescriptionUser\", {\n aiAgents: t(\"Common:AIAgents\"),\n });\n } else if (isAdmin) {\n titleRoomNoAccess = t(\"Common:EmptyAIAgentsNotActiveYetTitle\");\n descriptionRoomNoAccess = (",
       "module": "/packages/client"
     },
     {

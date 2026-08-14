@@ -3,13 +3,27 @@
   "content": "Specify your company information, add links to external resources and email addresses displayed within the workspace interface.",
   "content_en_sha1_hash": "38121235df2b3e1a208f04fac38d3e87c1895832",
   "created_at": "2026-08-13T22:43:55.412Z",
-  "updated_at": "2026-08-13T22:43:55.412Z",
+  "updated_at": "2026-08-14T15:14:09.221Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Section description or subtitle for the Company Info settings, explaining the purpose of this configuration area.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:14:09.221Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
+      "line_number": 153,
+      "context": "className={classNames(\n styles.sectionDescription,\n \"section-description\",\n )}\n >\n {t(\"BrandingSectionDescription\")}\n </div>\n <div className={classNames(styles.header, \"header\")}>\n {t(\"CompanyInfoSettings\")}\n </div>\n <div className={classNames(styles.description, \"description\")}>",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 79,
+      "context": "onClickLink={onClickLink}\n />\n {displayAbout ? (\n <CategoryItem\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\")}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "Create a Form Space from a template",
   "content_en_sha1_hash": "8421e68f0e72d1b5703f34c9932db527aeaf063c",
   "created_at": "2026-08-14T09:34:56.743Z",
-  "updated_at": "2026-08-14T09:34:56.743Z",
+  "updated_at": "2026-08-14T15:17:47.895Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for an AI suggestion item describing the action of creating a Form Space using a template.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:17:47.895Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 756,
+      "context": "{\n name: t(\"AiSuggestions:FormsTemplatesRecommendAFormTemplate\"),\n prompt: t(\"AiSuggestions:FormsTemplatesRecommendAFormTemplatePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesCreateASpaceFromATemplate\"),\n prompt: t(\n \"AiSuggestions:FormsTemplatesCreateASpaceFromATemplatePrompt\",\n ),\n requires: \"roomAdmin\",\n },",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

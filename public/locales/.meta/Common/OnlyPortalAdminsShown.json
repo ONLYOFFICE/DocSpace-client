@@ -3,7 +3,7 @@
   "content": "Only Full admins are shown here",
   "content_en_sha1_hash": "34680978770f61d5c3cc0f504d12445df6e202f4",
   "created_at": "2026-08-13T14:36:59.955Z",
-  "updated_at": "2026-08-13T14:47:45.938Z",
+  "updated_at": "2026-08-14T14:58:32.952Z",
   "comment": {
     "text": "Informational text in the transaction history view that appears when a role filter is applied, indicating that only users with Full admin privileges are visible.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 537,
-      "context": "const infoProps = withoutRoleFilter\n ? {}\n : {\n withInfo: true as const,\n infoText: t(\"OnlyPortalAdminsShown\", {\n productName: getBrandName(\"ProductName\"),\n }),\n };\n \n const selectorComponent = isSelectorVisible ? (",
+      "line_number": 536,
+      "context": "const infoProps = withoutRoleFilter\n ? {}\n : {\n withInfo: true as const,\n infoText: t(\"OnlyPortalAdminsShown\"),\n };\n \n const selectorComponent = isSelectorVisible ? (\n <PeopleSelector\n withCancelButton",
       "module": "/libs/ui-kit"
     }
   ],

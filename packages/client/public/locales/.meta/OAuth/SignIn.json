@@ -3,13 +3,21 @@
   "content": "Sign in with {{organizationName}} {{productName}}",
   "content_en_sha1_hash": "79053d19ed900274548277bb6a54147ce0092264",
   "created_at": "2026-08-13T22:44:30.692Z",
-  "updated_at": "2026-08-13T22:44:30.692Z",
+  "updated_at": "2026-08-14T15:31:46.950Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label for a social login button in the OAuth preview dialog, incorporating the organization and product brand names via {{organizationName}} and {{productName}}.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:31:46.950Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
+      "line_number": 212,
+      "context": "className=\"social-button\"\n label={\n <Trans\n t={t}\n ns=\"OAuth\"\n i18nKey=\"SignIn\"\n values={{ organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\") }}\n />\n }\n IconComponent={icon}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

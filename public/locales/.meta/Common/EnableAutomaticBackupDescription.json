@@ -3,7 +3,7 @@
   "content": "Use this option to back up the workspace data.",
   "content_en_sha1_hash": "641cb7f57f45a66515782b00e24199a0aaa02e4f",
   "created_at": "2026-08-12T11:00:19.813Z",
-  "updated_at": "2026-08-12T11:19:42.933Z",
+  "updated_at": "2026-08-14T14:58:32.902Z",
   "comment": {
     "text": "Description text for a toggle switch used to enable or disable automatic workspace data backups.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 493,
+      "line_number": 490,
       "context": "className={classNames(\n styles.settingsUnavailable,\n \"backup_toggle-btn-description\",\n )}\n >\n {t(\"Common:EnableAutomaticBackupDescription\")}\n </Text>\n </div>\n </div>\n {!isInitialError && selectedEnableSchedule && isEnableAuto ? (\n <div className=\"backup_modules\">",
       "module": "/packages/shared"
     }

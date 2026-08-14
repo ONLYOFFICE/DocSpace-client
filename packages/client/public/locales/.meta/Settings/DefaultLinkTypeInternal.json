@@ -3,13 +3,21 @@
   "content": "workspace users only",
   "content_en_sha1_hash": "e5c524b006a5e9c08b1a543ab14a02b1d0d47095",
   "created_at": "2026-08-13T22:44:29.204Z",
-  "updated_at": "2026-08-13T22:44:29.204Z",
+  "updated_at": "2026-08-14T15:38:49.752Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Label for a selection option in the portal security settings that restricts link access to members of the current workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:38:49.752Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
+      "line_number": 299,
+      "context": "value: \"false\",\n dataTestId: \"default_link_type_anyone\",\n },\n {\n id: \"default-link-type-docspace\",\n label: t(\"Settings:DefaultLinkTypeInternal\"),\n value: \"true\",\n dataTestId: \"default_link_type_docspace\",\n },\n ],\n [t],",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "To create and use {{aiAgents}}, connect your wallet and enable the AI features service in the workspace settings. Once it’s done, you’ll be able to work with {{aiAgents}} and collaborate with your team.",
   "content_en_sha1_hash": "4842289f8f948b4cde63f358702e518d90040f53",
   "created_at": "2026-08-13T22:44:01.989Z",
-  "updated_at": "2026-08-13T22:44:01.989Z",
+  "updated_at": "2026-08-14T15:12:21.081Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in an empty state view for SaaS admins, explaining how to enable AI features. The variable {{aiAgents}} refers to the AI Agents feature.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:12:21.081Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-empty-view/index.tsx",
+      "line_number": 170,
+      "context": "aiChats: t(\"Common:AIChats\", { defaultValue: \"AI Chats\" }),\n defaultValue:\n \"Configure an AI provider in {{productName}} settings to unlock {{aiChats}}.\",\n })\n : isAdminOrOwner\n ? t(\"Common:EmptyAIAgentsAIDisabledSaasAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n aiAgents: t(\"Common:AIAgents\", { defaultValue: \"AI Agents\" }),\n defaultValue:\n \"{{aiAgents}} are not yet enabled in this {{productName}} portal.\",\n })",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

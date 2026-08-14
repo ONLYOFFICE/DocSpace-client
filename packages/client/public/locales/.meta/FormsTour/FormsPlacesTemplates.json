@@ -3,13 +3,21 @@
   "content": "{{templates}} — the Form Space templates you saved.",
   "content_en_sha1_hash": "b5e88b04b88be86f1bdc7001ae1776fde5aabf57",
   "created_at": "2026-08-14T09:34:54.622Z",
-  "updated_at": "2026-08-14T09:34:54.622Z",
+  "updated_at": "2026-08-14T15:27:01.830Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "A descriptive sentence in a tour step explaining that the section contains saved Form Space templates; {{templates}} is a placeholder for the \"Templates\" label.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:27:01.830Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 152,
+      "context": "t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"FormsTour:FormsPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

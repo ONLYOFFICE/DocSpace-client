@@ -3,13 +3,21 @@
   "content": "You are about to restore the workspace from a backup file.",
   "content_en_sha1_hash": "65cce0886aed4f54d28a433ea4722baac4e43474",
   "created_at": "2026-08-13T22:44:18.642Z",
-  "updated_at": "2026-08-13T22:44:18.642Z",
+  "updated_at": "2026-08-14T15:03:49.471Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Bold text in a confirmation modal that warns the user about the upcoming workspace restoration from a backup file.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:03:49.471Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
+      "line_number": 91,
+      "context": "<Text\n as=\"p\"\n fontWeight={600}\n className={styles.restoreBackupConfirmText}\n >\n {t(\"Common:RestoreBackupConfirmBoldText\")}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>\n {t(\"Common:RestoreBackupConfirmReplaceText\")}\n </Text>\n <Text as=\"p\" className={styles.restoreBackupConfirmText}>",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

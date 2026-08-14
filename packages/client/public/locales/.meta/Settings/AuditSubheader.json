@@ -3,7 +3,7 @@
   "content": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your workspace.",
   "content_en_sha1_hash": "c297256575afd77d85ffa69dac0db6d074b11b80",
   "created_at": "2026-08-12T11:00:45.461Z",
-  "updated_at": "2026-08-12T13:34:08.640Z",
+  "updated_at": "2026-08-14T14:58:32.835Z",
   "comment": {
     "text": "Description text for an empty state screen in the Audit Trail subsection, explaining the purpose of tracking user changes to workspace entities.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 102,
-      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
+      "line_number": 101,
+      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\")}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }\n headerText={t(\"NoEventsHereYet\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 102,
-      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: getBrandName(\"ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
+      "line_number": 101,
+      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\")}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }\n headerText={t(\"NoEventsHereYet\")}\n />",
       "module": "/packages/client"
     }
   ],

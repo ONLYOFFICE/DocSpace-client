@@ -3,13 +3,39 @@
   "content": "Workspace deletion",
   "content_en_sha1_hash": "db1b77e1944c4cbf0625eb628091929384adf6b0",
   "created_at": "2026-08-13T22:44:29.799Z",
-  "updated_at": "2026-08-13T22:44:29.799Z",
+  "updated_at": "2026-08-14T15:33:29.801Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Section header or menu item label in the portal settings sidebar that directs users to the workspace deletion settings.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:33:29.801Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
+      "line_number": 131,
+      "context": "case \"Services\":\n return t(\"Settings:Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"PortalDeletion\":\n return t(\"Settings:PortalDeletion\");\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n default:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 233,
+      "context": "return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 550,
+      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"9\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"9-0\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 550,
+      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"9\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"9-0\",\n icon: \"\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

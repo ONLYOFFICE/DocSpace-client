@@ -3,13 +3,21 @@
   "content": "Follow simple steps to continue working in this workspace:",
   "content_en_sha1_hash": "4b64d92ec45181699ce126c377909b39e4ec6657",
   "created_at": "2026-08-13T22:44:34.304Z",
-  "updated_at": "2026-08-13T22:44:34.304Z",
+  "updated_at": "2026-08-14T15:42:48.102Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle on the Two-Factor Authentication (TFA) activation screen that introduces a list of instructional steps.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:42:48.102Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
+      "line_number": 163,
+      "context": "<div className=\"set-app-description\">\n <Text isBold fontSize=\"18px\" className=\"set-app-title\">\n {t(\"TfaTitle\")}\n </Text>\n <Text className=\"set-app-subtitle\">\n {t(\"TfaSubTitle\")}\n </Text>\n \n <div className=\"description\">\n <div className=\"description-item\">\n <div className=\"icon-container\">",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

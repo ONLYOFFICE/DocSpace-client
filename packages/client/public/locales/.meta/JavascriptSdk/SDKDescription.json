@@ -3,7 +3,7 @@
   "content": "Embed SDK allows you to embed the whole workspace or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
   "content_en_sha1_hash": "4d742bf149726ef9b8b293ed0bf4c37f401d934f",
   "created_at": "2026-08-12T11:00:47.584Z",
-  "updated_at": "2026-08-12T11:47:01.802Z",
+  "updated_at": "2026-08-14T14:58:32.799Z",
   "comment": {
     "text": "Description text in the Developer Tools section of Portal Settings explaining the Embed SDK functionality; contains a {{productName}} variable and ends abruptly to precede a link.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 167,
-      "context": "return (\n <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>\n <div className={styles.categoryDescription}>\n <Text className=\"sdk-description\">\n {t(\"SDKDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight=\"400\"",
+      "line_number": 163,
+      "context": "return (\n <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>\n <div className={styles.categoryDescription}>\n <Text className=\"sdk-description\">\n {t(\"SDKDescription\")}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }
   ],

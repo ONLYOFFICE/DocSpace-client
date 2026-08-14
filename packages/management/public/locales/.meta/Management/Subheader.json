@@ -3,7 +3,7 @@
   "content": "Use this section to create several workspaces and make them accessible for your users",
   "content_en_sha1_hash": "0f49bc517c1ea6dfaf6322f97cb1e4fbef4c24cd",
   "created_at": "2026-08-12T11:00:50.917Z",
-  "updated_at": "2026-08-12T13:42:12.344Z",
+  "updated_at": "2026-08-14T14:58:32.913Z",
   "comment": {
     "text": "Subheader text in the page header describing the purpose of the workspace management section.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/header.tsx",
-      "line_number": 49,
+      "line_number": 48,
       "context": "const { t } = useTranslation([\"Management\", \"Common\"]);\n \n return (\n <div className={styles.header}>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Subheader\")}\n </Text>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>",
       "module": "/packages/management"
     },

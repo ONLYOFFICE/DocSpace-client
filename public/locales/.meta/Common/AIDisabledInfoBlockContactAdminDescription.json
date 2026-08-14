@@ -3,7 +3,7 @@
   "content": "Contact the Full admin to activate AI features and chat with your agents, access their knowledge base, and let them run tasks across your apps.",
   "content_en_sha1_hash": "0433c6f0f511667267c1fd7aacdb6b459ab7594a",
   "created_at": "2026-08-13T14:36:37.548Z",
-  "updated_at": "2026-08-13T14:57:20.182Z",
+  "updated_at": "2026-08-14T14:58:32.927Z",
   "comment": {
     "text": "Information block description text shown when AI features are disabled, instructing the user to contact their administrator to enable them.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat-info-block/index.tsx",
-      "line_number": 121,
-      "context": ")}\n </>\n ))\n // standalone/saas user\n .otherwise(() =>\n t(\"AIDisabledInfoBlockContactAdminDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n \n return (",
+      "line_number": 118,
+      "context": ")}\n </>\n ))\n // standalone/saas user\n .otherwise(() =>\n t(\"AIDisabledInfoBlockContactAdminDescription\"),\n );\n \n return (\n <PublicRoomBar\n className={styles.chatInfoBlock}",
       "module": "/libs/ui-kit"
     }
   ],

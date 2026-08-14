@@ -3,13 +3,27 @@
   "content": "<1>{{displayName}}</1> invites you to join the workspace <1>{{spaceAddress}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "cc6c90c711ee88c69a044a5216a5e13afac6f00f",
   "created_at": "2026-08-13T23:03:12.769Z",
-  "updated_at": "2026-08-13T23:03:12.769Z",
+  "updated_at": "2026-08-14T15:07:54.962Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Greeting text displayed on the login screen when a user follows an invitation link, featuring the inviter's name ({{displayName}}) and the workspace address ({{spaceAddress}}).",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:07:54.962Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
+      "line_number": 114,
+      "context": "}\n \n return (\n <Trans\n {...commonProps}\n i18nKey=\"Common:InvitationToPortal\"\n defaults={DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n ...(roomData.title\n ? { roomName: roomData.title }",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
+      "line_number": 87,
+      "context": "const { type, roomName, displayName, spaceAddress } = invitationLinkData;\n \n const keyProp = roomName\n ? { tKey: \"Common:InvitationToRoom\" }\n : { tKey: \"Common:InvitationToPortal\" };\n \n const renderEmailChangeContent = () => {\n if (!(emailChange && type !== \"invitation\")) return null;\n \n return (",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

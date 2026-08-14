@@ -3,13 +3,21 @@
   "content": "Being an owner of this workspace, you must transfer the ownership to another user before you can disable your account. Please choose a new owner to proceed.",
   "content_en_sha1_hash": "f340e50b93c23f0a6156e6b0371f4578a4bdbf91",
   "created_at": "2026-08-13T22:44:32.607Z",
-  "updated_at": "2026-08-13T22:44:32.607Z",
+  "updated_at": "2026-08-14T15:25:48.348Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Informational text in the Delete Owner Profile dialog explaining the requirement to transfer workspace ownership before account deletion.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:25:48.348Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteOwnerProfileDialog/index.js",
+      "line_number": 62,
+      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteOwnerRestrictionText\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OwnerChangeBtn\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

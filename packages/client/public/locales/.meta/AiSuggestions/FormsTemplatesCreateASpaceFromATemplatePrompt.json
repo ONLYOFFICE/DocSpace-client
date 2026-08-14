@@ -3,13 +3,21 @@
   "content": "Create a new Form Space from the selected template and show the proposed setup before creation. If this information is not provided, ask me for the space name, collection goal, forms, participants, and deadline.",
   "content_en_sha1_hash": "4a76f9412c5bd502849363eaa76e2af21381a6d4",
   "created_at": "2026-08-14T09:34:56.752Z",
-  "updated_at": "2026-08-14T09:34:56.752Z",
+  "updated_at": "2026-08-14T15:17:22.555Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "AI instruction prompt that specifies how the assistant should handle creating a Form Space from a template, including whether to preview the setup or request missing information.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:17:22.555Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 758,
+      "context": "prompt: t(\"AiSuggestions:FormsTemplatesRecommendAFormTemplatePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesCreateASpaceFromATemplate\"),\n prompt: t(\n \"AiSuggestions:FormsTemplatesCreateASpaceFromATemplatePrompt\",\n ),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:FormsTemplatesAdaptTheTemplateToTheTask\"),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

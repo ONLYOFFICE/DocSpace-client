@@ -3,13 +3,21 @@
   "content": "Session Lifetime allows to set time (in minutes) before workspace users will need to enter their credentials again in order to access the workspace.",
   "content_en_sha1_hash": "f4feec17b93a7d3f83cf8e65a90258c256a15ff9",
   "created_at": "2026-08-14T09:26:28.744Z",
-  "updated_at": "2026-08-14T09:26:28.744Z",
+  "updated_at": "2026-08-14T15:32:41.219Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle for a category item in the mobile security settings view, describing the Session Lifetime setting.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:32:41.219Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
+      "line_number": 148,
+      "context": "url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"SessionLifetime\")}\n subtitle={t(\"SessionLifetimeMobileDescription\")}\n url=\"/portal-settings/security/access-portal/lifetime\"\n onClickLink={onClickLink}\n />\n </MainContainer>\n );",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

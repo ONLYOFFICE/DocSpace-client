@@ -3,13 +3,21 @@
   "content": "Your {{organizationName}} {{productName}} account will be created for <1>{{email}}</1>. Please complete your registration:",
   "content_en_sha1_hash": "19cdb8105b72f03445a167f8e1f3237f2312d401",
   "created_at": "2026-08-13T22:44:34.236Z",
-  "updated_at": "2026-08-13T22:44:34.236Z",
+  "updated_at": "2026-08-14T15:45:34.187Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Text message in the greeting container informing the user about the account creation details. It includes variables for the organization name, product name, and email address.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:45:34.187Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingUserContainer.tsx",
+      "line_number": 93,
+      "context": "</Text>\n </div>\n <Text>\n <Trans\n t={t}\n i18nKey=\"AccountWillBeCreated\"\n ns=\"Confirm\"\n defaults={DEFAULT_CREATION_TEXT}\n values={{\n email,\n organizationName: getBrandName(\"OrganizationName\"),",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

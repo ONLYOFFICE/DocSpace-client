@@ -3,13 +3,21 @@
   "content": "Invite new members to the workspace personally via email",
   "content_en_sha1_hash": "1452715c73089d72f3adf415823a687913f85115",
   "created_at": "2026-08-13T22:44:31.363Z",
-  "updated_at": "2026-08-13T22:44:31.363Z",
+  "updated_at": "2026-08-14T15:27:55.687Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional subtext in the Invite Panel that appears when inviting members to a workspace rather than a specific room.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:27:55.687Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 672,
+      "context": "[styles.noAllowInvitingGuests]:\n roomId !== -1 ? !allowInvitingGuests : null,\n })}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\")\n : !allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\")\n : t(\"Common:InviteToRoomManuallyInfoGuest\")}\n </Text>\n {roomId === -1 || allowInvitingGuests ? (",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

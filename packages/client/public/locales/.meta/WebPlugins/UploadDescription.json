@@ -3,7 +3,7 @@
   "content": "You can add plugins to extend the functionality of the workspace with extra features. Click Upload plugin or drop file in the ZIP archive.",
   "content_en_sha1_hash": "3e20fcea00ec471fec19614133daff5b1edbb940",
   "created_at": "2026-08-12T11:00:45.078Z",
-  "updated_at": "2026-08-12T13:37:49.987Z",
+  "updated_at": "2026-08-14T14:58:32.824Z",
   "comment": {
     "text": "Instructional text for the plugin upload area explaining how to add features; includes a placeholder for the product name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/UploadDescription.tsx",
-      "line_number": 50,
-      "context": "t,\n }: UploadDecsriptionProps) => {\n return (\n <div className={styles.uploadDescription}>\n <Text className={styles.uploadDescriptionText}>\n {t(\"UploadDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n {pluginsSdkUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme?.main?.accent ?? undefined}",
+      "line_number": 49,
+      "context": "t,\n }: UploadDecsriptionProps) => {\n return (\n <div className={styles.uploadDescription}>\n <Text className={styles.uploadDescriptionText}>\n {t(\"UploadDescription\")}\n </Text>\n {pluginsSdkUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme?.main?.accent ?? undefined}",
       "module": "/packages/client"
     }
   ],

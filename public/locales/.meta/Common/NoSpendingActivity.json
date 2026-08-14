@@ -3,7 +3,7 @@
   "content": "No spending activity for the selected period",
   "content_en_sha1_hash": "5d5e87b0515f62a027d7abf2f956811dddc2ed0d",
   "created_at": "2026-06-25T11:54:53.701Z",
-  "updated_at": "2026-08-12T14:02:21.389Z",
+  "updated_at": "2026-08-14T14:58:32.935Z",
   "comment": {
     "text": "Title of an empty state view in the billing usage breakdown, appearing when no records are found for the selected date range.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
-      "line_number": 202,
-      "context": "<Text\n fontSize=\"12px\"\n fontWeight={600}\n className={styles.mutedTitle}\n >\n {t(\"NoSpendingActivity\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoSpendingActivityDescription\")}\n </Text>\n </div>",
+      "line_number": 195,
+      "context": "{serviceUsage.length === 0 ? (\n <div className={styles.emptyState}>\n <div className={styles.emptyContent}>\n <Text fontSize=\"12px\" fontWeight={600} className={styles.mutedTitle}>\n {t(\"NoSpendingActivity\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoSpendingActivityDescription\")}\n </Text>\n </div>",
       "module": "/libs/ui-kit"
     },
     {

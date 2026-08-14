@@ -3,13 +3,21 @@
   "content": "Import users and groups via LDAP, and enable user authentication through logins/passwords stored on the LDAP server. Users will be imported immediately after the settings are saved. Users added later will be imported during their first authentication. If you want to provide access via LDAP only, disable the option to invite new workspace members via {{sectionName}}: <1>{{link}}</1>",
   "content_en_sha1_hash": "0f5d93b0200c60e887eb733e1cf0cbb8bcba1687",
   "created_at": "2026-08-13T22:44:30.856Z",
-  "updated_at": "2026-08-13T22:44:30.856Z",
+  "updated_at": "2026-08-14T15:29:02.073Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Introductory text on the LDAP integration settings page explaining the LDAP import and authentication process. It includes the `sectionName` variable and a `<1>` tag containing a clickable link.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:29:02.073Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
+      "line_number": 101,
+      "context": "return (\n <StyledLdapPage isSmallWindow={isSmallWindow}>\n <Text className=\"intro-text settings_unavailable\">\n <Trans\n t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n sectionName: t(\"Common:Contacts\"),\n link,\n }}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

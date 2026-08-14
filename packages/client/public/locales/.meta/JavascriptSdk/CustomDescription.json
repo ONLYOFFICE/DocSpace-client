@@ -3,7 +3,7 @@
   "content": "Manually configure the parameters for embedding your workspace.",
   "content_en_sha1_hash": "59e0d6cf929dd697c1ffb551d000085eab47dad4",
   "created_at": "2026-08-12T11:00:47.386Z",
-  "updated_at": "2026-08-12T11:51:01.300Z",
+  "updated_at": "2026-08-14T14:58:32.799Z",
   "comment": {
     "text": "Description text for a menu item or preset card explaining how to manually configure workspace embedding parameters.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 130,
-      "context": "image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),\n description: t(\"CustomDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,\n },",
+      "line_number": 128,
+      "context": "image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),\n description: t(\"CustomDescription\"),\n image: theme.isBase ? CustomImg : CustomImgDark,\n handleOnClick: navigateToCustom,\n },\n {\n title: t(\"Common:Uploader\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 449,
-      "context": "</>\n );\n \n return (\n <PresetWrapper\n description={t(\"CustomDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n header={t(\"CreateSamplePortal\", {\n productName: getBrandName(\"ProductName\"),\n })}",
+      "line_number": 448,
+      "context": "</>\n );\n \n return (\n <PresetWrapper\n description={t(\"CustomDescription\")}\n header={t(\"CreateSamplePortal\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Here, you can view the detailed storage usage data in this workspace.",
   "content_en_sha1_hash": "d082487a72724b94f9218ba122389f7798860d8c",
   "created_at": "2026-08-12T11:00:46.436Z",
-  "updated_at": "2026-08-12T12:03:12.911Z",
+  "updated_at": "2026-08-14T14:58:32.836Z",
   "comment": {
     "text": "Subtext on the storage statistics page that informs users they can view detailed usage data for the current workspace.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
-      "line_number": 119,
-      "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"statistics-description\">\n {t(\"StatisticDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n {isStatisticsAvailable ? (\n <>\n <RoomsList\n buttonProps={buttonProps}",
+      "line_number": 118,
+      "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"statistics-description\">\n {t(\"StatisticDescription\")}\n </Text>\n {isStatisticsAvailable ? (\n <>\n <RoomsList\n buttonProps={buttonProps}",
       "module": "/packages/client"
     }
   ],

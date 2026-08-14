@@ -3,7 +3,7 @@
   "content": "Workspace restoring is underway",
   "content_en_sha1_hash": "ac5ab74355f0ad1b1f76f47c2b94eb687c59446e",
   "created_at": "2026-08-13T14:37:02.035Z",
-  "updated_at": "2026-08-13T14:44:38.672Z",
+  "updated_at": "2026-08-14T14:58:32.863Z",
   "comment": {
     "text": "Header title for the Preparation Portal page, displayed during the workspace restoration process.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 157,
+      "line_number": 156,
       "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress",
       "module": "/packages/shared"
     }

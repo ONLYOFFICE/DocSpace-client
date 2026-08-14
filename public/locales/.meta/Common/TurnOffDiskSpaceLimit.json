@@ -3,13 +3,21 @@
   "content": "Turn off disk space limit for this workspace.",
   "content_en_sha1_hash": "7215d070bb8ea2c0a0522c6881a0e3f9954b9071",
   "created_at": "2026-08-13T22:44:25.448Z",
-  "updated_at": "2026-08-13T22:44:25.448Z",
+  "updated_at": "2026-08-14T14:59:59.054Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in a modal dialog that appears when the user is disabling the storage quota for a workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T14:59:59.054Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
+      "line_number": 151,
+      "context": ": t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.description}>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\")\n : t(\"Common:SetDiskSpaceQuota\")}\n </Text>\n {!isDisableQuota ? (\n <QuotaForm\n onSetQuotaBytesSize={onSetQuotaBytesSize}",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

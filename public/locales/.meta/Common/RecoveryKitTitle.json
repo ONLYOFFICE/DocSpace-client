@@ -3,13 +3,21 @@
   "content": "{{organizationName}} {{productName}} recovery kit",
   "content_en_sha1_hash": "538c03820207cac145967c4b9b64d18fe7681ffb",
   "created_at": "2026-08-13T22:44:17.557Z",
-  "updated_at": "2026-08-13T22:44:17.557Z",
+  "updated_at": "2026-08-14T15:04:45.201Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Dialog title for the recovery phrase display modal, containing the organization's brand name and the product name as variables.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:04:45.201Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
+      "line_number": 108,
+      "context": "createdDate: new Date().toLocaleDateString(i18n.language),\n lang: i18n.language,\n dir: i18n.dir(),\n accountLabel,\n strings: {\n title: t(\"Common:RecoveryKitTitle\", { organizationName: getBrandName(\"OrganizationName\"), productName }),\n subtitle: t(\"Common:RecoveryKitSubtitle\"),\n createdLabel: t(\"Common:ByCreation\"),\n accountLabel: t(\"Common:Account\"),\n phraseLabel: t(\"Common:RecoveryKitPhraseLabel\"),\n whatTitle: t(\"Common:RecoveryKitWhatTitle\"),",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

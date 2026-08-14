@@ -3,7 +3,7 @@
   "content": "Sign up with Microsoft",
   "content_en_sha1_hash": "e42ef65d8922b6518d457278329d7e64a6f24601",
   "created_at": "2025-05-19T21:30:48.853Z",
-  "updated_at": "2026-05-24T17:27:49.223Z",
+  "updated_at": "2026-08-14T14:58:32.908Z",
   "comment": {
     "text": "Button label for signing up using a Microsoft account.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 486,
+      "line_number": 484,
       "context": "return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");",
       "module": "/packages/shared"
     }

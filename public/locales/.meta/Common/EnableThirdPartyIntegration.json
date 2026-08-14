@@ -3,13 +3,21 @@
   "content": "Please ask the owner or Full admin to enable the corresponding service in the Integration section of the workspace Settings.",
   "content_en_sha1_hash": "4833e13588a99dee0cd1fba69e4867a8837b5e07",
   "created_at": "2026-08-13T22:44:03.058Z",
-  "updated_at": "2026-08-13T22:44:03.058Z",
+  "updated_at": "2026-08-14T15:10:15.598Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Tooltip text providing instructions to users who lack permission to enable a third-party service, directing them to the workspace Settings.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:10:15.598Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.tsx",
+      "line_number": 215,
+      "context": "};\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:EnableThirdPartyIntegration\")}\n </Text>\n );\n };\n \n const advancedOptions = thirdparties",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

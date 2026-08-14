@@ -3,7 +3,7 @@
   "content": "You can archive rooms you don’t use and restore them in the workspace at any moment or delete them permanently. These rooms will appear here.",
   "content_en_sha1_hash": "c6237dd74b270c5dfa9ec0bdb0286f1376f8774b",
   "created_at": "2026-08-12T11:00:10.810Z",
-  "updated_at": "2026-08-12T11:24:08.911Z",
+  "updated_at": "2026-08-14T14:58:32.653Z",
   "comment": {
     "text": "Placeholder text displayed on the empty Archive screen to explain how to manage archived rooms.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 324,
-      "context": ".with([FolderType.Recent, P._], () => t(\"Common:EmptyRecentDescription\"))\n .with([FolderType.Favorites, P._], () =>\n t(\"Common:EmptyFavoritesDescription\"),\n )\n .with([FolderType.Archive, ShareAccessRights.None], () =>\n t(\"Common:ArchiveEmptyScreen\", {\n productName: getBrandName(\"ProductName\"),\n }),\n )\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),",
+      "line_number": 316,
+      "context": ".with([FolderType.Recent, P._], () => t(\"Common:EmptyRecentDescription\"))\n .with([FolderType.Favorites, P._], () =>\n t(\"Common:EmptyFavoritesDescription\"),\n )\n .with([FolderType.Archive, ShareAccessRights.None], () =>\n t(\"Common:ArchiveEmptyScreen\"),\n )\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/empty-view/index.tsx",
-      "line_number": 152,
-      "context": "};\n \n const getDescription = () => {\n if (isFiltered) return t(\"Common:EmptyFilterRoomsDescription\");\n if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\", {\n productName: getBrandName(\"ProductName\"),\n });\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });",
+      "line_number": 151,
+      "context": "};\n \n const getDescription = () => {\n if (isFiltered) return t(\"Common:EmptyFilterRoomsDescription\");\n if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\");\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n };",
       "module": "/packages/sdk"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Select a mode for embedding your workspace",
   "content_en_sha1_hash": "755b5cbda8c30f2cae8ef6145272c4b09ec06c2e",
   "created_at": "2026-08-12T11:00:47.603Z",
-  "updated_at": "2026-08-12T11:46:22.097Z",
+  "updated_at": "2026-08-14T14:58:32.799Z",
   "comment": {
     "text": "Section header in Developer Tools settings instructing users to choose an embedding method; includes a variable for the product name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 182,
-      "context": "{t(\"APILink\")}.\n </Link>\n <CSPSetting t={t} theme={theme} />\n </div>\n <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() })}>\n {t(\"SelectModeEmbedding\", { productName: getBrandName(\"ProductName\") })}\n </div>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"InitializeSDK\")}\n </Text>\n <div className={classNames(styles.presetsContainer, { \"presets-flex\": isFlex })}>",
+      "line_number": 178,
+      "context": "{t(\"APILink\")}.\n </Link>\n <CSPSetting t={t} theme={theme} />\n </div>\n <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() })}>\n {t(\"SelectModeEmbedding\")}\n </div>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"InitializeSDK\")}\n </Text>\n <div className={classNames(styles.presetsContainer, { \"presets-flex\": isFlex })}>",
       "module": "/packages/client"
     }
   ],

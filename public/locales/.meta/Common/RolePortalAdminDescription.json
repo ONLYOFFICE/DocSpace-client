@@ -3,13 +3,27 @@
   "content": "Full admins can access workspace settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
   "content_en_sha1_hash": "dd386c853ec89c14b5295c3bdcabd0b06e889d87",
   "created_at": "2026-08-13T22:44:19.172Z",
-  "updated_at": "2026-08-13T22:44:19.172Z",
+  "updated_at": "2026-08-14T15:03:02.941Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text for the Portal Admin role in user management or access settings. It includes variables for the main section name (`{{sectionName}}`) and the agent section (`{{agentSection}}`), with the latter wrapped in a bold tag.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:03:02.941Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.tsx",
+      "line_number": 144,
+      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
+      "line_number": 54,
+      "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

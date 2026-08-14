@@ -3,13 +3,21 @@
   "content": "Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in the workspace.",
   "content_en_sha1_hash": "ab7a549072c7a12eda207db04777df6e1e012dbe",
   "created_at": "2026-08-13T22:44:32.635Z",
-  "updated_at": "2026-08-13T22:44:32.635Z",
+  "updated_at": "2026-08-14T15:25:26.986Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text in a confirmation dialog explaining the consequences of deleting user profiles. It includes variables {{sectionNameFirst}} and {{sectionNameSecond}} representing specific UI section names.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:25:26.986Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 126,
+      "context": "? t(\"ActionCannotBeUndoneGuests\")\n : t(\"ActionCannotBeUndoneUsers\")}\n </Text>\n <Text className=\"text-warning\">{t(\"PleaseNote\")}</Text>\n <Text className=\"text-delete-description\">\n {t(\"PersonalDataDeletionInfo\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>\n <Text className=\"text-delete-description\">",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "{{count}} workspace users",
   "content_en_sha1_hash": "2ea4ef3ffc3065f5ee0eee193ad30ad13022562a",
   "created_at": "2026-08-13T22:44:01.734Z",
-  "updated_at": "2026-08-13T22:44:01.734Z",
+  "updated_at": "2026-08-14T15:13:08.826Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Text label in the User Statistics dialog displaying the number of portal users. The {{count}} variable represents the numeric value of users.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:13:08.826Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/UserStatisticsDialog/sub-components/UserStatisticsInfo.tsx",
+      "line_number": 53,
+      "context": "const percentEditing = Math.round((totalUsers / limitUsers) * 100);\n \n const detailedEditInfo = () => {\n const portalUsersText = portalUsers\n ? t(\"EditUserCount\", {\n count: portalUsers,\n })\n : null;\n \n const externalUserText = externalUsers",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

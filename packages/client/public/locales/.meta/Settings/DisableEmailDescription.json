@@ -3,13 +3,27 @@
   "content": "If this box is checked, {{sectionName}} users will not need to verify their email after the first authorization in the workspace.",
   "content_en_sha1_hash": "a4147d465af125162a6f6dcd41c81d6b8aa9d19d",
   "created_at": "2026-08-13T22:44:29.320Z",
-  "updated_at": "2026-08-13T22:44:29.320Z",
+  "updated_at": "2026-08-14T15:37:48.314Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Tooltip for a help button explaining the effect of checking the email verification checkbox. The {{sectionName}} variable represents the integration type, such as LDAP or SSO.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:37:48.314Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AdvancedSettings.js",
+      "line_number": 90,
+      "context": "isChecked={disableEmailVerification}\n onChange={onChangeDisableEmailVerification}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />\n <HelpButton\n tooltipContent={t(\"Settings:DisableEmailDescription\", {\n sectionName: getConstName(\"LDAP\"),\n })}\n />\n </div>\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
+      "line_number": 99,
+      "context": "isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"disable_email_verification_checkbox\"\n />\n <HelpButton\n tooltipContent={t(\"Settings:DisableEmailDescription\", {\n sectionName: getConstName(\"SSO\"),\n })}\n dataTestId=\"disable_email_verification_help_button\"\n />\n </div>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "New workspace owner",
   "content_en_sha1_hash": "552890470e77afa35a0b3a502acdb716e5851e23",
   "created_at": "2026-08-13T14:37:19.551Z",
-  "updated_at": "2026-08-13T14:59:17.497Z",
+  "updated_at": "2026-08-14T14:58:32.691Z",
   "comment": {
     "text": "Label and tooltip within the Change Portal Owner dialog that identifies the person selected as the new workspace owner.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 185,
-      "context": "</div>\n \n <div className={styles.peopleSelectorInfo}>\n <Text\n className={styles.newOwner}\n title={t(\"NewPortalOwner\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n {t(\"NewPortalOwner\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
+      "line_number": 182,
+      "context": "</div>\n \n <div className={styles.peopleSelectorInfo}>\n <Text\n className={styles.newOwner}\n title={t(\"NewPortalOwner\")}\n >\n {t(\"NewPortalOwner\")}\n </Text>\n <Text\n className={styles.description}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 185,
-      "context": "</div>\n \n <div className={styles.peopleSelectorInfo}>\n <Text\n className={styles.newOwner}\n title={t(\"NewPortalOwner\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n {t(\"NewPortalOwner\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
+      "line_number": 182,
+      "context": "</div>\n \n <div className={styles.peopleSelectorInfo}>\n <Text\n className={styles.newOwner}\n title={t(\"NewPortalOwner\")}\n >\n {t(\"NewPortalOwner\")}\n </Text>\n <Text\n className={styles.description}",
       "module": "/packages/client"
     }
   ],

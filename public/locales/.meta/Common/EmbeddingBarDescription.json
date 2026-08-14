@@ -3,13 +3,27 @@
   "content": "Embedding will only work for the URLs specified by the Full admin in the JavaScript SDK settings.",
   "content_en_sha1_hash": "eb8fb5a1597a1fb347917ea3fab2d4c990184539",
   "created_at": "2026-08-13T22:44:01.926Z",
-  "updated_at": "2026-08-13T22:44:01.926Z",
+  "updated_at": "2026-08-14T15:12:47.310Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Informational text in the Embedding Panel banner explaining that embedding is restricted to URLs configured by the administrator in the JavaScript SDK settings.",
+    "is_auto": true,
+    "updated_at": "2026-08-14T15:12:47.310Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
+      "line_number": 442,
+      "context": "}}\n >\n {`\"Add the website URL for embedding to the <1>allow list</1>.\"`}\n </Trans>\n ) : (\n t(\"Common:EmbeddingBarDescription\")\n )}\n </Text>\n <IconButton\n className={styles.embeddingPanelBannerCloseIcon}\n size={12}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/EmbeddingPanel/index.tsx",
+      "line_number": 404,
+      "context": "}}\n >\n {`\"Add the website URL for embedding to the <1>allow list</1>.\"`}\n </Trans>\n ) : (\n t(\"Common:EmbeddingBarDescription\")\n )}\n </Text>\n <IconButton\n className={styles.embeddingPanelBannerCloseIcon}\n size={12}",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

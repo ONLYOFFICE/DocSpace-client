@@ -3,7 +3,7 @@
   "content": "Top up & Renew",
   "content_en_sha1_hash": "8dd4787548a226b9236b332c2f3b9277d5d48bc0",
   "created_at": "2026-07-27T13:07:39.125Z",
-  "updated_at": "2026-08-10T12:23:10.540Z",
+  "updated_at": "2026-08-13T14:37:21.738Z",
   "comment": {
     "text": "Button label and clickable link text used to initiate the process of adding funds or extending an expired subscription.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
-      "line_number": 379,
+      "line_number": 378,
       "context": ") : null}\n \n {isShowPreviousStoragePlan ? (\n <div className={styles.actionRow}>\n <Button\n label={t(\"TopUpAndRenew\")}\n size={ButtonSize.small}\n primary\n onClick={openUpgradeDialog}\n isDisabled={isDisabled}\n />",
       "module": "/libs/ui-kit"
     },

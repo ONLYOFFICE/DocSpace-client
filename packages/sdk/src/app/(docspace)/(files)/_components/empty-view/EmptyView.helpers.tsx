@@ -75,6 +75,7 @@ export const getRootTitle = (
       return t("Common:EmptyScreenFolder");
     default:
       return t("Common:EmptyRootRoomHeader", {
+        organizationName: getBrandName("OrganizationName"),
         productName: getBrandName("ProductName"),
       });
   }
@@ -130,9 +131,7 @@ export const getRootDescription = (
 ) => {
   switch (rootFolderType) {
     case FolderType.SHARE:
-      return t("Common:EmptyShareDescription", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Common:EmptyShareDescription");
     case FolderType.Favorites:
       return t("Common:EmptyFavoritesDescription");
     case FolderType.Recent:

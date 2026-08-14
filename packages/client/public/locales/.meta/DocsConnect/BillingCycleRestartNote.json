@@ -3,7 +3,7 @@
   "content": "Your monthly billing cycle will restart today. The next payment of <1>{{amount}}</1> will be charged <2>on {{date}}</2>.",
   "content_en_sha1_hash": "372a825d8be89a8023e38ff78abfa4869e4ccf91",
   "created_at": "2026-07-27T13:07:48.529Z",
-  "updated_at": "2026-08-13T10:58:03.213Z",
+  "updated_at": "2026-08-12T14:02:21.316Z",
   "comment": {
     "text": "Informational footer text in the BuyPlanPanel notifying users of an upcoming billing cycle restart, including placeholders for a currency amount (`amount`) and a localized date (`date`).",
     "is_auto": true,

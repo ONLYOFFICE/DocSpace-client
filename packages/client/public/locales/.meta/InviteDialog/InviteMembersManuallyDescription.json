@@ -1,20 +1,20 @@
 {
   "key_path": "InviteMembersManuallyDescription",
-  "content": "Invite new members to {{productName}} personally via email",
-  "content_en_sha1_hash": "ef1f3846a0dd7e2a42b3803beac9dd6d39eb70c9",
-  "created_at": "2025-05-19T21:30:54.724Z",
-  "updated_at": "2026-06-15T19:31:56.019Z",
+  "content": "Invite new members to the workspace personally via email",
+  "content_en_sha1_hash": "1452715c73089d72f3adf415823a687913f85115",
+  "created_at": "2026-08-13T22:44:31.363Z",
+  "updated_at": "2026-08-14T15:27:55.687Z",
   "comment": {
-    "text": "This is a descriptive text displayed below an input field on the invitation panel. It explains that users can invite new members to the product via email. `{{productName}}` is a variable representing the product's brand name.",
+    "text": "Instructional subtext in the Invite Panel that appears when inviting members to a workspace rather than a specific room.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:14:09.899Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:27:55.687Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 673,
-      "context": "[styles.noAllowInvitingGuests]:\n roomId !== -1 ? !allowInvitingGuests : null,\n })}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\", {\n productName: getBrandName(\"ProductName\"),",
+      "line_number": 672,
+      "context": "[styles.noAllowInvitingGuests]:\n roomId !== -1 ? !allowInvitingGuests : null,\n })}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\")\n : !allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\")\n : t(\"Common:InviteToRoomManuallyInfoGuest\")}\n </Text>\n {roomId === -1 || allowInvitingGuests ? (",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

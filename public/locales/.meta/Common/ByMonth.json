@@ -3,7 +3,7 @@
   "content": "By month",
   "content_en_sha1_hash": "12fee595dabc381983132f295d1902079e2c23fe",
   "created_at": "2026-06-25T11:54:46.317Z",
-  "updated_at": "2026-08-13T10:58:03.422Z",
+  "updated_at": "2026-08-12T14:02:21.398Z",
   "comment": {
     "text": "Tab label used to switch the spending breakdown view to a monthly grouping.",
     "is_auto": true,

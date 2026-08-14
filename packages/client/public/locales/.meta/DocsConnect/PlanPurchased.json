@@ -3,7 +3,7 @@
   "content": "Your plan has been purchased",
   "content_en_sha1_hash": "eb782239aaa5a02188f28273e523acd76fcc3d7b",
   "created_at": "2026-07-27T13:07:48.519Z",
-  "updated_at": "2026-08-13T10:58:03.211Z",
+  "updated_at": "2026-08-12T14:02:21.315Z",
   "comment": {
     "text": "Success toast message appearing after a user successfully completes a plan purchase or upgrade in the DocsConnect settings.",
     "is_auto": true,

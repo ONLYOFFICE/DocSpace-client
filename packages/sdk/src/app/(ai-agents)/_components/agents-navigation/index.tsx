@@ -47,7 +47,6 @@ import {
 import { CreateAgentIcon } from "@docspace/ui-kit/components/quick-actions/icons";
 import type { MainButtonProps } from "@docspace/ui-kit/components/main-button/MainButton.types";
 import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
@@ -226,9 +225,7 @@ const KnowledgeFilter = observer(() => {
       {
         id: "knowledge-upload-from-docspace",
         key: "knowledge-upload-from-docspace",
-        label: t("Common:FromPortal", {
-          productName: getBrandName("ProductName"),
-        }),
+        label: t("Common:FromPortal"),
         icon: ActionsUploadReactSvgUrl,
         onClick: onUploadFromDocSpace,
       },

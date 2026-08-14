@@ -3,7 +3,7 @@
   "content": "Wait for the current operation to complete",
   "content_en_sha1_hash": "43744920068ae9c077e24f893ad58703d318a3a0",
   "created_at": "2025-05-19T21:30:56.313Z",
-  "updated_at": "2026-08-13T10:58:03.298Z",
+  "updated_at": "2026-08-12T14:02:21.356Z",
   "comment": {
     "text": "This is a toast message warning the user to wait for an ongoing operation to finish before proceeding.",
     "is_auto": true,

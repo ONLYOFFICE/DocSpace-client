@@ -3,7 +3,7 @@
   "content": "Room template",
   "content_en_sha1_hash": "fdbb1ce823b57a9b8c778f4202dca453bf47d748",
   "created_at": "2025-05-19T21:30:56.152Z",
-  "updated_at": "2026-08-13T10:58:03.158Z",
+  "updated_at": "2026-08-12T14:02:21.296Z",
   "comment": {
     "text": "This is a label identifying a room as a template. It appears in the information panel when viewing details of a room that has been designated as a template.",
     "is_auto": true,

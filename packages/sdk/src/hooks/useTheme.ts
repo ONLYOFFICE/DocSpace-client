@@ -38,18 +38,18 @@ import { i18n as i18nType } from "i18next";
 import { match, P } from "ts-pattern";
 
 import {
-	Base,
-	Dark,
-	type TColorScheme,
-	type TTheme,
+  Base,
+  Dark,
+  type TColorScheme,
+  type TTheme,
 } from "@docspace/ui-kit/providers/theme/themes";
 import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
 import { setCookie } from "@docspace/ui-kit/utils/cookie";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import {
-	getFontFamilyDependingOnLanguage,
-	getDirectionByLanguage,
+  getFontFamilyDependingOnLanguage,
+  getDirectionByLanguage,
 } from "@docspace/ui-kit/providers/theme/rtl-utils";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 

@@ -1,20 +1,20 @@
 {
   "key_path": "DailyFeed",
-  "content": "Daily {{productName}} feed",
-  "content_en_sha1_hash": "86616eb49388f5f6bbcafaecd812e76ec70ed24b",
-  "created_at": "2025-05-19T21:30:54.080Z",
-  "updated_at": "2026-05-15T14:00:06.881Z",
+  "content": "Daily {{organizationName}} {{productName}} feed",
+  "content_en_sha1_hash": "b046a1a8f9bb5eb267672ab3b3fadd2c0af91c7a",
+  "created_at": "2026-08-13T22:44:30.720Z",
+  "updated_at": "2026-08-14T15:31:19.093Z",
   "comment": {
-    "text": "This is a toast message indicating a daily feed for the product. `{{productName}}` will be replaced with the brand name (e.g., ONLYOFFICE).",
+    "text": "Title for the daily feed subscription setting, incorporating the organization and product names as variables.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:18:04.255Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:31:19.093Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/DailyFeedContainer.tsx",
       "line_number": 77,
-      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"DailyFeed\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <ToggleButton\n className=\"daily-feed\"\n onChange={onChangeEmailSubscription}\n isChecked={dailyFeedSubscriptions}",
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"DailyFeed\", { organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\") })}\n </Text>\n <ToggleButton\n className=\"daily-feed\"\n onChange={onChangeEmailSubscription}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

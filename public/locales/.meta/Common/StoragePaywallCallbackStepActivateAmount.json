@@ -1,0 +1,29 @@
+{
+  "key_path": "StoragePaywallCallbackStepActivateAmount",
+  "content": "Activating {{storage}} of additional storage",
+  "content_en_sha1_hash": "c80bca8f358fe60b790117a5d9f1f3c5b6c266df",
+  "created_at": "2026-08-13T14:37:09.624Z",
+  "updated_at": "2026-08-13T14:41:15.930Z",
+  "comment": {
+    "text": "Step label in the payment processing flow indicating the activation of additional disk storage, where {{storage}} represents the specific amount or size being added.",
+    "is_auto": true,
+    "updated_at": "2026-08-13T14:41:15.930Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 201,
+      "context": "case PaymentFlavor.DiskStorage:\n return {\n processingTitle: t(\"Common:StoragePaywallCallbackProcessingTitle\"),\n processingHint: t(\"Common:StoragePaywallCallbackProcessingHint\"),\n activateStepLabel: storage\n ? t(\"Common:StoragePaywallCallbackStepActivateAmount\", { storage })\n : t(\"Common:StoragePaywallCallbackStepActivate\"),\n successTitle: t(\"Common:StoragePaywallCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToAddon\"),\n redirectUrl: DISK_STORAGE_REDIRECT_URL,",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

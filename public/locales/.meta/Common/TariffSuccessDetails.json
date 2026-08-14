@@ -3,7 +3,7 @@
   "content": "Storage: {{storage}} | {{price}} per month",
   "content_en_sha1_hash": "27edbaf09e9bd7a380a6f8fcf7a42d8b95fce491",
   "created_at": "2026-06-30T07:32:40.601Z",
-  "updated_at": "2026-08-06T08:04:20.054Z",
+  "updated_at": "2026-08-13T14:37:21.815Z",
   "comment": {
     "text": "A text label on the successful payment completion page that displays subscription details, including storage capacity ({{storage}}) and monthly cost ({{price}}).",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 471,
-      "context": "</Text>\n <Text\n fontSize=\"14px\"\n className={styles.tariffActivationDetails}\n >\n {t(\"TariffSuccessDetails\", { storage, price })}\n </Text>\n </>\n ) : isDocsConnect ? (\n <>\n <Text as=\"span\" className={styles.adminsAmount}>",
+      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/SuccessCard.tsx",
+      "line_number": 107,
+      "context": "<>\n <Text as=\"span\" className={styles.adminsAmount}>\n {t(\"AdminsAddedAmount\", { admins })}\n </Text>\n <Text fontSize=\"14px\" className={styles.tariffActivationDetails}>\n {t(\"TariffSuccessDetails\", { storage, price })}\n </Text>\n </>\n ) : isDocsConnect ? (\n <>\n <Text as=\"span\" className={styles.adminsAmount}>",
       "module": "/libs/ui-kit"
     }
   ],

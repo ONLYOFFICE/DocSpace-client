@@ -85,6 +85,7 @@ const PluginItem = ({
   };
 
   const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
+    organizationName: getBrandName("OrganizationName"),
     productName: getBrandName("ProductName"),
   });
 

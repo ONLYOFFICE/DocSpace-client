@@ -35,7 +35,6 @@
 
 import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 class MembersHelper {
   t: TTranslation;
@@ -55,18 +54,14 @@ class MembersHelper {
       roomAdmin: {
         key: "roomAdmin",
         label: this.t("Common:RoomManager"),
-        tooltip: this.t("Common:UserMaxAvailableRoleWarning", {
-          productName: getBrandName("ProductName"),
-        }),
+        tooltip: this.t("Common:UserMaxAvailableRoleWarning"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
       agentAdmin: {
         key: "agentAdmin",
         label: this.t("Common:AgentManager"),
-        tooltip: this.t("Common:UserAgentMaxAvailableRoleWarning", {
-          productName: getBrandName("ProductName"),
-        }),
+        tooltip: this.t("Common:UserAgentMaxAvailableRoleWarning"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
@@ -74,9 +69,7 @@ class MembersHelper {
         key: "collaborator",
         label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
-        tooltip: this.t("Common:GuestAgentMaxAvailableRoleWarning", {
-          productName: getBrandName("ProductName"),
-        }),
+        tooltip: this.t("Common:GuestAgentMaxAvailableRoleWarning"),
         type: "collaborator",
       },
       viewer: {

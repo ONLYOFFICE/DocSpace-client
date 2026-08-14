@@ -1,20 +1,20 @@
 {
   "key_path": "UserTariffReached",
-  "content": "All users will be added with User permissions only. To be able to add further admins, contact the {{productName}} administrator to upgrade the tariff plan.",
-  "content_en_sha1_hash": "dc98fe9d4b0ef6846be4b6f4320e9c8ae82ef9d8",
-  "created_at": "2025-05-19T21:30:54.152Z",
-  "updated_at": "2026-08-06T16:57:12.648Z",
+  "content": "All users will be added with User permissions only. To be able to add further admins, contact the Full admin to upgrade the tariff plan.",
+  "content_en_sha1_hash": "31bf9618a5df52cbf1e0cbac0d9a93e6e5d23d61",
+  "created_at": "2026-08-13T14:37:17.408Z",
+  "updated_at": "2026-08-14T14:58:32.666Z",
   "comment": {
-    "text": "This is an error message displayed in the Quotas Bar when an administrator has reached the user limit for their tariff plan. It informs them that new users will have \"User\" permissions only and advises contacting the {{productName}} administrator to upgrade the tariff plan.",
+    "text": "Informational message in the Quotas bar that appears when the user limit for the current tariff plan has been reached.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:17:27.943Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:08:44.565Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 120,
-      "context": ");\n };\n \n const getUserTariffLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffReached\", { productName: getBrandName(\"ProductName\") });\n \n return (\n <Trans\n t={t}\n i18nKey=\"UserTariffReachedForAdmins\"",
+      "line_number": 115,
+      "context": ");\n };\n \n const getUserTariffLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffReached\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"UserTariffReachedForAdmins\"",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -67,7 +67,6 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
@@ -94,7 +93,6 @@ const KnowledgeSettings = () => {
             noSelect
           >
             {t("Common:KnowledgeDescription", {
-              productName: getBrandName("ProductName"),
               defaultValue:
                 "Upload files to provide better context for the chat.",
             })}
@@ -121,7 +119,6 @@ const KnowledgeSettings = () => {
               <ReactSVG className="ai-button-icon" src={MoveReactSvgUrl} />
             }
             label={t("Common:KnowledgeSelectIn", {
-              productName: getBrandName("ProductName"),
               defaultValue: "Select files",
             })}
             scale

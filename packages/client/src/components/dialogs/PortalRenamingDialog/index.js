@@ -39,7 +39,6 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PortalRenamingDialog = (props) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
@@ -53,7 +52,7 @@ const PortalRenamingDialog = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("Settings:PortalRenaming", { productName: getBrandName("ProductName") })}
+        {t("Settings:PortalRenaming")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text fontSize="13px" fontWeight={400}>

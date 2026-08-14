@@ -2,12 +2,12 @@
   "key_path": "PreviousPlanTitle",
   "content": "Your previous {{service}} plan",
   "content_en_sha1_hash": "52fea8dc23e905809ef7bab6e47425bb69b4b840",
-  "created_at": "2026-08-13T10:57:59.790Z",
-  "updated_at": "2026-08-13T11:01:16.107Z",
+  "created_at": "2026-08-12T11:00:48.750Z",
+  "updated_at": "2026-08-12T14:02:21.317Z",
   "comment": {
-    "text": "Heading in the plan renewal panel that identifies the user's past subscription; {{service}} represents the name of the specific service.",
+    "text": "A heading in the plan renewal panel that identifies the user's prior subscription, where {{service}} represents the name of the service.",
     "is_auto": true,
-    "updated_at": "2026-08-13T11:01:16.107Z",
+    "updated_at": "2026-08-12T11:36:52.870Z",
     "model": "gemma4:26b"
   },
   "usage": [

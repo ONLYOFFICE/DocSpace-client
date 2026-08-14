@@ -3,7 +3,7 @@
   "content": "You are about to delete the <strong>files ({{filesCount}})</strong> and <strong>folders ({{foldersCount}})</strong>.",
   "content_en_sha1_hash": "8835009707c55340cb17b9a28925b9ff148c948d",
   "created_at": "2025-10-01T15:20:12.156Z",
-  "updated_at": "2026-08-13T10:58:03.099Z",
+  "updated_at": "2026-08-12T11:00:51.524Z",
   "comment": {
     "text": "This is the main text of a confirmation dialog that appears when a user attempts to delete both files and folders. It informs the user about the impending deletion, with `{{filesCount}}` and `{{foldersCount}}` representing the number of files and folders, respectively.",
     "is_auto": true,

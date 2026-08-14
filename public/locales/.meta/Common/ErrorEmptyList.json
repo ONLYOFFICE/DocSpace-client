@@ -3,7 +3,7 @@
   "content": "The list of entities has been changed. Please check the contents and try again.",
   "content_en_sha1_hash": "5fcafe5e752386800be3676175e2dc663d211f5b",
   "created_at": "2025-05-19T21:30:45.073Z",
-  "updated_at": "2026-08-13T10:58:03.043Z",
+  "updated_at": "2026-08-12T11:00:51.494Z",
   "comment": {
     "text": "This is an error toast message displayed when an operation fails because the list of items it was trying to act upon has become empty or invalid.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Change",
   "content_en_sha1_hash": "64fbd995d3b6b156ee26ae3c03e6516434c34c12",
   "created_at": "2025-05-19T21:30:43.398Z",
-  "updated_at": "2026-07-07T08:59:21.649Z",
+  "updated_at": "2026-08-14T14:58:32.635Z",
   "comment": {
     "text": "This is a button label. It allows users to confirm a change, such as changing a room owner, portal owner, or user type.",
     "is_auto": true,
@@ -19,25 +19,25 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 261,
+      "line_number": 252,
       "context": "{t(\"Settings:AccessRightsChangeOwnerConfirmText\")}\n </Text>\n <div className={styles.buttonWrapper}>\n <Button\n tabIndex={5}\n label={t(\"Common:ChangeButton\")}\n size=\"normal\"\n primary\n scale\n isDisabled={!selectedUser}\n onClick={onChangeAction}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 249,
+      "line_number": 248,
       "context": "<ModalDialog.Header>{t(\"ChangeContactType\")}</ModalDialog.Header>\n <ModalDialog.Body>{getBody()}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"change-user-type-modal_submit\"\n label={t(\"Common:ChangeButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onChangeType}\n isLoading={isRequestRunning}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 172,
+      "line_number": 171,
       "context": "type={LinkType.page}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onChangeDomainClick}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n <Badge\n className=\"paid-badge\"\n fontWeight=\"700\"\n backgroundColor={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/SocialAuthWelcomePanel.jsx",
-      "line_number": 69,
+      "line_number": 66,
       "context": "<span>{domain}</span>\n <IconButton\n iconName={PencilSvgUrl}\n size={12}\n onClick={onChangeDomainClick}\n aria-label={t(\"Common:ChangeButton\")}\n isFill\n />\n </>\n ),\n },",
       "module": "/packages/client"
     },

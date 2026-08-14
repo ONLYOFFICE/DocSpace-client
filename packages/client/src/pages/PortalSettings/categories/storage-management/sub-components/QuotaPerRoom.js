@@ -37,7 +37,6 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import QuotaPerItemComponent from "./QuotaPerItem";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const QuotaPerRoomComponent = (props) => {
   const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } = props;
@@ -57,9 +56,7 @@ const QuotaPerRoomComponent = (props) => {
       isQuotaSet={isDefaultRoomsQuotaSet}
       tabIndex={1}
       dataTestId="quota_room"
-      toggleDescription={t("SetDefaultRoomQuota", {
-        productName: getBrandName("ProductName"),
-      })}
+      toggleDescription={t("SetDefaultRoomQuota")}
     />
   );
 };

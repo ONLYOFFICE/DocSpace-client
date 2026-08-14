@@ -1,32 +1,32 @@
 {
   "key_path": "ProductNameDetail",
-  "content": "{{productName}} name",
-  "content_en_sha1_hash": "0f1403b43faa94c0dc6b13a5e45c10558ce66b12",
-  "created_at": "2025-05-19T21:30:50.037Z",
-  "updated_at": "2026-08-07T10:52:44.587Z",
+  "content": "Workspace name",
+  "content_en_sha1_hash": "6e0f2ba26a5e7f14ec0a62b070be54ac103989bb",
+  "created_at": "2026-08-13T22:44:28.657Z",
+  "updated_at": "2026-08-14T15:41:04.995Z",
   "comment": {
-    "text": "This text appears in a welcome dialog after a user signs in via social authentication. It displays the product name, where `{{productName}}` is a variable representing the brand name (e.g., \"ONLYOFFICE DocSpace\").",
+    "text": "Label for the workspace name or domain, appearing in the welcome dialog, information panels, and profile cards.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:27:07.949Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:41:04.995Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 151,
-      "context": "</Text>\n \n <div className=\"account-details\">\n <div className={`${styles.infoRow} welcome-product-name`}>\n <Text className=\"welcome-text\">\n {t(\"SocialAuthWelcomeDialog:ProductNameDetail\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {baseDomain == \"localhost\"",
+      "line_number": 152,
+      "context": "</Text>\n \n <div className=\"account-details\">\n <div className={`${styles.infoRow} welcome-product-name`}>\n <Text className=\"welcome-text\">\n {t(\"SocialAuthWelcomeDialog:ProductNameDetail\")}\n </Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {baseDomain == \"localhost\"\n ? `${baseDomain}`\n : `${tenantAlias}.${baseDomain}`}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/SocialAuthWelcomePanel.jsx",
-      "line_number": 59,
-      "context": "const domain =\n baseDomain === \"localhost\" ? baseDomain : `${tenantAlias}.${baseDomain}`;\n \n const columns = [\n {\n label: t(\"SocialAuthWelcomeDialog:ProductNameDetail\", {\n productName: getBrandName(\"ProductName\"),\n }),\n value: (\n <>\n <span>{domain}</span>",
+      "line_number": 58,
+      "context": "const domain =\n baseDomain === \"localhost\" ? baseDomain : `${tenantAlias}.${baseDomain}`;\n \n const columns = [\n {\n label: t(\"SocialAuthWelcomeDialog:ProductNameDetail\"),\n value: (\n <>\n <span>{domain}</span>\n <IconButton\n iconName={PencilSvgUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
-      "line_number": 154,
-      "context": "</Text>\n \n <div className={styles.profileCardGrid}>\n <div className={styles.profileCardField}>\n <Text as=\"span\" className={styles.profileCardLabel}>\n {t(\"SocialAuthWelcomeDialog:ProductNameDetail\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <span className={styles.profileCardValueRow}>\n <Text as=\"span\" className={styles.profileCardValue}>",
+      "line_number": 153,
+      "context": "</Text>\n \n <div className={styles.profileCardGrid}>\n <div className={styles.profileCardField}>\n <Text as=\"span\" className={styles.profileCardLabel}>\n {t(\"SocialAuthWelcomeDialog:ProductNameDetail\")}\n </Text>\n <span className={styles.profileCardValueRow}>\n <Text as=\"span\" className={styles.profileCardValue}>\n {portalName}\n </Text>",
       "module": "/packages/client"
     }
   ],
@@ -36,12 +36,6 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
-    },
-    "ru": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "ar-SA": {
       "ai_translated": false,
@@ -158,6 +152,12 @@
       "approved_at": null
     },
     "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

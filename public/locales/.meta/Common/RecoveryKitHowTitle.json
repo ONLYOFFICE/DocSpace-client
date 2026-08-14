@@ -3,7 +3,7 @@
   "content": "How to use it",
   "content_en_sha1_hash": "e13e18f3a4a56aeb9973b0c1bdfe43af2d3c3e20",
   "created_at": "2026-07-27T13:07:29.578Z",
-  "updated_at": "2026-07-27T13:19:41.819Z",
+  "updated_at": "2026-08-14T14:58:32.893Z",
   "comment": {
     "text": "Section title within a modal that introduces the instructions for using the recovery phrase.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 118,
-      "context": "whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),\n howText: t(\"Common:RecoveryKitHowText\", {\n action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),",
+      "context": "whatTitle: t(\"Common:RecoveryKitWhatTitle\"),\n whatText: t(\"Common:RecoveryKitWhatText\", {\n organizationName: getBrandName(\"OrganizationName\"), productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),\n howText: t(\"Common:RecoveryKitHowText\", {\n action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),",
       "module": "/packages/shared"
     }
   ],

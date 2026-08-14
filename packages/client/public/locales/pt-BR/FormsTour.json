@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Este é o formulário em si — exatamente o que todo mundo que segue o seu link abre. Carregue um formulário PDF que você já tem ou monte um a partir da galeria de modelos sem sair do espaço.",
+  "FormsBlank": "Este é o formulário em si — exatamente o que todo mundo que segue o seu link abre. Carregue um formulário PDF que você já tem ou monte um a partir da galeria de modelos sem sair do espaço de trabalho.",
   "FormsBlankTitle": "O formulário que todos abrem",
   "FormsComplete": "Uma cópia enviada vai para {{complete}} e fica lá, uma por pessoa. Ative a coleta de resultados e cada resposta também vira uma linha em uma planilha — uma coluna por campo, pronta para ordenar ou transformar em gráfico.",
   "FormsCompleteTitle": "Respostas reunidas",
@@ -15,7 +15,7 @@
   "FormsItem": "Cada linha é uma coleta inteira. Abra uma para trabalhar dentro dela, fixe as que estão em andamento ou use os três pontos para convidar pessoas, copiar o link que abre o formulário e salvar a configuração como modelo.",
   "FormsItemTitle": "Trabalhando com um espaço de formulários",
   "FormsPlacesRecent": "{{recent}} e {{favorites}} mantêm à mão as coletas que você está conduzindo.",
-  "FormsPlacesTemplates": "{{templates}} — os modelos de espaço que você salvou.",
+  "FormsPlacesTemplates": "{{templates}} — os modelos de espaço de formulários que você salvou.",
   "FormsPlacesTitle": "Cada coisa em seu lugar",
   "FormsPlacesTrash": "{{trash}} — espaços excluídos, restauráveis até que você a esvazie.",
   "FormsSpace": "Um espaço de formulários é uma coleta de ponta a ponta: o formulário PDF em branco, as pessoas que o preenchem e cada resposta que volta. Vamos criar um e olhar por dentro.",

@@ -3,7 +3,7 @@
   "content": "Room based on the template <1>«{{title}}»</1> created.",
   "content_en_sha1_hash": "6a8df0a004c7e61b689c124e267e93ff4887cded",
   "created_at": "2025-05-19T21:30:56.247Z",
-  "updated_at": "2026-08-13T10:58:03.051Z",
+  "updated_at": "2026-08-12T14:02:21.251Z",
   "comment": {
     "text": "This is a toast message confirming a new room has been created from a template. `{{title}}` is the name of the template used.",
     "is_auto": true,

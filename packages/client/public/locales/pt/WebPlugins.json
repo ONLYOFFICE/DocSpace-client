@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Excluir plug-in",
-  "DeletePluginDescription": "Este plugin não estará mais disponível para usuários do {{productName}}. Você tem certeza que quer continuar?",
+  "DeletePluginDescription": "Este plugin não estará mais disponível para utilizadores do espaço de trabalho. Tem a certeza de que quer continuar?",
   "DeletePluginTitle": "Excluir plug-in?",
   "ExpandFunctionality": "Expanda a funcionalidade usando Plugin SDK",
   "GoToRepo": "Vá para o repositório",
@@ -10,11 +10,11 @@
   "NotNeedSettings": "Não é necessário inserir configurações",
   "PluginCacheWarningDescription": "Plugins são armazenados em cache com base em seu número de versão. Para garantir que suas alterações sejam aplicadas, por favor, incremente o número da versão no seu arquivo <1>package.json</1> antes de enviar. O sistema não atualizará um plugin se a versão permanecer a mesma.",
   "PluginDeletedSuccessfully": "Plugin excluído com sucesso",
-  "PluginIsNotCompatible": "A versão do SDK do plugin não corresponde à versão do {{productName}}. Por favor, atualize para uma versão compatível.",
+  "PluginIsNotCompatible": "A versão do SDK do plugin não corresponde à versão do {{organizationName}} {{productName}}. Por favor, atualize para uma versão compatível.",
   "PluginLoadedSuccessfully": "Plugin carregado com sucesso",
   "PluginSamples": "Amostras de plug-ins",
   "PluginSDK": "SDK de plug-in",
-  "PluginSDKDescription": "Usando o Plugin SDK você pode estender a funcionalidade do {{productName}}, conectar serviços de terceiros ou aprimorar a experiência do usuário existente. Aqui você pode encontrar os exemplos de plugins com código-fonte disponíveis no GitHub.",
+  "PluginSDKDescription": "Usando o Plugin SDK pode estender a funcionalidade do seu espaço de trabalho, ligar serviços de terceiros ou aprimorar a experiência do utilizador existente. Aqui pode encontrar os exemplos de plugins com código-fonte disponíveis no GitHub.",
   "PluginSDKInstruction": "Clique no botão para obter instruções detalhadas sobre como criar seus próprios plug-ins.",
-  "UploadDescription": "Você pode adicionar plug-ins para estender a funcionalidade do {{productName}} com recursos extras. Clique em Carregar plugin ou solte o arquivo no arquivo ZIP."
+  "UploadDescription": "Pode adicionar plug-ins para estender a funcionalidade do espaço de trabalho com recursos extras. Clique em Carregar plugin ou solte o ficheiro no arquivo ZIP."
 }

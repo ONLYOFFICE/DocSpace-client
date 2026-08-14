@@ -216,7 +216,6 @@ export const TariffTitleContainer = ({
               fromDate: paymentDate,
               byDate: gracePeriodEndDate,
               delayDaysCount,
-              productName: getBrandName("ProductName"),
             }}
             components={{
               1: <Text as="span" isBold dataTestId="grace-period-date-range" />,

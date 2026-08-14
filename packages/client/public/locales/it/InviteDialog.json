@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Lingua dell'invito",
-  "InviteMembersManuallyDescription": "Invita i nuovi membri a {{productName}} personalmente via email",
+  "InviteMembersManuallyDescription": "Invita i nuovi membri allo spazio di lavoro personalmente via email",
   "InviteMembersSearchPlaceholder": "Invita i membri via e-mail",
-  "InviteViaLinkDescriptionAccounts": "Crea un link universale per l’auto-autorizzazione in {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Crea un link universale per l’auto-autorizzazione nello spazio di lavoro"
 }

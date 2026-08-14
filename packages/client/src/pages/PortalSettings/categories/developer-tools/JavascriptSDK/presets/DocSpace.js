@@ -67,7 +67,6 @@ import {
   Container,
   ControlsSection,
 } from "./StyledPresets";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DOCSPACE_EVENT_TYPES = [
   "onAppReady",
@@ -200,12 +199,8 @@ const DocSpace = (props) => {
 
   return (
     <PresetWrapper
-      description={t("PortalDescription", {
-        productName: getBrandName("ProductName"),
-      })}
-      header={t("CreateSamplePortal", {
-        productName: getBrandName("ProductName"),
-      })}
+      description={t("PortalDescription")}
+      header={t("CreateSamplePortal")}
     >
       <Container>
         <PreviewBlock

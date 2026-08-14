@@ -1,6 +1,6 @@
 {
   "ConversionMessage": "Усі документи, які ви передаєте, буде конвертовано в формат Office Open XML (docx, xlsx або pptx) для більш швидкого редагування.",
-  "ConvertedFileDestination": "Копію файлу буде створено у папці  <strong>{{folderTitle}}</strong>.",
+  "ConvertedFileDestination": "Копію файлу буде створено у папці <strong>{{folderTitle}}</strong>.",
   "FileUploadTitle": "Передавання файлу",
   "InfoCreateFileIn": "Новий файл '{{fileTitle}}' створено в '{{folderTitle}}'"
 }

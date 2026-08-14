@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Davet dili",
-  "InviteMembersManuallyDescription": "Yeni üyeleri {{productName}} ürününe e-posta yoluyla kişisel olarak davet edin",
+  "InviteMembersManuallyDescription": "Yeni üyeleri çalışma alanı ürününe e-posta yoluyla kişisel olarak davet edin",
   "InviteMembersSearchPlaceholder": "Üyeleri e-posta yoluyla davet edin",
-  "InviteViaLinkDescriptionAccounts": "{{productName}}'te kendi kendine yetkilendirme için evrensel bir bağlantı oluştur"
+  "InviteViaLinkDescriptionAccounts": "çalışma alanında kendi kendine yetkilendirme için evrensel bir bağlantı oluştur"
 }

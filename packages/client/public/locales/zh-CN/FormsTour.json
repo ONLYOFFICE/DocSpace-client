@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "这就是表单本身——每一位点击你链接的人所看到的正是它。上传一份你已有的 PDF 表单，或者不离开该空间，直接从模板库中创建一份。",
+  "FormsBlank": "这就是表单本身——每一位点击你链接的人所看到的正是它。上传一份你已有的 PDF 表单，或者不离开该工作区，直接从模板库中创建一份。",
   "FormsBlankTitle": "所有人打开的那份表单",
   "FormsComplete": "已提交的副本会进入 {{complete}} 并保存在那里，每人一份。开启结果收集后，每一份答复还会成为电子表格中的一行——每个字段一列，可直接排序或制作图表。",
   "FormsCompleteTitle": "答复已收齐",
@@ -15,7 +15,7 @@
   "FormsItem": "每一行都是一整套收集。打开其中一个即可在里面工作，把正在进行的置顶，或通过三个点邀请他人、复制可打开表单的链接，并把配置保存为模板。",
   "FormsItemTitle": "使用表单空间",
   "FormsPlacesRecent": "{{recent}} 和 {{favorites}} 让你正在进行的收集始终触手可及。",
-  "FormsPlacesTemplates": "{{templates}} — 你保存的空间模板。",
+  "FormsPlacesTemplates": "{{templates}} — 你保存的表单空间模板。",
   "FormsPlacesTitle": "各归其位",
   "FormsPlacesTrash": "{{trash}} — 已删除的空间，在清空之前都可以恢复。",
   "FormsSpace": "表单空间是一套从头到尾的收集：空白的 PDF 表单、填写它的人，以及每一份返回的答复。我们来创建一个，看看里面有什么。",

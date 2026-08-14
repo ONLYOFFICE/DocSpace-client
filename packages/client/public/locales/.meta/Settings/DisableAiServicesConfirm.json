@@ -3,7 +3,7 @@
   "content": "You can re-enable {{aiServices}} at any time. Are you sure you want to continue?",
   "content_en_sha1_hash": "912c9af85345b35c352c45adb96bc98f1db36409",
   "created_at": "2026-03-26T08:26:46.876Z",
-  "updated_at": "2026-08-07T10:52:44.673Z",
+  "updated_at": "2026-08-13T14:37:21.690Z",
   "comment": {
     "text": "This is a confirmation message in a dialog box, asking the user to confirm disabling AI services. The `{{aiServices}}` variable will be replaced with the localized term for \"AI Services\".",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
       "line_number": 109,
-      "context": "<Text\n fontSize=\"13px\"\n fontWeight={isAiToolsServiceOn ? 700 : 400}\n className={styles.confirm}\n >\n {t(\"DisableAiServicesConfirm\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "context": "<Text\n fontSize=\"13px\"\n fontWeight={isAiToolsServiceOn ? 700 : 400}\n className={styles.confirm}\n >\n {t(\"DisableAiServicesConfirm\", {\n aiServices: t(\"Common:AIFeatures\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],

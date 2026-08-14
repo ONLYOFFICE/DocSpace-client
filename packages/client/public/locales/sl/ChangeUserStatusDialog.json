@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "Po potrebi lahko onemogočene uporabnike kasneje izbrišete ali omogočite. Upoštevajte, da ne morete onemogočiti uporabnikov, kot sta lastnik in vi.",
   "DisableGuest": "Onemogoči gosta",
-  "DisableGuestDescription": "Če onemogočite tega gosta, se ne bo mogel prijaviti v {{productName}}.",
+  "DisableGuestDescription": "Če onemogočite tega gosta, se ne bo mogel prijaviti v delovni prostor.",
   "DisableGuests": "Onemogoči goste",
-  "DisableGuestsDescription": "Če onemogočite te goste, se ne bodo mogli prijaviti v {{productName}}.",
+  "DisableGuestsDescription": "Če onemogočite te goste, se ne bodo mogli prijaviti v delovni prostor.",
   "DisableGuestsGeneralDescription": "Pozneje lahko izbrišete ali omogočite onemogočene goste, če je to potrebno.",
   "DisableUser": "Onemogoči uporabnika",
-  "DisableUserDescription": "Če onemogočite tega uporabnika, se ne bo mogel prijaviti v {{productName}}, njegovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
+  "DisableUserDescription": "Če onemogočite tega uporabnika, se ne bo mogel prijaviti v delovni prostor, njegovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
   "DisableUsers": "Onemogoči uporabnike",
-  "DisableUsersDescription": "Če onemogočite te uporabnike, se ne bodo mogli prijaviti v  {{productName}}, njihovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
+  "DisableUsersDescription": "Če onemogočite te uporabnike, se ne bodo mogli prijaviti v delovni prostor, njihovi dokumenti in podatki pa bodo ostali nedotaknjeni.",
   "EnableGuest": "Omogoči gosta",
-  "EnableGuestDescription": "Če omogočite tega gosta, se bo lahko znova prijavil v {{productName}}.",
+  "EnableGuestDescription": "Če omogočite tega gosta, se bo lahko znova prijavil v delovni prostor.",
   "EnableGuests": "Omogoči goste",
-  "EnableGuestsDescription": "Če omogočite te goste, se bodo lahko znova prijavili v {{productName}}.",
+  "EnableGuestsDescription": "Če omogočite te goste, se bodo lahko znova prijavili v delovni prostor.",
   "EnableUser": "Omogoči uporabnika",
-  "EnableUserDescription": "Če omogočite tega uporabnika, se bo lahko ponovno prijavil v {{productName}} in dostopal do svojih dokumentov in podatkov.",
+  "EnableUserDescription": "Če omogočite tega uporabnika, se bo lahko ponovno prijavil v delovni prostor in dostopal do svojih dokumentov in podatkov.",
   "EnableUsers": "Omogoči uporabnike",
-  "EnableUsersDescription": "Če omogočite te uporabnike, se bodo lahko znova prijavili v {{productName}} in dostopali do svojih dokumentov in podatkov."
+  "EnableUsersDescription": "Če omogočite te uporabnike, se bodo lahko znova prijavili v delovni prostor in dostopali do svojih dokumentov in podatkov."
 }

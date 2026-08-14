@@ -3,7 +3,7 @@
   "content": "Reduced users",
   "content_en_sha1_hash": "434c609162ac7fca6500f2f928e8c6e20b2cef0d",
   "created_at": "2026-07-27T13:07:48.522Z",
-  "updated_at": "2026-08-13T10:58:03.218Z",
+  "updated_at": "2026-08-12T14:02:21.320Z",
   "comment": {
     "text": "Label for a summary row indicating the number of users removed from the current plan.",
     "is_auto": true,

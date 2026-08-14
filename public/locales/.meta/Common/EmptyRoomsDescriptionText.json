@@ -3,7 +3,7 @@
   "content": "Please create the first room in {{sectionName}}.",
   "content_en_sha1_hash": "52d0bc357573a2bc6f7486caa5c8d2793a7f50c7",
   "created_at": "2025-10-27T16:14:14.285Z",
-  "updated_at": "2026-08-13T10:58:03.384Z",
+  "updated_at": "2026-08-14T14:58:32.926Z",
   "comment": {
     "text": "This is a descriptive text displayed when no rooms are present in a section. It prompts the user to create the first room, with `{{sectionName}}` being a placeholder for the name of the section (e.g., \"Rooms\").",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/empty-view/index.tsx",
-      "line_number": 155,
-      "context": "if (isFiltered) return t(\"Common:EmptyFilterRoomsDescription\");\n if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\", {\n productName: getBrandName(\"ProductName\"),\n });\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n };\n \n const getOptions = () => {",
+      "line_number": 152,
+      "context": "const getDescription = () => {\n if (isFiltered) return t(\"Common:EmptyFilterRoomsDescription\");\n if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\");\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n };\n \n const getOptions = () => {",
       "module": "/packages/sdk"
     }
   ],

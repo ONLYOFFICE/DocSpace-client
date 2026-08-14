@@ -42,7 +42,6 @@ import styles from "./AdvancedSettings.module.scss";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import { getConstName } from "@docspace/shared/constants/consts";
 
 interface InjectedProps {
@@ -52,7 +51,6 @@ interface InjectedProps {
 	isLoadingXml: boolean;
 	setCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
 
 const AdvancedSettings = (props: InjectedProps) => {
 	const {
@@ -100,7 +98,6 @@ const AdvancedSettings = (props: InjectedProps) => {
 				<HelpButton
 					tooltipContent={t("Settings:DisableEmailDescription", {
 						sectionName: getConstName("SSO"),
-						productName: getBrandName("ProductName"),
 					})}
 					dataTestId="disable_email_verification_help_button"
 				/>

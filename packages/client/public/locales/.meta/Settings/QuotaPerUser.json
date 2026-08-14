@@ -3,7 +3,7 @@
   "content": "Quota per user",
   "content_en_sha1_hash": "34fbae11ee29d4cda07c3fec52be82daaf84c7c0",
   "created_at": "2025-05-19T21:30:52.346Z",
-  "updated_at": "2026-06-25T19:31:02.997Z",
+  "updated_at": "2026-08-14T14:58:32.836Z",
   "comment": {
     "text": "This is a label for a setting that allows administrators to define the storage limit for each user. It appears as a title in the settings menu and as a heading on the \"Quota per user\" configuration page.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 66,
-      "context": "productName: getBrandName(\"ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Files\"),",
+      "line_number": 63,
+      "context": "url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\")}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n sectionName: t(\"Common:Files\"),\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser.js",
-      "line_number": 54,
+      "line_number": 53,
       "context": ": {};\n \n return (\n <QuotaPerItemComponent\n type=\"user\"\n formLabel={t(\"QuotaPerUser\")}\n toggleLabel={t(\"DefineQuotaPerUser\")}\n disableQuota={() => setUserQuota(-1, t)}\n saveQuota={(size) => setUserQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultUsersQuotaSet}",
       "module": "/packages/client"
     },

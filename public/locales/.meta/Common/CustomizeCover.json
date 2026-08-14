@@ -3,7 +3,7 @@
   "content": "Customize cover",
   "content_en_sha1_hash": "b5b9c63cc83c3598cc9ddb9857ac47fb18bca819",
   "created_at": "2025-05-19T21:30:53.313Z",
-  "updated_at": "2026-08-13T10:58:03.290Z",
+  "updated_at": "2026-08-12T15:15:07.930Z",
   "comment": {
     "text": "This is a button label that allows users to modify the cover image of a room.",
     "is_auto": true,

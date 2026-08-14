@@ -249,7 +249,7 @@
   "QuotasDescription": "Këtu mund të caktoni kuotën e ruajtjes për përdoruesit dhe dhomat.",
   "Recalculate": "Rillogaritni",
   "RegisterApp": "Regjistro aplikacionin",
-  "ResetTemplateDescription": "Jeni të sigurt se dëshironi të ktheni gjendjen aktuale të boshit në gjendjen e saj parazgjedhur? Nuk do të mund ta anuloni këtë veprim.",
+  "ResetTemplateDescription": "Jeni të sigurt se dëshironi të ktheni gjendjen aktuale të boshit në gjendjen e saj parazgjedhur?\nNuk do të mund ta anuloni këtë veprim.",
   "ResetToDefault": "Rikthe në parazohë",
   "RestAPI": "REST API",
   "RestAPIDescription": "Krijoni platformën tuaj të produktivitetit bazuar në {{organizationName}} {{productName}} dhe bashkëpunoni tek dokumentet me ekipe, klientë dhe partnerë.",

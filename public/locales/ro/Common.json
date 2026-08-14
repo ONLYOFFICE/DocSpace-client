@@ -1766,7 +1766,7 @@
   "Role": "Rol",
   "RoleAIAgentContentCreatorDescription": "Creatorii de conținut pot folosi chat-ul și pot lucra cu fișiere în stocarea rezultatelor.\nPot încărca fișiere în baza de cunoștințe, dar nu pot gestiona utilizatorii sau accesa setările agentului.",
   "RoleAIAgentManagerDescription": "Managerii de agenți pot gestiona {{aiAgent}} atribuit, invita utilizatori noi și pot atribui roluri sub nivelul lor.\nPot folosi chat-ul, să încarce fișiere de cunoștințe, să lucreze cu Result storage și să gestioneze setările chat-ului.",
-  "RoleAIAgentViewerDescription": "Utilizatorii pot vizualiza doar fișiere în stocarea rezultatelor cu ieșiri generate de alții. Nu au acces la chat sau la baza de cunoștințe.",
+  "RoleAIAgentViewerDescription": "Utilizatorii pot vizualiza doar fișiere în stocarea rezultatelor cu ieșiri generate de alții.\nNu au acces la chat sau la baza de cunoștințe.",
   "RoleCommentator": "Comentator",
   "RoleCommentatorDescription": "Operaţii cu fişiere existente: vizualizare, comentare.",
   "RoleContentCreatorDescription": "Creatori de conținut pot crea și modifica fişiere în sală, dar nu pot gestiona utilizatorii sau accesa setările.",

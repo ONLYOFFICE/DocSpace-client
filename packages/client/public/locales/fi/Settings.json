@@ -249,7 +249,7 @@
   "QuotasDescription": "Tässä voit asettaa käyttäjille ja huoneille tallennuskiintiön.",
   "Recalculate": "Laske uudelleen",
   "RegisterApp": "Rekisteröi sovellus",
-  "ResetTemplateDescription": "Oletko varma, että haluat nollata tyhjän sivun nykyisen tilan sen oletustilaan? Et voi peruuttaa tätä toimintoa.",
+  "ResetTemplateDescription": "Oletko varma, että haluat nollata tyhjän sivun nykyisen tilan sen oletustilaan?\nEt voi peruuttaa tätä toimintoa.",
   "ResetToDefault": "Nollaa oletusarvoon",
   "RestAPI": "REST API",
   "RestAPIDescription": "Luo oma tuottavuusplatformisi {{organizationName}} {{productName}}:n pohjalta ja yhteistyöskentele asiakirjoilla tiimien, asiakkaiden ja kumppaneiden kanssa.",

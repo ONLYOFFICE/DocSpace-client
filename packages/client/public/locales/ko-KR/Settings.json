@@ -249,7 +249,7 @@
   "QuotasDescription": "여기에서 사용자 및 방에 대한 스토리지 할당량을 설정할 수 있습니다.",
   "Recalculate": "재계산",
   "RegisterApp": "앱 등록",
-  "ResetTemplateDescription": "빈칸의 현재 상태를 기본 상태로 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+  "ResetTemplateDescription": "빈칸의 현재 상태를 기본 상태로 초기화하시겠습니까?\n이 작업은 되돌릴 수 없습니다.",
   "ResetToDefault": "기본값으로 재설정",
   "RestAPI": "REST API",
   "RestAPIDescription": "{{organizationName}} {{productName}}을 기반으로 자체 생산성 플랫폼을 구축하고 팀, 고객 및 파트너와 문서를 공동 작업하세요.",

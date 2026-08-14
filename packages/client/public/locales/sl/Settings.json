@@ -249,7 +249,7 @@
   "QuotasDescription": "Tukaj lahko nastavite kvoto prostora za shranjevanje za uporabnike in sobe.",
   "Recalculate": "Preračunaj",
   "RegisterApp": "Registrirajte aplikacijo",
-  "ResetTemplateDescription": "Ali ste prepričani, da želite resetirati trenutno stanje praznega na njegovo privzerno stanje? To dejanje ne boste mogli preklicati.",
+  "ResetTemplateDescription": "Ali ste prepričani, da želite resetirati trenutno stanje praznega na njegovo privzerno stanje?\nTo dejanje ne boste mogli preklicati.",
   "ResetToDefault": "Ponastavi na privzeto",
   "RestAPI": "REST API",
   "RestAPIDescription": "Ustvarite svojo produktivno platformo na podlagi {{organizationName}} {{productName}} in sodelujte na dokumentih z ekipo, strankami in partnerji.",

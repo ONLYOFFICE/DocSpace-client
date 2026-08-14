@@ -1764,7 +1764,7 @@
   "Reviewing": "Tarkistaminen",
   "RevokeLink": "Peru linkki",
   "Role": "Rooli",
-  "RoleAIAgentContentCreatorDescription": "Sisällöntuottajat voivat käyttää chattia ja työskennellä Result-tallennustilassa olevien tiedostojen kanssa. He voivat ladata tiedostoja tietopankkiin, mutta he eivät voi hallita käyttäjiä tai käyttää agentin asetuksia.",
+  "RoleAIAgentContentCreatorDescription": "Sisällöntuottajat voivat käyttää chattia ja työskennellä Result-tallennustilassa olevien tiedostojen kanssa.\nHe voivat ladata tiedostoja tietopankkiin, mutta he eivät voi hallita käyttäjiä tai käyttää agentin asetuksia.",
   "RoleAIAgentManagerDescription": "Agenttien esimiehet voivat hallita annetun {{aiAgent}}, kutsua uusia käyttäjiä ja määrittää rooleja alemmalla tasolla.\nHe voivat käyttää chatia, ladata tietotiedostoja, työskennellä Result-tallennustilassa ja hallita chat-asetuksia.",
   "RoleAIAgentViewerDescription": "Katsojat voivat tarkastella vain tiedostoja Tulossäilytyksessä, jotka muut ovat luoneet.\nHeillä ei ole pääsyä chattiin tai tietopankkiin.",
   "RoleCommentator": "Kommentaattori",

@@ -249,7 +249,7 @@
   "QuotasDescription": "您可以设置用户和房间的储存空间额度。",
   "Recalculate": "重新计算",
   "RegisterApp": "注册应用",
-  "ResetTemplateDescription": "您确定要将空白区域的当前状态重置为默认状态吗？此操作将无法撤销。",
+  "ResetTemplateDescription": "您确定要将空白区域的当前状态重置为默认状态吗？\n此操作将无法撤销。",
   "ResetToDefault": "重置为默认",
   "RestAPI": "REST API",
   "RestAPIDescription": "基于 {{organizationName}} {{productName}}创建您自己的生产力平台，并与团队、客户和合作伙伴协作处理文档。",

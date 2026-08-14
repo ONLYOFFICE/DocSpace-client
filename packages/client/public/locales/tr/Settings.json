@@ -249,7 +249,7 @@
   "QuotasDescription": "Burada, kullanıcılar ve odalar için depolama kotası ayarlayabilirsiniz.",
   "Recalculate": "Yeniden hesapla",
   "RegisterApp": "Uygulama kaydet",
-  "ResetTemplateDescription": "Boşluğun mevcut durumunu varsayılan durumuna sıfırlamak istediğinizden emin misiniz? Bu işlemi geri alamayacaksınız.",
+  "ResetTemplateDescription": "Boşluğun mevcut durumunu varsayılan durumuna sıfırlamak istediğinizden emin misiniz?\nBu işlemi geri alamayacaksınız.",
   "ResetToDefault": "Varsayılana sıfırla",
   "RestAPI": "REST API",
   "RestAPIDescription": "{{organizationName}} {{productName}} üzerine kendi üretkenlik platformunuzu oluşturun ve ekiplerle, müşterilerle ve ortaklarla belgeler üzerinde işbirliği yapın.",

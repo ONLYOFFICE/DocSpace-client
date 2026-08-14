@@ -249,7 +249,7 @@
   "QuotasDescription": "Šeit varat iestatīt krātuves kvotu lietotājiem un telpām.",
   "Recalculate": "Pārrēķināt",
   "RegisterApp": "Reģistrēt lietotni",
-  "ResetTemplateDescription": "Vai esat pārliecināti, ka vēlaties atiestatīt pašreizējo šablonu uz sākotnējā stāvokļa? Šo darbību nevarēs atcelt.",
+  "ResetTemplateDescription": "Vai esat pārliecināti, ka vēlaties atiestatīt pašreizējo šablonu uz sākotnējā stāvokļa?\nŠo darbību nevarēs atcelt.",
   "ResetToDefault": "Atgriezties par défaut",
   "RestAPI": "REST API",
   "RestAPIDescription": "Izveido savu produktivitātes platformu, balstītu uz {{organizationName}} {{productName}}, un kolaborējiet ar dokumentiem ar komandām, klientiem un partneriem.",

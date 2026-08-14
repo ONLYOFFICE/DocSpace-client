@@ -249,7 +249,7 @@
   "QuotasDescription": "Hier können Sie Speicherquote für Benutzer und Räume festlegen.",
   "Recalculate": "Neu berechnen",
   "RegisterApp": "Anwendung registrieren",
-  "ResetTemplateDescription": "Sind Sie sicher, dass Sie den aktuellen Zustand der leeren Vorlage auf ihren Standardzustand zurücksetzen möchten? Sie können diese Aktion nicht rückgängig machen.",
+  "ResetTemplateDescription": "Sind Sie sicher, dass Sie den aktuellen Zustand der leeren Vorlage auf ihren Standardzustand zurücksetzen möchten?\nSie können diese Aktion nicht rückgängig machen.",
   "ResetToDefault": "Zurücksetzen auf Standard",
   "RestAPI": "REST API",
   "RestAPIDescription": "Erstellen Sie Ihre eigene Produktivitätsplattform basierend auf {{organizationName}} {{productName}} und arbeiten Sie mit Teams, Kunden und Partnern an Dokumenten zusammen.",

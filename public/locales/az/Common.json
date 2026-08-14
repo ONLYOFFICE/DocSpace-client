@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "Bu filtrə uyğun hesablaşma yoxdur. Başqa birini sınayın və ya bütün hesablaşmaları görmək üçün filtri silin.",
   "NotSupportedFormat": "Üzr istəyirik, amma bu format dəstəklənmir",
   "NoUpcomingPayments": "Qarşıdan gələn ödəniş yoxdur",
-  "NoUpcomingPaymentsDesc": "Bu ay üçün planlaşdırılmış ödəniş yoxdur.",
   "NoUpcomingPaymentsDescription": "Hələlik heç bir aktiv abunəliyiniz və ya planlaşdırılmış təkrarlanan ödənişiniz yoxdur.",
   "NoWalletTransaction": "Hələ ki heç bir əməliyyat yoxdur",
   "NoWalletTransactionDescription": "Çənnabagınız qaiməni istifadə etməyə başlayacaqsınız, ödəniş tarixində buraya göstəriləcəkdir.",

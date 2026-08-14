@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "Nezodpovedajúce transakcie s týmto filtrom. Skúste iný alebo odstráňte filter, aby ste zobrazili všetky transakcie.",
   "NotSupportedFormat": "Ľutujeme, ale formát tohto súboru nie je podporovaný",
   "NoUpcomingPayments": "Žiadne nadchádzajúce platby",
-  "NoUpcomingPaymentsDesc": "Na tento mesiac nie sú naplánované žiadne platby.",
   "NoUpcomingPaymentsDescription": "Zatiaľ nemáte žiadne aktívne predplatné ani naplánované opakované platby.",
   "NoWalletTransaction": "Zatiaľ žiadne transakcie.",
   "NoWalletTransactionDescription": "Keď začnete používať peňaženku, platobná história sa tu zobrazí.",

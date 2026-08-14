@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "Không có giao dịch nào phù hợp với bộ lọc này. Hãy thử một bộ lọc khác hoặc bỏ qua bộ lọc để xem tất cả các giao dịch.",
   "NotSupportedFormat": "Rất tiếc, định dạng file này không được hỗ trợ",
   "NoUpcomingPayments": "Không có khoản thanh toán sắp tới",
-  "NoUpcomingPaymentsDesc": "Không có khoản thanh toán nào được lên lịch cho tháng này.",
   "NoUpcomingPaymentsDescription": "Bạn chưa có bất kỳ gói đăng ký đang hoạt động hoặc khoản thanh toán định kỳ theo lịch nào.",
   "NoWalletTransaction": "Chưa có giao dịch nào cả.",
   "NoWalletTransactionDescription": "Khi bạn bắt đầu sử dụng ví, lịch sử thanh toán sẽ được hiển thị ở đây.",

@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "Ei löytynyt vastaavia tapahtumia tälle suodattimelle. Kokeile toista tai poista suodatin nähdäksesi kaikki tapahtumat.",
   "NotSupportedFormat": "Tätä tiedostomuotoa ei tueta",
   "NoUpcomingPayments": "Ei tulevia maksuja",
-  "NoUpcomingPaymentsDesc": "Tälle kuukaudelle ei ole ajoitettu maksuja.",
   "NoUpcomingPaymentsDescription": "Sinulla ei ole vielä aktiivisia tilauksia tai aikataulutettuja toistuvia maksuja.",
   "NoWalletTransaction": "Ei tapahtumia vielä",
   "NoWalletTransactionDescription": "Kun aloitat lompakon käyttö, maksuhistoria näkyy täällä.",

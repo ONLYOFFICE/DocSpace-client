@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "لا توجد معاملات تطابق هذا المرشح. حاول مرشحًا آخر أو قم بإزالة المرشح لعرض جميع المعاملات.",
   "NotSupportedFormat": "عذراً، هذا التنسيق غير مدعوم",
   "NoUpcomingPayments": "لا توجد مدفوعات قادمة",
-  "NoUpcomingPaymentsDesc": "لا توجد مدفوعات مجدولة لهذا الشهر.",
   "NoUpcomingPaymentsDescription": "ليس لديك أي اشتراكات نشطة أو مدفوعات متكررة مجدولة بعد.",
   "NoWalletTransaction": "لا توجد معاملات حتى الآن",
   "NoWalletTransactionDescription": "بمجرد أن تبدأ في استخدام المحفظة، سيتم عرض سجل الدفعات هنا.",

@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "Nav atbilstošu darījumu, kas atbilst šim filtru. Izmēģiniet citu vai izņemiet filtru, lai apskatītu visus darījumus.",
   "NotSupportedFormat": "Atvainojiet, bet šis faila formats nav atbalstīts",
   "NoUpcomingPayments": "Nav gaidāmu maksājumu",
-  "NoUpcomingPaymentsDesc": "Šim mēnesim nav ieplānots neviens maksājums.",
   "NoUpcomingPaymentsDescription": "Jums vēl nav aktīvu abonementu vai ieplānotu regulāru maksājumu.",
   "NoWalletTransaction": "Vēl nav darījumu",
   "NoWalletTransactionDescription": "Kad sāksiet lietot maku, maksājumu vēsture tiks atspoguļota šeit.",

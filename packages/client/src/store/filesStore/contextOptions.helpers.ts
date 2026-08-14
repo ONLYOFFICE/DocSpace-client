@@ -101,6 +101,7 @@ export const buildContextOptions = (
     isRecentFolder,
     isFavoritesFolder,
     isPrivacyFolder,
+    isFormRoomRoot,
   } = deps.treeFoldersStore;
   const { security } = deps.selectedFolderStore;
 
@@ -109,8 +110,15 @@ export const buildContextOptions = (
   // Plugins receive only an item id and fetch the content themselves, so they
   // can neither decrypt it nor be trusted with it: nothing from an encrypted
   // room may be offered to them, whether it is a file, a folder or the room.
+  const isFormRoomContent =
+    isFormRoomRoot || item.parentRoomType === FolderType.FormRoom;
+
   const arePluginsAllowed =
-    enablePlugins && !isEncrypted && !isPrivacyFolder && !item.private;
+    enablePlugins &&
+    !isEncrypted &&
+    !isPrivacyFolder &&
+    !item.private &&
+    !isFormRoomContent;
 
   const isThirdPartyFolder =
     item.providerKey && item.id === item.rootFolderId;

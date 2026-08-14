@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "Bu filtreyle eşleşen işlem bulunamadı. Başka bir filtre deneyin veya tüm işlemleri görmek için filtreyi kaldırın.",
   "NotSupportedFormat": "Üzgünüm, bu dosya biçimi desteklenmiyor",
   "NoUpcomingPayments": "Yaklaşan ödeme yok",
-  "NoUpcomingPaymentsDesc": "Bu ay için planlanmış ödeme yok.",
   "NoUpcomingPaymentsDescription": "Henüz herhangi bir etkin aboneliğiniz veya planlanmış yinelenen ödemeniz yok.",
   "NoWalletTransaction": "Henüz işlem yok",
   "NoWalletTransactionDescription": "Cüzdanı kullanmaya başladığınızda, ödeme geçmişi burada görüntülenecektir.",

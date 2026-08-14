@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "이 필터에 일치하는 거래 내역이 없습니다. 다른 필터를 사용해 보거나 필터를 제거하여 모든 거래 내역을 확인해 보세요.",
   "NotSupportedFormat": "이 파일 형식은 지원 되지 않습니다",
   "NoUpcomingPayments": "예정된 결제 없음",
-  "NoUpcomingPaymentsDesc": "이번 달에 예정된 결제가 없습니다.",
   "NoUpcomingPaymentsDescription": "아직 활성 구독이나 예약된 정기 결제가 없습니다.",
   "NoWalletTransaction": "아직 거래 내역이 없습니다.",
   "NoWalletTransactionDescription": "지갑을 사용하기 시작하면 결제 내역이 여기 표시됩니다.",

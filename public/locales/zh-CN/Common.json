@@ -1429,7 +1429,6 @@
   "NoTransactionsFilter": "没有符合此筛选条件的交易记录，请尝试其他条件或清除筛选器以查看全部记录。",
   "NotSupportedFormat": "很抱歉，系统暂不支持此文件格式",
   "NoUpcomingPayments": "无即将到来的付款",
-  "NoUpcomingPaymentsDesc": "本月没有安排任何付款。",
   "NoUpcomingPaymentsDescription": "您还没有任何有效的订阅或已安排的定期付款。",
   "NoWalletTransaction": "暂无交易记录",
   "NoWalletTransactionDescription": "开始使用钱包后，支付记录将在此处显示。",

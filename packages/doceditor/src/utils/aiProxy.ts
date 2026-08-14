@@ -83,9 +83,12 @@ const externalAIFetch = async (
       throw new Error("No AI profile resolved for the requested model");
     }
 
+    // OpenAI-compatible passthrough served by the ASC.NewAi service: it
+    // resolves the profile (base URL, key, headers) server-side and
+    // forwards the body to the provider verbatim.
     const url = e.url.replace(
       "[external]",
-      `/doceditor/api/ai/passthrough/${profileId}`,
+      `/api/2.0/ai/openai/${profileId}/v1`,
     );
 
     const options = {

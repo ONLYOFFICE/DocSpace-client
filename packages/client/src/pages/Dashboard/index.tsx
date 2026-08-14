@@ -88,6 +88,7 @@ import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
+import { setDashboardVisited } from "SRC_DIR/helpers/dashboardVisited";
 import {
   useChatNoAccess,
   mapChatNoAccessStores,
@@ -175,6 +176,16 @@ const Dashboard = (props: DashboardProps) => {
   React.useEffect(() => {
     hydrateWelcome(userId);
   }, [hydrateWelcome, userId]);
+
+  // Spends this user's one first-load Overview: from the next sign-in on, the
+  // entry redirect sends them to their Default Homepage instead. Recorded from
+  // the page rather than from the redirect so that only reaching the Overview
+  // for real counts, and only past the loader so a load abandoned on the
+  // skeleton doesn't.
+  React.useEffect(() => {
+    if (showLoader) return;
+    setDashboardVisited(userId);
+  }, [showLoader, userId]);
 
   /**
    * Whether the welcome is on screen, which two different things can ask for:

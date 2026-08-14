@@ -1433,7 +1433,6 @@
   "NoTransactionsFilter": "No transactions match this filter. Try another or remove the filter to view all transactions.",
   "NotSupportedFormat": "Sorry, this file format isn't supported",
   "NoUpcomingPayments": "No upcoming payments",
-  "NoUpcomingPaymentsDesc": "No payments are scheduled for this month.",
   "NoUpcomingPaymentsDescription": "You don’t have any active subscriptions or scheduled recurring payments yet.",
   "NoWalletTransaction": "No transactions yet",
   "NoWalletTransactionDescription": "Once you start using the wallet, the payment history will be displayed here.",

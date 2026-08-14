@@ -33,31 +33,51 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
+import { beforeEach, describe, expect, it } from "vitest";
 
-import type { AppId } from "./apps-catalog";
+import { RoomsTypePrivate } from "../enums";
 
-// Temporary kill switch for apps that cannot run on the new AI stack yet.
-// The AI Arbiter still drives the removed C# AI endpoints (chat streaming,
-// providers, models), which the Node AI service does not serve, so the
-// product is hidden everywhere until it is migrated or removed. Remove the
-// id from this set to bring the app back.
-const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>([
-  "ai-arbiter",
-]);
+import { getCreateRoomTypes } from "./rooms";
+import { isPrivateRoomsEnabled, PRIVATE_ROOMS_FLAG_KEY } from "./privateRooms";
 
-// Apps that are built but not released yet, each hidden behind its own opt-in
-// flag so testers can still reach them. Private rooms ("e2e-rooms") wait on the
-// editors side of the feature, see @docspace/shared/utils/privateRooms.
-const UNRELEASED_APPS: ReadonlyMap<AppId, () => boolean> = new Map([
-  ["e2e-rooms" as AppId, isPrivateRoomsEnabled],
-]);
+describe("private rooms feature flag", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
 
-const isAppUnreleased = (id: string): boolean => {
-  const isFeatureEnabled = UNRELEASED_APPS.get(id as AppId);
+  it("is off when the flag was never set", () => {
+    expect(isPrivateRoomsEnabled()).toBe(false);
+  });
 
-  return isFeatureEnabled ? !isFeatureEnabled() : false;
-};
+  it("is on for any non-empty flag value", () => {
+    localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
+    expect(isPrivateRoomsEnabled()).toBe(true);
 
-export const isAppTemporarilyDisabled = (id: string): boolean =>
-  TEMPORARILY_DISABLED_APPS.has(id) || isAppUnreleased(id);
+    localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "1");
+    expect(isPrivateRoomsEnabled()).toBe(true);
+  });
+
+  it("is off for an empty flag value", () => {
+    localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "");
+    expect(isPrivateRoomsEnabled()).toBe(false);
+  });
+
+  it("hides the private room type from the create-room chooser", () => {
+    expect(getCreateRoomTypes()).not.toContain(RoomsTypePrivate);
+  });
+
+  it("offers the private room type once the flag is set", () => {
+    localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
+
+    expect(getCreateRoomTypes()).toContain(RoomsTypePrivate);
+  });
+
+  it("keeps every other room type in both states", () => {
+    const hidden = getCreateRoomTypes();
+
+    localStorage.setItem(PRIVATE_ROOMS_FLAG_KEY, "true");
+    const shown = getCreateRoomTypes();
+
+    expect(shown.filter((type) => type !== RoomsTypePrivate)).toEqual(hidden);
+  });
+});

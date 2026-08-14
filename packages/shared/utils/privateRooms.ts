@@ -33,31 +33,38 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
+/**
+ * Private (end-to-end encrypted) rooms are not ready to be released: the
+ * editors half of the feature is still being built. The client code is kept
+ * intact and fully functional, but every surface that offers the feature to a
+ * user is hidden until a tester opts in from the browser console:
+ *
+ *   localStorage.setItem("privateRooms", "true");   // then reload the page
+ *   localStorage.removeItem("privateRooms");        // back to hidden
+ *
+ * Any non-empty value counts as "enabled" (presence-flag pattern), so
+ * `"true"`, `"1"` or `"on"` all work.
+ *
+ * Gated surfaces (all of them behave exactly as before once the flag is set):
+ *   - the Private room card in the create-room type chooser
+ *     (`getCreateRoomTypes` in ./rooms.tsx),
+ *   - the "e2e-rooms" app: sidebar item, `/e2e-rooms` route and the enable
+ *     flow (`SRC_DIR/helpers/disabled-apps.ts`, `AppsStore.isEnabled`),
+ *   - the Keys management tab and its `profile/keys-management` routes.
+ *
+ * The flag is read on demand, but the routing table is built once per page
+ * load, so flipping it requires a reload.
+ */
+export const PRIVATE_ROOMS_FLAG_KEY = "privateRooms";
 
-import type { AppId } from "./apps-catalog";
+export const isPrivateRoomsEnabled = (): boolean => {
+  if (typeof window === "undefined") return false;
 
-// Temporary kill switch for apps that cannot run on the new AI stack yet.
-// The AI Arbiter still drives the removed C# AI endpoints (chat streaming,
-// providers, models), which the Node AI service does not serve, so the
-// product is hidden everywhere until it is migrated or removed. Remove the
-// id from this set to bring the app back.
-const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>([
-  "ai-arbiter",
-]);
-
-// Apps that are built but not released yet, each hidden behind its own opt-in
-// flag so testers can still reach them. Private rooms ("e2e-rooms") wait on the
-// editors side of the feature, see @docspace/shared/utils/privateRooms.
-const UNRELEASED_APPS: ReadonlyMap<AppId, () => boolean> = new Map([
-  ["e2e-rooms" as AppId, isPrivateRoomsEnabled],
-]);
-
-const isAppUnreleased = (id: string): boolean => {
-  const isFeatureEnabled = UNRELEASED_APPS.get(id as AppId);
-
-  return isFeatureEnabled ? !isFeatureEnabled() : false;
+  try {
+    return Boolean(window.localStorage.getItem(PRIVATE_ROOMS_FLAG_KEY));
+  } catch {
+    // Storage can throw in a sandboxed iframe or with cookies disabled;
+    // an unreadable flag means the feature stays hidden.
+    return false;
+  }
 };
-
-export const isAppTemporarilyDisabled = (id: string): boolean =>
-  TEMPORARILY_DISABLED_APPS.has(id) || isAppUnreleased(id);

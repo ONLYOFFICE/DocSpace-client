@@ -45,7 +45,6 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const KnowledgeSettings = () => {
   const { t } = useTranslation(["Common"]);
@@ -66,9 +65,7 @@ const KnowledgeSettings = () => {
             className="set_room_params-info-description"
             noSelect
           >
-            {t("KnowledgeDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("KnowledgeDescription")}
           </Text>
         </div>
         <div className="ai-button-group">
@@ -89,9 +86,7 @@ const KnowledgeSettings = () => {
           <Button
             size={ButtonSize.small}
             icon={<ReactSVG className="ai-button-icon" src={MoveReactSvgUrl} />}
-            label={t("KnowledgeSelectIn", {
-              productName: getBrandName("ProductName"),
-            })}
+            label={t("KnowledgeSelectIn")}
             scale
             filled
             onClick={onClickAction}

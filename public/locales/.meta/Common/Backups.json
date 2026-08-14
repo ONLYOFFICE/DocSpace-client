@@ -3,7 +3,7 @@
   "content": "Backups",
   "content_en_sha1_hash": "530cc25bdc7d0ba5a4ef3d1206ec89ca3164965a",
   "created_at": "2026-06-25T11:54:45.739Z",
-  "updated_at": "2026-08-13T10:58:03.422Z",
+  "updated_at": "2026-08-12T14:02:21.398Z",
   "comment": {
     "text": "Service title used as a label for the backup category within the billing usage breakdown.",
     "is_auto": true,

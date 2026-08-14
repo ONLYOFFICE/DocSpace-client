@@ -42,7 +42,6 @@ import {
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ActivateAIDialogOwnProps = {
   visible: boolean;
@@ -101,7 +100,6 @@ const ActivateAIDialogComponent = ({
         t={t}
         i18nKey="ContactAdminToActivateAI"
         ns="Common"
-        values={{ productName: getBrandName("ProductName") }}
         components={{
           1: (
             <Text

@@ -3,7 +3,7 @@
   "content": "Create something now",
   "content_en_sha1_hash": "bf15bcc71c4316c75b5fd5894e396ad448f5cb87",
   "created_at": "2026-08-07T10:52:39.926Z",
-  "updated_at": "2026-08-13T10:58:03.026Z",
+  "updated_at": "2026-08-12T11:00:51.484Z",
   "comment": {
     "text": "Title for a step in the dashboard onboarding tour that serves as an invitation to use quick actions.",
     "is_auto": true,

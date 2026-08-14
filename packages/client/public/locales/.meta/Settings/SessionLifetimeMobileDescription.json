@@ -1,23 +1,15 @@
 {
   "key_path": "SessionLifetimeMobileDescription",
-  "content": "Session Lifetime allows to set time (in minutes) before the {{productName}} users will need to enter the space credentials again in order to access the space.",
-  "content_en_sha1_hash": "044392ac82e8db7a4c5bc674f8ca2ef7321edd16",
-  "created_at": "2025-05-19T21:30:52.644Z",
-  "updated_at": "2026-06-02T08:43:27.534Z",
+  "content": "Session Lifetime allows to set time (in minutes) before workspace users will need to enter their credentials again in order to access the workspace.",
+  "content_en_sha1_hash": "f4feec17b93a7d3f83cf8e65a90258c256a15ff9",
+  "created_at": "2026-08-14T09:26:28.744Z",
+  "updated_at": "2026-08-14T09:26:28.744Z",
   "comment": {
-    "text": "This is a subtitle for a settings item. It explains that \"Session Lifetime\" sets the duration (in minutes) after which users must re-enter credentials to access the space. `{{productName}}` will be replaced with the product's brand name.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:22:14.999Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 150,
-      "context": "url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <CategoryItem\n title={t(\"SessionLifetime\")}\n subtitle={t(\"SessionLifetimeMobileDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url=\"/portal-settings/security/access-portal/lifetime\"\n onClickLink={onClickLink}\n />",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +198,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "ChangeRoomOwner",
-  "content": "Change Room Owner",
-  "content_en_sha1_hash": "cad0e5b2fd954532208a53537047b60125201513",
-  "created_at": "2026-03-31T15:18:39.227Z",
-  "updated_at": "2026-08-06T14:20:57.659Z",
+  "content": "Change room owner",
+  "content_en_sha1_hash": "d9afe48d8cdb2ed0e46c9f0286665ebe1b7cc190",
+  "created_at": "2026-08-13T14:36:42.081Z",
+  "updated_at": "2026-08-13T14:55:15.756Z",
   "comment": {
-    "text": "This is a button label that, when clicked, allows the current room owner to transfer ownership of the room to another user.",
+    "text": "Context menu option used to initiate the process of transferring room ownership.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:10:20.888Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:55:15.756Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

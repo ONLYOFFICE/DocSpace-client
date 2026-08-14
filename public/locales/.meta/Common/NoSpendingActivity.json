@@ -3,7 +3,7 @@
   "content": "No spending activity for the selected period",
   "content_en_sha1_hash": "5d5e87b0515f62a027d7abf2f956811dddc2ed0d",
   "created_at": "2026-06-25T11:54:53.701Z",
-  "updated_at": "2026-08-13T10:58:03.397Z",
+  "updated_at": "2026-08-12T14:02:21.389Z",
   "comment": {
     "text": "Title of an empty state view in the billing usage breakdown, appearing when no records are found for the selected date range.",
     "is_auto": true,

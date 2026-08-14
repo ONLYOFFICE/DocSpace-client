@@ -3,7 +3,7 @@
   "content": "Choose room type",
   "content_en_sha1_hash": "e7c09e9e23bdd2add626c8f0f567b1148f985f6e",
   "created_at": "2025-05-19T21:30:56.784Z",
-  "updated_at": "2026-08-13T10:58:03.090Z",
+  "updated_at": "2026-08-12T11:00:51.519Z",
   "comment": {
     "text": "This is a dialog title that appears when a user is creating a new room and needs to select the type of room.",
     "is_auto": true,

@@ -79,7 +79,7 @@
   "ScopesHelp": "Əhatə dairələri tətbiqinizin bütün istifadəçi ilə əlaqəli məlumatlara çıxışını məhdudlaşdırmaq üçün istifadə olunur, bu da sizə lazım olan giriş növünü dəqiq müəyyən etməyə imkan verir.",
   "Secret": "Sirr",
   "SecretCopy": "Müştəri sirri uğurla buferə kopyalandı",
-  "SignIn": "{{productName}} ilə daxil olun",
+  "SignIn": "{{organizationName}} {{productName}} ilə daxil olun",
   "SupportAndLegalInfo": "Dəstək və Hüquqi məlumat",
   "TermsOfService": "Xidmət Şərtləri",
   "TermsOfServiceURL": "Xidmət Şərtləri URL",

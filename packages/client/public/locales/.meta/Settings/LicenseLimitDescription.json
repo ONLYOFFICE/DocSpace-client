@@ -1,23 +1,15 @@
 {
   "key_path": "LicenseLimitDescription",
-  "content": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
-  "content_en_sha1_hash": "48bb127c07477ce132bbeea9ad21b81eedf91b24",
-  "created_at": "2025-05-19T21:30:51.797Z",
-  "updated_at": "2026-05-15T15:37:40.247Z",
+  "content": "The license limit counter consists of: already existing accounts in the workspace and new users that you want to import. If you import users who already have an account in the workspace, they will not be counted again in the counter. Your {{organizationName}} {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
+  "content_en_sha1_hash": "933d0e9fccd2c52f414c5322b5811cc7d7536f11",
+  "created_at": "2026-08-13T22:44:29.666Z",
+  "updated_at": "2026-08-13T22:44:29.666Z",
   "comment": {
-    "text": "This is a tooltip that appears when hovering over an information icon next to the \"License Limit\" field. It explains how the license limit is calculated, including existing and imported users, and states the maximum allowed users. `{{productName}}` is the product name (e.g., ONLYOFFICE DocSpace), and `{{maxLimit}}` is the maximum number of users allowed by the license.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:23:31.746Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
-      "line_number": 76,
-      "context": "dataTestId=\"license_limit_help_button\"\n place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"LicenseLimitDescription\", {\n productName: getBrandName(\"ProductName\"),\n maxLimit: limitAdmins,\n })}\n </Text>\n }",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +198,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,29 +1,15 @@
 {
   "key_path": "EmbeddingBarDescription",
-  "content": "Embedding will only work for the URLs specified by the {{productName}} admin in the JavaScript SDK settings.",
-  "content_en_sha1_hash": "20daf7700e4107dbbb22b33a47d01501c6b64d05",
-  "created_at": "2026-06-09T09:42:41.893Z",
-  "updated_at": "2026-06-09T10:16:24.658Z",
+  "content": "Embedding will only work for the URLs specified by the Full admin in the JavaScript SDK settings.",
+  "content_en_sha1_hash": "eb8fb5a1597a1fb347917ea3fab2d4c990184539",
+  "created_at": "2026-08-13T22:44:01.926Z",
+  "updated_at": "2026-08-13T22:44:01.926Z",
   "comment": {
-    "text": "Informational text in the Embedding Panel explaining that embedding is restricted to URLs configured by the administrator. The {{productName}} variable represents the product's brand name.",
-    "is_auto": true,
-    "updated_at": "2026-06-09T10:16:24.658Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 443,
-      "context": "}}\n >\n {`\"Add the website URL for embedding to the <1>allow list</1>.\"`}\n </Trans>\n ) : (\n t(\"Common:EmbeddingBarDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n )}\n </Text>\n <IconButton",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/EmbeddingPanel/index.tsx",
-      "line_number": 405,
-      "context": "}}\n >\n {`\"Add the website URL for embedding to the <1>allow list</1>.\"`}\n </Trans>\n ) : (\n t(\"Common:EmbeddingBarDescription\", {\n productName: getBrandName(\"ProductName\"),\n })\n )}\n </Text>\n <IconButton",
-      "module": "/packages/sdk"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

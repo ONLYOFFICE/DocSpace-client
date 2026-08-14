@@ -3,7 +3,7 @@
   "content": "Learn how it is counted",
   "content_en_sha1_hash": "a89a5c65b6b953fa6ae8051a31d64dea72c7a0e7",
   "created_at": "2025-09-19T15:39:09.524Z",
-  "updated_at": "2026-08-13T10:58:03.332Z",
+  "updated_at": "2026-08-12T11:00:51.626Z",
   "comment": {
     "text": "This is a link label within a dialog. It appears next to user statistics and, when clicked, directs the user to a FAQ page explaining how those statistics are calculated.",
     "is_auto": true,

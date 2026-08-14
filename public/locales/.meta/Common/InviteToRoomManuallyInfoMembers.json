@@ -1,14 +1,14 @@
 {
   "key_path": "InviteToRoomManuallyInfoMembers",
-  "content": "Add existing {{productName}} members to the room.",
-  "content_en_sha1_hash": "816770fbd8f562c5be684447272d1393838bad6e",
-  "created_at": "2025-05-26T07:15:53.261Z",
-  "updated_at": "2026-07-07T08:59:21.769Z",
+  "content": "Add existing workspace members to the room.",
+  "content_en_sha1_hash": "6dcd5a98b79c02b8aa616061f927f4143534439b",
+  "created_at": "2026-08-12T11:00:25.241Z",
+  "updated_at": "2026-08-12T11:15:43.843Z",
   "comment": {
-    "text": "This is an informational message displayed in the invite panel. It explains that existing {{productName}} members can be added to the current room.",
+    "text": "Instructional description text in the Invite Panel that appears when guest invitations are disabled, explaining that users can add existing workspace members to a room.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:14:06.566Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:15:43.843Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -32,7 +32,10 @@
       "approved_at": null
     },
     "ru": {
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
     }
   }
 }

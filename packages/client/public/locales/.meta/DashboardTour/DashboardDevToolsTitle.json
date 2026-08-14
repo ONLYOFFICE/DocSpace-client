@@ -2,12 +2,12 @@
   "key_path": "DashboardDevToolsTitle",
   "content": "For developers",
   "content_en_sha1_hash": "f18d0d18586127e1f56da0a611a7144770659f55",
-  "created_at": "2026-08-13T10:58:00.147Z",
-  "updated_at": "2026-08-13T10:59:38.643Z",
+  "created_at": "2026-08-12T11:00:49.067Z",
+  "updated_at": "2026-08-12T11:32:37.878Z",
   "comment": {
-    "text": "Title for a step in the interactive dashboard tour that introduces developer-oriented features and API access.",
+    "text": "Title of an onboarding tour step that introduces the developer tools section.",
     "is_auto": true,
-    "updated_at": "2026-08-13T10:59:38.643Z",
+    "updated_at": "2026-08-12T11:32:37.878Z",
     "model": "gemma4:26b"
   },
   "usage": [

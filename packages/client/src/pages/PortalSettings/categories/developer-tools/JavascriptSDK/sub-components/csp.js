@@ -45,7 +45,6 @@ import { AddButton } from "@docspace/ui-kit/components/add-button";
 import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
 import { InfoBar } from "@docspace/shared/components/info-bar";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "./csp.module.scss";
 
@@ -139,11 +138,10 @@ const CSP = ({
   return (
     <>
       <div className={styles.categoryHeader}>
-        {t("CSPHeader", { productName: getBrandName("ProductName") })}
+        {t("CSPHeader")}
       </div>
       <div className={classNames(styles.container, styles.descriptionHolder)}>
         {t("CSPDescription", {
-          productName: getBrandName("ProductName"),
           organizationName: logoText,
         })}
         <HelpButton
@@ -158,9 +156,7 @@ const CSP = ({
           title={t("CSPInfoBarHeader")}
           description={
             <>
-              {t("CSPInfoBarDescription", {
-                productName: getBrandName("ProductName"),
-              })}{" "}
+              {t("CSPInfoBarDescription")}{" "}
               {installationGuidesUrl ? (
                 <Link
                   color={currentColorScheme?.main?.accent}
@@ -197,7 +193,7 @@ const CSP = ({
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
-        {error || t("CSPUrlHelp", { productName: getBrandName("ProductName") })}
+        {error || t("CSPUrlHelp")}
       </Text>
       <div className={styles.chipsContainer}>{getChips(cspDomains)}</div>
     </>

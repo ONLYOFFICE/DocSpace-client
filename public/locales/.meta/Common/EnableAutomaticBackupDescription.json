@@ -1,14 +1,14 @@
 {
   "key_path": "EnableAutomaticBackupDescription",
-  "content": "Use this option to back up the space data.",
-  "content_en_sha1_hash": "5de5a960f26ee047ca6bba10e1c75d82b9e47c85",
-  "created_at": "2025-05-26T07:15:43.062Z",
-  "updated_at": "2026-08-13T10:58:03.355Z",
+  "content": "Use this option to back up the workspace data.",
+  "content_en_sha1_hash": "641cb7f57f45a66515782b00e24199a0aaa02e4f",
+  "created_at": "2026-08-12T11:00:19.813Z",
+  "updated_at": "2026-08-12T11:19:42.933Z",
   "comment": {
-    "text": "This is a descriptive text displayed below a toggle button. It explains the purpose of enabling automatic backups for the space data.",
+    "text": "Description text for a toggle switch used to enable or disable automatic workspace data backups.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:53:40.631Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:19:42.933Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

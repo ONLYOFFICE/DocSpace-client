@@ -42,7 +42,6 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { useStores } from "SRC_DIR/store/useStore";
 
@@ -83,7 +82,6 @@ const ReducedRightsDialog: React.FC = () => {
           i18nKey="YourUserTypeHasChanged"
           values={{
             userType: t("Common:Guest"),
-            productName: getBrandName("ProductName"),
             adminName,
           }}
           components={{ 1: <span style={{ fontWeight: 600 }} /> }}
@@ -98,9 +96,7 @@ const ReducedRightsDialog: React.FC = () => {
           />
         </Text>
         <Text style={{ marginTop: "16px" }}>
-          {t("Common:ForQuestionsContactPortalAdmin", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Common:ForQuestionsContactPortalAdmin")}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

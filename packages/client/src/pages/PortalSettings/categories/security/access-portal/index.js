@@ -56,7 +56,6 @@ import { DevToolsAccessSection } from "./devToolsAccess";
 import { AccessControlSection } from "./accessControl";
 
 import MobileView from "./mobileView";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const HEADER_HEIGHT_DESKTOP = 69;
 const HEADER_HEIGHT_TABLET = 61;
@@ -97,7 +96,7 @@ const AccessPortal = (props) => {
 
   useEffect(() => {
     setDocumentTitle(
-      t("PortalAccess", { productName: getBrandName("ProductName") }),
+      t("PortalAccess"),
     );
 
     return () => {
@@ -189,9 +188,7 @@ const AccessPortal = (props) => {
 
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("TwoFactorAuthEnableDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />
@@ -248,7 +245,6 @@ const AccessPortal = (props) => {
           <Trans
             t={t}
             i18nKey="DeveloperToolsAccessDescription"
-            values={{ productName: getBrandName("ProductName") }}
             components={{ strong: <strong /> }}
           />
         </Text>
@@ -273,9 +269,7 @@ const AccessPortal = (props) => {
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("InvitationSettingsDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("InvitationSettingsDescription")}
         </Text>
 
         {invitationSettingsUrl ? (
@@ -335,9 +329,7 @@ const AccessPortal = (props) => {
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("AdminsMessageSettingDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("AdminsMessageSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="SaveToApply" />

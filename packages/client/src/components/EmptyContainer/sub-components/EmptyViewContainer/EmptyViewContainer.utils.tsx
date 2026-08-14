@@ -167,9 +167,7 @@ export const getFolderDescription = (
       () => t("EmptyView:FormFolderDefaultUserDescription"),
     )
     .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
-      t("EmptyView:FormFolderDefaultDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      t("EmptyView:FormFolderDefaultDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
       t("Common:DefaultFolderDescription"),
@@ -231,7 +229,6 @@ const getAIAgentsAIDisabledDescription = (
   return match([standalone, isPortalAdmin])
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
-        productName: getBrandName("ProductName"),
         aiChats: t("Common:AIChats"),
       }),
     )
@@ -247,14 +244,11 @@ const getAIAgentsAIDisabledDescription = (
     ))
     .with([true, false], () =>
       t("Common:EmptyAIAgentsAIDisabledDescription", {
-        productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>
-      t("Common:EmptyAIDisabledContactAdminDesc", {
-        productName: getBrandName("ProductName"),
-      }),
+      t("Common:EmptyAIDisabledContactAdminDesc"),
     );
 };
 
@@ -312,18 +306,14 @@ export const getRootDescription = (
       t("Common:DefaultFolderDescription"),
     )
     .with([FolderType.SHARE, P._], () =>
-      t("Common:EmptyShareDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      t("Common:EmptyShareDescription"),
     )
     .with([FolderType.Recent, P._], () => t("Common:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
       t("Common:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
-      t("Common:ArchiveEmptyScreen", {
-        productName: getBrandName("ProductName"),
-      }),
+      t("Common:ArchiveEmptyScreen"),
     )
     .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>
       t("Files:ArchiveEmptyScreenUser"),
@@ -431,6 +421,7 @@ export const getRootTitle = (
       ],
       () =>
         t("Common:EmptyRootRoomHeader", {
+          organizationName: getBrandName("OrganizationName"),
           productName: getBrandName("ProductName"),
         }),
     )
@@ -442,6 +433,7 @@ export const getRootTitle = (
     )
     .with([FolderType.Forms, P._], () =>
       t("Common:EmptyRootRoomHeader", {
+        organizationName: getBrandName("OrganizationName"),
         productName: getBrandName("ProductName"),
       }),
     )

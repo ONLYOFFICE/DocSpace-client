@@ -1,14 +1,14 @@
 {
   "key_path": "AdminsMessageSettingDescription",
-  "content": "Enable this option to display the {{productName}} administrator contact form on the Sign In page.",
-  "content_en_sha1_hash": "bee5beb31b7719c68dc869268d15a4b372f86cdb",
-  "created_at": "2025-05-19T21:30:50.404Z",
-  "updated_at": "2026-06-02T08:43:27.530Z",
+  "content": "Enable this option to display the Full admin contact form on the Sign In page.",
+  "content_en_sha1_hash": "369409ec247c68bcc531f2071a01ccad0c3d7342",
+  "created_at": "2026-08-13T14:37:15.346Z",
+  "updated_at": "2026-08-13T15:19:57.061Z",
   "comment": {
-    "text": "This is a description for a checkbox setting. It explains that enabling the option will display a contact form for the {{productName}} administrator on the Sign In page.",
+    "text": "Description text for a security setting in the Portal Settings, explaining that enabling this option displays an admin contact form on the Sign In page.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:54.021Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:19:57.061Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,23 +1,15 @@
 {
   "key_path": "KeyLifetimeDescription",
-  "content": "Set lifetime to automatically deactivate  the secret key after a defined period. Lifetime begins of creation of the key.",
-  "content_en_sha1_hash": "752153e2665fc818eb2ae85c84c0ad47c2f8b75f",
-  "created_at": "2025-05-19T21:30:51.759Z",
-  "updated_at": "2026-05-28T15:46:18.596Z",
+  "content": "Set lifetime to automatically deactivate the secret key after a defined period. Lifetime begins of creation of the key.",
+  "content_en_sha1_hash": "30540e92c7e9ae07514e0e88f516b67371f7b3f0",
+  "created_at": "2026-08-13T23:19:47.178Z",
+  "updated_at": "2026-08-13T23:19:47.178Z",
   "comment": {
-    "text": "This is a descriptive text in a dialog for creating an API key. It explains that the key's lifetime can be set to automatically deactivate it after a specified period, starting from its creation.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:23:36.056Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 430,
-      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className=\"api-key_lifetime-description\"\n >\n {t(\"Settings:KeyLifetimeDescription\")}\n </Text>\n {lifetimeIsChecked ? (\n <div className=\"api-key_lifetime-input-block\">\n <TextInput\n className=\"api-key_lifetime-input\"",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +198,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

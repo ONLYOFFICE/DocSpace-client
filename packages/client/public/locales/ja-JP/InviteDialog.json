@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "招待の言語",
-  "InviteMembersManuallyDescription": "新しいメンバーを個人的に招待するには、{{productName}} からメールを送信してください",
+  "InviteMembersManuallyDescription": "新しいメンバーを個人的に招待するには、ワークスペース からメールを送信してください",
   "InviteMembersSearchPlaceholder": "メンバーをメールで招待する",
-  "InviteViaLinkDescriptionAccounts": "{{productName}}で自己認証のためのユニバーサルリンクを作成する"
+  "InviteViaLinkDescriptionAccounts": "ワークスペースで自己認証のためのユニバーサルリンクを作成する"
 }

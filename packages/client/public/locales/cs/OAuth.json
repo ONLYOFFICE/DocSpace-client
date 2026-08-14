@@ -79,7 +79,7 @@
   "ScopesHelp": "Rozsahy slouží k omezení přístupu aplikace ke všem datům souvisejícím s uživatelem a umožňují přesně určit, jaký druh přístupu potřebujete.",
   "Secret": "Tajné",
   "SecretCopy": "Tajemství klienta úspěšně zkopírováno do schránky",
-  "SignIn": "Přihlaste se pomocí {{productName}}",
+  "SignIn": "Přihlaste se pomocí {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Podpora a právní informace",
   "TermsOfService": "Podmínky služby",
   "TermsOfServiceURL": "URL adresa Podmínek služby",

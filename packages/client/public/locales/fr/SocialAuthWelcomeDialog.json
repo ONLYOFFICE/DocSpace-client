@@ -1,11 +1,11 @@
 {
   "ChangeData": "Modifier les données et le mot de passe",
   "ClickButtonBelow": "Si vous souhaitez vous connecter à l'aide de votre e-mail, veuillez définir votre propre mot de passe. <br/> Une fois prêt, veuillez cliquer sur le bouton ci-dessous.",
-  "ContinueToProduct": "Continuer vers {{productName}}",
+  "ContinueToProduct": "Continuer vers l'espace de travail",
   "GeneratedPassword": "Mot de passe généré",
-  "ProductNameDetail": "Nom de {{productName}}",
+  "ProductNameDetail": "Nom de l'espace de travail",
   "ReviewAccountDetails": "Veuillez prendre quelques instants pour consulter les détails de votre compte :",
   "SetEmailPassword": "Définir le mot de passe",
-  "WelcomeSubtitle": "Votre espace a été créé avec succès. Vérifiez les détails de votre profil et commencez à travailler.",
+  "WelcomeSubtitle": "Votre espace de travail a été créé avec succès. Vérifiez les détails de votre profil et commencez à travailler.",
   "YourProfileDetails": "Les détails de votre profil"
 }

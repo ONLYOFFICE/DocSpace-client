@@ -1,23 +1,15 @@
 {
   "key_path": "TurnOffDiskSpaceLimit",
-  "content": "Turn off disk space limit for this {{productName}}.",
-  "content_en_sha1_hash": "00f04ca4180774b7c9a26c6f91babcdac9551e23",
-  "created_at": "2025-05-19T21:30:49.361Z",
-  "updated_at": "2026-05-15T14:00:06.944Z",
+  "content": "Turn off disk space limit for this workspace.",
+  "content_en_sha1_hash": "7215d070bb8ea2c0a0522c6881a0e3f9954b9071",
+  "created_at": "2026-08-13T22:44:25.448Z",
+  "updated_at": "2026-08-13T22:44:25.448Z",
   "comment": {
-    "text": "This is a sentence displayed in a modal dialog. It informs the user that the disk space limit will be removed for the specified product. `{{productName}}` will be replaced with the name of the ONLYOFFICE product (e.g., \"DocSpace\").",
-    "is_auto": true,
-    "updated_at": "2026-04-11T20:40:21.284Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 152,
-      "context": ": t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.description}>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: getBrandName(\"ProductName\"),\n })}",
-      "module": "/packages/shared"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -52,15 +44,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"n\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T14:06:25.256Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -157,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -172,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -208,12 +198,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,14 +1,14 @@
 {
   "key_path": "LdapMobileSettingsDescription",
-  "content": "Use this option to provide on-brand experience to your users. These settings will be effective for all of your portals.",
-  "content_en_sha1_hash": "5bb80585de3f60ce03d372fe3a4ac6a008e50003",
-  "created_at": "2025-05-19T21:30:54.241Z",
-  "updated_at": "2026-05-15T15:37:40.276Z",
+  "content": "Use this option to provide on-brand experience to your users. These settings will be effective for all of your workspaces.",
+  "content_en_sha1_hash": "4a209bd6a2f67c212ffea925fb954a1c9d7328da",
+  "created_at": "2026-08-12T11:00:47.220Z",
+  "updated_at": "2026-08-12T11:55:17.863Z",
   "comment": {
-    "text": "This is a subtitle for a settings category. It explains that the LDAP mobile settings will apply to all portals and help maintain brand consistency.",
+    "text": "Subtitle for a category item in the LDAP integration settings, explaining that these mobile configuration changes apply globally to all workspaces.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:59.071Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:55:17.863Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

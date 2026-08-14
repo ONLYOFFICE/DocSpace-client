@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Dit is het formulier zelf — precies wat iedereen die uw link volgt te zien krijgt. Upload een PDF-formulier dat u al hebt, of bouw er een uit de sjabloongalerij zonder de ruimte te verlaten.",
+  "FormsBlank": "Dit is het formulier zelf — precies wat iedereen die uw link volgt te zien krijgt. Upload een PDF-formulier dat u al hebt, of bouw er een uit de sjabloongalerij zonder de werkruimte te verlaten.",
   "FormsBlankTitle": "Het formulier dat iedereen opent",
   "FormsComplete": "Een ingediende kopie belandt in {{complete}} en blijft daar staan, één per persoon. Zet het verzamelen van resultaten aan en elk antwoord wordt bovendien een rij in een spreadsheet — één kolom per veld, klaar om te sorteren of in een grafiek te zetten.",
   "FormsCompleteTitle": "Antwoorden verzameld",
@@ -15,7 +15,7 @@
   "FormsItem": "Elke rij is een hele verzameling. Open er een om erin te werken, pin de lopende verzamelingen vast of gebruik de drie puntjes om mensen uit te nodigen, de link te kopiëren waarmee het formulier opent en de configuratie als sjabloon op te slaan.",
   "FormsItemTitle": "Werken met een formulierruimte",
   "FormsPlacesRecent": "{{recent}} en {{favorites}} houden de verzamelingen die u draaiende hebt binnen handbereik.",
-  "FormsPlacesTemplates": "{{templates}} — de ruimtesjablonen die u hebt opgeslagen.",
+  "FormsPlacesTemplates": "{{templates}} — de formulierruimtesjablonen die u hebt opgeslagen.",
   "FormsPlacesTitle": "Alles op zijn plek",
   "FormsPlacesTrash": "{{trash}} — verwijderde ruimtes, herstelbaar totdat u hem leegmaakt.",
   "FormsSpace": "Een formulierruimte is één verzameling van begin tot eind: het lege PDF-formulier, de mensen die het invullen en elk antwoord dat terugkomt. Laten we er een maken en naar binnen kijken.",

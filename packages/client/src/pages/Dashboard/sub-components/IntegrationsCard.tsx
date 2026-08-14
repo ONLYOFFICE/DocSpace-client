@@ -64,7 +64,6 @@ import { useTranslation } from "react-i18next";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 
@@ -109,9 +108,7 @@ const IntegrationsCardComponent = ({
     <div data-tour-id="dashboard-integrations">
       <CollapsibleCard
         title={t("Common:AlreadyUsingAnotherPlatform")}
-        description={t("Common:IntegrationsDescription", {
-          productName: getBrandName("ProductName"),
-        })}
+        description={t("Common:IntegrationsDescription")}
         defaultOpen
       >
         <div className={styles.integrationsGrid}>

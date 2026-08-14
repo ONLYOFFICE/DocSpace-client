@@ -3,7 +3,7 @@
   "content": "Create your first document right here — pick a type and start writing. It will be saved to {{files}}, where you can find it any time.",
   "content_en_sha1_hash": "ac13e752bef1ee1766e02efa2fccf42f293f44b6",
   "created_at": "2026-08-07T10:52:39.926Z",
-  "updated_at": "2026-08-13T10:58:03.026Z",
+  "updated_at": "2026-08-12T11:00:51.484Z",
   "comment": {
     "text": "Description text for an onboarding tour step guiding users to create their first document; includes a variable {{files}} representing the name of the files section.",
     "is_auto": true,

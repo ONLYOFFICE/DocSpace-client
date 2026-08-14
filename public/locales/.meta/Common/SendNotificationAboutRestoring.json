@@ -1,14 +1,14 @@
 {
   "key_path": "SendNotificationAboutRestoring",
-  "content": "Send notification about space restoring to users",
-  "content_en_sha1_hash": "e040fbeb56224222df87a697364fe2553d230591",
-  "created_at": "2025-05-26T07:15:47.743Z",
-  "updated_at": "2026-05-15T14:00:06.962Z",
+  "content": "Send notification about workspace restoring to users",
+  "content_en_sha1_hash": "ec9920327c5bd8c26a4cc8112eb660d647f15711",
+  "created_at": "2026-08-12T11:00:38.041Z",
+  "updated_at": "2026-08-12T11:03:30.591Z",
   "comment": {
-    "text": "This is a checkbox label. It allows the user to choose whether to send a notification to users when a space is restored from backup.",
+    "text": "Checkbox label in the backup restoration settings that determines whether users are notified when a workspace is being restored.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:43:21.303Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:03:30.591Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "You are about to delete the <strong>files ({{filesCount}})</strong> and <strong>folders ({{foldersCount}})</strong> to {{trashSection}}.",
   "content_en_sha1_hash": "6496df97776fa717ef3f6fb72ac93baf000fe1df",
   "created_at": "2025-10-01T15:20:12.148Z",
-  "updated_at": "2026-08-13T10:58:03.100Z",
+  "updated_at": "2026-08-12T11:00:51.525Z",
   "comment": {
     "text": "This is a confirmation message within a dialog box, informing the user about to delete multiple files and folders. It appears before the deletion action is finalized, with `{{filesCount}}` and `{{foldersCount}}` representing the number of files and folders respectively, and `{{trashSection}}` indicating the destination (e.g., \"to the trash\" or \"permanently\").",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "This item will be moved to Trash.",
   "content_en_sha1_hash": "744540358335d035766a06b08199a0b6f13d73bb",
   "created_at": "2026-04-03T21:51:30.645Z",
-  "updated_at": "2026-08-13T10:58:03.382Z",
+  "updated_at": "2026-08-12T11:00:51.645Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a single item is being moved to the trash.",
     "is_auto": true,

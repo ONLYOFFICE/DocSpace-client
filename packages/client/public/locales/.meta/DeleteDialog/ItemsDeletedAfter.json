@@ -3,7 +3,7 @@
   "content": "These items will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "79eaa6da991ca2c64d6a11c2cfc134b4342a0af3",
   "created_at": "2025-09-24T13:10:15.419Z",
-  "updated_at": "2026-08-13T10:58:03.100Z",
+  "updated_at": "2026-08-12T11:00:51.525Z",
   "comment": {
     "text": "This is a sentence fragment in a confirmation dialog that appears when a user deletes items. It informs the user that the deleted items will be permanently removed after 30 days.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "{{unit}}: {{count}}",
   "content_en_sha1_hash": "df646ff517dcc5bff3e00f6c38ae47a5148c11e6",
   "created_at": "2026-04-10T13:53:43.768Z",
-  "updated_at": "2026-08-13T10:58:03.423Z",
+  "updated_at": "2026-08-12T14:02:21.399Z",
   "comment": {
     "text": "This is a short label displaying a quantity and its unit. It appears in billing contexts, where `{{unit}}` is the service unit (e.g., \"GB\", \"users\") and `{{count}}` is the numerical quantity.",
     "is_auto": true,

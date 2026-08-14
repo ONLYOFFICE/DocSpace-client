@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletTopUpCallbackStepDone",
+  "content": "Wallet topped up by {{price}}",
+  "content_en_sha1_hash": "b482ea3bba653fc032eb73764eba15a2a1b0331a",
+  "created_at": "2026-08-13T14:37:13.802Z",
+  "updated_at": "2026-08-13T14:37:45.113Z",
+  "comment": {
+    "text": "Status label in a processing card indicating the successful completion of a top-up step, where {{price}} represents the amount added to the wallet.",
+    "is_auto": true,
+    "updated_at": "2026-08-13T14:37:45.113Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
+      "line_number": 100,
+      "context": "}[] = [\n { key: \"card\", label: t(\"WalletTopUpStepCardSaved\") },\n {\n key: \"topup\",\n label: t(\"WalletTopUpCallbackStep\", { price: topUpPrice }),\n doneLabel: t(\"WalletTopUpCallbackStepDone\", { price: topUpPrice }),\n },\n ...(tariffStep\n ? [{ key: \"tariff\", label: tariffStep }]\n : activateStepLabel\n ? [{ key: \"service\", label: activateStepLabel }]",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

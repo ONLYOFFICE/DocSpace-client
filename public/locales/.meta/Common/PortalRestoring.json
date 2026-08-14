@@ -1,14 +1,14 @@
 {
   "key_path": "PortalRestoring",
-  "content": "{{productName}} restoring",
-  "content_en_sha1_hash": "1a4df26daa825b316038b98a7979d755b829dc9b",
-  "created_at": "2025-05-19T21:30:53.435Z",
-  "updated_at": "2026-05-15T14:00:06.692Z",
+  "content": "Workspace restoring",
+  "content_en_sha1_hash": "54a6cb565e268447cadc16eecf0cff65a05cd91e",
+  "created_at": "2026-08-13T14:37:01.955Z",
+  "updated_at": "2026-08-13T14:44:59.174Z",
   "comment": {
-    "text": "This is the title of a modal dialog box that appears when the DocSpace portal is being restored. `{{productName}}` will be replaced with the product's brand name (e.g., \"ONLYOFFICE DocSpace\").",
+    "text": "Dialog title displayed during the workspace restoration process, including the {{productName}} variable.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:46:12.885Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:44:59.174Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

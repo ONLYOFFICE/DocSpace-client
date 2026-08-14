@@ -3,7 +3,7 @@
   "content": "The folders will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "e6e4ec19e0831226e7fbffb291747e44d34075ec",
   "created_at": "2025-09-24T13:10:15.417Z",
-  "updated_at": "2026-08-13T10:58:03.100Z",
+  "updated_at": "2026-08-12T11:00:51.526Z",
   "comment": {
     "text": "This text is part of a confirmation message in a dialog box, informing the user that deleted folders will be permanently removed after 30 days. It appears after the user confirms moving items to the trash.",
     "is_auto": true,

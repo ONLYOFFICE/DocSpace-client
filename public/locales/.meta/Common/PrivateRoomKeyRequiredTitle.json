@@ -3,7 +3,7 @@
   "content": "Encryption key required",
   "content_en_sha1_hash": "89a0141e9456e10c132c27f231a4a2ca03cefc47",
   "created_at": "2026-06-09T09:42:54.544Z",
-  "updated_at": "2026-08-13T10:58:03.090Z",
+  "updated_at": "2026-08-12T11:00:51.519Z",
   "comment": {
     "text": "Dialog title in a confirmation modal that appears when an encryption key must be provided or generated for a private room.",
     "is_auto": true,

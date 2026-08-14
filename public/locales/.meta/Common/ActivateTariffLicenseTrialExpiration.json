@@ -3,7 +3,7 @@
   "content": "Your trial expires on {{date}}.",
   "content_en_sha1_hash": "f29657c8fa2cf900e87405ad4828a95439d18d99",
   "created_at": "2025-05-26T07:15:40.148Z",
-  "updated_at": "2026-08-13T10:58:03.351Z",
+  "updated_at": "2026-08-12T11:00:51.632Z",
   "comment": {
     "text": "This is a message displayed in the tariff title container, informing the user about the expiration date of their trial period. The `{{date}}` variable will be replaced with the specific expiration date.",
     "is_auto": true,

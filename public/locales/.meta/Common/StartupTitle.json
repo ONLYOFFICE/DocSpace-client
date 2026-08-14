@@ -3,7 +3,7 @@
   "content": "You are using free {{planName}} plan",
   "content_en_sha1_hash": "afd91c8f7e34a3940572441cec8d07d4eee8863c",
   "created_at": "2026-04-10T13:53:43.322Z",
-  "updated_at": "2026-07-03T11:08:02.938Z",
+  "updated_at": "2026-08-13T14:37:21.806Z",
   "comment": {
     "text": "This is a text string displayed on the billing page, indicating the user's current free plan. The `{{planName}}` variable will be replaced with the specific name of the free plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 175,
+      "line_number": 174,
       "context": "const currentPlanTitle = () => {\n if (isFreeTariff) {\n return (\n <Text fontSize=\"16px\" isBold>\n <CommonTrans\n i18nKey=\"StartupTitle\"\n values={{ planName: currentTariffPlanTitle }}\n />\n </Text>\n );\n }",
       "module": "/libs/ui-kit"
     }

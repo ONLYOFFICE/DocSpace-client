@@ -3,7 +3,7 @@
   "content": "view-only",
   "content_en_sha1_hash": "f3ffae92799fc633c5ed01ec695997009a2a4938",
   "created_at": "2025-05-19T21:30:49.530Z",
-  "updated_at": "2026-08-13T10:58:03.286Z",
+  "updated_at": "2026-08-12T11:00:51.608Z",
   "comment": {
     "text": "This string describes a user's access level to a document, indicating they can only view it. It appears as a short label within a list of access options.",
     "is_auto": true,

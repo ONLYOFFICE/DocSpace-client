@@ -79,7 +79,7 @@
   "ScopesHelp": "Bereiche werden verwendet, um den Zugriff Ihrer App auf alle benutzerbezogenen Daten zu begrenzen, und ermöglichen es Ihnen, genau festzulegen, welche Art von Zugriff Sie benötigen.",
   "Secret": "Secret",
   "SecretCopy": "Client-Secret erfolgreich in die Zwischenablage kopiert",
-  "SignIn": "Anmelden mit {{productName}}",
+  "SignIn": "Anmelden mit {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Support- & Rechtsinformationen",
   "TermsOfService": "Nutzungsbedingungen",
   "TermsOfServiceURL": "URL der Nutzungsbedingungen",

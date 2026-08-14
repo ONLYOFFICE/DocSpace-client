@@ -1,23 +1,15 @@
 {
   "key_path": "PreparationPortalDescription",
-  "content": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
-  "content_en_sha1_hash": "60714cd70ca7d13efc48745ab7823e95ca812d51",
-  "created_at": "2025-05-19T21:30:53.442Z",
-  "updated_at": "2026-05-15T14:00:06.959Z",
+  "content": "Once the restoring process is over, you'll be automatically redirected to the workspace.",
+  "content_en_sha1_hash": "a163a67641584941437540f0667cc20b0399291c",
+  "created_at": "2026-08-13T22:44:15.846Z",
+  "updated_at": "2026-08-13T22:44:15.846Z",
   "comment": {
-    "text": "This is a progress message displayed while a restoring process is underway. It informs the user that they will be redirected to their product once the process is complete. `{{productName}}` will be replaced with the brand name of the product (e.g., ONLYOFFICE DocSpace).",
-    "is_auto": true,
-    "updated_at": "2026-04-11T20:46:08.756Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 163,
-      "context": "const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress\n text={t(\"Common:PreparationPortalDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n percent={percent}\n />\n );",
-      "module": "/packages/shared"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +198,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -42,7 +42,6 @@ import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
 import { IAdditionalResources } from "./AdditionalResources.types";
 import styles from "./AdditionalResources.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const AdditionalResources = ({
 	isSettingPaid,
@@ -98,9 +97,7 @@ export const AdditionalResources = ({
 				</div>
 			</div>
 			<div className={styles.additionalDescription}>
-				{t("Common:AdditionalResourcesDescription", {
-					productName: getBrandName("ProductName"),
-				})}
+				{t("Common:AdditionalResourcesDescription")}
 			</div>
 			<div className={classNames(styles.brandingCheckbox)}>
 				<Checkbox

@@ -1,14 +1,14 @@
 {
   "key_path": "BruteForceProtectionDescriptionMobile",
-  "content": "To protect the portal against brute-force attacks, you can set up the limits of unsuccessful login attempts by the user.",
-  "content_en_sha1_hash": "df581d5d7ed874eec5e55be026d206a447996258",
-  "created_at": "2025-05-19T21:30:50.835Z",
-  "updated_at": "2026-06-02T08:43:27.534Z",
+  "content": "To protect the workspace against brute-force attacks, you can set up the limits of unsuccessful login attempts by the user.",
+  "content_en_sha1_hash": "8f18329b8f61edb21f5f9289b8071011f87b4222",
+  "created_at": "2026-08-12T11:00:45.515Z",
+  "updated_at": "2026-08-12T13:33:36.485Z",
   "comment": {
-    "text": "This is a subtitle for a settings category item. It describes the purpose of the \"Brute-Force Protection\" setting, explaining that it allows users to configure limits for failed login attempts to enhance portal security.",
+    "text": "Subtitle for a security category item in the mobile settings menu, explaining the purpose of configuring login attempt limits.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:25.102Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:33:36.485Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -43,7 +43,6 @@ import {
   AccountsTableProps,
   InjectedTypeSelectTableProps,
 } from "../../../types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const checkedAccountType = "result";
 
@@ -89,9 +88,7 @@ const AccountsTable = (props: AccountsTableProps) => {
   if (isOwner) {
     typeOptions.unshift({
       key: UserTypes.PortalAdmin,
-      label: t("Common:PortalAdmin", {
-        productName: getBrandName("ProductName"),
-      }),
+      label: t("Common:PortalAdmin"),
       onClick: setTypePortalAdmin,
     });
   }

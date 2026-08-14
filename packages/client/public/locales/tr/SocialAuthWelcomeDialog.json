@@ -1,11 +1,11 @@
 {
   "ChangeData": "Verileri ve parolayı değiştir",
   "ClickButtonBelow": "E-postanızı kullanarak giriş yapmak istiyorsanız, lütfen kendi şifrenizi belirleyin. <br/> Hazır olduğunuzda lütfen aşağıdaki düğmeye tıklayın.",
-  "ContinueToProduct": "{{productName}} ile devam edin",
+  "ContinueToProduct": "Çalışma alanına devam edin",
   "GeneratedPassword": "Oluşturulan şifre",
-  "ProductNameDetail": "{{productName}} adı",
+  "ProductNameDetail": "Çalışma alanı adı",
   "ReviewAccountDetails": "Lütfen hesabınızla ilgili bilgilerinizi incelemek için bir an ayırın:",
   "SetEmailPassword": "Şifre belirle",
-  "WelcomeSubtitle": "Alanınız başarıyla oluşturuldu. Profil bilgilerinizi inceleyin ve çalışmaya başlayın.",
+  "WelcomeSubtitle": "Çalışma alanınız başarıyla oluşturuldu. Profil bilgilerinizi inceleyin ve çalışmaya başlayın.",
   "YourProfileDetails": "Profil bilgileriniz"
 }

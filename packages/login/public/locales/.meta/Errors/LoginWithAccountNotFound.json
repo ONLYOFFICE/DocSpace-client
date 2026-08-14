@@ -1,23 +1,15 @@
 {
   "key_path": "LoginWithAccountNotFound",
-  "content": "Can't find associated third-party account.  You need to connect your social networking account at the profile editing page first.",
-  "content_en_sha1_hash": "2c719c862ba901236fa0d9425c3107f7a48dc319",
-  "created_at": "2025-05-19T21:30:57.289Z",
-  "updated_at": "2026-05-15T14:00:06.922Z",
+  "content": "Can't find associated third-party account. You need to connect your social networking account at the profile editing page first.",
+  "content_en_sha1_hash": "371f017080cea58728b8debf968ad211c55d0d05",
+  "created_at": "2026-08-13T23:19:51.517Z",
+  "updated_at": "2026-08-13T23:19:51.517Z",
   "comment": {
-    "text": "Error message. This appears when a user attempts to log in with a third-party account that isn't linked to their profile.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:30:53.595Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 94,
-      "context": "case \"LoginWithBruteForce\":\n return t(\"Errors:LoginWithBruteForce\");\n case \"RecaptchaInvalid\":\n return t(\"Errors:RecaptchaInvalid\");\n case \"LoginWithAccountNotFound\":\n return t(\"Errors:LoginWithAccountNotFound\");\n case \"InvalidUsernameOrPassword\":\n return t(\"Errors:InvalidUsernameOrPassword\");\n case \"SsoSettingsDisabled\":\n return t(\"Errors:SsoSettingsDisabled\");\n case \"ErrorNotAllowedOption\":",
-      "module": "/packages/login"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -149,7 +141,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.629887Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +156,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

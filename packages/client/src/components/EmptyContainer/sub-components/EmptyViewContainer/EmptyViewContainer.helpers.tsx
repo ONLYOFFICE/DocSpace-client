@@ -314,19 +314,13 @@ export const getOptions = (
   );
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromPortalTitle", {
-      productName: getBrandName("ProductName"),
-    }),
-    t("EmptyView:UploadPDFFormOptionDescription", {
-      productName: getBrandName("ProductName"),
-    }),
+    t("EmptyView:UploadFromPortalTitle"),
+    t("EmptyView:UploadPDFFormOptionDescription"),
     FilterType.PDFForm,
   );
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromPortalTitle", {
-      productName: getBrandName("ProductName"),
-    }),
+    t("EmptyView:UploadFromPortalTitle"),
     t("EmptyView:SectionsUploadDescription", {
       sectionNameFirst: t("Common:Files"),
       sectionNameSecond: t("Common:Rooms"),
@@ -343,9 +337,7 @@ export const getOptions = (
 
   const inviteUserOption = createInviteOption(
     t("Common:InviteContacts"),
-    t("EmptyView:InviteUsersOptionDescription", {
-      productName: getBrandName("ProductName"),
-    }),
+    t("EmptyView:InviteUsersOptionDescription"),
   );
 
   const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;
@@ -425,9 +417,7 @@ export const getOptions = (
 
   const inviteRootRoom = {
     title: t("EmptyView:InviteNewUsers"),
-    description: t("EmptyView:InviteRootRoomDescription", {
-      productName: getBrandName("ProductName"),
-    }),
+    description: t("EmptyView:InviteRootRoomDescription"),
     icon: <InviteUserFormIcon />,
     key: "invite-root-room",
     onClick: () => actions.inviteRootUser(EmployeeType.User),
@@ -633,9 +623,7 @@ export const getOptions = (
   if (isAIRoom) {
     if (isKnowledgeTab) {
       const uploadFilesFromDocSpace = createUploadFromDocSpace(
-        t("EmptyView:UploadFromPortalTitle", {
-          productName: getBrandName("ProductName"),
-        }),
+        t("EmptyView:UploadFromPortalTitle"),
         t("Common:UploadFilesPortal", {
           sectionNameFirst: t("Common:Files"),
           sectionNameSecond: t("Common:Rooms"),

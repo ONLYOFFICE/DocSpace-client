@@ -3,7 +3,7 @@
   "content": "Select contact",
   "content_en_sha1_hash": "5e50ddcd5c222b7f0343923a74dc600d280d51e3",
   "created_at": "2026-04-10T13:53:43.197Z",
-  "updated_at": "2026-08-13T10:58:03.418Z",
+  "updated_at": "2026-08-12T14:02:21.396Z",
   "comment": {
     "text": "Button label. Appears when no contact is selected, prompting the user to choose one.",
     "is_auto": true,

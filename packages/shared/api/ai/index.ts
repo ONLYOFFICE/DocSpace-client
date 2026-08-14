@@ -382,6 +382,19 @@ export const getProfilesList = async () => {
   return (await response.json()) as TProfilesList;
 };
 
+export const getWebSearchConfigured = async () => {
+  const response = await authFetch(`/api/2.0/ai/web-search/is-configured`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) return false;
+
+  return (await response.json()) as boolean;
+};
+
 export const getProfileAssignments = async (entityId?: string) => {
   const params = entityId ? `?entityId=${encodeURIComponent(entityId)}` : "";
 

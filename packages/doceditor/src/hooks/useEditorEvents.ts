@@ -61,6 +61,7 @@ import type {
 import {
   getProfilesList,
   getProfileAssignments,
+  getWebSearchConfigured,
 } from "@docspace/shared/api/ai";
 // import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
 // import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
@@ -402,7 +403,10 @@ const useEditorEvents = ({
 
                 const validProfileIds = new Set(profiles.map((p) => p.id));
 
-                const assignments = await getProfileAssignments();
+                const [assignments, webSearchConfigured] = await Promise.all([
+                  getProfileAssignments(),
+                  getWebSearchConfigured(),
+                ]);
 
                 const actions: Record<string, { model: string }> = {};
                 Object.entries(assignments ?? {}).forEach(
@@ -412,12 +416,26 @@ const useEditorEvents = ({
                   },
                 );
 
+                // Placeholder config only — the real provider and its key
+                // stay on the server. The .invalid host makes the plugin's
+                // web_search/web_crawling requests travel the
+                // ai_onExternalFetch bridge, where aiProxy maps them to the
+                // NewAi web-search passthrough.
+                const webSearch = webSearchConfigured
+                  ? {
+                      provider: "onlyoffice",
+                      baseUrl:
+                        "https://onlyoffice-external.invalid/websearch/v1",
+                    }
+                  : undefined;
+
                 whenAiReady("Tools", sendTools);
                 whenAiReady("Actions", () => {
                   connector.sendEvent("ai_onCustomInit", {
                     actionsOverride: true,
                     profiles: aiProfiles,
                     actions,
+                    webSearch,
                   });
                   fireGenerationToolCall();
                   markAiActionsReady();

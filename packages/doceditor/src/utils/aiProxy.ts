@@ -68,28 +68,34 @@ const externalAIFetch = async (
   let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
 
   try {
-    let profileId: string | undefined;
-    const body = e.options.body;
-    if (typeof body === "string") {
-      try {
-        const model = (JSON.parse(body) as { model?: string })?.model;
-        if (model) profileId = modelProfileMap.get(model);
-      } catch {
-        /* leave profileId undefined */
+    let url: string;
+
+    if (e.url.startsWith("[external]/websearch/")) {
+      // Web-search tool requests carry no `model` in the body — the
+      // portal's active provider is resolved server-side by the NewAi
+      // web-search passthrough.
+      url = e.url.replace("[external]", "/api/2.0/ai");
+    } else {
+      let profileId: string | undefined;
+      const body = e.options.body;
+      if (typeof body === "string") {
+        try {
+          const model = (JSON.parse(body) as { model?: string })?.model;
+          if (model) profileId = modelProfileMap.get(model);
+        } catch {
+          /* leave profileId undefined */
+        }
       }
-    }
 
-    if (!profileId) {
-      throw new Error("No AI profile resolved for the requested model");
-    }
+      if (!profileId) {
+        throw new Error("No AI profile resolved for the requested model");
+      }
 
-    // OpenAI-compatible passthrough served by the ASC.NewAi service: it
-    // resolves the profile (base URL, key, headers) server-side and
-    // forwards the body to the provider verbatim.
-    const url = e.url.replace(
-      "[external]",
-      `/api/2.0/ai/openai/${profileId}/v1`,
-    );
+      // OpenAI-compatible passthrough served by the ASC.NewAi service: it
+      // resolves the profile (base URL, key, headers) server-side and
+      // forwards the body to the provider verbatim.
+      url = e.url.replace("[external]", `/api/2.0/ai/openai/${profileId}/v1`);
+    }
 
     const options = {
       ...e.options,

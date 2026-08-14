@@ -54,8 +54,12 @@ import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
 
 import ModelUpdatedTooltip from "./ModelUpdatedTooltip";
 
-// Frozen — the flag already lives in users' browsers once shown.
-const DISMISSED_KEY = "ai_chat_model_updated_bar_dismissed";
+// Per user, not per browser: the notice is about the portal's models, so one
+// flag per account is right, but two accounts sharing a machine must not
+// swallow each other's. Frozen once shipped — the flag lives in users'
+// browsers.
+const dismissedKey = (userId: string) =>
+  `ai_chat_model_updated_bar_dismissed_${userId}`;
 
 // The composer's model picker: an interactive combo, or the read-only label
 // shown to users who may not change the agent's model. joyride resolves this
@@ -102,6 +106,8 @@ type ModelUpdatedBannerProps = {
   entityId?: string;
   /** Only agent rooms are expected to carry a model assignment. */
   isAgentRoom?: boolean;
+  /** Whose dismissal is remembered. Nothing is shown without it. */
+  userId?: string;
 };
 
 /**
@@ -124,12 +130,14 @@ type ModelUpdatedBannerProps = {
  * here: no beacon, no scrolling, no focus trap (the user must be able to keep
  * typing in the composer) and a backdrop that leaves the picker in the clear.
  *
- * Dismissal is final — the flag is kept in localStorage, so a user who closes
- * the card never sees it again.
+ * Dismissal is final — the flag is kept in localStorage under the user's own
+ * key, so a user who closes the card never sees it again (and does not close
+ * it for whoever else uses that browser).
  */
 const ModelUpdatedBanner = ({
   entityId,
   isAgentRoom,
+  userId,
 }: ModelUpdatedBannerProps) => {
   const { t } = useTranslation("Common");
 
@@ -156,20 +164,50 @@ const ModelUpdatedBanner = ({
   );
 
   const [isDismissed, setIsDismissed] = useLocalStorage<boolean>(
-    DISMISSED_KEY,
+    dismissedKey(userId ?? ""),
     false,
   );
 
   // The picker never showed up within joyride's wait (the chat stayed closed).
   // Not a dismissal — nothing was shown — so it is kept out of localStorage and
-  // the notice is offered again on the next visit.
+  // lasts only as long as the scope it was recorded for: the host keys this
+  // component by `entityId`, so every room gets a fresh attempt.
   const [isTargetMissing, setIsTargetMissing] = useState(false);
+
+  // Whether the slots can be trusted to answer for *this* scope yet.
+  //
+  // Entering a room only moves the store's entity ref and fires
+  // `reloadModelAssignment()` without awaiting it, while the session pick is
+  // cleared right away — so until that read lands the slots still answer for
+  // the room the user came from. Taken as-is, that window says "nothing
+  // assigned" for a beat, and the tour is raised only to be dropped again when
+  // the real map arrives.
+  //
+  // The store's next write is the signal. This component is keyed by
+  // `entityId`, so it mounts exactly when the scope changes — before any of the
+  // reloads that switch fires have come back. Their landing is a `set` on the
+  // profiles store, so the first one after mount is the point from which the
+  // slots describe this room.
+  //
+  // Not a fetch and not a timeout: the store carries no "read in flight" flag
+  // to gate on (only `initialized`), and the assignment read is not something a
+  // caller can subscribe to on its own.
+  const [hasStoreSettled, setHasStoreSettled] = useState(false);
+
+  useEffect(
+    () => useProfilesStore.subscribe(() => setHasStoreSettled(true)),
+    [useProfilesStore],
+  );
 
   const isVisible =
     !isDismissed &&
     !isTargetMissing &&
+    hasStoreSettled &&
     !!isAgentRoom &&
     !!entityId &&
+    // No account to remember the dismissal against — showing the notice would
+    // mean showing it again on the next visit, forever.
+    !!userId &&
     isStoreReady &&
     hasProfiles &&
     !hasAssignment &&
@@ -247,4 +285,3 @@ const ModelUpdatedBanner = ({
 export { ModelUpdatedBanner };
 
 export default ModelUpdatedBanner;
-

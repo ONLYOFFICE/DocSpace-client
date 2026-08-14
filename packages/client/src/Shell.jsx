@@ -879,8 +879,10 @@ const Shell = ({ page = "home", ...rest }) => {
         >
           <AskAIChatBridge />
           <ModelUpdatedBanner
+            key={agentEntityId}
             entityId={agentEntityId}
             isAgentRoom={isInsideAgentRoom}
+            userId={userId}
           />
           {layout}
         </AiAgentProviders>

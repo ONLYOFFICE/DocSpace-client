@@ -80,7 +80,7 @@
   "AdvancedSettings": "Erweiterte Einstellungen",
   "AgentCover": "Agenten-Cover",
   "AgentInfo": "Agenteninformationen",
-  "AgentInViewModeWarning": "Sie befinden sich im <strong>nur-Lesen</strong>-Modus für diesen . Sie können die Ergebnisse der {{aiChat}}-Aktivitäten anderer Benutzer sehen.",
+  "AgentInViewModeWarning": "Sie befinden sich im <strong>nur-Lesen</strong>-Modus für diesen KI-Agenten. Sie können die Ergebnisse der {{aiChat}}-Aktivitäten anderer Benutzer sehen.",
   "AgentManager": "Agentenmanager",
   "AgentName": "Name des Agenten",
   "AgentOwner": "Besitzer des Agenten",

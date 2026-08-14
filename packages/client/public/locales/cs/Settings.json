@@ -30,7 +30,7 @@
   "ApiKeyCopied": "Zkopírovaný klíč API",
   "APIKeyDeactivated": "Klíč bude deaktivován po: {{date}}",
   "APIKeyExpired": "Platnost tohoto klíče API vypršela a již není aktivní.",
-  "ApiKeyLifetime": "<1>Životnost je nastavena.</1>Tajný klíč bude deaktivován po: {{days}} dnů",
+  "ApiKeyLifetime": "<1>Životnost je nastavena.</1> Tajný klíč bude deaktivován po: {{days}} dnů",
   "APIKeyMaxDays": "Dny <1>(Max {{days}})</1>",
   "ApiKeys": "Klíče API",
   "ApiKeysCardDescription": "Vytvářejte a spravujte všechna API klíče pro vaše {{organizationName}} {{productName}}.",

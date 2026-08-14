@@ -38,8 +38,16 @@ file using both fails. **Biome's formatter is disabled**
 (`packages/shared/biome.json` sets `formatter.enabled: false`), so nothing else
 catches this — a codemod that rewrites a line with a flat run of tabs inside a
 space-indented file ships silently. Exempt: `.test.`, `.stories.`, `.d.ts`.
-Inherited offenders are frozen in
-`common/tests/test/indentation-allowlist.json`, which must only ever shrink.
+
+Lines inside a multi-line template literal are skipped: leading whitespace
+there is string content (embedded SVG and CSS keep their own indentation), so
+re-indenting it would change what the code produces. Any script that fixes
+indentation in bulk must skip those lines too, and verify that every template
+literal is byte-identical afterwards.
+
+`common/tests/test/indentation-allowlist.json` holds the two remaining
+offenders, both in the `libs/ui-kit` submodule — fix them in
+`docspace-ui-kit-react`. The list must only ever shrink.
 
 ## Images (images.test.js)
 

@@ -430,7 +430,7 @@
   "Common": "Общие",
   "CommonFiles": "Общие файлы",
   "CompanyInfoSettings": "Настройки информации о компании",
-  "CompanyInfoSettingsDescription": "Эта информация будет отображаться в окне <1>{{link}}</1> .",
+  "CompanyInfoSettingsDescription": "Эта информация будет отображаться в окне <1>{{link}}</1>.",
   "CompanyName": "Название компании",
   "Complete": "Завершено",
   "CompletedForms": "Завершенные формы",

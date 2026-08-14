@@ -80,7 +80,7 @@
   "AdvancedSettings": "Setări avansate",
   "AgentCover": "Imagine de fundal agent",
   "AgentInfo": "Informații agent",
-  "AgentInViewModeWarning": "Sunteți în modul <strong>doar vizualizare</strong> pentru acest . Puteți vedea rezultatele activității {{aiChat}} a altor utilizatori.",
+  "AgentInViewModeWarning": "Sunteți în modul <strong>doar vizualizare</strong> pentru acest agent IA. Puteți vedea rezultatele activității {{aiChat}} a altor utilizatori.",
   "AgentManager": "Administrator de agent",
   "AgentName": "Nume de agent",
   "AgentOwner": "Proprietar agent",

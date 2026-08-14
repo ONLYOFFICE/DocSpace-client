@@ -80,7 +80,7 @@
   "AdvancedSettings": "Rozšířená nastavení",
   "AgentCover": "Cover agenta",
   "AgentInfo": "Informace o agentovi",
-  "AgentInViewModeWarning": "Jste v režimu <strong>pouze pro čtení</strong> pro tento . Můžete vidět výsledky aktivity {{aiChat}} ostatních uživatelů.",
+  "AgentInViewModeWarning": "Jste v režimu <strong>pouze pro čtení</strong> pro tohoto AI agenta. Můžete vidět výsledky aktivity {{aiChat}} ostatních uživatelů.",
   "AgentManager": "Manažer agenta",
   "AgentName": "Jméno agenta",
   "AgentOwner": "Majitel agenta",

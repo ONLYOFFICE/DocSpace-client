@@ -135,7 +135,7 @@
   "TooltipElementCopyMessage": "Копирај {{element}}",
   "TooltipElementsCopyMessage": "Копирај {{element}} елементе",
   "TooltipElementsMoveMessage": "Помери {{element}} елементе",
-  "UploadingProgress": "Отпремање : {{progress}}%.",
+  "UploadingProgress": "Отпремање: {{progress}}%.",
   "VersionHistory": "Историја верзије",
   "WaitOperation": "Сачекај да се тренутна операција заврши",
   "WarningCopyToFormRoomServal": "Копирање више фајлова у собу за попуњавање образаца није подржано. Копирајте један {{ organizationName }} PDF образац у исто време.",

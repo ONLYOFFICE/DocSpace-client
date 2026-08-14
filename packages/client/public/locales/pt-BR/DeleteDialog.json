@@ -1,9 +1,9 @@
 {
   "DeleteAllGroupDescription": "Os grupos selecionados serão excluídos. Os usuários dos grupos não serão removidos do espaço de trabalho. Você tem certeza que quer continuar?",
   "DeleteAllGroupsTitle": "Excluir grupos",
-  "DeleteFiles": "Você está prestes a mover <strong>arquivos ({{filesCount}} )</strong> para a {{trashSection}}.",
+  "DeleteFiles": "Você está prestes a mover <strong>arquivos ({{filesCount}})</strong> para a {{trashSection}}.",
   "DeleteFilesAndFolders": "Você está prestes a excluir os <strong>arquivos ({{filesCount}})</strong> e <strong>pastas ({{foldersCount}})</strong> para a {{trashSection}}.",
-  "DeleteFilesAndFoldersForever": "Você está prestes a excluir os <strong>arquivos ({{ filesCount }} )</strong> e <strong>pastas ({{ foldersCount }})</strong>.",
+  "DeleteFilesAndFoldersForever": "Você está prestes a excluir os <strong>arquivos ({{ filesCount }})</strong> e <strong>pastas ({{ foldersCount }})</strong>.",
   "DeleteFilesForever": "Você está prestes a excluir <strong>arquivos ({{filesCount}})</strong>.",
   "DeleteFolders": "Você está prestes a mover <strong>pastas ({{foldersCount}})</strong> para {{trashSection}}.",
   "DeleteFoldersForever": "Você está prestes a excluir <strong>pastas ({{foldersCount}})</strong>.",

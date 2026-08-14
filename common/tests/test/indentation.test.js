@@ -58,6 +58,37 @@ const EXCLUDE_RE = /\.test\.|\.stories\.|\.d\.ts$/;
 
 let mixedFiles = [];
 
+/**
+ * Line indices that fall inside a multi-line template literal. Leading
+ * whitespace there is string content — embedded SVG markup and CSS keep their
+ * own indentation — so it must not be read as the file's code style.
+ *
+ * @param {string} source
+ * @returns {Set<number>} zero-based line indices to ignore
+ */
+const templateLiteralLines = (source) => {
+  const inside = new Set();
+  let open = false;
+
+  source.split("\n").forEach((line, index) => {
+    if (open) inside.add(index);
+    let escaped = false;
+    for (const char of line) {
+      if (escaped) {
+        escaped = false;
+        continue;
+      }
+      if (char === "\\") {
+        escaped = true;
+        continue;
+      }
+      if (char === "`") open = !open;
+    }
+  });
+
+  return inside;
+};
+
 const collect = (dir, out) => {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP_DIRS.has(entry.name)) continue;
@@ -82,11 +113,14 @@ beforeAll(() => {
   const allowed = new Set(allowlist.mixedIndentation);
 
   files.forEach((filePath) => {
-    const lines = fs.readFileSync(filePath, "utf8").split("\n");
+    const source = fs.readFileSync(filePath, "utf8");
+    const lines = source.split("\n");
+    const inTemplate = templateLiteralLines(source);
 
     const tabLines = [];
     let spaceLines = 0;
     lines.forEach((line, index) => {
+      if (inTemplate.has(index)) return;
       if (/^\t/.test(line)) tabLines.push({ line: index + 1, text: line });
       else if (/^ {2,}\S/.test(line)) spaceLines += 1;
     });

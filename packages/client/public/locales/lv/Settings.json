@@ -30,7 +30,7 @@
   "ApiKeyCopied": "API atslēga nokopēta",
   "APIKeyDeactivated": "Atslēga tiks deaktivizēta pēc: {{date}}",
   "APIKeyExpired": "Šīs API atslēgas derīguma termiņš ir beidzies un tā vairs nav aktīva",
-  "ApiKeyLifetime": "<1>Lietderīgās lietošanas laiks ir iestatīts.</1>Privātā atslēga tiks deaktivizēta pēc: {{days}} dienām",
+  "ApiKeyLifetime": "<1>Lietderīgās lietošanas laiks ir iestatīts.</1> Privātā atslēga tiks deaktivizēta pēc: {{days}} dienām",
   "APIKeyMaxDays": "Dienas <1>(Maks. {{days}})</1>",
   "ApiKeys": "API atslēgas",
   "ApiKeysCardDescription": "Izveidojiet un pārvaldojiet visus API atslavas jūsu {{organizationName}} {{productName}}.",

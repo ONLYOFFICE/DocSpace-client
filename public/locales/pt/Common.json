@@ -80,7 +80,7 @@
   "AdvancedSettings": "Configurações Avançadas",
   "AgentCover": "Cobertura de agente",
   "AgentInfo": "Informações do agente",
-  "AgentInViewModeWarning": "Você está no modo <strong>apenas visualização</strong> para este . Você pode ver os resultados da atividade do {{aiChat}} de outros usuários.",
+  "AgentInViewModeWarning": "Você está no modo <strong>apenas visualização</strong> para este agente de IA. Você pode ver os resultados da atividade do {{aiChat}} de outros usuários.",
   "AgentManager": "Gerente de agentes",
   "AgentName": "Nome do agente",
   "AgentOwner": "Agente proprietário",

@@ -80,7 +80,7 @@
   "AdvancedSettings": "Papildu iestatījumi",
   "AgentCover": "Aģenta vāks",
   "AgentInfo": "Aģenta informācija",
-  "AgentInViewModeWarning": "Jūs esat <strong>view-only</strong> režīmā šai . Jūs varat redzēt {{aiChat}} aktivitātes rezultātus no citiem lietotājiem.",
+  "AgentInViewModeWarning": "Jūs esat <strong>view-only</strong> režīmā šim MI aģentam. Jūs varat redzēt {{aiChat}} aktivitātes rezultātus no citiem lietotājiem.",
   "AgentManager": "Aģenta vadītājs",
   "AgentName": "Aģenta vārds",
   "AgentOwner": "Aģenta īpašnieks",

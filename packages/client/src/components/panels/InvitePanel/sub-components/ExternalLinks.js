@@ -67,7 +67,6 @@ import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
 import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ExternalLinks = ({
   t,
@@ -182,20 +181,14 @@ const ExternalLinks = ({
 
   const description =
     roomId === -1
-      ? t("InviteViaLinkDescriptionAccounts", {
-          productName: getBrandName("ProductName"),
-        })
+      ? t("InviteViaLinkDescriptionAccounts")
       : roomType === RoomsType.AIRoom
         ? allowInvitingGuests
           ? t("Common:InviteViaLinkDescriptionAgentGuest")
-          : t("Common:InviteViaLinkDescriptionAgentMembers", {
-              productName: getBrandName("ProductName"),
-            })
+          : t("Common:InviteViaLinkDescriptionAgentMembers")
         : allowInvitingGuests
           ? t("Common:InviteViaLinkDescriptionRoomGuest")
-          : t("Common:InviteViaLinkDescriptionRoomMembers", {
-              productName: getBrandName("ProductName"),
-            });
+          : t("Common:InviteViaLinkDescriptionRoomMembers");
 
   return (
     <div className={styles.externalLink} ref={inputsRef}>

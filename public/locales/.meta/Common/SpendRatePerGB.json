@@ -3,7 +3,7 @@
   "content": "{{price}}/GB",
   "content_en_sha1_hash": "fc2e2cc5d7f8c814a14fe66f512ebf03271664ce",
   "created_at": "2026-08-01T16:25:06.339Z",
-  "updated_at": "2026-08-13T10:58:03.423Z",
+  "updated_at": "2026-08-12T14:02:21.399Z",
   "comment": {
     "text": "A short label or value in billing and usage information indicating the cost per gigabyte of storage, where {{price}} represents the numerical amount.",
     "is_auto": true,

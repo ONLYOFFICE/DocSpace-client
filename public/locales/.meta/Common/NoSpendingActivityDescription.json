@@ -3,7 +3,7 @@
   "content": "Usage-based services and subscription charges will appear here automatically",
   "content_en_sha1_hash": "3348abe1831acb8f166986bc0f77da5b29e89c91",
   "created_at": "2026-06-25T11:54:53.712Z",
-  "updated_at": "2026-08-13T10:58:03.397Z",
+  "updated_at": "2026-08-14T14:58:32.935Z",
   "comment": {
     "text": "Description text for an empty state in the spending breakdown section, informing users that future usage and subscription costs will be automatically listed here once they occur.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/MonthToDateSpend.tsx",
-      "line_number": 205,
-      "context": "className={styles.mutedTitle}\n >\n {t(\"NoSpendingActivity\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoSpendingActivityDescription\")}\n </Text>\n </div>\n </div>\n ) : (\n <>",
+      "line_number": 198,
+      "context": "<div className={styles.emptyContent}>\n <Text fontSize=\"12px\" fontWeight={600} className={styles.mutedTitle}>\n {t(\"NoSpendingActivity\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoSpendingActivityDescription\")}\n </Text>\n </div>\n </div>\n ) : (\n <div className={styles.spendBody}>",
       "module": "/libs/ui-kit"
     },
     {

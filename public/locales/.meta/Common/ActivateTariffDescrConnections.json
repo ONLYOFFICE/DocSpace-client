@@ -3,7 +3,7 @@
   "content": "You are using {{organizationName}} {{productName}} {{license}}.",
   "content_en_sha1_hash": "b4abdf15a611d8d64134d0f192a4d7f887e9e399",
   "created_at": "2025-09-19T15:39:04.582Z",
-  "updated_at": "2026-08-13T10:58:03.351Z",
+  "updated_at": "2026-08-12T11:00:51.633Z",
   "comment": {
     "text": "This is a descriptive text displayed on the tariff activation page. It informs the user about their current license type, including the organization name ({{organizationName}}), product name ({{productName}}), and whether it's a Developer or Enterprise license ({{license}}).",
     "is_auto": true,

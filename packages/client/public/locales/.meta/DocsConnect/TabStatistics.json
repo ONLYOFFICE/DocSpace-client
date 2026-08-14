@@ -3,7 +3,7 @@
   "content": "Statistics",
   "content_en_sha1_hash": "2086b21f8f49274138c38d476bee317a84a8aecc",
   "created_at": "2026-07-27T13:07:48.476Z",
-  "updated_at": "2026-07-27T13:54:22.976Z",
+  "updated_at": "2026-08-13T14:37:21.740Z",
   "comment": {
     "text": "Tab label for navigating to the statistics section within the DocsConnect tenant panel.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/index.tsx",
-      "line_number": 167,
-      "context": "];\n \n const tabs: TTabItem[] = [\n {\n id: \"statistics\",\n name: t(\"DocsConnect:TabStatistics\"),\n content: <Statistics />,\n },\n {\n id: \"settings\",\n name: t(\"DocsConnect:TabSettings\"),",
+      "line_number": 185,
+      "context": "];\n \n const tabs: TTabItem[] = [\n {\n id: \"statistics\",\n name: t(\"DocsConnect:TabStatistics\"),\n content: <Statistics />,\n onClick: () => refreshStatistics?.(),\n },\n {\n id: \"settings\",",
       "module": "/packages/client"
     }
   ],

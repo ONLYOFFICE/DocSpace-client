@@ -3,7 +3,7 @@
   "content": "Use recovery phrase",
   "content_en_sha1_hash": "8d7f041d531f2d7ac208f5ce3dcc4a7114eec8e4",
   "created_at": "2026-05-24T17:27:43.016Z",
-  "updated_at": "2026-08-13T10:58:03.279Z",
+  "updated_at": "2026-08-14T14:58:32.842Z",
   "comment": {
     "text": "Button label and modal dialog title used to initiate the process of recovering keys via a recovery phrase.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 120,
-      "context": "productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),\n howText: t(\"Common:RecoveryKitHowText\", {\n action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),",
+      "context": "organizationName: getBrandName(\"OrganizationName\"), productName,\n wordCount,\n }),\n howTitle: t(\"Common:RecoveryKitHowTitle\"),\n howText: t(\"Common:RecoveryKitHowText\", {\n action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),",
       "module": "/packages/shared"
     },
     {

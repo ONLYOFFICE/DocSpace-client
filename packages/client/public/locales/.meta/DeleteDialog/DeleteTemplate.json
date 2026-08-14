@@ -3,7 +3,7 @@
   "content": "Do you really want to delete template room <1>«{{templateName}}»</1>? The template cannot be restored.",
   "content_en_sha1_hash": "42cc6f2e7810dd946fb00d679c28bdc48a545120",
   "created_at": "2025-05-19T21:30:56.711Z",
-  "updated_at": "2026-08-13T10:58:03.097Z",
+  "updated_at": "2026-08-12T11:00:51.523Z",
   "comment": {
     "text": "This is the confirmation message in a dialog box that appears when a user attempts to delete a template room. The variable `{{templateName}}` is the name of the template being deleted.",
     "is_auto": true,

@@ -1,26 +1,26 @@
 {
   "key_path": "PortalOwnerCan",
-  "content": "{{productName}} owner can:",
-  "content_en_sha1_hash": "97d7cb6f581a857cc0b100e3288462c1654fe519",
-  "created_at": "2025-05-19T21:30:56.998Z",
-  "updated_at": "2026-05-15T14:00:06.644Z",
+  "content": "The workspace owner can:",
+  "content_en_sha1_hash": "db51f6526d6be6b129cedaf53b981aedd4399fec",
+  "created_at": "2026-08-13T14:37:19.553Z",
+  "updated_at": "2026-08-14T14:58:32.692Z",
   "comment": {
-    "text": "This is a list header in a dialog. It introduces a list of actions the portal owner can perform, with `{{productName}}` being replaced by the product's brand name (e.g., ONLYOFFICE DocSpace).",
+    "text": "List header in the Change Portal Owner dialog that introduces a list of actions or permissions available to the workspace owner.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:27.630Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:58:30.617Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 239,
-      "context": ")}\n \n <div className={styles.availableList}>\n <Text\n className={styles.listHeader}\n title={t(\"PortalOwnerCan\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n {t(\"PortalOwnerCan\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
+      "line_number": 232,
+      "context": ")}\n \n <div className={styles.availableList}>\n <Text\n className={styles.listHeader}\n title={t(\"PortalOwnerCan\")}\n >\n {t(\"PortalOwnerCan\")}\n </Text>\n \n {ownerRights?.map((item) => (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 239,
-      "context": ")}\n \n <div className={styles.availableList}>\n <Text\n className={styles.listHeader}\n title={t(\"PortalOwnerCan\", {\n productName: getBrandName(\"ProductName\"),\n })}\n >\n {t(\"PortalOwnerCan\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
+      "line_number": 232,
+      "context": ")}\n \n <div className={styles.availableList}>\n <Text\n className={styles.listHeader}\n title={t(\"PortalOwnerCan\")}\n >\n {t(\"PortalOwnerCan\")}\n </Text>\n \n {ownerRights?.map((item) => (",
       "module": "/packages/client"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

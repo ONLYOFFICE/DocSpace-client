@@ -54,7 +54,6 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { validateMembersForEncryption } from "@docspace/shared/services/private-room/room-encryption";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -197,12 +196,8 @@ const ChangeRoomOwner = (props) => {
     : t("Common:ChangeTheRoomOwner");
 
   const infoText = isAIAgent
-    ? t("Files:ChangeAgentOwnerSelectorInfo", {
-        productName: getBrandName("ProductName"),
-      })
-    : t("Common:PeopleSelectorInfo", {
-        productName: getBrandName("ProductName"),
-      });
+    ? t("Files:ChangeAgentOwnerSelectorInfo")
+    : t("Common:PeopleSelectorInfo");
 
   const footerCheckboxLabel = isAIAgent
     ? t("Common:LeaveTheAgent")

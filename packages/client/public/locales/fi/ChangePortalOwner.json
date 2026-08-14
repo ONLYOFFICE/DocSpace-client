@@ -1,13 +1,13 @@
 {
   "AppointAdmin": "Nimeä ylläpitäjät",
-  "BackupPortal": "Varmuuskopioi {{productName}}-n tiedot",
-  "ChangeInstruction": "Ole hyvä ja valitse omistajan nimi alta vaihtaaksesi {{productName}}-n omistajan.",
-  "ChangeOwner": "Vaihda {{productName}}-omistaja",
+  "BackupPortal": "Varmuuskopioi työtilan tiedot",
+  "ChangeInstruction": "Vaihda omistaja valitsemalla uuden omistajan nimi alta.",
+  "ChangeOwner": "Vaihda omistaja",
   "ChangeUser": "Vaihda käyttäjä",
   "DoTheSame": "Tee sama kuin järjestelmänvalvojat",
-  "ManagePortal": "Hallitse {{productName}}-n asetuksia",
+  "ManagePortal": "Hallitse työtilan asetuksia",
   "ManageUser": "Hallitse käyttäjätilejä",
-  "NewPortalOwner": "Uusi {{productName}}-omistaja",
-  "PortalOwnerCan": "{{productName}} omistaja voi:",
+  "NewPortalOwner": "Työtilan uusi omistaja",
+  "PortalOwnerCan": "Työtilan omistaja voi:",
   "SetAccessRights": "Aseta pääsyoikeudet"
 }

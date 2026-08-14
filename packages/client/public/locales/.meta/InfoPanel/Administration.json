@@ -3,7 +3,7 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2025-05-19T21:30:54.760Z",
-  "updated_at": "2026-07-07T08:59:21.802Z",
+  "updated_at": "2026-08-14T14:58:32.761Z",
   "comment": {
     "text": "This is a label for a section or category in the InfoPanel and Share dialogs, representing administrators or administrative roles.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 573,
+      "line_number": 568,
       "context": "owner.push(member);\n } else if (access === ShareAccessRights.RoomManager || isOwner) {\n if (administrators.length === 0) {\n administrators.push({\n id: \"administrators\",\n displayName: t(\"InfoPanel:Administration\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n administrators.push(member);",
       "module": "/packages/shared"
     }

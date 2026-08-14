@@ -5,7 +5,7 @@
   "RoomsEmptyTitle": "Váš seznam je zatím prázdný",
   "RoomsGroups": "Uspořádejte místnosti podle konkrétních vlastností, abyste rychle našli, co potřebujete. Vytvářejte skupiny a přepínejte mezi nimi hned nad seznamem.",
   "RoomsGroupsTitle": "Seskupte si místnosti",
-  "RoomsMembers": "Každá místnost má svůj seznam členů v informačním panelu. Přidejte kontakty z portálu a nastavte každému členovi roli — od prohlížení souborů až po správu celé místnosti.",
+  "RoomsMembers": "Každá místnost má svůj seznam členů v informačním panelu. Přidejte kontakty z pracovního prostoru a nastavte každému členovi roli — od prohlížení souborů až po správu celé místnosti.",
   "RoomsMembersTitle": "Pracujte společně",
   "RoomsPlacesArchive": "{{archive}} — místnosti, ve kterých už nepracujete, kdykoli obnovitelné.",
   "RoomsPlacesFiles": "{{recent}}, {{favorites}} a {{trash}} shromažďují soubory z vašich místností: nedávno otevřené, označené hvězdičkou a smazané.",

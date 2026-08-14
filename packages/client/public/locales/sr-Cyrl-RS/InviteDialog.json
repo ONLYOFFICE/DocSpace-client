@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Језик позивнице",
-  "InviteMembersManuallyDescription": "Позовите нове чланове у {{productName}} лично путем е-поште",
+  "InviteMembersManuallyDescription": "Позовите нове чланове у радни простор лично путем е-поште",
   "InviteMembersSearchPlaceholder": "Позовите чланове путем е-поште",
-  "InviteViaLinkDescriptionAccounts": "Створите универзални линк за самопризнање у {{productName}}-у."
+  "InviteViaLinkDescriptionAccounts": "Створите универзални линк за самопризнање у радном простору."
 }

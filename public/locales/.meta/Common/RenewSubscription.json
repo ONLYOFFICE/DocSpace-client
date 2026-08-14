@@ -2,12 +2,12 @@
   "key_path": "RenewSubscription",
   "content": "Renew subscription",
   "content_en_sha1_hash": "9f8e65758249c349385d2ddcf458f3f056c64837",
-  "created_at": "2026-08-13T10:57:45.290Z",
-  "updated_at": "2026-08-13T10:58:50.376Z",
+  "created_at": "2026-08-12T11:00:34.750Z",
+  "updated_at": "2026-08-13T14:37:21.733Z",
   "comment": {
-    "text": "Button label used to initiate the renewal process for an existing subscription, appearing in the DocsConnect purchase panel and promo page.",
+    "text": "Button label used to initiate the renewal of an existing DocsConnect subscription.",
     "is_auto": true,
-    "updated_at": "2026-08-13T10:58:50.376Z",
+    "updated_at": "2026-08-12T11:05:21.627Z",
     "model": "gemma4:26b"
   },
   "usage": [
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 143,
+      "line_number": 152,
       "context": "<div className={styles.actions}>\n {canceled ? (\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:RenewSubscription\")}\n onClick={() => openBuyPlan?.(\"edit\")}\n isDisabled={!canManage}\n className={styles.buyButton}\n testId=\"docs_connect_buy_button\"\n />",
       "module": "/packages/client"
     }

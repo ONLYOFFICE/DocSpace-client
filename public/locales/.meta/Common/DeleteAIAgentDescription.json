@@ -3,7 +3,7 @@
   "content": "The agent <1>\"{{agentName}}\"</1> will be permanently deleted. All data and user accesses will be lost.",
   "content_en_sha1_hash": "33c2e980bc6260bd79c8768b0f141e3c68b6509a",
   "created_at": "2026-06-02T22:17:37.877Z",
-  "updated_at": "2026-08-13T10:58:03.097Z",
+  "updated_at": "2026-08-12T11:00:51.523Z",
   "comment": {
     "text": "Body text in a confirmation dialog for deleting an AI agent, warning of permanent data loss. The `agentName` variable is wrapped in a tag for bold formatting.",
     "is_auto": true,

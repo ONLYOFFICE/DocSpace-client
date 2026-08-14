@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-26T07:15:46.895Z",
-  "updated_at": "2026-07-07T08:59:21.688Z",
+  "updated_at": "2026-08-14T14:58:32.672Z",
   "comment": {
     "text": "This is a page title and a navigation item label in the portal settings. It refers to the action of restoring a backup of the DocSpace portal.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
-      "line_number": 119,
+      "line_number": 118,
       "context": "return t(\"Settings:Customization\");\n case \"ManagementCategorySecurity\":\n return t(\"Settings:ManagementCategorySecurity\");\n case \"Common:Backup\":\n return t(\"Common:Backup\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"ManagementCategoryIntegration\":\n return t(\"Settings:ManagementCategoryIntegration\");\n case \"DataImport\":\n return t(\"Settings:DataImport\");",
       "module": "/packages/client"
     },
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 232,
-      "context": "return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", {\n productName: getBrandName(\"ProductName\"),\n });",
+      "line_number": 231,
+      "context": "return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");",
       "module": "/packages/client"
     },
     {

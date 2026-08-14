@@ -3,7 +3,7 @@
   "content": "Get full-featured document editing engine for your ecosystem. Create a tenant to connect storage-independent editors for text documents, spreadsheets, presentations and PDFs using <1>50+ ready connectors</1> to the platform you use. Add a Dev Pack to get access to <2>Automation API</2> and branding options.",
   "content_en_sha1_hash": "f385cbc9dca9a715ccde3cd54340c59c5f88c5ca",
   "created_at": "2026-07-27T13:07:48.473Z",
-  "updated_at": "2026-08-13T10:58:03.220Z",
+  "updated_at": "2026-08-13T14:37:21.735Z",
   "comment": {
     "text": "Promotional paragraph on the DocsConnect page explaining service features; contains two hyperlinks within tags <1> and <2>.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 108,
+      "line_number": 117,
       "context": ") : (\n <>\n <Text as=\"p\" className={styles.description}>\n <Trans\n t={t}\n i18nKey=\"PromoDescription\"\n ns=\"DocsConnect\"\n components={{\n 1: (\n <Link\n className={styles.link}",
       "module": "/packages/client"
     }

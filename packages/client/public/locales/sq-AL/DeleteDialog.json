@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "Grupet e selektuara do të fshihen. Përdoruesit në grupe nuk do të hiqen nga {{productName}}. Jeni të sigurt që dëshironi të vazhdoni?",
+  "DeleteAllGroupDescription": "Grupet e selektuara do të fshihen. Përdoruesit në grupe nuk do të hiqen nga hapësira e punës. Jeni të sigurt që dëshironi të vazhdoni?",
   "DeleteAllGroupsTitle": "Fshini grupet",
   "DeleteFiles": "Jeni gati të zhvendosni në {{trashSection}} <strong>skedarët ({{filesCount}})</strong>.",
   "DeleteFilesAndFolders": "Jeni gati të fshini në {{trashSection}} <strong>skedarët ({{filesCount}})</strong> dhe <strong>dosjet ({{foldersCount}})</strong>.",
@@ -7,7 +7,7 @@
   "DeleteFilesForever": "Jeni gati të fshini <strong>skedarët ({{filesCount}})</strong>.",
   "DeleteFolders": "Jeni gati të zhvendosni <strong>dosjet({{foldersCount}})</strong> në {{trashSection}}.",
   "DeleteFoldersForever": "Jeni gati të fshini <strong>dosjet ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "Grupi {{groupName}} do të fshihet. Përdoruesit në grup nuk do të hiqen nga {{productName}}. Jeni të sigurt që dëshironi të vazhdoni?",
+  "DeleteGroupDescription": "Grupi {{groupName}} do të fshihet. Përdoruesit në grup nuk do të hiqen nga hapësira e punës. Jeni të sigurt që dëshironi të vazhdoni?",
   "DeleteGroupTitle": "Fshini grupin",
   "DeleteItem": "Jeni gati të zhvendosni në {{trashSection}} <strong>{{name}}</strong>.",
   "DeleteItemForeverConfirm": "Jeni gati të fshini <strong>{{name}}</strong>.",

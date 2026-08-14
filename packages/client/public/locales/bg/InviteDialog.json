@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Език на поканата",
-  "InviteMembersManuallyDescription": "Поканете лично нови членове в {{productName}} чрез имейл",
+  "InviteMembersManuallyDescription": "Поканете лично нови членове в работното пространство чрез имейл",
   "InviteMembersSearchPlaceholder": "Поканете членове чрез имейл",
-  "InviteViaLinkDescriptionAccounts": "Създайте универсален линк за самоупълномощаване в {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Създайте универсален линк за самоупълномощаване в работното пространство"
 }

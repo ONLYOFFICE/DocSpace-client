@@ -3,7 +3,7 @@
   "content": "The file will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "0893b91fab956db6aa23b845defda697042a8cb4",
   "created_at": "2025-09-24T13:10:15.413Z",
-  "updated_at": "2026-08-13T10:58:03.100Z",
+  "updated_at": "2026-08-12T11:00:51.525Z",
   "comment": {
     "text": "This is a sentence fragment displayed in a confirmation dialog when a user is about to delete a file. It informs the user that the file will be permanently removed after a specific period.",
     "is_auto": true,

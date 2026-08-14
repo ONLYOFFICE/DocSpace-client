@@ -1,5 +1,5 @@
 {
-  "Desc": "Configurați datele de înregistrare în spațiul {{productName}}.",
+  "Desc": "Configurați datele de înregistrare în spațiul de lucru.",
   "ErrorEmail": "Adresa e-mail invalidă",
   "ErrorInstanceId": "ID-ul instanței este incorect",
   "ErrorLicenseBody": "Licența nu este valabilă. Verificați dacă ați ales fișierul potrivit.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Acord de licență",
   "PlaceholderLicense": "Fișierul de licență dvs",
   "Timezone": "Fus orar:",
-  "WelcomeTitle": "Bine ați venit în spațiul dvs {{productName}}!"
+  "WelcomeTitle": "Bine ați venit în spațiul dvs. de lucru!"
 }

@@ -41,7 +41,6 @@ import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Link } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const QuotasBar = ({
   t,
@@ -68,9 +67,7 @@ const QuotasBar = ({
 
   const getTenantCustomQuota = () => {
     if (!isAdmin)
-      return t("RemoveFilesOrContactToUpgradeQuota", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("RemoveFilesOrContactToUpgradeQuota");
 
     return (
       <Trans
@@ -92,9 +89,7 @@ const QuotasBar = ({
 
   const getUserTariffAlmostLimit = () => {
     if (!isAdmin)
-      return t("UserTariffAlmostReached", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("UserTariffAlmostReached");
 
     return (
       <Trans
@@ -117,15 +112,12 @@ const QuotasBar = ({
 
   const getUserTariffLimit = () => {
     if (!isAdmin)
-      return t("UserTariffReached", { productName: getBrandName("ProductName") });
+      return t("UserTariffReached");
 
     return (
       <Trans
         t={t}
         i18nKey="UserTariffReachedForAdmins"
-        values={{
-          productName: getBrandName("ProductName"),
-        }}
         components={{
           1: (
             <Link
@@ -143,9 +135,7 @@ const QuotasBar = ({
 
   const getStorageTariffDescription = () => {
     if (!isAdmin)
-      return t("RemoveFilesOrContactToUpgrade", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("RemoveFilesOrContactToUpgrade");
 
     return (
       <Trans
@@ -168,9 +158,7 @@ const QuotasBar = ({
 
   const getPersonalQuotaDescription = () => {
     if (!isAdmin)
-      return t("PersonalUserQuotaDescription", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("PersonalUserQuotaDescription");
 
     return (
       <Trans
@@ -198,9 +186,7 @@ const QuotasBar = ({
 
   const getUpgradeTariffDescription = () => {
     if (!isAdmin)
-      return t("ContactToUpgradeTariff", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("ContactToUpgradeTariff");
 
     return (
       <Trans
@@ -223,17 +209,12 @@ const QuotasBar = ({
 
   const getRoomsTariffDescription = () => {
     if (!isAdmin)
-      return t("ArchivedRoomsOrContact", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("ArchivedRoomsOrContact");
 
     return (
       <Trans
         t={t}
         i18nKey="RoomQuotaDescription"
-        values={{
-          productName: getBrandName("ProductName"),
-        }}
         components={{
           1: (
             <Link

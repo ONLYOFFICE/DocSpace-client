@@ -1,11 +1,11 @@
 {
   "ChangeData": "データとパスワードを変更する",
   "ClickButtonBelow": "メールアドレスを使用してログインする場合は、パスワードを設定してください。<br/>設定が完了しましたら、下のボタンをクリックしてください。",
-  "ContinueToProduct": "{{productName}} へ引き続き",
+  "ContinueToProduct": "ワークスペースへ進む",
   "GeneratedPassword": "生成されたパスワード",
-  "ProductNameDetail": "{{productName}} の名前",
+  "ProductNameDetail": "ワークスペース名",
   "ReviewAccountDetails": "アカウントの詳細をご確認ください。",
   "SetEmailPassword": "パスワードを設定する",
-  "WelcomeSubtitle": "スペースが正常に作成されました。プロフィールの詳細を確認して作業を開始してください。",
+  "WelcomeSubtitle": "ワークスペースが正常に作成されました。プロフィールの詳細を確認して作業を開始してください。",
   "YourProfileDetails": "プロフィールの詳細"
 }

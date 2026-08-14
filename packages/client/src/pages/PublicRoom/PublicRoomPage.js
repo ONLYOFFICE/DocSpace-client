@@ -52,7 +52,6 @@ import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 import { usePublic, useSDK } from "../Home/Hooks";
 import styles from "./PublicRoom.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
 
@@ -144,11 +143,11 @@ const PublicRoomPage = (props) => {
         t={t}
         ns="Common"
         i18nKey="PublicAuthorizeToast"
-        values={{ roomMode, productName: getBrandName("ProductName") }}
+        values={{ roomMode }}
         components={{
           1: (
             <Text
-              key="productName"
+              key="roomMode"
               as="span"
               fontSize="12px"
               fontWeight={700}

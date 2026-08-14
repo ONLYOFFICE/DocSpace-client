@@ -1,5 +1,5 @@
 {
-  "Desc": "Por favor, configure os dados de registro do {{productName}}.",
+  "Desc": "Por favor, configure os dados de registro do espaço de trabalho.",
   "ErrorEmail": "Endereço de e-mail inválido",
   "ErrorInstanceId": "ID de instância inválido",
   "ErrorLicenseBody": "A licença não é válida. Certifique-se de selecionar o arquivo correto.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Contratos de licença",
   "PlaceholderLicense": "Seu arquivo de licença",
   "Timezone": "Fuso horário:",
-  "WelcomeTitle": "Seja bem-vindo ao seu {{productName}}!"
+  "WelcomeTitle": "Seja bem-vindo ao seu espaço de trabalho!"
 }

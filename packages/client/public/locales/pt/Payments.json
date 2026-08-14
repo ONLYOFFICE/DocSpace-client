@@ -5,7 +5,7 @@
   "ChooseNewPlan": "Gostaria de escolher outro plano de preços?",
   "GracePeriodActive": "O período de carência está ativo <1>de {{fromDate}} a {{byDate}}</1> (dias restantes: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "Não é possível adicionar novos usuários e criar novas salas. A licença expirou.",
-  "LicenseGracePeriodInfo": "Durante este período, os administradores não conseguem criar salas novas ou adicionar usuários novos. Assim que o período de carência terminar, o {{productName}} ficará indisponível até que uma nova licença seja ativada.",
+  "LicenseGracePeriodInfo": "Durante este período, os administradores não conseguem criar salas novas ou adicionar utilizadores novos. Assim que o período de carência terminar, o espaço de trabalho ficará indisponível até que uma nova licença seja ativada.",
   "NewRoomWillExceedLimit": "Não é possível criar este quarto porque o limite do número de quartos incluídos no seu plano atual foi atingido.",
   "NewUsersWillExceedMembersLimit": "Não é possível adicionar novos utilizadores pagos, uma vez que foi atingido o limite do número de administradores incluídos no seu plano atual.",
   "NotPossibleRoomRestoring": "Não é possível restaurar este quarto, uma vez que foi atingido o limite do número de quartos incluídos no seu plano atual.",

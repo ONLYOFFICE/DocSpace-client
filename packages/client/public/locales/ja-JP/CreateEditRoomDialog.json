@@ -37,7 +37,7 @@
   "ThirdPartyStorageComboBoxPlaceholder": "ストレージの選択",
   "ThirdPartyStorageNoStorageAlert": "事前に、「統合」で対応するサービスを接続しておく必要があります。そうでない場合は、接続ができません。",
   "ThirdPartyStoragePermanentSettingDescription": "ファイルは、{{thirdpartyTitle}} サードパーティのストレージの「\"{{thirdpartyFolderName}}\"」フォルダーに保存されています。\n<strong>{{thirdpartyPath}}</strong>",
-  "ThirdPartyStorageRoomAdminNoStorageAlert": "サードパーティーのストレージを接続するには、{{productName}}設定の「統合」セクションに対応するサービスを追加する必要があります。統合を有効にするには、{{productName}}の所有者または管理者にご連絡ください。",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "サードパーティストレージを接続するには、ワークスペース設定の「統合」セクションで該当のサービスを追加する必要があります。統合を有効にするには、所有者またはスーパー管理者にお問い合わせください。",
   "UserEmail": "ユーザーのEmail",
   "UserIPAddress": "ユーザーのIPアドレス",
   "UserName": "ユーザー名",

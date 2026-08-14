@@ -3,14 +3,16 @@
   "DashboardAppsTitle": "Vse, s čimer lahko delate",
   "DashboardCreate": "Svoj prvi dokument ustvarite kar tukaj — izberite vrsto in začnite pisati. Shranil se bo v razdelek {{files}}, kjer ga lahko kadar koli najdete.",
   "DashboardCreateTitle": "Ustvarite nekaj zdaj",
+  "DashboardDevTools": "Gradite nekaj svojega? Vse tukaj je prav za to: API za upravljanje delovnega prostora iz vaše kode, SDK za vgradnjo urejevalnikov v lastno aplikacijo, vtičniki, webhooki in ključi. Nič od tega ne potrebujete za vsakodnevno uporabo {{organizationName}} {{productName}}.",
+  "DashboardDevToolsTitle": "Za razvijalce",
   "DashboardIntegrations": "Ali že delate v drugi platformi? Povežite jo tukaj in urejevalniki, ki ste jih pravkar videli, bodo na voljo kar v orodjih, ki jih vaša ekipa že uporablja — brez posebne kode in brez selitve podatkov.",
   "DashboardIntegrationsTitle": "Delo z drugimi platformami",
   "DashboardOverview": "Ta stran je vedno le en klik stran — odprite {{overview}} v stranski vrstici, kadar koli se želite vrniti nanjo.",
   "DashboardOverviewTitle": "Vrnitev sem",
-  "DashboardProfile": "Ime portala in kratek povzetek vašega profila: ime, e-pošta in geslo. Od tu lahko portal preimenujete ali spremenite geslo.",
+  "DashboardProfile": "Ime delovnega prostora in kratek povzetek vašega profila: ime, e-pošta in geslo. Od tu lahko delovni prostor preimenujete ali spremenite geslo.",
   "DashboardProfileTitle": "Podatki vašega profila",
   "WelcomeDashboardSubtitle": "Vse se začne na tej strani",
-  "WelcomeDashboardTitle": "Dobrodošli v {{productName}}",
+  "WelcomeDashboardTitle": "Dobrodošli v {{organizationName}} {{productName}}",
   "WelcomeDescription": "Ustvarjajte dokumente, sodelujte v sobah, zbirajte podatke z obrazci in prepustite branje umetni inteligenci — vse z enega mesta. Prehodite kratek vodnik in vse vam pokažemo.",
   "WelcomeLater": "Morda kasneje"
 }

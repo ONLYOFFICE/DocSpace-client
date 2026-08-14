@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { isPrivateRoomsEnabled } from "@docspace/shared/utils/privateRooms";
+
 import type { AppId } from "./apps-catalog";
 
 // Temporary kill switch for apps that cannot run on the new AI stack yet.
@@ -44,5 +46,18 @@ const TEMPORARILY_DISABLED_APPS: ReadonlySet<string> = new Set<AppId>([
   "ai-arbiter",
 ]);
 
+// Apps that are built but not released yet, each hidden behind its own opt-in
+// flag so testers can still reach them. Private rooms ("e2e-rooms") wait on the
+// editors side of the feature, see @docspace/shared/utils/privateRooms.
+const UNRELEASED_APPS: ReadonlyMap<AppId, () => boolean> = new Map([
+  ["e2e-rooms" as AppId, isPrivateRoomsEnabled],
+]);
+
+const isAppUnreleased = (id: string): boolean => {
+  const isFeatureEnabled = UNRELEASED_APPS.get(id as AppId);
+
+  return isFeatureEnabled ? !isFeatureEnabled() : false;
+};
+
 export const isAppTemporarilyDisabled = (id: string): boolean =>
-  TEMPORARILY_DISABLED_APPS.has(id);
+  TEMPORARILY_DISABLED_APPS.has(id) || isAppUnreleased(id);

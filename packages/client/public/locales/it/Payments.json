@@ -5,7 +5,7 @@
   "ChooseNewPlan": "Vuoi scegliere un nuovo piano tariffario?",
   "GracePeriodActive": "Il periodo di grazia è attivo <1>dal {{fromDate}} al {{byDate}}</1> (giorni rimanenti: {{delayDaysCount}}).",
   "LicenseExpiredRestriction": "Non è possibile aggiungere nuovi utenti e creare nuove stanze. La licenza è scaduta.",
-  "LicenseGracePeriodInfo": "Durante questo periodo, gli amministratori non possono creare nuove stanze o aggiungere nuovi utenti. Una volta terminato il periodo di grazia, {{productName}} non sarà disponibile fino all'attivazione di una nuova licenza.",
+  "LicenseGracePeriodInfo": "Durante questo periodo, gli amministratori non possono creare nuove stanze o aggiungere nuovi utenti. Una volta terminato il periodo di grazia, lo spazio di lavoro non sarà disponibile fino all'attivazione di una nuova licenza.",
   "NewRoomWillExceedLimit": "Non è possibile creare questa stanza perché è stato raggiunto il limite del numero di stanze incluse nel piano attuale.",
   "NewUsersWillExceedMembersLimit": "Non è possibile aggiungere nuovi utenti a pagamento poiché è stato raggiunto il limite del numero di amministratori previsto dal piano attuale.",
   "NotPossibleRoomRestoring": "Non è possibile ripristinare la stanza poiché è stato raggiunto il limite del numero di stanze incluse nel piano attuale.",

@@ -3,7 +3,7 @@
   "content": "Rooms E2E",
   "content_en_sha1_hash": "9364fc6e4de01f4ccd1c2448ceab9c7de94a9a7c",
   "created_at": "2026-06-09T09:42:38.869Z",
-  "updated_at": "2026-07-28T07:30:59.811Z",
+  "updated_at": "2026-08-14T14:58:32.670Z",
   "comment": {
     "text": "Title for the navigation menu item, app catalog entry, and iframe header representing end-to-end encrypted rooms; appears as a short noun label.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 142,
+      "line_number": 144,
       "context": "alwaysOn: false,\n },\n {\n id: \"e2e-rooms\",\n icon: <CatalogPrivateIcon />,\n title: t(\"Common:DashboardE2eRoomsTitle\"),\n description: t(\"Common:DashboardE2eRoomsDescription\"),\n href: \"/e2e-rooms\",\n supported: true,\n alwaysOn: false,\n },",
       "module": "/packages/client"
     },

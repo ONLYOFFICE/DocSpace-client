@@ -3,7 +3,7 @@
   "content": "−{{count}}",
   "content_en_sha1_hash": "c66c325e3a16bcfe20d6b246dbcfd50d56c1b5f2",
   "created_at": "2026-07-27T13:07:48.525Z",
-  "updated_at": "2026-08-13T10:58:03.218Z",
+  "updated_at": "2026-08-12T14:02:21.320Z",
   "comment": {
     "text": "A value in a summary row within the subscription panel indicating the reduction in user count, where {{count}} represents the numeric difference.",
     "is_auto": true,

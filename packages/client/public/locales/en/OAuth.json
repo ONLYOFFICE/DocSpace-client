@@ -79,7 +79,7 @@
   "ScopesHelp": "Scopes are used to limit your app's access to all user-related data, and they'll let you specify exactly what kind of access you need.",
   "Secret": "Secret",
   "SecretCopy": "Client secret successfully copied to clipboard",
-  "SignIn": "Sign in with {{productName}}",
+  "SignIn": "Sign in with {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Support & Legal info",
   "TermsOfService": "Terms of Service",
   "TermsOfServiceURL": "Terms of Service URL",

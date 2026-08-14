@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Invitation language",
-  "InviteMembersManuallyDescription": "Invite new members to {{productName}} personally via email",
+  "InviteMembersManuallyDescription": "Invite new members to the workspace personally via email",
   "InviteMembersSearchPlaceholder": "Invite members by email",
-  "InviteViaLinkDescriptionAccounts": "Create a universal link for self-authorization in {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Create a universal link for self-authorization in the workspace"
 }

@@ -1,5 +1,5 @@
 {
-  "DeleteAllGroupDescription": "Vybrané skupiny budou odstraněny. Uživatelé ve skupinách nebudou z {{productName}} odstraněni. Opravdu chcete pokračovat?",
+  "DeleteAllGroupDescription": "Vybrané skupiny budou odstraněny. Uživatelé ve skupinách nebudou z pracovního prostoru odstraněni. Opravdu chcete pokračovat?",
   "DeleteAllGroupsTitle": "Odstranit skupiny",
   "DeleteFiles": "Čekáte na přesunutí <strong>souborů ({{filesCount}})</strong> do {{trashSection}}.",
   "DeleteFilesAndFolders": "Chystáte se smazat <strong>soubory ({{filesCount}})</strong> a <strong>složky ({{foldersCount}})</strong> do {{trashSection}}.",
@@ -7,7 +7,7 @@
   "DeleteFilesForever": "Mazat se vám mají <strong>soubory ({{filesCount}})</strong>.",
   "DeleteFolders": "Připravujete se na přesunutí <strong>složek ({{foldersCount}})</strong> do {{trashSection}}.",
   "DeleteFoldersForever": "Mazat se vám bude <strong>složek ({{foldersCount}})</strong>.",
-  "DeleteGroupDescription": "Skupina {{groupName}} bude odstraněna. Uživatelé ve skupině nebudou z {{productName}} odstraněni. Jste si jisti, že chcete pokračovat?",
+  "DeleteGroupDescription": "Skupina {{groupName}} bude odstraněna. Uživatelé ve skupině nebudou z pracovního prostoru odstraněni. Jste si jisti, že chcete pokračovat?",
   "DeleteGroupTitle": "Smazat skupinu",
   "DeleteItem": "Čekáte na přesunutí <strong>{{name}}</strong> do {{trashSection}}.",
   "DeleteItemForeverConfirm": "Mazat se chystáte <strong>{{name}}</strong>.",

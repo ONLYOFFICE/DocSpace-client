@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Idioma do convite",
-  "InviteMembersManuallyDescription": "Convide novos membros para {{productName}} pessoalmente por e-mail",
+  "InviteMembersManuallyDescription": "Convide novos membros para o espaço de trabalho pessoalmente por e-mail",
   "InviteMembersSearchPlaceholder": "Convide membros por e-mail",
-  "InviteViaLinkDescriptionAccounts": "Crie uma hiperligação universal para permitir a auto autorização no {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Crie uma hiperligação universal para permitir a auto autorização no espaço de trabalho"
 }

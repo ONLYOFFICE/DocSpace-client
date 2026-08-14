@@ -3,7 +3,7 @@
   "content": "Do you really want to delete selected room templates? They cannot be restored.",
   "content_en_sha1_hash": "77abb31effe28a2cb22adb455e207e7f737e386a",
   "created_at": "2025-05-19T21:30:56.713Z",
-  "updated_at": "2026-08-13T10:58:03.097Z",
+  "updated_at": "2026-08-12T11:00:51.523Z",
   "comment": {
     "text": "This is the confirmation message in a dialog box that appears when a user attempts to delete selected room templates. It informs the user that the action is irreversible.",
     "is_auto": true,

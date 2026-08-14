@@ -3,7 +3,7 @@
   "content": "The change has been scheduled",
   "content_en_sha1_hash": "1679da098a0f1c02549524dee1bd45c99c98a61a",
   "created_at": "2026-07-27T13:07:48.532Z",
-  "updated_at": "2026-08-13T10:58:03.211Z",
+  "updated_at": "2026-08-12T14:02:21.315Z",
   "comment": {
     "text": "Success toast message appearing when a plan change has been successfully scheduled in the DocsConnect panel.",
     "is_auto": true,

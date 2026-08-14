@@ -39,7 +39,6 @@ import type { TFunction } from "i18next";
 import { Trans } from "react-i18next";
 
 import type { TTranslation } from "../types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getUserTypeDescriptionClient = (
   isPortalAdmin: boolean,
@@ -57,7 +56,6 @@ export const getUserTypeDescriptionClient = (
           1: <strong></strong>,
         }}
         values={{
-          productName: getBrandName("ProductName"),
           sectionName: t("Common:Documents"),
           agentSection: t("Common:AIAgents"),
         }}

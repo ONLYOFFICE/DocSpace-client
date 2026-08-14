@@ -47,7 +47,6 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { getExternalLinks } from "@docspace/shared/api/files";
 import { getExternalLinks as getRoomExternalLinks } from "@docspace/shared/api/rooms";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import type { TFileLink } from "@docspace/shared/api/files/types";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
@@ -402,9 +401,7 @@ const EmbeddingPanel = observer(({ isAdmin = false }: EmbeddingPanelProps) => {
                     {`"Add the website URL for embedding to the <1>allow list</1>."`}
                   </Trans>
                 ) : (
-                  t("Common:EmbeddingBarDescription", {
-                    productName: getBrandName("ProductName"),
-                  })
+                  t("Common:EmbeddingBarDescription")
                 )}
               </Text>
               <IconButton
@@ -494,9 +491,7 @@ const EmbeddingPanel = observer(({ isAdmin = false }: EmbeddingPanelProps) => {
                     isChecked={embeddingConfig.showTitle}
                     img={isBase ? HeaderUrl : HeaderDarkUrl}
                     title={t("Common:Header")}
-                    description={t("Common:HeaderDescription", {
-                      productName: getBrandName("ProductName"),
-                    })}
+                    description={t("Common:HeaderDescription")}
                     dataTestId="show_title"
                   />
                   <CheckboxElement

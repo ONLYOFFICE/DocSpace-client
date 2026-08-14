@@ -3,7 +3,7 @@
   "content": "Select folder",
   "content_en_sha1_hash": "20e97c9844509f09cc9df74473a387bfe234b56e",
   "created_at": "2025-05-19T21:30:48.430Z",
-  "updated_at": "2026-05-15T15:37:40.167Z",
+  "updated_at": "2026-08-14T14:58:32.658Z",
   "comment": {
     "text": "This is a button label or tooltip text that prompts the user to choose a folder. It appears when selecting a destination for files or when configuring a folder input.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 60,
+      "line_number": 59,
       "context": "isFormRoom?: boolean,\n isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");",
       "module": "/packages/client"
     },

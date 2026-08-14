@@ -3,7 +3,7 @@
   "content": "Manage storage quota",
   "content_en_sha1_hash": "0acf9963c183dbb1e5558ca61bdf05b365b77448",
   "created_at": "2025-05-19T21:30:46.354Z",
-  "updated_at": "2026-05-15T15:37:40.288Z",
+  "updated_at": "2026-08-14T14:58:32.836Z",
   "comment": {
     "text": "This is used as a link label to manage storage quota settings, a button label in a dropdown menu to change quota, and a dialog title for managing storage quota.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 147,
-      "context": "onClose={onCloseClick}\n >\n <ModalDialog.Header>\n {isDisableQuota\n ? t(\"Common:DisableStorageQuota\")\n : t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.description}>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {",
+      "line_number": 146,
+      "context": "onClose={onCloseClick}\n >\n <ModalDialog.Header>\n {isDisableQuota\n ? t(\"Common:DisableStorageQuota\")\n : t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text className={styles.description}>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\")",
       "module": "/packages/shared"
     }
   ],

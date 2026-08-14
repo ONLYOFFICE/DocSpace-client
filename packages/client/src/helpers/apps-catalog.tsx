@@ -69,6 +69,8 @@ import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import CatalogAiArbiterIcon from "@docspace/ui-kit/assets/icons/16/catalog.ai-arbiter.react.svg";
 import CatalogPrivateIcon from "@docspace/ui-kit/assets/icons/16/catalog.private.react.svg";
 
+import { isAppTemporarilyDisabled } from "./disabled-apps";
+
 export type AppId =
   | "ai-files"
   | "ai-rooms"
@@ -90,7 +92,7 @@ export type AppCatalogItem = {
 export const useAppsCatalog = (): AppCatalogItem[] => {
   const { t } = useTranslation(["Common"]);
 
-  return [
+  const catalog: AppCatalogItem[] = [
     {
       id: "ai-files",
       icon: <CatalogFolderIcon />,
@@ -146,4 +148,8 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       alwaysOn: false,
     },
   ];
+
+  // Apps that are disabled or still unreleased (private rooms) must not be
+  // offered anywhere, so they never reach the catalog either.
+  return catalog.filter((app) => !isAppTemporarilyDisabled(app.id));
 };

@@ -69,7 +69,6 @@ import { TooltipContainer } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "../Share.module.scss";
 import type { UserProps } from "../Share.types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const User = ({
 	user,
@@ -140,8 +139,8 @@ export const User = ({
 
 	const tooltipContent = `${
 		"isOwner" in user && user.isOwner
-			? t("Common:PortalOwner", { productName: getBrandName("ProductName") })
-			: t("Common:PortalAdmin", { productName: getBrandName("ProductName") })
+			? t("Common:PortalOwner")
+			: t("Common:PortalAdmin")
 	}. ${t("Common:HasFullAccess")}`;
 
 	const itemAvatar = isSystem

@@ -3,7 +3,7 @@
   "content": "<1>The unused portion of your current subscription is automatically applied toward your new subscription.</1><2>Unused: {{amount}}</2><3>Your billing cycle will restart today.</3>",
   "content_en_sha1_hash": "23f8bbac53f6c1a37af39eb46972855784f2773e",
   "created_at": "2026-08-06T14:20:54.697Z",
-  "updated_at": "2026-08-13T10:58:03.218Z",
+  "updated_at": "2026-08-12T14:02:21.319Z",
   "comment": {
     "text": "Tooltip for a HelpButton explaining how unused subscription credits transfer to a new plan; contains a formatted currency value in {{amount}}.",
     "is_auto": true,

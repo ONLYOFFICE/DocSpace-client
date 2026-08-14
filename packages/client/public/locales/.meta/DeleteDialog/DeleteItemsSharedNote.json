@@ -3,7 +3,7 @@
   "content": "Please note that if you have shared them with someone, they will become unavailable.",
   "content_en_sha1_hash": "840b5acfff4dfd6368270d6e180b41874d1ce417",
   "created_at": "2025-10-27T16:14:31.232Z",
-  "updated_at": "2026-08-13T10:58:03.099Z",
+  "updated_at": "2026-08-12T11:00:51.524Z",
   "comment": {
     "text": "This is a warning message displayed in a confirmation dialog when a user attempts to delete items that have been shared. It informs the user that shared items will become unavailable to others if deleted.",
     "is_auto": true,

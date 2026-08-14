@@ -1,13 +1,13 @@
 {
   "key_path": "RecommendedModelNotAvailableUserDescription",
-  "content": "To use <strong>{{model}}</strong>, a model we tested for form-related tasks, ask the portal admin to add OpenRouter in AI settings.",
-  "content_en_sha1_hash": "d73f4ddfe197e03baa5ba6b68d0c1599ad519979",
-  "created_at": "2026-06-09T09:42:55.488Z",
-  "updated_at": "2026-06-09T09:51:52.167Z",
+  "content": "To use <strong>{{model}}</strong>, a model we tested for form-related tasks, ask the Full admin to add OpenRouter in AI settings.",
+  "content_en_sha1_hash": "90beeb790ff356aa90daf7d4a309a59d30c93619",
+  "created_at": "2026-08-13T14:37:03.469Z",
+  "updated_at": "2026-08-13T14:44:18.663Z",
   "comment": {
-    "text": "Informational text shown when a recommended AI model is unavailable, instructing the user to request access from their administrator; includes an HTML `<strong>` tag wrapping the `{{model}}` variable.",
+    "text": "Informational text displayed when a recommended AI model is unavailable to the user; contains an HTML `<strong>` tag and a `{{model}}` variable representing the model's name.",
     "is_auto": true,
-    "updated_at": "2026-06-09T09:51:52.167Z",
+    "updated_at": "2026-08-13T14:44:18.663Z",
     "model": "gemma4:26b"
   },
   "usage": [

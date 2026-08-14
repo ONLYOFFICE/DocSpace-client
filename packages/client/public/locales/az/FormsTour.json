@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Bu, formanın özüdür — keçidinizlə gələn hər kəsin açdığı şey məhz budur. Artıq əlinizdə olan PDF formanı yükləyin və ya sahədən çıxmadan şablon qalereyasından bir forma qurun.",
+  "FormsBlank": "Bu, formanın özüdür — keçidinizlə gələn hər kəsin açdığı şey məhz budur. Artıq əlinizdə olan PDF formanı yükləyin və ya iş sahəsindən çıxmadan şablon qalereyasından bir forma qurun.",
   "FormsBlankTitle": "Hamının açdığı forma",
   "FormsComplete": "Göndərilən nüsxə {{complete}} bölməsinə düşür və orada qalır, hər adama bir nüsxə. Nəticələrin toplanmasını qoşun, onda hər cavab həm də cədvəldə bir sətrə çevrilir — hər sahə üçün bir sütun, sıralamağa və ya diaqram qurmağa hazır.",
   "FormsCompleteTitle": "Toplanmış cavablar",
@@ -15,7 +15,7 @@
   "FormsItem": "Hər sətir bütöv bir toplamadır. İçində işləmək üçün birini açın, apardıqlarınızı sabitləyin və ya üç nöqtə vasitəsilə adamları dəvət edin, formanı açan keçidi kopyalayın və quraşdırmanı şablon kimi saxlayın.",
   "FormsItemTitle": "Form sahəsi ilə iş",
   "FormsPlacesRecent": "{{recent}} və {{favorites}} apardığınız toplamaları əlinizin altında saxlayır.",
-  "FormsPlacesTemplates": "{{templates}} — saxladığınız sahə şablonları.",
+  "FormsPlacesTemplates": "{{templates}} — saxladığınız form sahəsi şablonları.",
   "FormsPlacesTitle": "Hər şey öz yerində",
   "FormsPlacesTrash": "{{trash}} — silinmiş sahələr, siz onu boşaldana qədər bərpa edilə bilər.",
   "FormsSpace": "Form sahəsi əvvəldən axıra bir toplamadır: boş PDF forma, onu dolduran adamlar və geri qayıdan hər cavab. Gəlin bir dənə yaradaq və içinə baxaq.",

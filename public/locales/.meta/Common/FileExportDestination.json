@@ -3,11 +3,11 @@
   "content": "<1>{{fileName}}</1> file exported to {{sectionName}}",
   "content_en_sha1_hash": "7d984189a627bf8b057fab0ddda7546b4b6c7397",
   "created_at": "2026-08-10T12:21:59.922Z",
-  "updated_at": "2026-08-13T10:59:04.447Z",
+  "updated_at": "2026-08-12T11:18:44.491Z",
   "comment": {
-    "text": "Toast message confirming a successful file export, containing the filename as a clickable link and the destination section name.",
+    "text": "Toast message appearing after a successful file export, containing a clickable filename link and the destination section name.",
     "is_auto": true,
-    "updated_at": "2026-08-13T10:59:04.447Z",
+    "updated_at": "2026-08-12T11:18:44.491Z",
     "model": "gemma4:26b"
   },
   "usage": [

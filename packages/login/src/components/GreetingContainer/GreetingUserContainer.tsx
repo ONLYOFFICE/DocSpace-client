@@ -95,6 +95,7 @@ export const GreetingUserContainer = ({
 					defaults={DEFAULT_CREATION_TEXT}
 					values={{
 						email,
+						organizationName: getBrandName("OrganizationName"),
 						productName: getBrandName("ProductName"),
 					}}
 					components={{

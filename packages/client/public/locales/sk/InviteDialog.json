@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Jazyk pozvánky",
-  "InviteMembersManuallyDescription": "Pozvať nových členov do {{productName}} osobne prostredníctvom e-mailu",
+  "InviteMembersManuallyDescription": "Pozvať nových členov do pracovného priestoru osobne prostredníctvom e-mailu",
   "InviteMembersSearchPlaceholder": "Pozvať členov e-mailom",
-  "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v pracovnom priestore"
 }

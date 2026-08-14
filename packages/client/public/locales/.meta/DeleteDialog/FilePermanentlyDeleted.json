@@ -3,7 +3,7 @@
   "content": "The file will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "443350c85789a8e017b77bf0107171aa77d1f2c7",
   "created_at": "2025-10-01T15:20:12.278Z",
-  "updated_at": "2026-08-13T10:58:03.099Z",
+  "updated_at": "2026-08-12T11:00:51.524Z",
   "comment": {
     "text": "This is a message displayed in a confirmation dialog when a user is about to permanently delete a file from the trash. The `{{trashSection}}` variable will be replaced with the localized name of the trash section.",
     "is_auto": true,

@@ -160,6 +160,7 @@ export type OptionActions = {
   onGoToForms: () => LinkProps;
   onGoToAgents: () => LinkProps;
   onCreateAIAgent: VoidFunction;
+  onOpenAiChat: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;
   onTopUpAndActivateAI: VoidFunction;

@@ -40,6 +40,8 @@ import { isMobile } from "react-device-detect";
 
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 import {
   Events,
   FileExtensions,
@@ -249,6 +251,9 @@ export const useOptions = (
 
   const hasAiProfiles = useHasAiProfiles();
   const isAiReady = standalone ? hasAiProfiles : aiReady;
+
+  const onOpenAiChat = useOpenAiChat();
+  const isAiChatAvailable = useIsAiChatAvailable();
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -523,6 +528,7 @@ export const useOptions = (
           onGoToAgents,
           onOpenAccessSettings,
           onCreateAIAgent,
+          onOpenAiChat,
           onGoToServices,
           onGoToAIProviderSettings,
           onTopUpAndActivateAI,
@@ -541,6 +547,7 @@ export const useOptions = (
         trashSection,
         isCardLinkedToPortal,
         isActivating,
+        isAiChatAvailable,
       ),
     [
       type,
@@ -581,6 +588,8 @@ export const useOptions = (
       isPortalAdmin,
       isCardLinkedToPortal,
       isActivating,
+      onOpenAiChat,
+      isAiChatAvailable,
     ],
   );
 

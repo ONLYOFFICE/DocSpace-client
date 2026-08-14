@@ -3,7 +3,7 @@
   "content": "Forget on this device",
   "content_en_sha1_hash": "08e79006678ae22bb8614d917ff66b84cb622664",
   "created_at": "2026-07-27T13:07:14.888Z",
-  "updated_at": "2026-07-31T12:36:29.537Z",
+  "updated_at": "2026-08-13T10:58:03.280Z",
   "comment": {
     "text": "Button label in the Keys Management section used to remove the current device from the list of authorized devices.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 399,
+      "line_number": 401,
       "context": "onClick={() => {\n if (!busy) handleForgetDevice();\n }}\n dataTestId=\"forget_device_link\"\n >\n {t(\"Common:ForgetDeviceButton\")}\n </Link>\n </div>\n ) : null}\n {isUnlocked ? (\n <div className={styles.deviceRow}>",
       "module": "/packages/client"
     }

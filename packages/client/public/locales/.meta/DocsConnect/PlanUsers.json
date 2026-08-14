@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2026-07-27T13:07:48.490Z",
-  "updated_at": "2026-08-10T12:23:10.487Z",
+  "updated_at": "2026-08-13T10:58:03.213Z",
   "comment": {
     "text": "A label or caption in summary cards and information rows that identifies the number of users included in a subscription plan.",
     "is_auto": true,
@@ -25,25 +25,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 475,
+      "line_number": 491,
       "context": "(isEditActive && !hasChanges) ||\n isTopUpUnavailable;\n \n const renderOverLimitSummary = () => (\n <>\n {summaryRow(t(\"DocsConnect:PlanUsers\"), `${MAX_USERS}+`, usersTooltip)}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),\n formatCurrency(pricePerUser),\n )}\n {summaryRow(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 475,
+      "line_number": 491,
       "context": "(isEditActive && !hasChanges) ||\n isTopUpUnavailable;\n \n const renderOverLimitSummary = () => (\n <>\n {summaryRow(t(\"DocsConnect:PlanUsers\"), `${MAX_USERS}+`, usersTooltip)}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),\n formatCurrency(pricePerUser),\n )}\n {summaryRow(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 475,
+      "line_number": 491,
       "context": "(isEditActive && !hasChanges) ||\n isTopUpUnavailable;\n \n const renderOverLimitSummary = () => (\n <>\n {summaryRow(t(\"DocsConnect:PlanUsers\"), `${MAX_USERS}+`, usersTooltip)}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),\n formatCurrency(pricePerUser),\n )}\n {summaryRow(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 475,
+      "line_number": 491,
       "context": "(isEditActive && !hasChanges) ||\n isTopUpUnavailable;\n \n const renderOverLimitSummary = () => (\n <>\n {summaryRow(t(\"DocsConnect:PlanUsers\"), `${MAX_USERS}+`, usersTooltip)}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),\n formatCurrency(pricePerUser),\n )}\n {summaryRow(",
       "module": "/packages/client"
     },

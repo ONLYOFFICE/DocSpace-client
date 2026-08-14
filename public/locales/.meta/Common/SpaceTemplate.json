@@ -3,7 +3,7 @@
   "content": "Space template",
   "content_en_sha1_hash": "131f4231ef35aa8146e42752376f585157d633ba",
   "created_at": "2026-07-28T11:25:29.818Z",
-  "updated_at": "2026-08-06T14:20:57.598Z",
+  "updated_at": "2026-08-13T10:58:03.159Z",
   "comment": {
     "text": "Label for a quick action button that opens the form templates list.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 304,
-      "context": "// one carries a testid, so the two can never collide in the DOM.\n {\n id: \"quick-form-template\",\n dataTestId: \"quick-form-space-template\",\n icon: <UseRoomTemplateIllustrationIcon />,\n label: t(\"Common:SpaceTemplate\"),\n onClick: () => goFormsTemplates(userId),\n },\n aiChatItems,\n ],\n [t, currentFolderId, userId, aiChatItems],",
+      "line_number": 308,
+      "context": "// one carries a testid, so the two can never collide in the DOM.\n {\n id: \"quick-form-template\",\n dataTestId: \"quick-form-space-template\",\n icon: <UseRoomTemplateIllustrationIcon />,\n label: t(\"Common:SpaceTemplate\"),\n onClick: () => goFormsTemplates(userId),\n },\n ];\n \n // The OForms gallery. There is no folder to create a form in at the Forms",
       "module": "/packages/client"
     }
   ],

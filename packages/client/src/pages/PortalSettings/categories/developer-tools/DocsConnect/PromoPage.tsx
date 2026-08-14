@@ -43,6 +43,11 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import config from "PACKAGE_FILE";
+
+import { DOCS_CONNECT_ROUTE } from "./constants";
 
 import styles from "./PromoPage.module.scss";
 
@@ -76,9 +81,13 @@ const PromoPage = ({
     setSubmitting(true);
     try {
       await startTrial?.();
+      window.location.href = combineUrl(
+        window.ClientConfig?.proxy?.url,
+        config.homepage,
+        DOCS_CONNECT_ROUTE,
+      );
     } catch (error) {
       toastr.error(error as Error);
-    } finally {
       setSubmitting(false);
     }
   };

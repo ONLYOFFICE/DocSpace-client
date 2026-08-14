@@ -650,6 +650,14 @@ self: FilesActionStore,
       }
     }
 
+    // Conversion runs on the server, which only ever sees ciphertext for a
+    // private room, so neither the converter nor the editor can open such a
+    // file. Say that instead of failing later with a generic error.
+    if (item.encrypted && item.viewAccessibility?.MustConvert) {
+      toastr.info(t!("Common:PrivateRoomConvertNotSupported"));
+      return;
+    }
+
     if (canConvert) {
       setConvertItem({ ...item, isOpen: true });
       setConvertDialogData({

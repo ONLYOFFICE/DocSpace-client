@@ -67,6 +67,7 @@ const ViewerWrapper = memo(
       currentDeviceType,
       isPublicFile,
       isDecrypting,
+      decryptionError,
       autoPlay,
 
       onClose,
@@ -197,6 +198,7 @@ const ViewerWrapper = memo(
         currentDeviceType={currentDeviceType}
         isPublicFile={isPublicFile}
         isDecrypting={isDecrypting}
+        decryptionError={decryptionError}
         onMaskClick={onClose}
         onNextClick={onNextClick}
         onPrevClick={onPrevClick}

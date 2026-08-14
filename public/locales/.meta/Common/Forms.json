@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-08-07T15:05:26.412Z",
+  "updated_at": "2026-08-13T10:58:03.026Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -13,37 +13,37 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useFilesHelper.ts",
-      "line_number": 394,
-      "context": "// server path, so it is missing from pathParts. Re-insert it after\n // the root crumb so returning to it keeps searchArea=Forms.\n if (formsSectionRef.current && !isThirdParty) {\n const insertIndex = breadCrumbs.findIndex((bc) => +bc.id === 0) + 1;\n breadCrumbs.splice(insertIndex, 0, {\n label: t(\"Forms\"),\n id: \"forms-section\",\n isRoom: true,\n rootFolderType: FolderType.FillingFormsRoom,\n });\n }",
+      "line_number": 398,
+      "context": "// server path, so it is missing from pathParts. Re-insert it after\n // the root crumb so returning to it keeps searchArea=Forms.\n if (formsSectionRef.current && !isThirdParty) {\n const insertIndex = breadCrumbs.findIndex((bc) => +bc.id === 0) + 1;\n breadCrumbs.splice(insertIndex, 0, {\n label: t(\"Forms\"),\n id: FORMS_SECTION_ID,\n isRoom: true,\n rootFolderType: FORMS_ROOT_FOLDER_TYPE as FolderType,\n });\n }",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 202,
-      "context": "withFormsTreeFolder &&\n !isUserOnly &&\n folder.rootFolderType === FolderType.VirtualRooms\n ) {\n newItems.push({\n label: t(\"Forms\"),\n id: \"forms-section\",\n parentId: folder.parentId!,\n rootFolderType: FolderType.FillingFormsRoom,\n filesCount: folder.filesCount!,\n foldersCount: folder.foldersCount!,",
+      "line_number": 206,
+      "context": "withFormsTreeFolder &&\n !isUserOnly &&\n folder.rootFolderType === FolderType.VirtualRooms\n ) {\n newItems.push({\n label: t(\"Forms\"),\n id: FORMS_SECTION_ID,\n parentId: folder.parentId!,\n rootFolderType: FORMS_ROOT_FOLDER_TYPE as FolderType,\n filesCount: folder.filesCount!,\n foldersCount: folder.foldersCount!,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 299,
+      "line_number": 301,
       "context": "? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel:\n headerProps.headerLabel || (isForms ? t(\"Forms\") : t(\"RoomList\")),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 299,
+      "line_number": 301,
       "context": "? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel:\n headerProps.headerLabel || (isForms ? t(\"Forms\") : t(\"RoomList\")),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 388,
+      "line_number": 397,
       "context": "const formsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);\n formsFilter.searchArea = RoomSearchArea.Forms;\n \n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n onClick: go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),\n children: [\n {\n id: \"forms-recent\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 171,
+      "line_number": 173,
       "context": "tourLabel: t(\"Common:WelcomeStartTour\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-forms\": {\n title: t(\"Common:Forms\"),\n subtitle: t(\"Common:FormsPromoSubtitle\"),\n description: t(\"Common:FormsPromoDescription\"),\n features: [\n {\n Icon: AIPoweredIcon,",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "Custom room",
   "content_en_sha1_hash": "0839c4e1eb680a458fad43d77aa71faffff6d7c4",
   "created_at": "2025-05-19T21:30:44.386Z",
-  "updated_at": "2026-08-07T15:05:26.432Z",
+  "updated_at": "2026-08-13T10:58:03.059Z",
   "comment": {
     "text": "This is a label for a type of room in DocSpace, indicating a user-defined or custom room. It appears in dropdown menus and lists where users select a room type.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 270,
+      "line_number": 274,
       "context": "},\n {\n id: \"quick-custom-room\",\n dataTestId: \"quick-custom-room\",\n icon: <QuickCustomRoomIcon />,\n label: t(\"Common:CustomRoomTitle\"),\n onClick: () =>\n dispatchCreateRoom(currentFolderId, RoomsType.CustomRoom),\n },\n // Opens the Templates list (sidebar Rooms → Templates).\n {",
       "module": "/packages/client"
     },

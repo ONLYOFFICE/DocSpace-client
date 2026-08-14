@@ -48,7 +48,6 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
-import { useEncryption } from "@docspace/shared/context/encryption";
 import { getPublicKeyFingerprint } from "@docspace/shared/services/encryption/identity";
 import type { TEncryptionKeyPair } from "@docspace/shared/api/privacy/types";
 
@@ -218,6 +217,8 @@ type KeysListProps = {
   onSelectActive: (keyId: string) => void;
   isDeleting: boolean;
   deletingKeyId: string | null;
+  /** Key id this device has adopted, from the per-device preference. */
+  activeKeyId?: string | null;
 };
 
 export const KeysList: React.FC<KeysListProps> = ({
@@ -228,9 +229,9 @@ export const KeysList: React.FC<KeysListProps> = ({
   onSelectActive,
   isDeleting,
   deletingKeyId,
+  activeKeyId,
 }) => {
   const { t } = useTranslation(["Common"]);
-  const { publicKey: currentPublicKey } = useEncryption();
 
   if (!keys || keys.length === 0) {
     return (
@@ -253,22 +254,28 @@ export const KeysList: React.FC<KeysListProps> = ({
         {t("Common:EncryptionKeys")} ({keys.length})
       </Text>
       <div className={styles.keysListItems}>
-        {keys.map((key) => (
-          <KeyItem
-            key={key.id}
-            keyData={key}
-            onDelete={onDelete}
-            onExport={onExport}
-            onRotate={onRotate}
-            onSelectActive={onSelectActive}
-            isDeleting={isDeleting}
-            deletingKeyId={deletingKeyId}
-            isCurrentDevice={
-              !!currentPublicKey && key.publicKey === currentPublicKey
-            }
-            canSwitchActive={keys.length > 1}
-          />
-        ))}
+        {keys.map((key) => {
+          // Adoption is recorded per device (active-key-preference), so only
+          // the device holding the key may claim it. Every other key can be
+          // adopted here, a single key on a fresh device included.
+          const isCurrentDevice =
+            !!activeKeyId && String(key.id) === String(activeKeyId);
+
+          return (
+            <KeyItem
+              key={key.id}
+              keyData={key}
+              onDelete={onDelete}
+              onExport={onExport}
+              onRotate={onRotate}
+              onSelectActive={onSelectActive}
+              isDeleting={isDeleting}
+              deletingKeyId={deletingKeyId}
+              isCurrentDevice={isCurrentDevice}
+              canSwitchActive={!isCurrentDevice}
+            />
+          );
+        })}
       </div>
     </div>
   );

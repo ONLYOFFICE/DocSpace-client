@@ -3,7 +3,7 @@
   "content": "Total due today",
   "content_en_sha1_hash": "a8e7f31661fc97cbee8c84a92261648af84764ac",
   "created_at": "2026-04-10T13:53:45.823Z",
-  "updated_at": "2026-08-06T14:20:57.623Z",
+  "updated_at": "2026-08-13T10:58:03.218Z",
   "comment": {
     "text": "This is a label indicating the total amount of money owed for the current day. It appears in the order summary section of the billing panel.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 916,
+      "line_number": 954,
       "context": "<Text\n fontSize=\"14px\"\n fontWeight={600}\n className={styles.summaryValue}\n >\n {t(\"Common:TotalDueToday\")}\n </Text>\n {calcPending ? (\n priceLoader\n ) : (\n <Text",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
-      "line_number": 916,
+      "line_number": 954,
       "context": "<Text\n fontSize=\"14px\"\n fontWeight={600}\n className={styles.summaryValue}\n >\n {t(\"Common:TotalDueToday\")}\n </Text>\n {calcPending ? (\n priceLoader\n ) : (\n <Text",
       "module": "/packages/client"
     }

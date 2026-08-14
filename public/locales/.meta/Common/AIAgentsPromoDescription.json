@@ -3,7 +3,7 @@
   "content": "Automate tasks, reduce manual work, and deliver results faster - with full control over your AI.",
   "content_en_sha1_hash": "18d8c6767309815edf8ecaf794c8a418cbf22e82",
   "created_at": "2026-06-25T19:30:57.561Z",
-  "updated_at": "2026-08-06T14:20:57.531Z",
+  "updated_at": "2026-08-13T10:58:03.073Z",
   "comment": {
     "text": "Descriptive text within a promotional dialog explaining the benefits and efficiency of using AI agents.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 206,
+      "line_number": 208,
       "context": "githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-agents\": {\n title: t(\"Common:AIAgents\"),\n subtitle: t(\"Common:AIAgentsPromoSubtitle\"),\n description: t(\"Common:AIAgentsPromoDescription\"),\n features: [\n {\n Icon: GenerateIcon,\n title: t(\"Common:GenerateAndSummarize\"),\n description: t(\"Common:GenerateAndSummarizeDescription\"),",
       "module": "/packages/client"
     }

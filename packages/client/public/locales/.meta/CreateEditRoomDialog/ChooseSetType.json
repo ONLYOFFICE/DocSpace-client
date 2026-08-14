@@ -3,7 +3,7 @@
   "content": "Choose set type",
   "content_en_sha1_hash": "dfa926bbaee9bb477b27d785e448edb5eed0cf33",
   "created_at": "2026-08-11T00:00:00.000Z",
-  "updated_at": "2026-08-11T00:00:00.000Z",
+  "updated_at": "2026-08-13T10:58:03.089Z",
   "comment": {
     "text": "Dialog title shown when creating a new item from the Forms section, where the user picks a set type instead of a room type.",
     "is_auto": false,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 322,
-      "context": "const chooseTypeHeader = isFormsCreate\n ? t(\"ChooseSetType\")\n : t(\"ChooseRoomType\");\n \n const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : t(\"Common:CreateRoom\");",
+      "line_number": 323,
+      "context": "};\n \n const isTemplate = !roomParams.type && !isTemplateSelected;\n \n const chooseTypeHeader = isFormsCreate\n ? t(\"ChooseSetType\")\n : t(\"ChooseRoomType\");\n \n const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : t(\"Common:CreateRoom\");",
       "module": "/packages/client"
     }
   ],

@@ -1542,7 +1542,7 @@
   "PaymentsTitle": "Payments",
   "PDFs": "PDFs",
   "People": "People",
-  "PeopleSelectorInfo": "Only a room or Full admin can become the owner of the room",
+  "PeopleSelectorInfo": "Only a room admin or Full admin can become the owner of the room",
   "PerBackup": "{{currency}} per 1 backup",
   "Permissions": "Permissions",
   "PerStorage": "{{currency}} per {{amount}}/month",

@@ -116,7 +116,7 @@
   "DisableAiServicesConfirm": "Voit uudelleenaktivoida {{aiServices}} milloin tahansa. Oletko varma, että haluat jatkaa?",
   "DisableAiServicesDescription": "Poistamalla käytöstä {{organizationName}} AI, seuraavat muutokset tulevat voimaan:",
   "DisableAiServicesServicesDisabled": "Maksulliset {{aiServices}} poistetaan käytöstä.",
-  "DisableAiServicesSettingsHidden": "{{aiSettings}} osio poistetaan työtilasta.",
+  "DisableAiServicesSettingsHidden": "{{aiSettings}}-osio poistetaan työtilasta.",
   "DisableEmailDescription": "Jos tämä laatikko on valittu, {{sectionName}} – käyttäjien ei tarvitse vahvistaa sähköpostiosoitettaan työtilassa :ssa tapahtuneen ensimmäisen valtuutuksen jälkeen.",
   "DisableEmailVerification": "Ota sähköpostivahvistus pois käytöstä",
   "DiskSpaceUsed": "Käytetty levytila",

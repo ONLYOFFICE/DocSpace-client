@@ -1,23 +1,15 @@
 {
   "key_path": "FormsFavoritesSummarizeFavoriteSpaces",
-  "content": "Summarize favorite form spaces",
-  "content_en_sha1_hash": "b80e9cddf2e10c64ee5cba7ecfed18b5e76162f0",
-  "created_at": "2026-08-12T15:15:05.693Z",
-  "updated_at": "2026-08-12T15:18:32.102Z",
+  "content": "Summarize favorite Form Spaces",
+  "content_en_sha1_hash": "12b45109f2ef72ab410d7a2ccc6cb25f8169da3d",
+  "created_at": "2026-08-14T09:34:56.523Z",
+  "updated_at": "2026-08-14T09:34:56.523Z",
   "comment": {
-    "text": "Label for an AI suggestion option that triggers a summary of the user's favorite form spaces.",
-    "is_auto": true,
-    "updated_at": "2026-08-12T15:18:32.102Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 731,
-      "context": "],\n \n // +\n formsFavorites: [\n {\n name: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesSummarizeFavoriteSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpaces\"),\n prompt: t(\"AiSuggestions:FormsFavoritesCompareFavoriteSpacesPrompt\"),",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

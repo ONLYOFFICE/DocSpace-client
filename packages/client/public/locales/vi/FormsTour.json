@@ -15,7 +15,7 @@
   "FormsItem": "Mỗi hàng là cả một đợt thu thập. Mở một hàng để làm việc bên trong, ghim những đợt đang chạy, hoặc dùng dấu ba chấm để mời người khác, sao chép liên kết mở biểu mẫu và lưu thiết lập thành mẫu.",
   "FormsItemTitle": "Làm việc với một không gian biểu mẫu",
   "FormsPlacesRecent": "{{recent}} và {{favorites}} giữ những đợt thu thập bạn đang chạy trong tầm tay.",
-  "FormsPlacesTemplates": "{{templates}} — các mẫu không gian bạn đã lưu.",
+  "FormsPlacesTemplates": "{{templates}} — các mẫu không gian biểu mẫu bạn đã lưu.",
   "FormsPlacesTitle": "Mọi thứ đúng chỗ của nó",
   "FormsPlacesTrash": "{{trash}} — các không gian đã xóa, có thể khôi phục cho đến khi bạn dọn sạch.",
   "FormsSpace": "Không gian biểu mẫu là một đợt thu thập trọn vẹn từ đầu đến cuối: biểu mẫu PDF trống, những người điền nó, và mọi câu trả lời gửi về. Hãy tạo một cái và nhìn vào bên trong.",

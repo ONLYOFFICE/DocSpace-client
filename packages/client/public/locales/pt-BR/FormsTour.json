@@ -15,7 +15,7 @@
   "FormsItem": "Cada linha é uma coleta inteira. Abra uma para trabalhar dentro dela, fixe as que estão em andamento ou use os três pontos para convidar pessoas, copiar o link que abre o formulário e salvar a configuração como modelo.",
   "FormsItemTitle": "Trabalhando com um espaço de formulários",
   "FormsPlacesRecent": "{{recent}} e {{favorites}} mantêm à mão as coletas que você está conduzindo.",
-  "FormsPlacesTemplates": "{{templates}} — os modelos de espaço que você salvou.",
+  "FormsPlacesTemplates": "{{templates}} — os modelos de espaço de formulários que você salvou.",
   "FormsPlacesTitle": "Cada coisa em seu lugar",
   "FormsPlacesTrash": "{{trash}} — espaços excluídos, restauráveis até que você a esvazie.",
   "FormsSpace": "Um espaço de formulários é uma coleta de ponta a ponta: o formulário PDF em branco, as pessoas que o preenchem e cada resposta que volta. Vamos criar um e olhar por dentro.",

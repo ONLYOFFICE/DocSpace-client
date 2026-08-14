@@ -15,7 +15,7 @@
   "FormsItem": "Jokainen rivi on kokonainen keräys. Avaa yksi työskennelläksesi sen sisällä, kiinnitä käynnissä olevat tai kutsu kolmesta pisteestä ihmisiä, kopioi lomakkeen avaava linkki ja tallenna asetukset malliksi.",
   "FormsItemTitle": "Työskentely lomaketilassa",
   "FormsPlacesRecent": "{{recent}} ja {{favorites}} pitävät käynnissä olevat keräyksesi käden ulottuvilla.",
-  "FormsPlacesTemplates": "{{templates}} — tallentamasi tilamallit.",
+  "FormsPlacesTemplates": "{{templates}} — tallentamasi lomaketilamallit.",
   "FormsPlacesTitle": "Kaikki paikallaan",
   "FormsPlacesTrash": "{{trash}} — poistetut tilat, palautettavissa siihen asti, kunnes tyhjennät sen.",
   "FormsSpace": "Lomaketila on yksi keräys alusta loppuun: tyhjä PDF-lomake, sitä täyttävät ihmiset ja jokainen palaava vastaus. Luodaan sellainen ja katsotaan sisään.",

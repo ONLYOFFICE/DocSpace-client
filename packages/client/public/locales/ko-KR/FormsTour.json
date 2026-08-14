@@ -15,7 +15,7 @@
   "FormsItem": "각 행이 하나의 완결된 수집입니다. 하나를 열어 그 안에서 작업하고, 진행 중인 것은 고정하고, 점 세 개로 사람을 초대하거나 양식을 여는 링크를 복사하거나 설정을 템플릿으로 저장하세요.",
   "FormsItemTitle": "양식 공간에서 작업하기",
   "FormsPlacesRecent": "{{recent}}와 {{favorites}}는 지금 진행 중인 수집을 가까이에 둡니다.",
-  "FormsPlacesTemplates": "{{templates}} — 저장해 둔 공간 템플릿.",
+  "FormsPlacesTemplates": "{{templates}} — 저장해 둔 양식 공간 템플릿.",
   "FormsPlacesTitle": "모든 것이 제자리에",
   "FormsPlacesTrash": "{{trash}} — 삭제한 공간으로, 비우기 전까지는 복원할 수 있습니다.",
   "FormsSpace": "양식 공간은 처음부터 끝까지 하나의 수집입니다. 빈 PDF 양식, 그것을 작성하는 사람들, 그리고 돌아오는 모든 응답까지. 하나 만들어 안을 들여다봅시다.",

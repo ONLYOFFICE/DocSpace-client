@@ -15,7 +15,7 @@
   "FormsItem": "Every row is a whole collection. Open one to work inside it, pin the ones you are running, or use the three dots to invite people, copy the link that opens the form, and save the setup as a template.",
   "FormsItemTitle": "Working with a form space",
   "FormsPlacesRecent": "{{recent}} and {{favorites}} keep the collections you are running at hand.",
-  "FormsPlacesTemplates": "{{templates}} — the form space templates you saved.",
+  "FormsPlacesTemplates": "{{templates}} — the Form Space templates you saved.",
   "FormsPlacesTitle": "Everything in its place",
   "FormsPlacesTrash": "{{trash}} — deleted form spaces, restorable until you empty it.",
   "FormsSpace": "A form space is one collection from end to end: the blank PDF form, the people filling it in, and every answer that comes back. Let's create one and look inside.",

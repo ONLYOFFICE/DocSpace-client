@@ -15,7 +15,7 @@
   "FormsItem": "Každý riadok je celý zber. Otvorte jeden a pracujte vnútri, pripnite si tie, ktoré práve bežia, alebo cez tri bodky pozvite ľudí, skopírujte odkaz otvárajúci formulár a uložte nastavenia ako šablónu.",
   "FormsItemTitle": "Práca s priestorom pre formuláre",
   "FormsPlacesRecent": "{{recent}} a {{favorites}} držia poruke zbery, ktoré práve vediete.",
-  "FormsPlacesTemplates": "{{templates}} — šablóny priestorov, ktoré ste uložili.",
+  "FormsPlacesTemplates": "{{templates}} — šablóny priestorov pre formuláre, ktoré ste uložili.",
   "FormsPlacesTitle": "Všetko na svojom mieste",
   "FormsPlacesTrash": "{{trash}} — zmazané priestory, obnoviteľné, kým ho nevysypete.",
   "FormsSpace": "Priestor pre formuláre je jeden zber od začiatku do konca: prázdny PDF formulár, ľudia, ktorí ho vypĺňajú, a každá odpoveď, ktorá sa vráti. Poďme jeden vytvoriť a nakuknúť dovnútra.",

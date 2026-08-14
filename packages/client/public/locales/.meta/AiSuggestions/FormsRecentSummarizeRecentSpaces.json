@@ -1,23 +1,15 @@
 {
   "key_path": "FormsRecentSummarizeRecentSpaces",
-  "content": "Summarize recent form spaces",
-  "content_en_sha1_hash": "d743331400fc52075edb3f1cd66742725a7b1747",
-  "created_at": "2026-08-12T15:15:05.889Z",
-  "updated_at": "2026-08-12T15:17:23.373Z",
+  "content": "Summarize recent Form Spaces",
+  "content_en_sha1_hash": "3b7f186f51f57e8d63137635e9df172becd7e947",
+  "created_at": "2026-08-14T09:34:56.693Z",
+  "updated_at": "2026-08-14T09:34:56.693Z",
   "comment": {
-    "text": "Action label for an AI suggestion that triggers a summary of the most recently accessed form spaces.",
-    "is_auto": true,
-    "updated_at": "2026-08-12T15:17:23.373Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 709,
-      "context": "],\n \n // +\n formsRecent: [\n {\n name: t(\"AiSuggestions:FormsRecentSummarizeRecentSpaces\"),\n prompt: t(\"AiSuggestions:FormsRecentSummarizeRecentSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsRecentRecentResults\"),\n prompt: t(\"AiSuggestions:FormsRecentRecentResultsPrompt\"),",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

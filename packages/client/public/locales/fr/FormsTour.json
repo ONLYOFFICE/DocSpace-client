@@ -15,7 +15,7 @@
   "FormsItem": "Chaque ligne est une collecte entière. Ouvrez-en une pour travailler à l'intérieur, épinglez celles que vous menez, ou servez-vous des trois points pour inviter des personnes, copier le lien qui ouvre le formulaire et enregistrer la configuration comme modèle.",
   "FormsItemTitle": "Travailler avec un espace de formulaires",
   "FormsPlacesRecent": "{{recent}} et {{favorites}} gardent à portée de main les collectes que vous menez.",
-  "FormsPlacesTemplates": "{{templates}} — les modèles d'espace que vous avez enregistrés.",
+  "FormsPlacesTemplates": "{{templates}} — les modèles d'espace de formulaires que vous avez enregistrés.",
   "FormsPlacesTitle": "Chaque chose à sa place",
   "FormsPlacesTrash": "{{trash}} — les espaces supprimés, restaurables tant que vous ne l'avez pas vidée.",
   "FormsSpace": "Un espace de formulaires est une collecte de bout en bout : le formulaire PDF vierge, les personnes qui le remplissent et chaque réponse qui revient. Créons-en un et regardons à l'intérieur.",

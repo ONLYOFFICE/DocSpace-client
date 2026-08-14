@@ -15,7 +15,7 @@
   "FormsItem": "Vsaka vrstica je celotna zbirka. Odprite eno, da delate v njej, pripnite tiste, ki jih vodite, ali prek treh pik povabite ljudi, kopirajte povezavo, ki odpre obrazec, in shranite nastavitve kot predlogo.",
   "FormsItemTitle": "Delo s prostorom za obrazce",
   "FormsPlacesRecent": "{{recent}} in {{favorites}} držita pri roki zbirke, ki jih vodite.",
-  "FormsPlacesTemplates": "{{templates}} — predloge prostorov, ki ste jih shranili.",
+  "FormsPlacesTemplates": "{{templates}} — predloge prostorov za obrazce, ki ste jih shranili.",
   "FormsPlacesTitle": "Vse na svojem mestu",
   "FormsPlacesTrash": "{{trash}} — izbrisani prostori, obnovljivi, dokler ga ne izpraznite.",
   "FormsSpace": "Prostor za obrazce je ena zbirka od začetka do konca: prazen obrazec PDF, ljudje, ki ga izpolnjujejo, in vsak odgovor, ki pride nazaj. Ustvarimo enega in poglejmo vanj.",

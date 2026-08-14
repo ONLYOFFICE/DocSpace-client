@@ -15,7 +15,7 @@
   "FormsItem": "Jede Zeile ist eine ganze Sammlung. Öffnen Sie eine, um darin zu arbeiten, heften Sie die laufenden an oder nutzen Sie die drei Punkte, um Personen einzuladen, den Link zum Formular zu kopieren und die Konfiguration als Vorlage zu speichern.",
   "FormsItemTitle": "Arbeiten mit einem Formular-Space",
   "FormsPlacesRecent": "{{recent}} und {{favorites}} halten die Sammlungen, die Sie gerade betreiben, griffbereit.",
-  "FormsPlacesTemplates": "{{templates}} – die Space-Vorlagen, die Sie gespeichert haben.",
+  "FormsPlacesTemplates": "{{templates}} – die Formular-Space-Vorlagen, die Sie gespeichert haben.",
   "FormsPlacesTitle": "Alles an seinem Platz",
   "FormsPlacesTrash": "{{trash}} – gelöschte Spaces, wiederherstellbar, bis Sie ihn leeren.",
   "FormsSpace": "Ein Formular-Space ist eine Sammlung von Anfang bis Ende: das leere PDF-Formular, die Personen, die es ausfüllen, und jede Antwort, die zurückkommt. Erstellen wir einen und schauen wir hinein.",

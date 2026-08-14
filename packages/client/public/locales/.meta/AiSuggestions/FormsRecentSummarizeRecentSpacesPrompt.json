@@ -1,23 +1,15 @@
 {
   "key_path": "FormsRecentSummarizeRecentSpacesPrompt",
-  "content": "Summarize recent form spaces, including their purpose, forms, collection status, results, and pending actions. If this information is not provided, ask me for the desired scope, focus, and summary length.",
-  "content_en_sha1_hash": "35d61cf9ef7c56fa4945c1df87d05fa8bbe305ba",
-  "created_at": "2026-08-12T15:15:05.895Z",
-  "updated_at": "2026-08-12T15:17:02.013Z",
+  "content": "Summarize recent Form Spaces, including their purpose, forms, collection status, results, and pending actions. If this information is not provided, ask me for the desired scope, focus, and summary length.",
+  "content_en_sha1_hash": "821a56f10b0745f14aaec3e2dec704a0a6ddac9e",
+  "created_at": "2026-08-14T09:34:56.698Z",
+  "updated_at": "2026-08-14T09:34:56.698Z",
   "comment": {
-    "text": "Instructional prompt for an AI suggestion that directs the model to summarize recent form spaces with specific details or request clarification if information is missing.",
-    "is_auto": true,
-    "updated_at": "2026-08-12T15:17:02.013Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
-      "line_number": 710,
-      "context": "// +\n formsRecent: [\n {\n name: t(\"AiSuggestions:FormsRecentSummarizeRecentSpaces\"),\n prompt: t(\"AiSuggestions:FormsRecentSummarizeRecentSpacesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormsRecentRecentResults\"),\n prompt: t(\"AiSuggestions:FormsRecentRecentResultsPrompt\"),\n },",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

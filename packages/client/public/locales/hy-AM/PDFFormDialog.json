@@ -1,4 +1,5 @@
 {
   "PDFform": "PDF ձև",
-  "PDFFormIsReadyToast": "PDF ձև <1>{{filename}}</1> պատրաստ է լրացման։"
+  "PDFFormIsReadyToast": "PDF ձև <1>{{filename}}</1> պատրաստ է լրացման։",
+  "PDFFormSuccessfullyCreatedDescription": "Ձեր PDF ձևը պատրաստ է լրացման։ Պատճենեք հանրային հղումը՝ ձևի լրացման գործընթացը սկսելու համար, կամ հրավիրեք այլ օգտատերերի այս տարածք։"
 }

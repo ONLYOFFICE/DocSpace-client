@@ -1,4 +1,5 @@
 {
   "PDFform": "نموذج PDF",
-  "PDFFormIsReadyToast": "نموذج PDF <1>{{filename}}</1> جاهز للتعبئة."
+  "PDFFormIsReadyToast": "نموذج PDF <1>{{filename}}</1> جاهز للتعبئة.",
+  "PDFFormSuccessfullyCreatedDescription": "نموذج PDF الخاص بكم جاهز للتعبئة. انسخوا الرابط العام لبدء عملية تعبئة النموذج أو ادعوا مستخدمين آخرين إلى هذه المساحة."
 }

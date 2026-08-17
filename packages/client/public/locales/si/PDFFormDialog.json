@@ -1,4 +1,5 @@
 {
   "PDFform": "PDF ආකෘතිය",
-  "PDFFormIsReadyToast": "PDF ආකෘතිය <1>{{filename}}</1> දැන් පිරවීම සඳහා සූදානම්ය."
+  "PDFFormIsReadyToast": "PDF ආකෘතිය <1>{{filename}}</1> දැන් පිරවීම සඳහා සූදානම්ය.",
+  "PDFFormSuccessfullyCreatedDescription": "ඔබේ PDF පෝරමය පිරවීම සඳහා සූදානම්ය. පෝරම පිරවීමේ ක්‍රියාවලිය ආරම්භ කිරීමට පොදු සබැඳිය පිටපත් කරන්න හෝ වෙනත් පරිශීලකයින් මෙම අවකාශයට ආරාධනා කරන්න."
 }

@@ -1,4 +1,5 @@
 {
   "PDFform": "ແບບຟອມ PDF",
-  "PDFFormIsReadyToast": "ແບບຟອມ PDF <1>{{filename}}</1> ພ້ອມແລ້ວທີ່ຈະຕື່ມຂໍ້ມູນ."
+  "PDFFormIsReadyToast": "ແບບຟອມ PDF <1>{{filename}}</1> ພ້ອມແລ້ວທີ່ຈະຕື່ມຂໍ້ມູນ.",
+  "PDFFormSuccessfullyCreatedDescription": "ແບບຟອມ PDF ຂອງທ່ານພ້ອມແລ້ວທີ່ຈະຕື່ມຂໍ້ມູນ. ສຳເນົາລິ້ງສາທາລະນະເພື່ອເລີ່ມຂະບວນການຕື່ມຂໍ້ມູນແບບຟອມ ຫຼືເຊີນຜູ້ໃຊ້ອື່ນເຂົ້າສະເປສນີ້."
 }

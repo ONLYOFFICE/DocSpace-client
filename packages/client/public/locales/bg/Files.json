@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Линковете към всички файлове в стаята ще бъдат генерирани отново. Предишните линкове към файлове на стаи и вградени документи ще станат недостъпни.",
   "RoomAccessRedirectNote": "Ще бъдете пренасочени автоматично към {{sectionName}} след 5 секунди.",
   "RoomAvailableViaExternalLink": "Стаята е достъп а чрез външен линк",
+  "RoomAvailableViaSharedLink": "Пространството е достъпно чрез споделен линк",
   "RoomCreated": "Стаята е създадена",
   "RoomEmptyContainerDescription": "Моля, създайте първата стая.",
   "RoomTagsLabel": "Етикети на стая",

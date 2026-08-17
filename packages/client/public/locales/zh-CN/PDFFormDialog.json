@@ -1,4 +1,5 @@
 {
   "PDFform": "PDF 表单",
-  "PDFFormIsReadyToast": "PDF 表单 <1>{{filename}}}</1> 已准备好填写。"
+  "PDFFormIsReadyToast": "PDF 表单 <1>{{filename}}}</1> 已准备好填写。",
+  "PDFFormSuccessfullyCreatedDescription": "您的 PDF 表单已准备好填写。复制公共链接以开始表单填写流程，或邀请其他用户加入此空间。"
 }

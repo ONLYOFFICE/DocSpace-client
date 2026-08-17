@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Lidhjet për të gjithë skedarët në dhomë do të rigjenerohen. Lidhjet e mëparshme me skedarët e dhomës dhe dokumentet e integruara do të bëhen të padisponueshme.",
   "RoomAccessRedirectNote": "Do të ridrejtoheni te {{sectionName}} automatikisht për 5 sekonda.",
   "RoomAvailableViaExternalLink": "Dhoma në dispozicion përmes lidhjes së jashtme",
+  "RoomAvailableViaSharedLink": "Hapësira në dispozicion përmes lidhjes së shpërndarë",
   "RoomCreated": "Dhoma u krijua",
   "RoomEmptyContainerDescription": "Ju lutemi krijoni dhomën e parë.",
   "RoomTagsLabel": "Etiketat e Dhomave",

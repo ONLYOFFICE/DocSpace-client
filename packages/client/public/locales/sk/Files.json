@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Odkazy na všetky súbory v miestnosti budú vygenerované nanovo. Predchádzajúce odkazy na súbory v miestnosti a vložené dokumenty sa stanú nedostupnými.",
   "RoomAccessRedirectNote": "Budete automaticky presmerovaní do sekcie {{sectionName}} o 5 sekúnd.",
   "RoomAvailableViaExternalLink": "Miestnosť je prístupná cez externý odkaz",
+  "RoomAvailableViaSharedLink": "Priestor je prístupný cez zdieľaný odkaz",
   "RoomCreated": "Miestnosť vytvorená",
   "RoomEmptyContainerDescription": "Prosím vytvorte prvú miestnosť.",
   "RoomTagsLabel": "Štítky miestnosti",

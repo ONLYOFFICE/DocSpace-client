@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Otaqdakı bütün fayllara keçidlər yenidən yaradılacaq. Otaq faylları və əlavə olunmuş sənədlərə əvvəlki keçidlər əlçatan olmayacaq.",
   "RoomAccessRedirectNote": "5 saniyədən sonra siz avtomatik olaraq {{sectionName}} bölməsinə yönləndiriləcəksiniz.",
   "RoomAvailableViaExternalLink": "Otaq xarici keçid ilə istifadə edilə bilər",
+  "RoomAvailableViaSharedLink": "Sahə paylaşılan keçid ilə istifadə edilə bilər",
   "RoomCreated": "Otaq yaradıldı",
   "RoomEmptyContainerDescription": "Lütfən, ilk otağı yaradın.",
   "RoomTagsLabel": "Otaq Teqləri",

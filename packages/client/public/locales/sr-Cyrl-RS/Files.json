@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Линкови за све фајлове у соби биће поново генерисани. Претходни линкови до фајлова у соби и уграђених докумената постаће недоступни.",
   "RoomAccessRedirectNote": "Бићеш преусмерен у {{sectionName}} аутоматски за 5 секунди.",
   "RoomAvailableViaExternalLink": "Соба доступна путем спољног линка",
+  "RoomAvailableViaSharedLink": "Простор доступан путем дељеног линка",
   "RoomCreated": "Соба креирана",
   "RoomEmptyContainerDescription": "Молимо вас креирајте прву собу.",
   "RoomTagsLabel": "Ознаке собе",

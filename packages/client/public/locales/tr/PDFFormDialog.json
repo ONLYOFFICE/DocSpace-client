@@ -1,4 +1,5 @@
 {
   "PDFform": "PDF formu",
-  "PDFFormIsReadyToast": "PDF formu <1>{{filename}}</1> doldurulmaya hazır."
+  "PDFFormIsReadyToast": "PDF formu <1>{{filename}}</1> doldurulmaya hazır.",
+  "PDFFormSuccessfullyCreatedDescription": "PDF formunuz doldurulmaya hazır. Form doldurma sürecini başlatmak için genel bağlantıyı kopyalayın veya diğer kullanıcıları bu alana davet edin."
 }

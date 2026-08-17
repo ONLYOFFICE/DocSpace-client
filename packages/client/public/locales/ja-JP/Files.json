@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "ルーム内のすべてのファイルへのリンクが再生成されます。ルームファイルおよび埋め込み文書への以前のリンクは利用できなくなります。",
   "RoomAccessRedirectNote": "5秒後に自動的に{{sectionName}}にリダイレクトされます。",
   "RoomAvailableViaExternalLink": "外部リンクから利用可能なルーム",
+  "RoomAvailableViaSharedLink": "共有リンクから利用可能なスペース",
   "RoomCreated": "ルームが作成されました",
   "RoomEmptyContainerDescription": "最初のルームを作成しましょう",
   "RoomTagsLabel": "ルームタグ",

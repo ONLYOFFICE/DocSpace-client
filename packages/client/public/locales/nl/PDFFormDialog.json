@@ -1,4 +1,5 @@
 {
   "PDFform": "PDF formulier",
-  "PDFFormIsReadyToast": "PDF formulier <1>{{filename}}</1> is klaar om ingevuld te worden."
+  "PDFFormIsReadyToast": "PDF formulier <1>{{filename}}</1> is klaar om ingevuld te worden.",
+  "PDFFormSuccessfullyCreatedDescription": "Uw PDF-formulier is klaar om ingevuld te worden. Kopieer de openbare link om het invulproces te starten of nodig andere gebruikers uit in deze ruimte."
 }

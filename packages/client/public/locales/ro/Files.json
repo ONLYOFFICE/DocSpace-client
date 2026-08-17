@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Link-uri către toate fișierele din sala vor fi regenerate. Link-urile precedente către fișerele din sala si documentele incorporate for deveni indisponibile.",
   "RoomAccessRedirectNote": "Veţi fi redirecţionat automat către {{sectionName}} în 5 secunde.",
   "RoomAvailableViaExternalLink": "Sala este disponibilă pe link extern",
+  "RoomAvailableViaSharedLink": "Spațiul este disponibil pe link partajat",
   "RoomCreated": "Sala s-a creat",
   "RoomEmptyContainerDescription": "Creați prima sală.",
   "RoomTagsLabel": "Etichete sală",

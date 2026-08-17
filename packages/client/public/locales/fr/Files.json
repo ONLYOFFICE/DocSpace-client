@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Les liens vers tous les fichiers de la salle seront générés à nouveau. Les liens précédents vers les fichiers de la salle et les documents intégrés deviendront indisponibles.",
   "RoomAccessRedirectNote": "Vous serez redirigé vers {{sectionName}} automatiquement dans 5 secondes.",
   "RoomAvailableViaExternalLink": "Salle disponible via lien externe",
+  "RoomAvailableViaSharedLink": "Espace disponible via lien partagé",
   "RoomCreated": "Salle créée",
   "RoomEmptyContainerDescription": "Veuillez créer la première salle.",
   "RoomTagsLabel": "Étiquettes de salle",

@@ -1,4 +1,5 @@
 {
   "PDFform": "Biểu mẫu PDF",
-  "PDFFormIsReadyToast": "Biểu mẫu PDF <1>{{filename}} </1> đã sẵn sàng để được điền."
+  "PDFFormIsReadyToast": "Biểu mẫu PDF <1>{{filename}} </1> đã sẵn sàng để được điền.",
+  "PDFFormSuccessfullyCreatedDescription": "Biểu mẫu PDF của bạn đã sẵn sàng để được điền. Sao chép liên kết công khai để bắt đầu quá trình điền biểu mẫu hoặc mời người dùng khác vào không gian này."
 }

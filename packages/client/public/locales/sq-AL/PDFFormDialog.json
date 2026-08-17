@@ -1,4 +1,5 @@
 {
   "PDFform": "Formulari PDF",
-  "PDFFormIsReadyToast": "Formulari PDF <1>{{filename}}</1> është gati për t'u plotësuar."
+  "PDFFormIsReadyToast": "Formulari PDF <1>{{filename}}</1> është gati për t'u plotësuar.",
+  "PDFFormSuccessfullyCreatedDescription": "Formulari juaj PDF është gati për t'u plotësuar. Kopjoni lidhjen publike për të nisur procesin e plotësimit të formularit ose ftoni përdorues të tjerë në këtë hapësirë."
 }

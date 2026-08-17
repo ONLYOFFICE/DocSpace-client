@@ -102,6 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Linki do wszystkich plików w pokoju zostaną wygenerowane ponownie. Poprzednie linki do plików w pokoju i osadzonych dokumentów staną się niedostępne.",
   "RoomAccessRedirectNote": "Zostaniesz automatycznie przekierowany do sekcji {{sectionName}} za 5 sekund.",
   "RoomAvailableViaExternalLink": "Pokój dostępny za pośrednictwem linku zewnętrznego",
+  "RoomAvailableViaSharedLink": "Obszar dostępny za pośrednictwem linku udostępniania",
   "RoomCreated": "Pokój został utworzony",
   "RoomEmptyContainerDescription": "Utwórz pierwszy pokój.",
   "RoomTagsLabel": "Tagi pokoju",

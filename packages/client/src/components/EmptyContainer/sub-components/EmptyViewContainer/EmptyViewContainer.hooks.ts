@@ -47,6 +47,7 @@ import {
   FileExtensions,
   FilesSelectorFilterTypes,
   FilterType,
+  FolderType,
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
@@ -66,6 +67,7 @@ import {
   getOptions,
   getTitle,
 } from "./EmptyViewContainer.helpers";
+import { isFormsSectionScope } from "./EmptyViewContainer.utils";
 
 import type {
   CreateEvent,
@@ -93,6 +95,8 @@ export const useEmptyView = (
     aiReady,
     standalone,
     isCardLinkedToPortal,
+    filterFolderType,
+    roomsFilterSearchArea,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
@@ -101,6 +105,11 @@ export const useEmptyView = (
 
   const hasAiProfiles = useHasAiProfiles();
   const isAiReady = standalone ? hasAiProfiles : aiReady;
+
+  const isFormsScope =
+    rootFolderType === FolderType.RoomTemplates
+      ? roomsFilterSearchArea === RoomSearchArea.FormTemplates
+      : isFormsSectionScope(filterFolderType);
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -126,6 +135,7 @@ export const useEmptyView = (
       isAiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
     );
     const title = getTitle(
       type,
@@ -144,6 +154,7 @@ export const useEmptyView = (
       isAiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
     );
     const icon = getIcon(
       type,
@@ -179,6 +190,7 @@ export const useEmptyView = (
     isAiReady,
     standalone,
     isPortalAdmin,
+    isFormsScope,
   ]);
 
   return emptyViewOptions;

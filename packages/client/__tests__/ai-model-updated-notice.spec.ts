@@ -239,6 +239,31 @@ test.describe("AI model updated notice", () => {
     await expect(notice(page)).toHaveCount(0);
   });
 
+  test("picking a model in the composer takes it away", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    // The card sends the user to the picker, so using the picker is the notice
+    // being acted on. An entity-scoped pick stays session-local, so nothing in
+    // the assignments the notice watches ever changes — the card used to sit
+    // over a picker the user had already answered.
+    mockRequest.use(...aiChatStoreHandlers(TEST_PORT, { assignments: {} }));
+
+    await page.goto(`${baseUrl}${AGENT_CHAT_URL}`);
+    await expect(notice(page)).toBeVisible();
+    await expect(notice(page)).toContainText(AI_CHAT_AUTO_PICKED.name);
+
+    await modelPicker(page).click();
+    await page.getByRole("menuitem", { name: AI_CHAT_ASSIGNED.name }).click();
+
+    await expect(notice(page)).toBeHidden();
+    // Final, like every other way out of the card: the agent still has no
+    // assignment of its own, so an unremembered close would put the notice back
+    // up on the next visit to a picker the user has already dealt with.
+    expect(await readFlag(page, USER_ID)).toBe("true");
+  });
+
   test("Esc closes it the same way the button does", async ({
     page,
     mockRequest,

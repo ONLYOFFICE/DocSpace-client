@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Otaq seçici yerləşdirmə nümunəsi yaradın",
   "CreateSampleUploader": "Nümunə Uploader embed yarat",
   "CreateSampleViewer": "İzləyici yerləşdirmə nümunəsi yaradın",
-  "CSPDescription": "{{organizationName}} iş sahəsini daxil etmək və ya qoşmaq istədiyiniz xidmətin ünvanını daxil edin.",
+  "CSPDescription": "İş sahəsini daxil etmək və ya qoşmaq istədiyiniz xidmətin ünvanını daxil edin.",
   "CSPHeader": "Bu iş sahəsi üçün icazəli domenləri əlavə edin.",
   "CSPHelp": "Bu parametr məzmun hücumlarından qorunmaq üçün istifadə edilə bilən təhlükəsizlik mexanizmidir. CSP təhlükəsiz mənbə yükləmə mənbələrini təsvir edir. \"Ağ siyahıya salınmayan\" mənbələrdən endrilmə bloklanıb. İstifadə olunacaq domenləri (protokollu) göstərin.",
   "CSPInfoBarDescription": "Quraşdırmanın düzgün işləməsini təmin etmək üçün iş sahəniz üçün HTTPS protokolunu aktiv edin.",

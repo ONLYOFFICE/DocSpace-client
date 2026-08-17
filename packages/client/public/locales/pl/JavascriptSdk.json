@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Utwórz próbne osadzenie Selektora pokojów",
   "CreateSampleUploader": "Utwórz przykładowy osadzony Uploader",
   "CreateSampleViewer": "Utwórz próbne osadzenie Przeglądarki",
-  "CSPDescription": "Wprowadź adres usługi, w której chcesz osadzić lub połączyć przestrzeń roboczą {{organizationName}}.",
+  "CSPDescription": "Wprowadź adres usługi, w której chcesz osadzić lub połączyć przestrzeń roboczą.",
   "CSPHeader": "Dodaj dozwolone domeny dla tej przestrzeni roboczej.",
   "CSPHelp": "Dane ustawienie to mechanizm zabezpieczający przed atakami polegającymi na wstrzykiwaniu zawartości. Zasady zabezpieczeń zawartości (CSP) opisują bezpieczne źródła pobierania zasobów. Pobieranie z zasobów, które nie znajdują się na Białej Liście, jest zablokowane. Określ domeny (wraz z protokołem), z którymi będzie to działać.",
   "CSPInfoBarDescription": "Włącz protokół HTTPS dla swojej przestrzeni roboczej, aby zapewnić prawidłowe działanie konfiguracji.",

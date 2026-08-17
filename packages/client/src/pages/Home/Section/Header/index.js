@@ -86,6 +86,9 @@ import {
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
+import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 
@@ -299,6 +302,22 @@ const SectionHeaderContent = (props) => {
     }
     // setIsInfoPanelVisible(!isInfoPanelVisible);
   }, [hideInfoPanelEvent, isInfoPanelVisible, showInfoPanel]);
+
+  // The AI chat panel is hosted by Home (see `useAiChatPanel` there), so the
+  // provider is always mounted above this header and the strict store hook is
+  // safe. `usePanelExclusivity` takes care of closing the info panel when the
+  // chat opens, so the toggle only has to flip its own panel.
+  const aiChatStore = useAiChatStore();
+  const openAiChat = useOpenAiChat();
+  const isAiChatAvailable = useIsAiChatAvailable();
+
+  const onToggleChatPanel = React.useCallback(() => {
+    if (aiChatStore.isVisible) {
+      aiChatStore.close();
+    } else {
+      openAiChat();
+    }
+  }, [aiChatStore, openAiChat]);
 
   const getContextOptionsFolder = React.useCallback(() => {
     if (isProfile) return getUserContextOptions();
@@ -1008,6 +1027,14 @@ const SectionHeaderContent = (props) => {
               }
               toggleInfoPanel={isProfile ? undefined : onToggleInfoPanel}
               isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
+              toggleChatPanel={onToggleChatPanel}
+              isChatPanelVisible={aiChatStore.isVisible}
+              hideChatButton={
+                !isAiChatAvailable ||
+                isSettingsPage ||
+                isPublicRoom ||
+                isProfile
+              }
               titles={{
                 warningText,
                 warningIcon: isRoomStorageQuotaExceeded
@@ -1020,6 +1047,7 @@ const SectionHeaderContent = (props) => {
                     : t("Common:Actions"),
                 contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
+                aiChat: t("Common:AIChatButton"),
               }}
               withMenu={withMenu}
               onPlusClick={onPlusClick}

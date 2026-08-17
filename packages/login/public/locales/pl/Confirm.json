@@ -5,7 +5,7 @@
   "ConnectApp": "Połącz aplikację",
   "ConnectAppDescription": "Zeskanuj podany kod QR za pomocą aplikacji uwierzytelniającej. Alternatywnie, ręcznie wprowadź podany klucz tajny do aplikacji: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Twój aktualny numer telefonu komórkowego",
-  "DeleteProfileBtn": "Usuń moje konto",
+  "DeleteProfileBtn": "Dezaktywuj moje konto",
   "DeleteProfileConfirmation": "Uwaga! Zamierzasz usunąć swoje konto.",
   "DeleteProfileConfirmationInfo": "Klikając przycisk \"Usuń moje konto\", wyrażasz zgodę na zasady naszej <1>Polityki prywatności.</1>",
   "DeleteProfileSuccessDescription": "Twoje konto {{organizationName}} {{productName}} zostało pomyślnie wyłączone. Właściciel lub superadministrator może trwale usunąć Twoje wyłączone konto.",

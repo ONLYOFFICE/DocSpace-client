@@ -5,7 +5,7 @@
   "ConnectApp": "Verbind de app",
   "ConnectAppDescription": "Scan de verstrekte QR-code met uw authenticator-app. Alternatief, voer handmatig de gegeven geheime sleutel in uw app in: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Uw huidige mobiele nummer",
-  "DeleteProfileBtn": "Verwijder mijn account",
+  "DeleteProfileBtn": "Mijn account deactiveren",
   "DeleteProfileConfirmation": "Let op! U staat op het punt uw account te verwijderen.",
   "DeleteProfileConfirmationInfo": "Door op ‛Mijn account verwijderen‛ te klikken, gaat u akkoord met ons <1>Privacybeleid.</1>",
   "DeleteProfileSuccessDescription": "Uw {{organizationName}} {{productName}}-account is succesvol uitgeschakeld. De eigenaar of superbeheerder kan uw uitgeschakelde account permanent verwijderen.",

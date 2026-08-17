@@ -5,10 +5,10 @@
   "created_at": "2025-05-19T21:30:55.267Z",
   "updated_at": "2026-07-27T13:07:50.874Z",
   "comment": {
-    "text": "This is a button label for an action to restore all items from the archive. It appears when the user is viewing the archive and wants to move all archived files and folders back to their original locations.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:10:31.160Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "Imperative action label for the header context menu item that permanently deletes everything stored in the Archive section (handler: onEmptyTrashAction). Translate it as an action (\"empty the archive\"), never as a state (\"the archive is empty\").",
+    "is_auto": false,
+    "updated_at": "2026-08-17T00:00:00.000Z",
+    "model": null
   },
   "usage": [
     {

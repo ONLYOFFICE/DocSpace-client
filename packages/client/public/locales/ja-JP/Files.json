@@ -12,7 +12,7 @@
   "AfterFilesWillBeDeletedPermanently": "ファイルは削除されます。",
   "AllLinksAreDisabled": "すべてのリンクは無効です",
   "AnalyzeResponses": "回答を分析",
-  "ArchiveAction": "空のアーカイブ",
+  "ArchiveAction": "アーカイブを空にする",
   "ArchiveEmptyScreenUser": "アーカイブされたルームはここに表示されます。",
   "ChangeAgentOwnerSelectorInfo": "エージェントの所有者になれるのは、ルーム管理者またはスーパー管理者のみです",
   "ChangeTheAgentOwner": "エージェントの所有者を変更する",

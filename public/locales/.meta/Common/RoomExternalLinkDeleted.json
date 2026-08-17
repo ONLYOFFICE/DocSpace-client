@@ -3,7 +3,7 @@
   "content": "Link <1>«{{linkTitle}}»</1> deleted.",
   "content_en_sha1_hash": "7cea2e32f802fb146ced190da8dbe579760bc862",
   "created_at": "2025-05-19T21:30:54.914Z",
-  "updated_at": "2026-07-07T08:59:21.810Z",
+  "updated_at": "2026-08-17T17:23:21.765Z",
   "comment": {
     "text": "This is a toast message displayed in the activity feed when an external link to a room has been deleted. `{{linkTitle}}` is the title of the deleted link, and `<1>` is used to bold the link title.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 292,
+      "line_number": 320,
       "context": "case FeedActionKeys.RoomExternalLinkDeleted:\n return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"RoomExternalLinkDeleted\"\n values={{\n linkTitle: (feed.data as TFeedData).title,\n }}\n components={{\n 1: (",
       "module": "/packages/client"
     },

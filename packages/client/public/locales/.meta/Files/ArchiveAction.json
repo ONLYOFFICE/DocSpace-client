@@ -3,7 +3,7 @@
   "content": "Empty archive",
   "content_en_sha1_hash": "a34ca8c2e425ac975dd4ded311c4e04ac532fd9f",
   "created_at": "2025-05-19T21:30:55.267Z",
-  "updated_at": "2026-07-27T13:07:50.874Z",
+  "updated_at": "2026-08-17T17:23:21.821Z",
   "comment": {
     "text": "Imperative action label for the header context menu item that permanently deletes everything stored in the Archive section (handler: onEmptyTrashAction). Translate it as an action (\"empty the archive\"), never as a state (\"the archive is empty\").",
     "is_auto": false,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
-      "line_number": 133,
+      "line_number": 131,
       "context": "if (isArchiveFolder) {\n return [\n {\n id: \"header_option_empty-archive\",\n key: \"empty-archive\",\n label: t(\"ArchiveAction\"),\n onClick: self.onEmptyTrashAction,\n disabled: !canDeleteAll,\n icon: ClearTrashReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     }

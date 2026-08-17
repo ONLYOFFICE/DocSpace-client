@@ -1,0 +1,29 @@
+{
+  "key_path": "DeleteFormSpaceConfirm",
+  "content": "The space <strong>\"{{roomName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
+  "content_en_sha1_hash": "ec2532b50ebd8b152a5e38a4017982e709c57154",
+  "created_at": "2026-08-17T17:22:45.075Z",
+  "updated_at": "2026-08-17T17:28:55.353Z",
+  "comment": {
+    "text": "Confirmation message in a deletion dialog that warns of permanent data loss when deleting a Form Space. The variable {{roomName}} represents the space's name and is displayed in bold.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:28:55.353Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 122,
+      "context": "if (isRoomDelete) {\n return isSingle ? (\n <>\n {isFormSpace ? (\n <Trans t={t} i18nKey=\"DeleteFormSpaceConfirm\" ns=\"Common\">\n The space <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n ) : (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

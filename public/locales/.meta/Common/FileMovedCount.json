@@ -3,7 +3,7 @@
   "content": "Files moved ({{count}}).",
   "content_en_sha1_hash": "63c34a945bf73b0cfeb83951dd5f8d83de11f174",
   "created_at": "2025-05-19T21:30:54.814Z",
-  "updated_at": "2026-07-07T08:59:21.804Z",
+  "updated_at": "2026-08-17T17:23:21.761Z",
   "comment": {
     "text": "This is a message displayed in the Info Panel's history feed. It indicates that multiple files have been moved, with `{{count}}` representing the number of files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 83,
+      "line_number": 94,
       "context": "return t(\"Common:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"Common:FileMovedCount\", {\n count,\n });\n return t(\"Common:FilesMovedNotify\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)",
       "module": "/packages/client"
     },

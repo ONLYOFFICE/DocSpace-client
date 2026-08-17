@@ -3,7 +3,7 @@
   "content": "Empty section",
   "content_en_sha1_hash": "d3a52ee49ba7ed31d66e3656a201daf8fbc17589",
   "created_at": "2026-06-03T09:30:00.178Z",
-  "updated_at": "2026-08-17T00:00:00.000Z",
+  "updated_at": "2026-08-17T17:23:21.821Z",
   "comment": {
     "text": "Action label for the header context menu item that permanently deletes everything in the current section (used for a read-only personal Files section).",
     "is_auto": false,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
       "line_number": 164,
-      "context": "{\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Common:EmptySection\"),\n onClick: self.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
+      "context": "disabled: false,\n },\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Common:EmptySection\"),\n onClick: self.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },\n ];",
       "module": "/packages/client"
     }
   ],

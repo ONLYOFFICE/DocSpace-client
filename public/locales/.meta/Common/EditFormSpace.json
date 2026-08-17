@@ -1,0 +1,29 @@
+{
+  "key_path": "EditFormSpace",
+  "content": "Edit space",
+  "content_en_sha1_hash": "ea6677816ab238ed833c5e8ab298c9d8980ef7c0",
+  "created_at": "2026-08-17T17:22:46.784Z",
+  "updated_at": "2026-08-17T17:27:23.333Z",
+  "comment": {
+    "text": "Menu item label used to open the interface for editing space settings.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:27:23.333Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 462,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_edit-room\",\n key: \"edit-room\",\n label: isFormSpace ? t(\"Common:EditFormSpace\") : t(\"Common:EditRoom\"),\n icon: SettingsReactSvgUrl,\n onClick: () => self.onClickEditRoom(item),\n disabled: false,\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Move to {{sectionName}}?",
   "content_en_sha1_hash": "ee3b1c51a995b4cd544de5f673d85dd47977b235",
   "created_at": "2025-06-02T10:19:15.915Z",
-  "updated_at": "2026-07-07T08:59:21.706Z",
+  "updated_at": "2026-08-17T17:23:21.685Z",
   "comment": {
     "text": "This is a dialog title asking for confirmation to move an item to a specific section. The `{{sectionName}}` variable will be replaced with the name of the destination section (e.g., \"Archive\" or \"Trash\").",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 232,
+      "line_number": 235,
       "context": "if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };\n \n const noteText = getDialogContent(",
       "module": "/packages/client"
     },

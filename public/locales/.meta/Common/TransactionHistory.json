@@ -3,7 +3,7 @@
   "content": "Transaction history",
   "content_en_sha1_hash": "aa7d3d7dd9d1706c1bda7bd97c31b7c47a7d310f",
   "created_at": "2026-04-10T13:53:43.722Z",
-  "updated_at": "2026-08-14T14:58:32.797Z",
+  "updated_at": "2026-08-17T17:23:21.785Z",
   "comment": {
     "text": "This is the title for a section or page displaying a user's past transactions.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 182,
+      "line_number": 191,
       "context": "};\n \n const tabsItems: TTabItem[] = [\n {\n id: \"transaction-history\",\n name: t(\"TransactionHistory\"),\n content: (\n <div>\n <TransactionHistory withoutRoleFilter withoutHeader />\n </div>\n ),",
       "module": "/libs/ui-kit"
     },

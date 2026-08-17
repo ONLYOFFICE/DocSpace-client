@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Questo è il modulo vero e proprio: esattamente ciò che apre chiunque segua il vostro link. Caricate un modulo PDF che avete già, oppure createne uno dalla galleria di modelli senza uscire dallo spazio.",
+  "FormsBlank": "Questo è il modulo vero e proprio: esattamente ciò che apre chiunque segua il vostro link. Caricate un modulo PDF che avete già, oppure createne uno dalla galleria di modelli senza uscire dallo spazio di lavoro.",
   "FormsBlankTitle": "Il modulo che tutti aprono",
   "FormsComplete": "Ogni copia inviata finisce in {{complete}} e vi resta, una per persona. Attivate la raccolta dei risultati e ogni risposta diventerà anche una riga di un foglio di calcolo: una colonna per campo, pronta da ordinare o rappresentare in un grafico.",
   "FormsCompleteTitle": "Risposte raccolte",
@@ -14,10 +14,8 @@
   "FormsInProgressTitle": "Iniziato, non concluso",
   "FormsItem": "Ogni riga è un'intera raccolta. Apritene una per lavorarci dentro, fissate quelle che avete in corso oppure usate i tre puntini per invitare persone, copiare il link che apre il modulo e salvare la configurazione come modello.",
   "FormsItemTitle": "Lavorare con uno spazio moduli",
-  "FormsOpenSpace": "Apriamo questo e vediamo come è composta una raccolta. Dentro ogni spazio moduli ci sono sempre le stesse tre cose: il modulo, le risposte ancora in fase di compilazione e quelle già arrivate.",
-  "FormsOpenSpaceTitle": "Entrate in uno spazio",
   "FormsPlacesRecent": "{{recent}} e {{favorites}} tengono a portata di mano le raccolte che avete in corso.",
-  "FormsPlacesTemplates": "{{templates}}: i modelli di spazio che avete salvato.",
+  "FormsPlacesTemplates": "{{templates}}: i modelli di spazio moduli che avete salvato.",
   "FormsPlacesTitle": "Ogni cosa al suo posto",
   "FormsPlacesTrash": "{{trash}}: gli spazi eliminati, ripristinabili finché non lo svuotate.",
   "FormsSpace": "Uno spazio moduli è una raccolta dall'inizio alla fine: il modulo PDF vuoto, le persone che lo compilano e ogni risposta che torna indietro. Creiamone uno e guardiamoci dentro.",

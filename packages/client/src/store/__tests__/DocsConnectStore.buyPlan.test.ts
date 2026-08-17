@@ -37,6 +37,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 vi.mock("@docspace/shared/api/docs-connect", () => ({
   getDocsConnectInfo: vi.fn(),
+  getDocsConnectStatistics: vi.fn(),
   startDocsConnectTrial: vi.fn(),
   buyDocsConnectPlan: vi.fn(),
   calculateDocsConnectDevPack: vi.fn(),
@@ -78,6 +79,7 @@ import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTar
 import type { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import DocsConnectStore from "../DocsConnectStore";
+import type DocumentBuilderReportStore from "../DocumentBuilderReportStore";
 
 const PRICE_PER_USER = 2;
 const DEV_PACK_PRICE = 3;
@@ -140,6 +142,7 @@ const createStore = (info: TDocsConnectInfo) => {
     {
       fetchPortalQuota: vi.fn().mockResolvedValue(null),
     } as unknown as CurrentQuotasStore,
+    {} as DocumentBuilderReportStore,
   );
 
   store.info = info;

@@ -57,7 +57,7 @@ const getTitle = (pathname: string, t: (key: string) => string): string => {
     return t("Common:PaymentMethod");
   if (pathname.includes("/billing/usage")) return t("Common:Usage");
   if (pathname.includes("/billing/addons/ai-services"))
-    return t("Common:AIServices");
+    return t("Common:AIFeatures");
   if (pathname.includes("/billing/addons/ai-search"))
     return t("Common:AISearch");
   if (pathname.includes("/billing/addons/backup")) return t("Common:Backup");

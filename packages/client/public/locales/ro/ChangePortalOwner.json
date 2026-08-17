@@ -1,13 +1,13 @@
 {
   "AppointAdmin": "Numire administratori",
-  "BackupPortal": "Creați o copie de rezervă a datelor din spațiul {{productName}}",
-  "ChangeInstruction": "Pentru a schimba proprietarul {{productName}}, alegeţi numele noului proprietar mai jos.",
-  "ChangeOwner": "Modificare proprietar {{productName}}",
+  "BackupPortal": "Creați o copie de rezervă a datelor din spațiul de lucru",
+  "ChangeInstruction": "Pentru a schimba proprietarul, vă rugăm să alegeți mai jos numele noului proprietar.",
+  "ChangeOwner": "Schimbați proprietarul",
   "ChangeUser": "Schimbare utilizator",
   "DoTheSame": "Faceţi aceleaşi lucruri ca și administratori",
-  "ManagePortal": "Gestionați configurarea spațiului {{productName}}",
+  "ManagePortal": "Gestionați configurarea spațiului de lucru",
   "ManageUser": "Gestionați conturile de utilizator",
-  "NewPortalOwner": "Proprietarul nou al {{productName}}",
-  "PortalOwnerCan": "Proprietarul {{productName}} poate:",
+  "NewPortalOwner": "Noul proprietar al spațiului de lucru",
+  "PortalOwnerCan": "Proprietarul spațiului de lucru poate:",
   "SetAccessRights": "Configurare drepturi de acces"
 }

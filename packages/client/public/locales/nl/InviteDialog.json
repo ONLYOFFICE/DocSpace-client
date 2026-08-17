@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Taal van de uitnodiging",
-  "InviteMembersManuallyDescription": "Nodig nieuwe leden persoonlijk per e-mail uit voor {{productName}}",
+  "InviteMembersManuallyDescription": "Nodig nieuwe leden persoonlijk per e-mail uit naar de werkruimte",
   "InviteMembersSearchPlaceholder": "Leden per e-mail uitnodigen",
-  "InviteViaLinkDescriptionAccounts": "Maak een universele link voor zelfautorisatie in {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Maak een universele link voor zelfautorisatie in de werkruimte"
 }

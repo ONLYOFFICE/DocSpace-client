@@ -111,7 +111,16 @@ export function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/";
 
-    if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
+    // The client app appends authError=true after a request came back 401 and
+    // the logout that follows it could not clear the cookie — on a deleted
+    // portal even POST /authentication/logout answers 404. Sending such a
+    // visitor back to the portal root only makes it fail the same way and
+    // return here, so the cookie must not be trusted in that case.
+    const hasAuthError =
+      request.nextUrl.searchParams.get("authError") === "true";
+
+    if (isAuth && !hasAuthError && redirectUrl)
+      return NextResponse.redirect(redirectUrl);
   }
 }
 

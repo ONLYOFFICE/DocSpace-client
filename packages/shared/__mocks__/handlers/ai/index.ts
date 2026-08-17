@@ -43,6 +43,13 @@ import {
   aiVectorizationPutHandler,
 } from "./vectorization";
 import { aiProvidersDefaultHandler } from "./providersDefault";
+import {
+  aiChatAssignmentsHandler,
+  aiChatDeepModeHandler,
+  aiChatProfilesListHandler,
+  aiChatStoreHandlers,
+  aiChatThreadsListHandler,
+} from "./chatStores";
 
 export {
   aiAgentsHandler,
@@ -54,7 +61,20 @@ export {
   aiVectorizationGetHandler,
   aiVectorizationPutHandler,
   aiProvidersDefaultHandler,
+  aiChatAssignmentsHandler,
+  aiChatDeepModeHandler,
+  aiChatProfilesListHandler,
+  aiChatStoreHandlers,
+  aiChatThreadsListHandler,
 };
+
+export {
+  AI_CHAT_ASSIGNED,
+  AI_CHAT_AUTO_PICKED,
+  AI_CHAT_PROFILES,
+  AiActionType,
+} from "./chatStores";
+export type { AiChatProfile, AssignmentMap } from "./chatStores";
 
 export const aiHandlers = (port: string) => [
   aiAgentsHandler(port),

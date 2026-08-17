@@ -48,7 +48,6 @@ import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import RoomsContent from "./sub-components/RoomsContent";
 import UsersContent from "./sub-components/UsersContent";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const InviteQuotaWarningDialog = (props) => {
   const {
@@ -156,12 +155,8 @@ const InviteQuotaWarningDialog = (props) => {
       <br />
       <Text>
         {standalone
-          ? t("LicenseGracePeriodInfo", {
-              productName: getBrandName("ProductName"),
-            })
-          : t("Common:GracePeriodActivatedDescription", {
-              productName: getBrandName("ProductName"),
-            })}
+          ? t("LicenseGracePeriodInfo")
+          : t("Common:GracePeriodActivatedDescription")}
       </Text>
     </>
   );

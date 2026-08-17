@@ -89,9 +89,7 @@ const PortalIntegration = (props) => {
   const presetsData = [
     {
       title: getBrandName("ProductName"),
-      description: t("PortalDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      description: t("PortalDescription"),
       image: theme.isBase ? PortalImg : PortalImgDark,
       handleOnClick: navigateToPortal,
     },
@@ -127,9 +125,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Custom"),
-      description: t("CustomDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      description: t("CustomDescription"),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },
@@ -164,7 +160,7 @@ const PortalIntegration = (props) => {
     <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>
       <div className={styles.categoryDescription}>
         <Text className="sdk-description">
-          {t("SDKDescription", { productName: getBrandName("ProductName") })}
+          {t("SDKDescription")}
         </Text>
         <Link
           color={currentColorScheme?.main?.accent}
@@ -179,7 +175,7 @@ const PortalIntegration = (props) => {
         <CSPSetting t={t} theme={theme} />
       </div>
       <div className={classNames(styles.categoryHeader, { [styles.isMobile]: isMobile() })}>
-        {t("SelectModeEmbedding", { productName: getBrandName("ProductName") })}
+        {t("SelectModeEmbedding")}
       </div>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}

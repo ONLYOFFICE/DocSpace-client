@@ -45,7 +45,6 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 import type { TTranslation } from "../../../../../types";
 import styles from "./RestoreConfirmModal.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type RestoreConfirmModalProps = {
   visible: boolean;
@@ -89,9 +88,7 @@ const RestoreConfirmModal = ({
             fontWeight={600}
             className={styles.restoreBackupConfirmText}
           >
-            {t("Common:RestoreBackupConfirmBoldText", {
-              productName: getBrandName("ProductName"),
-            })}
+            {t("Common:RestoreBackupConfirmBoldText")}
           </Text>
           <Text as="p" className={styles.restoreBackupConfirmText}>
             {t("Common:RestoreBackupConfirmReplaceText")}

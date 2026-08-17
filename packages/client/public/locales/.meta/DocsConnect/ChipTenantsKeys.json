@@ -3,7 +3,7 @@
   "content": "Your own tenants & keys",
   "content_en_sha1_hash": "5191d54b0576fd51ee0d0076aea8e37ce37555f6",
   "created_at": "2026-07-27T13:07:48.469Z",
-  "updated_at": "2026-07-27T14:30:02.482Z",
+  "updated_at": "2026-08-13T14:37:21.760Z",
   "comment": {
     "text": "A short label for a feature chip within the DocsConnect onboarding modal, representing the capability to manage custom tenants and keys.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
-      "line_number": 105,
+      "line_number": 106,
       "context": "const chips = [\n { Icon: FormatsIcon, label: t(\"DocsConnect:ChipFormats\") },\n { Icon: RebrandingIcon, label: t(\"DocsConnect:ChipWhiteLabel\") },\n { Icon: IntegrationIcon, label: t(\"DocsConnect:ChipAutomationApi\") },\n { Icon: TenantsKeysIcon, label: t(\"DocsConnect:ChipTenantsKeys\") },\n { Icon: CloudIcon, label: t(\"DocsConnect:ChipCloudHosted\") },\n { Icon: AutoUpdatesIcon, label: t(\"DocsConnect:ChipAutoUpdates\") },\n { Icon: PluginsIcon, label: t(\"DocsConnect:ChipPlugins\") },\n ];",
       "module": "/packages/client"
     }

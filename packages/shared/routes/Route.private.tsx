@@ -41,6 +41,7 @@ import AppLoader from "@docspace/ui-kit/components/app-loader";
 import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
 import { AUTH_TOKEN_TIMEOUT_MS, isOAuthFrame } from "../utils/oauthToken";
+import { isPortalNotFoundRedirectClaimed } from "../utils/portalNotFound";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -91,6 +92,13 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   }, [isAuthenticated]);
 
   const renderComponent = () => {
+    // A deleted portal fails every request, this route among them, so the
+    // branches below would send the visitor to the login page — which bounces
+    // a still-present auth cookie back to the portal root, where the same
+    // thing happens again. The wrong-portal-name redirect is already under
+    // way, and nothing may render or navigate over it.
+    if (isPortalNotFoundRedirectClaimed()) return null;
+
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(

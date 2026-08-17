@@ -79,7 +79,7 @@
   "ScopesHelp": "අපේක්ෂාවන් යෙදුමක පරිශීලකයන්ගේ සියලු දත්ත වෙත ප්‍රවේශය සීමා කිරීමට භාවිතා කරනු ලැබේ, සහ ඔබට අවශ්‍ය ප්‍රවේශයේ වර්ගය හරියටම සඳහාවි.",
   "Secret": "රහස",
   "SecretCopy": "සේවාදායක රහස සාර්ථකව ක්ලිප්බෝඩ් එකට පිටපත් කරන ලදී",
-  "SignIn": "{{productName}} සමඟ ලගා වන්න",
+  "SignIn": "{{organizationName}} {{productName}} සමඟ ලගා වන්න",
   "SupportAndLegalInfo": "ආධාර & නීතිමය තොරතුරු",
   "TermsOfService": "සේවා නියමයන්",
   "TermsOfServiceURL": "සේවා නියම URL",

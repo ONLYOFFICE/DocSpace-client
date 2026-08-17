@@ -98,9 +98,7 @@ export const AICard = ({
 
     if (!aiReady) {
       if (isAdmin) {
-        return t("InfoPanel:FormRoomAIProviderNotConnected", {
-          productName: getBrandName("ProductName"),
-        });
+        return t("InfoPanel:FormRoomAIProviderNotConnected");
       }
 
       return (

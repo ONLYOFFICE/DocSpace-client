@@ -1,20 +1,20 @@
 {
   "key_path": "DisableAiServicesSettingsHidden",
-  "content": "The {{aiSettings}} section will be removed from {{productName}}.",
-  "content_en_sha1_hash": "ff8f74bd28e7db5c67ccfe94554709171f4f4ab8",
-  "created_at": "2026-03-26T08:26:46.848Z",
-  "updated_at": "2026-08-07T10:52:44.671Z",
+  "content": "The {{aiSettings}} section will be removed from the workspace.",
+  "content_en_sha1_hash": "d8aeaf3f9a256db1c0ce793ab9568f576f272e99",
+  "created_at": "2026-08-13T22:44:29.315Z",
+  "updated_at": "2026-08-14T15:38:24.533Z",
   "comment": {
-    "text": "This is a line of text within a dialog that informs the user about the consequences of disabling AI services. It states that the AI settings section will be removed, with `{{aiSettings}}` referring to \"AI Services\" and `{{productName}}` referring to \"ONLYOFFICE DocSpace\".",
+    "text": "Informational text within a dialog describing the consequence of disabling AI services. The {{aiSettings}} variable represents the name of the section being removed.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:24:34.819Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:38:24.533Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
       "line_number": 65,
-      "context": "aiServices: t(\"Common:AIServices\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),\n t(\"DisableAiServicesServicesDisabled\", effectVars),\n t(\"DisableAiServicesAgentsDisabled\", effectVars),\n ];\n \n return (",
+      "context": "aiServices: t(\"Common:AIFeatures\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),\n t(\"DisableAiServicesServicesDisabled\", effectVars),\n t(\"DisableAiServicesAgentsDisabled\", effectVars),\n ];\n \n return (",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

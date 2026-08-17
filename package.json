@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "3.8.0",
+  "version": "4.0.0",
   "private": true,
   "engines": {
     "node": ">=24",
@@ -57,7 +57,7 @@
     "he": "1.2.0",
     "lefthook": "^2.1.10",
     "madge": "8.0.0",
-    "nx": "22.7.8",
+    "nx": "23.1.1",
     "prettier": "^3.9.6",
     "react": "19.2.8",
     "shx": "0.4.0",

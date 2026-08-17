@@ -5,6 +5,6 @@
   "FileLocation": "افتح موقع ملف",
   "ImageFileType": "الصور",
   "MailMergeFileType": "حدد ملف XLSX",
-  "SelectFilesType": "حدد نوع الملفات : {{fileType}}",
+  "SelectFilesType": "حدد نوع الملفات: {{fileType}}",
   "UsersWithoutAccess": "بعض المستخدمين الذين تريد ذكرهم ليس لديهم حق الوصول إلى الغرفة: {{users}}"
 }

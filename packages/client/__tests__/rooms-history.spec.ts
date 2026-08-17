@@ -273,6 +273,48 @@ test.describe("Rooms — info panel history", () => {
       ]);
     });
 
+    test("should allow picking the room creation day itself", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      const handle = historyHandle();
+
+      // a creation time past midnight used to disable the whole creation day,
+      // because it was passed to the calendar as the minimum date as-is
+      mockRequest.use(
+        roomContentHandler(TEST_PORT, ROOM_ID, ROOM_FILE_ID, {
+          roomType: RoomsType.VirtualDataRoom,
+          created: "2026-03-10T09:00:00.000Z",
+        }),
+        folderHistoryHandler(TEST_PORT, ROOM_ID, { feeds: FEEDS, handle }),
+      );
+
+      await openHistoryPanel(page, baseUrl);
+
+      const datePicker = await openCalendar(page);
+      const dayBefore = datePicker.getByRole("button", {
+        name: "9",
+        exact: true,
+      });
+      const creationDay = datePicker.getByRole("button", {
+        name: "10",
+        exact: true,
+      });
+
+      await expect(dayBefore).toBeDisabled();
+      await expect(creationDay).toBeEnabled();
+
+      await creationDay.click();
+
+      await expect(page.getByTestId("info_history_calendar")).toHaveText(
+        "Mar 10, 2026",
+      );
+      expect(handle.current?.getLastRequest()?.toDate).toBe(
+        "2026-03-10T23:59:59.999Z",
+      );
+    });
+
     test("should request the whole history back when the day is cleared", async ({
       page,
       baseUrl,
@@ -495,7 +537,58 @@ test.describe("Rooms — info panel history", () => {
 
       await popup.close();
 
+      // the file opened on its own, and the toast still names it and links to
+      // it so the report can be found again later
+      const toast = page.getByTestId("toast-content").first();
+
+      await expect(toast).toContainText("file exported to Files");
+      await expect(
+        toast.getByRole("link", { name: "History report.xlsx" }),
+      ).toHaveAttribute("target", "_blank");
+
       expect(handle.current?.getStartRequestCount()).toBe(1);
+    });
+
+    test("should offer the same open link when the browser blocks the popup", async ({
+      page,
+      baseUrl,
+      mockRequest,
+    }) => {
+      const handle = reportHandle();
+
+      mockRequest.use(
+        ...folderHistoryReportHandlers(TEST_PORT, ROOM_ID, {
+          pollsBeforeComplete: 0,
+          resultFileUrl: REPORT_URL,
+          handle,
+        }),
+      );
+
+      await page.addInitScript(() => {
+        window.open = () => null;
+      });
+
+      await openHistoryPanel(page, baseUrl);
+
+      await exportHistory(page);
+
+      const toast = page.getByTestId("toast-content").first();
+
+      await expect(toast).toBeVisible();
+      await expect(toast).toContainText("file exported to Files");
+
+      const openLink = toast.getByRole("link", { name: "History report.xlsx" });
+      await expect(openLink).toHaveAttribute("target", "_blank");
+
+      const popupPromise = page.waitForEvent("popup");
+
+      await openLink.click();
+
+      const reportPopup = await popupPromise;
+
+      expect(reportPopup.url()).toContain("report=42");
+
+      await reportPopup.close();
     });
 
     test("should poll the task status until the report is ready", async ({
@@ -521,6 +614,8 @@ test.describe("Rooms — info panel history", () => {
       const exportButton = page.getByTestId("info_history_export");
       const loader = page.locator("#info_history-export-loader");
 
+      const popupPromise = page.waitForEvent("popup");
+
       await exportHistory(page);
 
       await expect(loader).toBeVisible();
@@ -529,7 +624,9 @@ test.describe("Rooms — info panel history", () => {
       const toast = page.getByTestId("toast-content").first();
 
       await expect(toast).toBeVisible();
-      await expect(toast).toContainText("The report will be saved to");
+      await expect(toast).toContainText("file exported to Files");
+
+      await (await popupPromise).close();
 
       await expect(loader).toBeHidden();
       await expect(exportButton).toBeEnabled();

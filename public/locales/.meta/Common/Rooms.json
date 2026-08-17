@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-08-07T15:05:26.415Z",
+  "updated_at": "2026-08-14T14:58:32.643Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 174,
+      "line_number": 178,
       "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n title = t(\"Files\");\n break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.AiAgents:\n title = t(\"AIAgents\");\n break;\n default:",
       "module": "/libs/ui-kit"
     },
@@ -25,19 +25,19 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 351,
+      "line_number": 353,
       "context": "}\n emptyScreenHeader={emptyScreenHeader ?? t(\"EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"EmptyRoomsDescriptionText\", {\n sectionName: isForms ? t(\"Forms\") : t(\"Rooms\"),\n })\n }\n searchEmptyScreenImage={\n isBase ? (\n <EmptyScreenFilterRoomsLight />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 138,
+      "line_number": 140,
       "context": "tourLabel: t(\"Common:WelcomeStartTour\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {\n title: t(\"Common:Rooms\"),\n subtitle: t(\"Common:RoomsPromoSubtitle\"),\n description: t(\"Common:RoomsPromoDescription\"),\n features: [\n {\n Icon: CollaborationRoomIcon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
-      "line_number": 88,
+      "line_number": 90,
       "context": "setRoomType(roomType);\n };\n \n const formRoomTooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const publicRoomTooltipContent = t(\"Common:PublicRoomCreationDisabled\");\n \n if (isFormsCreate) {",
       "module": "/packages/client"
     },
@@ -61,20 +61,20 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 332,
-      "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
+      "line_number": 326,
+      "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 332,
-      "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
+      "line_number": 326,
+      "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 332,
-      "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
+      "line_number": 326,
+      "context": "const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
@@ -97,7 +97,7 @@
     },
     {
       "file_path": "/packages/client/src/helpers/apps-catalog.tsx",
-      "line_number": 106,
+      "line_number": 108,
       "context": "alwaysOn: true,\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:Rooms\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n href: \"/ai-rooms\",\n supported: true,\n alwaysOn: false,\n },",
       "module": "/packages/client"
     },
@@ -109,31 +109,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 271,
+      "line_number": 282,
       "context": "href: isGuest ? \"/shared-with-me/filter\" : \"/rooms/personal/filter\",\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:Rooms\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n installed: true,\n href: \"/rooms/shared/filter\",\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 271,
+      "line_number": 270,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: getBrandName(\"ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 271,
+      "line_number": 270,
       "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: getBrandName(\"ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 439,
+      "line_number": 432,
       "context": "<Checkbox\n dataTestId=\"applies_to_rooms_checkbox\"\n isChecked={applyToRooms}\n onChange={() => setApplyToRooms(!applyToRooms)}\n label={t(\"Settings:AppliesToRooms\", {\n rooms: t(\"Common:Rooms\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/accessControl.tsx",
-      "line_number": 439,
+      "line_number": 432,
       "context": "<Checkbox\n dataTestId=\"applies_to_rooms_checkbox\"\n isChecked={applyToRooms}\n onChange={() => setApplyToRooms(!applyToRooms)}\n label={t(\"Settings:AppliesToRooms\", {\n rooms: t(\"Common:Rooms\"),\n })}\n />\n <div\n className={`category-item-description ${styles.checkboxDescription}`}\n >",
       "module": "/packages/client"
     },
@@ -175,8 +175,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/empty-view/index.tsx",
-      "line_number": 156,
-      "context": "if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\", {\n productName: getBrandName(\"ProductName\"),\n });\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n };\n \n const getOptions = () => {\n if (isFiltered) return filterOptions;",
+      "line_number": 153,
+      "context": "const getDescription = () => {\n if (isFiltered) return t(\"Common:EmptyFilterRoomsDescription\");\n if (isArchive)\n return t(\"Common:ArchiveEmptyScreen\");\n return t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n };\n \n const getOptions = () => {\n if (isFiltered) return filterOptions;",
       "module": "/packages/sdk"
     },
     {

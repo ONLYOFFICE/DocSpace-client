@@ -626,7 +626,9 @@ self: FilesActionStore,
       return;
     }
 
-    if (!isAIAgents() && fileItemsList && enablePlugins) {
+    // an encrypted file stays on the normal open path: the plugin registered
+    // for this extension could only pass ciphertext outside the room
+    if (!isAIAgents() && fileItemsList && enablePlugins && !item.encrypted) {
       // TS cannot track the assignment inside the forEach
       // callback; the erased casts keep the old unchecked reads.
       let currPluginItem: Nullable<TPluginFileItem> = null;
@@ -646,6 +648,14 @@ self: FilesActionStore,
             item as unknown as TFile,
           );
       }
+    }
+
+    // Conversion runs on the server, which only ever sees ciphertext for a
+    // private room, so neither the converter nor the editor can open such a
+    // file. Say that instead of failing later with a generic error.
+    if (item.encrypted && item.viewAccessibility?.MustConvert) {
+      toastr.info(t!("Common:PrivateRoomConvertNotSupported"));
+      return;
     }
 
     if (canConvert) {

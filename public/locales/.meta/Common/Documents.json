@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:44.581Z",
-  "updated_at": "2026-08-06T14:20:57.524Z",
+  "updated_at": "2026-08-14T14:58:32.678Z",
   "comment": {
     "text": "This is a label for a category of files, referring to text documents. It appears in progress dialogs, template galleries, and file filters.",
     "is_auto": true,
@@ -85,13 +85,13 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 80,
+      "line_number": 79,
       "context": "i18nKey=\"RoleRoomAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string;\n default:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 80,
+      "line_number": 79,
       "context": "i18nKey=\"RoleRoomAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n ) as unknown as string;\n default:",
       "module": "/packages/shared"
     },
@@ -103,14 +103,14 @@
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 61,
-      "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );",
+      "line_number": 59,
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 61,
-      "context": "components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );",
+      "line_number": 59,
+      "context": "i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );",
       "module": "/packages/shared"
     },
     {

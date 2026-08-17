@@ -3,7 +3,7 @@
   "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
   "created_at": "2025-05-19T21:30:46.180Z",
-  "updated_at": "2026-07-27T13:07:50.673Z",
+  "updated_at": "2026-08-12T14:02:21.283Z",
   "comment": {
     "text": "This is an error message displayed as a toast notification or on an error page, indicating that a shared link is no longer valid because its expiration date has passed.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/actions.helpers.tsx",
-      "line_number": 710,
+      "line_number": 763,
       "context": "item as TFile | TFolder | TRoom,\n );\n \n if (primaryLink) {\n if (primaryLink.sharedTo?.isExpired) {\n toastr.error(t(\"Common:LinkExpired\"));\n return;\n }\n \n if (\n self.filesSettingsStore.isLinkBlockedByAdmin(",
       "module": "/packages/client"
     },

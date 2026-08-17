@@ -67,7 +67,6 @@ import type {
 } from "./BackupList.types";
 import { initState } from "./BackupList.constants";
 import styles from "../../RestoreBackup.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const BackupListModalDialog = ({
   isNotify,
@@ -211,9 +210,7 @@ const BackupListModalDialog = ({
         "restore-backup_warning-description",
       )}
     >
-      {t("Common:RestoreBackupWarningText", {
-        productName: getBrandName("ProductName"),
-      })}{" "}
+      {t("Common:RestoreBackupWarningText")}{" "}
       {!standalone ? (
         <Text
           as="span"
@@ -222,9 +219,7 @@ const BackupListModalDialog = ({
             "restore-backup_warning-link",
           )}
         >
-          {t("Common:RestoreBackupResetInfoWarningText", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Common:RestoreBackupResetInfoWarningText")}
         </Text>
       ) : null}
     </Text>

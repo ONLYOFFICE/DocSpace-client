@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndoneGuests": "Wybrani wyłączeni goście zostaną usunięci z {{productName}}. Nie można cofnąć tej czynności.",
-  "ActionCannotBeUndoneUsers": "Wybrani wyłączeni użytkownicy zostaną usunięci z {{productName}}. Nie będziesz w stanie cofnąć tego działania.",
+  "ActionCannotBeUndoneGuests": "Wybrani wyłączeni goście zostaną usunięci z przestrzeni roboczej. Nie można cofnąć tej czynności.",
+  "ActionCannotBeUndoneUsers": "Wybrani wyłączeni użytkownicy zostaną usunięci z przestrzeni roboczej. Nie będziesz w stanie cofnąć tego działania.",
   "CannotReassignFiles": "Jeśli usuniesz kilku użytkowników jednocześnie, nie będziesz w stanie przypisać ich plików innym użytkownikom.",
   "DeleteGroupGuestsSuccessMessage": "Goście zostali pomyślnie usunięci.",
   "DeleteGroupUsersSuccessMessage": "Użytkownicy zostali pomyślnie usunięci.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Usuń użytkownika",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> zostanie usunięty. Nie można cofnąć tej czynności.",
   "DeletingUsers": "Usuwanie użytkowników",
-  "PersonalDataDeletionInfo": "Dane osobowe, wszystkie pliki i foldery osobiste w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}}* wybranych użytkowników zostaną trwale usunięte. Pliki i foldery wybranych użytkowników przechowywane w sekcjach wspólnych* takich jak pokoje pozostaną w {{productName}}.",
+  "PersonalDataDeletionInfo": "Dane osobowe, wszystkie pliki i foldery osobiste w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}}* wybranych użytkowników zostaną trwale usunięte. Pliki i foldery wybranych użytkowników przechowywane w sekcjach wspólnych* takich jak pokoje pozostaną w przestrzeni roboczej.",
   "PleaseNote": "Uwaga:",
   "ReassignDataToAnotherUser": "Przypisz dane innemu użytkownikowi",
   "SuccessfullyDeleteGuestInfoMessage": "Gość został pomyślnie usunięty",

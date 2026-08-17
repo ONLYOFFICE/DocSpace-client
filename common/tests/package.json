@@ -19,6 +19,7 @@
     "test:ascii": "vitest run ascii.test.js",
     "test:license": "vitest run license.test.js",
     "test:dependencies": "vitest run dependencies.test.js",
+    "test:indentation": "vitest run indentation.test.js",
     "open-report": "open-cli reports/tests-report.html"
   },
   "devDependencies": {

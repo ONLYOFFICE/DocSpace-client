@@ -5,7 +5,7 @@
   "RoomsEmptyTitle": "你的列表暂时是空的",
   "RoomsGroups": "按特定特征整理房间，快速找到你需要的内容。创建分组，并在列表上方直接切换。",
   "RoomsGroupsTitle": "为房间分组",
-  "RoomsMembers": "每个房间的成员列表都在信息面板中。添加门户联系人，并为每位成员设置角色——从仅查看文件到管理整个房间。",
+  "RoomsMembers": "每个房间的成员列表都在信息面板中。添加工作区联系人，并为每位成员设置角色——从仅查看文件到管理整个房间。",
   "RoomsMembersTitle": "协同工作",
   "RoomsPlacesArchive": "{{archive}} — 你不再使用的房间，随时可以恢复。",
   "RoomsPlacesFiles": "{{recent}}、{{favorites}} 和 {{trash}} 汇集来自各房间的文件：最近打开的、已加星标的和已删除的。",

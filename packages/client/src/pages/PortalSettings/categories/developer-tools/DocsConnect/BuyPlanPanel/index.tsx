@@ -42,7 +42,7 @@ import { useApi } from "@docspace/ui-kit/providers/api";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { Text } from "@docspace/ui-kit/components/text";
-import { Link } from "@docspace/ui-kit/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
@@ -76,13 +76,16 @@ import {
   getDocsConnectDaysLeft,
   getDocsConnectNextBillingDate,
   getDocsConnectPeriodDays,
+  isDocsConnectCanceled,
   isDocsConnectPaid,
 } from "../utils";
 import { PAYMENT_ROUTES } from "../../../payments/utils";
+import { brandingRedirectUrl } from "../../../common/Branding/constants";
 
 import styles from "./BuyPlanPanel.module.scss";
 
 const MIN_USERS = 1;
+const DEFAULT_USERS = 50;
 const DEVPACK_MIN_USERS = 10;
 const MAX_USERS = 999;
 const USERS_MINUS_TOOLTIP_ID = "docs_connect_users_minus_tooltip";
@@ -123,6 +126,7 @@ interface BuyPlanPanelProps {
   fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
   fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
   closeBuyPlan?: () => void;
+  docsConnectUrl?: string;
 }
 
 const BuyPlanPanel = ({
@@ -140,18 +144,22 @@ const BuyPlanPanel = ({
   fetchPayerInfo,
   fetchWalletBalance,
   closeBuyPlan,
+  docsConnectUrl,
 }: BuyPlanPanelProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const { paymentApi } = useApi();
 
+  const [devPack, setDevPack] = useState<boolean>(
+    info?.devPackEnabled || (info?.previousPlan?.devPackEnabled ?? false),
+  );
   const [users, setUsers] = useState<number>(() => {
-    const initial = info?.tenant.payment?.quantity ?? 50;
-    const min = info?.devPackEnabled ? DEVPACK_MIN_USERS : MIN_USERS;
+    const initial =
+      info?.tenant.payment?.quantity ||
+      info?.previousPlan?.users ||
+      DEFAULT_USERS;
+    const min = devPack ? DEVPACK_MIN_USERS : MIN_USERS;
     return Math.max(initial, min);
   });
-  const [devPack, setDevPack] = useState<boolean>(
-    info?.devPackEnabled ?? false,
-  );
   const [submitting, setSubmitting] = useState(false);
   const [waitingPayment, setWaitingPayment] = useState(false);
   const [topUpDialogVisible, setTopUpDialogVisible] = useState(false);
@@ -221,6 +229,7 @@ const BuyPlanPanel = ({
   const currentDevPack = info.devPackEnabled ?? false;
 
   const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
+  const isRenew = isDocsConnectCanceled(info);
   const isOverLimit = users > MAX_USERS;
 
   const onToggleDevPack = () => {
@@ -340,6 +349,12 @@ const BuyPlanPanel = ({
       "_blank",
     );
 
+  const rebrandingUrl = combineUrl(
+    window.ClientConfig?.proxy?.url,
+    config.homepage,
+    brandingRedirectUrl,
+  );
+
   const onTopUpConfirm = async () => {
     await switchToDevPack?.({ quantity: users, topUp: 0 });
     toastr.success(t("DocsConnect:PlanPurchased"));
@@ -456,7 +471,8 @@ const BuyPlanPanel = ({
         : t("Common:Upgrade");
     }
 
-    if (!insufficientFunds || isTopUpUnavailable) return t("Common:Upgrade");
+    if (!insufficientFunds || isTopUpUnavailable)
+      return isRenew ? t("Common:RenewSubscription") : t("Common:Upgrade");
 
     return info.deactivated
       ? t("Common:TopUpAndPay")
@@ -641,9 +657,11 @@ const BuyPlanPanel = ({
         isDoubleFooterLine={footerHint !== null}
       >
         <ModalDialog.Header>
-          {isEditActive
-            ? t("Common:EditSubscription")
-            : t("DocsConnect:DocsConnect")}
+          {isRenew
+            ? t("Common:RenewSubscription")
+            : isEditActive
+              ? t("Common:EditSubscription")
+              : t("DocsConnect:DocsConnect")}
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={styles.body}>
@@ -696,7 +714,11 @@ const BuyPlanPanel = ({
               fontWeight={700}
               className={styles.calculateTitle}
             >
-              {t("DocsConnect:CalculateYourPlan")}
+              {isRenew
+                ? t("DocsConnect:PreviousPlanTitle", {
+                    service: t("DocsConnect:DocsConnect"),
+                  })
+                : t("DocsConnect:CalculateYourPlan")}
             </Text>
 
             <div className={styles.usersBlock}>
@@ -779,9 +801,17 @@ const BuyPlanPanel = ({
                     <AutomationApiSvg />
                   </div>
                   <div>
-                    <Text fontSize="12px" fontWeight={600}>
+                    <Link
+                      type={LinkType.page}
+                      href={docsConnectUrl}
+                      target={LinkTarget.blank}
+                      fontSize="13px"
+                      fontWeight={600}
+                      textDecoration="underline"
+                      dataTestId="docs_connect_automation_api_link"
+                    >
                       {t("DocsConnect:AutomationApi")}
-                    </Text>
+                    </Link>
                     <Text fontSize="12px" className={styles.secondaryText}>
                       {t("DocsConnect:AutomationApiDescription")}
                     </Text>
@@ -792,9 +822,17 @@ const BuyPlanPanel = ({
                     <RebrandingSvg />
                   </div>
                   <div>
-                    <Text fontSize="12px" fontWeight={600}>
+                    <Link
+                      type={LinkType.page}
+                      href={rebrandingUrl}
+                      target={LinkTarget.blank}
+                      fontSize="13px"
+                      fontWeight={600}
+                      textDecoration="underline"
+                      dataTestId="docs_connect_rebranding_link"
+                    >
                       {t("DocsConnect:Rebranding")}
-                    </Text>
+                    </Link>
                     <Text fontSize="12px" className={styles.secondaryText}>
                       {t("DocsConnect:RebrandingDescription")}
                     </Text>
@@ -1111,7 +1149,12 @@ const BuyPlanPanel = ({
 };
 
 export default inject(
-  ({ docsConnectStore, paymentStore, currentTariffStatusStore }: TStore) => ({
+  ({
+    docsConnectStore,
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+  }: TStore) => ({
     visible: docsConnectStore.buyPlanPanelVisible,
     info: docsConnectStore.info,
     buyPlan: docsConnectStore.buyPlan,
@@ -1127,6 +1170,7 @@ export default inject(
     fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
     fetchWalletBalance: paymentStore.fetchWalletBalance,
     closeBuyPlan: docsConnectStore.closeBuyPlan,
+    docsConnectUrl: settingsStore.docsConnectUrl,
   }),
 )(observer(BuyPlanPanel));
 

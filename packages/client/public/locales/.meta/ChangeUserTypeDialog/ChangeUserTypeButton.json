@@ -3,7 +3,7 @@
   "content": "Change type",
   "content_en_sha1_hash": "6e6f60c8b6ac90dba84303fb48273c30945c6d3f",
   "created_at": "2025-05-19T21:30:56.926Z",
-  "updated_at": "2026-05-15T15:37:40.245Z",
+  "updated_at": "2026-08-14T14:58:32.788Z",
   "comment": {
     "text": "This is the label for a button that allows users to change the type of an account within the portal settings, specifically during data import.",
     "is_auto": true,
@@ -37,13 +37,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 313,
+      "line_number": 312,
       "context": "case \"change-type\":\n return {\n id: \"option_change-type\",\n key: option,\n icon: ChangeToEmployeeReactSvgUrl,\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n onClick:\n isGuests && isRoomAdmin\n ? () =>\n this.usersStore.changeType(\n EmployeeType.User,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 313,
+      "line_number": 312,
       "context": "case \"change-type\":\n return {\n id: \"option_change-type\",\n key: option,\n icon: ChangeToEmployeeReactSvgUrl,\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n onClick:\n isGuests && isRoomAdmin\n ? () =>\n this.usersStore.changeType(\n EmployeeType.User,",
       "module": "/packages/client"
     },

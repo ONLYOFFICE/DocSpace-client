@@ -68,7 +68,6 @@ import {
 } from "@docspace/shared/enums";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type InviteItemBase = {
   access: number;
@@ -135,9 +134,7 @@ export const makeFreeRole = <T extends InviteItemBase>(
     ? t("Common:GroupMaxAvailableRoleWarning", {
         roleName: (freeRole as { label: string }).label,
       })
-    : t("Common:UserMaxAvailableRoleWarning", {
-        productName: getBrandName("ProductName"),
-      });
+    : t("Common:UserMaxAvailableRoleWarning");
   return item;
 };
 
@@ -150,12 +147,8 @@ export const makeViewerRole = <T extends InviteItemBase>(
 
   item.warning =
     item.access === ShareAccessRights.RoomManager
-      ? t("Common:UserAgentMaxAvailableRoleWarning", {
-          productName: getBrandName("ProductName"),
-        })
-      : t("Common:GuestAgentMaxAvailableRoleWarning", {
-          productName: getBrandName("ProductName"),
-        });
+      ? t("Common:UserAgentMaxAvailableRoleWarning")
+      : t("Common:GuestAgentMaxAvailableRoleWarning");
   item.access = (viewerRole as { access: number }).access;
 
   return item;

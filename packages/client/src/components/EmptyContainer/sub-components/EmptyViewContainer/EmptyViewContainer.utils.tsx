@@ -122,7 +122,6 @@ import type {
   OptionActions,
   UploadType,
 } from "./EmptyViewContainer.types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import { Text } from "@docspace/ui-kit/components";
 
 export const isUser = (access: AccessType) => {
@@ -167,9 +166,7 @@ export const getFolderDescription = (
       () => t("EmptyView:FormFolderDefaultUserDescription"),
     )
     .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
-      t("EmptyView:FormFolderDefaultDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      t("EmptyView:FormFolderDefaultDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
       t("Common:DefaultFolderDescription"),
@@ -231,7 +228,6 @@ const getAIAgentsAIDisabledDescription = (
   return match([standalone, isPortalAdmin])
     .with([true, true], () =>
       t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
-        productName: getBrandName("ProductName"),
         aiChats: t("Common:AIChats"),
       }),
     )
@@ -247,14 +243,11 @@ const getAIAgentsAIDisabledDescription = (
     ))
     .with([true, false], () =>
       t("Common:EmptyAIAgentsAIDisabledDescription", {
-        productName: getBrandName("ProductName"),
         aiAgents: t("Common:AIAgents"),
       }),
     )
     .otherwise(() =>
-      t("Common:EmptyAIDisabledContactAdminDesc", {
-        productName: getBrandName("ProductName"),
-      }),
+      t("Common:EmptyAIDisabledContactAdminDesc"),
     );
 };
 
@@ -299,7 +292,7 @@ export const getRootDescription = (
       t("EmptyView:EmptyTemplatesDescription"),
     )
     .with([FolderType.Forms, P._], () =>
-      t("Files:RoomEmptyContainerDescription"),
+      t("EmptyView:EmptyRootFormsDescription"),
     )
     .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
       <>
@@ -312,18 +305,14 @@ export const getRootDescription = (
       t("Common:DefaultFolderDescription"),
     )
     .with([FolderType.SHARE, P._], () =>
-      t("Common:EmptyShareDescription", {
-        productName: getBrandName("ProductName"),
-      }),
+      t("Common:EmptyShareDescription"),
     )
     .with([FolderType.Recent, P._], () => t("Common:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
       t("Common:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
-      t("Common:ArchiveEmptyScreen", {
-        productName: getBrandName("ProductName"),
-      }),
+      t("Common:ArchiveEmptyScreen"),
     )
     .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>
       t("Files:ArchiveEmptyScreenUser"),
@@ -429,10 +418,7 @@ export const getRootTitle = (
           ShareAccessRights.ReadOnly,
         ),
       ],
-      () =>
-        t("Common:EmptyRootRoomHeader", {
-          productName: getBrandName("ProductName"),
-        }),
+      () => t("Common:EmptyRoomsHeader"),
     )
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserTitle"),
@@ -440,11 +426,7 @@ export const getRootTitle = (
     .with([FolderType.RoomTemplates, P._], () =>
       t("EmptyView:EmptyTemplatesTitle"),
     )
-    .with([FolderType.Forms, P._], () =>
-      t("Common:EmptyRootRoomHeader", {
-        productName: getBrandName("ProductName"),
-      }),
-    )
+    .with([FolderType.Forms, P._], () => t("EmptyView:EmptyRootFormsTitle"))
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )

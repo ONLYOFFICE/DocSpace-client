@@ -1,8 +1,8 @@
 {
   "ChangePasswordSuccess": "Heslo bylo úspěšně změněno",
   "ConfirmEmailChange": "Potvrďte změnu e-mailu",
-  "ConfirmEmailChangeText": "Zadal/a jste žádost o změnu e-mailové adresy u účtu {{productName}}. Pro pokračování se prosím přihlaste pomocí vašich stávajících přihlašovacích údajů.",
-  "ErrorInvalidText": "Za 10 sekund budete přesměrováni na <1>{{productName}}</1>",
+  "ConfirmEmailChangeText": "Zadal/a jste žádost o změnu e-mailové adresy u účtu {{organizationName}} {{productName}}. Pro pokračování se prosím přihlaste pomocí vašich stávajících přihlašovacích údajů.",
+  "ErrorInvalidText": "Za 10 sekund budete přesměrováni na <1>pracovního prostoru</1>",
   "ForgotPassword": "Zapomněli jste heslo?",
   "LDAPUsernamePlaceholder": "Uživatelské jméno {{ldap_domain}}",
   "MessageAuthorize": "Přihlaste se a pokračujte",
@@ -11,7 +11,7 @@
   "PasswordRecoveryTitle": "Obnovení hesla",
   "RecoverAccess": "Obnovit přístup",
   "RecoverContactEmailPlaceholder": "Kontaktní emailová adresa",
-  "RecoverTextBody": "Pokud se nemůžete přihlásit pomocí stávajícího účtu nebo chcete být zaregistrováni jako nový uživatel, kontaktujte správce portálu.",
+  "RecoverTextBody": "Pokud se nemůžete přihlásit pomocí stávajícího účtu nebo chcete být zaregistrováni jako nový uživatel, kontaktujte supersprávce.",
   "Register": "Registrovat se",
   "RegisterTextBodyAfterDomainsList": "Pro registraci zadejte svůj e-mail a klikněte na tlačítko Odeslat žádost. Bude vám zaslán aktivační odkaz.",
   "RegisterTextBodyBeforeDomainsList": "Registrace je dostupná uživatelům s e-mailovým účtem na adrese",
@@ -20,5 +20,5 @@
   "RememberHelper": "Výchozí doba trvání relace je 20 minut. Zaškrtnutím této možnosti ji nastavíte na 1 rok. Chcete-li nastavit vlastní hodnotu, přejděte do Nastavení.",
   "SignInLDAP": "Přihlaste se do: {{ldap_domain}}",
   "SignInLdapHelper": "Použijte pověření pro firemní doménu",
-  "UserIsAlreadyRegistered": "Uživatel <1>{{email}}</1> je již v tomto {{productName}} zaregistrován, zadejte své heslo nebo se vraťte zpět a pokračujte jiným e-mailem."
+  "UserIsAlreadyRegistered": "Uživatel <1>{{email}}</1> je již v tomto pracovním prostoru zaregistrován, zadejte své heslo nebo se vraťte zpět a pokračujte jiným e-mailem."
 }

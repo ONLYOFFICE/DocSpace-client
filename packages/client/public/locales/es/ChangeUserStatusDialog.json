@@ -1,20 +1,20 @@
 {
   "DisableGeneralDescription": "Más tarde puede eliminar o activar a los usuarios desactivados si es necesario. Tenga en cuenta que no puede deshabilitar a usuarios como el Propietario y usted mismo.",
   "DisableGuest": "Desactivar invitado",
-  "DisableGuestDescription": "Si desactiva este invitado, este no podrá iniciar sesión en {{productName}}.",
+  "DisableGuestDescription": "Si desactiva este invitado, este no podrá iniciar sesión en el espacio de trabajo.",
   "DisableGuests": "Desactivar invitados",
-  "DisableGuestsDescription": "Si desactiva estos invitados, no podrán iniciar sesión en {{productName}}.",
+  "DisableGuestsDescription": "Si desactiva estos invitados, no podrán iniciar sesión en el espacio de trabajo.",
   "DisableGuestsGeneralDescription": "Si es necesario, más tarde puede eliminar o activar los invitados desactivados.",
   "DisableUser": "Desactivar usuario",
-  "DisableUserDescription": "Si desactiva a este usuario, no podrá iniciar sesión en {{productName}}, mientras que sus documentos y datos permanecerán intactos.",
+  "DisableUserDescription": "Si desactiva a este usuario, no podrá iniciar sesión en el espacio de trabajo, mientras que sus documentos y datos permanecerán intactos.",
   "DisableUsers": "Desactivar usuarios",
-  "DisableUsersDescription": "Si desactiva a estes usuarios, no podrán iniciar sesión en {{productName}}, mientras que sus documentos y datos permanecerán intactos.",
+  "DisableUsersDescription": "Si desactiva a estes usuarios, no podrán iniciar sesión en el espacio de trabajo, mientras que sus documentos y datos permanecerán intactos.",
   "EnableGuest": "Activar invitado",
-  "EnableGuestDescription": "Si activa este invitado, este podrá volver a iniciar sesión en {{productName}}.",
+  "EnableGuestDescription": "Si activa este invitado, este podrá volver a iniciar sesión en el espacio de trabajo.",
   "EnableGuests": "Activar invitados",
-  "EnableGuestsDescription": "Si activa a estos invitados, podrán volver a iniciar sesión en {{productName}}.",
+  "EnableGuestsDescription": "Si activa a estos invitados, podrán volver a iniciar sesión en el espacio de trabajo.",
   "EnableUser": "Activar usuario",
-  "EnableUserDescription": "Si activa a este usuario, podrá volver a iniciar sesión en {{productName}} y acceder a sus documentos y datos.",
+  "EnableUserDescription": "Si activa a este usuario, podrá volver a iniciar sesión en el espacio de trabajo y acceder a sus documentos y datos.",
   "EnableUsers": "Activar usuarios",
-  "EnableUsersDescription": "Si activa a estes usuarios, podrán volver a iniciar sesión en {{productName}} y acceder a sus documentos y datos."
+  "EnableUsersDescription": "Si activa a estes usuarios, podrán volver a iniciar sesión en el espacio de trabajo y acceder a sus documentos y datos."
 }

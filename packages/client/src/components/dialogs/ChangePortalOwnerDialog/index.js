@@ -53,7 +53,6 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import styles from "./ChangePortalOwner.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -116,13 +115,11 @@ const ChangePortalOwnerDialog = ({
     t("DoTheSame"),
     t("AppointAdmin"),
     t("SetAccessRights"),
-    t("ManagePortal", { productName: getBrandName("ProductName") }),
+    t("ManagePortal"),
     t("ManageUser"),
-    t("ChangePortalOwner:ChangeOwner", {
-      productName: getBrandName("ProductName"),
-    }),
-    t("BackupPortal", { productName: getBrandName("ProductName") }),
-    t("DeactivateOrDeleteSpace", { productName: getBrandName("ProductName") }),
+    t("ChangePortalOwner:ChangeOwner"),
+    t("BackupPortal"),
+    t("DeactivateOrDeleteSpace"),
   ];
 
   const filter = React.useMemo(() => {
@@ -182,19 +179,15 @@ const ChangePortalOwnerDialog = ({
         <div className={styles.peopleSelectorInfo}>
           <Text
             className={styles.newOwner}
-            title={t("NewPortalOwner", {
-              productName: getBrandName("ProductName"),
-            })}
+            title={t("NewPortalOwner")}
           >
-            {t("NewPortalOwner", { productName: getBrandName("ProductName") })}
+            {t("NewPortalOwner")}
           </Text>
           <Text
             className={styles.description}
-            title={t("ChangeInstruction", {
-              productName: getBrandName("ProductName"),
-            })}
+            title={t("ChangeInstruction")}
           >
-            {t("ChangeInstruction", { productName: getBrandName("ProductName") })}
+            {t("ChangeInstruction")}
           </Text>
         </div>
 
@@ -236,11 +229,9 @@ const ChangePortalOwnerDialog = ({
         <div className={styles.availableList}>
           <Text
             className={styles.listHeader}
-            title={t("PortalOwnerCan", {
-              productName: getBrandName("ProductName"),
-            })}
+            title={t("PortalOwnerCan")}
           >
-            {t("PortalOwnerCan", { productName: getBrandName("ProductName") })}
+            {t("PortalOwnerCan")}
           </Text>
 
           {ownerRights?.map((item) => (

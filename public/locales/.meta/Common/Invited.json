@@ -3,7 +3,7 @@
   "content": "Invited",
   "content_en_sha1_hash": "53469df1c48ff6abdcf1b528fd8c8ac2baf05099",
   "created_at": "2025-05-19T21:30:45.993Z",
-  "updated_at": "2026-07-07T08:59:21.768Z",
+  "updated_at": "2026-08-14T14:58:32.735Z",
   "comment": {
     "text": "This is a label indicating that a user has been invited. It appears next to a user's name in a list, for example, when searching for users to invite.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 132,
+      "line_number": 130,
       "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Terminated;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Invited\"))\n : isDisabled\n ? t(\"Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 132,
+      "line_number": 130,
       "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Terminated;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Invited\"))\n : isDisabled\n ? t(\"Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 444,
+      "line_number": 443,
       "context": "<Text\n className={classNames(styles.searchItemText, {\n [styles.isInfo]: true,\n })}\n >\n {t(\"Common:Invited\")}\n </Text>\n ) : null}\n {isDisabled ? (\n <Text\n className={classNames(styles.searchItemText, {",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteInput.tsx",
-      "line_number": 389,
+      "line_number": 388,
       "context": "<Text\n className={classNames(styles.searchItemText, {\n [styles.isInfo]: true,\n })}\n >\n {t(\"Common:Invited\")}\n </Text>\n ) : null}\n {isDisabled ? (\n <Text\n className={classNames(styles.searchItemText, {",
       "module": "/packages/sdk"
     }

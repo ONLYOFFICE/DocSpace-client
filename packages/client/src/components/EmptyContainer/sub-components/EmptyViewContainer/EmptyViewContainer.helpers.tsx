@@ -293,6 +293,7 @@ export const getOptions = (
   trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
   isCardLinkedToPortal: boolean = false,
   isActivating: boolean = false,
+  isAiChatAvailable: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -314,19 +315,13 @@ export const getOptions = (
   );
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromPortalTitle", {
-      productName: getBrandName("ProductName"),
-    }),
-    t("EmptyView:UploadPDFFormOptionDescription", {
-      productName: getBrandName("ProductName"),
-    }),
+    t("EmptyView:UploadFromPortalTitle"),
+    t("EmptyView:UploadPDFFormOptionDescription"),
     FilterType.PDFForm,
   );
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromPortalTitle", {
-      productName: getBrandName("ProductName"),
-    }),
+    t("EmptyView:UploadFromPortalTitle"),
     t("EmptyView:SectionsUploadDescription", {
       sectionNameFirst: t("Common:Files"),
       sectionNameSecond: t("Common:Rooms"),
@@ -343,9 +338,7 @@ export const getOptions = (
 
   const inviteUserOption = createInviteOption(
     t("Common:InviteContacts"),
-    t("EmptyView:InviteUsersOptionDescription", {
-      productName: getBrandName("ProductName"),
-    }),
+    t("EmptyView:InviteUsersOptionDescription"),
   );
 
   const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;
@@ -423,11 +416,23 @@ export const getOptions = (
     disabled: false,
   };
 
+  // Opens the AI chat panel — the same action the quick-action tiles and the
+  // dashboard use. Only offered where the chat is actually reachable
+  // (`isAiChatAvailable` already covers guests and portals without AI).
+  const openAiChat = {
+    title: t("Common:AIChat"),
+    description: t("EmptyView:AIChatOptionDescription"),
+    icon: <CreateChatIcon />,
+    key: "open-ai-chat",
+    onClick: actions.onOpenAiChat,
+    disabled: false,
+  };
+
+  const aiChatOption = isAiChatAvailable ? [openAiChat] : [];
+
   const inviteRootRoom = {
     title: t("EmptyView:InviteNewUsers"),
-    description: t("EmptyView:InviteRootRoomDescription", {
-      productName: getBrandName("ProductName"),
-    }),
+    description: t("EmptyView:InviteRootRoomDescription"),
     icon: <InviteUserFormIcon />,
     key: "invite-root-room",
     onClick: () => actions.inviteRootUser(EmployeeType.User),
@@ -573,14 +578,16 @@ export const getOptions = (
         createRoom,
         inviteRootRoom,
         migrationData,
+        ...aiChatOption,
       ])
       .with([FolderType.Forms, P._, true], () => [])
-      .with([FolderType.Forms, P._, P._], () => [createRoom])
+      .with([FolderType.Forms, P._, P._], () => [createRoom, ...aiChatOption])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,
         createPresentation,
         createForm,
+        ...aiChatOption,
       ])
       .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
         {
@@ -633,9 +640,7 @@ export const getOptions = (
   if (isAIRoom) {
     if (isKnowledgeTab) {
       const uploadFilesFromDocSpace = createUploadFromDocSpace(
-        t("EmptyView:UploadFromPortalTitle", {
-          productName: getBrandName("ProductName"),
-        }),
+        t("EmptyView:UploadFromPortalTitle"),
         t("Common:UploadFilesPortal", {
           sectionNameFirst: t("Common:Files"),
           sectionNameSecond: t("Common:Rooms"),

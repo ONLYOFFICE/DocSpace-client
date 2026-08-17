@@ -1,14 +1,14 @@
 {
   "key_path": "ChangeGuestsTypeToAdminMulti",
-  "content": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
-  "content_en_sha1_hash": "88ee3565e7278333f18e98758425d1d926d181c4",
-  "created_at": "2025-05-19T21:30:56.920Z",
-  "updated_at": "2026-07-07T08:59:21.716Z",
+  "content": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Full admins can access settings, manage and archive rooms, invite new users and assign roles below their level. Full admins have access to the {{documentsSection}} section.",
+  "content_en_sha1_hash": "66ee8334c573169fa5799d20f76138b18c9f6d0e",
+  "created_at": "2026-08-13T14:37:19.488Z",
+  "updated_at": "2026-08-13T15:03:36.438Z",
   "comment": {
-    "text": "This is a message displayed in a dialog when changing multiple guests' user type to \"Admin\". It informs the user about the new user type and the permissions associated with it. `{{membersSection}}` refers to a section name, `{{secondType}}` is the new user type (\"Admin\"), `{{productName}}` is the product name, and `{{documentsSection}}` is another section name.",
+    "text": "Informational text in a confirmation dialog describing the consequences of bulk-changing guests to admin status; includes placeholders for the members section, the new user type (formatted in bold), and the documents section.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:04:03.284Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:03:36.438Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

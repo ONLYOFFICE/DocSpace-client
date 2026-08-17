@@ -119,6 +119,21 @@ class OformsStore {
 
   currentExtensionGallery = ".docx";
 
+  // Set when the gallery is opened from the Forms section root, where there is
+  // no folder to create a file in: picking a template there creates a Form
+  // Filling room built around that form instead of a bare file. Constrains the
+  // gallery to PDFs, like inside a form room.
+  createRoomFromTemplate = false;
+
+  // The template a just-picked Forms-root selection should materialize into,
+  // once the room to hold it exists. Read by CreateEditRoomStore right after it
+  // creates the room; nothing is requested from the API before that.
+  formTemplateForNewRoom: {
+    id: number;
+    title: string;
+    extension: string;
+  } | null = null;
+
   submitToGalleryTileIsVisible = !hasPersisted(
     PersistenceKeys.submitToGalleryTileIsHidden,
   );
@@ -195,6 +210,22 @@ class OformsStore {
   ) => {
     this.isVisibleInfoPanelTemplateGallery = isVisibleInfoPanelTemplateGallery;
   };
+
+  setCreateRoomFromTemplate = (createRoomFromTemplate: boolean) => {
+    this.createRoomFromTemplate = createRoomFromTemplate;
+  };
+
+  setFormTemplateForNewRoom = (
+    formTemplateForNewRoom: OformsStore["formTemplateForNewRoom"],
+  ) => {
+    this.formTemplateForNewRoom = formTemplateForNewRoom;
+  };
+
+  // The gallery is limited to PDF forms both inside a form room and when it is
+  // opened to build a new form space out of a template.
+  get isFormsOnlyGallery() {
+    return this.treeFoldersStore.isFormRoomRoot || this.createRoomFromTemplate;
+  }
 
   fetchOformLocales = async () => {
     const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
@@ -441,7 +472,7 @@ class OformsStore {
   initTemplateGallery = async () => {
     await this.fetchOformLocales();
 
-    const firstLoadFilter: TOformsFilter = this.treeFoldersStore.isFormRoomRoot
+    const firstLoadFilter: TOformsFilter = this.isFormsOnlyGallery
       ? OformsFilter.getDefault()
       : OformsFilter.getDefaultDocx();
 
@@ -486,6 +517,11 @@ class OformsStore {
   };
 
   setTemplateGalleryVisible = (templateGalleryVisible: boolean) => {
+    // Closing always drops the room-from-template mode: the flag is opt-in per
+    // opening, so any other entry point (in-room gallery, "+" menu) keeps
+    // creating plain files even if a Forms-root opening was abandoned.
+    if (!templateGalleryVisible) this.createRoomFromTemplate = false;
+
     this.templateGalleryVisible = templateGalleryVisible;
   };
 

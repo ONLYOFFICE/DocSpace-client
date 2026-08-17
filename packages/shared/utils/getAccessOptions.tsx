@@ -38,7 +38,6 @@ import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
 import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
 import { TFunction } from "i18next";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type AccessOptionType = {
 	key: string | EmployeeType;
@@ -147,7 +146,6 @@ export const getAccessOptions = (
 						1: <strong></strong>,
 					}}
 					values={{
-						productName: getBrandName("ProductName"),
 						sectionName: t("Common:Documents"),
 						agentSection: t("Common:AIAgents"),
 					}}
@@ -171,9 +169,7 @@ export const getAccessOptions = (
 			key: "roomManager",
 			label: t("Common:RoomManager"),
 			description: getRoomAdminDescription(roomType, t),
-			tooltip: t("Common:UserMaxAvailableRoleWarning", {
-				productName: getBrandName("ProductName"),
-			}),
+			tooltip: t("Common:UserMaxAvailableRoleWarning"),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
 			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
@@ -183,9 +179,7 @@ export const getAccessOptions = (
 			key: "agentManager",
 			label: t("Common:AgentManager"),
 			description: getRoomAdminDescription(roomType, t),
-			tooltip: t("Common:UserAgentMaxAvailableRoleWarning", {
-				productName: getBrandName("ProductName"),
-			}),
+			tooltip: t("Common:UserAgentMaxAvailableRoleWarning"),
 			...(!standalone && isNone && { quota: t("Common:Paid") }),
 			color: globalColors.favoritesStatus,
 			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
@@ -204,9 +198,7 @@ export const getAccessOptions = (
 			description: getUserDescription(roomType, t),
 			tooltip:
 				roomType === RoomsType.AIRoom
-					? t("Common:GuestAgentMaxAvailableRoleWarning", {
-							productName: getBrandName("ProductName"),
-						})
+					? t("Common:GuestAgentMaxAvailableRoleWarning")
 					: undefined,
 			access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,
 			type: EmployeeType.User,

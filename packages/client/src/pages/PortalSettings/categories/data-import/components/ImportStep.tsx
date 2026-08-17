@@ -260,7 +260,6 @@ const ImportStep = (props: ImportStepProps) => {
           sectionName={t("Common:CommonFiles")}
           description={t("Settings:CommonFilesDescription", {
             user: user?.displayName,
-            productName: getBrandName("ProductName"),
           })}
           exportSection={{
             sectionName: t("Common:Common"),

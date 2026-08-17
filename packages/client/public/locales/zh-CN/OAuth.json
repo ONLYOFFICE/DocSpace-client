@@ -79,7 +79,7 @@
   "ScopesHelp": "作用域用于限制您的应用对所有用户相关数据的访问，并让您准确指定所需的访问类型。",
   "Secret": "密钥",
   "SecretCopy": "客户端密钥已复制到剪贴板",
-  "SignIn": "使用{{productName}}登录",
+  "SignIn": "使用{{organizationName}} {{productName}}登录",
   "SupportAndLegalInfo": "支持与法律信息",
   "TermsOfService": "服务条款",
   "TermsOfServiceURL": "服务条款网址",

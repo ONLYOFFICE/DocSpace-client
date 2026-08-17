@@ -42,6 +42,7 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { createFile } from "@docspace/shared/api/files";
 import {
   AnalyticsEvents,
   FolderType,
@@ -74,6 +75,7 @@ import ClientLoadingStore from "./ClientLoadingStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import DialogsStore from "./DialogsStore";
 import FilesActionsStore from "./FilesActionsStore";
+import type OformsStore from "./OformsStore";
 import SelectedFolderStore from "./SelectedFolderStore";
 import TagsStore from "./TagsStore";
 import { ThirdPartyStore } from "./ThirdPartyStore";
@@ -113,6 +115,7 @@ class CreateEditRoomStore {
     public clientLoadingStore: ClientLoadingStore,
     public dialogsStore: DialogsStore,
     public avatarEditorDialogStore: AvatarEditorDialogStore,
+    public oformsStore: OformsStore,
   ) {
     makeAutoObservable(this);
   }
@@ -738,6 +741,11 @@ class CreateEditRoomStore {
         ).catch((error) => console.error(error));
       }
 
+      // Forms-root gallery flow: materialize the picked template inside the
+      // room. Awaited before navigating so the room's first listing already
+      // contains the form, rather than racing the route's own fetch.
+      await this.createFormFromTemplate(room);
+
       await this.onOpenNewRoom(room);
 
       window.dataLayer = window.dataLayer || [];
@@ -809,6 +817,28 @@ class CreateEditRoomStore {
       rootFolderType: FolderType.Rooms,
       errorMsg,
     };
+  };
+
+  // Creates the form a Forms-root gallery pick selected, inside the room that
+  // was just created to hold it. Nothing was requested when the template was
+  // picked, so this is the only call the flow makes for the form itself.
+  createFormFromTemplate = async (room: TRoom) => {
+    const { formTemplateForNewRoom, setFormTemplateForNewRoom } =
+      this.oformsStore;
+
+    if (!formTemplateForNewRoom) return;
+
+    const { id, title, extension } = formTemplateForNewRoom;
+
+    // Consumed up front, so a failure here cannot leak into the next room the
+    // user creates.
+    setFormTemplateForNewRoom(null);
+
+    try {
+      await createFile(room.id, `${title}.${extension}`, undefined, id);
+    } catch (error) {
+      toastr.error(error as string);
+    }
   };
 
   onOpenNewRoom = async (room: TRoom) => {

@@ -79,7 +79,7 @@
   "ScopesHelp": "Obseg se uporablja za omejitev dostopa vaše aplikacije do vseh podatkov, povezanih z uporabniki, in vam bo omogočil, da natančno določite, kakšen dostop potrebujete.",
   "Secret": "Skrivnost",
   "SecretCopy": "Skrivnost odjemalca je bila uspešno kopirana v odložišče",
-  "SignIn": "Prijavi se z {{productName}}",
+  "SignIn": "Prijavi se z {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Podpora & Pravne informacije",
   "TermsOfService": "Pogoji storitve",
   "TermsOfServiceURL": "URL Pogojev storitve",

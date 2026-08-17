@@ -1,38 +1,38 @@
 {
   "key_path": "ContactToUpgradeTariff",
-  "content": "Contact the {{productName}} administrator to upgrade the tariff plan.",
-  "content_en_sha1_hash": "73e90a4484889dc6eb26e9a97067dbf1ec7565a6",
-  "created_at": "2025-05-19T21:30:54.108Z",
-  "updated_at": "2026-08-06T16:57:12.649Z",
+  "content": "Contact the Full admin to upgrade the tariff plan.",
+  "content_en_sha1_hash": "14c86ca3084c0b689746e64c8471cc799c6990df",
+  "created_at": "2026-08-13T14:37:17.367Z",
+  "updated_at": "2026-08-14T14:58:32.667Z",
   "comment": {
-    "text": "This is a message displayed to users when they need to upgrade their tariff plan. It instructs them to contact the administrator and includes a variable `{{productName}}` for the product's brand name.",
+    "text": "Informational text within the Quotas bar or an invite quota warning dialog that appears when the payment page is unavailable, instructing users to contact an administrator for a plan upgrade.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:17:48.457Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:12:07.616Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
-      "line_number": 63,
-      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n );",
+      "line_number": 62,
+      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\")}\n </Text>\n );\n \n if (isRoomsTariffLimit)\n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/UsersContent.tsx",
-      "line_number": 96,
-      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n );",
+      "line_number": 95,
+      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\")}\n </Text>\n );\n \n if (isUserTariffLimit)\n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 201,
-      "context": "return t(\"PersonalQuotaHeaderForAdmins\");\n };\n \n const getUpgradeTariffDescription = () => {\n if (!isAdmin)\n return t(\"ContactToUpgradeTariff\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return (\n <Trans",
+      "line_number": 189,
+      "context": "return t(\"PersonalQuotaHeaderForAdmins\");\n };\n \n const getUpgradeTariffDescription = () => {\n if (!isAdmin)\n return t(\"ContactToUpgradeTariff\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"ClickToUpgradeTariff\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
-      "line_number": 170,
-      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n );",
+      "line_number": 165,
+      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\")}\n </Text>\n );\n \n const roomsLimitContent = isRoomsTariffLimit ? (\n <>",
       "module": "/packages/sdk"
     }
   ],
@@ -167,7 +167,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -182,6 +182,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

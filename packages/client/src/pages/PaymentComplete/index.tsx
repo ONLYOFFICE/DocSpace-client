@@ -38,7 +38,7 @@ import { inject, observer } from "mobx-react";
 
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import AiPaywallCompletePage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage";
+import PaymentCompletePage from "@docspace/ui-kit/billing/payment-complete/PaymentCompletePage";
 
 import styles from "./PaymentComplete.module.scss";
 
@@ -58,7 +58,7 @@ const PaymentComplete = ({
       className={styles.wrapper}
       style={{ "--bg-pattern": bgPattern } as React.CSSProperties}
     >
-      <AiPaywallCompletePage docsConnectUrl={docsConnectUrl} />
+      <PaymentCompletePage docsConnectUrl={docsConnectUrl} />
     </div>
   );
 };

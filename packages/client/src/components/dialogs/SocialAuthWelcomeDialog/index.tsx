@@ -126,6 +126,7 @@ const SocialAuthWelcomeDialogComponent = ({
     >
       <ModalDialog.Header>
         {t("Common:EmptyRootRoomHeader", {
+          organizationName: getBrandName("OrganizationName"),
           productName: getBrandName("ProductName"),
         })}
       </ModalDialog.Header>
@@ -148,9 +149,7 @@ const SocialAuthWelcomeDialogComponent = ({
           <div className="account-details">
             <div className={`${styles.infoRow} welcome-product-name`}>
               <Text className="welcome-text">
-                {t("SocialAuthWelcomeDialog:ProductNameDetail", {
-                  productName: getBrandName("ProductName"),
-                })}
+                {t("SocialAuthWelcomeDialog:ProductNameDetail")}
               </Text>
               <Text fontWeight="600" truncate className="welcome-text">
                 {baseDomain == "localhost"
@@ -248,9 +247,7 @@ const SocialAuthWelcomeDialogComponent = ({
         <Button
           id="continue-to-docspace"
           className="auth-social-button"
-          label={t("SocialAuthWelcomeDialog:ContinueToProduct", {
-            productName: getBrandName("ProductName"),
-          })}
+          label={t("SocialAuthWelcomeDialog:ContinueToProduct")}
           primary
           onClick={onContinueClick}
           scale={currentDeviceType === DeviceType.mobile}

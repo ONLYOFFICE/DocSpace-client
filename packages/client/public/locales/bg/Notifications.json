@@ -2,8 +2,8 @@
   "ActionsWithFilesDescription": "Бейджве ще показват активността на файловете — качвания, редактиране или споделяния — в секциите {{rooms}}, {{shared}}, {{documents}} и {{aiAgents}}.",
   "AdminSetupRequired": "Необходима е административна настройка",
   "Badges": "Баджове",
-  "DailyFeed": "Ежедневен {{productName}} фийд",
-  "DailyFeedDescription": "Четете новини и събития от вашия {{productName}} в ежедневен бюлетин.",
+  "DailyFeed": "Ежедневен {{organizationName}} {{productName}} фийд",
+  "DailyFeedDescription": "Четете новини и събития от вашия {{organizationName}} {{productName}} в ежедневен бюлетин.",
   "FileActivityNotify": "Уведомявания за активност на файлове",
   "IsNotValid": "Не е валидно",
   "LdapEmailTooltip": "Този потребителски акаунт е зареден от LDAP. Имейл адресът на потребителя не е посочен и текущият е генериран автоматично и не може да се използва за изпращане на известия.",
@@ -14,6 +14,6 @@
   "SettingUpNotifications": "Настройка на известия",
   "SuccessConnected": "{{serviceName}} беше успешно свързан като канал за известия. Сега ще получавате актуализации там.",
   "SuccessDisconnected": "{{serviceName}} беше успешно премахнат като канал за известия. Известия вече няма да се изпращат там.",
-  "UsefulTips": "Полезни съвети за {{productName}}",
-  "UsefulTipsDescription": "Поучавайте полезни напътствия за {{productName}}"
+  "UsefulTips": "Полезни съвети за {{organizationName}} {{productName}}",
+  "UsefulTipsDescription": "Поучавайте полезни напътствия за {{organizationName}} {{productName}}"
 }

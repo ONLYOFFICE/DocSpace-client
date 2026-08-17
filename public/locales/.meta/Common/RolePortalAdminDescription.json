@@ -1,26 +1,26 @@
 {
   "key_path": "RolePortalAdminDescription",
-  "content": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
-  "content_en_sha1_hash": "bab4e02ce9aa9451d52b5912286876ff2522a52d",
-  "created_at": "2025-12-16T07:24:33.027Z",
-  "updated_at": "2026-05-15T14:00:06.968Z",
+  "content": "Full admins can access workspace settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
+  "content_en_sha1_hash": "dd386c853ec89c14b5295c3bdcabd0b06e889d87",
+  "created_at": "2026-08-13T22:44:19.172Z",
+  "updated_at": "2026-08-14T15:03:02.941Z",
   "comment": {
-    "text": "This is a description of the Portal Admin role, displayed when viewing user roles or assigning a new role. It explains the permissions of a Portal Admin, including managing rooms, inviting users, and accessing settings. `{{productName}}` is the product name (e.g., ONLYOFFICE DocSpace), `{{sectionName}}` is the name of a specific section, and `{{agentSection}}` refers to a section related to agents. The `<1>` tag bolds the text within it.",
+    "text": "Description text for the Portal Admin role in user management or access settings. It includes variables for the main section name (`{{sectionName}}`) and the agent section (`{{agentSection}}`), with the latter wrapped in a bold tag.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:44:30.049Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:03:02.941Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 145,
-      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),",
+      "line_number": 144,
+      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 55,
-      "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),",
+      "line_number": 54,
+      "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
       "module": "/packages/shared"
     }
   ],
@@ -106,15 +106,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The scope of the <1> tags differs between English and Korean. In English, only 'In {{agentSection}}' is wrapped in <1> tags (which applies <strong> styling), but in Korean the entire second sentence is wrapped in <1> tags. This causes significantly more text to be bolded than the English version intends.",
-          "suggestion": "<1>{{agentSection}}에서는</1>: 지식 기반 및 액세스 설정을 포함하여 {{agentSection}}을를 생성, 구성 및 관리할 수 있습니다.",
-          "checked_at": "2026-04-13T08:34:19.617Z",
-          "checked_by": "claude-code/haiku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -163,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

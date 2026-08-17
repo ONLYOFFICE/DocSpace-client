@@ -175,6 +175,47 @@ describe("getFilesContextOptions — encrypted file", () => {
   });
 });
 
+// Bug 82880: a format that needs server-side conversion cannot be opened from
+// a private room at all, so the menu must not offer it — the file click already
+// explains why. Keys are present here on purpose: without them the no-keys
+// branch strips the same options and the assertions would pass for free.
+describe("getFilesContextOptions — encrypted file that needs conversion", () => {
+  const withKeys = () =>
+    createTestFilesStore({ userStore: { encryptionKeys: [{ id: "key-1" }] } });
+
+  const openable = ["edit", "preview", "view", "open-pdf", "edit-pdf"];
+
+  const convertible = (): TItem =>
+    ({
+      ...encryptedFile(),
+      id: 7,
+      title: "Book.ods",
+      fileExst: ".ods",
+      viewAccessibility: {
+        MustConvert: true,
+        WebEdit: true,
+        WebView: true,
+        ImageView: false,
+        MediaView: false,
+      },
+    }) as unknown as TItem;
+
+  it("offers no way to open it, but keeps the encrypted download", () => {
+    const opts = withKeys().getFilesContextOptions(convertible());
+
+    for (const option of openable) {
+      expect(opts).not.toContain(option);
+    }
+    expect(opts).toContain("download-encrypted");
+  });
+
+  it("still offers to open an encrypted file that needs no conversion", () => {
+    const opts = withKeys().getFilesContextOptions(encryptedFile());
+
+    expect(opts).toContain("edit");
+  });
+});
+
 describe("getFilesContextOptions — room/folder with no permissions", () => {
   it("room with empty security keeps only ungated entries", () => {
     const store = createTestFilesStore();

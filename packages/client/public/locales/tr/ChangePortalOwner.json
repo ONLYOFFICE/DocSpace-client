@@ -1,13 +1,13 @@
 {
   "AppointAdmin": "Yöneticiler atayın",
-  "BackupPortal": "{{productName}} verisini yedekle",
-  "ChangeInstruction": "{{productName}} sahibini değiştirmek için lütfen aşağıdan yeni sahibin adını seçin.",
-  "ChangeOwner": "{{productName}} sahibini değiştir",
+  "BackupPortal": "Çalışma alanı verilerini yedekle",
+  "ChangeInstruction": "Sahibi değiştirmek için lütfen aşağıdan yeni sahibin adını seçin.",
+  "ChangeOwner": "Sahibi değiştir",
   "ChangeUser": "Kullanıcıyı değiştir",
   "DoTheSame": "Yöneticilerle aynı şeyi yap",
-  "ManagePortal": "{{productName}} yapılandırmasını yönet",
+  "ManagePortal": "Çalışma alanı yapılandırmasını yönet",
   "ManageUser": "Kullanıcı hesaplarını yönet",
-  "NewPortalOwner": "Yeni {{productName}} sahibi",
-  "PortalOwnerCan": "{{productName}} sahibi şunları yapabilir:",
+  "NewPortalOwner": "Yeni çalışma alanı sahibi",
+  "PortalOwnerCan": "Çalışma alanı sahibi şunları yapabilir:",
   "SetAccessRights": "Erişim haklarını ayarla"
 }

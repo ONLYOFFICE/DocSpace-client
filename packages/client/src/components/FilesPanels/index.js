@@ -34,7 +34,6 @@
  */
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
-import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -45,10 +44,6 @@ import {
 } from "@docspace/shared/enums";
 
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
-import FilesFilter from "@docspace/shared/api/files/filter";
-
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "@docspace/shared/constants";
 
 import {
   UploadPanel,
@@ -86,7 +81,6 @@ import {
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
 } from "../dialogs";
-import { AIAgentsDialog } from "../dialogs/AIAgentsDialog";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
@@ -185,8 +179,6 @@ const Panels = (props) => {
     removeUserConfirmation,
     assignRolesDialogVisible,
     extsFilesVectorized,
-    aiAgentSelectorDialogProps,
-    setAiAgentSelectorDialogProps,
     templateGalleryVisible,
     isVisibleInfoPanelTemplateGallery,
     editRoomGroupsDialogVisible,
@@ -200,8 +192,6 @@ const Panels = (props) => {
     pauseSubmissionsDialogVisible,
     askAIConnectDialogVisible,
   } = props;
-
-  const navigate = useNavigate();
 
   const [sharePDFForm, setSharePDFForm] = useState({
     visible: false,
@@ -364,27 +354,6 @@ const Panels = (props) => {
         withRecentTreeFolder
         withFavoritesTreeFolder
         withAIAgentsTreeFolder
-      />
-    ),
-    aiAgentSelectorDialogProps.visible && (
-      <AIAgentsDialog
-        key="ai-agents-selector"
-        onClose={() => setAiAgentSelectorDialogProps(false, null)}
-        withPadding
-        withSearch
-        onSubmit={(items) => {
-          const id = items[0]?.id;
-
-          setAiAgentSelectorDialogProps(false);
-
-          const url = getCategoryUrl(CategoryType.Chat, id);
-
-          const filter = new FilesFilter();
-
-          filter.folder = id;
-
-          navigate(`${url}?${filter.toUrlParams()}`);
-        }}
       />
     ),
     hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
@@ -576,8 +545,6 @@ export default inject(
       removeUserConfirmation,
       assignRolesDialogData,
 
-      aiAgentSelectorDialogProps,
-      setAiAgentSelectorDialogProps,
       editRoomGroupsDialogVisible,
       getCovers,
       covers,
@@ -704,8 +671,6 @@ export default inject(
       assignRolesDialogVisible: assignRolesDialogData.visible,
       extsFilesVectorized,
 
-      aiAgentSelectorDialogProps,
-      setAiAgentSelectorDialogProps,
       templateGalleryVisible,
       isVisibleInfoPanelTemplateGallery,
       editRoomGroupsDialogVisible,

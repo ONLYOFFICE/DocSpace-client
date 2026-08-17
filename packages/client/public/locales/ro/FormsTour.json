@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Acesta este formularul în sine — exact ce deschide oricine urmează linkul dumneavoastră. Încărcați un formular PDF pe care îl aveți deja sau construiți unul din galeria de șabloane, fără a părăsi spațiul.",
+  "FormsBlank": "Acesta este formularul în sine — exact ce deschide oricine urmează linkul dumneavoastră. Încărcați un formular PDF pe care îl aveți deja sau construiți unul din galeria de șabloane, fără a părăsi spațiul de lucru.",
   "FormsBlankTitle": "Formularul pe care îl deschide toată lumea",
   "FormsComplete": "O copie trimisă ajunge în {{complete}} și rămâne acolo, câte una de persoană. Activați colectarea rezultatelor și fiecare răspuns devine și un rând într-o foaie de calcul — câte o coloană pentru fiecare câmp, gata de sortat sau de reprezentat grafic.",
   "FormsCompleteTitle": "Răspunsuri adunate",
@@ -14,10 +14,8 @@
   "FormsInProgressTitle": "Început, nu terminat",
   "FormsItem": "Fiecare rând este o colectare întreagă. Deschideți una ca să lucrați înăuntru, fixați-le pe cele aflate în derulare sau folosiți cele trei puncte pentru a invita persoane, a copia linkul care deschide formularul și a salva configurarea ca șablon.",
   "FormsItemTitle": "Lucrul cu un spațiu formulare",
-  "FormsOpenSpace": "Hai să îl deschidem pe acesta și să vedem cum este alcătuită o colectare. În fiecare spațiu formulare se află aceleași trei lucruri: formularul propriu-zis, răspunsurile aflate încă în scriere și cele deja sosite.",
-  "FormsOpenSpaceTitle": "Intrați într-un spațiu",
   "FormsPlacesRecent": "{{recent}} și {{favorites}} țin la îndemână colectările pe care le derulați.",
-  "FormsPlacesTemplates": "{{templates}} — șabloanele de spațiu pe care le-ați salvat.",
+  "FormsPlacesTemplates": "{{templates}} — șabloanele de spațiu de formulare pe care le-ați salvat.",
   "FormsPlacesTitle": "Fiecare lucru la locul lui",
   "FormsPlacesTrash": "{{trash}} — spațiile șterse, recuperabile până când o goliți.",
   "FormsSpace": "Un spațiu formulare este o colectare de la un capăt la altul: formularul PDF gol, oamenii care îl completează și fiecare răspuns care se întoarce. Hai să creăm unul și să privim înăuntru.",

@@ -3,7 +3,7 @@
   "content": "Check examples",
   "content_en_sha1_hash": "19f0be7c2b09ce0581cb40a7615a57859eb2fb23",
   "created_at": "2026-07-27T13:07:48.475Z",
-  "updated_at": "2026-07-27T14:32:02.523Z",
+  "updated_at": "2026-08-13T14:37:21.735Z",
   "comment": {
     "text": "Link label on the DocsConnect promo page that directs users to view sample use cases.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 178,
-      "context": "color=\"accent\"\n fontSize=\"13px\"\n fontWeight={600}\n isHovered\n >\n {t(\"DocsConnect:CheckExamples\")}\n </Link>\n </div>\n </Tooltip>\n </div>\n );",
+      "line_number": 201,
+      "context": "color=\"accent\"\n fontSize=\"13px\"\n fontWeight={600}\n isHovered\n >\n {t(\"DocsConnect:CheckExamples\")}\n </Link>\n </div>\n </Tooltip>\n )}\n </div>",
       "module": "/packages/client"
     }
   ],

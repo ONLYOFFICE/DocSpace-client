@@ -3,7 +3,7 @@
   "content": "Changes saved successfully",
   "content_en_sha1_hash": "f280abfbdd2b446b83b726202b040224495bff89",
   "created_at": "2025-05-19T21:30:43.416Z",
-  "updated_at": "2026-08-07T15:05:26.406Z",
+  "updated_at": "2026-08-14T16:12:00.701Z",
   "comment": {
     "text": "Toast message. It appears after a successful operation, such as saving changes to an avatar, user profile, or data reassignment.",
     "is_auto": true,
@@ -37,26 +37,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 194,
+      "line_number": 195,
       "context": "internalUrl,\n portalUrl,\n !isDisabledCertificat,\n )\n .then((result) => {\n toastr.success(t(\"Common:ChangesSavedSuccessfully\"));\n \n setIsDefaultSettings(result?.isDefault || false);\n setPortalUrl(result?.docServicePortalUrl);\n setAuthHeader(result?.docServiceSignatureHeader);\n applySecretKey(result?.docServiceSignatureSecret);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 194,
+      "line_number": 195,
       "context": "internalUrl,\n portalUrl,\n !isDisabledCertificat,\n )\n .then((result) => {\n toastr.success(t(\"Common:ChangesSavedSuccessfully\"));\n \n setIsDefaultSettings(result?.isDefault || false);\n setPortalUrl(result?.docServicePortalUrl);\n setAuthHeader(result?.docServiceSignatureHeader);\n applySecretKey(result?.docServiceSignatureSecret);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 194,
+      "line_number": 195,
       "context": "internalUrl,\n portalUrl,\n !isDisabledCertificat,\n )\n .then((result) => {\n toastr.success(t(\"Common:ChangesSavedSuccessfully\"));\n \n setIsDefaultSettings(result?.isDefault || false);\n setPortalUrl(result?.docServicePortalUrl);\n setAuthHeader(result?.docServiceSignatureHeader);\n applySecretKey(result?.docServiceSignatureSecret);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 817,
-      "context": "// AI chat host callbacks. Web Search settings save on an explicit button\n // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.\n const aiChatCallbacks = useMemo(\n () => ({\n onWebSearchSaved: () =>\n toastr.success(t(\"Common:ChangesSavedSuccessfully\")),\n }),\n [t],\n );\n \n // Defer mounting AiAgentProviders until authStore is loaded — otherwise",
+      "line_number": 820,
+      "context": "// AI chat host callbacks. Web Search settings save on an explicit button\n // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.\n const aiChatCallbacks = useMemo(\n () => ({\n onWebSearchSaved: () =>\n toastr.success(t(\"Common:ChangesSavedSuccessfully\")),\n // The widget hydrates its stores from mount effects that can't await,\n // so failures there reach us only through this callback. Without it a\n // failed profiles load looks like a portal with no AI models\n // configured. `context` names the failing step (e.g. \"profiles:init\").\n onError: ({ type, error, context }) => {",
       "module": "/packages/client"
     },
     {

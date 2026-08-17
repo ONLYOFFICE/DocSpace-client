@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Tohle je samotný formulář — přesně to, co otevře každý, kdo klikne na váš odkaz. Nahrajte PDF formulář, který už máte, nebo si nějaký sestavte z galerie šablon, aniž byste opustili prostor.",
+  "FormsBlank": "Tohle je samotný formulář — přesně to, co otevře každý, kdo klikne na váš odkaz. Nahrajte PDF formulář, který už máte, nebo si nějaký sestavte z galerie šablon, aniž byste opustili pracovní prostor.",
   "FormsBlankTitle": "Formulář, který otevírají všichni",
   "FormsComplete": "Odeslaná kopie přistane v {{complete}} a zůstane tam, jedna od každého. Zapněte sběr výsledků a každá odpověď se navíc stane řádkem v tabulce — jeden sloupec na pole, připravený k řazení nebo do grafu.",
   "FormsCompleteTitle": "Posbírané odpovědi",
@@ -14,10 +14,8 @@
   "FormsInProgressTitle": "Rozpracované, nedokončené",
   "FormsItem": "Každý řádek je celý sběr. Otevřete jeden a pracujte uvnitř, připněte si ty, které právě běží, nebo přes tři tečky pozvěte lidi, zkopírujte odkaz otevírající formulář a uložte nastavení jako šablonu.",
   "FormsItemTitle": "Práce s prostorem pro formuláře",
-  "FormsOpenSpace": "Pojďme tenhle otevřít a podívat se, jak je sběr poskládaný. Uvnitř každého prostoru pro formuláře jsou tytéž tři věci: samotný formulář, odpovědi, které se ještě píší, a ty, které už dorazily.",
-  "FormsOpenSpaceTitle": "Vstupte do prostoru",
   "FormsPlacesRecent": "{{recent}} a {{favorites}} drží po ruce sběry, které právě vedete.",
-  "FormsPlacesTemplates": "{{templates}} — šablony prostorů, které jste uložili.",
+  "FormsPlacesTemplates": "{{templates}} — šablony prostorů pro formuláře, které jste uložili.",
   "FormsPlacesTitle": "Všechno na svém místě",
   "FormsPlacesTrash": "{{trash}} — smazané prostory, obnovitelné, dokud ho nevysypete.",
   "FormsSpace": "Prostor pro formuláře je jeden sběr od začátku do konce: prázdný PDF formulář, lidé, kteří ho vyplňují, a každá odpověď, která se vrátí. Pojďme jeden vytvořit a nakouknout dovnitř.",

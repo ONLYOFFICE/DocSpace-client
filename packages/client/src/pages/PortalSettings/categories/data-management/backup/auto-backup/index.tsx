@@ -106,7 +106,12 @@ export default inject(
   }: TStore) => {
     const language = authStore.language;
 
-    const { getIcon, filesSettings } = filesSettingsStore;
+    const {
+      getIcon,
+      filesSettings,
+      isExternalShareRestricted,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
 
     const settingsFileSelector = { getIcon, filesSettings };
     const {
@@ -231,6 +236,8 @@ export default inject(
     return {
       removeItem,
       settingsFileSelector,
+      disabledCreatePublicRoom:
+        isExternalShareRestricted && externalShareApplyToRooms,
       isEnableAuto,
       // authStore
       language,

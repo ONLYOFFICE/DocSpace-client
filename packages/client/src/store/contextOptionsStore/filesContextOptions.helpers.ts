@@ -98,7 +98,6 @@ import {
 } from "@docspace/shared/enums";
 import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import {
   createMenuGroup,
   filterModel,
@@ -736,9 +735,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_link-for-portal-users",
       key: "link-for-portal-users",
-      label: t("LinkForPortalUsers", {
-        productName: getBrandName("ProductName"),
-      }),
+      label: t("LinkForPortalUsers"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => onClickLinkForPortal(item, t),
       disabled: false,
@@ -1257,6 +1254,8 @@ export const getFilesContextOptionsImpl = (
             "update-xlsx-data",
             "share",
             "move",
+            // a one-item "move" category is replaced by this bare option
+            "move-to",
             "copy-to",
             "download",
             "download-encrypted",
@@ -1285,6 +1284,7 @@ export const getFilesContextOptionsImpl = (
             "update-xlsx-data",
             "share",
             "move",
+            "move-to",
             "copy-to",
             "download",
             "download-encrypted",

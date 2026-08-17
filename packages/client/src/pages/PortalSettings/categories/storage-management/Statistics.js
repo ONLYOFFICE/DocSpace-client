@@ -49,7 +49,6 @@ import styles from "./StyledComponent.module.scss";
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
 import AIAgentList from "./sub-components/AIAgentList.js";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const buttonProps = {
   className: "button-element",
@@ -116,7 +115,7 @@ const StatisticsComponent = (props) => {
         ) : null}
       </div>
       <Text className="statistics-description">
-        {t("StatisticDescription", { productName: getBrandName("ProductName") })}
+        {t("StatisticDescription")}
       </Text>
       {isStatisticsAvailable ? (
         <>

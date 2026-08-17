@@ -138,7 +138,6 @@ export default function useTour(
     continuous: true,
     steps,
     run: isMobileView ? false : tourStore.isRunning,
-    scrollToFirstStep: false,
     tooltipComponent: TourTooltip,
     // The tooltip reads as a free-floating card, so it carries no arrow toward
     // its anchor — the spotlight is what ties it to the target.
@@ -150,6 +149,19 @@ export default function useTour(
       // aim for the close button. Esc still ends it (`dismissKeyAction`).
       overlayClickAction: false,
       blockTargetInteraction: true,
+      // Each step's anchor is still scrolled into view before the step is laid
+      // out — the sections are all taller than the viewport, and a tour opens
+      // on whatever the user had scrolled to rather than on a fresh page, so
+      // even the opening anchor may be below the fold. It is the steps that do
+      // it, from their `before` hook (`scrollTargetIntoView`), which is why
+      // joyride's own scrolling is off rather than merely unused.
+      //
+      // joyride cannot do it here: none of these sections is scrolled by the
+      // document — each hands its content to ui-kit's `Scrollbar` — and for a
+      // custom scroll container joyride derives the container's `scrollTop`
+      // from the target's viewport top, which over-scrolls by the height of
+      // everything standing above the section. See `scrollTargetIntoView` in
+      // stepBuilders for the full account.
       skipScroll: true,
       zIndex: 10000,
       ...JOYRIDE_TIMEOUTS,

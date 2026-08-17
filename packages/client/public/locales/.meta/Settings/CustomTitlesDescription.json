@@ -1,14 +1,14 @@
 {
   "key_path": "CustomTitlesDescription",
-  "content": "Adjust the default space title displayed on the Welcome Page and in the From field of the email notifications.",
-  "content_en_sha1_hash": "509f4c811b4bd79763d49e1085f1eb0c426ff7a3",
-  "created_at": "2025-05-19T21:30:51.019Z",
-  "updated_at": "2026-05-28T15:46:18.589Z",
+  "content": "Adjust the default workspace title displayed on the Welcome Page and in the From field of the email notifications.",
+  "content_en_sha1_hash": "a8540ded96bf1af44d31b33ce5e0a5fae5b9ab01",
+  "created_at": "2026-08-12T15:15:00.375Z",
+  "updated_at": "2026-08-12T15:27:31.114Z",
   "comment": {
-    "text": "This is a descriptive text explaining where the custom space title appears: on the Welcome Page and in email notifications.",
+    "text": "Description text for a configuration option in the Portal Settings customization section, explaining how to modify the workspace title used on the Welcome Page and in email notifications.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:05.876Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T15:27:31.114Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -142,22 +142,14 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \"l\"",
-          "suggestion": "",
-          "checked_at": "2026-04-11T21:49:13.168Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -172,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -208,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

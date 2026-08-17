@@ -151,7 +151,8 @@ type TemplateGalleryProps = {
   languageFilterLoaded: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
   setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
-  isFormRoomRoot: boolean;
+  isFormsOnlyGallery: boolean;
+  setCreateRoomFromTemplate: (createRoomFromTemplate: boolean) => void;
 };
 
 const useTemplateGalleryScrollLocks = (templateGalleryVisible: boolean) => {
@@ -205,12 +206,13 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
     languageFilterLoaded,
     setIsVisibleInfoPanelTemplateGallery,
     setGallerySelected,
-    isFormRoomRoot,
+    isFormsOnlyGallery,
+    setCreateRoomFromTemplate,
   } = props;
 
   const isMobileView = useMobileDetection();
   const [currentTabId, setCurrentTabId] = useState<TabId>(() =>
-    isFormRoomRoot ? TAB_IDS.FORMS : TAB_IDS.DOCUMENTS,
+    isFormsOnlyGallery ? TAB_IDS.FORMS : TAB_IDS.DOCUMENTS,
   );
   const [isInitLoading, setIsInitLoading] = useState(true);
   const [isShowInitSkeleton, setShowInitSkeleton] = useState(true);
@@ -218,9 +220,9 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
   useEffect(() => {
     initTemplateGallery().then(() => setIsInitLoading(false));
     setCurrentExtensionGallery(
-      isFormRoomRoot ? FILE_EXTENSIONS.PDF : FILE_EXTENSIONS.DOCX,
+      isFormsOnlyGallery ? FILE_EXTENSIONS.PDF : FILE_EXTENSIONS.DOCX,
     );
-  }, [initTemplateGallery, isFormRoomRoot, setCurrentExtensionGallery]);
+  }, [initTemplateGallery, isFormsOnlyGallery, setCurrentExtensionGallery]);
 
   useTemplateGalleryScrollLocks(templateGalleryVisible);
 
@@ -243,6 +245,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
     setIsVisibleInfoPanelTemplateGallery(false);
     setGallerySelected(null);
     setTemplateGalleryVisible(false);
+    setCreateRoomFromTemplate(false);
   };
 
   useEventListener("keydown", (e: KeyboardEvent) => {
@@ -250,7 +253,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
   });
 
   const onSelect = (element: TTabItem) => {
-    if (isFormRoomRoot) return;
+    if (isFormsOnlyGallery) return;
     const tabId = element.id as TabId;
     setCurrentTabId(tabId);
     const fileExtension = getExtensionFromTabId(tabId);
@@ -306,7 +309,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
       );
     }
 
-    if (isFormRoomRoot)
+    if (isFormsOnlyGallery)
       return (
         <TemplateGalleryFormsOnlyContent
           isShowInitSkeleton={isShowInitSkeleton}
@@ -326,7 +329,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
     oformsLoadError,
     oformsNetworkError,
     onCloseClick,
-    isFormRoomRoot,
+    isFormsOnlyGallery,
     currentTabId,
     isShowInitSkeleton,
     resetFilters,
@@ -380,7 +383,7 @@ const TemplateGallery = (props: TemplateGalleryProps) => {
 };
 
 export default inject<TStore>(
-  ({ oformsStore, dialogsStore, treeFoldersStore }) => {
+  ({ oformsStore, dialogsStore }) => {
     const {
       templateGalleryVisible,
       setTemplateGalleryVisible,
@@ -394,10 +397,11 @@ export default inject<TStore>(
       oformsNetworkError,
       setIsVisibleInfoPanelTemplateGallery,
       setGallerySelected,
+      isFormsOnlyGallery,
+      setCreateRoomFromTemplate,
     } = oformsStore;
 
     const { setSubmitToGalleryDialogVisible } = dialogsStore;
-    const { isFormRoomRoot } = treeFoldersStore;
 
     return {
       templateGalleryVisible,
@@ -413,7 +417,8 @@ export default inject<TStore>(
       oformsNetworkError,
       setIsVisibleInfoPanelTemplateGallery,
       setGallerySelected,
-      isFormRoomRoot,
+      isFormsOnlyGallery,
+      setCreateRoomFromTemplate,
     };
   },
 )(withTranslation("Common")(observer(TemplateGallery)));

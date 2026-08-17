@@ -90,6 +90,7 @@ export type FilesSelectorInputProps = {
   isDocumentIcon?: boolean;
   filesSelectorSettings: FilesSelectorSettings;
   formProps?: FilesSelectorProps["formProps"];
+  disabledCreatePublicRoom?: boolean;
   dataTestId?: string;
 
   setBasePath: (folders: TBreadCrumb[]) => void;

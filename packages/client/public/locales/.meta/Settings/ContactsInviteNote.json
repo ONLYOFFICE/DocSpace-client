@@ -1,20 +1,20 @@
 {
   "key_path": "ContactsInviteNote",
-  "content": "Enable this option to allow invitations to be sent to new {{productName}} members through the {{sectionName}} section. Disable this option in case you want to invite new members through LDAP only.  ",
-  "content_en_sha1_hash": "cfbde54cb866b61bc9793d42952da1f2e3e3b989",
-  "created_at": "2025-06-02T10:19:19.135Z",
-  "updated_at": "2026-05-15T14:00:06.867Z",
+  "content": "Enable this option to allow invitations to be sent to new workspace members through the {{sectionName}} section. Disable this option in case you want to invite new members through LDAP only. ",
+  "content_en_sha1_hash": "5cc0adc60220ad2568e63ff370f0f5cf749a9ce0",
+  "created_at": "2026-08-13T22:44:29.112Z",
+  "updated_at": "2026-08-14T15:39:17.833Z",
   "comment": {
-    "text": "This is a descriptive note for a checkbox in the portal settings. It explains the function of enabling/disabling invitations for new members, with `{{productName}}` referring to the application name and `{{sectionName}}` to the \"Contacts\" section.",
+    "text": "Checkbox description explaining the setting for sending invitations via a specific section versus LDAP. The {{sectionName}} variable represents the name of the UI section.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:14.560Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:39:17.833Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 311,
-      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.checkboxDescription}\n >\n {t(\"ContactsInviteNote\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>",
+      "line_number": 307,
+      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.checkboxDescription}\n >\n {t(\"ContactsInviteNote\", {\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

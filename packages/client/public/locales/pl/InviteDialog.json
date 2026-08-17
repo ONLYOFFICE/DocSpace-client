@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Język zaproszenia",
-  "InviteMembersManuallyDescription": "Osobiście zaproś nowych członków do {{productName}} za pośrednictwem poczty e-mail.",
+  "InviteMembersManuallyDescription": "Osobiście zaproś nowych członków do przestrzeni roboczej za pośrednictwem poczty e-mail.",
   "InviteMembersSearchPlaceholder": "Zaproś przez e-mail",
-  "InviteViaLinkDescriptionAccounts": "Utwórz uniwersalny link do samodzielnej autoryzacji w {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Utwórz uniwersalny link do samodzielnej autoryzacji w przestrzeni roboczej"
 }

@@ -46,7 +46,6 @@ import { PreparationPortalProgress } from "@docspace/ui-kit/components/progress-
 import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
 import { IPreparationPortal } from "./PreparationPortal.types";
 import styles from "./PreparationPortal.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 let requestsCount = 0;
 
@@ -160,9 +159,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>
   ) : (
     <PreparationPortalProgress
-      text={t("Common:PreparationPortalDescription", {
-        productName: getBrandName("ProductName"),
-      })}
+      text={t("Common:PreparationPortalDescription")}
       percent={percent}
     />
   );

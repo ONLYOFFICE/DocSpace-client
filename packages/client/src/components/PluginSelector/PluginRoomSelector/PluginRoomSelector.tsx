@@ -35,6 +35,7 @@
 
 import { useEffect, useEffectEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 import { TRoomSelector } from "@onlyoffice/docspace-plugin-sdk";
 
 import RoomSelector from "@docspace/ui-kit/selectors/Room";
@@ -55,11 +56,16 @@ type Props = {
   pluginSelectorProps: TRoomSelector;
   dispatchMessage: PluginStore["dispatchMessage"];
   pluginName: string;
+} & Partial<InjectedProps>;
+
+type InjectedProps = {
+  disabledCreatePublicRoom: boolean;
 };
 
 const PluginRoomSelector = ({
   pluginSelectorProps: selectorProps,
   dispatchMessage,
+  disabledCreatePublicRoom,
   pluginName,
 }: Props) => {
   const { t } = useTranslation(["Common"]);
@@ -179,6 +185,7 @@ const PluginRoomSelector = ({
         convertPluginRoomType(createDefineRoomType) as RoomsType | undefined
       }
       withCreate={withCreate}
+      disabledCreatePublicRoom={disabledCreatePublicRoom}
       withSearch={withSearch}
       useAside
       onClose={onClose}
@@ -188,4 +195,12 @@ const PluginRoomSelector = ({
   );
 };
 
-export default PluginRoomSelector;
+export default inject<TStore>(({ filesSettingsStore }) => {
+  const { isExternalShareRestricted, externalShareApplyToRooms } =
+    filesSettingsStore;
+
+  return {
+    disabledCreatePublicRoom:
+      isExternalShareRestricted && externalShareApplyToRooms,
+  };
+})(observer(PluginRoomSelector));

@@ -70,7 +70,6 @@ import {
 } from "./RestoreBackup.constants";
 import type { RestoreBackupProps } from "./RestoreBackup.types";
 import styles from "./RestoreBackup.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const RestoreBackup = (props: RestoreBackupProps) => {
   const {
@@ -376,9 +375,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           "restore-backup_warning-description",
         )}
       >
-        {t("Common:RestoreBackupWarningText", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("Common:RestoreBackupWarningText")}
       </Text>
       {!standalone ? (
         <Text
@@ -388,9 +385,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
             "restore-backup_warning-link",
           )}
         >
-          {t("Common:RestoreBackupResetInfoWarningText", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Common:RestoreBackupResetInfoWarningText")}
         </Text>
       ) : null}
     </>

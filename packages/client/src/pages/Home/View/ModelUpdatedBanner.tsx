@@ -37,7 +37,7 @@
 // opt-out the section tours carry (see Tour/useTour.ts).
 "use no memo";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Trans, useTranslation } from "react-i18next";
 import {
@@ -167,6 +167,11 @@ const ModelUpdatedBanner = ({
   const modelName = useProfilesStore(
     (s) => (s.sessionChatProfile ?? s.chatProfile ?? s.defaultProfile)?.name,
   );
+  // The same pick, by identity — what tells a switch in the picker apart from
+  // the model merely being renamed.
+  const modelId = useProfilesStore(
+    (s) => (s.sessionChatProfile ?? s.chatProfile ?? s.defaultProfile)?.id,
+  );
 
   const [isDismissed, setIsDismissed] = useLocalStorage<boolean>(
     dismissedKey(userId ?? ""),
@@ -198,6 +203,12 @@ const ModelUpdatedBanner = ({
   // to gate on (only `initialized`), and the assignment read is not something a
   // caller can subscribe to on its own.
   const [hasStoreSettled, setHasStoreSettled] = useState(false);
+
+  // The model the card actually named, recorded the first time it was up. The
+  // picker's own auto-select is what gives the notice that name, so the
+  // recording cannot happen before the card is visible — otherwise the
+  // auto-select itself would read as a user pick and close the card unseen.
+  const shownModelId = useRef<string | undefined>(undefined);
 
   useEffect(
     () => useProfilesStore.subscribe(() => setHasStoreSettled(true)),
@@ -240,7 +251,7 @@ const ModelUpdatedBanner = ({
     [t, modelName],
   );
 
-  const { on, state, Tour } = useJoyride({
+  const { Tour } = useJoyride({
     steps,
     run: isVisible,
     tooltipComponent: ModelUpdatedTooltip,
@@ -268,21 +279,29 @@ const ModelUpdatedBanner = ({
       targetWaitTimeout: TARGET_WAIT_TIMEOUT,
     },
     locale: { close: t("Common:CloseButton") },
+
+    onEvent: (event) => {
+      if (event.action === ACTIONS.CLOSE) setIsDismissed(true);
+
+      if (event.type === EVENTS.TARGET_NOT_FOUND) setIsTargetMissing(true);
+    },
   });
 
-  // The ×, Esc and a click on the backdrop all come through as joyride's CLOSE
-  // action — the one signal that lands whatever the step's lifecycle. TOUR_END
-  // is deliberately not treated as a dismissal: with a single step it also
-  // fires when the target was never found, which nobody saw.
+  // Picking a model in the composer takes the card away, and for good: the
+  // notice exists to send the user to that control, so using it is the notice
+  // being acted on — the same outcome as closing it by hand. Nothing else
+  // would: an entity-scoped pick is session-local, so `hasAssignment` stays
+  // false and the card would otherwise sit over a picker the user has already
+  // answered. The pick is not a click on the backdrop either (the picker lives
+  // in the spotlight cutout), so joyride reports no CLOSE for it.
   useEffect(() => {
-    if (!isVisible) return;
-    if (state.action === ACTIONS.CLOSE) setIsDismissed(true);
-  }, [state.action, isVisible, setIsDismissed]);
-
-  useEffect(
-    () => on(EVENTS.TARGET_NOT_FOUND, () => setIsTargetMissing(true)),
-    [on],
-  );
+    if (!isVisible || !modelId) return;
+    if (shownModelId.current === undefined) {
+      shownModelId.current = modelId;
+      return;
+    }
+    if (shownModelId.current !== modelId) setIsDismissed(true);
+  }, [isVisible, modelId, setIsDismissed]);
 
   return Tour ? createPortal(Tour, document.body) : null;
 };

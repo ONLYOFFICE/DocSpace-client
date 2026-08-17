@@ -121,6 +121,7 @@ export const getDescription = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isFormsScope: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -161,6 +162,7 @@ export const getDescription = (
       standalone,
       aiReady,
       isPortalAdmin,
+      isFormsScope,
     );
 
   if (isFolder)
@@ -195,6 +197,7 @@ export const getTitle = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isFormsScope: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
@@ -215,6 +218,7 @@ export const getTitle = (
       aiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
     );
 
   if (isFolder)
@@ -404,6 +408,15 @@ export const getOptions = (
     disabled: false,
   };
 
+  const createFormSpace = {
+    title: t("EmptyView:CreateFormSpaceTitleOption"),
+    description: t("EmptyView:CreateFormSpaceDescriptionOption"),
+    icon: <CreateRoom />,
+    key: "create-form-space",
+    onClick: actions.onCreateRoom,
+    disabled: false,
+  };
+
   const createAIAgent = {
     title: t("Common:CreateAIAgentTitle"),
     description: t("Common:CreateAIAgentDescription", {
@@ -581,7 +594,10 @@ export const getOptions = (
         ...aiChatOption,
       ])
       .with([FolderType.Forms, P._, true], () => [])
-      .with([FolderType.Forms, P._, P._], () => [createRoom, ...aiChatOption])
+      .with([FolderType.Forms, P._, P._], () => [
+        createFormSpace,
+        ...aiChatOption,
+      ])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,

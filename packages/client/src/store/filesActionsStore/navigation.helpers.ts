@@ -51,7 +51,7 @@ import {
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
 import {
-  getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { getSectionTrashTarget } from "SRC_DIR/helpers/articleNavigation";
@@ -214,16 +214,18 @@ self: FilesActionStore,item: {
   isAIAgent?: boolean;
   title?: string;
   rootFolderType?: FolderType;
+  roomType?: RoomsType;
 }
 )=> {
   if (self.publicRoomStore.isPublicRoom)
     return self.moveToPublicRoom(item.id);
 
-  const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType } = item;
+  const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType, roomType } =
+    item;
 
   const categoryType = isAIAgent
     ? CategoryType.Chat
-    : getCategoryTypeByFolderType(rootFolderType, id);
+    : getCategoryTypeByFolderTypeInSection(rootFolderType, id, { roomType });
 
   const state = { title, rootFolderType, isRoot: false, isRoom };
   const filter = FilesFilter.getDefault();
@@ -320,17 +322,11 @@ self: FilesActionStore,
       ? item.parentType
       : (rootFolderTypeItem ?? rootFolderType);
 
-    let categoryType: TCategoryType = getCategoryTypeByFolderType(
+    const categoryType: TCategoryType = getCategoryTypeByFolderTypeInSection(
       destinationFolderType,
       parentId,
+      { pathname: window.DocSpace.location.pathname },
     );
-
-    if (
-      window.DocSpace.location.pathname.startsWith("/forms") &&
-      categoryType === CategoryType.SharedRoom
-    ) {
-      categoryType = CategoryType.Form;
-    }
 
     url = getCategoryUrl(categoryType, parentId);
   }

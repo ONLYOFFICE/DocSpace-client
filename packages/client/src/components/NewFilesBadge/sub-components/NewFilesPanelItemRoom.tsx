@@ -37,6 +37,7 @@ import { inject, observer } from "mobx-react";
 
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Text } from "@docspace/ui-kit/components/text";
+import { DeviceType } from "@docspace/shared/enums";
 
 import type { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
 
@@ -46,10 +47,16 @@ const NewFilesPanelItemRoomComponent = ({
   room,
   openItemAction,
   onClose,
+  currentDeviceType,
+  setArticleOpen,
 }: NewFilesPanelItemRoomProps) => {
   const onClick = async () => {
     openItemAction?.({ ...room, isFolder: true });
     onClose();
+
+    // On mobile the panel is opened from the article, which overlays the
+    // content and stays open on its own. Navigating away has to close it too.
+    if (currentDeviceType === DeviceType.mobile) setArticleOpen?.(false);
   };
 
   return (
@@ -78,8 +85,11 @@ const NewFilesPanelItemRoomComponent = ({
   );
 };
 
-export const NewFilesPanelItemRoom = inject<TStore>(({ filesActionsStore }) => {
-  const { openItemAction } = filesActionsStore;
+export const NewFilesPanelItemRoom = inject<TStore>(
+  ({ filesActionsStore, settingsStore }) => {
+    const { openItemAction } = filesActionsStore;
+    const { currentDeviceType, setArticleOpen } = settingsStore;
 
-  return { openItemAction };
-})(observer(NewFilesPanelItemRoomComponent));
+    return { openItemAction, currentDeviceType, setArticleOpen };
+  },
+)(observer(NewFilesPanelItemRoomComponent));

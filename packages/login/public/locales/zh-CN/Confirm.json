@@ -5,7 +5,7 @@
   "ConnectApp": "连接应用",
   "ConnectAppDescription": "使用身份验证器应用扫描下方二维码，或手动将密钥<1>{{secretKey}}</1>输入到应用中。",
   "CurrentNumber": "您目前的手机号码",
-  "DeleteProfileBtn": "删除我的账户",
+  "DeleteProfileBtn": "停用我的账户",
   "DeleteProfileConfirmation": "注意！您即将删除账户。",
   "DeleteProfileConfirmationInfo": "点击“删除我的账户”即表示您同意我们的 <1>隐私政策。</1>",
   "DeleteProfileSuccessDescription": "您的 {{organizationName}} {{productName}} 账户已成功停用。所有者或超级管理员可以永久删除您已停用的账户。",

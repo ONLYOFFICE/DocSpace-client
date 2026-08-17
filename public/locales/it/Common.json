@@ -1737,7 +1737,7 @@
   "ResetEncryptionKeysSuccess": "L'identità di cifratura è stata ripristinata. Generare una nuova chiave per configurare nuovamente la cifratura.",
   "ResetEncryptionKeysTitle": "Ripristina chiavi di cifratura",
   "ResetEncryptionKeysWarning": "Questa operazione rimuove ogni identità di cifratura registrata sul suo account. Si perderà l'accesso a tutti i file cifrati esistenti. I proprietari delle stanze potranno ricondividere i file con la nuova identità, ma tutto ciò che non viene ricondiviso diventerà irrecuperabile. Questa azione riguarda tutti i dispositivi su cui è effettuato l'accesso, non solo questo.",
-  "ResetKey": "Tasto di ripristino",
+  "ResetKey": "Reimposta la chiave",
   "ResetKnowledgeDescription": "Questa azione rimuoverà la chiave API configurata e disabiliterà l’indicizzazione dei documenti per la knowledge base. L’aggiunta di nuovi documenti e il loro utilizzo non sarà disponibile finché non verrà fornita una nuova chiave.",
   "ResetSettings": "Reimposta impostazioni",
   "Restore": "Ripristinare",

@@ -1,5 +1,5 @@
 {
-  "HideInput": "Oculta",
+  "HideInput": "Ocultar",
   "QuotaExceededDuringUpload": "<0>{{uploaded}} de {{total}}</0> carregado(s). Cota de armazenamento excedida — <1>ver detalhes</1>.",
   "QuotaExceededTooltip": "Cota de armazenamento excedida. Libere espaço ou atualize seu plano e tente novamente.",
   "Ready": "Concluído",

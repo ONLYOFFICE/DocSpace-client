@@ -1737,7 +1737,7 @@
   "ResetEncryptionKeysSuccess": "Su identidad de cifrado ha sido restablecida. Genere una nueva clave para volver a configurar el cifrado.",
   "ResetEncryptionKeysTitle": "Restablecer claves de cifrado",
   "ResetEncryptionKeysWarning": "Esta acción elimina todas las identidades de cifrado registradas en su cuenta. Perderá el acceso a todos los archivos cifrados existentes. Los propietarios de sala pueden volver a compartir archivos con su nueva identidad, pero todo lo que no se vuelva a compartir quedará irrecuperable. Esta acción afecta a todos los dispositivos en los que haya iniciado sesión, no solo a este.",
-  "ResetKey": "Clave de reinicio",
+  "ResetKey": "Restablecer la clave",
   "ResetKnowledgeDescription": "Esta acción eliminará la clave de la API configurada y desactivará la indexación de documentos para la base de conocimientos. No será posible añadir nuevos documentos a la base de conocimientos ni trabajar con ellos hasta que se proporcione una nueva clave.",
   "ResetSettings": "Restablecer ajustes",
   "Restore": "Restaurar",

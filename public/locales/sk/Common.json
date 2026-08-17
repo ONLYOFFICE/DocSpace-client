@@ -528,7 +528,7 @@
   "CustomAIStackDescription": "Optimalizujte náklady a udržte si plnú kontrolu nad svojimi dátami a modelmi.",
   "CustomFilter": "Vlastný filter",
   "CustomFilterDescriptionSpreadsheet": "Prehliadanie s použitými filtrami. Všetky ostatné možnosti úprav sú k dispozícii.",
-  "CustomFilterDisable": "Odstrániť šablónu",
+  "CustomFilterDisable": "Deaktivovať vlastný filter",
   "CustomFilterDisabled": "Vlastný filter pre vybraný súbor deaktivovaný",
   "CustomFilterEnable": "Povoliť vlastný filter",
   "CustomFilterEnabled": "Vlastný filter pre vybraný súbor aktivovaný",

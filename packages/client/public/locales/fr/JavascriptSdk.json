@@ -12,7 +12,7 @@
   "ButtonColor": "Couleur de boutons",
   "ButtonCustomization": "Personnalisation de boutons",
   "ButtonText": "Texte de boutons",
-  "CancelButtonText": "Supprimer le texte du bouton",
+  "CancelButtonText": "Texte du bouton Annuler",
   "Chat": "Chat",
   "CodeTitle": "code",
   "CopyWindowCode": "Copier le code d'intégration de la fenêtre",

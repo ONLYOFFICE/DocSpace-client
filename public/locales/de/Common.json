@@ -1737,7 +1737,7 @@
   "ResetEncryptionKeysSuccess": "Ihre Verschlüsselungsidentität wurde zurückgesetzt. Generieren Sie einen neuen Schlüssel, um die Verschlüsselung neu einzurichten.",
   "ResetEncryptionKeysTitle": "Verschlüsselungsschlüssel zurücksetzen",
   "ResetEncryptionKeysWarning": "Dadurch wird jede mit Ihrem Konto verknüpfte Verschlüsselungsidentität entfernt. Sie verlieren den Zugang zu allen vorhandenen verschlüsselten Dateien. Raum-Inhaber können Dateien mit Ihrer neuen Identität erneut teilen, aber alles, was nicht erneut geteilt wird, wird unwiederbringlich. Diese Aktion betrifft jedes Gerät, auf dem Sie angemeldet sind, nicht nur dieses.",
-  "ResetKey": "Reset-Key",
+  "ResetKey": "Schlüssel zurücksetzen",
   "ResetKnowledgeDescription": "Diese Aktion entfernt den konfigurierten API-Schlüssel und deaktiviert die Dokumentenindizierung für die Wissensdatenbank. Das Hinzufügen neuer Dokumente zur Wissensdatenbank und die Bearbeitung dieser Dokumente sind erst wieder möglich, nachdem ein neuer Schlüssel bereitgestellt wurde.",
   "ResetSettings": "Einstellungen zurücksetzen",
   "Restore": "Wiederherstellen",

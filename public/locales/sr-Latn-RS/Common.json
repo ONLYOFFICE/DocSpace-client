@@ -1737,7 +1737,7 @@
   "ResetEncryptionKeysSuccess": "Vaš identitet za šifrovanje je resetovan. Generišite novi ključ da ponovo postavite šifrovanje.",
   "ResetEncryptionKeysTitle": "Resetuj ključeve za šifrovanje",
   "ResetEncryptionKeysWarning": "Ovo uklanja svaki identitet za šifrovanje registrovan na vašem nalogu. Izgubiće te pristup svim postojećim šifrovanim fajlovima. Vlasnici soba mogu ponovo podeliti fajlove sa vašim novim identitetom, ali sve što nije ponovo podeljeno postaje neobnovivo. Ova radnja utiče na sve uređaje na kojima ste prijavljeni, ne samo na ovaj.",
-  "ResetKey": "Reset ključ",
+  "ResetKey": "Resetuj ključ",
   "ResetKnowledgeDescription": "Ova radnja će ukloniti konfigurisan API ključ i onemogućiti indeksiranje dokumenata za bazu znanja. Dodavanje novih dokumenata u bazu znanja i rad sa njima neće biti dostupni dok se ne obezbedi novi ključ.",
   "ResetSettings": "Resetujte podešavanja",
   "Restore": "Povrati",

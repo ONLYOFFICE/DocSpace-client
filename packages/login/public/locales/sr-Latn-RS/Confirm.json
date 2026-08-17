@@ -5,7 +5,7 @@
   "ConnectApp": "Poveži aplikaciju",
   "ConnectAppDescription": "Skeniraj obezbeđeni QR kod koristeći svoju aplikaciju za autentifikaciju. Alternativno, ručno unesi dati tajni ključ u aplikaciju: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Vaš trenutni broj mobilnog telefona",
-  "DeleteProfileBtn": "Obriši moj nalog",
+  "DeleteProfileBtn": "Deaktiviraj moj nalog",
   "DeleteProfileConfirmation": "Pažnja! Spremate se da obrišete svoj nalog.",
   "DeleteProfileConfirmationInfo": "Klikom na \"Delete my account\" slažete se sa našim <1>Privacy policy.</1>",
   "DeleteProfileSuccessDescription": "Vaš {{organizationName}} {{productName}} nalog je uspešno onemogućen. Vlasnik ili superadministrator može trajno izbrisati vaš onemogućeni nalog.",

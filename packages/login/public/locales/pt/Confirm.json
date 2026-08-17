@@ -5,7 +5,7 @@
   "ConnectApp": "Conecte o aplicativo",
   "ConnectAppDescription": "Digitalize o código QR fornecido usando seu aplicativo autenticador. Alternativamente, insira manualmente a chave secreta fornecida em seu aplicativo: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "O seu número de telemóvel atual",
-  "DeleteProfileBtn": "Eliminar a minha conta",
+  "DeleteProfileBtn": "Desativar a minha conta",
   "DeleteProfileConfirmation": "Atenção! Está prestes a eliminar a sua conta.",
   "DeleteProfileConfirmationInfo": "Ao clicar em \"Eliminar a minha conta\" concorda com a nossa <1>política de privacidade.</1>",
   "DeleteProfileSuccessDescription": "A sua conta {{organizationName}} {{productName}} foi desativada com sucesso. O proprietário ou o superadministrador pode eliminar permanentemente a sua conta desativada.",

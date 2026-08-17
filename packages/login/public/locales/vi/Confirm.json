@@ -5,7 +5,7 @@
   "ConnectApp": "Kết nối ứng dụng",
   "ConnectAppDescription": "Quét mã QR được cung cấp bằng ứng dụng xác thực của bạn. Hoặc, nhập thủ công khóa bí mật được cung cấp vào ứng dụng của bạn: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Số điện thoại di động hiện tại của bạn",
-  "DeleteProfileBtn": "Xóa tài khoản của tôi",
+  "DeleteProfileBtn": "Vô hiệu hóa tài khoản của tôi",
   "DeleteProfileConfirmation": "Chú ý! Bạn sắp xóa tài khoản của mình.",
   "DeleteProfileConfirmationInfo": "Với việc nhấp vào\"Xóa tài khoản của tôi\"bạn đồng ý với <1>Chính sách Bảo mật của chúng tôi.</1>",
   "DeleteProfileSuccessDescription": "Tài khoản {{organizationName}} {{productName}} của bạn đã được vô hiệu hóa thành công. Chủ sở hữu hoặc siêu quản trị viên có thể xóa vĩnh viễn tài khoản đã vô hiệu hóa của bạn.",

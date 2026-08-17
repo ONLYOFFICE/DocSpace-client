@@ -5,7 +5,7 @@
   "ConnectApp": "Conectare aplicație",
   "ConnectAppDescription": "Scanați codul QR cu ajutorul aplicației de autentificare. In mod alternativ, puteți introduce manual cheia secretă din aplicația dvs: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Numărul dvs. de telefon mobil curent",
-  "DeleteProfileBtn": "Șterge contul meu",
+  "DeleteProfileBtn": "Dezactivează contul meu",
   "DeleteProfileConfirmation": "Atenție! Dumneavoastră sunteți pe cale de a șterge contul dvs.",
   "DeleteProfileConfirmationInfo": "Apăsând Șterge contul meu, acceptați că sunteți de acord cu <1>Politica de confidențialitate a companiei.</1>",
   "DeleteProfileSuccessDescription": "Contul dvs. {{organizationName}} {{productName}} a fost dezactivat cu succes. Proprietarul sau superadministratorul poate șterge definitiv contul dvs. dezactivat.",

@@ -1737,7 +1737,7 @@
   "ResetEncryptionKeysSuccess": "Şifreleme kimliğiniz sıfırlandı. Şifrelemeyi yeniden kurmak için yeni bir anahtar oluşturun.",
   "ResetEncryptionKeysTitle": "Şifreleme anahtarlarını sıfırla",
   "ResetEncryptionKeysWarning": "Bu işlem hesabınıza kayıtlı her şifreleme kimliğini kaldırır. Mevcut şifrelenmiş tüm dosyalara erişimi kaybedersiniz. Oda sahipleri dosyaları yeni kimliğinizle yeniden paylaşabilir, ancak yeniden paylaşılmayan her şey kurtarılamaz hale gelir. Bu işlem yalnızca bu cihazı değil, oturum açtığınız tüm cihazları etkiler.",
-  "ResetKey": "Resetleme anahtarı",
+  "ResetKey": "Anahtarı sıfırla",
   "ResetKnowledgeDescription": "Bu işlem, yapılandırılmış API anahtarını kaldıracak ve bilgi tabanı için belge dizinlemesini devre dışı bırakacaktır. Yeni belgelerin bilgi tabanına eklenmesi ve bunlarla çalışılması, yeni bir anahtar sağlanana kadar kullanılamaz hale gelecektir.",
   "ResetSettings": "Ayarları sıfırla",
   "Restore": "Geri Yükle",

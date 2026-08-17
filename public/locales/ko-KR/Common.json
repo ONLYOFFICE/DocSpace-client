@@ -1737,7 +1737,7 @@
   "ResetEncryptionKeysSuccess": "암호화 신원이 재설정되었습니다. 새 키를 생성하여 암호화를 다시 설정하세요.",
   "ResetEncryptionKeysTitle": "암호화 키 재설정",
   "ResetEncryptionKeysWarning": "이 작업은 계정에 등록된 모든 암호화 신원을 제거합니다. 기존 암호화 파일에 대한 모든 접근 권한을 잃게 됩니다. 룸 소유자가 새 신원으로 파일을 다시 공유할 수 있지만 다시 공유되지 않는 파일은 복구할 수 없게 됩니다. 이 작업은 이 기기뿐만 아니라 로그인된 모든 기기에 영향을 줍니다.",
-  "ResetKey": "재설정 키",
+  "ResetKey": "키 재설정",
   "ResetKnowledgeDescription": "이 작업은 구성된 API 키를 제거하고 지식 베이스의 문서 인덱싱을 비활성화합니다. 새로운 키가 제공될 때까지 지식 베이스에 새 문서를 추가하고 작업하는 기능은 사용할 수 없습니다.",
   "ResetSettings": "설정 초기화",
   "Restore": "복원",

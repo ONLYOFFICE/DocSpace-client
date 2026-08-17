@@ -35,7 +35,7 @@
 
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 
 import {
@@ -141,6 +141,45 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     default:
       return CategoryType.Personal;
   }
+};
+
+/**
+ * Resolves the category a room/folder must open under, keeping the Forms
+ * section intact.
+ *
+ * Form filling rooms live in the VirtualRooms tree, so the server reports
+ * `rootFolderType = Rooms (14)` for the room and everything inside it --
+ * `FolderType.Forms (36)` only ever appears on the bare Forms section root.
+ * Deriving the URL from `rootFolderType` alone therefore yields
+ * `/rooms/shared/...`, and both the sidebar and the breadcrumb (which resolve
+ * the active section from the pathname) then highlight Rooms instead of Forms.
+ *
+ * `roomType` is the reliable signal: it identifies a form room even when the
+ * user enters it from another section (e.g. Files -> "Form data collection" ->
+ * "Share in the room"), where the `/forms` route prefix is not set yet. The
+ * pathname is the fallback for folders *inside* a form room, which carry no
+ * room type of their own.
+ *
+ * @param {import("@docspace/shared/enums").FolderType|null} [folderType]
+ * @param {number|string|null} [parentId]
+ * @param {{
+ *   roomType?: import("@docspace/shared/enums").RoomsType,
+ *   pathname?: string,
+ * }} [options]
+ */
+export const getCategoryTypeByFolderTypeInSection = (
+  folderType,
+  parentId,
+  { roomType, pathname = window.location.pathname } = {},
+) => {
+  const categoryType = getCategoryTypeByFolderType(folderType, parentId);
+
+  if (categoryType !== CategoryType.SharedRoom) return categoryType;
+
+  const isFormRoom = roomType === RoomsType.FormRoom;
+  const isFormsRoute = pathname.startsWith("/forms");
+
+  return isFormRoom || isFormsRoute ? CategoryType.Form : categoryType;
 };
 
 export const getCategoryUrl = (categoryType, folderId) => {

@@ -305,7 +305,7 @@ export const useQuickActions = (
         id: "quick-form-template",
         dataTestId: "quick-form-space-template",
         icon: <UseRoomTemplateIllustrationIcon />,
-        label: t("Common:SpaceTemplate"),
+        label: t("Common:FormSpaceTemplate"),
         onClick: () => goFormsTemplates(userId),
       },
     ];

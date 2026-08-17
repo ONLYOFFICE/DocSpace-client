@@ -1,11 +1,11 @@
 {
   "key_path": "ChangeRoomOwner",
-  "content": "Change room owner",
-  "content_en_sha1_hash": "d9afe48d8cdb2ed0e46c9f0286665ebe1b7cc190",
+  "content": "Change space owner",
+  "content_en_sha1_hash": "195663d92bd71d4e0352d16760867404bc463cad",
   "created_at": "2026-08-13T14:36:42.081Z",
-  "updated_at": "2026-08-14T14:58:32.854Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "Context menu option used to initiate the process of transferring room ownership.",
+    "text": "Context menu option used to initiate the process of transferring space ownership.",
     "is_auto": true,
     "updated_at": "2026-08-13T14:55:15.756Z",
     "model": "gemma4:26b"

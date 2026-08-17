@@ -1,11 +1,11 @@
 {
   "key_path": "DeleteRoom",
-  "content": "Delete room",
-  "content_en_sha1_hash": "b594b35fc93c52b72306de0bd837a641b78ba52e",
+  "content": "Delete space",
+  "content_en_sha1_hash": "6dac23cd3264ab494d2cbeb9417bcdcae84829b3",
   "created_at": "2025-09-22T13:39:26.761Z",
-  "updated_at": "2026-08-14T14:58:32.855Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "This is a button label that allows users to delete a room.",
+    "text": "This is a button label that allows users to delete a space.",
     "is_auto": true,
     "updated_at": "2026-04-11T20:55:17.428Z",
     "model": "google/gemini-2.5-flash"

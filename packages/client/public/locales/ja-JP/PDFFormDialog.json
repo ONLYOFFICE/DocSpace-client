@@ -1,5 +1,4 @@
 {
   "PDFform": "PDFフォーム",
-  "PDFFormIsReadyToast": "PDFフォーム<1>{{filename}}</1>の記入準備が整いました。",
-  "PDFFormSuccessfullyCreatedDescription": "PDFフォームの入力準備が整いました。フォーム記入プロセスを開始するために公開リンクをコピーするか、この部屋に他のユーザーを招待してください。"
+  "PDFFormIsReadyToast": "PDFフォーム<1>{{filename}}</1>の記入準備が整いました。"
 }

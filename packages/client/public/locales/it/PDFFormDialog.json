@@ -1,5 +1,4 @@
 {
   "PDFform": "Modulo PDF",
-  "PDFFormIsReadyToast": "Il modulo PDF <1>{{filename}}</1> è pronto per essere compilato.",
-  "PDFFormSuccessfullyCreatedDescription": "Il tuo modulo PDF è pronto per essere compilato. Copia il link pubblico per avviare il processo di compilazione del modulo o invita altri utenti in questa stanza."
+  "PDFFormIsReadyToast": "Il modulo PDF <1>{{filename}}</1> è pronto per essere compilato."
 }

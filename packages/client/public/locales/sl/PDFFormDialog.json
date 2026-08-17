@@ -1,5 +1,4 @@
 {
   "PDFform": "PDF obrazec",
-  "PDFFormIsReadyToast": "PDF obrazec <1>{{filename}}</1> je pripravljen za izpolnjevanje.",
-  "PDFFormSuccessfullyCreatedDescription": "Obrazec PDF je pripravljen za izpolnjevanje. Kopiraj javno povezavo, za postopek izpolnjevanja obrazca ali povabi druge uporabnike v to sobo."
+  "PDFFormIsReadyToast": "PDF obrazec <1>{{filename}}</1> je pripravljen za izpolnjevanje."
 }

@@ -833,7 +833,16 @@ const Shell = ({ page = "home", ...rest }) => {
       // configured. `context` names the failing step (e.g. "profiles:init").
       onError: ({ type, error, context }) => {
         console.error(`[ai-agent] ${context ?? type} failed`, error);
-        toastr.error(t("Common:UnexpectedError"));
+        // A 403 means the user has no access to this agent/room's AI (e.g. a
+        // view-only agent opened by a non-member): every hydration read 403s
+        // at once, and the "view-only" notice already explains it, so the
+        // generic error toast is just noise (Bug 83181). The chat lib rejects
+        // with the status only in the message (`HTTP <status>`), not as a
+        // property, so the message is checked alongside the axios-style shape.
+        const status = error?.response?.status ?? error?.status;
+        const isForbidden =
+          status === 403 || /\bHTTP\s+403\b/.test(error?.message ?? "");
+        if (!isForbidden) toastr.error(t("Common:UnexpectedError"));
       },
     }),
     [t],

@@ -43,7 +43,6 @@ import {
   FilterType,
   FolderType,
   RoomsType,
-  SearchArea,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
@@ -72,17 +71,12 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
-import { CategoryType } from "@docspace/shared/constants";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import type {
   EmptyViewItemType,
   EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
-import FilesFilter from "@docspace/shared/api/files/filter";
-
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-
 import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
 import {
@@ -665,15 +659,7 @@ export const getOptions = (
           key: "open-chat",
           title: t("Common:CreateChat"),
           icon: <CreateChatIcon />,
-          onClick: () => {
-            const filesFilter = FilesFilter.getFilter(window.location);
-
-            filesFilter.searchArea = SearchArea.Any;
-
-            const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
-
-            window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
-          },
+          onClick: actions.onStartNewChat,
           description: t("Common:CreateChatDescription", {
             aiChat: t("Common:AIChat"),
           }),

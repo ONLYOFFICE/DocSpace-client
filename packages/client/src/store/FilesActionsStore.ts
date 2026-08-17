@@ -666,6 +666,7 @@ class FilesActionStore {
     isAIAgent?: boolean;
     title?: string;
     rootFolderType?: FolderType;
+    roomType?: RoomsType;
   })=> openLocationActionImpl(this, item);
 
   nameWithoutExtension = (title?: string) => {

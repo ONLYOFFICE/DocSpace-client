@@ -66,6 +66,8 @@ import { useNavigate } from "react-router";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
+
 import styles from "../Dashboard.module.scss";
 
 type HeaderProps = {
@@ -105,7 +107,7 @@ const Header = ({
           className={styles.planLink}
           color="accent"
           type={LinkType.action}
-          onClick={() => navigate("/portal-settings/payments/portal-payments")}
+          onClick={() => navigate(PAYMENT_ROUTES.portalPayments)}
           isHovered
         >
           {isFreeTariff

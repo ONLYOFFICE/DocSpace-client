@@ -1,21 +1,33 @@
 {
-  "key_path": "EmptySection",
-  "content": "Empty section",
-  "content_en_sha1_hash": "d3a52ee49ba7ed31d66e3656a201daf8fbc17589",
-  "created_at": "2026-06-03T09:30:00.178Z",
+  "key_path": "EmptyTrash",
+  "content": "Empty trash",
+  "content_en_sha1_hash": "04382a00c149d1ed654583cc1c97378f4cbe895c",
+  "created_at": "2026-08-17T00:00:00.000Z",
   "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "Action label for the header context menu item that permanently deletes everything in the current section (used for a read-only personal Files section).",
+    "text": "Action label for the menu item and trash badge title that permanently deletes everything in the Trash section.",
     "is_auto": false,
     "updated_at": "2026-08-17T00:00:00.000Z",
     "model": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
-      "line_number": 164,
-      "context": "{\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Common:EmptySection\"),\n onClick: self.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
+      "file_path": "/packages/client/src/components/Article/Body/Items.js",
+      "line_number": 212,
+      "context": "iconBadge={iconBadge}\n withAnimation\n badgeTitle={labelBadge ? \"\" : t(\"Common:EmptyTrash\")}\n badgeComponent={\n <NewFilesBadge",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
+      "line_number": 110,
+      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptyTrash\"),\n onClick: self.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useHeaderContextMenu.ts",
+      "line_number": 152,
+      "context": "return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptyTrash\"),\n icon: ClearTrashReactSvgUrl,\n disabled: isEmpty || !deleteCtx?.emptyTrash,\n onClick: () => deleteCtx?.emptyTrash?.(),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

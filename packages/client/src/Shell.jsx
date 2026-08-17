@@ -747,10 +747,19 @@ const Shell = ({ page = "home", ...rest }) => {
   // context — the conversation itself stays in the current location.
   const [pickedAgent, setPickedAgent] = useState(null);
 
+  // Anonymous sessions (public room / public preview via a share link) and
+  // guests must never issue AI calls: they answer 401, and the shared axios
+  // client reacts to a 401 with logout + redirect to the login page, killing
+  // the public link view.
+  const canUseAi = isAuthenticated && !isGuest;
+
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
   const { actions: profilePickerActions, getAgentByRoomId } =
-    useAiAgentsPickerActions(isLoaded && isAiChatAvailable, setPickedAgent);
+    useAiAgentsPickerActions(
+      isLoaded && isAiChatAvailable && canUseAi,
+      setPickedAgent,
+    );
 
   // Re-derive the picked agent from the opened thread's persisted context:
   // agent threads restore their agent (alias + request context), plain
@@ -850,7 +859,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // mounted for useStores() consumers; only hydration and the chat
           // UI are switched off. Viewer-role gating inside agent rooms is
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
-          canUseAi={isAuthenticated && !isGuest}
+          canUseAi={canUseAi}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}

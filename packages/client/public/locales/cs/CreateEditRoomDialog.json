@@ -16,7 +16,6 @@
   "FileLifetime": "Životnost souboru",
   "FileLifetimeDescription": "Nastavte životnost souborů tak, aby se soubory v této místnosti po uplynutí definované doby automaticky odstranily. Životnost začíná datem nahrání/vytvoření souboru.",
   "FilesOlderThan": "Soubory starší než:",
-  "FormRoomBarDescription": "Tato místnost je k dispozici každému uživateli s odkazem. Externí uživatelé budou mít oprávnění k vyplňování formulářů pro všechny soubory.",
   "GoToIntegrations": "Přejít do integrací",
   "Horizontal": "Horizontální",
   "Icon": "Ikona",

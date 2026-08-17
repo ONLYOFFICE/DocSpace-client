@@ -16,7 +16,6 @@
   "FileLifetime": "文件有效期",
   "FileLifetimeDescription": "设置文件有效期，此房间中的文件会在定义的时间段后自动删除。有效期从文件上传/创建之日起开始计算。",
   "FilesOlderThan": "超过以下时间的文件：",
-  "FormRoomBarDescription": "任何有链接的人都能够访问此房间。外部用户拥有所有文件的填写权限。",
   "GoToIntegrations": "前往集成",
   "Horizontal": "水平线",
   "Icon": "图标",

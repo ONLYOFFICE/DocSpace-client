@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "කාමරයේ ඇති සියලු ගොනු සඳහා වූ සම්බන්ධතා නැවත ජනනය කරනු ලැබේ. කාමරයේ ගොනු සහ අන්තර්ගත ලේඛන සඳහා පෙර තිබූ සම්බන්ධතා අ වලංගු නොවනු ඇත.",
   "RoomAccessRedirectNote": "තත්පර 5 කින් ඔබව ස්වයංක්‍රීයව {{sectionName}} වෙත හරවා යවනු ලැබේ.",
   "RoomAvailableViaExternalLink": "බාහිර සබැඳියකින් කාමරයට ප්‍රවේශ විය හැකිය",
-  "RoomAvailableViaSharedLink": "අසුරැකියාංගයක් බෙදාගත් සම්බන්ධතාව හරහා ලබාගත හැකිය.",
   "RoomCreated": "කාමරය සෑදිණි",
   "RoomEmptyContainerDescription": "පළමු කාමරය සාදන්න.",
   "RoomTagsLabel": "රූම් ටැග් (Room Tags)",

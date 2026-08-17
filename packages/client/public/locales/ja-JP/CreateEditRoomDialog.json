@@ -16,7 +16,6 @@
   "FileLifetime": "ファイルの有効期間",
   "FileLifetimeDescription": "このルーム内のファイルを、定義した期間後に自動的に削除するようにファイルの有効期限を設定します。有効期限は、ファイルのアップロード日または作成日から開始します。",
   "FilesOlderThan": "より古いファイル：",
-  "FormRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーには、すべてのファイルに対するフォーム記入権限が与えられます。",
   "GoToIntegrations": "インテグレーションへ移動",
   "Horizontal": "横方向",
   "Icon": "アイコン",

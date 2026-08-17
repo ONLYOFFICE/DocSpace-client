@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Linkit kaikkiin huoneen lomakkeisiin luodaan uudelleen. Aiemmat linkit ja upotetut asiakirjat poistuvat käytöstä.",
   "RoomAccessRedirectNote": "Sinut ohjataan automaattisesti {{sectionName}}-osioon 5 sekunnin kuluttua.",
   "RoomAvailableViaExternalLink": "Huone saatavilla ulkoisen linkin kautta",
-  "RoomAvailableViaSharedLink": "Pääsy huoneeeen jaetun linkin kautta",
   "RoomCreated": "Huone luotu",
   "RoomEmptyContainerDescription": "Ole hyvä ja luo ensimmäinen huone.",
   "RoomTagsLabel": "Huonetunnisteet",

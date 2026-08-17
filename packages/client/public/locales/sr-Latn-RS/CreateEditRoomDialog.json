@@ -16,7 +16,6 @@
   "FileLifetime": "Vek trajanja fajla",
   "FileLifetimeDescription": "Postavite vek trajanja fajla za automatsko brisanje fajlova u ovoj sobi nakon definisanog perioda. Vek počinje od datuma postavljanja/kreiranja fajla.",
   "FilesOlderThan": "Fajlovi stariji od:",
-  "FormRoomBarDescription": "Ova prostorija je dostupna za bilo koga sa linkom. Spoljni korisnici će imati dozvolu za Popunjavanje Formulara za sve datoteke.",
   "GoToIntegrations": "Idite na Integracije",
   "Horizontal": "Horizontalno",
   "Icon": "Ikonica",

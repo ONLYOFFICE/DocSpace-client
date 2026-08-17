@@ -16,7 +16,6 @@
   "FileLifetime": "Faila kalpošanas laiks",
   "FileLifetimeDescription": "Iestatiet faila kalpošanas laiku, lai automātiski izdzēstu failus šajā telpā pēc noteikta perioda. Kalpošanas laiks sākas faila augšupielādes/izveides dienā.",
   "FilesOlderThan": "Faili, kas vecāki par:",
-  "FormRoomBarDescription": "Šī telpa ir pieejama ikvienam, kam ir saite. Ārējiem lietotājiem būs veidlapu aizpildītāja atļauja visiem failiem.",
   "GoToIntegrations": "Atbrauc uz integrāciju",
   "Horizontal": "Horizontāli",
   "Icon": "Ikona",

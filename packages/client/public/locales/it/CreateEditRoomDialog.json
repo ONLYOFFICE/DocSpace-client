@@ -16,7 +16,6 @@
   "FileLifetime": "Durata del file",
   "FileLifetimeDescription": "Imposta la durata dei file per eliminare automaticamente i file in questa stanza dopo un periodo definito. La durata inizia dalla data di caricamento/creazione del file.",
   "FilesOlderThan": "File più vecchi di:",
-  "FormRoomBarDescription": "Questa stanza è a disposizione di chiunque abbia il link. Gli utenti esterni avranno l'autorizzazione come Compilatore moduli per tutti i file.",
   "GoToIntegrations": "Vai a Integrazioni",
   "Horizontal": "Orizzontale",
   "Icon": "Icona",

@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Links zu allen Dateien im Raum werden neu generiert. Vorherige Links zu Raumdateien und eingebetteten Dokumenten sind nicht mehr verfügbar.",
   "RoomAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zu {{sectionName}} weitergeleitet.",
   "RoomAvailableViaExternalLink": "Raum verfügbar über externen Link",
-  "RoomAvailableViaSharedLink": "Raum über geteilten Link verfügbar",
   "RoomCreated": "Raum erstellt",
   "RoomEmptyContainerDescription": "Bitte erstellen Sie den ersten Raum.",
   "RoomTagsLabel": "Raum-Tags",

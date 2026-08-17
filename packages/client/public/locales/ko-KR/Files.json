@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "룸에 있는 모든 파일에 대한 링크가 다시 생성됩니다. 룸 파일과 임베드된 문서에 대한 이전 링크는 사용할 수 없게 됩니다.",
   "RoomAccessRedirectNote": "5초 후에 {{sectionName}} 섹션으로 자동 이동됩니다.",
   "RoomAvailableViaExternalLink": "외부 링크를 통해 이용 가능한 방",
-  "RoomAvailableViaSharedLink": "공유 링크를 통해 이용 가능한 룸",
   "RoomCreated": "방이 생성되었습니다",
   "RoomEmptyContainerDescription": "서 첫 번째 방을 만드세요.",
   "RoomTagsLabel": "룸 태그",

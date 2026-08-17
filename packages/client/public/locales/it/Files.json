@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "I collegamenti a tutti i file della stanza verranno rigenerati. I collegamenti precedenti ai file della stanza e ai documenti incorporati non saranno più disponibili.",
   "RoomAccessRedirectNote": "Verrai reindirizzato automaticamente a {{sectionName}} tra 5 secondi.",
   "RoomAvailableViaExternalLink": "Stanza disponibile tramite collegamento esterno",
-  "RoomAvailableViaSharedLink": "Stanza disponibile tramite il link condiviso",
   "RoomCreated": "La stanza è stata creata",
   "RoomEmptyContainerDescription": "Ti preghiamo di creare la prima stanza.",
   "RoomTagsLabel": "Tag della stanza",

@@ -16,7 +16,6 @@
   "FileLifetime": "Dateilebensdauer",
   "FileLifetimeDescription": "Legen Sie eine Dateilebensdauer fest, um die Dateien in diesem Raum nach einer definierten Zeitspanne automatisch zu löschen. Die Lebensdauer beginnt mit dem Datum des Hochladens/Erstellens der Datei.",
   "FilesOlderThan": "Dateien älter als:",
-  "FormRoomBarDescription": "Dieser Raum ist für jeden zugänglich, der den Link hat. Externe Benutzer haben die Berechtigung zum Ausfüllen von Formularen für alle Dateien.",
   "GoToIntegrations": "Zu Integrationen",
   "Horizontal": "Horizontal",
   "Icon": "Icon",

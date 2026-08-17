@@ -16,7 +16,6 @@
   "FileLifetime": "Vida útil de archivo",
   "FileLifetimeDescription": "Establezca la vida útil de los archivos para eliminar automáticamente los archivos de esta sala tras un periodo definido. La vida útil comienza en la fecha de carga/creación del archivo.",
   "FilesOlderThan": "Archivos más antiguos que:",
-  "FormRoomBarDescription": "Esta sala está disponible para cualquier persona que tenga el enlace. Los usuarios externos tendrán permiso para rellenar formularios para todos los archivos.",
   "GoToIntegrations": "Ir a Integraciones",
   "Horizontal": "Horizontal",
   "Icon": "Icono",

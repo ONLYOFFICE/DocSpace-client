@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Links naar alle bestanden in de kamer worden opnieuw gegenereerd. Eerdere links naar bestanden in de kamer en ingesloten documenten zullen niet meer beschikbaar zijn.",
   "RoomAccessRedirectNote": "U wordt automatisch doorgestuurd naar de {{sectionName}} in 5 seconden.",
   "RoomAvailableViaExternalLink": "Kamer beschikbaar via externe link",
-  "RoomAvailableViaSharedLink": "Kamer beschikbaar via gedeelde link",
   "RoomCreated": "Kamer aangemaakt",
   "RoomEmptyContainerDescription": "Maak de eerste kamer aan.",
   "RoomTagsLabel": "Kamer Tags",

@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Povezave do vseh datotek v sobi bodo znova ustvarjene. Prejšnje povezave do datotek sobe in vdelanih dokumentov ne bodo več na voljo.",
   "RoomAccessRedirectNote": "Samodejno vas čez 5 sekund preusmerimo na {{sectionName}}.",
   "RoomAvailableViaExternalLink": "Soba na voljo preko zunanje povezave",
-  "RoomAvailableViaSharedLink": "Soba je na voljo prek skupne povezave",
   "RoomCreated": "Soba ustvarjena",
   "RoomEmptyContainerDescription": "Prosimo, ustvarite prvo sobo.",
   "RoomTagsLabel": "Oznake sob",

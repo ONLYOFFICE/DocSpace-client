@@ -16,7 +16,6 @@
   "FileLifetime": "Tempo de vida do arquivo",
   "FileLifetimeDescription": "Defina o tempo de vida do arquivo para excluir automaticamente os arquivos nesta sala após um período definido. O tempo de vida começa na data de upload/criação do arquivo.",
   "FilesOlderThan": "Ficheiros mais antigos que:",
-  "FormRoomBarDescription": "Esta sala está disponível para qualquer pessoa com o link. Os usuários externos terão permissão de preenchimento de formulário para todos os arquivos.",
   "GoToIntegrations": "Ir para Integrações",
   "Horizontal": "Horizontais",
   "Icon": "Ícone",

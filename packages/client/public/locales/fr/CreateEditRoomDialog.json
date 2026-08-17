@@ -16,7 +16,6 @@
   "FileLifetime": "Durée de vie du fichier",
   "FileLifetimeDescription": "Définissez la durée de vie des fichiers pour supprimer automatiquement les fichiers de cette salle après une période définie. La durée de vie commence à la date de téléchargement/création du fichier.",
   "FilesOlderThan": "Fichiers plus anciens que :",
-  "FormRoomBarDescription": "Cette salle est accessible à toute personne disposant du lien. Les utilisateurs externes auront le droit de remplir des formulaires pour tous les fichiers.",
   "GoToIntegrations": "Aller à Intégrations",
   "Horizontal": "Horizontalement",
   "Icon": "Icône",

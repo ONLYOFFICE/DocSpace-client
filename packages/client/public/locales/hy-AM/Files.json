@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Սենյակի բոլոր ֆայլերի հղումները նորից կստեղծվեն: Սենյակի ֆայլերի և ներկառուցված փաստաթղթերի նախկին հղումներն անհասանելի կդառնան:",
   "RoomAccessRedirectNote": "Դուք ավտոմատ կվերաուղղորդվեք {{sectionName}} բաժին 5 վայրկյանում։",
   "RoomAvailableViaExternalLink": "Այստեղ դեռ ֆայլեր և թղթապանակներ չկան",
-  "RoomAvailableViaSharedLink": "Սենյակը հասանելի է ընդհանուր հղման միջոցով",
   "RoomCreated": "Ստեղծվել է սենյակ",
   "RoomEmptyContainerDescription": "Խնդրում եմ ստեղծեք առաջին սենյակը:",
   "RoomTagsLabel": "Սենյակի պիտակներ",

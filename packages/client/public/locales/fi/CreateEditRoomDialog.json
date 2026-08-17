@@ -16,7 +16,6 @@
   "FileLifetime": "Tiedoston käyttöikä",
   "FileLifetimeDescription": "Aseta tiedoston käyttöikä poistaaksesi automaattisesti tämän huoneen tiedostot määrätyn ajanjakson jälkeen. Käyttöikä alkaa tiedoston lataamis-/luomispäivämäärästä.",
   "FilesOlderThan": "Tiedostot, jotka ovat vanhempia kuin:",
-  "FormRoomBarDescription": "Tämä huone on kenelle tahansa, jolla on linkki. Ulkoiset käyttäjät saavat lomakkeen täyttäjänoikeudet kaikkiin tiedostoihin.",
   "GoToIntegrations": "Siirry integraatioihin",
   "Horizontal": "Vaakasuora",
   "Icon": "Kuvake",

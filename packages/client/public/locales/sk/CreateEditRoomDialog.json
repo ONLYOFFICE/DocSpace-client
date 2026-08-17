@@ -16,7 +16,6 @@
   "FileLifetime": "Doba používania súboru",
   "FileLifetimeDescription": "Nastavte dobu používania súborov na automatické vymazanie súborov v tejto miestnosti po uplynutí definovaného obdobia. Doba používania sa začína dátumom odoslania/vytvorenia súboru.",
   "FilesOlderThan": "Súbory staršie ako:",
-  "FormRoomBarDescription": "Táto miestnosť je dostupná každému, kto má k dispozícii odkaz. Externí používatelia budú mať oprávnenie na vyplnenie pre všetky súbory.",
   "GoToIntegrations": "Prejsť na integrácie",
   "Horizontal": "Horizontála",
   "Icon": "Ikona",

@@ -1,11 +1,11 @@
 {
   "key_path": "RoomMembersAvailableViaSharedLink",
-  "content": "Room available via shared link",
-  "content_en_sha1_hash": "8acb01f94cadbbbaa3b7e445cdaf6f155d7a1512",
+  "content": "Space available via shared link",
+  "content_en_sha1_hash": "8d3651a4eef40709e11e225dff3ef94072f02564",
   "created_at": "2026-06-01T21:20:31.317Z",
-  "updated_at": "2026-06-03T09:30:05.140Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "Header text in the info panel's member view, indicating that the room can be accessed using a shared link.",
+    "text": "Header text in the info panel's member view, indicating that the form space can be accessed using a shared link.",
     "is_auto": true,
     "updated_at": "2026-06-01T21:25:52.528Z",
     "model": "gemma4:26b"

@@ -1,11 +1,11 @@
 {
   "key_path": "LeaveTheRoom",
-  "content": "Leave the space",
-  "content_en_sha1_hash": "31c02d4e30a5bc889c1f1f6ff92ea56f28665c20",
+  "content": "Leave the room",
+  "content_en_sha1_hash": "0494f65ff12e4895fbbc91bd002080a4361c346d",
   "created_at": "2025-05-19T21:30:55.737Z",
-  "updated_at": "2026-08-17T00:00:00.000Z",
+  "updated_at": "2026-08-14T14:58:32.719Z",
   "comment": {
-    "text": "This is a button label or menu item. It allows a user to exit a space they are currently in.",
+    "text": "This is a button label or menu item. It allows a user to exit a room they are currently in.",
     "is_auto": true,
     "updated_at": "2026-04-11T21:09:19.852Z",
     "model": "google/gemini-2.5-flash"

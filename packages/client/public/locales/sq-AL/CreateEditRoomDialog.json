@@ -6,7 +6,7 @@
   "AutomaticIndexing": "Indeksimi automatik",
   "AutomaticIndexingDescription": "Aktivizoni indeksimin automatik për të indeksuar skedarët dhe dosjet sipas numrit të serisë. Renditja sipas numrit do të vendoset si parazgjedhje për të gjithë përdoruesit.",
   "ChooseRoomType": "Zgjidhni llojin e dhomës",
-  "ChooseSetType": "Zgjidhni llojin e grupit",
+  "ChooseSetType": "Zgjidhni llojin e hapësirës",
   "ConfigureDatabaseConnection": "Konfiguro lidhjen me bazën e të dhënave në Integrime → Shërbime të treta",
   "CreateRoomConfirmation": "Të vazhdohet pa e lidhur hapësirën ruaajtëse?\nJu keni zgjedhur një opsion ruajtjeje të palëve të treta që nuk është lidhur ende. Nëse vazhdoni pa e lidhur shërbimin, ky opsion nuk do të shtohet.",
   "CreateRoomWatermarksConfirmation": "Nuk keni vendosur një filigran për t'u aplikuar në dokumente në këtë dhomë. Mund të shtoni gjithmonë një filigran në cilësimet e redaktimit të dhomës. Të vazhdohet pa filigran?",

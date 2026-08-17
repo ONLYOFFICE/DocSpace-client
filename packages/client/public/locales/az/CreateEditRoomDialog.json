@@ -6,7 +6,7 @@
   "AutomaticIndexing": "Avtomatik indeksləşdirmə",
   "AutomaticIndexingDescription": "Fayl və qovluqları seriya nömrəsinə görə indeksləşdirmək üçün avtomatik indeksləşdirməni aktivləşdirin. Nömrə üzrə çeşidləmə bütün istifadəçilər üçün standart olaraq təyin ediləcək.",
   "ChooseRoomType": "Otaq növünü seçin",
-  "ChooseSetType": "Dəst növünü seçin",
+  "ChooseSetType": "Sahə növünü seçin",
   "ConfigureDatabaseConnection": "İnteqrasiya → Üçüncü tərəf xidmətlərində verilənlər bazası bağlantısını konfiqurasiya edin",
   "CreateRoomConfirmation": "Yaddaşa qoşulmadan davam edilsin?\nSiz hələ qoşulmamış üçüncü tərəfin yaddaş seçimini etmisiniz. Xidmətə qoşulmadan davam etsəniz, bu seçim əlavə edilməyəcək.",
   "CreateRoomWatermarksConfirmation": "Bu otaqdakı sənədlərə tətbiq olunacaq su nişanını təyin etməmisiniz. Otaq redaktə parametrlərində su nişanını həmişə əlavə edə bilərsiniz. Su nişanı olmadan davam edilsin?",

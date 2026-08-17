@@ -6,7 +6,7 @@
   "AutomaticIndexing": "Automatisch indexeren",
   "AutomaticIndexingDescription": "Schakel automatisch indexeren in om bestanden en mappen op serienummer te indexeren. Sorteren op nummer wordt standaard ingesteld voor alle gebruikers.",
   "ChooseRoomType": "Kies type kamer",
-  "ChooseSetType": "Kies type set",
+  "ChooseSetType": "Kies type ruimte",
   "ConfigureDatabaseConnection": "Configureer de databaseverbinding in Integratie → Derde partij-services",
   "CreateRoomConfirmation": "Doorgaan zonder de opslag aan te sluiten?\nU hebt een opslagoptie van derden geselecteerd die nog niet is aangesloten. Als u doorgaat zonder de dienst te verbinden, wordt deze optie niet toegevoegd.",
   "CreateRoomWatermarksConfirmation": "U heeft nog geen watermerk ingesteld voor documenten in deze kamer. U kunt altijd een watermerk toevoegen in de instellingen voor bewerken van de kamer. Doorgaan zonder watermerk?",

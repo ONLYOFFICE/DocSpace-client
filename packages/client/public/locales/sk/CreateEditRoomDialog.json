@@ -6,7 +6,7 @@
   "AutomaticIndexing": "Automatické indexovanie",
   "AutomaticIndexingDescription": "Povoľte automatické indexovanie na indexovanie súborov a priečinkov podľa sériového čísla. Triedenie podľa čísla bude nastavené ako predvolené pre všetkých používateľov.",
   "ChooseRoomType": "Vyberte typ miestnosti",
-  "ChooseSetType": "Vyberte typ sady",
+  "ChooseSetType": "Vyberte typ priestoru",
   "ConfigureDatabaseConnection": "Nakonfigurujte pripojenie k databáze v Integrácia → Tretie strany",
   "CreateRoomConfirmation": "Vybrali ste si možnosť úložiska od tretej strany, ktoré ešte nie je pripojené.\nAk budete pokračovať bez aktivácie služby, táto možnosť nebude pridaná.",
   "CreateRoomWatermarksConfirmation": "Nezadali ste vodoznak, ktorý sa má použiť na dokumenty v tejto miestnosti. Vodoznak môžete vždy pridať v nastaveniach miestnosti. Pokračovať bez vodoznaku?",

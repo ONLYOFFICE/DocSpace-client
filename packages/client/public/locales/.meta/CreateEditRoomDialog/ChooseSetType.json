@@ -1,9 +1,9 @@
 {
   "key_path": "ChooseSetType",
-  "content": "Choose set type",
-  "content_en_sha1_hash": "dfa926bbaee9bb477b27d785e448edb5eed0cf33",
+  "content": "Choose space type",
+  "content_en_sha1_hash": "9cf3e7ce26ad1c3145f39b3c2150635f4101d736",
   "created_at": "2026-08-11T00:00:00.000Z",
-  "updated_at": "2026-08-17T17:23:21.695Z",
+  "updated_at": "2026-08-18T07:20:00.000Z",
   "comment": {
     "text": "Dialog title shown when creating a new item from the Forms section, where the user picks a set type instead of a room type.",
     "is_auto": false,

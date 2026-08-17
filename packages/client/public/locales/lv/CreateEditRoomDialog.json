@@ -6,7 +6,7 @@
   "AutomaticIndexing": "Automātiskā indeksēšana",
   "AutomaticIndexingDescription": "Iespējojiet automātisku indeksēšanu indeksa failiem un mapēm pēc sērijas numura. Kārtošana pēc numura tiks iestatīta kā noklusējums visiem lietotājiem.",
   "ChooseRoomType": "Izvēlieties telpas tipu",
-  "ChooseSetType": "Izvēlieties kopas tipu",
+  "ChooseSetType": "Izvēlieties telpas tipu",
   "ConfigureDatabaseConnection": "Konfigurējiet datubāzes savienojumu Integrācija → Trešo pušu pakalpojumi",
   "CreateRoomConfirmation": "Vai turpināt, neizveidojot savienojumu ar krātuvi?\nEsat atlasījis trešās puses krātuves opciju, kas vēl nav pievienota. Ja turpināsiet, nepievienojot pakalpojumu, šī opcija netiks pievienota.",
   "CreateRoomWatermarksConfirmation": "Jūs neesat iestatījis ūdenszīmi, kas jāpiemēro šīs telpas dokumentiem. Jūs vienmēr varat pievienot ūdenszīmi telpas rediģēšanas iestatījumos. Vai turpināt bez ūdenszīmes?",

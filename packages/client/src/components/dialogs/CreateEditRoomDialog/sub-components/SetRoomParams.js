@@ -552,6 +552,7 @@ const SetRoomParams = ({
           isEdit={isEdit}
           isLoading={isDisabled}
           isTemplate={isTemplate || fromTemplate}
+          isFormSpace={isFormRoom}
         />
       ) : null}
 

@@ -41,7 +41,7 @@ import classNames from "classnames";
 import { isMobile } from "@docspace/shared/utils";
 import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitle";
 import { Text } from "@docspace/ui-kit/components/text";
-import { FileType, FolderType } from "@docspace/shared/enums";
+import { FileType, FolderType, RoomsType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/ui-kit/components/room-icon";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
@@ -225,6 +225,9 @@ const Details = ({
     "isRoom" in selection &&
     selection.isRoom;
 
+  const isFormSpaceTemplate =
+    "roomType" in selection && selection.roomType === RoomsType.FormRoom;
+
   const color = "logo" in selection ? selection.logo?.color : undefined;
   const resolvedTitle = useResolvedFileTitle(
     selection as { id?: number | string; title?: string; encrypted?: boolean },
@@ -250,7 +253,11 @@ const Details = ({
                   {t("Files:RoomTemplateDescription")}
                 </Text>
                 <Button
-                  label={t("Common:CreateRoom")}
+                  label={
+                    isFormSpaceTemplate
+                      ? t("Common:CreateFormSpaceAction")
+                      : t("Common:CreateRoom")
+                  }
                   className={styles.roomTemplateButton}
                   onClick={onCreateRoom}
                   size={ButtonSize.extraSmall}

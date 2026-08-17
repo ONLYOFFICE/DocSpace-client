@@ -1,11 +1,11 @@
 {
   "key_path": "SpaceTemplate",
-  "content": "Workspace template",
-  "content_en_sha1_hash": "e33d72e96c6a73f303fb3132a412a37d691fb5f8",
+  "content": "Space template",
+  "content_en_sha1_hash": "131f4231ef35aa8146e42752376f585157d633ba",
   "created_at": "2026-08-13T14:37:09.048Z",
-  "updated_at": "2026-08-13T14:43:07.167Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "Label for a quick action item used to navigate to workspace templates.",
+    "text": "Label for a quick action item used to navigate to space templates.",
     "is_auto": true,
     "updated_at": "2026-08-13T14:43:07.167Z",
     "model": "gemma4:26b"

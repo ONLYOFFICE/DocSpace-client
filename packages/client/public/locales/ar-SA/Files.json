@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "سيتم إعادة إنشاء الروابط إلى جميع الملفات في الغرفة. وستصبح الروابط السابقة إلى ملفات الغرفة والمستندات المضمنة غير متاحة.",
   "RoomAccessRedirectNote": "سيتم إعادة توجيهكم تلقائيًا إلى {{sectionName}} في غضون 5 ثوانٍ.",
   "RoomAvailableViaExternalLink": "الغرفة متاحة بواسطة رابط خارجي",
-  "RoomAvailableViaSharedLink": "الغرفة متاحة عبر الرابط المشترك",
   "RoomCreated": "تم إنشاء الغرفة",
   "RoomEmptyContainerDescription": "الرجاء إنشاء الغرفة الأولى.",
   "RoomTagsLabel": "وسوم الغرف",

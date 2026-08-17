@@ -102,7 +102,7 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Links to all files in the room will be re-generated. Previous links to room files and embedded documents will become unavailable.",
   "RoomAccessRedirectNote": "You will be redirected to the {{sectionName}} automatically in 5 seconds.",
   "RoomAvailableViaExternalLink": "Room available via external link",
-  "RoomAvailableViaSharedLink": "Room available via shared link",
+  "RoomAvailableViaSharedLink": "Space available via shared link",
   "RoomCreated": "Room created",
   "RoomEmptyContainerDescription": "Please create the first room.",
   "RoomTagsLabel": "Room Tags",

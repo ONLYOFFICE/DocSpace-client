@@ -1,11 +1,11 @@
 {
   "key_path": "UploadPDFFormOptionDescription",
-  "content": "Select a ready PDF form available in the workspace and upload it to the room.",
-  "content_en_sha1_hash": "0e2dfbfe878d94b08c43756b2eb4422d2fc65408",
+  "content": "Select a ready PDF form available in the workspace and upload it to the space.",
+  "content_en_sha1_hash": "5ffc2ad9c3daac1987c9437583c52da5268669b0",
   "created_at": "2026-08-12T11:00:48.519Z",
-  "updated_at": "2026-08-14T14:58:32.645Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "Instructional subtext in an empty state view that explains how to select and upload a PDF form from the workspace into the current room.",
+    "text": "Instructional subtext in an empty state view that explains how to select and upload a PDF form from the workspace into the current form space.",
     "is_auto": true,
     "updated_at": "2026-08-12T11:37:13.781Z",
     "model": "gemma4:26b"

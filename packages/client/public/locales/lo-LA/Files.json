@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "ລິ້ງໄປສູ່ເອກະສານທັງໝົດໃນຫ້ອງຈະຖືກສ້າງໃໝ່ອີກຄັ້ງ. ລິ້ງທີ່ເຄີຍໃຊ້ໄດ້ໃນເອກະສານຂອງຫ້ອງ ແລະເອກະສານທີ່ຝັງໄວ້ຈະບໍ່ສາມາດໃຊ້ໄດ້ອີກ.",
   "RoomAccessRedirectNote": "ທ່ານຈະຖືກປ່ຽນເສັ້ນທາງໄປຫາ {{sectionName}} ໂດຍອັດຕະໂນມັດໃນ 5 ວິນາທີ.",
   "RoomAvailableViaExternalLink": "ມີຫ້ອງຫວ່າງຜ່ານທາງເຊື່ອມຕໍ່ພາຍນອກ",
-  "RoomAvailableViaSharedLink": "ຫ້ອງຫວ່າງຜ່ານລິ້ງສາແບ່ງຮ່ວມ",
   "RoomCreated": "ຫ້ອງຖືກສ້າງແລ້ວ",
   "RoomEmptyContainerDescription": "ກະລຸນາສ້າງຫ້ອງທໍາອິດ.",
   "RoomTagsLabel": "ປ້າຍຫ້ອງ",

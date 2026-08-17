@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Saites uz visām telpā esošajiem failiem tiks atkārtoti ģenerētas. Iepriekšējās saites uz telpu failiem un iegultiem dokumentiem nebūs pieejamas.",
   "RoomAccessRedirectNote": "Jūs tiksiet automātiski novirzīts uz {{sectionName}} pēc 5 sekundēm.",
   "RoomAvailableViaExternalLink": "Numurs ir pieejams, izmantojot ārējo saiti",
-  "RoomAvailableViaSharedLink": "Telpa ir pieejama, izmantojot koplietošanas saiti",
   "RoomCreated": "Telpa ir izveidota",
   "RoomEmptyContainerDescription": "Lūdzu, izveidojiet pirmo telpu.",
   "RoomTagsLabel": "Telpu birkas",

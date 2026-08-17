@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Odadaki tüm dosyaların bağlantıları yeniden oluşturulacaktır. Oda dosyalarına ve gömülü belgelere yönelik önceki bağlantılar kullanılamaz duruma gelecektir.",
   "RoomAccessRedirectNote": "5 saniye içinde {{sectionName}} bölümüne otomatik olarak yönlendirileceksiniz.",
   "RoomAvailableViaExternalLink": "Oda harici bağlantıyla kullanılabilir",
-  "RoomAvailableViaSharedLink": "Oda paylaşımlı bağlantı üzerinden kullanılabilir",
   "RoomCreated": "Oda oluşturuldu",
   "RoomEmptyContainerDescription": "Lütfen ilk odayı oluşturun.",
   "RoomTagsLabel": "Oda Etiketleri",

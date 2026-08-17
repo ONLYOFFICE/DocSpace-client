@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Ссылки на все файлы в комнате будут сгенерированы повторно. Предыдущие ссылки на файлы комнаты и встроенные документы станут недоступными.",
   "RoomAccessRedirectNote": "Вы будете автоматически перенаправлены в раздел {{sectionName}} через 5 секунд.",
   "RoomAvailableViaExternalLink": "Комната доступна по внешней ссылке",
-  "RoomAvailableViaSharedLink": "Комната доступна по общей ссылке",
   "RoomCreated": "Комната создана",
   "RoomEmptyContainerDescription": "Пожалуйста, создайте первую комнату.",
   "RoomTagsLabel": "Тэги комнаты",

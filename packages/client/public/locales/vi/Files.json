@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "Liên kết đến tất cả các tập tin trong phòng sẽ được tạo lại. Các liên kết trước đó đến phòng có tập tin và tài liệu nhúng sẽ không khả dụng.",
   "RoomAccessRedirectNote": "Bạn sẽ được chuyển đến {{sectionName}} tự động trong 5 giây.",
   "RoomAvailableViaExternalLink": "Phòng khả dụng thông qua liên kết bên ngoài",
-  "RoomAvailableViaSharedLink": "Phòng có sẵn thông qua liên kết được chia sẻ",
   "RoomCreated": "Đã tạo phòng",
   "RoomEmptyContainerDescription": "Xin vui lòng tạo phòng đầu tiên.",
   "RoomTagsLabel": "Thẻ tag (từ khóa) phòng",

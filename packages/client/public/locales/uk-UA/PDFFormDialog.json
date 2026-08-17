@@ -1,5 +1,4 @@
 {
   "PDFform": "PDF-форма",
-  "PDFFormIsReadyToast": "PDF-форма <1>{{filename}}</1> готова до заповнення.",
-  "PDFFormSuccessfullyCreatedDescription": "Ваша PDF-форма готова до заповнення. Скопіюйте публічне посилання, щоб почати процес заповнення форм, або запросіть інших користувачів до цієї кімнати."
+  "PDFFormIsReadyToast": "PDF-форма <1>{{filename}}</1> готова до заповнення."
 }

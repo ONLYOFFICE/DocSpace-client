@@ -102,7 +102,6 @@
   "RevokeSharedLinkDescriptionPublicRoom": "房间内所有文件的链接将重新生成。之前的房间文件和嵌入式文档的链接将失效。",
   "RoomAccessRedirectNote": "将在5秒后自动跳转到{{sectionName}}。",
   "RoomAvailableViaExternalLink": "可通过外部链接访问的房间",
-  "RoomAvailableViaSharedLink": "可通过共享连接访问此房间",
   "RoomCreated": "房间已创建",
   "RoomEmptyContainerDescription": "请创建首个房间。",
   "RoomTagsLabel": "房间标签",

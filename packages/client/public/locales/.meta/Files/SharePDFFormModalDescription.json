@@ -1,9 +1,9 @@
 {
   "key_path": "SharePDFFormModalDescription",
-  "content": "A new room will be created and the PDF form will be copied there. You can then invite other users to fill out the form in the room.",
-  "content_en_sha1_hash": "ed2167bb85cc73bd33405c67a94418fac31708f7",
+  "content": "A new space will be created and the PDF form will be copied there. You can then invite other users to fill out the form in the space.",
+  "content_en_sha1_hash": "dd113a810bb16ff1bb29c17cb98a7d58fa17d544",
   "created_at": "2025-05-19T21:30:56.190Z",
-  "updated_at": "2026-05-28T15:46:18.548Z",
+  "updated_at": "2026-08-17T19:42:56.947Z",
   "comment": {
     "text": "This is the body text of a modal dialog that appears when a user chooses to share a PDF form. It explains that a new room will be created for the form, allowing other users to fill it out.",
     "is_auto": true,

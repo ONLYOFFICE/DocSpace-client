@@ -1,9 +1,9 @@
 {
   "key_path": "WarningCopyToFormRoom",
-  "content": "The file cannot be copied to this room. Please try to copy the {{organizationName}} PDF form.",
-  "content_en_sha1_hash": "a1c3d143cde07c3cc51c27c08a8705ae800f1435",
+  "content": "The file cannot be copied to this space. Please try to copy the {{organizationName}} PDF form.",
+  "content_en_sha1_hash": "7723c2a080334f2777ea33e75fa4ecbbe4215e60",
   "created_at": "2025-05-19T21:30:49.585Z",
-  "updated_at": "2026-08-12T11:00:51.493Z",
+  "updated_at": "2026-08-17T19:42:56.947Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to copy a file that is not an {{organizationName}} PDF form into a form room.",
     "is_auto": true,

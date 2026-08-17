@@ -67,7 +67,7 @@
   "FormRoomCreationLimit": "Izveidošana balstoties uz vairākiem failiem un mapēm nav pieejama šāda tipa telpai. Lai izveidotu šādu telpu, dodieties uz {{sectionName}} sadaļu vai izmantojiet vienu no PDF formām.",
   "Index": "Indekss",
   "LastActivity": "Pēdējā aktivitāte",
-  "LeaveRoomFormFillingWarning": "Jums šajā telpā pašlaik ir uztverieta formu aizpildīšana. Iziešana no telpas apturēs šīs formas jūsu posmā. Jūs varēsiet pievienoties atkal tikai pēc jauna uzaicinājuma no telpas administratora.",
+  "LeaveRoomFormFillingWarning": "Jums šajā telpā pašlaik ir uzticēta veidlapu aizpildīšana. Iziešana no telpas apturēs šīs veidlapas jūsu posmā. Jūs varēsiet pievienoties atkal tikai pēc jauna uzaicinājuma no telpas administratora.",
   "LifetimeDialogDescription": "Kalpošanas laika atskaite sākas faila izveides datumā. Daži faili šajā telpā pārsniedz piedāvāto kalpošanas laiku un tiks izdzēsti, tiklīdz iespējosiet iestatījumu.",
   "LifetimeDialogDescriptionHeader": "Vecāki faili ar pārsniegtu kalpošanas laiku tiks izdzēsti",
   "LinkDeletedSuccessfully": "Saite ir veiksmīgi izdzēsta",

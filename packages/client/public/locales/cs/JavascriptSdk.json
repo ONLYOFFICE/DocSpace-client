@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Vytvořit vzorové vložení selektoru místnosti",
   "CreateSampleUploader": "Vytvořit vzorový Uploader embed",
   "CreateSampleViewer": "Vytvoření vzorku vložení prohlížeče",
-  "CSPDescription": "Zadejte adresu služby, kam chcete vložit nebo propojit pracovní prostor {{organizationName}}.",
+  "CSPDescription": "Zadejte adresu služby, kam chcete vložit nebo propojit pracovní prostor.",
   "CSPHeader": "Přidejte povolené domény pro tento pracovní prostor.",
   "CSPHelp": "Toto nastavení je bezpečnostní mechanismus, který lze použít k ochraně před útoky typu \"content injection\". CSP popisuje bezpečné zdroje pro stahování zdrojů. Stahování ze zdrojů, které nejsou uvedeny na `bílém seznamu`, je blokováno. Zadejte domény (spolu s protokolem), se kterými bude pracovat.",
   "CSPInfoBarDescription": "Povolte prosím protokol HTTPS pro váš pracovní prostor, abyste zajistili správnou funkci nastavení.",

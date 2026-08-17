@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Criar exemplo de incorporação do seletor de salas",
   "CreateSampleUploader": "Criar um exemplo de incorporação de Uploader",
   "CreateSampleViewer": "Criar exemplo de incorporação do visualizador",
-  "CSPDescription": "Insira o endereço do serviço onde gostaria de incorporar ou ligar o espaço de trabalho {{organizationName}}.",
+  "CSPDescription": "Insira o endereço do serviço onde gostaria de incorporar ou ligar o espaço de trabalho.",
   "CSPHeader": "Adicione os domínios permitidos para este espaço de trabalho.",
   "CSPHelp": "Esta definição é um mecanismo de segurança que pode ser utilizado para proteger contra ataques de injeção de conteúdos. O CSP descreve fontes seguras de download de recursos. O download de recursos não incluídos na \"lista branca\" está bloqueado. Especifique os domínios (juntamente com o protocolo) com os quais irá trabalhar.",
   "CSPInfoBarDescription": "Ative o protocolo HTTPS para o seu espaço de trabalho para garantir o funcionamento correto da configuração.",

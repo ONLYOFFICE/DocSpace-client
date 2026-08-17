@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Ստացեք պատասխաններ, գտեք ֆայլեր և ստեղծեք բովանդակություն ԱԲ-ի օգնությամբ:",
   "CollaborationRoomEmptyTitle": "Բարի գալուստ Համագործակցության սենյակ",
   "CollaboratorEmptyTitle": "Սենյակը դատարկ է։",
   "CreateDocument": "Ստեղծել նոր փաստաթուղթ",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Ավելացնել խմբի անդամներ և նշանակել ղեկավարին",
   "EmptyGroupDeleteOptionDescription": "Եթե ձեզ այլևս այս խումբն անհրաժեշտ չէ",
   "EmptyGroupsCreateGroupOptionDescription": "Ստեղծեք խումբ՝ սենյակում ավելացնելու համար",
+  "EmptyRootFormsDescription": "Խնդրում եմ ստեղծեք առաջին ձևերի տարածքը:",
+  "EmptyRootFormsTitle": "Այստեղ դեռ ձևերի տարածքներ չկան",
   "EmptyRootRoomUserDescription": "Կիսված սենյակը կհայտնվի այստեղ:",
   "EmptyRootRoomUserTitle": "Այստեղ դեռ սենյակներ չկան",
   "EmptyTemplatesDescription": "Դուք կարող եք սենյակից ստեղծել կաղապար «Սենյակներ» բաժնում։",

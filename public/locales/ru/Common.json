@@ -133,6 +133,8 @@
   "AIModels": "Модели ИИ",
   "AIModelsDescription": "Получите доступ к широкому спектру моделей ИИ через интеграцию с OpenRouter",
   "AIModelsWebSearchKnowledgeBase": "Модели, Веб-поиск, База знаний",
+  "AIModelUpdatedDescription": "Мы обновили список доступных моделей. Модель <1>{{model}}</1> выбрана автоматически. Проверьте или измените модель ниже.",
+  "AIModelUpdatedTitle": "Модель обновлена",
   "AINewChat": "Новый чат",
   "AIOpenRouterPricingNote": "<1>Цены OpenRouter</1> + сервисный сбор 20% применяются к использованию",
   "AIPaywallCallbackActivated": "Функции ИИ активированы",

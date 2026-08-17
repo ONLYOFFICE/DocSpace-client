@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "借助 AI 获取答案、查找文件并起草内容。",
   "CollaborationRoomEmptyTitle": "欢迎来到协作房间",
   "CollaboratorEmptyTitle": "房间是空的。",
   "CreateDocument": "新建文档",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "添加组成员并指定负责人",
   "EmptyGroupDeleteOptionDescription": "如果您不再需要此组",
   "EmptyGroupsCreateGroupOptionDescription": "新建群组以将它们添加到此房间",
+  "EmptyRootFormsDescription": "请创建首个表单空间。",
+  "EmptyRootFormsTitle": "这里还没有表单空间",
   "EmptyRootRoomUserDescription": "已共享的房间将显示在此处",
   "EmptyRootRoomUserTitle": "此处暂无房间",
   "EmptyTemplatesDescription": "你可以在“房间”板块中从现有房间创建一个模板",

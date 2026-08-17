@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Saņemiet atbildes, atrodiet failus un veidojiet saturu ar MI.",
   "CollaborationRoomEmptyTitle": "Laipni lūdzam sadarbības telpā",
   "CollaboratorEmptyTitle": "Telpa ir tukša.",
   "CreateDocument": "Izveidot jaunu dokumentu",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Pievienojiet grupas dalībniekus un piešķiriet vadītāju",
   "EmptyGroupDeleteOptionDescription": "Ja šī grupa jums vairs nav nepieciešama",
   "EmptyGroupsCreateGroupOptionDescription": "Izveidojiet grupu, lai tos pievienotu telpai",
+  "EmptyRootFormsDescription": "Lūdzu, izveidojiet pirmo veidlapu telpu.",
+  "EmptyRootFormsTitle": "Šeit vēl nav veidlapu telpu",
   "EmptyRootRoomUserDescription": "Koplietotā telpa tiks parādīta šeit.",
   "EmptyRootRoomUserTitle": "Šeit vēl nav nevienas telpas",
   "EmptyTemplatesDescription": "Varat izveidot veidni no telpas sadaļā \"Telpas\"",

@@ -133,6 +133,8 @@
   "AIModels": "AI 模型",
   "AIModelsDescription": "通过 OpenRouter 集成访问广泛的 AI 模型",
   "AIModelsWebSearchKnowledgeBase": "模型、网络搜索、知识库",
+  "AIModelUpdatedDescription": "我们已更新可用的模型。已自动选择 <1>{{model}}</1>。请在下方查看或更改模型。",
+  "AIModelUpdatedTitle": "模型已更新",
   "AINewChat": "新对话",
   "AIOpenRouterPricingNote": "使用需支付<1>OpenRouter 定价</1>加 20% 服务费",
   "AIPaywallCallbackActivated": "AI 功能已激活",

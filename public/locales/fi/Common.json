@@ -133,6 +133,8 @@
   "AIModels": "AI-mallit",
   "AIModelsDescription": "Käytä laajaa valikoimaa AI-malleja OpenRouter-integraation kautta",
   "AIModelsWebSearchKnowledgeBase": "Mallit, Verkkohaku, Tietokanta",
+  "AIModelUpdatedDescription": "Olemme päivittäneet käytettävissä olevat mallit. <1>{{model}}</1> valittiin automaattisesti. Tarkista tai vaihda malli alta.",
+  "AIModelUpdatedTitle": "Malli päivitetty",
   "AINewChat": "Uusi chat",
   "AIOpenRouterPricingNote": "<1>OpenRouter-hinnoittelu</1> + 20 %:n palvelumaksu koskee käyttöä",
   "AIPaywallCallbackActivated": "AI-ominaisuudet aktivoitu",

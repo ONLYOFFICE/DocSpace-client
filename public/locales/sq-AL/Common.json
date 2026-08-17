@@ -133,6 +133,8 @@
   "AIModels": "Modelet e IA",
   "AIModelsDescription": "Përfitoni akses në një gamë të gjerë modelesh IA përmes integrimit me OpenRouter",
   "AIModelsWebSearchKnowledgeBase": "Modele, Kërkim në internet, Bazë njohurish",
+  "AIModelUpdatedDescription": "Ne përditësuam modelet e disponueshme. <1>{{model}}</1> u zgjodh automatikisht. Rishikoni ose ndryshoni modelin më poshtë.",
+  "AIModelUpdatedTitle": "Modeli u përditësua",
   "AINewChat": "Bisedë e re",
   "AIOpenRouterPricingNote": "<1>Çmimet e OpenRouter</1> + tarifë shërbimi prej 20% zbatohet për përdorimin",
   "AIPaywallCallbackActivated": "Funksionet AI u aktivizuan",

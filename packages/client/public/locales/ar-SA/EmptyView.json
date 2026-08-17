@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "احصل على إجابات وابحث عن الملفات وأنشئ محتوى بمساعدة الذكاء الاصطناعي.",
   "CollaborationRoomEmptyTitle": "مرحبًا بك في غرفة التعاون",
   "CollaboratorEmptyTitle": "الغرفة فارغة.",
   "CreateDocument": "إنشاء مستند جديد",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "إضافة أعضاء المجموعة وتعيين رئيس المجموعة",
   "EmptyGroupDeleteOptionDescription": "إذا لم تعد بحاجة إلى هذه المجموعة",
   "EmptyGroupsCreateGroupOptionDescription": "إنشاء مجموعة لإضافتهم إلى الغرفة",
+  "EmptyRootFormsDescription": "الرجاء إنشاء مساحة النماذج الأولى.",
+  "EmptyRootFormsTitle": "لا توجد مساحات نماذج هنا حتى الآن",
   "EmptyRootRoomUserDescription": "ستظهر الغرفة المشتركة هنا.",
   "EmptyRootRoomUserTitle": "لا توجد غرف هنا حتى الآن",
   "EmptyTemplatesDescription": "يمكنكم إنشاء قالب من غرفة موجودة ضمن قسم الغرف.",

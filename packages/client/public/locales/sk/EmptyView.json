@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Získajte odpovede, nájdite súbory a pripravte obsah pomocou AI.",
   "CollaborationRoomEmptyTitle": "Vitajte v Miestnosti na spoluprácu",
   "CollaboratorEmptyTitle": "Miestnosť je prázdna.",
   "CreateDocument": "Vytvoriť nový dokument",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Pridajte členov skupiny a priraďte vedúceho",
   "EmptyGroupDeleteOptionDescription": "Ak už túto skupinu nepotrebujete",
   "EmptyGroupsCreateGroupOptionDescription": "Vytvorte skupinu, aby ste ich mohli pridať do miestnosti",
+  "EmptyRootFormsDescription": "Prosím vytvorte prvý priestor pre formuláre.",
+  "EmptyRootFormsTitle": "Zatiaľ tu nie sú žiadne priestory pre formuláre",
   "EmptyRootRoomUserDescription": "Tu sa zobrazí zdieľaná miestnosť.",
   "EmptyRootRoomUserTitle": "Zatiaľ tu nie sú žiadne miestnosti",
   "EmptyTemplatesDescription": "Môžete vytvoriť šablónu z miestnosti v časti Miestnosť",

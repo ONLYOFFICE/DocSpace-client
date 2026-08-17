@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Saa vastauksia, löydä tiedostoja ja luo sisältöä tekoälyn avulla.",
   "CollaborationRoomEmptyTitle": "Tervetuloa yhteistyöhuoneseen",
   "CollaboratorEmptyTitle": "Huone on tyhjä.",
   "CreateDocument": "Luo uusi asiakirja",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Lisää ryhmän jäseniä ja määritä johtaja",
   "EmptyGroupDeleteOptionDescription": "Jos et tarvitse enää tätä ryhmää",
   "EmptyGroupsCreateGroupOptionDescription": "Luo ryhmä lisätäksesi heidät huoneeseen",
+  "EmptyRootFormsDescription": "Ole hyvä ja luo ensimmäinen lomaketila.",
+  "EmptyRootFormsTitle": "Täällä ei ole vielä lomaketiloja",
   "EmptyRootRoomUserDescription": "Jaettu huone ilmestyy tähän.",
   "EmptyRootRoomUserTitle": "Tässä ei ole vielä huoneita",
   "EmptyTemplatesDescription": "Voit luoda mallin huoneesta Huone-osiossa",

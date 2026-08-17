@@ -133,6 +133,8 @@
   "AIModels": "AI modelleri",
   "AIModelsDescription": "OpenRouter entegrasyonu aracılığıyla çok çeşitli AI modellerine erişin",
   "AIModelsWebSearchKnowledgeBase": "Modeller, Web araması, Bilgi tabanı",
+  "AIModelUpdatedDescription": "Kullanılabilir modelleri güncelledik. <1>{{model}}</1> otomatik olarak seçildi. Aşağıdan modeli gözden geçirin veya değiştirin.",
+  "AIModelUpdatedTitle": "Model güncellendi",
   "AINewChat": "Yeni sohbet",
   "AIOpenRouterPricingNote": "<1>OpenRouter fiyatlandırması</1> + kullanım için %20 hizmet ücreti geçerlidir",
   "AIPaywallCallbackActivated": "AI özellikleri etkinleştirildi",

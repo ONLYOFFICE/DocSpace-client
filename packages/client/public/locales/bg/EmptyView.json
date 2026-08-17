@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Получавайте отговори, намирайте файлове и създавайте съдържание с ИИ.",
   "CollaborationRoomEmptyTitle": "Добре дошли в Стаята за колаборации",
   "CollaboratorEmptyTitle": "Стаята е празна.",
   "CreateDocument": "Създайте нов документ",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Добавете членове на групата и задайте главата",
   "EmptyGroupDeleteOptionDescription": "Ако вече не се нуждаете от тази група",
   "EmptyGroupsCreateGroupOptionDescription": "Създайте група, за да ги добавите в стаята",
+  "EmptyRootFormsDescription": "Моля, създайте първото пространство за формуляри.",
+  "EmptyRootFormsTitle": "Тук все още няма пространства за формуляри",
   "EmptyRootRoomUserDescription": "Споделената стая ще се появи тук.",
   "EmptyRootRoomUserTitle": "Тук все още няма стаи",
   "EmptyTemplatesDescription": "Можете да създадете шаблон от стая в раздел Стая",

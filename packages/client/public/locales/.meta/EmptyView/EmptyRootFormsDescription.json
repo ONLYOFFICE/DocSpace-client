@@ -1,23 +1,15 @@
 {
-  "key_path": "WelcomeSubtitle",
-  "content": "Your workspace has been created successfully. Review your profile details and start working.",
-  "content_en_sha1_hash": "a3145c3d4333e331893321f164594ae9460ce744",
-  "created_at": "2026-08-12T11:00:45.142Z",
-  "updated_at": "2026-08-12T13:36:55.483Z",
+  "key_path": "EmptyRootFormsDescription",
+  "content": "Please create the first form space.",
+  "content_en_sha1_hash": "7a3d4912f78fc2908a882043385c0ecda922d6d7",
+  "created_at": "2026-08-14T19:17:45.940Z",
+  "updated_at": "2026-08-14T19:17:45.940Z",
   "comment": {
-    "text": "Subtitle in a welcome dialog that appears after successful workspace creation via social authentication.",
-    "is_auto": true,
-    "updated_at": "2026-08-12T13:36:55.483Z",
-    "model": "gemma4:26b"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.tsx",
-      "line_number": 100,
-      "context": "isRootEmptyPage &&\n rootFolderType === FolderType.Rooms &&\n socialAuthWelcomeVisible;\n \n const description = showSocialAuthBar\n ? t(\"SocialAuthWelcomeDialog:WelcomeSubtitle\")\n : baseDescription;\n \n const onChangeDomainClick = () => {\n navigate(\"/portal-settings/customization/general#portal-renaming\");\n };",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,

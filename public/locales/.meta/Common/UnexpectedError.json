@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-08-14T14:58:32.628Z",
+  "updated_at": "2026-08-14T16:12:00.701Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -229,7 +229,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 826,
+      "line_number": 827,
       "context": "// so failures there reach us only through this callback. Without it a\n // failed profiles load looks like a portal with no AI models\n // configured. `context` names the failing step (e.g. \"profiles:init\").\n onError: ({ type, error, context }) => {\n console.error(`[ai-agent] ${context ?? type} failed`, error);\n toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
       "module": "/packages/client"
     },

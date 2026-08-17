@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "AI සමඟ පිළිතුරු ලබා ගන්න, ගොනු සොයන්න සහ අන්තර්ගතය සකසන්න.",
   "CollaborationRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, සහයෝගිතා පරියේෂයට!",
   "CollaboratorEmptyTitle": "කාමරය හිස් ය.",
   "CreateDocument": "නව ලේඛනයක් සාදන්න",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "ප්‍රජාභවයන් එක්කරන්න සහ ප්‍රධානියා පත් කරන්න",
   "EmptyGroupDeleteOptionDescription": "ඔබට මේ සමූහය තවදුරටත් අවශ්‍ය නොවනවා නම්",
   "EmptyGroupsCreateGroupOptionDescription": "කාණ්ඩයක් සාදා ඔවුන්ව කාමරයට එක් කරන්න.",
+  "EmptyRootFormsDescription": "පළමු පෝරම අවකාශය සාදන්න.",
+  "EmptyRootFormsTitle": "මෙහි තවම පෝරම අවකාශ නොමැත",
   "EmptyRootRoomUserDescription": "සාමාන්‍ය කාමරය මෙහි දිස්වනු ඇත.",
   "EmptyRootRoomUserTitle": "මෙහි තවමත් කාමර නොමැත",
   "EmptyTemplatesDescription": "ඔබ Room කොටසෙහි කාමරයකින් අච්චුවක් නිර්මාණය කළ හැකිය.",

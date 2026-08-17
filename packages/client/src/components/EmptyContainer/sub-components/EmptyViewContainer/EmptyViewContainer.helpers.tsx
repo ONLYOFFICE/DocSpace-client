@@ -293,6 +293,7 @@ export const getOptions = (
   trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
   isCardLinkedToPortal: boolean = false,
   isActivating: boolean = false,
+  isAiChatAvailable: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -414,6 +415,20 @@ export const getOptions = (
     //disabled: !security?.Create,
     disabled: false,
   };
+
+  // Opens the AI chat panel — the same action the quick-action tiles and the
+  // dashboard use. Only offered where the chat is actually reachable
+  // (`isAiChatAvailable` already covers guests and portals without AI).
+  const openAiChat = {
+    title: t("Common:AIChat"),
+    description: t("EmptyView:AIChatOptionDescription"),
+    icon: <CreateChatIcon />,
+    key: "open-ai-chat",
+    onClick: actions.onOpenAiChat,
+    disabled: false,
+  };
+
+  const aiChatOption = isAiChatAvailable ? [openAiChat] : [];
 
   const inviteRootRoom = {
     title: t("EmptyView:InviteNewUsers"),
@@ -563,14 +578,16 @@ export const getOptions = (
         createRoom,
         inviteRootRoom,
         migrationData,
+        ...aiChatOption,
       ])
       .with([FolderType.Forms, P._, true], () => [])
-      .with([FolderType.Forms, P._, P._], () => [createRoom])
+      .with([FolderType.Forms, P._, P._], () => [createRoom, ...aiChatOption])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,
         createPresentation,
         createForm,
+        ...aiChatOption,
       ])
       .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
         {

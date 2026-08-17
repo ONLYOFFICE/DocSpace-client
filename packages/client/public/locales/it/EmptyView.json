@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Ottieni risposte, trova file e crea contenuti con l’IA.",
   "CollaborationRoomEmptyTitle": "Benvenuto nella stanza di collaborazione",
   "CollaboratorEmptyTitle": "La stanza è vuota.",
   "CreateDocument": "Crea un nuovo documento",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Aggiungi membri del gruppo e assegna il responsabile",
   "EmptyGroupDeleteOptionDescription": "Se non hai più bisogno di questo gruppo",
   "EmptyGroupsCreateGroupOptionDescription": "Crea un gruppo per aggiungerli nella stanza1",
+  "EmptyRootFormsDescription": "Ti preghiamo di creare il primo spazio moduli.",
+  "EmptyRootFormsTitle": "Ancora nessuno spazio moduli qui",
   "EmptyRootRoomUserDescription": "La stanza condivisa apparirà qui.",
   "EmptyRootRoomUserTitle": "Qui ancora non ci sono stanze",
   "EmptyTemplatesDescription": "Puoi creare un modello da una stanza nella sezione Stanza.",

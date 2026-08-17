@@ -133,6 +133,8 @@
   "AIModels": "Моделі ШІ",
   "AIModelsDescription": "Отримайте доступ до широкого спектра моделей ШІ через інтеграцію з OpenRouter",
   "AIModelsWebSearchKnowledgeBase": "Моделі, Пошук у вебі, База знань",
+  "AIModelUpdatedDescription": "Ми оновили список доступних моделей. Модель <1>{{model}}</1> вибрано автоматично. Перевірте або змініть модель нижче.",
+  "AIModelUpdatedTitle": "Модель оновлено",
   "AINewChat": "Новий чат",
   "AIOpenRouterPricingNote": "<1>Ціни OpenRouter</1> + сервісний збір 20% застосовуються до використання",
   "AIPaywallCallbackActivated": "Функції ШІ активовано",

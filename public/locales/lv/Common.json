@@ -133,6 +133,8 @@
   "AIModels": "MI modeļi",
   "AIModelsDescription": "Piekļūstiet plašam MI modeļu klāstam, izmantojot OpenRouter integrāciju",
   "AIModelsWebSearchKnowledgeBase": "Modeļi, Tīmekļa meklēšana, Zināšanu bāze",
+  "AIModelUpdatedDescription": "Mēs esam atjauninājuši pieejamos modeļus. <1>{{model}}</1> tika atlasīts automātiski. Pārskatiet vai mainiet modeli zemāk.",
+  "AIModelUpdatedTitle": "Modelis atjaunināts",
   "AINewChat": "Jauns čats",
   "AIOpenRouterPricingNote": "<1>OpenRouter cenas</1> + 20% pakalpojuma maksa attiecas uz lietošanu",
   "AIPaywallCallbackActivated": "MI funkcijas ir aktivizētas",

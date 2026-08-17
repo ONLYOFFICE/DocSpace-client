@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Nhận câu trả lời, tìm tệp và soạn nội dung với AI.",
   "CollaborationRoomEmptyTitle": "Chào mừng bạn đến với phòng Cộng tác",
   "CollaboratorEmptyTitle": "Phòng trống.",
   "CreateDocument": "Tạo một tài liệu mới",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Thêm thành viên nhóm và chỉ định trưởng nhóm",
   "EmptyGroupDeleteOptionDescription": "Nếu bạn không cần nhóm này nữa",
   "EmptyGroupsCreateGroupOptionDescription": "Tạo một nhóm để thêm họ vào phòng",
+  "EmptyRootFormsDescription": "Xin vui lòng tạo không gian biểu mẫu đầu tiên.",
+  "EmptyRootFormsTitle": "Chưa có không gian biểu mẫu nào ở đây",
   "EmptyRootRoomUserDescription": "Phòng chung sẽ xuất hiện ở đây.",
   "EmptyRootRoomUserTitle": "Chưa có phòng nào ở đây",
   "EmptyTemplatesDescription": "Bạn có thể tạo mẫu từ một phòng trong phần Phòng",

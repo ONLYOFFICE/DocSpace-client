@@ -133,6 +133,8 @@
   "AIModels": "Modeli umetne inteligence",
   "AIModelsDescription": "Dostopajte do širokega nabora modelov AI prek integracije OpenRouter",
   "AIModelsWebSearchKnowledgeBase": "Modeli, Iskanje po spletu, Baza znanja",
+  "AIModelUpdatedDescription": "Posodobili smo razpoložljive modele. Model <1>{{model}}</1> je bil izbran samodejno. Spodaj preglejte ali spremenite model.",
+  "AIModelUpdatedTitle": "Model posodobljen",
   "AINewChat": "Nova klepetalnica",
   "AIOpenRouterPricingNote": "<1>Cenik OpenRouter</1> + 20% servisna provizija velja za uporabo",
   "AIPaywallCallbackActivated": "AI funkcije so aktivirane",

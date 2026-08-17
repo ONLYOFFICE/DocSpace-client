@@ -133,6 +133,8 @@
   "AIModels": "AIモデル",
   "AIModelsDescription": "OpenRouter連携を通じて幅広いAIモデルにアクセスできます",
   "AIModelsWebSearchKnowledgeBase": "モデル、ウェブ検索、ナレッジベース",
+  "AIModelUpdatedDescription": "利用可能なモデルを更新しました。<1>{{model}}</1>が自動的に選択されました。以下でモデルを確認または変更してください。",
+  "AIModelUpdatedTitle": "モデルが更新されました",
   "AINewChat": "新規チャット",
   "AIOpenRouterPricingNote": "使用には<1>OpenRouterの料金</1>に20%のサービス手数料が加算されます",
   "AIPaywallCallbackActivated": "AI機能が有効になりました",

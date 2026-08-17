@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Obtenez des réponses, trouvez des fichiers et rédigez du contenu avec l’IA.",
   "CollaborationRoomEmptyTitle": "Bienvenue dans la salle de collaboration",
   "CollaboratorEmptyTitle": "La salle est vide.",
   "CreateDocument": "Créer un nouveau document",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Ajoutez les membres du groupe et attribuez le responsable",
   "EmptyGroupDeleteOptionDescription": "Si vous n'avez plus besoin de ce groupe",
   "EmptyGroupsCreateGroupOptionDescription": "Créez un groupe pour ajouter ses membres à la salle",
+  "EmptyRootFormsDescription": "Veuillez créer le premier espace de formulaires.",
+  "EmptyRootFormsTitle": "Il n’y a pas encore d’espaces de formulaires ici",
   "EmptyRootRoomUserDescription": "La salle partagée apparaîtra ici.",
   "EmptyRootRoomUserTitle": "Il n'y a pas encore de salles ici",
   "EmptyTemplatesDescription": "Vous pouvez créer un modèle à partir d'une salle dans la section Salle",

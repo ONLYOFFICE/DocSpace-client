@@ -133,6 +133,8 @@
   "AIModels": "Modelos de IA",
   "AIModelsDescription": "Acceda a una amplia gama de modelos de IA a través de la integración con OpenRouter",
   "AIModelsWebSearchKnowledgeBase": "Modelos, Búsqueda web, Base de conocimientos",
+  "AIModelUpdatedDescription": "Hemos actualizado los modelos disponibles. Se ha seleccionado <1>{{model}}</1> automáticamente. Revise o cambie el modelo a continuación.",
+  "AIModelUpdatedTitle": "Modelo actualizado",
   "AINewChat": "Nuevo chat",
   "AIOpenRouterPricingNote": "<1>Precios de OpenRouter</1> + una tarifa de servicio del 20 % aplicable al uso",
   "AIPaywallCallbackActivated": "Funciones de IA activadas",

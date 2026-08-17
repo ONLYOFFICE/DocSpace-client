@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Yapay zeka ile yanıtlar alın, dosyaları bulun ve içerik oluşturun.",
   "CollaborationRoomEmptyTitle": "İş birliği odasına hoş geldiniz",
   "CollaboratorEmptyTitle": "Oda boş.",
   "CreateDocument": "Yeni bir belge oluşturun",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Grup üyelerini ekleyin ve başkan atayın",
   "EmptyGroupDeleteOptionDescription": "Eğer artık bu gruba ihtiyacınız yoksa",
   "EmptyGroupsCreateGroupOptionDescription": "Onları odaya eklemek için bir grup oluşturun",
+  "EmptyRootFormsDescription": "Lütfen ilk form alanını oluşturun.",
+  "EmptyRootFormsTitle": "Burada henüz form alanı yok",
   "EmptyRootRoomUserDescription": "Paylaşılan oda burada görünecektir.",
   "EmptyRootRoomUserTitle": "Burada henüz oda yok",
   "EmptyTemplatesDescription": "Oda bölümünde bir odadan şablon oluşturabilirsiniz",

@@ -1,4 +1,5 @@
 {
+  "AIChatOptionDescription": "Pridobite odgovore, poiščite datoteke in pripravite vsebino z umetno inteligenco.",
   "CollaborationRoomEmptyTitle": "Dobrodošli v sobi za sodelovanje",
   "CollaboratorEmptyTitle": "Soba je prazna.",
   "CreateDocument": "Ustvari nov dokument",
@@ -17,6 +18,8 @@
   "EmptyGroupAddedUserOptionDescription": "Dodajte člane skupine in dodelite vodjo",
   "EmptyGroupDeleteOptionDescription": "Če te skupine ne potrebujete več",
   "EmptyGroupsCreateGroupOptionDescription": "Ustvarite skupino, da jih dodate v sobo",
+  "EmptyRootFormsDescription": "Prosimo, ustvarite prvi prostor za obrazce.",
+  "EmptyRootFormsTitle": "Tukaj še ni prostorov za obrazce",
   "EmptyRootRoomUserDescription": "Tukaj se bo prikazala skupna soba.",
   "EmptyRootRoomUserTitle": "Tukaj še ni sob",
   "EmptyTemplatesDescription": "Predlogo lahko ustvarite iz sobe v razdelku Soba",

@@ -1,11 +1,11 @@
 {
   "key_path": "FormFilingRoomTitle",
-  "content": "Form Filling Room",
-  "content_en_sha1_hash": "ce16b03553997eee69758275d881c1e1971387c2",
+  "content": "Form Filling Space",
+  "content_en_sha1_hash": "3d6a10533724f64d81d51bdfb0b0d9480d6c3ef2",
   "created_at": "2025-05-19T21:30:45.511Z",
-  "updated_at": "2026-07-07T08:59:21.852Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "This is a room type label. It identifies a room specifically designed for filling out forms.",
+    "text": "This is a type label. It identifies a space specifically designed for filling out forms.",
     "is_auto": true,
     "updated_at": "2026-04-11T20:52:04.885Z",
     "model": "google/gemini-2.5-flash"

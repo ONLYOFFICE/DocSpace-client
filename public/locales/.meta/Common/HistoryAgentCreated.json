@@ -3,7 +3,7 @@
   "content": "<1>«{{roomTitle}}»</1> agent created",
   "content_en_sha1_hash": "d417cc806d4a82a7289f23aad8f177222782249c",
   "created_at": "2025-11-03T12:10:31.497Z",
-  "updated_at": "2026-07-07T08:59:21.808Z",
+  "updated_at": "2026-08-17T17:23:21.763Z",
   "comment": {
     "text": "This is a history feed message indicating that an AI agent has been created. `{{roomTitle}}` is the name of the room where the agent was created.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 164,
+      "line_number": 175,
       "context": "case FeedActionKeys.AgentCreated:\n return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"HistoryAgentCreated\"\n values={{ roomTitle: (feed.data as TFeedData).title }}\n components={{\n 1: (\n <HistoryText\n key={(feed.data as TFeedData).title!}",
       "module": "/packages/client"
     },

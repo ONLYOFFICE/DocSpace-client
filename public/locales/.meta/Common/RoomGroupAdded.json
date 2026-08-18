@@ -3,7 +3,7 @@
   "content": "Groups added.",
   "content_en_sha1_hash": "b5a565f02102919ca707ad4dfe829242fca68461",
   "created_at": "2025-05-19T21:30:54.921Z",
-  "updated_at": "2026-07-07T08:59:21.812Z",
+  "updated_at": "2026-08-17T17:23:21.766Z",
   "comment": {
     "text": "This is a message displayed in the activity feed when one or more groups have been added to a room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 347,
+      "line_number": 375,
       "context": "case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"Common:RoomGroupAddedCount\", {\n count,\n });\n return t(\"Common:RoomGroupAdded\");\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"Common:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"Common:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:",
       "module": "/packages/client"
     },

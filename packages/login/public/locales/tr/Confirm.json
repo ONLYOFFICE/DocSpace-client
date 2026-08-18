@@ -5,7 +5,7 @@
   "ConnectApp": "Uygulama'yı bağlayın",
   "ConnectAppDescription": "Sağlayıcı uygulamanızla sağlanan QR kodunu tarayın. Alternatif olarak, uygulamanıza verilen gizli anahtarı manuel olarak girin: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Güncel mobil telefon numaranız",
-  "DeleteProfileBtn": "Hesabımı sil",
+  "DeleteProfileBtn": "Hesabımı devre dışı bırak",
   "DeleteProfileConfirmation": "Dikkat! Hesabınızı silmek üzeresiniz.",
   "DeleteProfileConfirmationInfo": "\"Hesabımı sil\"e tıklayarak <1>Gizlilik politikamızı kabul etmiş olursunuz.</1>",
   "DeleteProfileSuccessDescription": "{{organizationName}} {{productName}} hesabınız başarıyla devre dışı bırakıldı. Sahibi veya süper yönetici devre dışı bırakılan hesabınızı kalıcı olarak silebilir.",

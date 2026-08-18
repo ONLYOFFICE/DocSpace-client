@@ -57,7 +57,6 @@ const CSP = ({
   t,
   theme,
   disableCSP,
-  logoText,
 }) => {
   const [domain, changeDomain] = useState("");
   const [error, setError] = useState(null);
@@ -141,9 +140,7 @@ const CSP = ({
         {t("CSPHeader")}
       </div>
       <div className={classNames(styles.container, styles.descriptionHolder)}>
-        {t("CSPDescription", {
-          organizationName: logoText,
-        })}
+        {t("CSPDescription")}
         <HelpButton
           className="csp-helpbutton"
           offsetRight={0}
@@ -207,7 +204,6 @@ export default inject(({ settingsStore, userStore }) => {
     installationGuidesUrl,
     setCSPSettings,
     standalone,
-    logoText,
   } = settingsStore;
 
   const { user } = userStore;
@@ -221,6 +217,5 @@ export default inject(({ settingsStore, userStore }) => {
     setCSPSettings,
     standalone,
     disableCSP,
-    logoText,
   };
 })(observer(CSP));

@@ -1,9 +1,9 @@
 {
   "key_path": "FormRoomAINotConnectedDescription",
-  "content": "Store responses as structured data. Enable database sync in room settings to unlock AI-powered analysis with Ask AI.",
-  "content_en_sha1_hash": "92f1a03338d1079f16cb5043a573fb613d883a91",
+  "content": "Store responses as structured data. Enable database sync in space settings to unlock AI-powered analysis with Ask AI.",
+  "content_en_sha1_hash": "46612b0b032c94b48e345b308c9946098399143e",
   "created_at": "2026-05-08T13:10:42.362Z",
-  "updated_at": "2026-08-14T14:58:32.761Z",
+  "updated_at": "2026-08-17T19:42:56.947Z",
   "comment": {
     "text": "Informational text in the Form Room info panel that appears when the external database is not enabled, explaining how to enable AI-powered analysis via database sync.",
     "is_auto": true,

@@ -5,7 +5,7 @@
   "ConnectApp": "Conecte la aplicación",
   "ConnectAppDescription": "Escanee el código QR proporcionado con su aplicación de autenticación. Alternativamente, introduzca manualmente la clave secreta proporcionada en su aplicación: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Su número de teléfono móvil actual",
-  "DeleteProfileBtn": "Eliminar mi cuenta",
+  "DeleteProfileBtn": "Desactivar mi cuenta",
   "DeleteProfileConfirmation": "¡Atención! Usted va a eliminar su cuenta.",
   "DeleteProfileConfirmationInfo": "Al hacer clic en \"Eliminar mi cuenta\", usted acepta <1>nuestra política de privacidad.</1>",
   "DeleteProfileSuccessDescription": "Su cuenta de {{organizationName}} {{productName}} se ha deshabilitado correctamente. El propietario o el superadministrador pueden eliminar de forma permanente su cuenta deshabilitada.",

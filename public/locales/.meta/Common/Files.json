@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-08-14T14:58:32.636Z",
+  "updated_at": "2026-08-17T17:23:21.652Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -97,25 +97,25 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 325,
+      "line_number": 330,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 325,
+      "line_number": 330,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 325,
+      "line_number": 330,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 325,
+      "line_number": 330,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
@@ -169,7 +169,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 400,
+      "line_number": 428,
       "context": "return t(\"Common:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"Common:RoomIndexExportLocation\", {\n sectionName: t(\"Common:Files\"),\n });\n case FeedActionKeys.RoomChangeOwner:\n return t(\"Common:RoomChangeOwner\");\n case FeedActionKeys.FormSubmit:\n return t(\"Common:FilledOutForm\");",
       "module": "/packages/client"
     },
@@ -285,12 +285,6 @@
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
       "line_number": 98,
       "context": "</div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n rooms: t(\"Common:Rooms\"),\n shared: t(\"Common:SharedWithMe\"),\n documents: t(\"Common:Files\"),\n aiAgents: t(\"Common:AIAgents\"),\n })}\n </Text>\n </div>\n );",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
-      "line_number": 167,
-      "context": "},\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:Files\"),\n }),\n onClick: self.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {

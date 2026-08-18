@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2026-08-14T14:58:32.700Z",
+  "updated_at": "2026-08-17T17:23:21.696Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears on buttons that create a new room, or as the title of a dialog for creating a room.",
     "is_auto": true,
@@ -13,20 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 328,
-      "context": "? t(\"ChooseSetType\")\n : t(\"ChooseRoomType\");\n \n const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : t(\"Common:CreateRoom\");\n \n return (\n <>\n <ConfirmationModal\n visible={keyConfirmVisible}",
+      "line_number": 330,
+      "context": "const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : roomParams.type === RoomsType.FormRoom\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\");\n \n return (\n <>\n <ConfirmationModal\n visible={keyConfirmVisible}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ShareFolderDialog/index.js",
       "line_number": 78,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"\n key=\"OKButton\"\n label={t(\"Common:CreateRoom\")}\n size=\"normal\"\n primary\n onClick={onAction}\n scale\n testId=\"share_folder_dialog_create_room_button\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/SharePDFFormDialog/SharePDFFormDialog.tsx",
-      "line_number": 109,
-      "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:CreateRoom\")}\n onClick={onSubmit}\n />\n <Button\n scale\n tabIndex={0}",
       "module": "/packages/client"
     },
     {
@@ -37,20 +31,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
-      "line_number": 253,
-      "context": "className={styles.roomTemplateText}\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n <Button\n label={t(\"Common:CreateRoom\")}\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_create_room_button\"",
+      "line_number": 259,
+      "context": "</Text>\n <Button\n label={\n isFormSpaceTemplate\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\")\n }\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 547,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 550,
+      "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 547,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 550,
+      "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {

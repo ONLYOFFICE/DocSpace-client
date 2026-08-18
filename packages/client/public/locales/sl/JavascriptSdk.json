@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Ustvari vzorec vdelave izbire sobe",
   "CreateSampleUploader": "Ustvarite vzorčni vgrajeni uploader",
   "CreateSampleViewer": "Ustvari vzorec vdelave pregledovalnika",
-  "CSPDescription": "Vnesite naslov storitve, kjer želite vgraditi ali povezati delovni prostor {{organizationName}}.",
+  "CSPDescription": "Vnesite naslov storitve, kjer želite vgraditi ali povezati delovni prostor.",
   "CSPHeader": "Dodajte dovoljene domene za ta delovni prostor.",
   "CSPHelp": "Ta nastavitev je varnostni mehanizem, ki se lahko uporablja za zaščito pred napadi z vnašanjem vsebine. CSP opisuje varne vire za prenos prenos. Prenos iz virov, ki niso na »belem seznamu«, je blokiran. Določite domene (skupaj s protokolom), s katerimi bo delovalo.",
   "CSPInfoBarDescription": "Omogočite protokol HTTPS za vaš delovni prostor, da zagotovite pravilno namestitev.",

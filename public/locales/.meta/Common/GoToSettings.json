@@ -3,7 +3,7 @@
   "content": "Go to Settings",
   "content_en_sha1_hash": "afc288b1ffb91b961cd8fa6fbe17bd6255268ca9",
   "created_at": "2025-11-03T12:10:26.886Z",
-  "updated_at": "2026-08-14T14:58:32.642Z",
+  "updated_at": "2026-08-17T17:23:21.656Z",
   "comment": {
     "text": "This text is a button label that, when clicked, navigates the user to the application's settings page.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 429,
+      "line_number": 457,
       "context": "disabled: false,\n };\n \n // const goToServices = {\n //   type: \"button\",\n //   title: t(\"Common:GoToSettings\"),\n //   key: \"go-to-services\",\n //   onClick: actions.onGoToServices,\n // } as const;\n \n const goToAIProviderSettings = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 429,
+      "line_number": 457,
       "context": "disabled: false,\n };\n \n // const goToServices = {\n //   type: \"button\",\n //   title: t(\"Common:GoToSettings\"),\n //   key: \"go-to-services\",\n //   onClick: actions.onGoToServices,\n // } as const;\n \n const goToAIProviderSettings = {",
       "module": "/packages/client"
     },

@@ -1,0 +1,29 @@
+{
+  "key_path": "EmptyRecentFormsDescription",
+  "content": "All recent forms opened in the workspace end up in this section. Forms are stored for 90 days",
+  "content_en_sha1_hash": "5dfff97fd97f43a89ab360029b065b35bf9a7ecc",
+  "created_at": "2026-08-17T17:22:48.000Z",
+  "updated_at": "2026-08-17T17:26:33.801Z",
+  "comment": {
+    "text": "Informational text displayed in the empty state of the Recent forms section, explaining the storage location and 90-day retention period for forms.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:26:33.801Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 322,
+      "context": ".with([FolderType.SHARE, P._], () =>\n t(\"Common:EmptyShareDescription\"),\n )\n .with([FolderType.Recent, P._], () =>\n isFormsScope\n ? t(\"Common:EmptyRecentFormsDescription\")\n : t(\"Common:EmptyRecentDescription\"),\n )\n .with([FolderType.Favorites, P._], () =>\n isFormsScope\n ? t(\"Common:EmptyFavoritesFormsDescription\")",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

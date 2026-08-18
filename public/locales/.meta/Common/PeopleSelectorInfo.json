@@ -3,7 +3,7 @@
   "content": "Only a room admin or Full admin can become the owner of the room",
   "content_en_sha1_hash": "d167e32a4508b63098f746aca058bdd36c61f793",
   "created_at": "2026-08-14T09:44:20.687Z",
-  "updated_at": "2026-08-14T15:06:24.619Z",
+  "updated_at": "2026-08-17T17:23:21.738Z",
   "comment": {
     "text": "Informational text appearing in the People Selector empty state or the Change Room Owner dialog to explain the required administrative roles for transferring ownership.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 200,
-      "context": "? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\")\n : t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : t(\"Common:LeaveTheRoom\");",
+      "line_number": 202,
+      "context": "? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\")\n : t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")",
       "module": "/packages/client"
     },
     {

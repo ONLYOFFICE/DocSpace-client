@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Izveidot parauga telpas atlasītāja iegulšanu",
   "CreateSampleUploader": "Izveidot parauga ielādētāja embed",
   "CreateSampleViewer": "Izveidot skatītāja iegulšanas paraugu",
-  "CSPDescription": "Ievadiet pakalpojuma adresi, kur vēlaties iegult vai savienot {{organizationName}} darbvietu.",
+  "CSPDescription": "Ievadiet pakalpojuma adresi, kur vēlaties iegult vai savienot darbvietu.",
   "CSPHeader": "Pievienojiet atļautos domēnus šai darbvietai.",
   "CSPHelp": "Šis iestatījums ir drošības mehānisms, ko var izmantot, lai aizsargātu pret satura ievadīšanas uzbrukumiem. CSP apraksta drošus resursu lejupielādes avotus. Lejupielāde no resursiem, kas nav iekļauti “baltajā sarakstā”, ir bloķēta. Norādiet domēnus (kopā ar protokolu), ar kuriem tas darbosies.",
   "CSPInfoBarDescription": "Iespējojiet HTTPS protokolu savai darbvietai, lai nodrošinātu pareizu iestatīšanu.",

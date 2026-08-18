@@ -210,21 +210,23 @@ const getAIAgentsAIDisabledTitle = (
   standalone: boolean,
   isPortalAdmin: boolean,
 ) => {
-  return match([standalone, isPortalAdmin])
-    .with([true, true], () =>
-      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
-        aiProvider: t("Common:AIProvider"),
-      }),
-    )
-    .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
-    // standalone user
-    .with([true, false], () =>
-      t("Common:EmptyAIAgentsAIDisabledUserTitle", {
-        aiAgents: t("Common:AIAgents"),
-      }),
-    )
-    // saas user
-    .otherwise(() => t("Common:AIFeaturesNotActive"));
+  return (
+    match([standalone, isPortalAdmin])
+      .with([true, true], () =>
+        t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle", {
+          aiProvider: t("Common:AIProvider"),
+        }),
+      )
+      .with([false, true], () => t("Common:EmptyAIAgentsNotActiveYetTitle"))
+      // standalone user
+      .with([true, false], () =>
+        t("Common:EmptyAIAgentsAIDisabledUserTitle", {
+          aiAgents: t("Common:AIAgents"),
+        }),
+      )
+      // saas user
+      .otherwise(() => t("Common:AIFeaturesNotActive"))
+  );
 };
 
 const getAIAgentsAIDisabledDescription = (
@@ -253,9 +255,7 @@ const getAIAgentsAIDisabledDescription = (
         aiAgents: t("Common:AIAgents"),
       }),
     )
-    .otherwise(() =>
-      t("Common:EmptyAIDisabledContactAdminDesc"),
-    );
+    .otherwise(() => t("Common:EmptyAIDisabledContactAdminDesc"));
 };
 
 const getAIAgentsAIEnabledDescription = (
@@ -301,6 +301,9 @@ export const getRootDescription = (
         ? t("EmptyView:EmptyFormTemplatesDescription")
         : t("EmptyView:EmptyTemplatesDescription"),
     )
+    .with([FolderType.Forms, P.when(isUser)], () =>
+      t("EmptyView:EmptyRootFormsUserDescription"),
+    )
     .with([FolderType.Forms, P._], () =>
       t("EmptyView:EmptyRootFormsDescription"),
     )
@@ -314,9 +317,7 @@ export const getRootDescription = (
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
       t("Common:DefaultFolderDescription"),
     )
-    .with([FolderType.SHARE, P._], () =>
-      t("Common:EmptyShareDescription"),
-    )
+    .with([FolderType.SHARE, P._], () => t("Common:EmptyShareDescription"))
     .with([FolderType.Recent, P._], () =>
       isFormsScope
         ? t("Common:EmptyRecentFormsDescription")

@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Örnek Oda seçici yerleştirmesi oluştur",
   "CreateSampleUploader": "Örnek Yükleyici gömü nesnesi oluşturun",
   "CreateSampleViewer": "Örnek Görüntüleyici yerleştirmesi oluştur",
-  "CSPDescription": "{{organizationName}} çalışma alanını yerleştirmek veya bağlamak istediğiniz hizmetin adresini girin.",
+  "CSPDescription": "Çalışma alanını yerleştirmek veya bağlamak istediğiniz hizmetin adresini girin.",
   "CSPHeader": "Bu çalışma alanı için izin verilen alan adlarını ekleyin.",
   "CSPHelp": "Bu ayar, içerik yerleştirme saldırılarına karşı koruma sağlamak adına kullanılabilecek bir güvenlik mekanizmasıdır. CSP, güvenli kaynak indirme kaynaklarını niteler. 'Beyaz listede' yer almayan kaynaklardan indirme engellenmiştir. Çalışacağı etki alanlarını (protokol ile) belirtin.",
   "CSPInfoBarDescription": "Doğru kurulum çalışmasını sağlamak için lütfen çalışma alanınız için HTTPS protokolünü etkinleştirin.",

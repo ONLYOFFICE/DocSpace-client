@@ -3,7 +3,7 @@
   "content": "Here you'll find files and folders that other workspace members shared with you. Your own files and room content are not shown here.",
   "content_en_sha1_hash": "98f2e012a97a6cf4277795b9b2ffbf69c86d1459",
   "created_at": "2026-08-12T11:00:19.638Z",
-  "updated_at": "2026-08-14T14:58:32.652Z",
+  "updated_at": "2026-08-17T17:23:21.667Z",
   "comment": {
     "text": "Placeholder description displayed when the \"Shared\" folder is empty, explaining that only items shared by other workspace members are visible in this view.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 309,
-      "context": "))\n .with([FolderType.USER, P.when(() => security?.Create)], () =>\n t(\"Common:DefaultFolderDescription\"),\n )\n .with([FolderType.SHARE, P._], () =>\n t(\"Common:EmptyShareDescription\"),\n )\n .with([FolderType.Recent, P._], () => t(\"Common:EmptyRecentDescription\"))\n .with([FolderType.Favorites, P._], () =>\n t(\"Common:EmptyFavoritesDescription\"),\n )",
+      "line_number": 318,
+      "context": "))\n .with([FolderType.USER, P.when(() => security?.Create)], () =>\n t(\"Common:DefaultFolderDescription\"),\n )\n .with([FolderType.SHARE, P._], () =>\n t(\"Common:EmptyShareDescription\"),\n )\n .with([FolderType.Recent, P._], () =>\n isFormsScope\n ? t(\"Common:EmptyRecentFormsDescription\")\n : t(\"Common:EmptyRecentDescription\"),",
       "module": "/packages/client"
     },
     {

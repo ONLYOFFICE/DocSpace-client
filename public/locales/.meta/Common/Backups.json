@@ -3,7 +3,7 @@
   "content": "Backups",
   "content_en_sha1_hash": "530cc25bdc7d0ba5a4ef3d1206ec89ca3164965a",
   "created_at": "2026-06-25T11:54:45.739Z",
-  "updated_at": "2026-08-12T14:02:21.398Z",
+  "updated_at": "2026-08-17T17:23:21.866Z",
   "comment": {
     "text": "Service title used as a label for the backup category within the billing usage breakdown.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
-      "line_number": 156,
+      "line_number": 158,
       "context": "// const getServiceTitle = (service: string) => {\n //   switch (service) {\n //     case DISK_STORAGE:\n //       return t(\"AdditionalStorageInfo\");\n //     case BACKUP_SERVICE:\n //       return t(\"Backups\");\n //     case AI_TOOLS:\n //       return t(\"AIFeatures\");\n //     default:\n //       return service;\n //   }",
       "module": "/libs/ui-kit"
     }

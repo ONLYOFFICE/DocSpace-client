@@ -5,7 +5,7 @@
   "ConnectApp": "Pripojte aplikáciu",
   "ConnectAppDescription": "Naskenujte poskytnutý QR kód pomocou vašej autentifikačnej aplikácie. Alternatívne, manuálne zadajte daný tajný kľúč do vašej aplikácie: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Vaše aktuálne číslo mobilného telefónu",
-  "DeleteProfileBtn": "Vymazať môj účet",
+  "DeleteProfileBtn": "Deaktivovať môj účet",
   "DeleteProfileConfirmation": "Pozor! Idete si zmazať účet.",
   "DeleteProfileConfirmationInfo": "Odkliknutím \"Vymazať môj účet\" súhlasíte s našou <1>politikou Ochrany súkromia.</1>",
   "DeleteProfileSuccessDescription": "Váš účet {{organizationName}} {{productName}} bol úspešne deaktivovaný. Majiteľ alebo supersprávca môže váš deaktivovaný účet trvalo odstrániť.",

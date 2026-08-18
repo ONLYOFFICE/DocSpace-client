@@ -1,11 +1,11 @@
 {
   "key_path": "FormRoom",
-  "content": "Form room",
-  "content_en_sha1_hash": "d52d36abd86c722b352cf2a1f855ae5a1408dd21",
+  "content": "Form space",
+  "content_en_sha1_hash": "2af4816ae230a7824763f4d460131bf0855a5be4",
   "created_at": "2025-05-19T21:30:45.520Z",
-  "updated_at": "2026-08-06T14:20:57.593Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "This is a short label identifying a specific type of room within the application, used in filters and room type displays.",
+    "text": "This is a short label identifying a specific type of space within the application, used in filters and type displays.",
     "is_auto": true,
     "updated_at": "2026-04-11T20:52:02.310Z",
     "model": "google/gemini-2.5-flash"

@@ -1,9 +1,9 @@
 {
   "key_path": "BackupNotAllowedInFormRoom",
-  "content": "The backup file cannot be saved to the Form Filling room since this room type can only contain PDF forms.",
-  "content_en_sha1_hash": "958a8d0ffe13dd2a81d00247f69196aca2a96216",
+  "content": "The backup file cannot be saved to the Form Filling space since this space type can only contain PDF forms.",
+  "content_en_sha1_hash": "5bd42632362a79b4cf9aada09efb0506a8d045ce",
   "created_at": "2025-05-26T07:15:40.760Z",
-  "updated_at": "2026-08-12T11:00:51.492Z",
+  "updated_at": "2026-08-17T19:42:56.947Z",
   "comment": {
     "text": "Error message. Appears when a user attempts to save a backup file to a Form Filling room, which only supports PDF forms.",
     "is_auto": true,

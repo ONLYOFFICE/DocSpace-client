@@ -1,5 +1,5 @@
 {
   "PDFform": "PDF 양식",
   "PDFFormIsReadyToast": "<1>{{filename}}</1> PDF 양식을 작성할 준비가 되었습니다.",
-  "PDFFormSuccessfullyCreatedDescription": "PDF 양식을 작성할 준비가 되었습니다. 공개 링크를 복사하여 양식 작성 프로세스를 시작하거나 다른 사용자를 이 룸에 초대하세요."
+  "PDFFormSuccessfullyCreatedDescription": "PDF 양식을 작성할 준비가 되었습니다. 공개 링크를 복사하여 양식 작성 프로세스를 시작하거나 다른 사용자를 이 공간에 초대하세요."
 }

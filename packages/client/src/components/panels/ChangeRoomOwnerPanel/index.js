@@ -43,6 +43,7 @@ import {
   EmployeeType,
   EmployeeStatus,
   MembersSubjectType,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { getUserList } from "@docspace/shared/api/people";
 import { getRoomMembers } from "@docspace/shared/api/rooms";
@@ -68,6 +69,7 @@ const ChangeRoomOwner = (props) => {
     userId,
     useModal = true,
     isAIAgent,
+    isFormSpace,
     updateInfoPanelMembers,
     roomId,
     isPrivateRoom,
@@ -201,7 +203,9 @@ const ChangeRoomOwner = (props) => {
 
   const footerCheckboxLabel = isAIAgent
     ? t("Common:LeaveTheAgent")
-    : t("Common:LeaveTheRoom");
+    : isFormSpace
+      ? t("Common:LeaveTheFormSpace")
+      : t("Common:LeaveTheRoom");
 
   const selectorComponent = excludeReady ? (
     <PeopleSelector
@@ -295,6 +299,7 @@ export default inject(
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
       isAIAgent: room?.isAIAgent,
+      isFormSpace: room?.roomType === RoomsType.FormRoom,
       updateInfoPanelMembers,
       roomId: room?.id,
       isPrivateRoom: !!(room?.isPrivateRoom ?? room?.private),

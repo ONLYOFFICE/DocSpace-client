@@ -107,9 +107,7 @@ self: ContextOptionsStore,
       {
         id: "header_option_empty-trash",
         key: "empty-trash",
-        label: t("Common:EmptySection", {
-          sectionName: t("Common:TrashSection"),
-        }),
+        label: t("Common:EmptyTrash"),
         onClick: self.onEmptyTrashAction,
         icon: ClearTrashReactSvgUrl,
         disabled: false,
@@ -163,9 +161,7 @@ self: ContextOptionsStore,
       {
         id: "header_option_empty-section",
         key: "empty-section",
-        label: t("Common:EmptySection", {
-          sectionName: t("Common:Files"),
-        }),
+        label: t("Common:EmptySection"),
         onClick: self.onEmptyPersonalAction,
         icon: ClearTrashReactSvgUrl,
         disabled: false,

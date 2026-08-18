@@ -3,7 +3,7 @@
   "content": "These {{itemCount}} items will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "d7d4e0a69435ccf62fe4bedee43b8a740d981d18",
   "created_at": "2026-04-03T21:51:27.569Z",
-  "updated_at": "2026-08-12T11:00:51.524Z",
+  "updated_at": "2026-08-17T17:23:21.715Z",
   "comment": {
     "text": "This is a confirmation message in a dialog box, displayed when a user attempts to permanently delete multiple items from the trash. The `{{itemCount}}` variable represents the number of items being deleted.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 152,
+      "line_number": 162,
       "context": "<strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {t(\"Common:DeleteItemForever\")}\n </>\n ) : (\n t(\"Common:DeleteItemsForever\", { itemCount: selection.length })\n );\n }\n \n if (isRecycleBinFolder || isThirdParty) {\n if (isSingle) {",
       "module": "/packages/client"
     },

@@ -325,7 +325,9 @@ const CreateRoomDialog = ({
 
   const dialogHeader = !roomParams.type
     ? chooseTypeHeader
-    : t("Common:CreateRoom");
+    : roomParams.type === RoomsType.FormRoom
+      ? t("Common:CreateFormSpaceAction")
+      : t("Common:CreateRoom");
 
   return (
     <>

@@ -292,6 +292,7 @@ export const getFilesContextOptionsImpl = (
     item.isAIAgent ??
     (item.rootFolderType === FolderType.AIAgents &&
       item.roomType === RoomsType.AIRoom);
+  const isFormSpace = item.roomType === RoomsType.FormRoom;
 
   const isKnowledgeOrResult =
     item.isAIAgent && (item.isInsideKnowledge || item.isInsideResultStorage);
@@ -458,7 +459,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_edit-room",
       key: "edit-room",
-      label: t("Common:EditRoom"),
+      label: isFormSpace ? t("Common:EditFormSpace") : t("Common:EditRoom"),
       icon: SettingsReactSvgUrl,
       onClick: () => self.onClickEditRoom(item),
       disabled: false,
@@ -544,7 +545,9 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_create-room",
       key: "create-room-from-template",
-      label: t("Common:CreateRoom"),
+      label: isFormSpace
+        ? t("Common:CreateFormSpaceAction")
+        : t("Common:CreateRoom"),
       icon: CreateRoomReactSvgUrl,
       onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),
       disabled: false,
@@ -759,7 +762,9 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_change-room-owner",
       key: "change-room-owner",
-      label: t("Common:ChangeRoomOwner"),
+      label: isFormSpace
+        ? t("Common:ChangeFormSpaceOwner")
+        : t("Common:ChangeRoomOwner"),
       icon: ReconnectSvgUrl,
       onClick: self.onChangeRoomOwner,
       disabled: isAIAgent,
@@ -900,7 +905,11 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_leave-room",
       key: "leave-room",
-      label: isAIAgent ? t("Common:LeaveTheAgent") : t("Common:LeaveTheRoom"),
+      label: isAIAgent
+        ? t("Common:LeaveTheAgent")
+        : isFormSpace
+          ? t("Common:LeaveTheFormSpace")
+          : t("Common:LeaveTheRoom"),
       icon: LeaveRoomSvgUrl,
       onClick: self.onLeaveRoom,
       disabled: isKnowledgeOrResult
@@ -945,7 +954,9 @@ export const getFilesContextOptionsImpl = (
           : item.isTemplate
             ? t("Files:DeleteTemplateAction")
             : item.isRoom
-              ? t("Common:DeleteRoom")
+              ? isFormSpace
+                ? t("Common:DeleteFormSpace")
+                : t("Common:DeleteRoom")
               : t("Common:Delete"),
       icon:
         item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,

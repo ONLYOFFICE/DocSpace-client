@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2026-08-06T14:20:57.489Z",
+  "updated_at": "2026-08-17T17:23:21.644Z",
   "comment": {
     "text": "A toast message confirming that a file has been successfully unlocked.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 116,
+      "line_number": 127,
       "context": "});\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Common:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Common:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (\"version\" in feed.data && feed.data.version) {\n return t(\"Common:FileVersionRemoved\", {\n version: feed.data.version,\n });",
       "module": "/packages/client"
     },

@@ -1,9 +1,9 @@
 {
   "key_path": "RevokeSharedLinkDescriptionFormRoom",
-  "content": "Links to all forms in the room will be re-generated. Previous links to room forms and embedded forms will become unavailable.",
-  "content_en_sha1_hash": "3097908789ffd132e941b4e82a21df2f16bc5599",
+  "content": "Links to all forms in the space will be re-generated. Previous links to space forms and embedded forms will become unavailable.",
+  "content_en_sha1_hash": "036877be5f2510e5d12dcda1434e21d1d50b4926",
   "created_at": "2025-05-19T21:30:56.063Z",
-  "updated_at": "2026-05-15T14:00:06.674Z",
+  "updated_at": "2026-08-17T19:42:56.947Z",
   "comment": {
     "text": "This is a description in a confirmation dialog when revoking a shared link for a form room. It explains the consequences of the action.",
     "is_auto": true,

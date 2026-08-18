@@ -154,8 +154,6 @@ const SectionFilterContent = ({
   isOwner,
   currentFolderId,
 
-  currentClientView,
-
   getSelectedFolder,
   selectedFolderId,
 
@@ -200,8 +198,7 @@ const SectionFilterContent = ({
     [isFormsSection],
   );
 
-  const isContactsPage =
-    currentClientView === "users" || currentClientView === "groups";
+  const isContactsPage = location.pathname.includes("accounts");
   const isContactsPeoplePage = contactsTab === "people";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
@@ -2087,8 +2084,6 @@ export default inject(
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,
-
-      currentClientView: clientLoadingStore.currentClientView,
 
       fetchTags,
       setViewAs,

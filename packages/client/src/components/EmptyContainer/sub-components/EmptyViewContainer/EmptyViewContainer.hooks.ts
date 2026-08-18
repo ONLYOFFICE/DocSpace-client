@@ -42,13 +42,16 @@ import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
+import { useStores as useAiChatStores } from "@docspace/ui-kit/ai-agent/providers";
 import {
   Events,
   FileExtensions,
   FilesSelectorFilterTypes,
   FilterType,
+  FolderType,
   RoomSearchArea,
   RoomsType,
+  SearchArea,
 } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -66,6 +69,7 @@ import {
   getOptions,
   getTitle,
 } from "./EmptyViewContainer.helpers";
+import { isFormsSectionScope } from "./EmptyViewContainer.utils";
 
 import type {
   CreateEvent,
@@ -93,6 +97,8 @@ export const useEmptyView = (
     aiReady,
     standalone,
     isCardLinkedToPortal,
+    filterFolderType,
+    roomsFilterSearchArea,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
@@ -101,6 +107,11 @@ export const useEmptyView = (
 
   const hasAiProfiles = useHasAiProfiles();
   const isAiReady = standalone ? hasAiProfiles : aiReady;
+
+  const isFormsScope =
+    rootFolderType === FolderType.RoomTemplates
+      ? roomsFilterSearchArea === RoomSearchArea.FormTemplates
+      : isFormsSectionScope(filterFolderType);
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -126,6 +137,7 @@ export const useEmptyView = (
       isAiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
     );
     const title = getTitle(
       type,
@@ -144,6 +156,7 @@ export const useEmptyView = (
       isAiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
     );
     const icon = getIcon(
       type,
@@ -179,6 +192,7 @@ export const useEmptyView = (
     isAiReady,
     standalone,
     isPortalAdmin,
+    isFormsScope,
   ]);
 
   return emptyViewOptions;
@@ -254,6 +268,28 @@ export const useOptions = (
 
   const onOpenAiChat = useOpenAiChat();
   const isAiChatAvailable = useIsAiChatAvailable();
+
+  // `useThreadsStore` / `useRouter` are Zustand stores (callable as hooks
+  // elsewhere); here only their imperative `.getState()` API is needed, so the
+  // `use` prefix is aliased away to avoid implying a hook call in a callback.
+  const { useThreadsStore: threadsStore, useRouter: chatRouterStore } =
+    useAiChatStores();
+
+  // The agent room's chat tab keeps the thread from the previous visit, so
+  // reset it before navigating — the Results tab option must always land on a
+  // fresh conversation.
+  const onStartNewChat = useCallback(() => {
+    threadsStore.getState().onSwitchToNewThread();
+    chatRouterStore.getState().setCurrentPage("chat");
+
+    const filesFilter = FilesFilter.getFilter(window.location);
+
+    filesFilter.searchArea = SearchArea.Any;
+
+    const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
+
+    navigate(`${path}?${filesFilter.toUrlParams()}`);
+  }, [threadsStore, chatRouterStore, navigate]);
 
   const isAIRoom =
     selectedFolder?.roomType === RoomsType.AIRoom ||
@@ -529,6 +565,7 @@ export const useOptions = (
           onOpenAccessSettings,
           onCreateAIAgent,
           onOpenAiChat,
+          onStartNewChat,
           onGoToServices,
           onGoToAIProviderSettings,
           onTopUpAndActivateAI,
@@ -589,6 +626,7 @@ export const useOptions = (
       isCardLinkedToPortal,
       isActivating,
       onOpenAiChat,
+      onStartNewChat,
       isAiChatAvailable,
     ],
   );

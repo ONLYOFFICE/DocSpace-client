@@ -47,13 +47,24 @@ import {
   type DurationUnit,
 } from "@docspace/ui-kit/utils/date";
 
+import { RoomsType } from "@docspace/shared/enums";
+
 import { HistoryText } from "../HistoryText";
+
+import { useHistorySelection } from "./useHistorySelection";
 
 export const useFeedTranslation = (
   feed: TFeedAction<TFeedData | RoomMember>,
   hasRelatedItems: boolean,
 ) => {
   const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
+
+  const { selection } = useHistorySelection();
+
+  const isFormSpace =
+    !!selection &&
+    "roomType" in selection &&
+    selection.roomType === RoomsType.FormRoom;
 
   const count = feed.related.length + 1;
 
@@ -200,6 +211,23 @@ export const useFeedTranslation = (
           />
         );
       case FeedActionKeys.RoomCreated:
+        if (isFormSpace)
+          return (
+            <Trans
+              t={t}
+              ns="Common"
+              i18nKey="HistoryFormSpaceCreated"
+              values={{ roomTitle: (feed.data as TFeedData).title }}
+              components={{
+                1: (
+                  <HistoryText
+                    key={(feed.data as TFeedData).title!}
+                    title={(feed.data as TFeedData).title!}
+                  />
+                ),
+              }}
+            />
+          );
         return (
           <Trans
             t={t}

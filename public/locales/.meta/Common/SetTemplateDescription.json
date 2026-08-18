@@ -1,9 +1,9 @@
 {
   "key_path": "SetTemplateDescription",
-  "content": "Create a set from a template. Settings, users, folders, and forms will be copied from the selected template.",
-  "content_en_sha1_hash": "6099161f5e4244b7c619398bd5202397e003244a",
+  "content": "Create a space from a template. Settings, users, folders, and forms will be copied from the selected template.",
+  "content_en_sha1_hash": "7fe73cf40e6a2ee94c5012524bba8b6c2946b1ad",
   "created_at": "2026-06-25T19:30:50.943Z",
-  "updated_at": "2026-07-07T08:59:21.956Z",
+  "updated_at": "2026-08-18T07:20:00.000Z",
   "comment": {
     "text": "Instructional text in a form section explaining that settings, users, folders, and forms are cloned when creating a new set from a template.",
     "is_auto": true,

@@ -1,0 +1,29 @@
+{
+  "key_path": "DisableRoomQuotaFormSpace",
+  "content": "Disable quota for this space",
+  "content_en_sha1_hash": "aab88ac519511e6bbfe2adb890682967e5f300e2",
+  "created_at": "2026-08-17T17:23:18.862Z",
+  "updated_at": "2026-08-17T17:31:19.734Z",
+  "comment": {
+    "text": "Checkbox label used to disable the quota for a specific space.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:31:19.734Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
+      "line_number": 87,
+      "context": "}\n checkboxLabel={\n isAgent\n ? t(\"DisableRoomQuotaAgent\")\n : isFormSpace\n ? t(\"DisableRoomQuotaFormSpace\")\n : t(\"DisableRoomQuota\")\n }\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n initialSize={isEdit || isTemplate ? defaultValue.current : defaultQuota!}\n isDisabled={",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

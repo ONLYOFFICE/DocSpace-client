@@ -53,7 +53,7 @@ import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import {
   getCategoryUrl,
-  getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
 } from "SRC_DIR/helpers/utils";
 import {
   refreshInfoPanel,
@@ -549,7 +549,7 @@ export function redirectToParentImpl(
 
       const categoryType = isPublic
         ? CategoryType.PublicRoom
-        : getCategoryTypeByFolderType(rootFolderType, pathPart.id);
+        : getCategoryTypeByFolderTypeInSection(rootFolderType, pathPart.id);
 
       const path = getCategoryUrl(categoryType, pathPart.id);
 

@@ -1,0 +1,29 @@
+{
+  "key_path": "ChangeFormSpaceOwner",
+  "content": "Change space owner",
+  "content_en_sha1_hash": "195663d92bd71d4e0352d16760867404bc463cad",
+  "created_at": "2026-08-17T17:22:41.073Z",
+  "updated_at": "2026-08-17T17:30:34.329Z",
+  "comment": {
+    "text": "Menu item label used to initiate the process of transferring ownership of a space.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:30:34.329Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 766,
+      "context": "},\n {\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: isFormSpace\n ? t(\"Common:ChangeFormSpaceOwner\")\n : t(\"Common:ChangeRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: self.onChangeRoomOwner,\n disabled: isAIAgent,\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

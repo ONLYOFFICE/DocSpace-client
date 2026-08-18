@@ -1,0 +1,29 @@
+{
+  "key_path": "HistoryFormSpaceCreated",
+  "content": "<1>«{{roomTitle}}»</1> space created",
+  "content_en_sha1_hash": "d49a0b9503fe35ba8259be1f5591bb85fdc8d381",
+  "created_at": "2026-08-17T17:22:53.155Z",
+  "updated_at": "2026-08-17T17:25:22.708Z",
+  "comment": {
+    "text": "Activity feed entry notifying that a new space has been created; {{roomTitle}} is the name of the space.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:25:22.708Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 219,
+      "context": "if (isFormSpace)\n return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"HistoryFormSpaceCreated\"\n values={{ roomTitle: (feed.data as TFeedData).title }}\n components={{\n 1: (\n <HistoryText\n key={(feed.data as TFeedData).title!}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "No spending activity for the selected period",
   "content_en_sha1_hash": "5d5e87b0515f62a027d7abf2f956811dddc2ed0d",
   "created_at": "2026-06-25T11:54:53.701Z",
-  "updated_at": "2026-08-14T14:58:32.935Z",
+  "updated_at": "2026-08-17T17:23:21.856Z",
   "comment": {
     "text": "Title of an empty state view in the billing usage breakdown, appearing when no records are found for the selected date range.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
-      "line_number": 182,
+      "line_number": 185,
       "context": "};\n \n const emptyView = (\n <EmptyView\n icon={isBase ? <NoSpendingIcon /> : <NoSpendingDarkIcon />}\n title={t(\"NoSpendingActivity\")}\n description={t(\"NoSpendingActivityDescription\")}\n options={null}\n />\n );",
       "module": "/libs/ui-kit"
     }

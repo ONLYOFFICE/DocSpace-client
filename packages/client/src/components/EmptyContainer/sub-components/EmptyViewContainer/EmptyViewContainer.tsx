@@ -122,6 +122,7 @@ const InjectedEmptyViewContainer = inject<
     uploadDataStore,
     filesActionsStore,
     aiRoomStore,
+    filesStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isGracePeriod } = currentTariffStatusStore;
@@ -202,6 +203,8 @@ const InjectedEmptyViewContainer = inject<
       logoText,
       isKnowledgeTab: isInsideKnowledge,
       isResultsTab: isInsideResultStorage,
+      filterFolderType: filesStore.filter.folderType,
+      roomsFilterSearchArea: filesStore.roomsFilter.searchArea,
       isPortalAdmin: authStore.isAdmin,
       aiReady: paymentStore.isAIReady,
       standalone,

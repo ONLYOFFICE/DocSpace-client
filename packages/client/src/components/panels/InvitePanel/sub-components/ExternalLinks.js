@@ -187,7 +187,9 @@ const ExternalLinks = ({
           ? t("Common:InviteViaLinkDescriptionAgentGuest")
           : t("Common:InviteViaLinkDescriptionAgentMembers")
         : allowInvitingGuests
-          ? t("Common:InviteViaLinkDescriptionRoomGuest")
+          ? roomType === RoomsType.FormRoom
+            ? t("Common:InviteViaLinkDescriptionFormSpaceGuest")
+            : t("Common:InviteViaLinkDescriptionRoomGuest")
           : t("Common:InviteViaLinkDescriptionRoomMembers");
 
   return (

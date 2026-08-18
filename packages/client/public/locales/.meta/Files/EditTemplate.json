@@ -3,7 +3,7 @@
   "content": "Edit template",
   "content_en_sha1_hash": "8ebcef59970bb87d7ed8dd90149d3a44e736afba",
   "created_at": "2025-05-19T21:30:55.523Z",
-  "updated_at": "2026-08-14T14:58:32.700Z",
+  "updated_at": "2026-08-17T17:23:21.701Z",
   "comment": {
     "text": "This is a dialog title and a button label. It appears when editing a template, either as the title of the editing dialog or as an option in a context menu.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 555,
+      "line_number": 558,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-room\",\n key: \"edit-template\",\n label: t(\"EditTemplate\"),\n icon: SettingsReactSvgUrl,\n onClick: () => onEditRoomTemplate(item),\n disabled: !isTemplateOwner,\n },\n {",
       "module": "/packages/client"
     }

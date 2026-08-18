@@ -3,7 +3,7 @@
   "content": "This item will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "bc9b11f940706f51e5a6fa996be78b0f399ba112",
   "created_at": "2026-04-03T21:51:27.561Z",
-  "updated_at": "2026-08-12T11:00:51.524Z",
+  "updated_at": "2026-08-17T17:23:21.714Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user attempts to permanently delete a single item from the trash.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 149,
+      "line_number": 159,
       "context": "<>\n <Trans t={t} i18nKey=\"DeleteItemForeverConfirm\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {t(\"Common:DeleteItemForever\")}\n </>\n ) : (\n t(\"Common:DeleteItemsForever\", { itemCount: selection.length })\n );\n }",
       "module": "/packages/client"
     },

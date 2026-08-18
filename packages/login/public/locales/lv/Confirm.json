@@ -5,7 +5,7 @@
   "ConnectApp": "Pievienojiet lietotni",
   "ConnectAppDescription": "Skenējiet norādīto QR kodu, izmantojot savu autentifikācijas lietotni. Alternatīvi, manuāli ievadiet doto slepeno atslēgu savā lietotnē: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Jūsu pašreizējais mobilā tālruņa numurs",
-  "DeleteProfileBtn": "Dzēst manu kontu",
+  "DeleteProfileBtn": "Deaktivēt manu kontu",
   "DeleteProfileConfirmation": "Uzmanību! Jūs gatavojaties izdzēst savu kontu.",
   "DeleteProfileConfirmationInfo": "Noklikšķinot uz \"Dzēst manu kontu\", jūs piekrītat mūsu <1>konfidencialitātes politikai.</1>",
   "DeleteProfileSuccessDescription": "Jūsu {{organizationName}} {{productName}} konts tika veiksmīgi atspējots. Īpašnieks vai superadministrators var neatgriezeniski dzēst jūsu atspējoto kontu.",

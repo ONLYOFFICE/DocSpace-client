@@ -5,7 +5,7 @@
   "ConnectApp": "Yhdistä sovellus",
   "ConnectAppDescription": "Skannaa annettu QR-koodi tunnistussovelluksellasi. Vaihtoehtoisesti voit syöttää annetun salaisen avaimen manuaalisesti sovellukseesi: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Nykyinen matkapuhelinnumerosi",
-  "DeleteProfileBtn": "Poista tilini",
+  "DeleteProfileBtn": "Poista tilini käytöstä",
   "DeleteProfileConfirmation": "Huomio! Olet poistamassa tilisi.",
   "DeleteProfileConfirmationInfo": "Napsauttamalla \"Poista tilini\", hyväksyt <1>yksityisyyskäytäntömme.</1>",
   "DeleteProfileSuccessDescription": "{{organizationName}} {{productName}}-tilisi poistettiin käytöstä onnistuneesti. Omistaja tai pääjärjestelmänvalvoja voi poistaa käytöstä poistetun tilisi pysyvästi.",

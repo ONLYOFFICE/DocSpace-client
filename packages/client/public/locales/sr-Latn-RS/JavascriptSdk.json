@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Napravi primer ugradnje selektora Sobe",
   "CreateSampleUploader": "Kreirajte uzorak ugrađenog učitnika",
   "CreateSampleViewer": "Napravi primer ugradnje Pregledača",
-  "CSPDescription": "Unesite adresu servisa na koji želite da ugradite ili povežete {{organizationName}} radni prostor.",
+  "CSPDescription": "Unesite adresu servisa na koji želite da ugradite ili povežete radni prostor.",
   "CSPHeader": "Dodajte dozvoljene domene za ovaj radni prostor",
   "CSPHelp": "Ovo podešavanje je sigurnosni mehanizam koji se može koristiti kako bi se zaštitili od napada ubacivanjem sadržaja. CSP (Content Security Policy) opisuje sigurne izvore za preuzimanje resursa. Preuzimanje sa izvora koji nije uključen u \"belu listu\" je blokirano. Navedite domene (zajedno sa protokolom) s kojima će raditi.",
   "CSPInfoBarDescription": "Molimo omogućite HTTPS protokol za vaš radni prostor kako bi se osiguralo da pravilno radi.",

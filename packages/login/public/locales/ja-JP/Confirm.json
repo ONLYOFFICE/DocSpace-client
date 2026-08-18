@@ -5,7 +5,7 @@
   "ConnectApp": "アプリを接続する",
   "ConnectAppDescription": "提供されたQRコードを認証アプリでスキャンしてください。あるいは、指定されたシークレットキーをアプリに手動で入力してください: <1>{{ secretKey }}</1>。",
   "CurrentNumber": "現在お使いの電話番号",
-  "DeleteProfileBtn": "アカウントの削除",
+  "DeleteProfileBtn": "自分のアカウントを無効にする",
   "DeleteProfileConfirmation": "ご注意！アカウントを削除しようとしています。",
   "DeleteProfileConfirmationInfo": "\"Delete my account\" をクリックすると、<1>プライバシーポリシー</1> に同意したことになります。",
   "DeleteProfileSuccessDescription": "{{organizationName}} {{productName}}アカウントが正常に無効化されました。所有者またはスーパー管理者は、無効化されたアカウントを完全に削除できます。",

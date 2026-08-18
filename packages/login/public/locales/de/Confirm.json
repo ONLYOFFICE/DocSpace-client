@@ -5,7 +5,7 @@
   "ConnectApp": "App verbinden",
   "ConnectAppDescription": "Scannen Sie den bereitgestellten QR-Code mit Ihrer Authenticator-App. Alternativ können Sie den angegebenen geheimen Schlüssel manuell in Ihre App eingeben: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Ihre aktuelle Telefonnummer",
-  "DeleteProfileBtn": "Mein Konto löschen",
+  "DeleteProfileBtn": "Mein Konto deaktivieren",
   "DeleteProfileConfirmation": "Achtung! Dies wird Ihr Konto löschen.",
   "DeleteProfileConfirmationInfo": "Wenn Sie auf \"Mein Konto löschen\" klicken, akzeptieren Sie unsere <1>Datenschutzerklärung.</1>",
   "DeleteProfileSuccessDescription": "Ihr {{organizationName}} {{productName}}-Konto wurde erfolgreich deaktiviert. Der Besitzer oder Super-Administrator kann Ihr deaktiviertes Konto endgültig löschen.",

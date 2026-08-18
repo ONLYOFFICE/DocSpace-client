@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -155,7 +156,7 @@ test.describe("Room grouping", () => {
       await expect(groupTagsRow).not.toBeVisible();
 
       // Screenshot: Rooms page without grouping row when grouping is disabled
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "rooms-page-grouping-disabled.png",
@@ -423,7 +424,7 @@ test.describe("Room grouping", () => {
       await expect(allRoomsTag).toBeVisible();
 
       // Screenshot: Filter area with group tags row visible
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "group-tags-row-visible.png",
@@ -458,7 +459,7 @@ test.describe("Room grouping", () => {
         await secondTag.click();
 
         // Screenshot: Rooms filtered by selected group
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "rooms-filtered-by-group.png",
@@ -535,7 +536,7 @@ test.describe("Room grouping", () => {
       await page.getByTestId("create_group_tag").waitFor({ state: "visible" });
 
       // Screenshot: Tags row with Create group button (no groups)
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "create-group-button-in-tags.png",
@@ -570,7 +571,7 @@ test.describe("Room grouping", () => {
         await checkbox.click();
 
         // Screenshot: Header menu with group actions visible
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "header-menu-group-actions.png",
@@ -654,7 +655,7 @@ test.describe("Room grouping", () => {
       await expect(roomSelector).toBeVisible();
 
       // Screenshot: Room selector panel for creating a new group
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "room-selector-create-group.png",
@@ -707,7 +708,7 @@ test.describe("Room grouping", () => {
         await expect(submitButton).toBeDisabled();
 
         // Screenshot: Room selector with disabled Select button
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "room-selector-select-disabled.png",
@@ -906,7 +907,7 @@ test.describe("Room grouping", () => {
       await expect(roomSelector).toBeVisible();
 
       // Screenshot: Room list panel for editing group rooms
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "edit-group-room-list.png",

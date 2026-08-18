@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   colorThemeHandler,
   settingsHandler,
@@ -159,7 +160,7 @@ test.describe("Docs Connect buy plan panel", () => {
       await expect(page.getByText("Total monthly")).toBeVisible();
       await expect(page.getByText("$100.00")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "buy-plan-new.png",
@@ -179,7 +180,7 @@ test.describe("Docs Connect buy plan panel", () => {
 
       await expect(page.getByText("$250.00").first()).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "buy-plan-devpack.png",
@@ -228,7 +229,7 @@ test.describe("Docs Connect buy plan panel", () => {
         page.getByTestId("docs_connect_buy_plan_submit"),
       ).toHaveText("Top up & Buy");
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "buy-plan-insufficient.png",
@@ -387,7 +388,7 @@ test.describe("Docs Connect buy plan panel", () => {
       await expect(page.getByText("$90.00")).toBeVisible();
       await expect(page.getByText("$160.00")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "buy-plan-devpack-upgrade.png",

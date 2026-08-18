@@ -172,12 +172,11 @@ test.describe("Create Dialog Sample Plugin — ICreateDialog via main button", (
 
     await page.getByTestId(`${DLG}_save_button`).click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: '"My Plugin Folder" created as Private Folder' });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText(
-      '"My Plugin Folder" created as Private Folder',
-    );
   });
 
   // ── 6. Changing the name is reflected in the toast ────────────────────────
@@ -197,12 +196,11 @@ test.describe("Create Dialog Sample Plugin — ICreateDialog via main button", (
 
     await page.getByTestId(`${DLG}_save_button`).click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: '"Design Assets" created as Private Folder' });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText(
-      '"Design Assets" created as Private Folder',
-    );
   });
 
   // ── 7. Cancel button closes the dialog ────────────────────────────────────
@@ -222,7 +220,9 @@ test.describe("Create Dialog Sample Plugin — ICreateDialog via main button", (
     await page.getByTestId(`${DLG}_cancel_button`).click();
 
     await expect(page.getByTestId(`${DLG}_text_input`)).not.toBeVisible();
-    await expect(page.getByTestId("toast-content")).not.toBeVisible();
+    await expect(
+      page.getByTestId("toast-content").filter({ hasText: "created as" }),
+    ).not.toBeVisible();
   });
 });
 

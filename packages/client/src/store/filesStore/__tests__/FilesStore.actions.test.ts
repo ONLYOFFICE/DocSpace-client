@@ -37,6 +37,7 @@ import { describe, it, expect, vi, afterEach } from "vitest";
 import api from "@docspace/shared/api";
 import { FileType } from "@docspace/shared/enums";
 import { thumbnailStatuses } from "@docspace/shared/constants";
+import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
 
 import { createTestFilesStore } from "./testHarness";
 import type { TItem } from "../types";
@@ -93,6 +94,26 @@ describe("FilesStore.fetchFavoritesFolder — characterization", () => {
 
     expect(store.folders.map((f) => f.id)).toEqual([2]);
     expect(store.files.map((f) => f.id)).toEqual([1]);
+  });
+
+  it("keeps the section folderType scope on the refresh request", async () => {
+    const store = createTestFilesStore();
+    const getFolder = vi.spyOn(api.files, "getFolder").mockResolvedValue({
+      folders: [],
+      files: [file(1)],
+      total: 1,
+    } as never);
+
+    // Rooms favorites: the list is scoped by folderType, not by parentId.
+    store.filter.folderType = ROOMS_SECTION_FOLDER_TYPES;
+
+    await store.fetchFavoritesFolder(7);
+
+    // Without a filter argument getFolder issues a bare GET /files/7, which
+    // returns favorites from every section (Files/Forms) as well.
+    const passedFilter = getFolder.mock.calls[0][1];
+    expect(passedFilter).toBeDefined();
+    expect(passedFilter.folderType).toEqual(ROOMS_SECTION_FOLDER_TYPES);
   });
 });
 

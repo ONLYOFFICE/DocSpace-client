@@ -90,6 +90,10 @@ test.describe("Room grouping", () => {
       const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Edit room groups panel with grouping enabled and groups listed
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -124,6 +128,10 @@ test.describe("Room grouping", () => {
 
       const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Edit room groups panel with no groups (empty state)
       await expect(dialog).toHaveScreenshot([
@@ -204,6 +212,10 @@ test.describe("Room grouping", () => {
 
       const cancelButton = dialog.locator('button:has-text("Cancel")');
       await expect(cancelButton).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel with grouping toggled off showing Save/Cancel buttons
       await expect(dialog).toHaveScreenshot([
@@ -287,6 +299,10 @@ test.describe("Room grouping", () => {
       await expect(toggle).toBeVisible();
       await toggle.click();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Groups should appear disabled/grayed out
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -334,6 +350,10 @@ test.describe("Room grouping", () => {
       // The info bar/tooltip should be visible
       const infoBar = dialog.locator('[class*="infoBar"]');
       await expect(infoBar).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel with dismissible tooltip visible
       await expect(dialog).toHaveScreenshot([
@@ -387,6 +407,10 @@ test.describe("Room grouping", () => {
 
       // Tooltip should be dismissed
       await expect(infoBar).not.toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel after tooltip is dismissed
       await expect(dialog).toHaveScreenshot([
@@ -753,6 +777,10 @@ test.describe("Room grouping", () => {
       const createButton = dialog.getByTestId("create_new_group_button");
       await expect(createButton).toBeVisible();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Create new group button disabled when grouping is off
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -803,6 +831,10 @@ test.describe("Room grouping", () => {
           .getByTestId("modal-dialog")
           .filter({ hasText: "Remove group" });
         await expect(confirmDialog).toBeVisible();
+
+        // Park the cursor: the dialog opens under it, and a row left in its
+        // hover state is a one-icon difference against the baseline.
+        await page.mouse.move(0, 0);
 
         // Screenshot: Delete group confirmation dialog
         await expect(confirmDialog).toHaveScreenshot([

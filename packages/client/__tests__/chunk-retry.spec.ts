@@ -54,6 +54,12 @@ const isAppBooted = () =>
   Boolean(document.querySelector("#root")?.hasChildNodes());
 
 test.describe("Chunk load recovery", () => {
+  // Recovery is deliberately slow: a dropped bundle is retried, and the
+  // fallback path reloads the document up to three times before the app
+  // boots. The 30s polls below can eat the whole default test budget on a
+  // loaded machine, so give every test in here the tripled one.
+  test.slow();
+
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.Authenticated),

@@ -287,6 +287,19 @@ const PureHome = observer((props) => {
     aiChatPanel.isChatPanelVisible &&
     (aiChatPanel.isChatPanelFullscreen || !isDesktop);
 
+  // On tablets/phones the opened AI chat panel takes over the whole main
+  // area, so navigating to another section via the left panel must hide it —
+  // otherwise the new section stays covered by the chat overlay. Desktop
+  // keeps the docked panel open across navigation by design.
+  const prevPathnameRef = React.useRef(location.pathname);
+  React.useEffect(() => {
+    if (prevPathnameRef.current === location.pathname) return;
+    prevPathnameRef.current = location.pathname;
+
+    if (!isDesktop && aiChatPanel.isChatPanelVisible)
+      aiChatPanel.closeChatPanel();
+  }, [location.pathname, isDesktop, aiChatPanel]);
+
   // The "Forms" section root gets its own quick-actions tile set (collect
   // forms + from template), resolved by the hook below.
   const isFormsSection = getCategoryType(location) === CategoryType.Forms;

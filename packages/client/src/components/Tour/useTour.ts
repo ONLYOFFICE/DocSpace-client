@@ -141,7 +141,14 @@ export default function useTour(
     tooltipComponent: TourTooltip,
     // The tooltip reads as a free-floating card, so it carries no arrow toward
     // its anchor — the spotlight is what ties it to the target.
-    floatingOptions: { hideArrow: true },
+    floatingOptions: {
+      hideArrow: true,
+      shiftOptions: {
+        crossAxis: true,
+        boundary: "clippingAncestors",
+        rootBoundary: "viewport",
+      },
+    },
     options: {
       overlayColor: "rgba(0, 0, 0, 0.5)",
       // A click on the backdrop does nothing: the tour is a few steps long and
@@ -321,3 +328,4 @@ export default function useTour(
 
   return { Tour: isMobileView ? null : Tour };
 }
+

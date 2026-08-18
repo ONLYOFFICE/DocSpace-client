@@ -399,7 +399,7 @@ const CreateRoomDialog = ({
           ) : (
             <SetRoomParams
               t={t}
-              disabledChangeRoomType={Boolean(startRoomType)}
+              disabledChangeRoomType={Boolean(startRoomType) || isFormsCreate}
               isTemplateSelected={isTemplateSelected}
               setIsOauthWindowOpen={setIsOauthWindowOpen}
               tagHandler={tagHandler}

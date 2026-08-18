@@ -492,6 +492,8 @@ const SetAgentParams = ({
 
       <ProfileSettings
         agentParams={agentParams}
+        isAdmin={!!isUserAdmin}
+        recommendedModelForForms={recommendedModelForForms}
         setAgentParams={setAgentParams}
       />
 

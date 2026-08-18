@@ -90,14 +90,25 @@ test.describe("Chunk load recovery", () => {
     const failedOnce = new Set<string>();
     const recovered = new Set<string>();
 
+    // Only the initial document's bundles are dropped. The chunks the router
+    // imports later are left alone on purpose: every document load discovers
+    // a fresh batch of them, so failing those as well would keep feeding new
+    // faults into the recovery and burn the bootstrap's two-reload budget
+    // before the lazy graph ever closes - that is the "never load" scenario
+    // covered by the last test, not the dropped-request one covered here.
+    let initialDocument = true;
+    page.once("load", () => {
+      initialDocument = false;
+    });
+
     await page.route(BUNDLES_ROUTE, async (route) => {
       const url = route.request().url().split("?")[0];
-      if (!failedOnce.has(url)) {
+      if (initialDocument && !failedOnce.has(url)) {
         failedOnce.add(url);
         await route.abort("failed");
         return;
       }
-      recovered.add(url);
+      if (failedOnce.has(url)) recovered.add(url);
       await route.continue();
     });
 

@@ -81,10 +81,6 @@ const Plugin = ({ infoPanelItem, selection }: Props) => {
       <WrappedComponent
         pluginName={pluginName}
         component={{ component: PluginComponents.box, props: bodyProps }}
-        saveButton={undefined}
-        setSaveButtonProps={undefined}
-        setModalRequestRunning={undefined}
-        modalRequestRunning={undefined}
       />
     </div>
   );

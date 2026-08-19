@@ -133,7 +133,7 @@ export const usePlugin = ({
         component={
           {
             component: PluginComponents.box,
-            props: pluginMediaViewerProps?.content,
+            props: pluginMediaViewerProps.content,
           } satisfies BoxGroup
         }
       />

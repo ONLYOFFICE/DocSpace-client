@@ -42,6 +42,8 @@ import config from "PACKAGE_FILE";
 import { PluginActions, PluginToastType } from "./enums";
 import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryType } from "@docspace/shared/utils/common";
+import { IBox } from "@onlyoffice/docspace-plugin-sdk";
+
 import {
   showInfoPanel,
   openMembersTab,
@@ -52,12 +54,13 @@ import {
   setRoomsView,
 } from "../info-panel";
 
+import { TMessageActionsParams } from "./types";
+
 export const messageActions = ({
   message,
   setElementProps,
   pluginName,
   setSettingsPluginDialogVisible,
-  setCurrentSettingsDialogPlugin,
   updatePluginStatus,
   updatePropsContext,
   setPluginDialogVisible,
@@ -73,24 +76,25 @@ export const messageActions = ({
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
-  updateArticleButtonItems,
   updateCreateDialogProps,
   updatePlugin,
   setPluginMediaViewerVisible,
   setPluginMediaViewerProps,
-}) => {
+}: TMessageActionsParams): void => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
   message.actions.forEach((action) => {
     switch (action) {
       case PluginActions.updateProps:
-        setElementProps?.({ ...message.newProps });
+        if (message.newProps) {
+          setElementProps?.({ ...message.newProps });
+        }
 
         break;
 
       case PluginActions.updateContext:
         if (message?.contextProps) {
-          updatePropsContext(message.contextProps);
+          updatePropsContext?.(message.contextProps);
         }
         break;
 
@@ -179,32 +183,16 @@ export const messageActions = ({
         }
         break;
 
-      case PluginActions.showSettingsModal:
-        if (pluginName) {
-          setSettingsPluginDialogVisible?.(true);
-          setCurrentSettingsDialogPlugin?.({
-            pluginName,
-          });
-        }
-        break;
-
-      case PluginActions.closeSettingsModal:
-        setSettingsPluginDialogVisible?.(false);
-        setCurrentSettingsDialogPlugin?.(null);
-
-        break;
-
       case PluginActions.showCreateDialogModal:
         if (message.createDialogProps) {
           const payload = {
             ...message.createDialogProps,
-
             pluginName,
           };
 
-          const event = new Event(Events.CREATE_PLUGIN_FILE);
-
-          event.payload = payload;
+          const event = Object.assign(new Event(Events.CREATE_PLUGIN_FILE), {
+            payload,
+          });
 
           window.dispatchEvent(event);
         }
@@ -235,9 +223,6 @@ export const messageActions = ({
       case PluginActions.updateInfoPanelItems:
         updateInfoPanelItems?.(pluginName);
 
-      case PluginActions.updateArticleButtonItems:
-        updateArticleButtonItems?.(pluginName);
-
         break;
       case PluginActions.updateMainButtonItems:
         updateMainButtonItems?.(pluginName);
@@ -264,7 +249,7 @@ export const messageActions = ({
         const frame = document.getElementById(`${postMessage.frameId}`);
 
         if (frame) {
-          frame.contentWindow.postMessage(
+          (frame as HTMLIFrameElement).contentWindow?.postMessage(
             JSON.stringify(postMessage.message),
             "*",
           );
@@ -274,7 +259,7 @@ export const messageActions = ({
       }
       case PluginActions.saveSettings:
         if (message.settings !== undefined) {
-          updatePlugin(pluginName, null, message.settings);
+          updatePlugin?.(pluginName, null, message.settings);
         }
         break;
 
@@ -286,9 +271,9 @@ export const messageActions = ({
         break;
 
       case PluginActions.openInfoPanel:
-        setPluginDialogVisible(false);
-        setSettingsPluginDialogVisible(false);
-        setPluginSelectorVisible(false);
+        setPluginDialogVisible?.(false);
+        setSettingsPluginDialogVisible?.(false);
+        setPluginSelectorVisible?.(false);
         showInfoPanel();
 
         switch (message.infoPanelTab) {
@@ -339,7 +324,7 @@ export const messageActions = ({
   });
 };
 
-export const getPluginUrl = (url, file) => {
+export const getPluginUrl = (url: string, file: string): string => {
   const splittedURL = url.split("/");
 
   splittedURL.pop();
@@ -354,7 +339,7 @@ export const getPluginUrl = (url, file) => {
   );
 };
 
-export const isAIAgents = () => {
+export const isAIAgents = (): boolean => {
   const categoryType = getCategoryType(window.location);
 
   return (
@@ -365,7 +350,16 @@ export const isAIAgents = () => {
   );
 };
 
-export function borderToStyle(border = {}) {
+export function borderToStyle(border: IBox["borderProp"]): {
+  border?: string;
+  borderRadius?: string;
+} {
+  if (!border) return {};
+
+  if (typeof border === "string") {
+    return { border };
+  }
+
   const { width, style, color, radius } = border;
 
   const borderValue = [width, style, color].filter(Boolean).join(" ");

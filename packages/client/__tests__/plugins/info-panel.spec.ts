@@ -145,7 +145,9 @@ test.describe("Info Panel Sample Plugin", () => {
     ).toBeVisible();
 
     // onClick fires a success toast.
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Tab opened" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
 

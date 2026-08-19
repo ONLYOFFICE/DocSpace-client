@@ -47,6 +47,7 @@ import {
   PlaylistType,
 } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
+import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
 interface UsePluginProps {
   pluginMediaViewerVisible: PluginStore["pluginMediaViewerVisible"];
@@ -123,19 +124,18 @@ export const usePlugin = ({
 
   // Get plugin viewer content component
   const pluginContent = useMemo(() => {
-    if (!pluginMediaViewerVisible) return null;
+    if (!pluginMediaViewerVisible || !pluginMediaViewerProps?.pluginName)
+      return null;
 
     return (
       <WrappedComponent
-        pluginName={pluginMediaViewerProps?.pluginName}
-        component={{
-          component: PluginComponents.box,
-          props: pluginMediaViewerProps?.content,
-        }}
-        modalRequestRunning={undefined}
-        saveButton={undefined}
-        setModalRequestRunning={undefined}
-        setSaveButtonProps={undefined}
+        pluginName={pluginMediaViewerProps.pluginName}
+        component={
+          {
+            component: PluginComponents.box,
+            props: pluginMediaViewerProps.content,
+          } satisfies BoxGroup
+        }
       />
     );
   }, [pluginMediaViewerVisible, pluginMediaViewerProps]);

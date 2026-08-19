@@ -93,10 +93,11 @@ test.describe("Article Button Sample Plugin", () => {
 
     await page.locator("#article-button-sample-notify-btn").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Notification button clicked!" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Notification button clicked!");
   });
 
   // ── 3. Status button (onLoad) ─────────────────────────────────────────────────
@@ -123,10 +124,11 @@ test.describe("Article Button Sample Plugin", () => {
     await expect(statusBtn).toBeVisible();
     await statusBtn.click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Status button clicked!" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Status button clicked!");
   });
 
   // ── 4. Collapsed article ──────────────────────────────────────────────────────

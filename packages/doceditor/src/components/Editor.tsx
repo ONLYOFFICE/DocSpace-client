@@ -81,7 +81,6 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
-  generationToolCallState,
 
   organizationName = "",
   filesSettings,
@@ -149,8 +148,7 @@ const Editor = ({
     openShareFormDialog,
     onOpenRoleMappingPanel,
     shareKey,
-    generationToolCallState,
-    disconnectUsers,
+      disconnectUsers,
   });
 
   useInit({

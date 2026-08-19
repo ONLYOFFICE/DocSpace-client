@@ -33,54 +33,55 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Component, IButton } from "@onlyoffice/docspace-plugin-sdk";
+import {
+  ButtonGroup,
+  Component,
+  IButton,
+  IMessage,
+} from "@onlyoffice/docspace-plugin-sdk";
+import { Dispatch, SetStateAction } from "react";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
-import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
-import styles from "../SettingsPluginDialog.module.scss";
-import { FooterProps } from "../SettingsPluginDialog.types";
+export type TAllComponentProps = Component["props"];
 
-const Footer = ({
-  t,
+export type TContextProps = Record<string, TAllComponentProps>;
 
-  pluginName,
-
-  saveButtonProps,
-  modalRequestRunning,
-  setModalRequestRunning,
-  onCloseAction,
-}: FooterProps) => {
-  return (
-    <div className={styles.footer}>
-      <PluginComponent
-        component={
-          {
-            ...saveButtonProps,
-            props: {
-              ...saveButtonProps?.props,
-              scale: true,
-              isSaveButton: true,
-              primary: true,
-              size: "normal",
-              label: t("Common:SaveButton"),
-              settingsModalRequestRunning: modalRequestRunning,
-              setSettingsModalRequestRunning: setModalRequestRunning,
-              onCloseAction,
-              testId: "settings_plugin_save_button",
-            } as IButton,
-          } as Component
-        }
-        pluginName={pluginName}
-      />
-      <Button
-        scale
-        size={ButtonSize.normal}
-        onClick={onCloseAction}
-        label={t("Common:CancelButton")}
-        testId="settings_plugin_cancel_button"
-      />
-    </div>
-  );
+export type TPropsContext = {
+  contextProps: TContextProps;
+  updatePropsContext: (
+    newContextProps: NonNullable<IMessage["contextProps"]>,
+  ) => void;
+  isRequestRunning: boolean;
+  setIsRequestRunning: Dispatch<SetStateAction<boolean>>;
+  setModalRequestRunning?: (value: boolean) => void;
+  modalRequestRunning?: boolean;
 };
 
-export default Footer;
+export type TButtonElementProps = IButton & {
+  isSaveButton?: boolean;
+  settingsModalRequestRunning?: boolean;
+  setSettingsModalRequestRunning?: (value: boolean) => void;
+  onCloseAction?: () => void;
+};
+
+export type TPluginStoreInjected = {
+  getPluginIconUrl: PluginStore["getPluginIconUrl"];
+  dispatchMessage: PluginStore["dispatchMessage"];
+};
+
+export type TPluginComponentOwnProps = {
+  component: Component;
+  pluginName: string;
+};
+
+export type TPluginComponentProps = TPluginComponentOwnProps &
+  TPluginStoreInjected;
+
+export type TWrappedComponentProps = {
+  pluginName: string;
+  component: Component;
+  saveButton?: ButtonGroup & { contextName?: string };
+  setSaveButtonProps?: Dispatch<SetStateAction<ButtonGroup | undefined>>;
+  setModalRequestRunning?: (value: boolean) => void;
+  modalRequestRunning?: boolean;
+};

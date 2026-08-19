@@ -33,54 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { Component, IButton } from "@onlyoffice/docspace-plugin-sdk";
+import type { IModalDialogClient } from "SRC_DIR/helpers/plugins/types";
+import type PluginStore from "SRC_DIR/store/PluginStore";
 
-import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
-import styles from "../SettingsPluginDialog.module.scss";
-import { FooterProps } from "../SettingsPluginDialog.types";
-
-const Footer = ({
-  t,
-
-  pluginName,
-
-  saveButtonProps,
-  modalRequestRunning,
-  setModalRequestRunning,
-  onCloseAction,
-}: FooterProps) => {
-  return (
-    <div className={styles.footer}>
-      <PluginComponent
-        component={
-          {
-            ...saveButtonProps,
-            props: {
-              ...saveButtonProps?.props,
-              scale: true,
-              isSaveButton: true,
-              primary: true,
-              size: "normal",
-              label: t("Common:SaveButton"),
-              settingsModalRequestRunning: modalRequestRunning,
-              setSettingsModalRequestRunning: setModalRequestRunning,
-              onCloseAction,
-              testId: "settings_plugin_save_button",
-            } as IButton,
-          } as Component
-        }
-        pluginName={pluginName}
-      />
-      <Button
-        scale
-        size={ButtonSize.normal}
-        onClick={onCloseAction}
-        label={t("Common:CancelButton")}
-        testId="settings_plugin_cancel_button"
-      />
-    </div>
-  );
+export type PluginDialogProps = IModalDialogClient & {
+  isVisible: boolean;
+  dispatchMessage: PluginStore["dispatchMessage"];
 };
-
-export default Footer;

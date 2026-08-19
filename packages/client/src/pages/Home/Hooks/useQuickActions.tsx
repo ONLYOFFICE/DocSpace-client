@@ -38,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
 import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import {
@@ -189,6 +190,10 @@ export const useQuickActions = (
 
   const openChat = useOpenAiChat();
 
+  // Availability is computed by the host (Shell) and includes the portal AI
+  // switch, so the tile disappears live when an admin disables AI.
+  const isAiChatAvailable = useIsAiChatAvailable();
+
   const section = getQuickActionsSection(sectionFlags);
 
   const aiChatItems = React.useMemo<QuickActionItem>(
@@ -237,8 +242,11 @@ export const useQuickActions = (
   );
 
   const fileItems = React.useMemo<QuickActionItem[]>(
-    () => [...createFileTiles, aiChatItems],
-    [createFileTiles, aiChatItems],
+    () => [
+      ...createFileTiles,
+      ...(isAiChatAvailable ? [aiChatItems] : []),
+    ],
+    [createFileTiles, aiChatItems, isAiChatAvailable],
   );
 
   const roomItems = React.useMemo<QuickActionItem[]>(
@@ -283,9 +291,9 @@ export const useQuickActions = (
         label: t("Files:RoomTemplate"),
         onClick: () => goTemplates(userId),
       },
-      aiChatItems,
+      ...(isAiChatAvailable ? [aiChatItems] : []),
     ],
-    [t, currentFolderId, userId, aiChatItems],
+    [t, currentFolderId, userId, aiChatItems, isAiChatAvailable],
   );
 
   const formItems = React.useMemo<QuickActionItem[]>(() => {
@@ -327,7 +335,7 @@ export const useQuickActions = (
       });
     }
 
-    items.push(aiChatItems);
+    if (isAiChatAvailable) items.push(aiChatItems);
 
     return items;
   }, [
@@ -335,6 +343,7 @@ export const useQuickActions = (
     currentFolderId,
     userId,
     aiChatItems,
+    isAiChatAvailable,
     templateGalleryAvailable,
     setCreateRoomFromTemplate,
     setTemplateGalleryVisible,
@@ -368,7 +377,7 @@ export const useQuickActions = (
       });
     }
 
-    items.push(aiChatItems);
+    if (isAiChatAvailable) items.push(aiChatItems);
 
     return items;
   }, [
@@ -378,6 +387,7 @@ export const useQuickActions = (
     setTemplateGalleryVisible,
     setOformFromFolderId,
     aiChatItems,
+    isAiChatAvailable,
   ]);
 
   const agentItems = React.useMemo<QuickActionItem[]>(

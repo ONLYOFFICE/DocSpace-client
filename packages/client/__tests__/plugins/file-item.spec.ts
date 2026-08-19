@@ -99,10 +99,11 @@ test.describe("File Item Sample Plugin", () => {
     const nameCell = table.getByTestId(`files-cell-name-${PDF_ROW}`);
     await nameCell.locator(".item-file-name").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "PDF file opened:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("PDF file opened:");
     await expect(toast).toContainText("ONLYOFFICE Resume Sample.pdf");
   });
 
@@ -120,10 +121,11 @@ test.describe("File Item Sample Plugin", () => {
     const nameCell = table.getByTestId(`files-cell-name-${XLSX_ROW}`);
     await nameCell.locator(".item-file-name").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Spreadsheet file opened:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Spreadsheet file opened:");
     await expect(toast).toContainText("ONLYOFFICE Spreadsheet Sample.xlsx");
   });
 });

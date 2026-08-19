@@ -107,10 +107,11 @@ test.describe("Profile Menu Sample Plugin", () => {
 
     await page.getByTestId("profile-menu-sample-account-info").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Account info requested!" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Account info requested!");
   });
 
   // ── 3. Quick Help item click ──────────────────────────────────────────────────
@@ -124,10 +125,11 @@ test.describe("Profile Menu Sample Plugin", () => {
 
     await page.getByTestId("profile-menu-sample-quick-help").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Quick help opened!" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "info");
-    await expect(toast).toContainText("Quick help opened!");
   });
 });
 

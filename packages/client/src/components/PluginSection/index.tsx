@@ -65,6 +65,8 @@ const PluginSectionContent = ({
   const [sectionProps, setSectionProps] = useState<IBox | null>(null);
 
   const onLoadAction = useCallback(async () => {
+    setSectionProps(null);
+
     try {
       if (!item?.onLoad) return;
 

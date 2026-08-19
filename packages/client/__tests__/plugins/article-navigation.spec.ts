@@ -234,7 +234,30 @@ test.describe("Article Navigation Sample Plugin", () => {
     );
   });
 
-  // ── 6. Route guards ──────────────────────────────────────────────────────────
+  // ── 6. The updateArticleNavigationItems action ───────────────────────────────
+
+  test("The section button refreshes the item through the plugin action", async ({
+    page,
+    baseUrl,
+  }) => {
+    const pluginLoaded = page.waitForResponse(PLUGIN_REQUEST_URL);
+    await page.goto(`${baseUrl}/p/${OVERVIEW_KEY}`);
+    await pluginLoaded;
+
+    const refreshes = page.locator(`#${OVERVIEW_KEY}-card-refreshes`);
+    await expect(refreshes).toContainText("0");
+
+    await page.locator(`#${OVERVIEW_KEY}-refresh-button button`).click();
+
+    // The action makes DocSpace re-read the plugin items, so `onLoad` runs
+    // again with the new counter and the sidebar label follows the item.
+    await expect(refreshes).toContainText("1");
+    await expect(page.locator(navItem(OVERVIEW_KEY))).toContainText(
+      "Sample Overview (1)",
+    );
+  });
+
+  // ── 7. Route guards ──────────────────────────────────────────────────────────
 
   test("An unknown item key is redirected away from the plugin route", async ({
     page,

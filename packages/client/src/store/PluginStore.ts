@@ -251,6 +251,7 @@ class PluginStore {
       updateMainButtonItems: this.updateMainButtonItems,
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
+      updateArticleNavigationItems: this.updateArticleNavigationItems,
       updateFileItems: this.updateFileItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
@@ -1476,6 +1477,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualItems = new Map<string, IArticleNavigationItemClient>();
+
     for (const [key, value] of Array.from(items)) {
       const correctUserType = value.usersTypes
         ? value.usersTypes.includes(userRole)
@@ -1489,12 +1492,22 @@ class PluginStore {
 
       const icon = `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`;
 
-      this.articleNavigationItems.set(key, {
+      actualItems.set(key, {
         ...value,
         icon,
         pluginName: plugin.name,
       });
     }
+
+    Array.from(this.articleNavigationItems).forEach(([key, value]) => {
+      if (value.pluginName === plugin.name && !actualItems.has(key)) {
+        this.articleNavigationItems.delete(key);
+      }
+    });
+
+    actualItems.forEach((value, key) => {
+      this.articleNavigationItems.set(key, value);
+    });
   };
 
   deactivateArticleNavigationItems = (plugin: TPlugin) => {

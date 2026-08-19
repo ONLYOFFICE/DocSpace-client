@@ -268,6 +268,7 @@ export interface TMessageActionsParams {
   updateMainButtonItems?: PluginStore["updateMainButtonItems"];
   updateProfileMenuItems?: PluginStore["updateProfileMenuItems"];
   updateEventListenerItems?: PluginStore["updateEventListenerItems"];
+  updateArticleNavigationItems?: PluginStore["updateArticleNavigationItems"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];
   setPluginMediaViewerVisible?: PluginStore["setPluginMediaViewerVisible"];

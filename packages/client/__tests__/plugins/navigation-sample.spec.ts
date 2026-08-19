@@ -105,10 +105,11 @@ test.describe("Navigation Sample Plugin", () => {
     expect(page.url()).toContain(SHARED_WITH_ME_URL);
 
     // The navigate action fires, then the chained showToast executes.
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Navigating to Shared with me" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Navigating to Shared with me");
   });
 
   // ── 2. Actions.openInfoPanel ──────────────────────────────────────────────────

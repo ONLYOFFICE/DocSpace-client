@@ -114,7 +114,9 @@ test.describe("PostMessage Plugin — IPostMessagePlugin via profile menu", () =
     });
 
     // onClick fires a success toast.
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "PostMessage received" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
   });
@@ -146,7 +148,9 @@ test.describe("PostMessage Plugin — IPostMessagePlugin via profile menu", () =
     await sendBtn.click();
 
     // onClick fires a success toast.
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "PostMessage received" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
   });

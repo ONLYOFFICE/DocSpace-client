@@ -248,8 +248,15 @@ export const buildContextOptions = (
       "stop-filling",
     ];
 
+    // `security.AskAi` is server-computed at fetch time, so an already-loaded
+    // list keeps stale `true` values after an admin disables AI portal-wide —
+    // check the live switch as well.
     const noAskAi =
-      !item?.security?.AskAi || isPrivacyFolder || item.private || isEncrypted;
+      !item?.security?.AskAi ||
+      !deps.settingsStore.aiServicesEnabled ||
+      isPrivacyFolder ||
+      item.private ||
+      isEncrypted;
 
     if (noAskAi) {
       fileOptions = removeOptions(fileOptions, ["ask-ai", "separator6"]);

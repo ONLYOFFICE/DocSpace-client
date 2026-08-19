@@ -158,7 +158,7 @@ const PasswordStrength = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!isLoaded || !passwordSettings) return;
+    if (!isLoaded || !passwordSettings || isSaving) return;
     const currentSettings = getFromSessionStorage("currentPasswordSettings");
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
 

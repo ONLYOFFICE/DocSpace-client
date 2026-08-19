@@ -89,10 +89,11 @@ test.describe("Media Viewer Sample Plugin", () => {
     const nameCell = table.getByTestId(`files-cell-name-${MP4_ROW}`);
     await nameCell.locator(".item-file-name").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Media viewer loaded" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "info");
-    await expect(toast).toContainText("Media viewer loaded");
   });
 
   test("Clicking a JPG file opens the media viewer", async ({
@@ -127,10 +128,11 @@ test.describe("Media Viewer Sample Plugin", () => {
     const nameCell = table.getByTestId(`files-cell-name-${JPG_ROW}`);
     await nameCell.locator(".item-file-name").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Image viewer loaded" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Image viewer loaded");
   });
 
   // Navigation: playlistFilter includes both .mp4 and .jpg so the playlist has

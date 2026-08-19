@@ -57,6 +57,7 @@ import type {
   IFrame,
   IImage,
   ICreateDialog,
+  IModalDialog,
   IContextMenuPlugin,
   IEventListenerPlugin,
   IFilePlugin,
@@ -74,6 +75,8 @@ import type {
   IMediaViewer,
 } from "@onlyoffice/docspace-plugin-sdk";
 
+import type PluginStore from "SRC_DIR/store/PluginStore";
+
 import type {
   PluginDevices,
   PluginFileType,
@@ -90,6 +93,7 @@ export type {
   IFrame,
   IImage,
   ICreateDialog,
+  IModalDialog,
   ButtonGroup as TButtonGroup,
 };
 
@@ -108,6 +112,20 @@ export type {
 export interface IFloatingOperationsButtonClient
   extends IFloatingOperationsButton {
   pluginName: string;
+}
+
+type TModalDialogEventListener = NonNullable<
+  IModalDialog["eventListeners"]
+>[number];
+
+export interface IModalDialogClient
+  extends Omit<IModalDialog, "eventListeners"> {
+  pluginName: string;
+  eventListeners?: (Omit<TModalDialogEventListener, "onAction"> & {
+    onAction: (
+      event: Event,
+    ) => Promise<IMessage> | Promise<void> | IMessage | void;
+  })[];
 }
 
 export interface IContextMenuItemClient
@@ -217,3 +235,33 @@ export type TPlugin = {
   Partial<ISettingsPlugin> &
   Partial<IPostMessagePlugin> &
   Partial<IArticleButtonPlugin>;
+
+export interface TMessageActionsParams {
+  message: IMessage;
+  pluginName: string;
+  setElementProps?: (props: NonNullable<IMessage["newProps"]>) => void;
+  updatePropsContext?: (
+    contextProps: NonNullable<IMessage["contextProps"]>,
+  ) => void;
+  updateCreateDialogProps?: (
+    props: NonNullable<IMessage["createDialogProps"]>,
+  ) => void;
+  setSettingsPluginDialogVisible?: PluginStore["setSettingsPluginDialogVisible"];
+  updatePluginStatus?: PluginStore["updatePluginStatus"];
+  setPluginDialogVisible?: PluginStore["setPluginDialogVisible"];
+  setPluginDialogProps?: PluginStore["setPluginDialogProps"];
+  setPluginSelectorVisible?: PluginStore["setPluginSelectorVisible"];
+  setPluginSelectorProps?: PluginStore["setPluginSelectorProps"];
+  addPluginFloatingOperations?: PluginStore["addPluginFloatingOperations"];
+  removePluginFloatingOperations?: PluginStore["removePluginFloatingOperations"];
+  updatePluginFloatingOperations?: PluginStore["updatePluginFloatingOperations"];
+  updateContextMenuItems?: PluginStore["updateContextMenuItems"];
+  updateInfoPanelItems?: PluginStore["updateInfoPanelItems"];
+  updateMainButtonItems?: PluginStore["updateMainButtonItems"];
+  updateProfileMenuItems?: PluginStore["updateProfileMenuItems"];
+  updateEventListenerItems?: PluginStore["updateEventListenerItems"];
+  updateFileItems?: PluginStore["updateFileItems"];
+  updatePlugin?: PluginStore["updatePlugin"];
+  setPluginMediaViewerVisible?: PluginStore["setPluginMediaViewerVisible"];
+  setPluginMediaViewerProps?: PluginStore["setPluginMediaViewerProps"];
+}

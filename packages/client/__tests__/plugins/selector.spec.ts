@@ -181,10 +181,11 @@ test.describe("Selector Plugin", () => {
     // Click Option A — the onSelect callback fires and shows an info toast.
     await page.getByTestId("selector-item-0").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Focused: option-a" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "info");
-    await expect(toast).toContainText("Focused: option-a");
   });
 
   // ── 2. File selector ─────────────────────────────────────────────────────────
@@ -236,10 +237,11 @@ test.describe("Selector Plugin", () => {
     // Click the first item — onSelect fires with its id and shows an info toast.
     await page.getByTestId("selector-item-0").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Navigated to:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "info");
-    await expect(toast).toContainText("Navigated to:");
   });
 
   test("File selector: Cancel closes the selector", async ({
@@ -299,10 +301,11 @@ test.describe("Selector Plugin", () => {
     // Submit — onSubmit fires with selectedIds, toast and close follow.
     await page.getByTestId("selector_submit_button").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Rooms selected:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Rooms selected:");
     await expect(page.getByTestId("aside")).not.toBeVisible();
   });
 
@@ -348,10 +351,11 @@ test.describe("Selector Plugin", () => {
     await page.getByTestId("selector-item-0").click();
     await page.getByTestId("selector_submit_button").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Groups selected:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Groups selected:");
     await expect(page.getByTestId("aside")).not.toBeVisible();
   });
 
@@ -424,10 +428,11 @@ test.describe("Selector Plugin", () => {
     await page.getByTestId("selector-item-0").click();
     await page.getByTestId("selector_submit_button").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Users selected:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Users selected:");
     await expect(page.getByTestId("aside")).not.toBeVisible();
   });
 

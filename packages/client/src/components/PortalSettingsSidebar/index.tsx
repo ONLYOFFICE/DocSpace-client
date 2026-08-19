@@ -201,6 +201,9 @@ const PortalSettingsSidebar = ({
         id: String(item.key),
         label: mapLabel(item.tKey),
         icon: getCatalogIconUrlByType(item.type, { isSettingsCatalog: true }),
+        // linkData renders the item as a real router link, so right-click /
+        // Ctrl-click / middle-click can open the section in a new tab.
+        linkData: { path },
         onClick: () => navigate(path),
       };
     });

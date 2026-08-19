@@ -375,11 +375,12 @@ const PluginComponentBase = inject(
           }
 
           case PluginComponents.iFrame: {
-            const { style, ...frameRest } = elementProps as IFrame;
+            const { style, src, ...frameRest } = elementProps as IFrame;
             return (
               <iframe
                 title={PLUGIN_IFRAME_TITLE}
                 {...frameRest}
+                src={src || undefined}
                 style={{
                   minHeight: "100%",
                   border: "none",
@@ -390,11 +391,12 @@ const PluginComponentBase = inject(
           }
 
           case PluginComponents.img: {
-            const { alt, style, ...restProps } = elementProps as IImage;
+            const { alt, style, src, ...restProps } = elementProps as IImage;
 
             return (
               <img
                 {...restProps}
+                src={src || undefined}
                 alt={alt ?? "Plugin"}
                 style={style as React.CSSProperties}
               />

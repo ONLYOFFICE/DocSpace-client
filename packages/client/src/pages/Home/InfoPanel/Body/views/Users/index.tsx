@@ -206,6 +206,7 @@ const Users = ({
 				size={ComboBoxSize.content}
 				displaySelectedOption
 				modernView
+				fillIcon
 				manualWidth="auto"
 				isLoading={isLoading}
 			/>

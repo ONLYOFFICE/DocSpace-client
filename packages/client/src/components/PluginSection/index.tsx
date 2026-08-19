@@ -75,6 +75,8 @@ const PluginSectionContent = ({
       if (section) {
         setSectionProps({ ...section });
       }
+    } catch (e) {
+      console.error(e);
     } finally {
       window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
     }
@@ -95,10 +97,6 @@ const PluginSectionContent = ({
         component: PluginComponents.box,
         props: sectionProps ?? item.section,
       }}
-      saveButton={undefined}
-      setSaveButtonProps={undefined}
-      setModalRequestRunning={undefined}
-      modalRequestRunning={undefined}
     />
   );
 };

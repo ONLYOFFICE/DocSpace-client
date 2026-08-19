@@ -636,9 +636,11 @@ const PureHome = observer((props) => {
   const isErrorAvailable =
     isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
 
+  const isPluginSection = isPluginPage();
+
   return (
     <>
-      {isSettingsPage || isPluginPage() ? null : isContactsPage || isProfile ? (
+      {isSettingsPage || isPluginSection ? null : isContactsPage || isProfile ? (
         <>
           <AccountsDialogs />
           {isProfile ? null : <ContactsSelectionArea />}
@@ -650,7 +652,7 @@ const PureHome = observer((props) => {
           <SectionTours />
         </>
       )}
-      {isPluginPage() ? null : (
+      {isPluginSection ? null : (
         <>
           <MediaViewer />
           <UploadFileInputs />
@@ -673,7 +675,7 @@ const PureHome = observer((props) => {
           scrollableBanner={showQuickActions}
           stickyTableHeader={showQuickActions}
         >
-          {!isPluginPage() &&
+          {!isPluginSection &&
           (!isErrorAvailable ||
             isContactsPage ||
             isProfile ||
@@ -692,7 +694,7 @@ const PureHome = observer((props) => {
             <SectionWarningContent />
           </Section.SectionWarning>
 
-          {!isPluginPage() &&
+          {!isPluginSection &&
           !isChat &&
           !isErrorAvailable &&
           !isDisabledKnowledge &&
@@ -741,6 +743,7 @@ const PASS_THROUGH_PREFIXES = [
   "/accounts",
   "/contacts",
   "/developer-tools",
+  "/p",
   "/portal-settings",
   "/profile",
 ];

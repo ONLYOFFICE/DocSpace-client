@@ -56,6 +56,7 @@ import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
 } from "@docspace/ui-kit/ai-agent/providers/themes";
+import { getAiAccessSettings } from "@docspace/shared/api/settings";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
@@ -144,6 +145,9 @@ const Shell = ({ page = "home", ...rest }) => {
     isRoomAdmin,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
+    fetchTreeFolders,
+    aiServicesEnabled,
+    setAiServicesEnabled,
     fetchWalletBalance,
     setWalletLowBalance,
     agentEntityId,
@@ -265,6 +269,10 @@ const Shell = ({ page = "home", ...rest }) => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-ai-config",
     });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-ai-access-settings",
+    });
   }, []);
 
   useEffect(() => {
@@ -363,6 +371,34 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper?.off(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
     };
   }, [getAIConfig]);
+
+  // Admin toggled the portal AI switch: refresh the switch value, the AI
+  // config and the folders tree so the AI Agents section and the AI entry
+  // points (chat button, Ask AI) appear/disappear for everyone without a
+  // page reload (the nav item is rendered from the tree, so refetching the
+  // config alone leaves a stale entry behind).
+  useEffect(() => {
+    const handleAiAccessChanged = async () => {
+      try {
+        const { enabled } = await getAiAccessSettings();
+        setAiServicesEnabled?.(enabled);
+      } catch (e) {
+        console.error(e);
+      }
+
+      getAIConfig?.();
+      fetchTreeFolders?.();
+    };
+
+    SocketHelper?.on(SocketEvents.ChangeAiAccessSettings, handleAiAccessChanged);
+
+    return () => {
+      SocketHelper?.off(
+        SocketEvents.ChangeAiAccessSettings,
+        handleAiAccessChanged,
+      );
+    };
+  }, [getAIConfig, fetchTreeFolders, setAiServicesEnabled]);
 
   // The quota room is shared by every user, but the balance is admin-only data:
   // the settings response exposes walletLowBalance to admins alone, so the socket
@@ -698,6 +734,7 @@ const Shell = ({ page = "home", ...rest }) => {
     !location.pathname.includes("settings/plugins");
 
   const isAiChatAvailable =
+    aiServicesEnabled &&
     currentClientView !== "users" &&
     currentClientView !== "groups" &&
     currentClientView !== "profile" &&
@@ -1038,6 +1075,9 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      fetchTreeFolders: treeFoldersStore.fetchTreeFolders,
+      aiServicesEnabled: settingsStore.aiServicesEnabled,
+      setAiServicesEnabled: settingsStore.setAiServicesEnabled,
       isAIReady: paymentStore.isAIReady,
       fetchWalletBalance: paymentStore.fetchWalletBalance,
       setWalletLowBalance: settingsStore.setWalletLowBalance,

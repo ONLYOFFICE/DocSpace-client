@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   colorThemeHandler,
   licenseQuotaHandler,
@@ -114,7 +115,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "ee-trial.png",
@@ -142,7 +143,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "ee-trial-expired.png",
@@ -170,7 +171,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "ee-time-limited.png",
@@ -198,7 +199,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "ee-time-limited-grace-period.png",
@@ -231,7 +232,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "ee-lifetime.png",
@@ -259,7 +260,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "ee-lifetime-expired.png",
@@ -289,7 +290,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "de-time-limited.png",
@@ -317,7 +318,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "de-time-limited-grace-period.png",
@@ -351,7 +352,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "de-lifetime.png",
@@ -379,7 +380,7 @@ test.describe("Standalone payments", () => {
 
         await expect(page.getByTestId("standalone-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "standalone-payments",
           "de-lifetime-expired.png",
@@ -407,7 +408,7 @@ test.describe("Standalone payments", () => {
 
       await expect(page.getByTestId("bonus")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "standalone-payments",
         "community.png",
@@ -443,7 +444,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "month-payer-view.png",
@@ -476,7 +477,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "month-owner-view.png",
@@ -509,7 +510,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "month-owner-view-without-payer.png",
@@ -542,7 +543,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "month-admin-view.png",
@@ -575,7 +576,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "month-admin-view-without-payer.png",
@@ -610,7 +611,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "year-payer-view.png",
@@ -643,7 +644,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "year-owner-view.png",
@@ -676,7 +677,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "year-owner-view-without-payer.png",
@@ -709,7 +710,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "year-admin-view.png",
@@ -742,7 +743,7 @@ test.describe("SaaS payments", () => {
         await expect(page.getByTestId("payments-loader")).toHaveCount(0);
         await expect(page.getByTestId("saas-page")).toBeVisible();
 
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "saas-business-payments",
           "year-admin-view-without-payer.png",

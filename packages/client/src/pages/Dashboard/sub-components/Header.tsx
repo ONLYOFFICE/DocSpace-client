@@ -70,16 +70,20 @@ import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments
 
 import styles from "../Dashboard.module.scss";
 
+const STANDALONE_PAYMENTS_ROUTE = "/portal-settings/payments/portal-payments";
+
 type HeaderProps = {
   isFreeTariff?: boolean;
   paymentDate?: string;
   isAdminOrOwner?: boolean;
+  standalone?: boolean;
 };
 
 const Header = ({
   isFreeTariff = true,
   paymentDate = "",
   isAdminOrOwner = false,
+  standalone = false,
 }: HeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
@@ -107,7 +111,13 @@ const Header = ({
           className={styles.planLink}
           color="accent"
           type={LinkType.action}
-          onClick={() => navigate(PAYMENT_ROUTES.portalPayments)}
+          onClick={() =>
+            navigate(
+              standalone
+                ? STANDALONE_PAYMENTS_ROUTE
+                : PAYMENT_ROUTES.portalPayments,
+            )
+          }
           isHovered
         >
           {isFreeTariff
@@ -122,11 +132,17 @@ const Header = ({
 };
 
 const HeaderConnected = inject<TStore>(
-  ({ userStore, currentQuotaStore, currentTariffStatusStore }) => ({
+  ({
+    userStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+    settingsStore,
+  }) => ({
     isFreeTariff: currentQuotaStore.isFreeTariff,
     paymentDate: currentTariffStatusStore.paymentDate,
     isAdminOrOwner:
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
+    standalone: settingsStore.standalone,
   }),
 )(observer(Header));
 

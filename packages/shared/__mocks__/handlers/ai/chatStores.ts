@@ -153,6 +153,70 @@ export const aiChatThreadsListHandler = (port: string) =>
     HttpResponse.json([]),
   );
 
+/** `GET /api/2.0/ai/prompts/list` — no saved prompts. */
+export const aiChatPromptsListHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/prompts/list`, () =>
+    HttpResponse.json([]),
+  );
+
+/** `GET /api/2.0/ai/prompts/list-folders` — no prompt folders. */
+export const aiChatPromptsFoldersHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/prompts/list-folders`, () =>
+    HttpResponse.json([]),
+  );
+
+/** `GET /api/2.0/ai/tools/list-custom-servers` — no MCP servers added. */
+export const aiChatCustomServersHandler = (port: string) =>
+  http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/ai/tools/list-custom-servers`,
+    () => HttpResponse.json([]),
+  );
+
+/** `GET /api/2.0/ai/tools/list-system-tools` — no built-in tools offered. */
+export const aiChatSystemToolsHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/tools/list-system-tools`, () =>
+    HttpResponse.json([]),
+  );
+
+/** `GET /api/2.0/ai/tools/get-disabled` — nothing switched off. */
+export const aiChatDisabledToolsHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/tools/get-disabled`, () =>
+    HttpResponse.json([]),
+  );
+
+/** `GET /api/2.0/ai/web-search/is-configured` — web search left unset. */
+export const aiChatWebSearchConfiguredHandler = (port: string) =>
+  http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/ai/web-search/is-configured`,
+    () => HttpResponse.json(false),
+  );
+
+/**
+ * Every read the chat library makes while it boots, answered with an empty
+ * portal: no models, no threads, no prompts, no tools.
+ *
+ * The library hydrates its stores on mount on *every* page, not only where
+ * the chat is on screen, and it raises a toast for each read it cannot parse
+ * - so without these an unrelated spec meets a stack of "An unexpected error
+ * occurred" toasts (the static server answers an unmocked route with
+ * `index.html`) and any `getByTestId("toast-content")` in it turns into a
+ * strict-mode violation. They belong in `aiHandlers`, i.e. on by default, and
+ * a spec that needs a configured portal overrides them with
+ * `aiChatStoreHandlers`.
+ */
+export const aiChatEmptyStoreHandlers = (port: string) => [
+  aiChatProfilesListHandler(port, { profiles: [] }),
+  aiChatAssignmentsHandler(port),
+  aiChatDeepModeHandler(port),
+  aiChatThreadsListHandler(port),
+  aiChatPromptsListHandler(port),
+  aiChatPromptsFoldersHandler(port),
+  aiChatCustomServersHandler(port),
+  aiChatSystemToolsHandler(port),
+  aiChatDisabledToolsHandler(port),
+  aiChatWebSearchConfiguredHandler(port),
+];
+
 /**
  * Everything the chat widget hydrates from, in one call. Pass the assignment
  * options through; the rest have no knobs worth turning per spec.

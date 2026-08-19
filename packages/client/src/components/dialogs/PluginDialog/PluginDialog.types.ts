@@ -33,18 +33,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { IMessage } from "@onlyoffice/docspace-plugin-sdk";
-
 import type { IModalDialogClient } from "SRC_DIR/helpers/plugins/types";
 import type PluginStore from "SRC_DIR/store/PluginStore";
 
-export type TPluginDialogEventListener = {
-  name: string;
-  onAction: (evt: Event) => Promise<IMessage> | IMessage | Promise<void> | void;
-};
-
-export type PluginDialogProps = Omit<IModalDialogClient, "eventListeners"> & {
+export type PluginDialogProps = IModalDialogClient & {
   isVisible: boolean;
-  eventListeners?: TPluginDialogEventListener[];
   dispatchMessage: PluginStore["dispatchMessage"];
 };

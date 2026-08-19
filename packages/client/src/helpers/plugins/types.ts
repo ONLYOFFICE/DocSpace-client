@@ -114,8 +114,18 @@ export interface IFloatingOperationsButtonClient
   pluginName: string;
 }
 
-export interface IModalDialogClient extends IModalDialog {
+type TModalDialogEventListener = NonNullable<
+  IModalDialog["eventListeners"]
+>[number];
+
+export interface IModalDialogClient
+  extends Omit<IModalDialog, "eventListeners"> {
   pluginName: string;
+  eventListeners?: (Omit<TModalDialogEventListener, "onAction"> & {
+    onAction: (
+      event: Event,
+    ) => Promise<IMessage> | Promise<void> | IMessage | void;
+  })[];
 }
 
 export interface IContextMenuItemClient

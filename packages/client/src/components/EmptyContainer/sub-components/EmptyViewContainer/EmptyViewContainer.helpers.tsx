@@ -588,6 +588,7 @@ export const getOptions = (
         ...aiChatOption,
       ])
       .with([FolderType.Forms, P._, true], () => [])
+      .with([FolderType.Forms, P.when(isUser), P._], () => [])
       .with([FolderType.Forms, P._, P._], () => [
         createFormSpace,
         ...aiChatOption,

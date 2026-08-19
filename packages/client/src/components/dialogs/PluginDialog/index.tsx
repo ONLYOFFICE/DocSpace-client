@@ -81,8 +81,6 @@ const PluginDialog = ({
 
   const [modalRequestRunning, setModalRequestRunning] = React.useState(false);
 
-  const functionsRef = React.useRef<EventListener[]>([]);
-
   const onCloseAction = async () => {
     if (modalRequestRunning) return;
     const message = await onClose();
@@ -91,30 +89,28 @@ const PluginDialog = ({
   };
 
   React.useEffect(() => {
-    if (eventListeners) {
-      eventListeners.forEach((e) => {
-        const onAction = async (evt: Event) => {
-          setModalRequestRunning(true);
-          const message = await e.onAction(evt);
-          setModalRequestRunning(false);
+    if (!eventListeners) return;
 
-          dispatchMessage({ message, pluginName });
-        };
+    const handlers = eventListeners.map((e) => {
+      const onAction = async (event: Event) => {
+        setModalRequestRunning(true);
+        const message = await e.onAction(event);
+        setModalRequestRunning(false);
 
-        functionsRef.current.push(onAction);
+        dispatchMessage({ message, pluginName });
+      };
 
-        window.addEventListener(e.name, onAction);
-      });
-    }
+      window.addEventListener(e.name, onAction);
+
+      return onAction;
+    });
 
     return () => {
-      if (eventListeners) {
-        eventListeners.forEach((e, index) => {
-          window.removeEventListener(e.name, functionsRef.current[index]);
-        });
-      }
+      eventListeners.forEach((e, index) => {
+        window.removeEventListener(e.name, handlers[index]);
+      });
     };
-  }, []);
+  }, [eventListeners, pluginName, dispatchMessage]);
 
   const onLoadAction = React.useCallback(async () => {
     if (onLoad) {

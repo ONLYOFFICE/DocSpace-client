@@ -123,7 +123,6 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
-  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onOpenRoleMappingPanel,
@@ -340,17 +339,6 @@ const useEditorEvents = ({
             const sendTools = (data?: unknown) =>
               window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
 
-            const fireGenerationToolCall = () => {
-              if (!generationToolCallState) return;
-              connector.sendEvent("ai_onCallTool", {
-                name: generationToolCallState.toolName,
-                arguments: { ...generationToolCallState.parameters },
-              });
-              const url = new URL(window.location.href);
-              url.searchParams.delete("withTool");
-              window.history.replaceState(null, "", url.toString());
-            };
-
             // const editorOrigin = (() => {
             //   try {
             //     return config?.editorUrl
@@ -376,7 +364,6 @@ const useEditorEvents = ({
             //         routes: DEFAULT_SERVER_API_ROUTES,
             //       } satisfies ServerAPIConfig,
             //     });
-            //     fireGenerationToolCall();
             //     markAiActionsReady();
             //   });
             // } else {
@@ -422,6 +409,14 @@ const useEditorEvents = ({
                   },
                 );
 
+                // Older editor AI plugins resolve the Chat action without
+                // falling back to Default (current adapters do fall back),
+                // and generate tools silently no-op with no Chat model.
+                // Mirror the fallback here so generation works against a
+                // not-yet-updated document server.
+                if (!actions.Chat && actions.Default)
+                  actions.Chat = actions.Default;
+
                 // Placeholder config only — the real provider and its key
                 // stay on the server. The .invalid host makes the plugin's
                 // web_search/web_crawling requests travel the
@@ -448,7 +443,6 @@ const useEditorEvents = ({
                     actions,
                     webSearch,
                   });
-                  fireGenerationToolCall();
                   markAiActionsReady();
                 });
 
@@ -541,7 +535,6 @@ const useEditorEvents = ({
     checkAndRequestRoles,
     t,
     successAuth,
-    generationToolCallState,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {

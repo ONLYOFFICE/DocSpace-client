@@ -43,7 +43,6 @@ import {
   FilterType,
   FolderType,
   RoomsType,
-  SearchArea,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
@@ -72,17 +71,12 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
-import { CategoryType } from "@docspace/shared/constants";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import type {
   EmptyViewItemType,
   EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
-import FilesFilter from "@docspace/shared/api/files/filter";
-
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-
 import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
 import {
@@ -121,6 +115,7 @@ export const getDescription = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isFormsScope: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -161,6 +156,7 @@ export const getDescription = (
       standalone,
       aiReady,
       isPortalAdmin,
+      isFormsScope,
     );
 
   if (isFolder)
@@ -195,6 +191,7 @@ export const getTitle = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isFormsScope: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
@@ -215,6 +212,7 @@ export const getTitle = (
       aiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
     );
 
   if (isFolder)
@@ -404,6 +402,15 @@ export const getOptions = (
     disabled: false,
   };
 
+  const createFormSpace = {
+    title: t("EmptyView:CreateFormSpaceTitleOption"),
+    description: t("EmptyView:CreateFormSpaceDescriptionOption"),
+    icon: <CreateRoom />,
+    key: "create-form-space",
+    onClick: actions.onCreateRoom,
+    disabled: false,
+  };
+
   const createAIAgent = {
     title: t("Common:CreateAIAgentTitle"),
     description: t("Common:CreateAIAgentDescription", {
@@ -581,7 +588,11 @@ export const getOptions = (
         ...aiChatOption,
       ])
       .with([FolderType.Forms, P._, true], () => [])
-      .with([FolderType.Forms, P._, P._], () => [createRoom, ...aiChatOption])
+      .with([FolderType.Forms, P.when(isUser), P._], () => [])
+      .with([FolderType.Forms, P._, P._], () => [
+        createFormSpace,
+        ...aiChatOption,
+      ])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,
@@ -665,15 +676,7 @@ export const getOptions = (
           key: "open-chat",
           title: t("Common:CreateChat"),
           icon: <CreateChatIcon />,
-          onClick: () => {
-            const filesFilter = FilesFilter.getFilter(window.location);
-
-            filesFilter.searchArea = SearchArea.Any;
-
-            const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
-
-            window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
-          },
+          onClick: actions.onStartNewChat,
           description: t("Common:CreateChatDescription", {
             aiChat: t("Common:AIChat"),
           }),

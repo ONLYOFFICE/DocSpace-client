@@ -1,21 +1,33 @@
 {
-  "key_path": "SpaceTemplate",
-  "content": "Workspace template",
-  "content_en_sha1_hash": "e33d72e96c6a73f303fb3132a412a37d691fb5f8",
-  "created_at": "2026-08-13T14:37:09.048Z",
-  "updated_at": "2026-08-13T14:43:07.167Z",
+  "key_path": "EmptyTrash",
+  "content": "Empty trash",
+  "content_en_sha1_hash": "04382a00c149d1ed654583cc1c97378f4cbe895c",
+  "created_at": "2026-08-17T00:00:00.000Z",
+  "updated_at": "2026-08-17T17:23:21.649Z",
   "comment": {
-    "text": "Label for a quick action item used to navigate to workspace templates.",
-    "is_auto": true,
-    "updated_at": "2026-08-13T14:43:07.167Z",
-    "model": "gemma4:26b"
+    "text": "Action label for the menu item and trash badge title that permanently deletes everything in the Trash section.",
+    "is_auto": false,
+    "updated_at": "2026-08-17T00:00:00.000Z",
+    "model": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 308,
-      "context": "// one carries a testid, so the two can never collide in the DOM.\n {\n id: \"quick-form-template\",\n dataTestId: \"quick-form-space-template\",\n icon: <UseRoomTemplateIllustrationIcon />,\n label: t(\"Common:SpaceTemplate\"),\n onClick: () => goFormsTemplates(userId),\n },\n ];\n \n // The OForms gallery. There is no folder to create a form in at the Forms",
+      "file_path": "/packages/client/src/components/Article/Body/Items.js",
+      "line_number": 212,
+      "context": "labelBadge={labelBadge}\n onClickBadge={onBadgeClick}\n iconBadge={iconBadge}\n withAnimation\n badgeTitle={\n labelBadge ? \"\" : t(\"Common:EmptyTrash\")\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
+      "line_number": 110,
+      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptyTrash\"),\n onClick: self.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useHeaderContextMenu.ts",
+      "line_number": 154,
+      "context": "return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptyTrash\"),\n icon: ClearTrashReactSvgUrl,\n disabled: isEmpty || !deleteCtx?.emptyTrash,\n onClick: () => deleteCtx?.emptyTrash?.(),\n },\n {",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

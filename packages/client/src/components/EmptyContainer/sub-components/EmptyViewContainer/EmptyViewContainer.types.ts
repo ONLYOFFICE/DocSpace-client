@@ -39,6 +39,7 @@ import type {
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
+  RoomSearchArea,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -117,6 +118,8 @@ export interface InjectedEmptyViewContainerProps
   isKnowledgeTab?: boolean;
   isResultsTab?: boolean;
   isAIRoom?: boolean;
+  filterFolderType: Nullable<number[]>;
+  roomsFilterSearchArea: RoomSearchArea | string;
   isPortalAdmin: AuthStore["isAdmin"];
   aiReady?: boolean;
   standalone: SettingsStore["standalone"];
@@ -161,6 +164,7 @@ export type OptionActions = {
   onGoToAgents: () => LinkProps;
   onCreateAIAgent: VoidFunction;
   onOpenAiChat: VoidFunction;
+  onStartNewChat: VoidFunction;
   onGoToServices: VoidFunction;
   onGoToAIProviderSettings: VoidFunction;
   onTopUpAndActivateAI: VoidFunction;

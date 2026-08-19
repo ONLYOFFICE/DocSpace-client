@@ -747,10 +747,19 @@ const Shell = ({ page = "home", ...rest }) => {
   // context — the conversation itself stays in the current location.
   const [pickedAgent, setPickedAgent] = useState(null);
 
+  // Anonymous sessions (public room / public preview via a share link) and
+  // guests must never issue AI calls: they answer 401, and the shared axios
+  // client reacts to a 401 with logout + redirect to the login page, killing
+  // the public link view.
+  const canUseAi = isAuthenticated && !isGuest;
+
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
   const { actions: profilePickerActions, getAgentByRoomId } =
-    useAiAgentsPickerActions(isLoaded && isAiChatAvailable, setPickedAgent);
+    useAiAgentsPickerActions(
+      isLoaded && isAiChatAvailable && canUseAi,
+      setPickedAgent,
+    );
 
   // Re-derive the picked agent from the opened thread's persisted context:
   // agent threads restore their agent (alias + request context), plain
@@ -824,7 +833,16 @@ const Shell = ({ page = "home", ...rest }) => {
       // configured. `context` names the failing step (e.g. "profiles:init").
       onError: ({ type, error, context }) => {
         console.error(`[ai-agent] ${context ?? type} failed`, error);
-        toastr.error(t("Common:UnexpectedError"));
+        // A 403 means the user has no access to this agent/room's AI (e.g. a
+        // view-only agent opened by a non-member): every hydration read 403s
+        // at once, and the "view-only" notice already explains it, so the
+        // generic error toast is just noise (Bug 83181). The chat lib rejects
+        // with the status only in the message (`HTTP <status>`), not as a
+        // property, so the message is checked alongside the axios-style shape.
+        const status = error?.response?.status ?? error?.status;
+        const isForbidden =
+          status === 403 || /\bHTTP\s+403\b/.test(error?.message ?? "");
+        if (!isForbidden) toastr.error(t("Common:UnexpectedError"));
       },
     }),
     [t],
@@ -850,7 +868,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // mounted for useStores() consumers; only hydration and the chat
           // UI are switched off. Viewer-role gating inside agent rooms is
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
-          canUseAi={isAuthenticated && !isGuest}
+          canUseAi={canUseAi}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}

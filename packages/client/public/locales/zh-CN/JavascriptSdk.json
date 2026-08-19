@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "创建示例房间选择器嵌入",
   "CreateSampleUploader": "创建样本上传器嵌入",
   "CreateSampleViewer": "创建示例查看器嵌入",
-  "CSPDescription": "输入您想要嵌入或连接 {{organizationName}} 工作区的服务地址。",
+  "CSPDescription": "输入您想要嵌入或连接工作区的服务地址。",
   "CSPHeader": "添加此工作区的允许域名",
   "CSPHelp": "该设置是一种安全措施，可用于防范内容注入攻击。CSP 描述了安全的资源下载源。从未列在\"白名单\"中的资源下载将被阻止。指定域和与之配合的协议。",
   "CSPInfoBarDescription": "请为您的工作区启用 HTTPS 协议，以确保正确设置工作。",

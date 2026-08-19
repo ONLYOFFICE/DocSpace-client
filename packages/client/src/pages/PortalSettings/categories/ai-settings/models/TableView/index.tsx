@@ -127,9 +127,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
                   : ""
               }
               outputPrice={(() => {
-                const outputValue =
-                  m.price?.completion ??
-                  ("image" in m.price ? m.price.image : undefined);
+                const outputValue = m.price?.completion;
 
                 return outputValue != null
                   ? (formatAiModelsCurrency?.(outputValue) ?? "")

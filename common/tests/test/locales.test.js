@@ -45,6 +45,56 @@ const {
   moduleWorkspaces,
 } = require("../utils/files");
 
+// Groups of English keys that already share one value inside a namespace.
+// This baseline freezes pre-existing debt so the test only catches NEW
+// collisions; it must only ever shrink. An entry is
+// "Namespace: KeyA, KeyB" — the keys sorted alphabetically — so a third key
+// joining an allowlisted pair changes the signature and fails the test.
+const duplicateValuesAllowlist = new Set(
+  JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, "duplicate-en-values-allowlist.json"),
+      "utf8",
+    ),
+  ),
+);
+
+// Two keys in one namespace holding the same English text mean the UI offers
+// the same wording under two names and every translator pays for it twice.
+const collectEnValueCollisions = (files) => {
+  const byNamespace = new Map();
+
+  files
+    .filter((file) => file.language === "en" && file.namespace !== "BrandNames")
+    .forEach((file) => {
+      if (!byNamespace.has(file.namespace)) {
+        byNamespace.set(file.namespace, new Map());
+      }
+      const values = byNamespace.get(file.namespace);
+
+      file.translations.forEach(({ key, value }) => {
+        // empty values are EmptyValueKeysTest's business, not a collision
+        if (typeof value !== "string" || value.trim() === "") return;
+        if (!values.has(value)) values.set(value, new Set());
+        values.get(value).add(key);
+      });
+    });
+
+  const collisions = [];
+
+  byNamespace.forEach((values, namespace) => {
+    values.forEach((keys, value) => {
+      if (keys.size < 2) return;
+      collisions.push({
+        signature: `${namespace}: ${[...keys].sort().join(", ")}`,
+        value,
+      });
+    });
+  });
+
+  return collisions.sort((a, b) => a.signature.localeCompare(b.signature));
+};
+
 let workspaces = [];
 let translationFiles = [];
 let javascriptFiles = [];
@@ -528,6 +578,46 @@ describe("Locales Tests", () => {
       .join("\r\n")}`;
 
     expect(duplicatesArray.length, message).toBe(0);
+  });
+
+  it("DuplicateEnValuesTest: Verify that no two English keys inside one namespace carry the same value.", () => {
+    const collisions = collectEnValueCollisions(translationFiles);
+    const offenders = collisions.filter(
+      (collision) => !duplicateValuesAllowlist.has(collision.signature),
+    );
+
+    const message =
+      `These English keys hold the same value inside one namespace, so the ` +
+      `same wording ships under two names and every language pays to ` +
+      `translate it twice. It usually means a renamed key was kept next to ` +
+      `its replacement.\r\n` +
+      `Keep one key, point its callers at it and delete the rest. Only when ` +
+      `both keys must stay (different UI concepts that happen to read the ` +
+      `same) add the signature to duplicate-en-values-allowlist.json — the ` +
+      `baseline must only shrink.\r\n\r\n` +
+      `${offenders
+        .map((c, i) => `${i + 1}. ${c.signature}\r\n     = "${c.value}"`)
+        .join("\r\n")}`;
+
+    expect(offenders.length, message).toBe(0);
+  });
+
+  it("StaleDuplicateEnValuesAllowlist: the duplicate-value baseline only lists collisions that still exist.", () => {
+    const current = new Set(
+      collectEnValueCollisions(translationFiles).map((c) => c.signature),
+    );
+    const stale = [...duplicateValuesAllowlist].filter(
+      (signature) => !current.has(signature),
+    );
+
+    const message =
+      `These entries in duplicate-en-values-allowlist.json no longer ` +
+      `collide — the keys were merged, deleted or reworded, or another key ` +
+      `joined the group and changed its signature. Delete them from the ` +
+      `baseline (it must only shrink).\r\n\r\n` +
+      `${stale.map((signature, i) => `${i + 1}. ${signature}`).join("\r\n")}`;
+
+    expect(stale.length, message).toBe(0);
   });
 
   it("NotFoundKeysTest: Verify that all translation keys used in the JavaScript files are present in the English translation files.", () => {

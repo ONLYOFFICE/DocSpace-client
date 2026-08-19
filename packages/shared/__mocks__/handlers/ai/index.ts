@@ -45,10 +45,17 @@ import {
 import { aiProvidersDefaultHandler } from "./providersDefault";
 import {
   aiChatAssignmentsHandler,
+  aiChatCustomServersHandler,
   aiChatDeepModeHandler,
+  aiChatDisabledToolsHandler,
+  aiChatEmptyStoreHandlers,
   aiChatProfilesListHandler,
+  aiChatPromptsFoldersHandler,
+  aiChatPromptsListHandler,
   aiChatStoreHandlers,
+  aiChatSystemToolsHandler,
   aiChatThreadsListHandler,
+  aiChatWebSearchConfiguredHandler,
 } from "./chatStores";
 
 export {
@@ -62,10 +69,17 @@ export {
   aiVectorizationPutHandler,
   aiProvidersDefaultHandler,
   aiChatAssignmentsHandler,
+  aiChatCustomServersHandler,
   aiChatDeepModeHandler,
+  aiChatDisabledToolsHandler,
+  aiChatEmptyStoreHandlers,
   aiChatProfilesListHandler,
+  aiChatPromptsFoldersHandler,
+  aiChatPromptsListHandler,
   aiChatStoreHandlers,
+  aiChatSystemToolsHandler,
   aiChatThreadsListHandler,
+  aiChatWebSearchConfiguredHandler,
 };
 
 export {
@@ -85,4 +99,5 @@ export const aiHandlers = (port: string) => [
   aiRoomsChatsStreamHandler(port),
   aiVectorizationGetHandler(port),
   aiVectorizationPutHandler(port),
+  ...aiChatEmptyStoreHandlers(port),
 ];

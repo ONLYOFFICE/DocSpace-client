@@ -58,6 +58,7 @@ export const getDialogContent = (
   isAIAgentsFolderRoot,
   unsubscribe,
   isPrivacyFolder,
+  isFormSpace = false,
 ) => {
   if (!selection) return null;
 
@@ -117,10 +118,19 @@ export const getDialogContent = (
   if (isRoomDelete) {
     return isSingle ? (
       <>
-        <Trans t={t} i18nKey="DeleteRoomConfirm" ns="Common">
-          The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
-          will be permanently deleted. All data and user accesses will be lost.
-        </Trans>{" "}
+        {isFormSpace ? (
+          <Trans t={t} i18nKey="DeleteFormSpaceConfirm" ns="Common">
+            The space <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
+            will be permanently deleted. All data and user accesses will be
+            lost.
+          </Trans>
+        ) : (
+          <Trans t={t} i18nKey="DeleteRoomConfirm" ns="Common">
+            The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
+            will be permanently deleted. All data and user accesses will be
+            lost.
+          </Trans>
+        )}{" "}
         {t("Common:WantToContinue")}
       </>
     ) : (

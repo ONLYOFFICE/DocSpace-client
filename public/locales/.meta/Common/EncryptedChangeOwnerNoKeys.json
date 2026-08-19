@@ -3,7 +3,7 @@
   "content": "Cannot transfer ownership to {{user}}: they have not set up encryption keys yet. Ask them to generate keys in their profile, then try again.",
   "content_en_sha1_hash": "2750bb2b31c5f5f6992f460841b362691a3056a1",
   "created_at": "2026-05-24T17:27:26.269Z",
-  "updated_at": "2026-08-14T14:58:32.727Z",
+  "updated_at": "2026-08-17T17:23:21.737Z",
   "comment": {
     "text": "Error toast message shown when room ownership transfer fails because the recipient has not configured encryption keys. The {{user}} variable represents the name of the target user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 117,
+      "line_number": 119,
       "context": "candidate.label ||\n candidate.displayName ||\n candidate.id;\n toastr.error(\n reason === \"no-key\"\n ? t(\"Common:EncryptedChangeOwnerNoKeys\", { user: name })\n : t(\"Common:EncryptedChangeOwnerKeyMismatch\", { user: name }),\n );\n return;\n }\n }",
       "module": "/packages/client"
     },

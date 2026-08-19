@@ -3,7 +3,7 @@
   "content": "Model updated",
   "content_en_sha1_hash": "3ad0107aafb3e752b42c90a25195c8b266c9ea51",
   "created_at": "2026-08-14T16:11:17.308Z",
-  "updated_at": "2026-08-14T16:12:21.761Z",
+  "updated_at": "2026-08-17T17:23:21.773Z",
   "comment": {
     "text": "Title of a banner that appears when an AI model has been updated.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/View/ModelUpdatedBanner.tsx",
-      "line_number": 223,
+      "line_number": 239,
       "context": "{\n target: ANCHOR_SELECTOR,\n // \"end\" is logical, so the card shares the picker's trailing edge in\n // LTR and RTL alike; joyride re-places it when there is no room above.\n placement: \"top-end\",\n title: t(\"Common:AIModelUpdatedTitle\"),\n content: (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"AIModelUpdatedDescription\"",
       "module": "/packages/client"
     }

@@ -102,9 +102,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
               ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
               : "";
 
-          const outputValue =
-            m.price?.completion ??
-            ("image" in m.price ? m.price.image : undefined);
+          const outputValue = m.price?.completion;
 
           const outputPrice =
             outputValue != null

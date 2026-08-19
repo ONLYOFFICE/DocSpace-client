@@ -1,0 +1,29 @@
+{
+  "key_path": "DeleteFormSpaceTitle",
+  "content": "Delete this space?",
+  "content_en_sha1_hash": "db6d5f6b2c73e41ae0abff55b9ba7dea1f5d0be4",
+  "created_at": "2026-08-17T17:22:45.091Z",
+  "updated_at": "2026-08-17T17:28:21.466Z",
+  "comment": {
+    "text": "Dialog title used to confirm the deletion of a Form Space.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:28:21.466Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 224,
+      "context": "return `${t(\"Files:DeleteTemplateAction\")}?`;\n }\n \n if (isRoomDelete) {\n if (selection.length > 1) return t(\"Common:DeleteRoomsTitle\");\n if (isFormSpace) return t(\"Common:DeleteFormSpaceTitle\");\n return t(\"Common:DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"Common:DeleteForeverTitle\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

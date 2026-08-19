@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Create sample Room selector embed",
   "CreateSampleUploader": "Create sample Uploader embed",
   "CreateSampleViewer": "Create sample Viewer embed",
-  "CSPDescription": "Enter the address of the service where you'd like to embed or connect the {{organizationName}} workspace.",
+  "CSPDescription": "Enter the address of the service where you'd like to embed or connect the workspace.",
   "CSPHeader": "Add the allowed domains for this workspace",
   "CSPHelp": "This setting is a security mechanism that can be used to protect against content injection attacks. The CSP describes secure resource download sources. Downloading from resources not included in the `white list` is blocked. Specify the domains (together with the protocol) with which it will work.",
   "CSPInfoBarDescription": "Please enable the HTTPS protocol for your workspace to ensure the correct setup work.",

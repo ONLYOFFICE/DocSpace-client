@@ -1,9 +1,9 @@
 {
   "key_path": "PDFFormSuccessfullyCreatedDescription",
-  "content": "Your PDF form is ready to be filled out. Copy public link to start the form filling process or Invite other users to this room.",
-  "content_en_sha1_hash": "e0b80d168f5e86028d159e7def09f956b8f49d39",
+  "content": "Your PDF form is ready to be filled out. Copy public link to start the form filling process or Invite other users to this space.",
+  "content_en_sha1_hash": "484713e463429551cd36e0f6db350f093021430c",
   "created_at": "2025-05-19T21:30:53.769Z",
-  "updated_at": "2026-07-07T08:59:21.738Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
     "text": "This is a dialog description that appears after a PDF form has been successfully created, instructing the user on how to share it.",
     "is_auto": true,

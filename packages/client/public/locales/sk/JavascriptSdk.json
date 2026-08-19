@@ -23,7 +23,7 @@
   "CreateSampleRoomSelector": "Vytvoriť vzor vloženia pre Selektor miestnosti",
   "CreateSampleUploader": "Vytvoriť vzorový embed uploader",
   "CreateSampleViewer": "Vytvoriť vzor vloženia pre Viewer",
-  "CSPDescription": "Zadajte adresu služby, do ktorej chcete vložiť alebo pripojiť pracovný priestor {{organizationName}}.",
+  "CSPDescription": "Zadajte adresu služby, do ktorej chcete vložiť alebo pripojiť pracovný priestor.",
   "CSPHeader": "Pridajte povolené domény pre tento pracovný priestor.",
   "CSPHelp": "Toto nastavenie je bezpečnostný mechanizmus, ktorý sa môže použiť na ochranu pred útokmi formou vstrekovania obsahu. CSP popisuje bezpečné zdroje na sťahovanie obsahu. Sťahovanie zo zdrojov, ktoré nie sú na zozname povolených, je zablokované. Zadajte domény (spolu s protokolom), s ktorými bude pracovať.",
   "CSPInfoBarDescription": "Prosím, povoľte protokol HTTPS pre váš pracovný priestor, aby ste zabezpečili korektnú prácu nastavení.",

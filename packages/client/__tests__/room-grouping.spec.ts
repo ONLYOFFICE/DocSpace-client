@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -89,6 +90,10 @@ test.describe("Room grouping", () => {
       const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Edit room groups panel with grouping enabled and groups listed
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -124,6 +129,10 @@ test.describe("Room grouping", () => {
       const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Edit room groups panel with no groups (empty state)
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -155,7 +164,7 @@ test.describe("Room grouping", () => {
       await expect(groupTagsRow).not.toBeVisible();
 
       // Screenshot: Rooms page without grouping row when grouping is disabled
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "rooms-page-grouping-disabled.png",
@@ -203,6 +212,10 @@ test.describe("Room grouping", () => {
 
       const cancelButton = dialog.locator('button:has-text("Cancel")');
       await expect(cancelButton).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel with grouping toggled off showing Save/Cancel buttons
       await expect(dialog).toHaveScreenshot([
@@ -286,6 +299,10 @@ test.describe("Room grouping", () => {
       await expect(toggle).toBeVisible();
       await toggle.click();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Groups should appear disabled/grayed out
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -333,6 +350,10 @@ test.describe("Room grouping", () => {
       // The info bar/tooltip should be visible
       const infoBar = dialog.locator('[class*="infoBar"]');
       await expect(infoBar).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel with dismissible tooltip visible
       await expect(dialog).toHaveScreenshot([
@@ -387,6 +408,10 @@ test.describe("Room grouping", () => {
       // Tooltip should be dismissed
       await expect(infoBar).not.toBeVisible();
 
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
+
       // Screenshot: Panel after tooltip is dismissed
       await expect(dialog).toHaveScreenshot([
         "desktop",
@@ -423,7 +448,7 @@ test.describe("Room grouping", () => {
       await expect(allRoomsTag).toBeVisible();
 
       // Screenshot: Filter area with group tags row visible
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "group-tags-row-visible.png",
@@ -458,7 +483,7 @@ test.describe("Room grouping", () => {
         await secondTag.click();
 
         // Screenshot: Rooms filtered by selected group
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "rooms-filtered-by-group.png",
@@ -535,7 +560,7 @@ test.describe("Room grouping", () => {
       await page.getByTestId("create_group_tag").waitFor({ state: "visible" });
 
       // Screenshot: Tags row with Create group button (no groups)
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "create-group-button-in-tags.png",
@@ -570,7 +595,7 @@ test.describe("Room grouping", () => {
         await checkbox.click();
 
         // Screenshot: Header menu with group actions visible
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "header-menu-group-actions.png",
@@ -654,7 +679,7 @@ test.describe("Room grouping", () => {
       await expect(roomSelector).toBeVisible();
 
       // Screenshot: Room selector panel for creating a new group
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "room-selector-create-group.png",
@@ -707,7 +732,7 @@ test.describe("Room grouping", () => {
         await expect(submitButton).toBeDisabled();
 
         // Screenshot: Room selector with disabled Select button
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "room-selector-select-disabled.png",
@@ -751,6 +776,10 @@ test.describe("Room grouping", () => {
       // The "Create a new group" button should be disabled
       const createButton = dialog.getByTestId("create_new_group_button");
       await expect(createButton).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Create new group button disabled when grouping is off
       await expect(dialog).toHaveScreenshot([
@@ -802,6 +831,10 @@ test.describe("Room grouping", () => {
           .getByTestId("modal-dialog")
           .filter({ hasText: "Remove group" });
         await expect(confirmDialog).toBeVisible();
+
+        // Park the cursor: the dialog opens under it, and a row left in its
+        // hover state is a one-icon difference against the baseline.
+        await page.mouse.move(0, 0);
 
         // Screenshot: Delete group confirmation dialog
         await expect(confirmDialog).toHaveScreenshot([
@@ -906,7 +939,7 @@ test.describe("Room grouping", () => {
       await expect(roomSelector).toBeVisible();
 
       // Screenshot: Room list panel for editing group rooms
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "edit-group-room-list.png",

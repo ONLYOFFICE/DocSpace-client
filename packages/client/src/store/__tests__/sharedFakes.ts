@@ -71,6 +71,8 @@ export const fakeSettingsStore = (): FakeStore => ({
   enablePlugins: false,
   isFrame: false,
   isDesktopClient: false,
+  // Real store default; `ask-ai` context options are gated on it.
+  aiServicesEnabled: true,
 });
 
 export const fakeUserStore = (): FakeStore => ({

@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "Tyhjä vastaus",
-  "ErrorUnavailableText": "{{productName}} ei ole saatavilla"
+  "ErrorUnavailableText": "Työtila ei ole saatavilla"
 }

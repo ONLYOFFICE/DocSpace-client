@@ -30,6 +30,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 16px;
+
+    @include mixins.mobile {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
@@ -40,6 +44,14 @@
     border-radius: 12px;
     border: var(--dev-tools-card-border);
     background-color: var(--background-color);
+}
+
+.featured {
+    grid-column: span 2;
+
+    @include mixins.mobile {
+        grid-column: auto;
+    }
 }
 
 .cardIcon {

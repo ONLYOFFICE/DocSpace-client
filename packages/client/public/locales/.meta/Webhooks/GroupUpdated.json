@@ -3,17 +3,18 @@
   "content": "Group updated",
   "content_en_sha1_hash": "c13e7905dd3d91a99d06cb1d72d307870710937a",
   "created_at": "2025-05-19T21:30:49.773Z",
-  "updated_at": "2025-05-24T02:21:17.813Z",
+  "updated_at": "2026-05-15T14:00:06.833Z",
   "comment": {
-    "text": "The \"GroupUpdated\" translation key is used to display a notification when a group is updated in the PortalSettings page. This text appears as part of a confirmation message or tooltip, informing users that a change has been made to their groups.",
+    "text": "This is a toast message indicating that a group's information has been successfully modified.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:00.263Z"
+    "updated_at": "2026-04-11T21:28:46.164Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 42,
-      "context": "return t(\"UserUpdated\");\n case WebhookTriggers.UserDeleted:\n return t(\"UserDeleted\");\n case WebhookTriggers.GroupCreated:\n return t(\"GroupCreated\");\n case WebhookTriggers.GroupUpdated:\n return t(\"GroupUpdated\");\n case WebhookTriggers.GroupDeleted:\n return t(\"GroupDeleted\");\n case WebhookTriggers.FileCreated:\n return t(\"FileCreated\");",
+      "line_number": 52,
+      "context": "case WebhookTriggers.UserDeleted:\n return t(\"UserDeleted\");\n case WebhookTriggers.GroupCreated:\n return t(\"GroupCreated\");\n case WebhookTriggers.GroupUpdated:\n return t(\"GroupUpdated\");\n case WebhookTriggers.GroupDeleted:\n return t(\"GroupDeleted\");\n case WebhookTriggers.FileCreated:\n return t(\"FileCreated\");\n case WebhookTriggers.FileUploaded:",
       "module": "/packages/client"
     }
   ],
@@ -148,18 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"පක්ෂය යාවත්කාලීන කරන ලදී\" (pakshaya yavatkaalina karan ladee) literally translates to 'Party updated'. 'Group' is a broader term than 'party' and might not accurately reflect the intended meaning of 'Group updated' in the context of webhooks.",
-          "suggestion": "Consider a more general term for 'group' in Sinhala, such as \"මණ්ඩලය යාවත්කාලීන කරන ලදී\" (mandhalaya yavatkaalina karan ladee) or \"විළුකුල යාවත්කාලීන කරන ලදී\" (vilukulaya yavatkaalina karan ladee). The most appropriate translation depends on the specific context of the webhook."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -205,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

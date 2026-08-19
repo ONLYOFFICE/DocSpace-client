@@ -3,17 +3,18 @@
   "content": "Host",
   "content_en_sha1_hash": "3960ec4ca5fb5e5d8cdb2cc1c5121c003e426517",
   "created_at": "2025-05-19T21:30:53.301Z",
-  "updated_at": "2025-12-09T12:12:27.330Z",
+  "updated_at": "2026-05-15T14:00:06.854Z",
   "comment": {
-    "text": "This translation key represents the label for a \"Host\" authentication method in an SMTP settings section of a portal's login interface. It is used to display the term \"Host\" in the UI.",
+    "text": "This is a label for a text input field where users enter the hostname for SMTP server settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:00.607Z"
+    "updated_at": "2026-04-11T21:21:07.795Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 126,
-      "context": "isDisabled={isLoading}\n dataTestId=\"smtp_auth_toggle_button\"\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">\n <Text {...commonTextProps}>{t(\"HostLogin\")}</Text>\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <TextInput",
+      "line_number": 188,
+      "context": ");\n \n return (\n <StyledComponent>\n <div className=\"smtp-settings_title\">\n <Text {...commonTextProps}>{t(\"Host\")}</Text>\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <TextInput",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ev sahibi\" literally means \"House owner.\" While it can sometimes be used metaphorically, in the context of SMTPSettings:Host, it's not the correct translation for \"Host.\" It implies a physical house, not a server or email server.",
-          "suggestion": "The correct translation for \"Host\" in this context is likely \"Server\" or \"Qonaq\".  Depending on the specific use case (email server vs. general server), one may be more appropriate than the other.  If a more generic term is needed, \"Xidmət\" (Service) could also be considered."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Hostitel' is a valid Czech word, it doesn't perfectly capture the meaning of 'Host' in the context of SMTPSettings. 'Host' in this context refers to the server address.",
-          "suggestion": "Considering the context of SMTPSettings, 'Server' or 'Hostname' might be more accurate translations. Alternatively, keeping 'Host' is acceptable if users are familiar with the English term."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -69,13 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation \"Κεντρικός υπολογιστής\" (Kentrikós ypologistís) translates to 'Main Computer'. While technically related to a server, it's not the direct equivalent of 'Host' in the context of SMTPSettings. 'Host' in this context refers to the server name or address.",
-          "suggestion": "A more accurate translation would be something like \"Διακομιστής\" (Diakomistís) which translates to 'Server', or \"Φιλοξενητής\" (Filoxenitís) which translates to 'Host'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,25 +82,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հյուրընկալող\" (Hyurənkaloġ) translates to 'host' or 'entertainer', but in the context of SMTPSettings:Host, it's referring to the hostname or server address. A more accurate translation would be something like 'արտոնություն' (artonəut’yun) which means 'permission' or 'authority', or a direct transliteration like 'Հոսթ' (Host).",
-          "suggestion": "արտոնություն (artonəut’yun) or Հոսթ (Host)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Dominio\" for \"Host\" in the context of SMTPSettings is not ideal. While \"Dominio\" can mean domain, \"Host\" in this context refers to the server hostname.",
-          "suggestion": "Consider \"Server\" or \"Hostname\" as a more accurate translation depending on the desired level of technicality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Hosts' is the plural form. The English 'Host' refers to a single server. The translation should reflect this.",
-          "suggestion": "Serveris"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -184,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -237,13 +202,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'主机' (zhuji) generally translates to 'host' in the context of a server or computing environment. While it can sometimes be used for 'host' in other contexts, '主机' might be overly technical for configuration settings. A more appropriate translation might be '服务器地址' (fuwuyuan dizhi) for 'Host' in this SMTPSettings context, or simply '服务器' (fuwuyuan).",
-          "suggestion": "Consider '服务器地址' (fuwuyuan dizhi) or '服务器' (fuwuyuan) for a more accurate and less technical translation depending on the target audience and surrounding context."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

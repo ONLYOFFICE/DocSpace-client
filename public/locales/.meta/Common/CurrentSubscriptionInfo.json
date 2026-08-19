@@ -1,0 +1,29 @@
+{
+  "key_path": "CurrentSubscriptionInfo",
+  "content": "Current subscription: {{amount}}/month ({{info}})",
+  "content_en_sha1_hash": "455c517457c40d1d23aed1ecf4ce00303c7b0b9d",
+  "created_at": "2026-07-27T13:07:05.065Z",
+  "updated_at": "2026-08-05T16:32:00.366Z",
+  "comment": {
+    "text": "A descriptive text label in the billing section displaying active plan details, where {{amount}} is the formatted monthly price and {{info}} contains supplementary subscription information.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:39:33.287Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 203,
+      "context": "if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }\n \n if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {\n return t(\"CurrentSubscriptionInfo\", {\n amount: formatWalletCurrency(\n calculateTotalPrice(\n currentStoragePlanSize!,\n storagePriceIncrement,\n ),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

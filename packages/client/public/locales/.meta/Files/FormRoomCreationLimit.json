@@ -1,19 +1,20 @@
 {
   "key_path": "FormRoomCreationLimit",
-  "content": "Creation based on several files and folders is not available for this type of room. To create such a room, go to the {{sectionName}} section or use one of the PDF forms.",
-  "content_en_sha1_hash": "04390f074403148046bbe6a9ceb367130918e5f4",
+  "content": "Creation based on several files and folders is not available for this type of space. To create such a space, go to the {{sectionName}} section or use one of the PDF forms.",
+  "content_en_sha1_hash": "4aabd0c384dd216be0d4bd4ba97a52a0317b8b74",
   "created_at": "2025-06-02T10:19:22.921Z",
-  "updated_at": "2025-12-17T07:49:07.760Z",
+  "updated_at": "2026-08-17T19:42:56.947Z",
   "comment": {
-    "text": "This translation key is used to display a tooltip message indicating that file-based room creation is not available for certain types of rooms, directing users to alternative options in the \"Rooms\" section or using PDF forms. It appears on a dialog component, specifically on a button or option related to room type selection.",
+    "text": "This is a tooltip that appears when a user tries to create a room based on multiple files/folders, but the selected room type doesn't support it. It informs the user about alternative methods, with `{{sectionName}}` being a placeholder for the name of a section in the application.",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:21:47.053Z"
+    "updated_at": "2026-04-11T21:09:27.939Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
-      "line_number": 62,
-      "context": "}\n \n setRoomType(roomType);\n };\n \n const tooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n return (\n <div className={styles.roomTypeList}>",
+      "line_number": 89,
+      "context": "}\n \n setRoomType(roomType);\n };\n \n const formRoomTooltipContent = t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const publicRoomTooltipContent = t(\"Common:PublicRoomCreationDisabled\");",
       "module": "/packages/client"
     }
   ],
@@ -23,6 +24,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     }
   }
 }

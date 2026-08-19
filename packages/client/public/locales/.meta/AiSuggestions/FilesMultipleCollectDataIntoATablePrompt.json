@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesMultipleCollectDataIntoATablePrompt",
+  "content": "Extract comparable data from the selected files and combine it into one structured table. If this information is not provided, ask me for the fields or columns to include and the preferred output format.",
+  "content_en_sha1_hash": "55fec01a2bd685ef2d14eb4bda3e521568a116e0",
+  "created_at": "2026-08-04T09:58:55.120Z",
+  "updated_at": "2026-08-05T18:11:40.564Z",
+  "comment": {
+    "text": "Instructional prompt for an AI assistant that appears when a user selects the option to extract data from multiple files into a single table, providing guidance on how to handle missing parameters.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:11:40.564Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 412,
+      "context": "name: t(\"AiSuggestions:FilesMultipleCreateACombinedReport\"),\n prompt: t(\"AiSuggestions:FilesMultipleCreateACombinedReportPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCollectDataIntoATable\"),\n prompt: t(\"AiSuggestions:FilesMultipleCollectDataIntoATablePrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesMultipleCompareSelectedFiles\"),\n prompt: t(\"AiSuggestions:FilesMultipleCompareSelectedFilesPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

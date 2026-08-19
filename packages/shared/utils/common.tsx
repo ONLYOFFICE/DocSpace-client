@@ -1,39 +1,48 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import type { Location } from "react-router";
 import find from "lodash/find";
 import { findWindows } from "windows-iana";
+import { getCultureLabel } from "../constants/cultures";
 import {
   parseToDateTime,
   startOf,
   dateDiffAbs,
 } from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
-import type { I18nextProviderProps } from "react-i18next";
 import resizeImage from "resize-image";
 import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
 import { sha256 } from "@noble/hashes/sha2.js";
@@ -66,8 +75,6 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 
-import { flagsIcons } from "./image-flags";
-
 import { parseAddress } from "./email";
 
 import {
@@ -78,6 +85,7 @@ import {
   EmployeeType,
   EmployeeTypeString,
   UrlActionType,
+  RoomsTypePrivate,
 } from "../enums";
 import {
   CategoryType,
@@ -117,8 +125,6 @@ export const desktopConstants = Object.freeze({
 });
 
 let timer: null | ReturnType<typeof setTimeout> = null;
-type I18n = I18nextProviderProps["i18n"];
-
 export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
   return currentLng
     ? i18n.language !== currentLng
@@ -349,9 +355,7 @@ export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
     case EmployeeType.Owner:
       return t("Common:Owner");
     case EmployeeType.Admin:
-      return t("Common:PortalAdmin", {
-        productName: t("Common:ProductName"),
-      });
+      return t("Common:PortalAdmin");
     case EmployeeType.RoomAdmin:
       return t("Common:RoomAdmin");
     case EmployeeType.User:
@@ -418,25 +422,27 @@ export function toCommunityHostname(hostname: string) {
 export function getProviderLabel(provider: string, t: (key: string) => string) {
   switch (provider) {
     case "apple":
-      return t("Common:ProviderApple");
+      return getBrandName("ProviderApple");
     case "google":
-      return t("Common:ProviderGoogle");
+      return getBrandName("ProviderGoogle");
     case "facebook":
-      return t("Common:ProviderFacebook");
+      return getBrandName("ProviderFacebook");
     case "twitter":
-      return t("Common:ProviderTwitter");
+      return getBrandName("ProviderTwitter");
     case "linkedin":
-      return t("Common:ProviderLinkedIn");
+      return getBrandName("ProviderLinkedIn");
     case "microsoft":
-      return t("Common:ProviderMicrosoft");
+      return getBrandName("ProviderMicrosoft");
     case "sso":
-      return t("Common:SSO");
+      return getConstName("SSO");
     case "zoom":
-      return t("Common:ProviderZoom");
+      return getBrandName("ProviderZoom");
     case "weixin":
-      return t("Common:ProviderWechat");
+      return getBrandName("ProviderWechat");
     case "sso-full":
       return t("Common:ProviderSsoSetting");
+    case "nextcloud":
+      return getBrandName("Nextcloud");
     default:
       return "";
   }
@@ -485,6 +491,10 @@ export function getProviderTranslation(
       return signUp
         ? t("Common:SignUpWithWechat")
         : t("Common:SignInWithWechat");
+    case "nextcloud":
+      return signUp
+        ? t("Common:SignUpWithNextcloud")
+        : t("Common:SignInWithNextcloud");
     default:
       return "";
   }
@@ -582,7 +592,7 @@ export function convertLanguage(key: string) {
   }
 }
 
-export function convertToLanguage(key: string) {
+export function convertToLanguage(key?: string) {
   if (!key) return;
 
   const splittedKey = key.split("-");
@@ -642,12 +652,16 @@ export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
 
-export const frameCallbackData = (methodReturnData: unknown) => {
+export const frameCallbackData = (
+  methodReturnData: unknown,
+  callId?: number,
+) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onMethodReturn",
       frameId: getFrameId(),
       methodReturnData,
+      ...(callId !== undefined && { callId }),
     }),
     "*",
   );
@@ -679,51 +693,35 @@ export const frameCallCommand = (
   );
 };
 
-// Done in a similar way to server code
-// https://github.com/ONLYOFFICE/DocSpace-server/blob/master/common/ASC.Common/Utils/CommonFileSizeComment.cs
-export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
-  const power = Math.floor(Math.log(bytes) / Math.log(1024));
-  return power <= maxPower ? power : maxPower;
-};
+export {
+  getPowerFromBytes,
+  getSizeFromBytes,
+  getConvertedSize,
+  calculateTotalPrice,
+  truncateNumberToFraction,
+  formatCurrencyValue,
+} from "@docspace/ui-kit/billing/utils/common";
 
-export const getSizeFromBytes = (bytes: number, power: number) => {
-  const size = bytes / 1024 ** power;
-  const truncateToTwo = Math.trunc(size * 100) / 100;
-
-  return truncateToTwo;
-};
-
-export const getConvertedSize = (
-  t: (key: string) => string,
-  bytes: number,
-  withoutSizeName: boolean = false,
-) => {
-  let power = 0;
-  let resultSize = bytes;
-
-  const sizeNames = [
-    t("Common:Bytes"),
-    t("Common:Kilobyte"),
-    t("Common:Megabyte"),
-    t("Common:Gigabyte"),
-    t("Common:Terabyte"),
-    t("Common:Petabyte"),
-    t("Common:Exabyte"),
-  ];
-
-  if (bytes <= 0) return `${`0 ${t("Common:Bytes")}`}`;
-
-  if (bytes >= 1024) {
-    power = getPowerFromBytes(bytes, sizeNames.length - 1);
-    resultSize = getSizeFromBytes(bytes, power);
+export const frameHandlePing = (eventData: {
+  type?: string;
+  frameId?: string;
+}): boolean => {
+  if (eventData?.type === "ping") {
+    window.parent.postMessage(
+      JSON.stringify({
+        type: "pong",
+        frameId: getFrameId(),
+      }),
+      "*",
+    );
+    return true;
   }
-
-  if (withoutSizeName) return `${resultSize}`;
-
-  return `${resultSize} ${sizeNames[power]}`;
+  return false;
 };
 
-//
+import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 export const getConvertedQuota = (
   t: (key: string) => string,
@@ -960,8 +958,11 @@ export const toUrlParams = (
 
     const item = obj[key];
 
-    // added for double employeetype or room type
-    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
+    // added for double employeetype, room type or folder type
+    if (
+      Array.isArray(item) &&
+      (key === "employeetypes" || key === "type" || key === "folderType")
+    ) {
       for (let i = 0; i < item.length; i += 1) {
         str += `${key}=${encodeURIComponent(item[i])}`;
         if (i !== item.length - 1) {
@@ -1041,10 +1042,13 @@ export function tryParseArray(str: string) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).filter(
-  (item): item is number =>
-    typeof item === "number" && item !== RoomsType.AIRoom,
-);
+export const RoomsTypeValues = [
+  ...Object.values(RoomsType).filter(
+    (item): item is number =>
+      typeof item === "number" && item !== RoomsType.AIRoom,
+  ),
+  RoomsTypePrivate,
+];
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {
@@ -1163,49 +1167,6 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer.push({ user_id: id });
 };
 
-export const mapCulturesToArray = (
-  culturesArg: string[],
-  isBetaBadge: boolean = true,
-  i18nArg?: I18n,
-) => {
-  let t = null;
-
-  if (i18nArg) {
-    t = i18nArg.getFixedT(null, "Common");
-  }
-
-  return culturesArg.map((culture, index) => {
-    let iconName = culture;
-
-    switch (culture) {
-      case "sr-Cyrl-RS":
-      case "sr-Latn-RS":
-        iconName = "sr";
-        break;
-      default:
-        break;
-    }
-
-    const icon = flagsIcons?.get(`${iconName}.react.svg`);
-
-    const cultureObj = t
-      ? {
-          key: culture,
-          label: t(`Culture_${culture}`),
-          icon,
-          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
-          index,
-        }
-      : {
-          key: culture,
-          icon,
-          index,
-        };
-
-    return cultureObj;
-  });
-};
-
 export const mapTimezonesToArray = (
   timezones: TTimeZone[],
 ): {
@@ -1277,7 +1238,7 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
+    return t("Common:PortalAdmin");
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
@@ -1465,41 +1426,6 @@ export const getSdkScriptUrl = (version: string) => {
     : "";
 };
 
-export const calculateTotalPrice = (
-  quantity: number,
-  unitPrice: number,
-): number => {
-  return Number((quantity * unitPrice).toFixed(2));
-};
-
-export const truncateNumberToFraction = (
-  value: number,
-  digits: number = 2,
-): string => {
-  const [intPart, fracPart = ""] = value.toString().split(".");
-  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
-  return `${intPart}.${truncated}`;
-};
-
-export const formatCurrencyValue = (
-  language: string,
-  amount: number,
-  currency: string,
-  fractionDigits: number = 3,
-) => {
-  const truncatedStr = truncateNumberToFraction(amount, fractionDigits);
-  const truncated = Number(truncatedStr);
-
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: fractionDigits,
-    maximumFractionDigits: fractionDigits,
-  });
-
-  return formatter.format(truncated);
-};
-
 export const insertEditorPreloadFrame = (docServiceUrl: string) => {
   if (
     !docServiceUrl ||
@@ -1572,15 +1498,51 @@ export const getErrorInfo = (
   return message ?? t("Common:UnexpectedError");
 };
 
+/**
+ * A room or agent id in a route.
+ *
+ * Negative ids are matched on purpose. A section tour can walk the user into a
+ * stand-in room whose id is negative by design (client's `api/tourDemo`, where
+ * the sign is what keeps a demo id from ever addressing a real room), and a
+ * `\d+` here reads `/forms/-1000` as the section list rather than as a room —
+ * which leaves the list's own title, create button and quick-actions on a page
+ * that is standing inside a room.
+ *
+ * Only the forms tour walks into a stand-in room today; the rooms and agents
+ * patterns are written the same way so that adding such a step there is not a
+ * silent trap.
+ */
+const ROUTE_ID = "-?\\d+";
+
 export const getCategoryType = (location: { pathname: string }) => {
   let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/rooms")) {
+  if (pathname.startsWith("/forms")) {
+    const formRoomRegexp = new RegExp(`(forms)/(${ROUTE_ID})`);
+
+    if (formRoomRegexp.test(pathname)) {
+      categoryType = CategoryType.Form;
+    } else if (pathname.indexOf("/recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("/favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("/trash") > -1) {
+      categoryType = CategoryType.Trash;
+    } else {
+      categoryType = CategoryType.Forms;
+    }
+  } else if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
+    } else if (pathname.indexOf("recent") > -1) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.indexOf("favorite") > -1) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.indexOf("trash") > -1) {
+      categoryType = CategoryType.Trash;
     } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/shared\/(\d+)/;
+      const regexp = new RegExp(`(rooms)/shared/(${ROUTE_ID})`);
 
       categoryType = !regexp.test(location.pathname)
         ? CategoryType.Shared
@@ -1605,10 +1567,20 @@ export const getCategoryType = (location: { pathname: string }) => {
   } else if (pathname.startsWith("/shared-with-me")) {
     categoryType = CategoryType.SharedWithMe;
   } else if (pathname.startsWith("/ai-agents")) {
-    const agentRegexp = /(ai-agents)\/(\d+)/;
-    const chatRegexp = /(ai-agents)\/(\d+)\/chat/;
+    const agentRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})`);
+    const chatRegexp = new RegExp(`(ai-agents)/(${ROUTE_ID})/chat`);
 
-    if (chatRegexp.test(location.pathname)) {
+    // Agent-scoped alias sections reuse the file recent/favorites/trash data
+    // (same as the global sections), but live under /ai-agents/* so the
+    // sidebar keeps them under AI Agents. Detect them before the agent-detail
+    // patterns.
+    if (pathname.startsWith("/ai-agents/recent")) {
+      categoryType = CategoryType.Recent;
+    } else if (pathname.startsWith("/ai-agents/favorites")) {
+      categoryType = CategoryType.Favorite;
+    } else if (pathname.startsWith("/ai-agents/trash")) {
+      categoryType = CategoryType.Trash;
+    } else if (chatRegexp.test(location.pathname)) {
       categoryType = CategoryType.Chat;
     } else if (agentRegexp.test(location.pathname)) {
       categoryType = CategoryType.AIAgent;
@@ -1635,3 +1607,4 @@ export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
     return acc;
   }, initial);
 }
+

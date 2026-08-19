@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesPromoSubtitle",
+  "content": "Your workspace for documents",
+  "content_en_sha1_hash": "39d78ba700288a390179204ac1c5178285d48606",
+  "created_at": "2026-06-25T19:30:57.057Z",
+  "updated_at": "2026-08-12T11:00:51.507Z",
+  "comment": {
+    "text": "Subtitle in the promotional dialog describing the purpose of the Files feature.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:38:25.219Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 108,
+      "context": "import type { AppPromoContentMap } from \"./AppPromoDialog.types\";\n \n export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({\n \"ai-files\": {\n title: t(\"Common:Files\"),\n subtitle: t(\"Common:FilesPromoSubtitle\"),\n description: t(\"Common:FilesPromoDescription\"),\n features: [\n {\n Icon: FilesManagementIcon,\n title: t(\"Common:FileManagementPromoTitle\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,19 +1,20 @@
 {
   "key_path": "BrandNameSubtitle",
-  "content": "Your Brand name will be displayed in invitations, notifications, and other places where your {{productName}} name is referenced.",
-  "content_en_sha1_hash": "e8f623c4ac5ff99d56c9c2d693933029b1181f9b",
-  "created_at": "2025-05-26T07:15:41.021Z",
-  "updated_at": "2026-02-19T13:36:33.161Z",
+  "content": "Your Brand name will be displayed in invitations, notifications, and other places where your workspace name is referenced.",
+  "content_en_sha1_hash": "99344582106eb2c55602f8820270758c450cdffc",
+  "created_at": "2026-08-13T22:43:55.516Z",
+  "updated_at": "2026-08-14T15:14:43.944Z",
   "comment": {
-    "text": "This translation key is used for a subtitle that describes the usage of the brand name in various contexts, such as invitations and notifications. It provides context for users who see this text, especially those who are not familiar with {{productName}}.",
+    "text": "Subtitle for the Brand Name input field in the branding settings, explaining where the configured name will appear throughout the workspace.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:02.615Z"
+    "updated_at": "2026-08-14T15:14:43.944Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 158,
-      "context": "<Text\n className={classNames(styles.wlSubtitle, \"wl-subtitle\")}\n fontSize=\"13px\"\n >\n {t(\"BrandNameSubtitle\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n <div className=\"settings-block\">\n <FieldContainer id=\"fieldContainerBrandName\" isVertical>\n <TextInput",
+      "line_number": 167,
+      "context": "<Text\n className={classNames(styles.wlSubtitle, \"wl-subtitle\")}\n fontSize=\"13px\"\n >\n {t(\"BrandNameSubtitle\")}\n </Text>\n \n <div className=\"settings-block\">\n <FieldContainer id=\"fieldContainerBrandName\" isVertical>\n <TextInput",
       "module": "/packages/shared"
     }
   ],
@@ -102,6 +103,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
@@ -144,6 +151,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
@@ -151,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

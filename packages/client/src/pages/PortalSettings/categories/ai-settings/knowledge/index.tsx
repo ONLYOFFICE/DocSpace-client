@@ -1,33 +1,43 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2026
+ * Copyright (C) Ascensio System SIA, 2009-2026
  *
- * This program is a free software product.
- * You can redistribute it and/or modify it under the terms
- * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
- * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
- * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
- * any third-party rights.
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
  *
- * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
- * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
- * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
  *
- * The  interactive user interfaces in modified source and object code versions of the Program must
- * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
  *
- * Pursuant to Section 7(b) of the License you must retain the original Product logo when
- * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
- * trademark law for use of our trademarks.
+ * No trademark rights are granted under this License.
  *
- * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
- * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
- * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
-import { KnowledgeType, ProviderType } from "@docspace/shared/api/ai/enums";
+import {
+  KnowledgeType,
+  SYSTEM_AI_PROFILE_PROVIDER_TYPE,
+} from "@docspace/shared/api/ai/enums";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
@@ -36,6 +46,7 @@ import { PasswordInput } from "@docspace/ui-kit/components/password-input";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";
@@ -52,8 +63,6 @@ type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
   knowledgeConfig?: AISettingsStore["knowledgeConfig"];
   updateKnowledge?: AISettingsStore["updateKnowledge"];
-  hasAIProviders?: AISettingsStore["hasAIProviders"];
-  aiProviders?: AISettingsStore["aiProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
   knowledgeSettingsUrl?: SettingsStore["knowledgeSettingsUrl"];
@@ -65,13 +74,22 @@ const KnowledgeComponent = ({
   knowledgeInitied,
   knowledgeConfig,
   updateKnowledge,
-  hasAIProviders,
-  aiProviders,
   getAIConfig,
   aiConfig,
   knowledgeSettingsUrl,
 }: TKnowledgeProps) => {
-  const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
+  const { t } = useTranslation(["Common"]);
+
+  // Gate the Knowledge base on the AI chat profiles (the same signal the AI
+  // settings tabs use), not the legacy /ai providers list. "Connected" means
+  // at least one AI model profile is configured in the AI chat.
+  const { useProfilesStore } = useStores();
+  const hasAIProviders = useProfilesStore((s) => s.profiles.length > 0);
+  const hasSystemProvider = useProfilesStore((s) =>
+    s.profiles.some(
+      (p) => p.providerType === SYSTEM_AI_PROFILE_PROVIDER_TYPE,
+    ),
+  );
 
   const [resetDialogVisible, setResetDialogVisible] =
     React.useState<boolean>(false);
@@ -152,7 +170,7 @@ const KnowledgeComponent = ({
     try {
       await updateKnowledge?.(selectedOption, currentValue);
 
-      toastr.success(t("AISettings:KnowledgeEnabledSuccess"));
+      toastr.success(t("Common:KnowledgeEnabledSuccess"));
     } catch (e) {
       console.error(e);
       toastr.error(e as string);
@@ -162,9 +180,6 @@ const KnowledgeComponent = ({
     setSaveRequestRunning(false);
   };
 
-  const hasSystemProvider = aiProviders?.some(
-    (p) => p.type === ProviderType.PortalAi,
-  );
   const isSystemProviderDisabled =
     hasSystemProvider && !aiConfig?.systemAiEnabled;
 
@@ -252,15 +267,15 @@ const KnowledgeComponent = ({
         data-tooltip-id={tooltipId}
         data-tooltip-content={
           !hasAIProviders
-            ? t("AISettings:ToUseAddProvider", {
-                value: t("AIRoom:Knowledge"),
+            ? t("Common:ToUseAddProvider", {
+                value: t("Common:Knowledge"),
                 aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
       >
         <Text className={generalStyles.description}>
-          {t("AISettings:KnowledgeSettingsDescription", {
+          {t("Common:KnowledgeSettingsDescription", {
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
             aiAgents: t("Common:AIAgents"),
           })}
@@ -282,7 +297,7 @@ const KnowledgeComponent = ({
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("AISettings:Provider")}
+            labelText={t("Common:Provider")}
             removeMargin
           >
             <ComboBox
@@ -307,7 +322,7 @@ const KnowledgeComponent = ({
             <FieldContainer
               labelVisible
               isVertical
-              labelText={t("AISettings:APIKey")}
+              labelText={t("Common:APIKey")}
               removeMargin
             >
               {isKeyHidden ? (
@@ -316,14 +331,15 @@ const KnowledgeComponent = ({
                   data-testid="knowledge-key-hidden-banner"
                 >
                   <Text fontSize="12px" fontWeight={400} lineHeight="16px">
-                    {t("AISettings:WebSearchKeyHiddenDescription")}
+                    {t("Common:WebSearchKeyHiddenDescription")}
                   </Text>
                 </div>
               ) : (
                 <>
                   <PasswordInput
                     className={styles.passwordInput}
-                    placeholder={t("AISettings:EnterKey")}
+                    placeholder={t("Common:EnterKey")}
+                    inputName="knowledge_key"
                     inputValue={currentValue}
                     onChange={onChange}
                     scale
@@ -337,7 +353,7 @@ const KnowledgeComponent = ({
                     testId="knowledge-key-input"
                   />
                   <Text className={styles.hiddenKeyDescription}>
-                    {t("AISettings:KnowledgeKeyDescription")}
+                    {t("Common:KnowledgeKeyDescription")}
                   </Text>
                 </>
               )}
@@ -348,7 +364,7 @@ const KnowledgeComponent = ({
           <Button
             primary
             size={ButtonSize.small}
-            label={t("SaveButton")}
+            label={t("Common:SaveButton")}
             scale={false}
             onClick={onSave}
             isLoading={saveRequestRunning}
@@ -357,7 +373,7 @@ const KnowledgeComponent = ({
           />
           <Button
             size={ButtonSize.small}
-            label={t("Settings:ResetSettings")}
+            label={t("Common:ResetSettings")}
             scale={false}
             onClick={onRestoreToDefault}
             isDisabled={
@@ -386,8 +402,6 @@ export const Knowledge = inject(
       knowledgeInitied: aiSettingsStore.knowledgeInitied,
       knowledgeConfig: aiSettingsStore.knowledgeConfig,
       updateKnowledge: aiSettingsStore.updateKnowledge,
-      hasAIProviders: aiSettingsStore.hasAIProviders,
-      aiProviders: aiSettingsStore.aiProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
       knowledgeSettingsUrl: settingsStore.knowledgeSettingsUrl,
@@ -396,3 +410,4 @@ export const Knowledge = inject(
 )(observer(KnowledgeComponent));
 
 export { KnowledgeLoader };
+

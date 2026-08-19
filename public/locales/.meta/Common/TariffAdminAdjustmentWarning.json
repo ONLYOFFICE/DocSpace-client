@@ -1,0 +1,35 @@
+{
+  "key_path": "TariffAdminAdjustmentWarning",
+  "content": "Your current {{admins}}-admin limit remains until the end of your billing period. If you exceed the new limit, charges will be based on your assigned admins.",
+  "content_en_sha1_hash": "6d4dba6e627aa6c7d817402ce159b78ae4960251",
+  "created_at": "2026-06-30T07:32:40.578Z",
+  "updated_at": "2026-08-14T14:58:32.931Z",
+  "comment": {
+    "text": "Body text for a warning dialog informing users how their current admin limit applies until the end of the billing period. The {{admins}} placeholder represents a numeric count of administrators.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:33:25.385Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 308,
+      "context": "<StorageWarning\n title={t(\"TariffAdminAdjustmentScheduled\", {\n fromCount: currentTariffAdminsCount,\n toCount: nextTariffAdminsCount ?? 0,\n })}\n body={t(\"TariffAdminAdjustmentWarning\", {\n admins: maxCountManagersByQuota,\n })}\n onCancelChange={handleCancelTariffDowngrade}\n isCancelLoading={isCancelDowngradeLoading}\n />",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "line_number": 208,
+      "context": "</div>\n </div>\n \n {isDowngradePlan ? (\n <StorageWarning\n body={t(\"TariffAdminAdjustmentWarning\", {\n admins: currentAdmins,\n })}\n />\n ) : (\n <Text fontSize=\"13px\">",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

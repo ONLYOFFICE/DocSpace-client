@@ -1,0 +1,41 @@
+{
+  "key_path": "ActionCannotBeUndoneUsers",
+  "content": "The selected disabled users will be removed from the workspace. This action cannot be undone.",
+  "content_en_sha1_hash": "53e4eeebf527c52fb329d0879a4beb8260dc315f",
+  "created_at": "2026-08-12T11:00:48.919Z",
+  "updated_at": "2026-08-14T14:58:32.714Z",
+  "comment": {
+    "text": "Warning text within a confirmation dialog describing the irreversible removal of selected disabled users from the workspace.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T11:35:04.809Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 122,
+      "context": "return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\")\n : t(\"ActionCannotBeUndoneUsers\")}\n </Text>\n <Text className=\"text-warning\">{t(\"PleaseNote\")}</Text>\n <Text className=\"text-delete-description\">\n {t(\"PersonalDataDeletionInfo\", {\n sectionNameFirst: t(\"Common:Files\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 122,
+      "context": "return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\")\n : t(\"ActionCannotBeUndoneUsers\")}\n </Text>\n <Text className=\"text-warning\">{t(\"PleaseNote\")}</Text>\n <Text className=\"text-delete-description\">\n {t(\"PersonalDataDeletionInfo\", {\n sectionNameFirst: t(\"Common:Files\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

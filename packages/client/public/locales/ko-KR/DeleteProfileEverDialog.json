@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "선택한 비활성 사용자가 {{productName}}에서 삭제됩니다. 이 작업은 취소할 수 없습니다.",
-  "ActionCannotBeUndoneGuests": "선택된 비활성화된 게스트가 {{productName}}에서 제거됩니다. 이 작업은 취소할 수 없습니다.",
+  "ActionCannotBeUndoneGuests": "선택된 비활성화된 게스트가 워크스페이스에서 제거됩니다. 이 작업은 취소할 수 없습니다.",
+  "ActionCannotBeUndoneUsers": "선택한 비활성 사용자가 워크스페이스에서 삭제됩니다. 이 작업은 취소할 수 없습니다.",
   "CannotReassignFiles": "여러 사용자를 한 번에 삭제할 경우 해당 사용자의 파일을 다른 사용자에게 다시 할당할 수 없습니다.",
   "DeleteGroupGuestsSuccessMessage": "게스트가 삭제되었습니다.",
   "DeleteGroupUsersSuccessMessage": "사용자가 성공적으로 삭제되었습니다.",
@@ -12,7 +12,7 @@
   "DeleteUser": "사용자 삭제",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> 님이 삭제됩니다. 이 작업은 취소할 수 없습니다.",
   "DeletingUsers": "사용자 삭제",
-  "PersonalDataDeletionInfo": "개인 데이터, 선택한 사용자의 {{sectionNameFirst}} 및 {{sectionNameSecond}} 섹션에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다. 채팅방과 같은 공용 섹션에 저장된 선택한 사용자의 파일 및 폴더는 {{productName}}에 남아 있습니다.",
+  "PersonalDataDeletionInfo": "개인 데이터, 선택한 사용자의 {{sectionNameFirst}} 및 {{sectionNameSecond}} 섹션에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다. 채팅방과 같은 공용 섹션에 저장된 선택한 사용자의 파일 및 폴더는 워크스페이스에 남아 있습니다.",
   "PleaseNote": "참고:",
   "ReassignDataToAnotherUser": "다른 사용자에게 데이터 재할당",
   "SuccessfullyDeleteGuestInfoMessage": "해당 게스트가 삭제되었습니다",

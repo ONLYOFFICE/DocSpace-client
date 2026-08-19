@@ -1,9 +1,8 @@
 {
   "ChangePasswordSuccess": "La password è stata cambiata con successo",
-  "CodeTitle": "Il codice ti è stato inviato via email",
   "ConfirmEmailChange": "Conferma il cambio email",
-  "ConfirmEmailChangeText": "Hai richiesto di cambiare l’indirizzo email sul tuo account {{productName}}. Per procedere, effettua l’accesso con le credenziali correnti.",
-  "ErrorInvalidText": "Tra 10 secondi sarai reindirizzato alla <1>{{productName}}</1>",
+  "ConfirmEmailChangeText": "Hai richiesto di cambiare l’indirizzo email sul tuo account {{organizationName}} {{productName}}. Per procedere, effettua l’accesso con le credenziali correnti.",
+  "ErrorInvalidText": "Tra 10 secondi sarai reindirizzato alla <1>spazio di lavoro</1>",
   "ForgotPassword": "Password dimenticata?",
   "LDAPUsernamePlaceholder": "Nome utente di {{ldap_domain}}",
   "MessageAuthorize": "‎Accedere per continuare‎",
@@ -12,14 +11,14 @@
   "PasswordRecoveryTitle": "Recupero della password",
   "RecoverAccess": "Rimuovi accesso",
   "RecoverContactEmailPlaceholder": "Email di contatto",
-  "RecoverTextBody": "Se non riesci ad accedere con il tuo account esistente o desideri essere registrato come un nuovo utente, contatta l'amministratore del portale.",
+  "RecoverTextBody": "Se non riesci ad accedere con il tuo account esistente o desideri essere registrato come un nuovo utente, contatta il superamministratore.",
   "Register": "Registra",
   "RegisterTextBodyAfterDomainsList": "Per registrarti, inserisci la tua email e clicca su Inviare la richiesta. Un messaggio con un link per attivare il tuo account verrà inviato all'indirizzo specificato.",
   "RegisterTextBodyBeforeDomainsList": "‎La registrazione è disponibile per gli utenti con un account di posta elettronica all'indirizzo‎",
-  "RegisterTitle": "Richiesta di inscrizione ",
+  "RegisterTitle": "Richiesta di inscrizione",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "‎La durata predefinita della sessione è di 20 minuti. Selezionare questa opzione per impostarla su 1 anno. Per impostare il proprio valore, passare a Impostazioni.‎",
   "SignInLDAP": "Accedi a: {{ldap_domain}}",
   "SignInLdapHelper": "Utilizza le credenziali per il dominio aziendale",
-  "UserIsAlreadyRegistered": "L'utente <1>{{email}}</1> è già registrato in questo {{productName}}, inserisci la tua password o torna indietro per continuare con un'altra email."
+  "UserIsAlreadyRegistered": "L'utente <1>{{email}}</1> è già registrato in questo spazio di lavoro, inserisci la tua password o torna indietro per continuare con un'altra email."
 }

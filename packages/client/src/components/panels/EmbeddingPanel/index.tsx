@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { inject, observer } from "mobx-react";
@@ -193,8 +202,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 	const withPassword = currentLink?.sharedTo?.password;
 	const denyDownload = currentLink?.sharedTo?.denyDownload;
 
-	const contentRestrictedTitle = t("EmbeddingPanel:ContentRestricted");
-	const withPasswordTitle = t("EmbeddingPanel:LinkProtectedWithPassword");
+	const contentRestrictedTitle = t("Common:ContentRestricted");
+	const withPasswordTitle = t("Common:LinkProtectedWithPassword");
 
 	let barSubTitle = "";
 
@@ -245,7 +254,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 
 	const onCopyLink = () => {
 		copy(codeBlock);
-		toastr.success(t("EmbeddingPanel:CodeSuccessfullyCopied"));
+		toastr.success(t("Common:CodeSuccessfullyCopied"));
 	};
 
 	const onHeaderChange = () => {
@@ -391,7 +400,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 				{linkTitle}
 			</Link>
 			<Text fontSize="12px" fontWeight={600}>
-				{t("Files:Protected")}
+				{t("Common:Protected")}
 			</Text>
 		</div>
 	);
@@ -405,7 +414,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 			withoutPadding
 			dataTestId="embedding_panel_modal"
 		>
-			<ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
+			<ModalDialog.Header>{t("Common:EmbeddingSettings")}</ModalDialog.Header>
 			<ModalDialog.Body>
 				<div className={styles.embeddingPanelBody}>
 					{barIsVisible ? (
@@ -414,7 +423,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 								{isAdmin ? (
 									<Trans
 										t={t as TFunction}
-										ns="EmbeddingPanel"
+										ns="Common"
 										i18nKey="EmbeddingBarAllowList"
 										components={{
 											1: (
@@ -430,9 +439,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 										{`"Add the website URL for embedding to the <1>allow list</1>."`}
 									</Trans>
 								) : (
-									t("EmbeddingPanel:EmbeddingBarDescription", {
-										productName: t("Common:ProductName"),
-									})
+									t("Common:EmbeddingBarDescription")
 								)}
 							</Text>
 							<IconButton
@@ -452,7 +459,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 									fontSize="15px"
 									fontWeight={600}
 								>
-									{t("EmbeddingPanel:Link")}
+									{t("Common:Link")}
 								</Text>
 								<ComboBox
 									className={styles.embeddingPanelComboBox}
@@ -483,19 +490,21 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 							fontSize="15px"
 							fontWeight={600}
 						>
-							{t("EmbeddingPanel:DisplaySettings")}
+							{t("Common:DisplaySettings")}
 						</Text>
 
 						<div className={styles.embeddingPanelInputsContainer}>
 							<DisplayBlock
-								label={t("EmbeddingPanel:Width")}
+								label={t("Common:Width")}
+								name="embed_width"
 								inputValue={widthValue}
 								onInputChange={onChangeWidth}
 								selectedOption={widthDimension}
 								onSelectDimension={onChangeWidthDimension}
 							/>
 							<DisplayBlock
-								label={t("EmbeddingPanel:Height")}
+								label={t("Common:Height")}
+								name="embed_height"
 								inputValue={heightValue}
 								onInputChange={onChangeHeight}
 								selectedOption={heightDimension}
@@ -510,7 +519,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 									fontSize="15px"
 									fontWeight={600}
 								>
-									{t("JavascriptSdk:InterfaceElements")}
+									{t("Common:InterfaceElements")}
 								</Text>
 
 								<div className={styles.embeddingPanelCheckboxContainer}>
@@ -519,21 +528,19 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 										onChange={onHeaderChange}
 										isChecked={embeddingConfig.showTitle}
 										img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
-										title={t("JavascriptSdk:Header")}
-										description={t("JavascriptSdk:HeaderDescription", {
-											productName: t("Common:ProductName"),
-										})}
+										title={t("Common:Header")}
+										description={t("Common:HeaderDescription")}
 										dataTestId="show_title"
 									/>
 									<CheckboxElement
-										label={t("JavascriptSdk:SearchFilterAndSort")}
+										label={t("Common:SearchFilterAndSort")}
 										onChange={onTitleChange}
 										isChecked={embeddingConfig.showFilter}
 										img={theme.isBase ? SearchUrl : SearchDarkUrl}
-										title={t("JavascriptSdk:SearchBlock")}
+										title={t("Common:SearchBlock")}
 										dataTestId="show_filter"
 										description={t(
-											"JavascriptSdk:ManagerSearchBlockDescription",
+											"Common:ManagerSearchBlockDescription",
 										)}
 									/>
 								</div>
@@ -546,7 +553,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 								fontSize="15px"
 								fontWeight={600}
 							>
-								{t("JavascriptSdk:Code")}
+								{t("Common:Code")}
 							</Text>
 							<IconButton
 								className={styles.embeddingPanelCopyIcon}
@@ -618,7 +625,7 @@ export default inject<TStore>(
 		};
 	},
 )(
-	withTranslation(["Files", "EmbeddingPanel", "JavascriptSdk"])(
+	withTranslation(["Common"])(
 		observer(EmbeddingPanelComponent),
 	),
 );

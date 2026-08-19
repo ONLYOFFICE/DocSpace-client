@@ -1,7 +1,7 @@
 {
-  "ActionCannotBeUndone": " سيتم إزالة المستخدمين المُعطلين المحددين من {{productName}}. لا يمكن التراجع عن هذا الإجراء.",
-  "ActionCannotBeUndoneGuests": "سيتم إزالة الضيوف المعطلين المحددين من {{productName}}. لا يمكن التراجع عن هذا الإجراء.",
-  "CannotReassignFiles": " إذا تم حذف عدة مستخدمين مرة واحدة، لا يمكنك إعادة تعيين ملفاتهم لمستخدمين آخرين.",
+  "ActionCannotBeUndoneGuests": "سيتم إزالة الضيوف المعطلين المحددين من مساحة العمل. لا يمكن التراجع عن هذا الإجراء.",
+  "ActionCannotBeUndoneUsers": "سيتم إزالة المستخدمين المُعطلين المحددين من مساحة العمل. لا يمكن التراجع عن هذا الإجراء.",
+  "CannotReassignFiles": "إذا تم حذف عدة مستخدمين مرة واحدة، لا يمكنك إعادة تعيين ملفاتهم لمستخدمين آخرين.",
   "DeleteGroupGuestsSuccessMessage": "تم حذف الضيوف بنجاح.",
   "DeleteGroupUsersSuccessMessage": "تم حذف المستخدمين بشكل دائم.",
   "DeleteGuest": "حذف الضيف",
@@ -11,12 +11,12 @@
   "DeleteReqassignDescriptionGuest": "سيتم حذف {{userCaption}} من جميع الغرف التي تم دعوتهم إليها. سيتم تلقائيًا إعادة تعيين المستندات التي أنشأها هذا {{userCaption}} في الغرف إلى مالكي الغرف.",
   "DeleteUser": "حذف المستخدم",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> سيتم حذفه. سيتم حذف مستندات المستخدم الشخصية المتوفرة للآخرين. هل أنت متأكد أنك تريد المتابعة؟",
-  "DeletingUsers": " حذف مستخدمين",
-  "PersonalDataDeletionInfo": "البيانات الشخصية، جميع الملفات والمجلدات الشخصية في أقسام {{sectionNameFirst}} و {{sectionNameSecond}}* للمستخدمين المحددين سيتم حذفها نهائيًا. الملفات والمجلدات الخاصة بالمستخدمين المحددين المحفوظة في الأقسام المشتركة* مثل الغرف ستبقى في {{productName}}.",
-  "PleaseNote": " يرجى الملاحظة:",
+  "DeletingUsers": "حذف مستخدمين",
+  "PersonalDataDeletionInfo": "البيانات الشخصية، جميع الملفات والمجلدات الشخصية في أقسام {{sectionNameFirst}} و {{sectionNameSecond}}* للمستخدمين المحددين سيتم حذفها نهائيًا. الملفات والمجلدات الخاصة بالمستخدمين المحددين المحفوظة في الأقسام المشتركة* مثل الغرف ستبقى في مساحة العمل.",
+  "PleaseNote": "يرجى الملاحظة:",
   "ReassignDataToAnotherUser": "إعادة تعيين البيانات لمستخدم آخر",
   "SuccessfullyDeleteGuestInfoMessage": "تم حذف الضيف بنجاح",
   "SuccessfullyDeleteUserInfoMessage": "تم حذف المستخدم بنجاح",
-  "ToBeAbleToReassignData": " لتتمكن من إعادة تعيين البيانات، قم بحذف مستخدم واحد في كل مرة.",
+  "ToBeAbleToReassignData": "لتتمكن من إعادة تعيين البيانات، قم بحذف مستخدم واحد في كل مرة.",
   "UserFilesRemovalScope": "البيانات الشخصية، جميع الملفات والمجلدات في أقسام {{sectionNameFirst}} و {{sectionNameSecond}} لهذا المستخدم سيتم حذفها نهائيًا."
 }

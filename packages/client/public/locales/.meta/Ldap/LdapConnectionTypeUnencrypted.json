@@ -3,16 +3,17 @@
   "content": "Unencrypted communication",
   "content_en_sha1_hash": "bc1d8c39d5290a229552fb64a476b343bca25d9c",
   "created_at": "2025-05-19T21:30:54.196Z",
-  "updated_at": "2025-08-11T18:11:59.240Z",
+  "updated_at": "2026-05-15T14:00:06.848Z",
   "comment": {
-    "text": "This translation key is used for the label of a checkbox indicating unencrypted LDAP connection type. It appears in a settings page within a file, and its purpose is to display the description of this option to users, allowing them to understand what \"unencrypted communication\" means in the context of LDAP connections.",
+    "text": "This is a radio button label in the LDAP settings. It indicates that the connection to the LDAP server will not use encryption.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:13.062Z"
+    "updated_at": "2026-04-11T21:17:14.554Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/Checkboxes.js",
-      "line_number": 86,
+      "line_number": 95,
       "context": "key={ConnectionType.Unencrypted}\n value={ConnectionType.Unencrypted}\n isChecked={!isTlsEnabled ? !isSslEnabled : null}\n onChange={onChangeUnencrypted}\n isDisabled={!isLdapEnabled || isUIDisabled}\n label={t(\"LdapConnectionTypeUnencrypted\")}\n testId=\"type_unencrypted_radio_button\"\n />\n </div>\n <div className=\"ldap_checkbox-header\">\n <RadioButton",
       "module": "/packages/client"
     }
@@ -69,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Salattu viestintä' means 'Encrypted communication'. The English content refers to 'Unencrypted communication'.",
-          "suggestion": "Salaamaton viestintä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -154,18 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ක්‍රීප්ටෝ නොකරන ලද සන්නිවේදනය' literally translates to 'uncrypted communication'. While 'uncrypted' conveys a similar concept to 'unencrypted', it's not a standard term and might be misleading. 'නොමිතිකෘත්‍යාංකිත' (nomithikaŗthankaŗita) would be a more accurate translation for 'unencrypted'.",
-          "suggestion": "ක්‍රීප්ටෝ නොමිතිකෘත්‍යාංකිත සන්නිවේදනය (or a more concise equivalent)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Liên lạc không được mã hóa' is technically correct, it's a bit literal and not the most natural phrasing in Vietnamese for 'Unencrypted communication.' A more common and idiomatic translation would be something like 'Truyền thông không mã hóa' or 'Kết nối không mã hóa'.",
-          "suggestion": "Truyền thông không mã hóa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

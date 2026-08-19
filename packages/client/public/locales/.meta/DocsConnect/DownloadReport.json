@@ -1,0 +1,29 @@
+{
+  "key_path": "DownloadReport",
+  "content": "Download report",
+  "content_en_sha1_hash": "ca59430707ce8fb813997d7d85dff992c7f66e85",
+  "created_at": "2026-07-27T13:07:48.505Z",
+  "updated_at": "2026-08-10T12:23:10.569Z",
+  "comment": {
+    "text": "Button label used to initiate the download of a generated report.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:24:16.672Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 586,
+      "context": "<div className={styles.downloadReport}>\n <Button\n className={styles.downloadButton}\n size={ButtonSize.normal}\n label={t(\"DocsConnect:DownloadReport\")}\n onClick={() => downloadReport?.()}\n isLoading={isReportGenerating}\n />\n {isReportGenerating ? (\n <Text fontSize=\"13px\" className={styles.muted}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

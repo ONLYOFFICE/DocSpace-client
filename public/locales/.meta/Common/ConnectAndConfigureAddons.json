@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectAndConfigureAddons",
+  "content": "This section is used to connect and configure the add-ons.",
+  "content_en_sha1_hash": "7fa02d39b62b7b2e6712b639fdb117498ba6696e",
+  "created_at": "2026-06-25T11:54:47.077Z",
+  "updated_at": "2026-08-05T16:32:00.368Z",
+  "comment": {
+    "text": "Description text for a service or storage section in the billing area, explaining its purpose.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:18:31.749Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 337,
+      "context": ".map(({ item }) => item);\n \n return (\n <div style={{ width: \"100%\" }}>\n <Text className={styles.storageDescription}>\n {t(\"ConnectAndConfigureAddons\")}\n </Text>\n \n <div\n className={classNames(styles.servicesWrapper, {\n [styles.servicesWrapperMobile]: isMobile,",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

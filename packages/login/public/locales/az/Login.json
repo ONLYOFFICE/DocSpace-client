@@ -1,9 +1,8 @@
 {
   "ChangePasswordSuccess": "Şifrə uğurla dəyişdirildi",
-  "CodeTitle": "Kod e-poçt vasitəsilə göndərilmişdir",
   "ConfirmEmailChange": "E-poçtunuzu dəyişdiyinizi təsdiqləyin",
-  "ConfirmEmailChangeText": "{{productName}} hesabınızdakı e-poçt ünvanını dəyişmək üçün siz bir istəyiniz olub. Davam etmək üçün, mövcud hesab parametrlərinizlə giriş etməlisiniz.",
-  "ErrorInvalidText": "10 saniyədə <1>{{productName}}</1> yönləndiriləcəksiniz",
+  "ConfirmEmailChangeText": "{{organizationName}} {{productName}} hesabınızdakı e-poçt ünvanını dəyişmək üçün siz bir istəyiniz olub. Davam etmək üçün, mövcud hesab parametrlərinizlə giriş etməlisiniz.",
+  "ErrorInvalidText": "10 saniyədə <1>iş sahəsi</1> yönləndiriləcəksiniz",
   "ForgotPassword": "Parolunuzu unutmusunuz mu?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} istifadəçi adı",
   "MessageAuthorize": "Davam etmək üçün daxil olun",
@@ -12,7 +11,7 @@
   "PasswordRecoveryTitle": "Parolun bərpa edilməsi",
   "RecoverAccess": "Girişi bərpa edin",
   "RecoverContactEmailPlaceholder": "Əlaqə üçün e-poçt ünvanı",
-  "RecoverTextBody": "Cari hesabınızla giriş edə bilmirsinizsə və ya yeni istifadəçi kimi qeydiyyatdan keçmək istəyirsinizsə, o zaman portal administratoru ilə əlaqə saxlayın.",
+  "RecoverTextBody": "Cari hesabınızla giriş edə bilmirsinizsə və ya yeni istifadəçi kimi qeydiyyatdan keçmək istəyirsinizsə, o zaman super administrator ilə əlaqə saxlayın.",
   "Register": "Qeydiyyatdan keç",
   "RegisterTextBodyAfterDomainsList": "Qeydiyyatdan keçmək üçün, elektron poçt ünvanını daxil edin və Sorğunu göndər düyməsinə basın.",
   "RegisterTextBodyBeforeDomainsList": "Elektron poçtu olan istifadəçilər üçün qeydiyyat mümkündür",
@@ -21,5 +20,5 @@
   "RememberHelper": "Susmaya görə sessiya müddəti 20 dəqiqədir. Müddəti 1 ilə uzatmaq üçün qutunu klikləyin. Digər müddəti təyin etmək üçün, Ayarlar bölməsinə keçin.",
   "SignInLDAP": "Daxil olun: {{ldap_domain}}",
   "SignInLdapHelper": "Korporativ domen üçün etimadnamələrdən istifadə edin",
-  "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu {{productName}}-də qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın."
+  "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu iş sahəsində qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın."
 }

@@ -1,0 +1,29 @@
+{
+  "key_path": "SharedAgents",
+  "content": "Shared AI agents",
+  "content_en_sha1_hash": "e87373d381310746f9199f3b9c224ed1461f666e",
+  "created_at": "2026-06-25T19:30:57.642Z",
+  "updated_at": "2026-08-12T11:00:51.510Z",
+  "comment": {
+    "text": "Title of a feature card within the AppPromoDialog, representing AI agents accessible by multiple users.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:32:35.142Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 222,
+      "context": "title: t(\"Common:DocumentAwareAI\"),\n description: t(\"Common:DocumentAwareAIDescription\"),\n },\n {\n Icon: SharedAgentsIcon,\n title: t(\"Common:SharedAgents\"),\n description: t(\"Common:SharedAgentsDescription\"),\n },\n {\n Icon: CustomStackIcon,\n title: t(\"Common:CustomAIStack\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

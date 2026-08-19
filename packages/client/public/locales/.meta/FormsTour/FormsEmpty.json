@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsEmpty",
+  "content": "The spaces you have just seen were a preview. A form space appears in this list as soon as someone invites you to fill a form in, and the form is waiting for you inside it.",
+  "content_en_sha1_hash": "c18e6da56bd86e6d371b35215a9be59569c0911f",
+  "created_at": "2026-08-06T14:20:53.753Z",
+  "updated_at": "2026-08-13T10:58:03.050Z",
+  "comment": {
+    "text": "Description text for an empty state screen during a product tour, explaining that no form spaces are currently available and how they will appear upon invitation.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:44:57.468Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 295,
+      "context": "demoHooks,\n )\n : revealStep(\n EMPTY_SCREEN_SELECTOR,\n t(\"FormsTour:FormsEmptyTitle\"),\n t(\"FormsTour:FormsEmpty\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )),\n ].filter(Boolean) as Step[];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,16 +3,17 @@
   "content": "See members details here",
   "content_en_sha1_hash": "23f43b022112800cc997699f5494d86bfa2edabc",
   "created_at": "2025-05-19T21:30:54.894Z",
-  "updated_at": "2025-08-04T07:30:01.204Z",
+  "updated_at": "2026-05-15T14:00:06.723Z",
   "comment": {
-    "text": "This translation key is used to display a message when there are no members to show on an empty screen. It appears as a centered text in the \"No Contacts Item\" component, providing users with guidance on what they can see.",
+    "text": "This is a text message displayed when no members are found in the \"Members\" section of the InfoPanel. It informs the user where member details would typically appear.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:52.653Z"
+    "updated_at": "2026-04-11T21:13:01.317Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoContactsItem.tsx",
-      "line_number": 61,
+      "line_number": 70,
       "context": "<Text className=\"no-item-text\" textAlign=\"center\">\n {isGuests\n ? t(\"InfoPanel:GuestsEmptyScreenText\")\n : isGroups\n ? t(\"InfoPanel:GroupsEmptyScreenText\")\n : t(\"InfoPanel:MembersEmptyScreenText\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Üzvlərin məlumatlarına burada baxın' is a literal translation but sounds unnatural in Azerbaijani. A more natural phrasing would be closer to 'Burada üzvlərin məlumatlarını görə bilərsiniz' or 'Üzvlərin məlumatları burada yerləşdirilib'.",
-          "suggestion": "Burada üzvlərin məlumatlarını görə bilərsiniz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -99,18 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is overly verbose and not idiomatic for a button/link text. \"をクリックしてご覧ください\" (click here to see) is clunky and not how a native speaker would phrase it for this context.",
-          "suggestion": "メンバー詳細はこちら"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes a full sentence with punctuation, which might not be ideal for a compact UI element like a button or link. A shorter, more concise phrase is preferable.",
-          "suggestion": "メンバー詳細はこちら"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -146,13 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'members' is translated as 'hóspedes', which means 'guests'. 'Members' refers to people who are part of a group or organization, not necessarily guests.",
-          "suggestion": "Consider a more accurate translation like 'Veja os detalhes dos membros aqui' or 'Consulte os detalhes dos participantes aqui'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -164,49 +142,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Detaliile membrilor aici' is a literal translation and sounds unnatural in Romanian. A more natural phrasing would be 'Vezi detaliile membrilor' or 'Aici găsești detalii despre membri'.",
-          "suggestion": "Vezi detaliile membrilor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Здесь будут представлены подробности об участниках\" is a bit too formal for a screen displaying an empty state. It implies a future action rather than describing the current state. The English 'See members details here' is simpler and more direct.",
-          "suggestion": "Consider a more direct translation like \"Здесь будут участники\" or \"Здесь появятся участники\" (Here will be members/Here members will appear), or \"Пока здесь нет участников\" (Currently there are no members here)."
-        }
-      ],
-      "approved_at": null
+      "ai_spell_check_issues": [],
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'මෙසේ සාමාජික විස්තර බලන්න:' is a literal translation that doesn't quite convey the intended meaning of \"See members details here.\" A more natural Sinhala phrasing would be more appropriate. 'මෙසේ' (mese) means 'this way' which is not the intended meaning in the context of an empty list.",
-          "suggestion": "Consider a more natural phrasing like ' සාමාජිකයන් මෙහි ඇතිවන විට බලන්න' (Samaajikayan meh eathi wethawa danne watune bailanna) - meaning 'See details when members are available here'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tu nájdete podrobnosti o členoch' is a literal translation, but it doesn't convey the same meaning as 'See members details here'. It sounds more formal and less inviting. A more natural and user-friendly translation would be something like 'Pozrite si detaily členov' or 'Zobraziť detaily členov'.",
-          "suggestion": "Pozrite si detaily členov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

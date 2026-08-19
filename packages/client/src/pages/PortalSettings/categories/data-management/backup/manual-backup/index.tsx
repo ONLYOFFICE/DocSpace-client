@@ -1,30 +1,39 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -32,7 +41,9 @@ import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import { getBackupsCount } from "@docspace/shared/api/backup";
+import { BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
 
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import type {
@@ -51,9 +62,15 @@ const ManualBackupWrapper = ({
   isEmptyContentBeforeLoader,
   isInitialLoading,
   setIsEmptyContentBeforeLoader,
+  fetchWalletBalance,
+  language,
+  refreshPayerInfo,
+  refreshBackupService,
   ...props
 }: ManualBackupWrapperProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
+
+  const [isTopUpVisible, setIsTopUpVisible] = useState(false);
 
   useLayoutEffect(() => {
     setDocumentTitle(t("Common:DataBackup"));
@@ -74,21 +91,40 @@ const ManualBackupWrapper = ({
     if (progress === 100 && isBackupPaid) {
       const backupsCount = await getBackupsCount();
       setBackupsCount(backupsCount);
+      await fetchWalletBalance?.(true);
     }
 
     setDownloadingProgress(progress);
   };
 
   return (
-    <ManualBackup
-      isNotPaidPeriod={isNotPaidPeriod}
-      isInitialLoading={isInitialLoading}
-      isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
-      setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
-      setDownloadingProgress={updateDownloadingProgress}
-      isBackupPaid={isBackupPaid}
-      {...props}
-    />
+    <>
+      <ManualBackup
+        isNotPaidPeriod={isNotPaidPeriod}
+        isInitialLoading={isInitialLoading}
+        isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+        setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+        setDownloadingProgress={updateDownloadingProgress}
+        isBackupPaid={isBackupPaid}
+        fetchWalletBalance={fetchWalletBalance}
+        onOpenTopUpDialog={() => setIsTopUpVisible(true)}
+        {...props}
+      />
+      {isTopUpVisible ? (
+        <ClientSimpleTopUpDialog
+          visible={isTopUpVisible}
+          onClose={() => setIsTopUpVisible(false)}
+          onConfirm={async () => {
+            await Promise.all([
+              refreshPayerInfo?.(true),
+              refreshBackupService?.(),
+            ]);
+          }}
+          service={BACKUP_SERVICE}
+          language={language}
+        />
+      ) : null}
+    </>
   );
 };
 
@@ -104,6 +140,7 @@ export default inject(
     currentQuotaStore,
     paymentStore,
     clientLoadingStore,
+    authStore,
   }: TStore) => {
     const {
       accounts,
@@ -153,7 +190,14 @@ export default inject(
       isInitialError,
     } = backup;
 
-    const { isPayer, backupServicePrice } = paymentStore;
+    const {
+      isPayer,
+      backupServicePrice,
+      walletBalance,
+      walletCodeCurrency,
+      isCardLinkedToPortal,
+      handleServiceQuota,
+    } = paymentStore;
     const {
       newPath,
       basePath,
@@ -174,7 +218,8 @@ export default inject(
       setDeleteThirdPartyDialogVisible,
     } = dialogsStore;
 
-    const { isNotPaidPeriod, walletCustomerEmail } = currentTariffStatusStore;
+    const { isNotPaidPeriod, walletCustomerEmail, fetchPayerInfo } =
+      currentTariffStatusStore;
 
     const {
       providers,
@@ -185,13 +230,19 @@ export default inject(
     const { isBackupPaid, isThirdPartyAvailable, maxFreeBackups } =
       currentQuotaStore;
 
-    const { getIcon, filesSettings } = filesSettingsStore;
+    const {
+      getIcon,
+      filesSettings,
+      isExternalShareRestricted,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
+    const { language } = authStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
 
     const pageIsDisabled = isManagement()
       ? portals?.length === 1 || !backupPageEnable
-      : !backupPageEnable;
+      : false;
 
     // TODO: fix may be an empty object!!!
     const removeItem = (selectedThirdPartyAccount ??
@@ -288,6 +339,8 @@ export default inject(
       openConnectWindow,
       // filesSettingsStore
       settingsFileSelector,
+      disabledCreatePublicRoom:
+        isExternalShareRestricted && externalShareApplyToRooms,
 
       setBackupsCount,
 
@@ -300,8 +353,18 @@ export default inject(
       backupServicePrice,
       isFreeBackupsLimitReached,
 
+      walletBalance,
+      walletCodeCurrency,
+      isCardLinked: isCardLinkedToPortal,
+      fetchWalletBalance: paymentStore.fetchWalletBalance,
+
+      language,
+      refreshPayerInfo: fetchPayerInfo,
+      refreshBackupService: handleServiceQuota,
+
       // clientLoadingStore
       isInitialLoading: showPortalSettingsLoader,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));
+

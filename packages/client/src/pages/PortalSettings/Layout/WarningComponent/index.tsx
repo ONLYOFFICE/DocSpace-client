@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -32,197 +41,158 @@ import { Trans, useTranslation } from "react-i18next";
 import WarningComponent from "@docspace/ui-kit/components/navigation/sub-components/WarningComponent";
 import { Link } from "@docspace/ui-kit/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { Text } from "@docspace/ui-kit/components/text";
+import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
+import { BACKUP_SERVICE } from "@docspace/ui-kit/billing/constants";
+
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 
 type InjectedProps = {
   isPayer?: boolean;
-  walletCustomerEmail?: string;
-  cardLinkedOnNonProfit?: boolean;
-  cardLinkedOnFreeTariff?: boolean;
   isBackupPaid?: boolean;
   backupsCount?: number;
   maxFreeBackups?: number;
   isInited?: boolean;
-  isBackupServiceOn?: boolean;
   isNotPaidPeriod?: boolean;
+  isCardLinkedToPortal?: boolean;
+  backupServicePrice?: number;
+  walletCodeCurrency?: string;
+  language?: string;
 };
 
 const Warning = ({
   isPayer,
-  walletCustomerEmail,
-  cardLinkedOnNonProfit,
-  cardLinkedOnFreeTariff,
   isBackupPaid,
   backupsCount = 0,
   maxFreeBackups = 0,
   isInited,
-  isBackupServiceOn,
   isNotPaidPeriod,
+  isCardLinkedToPortal,
+  backupServicePrice = 0,
+  walletCodeCurrency = "",
+  language = "en",
 }: InjectedProps) => {
-  const { t, ready } = useTranslation(["Services", "Common", "Payments"]);
+  const { t, ready } = useTranslation(["Common", "Payments"]);
   const { pathname } = useLocation();
   const [warningText, setWarningText] = React.useState<React.ReactNode>("");
+  const [isTopUpVisible, setIsTopUpVisible] = React.useState(false);
 
-  const onClickServiceUrl = () => {
-    const servicePageUrl = combineUrl(
-      "/portal-settings",
-      "payments",
-      "/services",
-    );
-
-    window.DocSpace.navigate(servicePageUrl);
+  const onClickBackupServiceUrl = () => {
+    window.DocSpace.navigate(PAYMENT_ROUTES.backup);
   };
 
-  const onClickLearnMore = () => {
-    const servicePageUrl = combineUrl(
-      "/portal-settings",
-      "payments",
-      "/payment-method",
-    );
-
-    window.DocSpace.navigate(servicePageUrl);
+  const onClickTopUpAndActivate = () => {
+    setIsTopUpVisible(true);
   };
 
   const isBackupRoute =
     typeof pathname === "string" && pathname.includes("portal-settings/backup");
-
-  const isPaymentsServiceRoute =
-    typeof pathname === "string" &&
-    pathname.includes("portal-settings/payments/services/");
 
   React.useEffect(() => {
     if (!isBackupPaid || isNotPaidPeriod) return;
     if (!isBackupRoute || !isInited) return;
     if (!ready) return;
 
-    const setWarningTextFunc = () => {
-      const connectServiceLink = (
-        <Trans
-          t={t}
-          i18nKey="ConnectService"
-          ns="Services"
-          components={{
-            1: (
-              <Link
-                key="connect-service-link"
-                tag="a"
-                onClick={onClickServiceUrl}
-                color="accent"
-              />
-            ),
-          }}
+    const priceComponents = {
+      1: (
+        <Link
+          key="backup-service-details-link"
+          tag="a"
+          onClick={onClickBackupServiceUrl}
+          color="accent"
         />
-      );
-
-      const connectPayer = (
-        <Trans
-          t={t}
-          i18nKey="ContactToPayer"
-          ns="Services"
-          values={{ email: walletCustomerEmail }}
-          components={{
-            1: (
-              <Link
-                key="contact-payer-link"
-                tag="a"
-                color="accent"
-                href={`mailto:${walletCustomerEmail}`}
-              />
-            ),
-          }}
-        />
-      );
-      let resultText: React.ReactNode = "";
-
-      if (maxFreeBackups > 0) {
-        try {
-          const backupText = t("Services:FreeBackupsPerMonth", {
-            value:
-              backupsCount >= maxFreeBackups ? maxFreeBackups : backupsCount,
-            maxValue: maxFreeBackups,
-          });
-
-          resultText = backupText;
-
-          if (backupsCount >= maxFreeBackups && !isBackupServiceOn) {
-            const additionalInfo = isPayer ? connectServiceLink : connectPayer;
-            resultText = (
-              <>
-                <Text key="backup-text" as="span" fontWeight={600}>
-                  {backupText}
-                </Text>{" "}
-                <Text key="additional-info" as="span">
-                  {additionalInfo}
-                </Text>
-              </>
-            );
-          }
-
-          setWarningText(resultText);
-        } catch (e) {
-          console.error(e);
-        }
-
-        return;
-      }
-
-      resultText = connectServiceLink;
-
-      if (cardLinkedOnNonProfit || cardLinkedOnFreeTariff) {
-        if (isBackupServiceOn) {
-          resultText = "";
-        } else {
-          resultText = isPayer ? connectServiceLink : connectPayer;
-        }
-      }
-
-      setWarningText(resultText);
+      ),
     };
 
-    setWarningTextFunc();
+    const priceValues = {
+      value: backupsCount >= maxFreeBackups ? maxFreeBackups : backupsCount,
+      maxValue: maxFreeBackups,
+      currency: formatCurrencyValue(
+        language,
+        backupServicePrice,
+        walletCodeCurrency,
+        2,
+      ),
+    };
+
+    if (backupServicePrice <= 0) {
+      setWarningText("");
+      return;
+    }
+
+    if (!isCardLinkedToPortal) {
+      setWarningText(
+        <Trans
+          t={t}
+          i18nKey="AdditionalBackupsPriceWithActivation"
+          ns="Common"
+          values={priceValues}
+          components={{
+            1: (
+              <Link
+                key="backup-top-up-link"
+                tag="a"
+                onClick={onClickTopUpAndActivate}
+                color="accent"
+              />
+            ),
+          }}
+        />,
+      );
+      return;
+    }
+
+    setWarningText(
+      maxFreeBackups > 0 ? (
+        <Trans
+          t={t}
+          i18nKey="FreeBackupsPerMonthWithPrice"
+          ns="Common"
+          values={priceValues}
+          components={priceComponents}
+        />
+      ) : (
+        <Trans
+          t={t}
+          i18nKey="AdditionalBackupsPrice"
+          ns="Common"
+          values={priceValues}
+          components={priceComponents}
+        />
+      ),
+    );
   }, [
     ready,
     backupsCount,
     isInited,
-    isBackupServiceOn,
-    cardLinkedOnNonProfit,
-    cardLinkedOnFreeTariff,
-    isPayer,
     isBackupPaid,
     isNotPaidPeriod,
+    backupServicePrice,
+    maxFreeBackups,
+    walletCodeCurrency,
+    language,
+    isCardLinkedToPortal,
   ]);
 
   React.useEffect(() => {
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
-  if (isPaymentsServiceRoute && !isPayer) {
-    return (
-      <WarningComponent
-        title={
-          <Trans
-            t={t}
-            i18nKey="OnlyPayerCanManageServices"
-            ns="Payments"
-            components={{
-              1: (
-                <Link
-                  key="learn-more-link"
-                  tag="a"
-                  color="accent"
-                  onClick={onClickLearnMore}
-                />
-              ),
-            }}
-          />
-        }
-      />
-    );
-  }
-
   if (!isBackupPaid || !isBackupRoute || !warningText) return null;
 
-  return <WarningComponent title={warningText} />;
+  return (
+    <>
+      <WarningComponent title={warningText} />
+      {isTopUpVisible ? (
+        <ClientSimpleTopUpDialog
+          visible={isTopUpVisible}
+          onClose={() => setIsTopUpVisible(false)}
+          service={BACKUP_SERVICE}
+          language={language}
+        />
+      ) : null}
+    </>
+  );
 };
 
 export default inject(
@@ -231,28 +201,28 @@ export default inject(
     currentTariffStatusStore,
     currentQuotaStore,
     backup,
+    authStore,
   }: TStore) => {
     const {
       isPayer,
-      cardLinkedOnNonProfit,
-      cardLinkedOnFreeTariff,
-      isBackupServiceOn,
+      isCardLinkedToPortal,
+      backupServicePrice,
+      walletCodeCurrency,
     } = paymentStore;
-    const { walletCustomerEmail, isNotPaidPeriod } = currentTariffStatusStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
-
     return {
       isPayer,
-      walletCustomerEmail,
-      cardLinkedOnNonProfit,
-      cardLinkedOnFreeTariff,
       isBackupPaid,
       backupsCount,
       isInited,
-      isBackupServiceOn,
       maxFreeBackups,
       isNotPaidPeriod,
+      isCardLinkedToPortal,
+      backupServicePrice,
+      walletCodeCurrency,
+      language: authStore.language,
     };
   },
 )(observer(Warning));

@@ -1,0 +1,718 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@docspace/ui-kit/styles/mixins";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+// Dashboard content + the AI chat panel side by side. The panel (ui-kit
+// `ChatPanel`, 400px, flex-shrink: 0) renders inline on desktop and as a
+// fixed full-screen overlay on tablet/mobile via its own CSS.
+.dashboardLayout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Tablet/mobile: the panel's own CSS switches it to `position: fixed; inset: 0`
+// (the full viewport), which would put its left edge under the article
+// sidebar. Pin it to the inline end instead and leave the sidebar edge
+// visible — same geometry as the Home page (see Home.module.scss).
+@include mixins.tablet-and-below {
+  .dashboardLayout :global(.chat-panel) {
+    inset-inline-start: auto;
+    max-width: calc(100vw - 69px);
+  }
+}
+
+@include mixins.mobile {
+  .dashboardLayout :global(.chat-panel) {
+    inset-inline-start: 0;
+    max-width: 100vw;
+  }
+}
+
+// Chat fullscreen: collapse the dashboard content (it stays mounted, marked
+// `inert` by the host) and let the panel fill the section, leaving the
+// article sidebar visible. Mirrors the Home page's `ai-fullscreen` layout
+// mode (see Home.module.scss).
+.dashboardLayout[data-layout-mode="ai-fullscreen"] {
+  .dashboard {
+    flex: 0 0 0;
+    min-width: 0;
+    width: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  :global(.chat-panel) {
+    flex: 1 1 auto;
+    max-width: 100%;
+    border-inline-start: none;
+
+    @include mixins.not-mobile {
+      width: calc(100% - var(--ai-sidebar-width, 0px));
+    }
+  }
+}
+
+// Width of the article sidebar the fullscreen chat leaves visible. A copy of
+// the Home page's rules (Home.module.scss): they target the global
+// `.main-container`, but live in the lazily-loaded Home chunk, which is not
+// necessarily loaded when the dashboard is opened directly.
+@include mixins.not-mobile {
+  :global(.main-container) {
+    --ai-sidebar-width: 0px;
+  }
+
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-desktop-width, 252px);
+  }
+
+  :global(.main-container):has(
+    :global(#article-container[data-show-text="false"])
+  ) {
+    --ai-sidebar-width: var(--article-tablet-width-collapsed, 60px);
+  }
+}
+
+.dashboard {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  // Scrolling is owned by the ui-kit Scrollbar inside (same thin auto-hiding
+  // thumb as Section bodies, with its own edge padding) — a native scrollbar
+  // here would sit flush against the chat panel border. The DashboardLoader
+  // shares this class without the inner Scrollbar, so keep the native
+  // fallback: it only engages when content actually overflows.
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+// Sizes the inner Scrollbar holder; the custom scrollbar needs explicit
+// dimensions (it doesn't grow from content).
+.dashboardScrollbar {
+  width: 100%;
+  height: 100%;
+}
+
+.dashboardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 1180px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+// Reopens the welcome modal. Pinned to the top-right of the page rather than
+// placed in the plan header, where it read as one more link in a row of links.
+// Sits above the Scrollbar (which owns the whole box below it) so it stays put
+// while the content scrolls under it.
+.helpButton {
+  position: absolute;
+  top: 20px;
+  // Logical inset, so the button follows the page to the left edge in RTL.
+  inset-inline-end: 20px;
+  z-index: 1;
+
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+
+  &:hover {
+    background: var(--dropdown-item-hover-background-color);
+  }
+}
+
+// Plan header
+.planHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.planTitle {
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 28px;
+  margin: 0;
+}
+
+.planSubline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.planSublineText {
+  font-size: 13px;
+  line-height: 20px;
+
+  :global(.light) & {
+    color: $light-gray-dark;
+  }
+
+  :global(.dark) & {
+    color: $gray-dark;
+  }
+}
+
+.planLink {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15px;
+}
+
+// Profile card
+.profileCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 6px;
+
+  :global(.light) & {
+    background-color: $gray-light;
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+  }
+}
+
+.profileCardClose {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 16px;
+}
+
+.profileCardTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 0;
+  padding-inline-end: 28px;
+}
+
+.profileCardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 24px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profileCardField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.profileCardLabel {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+
+  :global(.light) & {
+    color: $light-gray-dark;
+  }
+
+  :global(.dark) & {
+    color: $gray-dark;
+  }
+}
+
+.profileCardValueRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.profileCardValue {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profileCardEdit {
+  flex-shrink: 0;
+}
+
+.profileCardLink {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  align-self: flex-start;
+}
+
+// Section
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0;
+}
+
+.sectionTitleLink {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.quickActions {
+  justify-content: flex-start;
+}
+
+// Modules grid
+.modulesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.moduleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+
+  :global(.light) & {
+    border: 1px solid $gray-light-mid;
+
+    &:hover {
+      background-color: $gray-light;
+    }
+  }
+
+  :global(.dark) & {
+    border: 1px solid $light-dark-gray-hover;
+
+    &:hover {
+      background-color: $dark-gray-light;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+.moduleHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.moduleIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+
+  :global(.light) & {
+    background-color: $gray-light-mid;
+  }
+
+  :global(.dark) & {
+    background-color: $gray-dark-mid;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &[data-installed="true"] {
+    background-color: color-mix(in srgb, var(--accent-main) 15%, transparent);
+
+    svg path {
+      fill: var(--accent-main);
+    }
+  }
+}
+
+.moduleTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.moduleDescription {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  margin: 0;
+
+  :global(.light) & {
+    color: $light-gray-dark;
+  }
+
+  :global(.dark) & {
+    color: $gray-dark;
+  }
+}
+
+// Integrations grid (inside CollapsibleCard)
+.integrationsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.integrationTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  :global(.light) & {
+    background-color: $white;
+    border: 1px solid $gray-light-mid;
+
+    &:hover {
+      border-color: var(--accent-main);
+    }
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    border: 1px solid $light-dark-gray-hover;
+
+    &:hover {
+      border-color: var(--accent-main);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: -2px;
+  }
+}
+
+.integrationTileMore {
+  :global(.light) & {
+    background-color: $gray-light;
+  }
+
+  :global(.dark) & {
+    background-color: $gray-dark-mid;
+  }
+}
+
+.integrationName {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 0;
+}
+
+.integrationLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15px;
+  color: var(--accent-main);
+  text-decoration: underline;
+}
+
+.integrationArrow {
+  width: 8px;
+  height: 9px;
+  flex-shrink: 0;
+
+  path {
+    fill: var(--accent-main);
+  }
+}
+
+// Dev tools grid (inside CollapsibleCard)
+.devToolsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+
+    .devToolTileFeatured {
+      grid-column: auto;
+    }
+  }
+}
+
+.devToolTile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+
+  :global(.light) & {
+    background-color: $white;
+    border: 1px solid $gray-light-mid;
+
+    &:hover {
+      border-color: var(--accent-main);
+    }
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    border: 1px solid $light-dark-gray-hover;
+
+    &:hover {
+      border-color: var(--accent-main);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-main);
+    outline-offset: -2px;
+  }
+}
+
+.devToolTileFeatured {
+  grid-column: span 2;
+}
+
+.devToolTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 0;
+}
+
+.devToolDescription {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  margin: 0;
+  flex: 1;
+
+  :global(.light) & {
+    color: $light-gray-dark;
+  }
+
+  :global(.dark) & {
+    color: $gray-dark;
+  }
+}
+
+.devToolLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15px;
+  margin-block-start: 8px;
+  color: var(--accent-main);
+  text-decoration: underline;
+  padding-top: 12px;
+}
+
+// Tooltip shown to guests over disabled create/upload actions: bold title,
+// then the explanation below with a gap.
+.guestRestrictionTooltip {
+  display: flex;
+  flex-direction: column;
+}
+
+// Loaders — skeleton boxes mirroring the cards above (no interactivity), so the
+// Overview skeleton lines up with the real content and there's no layout shift.
+.loaderModuleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+
+  :global(.light) & {
+    border: 1px solid $gray-light-mid;
+  }
+
+  :global(.dark) & {
+    border: 1px solid $light-dark-gray-hover;
+  }
+}
+
+.loaderModuleHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.loaderCollapsibleCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+
+  :global(.light) & {
+    background-color: $gray-light;
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+  }
+}
+
+.loaderCollapsibleHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 24px;
+}
+
+.loaderCollapsibleBody {
+  padding: 0 24px 20px;
+}
+
+.loaderIntegrationTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 12px;
+
+  :global(.light) & {
+    background-color: $white;
+    border: 1px solid $gray-light-mid;
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    border: 1px solid $light-dark-gray-hover;
+  }
+}
+
+.loaderDevToolTile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+
+  :global(.light) & {
+    background-color: $white;
+    border: 1px solid $gray-light-mid;
+  }
+
+  :global(.dark) & {
+    background-color: $dark-gray-light;
+    border: 1px solid $light-dark-gray-hover;
+  }
+}

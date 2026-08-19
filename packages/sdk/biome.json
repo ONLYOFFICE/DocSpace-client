@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
   "extends": [
     "../shared/biome.json"
   ],
@@ -32,5 +32,20 @@
       "!webpack.config.js",
       "!tests/*"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "src/app/(private)/**",
+        "!src/app/(private)/_utils/parity-check.ts"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "error"
+          }
+        }
+      }
+    }
+  ]
 }

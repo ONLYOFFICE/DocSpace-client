@@ -2,8 +2,8 @@
   "ActionsWithFilesDescription": "Badges will highlight file activity — uploads, edits, or shares — across the {{rooms}}, {{shared}}, {{documents}}, and {{aiAgents}} sections.",
   "AdminSetupRequired": "Admin setup required",
   "Badges": "Badges",
-  "DailyFeed": "Daily {{productName}} feed",
-  "DailyFeedDescription": "Read news and events from your {{productName}} in a daily digest.",
+  "DailyFeed": "Daily {{organizationName}} {{productName}} feed",
+  "DailyFeedDescription": "Read news and events from {{organizationName}} {{productName}} in a daily digest.",
   "FileActivityNotify": "File activity notifications",
   "IsNotValid": "Is not valid",
   "LdapEmailTooltip": "This user account is loaded from LDAP. The user's email address was not specified, and the current one was generated automatically and cannot be used to send notifications.",
@@ -14,6 +14,6 @@
   "SettingUpNotifications": "Setting up notifications",
   "SuccessConnected": "{{serviceName}} has been successfully connected as a notification channel. You will now receive updates there.",
   "SuccessDisconnected": "{{serviceName}} has been successfully disconnected as a notification channel. Notifications will no longer be sent there.",
-  "UsefulTips": "Useful {{productName}} tips",
-  "UsefulTipsDescription": "Get useful guides about {{productName}}"
+  "UsefulTips": "Useful {{organizationName}} {{productName}} tips",
+  "UsefulTipsDescription": "Get useful guides about {{organizationName}} {{productName}}"
 }

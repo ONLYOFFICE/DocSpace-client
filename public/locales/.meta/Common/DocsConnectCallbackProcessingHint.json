@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectCallbackProcessingHint",
+  "content": "Topping up your wallet and activating Docs Connect. This usually takes a few seconds.",
+  "content_en_sha1_hash": "cdc099934d9b5c435f7328e0b400c90ba2fbc4b4",
+  "created_at": "2026-07-27T13:07:08.105Z",
+  "updated_at": "2026-08-13T14:37:21.813Z",
+  "comment": {
+    "text": "Informative hint text on the payment completion page describing the ongoing background process of wallet top-up and Docs Connect activation.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:37:11.299Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 164,
+      "context": "redirectUrl: TARIFF_REDIRECT_URL,\n };\n case PaymentFlavor.DocsConnect:\n return {\n processingTitle: t(\"Common:DocsConnectCallbackProcessingTitle\"),\n processingHint: t(\"Common:DocsConnectCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:DocsConnectCallbackStepActivate\"),\n successTitle: t(\"Common:DocsConnectCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n errorTitle: t(\"Common:DocsConnectCallbackErrorTitle\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

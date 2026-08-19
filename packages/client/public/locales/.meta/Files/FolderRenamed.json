@@ -3,16 +3,17 @@
   "content": "The folder '{{folderTitle}}' is renamed to '{{newFoldedTitle}}'",
   "content_en_sha1_hash": "00e0cd3e6f810877e66c2784d96ec62ae9adc140",
   "created_at": "2025-05-19T21:30:55.695Z",
-  "updated_at": "2025-09-01T11:05:24.111Z",
+  "updated_at": "2026-05-15T14:00:06.614Z",
   "comment": {
-    "text": "The translation key \"FolderRenamed\" is used to display a success message after renaming a folder, showing the original and new folder titles. This message appears as a toast notification in a UI component.",
+    "text": "This is a toast message confirming a folder has been successfully renamed. It appears after a user renames a folder, with `{{folderTitle}}` being the original name and `{{newFoldedTitle}}` being the new name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:42.732Z"
+    "updated_at": "2026-04-11T21:09:30.458Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/GlobalEvents/RenameEvent.js",
-      "line_number": 116,
+      "line_number": 125,
       "context": "})\n : await renameFolder(item.id, value)\n .then(() => completeAction(item, type))\n .then(() => {\n toastr.success(\n t(\"FolderRenamed\", {\n folderTitle: item.title,\n newFoldedTitle: value,\n }),\n );\n })",
       "module": "/packages/client"
     }
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'is renamed to' is translated as 'olaraq dəyişdirildi', which is more accurately 'is changed to'. While technically correct, 'olaraq dəyişdirildi' doesn't convey the 'renaming' action as clearly as it could.",
-          "suggestion": "'{{folderTitle}}' qovluğunun adı '{{newFoldedTitle}}' adıyla dəyişdirildi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The single quotes around the variables `{{folderTitle}}` and `{{newFoldedTitle}}` in the English content are not consistently reflected in the Finnish translation. While the original uses single quotes, it's more common to use double quotes in Finnish for similar usage.",
-          "suggestion": "Consider changing the single quotes to double quotes: \"Kansio ”{{folderTitle}}” nimettiin uudelleen nimeksi ”{{newFoldedTitle}}”\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Պանակը '{{folderTitle}}'-ից վերանվանվել է'{{newFoldedTitle}}'' is a literal translation but doesn't quite convey the natural phrasing in Armenian. A more natural phrasing would be 'Պանակը վերանվանվել է'{{folderTitle}}'-ից'{{newFoldedTitle}}'' or 'Պանակ '{{folderTitle}}' վերանվանվել է '{{newFoldedTitle}}''",
-          "suggestion": "Պանակը վերանվանվել է '{{folderTitle}}'-ից '{{newFoldedTitle}}' կամ Պանակ '{{folderTitle}}' վերանվանվել է '{{newFoldedTitle}}'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,25 +94,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The single quotes around the placeholders in the Japanese translation are inconsistent with English. English uses single quotes, but the Japanese translation uses them as well, which is not idiomatic.",
-          "suggestion": "フォルダ'{{folderTitle}}'の名前が'{{newFoldedTitle}}'に変更されます。 -> フォルダ「{{folderTitle}}」の名前が「{{newFoldedTitle}}」に変更されます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'renamed to' is not perfectly captured by '으로 변경되었습니다'. While not incorrect, '로 변경되었습니다' is more generic. A more accurate translation would reflect the specific action of renaming, like '이름이 바뀌었습니다' (name changed).",
-          "suggestion": "'{{folderTitle}}' 폴더 이름이 '{{newFoldedTitle}}'로 바뀌었습니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'renamed' implies a change in name, whereas the Latvian translation 'pārvietota' means 'moved'. This doesn't accurately convey the original meaning.",
-          "suggestion": "Consider using 'pārdēvēta' instead of 'pārvietota' to accurately reflect the meaning of 'renamed'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -184,23 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{folderTitle}}' බහාලුම '{{newFoldedTitle}}' ලෙස නම් කර ඇත' is a literal translation but sounds unnatural in Sinhala. 'නම් කර ඇත' (nam kar ath) is somewhat formal. A more natural phrasing would use a verb expressing 'is called' or 'is now called'.",
-          "suggestion": "'{{folderTitle}}' බහාලුම දැන් '{{newFoldedTitle}}' ලෙස නම් වී ඇත"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of single quotes instead of double quotes is inconsistent with standard Sinhala writing conventions for representing titles. While single quotes *can* be used, double quotes are more common and preferred.",
-          "suggestion": "'{{folderTitle}}' බහාලුම '{{newFoldedTitle}}' ලෙස නම් කර ඇත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -218,18 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Фолдер' is a transliteration of 'Folder' and isn't a native Serbian word. While understandable, it's better to use the Serbian equivalent.",
-          "suggestion": "Use 'Папка' instead of 'Фолдер'."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of single quotes around placeholders is inconsistent with typical Serbian text formatting. Double quotes are generally preferred.",
-          "suggestion": "Change single quotes to double quotes: '{{folderTitle}}' to \"{{folderTitle}}\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -241,18 +184,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'newFoldedTitle' seems to be a typo. It should likely be 'yeniKlasörBaşlığı'.",
-          "suggestion": "'yeniKlasörBaşlığı'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'olarak değiştirildi' is grammatically correct, it's a slightly more formal way to say 'renamed'. A more natural and common phrasing would be 'yenilendi' or 'adını değiştirildi'.",
-          "suggestion": "'adını değiştirildi'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -264,18 +196,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Thư mục {{folderTitle}}, được đổi tên thành {{newFoldedTitle}}' implies that the folder exists and is then renamed. The English implies the act of renaming itself. A more accurate translation would reflect the action.",
-          "suggestion": "Thư mục '{{folderTitle}}' đã được đổi tên thành '{{newFoldedTitle}}'"
-        },
-        {
-          "type": "formatting",
-          "description": "The Vietnamese translation lacks single quotes around the folder titles like the English version. Although not strictly incorrect, it would maintain the consistency of the original.",
-          "suggestion": "Thư mục '{{folderTitle}}' đã được đổi tên thành '{{newFoldedTitle}}'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

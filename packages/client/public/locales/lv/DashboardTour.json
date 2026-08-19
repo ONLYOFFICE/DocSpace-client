@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "Šie ir mūsu produkti, un katrs no tiem ir veidots tā, lai pārņemtu citu jūsu darba daļu — dokumentus, sadarbību, datu vākšanu un MI palīdzību. Atveriet jebkuru no tiem, un saņemsiet īsu apskati arī par to sadaļu.",
+  "DashboardAppsTitle": "Viss, ar ko varat strādāt",
+  "DashboardCreate": "Izveidojiet savu pirmo dokumentu turpat šeit — izvēlieties veidu un sāciet rakstīt. Tas tiks saglabāts sadaļā {{files}}, kur to varēsiet atrast jebkurā brīdī.",
+  "DashboardCreateTitle": "Izveidojiet kaut ko tagad",
+  "DashboardDevTools": "Veidojat kaut ko savu? Viss šeit ir tieši tam: API, lai pārvaldītu darbvietu no sava koda, SDK, lai iegultu redaktorus savā lietotnē, spraudņi, tīmekļa āķi un atslēgas. Nekas no tā nav nepieciešams ikdienas darbam ar {{organizationName}} {{productName}}.",
+  "DashboardDevToolsTitle": "Izstrādātājiem",
+  "DashboardIntegrations": "Vai jau strādājat citā platformā? Pievienojiet to šeit, un tikko redzētie redaktori būs pieejami tieši tajos rīkos, ko jūsu komanda jau lieto — bez pielāgota koda un bez datu pārcelšanas.",
+  "DashboardIntegrationsTitle": "Darbs ar citām platformām",
+  "DashboardOverview": "Šī lapa vienmēr ir viena klikšķa attālumā — atveriet {{overview}} sānjoslā ikreiz, kad vēlaties šeit atgriezties.",
+  "DashboardOverviewTitle": "Atgriešanās šeit",
+  "DashboardProfile": "Darbvietas nosaukums un īss jūsu profila kopsavilkums: vārds, e-pasts un parole. No šejienes varat pārdēvēt darbvietu vai nomainīt paroli.",
+  "DashboardProfileTitle": "Jūsu profila dati",
+  "WelcomeDashboardSubtitle": "Viss sākas šajā lapā",
+  "WelcomeDashboardTitle": "Laipni lūdzam {{organizationName}} {{productName}}",
+  "WelcomeDescription": "Veidojiet dokumentus, sadarbojieties telpās, vāciet datus ar veidlapām un ļaujiet MI lasīt jūsu vietā — viss no vienas vietas. Dodieties īsā apskatē, un mēs jums visu parādīsim.",
+  "WelcomeLater": "Varbūt vēlāk"
+}

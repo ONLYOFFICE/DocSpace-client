@@ -1,0 +1,29 @@
+{
+  "key_path": "ArbiterPanelReady",
+  "content": "Your AI Arbiter panel is ready.",
+  "content_en_sha1_hash": "7e6048167c6389e95de1839ff92292b601a617c7",
+  "created_at": "2026-05-24T17:27:18.304Z",
+  "updated_at": "2026-05-24T18:51:44.387Z",
+  "comment": {
+    "text": "Status text within a wizard overlay that appears when the AI Arbiter panel initialization is complete.",
+    "is_auto": true,
+    "updated_at": "2026-05-24T18:51:44.387Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(ai-arbiter)/_components/wizard/WizardOverlay.tsx",
+      "line_number": 542,
+      "context": "aria-hidden=\"true\"\n >\n <CheckIcon />\n </div>\n <Text as=\"p\" className={styles.statusText}>\n {t(\"Common:ArbiterPanelReady\")}\n </Text>\n </div>\n );\n \n const renderFailed = () => (",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

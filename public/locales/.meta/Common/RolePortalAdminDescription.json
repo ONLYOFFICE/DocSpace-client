@@ -1,30 +1,217 @@
 {
   "key_path": "RolePortalAdminDescription",
-  "content": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
-  "content_en_sha1_hash": "bab4e02ce9aa9451d52b5912286876ff2522a52d",
-  "created_at": "2025-12-16T07:24:33.027Z",
-  "updated_at": "2025-12-19T13:32:35.151Z",
+  "content": "Full admins can access workspace settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.<br/> <1>In {{agentSection}}</1>: can create, configure and manage {{agentSection}}, including their knowledge base and access settings.",
+  "content_en_sha1_hash": "dd386c853ec89c14b5295c3bdcabd0b06e889d87",
+  "created_at": "2026-08-13T22:44:19.172Z",
+  "updated_at": "2026-08-14T15:03:02.941Z",
   "comment": {
-    "text": "This text describes the permissions and access granted to administrators within the {{productName}} portal. It appears within UI elements related to user roles and access options, explaining what administrators can do, including managing rooms, users, roles, and the {{agentSection}}. Translators should ensure the text accurately conveys the scope of administrator privileges.",
+    "text": "Description text for the Portal Admin role in user management or access settings. It includes variables for the main section name (`{{sectionName}}`) and the agent section (`{{agentSection}}`), with the latter wrapped in a bold tag.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:50:32.798Z"
+    "updated_at": "2026-08-14T15:03:02.941Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 135,
-      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),",
+      "line_number": 144,
+      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 45,
-      "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),",
+      "line_number": 54,
+      "context": "if (isPortalAdmin)\n return (\n <Trans\n t={t as TFunction}\n ns=\"Common\"\n i18nKey=\"RolePortalAdminDescription\"\n components={{\n 1: <strong></strong>,\n }}\n values={{\n sectionName: t(\"Common:Documents\"),",
       "module": "/packages/shared"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

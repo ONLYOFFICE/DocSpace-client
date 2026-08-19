@@ -1,8 +1,9 @@
 {
-  "ChangeData": "Daten und Passwort ändern\n",
-  "ClickButtonBelow": "Wenn Sie sich mit Ihrer E-Mail-Adresse anmelden möchten, legen Sie bitte Ihr eigenes Passwort fest. <br /> Klicken Sie anschließend auf die Schaltfläche unten.\n",
-  "ContinueToProduct": "Weiter zu {{productName}}\n",
-  "GeneratedPassword": "Generiertes Passwort\n",
-  "ProductNameDetail": "Name von {{productName}} \n",
-  "ReviewAccountDetails": "Bitte überprüfen Sie Ihre Kontodetails:\n"
+  "ChangeData": "Daten und Passwort ändern",
+  "ClickButtonBelow": "Wenn Sie sich mit Ihrer E-Mail-Adresse anmelden möchten, legen Sie bitte ein eigenes Passwort fest. <br/> Sobald dies erledigt ist, klicken Sie bitte auf die untenstehende Schaltfläche.",
+  "ContinueToProduct": "Weiter zum Arbeitsbereich",
+  "GeneratedPassword": "Generiertes Passwort",
+  "ProductNameDetail": "Name des Arbeitsbereichs",
+  "ReviewAccountDetails": "Bitte überprüfen Sie Ihre Kontodetails:",
+  "YourProfileDetails": "Ihre Profildetails"
 }

@@ -1,0 +1,1176 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { useEffect, useRef, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
+import { useApi } from "@docspace/ui-kit/providers/api";
+
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import QuantityPicker from "@docspace/ui-kit/components/quantity-picker";
+import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
+import SalesDepartmentRequestDialog from "@docspace/ui-kit/billing/dialogs/SalesDepartmentRequestDialog";
+import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
+import { isInsufficientFundsError } from "@docspace/ui-kit/billing/utils/insufficientFunds";
+
+import WalletSvg from "PUBLIC_DIR/images/icons/16/wallet.react.svg";
+import AutomationApiSvg from "PUBLIC_DIR/images/icons/16/docs-connect.automation-api.react.svg";
+import RebrandingSvg from "PUBLIC_DIR/images/icons/16/docs-connect.rebranding.react.svg";
+import ExternalLinkSvg from "PUBLIC_DIR/images/external.link.14.react.svg";
+
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import type {
+  TDocsConnectInfo,
+  TDocsConnectDevPackCalculation,
+} from "@docspace/shared/api/docs-connect/types";
+
+import config from "PACKAGE_FILE";
+
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
+
+import {
+  getDocsConnectDaysLeft,
+  getDocsConnectNextBillingDate,
+  getDocsConnectPeriodDays,
+  isDocsConnectCanceled,
+  isDocsConnectPaid,
+} from "../utils";
+import { PAYMENT_ROUTES } from "../../../payments/utils";
+import { brandingRedirectUrl } from "../../../common/Branding/constants";
+
+import styles from "./BuyPlanPanel.module.scss";
+
+const MIN_USERS = 1;
+const DEFAULT_USERS = 50;
+const DEVPACK_MIN_USERS = 10;
+const MAX_USERS = 999;
+const USERS_MINUS_TOOLTIP_ID = "docs_connect_users_minus_tooltip";
+const DEVPACK_CALC_DEBOUNCE_MS = 500;
+
+interface BuyPlanPanelProps {
+  visible?: boolean;
+  info?: TDocsConnectInfo;
+  buyPlan?: (opts: {
+    users: number;
+    devPack: boolean;
+    topUp?: number;
+  }) => Promise<void>;
+  calculateDevPack?: (
+    quantity: number,
+  ) => Promise<TDocsConnectDevPackCalculation | null>;
+  switchToDevPack?: (opts: {
+    quantity: number;
+    topUp?: number;
+  }) => Promise<void>;
+  buyPlanViaStripe?: (opts: {
+    users: number;
+    devPack: boolean;
+    topUp: number;
+    totalMonthly: number;
+    language: string;
+    fetchCardLinked: (
+      backUrl?: string,
+      successUrl?: string,
+    ) => Promise<string | null | undefined>;
+    signal: AbortSignal;
+  }) => Promise<boolean>;
+  isCardMissingOrInactive?: boolean;
+  isCardLinkedToPortal?: boolean;
+  isPayer?: boolean;
+  walletCustomerEmail?: string | null;
+  walletCustomerDisplayName?: string | null;
+  fetchPayerInfo?: (isRefresh?: boolean) => Promise<unknown>;
+  fetchWalletBalance?: (isRefresh?: boolean) => Promise<number>;
+  closeBuyPlan?: () => void;
+  docsConnectUrl?: string;
+}
+
+const BuyPlanPanel = ({
+  visible,
+  info,
+  buyPlan,
+  calculateDevPack,
+  switchToDevPack,
+  buyPlanViaStripe,
+  isCardMissingOrInactive,
+  isCardLinkedToPortal,
+  isPayer,
+  walletCustomerEmail,
+  walletCustomerDisplayName,
+  fetchPayerInfo,
+  fetchWalletBalance,
+  closeBuyPlan,
+  docsConnectUrl,
+}: BuyPlanPanelProps) => {
+  const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
+  const { paymentApi } = useApi();
+
+  const [devPack, setDevPack] = useState<boolean>(
+    info?.devPackEnabled || (info?.previousPlan?.devPackEnabled ?? false),
+  );
+  const [users, setUsers] = useState<number>(() => {
+    const initial =
+      info?.tenant.payment?.quantity ||
+      info?.previousPlan?.users ||
+      DEFAULT_USERS;
+    const min = devPack ? DEVPACK_MIN_USERS : MIN_USERS;
+    return Math.max(initial, min);
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [waitingPayment, setWaitingPayment] = useState(false);
+  const [topUpDialogVisible, setTopUpDialogVisible] = useState(false);
+  const [requestDialogVisible, setRequestDialogVisible] = useState(false);
+  const [devPackCalc, setDevPackCalc] =
+    useState<TDocsConnectDevPackCalculation | null>(null);
+  const [calcLoading, setCalcLoading] = useState(false);
+
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    return () => {
+      abortControllerRef.current?.abort();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    fetchPayerInfo?.()?.catch(() => {});
+    fetchWalletBalance?.()?.catch(() => {});
+  }, [visible, fetchPayerInfo, fetchWalletBalance]);
+
+  useEffect(() => {
+    if (!info) return undefined;
+
+    const curUsers = info.deactivated
+      ? 0
+      : (info.tenant.payment?.quantity ?? 0);
+    const curDevPack = info.devPackEnabled ?? false;
+    const isUp =
+      isDocsConnectPaid(info) && curUsers > 0 && devPack && !curDevPack;
+
+    if (!isUp || users > MAX_USERS) {
+      setDevPackCalc(null);
+      return undefined;
+    }
+
+    let cancelled = false;
+    setCalcLoading(true);
+    const timer = setTimeout(async () => {
+      try {
+        const res = await calculateDevPack?.(users);
+        if (!cancelled) setDevPackCalc(res ?? null);
+      } catch {
+        if (!cancelled) setDevPackCalc(null);
+      } finally {
+        if (!cancelled) setCalcLoading(false);
+      }
+    }, DEVPACK_CALC_DEBOUNCE_MS);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [users, devPack, info, calculateDevPack]);
+
+  if (!info) return null;
+
+  const currency = info.wallet?.currency ?? "USD";
+  const availableCredits = info.wallet?.availableCredits ?? 0;
+  const pricePerUser = info.prices?.pricePerUser ?? 0;
+  const devPackPrice = info.prices?.devPackPrice ?? 0;
+
+  const currentUsers = info.deactivated
+    ? 0
+    : (info.tenant.payment?.quantity ?? 0);
+  const currentDevPack = info.devPackEnabled ?? false;
+
+  const isEditActive = isDocsConnectPaid(info) && currentUsers > 0;
+  const isRenew = isDocsConnectCanceled(info);
+  const isOverLimit = users > MAX_USERS;
+
+  const onToggleDevPack = () => {
+    setDevPack((prev) => {
+      const next = !prev;
+      if (next && users < DEVPACK_MIN_USERS) setUsers(DEVPACK_MIN_USERS);
+      if (!next && isEditActive) setUsers(currentUsers);
+      return next;
+    });
+  };
+
+  const devPackPerUser = devPack ? devPackPrice : 0;
+  const perUser = pricePerUser + devPackPerUser;
+  const totalMonthly = users * perUser;
+
+  const usersChanged = users !== currentUsers;
+  const devPackChanged = devPack !== currentDevPack;
+  const hasChanges = usersChanged || devPackChanged;
+  const devPackTurnedOff = isEditActive && currentDevPack && !devPack;
+  const isScheduled =
+    isEditActive &&
+    (devPackTurnedOff || (!devPackChanged && users < currentUsers));
+  const isUpgrade = isEditActive && hasChanges && !isScheduled;
+  const isDevPackUpgrade = isEditActive && devPack && !currentDevPack;
+
+  const minUsers = isDevPackUpgrade
+    ? Math.max(currentUsers, DEVPACK_MIN_USERS)
+    : devPack
+      ? DEVPACK_MIN_USERS
+      : MIN_USERS;
+  const minusBlockedByDevPackUpgrade =
+    isDevPackUpgrade && users <= currentUsers;
+  const isMinusDisabled = devPack && users <= minUsers;
+
+  const periodEndDate = info.tenant.endDate ?? "";
+  const periodEndDateLocalized = formatDateLocalized(
+    periodEndDate,
+    "DATE_MED",
+    { locale: i18n.language },
+  );
+  const nextBillingDateLocalized = formatDateLocalized(
+    getDocsConnectNextBillingDate(),
+    "DATE_MED",
+    { locale: i18n.language },
+  );
+  const remainingDays = getDocsConnectDaysLeft(periodEndDate);
+  const periodDays = getDocsConnectPeriodDays(periodEndDate);
+  const prorationFactor =
+    periodDays > 0 ? Math.min(1, remainingDays / periodDays) : 0;
+
+  const calcPending =
+    !isOverLimit && isDevPackUpgrade && (calcLoading || devPackCalc === null);
+  const devPackCharge = devPackCalc?.amount ?? 0;
+  const unusedCredit = isDevPackUpgrade
+    ? Math.max(0, totalMonthly - devPackCharge)
+    : 0;
+
+  const addedUsers = Math.max(0, users - currentUsers);
+  const chargeNow = isOverLimit
+    ? 0
+    : isEditActive
+      ? isDevPackUpgrade
+        ? devPackCharge
+        : isUpgrade
+          ? Math.round(addedUsers * perUser * prorationFactor * 100) / 100
+          : 0
+      : users * perUser;
+
+  const remainingCredits = availableCredits - chargeNow;
+  const insufficientFunds = chargeNow > 0 && remainingCredits < 0;
+  const topUpRequired = Math.max(0, Math.ceil(chargeNow - availableCredits));
+  const isTopUpUnavailable =
+    insufficientFunds && !!isCardLinkedToPortal && !isPayer;
+
+  const formatCurrency = (amount: number) =>
+    formatCurrencyValue(i18n.language, amount, currency, 2);
+
+  const formatCurrencyExact = (amount: number) =>
+    new Intl.NumberFormat(i18n.language, {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 10,
+    }).format(amount);
+
+  const priceLoader = (
+    <Loader
+      color=""
+      size="16px"
+      type={LoaderTypes.track}
+      style={{ height: "16px" }}
+    />
+  );
+
+  const fetchCardLinked = async (backUrl?: string, successUrl?: string) => {
+    const res = await paymentApi.getCheckoutSetupUrl(
+      { backUrl: backUrl ?? window.location.href },
+      { params: { successUrl } } as never,
+    );
+    return res?.data?.response as string | undefined;
+  };
+
+  const onClose = () => {
+    abortControllerRef.current?.abort();
+    closeBuyPlan?.();
+  };
+
+  const onSendRequest = () => setRequestDialogVisible(true);
+
+  const onOpenWallet = () =>
+    window.open(
+      combineUrl(
+        window.ClientConfig?.proxy?.url,
+        config.homepage,
+        PAYMENT_ROUTES.wallet,
+      ),
+      "_blank",
+    );
+
+  const rebrandingUrl = combineUrl(
+    window.ClientConfig?.proxy?.url,
+    config.homepage,
+    brandingRedirectUrl,
+  );
+
+  const onTopUpConfirm = async () => {
+    await switchToDevPack?.({ quantity: users, topUp: 0 });
+    toastr.success(t("DocsConnect:PlanPurchased"));
+  };
+
+  const onBuy = async () => {
+    if (submitting) return;
+
+    if (isDevPackUpgrade && insufficientFunds && isCardMissingOrInactive) {
+      setTopUpDialogVisible(true);
+      return;
+    }
+
+    const isStripePurchase =
+      !isDevPackUpgrade && insufficientFunds && !!isCardMissingOrInactive;
+    const controller = isStripePurchase ? new AbortController() : null;
+    if (controller) abortControllerRef.current = controller;
+
+    setSubmitting(true);
+    if (isStripePurchase) setWaitingPayment(true);
+    try {
+      if (isDevPackUpgrade) {
+        await switchToDevPack?.({
+          quantity: users,
+          topUp: insufficientFunds ? topUpRequired : 0,
+        });
+      } else if (controller) {
+        const done = await buyPlanViaStripe?.({
+          users,
+          devPack,
+          topUp: topUpRequired,
+          totalMonthly,
+          language: i18n.language,
+          fetchCardLinked,
+          signal: controller.signal,
+        });
+        if (!done) return;
+      } else {
+        await buyPlan?.({
+          users,
+          devPack,
+          topUp: insufficientFunds ? topUpRequired : 0,
+        });
+      }
+      toastr.success(
+        isScheduled
+          ? t("DocsConnect:ChangeScheduled")
+          : t("DocsConnect:PlanPurchased"),
+      );
+    } catch (error) {
+      if (!controller?.signal.aborted) {
+        // The balance could have been spent while the panel was open.
+        if (isInsufficientFundsError(error)) {
+          toastr.error(
+            isPayer
+              ? t("Common:InsufficientFundsCheckCredits")
+              : t("Common:InsufficientFundsContactPayerShort"),
+            t("Common:InsufficientFunds"),
+          );
+        } else {
+          toastr.error(error as Error);
+        }
+      }
+    } finally {
+      setWaitingPayment(false);
+      setSubmitting(false);
+    }
+  };
+
+  const summaryRow = (
+    label: string,
+    value: React.ReactNode,
+    tooltip?: string,
+  ) => (
+    <div className={styles.summaryRow}>
+      {tooltip ? (
+        <div className={styles.summaryLabelWithHint}>
+          <Text
+            fontSize="14px"
+            fontWeight={400}
+            className={styles.summaryLabel}
+          >
+            {label}
+          </Text>
+          <HelpButton
+            size={12}
+            tooltipContent={tooltip}
+            tooltipMaxWidth="320px"
+          />
+        </div>
+      ) : (
+        <Text fontSize="14px" fontWeight={400} className={styles.summaryLabel}>
+          {label}
+        </Text>
+      )}
+      <Text fontSize="14px" fontWeight={600} className={styles.summaryValue}>
+        {value}
+      </Text>
+    </div>
+  );
+
+  const usersTooltip = t("DocsConnect:PlanUsersTooltip", {
+    count: isOverLimit ? MAX_USERS : users,
+  });
+
+  const getSubmitLabel = () => {
+    if (isOverLimit) return t("Common:SendRequest");
+
+    if (isEditActive) {
+      if (isScheduled) return t("Common:ScheduleChange");
+
+      return insufficientFunds && !isTopUpUnavailable
+        ? t("DocsConnect:TopUpAndBuy")
+        : t("Common:Upgrade");
+    }
+
+    if (!insufficientFunds || isTopUpUnavailable)
+      return isRenew ? t("Common:RenewSubscription") : t("Common:Upgrade");
+
+    return info.deactivated
+      ? t("Common:TopUpAndPay")
+      : t("DocsConnect:TopUpAndBuy");
+  };
+
+  const submitDisabled = isOverLimit
+    ? submitting
+    : submitting ||
+      calcPending ||
+      (isEditActive && !hasChanges) ||
+      isTopUpUnavailable;
+
+  const renderOverLimitSummary = () => (
+    <>
+      {summaryRow(t("DocsConnect:PlanUsers"), `${MAX_USERS}+`, usersTooltip)}
+      {summaryRow(
+        t("DocsConnect:BasePricePerUser"),
+        formatCurrency(pricePerUser),
+      )}
+      {summaryRow(
+        t("DocsConnect:DevPackPerUser"),
+        formatCurrency(devPack ? devPackPrice : 0),
+      )}
+      <hr className={styles.summaryDivider} />
+      <Text fontSize="14px" fontWeight={600} className={styles.uponRequestNote}>
+        {t("DocsConnect:UsersUponRequest", {
+          count: MAX_USERS,
+          service: t("DocsConnect:DocsConnect"),
+        })}
+      </Text>
+    </>
+  );
+
+  const renderFooterHint = () => {
+    if (isOverLimit) return null;
+
+    if (isTopUpUnavailable)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          <Trans
+            t={t}
+            ns="DocsConnect"
+            i18nKey="InsufficientCreditsForSubscription"
+            values={{
+              service: t("DocsConnect:DocsConnect"),
+              payerContact: walletCustomerDisplayName || walletCustomerEmail,
+            }}
+            components={{
+              1:
+                walletCustomerEmail && !walletCustomerDisplayName ? (
+                  <Link
+                    tag="a"
+                    color="accent"
+                    href={`mailto:${walletCustomerEmail}`}
+                    dataTestId="docs_connect_contact_payer_link"
+                  />
+                ) : (
+                  <Text
+                    as="span"
+                    fontWeight={600}
+                    dataTestId="docs_connect_contact_payer_name"
+                  />
+                ),
+            }}
+          />
+        </Text>
+      );
+
+    if (insufficientFunds)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          <Trans
+            ns="DocsConnect"
+            i18nKey="TopUpHint"
+            values={{ amount: formatCurrency(topUpRequired) }}
+            components={{ 1: <Text as="span" fontWeight={600} /> }}
+          />
+        </Text>
+      );
+
+    if (isDevPackUpgrade)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          <Trans
+            ns="DocsConnect"
+            i18nKey="BillingCycleRestartNote"
+            values={{
+              amount: formatCurrency(totalMonthly),
+              date: nextBillingDateLocalized,
+            }}
+            components={{
+              1: <Text as="span" fontWeight={600} />,
+              2: <Text as="span" fontWeight={600} />,
+            }}
+          />
+        </Text>
+      );
+
+    if (isUpgrade)
+      return (
+        <Text fontSize="13px" fontWeight={400} className={styles.footerHint}>
+          <Trans
+            ns="DocsConnect"
+            i18nKey="NextMonthlyBillNote"
+            values={{
+              amount: formatCurrency(totalMonthly),
+              date: nextBillingDateLocalized,
+            }}
+            components={{
+              1: <Text as="span" fontWeight={600} />,
+              2: <Text as="span" fontWeight={600} />,
+            }}
+          />
+        </Text>
+      );
+
+    return null;
+  };
+
+  const renderSummaryHint = () => {
+    if (isOverLimit) return null;
+
+    if (isScheduled)
+      return (
+        <StorageWarning
+          body={t("Common:ScheduledChangeBillingPeriodNote", {
+            date: periodEndDateLocalized,
+          })}
+        />
+      );
+
+    if (insufficientFunds)
+      return (
+        <Text
+          fontSize="12px"
+          className={`${styles.errorText} ${styles.summaryHint}`}
+          textAlign="right"
+        >
+          {t("Common:WalletTopUpRequired", {
+            currency: formatCurrency(topUpRequired),
+          })}
+        </Text>
+      );
+
+    return (
+      <Text
+        fontSize="12px"
+        className={`${styles.secondaryText} ${styles.summaryHint}`}
+        textAlign="right"
+      >
+        {isEditActive
+          ? t("DocsConnect:RemainingBalanceAfter", {
+              amount: formatCurrency(remainingCredits),
+            })
+          : t("DocsConnect:RemainingCreditsAfter", {
+              amount: formatCurrency(remainingCredits),
+            })}
+      </Text>
+    );
+  };
+
+  const footerHint = renderFooterHint();
+
+  if (requestDialogVisible) {
+    return (
+      <SalesDepartmentRequestDialog
+        visible={requestDialogVisible}
+        onClose={() => setRequestDialogVisible(false)}
+      />
+    );
+  }
+
+  return (
+    <>
+      <ModalDialog
+        visible={visible}
+        displayType={ModalDialogType.aside}
+        onClose={onClose}
+        withBodyScroll
+        withFooterBorder
+        isDoubleFooterLine={footerHint !== null}
+      >
+        <ModalDialog.Header>
+          {isRenew
+            ? t("Common:RenewSubscription")
+            : isEditActive
+              ? t("Common:EditSubscription")
+              : t("DocsConnect:DocsConnect")}
+        </ModalDialog.Header>
+        <ModalDialog.Body>
+          <div className={styles.body}>
+            <div className={styles.walletCard}>
+              <div className={styles.walletIcon} aria-hidden>
+                <WalletSvg />
+              </div>
+              <div>
+                <Text fontSize="14px" fontWeight={600}>
+                  {t("Common:Wallet")}
+                </Text>
+                {insufficientFunds ? (
+                  <Text
+                    fontSize="13px"
+                    fontWeight={400}
+                    className={styles.errorText}
+                  >
+                    {t("DocsConnect:WalletInsufficient", {
+                      amount: formatCurrency(availableCredits),
+                    })}
+                  </Text>
+                ) : (
+                  <Text fontSize="13px" className={styles.secondaryText}>
+                    {t("Common:AvailableCredits")}{" "}
+                    <Text
+                      as="span"
+                      fontSize="13px"
+                      fontWeight={600}
+                      className={styles.accent}
+                    >
+                      {formatCurrency(availableCredits)}
+                    </Text>
+                  </Text>
+                )}
+              </div>
+              <IconButton
+                className={styles.walletOpenBilling}
+                iconNode={<ExternalLinkSvg />}
+                size={16}
+                isFill
+                isClickable
+                onClick={onOpenWallet}
+                title={t("Common:OpenPortalBilling")}
+                dataTestId="open_wallet_button"
+              />
+            </div>
+
+            <Text
+              fontSize="16px"
+              fontWeight={700}
+              className={styles.calculateTitle}
+            >
+              {isRenew
+                ? t("DocsConnect:PreviousPlanTitle", {
+                    service: t("DocsConnect:DocsConnect"),
+                  })
+                : t("DocsConnect:CalculateYourPlan")}
+            </Text>
+
+            <div className={styles.usersBlock}>
+              <Text fontSize="13px" className={styles.usersTitle}>
+                {t("DocsConnect:NumberOfUsers")}
+              </Text>
+              <QuantityPicker
+                className={styles.quantityPicker}
+                value={users}
+                minValue={minUsers}
+                maxValue={MAX_USERS}
+                step={1}
+                showSlider
+                showPlusSign
+                underContorlsTitle={t("DocsConnect:PerUserPerMonth", {
+                  price: formatCurrency(pricePerUser),
+                })}
+                onChange={setUsers}
+                isDisabled={submitting}
+                minusDisabled={isMinusDisabled}
+                minusTooltipId={
+                  minusBlockedByDevPackUpgrade
+                    ? USERS_MINUS_TOOLTIP_ID
+                    : undefined
+                }
+              />
+              {minusBlockedByDevPackUpgrade ? (
+                <Tooltip
+                  id={USERS_MINUS_TOOLTIP_ID}
+                  place="bottom"
+                  maxWidth="320px"
+                  getContent={() =>
+                    t("DocsConnect:DevPackUserReductionTooltip")
+                  }
+                />
+              ) : null}
+            </div>
+
+            <div className={styles.devPackCard}>
+              <div className={styles.devPackHeader}>
+                <div>
+                  <Text fontSize="13px" fontWeight={600}>
+                    {t("DocsConnect:DevPack")}{" "}
+                    <Text
+                      as="span"
+                      fontSize="13px"
+                      fontWeight={400}
+                      className={styles.secondaryText}
+                    >
+                      {t("DocsConnect:OptionalAddOn")}
+                    </Text>
+                  </Text>
+                  <Text fontSize="13px">
+                    {t("DocsConnect:PlusPerUserPerMonth", {
+                      price: formatCurrency(devPackPrice),
+                    })}{" "}
+                    <Text
+                      as="span"
+                      fontSize="13px"
+                      className={styles.secondaryText}
+                    >
+                      {t("DocsConnect:MinUsersNote", {
+                        count: DEVPACK_MIN_USERS,
+                      })}
+                    </Text>
+                  </Text>
+                </div>
+                <ToggleButton
+                  className={styles.toggleButton}
+                  isChecked={devPack}
+                  onChange={onToggleDevPack}
+                  isDisabled={submitting}
+                  dataTestId="docs_connect_devpack_toggle"
+                />
+              </div>
+              <hr className={styles.devPackDivider} />
+              <div className={styles.devPackFeatures}>
+                <div className={styles.devPackFeature}>
+                  <div className={styles.devPackFeatureIcon} aria-hidden>
+                    <AutomationApiSvg />
+                  </div>
+                  <div>
+                    <Link
+                      type={LinkType.page}
+                      href={docsConnectUrl}
+                      target={LinkTarget.blank}
+                      fontSize="13px"
+                      fontWeight={600}
+                      textDecoration="underline"
+                      dataTestId="docs_connect_automation_api_link"
+                    >
+                      {t("DocsConnect:AutomationApi")}
+                    </Link>
+                    <Text fontSize="12px" className={styles.secondaryText}>
+                      {t("DocsConnect:AutomationApiDescription")}
+                    </Text>
+                  </div>
+                </div>
+                <div className={styles.devPackFeature}>
+                  <div className={styles.devPackFeatureIcon} aria-hidden>
+                    <RebrandingSvg />
+                  </div>
+                  <div>
+                    <Link
+                      type={LinkType.page}
+                      href={rebrandingUrl}
+                      target={LinkTarget.blank}
+                      fontSize="13px"
+                      fontWeight={600}
+                      textDecoration="underline"
+                      dataTestId="docs_connect_rebranding_link"
+                    >
+                      {t("DocsConnect:Rebranding")}
+                    </Link>
+                    <Text fontSize="12px" className={styles.secondaryText}>
+                      {t("DocsConnect:RebrandingDescription")}
+                    </Text>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {isEditActive && !hasChanges ? null : (
+              <>
+                <Text
+                  fontSize="16px"
+                  fontWeight={700}
+                  className={styles.orderSummaryTitle}
+                >
+                  {t("Common:OrderSummary")}
+                </Text>
+                <div className={styles.summaryCard}>
+                  {isOverLimit ? (
+                    renderOverLimitSummary()
+                  ) : isEditActive ? (
+                    isDevPackUpgrade ? (
+                      <>
+                        {usersChanged
+                          ? summaryRow(
+                              t("DocsConnect:UserAdjustmentLabel"),
+                              `${currentUsers} → ${users}`,
+                            )
+                          : summaryRow(
+                              t("DocsConnect:PlanUsers"),
+                              `${users}`,
+                              usersTooltip,
+                            )}
+                        {usersChanged && users > currentUsers
+                          ? summaryRow(
+                              t("DocsConnect:AdditionalUsers"),
+                              `+${users - currentUsers}`,
+                            )
+                          : null}
+                        {summaryRow(
+                          t("DocsConnect:BasePricePerUser"),
+                          formatCurrency(pricePerUser),
+                        )}
+                        {summaryRow(
+                          t("DocsConnect:DevPackPerUser"),
+                          formatCurrency(devPackPrice),
+                        )}
+                        {summaryRow(
+                          t("Common:NewMonthlyPrice"),
+                          formatCurrency(totalMonthly),
+                        )}
+                        <div className={styles.summaryRow}>
+                          <div className={styles.totalLabel}>
+                            <Text
+                              fontSize="14px"
+                              fontWeight={400}
+                              className={styles.summaryLabel}
+                            >
+                              {t("DocsConnect:UnusedSubscriptionCredit")}
+                            </Text>
+                            <Text
+                              as="span"
+                              fontSize="14px"
+                              fontWeight={400}
+                              className={styles.secondaryText}
+                            >
+                              (
+                              {t("Common:UntilDate", {
+                                date: periodEndDateLocalized,
+                              })}
+                              )
+                            </Text>
+                            <HelpButton
+                              size={12}
+                              tooltipContent={
+                                <Trans
+                                  ns="DocsConnect"
+                                  i18nKey="UnusedSubscriptionCreditTooltip"
+                                  values={{
+                                    amount: formatCurrencyExact(unusedCredit),
+                                  }}
+                                  components={{
+                                    1: <Text fontSize="12px" />,
+                                    2: (
+                                      <Text
+                                        fontSize="12px"
+                                        fontWeight={600}
+                                        className={styles.tooltipAmount}
+                                      />
+                                    ),
+                                    3: <Text fontSize="12px" />,
+                                  }}
+                                />
+                              }
+                              tooltipMaxWidth="320px"
+                            />
+                          </div>
+                          {calcPending ? (
+                            priceLoader
+                          ) : (
+                            <Text
+                              fontSize="14px"
+                              fontWeight={600}
+                              className={styles.creditValue}
+                            >
+                              {t("DocsConnect:MinusAmount", {
+                                amount: formatCurrency(unusedCredit),
+                              })}
+                            </Text>
+                          )}
+                        </div>
+                        <hr className={styles.summaryDivider} />
+                        <div className={styles.summaryRow}>
+                          <Text
+                            fontSize="14px"
+                            fontWeight={600}
+                            className={styles.summaryValue}
+                          >
+                            {t("Common:TotalDueToday")}
+                          </Text>
+                          {calcPending ? (
+                            priceLoader
+                          ) : (
+                            <Text
+                              fontSize="14px"
+                              fontWeight={600}
+                              className={styles.summaryValue}
+                            >
+                              {formatCurrencyExact(chargeNow)}
+                            </Text>
+                          )}
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {devPackTurnedOff
+                          ? summaryRow(
+                              t("DocsConnect:DevPack"),
+                              t("Common:Disabled"),
+                            )
+                          : null}
+                        {usersChanged
+                          ? summaryRow(
+                              t("DocsConnect:UserAdjustmentLabel"),
+                              `${currentUsers} → ${users}`,
+                            )
+                          : summaryRow(
+                              t("DocsConnect:PlanUsers"),
+                              `${users}`,
+                              usersTooltip,
+                            )}
+                        {usersChanged && users > currentUsers
+                          ? summaryRow(
+                              t("DocsConnect:AdditionalUsers"),
+                              `+${users - currentUsers}`,
+                            )
+                          : null}
+                        {usersChanged && users < currentUsers
+                          ? summaryRow(
+                              t("DocsConnect:ReducedUsers"),
+                              t("DocsConnect:MinusCount", {
+                                count: currentUsers - users,
+                              }),
+                            )
+                          : null}
+                        {summaryRow(
+                          t("DocsConnect:BasePricePerUser"),
+                          formatCurrency(pricePerUser),
+                        )}
+                        {devPack
+                          ? summaryRow(
+                              t("DocsConnect:DevPackPerUser"),
+                              formatCurrency(devPackPrice),
+                            )
+                          : null}
+                        {isUpgrade ? (
+                          summaryRow(
+                            t("Common:RemainingPeriod"),
+                            <>
+                              {t("DocsConnect:DaysCount", {
+                                count: remainingDays,
+                              })}{" "}
+                              <Text
+                                as="span"
+                                fontSize="14px"
+                                fontWeight={400}
+                                className={styles.secondaryText}
+                              >
+                                (
+                                {t("Common:UntilDate", {
+                                  date: periodEndDateLocalized,
+                                })}
+                                )
+                              </Text>
+                            </>,
+                          )
+                        ) : (
+                          <>
+                            {summaryRow(
+                              t("Common:NewMonthlyPrice"),
+                              formatCurrency(totalMonthly),
+                            )}
+                            {summaryRow(
+                              t("Common:EffectiveDate"),
+                              periodEndDateLocalized,
+                            )}
+                          </>
+                        )}
+                        <hr className={styles.summaryDivider} />
+                        <div className={styles.summaryRow}>
+                          <div className={styles.totalLabel}>
+                            <Text
+                              fontSize="14px"
+                              fontWeight={600}
+                              className={styles.summaryValue}
+                            >
+                              {t("Common:TotalDueToday")}
+                            </Text>
+                            {isUpgrade ? (
+                              <HelpButton
+                                size={12}
+                                tooltipContent={t(
+                                  "DocsConnect:TotalDueTodayTooltip",
+                                )}
+                                tooltipMaxWidth="320px"
+                              />
+                            ) : null}
+                          </div>
+                          <Text
+                            fontSize="14px"
+                            fontWeight={600}
+                            className={styles.summaryValue}
+                          >
+                            {formatCurrency(chargeNow)}
+                          </Text>
+                        </div>
+                      </>
+                    )
+                  ) : (
+                    <>
+                      {summaryRow(
+                        t("DocsConnect:PlanUsers"),
+                        `${users}`,
+                        usersTooltip,
+                      )}
+                      {summaryRow(
+                        t("DocsConnect:BasePricePerUser"),
+                        formatCurrency(pricePerUser),
+                      )}
+                      {summaryRow(
+                        t("DocsConnect:DevPackPerUser"),
+                        formatCurrency(devPack ? devPackPrice : 0),
+                      )}
+                      <hr className={styles.summaryDivider} />
+                      <div className={styles.summaryRow}>
+                        <Text
+                          fontSize="14px"
+                          fontWeight={600}
+                          className={styles.summaryValue}
+                        >
+                          {t("DocsConnect:TotalMonthly")}
+                        </Text>
+                        <Text
+                          fontSize="14px"
+                          fontWeight={600}
+                          className={styles.summaryValue}
+                        >
+                          {formatCurrency(totalMonthly)}
+                        </Text>
+                      </div>
+                    </>
+                  )}
+                </div>
+                {renderSummaryHint()}
+              </>
+            )}
+          </div>
+        </ModalDialog.Body>
+        <ModalDialog.Footer>
+          {footerHint}
+          <div className={styles.footerButtons}>
+            <Button
+              primary
+              scale
+              size={ButtonSize.normal}
+              label={getSubmitLabel()}
+              onClick={isOverLimit ? onSendRequest : onBuy}
+              isLoading={submitting}
+              isDisabled={submitDisabled}
+              testId="docs_connect_buy_plan_submit"
+            />
+            <Button
+              scale
+              size={ButtonSize.normal}
+              label={t("Common:CancelButton")}
+              onClick={onClose}
+              isDisabled={submitting && !waitingPayment}
+            />
+          </div>
+        </ModalDialog.Footer>
+      </ModalDialog>
+      {topUpDialogVisible ? (
+        <ClientSimpleTopUpDialog
+          visible={topUpDialogVisible}
+          onClose={() => setTopUpDialogVisible(false)}
+          onConfirm={onTopUpConfirm}
+          language={i18n.language}
+          service=""
+          minValue={String(topUpRequired)}
+        />
+      ) : null}
+    </>
+  );
+};
+
+export default inject(
+  ({
+    docsConnectStore,
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+  }: TStore) => ({
+    visible: docsConnectStore.buyPlanPanelVisible,
+    info: docsConnectStore.info,
+    buyPlan: docsConnectStore.buyPlan,
+    calculateDevPack: docsConnectStore.calculateDevPack,
+    switchToDevPack: docsConnectStore.switchToDevPack,
+    buyPlanViaStripe: docsConnectStore.buyPlanViaStripe,
+    isCardMissingOrInactive: paymentStore.isCardMissingOrInactive,
+    isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
+    isPayer: paymentStore.isPayer,
+    walletCustomerEmail: currentTariffStatusStore.walletCustomerEmail,
+    walletCustomerDisplayName:
+      currentTariffStatusStore.walletCustomerInfo?.displayName,
+    fetchPayerInfo: currentTariffStatusStore.fetchPayerInfo,
+    fetchWalletBalance: paymentStore.fetchWalletBalance,
+    closeBuyPlan: docsConnectStore.closeBuyPlan,
+    docsConnectUrl: settingsStore.docsConnectUrl,
+  }),
+)(observer(BuyPlanPanel));
+

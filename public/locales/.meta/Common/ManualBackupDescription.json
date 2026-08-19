@@ -1,18 +1,19 @@
 {
   "key_path": "ManualBackupDescription",
-  "content": "Use this option if you want to get all data contained in the space as a file.",
-  "content_en_sha1_hash": "72b06ec623764ca1cdcbbdbe125f16fc48240dee",
-  "created_at": "2025-05-26T07:15:44.992Z",
-  "updated_at": "2026-03-20T09:07:45.757Z",
+  "content": "Use this option if you want to get all data contained in the workspace as a file.",
+  "content_en_sha1_hash": "84b13aac99019044bc52197f4efabfdfed49086e",
+  "created_at": "2026-08-12T11:00:27.872Z",
+  "updated_at": "2026-08-12T11:11:02.135Z",
   "comment": {
-    "text": "Use this option to download all data contained within a space as a file. This setting is typically found on backup and restore options in a space management interface.",
+    "text": "Description text for the manual backup option, explaining that it allows downloading all workspace data as a single file.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:40.443Z"
+    "updated_at": "2026-08-12T11:11:02.135Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 447,
+      "line_number": 533,
       "context": "className={classNames(\n styles.backupModulesDescription,\n \"backup_modules-description\",\n )}\n >\n {t(\"Common:ManualBackupDescription\")}\n </Text>\n {!isManagement ? (\n <Link\n className={classNames(styles.linkLearnMore, \"link-learn-more\")}\n href={dataBackupUrl}",
       "module": "/packages/shared"
     }
@@ -163,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

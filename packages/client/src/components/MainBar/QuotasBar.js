@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
@@ -30,6 +39,7 @@ import { withTranslation, Trans } from "react-i18next";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 
 import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 const QuotasBar = ({
@@ -43,6 +53,9 @@ const QuotasBar = ({
   onLoad,
   currentColorScheme,
   isAdmin,
+  isPayer,
+  walletCustomerEmail,
+  walletCustomerDisplayName,
 }) => {
   const onClickAction = (e) => {
     onClick && onClick(type, e);
@@ -54,9 +67,7 @@ const QuotasBar = ({
 
   const getTenantCustomQuota = () => {
     if (!isAdmin)
-      return t("RemoveFilesOrContactToUpgradeQuota", {
-        productName: t("Common:ProductName"),
-      });
+      return t("RemoveFilesOrContactToUpgradeQuota");
 
     return (
       <Trans
@@ -78,9 +89,7 @@ const QuotasBar = ({
 
   const getUserTariffAlmostLimit = () => {
     if (!isAdmin)
-      return t("UserTariffAlmostReached", {
-        productName: t("Common:ProductName"),
-      });
+      return t("UserTariffAlmostReached");
 
     return (
       <Trans
@@ -103,15 +112,12 @@ const QuotasBar = ({
 
   const getUserTariffLimit = () => {
     if (!isAdmin)
-      return t("UserTariffReached", { productName: t("Common:ProductName") });
+      return t("UserTariffReached");
 
     return (
       <Trans
         t={t}
         i18nKey="UserTariffReachedForAdmins"
-        values={{
-          productName: t("Common:ProductName"),
-        }}
         components={{
           1: (
             <Link
@@ -129,9 +135,7 @@ const QuotasBar = ({
 
   const getStorageTariffDescription = () => {
     if (!isAdmin)
-      return t("RemoveFilesOrContactToUpgrade", {
-        productName: t("Common:ProductName"),
-      });
+      return t("RemoveFilesOrContactToUpgrade");
 
     return (
       <Trans
@@ -154,9 +158,7 @@ const QuotasBar = ({
 
   const getPersonalQuotaDescription = () => {
     if (!isAdmin)
-      return t("PersonalUserQuotaDescription", {
-        productName: t("Common:ProductName"),
-      });
+      return t("PersonalUserQuotaDescription");
 
     return (
       <Trans
@@ -184,9 +186,7 @@ const QuotasBar = ({
 
   const getUpgradeTariffDescription = () => {
     if (!isAdmin)
-      return t("ContactToUpgradeTariff", {
-        productName: t("Common:ProductName"),
-      });
+      return t("ContactToUpgradeTariff");
 
     return (
       <Trans
@@ -209,17 +209,12 @@ const QuotasBar = ({
 
   const getRoomsTariffDescription = () => {
     if (!isAdmin)
-      return t("ArchivedRoomsOrContact", {
-        productName: t("Common:ProductName"),
-      });
+      return t("ArchivedRoomsOrContact");
 
     return (
       <Trans
         t={t}
         i18nKey="RoomQuotaDescription"
-        values={{
-          productName: t("Common:ProductName"),
-        }}
         components={{
           1: (
             <Link
@@ -234,8 +229,64 @@ const QuotasBar = ({
       />
     );
   };
+  const getWalletLowBalanceDescription = () => {
+    if (!isPayer) {
+      const payerContact = walletCustomerDisplayName || walletCustomerEmail;
+
+      // The phrasing puts the contact in brackets, so without one it would read
+      // "Contact the Payer () to ...". The header alone still states the problem.
+      if (!payerContact) return null;
+
+      return (
+        <Trans
+          t={t}
+          i18nKey="WalletLowBalanceContactPayer"
+          values={{
+            payerContact,
+          }}
+          components={{
+            1:
+              walletCustomerEmail && !walletCustomerDisplayName ? (
+                <Link
+                  fontSize="12px"
+                  fontWeight="400"
+                  color={currentColorScheme?.main?.accent}
+                  href={`mailto:${walletCustomerEmail}`}
+                />
+              ) : (
+                <Text as="span" fontSize="12px" fontWeight={600} />
+              ),
+          }}
+        />
+      );
+    }
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="WalletLowBalanceDescription"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
   const getQuotaInfo = () => {
     switch (type) {
+      case QuotaBarTypes.WalletLowBalance:
+        return {
+          header: t("WalletLowBalanceHeader", { balance: currentValue }),
+          description: getWalletLowBalanceDescription(),
+        };
       case QuotaBarTypes.RoomsTariff:
         return {
           header: t("RoomQuotaHeader", { currentValue, maxValue }),

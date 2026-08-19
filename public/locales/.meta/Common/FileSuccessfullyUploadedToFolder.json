@@ -1,0 +1,29 @@
+{
+  "key_path": "FileSuccessfullyUploadedToFolder",
+  "content": "<2>{{title}}</2> successfully uploaded to <1>{{folderName}}</1>",
+  "content_en_sha1_hash": "36b082fe0d9234eeac0c1e1f421611d3cbd1079f",
+  "created_at": "2026-06-25T19:30:35.397Z",
+  "updated_at": "2026-07-07T08:59:21.788Z",
+  "comment": {
+    "text": "Toast message appearing after a successful file upload, where {{title}} is the filename and {{folderName}} is the destination folder.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:39:40.975Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useUploadToMyDocuments.tsx",
+      "line_number": 118,
+      "context": "const toastMessage =\n uploaded === 1 ? (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"Common:FileSuccessfullyUploadedToFolder\"\n values={{ title, qty: uploaded, folderName }}\n components={components}\n />\n ) : (\n <Trans",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

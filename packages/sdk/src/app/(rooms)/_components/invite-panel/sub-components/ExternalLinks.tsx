@@ -1,0 +1,384 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+"use client";
+
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
+import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
+import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
+
+import { useRef } from "react";
+import classNames from "classnames";
+
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { InputType } from "@docspace/ui-kit/components/text-input";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import type { TOption } from "@docspace/ui-kit/components/combobox";
+import type { TTranslation } from "@docspace/shared/types";
+import { now, parseToDateTime, isAfter } from "@docspace/ui-kit/utils/date";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
+import { filterNotReadOnlyOptions } from "@docspace/shared/utils/filterNotReadOnlyOptions";
+import api from "@docspace/shared/api";
+import { RoomsType } from "@docspace/shared/enums";
+import { LANGUAGE } from "@docspace/shared/constants";
+
+import type { ShareLink } from "../index";
+import AccessSelector from "./AccessSelector";
+import styles from "../InvitePanel.module.scss";
+import { getFreeUsersRoleArray } from "../utils";
+
+export type ExternalLinksProps = {
+  t: TTranslation;
+  roomId: number;
+  roomType: RoomsType;
+  shareLinks: ShareLink[];
+  setShareLinks: (links: ShareLink[]) => void;
+  getInfo: () => Promise<void>;
+  onChangeExternalLinksVisible: (v: boolean) => void;
+  externalLinksVisible: boolean;
+  setActiveLink: (link: ShareLink) => void;
+  activeLink: ShareLink;
+  isMobileView: boolean;
+  setLinkSettingsPanelVisible: (v: boolean) => void;
+  onSelectAccess: (access: TOption) => void;
+  copyLink: (link: ShareLink, showToast?: boolean) => void;
+  editLink: (access?: number | null, defaultLink?: ShareLink) => Promise<void>;
+  isLinksToggling: boolean;
+  setIsLinksToggling: (v: boolean) => void;
+  isOwner: boolean;
+  isAdmin: boolean;
+  allowInvitingGuests: boolean;
+  culture?: string;
+};
+
+const ExternalLinks: React.FC<ExternalLinksProps> = ({
+  t,
+  roomId,
+  roomType,
+  shareLinks,
+  setShareLinks,
+  isOwner,
+  isAdmin,
+  onChangeExternalLinksVisible,
+  externalLinksVisible,
+  setActiveLink,
+  activeLink,
+  isMobileView,
+  allowInvitingGuests,
+  setLinkSettingsPanelVisible,
+  onSelectAccess,
+  copyLink,
+  editLink,
+  isLinksToggling,
+  setIsLinksToggling,
+  culture,
+}) => {
+  const showUsersJoinedBlock = !!activeLink?.maxUseCount;
+  const showLifetimeBlock = !!activeLink?.expirationDate;
+  const showUsersLimitWarning =
+    (activeLink?.currentUseCount ?? 0) >= (activeLink?.maxUseCount ?? Infinity);
+  const linkIsExpired = isAfter(
+    now(),
+    parseToDateTime(activeLink?.expirationDate),
+  );
+
+  const locale = getCookie(LANGUAGE) ?? culture ?? "en";
+
+  const inputsRef = useRef<HTMLDivElement>(null);
+
+  const disableLink = async () => {
+    if (shareLinks?.length) {
+      await api.rooms.setInvitationLinks(
+        roomId,
+        "Invite",
+        0,
+        shareLinks[0].id,
+        undefined,
+        undefined,
+      );
+    }
+    setActiveLink({});
+    onChangeExternalLinksVisible(false);
+    setShareLinks([]);
+  };
+
+  const toggleLinks = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isLinksToggling) return;
+
+    setIsLinksToggling(true);
+
+    try {
+      !externalLinksVisible ? await editLink() : await disableLink();
+    } catch (error) {
+      toastr.error((error as Error).message);
+    } finally {
+      setIsLinksToggling(false);
+    }
+  };
+
+  const onCopyLink = () => copyLink(activeLink);
+
+  const availableAccess = getFreeUsersRoleArray();
+
+  const accesses = getAccessOptions(
+    t,
+    roomType,
+    false,
+    true,
+    isOwner,
+    isAdmin,
+    false, // standalone = false
+  );
+
+  const getAgentAccesses = () => {
+    return (
+      filterNotReadOnlyOptions(
+        accesses as unknown as Parameters<typeof filterNotReadOnlyOptions>[0],
+      ) as unknown as TOption[]
+    ).filter(
+      (o) => !(o as { isSeparator?: boolean }).isSeparator && !o.disabled,
+    );
+  };
+
+  const filteredAccesses =
+    roomType === RoomsType.AIRoom
+      ? getAgentAccesses()
+      : (filterPaidRoleOptions(
+          accesses as unknown as Parameters<typeof filterPaidRoleOptions>[0],
+        ) as unknown as TOption[]);
+
+  const description =
+    roomType === RoomsType.AIRoom
+      ? allowInvitingGuests
+        ? t("Common:InviteViaLinkDescriptionAgentGuest")
+        : t("Common:InviteViaLinkDescriptionAgentMembers")
+      : allowInvitingGuests
+        ? t("Common:InviteViaLinkDescriptionRoomGuest")
+        : t("Common:InviteViaLinkDescriptionRoomMembers");
+
+  return (
+    <div className={styles.externalLink} ref={inputsRef}>
+      <Heading
+        className={classNames(styles.subHeader, {
+          [styles.inline]: true,
+        })}
+      >
+        {t("Common:InviteViaLink")}
+
+        <IconButton
+          iconName={SettingsReactSvgUrl}
+          size={16}
+          dataTestId="link-settings_icon"
+          onClick={() => setLinkSettingsPanelVisible(true)}
+        />
+
+        <ToggleButton
+          className={classNames("invite-via-link", styles.toggleButton)}
+          isChecked={externalLinksVisible}
+          onChange={toggleLinks}
+          isDisabled={isLinksToggling}
+          dataTestId="invite_panel_external_links_toggle"
+        />
+      </Heading>
+      <Text className={styles.description}>{description}</Text>
+      {externalLinksVisible ? (
+        <>
+          <div className={styles.inviteInputContainer} key={activeLink.id}>
+            <div
+              className={classNames(styles.inviteInput, {
+                [styles.isShowCross]: true,
+              })}
+            >
+              <InputBlock
+                type={InputType.text}
+                className={classNames(styles.copyLinkIcon, styles.inputLink)}
+                iconSize={16}
+                iconButtonClassName="copy-link-icon"
+                scale
+                value={activeLink.shareLink ?? ""}
+                isReadOnly
+                iconName={CopyReactSvgUrl}
+                onIconClick={onCopyLink}
+                dataTestId="invite_panel_external_link_input"
+              />
+            </div>
+            <AccessSelector
+              className="invite-via-link-access"
+              t={t}
+              roomType={roomType}
+              defaultAccess={activeLink.access}
+              onSelectAccess={onSelectAccess}
+              containerRef={inputsRef}
+              isOwner={isOwner}
+              isAdmin={isAdmin}
+              isMobileView={isMobileView}
+              filteredAccesses={filteredAccesses}
+              availableAccess={availableAccess}
+              dataTestId="invite_panel_external_link_access"
+            />
+          </div>
+
+          {showLifetimeBlock || showUsersJoinedBlock ? (
+            <div className={styles.inviteViaLinkSettingsContainer}>
+              {showLifetimeBlock ? (
+                <div className={styles.inviteViaLinkSettings}>
+                  <IconButton
+                    className={styles.inviteViaLinkSettingsIcon}
+                    iconName={ClockIconUrl}
+                    size={12}
+                    isDisabled
+                  />
+                  <Text
+                    className={styles.inviteViaLinkSettingsText}
+                    fontSize="12px"
+                    fontWeight={400}
+                  >
+                    {t("Common:ValidUntil")}
+                  </Text>
+                  <Text
+                    fontSize="12px"
+                    fontWeight={600}
+                    className={classNames(styles.inviteViaLinkText, {
+                      [styles.isError]: linkIsExpired,
+                    })}
+                  >
+                    {getCorrectDate(locale, activeLink.expirationDate ?? "")}
+                  </Text>
+                  {linkIsExpired ? (
+                    <HelpButton
+                      place="right"
+                      iconNode={<ButtonAlertIcon />}
+                      tooltipMaxWidth="344px"
+                      tooltipContent={
+                        <>
+                          <Text>{t("Common:LinkSettingsExpired")}</Text>
+                          <Text>
+                            {t("Common:LinkSettingsExpiredToastDescription")}
+                          </Text>
+                        </>
+                      }
+                      className={styles.inviteViaLinkSettingsWarning}
+                    />
+                  ) : null}
+                </div>
+              ) : null}
+
+              {showUsersJoinedBlock ? (
+                <div className={styles.inviteViaLinkSettings}>
+                  <IconButton
+                    iconName={PersonPlusReactSvgUrl}
+                    size={12}
+                    isDisabled
+                  />
+                  <Text
+                    className={styles.inviteViaLinkSettingsText}
+                    fontSize="12px"
+                    fontWeight={400}
+                  >
+                    {t("Common:UsersJoined")}
+                  </Text>
+                  <Text
+                    fontSize="12px"
+                    fontWeight={600}
+                    className={classNames(styles.inviteViaLinkText, {
+                      [styles.isError]: showUsersLimitWarning,
+                    })}
+                  >
+                    {activeLink.currentUseCount}/{activeLink.maxUseCount}
+                  </Text>
+                  {showUsersLimitWarning ? (
+                    <HelpButton
+                      place="right"
+                      iconNode={<ButtonAlertIcon />}
+                      tooltipContent={
+                        <>
+                          <Text>{t("Common:LinkSettingsUsersLimitToast")}</Text>
+                          <Text>
+                            {t("Common:LinkSettingsUsersLimitToastDescription")}
+                          </Text>
+                        </>
+                      }
+                      className={styles.inviteViaLinkSettingsWarning}
+                      tooltipMaxWidth="344px"
+                    />
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+        </>
+      ) : null}
+    </div>
+  );
+};
+
+export default ExternalLinks;
+

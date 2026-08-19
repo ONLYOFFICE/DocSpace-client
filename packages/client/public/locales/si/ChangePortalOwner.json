@@ -1,14 +1,13 @@
 {
   "AppointAdmin": "පරිපාලකයින් පත් කරන්න",
-  "BackupPortal": "{{productName}} දත්ත උපස්ථය",
-  "ChangeInstruction": "{{productName}} හිමිකරු වෙනස් කිරීමට, කරුණාකර පහතින් නව හිමිකරුගේ නම තෝරන්න.",
-  "ChangeOwner": "{{productName}} හිමිකරු සංශෝධනය",
+  "BackupPortal": "වැඩ අවකාශයේ දත්ත උපස්ථ කිරීම",
+  "ChangeInstruction": "හිමිකරු වෙනස් කිරීමට, කරුණාකර පහතින් නව හිමිකරුගේ නම තෝරන්න.",
+  "ChangeOwner": "හිමිකරු වෙනස් කරන්න",
   "ChangeUser": "පරිශ්‍රීලක සංශෝධනය",
-  "DeactivateOrDeletePortal": "{{productName}} අක්‍රිය කරන්න හෝ මකන්න",
   "DoTheSame": "පරිපාලකයින් ලෙසම කරන්න",
-  "ManagePortal": "{{productName}} වින්‍යාසය කළමනාකරණය",
+  "ManagePortal": "වැඩ අවකාශයේ වින්‍යාසය කළමනාකරණය",
   "ManageUser": "පරිශ්‍රීලක ගිණුම් කළමනාකරණය",
-  "NewPortalOwner": "නව {{productName}} හිමිකරු",
-  "PortalOwnerCan": "{{productName}} හිමිකරුගේ වරප්‍රසාද:",
+  "NewPortalOwner": "නව වැඩ අවකාශයේ හිමිකරු",
+  "PortalOwnerCan": "වැඩ අවකාශයේ හිමිකරුට හැකිය:",
   "SetAccessRights": "ප්‍රවේශ අයිතීන් සකසන්න"
 }

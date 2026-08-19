@@ -1,0 +1,29 @@
+{
+  "key_path": "TrialBannerDescriptionSecond",
+  "content": "If you pay today, your data is saved, and the first charge occurs after the trial period expires.",
+  "content_en_sha1_hash": "715571d266e4a9c6d4fae7b74c12a4cc4c7e089f",
+  "created_at": "2026-07-27T13:07:48.479Z",
+  "updated_at": "2026-08-10T12:23:10.546Z",
+  "comment": {
+    "text": "Secondary informational text within a trial banner, displayed as small muted text to explain billing and data retention details.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:49:49.740Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 317,
+      "context": "{t(\"DocsConnect:TrialBannerDescription\", {\n count: daysLeft,\n })}\n </Text>\n <Text fontSize=\"12px\" className={styles.muted}>\n {t(\"DocsConnect:TrialBannerDescriptionSecond\")}\n </Text>\n </>\n )}\n </div>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

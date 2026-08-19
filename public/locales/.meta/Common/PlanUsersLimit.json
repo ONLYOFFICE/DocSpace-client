@@ -1,0 +1,35 @@
+{
+  "key_path": "PlanUsersLimit",
+  "content": "You wish to downgrade the team to <1>{{usersCount}}</1> admins, and current number of such users in the workspace is <1>{{currentUsersCount}}</1>.",
+  "content_en_sha1_hash": "3c8fb0df25ba86b9a3d89a69e8cceffa477218b3",
+  "created_at": "2026-08-12T11:00:32.226Z",
+  "updated_at": "2026-08-12T11:09:57.422Z",
+  "comment": {
+    "text": "Informational text in the ChangePricingPlanDialog that warns about admin limit discrepancies when downgrading a plan; includes `<1>` tags for formatting and numeric variables `usersCount` (new limit) and `currentUsersCount` (existing admins).",
+    "is_auto": true,
+    "updated_at": "2026-08-12T11:09:57.422Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/ChangePricingPlanDialog.tsx",
+      "line_number": 72,
+      "context": "const currentStorageSpace = getConvertedSize(t, usedTotalStorageSizeCount);\n \n const planUsersLimitations = (\n <Text as=\"span\" fontSize=\"13px\">\n <CommonTrans\n i18nKey=\"PlanUsersLimit\"\n \n values={{\n usersCount: managersCount,\n productName: getBrandName(\"ProductName\"),\n currentUsersCount: addedManagersCount,",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

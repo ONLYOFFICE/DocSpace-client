@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Avviate una chat IA per fare domande, riassumere documenti, generare testi e farvi aiutare nel lavoro, direttamente in {{sectionName}}.",
+  "TourAiAssistantTitle": "Il vostro assistente IA",
+  "TourBringFiles": "Caricate i file dal vostro computer oppure trascinateli semplicemente in un punto qualsiasi di questa finestra.",
+  "TourBringFilesTitle": "Portate qui i vostri file",
+  "TourCreateAnything": "Create documenti, fogli di calcolo, presentazioni e moduli PDF direttamente nel browser, senza bisogno di alcun software.",
+  "TourCreateAnythingTitle": "Create qualsiasi cosa",
+  "TourFindFast": "Cercate per nome, filtrate per tipo o autore, ordinate l'elenco e passate dalla vista a elenco a quella a riquadri.",
+  "TourFindFastTitle": "Trovate tutto in fretta",
+  "TourPlacesFavorites": "{{sectionName}}: i file contrassegnati con una stella.",
+  "TourPlacesRecent": "{{sectionName}}: ciò su cui avete lavorato di recente.",
+  "TourPlacesShared": "{{sectionName}}: i file che altri hanno condiviso con voi.",
+  "TourPlacesTitle": "Ogni cosa al suo posto",
+  "TourPlacesTrash": "{{sectionName}}: i file eliminati che potete ancora ripristinare.",
+  "TourShare": "Passate il mouse su un file per vedere le azioni rapide. Fate clic sull'icona di condivisione per concedere l'accesso ai contatti del vostro spazio di lavoro con diversi livelli di autorizzazione, oppure create un collegamento esterno per chiunque altro.",
+  "TourSharedAccess": "{{sharedBy}} indica da chi proviene il file, {{accessLevel}} indica che cosa potete farne: visualizzarlo, commentarlo o modificarlo. Solo il proprietario può cambiarlo.",
+  "TourSharedAccessTitle": "Chi l'ha condiviso e che cosa potete fare",
+  "TourSharedEmpty": "Non è ancora stato condiviso nulla con voi. File e cartelle compariranno qui non appena qualcuno vi darà accesso.",
+  "TourSharedEmptyTitle": "Il vostro elenco per ora è vuoto",
+  "TourSharedList": "Tutto ciò a cui altre persone vi danno accesso arriva in {{sectionName}}. Aprite un file per lavorarci nel browser: l'originale resta dov'è, così tutti vedono sempre la stessa versione.",
+  "TourSharedListTitle": "Condivisi con voi",
+  "TourShareTitle": "Condividete e collaborate"
+}

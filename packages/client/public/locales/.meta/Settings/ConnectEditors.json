@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectEditors",
+  "content": "Connect editors",
+  "content_en_sha1_hash": "ecafc5ad78042e47fdd4ae3874a03e1250e52e08",
+  "created_at": "2026-07-30T16:14:06.996Z",
+  "updated_at": "2026-08-10T12:23:10.669Z",
+  "comment": {
+    "text": "Button label used to initiate the editor connection process within the Document Service integration settings.",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:20:41.216Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 358,
+      "context": "</div>\n <Button\n className={styles.docsConnectPromoButton}\n size={ButtonSize.small}\n primary\n label={t(\"Settings:ConnectEditors\")}\n onClick={() => setConnectDialogVisible(true)}\n isDisabled={isSaveLoading || isResetLoading || isConnecting}\n dataTestId=\"docs_connect_connect_editors\"\n />\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

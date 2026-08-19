@@ -1,0 +1,29 @@
+{
+  "key_path": "Buy",
+  "content": "Buy",
+  "content_en_sha1_hash": "7ceca51fcafe42567c1c49ed6ab3604d7c962875",
+  "created_at": "2026-07-27T13:07:48.519Z",
+  "updated_at": "2026-08-12T11:00:51.654Z",
+  "comment": {
+    "text": "Button label used to initiate the purchase or upgrade process of a DocsConnect plan.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:34:00.862Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 319,
+      "context": "</Text>\n <Button\n primary\n scale\n size={ButtonSize.small}\n label={t(\"DocsConnect:Buy\")}\n onClick={onEditPlan}\n />\n </div>\n </>\n ) : (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

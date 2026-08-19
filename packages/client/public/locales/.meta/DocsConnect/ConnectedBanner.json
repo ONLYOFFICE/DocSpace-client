@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectedBanner",
+  "content": "<1>Connected to {{organizationName}} {{editorsName}}.</1> Your {{organizationName}} {{editorsName}} is now using the editors provided by {{service}}.",
+  "content_en_sha1_hash": "d1924aa2835f9ec93058f2e88bd4b61844eb8bf9",
+  "created_at": "2026-07-30T16:14:09.534Z",
+  "updated_at": "2026-08-10T12:23:10.509Z",
+  "comment": {
+    "text": "Informational banner in the settings panel that appears when editors are successfully connected to a service; contains placeholders for organization name, editor type, and service provider, with `<1>` tags used for text styling.",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:19:28.107Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 276,
+      "context": "className={styles.connectedBannerIcon}\n />\n <Text fontSize=\"13px\">\n <Trans\n ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

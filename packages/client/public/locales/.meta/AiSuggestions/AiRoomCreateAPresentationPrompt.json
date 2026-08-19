@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomCreateAPresentationPrompt",
+  "content": "Create a presentation from the available documents and show the proposed slide outline before generating it. If this information is not provided, ask me for the audience, purpose, preferred length, and visual style.",
+  "content_en_sha1_hash": "f5c4780019f31b505ae87f934a77afa936ae030d",
+  "created_at": "2026-08-04T09:58:55.093Z",
+  "updated_at": "2026-08-05T18:32:52.748Z",
+  "comment": {
+    "text": "Instructional prompt for the AI assistant used when generating a presentation from existing documents, specifying how the AI should behave regarding outlines and missing information.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:32:52.748Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 606,
+      "context": "prompt: t(\"AiSuggestions:AiRoomCreateAReportPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomCreateAPresentation\"),\n prompt: t(\"AiSuggestions:AiRoomCreateAPresentationPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:AiRoomCollectDataIntoATable\"),\n prompt: t(\"AiSuggestions:AiRoomCollectDataIntoATablePrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,33 +1,43 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
+import { AnalyticsEvents } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -35,327 +45,432 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { showSuccessCreateFolder } from "SRC_DIR/helpers/toast-helpers";
 import config from "PACKAGE_FILE";
 
-import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
+import {
+  getDefaultFileName,
+  getDefaultFileTestIdPrefix,
+} from "SRC_DIR/helpers/filesUtils";
+import {
+  getDisplayFileNames,
+  getUniqueFileTitle,
+  runEncryptedFileCreation,
+} from "SRC_DIR/helpers/encryptedFileCreation";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import Dialog from "./sub-components/Dialog";
 
 const CreateEvent = ({
-	id,
-	type,
-	extension,
-	title,
-	templateId,
-	fromTemplate,
-	onClose,
+  id,
+  type,
+  extension,
+  title,
+  templateId,
+  fromTemplate,
+  onClose,
 
-	addActiveItems,
+  addActiveItems,
 
-	gallerySelected,
-	setGallerySelected,
-	setCreatedItem,
+  gallerySelected,
+  setGallerySelected,
+  setCreatedItem,
 
-	parentId,
-	isIndexing,
+  parentId,
+  isIndexing,
 
-	completeAction,
-	openItemAction,
+  completeAction,
+  openItemAction,
 
-	clearActiveOperations,
+  clearActiveOperations,
 
-	setEventDialogVisible,
-	eventDialogVisible,
-	keepNewFileName,
-	setPortalTariff,
-	withoutDialog,
-	preview,
-	toForm,
-	publicRoomKey,
-	actionEdit,
-	openOnNewPage,
-	openEditor,
-	createFile,
+  setEventDialogVisible,
+  eventDialogVisible,
+  keepNewFileName,
+  setPortalTariff,
+  withoutDialog,
+  preview,
+  toForm,
+  publicRoomKey,
+  actionEdit,
+  openOnNewPage,
+  openEditor,
+  createFile,
 
-	isFrame,
-	frameConfig,
+  isFrame,
+  frameConfig,
+
+  isPrivacy,
+  getUserEncryptionKeys,
+  encryptionRoomId,
+  filesList,
+  fetchFiles,
+  openDocEditor,
 }) => {
-	const [headerTitle, setHeaderTitle] = React.useState(null);
-	const [startValue, setStartValue] = React.useState("");
+  const [headerTitle, setHeaderTitle] = React.useState(null);
+  const [startValue, setStartValue] = React.useState("");
 
-	const { t } = useTranslation(["Translations", "Common"]);
+  const { t } = useTranslation(["Translations", "Common"]);
 
-	const onCloseAction = useCallback(
-		(e) => {
-			if (gallerySelected) {
-				setGallerySelected && setGallerySelected(null);
-			}
+  const onCloseAction = useCallback(
+    (e) => {
+      if (gallerySelected) {
+        setGallerySelected && setGallerySelected(null);
+      }
 
-			setEventDialogVisible(false);
-			onClose && onClose(e);
-		},
-		[setGallerySelected, gallerySelected, setEventDialogVisible, onClose],
-	);
+      setEventDialogVisible(false);
+      onClose && onClose(e);
+    },
+    [setGallerySelected, gallerySelected, setEventDialogVisible, onClose],
+  );
 
-	const onSave = useCallback(
-		async (e, value, open = true) => {
-			let item;
-			let createdFolderId;
+  const onSave = useCallback(
+    async (e, value, open = true) => {
+      let item;
+      let createdFolderId;
 
-			const isMakeFormFromFile = !!templateId;
+      const isMakeFormFromFile = !!templateId;
 
-			let newValue = value;
+      let newValue = value;
 
-			if (value.trim() === "") {
-				newValue =
-					templateId === null
-						? getDefaultFileName(extension)
-						: getTitleWithoutExtension({ fileExst: extension });
+      if (value.trim() === "") {
+        newValue =
+          templateId === null
+            ? getDefaultFileName(extension)
+            : getTitleWithoutExtension({ fileExst: extension });
 
-				setStartValue(newValue);
-			}
+        setStartValue(newValue);
+      }
 
-			const isPaymentRequiredError = (err) => {
-				if (err?.response?.status === 402) setPortalTariff();
-			};
+      const isPaymentRequiredError = (err) => {
+        if (err?.response?.status === 402) setPortalTariff();
+      };
 
-			if (!extension) {
-				await api.files
-					.createFolder(parentId, newValue.trimEnd())
-					.then((folder) => {
-						item = folder;
-						createdFolderId = folder.id;
-						addActiveItems(null, [folder.id]);
-						setCreatedItem({ id: createdFolderId, type: "folder" });
-					})
-					.then(() => completeAction(item, type, true))
-					.then(() => {
-						if (isIndexing) showSuccessCreateFolder(t, item, openItemAction);
-					})
-					.catch((err) => {
-						isPaymentRequiredError(err);
-						toastr.error(err);
-					})
-					.finally(() => {
-						const folderIds = [+id];
-						createdFolderId && folderIds.push(createdFolderId);
+      if (!extension) {
+        await api.files
+          .createFolder(parentId, newValue.trimEnd())
+          .then((folder) => {
+            item = folder;
+            createdFolderId = folder.id;
+            addActiveItems(null, [folder.id]);
+            setCreatedItem({ id: createdFolderId, type: "folder" });
+            window.dispatchEvent(
+              new CustomEvent("folder_created", {
+                detail: {
+                  id: folder.id,
+                  parentId: folder.parentId,
+                },
+              }),
+            );
+          })
+          .then(() => completeAction(item, type, true))
+          .then(() => {
+            if (isIndexing) showSuccessCreateFolder(t, item, openItemAction);
+          })
+          .catch((err) => {
+            isPaymentRequiredError(err);
+            toastr.error(err);
+          })
+          .finally(() => {
+            const folderIds = [+id];
+            createdFolderId && folderIds.push(createdFolderId);
 
-						clearActiveOperations(null, folderIds);
-						onCloseAction();
-					});
-			} else {
-				try {
-					if (openEditor && !(isFrame && frameConfig?.events?.onEditorOpen)) {
-						const searchParams = new URLSearchParams();
+            clearActiveOperations(null, folderIds);
+            onCloseAction();
+          });
+      } else if (isPrivacy) {
+        const withEditor =
+          openEditor && !(isFrame && frameConfig?.events?.onEditorOpen);
+        const editorWindow =
+          withEditor && openOnNewPage ? window.open("", "_blank") : null;
 
-						searchParams.append("parentId", parentId);
-						searchParams.append("fileTitle", `${newValue}.${extension}`);
-						searchParams.append("open", open);
-						searchParams.append("id", id);
+        try {
+          const keys = getUserEncryptionKeys();
 
-						if (preview) {
-							searchParams.append("action", "view");
-						}
+          const created = await runEncryptedFileCreation({
+            extension,
+            title: newValue.trimEnd(),
+            parentId,
+            roomId: encryptionRoomId,
+            userId: keys.userId,
+            publicKey: keys.publicKey,
+            publicKeyId: keys.publicKeyId,
+          });
 
-						if (actionEdit) {
-							searchParams.append("action", "edit");
-						}
+          if (!created) {
+            editorWindow?.close();
+            return;
+          }
 
-						if (toForm) searchParams.append("toForm", "true");
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: AnalyticsEvents.FileCreated,
+            id: created.fileId,
+            parentId,
+            file_type: extension,
+          });
 
-						if (publicRoomKey) {
-							searchParams.append("share", publicRoomKey);
-						}
+          if (withEditor) {
+            openDocEditor(created.fileId, preview, null, actionEdit, false, editorWindow);
+          } else if (isFrame && frameConfig?.events?.onEditorOpen) {
+            frameCallEvent({ event: "onEditorOpen", data: created });
+          }
 
-						if (isMakeFormFromFile) {
-							searchParams.append("fromFile", isMakeFormFromFile);
-							searchParams.append("templateId", templateId);
-						} else if (fromTemplate) {
-							searchParams.append("fromTemplate", fromTemplate);
-							searchParams.append("formId", gallerySelected.id);
-						}
+          fetchFiles(parentId).catch(() => {});
+        } catch (error) {
+          editorWindow?.close();
+          isPaymentRequiredError(error);
+          toastr.error(error);
+        } finally {
+          onCloseAction();
+        }
+      } else {
+        try {
+          if (openEditor && !(isFrame && frameConfig?.events?.onEditorOpen)) {
+            const searchParams = new URLSearchParams();
 
-						searchParams.append("hash", new Date().getTime());
+            searchParams.append("parentId", parentId);
+            searchParams.append("fileTitle", `${newValue}.${extension}`);
+            searchParams.append("open", open);
+            searchParams.append("id", id);
 
-						const url = combineUrl(
-							window.location.origin,
-							window.ClientConfig?.proxy?.url,
-							config.homepage,
-							`/doceditor/create?${searchParams.toString()}`,
-						);
+            if (preview) {
+              searchParams.append("action", "view");
+            }
 
-						window.open(url, openOnNewPage ? "_blank" : "_self");
+            if (actionEdit) {
+              searchParams.append("action", "edit");
+            }
 
-						return;
-					}
+            if (toForm) searchParams.append("toForm", "true");
 
-					await createFile(
-						+parentId,
-						`${newValue}.${extension}`,
-						templateId,
-						gallerySelected?.id,
-					)
-						.then((data) => {
-							if (isFrame && frameConfig?.events?.onEditorOpen) {
-								frameCallEvent({
-									event: "onEditorOpen",
-									data,
-								});
-							}
-						})
-						.catch((error) => {
-							toastr.error(error);
-						});
-				} catch (error) {
-					toastr.error(error);
-				} finally {
-					onCloseAction();
-				}
-			}
-		},
-		[
-			parentId,
-			extension,
-			templateId,
-			title,
-			fromTemplate,
-			withoutDialog,
-			keepNewFileName,
-			gallerySelected?.id,
-			openOnNewPage,
-			openEditor,
-			preview,
-			actionEdit,
-			toForm,
-			publicRoomKey,
-			createFile,
-			onCloseAction,
-		],
-	);
+            if (publicRoomKey) {
+              searchParams.append("share", publicRoomKey);
+            }
 
-	React.useEffect(() => {
-		const defaultName = getDefaultFileName(extension);
+            if (isMakeFormFromFile) {
+              searchParams.append("fromFile", isMakeFormFromFile);
+              searchParams.append("templateId", templateId);
+            } else if (fromTemplate) {
+              searchParams.append("fromTemplate", fromTemplate);
+              searchParams.append("formId", gallerySelected.id);
+            }
 
-		if (title) {
-			const item = { fileExst: extension, title };
+            searchParams.append("hash", new Date().getTime());
 
-			setStartValue(getTitleWithoutExtension(item, fromTemplate));
-		} else {
-			setStartValue(defaultName);
-		}
+            const url = combineUrl(
+              window.location.origin,
+              window.ClientConfig?.proxy?.url,
+              config.homepage,
+              `/doceditor/create?${searchParams.toString()}`,
+            );
 
-		setHeaderTitle(defaultName);
+            window.open(url, openOnNewPage ? "_blank" : "_self");
 
-		if (!extension) return setEventDialogVisible(true);
+            return;
+          }
 
-		if (!keepNewFileName && !withoutDialog) {
-			setEventDialogVisible(true);
-		} else {
-			onSave(null, title || defaultName);
-		}
+          await createFile(
+            +parentId,
+            `${newValue}.${extension}`,
+            templateId,
+            gallerySelected?.id,
+          )
+            .then((data) => {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: AnalyticsEvents.FileCreated,
+                id: data.id,
+                parentId: data.folderId,
+                file_type: extension,
+              });
+              if (isFrame && frameConfig?.events?.onEditorOpen) {
+                frameCallEvent({
+                  event: "onEditorOpen",
+                  data,
+                });
+              }
+            })
+            .catch((error) => {
+              toastr.error(error);
+            });
+        } catch (error) {
+          toastr.error(error);
+        } finally {
+          onCloseAction();
+        }
+      }
+    },
+    [
+      parentId,
+      extension,
+      templateId,
+      title,
+      fromTemplate,
+      withoutDialog,
+      keepNewFileName,
+      gallerySelected?.id,
+      openOnNewPage,
+      openEditor,
+      preview,
+      actionEdit,
+      toForm,
+      publicRoomKey,
+      createFile,
+      onCloseAction,
+      isPrivacy,
+      getUserEncryptionKeys,
+      encryptionRoomId,
+      fetchFiles,
+      openDocEditor,
+      actionEdit,
+    ],
+  );
 
-		return () => {
-			setEventDialogVisible(false);
-		};
-	}, [extension, title, fromTemplate, withoutDialog, onSave]);
+  React.useEffect(() => {
+    const defaultName = getDefaultFileName(extension);
+    const suggestedName =
+      isPrivacy && extension
+        ? getUniqueFileTitle(
+            defaultName,
+            extension,
+            getDisplayFileNames(filesList ?? []),
+          )
+        : defaultName;
 
-	return (
-		<Dialog
-			t={t}
-			withForm
-			visible={eventDialogVisible}
-			title={headerTitle}
-			startValue={startValue}
-			onSave={onSave}
-			onCancel={onCloseAction}
-			onClose={onCloseAction}
-			isCreateDialog
-			extension={extension}
-		/>
-	);
+    if (title) {
+      const item = { fileExst: extension, title };
+
+      setStartValue(getTitleWithoutExtension(item, fromTemplate));
+    } else {
+      setStartValue(suggestedName);
+    }
+
+    setHeaderTitle(defaultName);
+
+    if (!extension) return setEventDialogVisible(true);
+
+    if (!keepNewFileName && !withoutDialog) {
+      setEventDialogVisible(true);
+    } else {
+      onSave(null, title || suggestedName);
+    }
+
+    return () => {
+      setEventDialogVisible(false);
+    };
+  }, [extension, title, fromTemplate, withoutDialog, onSave]);
+
+  return (
+    <Dialog
+      t={t}
+      withForm
+      visible={eventDialogVisible}
+      title={headerTitle}
+      testIdPrefix={getDefaultFileTestIdPrefix(extension)}
+      startValue={startValue}
+      onSave={onSave}
+      onCancel={onCloseAction}
+      onClose={onCloseAction}
+      isCreateDialog
+      extension={extension}
+    />
+  );
 };
 
 export default inject(
-	({
-		settingsStore,
-		filesStore,
-		filesActionsStore,
-		selectedFolderStore,
-		treeFoldersStore,
-		uploadDataStore,
-		dialogsStore,
-		oformsStore,
-		filesSettingsStore,
-		currentTariffStatusStore,
-		publicRoomStore,
-	}) => {
-		const publicRoomKey = publicRoomStore.publicRoomKey;
+  ({
+    settingsStore,
+    filesStore,
+    filesActionsStore,
+    selectedFolderStore,
+    treeFoldersStore,
+    uploadDataStore,
+    dialogsStore,
+    oformsStore,
+    filesSettingsStore,
+    currentTariffStatusStore,
+    publicRoomStore,
+  }) => {
+    const publicRoomKey = publicRoomStore.publicRoomKey;
 
-		const {
-			createFile,
-			addActiveItems,
+    const {
+      createFile,
+      addActiveItems,
 
-			setIsUpdatingRowItem,
-			setCreatedItem,
-		} = filesStore;
+      setIsUpdatingRowItem,
+      setCreatedItem,
+      files,
+      fetchFiles,
+      openDocEditor,
+    } = filesStore;
 
-		const { gallerySelected, setGallerySelected } = oformsStore;
+    const { gallerySelected, setGallerySelected } = oformsStore;
 
-		const { completeAction, openItemAction } = filesActionsStore;
+    const { completeAction, openItemAction } = filesActionsStore;
 
-		const { clearActiveOperations, fileCopyAs } = uploadDataStore;
+    const { clearActiveOperations, fileCopyAs, getUserEncryptionKeys } =
+      uploadDataStore;
 
-		const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
+    const { isRecycleBinFolder, isPrivacyFolder } = treeFoldersStore;
 
-		const { id: parentId, isIndexedFolder } = selectedFolderStore;
+    const { id: parentId, isIndexedFolder } = selectedFolderStore;
 
-		const { isDesktopClient, isFrame, frameConfig } = settingsStore;
+    const encryptionRoomId =
+      selectedFolderStore.navigationPath?.find((r) => r.isRoom)?.id ??
+      (selectedFolderStore.isRoom ? selectedFolderStore.id : null);
 
-		const { setPortalTariff } = currentTariffStatusStore;
+    const { isDesktopClient, isFrame, frameConfig } = settingsStore;
 
-		const {
-			setConvertPasswordDialogVisible,
-			setEventDialogVisible,
-			setFormCreationInfo,
-			eventDialogVisible,
-		} = dialogsStore;
+    const { setPortalTariff } = currentTariffStatusStore;
 
-		const { keepNewFileName, openOnNewPage } = filesSettingsStore;
+    const {
+      setConvertPasswordDialogVisible,
+      setEventDialogVisible,
+      setFormCreationInfo,
+      eventDialogVisible,
+    } = dialogsStore;
 
-		return {
-			setPortalTariff,
-			setEventDialogVisible,
-			eventDialogVisible,
-			createFile,
+    const { keepNewFileName, openOnNewPage } = filesSettingsStore;
 
-			addActiveItems,
+    return {
+      setPortalTariff,
+      setEventDialogVisible,
+      eventDialogVisible,
+      createFile,
 
-			setIsUpdatingRowItem,
-			gallerySelected,
-			setGallerySelected,
-			setCreatedItem,
+      addActiveItems,
 
-			parentId,
-			isIndexing: isIndexedFolder,
+      setIsUpdatingRowItem,
+      gallerySelected,
+      setGallerySelected,
+      setCreatedItem,
 
-			isDesktop: isDesktopClient,
-			isPrivacy: isPrivacyFolder,
-			isTrashFolder: isRecycleBinFolder,
-			completeAction,
-			openItemAction,
+      parentId,
+      isIndexing: isIndexedFolder,
 
-			clearActiveOperations,
-			fileCopyAs,
+      isDesktop: isDesktopClient,
+      isPrivacy: isPrivacyFolder,
+      isTrashFolder: isRecycleBinFolder,
+      completeAction,
+      openItemAction,
 
-			setConvertPasswordDialogVisible,
-			setFormCreationInfo,
+      clearActiveOperations,
+      fileCopyAs,
 
-			keepNewFileName,
-			publicRoomKey,
-			openOnNewPage,
+      setConvertPasswordDialogVisible,
+      setFormCreationInfo,
 
-			isFrame,
-			frameConfig,
-		};
-	},
+      keepNewFileName,
+      publicRoomKey,
+      openOnNewPage,
+
+      isFrame,
+      frameConfig,
+
+      getUserEncryptionKeys,
+      encryptionRoomId,
+      filesList: files,
+      fetchFiles,
+      openDocEditor,
+    };
+  },
 )(observer(CreateEvent));

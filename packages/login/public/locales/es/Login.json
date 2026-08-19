@@ -1,9 +1,8 @@
 {
   "ChangePasswordSuccess": "Contraseña se ha cambiado con éxito",
-  "CodeTitle": "Se le ha enviado el código por correo electrónico",
   "ConfirmEmailChange": "Confirme el cambio de su dirección de correo electrónico",
-  "ConfirmEmailChangeText": "Ha solicitado cambiar la dirección de correo electrónico de su cuenta de {{productName}}. Para continuar, por favor, inicie sesión con sus credenciales actuales.",
-  "ErrorInvalidText": "Dentro de 10 segundos se le redirigirá a la página de <1>{{productName}}</1>",
+  "ConfirmEmailChangeText": "Ha solicitado cambiar la dirección de correo electrónico de su cuenta de {{organizationName}} {{productName}}. Para continuar, por favor, inicie sesión con sus credenciales actuales.",
+  "ErrorInvalidText": "Dentro de 10 segundos se le redirigirá a la página de <1>el espacio de trabajo</1>",
   "ForgotPassword": "¿Ha olvidado su contraseña?",
   "LDAPUsernamePlaceholder": "Nombre de usuario de {{ldap_domain}}",
   "MessageAuthorize": "Inicie sesión para continuar.",
@@ -12,7 +11,7 @@
   "PasswordRecoveryTitle": "Recuperación de contraseña",
   "RecoverAccess": "Recuperar acceso",
   "RecoverContactEmailPlaceholder": "E-mail de contacto",
-  "RecoverTextBody": "Si no puede conectarse con su cuenta actual o quiere registrarse como nuevo usuario, póngase en contacto con el administrador del portal. ",
+  "RecoverTextBody": "Si no puede conectarse con su cuenta actual o quiere registrarse como nuevo usuario, póngase en contacto con el superadministrador.",
   "Register": "Registrarse",
   "RegisterTextBodyAfterDomainsList": "Para registrarse, introduzca su email y haga clic en Enviar solicitud. Se le enviará un enlace de activación.",
   "RegisterTextBodyBeforeDomainsList": "El registro está disponible para los usuarios con una cuenta de email en",
@@ -21,5 +20,5 @@
   "RememberHelper": "La duración de la sesión por defecto es de 20 minutos. Marque esta opción para establecerla en 1 año. Para establecer su propio valor, vaya a Ajustes.",
   "SignInLDAP": "Iniciar sesión en: {{ldap_domain}}",
   "SignInLdapHelper": "Utilice credenciales para el dominio corporativo",
-  "UserIsAlreadyRegistered": "El usuario <1>{{email}}</1> ya está registrado en este {{productName}}, introduzca su contraseña o regrese para continuar con otro correo electrónico."
+  "UserIsAlreadyRegistered": "El usuario <1>{{email}}</1> ya está registrado en este espacio de trabajo, introduzca su contraseña o regrese para continuar con otro correo electrónico."
 }

@@ -12,6 +12,9 @@ services:
       - "5110:5110"
     volumes:
       - ./__tests__:/app/packages/client/__tests__
+      # Specs import handlers and helpers from here, so it has to follow the
+      # spec mount above - otherwise editing one needs a full image rebuild.
+      - ../../packages/shared/__mocks__:/app/packages/shared/__mocks__
       - ./playwright.config.ts:/app/packages/client/playwright.config.ts
       - ../../playwright-report/client:/app/playwright-report/client
   # Dev mode: mount source code so you can iterate without rebuilding the image.
@@ -38,11 +41,13 @@ services:
       - ../../packages/shared/api:/app/packages/shared/api
       - ../../packages/shared/components:/app/packages/shared/components
       - ../../packages/shared/constants:/app/packages/shared/constants
+      - ../../packages/shared/context:/app/packages/shared/context
       - ../../packages/shared/dialogs:/app/packages/shared/dialogs
       - ../../packages/shared/enums:/app/packages/shared/enums
       - ../../packages/shared/hooks:/app/packages/shared/hooks
       - ../../packages/shared/pages:/app/packages/shared/pages
       - ../../packages/shared/selectors:/app/packages/shared/selectors
+      - ../../packages/shared/services:/app/packages/shared/services
       - ../../packages/shared/skeletons:/app/packages/shared/skeletons
       - ../../packages/shared/store:/app/packages/shared/store
       - ../../packages/shared/themes:/app/packages/shared/themes

@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentRow",
+  "content": "Most of what an agent needs from you can be done without opening it. Click the name to start talking to it, pin the ones you use daily, and use the three dots to change the setup, invite people, or duplicate it for a similar job.",
+  "content_en_sha1_hash": "235a2966d02b85dda8b494cbf964a536b0f754f2",
+  "created_at": "2026-08-06T14:20:56.250Z",
+  "updated_at": "2026-08-07T15:05:26.408Z",
+  "comment": {
+    "text": "Instructional text for an onboarding tour step that explains how to interact with an agent entry in a list.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:24:10.912Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 214,
+      "context": "// entries; a user's menu is short, so it is described separately.\n hasItems &&\n fileItemStep(\n FIRST_ITEM_SELECTOR,\n t(\"AiAgentsTour:AgentRowTitle\"),\n isAdmin ? t(\"AiAgentsTour:AgentRow\") : t(\"AiAgentsTour:AgentRowMember\"),\n callbacks,\n LOG_LABEL,\n ),\n \n // 4. Who may use the agent. The step opens the info panel on the first",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

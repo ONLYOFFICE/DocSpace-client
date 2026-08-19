@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletTopUpErrorTitle",
+  "content": "Payment failed",
+  "content_en_sha1_hash": "b1e8e75fdc7bb998da401b72a2dd4902c9f934c7",
+  "created_at": "2026-06-02T15:02:53.752Z",
+  "updated_at": "2026-08-13T14:37:21.812Z",
+  "comment": {
+    "text": "Card title shown when a wallet top-up payment fails on the AI paywall completion page.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T15:04:52.457Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.tsx",
+      "line_number": 352,
+      "context": "buttonLabel={t(\"TryAgainInAddon\")}\n onGoToServiceClick={onGoToBillingClick}\n />\n ) : (\n <ErrorCard\n title={pageContent.errorTitle ?? t(\"WalletTopUpErrorTitle\")}\n hint={pageContent.errorHint ?? t(\"WalletTopUpCallbackErrorHint\")}\n buttonLabel={\n pageContent.errorButtonLabel ?? t(\"WalletTopUpErrorRetry\")\n }\n onGoToServiceClick={onGoToBillingClick}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

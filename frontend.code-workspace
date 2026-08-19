@@ -38,7 +38,7 @@
     "editor.formatOnSave": true,
     "VsCodeTaskButtons.tasks": [
       {
-        "label": "Server (Aspire)",
+        "label": "Server",
         "tasks": [
           {
             "label": "Aspire : run CE (Community Edition) - frontend-dev",
@@ -86,122 +86,6 @@
             "tooltip": "🛠️ Start the \"backend aspire clear Docker\" task"
           }
         ],
-        "tooltip": "🛠️ Server tasks (Aspire)"
-      },
-      {
-        "label": "Server",
-        "tasks": [
-          {
-            "label": "Docker : Build-CE",
-            "task": "Backend | build CE",
-            "tooltip": "🛠️ Start the \"backend docker build CE\" task"
-          },
-          {
-            "label": "Docker : Run-CE (skip build)",
-            "task": "Backend | run CE",
-            "tooltip": "🛠️ Start the \"backend docker run CE\" task"
-          },
-          {
-            "label": "Docker : Build-EE",
-            "task": "Backend | build EE",
-            "tooltip": "🛠️ Start the \"backend docker build EE\" task"
-          },
-          {
-            "label": "Docker : Run-EE (skip build)",
-            "task": "Backend | run EE",
-            "tooltip": "🛠️ Start the \"backend docker run EE\" task"
-          },
-          {
-            "label": "Docker : ReBuild-EE",
-            "task": "Backend | rebuild EE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task"
-          },
-          {
-            "label": "Docker : Build-EE + dnsmasq",
-            "task": "Backend | build EE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Build-EE + identity",
-            "task": "Backend | build EE + identity",
-            "tooltip": "🛠️ Start the \"backend docker build EE + identity\" task"
-          },
-          {
-            "label": "Docker : Build-EE + dnsmasq + identity",
-            "task": "Backend | build EE + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq + identity\" task"
-          },
-          {
-            "label": "Docker : Build-DE",
-            "task": "Backend | build DE",
-            "tooltip": "🛠️ Start the \"backend docker build DE\" task"
-          },
-          {
-            "label": "Docker : Run-DE (skip build)",
-            "task": "Backend | run DE",
-            "tooltip": "🛠️ Start the \"backend docker build DE\" task"
-          },
-          {
-            "label": "Docker : ReBuild-DE",
-            "task": "Backend | rebuild DE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild DE\" task"
-          },
-          {
-            "label": "Docker : Build-DE + dnsmasq",
-            "task": "Backend | build DE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Build-DE + identity",
-            "task": "Backend | build DE + identity",
-            "tooltip": "🛠️ Start the \"backend docker build DE + identity\" task"
-          },
-          {
-            "label": "Docker : Build-DE + dnsmasq + identity",
-            "task": "Backend | build DE + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq + identity\" task"
-          },
-          {
-            "label": "Docker : Build-SAAS + dnsmasq",
-            "task": "Backend | build SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Run-SAAS + dnsmasq (skip build)",
-            "task": "Backend | run SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Build-SAAS + dnsmasq + identity",
-            "task": "Backend | build SAAS + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq + identity\" task"
-          },
-          {
-            "label": "Docker : ReBuild-SAAS + dnsmasq",
-            "task": "Backend | rebuild SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task"
-          },
-          {
-            "label": "Docker : Clear",
-            "task": "Backend | clear",
-            "tooltip": "🛠️ Start the \"backend docker clear\" task"
-          },
-          {
-            "label": "Docker : Stop",
-            "task": "Backend | stop",
-            "tooltip": "🛠️ Start the \"backend docker stop\" task"
-          },
-          {
-            "label": "Docker : Start",
-            "task": "Backend | start",
-            "tooltip": "🛠️ Start the \"backend docker start\" task"
-          },
-          {
-            "label": "Docker : Restart",
-            "task": "Backend | restart",
-            "tooltip": "🛠️ Start the \"backend docker restart\" task"
-          }
-        ],
         "tooltip": "🛠️ Server tasks"
       },
       {
@@ -218,9 +102,24 @@
             "tooltip": "🛠️ Start the \"frontend update dependencies\" task"
           },
           {
+            "label": "Update all lock files",
+            "task": "Frontend | update all lock files",
+            "tooltip": "🛠️ Update pnpm-lock.yaml + ui-kit lock + translation-app lock"
+          },
+          {
             "label": "Update pnpm-lock.yaml",
             "task": "Frontend | update pnpm-lock.yaml",
             "tooltip": "🛠️ Start the \"frontend update pnpm-lock.yaml\" task"
+          },
+          {
+            "label": "Update ui-kit lock",
+            "task": "Frontend | update ui-kit lock",
+            "tooltip": "🛠️ Update libs/ui-kit pnpm lock file"
+          },
+          {
+            "label": "Update translation-app lock",
+            "task": "Frontend | update translation-app lock",
+            "tooltip": "🛠️ Update common/translation-app frontend & backend npm lock files"
           },
           {
             "label": "Build",
@@ -268,9 +167,19 @@
             "tooltip": "🛠️ Start the \"frontend deploy\" task"
           },
           {
+            "label": "Deploy run",
+            "task": "Frontend | deploy run",
+            "tooltip": "🚀 Run the deployed build from ../publish/web — Next.js apps (login 5011, editor 5013, management 5015, sdk 5099) via node server.js + client via npx serve on 5001"
+          },
+          {
             "label": "Start storybook",
             "task": "Frontend | storybook",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Start storybook (ui-kit)",
+            "task": "Frontend | storybook (ui-kit)",
+            "tooltip": "🛠️ Start the \"ui-kit storybook\" task"
           },
           {
             "label": "Start storybook prod",
@@ -305,53 +214,78 @@
           },
           {
             "label": "Test all common tests",
-            "task": "Test | Jest:common",
-            "tooltip": "🛠️ Start the \"Test | Jest:common\" task"
+            "task": "Test | Vitest:common",
+            "tooltip": "🛠️ Start the \"Test | Vitest:common\" task"
           },
           {
             "label": "Test ascii (common)",
-            "task": "Test | Jest:ascii",
-            "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
+            "task": "Test | Vitest:ascii",
+            "tooltip": "🛠️ Start the \"Test | Vitest:ascii\" task"
+          },
+          {
+            "label": "Test license headers (common)",
+            "task": "Test | Vitest:license",
+            "tooltip": "🛠️ Start the \"Test | Vitest:license\" task"
           },
           {
             "label": "Test translations (common)",
-            "task": "Test | Jest:translations",
-            "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
+            "task": "Test | Vitest:translations",
+            "tooltip": "🛠️ Start the \"Test | Vitest:translations\" task"
+          },
+          {
+            "label": "Test translations: missing keys",
+            "task": "Test | Vitest:translations:missing-keys",
+            "tooltip": "🛠️ Check missing keys and missing locale files across ALL languages, not only the base ones"
+          },
+          {
+            "label": "Test translations: clear wrong values",
+            "task": "Test | Vitest:translations:clear-wrong",
+            "tooltip": "🛠️ Run translation tests with CLEAR_WRONG_VALUES=true — clears bad variables, tags and forbidden values"
           },
           {
             "label": "Test images (common)",
-            "task": "Test | Jest:images",
-            "tooltip": "🛠️ Start the \"Test | Jest:images\" task"
+            "task": "Test | Vitest:images",
+            "tooltip": "🛠️ Start the \"Test | Vitest:images\" task"
           },
           {
             "label": "Test colors (common)",
-            "task": "Test | Jest:colors",
-            "tooltip": "🛠️ Start the \"Test | Jest:colors\" task"
+            "task": "Test | Vitest:colors",
+            "tooltip": "🛠️ Start the \"Test | Vitest:colors\" task"
           },
           {
             "label": "Test deps check (common)",
-            "task": "Test | Jest:dependencies",
-            "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
+            "task": "Test | Vitest:dependencies",
+            "tooltip": "🛠️ Start the \"Test | Vitest:dependencies\" task"
           },
           {
             "label": "Test deps audit (common)",
-            "task": "Test | Jest:dependencies:audit",
-            "tooltip": "🛠️ Start the \"Test | Jest:dependencies:audit\" task"
+            "task": "Test | Audit:dependencies",
+            "tooltip": "🛠️ Start the \"Test | Audit:dependencies\" task"
           },
           {
             "label": "Test licenses audit (common)",
-            "task": "Test | Jest:licenses:audit",
-            "tooltip": "🛠️ Start the \"Test | Jest:licenses:audit\" task"
+            "task": "Test | Audit:licenses",
+            "tooltip": "🛠️ Start the \"Test | Audit:licenses\" task"
           },
           {
             "label": "Test unit",
-            "task": "Test | Jest:unit",
-            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
+            "task": "Test | Vitest:unit",
+            "tooltip": "🛠️ Start the \"Test | Vitest:unit\" task"
           },
           {
             "label": "Test unit:ui-kit",
-            "task": "Test | Jest:unit:ui-kit",
-            "tooltip": "🛠️ Start the \"Test | Jest:unit:ui-kit\" task"
+            "task": "Test | Vitest:unit:ui-kit",
+            "tooltip": "🛠️ Start the \"Test | Vitest:unit:ui-kit\" task"
+          },
+          {
+            "label": "Test vitest (client)",
+            "task": "Test | Vitest:client",
+            "tooltip": "🛠️ Run all @docspace/client vitest unit tests"
+          },
+          {
+            "label": "Test vitest (store)",
+            "task": "Test | Vitest:store",
+            "tooltip": "🛠️ Run @docspace/client store unit tests (src/store, incl. FilesStore)"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"
@@ -388,6 +322,31 @@
             "label": "Client E2E dev update screenshots",
             "task": "Test | Test e2e docker dev update-screenshots (client)",
             "tooltip": "🛠️ Start the \"dev update e2e screenshots (client)\" task"
+          },
+          {
+            "label": "Client E2E run UI — plugins only",
+            "task": "Test | Test e2e run ui (client plugins)",
+            "tooltip": "🛠️ Start the \"test run UI (client, __tests__/plugins only)\" task"
+          },
+          {
+            "label": "Client E2E start docker — plugins only",
+            "task": "Test | Test e2e docker start (client plugins)",
+            "tooltip": "🛠️ Start the \"local e2e tests in docker (client, __tests__/plugins only)\" task"
+          },
+          {
+            "label": "Client E2E update screenshots — plugins only",
+            "task": "Test | Test e2e docker update-screenshots (client plugins)",
+            "tooltip": "🛠️ Start the \"update e2e screenshots (client, __tests__/plugins only)\" task"
+          },
+          {
+            "label": "Client E2E dev docker — plugins only",
+            "task": "Test | Test e2e docker dev (client plugins)",
+            "tooltip": "🛠️ Start the \"dev e2e tests in docker (client, __tests__/plugins only)\" task"
+          },
+          {
+            "label": "Client E2E dev update screenshots — plugins only",
+            "task": "Test | Test e2e docker dev update-screenshots (client plugins)",
+            "tooltip": "🛠️ Start the \"dev update e2e screenshots (client, __tests__/plugins only)\" task"
           },
           {
             "label": "Client E2E clear docker",
@@ -600,12 +559,78 @@
             "tooltip": "🛠️ Remove unified E2E Docker image and volumes"
           },
         ]
+      },
+      {
+        "label": "Tools",
+        "tasks": [
+          {
+            "label": "Translation Stats",
+            "task": "Translation App | translation stats",
+            "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
+          },
+          {
+            "label": "Translation Stats (missing keys)",
+            "task": "Translation App | translation stats (missing keys)",
+            "tooltip": "📊 List every missing key per language and package"
+          },
+          {
+            "label": "Translation Stats (Markdown)",
+            "task": "Translation App | translation stats (Markdown)",
+            "tooltip": "📄 Generate translation-stats.md report"
+          },
+          {
+            "label": "Translation App : Start (with metadata)",
+            "task": "Translation App | start",
+            "tooltip": "🌐 Start translation app (backend + frontend + generate metadata)"
+          },
+          {
+            "label": "Translation App : Start (skip meta)",
+            "task": "Translation App | start (skip meta)",
+            "tooltip": "⚡ Start translation app quickly — skip metadata generation"
+          },
+          {
+            "label": "Verify Translations (fast, no LLM)",
+            "task": "Translation App | verify translations (no LLM)",
+            "tooltip": "🔍 Run deterministic checks: variables, tags, scripts, brackets — instant"
+          },
+          {
+            "label": "Verify Translations (LLM)",
+            "task": "Translation App | verify translations (LLM)",
+            "tooltip": "🤖 Run full LLM-based spell-check verification (slow)"
+          },
+          {
+            "label": "Verify Translations (LLM + recheck)",
+            "task": "Translation App | verify translations (LLM + recheck)",
+            "tooltip": "🔄 Re-verify only keys with existing issues in .meta (fast, targeted)"
+          },
+          {
+            "label": "Update Metadata",
+            "task": "Translation App | update metadata",
+            "tooltip": "🔄 Regenerate all .meta files (generate-metadata + save-meta-keys-usage + auto-comments)"
+          },
+          {
+            "label": "Clear Meta Issues",
+            "task": "Translation App | clear meta issues",
+            "tooltip": "🗑️ Reset all ai_spell_check_issues in .meta files to empty"
+          },
+          {
+            "label": "──────────────────────",
+            "task": "separator",
+            "tooltip": ""
+          },
+          {
+            "label": "Screenshot Comparison : Start",
+            "task": "Screenshot Comparison | start",
+            "tooltip": "🖼️ Start screenshot comparison tool"
+          }
+        ],
+        "tooltip": "🛠️ Common tools"
       }
     ],
     "licenser.author": "Ascensio System SIA",
-    "licenser.customHeader": "(c) Copyright @AUTHOR@ 2009-@YEAR@\\n\\nThis program is a free software product.\\nYou can redistribute it and/or modify it under the terms\\nof the GNU Affero General Public License (AGPL) version 3 as published by the Free Software\\nFoundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended\\nto the effect that @AUTHOR@ expressly excludes the warranty of non-infringement of\\nany third-party rights.\\n\\nThis program is distributed WITHOUT ANY WARRANTY, without even the implied warranty\\nof MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see\\nthe GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html\\n\\nYou can contact @AUTHOR@ at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.\\n\\nThe  interactive user interfaces in modified source and object code versions of the Program must\\ndisplay Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.\\n\\nPursuant to Section 7(b) of the License you must retain the original Product logo when\\ndistributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\\ntrademark law for use of our trademarks.\\n\\nAll the Product's GUI elements, including illustrations and icon sets, as well as technical writing\\ncontent are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\\nInternational. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode",
+    "licenser.customHeader": "Copyright (C) @AUTHOR@, 2009-@YEAR@\\n\\nThis program is a free software product. You can redistribute it and/or\\nmodify it under the terms of the GNU Affero General Public License (AGPL)\\nversion 3 as published by the Free Software Foundation, together with the\\nadditional terms provided in the LICENSE file.\\n\\nThis program is distributed WITHOUT ANY WARRANTY; without even the implied\\nwarranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For\\ndetails, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html\\n\\nYou can contact Ascensio System SIA by email at info@onlyoffice.com\\nor by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,\\nLV-1050, Latvia, European Union.\\n\\nThe interactive user interfaces in modified versions of the Program\\nare required to display Appropriate Legal Notices in accordance with\\nSection 5 of the GNU AGPL version 3.\\n\\nNo trademark rights are granted under this License.\\n\\nAll non-code elements of the Product, including illustrations,\\nicon sets, and technical writing content, are licensed under the\\nCreative Commons Attribution-ShareAlike 4.0 International License:\\nhttps://creativecommons.org/licenses/by-sa/4.0/legalcode\\n\\nThis license applies only to such non-code elements and does not\\nmodify or replace the licensing terms applicable to the Program's\\nsource code, which remains licensed under the GNU Affero General\\nPublic License v3.\\n\\nSPDX-License-Identifier: AGPL-3.0-only",
     "licenser.license": "Custom",
-    "licenser.useSingleLineStyle": true,
+    "licenser.useSingleLineStyle": false,
     "licenser.excludeFileExtensions": [
       "LICENSE",
       "aff",

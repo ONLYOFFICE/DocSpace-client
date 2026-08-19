@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, {
   useState,
@@ -40,6 +49,16 @@ import { decodeTiff } from "../../utils/decodeTiff";
 import { isNullOrUndefined } from "../../utils/typeGuards";
 
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
+
+import { getFileEncryptionAccess } from "../../api/files";
+import { loadRoomMemberKeysSafe } from "../../services/private-room/room-member-keys";
+import { decryptFile } from "../../services/encryption/file-keys";
+import {
+  unwrapDekForCurrentUser,
+  type RoomMemberPublicKey,
+} from "../../services/encryption/room-file-access";
+import { requireUnlock } from "../../services/encryption/secret-storage";
+import { resolveDisplayTitle } from "../../services/encryption/filename-cache";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";
@@ -70,6 +89,9 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     currentDeviceType,
     isPublicFile = false,
     autoPlay = false,
+    userId,
+    currentRoomId,
+    onDecryptionError,
 
     t,
     getIcon,
@@ -88,18 +110,41 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
   const TiffAbortSignalRef = useRef<AbortController>(undefined);
   const HeicAbortSignalRef = useRef<AbortController>(undefined);
+  const EncryptedAbortSignalRef = useRef<AbortController>(undefined);
 
   const isWillUnmountRef = useRef(false);
   const lastRemovedFileIdRefRef = useRef<number>(undefined);
 
   const [title, setTitle] = useState<string>("");
-  const [fileUrl, setFileUrl] = useState<string | undefined>(() => {
+  const prevBlobUrlRef = useRef<string | null>(null);
+
+  const setFileUrl_ = useCallback((url: string | undefined) => {
+    // Revoke previous blob URL to prevent memory leaks
+    if (prevBlobUrlRef.current && prevBlobUrlRef.current.startsWith("blob:")) {
+      URL.revokeObjectURL(prevBlobUrlRef.current);
+    }
+    prevBlobUrlRef.current =
+      url && url.startsWith("blob:") ? url : null;
+    setFileUrlRaw(url);
+  }, []);
+
+  const [fileUrlRaw, setFileUrlRaw] = useState<string | undefined>(() => {
     if (!currentFileId || !playlist.length) return undefined;
     const item = playlist.find(
       (file) => file.fileId?.toString() === currentFileId?.toString(),
     );
+    if (item?.encrypted) return undefined;
     return item?.src;
   });
+  const fileUrl = fileUrlRaw;
+  const setFileUrl = setFileUrl_;
+
+  const [isDecrypting, setIsDecrypting] = useState(false);
+  // A file that cannot be decrypted has no URL to hand to the player, so the
+  // viewer would sit on a loader forever with the reason only in the console.
+  const [decryptionError, setDecryptionError] = useState<string | undefined>(
+    undefined,
+  );
 
   const [targetFile, setTargetFile] = useState(() => {
     if (!currentFileId) return undefined;
@@ -389,7 +434,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     };
   });
 
-  const { src, title: currentTitle, fileId } = playlist[playlistPos] || {};
+  const {
+    src,
+    title: currentTitle,
+    fileId,
+    encrypted: isEncrypted,
+  } = playlist[playlistPos] || {};
 
   useEffect(() => {
     if (!isNullOrUndefined(fileId) && currentFileId !== fileId) {
@@ -397,9 +447,129 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     }
   }, [fileId, onChangeUrl, currentFileId]);
 
+  const fetchAndDecryptFile = useCallback(
+    async (
+      src: string,
+      fileId: number,
+      title: string,
+      roomId: number | string | null | undefined,
+    ) => {
+      EncryptedAbortSignalRef.current?.abort();
+      const controller = new AbortController();
+      EncryptedAbortSignalRef.current = controller;
+      setIsDecrypting(true);
+      setDecryptionError(undefined);
+
+      const { signal } = controller;
+      const isStale = () => signal.aborted;
+
+      try {
+        if (!userId) {
+          throw new Error("User ID not available for decryption");
+        }
+        const encryptionInfo = await getFileEncryptionAccess(fileId);
+        if (isStale()) return;
+        if (!encryptionInfo?.fileKeys) {
+          throw new Error("You don't have access to decrypt this file");
+        }
+
+        const identity = await requireUnlock(String(userId));
+        if (isStale()) return;
+        if (!identity) {
+          // User dismissed the passphrase dialog without unlocking — close
+          // the viewer instead of leaving it stuck on a loader/error frame.
+          onClose?.();
+          return;
+        }
+
+        const response = await fetch(src, { signal });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch file: ${response.status}`);
+        }
+
+        const encryptedData = await response.arrayBuffer();
+        if (isStale()) return;
+
+        const roomMemberKeys: RoomMemberPublicKey[] =
+          await loadRoomMemberKeysSafe(roomId);
+        if (isStale()) return;
+
+        const dek = await unwrapDekForCurrentUser({
+          fileKeys: encryptionInfo.fileKeys,
+          roomMemberKeys,
+          currentUserId: String(userId),
+          currentIdentity: identity,
+          fileId,
+        });
+        if (isStale()) return;
+
+        // Decrypt file (DSE3 format is self-describing)
+        const { data: decryptedBlob, fileName: decryptedName } =
+          await decryptFile(encryptedData, dek, {
+            cacheFilenameForFileId: fileId,
+          });
+        if (isStale()) return;
+
+        // Use decrypted name from DSE3 header for extension detection
+        const displayName = decryptedName || title;
+        if (decryptedName) {
+          setTitle(decryptedName);
+        }
+        const ext = getFileExtension(displayName).toLowerCase();
+        const mimeTypes: Record<string, string> = {
+          jpg: "image/jpeg",
+          jpeg: "image/jpeg",
+          png: "image/png",
+          gif: "image/gif",
+          webp: "image/webp",
+          tif: "image/tiff",
+          tiff: "image/tiff",
+          heic: "image/heic",
+          mp4: "video/mp4",
+          webm: "video/webm",
+          mp3: "audio/mpeg",
+          wav: "audio/wav",
+          ogg: "audio/ogg",
+          pdf: "application/pdf",
+        };
+        const mimeType = mimeTypes[ext] || "application/octet-stream";
+
+        const typedBlob = new Blob([decryptedBlob], { type: mimeType });
+        setFileUrl(URL.createObjectURL(typedBlob));
+      } catch (error) {
+        if (isStale()) return;
+        if (error instanceof Error) {
+          if (error.name === "AbortError") {
+            return;
+          }
+          console.error("[MediaViewer] Decryption error:", error.message);
+          onDecryptionError?.(error.message);
+          setDecryptionError(
+            t("Common:EncryptionDecryptPartialFailed", { fileNames: title }),
+          );
+        }
+      } finally {
+        if (EncryptedAbortSignalRef.current === controller) {
+          setIsDecrypting(false);
+        }
+      }
+    },
+    [t, userId, onClose, onDecryptionError],
+  );
+
   useEffect(() => {
     return () => {
       TiffAbortSignalRef.current?.abort();
+      HeicAbortSignalRef.current?.abort();
+      EncryptedAbortSignalRef.current?.abort();
+      if (
+        prevBlobUrlRef.current &&
+        prevBlobUrlRef.current.startsWith("blob:")
+      ) {
+        URL.revokeObjectURL(prevBlobUrlRef.current);
+        prevBlobUrlRef.current = null;
+      }
     };
   }, []);
 
@@ -411,17 +581,35 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       return;
     }
 
-    if (!isTiff(extension) && !isHeic(extension)) {
+    // a failure belongs to the file that produced it, not to the next one
+    setDecryptionError(undefined);
+
+    if (isEncrypted) {
       TiffAbortSignalRef.current?.abort();
       HeicAbortSignalRef.current?.abort();
+      setFileUrl(undefined);
+      // `originRoomId` is set only for files moved out of a room (Recent /
+      // Trash views). For files opened inside their home private room it is
+      // undefined, so we fall back to the caller-provided currentRoomId from
+      // the navigation context.
+      const fileForRoom = files.find((file) => file.id === fileId);
+      fetchAndDecryptFile(
+        src,
+        fileId,
+        currentTitle,
+        fileForRoom?.originRoomId ?? currentRoomId ?? null,
+      );
+    } else if (!isTiff(extension) && !isHeic(extension)) {
+      TiffAbortSignalRef.current?.abort();
+      HeicAbortSignalRef.current?.abort();
+      EncryptedAbortSignalRef.current?.abort();
       setFileUrl(src);
-    }
-
-    if (isHeic(extension)) {
+    } else if (isHeic(extension)) {
+      EncryptedAbortSignalRef.current?.abort();
       setFileUrl(undefined);
       fetchAndSetHeicDataURL(src);
-    }
-    if (isTiff(extension)) {
+    } else if (isTiff(extension)) {
+      EncryptedAbortSignalRef.current?.abort();
       setFileUrl(undefined);
       fetchAndSetTiffDataURL(src);
     }
@@ -433,16 +621,25 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       setBufferSelection?.(foundFile);
     }
 
-    setTitle(currentTitle);
+    setTitle(
+      resolveDisplayTitle({
+        id: fileId,
+        title: currentTitle,
+        encrypted: isEncrypted,
+      }),
+    );
   }, [
     src,
     files,
     fileId,
     currentTitle,
+    isEncrypted,
+    currentRoomId,
     setBufferSelection,
     onEmptyPlaylistError,
     fetchAndSetTiffDataURL,
     fetchAndSetHeicDataURL,
+    fetchAndDecryptFile,
     pluginViewerContent,
     pluginTitle,
     pluginFileId,
@@ -511,6 +708,8 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       onDownloadClick={onDownloadMedia}
       errorTitle={t("Common:MediaError")}
       pluginViewerContent={pluginViewerContent}
+      isDecrypting={isDecrypting}
+      decryptionError={decryptionError}
     />
   ) : undefined;
 };

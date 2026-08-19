@@ -1,0 +1,41 @@
+{
+  "key_path": "EmptyAIAgentsNotActiveYetDescription",
+  "content": "Activate AI features to create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
+  "content_en_sha1_hash": "bd28e77d2f4742c30c619bb964bb226962f60a72",
+  "created_at": "2026-06-25T11:54:49.069Z",
+  "updated_at": "2026-08-17T17:23:21.655Z",
+  "comment": {
+    "text": "Description text on an empty state or no-access screen that appears when AI features are not yet active, explaining the functionality available upon activation.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:14:59.627Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 101,
+      "context": "}),\n )\n // saas admin\n .with([false, true], () => (\n <>\n <Text as=\"span\">{t(\"EmptyAIAgentsNotActiveYetDescription\")}</Text>\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n {t(\"EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>\n ))",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
+      "line_number": 106,
+      "context": "} else if (isAdmin) {\n titleRoomNoAccess = t(\"Common:EmptyAIAgentsNotActiveYetTitle\");\n descriptionRoomNoAccess = (\n <>\n <Text as=\"span\">\n {t(\"Common:EmptyAIAgentsNotActiveYetDescription\")}\n </Text>\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n {t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 244,
+      "context": "}),\n )\n .with([false, true], () => (\n <>\n <Text as=\"span\">\n {t(\"Common:EmptyAIAgentsNotActiveYetDescription\")}\n </Text>\n <Text as=\"span\" style={{ display: \"block\", marginTop: \"8px\" }}>\n {t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

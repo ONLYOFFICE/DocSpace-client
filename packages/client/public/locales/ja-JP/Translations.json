@@ -1,8 +1,5 @@
 {
-  "ChooseFromList": "リストから選択する",
-  "FileLocked": "ロックされたファイル",
   "FileProtected": "このファイルはパスワードで保護されている",
-  "FileUnlocked": "ロック削除されたファイル",
   "FolderTitleBoxNet": "ボックス ディレクトリ",
   "FolderTitleDocuSign": "DocuSignアカウント",
   "FolderTitleDropBox": "Dropboxディレクトリ",
@@ -13,7 +10,6 @@
   "FolderTitleWebDav": "WebDAVディレクトリ",
   "FolderTitleYandex": "Yandexディレクトリ",
   "NewForm": "PDFフォーム",
-  "OwnerChange": "オーナー変更",
   "RoleGuestDescriprion": "ゲストは招待されたルームにアクセスでき、ルームで適切な役割が割り当てられている場合は、文書の作成や編集も可能です。",
   "SearchByHeadOfGroup": "グループ代表で検索",
   "SearchByOwner": "所有者で検索する",

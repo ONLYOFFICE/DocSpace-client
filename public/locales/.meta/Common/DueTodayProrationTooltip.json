@@ -1,0 +1,29 @@
+{
+  "key_path": "DueTodayProrationTooltip",
+  "content": "Today, you're only paying for the selected amount of admins for the remaining days until your billing date. Moving forward, the full amount will be charged once per billing cycle on your regular billing date.",
+  "content_en_sha1_hash": "051fb21a314d4874f0f71e34cb2320ed829ce2d6",
+  "created_at": "2026-06-30T07:32:29.599Z",
+  "updated_at": "2026-07-03T11:08:02.942Z",
+  "comment": {
+    "text": "Tooltip for an info icon in the Price Details dialog that explains how current charges are prorated until the next billing date.",
+    "is_auto": true,
+    "updated_at": "2026-06-30T07:41:28.723Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
+      "line_number": 188,
+      "context": "{isDowngradePlan ? null : (\n <HelpButton\n iconNode={<InfoIcon />}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"DueTodayProrationTooltip\")}\n </Text>\n }\n dataTestId=\"price_details_due_today_help\"\n />\n )}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

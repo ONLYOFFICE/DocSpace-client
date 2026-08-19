@@ -1,0 +1,29 @@
+{
+  "key_path": "OverviewPrepareADocumentForPDF",
+  "content": "Prepare a document for PDF",
+  "content_en_sha1_hash": "f51e1516cb7adb149758fdf6cf6243b5123860d0",
+  "created_at": "2026-08-05T16:31:58.710Z",
+  "updated_at": "2026-08-05T17:09:24.032Z",
+  "comment": {
+    "text": "Label for an AI suggestion option that triggers the process of formatting a document for PDF conversion.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:09:24.032Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 231,
+      "context": "{\n name: t(\"AiSuggestions:OverviewCreateAPresentationOnATopic\"),\n prompt: t(\"AiSuggestions:OverviewCreateAPresentationOnATopicPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewPrepareADocumentForPDF\"),\n prompt: t(\"AiSuggestions:OverviewPrepareADocumentForPDFPrompt\"),\n },\n {\n name: t(\"AiSuggestions:OverviewFindATemplateFromTheLibrary\"),\n prompt: t(\"AiSuggestions:OverviewFindATemplateFromTheLibraryPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

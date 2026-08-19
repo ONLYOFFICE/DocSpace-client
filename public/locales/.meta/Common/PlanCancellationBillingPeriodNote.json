@@ -1,0 +1,35 @@
+{
+  "key_path": "PlanCancellationBillingPeriodNote",
+  "content": "Your current subscription will remain active until the end of your billing period ({{date}}). After that, it will be canceled automatically. To continue using {{service}}, you'll need to purchase a new subscription.",
+  "content_en_sha1_hash": "87ffc2641f7cda506abe18f9a90154a67ca3cf8c",
+  "created_at": "2026-07-27T13:07:26.903Z",
+  "updated_at": "2026-08-10T12:23:10.547Z",
+  "comment": {
+    "text": "Informative text in a dialog body or information panel shown when a subscription cancellation is scheduled; includes {{date}} for the end of the billing period and {{service}} for the name of the service.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:22:00.238Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 255,
+      "context": "{scheduledChange ? (\n <StorageWarning\n title={scheduledChangeTitle}\n body={\n isCancellation\n ? t(\"Common:PlanCancellationBillingPeriodNote\", {\n date: formatDateLocalized(\n scheduledChange.dueDate,\n \"DATE_MED\",\n {\n locale: language,",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 338,
+      "context": "{scheduledChange ? (\n <StorageWarning\n title={scheduledChangeTitle}\n body={\n isCancellation\n ? t(\"Common:PlanCancellationBillingPeriodNote\", {\n date: scheduledChangeDate,\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: scheduledChangeDate,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

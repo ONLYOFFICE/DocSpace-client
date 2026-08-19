@@ -1,0 +1,23 @@
+{
+  "TourAiAssistant": "Spusťte AI chat a ptejte se, shrnujte dokumenty, generujte texty a nechte si pomoct s prací — přímo v sekci {{sectionName}}.",
+  "TourAiAssistantTitle": "Váš AI asistent",
+  "TourBringFiles": "Nahrajte soubory z počítače nebo je jednoduše přetáhněte kamkoli v tomto okně.",
+  "TourBringFilesTitle": "Přineste své soubory",
+  "TourCreateAnything": "Vytvářejte dokumenty, tabulky, prezentace a PDF formuláře přímo v prohlížeči — bez jakéhokoli softwaru.",
+  "TourCreateAnythingTitle": "Vytvořte cokoli",
+  "TourFindFast": "Vyhledávejte podle názvu, filtrujte podle typu nebo autora, řaďte seznam a přepínejte mezi zobrazením v seznamu a v dlaždicích.",
+  "TourFindFastTitle": "Najděte cokoli rychle",
+  "TourPlacesFavorites": "{{sectionName}} — soubory označené hvězdičkou.",
+  "TourPlacesRecent": "{{sectionName}} — na čem jste pracovali v poslední době.",
+  "TourPlacesShared": "{{sectionName}} — soubory, které s vámi sdíleli ostatní.",
+  "TourPlacesTitle": "Všechno na svém místě",
+  "TourPlacesTrash": "{{sectionName}} — smazané soubory, které ještě můžete obnovit.",
+  "TourShare": "Najeďte myší na libovolný soubor a uvidíte rychlé akce. Klikněte na ikonu sdílení a udělte přístup kontaktům svého pracovního prostoru s různými úrovněmi oprávnění — nebo vytvořte externí odkaz pro kohokoli dalšího.",
+  "TourSharedAccess": "{{sharedBy}} říká, od koho soubor přišel, {{accessLevel}} říká, co s ním smíte dělat — prohlížet, komentovat nebo upravovat. Změnit to může jen vlastník.",
+  "TourSharedAccessTitle": "Kdo ho nasdílel a co smíte dělat",
+  "TourSharedEmpty": "Zatím s vámi nikdo nic nesdílel. Soubory a složky se tu objeví, jakmile vám k nim někdo dá přístup.",
+  "TourSharedEmptyTitle": "Váš seznam je zatím prázdný",
+  "TourSharedList": "Všechno, k čemu vám ostatní dají přístup, přistane v sekci {{sectionName}}. Otevřete soubor a pracujte na něm v prohlížeči — originál zůstává tam, kde je, takže všichni vždy vidí stejnou verzi.",
+  "TourSharedListTitle": "Sdílené s vámi",
+  "TourShareTitle": "Sdílejte a spolupracujte"
+}

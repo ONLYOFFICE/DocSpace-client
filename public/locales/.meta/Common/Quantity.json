@@ -3,23 +3,30 @@
   "content": "Quantity",
   "content_en_sha1_hash": "44f6af6945544c0bab016a9160df6abb0cefcb60",
   "created_at": "2026-03-20T09:07:38.532Z",
-  "updated_at": "2026-03-20T09:14:32.354Z",
+  "updated_at": "2026-08-06T08:04:19.968Z",
   "comment": {
-    "text": "This key displays the word \"Quantity\" in the UI, likely referring to the number of items or files being uploaded or processed. It appears in both a developer tools Uploader section and a SaaS transaction history table header, indicating it's a generally used label for numeric values. Translators should ensure the translation accurately conveys the concept of \"amount\" or \"number.\"",
+    "text": "Table header or section header for a numerical value. It indicates a count or amount of items.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:14:32.354Z"
+    "updated_at": "2026-04-11T20:45:41.360Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 477,
-      "context": "dataTestId=\"upload_mode_radiobutton_group\"\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"Common:Quantity\")}</CategorySubHeader>\n <RadioButtonGroup\n orientation=\"vertical\"\n options={uploadQuantityOptions}\n name=\"uploadQuantity\"\n selected={uploadQuantity}",
-      "module": "/packages/client"
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 419,
+      "context": "</div>\n </div>\n )}\n \n <div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"Common:Quantity\")}</Text>\n <Text className={styles.quantityValue}>{planUsers}</Text>\n <Text className={styles.cardCaption}>\n {t(\"DocsConnect:PlanUsers\")}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
-      "line_number": 70,
-      "context": "resizable: true,\n minWidth: 120,\n },\n {\n key: \"Quantity\",\n title: t(\"Common:Quantity\"),\n enable: true,\n resizable: true,\n minWidth: 150,\n },\n {",
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TableView/TableHeader.tsx",
+      "line_number": 93,
+      "context": "enable: true,\n resizable: true,\n minWidth: 120,\n },\n {\n key: \"Quantity\",\n title: t(\"Quantity\"),\n enable: true,\n resizable: true,\n minWidth: 150,\n },",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
+      "line_number": 486,
+      "context": "dataTestId=\"upload_mode_radiobutton_group\"\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"Common:Quantity\")}</CategorySubHeader>\n <RadioButtonGroup\n orientation=\"vertical\"\n options={uploadQuantityOptions}\n name=\"uploadQuantity\"\n selected={uploadQuantity}",
       "module": "/packages/client"
     }
   ],
@@ -154,7 +161,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,

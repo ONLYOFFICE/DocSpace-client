@@ -1,0 +1,29 @@
+{
+  "key_path": "PlusPerUserPerMonth",
+  "content": "+{{price}} per user/month",
+  "content_en_sha1_hash": "3e660f1973d9621fcaa59bd157239e7b6f8d93a6",
+  "created_at": "2026-07-27T13:07:48.510Z",
+  "updated_at": "2026-08-12T14:02:21.318Z",
+  "comment": {
+    "text": "Text label in the DocsConnect pricing panel indicating the additional monthly cost per user; includes a formatted currency variable {{price}}.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:07:52.041Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 775,
+      "context": ">\n {t(\"DocsConnect:OptionalAddOn\")}\n </Text>\n </Text>\n <Text fontSize=\"13px\">\n {t(\"DocsConnect:PlusPerUserPerMonth\", {\n price: formatCurrency(devPackPrice),\n })}{\" \"}\n <Text\n as=\"span\"\n fontSize=\"13px\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

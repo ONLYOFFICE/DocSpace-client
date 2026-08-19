@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
@@ -41,20 +50,15 @@ import { FormsSection } from "@/types/forms";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { useFormsNavigationStore } from "../../_store/FormsNavigationStore";
 import { useFormsListStore } from "../../_store/FormsListStore";
-import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useLibraryParams } from "../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../_utils/libraryUrl";
-import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
-import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
-
 import styles from "../forms-layout/FormsLayout.module.scss";
 
 type FormsHeaderProps = {
-  onUploadFiles: () => void;
-  onCreateBlankForm: () => void;
+  headerOffset?: number;
 };
 
-const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => {
+const FormsHeader = ({ headerOffset = 0 }: FormsHeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
@@ -98,12 +102,9 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
   }, [libParams.categoryId]);
 
   const { items, folders } = useFormsListStore();
-  const formsSettingsStore = useFormsSettingsStore();
   const { currentDeviceType } = useDeviceType();
 
-  const isMyForms = activeSection === FormsSection.MyForms;
   const isLibrary = activeSection === FormsSection.Library;
-  const canCreateForms = isMyForms && !!formsSettingsStore.folderSecurity?.Create;
   const isSettings = activeSection === FormsSection.Settings;
   const isEditing = Boolean(editingFile);
   const isInsideCompletedFolder =
@@ -116,7 +117,7 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
   const getSectionTitle = React.useCallback(() => {
     switch (activeSection) {
       case FormsSection.MyForms:
-        return t("Common:MyForms");
+        return t("Common:Forms");
       case FormsSection.Library:
         return t("Common:Library");
       case FormsSection.InProgress:
@@ -243,27 +244,29 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     setNavDropdownMinWidth(Math.ceil(max + 67));
   }, [navigationItems]);
 
-  const getContextOptionsPlus = React.useCallback(() => {
-    const security = formsSettingsStore.folderSecurity;
-    if (!security?.Create) return [];
+  const headerStyle = React.useMemo<React.CSSProperties | undefined>(() => {
+    if (!navDropdownMinWidth && !headerOffset) return undefined;
+    const style: React.CSSProperties = {};
+    if (navDropdownMinWidth) {
+      (style as Record<string, string>)["--nav-dropdown-min-width"] =
+        `${navDropdownMinWidth}px`;
+    }
+    if (headerOffset) {
+      style.paddingInlineStart = `${headerOffset}px`;
+    }
+    return style;
+  }, [navDropdownMinWidth, headerOffset]);
 
-    return [
-      {
-        id: "upload-forms",
-        key: "upload-forms",
-        label: t("Common:UploadPDFForm"),
-        icon: ActionsUploadReactSvgUrl,
-        onClick: onUploadFiles,
-      },
-      {
-        id: "create-blank-form",
-        key: "create-blank-form",
-        label: t("Common:NewPDFForm"),
-        icon: FormPlusReactSvgUrl,
-        onClick: onCreateBlankForm,
-      },
-    ];
-  }, [formsSettingsStore.folderSecurity, t, onUploadFiles, onCreateBlankForm]);
+  const editingWrapperStyle = React.useMemo<
+    React.CSSProperties | undefined
+  >(() => {
+    if (!headerOffset) return undefined;
+    return {
+      position: "relative",
+      marginInlineStart: `${headerOffset}px`,
+      height: "100%",
+    };
+  }, [headerOffset]);
 
   const handleEditorBack = React.useCallback(() => {
     closeEditor();
@@ -322,7 +325,7 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     return (
       <div
         className={styles.headerRow}
-        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+        style={headerStyle}
       >
         <div className={styles.headerNavigation}>
           <Navigation
@@ -366,43 +369,51 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
   }
 
   if (isEditing) {
+    const editingNavigation = (
+      <Navigation
+        showText
+        isRootFolder={false}
+        canCreate={false}
+        title={editingFile?.title || ""}
+        rootRoomTitle=""
+        isDesktop={currentDeviceType === DeviceType.desktop}
+        isFrame
+        navigationItems={navigationItems}
+        getContextOptionsPlus={() => []}
+        getContextOptionsFolder={() => []}
+        onClickFolder={handleEditorBreadcrumbClick}
+        isTrashFolder={false}
+        isEmptyPage={false}
+        isEmptyFilesList={false}
+        onBackToParentFolder={handleEditorBack}
+        showRootFolderTitle={false}
+        withLogo=""
+        burgerLogo=""
+        withMenu={false}
+        currentDeviceType={currentDeviceType}
+        titleIcon=""
+        titleIconTooltip=""
+        showNavigationButton={false}
+        isCurrentFolderInfo={false}
+        showTitle
+        isPublicRoom={false}
+        isRoom={false}
+        isInfoPanelVisible={false}
+        toggleInfoPanel={() => {}}
+        onLogoClick={() => {}}
+        hideInfoPanel={() => {}}
+        clearTrash={() => {}}
+        showFolderInfo={() => {}}
+      />
+    );
+
     return (
       <div className={styles.headerEditing}>
-        <Navigation
-          showText
-          isRootFolder={false}
-          canCreate={false}
-          title={editingFile?.title || ""}
-          rootRoomTitle=""
-          isDesktop={currentDeviceType === DeviceType.desktop}
-          isFrame
-          navigationItems={navigationItems}
-          getContextOptionsPlus={() => []}
-          getContextOptionsFolder={() => []}
-          onClickFolder={handleEditorBreadcrumbClick}
-          isTrashFolder={false}
-          isEmptyPage={false}
-          isEmptyFilesList={false}
-          onBackToParentFolder={handleEditorBack}
-          showRootFolderTitle={false}
-          withLogo=""
-          burgerLogo=""
-          withMenu={false}
-          currentDeviceType={currentDeviceType}
-          titleIcon=""
-          titleIconTooltip=""
-          showNavigationButton={false}
-          isCurrentFolderInfo={false}
-          showTitle
-          isPublicRoom={false}
-          isRoom={false}
-          isInfoPanelVisible={false}
-          toggleInfoPanel={() => {}}
-          onLogoClick={() => {}}
-          hideInfoPanel={() => {}}
-          clearTrash={() => {}}
-          showFolderInfo={() => {}}
-        />
+        {editingWrapperStyle ? (
+          <div style={editingWrapperStyle}>{editingNavigation}</div>
+        ) : (
+          editingNavigation
+        )}
       </div>
     );
   }
@@ -411,7 +422,7 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     return (
       <div
         className={styles.headerRow}
-        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+        style={headerStyle}
       >
         <div className={styles.headerNavigation}>
           <Navigation
@@ -458,7 +469,7 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     return (
       <div
         className={styles.headerRow}
-        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+        style={headerStyle}
       >
         <div className={styles.headerNavigation}>
           <Navigation
@@ -513,10 +524,14 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
       libraryTitle = libLangTitle || "";
     }
 
+    if (currentDeviceType === DeviceType.mobile && libParams.depth >= 2) {
+      libraryTitle = libraryTitle ? `... / ${libraryTitle}` : "...";
+    }
+
     return (
       <div
         className={styles.headerRow}
-        style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+        style={headerStyle}
       >
         <div className={styles.headerNavigation}>
           <Navigation
@@ -562,20 +577,23 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
   return (
     <div
       className={styles.headerRow}
-      style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
+      style={headerStyle}
     >
       <div className={styles.headerNavigation}>
+        <span data-tour={`section-${activeSection}`} className={styles.tourAnchor}>
+          {getSectionTitle()}
+        </span>
         <Navigation
           showText
           isRootFolder
-          canCreate={canCreateForms}
-          isPlusButtonVisible={canCreateForms}
+          canCreate={false}
+          isPlusButtonVisible={false}
           title={getSectionTitle()}
           rootRoomTitle=""
           isDesktop={currentDeviceType === DeviceType.desktop}
           isFrame
           navigationItems={[]}
-          getContextOptionsPlus={getContextOptionsPlus}
+          getContextOptionsPlus={() => []}
           getContextOptionsFolder={() => []}
           onClickFolder={() => {}}
           isTrashFolder={false}

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
@@ -44,6 +53,10 @@ import HeaderUnAuth from "./sub-components/header-unauth";
 import HeaderNav from "./sub-components/header-nav";
 import Header from "./sub-components/header";
 import styles from "./nav.module.scss";
+
+// Minimum scroll delta (px) that counts as a deliberate direction change.
+// Below this the movement is momentum/rubber-band noise rather than a gesture.
+const SCROLL_THRESHOLD = 5;
 
 const NavMenu = (props) => {
   const {
@@ -82,22 +95,39 @@ const NavMenu = (props) => {
 
   const onScroll = useCallback((e) => {
     const eventTarget = e.target;
-    const currentScrollTop = Math.max(0, eventTarget.scrollTop);
     const scrollHeight = eventTarget.scrollHeight;
     const clientHeight = eventTarget.clientHeight;
 
+    // Clamp to the real scrollable range: iOS rubber-banding reports scrollTop
+    // beyond both ends during overscroll, and those out-of-range values would
+    // otherwise register as direction changes once the bounce settles back.
+    const maxScrollTop = Math.max(0, scrollHeight - clientHeight);
+    const currentScrollTop = Math.min(
+      Math.max(0, eventTarget.scrollTop),
+      maxScrollTop,
+    );
+
     const scrollShift = scrollTopRef.current - currentScrollTop;
+
+    // Ignore sub-threshold jitter without losing the reference point: momentum
+    // scrolling emits a stream of tiny deltas (and iOS re-fires events with an
+    // unchanged scrollTop while the URL bar animates), so reacting to every one
+    // of them would toggle the bar on noise. Keeping scrollTopRef untouched
+    // here lets small deltas accumulate until they add up to a real gesture.
+    if (Math.abs(scrollShift) < SCROLL_THRESHOLD) return;
+
     scrollTopRef.current = currentScrollTop;
 
     const isNearBottom = scrollHeight - (currentScrollTop + clientHeight) < 100;
 
     const isAtTop = currentScrollTop < 20;
 
-    if (isAtTop) {
-      setIsFixed(false);
-    } else if (scrollShift > 0 && !isNearBottom) {
+    // An upward scroll wins over isAtTop: while the bar is pinned it occupies
+    // the first 48px of the scroller, so a gesture that ends near the top still
+    // reports scrollTop < 20 — checking isAtTop first would unpin mid-gesture.
+    if (scrollShift > 0 && !isNearBottom) {
       setIsFixed(true);
-    } else if (scrollShift <= 0) {
+    } else if (isAtTop || scrollShift <= 0) {
       setIsFixed(false);
     }
   }, []);

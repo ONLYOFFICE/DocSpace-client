@@ -1,25 +1,26 @@
 {
   "key_path": "RestoreBackupResetInfoWarningText",
-  "content": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
-  "content_en_sha1_hash": "3531a741576e6d7f3c7d70f497013990e0744339",
-  "created_at": "2025-05-26T07:15:46.918Z",
-  "updated_at": "2026-02-19T13:36:33.212Z",
+  "content": "All current passwords will be reset. Workspace users will get an email with the access restoration link.",
+  "content_en_sha1_hash": "148226528b143e6559e6265c392cc52350adec3d",
+  "created_at": "2026-08-13T22:44:18.707Z",
+  "updated_at": "2026-08-14T15:03:28.162Z",
   "comment": {
-    "text": "This translation key is used to display a warning message when users need to reset their passwords after restoring backup data. The message informs them that all current passwords will be reset and provides an access restoration link via email for {{productName}} users. It appears in UI components related to data recovery, such as restore backup pages.",
+    "text": "Warning text displayed during the backup restoration process to inform users about the consequences of resetting passwords and the subsequent email notifications.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:59.783Z"
+    "updated_at": "2026-08-14T15:03:28.162Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 381,
-      "context": "styles.restoreBackupWarningLink,\n styles.settingsUnavailable,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}\n </>",
+      "line_number": 388,
+      "context": "styles.restoreBackupWarningLink,\n styles.settingsUnavailable,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\")}\n </Text>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 215,
-      "context": "className={classNames(\n styles.restoreBackupWarningLink,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}\n </Text>",
+      "line_number": 222,
+      "context": "className={classNames(\n styles.restoreBackupWarningLink,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\")}\n </Text>\n ) : null}\n </Text>\n );",
       "module": "/packages/shared"
     }
   ],
@@ -156,6 +157,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
@@ -163,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

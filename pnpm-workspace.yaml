@@ -1,3 +1,84 @@
 packages:
   - packages/*
   - libs/*
+
+# Dependency install/postinstall scripts (pnpm >= 11 requires an explicit
+# decision per package; unreviewed packages fail the install).
+allowBuilds:
+  # No-op preinstall echo only (transitive via libs/ui-kit)
+  '@google/genai': false
+  # Native file watcher used by the Nx daemon
+  '@parcel/watcher': true
+  # postinstall links the platform-specific binary
+  esbuild: true
+  # postinstall installs the git-hook binary used by `prepare`
+  lefthook: true
+  # postinstall is optional and self-swallowing
+  msw: false
+  # postinstall sets up native modules and the daemon
+  nx: true
+  # install script validates/builds the native image pipeline for Next.js
+  sharp: true
+
+minimumReleaseAgeExclude:
+  # Vendored tarball (libs/ui-kit/onlyoffice-ai-chat-*.tgz), never published to
+  # npm, so the age check 404s on the registry. Listed without a version so it
+  # survives tarball bumps; the artifact is committed and reviewed in ui-kit.
+  - '@onlyoffice/ai-chat'
+  - '@rolldown/binding-android-arm64@1.2.2'
+  - '@rolldown/binding-linux-arm-gnueabihf@1.2.2'
+  - '@rolldown/binding-linux-arm64-musl@1.2.2'
+  - '@rolldown/binding-linux-s390x-gnu@1.2.2'
+  - '@rolldown/binding-linux-x64-musl@1.2.2'
+
+overrides:
+  pnpm: ">=10.33.0"
+  # Single mobx instance across the workspace (libs/ui-kit submodule pins 6.13.5)
+  mobx: "6.16.1"
+  mobx-react: "9.2.2"
+  # Single react instance across the workspace; react-router 8 needs >=19.2.7
+  react: "19.2.8"
+  react-dom: "19.2.8"
+  on-headers: "^1.1.0"
+  "@types/react": "19.2.10"
+  "@types/react-dom": "19.2.3"
+  "@smithy/config-resolver": "4.4.6"
+  diff: "4.0.4"
+  lodash: "4.18.1"
+  lodash-es: "4.18.1"
+  js-yaml: "^4.2.0"
+  node-forge: ">=1.3.2"
+  mdast-util-to-hast: ">=13.2.1"
+  express: ">=5.2.1"
+  qs: ">=6.14.2"
+  node-fetch: ">=2.6.7"
+  ajv: ">=8.18.0"
+  fast-xml-parser: ">=5.7.0"
+  minimatch: ">=10.2.1"
+  serialize-javascript: ">=7.0.3"
+  immutable: ">=5.1.5"
+  "@svgr/plugin-svgo>svgo": "~3.3.3"
+  "postcss-svgo>svgo": ">=4.0.1"
+  file-type: ">=21.3.2"
+  flatted: ">=3.4.0"
+  "picomatch@^2": "^2.3.2"
+  "picomatch@^4": "^4.0.4"
+  "yaml@^1": "^1.10.3"
+  "yaml@^2": "^2.8.3"
+  brace-expansion: ">=5.0.5"
+  axios: ">=1.15.2"
+  postcss: ">=8.5.10"
+  protobufjs: ">=8.6.0"
+  follow-redirects: ">=1.16.0"
+  # Security fixes
+  ws: ">=8.21.0"
+  tmp: ">=0.2.6"
+  "@grpc/grpc-js": "~1.9.16"
+  form-data: ">=4.0.6"
+  vite: ">=8.0.16"
+  "@babel/core": ">=7.29.6 <8"
+  # Inherited libvips CVEs; pulled in transitively by next
+  sharp: ">=0.35.0"
+  # Guards against libs/ui-kit submodule drift until its pointer is bumped;
+  # every manifest now pins 8.3.0 directly, so this can be dropped afterwards
+  react-router: "8.3.0"

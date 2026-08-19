@@ -1,18 +1,15 @@
 name: Frontend common tests
 
 'on':
-  push:
-    branches: [develop, release/v*, hotfix/v*]
-    paths:
-      [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
-  pull_request:
-    branches: [develop, release/v*, hotfix/v*]
-    paths:
-      [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual run'
+        required: false
+        default: 'manual'
 
 env:
   NODE_VERSION: 24.x
-  PNPM_VERSION: 10.30.0
 
 jobs:
   # Detect changes to optimize job execution
@@ -69,6 +66,16 @@ jobs:
               echo "::set-output name=${key}::${value}"
             fi
           }
+
+          # For manual runs — mark everything as changed so all jobs execute
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "🖱️ Manual trigger — forcing all change flags to true"
+            for key in packages common playwright playwright_client playwright_login playwright_sdk playwright_management playwright_doceditor locales workflow any_changes; do
+              set_output "$key" "true"
+            done
+            set_output "changed_files" "(manual trigger — all files considered changed)"
+            exit 0
+          fi
 
           # Get the base branch for comparison
           if [ "${{ github.event_name }}" = "pull_request" ]; then
@@ -233,9 +240,8 @@ jobs:
           path: "."
           ssh-key: ${{ secrets.DOCSPACEUIKITREACT_SSH_KEY }}
       - name: Install pnpm
+        # Version comes from the "packageManager" field in package.json
         uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -359,12 +365,15 @@ jobs:
           DEPS_TEST_SUCCESS=true
 
           # Run pnpm audit
-          if ! pnpm audit --audit-level=moderate; then
-            echo "❌ Dependencies audit failed"
-            AUDIT_SUCCESS=false
-          else
-            echo "✅ Dependencies audit passed"
-          fi
+          # TODO: Re-enable when pnpm fixes the bulk advisory endpoint issue
+          # See: https://github.com/pnpm/pnpm/issues/9238
+          echo "⚠️ pnpm audit temporarily disabled (npm registry retired old endpoint)"
+          # if ! pnpm audit --audit-level=moderate; then
+          #   echo "❌ Dependencies audit failed"
+          #   AUDIT_SUCCESS=false
+          # else
+          #   echo "✅ Dependencies audit passed"
+          # fi
 
           # Run dependency tests
           echo "🔍 Running dependency tests..."
@@ -449,7 +458,7 @@ jobs:
     name: "Client e2e tests"
     runs-on: ubuntu-latest
     needs: [changes, static-analysis-and-tests]
-    if: needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true'
+    if: always() && (needs.changes.outputs.playwright_client == 'true' || needs.changes.outputs.workflow == 'true') && needs.static-analysis-and-tests.result == 'success'
     timeout-minutes: 15
     steps:
       - name: Add known hosts

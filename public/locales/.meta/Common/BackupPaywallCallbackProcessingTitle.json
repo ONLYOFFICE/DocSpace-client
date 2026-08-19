@@ -1,0 +1,29 @@
+{
+  "key_path": "BackupPaywallCallbackProcessingTitle",
+  "content": "Processing your payment",
+  "content_en_sha1_hash": "7883e37eeca1fc3971dea18fa641932952c3b09b",
+  "created_at": "2026-08-06T08:03:35.896Z",
+  "updated_at": "2026-08-13T14:37:21.814Z",
+  "comment": {
+    "text": "Heading on the payment completion page shown during the processing of a backup-related payment callback.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T08:07:59.609Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 176,
+      "context": "errorButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n redirectUrl: DOCS_CONNECT_ROUTE,\n };\n case PaymentFlavor.Backup:\n return {\n processingTitle: t(\"Common:BackupPaywallCallbackProcessingTitle\"),\n processingHint: t(\"Common:BackupPaywallCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:BackupPaywallCallbackStepActivate\"),\n successTitle: t(\"Common:BackupPaywallCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:GoToAddon\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

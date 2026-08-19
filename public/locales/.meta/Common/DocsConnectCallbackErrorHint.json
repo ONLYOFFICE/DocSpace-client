@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectCallbackErrorHint",
+  "content": "Your card was saved, but we couldn't complete the purchase. You can retry from Docs Connect.",
+  "content_en_sha1_hash": "e109ebeb163a90a9ccbf9b58039901c8a3d1c120",
+  "created_at": "2026-07-27T13:07:08.042Z",
+  "updated_at": "2026-08-13T14:37:21.813Z",
+  "comment": {
+    "text": "Error text on the AI paywall completion page that appears when a transaction fails after a payment method has been successfully saved via Docs Connect.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:38:28.065Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 170,
+      "context": "activateStepLabel: t(\"Common:DocsConnectCallbackStepActivate\"),\n successTitle: t(\"Common:DocsConnectCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n errorTitle: t(\"Common:DocsConnectCallbackErrorTitle\"),\n errorHint: t(\"Common:DocsConnectCallbackErrorHint\"),\n errorButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n redirectUrl: DOCS_CONNECT_ROUTE,\n };\n case PaymentFlavor.Backup:\n return {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

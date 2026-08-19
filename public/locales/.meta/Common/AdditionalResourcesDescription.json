@@ -1,19 +1,20 @@
 {
   "key_path": "AdditionalResourcesDescription",
-  "content": "Choose whether you want to display links to additional resources in {{productName}} menu.",
-  "content_en_sha1_hash": "ba7ac198833cace77d47f785c15e7a5c1bb730da",
-  "created_at": "2025-05-26T07:15:40.229Z",
-  "updated_at": "2026-02-19T13:36:33.158Z",
+  "content": "Choose whether you want to display links to additional resources in workspace menu.",
+  "content_en_sha1_hash": "b2072b167e853706aa9503a4ec4cb014cc52976f",
+  "created_at": "2026-08-13T22:43:50.969Z",
+  "updated_at": "2026-08-14T15:16:53.700Z",
   "comment": {
-    "text": "This translation key provides the text for a description that explains why additional resources are not currently available. It is displayed in the UI of a settings page and is translated as part of the branding options for {productName}.",
+    "text": "Description text for a branding setting explaining the visibility of additional resource links in the workspace menu.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:13.926Z"
+    "updated_at": "2026-08-14T15:16:53.700Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 91,
-      "context": "<div className={styles.additionalHeader}>\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div className={styles.additionalDescription}>\n {t(\"Common:AdditionalResourcesDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox",
+      "line_number": 100,
+      "context": "<div className={styles.additionalHeader}>\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div className={styles.additionalDescription}>\n {t(\"Common:AdditionalResourcesDescription\")}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox\n data-testid=\"show-feedback-support\"\n className={classNames(",
       "module": "/packages/shared"
     }
   ],
@@ -163,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,32 +1,41 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TFunction } from "i18next";
@@ -35,7 +44,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
 import { RadioButton } from "@docspace/ui-kit/components/radio-button";
-import { startBackup } from "../../../api/portal";
+import { saveDeposite, startBackup } from "../../../api/portal";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
 import StatusMessage from "@docspace/ui-kit/components/status-message";
@@ -185,8 +194,14 @@ const ManualBackup = ({
   backupServicePrice,
   isBackupPaid = false,
   isFreeBackupsLimitReached = false,
+  disabledCreatePublicRoom = false,
   setBackupProgressWarning,
   backupProgressWarning,
+  walletBalance = 0,
+  walletCodeCurrency,
+  isCardLinked = false,
+  fetchWalletBalance,
+  onOpenTopUpDialog,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -199,6 +214,64 @@ const ManualBackup = ({
 
   const [showCancelOperation, setShowCancelOperation] = useState(false);
   const [isCancelOperation, setIsCancelOperation] = useState(false);
+  const [isToppingUp, setIsToppingUp] = useState(false);
+
+  const isChargeableBackup = isBackupPaid && isFreeBackupsLimitReached;
+  const isBalanceInsufficient =
+    isChargeableBackup &&
+    !!backupServicePrice &&
+    walletBalance < backupServicePrice;
+
+  const isTopUpBeforeCopy = isBalanceInsufficient && isPayer && isCardLinked;
+
+  const isTopUpDialogBeforeCopy =
+    isBalanceInsufficient && !isCardLinked && !!onOpenTopUpDialog;
+
+  const isCopyBlocked = isBalanceInsufficient && isCardLinked && !isPayer;
+
+  // Memoized: StatusMessage replays its show animation whenever the message
+  // identity changes, so a fresh element on every render makes it blink.
+  const insufficientFundsMessage = useMemo(
+    () =>
+      isCopyBlocked
+        ? getPaymentError(
+            t,
+            false,
+            walletCustomerEmail ?? "",
+            backupServicePrice ?? 0,
+          )
+        : "",
+    [isCopyBlocked, t, walletCustomerEmail, backupServicePrice],
+  );
+
+  const topUpAmount = Math.ceil((backupServicePrice ?? 0) - walletBalance);
+
+  const copyButtonLabel =
+    isTopUpBeforeCopy || isTopUpDialogBeforeCopy
+      ? t("Common:TopUpAndMakeCopy")
+      : undefined;
+
+  const topUpIfNeeded = async () => {
+    if (isTopUpDialogBeforeCopy) {
+      onOpenTopUpDialog?.();
+      return false;
+    }
+
+    if (!isTopUpBeforeCopy) return true;
+
+    setIsToppingUp(true);
+
+    try {
+      await saveDeposite(topUpAmount, walletCodeCurrency || "USD");
+      await fetchWalletBalance?.(true);
+      return true;
+    } catch (error) {
+      toastr.error(error as Error);
+      return false;
+    } finally {
+      setIsToppingUp(false);
+    }
+  };
 
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
@@ -261,6 +334,8 @@ const ManualBackup = ({
   ]);
 
   const onMakeTemporaryBackup = async () => {
+    if (!(await topUpIfNeeded())) return;
+
     setErrorMessage("");
     setBackupProgressError("");
     setBackupProgressWarning("");
@@ -330,12 +405,14 @@ const ManualBackup = ({
     selectedStorageId?: string,
     selectedStorageTitle?: string,
   ) => {
+    if (!(await topUpIfNeeded())) return;
+
     clearLocalStorage();
 
     setErrorMessage("");
     setBackupProgressError("");
     setBackupProgressWarning("");
-    
+
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
@@ -403,6 +480,9 @@ const ManualBackup = ({
     isMaxProgress,
     onMakeCopy,
     buttonSize,
+    copyButtonLabel,
+    isToppingUp,
+    isCopyBlocked,
   };
 
   const onCancelOperation = async () => {
@@ -411,6 +491,7 @@ const ManualBackup = ({
     const res = await cancelBackup();
 
     if (!res) {
+      setIsCancelOperation(false);
       setShowCancelOperation(true);
     }
   };
@@ -419,9 +500,9 @@ const ManualBackup = ({
 
   if (isInitialLoading) return <DataBackupLoader />;
 
-  const mainDisabled = !isMaxProgress || pageIsDisabled;
+  const mainDisabled = !isMaxProgress || pageIsDisabled || isCopyBlocked;
   const additionalDisabled =
-    !isMaxProgress || isNotPaidPeriod || pageIsDisabled;
+    !isMaxProgress || isNotPaidPeriod || pageIsDisabled || isCopyBlocked;
   const isDownloadButton =
     temporaryLink && temporaryLink.length > 0 && isMaxProgress;
   const isCreateButtonDisabled = mainDisabled && !isDownloadButton;
@@ -429,8 +510,13 @@ const ManualBackup = ({
   return (
     <div className={styles.manualBackup} data-testid="manual-backup-wrapper">
       <StatusMessage
-        message={errorMessage || errorInformation || backupProgressWarning}
-        isWarning={!!backupProgressWarning}
+        message={
+          errorMessage ||
+          insufficientFundsMessage ||
+          errorInformation ||
+          backupProgressWarning
+        }
+        isWarning={!!backupProgressWarning && !insufficientFundsMessage}
       />
       <div
         className={classNames(
@@ -495,10 +581,11 @@ const ManualBackup = ({
               >
                 <Button
                   id="create-button"
-                  label={t("Common:Create")}
+                  label={copyButtonLabel ?? t("Common:Create")}
                   onClick={onMakeTemporaryBackup}
                   primary
-                  isDisabled={mainDisabled}
+                  isDisabled={mainDisabled || isToppingUp}
+                  isLoading={isToppingUp}
                   size={buttonSize}
                   testId="create_temporary_backup_button"
                 />
@@ -553,7 +640,7 @@ const ManualBackup = ({
           )}
         >
           {t("Common:RoomsModuleDescription", {
-            roomName: t("Common:MyDocuments"),
+            roomName: t("Common:Files"),
           })}
         </Text>
         {isCheckedDocuments ? (
@@ -570,6 +657,7 @@ const ManualBackup = ({
             maxWidth={maxWidth}
             isBackupPaid={isBackupPaid}
             isFreeBackupsLimitReached={isFreeBackupsLimitReached}
+            disabledCreatePublicRoom={disabledCreatePublicRoom}
           />
         ) : null}
       </div>
@@ -675,10 +763,14 @@ const ManualBackup = ({
         <OperationsProgressButton
           operationsAlert={Boolean(backupProgressError)}
           operationsCompleted={downloadingProgress === 100}
+          operationsCanceled={isCancelOperation}
           operations={[
             {
-              label:
-                downloadingProgress === 100
+              label: isCancelOperation
+                ? t("Common:CanceledOperation", {
+                    operationName: t("Common:Backup"),
+                  })
+                : downloadingProgress === 100
                   ? t("Common:Backup")
                   : downloadingProgress === 0
                     ? t("Common:PreparingBackup")
@@ -701,3 +793,4 @@ const ManualBackup = ({
 };
 
 export default ManualBackup;
+

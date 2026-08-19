@@ -3,52 +3,77 @@
   "content": "Spreadsheets",
   "content_en_sha1_hash": "e8a0fe95bcd9c07d210920e52baa1560871c11ad",
   "created_at": "2025-05-19T21:30:49.008Z",
-  "updated_at": "2026-03-31T15:18:46.214Z",
+  "updated_at": "2026-08-06T14:20:57.525Z",
   "comment": {
-    "text": "The translation key \"Common:Spreadsheets\" is used to display a label indicating that only spreadsheets are being filtered or selected in a file filter interface. It appears as part of a dropdown menu or list, providing context for users selecting files by type.",
+    "text": "This is a label for a tab or filter option. It refers to files of the spreadsheet type (e.g., .xlsx).",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:55.939Z"
+    "updated_at": "2026-04-11T20:42:12.932Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/TemplateGallery/index.tsx",
-      "line_number": 75,
+      "line_number": 84,
       "context": "),\n onClick: async () => await resetFilters(FILE_EXTENSIONS.DOCX),\n },\n {\n id: TAB_IDS.SPREADSHEET,\n name: t(\"Common:Spreadsheets\"),\n content: (\n <TilesContainer ext={FILE_EXTENSIONS.XLSX} isShowInitSkeleton={false} />\n ),\n onClick: async () => await resetFilters(FILE_EXTENSIONS.XLSX),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 788,
+      "line_number": 868,
       "context": "break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 788,
+      "line_number": 868,
       "context": "break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 137,
-      "context": "key: FilterType.PresentationsOnly,\n label: t(`Common:Presentations`),\n },\n {\n key: FilterType.SpreadsheetsOnly,\n label: t(`Common:Spreadsheets`),\n },\n {\n key: FilterType.PDFForm,\n label: getManyPDFTitle(t, true),\n },",
+      "line_number": 146,
+      "context": "key: FilterType.PresentationsOnly,\n label: t(\"Common:Presentations\"),\n },\n {\n key: FilterType.SpreadsheetsOnly,\n label: t(\"Common:Spreadsheets\"),\n },\n {\n key: FilterType.PDFForm,\n label: getManyPDFTitle(t, true),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 158,
+      "line_number": 109,
       "context": "label: t(\"Common:Documents\"),\n typeKey: FilterType.DocumentsOnly,\n },\n {\n key: \"filter-type-spreadsheets\",\n label: t(\"Common:Spreadsheets\"),\n typeKey: FilterType.SpreadsheetsOnly,\n },\n {\n key: \"filter-type-presentations\",\n label: t(\"Common:Presentations\"),",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 274,
+      "context": "},\n {\n id: \"filter_type-spreadsheets\",\n key: String(FilterType.SpreadsheetsOnly),\n group: FilterGroups.filterType,\n label: t(\"Common:Spreadsheets\", { defaultValue: \"Spreadsheets\" }),\n },\n {\n id: \"filter_type-presentations\",\n key: String(FilterType.PresentationsOnly),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-filter/useAliasFilesFilter.tsx",
+      "line_number": 274,
+      "context": "},\n {\n id: \"filter_type-spreadsheets\",\n key: String(FilterType.SpreadsheetsOnly),\n group: FilterGroups.filterType,\n label: t(\"Common:Spreadsheets\", { defaultValue: \"Spreadsheets\" }),\n },\n {\n id: \"filter_type-presentations\",\n key: String(FilterType.PresentationsOnly),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 242,
+      "context": "},\n {\n id: \"filter_type-spreadsheets\",\n key: FilterType.SpreadsheetsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Spreadsheets\"),\n },\n {\n id: \"filter_type-presentations\",\n key: FilterType.PresentationsOnly.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 242,
+      "context": "},\n {\n id: \"filter_type-spreadsheets\",\n key: FilterType.SpreadsheetsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Spreadsheets\"),\n },\n {\n id: \"filter_type-presentations\",\n key: FilterType.PresentationsOnly.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 477,
+      "line_number": 484,
       "context": "isChecked={state.spreadsheets.isChecked}\n isIndeterminate={state.spreadsheets.isIndeterminate}\n items={state.spreadsheets.files}\n titleFormat={state.spreadsheets.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.Spreadsheets}\n title={t(\"Common:Spreadsheets\")}\n dataTestId=\"download_dialog_spreadsheets\"\n />\n ) : null}\n {state.presentations.files.length > 0 ? (\n <DownloadContent",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 320,
+      "line_number": 318,
       "context": "case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:",
       "module": "/packages/shared"
     }
@@ -184,7 +209,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -207,13 +232,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Прорачунске табеле\" is a functional translation but doesn't directly correspond to \"Spreadsheets.\" It translates to 'Calculation Tables'. While spreadsheets *are* used for calculations, \"Spreadsheets\" has a broader meaning referring to the software and file format.",
-          "suggestion": "Consider alternatives like \"Рачунске табеле\" (Racunske tabele - Accounting Tables) or a more descriptive phrase if a single word equivalent isn't feasible.  A note for the translator explaining the nuance of the English term might be helpful."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -249,13 +268,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Fletë kryesore' is a literal translation of 'main sheets', which doesn't fully capture the meaning of 'Spreadsheets'. It's more accurately translated as 'Tabele' or 'Fletë llogaritëse'.",
-          "suggestion": "Tabele"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

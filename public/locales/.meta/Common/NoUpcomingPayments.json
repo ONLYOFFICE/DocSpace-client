@@ -1,0 +1,35 @@
+{
+  "key_path": "NoUpcomingPayments",
+  "content": "No upcoming payments",
+  "content_en_sha1_hash": "44d2c34db64573324af869b4a71ab0338b1bf683",
+  "created_at": "2026-06-25T11:54:53.918Z",
+  "updated_at": "2026-08-14T14:58:32.936Z",
+  "comment": {
+    "text": "Title for an empty state view in the billing wallet section, appearing when no scheduled payments are listed.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:03:37.705Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/UpcomingPayments.tsx",
+      "line_number": 88,
+      "context": "</Text>\n {upcomingPayments.length === 0 ? (\n <div className={styles.emptyState}>\n <div className={styles.emptyContent}>\n <Text fontSize=\"12px\" fontWeight={600} className={styles.mutedTitle}>\n {t(\"NoUpcomingPayments\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoUpcomingPaymentsDescription\")}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/index.tsx",
+      "line_number": 75,
+      "context": "useViewEffect({ view: viewAs, setView: setViewAs, currentDeviceType });\n \n const emptyView = (\n <EmptyView\n icon={isBase ? <NoSpendingIcon /> : <NoSpendingDarkIcon />}\n title={t(\"NoUpcomingPayments\")}\n description={t(\"NoUpcomingPaymentsDescription\")}\n options={null}\n />\n );",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

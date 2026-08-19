@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceResultsCompareGroupsOrPeriods",
+  "content": "Compare groups or periods",
+  "content_en_sha1_hash": "81daf387cad7becc42a9176ce63d9e0db4d910f5",
+  "created_at": "2026-08-04T09:58:55.148Z",
+  "updated_at": "2026-08-05T17:46:00.226Z",
+  "comment": {
+    "text": "Label for an AI suggestion action that enables users to perform comparisons between different data groups or time periods within FormSpace results.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:46:00.226Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 172,
+      "context": "{\n name: t(\"AiSuggestions:FormSpaceResultsSummarizeResults\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsSummarizeResultsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriods\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCompareGroupsOrPeriodsPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReport\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCreateAResultsReportPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

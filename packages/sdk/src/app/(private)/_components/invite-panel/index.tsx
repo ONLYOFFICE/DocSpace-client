@@ -1,0 +1,120 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+"use client";
+
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+import type { TUser } from "@docspace/shared/api/people/types";
+import { RoomsType } from "@docspace/shared/enums";
+import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
+
+import InvitePanel from "@/app/(rooms)/_components/invite-panel";
+
+import { usePrivateInviteFlow } from "../../_hooks/usePrivateInviteFlow";
+
+// Thin wrapper around (rooms)/invite-panel:
+//   - locks isPrivateRoom=true so external-links / groups / guests UI hides;
+//   - hooks onInviteSubmitted to addMembersToEncryptedRoom via the flow hook.
+// The base panel already accepts `isPrivateRoom` and gates ExternalLinks
+// (added during v1); the only thing we add is the post-invite encryption fan-out.
+
+type PrivateInvitePanelProps = {
+  visible: boolean;
+  onClose: () => void;
+  roomId: number;
+  user?: TUser;
+  culture?: string;
+  defaultAccess?: number;
+  onMembersUpdated?: () => void;
+};
+
+const PrivateInvitePanel: React.FC<PrivateInvitePanelProps> = ({
+  visible,
+  onClose,
+  roomId,
+  user,
+  culture,
+  defaultAccess,
+  onMembersUpdated,
+}) => {
+  const { t } = useTranslation(["Common"]);
+  const { onInviteSubmitted, onBeforeSubmit, reencryptProgress } =
+    usePrivateInviteFlow();
+
+  const handleInviteSubmitted = React.useCallback(
+    (memberIds: string[], displayNames: Record<string, string>) =>
+      onInviteSubmitted({ roomId, memberIds, displayNames }),
+    [onInviteSubmitted, roomId],
+  );
+
+  // Compute integer percentage for the progress bar. The initial onProgress
+  // call passes (0, total) which would show 0%; subsequent calls increment
+  // processed so the bar advances as each file's DEK is re-wrapped.
+  const reencryptPercent =
+    reencryptProgress !== null && reencryptProgress.total > 0
+      ? Math.floor(
+          (reencryptProgress.processed / reencryptProgress.total) * 100,
+        )
+      : 0;
+
+  return (
+    <>
+      <InvitePanel
+        visible={visible}
+        onClose={onClose}
+        roomId={roomId}
+        roomType={RoomsType.CustomRoom}
+        defaultAccess={defaultAccess}
+        user={user}
+        isPrivateRoom
+        culture={culture}
+        onMembersUpdated={onMembersUpdated}
+        onBeforeSubmit={onBeforeSubmit}
+        onInviteSubmitted={handleInviteSubmitted}
+      />
+      {reencryptProgress !== null ? (
+        <ProgressBar
+          percent={reencryptPercent}
+          label={t("Common:ReEncryptingFiles")}
+          data-testid="reencrypt-progress-bar"
+        />
+      ) : null}
+    </>
+  );
+};
+
+export default PrivateInvitePanel;

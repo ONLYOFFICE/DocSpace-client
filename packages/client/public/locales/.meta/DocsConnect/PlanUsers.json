@@ -1,0 +1,71 @@
+{
+  "key_path": "PlanUsers",
+  "content": "Users",
+  "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
+  "created_at": "2026-07-27T13:07:48.490Z",
+  "updated_at": "2026-08-12T14:02:21.316Z",
+  "comment": {
+    "text": "A label or caption in summary cards and information rows that identifies the number of users included in a subscription plan.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:09:11.164Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 422,
+      "context": "<div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"Common:Quantity\")}</Text>\n <Text className={styles.quantityValue}>{planUsers}</Text>\n <Text className={styles.cardCaption}>\n {t(\"DocsConnect:PlanUsers\")}\n </Text>\n </div>\n </div>\n \n {isPaid ? (",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 422,
+      "context": "<div className={styles.summaryCard}>\n <Text className={styles.cardLabel}>{t(\"Common:Quantity\")}</Text>\n <Text className={styles.quantityValue}>{planUsers}</Text>\n <Text className={styles.cardCaption}>\n {t(\"DocsConnect:PlanUsers\")}\n </Text>\n </div>\n </div>\n \n {isPaid ? (",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 491,
+      "context": "(isEditActive && !hasChanges) ||\n isTopUpUnavailable;\n \n const renderOverLimitSummary = () => (\n <>\n {summaryRow(t(\"DocsConnect:PlanUsers\"), `${MAX_USERS}+`, usersTooltip)}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),\n formatCurrency(pricePerUser),\n )}\n {summaryRow(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 491,
+      "context": "(isEditActive && !hasChanges) ||\n isTopUpUnavailable;\n \n const renderOverLimitSummary = () => (\n <>\n {summaryRow(t(\"DocsConnect:PlanUsers\"), `${MAX_USERS}+`, usersTooltip)}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),\n formatCurrency(pricePerUser),\n )}\n {summaryRow(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 491,
+      "context": "(isEditActive && !hasChanges) ||\n isTopUpUnavailable;\n \n const renderOverLimitSummary = () => (\n <>\n {summaryRow(t(\"DocsConnect:PlanUsers\"), `${MAX_USERS}+`, usersTooltip)}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),\n formatCurrency(pricePerUser),\n )}\n {summaryRow(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 491,
+      "context": "(isEditActive && !hasChanges) ||\n isTopUpUnavailable;\n \n const renderOverLimitSummary = () => (\n <>\n {summaryRow(t(\"DocsConnect:PlanUsers\"), `${MAX_USERS}+`, usersTooltip)}\n {summaryRow(\n t(\"DocsConnect:BasePricePerUser\"),\n formatCurrency(pricePerUser),\n )}\n {summaryRow(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/CancelPlanDialog/index.tsx",
+      "line_number": 122,
+      "context": "as=\"span\"\n fontSize=\"13px\"\n fontWeight={400}\n className={styles.muted}\n >\n ({t(\"DocsConnect:PlanUsers\")}: {planUsers})\n </Text>\n </Text>\n <StorageWarning\n body={t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: periodEndDateLocalized,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 465,
+      "context": "</div>\n <div className={styles.detailRows}>\n <div className={styles.detailRow}>\n <div className={styles.detailLabel}>\n <Text className={styles.muted}>\n {t(\"DocsConnect:PlanUsers\")}\n </Text>\n <HelpButton\n size={12}\n tooltipContent={t(\"DocsConnect:PlanUsersTooltip\", {\n count: planUsers,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

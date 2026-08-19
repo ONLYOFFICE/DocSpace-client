@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
@@ -311,7 +320,7 @@ const successListWithCreate = {
 					ExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
 					PrimaryExternalLink: ["Editing", "Review", "Comment", "Read", "None"],
 				},
-				title: "Plugin SDK",
+				title: "AI agent",
 				access: 0,
 				sharedBy: {
 					id: "4a515a15-d4d6-4b8e-828e-e0586f18f3a3",
@@ -714,7 +723,7 @@ const getListWithCreate = ({
 							"None",
 						],
 					},
-					title: "Plugin SDK",
+					title: "AI agent",
 					access,
 					sharedBy: {
 						id: "4a515a15-d4d6-4b8e-828e-e0586f18f3a3",
@@ -900,33 +909,71 @@ const getListWithCreate = ({
 	};
 };
 
+/**
+ * Overrides `Create` on the section root the list came back under.
+ *
+ * That one flag is what the whole create affordance hangs off — the "New agent"
+ * header button and the create tile both read it (getSectionCreateButton →
+ * getFolderModel → `security.Create`) — and the server answers it per role: an
+ * agent list fetched by someone who cannot manage agents comes back with
+ * `Create: false`. The canned payloads here all say `true`, so a test standing
+ * in as anybody else has to say otherwise.
+ */
+const withRootCreate = <T,>(payload: T, canCreate?: boolean): T => {
+	if (canCreate === undefined) return payload;
+
+	const list = payload as unknown as {
+		response: { current: { security: Record<string, boolean> } };
+	};
+
+	return {
+		...list,
+		response: {
+			...list.response,
+			current: {
+				...list.response.current,
+				security: { ...list.response.current.security, Create: canCreate },
+			},
+		},
+	} as unknown as T;
+};
+
 export const aiAgentsResolver = ({
 	withCreate,
 	withListCreate,
 	aiAccess,
 	inRoom = true,
 	isDocAdmin,
+	canCreate,
 }: {
 	withCreate?: boolean;
 	withListCreate?: boolean;
 	aiAccess?: ShareAccessRights;
 	inRoom?: boolean;
 	isDocAdmin?: boolean;
+	canCreate?: boolean;
 }) => {
 	if (aiAccess !== undefined) {
 		return new Response(
 			JSON.stringify(
-				getListWithCreate({ access: aiAccess, inRoom, isDocAdmin }),
+				withRootCreate(
+					getListWithCreate({ access: aiAccess, inRoom, isDocAdmin }),
+					canCreate,
+				),
 			),
 		);
 	}
 	if (withCreate) {
-		return new Response(JSON.stringify(successEmptyWithCreate));
+		return new Response(
+			JSON.stringify(withRootCreate(successEmptyWithCreate, canCreate)),
+		);
 	}
 	if (withListCreate) {
-		return new Response(JSON.stringify(successListWithCreate));
+		return new Response(
+			JSON.stringify(withRootCreate(successListWithCreate, canCreate)),
+		);
 	}
-	return new Response(JSON.stringify(successEmpty));
+	return new Response(JSON.stringify(withRootCreate(successEmpty, canCreate)));
 };
 
 export const aiAgentsHandler = (
@@ -937,12 +984,18 @@ export const aiAgentsHandler = (
 		aiAccess,
 		inRoom,
 		isDocAdmin,
+		canCreate,
 	}: {
 		withCreate?: boolean;
 		withListCreate?: boolean;
 		aiAccess?: ShareAccessRights;
 		inRoom?: boolean;
 		isDocAdmin?: boolean;
+		/**
+		 * `security.Create` on the AI agents root. Left out, the payload's own
+		 * value stands.
+		 */
+		canCreate?: boolean;
 	} = {},
 ) => {
 	return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}`, () => {
@@ -952,6 +1005,7 @@ export const aiAgentsHandler = (
 			aiAccess,
 			inRoom,
 			isDocAdmin,
+			canCreate,
 		});
 	});
 };

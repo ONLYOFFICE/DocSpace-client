@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
@@ -68,8 +77,11 @@ import {
 
 import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 
+import { getFolderInfo } from "@docspace/shared/api/files";
+
 import MobileView from "./MobileView";
-import { encryptionUploadDialog } from "../../../helpers/desktop";
+import ActivateAIDialog from "../../dialogs/ActivateAIDialog";
+import ClientSimpleTopUpDialog from "../../EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 
 import styles from "./main-button.module.scss";
 
@@ -79,8 +91,6 @@ const ArticleMainButtonContent = (props) => {
     isMobileArticle,
 
     isPrivacy,
-    encryptedFile,
-    encrypted,
     startUpload,
     setAction,
     setSelectFileDialogVisible,
@@ -94,6 +104,7 @@ const ArticleMainButtonContent = (props) => {
     isFavoritesFolder,
     isRecentFolder,
     isRecycleBinFolder,
+    canCreateEncrypted,
 
     currentFolderId,
     currentRoomType,
@@ -132,7 +143,6 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     contactsTab,
-    setRefMap,
     setTemplateGalleryVisible,
     templateGalleryAvailable,
 
@@ -144,6 +154,16 @@ const ArticleMainButtonContent = (props) => {
     allowInvitingMembers,
 
     aiConfig,
+    isGracePeriod,
+
+    isAIReady,
+    isCardLinkedToPortal,
+    enableAIService,
+    getAIConfig,
+    refreshPaymentInfo,
+    setSecurity,
+    isEmptyFilesList,
+    language,
   } = props;
 
   const location = useLocation();
@@ -166,14 +186,20 @@ const ArticleMainButtonContent = (props) => {
     (e) => {
       const format = e.action || null;
 
-      const event = new Event(Events.CREATE);
-
       const isPDF = format === "pdf";
 
       if (isPDF && isMobile) {
         toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
+
+      const event = new CustomEvent(Events.CREATE, {
+        detail: {
+          parentId: currentFolderId,
+          context: "sidebar",
+          extension: format,
+        },
+      });
 
       const payload = {
         extension: format,
@@ -184,7 +210,7 @@ const ArticleMainButtonContent = (props) => {
 
       window.dispatchEvent(event);
     },
-    [setAction],
+    [setAction, currentFolderId],
   );
 
   const onCreateRoom = React.useCallback(() => {
@@ -193,26 +219,79 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: currentFolderId, context: "sidebar" },
+    });
+    if (window.location.pathname.startsWith("/forms")) {
+      event.payload = { isFormsCreate: true };
+    }
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog]);
+  }, [isWarningRoomsDialog, currentFolderId]);
 
-  const onCreateAgent = React.useCallback(
-    () => {
-      // TODO: AI: Add quota if it needed
+  const onCreateAgent = React.useCallback(() => {
+    if (isGracePeriod) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
 
-      // if (isWarningRoomsDialog) {
-      //   setQuotaWarningDialogVisible(true);
-      //   return;
-      // }
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: { parentId: currentFolderId, context: "sidebar" },
+    });
+    window.dispatchEvent(event);
+  }, [isGracePeriod, currentFolderId]);
 
-      const event = new Event(Events.AGENT_CREATE);
+  const [aiFeaturesDialogVisible, setAiFeaturesDialogVisible] =
+    React.useState(false);
+  const [simpleTopUpDialogVisible, setSimpleTopUpDialogVisible] =
+    React.useState(false);
+  const [isActivatingAI, setIsActivatingAI] = React.useState(false);
+
+  const showActivateAIDialog =
+    isAIAgentsFolder && !isAIReady && !isEmptyFilesList;
+
+  const refreshCurrentFolder = React.useCallback(async () => {
+    if (!currentFolderId) return;
+    const updated = await getFolderInfo(currentFolderId);
+    if (updated.security) setSecurity?.(updated.security);
+  }, [currentFolderId, setSecurity]);
+
+  const onAIActivated = React.useCallback(async () => {
+    await Promise.all([
+      getAIConfig?.(),
+      refreshCurrentFolder(),
+      refreshPaymentInfo?.(),
+    ]);
+  }, [getAIConfig, refreshCurrentFolder, refreshPaymentInfo]);
+
+  const onDialogActivate = React.useCallback(async () => {
+    if (!isCardLinkedToPortal) {
+      setAiFeaturesDialogVisible(false);
+      setSimpleTopUpDialogVisible(true);
+      return;
+    }
+
+    try {
+      setIsActivatingAI(true);
+      await enableAIService?.(onAIActivated);
+
+      const event = new CustomEvent(Events.AGENT_CREATE, {
+        detail: { parentId: currentFolderId, context: "sidebar" },
+      });
       window.dispatchEvent(event);
-    },
-    [
-      // isWarningRoomsDialog
-    ],
-  );
+      setAiFeaturesDialogVisible(false);
+    } finally {
+      setIsActivatingAI(false);
+    }
+  }, [isCardLinkedToPortal, enableAIService, onAIActivated, currentFolderId]);
+
+  const onMainButtonAgentClick = React.useCallback(() => {
+    if (showActivateAIDialog) {
+      setAiFeaturesDialogVisible(true);
+      return;
+    }
+
+    onCreateAgent();
+  }, [showActivateAIDialog, onCreateAgent]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -249,21 +328,8 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onUploadFileClick = React.useCallback(() => {
-    if (isPrivacy) {
-      encryptionUploadDialog((f, isEncrypted) => {
-        f.encrypted = isEncrypted;
-        startUpload([f], null, t); // TODO: createFoldersTree
-      });
-    } else {
-      inputFilesElement.current.click();
-    }
-  }, [
-    isPrivacy,
-    encrypted,
-    encryptedFile,
-    encryptionUploadDialog,
-    startUpload,
-  ]);
+    inputFilesElement.current.click();
+  }, []);
 
   const onUploadFolderClick = React.useCallback(() => {
     inputFolderElement.current.click();
@@ -314,7 +380,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
+        label: t("Common:FromPortal"),
         key: "actions_upload-from-docspace",
         disabled: false,
         onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
@@ -395,7 +461,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-files",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFiles"),
+        label: t("Common:UploadFiles"),
         onClick: onUploadFileClick,
         key: "upload-files",
       },
@@ -407,9 +473,7 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-files-product",
         className: "main-button_drop-down",
         icon: MoveReactSvgUrl,
-        label: t("EmptyView:UploadFromPortalTitle", {
-          productName: t("Common:ProductName"),
-        }),
+        label: t("EmptyView:UploadFromPortalTitle"),
         onClick: onShowAiKnowledgeSelectFileDialog,
         key: "upload-files-product",
       };
@@ -500,13 +564,12 @@ const ArticleMainButtonContent = (props) => {
       key: "pptx",
     };
 
-    if (!(isMobile || isTablet)) {
+    if (!(isMobile || isTablet) && !isPrivacy) {
       newUploadActions.push({
         id: "actions_upload-folders",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFolder"),
-        disabled: isPrivacy,
+        label: t("Common:UploadFolder"),
         onClick: onUploadFolderClick,
         key: "upload-folder",
       });
@@ -542,25 +605,28 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const newActions = [
-      createNewDocumentDocx,
-      createNewSpreadsheetXlsx,
-      createNewPresentationPptx,
-      formActions,
-      createNewFolder,
-    ];
+    const createNewPdfForm = {
+      id: "actions_new-pdf-form",
+      className: "main-button_drop-down",
+      icon: FormReactSvgUrl,
+      label: t("Translations:NewForm"),
+      onClick: onCreate,
+      action: "pdf",
+      key: "pdf",
+    };
 
-    if (pluginItems.length > 0) {
-      // menuModel.push({
-      //   id: "actions_more-plugins",
-      //   className: "main-button_drop-down",
-      //   icon: PluginMoreReactSvgUrl,
-      //   label: t("Common:More"),
-      //   disabled: false,
-      //   key: "more-plugins",
-      //   items: pluginItems,
-      // });
+    const canCreateDocuments = !isPrivacy || canCreateEncrypted;
+    const newActions = canCreateDocuments
+      ? [
+          createNewDocumentDocx,
+          createNewSpreadsheetXlsx,
+          createNewPresentationPptx,
+          isPrivacy ? createNewPdfForm : formActions,
+          createNewFolder,
+        ]
+      : [createNewFolder];
 
+    if (pluginItems.length > 0 && !isPrivacy) {
       newActions.push({
         id: "actions_more-plugins",
         className: "main-button_drop-down",
@@ -572,7 +638,7 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    if (templateGalleryAvailable) {
+    if (templateGalleryAvailable && !isPrivacy) {
       if (isDesktop()) {
         newActions.push({
           isSeparator: true,
@@ -598,6 +664,7 @@ const ArticleMainButtonContent = (props) => {
   }, [
     t,
     isPrivacy,
+    canCreateEncrypted,
     currentFolderId,
     isAccountsPage,
     isSettingsPage,
@@ -660,7 +727,9 @@ const ArticleMainButtonContent = (props) => {
 
     if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
 
-    if (isAIAgentsFolder && aiConfig.aiReadyNeedReset) visibilityValue = false;
+    if (isAIAgentsFolder && aiConfig?.aiReadyNeedReset) visibilityValue = false;
+
+    if (showActivateAIDialog && isMobileArticle) visibilityValue = true;
 
     return visibilityValue;
   };
@@ -672,9 +741,9 @@ const ArticleMainButtonContent = (props) => {
   }, [mainButtonVisible]);
 
   const onMainButtonClick = () => {
-    if (isAIAgentsFolder) return onCreateAgent();
+    if (isAIAgentsFolder) return onMainButtonAgentClick();
     if (!isAccountsPage) return onCreateRoom();
-    if (isContactsGroupsPage) return createGroup();
+    if (isContactsGroupsPage) return createGroup(currentFolderId, "sidebar");
   };
 
   const mainButtonText =
@@ -688,6 +757,8 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else if ((isChatTab || isResultTab) && isAIRoom) {
     isDisabled = true;
+  } else if (showActivateAIDialog) {
+    isDisabled = isFrame && disableActionButton;
   } else {
     isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
@@ -702,7 +773,7 @@ const ArticleMainButtonContent = (props) => {
       {isMobileArticle ? (
         <MobileView
           t={t}
-          titleProp={t("Upload")}
+          titleProp={t("Common:Upload")}
           actionOptions={actions}
           buttonOptions={!isAccountsPage ? uploadActions : null}
           withoutButton={
@@ -737,9 +808,9 @@ const ArticleMainButtonContent = (props) => {
           className={classNames(styles.mainButton, "create-agent-button")}
           id="rooms-shared_create-agent-button"
           label={t("Common:NewAgent")}
-          onClick={onCreateAgent}
+          onClick={onMainButtonAgentClick}
           $currentColorScheme={currentColorScheme}
-          isDisabled={isDisabled || aiConfig.aiReadyNeedReset}
+          isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}
           size="small"
           primary
           scale
@@ -758,7 +829,6 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
-          setRefMap={setRefMap}
         />
       )}
 
@@ -795,6 +865,19 @@ const ArticleMainButtonContent = (props) => {
         ref={inputFolderElement}
         style={{ display: "none" }}
       />
+
+      <ActivateAIDialog
+        visible={aiFeaturesDialogVisible}
+        onClose={() => setAiFeaturesDialogVisible(false)}
+        onActivate={onDialogActivate}
+        isActivating={isActivatingAI}
+      />
+      <ClientSimpleTopUpDialog
+        visible={simpleTopUpDialogVisible}
+        onClose={() => setSimpleTopUpDialogVisible(false)}
+        onConfirm={onAIActivated}
+        language={language}
+      />
     </>
   );
 };
@@ -815,13 +898,14 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
-    guidanceStore,
     aiRoomStore,
     filesSettingsStore,
+    currentTariffStatusStore,
+    paymentStore,
+    authStore,
   }) => {
     const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
-    const { setRefMap } = guidanceStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -833,6 +917,7 @@ export default inject(
       selectedTreeNode,
     } = treeFoldersStore;
     const { startUpload } = uploadDataStore;
+    const canCreateEncrypted = uploadDataStore.shouldEncryptCurrentUpload();
     const {
       setSelectFileDialogVisible,
       setInvitePanelOptions,
@@ -860,7 +945,8 @@ export default inject(
 
     const { security } = selectedFolderStore;
 
-    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
+    const { mainButtonMobileVisible, setMainButtonVisible, isEmptyFilesList } =
+      filesStore;
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
@@ -870,6 +956,7 @@ export default inject(
     const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter, setTemplateGalleryVisible } =
       oformsStore;
@@ -886,6 +973,7 @@ export default inject(
 
       showArticleLoader,
       isPrivacy: isPrivacyFolder,
+      canCreateEncrypted,
       isFavoritesFolder,
       isRecentFolder,
       isRecycleBinFolder,
@@ -943,7 +1031,6 @@ export default inject(
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       contactsTab: peopleStore.usersStore.contactsTab,
-      setRefMap,
       setTemplateGalleryVisible,
       templateGalleryAvailable,
 
@@ -955,11 +1042,21 @@ export default inject(
       allowInvitingMembers,
 
       aiConfig,
+
+      isGracePeriod,
+
+      isAIReady: paymentStore.isAIReady,
+      isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
+      enableAIService: paymentStore.enableAIService,
+      getAIConfig: settingsStore.getAIConfig,
+      refreshPaymentInfo: authStore.getPaymentInfo,
+      setSecurity: selectedFolderStore.setSecurity,
+      isEmptyFilesList,
+      language: authStore.language ?? "en",
     };
   },
 )(
   withTranslation([
-    "Article",
     "UploadPanel",
     "Common",
     "Files",
@@ -968,3 +1065,4 @@ export default inject(
     "EmptyView",
   ])(observer(ArticleMainButtonContent)),
 );
+

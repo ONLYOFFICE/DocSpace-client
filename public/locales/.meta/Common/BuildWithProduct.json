@@ -1,0 +1,29 @@
+{
+  "key_path": "BuildWithProduct",
+  "content": "Build with {{organizationName}}",
+  "content_en_sha1_hash": "57f6b7253bdb61d642327a73629abc19f33c126d",
+  "created_at": "2026-06-01T21:20:38.478Z",
+  "updated_at": "2026-08-12T11:00:51.550Z",
+  "comment": {
+    "text": "Card title in the DevTools section of the Dashboard, featuring the organization's brand name via the {{organizationName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-06-01T21:46:04.225Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 224,
+      "context": "// set of props and forwards no `data-*`. The wrapper stays put when the card\n // is collapsed, so the spotlight follows the card down to its header\n // instead of the step disappearing.\n <div data-tour-id=\"dashboard-devtools\">\n <CollapsibleCard\n title={t(\"Common:BuildWithProduct\", { organizationName })}\n description={t(\"Common:BuildWithProductDescription\")}\n defaultOpen\n >\n <div className={styles.devToolsGrid}>\n {tools.map((tool) => (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

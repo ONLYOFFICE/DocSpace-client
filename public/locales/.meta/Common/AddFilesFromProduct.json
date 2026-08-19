@@ -1,0 +1,35 @@
+{
+  "key_path": "AddFilesFromProduct",
+  "content": "Add files from the workspace",
+  "content_en_sha1_hash": "b82d7e2e992a6aa92b18ff6baa0f0b74a3c7da59",
+  "created_at": "2026-08-12T11:00:07.347Z",
+  "updated_at": "2026-08-12T11:24:36.908Z",
+  "comment": {
+    "text": "Button label in the AI agent composer that opens a file picker, featuring a variable {{productName}} representing the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T11:24:36.908Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/providers/files/use-integration.tsx",
+      "line_number": 108,
+      "context": "const composerActions = React.useMemo<ComposerAction[]>(\n () => [\n {\n id: \"add-files-from-product\",\n text: t(\"Common:AddFilesFromProduct\", {\n productName: getBrandName(\"ProductName\"),\n defaultValue: \"Add files from {{productName}}\",\n }),\n icon: <CatalogDocuments className={styles.composerActionIcon} />,\n onClick: () => setPickerVisible(true),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

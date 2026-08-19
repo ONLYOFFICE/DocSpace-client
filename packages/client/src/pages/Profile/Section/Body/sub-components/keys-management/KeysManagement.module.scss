@@ -1,0 +1,271 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins" as mixins;
+
+.sectionBody {
+  width: 100%;
+  max-width: 660px;
+
+  @include mixins.tablet {
+    max-width: 100%;
+  }
+}
+
+.contentBody {
+  margin-bottom: 24px;
+
+  p {
+    line-height: 20px;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.categoryTitle {
+  margin-bottom: 12px;
+  border-bottom: var(--profile-notifications-border);
+
+  p {
+    line-height: 16px;
+    padding-bottom: 8px;
+  }
+}
+
+.secondaryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.deviceSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider-color);
+}
+
+.deviceRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toggleRow {
+  display: flex;
+}
+
+.deviceToggle {
+  position: relative;
+  height: 20px;
+  line-height: 20px;
+
+  & > svg {
+    margin-top: 2px;
+  }
+}
+
+.keyStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--row-background-color);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: minmax(75px, auto) minmax(0, 1fr);
+  gap: 24px;
+  row-gap: 16px;
+  align-items: baseline;
+  max-width: 100%;
+}
+
+.detailsLabel {
+  color: var(--profile-description-text-color);
+  white-space: nowrap;
+}
+
+.monoValue {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  user-select: all;
+  min-width: 0;
+  word-break: break-all;
+}
+
+.keysList {
+  margin-bottom: 20px;
+}
+
+.keysListTitle {
+  margin-bottom: 12px;
+}
+
+.keysListItems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.keyItem {
+  position: relative;
+  padding: 16px;
+  background: var(--row-background-color);
+  border-radius: 8px;
+  border: 1px solid var(--divider-color);
+}
+
+.statusRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  // on a narrow screen the badges plus the "Use on this device" button leave no
+  // room for the action icons, so let them move to a line of their own
+  flex-wrap: wrap;
+}
+
+.keyItemBadges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.keyItemActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  // icons are the last thing that may be squeezed out of view
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+.keyItemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.keyItemOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.deleteButton {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.noKeys {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--row-background-color);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.resetSection {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider-color);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resumeSection {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--row-background-color);
+  border: 1px solid var(--divider-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.resumeActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.resetHint {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.resetButton {
+  align-self: flex-start;
+}
+
+.rotationProgress {
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+}

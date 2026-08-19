@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
@@ -31,6 +40,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
+import { AnalyticsEvents } from "@docspace/ui-kit/enums";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -39,8 +49,12 @@ import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
+import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
+
 import QuotasBar from "./QuotasBar";
 import ConfirmEmailBar from "./ConfirmEmailBar";
+
+const WALLET_LOW_BALANCE_CLOSED = "walletLowBalanceClosed";
 
 const Bar = (props) => {
   const {
@@ -82,6 +96,12 @@ const Bar = (props) => {
     isStorageQuotaLimit,
     isRoomsTariffAlmostLimit,
     isRoomsTariffLimit,
+    walletLowBalance,
+    formatWalletCurrency,
+    isPayer,
+    walletCustomerEmail,
+    walletCustomerDisplayName,
+    language,
   } = props;
 
   const navigate = useNavigate();
@@ -101,14 +121,25 @@ const Bar = (props) => {
     roomsAndStorageTariffLimit: false,
     confirmEmail: false,
     personalUserQuota: false,
+    walletLowBalance: false,
   });
 
+  const [isTopUpVisible, setIsTopUpVisible] = useState(false);
   const [htmlLink, setHtmlLink] = useState();
   const [campaigns, setCampaigns] = useState();
 
   const { loadLanguagePath } = getBannerAttribute();
 
   const onCloseQuota = (currentBar) => {
+    // The tariff bars stay closed for good — they are resolved by an upgrade.
+    // A low balance is cyclical, so its dismissal is kept per session instead:
+    // it survives a reload of the same dip, but a later dip is announced again.
+    if (currentBar === QuotaBarTypes.WalletLowBalance) {
+      sessionStorage.setItem(WALLET_LOW_BALANCE_CLOSED, "true");
+      setBarVisible((value) => ({ ...value, walletLowBalance: false }));
+      return;
+    }
+
     const closeItems = JSON.parse(localStorage.getItem("barClose")) || [];
 
     const closed =
@@ -187,6 +218,11 @@ const Bar = (props) => {
   };
 
   const onClickQuota = (type, e) => {
+    if (type === QuotaBarTypes.WalletLowBalance) {
+      setIsTopUpVisible(true);
+      return;
+    }
+
     type === QuotaBarTypes.StorageQuota ||
     type === QuotaBarTypes.PersonalUserQuota
       ? onClickTenantCustomQuota(type)
@@ -272,6 +308,9 @@ const Bar = (props) => {
       if (!closed.includes(QuotaBarTypes.PersonalUserQuota)) {
         setBarVisible((value) => ({ ...value, personalUserQuota: true }));
       }
+      if (!sessionStorage.getItem(WALLET_LOW_BALANCE_CLOSED)) {
+        setBarVisible((value) => ({ ...value, walletLowBalance: true }));
+      }
     } else {
       setBarVisible({
         roomsTariff: isAdmin || isRoomAdmin,
@@ -288,6 +327,7 @@ const Bar = (props) => {
         storageAndUserTariffLimit: isAdmin || isRoomAdmin,
         confirmEmail: true,
         personalUserQuota: isAdmin || isUser || isRoomAdmin,
+        walletLowBalance: !sessionStorage.getItem(WALLET_LOW_BALANCE_CLOSED),
       });
     }
 
@@ -317,7 +357,34 @@ const Bar = (props) => {
     updateBanner();
   }, [t]);
 
+  // The backend re-arms its own notification once the balance recovers, so the
+  // dismissal is dropped on the same edge. Guarded on the true -> false
+  // transition: the initial value is false too, and clearing on that would let a
+  // reload resurrect a banner the user had already closed for the current dip.
+  const wasLowBalance = React.useRef(false);
+
+  useEffect(() => {
+    if (walletLowBalance) {
+      wasLowBalance.current = true;
+      return;
+    }
+
+    if (!wasLowBalance.current) return;
+    wasLowBalance.current = false;
+
+    sessionStorage.removeItem(WALLET_LOW_BALANCE_CLOSED);
+    setBarVisible((value) => ({ ...value, walletLowBalance: true }));
+  }, [walletLowBalance]);
+
   const getCurrentBar = () => {
+    if (isAdmin && walletLowBalance && barVisible.walletLowBalance) {
+      return {
+        type: QuotaBarTypes.WalletLowBalance,
+        maxValue: null,
+        currentValue: formatWalletCurrency?.(),
+      };
+    }
+
     if (
       isRoomsTariffAlmostLimit &&
       isStorageTariffAlmostLimit &&
@@ -438,6 +505,23 @@ const Bar = (props) => {
 
   const currentBar = getCurrentBar();
 
+  const pushLimitEvent = React.useCallback((context) => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer?.push({ event: AnalyticsEvents.LimitReached, context });
+  }, []);
+
+  React.useEffect(() => {
+    if (isRoomsTariffLimit) pushLimitEvent("rooms");
+  }, [isRoomsTariffLimit, pushLimitEvent]);
+
+  React.useEffect(() => {
+    if (isUserTariffLimit) pushLimitEvent("admins");
+  }, [isUserTariffLimit, pushLimitEvent]);
+
+  React.useEffect(() => {
+    if (isStorageTariffLimit || isStorageQuotaLimit) pushLimitEvent("storage");
+  }, [isStorageTariffLimit, isStorageQuotaLimit, pushLimitEvent]);
+
   const showQuotasBar = !!currentBar && tReady;
 
   React.useEffect(() => {
@@ -473,16 +557,31 @@ const Bar = (props) => {
     setMaintenanceExist(true);
   };
 
-  return showQuotasBar ? (
-    <QuotasBar
-      currentColorScheme={currentColorScheme}
-      {...currentBar}
-      onClick={onClickQuota}
-      onClose={onCloseQuota}
-      onClickTenantCustomQuota={onClickTenantCustomQuota}
-      onLoad={onLoad}
-      isAdmin={isAdmin}
+  const topUpDialog = isTopUpVisible ? (
+    <ClientSimpleTopUpDialog
+      visible={isTopUpVisible}
+      onClose={() => setIsTopUpVisible(false)}
+      language={language}
+      service=""
     />
+  ) : null;
+
+  return showQuotasBar ? (
+    <>
+      <QuotasBar
+        currentColorScheme={currentColorScheme}
+        {...currentBar}
+        onClick={onClickQuota}
+        onClose={onCloseQuota}
+        onClickTenantCustomQuota={onClickTenantCustomQuota}
+        onLoad={onLoad}
+        isAdmin={isAdmin}
+        isPayer={isPayer}
+        walletCustomerEmail={walletCustomerEmail}
+        walletCustomerDisplayName={walletCustomerDisplayName}
+      />
+      {topUpDialog}
+    </>
   ) : withActivationBar && barVisible.confirmEmail && tReady ? (
     <ConfirmEmailBar
       userEmail={userEmail}
@@ -502,7 +601,15 @@ const Bar = (props) => {
 };
 
 export default inject(
-  ({ settingsStore, profileActionsStore, userStore, currentQuotaStore }) => {
+  ({
+    settingsStore,
+    profileActionsStore,
+    userStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+    paymentStore,
+    authStore,
+  }) => {
     const { user, withActivationBar, sendActivationLink } = userStore;
 
     const { onPaymentsClick } = profileActionsStore;
@@ -530,6 +637,12 @@ export default inject(
     } = currentQuotaStore;
 
     const { currentColorScheme, setMainBarVisible } = settingsStore;
+
+    const { formatWalletCurrency, isPayer } = paymentStore;
+    const { walletLowBalance } = settingsStore;
+    const { language } = authStore;
+    const { walletCustomerEmail, walletCustomerInfo } =
+      currentTariffStatusStore;
 
     return {
       isAdmin: user?.isAdmin || user?.isOwner,
@@ -564,6 +677,13 @@ export default inject(
       isStorageQuotaLimit,
       isRoomsTariffAlmostLimit,
       isRoomsTariffLimit,
+
+      walletLowBalance,
+      language,
+      formatWalletCurrency,
+      isPayer,
+      walletCustomerEmail,
+      walletCustomerDisplayName: walletCustomerInfo?.displayName,
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));

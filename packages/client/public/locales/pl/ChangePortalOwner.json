@@ -1,14 +1,13 @@
 {
   "AppointAdmin": "Wyznacz administratorów",
-  "BackupPortal": "Stwórz kopię zapasową danych {{productName}}",
-  "ChangeInstruction": "Aby zmienić właściciela {{productName}}, wybierz nazwę nowego właściciela poniżej.",
-  "ChangeOwner": "Zmień właściciela {{productName}}",
+  "BackupPortal": "Stwórz kopię zapasową danych przestrzeni roboczej",
+  "ChangeInstruction": "Aby zmienić właściciela, wybierz poniżej imię nowego właściciela.",
+  "ChangeOwner": "Zmień właściciela",
   "ChangeUser": "Zmień użytkownika",
-  "DeactivateOrDeletePortal": "Dezaktywuj lub usuń {{productName}}",
   "DoTheSame": "Postępuj tak samo jak administratorzy",
-  "ManagePortal": "Zarządzaj konfiguracją {{productName}}",
+  "ManagePortal": "Zarządzaj konfiguracją przestrzeni roboczej",
   "ManageUser": "Zarządzaj kontami użytkowników",
-  "NewPortalOwner": "Nowy właściciel {{productName}}",
-  "PortalOwnerCan": "Właściciel {{productName}} może:",
+  "NewPortalOwner": "Nowy właściciel przestrzeni roboczej",
+  "PortalOwnerCan": "Właściciel przestrzeni roboczej może:",
   "SetAccessRights": "Konfiguruj prawa dostępu"
 }

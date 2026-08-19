@@ -3,16 +3,17 @@
   "content": "The invitation was successfully sent",
   "content_en_sha1_hash": "111da91469d6f8d042a07154deded5ad1c84977e",
   "created_at": "2025-05-19T21:30:53.530Z",
-  "updated_at": "2025-05-26T07:57:32.331Z",
+  "updated_at": "2026-05-15T14:00:06.695Z",
   "comment": {
-    "text": "The translation key \"SuccessSentInvitation\" is used to display a success message when an invitation is successfully sent to users. It appears in a toast notification after resending invitations to selected user IDs, typically triggered by sending an invitation via the Send Invite Dialog component.",
+    "text": "This is a toast message confirming that an invitation has been successfully sent to one or more users. It appears briefly after the user attempts to send an invitation.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:32.379Z"
+    "updated_at": "2026-04-11T21:19:54.178Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SendInviteDialog/index.js",
-      "line_number": 60,
+      "line_number": 69,
       "context": "const { userIds } = this.state;\n \n this.setState({ isRequestRunning: true }, () => {\n resendUserInvites(userIds)\n .then(() =>\n toastr.success(t(\"PeopleTranslations:SuccessSentInvitation\")),\n )\n .catch((error) => toastr.error(error))\n .finally(() => {\n this.setState({ isRequestRunning: false }, () => {\n setSelected(\"close\");",
       "module": "/packages/client"
     }
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -199,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

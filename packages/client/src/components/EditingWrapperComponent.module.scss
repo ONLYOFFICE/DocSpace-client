@@ -1,0 +1,170 @@
+// (c) Copyright Ascensio System SIA 2009-2026
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "@docspace/ui-kit/styles/mixins";
+
+.editingWrapper {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+
+  &[data-view="table"] {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    border-bottom: var(--files-editing-wrapper-border-bottom);
+    padding-bottom: 4px;
+    margin-top: 4px;
+  }
+
+  &[data-view="tile"] {
+    position: absolute;
+    width: calc(100% - 18px);
+    z-index: 1;
+    gap: 4px;
+    background-color: var(--files-editing-wrapper-tile-background);
+    border: var(--files-editing-wrapper-border);
+    border-radius: 0 0 6px 6px;
+    height: 43px;
+    bottom: 0;
+    inset-inline: 0;
+    padding: 9px 8px;
+
+    &[data-folder] {
+      border-radius: 6px;
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    height: 56px;
+
+    &[data-view="tile"] {
+      height: 43px;
+    }
+  }
+
+  :global(.edit-text) {
+    height: 32px;
+    font-size: 15px;
+    outline: 0 !important;
+    font-weight: 600;
+    margin: 0;
+    font-family: var(--font-family);
+    text-align: start;
+    color: var(--files-editing-wrapper-color);
+    background: var(--files-editing-wrapper-row-item-background) !important;
+  }
+
+  &[data-view="table"] :global(.edit-text) {
+    font-size: 13px;
+    padding-inline-start: 12px;
+  }
+
+  &[data-view="tile"] :global(.edit-text) {
+    font-size: 14px;
+    margin-inline-end: 2px;
+    border: none;
+    background: none;
+  }
+
+  &[data-view="tile"]:not([data-updating-row]) :global(.edit-text) {
+    background: var(--files-editing-wrapper-tile-item-background);
+    border: 1px solid var(--files-editing-wrapper-tile-item-border);
+
+    &:focus {
+      border: 1px solid var(--files-editing-wrapper-tile-item-active-border);
+    }
+  }
+
+  &[data-updating-row] :global(.edit-text) {
+    margin-inline-start: 0;
+    display: flex;
+    align-items: center;
+    background: none !important;
+  }
+
+  &[data-disabled] :global(.edit-text) {
+    background-color: var(--files-editing-wrapper-disabled-background);
+  }
+
+  :global(.edit-button) {
+    margin-inline-start: 8px;
+    height: 32px;
+    padding: 0 7px;
+  }
+
+  &[data-view="tile"] :global(.edit-button) {
+    margin-inline-start: 0;
+    background: var(--files-editing-wrapper-tile-item-background);
+    border: 1px solid var(--files-editing-wrapper-tile-item-border);
+
+    &:hover {
+      border: 1px solid var(--files-editing-wrapper-tile-item-active-border);
+    }
+  }
+
+  &[data-view="table"] :global(.edit-button) {
+    width: 24px;
+    height: 24px;
+    border: 1px transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      border: var(--files-editing-wrapper-border);
+    }
+  }
+
+  :global(.edit-ok-icon) {
+    width: 16px;
+    height: 16px;
+  }
+
+  :global(.edit-cancel-icon) {
+    width: 14px;
+    height: 14px;
+    padding: 1px;
+  }
+}
+
+.editIcon {
+  overflow: hidden;
+  vertical-align: middle;
+
+  &:not(:root) {
+    width: 100%;
+    height: 100%;
+  }
+
+  path {
+    fill: var(--files-editing-wrapper-fill) !important;
+  }
+
+  &:hover {
+    fill: var(--files-editing-wrapper-hover-fill) !important;
+  }
+}

@@ -1,34 +1,14 @@
 {
-  "key_path": "PortalNameEmpty",
+  "comment": {
+    "text": "Error text. This message appears when a user attempts to save an empty name for their DocSpace account.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:46:17.846Z",
+    "model": "google/gemini-2.5-flash"
+  },
   "content": "Account name is empty",
   "content_en_sha1_hash": "bc7fcc32b6bbe8a24d9fe8f945809e85db12bdce",
   "created_at": "2025-05-26T07:15:46.227Z",
-  "updated_at": "2026-03-26T08:26:58.120Z",
-  "comment": {
-    "text": "The \"Account name is empty\" translation key indicates that an account name field should be filled in. It appears on a UI element where users can rename portals and appears when the input field is left blank. Translators should replace the existing English content with their own language equivalent.",
-    "is_auto": true,
-    "updated_at": "2025-05-26T08:04:21.716Z"
-  },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 242,
-      "context": "const onValidateInput = (value) => {\n const validDomain = new RegExp(domainValidator.regex);\n \n switch (true) {\n case value === \"\":\n setErrorValue(t(\"PortalNameEmpty\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 242,
-      "context": "const onValidateInput = (value) => {\n const validDomain = new RegExp(domainValidator.regex);\n \n switch (true) {\n case value === \"\":\n setErrorValue(t(\"PortalNameEmpty\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 220,
-      "context": "t: TTranslation,\n ) => {\n const validName = new RegExp(nameValidator.regex);\n switch (true) {\n case value === \"\":\n return setError(t(\"Common:PortalNameEmpty\"));\n case value.length < nameValidator.minLength ||\n value.length > nameValidator.maxLength:\n return setError(\n t(\"Common:PortalNameLength\", {\n minLength: nameValidator.minLength.toString(),",
-      "module": "/packages/shared"
-    }
-  ],
+  "key_path": "PortalNameEmpty",
   "languages": {
     "en": {
       "ai_translated": false,
@@ -160,7 +140,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -215,6 +195,33 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
     }
-  }
+  },
+  "updated_at": "2026-08-14T14:58:32.781Z",
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 280,
+      "context": "const onValidateInput = (value) => {\n const validDomain = new RegExp(domainValidator.regex);\n \n switch (true) {\n case value === \"\":\n setErrorValue(t(\"Common:PortalNameEmpty\"));\n saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 280,
+      "context": "const onValidateInput = (value) => {\n const validDomain = new RegExp(domainValidator.regex);\n \n switch (true) {\n case value === \"\":\n setErrorValue(t(\"Common:PortalNameEmpty\"));\n saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.tsx",
+      "line_number": 226,
+      "context": "t: TTranslation,\n ) => {\n const validName = new RegExp(nameValidator.regex);\n switch (true) {\n case value === \"\":\n return setError(t(\"Common:PortalNameEmpty\"));\n case value.length < nameValidator.minLength ||\n value.length > nameValidator.maxLength:\n return setError(\n t(\"Common:PortalNameLength\", {\n minLength: nameValidator.minLength.toString(),",
+      "module": "/packages/shared"
+    }
+  ]
 }

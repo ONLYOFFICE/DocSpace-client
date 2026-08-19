@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
@@ -54,6 +63,7 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import LoaderSectionHeader from "../loaderSectionHeader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import classNames from "classnames";
 
@@ -88,6 +98,8 @@ const SectionHeaderContent = (props) => {
     deviceType,
     isNotPaidPeriod,
     isBackupPaid,
+    maxFreeBackups = 0,
+    backupsCount,
   } = props;
 
   const navigate = useNavigate();
@@ -133,9 +145,12 @@ const SectionHeaderContent = (props) => {
         case "SingleSignOn:ServiceProviderSettings":
         case "SingleSignOn:SpMetadata":
           return isSSOAvailable;
-        case "Backup":
+        case "Common:Backup": {
           if (isNotPaidPeriod) return true;
-          return !isBackupPaid;
+          if (!isBackupPaid) return true;
+          if (maxFreeBackups > 0) return (backupsCount ?? 0) < maxFreeBackups;
+          return false;
+        }
         default:
           return true;
       }
@@ -147,6 +162,8 @@ const SectionHeaderContent = (props) => {
       standalone,
       isNotPaidPeriod,
       isBackupPaid,
+      maxFreeBackups,
+      backupsCount,
     ],
   );
 
@@ -154,28 +171,6 @@ const SectionHeaderContent = (props) => {
     if (tReady) setIsLoadedSectionHeader(true);
 
     const arrayOfParams = getArrayOfParams();
-
-    const serviceSubPageHeaders = {
-      "ai-services": "Services:OrganizationAI",
-      "backup": "Common:Backup",
-      "disk-storage": "Payments:AdditionalDiskStorage",
-    };
-
-    let number = 1;
-    if (window.location.href.includes("disk-storage")) number = 2;
-    const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
-
-    if (serviceSubPageHeader) {
-      const header = serviceSubPageHeader;
-      const isCategoryOrHeader = false;
-
-      setState((val) => {
-        if (val.header === header && val.isCategoryOrHeader === isCategoryOrHeader)
-          return val;
-        return { ...val, header, isCategoryOrHeader };
-      });
-      return;
-    }
 
     const key = getKeyByLink(arrayOfParams, settingsTree);
 
@@ -220,7 +215,8 @@ const SectionHeaderContent = (props) => {
     const isServicesSubPage =
       location.pathname.includes("/services/disk-storage") ||
       location.pathname.includes("/services/backup") ||
-      location.pathname.includes("/services/ai-services");
+      location.pathname.includes("/services/ai-services") ||
+      location.pathname.includes("/services/ai-search");
 
     if (isServicesSubPage && location.key === "default") {
       navigate("/portal-settings/payments/services");
@@ -305,11 +301,12 @@ const SectionHeaderContent = (props) => {
               })
             : t("DataImport")
       : !standalone && isPaymentPage
-        ? t("Billing")
-        : t(header, {
+        ? t("Common:Billing")
+        : // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
+          t(header, {
             organizationName: logoText,
             license: t("Common:EnterpriseLicense"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             aiServices: t("Common:AIServices"),
           });
 
@@ -333,6 +330,7 @@ const SectionHeaderContent = (props) => {
           {!isCategoryOrHeader &&
           arrayOfParams[0] &&
           (isMobile() ||
+            window.location.href.indexOf("/ai-search") > -1 ||
             window.location.href.indexOf("/javascript-sdk/") > -1 ||
             window.location.href.indexOf("/ai-services") > -1 ||
             window.location.href.indexOf("/services/backup") > -1 ||
@@ -402,13 +400,16 @@ export default inject(
     settingsStore,
     oauthStore,
     currentTariffStatusStore,
+    backup,
   }) => {
     const {
       isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       isBackupPaid,
+      maxFreeBackups,
     } = currentQuotaStore;
+    const { backupsCount } = backup;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
     const { toggleSelector } = setup;
@@ -457,6 +458,8 @@ export default inject(
       deviceType,
       isNotPaidPeriod,
       isBackupPaid,
+      maxFreeBackups,
+      backupsCount,
     };
   },
 )(
@@ -468,7 +471,6 @@ export default inject(
       "JavascriptSdk",
       "OAuth",
       "Ldap",
-      "Services",
       "Payments",
     ])(observer(SectionHeaderContent)),
   ),

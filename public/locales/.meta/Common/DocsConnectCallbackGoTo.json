@@ -1,0 +1,35 @@
+{
+  "key_path": "DocsConnectCallbackGoTo",
+  "content": "Go to Docs Connect",
+  "content_en_sha1_hash": "98365f24d5dbe8645e799c37956e6a6b6f48663f",
+  "created_at": "2026-07-27T13:07:08.085Z",
+  "updated_at": "2026-08-13T14:37:21.813Z",
+  "comment": {
+    "text": "Button label on the AI paywall completion page used to redirect the user to the Docs Connect service.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:37:32.114Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 168,
+      "context": "processingTitle: t(\"Common:DocsConnectCallbackProcessingTitle\"),\n processingHint: t(\"Common:DocsConnectCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:DocsConnectCallbackStepActivate\"),\n successTitle: t(\"Common:DocsConnectCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n errorTitle: t(\"Common:DocsConnectCallbackErrorTitle\"),\n errorHint: t(\"Common:DocsConnectCallbackErrorHint\"),\n errorButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n redirectUrl: DOCS_CONNECT_ROUTE,\n };",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 168,
+      "context": "processingTitle: t(\"Common:DocsConnectCallbackProcessingTitle\"),\n processingHint: t(\"Common:DocsConnectCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:DocsConnectCallbackStepActivate\"),\n successTitle: t(\"Common:DocsConnectCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n errorTitle: t(\"Common:DocsConnectCallbackErrorTitle\"),\n errorHint: t(\"Common:DocsConnectCallbackErrorHint\"),\n errorButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n redirectUrl: DOCS_CONNECT_ROUTE,\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,19 +1,20 @@
 {
   "key_path": "AutoSavePeriodHelp",
-  "content": "The time shown below corresponds to the time zone set in the {{productName}}.",
-  "content_en_sha1_hash": "fc425c15b268cad321e77bf210b8507fc99e1b7e",
-  "created_at": "2025-05-26T07:15:40.662Z",
-  "updated_at": "2025-08-04T07:30:01.748Z",
+  "content": "The time shown below corresponds to the time zone set in the workspace.",
+  "content_en_sha1_hash": "1917042644d5e016d4a6581c5c8d3b10698284d5",
+  "created_at": "2026-08-13T22:43:54.478Z",
+  "updated_at": "2026-08-14T15:16:05.666Z",
   "comment": {
-    "text": "This translation key is used to provide contextual information about auto-saving periods in a scheduling component. It displays the time shown below in relation to the user's set time zone and is likely found within a schedule or calendar interface.",
+    "text": "Help text appearing below a time selection field in the auto-backup schedule settings to clarify the time zone context.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:33.987Z"
+    "updated_at": "2026-08-14T15:16:05.666Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/sub-components/ScheduleComponent/ScheduleComponent.tsx",
-      "line_number": 78,
-      "context": "const renderHelpContent = () => (\n <Text\n className={classNames(styles.scheduleDescription, \"schedule_description\")}\n fontSize=\"12px\"\n >\n {t(\"Common:AutoSavePeriodHelp\", { productName: t(\"Common:ProductName\") })}\n </Text>\n );\n \n return (\n <div",
+      "line_number": 87,
+      "context": "const renderHelpContent = () => (\n <Text\n className={classNames(styles.scheduleDescription, \"schedule_description\")}\n fontSize=\"12px\"\n >\n {t(\"Common:AutoSavePeriodHelp\")}\n </Text>\n );\n \n return (\n <div",
       "module": "/packages/shared"
     }
   ],
@@ -163,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

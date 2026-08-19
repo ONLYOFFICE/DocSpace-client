@@ -1,14 +1,13 @@
 {
   "AppointAdmin": "Jmenování administrátorů",
-  "BackupPortal": "Zálohovat data {{productName}}",
-  "ChangeInstruction": "Chcete-li změnit vlastníka prostoru {{productName}}, vyberte níže jméno nového vlastníka.",
-  "ChangeOwner": "Změna vlastníka prostoru {{productName}}",
+  "BackupPortal": "Zálohovat data pracovního prostoru",
+  "ChangeInstruction": "Chcete-li změnit vlastníka, vyberte prosím níže jméno nového vlastníka.",
+  "ChangeOwner": "Změnit vlastníka",
   "ChangeUser": "Změna uživatele",
-  "DeactivateOrDeletePortal": "Deaktivace nebo odstranění {{productName}}",
   "DoTheSame": "Postupujte stejně jako správci",
-  "ManagePortal": "Spravovat konfiguraci {{productName}}",
+  "ManagePortal": "Spravovat konfiguraci pracovního prostoru",
   "ManageUser": "Spravovat uživatelské účty",
-  "NewPortalOwner": "Nový majitel {{productName}}",
-  "PortalOwnerCan": "Majitel {{productName}} může:",
+  "NewPortalOwner": "Nový vlastník pracovního prostoru",
+  "PortalOwnerCan": "Vlastník pracovního prostoru může:",
   "SetAccessRights": "Nastavení přístupových práv"
 }

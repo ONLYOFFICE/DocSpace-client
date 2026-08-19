@@ -1,24 +1,37 @@
 {
   "key_path": "LicenseGracePeriodInfo",
-  "content": "During this time, admins are not able to create new rooms or add new users. Once the grace period ends, {{productName}} will become unavailable until a new license is activated.",
-  "content_en_sha1_hash": "036439c191a76a4b6f284fdec3a7d03bd6c5d9ca",
-  "created_at": "2026-02-18T14:56:32.715Z",
-  "updated_at": "2026-03-20T09:57:51.281Z",
+  "content": "During this time, admins are not able to create new rooms or add new users. Once the grace period ends, the workspace will become unavailable until a new license is activated.",
+  "content_en_sha1_hash": "f251c67513d16988ad32150e52c91a269fed3f0f",
+  "created_at": "2026-08-12T11:00:46.838Z",
+  "updated_at": "2026-08-14T14:58:32.717Z",
   "comment": {
-    "text": "This key displays a warning message in a dialog, informing admins that new rooms and users cannot be added during a license grace period. It explains that the product will become unavailable until a new license is activated after the grace period ends. Translators should ensure \"productName\" is accurately localized.",
+    "text": "Informational text within an invite quota warning dialog that explains the restrictions and consequences of being in a license grace period.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:57:51.281Z"
+    "updated_at": "2026-08-12T11:57:25.025Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 149,
-      "context": ")}\n </Text>\n <br />\n <Text>\n {standalone\n ? t(\"LicenseGracePeriodInfo\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "line_number": 158,
+      "context": ")}\n </Text>\n <br />\n <Text>\n {standalone\n ? t(\"LicenseGracePeriodInfo\")\n : t(\"Common:GracePeriodActivatedDescription\")}\n </Text>\n </>\n );",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/quota-warning-dialog/index.tsx",
+      "line_number": 155,
+      "context": ")}\n </Text>\n <br />\n <Text>\n {standalone\n ? t(\"LicenseGracePeriodInfo\")\n : t(\"Common:GracePeriodActivatedDescription\")}\n </Text>\n </>\n );",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

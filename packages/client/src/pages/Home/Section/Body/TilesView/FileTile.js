@@ -1,39 +1,46 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import classNames from "classnames";
 import { use, useRef, useEffect, useState, useCallback, useMemo } from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
-import { FolderType } from "@docspace/shared/enums";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { FileTile as FileTileComponent } from "@docspace/ui-kit/components/tiles/file-tile";
 import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
@@ -46,15 +53,12 @@ import { TagManagement } from "SRC_DIR/components/TagManagement";
 
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
+import styles from "./FileTile.module.scss";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
-
-const StyledDragAndDrop = styled(DragAndDrop)`
-  border-radius: 12px;
-`;
 
 const FileTile = (props) => {
   const {
@@ -90,12 +94,12 @@ const FileTile = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
+    badgeIconColor,
+    isExternalShareRestricted, // injected by withFileActions (accounts for blockExistingLinksOnRestrict)
     selectableRef,
     openUser,
     isBlockingOperation,
     showStorageInfo,
-    setRefMap,
-    deleteRefMap,
     dataTestId,
     setDropTargetPreview,
     selectedFolderTitle,
@@ -129,22 +133,6 @@ const FileTile = (props) => {
   const isDragDisabled = dragging && !isDragging;
 
   useEffect(() => {
-    if (!tileRef?.current) return;
-
-    if (item?.isPDF) {
-      setRefMap(GuidanceRefKey.Pdf, tileRef);
-    }
-    if (item?.type === FolderType.Done) {
-      setRefMap(GuidanceRefKey.Ready, tileRef);
-    }
-
-    return () => {
-      deleteRefMap(GuidanceRefKey.Pdf);
-      deleteRefMap(GuidanceRefKey.Ready);
-    };
-  }, [setRefMap, deleteRefMap]);
-
-  useEffect(() => {
     if (dragging) {
       if (isDragging) {
         if (isDragActive) setDropTargetPreview(item.title);
@@ -168,6 +156,7 @@ const FileTile = (props) => {
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      isPrivateRoom={item.isPrivateRoom}
       showDefault={
         !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
@@ -177,6 +166,8 @@ const FileTile = (props) => {
       isArchive={item.isArchive}
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      encrypted={item.encrypted}
+      badgeIconColor={badgeIconColor}
     />
   );
 
@@ -260,17 +251,36 @@ const FileTile = (props) => {
           columnCount={columnCount}
           thumbnailClick={onFilesClick}
           getRoomTypeName={getRoomTypeName}
-          customBottomContent={(isHovered, tags) => (
-            <TagManagement
-              tags={tags}
-              id={item.id}
-              access={item.access}
-              roomName={item.title}
-              columnCount={columnCount}
-              onSelectTag={onSelectTag}
-              isActive={isActive || isHovered || checkedProps}
-            />
-          )}
+          customBottomContent={(isHovered, tags) => {
+            const isRestrictedPublicRoom =
+              isExternalShareRestricted &&
+              item.shared &&
+              item.roomType === RoomsType.PublicRoom;
+
+            const patchedTags = isRestrictedPublicRoom
+              ? tags.map((tag) =>
+                  typeof tag === "object" && tag.isDefault
+                    ? {
+                        ...tag,
+                        labelSuffix: ` (${t("Common:Restricted")})`,
+                        labelSuffixColor: "var(--info-panel-link-blocked)",
+                      }
+                    : tag,
+                )
+              : tags;
+
+            return (
+              <TagManagement
+                tags={patchedTags}
+                id={item.id}
+                access={item.access}
+                roomName={item.title}
+                columnCount={columnCount}
+                onSelectTag={onSelectTag}
+                isActive={isActive || isHovered || checkedProps}
+              />
+            );
+          }}
         />
       );
     if (item.isFolder)
@@ -303,10 +313,10 @@ const FileTile = (props) => {
 
   return (
     <div ref={selectableRef} id={id}>
-      <StyledDragAndDrop
+      <DragAndDrop
         data-title={item.title}
         value={value}
-        className={classNameMemo}
+        className={classNames(styles.dragAndDrop, classNameMemo)}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging ? isDragging : null}
@@ -316,7 +326,7 @@ const FileTile = (props) => {
         data-document-title={documentTitle}
       >
         {renderTile()}
-      </StyledDragAndDrop>
+      </DragAndDrop>
     </div>
   );
 };
@@ -328,7 +338,6 @@ export default inject(
       filesStore,
       treeFoldersStore,
       infoPanelStore,
-      guidanceStore,
       currentQuotaStore,
     },
     { item },
@@ -337,17 +346,16 @@ export default inject(
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
 
-    const { setRefMap, deleteRefMap } = guidanceStore;
-
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
 
-    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder, isFormsFolder } =
       treeFoldersStore;
 
     const { showStorageInfo } = currentQuotaStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isFormsFolder;
 
     return {
       getIcon,
@@ -356,8 +364,6 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      setRefMap,
-      deleteRefMap,
       openUser: infoPanelStore.openUser,
       showStorageInfo,
     };
@@ -371,3 +377,4 @@ export default inject(
     "GroupingRooms",
   ])(withFileActions(withBadges(withQuickButtons(observer(FileTile))))),
 );
+

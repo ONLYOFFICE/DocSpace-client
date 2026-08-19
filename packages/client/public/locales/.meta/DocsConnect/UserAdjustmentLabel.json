@@ -1,0 +1,35 @@
+{
+  "key_path": "UserAdjustmentLabel",
+  "content": "User adjustment",
+  "content_en_sha1_hash": "2f04e693d66a63cb390c466354c7485e1c895302",
+  "created_at": "2026-07-27T13:07:48.521Z",
+  "updated_at": "2026-08-12T14:02:21.319Z",
+  "comment": {
+    "text": "A label in a summary row within the plan upgrade panel that indicates a change in user count, appearing alongside a value transition (e.g., \"5 → 10\").",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:43:36.056Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 861,
+      "context": ") : isEditActive ? (\n isDevPackUpgrade ? (\n <>\n {usersChanged\n ? summaryRow(\n t(\"DocsConnect:UserAdjustmentLabel\"),\n `${currentUsers} → ${users}`,\n )\n : summaryRow(\n t(\"DocsConnect:PlanUsers\"),\n `${users}`,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 861,
+      "context": ") : isEditActive ? (\n isDevPackUpgrade ? (\n <>\n {usersChanged\n ? summaryRow(\n t(\"DocsConnect:UserAdjustmentLabel\"),\n `${currentUsers} → ${users}`,\n )\n : summaryRow(\n t(\"DocsConnect:PlanUsers\"),\n `${users}`,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,16 +3,17 @@
   "content": "These items will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "210f25353b01ba80b5f4ad5b6e8835425939e450",
   "created_at": "2025-10-01T15:20:12.341Z",
-  "updated_at": "2026-03-20T09:07:45.491Z",
+  "updated_at": "2026-08-17T17:23:21.717Z",
   "comment": {
-    "text": "This text explains that selected items will be permanently removed from the trash section. It appears within a confirmation dialog used when permanently deleting files and folders. Translators should ensure the wording accurately conveys the irreversible nature of the action.",
+    "text": "This is a sentence fragment displayed within a confirmation dialog when a user is about to permanently delete items. It informs the user that the items will be permanently removed from the trash. `{{trashSection}}` will be replaced with the localized name of the trash section.",
     "is_auto": true,
-    "updated_at": "2025-10-01T15:20:17.766Z"
+    "updated_at": "2026-04-11T21:05:19.224Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 163,
+      "line_number": 200,
       "context": "You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? t(\"ItemsPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
       "module": "/packages/client"
     }
@@ -148,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

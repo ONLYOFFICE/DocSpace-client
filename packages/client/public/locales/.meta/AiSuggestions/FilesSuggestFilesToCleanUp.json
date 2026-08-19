@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesSuggestFilesToCleanUp",
+  "content": "Suggest files to clean up",
+  "content_en_sha1_hash": "262f41547b82bc991843973faee3e4db35356c71",
+  "created_at": "2026-08-04T09:58:55.136Z",
+  "updated_at": "2026-08-05T17:55:42.051Z",
+  "comment": {
+    "text": "Label for an AI suggestion item that identifies files recommended for removal to free up space.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:55:42.051Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 263,
+      "context": "{\n name: t(\"AiSuggestions:FilesFindPossibleDuplicates\"),\n prompt: t(\"AiSuggestions:FilesFindPossibleDuplicatesPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesSuggestFilesToCleanUp\"),\n prompt: t(\"AiSuggestions:FilesSuggestFilesToCleanUpPrompt\"),\n },\n ],\n \n // +",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

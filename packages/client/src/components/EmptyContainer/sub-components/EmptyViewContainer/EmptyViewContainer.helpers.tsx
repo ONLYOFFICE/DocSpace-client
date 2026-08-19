@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { type JSX } from "react";
 import { P, match } from "ts-pattern";
@@ -34,7 +43,6 @@ import {
   FilterType,
   FolderType,
   RoomsType,
-  SearchArea,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
@@ -44,6 +52,8 @@ import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spr
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
 import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
+import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
+import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
@@ -61,17 +71,12 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
-import { CategoryType } from "@docspace/shared/constants";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import type {
   EmptyViewItemType,
   EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
-import FilesFilter from "@docspace/shared/api/files/filter";
-
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-
 import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
 import {
@@ -88,6 +93,7 @@ import {
   isAdmin,
   isUser,
 } from "./EmptyViewContainer.utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const getDescription = (
   type: RoomsType,
@@ -100,13 +106,16 @@ export const getDescription = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isFormsScope: boolean = false,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -114,26 +123,26 @@ export const getDescription = (
     if (isKnowledgeTab)
       return (
         <>
-          {t("AIRoom:EmptyKnowledgeDescription", {
-            aiChat: t("AIRoom:AIChat"),
+          {t("Common:EmptyKnowledgeDescription", {
+            aiChat: t("Common:AIChat"),
           })}
           <Text
             as="span"
             fontSize="12px"
             style={{ display: "block", marginTop: "8px" }}
           >
-            {t("AIRoom:EmptyKnowledgeDescriptionActions")}
+            {t("Common:EmptyKnowledgeDescriptionActions")}
           </Text>
         </>
       );
 
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
-        ? t("AIRoom:EmptyResultsDescription", {
-            aiChat: t("AIRoom:AIChat"),
+        ? t("Common:EmptyResultsDescription", {
+            aiChat: t("Common:AIChat"),
           })
-        : t("AIRoom:EmptyResultsViewerDescription", {
-            aiChat: t("AIRoom:AIChat"),
+        : t("Common:EmptyResultsViewerDescription", {
+            aiChat: t("Common:AIChat"),
           });
   }
 
@@ -147,6 +156,7 @@ export const getDescription = (
       standalone,
       aiReady,
       isPortalAdmin,
+      isFormsScope,
     );
 
   if (isFolder)
@@ -172,22 +182,25 @@ export const getTitle = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isKnowledgeTab?: boolean,
   isResultsTab?: boolean,
   isAIRoom?: boolean,
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  isFormsScope: boolean = false,
 ): string => {
   const isNotAdmin = isUser(access);
 
   if (isAIRoom) {
-    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeTitle");
+    if (isKnowledgeTab) return t("Common:EmptyKnowledgeTitle");
 
     if (isResultsTab)
       return security && "UseChat" in security && security.UseChat
-        ? t("AIRoom:EmptyResultsTitle")
+        ? t("Common:EmptyResultsTitle")
         : t("Common:NothingToShowYet");
   }
 
@@ -199,6 +212,7 @@ export const getTitle = (
       aiReady,
       standalone,
       isPortalAdmin,
+      isFormsScope,
     );
 
   if (isFolder)
@@ -223,10 +237,22 @@ export const getIcon = (
   parentRoomType: Nullable<FolderType>,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   isResultsTab?: boolean,
+  isKnowledgeTab?: boolean,
+  isAIRoom?: boolean,
 ): JSX.Element => {
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
+
+  // The knowledge tab shows a folder whose `folderType` isn't a default-folder
+  // type, so `getFolderIcon` would fall through to its empty `<div />` and the
+  // empty screen would render with no illustration. Use the same default
+  // folder icon the SDK agents knowledge empty view uses.
+  if (isAIRoom && isKnowledgeTab)
+    return isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />;
+
   return isFolder
     ? getFolderIcon(
         parentRoomType,
@@ -241,7 +267,9 @@ export const getIcon = (
 
 export const getOptions = (
   type: RoomsType,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
+  security: Nullable<
+    TFolderSecurity | TRoomSecurity | Partial<TFolderSecurity & TRoomSecurity>
+  >,
   t: TTranslation,
   access: AccessType,
   isFolder: boolean,
@@ -260,6 +288,10 @@ export const getOptions = (
   aiReady: boolean = false,
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
+  trashSection: "personal" | "rooms" | "forms" | "agents" = "personal",
+  isCardLinkedToPortal: boolean = false,
+  isActivating: boolean = false,
+  isAiChatAvailable: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -281,21 +313,15 @@ export const getOptions = (
   );
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromPortalTitle", {
-      productName: t("Common:ProductName"),
-    }),
-    t("EmptyView:UploadPDFFormOptionDescription", {
-      productName: t("Common:ProductName"),
-    }),
+    t("EmptyView:UploadFromPortalTitle"),
+    t("EmptyView:UploadPDFFormOptionDescription"),
     FilterType.PDFForm,
   );
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(
-    t("EmptyView:UploadFromPortalTitle", {
-      productName: t("Common:ProductName"),
-    }),
+    t("EmptyView:UploadFromPortalTitle"),
     t("EmptyView:SectionsUploadDescription", {
-      sectionNameFirst: t("Common:MyDocuments"),
+      sectionNameFirst: t("Common:Files"),
       sectionNameSecond: t("Common:Rooms"),
     }),
     // TODO: need fix selector
@@ -310,9 +336,7 @@ export const getOptions = (
 
   const inviteUserOption = createInviteOption(
     t("Common:InviteContacts"),
-    t("EmptyView:InviteUsersOptionDescription", {
-      productName: t("Common:ProductName"),
-    }),
+    t("EmptyView:InviteUsersOptionDescription"),
   );
 
   const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;
@@ -378,22 +402,44 @@ export const getOptions = (
     disabled: false,
   };
 
+  const createFormSpace = {
+    title: t("EmptyView:CreateFormSpaceTitleOption"),
+    description: t("EmptyView:CreateFormSpaceDescriptionOption"),
+    icon: <CreateRoom />,
+    key: "create-form-space",
+    onClick: actions.onCreateRoom,
+    disabled: false,
+  };
+
   const createAIAgent = {
-    title: t("EmptyView:CreateAIAgent"),
-    description: t("EmptyView:CreateAIAgentDescription", {
+    title: t("Common:CreateAIAgentTitle"),
+    description: t("Common:CreateAIAgentDescription", {
       aiAgent: t("Common:AIAgent"),
     }),
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,
-    disabled: !security?.Create,
+    //disabled: !security?.Create,
+    disabled: false,
   };
+
+  // Opens the AI chat panel — the same action the quick-action tiles and the
+  // dashboard use. Only offered where the chat is actually reachable
+  // (`isAiChatAvailable` already covers guests and portals without AI).
+  const openAiChat = {
+    title: t("Common:AIChat"),
+    description: t("EmptyView:AIChatOptionDescription"),
+    icon: <CreateChatIcon />,
+    key: "open-ai-chat",
+    onClick: actions.onOpenAiChat,
+    disabled: false,
+  };
+
+  const aiChatOption = isAiChatAvailable ? [openAiChat] : [];
 
   const inviteRootRoom = {
     title: t("EmptyView:InviteNewUsers"),
-    description: t("EmptyView:InviteRootRoomDescription", {
-      productName: t("Common:ProductName"),
-    }),
+    description: t("EmptyView:InviteRootRoomDescription"),
     icon: <InviteUserFormIcon />,
     key: "invite-root-room",
     onClick: () => actions.inviteRootUser(EmployeeType.User),
@@ -413,6 +459,30 @@ export const getOptions = (
     key: "go-to-ai-provider-settings",
     onClick: actions.onGoToAIProviderSettings,
   } as const;
+
+  const activateOrTopUpAI = isCardLinkedToPortal
+    ? ({
+        type: "button",
+        title: t("Common:Activate"),
+        key: "activate-ai",
+        onClick: actions.onActivateAI,
+        isLoading: isActivating,
+      } as const)
+    : ({
+        type: "button",
+        title: t("Common:TopUpAndActivate"),
+        key: "top-up-and-activate-ai",
+        onClick: actions.onTopUpAndActivateAI,
+        isLoading: isActivating,
+      } as const);
+
+  // const aiBenefits = {
+  //   type: "button",
+  //   title: t("Common:Benefits"),
+  //   key: "ai-benefits",
+  //   primary: false,
+  //   onClick: actions.onShowAIBenefits,
+  // } as const;
 
   const uploadFromDeviceAnyFile = isMobile
     ? createUploadFromDeviceOption(
@@ -445,7 +515,7 @@ export const getOptions = (
   const migrationData = {
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
-      productName: t("Common:ProductName"),
+      productName: getBrandName("ProductName"),
       organizationName: logoText,
     }),
     icon: <InviteUserFormIcon />,
@@ -495,47 +565,83 @@ export const getOptions = (
     ],
   };
 
-  if (isRootEmptyPage) {
+  // The knowledge/results tabs view the agent room itself, which lives at the
+  // section root (`parentId === 0`) and so trips `isRootEmptyPage`. Without
+  // this guard the root branch below (FolderType.AIAgents → create-agent)
+  // would win and the knowledge/results upload actions never render. Title and
+  // description already special-case `isAIRoom` first, so options must too.
+  const isAIAliasTab = !!(isAIRoom && (isKnowledgeTab || isResultsTab));
+
+  if (isRootEmptyPage && !isAIAliasTab) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
-      .with([FolderType.AIAgents, P._, P._], () =>
-        match([aiReady, standalone, isPortalAdmin])
-          .with([true, P._, P.when(() => isAdmin(access))], () => [
-            createAIAgent,
-          ])
-          .with([false, P._, true], () => [goToAIProviderSettings]) // NOTE: AI SaaS same as AI Standalone in v.4.0
-          // .with([false, false, true], () => [goToServices])
-          .otherwise(() => []),
-      )
+      .with([FolderType.AIAgents, P._, P._], () => {
+        if (aiReady) return isPortalAdmin ? [createAIAgent] : [];
+        if (!isPortalAdmin) return [];
+        if (standalone) return [goToAIProviderSettings];
+        return [activateOrTopUpAI];
+      })
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,
         migrationData,
+        ...aiChatOption,
+      ])
+      .with([FolderType.Forms, P._, true], () => [])
+      .with([FolderType.Forms, P._, P._], () => [
+        createFormSpace,
+        ...aiChatOption,
       ])
       .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,
         createPresentation,
         createForm,
+        ...aiChatOption,
       ])
       .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
         {
           ...actions.onGoToShared(),
           icon: <FolderIcon />,
-          description: t("Files:GoToMyRooms"),
+          description: t("Common:GoToMyRooms"),
           key: "empty-view-goto-shared",
         },
       ])
-      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [
-        {
-          ...actions.onGoToPersonal(),
-          icon: <PersonIcon />,
-          description: t("Files:GoToSection", {
-            sectionName: t("Common:MyDocuments"),
-          }),
-          key: "empty-view-trash-goto-personal",
-        },
-      ])
+      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => {
+        const trashOrigin = {
+          rooms: {
+            link: actions.onGoToShared(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:Rooms"),
+          },
+          forms: {
+            link: actions.onGoToForms(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:Forms"),
+          },
+          agents: {
+            link: actions.onGoToAgents(),
+            icon: <FolderIcon />,
+            sectionName: t("Common:AIAgents"),
+          },
+          personal: {
+            link: actions.onGoToPersonal(),
+            icon: <PersonIcon />,
+            sectionName: t("Common:Files"),
+          },
+        }[trashSection];
+
+        return [
+          {
+            ...trashOrigin.link,
+            icon: trashOrigin.icon,
+            description: t("Common:GoToSection", {
+              sectionName: trashOrigin.sectionName,
+            }),
+            key: "empty-view-trash-goto-origin",
+          },
+        ];
+      })
       .otherwise(() => []);
   }
 
@@ -544,11 +650,9 @@ export const getOptions = (
   if (isAIRoom) {
     if (isKnowledgeTab) {
       const uploadFilesFromDocSpace = createUploadFromDocSpace(
-        t("EmptyView:UploadFromPortalTitle", {
-          productName: t("Common:ProductName"),
-        }),
-        t("AIRoom:UploadFilesPortal", {
-          sectionNameFirst: t("Common:MyDocuments"),
+        t("EmptyView:UploadFromPortalTitle"),
+        t("Common:UploadFilesPortal", {
+          sectionNameFirst: t("Common:Files"),
           sectionNameSecond: t("Common:Rooms"),
         }),
         "",
@@ -557,8 +661,9 @@ export const getOptions = (
 
       const uploadFilesFromDevice = createUploadFromDeviceOption(
         t("EmptyView:UploadDeviceOptionTitle"),
-        t("AIRoom:UploadFilesDevice"),
+        t("Common:UploadFilesDevice"),
         "file",
+        true,
       );
 
       return [uploadFilesFromDocSpace, uploadFilesFromDevice];
@@ -568,19 +673,11 @@ export const getOptions = (
       return [
         {
           key: "open-chat",
-          title: t("AIRoom:CreateChat"),
+          title: t("Common:CreateChat"),
           icon: <CreateChatIcon />,
-          onClick: () => {
-            const filesFilter = FilesFilter.getFilter(window.location);
-
-            filesFilter.searchArea = SearchArea.Any;
-
-            const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
-
-            window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
-          },
-          description: t("AIRoom:CreateChatDescription", {
-            aiChat: t("AIRoom:AIChat"),
+          onClick: actions.onStartNewChat,
+          description: t("Common:CreateChatDescription", {
+            aiChat: t("Common:AIChat"),
           }),
           disabled: !canUseChat,
         },
@@ -686,3 +783,4 @@ export const getOptions = (
       return [];
   }
 };
+

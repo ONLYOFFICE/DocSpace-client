@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Os usuários desabilitados selecionados serão removidos do {{productName}}. Essa ação não pode ser desfeita.",
-  "ActionCannotBeUndoneGuests": "Os convidados desativados selecionados serão removidos de {{productName}}. Essa ação não pode ser desfeita.",
+  "ActionCannotBeUndoneGuests": "Os convidados desativados selecionados serão removidos do espaço de trabalho. Essa ação não pode ser desfeita.",
+  "ActionCannotBeUndoneUsers": "Os usuários desabilitados selecionados serão removidos do espaço de trabalho. Essa ação não pode ser desfeita.",
   "CannotReassignFiles": "Se você excluir vários usuários de uma vez, não poderá reatribuir seus arquivos a outros usuários.",
   "DeleteGroupGuestsSuccessMessage": "Os convidados foram excluídos com êxito.",
   "DeleteGroupUsersSuccessMessage": "Os usuários foram excluídos com sucesso.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Excluir usuário",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> será excluído. Essa ação não pode ser desfeita.",
   "DeletingUsers": "Excluindo usuários",
-  "PersonalDataDeletionInfo": "Os dados pessoais, todos os arquivos e pastas pessoais nas seções {{sectionNameFirst}} e {{sectionNameSecond}}* dos usuários selecionados serão excluídos permanentemente. Os arquivos e pastas dos usuários selecionados mantidos em seções comuns*, como salas, permanecerão em {{productName}}.",
+  "PersonalDataDeletionInfo": "Os dados pessoais, todos os arquivos e pastas pessoais nas seções {{sectionNameFirst}} e {{sectionNameSecond}}* dos usuários selecionados serão excluídos permanentemente. Os arquivos e pastas dos usuários selecionados mantidos em seções comuns*, como salas, permanecerão no espaço de trabalho.",
   "PleaseNote": "Observe:",
   "ReassignDataToAnotherUser": "Reatribuir dados a outro usuário",
   "SuccessfullyDeleteGuestInfoMessage": "O convidado foi excluído com sucesso",

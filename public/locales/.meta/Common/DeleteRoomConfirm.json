@@ -1,0 +1,38 @@
+{
+  "key_path": "DeleteRoomConfirm",
+  "content": "The room <strong>\"{{roomName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
+  "content_en_sha1_hash": "1b7cd3772bae9279fc902414a7a7d258013ebfda",
+  "created_at": "2025-09-22T13:39:49.180Z",
+  "updated_at": "2026-08-17T17:23:21.712Z",
+  "comment": {
+    "text": "This is the confirmation message displayed in a dialog when a user attempts to delete a room. It informs the user that the room, identified by `{{roomName}}`, and all its associated data and user accesses will be permanently lost.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:05:35.543Z",
+    "model": "google/gemini-2.5-flash"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 128,
+      "context": "The space <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n ) : (\n <Trans t={t} i18nKey=\"DeleteRoomConfirm\" ns=\"Common\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n )}{\" \"}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(rooms)/_components/delete-room-dialog/index.tsx",
+      "line_number": 134,
+      "context": "<Text>\n {isSingle ? (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"DeleteRoomConfirm\"\n values={{ roomName }}\n components={{ strong: <strong key=\"strong\" /> }}\n />\n ) : (\n <Trans",
+      "module": "/packages/sdk"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
+    }
+  }
+}

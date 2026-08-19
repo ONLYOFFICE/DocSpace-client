@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsTemplatesTitle",
+  "content": "Reuse what works",
+  "content_en_sha1_hash": "460d90e6777495a1b0ec1e8b7bc1fc036ed14c94",
+  "created_at": "2026-08-06T14:20:52.339Z",
+  "updated_at": "2026-08-07T15:05:26.432Z",
+  "comment": {
+    "text": "Title for an onboarding tour step that introduces the feature for reusing templates in Rooms.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:49:33.626Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 170,
+      "context": "canCreate &&\n canUseTemplates &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-use-template\"]',\n t(\"RoomsTour:RoomsTemplatesTitle\"),\n t(\"RoomsTour:RoomsTemplates\"),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

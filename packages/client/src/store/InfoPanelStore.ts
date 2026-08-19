@@ -1,31 +1,44 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
+import {
+  getFolderLogReportStatus,
+  startFolderLogReport,
+} from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { FolderType } from "@docspace/shared/enums";
@@ -37,7 +50,11 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import type { TLogo } from "@docspace/ui-kit/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import {
+  TFile,
+  TFolder,
+  TFolderLogReportDateRange,
+} from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
@@ -57,16 +74,16 @@ import FilesSettingsStore from "./FilesSettingsStore";
 import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import TreeFoldersStore from "./TreeFoldersStore";
+import DocumentBuilderReportStore, {
+  ReportType,
+} from "./DocumentBuilderReportStore";
 
 export type InfoPanelViewType = InfoPanelView | `info_plugin-${string}`;
 
 type TSelection =
-  | Nullable<TRoom | TFolder | TFile>
-  | Array<TRoom | TFolder | TFile>;
+  Nullable<TRoom | TFolder | TFile> | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
-  userStore = {} as UserStore;
-
   isVisible = false;
 
   isMobileHidden = false;
@@ -95,11 +112,27 @@ class InfoPanelStore {
 
   shareChanged = false;
 
-  constructor(userStore: UserStore) {
-    this.userStore = userStore;
+  documentBuilderReportStore = {} as DocumentBuilderReportStore;
 
+  constructor(public userStore: UserStore) {
     makeAutoObservable(this);
   }
+
+  get isRoomHistoryReportBuilding() {
+    return this.documentBuilderReportStore.isReportBuilding(
+      ReportType.RoomHistory,
+    );
+  }
+
+  getRoomHistoryReport = (
+    folderId: number | string,
+    dateRange?: TFolderLogReportDateRange,
+  ) => {
+    return this.documentBuilderReportStore.buildReport(ReportType.RoomHistory, {
+      start: () => startFolderLogReport(folderId, dateRange),
+      getStatus: () => getFolderLogReportStatus(folderId),
+    });
+  };
 
   setIsVisible = (visiable: boolean) => {
     const selectedFolderIsAgentOrFolderInAgent =
@@ -263,7 +296,14 @@ class InfoPanelStore {
       return item.logo?.cover ? item.logo : item.logo?.medium;
 
     if (isFolder(item))
-      return this.filesSettingsStore.getIconByFolderType(folderType, size);
+      // type-only cast — `folderType` is
+      // `false | FolderType | undefined` here and was passed to the untyped
+      // .js store unchanged; getIconPathByFolderType falls back to the
+      // default folder icon for non-FolderType values.
+      return this.filesSettingsStore.getIconByFolderType(
+        folderType as FolderType,
+        size,
+      );
 
     const fileExst = "fileExst" in item && item.fileExst;
 
@@ -271,11 +311,17 @@ class InfoPanelStore {
   };
 
   get infoPanelSelection(): TSelection {
-    const selection = this.filesStore.selection.length
+    // FilesStore selection/bufferSelection are filesList
+    // view-model items (TItem) and the fallback is a spread of the selected
+    // folder store; the erased casts keep the old JS values while this
+    // getter keeps its raw-entity TSelection facade.
+    const selection = (this.filesStore.selection.length
       ? this.filesStore.selection.length === 1
         ? this.filesStore.selection[0]
         : this.filesStore.selection
-      : (this.filesStore.bufferSelection ?? { ...this.selectedFolderStore });
+      : (this.filesStore.bufferSelection ?? {
+          ...this.selectedFolderStore,
+        })) as unknown as TSelection;
 
     if (!selection) return null;
 
@@ -285,7 +331,7 @@ class InfoPanelStore {
 
     const icon = this.getInfoPanelItemIcon(selection, 32);
 
-    return { ...selection, icon };
+    return { ...selection, icon } as unknown as TSelection;
   }
 
   get infoPanelRoomSelection(): Nullable<TRoom> {
@@ -295,7 +341,7 @@ class InfoPanelStore {
       "isRoom" in this.infoPanelSelection &&
       this.infoPanelSelection.isRoom
     ) {
-      return this.infoPanelSelection;
+      return this.infoPanelSelection as TRoom;
     }
 
     return this.infoPanelRoom;
@@ -343,16 +389,22 @@ class InfoPanelStore {
     const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
+    const isForms = this.getIsForms();
     const isAccounts =
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
 
-    return isRooms || isFiles || isAccounts || isAIAgent;
+    return isRooms || isFiles || isForms || isAccounts || isAIAgent;
   };
 
   getIsAIAgent = () => {
     const pathname = window.location.pathname.toLowerCase();
     return pathname.indexOf("ai-agent") !== -1;
+  };
+
+  getIsForms = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return pathname.indexOf("forms") !== -1;
   };
 
   getIsFiles = () => {
@@ -414,6 +466,13 @@ class InfoPanelStore {
     return (
       this.roomsView === InfoPanelView.infoShare ||
       this.fileView === InfoPanelView.infoShare
+    );
+  }
+
+  get isDetailsTabActive(): boolean {
+    return (
+      this.roomsView === InfoPanelView.infoDetails ||
+      this.fileView === InfoPanelView.infoDetails
     );
   }
 

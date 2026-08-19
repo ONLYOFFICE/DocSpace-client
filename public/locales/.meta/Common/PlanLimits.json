@@ -1,0 +1,29 @@
+{
+  "key_path": "PlanLimits",
+  "content": "{{admins}} admins | {{rooms}} rooms | {{storage}}",
+  "content_en_sha1_hash": "370f0d4cc6aa54aaa25e29c2c8a4b0c7b567246c",
+  "created_at": "2026-07-07T08:59:01.370Z",
+  "updated_at": "2026-08-01T16:25:17.902Z",
+  "comment": {
+    "text": "A summary text line in the billing overview displaying usage limits for the free plan, consisting of the number of admins, rooms, and storage capacity separated by pipes.",
+    "is_auto": true,
+    "updated_at": "2026-07-07T08:59:56.413Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/CurrentPlan.tsx",
+      "line_number": 79,
+      "context": "<Text fontSize=\"18px\" fontWeight={700}>\n {currentTariffPlanTitle}\n </Text>\n <Text fontSize=\"12px\">\n {isFreeTariff\n ? t(\"PlanLimits\", {\n admins: limitValue(MANAGER),\n rooms: limitValue(ROOM),\n storage: getConvertedSize(t, limitValue(TOTAL_SIZE)),\n })\n : t(\"PlanCost\", {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

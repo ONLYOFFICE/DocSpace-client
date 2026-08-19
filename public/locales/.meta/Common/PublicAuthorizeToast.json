@@ -1,19 +1,20 @@
 {
   "key_path": "PublicAuthorizeToast",
-  "content": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this {{productName}}, please authorize.",
-  "content_en_sha1_hash": "966e9f6f87aa9004801797a1570d6371db7bf248",
-  "created_at": "2025-06-24T16:31:00.928Z",
-  "updated_at": "2025-10-27T16:14:33.650Z",
+  "content": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this workspace, please authorize.",
+  "content_en_sha1_hash": "284e74dd118cac41e4bf14fb2dc417b82acefafd",
+  "created_at": "2026-08-12T11:00:33.392Z",
+  "updated_at": "2026-08-14T14:58:32.846Z",
   "comment": {
-    "text": "This translation key is used to display a toast message prompting users to authorize access to their account when they enter a public room in the application. The message includes placeholders for room mode and product name, which will be replaced by actual values during translation. It appears as a modal or dialog prompt.",
+    "text": "A toast message appearing when accessing a public room, notifying users of the active <1>{{roomMode}}</1> mode and prompting them to authorize if they have an account in the workspace.",
     "is_auto": true,
-    "updated_at": "2025-06-24T16:31:40.712Z"
+    "updated_at": "2026-08-12T11:06:10.496Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 120,
-      "context": "const content = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"\n values={{ roomMode, productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Text\n key=\"productName\"",
+      "line_number": 145,
+      "context": "const content = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"\n values={{ roomMode }}\n components={{\n 1: (\n <Text\n key=\"roomMode\"",
       "module": "/packages/client"
     }
   ],

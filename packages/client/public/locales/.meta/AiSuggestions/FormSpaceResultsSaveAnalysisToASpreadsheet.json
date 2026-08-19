@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceResultsSaveAnalysisToASpreadsheet",
+  "content": "Save analysis to a spreadsheet",
+  "content_en_sha1_hash": "3248cd3811ba5d1c04d455280cca681f803e6cda",
+  "created_at": "2026-08-04T09:58:55.154Z",
+  "updated_at": "2026-08-05T17:40:34.823Z",
+  "comment": {
+    "text": "Button label within the AI suggestions menu that triggers the process of exporting analysis results into a spreadsheet.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T17:40:34.823Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 202,
+      "context": "name: t(\"AiSuggestions:FormSpaceResultsCreateAPresentation\"),\n prompt: t(\"AiSuggestions:FormSpaceResultsCreateAPresentationPrompt\"),\n requires: \"create\",\n },\n {\n name: t(\"AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheet\"),\n prompt: t(\n \"AiSuggestions:FormSpaceResultsSaveAnalysisToASpreadsheetPrompt\",\n ),\n requires: \"create\",\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

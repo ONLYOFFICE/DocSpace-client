@@ -1,21 +1,48 @@
 @use "@docspace/ui-kit/styles/mixins";
 
 .aiAgentChat {
-  --chat-header-top: calc(var(--section-header-height) + var(--section-submenu-height));
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+
+  // Declarations stay ahead of every nested rule: Sass is aligning with CSS,
+  // where a declaration after a nested rule changes meaning (`mixed-decls`).
+  margin-inline: -20px -3px;
+
+  // Declared before the media-query mixins below: Sass warns (mixed-decls) when
+  // a plain declaration follows a nested rule, since CSS is about to stop
+  // hoisting it above them.
+  --chat-header-top: calc(
+    var(--section-header-height) + var(--section-submenu-height)
+  );
 
   @include mixins.tablet-and-below {
-    --chat-header-top: calc(var(--section-header-height-tablet) + var(--section-submenu-height));
+    margin-inline: -24px 0;
+
+    --chat-header-top: calc(
+      var(--section-header-height-tablet) + var(--section-submenu-height)
+    );
   }
 
   @include mixins.mobile {
-    --chat-header-top: calc(var(--section-header-height-mobile) + var(--section-submenu-height));
+    margin-inline: -16px -8px;
+
+    --chat-header-top: calc(
+      var(--section-header-height-mobile) + var(--section-submenu-height)
+    );
   }
 
-  :global(.chat-message-body) {
-    margin: 0 -20px;
+  // :global(.aui-root > div:has(> .chat-viewport--empty)) {
+  //   grid-template-rows: 2fr auto auto 8fr auto;
+  // }
 
-    @include mixins.tablet-and-below {
-      margin: 0 -16px;
-    }
+  :global(div:has(> div > [style*="--chat-welcome-color"])) {
+    margin-bottom: 18px;
+  }
+
+  :global(#chat-toolbar) {
+    --chat-toolbar-padding-block: 16px;
+    --chat-toolbar-padding-inline: 20px;
   }
 }

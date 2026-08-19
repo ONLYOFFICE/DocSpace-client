@@ -1,0 +1,29 @@
+{
+  "key_path": "SubscriptionDeactivatedNonPayment",
+  "content": "Subscription deactivated — non-payment",
+  "content_en_sha1_hash": "6244400f48c757281fab42d54dc81d4c61f933c3",
+  "created_at": "2026-07-27T13:07:38.249Z",
+  "updated_at": "2026-08-05T16:32:00.369Z",
+  "comment": {
+    "text": "Status label displayed in place of the subscription price when a service has been deactivated due to non-payment.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:12:54.802Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 554,
+      "context": "} else if (isTrial) {\n docsConnectPrice = t(\"DocsConnectTrialDaysLeft\", {\n count: trialDaysLeft,\n });\n } else if (deactivated) {\n docsConnectPrice = t(\"SubscriptionDeactivatedNonPayment\");\n } else if (canceled) {\n docsConnectPrice = t(\"FromPricePerUserMonth\", {\n price: formatWalletCurrency(item.price.value, 0),\n });\n } else if (hasScheduledChange) {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

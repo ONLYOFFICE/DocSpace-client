@@ -1,6 +1,6 @@
 {
   "DeletePlugin": "Eklentiyi sil",
-  "DeletePluginDescription": "Bu eklenti artık {{productName}} kullanıcıları tarafından kullanılamayacak. Devam etmek istediğinize emin misiniz?",
+  "DeletePluginDescription": "Bu eklenti artık çalışma alanı kullanıcıları tarafından kullanılamayacak. Devam etmek istediğinize emin misiniz?",
   "DeletePluginTitle": "Eklenti silinsin mi?",
   "ExpandFunctionality": "Eklenti SDK'sını kullanarak işlevselliği genişletin",
   "GoToRepo": "Depoya git",
@@ -8,13 +8,13 @@
   "NeedSettings": "Ayarları girmeniz gerekiyor",
   "NoPlugins": "Hiçbir eklenti eklenmedi",
   "NotNeedSettings": "Ayarlara girmenize gerek yok",
-  "PluginIsNotCompatible": "Eklenti SDK sürümü, {{productName}} sürümüyle eşleşmiyor. Lütfen uyumlu bir sürüme güncelleyin.",
+  "PluginCacheWarningDescription": "Eklentiler, sürüm numaralarına göre önbelleğe alınır. Değişikliklerinizin uygulanması için lütfen yüklemeden önce <1>package.json</1> dosyanızdaki sürüm numarasını artırın. Sistem, sürüm aynı kalırsa eklentiyi güncellemez.",
+  "PluginDeletedSuccessfully": "Eklenti başarıyla silindi",
+  "PluginIsNotCompatible": "Eklenti SDK sürümü, {{organizationName}} {{productName}} sürümüyle eşleşmiyor. Lütfen uyumlu bir sürüme güncelleyin.",
   "PluginLoadedSuccessfully": "Eklenti başarıyla yüklendi",
   "PluginSamples": "Eklenti örnekleri",
   "PluginSDK": "Eklenti SDK'sı",
-  "PluginSDKDescription": "Eklenti SDK'sını kullanarak {{productName}} işlevselliğinizi genişletebilir, üçüncü taraf hizmetlerine bağlanabilir veya mevcut kullanıcı deneyimini geliştirebilirsiniz. Burada GitHub'da bulunan kod kaynağına sahip eklenti örneklerini bulabilirsiniz.",
+  "PluginSDKDescription": "Eklenti SDK'sını kullanarak çalışma alanınızın işlevselliğini genişletebilir, üçüncü taraf hizmetlerine bağlanabilir veya mevcut kullanıcı deneyimini geliştirebilirsiniz. Burada GitHub'da bulunan kod kaynağına sahip eklenti örneklerini bulabilirsiniz.",
   "PluginSDKInstruction": "Kendi eklentilerinizi nasıl oluşturacağınızla ilgili ayrıntılı talimatlar için düğmeye tıklayın.",
-  "UploadDescription": "{{productName}}'in işlevselliğini ekstra özelliklerle genişletmek için eklentiler ekleyebilirsiniz. Eklenti yükle'ye tıklayın veya dosyayı ZIP arşivine bırakın.",
-  "PluginCacheWarningDescription": "Eklentiler, sürüm numaralarına göre önbelleğe alınır. Değişikliklerinizin uygulanması için lütfen yüklemeden önce <1>package.json</1> dosyanızdaki sürüm numarasını artırın. Sistem, sürüm aynı kalırsa eklentiyi güncellemez.",
-  "PluginDeletedSuccessfully": "Eklenti başarıyla silindi"
+  "UploadDescription": "Çalışma alanının işlevselliğini ekstra özelliklerle genişletmek için eklentiler ekleyebilirsiniz. Eklenti yükle'ye tıklayın veya dosyayı ZIP arşivine bırakın."
 }

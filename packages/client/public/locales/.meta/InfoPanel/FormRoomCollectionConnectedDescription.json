@@ -1,0 +1,29 @@
+{
+  "key_path": "FormRoomCollectionConnectedDescription",
+  "content": "Responses are continuously saved to a spreadsheet file.",
+  "content_en_sha1_hash": "9e051c1bf8851da042023f3d7c0d67f0d958a872",
+  "created_at": "2026-05-08T13:10:42.370Z",
+  "updated_at": "2026-05-15T14:00:06.729Z",
+  "comment": {
+    "text": "Descriptive text in the Form InfoPanel details view, shown when a spreadsheet collection is active to indicate that incoming responses are being automatically recorded.",
+    "is_auto": true,
+    "updated_at": "2026-05-08T13:16:51.312Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
+      "line_number": 84,
+      "context": "const description = useMemo(() => {\n if (collectionConnected) {\n if (isRoom)\n return t(\"InfoPanel:FormRoomCollectionConnectedDescriptionRoom\");\n return t(\"InfoPanel:FormRoomCollectionConnectedDescription\");\n }\n return t(\"InfoPanel:FormRoomCollectionNotConnectedDescription\");\n }, [collectionConnected, isRoom, t]);\n \n const renderAction = () => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "key_path": "DropInIntegrationTitle",
+  "content": "Drop-in integration",
+  "content_en_sha1_hash": "cb97793925113bf006411003c378238578247473",
+  "created_at": "2026-07-27T13:07:48.466Z",
+  "updated_at": "2026-08-13T14:37:21.759Z",
+  "comment": {
+    "text": "Title of an integration type within the DocsConnect setup modal, appearing as a heading for a specific integration option.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:23:32.602Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
+      "line_number": 97,
+      "context": "title: t(\"DocsConnect:RealtimeCollaborationTitle\"),\n description: t(\"DocsConnect:RealtimeCollaborationDescription\"),\n },\n {\n Icon: IntegrationIcon,\n title: t(\"DocsConnect:DropInIntegrationTitle\"),\n description: t(\"DocsConnect:DropInIntegrationDescription\"),\n },\n ];\n \n const chips = [",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

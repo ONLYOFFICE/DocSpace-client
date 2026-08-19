@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsEmptyTitle",
+  "content": "Your list is empty for now",
+  "content_en_sha1_hash": "6825ed70df352332c3cafd4f841d5d1adf5e2597",
+  "created_at": "2026-08-06T14:20:52.336Z",
+  "updated_at": "2026-08-07T15:05:26.434Z",
+  "comment": {
+    "text": "Title for the empty state screen in the Rooms component, appearing when no rooms have been created.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:52:41.234Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 275,
+      "context": "LOG_LABEL,\n demoHooks,\n )\n : revealStep(\n EMPTY_SCREEN_SELECTOR,\n t(\"RoomsTour:RoomsEmptyTitle\"),\n t(\"RoomsTour:RoomsEmpty\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

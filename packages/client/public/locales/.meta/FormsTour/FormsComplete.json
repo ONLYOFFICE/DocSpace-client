@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsComplete",
+  "content": "A submitted copy lands in {{complete}} and stays there, one per person. Switch on result collection and every answer also becomes a row in a spreadsheet — one column per field, ready to sort or chart.",
+  "content_en_sha1_hash": "f8b1973d920a5bd6c3bb85ede88cae874b3a1c87",
+  "created_at": "2026-08-06T14:20:53.750Z",
+  "updated_at": "2026-08-13T10:58:03.050Z",
+  "comment": {
+    "text": "Description text for a guided tour step explaining how form submissions are stored and processed, including a variable {{complete}} representing the destination folder or section.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:47:47.608Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 249,
+      "context": "// why this is the last thing said about the inside.\n showInsideSpace &&\n revealStep(\n COMPLETE_SELECTOR,\n t(\"FormsTour:FormsCompleteTitle\"),\n t(\"FormsTour:FormsComplete\", { complete: t(\"Common:Complete\") }),\n callbacks,\n LOG_LABEL,\n spaceHooks,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,135 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FilesStore.getFilesContextOptions — characterization > builds options for a custom room 1`] = `
+[
+  "select",
+  "open",
+  "separator0",
+  "link-for-room-members",
+  "edit-room",
+  "invite-users-to-room",
+  "external-link",
+  "room-info",
+  "pin-room",
+  "mute-room",
+  "edit-index",
+  "short-tour",
+  "export-room-index",
+  "save-as-template",
+  "separator1",
+  "duplicate-room",
+  "download",
+  "change-room-owner",
+  "archive-room",
+  "leave-room",
+  "delete",
+]
+`;
+
+exports[`FilesStore.getFilesContextOptions — characterization > builds options for a document file 1`] = `
+[
+  "select",
+  "edit",
+  "vectorization",
+  "preview",
+  "update-xlsx-data",
+  "separator0",
+  "ask-ai",
+  "separator6",
+  "filling-status",
+  "start-filling",
+  "reset-and-start-filling",
+  "submit-to-gallery",
+  "separator-SubmitToGallery",
+  "link-for-room-members",
+  "sharing-settings",
+  "copy-shared-link",
+  "manage-links",
+  "create-room-separator",
+  "create-room",
+  "embedding-settings",
+  "send-by-email",
+  "version",
+  "show-version-history",
+  "show-info",
+  "block-unblock-version",
+  "separator1",
+  "mark-as-favorite",
+  "download",
+  "download-as",
+  "move",
+  "move-to",
+  "copy-to",
+  "duplicate",
+  "rename",
+  "edit-index",
+  "separator5",
+  "delete",
+  "remove-from-recent",
+  "copy-general-link",
+  "separate-stop-filling",
+  "stop-filling",
+]
+`;
+
+exports[`FilesStore.getFilesContextOptions — characterization > builds options for a plain folder 1`] = `
+[
+  "select",
+  "open",
+  "update-xlsx-data",
+  "sharing-settings",
+  "copy-shared-link",
+  "manage-links",
+  "create-room-separator",
+  "create-room",
+  "link-for-room-members",
+  "show-info",
+  "separator1",
+  "mark-as-favorite",
+  "download",
+  "move",
+  "move-to",
+  "copy-to",
+  "duplicate",
+  "edit-index",
+  "rename",
+  "separator2",
+  "delete",
+]
+`;
+
+exports[`FilesStore.getFilesContextOptions — characterization > builds options for a room template 1`] = `
+[
+  "select",
+  "open",
+  "separator0",
+  "create-room-from-template",
+  "edit-template",
+  "access-settings",
+  "link-for-room-members",
+  "room-info",
+  "separator1",
+  "download",
+  "delete",
+]
+`;
+
+exports[`FilesStore.getFilesContextOptions — characterization > builds options for an AI agent room 1`] = `
+[
+  "select",
+  "open",
+  "separator0",
+  "edit-agent",
+  "invite-users-to-room",
+  "link-for-room-members",
+  "room-info",
+  "pin-room",
+  "mute-room",
+  "separator1",
+  "duplicate-room",
+  "download",
+  "change-agent-owner",
+  "leave-room",
+  "delete",
+]
+`;

@@ -1,0 +1,35 @@
+{
+  "key_path": "TourAiAssistant",
+  "content": "Start an AI chat to ask questions, summarize documents, generate texts and get help with your work — right inside {{sectionName}}.",
+  "content_en_sha1_hash": "e5cdc5fe6682331c4bef573f5676c92fad59e03d",
+  "created_at": "2026-08-06T14:20:53.787Z",
+  "updated_at": "2026-08-07T15:05:26.422Z",
+  "comment": {
+    "text": "Description text for an interactive product tour step explaining the AI chat feature's capabilities. The {{sectionName}} variable represents the current section name, such as \"Files\" or \"Rooms\".",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:38:01.535Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 261,
+      "context": "canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,\n ),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 184,
+      "context": "// files tour; the wording is shared rather than duplicated per namespace.\n showFilter &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Rooms\") }),\n callbacks,\n LOG_LABEL,\n 6,\n expandQuickActions,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

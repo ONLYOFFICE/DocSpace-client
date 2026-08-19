@@ -3,18 +3,25 @@
   "content": "Storage quota set per agent. You can change this value or turn off storage limit.",
   "content_en_sha1_hash": "8b8c6bcf79513b149c8cd8f0054c3de29d767278",
   "created_at": "2025-11-03T12:10:33.218Z",
-  "updated_at": "2025-11-03T12:17:54.927Z",
+  "updated_at": "2026-08-17T17:23:21.679Z",
   "comment": {
-    "text": "This text explains the storage quota setting for agents, allowing users to adjust the limit or disable it entirely. It appears in the Room Quota form, providing information about agent-specific storage settings. Translators should focus on conveying the user's ability to control storage limits.",
+    "text": "This is a description displayed below the storage quota input field when configuring storage limits for an agent. It explains that the quota is set per agent and can be modified or disabled.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:17:54.927Z"
+    "updated_at": "2026-04-11T21:04:29.998Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
-      "line_number": 66,
-      "context": "return (\n <QuotaForm\n label={t(\"Common:StorageQuota\")}\n description={\n isAgent ? t(\"StorageDescriptionAgent\") : t(\"StorageDescription\")\n }\n checkboxLabel={\n isAgent ? t(\"DisableRoomQuotaAgent\") : t(\"DisableRoomQuota\")\n }\n onSetQuotaBytesSize={onSetQuotaBytesSize}",
+      "line_number": 78,
+      "context": "return (\n <QuotaForm\n label={t(\"Common:StorageQuota\")}\n description={\n isAgent\n ? t(\"StorageDescriptionAgent\")\n : isFormSpace\n ? t(\"StorageDescriptionFormSpace\")\n : t(\"StorageDescription\")\n }\n checkboxLabel={",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/room-quota/index.tsx",
+      "line_number": 104,
+      "context": "return (\n <QuotaForm\n label={t(\"Common:StorageQuota\", { defaultValue: \"Storage quota\" })}\n description={\n isAgent\n ? t(\"CreateEditRoomDialog:StorageDescriptionAgent\", {\n defaultValue:\n \"Set a storage quota for this agent. When the limit is reached, new files cannot be uploaded.\",\n })\n : t(\"CreateEditRoomDialog:StorageDescription\", {\n defaultValue: \"Set a storage quota for this room.\",",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {
@@ -23,6 +30,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [],
       "approved_at": null
+    },
+    "ru": {
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     }
   }
 }

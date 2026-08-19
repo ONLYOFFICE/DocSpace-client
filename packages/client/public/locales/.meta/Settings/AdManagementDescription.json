@@ -1,30 +1,37 @@
 {
   "key_path": "AdManagementDescription",
-  "content": "Choose whether promotional banners are shown in your {{productName}}.",
-  "content_en_sha1_hash": "2a6b030bb7ef724467eef21491f93e99dd805096",
-  "created_at": "2025-07-02T07:49:04.418Z",
-  "updated_at": "2026-02-19T13:36:32.702Z",
+  "content": "Choose whether promotional banners are shown in your workspace.",
+  "content_en_sha1_hash": "01306facc3c2f0916f5bc7276b4620e505190eff",
+  "created_at": "2026-08-12T11:00:45.329Z",
+  "updated_at": "2026-08-14T14:58:32.779Z",
   "comment": {
-    "text": "This translation key is used for a descriptive text that explains the choice to display promotional banners in the product name. It appears in the UI as part of a Portal Settings category and is displayed next to an \"Ad Management\" option on a customization page.",
+    "text": "Subtitle for the Ad Management category item in the customization navigation and a descriptive text on the Ad Management settings page.",
     "is_auto": true,
-    "updated_at": "2025-07-02T07:49:31.824Z"
+    "updated_at": "2026-08-12T13:35:39.282Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 108,
-      "context": "onClickLink={onClickLink}\n />\n {isEnterprise ? (\n <CategoryItem\n title={t(\"AdManagement\")}\n subtitle={t(\"AdManagementDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n url=\"/portal-settings/customization/general/ad-management\"\n onClickLink={onClickLink}\n />",
+      "line_number": 111,
+      "context": "onClickLink={onClickLink}\n />\n {isEnterprise ? (\n <CategoryItem\n title={t(\"AdManagement\")}\n subtitle={t(\"AdManagementDescription\")}\n url=\"/portal-settings/customization/general/ad-management\"\n onClickLink={onClickLink}\n />\n ) : null}\n <CategoryItem",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 177,
-      "context": "<Text fontSize=\"16px\" fontWeight={700}>\n {t(\"AdManagement\")}\n </Text>\n ) : null}\n <Text>\n {t(\"AdManagementDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <RadioButtonGroup\n className={styles.radioButtonGroup}\n fontSize=\"13px\"\n fontWeight={400}",
+      "line_number": 186,
+      "context": "<Text fontSize=\"16px\" fontWeight={700}>\n {t(\"AdManagement\")}\n </Text>\n ) : null}\n <Text>\n {t(\"AdManagementDescription\")}\n </Text>\n <RadioButtonGroup\n className={styles.radioButtonGroup}\n fontSize=\"13px\"\n fontWeight={400}",
       "module": "/packages/client"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,22 +3,23 @@
   "content": "Log out",
   "content_en_sha1_hash": "6e78c91f5a05fc0d4f1a787d38e3d6fe2f856d46",
   "created_at": "2025-05-19T21:30:53.366Z",
-  "updated_at": "2025-08-11T18:11:59.150Z",
+  "updated_at": "2026-05-15T14:00:06.690Z",
   "comment": {
-    "text": "This translation key is used for the text \"Log out\" on a logout button in a modal dialogue, typically used to exit the application or end a user's session. It appears as part of a footer section in a dialog box and is triggered when the user clicks the button.",
+    "text": "This is the label for a button that logs the user out of their current session or all sessions.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:51.729Z"
+    "updated_at": "2026-04-11T21:20:44.055Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LogoutAllSessionDialog/index.js",
-      "line_number": 84,
+      "line_number": 93,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"logout\"\n key=\"LogoutBtn\"\n label={t(\"Profile:LogoutBtn\")}\n size=\"normal\"\n scale\n primary\n onClick={onClickLogout}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LogoutSessionDialog/index.js",
-      "line_number": 56,
+      "line_number": 65,
       "context": "})}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"LogoutBtn\"\n label={t(\"Profile:LogoutBtn\")}\n size=\"normal\"\n scale\n primary\n onClick={onClick}\n isLoading={isLoading}",
       "module": "/packages/client"
     }
@@ -51,13 +52,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Odhlášení\" is a valid Czech word, it's a noun meaning \"logging out.\" The English \"Log out\" is an imperative verb. A more appropriate translation would be a verb form.",
-          "suggestion": "Odhlásit se"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -93,13 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Դուրս գալ' literally translates to 'exit' or 'get out', which isn't the best equivalent for 'Log out'. While understandable, it lacks the specific meaning of logging out of a system or application.",
-          "suggestion": "Consider using a more specific translation like 'Ավարտել գործունեությունը' (Avaretel gorut'evut'yun) which means 'End session' or 'Finish activity'.  Alternatively, 'Լոգ աութ' (Log out) could be used as a transliteration if the target audience is familiar with English terminology."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -166,18 +155,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නික්මෙන්න' (nikamennā) is a command form which translates to 'Go out!' or 'Leave!'.  The intended meaning of 'Log out' is to end a session, which is best conveyed with a more formal or specific term.  'නික්මෙන්න' implies physically leaving a place.",
-          "suggestion": "Consider 'පිටුබිඳින' (pithubidina) which means 'sign out', or 'නිෂ්ක්‍රමණය' (nishkramaya) meaning 'exit'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -225,13 +208,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '注销' (zhùxiāo) can be used for 'log out,' it more accurately translates to 'cancel' or 'unregister.' '退出' (tuīchū) is a more common and direct translation for 'log out' in a user interface context.",
-          "suggestion": "退出"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

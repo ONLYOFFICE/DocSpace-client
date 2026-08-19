@@ -1,29 +1,39 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -77,8 +87,12 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Edit room groups panel with grouping enabled and groups listed
       await expect(dialog).toHaveScreenshot([
@@ -112,8 +126,12 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Edit room groups panel with no groups (empty state)
       await expect(dialog).toHaveScreenshot([
@@ -146,7 +164,7 @@ test.describe("Room grouping", () => {
       await expect(groupTagsRow).not.toBeVisible();
 
       // Screenshot: Rooms page without grouping row when grouping is disabled
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "rooms-page-grouping-disabled.png",
@@ -180,7 +198,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click the grouping toggle to disable grouping
@@ -194,6 +212,10 @@ test.describe("Room grouping", () => {
 
       const cancelButton = dialog.locator('button:has-text("Cancel")');
       await expect(cancelButton).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel with grouping toggled off showing Save/Cancel buttons
       await expect(dialog).toHaveScreenshot([
@@ -228,7 +250,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Toggle off
@@ -269,13 +291,17 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Toggle off grouping
       const toggle = dialog.getByTestId("toggle_room_groups_button");
       await expect(toggle).toBeVisible();
       await toggle.click();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Groups should appear disabled/grayed out
       await expect(dialog).toHaveScreenshot([
@@ -318,12 +344,16 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // The info bar/tooltip should be visible
       const infoBar = dialog.locator('[class*="infoBar"]');
       await expect(infoBar).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel with dismissible tooltip visible
       await expect(dialog).toHaveScreenshot([
@@ -363,7 +393,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Find and click the close button on the tooltip
@@ -377,6 +407,10 @@ test.describe("Room grouping", () => {
 
       // Tooltip should be dismissed
       await expect(infoBar).not.toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Panel after tooltip is dismissed
       await expect(dialog).toHaveScreenshot([
@@ -414,7 +448,7 @@ test.describe("Room grouping", () => {
       await expect(allRoomsTag).toBeVisible();
 
       // Screenshot: Filter area with group tags row visible
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "group-tags-row-visible.png",
@@ -449,7 +483,7 @@ test.describe("Room grouping", () => {
         await secondTag.click();
 
         // Screenshot: Rooms filtered by selected group
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "rooms-filtered-by-group.png",
@@ -526,7 +560,7 @@ test.describe("Room grouping", () => {
       await page.getByTestId("create_group_tag").waitFor({ state: "visible" });
 
       // Screenshot: Tags row with Create group button (no groups)
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "create-group-button-in-tags.png",
@@ -561,7 +595,7 @@ test.describe("Room grouping", () => {
         await checkbox.click();
 
         // Screenshot: Header menu with group actions visible
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "header-menu-group-actions.png",
@@ -632,7 +666,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click "Create a new group" button
@@ -645,7 +679,7 @@ test.describe("Room grouping", () => {
       await expect(roomSelector).toBeVisible();
 
       // Screenshot: Room selector panel for creating a new group
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "room-selector-create-group.png",
@@ -677,7 +711,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click "Create a new group"
@@ -698,7 +732,7 @@ test.describe("Room grouping", () => {
         await expect(submitButton).toBeDisabled();
 
         // Screenshot: Room selector with disabled Select button
-        await expect(page).toHaveScreenshot([
+        await expectScreenshot(page, [
           "desktop",
           "room-grouping",
           "room-selector-select-disabled.png",
@@ -731,7 +765,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Toggle off grouping
@@ -742,6 +776,10 @@ test.describe("Room grouping", () => {
       // The "Create a new group" button should be disabled
       const createButton = dialog.getByTestId("create_new_group_button");
       await expect(createButton).toBeVisible();
+
+      // Park the cursor: the dialog opens under it, and a row left in its
+      // hover state is a one-icon difference against the baseline.
+      await page.mouse.move(0, 0);
 
       // Screenshot: Create new group button disabled when grouping is off
       await expect(dialog).toHaveScreenshot([
@@ -779,7 +817,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click the delete icon on the first group
@@ -789,8 +827,14 @@ test.describe("Room grouping", () => {
         await deleteIcon.click();
 
         // Delete confirmation dialog should appear
-        const confirmDialog = page.getByTestId("modal-dialog");
+        const confirmDialog = page
+          .getByTestId("modal-dialog")
+          .filter({ hasText: "Remove group" });
         await expect(confirmDialog).toBeVisible();
+
+        // Park the cursor: the dialog opens under it, and a row left in its
+        // hover state is a one-icon difference against the baseline.
+        await page.mouse.move(0, 0);
 
         // Screenshot: Delete group confirmation dialog
         await expect(confirmDialog).toHaveScreenshot([
@@ -826,7 +870,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click the delete icon on the first group
@@ -835,13 +879,21 @@ test.describe("Room grouping", () => {
       if (await deleteIcon.isVisible()) {
         await deleteIcon.click();
 
-        // Click Cancel in the confirmation dialog
-        const cancelButton = page.locator('button:has-text("Cancel")').last();
+        // Click Cancel in the delete confirmation dialog (scope to it so we
+        // don't match Cancel buttons in other mounted dialogs)
+        const confirmDialog = page
+          .getByTestId("modal-dialog")
+          .filter({ hasText: "Remove group" });
+        await expect(confirmDialog).toBeVisible();
+
+        const cancelButton = confirmDialog.getByRole("button", {
+          name: "Cancel",
+        });
         await expect(cancelButton).toBeVisible();
         await cancelButton.click();
 
         // The main dialog should still be visible (returned to groups panel)
-        const mainDialog = page.getByTestId("modal-dialog");
+        const mainDialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
         await expect(mainDialog).toBeVisible();
       }
     });
@@ -874,7 +926,7 @@ test.describe("Room grouping", () => {
       await expect(groupManagementButton).toBeVisible();
       await groupManagementButton.click();
 
-      const dialog = page.getByTestId("modal-dialog");
+      const dialog = page.getByTestId("modal-dialog").filter({ hasText: "Edit room groups" });
       await expect(dialog).toBeVisible();
 
       // Click on the group data area (name/icon) of the first group
@@ -887,7 +939,7 @@ test.describe("Room grouping", () => {
       await expect(roomSelector).toBeVisible();
 
       // Screenshot: Room list panel for editing group rooms
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "room-grouping",
         "edit-group-room-list.png",

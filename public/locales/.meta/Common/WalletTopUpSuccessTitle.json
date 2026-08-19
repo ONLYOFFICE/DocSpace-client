@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletTopUpSuccessTitle",
+  "content": "Wallet topped up",
+  "content_en_sha1_hash": "51e6fe04d32757cfcdced4a3aa3c554a8451b094",
+  "created_at": "2026-06-02T15:02:53.820Z",
+  "updated_at": "2026-08-13T14:37:21.814Z",
+  "comment": {
+    "text": "Title of a success card displayed after a user successfully adds funds to their wallet.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T15:03:21.179Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 213,
+      "context": "default:\n return {\n processingTitle: t(\"Common:WalletTopUpCallbackProcessingTitle\"),\n processingHint: t(\"Common:WalletTopUpCallbackProcessingHint\"),\n activateStepLabel: \"\",\n successTitle: t(\"Common:WalletTopUpSuccessTitle\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:WalletTopUpGoToWallet\"),\n redirectUrl: WALLET_REDIRECT_URL,\n };\n }",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

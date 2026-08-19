@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectCallbackProcessingTitle",
+  "content": "Processing your payment",
+  "content_en_sha1_hash": "7883e37eeca1fc3971dea18fa641932952c3b09b",
+  "created_at": "2026-07-27T13:07:08.124Z",
+  "updated_at": "2026-08-13T14:37:21.813Z",
+  "comment": {
+    "text": "A page title displayed during the payment processing stage of a DocsConnect transaction.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:36:36.783Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 163,
+      "context": "successButtonLabel: t(\"Common:GoToTariffPlan\"),\n redirectUrl: TARIFF_REDIRECT_URL,\n };\n case PaymentFlavor.DocsConnect:\n return {\n processingTitle: t(\"Common:DocsConnectCallbackProcessingTitle\"),\n processingHint: t(\"Common:DocsConnectCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:DocsConnectCallbackStepActivate\"),\n successTitle: t(\"Common:DocsConnectCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

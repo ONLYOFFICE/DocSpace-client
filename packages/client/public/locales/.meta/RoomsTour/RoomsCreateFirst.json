@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsCreateFirst",
+  "content": "Pick a type, invite the people you work with, and drop in your files. It takes a minute — and everything you have just seen starts working on your own documents.",
+  "content_en_sha1_hash": "4a1d577629127dca8986386876324faf649e1954",
+  "created_at": "2026-08-06T14:20:52.334Z",
+  "updated_at": "2026-08-07T15:05:26.433Z",
+  "comment": {
+    "text": "Body text for a step in the Rooms onboarding tour that explains how to create and start using a room.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:53:48.112Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/RoomsTour/tourSteps.ts",
+      "line_number": 268,
+      "context": "demoHooks &&\n (canCreate\n ? revealStep(\n EMPTY_SCREEN_CREATE_SELECTOR,\n t(\"RoomsTour:RoomsCreateFirstTitle\"),\n t(\"RoomsTour:RoomsCreateFirst\"),\n callbacks,\n LOG_LABEL,\n demoHooks,\n )\n : revealStep(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

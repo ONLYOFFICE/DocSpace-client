@@ -1,0 +1,163 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+.editLinkBodyContent {
+  padding: 20px 0 0;
+  margin-inline-end: -16px;
+  width: calc(100% + 16px);
+
+  .linkBlock {
+    padding: 0 16px 20px;
+
+    .linkText {
+      display: inline-flex;
+      margin-bottom: 8px;
+    }
+
+    .linkInput {
+      margin-bottom: 8px;
+      margin-top: 16px;
+      // !important overrides WebKit's -webkit-text-fill-color on disabled/read-only inputs.
+      -webkit-text-fill-color: $gray-text !important;
+      color: $gray-text;
+
+      :global(.dark) & {
+        // !important overrides WebKit's -webkit-text-fill-color on disabled/read-only inputs.
+        -webkit-text-fill-color: $gray-dark !important;
+        color: $gray-dark;
+      }
+    }
+  }
+
+  .toggleBlock {
+    padding: 0 16px 20px;
+    border-top: 1px solid $gray-light-mid;
+
+    :global(.dark) & {
+      border-top: 1px solid $gray-dark-strong;
+    }
+
+    .toggleHeader {
+      display: flex;
+      padding-top: 20px;
+      padding-bottom: 8px;
+      gap: 8px;
+      align-items: center;
+
+      .toggleWrapper {
+        margin-inline-start: auto;
+        align-self: center;
+        display: flex;
+        align-items: center;
+
+        .toggle {
+          position: static;
+          gap: 0;
+        }
+      }
+    }
+
+    .passwordBlock {
+      margin-top: 8px;
+    }
+
+    :global(.password-field-wrapper) {
+      width: 100%;
+    }
+  }
+
+  .toggleDescription {
+    color: $gray;
+  }
+
+  .toggleDescriptionExpired {
+    color: $light-error-status;
+
+    :global(.dark) & {
+      color: $dark-error-status;
+    }
+  }
+
+  .passwordBlock {
+    width: 100%;
+    display: flex;
+
+    .passwordInput {
+      width: 100%;
+    }
+
+    .generateIcon {
+      margin-block: 16px 0;
+      margin-inline: 8px 0;
+    }
+  }
+
+  :global(.edit-link-panel) {
+    :global(.scroll-body) {
+      // !important overrides the default padding-inline-end applied by the Scrollbar component.
+      padding-inline-end: 0 !important;
+    }
+  }
+
+  :global(.field-label-icon) {
+    display: none;
+  }
+
+  .passwordLinks {
+    display: flex;
+    gap: 12px;
+    margin-top: -8px;
+  }
+
+  .header {
+    padding: 0 16px;
+    border-bottom: 1px solid $gray-light-mid;
+
+    :global(.dark) & {
+      border-bottom: 1px solid $gray-dark-strong;
+    }
+
+    .heading {
+      font-weight: 700;
+      font-size: 18px;
+    }
+  }
+
+  .datePicker {
+    padding-top: 8px;
+  }
+}

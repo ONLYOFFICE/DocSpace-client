@@ -1,0 +1,35 @@
+{
+  "key_path": "NoUpcomingPaymentsDescription",
+  "content": "You don’t have any active subscriptions or scheduled recurring payments yet.",
+  "content_en_sha1_hash": "4ecc77233988562a726a26040523b1ca32bd9b62",
+  "created_at": "2026-06-25T11:54:53.928Z",
+  "updated_at": "2026-08-14T14:58:32.936Z",
+  "comment": {
+    "text": "Description text for an empty state view in the upcoming payments section, appearing when no active subscriptions or scheduled recurring payments are found.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T12:03:22.097Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/overview/sub-components/UpcomingPayments.tsx",
+      "line_number": 91,
+      "context": "<div className={styles.emptyContent}>\n <Text fontSize=\"12px\" fontWeight={600} className={styles.mutedTitle}>\n {t(\"NoUpcomingPayments\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.mutedTitle}>\n {t(\"NoUpcomingPaymentsDescription\")}\n </Text>\n </div>\n </div>\n ) : (\n <div className={styles.upcomingList}>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/sub-components/UpcomingPayments/index.tsx",
+      "line_number": 76,
+      "context": "const emptyView = (\n <EmptyView\n icon={isBase ? <NoSpendingIcon /> : <NoSpendingDarkIcon />}\n title={t(\"NoUpcomingPayments\")}\n description={t(\"NoUpcomingPaymentsDescription\")}\n options={null}\n />\n );\n \n return (",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

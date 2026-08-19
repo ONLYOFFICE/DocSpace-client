@@ -3,17 +3,18 @@
   "content": "Group created",
   "content_en_sha1_hash": "a72534ec04c811d9241605c84240805ba9206f26",
   "created_at": "2025-05-19T21:30:49.768Z",
-  "updated_at": "2025-05-24T02:21:36.278Z",
+  "updated_at": "2026-05-15T14:00:06.833Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating when a new group has been created, typically on a web interface. It appears in the UI, likely as part of a notification or confirmation dialog, to inform users about newly created groups. The goal is to provide feedback to users when their group is successfully created.",
+    "text": "This is a toast message indicating that a new group has been successfully created.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:00.945Z"
+    "updated_at": "2026-04-11T21:28:47.741Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
-      "line_number": 40,
-      "context": "return t(\"UserInvited\");\n case WebhookTriggers.UserUpdated:\n return t(\"UserUpdated\");\n case WebhookTriggers.UserDeleted:\n return t(\"UserDeleted\");\n case WebhookTriggers.GroupCreated:\n return t(\"GroupCreated\");\n case WebhookTriggers.GroupUpdated:\n return t(\"GroupUpdated\");\n case WebhookTriggers.GroupDeleted:\n return t(\"GroupDeleted\");",
+      "line_number": 50,
+      "context": "case WebhookTriggers.UserUpdated:\n return t(\"UserUpdated\");\n case WebhookTriggers.UserDeleted:\n return t(\"UserDeleted\");\n case WebhookTriggers.GroupCreated:\n return t(\"GroupCreated\");\n case WebhookTriggers.GroupUpdated:\n return t(\"GroupUpdated\");\n case WebhookTriggers.GroupDeleted:\n return t(\"GroupDeleted\");\n case WebhookTriggers.FileCreated:",
       "module": "/packages/client"
     }
   ],
@@ -148,23 +149,12 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කුழு සාදා ගන්නා ලදි' is too verbose and doesn't accurately convey the brevity of \"Group created\". It implies an ongoing action rather than a completed event.",
-          "suggestion": "කුழு නිර්මාණය කරන ලදි (Kulu nirmanaya karan ladi) - 'Group created' or කෙටිగా, 'කුழு' (Kulu) - 'Group' (context dependent)"
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'ගන්නා ලදි' ('ganna ladi') suggests an ongoing process. The translation should imply completion.",
-          "suggestion": "Using a more appropriate verb tense to indicate completion, like 'කරයි' (karayi) in certain contexts, could improve accuracy, but a simpler phrasing is preferable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -210,6 +200,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

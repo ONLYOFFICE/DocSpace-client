@@ -1,0 +1,350 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import { act, render } from "@testing-library/react";
+import { useEffect } from "react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+const captured = {
+  passphrase: null as Record<string, unknown> | null,
+  recovery: null as Record<string, unknown> | null,
+};
+
+vi.mock("@docspace/shared/dialogs/passphrase-modal", () => ({
+  PassphraseModal: (props: Record<string, unknown>) => {
+    captured.passphrase = props;
+    useEffect(() => () => {
+      captured.passphrase = null;
+    }, []);
+    return null;
+  },
+}));
+vi.mock("../RecoveryPhraseDisplayModal", () => ({
+  RecoveryPhraseDisplayModal: (props: Record<string, unknown>) => {
+    captured.recovery = props;
+    useEffect(() => () => {
+      captured.recovery = null;
+    }, []);
+    return null;
+  },
+}));
+
+vi.mock("@docspace/ui-kit/components/toast", () => ({
+  toastr: { success: vi.fn(), error: vi.fn(), warning: vi.fn() },
+}));
+
+vi.mock("@docspace/shared/services/encryption/identity", () => ({
+  generateIdentityKeyPair: vi.fn(),
+  serializeIdentity: vi.fn(),
+}));
+vi.mock("@docspace/shared/services/encryption/recovery", () => ({
+  generateRecoveryMnemonic: vi.fn(),
+}));
+vi.mock("@docspace/shared/services/encryption/apply-new-identity", () => ({
+  applyNewIdentity: vi.fn(),
+}));
+vi.mock("@docspace/shared/api/privacy", () => ({
+  setEncryptionKeys: vi.fn(),
+}));
+vi.mock("@docspace/shared/context/encryption", () => ({
+  useEncryption: () => ({ suspendAutoLock: () => () => {} }),
+}));
+
+import { toastr } from "@docspace/ui-kit/components/toast";
+import {
+  generateIdentityKeyPair,
+  serializeIdentity,
+} from "@docspace/shared/services/encryption/identity";
+import { generateRecoveryMnemonic } from "@docspace/shared/services/encryption/recovery";
+import { applyNewIdentity } from "@docspace/shared/services/encryption/apply-new-identity";
+import { setEncryptionKeys } from "@docspace/shared/api/privacy";
+
+import {
+  useGenerateKeyFlow,
+  type GenerateKeyFlow,
+} from "../useGenerateKeyFlow";
+
+let latest: GenerateKeyFlow;
+const Harness = (deps: Parameters<typeof useGenerateKeyFlow>[0]) => {
+  latest = useGenerateKeyFlow(deps);
+  return <>{latest.modals}</>;
+};
+
+const dummyKeyPair = {
+  publicKey: new Uint8Array(32),
+  privateKey: new Uint8Array(32),
+};
+
+const happyMocks = () => {
+  vi.mocked(generateIdentityKeyPair).mockResolvedValue(
+    // biome-ignore lint/suspicious/noExplicitAny: test mock
+    dummyKeyPair as any,
+  );
+  vi.mocked(generateRecoveryMnemonic).mockResolvedValue("twelve word phrase");
+  vi.mocked(serializeIdentity).mockResolvedValue({
+    publicKey: "pub-base64",
+    privateKeyEnc: "enc-base64",
+  });
+  vi.mocked(setEncryptionKeys).mockResolvedValue(undefined as never);
+};
+
+describe("useGenerateKeyFlow", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    captured.passphrase = null;
+    captured.recovery = null;
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  describe("entry branch", () => {
+    it("opens the passphrase modal directly regardless of existing keys (no gate)", async () => {
+      render(
+        <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+      expect(captured.passphrase).not.toBeNull();
+    });
+  });
+
+  describe("onPassphraseSubmit", () => {
+    it("toasts an error and does NOT generate keys when userId is undefined", async () => {
+      render(
+        <Harness userId={undefined} refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+
+      expect(toastr.error).toHaveBeenCalledTimes(1);
+      expect(generateIdentityKeyPair).not.toHaveBeenCalled();
+      expect(generateRecoveryMnemonic).not.toHaveBeenCalled();
+    });
+
+    it("advances to recovery-display on successful keypair generation", async () => {
+      happyMocks();
+      render(
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+
+      expect(generateIdentityKeyPair).toHaveBeenCalledTimes(1);
+      expect(generateRecoveryMnemonic).toHaveBeenCalledTimes(1);
+      expect(captured.recovery?.mnemonic).toBe("twelve word phrase");
+    });
+
+    it("toasts an error and resets state when keypair generation throws", async () => {
+      vi.mocked(generateIdentityKeyPair).mockRejectedValueOnce(
+        new Error("rng failure"),
+      );
+      render(
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+
+      expect(toastr.error).toHaveBeenCalledTimes(1);
+      expect(captured.recovery).toBeNull();
+    });
+  });
+
+  describe("onRecoveryConfirm", () => {
+    it("calls setEncryptionKeys with a fresh UUID and the serialized payload", async () => {
+      happyMocks();
+      const refresh = vi.fn().mockResolvedValue(undefined);
+      render(
+        <Harness userId="42" refreshKeysFromServer={refresh} />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+      await act(async () => {
+        await (captured.recovery!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(setEncryptionKeys).toHaveBeenCalledTimes(1);
+      expect(setEncryptionKeys).toHaveBeenCalledWith(
+        expect.objectContaining({
+          publicKey: "pub-base64",
+          privateKeyEnc: "enc-base64",
+          id: expect.stringMatching(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
+        }),
+      );
+    });
+
+    it("invokes serializeIdentity with the generated recovery mnemonic", async () => {
+      happyMocks();
+      render(
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+      await act(async () => {
+        await (captured.recovery!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(serializeIdentity).toHaveBeenCalledWith(
+        dummyKeyPair,
+        "secret",
+        { recoveryMnemonic: "twelve word phrase" },
+      );
+    });
+
+    it("applies the new identity AFTER the API write but BEFORE refresh", async () => {
+      happyMocks();
+      const callOrder: string[] = [];
+      vi.mocked(setEncryptionKeys).mockImplementationOnce((async () => {
+        callOrder.push("api");
+      }) as never);
+      vi.mocked(applyNewIdentity).mockImplementationOnce(async () => {
+        callOrder.push("apply");
+      });
+      const refresh = vi.fn().mockImplementation(async () => {
+        callOrder.push("refresh");
+      });
+
+      render(
+        <Harness userId="42" refreshKeysFromServer={refresh} />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+      await act(async () => {
+        await (captured.recovery!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(callOrder).toEqual(["api", "apply", "refresh"]);
+    });
+
+    it("registers INACTIVE (activate=false) when the account already has keys", async () => {
+      happyMocks();
+      render(
+        <Harness userId="42" hasExistingKeys refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+      await act(async () => {
+        await (captured.recovery!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(applyNewIdentity).toHaveBeenCalledWith(
+        expect.objectContaining({
+          userId: "42",
+          newIdentity: dummyKeyPair,
+          newPublicKeyB64: "pub-base64",
+          activate: false,
+        }),
+      );
+    });
+
+    it("activates (activate=true) in the zero-keys bootstrap case", async () => {
+      happyMocks();
+      render(
+        <Harness
+          userId="42"
+          hasExistingKeys={false}
+          refreshKeysFromServer={vi.fn()}
+        />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+      await act(async () => {
+        await (captured.recovery!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(applyNewIdentity).toHaveBeenCalledWith(
+        expect.objectContaining({ activate: true }),
+      );
+    });
+
+    it("clears state via reset() on API error so the user can retry", async () => {
+      happyMocks();
+      vi.mocked(setEncryptionKeys).mockRejectedValueOnce(new Error("500"));
+
+      render(
+        <Harness userId="42" refreshKeysFromServer={vi.fn()} />,
+      );
+      await act(async () => latest.request());
+      await act(async () => {
+        await (captured.passphrase!.onSubmit as (p: string) => Promise<void>)(
+          "secret",
+        );
+      });
+      await act(async () => {
+        await (captured.recovery!.onConfirm as () => Promise<void>)();
+      });
+
+      expect(toastr.error).toHaveBeenCalledTimes(1);
+      expect(captured.recovery).toBeNull();
+    });
+  });
+});

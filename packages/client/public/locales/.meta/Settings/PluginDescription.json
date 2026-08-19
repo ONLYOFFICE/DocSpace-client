@@ -1,0 +1,41 @@
+{
+  "key_path": "PluginDescription",
+  "content": "Extend your workspace functionality, connect third-party services or enhance the existing user experience.",
+  "content_en_sha1_hash": "29f04a02cc8dc7e10c6a0c0fd4cd9e9da73a7d06",
+  "created_at": "2026-08-12T11:00:46.172Z",
+  "updated_at": "2026-08-14T14:58:32.755Z",
+  "comment": {
+    "text": "Description text within a card explaining the purpose of the Plugin SDK; includes a `{productName}` variable representing the application name.",
+    "is_auto": true,
+    "updated_at": "2026-08-12T12:09:46.460Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 133,
+      "context": "linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"plugins-sdk\",\n title: t(\"WebPlugins:PluginSDK\"),\n description: t(\"Settings:PluginDescription\"),\n path: \"/developer-tools/plugin-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"webhooks\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 138,
+      "context": "linkTitle={t(\"Settings:StartEmbedding\")}\n />\n <Card\n icon={<PluginSvg />}\n title={t(\"WebPlugins:PluginSDK\")}\n description={t(\"Settings:PluginDescription\")}\n url=\"/developer-tools/plugin-sdk\"\n color={globalColors.secondGreen}\n linkTitle={t(\"Common:ReadInstructions\")}\n />\n <Card",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

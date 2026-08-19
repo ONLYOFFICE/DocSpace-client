@@ -1,0 +1,29 @@
+{
+  "key_path": "EditorsSubtitleStat",
+  "content": "Document editors with full permissions",
+  "content_en_sha1_hash": "41ad6ef725703d6567a1112aad1e177cc3ae2f5b",
+  "created_at": "2026-07-27T13:07:48.500Z",
+  "updated_at": "2026-08-10T12:23:10.566Z",
+  "comment": {
+    "text": "Subtitle for a usage statistics card in the DocsConnect tenant panel, providing context for the editor count metric.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:22:02.587Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 566,
+      "context": "</Text>\n </div>\n <div className={styles.twoCards}>\n <UsageBlock\n title={t(\"DocsConnect:Editors\")}\n subtitle={t(\"DocsConnect:EditorsSubtitleStat\")}\n usageLabel={t(\"DocsConnect:EditorUsage\")}\n usage={tenantInfo.stats.editor}\n limit={tenantInfo.usersLimit.edit}\n t={t}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

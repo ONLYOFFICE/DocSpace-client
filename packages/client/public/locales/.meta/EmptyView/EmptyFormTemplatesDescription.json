@@ -1,0 +1,29 @@
+{
+  "key_path": "EmptyFormTemplatesDescription",
+  "content": "You can create a template from a form space in the Form Spaces section",
+  "content_en_sha1_hash": "151965179042b9ec8dd272ee1bfabbe6e7243966",
+  "created_at": "2026-08-17T17:23:18.147Z",
+  "updated_at": "2026-08-17T17:32:40.528Z",
+  "comment": {
+    "text": "Instructional text shown in an empty state view within the Form Templates section, explaining how to create a new template.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:32:40.528Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 301,
+      "context": ".with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n isFormsScope\n ? t(\"EmptyView:EmptyFormTemplatesDescription\")\n : t(\"EmptyView:EmptyTemplatesDescription\"),\n )\n .with([FolderType.Forms, P._], () =>\n t(\"EmptyView:EmptyRootFormsDescription\"),\n )",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

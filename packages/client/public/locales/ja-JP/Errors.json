@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "反応なし",
-  "ErrorUnavailableText": "{{productName}}は現在、ご利用いただけません"
+  "ErrorUnavailableText": "ワークスペースは現在、ご利用いただけません"
 }

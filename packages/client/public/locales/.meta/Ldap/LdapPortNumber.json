@@ -3,16 +3,17 @@
   "content": "Port Number",
   "content_en_sha1_hash": "36469310e52904d723dedb225ab3d5675bf823c6",
   "created_at": "2025-05-19T21:30:54.250Z",
-  "updated_at": "2025-08-11T18:11:59.242Z",
+  "updated_at": "2026-05-15T14:00:06.849Z",
   "comment": {
-    "text": "The \"Port Number\" translation key is used to display a label for a field that requires an LDAP port number in a portal settings page. It appears as a required input field and is accompanied by error messaging and tooltips.",
+    "text": "This is the label for an input field where the user enters the port number for the LDAP server connection. It appears in the LDAP integration settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:06.115Z"
+    "updated_at": "2026-04-11T21:16:55.459Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
-      "line_number": 166,
+      "line_number": 175,
       "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.portNumber}\n labelText={t(\"LdapPortNumber\")}\n tooltipContent={t(\"LdapPortNumberTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"port_number_field_container\"\n >",
       "module": "/packages/client"
     }
@@ -27,13 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'رقم البوابة' (raqm al-bawwabah) is technically correct as 'gate number', it's not the most common or natural translation for 'Port Number' in a technical context like LDAP. A more accurate and standard translation would be 'رقم المنفذ' (raqm al-manfath).",
-          "suggestion": "Use 'رقم المنفذ' (raqm al-manfath) instead."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -111,25 +106,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ເລກປະຕູ\" literally translates to 'door number'. While it might be understood in context, 'Port Number' is better conveyed with a more specific term related to network ports.",
-          "suggestion": "Consider using \"ຕົວເລກຊອດໂປ໊ร์ດ\" (tua lek sod port) which more accurately translates to 'port number' or \"ເລກຊອດ\" (lek sod) for 'port number'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Latvian translation includes a colon (:) at the end, which might be unnecessary and visually disruptive depending on the context where this key is used. It's often better to omit the colon unless it's specifically required for the UI or application.",
-          "suggestion": "Consider removing the colon: 'Porta numurs'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -166,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,
@@ -189,13 +172,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Број порта' is understandable, a more accurate and idiomatic translation for 'Port Number' in this context (LDAP configuration) would be 'Порт број'. The Serbian language typically places the noun before the descriptor.",
-          "suggestion": "Порт број"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

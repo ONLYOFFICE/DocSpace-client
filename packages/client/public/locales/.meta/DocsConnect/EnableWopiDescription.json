@@ -1,0 +1,29 @@
+{
+  "key_path": "EnableWopiDescription",
+  "content": "Allow integrations with WOPI-compatible storage providers",
+  "content_en_sha1_hash": "ac5d6eee113ba3dd3944b8b518a7595c3cda3f45",
+  "created_at": "2026-07-27T13:07:48.536Z",
+  "updated_at": "2026-08-10T12:23:10.518Z",
+  "comment": {
+    "text": "Description text for a toggle switch in the Developer Tools settings, explaining the functionality of enabling WOPI-compatible storage integration.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:21:20.790Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 440,
+      "context": "}))\n }\n />\n </div>\n <Text fontSize=\"13px\" className={styles.toggleDescription}>\n {t(\"DocsConnect:EnableWopiDescription\")}\n </Text>\n </div>\n </div>\n \n <div className={styles.settingsGroup}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "RoomsCreateFirst": "Valitse tyyppi, kutsu ihmiset, joiden kanssa työskentelet, ja pudota tiedostosi sisään. Se vie minuutin — ja kaikki juuri näkemäsi alkaa toimia omilla asiakirjoillasi.",
+  "RoomsCreateFirstTitle": "Tee siitä nyt omasi",
+  "RoomsEmpty": "Juuri näkemäsi huoneet olivat esikatselu. Huoneet, joihin joku kutsuu sinut, ilmestyvät tähän luetteloon, ja kaikki näytetty toimii niissä samalla tavalla.",
+  "RoomsEmptyTitle": "Luettelosi on toistaiseksi tyhjä",
+  "RoomsGroups": "Järjestä huoneet tiettyjen ominaisuuksien mukaan löytääksesi nopeasti tarvitsemasi. Luo ryhmiä ja vaihda niiden välillä heti luettelon yläpuolella.",
+  "RoomsGroupsTitle": "Ryhmittele huoneesi",
+  "RoomsMembers": "Jokaisella huoneella on jäsenluettelonsa tietopaneelissa. Lisää työtilan yhteystietoja ja määritä jokaiselle jäsenelle rooli — tiedostojen katselusta koko huoneen hallintaan.",
+  "RoomsMembersTitle": "Työskennelkää yhdessä",
+  "RoomsPlacesArchive": "{{archive}} — huoneet, joissa et enää työskentele, palautettavissa milloin tahansa.",
+  "RoomsPlacesFiles": "{{recent}}, {{favorites}} ja {{trash}} kokoavat tiedostot huoneistasi: äskettäin avatut, tähdellä merkityt ja poistetut.",
+  "RoomsPlacesTemplates": "{{templates}} — huonemallisi.",
+  "RoomsPlacesTitle": "Kaikki paikallaan",
+  "RoomsTemplates": "Tee mistä tahansa huoneesta malli — sen asetukset, rakenne ja tiedostot tallentuvat. Luo siitä uusi huone yhdellä napsautuksella, jäljelle jää vain jäsenten lisääminen.",
+  "RoomsTemplatesTitle": "Käytä uudelleen sitä, mikä toimii",
+  "RoomsTypes": "{{collaboration}} tiimityöhön, {{vdr}} turvalliseen tiedostojen jakamiseen, {{publicRoom}} ulkoiseen käyttöön, {{custom}} omiin skenaarioihisi.",
+  "RoomsTypesTitle": "Huone jokaiseen tehtävään"
+}

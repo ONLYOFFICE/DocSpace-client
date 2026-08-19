@@ -1,0 +1,29 @@
+{
+  "key_path": "TariffPlan",
+  "content": "Tariff plan",
+  "content_en_sha1_hash": "aeb383dc7ea42f058365530cf364e14c91618eda",
+  "created_at": "2026-05-25T18:26:14.961Z",
+  "updated_at": "2026-08-13T14:37:21.758Z",
+  "comment": {
+    "text": "Menu item label in the portal settings payments section, containing the dynamic variable `productName`.",
+    "is_auto": true,
+    "updated_at": "2026-05-25T18:27:00.575Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
+      "line_number": 55,
+      "context": "import styles from \"./BillingHeader.module.scss\";\n \n const getTitle = (pathname: string, t: (key: string) => string): string => {\n if (pathname.includes(\"/billing/wallet\")) return t(\"Common:Wallet\");\n if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))\n return t(\"Common:AIFeatures\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

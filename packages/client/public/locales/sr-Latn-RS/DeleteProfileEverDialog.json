@@ -1,6 +1,6 @@
 {
-  "ActionCannotBeUndone": "Izabrani onemogućeni korisnici će biti uklonjeni iz {{productName}}-a. Ova radnja se ne može opozvati.",
-  "ActionCannotBeUndoneGuests": "Izabrani onemogućeni gosti biće uklonjeni iz {{productName}}. Ova radnja se ne može poništiti.",
+  "ActionCannotBeUndoneGuests": "Izabrani onemogućeni gosti biće uklonjeni iz radnog prostora. Ova radnja se ne može poništiti.",
+  "ActionCannotBeUndoneUsers": "Izabrani onemogućeni korisnici će biti uklonjeni iz radnog prostora. Ova radnja se ne može opozvati.",
   "CannotReassignFiles": "Ako obrišete više korisnika odjednom, ne možete da dodelite njihove datoteke drugim korisnicima.",
   "DeleteGroupGuestsSuccessMessage": "Gosti su uspešno obrisani.",
   "DeleteGroupUsersSuccessMessage": "Korisnici su uspešno obrisani.",
@@ -12,7 +12,7 @@
   "DeleteUser": "Obriši korisnika",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> će biti obrisan. Ova radnja se ne može opozvati.",
   "DeletingUsers": "Brisanje korisnika",
-  "PersonalDataDeletionInfo": "Lični podaci, sve lične datoteke i fascikle u odeljcima {{sectionNameFirst}} i {{sectionNameSecond}}* izabranih korisnika biće trajno izbrisani. Datoteke i direktorijumi izabranih korisnika koji se čuvaju u zajedničkim odeljcima* kao što su sobe ostaće u {{productName}}.",
+  "PersonalDataDeletionInfo": "Lični podaci, sve lične datoteke i fascikle u odeljcima {{sectionNameFirst}} i {{sectionNameSecond}}* izabranih korisnika biće trajno izbrisani. Datoteke i direktorijumi izabranih korisnika koji se čuvaju u zajedničkim odeljcima* kao što su sobe ostaće u radnom prostoru.",
   "PleaseNote": "Molim obratite pažnju:",
   "ReassignDataToAnotherUser": "Ponovo dodeli podatke drugom korisniku",
   "SuccessfullyDeleteGuestInfoMessage": "Gost je uspešno obrisan",

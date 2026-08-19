@@ -1,0 +1,29 @@
+{
+  "key_path": "MinusCount",
+  "content": "−{{count}}",
+  "content_en_sha1_hash": "c66c325e3a16bcfe20d6b246dbcfd50d56c1b5f2",
+  "created_at": "2026-07-27T13:07:48.525Z",
+  "updated_at": "2026-08-12T14:02:21.320Z",
+  "comment": {
+    "text": "A value in a summary row within the subscription panel indicating the reduction in user count, where {{count}} represents the numeric difference.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T14:12:23.393Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/BuyPlanPanel/index.tsx",
+      "line_number": 996,
+      "context": ")\n : null}\n {usersChanged && users < currentUsers\n ? summaryRow(\n t(\"DocsConnect:ReducedUsers\"),\n t(\"DocsConnect:MinusCount\", {\n count: currentUsers - users,\n }),\n )\n : null}\n {summaryRow(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

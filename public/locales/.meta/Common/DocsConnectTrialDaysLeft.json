@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsConnectTrialDaysLeft",
+  "content": "{{count}} Free days left",
+  "content_en_sha1_hash": "00a662738fd8c9e8f2a747858170f89777247fd7",
+  "created_at": "2026-07-27T13:07:08.267Z",
+  "updated_at": "2026-08-05T16:32:00.368Z",
+  "comment": {
+    "text": "A text label indicating the remaining number of free days in a trial period, where {{count}} represents the numeric value.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:33:13.795Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 550,
+      "context": "{t(\"Upgrade\")}\n </Link>\n </>\n );\n } else if (isTrial) {\n docsConnectPrice = t(\"DocsConnectTrialDaysLeft\", {\n count: trialDaysLeft,\n });\n } else if (deactivated) {\n docsConnectPrice = t(\"SubscriptionDeactivatedNonPayment\");\n } else if (canceled) {",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

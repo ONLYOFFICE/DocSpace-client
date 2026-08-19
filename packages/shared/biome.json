@@ -1,5 +1,9 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
+  "plugins": [
+    "../shared/biome-plugins/no-dynamic-i18n-key.grit",
+    "../shared/biome-plugins/no-constants-via-i18n.grit"
+  ],
   "formatter": {
     "enabled": false
   },
@@ -65,8 +69,6 @@
         "useHookAtTopLevel": "error"
       },
       "nursery": {
-        "noDeprecatedImports": "error",
-        "noImportCycles": "error",
         "noMisusedPromises": "error"
       },
       "style": {
@@ -107,7 +109,9 @@
         "useGetterReturn": "off",
         "useNamespaceKeyword": "error",
         "noConsole": "off",
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noDeprecatedImports": "error",
+        "noImportCycles": "error"
       },
       "security": {
         "noDangerouslySetInnerHtml": "error",
@@ -123,5 +127,20 @@
         "noStaticElementInteractions": "off"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "**/services/encryption/**",
+        "**/services/private-room/**"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "error"
+          }
+        }
+      }
+    }
+  ]
 }

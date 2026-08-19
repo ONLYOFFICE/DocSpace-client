@@ -5,7 +5,7 @@
   "ErrorNotAllowedOption": "您的定价方案不支持该选项",
   "ErrorUserNotFound": "暂无符合条件的用户",
   "InvalidUsernameOrPassword": "用户名或密码无效。",
-  "LoginWithAccountNotFound": "找不到相关的第三方帐户。  您需要先在资料编辑页面连接您的社交网络帐户。",
+  "LoginWithAccountNotFound": "找不到相关的第三方帐户。 您需要先在资料编辑页面连接您的社交网络帐户。",
   "LoginWithBruteForce": "授权暂时被阻止",
   "LoginWithBruteForceCaptcha": "我不是机器人",
   "OAuthApplicationDisabled": "该应用已禁用",

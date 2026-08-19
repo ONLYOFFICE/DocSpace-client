@@ -1,0 +1,29 @@
+{
+  "key_path": "ConnectToDocs",
+  "content": "Connect to {{organizationName}} {{editorsName}}",
+  "content_en_sha1_hash": "a1b94340bf5a8724fe8a0b372403b7c84c1f270f",
+  "created_at": "2026-07-30T16:14:09.537Z",
+  "updated_at": "2026-08-10T12:23:10.513Z",
+  "comment": {
+    "text": "Button label used to initiate a connection, containing variables for the organization name and the editors' product name.",
+    "is_auto": true,
+    "updated_at": "2026-07-30T16:19:44.925Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 330,
+      "context": "</div>\n <div className={styles.addRuleAction}>\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"DocsConnect:ConnectToDocs\", {\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n })}\n isDisabled={isBusy || isResetting || !canApplyToPortal}\n onClick={() => setApplyDialogVisible(true)}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

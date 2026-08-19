@@ -3,23 +3,24 @@
   "content": "Edit template",
   "content_en_sha1_hash": "8ebcef59970bb87d7ed8dd90149d3a44e736afba",
   "created_at": "2025-05-19T21:30:55.523Z",
-  "updated_at": "2026-03-31T15:18:45.977Z",
+  "updated_at": "2026-08-17T17:23:21.701Z",
   "comment": {
-    "text": "This translation key is used to display \"Edit template\" in a specific dialog context. It appears as part of the header of a Create/Edit Room Dialog and serves to indicate that editing a template option is available.",
+    "text": "This is a dialog title and a button label. It appears when editing a template, either as the title of the editing dialog or as an option in a context menu.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:54.537Z"
+    "updated_at": "2026-04-11T21:09:54.435Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/EditRoomDialog.js",
-      "line_number": 310,
+      "line_number": 319,
       "context": "</ModalDialog.Container>\n )}\n \n <ModalDialog.Header>\n {isTemplate\n ? t(\"Files:EditTemplate\")\n : t(\"CreateEditRoomDialog:RoomEditing\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetRoomParams",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2236,
-      "context": "disabled: false,\n },\n {\n id: \"option_edit-room\",\n key: \"edit-template\",\n label: t(\"EditTemplate\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onEditRoomTemplate(item),\n disabled: !isTemplateOwner,\n },\n {",
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 558,
+      "context": "disabled: false,\n },\n {\n id: \"option_edit-room\",\n key: \"edit-template\",\n label: t(\"EditTemplate\"),\n icon: SettingsReactSvgUrl,\n onClick: () => onEditRoomTemplate(item),\n disabled: !isTemplateOwner,\n },\n {",
       "module": "/packages/client"
     }
   ],
@@ -135,13 +136,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Edite os templates' is too literal and doesn't sound natural in Portuguese. 'Edite' implies a direct instruction, which isn't ideal for a UI element label. A better translation would be more descriptive.",
-          "suggestion": "Editar modelo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -160,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-06-02T14:55:40.201651Z"
     },
     "si": {
       "ai_translated": false,

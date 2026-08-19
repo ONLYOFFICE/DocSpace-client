@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "Nämä ovat tuotteitamme, ja jokainen niistä on tehty ottamaan hoitaakseen erilaisen osan työstäsi — asiakirjat, yhteistyön, tiedonkeruun ja tekoälyavun. Avaa mikä tahansa niistä, niin saat lyhyen kierroksen myös siitä osiosta.",
+  "DashboardAppsTitle": "Kaikki, minkä kanssa voit työskennellä",
+  "DashboardCreate": "Luo ensimmäinen asiakirjasi tässä — valitse tyyppi ja ala kirjoittaa. Se tallentuu osioon {{files}}, josta löydät sen milloin tahansa.",
+  "DashboardCreateTitle": "Luo jotakin nyt",
+  "DashboardDevTools": "Rakennatko jotain omaa? Kaikki täällä on juuri sitä varten: API työtilan ohjaamiseen koodistasi, SDK editorien upottamiseen omaan sovellukseesi, lisäosat, webhookit ja avaimet. Mitään näistä et tarvitse {{organizationName}} {{productName}}-palvelun päivittäiseen käyttöön.",
+  "DashboardDevToolsTitle": "Kehittäjille",
+  "DashboardIntegrations": "Työskenteletkö jo toisessa alustassa? Yhdistä se tästä, niin juuri näkemäsi editorit ovat käytettävissä suoraan niissä työkaluissa, joita tiimisi jo käyttää – ilman räätälöityä koodia ja ilman tietojen siirtoa.",
+  "DashboardIntegrationsTitle": "Työskentely muiden alustojen kanssa",
+  "DashboardOverview": "Tämä sivu on aina yhden klikkauksen päässä — avaa {{overview}} sivupalkista aina, kun haluat palata tänne.",
+  "DashboardOverviewTitle": "Tänne palaaminen",
+  "DashboardProfile": "Työtilan nimi ja lyhyt yhteenveto profiilistasi: nimi, sähköposti ja salasana. Täältä voit nimetä työtilan uudelleen tai vaihtaa salasanasi.",
+  "DashboardProfileTitle": "Profiilisi tiedot",
+  "WelcomeDashboardSubtitle": "Kaikki alkaa tältä sivulta",
+  "WelcomeDashboardTitle": "Tervetuloa palveluun {{organizationName}} {{productName}}",
+  "WelcomeDescription": "Luo asiakirjoja, tee yhteistyötä huoneissa, kerää tietoa lomakkeilla ja anna tekoälyn hoitaa lukeminen — kaikki yhdestä paikasta. Käy lyhyellä kierroksella, niin näytämme sinulle kaiken.",
+  "WelcomeLater": "Ehkä myöhemmin"
+}

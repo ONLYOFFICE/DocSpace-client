@@ -1,0 +1,29 @@
+{
+  "key_path": "AgentFindTitle",
+  "content": "Picking one out later",
+  "content_en_sha1_hash": "104bbef581b53e281d9730e47674840c3b0b7405",
+  "created_at": "2026-08-06T14:20:56.248Z",
+  "updated_at": "2026-08-07T15:05:26.409Z",
+  "comment": {
+    "text": "Title for an onboarding tour step that highlights the search and filter bar, informing users they can refine their selection later.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:25:34.980Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
+      "line_number": 250,
+      "context": "// whole filter bar around them.\n showFilter &&\n elementGroupStep(\n SEARCH_SELECTOR,\n [SEARCH_SELECTOR, FILTER_BUTTON_SELECTOR],\n t(\"AiAgentsTour:AgentFindTitle\"),\n t(\"AiAgentsTour:AgentFind\"),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

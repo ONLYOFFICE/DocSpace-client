@@ -1,8 +1,9 @@
 {
   "ChangeData": "Promeni podatke i lozinku",
-  "ClickButtonBelow": "Ako želite da se prijavite pomoću svoje e-pošte, postavite sopstvenu lozinku. <br /> Kada budete spremni, kliknite na dugme ispod.",
-  "ContinueToProduct": "Nastavi na {{productName}}",
+  "ClickButtonBelow": "Ako želite da se prijavite koristeći svoju e-poštu, postavite sopstvenu lozinku. <br/> Kada budete spremni, kliknite na dugme ispod.",
+  "ContinueToProduct": "Nastavi na radni prostor",
   "GeneratedPassword": "Generisana lozinka",
-  "ProductNameDetail": "Naziv {{productName}}",
-  "ReviewAccountDetails": "Molimo vas da odvojite trenutak da pregledate detalje svog naloga:"
+  "ProductNameDetail": "Naziv radnog prostora",
+  "ReviewAccountDetails": "Molimo vas da odvojite trenutak da pregledate detalje svog naloga:",
+  "YourProfileDetails": "Detalji vašeg profila"
 }

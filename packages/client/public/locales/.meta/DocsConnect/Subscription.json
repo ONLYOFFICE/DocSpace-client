@@ -1,0 +1,29 @@
+{
+  "key_path": "Subscription",
+  "content": "Subscription",
+  "content_en_sha1_hash": "8fde48f31aff21f9652066ed6732f7e7dbae712e",
+  "created_at": "2026-07-27T13:07:48.482Z",
+  "updated_at": "2026-08-10T12:23:10.557Z",
+  "comment": {
+    "text": "Label in the DocsConnect statistics view within Portal Settings, used to identify the current subscription plan or status.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:55:48.019Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
+      "line_number": 436,
+      "context": "{t(\"Common:Inactive\")}\n </span>\n </div>\n ) : (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"DocsConnect:Subscription\")}{\" \"}\n <Text\n as=\"span\"\n fontSize=\"16px\"\n fontWeight={400}\n className={styles.tariffNote}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

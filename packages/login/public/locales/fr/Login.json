@@ -1,9 +1,8 @@
 {
   "ChangePasswordSuccess": "Le mot de passe a bien été modifié",
-  "CodeTitle": "Le code vous a été envoyé par e-mail",
   "ConfirmEmailChange": "Confirmer le changement de votre adresse e-mail",
-  "ConfirmEmailChangeText": "Vous avez demandé à modifier l'adresse e-mail de votre compte de {{productName}}. Pour continuer, veuillez vous connecter avec vos identifiants actuels.",
-  "ErrorInvalidText": "En 10 secondes, vous serez redirigé vers <1>{{productName}}</1>",
+  "ConfirmEmailChangeText": "Vous avez demandé à modifier l'adresse e-mail de votre compte de {{organizationName}} {{productName}}. Pour continuer, veuillez vous connecter avec vos identifiants actuels.",
+  "ErrorInvalidText": "En 10 secondes, vous serez redirigé vers <1>l'espace de travail</1>",
   "ForgotPassword": "Mot de passe oublié ?",
   "LDAPUsernamePlaceholder": "Nom d'utilisateur de {{ldap_domain}}",
   "MessageAuthorize": "Veuillez vous connecter pour continuer",
@@ -12,14 +11,14 @@
   "PasswordRecoveryTitle": "Récupération du mot de passe",
   "RecoverAccess": "Récupérer l'accès",
   "RecoverContactEmailPlaceholder": "E-mail de contact",
-  "RecoverTextBody": "Si vous ne pouvez pas vous connecter avec votre compte existant ou que vous souhaitez en créer un nouveau, merci de contacter l'administrateur du portail.",
+  "RecoverTextBody": "Si vous ne pouvez pas vous connecter avec votre compte existant ou que vous souhaitez en créer un nouveau, merci de contacter le super-administrateur.",
   "Register": "Inscription",
   "RegisterTextBodyAfterDomainsList": "Pour vous inscrire, merci de saisir votre adresse e-mail et de cliquer sur Envoyer une demande. Un message avec un lien pour activer votre compte sera envoyé à cette adresse.",
-  "RegisterTextBodyBeforeDomainsList": "L'inscription est accessible aux utilisateurs avec une adresse de messagerie à ",
+  "RegisterTextBodyBeforeDomainsList": "L'inscription est accessible aux utilisateurs avec une adresse de messagerie à",
   "RegisterTitle": "Demande d'inscription",
   "RegistrationEmailWatermark": "Adresse de courriel",
   "RememberHelper": "Par défaut, la durée de validité de la session est de 20 minutes. Cochez cette option pour la définir sur 1 an. Vous pouvez définir votre propre valeur en accédant aux paramètres.",
   "SignInLDAP": "Se connecter à : {{ldap_domain}}",
   "SignInLdapHelper": "Utiliser les informations d'identification du domaine de l'entreprise",
-  "UserIsAlreadyRegistered": "L'utilisateur <1>{{email}}</1> est déjà enregistré dans ce {{productName}}, saisissez votre mot de passe ou revenez en arrière pour continuer avec un autre e-mail."
+  "UserIsAlreadyRegistered": "L'utilisateur <1>{{email}}</1> est déjà enregistré dans cet espace de travail, saisissez votre mot de passe ou revenez en arrière pour continuer avec un autre e-mail."
 }

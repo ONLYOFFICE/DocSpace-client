@@ -3,22 +3,23 @@
   "content": "Permissions",
   "content_en_sha1_hash": "d06d55570938d12f87db3bf2b48caa9de22d9c67",
   "created_at": "2025-05-19T21:30:47.333Z",
-  "updated_at": "2025-11-03T12:10:35.221Z",
+  "updated_at": "2026-05-28T15:46:18.595Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Permissions\" in a UI context, specifically in a Create API Key Dialog. It is part of a larger dialog that allows users to manage API keys, and this translation key enables the user to select specific permissions for their API key.",
+    "text": "This is a tab label and table header for a section displaying access rights.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:03.267Z"
+    "updated_at": "2026-04-11T20:46:28.638Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 392,
+      "line_number": 402,
       "context": "testId=\"secret_key_name_input\"\n />\n </div>\n <div className=\"api-key_name\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Permissions\")}\n </Text>\n <Tabs\n hotkeysId=\"apiKeys\"\n type={TabsTypes.Secondary}\n items={tabsItems}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/TableView/TableHeader.tsx",
-      "line_number": 83,
+      "line_number": 92,
       "context": "enable: true,\n resizable: true,\n },\n {\n key: \"Permissions\",\n title: t(\"Common:Permissions\"),\n enable: true,\n resizable: true,\n },\n {\n key: \"State\",",
       "module": "/packages/client"
     }
@@ -154,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -177,13 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Дозволе\" is not the most accurate translation of \"Permissions\". While it technically means \"Permits\" or \"Allowances,\" it doesn't fully capture the meaning of 'Permissions' which implies rights or access controls.",
-          "suggestion": "Consider using \"Права\" (Prava) which directly translates to 'Rights' or \"Дозволе за приступ\" (Dozvole za pristup) which means 'Permissions for access'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -211,6 +206,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

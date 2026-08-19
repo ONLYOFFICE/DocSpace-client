@@ -1,0 +1,35 @@
+{
+  "key_path": "DocsConnectTrialToggleDisabled",
+  "content": "Free trial cannot be turned off. It will expire automatically on {{date}}.",
+  "content_en_sha1_hash": "13daa32b577d4076a28b419e65b9ba69e32967bc",
+  "created_at": "2026-07-27T13:07:08.288Z",
+  "updated_at": "2026-08-05T16:32:00.368Z",
+  "comment": {
+    "text": "Tooltip for the DocsConnect trial toggle that appears when a free trial is active, informing the user of the automatic expiration date in {{date}}.",
+    "is_auto": true,
+    "updated_at": "2026-07-27T13:32:41.238Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/docs-connect/DocsConnectPage.tsx",
+      "line_number": 175,
+      "context": "const scheduledChangeTitle = getScheduledChangeTitle();\n \n const trialActive = !isPaid && !expired;\n const trialToggleTooltip = trialActive\n ? t(\"Common:DocsConnectTrialToggleDisabled\", {\n date: formatDateLocalized(endDate, \"DATE_MED\", { locale: language }),\n })\n : undefined;\n \n const contextMenuItems = scheduledChange",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 466,
+      "context": "});\n const deactivated = docsConnectState?.deactivated ?? false;\n const canceled = docsConnectState?.canceled ?? false;\n \n const trialToggleTooltip = trialActive\n ? t(\"DocsConnectTrialToggleDisabled\", {\n date: formatDateLocalized(\n docsConnectState?.trialEndDate,\n \"DATE_MED\",\n { locale: language },\n ),",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

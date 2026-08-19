@@ -1,0 +1,29 @@
+{
+  "key_path": "AiRoomWhatCanIAskPrompt",
+  "content": "Explain what you can help me with here, based on your instructions and the documents available to you, and give a few concrete examples.",
+  "content_en_sha1_hash": "a2ae0de343191618a61d4a7f50cb4588a4e87ebe",
+  "created_at": "2026-08-04T09:58:55.108Z",
+  "updated_at": "2026-08-05T18:24:03.449Z",
+  "comment": {
+    "text": "Description text for an AI suggestion item in the AiRoom that explains how to interact with the AI using available documents and instructions.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:24:03.449Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 573,
+      "context": "],\n \n aiRoom: [\n {\n name: t(\"AiSuggestions:AiRoomWhatCanIAsk\"),\n prompt: t(\"AiSuggestions:AiRoomWhatCanIAskPrompt\"),\n },\n {\n name: t(\"AiSuggestions:AiRoomSummarizeTheKnowledgeBase\"),\n prompt: t(\"AiSuggestions:AiRoomSummarizeTheKnowledgeBasePrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

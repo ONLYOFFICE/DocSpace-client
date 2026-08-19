@@ -1,14 +1,13 @@
 {
   "AppointAdmin": "تعيين المسؤولين",
-  "BackupPortal": "بيانات {{productName}} الاحتياطية",
-  "ChangeInstruction": "لتغيير مالك {{productName}}، يرجى اختيار اسم المالك الجديد أدناه.",
-  "ChangeOwner": "تغيير مالك {{productName}}",
+  "BackupPortal": "النسخ الاحتياطي لبيانات مساحة العمل",
+  "ChangeInstruction": "لتغيير المالك، يرجى اختيار اسم المالك الجديد أدناه.",
+  "ChangeOwner": "تغيير المالك",
   "ChangeUser": "تغيير المستخدم",
-  "DeactivateOrDeletePortal": "قم بإلغاء تنشيط {{productName}} أو حذفه",
   "DoTheSame": "افعل نفس الشيء مثل المسؤولين",
-  "ManagePortal": "إدارة تكوين {{productName}}",
+  "ManagePortal": "إدارة تكوين مساحة العمل",
   "ManageUser": "إدارة حسابات المستخدمين",
-  "NewPortalOwner": "مالك {{productName}} جديد",
-  "PortalOwnerCan": "يمكن لمالك {{productName}}:",
+  "NewPortalOwner": "مالك مساحة العمل الجديد",
+  "PortalOwnerCan": "يمكن لمالك مساحة العمل:",
   "SetAccessRights": "تعيين امكانيات الوصول"
 }

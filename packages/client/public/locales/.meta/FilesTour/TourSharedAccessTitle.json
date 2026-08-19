@@ -1,0 +1,29 @@
+{
+  "key_path": "TourSharedAccessTitle",
+  "content": "Who shared it, and what you can do",
+  "content_en_sha1_hash": "b890036ef8f49a05e160135b79316280214d79fc",
+  "created_at": "2026-08-06T14:20:53.794Z",
+  "updated_at": "2026-08-07T15:05:26.423Z",
+  "comment": {
+    "text": "Tooltip title appearing during the Files tour to introduce information regarding file ownership and permission levels within the table columns.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:31:41.786Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
+      "line_number": 348,
+      "context": "// first row's values, so what the tooltip talks about is what is lit up.\n hasItems &&\n elementGroupStep(\n TABLE_HEADER_SELECTOR,\n SHARED_COLUMN_SELECTORS,\n t(\"FilesTour:TourSharedAccessTitle\"),\n t(\"FilesTour:TourSharedAccess\", {\n sharedBy: t(\"Common:SharedBy\"),\n accessLevel: t(\"Common:AccessLevel\"),\n }),\n callbacks,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

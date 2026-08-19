@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "If you have problems accessing this {{productName}}, please contact the administrator.",
-  "ContactAdministrator": "Contact the {{productName}} administrator"
+  "AccessingProblemContact": "If you have problems accessing this workspace, please contact the administrator.",
+  "ContactAdministrator": "Contact the Full admin"
 }

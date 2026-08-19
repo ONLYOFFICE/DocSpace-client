@@ -1,0 +1,29 @@
+{
+  "key_path": "RoomsTemplatesSaveAsTemplatePrompt",
+  "content": "Save as a template across available room templates in a clear, reusable structure. If this information is not provided, ask me for the template name, intended use case, and changes to apply.",
+  "content_en_sha1_hash": "714a64f3dfa7c12da11d910470d587e4df1597d5",
+  "created_at": "2026-08-04T09:58:55.218Z",
+  "updated_at": "2026-08-05T16:45:36.471Z",
+  "comment": {
+    "text": "An instruction prompt for the AI assistant that defines how to save room templates and specifies which details to request from the user if information is missing.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T16:45:36.471Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 519,
+      "context": "prompt: t(\"AiSuggestions:RoomsTemplatesUpdateTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n {\n name: t(\"AiSuggestions:RoomsTemplatesSaveAsTemplate\"),\n prompt: t(\"AiSuggestions:RoomsTemplatesSaveAsTemplatePrompt\"),\n requires: \"roomAdmin\",\n },\n ],\n \n // +",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

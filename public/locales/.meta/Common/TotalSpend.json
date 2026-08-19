@@ -1,0 +1,29 @@
+{
+  "key_path": "TotalSpend",
+  "content": "Total spend",
+  "content_en_sha1_hash": "912c2eb1c0163548f13aebeb35f955e65dfa465d",
+  "created_at": "2026-06-25T11:54:59.309Z",
+  "updated_at": "2026-08-17T17:23:21.866Z",
+  "comment": {
+    "text": "Label in the billing usage summary card that precedes a formatted monetary value.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T11:58:34.317Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/usage/index.tsx",
+      "line_number": 326,
+      "context": "</div>\n ) : null}\n </div>\n \n <div className={styles.totalCard}>\n <Text className={styles.totalLabel}>{t(\"TotalSpend\")}</Text>\n {isLoading ? (\n <RectangleSkeleton width=\"120px\" height=\"24px\" borderRadius=\"3px\" />\n ) : (\n <SpendAmount\n amount={totalSpend}",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

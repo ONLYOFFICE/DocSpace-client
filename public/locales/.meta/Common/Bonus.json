@@ -3,40 +3,47 @@
   "content": "Bonus",
   "content_en_sha1_hash": "4d963cfab70d8c850b1221649bcc7b4d96d558d3",
   "created_at": "2025-05-19T21:30:43.309Z",
-  "updated_at": "2026-03-26T08:26:57.935Z",
+  "updated_at": "2026-08-14T14:58:32.630Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Bonus\" in various parts of the UI, such as article titles and settings pages. It appears in interactive elements like buttons and dialogues, indicating a reward or special feature within the application.",
+    "text": "This is a label for a menu item or section title, referring to a bonus or reward feature within the application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:12.495Z"
+    "updated_at": "2026-04-11T20:58:13.395Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/Body/BonusItem.js",
-      "line_number": 56,
+      "line_number": 65,
       "context": "navigate(bonusUrl);\n toggleArticleOpen();\n }, []);\n \n const title = t(\"Common:Bonus\");\n \n return (\n <ArticleItem\n key=\"bonus\"\n text={title}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
+      "line_number": 134,
+      "context": "return t(\"Settings:AISettings\");\n case \"PortalDeletion\":\n return t(\"Settings:PortalDeletion\");\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n default:\n return tKey;\n }\n };",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 232,
-      "context": "return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
+      "line_number": 235,
+      "context": "return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 692,
+      "line_number": 654,
       "context": "{\n id: \"portal-settings_catalog-bonus\",\n key: \"11\",\n type: PageType.bonus,\n link: \"bonus\",\n tKey: \"Common:Bonus\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-bonus\",\n key: \"11-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/components/article/index.tsx",
-      "line_number": 133,
+      "line_number": 142,
       "context": "withAnimation\n />\n ) : (\n <ArticleItem\n key=\"bonus\"\n text={t(\"Common:Bonus\")}\n iconNode={<GiftReactSvg />}\n showText={showText}\n onClick={() => onItemClick(\"bonus\")}\n isActive={activePath.includes(\"bonus\")}\n folderId=\"management_catalog-bonus\"",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/lib/index.ts",
-      "line_number": 69,
+      "line_number": 78,
       "context": "case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Bonus\"), isSubPage: false };\n default:\n return { key: t(\"Common:Spaces\"), isSubPage: false };\n }\n };",
       "module": "/packages/management"
     }
@@ -172,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.259137Z"
     },
     "si": {
       "ai_translated": false,
@@ -223,6 +230,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

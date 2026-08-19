@@ -1,0 +1,29 @@
+{
+  "key_path": "WalletTopUpCallbackStep",
+  "content": "Adding {{price}} to your wallet",
+  "content_en_sha1_hash": "92143c456e9c157b565929edae7e0fd7960c557d",
+  "created_at": "2026-06-02T15:02:53.718Z",
+  "updated_at": "2026-08-13T14:37:21.815Z",
+  "comment": {
+    "text": "A step in a progress list on the payment completion page, indicating the current action during a wallet top-up. The {{price}} variable represents the formatted monetary amount.",
+    "is_auto": true,
+    "updated_at": "2026-06-02T15:06:38.959Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-complete/sub-components/ProcessingCard.tsx",
+      "line_number": 99,
+      "context": "doneLabel?: React.ReactNode;\n }[] = [\n { key: \"card\", label: t(\"WalletTopUpStepCardSaved\") },\n {\n key: \"topup\",\n label: t(\"WalletTopUpCallbackStep\", { price: topUpPrice }),\n doneLabel: t(\"WalletTopUpCallbackStepDone\", { price: topUpPrice }),\n },\n ...(tariffStep\n ? [{ key: \"tariff\", label: tariffStep }]\n : activateStepLabel",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

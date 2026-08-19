@@ -1,32 +1,41 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 
 import {
@@ -111,6 +120,9 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.AIAgents:
       return parentId > 0 ? CategoryType.AIAgent : CategoryType.AIAgents;
 
+    case FolderType.Forms:
+      return parentId > 0 ? CategoryType.Form : CategoryType.Forms;
+
     case FolderType.Archive:
       return CategoryType.Archive;
 
@@ -131,6 +143,45 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
   }
 };
 
+/**
+ * Resolves the category a room/folder must open under, keeping the Forms
+ * section intact.
+ *
+ * Form filling rooms live in the VirtualRooms tree, so the server reports
+ * `rootFolderType = Rooms (14)` for the room and everything inside it --
+ * `FolderType.Forms (36)` only ever appears on the bare Forms section root.
+ * Deriving the URL from `rootFolderType` alone therefore yields
+ * `/rooms/shared/...`, and both the sidebar and the breadcrumb (which resolve
+ * the active section from the pathname) then highlight Rooms instead of Forms.
+ *
+ * `roomType` is the reliable signal: it identifies a form room even when the
+ * user enters it from another section (e.g. Files -> "Form data collection" ->
+ * "Share in the room"), where the `/forms` route prefix is not set yet. The
+ * pathname is the fallback for folders *inside* a form room, which carry no
+ * room type of their own.
+ *
+ * @param {import("@docspace/shared/enums").FolderType|null} [folderType]
+ * @param {number|string|null} [parentId]
+ * @param {{
+ *   roomType?: import("@docspace/shared/enums").RoomsType,
+ *   pathname?: string,
+ * }} [options]
+ */
+export const getCategoryTypeByFolderTypeInSection = (
+  folderType,
+  parentId,
+  { roomType, pathname = window.location.pathname } = {},
+) => {
+  const categoryType = getCategoryTypeByFolderType(folderType, parentId);
+
+  if (categoryType !== CategoryType.SharedRoom) return categoryType;
+
+  const isFormRoom = roomType === RoomsType.FormRoom;
+  const isFormsRoute = pathname.startsWith("/forms");
+
+  return isFormRoom || isFormsRoute ? CategoryType.Form : categoryType;
+};
+
 export const getCategoryUrl = (categoryType, folderId) => {
   const cType = categoryType;
 
@@ -149,6 +200,12 @@ export const getCategoryUrl = (categoryType, folderId) => {
 
     case CategoryType.Shared:
       return "/rooms/shared/filter";
+
+    case CategoryType.Forms:
+      return "/forms/filter";
+
+    case CategoryType.Form:
+      return `/forms/${folderId}/filter`;
 
     case CategoryType.SharedRoom:
       return `/rooms/shared/${folderId}/filter`;
@@ -194,4 +251,31 @@ export const getCategoryUrl = (categoryType, folderId) => {
 export const getUrlByDefaultFolderType = (folderType) => {
   const categoryType = getCategoryTypeByFolderType(folderType);
   return getCategoryUrl(categoryType);
+};
+
+export const isNewProductView = () =>
+  localStorage.getItem("useDocSpace") !== "old";
+
+export const getNewViewUrlByFolderType = (folderType) => {
+  switch (folderType) {
+    case FolderType.SHARE:
+      return "/ai-files?section=shared-with-me";
+    case FolderType.Recent:
+      return "/ai-files?section=recent";
+    case FolderType.Favorites:
+      return "/ai-files?section=favorites";
+    case FolderType.TRASH:
+      return "/ai-files?section=trash";
+    case FolderType.USER:
+      return "/ai-files";
+    case FolderType.Rooms:
+    case FolderType.RoomTemplates:
+      return "/ai-rooms?section=rooms";
+    case FolderType.Archive:
+      return "/ai-rooms?section=archive";
+    case FolderType.AIAgents:
+      return "/agents";
+    default:
+      return "/ai-files";
+  }
 };

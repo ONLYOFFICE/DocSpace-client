@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesPermissionsTitle",
+  "content": "Advanced permissions",
+  "content_en_sha1_hash": "aaa048ee3d59e450abcfc34e81c972b2c0fcbb1f",
+  "created_at": "2026-06-25T19:30:57.153Z",
+  "updated_at": "2026-08-12T11:00:51.508Z",
+  "comment": {
+    "text": "Title for a feature item within the AppPromoDialog, representing granular access control settings.",
+    "is_auto": true,
+    "updated_at": "2026-06-25T19:39:06.956Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 123,
+      "context": "title: t(\"Common:FilesQuickSearchTitle\"),\n description: t(\"Common:FilesQuickSearchDescription\"),\n },\n {\n Icon: FilesPermissionsIcon,\n title: t(\"Common:FilesPermissionsTitle\"),\n description: t(\"Common:FilesPermissionsDescription\"),\n },\n {\n Icon: FilesAccessIcon,\n title: t(\"Common:AccessControlTitle\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

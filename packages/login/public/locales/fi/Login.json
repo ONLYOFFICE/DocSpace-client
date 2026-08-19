@@ -1,9 +1,8 @@
 {
   "ChangePasswordSuccess": "Salasanan vaihtaminen onnistui",
-  "CodeTitle": "Koodi lähetettiin sinulle sähköpostitse",
   "ConfirmEmailChange": "Vahvista sähköpostiosoitteen muutos",
-  "ConfirmEmailChangeText": "Olet pyytänyt muuttamaan sähköpostiosoitteen {{productName}}-tililläsi. Jotta voimme jatkaa, kirjaudu sisään käyttämällä nykyisiä tunnistetietojasi.",
-  "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>{{productName}}</1>",
+  "ConfirmEmailChangeText": "Olet pyytänyt muuttamaan sähköpostiosoitteen {{organizationName}} {{productName}}-tililläsi. Jotta voimme jatkaa, kirjaudu sisään käyttämällä nykyisiä tunnistetietojasi.",
+  "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>työtila</1>",
   "ForgotPassword": "Unohditko salasanasi?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}}:n käyttäjänimi",
   "MessageAuthorize": "Kirjaudu sisään jatkaaksesi",
@@ -12,14 +11,14 @@
   "PasswordRecoveryTitle": "Salasanan palautus",
   "RecoverAccess": "Palauta käyttöoikeus",
   "RecoverContactEmailPlaceholder": "Sähköposti yhteydenottoa varten",
-  "RecoverTextBody": "Jos et voi kirjautua sisään nykyisellä tililläsi tai haluat rekisteröityä uutena käyttäjänä, ota yhteyttä portaalin järjestelmänvalvojaan. ",
+  "RecoverTextBody": "Jos et voi kirjautua sisään nykyisellä tililläsi tai haluat rekisteröityä uutena käyttäjänä, ota yhteyttä pääjärjestelmänvalvojaan.",
   "Register": "Rekisteröidy",
-  "RegisterTextBodyAfterDomainsList": "Rekisteröidy kirjoittamalla sähköpostiosoitteesi ja napsauttamalla Lähetä pyyntö. Sinulle lähetetään aktivointilinkki.  ",
+  "RegisterTextBodyAfterDomainsList": "Rekisteröidy kirjoittamalla sähköpostiosoitteesi ja napsauttamalla Lähetä pyyntö. Sinulle lähetetään aktivointilinkki.",
   "RegisterTextBodyBeforeDomainsList": "Rekisteröityminen on saatavilla käyttäjille, joilla on sähköpostitili osoitteessa",
   "RegisterTitle": "Rekisteröintipyyntö",
-  "RegistrationEmailWatermark": "sähköposti",
+  "RegistrationEmailWatermark": "Sähköposti",
   "RememberHelper": "Istunnon oletuskesto on 20 minuuttia. Valitse tämä vaihtoehto, jos haluat asettaa sen 1 vuodeksi. Voit asettaa oman arvon Asetuksissa.",
   "SignInLDAP": "Kirjaudu sisään: {{ldap_domain}}",
   "SignInLdapHelper": "Käytä yrityksen verkkotunnuksen tunnistetietoja",
-  "UserIsAlreadyRegistered": "Käyttäjä <1>{{email}}</1> on jo rekisteröity {{productName}}:een, syötä salasanasi tai palaa jatkaaksesi toisella sähköpostilla."
+  "UserIsAlreadyRegistered": "Käyttäjä <1>{{email}}</1> on jo rekisteröity tähän työtilaan, syötä salasanasi tai palaa jatkaaksesi toisella sähköpostilla."
 }

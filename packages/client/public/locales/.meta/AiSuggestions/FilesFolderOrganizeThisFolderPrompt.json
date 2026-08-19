@@ -1,0 +1,29 @@
+{
+  "key_path": "FilesFolderOrganizeThisFolderPrompt",
+  "content": "Propose a clear folder structure for the current folder and show the move plan before applying any changes. If this information is not provided, ask me for the preferred grouping rules and confirmation before moving anything.",
+  "content_en_sha1_hash": "cd2541c7b0c5c3622d380b405e4aac031a501c0a",
+  "created_at": "2026-08-04T09:58:55.117Z",
+  "updated_at": "2026-08-05T18:14:20.702Z",
+  "comment": {
+    "text": "An instruction sent to the AI model when the user selects the \"Organize this folder\" suggestion, defining how it should propose new structures and request confirmation for moves.",
+    "is_auto": true,
+    "updated_at": "2026-08-05T18:14:20.702Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 362,
+      "context": "name: t(\"AiSuggestions:FilesFolderRenameFolder\"),\n prompt: t(\"AiSuggestions:FilesFolderRenameFolderPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFolderOrganizeThisFolder\"),\n prompt: t(\"AiSuggestions:FilesFolderOrganizeThisFolderPrompt\"),\n },\n {\n name: t(\"AiSuggestions:FilesFolderFindEmptyFolders\"),\n prompt: t(\"AiSuggestions:FilesFolderFindEmptyFoldersPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

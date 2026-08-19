@@ -1,31 +1,40 @@
-// (c) Copyright Ascensio System SIA 2009-2026
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import {
   getPaymentSettings,
@@ -33,24 +42,17 @@ import {
   acceptLicense,
 } from "@docspace/shared/api/settings";
 import {
-  getBalance,
-  getCardLinked,
-  getTransactionHistory,
-  getPaymentLink,
-  getAutoTopUpSettings,
-  updateAutoTopUpSettings,
   getServicesQuotas,
   getServiceQuota,
   getLicenseQuota,
+  setServiceState,
+  getWalletBalance,
 } from "@docspace/shared/api/portal";
-import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
 import { type TData } from "@docspace/ui-kit/components/toast";
@@ -63,21 +65,27 @@ import {
   TNumericPaymentFeature,
   TLicenseQuota,
 } from "@docspace/shared/api/portal/types";
-import { formatCurrencyValue } from "@docspace/shared/utils/common";
+
 import {
   AI_ENUM,
-  AI_TOOLS,
+  AI_SEARCH_ENUM,
   BACKUP_SERVICE,
-  STORAGE_TARIFF_DEACTIVATED,
-  STORAGE_DEACTIVATION_VISITED,
-  WEB_SEARCH,
-} from "@docspace/shared/constants";
-import type { DateTime } from "luxon";
+} from "@docspace/ui-kit/billing/constants";
+import { applyServiceQuotaToMap } from "@docspace/ui-kit/billing/utils/parsers";
+import { formatCurrencyValue } from "@docspace/ui-kit/billing/utils/common";
 import {
-  now,
-  subtractFromDate,
-  formatDate as formatDateUtil,
-} from "@docspace/ui-kit/utils/date";
+  getCardLinkedOnFreeTariff,
+  getCardLinkedOnNonProfit,
+  getIsCardLinkedToPortal,
+  getIsCardMissingOrInactive,
+  getIsPayer,
+  getWalletBalanceAmount,
+  getWalletBalanceCurrency,
+  formatPaymentDate,
+} from "@docspace/ui-kit/billing/utils/paymentSelectors";
+import type { DateTime } from "luxon";
+
+import { PersistenceKeys, removePersisted } from "./utils/persistence";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -99,9 +107,31 @@ class PaymentStore {
 
   settingsStore: SettingsStore | null = null;
 
-  paymentQuotasStore: PaymentQuotasStore | null = null;
-
   licenseQuota: TLicenseQuota | null = null;
+
+  walletBalanceData: TBalance | null = null;
+
+  get walletBalance(): number {
+    return getWalletBalanceAmount(this.walletBalanceData);
+  }
+
+  get walletCodeCurrency(): string {
+    return getWalletBalanceCurrency(this.walletBalanceData);
+  }
+
+  fetchWalletBalance = async (isRefresh?: boolean) => {
+    const res = await getWalletBalance(isRefresh);
+    if (res) this.walletBalanceData = res;
+    return this.walletBalance;
+  };
+
+  formatWalletCurrency = (item: number | null = null, fractionDigits = 2) =>
+    formatCurrencyValue(
+      authStore.language ?? "en",
+      item ?? this.walletBalance,
+      this.walletCodeCurrency || "USD",
+      fractionDigits,
+    );
 
   salesEmail = "";
 
@@ -114,59 +144,15 @@ class PaymentStore {
     trialMode: true,
   };
 
-  paymentLink = "";
-
-  accountLink = "";
-
   isLoading = false;
 
   isUpdatingBasicSettings = false;
 
-  totalPrice = 30;
-
-  managersCount = 1;
-
   maxAvailableManagersCount = 999;
-
-  stepByQuotaForManager = 1;
-
-  minAvailableManagersValue = 1;
-
-  stepByQuotaForTotalSize = 107374182400;
-
-  minAvailableTotalSizeValue = 107374182400;
 
   isInitPaymentPage = false;
 
   isLicenseCorrect = false;
-
-  isInitWalletPage = false;
-
-  isPaymentMethodInit = false;
-
-  balance: TBalance = 0;
-
-  previousBalance: TBalance = 0;
-
-  cardLinked = "";
-
-  transactionHistory: TTransactionCollection[] = [];
-
-  isTransactionHistoryExist = false;
-
-  autoPayments: TAutoTopUpSettings | null = null;
-
-  minBalance: string = "";
-
-  upToBalance: string = "";
-
-  isAutomaticPaymentsEnabled: boolean = false;
-
-  isVisibleWalletSettings = false;
-
-  upToBalanceError = false;
-
-  minBalanceError = false;
 
   servicesQuotasFeatures: Map<
     string,
@@ -175,253 +161,72 @@ class PaymentStore {
 
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
-  isShowStorageTariffDeactivatedModal = false;
-
-  isStorageDeactivationVisited = false;
-
-  reccomendedAmount = "";
-
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
     currentQuotaStore: CurrentQuotasStore,
-    paymentQuotasStore: PaymentQuotasStore,
   ) {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
-    this.paymentQuotasStore = paymentQuotasStore;
     this.settingsStore = settingsStore;
 
     makeAutoObservable(this);
   }
 
-  get isAlreadyPaid() {
-    const isFreeTariff = this.currentQuotaStore?.isFreeTariff;
-
-    return this.currentTariffStatusStore?.walletCustomerEmail || !isFreeTariff;
-  }
-
-  get isNeedRequest() {
-    return this.managersCount > this.maxAvailableManagersCount;
-  }
-
-  get isLessCountThanAcceptable() {
-    return this.managersCount < this.minAvailableManagersValue;
-  }
-
   get isPayer() {
-    if (!this.userStore || !this.currentTariffStatusStore) return;
-
-    const { user } = this.userStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-
-    if (!user || !walletCustomerEmail) return false;
-
-    return user.email === walletCustomerEmail;
-  }
-
-  get isStripePortalAvailable() {
-    if (!this.userStore) return;
-
-    const { user } = this.userStore;
-
-    if (!user) return false;
-
-    return user.isOwner || this.isPayer;
-  }
-
-  get canUpdateTariff() {
-    if (!this.userStore || !this.currentQuotaStore) return;
-
-    const { user } = this.userStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore!;
-
-    if (!user) return false;
-
-    if (this.currentQuotaStore.isNonProfit) {
-      if (!walletCustomerEmail) return true;
-      return this.isPayer;
-    }
-
-    if (!this.isAlreadyPaid && !this.cardLinkedOnFreeTariff) return true;
-
-    return this.isPayer;
-  }
-
-  get canPayTariff() {
-    if (!this.currentQuotaStore) return;
-    const { addedManagersCount } = this.currentQuotaStore;
-
-    if (this.managersCount >= addedManagersCount) return true;
-
-    return false;
-  }
-
-  get canDowngradeTariff() {
-    if (!this.currentQuotaStore) return;
-    const { addedManagersCount, usedTotalStorageSizeCount } =
-      this.currentQuotaStore;
-
-    if (addedManagersCount > this.managersCount) return false;
-    if (usedTotalStorageSizeCount > this.allowedStorageSizeByQuota)
-      return false;
-
-    return true;
-  }
-
-  get isCardLinkedToPortal() {
-    if (!this.currentQuotaStore) return false;
-
-    const { isNonProfit, isFreeTariff } = this.currentQuotaStore;
-
-    return (
-      this.cardLinkedOnNonProfit ||
-      this.cardLinkedOnFreeTariff ||
-      (!isNonProfit && !isFreeTariff)
+    return getIsPayer(
+      this.userStore?.user?.email,
+      this.currentTariffStatusStore?.walletCustomerEmail,
     );
   }
-
-  setIsInitPaymentPage = (value: boolean) => {
-    this.isInitPaymentPage = value;
-  };
-
-  setMinBalance = (value: string) => {
-    this.minBalance = value;
-  };
-
-  setUpToBalance = (value: string) => {
-    this.upToBalance = value;
-  };
-
-  setUpToBalanceError = (value: boolean) => {
-    this.upToBalanceError = value;
-  };
-
-  setMinBalanceError = (value: boolean) => {
-    this.minBalanceError = value;
-  };
-
-  setIsAutomaticPaymentsEnabled = (value: boolean) => {
-    this.isAutomaticPaymentsEnabled = value;
-  };
 
   setIsUpdatingBasicSettings = (isUpdatingBasicSettings: boolean) => {
     this.isUpdatingBasicSettings = isUpdatingBasicSettings;
   };
 
-  basicSettings = async () => {
-    if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
-
-    const {
-      fetchPortalTariff,
-      fetchPayerInfo,
-      isGracePeriod,
-      isNotPaidPeriod,
-    } = this.currentTariffStatusStore;
-    const { addedManagersCount } = this.currentQuotaStore;
-
-    this.setIsUpdatingBasicSettings(true);
-
-    await fetchPayerInfo();
-
-    const requests = [];
-
-    requests.push(fetchPortalTariff());
-
-    if (isGracePeriod || isNotPaidPeriod) {
-      requests.push(this.getBasicPaymentLink(addedManagersCount));
-    }
-
-    if (this.isAlreadyPaid && this.isStripePortalAvailable) {
-      requests.push(this.setPaymentAccount());
-
-      if (
-        this.isPayer &&
-        this.currentTariffStatusStore.walletCustomerStatusNotActive
-      ) {
-        requests.push(this.fetchCardLinked());
-      }
-
-      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
-        this.setIsShowTariffDeactivatedModal(true);
-
-        await this.handleServicesQuotas();
-      }
-    } else {
-      requests.push(this.getBasicPaymentLink(addedManagersCount));
-    }
-
-    try {
-      await Promise.all(requests);
-      this.setBasicTariffContainer();
-    } catch (error) {
-      // toastr.error(t("Common:UnexpectedError"));
-      console.error(error);
-    }
-
-    this.setIsUpdatingBasicSettings(false);
-  };
-
-  setIsInitWalletPage = (value: boolean) => {
-    this.isInitWalletPage = value;
-  };
-
-  setPaymentMethodInit = (value: boolean) => {
-    this.isPaymentMethodInit = value;
-  };
-
-  get isAutoPaymentExist() {
-    return this.autoPayments?.enabled;
-  }
-
-  get walletCodeCurrency() {
-    if (this.balance && this.balance.subAccounts.length > 0)
-      return this.balance.subAccounts[0].currency;
-
-    return "USD";
-  }
-
-  get walletBalance() {
-    if (this.balance && this.balance.subAccounts.length > 0)
-      return this.balance.subAccounts[0].amount;
-
-    return 0.0;
-  }
-
-  get wasFirstTopUp() {
-    return typeof this.balance !== "number";
-  }
-
-  get wasChangeBalance() {
-    return (
-      this.previousBalance === 0 &&
-      typeof this.balance !== "number" &&
-      !!this.balance &&
-      this.balance.subAccounts.length > 0
-    );
-  }
-
   get cardLinkedOnFreeTariff() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    const { isFreeTariff } = this.currentQuotaStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-
-    return isFreeTariff && !!walletCustomerEmail;
+    return getCardLinkedOnFreeTariff(
+      this.currentQuotaStore.isFreeTariff,
+      this.currentTariffStatusStore.walletCustomerEmail,
+    );
   }
 
   get cardLinkedOnNonProfit() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
-    const { isNonProfit } = this.currentQuotaStore;
+    return getCardLinkedOnNonProfit(
+      this.currentQuotaStore.isNonProfit,
+      this.currentTariffStatusStore.walletCustomerEmail,
+    );
+  }
 
-    if (!isNonProfit) return false;
+  get isCardLinkedToPortal() {
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    if (!walletCustomerEmail) return false;
+    return getIsCardLinkedToPortal({
+      isNonProfit: this.currentQuotaStore.isNonProfit,
+      isFreeTariff: this.currentQuotaStore.isFreeTariff,
+      walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+    });
+  }
 
-    return true;
+  get isCardMissingOrInactive() {
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return true;
+
+    return getIsCardMissingOrInactive({
+      isNonProfit: this.currentQuotaStore.isNonProfit,
+      isFreeTariff: this.currentQuotaStore.isFreeTariff,
+      walletCustomerEmail: this.currentTariffStatusStore.walletCustomerEmail,
+      walletCustomerStatusNotActive:
+        this.currentTariffStatusStore.walletCustomerStatusNotActive,
+    });
+  }
+
+  get isStripeCheckoutRequired() {
+    return this.isCardMissingOrInactive;
   }
 
   get storageSizeIncrement() {
@@ -430,20 +235,12 @@ class PaymentStore {
         ?.value || 0
     );
   }
-
   get storagePriceIncrement() {
     return (
       (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice)
         ?.price?.value || 0
     );
   }
-
-  get storageServiceName() {
-    return (
-      this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice
-    )?.serviceName;
-  }
-
   get backupServicePrice() {
     return (
       (
@@ -451,13 +248,6 @@ class PaymentStore {
           BACKUP_SERVICE,
         ) as TServiceFeatureWithPrice
       )?.price?.value || 0
-    );
-  }
-
-  get webSearchPrice() {
-    return (
-      (this.servicesQuotasFeatures.get(WEB_SEARCH) as TServiceFeatureWithPrice)
-        ?.price?.value || 0
     );
   }
 
@@ -469,525 +259,50 @@ class PaymentStore {
     return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
   }
 
-  get availableBackupsCount() {
-    if (this.backupServicePrice === 0) return 0;
-    if (this.walletBalance === 0) return 0;
-    return Math.floor(this.walletBalance / this.backupServicePrice);
+  get isAIReady() {
+    return (
+      Boolean(this.isAiToolsServiceOn) ||
+      Boolean(settingsStore.aiConfig?.aiReady)
+    );
   }
 
-  formatWalletCurrency = (
-    item: number | null = null,
-    fractionDigits: number = 3,
-  ) => {
-    const { language } = authStore;
+  formatDate = (date: DateTime, timeType?: "start" | "end") =>
+    formatPaymentDate(date, timeType);
 
-    const amount = item ?? this.walletBalance;
-
-    return formatCurrencyValue(
-      language,
-      amount,
-      this.walletCodeCurrency,
-      fractionDigits,
-    );
-  };
-
-  formatPaymentCurrency = (item: number = 0, fractionDigits: number = 0) => {
-    const { language } = authStore;
-    const amount = item || this.walletBalance;
-    const { planCost } = this.paymentQuotasStore!;
-    const { isoCurrencySymbol } = planCost;
-
-    return formatCurrencyValue(
-      language,
-      amount,
-      isoCurrencySymbol || "USD",
-      fractionDigits,
-    );
-  };
-
-  updatePreviousBalance = () => {
-    this.previousBalance = this.balance;
-  };
-
-  fetchBalance = async (isRefresh?: boolean) => {
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    try {
-      const res = await getBalance(isRefresh, abortController.signal);
-
-      if (!res) return;
-
-      this.balance = res;
-    } catch (e) {
-      if (axios.isCancel(e)) return;
-      throw e;
-    }
-  };
-
-  getEndTransactionDate = (format = "yyyy-MM-dd'T'HH:mm:ss") => {
-    return formatDateUtil(now(), format);
-  };
-
-  getStartTransactionDate = (format = "yyyy-MM-dd'T'HH:mm:ss") => {
-    const date = subtractFromDate(now(), 4, "weeks");
-    return date ? formatDateUtil(date, format) : "";
-  };
-
-  formatDate = (date: DateTime, timeType?: "start" | "end") => {
-    if (!timeType) {
-      return formatDateUtil(date, "yyyy-MM-dd'T'HH:mm:ss", { locale: "en" });
-    }
-
-    const dateStr = formatDateUtil(date, "yyyy-MM-dd", { locale: "en" });
-    const timeTypeValue = timeType === "start" ? "00:00:00" : "23:59:59";
-
-    return `${dateStr}T${timeTypeValue}`;
-  };
-
-  fetchTransactionHistory = async (
-    startDate: DateTime | null = subtractFromDate(now(), 4, "weeks"),
-    endDate: DateTime | null = now(),
-    credit = true,
-    debit = true,
-    participantName?: string,
-    serviceName?: string,
-  ) => {
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    try {
-      const res = await getTransactionHistory(
-        startDate ? this.formatDate(startDate, "start") : "",
-        endDate ? this.formatDate(endDate, "end") : "",
-        credit,
-        debit,
-        participantName,
-        0,
-        25,
-        serviceName,
-        abortController.signal,
-      );
-
-      if (!res) return;
-
-      this.transactionHistory = res.collection;
-      this.isTransactionHistoryExist = res.collection.length > 0;
-    } catch (error) {
-      if (axios.isCancel(error)) return;
-      console.error(error);
-    }
-  };
-
-  fetchAutoPayments = async () => {
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    try {
-      const res = await getAutoTopUpSettings(abortController.signal);
-
-      if (!res) return;
-
-      this.autoPayments = res;
-      this.isAutomaticPaymentsEnabled = res.enabled;
-
-      if (res.enabled) {
-        this.setMinBalance(res.minBalance.toString());
-        this.setUpToBalance(res.upToBalance.toString());
-      }
-    } catch (error) {
-      if (axios.isCancel(error)) return;
-      console.error(error);
-    }
-  };
-
-  fetchCardLinked = async (url?: string) => {
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    const backUrl = url || `${window.location.href}?complete=true`;
-
-    try {
-      const res = await getCardLinked(backUrl, abortController.signal);
-
-      if (!res) return;
-
-      this.cardLinked = res;
-    } catch (error) {
-      if (axios.isCancel(error)) return;
-      console.error(error);
-    }
-  };
-
-  updateAutoPayments = async () => {
-    try {
-      const res = await updateAutoTopUpSettings(
-        this.isAutomaticPaymentsEnabled,
-        +this.minBalance,
-        +this.upToBalance,
-        this.walletCodeCurrency || "",
-      );
-
-      if (!res) {
-        throw new Error();
-      }
-
-      this.autoPayments = res as TAutoTopUpSettings;
-    } catch (error) {
-      toastr.error(error as string);
-    }
-  };
-
-  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
-    this.isVisibleWalletSettings = isVisibleWalletSettings;
-  };
-
-  handleServicesQuotas = async () => {
-    // temporary solution, should be in the service store
-
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    const res = await getServicesQuotas(abortController.signal);
-
-    if (!res) return;
-
-    const quotas = res.map((service) => {
-      const feature = service.features[0];
-      return {
-        ...feature,
-        price: service.price,
-        serviceName: service.serviceName,
-      };
-    });
-
-    this.servicesQuotasFeatures = new Map(
-      quotas.map((feature) => [feature.id, feature]),
-    );
-
-    return res;
-  };
-
-  changeServiceState = async (service: string) => {
-    const feature = this.servicesQuotasFeatures.get(service);
-
-    if (!feature) return;
-
-    this.servicesQuotasFeatures.set(service, {
-      ...feature,
-      value: !feature.value,
-    });
-  };
-
-  isShowStorageTariffDeactivated = () => {
-    const { previousStoragePlanSize } = this.currentTariffStatusStore!;
-
-    if (!previousStoragePlanSize) return false;
-
-    return localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== "true";
-  };
-
-  setIsShowTariffDeactivatedModal = (value: boolean) => {
-    this.isShowStorageTariffDeactivatedModal = value;
-  };
-
-  setStorageDeactivationVisited = (value: boolean) => {
-    this.isStorageDeactivationVisited = value;
-
-    localStorage.setItem(STORAGE_DEACTIVATION_VISITED, "true");
-  };
-
-  setPaymentAccount = async () => {
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    try {
-      const res = await api.portal.getPaymentAccount(abortController.signal);
-
-      if (!res) return;
-
-      if (res.indexOf("error") === -1) {
-        this.accountLink = res;
-      } else {
-        console.error(res);
-      }
-    } catch (error) {
-      if (axios.isCancel(error)) return;
-      console.error(error);
-    }
-  };
-
-  initWalletPayerAndBalance = async (isRefresh: boolean) => {
-    if (!this.currentTariffStatusStore) return;
-    const { fetchPayerInfo } = this.currentTariffStatusStore;
-
-    await Promise.all([
-      fetchPayerInfo(isRefresh),
-      this.fetchBalance(isRefresh),
-    ]);
-  };
-
-  setReccomendedAmount = (amount: string) => {
-    this.reccomendedAmount = amount;
-  };
-
-  setServiceQuota = async (serviceName = BACKUP_SERVICE) => {
+  handleServiceQuota = async (serviceName = BACKUP_SERVICE) => {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
     const service = await getServiceQuota(serviceName, abortController.signal);
 
-    const feature = service.features[0];
-
-    const featureWithPrice = {
-      ...feature,
-      price: service.price,
-      serviceName: service.serviceName,
-    } as TServiceFeatureWithPrice;
-
-    const existingEntry = Array.from(
-      this.servicesQuotasFeatures.entries(),
-    ).find(
-      ([, value]) =>
-        (value as TServiceFeatureWithPrice).serviceName === service.serviceName,
-    );
-
-    const key = existingEntry
-      ? existingEntry[0]
-      : service.features[0].id.toString();
-
-    this.servicesQuotasFeatures.set(key, featureWithPrice);
+    runInAction(() => {
+      applyServiceQuotaToMap(
+        service,
+        this.servicesQuotasFeatures as Parameters<
+          typeof applyServiceQuotaToMap
+        >[1],
+      );
+    });
 
     return service.serviceName;
   };
 
-  paymentMethodInit = async (t: TTranslation) => {
-    const isRefresh = window.location.href.includes("complete=true");
+  enableAIService = async (onSuccess?: () => void | Promise<void>) => {
+    const feature = this.servicesQuotasFeatures.get(AI_ENUM);
+    if (feature) {
+      this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: true });
+    }
     try {
-      const requests = [];
+      await setServiceState({ service: AI_ENUM, enabled: true });
 
-      this.setPaymentMethodInit(false);
-
-      await this.initWalletPayerAndBalance(isRefresh);
-
-      if (this.isAlreadyPaid) {
-        if (this.isStripePortalAvailable) {
-          requests.push(this.setPaymentAccount());
-
-          if (
-            this.isPayer &&
-            this.currentTariffStatusStore?.walletCustomerStatusNotActive
-          ) {
-            requests.push(this.fetchCardLinked());
-          }
-        }
-      } else {
-        requests.push(this.fetchCardLinked());
+      await setServiceState({ service: AI_SEARCH_ENUM, enabled: true });
+      await onSuccess?.();
+    } catch (e) {
+      if (feature) {
+        this.servicesQuotasFeatures.set(AI_ENUM, { ...feature, value: false });
       }
-
-      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
-        this.setIsShowTariffDeactivatedModal(true);
-        requests.push(this.handleServicesQuotas());
-      }
-
-      await Promise.all(requests);
-
-      this.setPaymentMethodInit(true);
-    } catch (error) {
-      toastr.error(t("Common:UnexpectedError"));
-      console.error(error);
+      toastr.error(e as Error);
     }
-  };
-
-  walletInit = async (t: TTranslation) => {
-    const isRefresh = window.location.href.includes("complete=true");
-    if (!this.currentTariffStatusStore) return;
-
-    if (!isRefresh) {
-      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
-    }
-
-    const { fetchPortalTariff } = this.currentTariffStatusStore;
-
-    const requests = [];
-
-    requests.push(fetchPortalTariff());
-
-    try {
-      await this.initWalletPayerAndBalance(isRefresh);
-      this.previousBalance = this.balance;
-
-      if (this.isAlreadyPaid) {
-        if (this.isStripePortalAvailable) {
-          requests.push(this.setPaymentAccount());
-
-          if (
-            this.isPayer &&
-            this.currentTariffStatusStore.walletCustomerStatusNotActive
-          ) {
-            requests.push(this.fetchCardLinked());
-          }
-        }
-
-        requests.push(this.fetchAutoPayments(), this.fetchTransactionHistory());
-      } else {
-        requests.push(this.fetchCardLinked());
-      }
-
-      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
-        this.setIsShowTariffDeactivatedModal(true);
-        requests.push(this.handleServicesQuotas());
-      }
-
-      await Promise.all(requests);
-
-      this.setIsInitWalletPage(true);
-
-      const url = new URL(window.location.href);
-      const params = url.searchParams;
-
-      const priceParam = params.get("price");
-
-      if (priceParam) {
-        const reccomendedAmount = this.walletBalance - Number(priceParam);
-        if (reccomendedAmount < 0)
-          this.setReccomendedAmount(
-            Math.ceil(Math.abs(reccomendedAmount)).toString(),
-          );
-      } else {
-        this.setReccomendedAmount("");
-      }
-
-      if (
-        window.location.href.includes("complete=true") ||
-        window.location.href.includes("open=true")
-      ) {
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname,
-        );
-        this.setVisibleWalletSetting(true);
-      }
-    } catch (error) {
-      toastr.error(t("Common:UnexpectedError"));
-      console.error(error);
-    }
-  };
-
-  init = async (t: TTranslation) => {
-    if (this.isInitPaymentPage) {
-      await this.basicSettings();
-
-      return;
-    }
-
-    if (
-      !this.currentTariffStatusStore ||
-      !this.currentQuotaStore ||
-      !this.paymentQuotasStore
-    )
-      return;
-
-    const { addedManagersCount } = this.currentQuotaStore;
-    const { setPortalPaymentQuotas } = this.paymentQuotasStore;
-    const {
-      fetchPortalTariff,
-      fetchPayerInfo,
-      isGracePeriod,
-      isNotPaidPeriod,
-    } = this.currentTariffStatusStore;
-
-    const requests = [];
-
-    requests.push(this.getSettingsPayment());
-    requests.push(setPortalPaymentQuotas());
-    requests.push(fetchPortalTariff());
-
-    await fetchPayerInfo();
-
-    if (isGracePeriod || isNotPaidPeriod) {
-      requests.push(this.getBasicPaymentLink(addedManagersCount));
-    }
-
-    if (this.isAlreadyPaid && this.isStripePortalAvailable) {
-      requests.push(this.setPaymentAccount());
-
-      if (
-        this.isPayer &&
-        this.currentTariffStatusStore.walletCustomerStatusNotActive
-      ) {
-        requests.push(this.fetchCardLinked());
-      }
-    } else {
-      requests.push(this.getBasicPaymentLink(addedManagersCount));
-    }
-
-    if (this.isShowStorageTariffDeactivated() && this.isPayer) {
-      this.setIsShowTariffDeactivatedModal(true);
-      requests.push(this.handleServicesQuotas());
-    }
-
-    try {
-      await Promise.all(requests);
-
-      this.setRangeStepByQuota();
-      this.setBasicTariffContainer();
-    } catch (error) {
-      toastr.error(t("Common:UnexpectedError"));
-      console.error(error);
-      return;
-    }
-
-    this.setIsInitPaymentPage(true);
-  };
-
-  getBasicPaymentLink = async (managersCount: number) => {
-    const backUrl = combineUrl(
-      window.location.origin,
-      "/portal-settings/payments/portal-payments?complete=true",
-    );
-
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    try {
-      const link = await getPaymentLink(
-        managersCount,
-        backUrl,
-        abortController.signal,
-      );
-
-      if (!link) return;
-      this.setPaymentLink(link);
-    } catch (err) {
-      if (axios.isCancel(err)) return;
-      console.error(err);
-    }
-  };
-
-  getPaymentLink = async (token = undefined) => {
-    const backUrl = combineUrl(
-      window.location.origin,
-      "/portal-settings/payments/portal-payments?complete=true",
-    );
-
-    await getPaymentLink(this.managersCount, backUrl, token)
-      ?.then((link) => {
-        if (!link) return;
-        this.setPaymentLink(link);
-      })
-      .catch((err) => {
-        if (axios.isCancel(err)) {
-          console.log("Request canceled", err.message);
-        } else {
-          console.error(err);
-          if (err?.response?.status === 402) {
-            return;
-          }
-          if (this.isInitPaymentPage) toastr.error(err);
-        }
-      });
   };
 
   standaloneBasicSettings = async (t: TTranslation) => {
@@ -1109,8 +424,8 @@ class PaymentStore {
         return;
       }
 
-      toastr.success(t("ActivateLicenseActivated"));
-      localStorage.removeItem("enterpriseAlertClose");
+      toastr.success(t("Common:ActivateLicenseActivated"));
+      removePersisted(PersistenceKeys.enterpriseAlertClose);
 
       await getPaymentInfo();
       await this.settingsStore?.getSettings();
@@ -1119,98 +434,8 @@ class PaymentStore {
     }
   };
 
-  setPaymentLink = async (link: string) => {
-    this.paymentLink = link;
-  };
-
   setIsLoading = (isLoading: boolean) => {
     this.isLoading = isLoading;
-  };
-
-  getTotalCostByFormula = (value: number) => {
-    const costValuePerManager = this.paymentQuotasStore?.planCost.value;
-    if (costValuePerManager) return value * +costValuePerManager;
-  };
-
-  get allowedStorageSizeByQuota() {
-    if (this.managersCount > this.maxAvailableManagersCount)
-      return this.maxAvailableManagersCount * this.stepByQuotaForTotalSize;
-
-    return this.managersCount * this.stepByQuotaForTotalSize;
-  }
-
-  resetTariffContainerToBasic = () => {
-    this.setBasicTariffContainer();
-  };
-
-  setBasicTariffContainer = () => {
-    if (!this.currentQuotaStore) return;
-
-    const { currentPlanCost, maxCountManagersByQuota, addedManagersCount } =
-      this.currentQuotaStore;
-    const currentTotalPrice = currentPlanCost.value;
-    const isFreeTariff = this.currentQuotaStore?.isFreeTariff;
-
-    if (!isFreeTariff) {
-      const countOnRequest =
-        maxCountManagersByQuota > this.maxAvailableManagersCount;
-
-      this.managersCount = countOnRequest
-        ? this.maxAvailableManagersCount + 1
-        : maxCountManagersByQuota;
-
-      this.totalPrice = +currentTotalPrice;
-
-      return;
-    }
-
-    this.managersCount = addedManagersCount;
-    const totalPrice = this.getTotalCostByFormula(addedManagersCount);
-
-    if (totalPrice) this.totalPrice = totalPrice;
-  };
-
-  setTotalPrice = (value: number) => {
-    const price = this.getTotalCostByFormula(value);
-    if (price !== this.totalPrice && price) this.totalPrice = price;
-  };
-
-  setManagersCount = (managers: number) => {
-    if (managers > this.maxAvailableManagersCount)
-      this.managersCount = this.maxAvailableManagersCount + 1;
-    else this.managersCount = managers;
-  };
-
-  setRangeStepByQuota = () => {
-    if (!this.paymentQuotasStore) return;
-
-    const { stepAddingQuotaManagers, stepAddingQuotaTotalSize } =
-      this.paymentQuotasStore;
-
-    if (stepAddingQuotaManagers && typeof stepAddingQuotaManagers === "number")
-      this.stepByQuotaForManager = stepAddingQuotaManagers;
-    this.minAvailableManagersValue = this.stepByQuotaForManager;
-
-    if (
-      stepAddingQuotaTotalSize &&
-      typeof stepAddingQuotaTotalSize === "number"
-    )
-      this.stepByQuotaForTotalSize = stepAddingQuotaTotalSize;
-    this.minAvailableTotalSizeValue = this.stepByQuotaForManager;
-  };
-
-  sendPaymentRequest = async (
-    email: string,
-    userName: string,
-    message: string,
-    t: TTranslation,
-  ) => {
-    try {
-      await api.portal.sendPaymentRequest(email, userName, message);
-      toastr.success(t("SuccessfullySentMessage"));
-    } catch (e) {
-      toastr.error(e as TData);
-    }
   };
 }
 

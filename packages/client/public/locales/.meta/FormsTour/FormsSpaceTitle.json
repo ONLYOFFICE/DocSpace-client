@@ -1,0 +1,29 @@
+{
+  "key_path": "FormsSpaceTitle",
+  "content": "One space per form",
+  "content_en_sha1_hash": "235ef1502c980fa89937a2d4bc4d8de58e113eac",
+  "created_at": "2026-08-06T14:20:53.759Z",
+  "updated_at": "2026-08-13T10:58:03.049Z",
+  "comment": {
+    "text": "Title for an onboarding tour step that appears when highlighting the tile used to create a new space.",
+    "is_auto": true,
+    "updated_at": "2026-08-06T14:39:01.713Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
+      "line_number": 174,
+      "context": "// that says so is the one pointing at the tile that creates one.\n canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-form-room\"]',\n t(\"FormsTour:FormsSpaceTitle\"),\n t(\"FormsTour:FormsSpace\"),\n callbacks,\n LOG_LABEL,\n 6,\n leaveSpace,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

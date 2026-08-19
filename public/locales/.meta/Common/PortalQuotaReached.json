@@ -1,24 +1,31 @@
 {
   "key_path": "PortalQuotaReached",
-  "content": "{{productName}} quota limit has been reached.",
-  "content_en_sha1_hash": "12643ac7169dce149394572222dc071c99d91a82",
-  "created_at": "2026-02-18T14:56:07.418Z",
-  "updated_at": "2026-03-20T09:15:02.785Z",
+  "content": "The workspace quota limit has been reached.",
+  "content_en_sha1_hash": "7685cf2920ba0eb54ca8a335b69bbde8022bf8cf",
+  "created_at": "2026-08-12T11:00:32.420Z",
+  "updated_at": "2026-08-14T14:58:32.861Z",
   "comment": {
-    "text": "This key displays a message in the UI indicating that the user has reached their quota limit for {{productName}}. It appears as a header message, likely in a dialog or similar notification, informing the user they cannot proceed. Translators should ensure the message clearly conveys the quota limitation.",
+    "text": "Header for a notification bar that appears when the workspace quota limit has been met; includes the `productName` variable.",
     "is_auto": true,
-    "updated_at": "2026-03-20T09:15:02.785Z"
+    "updated_at": "2026-08-12T11:08:40.492Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Bar/index.tsx",
-      "line_number": 71,
-      "context": "return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial\n ? t(\"PortalQuotaReached\", {\n productName: t(\"ProductName\"),\n })\n : t(\"PortalQuotaLimitWarning\", {\n productName: t(\"ProductName\"),\n }),",
+      "line_number": 80,
+      "context": "return {\n description: initial\n ? t(\"EditingUnavailable\")\n : t(\"YourFurtherEditsNotSaved\"),\n header: initial\n ? t(\"PortalQuotaReached\")\n : t(\"PortalQuotaLimitWarning\"),\n };\n }\n };",
       "module": "/packages/doceditor"
     }
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

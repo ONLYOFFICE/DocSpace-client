@@ -60,7 +60,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import type { TextProps } from "@docspace/ui-kit/components/text";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { Textarea } from "@docspace/ui-kit/components/textarea";
-import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { TextInput, InputSize } from "@docspace/ui-kit/components/text-input";
 import { Label } from "@docspace/ui-kit/components/label";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
@@ -90,6 +90,14 @@ const BUTTON_SIZE_MAP: Partial<Record<string, ButtonSize>> = {
   small: ButtonSize.small,
   normal: ButtonSize.normal,
   medium: ButtonSize.medium,
+};
+
+const INPUT_SIZE_MAP: Partial<Record<string, InputSize>> = {
+  base: InputSize.base,
+  middle: InputSize.middle,
+  big: InputSize.large,
+  huge: InputSize.large,
+  large: InputSize.large,
 };
 
 const PropsContext = React.createContext<TPropsContext>({} as TPropsContext);
@@ -264,6 +272,7 @@ const PluginComponentBase = inject(
               onChange,
               onBlur,
               onFocus,
+              size,
               children: _children,
               ...restProps
             } = elementProps as IInput;
@@ -284,6 +293,7 @@ const PluginComponentBase = inject(
                 {...(restProps as unknown as React.ComponentProps<
                   typeof TextInput
                 >)}
+                size={size ? INPUT_SIZE_MAP[size] : undefined}
                 onChange={onEventAction(onChange)}
                 onBlur={onEventAction(onBlur)}
                 onFocus={onEventAction(onFocus)}

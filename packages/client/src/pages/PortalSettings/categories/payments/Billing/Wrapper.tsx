@@ -36,6 +36,7 @@
 import { useEffect, useMemo } from "react";
 import { Outlet, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import Section from "@docspace/ui-kit/components/section";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
@@ -45,12 +46,13 @@ import { DeviceType } from "@docspace/shared/enums";
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
 import ErrorBoundary from "SRC_DIR/components/ErrorBoundaryWrapper";
 import SectionWrapper from "SRC_DIR/components/Section";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import type { TPaymentUser } from "@docspace/ui-kit/billing/types";
 
 import BillingHeader from "./BillingHeader";
 import PayerOnlyWarning from "./PayerOnlyWarning";
-import { PAYMENT_ROUTES } from "../utils";
+import { PAYMENT_ROUTES, getBillingPageTitle } from "../utils";
 
 import styles from "./Wrapper.module.scss";
 
@@ -80,6 +82,11 @@ const BillingWrapperComponent = ({
   currentDeviceType,
 }: WrapperProps) => {
   const location = useLocation();
+  const { t, ready } = useTranslation(["Common", "DocsConnect"]);
+
+  useEffect(() => {
+    if (ready) setDocumentTitle(getBillingPageTitle(location.pathname, t));
+  }, [location.pathname, ready, t]);
 
   const showPayerOnlyWarning =
     location.pathname.includes("/billing/wallet") &&
@@ -177,3 +184,4 @@ export const Component = inject(
     };
   },
 )(observer(BillingWrapperComponent));
+

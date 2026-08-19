@@ -481,18 +481,19 @@ const WrappedComponent = ({
   const [contextProps, setContextProps] = React.useState<TContextProps>({});
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const updatePropsContext = (
-    newContextProps: NonNullable<IMessage["contextProps"]>,
-  ) => {
-    newContextProps.forEach(({ name, props }) => {
-      if (saveButton && name === saveButton.contextName) {
-        setSaveButtonProps?.((val) => ({ ...val, props }) as ButtonGroup);
-        return;
-      }
+  const updatePropsContext = React.useCallback(
+    (newContextProps: NonNullable<IMessage["contextProps"]>) => {
+      newContextProps.forEach(({ name, props }) => {
+        if (saveButton && name === saveButton.contextName) {
+          setSaveButtonProps?.((val) => ({ ...val, props }) as ButtonGroup);
+          return;
+        }
 
-      setContextProps((prev) => ({ ...prev, [name]: props }));
-    });
-  };
+        setContextProps((prev) => ({ ...prev, [name]: props }));
+      });
+    },
+    [saveButton, setSaveButtonProps],
+  );
 
   const contextValue = useMemo(
     () => ({
@@ -505,6 +506,7 @@ const WrappedComponent = ({
     }),
     [
       contextProps,
+      updatePropsContext,
       isRequestRunning,
       setModalRequestRunning,
       modalRequestRunning,

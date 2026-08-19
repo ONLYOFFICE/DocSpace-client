@@ -153,6 +153,9 @@ const DeveloperToolsSidebar = ({
       // biome-ignore lint/plugin/no-dynamic-i18n-key: literals captured by locales scanner
       label: t(item.translationKey),
       icon: getCatalogIconUrlByType(item.pageType),
+      // linkData renders the item as a real router link, so right-click /
+      // Ctrl-click / middle-click can open the section in a new tab.
+      linkData: { path: item.path },
       onClick: () => navigate(item.path),
     }));
     return [{ id: "developer-tools", items }];

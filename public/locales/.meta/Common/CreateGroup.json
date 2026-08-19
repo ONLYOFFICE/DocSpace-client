@@ -3,7 +3,7 @@
   "content": "Create group",
   "content_en_sha1_hash": "5a0b1c170fd55ab07e5656625be963d20baa107a",
   "created_at": "2026-02-19T13:36:07.022Z",
-  "updated_at": "2026-08-14T14:58:32.699Z",
+  "updated_at": "2026-08-19T13:26:37.690Z",
   "comment": {
     "text": "This is a button label and dialog title. It allows users to create a new group.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 723,
+      "line_number": 724,
       "context": "const groupsOptions = [\n {\n id: \"create_group\",\n className: \"main-button_drop-down\",\n icon: GroupReactSvgUrl,\n label: t(\"Common:CreateGroup\"),\n onClick: createGroup,\n action: \"group\",\n key: \"group\",\n },\n ];",
       "module": "/packages/client"
     }

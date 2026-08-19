@@ -3,7 +3,7 @@
   "content": "Copied to clipboard",
   "content_en_sha1_hash": "0e7383487387213f8f33b310d457c956a84efa2d",
   "created_at": "2025-11-25T11:52:41.121Z",
-  "updated_at": "2026-07-28T07:30:59.965Z",
+  "updated_at": "2026-08-19T13:26:37.719Z",
   "comment": {
     "text": "Toast message. Appears briefly after content is successfully copied to the clipboard.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 68,
       "context": "const { isBase } = useTheme();\n \n const onCopy = () => {\n copy(content);\n toastr.success(\n successCopyMessage ?? t(\"CopiedToClipboard\"),\n );\n };\n \n return (\n <div className={styles.codeContainer} data-testid=\"code-block\">",
       "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/plugins/WrappedComponent.tsx",
+      "line_number": 263,
+      "context": "return (\n <Textarea\n {...restProps}\n copyInfoText={\n copyInfoText ? t(\"Common:CopiedToClipboard\") : undefined\n }\n onChange={onChangeAction}\n />\n );\n }",
+      "module": "/packages/client"
     }
   ],
   "languages": {

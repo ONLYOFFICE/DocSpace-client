@@ -3,7 +3,7 @@
   "content": "Activate",
   "content_en_sha1_hash": "92ef08325a4813563a3110359906076374683282",
   "created_at": "2025-05-19T21:30:42.888Z",
-  "updated_at": "2026-08-17T17:23:21.656Z",
+  "updated_at": "2026-08-19T13:26:37.652Z",
   "comment": {
     "text": "This is the label for a button. Clicking it activates a license after a file has been uploaded.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 130,
+      "line_number": 102,
       "context": "// saas admin: activate AI right away (or top up first) + show benefits.\n // The actual logic lives on the client and is passed in via callbacks.\n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Activate\"),\n key: \"activate-ai\",\n onClick: onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({",
       "module": "/libs/ui-kit"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 472,
+      "line_number": 466,
       "context": "} as const;\n \n const activateOrTopUpAI = isCardLinkedToPortal\n ? ({\n type: \"button\",\n title: t(\"Common:Activate\"),\n key: \"activate-ai\",\n onClick: actions.onActivateAI,\n isLoading: isActivating,\n } as const)\n : ({",
       "module": "/packages/client"
     },

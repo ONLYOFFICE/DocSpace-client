@@ -76,6 +76,8 @@ import {
 
 import { DeviceType } from "@docspace/shared/enums";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 import type PaymentStore from "SRC_DIR/store/PaymentStore";
 
@@ -122,7 +124,11 @@ const AISettings = ({
 }: TAISettingsProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation(["Common"]);
+  const { t, ready } = useTranslation(["Common", "Settings"]);
+
+  React.useEffect(() => {
+    if (ready) setDocumentTitle(t("Settings:AISettings"));
+  }, [ready, t]);
 
   const initKnowledge = React.useCallback(async () => {
     await fetchKnowledge?.();

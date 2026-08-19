@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Ovo je sam obrazac — tačno ono što otvara svako ko prati vaš link. Otpremite PDF obrazac koji već imate ili napravite novi iz galerije šablona, bez napuštanja prostora.",
+  "FormsBlank": "Ovo je sam obrazac — tačno ono što otvara svako ko prati vaš link. Otpremite PDF obrazac koji već imate ili napravite novi iz galerije šablona, bez napuštanja radnog prostora.",
   "FormsBlankTitle": "Obrazac koji svi otvaraju",
   "FormsComplete": "Poslata kopija stiže u {{complete}} i ostaje tamo, po jedna po osobi. Uključite prikupljanje rezultata i svaki odgovor postaje i red u tabeli — po jedna kolona za svako polje, spremno za sortiranje ili grafikon.",
   "FormsCompleteTitle": "Prikupljeni odgovori",
@@ -14,10 +14,8 @@
   "FormsInProgressTitle": "Započeto, ali ne završeno",
   "FormsItem": "Svaki red je cela zbirka. Otvorite jedan da radite unutra, zakačite one koje vodite ili pomoću tri tačke pozovite ljude, kopirajte link koji otvara obrazac i sačuvajte podešavanja kao šablon.",
   "FormsItemTitle": "Rad sa prostorom obrazaca",
-  "FormsOpenSpace": "Otvorimo ovaj i pogledajmo kako je zbirka sastavljena. Unutar svakog prostora obrazaca nalaze se iste tri stvari: sam obrazac, odgovori koji se još pišu i oni koji su već stigli.",
-  "FormsOpenSpaceTitle": "Zakoračite u prostor",
   "FormsPlacesRecent": "{{recent}} i {{favorites}} drže nadohvat ruke zbirke koje vodite.",
-  "FormsPlacesTemplates": "{{templates}} — šabloni prostora koje ste sačuvali.",
+  "FormsPlacesTemplates": "{{templates}} — šabloni prostora obrazaca koje ste sačuvali.",
   "FormsPlacesTitle": "Sve na svom mestu",
   "FormsPlacesTrash": "{{trash}} — obrisani prostori, mogu da se vrate dok je ne ispraznite.",
   "FormsSpace": "Prostor obrazaca je jedna zbirka s kraja na kraj: prazan PDF obrazac, ljudi koji ga popunjavaju i svaki odgovor koji stigne nazad. Napravimo jedan i zavirimo unutra.",

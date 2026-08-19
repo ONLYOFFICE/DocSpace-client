@@ -1,20 +1,20 @@
 {
   "key_path": "ChangeUserTypeNote",
-  "content": "<1>Note:</1> you cannot change the type for the {{productName}} admin and for yourself.",
-  "content_en_sha1_hash": "8909a0a799a09837bcdce8e0b8c101795e45033a",
-  "created_at": "2025-05-19T21:30:56.929Z",
-  "updated_at": "2026-05-15T14:00:06.649Z",
+  "content": "<1>Note:</1> you cannot change the type for the Full admin and for yourself.",
+  "content_en_sha1_hash": "a41936d9586b5c69a9ce8020531afa7637199588",
+  "created_at": "2026-08-13T14:37:19.497Z",
+  "updated_at": "2026-08-14T14:58:32.695Z",
   "comment": {
-    "text": "This is a note displayed within the \"Change User Type\" dialog. It informs the user that they cannot change the user type for the DocSpace administrator or for their own account. The `{{productName}}` variable will be replaced with the product's brand name.",
+    "text": "Informational note within the ChangeUserTypeDialog explaining restrictions on changing specific user types. The <1> tag is used to apply bold styling to the \"Note:\" prefix.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:58.032Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:03:01.746Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
       "line_number": 221,
-      "context": "/>\n </Text>\n {!isCurrentUserOwner ? (\n <Text className={styles.noteText}>\n <Trans\n i18nKey=\"ChangeUserTypeNote\"\n ns=\"ChangeUserTypeDialog\"\n t={t}\n values={{ productName: getBrandName(\"ProductName\") }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,",
+      "context": "/>\n </Text>\n {!isCurrentUserOwner ? (\n <Text className={styles.noteText}>\n <Trans\n i18nKey=\"ChangeUserTypeNote\"\n ns=\"ChangeUserTypeDialog\"\n t={t}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,13 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
     },
     "sk": {
       "ai_translated": false,
@@ -158,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -194,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "si": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

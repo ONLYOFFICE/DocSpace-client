@@ -3,7 +3,7 @@
   "content": "AI features",
   "content_en_sha1_hash": "59f0c687f2560552c920af9e6c0850fc4715bf49",
   "created_at": "2026-06-03T11:45:29.424Z",
-  "updated_at": "2026-08-06T08:04:19.869Z",
+  "updated_at": "2026-08-17T17:23:21.683Z",
   "comment": {
     "text": "Menu item label in the context menu that contains AI-related sub-options.",
     "is_auto": true,
@@ -19,14 +19,38 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/sub-components/SpendingBreakdown.tsx",
-      "line_number": 163,
+      "line_number": 160,
       "context": "//     case DISK_STORAGE:\n //       return t(\"AdditionalStorageInfo\");\n //     case BACKUP_SERVICE:\n //       return t(\"Backups\");\n //     case AI_TOOLS:\n //       return t(\"AIFeatures\");\n //     default:\n //       return service;\n //   }\n // };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ActivateAIDialog/index.tsx",
-      "line_number": 125,
+      "line_number": 123,
       "context": "<ModalDialog\n visible={visible}\n onClose={isActivating ? () => {} : onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:AIFeatures\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" lineHeight=\"20px\">\n {renderBody()}\n </Text>\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 60,
+      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n \n const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIFeatures\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 60,
+      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n \n const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIFeatures\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
+      "line_number": 60,
+      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n \n const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIFeatures\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
+      "line_number": 60,
+      "context": "if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))\n return t(\"Common:AIFeatures\");\n if (pathname.includes(\"/billing/addons/ai-search\"))\n return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");",
       "module": "/packages/client"
     },
     {

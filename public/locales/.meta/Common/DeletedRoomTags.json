@@ -3,7 +3,7 @@
   "content": "Tags removed.",
   "content_en_sha1_hash": "453b4c78053004eb819254db86b4ee03ae201130",
   "created_at": "2025-05-19T21:30:54.773Z",
-  "updated_at": "2026-07-07T08:59:21.810Z",
+  "updated_at": "2026-08-17T17:23:21.764Z",
   "comment": {
     "text": "This is a toast message indicating that tags associated with a room have been successfully removed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 265,
+      "line_number": 293,
       "context": "/>\n );\n case FeedActionKeys.AddedRoomTags:\n return t(\"Common:AddedRoomTags\");\n case FeedActionKeys.DeletedRoomTags:\n return t(\"Common:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"Common:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:",
       "module": "/packages/client"
     },

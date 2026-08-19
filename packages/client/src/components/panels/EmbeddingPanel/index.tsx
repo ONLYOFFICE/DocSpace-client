@@ -74,7 +74,6 @@ import styles from "./EmbeddingPanel.module.scss";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type LinkParamsLinkShareToType = {
 	denyDownload: boolean;
@@ -440,9 +439,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 										{`"Add the website URL for embedding to the <1>allow list</1>."`}
 									</Trans>
 								) : (
-									t("Common:EmbeddingBarDescription", {
-										productName: getBrandName("ProductName"),
-									})
+									t("Common:EmbeddingBarDescription")
 								)}
 							</Text>
 							<IconButton
@@ -532,9 +529,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
 										isChecked={embeddingConfig.showTitle}
 										img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
 										title={t("Common:Header")}
-										description={t("Common:HeaderDescription", {
-											productName: getBrandName("ProductName"),
-										})}
+										description={t("Common:HeaderDescription")}
 										dataTestId="show_title"
 									/>
 									<CheckboxElement

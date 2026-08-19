@@ -3,7 +3,7 @@
   "content": "View",
   "content_en_sha1_hash": "69bd4ef9fbd0894a22759c3766b859defbdedbc8",
   "created_at": "2025-05-19T21:30:49.521Z",
-  "updated_at": "2026-08-06T14:20:57.522Z",
+  "updated_at": "2026-08-17T17:23:21.681Z",
   "comment": {
     "text": "This is a button label or menu item for viewing content. It can appear as a standalone button on a smart banner or as a menu option in a context menu.",
     "is_auto": true,
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 368,
+      "line_number": 365,
       "context": "case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:View\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillOut\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }

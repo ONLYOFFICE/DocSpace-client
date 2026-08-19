@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Bu, formun kendisi — bağlantınızı açan herkesin gördüğü şey tam olarak budur. Elinizde hazır bir PDF form varsa yükleyin ya da alandan çıkmadan şablon galerisinden bir tane oluşturun.",
+  "FormsBlank": "Bu, formun kendisi — bağlantınızı açan herkesin gördüğü şey tam olarak budur. Elinizde hazır bir PDF form varsa yükleyin ya da çalışma alanından çıkmadan şablon galerisinden bir tane oluşturun.",
   "FormsBlankTitle": "Herkesin açtığı form",
   "FormsComplete": "Gönderilen bir kopya {{complete}} içine düşer ve orada kalır, kişi başına bir tane. Sonuç toplamayı açtığınızda her yanıt aynı zamanda bir elektronik tablo satırına dönüşür — her alan için bir sütun, sıralamaya ya da grafiğe hazır.",
   "FormsCompleteTitle": "Toplanan yanıtlar",
@@ -14,10 +14,8 @@
   "FormsInProgressTitle": "Başlanmış, tamamlanmamış",
   "FormsItem": "Her satır bütün bir derlemedir. İçinde çalışmak için birini açın, yürüttüklerinizi sabitleyin ya da üç noktayı kullanarak kişileri davet edin, formu açan bağlantıyı kopyalayın ve yapılandırmayı şablon olarak kaydedin.",
   "FormsItemTitle": "Bir form alanıyla çalışmak",
-  "FormsOpenSpace": "Şunu açalım ve bir derlemenin nasıl kurulduğuna bakalım. Her form alanının içinde aynı üç şey vardır: formun kendisi, hâlâ yazılmakta olan yanıtlar ve çoktan gelmiş olanlar.",
-  "FormsOpenSpaceTitle": "Bir alanın içine adım atın",
   "FormsPlacesRecent": "{{recent}} ve {{favorites}}, yürüttüğünüz derlemeleri elinizin altında tutar.",
-  "FormsPlacesTemplates": "{{templates}} — kaydettiğiniz alan şablonları.",
+  "FormsPlacesTemplates": "{{templates}} — kaydettiğiniz form alanı şablonları.",
   "FormsPlacesTitle": "Her şey yerli yerinde",
   "FormsPlacesTrash": "{{trash}} — silinmiş alanlar; siz boşaltana kadar geri getirilebilir.",
   "FormsSpace": "Form alanı, baştan sona tek bir derlemedir: boş PDF form, onu dolduran kişiler ve geri dönen her yanıt. Hadi bir tane oluşturup içine bakalım.",

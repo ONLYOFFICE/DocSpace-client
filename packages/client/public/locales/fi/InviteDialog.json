@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Kutsukieli",
-  "InviteMembersManuallyDescription": "Kutsu uusia jäseniä {{productName}} :een henkilökohtaisesti sähköpostilla",
+  "InviteMembersManuallyDescription": "Kutsu uusia jäseniä työtilaan henkilökohtaisesti sähköpostilla",
   "InviteMembersSearchPlaceholder": "Kutsu käyttäjiä sähköpostilla",
-  "InviteViaLinkDescriptionAccounts": "Luo universaali linkki itsevaltuutukselle {{productName}}:lla."
+  "InviteViaLinkDescriptionAccounts": "Luo universaali linkki itsevaltuutukselle työtilassa."
 }

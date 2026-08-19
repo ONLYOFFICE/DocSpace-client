@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Este é o formulário em si — exatamente aquilo que abre quem seguir a sua ligação. Carregue um formulário PDF que já tenha ou construa um a partir da galeria de modelos sem sair do espaço.",
+  "FormsBlank": "Este é o formulário em si — exatamente aquilo que abre quem seguir a sua ligação. Carregue um formulário PDF que já tenha ou construa um a partir da galeria de modelos sem sair do espaço de trabalho.",
   "FormsBlankTitle": "O formulário que todos abrem",
   "FormsComplete": "Uma cópia submetida vai para {{complete}} e fica lá, uma por pessoa. Ative a recolha de resultados e cada resposta passa também a ser uma linha numa folha de cálculo — uma coluna por campo, pronta a ordenar ou a representar num gráfico.",
   "FormsCompleteTitle": "Respostas recolhidas",
@@ -14,10 +14,8 @@
   "FormsInProgressTitle": "Começado, não terminado",
   "FormsItem": "Cada linha é uma recolha inteira. Abra uma para trabalhar lá dentro, afixe as que tem em curso ou use os três pontos para convidar pessoas, copiar a ligação que abre o formulário e guardar a configuração como modelo.",
   "FormsItemTitle": "Trabalhar com um espaço de formulários",
-  "FormsOpenSpace": "Vamos abrir este e ver como é composta uma recolha. Dentro de cada espaço de formulários estão sempre as mesmas três coisas: o próprio formulário, as respostas ainda a ser escritas e as que já chegaram.",
-  "FormsOpenSpaceTitle": "Entre num espaço",
   "FormsPlacesRecent": "{{recent}} e {{favorites}} mantêm à mão as recolhas que tem em curso.",
-  "FormsPlacesTemplates": "{{templates}} — os modelos de espaço que guardou.",
+  "FormsPlacesTemplates": "{{templates}} — os modelos de espaço de formulários que guardou.",
   "FormsPlacesTitle": "Cada coisa no seu lugar",
   "FormsPlacesTrash": "{{trash}} — espaços eliminados, restauráveis até a esvaziar.",
   "FormsSpace": "Um espaço de formulários é uma recolha de ponta a ponta: o formulário PDF em branco, as pessoas que o preenchem e cada resposta que chega. Vamos criar um e espreitar lá dentro.",

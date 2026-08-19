@@ -1,0 +1,29 @@
+{
+  "key_path": "FormSpaceTemplate",
+  "content": "Space template",
+  "content_en_sha1_hash": "131f4231ef35aa8146e42752376f585157d633ba",
+  "created_at": "2026-08-17T17:22:51.896Z",
+  "updated_at": "2026-08-17T17:25:44.650Z",
+  "comment": {
+    "text": "Button label for a quick action item used to create a new Form Space from a template.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:25:44.650Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
+      "line_number": 308,
+      "context": "// one carries a testid, so the two can never collide in the DOM.\n {\n id: \"quick-form-template\",\n dataTestId: \"quick-form-space-template\",\n icon: <UseRoomTemplateIllustrationIcon />,\n label: t(\"Common:FormSpaceTemplate\"),\n onClick: () => goFormsTemplates(userId),\n },\n ];\n \n // The OForms gallery. There is no folder to create a form in at the Forms",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

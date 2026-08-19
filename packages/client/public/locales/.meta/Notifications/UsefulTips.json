@@ -1,20 +1,20 @@
 {
   "key_path": "UsefulTips",
-  "content": "Useful {{productName}} tips",
-  "content_en_sha1_hash": "184f3029f854216318bae47c9d442f284b83b435",
-  "created_at": "2025-05-19T21:30:54.092Z",
-  "updated_at": "2026-05-15T14:00:06.881Z",
+  "content": "Useful {{organizationName}} {{productName}} tips",
+  "content_en_sha1_hash": "e5ebf7edffdfec88e38092359c733a05861c2f0f",
+  "created_at": "2026-08-13T22:44:30.740Z",
+  "updated_at": "2026-08-14T15:30:28.732Z",
   "comment": {
-    "text": "This is a heading for a section displaying helpful tips. `{{productName}}` will be replaced with the name of the ONLYOFFICE product, e.g., \"DocSpace\".",
+    "text": "Section title for the useful tips container in the notifications settings, containing variables for the organization and product names.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:17:53.785Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:30:28.732Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.tsx",
       "line_number": 78,
-      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"UsefulTips\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <ToggleButton\n className=\"useful-tips toggle-btn\"\n onChange={onChangeEmailSubscription}\n isChecked={usefulTipsSubscription}",
+      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"UsefulTips\", { organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\") })}\n </Text>\n <ToggleButton\n className=\"useful-tips toggle-btn\"\n onChange={onChangeEmailSubscription}",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

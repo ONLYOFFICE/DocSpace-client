@@ -67,6 +67,14 @@ import type {
 
 const baseUrl = "/ai";
 
+// A 403 on an AI read means the caller has no access to this agent/room's AI
+// (e.g. an owner opening an agent created by another admin). That "no access"
+// state is already surfaced by the agent view's NoAccessContainer, so a generic
+// error toast on top is noise — several AI reads race on open and each would
+// fire one (Bug 83181). Callers that self-toast skip it for 403 via this check.
+const isForbiddenError = (e: unknown): boolean =>
+  (e as { response?: { status?: number } })?.response?.status === 403;
+
 export const getModels = async (
   providerId?: TAiProvider["id"],
   abortController?: AbortController | null,
@@ -228,7 +236,7 @@ export const getAIConfig = async () => {
     return res as TAIConfig;
   } catch (e) {
     console.log(e);
-    toastr.error(e as string);
+    if (!isForbiddenError(e)) toastr.error(e as string);
   }
 };
 
@@ -242,7 +250,7 @@ export const getKnowledgeConfig = async () => {
     return res as KnowledgeConfig;
   } catch (e) {
     console.log(e);
-    toastr.error(e as string);
+    if (!isForbiddenError(e)) toastr.error(e as string);
   }
 };
 
@@ -380,6 +388,19 @@ export const getProfilesList = async () => {
   if (!response.ok) return [] as TProfilesList;
 
   return (await response.json()) as TProfilesList;
+};
+
+export const getWebSearchConfigured = async () => {
+  const response = await authFetch(`/api/2.0/ai/web-search/is-configured`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) return false;
+
+  return (await response.json()) as boolean;
 };
 
 export const getProfileAssignments = async (entityId?: string) => {

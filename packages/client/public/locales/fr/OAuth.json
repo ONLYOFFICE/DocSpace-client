@@ -79,7 +79,7 @@
   "ScopesHelp": "Les champs d'application sont utilisés pour limiter l'accès de votre application à toutes les données relatives à l'utilisateur, et ils vous permettent de spécifier exactement le type d'accès dont vous avez besoin.",
   "Secret": "Secret",
   "SecretCopy": "Le secret du client a été copié avec succès dans le presse-papiers",
-  "SignIn": "Se connecter avec {{productName}}",
+  "SignIn": "Se connecter avec {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Assistance et informations juridiques",
   "TermsOfService": "Conditions d'utilisation",
   "TermsOfServiceURL": "URL des conditions d'utilisation",

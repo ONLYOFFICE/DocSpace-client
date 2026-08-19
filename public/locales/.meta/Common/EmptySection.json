@@ -1,39 +1,21 @@
 {
   "key_path": "EmptySection",
-  "content": "Empty {{sectionName}}",
-  "content_en_sha1_hash": "a8c3ee9d97173f47924959f3cbc240a5d756184d",
+  "content": "Empty section",
+  "content_en_sha1_hash": "d3a52ee49ba7ed31d66e3656a201daf8fbc17589",
   "created_at": "2026-06-03T09:30:00.178Z",
-  "updated_at": "2026-07-27T13:07:50.560Z",
+  "updated_at": "2026-08-17T17:23:21.821Z",
   "comment": {
-    "text": "Action label for a menu item or badge title used to clear the contents of a specific area. `{{sectionName}}` is a noun representing the section being emptied (e.g., \"Trash\").",
-    "is_auto": true,
-    "updated_at": "2026-06-03T09:32:54.037Z",
-    "model": "gemma4:26b"
+    "text": "Action label for the header context menu item that permanently deletes everything in the current section (used for a read-only personal Files section).",
+    "is_auto": false,
+    "updated_at": "2026-08-17T00:00:00.000Z",
+    "model": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 214,
-      "context": "iconBadge={iconBadge}\n withAnimation\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }\n badgeComponent={\n <NewFilesBadge",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
-      "line_number": 110,
-      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: self.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
+      "line_number": 164,
+      "context": "disabled: false,\n },\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Common:EmptySection\"),\n onClick: self.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },\n ];",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
-      "line_number": 110,
-      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: self.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useHeaderContextMenu.ts",
-      "line_number": 154,
-      "context": "return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Common:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n icon: ClearTrashReactSvgUrl,\n disabled: isEmpty || !deleteCtx?.emptyTrash,\n onClick: () => deleteCtx?.emptyTrash?.(),",
-      "module": "/packages/sdk"
     }
   ],
   "languages": {

@@ -5,7 +5,7 @@
   "RoomsEmptyTitle": "Your list is empty for now",
   "RoomsGroups": "Organize rooms by specific features to quickly find what you need. Create groups and switch between them right above the list.",
   "RoomsGroupsTitle": "Group your rooms",
-  "RoomsMembers": "Every room has its member list in the Info panel. Add portal contacts and set a role for each member — from viewing files to managing the entire room.",
+  "RoomsMembers": "Every room has its member list in the Info panel. Add workspace contacts and set a role for each member — from viewing files to managing the entire room.",
   "RoomsMembersTitle": "Work together",
   "RoomsPlacesArchive": "{{archive}} — rooms you no longer work in, restorable anytime.",
   "RoomsPlacesFiles": "{{recent}}, {{favorites}} and {{trash}} gather files from your rooms: recently opened, starred and deleted.",

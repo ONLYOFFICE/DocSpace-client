@@ -1,5 +1,5 @@
 {
-  "Desc": "Por favor, configure los datos de registro de {{productName}}.",
+  "Desc": "Por favor, configure los datos de registro del espacio de trabajo.",
   "ErrorEmail": "Dirección de correo electrónico no válida",
   "ErrorInstanceId": "ID de instancia no válido",
   "ErrorLicenseBody": "La licencia no es válida. Asegúrese de que selecciona el archivo correcto.",
@@ -9,5 +9,5 @@
   "LicenseLink": "Contratos de licencia",
   "PlaceholderLicense": "Su archivo de licencia",
   "Timezone": "Zona horaria:",
-  "WelcomeTitle": "¡Bienvenido/a a su {{productName}}!"
+  "WelcomeTitle": "¡Bienvenido/a a su espacio de trabajo!"
 }

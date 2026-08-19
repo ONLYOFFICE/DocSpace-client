@@ -3,7 +3,7 @@
   "content": "MCP server",
   "content_en_sha1_hash": "94cbffb24efcf41d6f46da3b0290c1a446e05376",
   "created_at": "2025-11-21T08:21:51.253Z",
-  "updated_at": "2026-08-07T10:52:44.585Z",
+  "updated_at": "2026-08-17T17:23:21.666Z",
   "comment": {
     "text": "This is a noun referring to the server component that handles AI-related functionalities. It appears as a label in various contexts, including descriptions of AI features and as a dialog title when configuring AI servers.",
     "is_auto": true,

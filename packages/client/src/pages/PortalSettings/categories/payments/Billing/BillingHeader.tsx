@@ -47,27 +47,9 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import { getDocsConnectTrialState } from "../../developer-tools/DocsConnect/utils";
 
 import PayerOnlyWarning from "./PayerOnlyWarning";
+import { getBillingPageTitle } from "../utils";
 
 import styles from "./BillingHeader.module.scss";
-
-const getTitle = (pathname: string, t: (key: string) => string): string => {
-  if (pathname.includes("/billing/wallet")) return t("Common:Wallet");
-  if (pathname.includes("/billing/tariff-plan")) return t("Common:TariffPlan");
-  if (pathname.includes("/billing/payment-method"))
-    return t("Common:PaymentMethod");
-  if (pathname.includes("/billing/usage")) return t("Common:Usage");
-  if (pathname.includes("/billing/addons/ai-services"))
-    return t("Common:AIServices");
-  if (pathname.includes("/billing/addons/ai-search"))
-    return t("Common:AISearch");
-  if (pathname.includes("/billing/addons/backup")) return t("Common:Backup");
-  if (pathname.includes("/billing/addons/disk-storage"))
-    return t("Common:Storage");
-  if (pathname.includes("/billing/addons/docs-connect"))
-    return t("DocsConnect:DocsConnect");
-  if (pathname.includes("/billing/addons")) return t("Common:Addons");
-  return t("Common:Billing");
-};
 
 const isSubPage = (pathname: string): boolean => {
   const path = pathname.replace(/\/$/, "");
@@ -91,7 +73,7 @@ const BillingHeader = ({
   const navigate = useNavigate();
   const { t } = useTranslation(["Common", "DocsConnect"]);
 
-  const title = getTitle(location.pathname, t);
+  const title = getBillingPageTitle(location.pathname, t);
   const showBackButton = isSubPage(location.pathname);
 
   const isDocsConnectPage = location.pathname.includes(

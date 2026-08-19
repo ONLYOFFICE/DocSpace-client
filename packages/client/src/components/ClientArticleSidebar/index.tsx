@@ -215,6 +215,12 @@ const ClientArticleSidebar = ({
 
     const newCount = (folder?: TTreeFolder) => folder?.newItems ?? 0;
 
+    const panelFolderId = (folder: TTreeFolder): string | number => {
+      if (folder.rootFolderType === FolderType.Rooms) return "rooms";
+      if (folder.rootFolderType === FolderType.AIAgents) return "agents";
+      return folder.id;
+    };
+
     const sectionBadge = (
       folderId: string | number,
       count: number,
@@ -238,7 +244,10 @@ const ClientArticleSidebar = ({
       if (total <= 0 || !parent) return {};
       return {
         collapsedBadgeComponent: (
-          <NewFilesBadge newFilesCount={total} folderId={parent.id} />
+          <NewFilesBadge
+            newFilesCount={total}
+            folderId={panelFolderId(parent)}
+          />
         ),
       };
     };
@@ -316,7 +325,7 @@ const ClientArticleSidebar = ({
     if (roomsFolder) {
       mainItems.push({
         ...navItem(roomsFolder),
-        ...sectionBadge(roomsFolder.id, newCount(roomsFolder)),
+        ...sectionBadge(panelFolderId(roomsFolder), newCount(roomsFolder)),
         ...collapsedBadge(roomsFolder, [archiveFolder]),
         children: [
           // Recent/Favorites under Rooms reuse the @recent/@favorites files
@@ -473,7 +482,7 @@ const ClientArticleSidebar = ({
 
       const agentsItem: NavMenuItem = {
         ...navItem(aiAgentsFolder),
-        ...sectionBadge(aiAgentsFolder.id, newCount(aiAgentsFolder)),
+        ...sectionBadge(panelFolderId(aiAgentsFolder), newCount(aiAgentsFolder)),
       };
       mainItems.push(
         agentChildren.length > 0

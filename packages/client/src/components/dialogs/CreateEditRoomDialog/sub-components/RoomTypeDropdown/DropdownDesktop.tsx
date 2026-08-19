@@ -36,7 +36,7 @@
 import { useEffect, useState, useRef } from "react";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Backdrop } from "@docspace/ui-kit/components";
 import { RoomsType } from "@docspace/shared/enums";
@@ -95,7 +95,7 @@ const DropdownDesktop = ({
     };
   }, [open, heightList]);
 
-  const roomTypes = RoomsTypeValues.map((roomType) => (
+  const roomTypes = getCreateRoomTypes().map((roomType) => (
     <RoomType
       id={roomType.toString()}
       key={roomType}

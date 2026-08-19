@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2026-05-15T15:37:40.252Z",
+  "updated_at": "2026-08-14T14:58:32.799Z",
   "comment": {
     "text": "This is a page title for the Javascript SDK settings. It appears as the main heading for the Javascript SDK configuration section.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 145,
+      "line_number": 141,
       "context": "handleOnClick: navigateToUploader,\n },\n ];\n \n useEffect(() => {\n if (tReady) setDocumentTitle(t(\"JavascriptSdk\"));\n }, [tReady]);\n \n useEffect(() => {\n const content = document.querySelector(\".section-wrapper-content\");\n if (!content) return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
-      "line_number": 89,
+      "line_number": 88,
       "context": "];\n \n const DocSpace = (props) => {\n const { t, theme, currentColorScheme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[220]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 127,
+      "line_number": 126,
       "context": "const Manager = (props) => {\n const { t, fetchExternalLinks, theme, currentColorScheme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },",
       "module": "/packages/client"
     },

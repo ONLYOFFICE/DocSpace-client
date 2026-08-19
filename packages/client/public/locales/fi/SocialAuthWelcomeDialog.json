@@ -1,11 +1,9 @@
 {
   "ChangeData": "Vaihda tiedot ja salasana",
   "ClickButtonBelow": "Jos haluat kirjautua sähköpostiosoitteellasi, määritä itsellesi salasana. <br/> Kun olet valmis, napsauta alla olevaa painiketta.",
-  "ContinueToProduct": "Jatka {{productName}} -tuotteeseen",
+  "ContinueToProduct": "Jatka työtilaan",
   "GeneratedPassword": "Luotu salasana",
-  "ProductNameDetail": "{{productName}} nimi",
+  "ProductNameDetail": "Työtilan nimi",
   "ReviewAccountDetails": "Ole hyvä ja tarkista tilisi tiedot hetken ajan:",
-  "SetEmailPassword": "Aseta salasana",
-  "WelcomeSubtitle": "Tilasi on luotu onnistuneesti. Tarkista profiilitietosi ja aloita työskentely.",
   "YourProfileDetails": "Profiilitietosi"
 }

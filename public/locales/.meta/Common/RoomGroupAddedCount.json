@@ -3,7 +3,7 @@
   "content": "Groups added ({{count}}).",
   "content_en_sha1_hash": "cb7ab7bb6fa0e53d6c5b716aea922f323488eec3",
   "created_at": "2025-05-19T21:30:54.923Z",
-  "updated_at": "2026-07-07T08:59:21.812Z",
+  "updated_at": "2026-08-17T17:23:21.766Z",
   "comment": {
     "text": "This is a message displayed in the \"History\" section of the InfoPanel, indicating that multiple groups have been added to a room. `{{count}}` is a number representing how many groups were added.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 344,
+      "line_number": 372,
       "context": "return t(\"Common:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"Common:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"Common:RoomGroupAddedCount\", {\n count,\n });\n return t(\"Common:RoomGroupAdded\");\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"Common:RoomUpdateAccess\");",
       "module": "/packages/client"
     },

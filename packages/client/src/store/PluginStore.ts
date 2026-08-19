@@ -49,13 +49,14 @@ import type {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
+
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import SocketHelper, {
   SocketEvents,
   TChangeWebPluginData,
+  SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
@@ -84,6 +85,8 @@ import type {
   TPlugin,
   IPostMessageCallbackMessage,
   IMediaViewerClient,
+  IModalDialogClient,
+  TMessageActionsParams,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -97,7 +100,6 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
-import { SocketCommands } from "@docspace/ui-kit/utils/socket";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -108,12 +110,14 @@ const origin =
 const proxy = window.ClientConfig?.proxy?.url || proxyURL;
 const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
-type TDispatchMessage = {
+type TDispatchMessage = Pick<
+  TMessageActionsParams,
+  | "pluginName"
+  | "setElementProps"
+  | "updateCreateDialogProps"
+  | "updatePropsContext"
+> & {
   message: IMessage | void;
-  pluginName: string;
-  setElementProps?: React.Dispatch<unknown>;
-  updateCreateDialogProps?: React.Dispatch<unknown>;
-  updatePropsContext?: (props: unknown) => void;
 };
 
 class PluginStore {
@@ -162,7 +166,7 @@ class PluginStore {
     IFloatingOperationsButtonClient
   > = new Map();
 
-  pluginDialogProps: null | ModalDialogProps = null;
+  pluginDialogProps: null | IModalDialogClient = null;
 
   pluginSelectorProps: null | TSelectorProps = null;
 
@@ -231,12 +235,13 @@ class PluginStore {
     updateCreateDialogProps,
     updatePropsContext,
   }: TDispatchMessage) => {
+    if (!message) return;
+
     messageActions({
       message,
       pluginName,
       setElementProps,
       setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
       updatePluginStatus: this.updatePluginStatus,
       updatePropsContext: updatePropsContext,
       setPluginDialogVisible: this.setPluginDialogVisible,
@@ -283,13 +288,11 @@ class PluginStore {
     this.pluginSelectorVisible = value;
   };
 
-  setPluginSelectorProps = (
-    value: null | (TSelectorProps & { pluginName: string }),
-  ) => {
+  setPluginSelectorProps = (value: null | TSelectorProps) => {
     this.pluginSelectorProps = value;
   };
 
-  setPluginDialogProps = (value: null | ModalDialogProps) => {
+  setPluginDialogProps = (value: null | IModalDialogClient) => {
     this.pluginDialogProps = value;
   };
 
@@ -869,11 +872,7 @@ class PluginStore {
     )
       return;
 
-    if (
-      itemId !== undefined &&
-      item.itemId &&
-      !item.itemId.includes(itemId)
-    )
+    if (itemId !== undefined && item.itemId && !item.itemId.includes(itemId))
       return;
 
     if (item.items && item.items.length > 0) {

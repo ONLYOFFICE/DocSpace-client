@@ -1,20 +1,20 @@
 {
   "key_path": "NoMCPServersDescription",
-  "content": "Please connect {{mcpServers}} in {{productName}} settings to use them in the {{aiAgent}}.",
-  "content_en_sha1_hash": "cb7d0b5345d622db847157a2457d0c1cff8e3cce",
-  "created_at": "2026-06-01T21:20:26.047Z",
-  "updated_at": "2026-07-27T13:07:51.097Z",
+  "content": "Please connect {{mcpServers}} in workspace settings to use them in the {{aiAgent}}.",
+  "content_en_sha1_hash": "7a1ca7aedd92c169dcdd063f25d7e016964d8290",
+  "created_at": "2026-08-13T22:44:13.097Z",
+  "updated_at": "2026-08-14T15:07:26.844Z",
   "comment": {
-    "text": "Empty screen description instructing the user to configure MCP servers in the product settings. Includes placeholders for the server title, product name, and AI agent name.",
+    "text": "Empty screen description shown when no MCP servers are configured, instructing the user to connect {{mcpServers}} (a settings section title) in workspace settings to enable them for the {{aiAgent}} (the AI agent name).",
     "is_auto": true,
-    "updated_at": "2026-06-01T21:34:42.865Z",
+    "updated_at": "2026-08-14T15:07:26.844Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
       "line_number": 228,
-      "context": ")\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n productName: getBrandName(\"ProductName\"),\n aiAgent: t(\"AIAgent\"),\n })}\n searchEmptyScreenImage={",
+      "context": ")\n }\n emptyScreenHeader={t(\"NoMCPServers\", {\n mcpServers: t(\"MCPSettingTitle\"),\n })}\n emptyScreenDescription={t(\"NoMCPServersDescription\", {\n mcpServers: t(\"MCPSettingTitle\"),\n aiAgent: t(\"AIAgent\"),\n })}\n searchEmptyScreenImage={\n isBase ? (",
       "module": "/libs/ui-kit"
     }
   ],

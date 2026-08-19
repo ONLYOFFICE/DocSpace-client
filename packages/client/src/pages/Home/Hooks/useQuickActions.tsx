@@ -38,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
 import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import {
@@ -155,6 +156,9 @@ export type UseQuickActionsProps = SectionFlags & {
   // folder (mirrors MainButton.onShowTemplateGallery).
   setTemplateGalleryVisible?: (visible: boolean) => void;
   setOformFromFolderId?: (id: number | string | null) => void;
+  // Makes the gallery create a form space out of the picked template instead of
+  // a file — used by the Forms root tile, which has no folder to create in.
+  setCreateRoomFromTemplate?: (value: boolean) => void;
 };
 
 export type QuickActionsResult = {
@@ -180,10 +184,15 @@ export const useQuickActions = (
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
+    setCreateRoomFromTemplate,
     ...sectionFlags
   } = props;
 
   const openChat = useOpenAiChat();
+
+  // Availability is computed by the host (Shell) and includes the portal AI
+  // switch, so the tile disappears live when an admin disables AI.
+  const isAiChatAvailable = useIsAiChatAvailable();
 
   const section = getQuickActionsSection(sectionFlags);
 
@@ -233,8 +242,11 @@ export const useQuickActions = (
   );
 
   const fileItems = React.useMemo<QuickActionItem[]>(
-    () => [...createFileTiles, aiChatItems],
-    [createFileTiles, aiChatItems],
+    () => [
+      ...createFileTiles,
+      ...(isAiChatAvailable ? [aiChatItems] : []),
+    ],
+    [createFileTiles, aiChatItems, isAiChatAvailable],
   );
 
   const roomItems = React.useMemo<QuickActionItem[]>(
@@ -279,13 +291,13 @@ export const useQuickActions = (
         label: t("Files:RoomTemplate"),
         onClick: () => goTemplates(userId),
       },
-      aiChatItems,
+      ...(isAiChatAvailable ? [aiChatItems] : []),
     ],
-    [t, currentFolderId, userId, aiChatItems],
+    [t, currentFolderId, userId, aiChatItems, isAiChatAvailable],
   );
 
-  const formItems = React.useMemo<QuickActionItem[]>(
-    () => [
+  const formItems = React.useMemo<QuickActionItem[]>(() => {
+    const items: QuickActionItem[] = [
       // Collect forms → create a Form Filling Room.
       {
         id: "quick-form-room",
@@ -301,13 +313,42 @@ export const useQuickActions = (
         id: "quick-form-template",
         dataTestId: "quick-form-space-template",
         icon: <UseRoomTemplateIllustrationIcon />,
-        label: t("Common:SpaceTemplate"),
+        label: t("Common:FormSpaceTemplate"),
         onClick: () => goFormsTemplates(userId),
       },
-      aiChatItems,
-    ],
-    [t, currentFolderId, userId, aiChatItems],
-  );
+    ];
+
+    // The OForms gallery. There is no folder to create a form in at the Forms
+    // root, so `createRoomFromTemplate` makes the picked template produce a
+    // form space built around it (see onCreateTemplateImpl).
+    if (templateGalleryAvailable) {
+      items.push({
+        id: "quick-form-gallery",
+        dataTestId: "quick-form-gallery",
+        icon: <CreateFromTemplateIcon />,
+        label: t("Common:TemplateGallery"),
+        onClick: () => {
+          setCreateRoomFromTemplate?.(true);
+          setTemplateGalleryVisible?.(true);
+          setOformFromFolderId?.(currentFolderId);
+        },
+      });
+    }
+
+    if (isAiChatAvailable) items.push(aiChatItems);
+
+    return items;
+  }, [
+    t,
+    currentFolderId,
+    userId,
+    aiChatItems,
+    isAiChatAvailable,
+    templateGalleryAvailable,
+    setCreateRoomFromTemplate,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
+  ]);
 
   // Inside a Form Filling room only PDF forms can be created. A blank PDF form
   // is the same `pdf` create flow as the personal-files PDF tile (dispatchCreate
@@ -336,7 +377,7 @@ export const useQuickActions = (
       });
     }
 
-    items.push(aiChatItems);
+    if (isAiChatAvailable) items.push(aiChatItems);
 
     return items;
   }, [
@@ -346,6 +387,7 @@ export const useQuickActions = (
     setTemplateGalleryVisible,
     setOformFromFolderId,
     aiChatItems,
+    isAiChatAvailable,
   ]);
 
   const agentItems = React.useMemo<QuickActionItem[]>(

@@ -70,7 +70,9 @@ const OverviewPage = () => {
         onViewUsage={() => navigateToRoute("/billing/usage")}
         onManageAddons={() => navigateToRoute(PAYMENT_ROUTES.services)}
         onManagePaymentMethod={() => navigateToRoute("/billing/payment-method")}
-        onUpcomingDetails={() => navigateToRoute("/billing/wallet")}
+        onUpcomingDetails={() =>
+          navigateToRoute("/billing/wallet?tab=upcoming-payments")
+        }
       />
     </ConfirmWrapper>
   );

@@ -3,7 +3,7 @@
   "content": "File locked",
   "content_en_sha1_hash": "d56ec25816d2caab4e55bb34552b52e102303854",
   "created_at": "2025-05-19T21:30:49.965Z",
-  "updated_at": "2026-08-06T14:20:57.602Z",
+  "updated_at": "2026-08-17T17:23:21.762Z",
   "comment": {
     "text": "This is a toast message that appears when a file is successfully locked. It indicates that the file is now protected from editing by others.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 114,
+      "line_number": 125,
       "context": "return t(\"Common:FileDeletedCount\", {\n count,\n });\n return t(\"Common:FilesRemovedNotify\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Common:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Common:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (\"version\" in feed.data && feed.data.version) {\n return t(\"Common:FileVersionRemoved\", {",
       "module": "/packages/client"
     },

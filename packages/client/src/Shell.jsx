@@ -56,6 +56,7 @@ import {
   PORTAL_BASE_THEME_ID,
   PORTAL_DARK_THEME_ID,
 } from "@docspace/ui-kit/ai-agent/providers/themes";
+import { getAiAccessSettings } from "@docspace/shared/api/settings";
 import { Portal } from "@docspace/ui-kit/components/portal";
 import { SnackBar } from "@docspace/ui-kit/components/snackbar";
 import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
@@ -90,6 +91,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { setFileView } from "SRC_DIR/helpers/info-panel";
 import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
+import { ModelUpdatedBanner } from "SRC_DIR/pages/Home/View/ModelUpdatedBanner";
 import { useAiAgentsPickerActions } from "SRC_DIR/Hooks/useAiAgentsPickerActions";
 
 import config from "PACKAGE_FILE";
@@ -102,6 +104,7 @@ import ScrollToTop from "./components/Layout/ScrollToTop";
 import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import { AskAIChatBridge } from "./components/AskAIChatBridge";
 import useCreateFileError from "./Hooks/useCreateFileError";
 import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
@@ -142,6 +145,9 @@ const Shell = ({ page = "home", ...rest }) => {
     isRoomAdmin,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
+    fetchTreeFolders,
+    aiServicesEnabled,
+    setAiServicesEnabled,
     fetchWalletBalance,
     setWalletLowBalance,
     agentEntityId,
@@ -263,6 +269,10 @@ const Shell = ({ page = "home", ...rest }) => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "change-ai-config",
     });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-ai-access-settings",
+    });
   }, []);
 
   useEffect(() => {
@@ -361,6 +371,34 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper?.off(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
     };
   }, [getAIConfig]);
+
+  // Admin toggled the portal AI switch: refresh the switch value, the AI
+  // config and the folders tree so the AI Agents section and the AI entry
+  // points (chat button, Ask AI) appear/disappear for everyone without a
+  // page reload (the nav item is rendered from the tree, so refetching the
+  // config alone leaves a stale entry behind).
+  useEffect(() => {
+    const handleAiAccessChanged = async () => {
+      try {
+        const { enabled } = await getAiAccessSettings();
+        setAiServicesEnabled?.(enabled);
+      } catch (e) {
+        console.error(e);
+      }
+
+      getAIConfig?.();
+      fetchTreeFolders?.();
+    };
+
+    SocketHelper?.on(SocketEvents.ChangeAiAccessSettings, handleAiAccessChanged);
+
+    return () => {
+      SocketHelper?.off(
+        SocketEvents.ChangeAiAccessSettings,
+        handleAiAccessChanged,
+      );
+    };
+  }, [getAIConfig, fetchTreeFolders, setAiServicesEnabled]);
 
   // The quota room is shared by every user, but the balance is admin-only data:
   // the settings response exposes walletLowBalance to admins alone, so the socket
@@ -502,7 +540,8 @@ const Shell = ({ page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${logoText} ${getBrandName("ProductName")}`,
+        organizationName: logoText,
+        productName: getBrandName("ProductName"),
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
@@ -695,6 +734,7 @@ const Shell = ({ page = "home", ...rest }) => {
     !location.pathname.includes("settings/plugins");
 
   const isAiChatAvailable =
+    aiServicesEnabled &&
     currentClientView !== "users" &&
     currentClientView !== "groups" &&
     currentClientView !== "profile" &&
@@ -744,10 +784,19 @@ const Shell = ({ page = "home", ...rest }) => {
   // context — the conversation itself stays in the current location.
   const [pickedAgent, setPickedAgent] = useState(null);
 
+  // Anonymous sessions (public room / public preview via a share link) and
+  // guests must never issue AI calls: they answer 401, and the shared axios
+  // client reacts to a 401 with logout + redirect to the login page, killing
+  // the public link view.
+  const canUseAi = isAuthenticated && !isGuest;
+
   // "Choose AI Agent" entry (with the agents submenu) for the model picker;
   // empty until agents are loaded and unless there is more than one of them.
   const { actions: profilePickerActions, getAgentByRoomId } =
-    useAiAgentsPickerActions(isLoaded && isAiChatAvailable, setPickedAgent);
+    useAiAgentsPickerActions(
+      isLoaded && isAiChatAvailable && canUseAi,
+      setPickedAgent,
+    );
 
   // Re-derive the picked agent from the opened thread's persisted context:
   // agent threads restore their agent (alias + request context), plain
@@ -815,6 +864,23 @@ const Shell = ({ page = "home", ...rest }) => {
     () => ({
       onWebSearchSaved: () =>
         toastr.success(t("Common:ChangesSavedSuccessfully")),
+      // The widget hydrates its stores from mount effects that can't await,
+      // so failures there reach us only through this callback. Without it a
+      // failed profiles load looks like a portal with no AI models
+      // configured. `context` names the failing step (e.g. "profiles:init").
+      onError: ({ type, error, context }) => {
+        console.error(`[ai-agent] ${context ?? type} failed`, error);
+        // A 403 means the user has no access to this agent/room's AI (e.g. a
+        // view-only agent opened by a non-member): every hydration read 403s
+        // at once, and the "view-only" notice already explains it, so the
+        // generic error toast is just noise (Bug 83181). The chat lib rejects
+        // with the status only in the message (`HTTP <status>`), not as a
+        // property, so the message is checked alongside the axios-style shape.
+        const status = error?.response?.status ?? error?.status;
+        const isForbidden =
+          status === 403 || /\bHTTP\s+403\b/.test(error?.message ?? "");
+        if (!isForbidden) toastr.error(t("Common:UnexpectedError"));
+      },
     }),
     [t],
   );
@@ -839,7 +905,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // mounted for useStores() consumers; only hydration and the chat
           // UI are switched off. Viewer-role gating inside agent rooms is
           // handled by `accessRightsStore.canUseChat` in AIAgentView.
-          canUseAi={isAuthenticated && !isGuest}
+          canUseAi={canUseAi}
           callbacks={aiChatCallbacks}
           entityId={agentEntityId}
           contextEntityId={chatContextEntityId}
@@ -867,6 +933,13 @@ const Shell = ({ page = "home", ...rest }) => {
           composerDisabled={standalone ? undefined : !isAIReady}
           suggestions={aiSuggestions}
         >
+          <AskAIChatBridge />
+          <ModelUpdatedBanner
+            key={agentEntityId}
+            entityId={agentEntityId}
+            isAgentRoom={isInsideAgentRoom}
+            userId={userId}
+          />
           {layout}
         </AiAgentProviders>
       ) : (
@@ -1002,6 +1075,9 @@ const ShellWrapper = inject(
       standalone,
       setSocialAuthWelcomeDialogVisible,
       getAIConfig,
+      fetchTreeFolders: treeFoldersStore.fetchTreeFolders,
+      aiServicesEnabled: settingsStore.aiServicesEnabled,
+      setAiServicesEnabled: settingsStore.setAiServicesEnabled,
       isAIReady: paymentStore.isAIReady,
       fetchWalletBalance: paymentStore.fetchWalletBalance,
       setWalletLowBalance: settingsStore.setWalletLowBalance,

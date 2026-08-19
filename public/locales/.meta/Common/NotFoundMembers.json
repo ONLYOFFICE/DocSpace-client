@@ -3,7 +3,7 @@
   "content": "No members found",
   "content_en_sha1_hash": "2f9524453596c315ea26d2daec2af8d6792b16f1",
   "created_at": "2025-05-19T21:30:46.909Z",
-  "updated_at": "2026-08-01T16:25:17.786Z",
+  "updated_at": "2026-08-17T17:23:21.738Z",
   "comment": {
     "text": "This is an empty state header text displayed when no members are found after applying a filter or search in a people selector.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 561,
-      "context": "isCloseable: true,\n headerLabel: t(\"ListContacts\"),\n }}\n filter={() => filter(withoutRoleFilter)}\n {...infoProps}\n emptyScreenHeader={t(\"NotFoundMembers\")}\n emptyScreenDescription={t(\"Common:PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n ) : null;",
+      "line_number": 555,
+      "context": "isCloseable: true,\n headerLabel: t(\"ListContacts\"),\n }}\n filter={() => filter(withoutRoleFilter)}\n {...infoProps}\n emptyScreenHeader={t(\"NotFoundMembers\")}\n emptyScreenDescription={t(\"Common:PeopleSelectorInfo\")}\n />\n ) : null;\n \n return (",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 783,
+      "line_number": 779,
       "context": "searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"NotFoundMembers\")\n : t(\"NotFoundGroups\")\n }\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"NotFoundFilterGuestsDescription\")",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 239,
+      "line_number": 238,
       "context": "excludeItems={\n isPrivateRoom && excludeItems.length ? excludeItems : undefined\n }\n withInfo\n infoText={infoText}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={infoText}\n className={styles.changeOwnerPeopleSelector}\n data-test-id=\"change_owner_people_selector\"\n />\n ) : (",
       "module": "/packages/client"
     },
@@ -61,7 +61,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/change-room-owner-dialog/index.tsx",
-      "line_number": 186,
+      "line_number": 183,
       "context": "{...infoProps}\n withOutCurrentAuthorizedUser\n filterUserId={roomOwnerId}\n currentUserId={currentUserId}\n disableDisabledUsers\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={infoText}\n className={styles.changeOwnerPeopleSelector}\n data-test-id=\"change_owner_people_selector\"\n />\n </div>",
       "module": "/packages/sdk"
     },

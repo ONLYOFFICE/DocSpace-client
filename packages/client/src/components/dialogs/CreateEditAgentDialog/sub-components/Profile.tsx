@@ -34,17 +34,21 @@
  */
 
 import React from "react";
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { RecomendedModel } from "@docspace/ui-kit/ai-agent/recomended-model";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 
 type ProfileSettingsProps = {
   agentParams: TAgentParams;
+  isAdmin?: boolean;
+  recommendedModelForForms?: string;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
@@ -54,14 +58,18 @@ type ProfileSettingsProps = {
 // `profileId` and binds the profile to the created agent server-side.
 const ProfileSettings = ({
   agentParams,
+  isAdmin,
+  recommendedModelForForms,
   setAgentParams,
 }: ProfileSettingsProps) => {
   const { t } = useTranslation(["Common"]);
+  const navigate = useNavigate();
   const { useProfilesStore } = useStores();
 
   const profiles = useProfilesStore((s) => s.profiles);
   const chatProfile = useProfilesStore((s) => s.chatProfile);
   const defaultProfile = useProfilesStore((s) => s.defaultProfile);
+  const initialized = useProfilesStore((s) => s.initialized);
 
   const selectedProfileId = agentParams.profileId;
 
@@ -115,6 +123,12 @@ const ProfileSettings = ({
     [profiles, setAgentParams],
   );
 
+  const recommendedModel = recommendedModelForForms ?? "";
+
+  const onOpenSettings = React.useCallback(() => {
+    navigate("/portal-settings/ai-settings/ai-models");
+  }, [navigate]);
+
   return (
     <StyledParam increaseGap>
       {/* width:100% so the scaled ComboBox spans the dialog width instead of
@@ -138,6 +152,22 @@ const ProfileSettings = ({
             })}
           </Text>
         </div>
+
+        {/* Hidden until profiles are loaded (avoids flashing a wrong state)
+            and while the selected profile is already on the recommended
+            model. Profiles replaced the provider/model comboboxes, so the
+            "select model" branch is gone: the banner always renders the
+            not-available state, pointing admins to AI settings. */}
+        {initialized && recommendedModel ? (
+          <RecomendedModel
+            isAdmin={!!isAdmin}
+            isChat={false}
+            selectedModel={selectedProfile?.modelId ?? ""}
+            recomendedModel={recommendedModel}
+            onOpenSettings={onOpenSettings}
+          />
+        ) : null}
+
         <ComboBox
           options={options}
           selectedOption={selectedOption}

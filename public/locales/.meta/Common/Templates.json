@@ -3,7 +3,7 @@
   "content": "Templates",
   "content_en_sha1_hash": "f25b700ed9f092123a43acb205a6869342cf9dd6",
   "created_at": "2025-05-19T21:30:49.261Z",
-  "updated_at": "2026-08-07T15:05:26.412Z",
+  "updated_at": "2026-08-17T17:23:21.652Z",
   "comment": {
     "text": "This is a tab label that, when clicked, displays a list of available document templates.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 349,
+      "line_number": 358,
       "context": "},\n ...(canUseTemplates\n ? [\n {\n id: \"rooms-templates\",\n label: t(\"Common:Templates\"),\n icon: getCatalogIconUrlByType(FolderType.RoomTemplates),\n onClick: goTemplates,\n },\n ]\n : []),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 349,
+      "line_number": 358,
       "context": "},\n ...(canUseTemplates\n ? [\n {\n id: \"rooms-templates\",\n label: t(\"Common:Templates\"),\n icon: getCatalogIconUrlByType(FolderType.RoomTemplates),\n onClick: goTemplates,\n },\n ]\n : []),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 163,
+      "line_number": 153,
       "context": "recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {\n templates: t(\"Common:Templates\"),\n }),\n t(\"FormsTour:FormsPlacesTrash\", { trash: t(\"Common:TrashSection\") }),\n ].filter(Boolean) as string[];\n \n // The block of steps that runs inside a space. It walks into a stand-in one",
       "module": "/packages/client"
     },
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 761,
+      "line_number": 780,
       "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":",
       "module": "/packages/client"
     }

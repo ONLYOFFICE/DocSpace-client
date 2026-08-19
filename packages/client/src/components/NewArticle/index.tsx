@@ -535,7 +535,11 @@ const NewArticle = ({
       ...(isAppTemporarilyDisabled(AI_ARBITER_ID)
         ? []
         : [{ item: aiArbiterItem, enabled: aiArbiterEnabled }]),
-      { item: e2eRoomsItem, enabled: e2eRoomsEnabled },
+      // Hidden until private rooms ship: without the opt-in flag the item must
+      // not even show up in the "available" group, which offers an enable flow.
+      ...(isAppTemporarilyDisabled(E2E_ROOMS_ID)
+        ? []
+        : [{ item: e2eRoomsItem, enabled: e2eRoomsEnabled }]),
     ];
 
     const enabled = all.filter((x) => x.enabled).map((x) => x.item);

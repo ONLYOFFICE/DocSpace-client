@@ -5,7 +5,7 @@
   "RoomsEmptyTitle": "Luettelosi on toistaiseksi tyhjä",
   "RoomsGroups": "Järjestä huoneet tiettyjen ominaisuuksien mukaan löytääksesi nopeasti tarvitsemasi. Luo ryhmiä ja vaihda niiden välillä heti luettelon yläpuolella.",
   "RoomsGroupsTitle": "Ryhmittele huoneesi",
-  "RoomsMembers": "Jokaisella huoneella on jäsenluettelonsa tietopaneelissa. Lisää portaalin yhteystietoja ja määritä jokaiselle jäsenelle rooli — tiedostojen katselusta koko huoneen hallintaan.",
+  "RoomsMembers": "Jokaisella huoneella on jäsenluettelonsa tietopaneelissa. Lisää työtilan yhteystietoja ja määritä jokaiselle jäsenelle rooli — tiedostojen katselusta koko huoneen hallintaan.",
   "RoomsMembersTitle": "Työskennelkää yhdessä",
   "RoomsPlacesArchive": "{{archive}} — huoneet, joissa et enää työskentele, palautettavissa milloin tahansa.",
   "RoomsPlacesFiles": "{{recent}}, {{favorites}} ja {{trash}} kokoavat tiedostot huoneistasi: äskettäin avatut, tähdellä merkityt ja poistetut.",

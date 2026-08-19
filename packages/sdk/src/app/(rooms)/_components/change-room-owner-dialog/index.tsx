@@ -76,7 +76,6 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import api from "@docspace/shared/api";
 import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import { ShareAccessRights } from "@docspace/ui-kit/enums";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import styles from "./ChangeRoomOwnerDialog.module.scss";
 
@@ -110,9 +109,7 @@ const ChangeRoomOwnerDialog = ({
   const ownerIsCurrentUser = !!currentUserId && roomOwnerId === currentUserId;
 
   const headerLabel = t("Common:ChangeTheRoomOwner");
-  const infoText = t("Common:PeopleSelectorInfo", {
-    productName: getBrandName("ProductName"),
-  });
+  const infoText = t("Common:PeopleSelectorInfo");
 
   const onSubmit: TOnSubmit = async (users, _access, _name, isLeaveChecked) => {
     const newOwnerId = users[0]?.id;

@@ -325,7 +325,9 @@ const CreateRoomDialog = ({
 
   const dialogHeader = !roomParams.type
     ? chooseTypeHeader
-    : t("Common:CreateRoom");
+    : roomParams.type === RoomsType.FormRoom
+      ? t("Common:CreateFormSpaceAction")
+      : t("Common:CreateRoom");
 
   return (
     <>
@@ -397,7 +399,7 @@ const CreateRoomDialog = ({
           ) : (
             <SetRoomParams
               t={t}
-              disabledChangeRoomType={Boolean(startRoomType)}
+              disabledChangeRoomType={Boolean(startRoomType) || isFormsCreate}
               isTemplateSelected={isTemplateSelected}
               setIsOauthWindowOpen={setIsOauthWindowOpen}
               tagHandler={tagHandler}

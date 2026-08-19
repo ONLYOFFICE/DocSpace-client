@@ -3,7 +3,7 @@
   "content": "Anyone with this phrase can decrypt your files. Never share it. We cannot recover it for you.",
   "content_en_sha1_hash": "ca78a7d2f156019d514235c948453507f91ac925",
   "created_at": "2026-05-24T17:27:36.616Z",
-  "updated_at": "2026-07-27T13:07:50.926Z",
+  "updated_at": "2026-08-14T14:58:32.894Z",
   "comment": {
     "text": "Warning text within the Recovery Phrase Display modal that alerts the user to the security risks of sharing the phrase and the impossibility of recovery.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 125,
-      "context": "action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),\n footer: t(\"Common:RecoveryKitFooter\", { productName }),\n },\n });\n }, [words, wordCount, accountLabel, i18n, t]);",
+      "context": "action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),\n footer: t(\"Common:RecoveryKitFooter\", { organizationName: getBrandName(\"OrganizationName\"), productName }),\n },\n });\n }, [words, wordCount, accountLabel, i18n, t]);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/key-generation/RecoveryPhraseDisplayModal.tsx",
       "line_number": 125,
-      "context": "action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),\n footer: t(\"Common:RecoveryKitFooter\", { productName }),\n },\n });\n }, [words, wordCount, accountLabel, i18n, t]);",
+      "context": "action: t(\"Common:UseRecoveryPhrase\"),\n wordCount,\n }),\n storageTitle: t(\"Common:RecoveryKitStorageTitle\"),\n storageText: t(\"Common:RecoveryKitStorageText\"),\n warning: t(\"Common:RecoveryPhraseWarning\"),\n footer: t(\"Common:RecoveryKitFooter\", { organizationName: getBrandName(\"OrganizationName\"), productName }),\n },\n });\n }, [words, wordCount, accountLabel, i18n, t]);",
       "module": "/packages/shared"
     }
   ],

@@ -151,9 +151,7 @@ export function useHeaderContextMenu(current: TFolder | TRoom | undefined) {
         {
           id: "header_option_empty-trash",
           key: "empty-trash",
-          label: t("Common:EmptySection", {
-            sectionName: t("Common:TrashSection"),
-          }),
+          label: t("Common:EmptyTrash"),
           icon: ClearTrashReactSvgUrl,
           disabled: isEmpty || !deleteCtx?.emptyTrash,
           onClick: () => deleteCtx?.emptyTrash?.(),

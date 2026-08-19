@@ -79,7 +79,7 @@
   "ScopesHelp": "Scopes përdoren për të kufizuar aksesin e aplikacionit tuaj në të gjitha të dhënat e lidhura me përdoruesit dhe ato do t'ju lejojnë të specifikoni saktësisht se çfarë lloj aksesi ju nevojitet.",
   "Secret": "Sekret",
   "SecretCopy": "Sekreti i klientit u kopjua me sukses në kujtesën e fragmenteve",
-  "SignIn": "Identifikohu me {{productName}}",
+  "SignIn": "Identifikohu me {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Mbështetje dhe informacion ligjor",
   "TermsOfService": "Kushtet e Shërbimit",
   "TermsOfServiceURL": "URL-ja e kushteve të shërbimit",

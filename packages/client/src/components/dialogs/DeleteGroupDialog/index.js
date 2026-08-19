@@ -40,7 +40,6 @@ import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const DeleteGroupDialog = (props) => {
 	const {
@@ -93,11 +92,8 @@ const DeleteGroupDialog = (props) => {
 			<ModalDialog.Body>
 				<Text>
 					{hasMoreGroups
-						? t("DeleteDialog:DeleteAllGroupDescription", {
-								productName: getBrandName("ProductName"),
-							})
+						? t("DeleteDialog:DeleteAllGroupDescription")
 						: t("DeleteDialog:DeleteGroupDescription", {
-								productName: getBrandName("ProductName"),
 								groupName,
 							})}
 				</Text>

@@ -57,7 +57,6 @@ import type { TDomainValidator } from "@docspace/shared/api/settings/types";
 import useDeviceType from "@/hooks/useDeviceType";
 
 import styles from "./configuration.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type CheckDomainResponse = {
   value: boolean;
@@ -164,7 +163,7 @@ export const Body = ({
       </FieldContainer>
       <FieldContainer
         isVertical
-        labelText={t("PortalName", { productName: getBrandName("ProductName") })}
+        labelText={t("PortalName")}
         labelVisible
         hasError={!!(portalNameError || checkDomainError)}
         errorMessage={portalNameError || checkDomainError}

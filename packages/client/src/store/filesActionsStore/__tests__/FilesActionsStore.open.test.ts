@@ -87,3 +87,124 @@ describe("FilesActionsStore — open/leave/owner (batch 16)", () => {
     spy.mockRestore();
   });
 });
+
+// Bug 82885: a plugin registered for an extension takes over the plain click
+// on a file, so this path hands the file to the plugin without any menu. For an
+// encrypted file the plugin can only ship ciphertext to a third party, and the
+// file must open normally instead.
+describe("FilesActionsStore — plugin file items vs encrypted files", () => {
+  const docx = (encrypted: boolean) =>
+    ({
+      id: 1,
+      fileExst: ".docx",
+      isFolder: false,
+      viewUrl: "http://x/1",
+      webUrl: "",
+      security: { Download: true },
+      viewAccessibility: { WebEdit: true },
+      ...(encrypted ? { encrypted: true } : {}),
+    }) as never;
+
+  const setup = (onClick: () => void, openDocEditor: () => void) =>
+    createTestFilesActionsStore({
+      settingsStore: {
+        enablePlugins: true,
+        currentDeviceType: "desktop",
+        isFrame: false,
+      },
+      pluginStore: {
+        fileItemsList: [{ key: ".docx", value: { onClick } }],
+      },
+      filesStore: { openDocEditor, setSelection: vi.fn(), categoryType: 0 },
+    });
+
+  it("hands a regular file to the plugin registered for its extension", async () => {
+    const onClick = vi.fn();
+    const openDocEditor = vi.fn();
+
+    await setup(onClick, openDocEditor).openItemAction(docx(false), t);
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(openDocEditor).not.toHaveBeenCalled();
+  });
+
+  it("skips the plugin for an encrypted file and opens the editor instead", async () => {
+    const onClick = vi.fn();
+    const openDocEditor = vi.fn();
+
+    await setup(onClick, openDocEditor).openItemAction(docx(true), t);
+
+    expect(onClick).not.toHaveBeenCalled();
+    expect(openDocEditor).toHaveBeenCalledTimes(1);
+  });
+});
+
+// Bug 82880: formats that need conversion before opening (ODS, ODT, PAGES)
+// were handed to the editor anyway, which fails on the encrypted bytes with a
+// generic "error opening file". Conversion runs on the server and cannot be
+// applied to an encrypted file, so the open path has to say so instead.
+describe("FilesActionsStore — opening a file that needs conversion", () => {
+  const odt = (encrypted: boolean) =>
+    ({
+      id: 1,
+      fileExst: ".odt",
+      isFolder: false,
+      viewUrl: "http://x/1",
+      webUrl: "",
+      ...(encrypted ? { encrypted: true } : {}),
+      security: { Download: true, Convert: true },
+      viewAccessibility: { MustConvert: true, WebEdit: true },
+    }) as never;
+
+  const setup = () => {
+    const openDocEditor = vi.fn();
+    const setConvertDialogVisible = vi.fn();
+    const store = createTestFilesActionsStore({
+      filesStore: { openDocEditor, setSelection: vi.fn(), categoryType: 0 },
+      dialogsStore: {
+        setConvertItem: vi.fn(),
+        setConvertDialogData: vi.fn(),
+        setConvertDialogVisible,
+      },
+    });
+    return { store, openDocEditor, setConvertDialogVisible };
+  };
+
+  it("keeps an encrypted file out of both the editor and the converter", async () => {
+    const { store, openDocEditor, setConvertDialogVisible } = setup();
+
+    await store.openItemAction(odt(true), t);
+
+    expect(openDocEditor).not.toHaveBeenCalled();
+    expect(setConvertDialogVisible).not.toHaveBeenCalled();
+  });
+
+  it("still offers conversion for the same format outside a private room", async () => {
+    const { store, openDocEditor, setConvertDialogVisible } = setup();
+
+    await store.openItemAction(odt(false), t);
+
+    expect(setConvertDialogVisible).toHaveBeenCalledWith(true);
+    expect(openDocEditor).not.toHaveBeenCalled();
+  });
+
+  it("still opens an encrypted file that needs no conversion", async () => {
+    const { store, openDocEditor } = setup();
+
+    await store.openItemAction(
+      {
+        id: 2,
+        fileExst: ".docx",
+        isFolder: false,
+        viewUrl: "http://x/2",
+        webUrl: "",
+        encrypted: true,
+        security: { Download: true },
+        viewAccessibility: { WebEdit: true },
+      } as never,
+      t,
+    );
+
+    expect(openDocEditor).toHaveBeenCalledTimes(1);
+  });
+});

@@ -3,7 +3,7 @@
   "content": "Change the agent owner",
   "content_en_sha1_hash": "c2076e53359b7dba4156826f419c8405ea1726a4",
   "created_at": "2025-10-27T16:14:30.035Z",
-  "updated_at": "2026-05-24T17:27:49.101Z",
+  "updated_at": "2026-08-17T17:23:21.737Z",
   "comment": {
     "text": "This is a dialog title for changing the owner of an AI agent. It appears when a user wants to transfer ownership of an AI agent to another user.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 196,
-      "context": "}, [isPrivateRoom, roomId, baseExclude]);\n \n const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),",
+      "line_number": 197,
+      "context": "}, [isPrivateRoom, roomId, baseExclude]);\n \n const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\")\n : t(\"Common:PeopleSelectorInfo\");",
       "module": "/packages/client"
     }
   ],

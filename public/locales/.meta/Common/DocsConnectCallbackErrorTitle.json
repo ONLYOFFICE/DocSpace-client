@@ -3,7 +3,7 @@
   "content": "Purchase failed",
   "content_en_sha1_hash": "52c2cea69019b94235e7e021e6b7d6a38e2068b5",
   "created_at": "2026-07-27T13:07:08.062Z",
-  "updated_at": "2026-08-06T08:04:20.055Z",
+  "updated_at": "2026-08-13T14:37:21.813Z",
   "comment": {
     "text": "Title for an error card on the AI paywall completion page, appearing when a DocsConnect-related purchase fails.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage.tsx",
-      "line_number": 568,
-      "context": "</div>\n \n <div className={styles.cardBody}>\n <Text fontSize=\"16px\" fontWeight={600} className={styles.title}>\n {isDocsConnect\n ? t(\"DocsConnectCallbackErrorTitle\")\n : isWalletOnly\n ? t(\"WalletTopUpErrorTitle\")\n : t(\"AIPaywallCallbackError\")}\n </Text>",
+      "file_path": "/libs/ui-kit/billing/payment-complete/PaymentCompletePage.utils.ts",
+      "line_number": 169,
+      "context": "processingHint: t(\"Common:DocsConnectCallbackProcessingHint\"),\n activateStepLabel: t(\"Common:DocsConnectCallbackStepActivate\"),\n successTitle: t(\"Common:DocsConnectCallbackSuccess\"),\n successHint: t(\"Common:WalletTopUpCallbackSuccessHint\"),\n successButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n errorTitle: t(\"Common:DocsConnectCallbackErrorTitle\"),\n errorHint: t(\"Common:DocsConnectCallbackErrorHint\"),\n errorButtonLabel: t(\"Common:DocsConnectCallbackGoTo\"),\n redirectUrl: DOCS_CONNECT_ROUTE,\n };\n case PaymentFlavor.Backup:",
       "module": "/libs/ui-kit"
     }
   ],

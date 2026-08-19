@@ -71,7 +71,9 @@
   }
 
   .item-file-name {
-    max-height: 100%;
+    // two clamped lines must fit exactly, otherwise the second one gets
+    // cut off from below by the tile's fixed-height bottom section
+    max-height: calc(2 * var(--tile-content-line-height, 20px));
     line-height: var(--tile-content-line-height, 20px);
 
     overflow: hidden;

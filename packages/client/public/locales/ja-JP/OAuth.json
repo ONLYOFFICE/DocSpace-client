@@ -79,7 +79,7 @@
   "ScopesHelp": "スコープは、アプリがすべてのユーザー関連データにアクセスするのを制限するために使用され、必要なアクセスを正確に指定することができます。",
   "Secret": "シークレット",
   "SecretCopy": "クライアントシークレットがクリップボードに正常にコピーされました",
-  "SignIn": "{{productName}}でサインイン",
+  "SignIn": "{{organizationName}} {{productName}}でサインイン",
   "SupportAndLegalInfo": "サポート＆法的情報",
   "TermsOfService": "サービス利用規約",
   "TermsOfServiceURL": "利用規約のURL",

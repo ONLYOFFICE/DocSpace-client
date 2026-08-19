@@ -3,7 +3,7 @@
   "content": "Folders moved to {{sectionName}}.",
   "content_en_sha1_hash": "8d9a3570837569f5b50061430a22c1e6c8b2d08e",
   "created_at": "2026-05-19T19:03:16.973Z",
-  "updated_at": "2026-07-07T08:59:21.807Z",
+  "updated_at": "2026-08-17T17:23:21.763Z",
   "comment": {
     "text": "Notification message in the History feed indicating folders have been moved to a specific location. The `{{sectionName}}` variable represents the destination section name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 144,
+      "line_number": 155,
       "context": "if (hasRelatedItems)\n return t(\"Common:FoldersTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"Common:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:\n if (hasRelatedItems)\n return t(\"Common:FolderCopiedCount\", {",
       "module": "/packages/client"
     },

@@ -72,17 +72,15 @@ const Plugin = ({ infoPanelItem, selection }: Props) => {
     onLoadAction();
   }, [onLoadAction]);
 
+  if (!pluginName) return null;
+
   return (
     <div
-      data-testid={`info_panel_plugin_${pluginName?.toLowerCase()?.replace(/\s+/g, "_")}`}
+      data-testid={`info_panel_plugin_${pluginName.toLowerCase().replace(/\s+/g, "_")}`}
     >
       <WrappedComponent
         pluginName={pluginName}
         component={{ component: PluginComponents.box, props: bodyProps }}
-        saveButton={undefined}
-        setSaveButtonProps={undefined}
-        setModalRequestRunning={undefined}
-        modalRequestRunning={undefined}
       />
     </div>
   );

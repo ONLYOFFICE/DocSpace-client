@@ -1,11 +1,11 @@
 {
   "key_path": "FormFilingRoomInfo",
-  "content": "Create, edit, or upload PDF forms in the room. Invite members and guests to fill out forms. Review completed copies, and analyze data automatically collected in a spreadsheet.",
-  "content_en_sha1_hash": "3f433931a99e6abfe2cb30be0b3a3d6c9a3f30a0",
+  "content": "Create, edit, or upload PDF forms in the space. Invite members and guests to fill out forms. Review completed copies, and analyze data automatically collected in a spreadsheet.",
+  "content_en_sha1_hash": "3cb087e2ab8db669a6aeb267cb2edf5d4fe67a8d",
   "created_at": "2026-03-31T15:18:12.985Z",
-  "updated_at": "2026-07-07T08:59:21.957Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "This is a descriptive text for a \"Form filling room\" type, explaining its purpose and features within ONLYOFFICE DocSpace. It appears when a user is selecting or viewing information about different room types.",
+    "text": "This is a descriptive text for a \"Form filling space\" type, explaining its purpose and features. It appears when a user is selecting or viewing information about different types.",
     "is_auto": true,
     "updated_at": "2026-04-11T20:52:05.789Z",
     "model": "google/gemini-2.5-flash"

@@ -69,7 +69,6 @@ import type {
   NavMenuItem,
 } from "@docspace/ui-kit/components/nav-menu";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import {
   settingsTree,
@@ -130,9 +129,7 @@ const PortalSettingsSidebar = ({
       case "AISettings":
         return t("Settings:AISettings");
       case "PortalDeletion":
-        return t("Settings:PortalDeletion", {
-          productName: getBrandName("ProductName"),
-        });
+        return t("Settings:PortalDeletion");
       case "Common:PaymentsTitle":
         return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
       case "Common:Bonus":

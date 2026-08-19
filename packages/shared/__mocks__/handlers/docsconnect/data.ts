@@ -162,7 +162,20 @@ export const docsConnectWalletServicesSuccess = () => [
     id: DOCS_CONNECT_DEVPACK_SERVICE_ID,
     serviceName: "docscloud-devpack",
     price: { value: DOCS_CONNECT_DEVPACK_FULL_PRICE },
-    features: [],
+    // The client picks the Dev Pack service out of the wallet services by its
+    // `docsclouddevpack` feature, not by the service name (see
+    // `findDocsConnectServices`) - without it the Dev Pack price reads as 0
+    // and every "with Dev Pack" total collapses onto the base price.
+    features: [
+      {
+        id: "docsclouddevpack",
+        title: "Dev Pack",
+        priceTitle: "White label and mobile editors",
+        image: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><rect width="24" height="24" rx="4" fill="#4781D1"/></svg>',
+        value: false,
+        type: "flag",
+      },
+    ],
   },
   {
     id: DOCS_CONNECT_STORAGE_SERVICE_ID,

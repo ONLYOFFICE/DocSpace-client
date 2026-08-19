@@ -1,11 +1,11 @@
 {
   "key_path": "RoomFormBarDescription",
-  "content": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
-  "content_en_sha1_hash": "71456b52b18baef0b2e68e4d7a533ffa05a20307",
+  "content": "This space is available to anyone with the link. External users will have Form Filler permission for all the forms.",
+  "content_en_sha1_hash": "03e9f3ec7884308da2ce542f891c1b444d35780c",
   "created_at": "2026-06-01T21:20:31.377Z",
-  "updated_at": "2026-06-03T09:30:05.140Z",
+  "updated_at": "2026-08-17T00:00:00.000Z",
   "comment": {
-    "text": "Body text for an information bar in the Members view, describing the room's accessibility via a shared link and the permissions assigned to external users.",
+    "text": "Body text for an information bar in the Members view, describing the form space's accessibility via a shared link and the permissions assigned to external users.",
     "is_auto": true,
     "updated_at": "2026-06-01T21:27:26.592Z",
     "model": "gemma4:26b"

@@ -43,6 +43,7 @@ import {
   EmployeeType,
   EmployeeStatus,
   MembersSubjectType,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { getUserList } from "@docspace/shared/api/people";
 import { getRoomMembers } from "@docspace/shared/api/rooms";
@@ -54,7 +55,6 @@ import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { validateMembersForEncryption } from "@docspace/shared/services/private-room/room-encryption";
 import styles from "./ChangeRoomOwnerPanel.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ChangeRoomOwner = (props) => {
   const {
@@ -69,6 +69,7 @@ const ChangeRoomOwner = (props) => {
     userId,
     useModal = true,
     isAIAgent,
+    isFormSpace,
     updateInfoPanelMembers,
     roomId,
     isPrivateRoom,
@@ -197,16 +198,14 @@ const ChangeRoomOwner = (props) => {
     : t("Common:ChangeTheRoomOwner");
 
   const infoText = isAIAgent
-    ? t("Files:ChangeAgentOwnerSelectorInfo", {
-        productName: getBrandName("ProductName"),
-      })
-    : t("Common:PeopleSelectorInfo", {
-        productName: getBrandName("ProductName"),
-      });
+    ? t("Files:ChangeAgentOwnerSelectorInfo")
+    : t("Common:PeopleSelectorInfo");
 
   const footerCheckboxLabel = isAIAgent
     ? t("Common:LeaveTheAgent")
-    : t("Common:LeaveTheRoom");
+    : isFormSpace
+      ? t("Common:LeaveTheFormSpace")
+      : t("Common:LeaveTheRoom");
 
   const selectorComponent = excludeReady ? (
     <PeopleSelector
@@ -300,6 +299,7 @@ export default inject(
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
       isAIAgent: room?.isAIAgent,
+      isFormSpace: room?.roomType === RoomsType.FormRoom,
       updateInfoPanelMembers,
       roomId: room?.id,
       isPrivateRoom: !!(room?.isPrivateRoom ?? room?.private),

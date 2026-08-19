@@ -1,19 +1,19 @@
 {
   "key_path": "PortalDeletionHelper",
-  "content": "If you do not think you will use the space and would like to delete your space permanently, submit your request using the Delete button. Please, keep in mind that you will not be able to reactivate your space or recover any information associated with it.",
-  "content_en_sha1_hash": "b1a7d4babcdcd1022c5cd930e0d4027f04cfa974",
-  "created_at": "2025-05-19T21:30:52.223Z",
-  "updated_at": "2026-05-15T15:37:40.248Z",
+  "content": "If you do not think you will use the workspace and would like to delete it permanently, submit your request using the Delete button. Please, keep in mind that you will not be able to reactivate your workspace or recover any information associated with it.",
+  "content_en_sha1_hash": "3b85ca3c87b9fee01e92c762aa53bd6b0a66e7d9",
+  "created_at": "2026-08-13T14:37:16.337Z",
+  "updated_at": "2026-08-14T14:58:32.790Z",
   "comment": {
-    "text": "This is a helper text providing important information about the permanent deletion of a user's space. It appears below the main description on the portal deletion settings page.",
+    "text": "Instructional helper text in the portal deletion settings that warns users about the permanent and irreversible nature of workspace deletion.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:22:57.542Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T15:15:52.802Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 106,
+      "line_number": 105,
       "context": "return (\n <div className={styles.mainContainer}>\n <Text fontSize=\"13px\" className={styles.description}>\n {t(\"PortalDeletionDescription\")}\n </Text>\n <Text className={styles.helper}>{t(\"PortalDeletionHelper\")}</Text>\n <div className={styles.buttonWrapper}>\n <Button\n className={`delete-button ${styles.button}`}\n label={t(\"Common:Delete\")}\n primary",
       "module": "/packages/client"
     }
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

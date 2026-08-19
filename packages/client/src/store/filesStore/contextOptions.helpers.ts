@@ -101,10 +101,24 @@ export const buildContextOptions = (
     isRecentFolder,
     isFavoritesFolder,
     isPrivacyFolder,
+    isFormRoomRoot,
   } = deps.treeFoldersStore;
   const { security } = deps.selectedFolderStore;
 
   const { enablePlugins } = deps.settingsStore;
+
+  // Plugins receive only an item id and fetch the content themselves, so they
+  // can neither decrypt it nor be trusted with it: nothing from an encrypted
+  // room may be offered to them, whether it is a file, a folder or the room.
+  const isFormRoomContent =
+    isFormRoomRoot || item.parentRoomType === FolderType.FormRoom;
+
+  const arePluginsAllowed =
+    enablePlugins &&
+    !isEncrypted &&
+    !isPrivacyFolder &&
+    !item.private &&
+    !isFormRoomContent;
 
   const isThirdPartyFolder =
     item.providerKey && item.id === item.rootFolderId;
@@ -234,8 +248,15 @@ export const buildContextOptions = (
       "stop-filling",
     ];
 
+    // `security.AskAi` is server-computed at fetch time, so an already-loaded
+    // list keeps stale `true` values after an admin disables AI portal-wide —
+    // check the live switch as well.
     const noAskAi =
-      !item?.security?.AskAi || isPrivacyFolder || item.private || isEncrypted;
+      !item?.security?.AskAi ||
+      !deps.settingsStore.aiServicesEnabled ||
+      isPrivacyFolder ||
+      item.private ||
+      isEncrypted;
 
     if (noAskAi) {
       fileOptions = removeOptions(fileOptions, ["ask-ai", "separator6"]);
@@ -489,6 +510,19 @@ export const buildContextOptions = (
 
       fileOptions.push("download-encrypted");
 
+      // Conversion runs on the server, which only ever sees ciphertext here,
+      // so such a file cannot be opened from a private room by any route.
+      if (mustConvert) {
+        fileOptions = removeOptions(fileOptions, [
+          "view",
+          "pdf-view",
+          "preview",
+          "edit",
+          "open-pdf",
+          "edit-pdf",
+        ]);
+      }
+
       const userKeys = deps.userStore?.encryptionKeys;
       const hasEncryptionKeys =
         Array.isArray(userKeys) && userKeys.length > 0;
@@ -515,7 +549,7 @@ export const buildContextOptions = (
     if (!isRecycleBinFolder) {
       fileOptions = removeOptions(fileOptions, ["restore"]);
 
-      if (enablePlugins) {
+      if (arePluginsAllowed) {
         if (
           !item.viewAccessibility!.MediaView &&
           !item.viewAccessibility!.ImageView
@@ -897,7 +931,7 @@ export const buildContextOptions = (
     } else {
       roomOptions = removeOptions(roomOptions, ["unarchive-room"]);
 
-      if (enablePlugins) {
+      if (arePluginsAllowed) {
         const pluginRoomsKeys = deps.pluginStore.getContextMenuKeysByType(
           PluginFileType.room,
           null,
@@ -1065,7 +1099,7 @@ export const buildContextOptions = (
   } else {
     folderOptions = removeOptions(folderOptions, ["restore"]);
 
-    if (enablePlugins) {
+    if (arePluginsAllowed) {
       const pluginFoldersKeys = deps.pluginStore.getContextMenuKeysByType(
         PluginFileType.folder,
         null,

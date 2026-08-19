@@ -636,10 +636,21 @@ export async function deleteFile(
   return res;
 }
 
-export async function emptyTrash() {
+/**
+ * Empty the trash. Each root section (Files/Rooms/Forms/AI Agents) shows the
+ * same trash folder scoped by the `folderType` filter, so the same scope must
+ * be sent here — otherwise the whole trash is cleared and the other sections
+ * lose their items too. Without a scope the server keeps clearing everything.
+ */
+export async function emptyTrash(folderType?: FolderType[] | null) {
+  const scope =
+    folderType && folderType.length > 0
+      ? `&${toUrlParams({ folderType }, true)}`
+      : "";
+
   const res = (await request({
     method: "put",
-    url: "/files/fileops/emptytrash?single=true",
+    url: `/files/fileops/emptytrash?single=true${scope}`,
   })) as TOperation[];
   return res;
 }

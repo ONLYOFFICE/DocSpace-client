@@ -3,7 +3,7 @@
   "content": "Preview",
   "content_en_sha1_hash": "f1fbb2b43dca281d0138f4fcc92543ad143ef0b1",
   "created_at": "2025-05-19T21:30:47.467Z",
-  "updated_at": "2026-08-06T14:20:57.613Z",
+  "updated_at": "2026-08-17T17:23:21.777Z",
   "comment": {
     "text": "This is a button label or tab title that allows users to view a preview of a document, template, or other content.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 130,
+      "line_number": 127,
       "context": "key: \"separator\",\n isSeparator: true,\n },\n {\n key: \"preview\",\n label: t(\"Common:Preview\"),\n // item.id may be null in the row model; the erased\n // cast keeps the old unchecked call.\n onClick: () => openDocEditor?.(item.id as number, true),\n disabled: false,\n icon: EyeIcon,",
       "module": "/packages/client"
     },

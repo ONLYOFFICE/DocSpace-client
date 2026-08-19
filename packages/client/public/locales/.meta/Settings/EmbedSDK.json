@@ -3,7 +3,7 @@
   "content": "Embed SDK",
   "content_en_sha1_hash": "a9ccf1a96c44b79062482e5c0b3db74a1df2a6dd",
   "created_at": "2026-04-03T21:51:36.584Z",
-  "updated_at": "2026-07-27T13:07:50.693Z",
+  "updated_at": "2026-08-14T14:58:32.755Z",
   "comment": {
     "text": "This is a title for a section in the Developer Tools settings, referring to the Embed SDK. It also appears as a card title in the same section.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
       "line_number": 125,
-      "context": "url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\", { productName }),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {",
+      "context": "url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),\n path: \"/developer-tools/javascript-sdk\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {",
       "module": "/packages/client"
     },
     {
@@ -26,7 +26,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
       "line_number": 129,
-      "context": "linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}",
+      "context": "linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\")}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />",
       "module": "/packages/client"
     }
   ],

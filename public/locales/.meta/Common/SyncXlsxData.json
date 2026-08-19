@@ -3,7 +3,7 @@
   "content": "Sync responses to XLSX",
   "content_en_sha1_hash": "d3cb9220ca7500d93b03c5b3bc7cabad9327fa45",
   "created_at": "2026-04-23T17:23:53.385Z",
-  "updated_at": "2026-08-06T14:20:57.657Z",
+  "updated_at": "2026-08-17T17:23:21.817Z",
   "comment": {
     "text": "Menu item label that triggers the synchronization of form responses to an Excel file. Appears in the context menu when managing form data.",
     "is_auto": true,

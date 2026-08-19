@@ -1,14 +1,14 @@
 {
   "key_path": "DeleteWarning",
-  "content": "The last full access space cannot be deleted",
-  "content_en_sha1_hash": "b684b6f8185450f454f665f01f5c551f723dd323",
-  "created_at": "2025-05-19T21:30:57.434Z",
-  "updated_at": "2026-05-15T14:00:06.973Z",
+  "content": "The last full access workspace cannot be deleted",
+  "content_en_sha1_hash": "c8e4986c86823fd0230a2643aa7c04b241b01b7b",
+  "created_at": "2026-08-12T11:00:50.876Z",
+  "updated_at": "2026-08-12T13:45:27.521Z",
   "comment": {
-    "text": "This is an error message displayed as a toast notification. It informs the user that they cannot delete the last remaining space with full access rights.",
+    "text": "Error toast message that appears when a user attempts to delete the only remaining workspace with full access permissions.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:31:51.799Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:45:27.521Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -90,7 +90,6 @@ describe("getTourSteps — room admin", () => {
       "FormsTour:FormsSpaceTitle",
       "FormsTour:FormsTemplatesTitle",
       "FormsTour:FormsItemTitle",
-      "FormsTour:FormsOpenSpaceTitle",
       "FormsTour:FormsBlankTitle",
       "FormsTour:FormsInProgressTitle",
       "FormsTour:FormsCompleteTitle",
@@ -145,7 +144,6 @@ describe("getTourSteps — inside a space", () => {
       "FormsTour:FormsSpaceTitle",
       "FormsTour:FormsTemplatesTitle",
       "FormsTour:FormsItemTitle",
-      "FormsTour:FormsOpenSpaceTitle",
       "FormsTour:FormsBlankTitle",
       "FormsTour:FormsInProgressTitle",
       "FormsTour:FormsCompleteTitle",
@@ -154,25 +152,16 @@ describe("getTourSteps — inside a space", () => {
     ]);
   });
 
-  it("names the door before walking through it", () => {
-    // Without this step the tour teleports: the user is told a row is a whole
-    // collection, and the next tooltip is already describing the contents of a
-    // room they never opened.
+  it("names the row as the door, then walks straight in through it", () => {
+    // The row step is the only one pointing at a row out in the list: a second
+    // step spotlighting the same row to say "step inside" repeats the accent
+    // the row step already put there, so the tour opens the space on the step
+    // that describes what is inside it.
     const titleList = titles(demoFlags);
 
-    expect(titleList.indexOf("FormsTour:FormsOpenSpaceTitle")).toBe(
+    expect(titleList.indexOf("FormsTour:FormsItemTitle")).toBe(
       titleList.indexOf("FormsTour:FormsBlankTitle") - 1,
     );
-  });
-
-  it("opens the space the step is pointing at, not whichever row sorts first", () => {
-    const [openSpace] = steps(demoFlags).filter(
-      (step) => step.title === "FormsTour:FormsOpenSpaceTitle",
-    );
-
-    // `fileItemStep` resolves its anchor through a function, so the selector it
-    // was built from is what the assertion has to reach for.
-    expect(openSpace.target).toBeTypeOf("function");
   });
 
   it("anchors on ids rather than on where a row happens to sort", () => {
@@ -186,7 +175,7 @@ describe("getTourSteps — inside a space", () => {
     `;
 
     const resolved = steps(adminFlags)
-      .slice(4, 7)
+      .slice(3, 6)
       .map((step) => (step.target as () => Element | null)());
 
     expect(resolved).toEqual([
@@ -219,7 +208,7 @@ describe("getTourSteps — inside a space", () => {
     inner.getBoundingClientRect = () => new DOMRect(0, 0, 0, 0);
     cell.getBoundingClientRect = () => new DOMRect(0, 100, 400, 40);
 
-    const inProgress = steps(adminFlags)[5];
+    const inProgress = steps(adminFlags)[4];
 
     expect((inProgress.target as () => Element | null)()).toBe(cell);
 
@@ -230,7 +219,7 @@ describe("getTourSteps — inside a space", () => {
     // The section is still at its root when the tour starts, so none of these
     // anchors exists yet. Without the flag every one of them would be dropped
     // before the tour had a chance to walk into the space.
-    for (const step of steps(adminFlags).slice(4, 7)) {
+    for (const step of steps(adminFlags).slice(3, 6)) {
       expect(step.data).toEqual({
         revealsTarget: true,
         presence: undefined,
@@ -273,7 +262,6 @@ describe("getTourSteps — what the page allows", () => {
     });
 
     expect(emptyPage).toEqual([
-      "FormsTour:FormsOpenSpaceTitle",
       "FormsTour:FormsBlankTitle",
       "FormsTour:FormsInProgressTitle",
       "FormsTour:FormsCompleteTitle",

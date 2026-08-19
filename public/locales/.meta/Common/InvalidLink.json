@@ -3,7 +3,7 @@
   "content": "Invalid link",
   "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
   "created_at": "2025-05-19T21:30:45.936Z",
-  "updated_at": "2026-07-28T07:30:59.882Z",
+  "updated_at": "2026-08-17T17:23:21.773Z",
   "comment": {
     "text": "This is an error message displayed when a link is malformed or no longer valid, such as a share link or a link to a document. It appears in various contexts, including a dedicated error page, a toast notification, or a message within the document editor.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 207,
+      "line_number": 218,
       "context": "const guestShareLinkInvalid = sessionStorage.getItem(\n \"guestShareLinkInvalid\",\n );\n \n if (guestShareLinkInvalid === \"true\") {\n toastr.error(t(\"Common:InvalidLink\"));\n sessionStorage.removeItem(\"guestShareLinkInvalid\");\n }\n }, []);\n \n const [isLoading, setIsLoading] = React.useState(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 233,
+      "line_number": 235,
       "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n console.log(\"ONLYOFFICE Document Editor is ready\", docEditor);\n const url = window.location.href;\n \n const index = url.indexOf(\"#message/\");",
       "module": "/packages/doceditor"
     },

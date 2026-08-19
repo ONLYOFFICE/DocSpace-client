@@ -68,25 +68,37 @@ const externalAIFetch = async (
   let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
 
   try {
-    let profileId: string | undefined;
-    const body = e.options.body;
-    if (typeof body === "string") {
-      try {
-        const model = (JSON.parse(body) as { model?: string })?.model;
-        if (model) profileId = modelProfileMap.get(model);
-      } catch {
-        /* leave profileId undefined */
+    let url: string;
+
+    // NewAi endpoints addressed by path rather than by profile: their
+    // requests carry no `model` in the body. Web search resolves the
+    // portal's active provider server-side; editor-tools lists and
+    // executes the DocSpace tool catalog.
+    const pathRouted = ["[external]/websearch/", "[external]/editor-tools/"];
+
+    if (pathRouted.some((prefix) => e.url.startsWith(prefix))) {
+      url = e.url.replace("[external]", "/api/2.0/ai");
+    } else {
+      let profileId: string | undefined;
+      const body = e.options.body;
+      if (typeof body === "string") {
+        try {
+          const model = (JSON.parse(body) as { model?: string })?.model;
+          if (model) profileId = modelProfileMap.get(model);
+        } catch {
+          /* leave profileId undefined */
+        }
       }
-    }
 
-    if (!profileId) {
-      throw new Error("No AI profile resolved for the requested model");
-    }
+      if (!profileId) {
+        throw new Error("No AI profile resolved for the requested model");
+      }
 
-    const url = e.url.replace(
-      "[external]",
-      `/doceditor/api/ai/passthrough/${profileId}`,
-    );
+      // OpenAI-compatible passthrough served by the ASC.NewAi service: it
+      // resolves the profile (base URL, key, headers) server-side and
+      // forwards the body to the provider verbatim.
+      url = e.url.replace("[external]", `/api/2.0/ai/openai/${profileId}/v1`);
+    }
 
     const options = {
       ...e.options,

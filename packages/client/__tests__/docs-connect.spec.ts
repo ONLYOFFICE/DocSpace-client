@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   colorThemeHandler,
   settingsHandler,
@@ -126,7 +127,7 @@ test.describe("Docs Connect", () => {
         page.getByTestId("docs_connect_create_tenant_button"),
       ).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "promo.png",
@@ -179,7 +180,7 @@ test.describe("Docs Connect", () => {
       });
       await expect(page.getByTestId("docs_connect_buy_button")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "canceled.png",
@@ -205,7 +206,7 @@ test.describe("Docs Connect", () => {
       );
       await expect(page.getByTestId("docs_connect_trial_banner")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "trial.png",
@@ -226,7 +227,7 @@ test.describe("Docs Connect", () => {
         { timeout: FIRST_RENDER_TIMEOUT },
       );
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "trial-low.png",
@@ -247,7 +248,7 @@ test.describe("Docs Connect", () => {
         { timeout: FIRST_RENDER_TIMEOUT },
       );
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "trial-expired.png",
@@ -273,7 +274,7 @@ test.describe("Docs Connect", () => {
       ).toBeHidden();
       await expect(page.getByText("$100.00")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "paid.png",
@@ -294,7 +295,7 @@ test.describe("Docs Connect", () => {
       });
       await expect(page.getByText("$250.00")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "paid-devpack.png",
@@ -319,7 +320,7 @@ test.describe("Docs Connect", () => {
       const cancelChangeLink = page.getByText("Cancel change");
       await expect(cancelChangeLink).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "scheduled.png",
@@ -361,7 +362,7 @@ test.describe("Docs Connect", () => {
       await expect(page.getByText("$100.00/month")).toBeVisible();
       await expect(page.getByText("Renews on 21 Jul 2026")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "scheduled-devpack-disable.png",
@@ -403,7 +404,7 @@ test.describe("Docs Connect", () => {
       await expect(page.getByText("Dev Pack will be disabled")).toBeVisible();
       await expect(page.getByText("$80.00/month")).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "scheduled-devpack-disable-users.png",
@@ -426,7 +427,7 @@ test.describe("Docs Connect", () => {
         page.getByText("Subscription cancellation").first(),
       ).toBeVisible();
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "scheduled-cancellation.png",
@@ -447,7 +448,7 @@ test.describe("Docs Connect", () => {
       const banner = page.getByTestId("docs_connect_deactivated_banner");
       await expect(banner).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
 
-      await expect(page).toHaveScreenshot([
+      await expectScreenshot(page, [
         "desktop",
         "docs-connect",
         "deactivated.png",

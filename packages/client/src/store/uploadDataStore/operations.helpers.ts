@@ -46,7 +46,7 @@ import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";
 import {
-  getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 
@@ -384,9 +384,12 @@ export async function navigateToNewFolderLocationImpl(
   filter.folder = folderId as string;
 
   try {
-    const { rootFolderType, parentId } = await getFolderInfo(folderId!);
+    const { rootFolderType, parentId, roomType } =
+      await getFolderInfo(folderId!);
     const path = getCategoryUrl(
-      getCategoryTypeByFolderType(rootFolderType, parentId),
+      getCategoryTypeByFolderTypeInSection(rootFolderType, parentId, {
+        roomType,
+      }),
       folderId,
     );
 

@@ -3,7 +3,7 @@
   "content": "Don't ask again on this device",
   "content_en_sha1_hash": "81aa4d6bc92d8923b7eae1fb95b824b9b5c5e088",
   "created_at": "2026-07-27T13:07:30.227Z",
-  "updated_at": "2026-07-31T12:36:29.537Z",
+  "updated_at": "2026-08-13T10:58:03.280Z",
   "comment": {
     "text": "Checkbox label or informational text used in passkey management to indicate that authentication prompts are bypassed on the current device.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 388,
+      "line_number": 390,
       "context": "<Text>{t(\"Common:PasskeyUnlockLabel\")}</Text>\n </div>\n ) : null}\n {deviceRemembered ? (\n <div className={styles.deviceRow}>\n <Text fontSize=\"13px\">{t(\"Common:RememberDeviceLabel\")}</Text>\n <Link\n type={LinkType.action}\n fontWeight=\"600\"\n fontSize=\"13px\"\n isHovered",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/passphrase-modal/PassphraseModal.tsx",
-      "line_number": 326,
+      "line_number": 336,
       "context": "<Checkbox\n id=\"rememberDevice\"\n isChecked={rememberDevice}\n isDisabled={isLoading}\n onChange={(e) => setRememberDevice(e.target.checked)}\n label={t(\"Common:RememberDeviceLabel\")}\n tabIndex={4}\n />\n </div>\n ) : null}",
       "module": "/packages/shared"
     }

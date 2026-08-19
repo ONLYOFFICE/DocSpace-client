@@ -12,6 +12,9 @@ services:
       - "5110:5110"
     volumes:
       - ./__tests__:/app/packages/client/__tests__
+      # Specs import handlers and helpers from here, so it has to follow the
+      # spec mount above - otherwise editing one needs a full image rebuild.
+      - ../../packages/shared/__mocks__:/app/packages/shared/__mocks__
       - ./playwright.config.ts:/app/packages/client/playwright.config.ts
       - ../../playwright-report/client:/app/playwright-report/client
   # Dev mode: mount source code so you can iterate without rebuilding the image.

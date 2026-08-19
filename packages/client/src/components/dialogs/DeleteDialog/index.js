@@ -41,6 +41,7 @@ import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { getDialogContent } from "./DeleteDialog.helper";
 import styles from "./DeleteDialog.module.scss";
@@ -85,6 +86,7 @@ const DeleteDialogComponent = (props) => {
 
   const isTemplate = selection[0]?.isTemplate;
   const isAIAgent = selection[0]?.isAIAgent;
+  const isFormSpace = selection[0]?.roomType === RoomsType.FormRoom;
 
   const onClose = () => {
     if (
@@ -219,6 +221,7 @@ const DeleteDialogComponent = (props) => {
 
     if (isRoomDelete) {
       if (selection.length > 1) return t("Common:DeleteRoomsTitle");
+      if (isFormSpace) return t("Common:DeleteFormSpaceTitle");
       return t("Common:DeleteRoomTitle");
     }
 
@@ -247,6 +250,8 @@ const DeleteDialogComponent = (props) => {
     isAIAgent,
     isAIAgentsFolderRoot,
     unsubscribe,
+    isPrivacyFolder,
+    isFormSpace,
   );
 
   const title = getDialogTitle();
@@ -274,7 +279,9 @@ const DeleteDialogComponent = (props) => {
                 ? t("Common:DeleteAIAgentWarning")
                 : isTemplate
                   ? t("DeleteTemplateWarning")
-                  : t("Common:DeleteRoomWarning")
+                  : isFormSpace
+                    ? t("Common:DeleteFormSpaceWarning")
+                    : t("Common:DeleteRoomWarning")
             }
             dataTestId="delete_warning_checkbox"
             isChecked={isChecked}

@@ -117,6 +117,8 @@
       "options": {
         "env": {
           "APP_EDITION": "developer",
+          "APP_EDITOR_TEST": "true",
+          "APP_EDITOR_VERSION": "10.0.0.1",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false"
         }
@@ -139,6 +141,8 @@
       "options": {
         "env": {
           "APP_EDITION": "developer",
+          "APP_EDITOR_TEST": "true",
+          "APP_EDITOR_VERSION": "10.0.0.1",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false"
         }
@@ -181,6 +185,8 @@
       "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development --APP_HOSTING_STANDALONE false",
       "options": {
         "env": {
+          "APP_EDITOR_TEST": "true",
+          "APP_EDITOR_VERSION": "10.0.0.1",
           "SKIP_CLIENT": "true",
           "STORYBOOK": "false",
           "APP_EDITION": "developer"

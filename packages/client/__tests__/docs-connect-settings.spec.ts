@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import {
   colorThemeHandler,
   settingsHandler,
@@ -123,7 +124,7 @@ test.describe("Docs Connect settings tab", () => {
       page.getByTestId("docs_connect_settings_header_input"),
     ).toHaveValue("AuthorizationJwt", { timeout: FIRST_RENDER_TIMEOUT });
 
-    await expect(page).toHaveScreenshot([
+    await expectScreenshot(page, [
       "desktop",
       "docs-connect",
       "settings.png",
@@ -265,7 +266,7 @@ test.describe("Docs Connect preview tab", () => {
 
     await page.mouse.move(0, 0);
 
-    await expect(page).toHaveScreenshot(
+    await expectScreenshot(page, 
       ["desktop", "docs-connect", "preview-code.png"],
       {
         mask: [

@@ -384,6 +384,7 @@ const DocsLayoutCore = observer(
 
     const {
       isTrash,
+      isPermanentDelete,
       requestDeleteItem,
       requestDelete,
       deleteDialogVisible,
@@ -738,6 +739,7 @@ const DocsLayoutCore = observer(
                                 isLoading={isDeleting}
                                 itemCount={deleteDialogItemCount}
                                 isTrash={isTrash}
+                                isPermanentDelete={isPermanentDelete}
                                 onClose={closeDeleteDialog}
                                 onConfirm={confirmDelete}
                               />

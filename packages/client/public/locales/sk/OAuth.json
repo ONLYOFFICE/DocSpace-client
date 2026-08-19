@@ -79,7 +79,7 @@
   "ScopesHelp": "Rozsahy sa používajú na obmedzenie prístupu vašej aplikácie ku všetkým údajom súvisiacim s používateľom a umožnia vám presne určiť, aký druh prístupu potrebujete.",
   "Secret": "Tajný kód",
   "SecretCopy": "Klientsky tajný kód úspešne skopírovaný do schránky",
-  "SignIn": "Prihlásiť sa pomocou {{productName}}",
+  "SignIn": "Prihlásiť sa pomocou {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Podpora a právne informácie",
   "TermsOfService": "Podmienky používania",
   "TermsOfServiceURL": "URL adresa pre Podmienky používania",

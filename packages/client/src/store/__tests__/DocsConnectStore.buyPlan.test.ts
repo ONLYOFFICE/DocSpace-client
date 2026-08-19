@@ -37,6 +37,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 vi.mock("@docspace/shared/api/docs-connect", () => ({
   getDocsConnectInfo: vi.fn(),
+  getDocsConnectStatistics: vi.fn(),
   startDocsConnectTrial: vi.fn(),
   buyDocsConnectPlan: vi.fn(),
   calculateDocsConnectDevPack: vi.fn(),

@@ -70,7 +70,6 @@ import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModul
 import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
 import styles from "./AutoBackup.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -429,9 +428,7 @@ const AutomaticBackup = ({
             "backup_modules-description",
           )}
         >
-          {t("Common:AutoBackupDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Common:AutoBackupDescription")}
         </Text>
         {!isManagement ? (
           <Link

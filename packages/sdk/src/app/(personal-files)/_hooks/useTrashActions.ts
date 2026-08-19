@@ -66,6 +66,12 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
 
   const isTrash = filesListStore.rootFolderType === FolderType.TRASH;
 
+  // Private-room files must never go to the recycle bin — bypass it the same
+  // way the reference client does for privacy folders (FilesActionsStore.js).
+  // The confirmation dialog reads this too, so its warning cannot promise the
+  // recycle bin while the delete call skips it (bug 82886).
+  const isPermanentDelete = isTrash || !!encryptedActions;
+
   const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [pendingDeleteItems, setPendingDeleteItems] = useState<
@@ -101,9 +107,7 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
     const folderIds = pendingDeleteItems
       .filter((i) => i.isFolder)
       .map((i) => i.id as number);
-    // Private-room files must never go to the recycle bin — bypass it the same
-    // way the reference client does for privacy folders (FilesActionsStore.js).
-    const immediately = isTrash || !!encryptedActions;
+    const immediately = isPermanentDelete;
     const itemsToRemove = pendingDeleteItems;
 
     const currentFolder = filesListStore.currentFolder;
@@ -165,7 +169,7 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
       setIsDeleting(false);
     }
   }, [
-    isTrash,
+    isPermanentDelete,
     encryptedActions,
     filesListStore,
     filesSelectionStore,
@@ -215,6 +219,7 @@ export default function useTrashActions(trackOperation?: TrackOperation) {
 
   return {
     isTrash,
+    isPermanentDelete,
     requestDeleteItem,
     requestDelete,
     deleteDialogVisible,

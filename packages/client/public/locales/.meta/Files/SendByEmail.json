@@ -3,7 +3,7 @@
   "content": "Send by email",
   "content_en_sha1_hash": "6ec82549f3e3a32eba90bc618cdb8d0b58d0dbf3",
   "created_at": "2025-05-19T21:30:56.176Z",
-  "updated_at": "2026-08-06T14:20:57.659Z",
+  "updated_at": "2026-08-17T17:23:21.819Z",
   "comment": {
     "text": "This is a button label that, when clicked, allows the user to send the current document or file as an email attachment.",
     "is_auto": true,

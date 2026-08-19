@@ -3,7 +3,7 @@
   "content": "White-label (Dev Pack)",
   "content_en_sha1_hash": "112a46ebc417a7584230f14a5408380f18ef3c10",
   "created_at": "2026-07-27T13:07:48.468Z",
-  "updated_at": "2026-07-27T14:29:42.989Z",
+  "updated_at": "2026-08-13T14:37:21.759Z",
   "comment": {
     "text": "Short label for a feature chip within the DocsConnect onboarding modal, representing a specific developer-oriented package option.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
-      "line_number": 103,
+      "line_number": 104,
       "context": "},\n ];\n \n const chips = [\n { Icon: FormatsIcon, label: t(\"DocsConnect:ChipFormats\") },\n { Icon: RebrandingIcon, label: t(\"DocsConnect:ChipWhiteLabel\") },\n { Icon: IntegrationIcon, label: t(\"DocsConnect:ChipAutomationApi\") },\n { Icon: TenantsKeysIcon, label: t(\"DocsConnect:ChipTenantsKeys\") },\n { Icon: CloudIcon, label: t(\"DocsConnect:ChipCloudHosted\") },\n { Icon: AutoUpdatesIcon, label: t(\"DocsConnect:ChipAutoUpdates\") },\n { Icon: PluginsIcon, label: t(\"DocsConnect:ChipPlugins\") },",
       "module": "/packages/client"
     }

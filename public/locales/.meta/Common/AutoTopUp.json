@@ -3,7 +3,7 @@
   "content": "Auto top-up",
   "content_en_sha1_hash": "b9b9f21850a422a621b702b5f395e673f86075a8",
   "created_at": "2026-04-10T13:53:41.905Z",
-  "updated_at": "2026-08-10T12:23:11.178Z",
+  "updated_at": "2026-08-17T17:23:21.856Z",
   "comment": {
     "text": "This is a label for a feature that automatically adds funds to a user's balance. It appears as a short title within a settings block.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
-      "line_number": 149,
+      "line_number": 154,
       "context": "testId=\"overview_top_up_button\"\n />\n {wasFirstTopUp ? (\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={t(\"AutoTopUp\")}\n onClick={() => setIsWalletRefilledOpen(true)}\n isDisabled={isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"overview_auto_top_up_button\"\n />",
       "module": "/libs/ui-kit"
     },
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 257,
+      "line_number": 265,
       "context": "testId=\"top_up_balance_button\"\n />\n {wasFirstTopUp ? (\n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n label={t(\"AutoTopUp\")}\n onClick={() => setIsWalletRefilledOpen(true)}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n className={styles.cardButton}\n testId=\"auto_top_up_button\"\n />",
       "module": "/libs/ui-kit"
     }

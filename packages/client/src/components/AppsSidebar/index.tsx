@@ -63,7 +63,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { NavMenu } from "@docspace/ui-kit/components/nav-menu";
@@ -184,6 +184,18 @@ export const AppsSidebarView = ({
     "",
     true,
   );
+
+  // The expanded and collapsed headers render mutually exclusive <img> tags, so
+  // the variant that is currently hidden is only requested at the moment the
+  // user toggles - leaving an empty logo box until it arrives. Warm both into
+  // the browser cache up front so either state paints immediately. Re-runs when
+  // the theme flips or whitelabel timestamp changes, since both alter the URLs.
+  useEffect(() => {
+    [fullLogo, burgerLogo].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [fullLogo, burgerLogo]);
 
   const isAdmin = user?.isAdmin ?? false;
   const isOwner = user?.isOwner ?? false;

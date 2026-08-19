@@ -83,6 +83,14 @@ commit messages, and planning notes — must be written in English. User-facing
 strings are the only exception and must go through the i18n system, never
 hardcoded.
 
+### Branch review
+
+Use the `review-branch` skill to review a branch against its parent. It
+resolves the base branch (explicit arg → `git config branch.<name>.reviewBase`
+→ auto-detect) for the client repo **and** the `libs/ui-kit` submodule
+separately — a client diff that is only a gitlink bump means the change under
+review lives in the submodule.
+
 ### License headers
 
 Every new source file (`.ts`, `.tsx`, `.js`, `.jsx`; `.scss` by convention)
@@ -141,6 +149,7 @@ editing locale files. For translation work use the `translate-locales`,
 | `.claude/rules/source-checks.md` | `packages/**`, `libs/ui-kit/**`, `public/images/**` |
 | `.claude/rules/unit-tests.md` | `**/*.test.*`, `**/__tests__/**` (unit), vitest configs |
 | `.claude/rules/i18n.md` | `public/locales/**`, `common/tests/**` |
+| `.claude/rules/bulk-locale-edits.md` | `public/locales/**`, `packages/*/public/locales/**`, `common/scripts/**` |
 | `.claude/rules/e2e-tests.md` | `packages/client/__tests__/**`, `packages/shared/__mocks__/**` |
 | `.claude/rules/pnpm.md` | `package.json`, `pnpm-workspace.yaml`, Dockerfiles, CI workflows |
 | `.claude/rules/claude-settings.md` | `.claude/settings*.json` |

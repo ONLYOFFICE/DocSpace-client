@@ -51,7 +51,7 @@ import {
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
 import {
-  getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { getSectionTrashTarget } from "SRC_DIR/helpers/articleNavigation";
@@ -214,16 +214,18 @@ self: FilesActionStore,item: {
   isAIAgent?: boolean;
   title?: string;
   rootFolderType?: FolderType;
+  roomType?: RoomsType;
 }
 )=> {
   if (self.publicRoomStore.isPublicRoom)
     return self.moveToPublicRoom(item.id);
 
-  const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType } = item;
+  const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType, roomType } =
+    item;
 
   const categoryType = isAIAgent
     ? CategoryType.Chat
-    : getCategoryTypeByFolderType(rootFolderType, id);
+    : getCategoryTypeByFolderTypeInSection(rootFolderType, id, { roomType });
 
   const state = { title, rootFolderType, isRoot: false, isRoom };
   const filter = FilesFilter.getDefault();
@@ -320,17 +322,11 @@ self: FilesActionStore,
       ? item.parentType
       : (rootFolderTypeItem ?? rootFolderType);
 
-    let categoryType: TCategoryType = getCategoryTypeByFolderType(
+    const categoryType: TCategoryType = getCategoryTypeByFolderTypeInSection(
       destinationFolderType,
       parentId,
+      { pathname: window.DocSpace.location.pathname },
     );
-
-    if (
-      window.DocSpace.location.pathname.startsWith("/forms") &&
-      categoryType === CategoryType.SharedRoom
-    ) {
-      categoryType = CategoryType.Form;
-    }
 
     url = getCategoryUrl(categoryType, parentId);
   }
@@ -626,7 +622,9 @@ self: FilesActionStore,
       return;
     }
 
-    if (!isAIAgents() && fileItemsList && enablePlugins) {
+    // an encrypted file stays on the normal open path: the plugin registered
+    // for this extension could only pass ciphertext outside the room
+    if (!isAIAgents() && fileItemsList && enablePlugins && !item.encrypted) {
       // TS cannot track the assignment inside the forEach
       // callback; the erased casts keep the old unchecked reads.
       let currPluginItem: Nullable<TPluginFileItem> = null;
@@ -646,6 +644,14 @@ self: FilesActionStore,
             item as unknown as TFile,
           );
       }
+    }
+
+    // Conversion runs on the server, which only ever sees ciphertext for a
+    // private room, so neither the converter nor the editor can open such a
+    // file. Say that instead of failing later with a generic error.
+    if (item.encrypted && item.viewAccessibility?.MustConvert) {
+      toastr.info(t!("Common:PrivateRoomConvertNotSupported"));
+      return;
     }
 
     if (canConvert) {

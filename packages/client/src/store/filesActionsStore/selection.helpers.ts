@@ -719,10 +719,7 @@ self: FilesActionStore,fileIds: number[], t: TTranslation
 export const askAIActionImpl = (
 self: FilesActionStore,item: TActionItem
 )=> {
-  self.dialogsStore.setAiAgentSelectorDialogProps(
-    true,
-    item as unknown as TFile,
-  );
+  self.dialogsStore.setAskAIFile(item as unknown as TFile);
 };
 
 

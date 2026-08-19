@@ -75,7 +75,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
 import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url";
 import PersonInviteReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
-import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
+import CatalogGuestReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.guest.react.svg?url";
 import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -95,7 +95,6 @@ import SettingsSetupStore from "../SettingsSetupStore";
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
 import TargetUserStore from "./TargetUserStore";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 
@@ -362,7 +361,7 @@ class ContactsConextOptionsStore {
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       title: getUserTypeTranslation(EmployeeType.Admin, t),
-      icon: isGuests ? PersonAdminReactSvgUrl : null,
+      icon: PersonAdminReactSvgUrl,
       badgeLabel: isGuests && !standalone ? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -377,7 +376,7 @@ class ContactsConextOptionsStore {
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
-      icon: isGuests ? PersonManagerReactSvgUrl : null,
+      icon: PersonManagerReactSvgUrl,
       badgeLabel: isGuests && !standalone? t("Common:Paid") : undefined,
       isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -394,7 +393,7 @@ class ContactsConextOptionsStore {
       key: EmployeeType.User,
       label: getUserTypeTranslation(EmployeeType.User, t),
       title: getUserTypeTranslation(EmployeeType.User, t),
-      icon: isGuests ? CatalogUserReactSvgUrl : null,
+      icon: PersonDefaultReactSvgUrl,
       "data-action": EmployeeType.User,
       action: EmployeeType.User,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -406,6 +405,7 @@ class ContactsConextOptionsStore {
       key: EmployeeType.Guest,
       label: getUserTypeTranslation(EmployeeType.Guest, t),
       title: getUserTypeTranslation(EmployeeType.Guest, t),
+      icon: CatalogGuestReactSvgUrl,
       "data-action": EmployeeType.Guest,
       action: EmployeeType.Guest,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -680,9 +680,7 @@ class ContactsConextOptionsStore {
               id: "accounts-add_administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:PortalAdmin", {
-                productName: getBrandName("ProductName"),
-              }),
+              label: t("Common:PortalAdmin"),
               onClick: () => this.inviteUser(EmployeeType.Admin),
               "data-type": EmployeeType.Admin,
               action: EmployeeType.Admin,

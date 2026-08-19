@@ -1,9 +1,9 @@
 {
   "key_path": "FormSetTitle",
-  "content": "Form Set",
-  "content_en_sha1_hash": "91f81f729b143df5e2854d0b648a59207ba742b3",
+  "content": "Form space",
+  "content_en_sha1_hash": "2af4816ae230a7824763f4d460131bf0855a5be4",
   "created_at": "2026-06-25T19:30:36.656Z",
-  "updated_at": "2026-07-28T11:44:10.705Z",
+  "updated_at": "2026-08-18T07:20:00.000Z",
   "comment": {
     "text": "Label for a quick action item and a title for a form section, referring to a collection of forms.",
     "is_auto": true,
@@ -14,13 +14,13 @@
     {
       "file_path": "/libs/ui-kit/components/room-type/RoomType.utils.ts",
       "line_number": 11,
-      "context": "roomType: RoomsType = 1,\n isTemplate: boolean = false,\n isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:SetTemplateTitle\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:",
+      "context": "roomType: RoomsType = 1,\n isTemplate: boolean = false,\n isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:FromTemplate\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 46,
-      "context": "roomType: RoomsType = 1,\n isTemplate: boolean = false,\n isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:SetTemplateTitle\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:",
+      "context": "roomType: RoomsType = 1,\n isTemplate: boolean = false,\n isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate ? t(\"Common:FromTemplate\") : t(\"Common:FormSetTitle\");\n \n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Go beyond simple sharing with granular roles and secure access control.",
   "content_en_sha1_hash": "fa6db09d986508eedd0b1779c168684941801753",
   "created_at": "2026-06-25T19:30:57.169Z",
-  "updated_at": "2026-08-06T14:20:57.527Z",
+  "updated_at": "2026-08-12T11:00:51.508Z",
   "comment": {
     "text": "Feature description within an AppPromoDialog highlighting advanced sharing and access control capabilities.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 122,
+      "line_number": 124,
       "context": "description: t(\"Common:FilesQuickSearchDescription\"),\n },\n {\n Icon: FilesPermissionsIcon,\n title: t(\"Common:FilesPermissionsTitle\"),\n description: t(\"Common:FilesPermissionsDescription\"),\n },\n {\n Icon: FilesAccessIcon,\n title: t(\"Common:AccessControlTitle\"),\n description: t(\"Common:AccessControlDescription\"),",
       "module": "/packages/client"
     }

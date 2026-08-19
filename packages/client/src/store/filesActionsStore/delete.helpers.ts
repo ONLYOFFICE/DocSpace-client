@@ -285,7 +285,13 @@ self: FilesActionStore,translations: TSuccessTranslations
   } = self.uploadDataStore;
   const { setSecondaryProgressBarData } = secondaryProgressDataStore;
   const { isRecycleBinFolder } = self.treeFoldersStore;
-  const { addActiveItems, files, folders, getIsEmptyTrash } = self.filesStore;
+  const { addActiveItems, files, folders, getIsEmptyTrash, filter } =
+    self.filesStore;
+
+  // The trash view is shared by the root sections and scoped by the
+  // `folderType` filter, so the operation must carry the same scope to clear
+  // only the section the user is looking at.
+  const folderType = filter?.folderType ?? null;
 
   const fileIds = files.map((f) => f.id);
   const folderIds = folders.map((f) => f.id);
@@ -309,7 +315,7 @@ self: FilesActionStore,translations: TSuccessTranslations
   });
 
   try {
-    await emptyTrash().then(async (res) => {
+    await emptyTrash(folderType).then(async (res) => {
       const result = res[0];
 
       if (result?.error) return Promise.reject(result.error);

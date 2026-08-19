@@ -59,6 +59,8 @@ interface ViewerProps {
   isPreviewFile?: boolean;
   isPublicFile?: boolean;
   isDecrypting?: boolean;
+  /** Localized reason shown in place of the media when decryption failed. */
+  decryptionError?: string;
 
   currentDeviceType?: DeviceType;
 

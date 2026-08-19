@@ -1,19 +1,19 @@
 {
   "key_path": "Subheader",
-  "content": "Use this section to create several spaces and make them accessible for your users",
-  "content_en_sha1_hash": "79f5c82d08ab04703fb38185b6e24a16b816534d",
-  "created_at": "2025-05-19T21:30:57.479Z",
-  "updated_at": "2026-05-15T14:00:06.972Z",
+  "content": "Use this section to create several workspaces and make them accessible for your users",
+  "content_en_sha1_hash": "0f49bc517c1ea6dfaf6322f97cb1e4fbef4c24cd",
+  "created_at": "2026-08-12T11:00:50.917Z",
+  "updated_at": "2026-08-14T14:58:32.913Z",
   "comment": {
-    "text": "This subheader text appears on pages related to space management. It instructs the user to create and manage multiple spaces for their users.",
+    "text": "Subheader text in the page header describing the purpose of the workspace management section.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:31:32.597Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:42:12.344Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/configuration/header.tsx",
-      "line_number": 49,
+      "line_number": 48,
       "context": "const { t } = useTranslation([\"Management\", \"Common\"]);\n \n return (\n <div className={styles.header}>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Subheader\")}\n </Text>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>",
       "module": "/packages/management"
     },
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -64,6 +64,7 @@ import EmptyPrivateRoomView from "@docspace/shared/components/empty-views/empty-
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
+import useShowFilterParam from "@/hooks/useShowFilterParam";
 import useDeviceType from "@/hooks/useDeviceType";
 import { Filter } from "@/app/(docspace)/_components/filter";
 import SelectionArea from "@/app/(docspace)/_components/selection-area";
@@ -239,6 +240,7 @@ const DocsLayoutCore = observer(
     }, [infoPanelStore, roomChanged]);
 
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
+    const showFilter = useShowFilterParam();
     const { currentDeviceType } = useDeviceType();
     const isMobile = currentDeviceType === DeviceType.mobile;
 
@@ -573,6 +575,7 @@ const DocsLayoutCore = observer(
                               className={styles.root}
                               style={frameHeaderVars}
                               data-layout-mode={layoutMode}
+                              data-no-filter={showFilter ? undefined : ""}
                             >
                               <DropZone
                                 onFilesDropped={uploadFilesToFolder}

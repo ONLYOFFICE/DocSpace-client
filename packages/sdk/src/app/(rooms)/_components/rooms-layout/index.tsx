@@ -66,6 +66,7 @@ import SelectionArea from "@/app/(docspace)/_components/selection-area";
 import { DeviceTypeObserver } from "@/app/(docspace)/_components/DeviceTypeObserver";
 import RootScrollbar from "@/app/(docspace)/_components/RootScrollbar";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
+import useShowFilterParam from "@/hooks/useShowFilterParam";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
@@ -150,6 +151,7 @@ const RoomsLayout = observer(
     const router = useRouter();
     const { isEmptyList } = useSettingsStore();
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
+    const showFilter = useShowFilterParam();
     const infoPanelStore = useInfoPanelStore();
     const filesListStore = useFilesListStore();
     const tagsStore = useRoomsTagsStore();
@@ -294,6 +296,7 @@ const RoomsLayout = observer(
           className={styles.root}
           style={frameHeaderVars}
           data-layout-mode={layoutMode}
+          data-no-filter={showFilter ? undefined : ""}
         >
           <RootScrollbar>
             <SectionWrapper

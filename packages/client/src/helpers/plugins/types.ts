@@ -51,6 +51,7 @@ import type {
   IMainButtonItem,
   IProfileMenuItem,
   IArticleButtonItem,
+  IArticleNavigationItem,
   ISettings,
   IMessage,
   IPostMessage,
@@ -65,6 +66,7 @@ import type {
   IMainButtonPlugin,
   IProfileMenuPlugin,
   IArticleButtonPlugin,
+  IArticleNavigationPlugin,
   IPlugin,
   IApiPlugin,
   ISettingsPlugin,
@@ -106,6 +108,7 @@ export type {
   IMainButtonItem,
   IProfileMenuItem,
   IArticleButtonItem,
+  IArticleNavigationItem,
 };
 
 //Extended client-side types
@@ -168,6 +171,10 @@ export interface IFileItemClient extends Omit<IFileItem, "onClick"> {
 }
 
 export interface IArticleButtonItemClient extends IArticleButtonItem {
+  pluginName: string;
+}
+
+export interface IArticleNavigationItemClient extends IArticleNavigationItem {
   pluginName: string;
 }
 
@@ -234,7 +241,8 @@ export type TPlugin = {
   Partial<IProfileMenuPlugin> &
   Partial<ISettingsPlugin> &
   Partial<IPostMessagePlugin> &
-  Partial<IArticleButtonPlugin>;
+  Partial<IArticleButtonPlugin> &
+  Partial<IArticleNavigationPlugin>;
 
 export interface TMessageActionsParams {
   message: IMessage;
@@ -260,6 +268,7 @@ export interface TMessageActionsParams {
   updateMainButtonItems?: PluginStore["updateMainButtonItems"];
   updateProfileMenuItems?: PluginStore["updateProfileMenuItems"];
   updateEventListenerItems?: PluginStore["updateEventListenerItems"];
+  updateArticleNavigationItems?: PluginStore["updateArticleNavigationItems"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];
   setPluginMediaViewerVisible?: PluginStore["setPluginMediaViewerVisible"];

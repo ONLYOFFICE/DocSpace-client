@@ -619,8 +619,8 @@ importers:
         specifier: 2.4.16
         version: 2.4.16
       '@onlyoffice/docspace-plugin-sdk':
-        specifier: file:onlyoffice-docspace-plugin-sdk-2.1.0.tgz
-        version: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)
+        specifier: file:onlyoffice-docspace-plugin-sdk-3.0.0.tgz
+        version: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz(@types/node@24.10.7)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -1620,6 +1620,9 @@ packages:
   '@aws-sdk/core@3.977.6':
     resolution: {integrity: sha512-QiaJV4/zDrB4ZY2mfeSXSzSTc36W16sZXcGz+SPFk0CJ26gziO0cS+4LjJUMAbdeeBOvS0k0Aq1cZpfGdUXxSw==}
     engines: {node: '>=20.0.0'}
+    deprecated: |-
+      Deprecated due to Document number parsing bug in JSON, see
+        https://github.com/aws/aws-sdk-js-v3/issues/8246. Newer version available.
 
   '@aws-sdk/credential-provider-env@3.972.67':
     resolution: {integrity: sha512-rcIpk5kxUqDaaNa6Xk23pQ6ViY7jlqzmfFWCahQcBT97ddXaXYYwzCen9Tz1Jvo6aJft6wDl5bN44/Jw5B4oLA==}
@@ -3498,9 +3501,9 @@ packages:
     resolution: {integrity: sha512-QllfkKJOZzgVmN+VMD9+r/vCwY2xHmxdFIZN9TNpg7Ea7fi9Q3UNAZQPmnTMu6DlEuBb0Ztc188Bca2RK0nhrg==, tarball: file:libs/ui-kit/onlyoffice-docspace-api-sdk-3.7.0.tgz}
     version: 3.7.0
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz':
-    resolution: {integrity: sha512-4cLzfGInVvexlNdCrts/+Wi/VeBh9sedGseGy3+307B4rxE/yL1KR54sAHKigaW81p89REvIWdLDwYR1jsl9gA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz}
-    version: 2.1.0
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz':
+    resolution: {integrity: sha512-TymVye0li9DLiNPTfQHItrT4omSs8gAaP7xSF/cLl9p6hcjcLN0ywxwd7QadbFaPpcE6/6WssYvBrw8813EyCA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
+    version: 3.0.0
     hasBin: true
 
   '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
@@ -12297,7 +12300,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-2.1.0.tgz(@types/node@24.10.7)':
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz(@types/node@24.10.7)':
     dependencies:
       inquirer: 9.3.8(@types/node@24.10.7)
       jszip: 3.10.1

@@ -88,6 +88,7 @@ import {
   type TTreeFolder,
   type FolderIds,
 } from "SRC_DIR/helpers/articleNavigation";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
 
 type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
@@ -546,6 +547,7 @@ const ClientArticleSidebar = ({
       groups={groups}
       activeId={activeId}
       isNavLoading={isNavLoading}
+      pluginSection={Section.Files}
     />
   );
 };

@@ -306,6 +306,27 @@
   margin: 0;
 }
 
+// Title plus its subtitle read as one block, so they sit closer to each other
+// than the section's own 20px gap to the content below.
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sectionSubtitle {
+  font-size: 13px;
+  line-height: 20px;
+
+  :global(.light) & {
+    color: $gray-text;
+  }
+
+  :global(.dark) & {
+    color: $gray-dark-text;
+  }
+}
+
 .sectionTitleLink {
   font-size: 16px;
   font-weight: 700;

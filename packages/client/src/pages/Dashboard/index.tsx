@@ -124,6 +124,8 @@ type DashboardProps = ChatNoAccessStoreProps & {
   canCreateRooms: boolean;
   /** Whether the portal's AI is set up, which agent creation also needs. */
   aiReady: boolean;
+  /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
+  isFreeTariff: boolean;
   /** Rooms quota exhausted or portal in its grace period. */
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
@@ -144,10 +146,11 @@ const Dashboard = (props: DashboardProps) => {
     requestDashboardTour,
     canCreateRooms,
     aiReady,
+    isFreeTariff,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
   } = props;
-  const { t } = useTranslation(["Common", "OAuth"]);
+  const { t } = useTranslation(["Common"]);
   useDocumentTitle("Common:Home");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -324,7 +327,18 @@ const Dashboard = (props: DashboardProps) => {
 
             {moduleItems.length > 0 ? (
               <section data-tour-id="dashboard-apps" className={styles.section}>
-                <Text className={styles.sectionTitle}>{t("OAuth:Apps")}</Text>
+                <div className={styles.sectionHeading}>
+                  <Text className={styles.sectionTitle}>
+                    {t("Common:DiscoverApps")}
+                  </Text>
+                  <Text className={styles.sectionSubtitle}>
+                    {t("Common:DiscoverAppsDescription", {
+                      planName: isFreeTariff
+                        ? t("Common:StartupPlan")
+                        : t("Common:BusinessPlan"),
+                    })}
+                  </Text>
+                </div>
                 <div className={styles.modulesGrid}>
                   {moduleItems.map((mod) => (
                     <ModuleCard
@@ -426,6 +440,9 @@ const DashboardConnected = inject((stores: TStore) => {
     // Same set the Home quick actions and the agents header button gate on.
     canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,
     aiReady: settingsStore.aiConfig?.aiReady ?? false,
+    // Undefined until the tariff loads; the plan is free by default, matching
+    // the header's own fallback.
+    isFreeTariff: currentQuotaStore.isFreeTariff ?? true,
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
     setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
   };

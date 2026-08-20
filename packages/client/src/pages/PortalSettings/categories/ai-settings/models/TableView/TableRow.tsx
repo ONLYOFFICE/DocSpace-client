@@ -54,7 +54,7 @@ type ModelSettingsRowProps = {
   enabled: boolean;
   isUpdating: boolean;
   link?: string;
-  onToggle: (modelId: string, enabled: boolean) => Promise<void>;
+  onToggle: (modelId: string, enabled: boolean) => void;
   isAiToolsServiceOn?: boolean;
 };
 
@@ -71,7 +71,7 @@ const ModelSettingsRow: React.FC<ModelSettingsRowProps> = ({
   isAiToolsServiceOn,
 }) => {
   const onChange = useCallback(() => {
-    void onToggle(modelId, !enabled);
+    onToggle(modelId, !enabled);
   }, [enabled, modelId, onToggle]);
 
   return (

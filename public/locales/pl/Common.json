@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Wyłącz limit pamięci",
   "Disconnect": "Rozłącz",
   "DisconnectCloudTitle": "Odłącz chmurę",
+  "DiscoverApps": "Poznaj aplikacje",
+  "DiscoverAppsDescription": "Twój plan {{planName}} obejmuje aplikacje do przechowywania dokumentów, zarządzania nimi i automatyzacji. Sprawdź, co robi każda aplikacja, lub od razu zacznij pracę.",
   "DisplayFileExtension": "Wyświetlaj rozszerzenie pliku obok nazwy pliku",
   "DisplaySettings": "Ustawienia wyświetlania",
   "DocsConnectCallbackErrorHint": "Twoja karta została zapisana, ale nie udało się sfinalizować zakupu. Możesz spróbować ponownie w Docs Connect.",

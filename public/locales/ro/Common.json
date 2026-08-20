@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Dezactivare cotă spațiu de stocare",
   "Disconnect": "Deconectare",
   "DisconnectCloudTitle": "Deconectare de la cloud",
+  "DiscoverApps": "Descoperiți aplicațiile",
+  "DiscoverAppsDescription": "Planul dvs. {{planName}} include aplicații pentru stocarea, gestionarea și automatizarea documentelor. Vedeți ce face fiecare aplicație sau treceți direct la treabă.",
   "DisplayFileExtension": "Afișează extensia fișierului de lângă numele fișierului",
   "DisplaySettings": "Setări de afișare",
   "DocsConnectCallbackErrorHint": "Cardul dvs. a fost salvat, dar nu am putut finaliza achiziția. Puteți reîncerca din Docs Connect.",

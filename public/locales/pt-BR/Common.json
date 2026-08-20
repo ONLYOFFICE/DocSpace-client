@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Desabilitar cota de armazenamento",
   "Disconnect": "Desconectar",
   "DisconnectCloudTitle": "Desconecte a nuvem",
+  "DiscoverApps": "Descubra os aplicativos",
+  "DiscoverAppsDescription": "Seu plano {{planName}} inclui aplicativos para armazenamento, gerenciamento e automação de documentos. Veja o que cada aplicativo faz ou comece a usar agora mesmo.",
   "DisplayFileExtension": "Exibir a extensão do arquivo ao lado do nome do arquivo",
   "DisplaySettings": "Configurações do visor",
   "DocsConnectCallbackErrorHint": "Seu cartão foi salvo, mas não conseguimos concluir a compra. Você pode tentar novamente em Docs Connect.",

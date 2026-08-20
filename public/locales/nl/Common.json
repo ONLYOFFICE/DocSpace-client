@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Opslagquota uitschakelen",
   "Disconnect": "Loskoppelen",
   "DisconnectCloudTitle": "Verbreek de verbinding met de cloud",
+  "DiscoverApps": "Ontdek de toepassingen",
+  "DiscoverAppsDescription": "Uw {{planName}}-plan omvat toepassingen voor het opslaan, beheren en automatiseren van documenten. Bekijk wat elke toepassing doet of ga direct aan de slag.",
   "DisplayFileExtension": "Bestandsextensie naast bestandsnaam weergeven",
   "DisplaySettings": "Weergave instellingen",
   "DocsConnectCallbackErrorHint": "Uw kaart is opgeslagen, maar we konden de aankoop niet voltooien. U kunt het opnieuw proberen vanuit Docs Connect.",

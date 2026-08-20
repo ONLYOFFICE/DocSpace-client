@@ -641,6 +641,8 @@
   "DisableStorageQuota": "ආචයන සීමාව අබල කරන්න",
   "Disconnect": "විසන්ධි කරන්න",
   "DisconnectCloudTitle": "Cloud විසන්ධි කරන්න",
+  "DiscoverApps": "යෙදුම් සොයා බලන්න",
+  "DiscoverAppsDescription": "ඔබේ {{planName}} සැලසුමට ලේඛන ගබඩා කිරීම, කළමනාකරණය සහ ස්වයංක්‍රීයකරණය සඳහා යෙදුම් ඇතුළත් වේ. සෑම යෙදුමක් කරන්නේ කුමක්දැයි බලන්න, නැතහොත් වහාම වැඩ ආරම්භ කරන්න.",
   "DisplayFileExtension": "ගොනු නාමයට අමතරව ගොනු ආකාරයද පෙන්වන්න",
   "DisplaySettings": "ප්‍රදර්ශන සැකසුම්",
   "DocsConnectCallbackErrorHint": "ඔබේ කාඩ්පත සුරැකිණි, නමුත් මිලදී ගැනීම සම්පූර්ණ කිරීමට නොහැකි විය. ඔබට Docs Connect වෙතින් නැවත උත්සාහ කළ හැක.",

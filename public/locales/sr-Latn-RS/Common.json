@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Onemogući kvotu skladišta",
   "Disconnect": "Prekini vezu",
   "DisconnectCloudTitle": "Isključi cloud",
+  "DiscoverApps": "Otkrijte aplikacije",
+  "DiscoverAppsDescription": "Vaš {{planName}} plan obuhvata aplikacije za čuvanje dokumenata, upravljanje njima i automatizaciju. Pogledajte šta svaka aplikacija radi ili odmah počnite sa radom.",
   "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
   "DisplaySettings": "Podešavanja Ekrana",
   "DocsConnectCallbackErrorHint": "Vaša kartica je sačuvana, ali nismo uspeli da završimo kupovinu. Možete ponovo pokušati iz Docs Connect.",

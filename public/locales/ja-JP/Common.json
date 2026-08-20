@@ -641,6 +641,8 @@
   "DisableStorageQuota": "ストレージの容量制限を無効にする",
   "Disconnect": "接続解除",
   "DisconnectCloudTitle": "クラウドの接続解除",
+  "DiscoverApps": "アプリを見る",
+  "DiscoverAppsDescription": "{{planName}}プランには、文書の保存、管理、自動化のためのアプリが含まれています。各アプリの機能をご確認いただくか、そのままご利用を開始してください。",
   "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する",
   "DisplaySettings": "表示設定",
   "DocsConnectCallbackErrorHint": "カードは保存されましたが、購入を完了できませんでした。Docs Connect から再試行できます。",

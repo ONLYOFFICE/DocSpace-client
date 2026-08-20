@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Vô hiệu hóa hạn mức lưu trữ",
   "Disconnect": "Ngắt kết nối",
   "DisconnectCloudTitle": "Ngắt kết nối đám mây",
+  "DiscoverApps": "Khám phá các ứng dụng",
+  "DiscoverAppsDescription": "Gói {{planName}} của bạn bao gồm các ứng dụng để lưu trữ, quản lý và tự động hóa tài liệu. Xem từng ứng dụng làm được gì, hoặc bắt đầu sử dụng ngay.",
   "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
   "DisplaySettings": "Cài đặt hiển thị",
   "DocsConnectCallbackErrorHint": "Thẻ của bạn đã được lưu, nhưng chúng tôi không thể hoàn tất giao dịch mua. Bạn có thể thử lại từ Docs Connect.",

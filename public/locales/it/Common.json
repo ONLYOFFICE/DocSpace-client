@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Disabilita quota di archiviazione",
   "Disconnect": "Scollega",
   "DisconnectCloudTitle": "Scollegare il cloud",
+  "DiscoverApps": "Scopri le applicazioni",
+  "DiscoverAppsDescription": "Il tuo piano {{planName}} include applicazioni per l'archiviazione, la gestione e l'automazione dei documenti. Scopri cosa fa ogni applicazione o inizia subito a lavorare.",
   "DisplayFileExtension": "Mostra l’estensione del file vicino al nome del file",
   "DisplaySettings": "Impostazioni di visualizzazione",
   "DocsConnectCallbackErrorHint": "La tua carta è stata salvata, ma non siamo riusciti a completare l'acquisto. Puoi riprovare da Docs Connect.",

@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Vypnúť kvótu úložiska",
   "Disconnect": "Odpojiť",
   "DisconnectCloudTitle": "Odpojiť Cloud",
+  "DiscoverApps": "Objavte aplikácie",
+  "DiscoverAppsDescription": "Váš plán {{planName}} obsahuje aplikácie na ukladanie, správu a automatizáciu dokumentov. Pozrite si, čo jednotlivé aplikácie dokážu, alebo sa hneď pustite do práce.",
   "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu",
   "DisplaySettings": "Nastavenia zobrazenia",
   "DocsConnectCallbackErrorHint": "Vaša karta bola uložená, ale nákup sa nepodarilo dokončiť. Skúsiť to znova môžete v Docs Connect.",

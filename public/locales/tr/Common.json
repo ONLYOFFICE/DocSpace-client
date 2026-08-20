@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Depolama kotasını devre dışı bırak",
   "Disconnect": "Bağlantıyı kes",
   "DisconnectCloudTitle": "Bulut bağlantısını kes",
+  "DiscoverApps": "Uygulamaları keşfedin",
+  "DiscoverAppsDescription": "{{planName}} planınız belge depolama, yönetim ve otomasyon için uygulamalar içerir. Her uygulamanın ne yaptığını görün veya hemen kullanmaya başlayın.",
   "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle",
   "DisplaySettings": "Ekran ayarları",
   "DocsConnectCallbackErrorHint": "Kartınız kaydedildi, ancak satın alma işlemi tamamlanamadı. Docs Connect üzerinden tekrar deneyebilirsiniz.",

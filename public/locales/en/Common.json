@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Disable storage quota",
   "Disconnect": "Disconnect",
   "DisconnectCloudTitle": "Disconnect cloud",
+  "DiscoverApps": "Discover Apps",
+  "DiscoverAppsDescription": "Your {{planName}} plan includes apps for document storage, management, and automation. See what each app does, or jump right in.",
   "DisplayFileExtension": "Display file extension next to file name",
   "DisplaySettings": "Display settings",
   "DocsConnectCallbackErrorHint": "Your card was saved, but we couldn't complete the purchase. You can retry from Docs Connect.",

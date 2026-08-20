@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Poista muistikiintiö käytöstä",
   "Disconnect": "Katkaise",
   "DisconnectCloudTitle": "Katkaise yhteys pilveen",
+  "DiscoverApps": "Tutustu sovelluksiin",
+  "DiscoverAppsDescription": "{{planName}}-tilaukseesi kuuluu sovelluksia asiakirjojen tallentamiseen, hallintaan ja automatisointiin. Katso, mitä kukin sovellus tekee, tai aloita työskentely heti.",
   "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä",
   "DisplaySettings": "Näyttöasetukset",
   "DocsConnectCallbackErrorHint": "Korttisi tallennettiin, mutta emme pystyneet viimeistelemään ostoa. Voit yrittää uudelleen Docs Connect -palvelusta.",

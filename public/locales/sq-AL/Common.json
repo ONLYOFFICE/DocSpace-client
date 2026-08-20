@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Çaktivizoni kuotën e ruajtjes",
   "Disconnect": "Shkëputeni",
   "DisconnectCloudTitle": "Shkëputni renë",
+  "DiscoverApps": "Zbuloni aplikacionet",
+  "DiscoverAppsDescription": "Plani juaj {{planName}} përfshin aplikacione për ruajtjen, administrimin dhe automatizimin e dokumenteve. Shihni se çfarë bën secili aplikacion, ose filloni punën menjëherë.",
   "DisplayFileExtension": "Shfaqni zgjerimin e skedarit pranë emrit të skedarit\"",
   "DisplaySettings": "Cilësimet e ekranit",
   "DocsConnectCallbackErrorHint": "Karta juaj u ruajt, por nuk mundëm ta përfundonim blerjen. Mund ta provoni përsëri nga Docs Connect.",

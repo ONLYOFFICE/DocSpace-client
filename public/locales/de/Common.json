@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Speicherquote deaktivieren",
   "Disconnect": "Trennen Sie die Verbindung",
   "DisconnectCloudTitle": "Cloud-Verbindung trennen",
+  "DiscoverApps": "Anwendungen entdecken",
+  "DiscoverAppsDescription": "Ihr {{planName}}-Plan umfasst Anwendungen für die Speicherung, Verwaltung und Automatisierung von Dokumenten. Sehen Sie, was jede Anwendung kann, oder legen Sie direkt los.",
   "DisplayFileExtension": "Dateierweiterung neben dem Dateinamen anzeigen",
   "DisplaySettings": "Anzeigeeinstellungen",
   "DocsConnectCallbackErrorHint": "Ihre Karte wurde gespeichert, aber der Kauf konnte nicht abgeschlossen werden. Sie können es über Docs Connect erneut versuchen.",

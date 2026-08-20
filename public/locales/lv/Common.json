@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Atspiet krātuves kvotu",
   "Disconnect": "Atvienot",
   "DisconnectCloudTitle": "Atvienot mākoņpakalpojumu",
+  "DiscoverApps": "Iepazīstiet lietotnes",
+  "DiscoverAppsDescription": "Jūsu {{planName}} plāns ietver lietotnes dokumentu glabāšanai, pārvaldībai un automatizācijai. Uzziniet, ko dara katra lietotne, vai sāciet darbu uzreiz.",
   "DisplayFileExtension": "Rādīt faila paplašinājumu blakus faila nosaukumam",
   "DisplaySettings": "Displeja iestatījumi",
   "DocsConnectCallbackErrorHint": "Jūsu karte tika saglabāta, taču mums neizdevās pabeigt pirkumu. Varat mēģināt vēlreiz no Docs Connect.",

@@ -641,6 +641,8 @@
   "DisableStorageQuota": "停用存储配额",
   "Disconnect": "断开连接",
   "DisconnectCloudTitle": "断开云端的连接",
+  "DiscoverApps": "探索应用",
+  "DiscoverAppsDescription": "您的{{planName}}版本包含用于文档存储、管理和自动化的应用。了解每个应用的功能，或直接开始使用。",
   "DisplayFileExtension": "在文件名称旁显示文件扩展名",
   "DisplaySettings": "显示设置",
   "DocsConnectCallbackErrorHint": "您的银行卡已保存，但我们无法完成购买。您可以从 Docs Connect 重试。",

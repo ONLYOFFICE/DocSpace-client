@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Désactiver les quotas de stockage",
   "Disconnect": "Déconnecter",
   "DisconnectCloudTitle": "Déconnecter le cloud",
+  "DiscoverApps": "Découvrez les applications",
+  "DiscoverAppsDescription": "Votre plan tarifaire {{planName}} comprend des applications de stockage, de gestion et d'automatisation des documents. Découvrez le rôle de chaque application ou lancez-vous directement.",
   "DisplayFileExtension": "Afficher l'extension du fichier à côté du nom du fichier",
   "DisplaySettings": "Paramètres d'affichage",
   "DocsConnectCallbackErrorHint": "Votre carte a été enregistrée, mais nous n'avons pas pu finaliser l'achat. Vous pouvez réessayer depuis Docs Connect.",

@@ -641,6 +641,8 @@
   "DisableStorageQuota": "Onemogoči kvoto za shranjevanje",
   "Disconnect": "Prekliči",
   "DisconnectCloudTitle": "Prekini povezavo z oblakom",
+  "DiscoverApps": "Odkrijte aplikacije",
+  "DiscoverAppsDescription": "Vaš paket {{planName}} vključuje aplikacije za shranjevanje dokumentov, njihovo upravljanje in avtomatizacijo. Oglejte si, kaj počne posamezna aplikacija, ali pa se dela lotite takoj.",
   "DisplayFileExtension": "Prikaži pripono datoteke poleg imena datoteke",
   "DisplaySettings": "Nastavitve zaslona",
   "DocsConnectCallbackErrorHint": "Vaša kartica je bila shranjena, vendar nakupa nismo mogli dokončati. Poskusite znova v Docs Connect.",

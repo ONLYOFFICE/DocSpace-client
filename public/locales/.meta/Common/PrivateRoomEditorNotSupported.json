@@ -3,7 +3,7 @@
   "content": "Encrypted files cannot be opened in the editor yet.",
   "content_en_sha1_hash": "c48479a97952433df21422fd039eea9dd7027cdb",
   "created_at": "2026-06-09T09:42:54.370Z",
-  "updated_at": "2026-08-12T11:00:51.645Z",
+  "updated_at": "2026-08-20T12:26:01.847Z",
   "comment": {
     "text": "An info toast message that appears when a user attempts to open an encrypted file within a private room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 495,
+      "line_number": 497,
       "context": "docsSettingsStore.filesSettings?.storeOriginalFiles ?? false;\n \n const openFileHandler = React.useCallback(\n (file: TFileItem, preview?: boolean) => {\n if (isPrivate && file.encrypted) {\n toastr.info(t(\"Common:PrivateRoomEditorNotSupported\"));\n return;\n }\n if (!preview && file.viewAccessibility?.MustConvert) {\n requestConvert(file);\n return;",
       "module": "/packages/sdk"
     }

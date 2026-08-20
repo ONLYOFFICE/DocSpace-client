@@ -3,7 +3,7 @@
   "content": "The shared form space will appear here.",
   "content_en_sha1_hash": "01b4fd97cf9ad7fd2225c3761e0c3863d712f823",
   "created_at": "2026-08-19T13:26:34.346Z",
-  "updated_at": "2026-08-19T13:31:24.660Z",
+  "updated_at": "2026-08-20T12:26:01.706Z",
   "comment": {
     "text": "Placeholder text in an empty state view that appears when the user's shared forms folder contains no items.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 305,
+      "line_number": 341,
       "context": "isFormsScope\n ? t(\"EmptyView:EmptyFormTemplatesDescription\")\n : t(\"EmptyView:EmptyTemplatesDescription\"),\n )\n .with([FolderType.Forms, P.when(isUser)], () =>\n t(\"EmptyView:EmptyRootFormsUserDescription\"),\n )\n .with([FolderType.Forms, P._], () =>\n t(\"EmptyView:EmptyRootFormsDescription\"),\n )\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (",
       "module": "/packages/client"
     }

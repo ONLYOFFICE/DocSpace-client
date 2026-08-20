@@ -3,7 +3,7 @@
   "content": "Download report",
   "content_en_sha1_hash": "ca59430707ce8fb813997d7d85dff992c7f66e85",
   "created_at": "2026-04-10T13:53:45.938Z",
-  "updated_at": "2026-08-17T17:23:21.808Z",
+  "updated_at": "2026-08-20T12:26:01.805Z",
   "comment": {
     "text": "This is a button label that allows users to download a report, such as a transaction history or an audit trail.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/usage/index.tsx",
-      "line_number": 316,
-      "context": "dataTestId=\"usage_download_report\"\n className={\n isReportLoading ? styles.downloadReportLinkDisabled : undefined\n }\n >\n {t(\"DownloadReportBtnText\")}\n </Link>\n {isReportLoading ? (\n <Loader color=\"\" size=\"16px\" type={LoaderTypes.track} />\n ) : null}\n </div>",
+      "line_number": 328,
+      "context": "isReportInProgress\n ? styles.downloadReportLinkDisabled\n : undefined\n }\n >\n {t(\"DownloadReportBtnText\")}\n </Link>\n {isReportLoading ? (\n <Loader color=\"\" size=\"16px\" type={LoaderTypes.track} />\n ) : null}\n </div>",
       "module": "/libs/ui-kit"
     },
     {

@@ -343,7 +343,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -451,6 +451,16 @@
   svg {
     width: 16px;
     height: 16px;
+    
+    path {
+      :global(.light) & {
+        fill: $light-gray-dark;
+      }
+
+      :global(.dark) & {
+        fill: $dark-gray-dark;
+      }
+    }
   }
 }
 

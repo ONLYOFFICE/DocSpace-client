@@ -138,6 +138,7 @@ export const useEmptyView = (
       standalone,
       isPortalAdmin,
       isFormsScope,
+      filterFolderType,
     );
     const title = getTitle(
       type,
@@ -193,6 +194,7 @@ export const useEmptyView = (
     standalone,
     isPortalAdmin,
     isFormsScope,
+    filterFolderType,
   ]);
 
   return emptyViewOptions;

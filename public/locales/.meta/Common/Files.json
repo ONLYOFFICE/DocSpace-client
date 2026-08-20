@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-08-19T13:26:37.648Z",
+  "updated_at": "2026-08-20T12:26:01.693Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 310,
-      "context": "const childFolders = [sharedFolder, recentFolder, favFolder];\n if (!isVisitor && myDocsFolder) childFolders.push(trashFolder);\n \n mainItems.push({\n id: myDocsFolder ? String(myDocsFolder.id) : \"files\",\n label: myDocsFolder ? myDocsFolder.title : t(\"Common:Files\"),\n icon: getCatalogIconUrlByType(FolderType.USER),\n onClick: primaryFolder\n ? goFolder(primaryFolder.id, primaryFolder.rootFolderType)\n : undefined,\n ...sectionBadge(",
+      "line_number": 307,
+      "context": "const childFolders = [sharedFolder, recentFolder, favFolder];\n if (!isVisitor && myDocsFolder) childFolders.push(trashFolder);\n \n mainItems.push({\n id: myDocsFolder ? String(myDocsFolder.id) : \"files\",\n label: myDocsFolder ? myDocsFolder.title : t(\"Common:Files\"),\n icon: getCatalogIconUrlByType(FolderType.USER),\n ...(primaryFolder\n ? nav(folderUrl(primaryFolder.id, primaryFolder.rootFolderType))\n : {}),\n ...sectionBadge(",
       "module": "/packages/client"
     },
     {
@@ -97,26 +97,32 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 324,
+      "line_number": 326,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 324,
+      "line_number": 326,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 324,
+      "line_number": 326,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 324,
+      "line_number": 326,
       "context": ");\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 178,
+      "context": ") => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };\n \n export const getFolderDescription = (\n t: TTranslation,\n access: AccessType,",
       "module": "/packages/client"
     },
     {
@@ -357,6 +363,12 @@
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/views/History/useFeedTranslation.tsx",
       "line_number": 369,
       "context": "return t(\"Common:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"Common:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"Common:RoomIndexExportLocation\", {\n sectionName: t(\"Common:Files\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"Common:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"Common:StartedFillingItOut\");",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
+      "line_number": 142,
+      "context": "case FolderType.Recent:\n return t(\"Common:EmptyRecentDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n appName: t(\"Common:Files\"),\n });\n case FolderType.USER:\n return t(\"Common:DefaultFolderDescription\");\n default:\n return (",
       "module": "/packages/sdk"
     },
     {

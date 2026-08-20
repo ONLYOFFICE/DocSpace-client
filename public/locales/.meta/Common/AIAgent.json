@@ -3,7 +3,7 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2026-08-19T13:26:37.653Z",
+  "updated_at": "2026-08-20T12:26:01.697Z",
   "comment": {
     "text": "This string refers to an AI agent, likely a feature or service within the application. It appears as a label in various contexts, including a selector and an empty screen description.",
     "is_auto": true,
@@ -43,13 +43,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 417,
+      "line_number": 419,
       "context": "};\n \n const createAIAgent = {\n title: t(\"Common:CreateAIAgentTitle\"),\n description: t(\"Common:CreateAIAgentDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n icon: <CreateAIAgentIcon />,\n key: \"create-ai-agent\",\n onClick: actions.onCreateAIAgent,\n //disabled: !security?.Create,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 204,
+      "line_number": 239,
       "context": "return isUser(access)\n ? t(\"Common:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"Common:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };\n \n const getAIAgentsAIDisabledTitle = (\n t: TTranslation,",
       "module": "/packages/client"
     },

@@ -69,6 +69,8 @@ import type {
   NavMenuItem,
   NavSubItem,
 } from "@docspace/ui-kit/components/nav-menu";
+import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -120,6 +122,8 @@ const ClientArticleSidebar = ({
   const onFolderNavigateRef = React.useRef(onFolderNavigate);
   onFolderNavigateRef.current = onFolderNavigate;
 
+  const aiChatStore = useAiChatStoreOptional();
+
   // Every sidebar entry is described by the URL it opens, so the same target
   // can be rendered as a real <a href> (Ctrl/Cmd-click and "Open link in new
   // tab" work) and still navigate in-app on a plain click. `nav()` builds the
@@ -128,6 +132,7 @@ const ClientArticleSidebar = ({
     (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
       linkData: { path },
       onClick: () => {
+        aiChatStore?.setFullscreen(false);
         onFolderNavigateRef.current?.();
         navigate(path);
       },
@@ -446,9 +451,12 @@ const ClientArticleSidebar = ({
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
             ...nav(
-              scopedUrl(CategoryType.Trash, "/forms/trash", recycleBinFolderId, [
-                FolderType.FormRoom,
-              ]),
+              scopedUrl(
+                CategoryType.Trash,
+                "/forms/trash",
+                recycleBinFolderId,
+                [FolderType.FormRoom],
+              ),
             ),
             withTopSeparator: true,
           },
@@ -493,7 +501,10 @@ const ClientArticleSidebar = ({
 
       const agentsItem: NavMenuItem = {
         ...navItem(aiAgentsFolder),
-        ...sectionBadge(panelFolderId(aiAgentsFolder), newCount(aiAgentsFolder)),
+        ...sectionBadge(
+          panelFolderId(aiAgentsFolder),
+          newCount(aiAgentsFolder),
+        ),
       };
       mainItems.push(
         agentChildren.length > 0
@@ -571,4 +582,3 @@ const ClientArticleSidebarConnected = inject<TStore>(
 )(observer(ClientArticleSidebar));
 
 export default ClientArticleSidebarConnected;
-

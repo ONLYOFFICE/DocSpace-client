@@ -60,13 +60,11 @@ describe("(docspace) Layout providers", () => {
     container = undefined;
   });
 
-  // Bug 83223
   it("provides DocsUserStore to children", () => {
     container = document.createElement("div");
     document.body.appendChild(container);
     root = createRoot(container);
 
-    // React duplicates render-phase errors into console.error
     const consoleError = vi
       .spyOn(console, "error")
       .mockImplementation(() => {});

@@ -135,8 +135,6 @@
   );
 }
 
-// With showFilter=false the sticky filter block is not rendered at all, so
-// its height must not push the sticky table header down (Bug 82615).
 .root[data-no-filter] {
   --section-filter-height: 0px;
 }

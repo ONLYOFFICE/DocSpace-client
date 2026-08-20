@@ -80,7 +80,7 @@ const NewFilesPanelItemFileComponent = ({
   };
 
   const onOpenFileLocation = () => {
-    checkAndOpenLocationAction!(item);
+    checkAndOpenLocationAction!({ ...item, title: resolvedTitle });
     onClose();
     closeMobileArticle();
   };

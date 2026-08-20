@@ -34,7 +34,7 @@
  */
 
 import React, { useEffect, useMemo, useCallback, useState } from "react";
-import { Outlet, useLocation, useSearchParams } from "react-router";
+import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
@@ -64,7 +64,10 @@ import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 
-import { updateTempContent } from "@docspace/shared/utils/common";
+import {
+  getFrameInitialTheme,
+  updateTempContent,
+} from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
   DeviceType,
@@ -169,6 +172,7 @@ const Shell = ({ page = "home", ...rest }) => {
 
   const [searchParams] = useSearchParams();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const folderType = searchParams.get("folderType");
   const searchArea = searchParams.get("searchArea");
@@ -858,6 +862,32 @@ const Shell = ({ page = "home", ...rest }) => {
     [isInsideAgentRoom, pickedAgent],
   );
 
+  // Chat error box override (Bug 83207): the wallet 402 must read as a
+  // human message with a way to top up instead of the raw provider text.
+  // Admins get a button to Billing -> Wallet; regular users are pointed to
+  // their Payer (`action: null` also drops the default Retry, which would
+  // just fail again on an empty wallet). Every other code keeps the
+  // library default (localized text + Retry).
+  const formatChatError = useCallback(
+    (payload) => {
+      if (payload?.code !== "insufficient_funds") return null;
+
+      return {
+        title: t("Common:WalletBalanceTooLow"),
+        description: isAdmin
+          ? t("Common:TopUpWalletToContinue")
+          : t("Common:InsufficientFundsContactPayerShort"),
+        action: isAdmin
+          ? {
+              text: t("Common:TopUpWallet"),
+              onClick: () => navigate("/portal-settings/payments/wallet"),
+            }
+          : null,
+      };
+    },
+    [t, isAdmin, navigate],
+  );
+
   // AI chat host callbacks. Web Search settings save on an explicit button
   // (see `webSearchSaveMode` in AiAgentProviders); notify the user on success.
   const aiChatCallbacks = useMemo(
@@ -917,6 +947,7 @@ const Shell = ({ page = "home", ...rest }) => {
           // interactive picker to change it. `isAgentRoom` keeps the
           // room-assignment-wins reset on scope switches even though the
           // picker is no longer hidden there.
+          formatChatError={formatChatError}
           hideProfilePicker={false}
           profilePickerReadOnly={isInsideAgentRoom && !canEditAgentRoom}
           isAgentRoom={isInsideAgentRoom}
@@ -1049,7 +1080,10 @@ const ShellWrapper = inject(
       setTheme,
       roomsMode,
       setSnackbarExist,
-      userTheme: isFrame ? frameConfig?.theme : userTheme,
+      userTheme:
+        isFrame || getFrameInitialTheme()
+          ? (frameConfig?.theme ?? getFrameInitialTheme())
+          : userTheme,
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,

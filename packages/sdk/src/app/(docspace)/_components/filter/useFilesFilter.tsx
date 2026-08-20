@@ -291,8 +291,7 @@ export default function useFilesFilter({
   const getSelectedFilterData = React.useCallback(() => {
     const filterValues: TItem[] = [];
 
-    const sp = new URLSearchParams(window.location.search);
-    const tagsRaw = sp.get("tags");
+    const tagsRaw = searchParams.get("tags");
     if (tagsRaw) {
       try {
         const parsed = JSON.parse(tagsRaw);

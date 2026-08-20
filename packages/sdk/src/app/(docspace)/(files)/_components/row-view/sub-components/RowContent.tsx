@@ -39,14 +39,12 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { Text } from "@docspace/ui-kit/components/text";
 import { FilesRowContent } from "@docspace/shared/components/files-row";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { SortByFieldName } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
@@ -67,7 +65,6 @@ const RowContent = observer(
   }: RowContentProps) => {
     const { title: rawTitle, createdBy, created, updated } = item;
 
-    const { isBase } = useTheme();
     const { t, i18n } = useTranslation(["Common"]);
 
     const { openFolder } = useFolderActions({ t });
@@ -118,7 +115,7 @@ const RowContent = observer(
 
     return (
       <FilesRowContent
-        sideColor={isBase ? globalColors.gray : globalColors.grayDark}
+        sideColor="var(--row-side-color)"
       >
         <Link
           className="row-content-link"
@@ -147,8 +144,6 @@ const RowContent = observer(
 
         {mainInfo ? (
           <Text
-            containerMinWidth="200px"
-            containerWidth="15%"
             fontSize="12px"
             fontWeight={400}
             className="row_update-text"

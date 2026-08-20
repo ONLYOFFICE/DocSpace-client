@@ -43,6 +43,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
+import { useDisableModelConfirmation } from "../DisableModelDialog";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
@@ -80,8 +81,13 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     ...(aiToolsPrices?.image ?? []),
   ];
 
-  const onToggle = async (modelId: string, enabled: boolean) => {
-    await setAiModelAvailability?.(modelId, enabled);
+  const { requestToggle, disableModelDialog } =
+    useDisableModelConfirmation(setAiModelAvailability);
+
+  const onToggle = (modelId: string, enabled: boolean) => {
+    const model = models.find((m) => m.id === modelId);
+
+    requestToggle({ id: modelId, title: model?.alias ?? modelId }, enabled);
   };
 
   const ref = useRef<HTMLDivElement>(null);
@@ -142,6 +148,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
           ))}
         </TableBody>
       </TableContainer>
+
+      {disableModelDialog}
     </div>
   );
 };

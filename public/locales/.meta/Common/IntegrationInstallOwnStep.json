@@ -1,9 +1,9 @@
 {
-  "key_path": "IntegrationsDescription",
-  "content": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
-  "content_en_sha1_hash": "fa49cdb80460679c8ce1c1668c9cfb3081466c2b",
-  "created_at": "2026-08-20T20:04:48.403Z",
-  "updated_at": "2026-08-20T20:04:48.403Z",
+  "key_path": "IntegrationInstallOwnStep",
+  "content": "Implement the {{organizationName}} {{productName}} API in your application: generate an editor config with the document URL, callback URL, and key, load the editor on your page, and handle the callback to save the edited document back to your storage.",
+  "content_en_sha1_hash": "70f8d8f10c35e020902e830e63257a22509503c3",
+  "created_at": "2026-08-20T20:04:48.129Z",
+  "updated_at": "2026-08-20T20:04:48.129Z",
   "comment": {
     "text": "",
     "is_auto": false,

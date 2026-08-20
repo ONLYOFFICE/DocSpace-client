@@ -1,9 +1,9 @@
 {
-  "key_path": "IntegrationsDescription",
-  "content": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
-  "content_en_sha1_hash": "fa49cdb80460679c8ce1c1668c9cfb3081466c2b",
-  "created_at": "2026-08-20T20:04:48.403Z",
-  "updated_at": "2026-08-20T20:04:48.403Z",
+  "key_path": "IntegrationConfigureOwnStep",
+  "content": "Configure the Document Server URL, file URL, callback URL, and a JWT-signed config to enable secure editing and co-authoring.",
+  "content_en_sha1_hash": "0c66d4ca01dd1a4ac8fc4693e849bbb0de0b66bd",
+  "created_at": "2026-08-20T20:04:48.343Z",
+  "updated_at": "2026-08-20T20:04:48.343Z",
   "comment": {
     "text": "",
     "is_auto": false,

@@ -1,9 +1,9 @@
 {
-  "key_path": "IntegrationsDescription",
-  "content": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
-  "content_en_sha1_hash": "fa49cdb80460679c8ce1c1668c9cfb3081466c2b",
-  "created_at": "2026-08-20T20:04:48.403Z",
-  "updated_at": "2026-08-20T20:04:48.403Z",
+  "key_path": "IntegrationAutomateHeader",
+  "content": "Automate document workflows in n8n with {{organizationName}} {{productName}}",
+  "content_en_sha1_hash": "620b25fe9c75aa9546e30d4f0af66ebd7989353f",
+  "created_at": "2026-08-20T20:04:47.932Z",
+  "updated_at": "2026-08-20T20:04:47.932Z",
   "comment": {
     "text": "",
     "is_auto": false,

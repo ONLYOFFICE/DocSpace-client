@@ -1,9 +1,9 @@
 {
-  "key_path": "IntegrationsDescription",
-  "content": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
-  "content_en_sha1_hash": "fa49cdb80460679c8ce1c1668c9cfb3081466c2b",
-  "created_at": "2026-08-20T20:04:48.403Z",
-  "updated_at": "2026-08-20T20:04:48.403Z",
+  "key_path": "WelcomeToOrganization",
+  "content": "Welcome to {{organizationName}}",
+  "content_en_sha1_hash": "91de837532d2aa12da937100fbffbc02b0e5a4bb",
+  "created_at": "2026-08-20T20:05:30.764Z",
+  "updated_at": "2026-08-20T20:05:30.764Z",
   "comment": {
     "text": "",
     "is_auto": false,

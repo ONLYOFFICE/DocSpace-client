@@ -1,9 +1,9 @@
 {
-  "key_path": "IntegrationsDescription",
-  "content": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
-  "content_en_sha1_hash": "fa49cdb80460679c8ce1c1668c9cfb3081466c2b",
-  "created_at": "2026-08-20T20:04:48.403Z",
-  "updated_at": "2026-08-20T20:04:48.403Z",
+  "key_path": "IntegrationConfigureMoodleStep",
+  "content": "Configure the integration. Go to the Moodle plugin settings (or Plugins overview → {{organizationName}} document → Settings) to connect {{organizationName}} Document Server and enable document editing.",
+  "content_en_sha1_hash": "b946ea8246e80d9edc5d28b80f15ae5e8f853c1f",
+  "created_at": "2026-08-20T20:04:48.312Z",
+  "updated_at": "2026-08-20T20:04:48.312Z",
   "comment": {
     "text": "",
     "is_auto": false,

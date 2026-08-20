@@ -1,9 +1,9 @@
 {
-  "key_path": "IntegrationsDescription",
-  "content": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
-  "content_en_sha1_hash": "fa49cdb80460679c8ce1c1668c9cfb3081466c2b",
-  "created_at": "2026-08-20T20:04:48.403Z",
-  "updated_at": "2026-08-20T20:04:48.403Z",
+  "key_path": "IntegrationInstallMoodleStep",
+  "content": "Install the {{organizationName}} plugin for Moodle into the {{moduleName}} directory following the standard Moodle plugin installation steps.",
+  "content_en_sha1_hash": "dc195a5f10298907931a6f7c83d515d71418eb1e",
+  "created_at": "2026-08-20T20:04:48.099Z",
+  "updated_at": "2026-08-20T20:04:48.099Z",
   "comment": {
     "text": "",
     "is_auto": false,

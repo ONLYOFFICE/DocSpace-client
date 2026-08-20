@@ -1,9 +1,9 @@
 {
-  "key_path": "IntegrationsDescription",
-  "content": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
-  "content_en_sha1_hash": "fa49cdb80460679c8ce1c1668c9cfb3081466c2b",
-  "created_at": "2026-08-20T20:04:48.403Z",
-  "updated_at": "2026-08-20T20:04:48.403Z",
+  "key_path": "IntegrationOwnHeader",
+  "content": "Embed {{organizationName}} {{productName}} into your own platform and enable real-time co-editing",
+  "content_en_sha1_hash": "fcbf192ef2dd329df67d2b6ae2757b7d5961e8fa",
+  "created_at": "2026-08-20T20:04:47.898Z",
+  "updated_at": "2026-08-20T20:04:47.898Z",
   "comment": {
     "text": "",
     "is_auto": false,

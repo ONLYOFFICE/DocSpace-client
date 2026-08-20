@@ -107,8 +107,9 @@ const CreateSectionLoader = () => (
 );
 
 // Mirrors the "Applications" section ({@link ./ModuleCard}): title + a module
-// grid (icon + title row, then a description line). The card count matches the
-// installed modules — guests don't get the personal Files module.
+// grid (icon + title row with the state chip, a description line, then the
+// action row). The card count matches the installed modules — guests don't get
+// the personal Files module.
 const ModulesSectionLoader = ({ count }: { count: number }) => (
   <section className={styles.section}>
     <RectangleSkeleton width="120px" height="24px" borderRadius="3px" />
@@ -118,8 +119,14 @@ const ModulesSectionLoader = ({ count }: { count: number }) => (
           <div className={styles.loaderModuleHeader}>
             <RectangleSkeleton width="32px" height="32px" borderRadius="6px" />
             <RectangleSkeleton width="80px" height="16px" borderRadius="3px" />
+            <RectangleSkeleton width="72px" height="24px" borderRadius="4px" />
           </div>
           <RectangleSkeleton width="100%" height="32px" borderRadius="3px" />
+          {/* Action row: the section button plus the round tour icon beside it. */}
+          <div className={styles.loaderModuleFooter}>
+            <RectangleSkeleton width="100%" height="32px" borderRadius="3px" />
+            <RectangleSkeleton width="16px" height="16px" borderRadius="50%" />
+          </div>
         </div>
       ))}
     </div>
@@ -213,3 +220,4 @@ export const DashboardLoader = inject<TStore>(({ userStore }) => ({
 }))(observer(DashboardLoaderComponent));
 
 export default DashboardLoader;
+

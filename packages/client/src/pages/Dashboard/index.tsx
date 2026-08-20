@@ -61,7 +61,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
@@ -78,17 +83,12 @@ import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import ChatPanelView from "@docspace/ui-kit/components/section/sub-components/ChatPanel";
 
-import CatalogRoomsIcon from "@docspace/ui-kit/assets/icons/16/catalog.rooms.react.svg";
-import CatalogFolderIcon from "@docspace/ui-kit/assets/icons/16/catalog.folder.react.svg";
-import CatalogDocumentsIcon from "@docspace/ui-kit/assets/icons/16/catalog.documents.react.svg";
-import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
-
 import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
-import { useAppPromo } from "SRC_DIR/components/dialogs/AppPromoDialog";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 import { setDashboardVisited } from "SRC_DIR/helpers/dashboardVisited";
+import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 import {
   useChatNoAccess,
   mapChatNoAccessStores,
@@ -97,7 +97,7 @@ import {
 
 import { WelcomeDialog } from "./WelcomeDialog";
 import { DashboardTourHost } from "./DashboardTourHost";
-import { ModuleCard, type ModuleItem } from "./sub-components/ModuleCard";
+import { ModuleCard } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
 import { IntegrationsCard } from "./sub-components/IntegrationsCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
@@ -106,6 +106,7 @@ import { DashboardLoader } from "./sub-components/DashboardLoader";
 import { GuestRestrictionTooltip } from "./sub-components/GuestRestrictionTooltip";
 import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
+import { useModuleItems } from "./hooks/useModuleItems";
 import { useMyFolderId } from "./hooks/useMyFolderId";
 import styles from "./Dashboard.module.scss";
 
@@ -123,6 +124,13 @@ type DashboardProps = ChatNoAccessStoreProps & {
   dismissWelcome: (userId?: string) => void;
   /** Arms the dashboard's own tour, which `DashboardTour` then starts. */
   requestDashboardTour: () => void;
+  /** Admins / owners / room admins — the set allowed to create rooms. */
+  canCreateRooms: boolean;
+  /** Whether the portal's AI is set up, which agent creation also needs. */
+  aiReady: boolean;
+  /** Rooms quota exhausted or portal in its grace period. */
+  isWarningRoomsDialog: boolean;
+  setQuotaWarningDialogVisible: (visible: boolean) => void;
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
@@ -138,6 +146,10 @@ const Dashboard = (props: DashboardProps) => {
     hydrateWelcome,
     dismissWelcome,
     requestDashboardTour,
+    canCreateRooms,
+    aiReady,
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
   } = props;
   const { t } = useTranslation(["Common", "OAuth"]);
   useDocumentTitle("Common:Home");
@@ -155,13 +167,18 @@ const Dashboard = (props: DashboardProps) => {
   );
   const createItems = useCreateActions(myFolderId, isGuest);
 
-  // "Introduce this app" promo, shown on every card click. The clicked card's
-  // href is stashed in a ref so the promo's confirm callback can navigate to it
-  // afterwards. Apps without promo content fall straight through to navigate.
-  const promoHrefRef = React.useRef<string | undefined>(undefined);
-  const { maybeShowPromo, promoDialog } = useAppPromo(() => {
-    if (promoHrefRef.current) navigate(promoHrefRef.current);
-  }, requestAppTour);
+  // Agent creation needs AI to be set up on top of the create right. `aiReady`
+  // (portal /ai/config) can lag behind the chat-lib profiles, so existing
+  // profiles count as ready too — the same signal Home and the agents EmptyView
+  // use to decide whether to offer agent creation.
+  const hasAiProfiles = useHasAiProfiles();
+  const moduleItems = useModuleItems({
+    isGuest,
+    canCreateRooms,
+    canCreateAgents: (aiReady || hasAiProfiles) && canCreateRooms,
+    isWarningRoomsDialog,
+    setQuotaWarningDialogVisible,
+  });
 
   // The dashboard renders its own content (no SDK iframe). Tell the
   // persistent host to drop the previous app's frame so it doesn't linger
@@ -267,41 +284,6 @@ const Dashboard = (props: DashboardProps) => {
   // ahead of the navigation it sits next to.
   if (showLoader) return <DashboardLoader />;
 
-  const moduleItems: ModuleItem[] = [
-    {
-      id: "ai-files",
-      icon: <CatalogFolderIcon />,
-      title: t("Common:Files"),
-      description: t("Common:DashboardFilesDescription"),
-      installed: true,
-      href: isGuest ? "/shared-with-me/filter" : "/rooms/personal/filter",
-    },
-    {
-      id: "ai-rooms",
-      icon: <CatalogRoomsIcon />,
-      title: t("Common:Rooms"),
-      description: t("Common:DashboardRoomsDescription"),
-      installed: true,
-      href: "/rooms/shared/filter",
-    },
-    {
-      id: "ai-forms",
-      icon: <CatalogDocumentsIcon />,
-      title: t("Common:Forms"),
-      description: t("Common:DashboardFormsDescription"),
-      installed: true,
-      href: "/forms/filter",
-    },
-    {
-      id: "ai-agents",
-      icon: <AiAgentsIcon />,
-      title: t("Common:AIAgents"),
-      description: t("Common:DashboardAIChatAgentsDescription"),
-      installed: true,
-      href: "/ai-agents/filter",
-    },
-  ].filter((mod) => mod.installed);
-
   return (
     <div
       className={styles.dashboardLayout}
@@ -359,7 +341,10 @@ const Dashboard = (props: DashboardProps) => {
                   getContent={() => <GuestRestrictionTooltip />}
                 />
               ) : null}
-              <QuickActions items={createItems} className={styles.quickActions} />
+              <QuickActions
+                items={createItems}
+                className={styles.quickActions}
+              />
             </section>
 
             {moduleItems.length > 0 ? (
@@ -370,12 +355,11 @@ const Dashboard = (props: DashboardProps) => {
                     <ModuleCard
                       key={mod.id}
                       mod={mod}
-                      onClick={() => {
-                        promoHrefRef.current = mod.href;
-                        // Show the app's promo; it navigates on confirm.
-                        // Apps with no promo content navigate directly.
-                        if (maybeShowPromo(mod.id as AppId)) return;
-                        if (mod.href) navigate(mod.href);
+                      onTakeTour={() => {
+                        requestAppTour(mod.id as AppId);
+                        // The tour runs inside the app's section, so this
+                        // navigates even when the button next to it creates.
+                        navigate(mod.href);
                       }}
                     />
                   ))}
@@ -385,7 +369,7 @@ const Dashboard = (props: DashboardProps) => {
 
             <IntegrationsCard />
             <DevToolsCard />
-            </div>
+          </div>
         </Scrollbar>
 
         {progress.isUploading ? (
@@ -398,8 +382,6 @@ const Dashboard = (props: DashboardProps) => {
             clearUploadedFilesHistory={clearProgress}
           />
         ) : null}
-
-        {promoDialog}
 
         {showWelcome ? (
           <WelcomeDialog
@@ -428,9 +410,12 @@ const Dashboard = (props: DashboardProps) => {
 
 const DashboardConnected = inject((stores: TStore) => {
   const {
+    authStore,
     userStore,
     clientLoadingStore,
     settingsStore,
+    currentQuotaStore,
+    dialogsStore,
     filesTourStore,
     roomsTourStore,
     formsTourStore,
@@ -463,6 +448,11 @@ const DashboardConnected = inject((stores: TStore) => {
     hydrateWelcome: dashboardTourStore.hydrateWelcome,
     dismissWelcome: dashboardTourStore.dismissWelcome,
     requestDashboardTour: dashboardTourStore.requestTour,
+    // Same set the Home quick actions and the agents header button gate on.
+    canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,
+    aiReady: settingsStore.aiConfig?.aiReady ?? false,
+    isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
+    setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
   };
 })(observer(Dashboard));
 

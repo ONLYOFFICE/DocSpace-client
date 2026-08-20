@@ -73,11 +73,15 @@ import styles from "../Dashboard.module.scss";
 // resolves. They stay in sync with the sidebar's nav skeleton — both gated on
 // the same first-load article loader.
 
-// Mirrors the plan banner ({@link ./Header}): title + subline.
+// Mirrors the header ({@link ./Header}): greeting + plan subline, with the
+// round tour button at the opposite edge.
 const PlanHeaderLoader = () => (
   <div className={styles.planHeader}>
-    <RectangleSkeleton width="280px" height="28px" borderRadius="3px" />
-    <RectangleSkeleton width="360px" height="20px" borderRadius="3px" />
+    <div className={styles.planHeaderText}>
+      <RectangleSkeleton width="280px" height="28px" borderRadius="3px" />
+      <RectangleSkeleton width="360px" height="20px" borderRadius="3px" />
+    </div>
+    <RectangleSkeleton width="32px" height="32px" borderRadius="50%" />
   </div>
 );
 

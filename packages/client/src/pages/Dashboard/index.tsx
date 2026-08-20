@@ -74,16 +74,12 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
-import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
-import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
 import ChatPanelView from "@docspace/ui-kit/components/section/sub-components/ChatPanel";
-
-import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
@@ -185,8 +181,6 @@ const Dashboard = (props: DashboardProps) => {
   // behind the dashboard.
   useSdkFrame({ appId: "dashboard", enabled: false });
 
-  const isMobile = currentDeviceType === DeviceType.mobile;
-
   // The welcome flag is per-user and lives in storage, so it has to be read
   // back once the signed-in user is known. Keyed on `userId` rather than run
   // once: the same page survives a user switch on this route.
@@ -213,16 +207,12 @@ const Dashboard = (props: DashboardProps) => {
   const [isWelcomeOpen, setIsWelcomeOpen] = React.useState(false);
 
   /**
-   * The first-visit offer, made once to a user who can actually be walked
-   * through the page afterwards.
+   * The first-visit offer, made once per user, on every device.
    *
-   * Not on mobile, where no tour runs at all (`useTour` refuses to) — and the
-   * flag is deliberately left unspent there rather than dismissed, so somebody
-   * whose first visit was on a phone still gets the offer on their desktop.
    * Behind the loader for the same reason the tour is: the modal introduces the
    * page, and the page is a skeleton until then.
    */
-  const isFirstVisit = !isWelcomeSeen && !showLoader && !isMobile;
+  const isFirstVisit = !isWelcomeSeen && !showLoader;
 
   const showWelcome = isFirstVisit || isWelcomeOpen;
 
@@ -290,24 +280,9 @@ const Dashboard = (props: DashboardProps) => {
       data-layout-mode={isAiChatFullscreen ? "ai-fullscreen" : undefined}
     >
       <div className={styles.dashboard} inert={isAiChatFullscreen}>
-        {/* Outside the Scrollbar so it stays pinned to the corner instead of
-            scrolling away with the content. Not on mobile: it reopens the
-            welcome, whose only offer is a tour that cannot run there. */}
-        {!isMobile ? (
-          <IconButton
-            className={styles.helpButton}
-            iconName={QuestionReactSvgUrl}
-            size={16}
-            isClickable
-            title={t("Common:WelcomeStartTour")}
-            onClick={() => setIsWelcomeOpen(true)}
-            dataTestId="dashboard-open-welcome"
-          />
-        ) : null}
-
         <Scrollbar className={styles.dashboardScrollbar}>
           <div className={styles.dashboardInner}>
-            <Header />
+            <Header onOpenTour={() => setIsWelcomeOpen(true)} />
             <ProfileCard />
 
             <section data-tour-id="dashboard-create" className={styles.section}>

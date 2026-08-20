@@ -61,11 +61,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
+import { getBrandName } from "@docspace/ui-kit/constants/brands";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 import PluginIcon from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg";
@@ -193,7 +194,18 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
     <div data-tour-id="dashboard-integrations">
       <CollapsibleCard
         title={t("Common:AlreadyUsingAnotherPlatform")}
-        description={t("Common:IntegrationsDescription")}
+        description={
+          <Trans
+            t={t}
+            ns="Common"
+            i18nKey="IntegrationsDescription"
+            values={{
+              docsName: getBrandName("ProductEditorsName"),
+              productName: getBrandName("ProductName"),
+            }}
+            components={{ strong: <strong key="strong" /> }}
+          />
+        }
         defaultOpen
       >
         <div className={styles.integrationsGrid}>

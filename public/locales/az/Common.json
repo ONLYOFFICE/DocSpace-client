@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Dəvəti təkrarlayın",
   "ReportSaveLocation": "Hesabat {{sectionName}} bölməsində qeyd ediləcək",
   "RequestDetails": "Lütfən, sorğunuzun təfərrüatlarını burada təsvir edin.",
+  "RequestsProcessedInMonth": "{{month}} ayında emal edilmiş sorğular",
   "RequiredField": "Tələb olunan sahə",
   "Reset": "Sıfırlayın",
   "ResetAndStartFilling": "Sıfırlayın və doldurmağa başlayın",

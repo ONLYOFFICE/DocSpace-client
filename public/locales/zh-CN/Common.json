@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "重复邀请",
   "ReportSaveLocation": "报告将保存至{{sectionName}}",
   "RequestDetails": "请在此详细描述您的需求。",
+  "RequestsProcessedInMonth": "{{month}} 已处理的请求数",
   "RequiredField": "必要字段",
   "Reset": "重设",
   "ResetAndStartFilling": "重置并开始填写",

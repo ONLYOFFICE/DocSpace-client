@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Lähetä kutsu uudelleen",
   "ReportSaveLocation": "Raportti tallennetaan {{sectionName}}-osioon",
   "RequestDetails": "Ole hyvä ja kuvaile pyyntösi yksityiskohdat tässä.",
+  "RequestsProcessedInMonth": "Pyyntöjä käsitelty kuukautena {{month}}",
   "RequiredField": "Pakollinen kenttä",
   "Reset": "Nollaa",
   "ResetAndStartFilling": "Nollaa ja aloita täyttäminen",

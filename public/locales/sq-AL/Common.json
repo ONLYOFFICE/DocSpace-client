@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Përsëriteni ftesën",
   "ReportSaveLocation": "Raporti do të ruhet në {{sectionName}}",
   "RequestDetails": "Ju lutem përshkruani detajet e kërkesës suaj këtu.",
+  "RequestsProcessedInMonth": "Kërkesa të përpunuara në {{month}}",
   "RequiredField": "Fusha e kërkuar",
   "Reset": "Rindizni",
   "ResetAndStartFilling": "Rivendosni dhe filloni plotësimin",

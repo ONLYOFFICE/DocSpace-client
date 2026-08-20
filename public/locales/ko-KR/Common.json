@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "초대 반복",
   "ReportSaveLocation": "보고서가 {{sectionName}}(으)로 저장됩니다",
   "RequestDetails": "여기에 요청 세부 사항을 기재하세요.",
+  "RequestsProcessedInMonth": "{{month}}에 처리된 요청",
   "RequiredField": "필수 항목입니다",
   "Reset": "리셋",
   "ResetAndStartFilling": "재설정하고 채우기 시작",

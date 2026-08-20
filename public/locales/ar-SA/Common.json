@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "تكرار الدعوة",
   "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}",
   "RequestDetails": "يرجى وصف تفاصيل طلبك هنا.",
+  "RequestsProcessedInMonth": "الطلبات المعالجة في {{month}}",
   "RequiredField": "الحقل مطلوب",
   "Reset": "إعادة تعيين",
   "ResetAndStartFilling": "إعادة التهيئة والبدء بالتعبئة",

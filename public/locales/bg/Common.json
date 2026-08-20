@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Повторете поканата",
   "ReportSaveLocation": "Отчетът ще бъде запазен в {{sectionName}}",
   "RequestDetails": "Моля, опишете подробностите за вашата заявка тук.",
+  "RequestsProcessedInMonth": "Обработени заявки през {{month}}",
   "RequiredField": "Задължително поле",
   "Reset": "Нулирай",
   "ResetAndStartFilling": "Нулирай и започни попълване",

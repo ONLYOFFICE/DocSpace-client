@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Uitnodiging herhalen",
   "ReportSaveLocation": "Het rapport wordt opgeslagen in {{sectionName}}",
   "RequestDetails": "Beschrijf hier de details van uw aanvraag.",
+  "RequestsProcessedInMonth": "Verzoeken verwerkt in {{month}}",
   "RequiredField": "Verplicht veld",
   "Reset": "Reset",
   "ResetAndStartFilling": "Resetten en beginnen met vullen",

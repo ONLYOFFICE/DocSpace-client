@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "ເຊີນຊ້ຳ",
   "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}",
   "RequestDetails": "ກະລຸນາອະທິບາຍລາຍລະອຽດການຮ້ອງຂໍຂອງທ່ານທີ່ນີ້.",
+  "RequestsProcessedInMonth": "ຄຳຮ້ອງຂໍທີ່ປະມວນຜົນໃນ {{month}}",
   "RequiredField": "ຂໍ້ມູນທີ່ຈຳເປັນ",
   "Reset": "ຣີເຊັດ",
   "ResetAndStartFilling": "ຣີເຊັດ ແລະເລີ່ມຕື່ມຂໍ້ມູນ",

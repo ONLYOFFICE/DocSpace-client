@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Repetir convite",
   "ReportSaveLocation": "O relatório será salvo em {{sectionName}}",
   "RequestDetails": "Por favor, descreva os detalhes do seu pedido aqui.",
+  "RequestsProcessedInMonth": "Solicitações processadas em {{month}}",
   "RequiredField": "Campo obrigatório",
   "Reset": "Redefinir",
   "ResetAndStartFilling": "Redefinir e começar a preencher",

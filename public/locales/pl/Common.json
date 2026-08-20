@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Ponów zaproszenie",
   "ReportSaveLocation": "Raport zostanie zapisany w {{sectionName}}",
   "RequestDetails": "Dokładnie opisz swoją prośbę tutaj.",
+  "RequestsProcessedInMonth": "Zapytania przetworzone w miesiącu {{month}}",
   "RequiredField": "Pole wymagane",
   "Reset": "Zresetuj",
   "ResetAndStartFilling": "Zresetuj i rozpocznij wypełnianie",

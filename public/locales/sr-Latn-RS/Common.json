@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Ponovi pozivnicu",
   "ReportSaveLocation": "Izveštaj će biti sačuvan u {{sectionName}}",
   "RequestDetails": "Molimo opišite detalje vašeg zahteva ovde.",
+  "RequestsProcessedInMonth": "Obrađeno zahteva u {{month}}",
   "RequiredField": "Obavezno polje",
   "Reset": "Resetuj",
   "ResetAndStartFilling": "Ponovno postavljanje i početak popunjavanja",

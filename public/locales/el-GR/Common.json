@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Επανάληψη πρόσκλησης",
   "ReportSaveLocation": "Η αναφορά θα αποθηκευτεί στο {{sectionName}}",
   "RequestDetails": "Περιγράψτε τις λεπτομέρειες του αιτήματός σας εδώ.",
+  "RequestsProcessedInMonth": "Αιτήματα που επεξεργάστηκαν τον {{month}}",
   "RequiredField": "Υποχρεωτικό πεδίο",
   "Reset": "Επαναφορά",
   "ResetAndStartFilling": "Επαναφορά και έναρξη συμπλήρωσης",

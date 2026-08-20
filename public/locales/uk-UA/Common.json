@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Повторити запрошення",
   "ReportSaveLocation": "Звіт буде збережено у {{sectionName}}",
   "RequestDetails": "Опишіть деталі свого запиту тут.",
+  "RequestsProcessedInMonth": "Запитів оброблено у {{month}}",
   "RequiredField": "Обов'язкове поле",
   "Reset": "Скинути",
   "ResetAndStartFilling": "Скинути й почати заповнення",

@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Opakovať pozvanie",
   "ReportSaveLocation": "Správa bude uložená do {{sectionName}}",
   "RequestDetails": "Tu popíšte podrobnosti vašej žiadosti.",
+  "RequestsProcessedInMonth": "Požiadavky spracované v {{month}}",
   "RequiredField": "Požadované pole",
   "Reset": "Obnoviť",
   "ResetAndStartFilling": "Resetovať a začať plniť",

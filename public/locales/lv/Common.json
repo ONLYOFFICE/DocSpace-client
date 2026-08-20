@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Atkārtoti uzaicināt",
   "ReportSaveLocation": "Atskaite tiks saglabāta {{sectionName}}",
   "RequestDetails": "Lūdzu, aprakstiet sīkāku informāciju par savu pieprasījumu šeit.",
+  "RequestsProcessedInMonth": "{{month}} apstrādātie pieprasījumi",
   "RequiredField": "Obligāts lauks",
   "Reset": "Atiestatīšana",
   "ResetAndStartFilling": "Atiestatīt un sākt aizpildīšanu",

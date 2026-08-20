@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "もう一度招待する",
   "ReportSaveLocation": "レポートは {{sectionName}} に保存されます",
   "RequestDetails": "ご要望内容をこちらにご記入ください。",
+  "RequestsProcessedInMonth": "{{month}}に処理されたリクエスト",
   "RequiredField": "必須項目",
   "Reset": "リセット",
   "ResetAndStartFilling": "リセットして入力を始める",

@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Repetare invitaţie",
   "ReportSaveLocation": "Raportul va fi salvat în {{sectionName}}",
   "RequestDetails": "Descrieţi detaliile solicitării dvs. aici.",
+  "RequestsProcessedInMonth": "Solicitări procesate în {{month}}",
   "RequiredField": "Câmp obligatoriu",
   "Reset": "Resetare",
   "ResetAndStartFilling": "Resetare și începere completare",

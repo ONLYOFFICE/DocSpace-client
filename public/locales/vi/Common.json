@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Lặp lại lời mời",
   "ReportSaveLocation": "Báo cáo sẽ được lưu vào {{sectionName}}",
   "RequestDetails": "Xin vui lòng mô tả chi tiết yêu cầu của bạn tại đây.",
+  "RequestsProcessedInMonth": "Số yêu cầu đã xử lý trong {{month}}",
   "RequiredField": "Trường bắt buộc",
   "Reset": "Đặt lại",
   "ResetAndStartFilling": "Thiết lập lại và bắt đầu điền",

@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Ponovi povabilo",
   "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}",
   "RequestDetails": "Tukaj opiši podrobnosti svoje zahteve.",
+  "RequestsProcessedInMonth": "Obdelane zahteve v {{month}}",
   "RequiredField": "Obvezno polje",
   "Reset": "Ponastavi",
   "ResetAndStartFilling": "Ponastavi in začni polniti",

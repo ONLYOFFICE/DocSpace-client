@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "Daveti tekrarla",
   "ReportSaveLocation": "Rapor {{sectionName}} bölümüne kaydedilecektir",
   "RequestDetails": "Lütfen talebinizin detaylarını burada açıklayın.",
+  "RequestsProcessedInMonth": "{{month}} ayında işlenen istekler",
   "RequiredField": "Gerekli alan",
   "Reset": "Sıfırla",
   "ResetAndStartFilling": "Sıfırla ve doldurmaya başla",

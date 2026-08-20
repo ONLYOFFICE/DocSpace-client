@@ -1736,6 +1736,7 @@
   "RepeatInvitation": "ආරාධනය නැවතත්",
   "ReportSaveLocation": "වාර්තාව {{sectionName}} වෙත සුරකිනු ලැබේ",
   "RequestDetails": "ඔබගේ ඉල්ලීම මෙහි විස්තර කරන්න.",
+  "RequestsProcessedInMonth": "{{month}} හි සැකසූ ඉල්ලීම්",
   "RequiredField": "අනිවාර්ය ක්ෂේත්‍රයකි",
   "Reset": "ප්‍රතිසංස්කරණය කරන්න",
   "ResetAndStartFilling": "නැවත සැකසීම සහ පිරවීම ආරම්භ කරන්න",

@@ -507,9 +507,17 @@ export function fetchFilesImpl(
         }
       });
 
-      // A same-folder refetch (e.g. a filter change) replaced the loaded
-      // pages with page 0 — reload the rest for the active client search.
-      if (self.clientSearchQuery) {
+      const pendingSearch = self.pendingClientSearch;
+      if (pendingSearch) self.setPendingClientSearch(null);
+
+      if (
+        pendingSearch &&
+        String(pendingSearch.folderId) === String(folderId)
+      ) {
+        self.setClientSearchQuery(pendingSearch.query);
+      } else if (self.clientSearchQuery) {
+        // A same-folder refetch (e.g. a filter change) replaced the loaded
+        // pages with page 0 — reload the rest for the active client search.
         void loadAllPagesForClientSearchImpl(self);
       }
 

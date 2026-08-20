@@ -201,6 +201,9 @@ const GlobalEvents = ({
       // straight on a preset room type and lock the chooser.
       startRoomType: e?.payload?.startRoomType,
       isFormsCreate: e?.payload?.isFormsCreate,
+      // Opens the dialog straight on the "from template" picker instead of the
+      // room-type chooser (quick-actions "Room template" tile).
+      withTemplateSelector: e?.payload?.withTemplateSelector,
       item: e.item,
       context: e.context || e.detail?.context || "",
       visible: true,
@@ -210,6 +213,7 @@ const GlobalEvents = ({
           onClose: null,
           startRoomType: undefined,
           isFormsCreate: undefined,
+          withTemplateSelector: undefined,
         }),
     });
   }, []);

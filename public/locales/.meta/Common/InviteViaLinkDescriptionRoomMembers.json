@@ -1,9 +1,9 @@
 {
   "key_path": "InviteViaLinkDescriptionRoomMembers",
-  "content": "Create a universal link for workspace members for self-authorization in the room.",
-  "content_en_sha1_hash": "9daf89361a735f324301fe45f77f5f1680c37a6e",
+  "content": "Create a universal link for members for self-authorization in the room.",
+  "content_en_sha1_hash": "ed87a036f00fe430e6bde8784ed8a51bdbc87046",
   "created_at": "2026-08-12T11:00:25.337Z",
-  "updated_at": "2026-08-17T17:23:21.742Z",
+  "updated_at": "2026-08-20T07:54:31.659Z",
   "comment": {
     "text": "Description text in the Invite Panel's External Links section, shown when generating a link for existing workspace members to access a room.",
     "is_auto": true,

@@ -1,0 +1,29 @@
+{
+  "key_path": "EmptyAIChatNotAvailableYetUserDescription",
+  "content": "Contact your Full admin to connect an AI service for this workspace. Once connected, {{aiChat}} will be available to all users.",
+  "content_en_sha1_hash": "a1d60a33b165e82815945c48b5c8c7cc4d53fbec",
+  "created_at": "2026-08-19T13:26:04.058Z",
+  "updated_at": "2026-08-19T13:27:10.652Z",
+  "comment": {
+    "text": "Text on a \"no access\" screen for users without admin rights, instructing them to contact an administrator to enable AI services. The variable `{{aiChat}}` represents the name of the AI chat feature.",
+    "is_auto": true,
+    "updated_at": "2026-08-19T13:27:10.652Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "line_number": 124,
+      "context": ".with([true, true], () =>\n t(\"EmptyAIChatNotAvailableYetAdminDescription\", { aiChat }),\n )\n // standalone user: nothing to connect without admin rights\n .with([true, false], () =>\n t(\"EmptyAIChatNotAvailableYetUserDescription\", { aiChat, productName }),\n )\n // saas admin: activation is one click (or a top-up) away\n .with([false, true], () =>\n t(\"EmptyAIChatNotActiveYetAdminDescription\", { aiChat }),\n )",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "You can create a template from a room in the Room section",
   "content_en_sha1_hash": "3ae0630d6f2123e351bffec005e5b0541a21b4dd",
   "created_at": "2025-05-19T21:30:56.500Z",
-  "updated_at": "2026-08-17T17:23:21.666Z",
+  "updated_at": "2026-08-19T13:26:37.661Z",
   "comment": {
     "text": "This is a message displayed when no room templates are available. It informs the user how to create a template.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 302,
-      "context": "t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n isFormsScope\n ? t(\"EmptyView:EmptyFormTemplatesDescription\")\n : t(\"EmptyView:EmptyTemplatesDescription\"),\n )\n .with([FolderType.Forms, P._], () =>\n t(\"EmptyView:EmptyRootFormsDescription\"),\n )\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (",
+      "context": "t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n isFormsScope\n ? t(\"EmptyView:EmptyFormTemplatesDescription\")\n : t(\"EmptyView:EmptyTemplatesDescription\"),\n )\n .with([FolderType.Forms, P.when(isUser)], () =>\n t(\"EmptyView:EmptyRootFormsUserDescription\"),\n )\n .with([FolderType.Forms, P._], () =>",
       "module": "/packages/client"
     }
   ],

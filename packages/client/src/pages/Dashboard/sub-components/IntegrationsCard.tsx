@@ -59,15 +59,109 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
+import PluginIcon from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg";
 
+import { IntegrationDialog } from "./IntegrationDialog";
+import {
+  useIntegrationPlatforms,
+  type IntegrationPlatform,
+} from "./integrations-catalog";
 import styles from "../Dashboard.module.scss";
+
+const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
+
+type PlatformTileProps = {
+  name: string;
+  iconUrl?: string;
+  iconAlt?: string;
+  hideIcon?: boolean;
+  isBold?: boolean;
+  linkLabel?: string;
+  href?: string;
+  onClick?: () => void;
+  testId?: string;
+};
+
+const PlatformTile = ({
+  name,
+  iconUrl,
+  iconAlt,
+  hideIcon = false,
+  isBold = false,
+  linkLabel,
+  href,
+  onClick,
+  testId,
+}: PlatformTileProps) => {
+  const content = (
+    <>
+      {hideIcon ? null : (
+        <span
+          className={styles.integrationIcon}
+          data-fallback={iconUrl ? undefined : "true"}
+        >
+          {iconUrl ? (
+            <img src={iconUrl} alt={iconAlt ?? ""} />
+          ) : (
+            <PluginIcon aria-hidden="true" />
+          )}
+        </span>
+      )}
+      <Text
+        as="span"
+        className={styles.integrationName}
+        isBold={isBold}
+        truncate
+        title={name}
+      >
+        {name}
+      </Text>
+      {linkLabel ? (
+        <span className={styles.integrationLink}>
+          {linkLabel}
+          <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
+        </span>
+      ) : (
+        <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
+      )}
+    </>
+  );
+
+  if (href)
+    return (
+      <a
+        className={styles.integrationTile}
+        data-variant={hideIcon ? "no-icon" : undefined}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-testid={testId}
+      >
+        {content}
+      </a>
+    );
+
+  return (
+    <button
+      type="button"
+      className={styles.integrationTile}
+      data-variant={hideIcon ? "no-icon" : undefined}
+      onClick={onClick}
+      data-testid={testId}
+    >
+      {content}
+    </button>
+  );
+};
 
 interface IntegrationsCardProps {
   nextcloudUrl?: string;
@@ -75,36 +169,27 @@ interface IntegrationsCardProps {
   confluenceUrl?: string;
   alfrescoUrl?: string;
   moodleUrl?: string;
-  odooUrl?: string;
   allConnectorsUrl?: string;
 }
 
-const IntegrationsCardComponent = ({
-  nextcloudUrl,
-  owncloudUrl,
-  confluenceUrl,
-  alfrescoUrl,
-  moodleUrl,
-  odooUrl,
-  allConnectorsUrl,
-}: IntegrationsCardProps) => {
-  const { t } = useTranslation(["Common"]);
+const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
+  const { allConnectorsUrl } = props;
+  const { t } = useTranslation(["Common", "DocsConnect"]);
+  const navigate = useNavigate();
 
-  const platforms: { id: string; name: string; url?: string }[] = [
-    { id: "nextcloud", name: "Nextcloud", url: nextcloudUrl },
-    { id: "owncloud", name: "ownCloud", url: owncloudUrl },
-    { id: "confluence", name: "Confluence", url: confluenceUrl },
-    { id: "alfresco", name: "Alfresco", url: alfrescoUrl },
-    { id: "moodle", name: "Moodle", url: moodleUrl },
-    { id: "seafile", name: "Seafile", url: allConnectorsUrl },
-    { id: "odoo", name: "Odoo", url: odooUrl },
-  ];
+  const platforms = useIntegrationPlatforms(t, props);
+
+  const [openPlatform, setOpenPlatform] =
+    React.useState<IntegrationPlatform | null>(null);
+
+  const closeDialog = React.useCallback(() => setOpenPlatform(null), []);
+
+  const onCreateInstance = React.useCallback(() => {
+    setOpenPlatform(null);
+    navigate(DOCS_CONNECT_PATH);
+  }, [navigate]);
 
   return (
-    // Anchor for the dashboard tour, on a wrapper rather than on the card:
-    // `CollapsibleCard` takes a fixed set of props and forwards no `data-*`.
-    // The wrapper stays put when the card is collapsed, so the spotlight
-    // follows the card down to its header instead of the step disappearing.
     <div data-tour-id="dashboard-integrations">
       <CollapsibleCard
         title={t("Common:AlreadyUsingAnotherPlatform")}
@@ -113,44 +198,31 @@ const IntegrationsCardComponent = ({
       >
         <div className={styles.integrationsGrid}>
           {platforms.map((platform) => (
-            <a
+            <PlatformTile
               key={platform.id}
-              className={styles.integrationTile}
-              href={platform.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Text as="p" className={styles.integrationName}>
-                {platform.name}
-              </Text>
-              <span className={styles.integrationLink}>
-                {t("Common:Connect")}
-                <ArrowIcon
-                  aria-hidden="true"
-                  className={styles.integrationArrow}
-                />
-              </span>
-            </a>
+              name={platform.name}
+              iconUrl={platform.iconUrl}
+              iconAlt={platform.name}
+              onClick={() => setOpenPlatform(platform)}
+              testId={`dashboard-integration-${platform.id}`}
+            />
           ))}
-          <a
-            className={`${styles.integrationTile} ${styles.integrationTileMore}`}
+          <PlatformTile
+            hideIcon
+            isBold
+            name={t("Common:PlusMore", { count: 20 })}
+            linkLabel={t("Common:ViewAll")}
             href={allConnectorsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Text as="p" className={styles.integrationName} isBold>
-              {t("Common:PlusMore", { count: 20 })}
-            </Text>
-            <span className={styles.integrationLink}>
-              {t("Common:ViewAll")}
-              <ArrowIcon
-                aria-hidden="true"
-                className={styles.integrationArrow}
-              />
-            </span>
-          </a>
+            testId="dashboard-integration-more"
+          />
         </div>
       </CollapsibleCard>
+
+      <IntegrationDialog
+        platform={openPlatform}
+        onClose={closeDialog}
+        onCreateInstance={onCreateInstance}
+      />
     </div>
   );
 };
@@ -161,7 +233,6 @@ export const IntegrationsCard = inject<TStore>(({ settingsStore }) => ({
   confluenceUrl: settingsStore.confluenceUrl,
   alfrescoUrl: settingsStore.alfrescoUrl,
   moodleUrl: settingsStore.moodleUrl,
-  odooUrl: settingsStore.odooUrl,
   allConnectorsUrl: settingsStore.allConnectorsUrl,
 }))(observer(IntegrationsCardComponent));
 

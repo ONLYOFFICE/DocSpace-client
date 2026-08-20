@@ -43,6 +43,12 @@
   "ProviderZoom-si": "සූම්",
 
   "Nextcloud": "Nextcloud",
+  "OwnCloud": "ownCloud",
+  "Confluence": "Confluence",
+  "Alfresco": "Alfresco",
+  "Moodle": "Moodle",
+  "N8n": "n8n",
+  "GitHub": "GitHub",
 
   "TypeTitleBoxNet": "Box",
   "TypeTitleDocuSign": "DocuSign",

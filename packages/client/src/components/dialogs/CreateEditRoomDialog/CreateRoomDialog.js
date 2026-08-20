@@ -82,6 +82,7 @@ const CreateRoomDialog = ({
   isDefaultRoomsQuotaSet,
   isExternalShareRestricted,
   fetchedRoomParams,
+  withTemplateSelector,
   encryptionKeys,
   userId,
   accountEmail,
@@ -90,8 +91,11 @@ const CreateRoomDialog = ({
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
-  const [templateDialogIsVisible, setTemplateDialogIsVisible] =
-    useState(false);
+  // `withTemplateSelector` opens the dialog straight on the template picker
+  // (quick-actions "Room template" tile), skipping the room-type chooser.
+  const [templateDialogIsVisible, setTemplateDialogIsVisible] = useState(
+    !!withTemplateSelector,
+  );
   const [keyConfirmVisible, setKeyConfirmVisible] = useState(false);
   const isMountRef = React.useRef(true);
   const onCloseRef = useRef(onClose);
@@ -255,6 +259,13 @@ const CreateRoomDialog = ({
   };
 
   const onCloseCreateFromTemplateDialog = () => {
+    // Entered straight on the picker: there is no room-type chooser behind it
+    // to fall back to, so leaving the picker closes the dialog altogether.
+    if (withTemplateSelector) {
+      onCloseRef.current?.();
+      return;
+    }
+
     setRoomParams({ ...startRoomParams });
     setTemplateDialogIsVisible(false);
   };
@@ -270,6 +281,10 @@ const CreateRoomDialog = ({
         title: "",
         type: null,
       }));
+
+      // Opened straight on the picker: back goes to the picker, not to the
+      // room-type chooser the user never saw.
+      if (withTemplateSelector) setTemplateDialogIsVisible(true);
       return;
     }
 

@@ -103,35 +103,39 @@ export const IntegrationDialog = ({
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <Button
-          primary
-          size={ButtonSize.normal}
-          label={t("Common:CreateInstance")}
-          onClick={onCreateInstance}
-          testId={`integration-create-instance-${platform.id}`}
-        />
-        {githubUrl ? (
-          <Button
-            size={ButtonSize.normal}
-            label={getBrandName("GitHub")}
-            icon={<GithubIcon />}
-            onClick={() => window.open(githubUrl, "_blank", "noopener")}
-            testId={`integration-github-${platform.id}`}
-          />
-        ) : null}
-        {url ? (
-          <Link
-            className={styles.integrationDialogLearnMore}
-            type={LinkType.action}
-            href={url}
-            target={LinkTarget.blank}
-            isHovered
-            fontSize="13px"
-            fontWeight={600}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        ) : null}
+        <div className={styles.integrationDialogFooter}>
+          <div className={styles.integrationDialogFooterButtons}>
+            <Button
+              primary
+              size={ButtonSize.normal}
+              label={t("Common:CreateInstance")}
+              onClick={onCreateInstance}
+              testId={`integration-create-instance-${platform.id}`}
+            />
+            {githubUrl ? (
+              <Button
+                size={ButtonSize.normal}
+                label={getBrandName("GitHub")}
+                icon={<GithubIcon />}
+                onClick={() => window.open(githubUrl, "_blank", "noopener")}
+                testId={`integration-github-${platform.id}`}
+              />
+            ) : null}
+          </div>
+          {url ? (
+            <Link
+              className={styles.integrationDialogLearnMore}
+              type={LinkType.action}
+              href={url}
+              target={LinkTarget.blank}
+              isHovered
+              fontSize="13px"
+              fontWeight={600}
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          ) : null}
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

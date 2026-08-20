@@ -47,7 +47,9 @@
   "Confluence": "Confluence",
   "Alfresco": "Alfresco",
   "Moodle": "Moodle",
+  "MoodleModuleName": "mod/onlyofficeeditor",
   "N8n": "n8n",
+  "N8nPackageName": "@onlyoffice/n8n-nodes-docs",
   "GitHub": "GitHub",
 
   "TypeTitleBoxNet": "Box",

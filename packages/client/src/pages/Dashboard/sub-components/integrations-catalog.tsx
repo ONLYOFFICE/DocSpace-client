@@ -205,6 +205,7 @@ export const useIntegrationPlatforms = (
             id: "install",
             text: t("Common:IntegrationInstallMoodleStep", {
               organizationName: getBrandName("OrganizationName"),
+              moduleName: getBrandName("MoodleModuleName"),
             }),
           },
           {
@@ -232,6 +233,7 @@ export const useIntegrationPlatforms = (
             text: t("Common:IntegrationInstallN8NStep", {
               organizationName: getBrandName("OrganizationName"),
               productName: getBrandName("ProductName"),
+              packageName: getBrandName("N8nPackageName"),
             }),
           },
           {

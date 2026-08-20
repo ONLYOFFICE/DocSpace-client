@@ -3,7 +3,7 @@
   "content": "Connect your own AI service to unlock advanced features in the workspace. Once added, it will be accessible to all users in {{aiChats}}.",
   "content_en_sha1_hash": "0179aa502b6d8ca116b2612a6795523244a26c9a",
   "created_at": "2026-08-13T22:44:02.029Z",
-  "updated_at": "2026-08-17T17:23:21.665Z",
+  "updated_at": "2026-08-19T13:26:37.660Z",
   "comment": {
     "text": "Description text in an empty state screen for standalone admins, explaining how to enable advanced features by connecting an AI service. The {{aiChats}} variable refers to a specific workspace section.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/index.tsx",
-      "line_number": 94,
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "line_number": 80,
       "context": ".otherwise(() => t(\"AIFeaturesAreCurrentlyDisabled\"));\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin\n .with([true, true], () =>\n t(\"EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n aiChats: t(\"AIChats\"),\n }),\n )\n // saas admin\n .with([false, true], () => (",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 237,
+      "line_number": 239,
       "context": "standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n return match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription\", {\n aiChats: t(\"Common:AIChats\"),\n }),\n )\n .with([false, true], () => (\n <>",
       "module": "/packages/client"
     },

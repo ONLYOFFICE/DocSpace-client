@@ -33,14 +33,50 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from "react";
+import type { ComponentType } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { messageActions } from "SRC_DIR/helpers/plugins/utils";
-import { getPluginFileTestIdPrefix } from "SRC_DIR/helpers/filesUtils";
+import type {
+  IComboBoxItem,
+  ICreateDialog,
+} from "@onlyoffice/docspace-plugin-sdk";
+import type { TTranslation } from "@docspace/shared/types";
 
-import Dialog from "./sub-components/Dialog";
+import { getPluginFileTestIdPrefix } from "SRC_DIR/helpers/filesUtils";
+import type { TMessageActionsParams } from "SRC_DIR/helpers/plugins/types";
+import type PluginStore from "SRC_DIR/store/PluginStore";
+
+import DialogComponent from "./sub-components/Dialog";
+
+type TDialogProps = {
+  t: TTranslation;
+  visible: boolean;
+  title: string;
+  testIdPrefix?: string;
+  startValue?: string;
+  isCreateDialog?: boolean;
+  isCreateDisabled?: boolean;
+  extension?: string;
+  errorText?: string;
+  options?: IComboBoxItem[];
+  selectedOption?: IComboBoxItem;
+  onSave?: (e: unknown, value: string) => Promise<void>;
+  onChange?: (value: string) => void;
+  onSelect?: (option: IComboBoxItem) => void;
+  onCancel?: (e?: unknown) => void;
+  onClose?: (e?: unknown) => void;
+};
+
+const Dialog = DialogComponent as unknown as ComponentType<TDialogProps>;
+
+type TCreatePluginFileProps = Omit<ICreateDialog, "onCancel" | "onClose"> & {
+  pluginName: string;
+  onCancel?: (e?: unknown) => void;
+  onClose?: (e?: unknown) => void;
+  updateCreatePluginFileProps?: TMessageActionsParams["updateCreateDialogProps"];
+  dispatchMessage: PluginStore["dispatchMessage"];
+};
 
 const CreatePluginFile = ({
   visible,
@@ -61,102 +97,60 @@ const CreatePluginFile = ({
   pluginName,
   errorText,
   isAutoFocusOnError,
-  updatePluginStatus,
-  setCurrentSettingsDialogPlugin,
-  setSettingsPluginDialogVisible,
-  setPluginDialogVisible,
-  setPluginDialogProps,
-  updateContextMenuItems,
-  updateInfoPanelItems,
-  updateMainButtonItems,
-  updateProfileMenuItems,
-  updateEventListenerItems,
-  updateFileItems,
   updateCreatePluginFileProps,
-}) => {
+  dispatchMessage,
+}: TCreatePluginFileProps) => {
   const { t } = useTranslation(["Translations", "Common", "Files"]);
 
   const onCloseAction = () => {
-    onCancel && onCancel();
-    onClose && onClose();
+    onCancel?.();
+    onClose?.();
   };
 
-  const onSaveAction = async (e, value) => {
-    if (!onSave) return onCloseAction();
+  const onSaveAction = async (e: unknown, value: string) => {
+    if (!onSave) {
+      onCloseAction();
+      return;
+    }
 
     try {
       const message = await onSave(e, value);
 
-      messageActions({
+      dispatchMessage({
         message,
         pluginName,
-        setSettingsPluginDialogVisible,
-        setCurrentSettingsDialogPlugin,
-        updatePluginStatus,
-        setPluginDialogVisible,
-        setPluginDialogProps,
-        updateContextMenuItems,
-        updateInfoPanelItems,
-        updateMainButtonItems,
-        updateProfileMenuItems,
-        updateEventListenerItems,
-        updateFileItems,
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
-      isCloseAfterCreate && onCloseAction();
+
+      if (isCloseAfterCreate) onCloseAction();
     } catch (error) {
       if (!onError) return;
 
       if (isAutoFocusOnError) {
         setTimeout(() => {
-          const input = document?.getElementById("create-text-input");
-          if (input) {
-            input.focus();
-          }
+          document.getElementById("create-text-input")?.focus();
         }, 50);
       }
 
       const message = await onError(error);
 
-      messageActions({
+      dispatchMessage({
         message,
         pluginName,
-        setSettingsPluginDialogVisible,
-        setCurrentSettingsDialogPlugin,
-        updatePluginStatus,
-        setPluginDialogVisible,
-        setPluginDialogProps,
-        updateContextMenuItems,
-        updateInfoPanelItems,
-        updateMainButtonItems,
-        updateProfileMenuItems,
-        updateEventListenerItems,
-        updateFileItems,
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
     }
   };
 
-  const onSelectAction = (option) => {
+  const onSelectAction = (option: IComboBoxItem) => {
     if (!onSelect) return;
 
     try {
       const message = onSelect(option);
 
-      messageActions({
+      dispatchMessage({
         message,
         pluginName,
-        setSettingsPluginDialogVisible,
-        setCurrentSettingsDialogPlugin,
-        updatePluginStatus,
-        setPluginDialogVisible,
-        setPluginDialogProps,
-        updateContextMenuItems,
-        updateInfoPanelItems,
-        updateMainButtonItems,
-        updateProfileMenuItems,
-        updateEventListenerItems,
-        updateFileItems,
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
     } catch (error) {
@@ -164,30 +158,19 @@ const CreatePluginFile = ({
     }
   };
 
-  const onChangeAction = async (value) => {
+  const onChangeAction = (value: string) => {
     if (!onChange) return;
 
     try {
       const message = onChange(value);
 
-      messageActions({
+      dispatchMessage({
         message,
         pluginName,
-        setSettingsPluginDialogVisible,
-        setCurrentSettingsDialogPlugin,
-        updatePluginStatus,
-        setPluginDialogVisible,
-        setPluginDialogProps,
-        updateContextMenuItems,
-        updateInfoPanelItems,
-        updateMainButtonItems,
-        updateProfileMenuItems,
-        updateEventListenerItems,
-        updateFileItems,
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -213,33 +196,8 @@ const CreatePluginFile = ({
   );
 };
 
-export default inject(({ pluginStore }) => {
-  const {
-    updatePluginStatus,
-    setCurrentSettingsDialogPlugin,
-    setSettingsPluginDialogVisible,
-    setPluginDialogVisible,
-    setPluginDialogProps,
+export default inject(({ pluginStore }: TStore) => {
+  const { dispatchMessage } = pluginStore;
 
-    updateContextMenuItems,
-    updateInfoPanelItems,
-    updateMainButtonItems,
-    updateProfileMenuItems,
-    updateEventListenerItems,
-    updateFileItems,
-  } = pluginStore;
-  return {
-    updatePluginStatus,
-    setCurrentSettingsDialogPlugin,
-    setSettingsPluginDialogVisible,
-    setPluginDialogVisible,
-    setPluginDialogProps,
-
-    updateContextMenuItems,
-    updateInfoPanelItems,
-    updateMainButtonItems,
-    updateProfileMenuItems,
-    updateEventListenerItems,
-    updateFileItems,
-  };
+  return { dispatchMessage };
 })(observer(CreatePluginFile));

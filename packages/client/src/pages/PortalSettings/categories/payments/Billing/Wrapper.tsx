@@ -88,11 +88,12 @@ const BillingWrapperComponent = ({
     if (ready) setDocumentTitle(getBillingPageTitle(location.pathname, t));
   }, [location.pathname, ready, t]);
 
+  const isPayerManagedPage =
+    location.pathname.includes("/billing/wallet") ||
+    location.pathname.includes("/billing/tariff-plan");
+
   const showPayerOnlyWarning =
-    location.pathname.includes("/billing/wallet") &&
-    isPayerInfoLoaded &&
-    !isPayer &&
-    isCardLinkedToPortal;
+    isPayerManagedPage && isPayerInfoLoaded && !isPayer && isCardLinkedToPortal;
 
   const isDesktop = currentDeviceType === DeviceType.desktop;
 

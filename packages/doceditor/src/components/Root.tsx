@@ -47,6 +47,7 @@ import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
 import useSelectFolderDialog from "@/hooks/useSelectFolderDialog";
 import useSocketHelper from "@/hooks/useSocketHelper";
+import useSessionLifetime from "@/hooks/useSessionLifetime";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
@@ -176,6 +177,8 @@ const Root = ({
     folderId: config?.file?.folderId,
     folderType: config?.file?.rootFolderType,
   });
+
+  useSessionLifetime(user);
 
   const {
     changeLinkTypeDialogVisible,

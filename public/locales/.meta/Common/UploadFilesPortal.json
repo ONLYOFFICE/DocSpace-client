@@ -3,7 +3,7 @@
   "content": "Upload files from {{sectionNameFirst}} or {{sectionNameSecond}}",
   "content_en_sha1_hash": "433b16c48130c1d70d82a2fe1bf618e47c921946",
   "created_at": "2026-08-13T23:19:44.071Z",
-  "updated_at": "2026-08-17T17:23:21.662Z",
+  "updated_at": "2026-08-19T13:26:37.659Z",
   "comment": {
     "text": "Description text for an empty state view, informing users they can upload files from specific application sections. `{{sectionNameFirst}}` and `{{sectionNameSecond}}` represent the names of these sections (e.g., \"Files\" or \"Rooms\").",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 660,
+      "line_number": 655,
       "context": "if (isAIRoom) {\n if (isKnowledgeTab) {\n const uploadFilesFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"Common:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:Files\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n \"\",\n true,",
       "module": "/packages/client"
     },

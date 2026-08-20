@@ -164,7 +164,9 @@ test.describe("Settings Plugin — ISettingsPlugin via portal-settings", () => {
     // Save — triggers Actions.saveSettings + Actions.showToast.
     await page.getByTestId("settings_plugin_save_button").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Settings saved" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
 
@@ -204,7 +206,9 @@ test.describe("Settings Plugin — ISettingsPlugin via portal-settings", () => {
 
     await page.getByTestId("settings_plugin_save_button").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Settings saved" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
   });

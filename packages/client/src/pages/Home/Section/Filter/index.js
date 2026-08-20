@@ -1810,7 +1810,9 @@ const SectionFilterContent = ({
       }
 
       if (isTemplatesFolder) {
-        newFilter.searchArea = RoomSearchArea.Templates;
+        newFilter.searchArea = isFormsSection
+          ? RoomSearchArea.FormTemplates
+          : RoomSearchArea.Templates;
       }
 
       if (isFormsFolder) {

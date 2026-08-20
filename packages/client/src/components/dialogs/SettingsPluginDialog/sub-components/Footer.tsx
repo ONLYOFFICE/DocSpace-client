@@ -34,6 +34,7 @@
  */
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Component, IButton } from "@onlyoffice/docspace-plugin-sdk";
 
 import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
 import styles from "../SettingsPluginDialog.module.scss";
@@ -48,28 +49,28 @@ const Footer = ({
   modalRequestRunning,
   setModalRequestRunning,
   onCloseAction,
-  updatePlugin,
 }: FooterProps) => {
   return (
     <div className={styles.footer}>
       <PluginComponent
-        component={{
-          ...saveButtonProps,
-          props: {
-            ...saveButtonProps?.props,
-            scale: true,
-            isSaveButton: true,
-            primary: true,
-            size: "normal",
-            label: t("Common:SaveButton"),
-            settingsModalRequestRunning: modalRequestRunning,
-            setSettingsModalRequestRunning: setModalRequestRunning,
-            onCloseAction,
-            testId: "settings_plugin_save_button",
-          },
-        }}
+        component={
+          {
+            ...saveButtonProps,
+            props: {
+              ...saveButtonProps?.props,
+              scale: true,
+              isSaveButton: true,
+              primary: true,
+              size: "normal",
+              label: t("Common:SaveButton"),
+              settingsModalRequestRunning: modalRequestRunning,
+              setSettingsModalRequestRunning: setModalRequestRunning,
+              onCloseAction,
+              testId: "settings_plugin_save_button",
+            } as IButton,
+          } as Component
+        }
         pluginName={pluginName}
-        updatePlugin={updatePlugin}
       />
       <Button
         scale

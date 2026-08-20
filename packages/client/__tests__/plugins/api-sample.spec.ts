@@ -183,10 +183,11 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     await openProfileMenu(page);
     await page.getByTestId("api-sample-create-room").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: `Room created: "${MOCK_ROOM_TITLE}"` });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText(`Room created: "${MOCK_ROOM_TITLE}"`);
   });
 
   // ── 4. API failure shows an error toast ──────────────────────────────────────
@@ -206,10 +207,11 @@ test.describe("API Sample Plugin — room creation via IApiPlugin", () => {
     await openProfileMenu(page);
     await page.getByTestId("api-sample-create-room").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Failed to create room" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "error");
-    await expect(toast).toContainText("Failed to create room");
   });
 });
 

@@ -129,7 +129,10 @@ self: FilesActionStore
       self.selectedFolderStore.navigationPath.length - 1
     ]?.isTemplatesFolder
   ) {
-    filter.searchArea = RoomSearchArea.Templates;
+    filter.searchArea =
+      correctCategoryType === CategoryType.Forms
+        ? RoomSearchArea.FormTemplates
+        : RoomSearchArea.Templates;
   }
 
   if (categoryType === CategoryType.Chat) {
@@ -300,10 +303,19 @@ self: FilesActionStore,
 
   const newFilter = FilesFilter.getDefault();
 
+  const isEncrypted = !!item.encrypted && !!title;
+
   // FilesFilter.folder is declared as a string but the old
   // JS assigns raw numeric ids; toUrlParams only serializes it.
-  newFilter.search = title as string;
+  if (!isEncrypted) newFilter.search = title as string;
   newFilter.folder = parentId as unknown as string;
+
+  if (isEncrypted) {
+    self.filesStore.setPendingClientSearch({
+      folderId: parentId as number | string,
+      query: title as string,
+    });
+  }
 
   let url;
   if (isTrashDestination) {

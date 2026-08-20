@@ -1,6 +1,7 @@
 // (c) Copyright Ascensio System SIA 2009-2026
 // SPDX-License-Identifier: AGPL-3.0-only
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { createTestFilesActionsStore } from "./testHarness";
 
 // Mutable filter fake with the bits selectTag/selectOption touch.
@@ -54,6 +55,48 @@ describe("FilesActionsStore — navigation/filter (batch 6)", () => {
     store.onClickBack();
     expect(setBufferSelection).not.toHaveBeenCalled();
     expect(navigate).not.toHaveBeenCalled();
+  });
+
+  it("moveToRoomsPage returns a form template to the Forms/Templates list", () => {
+    (
+      window as unknown as { DocSpace: { location: { pathname: string } } }
+    ).DocSpace.location.pathname = "/forms/123/filter";
+
+    const store = createTestFilesActionsStore({
+      selectedFolderStore: {
+        navigationPath: [
+          { id: 5, title: "Templates", isTemplatesFolder: true },
+        ],
+        rootFolderType: FolderType.RoomTemplates,
+      },
+    });
+
+    store.moveToRoomsPage();
+
+    const [url] = navigate.mock.calls[0];
+    expect(url).toContain("/forms/filter?");
+    expect(url).toContain(`searchArea=${RoomSearchArea.FormTemplates}`);
+  });
+
+  it("moveToRoomsPage returns a room template to the Rooms/Templates list", () => {
+    (
+      window as unknown as { DocSpace: { location: { pathname: string } } }
+    ).DocSpace.location.pathname = "/rooms/shared/123/filter";
+
+    const store = createTestFilesActionsStore({
+      selectedFolderStore: {
+        navigationPath: [
+          { id: 5, title: "Templates", isTemplatesFolder: true },
+        ],
+        rootFolderType: FolderType.RoomTemplates,
+      },
+    });
+
+    store.moveToRoomsPage();
+
+    const [url] = navigate.mock.calls[0];
+    expect(url).toContain("/rooms/shared/filter?");
+    expect(url).toContain(`searchArea=${RoomSearchArea.Templates}`);
   });
 
   it("onClickBack closes the media viewer when it is open", () => {

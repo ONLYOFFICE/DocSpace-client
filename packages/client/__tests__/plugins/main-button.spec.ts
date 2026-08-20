@@ -132,10 +132,11 @@ test.describe("Main Button Sample Plugin", () => {
     await openMoreSubmenu(page);
     await page.getByTestId("main-button-sample-quick").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Quick action triggered for folder:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Quick action triggered for folder:");
   });
 
   // ── 3. Generate Report submenu ────────────────────────────────────────────────
@@ -181,10 +182,11 @@ test.describe("Main Button Sample Plugin", () => {
     await page.getByTestId("main-button-sample-report").hover();
     await page.getByTestId("main-button-sample-report-pdf").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "PDF report generated for folder:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("PDF report generated for folder:");
   });
 
   test("Clicking CSV Report fires a success toast", async ({
@@ -199,9 +201,10 @@ test.describe("Main Button Sample Plugin", () => {
     await page.getByTestId("main-button-sample-report").hover();
     await page.getByTestId("main-button-sample-report-csv").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "CSV report generated for folder:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("CSV report generated for folder:");
   });
 });

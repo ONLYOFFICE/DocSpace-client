@@ -64,7 +64,10 @@ import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import AiAgentProviders from "@docspace/ui-kit/ai-agent/providers";
 import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 
-import { updateTempContent } from "@docspace/shared/utils/common";
+import {
+  getFrameInitialTheme,
+  updateTempContent,
+} from "@docspace/shared/utils/common";
 import {
   AnalyticsEvents,
   DeviceType,
@@ -1049,7 +1052,10 @@ const ShellWrapper = inject(
       setTheme,
       roomsMode,
       setSnackbarExist,
-      userTheme: isFrame ? frameConfig?.theme : userTheme,
+      userTheme:
+        isFrame || getFrameInitialTheme()
+          ? (frameConfig?.theme ?? getFrameInitialTheme())
+          : userTheme,
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,

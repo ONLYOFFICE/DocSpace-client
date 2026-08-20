@@ -3,7 +3,7 @@
   "content": "Create space",
   "content_en_sha1_hash": "53c7ff75df10302be927a7804cfa518e7fdf7010",
   "created_at": "2026-08-17T17:22:43.214Z",
-  "updated_at": "2026-08-17T17:30:08.577Z",
+  "updated_at": "2026-08-20T12:26:01.730Z",
   "comment": {
     "text": "Button label or dialog header used when initiating the creation of a Form-type space or when using a form template.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 329,
+      "line_number": 344,
       "context": ": t(\"ChooseRoomType\");\n \n const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : roomParams.type === RoomsType.FormRoom\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\");\n \n return (\n <>\n <ConfirmationModal",
       "module": "/packages/client"
     },

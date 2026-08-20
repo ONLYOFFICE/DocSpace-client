@@ -111,6 +111,8 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
+import { ROOMS_SECTION_FOLDER_TYPES } from "@docspace/shared/utils/rooms";
+
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -141,6 +143,39 @@ export const isFormsSectionScope = (filterFolderType: Nullable<number[]>) => {
     !!filterFolderType?.length &&
     filterFolderType.every((type) => type === FolderType.FormRoom)
   );
+};
+
+const isAgentsSectionScope = (filterFolderType: Nullable<number[]>) => {
+  return (
+    !!filterFolderType?.length &&
+    filterFolderType.every((type) => type === FolderType.AIAgent)
+  );
+};
+
+const isRoomsSectionScope = (filterFolderType: Nullable<number[]>) => {
+  return (
+    !!filterFolderType?.length &&
+    filterFolderType.every((type) =>
+      (ROOMS_SECTION_FOLDER_TYPES as FolderType[]).includes(type),
+    )
+  );
+};
+
+/**
+ * Localized name of the app the aggregate section (Recent/Favorites/Trash) is
+ * scoped to, taken from the `folderType` scope filter the app puts on the
+ * aggregate — see `getSectionTrashTarget`. An unscoped section belongs to the
+ * Files app, which lists personal documents (`FolderType.USER`).
+ */
+export const getSectionAppName = (
+  t: TTranslation,
+  filterFolderType: Nullable<number[]>,
+) => {
+  if (isFormsSectionScope(filterFolderType)) return t("Common:Forms");
+  if (isAgentsSectionScope(filterFolderType)) return t("Common:AIAgents");
+  if (isRoomsSectionScope(filterFolderType)) return t("Common:Rooms");
+
+  return t("Common:Files");
 };
 
 export const getFolderDescription = (
@@ -283,6 +318,7 @@ export const getRootDescription = (
   aiReady: boolean,
   isPortalAdmin: boolean,
   isFormsScope: boolean = false,
+  filterFolderType: Nullable<number[]> = null,
 ) => {
   return match([rootFolderType, access])
     .with([FolderType.AIAgents, P._], () =>
@@ -335,13 +371,10 @@ export const getRootDescription = (
       t("Files:ArchiveEmptyScreenUser"),
     )
     .with([FolderType.TRASH, P._], () =>
-      isFormsScope
-        ? t("Common:TrashFormsFunctionalityDescription", {
-            sectionName: t("Common:TrashSection"),
-          })
-        : t("Common:TrashFunctionalityDescription", {
-            sectionName: t("Common:TrashSection"),
-          }),
+      t("Common:TrashFunctionalityDescription", {
+        appName: getSectionAppName(t, filterFolderType),
+        sectionName: t("Common:TrashSection"),
+      }),
     )
     .otherwise(() => "");
 };
@@ -460,11 +493,7 @@ export const getRootTitle = (
         : t("Common:NoRecentFilesHereYet"),
     )
     .with([FolderType.Archive, P._], () => t("Common:ArchiveEmptyScreenHeader"))
-    .with([FolderType.TRASH, P._], () =>
-      isFormsScope
-        ? t("EmptyView:FormFolderDefaultTitle")
-        : t("Common:EmptyScreenFolder"),
-    )
+    .with([FolderType.TRASH, P._], () => t("Common:NoItemsHereYet"))
     .otherwise(() => "");
 };
 

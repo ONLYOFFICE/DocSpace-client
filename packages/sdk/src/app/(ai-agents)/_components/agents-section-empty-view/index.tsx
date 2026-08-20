@@ -149,13 +149,14 @@ const AgentsSectionEmptyView = ({ section }: AgentsSectionEmptyViewProps) => {
       return (
         <EmptyView
           icon={icon}
-          title={t("Common:EmptyScreenFolder", {
-            defaultValue: "No agents here yet",
+          title={t("Common:NoItemsHereYet", {
+            defaultValue: "No items here yet",
           })}
           description={t("Common:TrashFunctionalityDescription", {
             sectionName: t("Common:TrashSection"),
+            appName: t("Common:AIAgents"),
             defaultValue:
-              "All deleted agents are moved to '{{sectionName}}'. Restore agents deleted by mistake or delete them permanently. Items in '{{sectionName}}' are automatically deleted after 30 days.",
+              "All deleted items from {{appName}} are moved here. Restore items deleted by mistake or delete them permanently. Items in '{{sectionName}}' are automatically deleted after 30 days. Please note, that the items deleted from the '{{sectionName}}' cannot be restored any longer.",
           })}
           options={null}
         />
@@ -167,3 +168,4 @@ const AgentsSectionEmptyView = ({ section }: AgentsSectionEmptyViewProps) => {
 };
 
 export default AgentsSectionEmptyView;
+

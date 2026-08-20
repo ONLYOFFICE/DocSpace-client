@@ -3,7 +3,7 @@
   "content": "{{aiChat}} isn’t active yet",
   "content_en_sha1_hash": "586364a7acae903dd7ecde6240894c62d98ec982",
   "created_at": "2026-08-19T13:26:03.994Z",
-  "updated_at": "2026-08-19T13:29:10.356Z",
+  "updated_at": "2026-08-20T12:26:01.848Z",
   "comment": {
     "text": "Screen title shown when the AI chat feature is not yet enabled. The {{aiChat}} variable represents the name of the AI service.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
-      "line_number": 115,
-      "context": "const aiChat = t(\"AIChat\");\n const productName = getBrandName(\"ProductName\");\n \n const title = standalone\n ? t(\"EmptyAIChatNotAvailableYetTitle\", { aiChat })\n : t(\"EmptyAIChatNotActiveYetTitle\", { aiChat });\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin: connect an AI service of your own\n .with([true, true], () =>\n t(\"EmptyAIChatNotAvailableYetAdminDescription\", { aiChat }),",
+      "line_number": 112,
+      "context": "}: Omit<NoAccessCopyProps, \"isAgents\">): NoAccessCopy => {\n const aiChat = t(\"AIChat\");\n \n const title = standalone\n ? t(\"EmptyAIChatNotAvailableYetTitle\", { aiChat })\n : t(\"EmptyAIChatNotActiveYetTitle\", { aiChat });\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin: connect an AI service of your own\n .with([true, true], () =>\n t(\"EmptyAIChatNotAvailableYetAdminDescription\", { aiChat }),",
       "module": "/libs/ui-kit"
     }
   ],

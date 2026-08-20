@@ -129,7 +129,10 @@ self: FilesActionStore
       self.selectedFolderStore.navigationPath.length - 1
     ]?.isTemplatesFolder
   ) {
-    filter.searchArea = RoomSearchArea.Templates;
+    filter.searchArea =
+      correctCategoryType === CategoryType.Forms
+        ? RoomSearchArea.FormTemplates
+        : RoomSearchArea.Templates;
   }
 
   if (categoryType === CategoryType.Chat) {

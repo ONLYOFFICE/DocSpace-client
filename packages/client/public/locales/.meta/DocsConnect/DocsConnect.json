@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-13T14:37:21.712Z",
+  "updated_at": "2026-08-19T13:26:37.721Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -138,15 +138,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 67,
-      "context": "return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");\n if (pathname.includes(\"/billing/addons/docs-connect\"))\n return t(\"DocsConnect:DocsConnect\");\n if (pathname.includes(\"/billing/addons\")) return t(\"Common:Addons\");\n return t(\"Common:Billing\");\n };\n \n const isSubPage = (pathname: string): boolean => {",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
       "line_number": 138,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n isHuge\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"DocsConnect:DocsConnect\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.intro}>\n <Text as=\"h3\" className={styles.subtitle}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/utils/index.ts",
+      "line_number": 76,
+      "context": "return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");\n if (pathname.includes(\"/billing/addons/docs-connect\"))\n return t(\"DocsConnect:DocsConnect\");\n if (pathname.includes(\"/billing/addons\")) return t(\"Common:Addons\");\n return t(\"Common:Billing\");\n };\n \n export function getTwoDotsReplacing(translation: string) {",
       "module": "/packages/client"
     },
     {

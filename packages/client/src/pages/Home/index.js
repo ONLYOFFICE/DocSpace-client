@@ -331,7 +331,6 @@ const PureHome = observer((props) => {
     canCreateEncrypted,
     canCreateRooms,
     canCreateAgents,
-    userId,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,

@@ -91,6 +91,16 @@ resolves the base branch (explicit arg → `git config branch.<name>.reviewBase`
 separately — a client diff that is only a gitlink bump means the change under
 review lives in the submodule.
 
+### Dependency audits
+
+The repo has seven independent lockfiles, so a clean `pnpm audit` at the root
+covers only the pnpm workspace. Use the `audit-deps` skill (or run
+`node .claude/scripts/audit/audit-deps.mjs`) to audit every tree at once -
+including the npm sub-projects under `common/` - and to get the override line
+that fixes each finding. Overrides go in `pnpm-workspace.yaml` for pnpm trees
+and in the project's own `package.json` for npm trees; `libs/ui-kit` findings
+belong to the ui-kit repo.
+
 ### License headers
 
 Every new source file (`.ts`, `.tsx`, `.js`, `.jsx`; `.scss` by convention)

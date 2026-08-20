@@ -3,7 +3,7 @@
   "content": "Owners",
   "content_en_sha1_hash": "4eaec4bc0f1df68ab2a7c896845068f9bba671b9",
   "created_at": "2026-03-31T15:18:18.114Z",
-  "updated_at": "2026-07-31T12:36:29.470Z",
+  "updated_at": "2026-08-19T13:26:37.736Z",
   "comment": {
     "text": "This is a label for a filter option in the Home section, allowing users to filter items by their owners.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1337,
+      "line_number": 1334,
       "context": "const ownerOptions = [\n {\n key: FilterGroups.roomFilterOwner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Common:Owners\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     },

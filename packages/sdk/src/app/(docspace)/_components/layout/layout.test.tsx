@@ -38,6 +38,7 @@ import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 import { useDocsUserStore } from "@/app/(personal-files)/_store/DocsUserStore";
+import { useInfoPanelStore } from "@/app/(docspace)/_store/InfoPanelStore";
 
 import { Layout } from "./index";
 
@@ -46,6 +47,7 @@ import { Layout } from "./index";
 
 const Probe = () => {
   useDocsUserStore();
+  useInfoPanelStore();
   return <div data-testid="probe" />;
 };
 
@@ -60,7 +62,7 @@ describe("(docspace) Layout providers", () => {
     container = undefined;
   });
 
-  it("provides DocsUserStore to children", () => {
+  it("provides DocsUserStore and InfoPanelStore to children", () => {
     container = document.createElement("div");
     document.body.appendChild(container);
     root = createRoot(container);

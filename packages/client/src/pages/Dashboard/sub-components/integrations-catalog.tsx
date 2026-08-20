@@ -246,7 +246,7 @@ export const useIntegrationPlatforms = (
       },
       {
         id: "custom",
-        name: t("YourOwnPlatform"),
+        name: t("Common:YourOwnPlatform"),
         url: allConnectorsUrl,
         subtitle: t("Common:IntegrationOwnHeader", {
           organizationName: getBrandName("OrganizationName"),

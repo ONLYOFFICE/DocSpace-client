@@ -1,9 +1,9 @@
 {
   "key_path": "DashboardRoomsDescription",
-  "content": "Create secure collaboration spaces for projects, customers, or departments.",
-  "content_en_sha1_hash": "9fbb9f76ec96ea18d24cc9ae1258648d6fe747db",
+  "content": "Collaborate with others around a specific topic or project.",
+  "content_en_sha1_hash": "819580e139fd6190a97fea3677d70adb08772987",
   "created_at": "2026-06-01T21:20:14.499Z",
-  "updated_at": "2026-08-14T14:58:32.747Z",
+  "updated_at": "2026-08-20T15:38:18.642Z",
   "comment": {
     "text": "Subtext for an application card in the apps catalog, describing the purpose of the AI rooms feature.",
     "is_auto": true,

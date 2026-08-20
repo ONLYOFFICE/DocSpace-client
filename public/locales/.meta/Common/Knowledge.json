@@ -3,7 +3,7 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-08-14T14:58:32.698Z",
+  "updated_at": "2026-08-19T13:26:37.688Z",
   "comment": {
     "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 212,
+      "line_number": 218,
       "context": "onClick: makeOnClick(TAB_IDS.WEB_SEARCH),\n isDisabled: disableNonAiModels,\n },\n {\n id: TAB_IDS.KNOWLEDGE,\n name: t(\"Common:Knowledge\"),\n content: standalone ? <Knowledge /> : <KnowledgeBaseSaas />,\n onClick: makeOnClick(TAB_IDS.KNOWLEDGE),\n isDisabled: disableNonAiModels,\n },\n ];",
       "module": "/packages/client"
     },

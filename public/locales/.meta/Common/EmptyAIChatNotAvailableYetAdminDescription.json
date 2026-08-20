@@ -1,0 +1,29 @@
+{
+  "key_path": "EmptyAIChatNotAvailableYetAdminDescription",
+  "content": "Connect your own AI service to start using {{aiChat}} in the workspace. Once connected, {{aiChat}} will be available to all users.",
+  "content_en_sha1_hash": "50d4ae231a2694763bae83e63d96e020f842e8c6",
+  "created_at": "2026-08-19T13:26:04.026Z",
+  "updated_at": "2026-08-19T13:27:57.887Z",
+  "comment": {
+    "text": "Description text on the AI chat no-access screen for standalone admins, explaining how to enable the feature. The variable {{aiChat}} represents the name of the AI chat service.",
+    "is_auto": true,
+    "updated_at": "2026-08-19T13:27:57.887Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "line_number": 120,
+      "context": ": t(\"EmptyAIChatNotActiveYetTitle\", { aiChat });\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin: connect an AI service of your own\n .with([true, true], () =>\n t(\"EmptyAIChatNotAvailableYetAdminDescription\", { aiChat }),\n )\n // standalone user: nothing to connect without admin rights\n .with([true, false], () =>\n t(\"EmptyAIChatNotAvailableYetUserDescription\", { aiChat, productName }),\n )",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

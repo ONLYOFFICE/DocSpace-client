@@ -1,0 +1,29 @@
+{
+  "key_path": "EmptyAIChatNotAvailableYetTitle",
+  "content": "{{aiChat}} is not available yet",
+  "content_en_sha1_hash": "0c36fb47e487ab4746a208347729bd5f2b014b32",
+  "created_at": "2026-08-19T13:26:04.042Z",
+  "updated_at": "2026-08-19T13:27:32.050Z",
+  "comment": {
+    "text": "Screen title displayed when the AI chat feature is not yet accessible. The {{aiChat}} variable represents the name of the AI chat service.",
+    "is_auto": true,
+    "updated_at": "2026-08-19T13:27:32.050Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "line_number": 114,
+      "context": "}: Omit<NoAccessCopyProps, \"isAgents\">): NoAccessCopy => {\n const aiChat = t(\"AIChat\");\n const productName = getBrandName(\"ProductName\");\n \n const title = standalone\n ? t(\"EmptyAIChatNotAvailableYetTitle\", { aiChat })\n : t(\"EmptyAIChatNotActiveYetTitle\", { aiChat });\n \n const description = match([standalone, isPortalAdmin])\n // standalone admin: connect an AI service of your own\n .with([true, true], () =>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

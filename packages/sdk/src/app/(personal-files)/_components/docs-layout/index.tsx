@@ -942,6 +942,10 @@ const DocsLayoutAi = observer((props: DocsLayoutProps) => {
   const { useAttachmentsStore } = useStores();
   const openChat = useOpenAiChat();
 
+  // No `chatProps`: without an AI profile the panel shows the chat widget's own
+  // setup screen, which configures a provider in place. That beats the client's
+  // branded empty view here, whose CTA would have to jump the embedded frame
+  // out to the AI-agents settings section.
   const aiChatPanel = useAiChatPanel();
   // Info-panel exclusivity is host policy (it owns the InfoPanelStore), so it
   // stays here rather than inside the shared ui-kit panel hook.

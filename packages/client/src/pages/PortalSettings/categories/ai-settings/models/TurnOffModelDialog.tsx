@@ -34,58 +34,77 @@
  */
 
 import React from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
 
+import styles from "./TurnOffModelDialog.module.scss";
+
+// Remembered per browser only — the backend has no place for this preference
+// yet, so an admin who opted out still sees the dialog on another device.
+const HIDE_CONFIRMATION_KEY = "aiModelTurnOffConfirmationHidden";
+
+const isConfirmationHidden = () =>
+  localStorage.getItem(HIDE_CONFIRMATION_KEY) === "true";
+
+const hideConfirmation = () =>
+  localStorage.setItem(HIDE_CONFIRMATION_KEY, "true");
+
 type TModel = {
   id: string;
   title: string;
 };
 
-type DisableModelDialogProps = {
+type TurnOffModelDialogProps = {
   model: TModel;
   isLoading: boolean;
-  onConfirm: VoidFunction;
+  onConfirm: (dontShowAgain: boolean) => void;
   onClose: VoidFunction;
 };
 
-const DisableModelDialog = ({
+const TurnOffModelDialog = ({
   model,
   isLoading,
   onConfirm,
   onClose,
-}: DisableModelDialogProps) => {
+}: TurnOffModelDialogProps) => {
   const { t } = useTranslation(["Common"]);
+
+  const [dontShowAgain, setDontShowAgain] = React.useState(false);
 
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("Common:DisableAIModel")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Common:TurnOffAIModelTitle", { model: model.title })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>
-          <Trans
-            t={t}
-            i18nKey="DisableAIModelDescription"
-            ns="Common"
-            values={{ model: model.title }}
-            components={{ 1: <strong /> }}
+        <div className={styles.body}>
+          <Text>{t("Common:TurnOffAIModelDescription")}</Text>
+          <Text>{t("Common:TurnOffAIModelHint")}</Text>
+          <Checkbox
+            isChecked={dontShowAgain}
+            onChange={() => setDontShowAgain((checked) => !checked)}
+            label={t("Common:DontShowAgain")}
+            isDisabled={isLoading}
+            dataTestId="turn-off-ai-model-dont-show-again"
           />
-        </Text>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:Disable")}
+          label={t("Common:TurnOff")}
           scale
-          onClick={onConfirm}
+          onClick={() => onConfirm(dontShowAgain)}
           isLoading={isLoading}
-          testId="disable-ai-model-button"
+          testId="turn-off-ai-model-button"
         />
         <Button
           size={ButtonSize.normal}
@@ -93,7 +112,7 @@ const DisableModelDialog = ({
           scale
           onClick={onClose}
           isDisabled={isLoading}
-          testId="disable-ai-model-cancel-button"
+          testId="turn-off-ai-model-cancel-button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -102,9 +121,10 @@ const DisableModelDialog = ({
 
 /**
  * Turning a model off takes it away from every user of the workspace, so it is
- * confirmed first; turning one back on is harmless and stays instant.
+ * confirmed first; turning one back on is harmless and stays instant. An admin
+ * who ticked "Don't show again" skips straight to the request.
  */
-export const useDisableModelConfirmation = (
+export const useTurnOffModelConfirmation = (
   setAvailability?: (modelId: string, enabled: boolean) => Promise<void>,
 ) => {
   const [pendingModel, setPendingModel] = React.useState<TModel | null>(null);
@@ -112,8 +132,8 @@ export const useDisableModelConfirmation = (
 
   const requestToggle = React.useCallback(
     (model: TModel, enabled: boolean) => {
-      if (enabled) {
-        void setAvailability?.(model.id, true);
+      if (enabled || isConfirmationHidden()) {
+        void setAvailability?.(model.id, enabled);
         return;
       }
 
@@ -128,21 +148,25 @@ export const useDisableModelConfirmation = (
     setPendingModel(null);
   }, [isLoading]);
 
-  const onConfirm = React.useCallback(async () => {
-    if (!pendingModel) return;
+  const onConfirm = React.useCallback(
+    async (dontShowAgain: boolean) => {
+      if (!pendingModel) return;
 
-    setIsLoading(true);
+      setIsLoading(true);
 
-    try {
-      await setAvailability?.(pendingModel.id, false);
-    } finally {
-      setIsLoading(false);
-      setPendingModel(null);
-    }
-  }, [pendingModel, setAvailability]);
+      try {
+        await setAvailability?.(pendingModel.id, false);
+        if (dontShowAgain) hideConfirmation();
+      } finally {
+        setIsLoading(false);
+        setPendingModel(null);
+      }
+    },
+    [pendingModel, setAvailability],
+  );
 
-  const disableModelDialog = pendingModel ? (
-    <DisableModelDialog
+  const turnOffModelDialog = pendingModel ? (
+    <TurnOffModelDialog
       model={pendingModel}
       isLoading={isLoading}
       onConfirm={onConfirm}
@@ -150,7 +174,7 @@ export const useDisableModelConfirmation = (
     />
   ) : null;
 
-  return { requestToggle, disableModelDialog };
+  return { requestToggle, turnOffModelDialog };
 };
 
-export default DisableModelDialog;
+export default TurnOffModelDialog;

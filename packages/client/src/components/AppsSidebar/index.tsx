@@ -61,7 +61,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { useEffect, useMemo } from "react";
 
@@ -344,6 +344,10 @@ export const AppsSidebarView = ({
               iconOnly={!showText}
               withExpandControl={isMobile}
               withAnimation
+              // Items that carry `linkData` render as real router links, so
+              // middle-click / Ctrl-click / "Open link in new tab" work on the
+              // navigation the same way they did in the old article.
+              LinkRouter={Link}
             />
           )}
 

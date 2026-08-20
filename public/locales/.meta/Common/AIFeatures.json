@@ -3,7 +3,7 @@
   "content": "AI features",
   "content_en_sha1_hash": "59f0c687f2560552c920af9e6c0850fc4715bf49",
   "created_at": "2026-06-03T11:45:29.424Z",
-  "updated_at": "2026-08-17T17:23:21.683Z",
+  "updated_at": "2026-08-19T13:26:37.680Z",
   "comment": {
     "text": "Menu item label in the context menu that contains AI-related sub-options.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 60,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/utils/index.ts",
+      "line_number": 69,
       "context": "if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))\n return t(\"Common:AIFeatures\");\n if (pathname.includes(\"/billing/addons/ai-search\"))\n return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");",
       "module": "/packages/client"
     },

@@ -64,6 +64,9 @@ type CreateRoomEventProps = {
   visible: boolean;
   startRoomType: RoomsType;
   isFormsCreate?: boolean;
+  // Opens the dialog on the "from template" picker instead of the room-type
+  // chooser.
+  withTemplateSelector?: boolean;
   item: TFolder;
   context: string;
   onClose: VoidFunction;
@@ -134,6 +137,7 @@ const CreateRoomEvent = ({
   deleteThirdParty,
   startRoomType,
   isFormsCreate,
+  withTemplateSelector,
   isCorrectWatermark,
   processCreatingRoomFromData,
   setProcessCreatingRoomFromData,
@@ -234,6 +238,7 @@ const CreateRoomEvent = ({
       onCreate={onCreate}
       startRoomType={startRoomType}
       isFormsCreate={isFormsCreate}
+      withTemplateSelector={withTemplateSelector}
       fetchedTags={fetchedTags}
       isLoading={isLoading}
       setIsLoading={setIsLoading}

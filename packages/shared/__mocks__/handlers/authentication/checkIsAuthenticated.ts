@@ -33,37 +33,29 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { checkIsAuthenticatedHandler } from "./checkIsAuthenticated";
-import { confirmHandler, ErrorConfirm } from "./confirm";
-import { loginHandler } from "./login";
-import { loginWithTfaCodeHandler } from "./loginWithTfaCode";
-import {
-  createDeleteBackupHistoryHandler,
-  createGetBackupHistoryHandler,
-} from "./backupHistory";
-import { createDeleteBackupHandler, createStartBackupHandler } from "./backup";
-import { createStartRestoreHandler } from "./restore";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
-export {
-  checkIsAuthenticatedHandler,
-  confirmHandler,
-  loginHandler,
-  loginWithTfaCodeHandler,
-  ErrorConfirm,
-  createDeleteBackupHandler,
-  createStartBackupHandler,
-  createGetBackupHistoryHandler,
-  createDeleteBackupHistoryHandler,
-  createStartRestoreHandler,
+export const PATH = "authentication";
+
+// GET /api/2.0/authentication answers whether the session behind the request
+// cookie is still alive. The login proxy asks it before bouncing a
+// cookie-carrying visitor back to the portal root.
+const isAuthenticatedEnvelope = (alive: boolean) => ({
+  count: 1,
+  response: alive,
+  links: [
+    {
+      href: `${BASE_URL}/${API_PREFIX}/${PATH}`,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+});
+
+export const checkIsAuthenticatedHandler = (port: string, alive = true) => {
+  return http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () => {
+    return new Response(JSON.stringify(isAuthenticatedEnvelope(alive)));
+  });
 };
-
-export const authenticationHandlers = (port: string) => [
-  checkIsAuthenticatedHandler(port),
-  loginHandler(port),
-  confirmHandler(port),
-  loginWithTfaCodeHandler(port),
-  createGetBackupHistoryHandler(port),
-  createDeleteBackupHistoryHandler(port),
-  createDeleteBackupHandler(port),
-  createStartBackupHandler(port),
-];

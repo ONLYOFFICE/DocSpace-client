@@ -36,6 +36,7 @@
 import type { Page } from "@playwright/test";
 
 import {
+  checkIsAuthenticatedHandler,
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
@@ -149,4 +150,27 @@ test("authenticated visitor of a live portal is still redirected to the portal r
   await page.goto(`${baseUrl}/login`);
 
   expect(page.url()).toBe(`${baseUrl}/`);
+});
+
+// A portal restore invalidates every session while the browser keeps the
+// cookie. The proxy must believe the API, not the cookie: no bounce to the
+// portal root (that was the redirect loop), and the dead cookie is dropped so
+// nothing trusts it again.
+test("a cookie whose session the API rejects stays on the login form without the cookie", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(checkIsAuthenticatedHandler(port, false));
+
+  await useProxyHeaders(page, port);
+  await setStaleAuthCookie(page);
+
+  await page.goto(`${baseUrl}/login`);
+
+  expect(page.url()).toBe(`${baseUrl}/login`);
+
+  const cookies = await page.context().cookies();
+  expect(cookies.find((cookie) => cookie.name === AUTH_COOKIE)).toBeUndefined();
 });

@@ -37,8 +37,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { OAuth2ErrorKey } from "./utils/enums";
 
-// This function can be marked `async` if using `await` inside
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
   const host = request.headers.get("x-forwarded-host");
@@ -119,8 +118,51 @@ export function proxy(request: NextRequest) {
     const hasAuthError =
       request.nextUrl.searchParams.get("authError") === "true";
 
-    if (isAuth && !hasAuthError && redirectUrl)
-      return NextResponse.redirect(redirectUrl);
+    // The cookie's presence proves nothing by itself: a portal restore
+    // resets every session while the browser keeps the cookie, and bouncing
+    // such a visitor to the portal root only brings them straight back
+    // here. Only the API can tell whether the session behind the cookie is
+    // still alive, so ask it before leaving the login page.
+    if (isAuth && !hasAuthError && host && proto) {
+      // Same base-URL strategy as the SSR data layer (getAPIUrl): the
+      // internal API_HOST when the deployment provides one, the public
+      // origin otherwise. The forwarded headers keep tenant resolution and
+      // the tenant's IP-restriction check working on both paths.
+      const apiBase = process.env.API_HOST?.trim() || redirectUrl;
+      const forwardedFor = request.headers.get("x-forwarded-for");
+
+      try {
+        const authRes = await fetch(`${apiBase}/api/2.0/authentication`, {
+          headers: {
+            cookie: request.headers.get("cookie") ?? "",
+            "x-forwarded-host": host,
+            "x-forwarded-proto": proto,
+            ...(forwardedFor ? { "x-forwarded-for": forwardedFor } : {}),
+          },
+          cache: "no-store",
+          signal: AbortSignal.timeout(1500),
+        });
+
+        if (authRes.ok) {
+          if ((await authRes.json())?.response === true) {
+            return NextResponse.redirect(redirectUrl);
+          }
+
+          // The session is confirmed dead. No anonymous endpoint ever clears
+          // the cookie server-side, so drop it here — otherwise the browser
+          // carries it forever and every visit repeats this round-trip.
+          const response = NextResponse.next();
+          response.cookies.delete("asc_auth_key");
+          return response;
+        }
+
+        // Transient state (403 while a restore is running, 5xx): keep the
+        // cookie and show the login form rather than guessing.
+      } catch {
+        // Unreachable or slow API (timeout, DNS, refused): keep the cookie
+        // and show the login form.
+      }
+    }
   }
 }
 

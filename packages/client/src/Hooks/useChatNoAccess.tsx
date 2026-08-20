@@ -107,7 +107,6 @@ export const useChatNoAccess = ({
 
   const noAccessProps = useMemo(
     () => ({
-      aiReady,
       standalone: !!standalone,
       isPortalAdmin: !!isAdmin,
       isCardLinkedToPortal,
@@ -117,7 +116,6 @@ export const useChatNoAccess = ({
       goToAISettings,
     }),
     [
-      aiReady,
       standalone,
       isAdmin,
       isCardLinkedToPortal,

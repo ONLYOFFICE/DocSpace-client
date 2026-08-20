@@ -95,6 +95,7 @@ import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import {
   frameCallEvent,
+  getFrameInitialTheme,
   getShowText,
   insertDataLayer,
   insertTagManager,
@@ -113,6 +114,11 @@ const themes = {
 
 const isDesktopEditors = window.AscDesktopEditor !== undefined;
 const systemTheme = getSystemTheme();
+const frameInitialTheme = getFrameInitialTheme();
+const initialTheme =
+  frameInitialTheme && frameInitialTheme !== ThemeKeys.SystemStr
+    ? (frameInitialTheme as ThemeKeys.BaseStr | ThemeKeys.DarkStr)
+    : systemTheme;
 
 class SettingsStore {
   isFirstLoaded = false;
@@ -137,7 +143,7 @@ class SettingsStore {
 
   cultures: string[] = [];
 
-  theme = themes[systemTheme];
+  theme = themes[initialTheme];
 
   trustedDomains: string[] = [];
 

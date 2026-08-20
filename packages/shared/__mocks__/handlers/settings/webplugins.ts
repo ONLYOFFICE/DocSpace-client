@@ -185,6 +185,20 @@ export const mockArticleButtonPlugin: TAPIPlugin = {
   settings: "",
 };
 
+export const mockArticleNavigationPlugin: TAPIPlugin = {
+  ...mockPlugin1,
+  name: "article-navigation",
+  version: "1.0.0",
+  minDocSpaceVersion: "3.5.0",
+  description:
+    "Sample plugin demonstrating article navigation items for DocSpace",
+  pluginName: "ArticleNavigationSample",
+  scopes: "ArticleNavigation",
+  image: "docspace-icon.svg",
+  url: "/plugins/article-navigation/plugin.js",
+  settings: "",
+};
+
 export const mockFileItemPlugin: TAPIPlugin = {
   ...mockPlugin1,
   name: "file-item",
@@ -507,6 +521,20 @@ export const webPluginsWithArticleButtonPlugin = {
   statusCode: 200,
 };
 
+// Plugins list with article navigation sample plugin
+export const webPluginsWithArticleNavigationPlugin = {
+  response: [mockArticleNavigationPlugin],
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
 // Plugins list with file item sample plugin
 export const webPluginsWithFileItemPlugin = {
   response: [mockFileItemPlugin],
@@ -654,6 +682,7 @@ type TWebPluginType =
   | "withSelectorPlugin"
   | "withMainButtonPlugin"
   | "withArticleButtonPlugin"
+  | "withArticleNavigationPlugin"
   | "withFileItemPlugin"
   | "withProfileMenuPlugin"
   | "withEventListenerPlugin"
@@ -691,6 +720,9 @@ export const webPluginsResolver = (type: TWebPluginType = "empty") => {
       break;
     case "withArticleButtonPlugin":
       data = webPluginsWithArticleButtonPlugin;
+      break;
+    case "withArticleNavigationPlugin":
+      data = webPluginsWithArticleNavigationPlugin;
       break;
     case "withFileItemPlugin":
       data = webPluginsWithFileItemPlugin;

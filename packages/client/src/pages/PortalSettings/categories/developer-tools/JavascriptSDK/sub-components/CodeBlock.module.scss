@@ -27,6 +27,7 @@
 @use "@docspace/ui-kit/styles/mixins";
 
 .container {
+  position: relative;
   border: 1px solid var(--plugins-border-color);
   border-radius: 6px;
   max-width: 800px;
@@ -41,4 +42,18 @@
   :global(.cm-gutters) {
     @include mixins.no-user-select;
   }
+}
+
+.copyButton {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+
+  inset-inline-end: 18px;
+  top: 6px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -3,7 +3,7 @@
   "content": "Get answers, find files and draft content with AI.",
   "content_en_sha1_hash": "25b069ee689413d4fce91b6971b8fa523a8c2ed3",
   "created_at": "2026-08-14T19:38:17.397Z",
-  "updated_at": "2026-08-17T17:34:10.521Z",
+  "updated_at": "2026-08-20T12:26:01.702Z",
   "comment": {
     "text": "Subtitle for a quick-action tile in an empty container view, describing the capabilities of the AI chat feature.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 437,
+      "line_number": 433,
       "context": "// Opens the AI chat panel — the same action the quick-action tiles and the\n // dashboard use. Only offered where the chat is actually reachable\n // (`isAiChatAvailable` already covers guests and portals without AI).\n const openAiChat = {\n title: t(\"Common:AIChat\"),\n description: t(\"EmptyView:AIChatOptionDescription\"),\n icon: <CreateChatIcon />,\n key: \"open-ai-chat\",\n onClick: actions.onOpenAiChat,\n disabled: false,\n };",
       "module": "/packages/client"
     }

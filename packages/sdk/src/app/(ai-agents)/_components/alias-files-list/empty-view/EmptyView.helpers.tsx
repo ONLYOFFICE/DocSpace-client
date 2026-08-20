@@ -54,10 +54,7 @@ import EmptyFilterFilesLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filte
 import EmptyFilterFilesDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-export const getTitle = (
-  t: TTranslation,
-  folderType?: FolderType | null,
-) => {
+export const getTitle = (t: TTranslation, folderType?: FolderType | null) => {
   switch (folderType) {
     case FolderType.Knowledge:
       return t("Common:EmptyKnowledgeTitle", {
@@ -84,7 +81,7 @@ export const getRootTitle = (
     case FolderType.Recent:
       return t("Common:NoRecentFilesHereYet");
     case FolderType.TRASH:
-      return t("Common:EmptyScreenFolder");
+      return t("Common:NoItemsHereYet");
     case FolderType.USER:
       return t("Common:EmptyScreenFolder");
     default:
@@ -153,6 +150,7 @@ export const getRootDescription = (
     case FolderType.TRASH:
       return t("Common:TrashFunctionalityDescription", {
         sectionName: t("Common:TrashSection"),
+        appName: t("Common:AIAgents"),
       });
     case FolderType.USER:
       return t("Common:DefaultFolderDescription");
@@ -188,3 +186,4 @@ export const getDescription = (
       return t("Common:UserEmptyDescription");
   }
 };
+

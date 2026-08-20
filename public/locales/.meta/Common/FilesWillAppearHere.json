@@ -3,7 +3,7 @@
   "content": "Files and folders added to the room will appear here.",
   "content_en_sha1_hash": "52cd903bd75b3f0b726ed3310678ed5925968532",
   "created_at": "2025-05-19T21:30:45.315Z",
-  "updated_at": "2026-08-17T17:23:21.667Z",
+  "updated_at": "2026-08-20T12:26:01.707Z",
   "comment": {
     "text": "This is a line of text displayed in an empty room or folder, informing the user that files and folders will be listed here once added. It appears below \"Room empty at the moment.\"",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 311,
+      "line_number": 350,
       "context": ")\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />\n <span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n ))\n .with([FolderType.USER, P.when(() => security?.Create)], () =>\n t(\"Common:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
-      "line_number": 164,
+      "line_number": 162,
       "context": "default:\n return (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />\n <span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n );\n }\n };",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
-      "line_number": 150,
+      "line_number": 151,
       "context": "default:\n return (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />\n <span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n );\n }\n };",
       "module": "/packages/sdk"
     }

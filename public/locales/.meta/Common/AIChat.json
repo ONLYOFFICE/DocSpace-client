@@ -3,7 +3,7 @@
   "content": "AI Chat",
   "content_en_sha1_hash": "81cefbaa610fdd5ac7a58a071fcea75d7e9af3d6",
   "created_at": "2025-11-25T11:53:02.411Z",
-  "updated_at": "2026-08-17T17:23:21.658Z",
+  "updated_at": "2026-08-20T12:26:01.698Z",
   "comment": {
     "text": "This is a label for the \"AI Chat\" feature, appearing as a noun within a sentence describing an empty knowledge base in an AI Room.",
     "is_auto": true,
@@ -12,32 +12,38 @@
   },
   "usage": [
     {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-no-access-screen/copy.tsx",
+      "line_number": 108,
+      "context": "const getChatCopy = ({\n standalone,\n isPortalAdmin,\n t,\n }: Omit<NoAccessCopyProps, \"isAgents\">): NoAccessCopy => {\n const aiChat = t(\"AIChat\");\n \n const title = standalone\n ? t(\"EmptyAIChatNotAvailableYetTitle\", { aiChat })\n : t(\"EmptyAIChatNotActiveYetTitle\", { aiChat });",
+      "module": "/libs/ui-kit"
+    },
+    {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 133,
+      "line_number": 128,
       "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 133,
+      "line_number": 128,
       "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 133,
+      "line_number": 128,
       "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 133,
+      "line_number": 128,
       "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 133,
+      "line_number": 128,
       "context": "if (isAIRoom) {\n if (isKnowledgeTab)\n return (\n <>\n {t(\"Common:EmptyKnowledgeDescription\", {\n aiChat: t(\"Common:AIChat\"),\n })}\n <Text\n as=\"span\"\n fontSize=\"12px\"\n style={{ display: \"block\", marginTop: \"8px\" }}",
       "module": "/packages/client"
     },
@@ -49,7 +55,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Hooks/useQuickActions.tsx",
-      "line_number": 199,
+      "line_number": 197,
       "context": "const aiChatItems = React.useMemo<QuickActionItem>(\n () => ({\n id: \"quick-ai-chat\",\n dataTestId: \"quick-ai-chat\",\n icon: <AIChatIcon />,\n label: t(\"Common:AIChat\"),\n onClick: openChat,\n }),\n [t, openChat],\n );",
       "module": "/packages/client"
     },
@@ -73,13 +79,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
-      "line_number": 179,
+      "line_number": 177,
       "context": "switch (folderType) {\n case FolderType.Knowledge:\n return t(\"Common:EmptyKnowledgeDescription\", {\n defaultValue:\n \"Files uploaded here will be indexed and used as context in the {{aiChat}} tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.\",\n aiChat: t(\"Common:AIChat\"),\n });\n case FolderType.ResultStorage:\n return t(\"Common:EmptyResultsDescription\", {\n defaultValue:\n \"Files generated in {{aiChat}} will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.\",",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
-      "line_number": 179,
+      "line_number": 177,
       "context": "switch (folderType) {\n case FolderType.Knowledge:\n return t(\"Common:EmptyKnowledgeDescription\", {\n defaultValue:\n \"Files uploaded here will be indexed and used as context in the {{aiChat}} tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.\",\n aiChat: t(\"Common:AIChat\"),\n });\n case FolderType.ResultStorage:\n return t(\"Common:EmptyResultsDescription\", {\n defaultValue:\n \"Files generated in {{aiChat}} will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.\",",
       "module": "/packages/sdk"
     }

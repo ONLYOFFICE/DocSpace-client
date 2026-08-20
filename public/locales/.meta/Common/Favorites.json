@@ -1,9 +1,9 @@
 {
   "key_path": "Favorites",
-  "content": "Favorites",
-  "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
+  "content": "Favorite files",
+  "content_en_sha1_hash": "2c3e71c8bc44fde8dff5efc87b140e933c09d30e",
   "created_at": "2025-08-29T14:33:19.030Z",
-  "updated_at": "2026-08-14T14:58:32.629Z",
+  "updated_at": "2026-08-20T12:26:01.687Z",
   "comment": {
     "text": "This is a label for a folder or section in the file management interface, indicating items that have been marked as favorites. It appears in navigation menus and settings for default page display.",
     "is_auto": true,
@@ -25,14 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 345,
-      "context": "ROOMS_SECTION_FOLDER_TYPES,\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n onClick: goScoped(\n CategoryType.Favorite,\n \"/rooms/favorite\",\n favoritesFolderId,",
+      "line_number": 344,
+      "context": "),\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n ...nav(\n scopedUrl(\n CategoryType.Favorite,\n \"/rooms/favorite\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 345,
-      "context": "ROOMS_SECTION_FOLDER_TYPES,\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n onClick: goScoped(\n CategoryType.Favorite,\n \"/rooms/favorite\",\n favoritesFolderId,",
+      "line_number": 344,
+      "context": "),\n ),\n },\n {\n id: \"rooms-favorites\",\n label: t(\"Common:Favorites\"),\n icon: getCatalogIconUrlByType(FolderType.Favorites),\n ...nav(\n scopedUrl(\n CategoryType.Favorite,\n \"/rooms/favorite\",",
       "module": "/packages/client"
     },
     {
@@ -91,13 +91,13 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 638,
+      "line_number": 643,
       "context": "iconName={FavoriteFillReactSvgUrl}\n className={classNames(\"badge icons-group\")}\n size={IconSizeType.medium}\n onClick={onClickFavorite}\n color=\"accent\"\n title={t(\"Common:Favorites\")}\n />\n ) : null}\n </div>\n );\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 377,
+      "line_number": 381,
       "context": "className={classNames(\"badge icons-group\")}\n size={sizeQuickButton}\n onClick={onClickFavorite}\n color=\"accent\"\n isDisabled={isDisabled}\n title={t(\"Common:Favorites\")}\n />\n ) : null}\n \n {showFailedVectorizationBadge ? (\n <FailedVectorizationBadge",
       "module": "/packages/shared"
     }

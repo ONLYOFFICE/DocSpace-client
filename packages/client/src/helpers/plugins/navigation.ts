@@ -33,41 +33,34 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import {
-  Actions,
-  FilesType,
-  Events,
-  PluginStatus,
-  ToastType,
-  Components,
-  UsersType,
-  Devices,
-  Section,
-} from "@onlyoffice/docspace-plugin-sdk";
+import { Section } from "./enums";
 
-enum PluginScopes {
-  API = "API",
-  Settings = "Settings",
-  ContextMenu = "ContextMenu",
-  InfoPanel = "InfoPanel",
-  MainButton = "MainButton",
-  ProfileMenu = "ProfileMenu",
-  EventListener = "EventListener",
-  File = "File",
-  PostMessage = "PostMessage",
-  ArticleButton = "ArticleButton",
-  ArticleNavigation = "ArticleNavigation",
-}
+const PLUGIN_SECTION_SEGMENT = "p";
 
-export {
-  PluginScopes,
-  Section,
-  Actions as PluginActions,
-  FilesType as PluginFileType,
-  Events as PluginEvents,
-  PluginStatus,
-  ToastType as PluginToastType,
-  Components as PluginComponents,
-  UsersType as PluginUsersType,
-  Devices as PluginDevices,
+const SECTION_BASE_PATH: Record<Section, string> = {
+  [Section.Files]: "",
+  [Section.Accounts]: "/accounts",
+  [Section.Settings]: "/portal-settings",
 };
+
+const getSectionBasePath = (section: Section) =>
+  `${SECTION_BASE_PATH[section]}/${PLUGIN_SECTION_SEGMENT}`;
+
+export const getPluginSectionPath = (section: Section, itemKey: string) =>
+  `${getSectionBasePath(section)}/${itemKey}`;
+
+export const getPluginSectionRoute = (section: Section) =>
+  `${getSectionBasePath(section)}/:itemKey`;
+
+export const getPluginSectionByPath = (pathname: string) => {
+  const sections = Object.keys(SECTION_BASE_PATH) as Section[];
+
+  return (
+    sections.find((section) =>
+      pathname.startsWith(`${getSectionBasePath(section)}/`),
+    ) ?? null
+  );
+};
+
+export const isPluginSectionPath = (pathname: string) =>
+  getPluginSectionByPath(pathname) !== null;

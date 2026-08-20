@@ -180,6 +180,7 @@ const PluginComponentBase = inject(
             } = boxProps;
 
             const elementStyles: React.CSSProperties = {
+              boxSizing: "border-box",
               width: widthProp,
               height: heightProp,
               padding: paddingProp,
@@ -358,11 +359,13 @@ const PluginComponentBase = inject(
           case PluginComponents.comboBox: {
             const { onSelect, ...restProps } = elementProps as IComboBox;
 
-            const onSelectAction = (
+            const onSelectAction = async (
               option: React.ComponentProps<typeof ComboBox>["options"][number],
             ) => {
               if (!onSelect) return;
-              const message = onSelect(option as IComboBox["options"][number]);
+              const message = await onSelect(
+                option as IComboBox["options"][number],
+              );
               dispatch(message);
             };
 

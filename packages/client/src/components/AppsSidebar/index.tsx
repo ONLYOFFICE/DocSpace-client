@@ -86,11 +86,16 @@ import BackButton from "@docspace/ui-kit/components/article/sub-components/BackB
 import ArticleDevToolsBar from "@docspace/ui-kit/components/article/sub-components/DevToolsBar";
 import { ArticleProfileLoader } from "@docspace/ui-kit/components/article/skeletons";
 import { useSectionNavigation } from "SRC_DIR/contexts/SectionNavigationContext";
+import type { Section } from "SRC_DIR/helpers/plugins/enums";
 import CollapseButton from "./CollapseButton";
 import ProfileBlock from "./ProfileBlock";
 import AppsPluginItems from "./AppsPluginItems/AppsPluginItems";
 import { BackButtonLoader, HeaderLoader, NavMenuLoader } from "./SidebarLoader";
 import { useSidebarShowText } from "./useSidebarShowText";
+import {
+  usePluginNavGroup,
+  type PluginNavigationItems,
+} from "./usePluginNavGroup";
 import styles from "./AppsSidebar.module.scss";
 import type { AppsPluginsItems } from "./AppsPluginItems/AppsPluginItems.types";
 
@@ -114,6 +119,8 @@ export type AppsSidebarProps = {
   backLabel?: string;
   /** Shows the Developer Tools banner on a secondary sidebar (hidden there by default). */
   withDevTools?: boolean;
+  /** Portal section this sidebar stands for — plugins add their navigation items to it. */
+  pluginSection?: Section;
 };
 
 type AppsSidebarViewProps = AppsSidebarProps & {
@@ -124,6 +131,7 @@ type AppsSidebarViewProps = AppsSidebarProps & {
   isNotPaidPeriod?: boolean;
   articleOpen?: boolean;
   articleButtonItems?: AppsPluginsItems | null;
+  articleNavigationItems?: PluginNavigationItems | null;
   toggleArticleOpen?: () => void;
   onBack?: () => void;
   backLabel?: string;
@@ -144,6 +152,8 @@ export const AppsSidebarView = ({
   hideBack,
   backLabel,
   articleButtonItems,
+  articleNavigationItems,
+  pluginSection,
   isNavLoading,
   limitedAccessDevToolsForUsers,
   withDevTools,
@@ -205,12 +215,22 @@ export const AppsSidebarView = ({
     toggleArticleOpen?.();
   };
 
+  const { pluginGroup, activePluginItemId } = usePluginNavGroup({
+    section: pluginSection,
+    items: articleNavigationItems,
+  });
+
+  const navGroups = useMemo(
+    () => (pluginGroup ? [...groups, pluginGroup] : groups),
+    [groups, pluginGroup],
+  );
+
   // On mobile the article overlays the content, so it must close itself after a
   // navigation click. Wrap every item/sub-item onClick to run its own handler
   // first (navigate) and then close the article. Off mobile the article is
   // pinned, so handlers pass through untouched.
   const mobileGroups = useMemo(() => {
-    if (!isMobile) return groups;
+    if (!isMobile) return navGroups;
 
     const closeAfter =
       <T,>(handler?: (item: T) => void) =>
@@ -219,7 +239,7 @@ export const AppsSidebarView = ({
         toggleArticleOpen?.();
       };
 
-    return groups.map((group) => ({
+    return navGroups.map((group) => ({
       ...group,
       items: group.items.map((item: NavMenuItem) => ({
         ...item,
@@ -230,7 +250,7 @@ export const AppsSidebarView = ({
         })),
       })),
     }));
-  }, [groups, isMobile, toggleArticleOpen]);
+  }, [navGroups, isMobile, toggleArticleOpen]);
 
   const articleContent = (
     <>
@@ -320,7 +340,7 @@ export const AppsSidebarView = ({
           ) : (
             <NavMenu
               groups={mobileGroups}
-              activeItemId={activeId}
+              activeItemId={activePluginItemId ?? activeId}
               iconOnly={!showText}
               withExpandControl={isMobile}
               withAnimation
@@ -405,6 +425,7 @@ type AppsSidebarConnectedProps = AppsSidebarProps & {
   articleOpen?: boolean;
   toggleArticleOpen?: () => void;
   articleButtonItems?: AppsPluginsItems | null;
+  articleNavigationItems?: PluginNavigationItems | null;
   limitedAccessDevToolsForUsers?: boolean;
 };
 
@@ -445,6 +466,7 @@ export default inject<TStore>(
     toggleArticleOpen: settingsStore.toggleArticleOpen,
     isNotPaidPeriod: currentTariffStatusStore.isNotPaidPeriod,
     articleButtonItems: pluginStore?.articleButtonItemsList,
+    articleNavigationItems: pluginStore?.articleNavigationItemsList,
     limitedAccessDevToolsForUsers: settingsStore.limitedAccessDevToolsForUsers,
   }),
 )(observer(AppsSidebar));

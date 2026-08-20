@@ -742,7 +742,7 @@ const PASS_THROUGH_PREFIXES = [
   "/accounts",
   "/contacts",
   "/developer-tools",
-  "/p",
+  "/p/",
   "/portal-settings",
   "/profile",
 ];

@@ -66,7 +66,7 @@ import { useNavigate } from "react-router";
 
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
-import { getBrandName } from "@docspace/ui-kit/constants/brands";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 import PluginIcon from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg";

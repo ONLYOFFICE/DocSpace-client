@@ -250,7 +250,7 @@ const ClientArticleSidebar = ({
 
     const overview: NavMenuItem = {
       id: "dashboard",
-      label: t("Common:Overview"),
+      label: t("Common:Home"),
       icon: CatalogOverviewReactSvgUrl,
       ...nav("/dashboard"),
     };

@@ -1101,6 +1101,7 @@
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> room created",
   "HistoryStopDate": "Filling was stopped by <1>{{userName}}</1>",
   "HistorySubmittedPartDescription": "Submitted their part. The form was sent to the next recipient.",
+  "Home": "Home",
   "Homepage": "Homepage",
   "Hotkeys": "Hotkeys",
   "Hour": "hour",

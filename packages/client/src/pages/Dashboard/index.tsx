@@ -140,7 +140,7 @@ const Dashboard = (props: DashboardProps) => {
     requestDashboardTour,
   } = props;
   const { t } = useTranslation(["Common", "OAuth"]);
-  useDocumentTitle("Common:Overview");
+  useDocumentTitle("Common:Home");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();

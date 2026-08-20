@@ -1513,13 +1513,10 @@ class PluginStore {
   deactivateArticleNavigationItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: Map<string, IArticleNavigationItem> | undefined =
-      plugin.getArticleNavigationItems && plugin.getArticleNavigationItems();
-
-    if (!items) return;
-
-    Array.from(items).forEach(([key]) => {
-      this.articleNavigationItems.delete(key);
+    Array.from(this.articleNavigationItems).forEach(([key, value]) => {
+      if (value.pluginName === plugin.name) {
+        this.articleNavigationItems.delete(key);
+      }
     });
   };
 

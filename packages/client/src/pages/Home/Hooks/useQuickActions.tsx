@@ -107,14 +107,18 @@ const dispatchCreateRoom = (
   window.dispatchEvent(event);
 };
 
-// Opens the Templates list — the Rooms list scoped to the Templates search
-// area. Mirrors the sidebar's Templates item (ClientArticleSidebar.goTemplates).
-const goTemplates = (userId?: string) => {
-  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
-  filter.searchArea = RoomSearchArea.Templates;
-  window.DocSpace.navigate(
-    `/rooms/shared/filter?${filter.toUrlParams(userId, false)}`,
-  );
+// Opens the create-room dialog directly on its "from template" picker, so the
+// tile creates a room out of a template in place instead of navigating to the
+// Templates list first (`withTemplateSelector` is read by CreateRoomDialog).
+const dispatchCreateRoomFromTemplate = (
+  parentId: number | string | null,
+) => {
+  const event = new CustomEvent(Events.ROOM_CREATE, {
+    detail: { parentId, context: "sidebar" },
+  });
+  // @ts-expect-error custom payload consumed by GlobalEvents/onCreateRoom
+  event.payload = { withTemplateSelector: true };
+  window.dispatchEvent(event);
 };
 
 // Opens the create-agent dialog scoped to the current folder, via the same
@@ -283,17 +287,18 @@ export const useQuickActions = (
         onClick: () =>
           dispatchCreateRoom(currentFolderId, RoomsType.CustomRoom),
       },
-      // Opens the Templates list (sidebar Rooms → Templates).
+      // Opens the create-room dialog on its template picker, so a room can be
+      // created from a template without leaving the Rooms list.
       {
         id: "quick-use-template",
         dataTestId: "quick-use-template",
         icon: <UseRoomTemplateIllustrationIcon />,
         label: t("Files:RoomTemplate"),
-        onClick: () => goTemplates(userId),
+        onClick: () => dispatchCreateRoomFromTemplate(currentFolderId),
       },
       ...(isAiChatAvailable ? [aiChatItems] : []),
     ],
-    [t, currentFolderId, userId, aiChatItems, isAiChatAvailable],
+    [t, currentFolderId, aiChatItems, isAiChatAvailable],
   );
 
   const formItems = React.useMemo<QuickActionItem[]>(() => {

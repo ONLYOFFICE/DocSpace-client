@@ -499,7 +499,7 @@
   flex-direction: row;
   align-items: center;
   gap: 12px;
-  width: 100%;
+  min-width: 0;
   padding: 16px;
   border-radius: 12px;
   text-align: start;

@@ -647,6 +647,8 @@
   "Diagrams": "Schematy",
   "DiagramViewer": "Przeglądarka Diagramów",
   "Disable": "Wyłącz",
+  "DisableAIModel": "Wyłącz model",
+  "DisableAIModelDescription": "Model <1>{{model}}</1> nie będzie już dostępny dla żadnego użytkownika przestrzeni roboczej. Wszyscy, którzy z niego korzystają, będą musieli przełączyć się na inny model. Możesz go w każdej chwili ponownie włączyć.",
   "DisableBackupConfirm": "Wyłączenie usługi kopii zapasowej uniemożliwi superadministratorom tworzenie kopii zapasowych. Jeśli automatyczna kopia zapasowa jest włączona, pozostanie aktywna w ramach darmowego limitu, ale po całkowitym wykorzystaniu limitu zostanie trwale dezaktywowana. Czy na pewno chcesz kontynuować?",
   "DisableBackupConfirmWithoutQuota": "Wyłączenie usługi kopii zapasowej uniemożliwi superadministratorom tworzenie kopii zapasowych. Jeśli automatyczna kopia zapasowa jest włączona, zostanie dezaktywowana. Czy na pewno chcesz kontynuować?",
   "Disabled": "Wyłączono",

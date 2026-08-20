@@ -647,6 +647,8 @@
   "Diagrams": "Diagramy",
   "DiagramViewer": "Prohlížeč schémat",
   "Disable": "Zakázat",
+  "DisableAIModel": "Zakázat model",
+  "DisableAIModelDescription": "Model <1>{{model}}</1> již nebude dostupný žádnému uživateli pracovního prostoru. Všichni, kdo jej používají, budou muset přejít na jiný model. Kdykoli jej můžete znovu povolit.",
   "DisableBackupConfirm": "Vypnutí služby zálohování zabrání supersprávcům vytvářet zálohy. Pokud je automatické zálohování zapnuto, zůstane aktivní v rámci bezplatné kvóty, ale po jejím úplném vyčerpání bude trvale deaktivováno. Opravdu chcete pokračovat?",
   "DisableBackupConfirmWithoutQuota": "Vypnutí služby zálohování zabrání supersprávcům vytvářet zálohy. Pokud je automatické zálohování zapnuto, bude deaktivováno. Opravdu chcete pokračovat?",
   "Disabled": "Deaktivováno",

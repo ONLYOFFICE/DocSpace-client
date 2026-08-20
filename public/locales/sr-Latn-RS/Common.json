@@ -647,6 +647,8 @@
   "Diagrams": "Dijagrami",
   "DiagramViewer": "Pregledač dijagrama",
   "Disable": "Onemogući",
+  "DisableAIModel": "Onemogući model",
+  "DisableAIModelDescription": "Model <1>{{model}}</1> više neće biti dostupan nijednom korisniku radnog prostora. Svi koji ga koriste moraće da pređu na drugi model. Možete ga ponovo omogućiti u bilo kom trenutku.",
   "DisableBackupConfirm": "Onemogućavanje usluge rezervne kopije sprečiće superadministratore da kreiraju rezervne kopije. Ako je automatska rezervna kopija uključena, ostaće aktivna u okviru besplatne kvote, ali kada se kvota potpuno iskoristi, biće trajno deaktivirana. Da li ste sigurni da želite da nastavite?",
   "DisableBackupConfirmWithoutQuota": "Onemogućavanje usluge rezervne kopije sprečiće superadministratore da kreiraju rezervne kopije. Ako je automatska rezervna kopija uključena, biće deaktivirana. Da li ste sigurni da želite da nastavite?",
   "Disabled": "Onemogućeno",

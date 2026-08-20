@@ -647,6 +647,8 @@
   "Diagrams": "Şemalar",
   "DiagramViewer": "Şematik Görüntüleyici",
   "Disable": "Devre dışı bırak",
+  "DisableAIModel": "Modeli devre dışı bırak",
+  "DisableAIModelDescription": "<1>{{model}}</1> modeli çalışma alanındaki hiçbir kullanıcı için kullanılabilir olmayacak. Modeli kullanan herkesin başka bir modele geçmesi gerekecek. İstediğiniz zaman yeniden etkinleştirebilirsiniz.",
   "DisableBackupConfirm": "Yedekleme hizmetini devre dışı bırakmak, süper yöneticilernin yedek oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse ücretsiz kota kapsamında etkin kalır, ancak kota tamamen kullanıldığında kalıcı olarak devre dışı bırakılır. Devam etmek istediğinizden emin misiniz?",
   "DisableBackupConfirmWithoutQuota": "Yedekleme hizmetini devre dışı bırakmak, süper yöneticilernin yedek oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse devre dışı bırakılacaktır. Devam etmek istediğinizden emin misiniz?",
   "Disabled": "Devre dışı bırakıldı",

@@ -647,6 +647,8 @@
   "Diagrams": "Sơ đồ",
   "DiagramViewer": "Trình xem sơ đồ",
   "Disable": "Tắt",
+  "DisableAIModel": "Tắt mô hình",
+  "DisableAIModelDescription": "Mô hình <1>{{model}}</1> sẽ không còn khả dụng với bất kỳ người dùng nào trong không gian làm việc. Những ai đang sử dụng sẽ phải chuyển sang mô hình khác. Bạn có thể bật lại bất cứ lúc nào.",
   "DisableBackupConfirm": "Việc vô hiệu hóa dịch vụ sao lưu sẽ khiến siêu quản trị viên không thể tạo bản sao lưu. Nếu Sao lưu tự động đang được bật, nó vẫn hoạt động trong phạm vi hạn mức miễn phí, nhưng khi hạn mức được dùng hết, nó sẽ bị vô hiệu hóa vĩnh viễn. Bạn có chắc chắn muốn tiếp tục?",
   "DisableBackupConfirmWithoutQuota": "Việc vô hiệu hóa dịch vụ sao lưu sẽ khiến siêu quản trị viên không thể tạo bản sao lưu. Nếu Sao lưu tự động đang được bật, nó sẽ bị vô hiệu hóa. Bạn có chắc chắn muốn tiếp tục?",
   "Disabled": "Đã vô hiệu hóa",

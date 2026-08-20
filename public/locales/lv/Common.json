@@ -647,6 +647,8 @@
   "Diagrams": "Diagrammas",
   "DiagramViewer": "Diagrammu skatītājs",
   "Disable": "Atspiet",
+  "DisableAIModel": "Atspējot modeli",
+  "DisableAIModelDescription": "Modelis <1>{{model}}</1> vairs nebūs pieejams nevienam darbvietas lietotājam. Visiem, kas to izmanto, būs jāpāriet uz citu modeli. Jūs varat to jebkurā laikā atkal iespējot.",
   "DisableBackupConfirm": "Dublēšanas pakalpojuma atspējošana neļaus superadministratoriem izveidot dublējumus. Ja automātiskā dublēšana ir iespējota, tā paliks aktīva bezmaksas kvotas ietvaros, taču, kad kvota būs pilnībā izmantota, tā tiks neatgriezeniski deaktivizēta. Vai tiešām vēlaties turpināt?",
   "DisableBackupConfirmWithoutQuota": "Dublēšanas pakalpojuma atspējošana neļaus superadministratoriem izveidot dublējumus. Ja automātiskā dublēšana ir iespējota, tā tiks deaktivizēta. Vai tiešām vēlaties turpināt?",
   "Disabled": "Atspēgts",

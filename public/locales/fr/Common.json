@@ -647,6 +647,8 @@
   "Diagrams": "Diagrammes",
   "DiagramViewer": "Visionneuse de diagrammes",
   "Disable": "Désactiver",
+  "DisableAIModel": "Désactiver le modèle",
+  "DisableAIModelDescription": "Le modèle <1>{{model}}</1> ne sera plus disponible pour aucun utilisateur de l'espace de travail. Toutes les personnes qui l'utilisent devront passer à un autre modèle. Vous pouvez le réactiver à tout moment.",
   "DisableBackupConfirm": "La désactivation du service de sauvegarde empêchera les super-administrateurs de créer des sauvegardes. Si la sauvegarde automatique est activée, elle restera active dans la limite du quota gratuit, mais une fois le quota entièrement utilisé, elle sera définitivement désactivée. Voulez-vous vraiment continuer ?",
   "DisableBackupConfirmWithoutQuota": "La désactivation du service de sauvegarde empêchera les super-administrateurs de créer des sauvegardes. Si la sauvegarde automatique est activée, elle sera désactivée. Voulez-vous vraiment continuer ?",
   "Disabled": "Désactivé",

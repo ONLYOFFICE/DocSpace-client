@@ -647,6 +647,8 @@
   "Diagrams": "Diagrammen",
   "DiagramViewer": "Diagramviewer",
   "Disable": "Uitschakelen",
+  "DisableAIModel": "Model uitschakelen",
+  "DisableAIModelDescription": "Het model <1>{{model}}</1> is niet langer beschikbaar voor gebruikers van de werkruimte. Iedereen die het gebruikt, moet overschakelen naar een ander model. U kunt het op elk moment weer inschakelen.",
   "DisableBackupConfirm": "Als u de back-updienst uitschakelt, kunnen superbeheerders geen back-ups meer maken. Als automatische back-up is ingeschakeld, blijft deze actief binnen het gratis quotum, maar zodra het quotum volledig is gebruikt, wordt deze permanent uitgeschakeld. Weet u zeker dat u wilt doorgaan?",
   "DisableBackupConfirmWithoutQuota": "Als u de back-updienst uitschakelt, kunnen superbeheerders geen back-ups meer maken. Als automatische back-up is ingeschakeld, wordt deze uitgeschakeld. Weet u zeker dat u wilt doorgaan?",
   "Disabled": "Uitgeschakeld",

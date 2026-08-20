@@ -647,6 +647,8 @@
   "Diagrams": "图表",
   "DiagramViewer": "图表查看器",
   "Disable": "禁用",
+  "DisableAIModel": "禁用模型",
+  "DisableAIModelDescription": "<1>{{model}}</1> 模型将不再对工作区的任何用户可用。正在使用该模型的用户需要切换到其他模型。您可以随时重新启用它。",
   "DisableBackupConfirm": "禁用备份服务将导致超级管理员无法创建备份。如果已启用自动备份，它将在免费配额范围内继续有效，但配额用尽后将被永久停用。您确定要继续吗？",
   "DisableBackupConfirmWithoutQuota": "禁用备份服务将导致超级管理员无法创建备份。如果已启用自动备份，它将被停用。您确定要继续吗？",
   "Disabled": "已禁用",

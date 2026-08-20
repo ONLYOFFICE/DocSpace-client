@@ -647,6 +647,8 @@
   "Diagrams": "Diaqramlar",
   "DiagramViewer": "Diaqram Baxıcı",
   "Disable": "Deaktiv edin",
+  "DisableAIModel": "Modeli deaktiv edin",
+  "DisableAIModelDescription": "<1>{{model}}</1> modeli iş sahəsinin heç bir istifadəçisi üçün əlçatan olmayacaq. Ondan istifadə edən hər kəs başqa modelə keçməli olacaq. İstənilən vaxt onu yenidən aktivləşdirə bilərsiniz.",
   "DisableBackupConfirm": "Yedəkləmə xidmətinin söndürülməsi super administratorların yedək yaratmasına imkan verməyəcək. Avtomatik yedəkləmə aktivdirsə, o, pulsuz kvota çərçivəsində aktiv qalacaq, lakin kvota tam istifadə edildikdən sonra birdəfəlik deaktiv ediləcək. Davam etmək istədiyinizə əminsiniz?",
   "DisableBackupConfirmWithoutQuota": "Yedəkləmə xidmətinin söndürülməsi super administratorların yedək yaratmasına imkan verməyəcək. Avtomatik yedəkləmə aktivdirsə, o, deaktiv ediləcək. Davam etmək istədiyinizə əminsiniz?",
   "Disabled": "Deaktiv edildi",

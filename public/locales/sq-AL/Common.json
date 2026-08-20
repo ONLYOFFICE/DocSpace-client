@@ -647,6 +647,8 @@
   "Diagrams": "Diagramet",
   "DiagramViewer": "Shfaqësi i Diagramit",
   "Disable": "Çaktivizoni",
+  "DisableAIModel": "Çaktivizo modelin",
+  "DisableAIModelDescription": "Modeli <1>{{model}}</1> nuk do të jetë më i disponueshëm për asnjë përdorues të hapësirës së punës. Të gjithë ata që e përdorin do të duhet të kalojnë në një model tjetër. Mund ta aktivizoni sërish në çdo moment.",
   "DisableBackupConfirm": "Çaktivizimi i shërbimit të backup-it do të pengojë superadministratorët të krijojnë kopje rezervë. Nëse Backup-i automatik është i aktivizuar, ai do të mbetet aktiv brenda kuotës falas, por sapo kuota të përdoret plotësisht, do të çaktivizohet përgjithmonë. Jeni i sigurt që dëshironi të vazhdoni?",
   "DisableBackupConfirmWithoutQuota": "Çaktivizimi i shërbimit të backup-it do të pengojë superadministratorët të krijojnë kopje rezervë. Nëse Backup-i automatik është i aktivizuar, ai do të çaktivizohet. Jeni i sigurt që dëshironi të vazhdoni?",
   "Disabled": "I çaktivizuar",

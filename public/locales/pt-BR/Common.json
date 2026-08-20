@@ -647,6 +647,8 @@
   "Diagrams": "Diagramas",
   "DiagramViewer": "Visualizador de Diagramas",
   "Disable": "Desativar",
+  "DisableAIModel": "Desativar modelo",
+  "DisableAIModelDescription": "O modelo <1>{{model}}</1> deixará de estar disponível para qualquer usuário do espaço de trabalho. Quem estiver usando terá que mudar para outro modelo. Você pode ativá-lo novamente a qualquer momento.",
   "DisableBackupConfirm": "Desativar o serviço de backup impedirá que os superadministradores criem backups. Se o backup automático estiver ativado, ele permanecerá ativo dentro da cota gratuita, mas quando a cota for totalmente utilizada, será desativado permanentemente. Tem certeza de que deseja continuar?",
   "DisableBackupConfirmWithoutQuota": "Desativar o serviço de backup impedirá que os superadministradores criem backups. Se o backup automático estiver ativado, ele será desativado. Tem certeza de que deseja continuar?",
   "Disabled": "Desabilitado",

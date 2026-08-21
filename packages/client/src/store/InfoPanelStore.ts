@@ -74,6 +74,7 @@ import FilesSettingsStore from "./FilesSettingsStore";
 import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import TreeFoldersStore from "./TreeFoldersStore";
+import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
 import DocumentBuilderReportStore, {
   ReportType,
 } from "./DocumentBuilderReportStore";
@@ -386,6 +387,8 @@ class InfoPanelStore {
   // Routing helpers //
 
   getCanDisplay = () => {
+    if (isPluginPage()) return false;
+
     const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();

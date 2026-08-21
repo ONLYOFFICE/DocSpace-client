@@ -41,6 +41,7 @@ import Section from "@docspace/ui-kit/components/section";
 import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
+import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import PortalSettingsSidebar from "SRC_DIR/components/PortalSettingsSidebar";
@@ -57,6 +58,7 @@ const Layout = ({
   enablePlugins,
   isInitPlugins,
   initPlugins,
+  setIsPortalSettingsLoading,
 
   currentDeviceType,
 }) => {
@@ -66,6 +68,10 @@ const Layout = ({
     const sel = window.getSelection?.();
     if (sel?.rangeCount) sel.removeAllRanges();
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (isPluginPage()) setIsPortalSettingsLoading(false);
+  }, [location.pathname, setIsPortalSettingsLoading]);
 
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
@@ -80,9 +86,11 @@ const Layout = ({
       <PortalSettingsSidebar />
       {!isGeneralPage ? (
         <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
-          <Section.SectionHeader>
-            <SectionHeaderContent />
-          </Section.SectionHeader>
+          {!isPluginPage() ? (
+            <Section.SectionHeader>
+              <SectionHeaderContent />
+            </Section.SectionHeader>
+          ) : null}
 
           {currentDeviceType !== DeviceType.desktop ? (
             <Section.SectionWarning>
@@ -103,6 +111,7 @@ export default inject(
     settingsStore,
     setup,
     pluginStore,
+    clientLoadingStore,
   }) => {
     const { language } = authStore;
     const { addUsers } = setup.headerAction;
@@ -113,6 +122,7 @@ export default inject(
       currentDeviceType,
     } = settingsStore;
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
+    const { setIsPortalSettingsLoading } = clientLoadingStore;
 
     return {
       language,
@@ -122,6 +132,7 @@ export default inject(
       enablePlugins,
       isInitPlugins,
       initPlugins,
+      setIsPortalSettingsLoading,
 
       currentDeviceType,
     };

@@ -3,7 +3,7 @@
   "content": "Overview",
   "content_en_sha1_hash": "0efc2e6be4c23b9a513d7ce0dcff8ed80e8912e7",
   "created_at": "2026-06-01T21:20:38.341Z",
-  "updated_at": "2026-08-14T14:58:32.630Z",
+  "updated_at": "2026-08-20T12:26:01.688Z",
   "comment": {
     "text": "Navigation menu label for the main overview section. It appears as a short title in sidebars or lists.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 256,
-      "context": "};\n };\n \n const overview: NavMenuItem = {\n id: \"dashboard\",\n label: t(\"Common:Overview\"),\n icon: CatalogOverviewReactSvgUrl,\n onClick: go(\"/dashboard\"),\n };\n \n const roomsFolder = find(FolderType.Rooms);",
+      "line_number": 253,
+      "context": "};\n };\n \n const overview: NavMenuItem = {\n id: \"dashboard\",\n label: t(\"Common:Overview\"),\n icon: CatalogOverviewReactSvgUrl,\n ...nav(\"/dashboard\"),\n };\n \n const roomsFolder = find(FolderType.Rooms);",
       "module": "/packages/client"
     },
     {

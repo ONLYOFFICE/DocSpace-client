@@ -3,7 +3,7 @@
   "content": "Select a ready PDF form available in the workspace and upload it to the space.",
   "content_en_sha1_hash": "5ffc2ad9c3daac1987c9437583c52da5268669b0",
   "created_at": "2026-08-12T11:00:48.519Z",
-  "updated_at": "2026-08-19T13:26:37.655Z",
+  "updated_at": "2026-08-20T12:26:01.699Z",
   "comment": {
     "text": "Instructional subtext in an empty state view that explains how to select and upload a PDF form from the workspace into the current form space.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 317,
+      "line_number": 319,
       "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),\n t(\"EmptyView:UploadPDFFormOptionDescription\"),\n FilterType.PDFForm,\n );\n \n const uploadAllFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\"),",
       "module": "/packages/client"
     }

@@ -259,6 +259,10 @@ class PaymentStore {
     return this.servicesQuotasFeatures.get(AI_ENUM)?.value;
   }
 
+  get isAiSearchServiceOn() {
+    return this.servicesQuotasFeatures.get(AI_SEARCH_ENUM)?.value;
+  }
+
   get isAIReady() {
     return (
       Boolean(this.isAiToolsServiceOn) ||

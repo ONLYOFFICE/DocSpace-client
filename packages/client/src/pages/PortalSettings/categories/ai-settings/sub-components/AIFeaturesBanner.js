@@ -50,7 +50,7 @@ import AIIcon from "@docspace/ui-kit/assets/icons/16/AI.svg";
 import PriceIcon from "@docspace/ui-kit/assets/icons/16/price.react.svg";
 import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
 
-import { AI_ENUM, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
+import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 
 import InfoIcon from "PUBLIC_DIR/images/info.react.svg";
 import EnabledIcon from "PUBLIC_DIR/images/tick.rounded.svg";
@@ -61,27 +61,61 @@ import styles from "./AIFeaturesBanner.module.scss";
 
 const ALL_SERVICES_ROUTE = "/portal-settings/payments/services";
 const AI_SERVICES_ROUTE = "/portal-settings/payments/services/ai-services";
+const AI_SEARCH_ROUTE = "/portal-settings/payments/services/ai-search";
 const OPENROUTER_PRICING_URL = "https://openrouter.ai/models";
+
+const getBannerTexts = (t, isWebSearchTab) =>
+  isWebSearchTab
+    ? {
+        activateTitle: t("Common:ActivateAISearchToGetStarted"),
+        activateDescription: t("Common:ActivateAISearchDescription"),
+        activateLabel: t("Common:ActivateAISearch"),
+        enabledTitle: t("Common:AISearchEnabledTitle"),
+        enabledDescription: t("Common:AISearchEnabledDescription"),
+      }
+    : {
+        activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
+        activateDescription: t("Common:GetAccessToAIModels"),
+        activateLabel: t("Common:ActivateAIFeatures"),
+        enabledTitle: t("Common:AIFeaturesEnabled"),
+        enabledDescription: t("Common:AIFeaturesEnabledDescription"),
+      };
 
 const AIFeaturesBanner = ({
   currentDeviceType,
   isAiToolsServiceOn,
+  isAiSearchServiceOn,
   isCardLinkedToPortal,
+  isWebSearchTab,
 }) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
   const tooltipId = useId();
 
   const isMobile = currentDeviceType === DeviceType.mobile;
-  const isEnabled = !!isAiToolsServiceOn;
+  const isEnabled = isWebSearchTab
+    ? !!isAiSearchServiceOn
+    : !!isAiToolsServiceOn;
+
+  const {
+    activateTitle,
+    activateDescription,
+    activateLabel,
+    enabledTitle,
+    enabledDescription,
+  } = getBannerTexts(t, isWebSearchTab);
+  const withFeatures = !isWebSearchTab;
 
   const onActivate = () => {
-    let route = AI_SERVICES_ROUTE;
+    const serviceRoute = isWebSearchTab ? AI_SEARCH_ROUTE : AI_SERVICES_ROUTE;
+    const activateParam = isWebSearchTab ? AI_SEARCH : AI_TOOLS;
+
+    let route = serviceRoute;
 
     if (!isEnabled) {
       route = isCardLinkedToPortal
-        ? `${AI_SERVICES_ROUTE}?activate=${AI_TOOLS}`
-        : `${ALL_SERVICES_ROUTE}`; // ?actionType=${AI_ENUM}
+        ? `${serviceRoute}?activate=${activateParam}`
+        : `${ALL_SERVICES_ROUTE}`;
     }
 
     navigate(
@@ -144,36 +178,32 @@ const AIFeaturesBanner = ({
         <div className={styles.title}>
           {isEnabled ? <EnabledIcon className={styles.enabledIcon} /> : null}
           <Text fontSize="13px" fontWeight={600}>
-            {isEnabled
-              ? t("Common:AIFeaturesEnabled")
-              : t("Common:ActivateAIFeaturesToGetStarted")}
+            {isEnabled ? enabledTitle : activateTitle}
           </Text>
-          {isMobile && isEnabled ? (
+          {isMobile && isEnabled && withFeatures ? (
             <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />
           ) : null}
         </div>
         <Text as="div" fontSize="12px" className={styles.descriptionText}>
-          {isEnabled
-            ? t("Common:AIFeaturesEnabledDescription")
-            : t("Common:GetAccessToAIModels")}
-          {isMobile && !isEnabled ? (
+          {isEnabled ? enabledDescription : activateDescription}
+          {isMobile && !isEnabled && withFeatures ? (
             <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />
           ) : null}
         </Text>
 
-        {isMobile ? null : features}
+        {isMobile || !withFeatures ? null : features}
       </div>
 
       <Button
         className={styles.button}
         primary={!isEnabled}
         size={ButtonSize.small}
-        label={isEnabled ? t("Common:Details") : t("Common:ActivateAIFeatures")}
+        label={isEnabled ? t("Common:Details") : activateLabel}
         onClick={onActivate}
         scale={isMobile}
       />
 
-      {isMobile ? (
+      {isMobile && withFeatures ? (
         <Tooltip
           id={tooltipId}
           place="bottom"

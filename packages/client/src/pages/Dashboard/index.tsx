@@ -81,6 +81,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 import ChatPanelView from "@docspace/ui-kit/components/section/sub-components/ChatPanel";
 
 import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
@@ -181,7 +182,12 @@ const Dashboard = (props: DashboardProps) => {
     myFolderId,
     openFiles,
   );
-  const createItems = useCreateActions(myFolderId, isGuest);
+  // Availability is computed once by the host (Shell) — it already accounts for
+  // the portal's AI services being switched off in settings — and shared
+  // through AiAgentProviders' context, the same signal Home reads.
+  const isAiChatAvailable = useIsAiChatAvailable();
+
+  const createItems = useCreateActions(myFolderId, isGuest, isAiChatAvailable);
 
   // Agent creation needs AI to be set up on top of the create right. `aiReady`
   // (portal /ai/config) can lag behind the chat-lib profiles, so existing
@@ -269,8 +275,20 @@ const Dashboard = (props: DashboardProps) => {
     noAccessProps: aiChatNoAccessProps,
   });
 
+  // The panel is shared state, so a portal that turns AI services off while a
+  // chat is open must not leave it on screen. Home does the same in
+  // `usePanelExclusivity`; the dashboard has no Info Panel to coordinate with,
+  // so only this half of that hook applies here. `useAiChatPanel` returns a new
+  // object each render, so the effect keys on its two reactive values rather
+  // than on the bindings themselves.
+  const { isChatPanelVisible, closeChatPanel } = aiChatPanel;
+  React.useEffect(() => {
+    if (!isAiChatAvailable && isChatPanelVisible) closeChatPanel();
+  }, [isAiChatAvailable, isChatPanelVisible, closeChatPanel]);
+
   const isDesktop = useIsDesktop();
   const isAiChatFullscreen =
+    isAiChatAvailable &&
     aiChatPanel.isChatPanelVisible &&
     (aiChatPanel.isChatPanelFullscreen || !isDesktop);
 
@@ -444,17 +462,19 @@ const Dashboard = (props: DashboardProps) => {
         <DashboardTourHost />
       </div>
 
-      <ChatPanelView
-        isVisible={aiChatPanel.isChatPanelVisible}
-        setIsVisible={(visible) => {
-          if (!visible) aiChatPanel.closeChatPanel();
-        }}
-        currentDeviceType={currentDeviceType}
-      >
-        {aiChatPanel.chatPanelContent}
-      </ChatPanelView>
+      {isAiChatAvailable ? (
+        <ChatPanelView
+          isVisible={aiChatPanel.isChatPanelVisible}
+          setIsVisible={(visible) => {
+            if (!visible) aiChatPanel.closeChatPanel();
+          }}
+          currentDeviceType={currentDeviceType}
+        >
+          {aiChatPanel.chatPanelContent}
+        </ChatPanelView>
+      ) : null}
 
-      {aiChatTopUpDialog}
+      {isAiChatAvailable ? aiChatTopUpDialog : null}
     </div>
   );
 };

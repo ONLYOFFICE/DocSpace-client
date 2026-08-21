@@ -5,10 +5,7 @@ paths:
   - "libs/ui-kit/biome-plugins/**"
   - "scripts/generate-*.js"
   - "package.json"
-  - "*/package.json"
-  - "packages/*/package.json"
-  - "libs/ui-kit/package.json"
-  - "common/translation-app/*/package.json"
+  - "**/package.json"
 ---
 
 # Checked-in generated artifacts

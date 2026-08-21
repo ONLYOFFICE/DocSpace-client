@@ -43,7 +43,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
-import { useDisableModelConfirmation } from "../DisableModelDialog";
+import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
@@ -81,8 +81,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     ...(aiToolsPrices?.image ?? []),
   ];
 
-  const { requestToggle, disableModelDialog } =
-    useDisableModelConfirmation(setAiModelAvailability);
+  const { requestToggle, turnOffModelDialog } =
+    useTurnOffModelConfirmation(setAiModelAvailability);
 
   const onToggle = (modelId: string, enabled: boolean) => {
     const model = models.find((m) => m.id === modelId);
@@ -149,7 +149,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
         </TableBody>
       </TableContainer>
 
-      {disableModelDialog}
+      {turnOffModelDialog}
     </div>
   );
 };

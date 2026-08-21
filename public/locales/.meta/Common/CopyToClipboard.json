@@ -3,7 +3,7 @@
   "content": "Copy to clipboard",
   "content_en_sha1_hash": "d8f482edf74e07a582e0836096d47a59b3bc03c2",
   "created_at": "2026-05-24T17:27:22.017Z",
-  "updated_at": "2026-08-10T12:23:10.549Z",
+  "updated_at": "2026-08-21T15:49:57.262Z",
   "comment": {
     "text": "Button label used to copy the recovery phrase to the clipboard.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 364,
+      "line_number": 365,
       "context": "<div className={styles.overviewGrid}>\n <InfoField\n label={t(\"Common:Address\")}\n value={tenant.address ?? \"\"}\n onCopy={onCopy}\n copyTitle={t(\"Common:CopyToClipboard\")}\n />\n <InfoField\n label={t(\"DocsConnect:JwtHeader\")}\n value={config.security.header}\n onCopy={onCopy}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 364,
+      "line_number": 365,
       "context": "<div className={styles.overviewGrid}>\n <InfoField\n label={t(\"Common:Address\")}\n value={tenant.address ?? \"\"}\n onCopy={onCopy}\n copyTitle={t(\"Common:CopyToClipboard\")}\n />\n <InfoField\n label={t(\"DocsConnect:JwtHeader\")}\n value={config.security.header}\n onCopy={onCopy}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 364,
+      "line_number": 365,
       "context": "<div className={styles.overviewGrid}>\n <InfoField\n label={t(\"Common:Address\")}\n value={tenant.address ?? \"\"}\n onCopy={onCopy}\n copyTitle={t(\"Common:CopyToClipboard\")}\n />\n <InfoField\n label={t(\"DocsConnect:JwtHeader\")}\n value={config.security.header}\n onCopy={onCopy}",
       "module": "/packages/client"
     },

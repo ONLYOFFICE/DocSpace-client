@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Pripojené k {{organizationName}} {{editorsName}}.</1> Váš {{organizationName}} {{editorsName}} teraz používa editory poskytované službou {{service}}.",
   "ConnectToDocs": "Pripojiť k {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Kopírovať tajný kľúč",
-  "CreateTenant": "Vytvoriť tenant",
   "DaysCount": "{{count}} dní",
   "DaysLeft": "Zostávajúce dni",
   "DemoCode": "Ukážkový kód",

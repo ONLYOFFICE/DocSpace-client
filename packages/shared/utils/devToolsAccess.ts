@@ -1,0 +1,68 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+/**
+ * Who may reach the Developer Tools section.
+ *
+ * The single source of truth for the rule enforced by the route guard in
+ * `routes/Route.private.tsx`: guests never get in, and room admins / users are
+ * kept out too when the portal turns on "limit access to developer tools"
+ * (Settings -> Security -> Access portal). Everything that merely *advertises*
+ * the section - the sidebar banner, the dashboard card - must ask this too,
+ * so we don't offer a link that answers with 403.
+ */
+export const hasDevToolsAccess = (
+  user: { isVisitor?: boolean; isAdmin?: boolean; isOwner?: boolean } | null
+    | undefined,
+  limitedAccessDevToolsForUsers: boolean | undefined,
+) => {
+  if (!user || user.isVisitor) return false;
+
+  return !limitedAccessDevToolsForUsers || !!user.isAdmin || !!user.isOwner;
+};
+
+/**
+ * Who may reach Docs Connect inside Developer Tools.
+ *
+ * Stricter than `hasDevToolsAccess`: connecting an editors instance is a
+ * portal-wide operation, so only portal admins and the owner get the page -
+ * room admins and users are kept out even when the rest of the section is open
+ * to them. Enforced by the route guard in `routes/Route.private.tsx`; the
+ * sidebar item and the Overview card must ask this too, so we never offer a
+ * link that answers with 403. Same flags the dashboard cards gate on.
+ */
+export const hasDocsConnectAccess = (
+  user: { isAdmin?: boolean; isOwner?: boolean } | null | undefined,
+) => !!user && (!!user.isAdmin || !!user.isOwner);

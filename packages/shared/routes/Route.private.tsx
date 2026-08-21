@@ -42,6 +42,10 @@ import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
 import { AUTH_TOKEN_TIMEOUT_MS, isOAuthFrame } from "../utils/oauthToken";
 import { isPortalNotFoundRedirectClaimed } from "../utils/portalNotFound";
+import {
+  hasDevToolsAccess,
+  hasDocsConnectAccess,
+} from "../utils/devToolsAccess";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -174,6 +178,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("bonus") && !isCommunity;
 
     const isDeveloperToolsPage = location.pathname.includes("/developer-tools");
+    const isDocsConnectPage = location.pathname.includes(
+      "/developer-tools/docs-connect",
+    );
 
     if (location.pathname === "/shared/invalid-link") {
       return children;
@@ -347,7 +354,12 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isDeveloperToolsPage) {
-      if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin && !user?.isOwner))
+      if (!hasDevToolsAccess(user, limitedAccessDevToolsForUsers))
+        return <Navigate replace to="/error/403" />;
+
+      // Docs Connect is admin/owner-only even when the rest of the section is
+      // open, so a room admin or user who guesses the URL is bounced too.
+      if (isDocsConnectPage && !hasDocsConnectAccess(user))
         return <Navigate replace to="/error/403" />;
     }
 

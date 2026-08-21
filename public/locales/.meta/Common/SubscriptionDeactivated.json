@@ -3,7 +3,7 @@
   "content": "Subscription deactivated — non-payment",
   "content_en_sha1_hash": "6244400f48c757281fab42d54dc81d4c61f933c3",
   "created_at": "2026-04-10T13:53:45.694Z",
-  "updated_at": "2026-08-13T14:37:21.737Z",
+  "updated_at": "2026-08-21T15:49:57.260Z",
   "comment": {
     "text": "This is a status message displayed when a subscription has been deactivated due to non-payment, specifically for storage plan changes.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 249,
+      "line_number": 250,
       "context": "<Text\n fontSize=\"13px\"\n fontWeight={600}\n className={styles.deactivatedTitle}\n >\n {t(\"Common:SubscriptionDeactivated\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" className={styles.muted}>\n {t(\"Common:SubscriptionDeactivatedDescription\")}\n </Text>",
       "module": "/packages/client"
     }

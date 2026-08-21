@@ -3,7 +3,7 @@
   "content": "Customize your {{plan}} plan",
   "content_en_sha1_hash": "93c1c39c8cfd3a7be484d7931e1ae722e9c7cd4f",
   "created_at": "2026-06-01T21:20:38.508Z",
-  "updated_at": "2026-08-19T13:26:37.723Z",
+  "updated_at": "2026-08-21T08:01:33.834Z",
   "comment": {
     "text": "Link label in the dashboard header for users not on a free tariff. The {{plan}} variable represents the name of the plan.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
-      "line_number": 125,
-      "context": "}\n isHovered\n >\n {isFreeTariff\n ? t(\"Common:ActivatePremiumFeatures\")\n : t(\"Common:CustomizeYourPlan\", {\n plan: t(\"Common:BusinessPlan\"),\n })}\n </Link>\n </div>\n </header>",
+      "line_number": 146,
+      "context": "onClick={openPayments}\n isHovered\n >\n {isFreeTariff\n ? t(\"Common:UpgradeAndAddAddons\", { planName: businessPlan })\n : t(\"Common:CustomizeYourPlan\", { plan: businessPlan })}\n </Link>\n </div>\n ) : null}\n </div>",
       "module": "/packages/client"
     }
   ],

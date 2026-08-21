@@ -29,7 +29,9 @@ than one major of the package exists in the lockfile.
 
 The repo has seven independent lockfiles; the root audit sees only this
 workspace. `node .claude/scripts/audit/audit-deps.mjs` (skill: `audit-deps`)
-audits all of them and prints the override line for each finding.
+audits all of them and prints the override line for each finding. Each lockfile
+is refreshed by its own command and must be committed together with the
+`package.json` that changed — see `.claude/rules/generated-artifacts.md`.
 
 `packageManager` in `package.json` is the single source of truth for the pnpm
 version: CI (`pnpm/action-setup`) reads it, and the Dockerfiles pin the same

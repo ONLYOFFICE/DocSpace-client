@@ -154,8 +154,10 @@ const DashboardTour = ({
     if (!dashboardTourStore.isPending || dashboardTourStore.isRunning) return;
 
     // No tour on mobile — `useTour` refuses to run there. Drop the request
-    // rather than leave it armed for a desktop visit that may never come; the
-    // welcome is not offered on mobile either, so nothing armed it on purpose.
+    // rather than leave it armed for a desktop visit that may never come.
+    // Nothing on the page arms it here (the dashboard gates the welcome and
+    // both help icons on the device type), so this is the backstop for a
+    // request that outlived a resize into mobile widths.
     if (isMobileView) {
       dashboardTourStore.completeTour();
       return undefined;

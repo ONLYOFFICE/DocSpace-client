@@ -65,6 +65,10 @@ import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { getBrandName } from "@docspace/shared/constants/brands";
+
+import QuestionReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
 
@@ -73,6 +77,12 @@ import styles from "../Dashboard.module.scss";
 const STANDALONE_PAYMENTS_ROUTE = "/portal-settings/payments/portal-payments";
 
 type HeaderProps = {
+  /**
+   * Opens the welcome modal, whose only offer is the dashboard tour. Left out
+   * where no tour can run (mobile), in which case the help icon is not
+   * rendered at all rather than sitting there doing nothing.
+   */
+  onOpenTour?: () => void;
   isFreeTariff?: boolean;
   paymentDate?: string;
   isAdminOrOwner?: boolean;
@@ -80,6 +90,7 @@ type HeaderProps = {
 };
 
 const Header = ({
+  onOpenTour,
   isFreeTariff = true,
   paymentDate = "",
   isAdminOrOwner = false,
@@ -88,45 +99,68 @@ const Header = ({
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
-  if (!isAdminOrOwner) return null;
+  const businessPlan = t("Common:BusinessPlan");
+
+  const openPayments = () =>
+    navigate(
+      standalone ? STANDALONE_PAYMENTS_ROUTE : PAYMENT_ROUTES.portalPayments,
+    );
 
   return (
     <header className={styles.planHeader}>
-      <Text className={styles.planTitle}>
-        {t("Common:BusinessTitle", {
-          planName: isFreeTariff
-            ? t("Common:StartupPlan")
-            : t("Common:BusinessPlan"),
-        })}
-      </Text>
-      <div className={styles.planSubline}>
-        {!isFreeTariff && paymentDate ? (
-          <Text as="span" className={styles.planSublineText}>
-            {t("Common:SubscriptionAutoRenewedOn", {
-              finalDate: paymentDate,
-            })}
-          </Text>
+      <div className={styles.planHeaderText}>
+        <Text className={styles.planTitle}>
+          {t("Common:WelcomeToOrganization", {
+            organizationName: getBrandName("OrganizationName"),
+          })}
+        </Text>
+
+        {/* Only the plan line is billing-scoped: everyone gets the greeting,
+            but a link into the payments settings is of no use to a user who
+            cannot open them. */}
+        {isAdminOrOwner ? (
+          <div className={styles.planSubline}>
+            <Text as="span" className={styles.planSublineText}>
+              {/* Two sentences on a paid plan, but each key keeps its own
+                  punctuation so the join isn't hardcoded to a period. */}
+              {isFreeTariff
+                ? t("Common:FreePlanDescription", {
+                    planName: t("Common:StartupPlan"),
+                  })
+                : paymentDate
+                  ? t("Common:PaidPlanDescription", {
+                      planName: businessPlan,
+                      finalDate: paymentDate,
+                    })
+                  : t("Common:BusinessTitle", { planName: businessPlan })}
+            </Text>
+            <Link
+              className={styles.planLink}
+              color="accent"
+              type={LinkType.action}
+              onClick={openPayments}
+              isHovered
+            >
+              {isFreeTariff
+                ? t("Common:UpgradeAndAddAddons", { planName: businessPlan })
+                : t("Common:CustomizeYourPlan", { plan: businessPlan })}
+            </Link>
+          </div>
         ) : null}
-        <Link
-          className={styles.planLink}
-          color="accent"
-          type={LinkType.action}
-          onClick={() =>
-            navigate(
-              standalone
-                ? STANDALONE_PAYMENTS_ROUTE
-                : PAYMENT_ROUTES.portalPayments,
-            )
-          }
-          isHovered
-        >
-          {isFreeTariff
-            ? t("Common:ActivatePremiumFeatures")
-            : t("Common:CustomizeYourPlan", {
-                plan: t("Common:BusinessPlan"),
-              })}
-        </Link>
       </div>
+
+      {/* Pinned to the far edge of the header row, opposite the greeting. */}
+      {onOpenTour ? (
+        <IconButton
+          className={styles.helpButton}
+          iconName={QuestionReactSvgUrl}
+          size={16}
+          isClickable
+          title={t("Common:WelcomeStartTour")}
+          onClick={onOpenTour}
+          dataTestId="dashboard-open-welcome"
+        />
+      ) : null}
     </header>
   );
 };

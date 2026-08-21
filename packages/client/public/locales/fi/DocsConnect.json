@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Yhdistetty {{organizationName}} {{editorsName}} -palveluun.</1> {{organizationName}} {{editorsName}} käyttää nyt {{service}} -palvelun tarjoamia editoreita.",
   "ConnectToDocs": "Yhdistä {{organizationName}} {{editorsName}} -palveluun",
   "CopySecretKey": "Kopioi salainen avain",
-  "CreateTenant": "Luo tenantti",
   "DaysCount": "{{count}} päivää",
   "DaysLeft": "Päiviä jäljellä",
   "DemoCode": "Demokoodi",

@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2026-08-20T12:26:01.690Z",
+  "updated_at": "2026-08-21T15:49:57.154Z",
   "comment": {
     "text": "This is a label for a presentation file type or a button to create a new presentation. It appears in menus and file listings.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useCreateActions.tsx",
-      "line_number": 126,
+      "line_number": 131,
       "context": "...disabledProps,\n },\n {\n id: \"presentation\",\n icon: <CreatePresentationIcon />,\n label: t(\"Common:Presentation\"),\n onClick: () =>\n window.open(\n makeCreateUrl(NEW_FILE_NAMES.presentation, myFolderId),\n \"_blank\",\n ),",
       "module": "/packages/client"
     },

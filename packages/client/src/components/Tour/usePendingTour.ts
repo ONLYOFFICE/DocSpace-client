@@ -48,7 +48,7 @@ import type TourStore from "SRC_DIR/store/TourStore";
 const SECTION_SETTLE_DELAY = 300;
 
 /**
- * Starts a tour that was requested from outside the section — the app promo on
+ * Starts a tour that was requested from outside the section — the app card on
  * the dashboard arms it with `requestTour`, this runs it once the section it
  * walks through is on screen.
  *

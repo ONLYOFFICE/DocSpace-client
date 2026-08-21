@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Savienots ar {{organizationName}} {{editorsName}}.</1> Jūsu {{organizationName}} {{editorsName}} tagad izmanto {{service}} nodrošinātos redaktorus.",
   "ConnectToDocs": "Savienot ar {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Kopēt privāto atslēgu",
-  "CreateTenant": "Izveidot tenantu",
   "DaysCount": "{{count}} dienas",
   "DaysLeft": "Atlikušās dienas",
   "DemoCode": "Demo kods",

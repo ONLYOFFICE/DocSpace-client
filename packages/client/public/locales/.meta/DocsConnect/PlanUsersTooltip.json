@@ -3,7 +3,7 @@
   "content": "Includes {{count}} unique editors and {{count}} unique viewers per month. A user takes a seat the first time they open a document and keeps it until the end of the period.",
   "content_en_sha1_hash": "21ed963759b69de86ba6bef3e266e4f40045f8dc",
   "created_at": "2026-07-27T13:07:48.491Z",
-  "updated_at": "2026-08-12T14:02:21.315Z",
+  "updated_at": "2026-08-21T15:49:57.256Z",
   "comment": {
     "text": "Tooltip content for a HelpButton that explains how monthly editor and viewer limits are calculated, using {{count}} to represent the number of users.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 469,
+      "line_number": 470,
       "context": "<Text className={styles.muted}>\n {t(\"DocsConnect:PlanUsers\")}\n </Text>\n <HelpButton\n size={12}\n tooltipContent={t(\"DocsConnect:PlanUsersTooltip\", {\n count: planUsers,\n })}\n tooltipMaxWidth=\"320px\"\n />\n </div>",
       "module": "/packages/client"
     }

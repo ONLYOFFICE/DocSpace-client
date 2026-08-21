@@ -72,7 +72,7 @@ export const GuestRestrictionTooltip = () => {
   const { t } = useTranslation(["Common"]);
 
   return (
-    <div className={styles.guestRestrictionTooltip}>
+    <div className={styles.restrictionTooltip}>
       <Text fontWeight={700} fontSize="12px">
         {t("Common:GuestCantCreateOrUploadTitle")}
       </Text>

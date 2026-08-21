@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Conectat la {{organizationName}} {{editorsName}}.</1> {{organizationName}} {{editorsName}} folosește acum editoarele furnizate de {{service}}.",
   "ConnectToDocs": "Conectare la {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Copiați cheia secretă",
-  "CreateTenant": "Creare tenant",
   "DaysCount": "{{count}} zile",
   "DaysLeft": "Zile rămase",
   "DemoCode": "Cod demonstrativ",

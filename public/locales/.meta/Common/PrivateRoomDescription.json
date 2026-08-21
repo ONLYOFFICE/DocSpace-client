@@ -3,7 +3,7 @@
   "content": "All files in this room will be encrypted",
   "content_en_sha1_hash": "51563aa98d63f7e6b70e10ede514f7f837acd0f3",
   "created_at": "2026-05-24T17:27:35.766Z",
-  "updated_at": "2026-08-17T17:23:21.704Z",
+  "updated_at": "2026-08-21T15:49:57.181Z",
   "comment": {
     "text": "Tooltip for a title icon that appears when viewing an encrypted room to inform the user about the encryption status of the files.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 631,
+      "line_number": 634,
       "context": "]);\n \n const titleIconTooltip = React.useMemo(() => {\n if (sharedType) return t(\"Files:RecentlyOpenedTooltip\");\n \n if (isEncryptedRoom) return t(\"Common:PrivateRoomDescription\");\n \n if (lifetime)\n return `${t(\"Common:RoomFilesLifetime\", {\n days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),",
       "module": "/packages/client"
     },

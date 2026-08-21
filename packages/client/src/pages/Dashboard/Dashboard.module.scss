@@ -667,6 +667,10 @@
   }
 }
 
+.integrationDialog {
+  --modal-dialog-large-width: 740px;
+}
+
 .integrationDialogBody {
   display: flex;
   flex-direction: column;

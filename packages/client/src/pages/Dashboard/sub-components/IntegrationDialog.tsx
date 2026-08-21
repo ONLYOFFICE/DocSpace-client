@@ -80,6 +80,7 @@ export const IntegrationDialog = ({
       visible
       onClose={onClose}
       displayType={ModalDialogType.modal}
+      className={styles.integrationDialog}
       isLarge
       autoMaxHeight
     >

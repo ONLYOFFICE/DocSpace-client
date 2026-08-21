@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-08-19T13:26:37.650Z",
+  "updated_at": "2026-08-21T15:04:37.040Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
@@ -103,7 +103,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearchSaas.tsx",
-      "line_number": 89,
+      "line_number": 90,
       "context": ");\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"Common:SomethingWentWrong\")}\n description={t(\"Common:ServerErrorEmptyDescription\")}\n options={[\n {\n to: \"\",\n key: \"reload\",",
       "module": "/packages/client"
     },

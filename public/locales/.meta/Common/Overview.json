@@ -3,7 +3,7 @@
   "content": "Overview",
   "content_en_sha1_hash": "0efc2e6be4c23b9a513d7ce0dcff8ed80e8912e7",
   "created_at": "2026-06-01T21:20:38.341Z",
-  "updated_at": "2026-08-21T08:01:33.694Z",
+  "updated_at": "2026-08-21T15:04:37.032Z",
   "comment": {
     "text": "Navigation menu label for the main overview section. It appears as a short title in sidebars or lists.",
     "is_auto": true,
@@ -15,6 +15,30 @@
       "file_path": "/packages/client/src/components/Article/Body/DeveloperToolsItems.tsx",
       "line_number": 58,
       "context": "const items = [\n {\n id: \"devtools-overview\",\n path: \"/developer-tools/overview\",\n pageType: PageType.devToolsOverview,\n // t(\"Common:Overview\") - already translated in the parent component\n translationKey: \"Common:Overview\",\n },\n {\n id: \"devtools-docs-connect\",\n path: \"/developer-tools/docs-connect\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/Body/NavMenuItems.tsx",
+      "line_number": 97,
+      "context": ");\n \n const groups = React.useMemo<NavMenuGroup[]>(() => {\n const overviewItem: NavMenuItem = {\n id: \"dashboard\",\n label: t(\"Common:Overview\"),\n icon: CatalogOverviewReactSvgUrl,\n onClick: go(\"/dashboard\"),\n };\n \n const folderToNavItem = (folder: TTreeFolder): NavMenuItem | null => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 259,
+      "context": "};\n };\n \n const overview: NavMenuItem = {\n id: \"dashboard\",\n label: t(\"Common:Overview\"),\n icon: CatalogOverviewReactSvgUrl,\n ...nav(\"/dashboard\"),\n };\n \n const roomsFolder = find(FolderType.Rooms);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
+      "line_number": 210,
+      "context": "// because a page reached from a sidebar item is easy to think of as a\n // landing screen shown once.\n navItemStep(\n OVERVIEW_ITEM_SELECTOR,\n t(\"DashboardTour:DashboardOverviewTitle\"),\n t(\"DashboardTour:DashboardOverview\", { overview: t(\"Common:Overview\") }),\n callbacks,\n LOG_LABEL,\n ),\n ].filter(Boolean) as Step[];\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NewArticle/index.tsx",
+      "line_number": 253,
+      "context": "const groups = React.useMemo<NavMenuGroup[]>(() => {\n // const underDevelopment = () => toastr.info(t(\"Common:UnderDevelopment\"));\n \n const overviewItem: NavMenuItem = {\n id: OVERVIEW_ID,\n label: t(\"Common:Overview\"),\n icon: CatalogOverviewReactSvgUrl,\n onClick: () => navigate(\"/dashboard\"),\n };\n \n const sharedWithMeHasNew =",
       "module": "/packages/client"
     }
   ],

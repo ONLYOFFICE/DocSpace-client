@@ -1,0 +1,29 @@
+{
+  "key_path": "WebSearchPoweredByNote",
+  "content": "Web search and web crawling are powered by Exa. No Exa account or additional setup is required. Usage is billed through your portal.",
+  "content_en_sha1_hash": "d68e5ab2447a25b70515dd54122dfcea4ba371b4",
+  "created_at": "2026-08-21T15:04:28.912Z",
+  "updated_at": "2026-08-21T15:05:08.963Z",
+  "comment": {
+    "text": "Informational note in the AI search settings providing details about the service provider and billing.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T15:05:08.963Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/WebSearchSaas.tsx",
+      "line_number": 114,
+      "context": "<div className={styles.wrapper}>\n <Text className={styles.description}>\n {t(\"Common:WebSearchEngineDescription\")}\n </Text>\n <Text className={classNames(styles.description, styles.poweredByNote)}>\n {t(\"Common:WebSearchPoweredByNote\")}\n </Text>\n \n {webSearchSettingsUrl ? (\n <Link\n className={classNames(generalStyles.learnMoreLink, styles.learnMore)}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

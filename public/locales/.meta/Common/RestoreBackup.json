@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-26T07:15:46.895Z",
-  "updated_at": "2026-08-21T08:01:33.735Z",
+  "updated_at": "2026-08-21T15:04:37.085Z",
   "comment": {
     "text": "This is a page title and a navigation item label in the portal settings. It refers to the action of restoring a backup of the DocSpace portal.",
     "is_auto": true,

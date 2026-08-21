@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-08-21T08:01:33.699Z",
+  "updated_at": "2026-08-21T15:04:37.036Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -33,6 +33,12 @@
       "file_path": "/packages/client/src/components/DashboardTour/tourSteps.ts",
       "line_number": 152,
       "context": "// from an empty portal to something in it.\n elementStep(\n CREATE_SECTION_SELECTOR,\n t(\"DashboardTour:DashboardCreateTitle\"),\n t(\"DashboardTour:DashboardCreate\", {\n files: t(\"Common:Files\"),\n }),\n callbacks,\n LOG_LABEL,\n ),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
+      "line_number": 107,
+      "context": "import type { AppPromoContentMap } from \"./AppPromoDialog.types\";\n \n export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({\n \"ai-files\": {\n title: t(\"Common:Files\"),\n subtitle: t(\"Common:FilesPromoSubtitle\"),\n description: t(\"Common:FilesPromoDescription\"),\n features: [\n {\n Icon: FilesManagementIcon,",
       "module": "/packages/client"
     },
     {
@@ -115,7 +121,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 178,
+      "line_number": 214,
       "context": ") => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };\n \n export const getFolderDescription = (\n t: TTranslation,\n access: AccessType,",
       "module": "/packages/client"
     },
@@ -150,12 +156,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 142,
-      "context": "const items: ModuleItem[] = [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:Files\"),\n description: t(\"Common:DashboardFilesDescription\"),\n installed: true,\n href: filesHref,\n buttonLabel: t(\"Common:Open\"),\n onAction: () => navigate(filesHref),",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useUploadToMyDocuments.tsx",
       "line_number": 232,
       "context": "if (uploaded > 0) {\n showSuccessToast(\n t as TFunction,\n uploaded,\n firstFileName,\n t(\"Common:Files\"),\n onOpenFiles,\n );\n }\n if (failed > 0) {\n toastr.error(t(\"Common:ErrorUploadingFiles\", { count: failed }));",
@@ -163,8 +163,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 340,
-      "context": "}}\n />\n </Text>\n <Text as=\"p\" className={styles.createSubtitle}>\n {t(\"Common:NewFilesDefaultPlace\", {\n sectionName: t(\"Common:Files\"),\n })}\n {isAdminOrOwner ? (\n <>\n {\" - \"}\n <Trans",
+      "line_number": 274,
+      "context": "const moduleItems: ModuleItem[] = [\n {\n id: \"ai-files\",\n icon: <CatalogFolderIcon />,\n title: t(\"Common:Files\"),\n description: t(\"Common:DashboardFilesDescription\"),\n installed: true,\n href: isGuest ? \"/shared-with-me/filter\" : \"/rooms/personal/filter\",\n },\n {",
       "module": "/packages/client"
     },
     {

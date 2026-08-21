@@ -3,7 +3,7 @@
   "content": "Hide menu",
   "content_en_sha1_hash": "93066aecf8f75fbb8e34e32fb582d55ae44b9cb5",
   "created_at": "2025-05-19T21:30:45.764Z",
-  "updated_at": "2026-08-21T08:01:33.693Z",
+  "updated_at": "2026-08-21T15:04:37.031Z",
   "comment": {
     "text": "This is a button label and tooltip content for an action that hides a menu or sidebar. It appears as a short label.",
     "is_auto": true,

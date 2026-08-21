@@ -3,7 +3,7 @@
   "content": "Templates",
   "content_en_sha1_hash": "f25b700ed9f092123a43acb205a6869342cf9dd6",
   "created_at": "2025-05-19T21:30:49.261Z",
-  "updated_at": "2026-08-21T08:01:33.700Z",
+  "updated_at": "2026-08-21T15:04:37.036Z",
   "comment": {
     "text": "This is a tab label that, when clicked, displays a list of available document templates.",
     "is_auto": true,

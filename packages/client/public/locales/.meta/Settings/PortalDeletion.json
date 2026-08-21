@@ -3,7 +3,7 @@
   "content": "Workspace deletion",
   "content_en_sha1_hash": "db1b77e1944c4cbf0625eb628091929384adf6b0",
   "created_at": "2026-08-13T22:44:29.799Z",
-  "updated_at": "2026-08-21T08:01:33.737Z",
+  "updated_at": "2026-08-21T15:04:37.086Z",
   "comment": {
     "text": "Section header or menu item label in the portal settings sidebar that directs users to the workspace deletion settings.",
     "is_auto": true,

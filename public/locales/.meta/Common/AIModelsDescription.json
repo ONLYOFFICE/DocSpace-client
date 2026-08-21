@@ -3,7 +3,7 @@
   "content": "Access a wide range of AI models through OpenRouter integration",
   "content_en_sha1_hash": "e00976345b438fa41be4a0aac757d8580d578f4e",
   "created_at": "2026-07-03T11:07:19.080Z",
-  "updated_at": "2026-08-21T08:01:33.874Z",
+  "updated_at": "2026-08-21T15:04:37.214Z",
   "comment": {
     "text": "Introductory text displayed at the top of the AI models settings section, describing the OpenRouter integration feature.",
     "is_auto": true,

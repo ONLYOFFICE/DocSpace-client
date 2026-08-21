@@ -3,7 +3,7 @@
   "content": "No form spaces yet here",
   "content_en_sha1_hash": "33eb3ade186f578c2ed608ee769e3620ab5f35f3",
   "created_at": "2026-08-14T17:26:19.542Z",
-  "updated_at": "2026-08-21T08:01:33.718Z",
+  "updated_at": "2026-08-21T15:04:37.055Z",
   "comment": {
     "text": "Heading for an empty state view shown when the Forms section contains no form spaces.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 484,
-      "context": "t(\"EmptyView:EmptyRootRoomUserTitle\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesTitle\"),\n )\n .with([FolderType.Forms, P._], () => t(\"EmptyView:EmptyRootFormsTitle\"))\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.SHARE, P._], () => t(\"Common:EmptyShareTitle\"))\n .with([FolderType.Favorites, P._], () => t(\"Common:EmptyFavoritesTitle\"))",
+      "line_number": 516,
+      "context": "t(\"EmptyView:EmptyRootRoomUserTitle\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesTitle\"),\n )\n .with([FolderType.Forms, P._], () => t(\"EmptyView:EmptyRootFormsTitle\"))\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.SHARE, P._], () => t(\"Common:EmptyShareTitle\"))\n .with([FolderType.Favorites, P._], () =>",
       "module": "/packages/client"
     }
   ],

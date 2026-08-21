@@ -187,13 +187,21 @@ const IntegrationsCardLoader = () => (
   </CollapsibleCardLoader>
 );
 
-// Mirrors the dev-tools grid ({@link ./DevToolsCard}): 6 tiles, each a title,
-// a two-line description and a learn-more link.
+// Mirrors the dev-tools grid ({@link ./DevToolsCard}): 7 tiles, each a title,
+// a two-line description and a learn-more link. The first one is the featured
+// Docs Connect tile and spans two columns, like in the real card.
 const DevToolsCardLoader = () => (
   <CollapsibleCardLoader>
     <div className={styles.devToolsGrid}>
-      {Array.from({ length: 6 }, (_, index) => (
-        <div key={index} className={styles.loaderDevToolTile}>
+      {Array.from({ length: 7 }, (_, index) => (
+        <div
+          key={index}
+          className={
+            index === 0
+              ? `${styles.loaderDevToolTile} ${styles.devToolTileFeatured}`
+              : styles.loaderDevToolTile
+          }
+        >
           <RectangleSkeleton width="120px" height="16px" borderRadius="3px" />
           <RectangleSkeleton width="100%" height="12px" borderRadius="3px" />
           <RectangleSkeleton width="70%" height="12px" borderRadius="3px" />

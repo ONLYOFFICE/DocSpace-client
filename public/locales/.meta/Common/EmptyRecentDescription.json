@@ -1,38 +1,26 @@
 {
   "key_path": "EmptyRecentDescription",
-  "content": "All recent files opened in the workspace end up in this section. Files are stored for 90 days",
-  "content_en_sha1_hash": "edf230a90642952400a5dc50d3f247546fc8be2a",
-  "created_at": "2026-08-12T11:00:19.462Z",
-  "updated_at": "2026-08-20T12:26:01.707Z",
+  "content": "Files you recently opened appear here and remain in the list for 90 days.",
+  "content_en_sha1_hash": "fe647bfc96484832235f3893abda2034634b5fa2",
+  "created_at": "2026-08-21T15:04:01.859Z",
+  "updated_at": "2026-08-21T15:09:20.534Z",
   "comment": {
-    "text": "Description text for an empty state view in the \"Recent\" section, informing users about where recently opened files are stored and their 90-day retention period.",
+    "text": "Description text for an empty state view in the \"Recent\" section, explaining the behavior and 90-day retention period for recently opened files.",
     "is_auto": true,
-    "updated_at": "2026-08-12T11:20:32.261Z",
+    "updated_at": "2026-08-21T15:09:20.534Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 360,
-      "context": ")\n .with([FolderType.SHARE, P._], () => t(\"Common:EmptyShareDescription\"))\n .with([FolderType.Recent, P._], () =>\n isFormsScope\n ? t(\"Common:EmptyRecentFormsDescription\")\n : t(\"Common:EmptyRecentDescription\"),\n )\n .with([FolderType.Favorites, P._], () =>\n isFormsScope\n ? t(\"Common:EmptyFavoritesFormsDescription\")\n : t(\"Common:EmptyFavoritesDescription\"),",
+      "line_number": 179,
+      "context": "if (isAgentsSectionScope(filterFolderType))\n return t(\"Common:EmptyRecentAgentsDescription\");\n if (isRoomsSectionScope(filterFolderType))\n return t(\"Common:EmptyRecentRoomsDescription\");\n \n return t(\"Common:EmptyRecentDescription\");\n };\n \n /**\n * Favorites is scoped per app the same way Recent is — see\n * `getRecentDescription`.",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-section-empty-view/index.tsx",
       "line_number": 115,
       "context": "<EmptyView\n icon={icon}\n title={t(\"Common:NoRecentFilesHereYet\", {\n defaultValue: \"No recent agents here yet\",\n })}\n description={t(\"Common:EmptyRecentDescription\", {\n defaultValue:\n \"Agents you've recently chatted with will appear here.\",\n })}\n options={null}\n />",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
-      "line_number": 149,
-      "context": "case FolderType.SHARE:\n return t(\"Common:EmptyShareDescription\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesDescription\");\n case FolderType.Recent:\n return t(\"Common:EmptyRecentDescription\");\n case FolderType.TRASH:\n return t(\"Common:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n appName: t(\"Common:AIAgents\"),\n });",
-      "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/sdk/src/app/(ai-agents)/_components/recent-empty-view/index.tsx",
-      "line_number": 75,
-      "context": "<EmptyView\n icon={icon}\n title={t(\"Common:NoRecentFilesHereYet\", {\n defaultValue: \"No recent files here yet\",\n })}\n description={t(\"Common:EmptyRecentDescription\", {\n defaultValue: \"Files you've recently opened will appear here.\",\n })}\n options={null}\n />\n );",
       "module": "/packages/sdk"
     },
     {

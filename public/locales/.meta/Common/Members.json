@@ -3,7 +3,7 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2026-08-20T12:26:01.685Z",
+  "updated_at": "2026-08-21T15:04:37.029Z",
   "comment": {
     "text": "This is a label for a section or item, referring to the users associated with a particular account or room.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/AccountsSidebar/index.tsx",
-      "line_number": 121,
+      "line_number": 122,
       "context": "const groups = React.useMemo<NavMenuGroup[]>(() => {\n const items: NavMenuItem[] = [\n {\n id: MEMBERS_ID,\n label: t(\"Common:Members\"),\n icon: getCatalogIconUrlByType(PageType.account),\n ...navToFilterRoute(PEOPLE_ROUTE_WITH_FILTER),\n },\n {\n id: GROUPS_ID,",
       "module": "/packages/client"
     },

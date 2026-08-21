@@ -3,7 +3,7 @@
   "content": "Backup",
   "content_en_sha1_hash": "dd96994d01e723dd6f9b0bdb6119722dbeb9faf0",
   "created_at": "2025-05-19T21:30:50.645Z",
-  "updated_at": "2026-08-19T13:26:37.673Z",
+  "updated_at": "2026-08-21T15:04:37.085Z",
   "comment": {
     "text": "This is a navigation item or section title in the portal settings, referring to the functionality for creating and managing backups of data.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
-      "line_number": 116,
+      "line_number": 117,
       "context": "switch (tKey) {\n case \"Customization\":\n return t(\"Settings:Customization\");\n case \"ManagementCategorySecurity\":\n return t(\"Settings:ManagementCategorySecurity\");\n case \"Common:Backup\":\n return t(\"Common:Backup\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"ManagementCategoryIntegration\":\n return t(\"Settings:ManagementCategoryIntegration\");",
       "module": "/packages/client"
     },

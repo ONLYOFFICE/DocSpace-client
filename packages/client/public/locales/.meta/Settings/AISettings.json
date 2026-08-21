@@ -3,7 +3,7 @@
   "content": "AI settings",
   "content_en_sha1_hash": "6dcf51d7630d6e48c2162d10dfcc2c61485912c7",
   "created_at": "2025-10-27T16:14:27.398Z",
-  "updated_at": "2026-08-19T13:26:37.674Z",
+  "updated_at": "2026-08-21T15:04:37.086Z",
   "comment": {
     "text": "This is a label for a section or link related to artificial intelligence settings. It appears in dialogs and portal settings pages.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/components/PortalSettingsSidebar/index.tsx",
-      "line_number": 129,
+      "line_number": 130,
       "context": "case \"StorageManagement\":\n return t(\"Settings:StorageManagement\");\n case \"Services\":\n return t(\"Settings:Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n case \"PortalDeletion\":\n return t(\"Settings:PortalDeletion\");\n case \"Common:PaymentsTitle\":\n return standalone ? t(\"Common:PaymentsTitle\") : t(\"Common:Billing\");\n case \"Common:Bonus\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/index.tsx",
-      "line_number": 130,
+      "line_number": 132,
       "context": "const navigate = useNavigate();\n const location = useLocation();\n const { t, ready } = useTranslation([\"Common\", \"Settings\"]);\n \n React.useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:AISettings\"));\n }, [ready, t]);\n \n const initKnowledge = React.useCallback(async () => {\n await fetchKnowledge?.();\n }, [fetchKnowledge]);",
       "module": "/packages/client"
     },

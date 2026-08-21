@@ -3,7 +3,7 @@
   "content": "AI provider",
   "content_en_sha1_hash": "f81714b57309b6c32065a1d1c2804f1c4658bb33",
   "created_at": "2025-11-21T08:21:51.316Z",
-  "updated_at": "2026-08-20T12:26:01.705Z",
+  "updated_at": "2026-08-21T15:04:37.049Z",
   "comment": {
     "text": "This is a noun, appearing as a short label or part of a sentence. It refers to the service that provides AI capabilities.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 252,
+      "line_number": 288,
       "context": ") => {\n return (\n match([standalone, isPortalAdmin])\n .with([true, true], () =>\n t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n )\n .with([false, true], () => t(\"Common:EmptyAIAgentsNotActiveYetTitle\"))\n // standalone user\n .with([true, false], () =>",
       "module": "/packages/client"
     },

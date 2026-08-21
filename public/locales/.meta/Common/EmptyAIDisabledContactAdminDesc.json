@@ -3,7 +3,7 @@
   "content": "Contact the Full admin to activate AI features and create agents with their own knowledge base, share them with your team, and let them run tasks across your apps.",
   "content_en_sha1_hash": "ec67dfdd37e60b06382cd19320c802376f50509a",
   "created_at": "2026-08-13T14:36:48.259Z",
-  "updated_at": "2026-08-20T12:26:01.696Z",
+  "updated_at": "2026-08-21T15:04:37.042Z",
   "comment": {
     "text": "Description text for an empty state or \"no access\" screen shown when AI features are disabled, instructing users to contact an administrator for activation.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 293,
+      "line_number": 329,
       "context": ".with([true, false], () =>\n t(\"Common:EmptyAIAgentsAIDisabledDescription\", {\n aiAgents: t(\"Common:AIAgents\"),\n }),\n )\n .otherwise(() => t(\"Common:EmptyAIDisabledContactAdminDesc\"));\n };\n \n const getAIAgentsAIEnabledDescription = (\n t: TTranslation,\n access: AccessType,",
       "module": "/packages/client"
     }

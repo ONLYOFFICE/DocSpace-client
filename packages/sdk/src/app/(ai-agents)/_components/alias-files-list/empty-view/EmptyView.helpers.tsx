@@ -144,9 +144,9 @@ export const getRootDescription = (
     case FolderType.SHARE:
       return t("Common:EmptyShareDescription");
     case FolderType.Favorites:
-      return t("Common:EmptyFavoritesDescription");
+      return t("Common:EmptyFavoritesAgentsDescription");
     case FolderType.Recent:
-      return t("Common:EmptyRecentDescription");
+      return t("Common:EmptyRecentAgentsDescription");
     case FolderType.TRASH:
       return t("Common:TrashFunctionalityDescription", {
         sectionName: t("Common:TrashSection"),

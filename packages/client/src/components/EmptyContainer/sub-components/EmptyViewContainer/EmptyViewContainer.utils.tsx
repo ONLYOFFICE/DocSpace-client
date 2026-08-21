@@ -162,6 +162,42 @@ const isRoomsSectionScope = (filterFolderType: Nullable<number[]>) => {
 };
 
 /**
+ * Recent is an aggregate section every app scopes to itself, so its empty
+ * description follows the same scope filter `getSectionAppName` reads.
+ */
+const getRecentDescription = (
+  t: TTranslation,
+  isFormsScope: boolean,
+  filterFolderType: Nullable<number[]>,
+) => {
+  if (isFormsScope) return t("Common:EmptyRecentFormsDescription");
+  if (isAgentsSectionScope(filterFolderType))
+    return t("Common:EmptyRecentAgentsDescription");
+  if (isRoomsSectionScope(filterFolderType))
+    return t("Common:EmptyRecentRoomsDescription");
+
+  return t("Common:EmptyRecentDescription");
+};
+
+/**
+ * Favorites is scoped per app the same way Recent is — see
+ * `getRecentDescription`.
+ */
+const getFavoritesDescription = (
+  t: TTranslation,
+  isFormsScope: boolean,
+  filterFolderType: Nullable<number[]>,
+) => {
+  if (isFormsScope) return t("Common:EmptyFavoritesFormsDescription");
+  if (isAgentsSectionScope(filterFolderType))
+    return t("Common:EmptyFavoritesAgentsDescription");
+  if (isRoomsSectionScope(filterFolderType))
+    return t("Common:EmptyFavoritesRoomsDescription");
+
+  return t("Common:EmptyFavoritesDescription");
+};
+
+/**
  * Localized name of the app the aggregate section (Recent/Favorites/Trash) is
  * scoped to, taken from the `folderType` scope filter the app puts on the
  * aggregate — see `getSectionTrashTarget`. An unscoped section belongs to the
@@ -355,14 +391,10 @@ export const getRootDescription = (
     )
     .with([FolderType.SHARE, P._], () => t("Common:EmptyShareDescription"))
     .with([FolderType.Recent, P._], () =>
-      isFormsScope
-        ? t("Common:EmptyRecentFormsDescription")
-        : t("Common:EmptyRecentDescription"),
+      getRecentDescription(t, isFormsScope, filterFolderType),
     )
     .with([FolderType.Favorites, P._], () =>
-      isFormsScope
-        ? t("Common:EmptyFavoritesFormsDescription")
-        : t("Common:EmptyFavoritesDescription"),
+      getFavoritesDescription(t, isFormsScope, filterFolderType),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       t("Common:ArchiveEmptyScreen"),
@@ -486,7 +518,11 @@ export const getRootTitle = (
       t("Common:EmptyScreenFolder"),
     )
     .with([FolderType.SHARE, P._], () => t("Common:EmptyShareTitle"))
-    .with([FolderType.Favorites, P._], () => t("Common:EmptyFavoritesTitle"))
+    .with([FolderType.Favorites, P._], () =>
+      isFormsScope
+        ? t("Common:EmptyFavoritesFormsTitle")
+        : t("Common:EmptyFavoritesTitle"),
+    )
     .with([FolderType.Recent, P._], () =>
       isFormsScope
         ? t("Common:NoRecentFormsHereYet")

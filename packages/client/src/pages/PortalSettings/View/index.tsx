@@ -41,6 +41,7 @@ import { useTranslation } from "react-i18next";
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { AI_ENUM, AI_SEARCH_ENUM } from "@docspace/ui-kit/billing/constants";
 import { DeviceType } from "@docspace/shared/enums";
+import componentLoader from "@docspace/shared/utils/component-loader";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
 import { Component as Customization } from "../categories/common";
@@ -72,7 +73,9 @@ import { Component as ServicesPage } from "../categories/payments/ServicesPage";
 // static import here would drag the chat stack onto the initial-load
 // critical path. The chunk is fetched only when the tab is opened.
 const AISettings = React.lazy(() =>
-  import("../categories/ai-settings").then((m) => ({
+  // See the AIAgentView lazy in pages/Home/View: componentLoader recovers
+  // from a chunk that no longer exists after a deploy.
+  componentLoader(() => import("../categories/ai-settings")).then((m) => ({
     default: m.Component,
   })),
 );

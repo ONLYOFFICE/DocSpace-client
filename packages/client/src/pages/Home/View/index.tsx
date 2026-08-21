@@ -39,6 +39,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { Navigate, useLocation, useNavigate } from "react-router";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
+import componentLoader from "@docspace/shared/utils/component-loader";
 import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@docspace/ui-kit/utils";
 import type { Nullable } from "@docspace/shared/types";
@@ -81,10 +82,14 @@ import OformsStore from "SRC_DIR/store/OformsStore";
 // ViewComponent statically — so a static import here would put all of that
 // on the initial-load critical path. The chunk is fetched only when the
 // chat view actually renders.
+// componentLoader, not a bare import: a stale chunk hash after a deploy (or
+// an aborted request in a throttled background tab) rejects the import, and
+// with nothing catching it the chat view just never renders. The loader
+// reloads the page once to pick up the new manifest.
 const AIAgentView = React.lazy(() =>
-  import("SRC_DIR/pages/Home/View/AIAgentView").then((m) => ({
-    default: m.AIAgentView,
-  })),
+  componentLoader(() => import("SRC_DIR/pages/Home/View/AIAgentView")).then(
+    (m) => ({ default: m.AIAgentView }),
+  ),
 );
 
 type ViewProps = UseContactsProps &

@@ -65,6 +65,7 @@ import { inject, observer } from "mobx-react";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { DeviceType } from "@docspace/shared/enums";
+import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
 
 import { PROFILE_CARD_HIDDEN_KEY } from "./ProfileCard";
 import styles from "../Dashboard.module.scss";
@@ -221,12 +222,16 @@ type DashboardLoaderProps = {
   // buttons aren't rendered on mobile ({@link ../index}) — skip their
   // placeholders there too.
   currentDeviceType?: TStore["settingsStore"]["currentDeviceType"];
+  // The dev-tools card is hidden for anyone without access to the section
+  // ({@link ./DevToolsCard}) — gate its skeleton on the same rule.
+  showDevTools?: boolean;
 };
 
 const DashboardLoaderComponent = ({
   isAdminOrOwner = false,
   isGuest = false,
   currentDeviceType,
+  showDevTools = false,
 }: DashboardLoaderProps) => {
   // The profile card is admin/owner-only and can be dismissed (persisted in
   // localStorage) — gate its skeleton on the same conditions as the real card
@@ -254,7 +259,7 @@ const DashboardLoaderComponent = ({
           showTourButton={showTourButton}
         />
         <IntegrationsCardLoader />
-        <DevToolsCardLoader />
+        {showDevTools ? <DevToolsCardLoader /> : null}
       </div>
     </div>
   );
@@ -266,6 +271,10 @@ export const DashboardLoader = inject<TStore>(
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     isGuest: userStore.user?.isVisitor ?? false,
     currentDeviceType: settingsStore.currentDeviceType,
+    showDevTools: hasDevToolsAccess(
+      userStore.user,
+      settingsStore.limitedAccessDevToolsForUsers,
+    ),
   }),
 )(observer(DashboardLoaderComponent));
 

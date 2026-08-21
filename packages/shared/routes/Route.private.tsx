@@ -42,6 +42,7 @@ import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
 import { AUTH_TOKEN_TIMEOUT_MS, isOAuthFrame } from "../utils/oauthToken";
 import { isPortalNotFoundRedirectClaimed } from "../utils/portalNotFound";
+import { hasDevToolsAccess } from "../utils/devToolsAccess";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -347,7 +348,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isDeveloperToolsPage) {
-      if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin && !user?.isOwner))
+      if (!hasDevToolsAccess(user, limitedAccessDevToolsForUsers))
         return <Navigate replace to="/error/403" />;
     }
 

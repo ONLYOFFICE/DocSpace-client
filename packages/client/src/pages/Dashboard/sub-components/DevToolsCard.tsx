@@ -66,6 +66,7 @@ import { Link } from "react-router";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 
@@ -83,6 +84,10 @@ type DevTool = {
 
 interface DevToolsCardProps {
   apiBasicLink?: string;
+  // The card's tiles lead into /developer-tools, which the route guard closes
+  // for guests and - when the portal limits access - for room admins and users.
+  // Hide the whole card for them rather than show links that answer with a 403.
+  showDevTools?: boolean;
 }
 
 const useDevTools = (props: DevToolsCardProps): DevTool[] => {
@@ -209,9 +214,14 @@ const DevToolTile = ({ tool }: { tool: DevTool }) => {
 };
 
 const DevToolsCardComponent = (props: DevToolsCardProps) => {
+  const { showDevTools } = props;
   const { t } = useTranslation(["Common"]);
   const tools = useDevTools(props);
   const organizationName = getBrandName("OrganizationName");
+
+  // The dashboard tour reads its anchors from the DOM, so the dev-tools step
+  // drops itself once this returns nothing - no tour change needed here.
+  if (!showDevTools) return null;
 
   return (
     // Anchor for the dashboard tour, on a wrapper rather than on the card, for
@@ -235,8 +245,12 @@ const DevToolsCardComponent = (props: DevToolsCardProps) => {
   );
 };
 
-export const DevToolsCard = inject<TStore>(({ settingsStore }) => ({
+export const DevToolsCard = inject<TStore>(({ settingsStore, userStore }) => ({
   apiBasicLink: settingsStore.apiBasicLink,
+  showDevTools: hasDevToolsAccess(
+    userStore.user,
+    settingsStore.limitedAccessDevToolsForUsers,
+  ),
 }))(observer(DevToolsCardComponent));
 
 export default DevToolsCard;

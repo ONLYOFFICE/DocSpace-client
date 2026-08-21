@@ -1,11 +1,9 @@
 {
   "ChangeData": "Daten und Passwort ändern",
   "ClickButtonBelow": "Wenn Sie sich mit Ihrer E-Mail-Adresse anmelden möchten, legen Sie bitte ein eigenes Passwort fest. <br/> Sobald dies erledigt ist, klicken Sie bitte auf die untenstehende Schaltfläche.",
-  "ContinueToProduct": "Weiter zu {{productName}}",
+  "ContinueToProduct": "Weiter zum Arbeitsbereich",
   "GeneratedPassword": "Generiertes Passwort",
-  "ProductNameDetail": "Name von {{productName}}",
+  "ProductNameDetail": "Name des Arbeitsbereichs",
   "ReviewAccountDetails": "Bitte überprüfen Sie Ihre Kontodetails:",
-  "SetEmailPassword": "Passwort festlegen",
-  "WelcomeSubtitle": "Ihr Bereich wurde erfolgreich erstellt. Überprüfen Sie Ihre Profildetails und beginnen Sie mit der Arbeit.",
   "YourProfileDetails": "Ihre Profildetails"
 }

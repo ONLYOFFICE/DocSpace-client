@@ -67,7 +67,6 @@ import { useNavigate } from "react-router";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import { DeviceType } from "@docspace/shared/enums";
 
 import ChangePasswordDialog from "SRC_DIR/components/dialogs/ChangePasswordDialog";
@@ -131,7 +130,11 @@ const ProfileCardComponent = ({
 
   return (
     <>
-      <div className={styles.profileCard}>
+      {/* Anchor for the dashboard tour's first step. On the card's own root, so
+          it is present exactly when the card is — the tour reads the DOM to
+          decide whether that step exists at all, and this card is both
+          admin-only and dismissable. */}
+      <div data-tour-id="dashboard-profile" className={styles.profileCard}>
         <IconButton
           className={styles.profileCardClose}
           iconName={CrossReactSvgUrl}
@@ -147,9 +150,7 @@ const ProfileCardComponent = ({
         <div className={styles.profileCardGrid}>
           <div className={styles.profileCardField}>
             <Text as="span" className={styles.profileCardLabel}>
-              {t("SocialAuthWelcomeDialog:ProductNameDetail", {
-                productName: getBrandName("ProductName"),
-              })}
+              {t("SocialAuthWelcomeDialog:ProductNameDetail")}
             </Text>
             <span className={styles.profileCardValueRow}>
               <Text as="span" className={styles.profileCardValue}>

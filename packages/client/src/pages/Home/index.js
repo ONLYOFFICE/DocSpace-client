@@ -70,6 +70,7 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import SectionTours from "SRC_DIR/components/Tour/SectionTours";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
 
 import {
   SectionFilterContent,
@@ -231,6 +232,7 @@ const PureHome = observer((props) => {
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
+    setCreateRoomFromTemplate,
 
     infoPanelStore,
   } = props;
@@ -286,6 +288,19 @@ const PureHome = observer((props) => {
     aiChatPanel.isChatPanelVisible &&
     (aiChatPanel.isChatPanelFullscreen || !isDesktop);
 
+  // On tablets/phones the opened AI chat panel takes over the whole main
+  // area, so navigating to another section via the left panel must hide it —
+  // otherwise the new section stays covered by the chat overlay. Desktop
+  // keeps the docked panel open across navigation by design.
+  const prevPathnameRef = React.useRef(location.pathname);
+  React.useEffect(() => {
+    if (prevPathnameRef.current === location.pathname) return;
+    prevPathnameRef.current = location.pathname;
+
+    if (!isDesktop && aiChatPanel.isChatPanelVisible)
+      aiChatPanel.closeChatPanel();
+  }, [location.pathname, isDesktop, aiChatPanel]);
+
   // The "Forms" section root gets its own quick-actions tile set (collect
   // forms + from template), resolved by the hook below.
   const isFormsSection = getCategoryType(location) === CategoryType.Forms;
@@ -317,10 +332,10 @@ const PureHome = observer((props) => {
     canCreateEncrypted,
     canCreateRooms,
     canCreateAgents,
-    userId,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
+    setCreateRoomFromTemplate,
     isDocumentsFolder,
     isRoom,
     isFormRoom,
@@ -620,9 +635,11 @@ const PureHome = observer((props) => {
   const isErrorAvailable =
     isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
 
+  const isPluginSection = isPluginPage();
+
   return (
     <>
-      {isSettingsPage ? null : isContactsPage || isProfile ? (
+      {isSettingsPage || isPluginSection ? null : isContactsPage || isProfile ? (
         <>
           <AccountsDialogs />
           {isProfile ? null : <ContactsSelectionArea />}
@@ -634,9 +651,13 @@ const PureHome = observer((props) => {
           <SectionTours />
         </>
       )}
-      <MediaViewer />
-      <UploadFileInputs />
-      <CreateButtonMobile />
+      {isPluginSection ? null : (
+        <>
+          <MediaViewer />
+          <UploadFileInputs />
+          <CreateButtonMobile />
+        </>
+      )}
       {/* When the quick-actions banner shows, switch the Section to the SDK's
           stickyTableHeader mode so the banner renders above the (now in-body,
           sticky) filter. The host is always `display: contents` (no layout
@@ -653,11 +674,12 @@ const PureHome = observer((props) => {
           scrollableBanner={showQuickActions}
           stickyTableHeader={showQuickActions}
         >
-          {!isErrorAvailable ||
-          isContactsPage ||
-          isProfile ||
-          isSettingsPage ||
-          showHeaderLoader ? (
+          {!isPluginSection &&
+          (!isErrorAvailable ||
+            isContactsPage ||
+            isProfile ||
+            isSettingsPage ||
+            showHeaderLoader) ? (
             <Section.SectionHeader>
               <SectionHeaderContent />
             </Section.SectionHeader>
@@ -671,7 +693,8 @@ const PureHome = observer((props) => {
             <SectionWarningContent />
           </Section.SectionWarning>
 
-          {!isChat &&
+          {!isPluginSection &&
+          !isChat &&
           !isErrorAvailable &&
           !isDisabledKnowledge &&
           shouldShowFilter &&
@@ -719,6 +742,7 @@ const PASS_THROUGH_PREFIXES = [
   "/accounts",
   "/contacts",
   "/developer-tools",
+  "/p/",
   "/portal-settings",
   "/profile",
 ];
@@ -1091,6 +1115,7 @@ export const Component = inject(
       templateGalleryAvailable: settingsStore.templateGalleryAvailable,
       setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
       setOformFromFolderId: oformsStore.setOformFromFolderId,
+      setCreateRoomFromTemplate: oformsStore.setCreateRoomFromTemplate,
 
       isErrorAIAgentNotAvailable,
       currentTab: aiRoomStore.currentTab,

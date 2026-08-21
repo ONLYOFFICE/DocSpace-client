@@ -1,5 +1,5 @@
 {
-  "FormsBlank": "Šī ir pati veidlapa — tieši tas, ko atver ikviens, kas seko jūsu saitei. Augšupielādējiet jau esošu PDF veidlapu vai izveidojiet tādu no veidņu galerijas, nepametot telpu.",
+  "FormsBlank": "Šī ir pati veidlapa — tieši tas, ko atver ikviens, kas seko jūsu saitei. Augšupielādējiet jau esošu PDF veidlapu vai izveidojiet tādu no veidņu galerijas, nepametot darbvietu.",
   "FormsBlankTitle": "Veidlapa, ko atver visi",
   "FormsComplete": "Iesniegtā kopija nonāk sadaļā {{complete}} un paliek tur, viena uz katru cilvēku. Ieslēdziet rezultātu apkopošanu, un katra atbilde kļūs arī par rindu izklājlapā — viena kolonna katram laukam, gatava kārtošanai vai diagrammām.",
   "FormsCompleteTitle": "Savāktās atbildes",
@@ -14,10 +14,8 @@
   "FormsInProgressTitle": "Iesākts, bet nepabeigts",
   "FormsItem": "Katra rinda ir vesela vākšana. Atveriet vienu, lai strādātu tajā, piespraudiet tās, kuras vadāt, vai ar trim punktiem uzaiciniet cilvēkus, nokopējiet saiti, kas atver veidlapu, un saglabājiet iestatījumus kā veidni.",
   "FormsItemTitle": "Darbs ar veidlapu telpu",
-  "FormsOpenSpace": "Atvērsim šo un paskatīsimies, kā ir salikta vākšana. Katras veidlapu telpas iekšienē ir vienas un tās pašas trīs lietas: pati veidlapa, atbildes, kas vēl tiek rakstītas, un tās, kas jau pienākušas.",
-  "FormsOpenSpaceTitle": "Ieejiet telpā",
   "FormsPlacesRecent": "{{recent}} un {{favorites}} tur pa rokai vākšanas, ko jūs vadāt.",
-  "FormsPlacesTemplates": "{{templates}} — telpu veidnes, ko esat saglabājuši.",
+  "FormsPlacesTemplates": "{{templates}} — veidlapu telpu veidnes, ko esat saglabājuši.",
   "FormsPlacesTitle": "Viss savā vietā",
   "FormsPlacesTrash": "{{trash}} — dzēstās telpas, atjaunojamas, kamēr neesat to iztukšojuši.",
   "FormsSpace": "Veidlapu telpa ir viena vākšana no sākuma līdz beigām: tukšā PDF veidlapa, cilvēki, kas to aizpilda, un katra atbilde, kas atnāk atpakaļ. Izveidosim vienu un ieskatīsimies iekšā.",

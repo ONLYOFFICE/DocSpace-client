@@ -67,7 +67,6 @@ import styles from "./TemplateAccessSettingsPanel.module.scss";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TemplateAccessSettingsContainer =
 	| {
@@ -357,9 +356,7 @@ const TemplateAccessSettingsPanel = ({
 							/>
 						</Heading>
 						<Text className={styles.description}>
-							{t("Files:TemplateAvailableDescription", {
-								productName: getBrandName("ProductName"),
-							})}
+							{t("Files:TemplateAvailableDescription")}
 						</Text>
 					</div>
 					<div className={isAvailable ? styles.bodyDisabled : styles.body}>
@@ -460,9 +457,7 @@ const TemplateAccessSettingsPanel = ({
 							/>
 						</Heading>
 						<Text className={styles.description}>
-							{t("Files:TemplateAvailableDescription", {
-								productName: getBrandName("ProductName"),
-							})}
+							{t("Files:TemplateAvailableDescription")}
 						</Text>
 					</div>
 					<div className={isAvailable ? styles.bodyDisabled : styles.body}>

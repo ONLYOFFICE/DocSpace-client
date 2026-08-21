@@ -1,26 +1,26 @@
 {
   "key_path": "InviteViaLinkDescriptionRoomMembers",
-  "content": "Create a universal link for {{productName}} members for self-authorization in the room.",
-  "content_en_sha1_hash": "3946ab9dd032f1a4b4a2ac8747407b48e8d56376",
-  "created_at": "2025-05-26T07:15:53.269Z",
-  "updated_at": "2026-07-07T08:59:21.766Z",
+  "content": "Create a universal link for members for self-authorization in the room.",
+  "content_en_sha1_hash": "ed87a036f00fe430e6bde8784ed8a51bdbc87046",
+  "created_at": "2026-08-12T11:00:25.337Z",
+  "updated_at": "2026-08-20T07:54:31.659Z",
   "comment": {
-    "text": "This is a descriptive sentence displayed below a link generation option. It explains that the link allows existing {{productName}} members to self-authorize and join the room.",
+    "text": "Description text in the Invite Panel's External Links section, shown when generating a link for existing workspace members to access a room.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:14:00.558Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T11:14:31.004Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 196,
-      "context": ": t(\"Common:InviteViaLinkDescriptionAgentMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : allowInvitingGuests\n ? t(\"Common:InviteViaLinkDescriptionRoomGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomMembers\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return (\n <div className={styles.externalLink} ref={inputsRef}>",
+      "line_number": 193,
+      "context": ": t(\"Common:InviteViaLinkDescriptionAgentMembers\")\n : allowInvitingGuests\n ? roomType === RoomsType.FormRoom\n ? t(\"Common:InviteViaLinkDescriptionFormSpaceGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomMembers\");\n \n return (\n <div className={styles.externalLink} ref={inputsRef}>\n <Heading\n className={classNames(styles.subHeader, {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/ExternalLinks.tsx",
-      "line_number": 228,
-      "context": ": t(\"Common:InviteViaLinkDescriptionAgentMembers\", {\n productName: getBrandName(\"ProductName\"),\n })\n : allowInvitingGuests\n ? t(\"Common:InviteViaLinkDescriptionRoomGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomMembers\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n return (\n <div className={styles.externalLink} ref={inputsRef}>",
+      "line_number": 225,
+      "context": "? allowInvitingGuests\n ? t(\"Common:InviteViaLinkDescriptionAgentGuest\")\n : t(\"Common:InviteViaLinkDescriptionAgentMembers\")\n : allowInvitingGuests\n ? t(\"Common:InviteViaLinkDescriptionRoomGuest\")\n : t(\"Common:InviteViaLinkDescriptionRoomMembers\");\n \n return (\n <div className={styles.externalLink} ref={inputsRef}>\n <Heading\n className={classNames(styles.subHeader, {",
       "module": "/packages/sdk"
     }
   ],
@@ -32,7 +32,10 @@
       "approved_at": null
     },
     "ru": {
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
     }
   }
 }

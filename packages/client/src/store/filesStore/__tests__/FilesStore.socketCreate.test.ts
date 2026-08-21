@@ -104,6 +104,25 @@ describe("FilesStore.redirectToParent — characterization", () => {
     expect(String(navigate.mock.calls[0][0])).toContain("/rooms/shared/filter");
   });
 
+  it("navigates to the form templates listing when a form template is removed", () => {
+    const store = createTestFilesStore({
+      selectedFolderStore: { roomType: RoomsType.FormRoom },
+    });
+
+    store.redirectToParent(
+      { id: 5 } as never,
+      [pathPart(1), pathPart(5)],
+      true, // isRoom
+      true, // isTemplate
+      FolderType.RoomTemplates,
+    );
+
+    expect(navigate).toHaveBeenCalledTimes(1);
+    const url = String(navigate.mock.calls[0][0]);
+    expect(url).toContain("/forms/filter");
+    expect(url).toContain("searchArea=FormTemplates");
+  });
+
   it("does nothing when the removed id is not part of the path", () => {
     const store = createTestFilesStore();
 

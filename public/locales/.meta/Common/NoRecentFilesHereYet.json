@@ -3,7 +3,7 @@
   "content": "No recent files here yet",
   "content_en_sha1_hash": "cee075c841fe659f097af4b5747f13df185d5c6d",
   "created_at": "2026-05-19T19:03:20.273Z",
-  "updated_at": "2026-08-06T08:04:19.858Z",
+  "updated_at": "2026-08-20T12:26:01.709Z",
   "comment": {
     "text": "Placeholder text displayed in the \"Recent\" files view when no files have been recently accessed.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 453,
-      "context": ".with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.SHARE, P._], () => t(\"Common:EmptyShareTitle\"))\n .with([FolderType.Favorites, P._], () => t(\"Common:EmptyFavoritesTitle\"))\n .with([FolderType.Recent, P._], () => t(\"Common:NoRecentFilesHereYet\"))\n .with([FolderType.Archive, P._], () => t(\"Common:ArchiveEmptyScreenHeader\"))\n .with([FolderType.TRASH, P._], () => t(\"Common:EmptyScreenFolder\"))\n .otherwise(() => \"\");\n };",
+      "line_number": 492,
+      "context": ".with([FolderType.SHARE, P._], () => t(\"Common:EmptyShareTitle\"))\n .with([FolderType.Favorites, P._], () => t(\"Common:EmptyFavoritesTitle\"))\n .with([FolderType.Recent, P._], () =>\n isFormsScope\n ? t(\"Common:NoRecentFormsHereYet\")\n : t(\"Common:NoRecentFilesHereYet\"),\n )\n .with([FolderType.Archive, P._], () => t(\"Common:ArchiveEmptyScreenHeader\"))\n .with([FolderType.TRASH, P._], () => t(\"Common:NoItemsHereYet\"))\n .otherwise(() => \"\");\n };",
       "module": "/packages/client"
     },
     {
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/alias-files-list/empty-view/EmptyView.helpers.tsx",
-      "line_number": 85,
-      "context": "case FolderType.SHARE:\n return t(\"Common:EmptyShareTitle\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesTitle\");\n case FolderType.Recent:\n return t(\"Common:NoRecentFilesHereYet\");\n case FolderType.TRASH:\n return t(\"Common:EmptyScreenFolder\");\n case FolderType.USER:\n return t(\"Common:EmptyScreenFolder\");\n default:",
+      "line_number": 82,
+      "context": "case FolderType.SHARE:\n return t(\"Common:EmptyShareTitle\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesTitle\");\n case FolderType.Recent:\n return t(\"Common:NoRecentFilesHereYet\");\n case FolderType.TRASH:\n return t(\"Common:NoItemsHereYet\");\n case FolderType.USER:\n return t(\"Common:EmptyScreenFolder\");\n default:",
       "module": "/packages/sdk"
     },
     {
@@ -38,7 +38,7 @@
     {
       "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/empty-view/EmptyView.helpers.tsx",
       "line_number": 71,
-      "context": "case FolderType.SHARE:\n return t(\"Common:EmptyShareTitle\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesTitle\");\n case FolderType.Recent:\n return t(\"Common:NoRecentFilesHereYet\");\n case FolderType.TRASH:\n return t(\"Common:EmptyScreenFolder\");\n case FolderType.USER:\n return t(\"Common:EmptyScreenFolder\");\n default:",
+      "context": "case FolderType.SHARE:\n return t(\"Common:EmptyShareTitle\");\n case FolderType.Favorites:\n return t(\"Common:EmptyFavoritesTitle\");\n case FolderType.Recent:\n return t(\"Common:NoRecentFilesHereYet\");\n case FolderType.TRASH:\n return t(\"Common:NoItemsHereYet\");\n case FolderType.USER:\n return t(\"Common:EmptyScreenFolder\");\n default:",
       "module": "/packages/sdk"
     }
   ],

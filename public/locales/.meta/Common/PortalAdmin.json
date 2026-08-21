@@ -1,50 +1,50 @@
 {
   "key_path": "PortalAdmin",
-  "content": "{{productName}} admin",
-  "content_en_sha1_hash": "c2ab2049e1e222685c5af15f68e5f6c5b11e8747",
-  "created_at": "2025-05-19T21:30:47.411Z",
-  "updated_at": "2026-07-03T11:08:02.874Z",
+  "content": "Full admin",
+  "content_en_sha1_hash": "8b16bbd40111e55863b1d7ea4eb0cf527889bddf",
+  "created_at": "2026-08-13T14:37:01.841Z",
+  "updated_at": "2026-08-19T13:26:37.747Z",
   "comment": {
-    "text": "This is a label for a user type, referring to the administrator of the entire {{productName}} portal. It appears in tooltips, dropdown menus, and user selection interfaces.",
+    "text": "Label for the highest-level user role appearing in tooltips, dropdown menus, and selection lists; includes a product name variable when used within tooltip text.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:46:18.459Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:46:08.460Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
-      "line_number": 151,
-      "context": "tooltipContent={\n <>\n <Text isBold>{t(\"ManagerTypesDescription\")}</Text>\n <br />\n <Text isBold>\n {t(\"PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <Text>\n {t(\"AdministratorDescription\", {",
+      "line_number": 150,
+      "context": "tooltipContent={\n <>\n <Text isBold>{t(\"ManagerTypesDescription\")}</Text>\n <br />\n <Text isBold>\n {t(\"PortalAdmin\")}\n </Text>\n <Text>\n {t(\"AdministratorDescription\")}\n </Text>\n <br />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
-      "line_number": 92,
-      "context": "];\n \n if (isOwner) {\n typeOptions.unshift({\n key: UserTypes.PortalAdmin,\n label: t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n }),\n onClick: setTypePortalAdmin,\n });\n }",
+      "line_number": 91,
+      "context": "];\n \n if (isOwner) {\n typeOptions.unshift({\n key: UserTypes.PortalAdmin,\n label: t(\"Common:PortalAdmin\"),\n onClick: setTypePortalAdmin,\n });\n }\n \n if (!ready) return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
       "line_number": 683,
-      "context": "? [\n {\n id: \"accounts-add_administrator\",\n className: \"main-button_drop-down\",\n icon: PersonAdminReactSvgUrl,\n label: t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n }),\n onClick: () => this.inviteUser(EmployeeType.Admin),\n \"data-type\": EmployeeType.Admin,\n action: EmployeeType.Admin,",
+      "context": "? [\n {\n id: \"accounts-add_administrator\",\n className: \"main-button_drop-down\",\n icon: PersonAdminReactSvgUrl,\n label: t(\"Common:PortalAdmin\"),\n onClick: () => this.inviteUser(EmployeeType.Admin),\n \"data-type\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: \"administrator\",\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/User.tsx",
-      "line_number": 144,
-      "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: getBrandName(\"ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: getBrandName(\"ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl\n : isExpect",
+      "line_number": 143,
+      "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\")\n : t(\"Common:PortalAdmin\")\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl\n : isExpect",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
       "line_number": 358,
-      "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:",
+      "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\");\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
       "line_number": 358,
-      "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:",
+      "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\");\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:",
       "module": "/packages/shared"
     }
   ],
@@ -179,7 +179,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -194,6 +194,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -230,12 +236,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

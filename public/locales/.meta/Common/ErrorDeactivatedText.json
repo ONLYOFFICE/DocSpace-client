@@ -1,26 +1,26 @@
 {
   "key_path": "ErrorDeactivatedText",
-  "content": "This {{productName}} is deactivated",
-  "content_en_sha1_hash": "192b71af1a142211b0f1573c4d3e056a55e4111b",
-  "created_at": "2025-05-19T21:30:45.063Z",
-  "updated_at": "2026-05-15T14:00:06.930Z",
+  "content": "This workspace is deactivated",
+  "content_en_sha1_hash": "dfc28ba3ad7b117b34654d7003b6c384ea87e5b1",
+  "created_at": "2026-08-13T22:44:04.003Z",
+  "updated_at": "2026-08-14T15:09:33.215Z",
   "comment": {
-    "text": "Error text displayed when the product is deactivated. `{{productName}}` will be replaced with the name of the ONLYOFFICE product (e.g., \"DocSpace\").",
+    "text": "Error header displayed in the ErrorContainer when a user attempts to access a deactivated workspace.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:53:21.723Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:09:33.215Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/libs/ui-kit/errors/ErrorUnavailable.tsx",
-      "line_number": 49,
-      "context": "return (\n ready && (\n <div className={styles.errorUnavailableWrapper}>\n <ErrorContainer\n headerText={t(\"ErrorDeactivatedText\", {\n productName: getBrandName(\"ProductName\") ?? \"\",\n })}\n />\n </div>\n )",
+      "line_number": 48,
+      "context": "return (\n ready && (\n <div className={styles.errorUnavailableWrapper}>\n <ErrorContainer\n headerText={t(\"ErrorDeactivatedText\")}\n />\n </div>\n )\n );\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/shared/components/errors/ErrorUnavailable.tsx",
-      "line_number": 50,
-      "context": "return (\n ready && (\n <div className={styles.errorUnavailableWrapper}>\n <ErrorContainer\n headerText={t(\"ErrorDeactivatedText\", {\n productName: getBrandName(\"ProductName\"),\n })}\n />\n </div>\n )",
+      "line_number": 49,
+      "context": "return (\n ready && (\n <div className={styles.errorUnavailableWrapper}>\n <ErrorContainer\n headerText={t(\"ErrorDeactivatedText\")}\n />\n </div>\n )\n );\n };",
       "module": "/packages/shared"
     }
   ],
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

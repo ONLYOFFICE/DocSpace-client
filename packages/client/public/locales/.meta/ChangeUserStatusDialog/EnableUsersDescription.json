@@ -1,20 +1,20 @@
 {
   "key_path": "EnableUsersDescription",
-  "content": "If you enable these users, they will be able to log in to {{productName}} again and access their documents and data.",
-  "content_en_sha1_hash": "61e8d10c36f1b30de48b0856fadfef112538af82",
-  "created_at": "2025-05-19T21:30:56.975Z",
-  "updated_at": "2026-05-15T14:00:06.647Z",
+  "content": "If you enable these users, they will be able to log in to the workspace again and access their documents and data.",
+  "content_en_sha1_hash": "3875050ac87f0dedab741935ac8eaf2d580b07a0",
+  "created_at": "2026-08-13T22:44:32.903Z",
+  "updated_at": "2026-08-14T15:20:46.750Z",
   "comment": {
-    "text": "This is a description in a dialog box that appears when enabling multiple users. It explains that the selected users will regain login access to {{productName}} and their documents.",
+    "text": "Description text in a dialog that explains the consequences of enabling selected users, specifically regarding their ability to regain workspace access and view their data.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:03:37.325Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:20:46.750Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 213,
-      "context": "? isGuests\n ? t(\"EnableGuestDescription\", { productName: getBrandName(\"ProductName\") })\n : t(\"EnableUserDescription\", { productName: getBrandName(\"ProductName\") })\n : isGuests\n ? t(\"EnableGuestsDescription\", { productName: getBrandName(\"ProductName\") })\n : t(\"EnableUsersDescription\", { productName: getBrandName(\"ProductName\") });\n \n buttonLabelSave = t(\"Common:Enable\");\n }\n \n return (",
+      "line_number": 208,
+      "context": "? isGuests\n ? t(\"EnableGuestDescription\")\n : t(\"EnableUserDescription\")\n : isGuests\n ? t(\"EnableGuestsDescription\")\n : t(\"EnableUsersDescription\");\n \n buttonLabelSave = t(\"Common:Enable\");\n }\n \n return (",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

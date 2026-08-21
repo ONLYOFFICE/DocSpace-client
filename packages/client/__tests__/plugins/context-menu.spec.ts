@@ -137,7 +137,9 @@ test.describe("Context Menu Sample Plugin", () => {
 
     await filteredItem.click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Office document action triggered for file:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "info");
   });
@@ -258,7 +260,9 @@ test.describe("Context Menu Sample Plugin", () => {
 
     await groupItem.click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Group action:" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
   });

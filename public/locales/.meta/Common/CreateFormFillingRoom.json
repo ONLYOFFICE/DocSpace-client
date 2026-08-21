@@ -1,9 +1,9 @@
 {
   "key_path": "CreateFormFillingRoom",
-  "content": "Create Form filling room",
-  "content_en_sha1_hash": "2c00eeebf71b5e09d7795d3137d22acce6f3542a",
+  "content": "Create Form filling space",
+  "content_en_sha1_hash": "ead38a8c5f93828b6034361746b030e5d3fdd367",
   "created_at": "2025-05-19T21:30:43.893Z",
-  "updated_at": "2026-05-15T14:00:06.623Z",
+  "updated_at": "2026-08-17T19:42:56.947Z",
   "comment": {
     "text": "This is a button label. It appears on a screen where users can choose to create different types of rooms, specifically for initiating the creation of a form filling room.",
     "is_auto": true,

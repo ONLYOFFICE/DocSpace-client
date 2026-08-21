@@ -67,7 +67,6 @@ import { useTranslation } from "react-i18next";
 
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
-import { getBrandName } from "@docspace/shared/constants/brands";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg";
@@ -149,9 +148,7 @@ const RoomsEmptyView = ({ isFiltered, isArchive }: RoomsEmptyViewProps) => {
   const getDescription = () => {
     if (isFiltered) return t("Common:EmptyFilterRoomsDescription");
     if (isArchive)
-      return t("Common:ArchiveEmptyScreen", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Common:ArchiveEmptyScreen");
     return t("Common:EmptyRoomsDescriptionText", {
       sectionName: t("Common:Rooms"),
     });

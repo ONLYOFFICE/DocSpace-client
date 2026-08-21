@@ -51,6 +51,7 @@ import Header from "./sub-components/Header";
 import Info from "./sub-components/Info";
 import Footer from "./sub-components/Footer";
 import { SettingsPluginDialogProps } from "./SettingsPluginDialog.types";
+import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
 const SettingsPluginDialog = ({
   plugin,
@@ -63,16 +64,12 @@ const SettingsPluginDialog = ({
 
   onClose,
   onDelete,
-  updatePlugin,
 }: SettingsPluginDialogProps) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 
-  const {
-    saveButton,
-    settings,
-    onLoad,
-    settingsComponent,
-  } = pluginSettings ? pluginSettings : {};
+  const { saveButton, settings, onLoad, settingsComponent } = pluginSettings
+    ? pluginSettings
+    : {};
 
   const [customSettingsProps, setCustomSettingsProps] = useState(settings);
 
@@ -134,19 +131,21 @@ const SettingsPluginDialog = ({
               pluginName={plugin.name}
               component={settingsComponent}
             />
-          ) : (
+          ) : customSettingsProps ? (
             <WrappedComponent
               pluginName={plugin.name}
-              component={{
-                component: PluginComponents.box,
-                props: customSettingsProps,
-              }}
+              component={
+                {
+                  component: PluginComponents.box,
+                  props: customSettingsProps,
+                } satisfies BoxGroup
+              }
               saveButton={saveButtonProps}
               setSaveButtonProps={setSaveButtonProps}
               setModalRequestRunning={setModalRequestRunning}
               modalRequestRunning={modalRequestRunning}
             />
-          )}
+          ) : null}
           <Info
             t={t}
             plugin={plugin}
@@ -172,7 +171,6 @@ const SettingsPluginDialog = ({
           setModalRequestRunning={setModalRequestRunning}
           onCloseAction={onCloseAction}
           modalRequestRunning={modalRequestRunning}
-          updatePlugin={updatePlugin}
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -188,7 +186,6 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     setCurrentSettingsDialogPlugin,
     setDeletePluginDialogVisible,
     setDeletePluginDialogProps,
-    updatePlugin,
     reactSettingsSaveButtonState,
   } = pluginStore;
 
@@ -224,7 +221,6 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     pluginSettings,
     reactSettingsSaveButtonState,
     settingsPluginDialogVisible,
-    updatePlugin,
 
     onClose,
     onDelete,

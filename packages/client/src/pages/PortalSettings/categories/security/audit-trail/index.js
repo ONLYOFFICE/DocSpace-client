@@ -48,7 +48,6 @@ import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const AuditTrail = (props) => {
   const {
@@ -99,9 +98,7 @@ const AuditTrail = (props) => {
   if (auditTrailUsers.length === 0) {
     return (
       <EmptyScreenContainer
-        descriptionText={t("AuditSubheader", {
-          productName: getBrandName("ProductName"),
-        })}
+        descriptionText={t("AuditSubheader")}
         imageSrc={
           theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl
         }
@@ -115,9 +112,7 @@ const AuditTrail = (props) => {
     securityLifetime.auditTrailLifeTime && (
       <HistoryMainContent
         t={t}
-        subHeader={t("AuditSubheader", {
-          productName: getBrandName("ProductName"),
-        })}
+        subHeader={t("AuditSubheader")}
         latestText={t("LoginLatestText")}
         storagePeriod={t("StoragePeriod")}
         saveButtonLabel={t("Common:SaveButton")}

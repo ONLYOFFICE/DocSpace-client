@@ -1,6 +1,6 @@
 {
   "InvitationLanguage": "Γλώσσα πρόσκλησης",
-  "InviteMembersManuallyDescription": "Πρόσκληση νέων μελών στο {{productName}} προσωπικά μέσω email",
+  "InviteMembersManuallyDescription": "Πρόσκληση νέων μελών στον χώρο εργασίας προσωπικά μέσω email",
   "InviteMembersSearchPlaceholder": "Πρόσκληση μελών μέσω email",
-  "InviteViaLinkDescriptionAccounts": "Δημιουργήστε μια καθολική σύνδεση για αυτοεξουσιοδότηση στο {{productName}}"
+  "InviteViaLinkDescriptionAccounts": "Δημιουργήστε μια καθολική σύνδεση για αυτοεξουσιοδότηση στον χώρο εργασίας"
 }

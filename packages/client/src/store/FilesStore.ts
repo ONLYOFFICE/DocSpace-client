@@ -240,6 +240,11 @@ class FilesStore {
 
   clientSearchGeneration = 0;
 
+  pendingClientSearch: Nullable<{
+    folderId: number | string;
+    query: string;
+  }> = null;
+
   // the persisted view value is trusted to be a valid TViewAs
   // (it is only ever written via setViewAs).
   privateViewAs = (!isDesktop() && storageViewAs !== "tile"
@@ -1409,6 +1414,12 @@ class FilesStore {
     setClientSearchQueryImpl(this, query);
 
   clearClientSearch = () => clearClientSearchImpl(this);
+
+  setPendingClientSearch = (
+    pending: Nullable<{ folderId: number | string; query: string }>,
+  ) => {
+    this.pendingClientSearch = pending;
+  };
 
   ensureEncryptedFilenameForFile = (file: TFile) =>
     ensureEncryptedFilenameForFileImpl(this, file);

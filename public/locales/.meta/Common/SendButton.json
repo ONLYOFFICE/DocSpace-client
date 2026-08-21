@@ -3,7 +3,7 @@
   "content": "Send",
   "content_en_sha1_hash": "9bc2575c3930437e80555f78757b783c842e8e66",
   "created_at": "2025-05-19T21:30:48.532Z",
-  "updated_at": "2026-05-24T17:27:49.077Z",
+  "updated_at": "2026-08-07T15:05:26.439Z",
   "comment": {
     "text": "This is the label for a button that initiates an action, such as sending a request or confirming a change (e.g., email or password).",
     "is_auto": true,
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 359,
+      "line_number": 360,
       "context": "isDisabled={loading}\n key=\"RecoverySendBtn\"\n size={ButtonSize.normal}\n id=\"recover-access-modal_send\"\n className={styles.recoverButtonDialog}\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendButton\")}\n onClick={onSendRecoverRequest}\n aria-label=\"Send recover request\"\n testId=\"recover_access_modal_submit_button\"\n />\n <Button",
       "module": "/packages/shared"
     }

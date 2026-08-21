@@ -3,7 +3,7 @@
   "content": "{{recent}} and {{favorites}} keep the collections you are running at hand.",
   "content_en_sha1_hash": "77f4b78e506f8e8a991c65c9af455fe3db06fa32",
   "created_at": "2026-08-06T14:20:53.756Z",
-  "updated_at": "2026-08-06T14:41:28.417Z",
+  "updated_at": "2026-08-13T10:58:03.048Z",
   "comment": {
     "text": "Tooltip in an onboarding tour explaining how specific sections help manage collections. The {{recent}} and {{favorites}} placeholders represent the names of navigation items.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FormsTour/tourSteps.ts",
-      "line_number": 155,
-      "context": "// wording in the tooltip is the wording on screen. One sentence each, read as\n // a single paragraph; Templates is behind the same admin gate in the sidebar\n // (ClientArticleSidebar) as here, so for everyone else its sentence drops\n // rather than pointing at an item they do not have.\n const places = [\n t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {",
+      "line_number": 147,
+      "context": "// wording in the tooltip is the wording on screen. One bullet each; Templates\n // is behind the same admin gate in the sidebar (ClientArticleSidebar) as\n // here, so for everyone else its bullet drops rather than pointing at an item\n // they do not have.\n const places = [\n t(\"FormsTour:FormsPlacesRecent\", {\n recent: t(\"Common:Recent\"),\n favorites: t(\"Common:Favorites\"),\n }),\n canUseTemplates &&\n t(\"FormsTour:FormsPlacesTemplates\", {",
       "module": "/packages/client"
     }
   ],

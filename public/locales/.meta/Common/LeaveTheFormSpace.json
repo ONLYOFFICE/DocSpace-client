@@ -1,0 +1,41 @@
+{
+  "key_path": "LeaveTheFormSpace",
+  "content": "Leave the space",
+  "content_en_sha1_hash": "31c02d4e30a5bc889c1f1f6ff92ea56f28665c20",
+  "created_at": "2026-08-17T17:22:55.219Z",
+  "updated_at": "2026-08-17T17:24:30.779Z",
+  "comment": {
+    "text": "Dialog title, checkbox label, and menu item label used when exiting a Form Space.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:24:30.779Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 90,
+      "context": "}, []);\n \n const titleText = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Common:LeaveRoomDescription\")\n : t(\"Common:WantLeaveRoom\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
+      "line_number": 207,
+      "context": ": t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const selectorComponent = excludeReady ? (\n <PeopleSelector\n withCancelButton",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 911,
+      "context": "id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAIAgent\n ? t(\"Common:LeaveTheAgent\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: self.onLeaveRoom,\n disabled: isKnowledgeOrResult\n ? false",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

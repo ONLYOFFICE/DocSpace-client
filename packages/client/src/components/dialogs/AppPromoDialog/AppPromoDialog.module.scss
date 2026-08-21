@@ -185,6 +185,15 @@
   // so the illustration never grows taller than the content beside it.
   overflow: hidden;
 
+  // The preview is meant to read as a screenshot running off the edge of the
+  // dialog, so it has to escape the body's inline padding: pull the wrapper out
+  // by that padding, putting its trailing edge flush with the dialog border
+  // instead of inset from it. The kit sets the body's bottom padding to
+  // padding-y/2 when there's a footer; cancel that too so nothing shows as a
+  // gap between the cropped image and the footer.
+  margin-inline-end: calc(-1 * var(--modal-dialog-padding-x, 16px));
+  margin-block-end: calc(-1 * var(--modal-dialog-padding-y, 16px) / 2);
+
   // Tablet and mobile: drop the illustration entirely, keep only the
   // feature list.
   @include mixins.tablet-and-below {
@@ -193,14 +202,22 @@
 }
 
 .illustration {
-  // Inline SVG (not <img>), so object-fit doesn't apply. Pin it to the top of
-  // the wrapper at full width; its natural aspect ratio sets the height and the
-  // wrapper's overflow:hidden crops whatever spills past the feature-list
-  // height — no empty space below, image bleeds toward the footer.
+  // PNG preview in an <img>, pinned to the top-start corner of the wrapper.
+  //
+  // Sized by HEIGHT, not width: the preview is wider than it is tall (~3:2), so
+  // at `width: 100%` it ends up shorter than the feature list and leaves a white
+  // strip above the footer. Filling the block axis instead makes it spill past
+  // the wrapper's inline edge, where overflow:hidden crops it — so the
+  // screenshot reads as continuing off the edge of the dialog.
+  //
+  // Deliberately no `object-fit`: the overflow *is* the design. object-fit only
+  // acts once both axes are constrained, and contain/cover would letterbox or
+  // rescale the preview to sit fully inside the cell, killing the bleed.
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: auto;
+  block-size: 100%;
+  min-block-size: 100%;
   display: block;
 }

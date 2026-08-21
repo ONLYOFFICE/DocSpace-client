@@ -3,7 +3,7 @@
   "content": "The shared room will appear here.",
   "content_en_sha1_hash": "ec24ff68dc23489ef8e9a00fbca2dd55df242e5f",
   "created_at": "2025-05-19T21:30:56.494Z",
-  "updated_at": "2026-08-06T08:04:19.854Z",
+  "updated_at": "2026-08-20T12:26:01.706Z",
   "comment": {
     "text": "This text appears in an empty room that the user does not have access to. It informs the user that shared rooms will be displayed here once they are granted access.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 296,
-      "context": ")\n .with([FolderType.Rooms, ShareAccessRights.None], () =>\n t(\"Files:RoomEmptyContainerDescription\"),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesDescription\"),\n )\n .with([FolderType.Forms, P._], () =>",
+      "line_number": 333,
+      "context": ")\n .with([FolderType.Rooms, ShareAccessRights.None], () =>\n t(\"Files:RoomEmptyContainerDescription\"),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n isFormsScope\n ? t(\"EmptyView:EmptyFormTemplatesDescription\")\n : t(\"EmptyView:EmptyTemplatesDescription\"),",
       "module": "/packages/client"
     }
   ],

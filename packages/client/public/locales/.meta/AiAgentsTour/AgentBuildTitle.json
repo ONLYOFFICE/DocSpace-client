@@ -3,7 +3,7 @@
   "content": "Give it a job",
   "content_en_sha1_hash": "8c915e6d78cd8cd23cfc21264ffe2379e71a5c14",
   "created_at": "2026-08-06T14:20:56.245Z",
-  "updated_at": "2026-08-06T14:27:44.065Z",
+  "updated_at": "2026-08-07T15:05:26.408Z",
   "comment": {
     "text": "Title of an onboarding tour step that introduces the process of assigning a specific task to an AI agent.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 199,
+      "line_number": 201,
       "context": "isAdmin &&\n canCreate &&\n showFilter &&\n elementStep(\n '[data-testid=\"quick-actions\"]',\n t(\"AiAgentsTour:AgentBuildTitle\"),\n t(\"AiAgentsTour:AgentBuild\"),\n callbacks,\n LOG_LABEL,\n ),",
       "module": "/packages/client"
     }

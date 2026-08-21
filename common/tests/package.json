@@ -19,6 +19,7 @@
     "test:ascii": "vitest run ascii.test.js",
     "test:license": "vitest run license.test.js",
     "test:dependencies": "vitest run dependencies.test.js",
+    "test:indentation": "vitest run indentation.test.js",
     "open-report": "open-cli reports/tests-report.html"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
   },
   "overrides": {
     "undici": "^7.29.0",
-    "postcss": "^8.5.23"
+    "postcss": "^8.5.23",
+    "nanoid": "^3.3.18"
   }
 }

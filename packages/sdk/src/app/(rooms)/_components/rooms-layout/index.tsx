@@ -66,6 +66,7 @@ import SelectionArea from "@/app/(docspace)/_components/selection-area";
 import { DeviceTypeObserver } from "@/app/(docspace)/_components/DeviceTypeObserver";
 import RootScrollbar from "@/app/(docspace)/_components/RootScrollbar";
 import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
+import useShowFilterParam from "@/hooks/useShowFilterParam";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { normalizeRoomLogo } from "@/app/(docspace)/_utils/getRoomIconLogo";
@@ -150,12 +151,17 @@ const RoomsLayout = observer(
     const router = useRouter();
     const { isEmptyList } = useSettingsStore();
     const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
+    const showFilter = useShowFilterParam();
     const infoPanelStore = useInfoPanelStore();
     const filesListStore = useFilesListStore();
     const tagsStore = useRoomsTagsStore();
 
     // Private rooms skip AI entirely (parity with Personal Files). Active and
     // archived rooms both get the panel; the hook returns undefined when off.
+    // No `chatProps`: without an AI profile the panel shows the chat widget's
+    // own setup screen, which configures a provider in place. That beats the
+    // client's branded empty view here, whose CTA would have to jump the
+    // embedded frame out to the AI-agents settings section.
     const ai = useAiChatPanel(!isPrivate);
     // Info-panel exclusivity is host policy (owns InfoPanelStore), kept beside
     // the shared ui-kit panel hook and gated on the same condition.
@@ -294,6 +300,7 @@ const RoomsLayout = observer(
           className={styles.root}
           style={frameHeaderVars}
           data-layout-mode={layoutMode}
+          data-no-filter={showFilter ? undefined : ""}
         >
           <RootScrollbar>
             <SectionWrapper

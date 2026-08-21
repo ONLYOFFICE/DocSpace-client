@@ -106,6 +106,7 @@ export const GreetingLoginContainer = ({
             i18nKey="ConfirmEmailChangeText"
             ns="Login"
             values={{
+              organizationName: getBrandName("OrganizationName"),
               productName: getBrandName("ProductName"),
             }}
           />

@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TTheme } from "@docspace/shared/themes";
+import type { TTheme } from "@docspace/ui-kit/providers/theme/themes";
 import type store from "./src/store";
 import "@docspace/shared/index.d";
 

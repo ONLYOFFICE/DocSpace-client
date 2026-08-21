@@ -1,14 +1,14 @@
 {
   "key_path": "PreparationPortalTitle",
-  "content": "Portal restoring is underway",
-  "content_en_sha1_hash": "4d21b354c882fba5a868ff44f825eac2c9872eda",
-  "created_at": "2025-05-19T21:30:47.439Z",
-  "updated_at": "2026-07-04T11:30:21.961Z",
+  "content": "Workspace restoring is underway",
+  "content_en_sha1_hash": "ac5ab74355f0ad1b1f76f47c2b94eb687c59446e",
+  "created_at": "2026-08-13T14:37:02.035Z",
+  "updated_at": "2026-08-14T14:58:32.863Z",
   "comment": {
-    "text": "This is a page title or header text displayed when the DocSpace portal is being restored.",
+    "text": "Header title for the Preparation Portal page, displayed during the workspace restoration process.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:46:07.941Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-13T14:44:38.672Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 157,
+      "line_number": 156,
       "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress",
       "module": "/packages/shared"
     }
@@ -155,7 +155,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.259137Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +170,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -206,12 +212,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

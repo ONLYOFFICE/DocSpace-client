@@ -45,6 +45,8 @@ import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.12.react.svg";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
+import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
+
 import styles from "./ModelSettingsRowView.module.scss";
 
 type ModelSettingsRowViewProps = {
@@ -75,9 +77,8 @@ const RowView = (props: ModelSettingsRowViewProps) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const onToggle = async (modelId: string, enabled: boolean) => {
-    await setAiModelAvailability?.(modelId, enabled);
-  };
+  const { requestToggle, turnOffModelDialog } =
+    useTurnOffModelConfirmation(setAiModelAvailability);
 
   if (!models.length) return null;
 
@@ -102,9 +103,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
               ? (formatAiModelsCurrency?.(m.price.prompt) ?? "")
               : "";
 
-          const outputValue =
-            m.price?.completion ??
-            ("image" in m.price ? m.price.image : undefined);
+          const outputValue = m.price?.completion;
 
           const outputPrice =
             outputValue != null
@@ -158,7 +157,9 @@ const RowView = (props: ModelSettingsRowViewProps) => {
               >
                 <ToggleButton
                   isChecked={enabled}
-                  onChange={() => onToggle(m.id, !enabled)}
+                  onChange={() =>
+                    requestToggle({ id: m.id, title: m.alias }, !enabled)
+                  }
                   isDisabled={isUpdating || !isAiToolsServiceOn}
                   dataTestId={`ai_model_toggle_${m.id}`}
                 />
@@ -167,6 +168,8 @@ const RowView = (props: ModelSettingsRowViewProps) => {
           );
         })}
       </RowContainer>
+
+      {turnOffModelDialog}
     </div>
   );
 };

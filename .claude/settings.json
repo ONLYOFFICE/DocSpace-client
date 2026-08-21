@@ -9,10 +9,9 @@
       "Bash(git checkout:*)",
       "Bash(git check-ignore:*)",
       "Bash(node common/scripts/translation-stats.js:*)",
-      "Read(~/.claude/**)",
-      "Bash(pnpm exec *)",
+      "Bash(pnpm exec:*)",
       "Bash(pnpm test:client)",
-      "Bash(git grep *)"
+      "Bash(git grep:*)"
     ]
   },
   "enabledPlugins": {

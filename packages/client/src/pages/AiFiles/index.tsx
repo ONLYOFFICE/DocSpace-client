@@ -127,7 +127,7 @@ const getSrc = (
 
 const AiFiles = ({ myFolderId }: AiFilesProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardFilesTitle");
+  useDocumentTitle("Common:Files");
   const [searchParams, setSearchParams] = useSearchParams();
   const section = searchParams.get("section") ?? "";
   const lastSdkSectionRef = React.useRef<string | null>(null);
@@ -177,7 +177,7 @@ const AiFiles = ({ myFolderId }: AiFilesProps) => {
   const apiRef = useSdkFrame({
     appId: "ai-files",
     enabled: true,
-    title: t("Common:DashboardFilesTitle"),
+    title: t("Common:Files"),
     getSrc: () => {
       const sp = searchParamsRef.current;
       return getSrc(

@@ -672,7 +672,9 @@ class UsersStore {
             }
           }
 
-          options.push("reset-auth");
+          if (isOwner) {
+            options.push("reset-auth");
+          }
 
           if (!isUserLDAP) {
             options.push("separator-2");
@@ -1410,3 +1412,4 @@ class UsersStore {
 }
 
 export default UsersStore;
+

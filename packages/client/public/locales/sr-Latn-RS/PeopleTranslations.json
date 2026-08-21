@@ -1,7 +1,7 @@
 {
   "AccountLoginType": "Tip prijave na nalog",
   "AddMembers": "Dodaj članove",
-  "DeleteSelfProfile": "Obriši profil",
+  "DeleteSelfProfile": "Deaktiviraj nalog",
   "DisabledEmployeeStatus": "Onemogućeno",
   "DisableUserButton": "Onemogući",
   "EditGroup": "Uredi grupe",
@@ -10,7 +10,7 @@
   "GuestsRemoved": "Gost(i) su uspešno uklonjeni",
   "LDAPAccountTooltip": "Ovaj korisnički nalog je učitan iz LDAP-a. Ako treba da promenite korisničko ime i email adresu, ili da onemogućite korisnika, obratite se LDAP direktorijumu.",
   "LDAPGroupTooltip": "Ova grupa je učitana iz LDAP-a. Ako treba da je preimenujete, dodate ili uklonite korisnike, obratite se LDAP direktorijumu.",
-  "MembersCount": "članovi : {{count}}",
+  "MembersCount": "članovi: {{count}}",
   "NameChangeButton": "Promeni ime",
   "PasswordChangeButton": "Promeni lozinku",
   "PendingInviteTitle": "Čekanje na pozivnicu",

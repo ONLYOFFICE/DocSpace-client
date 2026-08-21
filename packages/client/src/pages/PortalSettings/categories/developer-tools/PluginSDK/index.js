@@ -46,7 +46,6 @@ import GithubDark from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import styles from "./PluginSDK.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PluginSDK = ({
   systemPluginList,
@@ -135,9 +134,7 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight="20px"
       >
-        {t("PluginSDKDescription", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("PluginSDKDescription")}
       </Text>
       <Text
         className={styles.description}

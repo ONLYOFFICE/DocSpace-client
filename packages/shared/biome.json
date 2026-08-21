@@ -1,5 +1,9 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
+  "plugins": [
+    "../shared/biome-plugins/no-dynamic-i18n-key.grit",
+    "../shared/biome-plugins/no-constants-via-i18n.grit"
+  ],
   "formatter": {
     "enabled": false
   },

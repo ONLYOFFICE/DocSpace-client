@@ -69,6 +69,8 @@ import AiAgentsIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import CatalogAiArbiterIcon from "@docspace/ui-kit/assets/icons/16/catalog.ai-arbiter.react.svg";
 import CatalogPrivateIcon from "@docspace/ui-kit/assets/icons/16/catalog.private.react.svg";
 
+import { isAppTemporarilyDisabled } from "./disabled-apps";
+
 export type AppId =
   | "ai-files"
   | "ai-rooms"
@@ -90,11 +92,11 @@ export type AppCatalogItem = {
 export const useAppsCatalog = (): AppCatalogItem[] => {
   const { t } = useTranslation(["Common"]);
 
-  return [
+  const catalog: AppCatalogItem[] = [
     {
       id: "ai-files",
       icon: <CatalogFolderIcon />,
-      title: t("Common:DashboardFilesTitle"),
+      title: t("Common:Files"),
       description: t("Common:DashboardFilesDescription"),
       href: "/ai-files",
       supported: true,
@@ -103,7 +105,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-rooms",
       icon: <CatalogRoomsIcon />,
-      title: t("Common:DashboardRoomsTitle"),
+      title: t("Common:Rooms"),
       description: t("Common:DashboardRoomsDescription"),
       href: "/ai-rooms",
       supported: true,
@@ -112,7 +114,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-forms",
       icon: <CatalogDocumentsIcon />,
-      title: t("Common:DashboardFormsTitle"),
+      title: t("Common:Forms"),
       description: t("Common:DashboardFormsDescription"),
       href: "/ai-forms",
       supported: true,
@@ -121,7 +123,7 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
     {
       id: "ai-agents",
       icon: <AiAgentsIcon />,
-      title: t("Common:DashboardAIChatAgentsTitle"),
+      title: t("Common:AIAgents"),
       description: t("Common:DashboardAIChatAgentsDescription"),
       href: "/agents",
       supported: true,
@@ -146,4 +148,8 @@ export const useAppsCatalog = (): AppCatalogItem[] => {
       alwaysOn: false,
     },
   ];
+
+  // Apps that are disabled or still unreleased (private rooms) must not be
+  // offered anywhere, so they never reach the catalog either.
+  return catalog.filter((app) => !isAppTemporarilyDisabled(app.id));
 };

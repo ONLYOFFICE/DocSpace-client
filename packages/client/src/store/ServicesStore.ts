@@ -36,30 +36,20 @@
 import { makeAutoObservable, observable } from "mobx";
 import axios from "axios";
 
-import { toastr } from "@docspace/ui-kit/components/toast";
-
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
-import { TTranslation } from "@docspace/shared/types";
-
 import PaymentStore from "./PaymentStore";
-import { TBalance } from "@docspace/shared/api/portal/types";
+
 import {
   getAiPrices,
   getAiModelRestrictions,
   setAiModelRestrictions,
-  getServiceQuotaBalance,
 } from "@docspace/shared/api/portal";
-import { getBackupsCount } from "@docspace/shared/api/backup";
+
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { formatterCurrencyWithoutTranction } from "@docspace/ui-kit/billing/wallet/utils";
-import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import {
-  AI_ENUM,
-  BACKUP_SERVICE,
-  STORAGE_ENUM,
-} from "@docspace/ui-kit/billing/constants";
+
 import { parseAiPrices } from "@docspace/ui-kit/billing/utils/parsers";
 import type { TAiToolsPrices } from "@docspace/ui-kit/billing/types";
 
@@ -90,8 +80,6 @@ class ServicesStore {
 
   confirmActionType: string | null = null;
 
-  aiToolsBalance: TBalance = null;
-
   aiToolsPrices: TAiToolsPrices | null = null;
 
   isAiToolsPricesLoading = false;
@@ -116,20 +104,6 @@ class ServicesStore {
     });
   }
 
-  get aiServiceBalance() {
-    if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
-      return this.aiToolsBalance.subAccounts[0].amount;
-
-    return 0.0;
-  }
-
-  get aiServiceCodeCurrency() {
-    if (this.aiToolsBalance && this.aiToolsBalance.subAccounts.length > 0)
-      return this.aiToolsBalance.subAccounts[0].currency;
-
-    return "USD";
-  }
-
   get aiModelsCurrency() {
     const currency = this.aiToolsPrices?.currency;
     if (!currency) return "USD";
@@ -149,37 +123,6 @@ class ServicesStore {
       amount,
       this.aiModelsCurrency,
     );
-  };
-
-  formatAiServiceCurrency = (
-    item: number | null = null,
-    fractionDigits: number = 3,
-    currency: string = this.aiServiceCodeCurrency,
-  ) => {
-    const { language } = authStore;
-
-    const amount = item ?? this.aiServiceBalance;
-
-    return formatCurrencyValue(language, amount, currency, fractionDigits);
-  };
-
-  fetchAiServiceBalance = async (isRefresh?: boolean) => {
-    const abortController = new AbortController();
-    this.settingsStore?.addAbortControllers(abortController);
-
-    try {
-      const res = await getServiceQuotaBalance(
-        isRefresh,
-        abortController.signal,
-      );
-
-      if (!res) return;
-
-      this.aiToolsBalance = res;
-    } catch (error) {
-      if (axios.isCancel(error)) return;
-      console.error(error);
-    }
   };
 
   fetchAiPrices = async () => {

@@ -46,7 +46,6 @@ import { HelpButton } from "@docspace/ui-kit/components/help-button";
 
 import type { ScheduleComponentProps } from "./ScheduleComponent.types";
 import styles from "./ScheduleComponent.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ScheduleComponent = ({
   selectedPeriodLabel,
@@ -85,7 +84,7 @@ const ScheduleComponent = ({
       className={classNames(styles.scheduleDescription, "schedule_description")}
       fontSize="12px"
     >
-      {t("Common:AutoSavePeriodHelp", { productName: getBrandName("ProductName") })}
+      {t("Common:AutoSavePeriodHelp")}
     </Text>
   );
 

@@ -50,8 +50,13 @@ type Props = {
 };
 
 const Plugin = ({ infoPanelItem, selection, currentFile }: Props) => {
-  const { body: boxProps, subMenu, onLoad, pluginName, component } =
-    infoPanelItem || {};
+  const {
+    body: boxProps,
+    subMenu,
+    onLoad,
+    pluginName,
+    component,
+  } = infoPanelItem || {};
 
   const [bodyProps, setBodyProps] = useState(boxProps || {});
 
@@ -76,13 +81,15 @@ const Plugin = ({ infoPanelItem, selection, currentFile }: Props) => {
     onLoadAction();
   }, [onLoadAction]);
 
+  if (!pluginName) return null;
+
   return (
     <div
-      data-testid={`info_panel_plugin_${pluginName?.toLowerCase()?.replace(/\s+/g, "_")}`}
+      data-testid={`info_panel_plugin_${pluginName.toLowerCase().replace(/\s+/g, "_")}`}
     >
       {component ? (
         <PluginWrappedComponent
-          pluginName={pluginName!}
+          pluginName={pluginName}
           component={component}
           currentFile={currentFile}
         />
@@ -90,10 +97,6 @@ const Plugin = ({ infoPanelItem, selection, currentFile }: Props) => {
         <WrappedComponent
           pluginName={pluginName}
           component={{ component: PluginComponents.box, props: bodyProps }}
-          saveButton={undefined}
-          setSaveButtonProps={undefined}
-          setModalRequestRunning={undefined}
-          modalRequestRunning={undefined}
         />
       )}
     </div>

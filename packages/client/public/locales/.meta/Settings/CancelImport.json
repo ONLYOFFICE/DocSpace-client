@@ -3,7 +3,7 @@
   "content": "Cancel import",
   "content_en_sha1_hash": "a4b5358b5d50407c88f27bef1900ad0b73db2767",
   "created_at": "2025-05-19T21:30:50.865Z",
-  "updated_at": "2026-05-15T15:37:40.242Z",
+  "updated_at": "2026-08-14T14:58:32.787Z",
   "comment": {
     "text": "This is a button label. It appears in the data import wizard, allowing the user to stop the ongoing import process.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 309,
+      "line_number": 308,
       "context": "onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />\n \n {cancelUploadDialogVisible ? (\n <CancelUploadDialog",
       "module": "/packages/client"
     },

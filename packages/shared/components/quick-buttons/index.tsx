@@ -32,8 +32,9 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { memo } from "react";
+import { memo, useState } from "react";
 import isNil from "lodash/isNil";
+import { useIsomorphicLayoutEffect } from "@docspace/ui-kit/hooks/useIsomorphicLayoutEffect";
 import { Trans } from "react-i18next";
 import { isTablet as isTabletDevice } from "react-device-detect";
 import equal from "fast-deep-equal";
@@ -93,8 +94,11 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
 
   const { id, shared, security } = item;
 
+  const [mounted, setMounted] = useState(false);
+  useIsomorphicLayoutEffect(() => setMounted(true), []);
+
   const isTile = viewAs === "tile";
-  const desktopView = !isTile && isDesktop();
+  const desktopView = mounted && !isTile && isDesktop();
 
   const lockedBy = "lockedBy" in item ? (item.lockedBy as string) : undefined;
   const locked = "locked" in item ? item.locked : undefined;
@@ -103,7 +107,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
 
   const showShareIcon = !isNil(item.shareSettings?.PrimaryExternalLink);
 
-  const tabletViewQuickButton = isTablet() || isTabletDevice;
+  const tabletViewQuickButton = mounted && (isTablet() || isTabletDevice);
 
   const sizeQuickButton: IconSizeType =
     isTile || tabletViewQuickButton ? IconSizeType.medium : IconSizeType.small;

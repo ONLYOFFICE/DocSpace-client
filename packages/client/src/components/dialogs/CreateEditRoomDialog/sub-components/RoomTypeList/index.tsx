@@ -36,7 +36,7 @@
 import { useTranslation } from "react-i18next";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { getCreateRoomTypes } from "@docspace/shared/utils/rooms";
 import { RoomsType } from "@docspace/shared/enums";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
@@ -67,9 +67,11 @@ const RoomTypeList = ({
   // opens straight into the FFR form via startRoomType). The only place the
   // FFR card still belongs in this generic chooser is the "create room from
   // selected PDF data" flow.
+  const availableRoomTypes = getCreateRoomTypes();
+
   const roomTypeValues = processCreatingRoomFromData
-    ? RoomsTypeValues
-    : RoomsTypeValues.filter((roomType) => roomType !== RoomsType.FormRoom);
+    ? availableRoomTypes
+    : availableRoomTypes.filter((roomType) => roomType !== RoomsType.FormRoom);
 
   const handleClick = (roomType: RoomsType | "template") => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;

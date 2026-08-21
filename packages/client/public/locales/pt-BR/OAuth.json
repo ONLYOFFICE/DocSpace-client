@@ -79,7 +79,7 @@
   "ScopesHelp": "Os escopos são usados para limitar o acesso do seu aplicativo a todos os dados relacionados ao usuário e permitem que você especifique exatamente o tipo de acesso necessário.",
   "Secret": "Segredo",
   "SecretCopy": "Segredo do cliente copiado com sucesso para a área de transferência",
-  "SignIn": "Faça login com {{productName}}",
+  "SignIn": "Faça login com {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Informações legais e de suporte",
   "TermsOfService": "Termos de serviço",
   "TermsOfServiceURL": "URL dos Termos de Serviço",

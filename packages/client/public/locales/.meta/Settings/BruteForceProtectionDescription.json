@@ -1,14 +1,14 @@
 {
   "key_path": "BruteForceProtectionDescription",
-  "content": "Set up the limit of unsuccessful login attempts by the user to protect the space against brute-force attacks. When the limit is reached, attempts coming from the associated IP address will be banned for specified period of time, or captcha will be requested if enabled.",
-  "content_en_sha1_hash": "8d779beeb43e299e317c89a6b51492bc342a5d56",
-  "created_at": "2025-05-19T21:30:50.827Z",
-  "updated_at": "2026-05-15T14:00:06.863Z",
+  "content": "Set up the limit of unsuccessful login attempts by the user to protect the workspace against brute-force attacks. When the limit is reached, attempts coming from the associated IP address will be banned for specified period of time, or captcha will be requested if enabled.",
+  "content_en_sha1_hash": "f40135e3c92936af32ceadf81ee32efc86e660fb",
+  "created_at": "2026-08-12T15:15:00.265Z",
+  "updated_at": "2026-08-12T15:28:00.330Z",
   "comment": {
-    "text": "This is a description of the brute-force protection settings, explaining how it limits login attempts and bans IP addresses or requests a CAPTCHA.",
+    "text": "Subtitle text for the Brute Force Protection setting in the portal's security configuration, explaining how login attempt limits trigger IP bans or captcha requests.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:25:25.905Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T15:28:00.330Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -200,12 +206,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -63,13 +63,14 @@ import type {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
+
 import type { TTranslation } from "@docspace/shared/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import SocketHelper, {
   SocketEvents,
   TChangeWebPluginData,
+  SocketCommands,
 } from "@docspace/ui-kit/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
@@ -92,10 +93,14 @@ import type {
   IProfileMenuItemClient,
   IArticleButtonItem,
   IArticleButtonItemClient,
+  IArticleNavigationItem,
+  IArticleNavigationItemClient,
   IframeWindow,
   TPlugin,
   IPostMessageCallbackMessage,
   IMediaViewerClient,
+  IModalDialogClient,
+  TMessageActionsParams,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -111,7 +116,6 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
-import { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import { TUser } from "@docspace/shared/api/people/types";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
@@ -128,12 +132,14 @@ const pluginAxios = axios.create({
   withCredentials: true,
 });
 
-type TDispatchMessage = {
+type TDispatchMessage = Pick<
+  TMessageActionsParams,
+  | "pluginName"
+  | "setElementProps"
+  | "updateCreateDialogProps"
+  | "updatePropsContext"
+> & {
   message: IMessage | void;
-  pluginName: string;
-  setElementProps?: React.Dispatch<unknown>;
-  updateCreateDialogProps?: React.Dispatch<unknown>;
-  updatePropsContext?: (props: unknown) => void;
   currentFile?: TCurrentFile | null;
 };
 
@@ -162,9 +168,13 @@ class PluginStore {
 
   articleButtonItems: Map<string, IArticleButtonItemClient> = new Map();
 
+  articleNavigationItems: Map<string, IArticleNavigationItemClient> = new Map();
+
   pluginFrame: HTMLIFrameElement | null = null;
 
   isInit = false;
+
+  isLoaded = false;
 
   settingsPluginDialogVisible = false;
 
@@ -179,7 +189,7 @@ class PluginStore {
     IFloatingOperationsButtonClient
   > = new Map();
 
-  pluginDialogProps: null | ModalDialogProps = null;
+  pluginDialogProps: null | IModalDialogClient = null;
 
   pluginSelectorProps: null | TSelectorProps = null;
 
@@ -258,12 +268,13 @@ class PluginStore {
     updatePropsContext,
     currentFile,
   }: TDispatchMessage) => {
+    if (!message) return;
+
     messageActions({
       message,
       pluginName,
       setElementProps,
       setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
       updatePluginStatus: this.updatePluginStatus,
       updatePropsContext: updatePropsContext,
       setPluginDialogVisible: this.setPluginDialogVisible,
@@ -273,8 +284,8 @@ class PluginStore {
       updateMainButtonItems: this.updateMainButtonItems,
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
+      updateArticleNavigationItems: this.updateArticleNavigationItems,
       updateFileItems: this.updateFileItems,
-      updateArticleButtonItems: this.updateArticleButtonItems,
       updateCreateDialogProps: updateCreateDialogProps,
       updatePlugin: this.updatePlugin,
       setPluginSelectorVisible: this.setPluginSelectorVisible,
@@ -323,13 +334,11 @@ class PluginStore {
     this.pluginSelectorVisible = value;
   };
 
-  setPluginSelectorProps = (
-    value: null | (TSelectorProps & { pluginName: string }),
-  ) => {
+  setPluginSelectorProps = (value: null | TSelectorProps) => {
     this.pluginSelectorProps = value;
   };
 
-  setPluginDialogProps = (value: null | ModalDialogProps) => {
+  setPluginDialogProps = (value: null | IModalDialogClient) => {
     this.pluginDialogProps = value;
   };
 
@@ -418,6 +427,14 @@ class PluginStore {
         ) {
           this.updateArticleButtonItems(name);
         }
+
+        if (
+          this.plugins[pluginIdx].scopes.includes(
+            PluginScopes.ArticleNavigation,
+          )
+        ) {
+          this.updateArticleNavigationItems(name);
+        }
       }
     }
   };
@@ -434,8 +451,15 @@ class PluginStore {
     this.isInit = isInit;
   };
 
+  setIsLoaded = (isLoaded: boolean) => {
+    this.isLoaded = isLoaded;
+  };
+
   initPlugins = async () => {
-    if (this.isNotPaidPeriod) return;
+    if (this.isNotPaidPeriod) {
+      this.setIsLoaded(true);
+      return;
+    }
 
     const frame = document.createElement("iframe");
     frame.id = "plugin-iframe";
@@ -454,7 +478,10 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
-    if (this.isNotPaidPeriod) return;
+    if (this.isNotPaidPeriod) {
+      this.setIsLoaded(true);
+      return;
+    }
 
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
@@ -480,6 +507,8 @@ class PluginStore {
         return;
       }
       console.log(e);
+    } finally {
+      this.setIsLoaded(true);
     }
   };
 
@@ -606,7 +635,7 @@ class PluginStore {
 
           this.initLocalePlugin(newPlugin);
 
-          this.installPlugin(newPlugin);
+          await this.installPlugin(newPlugin);
 
           if (newPlugin.scopes.includes(PluginScopes.Settings)) {
             newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
@@ -619,7 +648,9 @@ class PluginStore {
         }
       };
 
-      const onError = () => {};
+      const onError = () => {
+        resolve(null);
+      };
 
       const frameDoc = this.pluginFrame?.contentDocument;
       const script = frameDoc?.createElement("script");
@@ -734,6 +765,10 @@ class PluginStore {
     if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
       this.updateArticleButtonItems(name);
     }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.updateArticleNavigationItems(name);
+    }
   };
 
   updatePlugin = async (
@@ -834,6 +869,10 @@ class PluginStore {
 
     if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
       this.deactivateArticleButtonItems(plugin);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleNavigation)) {
+      this.deactivateArticleNavigationItems(plugin);
     }
   };
 
@@ -1487,6 +1526,62 @@ class PluginStore {
     }
   };
 
+  updateArticleNavigationItems = async (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items: Map<string, IArticleNavigationItem> | undefined =
+      plugin.getArticleNavigationItems && plugin.getArticleNavigationItems();
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const device = this.getCurrentDevice();
+
+    const actualItems = new Map<string, IArticleNavigationItemClient>();
+
+    for (const [key, value] of Array.from(items)) {
+      const correctUserType = value.usersTypes
+        ? value.usersTypes.includes(userRole)
+        : true;
+
+      const correctDevice = value.devices
+        ? value.devices.includes(device)
+        : true;
+
+      if (!correctUserType || !correctDevice) continue;
+
+      const icon = `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`;
+
+      actualItems.set(key, {
+        ...value,
+        icon,
+        pluginName: plugin.name,
+      });
+    }
+
+    Array.from(this.articleNavigationItems).forEach(([key, value]) => {
+      if (value.pluginName === plugin.name && !actualItems.has(key)) {
+        this.articleNavigationItems.delete(key);
+      }
+    });
+
+    actualItems.forEach((value, key) => {
+      this.articleNavigationItems.set(key, value);
+    });
+  };
+
+  deactivateArticleNavigationItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    Array.from(this.articleNavigationItems).forEach(([key, value]) => {
+      if (value.pluginName === plugin.name) {
+        this.articleNavigationItems.delete(key);
+      }
+    });
+  };
+
   deactivateArticleButtonItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
@@ -1722,6 +1817,11 @@ class PluginStore {
           },
           pluginName,
         }),
+      updateArticleNavigationItems: () =>
+        this.dispatchMessage({
+          message: { actions: [Actions.updateArticleNavigationItems] },
+          pluginName,
+        }),
     },
     api: {
       get: (path, params) =>
@@ -1812,7 +1912,23 @@ class PluginStore {
       );
     }
   };
+
+  get articleNavigationItemsList() {
+    const items = Array.from(this.articleNavigationItems, ([key, value]) => {
+      return {
+        key,
+        value: {
+          ...value,
+        },
+      };
+    });
+
+    if (items.length > 0) {
+      return items;
+    }
+
+    return null;
+  }
 }
 
 export default PluginStore;
-

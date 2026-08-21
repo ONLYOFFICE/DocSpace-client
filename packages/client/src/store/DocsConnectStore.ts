@@ -34,10 +34,12 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 import copy from "copy-to-clipboard";
 
 import {
   getDocsConnectInfo,
+  getDocsConnectStatistics,
   startDocsConnectTrial,
   buyDocsConnectPlan,
   calculateDocsConnectDevPack,
@@ -74,7 +76,8 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { isDocsConnectPaid } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/utils";
 
-import i18n from "../i18n";
+import type DocumentBuilderReportStore from "./DocumentBuilderReportStore";
+import { ReportType } from "./DocumentBuilderReportStore";
 
 export type BuyPlanMode = "trial" | "edit";
 
@@ -105,22 +108,28 @@ class DocsConnectStore {
 
   connection: Nullable<TDocsConnectConnection> = null;
 
-  isReportGenerating: boolean = false;
-
-  reportPageLeft: boolean = false;
-
   depositedTopUp: number = 0;
+
+  isPortalConnectionAvailable: boolean = false;
+
+  isStatisticsRefreshing: boolean = false;
+
+  statisticsRefreshController: Nullable<AbortController> = null;
+
+  private documentBuilderReportStore: DocumentBuilderReportStore;
 
   constructor(
     settingsStore: SettingsStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
     currentQuotaStore: CurrentQuotasStore,
+    documentBuilderReportStore: DocumentBuilderReportStore,
   ) {
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.documentBuilderReportStore = documentBuilderReportStore;
     makeAutoObservable(this, {
-      reportPageLeft: false,
+      statisticsRefreshController: false,
     });
   }
 
@@ -154,6 +163,52 @@ class DocsConnectStore {
     } finally {
       if (initialLoad) this.setIsLoading(false);
     }
+  };
+
+  refreshStatistics = async () => {
+    if (!this.info) return;
+
+    this.abortStatisticsRefresh();
+
+    const controller = new AbortController();
+    this.statisticsRefreshController = controller;
+    this.isStatisticsRefreshing = true;
+
+    try {
+      const patch = await getDocsConnectStatistics(this.info.serviceIds, {
+        signal: controller.signal,
+      });
+
+      runInAction(() => {
+        const { info } = this;
+
+        if (this.statisticsRefreshController !== controller || !info) return;
+
+        this.info = {
+          ...info,
+          ...patch,
+          tenant: patch.tenant ?? info.tenant,
+          tenantInfo: patch.tenantInfo ?? info.tenantInfo,
+        };
+      });
+    } catch (error) {
+      if (!axios.isCancel(error)) toastr.error(error as Error);
+    } finally {
+      if (this.statisticsRefreshController === controller) {
+        this.statisticsRefreshController = null;
+        runInAction(() => {
+          this.isStatisticsRefreshing = false;
+        });
+      }
+    }
+  };
+
+  abortStatisticsRefresh = () => {
+    if (!this.statisticsRefreshController) return;
+
+    this.statisticsRefreshController.abort();
+    this.statisticsRefreshController = null;
+    this.isStatisticsRefreshing = false;
   };
 
   openBuyPlan = (mode: BuyPlanMode) => {
@@ -190,10 +245,7 @@ class DocsConnectStore {
   };
 
   startTrial = async () => {
-    const info = await startDocsConnectTrial();
-    runInAction(() => {
-      this.info = info;
-    });
+    await startDocsConnectTrial();
     this.refreshPortalState();
   };
 
@@ -388,61 +440,17 @@ class DocsConnectStore {
     });
   };
 
-  private resetReportState = () => {
-    this.reportPageLeft = false;
-    runInAction(() => {
-      this.isReportGenerating = false;
-    });
-  };
-
-  private finishReport = (resultFileUrl?: string) => {
-    toastr.success(
-      i18n.t("Common:ReportSaveLocation", {
-        sectionName: i18n.t("Common:Files"),
-      }),
+  get isReportGenerating() {
+    return this.documentBuilderReportStore.isReportBuilding(
+      ReportType.DocsConnect,
     );
-    if (!this.reportPageLeft && resultFileUrl) {
-      setTimeout(() => window.open(resultFileUrl, "_blank"), 100); // hack for ios
-    }
-    this.resetReportState();
-  };
+  }
 
-  markReportPageLeft = () => {
-    if (this.isReportGenerating) this.reportPageLeft = true;
-  };
-
-  downloadReport = async () => {
-    if (this.isReportGenerating) return;
-
-    this.reportPageLeft = false;
-    runInAction(() => {
-      this.isReportGenerating = true;
+  downloadReport = () =>
+    this.documentBuilderReportStore.buildReport(ReportType.DocsConnect, {
+      start: startDocsConnectReport,
+      getStatus: getDocsConnectReportStatus,
     });
-
-    const controller = new AbortController();
-
-    try {
-      let status = await startDocsConnectReport();
-
-      if (!status?.isCompleted && !status?.error) {
-        await pollUntil(async () => {
-          status = await getDocsConnectReportStatus();
-          return !!status?.isCompleted || !!status?.error;
-        }, controller.signal);
-      }
-
-      if (status?.error) {
-        toastr.error(status.error);
-        this.resetReportState();
-        return;
-      }
-
-      this.finishReport(status?.resultFileUrl);
-    } catch (error) {
-      toastr.error(error as Error);
-      this.resetReportState();
-    }
-  };
 
   copyToClipboard = (value: string, t: TTranslation) => {
     if (!value) return;

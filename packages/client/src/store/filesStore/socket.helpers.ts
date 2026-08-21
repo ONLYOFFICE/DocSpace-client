@@ -39,6 +39,7 @@ import {
   AnalyticsEvents,
   FolderType,
   RoomSearchArea,
+  RoomsType,
 } from "@docspace/shared/enums";
 import {
   frameCallEvent,
@@ -53,7 +54,7 @@ import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import {
   getCategoryUrl,
-  getCategoryTypeByFolderType,
+  getCategoryTypeByFolderTypeInSection,
 } from "SRC_DIR/helpers/utils";
 import {
   refreshInfoPanel,
@@ -481,10 +482,20 @@ export function redirectToParentImpl(
     return;
 
   if (isRoom && isTemplate) {
+    const isFormTemplate =
+      self.selectedFolderStore.roomType === RoomsType.FormRoom;
+
     const newRoomsFilter = RoomsFilter.getDefault();
-    newRoomsFilter.searchArea = RoomSearchArea.Templates;
+    newRoomsFilter.searchArea = isFormTemplate
+      ? RoomSearchArea.FormTemplates
+      : RoomSearchArea.Templates;
+
+    const path = getCategoryUrl(
+      isFormTemplate ? CategoryType.Forms : CategoryType.Shared,
+    );
+
     return window.DocSpace.navigate(
-      `/rooms/shared/filter?${newRoomsFilter.toUrlParams()}`,
+      `${path}?${newRoomsFilter.toUrlParams()}`,
     );
   }
   const pathPart = pathParts[includePathPartIndex - 1];
@@ -549,7 +560,7 @@ export function redirectToParentImpl(
 
       const categoryType = isPublic
         ? CategoryType.PublicRoom
-        : getCategoryTypeByFolderType(rootFolderType, pathPart.id);
+        : getCategoryTypeByFolderTypeInSection(rootFolderType, pathPart.id);
 
       const path = getCategoryUrl(categoryType, pathPart.id);
 

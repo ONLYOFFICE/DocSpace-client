@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-08-06T14:20:57.538Z",
+  "updated_at": "2026-08-12T14:02:21.267Z",
   "comment": {
     "text": "This is a toast message that appears after a user successfully copies a link to their clipboard.",
     "is_auto": true,
@@ -73,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/helpers.ts",
-      "line_number": 181,
+      "line_number": 184,
       "context": "? `${window.location.href}&preview=${id}`\n : (webUrl as string)\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n export const filterModel = (model: TContextOption[], filter: string[]) => {\n const options: TContextOption[] = [];\n let index = 0;",
       "module": "/packages/client"
     },

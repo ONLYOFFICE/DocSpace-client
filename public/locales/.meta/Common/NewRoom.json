@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2026-08-06T14:20:57.498Z",
+  "updated_at": "2026-08-20T12:26:01.690Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new room. It appears in various contexts where a user can initiate the creation of a new collaborative space.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/utils/hooks/useRoomsHelper.tsx",
-      "line_number": 240,
+      "line_number": 275,
       "context": "const createRoomType =\n createDefineRoomType ??\n (formsSection ? ApiRoomType.FillingFormsRoom : undefined);\n const createItem: TSelectorItem = {\n isCreateNewItem: true,\n label: createDefineRoomLabel ?? t(\"NewRoom\"),\n id: \"create-room-item\",\n key: \"create-room-item\",\n hotkey: \"r\",\n isRoomsOnly,\n createDefineRoomType: createRoomType,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 801,
+      "line_number": 796,
       "context": "/>\n ) : isRoomsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-room-button\")}\n id=\"rooms-shared_create-room-button\"\n label={t(\"Common:NewRoom\")}\n onClick={onCreateRoom}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 801,
+      "line_number": 796,
       "context": "/>\n ) : isRoomsFolder ? (\n <Button\n className={classNames(styles.mainButton, \"create-room-button\")}\n id=\"rooms-shared_create-room-button\"\n label={t(\"Common:NewRoom\")}\n onClick={onCreateRoom}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
       "module": "/packages/client"
     },
@@ -55,13 +55,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 1019,
-      "context": "? WarningQuotaExceededUrl\n : undefined,\n actions: isFormsSection\n ? t(\"Common:CreateFormSet\")\n : isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}",
+      "line_number": 1046,
+      "context": "? WarningQuotaExceededUrl\n : undefined,\n actions: isFormsSection\n ? t(\"Common:CreateFormSet\")\n : isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Common:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n aiChat: t(\"Common:AIChatButton\"),\n }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 434,
+      "line_number": 426,
       "context": "? isFlowsFolder\n ? []\n : [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: self.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : isPrivacyFolder",
       "module": "/packages/client"
     },
@@ -73,13 +73,13 @@
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 296,
+      "line_number": 299,
       "context": "}),\n ...(isSaveFormAsXLSXChanged && {\n saveFormAsXLSX,\n }),\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.ts",
-      "line_number": 296,
+      "line_number": 299,
       "context": "}),\n ...(isSaveFormAsXLSXChanged && {\n saveFormAsXLSX,\n }),\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
     },
@@ -91,13 +91,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-layout/index.tsx",
-      "line_number": 267,
+      "line_number": 273,
       "context": "if (isArchive || !canCreateRooms) return [];\n const items: QuickActionItem[] = [\n {\n id: \"custom-room\",\n icon: <CreateCustomRoomIllustrationIcon />,\n label: t(\"Common:NewRoom\"),\n onClick: createCustomRoom,\n disabled: isArchive,\n },\n ];\n if (!isPrivate) {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/rooms-layout/index.tsx",
-      "line_number": 267,
+      "line_number": 273,
       "context": "if (isArchive || !canCreateRooms) return [];\n const items: QuickActionItem[] = [\n {\n id: \"custom-room\",\n icon: <CreateCustomRoomIllustrationIcon />,\n label: t(\"Common:NewRoom\"),\n onClick: createCustomRoom,\n disabled: isArchive,\n },\n ];\n if (!isPrivate) {",
       "module": "/packages/sdk"
     }

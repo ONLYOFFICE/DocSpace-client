@@ -38,7 +38,12 @@ import React from "react";
 import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
+import copy from "copy-to-clipboard";
+
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import styles from "./CodeBlock.module.scss";
 
@@ -74,8 +79,16 @@ const CodeBlock = ({ config, scriptUrl, theme }) => {
     },
   });
 
+  const onCopyCode = () => copy(codeString);
+
   return (
     <div className={styles.container} dir="ltr">
+      <IconButton
+        className={styles.copyButton}
+        iconName={CopyReactSvgUrl}
+        size={16}
+        onClick={onCopyCode}
+      />
       <CodeMirror
         value={codeString}
         theme={theme.isBase ? baseTheme : darkTheme}

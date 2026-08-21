@@ -76,10 +76,11 @@ test.describe("Event Listener Sample Plugin", () => {
 
     await page.getByTestId("new-document").click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "File created!" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "info");
-    await expect(toast).toContainText("File created!");
   });
 
   // ── 2. ROOM_CREATE event ──────────────────────────────────────────────────────
@@ -104,10 +105,11 @@ test.describe("Event Listener Sample Plugin", () => {
       .getByRole("button", { name: "Collaboration room", exact: true })
       .click();
 
-    const toast = page.getByTestId("toast-content");
+    const toast = page
+      .getByTestId("toast-content")
+      .filter({ hasText: "Room created!" });
     await expect(toast).toBeVisible();
     await expect(toast).toHaveAttribute("data-type", "success");
-    await expect(toast).toContainText("Room created!");
   });
 });
 

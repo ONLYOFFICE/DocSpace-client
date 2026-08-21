@@ -37,12 +37,12 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useSearchParams } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
 import type { TViewAs } from "@docspace/ui-kit/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
+import useShowFilterParam from "@/hooks/useShowFilterParam";
 import { useSettingsStore } from "../../_store/SettingsStore";
 
 type SectionProps = {
@@ -104,17 +104,7 @@ export const SectionWrapper = observer(
     scrollableBanner,
     stickyTableHeader,
   }: SectionProps) => {
-    const searchParams = useSearchParams();
-
-    const showFilterParam = searchParams.get("showFilter");
-    const effectiveShowFilter =
-      showFilterParam === null
-        ? showFilter
-        : showFilterParam === "true"
-          ? true
-          : showFilterParam === "false"
-            ? false
-            : showFilter;
+    const effectiveShowFilter = useShowFilterParam(showFilter);
 
     const settingsStore = useSettingsStore();
     const { currentDeviceType } = useDeviceType();

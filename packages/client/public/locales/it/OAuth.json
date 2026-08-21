@@ -79,7 +79,7 @@
   "ScopesHelp": "Gli scope servono a limitare l'accesso dell'applicazione a tutti i dati relativi all'utente e consentono di specificare esattamente il tipo di accesso necessario.",
   "Secret": "Segreto",
   "SecretCopy": "Il segreto del client è stato copiato con successo negli appunti",
-  "SignIn": "Accedi con {{productName}}",
+  "SignIn": "Accedi con {{organizationName}} {{productName}}",
   "SupportAndLegalInfo": "Supporto e informazioni legali",
   "TermsOfService": "Termini di servizio",
   "TermsOfServiceURL": "URL dei termini di servizio",

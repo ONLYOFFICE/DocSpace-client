@@ -1,0 +1,29 @@
+{
+  "key_path": "CreateFormSpaceTitleOption",
+  "content": "Create a new form space",
+  "content_en_sha1_hash": "79db1b211991bd502a57e93cf4d5b0e670d6bc25",
+  "created_at": "2026-08-17T17:23:18.127Z",
+  "updated_at": "2026-08-20T12:26:01.702Z",
+  "comment": {
+    "text": "Title for an action option in an empty state view used to initiate the creation of a new form space.",
+    "is_auto": true,
+    "updated_at": "2026-08-17T17:33:07.390Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 408,
+      "context": "onClick: actions.onCreateRoom,\n disabled: false,\n };\n \n const createFormSpace = {\n title: t(\"EmptyView:CreateFormSpaceTitleOption\"),\n description: t(\"EmptyView:CreateFormSpaceDescriptionOption\"),\n icon: <CreateRoom />,\n key: \"create-form-space\",\n onClick: actions.onCreateRoom,\n disabled: false,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

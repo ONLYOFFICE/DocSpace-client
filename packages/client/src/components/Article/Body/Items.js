@@ -209,11 +209,7 @@ const Item = ({
         iconBadge={iconBadge}
         withAnimation
         badgeTitle={
-          labelBadge
-            ? ""
-            : t("Common:EmptySection", {
-                sectionName: t("Common:TrashSection"),
-              })
+          labelBadge ? "" : t("Common:EmptyTrash")
         }
         badgeComponent={
           <NewFilesBadge

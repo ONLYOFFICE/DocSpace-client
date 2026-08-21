@@ -355,9 +355,7 @@ export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
     case EmployeeType.Owner:
       return t("Common:Owner");
     case EmployeeType.Admin:
-      return t("Common:PortalAdmin", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Common:PortalAdmin");
     case EmployeeType.RoomAdmin:
       return t("Common:RoomAdmin");
     case EmployeeType.User:
@@ -652,6 +650,27 @@ const FRAME_NAME = "frameDocSpace";
 
 export const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
+
+export const getFrameInitialTheme = (): ThemeKeys | null => {
+  if (typeof window === "undefined" || !window.name.includes(FRAME_NAME))
+    return null;
+
+  const param = new URLSearchParams(window.location.search).get("theme");
+
+  switch (param) {
+    case ThemeKeys.Base:
+    case ThemeKeys.BaseStr:
+      return ThemeKeys.BaseStr;
+    case ThemeKeys.Dark:
+    case ThemeKeys.DarkStr:
+      return ThemeKeys.DarkStr;
+    case ThemeKeys.System:
+    case ThemeKeys.SystemStr:
+      return ThemeKeys.SystemStr;
+    default:
+      return ThemeKeys.BaseStr;
+  }
 };
 
 export const frameCallbackData = (
@@ -1240,9 +1259,7 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", {
-      productName: getBrandName("ProductName"),
-    });
+    return t("Common:PortalAdmin");
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 

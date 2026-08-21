@@ -3,7 +3,7 @@
   "content": "Who else is in here",
   "content_en_sha1_hash": "f437e3067172e90e0b59973d3195f6b292c952ed",
   "created_at": "2026-08-06T14:20:56.244Z",
-  "updated_at": "2026-08-06T14:28:45.746Z",
+  "updated_at": "2026-08-07T15:05:26.408Z",
   "comment": {
     "text": "An information panel title used during the AI Agents onboarding tour to explain membership visibility to non-admin users.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiAgentsTour/tourSteps.ts",
-      "line_number": 230,
+      "line_number": 232,
       "context": "infoPanelHooks &&\n revealStep(\n INFO_PANEL_SELECTOR,\n isAdmin\n ? t(\"AiAgentsTour:AgentAccessTitle\")\n : t(\"AiAgentsTour:AgentAccessMemberTitle\"),\n isAdmin\n ? t(\"AiAgentsTour:AgentAccess\")\n : t(\"AiAgentsTour:AgentAccessMember\"),\n callbacks,\n LOG_LABEL,",
       "module": "/packages/client"
     }

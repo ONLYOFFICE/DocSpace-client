@@ -33,8 +33,25 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { getRoomEncryptionKeys } from "../../api/privacy";
+import { getFilePublicKeys, getRoomEncryptionKeys } from "../../api/privacy";
+import type { TEncryptionKeyPair } from "../../api/privacy/types";
 import type { RoomMemberPublicKey } from "../encryption/room-file-access";
+
+const toMemberKeys = (
+  keys: TEncryptionKeyPair[] | undefined,
+): RoomMemberPublicKey[] => {
+  const list: RoomMemberPublicKey[] = [];
+  if (!Array.isArray(keys)) return list;
+  for (const k of keys) {
+    if (!k?.userId || !k?.publicKey) continue;
+    list.push({
+      userId: String(k.userId),
+      publicKey: k.publicKey,
+      publicKeyId: k.id,
+    });
+  }
+  return list;
+};
 
 export async function loadRoomMemberKeys(
   roomId: number | string,
@@ -43,25 +60,14 @@ export async function loadRoomMemberKeys(
   keysByUserId: Map<string, RoomMemberPublicKey[]>;
   list: RoomMemberPublicKey[];
 }> {
-  const keys = await getRoomEncryptionKeys(roomId);
+  const list = toMemberKeys(await getRoomEncryptionKeys(roomId));
   const keyByUserId = new Map<string, string>();
   const keysByUserId = new Map<string, RoomMemberPublicKey[]>();
-  const list: RoomMemberPublicKey[] = [];
-  if (Array.isArray(keys)) {
-    for (const k of keys) {
-      if (!k?.userId || !k?.publicKey) continue;
-      const id = String(k.userId);
-      const entry: RoomMemberPublicKey = {
-        userId: id,
-        publicKey: k.publicKey,
-        publicKeyId: k.id,
-      };
-      keyByUserId.set(id, k.publicKey);
-      const bucket = keysByUserId.get(id);
-      if (bucket) bucket.push(entry);
-      else keysByUserId.set(id, [entry]);
-      list.push(entry);
-    }
+  for (const entry of list) {
+    keyByUserId.set(entry.userId, entry.publicKey);
+    const bucket = keysByUserId.get(entry.userId);
+    if (bucket) bucket.push(entry);
+    else keysByUserId.set(entry.userId, [entry]);
   }
   return { keyByUserId, keysByUserId, list };
 }
@@ -76,4 +82,35 @@ export async function loadRoomMemberKeysSafe(
   } catch {
     return [];
   }
+}
+
+/**
+ * Public keys usable as sender candidates when unwrapping a file's DEK.
+ *
+ * The wrap names its sender, so unwrap needs that user's public key. The
+ * file-scoped source lists everyone holding an entry on the file and needs no
+ * room id, which the room roster does — and callers do not always have a
+ * correct one (a file in a subfolder knows only its folder id). Both sources
+ * are merged so a known room id still contributes its members.
+ */
+export async function loadFileSenderKeysSafe(
+  fileId: number | string,
+  roomId?: number | string | null,
+): Promise<RoomMemberPublicKey[]> {
+  const [fileKeys, roomKeys] = await Promise.all([
+    getFilePublicKeys(fileId)
+      .then(toMemberKeys)
+      .catch(() => [] as RoomMemberPublicKey[]),
+    loadRoomMemberKeysSafe(roomId),
+  ]);
+
+  const merged: RoomMemberPublicKey[] = [];
+  const seen = new Set<string>();
+  for (const entry of [...fileKeys, ...roomKeys]) {
+    const dedupeKey = `${entry.userId}:${entry.publicKey}`;
+    if (seen.has(dedupeKey)) continue;
+    seen.add(dedupeKey);
+    merged.push(entry);
+  }
+  return merged;
 }

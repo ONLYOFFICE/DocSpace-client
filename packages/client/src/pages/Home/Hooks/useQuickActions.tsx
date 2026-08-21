@@ -38,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
 import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
 import {
@@ -57,8 +58,7 @@ import {
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { RoomsType } from "@docspace/ui-kit/enums";
-import { Events, RoomSearchArea } from "@docspace/shared/enums";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { Events } from "@docspace/shared/enums";
 import { getConstName } from "@docspace/shared/constants/consts";
 
 import {
@@ -106,14 +106,21 @@ const dispatchCreateRoom = (
   window.dispatchEvent(event);
 };
 
-// Opens the Templates list — the Rooms list scoped to the Templates search
-// area. Mirrors the sidebar's Templates item (ClientArticleSidebar.goTemplates).
-const goTemplates = (userId?: string) => {
-  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
-  filter.searchArea = RoomSearchArea.Templates;
-  window.DocSpace.navigate(
-    `/rooms/shared/filter?${filter.toUrlParams(userId, false)}`,
-  );
+// Opens the create-room dialog directly on its "from template" picker, so the
+// tile creates a room out of a template in place instead of navigating to the
+// Templates list first (`withTemplateSelector` is read by CreateRoomDialog).
+// `isFormsCreate` scopes the picker to form templates (FormRoom /
+// RoomSearchArea.FormTemplates) for the Forms section tile.
+const dispatchCreateRoomFromTemplate = (
+  parentId: number | string | null,
+  isFormsCreate?: boolean,
+) => {
+  const event = new CustomEvent(Events.ROOM_CREATE, {
+    detail: { parentId, context: "sidebar" },
+  });
+  // @ts-expect-error custom payload consumed by GlobalEvents/onCreateRoom
+  event.payload = { withTemplateSelector: true, isFormsCreate };
+  window.dispatchEvent(event);
 };
 
 // Opens the create-agent dialog scoped to the current folder, via the same
@@ -126,17 +133,6 @@ const dispatchCreateAgent = (parentId: number | string | null) => {
   window.dispatchEvent(event);
 };
 
-// Opens the form templates list — the Templates search area scoped to the
-// Forms section. Mirrors the sidebar's Forms → Templates item
-// (ClientArticleSidebar.goFormsTemplates).
-const goFormsTemplates = (userId?: string) => {
-  const filter = RoomsFilter.getDefault(userId, RoomSearchArea.FormTemplates);
-  filter.searchArea = RoomSearchArea.FormTemplates;
-  window.DocSpace.navigate(
-    `/forms/filter?${filter.toUrlParams(userId, false)}`,
-  );
-};
-
 export type UseQuickActionsProps = SectionFlags & {
   currentFolderId: number | string | null;
   // selectedFolderStore.security?.Create — folder-level create permission.
@@ -147,7 +143,6 @@ export type UseQuickActionsProps = SectionFlags & {
   canCreateRooms?: boolean;
   // AI is ready and the user can manage agents (admins / owners / room admins).
   canCreateAgents?: boolean;
-  userId?: string;
   // Whether the OForms template gallery is reachable (settingsStore). The
   // FormRoom "from template" tile is only offered when it is.
   templateGalleryAvailable?: boolean;
@@ -155,6 +150,9 @@ export type UseQuickActionsProps = SectionFlags & {
   // folder (mirrors MainButton.onShowTemplateGallery).
   setTemplateGalleryVisible?: (visible: boolean) => void;
   setOformFromFolderId?: (id: number | string | null) => void;
+  // Makes the gallery create a form space out of the picked template instead of
+  // a file — used by the Forms root tile, which has no folder to create in.
+  setCreateRoomFromTemplate?: (value: boolean) => void;
 };
 
 export type QuickActionsResult = {
@@ -176,14 +174,18 @@ export const useQuickActions = (
     canCreateEncrypted,
     canCreateRooms,
     canCreateAgents,
-    userId,
     templateGalleryAvailable,
     setTemplateGalleryVisible,
     setOformFromFolderId,
+    setCreateRoomFromTemplate,
     ...sectionFlags
   } = props;
 
   const openChat = useOpenAiChat();
+
+  // Availability is computed by the host (Shell) and includes the portal AI
+  // switch, so the tile disappears live when an admin disables AI.
+  const isAiChatAvailable = useIsAiChatAvailable();
 
   const section = getQuickActionsSection(sectionFlags);
 
@@ -233,8 +235,11 @@ export const useQuickActions = (
   );
 
   const fileItems = React.useMemo<QuickActionItem[]>(
-    () => [...createFileTiles, aiChatItems],
-    [createFileTiles, aiChatItems],
+    () => [
+      ...createFileTiles,
+      ...(isAiChatAvailable ? [aiChatItems] : []),
+    ],
+    [createFileTiles, aiChatItems, isAiChatAvailable],
   );
 
   const roomItems = React.useMemo<QuickActionItem[]>(
@@ -271,21 +276,22 @@ export const useQuickActions = (
         onClick: () =>
           dispatchCreateRoom(currentFolderId, RoomsType.CustomRoom),
       },
-      // Opens the Templates list (sidebar Rooms → Templates).
+      // Opens the create-room dialog on its template picker, so a room can be
+      // created from a template without leaving the Rooms list.
       {
         id: "quick-use-template",
         dataTestId: "quick-use-template",
         icon: <UseRoomTemplateIllustrationIcon />,
         label: t("Files:RoomTemplate"),
-        onClick: () => goTemplates(userId),
+        onClick: () => dispatchCreateRoomFromTemplate(currentFolderId),
       },
-      aiChatItems,
+      ...(isAiChatAvailable ? [aiChatItems] : []),
     ],
-    [t, currentFolderId, userId, aiChatItems],
+    [t, currentFolderId, aiChatItems, isAiChatAvailable],
   );
 
-  const formItems = React.useMemo<QuickActionItem[]>(
-    () => [
+  const formItems = React.useMemo<QuickActionItem[]>(() => {
+    const items: QuickActionItem[] = [
       // Collect forms → create a Form Filling Room.
       {
         id: "quick-form-room",
@@ -294,20 +300,50 @@ export const useQuickActions = (
         label: t("Common:FormSpaceTitle"),
         onClick: () => dispatchCreateRoom(currentFolderId, RoomsType.FormRoom),
       },
-      // Opens the form templates list (sidebar Forms → Templates). Note the
-      // in-room tile below reuses this `id` for the OForms gallery; only this
-      // one carries a testid, so the two can never collide in the DOM.
+      // Opens the create-room dialog on its template picker, scoped to form
+      // templates, so a form space can be created from a template without
+      // leaving the Forms list. Note the in-room tile below reuses this `id`
+      // for the OForms gallery; only this one carries a testid, so the two can
+      // never collide in the DOM.
       {
         id: "quick-form-template",
         dataTestId: "quick-form-space-template",
         icon: <UseRoomTemplateIllustrationIcon />,
-        label: t("Common:SpaceTemplate"),
-        onClick: () => goFormsTemplates(userId),
+        label: t("Common:FormSpaceTemplate"),
+        onClick: () => dispatchCreateRoomFromTemplate(currentFolderId, true),
       },
-      aiChatItems,
-    ],
-    [t, currentFolderId, userId, aiChatItems],
-  );
+    ];
+
+    // The OForms gallery. There is no folder to create a form in at the Forms
+    // root, so `createRoomFromTemplate` makes the picked template produce a
+    // form space built around it (see onCreateTemplateImpl).
+    if (templateGalleryAvailable) {
+      items.push({
+        id: "quick-form-gallery",
+        dataTestId: "quick-form-gallery",
+        icon: <CreateFromTemplateIcon />,
+        label: t("Common:TemplateGallery"),
+        onClick: () => {
+          setCreateRoomFromTemplate?.(true);
+          setTemplateGalleryVisible?.(true);
+          setOformFromFolderId?.(currentFolderId);
+        },
+      });
+    }
+
+    if (isAiChatAvailable) items.push(aiChatItems);
+
+    return items;
+  }, [
+    t,
+    currentFolderId,
+    aiChatItems,
+    isAiChatAvailable,
+    templateGalleryAvailable,
+    setCreateRoomFromTemplate,
+    setTemplateGalleryVisible,
+    setOformFromFolderId,
+  ]);
 
   // Inside a Form Filling room only PDF forms can be created. A blank PDF form
   // is the same `pdf` create flow as the personal-files PDF tile (dispatchCreate
@@ -319,7 +355,7 @@ export const useQuickActions = (
       {
         id: "quick-blank-pdf-form",
         icon: <BlankPdfIcon />,
-        label: t("Translations:NewForm"),
+        label: t("Common:BlankPDFForm"),
         onClick: () => dispatchCreate(currentFolderId, "pdf", t),
       },
     ];
@@ -336,7 +372,7 @@ export const useQuickActions = (
       });
     }
 
-    items.push(aiChatItems);
+    if (isAiChatAvailable) items.push(aiChatItems);
 
     return items;
   }, [
@@ -346,6 +382,7 @@ export const useQuickActions = (
     setTemplateGalleryVisible,
     setOformFromFolderId,
     aiChatItems,
+    isAiChatAvailable,
   ]);
 
   const agentItems = React.useMemo<QuickActionItem[]>(

@@ -91,11 +91,49 @@
   cursor: pointer;
 }
 
+// 1fr <-> 0fr animates the auto height; the inner element clips the content.
+.featuresWrap {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows 0.3s ease,
+    opacity 0.25s ease;
+}
+
+.featuresCollapsed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.featuresInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
 .features {
   display: flex;
   flex-direction: column;
   gap: 4px;
   margin-block-start: 8px;
+}
+
+// Duration must match SWAP_FADE_MS in the component.
+.swapFade {
+  transition: opacity 0.2s ease;
+}
+
+.swapFadeHidden {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featuresWrap {
+    transition: none;
+  }
+
+  .swapFade {
+    transition: none;
+  }
 }
 
 .featureRow {

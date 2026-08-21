@@ -1,20 +1,20 @@
 {
   "key_path": "ChangeTheRoomOwner",
-  "content": "Change the Room Owner",
-  "content_en_sha1_hash": "02a0f3d75f6449e5611f36f91216cb8be76a6efe",
-  "created_at": "2026-06-02T22:17:34.545Z",
-  "updated_at": "2026-07-07T08:59:21.759Z",
+  "content": "Change the room owner",
+  "content_en_sha1_hash": "5f42ce139e83e5ff11db6c8a0f00f2dda51b76df",
+  "created_at": "2026-08-13T14:36:42.148Z",
+  "updated_at": "2026-08-17T17:23:21.737Z",
   "comment": {
-    "text": "Dialog title or panel header used when initiating the process to reassign room ownership.",
+    "text": "Dialog title or panel header used when initiating the process of transferring room ownership.",
     "is_auto": true,
-    "updated_at": "2026-06-02T22:19:26.940Z",
+    "updated_at": "2026-08-13T14:54:52.512Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 197,
-      "context": "const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n })",
+      "line_number": 198,
+      "context": "const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\")\n : t(\"Common:PeopleSelectorInfo\");",
       "module": "/packages/client"
     },
     {
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/change-room-owner-dialog/index.tsx",
-      "line_number": 112,
-      "context": "[],\n );\n \n const ownerIsCurrentUser = !!currentUserId && roomOwnerId === currentUserId;\n \n const headerLabel = t(\"Common:ChangeTheRoomOwner\");\n const infoText = t(\"Common:PeopleSelectorInfo\", {\n productName: getBrandName(\"ProductName\"),\n });\n \n const onSubmit: TOnSubmit = async (users, _access, _name, isLeaveChecked) => {",
+      "line_number": 111,
+      "context": "[],\n );\n \n const ownerIsCurrentUser = !!currentUserId && roomOwnerId === currentUserId;\n \n const headerLabel = t(\"Common:ChangeTheRoomOwner\");\n const infoText = t(\"Common:PeopleSelectorInfo\");\n \n const onSubmit: TOnSubmit = async (users, _access, _name, isLeaveChecked) => {\n const newOwnerId = users[0]?.id;\n if (!newOwnerId || typeof newOwnerId !== \"string\") return;",
       "module": "/packages/sdk"
     }
   ],
@@ -104,6 +104,12 @@
       "approved_at": null
     },
     "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

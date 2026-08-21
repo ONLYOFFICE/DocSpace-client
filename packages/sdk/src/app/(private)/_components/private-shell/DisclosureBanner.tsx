@@ -39,8 +39,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
-import { getBrandName } from "@docspace/shared/constants/brands";
-
 import { useEncryptionIdentityStore } from "../../_store/EncryptionIdentityStore";
 
 import styles from "./DisclosureBanner.module.scss";
@@ -83,9 +81,7 @@ const DisclosureBannerInner: React.FC = () => {
       <div className={styles.content}>
         <p className={styles.title}>{t("Common:PrivateRoomDisclosureTitle")}</p>
         <p className={styles.body}>
-          {t("Common:PrivateRoomDisclosureBody", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("Common:PrivateRoomDisclosureBody")}
         </p>
       </div>
       <button

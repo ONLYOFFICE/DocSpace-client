@@ -3,7 +3,7 @@
   "content": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>",
   "content_en_sha1_hash": "d3fb9b35c837c5329abc87569daecaa83b8fff21",
   "created_at": "2025-05-19T21:30:54.114Z",
-  "updated_at": "2026-08-06T16:57:12.648Z",
+  "updated_at": "2026-08-14T14:58:32.667Z",
   "comment": {
     "text": "This is a message displayed in the Quotas Bar. It informs users that they have exceeded their personal storage quota and provides a link to the \"Storage management settings\" to free up space or manage user quotas.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 178,
-      "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"PersonalUserQuotaAdminsDescription\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
+      "line_number": 166,
+      "context": "return t(\"PersonalUserQuotaDescription\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"PersonalUserQuotaAdminsDescription\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }
   ],

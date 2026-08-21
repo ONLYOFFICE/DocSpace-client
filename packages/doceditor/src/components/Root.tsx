@@ -47,6 +47,7 @@ import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
 import useSelectFolderDialog from "@/hooks/useSelectFolderDialog";
 import useSocketHelper from "@/hooks/useSocketHelper";
+import useSessionLifetime from "@/hooks/useSessionLifetime";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
@@ -127,8 +128,6 @@ const Root = ({
 
   deepLinkSettings,
   baseSdkConfig,
-
-  generationToolCallState,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -178,6 +177,8 @@ const Root = ({
     folderId: config?.file?.folderId,
     folderType: config?.file?.rootFolderType,
   });
+
+  useSessionLifetime(user);
 
   const {
     changeLinkTypeDialogVisible,
@@ -363,7 +364,6 @@ const Root = ({
           onDownloadAs={onDownloadAs}
           filesSettings={filesSettings}
           shareKey={shareKey}
-          generationToolCallState={generationToolCallState}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}
@@ -390,6 +390,10 @@ const Root = ({
           filesSettings={filesSettings as SelectFolderDialogProps["filesSettings"]}
           fileSaveAsExtension={extensionSelectorFolderDialog}
           selectedFolderId={selectedFolderId}
+          disabledCreatePublicRoom={
+            !filesSettings.externalShare &&
+            filesSettings.externalShareApplyToRooms
+          }
         />
       ) : null}
       {selectFileDialogVisible && fileInfo ? (

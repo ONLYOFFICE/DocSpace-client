@@ -69,6 +69,8 @@ import type {
   NavMenuItem,
   NavSubItem,
 } from "@docspace/ui-kit/components/nav-menu";
+import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -86,6 +88,7 @@ import {
   type TTreeFolder,
   type FolderIds,
 } from "SRC_DIR/helpers/articleNavigation";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
 
 type ClientArticleSidebarProps = FolderIds & {
   userId?: string;
@@ -120,70 +123,70 @@ const ClientArticleSidebar = ({
   const onFolderNavigateRef = React.useRef(onFolderNavigate);
   onFolderNavigateRef.current = onFolderNavigate;
 
-  const go = React.useCallback(
-    (path: string) => () => {
-      onFolderNavigateRef.current?.();
-      navigate(path);
-    },
+  const aiChatStore = useAiChatStoreOptional();
+
+  // Every sidebar entry is described by the URL it opens, so the same target
+  // can be rendered as a real <a href> (Ctrl/Cmd-click and "Open link in new
+  // tab" work) and still navigate in-app on a plain click. `nav()` builds the
+  // { linkData, onClick } pair every item spreads in.
+  const nav = React.useCallback(
+    (path: string): Pick<NavSubItem, "linkData" | "onClick"> => ({
+      linkData: { path },
+      onClick: () => {
+        aiChatStore?.setFullscreen(false);
+        onFolderNavigateRef.current?.();
+        navigate(path);
+      },
+    }),
     [navigate],
   );
 
-  const goFolder = React.useCallback(
-    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) => () => {
-      onFolderNavigateRef.current?.();
-      navigate(buildFolderUrl(folderId, rootFolderType, userId));
-    },
-    [navigate, userId],
+  const folderUrl = React.useCallback(
+    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
+      buildFolderUrl(folderId, rootFolderType, userId),
+    [userId],
   );
 
   // Agent-scoped Recent/Favorites/Trash: same alias data, routed under
   // /ai-agents/* so the sidebar keeps the selection under AI Agents.
-  const goFolderAgent = React.useCallback(
-    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) => () => {
-      onFolderNavigateRef.current?.();
-      navigate(buildFolderUrl(folderId, rootFolderType, userId, true));
-    },
-    [navigate, userId],
+  const agentFolderUrl = React.useCallback(
+    (folderId: number, rootFolderType: TTreeFolder["rootFolderType"]) =>
+      buildFolderUrl(folderId, rootFolderType, userId, true),
+    [userId],
   );
 
   // Section-scoped Recent/Favorites/Trash: the same special files views,
   // constrained to the section's content via the `folderType` scope filter
   // (the folder types of the rooms/root the section is made of). The
-  // recent/favorites folder ids are known up front (from the tree), so we
-  // navigate with the concrete `folder=<id>` instead of the "@recent"/
-  // "@favorites" alias FilesFilter.getDefault would otherwise set.
-  const goScoped = React.useCallback(
+  // recent/favorites folder ids are known up front (from the tree), so the URL
+  // carries the concrete `folder=<id>` instead of the "@recent"/"@favorites"
+  // alias FilesFilter.getDefault would otherwise set.
+  const scopedUrl = React.useCallback(
     (
       categoryType: ValueOf<typeof CategoryType>,
       basePath: string,
       folderId: number | null | undefined,
       folderType: FolderType[],
-    ) =>
-      () => {
-        onFolderNavigateRef.current?.();
-        const filter = FilesFilter.getDefault({ categoryType });
-        if (folderId != null) filter.folder = String(folderId);
-        filter.folderType = folderType;
-        navigate(`${basePath}/filter?${filter.toUrlParams()}`);
-      },
-    [navigate],
+    ) => {
+      const filter = FilesFilter.getDefault({ categoryType });
+      if (folderId != null) filter.folder = String(folderId);
+      filter.folderType = folderType;
+      return `${basePath}/filter?${filter.toUrlParams()}`;
+    },
+    [],
   );
 
-  // Templates: the Rooms list scoped to the Templates search area. Replaces the
-  // former Rooms/Templates submenu tabs (searchArea=Templates on /rooms/shared).
-  const goTemplates = React.useCallback(() => {
-    onFolderNavigateRef.current?.();
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Templates);
-    filter.searchArea = RoomSearchArea.Templates;
-    navigate(`/rooms/shared/filter?${filter.toUrlParams(userId, false)}`);
-  }, [navigate, userId]);
-
-  const goFormsTemplates = React.useCallback(() => {
-    onFolderNavigateRef.current?.();
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.FormTemplates);
-    filter.searchArea = RoomSearchArea.FormTemplates;
-    navigate(`/forms/filter?${filter.toUrlParams(userId, false)}`);
-  }, [navigate, userId]);
+  // Rooms list scoped to a search area — Templates replaces the former
+  // Rooms/Templates submenu tabs (searchArea=Templates on /rooms/shared), and
+  // Forms/FormTemplates do the same on /forms.
+  const searchAreaUrl = React.useCallback(
+    (basePath: string, searchArea: RoomSearchArea) => {
+      const filter = RoomsFilter.getDefault(userId, searchArea);
+      filter.searchArea = searchArea;
+      return `${basePath}?${filter.toUrlParams(userId, false)}`;
+    },
+    [userId],
+  );
 
   const activeId = React.useMemo(
     () =>
@@ -208,11 +211,17 @@ const ClientArticleSidebar = ({
       id: String(folder.id),
       label: folder.title,
       icon: getCatalogIconUrlByType(folder.rootFolderType),
-      onClick: goFolder(folder.id, folder.rootFolderType),
+      ...nav(folderUrl(folder.id, folder.rootFolderType)),
       ...extra,
     });
 
     const newCount = (folder?: TTreeFolder) => folder?.newItems ?? 0;
+
+    const panelFolderId = (folder: TTreeFolder): string | number => {
+      if (folder.rootFolderType === FolderType.Rooms) return "rooms";
+      if (folder.rootFolderType === FolderType.AIAgents) return "agents";
+      return folder.id;
+    };
 
     const sectionBadge = (
       folderId: string | number,
@@ -237,7 +246,10 @@ const ClientArticleSidebar = ({
       if (total <= 0 || !parent) return {};
       return {
         collapsedBadgeComponent: (
-          <NewFilesBadge newFilesCount={total} folderId={parent.id} />
+          <NewFilesBadge
+            newFilesCount={total}
+            folderId={panelFolderId(parent)}
+          />
         ),
       };
     };
@@ -246,7 +258,7 @@ const ClientArticleSidebar = ({
       id: "dashboard",
       label: t("Common:Overview"),
       icon: CatalogOverviewReactSvgUrl,
-      onClick: go("/dashboard"),
+      ...nav("/dashboard"),
     };
 
     const roomsFolder = find(FolderType.Rooms);
@@ -300,9 +312,9 @@ const ClientArticleSidebar = ({
         id: myDocsFolder ? String(myDocsFolder.id) : "files",
         label: myDocsFolder ? myDocsFolder.title : t("Common:Files"),
         icon: getCatalogIconUrlByType(FolderType.USER),
-        onClick: primaryFolder
-          ? goFolder(primaryFolder.id, primaryFolder.rootFolderType)
-          : undefined,
+        ...(primaryFolder
+          ? nav(folderUrl(primaryFolder.id, primaryFolder.rootFolderType))
+          : {}),
         ...sectionBadge(
           myDocsFolder ? myDocsFolder.id : (primaryFolder?.id ?? ""),
           newCount(myDocsFolder),
@@ -315,7 +327,7 @@ const ClientArticleSidebar = ({
     if (roomsFolder) {
       mainItems.push({
         ...navItem(roomsFolder),
-        ...sectionBadge(roomsFolder.id, newCount(roomsFolder)),
+        ...sectionBadge(panelFolderId(roomsFolder), newCount(roomsFolder)),
         ...collapsedBadge(roomsFolder, [archiveFolder]),
         children: [
           // Recent/Favorites under Rooms reuse the @recent/@favorites files
@@ -324,22 +336,26 @@ const ClientArticleSidebar = ({
             id: "rooms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            onClick: goScoped(
-              CategoryType.Recent,
-              "/rooms/recent",
-              recentFolderId,
-              ROOMS_SECTION_FOLDER_TYPES,
+            ...nav(
+              scopedUrl(
+                CategoryType.Recent,
+                "/rooms/recent",
+                recentFolderId,
+                ROOMS_SECTION_FOLDER_TYPES,
+              ),
             ),
           },
           {
             id: "rooms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            onClick: goScoped(
-              CategoryType.Favorite,
-              "/rooms/favorite",
-              favoritesFolderId,
-              ROOMS_SECTION_FOLDER_TYPES,
+            ...nav(
+              scopedUrl(
+                CategoryType.Favorite,
+                "/rooms/favorite",
+                favoritesFolderId,
+                ROOMS_SECTION_FOLDER_TYPES,
+              ),
             ),
           },
           ...(canUseTemplates
@@ -348,7 +364,12 @@ const ClientArticleSidebar = ({
                   id: "rooms-templates",
                   label: t("Common:Templates"),
                   icon: getCatalogIconUrlByType(FolderType.RoomTemplates),
-                  onClick: goTemplates,
+                  ...nav(
+                    searchAreaUrl(
+                      "/rooms/shared/filter",
+                      RoomSearchArea.Templates,
+                    ),
+                  ),
                 },
               ]
             : []),
@@ -364,11 +385,13 @@ const ClientArticleSidebar = ({
             id: "rooms-trash",
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
-            onClick: goScoped(
-              CategoryType.Trash,
-              "/rooms/trash",
-              recycleBinFolderId,
-              ROOMS_SECTION_FOLDER_TYPES,
+            ...nav(
+              scopedUrl(
+                CategoryType.Trash,
+                "/rooms/trash",
+                recycleBinFolderId,
+                ROOMS_SECTION_FOLDER_TYPES,
+              ),
             ),
           },
         ],
@@ -380,35 +403,33 @@ const ClientArticleSidebar = ({
     // Active rooms listing), so the item points at the dedicated /forms route
     // scoped to that search area.
     if (roomsFolder) {
-      const formsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Forms);
-      formsFilter.searchArea = RoomSearchArea.Forms;
-
       mainItems.push({
         id: "forms",
         label: t("Common:Forms"),
         icon: getCatalogIconUrlByType(FolderType.FormRoom),
-        onClick: go(`/forms/filter?${formsFilter.toUrlParams(userId, false)}`),
+        ...nav(searchAreaUrl("/forms/filter", RoomSearchArea.Forms)),
         children: [
           {
             id: "forms-recent",
             label: t("Common:Recent"),
             icon: getCatalogIconUrlByType(FolderType.Recent),
-            onClick: goScoped(
-              CategoryType.Recent,
-              "/forms/recent",
-              recentFolderId,
-              [FolderType.FormRoom],
+            ...nav(
+              scopedUrl(CategoryType.Recent, "/forms/recent", recentFolderId, [
+                FolderType.FormRoom,
+              ]),
             ),
           },
           {
             id: "forms-favorites",
             label: t("Common:Favorites"),
             icon: getCatalogIconUrlByType(FolderType.Favorites),
-            onClick: goScoped(
-              CategoryType.Favorite,
-              "/forms/favorites",
-              favoritesFolderId,
-              [FolderType.FormRoom],
+            ...nav(
+              scopedUrl(
+                CategoryType.Favorite,
+                "/forms/favorites",
+                favoritesFolderId,
+                [FolderType.FormRoom],
+              ),
             ),
           },
           ...(canUseTemplates
@@ -417,7 +438,12 @@ const ClientArticleSidebar = ({
                   id: "forms-templates",
                   label: t("Common:Templates"),
                   icon: getCatalogIconUrlByType(FolderType.RoomTemplates),
-                  onClick: goFormsTemplates,
+                  ...nav(
+                    searchAreaUrl(
+                      "/forms/filter",
+                      RoomSearchArea.FormTemplates,
+                    ),
+                  ),
                 },
               ]
             : []),
@@ -425,11 +451,13 @@ const ClientArticleSidebar = ({
             id: "forms-trash",
             label: t("Common:TrashSection"),
             icon: getCatalogIconUrlByType(FolderType.TRASH),
-            onClick: goScoped(
-              CategoryType.Trash,
-              "/forms/trash",
-              recycleBinFolderId,
-              [FolderType.FormRoom],
+            ...nav(
+              scopedUrl(
+                CategoryType.Trash,
+                "/forms/trash",
+                recycleBinFolderId,
+                [FolderType.FormRoom],
+              ),
             ),
             withTopSeparator: true,
           },
@@ -445,34 +473,39 @@ const ClientArticleSidebar = ({
     if (aiAgentsFolder) {
       const agentChildren: NavSubItem[] = [];
       if (recentFolder)
-        agentChildren.push({
-          ...navItem(recentFolder, {
+        agentChildren.push(
+          navItem(recentFolder, {
             id: "agents-recent",
             ...sectionBadge(recentFolder.id, newCount(recentFolder)),
+            ...nav(
+              agentFolderUrl(recentFolder.id, recentFolder.rootFolderType),
+            ),
           }),
-          onClick: goFolderAgent(recentFolder.id, recentFolder.rootFolderType),
-        });
+        );
       if (favFolder)
-        agentChildren.push({
-          ...navItem(favFolder, {
+        agentChildren.push(
+          navItem(favFolder, {
             id: "agents-favorites",
             ...sectionBadge(favFolder.id, newCount(favFolder)),
+            ...nav(agentFolderUrl(favFolder.id, favFolder.rootFolderType)),
           }),
-          onClick: goFolderAgent(favFolder.id, favFolder.rootFolderType),
-        });
+        );
       if (trashFolder)
-        agentChildren.push({
-          ...navItem(trashFolder, {
+        agentChildren.push(
+          navItem(trashFolder, {
             id: "agents-trash",
             withTopSeparator: true,
             ...sectionBadge(trashFolder.id, newCount(trashFolder)),
+            ...nav(agentFolderUrl(trashFolder.id, trashFolder.rootFolderType)),
           }),
-          onClick: goFolderAgent(trashFolder.id, trashFolder.rootFolderType),
-        });
+        );
 
       const agentsItem: NavMenuItem = {
         ...navItem(aiAgentsFolder),
-        ...sectionBadge(aiAgentsFolder.id, newCount(aiAgentsFolder)),
+        ...sectionBadge(
+          panelFolderId(aiAgentsFolder),
+          newCount(aiAgentsFolder),
+        ),
       };
       mainItems.push(
         agentChildren.length > 0
@@ -495,12 +528,11 @@ const ClientArticleSidebar = ({
     ];
   }, [
     t,
-    go,
-    goFolder,
-    goFolderAgent,
-    goScoped,
-    goTemplates,
-    goFormsTemplates,
+    nav,
+    folderUrl,
+    agentFolderUrl,
+    scopedUrl,
+    searchAreaUrl,
     treeFolders,
     isVisitor,
     canUseTemplates,
@@ -515,6 +547,7 @@ const ClientArticleSidebar = ({
       groups={groups}
       activeId={activeId}
       isNavLoading={isNavLoading}
+      pluginSection={Section.Files}
     />
   );
 };
@@ -551,4 +584,3 @@ const ClientArticleSidebarConnected = inject<TStore>(
 )(observer(ClientArticleSidebar));
 
 export default ClientArticleSidebarConnected;
-

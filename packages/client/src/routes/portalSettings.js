@@ -43,6 +43,8 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 import { generalRoutes } from "./general";
 
 import { ViewComponent } from "../pages/PortalSettings/View";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
+import { getPluginSectionRoute } from "SRC_DIR/helpers/plugins/navigation";
 
 const DevToolsRedirect = () => {
   const location = useLocation();
@@ -482,6 +484,17 @@ const PortalSettingsRoutes = {
         );
 
         return { Component: ProviderMetadataSection };
+      },
+    },
+    {
+      path: getPluginSectionRoute(Section.Settings),
+      async lazy() {
+        const { Component } = await componentLoader(
+          () => import("SRC_DIR/components/PluginSection"),
+        );
+        return {
+          Component,
+        };
       },
     },
     {

@@ -42,7 +42,6 @@ import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { WarningQuotaDialogProps } from "./WarningQuotaDialog.types";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const WarningQuotaDialog = ({
   t,
@@ -77,7 +76,6 @@ export const WarningQuotaDialog = ({
       quotaLimits.push(
         t("Settings:TenantQuotaLimit", {
           tenantQuotaLimit: getConvertedSize(t, tenantCustomQuota),
-          productName: getBrandName("ProductName"),
         }),
       );
     }
@@ -88,7 +86,6 @@ export const WarningQuotaDialog = ({
 
     return t("Settings:StorageQuotaWarningDescription", {
       quotaLimits: quotaLimits.join(", "),
-      productName: getBrandName("ProductName"),
     });
   };
 

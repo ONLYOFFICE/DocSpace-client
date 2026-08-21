@@ -1,0 +1,29 @@
+{
+  "key_path": "WelcomeAiChatTitle",
+  "content": "Your AI assistant for documents",
+  "content_en_sha1_hash": "574281f99d387ba54c48df2a896467fe18504755",
+  "created_at": "2026-08-07T15:05:18.971Z",
+  "updated_at": "2026-08-07T15:07:16.537Z",
+  "comment": {
+    "text": "Heading for the AI agent chat introduction screen.",
+    "is_auto": true,
+    "updated_at": "2026-08-07T15:07:16.537Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat-intro/index.tsx",
+      "line_number": 63,
+      "context": "fontWeight=\"600\"\n lineHeight=\"16px\"\n className={styles.text}\n noSelect\n >\n {t(\"WelcomeAiChatTitle\")}\n </Text>\n </div>\n );\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

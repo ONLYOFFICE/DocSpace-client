@@ -54,6 +54,7 @@ import FilesTourStore from "./FilesTourStore";
 import RoomsTourStore from "./RoomsTourStore";
 import FormsTourStore from "./FormsTourStore";
 import AiAgentsTourStore from "./AiAgentsTourStore";
+import DashboardTourStore from "./DashboardTourStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -208,6 +209,7 @@ const filesTourStore = new FilesTourStore();
 const roomsTourStore = new RoomsTourStore();
 const formsTourStore = new FormsTourStore();
 const aiAgentsTourStore = new AiAgentsTourStore();
+const dashboardTourStore = new DashboardTourStore();
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
@@ -380,6 +382,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   clientLoadingStore,
   dialogsStore,
   avatarEditorDialogStore,
+  oformsStore,
 );
 
 const createEditAgentStore = new CreateEditAgentStore(
@@ -415,6 +418,7 @@ const docsConnectStore = new DocsConnectStore(
   settingsStore,
   currentTariffStatusStore,
   currentQuotaStore,
+  documentBuilderReportStore,
 );
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
@@ -496,6 +500,7 @@ const store = {
   roomsTourStore,
   formsTourStore,
   aiAgentsTourStore,
+  dashboardTourStore,
 
   aiRoomStore,
   appsStore,

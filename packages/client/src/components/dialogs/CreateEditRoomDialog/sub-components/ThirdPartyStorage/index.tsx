@@ -54,7 +54,6 @@ import styles from "SRC_DIR/components/dialogs/CreateEditRoomDialog/CreateEditRo
 
 import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ThirdPartyStorageProps = {
 	t: TFunction;
@@ -124,9 +123,7 @@ const ThirdPartyStorage = ({
 		if (!connectItems?.length) {
 			const data = isRoomAdmin ? (
 				<Text as="p">
-					{t("ThirdPartyStorageRoomAdminNoStorageAlert", {
-						productName: getBrandName("ProductName"),
-					})}
+					{t("ThirdPartyStorageRoomAdminNoStorageAlert")}
 				</Text>
 			) : (
 				<Text as="p">

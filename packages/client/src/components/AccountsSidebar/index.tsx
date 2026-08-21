@@ -75,6 +75,7 @@ import {
   GROUPS_ROUTE_WITH_FILTER,
   GUESTS_ROUTE_WITH_FILTER,
 } from "SRC_DIR/helpers/contacts";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
 
 const MEMBERS_ID = "accounts-members";
 const GROUPS_ID = "accounts-groups";
@@ -102,10 +103,14 @@ const AccountsSidebar = ({ isNavLoading }: AccountsSidebarProps) => {
   // Navigating to the bare routes (e.g. `/accounts/people`) forces an extra
   // `<Navigate replace />` redirect hop, which remounts the view and shows the
   // body skeleton on every section switch.
-  const goToFilterRoute = React.useCallback(
-    (route: string) => () => {
+  // `linkData` renders the item as a real router link (right-click / Ctrl-click
+  // / middle-click open the section in a new tab), while `onClick` keeps the
+  // plain click an in-app navigation.
+  const navToFilterRoute = React.useCallback(
+    (route: string): Pick<NavMenuItem, "linkData" | "onClick"> => {
       const params = AccountsFilter.getDefault().toUrlParams();
-      navigate(`/${route}?${params}`);
+      const path = `/${route}?${params}`;
+      return { linkData: { path }, onClick: () => navigate(path) };
     },
     [navigate],
   );
@@ -116,23 +121,23 @@ const AccountsSidebar = ({ isNavLoading }: AccountsSidebarProps) => {
         id: MEMBERS_ID,
         label: t("Common:Members"),
         icon: getCatalogIconUrlByType(PageType.account),
-        onClick: goToFilterRoute(PEOPLE_ROUTE_WITH_FILTER),
+        ...navToFilterRoute(PEOPLE_ROUTE_WITH_FILTER),
       },
       {
         id: GROUPS_ID,
         label: t("Common:Groups"),
         icon: getCatalogIconUrlByType(PageType.groups),
-        onClick: goToFilterRoute(GROUPS_ROUTE_WITH_FILTER),
+        ...navToFilterRoute(GROUPS_ROUTE_WITH_FILTER),
       },
       {
         id: GUESTS_ID,
         label: t("Common:Guests"),
         icon: getCatalogIconUrlByType(PageType.guests),
-        onClick: goToFilterRoute(GUESTS_ROUTE_WITH_FILTER),
+        ...navToFilterRoute(GUESTS_ROUTE_WITH_FILTER),
       },
     ];
     return [{ id: "accounts", items }];
-  }, [t, goToFilterRoute]);
+  }, [t, navToFilterRoute]);
 
   return (
     <AppsSidebar
@@ -140,10 +145,11 @@ const AccountsSidebar = ({ isNavLoading }: AccountsSidebarProps) => {
       activeId={activeId}
       variant="secondary"
       isNavLoading={isNavLoading}
+      pluginSection={Section.Accounts}
     />
   );
 };
 
 export default inject<TStore>(({ clientLoadingStore }) => ({
-  isNavLoading: clientLoadingStore.showBodyLoader,
+  isNavLoading: clientLoadingStore.showArticleLoader,
 }))(observer(AccountsSidebar));

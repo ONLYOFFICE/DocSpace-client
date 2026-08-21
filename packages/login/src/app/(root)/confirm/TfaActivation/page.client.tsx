@@ -70,7 +70,6 @@ import {
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { useSearchParams } from "next/navigation";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TfaActivationFormProps = {
   secretKey: string;
@@ -161,7 +160,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
           {t("TfaTitle")}
         </Text>
         <Text className="set-app-subtitle">
-          {t("TfaSubTitle", { productName: getBrandName("ProductName") })}
+          {t("TfaSubTitle")}
         </Text>
 
         <div className="description">

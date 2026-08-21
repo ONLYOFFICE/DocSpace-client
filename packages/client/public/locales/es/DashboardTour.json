@@ -1,0 +1,18 @@
+{
+  "DashboardApps": "Estos son nuestros productos, cada uno creado para encargarse de un tipo distinto de trabajo por usted: documentos, colaboración, recopilación de datos y ayuda de la IA. Abra cualquiera de ellos y también recibirá un breve recorrido por esa sección.",
+  "DashboardAppsTitle": "Todo aquello con lo que puede trabajar",
+  "DashboardCreate": "Cree aquí mismo su primer documento: elija un tipo y empiece a escribir. Se guardará en {{files}}, donde podrá encontrarlo en cualquier momento.",
+  "DashboardCreateTitle": "Cree algo ahora",
+  "DashboardDevTools": "¿Está creando algo propio? Todo esto es para eso: una API para controlar el espacio de trabajo desde su código, un SDK para incrustar los editores en su propia aplicación, complementos, webhooks y claves. Nada de esto es necesario para usar {{organizationName}} {{productName}} en el día a día.",
+  "DashboardDevToolsTitle": "Para desarrolladores",
+  "DashboardIntegrations": "¿Ya trabaja en otra plataforma? Conéctela aquí y conserve los editores que acaba de ver directamente en las herramientas que su equipo ya utiliza, sin código personalizado ni migración de datos.",
+  "DashboardIntegrationsTitle": "Trabajar con otras plataformas",
+  "DashboardOverview": "Esta página está siempre a un clic: abra {{overview}} en la barra lateral siempre que quiera volver a ella.",
+  "DashboardOverviewTitle": "Volver aquí",
+  "DashboardProfile": "El nombre del espacio de trabajo y un breve resumen de su perfil: nombre, correo electrónico y contraseña. Desde aquí puede renombrar el espacio de trabajo o cambiar su contraseña.",
+  "DashboardProfileTitle": "Los datos de su perfil",
+  "WelcomeDashboardSubtitle": "Todo empieza en esta página",
+  "WelcomeDashboardTitle": "Bienvenido a {{organizationName}} {{productName}}",
+  "WelcomeDescription": "Cree documentos, colabore en salas, recopile datos con formularios y deje que la IA se encargue de leer: todo desde un mismo lugar. Haga un recorrido rápido y se lo mostraremos todo.",
+  "WelcomeLater": "Quizá más tarde"
+}

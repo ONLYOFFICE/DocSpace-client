@@ -147,7 +147,7 @@ type AiAgentsProps = {
 
 const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   const { t } = useTranslation(["Common"]);
-  useDocumentTitle("Common:DashboardAIChatAgentsTitle");
+  useDocumentTitle("Common:AIAgents");
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const lastSdkKeyRef = React.useRef<string | null>(null);
@@ -195,7 +195,7 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   const apiRef = useSdkFrame({
     appId: "ai-agents",
     enabled: !!canManageAgents,
-    title: t("Common:DashboardAIChatAgentsTitle"),
+    title: t("Common:AIAgents"),
     getSrc: () => {
       const { payload } = buildNavKey(searchParamsRef.current);
       if (payload.agentId) {
@@ -230,7 +230,7 @@ const AiAgentsComponent = ({ canManageAgents, theme }: AiAgentsProps) => {
   if (!canManageAgents) {
     return (
       <EmptyView
-        title={t("Common:DashboardAIChatAgentsTitle")}
+        title={t("Common:AIAgents")}
         description={t("Common:AIAgentsNonAdminDescription")}
         icon={
           theme?.isBase !== false ? (

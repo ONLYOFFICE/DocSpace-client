@@ -3,7 +3,7 @@
   "content": "Interface elements",
   "content_en_sha1_hash": "664ca787f30b4553416fc2fd6e29813dbe80ffc7",
   "created_at": "2026-06-09T09:42:47.495Z",
-  "updated_at": "2026-06-15T19:31:56.011Z",
+  "updated_at": "2026-08-14T14:58:32.729Z",
   "comment": {
     "text": "A section header or label in the Embedding Panel and developer tools settings used to categorize a group of UI-related configuration options.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 525,
+      "line_number": 522,
       "context": "<Text\n className={styles.embeddingPanelHeaderText}\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"Common:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}",
       "module": "/packages/client"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 495,
+      "line_number": 490,
       "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"Common:InterfaceElements\")}</CategorySubHeader>\n \n <CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"",
       "module": "/packages/client"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/info-panel/sub-components/EmbeddingPanel/index.tsx",
-      "line_number": 487,
+      "line_number": 484,
       "context": "<Text\n className={styles.embeddingPanelHeaderText}\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"Common:InterfaceElements\")}\n </Text>\n \n <div className={styles.embeddingPanelCheckboxContainer}>\n <CheckboxElement\n label={t(\"Common:Title\")}",
       "module": "/packages/sdk"
     }

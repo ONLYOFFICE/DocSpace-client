@@ -3,7 +3,7 @@
   "content": "<1>OpenRouter pricing</1> + 20% service fee applies to usage",
   "content_en_sha1_hash": "f7b743f7575725a6c402aca9abeb55073adf8cc8",
   "created_at": "2026-07-03T11:07:19.132Z",
-  "updated_at": "2026-07-03T11:12:51.192Z",
+  "updated_at": "2026-08-20T12:26:01.772Z",
   "comment": {
     "text": "Informational text in an AI features banner notifying users of an additional 20% service fee; the <1> tag wraps the phrase \"OpenRouter pricing\".",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/new-chat/components/chat-ai-benefits/index.tsx",
+      "line_number": 78,
+      "context": "<li className={styles.item}>\n <PriceIcon className={styles.icon} />\n <Text as=\"span\" fontSize=\"12px\" fontWeight=\"600\" lineHeight=\"16px\">\n <CommonTrans\n i18nKey=\"AIOpenRouterPricingNote\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight={600}",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
       "line_number": 95,

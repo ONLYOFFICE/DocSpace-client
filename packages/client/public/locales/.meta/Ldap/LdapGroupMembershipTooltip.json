@@ -1,20 +1,20 @@
 {
   "key_path": "LdapGroupMembershipTooltip",
-  "content": "Enable this option if you want to add groups from LDAP server to {{productName}} Accounts. Please note that only users who belong to these groups will be added.",
-  "content_en_sha1_hash": "b9ce909a518bb12d1a4224e200ca4366908b2784",
-  "created_at": "2025-05-19T21:30:54.218Z",
-  "updated_at": "2026-05-15T14:00:06.849Z",
+  "content": "Enable this option if you want to add groups from LDAP server to the workspace Accounts. Please note that only users who belong to these groups will be added.",
+  "content_en_sha1_hash": "d705b2ef3de9fb3d0a25cfa0c11f89a4958efb79",
+  "created_at": "2026-08-13T22:44:30.845Z",
+  "updated_at": "2026-08-14T15:29:25.163Z",
   "comment": {
-    "text": "This is a tooltip providing additional information for the \"Group Membership\" setting. It explains that enabling this option allows adding LDAP groups to {{productName}} Accounts, and only users within those groups will be added.",
+    "text": "Tooltip for a help button in the LDAP integration settings, explaining the impact of enabling LDAP group membership on workspace accounts.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:17:07.516Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-14T15:29:25.163Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 112,
-      "context": "label={t(\"LdapGroupMembership\")}\n isDisabled={!isLdapEnabled || isUIDisabled}\n dataTestId=\"group_membership_toggle_button\"\n />\n <HelpButton\n tooltipContent={t(\"LdapGroupMembershipTooltip\", {\n productName: getBrandName(\"ProductName\"),\n })}\n dataTestId=\"group_membership_help_button\"\n />\n </div>",
+      "line_number": 111,
+      "context": "label={t(\"LdapGroupMembership\")}\n isDisabled={!isLdapEnabled || isUIDisabled}\n dataTestId=\"group_membership_toggle_button\"\n />\n <HelpButton\n tooltipContent={t(\"LdapGroupMembershipTooltip\")}\n dataTestId=\"group_membership_help_button\"\n />\n </div>\n <div className=\"group_membership-container\">\n <FieldContainer",
       "module": "/packages/client"
     }
   ],
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

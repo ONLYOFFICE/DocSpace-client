@@ -143,12 +143,15 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
 
   if (!res) {
     logger.error(
-      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, File create failed, open empty editor`,
+      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, File create failed`,
     );
-    const documentServerUrl = await getEditorUrl();
 
     return (
-      <Editor documentServerUrl={documentServerUrl?.docServiceUrl ?? ""} />
+      <CreateFileError
+        error={new Error()}
+        fileInfo={fileInfo}
+        fromFile={!!fromFile}
+      />
     );
   }
 

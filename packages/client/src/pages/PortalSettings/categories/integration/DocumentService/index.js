@@ -69,6 +69,7 @@ const DocumentService = ({
   docsConnectConnection,
   fetchDocsConnectConnection,
   applyDocsConnectToPortal,
+  isDocsConnectAvailable,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -106,8 +107,8 @@ const DocumentService = ({
   }, [t]);
 
   useEffect(() => {
-    fetchDocsConnectConnection?.();
-  }, [fetchDocsConnectConnection]);
+    if (isDocsConnectAvailable) fetchDocsConnectConnection?.();
+  }, [fetchDocsConnectConnection, isDocsConnectAvailable]);
 
   const applySecretKey = (value) => {
     const nextValue = value || SECRET_KEY_MASK;
@@ -337,7 +338,7 @@ const DocumentService = ({
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>
-        {showConnectEditorsBanner ? (
+        {!isDocsConnectAvailable ? null : showConnectEditorsBanner ? (
           <div className={styles.docsConnectPromo}>
             <div className={styles.docsConnectPromoText}>
               <Text className={styles.docsConnectPromoTitle}>
@@ -489,9 +490,7 @@ const DocumentService = ({
               <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="internalAdress"
-                  text={t("Settings:DocumentServiceLocationUrlInternal", {
-                    productName: getBrandName("ProductName"),
-                  })}
+                  text={t("Settings:DocumentServiceLocationUrlInternal")}
                 />
                 <InputBlock
                   id="internalAdress"
@@ -516,9 +515,7 @@ const DocumentService = ({
               <div className={styles.inputWrapper}>
                 <Label
                   htmlFor="portalAdress"
-                  text={t("Settings:DocumentServiceLocationUrlPortal", {
-                    productName: getBrandName("ProductName"),
-                  })}
+                  text={t("Settings:DocumentServiceLocationUrlPortal")}
                 />
                 <InputBlock
                   id="portalAdress"
@@ -604,6 +601,7 @@ export default inject(
       docsConnectConnection: docsConnectStore.connectionData,
       fetchDocsConnectConnection: docsConnectStore.fetchConnection,
       applyDocsConnectToPortal: docsConnectStore.applyToDocumentService,
+      isDocsConnectAvailable: docsConnectStore.isPortalConnectionAvailable,
     };
   },
 )(observer(DocumentService));

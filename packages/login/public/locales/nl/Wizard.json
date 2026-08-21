@@ -1,5 +1,5 @@
 {
-  "Desc": "Stel de {{productName}} registratiegegevens in.",
+  "Desc": "Stel de werkruimte-registratiegegevens in.",
   "ErrorEmail": "Ongeldig e-mailadres",
   "ErrorInstanceId": "Ongeldig instance ID",
   "ErrorLicenseBody": "De licentie is ongeldig. Zorg ervoor dat u het juiste bestand selecteert.",
@@ -9,5 +9,5 @@
   "LicenseLink": "licentieovereenkomsten",
   "PlaceholderLicense": "Uw licentiebestand",
   "Timezone": "Tijdzone:",
-  "WelcomeTitle": "Welkom bij uw {{productName}}!"
+  "WelcomeTitle": "Welkom bij uw werkruimte!"
 }

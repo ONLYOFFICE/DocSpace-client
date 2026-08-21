@@ -3,7 +3,7 @@
   "content": "AI services",
   "content_en_sha1_hash": "7452369e2f15817a4414cc5653aa2101c5c608f4",
   "created_at": "2026-03-26T08:26:29.053Z",
-  "updated_at": "2026-08-06T11:20:26.637Z",
+  "updated_at": "2026-08-19T13:26:37.739Z",
   "comment": {
     "text": "This is a short label for a section or feature related to artificial intelligence functionalities within the application. It appears in various contexts, including a dialog for disabling AI services.",
     "is_auto": true,
@@ -12,38 +12,14 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 63,
-      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n \n const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 63,
-      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n \n const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 63,
-      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n \n const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
-      "line_number": 63,
-      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n \n const effectVars = {\n productName: getBrandName(\"ProductName\"),\n aiSettings: t(\"AISettings\"),\n aiServices: t(\"Common:AIServices\"),\n aiAgents: t(\"Common:AIAgents\"),\n };\n \n const effects = [\n t(\"DisableAiServicesSettingsHidden\", effectVars),",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 120,
+      "line_number": 118,
       "context": "onClickLink={onClickLink}\n />\n ) : null}\n <CategoryItem\n title={t(\"AiServicesManagement\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n subtitle={t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: getBrandName(\"OrganizationName\"),\n aiSettings: t(\"AISettings\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 120,
+      "line_number": 118,
       "context": "onClickLink={onClickLink}\n />\n ) : null}\n <CategoryItem\n title={t(\"AiServicesManagement\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n subtitle={t(\"AiServicesManagementDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: getBrandName(\"OrganizationName\"),\n aiSettings: t(\"AISettings\"),",
       "module": "/packages/client"
     },
@@ -57,12 +33,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
       "line_number": 233,
       "context": "return (\n <div className={styles.wrapper}>\n {!isMobileView ? (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"AiServicesManagement\", {\n aiServices: t(\"Common:AIServices\"),\n })}\n </Text>\n ) : null}\n <Text className=\"category-item-description\" fontSize=\"13px\">\n {t(\"AiServicesManagementDescription\", {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Billing/BillingHeader.tsx",
-      "line_number": 60,
-      "context": "if (pathname.includes(\"/billing/tariff-plan\")) return t(\"Common:TariffPlan\");\n if (pathname.includes(\"/billing/payment-method\"))\n return t(\"Common:PaymentMethod\");\n if (pathname.includes(\"/billing/usage\")) return t(\"Common:Usage\");\n if (pathname.includes(\"/billing/addons/ai-services\"))\n return t(\"Common:AIServices\");\n if (pathname.includes(\"/billing/addons/ai-search\"))\n return t(\"Common:AISearch\");\n if (pathname.includes(\"/billing/addons/backup\")) return t(\"Common:Backup\");\n if (pathname.includes(\"/billing/addons/disk-storage\"))\n return t(\"Common:Storage\");",
       "module": "/packages/client"
     },
     {

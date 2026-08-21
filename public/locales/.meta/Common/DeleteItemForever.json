@@ -3,7 +3,7 @@
   "content": "This item will be permanently deleted. Are you sure?",
   "content_en_sha1_hash": "bc9b11f940706f51e5a6fa996be78b0f399ba112",
   "created_at": "2026-04-03T21:51:27.561Z",
-  "updated_at": "2026-06-03T09:30:05.141Z",
+  "updated_at": "2026-08-17T17:23:21.714Z",
   "comment": {
     "text": "This is a confirmation message displayed in a dialog when a user attempts to permanently delete a single item from the trash.",
     "is_auto": true,
@@ -12,6 +12,12 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 159,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteItemForeverConfirm\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {t(\"Common:DeleteItemForever\")}\n </>\n ) : (\n t(\"Common:DeleteItemsForever\", { itemCount: selection.length })\n );\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(forms)/_components/delete-form-dialog/index.tsx",
       "line_number": 61,
       "context": "return (\n <ModalDialog visible={visible} onClose={close} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:DeletePermanently\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:DeleteItemForever\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:Delete\")}\n size={ButtonSize.normal}",
@@ -19,8 +25,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/delete-dialog/index.tsx",
-      "line_number": 73,
-      "context": "? t(\"Common:DeleteForeverNote\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isTrash\n ? itemCount === 1\n ? t(\"Common:DeleteItemForever\")\n : t(\"Common:DeleteItemsForever\", { itemCount })\n : itemCount === 1\n ? t(\"Common:MoveToTrashItem\")\n : t(\"Common:MoveToTrashItems\", { itemCount });",
+      "line_number": 85,
+      "context": "case \"empty-trash\":\n return t(\"Common:DeleteForeverNote\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case \"permanent-one\":\n return t(\"Common:DeleteItemForever\");\n case \"permanent-many\":\n return t(\"Common:DeleteItemsForever\", { itemCount });\n case \"trash-one\":\n return t(\"Common:MoveToTrashItem\");\n default:",
       "module": "/packages/sdk"
     }
   ],

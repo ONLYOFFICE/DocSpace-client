@@ -1,11 +1,9 @@
 {
   "ChangeData": "تغيير البيانات وكلمة المرور",
   "ClickButtonBelow": "إذا كنت ترغب في تسجيل الدخول باستخدام بريدك الإلكتروني، يرجى تعيين كلمة مرور خاصة بك. <br/> بمجرد الانتهاء، يرجى النقر فوق الزر أدناه.",
-  "ContinueToProduct": "تابع إلى {{productName}}",
+  "ContinueToProduct": "تابع إلى مساحة العمل",
   "GeneratedPassword": "كلمة مرور مُنشأة",
-  "ProductNameDetail": "اسم {{productName}}",
+  "ProductNameDetail": "اسم مساحة العمل",
   "ReviewAccountDetails": "الرجاء تخصيص لحظة لمراجعة تفاصيل حسابك:",
-  "SetEmailPassword": "تعيين كلمة المرور",
-  "WelcomeSubtitle": "تم إنشاء مساحتك بنجاح. راجع تفاصيل ملفك الشخصي وابدأ العمل.",
   "YourProfileDetails": "تفاصيل ملفك الشخصي"
 }

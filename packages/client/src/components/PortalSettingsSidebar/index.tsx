@@ -69,13 +69,13 @@ import type {
   NavMenuItem,
 } from "@docspace/ui-kit/components/nav-menu";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 import {
   settingsTree,
   getSelectedLinkByKey,
 } from "SRC_DIR/pages/PortalSettings/utils";
 import AppsSidebar from "SRC_DIR/components/AppsSidebar";
+import { Section } from "SRC_DIR/helpers/plugins/enums";
 
 type PortalSettingsSidebarProps = {
   isNotPaidPeriod: boolean;
@@ -129,9 +129,7 @@ const PortalSettingsSidebar = ({
       case "AISettings":
         return t("Settings:AISettings");
       case "PortalDeletion":
-        return t("Settings:PortalDeletion", {
-          productName: getBrandName("ProductName"),
-        });
+        return t("Settings:PortalDeletion");
       case "Common:PaymentsTitle":
         return standalone ? t("Common:PaymentsTitle") : t("Common:Billing");
       case "Common:Bonus":
@@ -203,6 +201,9 @@ const PortalSettingsSidebar = ({
         id: String(item.key),
         label: mapLabel(item.tKey),
         icon: getCatalogIconUrlByType(item.type, { isSettingsCatalog: true }),
+        // linkData renders the item as a real router link, so right-click /
+        // Ctrl-click / middle-click can open the section in a new tab.
+        linkData: { path },
         onClick: () => navigate(path),
       };
     });
@@ -231,6 +232,7 @@ const PortalSettingsSidebar = ({
       isNavLoading={isNavLoading}
       hideBack={isNotPaidPeriod}
       withDevTools
+      pluginSection={Section.Settings}
     />
   );
 };

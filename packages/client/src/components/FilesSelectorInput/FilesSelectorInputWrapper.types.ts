@@ -52,6 +52,7 @@ export interface InjectedFilesSelectorInputWrapperProps
 			| "isErrorPath"
 		> {
 	filesSelectorSettings: FilesSelectorSettings;
+	disabledCreatePublicRoom?: boolean;
 }
 
 export interface ExternalFilesSelectorInputWrapperProps {

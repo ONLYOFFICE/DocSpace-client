@@ -2,8 +2,8 @@
   "ActionsWithFilesDescription": "Պիտակները կընդգծեն ֆայլի գործունեությունը՝ վերբեռնումները, խմբագրումները կամ կիսումները՝ {{rooms}}, {{shared}}, {{documents}}, և {{aiAgents}} բաժիններում։",
   "AdminSetupRequired": "Անհրաժեշտ է ադմինիստրատորի կարգավորում",
   "Badges": "Տեղեկաքարտ",
-  "DailyFeed": "{{productName}}-ի ամենօրյա թարմացում",
-  "DailyFeedDescription": "Կարդացեք նորություններ և իրադարձություններ ձեր {{productName}}-ից ամենօրյա ակնարկով:",
+  "DailyFeed": "{{organizationName}} {{productName}}-ի ամենօրյա թարմացում",
+  "DailyFeedDescription": "Կարդացեք նորություններ և իրադարձություններ ձեր {{organizationName}} {{productName}}-ից ամենօրյա ակնարկով:",
   "FileActivityNotify": "Ֆայլերի ակտիվության ծանուցումներ",
   "IsNotValid": "Անվավեր է",
   "LdapEmailTooltip": "Այս օգտատիրոջ հաշիվը բեռնված է LDAP-ից։ Օգտատիրոջ էլ. փոստի հասցեն չի նշվել, իսկ ընթացիկը ստեղծվել է ավտոմատ և չի կարող օգտագործվել ծանուցումներ ուղարկելու համար։",
@@ -14,6 +14,6 @@
   "SettingUpNotifications": "Ծանուցումների կարգավորում",
   "SuccessConnected": "{{serviceName}}-ը հաջողությամբ միացվել է որպես ծանուցումների ալիք։ Այժմ դուք կստանաք թարմացումներ այնտեղ։",
   "SuccessDisconnected": "{{serviceName}}-ը հաջողությամբ անջատվել է որպես ծանուցումների ալիք։ Ծանուցումներ այլևս չեն ուղարկվի այնտեղ։",
-  "UsefulTips": "Օգտակար {{productName}} խորհուրդներ",
-  "UsefulTipsDescription": "Ստացեք օգտակար ուղեցույցներ {{productName}}-ի մասին"
+  "UsefulTips": "Օգտակար {{organizationName}} {{productName}} խորհուրդներ",
+  "UsefulTipsDescription": "Ստացեք օգտակար ուղեցույցներ {{organizationName}} {{productName}}-ի մասին"
 }

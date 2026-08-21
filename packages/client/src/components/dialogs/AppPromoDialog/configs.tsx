@@ -62,6 +62,8 @@
 // Per-app promo content. The generic `AppPromoDialog` is layout-only; each app
 // drops an entry here. To add another app's promo, import its four feature
 // icons + light/dark illustration and append a new key — nothing else changes.
+// Feature icons are SVG-as-component; the previews are PNGs, imported as URLs
+// and rendered as an `<img>`.
 // `tourLabel` is what marks an app as having an onboarding tour to offer; leave
 // it out for an app that has none.
 //
@@ -74,29 +76,29 @@ import FilesManagementIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.re
 import FilesSearchIcon from "PUBLIC_DIR/images/search.react.svg";
 import FilesPermissionsIcon from "PUBLIC_DIR/images/edit.index.react.svg";
 import FilesAccessIcon from "PUBLIC_DIR/images/security.react.svg";
-import FilesPreviewLight from "PUBLIC_DIR/images/app-promo/files.preview.light.svg";
-import FilesPreviewDark from "PUBLIC_DIR/images/app-promo/files.preview.dark.svg";
+import FilesPreviewLight from "PUBLIC_DIR/images/app-promo/files.preview.light.png";
+import FilesPreviewDark from "PUBLIC_DIR/images/app-promo/files.preview.dark.png";
 
 import CollaborationRoomIcon from "PUBLIC_DIR/images/pencil.react.svg";
 import PublicRoomIcon from "PUBLIC_DIR/images/universe.react.svg";
 import VDRRoomIcon from "PUBLIC_DIR/images/vdr.room.react.svg";
 import CustomRoomIcon from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg";
-import RoomsPreviewLight from "PUBLIC_DIR/images/app-promo/rooms.preview.light.svg";
-import RoomsPreviewDark from "PUBLIC_DIR/images/app-promo/rooms.preview.dark.svg";
+import RoomsPreviewLight from "PUBLIC_DIR/images/app-promo/rooms.preview.light.png";
+import RoomsPreviewDark from "PUBLIC_DIR/images/app-promo/rooms.preview.dark.png";
 
 import AIPoweredIcon from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg";
 import SharingIcon from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg";
 import DataIcon from "PUBLIC_DIR/images/data.icon.react.svg";
 import BuiltInIcon from "PUBLIC_DIR/images/stats.react.svg";
-import FormsPreviewLight from "PUBLIC_DIR/images/app-promo/forms.preview.light.svg";
-import FormsPreviewDark from "PUBLIC_DIR/images/app-promo/forms.preview.dark.svg";
+import FormsPreviewLight from "PUBLIC_DIR/images/app-promo/forms.preview.light.png";
+import FormsPreviewDark from "PUBLIC_DIR/images/app-promo/forms.preview.dark.png";
 
 import GenerateIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 import SharedAgentsIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg";
 import CustomStackIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg";
 import MCPIcon from "PUBLIC_DIR/images/icons/16/catalog.devtools-api.react.svg";
-import AgentsPreviewLight from "PUBLIC_DIR/images/app-promo/agents.preview.light.svg";
-import AgentsPreviewDark from "PUBLIC_DIR/images/app-promo/agents.preview.dark.svg";
+import AgentsPreviewLight from "PUBLIC_DIR/images/app-promo/agents.preview.light.png";
+import AgentsPreviewDark from "PUBLIC_DIR/images/app-promo/agents.preview.dark.png";
 
 import type { AppPromoContentMap } from "./AppPromoDialog.types";
 
@@ -127,8 +129,8 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
         description: t("Common:AccessControlDescription"),
       },
     ],
-    IllustrationLight: FilesPreviewLight,
-    IllustrationDark: FilesPreviewDark,
+    illustrationLight: FilesPreviewLight,
+    illustrationDark: FilesPreviewDark,
     openLabel: t("Common:Open"),
     tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
@@ -160,15 +162,15 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
         description: t("Common:CustomRoomsDesctiprion"),
       },
     ],
-    IllustrationLight: RoomsPreviewLight,
-    IllustrationDark: RoomsPreviewDark,
+    illustrationLight: RoomsPreviewLight,
+    illustrationDark: RoomsPreviewDark,
     openLabel: t("Common:Open"),
     tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
     githubUrl: "https://github.com/ONLYOFFICE/DocSpace",
   },
   "ai-forms": {
-    title: t("Common:DashboardFormsTitle"),
+    title: t("Common:Forms"),
     subtitle: t("Common:FormsPromoSubtitle"),
     description: t("Common:FormsPromoDescription"),
     features: [
@@ -193,8 +195,8 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
         description: t("Common:BuiltInInsightsDescription"),
       },
     ],
-    IllustrationLight: FormsPreviewLight,
-    IllustrationDark: FormsPreviewDark,
+    illustrationLight: FormsPreviewLight,
+    illustrationDark: FormsPreviewDark,
     openLabel: t("Common:Open"),
     tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),
@@ -231,8 +233,8 @@ export const getAppPromoContent = (t: TTranslation): AppPromoContentMap => ({
         description: t("Common:MCPIntegrationDescription"),
       },
     ],
-    IllustrationLight: AgentsPreviewLight,
-    IllustrationDark: AgentsPreviewDark,
+    illustrationLight: AgentsPreviewLight,
+    illustrationDark: AgentsPreviewDark,
     openLabel: t("Common:Open"),
     tourLabel: t("Common:WelcomeStartTour"),
     githubLabel: t("Common:ViewOnGithub"),

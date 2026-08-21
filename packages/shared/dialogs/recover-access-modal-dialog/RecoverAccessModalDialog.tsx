@@ -245,6 +245,11 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 		}
 	};
 
+	const emailErrorText = emailErrorMessage
+		? // biome-ignore lint/plugin/no-dynamic-i18n-key: keys come from the email validator's error enum (translated in Common)
+			t(`Common:${emailErrorMessage}`)
+		: t("Common:RequiredField");
+
 	return (
 		<ModalDialog
 			id={id}
@@ -274,11 +279,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 						key="e-mail"
 						labelVisible={false}
 						hasError={isShowError ? emailErr : undefined}
-						errorMessage={
-							emailErrorMessage
-								? t(`Common:${emailErrorMessage}`)
-								: t("Common:RequiredField")
-						}
+errorMessage={emailErrorText}
 						dataTestId="recover_access_modal_email_container"
 					>
 						<EmailInput

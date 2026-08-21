@@ -33,10 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { createElement } from "react";
 import type { Step } from "react-joyride";
 import type { TFunction } from "i18next";
 
 import type { TourStepCallbacks } from "SRC_DIR/components/Tour/useTour";
+import TourList from "SRC_DIR/components/Tour/TourList";
 import {
   navItemStep,
   elementStep,
@@ -216,16 +218,29 @@ export function getTourSteps(
     // 6. The sidebar sub-items: what each of the section's shortcuts holds.
     // Each is named by the sidebar's own label, so the wording in the tooltip
     // is the wording on screen and the names are not translated twice.
+    //
+    // Bulleted rather than one paragraph: the three things this step covers
+    // (the file shortcuts, templates, the archive) are unrelated to each
+    // other, and running them together buried the sidebar names the user is
+    // meant to spot. The wording of each is unchanged.
     showQuickAccess &&
       navItemStep(
         sidebarSelector("rooms-recent"),
         t("RoomsTour:RoomsPlacesTitle"),
-        t("RoomsTour:RoomsPlaces", {
-          recent: t("Common:Recent"),
-          favorites: t("Common:Favorites"),
-          trash: t("Common:TrashSection"),
-          templates: t("Common:Templates"),
-          archive: t("Common:Archive"),
+        createElement(TourList, {
+          items: [
+            t("RoomsTour:RoomsPlacesFiles", {
+              recent: t("Common:Recent"),
+              favorites: t("Common:Favorites"),
+              trash: t("Common:TrashSection"),
+            }),
+            t("RoomsTour:RoomsPlacesTemplates", {
+              templates: t("Common:Templates"),
+            }),
+            t("RoomsTour:RoomsPlacesArchive", {
+              archive: t("Common:Archive"),
+            }),
+          ],
         }),
         callbacks,
         LOG_LABEL,

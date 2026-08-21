@@ -47,7 +47,6 @@ import { continuePortal } from "@docspace/shared/api/portal";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import styles from "../confirm.module.scss";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const ContinuePortalForm = () => {
   const { t } = useTranslation(["Confirm", "Common"]);
@@ -96,9 +95,7 @@ const ContinuePortalForm = () => {
   ) : (
     <>
       <Text className="subtitle">
-        {t("PortalContinueTitle", {
-          productName: getBrandName("ProductName"),
-        })}
+        {t("PortalContinueTitle")}
       </Text>
       <div className={styles.buttonsWrapper}>
         <Button

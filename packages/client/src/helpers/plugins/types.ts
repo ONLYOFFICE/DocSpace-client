@@ -43,6 +43,7 @@ import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 // Import types from SDK
 import type {
+  IBox,
   IContextMenuItem,
   IEventListenerItem,
   IFileItem,
@@ -51,12 +52,14 @@ import type {
   IMainButtonItem,
   IProfileMenuItem,
   IArticleButtonItem,
+  IArticleNavigationItem,
   ISettings,
   IMessage,
   IPostMessage,
   IFrame,
   IImage,
   ICreateDialog,
+  IModalDialog,
   IContextMenuPlugin,
   IEventListenerPlugin,
   IFilePlugin,
@@ -64,6 +67,7 @@ import type {
   IMainButtonPlugin,
   IProfileMenuPlugin,
   IArticleButtonPlugin,
+  IArticleNavigationPlugin,
   IPlugin,
   IApiPlugin,
   ISettingsPlugin,
@@ -73,6 +77,10 @@ import type {
   IPostMessagePlugin,
   IMediaViewer,
 } from "@onlyoffice/docspace-plugin-sdk";
+
+import type { TCurrentFile } from "@onlyoffice/docspace-plugin-sdk/react";
+
+import type PluginStore from "SRC_DIR/store/PluginStore";
 
 import type {
   PluginDevices,
@@ -90,6 +98,7 @@ export type {
   IFrame,
   IImage,
   ICreateDialog,
+  IModalDialog,
   ButtonGroup as TButtonGroup,
 };
 
@@ -102,27 +111,36 @@ export type {
   IMainButtonItem,
   IProfileMenuItem,
   IArticleButtonItem,
+  IArticleNavigationItem,
 };
 
 //Extended client-side types
-export interface IFloatingOperationsButtonClient extends IFloatingOperationsButton {
+export interface IFloatingOperationsButtonClient
+  extends IFloatingOperationsButton {
   pluginName: string;
 }
 
-export interface IContextMenuItemClient extends Omit<
-  IContextMenuItem,
-  "onClick"
-> {
+type TModalDialogEventListener = NonNullable<
+  IModalDialog["eventListeners"]
+>[number];
+
+export interface IModalDialogClient
+  extends Omit<IModalDialog, "eventListeners"> {
+  pluginName: string;
+  eventListeners?: (Omit<TModalDialogEventListener, "onAction"> & {
+    onAction: (
+      event: Event,
+    ) => Promise<IMessage> | Promise<void> | IMessage | void;
+  })[];
+}
+
+export interface IContextMenuItemClient
+  extends Omit<IContextMenuItem, "onClick"> {
   pluginName: string;
   items?: Omit<IContextMenuItemClient, "items">[];
   onClick?: (
     id: number | string,
   ) => Promise<IMessage> | Promise<void> | IMessage | void;
-  /**
-   * Restricts the item to the listed file, folder or room identifiers.
-   * Not declared by the SDK yet, so it is typed on the client side.
-   */
-  itemId?: (number | string)[];
 }
 
 export interface IMainButtonItemClient extends IMainButtonItem {
@@ -138,10 +156,8 @@ export interface IEventListenerItemClient extends IEventListenerItem {
   pluginName: string;
 }
 
-interface IInfoPanelItemSubMenuClient extends Omit<
-  IInfoPanelSubMenu,
-  "onClick"
-> {
+interface IInfoPanelItemSubMenuClient
+  extends Omit<IInfoPanelSubMenu, "onClick"> {
   onClick: (id: number) => Promise<IMessage | void>;
 }
 
@@ -159,6 +175,23 @@ export interface IFileItemClient extends Omit<IFileItem, "onClick"> {
 
 export interface IArticleButtonItemClient extends IArticleButtonItem {
   pluginName: string;
+}
+
+export interface IArticleNavigationItemClient
+  extends Omit<IArticleNavigationItem, "sectionComponent"> {
+  pluginName: string;
+  /**
+   * React section, optional on the client side: plugins built against the
+   * pre-React SDK describe their section with the IBox fields below.
+   */
+  sectionComponent?: IArticleNavigationItem["sectionComponent"];
+  /**
+   * IBox-based section and its loader. The React SDK no longer declares them,
+   * so they are typed on the client side while both plugin generations are
+   * supported.
+   */
+  section?: IBox;
+  onLoad?: () => Promise<{ section: IBox }>;
 }
 
 export interface IMediaViewerClient extends IMediaViewer {
@@ -224,4 +257,38 @@ export type TPlugin = {
   Partial<IProfileMenuPlugin> &
   Partial<ISettingsPlugin> &
   Partial<IPostMessagePlugin> &
-  Partial<IArticleButtonPlugin>;
+  Partial<IArticleButtonPlugin> &
+  Partial<IArticleNavigationPlugin>;
+
+export interface TMessageActionsParams {
+  message: IMessage;
+  pluginName: string;
+  setElementProps?: (props: NonNullable<IMessage["newProps"]>) => void;
+  updatePropsContext?: (
+    contextProps: NonNullable<IMessage["contextProps"]>,
+  ) => void;
+  updateCreateDialogProps?: (
+    props: NonNullable<IMessage["createDialogProps"]>,
+  ) => void;
+  setSettingsPluginDialogVisible?: PluginStore["setSettingsPluginDialogVisible"];
+  updatePluginStatus?: PluginStore["updatePluginStatus"];
+  setPluginDialogVisible?: PluginStore["setPluginDialogVisible"];
+  setPluginDialogProps?: PluginStore["setPluginDialogProps"];
+  setPluginSelectorVisible?: PluginStore["setPluginSelectorVisible"];
+  setPluginSelectorProps?: PluginStore["setPluginSelectorProps"];
+  addPluginFloatingOperations?: PluginStore["addPluginFloatingOperations"];
+  removePluginFloatingOperations?: PluginStore["removePluginFloatingOperations"];
+  updatePluginFloatingOperations?: PluginStore["updatePluginFloatingOperations"];
+  updateContextMenuItems?: PluginStore["updateContextMenuItems"];
+  updateInfoPanelItems?: PluginStore["updateInfoPanelItems"];
+  updateMainButtonItems?: PluginStore["updateMainButtonItems"];
+  updateProfileMenuItems?: PluginStore["updateProfileMenuItems"];
+  updateEventListenerItems?: PluginStore["updateEventListenerItems"];
+  updateArticleNavigationItems?: PluginStore["updateArticleNavigationItems"];
+  updateFileItems?: PluginStore["updateFileItems"];
+  updatePlugin?: PluginStore["updatePlugin"];
+  setPluginMediaViewerVisible?: PluginStore["setPluginMediaViewerVisible"];
+  setPluginMediaViewerProps?: PluginStore["setPluginMediaViewerProps"];
+  setReactPluginModalState?: PluginStore["setReactPluginModalState"];
+  reactPluginCurrentFile?: TCurrentFile | null;
+}

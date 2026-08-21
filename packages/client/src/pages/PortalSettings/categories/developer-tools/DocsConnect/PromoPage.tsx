@@ -43,6 +43,11 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType, LinkTarget } from "@docspace/ui-kit/components/link";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import config from "PACKAGE_FILE";
+
+import { DOCS_CONNECT_ROUTE } from "./constants";
 
 import styles from "./PromoPage.module.scss";
 
@@ -76,9 +81,13 @@ const PromoPage = ({
     setSubmitting(true);
     try {
       await startTrial?.();
+      window.location.href = combineUrl(
+        window.ClientConfig?.proxy?.url,
+        config.homepage,
+        DOCS_CONNECT_ROUTE,
+      );
     } catch (error) {
       toastr.error(error as Error);
-    } finally {
       setSubmitting(false);
     }
   };
@@ -89,37 +98,50 @@ const PromoPage = ({
         {t("DocsConnect:DocsConnect")}
       </Heading>
 
-      <Text as="p" className={styles.description}>
-        <Trans
-          t={t}
-          i18nKey="PromoDescription"
-          ns="DocsConnect"
-          components={{
-            1: (
-              <Link
-                className={styles.link}
-                type={LinkType.page}
-                href={allConnectorsUrl}
-                target={LinkTarget.blank}
-                color="accent"
-              />
-            ),
-            2: (
-              <Link
-                className={styles.link}
-                id={AUTOMATION_API_ANCHOR}
-                type={LinkType.action}
-                color="accent"
-              />
-            ),
-          }}
-        />
-      </Text>
+      {canceled ? (
+        <div className={styles.canceledText}>
+          <Text as="p" className={styles.canceledTitle}>
+            {t("DocsConnect:SubscriptionCanceledTitle", {
+              service: t("DocsConnect:DocsConnect"),
+            })}
+          </Text>
+          <Text as="p" className={styles.description}>
+            {t("DocsConnect:SubscriptionCanceledDescription")}
+          </Text>
+        </div>
+      ) : (
+        <>
+          <Text as="p" className={styles.description}>
+            <Trans
+              t={t}
+              i18nKey="PromoDescription"
+              ns="DocsConnect"
+              components={{
+                1: (
+                  <Link
+                    className={styles.link}
+                    type={LinkType.page}
+                    href={allConnectorsUrl}
+                    target={LinkTarget.blank}
+                    color="accent"
+                  />
+                ),
+                2: (
+                  <Link
+                    className={styles.link}
+                    id={AUTOMATION_API_ANCHOR}
+                    type={LinkType.action}
+                    color="accent"
+                  />
+                ),
+              }}
+            />
+          </Text>
 
-      {canceled ? null : (
-        <Text as="p" className={styles.trialNote}>
-          {t("DocsConnect:TrialAvailable")}
-        </Text>
+          <Text as="p" className={styles.trialNote}>
+            {t("DocsConnect:TrialAvailable")}
+          </Text>
+        </>
       )}
 
       <div className={styles.actions}>
@@ -127,7 +149,7 @@ const PromoPage = ({
           <Button
             primary
             size={ButtonSize.small}
-            label={t("DocsConnect:Buy")}
+            label={t("Common:RenewSubscription")}
             onClick={() => openBuyPlan?.("edit")}
             isDisabled={!canManage}
             className={styles.buyButton}
@@ -156,29 +178,31 @@ const PromoPage = ({
         </Link>
       </div>
 
-      <Tooltip
-        anchorSelect={`#${AUTOMATION_API_ANCHOR}`}
-        place="bottom-start"
-        clickable
-        maxWidth="280px"
-      >
-        <div className={styles.tooltipBox}>
-          <Text fontSize="12px" lineHeight="16px">
-            {t("DocsConnect:AutomationApiTooltip")}
-          </Text>
-          <Link
-            type={LinkType.page}
-            href={docsConnectUrl}
-            target={LinkTarget.blank}
-            color="accent"
-            fontSize="13px"
-            fontWeight={600}
-            isHovered
-          >
-            {t("DocsConnect:CheckExamples")}
-          </Link>
-        </div>
-      </Tooltip>
+      {canceled ? null : (
+        <Tooltip
+          anchorSelect={`#${AUTOMATION_API_ANCHOR}`}
+          place="bottom-start"
+          clickable
+          maxWidth="280px"
+        >
+          <div className={styles.tooltipBox}>
+            <Text fontSize="12px" lineHeight="16px">
+              {t("DocsConnect:AutomationApiTooltip")}
+            </Text>
+            <Link
+              type={LinkType.page}
+              href={docsConnectUrl}
+              target={LinkTarget.blank}
+              color="accent"
+              fontSize="13px"
+              fontWeight={600}
+              isHovered
+            >
+              {t("DocsConnect:CheckExamples")}
+            </Link>
+          </div>
+        </Tooltip>
+      )}
     </div>
   );
 };

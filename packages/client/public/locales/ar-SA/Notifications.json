@@ -2,8 +2,8 @@
   "ActionsWithFilesDescription": "ستُبرز الشارات نشاط الملفات — التحميلات، أو التعديلات، أو المشاركات — عبر أقسام {{rooms}}، {{shared}}، {{documents}}، و {{aiAgents}}.",
   "AdminSetupRequired": "مطلوب إعداد من المسؤول",
   "Badges": "شارات",
-  "DailyFeed": "أخبار {{productName}} اليومية",
-  "DailyFeedDescription": "اطلع على الأخبار والفعاليات من {{productName}} الخاص بك في ملخص يومي.",
+  "DailyFeed": "أخبار {{organizationName}} {{productName}} اليومية",
+  "DailyFeedDescription": "اطلع على الأخبار والفعاليات من {{organizationName}} {{productName}} الخاص بك في ملخص يومي.",
   "FileActivityNotify": "إشعارات نشاط الملف",
   "IsNotValid": "غير صالح",
   "LdapEmailTooltip": "تم تحميل حساب المستخدم هذا من LDAP. لم يتم تحديد عنوان البريد الإلكتروني للمستخدم، وقد تم إنشاء العنوان الحالي تلقائيًا ولا يمكن استخدامه لإرسال الإشعارات.",
@@ -14,6 +14,6 @@
   "SettingUpNotifications": "إعداد الإشعارات",
   "SuccessConnected": "تم توصيل {{serviceName}} بنجاح كقناة إشعارات. ستتلقون الآن التحديثات هناك.",
   "SuccessDisconnected": "تم فصل {{serviceName}} بنجاح كقناة إشعارات. لن يتم إرسال الإشعارات إلى هناك بعد الآن.",
-  "UsefulTips": "نصائح مفيدة حول  {{productName}}",
-  "UsefulTipsDescription": "احصل على دليل مفيد حول {{productName}}"
+  "UsefulTips": "نصائح مفيدة حول {{organizationName}} {{productName}}",
+  "UsefulTipsDescription": "احصل على دليل مفيد حول {{organizationName}} {{productName}}"
 }

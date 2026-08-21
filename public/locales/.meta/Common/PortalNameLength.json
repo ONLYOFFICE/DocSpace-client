@@ -203,17 +203,17 @@
       "approved_at": null
     }
   },
-  "updated_at": "2026-06-15T19:31:56.086Z",
+  "updated_at": "2026-08-14T14:58:32.781Z",
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 287,
+      "line_number": 286,
       "context": "saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"Common:PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 287,
+      "line_number": 286,
       "context": "saveToSessionStorage(\"errorValue\", t(\"Common:PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"Common:PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
       "module": "/packages/client"
     },

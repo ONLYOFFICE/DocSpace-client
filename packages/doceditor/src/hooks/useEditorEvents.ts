@@ -61,9 +61,10 @@ import type {
 import {
   getProfilesList,
   getProfileAssignments,
+  getWebSearchConfigured,
 } from "@docspace/shared/api/ai";
-import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
-import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
+// import { DEFAULT_SERVER_API_ROUTES } from "@docspace/ui-kit/ai-agent/providers";
+// import type { ServerAPIConfig } from "@docspace/ui-kit/ai-agent/providers";
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import {
   CREATED_FORM_KEY,
@@ -110,6 +111,7 @@ import externalAIFetch, { abortAllRequests } from "@/utils/aiProxy";
 let docEditor: TDocEditor | null = null;
 
 const useEditorEvents = ({
+  user,
   successAuth,
   fileInfo,
   config,
@@ -121,7 +123,6 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
-  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onOpenRoleMappingPanel,
@@ -281,7 +282,12 @@ const useEditorEvents = ({
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
     if (!aiInitedRef.current) {
-      const connector = docEditor?.createConnector?.();
+      // AI is not available to guests (and anonymous share-link viewers):
+      // don't init the editor's AI plugin for them at all — mirrors the
+      // portal, where guests get no AI chat, and the backend gateway
+      // rejects guest calls anyway.
+      const aiAllowed = Boolean(user) && !user?.isVisitor;
+      const connector = aiAllowed ? docEditor?.createConnector?.() : undefined;
 
       if (connector && !isOAuthFrame()) {
         aiInitedRef.current = true;
@@ -333,46 +339,35 @@ const useEditorEvents = ({
             const sendTools = (data?: unknown) =>
               window.parent?.postMessage({ type: "initedAiPlugin", data }, "*");
 
-            const fireGenerationToolCall = () => {
-              if (!generationToolCallState) return;
-              connector.sendEvent("ai_onCallTool", {
-                name: generationToolCallState.toolName,
-                arguments: { ...generationToolCallState.parameters },
-              });
-              const url = new URL(window.location.href);
-              url.searchParams.delete("withTool");
-              window.history.replaceState(null, "", url.toString());
-            };
+            // const editorOrigin = (() => {
+            //   try {
+            //     return config?.editorUrl
+            //       ? new URL(config.editorUrl).origin
+            //       : "";
+            //   } catch {
+            //     return "";
+            //   }
+            // })();
+            // const sameOrigin =
+            //   typeof window !== "undefined" &&
+            //   editorOrigin === window.location.origin;
 
-            const editorOrigin = (() => {
-              try {
-                return config?.editorUrl
-                  ? new URL(config.editorUrl).origin
-                  : "";
-              } catch {
-                return "";
-              }
-            })();
-            const sameOrigin =
-              typeof window !== "undefined" &&
-              editorOrigin === window.location.origin;
-
-            if (sameOrigin) {
-              aiAvailable = true;
-              whenAiReady("Tools", sendTools);
-              whenAiReady("Actions", () => {
-                connector.sendEvent("ai_onCustomInit", {
-                  actionsOverride: true,
-                  apiConfig: {
-                    origin: window.location.origin,
-                    baseUrl: "/api/2.0/ai",
-                    routes: DEFAULT_SERVER_API_ROUTES,
-                  } satisfies ServerAPIConfig,
-                });
-                fireGenerationToolCall();
-                markAiActionsReady();
-              });
-            } else {
+            // if (sameOrigin) {
+            //   aiAvailable = true;
+            //   whenAiReady("Tools", sendTools);
+            //   whenAiReady("Actions", () => {
+            //     connector.sendEvent("ai_onCustomInit", {
+            //       actionsOverride: true,
+            //       apiConfig: {
+            //         origin: window.location.origin,
+            //         baseUrl: "/api/2.0/ai",
+            //         routes: DEFAULT_SERVER_API_ROUTES,
+            //       } satisfies ServerAPIConfig,
+            //     });
+            //     markAiActionsReady();
+            //   });
+            // } else {
+            {
               const profiles = await getProfilesList();
 
               if (profiles && profiles.length > 0) {
@@ -401,7 +396,10 @@ const useEditorEvents = ({
 
                 const validProfileIds = new Set(profiles.map((p) => p.id));
 
-                const assignments = await getProfileAssignments();
+                const [assignments, webSearchConfigured] = await Promise.all([
+                  getProfileAssignments(),
+                  getWebSearchConfigured(),
+                ]);
 
                 const actions: Record<string, { model: string }> = {};
                 Object.entries(assignments ?? {}).forEach(
@@ -411,14 +409,40 @@ const useEditorEvents = ({
                   },
                 );
 
+                // Older editor AI plugins resolve the Chat action without
+                // falling back to Default (current adapters do fall back),
+                // and generate tools silently no-op with no Chat model.
+                // Mirror the fallback here so generation works against a
+                // not-yet-updated document server.
+                if (!actions.Chat && actions.Default)
+                  actions.Chat = actions.Default;
+
+                // Placeholder config only — the real provider and its key
+                // stay on the server. The .invalid host makes the plugin's
+                // web_search/web_crawling requests travel the
+                // ai_onExternalFetch bridge, where aiProxy maps them to the
+                // NewAi web-search passthrough.
+                const webSearch = webSearchConfigured
+                  ? {
+                      provider: "onlyoffice",
+                      baseUrl:
+                        "https://onlyoffice-external.invalid/websearch/v1",
+                    }
+                  : undefined;
+
                 whenAiReady("Tools", sendTools);
                 whenAiReady("Actions", () => {
                   connector.sendEvent("ai_onCustomInit", {
                     actionsOverride: true,
+                    // AI settings are managed in DocSpace: hide the plugin's
+                    // own settings entry points entirely (toolbar button and
+                    // the chat window's settings dialog). The composer's
+                    // profile pick stays available.
+                    settingsLock: "removed",
                     profiles: aiProfiles,
                     actions,
+                    webSearch,
                   });
-                  fireGenerationToolCall();
                   markAiActionsReady();
                 });
 
@@ -511,7 +535,6 @@ const useEditorEvents = ({
     checkAndRequestRoles,
     t,
     successAuth,
-    generationToolCallState,
   ]);
 
   const onUserActionRequired = React.useCallback(() => {

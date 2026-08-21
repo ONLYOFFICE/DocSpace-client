@@ -1,4 +1,4 @@
 {
   "ErrorEmptyResponse": "Respuesta vacía",
-  "ErrorUnavailableText": "{{productName}} no está disponible"
+  "ErrorUnavailableText": "El espacio de trabajo no está disponible"
 }

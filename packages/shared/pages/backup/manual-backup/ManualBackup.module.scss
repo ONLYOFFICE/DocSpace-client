@@ -55,32 +55,7 @@
     justify-content: flex-start;
 
     button:first-child {
-      max-width: 124px;
       margin-inline-end: 8px;
-    }
-
-    button:last-child {
-      max-width: 153px;
-    }
-
-    @include mixins.tablet-and-below {
-      button:first-child {
-        max-width: 129px;
-      }
-
-      button:last-child {
-        max-width: 160px;
-      }
-    }
-
-    @include mixins.mobile {
-      button:first-child {
-        max-width: 155px;
-      }
-
-      button:last-child {
-        max-width: 155px;
-      }
     }
   }
 

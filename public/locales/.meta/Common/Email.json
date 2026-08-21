@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2026-07-07T08:59:21.672Z",
+  "updated_at": "2026-08-17T17:23:21.737Z",
   "comment": {
     "text": "This is a label for an email address, used in user information displays and table headers. It appears as a short label.",
     "is_auto": true,
@@ -13,19 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 197,
+      "line_number": 196,
       "context": "className=\"welcome-text\"\n >{`${user?.firstName} ${user?.lastName}`}</Text>\n </div>\n \n <div className={styles.infoRow}>\n <Text className=\"welcome-text\">{t(\"Common:Email\")}</Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {user?.email}\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/SocialAuthWelcomePanel.jsx",
-      "line_number": 82,
-      "context": "value: (\n <span>{`${user?.firstName ?? \"\"} ${user?.lastName ?? \"\"}`.trim()}</span>\n ),\n },\n {\n label: t(\"Common:Email\"),\n value: <span>{user?.email}</span>,\n },\n {\n label: t(\"Common:Password\"),\n value: (",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/ProfileCard.tsx",
-      "line_number": 179,
+      "line_number": 180,
       "context": "</Text>\n </div>\n \n <div className={styles.profileCardField}>\n <Text as=\"span\" className={styles.profileCardLabel}>\n {t(\"Common:Email\")}\n </Text>\n <Text as=\"span\" className={styles.profileCardValue}>\n {email}\n </Text>\n </div>",
       "module": "/packages/client"
     },
@@ -91,13 +85,13 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 357,
+      "line_number": 356,
       "context": "name=\"wizard-email\"\n tabIndex={1}\n size={InputSize.large}\n scale\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed\n onChange={onChangeEmail}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 231,
+      "line_number": 228,
       "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n name=\"company_email\"",
       "module": "/packages/shared"
     }

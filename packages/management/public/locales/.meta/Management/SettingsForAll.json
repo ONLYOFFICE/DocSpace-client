@@ -1,14 +1,14 @@
 {
   "key_path": "SettingsForAll",
-  "content": "These settings will be effective for all of your spaces.",
-  "content_en_sha1_hash": "0dc145fa179494f0647bea48dab8b51aaa7889b8",
-  "created_at": "2025-05-19T21:30:57.474Z",
-  "updated_at": "2026-06-09T09:43:10.977Z",
+  "content": "These settings will be effective for all of your workspaces.",
+  "content_en_sha1_hash": "8d22562a6fdf01fc3f0aa538712fca493c999130",
+  "created_at": "2026-08-12T11:00:50.913Z",
+  "updated_at": "2026-08-12T13:42:36.742Z",
   "comment": {
-    "text": "This is a bar title displayed when a user navigates to the settings page. It informs the user that the settings they are viewing will apply to all their spaces.",
+    "text": "Section header text shown when multiple workspaces are present, indicating that the current settings apply globally.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:31:34.179Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-12T13:42:36.742Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:54.651494Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

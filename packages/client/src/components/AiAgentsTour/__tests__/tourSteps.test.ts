@@ -36,6 +36,8 @@
 import { describe, it, expect, vi } from "vitest";
 import type { TFunction } from "i18next";
 
+import { bullets } from "SRC_DIR/components/Tour/__tests__/bullets";
+
 import { getTourSteps, type TourStepFlags } from "../tourSteps";
 
 /** Echo the key back, so a step can be identified by the key it rendered. */
@@ -104,12 +106,13 @@ describe("getTourSteps — admin", () => {
     expect(steps(demoFlags).length).toBeLessThanOrEqual(7);
   });
 
-  it("names every sidebar shortcut it points at, in one paragraph", () => {
+  it("names every sidebar shortcut it points at, one bullet each", () => {
     const places = steps(adminFlags).at(-1);
 
-    expect(places?.content).toBe(
-      "AiAgentsTour:AgentPlacesRecent AiAgentsTour:AgentPlacesTrash",
-    );
+    expect(bullets(places)).toEqual([
+      "AiAgentsTour:AgentPlacesRecent",
+      "AiAgentsTour:AgentPlacesTrash",
+    ]);
     // The spotlight covers the sub-list the anchor item belongs to.
     expect(places?.spotlightTarget).toBeTypeOf("function");
   });
@@ -189,7 +192,7 @@ describe("getTourSteps — what the page allows", () => {
       hasTrash: false,
     }).at(-1);
 
-    expect(withoutTrash?.content).toBe("AiAgentsTour:AgentPlacesRecent");
+    expect(bullets(withoutTrash)).toEqual(["AiAgentsTour:AgentPlacesRecent"]);
 
     // With none of the three aliases there is no sub-list to anchor on at all.
     expect(

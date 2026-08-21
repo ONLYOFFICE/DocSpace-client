@@ -67,6 +67,7 @@ export const TariffTitleContainer = ({
 
   const {
     isUserStatisticsVisible,
+    isReportLoading,
     openUserStatistics,
     closeUserStatistics,
     downloadAndOpenReport,
@@ -215,7 +216,6 @@ export const TariffTitleContainer = ({
               fromDate: paymentDate,
               byDate: gracePeriodEndDate,
               delayDaysCount,
-              productName: getBrandName("ProductName"),
             }}
             components={{
               1: <Text as="span" isBold dataTestId="grace-period-date-range" />,
@@ -263,6 +263,7 @@ export const TariffTitleContainer = ({
         isVisible={isUserStatisticsVisible}
         statistics={usersStatistics}
         onClose={closeUserStatistics}
+        isReportLoading={isReportLoading}
         onDownloadAndReport={downloadAndOpenReport}
       />
     </div>

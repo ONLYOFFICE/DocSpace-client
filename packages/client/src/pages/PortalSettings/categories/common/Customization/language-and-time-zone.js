@@ -59,7 +59,6 @@ import useCommon from "../useCommon";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
-import { getBrandName } from "@docspace/shared/constants/brands";
 
 const mapTimezonesToArray = (timezones = []) => {
   return timezones.map((timezone) => {
@@ -537,9 +536,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
-          {t("TimeLanguageSettingsDescription", {
-            productName: getBrandName("ProductName"),
-          })}
+          {t("TimeLanguageSettingsDescription")}
         </Text>
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />

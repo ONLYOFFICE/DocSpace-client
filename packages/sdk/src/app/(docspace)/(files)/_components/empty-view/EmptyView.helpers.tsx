@@ -70,11 +70,12 @@ export const getRootTitle = (
     case FolderType.Recent:
       return t("Common:NoRecentFilesHereYet");
     case FolderType.TRASH:
-      return t("Common:EmptyScreenFolder");
+      return t("Common:NoItemsHereYet");
     case FolderType.USER:
       return t("Common:EmptyScreenFolder");
     default:
       return t("Common:EmptyRootRoomHeader", {
+        organizationName: getBrandName("OrganizationName"),
         productName: getBrandName("ProductName"),
       });
   }
@@ -130,9 +131,7 @@ export const getRootDescription = (
 ) => {
   switch (rootFolderType) {
     case FolderType.SHARE:
-      return t("Common:EmptyShareDescription", {
-        productName: getBrandName("ProductName"),
-      });
+      return t("Common:EmptyShareDescription");
     case FolderType.Favorites:
       return t("Common:EmptyFavoritesDescription");
     case FolderType.Recent:
@@ -140,6 +139,7 @@ export const getRootDescription = (
     case FolderType.TRASH:
       return t("Common:TrashFunctionalityDescription", {
         sectionName: t("Common:TrashSection"),
+        appName: t("Common:Files"),
       });
     case FolderType.USER:
       return t("Common:DefaultFolderDescription");
@@ -157,3 +157,4 @@ export const getRootDescription = (
 export const getDescription = (t: TTranslation) => {
   return t("Common:UserEmptyDescription");
 };
+

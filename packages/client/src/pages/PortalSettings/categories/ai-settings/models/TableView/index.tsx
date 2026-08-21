@@ -43,6 +43,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
+import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import styles from "./ModelSettingsTable.module.scss";
@@ -80,8 +81,13 @@ const TableView = (props: ModelSettingsTableViewProps) => {
     ...(aiToolsPrices?.image ?? []),
   ];
 
-  const onToggle = async (modelId: string, enabled: boolean) => {
-    await setAiModelAvailability?.(modelId, enabled);
+  const { requestToggle, turnOffModelDialog } =
+    useTurnOffModelConfirmation(setAiModelAvailability);
+
+  const onToggle = (modelId: string, enabled: boolean) => {
+    const model = models.find((m) => m.id === modelId);
+
+    requestToggle({ id: modelId, title: model?.alias ?? modelId }, enabled);
   };
 
   const ref = useRef<HTMLDivElement>(null);
@@ -127,9 +133,7 @@ const TableView = (props: ModelSettingsTableViewProps) => {
                   : ""
               }
               outputPrice={(() => {
-                const outputValue =
-                  m.price?.completion ??
-                  ("image" in m.price ? m.price.image : undefined);
+                const outputValue = m.price?.completion;
 
                 return outputValue != null
                   ? (formatAiModelsCurrency?.(outputValue) ?? "")
@@ -144,6 +148,8 @@ const TableView = (props: ModelSettingsTableViewProps) => {
           ))}
         </TableBody>
       </TableContainer>
+
+      {turnOffModelDialog}
     </div>
   );
 };

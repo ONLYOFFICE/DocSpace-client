@@ -1,6 +1,6 @@
 {
   "name": "@docspace/client",
-  "version": "3.8.0",
+  "version": "4.0.0",
   "private": true,
   "homepage": "",
   "scripts": {
@@ -15,10 +15,10 @@
     "test:start": "cross-env PORT=5110 NODE_ENV=production E2E_TEST=true serve dist -s -p 5110",
     "test:e2e:docker:build": "docker-compose build",
     "test:e2e:docker:start": "docker-compose run --rm tests-local pnpm exec playwright test",
-    "test:e2e:docker:update-screenshots": "docker-compose run --rm tests-local pnpm exec playwright test --update-snapshots",
+    "test:e2e:docker:update-screenshots": "docker-compose run --rm tests-local pnpm exec playwright test --update-snapshots=changed",
     "test:e2e:docker:clear": "docker rmi client-tests",
     "test:e2e:docker:dev": "docker-compose run --rm tests-dev pnpm exec playwright test",
-    "test:e2e:docker:dev:update-screenshots": "docker-compose run --rm tests-dev pnpm exec playwright test --update-snapshots",
+    "test:e2e:docker:dev:update-screenshots": "docker-compose run --rm tests-dev pnpm exec playwright test --update-snapshots=changed",
     "test:e2e:ui": "pnpm run test:build && cross-env PORT=5110 pnpm exec playwright test --ui",
     "test:e2e:docker:plugins": "pnpm run test:e2e:docker:start __tests__/plugins",
     "test:e2e:docker:plugins:update-screenshots": "pnpm run test:e2e:docker:update-screenshots __tests__/plugins",

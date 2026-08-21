@@ -61,6 +61,8 @@ import type {
   TValidateShareRoom,
 } from "../../../api/rooms/types";
 
+import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
+
 import styles from "./PublicRoomPasswordForm.module.scss";
 
 export type PublicRoomPasswordProps = {
@@ -157,7 +159,15 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
   };
 
   return (
-    <div className={styles.page} id="public-password-page">
+    <div
+      className={styles.page}
+      id="public-password-page"
+      style={
+        {
+          "--bg-pattern": `url('${BackgroundPatternReactSvgUrl}')`,
+        } as React.CSSProperties
+      }
+    >
       <div className={styles.publicRoomPage}>
         <div
           className={classNames(

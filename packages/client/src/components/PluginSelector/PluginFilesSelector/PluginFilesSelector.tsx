@@ -65,6 +65,7 @@ type Props = {
 type InjectedProps = {
   getIcon: FilesSettingsStore["getIcon"];
   rootFolderType: SelectedFolderStore["rootFolderType"];
+  disabledCreatePublicRoom: boolean;
 };
 
 const PluginFilesSelector = ({
@@ -72,6 +73,7 @@ const PluginFilesSelector = ({
   dispatchMessage,
   getIcon,
   rootFolderType,
+  disabledCreatePublicRoom,
   pluginName,
 }: Props) => {
   const { t } = useTranslation(["Common"]);
@@ -220,6 +222,7 @@ const PluginFilesSelector = ({
       cancelButtonLabel={cancelButtonLabel ?? t("Common:CancelButton")}
       submitButtonLabel={submitButtonLabel ?? t("Common:AddButton")}
       withCreate={!!withCreate}
+      disabledCreatePublicRoom={disabledCreatePublicRoom}
       withFooterCheckbox={!!withFooterCheckbox}
       withFooterInput={!!withFooterInput}
       disabledItems={[]}
@@ -251,11 +254,14 @@ const PluginFilesSelector = ({
 };
 
 export default inject<TStore>(({ filesSettingsStore, selectedFolderStore }) => {
-  const { getIcon } = filesSettingsStore;
+  const { getIcon, isExternalShareRestricted, externalShareApplyToRooms } =
+    filesSettingsStore;
   const { rootFolderType } = selectedFolderStore;
 
   return {
     getIcon,
     rootFolderType,
+    disabledCreatePublicRoom:
+      isExternalShareRestricted && externalShareApplyToRooms,
   };
 })(observer(PluginFilesSelector));

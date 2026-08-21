@@ -121,6 +121,7 @@ vi.mock("react-i18next", () => ({
     ready: true,
   }),
   Trans: ({ t, i18nKey, values }: TransProps) => {
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: test mock forwards whatever key the component under test passes
     return t(i18nKey, { ...values });
   },
   // Modules that bootstrap i18n at import time (e.g. client `src/i18n.js`,

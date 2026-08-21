@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useId } from "react";
+import { useEffect, useId, useState } from "react";
+import classNames from "classnames";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
@@ -58,6 +59,9 @@ import EnabledIcon from "PUBLIC_DIR/images/tick.rounded.svg";
 import config from "PACKAGE_FILE";
 
 import styles from "./AIFeaturesBanner.module.scss";
+
+// Must match the .swapFade transition duration in the SCSS module.
+const SWAP_FADE_MS = 200;
 
 const ALL_SERVICES_ROUTE = "/portal-settings/payments/services";
 const AI_SERVICES_ROUTE = "/portal-settings/payments/services/ai-services";
@@ -93,9 +97,37 @@ const AIFeaturesBanner = ({
   const tooltipId = useId();
 
   const isMobile = currentDeviceType === DeviceType.mobile;
-  const isEnabled = isWebSearchTab
+  const isEnabledTarget = isWebSearchTab
     ? !!isAiSearchServiceOn
     : !!isAiToolsServiceOn;
+
+  // Displayed copy of the state: in-place flips (stale store refreshed on
+  // back navigation) are swapped with a fade-through instead of a hard snap.
+  const [isEnabled, setIsEnabled] = useState(isEnabledTarget);
+  const [isSwapping, setIsSwapping] = useState(false);
+  const [prevIsWebSearchTab, setPrevIsWebSearchTab] = useState(isWebSearchTab);
+
+  // Tab switches sync during render (no fade, no intermediate frame).
+  if (prevIsWebSearchTab !== isWebSearchTab) {
+    setPrevIsWebSearchTab(isWebSearchTab);
+    setIsEnabled(isEnabledTarget);
+    setIsSwapping(false);
+  }
+
+  useEffect(() => {
+    if (isEnabledTarget === isEnabled) {
+      setIsSwapping(false);
+      return undefined;
+    }
+
+    setIsSwapping(true);
+    const timerId = setTimeout(() => {
+      setIsEnabled(isEnabledTarget);
+      setIsSwapping(false);
+    }, SWAP_FADE_MS);
+
+    return () => clearTimeout(timerId);
+  }, [isEnabledTarget, isEnabled]);
 
   const {
     activateTitle,
@@ -105,6 +137,12 @@ const AIFeaturesBanner = ({
     enabledDescription,
   } = getBannerTexts(t, isWebSearchTab);
   const withFeatures = !isWebSearchTab;
+
+  // Frozen while collapsed so the rows don't swap mid-animation.
+  const [featuresEnabled, setFeaturesEnabled] = useState(isEnabled);
+  if (withFeatures && featuresEnabled !== isEnabled) {
+    setFeaturesEnabled(isEnabled);
+  }
 
   const onActivate = () => {
     const serviceRoute = isWebSearchTab ? AI_SEARCH_ROUTE : AI_SERVICES_ROUTE;
@@ -147,7 +185,7 @@ const AIFeaturesBanner = ({
 
   const features = (
     <div className={styles.features}>
-      {isEnabled ? (
+      {featuresEnabled ? (
         <div className={styles.featureRow}>{openRouterPricingNote}</div>
       ) : (
         <>
@@ -175,7 +213,11 @@ const AIFeaturesBanner = ({
   return (
     <div className={styles.banner}>
       <div className={styles.textBlock}>
-        <div className={styles.title}>
+        <div
+          className={classNames(styles.title, styles.swapFade, {
+            [styles.swapFadeHidden]: isSwapping,
+          })}
+        >
           {isEnabled ? <EnabledIcon className={styles.enabledIcon} /> : null}
           <Text fontSize="13px" fontWeight={600}>
             {isEnabled ? enabledTitle : activateTitle}
@@ -184,18 +226,35 @@ const AIFeaturesBanner = ({
             <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />
           ) : null}
         </div>
-        <Text as="div" fontSize="12px" className={styles.descriptionText}>
+        <Text
+          as="div"
+          fontSize="12px"
+          className={classNames(styles.descriptionText, styles.swapFade, {
+            [styles.swapFadeHidden]: isSwapping,
+          })}
+        >
           {isEnabled ? enabledDescription : activateDescription}
           {isMobile && !isEnabled && withFeatures ? (
             <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />
           ) : null}
         </Text>
 
-        {isMobile || !withFeatures ? null : features}
+        {isMobile ? null : (
+          <div
+            className={classNames(styles.featuresWrap, {
+              [styles.featuresCollapsed]: !withFeatures || isSwapping,
+            })}
+            inert={!withFeatures || isSwapping}
+          >
+            <div className={styles.featuresInner}>{features}</div>
+          </div>
+        )}
       </div>
 
       <Button
-        className={styles.button}
+        className={classNames(styles.button, styles.swapFade, {
+          [styles.swapFadeHidden]: isSwapping,
+        })}
         primary={!isEnabled}
         size={ButtonSize.small}
         label={isEnabled ? t("Common:Details") : activateLabel}

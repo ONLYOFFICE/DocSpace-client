@@ -74,12 +74,15 @@ import styles from "../Dashboard.module.scss";
 // the same first-load article loader.
 
 // Mirrors the header ({@link ./Header}): greeting + plan subline, with the
-// round tour button at the opposite edge.
-const PlanHeaderLoader = () => (
+// round tour button at the opposite edge. Everyone gets the greeting and the
+// tour button; only admins/owners get the billing-scoped subline.
+const PlanHeaderLoader = ({ showSubline }: { showSubline: boolean }) => (
   <div className={styles.planHeader}>
     <div className={styles.planHeaderText}>
       <RectangleSkeleton width="280px" height="28px" borderRadius="3px" />
-      <RectangleSkeleton width="360px" height="20px" borderRadius="3px" />
+      {showSubline ? (
+        <RectangleSkeleton width="360px" height="20px" borderRadius="3px" />
+      ) : null}
     </div>
     <RectangleSkeleton width="32px" height="32px" borderRadius="50%" />
   </div>
@@ -183,7 +186,7 @@ const DevToolsCardLoader = () => (
 );
 
 type DashboardLoaderProps = {
-  // Admins/owners see the plan banner and profile card; everyone else doesn't.
+  // Admins/owners see the plan subline and profile card; everyone else doesn't.
   isAdminOrOwner?: boolean;
   // Guests don't get the personal Files module in the Applications grid.
   isGuest?: boolean;
@@ -206,7 +209,7 @@ const DashboardLoaderComponent = ({
   return (
     <div className={styles.dashboard}>
       <div className={styles.dashboardInner}>
-        {isAdminOrOwner ? <PlanHeaderLoader /> : null}
+        <PlanHeaderLoader showSubline={isAdminOrOwner} />
         {showProfileCard ? <ProfileCardLoader /> : null}
         <CreateSectionLoader />
         <ModulesSectionLoader count={moduleCount} />

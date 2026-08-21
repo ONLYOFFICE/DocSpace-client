@@ -76,6 +76,7 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
+import { getBrandName } from "@docspace/shared/constants/brands";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
@@ -122,6 +123,8 @@ type DashboardProps = ChatNoAccessStoreProps & {
   requestDashboardTour: () => void;
   /** Admins / owners / room admins — the set allowed to create rooms. */
   canCreateRooms: boolean;
+  /** Portal admins and the owner — the only ones who can reach Docs Connect. */
+  isAdminOrOwner: boolean;
   /** Whether the portal's AI is set up, which agent creation also needs. */
   aiReady: boolean;
   /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
@@ -132,6 +135,7 @@ type DashboardProps = ChatNoAccessStoreProps & {
 };
 
 const UPLOAD_LINK_ID = "dashboard-upload-link";
+const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
 
 const Dashboard = (props: DashboardProps) => {
   const {
@@ -145,6 +149,7 @@ const Dashboard = (props: DashboardProps) => {
     dismissWelcome,
     requestDashboardTour,
     canCreateRooms,
+    isAdminOrOwner,
     aiReady,
     isFreeTariff,
     isWarningRoomsDialog,
@@ -159,6 +164,9 @@ const Dashboard = (props: DashboardProps) => {
   const myFolderId = useMyFolderId();
   const openFiles = React.useCallback(() => {
     navigate("/rooms/personal/filter");
+  }, [navigate]);
+  const openDocsConnect = React.useCallback(() => {
+    navigate(DOCS_CONNECT_PATH);
   }, [navigate]);
   const { openUploadDialog, progress, clearProgress } = useUploadToMyDocuments(
     myFolderId,
@@ -289,28 +297,59 @@ const Dashboard = (props: DashboardProps) => {
             <ProfileCard />
 
             <section data-tour-id="dashboard-create" className={styles.section}>
-              <Text fontSize="18px" fontWeight={700} lineHeight="24px">
-                <Trans
-                  t={t}
-                  ns="Common"
-                  i18nKey="CreateNewOrUpload"
-                  components={{
-                    1: (
-                      <Link
-                        id={UPLOAD_LINK_ID}
-                        type={LinkType.action}
-                        color="accent"
-                        isHovered
-                        isSemitransparent={isGuest}
-                        fontSize="18px"
-                        fontWeight={700}
-                        lineHeight="24px"
-                        onClick={isGuest ? undefined : openUploadDialog}
+              <div className={styles.sectionHeading}>
+                <Text fontSize="18px" fontWeight={700} lineHeight="24px">
+                  <Trans
+                    t={t}
+                    ns="Common"
+                    i18nKey="CreateNewOrUpload"
+                    components={{
+                      1: (
+                        <Link
+                          id={UPLOAD_LINK_ID}
+                          type={LinkType.action}
+                          color="accent"
+                          isHovered
+                          isSemitransparent={isGuest}
+                          fontSize="18px"
+                          fontWeight={700}
+                          lineHeight="24px"
+                          onClick={isGuest ? undefined : openUploadDialog}
+                        />
+                      ),
+                    }}
+                  />
+                </Text>
+                <Text as="p" className={styles.createSubtitle}>
+                  {t("Common:NewFilesDefaultPlace", {
+                    sectionName: t("Common:Files"),
+                  })}
+                  {isAdminOrOwner ? (
+                    <>
+                      {" - "}
+                      <Trans
+                        t={t}
+                        ns="Common"
+                        i18nKey="OrConnectDocs"
+                        values={{
+                          docsName: getBrandName("ProductEditorsName"),
+                        }}
+                        components={{
+                          1: (
+                            <Link
+                              type={LinkType.action}
+                              color="accent"
+                              isHovered
+                              className={styles.createSubtitleLink}
+                              onClick={openDocsConnect}
+                            />
+                          ),
+                        }}
                       />
-                    ),
-                  }}
-                />
-              </Text>
+                    </>
+                  ) : null}
+                </Text>
+              </div>
               {isGuest ? (
                 <Tooltip
                   id={`${UPLOAD_LINK_ID}-tooltip`}
@@ -439,6 +478,11 @@ const DashboardConnected = inject((stores: TStore) => {
     requestDashboardTour: dashboardTourStore.requestTour,
     // Same set the Home quick actions and the agents header button gate on.
     canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,
+    // Room admins are excluded here: Docs Connect sits under the portal's
+    // developer tools, which only admins and the owner can open. Same flags
+    // the Header and ProfileCard gate on.
+    isAdminOrOwner:
+      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
     aiReady: settingsStore.aiConfig?.aiReady ?? false,
     // Undefined until the tariff loads; the plan is free by default, matching
     // the header's own fallback.

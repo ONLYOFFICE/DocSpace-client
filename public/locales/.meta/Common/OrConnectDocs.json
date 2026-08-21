@@ -1,0 +1,29 @@
+{
+  "key_path": "OrConnectDocs",
+  "content": "<1>or connect {{docsName}}</1> to your existing platform",
+  "content_en_sha1_hash": "695cbbb568279c409abfe9c3f931f67fecd48d56",
+  "created_at": "2026-08-21T00:00:00.000Z",
+  "updated_at": "2026-08-21T00:00:00.000Z",
+  "comment": {
+    "text": "Second half of the Dashboard subtitle, shown to portal admins and the owner only, offering to connect the editors to an existing platform. The `<1>` tag is a link to the Docs Connect page under developer tools; `{{docsName}}` is the editors' brand name.",
+    "is_auto": false,
+    "updated_at": "2026-08-21T00:00:00.000Z",
+    "model": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 333,
+      "context": "<Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"OrConnectDocs\"\n values={{ docsName: getBrandName(\"ProductEditorsName\") }}\n components={{\n 1: (\n <Link\n type={LinkType.action}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

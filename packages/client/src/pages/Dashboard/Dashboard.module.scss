@@ -327,6 +327,30 @@
   }
 }
 
+// Larger than `.sectionSubtitle`: this one sits under the page's opening
+// heading rather than inside a card, so it reads at body size.
+.createSubtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+
+  :global(.light) & {
+    color: $gray-text;
+  }
+
+  :global(.dark) & {
+    color: $gray-dark-text;
+  }
+}
+
+// The docs-connect link inherits the subtitle's size and weight so the two
+// sentences read as one line.
+.createSubtitleLink {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
 .sectionTitleLink {
   font-size: 16px;
   font-weight: 700;

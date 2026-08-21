@@ -1,0 +1,29 @@
+{
+  "key_path": "NewFilesDefaultPlace",
+  "content": "New documents are saved to {{sectionName}} by default",
+  "content_en_sha1_hash": "62bd21983c1f3e6af1be9238cd22b45e431bf4da",
+  "created_at": "2026-08-21T00:00:00.000Z",
+  "updated_at": "2026-08-21T00:00:00.000Z",
+  "comment": {
+    "text": "Subtitle under the Dashboard's \"Create or upload a file\" heading, telling the user where newly created documents end up. `{{sectionName}}` is the name of the Files section.",
+    "is_auto": false,
+    "updated_at": "2026-08-21T00:00:00.000Z",
+    "model": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 324,
+      "context": "<Text as=\"p\" className={styles.createSubtitle}>\n {t(\"Common:NewFilesDefaultPlace\", {\n sectionName: t(\"Common:Files\"),\n })}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

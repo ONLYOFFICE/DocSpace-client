@@ -524,7 +524,18 @@ const ClientArticleSidebar = ({
 
     return [
       { id: "overview", items: [overview] },
-      ...(mainItems.length > 0 ? [{ id: "main", items: mainItems }] : []),
+      // The products themselves, captioned to set them apart from Home above.
+      // In icon-only mode NavMenu renders the caption as a short divider dash
+      // instead of text, so the collapsed sidebar keeps the same separation.
+      ...(mainItems.length > 0
+        ? [
+            {
+              id: "main",
+              label: t("Common:AppsSectionTitle"),
+              items: mainItems,
+            },
+          ]
+        : []),
     ];
   }, [
     t,

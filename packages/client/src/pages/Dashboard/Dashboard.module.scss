@@ -121,7 +121,11 @@
   height: 100%;
 }
 
+// Query container for the grids inside: their column counts must react to the
+// space the dashboard content actually gets, not to the viewport — the AI chat
+// panel takes 400px out of the row without changing the viewport width.
 .dashboardInner {
+  container: dashboard-content / inline-size;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -369,17 +373,21 @@
   justify-content: flex-start;
 }
 
-// Modules grid
+// Modules grid. Breakpoints are on the `dashboard-content` container
+// (`.dashboardInner`), not the viewport, so opening the chat panel re-flows the
+// cards instead of squeezing four of them into the leftover width. The widths
+// are the old viewport breakpoints minus the article sidebar and the 40px of
+// inner padding.
 .modulesGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 
-  @media (max-width: 1200px) {
+  @container dashboard-content (max-width: 900px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (max-width: 600px) {
+  @container dashboard-content (max-width: 460px) {
     grid-template-columns: 1fr;
   }
 }

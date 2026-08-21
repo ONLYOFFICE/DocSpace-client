@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>{{organizationName}} {{editorsName}}-a qoşuldu.</1> {{organizationName}} {{editorsName}} artıq {{service}} tərəfindən təmin edilən redaktorlardan istifadə edir.",
   "ConnectToDocs": "{{organizationName}} {{editorsName}}-a qoşulun",
   "CopySecretKey": "Gizli açarı kopyalayın",
-  "CreateTenant": "Tenant yaradın",
   "DaysCount": "{{count}} gün",
   "DaysLeft": "Qalan günlər",
   "DemoCode": "Demo kod",

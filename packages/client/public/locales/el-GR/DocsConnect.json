@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Συνδέθηκε με {{organizationName}} {{editorsName}}.</1> Το {{organizationName}} {{editorsName}} σας χρησιμοποιεί τώρα τους επεξεργαστές που παρέχει το {{service}}.",
   "ConnectToDocs": "Σύνδεση με {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Αντιγραφή μυστικού κλειδιού",
-  "CreateTenant": "Δημιουργία μισθωτή",
   "DaysCount": "{{count}} ημέρες",
   "DaysLeft": "Ημέρες που απομένουν",
   "DemoCode": "Κώδικας επίδειξης",

@@ -159,7 +159,7 @@ const PromoPage = ({
           <Button
             primary
             size={ButtonSize.small}
-            label={t("DocsConnect:CreateTenant")}
+            label={t("Common:CreateInstance")}
             onClick={onCreateTenant}
             isLoading={submitting}
             isDisabled={submitting || !canManage}
@@ -207,15 +207,17 @@ const PromoPage = ({
   );
 };
 
-export default inject(({ docsConnectStore, settingsStore, userStore }: TStore) => {
-  const { user } = userStore;
+export default inject(
+  ({ docsConnectStore, settingsStore, userStore }: TStore) => {
+    const { user } = userStore;
 
-  return {
-    startTrial: docsConnectStore.startTrial,
-    openBuyPlan: docsConnectStore.openBuyPlan,
-    docsConnectUrl: settingsStore.docsConnectUrl,
-    allConnectorsUrl: settingsStore.allConnectorsUrl,
-    canManage: (user?.isAdmin || user?.isOwner) ?? false,
-  };
-})(observer(PromoPage));
+    return {
+      startTrial: docsConnectStore.startTrial,
+      openBuyPlan: docsConnectStore.openBuyPlan,
+      docsConnectUrl: settingsStore.docsConnectUrl,
+      allConnectorsUrl: settingsStore.allConnectorsUrl,
+      canManage: (user?.isAdmin || user?.isOwner) ?? false,
+    };
+  },
+)(observer(PromoPage));
 

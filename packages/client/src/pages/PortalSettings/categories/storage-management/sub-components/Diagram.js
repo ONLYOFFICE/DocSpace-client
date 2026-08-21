@@ -63,8 +63,8 @@ const getTags = (
     globalColors.secondGreen,
     globalColors.secondOrange,
     globalColors.mainYellow,
+    globalColors.purple,
     globalColors.coralPink,
-    globalColors.secondPurple,
   ];
 
   let commonSize = standalone ? tenantCustomQuota : maxTotalSizeByQuota;

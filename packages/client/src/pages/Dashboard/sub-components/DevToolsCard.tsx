@@ -66,7 +66,10 @@ import { Link } from "react-router";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
+import {
+  hasDevToolsAccess,
+  hasDocsConnectAccess,
+} from "@docspace/shared/utils/devToolsAccess";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 
@@ -88,10 +91,13 @@ interface DevToolsCardProps {
   // for guests and - when the portal limits access - for room admins and users.
   // Hide the whole card for them rather than show links that answer with a 403.
   showDevTools?: boolean;
+  // Docs Connect is stricter still - admin/owner only - so its tile drops out
+  // for room admins and users even when the rest of the card stays.
+  canOpenDocsConnect?: boolean;
 }
 
 const useDevTools = (props: DevToolsCardProps): DevTool[] => {
-  const { apiBasicLink } = props;
+  const { apiBasicLink, canOpenDocsConnect } = props;
 
   const { t } = useTranslation([
     "Settings",
@@ -106,15 +112,23 @@ const useDevTools = (props: DevToolsCardProps): DevTool[] => {
   const organizationName = getBrandName("OrganizationName");
   const docsName = `${organizationName} ${getBrandName("ProductEditorsName")}`;
 
+  const docsConnect: DevTool[] = canOpenDocsConnect
+    ? [
+        {
+          id: "docs-connect",
+          title: t("DocsConnect:DocsConnect"),
+          description: t("DocsConnect:CardDescription", {
+            productName: docsName,
+          }),
+          path: "/developer-tools/docs-connect",
+          featured: true,
+          linkTitle: t("DocsConnect:GetStarted"),
+        },
+      ]
+    : [];
+
   return [
-    {
-      id: "docs-connect",
-      title: t("DocsConnect:DocsConnect"),
-      description: t("DocsConnect:CardDescription", { productName: docsName }),
-      path: "/developer-tools/docs-connect",
-      featured: true,
-      linkTitle: t("DocsConnect:GetStarted"),
-    },
+    ...docsConnect,
     {
       id: "rest-api",
       title: t("Settings:RestAPI"),
@@ -251,6 +265,7 @@ export const DevToolsCard = inject<TStore>(({ settingsStore, userStore }) => ({
     userStore.user,
     settingsStore.limitedAccessDevToolsForUsers,
   ),
+  canOpenDocsConnect: hasDocsConnectAccess(userStore.user),
 }))(observer(DevToolsCardComponent));
 
 export default DevToolsCard;

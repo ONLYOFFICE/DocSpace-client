@@ -133,6 +133,10 @@
 
 // Reopens the welcome modal (the dashboard tour). Sits at the far edge of the
 // header row, opposite the greeting.
+//
+// Hidden on mobile: the tours walk through desktop layouts (article sidebar,
+// table headers, info panel) that a phone either collapses or does not render,
+// so the entry point is left out where the walkthrough has nothing to point at.
 .helpButton {
   flex: 0 0 auto;
   width: 32px;
@@ -145,6 +149,10 @@
 
   &:hover {
     background: var(--dropdown-item-hover-background-color);
+  }
+
+  @include mixins.mobile {
+    display: none;
   }
 }
 
@@ -440,6 +448,8 @@
   margin-block-start: auto;
 }
 
+// Per-app tour entry point. Hidden on mobile for the same reason as
+// `.helpButton` above — the section tours target desktop-only chrome.
 .moduleTourButton {
   flex-shrink: 0;
   width: 16px;
@@ -452,6 +462,10 @@
 
   &:hover {
     background: var(--dropdown-item-hover-background-color);
+  }
+
+  @include mixins.mobile {
+    display: none;
   }
 }
 

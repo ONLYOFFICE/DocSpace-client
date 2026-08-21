@@ -3,7 +3,7 @@
   "content": "Create instance",
   "content_en_sha1_hash": "448e244903a83a672cc89c0cba5ddcb21e9a4103",
   "created_at": "2026-08-20T20:04:26.380Z",
-  "updated_at": "2026-08-21T08:15:33.234Z",
+  "updated_at": "2026-08-21T15:49:57.226Z",
   "comment": {
     "text": "Button label in the integration dialog used to trigger the creation of a new instance.",
     "is_auto": true,
@@ -13,8 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationDialog.tsx",
-      "line_number": 111,
-      "context": "<div className={styles.integrationDialogFooter}>\n <div className={styles.integrationDialogFooterButtons}>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:CreateInstance\")}\n onClick={onCreateInstance}\n testId={`integration-create-instance-${platform.id}`}\n />\n {githubUrl ? (\n <Button",
+      "line_number": 97,
+      "context": "<div className={styles.integrationDialogFooter}>\n <div className={styles.integrationDialogFooterButtons}>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:CreateInstance\")}\n onClick={onCreateInstance}\n isDisabled={isCreateInstanceDisabled}\n testId={`integration-create-instance-${platform.id}`}\n />\n {githubUrl ? (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 162,
+      "context": "/>\n ) : (\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"Common:CreateInstance\")}\n onClick={onCreateTenant}\n isLoading={submitting}\n isDisabled={submitting || !canManage}\n testId=\"docs_connect_create_tenant_button\"\n />",
       "module": "/packages/client"
     }
   ],

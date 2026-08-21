@@ -1,20 +1,20 @@
 {
-  "key_path": "DisableAIModelDescription",
-  "content": "The <1>{{model}}</1> model will no longer be available to any user of the workspace. Everyone using it will have to switch to another model. You can enable it back at any time.",
-  "content_en_sha1_hash": "408a3ee38225a2d1f1f7cb690807388183b78bc1",
-  "created_at": "2026-08-20T20:04:30.998Z",
-  "updated_at": "2026-08-21T08:14:58.015Z",
+  "key_path": "AppsSectionTitle",
+  "content": "Apps",
+  "content_en_sha1_hash": "d9a36850b7f3f78365a998cb16cb68b6fd79400d",
+  "created_at": "2026-08-21T15:49:14.339Z",
+  "updated_at": "2026-08-21T15:50:50.927Z",
   "comment": {
-    "text": "Body text in a modal dialog explaining the consequences of disabling an AI model. The variable {{model}} represents the model's name and is wrapped in a bold tag.",
+    "text": "Sidebar section title used to label a group of available applications.",
     "is_auto": true,
-    "updated_at": "2026-08-21T08:14:58.015Z",
+    "updated_at": "2026-08-21T15:50:50.927Z",
     "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/DisableModelDialog.tsx",
-      "line_number": 73,
-      "context": "<ModalDialog.Header>{t(\"Common:DisableAIModel\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans\n t={t}\n i18nKey=\"DisableAIModelDescription\"\n ns=\"Common\"\n values={{ model: model.title }}\n components={{ 1: <strong /> }}\n />\n </Text>",
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 534,
+      "context": "// instead of text, so the collapsed sidebar keeps the same separation.\n ...(mainItems.length > 0\n ? [\n {\n id: \"main\",\n label: t(\"Common:AppsSectionTitle\"),\n items: mainItems,\n },\n ]\n : []),\n ];",
       "module": "/packages/client"
     }
   ],

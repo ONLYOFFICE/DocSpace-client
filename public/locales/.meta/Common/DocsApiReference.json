@@ -1,0 +1,29 @@
+{
+  "key_path": "DocsApiReference",
+  "content": "{{organizationName}} {{docsName}} API",
+  "content_en_sha1_hash": "94378b01ad5d8bf608240503686da79b38675086",
+  "created_at": "2026-08-21T15:49:22.128Z",
+  "updated_at": "2026-08-21T15:50:18.770Z",
+  "comment": {
+    "text": "Button label for a link to the API documentation, featuring the organization name and product name as variables.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T15:50:18.770Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationDialog.tsx",
+      "line_number": 84,
+      "context": "// footer collapses to a single secondary button to the API reference.\n const renderFooter = () =>\n docsApiUrl ? (\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:DocsApiReference\", {\n organizationName: getBrandName(\"OrganizationName\"),\n docsName: getBrandName(\"ProductEditorsName\"),\n })}\n onClick={() => window.open(docsApiUrl, \"_blank\", \"noopener\")}\n testId={`integration-docs-api-${platform.id}`}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

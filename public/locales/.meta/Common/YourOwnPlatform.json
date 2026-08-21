@@ -3,7 +3,7 @@
   "content": "Your own platform",
   "content_en_sha1_hash": "bbd1415c463ea15808ff3e35db21a0701a062dba",
   "created_at": "2026-08-20T20:05:31.693Z",
-  "updated_at": "2026-08-21T08:02:20.526Z",
+  "updated_at": "2026-08-21T15:49:57.230Z",
   "comment": {
     "text": "Label for the custom integration option in the integrations catalog, serving as the title for this specific integration card.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
-      "line_number": 251,
-      "context": "],\n githubUrl: \"https://github.com/ONLYOFFICE\",\n },\n {\n id: \"custom\",\n name: t(\"Common:YourOwnPlatform\"),\n url: allConnectorsUrl,\n subtitle: t(\"Common:IntegrationOwnHeader\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),",
+      "line_number": 257,
+      "context": "],\n githubUrl: \"https://github.com/ONLYOFFICE\",\n },\n {\n id: \"custom\",\n name: t(\"Common:YourOwnPlatform\"),\n subtitle: t(\"Common:IntegrationOwnHeader\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n steps: [",
       "module": "/packages/client"
     }
   ],

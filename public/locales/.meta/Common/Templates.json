@@ -3,7 +3,7 @@
   "content": "Templates",
   "content_en_sha1_hash": "f25b700ed9f092123a43acb205a6869342cf9dd6",
   "created_at": "2025-05-19T21:30:49.261Z",
-  "updated_at": "2026-08-21T15:04:37.036Z",
+  "updated_at": "2026-08-21T15:49:57.156Z",
   "comment": {
     "text": "This is a tab label that, when clicked, displays a list of available document templates.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 780,
+      "line_number": 783,
       "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Live Viewer",
   "content_en_sha1_hash": "cea59129f99b5061169ab65eee7eeb06e606e038",
   "created_at": "2026-07-27T13:07:48.502Z",
-  "updated_at": "2026-08-10T12:23:10.567Z",
+  "updated_at": "2026-08-21T15:49:57.263Z",
   "comment": {
     "text": "Title for a usage block in the statistics panel, labeling the number of users with viewer-only access.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 573,
+      "line_number": 574,
       "context": "usage={tenantInfo.stats.editor}\n limit={tenantInfo.usersLimit.edit}\n t={t}\n />\n <UsageBlock\n title={t(\"DocsConnect:LiveViewer\")}\n subtitle={t(\"DocsConnect:LiveViewerSubtitle\")}\n usageLabel={t(\"DocsConnect:ViewerUsage\")}\n usage={tenantInfo.stats.viewer}\n limit={tenantInfo.usersLimit.view}\n t={t}",
       "module": "/packages/client"
     }

@@ -77,7 +77,11 @@ import styles from "../Dashboard.module.scss";
 const STANDALONE_PAYMENTS_ROUTE = "/portal-settings/payments/portal-payments";
 
 type HeaderProps = {
-  /** Opens the welcome modal, whose only offer is the dashboard tour. */
+  /**
+   * Opens the welcome modal, whose only offer is the dashboard tour. Left out
+   * where no tour can run (mobile), in which case the help icon is not
+   * rendered at all rather than sitting there doing nothing.
+   */
   onOpenTour?: () => void;
   isFreeTariff?: boolean;
   paymentDate?: string;
@@ -146,15 +150,17 @@ const Header = ({
       </div>
 
       {/* Pinned to the far edge of the header row, opposite the greeting. */}
-      <IconButton
-        className={styles.helpButton}
-        iconName={QuestionReactSvgUrl}
-        size={16}
-        isClickable
-        title={t("Common:WelcomeStartTour")}
-        onClick={onOpenTour}
-        dataTestId="dashboard-open-welcome"
-      />
+      {onOpenTour ? (
+        <IconButton
+          className={styles.helpButton}
+          iconName={QuestionReactSvgUrl}
+          size={16}
+          isClickable
+          title={t("Common:WelcomeStartTour")}
+          onClick={onOpenTour}
+          dataTestId="dashboard-open-welcome"
+        />
+      ) : null}
     </header>
   );
 };

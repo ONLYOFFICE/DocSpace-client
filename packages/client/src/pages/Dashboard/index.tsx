@@ -77,6 +77,7 @@ import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
 import { useAiChatPanel } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
@@ -157,6 +158,14 @@ const Dashboard = (props: DashboardProps) => {
   } = props;
   const { t } = useTranslation(["Common"]);
   useDocumentTitle("Common:Home");
+
+  // Gates every tour entry point on this page. The tours walk through desktop
+  // chrome (`useTour` refuses to run on mobile outright), so on a phone the
+  // welcome is not offered and neither help icon is rendered — the CSS in
+  // `Dashboard.module.scss` hides them too, but a button that cannot do
+  // anything should not be in the tree to begin with.
+  const isMobile = currentDeviceType === DeviceType.mobile;
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -218,12 +227,16 @@ const Dashboard = (props: DashboardProps) => {
   const [isWelcomeOpen, setIsWelcomeOpen] = React.useState(false);
 
   /**
-   * The first-visit offer, made once per user, on every device.
+   * The first-visit offer, made once to a user who can actually be walked
+   * through the page afterwards.
    *
+   * Not on mobile, where no tour runs at all (`useTour` refuses to) — and the
+   * flag is deliberately left unspent there rather than dismissed, so somebody
+   * whose first visit was on a phone still gets the offer on their desktop.
    * Behind the loader for the same reason the tour is: the modal introduces the
    * page, and the page is a skeleton until then.
    */
-  const isFirstVisit = !isWelcomeSeen && !showLoader;
+  const isFirstVisit = !isWelcomeSeen && !showLoader && !isMobile;
 
   const showWelcome = isFirstVisit || isWelcomeOpen;
 
@@ -293,7 +306,9 @@ const Dashboard = (props: DashboardProps) => {
       <div className={styles.dashboard} inert={isAiChatFullscreen}>
         <Scrollbar className={styles.dashboardScrollbar}>
           <div className={styles.dashboardInner}>
-            <Header onOpenTour={() => setIsWelcomeOpen(true)} />
+            <Header
+              onOpenTour={isMobile ? undefined : () => setIsWelcomeOpen(true)}
+            />
             <ProfileCard />
 
             <section data-tour-id="dashboard-create" className={styles.section}>
@@ -383,12 +398,17 @@ const Dashboard = (props: DashboardProps) => {
                     <ModuleCard
                       key={mod.id}
                       mod={mod}
-                      onTakeTour={() => {
-                        requestAppTour(mod.id as AppId);
-                        // The tour runs inside the app's section, so this
-                        // navigates even when the button next to it creates.
-                        navigate(mod.href);
-                      }}
+                      onTakeTour={
+                        isMobile
+                          ? undefined
+                          : () => {
+                              requestAppTour(mod.id as AppId);
+                              // The tour runs inside the app's section, so this
+                              // navigates even when the button next to it
+                              // creates.
+                              navigate(mod.href);
+                            }
+                      }
                     />
                   ))}
                 </div>

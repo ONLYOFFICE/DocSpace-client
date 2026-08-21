@@ -86,7 +86,7 @@ import {
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
-import { useAiChatStore } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
+import { useAiChatStoreOptional } from "@docspace/ui-kit/ai-agent/providers/ai-chat-store";
 import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel/hooks/useOpenAiChat";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
@@ -303,16 +303,19 @@ const SectionHeaderContent = (props) => {
     // setIsInfoPanelVisible(!isInfoPanelVisible);
   }, [hideInfoPanelEvent, isInfoPanelVisible, showInfoPanel]);
 
-  // The AI chat panel is hosted by Home (see `useAiChatPanel` there), so the
-  // provider is always mounted above this header and the strict store hook is
-  // safe. `usePanelExclusivity` takes care of closing the info panel when the
-  // chat opens, so the toggle only has to flip its own panel.
-  const aiChatStore = useAiChatStore();
+  // The AI chat panel is hosted by Home (see `useAiChatPanel` there), but the
+  // provider mounts only after auth init: a cold start straight into this
+  // header (a public room link in a fresh session) renders it before Shell
+  // wraps the layout in AiAgentProviders, so the strict hook would throw and
+  // flash the route error boundary (Bug 83319). `usePanelExclusivity` takes
+  // care of closing the info panel when the chat opens, so the toggle only
+  // has to flip its own panel.
+  const aiChatStore = useAiChatStoreOptional();
   const openAiChat = useOpenAiChat();
   const isAiChatAvailable = useIsAiChatAvailable();
 
   const onToggleChatPanel = React.useCallback(() => {
-    if (aiChatStore.isVisible) {
+    if (aiChatStore?.isVisible) {
       aiChatStore.close();
     } else {
       openAiChat();
@@ -1028,7 +1031,7 @@ const SectionHeaderContent = (props) => {
               toggleInfoPanel={isProfile ? undefined : onToggleInfoPanel}
               isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
               toggleChatPanel={onToggleChatPanel}
-              isChatPanelVisible={aiChatStore.isVisible}
+              isChatPanelVisible={!!aiChatStore?.isVisible}
               hideChatButton={
                 !isAiChatAvailable ||
                 isSettingsPage ||

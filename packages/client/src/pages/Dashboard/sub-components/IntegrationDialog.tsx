@@ -72,8 +72,58 @@ export const IntegrationDialog = ({
 
   if (!platform) return null;
 
-  const { name, subtitle, steps, url, githubUrl } = platform;
+  const { name, subtitle, steps, url, githubUrl, docsApiUrl } = platform;
   const GithubIcon = isBase ? GithubLightIcon : GithubDarkIcon;
+
+  // "Your own platform": nothing to provision and no connector repo, so the
+  // footer collapses to a single secondary button to the API reference.
+  const renderFooter = () =>
+    docsApiUrl ? (
+      <Button
+        size={ButtonSize.normal}
+        label={t("Common:DocsApiReference", {
+          organizationName: getBrandName("OrganizationName"),
+          docsName: getBrandName("ProductEditorsName"),
+        })}
+        onClick={() => window.open(docsApiUrl, "_blank", "noopener")}
+        testId={`integration-docs-api-${platform.id}`}
+      />
+    ) : (
+      <div className={styles.integrationDialogFooter}>
+        <div className={styles.integrationDialogFooterButtons}>
+          <Button
+            primary
+            size={ButtonSize.normal}
+            label={t("Common:CreateInstance")}
+            onClick={onCreateInstance}
+            isDisabled={isCreateInstanceDisabled}
+            testId={`integration-create-instance-${platform.id}`}
+          />
+          {githubUrl ? (
+            <Button
+              size={ButtonSize.normal}
+              label={getBrandName("GitHub")}
+              icon={<GithubIcon />}
+              onClick={() => window.open(githubUrl, "_blank", "noopener")}
+              testId={`integration-github-${platform.id}`}
+            />
+          ) : null}
+        </div>
+        {url ? (
+          <Link
+            className={styles.integrationDialogLearnMore}
+            type={LinkType.action}
+            href={url}
+            target={LinkTarget.blank}
+            isHovered
+            fontSize="13px"
+            fontWeight={600}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
+    );
 
   return (
     <ModalDialog
@@ -107,42 +157,7 @@ export const IntegrationDialog = ({
         </div>
       </ModalDialog.Body>
 
-      <ModalDialog.Footer>
-        <div className={styles.integrationDialogFooter}>
-          <div className={styles.integrationDialogFooterButtons}>
-            <Button
-              primary
-              size={ButtonSize.normal}
-              label={t("Common:CreateInstance")}
-              onClick={onCreateInstance}
-              isDisabled={isCreateInstanceDisabled}
-              testId={`integration-create-instance-${platform.id}`}
-            />
-            {githubUrl ? (
-              <Button
-                size={ButtonSize.normal}
-                label={getBrandName("GitHub")}
-                icon={<GithubIcon />}
-                onClick={() => window.open(githubUrl, "_blank", "noopener")}
-                testId={`integration-github-${platform.id}`}
-              />
-            ) : null}
-          </div>
-          {url ? (
-            <Link
-              className={styles.integrationDialogLearnMore}
-              type={LinkType.action}
-              href={url}
-              target={LinkTarget.blank}
-              isHovered
-              fontSize="13px"
-              fontWeight={600}
-            >
-              {t("Common:LearnMore")}
-            </Link>
-          ) : null}
-        </div>
-      </ModalDialog.Footer>
+      <ModalDialog.Footer>{renderFooter()}</ModalDialog.Footer>
     </ModalDialog>
   );
 };

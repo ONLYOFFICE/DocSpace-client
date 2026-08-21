@@ -174,6 +174,7 @@ interface IntegrationsCardProps {
   alfrescoUrl?: string;
   moodleUrl?: string;
   allConnectorsUrl?: string;
+  docsApiUrl?: string;
 }
 
 const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
@@ -260,6 +261,9 @@ export const IntegrationsCard = inject<TStore>(
     alfrescoUrl: settingsStore.alfrescoUrl,
     moodleUrl: settingsStore.moodleUrl,
     allConnectorsUrl: settingsStore.allConnectorsUrl,
+    // Same API-reference target the Docs Connect promo page opens from its
+    // "Read API documentation" action.
+    docsApiUrl: settingsStore.docsConnectUrl,
   }),
 )(observer(IntegrationsCardComponent));
 

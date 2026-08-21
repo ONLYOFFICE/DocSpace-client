@@ -58,6 +58,10 @@ export type IntegrationPlatform = {
   githubUrl?: string;
   subtitle: string;
   steps: IntegrationStep[];
+  // "Your own platform" has no ready-made connector to install and no repo to
+  // browse, so its dialog drops the "Create instance"/GitHub/"Learn more"
+  // footer for a single secondary button pointing at the Docs API reference.
+  docsApiUrl?: string;
 };
 
 type CatalogUrls = {
@@ -67,6 +71,7 @@ type CatalogUrls = {
   alfrescoUrl?: string;
   moodleUrl?: string;
   allConnectorsUrl?: string;
+  docsApiUrl?: string;
 };
 
 export const useIntegrationPlatforms = (
@@ -80,6 +85,7 @@ export const useIntegrationPlatforms = (
     alfrescoUrl,
     moodleUrl,
     allConnectorsUrl,
+    docsApiUrl,
   } = urls;
 
   const createInstanceStep = t("Common:IntegrationCreateStep", {
@@ -249,7 +255,6 @@ export const useIntegrationPlatforms = (
       {
         id: "custom",
         name: t("Common:YourOwnPlatform"),
-        url: allConnectorsUrl,
         subtitle: t("Common:IntegrationOwnHeader", {
           organizationName: getBrandName("OrganizationName"),
           productName: getBrandName("ProductName"),
@@ -265,7 +270,9 @@ export const useIntegrationPlatforms = (
           },
           { id: "connect", text: t("Common:IntegrationConfigureOwnStep") },
         ],
-        githubUrl: "https://github.com/ONLYOFFICE",
+        // No connector to create and no repo to browse for a self-built
+        // integration: the footer is just the API reference.
+        docsApiUrl,
       },
     ],
     [
@@ -277,6 +284,7 @@ export const useIntegrationPlatforms = (
       alfrescoUrl,
       moodleUrl,
       allConnectorsUrl,
+      docsApiUrl,
     ],
   );
 };

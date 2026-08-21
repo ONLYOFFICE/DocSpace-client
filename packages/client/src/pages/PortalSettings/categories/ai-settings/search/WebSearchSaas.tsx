@@ -40,6 +40,7 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
@@ -109,6 +110,9 @@ const WebSearchSaas = ({
       <Text className={styles.description}>
         {t("Common:WebSearchEngineDescription")}
       </Text>
+      <Text className={classNames(styles.description, styles.poweredByNote)}>
+        {t("Common:WebSearchPoweredByNote")}
+      </Text>
 
       {webSearchSettingsUrl ? (
         <Link
@@ -123,6 +127,8 @@ const WebSearchSaas = ({
           {t("Common:LearnMore")}
         </Link>
       ) : null}
+
+      <Tooltip id="ws-pricing-tooltip" place="bottom" />
 
       <div className={styles.list}>
         {items.map((ws) => (
@@ -150,6 +156,8 @@ const WebSearchSaas = ({
                   href={ws.link}
                   target={LinkTarget.blank}
                   className={styles.detailsLink}
+                  data-tooltip-id="ws-pricing-tooltip"
+                  data-tooltip-content={t("Common:ViewExaPricing")}
                 >
                   <ExternalLinkIcon />
                 </Link>

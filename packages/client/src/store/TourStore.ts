@@ -69,7 +69,7 @@ export const safeRemove = (key: string): void => {
  * Per-section onboarding tour state.
  *
  * A tour never opens on its own. It is asked for from outside the section — the
- * app promo on the dashboard — via `requestTour`, and the section's tour host
+ * app card on the dashboard — via `requestTour`, and the section's tour host
  * starts it once the section it walks through is on screen. That request is
  * persisted because it is made on another route, so it has to survive the
  * navigation (including a full page load) to the section; concrete stores

@@ -475,7 +475,7 @@ const DashboardConnected = inject((stores: TStore) => {
   } = stores;
 
   // The app cards an onboarding tour can be started from. An app that isn't
-  // here simply gets no "Take a tour" button in its promo.
+  // here simply gets no "Take a tour" button on its card.
   const appTourStores = {
     "ai-files": filesTourStore,
     "ai-rooms": roomsTourStore,

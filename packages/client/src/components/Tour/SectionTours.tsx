@@ -50,7 +50,7 @@ import type TourStore from "SRC_DIR/store/TourStore";
  *
  * The gate is the stores, which are cheap and always present: a tour host only
  * ever does anything for a tour that has been requested (`isPending`, armed by
- * the app promo on the dashboard) or is already up (`isRunning`). Until then
+ * an app card on the dashboard) or is already up (`isRunning`). Until then
  * every host renders `null`, so mounting them is the same as not — this just
  * makes that literal, and keeps the chunk off the wire while it holds.
  *

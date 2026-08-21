@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useId } from "react";
+import { useEffect, useId, useState } from "react";
+import classNames from "classnames";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
@@ -50,38 +51,110 @@ import AIIcon from "@docspace/ui-kit/assets/icons/16/AI.svg";
 import PriceIcon from "@docspace/ui-kit/assets/icons/16/price.react.svg";
 import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
 
-import { AI_ENUM, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
+import { AI_SEARCH, AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 
 import InfoIcon from "PUBLIC_DIR/images/info.react.svg";
 import EnabledIcon from "PUBLIC_DIR/images/tick.rounded.svg";
 
 import config from "PACKAGE_FILE";
 
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
+
 import styles from "./AIFeaturesBanner.module.scss";
 
-const ALL_SERVICES_ROUTE = "/portal-settings/payments/services";
-const AI_SERVICES_ROUTE = "/portal-settings/payments/services/ai-services";
+// Must match the .swapFade transition duration in the SCSS module.
+const SWAP_FADE_MS = 200;
+
 const OPENROUTER_PRICING_URL = "https://openrouter.ai/models";
+
+const getBannerTexts = (t, isWebSearchTab) =>
+  isWebSearchTab
+    ? {
+        activateTitle: t("Common:ActivateAISearchToGetStarted"),
+        activateDescription: t("Common:ActivateAISearchDescription"),
+        activateLabel: t("Common:ActivateAISearch"),
+        enabledTitle: t("Common:AISearchEnabledTitle"),
+        enabledDescription: t("Common:AISearchEnabledDescription"),
+      }
+    : {
+        activateTitle: t("Common:ActivateAIFeaturesToGetStarted"),
+        activateDescription: t("Common:GetAccessToAIModels"),
+        activateLabel: t("Common:ActivateAIFeatures"),
+        enabledTitle: t("Common:AIFeaturesEnabled"),
+        enabledDescription: t("Common:AIFeaturesEnabledDescription"),
+      };
 
 const AIFeaturesBanner = ({
   currentDeviceType,
   isAiToolsServiceOn,
+  isAiSearchServiceOn,
   isCardLinkedToPortal,
+  isWebSearchTab,
 }) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
   const tooltipId = useId();
 
   const isMobile = currentDeviceType === DeviceType.mobile;
-  const isEnabled = !!isAiToolsServiceOn;
+  const isEnabledTarget = isWebSearchTab
+    ? !!isAiSearchServiceOn
+    : !!isAiToolsServiceOn;
+
+  // Displayed copy of the state: in-place flips (stale store refreshed on
+  // back navigation) are swapped with a fade-through instead of a hard snap.
+  const [isEnabled, setIsEnabled] = useState(isEnabledTarget);
+  const [isSwapping, setIsSwapping] = useState(false);
+  const [prevIsWebSearchTab, setPrevIsWebSearchTab] = useState(isWebSearchTab);
+
+  // Tab switches sync during render (no fade, no intermediate frame).
+  if (prevIsWebSearchTab !== isWebSearchTab) {
+    setPrevIsWebSearchTab(isWebSearchTab);
+    setIsEnabled(isEnabledTarget);
+    setIsSwapping(false);
+  }
+
+  useEffect(() => {
+    if (isEnabledTarget === isEnabled) {
+      setIsSwapping(false);
+      return undefined;
+    }
+
+    setIsSwapping(true);
+    const timerId = setTimeout(() => {
+      setIsEnabled(isEnabledTarget);
+      setIsSwapping(false);
+    }, SWAP_FADE_MS);
+
+    return () => clearTimeout(timerId);
+  }, [isEnabledTarget, isEnabled]);
+
+  const {
+    activateTitle,
+    activateDescription,
+    activateLabel,
+    enabledTitle,
+    enabledDescription,
+  } = getBannerTexts(t, isWebSearchTab);
+  const withFeatures = !isWebSearchTab;
+
+  // Frozen while collapsed so the rows don't swap mid-animation.
+  const [featuresEnabled, setFeaturesEnabled] = useState(isEnabled);
+  if (withFeatures && featuresEnabled !== isEnabled) {
+    setFeaturesEnabled(isEnabled);
+  }
 
   const onActivate = () => {
-    let route = AI_SERVICES_ROUTE;
+    const serviceRoute = isWebSearchTab
+      ? PAYMENT_ROUTES.aiSearch
+      : PAYMENT_ROUTES.aiServices;
+    const activateParam = isWebSearchTab ? AI_SEARCH : AI_TOOLS;
+
+    let route = serviceRoute;
 
     if (!isEnabled) {
       route = isCardLinkedToPortal
-        ? `${AI_SERVICES_ROUTE}?activate=${AI_TOOLS}`
-        : `${ALL_SERVICES_ROUTE}`; // ?actionType=${AI_ENUM}
+        ? `${serviceRoute}?activate=${activateParam}`
+        : PAYMENT_ROUTES.services;
     }
 
     navigate(
@@ -113,7 +186,7 @@ const AIFeaturesBanner = ({
 
   const features = (
     <div className={styles.features}>
-      {isEnabled ? (
+      {featuresEnabled ? (
         <div className={styles.featureRow}>{openRouterPricingNote}</div>
       ) : (
         <>
@@ -141,39 +214,56 @@ const AIFeaturesBanner = ({
   return (
     <div className={styles.banner}>
       <div className={styles.textBlock}>
-        <div className={styles.title}>
+        <div
+          className={classNames(styles.title, styles.swapFade, {
+            [styles.swapFadeHidden]: isSwapping,
+          })}
+        >
           {isEnabled ? <EnabledIcon className={styles.enabledIcon} /> : null}
           <Text fontSize="13px" fontWeight={600}>
-            {isEnabled
-              ? t("Common:AIFeaturesEnabled")
-              : t("Common:ActivateAIFeaturesToGetStarted")}
+            {isEnabled ? enabledTitle : activateTitle}
           </Text>
-          {isMobile && isEnabled ? (
+          {isMobile && isEnabled && withFeatures ? (
             <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />
           ) : null}
         </div>
-        <Text as="div" fontSize="12px" className={styles.descriptionText}>
-          {isEnabled
-            ? t("Common:AIFeaturesEnabledDescription")
-            : t("Common:GetAccessToAIModels")}
-          {isMobile && !isEnabled ? (
+        <Text
+          as="div"
+          fontSize="12px"
+          className={classNames(styles.descriptionText, styles.swapFade, {
+            [styles.swapFadeHidden]: isSwapping,
+          })}
+        >
+          {isEnabled ? enabledDescription : activateDescription}
+          {isMobile && !isEnabled && withFeatures ? (
             <InfoIcon className={styles.infoIcon} data-tooltip-id={tooltipId} />
           ) : null}
         </Text>
 
-        {isMobile ? null : features}
+        {isMobile ? null : (
+          <div
+            className={classNames(styles.featuresWrap, {
+              [styles.featuresCollapsed]: !withFeatures || isSwapping,
+            })}
+            inert={!withFeatures || isSwapping}
+          >
+            <div className={styles.featuresInner}>{features}</div>
+          </div>
+        )}
       </div>
 
       <Button
-        className={styles.button}
+        className={classNames(styles.button, styles.swapFade, {
+          [styles.swapFadeHidden]: isSwapping,
+        })}
         primary={!isEnabled}
         size={ButtonSize.small}
-        label={isEnabled ? t("Common:Details") : t("Common:ActivateAIFeatures")}
+        label={isEnabled ? t("Common:Details") : activateLabel}
         onClick={onActivate}
         scale={isMobile}
       />
 
-      {isMobile ? (
+      {isMobile && withFeatures ? (
         <Tooltip
           id={tooltipId}
           place="bottom"

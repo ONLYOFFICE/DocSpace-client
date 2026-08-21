@@ -58,14 +58,13 @@ import EnabledIcon from "PUBLIC_DIR/images/tick.rounded.svg";
 
 import config from "PACKAGE_FILE";
 
+import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
+
 import styles from "./AIFeaturesBanner.module.scss";
 
 // Must match the .swapFade transition duration in the SCSS module.
 const SWAP_FADE_MS = 200;
 
-const ALL_SERVICES_ROUTE = "/portal-settings/payments/services";
-const AI_SERVICES_ROUTE = "/portal-settings/payments/services/ai-services";
-const AI_SEARCH_ROUTE = "/portal-settings/payments/services/ai-search";
 const OPENROUTER_PRICING_URL = "https://openrouter.ai/models";
 
 const getBannerTexts = (t, isWebSearchTab) =>
@@ -145,7 +144,9 @@ const AIFeaturesBanner = ({
   }
 
   const onActivate = () => {
-    const serviceRoute = isWebSearchTab ? AI_SEARCH_ROUTE : AI_SERVICES_ROUTE;
+    const serviceRoute = isWebSearchTab
+      ? PAYMENT_ROUTES.aiSearch
+      : PAYMENT_ROUTES.aiServices;
     const activateParam = isWebSearchTab ? AI_SEARCH : AI_TOOLS;
 
     let route = serviceRoute;
@@ -153,7 +154,7 @@ const AIFeaturesBanner = ({
     if (!isEnabled) {
       route = isCardLinkedToPortal
         ? `${serviceRoute}?activate=${activateParam}`
-        : `${ALL_SERVICES_ROUTE}`;
+        : PAYMENT_ROUTES.services;
     }
 
     navigate(

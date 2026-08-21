@@ -45,7 +45,7 @@ import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.12.react.svg";
 
 import type ServicesStore from "SRC_DIR/store/ServicesStore";
 
-import { useDisableModelConfirmation } from "../DisableModelDialog";
+import { useTurnOffModelConfirmation } from "../TurnOffModelDialog";
 
 import styles from "./ModelSettingsRowView.module.scss";
 
@@ -77,8 +77,8 @@ const RowView = (props: ModelSettingsRowViewProps) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const { requestToggle, disableModelDialog } =
-    useDisableModelConfirmation(setAiModelAvailability);
+  const { requestToggle, turnOffModelDialog } =
+    useTurnOffModelConfirmation(setAiModelAvailability);
 
   if (!models.length) return null;
 
@@ -169,7 +169,7 @@ const RowView = (props: ModelSettingsRowViewProps) => {
         })}
       </RowContainer>
 
-      {disableModelDialog}
+      {turnOffModelDialog}
     </div>
   );
 };

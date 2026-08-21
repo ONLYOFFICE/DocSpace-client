@@ -56,12 +56,16 @@ type IntegrationDialogProps = {
   platform: IntegrationPlatform | null;
   onClose: () => void;
   onCreateInstance: () => void;
+  // Docs Connect sits under the portal's developer tools, so only admins and
+  // the owner can act on this button — everyone else sees it disabled.
+  isCreateInstanceDisabled?: boolean;
 };
 
 export const IntegrationDialog = ({
   platform,
   onClose,
   onCreateInstance,
+  isCreateInstanceDisabled = false,
 }: IntegrationDialogProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -110,6 +114,7 @@ export const IntegrationDialog = ({
               size={ButtonSize.normal}
               label={t("Common:CreateInstance")}
               onClick={onCreateInstance}
+              isDisabled={isCreateInstanceDisabled}
               testId={`integration-create-instance-${platform.id}`}
             />
             {githubUrl ? (

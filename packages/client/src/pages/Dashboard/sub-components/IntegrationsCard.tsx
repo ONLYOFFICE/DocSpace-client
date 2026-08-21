@@ -71,6 +71,8 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 import PluginIcon from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg";
 
+import { MORE_CONNECTORS_COUNT } from "SRC_DIR/pages/PortalSettings/categories/developer-tools/DocsConnect/constants";
+
 import { IntegrationDialog } from "./IntegrationDialog";
 import {
   useIntegrationPlatforms,
@@ -165,6 +167,7 @@ const PlatformTile = ({
 };
 
 interface IntegrationsCardProps {
+  isAdminOrOwner?: boolean;
   nextcloudUrl?: string;
   owncloudUrl?: string;
   confluenceUrl?: string;
@@ -174,7 +177,7 @@ interface IntegrationsCardProps {
 }
 
 const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
-  const { allConnectorsUrl } = props;
+  const { allConnectorsUrl, isAdminOrOwner = false } = props;
   const { t } = useTranslation(["Common", "DocsConnect"]);
   const navigate = useNavigate();
 
@@ -185,10 +188,14 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
 
   const closeDialog = React.useCallback(() => setOpenPlatform(null), []);
 
+  // Docs Connect lives under the portal's developer tools, which only admins
+  // and the owner can open — everyone else would land on /error/403. Same gate
+  // the "or connect Docs" subtitle link uses.
   const onCreateInstance = React.useCallback(() => {
+    if (!isAdminOrOwner) return;
     setOpenPlatform(null);
     navigate(DOCS_CONNECT_PATH);
-  }, [navigate]);
+  }, [navigate, isAdminOrOwner]);
 
   return (
     <div data-tour-id="dashboard-integrations">
@@ -222,7 +229,7 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
           <PlatformTile
             hideIcon
             isBold
-            name={t("Common:PlusMore", { count: 20 })}
+            name={t("Common:PlusMore", { count: MORE_CONNECTORS_COUNT })}
             linkLabel={t("Common:ViewAll")}
             href={allConnectorsUrl}
             testId="dashboard-integration-more"
@@ -234,19 +241,27 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
         platform={openPlatform}
         onClose={closeDialog}
         onCreateInstance={onCreateInstance}
+        isCreateInstanceDisabled={!isAdminOrOwner}
       />
     </div>
   );
 };
 
-export const IntegrationsCard = inject<TStore>(({ settingsStore }) => ({
-  nextcloudUrl: settingsStore.nextcloudUrl,
-  owncloudUrl: settingsStore.owncloudUrl,
-  confluenceUrl: settingsStore.confluenceUrl,
-  alfrescoUrl: settingsStore.alfrescoUrl,
-  moodleUrl: settingsStore.moodleUrl,
-  allConnectorsUrl: settingsStore.allConnectorsUrl,
-}))(observer(IntegrationsCardComponent));
+export const IntegrationsCard = inject<TStore>(
+  ({ settingsStore, userStore }) => ({
+    // Room admins are excluded: only admins and the owner may open the
+    // developer tools section Docs Connect lives in. Same flags the page
+    // subtitle link, the Header and ProfileCard gate on.
+    isAdminOrOwner:
+      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
+    nextcloudUrl: settingsStore.nextcloudUrl,
+    owncloudUrl: settingsStore.owncloudUrl,
+    confluenceUrl: settingsStore.confluenceUrl,
+    alfrescoUrl: settingsStore.alfrescoUrl,
+    moodleUrl: settingsStore.moodleUrl,
+    allConnectorsUrl: settingsStore.allConnectorsUrl,
+  }),
+)(observer(IntegrationsCardComponent));
 
 export default IntegrationsCard;
 

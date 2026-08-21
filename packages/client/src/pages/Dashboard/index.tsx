@@ -361,6 +361,7 @@ const Dashboard = (props: DashboardProps) => {
                           ),
                         }}
                       />
+                      {"."}
                     </>
                   ) : null}
                 </Text>
@@ -386,11 +387,13 @@ const Dashboard = (props: DashboardProps) => {
                     {t("Common:DiscoverApps")}
                   </Text>
                   <Text className={styles.sectionSubtitle}>
-                    {t("Common:DiscoverAppsDescription", {
-                      planName: isFreeTariff
-                        ? t("Common:StartupPlan")
-                        : t("Common:BusinessPlan"),
-                    })}
+                    {isAdminOrOwner
+                      ? t("Common:DiscoverAppsDescription", {
+                          planName: isFreeTariff
+                            ? t("Common:StartupPlan")
+                            : t("Common:BusinessPlan"),
+                        })
+                      : t("Common:DiscoverAppsWorkspaceDescription")}
                   </Text>
                 </div>
                 <div className={styles.modulesGrid}>

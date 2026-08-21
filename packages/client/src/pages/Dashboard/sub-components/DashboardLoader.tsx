@@ -64,6 +64,7 @@ import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
+import { DeviceType } from "@docspace/shared/enums";
 
 import { PROFILE_CARD_HIDDEN_KEY } from "./ProfileCard";
 import styles from "../Dashboard.module.scss";
@@ -74,9 +75,16 @@ import styles from "../Dashboard.module.scss";
 // the same first-load article loader.
 
 // Mirrors the header ({@link ./Header}): greeting + plan subline, with the
-// round tour button at the opposite edge. Everyone gets the greeting and the
-// tour button; only admins/owners get the billing-scoped subline.
-const PlanHeaderLoader = ({ showSubline }: { showSubline: boolean }) => (
+// round tour button at the opposite edge. Everyone gets the greeting; only
+// admins/owners get the billing-scoped subline, and only non-mobile gets the
+// tour button.
+const PlanHeaderLoader = ({
+  showSubline,
+  showTourButton,
+}: {
+  showSubline: boolean;
+  showTourButton: boolean;
+}) => (
   <div className={styles.planHeader}>
     <div className={styles.planHeaderText}>
       <RectangleSkeleton width="280px" height="28px" borderRadius="3px" />
@@ -84,7 +92,9 @@ const PlanHeaderLoader = ({ showSubline }: { showSubline: boolean }) => (
         <RectangleSkeleton width="360px" height="20px" borderRadius="3px" />
       ) : null}
     </div>
-    <RectangleSkeleton width="32px" height="32px" borderRadius="50%" />
+    {showTourButton ? (
+      <RectangleSkeleton width="32px" height="32px" borderRadius="50%" />
+    ) : null}
   </div>
 );
 
@@ -117,7 +127,13 @@ const CreateSectionLoader = () => (
 // grid (icon + title row with the state chip, a description line, then the
 // action row). The card count matches the installed modules — guests don't get
 // the personal Files module.
-const ModulesSectionLoader = ({ count }: { count: number }) => (
+const ModulesSectionLoader = ({
+  count,
+  showTourButton,
+}: {
+  count: number;
+  showTourButton: boolean;
+}) => (
   <section className={styles.section}>
     <RectangleSkeleton width="120px" height="24px" borderRadius="3px" />
     <div className={styles.modulesGrid}>
@@ -129,10 +145,13 @@ const ModulesSectionLoader = ({ count }: { count: number }) => (
             <RectangleSkeleton width="72px" height="24px" borderRadius="4px" />
           </div>
           <RectangleSkeleton width="100%" height="32px" borderRadius="3px" />
-          {/* Action row: the section button plus the round tour icon beside it. */}
+          {/* Action row: the section button plus the round tour icon beside it
+              (the latter only where a tour can run, i.e. not on mobile). */}
           <div className={styles.loaderModuleFooter}>
             <RectangleSkeleton width="100%" height="32px" borderRadius="3px" />
-            <RectangleSkeleton width="16px" height="16px" borderRadius="50%" />
+            {showTourButton ? (
+              <RectangleSkeleton width="16px" height="16px" borderRadius="50%" />
+            ) : null}
           </div>
         </div>
       ))}
@@ -190,11 +209,16 @@ type DashboardLoaderProps = {
   isAdminOrOwner?: boolean;
   // Guests don't get the personal Files module in the Applications grid.
   isGuest?: boolean;
+  // The tours target desktop-only chrome, so the header and per-card tour
+  // buttons aren't rendered on mobile ({@link ../index}) — skip their
+  // placeholders there too.
+  currentDeviceType?: TStore["settingsStore"]["currentDeviceType"];
 };
 
 const DashboardLoaderComponent = ({
   isAdminOrOwner = false,
   isGuest = false,
+  currentDeviceType,
 }: DashboardLoaderProps) => {
   // The profile card is admin/owner-only and can be dismissed (persisted in
   // localStorage) — gate its skeleton on the same conditions as the real card
@@ -206,13 +230,21 @@ const DashboardLoaderComponent = ({
 
   const moduleCount = isGuest ? 3 : 4;
 
+  const showTourButton = currentDeviceType !== DeviceType.mobile;
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.dashboardInner}>
-        <PlanHeaderLoader showSubline={isAdminOrOwner} />
+        <PlanHeaderLoader
+          showSubline={isAdminOrOwner}
+          showTourButton={showTourButton}
+        />
         {showProfileCard ? <ProfileCardLoader /> : null}
         <CreateSectionLoader />
-        <ModulesSectionLoader count={moduleCount} />
+        <ModulesSectionLoader
+          count={moduleCount}
+          showTourButton={showTourButton}
+        />
         <IntegrationsCardLoader />
         <DevToolsCardLoader />
       </div>
@@ -220,11 +252,14 @@ const DashboardLoaderComponent = ({
   );
 };
 
-export const DashboardLoader = inject<TStore>(({ userStore }) => ({
-  isAdminOrOwner:
-    (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
-  isGuest: userStore.user?.isVisitor ?? false,
-}))(observer(DashboardLoaderComponent));
+export const DashboardLoader = inject<TStore>(
+  ({ userStore, settingsStore }) => ({
+    isAdminOrOwner:
+      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
+    isGuest: userStore.user?.isVisitor ?? false,
+    currentDeviceType: settingsStore.currentDeviceType,
+  }),
+)(observer(DashboardLoaderComponent));
 
 export default DashboardLoader;
 

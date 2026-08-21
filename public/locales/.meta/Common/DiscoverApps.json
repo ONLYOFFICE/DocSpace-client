@@ -3,13 +3,21 @@
   "content": "Discover Apps",
   "content_en_sha1_hash": "b5d97328540f838835775fa2572426588a6ca686",
   "created_at": "2026-08-20T20:04:31.363Z",
-  "updated_at": "2026-08-20T20:04:31.363Z",
+  "updated_at": "2026-08-21T08:14:29.430Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Section title on the Dashboard that introduces a list of available applications.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:14:29.430Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 386,
+      "context": "{moduleItems.length > 0 ? (\n <section data-tour-id=\"dashboard-apps\" className={styles.section}>\n <div className={styles.sectionHeading}>\n <Text className={styles.sectionTitle}>\n {t(\"Common:DiscoverApps\")}\n </Text>\n <Text className={styles.sectionSubtitle}>\n {t(\"Common:DiscoverAppsDescription\", {\n planName: isFreeTariff\n ? t(\"Common:StartupPlan\")",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "Embed {{organizationName}} {{productName}} into your own platform and enable real-time co-editing",
   "content_en_sha1_hash": "fcbf192ef2dd329df67d2b6ae2757b7d5961e8fa",
   "created_at": "2026-08-20T20:04:47.898Z",
-  "updated_at": "2026-08-20T20:04:47.898Z",
+  "updated_at": "2026-08-21T08:06:26.975Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle for the custom integration card in the integrations catalog, describing the embedding feature. It includes variables for the organization name and product name.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:06:26.975Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 253,
+      "context": "},\n {\n id: \"custom\",\n name: t(\"Common:YourOwnPlatform\"),\n url: allConnectorsUrl,\n subtitle: t(\"Common:IntegrationOwnHeader\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n steps: [\n { id: \"instance\", text: createInstanceStep },",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

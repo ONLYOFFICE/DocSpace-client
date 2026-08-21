@@ -3,13 +3,21 @@
   "content": "Automate document workflows in n8n with {{organizationName}} {{productName}}",
   "content_en_sha1_hash": "620b25fe9c75aa9546e30d4f0af66ebd7989353f",
   "created_at": "2026-08-20T20:04:47.932Z",
-  "updated_at": "2026-08-20T20:04:47.932Z",
+  "updated_at": "2026-08-21T08:13:22.658Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle for the n8n integration card in the integrations catalog, describing workflow automation using the {{organizationName}} and {{productName}} variables.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:13:22.658Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 225,
+      "context": "{\n id: \"n8n\",\n name: getBrandName(\"N8n\"),\n iconUrl: N8nLogoUrl,\n url: allConnectorsUrl,\n subtitle: t(\"Common:IntegrationAutomateHeader\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n steps: [\n { id: \"instance\", text: createInstanceStep },",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

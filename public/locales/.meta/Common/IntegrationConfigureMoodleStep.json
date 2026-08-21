@@ -3,13 +3,21 @@
   "content": "Configure the integration. Go to the Moodle plugin settings (or Plugins overview → {{organizationName}} document → Settings) to connect {{organizationName}} Document Server and enable document editing.",
   "content_en_sha1_hash": "b946ea8246e80d9edc5d28b80f15ae5e8f853c1f",
   "created_at": "2026-08-20T20:04:48.312Z",
-  "updated_at": "2026-08-20T20:04:48.312Z",
+  "updated_at": "2026-08-21T08:11:51.908Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Step description in the Moodle integration setup process providing configuration instructions. It includes the `{{organizationName}}` variable, which represents the name of the organization.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:11:51.908Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 213,
+      "context": "moduleName: getBrandName(\"MoodleModuleName\"),\n }),\n },\n {\n id: \"configure\",\n text: t(\"Common:IntegrationConfigureMoodleStep\", {\n organizationName: getBrandName(\"OrganizationName\"),\n }),\n },\n ],\n githubUrl: \"https://github.com/ONLYOFFICE\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

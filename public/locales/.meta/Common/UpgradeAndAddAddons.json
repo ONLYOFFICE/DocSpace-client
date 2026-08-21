@@ -3,13 +3,21 @@
   "content": "Upgrade to {{planName}} and add add-ons.",
   "content_en_sha1_hash": "5a958e3f00ecdd69d4e996d60f7287f467628a0f",
   "created_at": "2026-08-20T20:05:26.678Z",
-  "updated_at": "2026-08-20T20:05:26.678Z",
+  "updated_at": "2026-08-21T08:03:37.732Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Clickable link in the Dashboard Header that directs users to the payments page. The {{planName}} variable represents the name of the target subscription plan.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:03:37.732Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
+      "line_number": 145,
+      "context": "type={LinkType.action}\n onClick={openPayments}\n isHovered\n >\n {isFreeTariff\n ? t(\"Common:UpgradeAndAddAddons\", { planName: businessPlan })\n : t(\"Common:CustomizeYourPlan\", { plan: businessPlan })}\n </Link>\n </div>\n ) : null}\n </div>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

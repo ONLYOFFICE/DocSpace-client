@@ -3,13 +3,21 @@
   "content": "Top up your Wallet to continue.",
   "content_en_sha1_hash": "d249cea74da86dcd55b6f20c05bc0c4ff426bc96",
   "created_at": "2026-08-20T20:05:24.709Z",
-  "updated_at": "2026-08-20T20:05:24.709Z",
+  "updated_at": "2026-08-21T08:04:02.716Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description text in a dialog shown to administrators when their wallet balance is insufficient to proceed with an operation.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:04:02.716Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 878,
+      "context": "if (payload?.code !== \"insufficient_funds\") return null;\n \n return {\n title: t(\"Common:WalletBalanceTooLow\"),\n description: isAdmin\n ? t(\"Common:TopUpWalletToContinue\")\n : t(\"Common:InsufficientFundsContactPayerShort\"),\n action: isAdmin\n ? {\n text: t(\"Common:TopUpWallet\"),\n onClick: () => navigate(\"/portal-settings/payments/wallet\"),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

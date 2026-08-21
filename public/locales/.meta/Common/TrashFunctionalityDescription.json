@@ -3,7 +3,7 @@
   "content": "All deleted items from {{appName}} are moved here. Restore items deleted by mistake or delete them permanently. Items in '{{sectionName}}' are automatically deleted after 30 days. Please note, that the items deleted from the '{{sectionName}}' cannot be restored any longer.",
   "content_en_sha1_hash": "92dc251c508b8107ea605c99bdaf0ded60b15f76",
   "created_at": "2026-08-20T12:25:52.258Z",
-  "updated_at": "2026-08-20T12:26:52.332Z",
+  "updated_at": "2026-08-21T08:01:33.715Z",
   "comment": {
     "text": "Description text for an empty state view in the Trash folder or AI Agents section. It explains the restoration process and the 30-day auto-deletion policy, using `{{appName}}` for the application name and `{{sectionName}}` for the trash section name.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 374,
-      "context": ")\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>\n t(\"Common:TrashFunctionalityDescription\", {\n appName: getSectionAppName(t, filterFolderType),\n }),\n )\n .otherwise(() => \"\");\n };",
+      "context": ")\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>\n t(\"Common:TrashFunctionalityDescription\", {\n appName: getSectionAppName(t, filterFolderType),\n sectionName: t(\"Common:TrashSection\"),\n }),\n )\n .otherwise(() => \"\");",
       "module": "/packages/client"
     },
     {

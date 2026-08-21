@@ -3,13 +3,21 @@
   "content": "Configure the integration. Go to ownCloud Settings → Administration → Additional → {{organizationName}} to enable document editing.",
   "content_en_sha1_hash": "0b87991bfa3a4752c85d44c351cd8aa79c6f38aa",
   "created_at": "2026-08-20T20:04:48.221Z",
-  "updated_at": "2026-08-20T20:04:48.221Z",
+  "updated_at": "2026-08-21T08:10:20.202Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional text for a configuration step in the integration catalog, providing navigation instructions within ownCloud. It includes the {{organizationName}} variable.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:10:20.202Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 137,
+      "context": "serviceName: getBrandName(\"OwnCloud\"),\n }),\n },\n {\n id: \"configure\",\n text: t(\"Common:IntegrationConfigureOwnCloudStep\", {\n organizationName: getBrandName(\"OrganizationName\"),\n }),\n },\n ],\n githubUrl: \"https://github.com/ONLYOFFICE\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

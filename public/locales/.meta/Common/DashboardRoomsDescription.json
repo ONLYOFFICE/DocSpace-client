@@ -3,7 +3,7 @@
   "content": "Collaborate with others around a specific topic or project.",
   "content_en_sha1_hash": "819580e139fd6190a97fea3677d70adb08772987",
   "created_at": "2026-06-01T21:20:14.499Z",
-  "updated_at": "2026-08-20T15:38:18.642Z",
+  "updated_at": "2026-08-21T08:01:33.818Z",
   "comment": {
     "text": "Subtext for an application card in the apps catalog, describing the purpose of the AI rooms feature.",
     "is_auto": true,
@@ -18,9 +18,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 283,
-      "context": "},\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:Rooms\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n installed: true,\n href: \"/rooms/shared/filter\",\n },\n {\n id: \"ai-forms\",",
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 153,
+      "context": "},\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:Rooms\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n installed: true,\n href: \"/rooms/shared/filter\",\n ...createOrOpen(\n canCreateRooms,\n \"/rooms/shared/filter\",",
       "module": "/packages/client"
     }
   ],

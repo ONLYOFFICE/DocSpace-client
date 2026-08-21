@@ -3,13 +3,21 @@
   "content": "Configure the integration. Create {{organizationName}} {{productName}} credentials in n8n with the Document Server URL and JWT secret to connect to {{organizationName}} Document Server and use it in workflows.",
   "content_en_sha1_hash": "72a6a88dd4ae929d5de226402ce57e1eae5e8fb0",
   "created_at": "2026-08-20T20:04:48.373Z",
-  "updated_at": "2026-08-20T20:04:48.373Z",
+  "updated_at": "2026-08-21T08:11:26.531Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional text for a configuration step in the n8n integration setup. It includes variables for the organization name and product name.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:11:26.531Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 241,
+      "context": "packageName: getBrandName(\"N8nPackageName\"),\n }),\n },\n {\n id: \"configure\",\n text: t(\"Common:IntegrationConfigureN8NStep\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n },\n ],",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

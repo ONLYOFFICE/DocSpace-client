@@ -3,13 +3,21 @@
   "content": "Install the {{organizationName}} {{productName}} n8n Nodes package from the n8n Community Nodes page (or via npm install {{packageName}}).",
   "content_en_sha1_hash": "9d9912e7c779c5bc31e29906e97307f0ec2c6884",
   "created_at": "2026-08-20T20:04:48.159Z",
-  "updated_at": "2026-08-20T20:04:48.159Z",
+  "updated_at": "2026-08-21T08:07:46.410Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instruction text for a step in the n8n integration installation process, containing placeholders for the organization name, product name, and npm package name.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:07:46.410Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 233,
+      "context": "}),\n steps: [\n { id: \"instance\", text: createInstanceStep },\n {\n id: \"install\",\n text: t(\"Common:IntegrationInstallN8NStep\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n packageName: getBrandName(\"N8nPackageName\"),\n }),\n },",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

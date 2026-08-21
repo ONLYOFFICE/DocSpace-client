@@ -3,13 +3,21 @@
   "content": "Your {{planName}} plan includes apps for document storage, management, and automation. See what each app does, or jump right in.",
   "content_en_sha1_hash": "45a9ecbf38d0b6001f21760c90e97b6bdc37cb99",
   "created_at": "2026-08-20T20:04:31.394Z",
-  "updated_at": "2026-08-20T20:04:31.394Z",
+  "updated_at": "2026-08-21T08:14:11.538Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle for the \"Discover Apps\" section on the Dashboard. It describes the apps included in the user's current subscription, where {{planName}} represents the specific plan tier.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:14:11.538Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
+      "line_number": 389,
+      "context": "<div className={styles.sectionHeading}>\n <Text className={styles.sectionTitle}>\n {t(\"Common:DiscoverApps\")}\n </Text>\n <Text className={styles.sectionSubtitle}>\n {t(\"Common:DiscoverAppsDescription\", {\n planName: isFreeTariff\n ? t(\"Common:StartupPlan\")\n : t(\"Common:BusinessPlan\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

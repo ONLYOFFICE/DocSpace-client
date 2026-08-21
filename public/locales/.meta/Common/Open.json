@@ -3,7 +3,7 @@
   "content": "Open",
   "content_en_sha1_hash": "cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3",
   "created_at": "2026-03-20T09:07:38.471Z",
-  "updated_at": "2026-08-17T17:23:21.684Z",
+  "updated_at": "2026-08-21T08:01:33.825Z",
   "comment": {
     "text": "This is a button label that allows users to open a file or folder. It appears in various contexts, such as confirming an AI agent's action or within a version history context menu.",
     "is_auto": true,
@@ -18,27 +18,15 @@
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 134,
-      "context": "description: t(\"Common:AccessControlDescription\"),\n },\n ],\n illustrationLight: FilesPreviewLight,\n illustrationDark: FilesPreviewDark,\n openLabel: t(\"Common:Open\"),\n tourLabel: t(\"Common:WelcomeStartTour\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {",
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 132,
+      "context": "createLabel: string,\n create: () => void,\n ) =>\n canCreate\n ? { buttonLabel: createLabel, onAction: create }\n : { buttonLabel: t(\"Common:Open\"), onAction: () => navigate(href) };\n \n const filesHref = isGuest\n ? \"/shared-with-me/filter\"\n : \"/rooms/personal/filter\";",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 134,
-      "context": "description: t(\"Common:AccessControlDescription\"),\n },\n ],\n illustrationLight: FilesPreviewLight,\n illustrationDark: FilesPreviewDark,\n openLabel: t(\"Common:Open\"),\n tourLabel: t(\"Common:WelcomeStartTour\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 134,
-      "context": "description: t(\"Common:AccessControlDescription\"),\n },\n ],\n illustrationLight: FilesPreviewLight,\n illustrationDark: FilesPreviewDark,\n openLabel: t(\"Common:Open\"),\n tourLabel: t(\"Common:WelcomeStartTour\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 134,
-      "context": "description: t(\"Common:AccessControlDescription\"),\n },\n ],\n illustrationLight: FilesPreviewLight,\n illustrationDark: FilesPreviewDark,\n openLabel: t(\"Common:Open\"),\n tourLabel: t(\"Common:WelcomeStartTour\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {",
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 132,
+      "context": "createLabel: string,\n create: () => void,\n ) =>\n canCreate\n ? { buttonLabel: createLabel, onAction: create }\n : { buttonLabel: t(\"Common:Open\"), onAction: () => navigate(href) };\n \n const filesHref = isGuest\n ? \"/shared-with-me/filter\"\n : \"/rooms/personal/filter\";",
       "module": "/packages/client"
     },
     {

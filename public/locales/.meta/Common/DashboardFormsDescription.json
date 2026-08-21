@@ -3,7 +3,7 @@
   "content": "Build forms, collect responses, and analyze structured data.",
   "content_en_sha1_hash": "7160b8cd82678512918e654ead1f8610514e9ffb",
   "created_at": "2026-06-01T21:20:14.469Z",
-  "updated_at": "2026-08-20T15:38:18.642Z",
+  "updated_at": "2026-08-21T08:01:33.818Z",
   "comment": {
     "text": "Subtitle for an application card in the apps catalog, providing a brief overview of the AI Forms feature.",
     "is_auto": true,
@@ -18,9 +18,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 291,
-      "context": "},\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n installed: true,\n href: \"/forms/filter\",\n },\n {\n id: \"ai-agents\",",
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 168,
+      "context": "},\n {\n id: \"ai-forms\",\n icon: <CatalogDocumentsIcon />,\n title: t(\"Common:Forms\"),\n description: t(\"Common:DashboardFormsDescription\"),\n installed: true,\n href: \"/forms/filter\",\n // A form set is a form-filling room, so it goes through the same\n // create-room dialog, opened on the FormRoom type.\n ...createOrOpen(",
       "module": "/packages/client"
     }
   ],

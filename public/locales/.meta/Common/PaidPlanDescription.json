@@ -3,13 +3,21 @@
   "content": "You are using {{planName}} plan. Subscription will be automatically renewed on {{finalDate}}",
   "content_en_sha1_hash": "a2528f078db877dd07290060d6db0510e2942aca",
   "created_at": "2026-08-20T20:05:00.985Z",
-  "updated_at": "2026-08-20T20:05:00.985Z",
+  "updated_at": "2026-08-21T08:05:02.634Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Text in the Header informing the user of their current subscription plan and next renewal date. Contains {{planName}} for the plan name and {{finalDate}} for the renewal date.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:05:02.634Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/Header.tsx",
+      "line_number": 131,
+      "context": "{isFreeTariff\n ? t(\"Common:FreePlanDescription\", {\n planName: t(\"Common:StartupPlan\"),\n })\n : paymentDate\n ? t(\"Common:PaidPlanDescription\", {\n planName: businessPlan,\n finalDate: paymentDate,\n })\n : t(\"Common:BusinessTitle\", { planName: businessPlan })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "Install the {{organizationName}} plugin for Moodle into the {{moduleName}} directory following the standard Moodle plugin installation steps.",
   "content_en_sha1_hash": "dc195a5f10298907931a6f7c83d515d71418eb1e",
   "created_at": "2026-08-20T20:04:48.099Z",
-  "updated_at": "2026-08-20T20:04:48.099Z",
+  "updated_at": "2026-08-21T08:08:13.565Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instruction text for an installation step in the Integrations Catalog. It provides guidance for plugin installation, using {{organizationName}} for the organization's brand name and {{moduleName}} for the Moodle module name.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:08:13.565Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 206,
+      "context": "}),\n steps: [\n { id: \"instance\", text: createInstanceStep },\n {\n id: \"install\",\n text: t(\"Common:IntegrationInstallMoodleStep\", {\n organizationName: getBrandName(\"OrganizationName\"),\n moduleName: getBrandName(\"MoodleModuleName\"),\n }),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "The <1>{{model}}</1> model will no longer be available to any user of the workspace. Everyone using it will have to switch to another model. You can enable it back at any time.",
   "content_en_sha1_hash": "408a3ee38225a2d1f1f7cb690807388183b78bc1",
   "created_at": "2026-08-20T20:04:30.998Z",
-  "updated_at": "2026-08-20T20:04:30.998Z",
+  "updated_at": "2026-08-21T08:14:58.015Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Body text in a modal dialog explaining the consequences of disabling an AI model. The variable {{model}} represents the model's name and is wrapped in a bold tag.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:14:58.015Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/DisableModelDialog.tsx",
+      "line_number": 73,
+      "context": "<ModalDialog.Header>{t(\"Common:DisableAIModel\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans\n t={t}\n i18nKey=\"DisableAIModelDescription\"\n ns=\"Common\"\n values={{ model: model.title }}\n components={{ 1: <strong /> }}\n />\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

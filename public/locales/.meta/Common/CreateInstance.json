@@ -3,13 +3,21 @@
   "content": "Create instance",
   "content_en_sha1_hash": "448e244903a83a672cc89c0cba5ddcb21e9a4103",
   "created_at": "2026-08-20T20:04:26.380Z",
-  "updated_at": "2026-08-20T20:04:26.380Z",
+  "updated_at": "2026-08-21T08:15:33.234Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Button label in the integration dialog used to trigger the creation of a new instance.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:15:33.234Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationDialog.tsx",
+      "line_number": 111,
+      "context": "<div className={styles.integrationDialogFooter}>\n <div className={styles.integrationDialogFooterButtons}>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:CreateInstance\")}\n onClick={onCreateInstance}\n testId={`integration-create-instance-${platform.id}`}\n />\n {githubUrl ? (\n <Button",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

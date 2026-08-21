@@ -3,13 +3,21 @@
   "content": "Disable model",
   "content_en_sha1_hash": "a9b854d3d307f43293204db66c39baa1c833d813",
   "created_at": "2026-08-20T20:04:30.968Z",
-  "updated_at": "2026-08-20T20:04:30.968Z",
+  "updated_at": "2026-08-21T08:15:14.328Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Dialog title for a modal window used when disabling an AI model.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:15:14.328Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/DisableModelDialog.tsx",
+      "line_number": 68,
+      "context": "}: DisableModelDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:DisableAIModel\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n <Trans\n t={t}\n i18nKey=\"DisableAIModelDescription\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

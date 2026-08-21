@@ -3,13 +3,45 @@
   "content": "Create, edit, and co-author office files right in your {{serviceName}}",
   "content_en_sha1_hash": "81a833d10861d6a0d4bdc55478603da78890e8ee",
   "created_at": "2026-08-20T20:04:47.855Z",
-  "updated_at": "2026-08-20T20:04:47.855Z",
+  "updated_at": "2026-08-21T08:06:03.137Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Subtitle for integration items in the catalog, describing the service's capabilities. The {{serviceName}} variable represents the name of the integrated service.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:06:03.137Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 97,
+      "context": "{\n id: \"nextcloud\",\n name: getBrandName(\"Nextcloud\"),\n iconUrl: NextcloudLogoUrl,\n url: nextcloudUrl,\n subtitle: t(\"Common:IntegrationServiceHeader\", {\n serviceName: getBrandName(\"Nextcloud\"),\n }),\n steps: [\n { id: \"instance\", text: createInstanceStep },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 97,
+      "context": "{\n id: \"nextcloud\",\n name: getBrandName(\"Nextcloud\"),\n iconUrl: NextcloudLogoUrl,\n url: nextcloudUrl,\n subtitle: t(\"Common:IntegrationServiceHeader\", {\n serviceName: getBrandName(\"Nextcloud\"),\n }),\n steps: [\n { id: \"instance\", text: createInstanceStep },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 97,
+      "context": "{\n id: \"nextcloud\",\n name: getBrandName(\"Nextcloud\"),\n iconUrl: NextcloudLogoUrl,\n url: nextcloudUrl,\n subtitle: t(\"Common:IntegrationServiceHeader\", {\n serviceName: getBrandName(\"Nextcloud\"),\n }),\n steps: [\n { id: \"instance\", text: createInstanceStep },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 97,
+      "context": "{\n id: \"nextcloud\",\n name: getBrandName(\"Nextcloud\"),\n iconUrl: NextcloudLogoUrl,\n url: nextcloudUrl,\n subtitle: t(\"Common:IntegrationServiceHeader\", {\n serviceName: getBrandName(\"Nextcloud\"),\n }),\n steps: [\n { id: \"instance\", text: createInstanceStep },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 97,
+      "context": "{\n id: \"nextcloud\",\n name: getBrandName(\"Nextcloud\"),\n iconUrl: NextcloudLogoUrl,\n url: nextcloudUrl,\n subtitle: t(\"Common:IntegrationServiceHeader\", {\n serviceName: getBrandName(\"Nextcloud\"),\n }),\n steps: [\n { id: \"instance\", text: createInstanceStep },\n {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,21 @@
   "content": "Create {{serviceName}} instance. Add {{devPack}} if you need branding options.",
   "content_en_sha1_hash": "fc73a4cec4321750ef6a1f531e046f296de299b6",
   "created_at": "2026-08-20T20:04:47.968Z",
-  "updated_at": "2026-08-20T20:04:47.968Z",
+  "updated_at": "2026-08-21T08:09:30.184Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Instructional text within the integration creation wizard. `{{serviceName}}` represents the name of the service, and `{{devPack}}` represents the name of the developer package.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:09:30.184Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "line_number": 85,
+      "context": "alfrescoUrl,\n moodleUrl,\n allConnectorsUrl,\n } = urls;\n \n const createInstanceStep = t(\"Common:IntegrationCreateStep\", {\n serviceName: t(\"DocsConnect:DocsConnect\"),\n devPack: t(\"DocsConnect:DevPack\"),\n });\n \n return React.useMemo(",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

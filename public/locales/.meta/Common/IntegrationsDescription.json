@@ -3,13 +3,21 @@
   "content": "Connect <strong>{{docsName}}</strong> and <strong>{{productName}}</strong> to your infrastructure with ready-to-use integrations. No custom code, no migration.",
   "content_en_sha1_hash": "fa49cdb80460679c8ce1c1668c9cfb3081466c2b",
   "created_at": "2026-08-20T20:04:48.403Z",
-  "updated_at": "2026-08-20T20:04:48.403Z",
+  "updated_at": "2026-08-21T08:05:39.825Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description for the IntegrationsCard on the Dashboard, explaining the connection of {{docsName}} and {{productName}} to infrastructure. The variables {{docsName}} and {{productName}} are emphasized with `<strong>` tags.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T08:05:39.825Z",
+    "model": "gemma4:26b"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationsCard.tsx",
+      "line_number": 201,
+      "context": "title={t(\"Common:AlreadyUsingAnotherPlatform\")}\n description={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"IntegrationsDescription\"\n values={{\n docsName: getBrandName(\"ProductEditorsName\"),\n productName: getBrandName(\"ProductName\"),\n }}\n components={{ strong: <strong key=\"strong\" /> }}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

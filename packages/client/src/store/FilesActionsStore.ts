@@ -236,6 +236,7 @@ export type TActionItem = {
   isAIAgent?: boolean;
   isTemplate?: boolean;
   encrypted?: boolean;
+  private?: boolean;
   external?: boolean;
   isLinkExpired?: boolean;
   requestToken?: string;

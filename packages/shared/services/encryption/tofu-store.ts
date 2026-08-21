@@ -385,6 +385,12 @@ export class TofuStore {
     await this.putRecord({ ...existing, keys });
   }
 
+  async getKeys(userId: string): Promise<TofuKeyEntry[]> {
+    if (!userId) return [];
+    const existing = await this.getRecord(userId);
+    return existing ? [...existing.keys] : [];
+  }
+
   async forgetKey(userId: string, publicKey: string): Promise<void> {
     if (!userId || !publicKey) {
       throw new Error("TofuStore.forgetKey: userId and publicKey are required");

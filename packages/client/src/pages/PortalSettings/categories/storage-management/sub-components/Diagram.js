@@ -48,6 +48,8 @@ const calculateSize = (size, common) => {
   return (size * 100) / common;
 };
 
+const MIN_USED_SHARE = 25;
+
 const getTags = (
   t,
   standalone,
@@ -56,41 +58,39 @@ const getTags = (
   maxTotalSizeByQuota,
   usedPortalSpace,
 ) => {
-  const array = [];
   const colors = [
     globalColors.mainBlueLight,
     globalColors.secondGreen,
     globalColors.secondOrange,
     globalColors.mainYellow,
+    globalColors.purple,
     globalColors.coralPink,
   ];
 
-  let i = 0;
   let commonSize = standalone ? tenantCustomQuota : maxTotalSizeByQuota;
 
   if (standalone && tenantCustomQuota < usedPortalSpace)
     commonSize = usedPortalSpace;
 
-  Object.keys(catalogs).forEach((key) => {
-    const item = catalogs[key];
-    const { usedSpace, title } = item;
+  const items = Object.values(catalogs).map(({ usedSpace, title }, i) => ({
+    name: title,
+    color: colors[i],
+    share: calculateSize(usedSpace, commonSize),
+    size: getConvertedSize(t, usedSpace),
+  }));
 
-    let percentageSize = calculateSize(usedSpace, commonSize);
+  const usedShare = items.reduce((sum, item) => sum + item.share, 0);
+  const scale =
+    usedShare > 0 && usedShare < MIN_USED_SHARE
+      ? MIN_USED_SHARE / usedShare
+      : 1;
+
+  return items.map(({ share, ...item }) => {
+    let percentageSize = share * scale;
     if (percentageSize < 0.05 && percentageSize !== 0) percentageSize = 0.5;
 
-    const size = getConvertedSize(t, usedSpace);
-
-    array.push({
-      name: title,
-      color: colors[i],
-      percentageSize,
-      size,
-    });
-
-    i++;
+    return { ...item, percentageSize };
   });
-
-  return array;
 };
 const Diagram = (props) => {
   const {

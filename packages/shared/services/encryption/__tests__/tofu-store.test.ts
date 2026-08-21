@@ -282,6 +282,27 @@ describe("TofuStore", () => {
     expect(list[0].keys).toHaveLength(1);
   });
 
+  it("getKeys returns every recorded key and [] for unknown or empty userId", async () => {
+    const tofu = new TofuStore("alice");
+    expect(await tofu.getKeys("bob")).toEqual([]);
+    expect(await tofu.getKeys("")).toEqual([]);
+
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");
+    await tofu.acceptKey("bob", "PKBOBABCDEFGHIJL");
+
+    const keys = await tofu.getKeys("bob");
+    expect(keys.map((k) => k.publicKey).sort()).toEqual([
+      "PKBOBABCDEFGHIJK",
+      "PKBOBABCDEFGHIJL",
+    ]);
+  });
+
+  it("getKeys is read-only — it never creates a record", async () => {
+    const tofu = new TofuStore("alice");
+    await tofu.getKeys("bob");
+    expect(await tofu.list()).toHaveLength(0);
+  });
+
   it("forgetKey removes exactly one key and keeps the rest trusted", async () => {
     const tofu = new TofuStore("alice");
     await tofu.acceptKey("bob", "PKBOBABCDEFGHIJK");

@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Plug in MCP servers from the apps your team uses. AI agents can read data and run actions across your whole toolchain from a single chat.",
   "ConnectMCPServersTitle": "Connect MCP servers",
   "Contact": "Contact",
+  "ContactAdminForPermissions": "Contact the Full admin to get the required permissions.",
   "ContactAdminToActivateAI": "<1>AI features aren't active.</1> Contact the Full admin to activate the AI features and create new AI agents.",
   "ContactNotFound": "Contact <1>«{{email}}»</1> is not found",
   "Contacts": "Contacts",

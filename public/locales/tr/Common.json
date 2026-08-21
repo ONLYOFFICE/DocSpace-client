@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Ekibinizin kullandığı uygulamalardan MCP sunucularını bağlayın. AI ajanları, tek bir sohbetten tüm araç zincirinizde veri okuyabilir ve eylemler çalıştırabilir.",
   "ConnectMCPServersTitle": "MCP sunucularını bağlayın",
   "Contact": "İletişim",
+  "ContactAdminForPermissions": "Gerekli izinleri almak için süper yöneticiye başvurun.",
   "ContactAdminToActivateAI": "<1>AI özellikleri etkin değil.</1> AI özelliklerini etkinleştirmek ve yeni AI ajanları oluşturmak için süper yöneticiye başvurun.",
   "ContactNotFound": "<1>«{{email}}»</1> kişisi bulunamadı",
   "Contacts": "Kişiler",

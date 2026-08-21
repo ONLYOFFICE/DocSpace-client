@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "ເຊື່ອມຕໍ່ MCP servers ຈາກແອັບທີ່ທີມຂອງທ່ານໃຊ້. ຕົວແທນ AI ສາມາດອ່ານຂໍ້ມູນ ແລະ ປະຕິບັດການກະທຳຂ້າມຊຸດເຄື່ອງມືທັງໝົດຂອງທ່ານ ຈາກການສົນທະນາດຽວ.",
   "ConnectMCPServersTitle": "ເຊື່ອມຕໍ່ MCP servers",
   "Contact": "ຕິດຕໍ່",
+  "ContactAdminForPermissions": "ຕິດຕໍ່ຜູ້ດູແລລະບົບສູງສຸດເພື່ອຮັບສິດທີ່ຕ້ອງການ.",
   "ContactAdminToActivateAI": "<1>ຄຸນສົມບັດ AI ຍັງບໍ່ໄດ້ເປີດໃຊ້.</1> ຕິດຕໍ່ຜູ້ດູແລລະບົບສູງສຸດເພື່ອເປີດໃຊ້ຄຸນສົມບັດ AI ແລະ ສ້າງຕົວແທນ AI ໃໝ່.",
   "ContactNotFound": "ຜູ້​ຕິດຕໍ່ <1>«{{email}}»</1> ບໍ່​ພົບ",
   "Contacts": "ລາຍຊື່ຜູ້ຕິດຕໍ່",

@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Pievienojiet MCP serverus no lietotnēm, ko izmanto jūsu komanda. MI aģenti var lasīt datus un veikt darbības visā jūsu rīku kopumā no vienas tērzēšanas.",
   "ConnectMCPServersTitle": "Pievienot MCP serverus",
   "Contact": "Kontakts",
+  "ContactAdminForPermissions": "Sazinieties ar superadministratoru, lai iegūtu nepieciešamās atļaujas.",
   "ContactAdminToActivateAI": "<1>MI funkcijas nav aktīvas.</1> Sazinieties ar superadministratoru, lai aktivizētu MI funkcijas un izveidotu jaunus MI aģentus.",
   "ContactNotFound": "Kontakts <1>«{{email}}»</1> nav atrasts",
   "Contacts": "Kontakti",

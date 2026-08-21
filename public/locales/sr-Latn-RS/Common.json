@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Priključite MCP servere iz aplikacija koje vaš tim koristi. AI agenti mogu da čitaju podatke i izvršavaju radnje u celokupnom skupu alatki iz jednog ćaskanja.",
   "ConnectMCPServersTitle": "Povežite MCP servere",
   "Contact": "Kontakt",
+  "ContactAdminForPermissions": "Obratite se superadministratoru da biste dobili potrebne dozvole.",
   "ContactAdminToActivateAI": "<1>AI funkcije nisu aktivne.</1> Obratite se superadministratoru da aktivira AI funkcije i omogući kreiranje novih AI agenata.",
   "ContactNotFound": "Kontakt <1>«{{email}}»</1> nije pronađen",
   "Contacts": "Kontakti",

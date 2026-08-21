@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "チームが使用するアプリからMCPサーバーを接続しましょう。AIエージェントは、単一のチャットからツールチェーン全体のデータを読み取り、アクションを実行できます。",
   "ConnectMCPServersTitle": "MCPサーバーを接続",
   "Contact": "連絡先",
+  "ContactAdminForPermissions": "必要な権限を取得するには、スーパー管理者にお問い合わせください。",
   "ContactAdminToActivateAI": "<1>AI機能が有効になっていません。</1> AI機能を有効にして新しいAIエージェントを作成するには、スーパー管理者にお問い合わせください。",
   "ContactNotFound": "連絡先 <1>«{{email}}»</1> が見つかりません",
   "Contacts": "連絡先",

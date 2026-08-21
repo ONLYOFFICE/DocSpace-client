@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Pripojte MCP servery z aplikácií, ktoré váš tím používa. AI agenti môžu čítať údaje a vykonávať akcie naprieč celou vašou sadou nástrojov z jediného chatu.",
   "ConnectMCPServersTitle": "Pripojiť MCP servery",
   "Contact": "Kontakt",
+  "ContactAdminForPermissions": "Obráťte sa na supersprávcu, aby ste získali potrebné oprávnenia.",
   "ContactAdminToActivateAI": "<1>Funkcie AI nie sú aktívne.</1> Obráťte sa na supersprávcu, aby aktivoval funkcie AI a umožnil vytváranie nových AI agentov.",
   "ContactNotFound": "Kontakt <1>«{{email}}»</1> nebol nájdený",
   "Contacts": "Kontakty",

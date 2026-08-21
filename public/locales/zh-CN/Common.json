@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "接入您团队所用应用的 MCP 服务器。AI 智能体可在单个聊天中读取数据并在您的整个工具链中执行操作。",
   "ConnectMCPServersTitle": "连接 MCP 服务器",
   "Contact": "联系人",
+  "ContactAdminForPermissions": "请联系超级管理员以获取所需权限。",
   "ContactAdminToActivateAI": "<1>AI 功能未激活。</1>请联系超级管理员激活 AI 功能并创建新的 AI 智能体。",
   "ContactNotFound": "找不到联系人 <1>«{{email}}»</1>",
   "Contacts": "联系人",

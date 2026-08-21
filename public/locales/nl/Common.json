@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Sluit MCP-servers aan van de apps die uw team gebruikt. AI-agenten kunnen gegevens lezen en acties uitvoeren in uw hele toolchain vanuit één enkele chat.",
   "ConnectMCPServersTitle": "MCP-servers verbinden",
   "Contact": "Contact",
+  "ContactAdminForPermissions": "Neem contact op met de superbeheerder om de vereiste rechten te krijgen.",
   "ContactAdminToActivateAI": "<1>AI-functies zijn niet actief.</1> Neem contact op met de superbeheerder om de AI-functies te activeren en nieuwe AI-agenten te maken.",
   "ContactNotFound": "Contact <1>«{{email}}»</1> is niet gevonden",
   "Contacts": "Contacten",

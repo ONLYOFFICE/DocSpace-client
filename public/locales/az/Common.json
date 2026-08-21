@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Komandanızın istifadə etdiyi tətbiqlərdən MCP serverlərini qoşun. AI agentləri tək bir söhbətdən bütün alət dəstinizdə məlumatları oxuya və əməliyyatları yerinə yetirə bilər.",
   "ConnectMCPServersTitle": "MCP serverlərini qoşun",
   "Contact": "Əlaqə",
+  "ContactAdminForPermissions": "Lazımi icazələri almaq üçün super administratora müraciət edin.",
   "ContactAdminToActivateAI": "<1>AI funksiyaları aktiv deyil.</1> AI funksiyalarını aktivləşdirmək və yeni AI agentləri yaratmaq üçün super administratora müraciət edin.",
   "ContactNotFound": "<1>«{{email}}»</1> əlaqəsi tapılmadı",
   "Contacts": "Əlaqələr",

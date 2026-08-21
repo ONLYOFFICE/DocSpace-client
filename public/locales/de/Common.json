@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Binden Sie MCP-Server aus den von Ihrem Team genutzten Apps ein. KI-Agenten können Daten lesen und Aktionen über Ihre gesamte Toolchain hinweg aus einem einzigen Chat heraus ausführen.",
   "ConnectMCPServersTitle": "MCP-Server verbinden",
   "Contact": "Kontakt",
+  "ContactAdminForPermissions": "Wenden Sie sich an den Super-Administrator, um die erforderlichen Berechtigungen zu erhalten.",
   "ContactAdminToActivateAI": "<1>KI-Funktionen sind nicht aktiv.</1> Wenden Sie sich an den Super-Administrator, um die KI-Funktionen zu aktivieren und neue KI-Agenten zu erstellen.",
   "ContactNotFound": "Kontakt <1>«{{email}}»</1> wurde nicht gefunden",
   "Contacts": "Kontakte",

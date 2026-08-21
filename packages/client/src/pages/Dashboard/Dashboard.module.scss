@@ -756,6 +756,13 @@
   margin-inline-start: 4px;
 }
 
+// Hover target for the "no permission" tooltip: a disabled button gets no
+// mouse events of its own, so the wrapper has to be the anchor.
+.integrationDialogCreateAnchor {
+  display: inline-flex;
+  min-width: 0;
+}
+
 @include mixins.mobile {
   .integrationDialogFooter {
     flex-direction: column-reverse;
@@ -766,6 +773,10 @@
   .integrationDialogFooterButtons > * {
     flex: 1 1 0;
     min-width: 0;
+  }
+
+  .integrationDialogCreateAnchor > * {
+    width: 100%;
   }
 
   .integrationDialogLearnMore {
@@ -875,9 +886,10 @@
   padding-top: 12px;
 }
 
-// Tooltip shown to guests over disabled create/upload actions: bold title,
-// then the explanation below with a gap.
-.guestRestrictionTooltip {
+// Two-line tooltip body — bold reason, then what to do about it. Shared by the
+// guest create/upload restriction and the disabled "Create instance" button in
+// the integration dialog.
+.restrictionTooltip {
   display: flex;
   flex-direction: column;
 }

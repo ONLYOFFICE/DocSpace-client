@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Liitä MCP-palvelimia tiimisi käyttämistä sovelluksista. AI-agentit voivat lukea tietoja ja suorittaa toimintoja koko työkaluketjussasi yhdestä keskustelusta.",
   "ConnectMCPServersTitle": "Yhdistä MCP-palvelimet",
   "Contact": "Yhteystiedot",
+  "ContactAdminForPermissions": "Ota yhteyttä pääjärjestelmänvalvojaan saadaksesi tarvittavat oikeudet.",
   "ContactAdminToActivateAI": "<1>AI-ominaisuudet eivät ole käytössä.</1> Ota yhteyttä pääjärjestelmänvalvojaan aktivoidaksesi AI-ominaisuudet ja luodaksesi uusia AI-agentteja.",
   "ContactNotFound": "Yhteystietoa <1>«{{email}}»</1> ei löydetty",
   "Contacts": "Yhteystiedot",

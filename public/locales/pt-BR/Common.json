@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Conecte servidores MCP dos aplicativos que sua equipe usa. Os agentes de IA podem ler dados e executar ações em todo o seu conjunto de ferramentas a partir de um único chat.",
   "ConnectMCPServersTitle": "Conectar servidores MCP",
   "Contact": "Contato",
+  "ContactAdminForPermissions": "Entre em contato com o superadministrador para obter as permissões necessárias.",
   "ContactAdminToActivateAI": "<1>Os recursos de IA não estão ativos.</1> Entre em contato com o superadministrador para ativar os recursos de IA e criar novos agentes de IA.",
   "ContactNotFound": "O contato <1>«{{email}}»</1> não foi encontrado",
   "Contacts": "Contatos",

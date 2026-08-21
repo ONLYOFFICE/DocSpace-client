@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Kết nối các máy chủ MCP từ các ứng dụng mà nhóm của bạn sử dụng. Các tác nhân AI có thể đọc dữ liệu và thực hiện các hành động trên toàn bộ chuỗi công cụ của bạn từ một cuộc trò chuyện duy nhất.",
   "ConnectMCPServersTitle": "Kết nối các máy chủ MCP",
   "Contact": "Liên hệ",
+  "ContactAdminForPermissions": "Hãy liên hệ với siêu quản trị viên để được cấp quyền cần thiết.",
   "ContactAdminToActivateAI": "<1>Các tính năng AI chưa được kích hoạt.</1> Hãy liên hệ với siêu quản trị viên để kích hoạt các tính năng AI và tạo tác nhân AI mới.",
   "ContactNotFound": "Không tìm thấy liên hệ <1>«{{email}}»</1>",
   "Contacts": "Liên lạc",

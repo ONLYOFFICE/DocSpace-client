@@ -449,6 +449,7 @@
   "ConnectMCPServersCardDescription": "Lidhni serverë MCP nga aplikacionet që përdor ekipi juaj. Agjentët IA mund të lexojnë të dhëna dhe të kryejnë veprime nëpër të gjithë grupin tuaj të mjeteve nga një bisedë e vetme.",
   "ConnectMCPServersTitle": "Lidhni serverë MCP",
   "Contact": "Kontakt",
+  "ContactAdminForPermissions": "Kontaktoni superadministratorin për të marrë lejet e nevojshme.",
   "ContactAdminToActivateAI": "<1>Funksionet AI nuk janë aktive.</1> Kontaktoni superadministratorin për të aktivizuar funksionet AI dhe për të krijuar agjentë AI të reja.",
   "ContactNotFound": "Kontakti <1>«{{email}}»</1> nuk u gjet",
   "Contacts": "Kontaktet",

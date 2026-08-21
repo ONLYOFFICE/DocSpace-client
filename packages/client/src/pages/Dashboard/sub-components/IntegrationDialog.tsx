@@ -43,6 +43,7 @@ import {
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
@@ -51,6 +52,10 @@ import GithubDarkIcon from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg
 
 import type { IntegrationPlatform } from "./integrations-catalog";
 import styles from "../Dashboard.module.scss";
+
+// A disabled <button> fires no mouse events, so the tooltip anchors on the
+// wrapper around it rather than on the button itself.
+const CREATE_INSTANCE_ANCHOR = "integration-create-instance-anchor";
 
 type IntegrationDialogProps = {
   platform: IntegrationPlatform | null;
@@ -91,14 +96,36 @@ export const IntegrationDialog = ({
     ) : (
       <div className={styles.integrationDialogFooter}>
         <div className={styles.integrationDialogFooterButtons}>
-          <Button
-            primary
-            size={ButtonSize.normal}
-            label={t("Common:CreateInstance")}
-            onClick={onCreateInstance}
-            isDisabled={isCreateInstanceDisabled}
-            testId={`integration-create-instance-${platform.id}`}
-          />
+          <span
+            id={CREATE_INSTANCE_ANCHOR}
+            className={styles.integrationDialogCreateAnchor}
+          >
+            <Button
+              primary
+              size={ButtonSize.normal}
+              label={t("Common:CreateInstance")}
+              onClick={onCreateInstance}
+              isDisabled={isCreateInstanceDisabled}
+              testId={`integration-create-instance-${platform.id}`}
+            />
+          </span>
+          {isCreateInstanceDisabled ? (
+            <Tooltip
+              id={`${CREATE_INSTANCE_ANCHOR}-tooltip`}
+              anchorSelect={`#${CREATE_INSTANCE_ANCHOR}`}
+              place="top"
+              getContent={() => (
+                <div className={styles.restrictionTooltip}>
+                  <Text fontWeight={700} fontSize="12px">
+                    {t("Common:YouDontHaveEnoughPermission")}
+                  </Text>
+                  <Text fontSize="12px">
+                    {t("Common:ContactAdminForPermissions")}
+                  </Text>
+                </div>
+              )}
+            />
+          ) : null}
           {githubUrl ? (
             <Button
               size={ButtonSize.normal}

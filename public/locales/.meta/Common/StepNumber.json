@@ -3,7 +3,7 @@
   "content": "Step {{number}}.",
   "content_en_sha1_hash": "eeeb5d9578da7fd64e9fd0313530667b93018473",
   "created_at": "2026-08-20T20:05:20.294Z",
-  "updated_at": "2026-08-21T15:49:57.226Z",
+  "updated_at": "2026-08-21T16:27:00.794Z",
   "comment": {
     "text": "Label for a step in an ordered list within the integration dialog. The {{number}} variable represents the current step index.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationDialog.tsx",
-      "line_number": 149,
+      "line_number": 176,
       "context": "<ol className={styles.integrationDialogSteps}>\n {steps.map((step, index) => (\n <li key={step.id} className={styles.integrationDialogStep}>\n <Text as=\"span\" className={styles.integrationDialogStepLabel}>\n {t(\"Common:StepNumber\", { number: index + 1 })}\n </Text>\n <Text as=\"span\" className={styles.integrationDialogStepText}>\n {step.text}\n </Text>\n </li>",
       "module": "/packages/client"
     }

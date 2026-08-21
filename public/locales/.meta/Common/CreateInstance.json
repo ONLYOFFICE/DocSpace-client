@@ -3,7 +3,7 @@
   "content": "Create instance",
   "content_en_sha1_hash": "448e244903a83a672cc89c0cba5ddcb21e9a4103",
   "created_at": "2026-08-20T20:04:26.380Z",
-  "updated_at": "2026-08-21T15:49:57.226Z",
+  "updated_at": "2026-08-21T16:27:00.794Z",
   "comment": {
     "text": "Button label in the integration dialog used to trigger the creation of a new instance.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationDialog.tsx",
-      "line_number": 97,
-      "context": "<div className={styles.integrationDialogFooter}>\n <div className={styles.integrationDialogFooterButtons}>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:CreateInstance\")}\n onClick={onCreateInstance}\n isDisabled={isCreateInstanceDisabled}\n testId={`integration-create-instance-${platform.id}`}\n />\n {githubUrl ? (",
+      "line_number": 106,
+      "context": "className={styles.integrationDialogCreateAnchor}\n >\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:CreateInstance\")}\n onClick={onCreateInstance}\n isDisabled={isCreateInstanceDisabled}\n testId={`integration-create-instance-${platform.id}`}\n />\n </span>",
       "module": "/packages/client"
     },
     {

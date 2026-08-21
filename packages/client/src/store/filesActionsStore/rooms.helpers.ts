@@ -43,6 +43,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { splitFileAndFolderIds } from "@docspace/shared/utils/common";
+import { revokeMemberFromEncryptedRoom } from "@docspace/shared/services/private-room/room-encryption";
 import uniqueid from "lodash/uniqueId";
 import api from "@docspace/shared/api";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -612,7 +613,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
   const { user } = self.userStore;
 
   // the fallback is the selected-folder store snapshot; only
-  // id/isAIAgent are read from it, matching the old JS duck typing.
+  // id/isAIAgent/private are read from it, matching the old JS duck typing.
   const room = (
     selection.length
       ? selection[0]
@@ -623,6 +624,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
 
   const roomId = room.id;
   const isAIAgent = room.isAIAgent;
+  const isPrivateRoom = room.private === true;
 
   // user is nullable on UserStore; the old JS read the
   // flags unchecked (crash when logged out), the `!` keeps that behavior.
@@ -637,36 +639,61 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
     : t("Files:YouLeftTheAgent");
   const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 
-  return (
-    api.rooms.updateRoomMemberRole(roomId, {
-      invitations: [{ id: user?.id, access: ShareAccessRights.None }],
-      force,
-    }) as Promise<unknown>
-  )
-    .then(() => {
-      if (!isAdmin) {
-        if (!isRoot) {
-          const filter = RoomsFilter.getDefault();
-          window.DocSpace.navigate(
-            `rooms/shared/filter?${filter.toUrlParams()}`,
-          );
+  const leave = () =>
+    (
+      api.rooms.updateRoomMemberRole(roomId, {
+        invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+        force,
+      }) as Promise<unknown>
+    )
+      .then(() => {
+        if (!isAdmin) {
+          if (!isRoot) {
+            const filter = RoomsFilter.getDefault();
+            window.DocSpace.navigate(
+              `rooms/shared/filter?${filter.toUrlParams()}`,
+            );
+          } else {
+            self.filesStore.removeFiles(null, [roomId]);
+          }
+        } else if (!isRoot) {
+          self.selectedFolderStore.setInRoom(false);
+
+          const operationId = uniqueid("operation_");
+          self.updateCurrentFolder(null, operationId);
         } else {
-          self.filesStore.removeFiles(null, [roomId]);
+          self.filesStore.setInRoomFolder(roomId, false);
         }
-      } else if (!isRoot) {
-        self.selectedFolderStore.setInRoom(false);
 
-        const operationId = uniqueid("operation_");
-        self.updateCurrentFolder(null, operationId);
-      } else {
-        self.filesStore.setInRoomFolder(roomId, false);
+        toastr.success(successText);
+      })
+      .finally(() => {
+        setSelected("none");
+      });
+
+  if (!isPrivateRoom) return leave();
+
+  // Must run before the role change drops access to files/{id}/access;
+  // best-effort - a failed cleanup must not trap the user in the room.
+  const revokeOwnEncryptedAccess = async () => {
+    try {
+      const results = await revokeMemberFromEncryptedRoom(
+        Number(roomId),
+        String(user?.id),
+        {},
+      );
+      const failures = results.filter((r) => !r.success);
+      if (failures.length > 0) {
+        console.error(
+          `[ENCRYPTION] ${failures.length} file(s) kept the leaver's wrap entries`,
+        );
       }
+    } catch (err) {
+      console.error("[ENCRYPTION] revoke own access on leave failed:", err);
+    }
+  };
 
-      toastr.success(successText);
-    })
-    .finally(() => {
-      setSelected("none");
-    });
+  return revokeOwnEncryptedAccess().then(leave);
 };
 
 

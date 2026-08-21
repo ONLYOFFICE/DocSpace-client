@@ -43,6 +43,7 @@ import {
   type RoomMemberPublicKey,
 } from "../room-file-access";
 import {
+  getTofuStore,
   resetTofuStores,
   registerKeyMismatchHandler,
   unregisterKeyMismatchHandler,
@@ -277,6 +278,66 @@ describe("unwrapDekForCurrentUser — TOFU verification on sender public key", (
         onKeyChange: resolver,
       }),
     ).rejects.toBeInstanceOf(AuthenticationError);
+  });
+
+  it("unwraps via the TOFU-trusted sender key after the sender left the room (bug 82872)", async () => {
+    // First unwrap pins the sender's key; the second runs after the sender
+    // left, when both live key sources come back empty.
+    await unwrapDekForCurrentUser({
+      fileKeys: legitimateFileKeys,
+      roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(alice) }],
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: FILE_ID,
+    });
+
+    const out = await unwrapDekForCurrentUser({
+      fileKeys: legitimateFileKeys,
+      roomMemberKeys: [],
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: FILE_ID,
+    });
+    expect(out).toEqual(dek);
+  });
+
+  it("still refuses when the device never saw the departed sender's key", async () => {
+    await expect(
+      unwrapDekForCurrentUser({
+        fileKeys: legitimateFileKeys,
+        roomMemberKeys: [],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+      }),
+    ).rejects.toBeInstanceOf(AuthenticationError);
+  });
+
+  it("TOFU fallback cannot unwrap when the trusted key is not the wrap's real sender key", async () => {
+    await getTofuStore(BOB_ID).acceptKey(ALICE_ID, pubB64(attacker));
+
+    await expect(
+      unwrapDekForCurrentUser({
+        fileKeys: legitimateFileKeys,
+        roomMemberKeys: [],
+        currentUserId: BOB_ID,
+        currentIdentity: bob,
+        fileId: FILE_ID,
+      }),
+    ).rejects.toBeInstanceOf(AuthenticationError);
+  });
+
+  it("falls back to the TOFU key when the live key for the sender does not open the wrap", async () => {
+    await getTofuStore(BOB_ID).acceptKey(ALICE_ID, pubB64(alice));
+
+    const out = await unwrapDekForCurrentUser({
+      fileKeys: legitimateFileKeys,
+      roomMemberKeys: [{ userId: ALICE_ID, publicKey: pubB64(attacker) }],
+      currentUserId: BOB_ID,
+      currentIdentity: bob,
+      fileId: FILE_ID,
+    });
+    expect(out).toEqual(dek);
   });
 
   it("does not invoke resolver when sender is unrelated (different userId) — separate TOFU record", async () => {

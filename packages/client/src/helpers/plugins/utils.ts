@@ -53,6 +53,7 @@ import {
   setFileView,
   setRoomsView,
 } from "../info-panel";
+import { isPluginSectionPath } from "./navigation";
 
 import { TMessageActionsParams } from "./types";
 
@@ -75,6 +76,7 @@ export const messageActions = ({
   updateMainButtonItems,
   updateProfileMenuItems,
   updateEventListenerItems,
+  updateArticleNavigationItems,
   updateFileItems,
   updateCreateDialogProps,
   updatePlugin,
@@ -236,6 +238,10 @@ export const messageActions = ({
         updateEventListenerItems?.(pluginName);
 
         break;
+      case PluginActions.updateArticleNavigationItems:
+        updateArticleNavigationItems?.(pluginName);
+
+        break;
       case PluginActions.updateFileItems:
         updateFileItems?.(pluginName);
 
@@ -323,6 +329,9 @@ export const messageActions = ({
     }
   });
 };
+
+export const isPluginPage = (): boolean =>
+  isPluginSectionPath(window.location.pathname);
 
 export const getPluginUrl = (url: string, file: string): string => {
   const splittedURL = url.split("/");

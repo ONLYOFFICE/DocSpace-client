@@ -39,7 +39,7 @@ import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
-import { AI_ENUM } from "@docspace/ui-kit/billing/constants";
+import { AI_ENUM, AI_SEARCH_ENUM } from "@docspace/ui-kit/billing/constants";
 import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
@@ -300,6 +300,7 @@ const View = ({
           case "ai-settings":
             if (!settingsStore.standalone) {
               paymentStore.handleServiceQuota(AI_ENUM);
+              paymentStore.handleServiceQuota(AI_SEARCH_ENUM);
               servicesStore.fetchAiPrices();
               servicesStore.fetchAiModelRestrictions();
             }

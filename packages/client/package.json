@@ -96,7 +96,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
-    "@onlyoffice/docspace-plugin-sdk": "file:onlyoffice-docspace-plugin-sdk-2.1.0.tgz",
+    "@onlyoffice/docspace-plugin-sdk": "file:onlyoffice-docspace-plugin-sdk-3.0.0.tgz",
     "@playwright/test": "1.58.1",
     "@testing-library/jest-dom": "6.6.4",
     "@testing-library/react": "16.3.0",

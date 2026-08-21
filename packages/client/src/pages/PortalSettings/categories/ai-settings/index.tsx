@@ -112,6 +112,7 @@ type TAISettingsProps = {
   currentDeviceType?: DeviceType;
   standalone?: boolean;
   isAiToolsServiceOn?: PaymentStore["isAiToolsServiceOn"];
+  isAiSearchServiceOn?: PaymentStore["isAiSearchServiceOn"];
   isCardLinkedToPortal?: PaymentStore["isCardLinkedToPortal"];
 };
 
@@ -120,6 +121,7 @@ const AISettings = ({
   currentDeviceType,
   standalone,
   isAiToolsServiceOn,
+  isAiSearchServiceOn,
   isCardLinkedToPortal,
 }: TAISettingsProps) => {
   const navigate = useNavigate();
@@ -237,7 +239,9 @@ const AISettings = ({
             <AIFeaturesBanner
               currentDeviceType={currentDeviceType}
               isAiToolsServiceOn={isAiToolsServiceOn}
+              isAiSearchServiceOn={isAiSearchServiceOn}
               isCardLinkedToPortal={isCardLinkedToPortal}
+              isWebSearchTab={currentTabId === TAB_IDS.WEB_SEARCH}
             />
           )
         }
@@ -250,13 +254,15 @@ export const Component = inject(
   ({ aiSettingsStore, settingsStore, paymentStore }: TStore) => {
     const { fetchKnowledge } = aiSettingsStore;
     const { currentDeviceType, standalone } = settingsStore;
-    const { isAiToolsServiceOn, isCardLinkedToPortal } = paymentStore;
+    const { isAiToolsServiceOn, isAiSearchServiceOn, isCardLinkedToPortal } =
+      paymentStore;
 
     return {
       fetchKnowledge,
       currentDeviceType,
       standalone,
       isAiToolsServiceOn,
+      isAiSearchServiceOn,
       isCardLinkedToPortal,
     };
   },

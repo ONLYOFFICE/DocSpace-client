@@ -116,6 +116,7 @@ export const getDescription = (
   standalone: boolean = false,
   isPortalAdmin: boolean = false,
   isFormsScope: boolean = false,
+  filterFolderType: Nullable<number[]> = null,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
@@ -157,6 +158,7 @@ export const getDescription = (
       aiReady,
       isPortalAdmin,
       isFormsScope,
+      filterFolderType,
     );
 
   if (isFolder)

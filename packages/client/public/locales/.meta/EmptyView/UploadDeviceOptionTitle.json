@@ -3,7 +3,7 @@
   "content": "Upload from your Device",
   "content_en_sha1_hash": "c766735fe84df9f06fa3ff2fbe6daa4d88c8afe4",
   "created_at": "2025-05-19T21:30:56.546Z",
-  "updated_at": "2026-08-19T13:26:37.645Z",
+  "updated_at": "2026-08-20T12:26:01.689Z",
   "comment": {
     "text": "This is the title for an option that allows users to upload files from their local device. It appears in menus or dialogs where file upload options are presented.",
     "is_auto": true,
@@ -25,19 +25,19 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 489,
+      "line_number": 491,
       "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 489,
+      "line_number": 491,
       "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 489,
+      "line_number": 491,
       "context": "//   onClick: actions.onShowAIBenefits,\n // } as const;\n \n const uploadFromDeviceAnyFile = isMobile\n ? createUploadFromDeviceOption(\n t(\"EmptyView:UploadDeviceOptionTitle\"),\n t(\"EmptyView:UploadDeviceOptionDescription\"),\n \"file\",\n )\n : {\n title: t(\"EmptyView:UploadDeviceOptionTitle\"),",
       "module": "/packages/client"
     },

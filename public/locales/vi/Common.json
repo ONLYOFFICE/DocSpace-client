@@ -494,7 +494,7 @@
   "CreateFormSpaceAction": "Tạo không gian",
   "CreateGroup": "Tạo nhóm",
   "CreateMasterFormFromFile": "Tạo biểu mẫu PDF từ tệp",
-  "CreateNewOrUpload": "Tạo mới hoặc <1>tải lên tệp của bạn</1>",
+  "CreateNewOrUpload": "Tạo hoặc <1>tải lên tệp</1>",
   "CreatePassphrase": "Tạo mật khẩu bảo vệ",
   "CreatePassphraseHint": "Tạo mật khẩu bảo vệ mạnh để bảo vệ khóa mã hóa của bạn. Bạn sẽ cần nó để giải mã tệp trên bất kỳ thiết bị nào sử dụng khóa này.",
   "CreatePrivateRoom": "Tạo phòng riêng tư",

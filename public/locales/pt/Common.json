@@ -494,7 +494,7 @@
   "CreateFormSpaceAction": "Criar espaço",
   "CreateGroup": "Criar grupo",
   "CreateMasterFormFromFile": "Criar formulário PDF a partir do ficheiro",
-  "CreateNewOrUpload": "Criar novo ou <1>carregar o seu ficheiro</1>",
+  "CreateNewOrUpload": "Criar ou <1>carregar um ficheiro</1>",
   "CreatePassphrase": "Criar frase-passe",
   "CreatePassphraseHint": "Crie uma frase-passe forte para proteger a sua chave de encriptação. Irá precisar dela para desencriptar ficheiros em qualquer dispositivo onde utilize esta chave.",
   "CreatePrivateRoom": "Criar sala privada",

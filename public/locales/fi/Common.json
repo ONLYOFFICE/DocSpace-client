@@ -494,7 +494,7 @@
   "CreateFormSpaceAction": "Luo tila",
   "CreateGroup": "Luo ryhmä",
   "CreateMasterFormFromFile": "Luo PDF-lomake tiedostosta",
-  "CreateNewOrUpload": "Luo uusi tai <1>lataa tiedostosi</1>",
+  "CreateNewOrUpload": "Luo tai <1>lataa tiedosto</1>",
   "CreatePassphrase": "Luo salauslause",
   "CreatePassphraseHint": "Luo vahva salauslause suojaamaan salausavaintasi. Tarvitset sitä tiedostojen purkamiseen kaikilla laitteilla, joilla käytät tätä avainta.",
   "CreatePrivateRoom": "Luo yksityishuone",

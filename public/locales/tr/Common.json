@@ -494,7 +494,7 @@
   "CreateFormSpaceAction": "Alan oluştur",
   "CreateGroup": "Grup oluştur",
   "CreateMasterFormFromFile": "Dosyadan PDF formu oluştur",
-  "CreateNewOrUpload": "Yeni oluştur veya <1>dosyanızı yükleyin</1>",
+  "CreateNewOrUpload": "Oluştur veya <1>dosya yükle</1>",
   "CreatePassphrase": "Parola oluştur",
   "CreatePassphraseHint": "Şifreleme anahtarınızı korumak için güçlü bir parola oluşturun. Bu anahtarı kullandığınız her cihazda dosyaların şifresini çözmek için buna ihtiyacınız olacak.",
   "CreatePrivateRoom": "Özel oda oluştur",

@@ -494,7 +494,7 @@
   "CreateFormSpaceAction": "Vytvoriť priestor",
   "CreateGroup": "Vytvoriť skupinu",
   "CreateMasterFormFromFile": "Vytvoriť PDF formulár zo súboru",
-  "CreateNewOrUpload": "Vytvoriť nový alebo <1>nahrať váš súbor</1>",
+  "CreateNewOrUpload": "Vytvoriť alebo <1>nahrať súbor</1>",
   "CreatePassphrase": "Vytvoriť prístupovú frázu",
   "CreatePassphraseHint": "Vytvorte silnú prístupovú frázu na ochranu svojho šifrovacieho kľúča. Budete ju potrebovať na dešifrovanie súborov na každom zariadení, kde tento kľúč používate.",
   "CreatePrivateRoom": "Vytvoriť súkromnú miestnosť",

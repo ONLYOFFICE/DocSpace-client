@@ -495,7 +495,7 @@
   "CreateGroup": "Create group",
   "CreateInstance": "Create instance",
   "CreateMasterFormFromFile": "Create PDF form from file",
-  "CreateNewOrUpload": "Create new or <1>upload your file</1>",
+  "CreateNewOrUpload": "Create or <1>upload a file</1>",
   "CreatePassphrase": "Create passphrase",
   "CreatePassphraseHint": "Create a strong passphrase to protect your encryption key. You will need it to decrypt files on any device where you use this key.",
   "CreatePrivateRoom": "Create private room",

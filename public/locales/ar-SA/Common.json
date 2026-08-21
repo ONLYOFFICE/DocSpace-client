@@ -494,7 +494,7 @@
   "CreateFormSpaceAction": "إنشاء مساحة",
   "CreateGroup": "إنشاء مجموعة",
   "CreateMasterFormFromFile": "إنشاء نموذج PDF من ملف",
-  "CreateNewOrUpload": "إنشاء جديد أو <1>رفع ملفك</1>",
+  "CreateNewOrUpload": "إنشاء أو <1>رفع ملف</1>",
   "CreatePassphrase": "إنشاء عبارة مرور",
   "CreatePassphraseHint": "أنشئ عبارة مرور قوية لحماية مفتاح التشفير الخاص بك. ستحتاج إليها لفك تشفير الملفات على أي جهاز تستخدم فيه هذا المفتاح.",
   "CreatePrivateRoom": "إنشاء غرفة خاصة",

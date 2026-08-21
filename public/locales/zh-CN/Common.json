@@ -494,7 +494,7 @@
   "CreateFormSpaceAction": "创建空间",
   "CreateGroup": "创建群组",
   "CreateMasterFormFromFile": "从文件创建 PDF 表单",
-  "CreateNewOrUpload": "新建或<1>上传您的文件</1>",
+  "CreateNewOrUpload": "新建或<1>上传文件</1>",
   "CreatePassphrase": "创建密码短语",
   "CreatePassphraseHint": "创建一个强密码短语来保护您的加密密钥。在使用此密钥的任何设备上解密文件时都需要它。",
   "CreatePrivateRoom": "创建私人房间",

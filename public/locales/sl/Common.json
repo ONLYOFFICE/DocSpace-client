@@ -494,7 +494,7 @@
   "CreateFormSpaceAction": "Ustvari prostor",
   "CreateGroup": "Ustvari skupino",
   "CreateMasterFormFromFile": "Ustvarite obrazec PDF iz datoteke",
-  "CreateNewOrUpload": "Ustvari novo ali <1>naloži svojo datoteko</1>",
+  "CreateNewOrUpload": "Ustvari ali <1>naloži datoteko</1>",
   "CreatePassphrase": "Ustvari geslo",
   "CreatePassphraseHint": "Ustvarite močno geslo za zaščito svojega šifrirnega ključa. Potrebovali ga boste za dešifriranje datotek na vsaki napravi, kjer uporabljate ta ključ.",
   "CreatePrivateRoom": "Ustvari zasebno sobo",

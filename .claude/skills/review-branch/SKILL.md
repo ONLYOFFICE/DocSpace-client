@@ -91,6 +91,7 @@ push fails. Full detail in `.claude/rules/source-checks.md`.
 | **Images** | referenced by basename; no duplicate filenames |
 | **Dependencies** | same version string in every workspace; actually imported |
 | **English everywhere** | code, comments, docs, commit messages |
+| **Generated artifacts** | nothing checks their freshness, and a stale one leaves no trace in the diff — run the generators and see whether anything moves (see `.claude/rules/generated-artifacts.md`), then revert what you produced |
 
 Locale coverage, concretely:
 

@@ -1,0 +1,29 @@
+{
+  "key_path": "FileSizeLimitExceeded",
+  "content": "The file size limit cannot exceed {{limit}} bytes ({{size}}). Enter a smaller value.",
+  "content_en_sha1_hash": "ffcfe2c5c14d07b6edf52411759ccc20d94f970c",
+  "created_at": "2026-08-24T22:29:57.029Z",
+  "updated_at": "2026-08-24T22:36:34.506Z",
+  "comment": {
+    "text": "Error text in the DocsConnect settings panel that appears when an entered file size limit exceeds the allowed maximum. It includes the limit in bytes ({{limit}}) and its human-readable equivalent ({{size}}).",
+    "is_auto": true,
+    "updated_at": "2026-08-24T22:36:34.506Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
+      "line_number": 259,
+      "context": "isAnonymousSupport: anonymous,\n fileSizeLimit: Number(maxDownload) || 0,\n });\n \n const fileSizeLimitError = (limit: number) =>\n t(\"DocsConnect:FileSizeLimitExceeded\", {\n limit,\n size: getConvertedSize(t, limit),\n });\n \n const onSaveGeneral = async () => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-08-19T13:26:37.667Z",
+  "updated_at": "2026-08-24T22:30:00.615Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -25,31 +25,31 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 267,
+      "line_number": 272,
       "context": "{...cancelButtonSelectorProps}\n {...searchSelectorProps}\n withPadding={withPadding}\n onSelect={onSelect}\n items={items}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={false}\n emptyScreenImage={\n isBase ? (\n <EmptyScreenAIAgentsSelectorLight />",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 167,
+      "line_number": 172,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps?.headerLabel || t(\"SelectAction\"),\n onCloseClick: onCancel,\n },\n }\n : {};",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
-      "line_number": 195,
+      "line_number": 208,
       "context": "onClearSearch={onClearSearch}\n isSearchLoading={false}\n disableSubmitButton={!selectedItem}\n isMultiSelect={false}\n items={itemsList}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"NotFoundGroups\")}\n emptyScreenDescription={t(\"GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 750,
+      "line_number": 756,
       "context": "renderCustomItem={renderCustomItem}\n aria-label={ariaLabel || \"People Selector\"}\n data-selector-type={dataSelectorType || \"people\"}\n dataTestId={dataTestId || \"people-selector\"}\n items={itemsList}\n submitButtonLabel={submitButtonLabel || t(\"SelectAction\")}\n onSubmit={onSubmit}\n disableSubmitButton={disableSubmitButton || !selectedItems.length}\n selectedItem={isMultiSelect ? null : selectedItems[0]}\n submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 343,
+      "line_number": 348,
       "context": "{...withAside}\n withPadding={withPadding}\n onSelect={onSelect}\n items={sortedItems}\n selectedItems={selectedItems}\n submitButtonLabel={submitButtonLabel || t(\"SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={\n isBase ? <EmptyScreenRoomsLight /> : <EmptyScreenRoomsDark />\n }",
       "module": "/libs/ui-kit"
     },

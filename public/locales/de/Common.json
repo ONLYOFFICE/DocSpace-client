@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "KI-Funktionen aktivieren, um loszulegen?",
   "ActivateAISearch": "KI-Suche aktivieren",
   "ActivateAISearchDescription": "Aktivieren Sie die KI-Suche, um Websuche und Web-Crawling in KI-Chats zu nutzen.",
-  "ActivateAISearchToGetStarted": "KI-Suche aktivieren, um loszulegen",
+  "ActivateAISearchToGetStarted": "KI-Suche aktivieren, um loszulegen?",
   "ActivateLicense": "Lizenz freischalten",
   "ActivateLicenseActivated": "Lizenz wurde erfolgreich aktiviert",
   "ActivatePaidTariffExpiration": "Ihr Abonnement ist bis {{date}}, gültig.",

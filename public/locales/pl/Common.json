@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "Aktywować funkcje AI, aby rozpocząć?",
   "ActivateAISearch": "Aktywuj wyszukiwanie AI",
   "ActivateAISearchDescription": "Włącz wyszukiwanie AI, aby korzystać z wyszukiwania w sieci i indeksowania stron w czatach AI.",
-  "ActivateAISearchToGetStarted": "Aktywuj wyszukiwanie AI, aby rozpocząć",
+  "ActivateAISearchToGetStarted": "Aktywować wyszukiwanie AI, aby rozpocząć?",
   "ActivateLicense": "Aktywuj licencję",
   "ActivateLicenseActivated": "Licencja została aktywowana",
   "ActivatePaidTariffExpiration": "Twoja subskrypcja wygaśnie {{date}}.",

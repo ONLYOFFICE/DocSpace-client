@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "AI 기능을 활성화하여 시작하시겠습니까?",
   "ActivateAISearch": "AI 검색 활성화",
   "ActivateAISearchDescription": "AI 채팅에서 웹 검색과 웹 크롤링을 사용하려면 AI 검색을 활성화하세요.",
-  "ActivateAISearchToGetStarted": "AI 검색을 활성화하여 시작하세요",
+  "ActivateAISearchToGetStarted": "AI 검색을 활성화하여 시작하시겠습니까?",
   "ActivateLicense": "라이선스 활성화",
   "ActivateLicenseActivated": "라이선스가 활성화되었습니다",
   "ActivatePaidTariffExpiration": "구독이 {{date}}에 만료됩니다.",

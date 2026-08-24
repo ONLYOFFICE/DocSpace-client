@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "AI機能を有効にして始めますか？",
   "ActivateAISearch": "AI検索を有効にする",
   "ActivateAISearchDescription": "AIチャットでウェブ検索とウェブクロールを使用するには、AI検索を有効にしてください。",
-  "ActivateAISearchToGetStarted": "AI検索を有効にして始めましょう",
+  "ActivateAISearchToGetStarted": "AI検索を有効にして始めますか？",
   "ActivateLicense": "ライセンスの有効化",
   "ActivateLicenseActivated": "ライセンス認証済み",
   "ActivatePaidTariffExpiration": "サブスクリプションの有効期限は{{date}}です。",

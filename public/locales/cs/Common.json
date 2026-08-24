@@ -1343,7 +1343,6 @@
   "MessageExported": "Zpráva exportována do souboru: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Aktivní do {{date}}",
   "MigrateAgree": "Rozumím a souhlasím s přechodem fakturace na peněženku {{organizationName}}",
-  "MigrateAutoRenews": "Poté se {{price}}/měsíc automaticky obnovuje z vaší peněženky — vaše karta již není za tarif účtována.",
   "MigrateBannerSubtitle": "Co se stane, když potvrdíte",
   "MigrateBannerTitle": "Poplatky za tarif se přesouvají ze Stripe do vaší peněženky.",
   "MigrateCurrentTariff": "Aktuální tarif",

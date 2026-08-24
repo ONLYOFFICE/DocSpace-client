@@ -1343,7 +1343,6 @@
   "MessageExported": "පණිවිඩය <1>{{fileName}}</1> ගොනුවට නිර්යාත කරන ලදී",
   "MigrateActiveUntil": "{{date}} දක්වා ක්‍රියාකාරීයි",
   "MigrateAgree": "මගේ බිල්පත්කරණය {{organizationName}} පසුම්බිය වෙත මාරු කිරීමට මම තේරුම් ගෙන එකඟ වෙමි",
-  "MigrateAutoRenews": "ඉන්පසු {{price}}/මසකට ඔබගේ පසුම්බියෙන් ස්වයංක්‍රීයව අලුත් වේ — සැලසුම සඳහා ඔබගේ කාඩ්පතෙන් තවදුරටත් අය නොකෙරේ.",
   "MigrateBannerSubtitle": "ඔබ තහවුරු කළ විට සිදුවන්නේ මෙයයි",
   "MigrateBannerTitle": "ටැරිෆ් ගාස්තු Stripe වෙතින් ඔබගේ පසුම්බිය වෙත මාරු වෙමින් පවතී.",
   "MigrateCurrentTariff": "වත්මන් ටැරිෆ්",

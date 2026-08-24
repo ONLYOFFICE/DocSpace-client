@@ -1343,7 +1343,6 @@
   "MessageExported": "Mensagem exportada para o arquivo: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Ativo até {{date}}",
   "MigrateAgree": "Compreendo e concordo em mudar a minha faturação para a carteira {{organizationName}}",
-  "MigrateAutoRenews": "Depois, {{price}}/mês com renovação automática a partir da sua carteira — o seu cartão deixa de ser cobrado pelo plano.",
   "MigrateBannerSubtitle": "Eis o que acontece quando confirmar",
   "MigrateBannerTitle": "As cobranças do tarifário estão a passar do Stripe para a sua carteira.",
   "MigrateCurrentTariff": "Tarifário atual",

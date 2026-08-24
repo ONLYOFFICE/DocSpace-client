@@ -1343,7 +1343,6 @@
   "MessageExported": "파일로 내보낸 메시지: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "{{date}}까지 유효",
   "MigrateAgree": "{{organizationName}} 지갑으로 청구를 전환하는 것에 동의하며 이를 이해합니다",
-  "MigrateAutoRenews": "이후 {{price}}/월이 지갑에서 자동으로 갱신됩니다 — 요금제에 대해 더 이상 카드로 청구되지 않습니다.",
   "MigrateBannerSubtitle": "확인하면 다음과 같이 진행됩니다",
   "MigrateBannerTitle": "요금제 청구가 Stripe에서 지갑으로 이동합니다.",
   "MigrateCurrentTariff": "현재 요금제",

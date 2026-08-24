@@ -1343,7 +1343,6 @@
   "MessageExported": "Wiadomość wyeksportowana do pliku: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Aktywna do {{date}}",
   "MigrateAgree": "Rozumiem i zgadzam się na przeniesienie moich rozliczeń do portfela {{organizationName}}",
-  "MigrateAutoRenews": "Następnie {{price}}/mo odnawia się automatycznie z Twojego portfela — Twoja karta nie jest już obciążana za plan.",
   "MigrateBannerSubtitle": "Oto co się stanie po potwierdzeniu",
   "MigrateBannerTitle": "Opłaty za taryfę są przenoszone ze Stripe do Twojego portfela.",
   "MigrateCurrentTariff": "Aktualna taryfa",

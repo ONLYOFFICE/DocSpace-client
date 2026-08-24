@@ -1343,7 +1343,6 @@
   "MessageExported": "Το μήνυμα εξάχθη στο αρχείο: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Ενεργό έως {{date}}",
   "MigrateAgree": "Κατανοώ και συμφωνώ να μεταφέρω τη χρέωσή μου στο πορτοφόλι {{organizationName}}",
-  "MigrateAutoRenews": "Στη συνέχεια {{price}}/μήνα ανανεώνεται αυτόματα από το πορτοφόλι σας — η κάρτα σας δεν χρεώνεται πλέον για το πρόγραμμα.",
   "MigrateBannerSubtitle": "Δείτε τι συμβαίνει όταν επιβεβαιώσετε",
   "MigrateBannerTitle": "Οι χρεώσεις τιμολογίου μεταφέρονται από το Stripe στο πορτοφόλι σας.",
   "MigrateCurrentTariff": "Τρέχον τιμολόγιο",

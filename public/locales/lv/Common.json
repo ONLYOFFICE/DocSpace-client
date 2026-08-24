@@ -1343,7 +1343,6 @@
   "MessageExported": "Ziņojums eksportēts uz failu: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Aktīvs līdz {{date}}",
   "MigrateAgree": "Es saprotu un piekrītu pārslēgt savu fakturēšanu uz {{organizationName}} maku",
-  "MigrateAutoRenews": "Pēc tam {{price}}/mēn automātiski atjaunojas no jūsu maka — par plānu jūsu karte vairs netiek iekasēta.",
   "MigrateBannerSubtitle": "Lūk, kas notiek, kad apstiprināt",
   "MigrateBannerTitle": "Tarifa maksājumi tiek pārcelti no Stripe uz jūsu maku.",
   "MigrateCurrentTariff": "Pašreizējais tarifs",

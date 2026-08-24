@@ -1343,7 +1343,6 @@
   "MessageExported": "Poruka uspešno eksportovana u fajl: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Aktivno do {{date}}",
   "MigrateAgree": "Razumem i slažem se da prebacim naplatu na {{organizationName}} novčanik",
-  "MigrateAutoRenews": "Zatim se {{price}}/mo automatski obnavlja iz vašeg novčanika — vaša kartica se više ne naplaćuje za plan.",
   "MigrateBannerSubtitle": "Evo šta se dešava kada potvrdite",
   "MigrateBannerTitle": "Naplate tarife se prebacuju sa Stripe na vaš novčanik.",
   "MigrateCurrentTariff": "Trenutna tarifa",

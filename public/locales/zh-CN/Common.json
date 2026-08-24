@@ -1343,7 +1343,6 @@
   "MessageExported": "消息已导出到文件：<1>{{fileName}}</1>",
   "MigrateActiveUntil": "有效期至 {{date}}",
   "MigrateAgree": "我了解并同意将我的账单切换至 {{organizationName}} 钱包",
-  "MigrateAutoRenews": "此后将以 {{price}}/月从您的钱包自动续订 — 您的银行卡不再为此套餐扣费。",
   "MigrateBannerSubtitle": "确认后将发生以下情况",
   "MigrateBannerTitle": "资费费用正从 Stripe 转移至您的钱包。",
   "MigrateCurrentTariff": "当前资费",

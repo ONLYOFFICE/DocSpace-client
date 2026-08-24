@@ -1343,7 +1343,6 @@
   "MessageExported": "Mensaje exportado al archivo: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Activo hasta el {{date}}",
   "MigrateAgree": "Entiendo y acepto cambiar mi facturación al monedero de {{organizationName}}",
-  "MigrateAutoRenews": "Después, {{price}}/mo se renueva automáticamente desde su monedero — su tarjeta ya no se cobra por el plan.",
   "MigrateBannerSubtitle": "Esto es lo que ocurre cuando confirma",
   "MigrateBannerTitle": "Los cargos de la tarifa se están trasladando de Stripe a su monedero.",
   "MigrateCurrentTariff": "Tarifa actual",

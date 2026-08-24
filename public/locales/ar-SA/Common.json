@@ -1343,7 +1343,6 @@
   "MessageExported": "تم تصدير الرسالة إلى ملف: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "نشط حتى {{date}}",
   "MigrateAgree": "أفهم وأوافق على تحويل الفوترة الخاصة بي إلى محفظة {{organizationName}}",
-  "MigrateAutoRenews": "ثم {{price}}/شهر يتجدد تلقائيًا من محفظتك — لن يتم تحصيل رسوم الخطة من بطاقتك بعد الآن.",
   "MigrateBannerSubtitle": "إليك ما يحدث عند التأكيد",
   "MigrateBannerTitle": "يتم نقل رسوم التعرفة من Stripe إلى محفظتك.",
   "MigrateCurrentTariff": "التعرفة الحالية",

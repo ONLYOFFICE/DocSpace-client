@@ -1343,7 +1343,6 @@
   "MessageExported": "Повідомлення експортовано у файл: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Активно до {{date}}",
   "MigrateAgree": "Я розумію та погоджуюся перевести свій білінг на гаманець {{organizationName}}",
-  "MigrateAutoRenews": "Потім {{price}}/міс. автоматично поновлюється з вашого гаманця — з вашої картки більше не стягується плата за план.",
   "MigrateBannerSubtitle": "Ось що станеться після підтвердження",
   "MigrateBannerTitle": "Тарифні платежі переходять зі Stripe на ваш гаманець.",
   "MigrateCurrentTariff": "Поточний тариф",

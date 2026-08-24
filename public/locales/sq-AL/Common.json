@@ -1343,7 +1343,6 @@
   "MessageExported": "Mesazhi u eksportua në skedar: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Aktiv deri më {{date}}",
   "MigrateAgree": "Kuptoj dhe pranoj të kaloj faturimin tim te portofoli i {{organizationName}}",
-  "MigrateAutoRenews": "Më pas {{price}}/muaj rinovohet automatikisht nga portofoli juaj — karta juaj nuk tarifohet më për planin.",
   "MigrateBannerSubtitle": "Ja çfarë ndodh kur konfirmoni",
   "MigrateBannerTitle": "Tarifimet e tarifës po kalojnë nga Stripe te portofoli juaj.",
   "MigrateCurrentTariff": "Tarifa aktuale",

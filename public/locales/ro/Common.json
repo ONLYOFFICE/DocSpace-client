@@ -1343,7 +1343,6 @@
   "MessageExported": "Mesajul a fost exportat în fișierul: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Activ până la {{date}}",
   "MigrateAgree": "Înțeleg și sunt de acord să trec facturarea mea către portofelul {{organizationName}}",
-  "MigrateAutoRenews": "Apoi {{price}}/lună se reînnoiește automat din portofelul dvs. — cardul dvs. nu mai este debitat pentru abonament.",
   "MigrateBannerSubtitle": "Iată ce se întâmplă când confirmați",
   "MigrateBannerTitle": "Taxele pentru tarif se mută de la Stripe la portofelul dvs.",
   "MigrateCurrentTariff": "Tarif curent",

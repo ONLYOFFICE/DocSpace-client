@@ -1343,7 +1343,6 @@
   "MessageExported": "Сообщение экспортировано в файл: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Действует до {{date}}",
   "MigrateAgree": "Я понимаю и согласен перевести биллинг на кошелёк {{organizationName}}",
-  "MigrateAutoRenews": "Затем {{price}}/мес. автоматически списывается с вашего кошелька — плата за план с вашей карты больше не взимается.",
   "MigrateBannerSubtitle": "Вот что произойдет после подтверждения",
   "MigrateBannerTitle": "Списания за тариф переносятся со Stripe на ваш кошелёк.",
   "MigrateCurrentTariff": "Текущий тариф",

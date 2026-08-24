@@ -1343,7 +1343,6 @@
   "MessageExported": "Съобщение експортирано във файл: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Активен до {{date}}",
   "MigrateAgree": "Разбирам и съм съгласен да премина към фактуриране чрез портфейла на {{organizationName}}",
-  "MigrateAutoRenews": "След това {{price}}/мес. се подновява автоматично от портфейла ви — картата ви вече не се таксува за плана.",
   "MigrateBannerSubtitle": "Ето какво се случва, когато потвърдите",
   "MigrateBannerTitle": "Таксите за тарифата се прехвърлят от Stripe към портфейла ви.",
   "MigrateCurrentTariff": "Текуща тарифа",

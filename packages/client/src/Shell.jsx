@@ -145,6 +145,7 @@ const Shell = ({ page = "home", ...rest }) => {
     standalone,
     isGuest,
     isAdmin,
+    isPayer,
     isRoomAdmin,
     setSocialAuthWelcomeDialogVisible,
     getAIConfig,
@@ -864,20 +865,21 @@ const Shell = ({ page = "home", ...rest }) => {
 
   // Chat error box override (Bug 83207): the wallet 402 must read as a
   // human message with a way to top up instead of the raw provider text.
-  // Admins get a button to Billing -> Wallet; regular users are pointed to
-  // their Payer (`action: null` also drops the default Retry, which would
-  // just fail again on an empty wallet). Every other code keeps the
-  // library default (localized text + Retry).
+  // Only the Payer can actually top the wallet up, so the button to
+  // Billing -> Wallet is theirs alone; everyone else is pointed to the Payer
+  // (`action: null` also drops the default Retry, which would just fail
+  // again on an empty wallet). Every other code keeps the library default
+  // (localized text + Retry).
   const formatChatError = useCallback(
     (payload) => {
       if (payload?.code !== "insufficient_funds") return null;
 
       return {
         title: t("Common:WalletBalanceTooLow"),
-        description: isAdmin
+        description: isPayer
           ? t("Common:TopUpWalletToContinue")
           : t("Common:InsufficientFundsContactPayerShort"),
-        action: isAdmin
+        action: isPayer
           ? {
               text: t("Common:TopUpWallet"),
               onClick: () => navigate("/portal-settings/payments/wallet"),
@@ -885,7 +887,7 @@ const Shell = ({ page = "home", ...rest }) => {
           : null,
       };
     },
-    [t, isAdmin, navigate],
+    [t, isPayer, navigate],
   );
 
   // AI chat host callbacks. Web Search settings save on an explicit button
@@ -1113,6 +1115,7 @@ const ShellWrapper = inject(
       aiServicesEnabled: settingsStore.aiServicesEnabled,
       setAiServicesEnabled: settingsStore.setAiServicesEnabled,
       isAIReady: paymentStore.isAIReady,
+      isPayer: paymentStore.isPayer,
       fetchWalletBalance: paymentStore.fetchWalletBalance,
       setWalletLowBalance: settingsStore.setWalletLowBalance,
       currentClientView: clientLoadingStore.currentClientView,

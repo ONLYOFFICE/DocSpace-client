@@ -253,7 +253,7 @@ test.describe("Dashboard tour", () => {
     baseUrl,
   }) => {
     // The tour's job is to hand the user over to the four section tours, each
-    // offered by its own app promo — so it closes on the way back to this page
+    // offered by its own app card — so it closes on the way back to this page
     // rather than on one of the apps it just described.
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 

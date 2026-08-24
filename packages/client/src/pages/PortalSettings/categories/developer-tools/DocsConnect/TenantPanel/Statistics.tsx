@@ -65,6 +65,7 @@ import {
   getDocsConnectPricePerUser,
   getDocsConnectTrialState,
 } from "../utils";
+import { MORE_CONNECTORS_COUNT } from "../constants";
 
 import InfoField from "./sub-components/InfoField";
 import UsageBlock from "./sub-components/UsageBlock";
@@ -626,7 +627,7 @@ const Statistics = ({
             rel="noreferrer"
           >
             <Text as="p" className={styles.integrationName}>
-              {t("Common:PlusMore", { count: 20 })}
+              {t("Common:PlusMore", { count: MORE_CONNECTORS_COUNT })}
             </Text>
             <span className={styles.integrationLink}>
               {t("Common:ViewAll")}

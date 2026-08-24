@@ -3,7 +3,7 @@
   "content": "Ask the Room or Full admin for additional permissions.",
   "content_en_sha1_hash": "ca5b6e116245eee1ca433d4cc8ddaea1bfcbcfd1",
   "created_at": "2026-08-13T14:36:53.438Z",
-  "updated_at": "2026-08-14T14:58:32.757Z",
+  "updated_at": "2026-08-21T16:27:00.793Z",
   "comment": {
     "text": "Instructional text within a tooltip that appears when a guest user lacks the necessary permissions to create or upload files.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/GuestRestrictionTooltip.tsx",
       "line_number": 80,
-      "context": "<div className={styles.guestRestrictionTooltip}>\n <Text fontWeight={700} fontSize=\"12px\">\n {t(\"Common:GuestCantCreateOrUploadTitle\")}\n </Text>\n <Text fontSize=\"12px\">\n {t(\"Common:GuestCantCreateOrUploadDescription\")}\n </Text>\n </div>\n );\n };",
+      "context": "<div className={styles.restrictionTooltip}>\n <Text fontWeight={700} fontSize=\"12px\">\n {t(\"Common:GuestCantCreateOrUploadTitle\")}\n </Text>\n <Text fontSize=\"12px\">\n {t(\"Common:GuestCantCreateOrUploadDescription\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

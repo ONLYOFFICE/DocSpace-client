@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Подключено к {{organizationName}} {{editorsName}}.</1> Ваш {{organizationName}} {{editorsName}} теперь использует редакторы, предоставляемые {{service}}.",
   "ConnectToDocs": "Подключить к {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Скопировать секретный ключ",
-  "CreateTenant": "Создать тенант",
   "DaysCount": "{{count}} дней",
   "DaysLeft": "Осталось дней",
   "DemoCode": "Демо-код",

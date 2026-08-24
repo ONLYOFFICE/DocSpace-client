@@ -86,7 +86,8 @@ offenders, both in the `libs/ui-kit` submodule — fix them in
   plugin (`packages/shared/biome-plugins/` and `libs/ui-kit/biome-plugins/`;
   the ui-kit copy exists because its standalone CI can't reach
   `packages/shared`). Nothing checks their freshness. The ui-kit copy must be
-  committed in the `docspace-ui-kit-react` repo.
+  committed in the `docspace-ui-kit-react` repo. Full procedure and the other
+  checked-in generated files: `.claude/rules/generated-artifacts.md`.
 - The plugins are declared **once** in `packages/shared/biome.json` and
   inherited by the other packages via `extends`. Gotcha: biome resolves a
   plugin's relative path against the *extending* package's directory, so the

@@ -3,7 +3,7 @@
   "content": "This section allows users to work with {{aiAgents}} — smart assistants for handling documents and other tasks. \nTo start using them, the AI features service must be enabled by the Full admin.",
   "content_en_sha1_hash": "ef22e271d5428e2252d7c0887307bd00438b88a4",
   "created_at": "2026-08-13T14:36:48.030Z",
-  "updated_at": "2026-08-20T12:26:01.705Z",
+  "updated_at": "2026-08-21T15:04:37.050Z",
   "comment": {
     "text": "Informational text in an empty state or \"no access\" screen explaining that AI features are disabled until activated by an admin. Includes a variable {{aiAgents}} representing the name of the smart assistants.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 289,
+      "line_number": 325,
       "context": "{t(\"Common:EmptyAIAgentsNotActiveYetDescriptionLine2\")}\n </Text>\n </>\n ))\n .with([true, false], () =>\n t(\"Common:EmptyAIAgentsAIDisabledDescription\", {\n aiAgents: t(\"Common:AIAgents\"),\n }),\n )\n .otherwise(() => t(\"Common:EmptyAIDisabledContactAdminDesc\"));\n };",
       "module": "/packages/client"
     },

@@ -250,7 +250,7 @@ const NewArticle = ({
 
     const overviewItem: NavMenuItem = {
       id: OVERVIEW_ID,
-      label: t("Common:Overview"),
+      label: t("Common:Home"),
       icon: CatalogOverviewReactSvgUrl,
       onClick: () => navigate("/dashboard"),
     };

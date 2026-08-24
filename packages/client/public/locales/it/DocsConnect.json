@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Collegato a {{organizationName}} {{editorsName}}.</1> Il tuo {{organizationName}} {{editorsName}} ora utilizza gli editor forniti da {{service}}.",
   "ConnectToDocs": "Collega a {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Copia chiave segreta",
-  "CreateTenant": "Crea tenant",
   "DaysCount": "{{count}} giorni",
   "DaysLeft": "Giorni rimanenti",
   "DemoCode": "Codice demo",

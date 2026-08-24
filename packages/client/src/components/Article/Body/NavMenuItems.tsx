@@ -94,7 +94,7 @@ const NavMenuItems = ({
   const groups = React.useMemo<NavMenuGroup[]>(() => {
     const overviewItem: NavMenuItem = {
       id: "dashboard",
-      label: t("Common:Overview"),
+      label: t("Common:Home"),
       icon: CatalogOverviewReactSvgUrl,
       onClick: go("/dashboard"),
     };

@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>تم الاتصال بـ {{organizationName}} {{editorsName}}.</1> يستخدم {{organizationName}} {{editorsName}} الخاص بك الآن المحررات التي يوفرها {{service}}.",
   "ConnectToDocs": "الاتصال بـ {{organizationName}} {{editorsName}}",
   "CopySecretKey": "نسخ المفتاح السري",
-  "CreateTenant": "إنشاء مستأجر",
   "DaysCount": "{{count}} يوم",
   "DaysLeft": "الأيام المتبقية",
   "DemoCode": "كود العرض التوضيحي",

@@ -106,7 +106,6 @@ import type {
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import { createPluginApi } from "../helpers/plugins/react/api";
 import { toCurrentUser } from "../helpers/plugins/react/utils";
-import { rewritePluginImports } from "../helpers/plugins/react/shim";
 import {
   PluginFileType,
   PluginScopes,
@@ -1940,6 +1939,11 @@ class PluginStore {
       if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${plugin.url}`);
 
       const rawCode = await res.text();
+
+      const { rewritePluginImports } = await import(
+        "../helpers/plugins/react/shim"
+      );
+
       const code = rewritePluginImports(rawCode);
       const blob = new Blob([code], { type: "application/javascript" });
       const blobUrl = URL.createObjectURL(blob);

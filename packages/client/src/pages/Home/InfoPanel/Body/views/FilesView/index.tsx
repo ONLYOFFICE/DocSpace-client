@@ -521,4 +521,3 @@ export default inject<TStore, ExternalFilesViewProps, InjectedFilesViewProps>(
     };
   },
 )(observer(FilesView as FC<ExternalFilesViewProps>));
-

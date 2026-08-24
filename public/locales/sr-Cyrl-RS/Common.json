@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "Активирати АИ функције за почетак?",
   "ActivateAISearch": "Активирајте АИ претрагу",
   "ActivateAISearchDescription": "Омогућите АИ претрагу да бисте у АИ ћаскањима користили Веб претрагу и индексирање веба.",
-  "ActivateAISearchToGetStarted": "Активирајте АИ претрагу да бисте почели",
+  "ActivateAISearchToGetStarted": "Активирати АИ претрагу за почетак?",
   "ActivateLicense": "Активирај лиценцу",
   "ActivateLicenseActivated": "Лиценца активирана",
   "ActivatePaidTariffExpiration": "Ваша претплата истиче {{date}}.",

@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "Vai aktivizēt MI funkcijas, lai sāktu?",
   "ActivateAISearch": "Aktivizēt MI meklēšanu",
   "ActivateAISearchDescription": "Iespējojiet MI meklēšanu, lai MI tērzēšanā izmantotu tīmekļa meklēšanu un tīmekļa pārmeklēšanu.",
-  "ActivateAISearchToGetStarted": "Aktivizējiet MI meklēšanu, lai sāktu",
+  "ActivateAISearchToGetStarted": "Vai aktivizēt MI meklēšanu, lai sāktu?",
   "ActivateLicense": "Aktivizēt licenci",
   "ActivateLicenseActivated": "Licence ir aktivizēta",
   "ActivatePaidTariffExpiration": "Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}.",

@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@use "@docspace/ui-kit/styles/variables/colors";
 @use "@docspace/ui-kit/styles/mixins";
 
 .banner {
@@ -41,13 +40,18 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  // Top-anchored so content doesn't drift while the height animates; the
+  // button centers itself via align-self.
+  align-items: flex-start;
   gap: 16px;
   width: 100%;
   max-width: 660px;
   padding: 16px;
   border-radius: 6px;
   background: var(--background-cards-color);
+  overflow: hidden;
+  // Height is animated by the component (FLIP) when a content swap changes it.
+  transition: height 0.3s ease;
 
   @include mixins.mobile {
     flex-direction: column;
@@ -91,23 +95,8 @@
   cursor: pointer;
 }
 
-// 1fr <-> 0fr animates the auto height; the inner element clips the content.
 .featuresWrap {
-  display: grid;
-  grid-template-rows: 1fr;
-  transition:
-    grid-template-rows 0.3s ease,
-    opacity 0.25s ease;
-}
-
-.featuresCollapsed {
-  grid-template-rows: 0fr;
-  opacity: 0;
-}
-
-.featuresInner {
-  min-height: 0;
-  overflow: hidden;
+  transition: opacity 0.2s ease;
 }
 
 .features {
@@ -127,10 +116,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .featuresWrap {
-    transition: none;
-  }
-
+  .banner,
+  .featuresWrap,
   .swapFade {
     transition: none;
   }
@@ -153,4 +140,9 @@
 
 .button {
   flex-shrink: 0;
+  align-self: center;
+
+  @include mixins.mobile {
+    align-self: stretch;
+  }
 }

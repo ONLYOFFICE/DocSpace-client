@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "Aktivoidaanko AI-ominaisuudet aloittamista varten?",
   "ActivateAISearch": "Aktivoi AI-haku",
   "ActivateAISearchDescription": "Ota AI-haku käyttöön, jotta voit käyttää verkkohakua ja verkkosivujen indeksointia AI-chateissa.",
-  "ActivateAISearchToGetStarted": "Aktivoi AI-haku aloittaaksesi",
+  "ActivateAISearchToGetStarted": "Aktivoidaanko AI-haku aloittamista varten?",
   "ActivateLicense": "Aktivoi lisenssi",
   "ActivateLicenseActivated": "Lisenssi aktivoitu",
   "ActivatePaidTariffExpiration": "Tilauksesi vanhenee {{date}}.",

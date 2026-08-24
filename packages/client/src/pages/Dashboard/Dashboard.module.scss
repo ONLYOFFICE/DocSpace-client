@@ -99,6 +99,12 @@
   }
 }
 
+@include mixins.tablet {
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-tablet-width, 243px);
+  }
+}
+
 .dashboard {
   position: relative;
   flex: 1 1 auto;
@@ -497,7 +503,7 @@
   svg {
     width: 16px;
     height: 16px;
-    
+
     path {
       :global(.light) & {
         fill: $light-gray-dark;
@@ -563,7 +569,9 @@
   color: inherit;
   cursor: pointer;
   font-family: inherit;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 
   :global(.light) & {
     background-color: $white;

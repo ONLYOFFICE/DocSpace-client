@@ -353,7 +353,7 @@ const Dashboard = (props: DashboardProps) => {
                     }}
                   />
                 </Text>
-                <Text as="p" className={styles.createSubtitle}>
+                <Text as="p" className={styles.sectionSubtitle}>
                   {t("Common:NewFilesDefaultPlace", {
                     sectionName: t("Common:Files"),
                   })}

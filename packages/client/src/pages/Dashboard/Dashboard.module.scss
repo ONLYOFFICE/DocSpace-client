@@ -333,21 +333,6 @@
 }
 
 .sectionSubtitle {
-  font-size: 13px;
-  line-height: 20px;
-
-  :global(.light) & {
-    color: $gray-text;
-  }
-
-  :global(.dark) & {
-    color: $gray-dark-text;
-  }
-}
-
-// Larger than `.sectionSubtitle`: this one sits under the page's opening
-// heading rather than inside a card, so it reads at body size.
-.createSubtitle {
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;

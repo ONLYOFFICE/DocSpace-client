@@ -67,7 +67,7 @@ const SettingsPluginDialog = ({
 }: SettingsPluginDialogProps) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 
-  const { saveButton, settings, onLoad, settingsComponent } = pluginSettings
+  const { saveButton, settings, onLoad, component } = pluginSettings
     ? pluginSettings
     : {};
 
@@ -77,7 +77,7 @@ const SettingsPluginDialog = ({
 
   const [modalRequestRunning, setModalRequestRunning] = useState(false);
 
-  const effectiveSaveButtonProps = settingsComponent
+  const effectiveSaveButtonProps = component
     ? (reactSettingsSaveButtonState ?? saveButtonProps)
     : saveButtonProps;
 
@@ -126,10 +126,10 @@ const SettingsPluginDialog = ({
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div style={{ marginTop: "16px" }}>
-          {settingsComponent ? (
+          {component ? (
             <PluginWrappedComponent
               pluginName={plugin.name}
-              component={settingsComponent}
+              component={component}
             />
           ) : customSettingsProps ? (
             <WrappedComponent

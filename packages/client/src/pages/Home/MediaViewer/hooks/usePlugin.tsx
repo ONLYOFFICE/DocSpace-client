@@ -40,6 +40,7 @@ import {
 } from "SRC_DIR/helpers/plugins/enums";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 import PluginStore from "SRC_DIR/store/PluginStore";
 
 import {
@@ -47,6 +48,7 @@ import {
   PlaylistType,
 } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import { IContextMenuItemClient } from "SRC_DIR/helpers/plugins/types";
+import type { TCurrentFile } from "@onlyoffice/docspace-plugin-sdk/react";
 import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
 interface UsePluginProps {
@@ -88,7 +90,10 @@ export const usePlugin = ({
 
   const onLoad = useCallback(
     async (fileId: NumberOrString) => {
-      if (pluginMediaViewerProps?.onLoad) {
+      if (
+        pluginMediaViewerProps?.onLoad &&
+        !pluginMediaViewerProps.component
+      ) {
         const message = await pluginMediaViewerProps.onLoad({
           fileId: fileId,
         });
@@ -122,10 +127,38 @@ export const usePlugin = ({
     currentMediaFileId,
   ]);
 
-  // Get plugin viewer content component
+  // The file on screen in the shape `useCurrentFile` returns, so a component
+  // reads it directly instead of being handed the id through `onLoad`.
+  const currentFile = useMemo<TCurrentFile | null>(() => {
+    const item = playlist.find((p) => p.fileId === currentMediaFileId);
+    if (!item) return null;
+
+    return {
+      id: item.fileId,
+      title: item.title,
+      fileExst: item.fileExst || undefined,
+    };
+  }, [playlist, currentMediaFileId]);
+
   const pluginContent = useMemo(() => {
     if (!pluginMediaViewerVisible || !pluginMediaViewerProps?.pluginName)
       return null;
+
+    if (pluginMediaViewerProps.component) {
+      return (
+        <PluginWrappedComponent
+          pluginName={pluginMediaViewerProps.pluginName}
+          component={pluginMediaViewerProps.component}
+          currentFile={currentFile}
+        />
+      );
+    }
+
+    // `content` is optional since the React SDK: a plugin supplies either it or
+    // `component`, so there is nothing to render once both are absent.
+    const content = pluginMediaViewerProps.content;
+
+    if (!content) return null;
 
     return (
       <WrappedComponent
@@ -133,12 +166,12 @@ export const usePlugin = ({
         component={
           {
             component: PluginComponents.box,
-            props: pluginMediaViewerProps.content,
+            props: content,
           } satisfies BoxGroup
         }
       />
     );
-  }, [pluginMediaViewerVisible, pluginMediaViewerProps]);
+  }, [pluginMediaViewerVisible, pluginMediaViewerProps, currentFile]);
 
   // Get plugin context menu items
   const pluginContextMenuItems = useMemo(() => {

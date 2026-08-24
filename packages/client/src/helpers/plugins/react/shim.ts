@@ -160,11 +160,6 @@ const SPECIFIER_MAP: Record<string, string> = {
   "@docspace/ui-kit": PLUGIN_UI_KIT_SHIM_URL,
 };
 
-// The kit shim re-exports the kit in full, so subpaths resolve to it as well.
-const PREFIX_MAP: [string, string][] = [
-  ["@docspace/ui-kit/", PLUGIN_UI_KIT_SHIM_URL],
-];
-
 // What the browser resolves by itself; everything else is a package name.
 const isResolvable = (specifier: string) =>
   specifier.startsWith(".") ||
@@ -183,9 +178,7 @@ const STATIC_IMPORT_RE =
 export function rewritePluginImports(code: string): string {
   const unresolved = new Set<string>();
 
-  const resolve = (specifier: string) =>
-    SPECIFIER_MAP[specifier] ??
-    PREFIX_MAP.find(([prefix]) => specifier.startsWith(prefix))?.[1];
+  const resolve = (specifier: string) => SPECIFIER_MAP[specifier];
 
   let rewritten = code.replace(
     STATIC_IMPORT_RE,

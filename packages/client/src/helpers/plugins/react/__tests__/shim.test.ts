@@ -84,15 +84,15 @@ describe("rewritePluginImports", () => {
     expect(rewrittenSpecifiers(code)).toHaveLength(1);
   });
 
-  it("sends the barrel and a subpath of the kit to the same module", () => {
-    const [barrel, subpath] = rewrittenSpecifiers(
-      [
-        `import { Text } from "@docspace/ui-kit";`,
+  // The kit is published with a single entry point, so a subpath is a mistake
+  // the plugin has to hear about by name — silently sending it to the barrel
+  // would break later, in the browser, on the first export the barrel lacks.
+  it("refuses a subpath of the kit", () => {
+    expect(() =>
+      rewritePluginImports(
         `import { Button } from "@docspace/ui-kit/components/button";`,
-      ].join("\n"),
-    );
-
-    expect(barrel).toBe(subpath);
+      ),
+    ).toThrow(/"@docspace\/ui-kit\/components\/button"/);
   });
 
   it("leaves a specifier the browser can resolve on its own", () => {

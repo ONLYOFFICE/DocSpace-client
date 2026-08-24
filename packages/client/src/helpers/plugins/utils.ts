@@ -295,6 +295,8 @@ export const messageActions = ({
 
       case PluginActions.openInfoPanel:
         setPluginDialogVisible?.(false);
+        setPluginDialogProps?.(null);
+        setReactPluginModalState?.(null);
         setSettingsPluginDialogVisible?.(false);
         setPluginSelectorVisible?.(false);
         showInfoPanel();

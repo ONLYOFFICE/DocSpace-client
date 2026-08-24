@@ -85,6 +85,12 @@ const PluginDialog = ({
 
   const [modalRequestRunning, setModalRequestRunning] = React.useState(false);
 
+  const activePluginName = reactPluginModalState?.pluginName ?? pluginName;
+
+  const activeEventListeners = reactPluginModalState
+    ? reactPluginModalState.options?.eventListeners
+    : eventListeners;
+
   const onCloseAction = async () => {
     if (modalRequestRunning) return;
     const message = await onClose?.();
@@ -92,16 +98,26 @@ const PluginDialog = ({
     dispatchMessage({ message, pluginName });
   };
 
-  React.useEffect(() => {
-    if (!eventListeners) return;
+  const onReactCloseAction = async () => {
+    if (modalRequestRunning) return;
 
-    const handlers = eventListeners.map((e) => {
+    const message = await reactPluginModalState?.options?.onClose?.();
+
+    closeReactPluginModal();
+
+    dispatchMessage({ message, pluginName: activePluginName });
+  };
+
+  React.useEffect(() => {
+    if (!activeEventListeners) return;
+
+    const handlers = activeEventListeners.map((e) => {
       const onAction = async (event: Event) => {
         setModalRequestRunning(true);
         const message = await e.onAction(event);
         setModalRequestRunning(false);
 
-        dispatchMessage({ message, pluginName });
+        dispatchMessage({ message, pluginName: activePluginName });
       };
 
       window.addEventListener(e.name, onAction);
@@ -110,11 +126,11 @@ const PluginDialog = ({
     });
 
     return () => {
-      eventListeners.forEach((e, index) => {
+      activeEventListeners.forEach((e, index) => {
         window.removeEventListener(e.name, handlers[index]);
       });
     };
-  }, [eventListeners, pluginName, dispatchMessage]);
+  }, [activeEventListeners, activePluginName, dispatchMessage]);
 
   const onLoadAction = React.useCallback(async () => {
     if (onLoad) {
@@ -156,7 +172,7 @@ const PluginDialog = ({
     ) : (
       <ModalDialog
         visible
-        onClose={closeReactPluginModal}
+        onClose={onReactCloseAction}
         displayType={reactDisplayType}
         autoMaxWidth={options?.autoMaxWidth}
         autoMaxHeight={options?.autoMaxHeight}

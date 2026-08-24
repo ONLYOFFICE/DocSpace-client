@@ -69,7 +69,14 @@ async function Page(props: {
 
   const cookieStore = await cookies();
 
-  const token = cookieStore.get(`x-signature-${user!.id}`)?.value;
+  // A dead session still reaches this page with its cookie present (the OAuth
+  // proxy branch checks only cookie presence), so getUser() may return nothing.
+  if (!user) {
+    logger.info("Consent page has no authenticated user");
+    return "";
+  }
+
+  const token = cookieStore.get(`x-signature-${user.id}`)?.value;
   let new_token = "";
 
   if (!token) {
@@ -84,8 +91,7 @@ async function Page(props: {
 
   const client = data?.client as IClientProps;
 
-  if (!client || (client && !("clientId" in client)) || !scopes || !user)
-    return "";
+  if (!client || (client && !("clientId" in client)) || !scopes) return "";
 
   const isRegisterContainerVisible =
     typeof settings === "string" ? undefined : settings?.enabledJoin;

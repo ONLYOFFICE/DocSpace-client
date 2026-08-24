@@ -37,6 +37,10 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { OAuth2ErrorKey } from "./utils/enums";
 
+// Caps the wait an authenticated visitor pays on /login before the redirect
+// to the portal root.
+const AUTH_CHECK_TIMEOUT = 1500;
+
 export async function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
@@ -107,9 +111,6 @@ export async function proxy(request: NextRequest) {
       );
     }
   } else {
-    const url = request.nextUrl.clone();
-    url.pathname = "/";
-
     // The client app appends authError=true after a request came back 401 and
     // the logout that follows it could not clear the cookie — on a deleted
     // portal even POST /authentication/logout answers 404. Sending such a
@@ -124,10 +125,10 @@ export async function proxy(request: NextRequest) {
     // here. Only the API can tell whether the session behind the cookie is
     // still alive, so ask it before leaving the login page.
     if (isAuth && !hasAuthError && host && proto) {
-      // Same base-URL strategy as the SSR data layer (getAPIUrl): the
-      // internal API_HOST when the deployment provides one, the public
-      // origin otherwise. The forwarded headers keep tenant resolution and
-      // the tenant's IP-restriction check working on both paths.
+      // The internal API_HOST when the deployment provides one (every real
+      // installer sets it), the public origin otherwise — effectively dev
+      // only. The forwarded headers keep tenant resolution and the tenant's
+      // IP-restriction check working on both paths.
       const apiBase = process.env.API_HOST?.trim() || redirectUrl;
       const forwardedFor = request.headers.get("x-forwarded-for");
 
@@ -140,7 +141,7 @@ export async function proxy(request: NextRequest) {
             ...(forwardedFor ? { "x-forwarded-for": forwardedFor } : {}),
           },
           cache: "no-store",
-          signal: AbortSignal.timeout(1500),
+          signal: AbortSignal.timeout(AUTH_CHECK_TIMEOUT),
         });
 
         if (authRes.ok) {
@@ -149,15 +150,19 @@ export async function proxy(request: NextRequest) {
           }
 
           // The session is confirmed dead. No anonymous endpoint ever clears
-          // the cookie server-side, so drop it here — otherwise the browser
-          // carries it forever and every visit repeats this round-trip.
+          // the cookie server-side, so drop it here. This clears the
+          // host-only entry — the common case; Domain-scoped and Partitioned
+          // variants (see the server's CookiesManager.ClearCookies) survive
+          // until a real logout and repeat this round-trip on their rare
+          // deployments.
           const response = NextResponse.next();
           response.cookies.delete("asc_auth_key");
           return response;
         }
 
-        // Transient state (403 while a restore is running, 5xx): keep the
-        // cookie and show the login form rather than guessing.
+        // No answer about the session (404 on a deleted portal, 403 while a
+        // restore is running, 5xx): keep the cookie and show the login form
+        // rather than guessing.
       } catch {
         // Unreachable or slow API (timeout, DNS, refused): keep the cookie
         // and show the login form.

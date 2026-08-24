@@ -36,7 +36,9 @@
 import type { Page } from "@playwright/test";
 
 import {
+  checkIsAuthenticatedErrorHandler,
   checkIsAuthenticatedHandler,
+  checkIsAuthenticatedNetworkErrorHandler,
   settingsHandler,
   TypeSettings,
 } from "@docspace/shared/__mocks__/handlers";
@@ -173,4 +175,86 @@ test("a cookie whose session the API rejects stays on the login form without the
 
   const cookies = await page.context().cookies();
   expect(cookies.find((cookie) => cookie.name === AUTH_COOKIE)).toBeUndefined();
+});
+
+// An API error proves nothing about the session, so the proxy must not bounce
+// to the portal root (that would restart the loop) and must not drop the
+// cookie (a healthy retry may still accept it). These two branches are the
+// ones the loop's absence depends on.
+test("an API error keeps the visitor on the login form with the cookie intact", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(checkIsAuthenticatedErrorHandler(port));
+
+  await useProxyHeaders(page, port);
+  await setStaleAuthCookie(page);
+
+  await page.goto(`${baseUrl}/login`);
+
+  expect(page.url()).toBe(`${baseUrl}/login`);
+
+  const cookies = await page.context().cookies();
+  expect(cookies.find((cookie) => cookie.name === AUTH_COOKIE)).toBeDefined();
+});
+
+test("an unreachable API keeps the visitor on the login form with the cookie intact", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(checkIsAuthenticatedNetworkErrorHandler(port));
+
+  await useProxyHeaders(page, port);
+  await setStaleAuthCookie(page);
+
+  await page.goto(`${baseUrl}/login`);
+
+  expect(page.url()).toBe(`${baseUrl}/login`);
+
+  const cookies = await page.context().cookies();
+  expect(cookies.find((cookie) => cookie.name === AUTH_COOKIE)).toBeDefined();
+});
+
+// Same deleted portal and stale cookie, but without the client's authError
+// hint: /authentication answers 404 there, so the proxy must fall through to
+// the login form and let /settings route the visitor to the wrong-portal-name
+// site instead of bouncing them to the portal root.
+test("a deleted portal without the authError hint still avoids the portal root", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.PortalNotFound),
+    checkIsAuthenticatedErrorHandler(port, 404),
+  );
+
+  await useProxyHeaders(page, port);
+  await stubWrongPortalNameSite(page);
+
+  await setStaleAuthCookie(page);
+
+  const documentUrls: string[] = [];
+  page.on("request", (request) => {
+    if (request.resourceType() === "document") documentUrls.push(request.url());
+  });
+
+  await page.goto(`${baseUrl}/login`);
+
+  await page.waitForURL(`${WRONG_PORTAL_NAME_URL}*`);
+
+  expect(documentUrls).not.toContain(`${baseUrl}/`);
+
+  // 404 proves nothing about the session, so the cookie must survive too.
+  const cookies = await page.context().cookies();
+  expect(cookies.find((cookie) => cookie.name === AUTH_COOKIE)).toBeDefined();
+
+  await expect(
+    page.getByRole("heading", { name: "Wrong portal name" }),
+  ).toBeVisible();
 });

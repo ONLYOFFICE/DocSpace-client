@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { http } from "msw";
+import { http, HttpResponse } from "msw";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "authentication";
@@ -59,3 +59,17 @@ export const checkIsAuthenticatedHandler = (port: string, alive = true) => {
     return new Response(JSON.stringify(isAuthenticatedEnvelope(alive)));
   });
 };
+
+// A liveness check that fails without an answer: 404 on a deleted portal,
+// 403 while a restore is running, 5xx from a struggling one.
+export const checkIsAuthenticatedErrorHandler = (port: string, status = 502) =>
+  http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/${PATH}`,
+    () => new Response(null, { status }),
+  );
+
+// A liveness check that never reaches the API at all (DNS, refused, dropped).
+export const checkIsAuthenticatedNetworkErrorHandler = (port: string) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/${PATH}`, () =>
+    HttpResponse.error(),
+  );

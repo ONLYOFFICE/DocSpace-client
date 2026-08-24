@@ -136,4 +136,32 @@ describe("rewritePluginImports", () => {
 
     expect(rewritePluginImports(code)).toBe(code);
   });
+
+  it.each([
+    [`export const note = 'the icons come from "lucide-react"';`, "a string"],
+    [`const a = 1; // ported over from "zod"`, "a trailing comment"],
+    [`// re-exported from "lodash-es"\nexport const a = 1;`, "a comment line"],
+  ])("does not read a package name out of %s", (code) => {
+    expect(rewritePluginImports(code)).toBe(code);
+  });
+
+  it("rewrites a bundle whose text mentions a package it does not import", () => {
+    const code = [
+      `import { Text } from "@docspace/ui-kit";`,
+      `export const hint = 'not unlike "zod", but hand-written';`,
+    ].join("\n");
+
+    const rewritten = rewritePluginImports(code);
+
+    expect(rewrittenSpecifiers(code)).toHaveLength(1);
+    expect(rewritten).toContain(`'not unlike "zod", but hand-written'`);
+  });
+
+  it.each([
+    [`import"react";`, "a bare import"],
+    [`import x from"react";`, "a default import"],
+    [`export{a}from"react";`, "a re-export"],
+  ])("rewrites minified %s", (code) => {
+    expect(rewrittenSpecifiers(code)).toHaveLength(1);
+  });
 });

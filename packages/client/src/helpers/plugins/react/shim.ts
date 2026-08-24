@@ -171,6 +171,11 @@ const isResolvable = (specifier: string) =>
   specifier.startsWith("/") ||
   /^[a-z][a-z\d+.-]*:/i.test(specifier);
 
+// A whole import or export statement, anchored at a statement boundary: the bare
+// `from "x"` fragment also matched prose in a string or a comment.
+const STATIC_IMPORT_RE =
+  /(^|[;{}\n\r])(\s*)(import|export)\b([^;'"]*?\bfrom\s*|\s*)(["'])([^"']+)\5/g;
+
 /**
  * Points the plugin's imports at the host's copies. Throws on any other bare
  * specifier: it can never resolve, and `import()` would not say what or why.
@@ -182,13 +187,20 @@ export function rewritePluginImports(code: string): string {
     SPECIFIER_MAP[specifier] ??
     PREFIX_MAP.find(([prefix]) => specifier.startsWith(prefix))?.[1];
 
-  // `from "x"` covers import, export-from and re-export; `import "x"` has none.
   let rewritten = code.replace(
-    /\b(from|import)\s+["']([^"']+)["']/g,
-    (match, keyword: string, specifier: string) => {
+    STATIC_IMPORT_RE,
+    (
+      match,
+      before: string,
+      space: string,
+      keyword: string,
+      clause: string,
+      _quote: string,
+      specifier: string,
+    ) => {
       const shimUrl = resolve(specifier);
 
-      if (shimUrl) return `${keyword} "${shimUrl}"`;
+      if (shimUrl) return `${before}${space}${keyword}${clause}"${shimUrl}"`;
 
       if (!isResolvable(specifier)) unresolved.add(specifier);
 

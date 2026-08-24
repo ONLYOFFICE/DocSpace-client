@@ -204,7 +204,10 @@ class PluginStore {
 
   pluginMediaViewerProps: null | IMediaViewerClient = null;
 
-  reactSettingsSaveButtonState: ButtonGroup | null = null;
+  reactSettingsSaveButtonState: null | {
+    pluginName: string;
+    button: ButtonGroup;
+  } = null;
 
   reactPluginModalState: null | {
     pluginName: string;
@@ -306,8 +309,11 @@ class PluginStore {
     this.reactPluginModalState = value;
   };
 
-  setReactSettingsSaveButtonState = (state: ButtonGroup | null): void => {
-    this.reactSettingsSaveButtonState = state;
+  setReactSettingsSaveButtonState = (
+    pluginName: string,
+    button: ButtonGroup | null,
+  ): void => {
+    this.reactSettingsSaveButtonState = button ? { pluginName, button } : null;
   };
 
   setNeedPageReload = (value: boolean) => {
@@ -320,6 +326,7 @@ class PluginStore {
 
   setCurrentSettingsDialogPlugin = (value: null | { pluginName: string }) => {
     this.currentSettingsDialogPlugin = value;
+    this.reactSettingsSaveButtonState = null;
   };
 
   setSettingsPluginDialogVisible = (value: boolean) => {
@@ -1924,7 +1931,7 @@ class PluginStore {
           entry.setAdminPluginSettingsValue?.(settingsStr);
         },
         setSaveButton: (props: ButtonGroup) => {
-          this.setReactSettingsSaveButtonState(props);
+          this.setReactSettingsSaveButtonState(pluginName, props);
         },
       },
     };

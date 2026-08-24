@@ -77,8 +77,13 @@ const SettingsPluginDialog = ({
 
   const [modalRequestRunning, setModalRequestRunning] = useState(false);
 
+  const reactSaveButton =
+    reactSettingsSaveButtonState?.pluginName === plugin?.name
+      ? reactSettingsSaveButtonState.button
+      : null;
+
   const effectiveSaveButtonProps = component
-    ? (reactSettingsSaveButtonState ?? saveButtonProps)
+    ? (reactSaveButton ?? saveButtonProps)
     : saveButtonProps;
 
   const onLoadAction = useCallback(async () => {

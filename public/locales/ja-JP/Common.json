@@ -1313,6 +1313,7 @@
   "MakeForm": "PDFフォームを作成",
   "Manage": "管理",
   "ManageGroupRooms": "部屋グループの管理",
+  "ManageInstance": "インスタンスを管理",
   "ManageNotifications": "管理",
   "ManagerSearchBlockDescription": "検索、フィルター、並べ替えオプションを無効にすることができます。",
   "ManagerTypesDescription": "管理者アカウントの種類とその権限",

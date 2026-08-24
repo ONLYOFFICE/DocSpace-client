@@ -201,7 +201,7 @@ const DevToolTile = ({ tool }: { tool: DevTool }) => {
       </Text>
       <span className={styles.devToolLink}>
         {tool.linkTitle}
-        <ArrowIcon aria-hidden="true" className={styles.integrationArrow} />
+        <ArrowIcon aria-hidden="true" className={styles.devToolArrow} />
       </span>
     </>
   );
@@ -265,7 +265,10 @@ export const DevToolsCard = inject<TStore>(({ settingsStore, userStore }) => ({
     userStore.user,
     settingsStore.limitedAccessDevToolsForUsers,
   ),
-  canOpenDocsConnect: hasDocsConnectAccess(userStore.user),
+  canOpenDocsConnect: hasDocsConnectAccess(
+    userStore.user,
+    settingsStore.standalone,
+  ),
 }))(observer(DevToolsCardComponent));
 
 export default DevToolsCard;

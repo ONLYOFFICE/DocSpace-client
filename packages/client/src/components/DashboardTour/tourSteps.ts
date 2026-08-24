@@ -93,10 +93,10 @@ export type TourStepFlags = {
    */
   appIds: string[];
   /**
-   * Whether the integrations card is on the page. It renders unconditionally
-   * today, but it is a collapsible card whose anchor sits on a wrapper the tour
-   * reads from the DOM like every other — so a future condition on it costs a
-   * dropped step rather than a step pointing at nothing.
+   * Whether the integrations card is on the page. It is a Docs Connect surface,
+   * so a standalone portal does not have it — read from the DOM like every
+   * other anchor, which costs a dropped step rather than a step pointing at
+   * nothing.
    */
   hasIntegrations: boolean;
   /**

@@ -531,258 +531,6 @@
   }
 }
 
-// Integrations grid (inside CollapsibleCard)
-.integrationsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-
-  @media (max-width: 1100px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.integrationTile {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-  padding: 16px;
-  border-radius: 12px;
-  text-align: start;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  font-family: inherit;
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
-
-  :global(.light) & {
-    background-color: $white;
-    border: 1px solid $gray-light-mid;
-
-    &:hover {
-      border-color: var(--accent-main);
-    }
-  }
-
-  :global(.dark) & {
-    background-color: $dark-gray-light;
-    border: 1px solid $light-dark-gray-hover;
-
-    &:hover {
-      border-color: var(--accent-main);
-    }
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--accent-main);
-    outline-offset: -2px;
-  }
-
-  &[data-variant="no-icon"] {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    text-align: center;
-
-    :global(.light) & {
-      background-color: $gray-light;
-    }
-
-    :global(.dark) & {
-      background-color: $gray-dark-mid;
-    }
-
-    .integrationName {
-      flex: 0 0 auto;
-    }
-  }
-}
-
-.integrationIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  &[data-fallback] {
-    :global(.light) & {
-      background-color: $gray-light-mid;
-    }
-
-    :global(.dark) & {
-      background-color: $gray-dark-mid;
-    }
-
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-  }
-}
-
-.integrationName {
-  flex: 1;
-  min-width: 0;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
-  margin: 0;
-}
-
-.integrationLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 15px;
-  color: var(--accent-main);
-  text-decoration: underline;
-}
-
-.integrationArrow {
-  width: 8px;
-  height: 9px;
-  flex-shrink: 0;
-
-  path {
-    fill: var(--accent-main);
-  }
-}
-
-.integrationDialog {
-  --modal-dialog-large-width: 740px;
-}
-
-.integrationDialogBody {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.integrationDialogSubtitle {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 22px;
-  margin: 0;
-}
-
-.integrationDialogSteps {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 0;
-  padding: 16px;
-  border-radius: 8px;
-  list-style: none;
-
-  :global(.light) & {
-    background-color: $gray-light;
-  }
-
-  :global(.dark) & {
-    background-color: $gray-dark-mid;
-  }
-}
-
-.integrationDialogStep {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-}
-
-.integrationDialogStepLabel {
-  flex-shrink: 0;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 20px;
-}
-
-.integrationDialogStepText {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 20px;
-
-  :global(.light) & {
-    color: $light-gray-dark;
-  }
-
-  :global(.dark) & {
-    color: $gray-dark;
-  }
-}
-
-.integrationDialogFooter {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-}
-
-.integrationDialogFooterButtons {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
-
-.integrationDialogLearnMore {
-  align-self: center;
-  margin-inline-start: 4px;
-}
-
-// Hover target for the "no permission" tooltip: a disabled button gets no
-// mouse events of its own, so the wrapper has to be the anchor.
-.integrationDialogCreateAnchor {
-  display: inline-flex;
-  min-width: 0;
-}
-
-@include mixins.mobile {
-  .integrationDialogFooter {
-    flex-direction: column-reverse;
-    align-items: stretch;
-    gap: 16px;
-  }
-
-  .integrationDialogFooterButtons > * {
-    flex: 1 1 0;
-    min-width: 0;
-  }
-
-  .integrationDialogCreateAnchor > * {
-    width: 100%;
-  }
-
-  .integrationDialogLearnMore {
-    align-self: flex-start;
-    margin-inline-start: 0;
-  }
-}
-
 .devToolsGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -871,6 +619,18 @@
   }
 }
 
+// Trailing arrow inside `.devToolLink`, matching the one on the integration
+// tiles (see components/IntegrationsCard).
+.devToolArrow {
+  width: 8px;
+  height: 9px;
+  flex-shrink: 0;
+
+  path {
+    fill: var(--accent-main);
+  }
+}
+
 .devToolLink {
   display: inline-flex;
   align-items: center;
@@ -884,9 +644,8 @@
   padding-top: 12px;
 }
 
-// Two-line tooltip body — bold reason, then what to do about it. Shared by the
-// guest create/upload restriction and the disabled "Create instance" button in
-// the integration dialog.
+// Two-line tooltip body — bold reason, then what to do about it. Used by the
+// guest create/upload restriction tooltip on the Overview.
 .restrictionTooltip {
   display: flex;
   flex-direction: column;

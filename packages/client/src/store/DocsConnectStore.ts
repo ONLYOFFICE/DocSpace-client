@@ -50,6 +50,7 @@ import {
   startDocsConnectReport,
   getDocsConnectReportStatus,
   getDocsConnectConnection,
+  hasDocsConnectTenant,
 } from "@docspace/shared/api/docs-connect";
 import type { TDocsConnectConnection } from "@docspace/shared/api/docs-connect";
 import { saveDeposite } from "@docspace/shared/api/portal";
@@ -89,6 +90,16 @@ class DocsConnectStore {
   currentQuotaStore: Nullable<CurrentQuotasStore> = null;
 
   info: Nullable<TDocsConnectInfo> = null;
+
+  /**
+   * Whether this portal has an instance, for callers outside this page (the
+   * integrations card on the Overview) that must not pay for the full `info`
+   * request. `null` until asked — see {@link checkInstance}.
+   */
+  hasInstance: Nullable<boolean> = null;
+
+  /** In-flight {@link checkInstance} request, shared by concurrent callers. */
+  instanceCheck: Nullable<Promise<boolean>> = null;
 
   isLoading: boolean = true;
 
@@ -130,6 +141,7 @@ class DocsConnectStore {
     this.documentBuilderReportStore = documentBuilderReportStore;
     makeAutoObservable(this, {
       statisticsRefreshController: false,
+      instanceCheck: false,
     });
   }
 
@@ -154,6 +166,9 @@ class DocsConnectStore {
       const info = await getDocsConnectInfo();
       runInAction(() => {
         this.info = info;
+        // The page's own request answers the question too, so a card rendered
+        // next to it never has to ask again.
+        this.hasInstance = info != null;
       });
     } catch (error) {
       toastr.error(error as Error);
@@ -163,6 +178,26 @@ class DocsConnectStore {
     } finally {
       if (initialLoad) this.setIsLoading(false);
     }
+  };
+
+  /**
+   * Resolves `hasInstance` once per session. Concurrent callers share the same
+   * request, and a resolved answer is reused — the set of portals that gain an
+   * instance while the Overview is open is served by `fetchInfo` on the Docs
+   * Connect page itself.
+   */
+  checkInstance = async () => {
+    if (this.hasInstance != null) return this.hasInstance;
+    if (!this.instanceCheck) {
+      this.instanceCheck = hasDocsConnectTenant().finally(() => {
+        this.instanceCheck = null;
+      });
+    }
+    const hasInstance = await this.instanceCheck;
+    runInAction(() => {
+      this.hasInstance = hasInstance;
+    });
+    return hasInstance;
   };
 
   refreshStatistics = async () => {
@@ -246,6 +281,9 @@ class DocsConnectStore {
 
   startTrial = async () => {
     await startDocsConnectTrial();
+    runInAction(() => {
+      this.hasInstance = true;
+    });
     this.refreshPortalState();
   };
 

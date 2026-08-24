@@ -1313,6 +1313,7 @@
   "MakeForm": "Сохранить как PDF-форму",
   "Manage": "Управление",
   "ManageGroupRooms": "Управлять группой комнат",
+  "ManageInstance": "Управлять экземпляром",
   "ManageNotifications": "Управление",
   "ManagerSearchBlockDescription": "Вы можете отключить функции поиска, фильтрации и сортировки.",
   "ManagerTypesDescription": "Типы учетных записей администратора и их права доступа",

@@ -1313,6 +1313,7 @@
   "MakeForm": "PDF 양식으로 저장",
   "Manage": "관리",
   "ManageGroupRooms": "공간 그룹 관리",
+  "ManageInstance": "인스턴스 관리",
   "ManageNotifications": "관리",
   "ManagerSearchBlockDescription": "검색, 필터, 정렬 옵션을 비활성화할 수 있습니다.",
   "ManagerTypesDescription": "주소 관리자 계정 유형 및 특권",

@@ -370,7 +370,7 @@ const Dashboard = (props: DashboardProps) => {
                         components={{
                           1: (
                             <Link
-                              type={LinkType.action}
+                              type={LinkType.page}
                               color="accent"
                               isHovered
                               className={styles.createSubtitleLink}

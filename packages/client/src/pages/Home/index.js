@@ -70,7 +70,7 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 import SectionTours from "SRC_DIR/components/Tour/SectionTours";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
-import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
+import { isPluginSectionPath } from "SRC_DIR/helpers/plugins/navigation";
 
 import {
   SectionFilterContent,
@@ -267,6 +267,8 @@ const PureHome = observer((props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
+  const isPluginSection = isPluginSectionPath(location.pathname);
+
   const view = getContactsView(location);
   if (allowInvitingGuests === false && view === "guests") checkGuests();
 
@@ -426,13 +428,14 @@ const PureHome = observer((props) => {
   });
 
   const getContextModel = useCallback(() => {
-    if (isFrame || isProfile) return null;
+    if (isFrame || isProfile || isPluginSection) return null;
 
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
   }, [
     isFrame,
     isProfile,
+    isPluginSection,
     isContactsPage,
     getContactsModel,
     getFolderModel,
@@ -634,8 +637,6 @@ const PureHome = observer((props) => {
 
   const isErrorAvailable =
     isErrorRoomNotAvailable || isErrorAIAgentNotAvailable;
-
-  const isPluginSection = isPluginPage();
 
   return (
     <>

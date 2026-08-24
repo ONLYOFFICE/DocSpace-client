@@ -43,7 +43,7 @@ import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url"
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
-import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
 // import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 // import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 // import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";

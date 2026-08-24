@@ -360,7 +360,12 @@
   line-height: 22px;
 }
 
+// The create tiles fill the whole content width here instead of stopping at the
+// ui-kit tile cap (184px) — the dashboard has a fixed 1180px content column, so
+// capped tiles left a gap at the end of the row. Height is unchanged.
 .quickActions {
+  --quick-actions-tile-max-width: none;
+
   justify-content: flex-start;
 }
 

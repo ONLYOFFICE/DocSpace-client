@@ -1342,7 +1342,7 @@
   "MessageExported": "Message exported to file: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Active until {{date}}",
   "MigrateAgree": "I understand and agree to switch my billing to the {{organizationName}} wallet",
-  "MigrateAutoRenews": "Then {{price}}/mo auto-renews from your wallet — your card is no longer charged for the plan.",
+  "MigrateAutoRenewsBalanceFirst": "Then {{price}}/mo auto-renews using your Wallet balance first. If the balance is insufficient, the remaining amount will be charged to your default payment method.",
   "MigrateBannerSubtitle": "Here's what happens when you confirm",
   "MigrateBannerTitle": "Tariff charges are moving from Stripe to your wallet.",
   "MigrateCurrentTariff": "Current tariff",

@@ -1342,7 +1342,6 @@
   "MessageExported": "Message exporté vers le fichier : <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Actif jusqu'au {{date}}",
   "MigrateAgree": "Je comprends et j'accepte de transférer ma facturation vers le Wallet de {{organizationName}}",
-  "MigrateAutoRenews": "Ensuite, {{price}}/mois sont renouvelés automatiquement depuis votre Wallet — votre carte n'est plus débitée pour le plan.",
   "MigrateBannerSubtitle": "Voici ce qui se passe lorsque vous confirmez",
   "MigrateBannerTitle": "Les frais de tarif passent de Stripe à votre Wallet.",
   "MigrateCurrentTariff": "Tarif actuel",

@@ -1342,7 +1342,6 @@
   "MessageExported": "Sporočilo izvoženo v datoteko: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Veljavno do {{date}}",
   "MigrateAgree": "Razumem in se strinjam, da preklopim svoj obračun na denarnico {{organizationName}}",
-  "MigrateAutoRenews": "Nato se {{price}}/mes samodejno obnavlja iz vaše denarnice — vaša kartica za paket ni več bremenjena.",
   "MigrateBannerSubtitle": "Tukaj je, kaj se zgodi, ko potrdite",
   "MigrateBannerTitle": "Stroški tarife se prenašajo s storitve Stripe v vašo denarnico.",
   "MigrateCurrentTariff": "Trenutna tarifa",

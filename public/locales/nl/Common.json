@@ -1342,7 +1342,6 @@
   "MessageExported": "Bericht geëxporteerd naar bestand: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Actief tot {{date}}",
   "MigrateAgree": "Ik begrijp en ga ermee akkoord om mijn facturering over te zetten naar de {{organizationName}}-portemonnee",
-  "MigrateAutoRenews": "Daarna verlengt {{price}}/mnd automatisch vanuit uw portemonnee — uw kaart wordt niet langer voor het plan belast.",
   "MigrateBannerSubtitle": "Dit gebeurt er wanneer u bevestigt",
   "MigrateBannerTitle": "Tariefkosten worden verplaatst van Stripe naar uw portemonnee.",
   "MigrateCurrentTariff": "Huidig tarief",

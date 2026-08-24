@@ -1342,7 +1342,6 @@
   "MessageExported": "Порука успешно експортована у фајл: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Активно до {{date}}",
   "MigrateAgree": "Разумем и сагласан сам да пребацим своју наплату на новчаник организације {{organizationName}}",
-  "MigrateAutoRenews": "Затим се {{price}}/мес аутоматски обнавља из вашег новчаника — ваша картица се више не наплаћује за план.",
   "MigrateBannerSubtitle": "Ево шта се дешава када потврдите",
   "MigrateBannerTitle": "Наплате тарифе се пребацују са Stripe на ваш новчаник.",
   "MigrateCurrentTariff": "Тренутна тарифа",

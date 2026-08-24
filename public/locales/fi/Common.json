@@ -1342,7 +1342,6 @@
   "MessageExported": "Viesti viety tiedostoon: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Voimassa {{date}} asti",
   "MigrateAgree": "Ymmärrän ja hyväksyn laskutukseni siirtämisen {{organizationName}}-lompakkoon",
-  "MigrateAutoRenews": "Sen jälkeen {{price}}/mo uusitaan automaattisesti lompakostasi — korttiasi ei enää veloiteta suunnitelmasta.",
   "MigrateBannerSubtitle": "Näin tapahtuu, kun vahvistat",
   "MigrateBannerTitle": "Tariffiveloitukset siirtyvät Stripestä lompakkoosi.",
   "MigrateCurrentTariff": "Nykyinen tariffi",

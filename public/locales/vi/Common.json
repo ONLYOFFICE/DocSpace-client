@@ -1342,7 +1342,6 @@
   "MessageExported": "Thông báo được xuất ra file: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Có hiệu lực đến {{date}}",
   "MigrateAgree": "Tôi hiểu và đồng ý chuyển thanh toán của mình sang ví {{organizationName}}",
-  "MigrateAutoRenews": "Sau đó {{price}}/tháng tự động gia hạn từ ví của bạn — thẻ của bạn không còn bị tính phí cho gói này nữa.",
   "MigrateBannerSubtitle": "Đây là những gì sẽ xảy ra khi bạn xác nhận",
   "MigrateBannerTitle": "Các khoản phí gói cước đang được chuyển từ Stripe sang ví của bạn.",
   "MigrateCurrentTariff": "Gói cước hiện tại",

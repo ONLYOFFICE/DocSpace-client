@@ -1342,7 +1342,6 @@
   "MessageExported": "Հաղորդագրությունը արտահանվել է <1>{{fileName}}</1> ֆայլի մեջ",
   "MigrateActiveUntil": "Ակտիվ է մինչև {{date}}",
   "MigrateAgree": "Ես հասկանում և համաձայն եմ իմ հաշվարկն անցկացնել {{organizationName}} դրամապանակին",
-  "MigrateAutoRenews": "Այնուհետև {{price}}/ամիս ինքնաբերաբար կնորանա ձեր դրամապանակից — ձեր քարտն այլևս չի գանձվում պլանի համար։",
   "MigrateBannerSubtitle": "Ահա թե ինչ կլինի, երբ հաստատեք",
   "MigrateBannerTitle": "Սակագնի վճարումները տեղափոխվում են Stripe-ից ձեր դրամապանակ։",
   "MigrateCurrentTariff": "Ընթացիկ սակագին",

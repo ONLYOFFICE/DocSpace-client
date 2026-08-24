@@ -1342,7 +1342,6 @@
   "MessageExported": "メッセージが次のファイルにエクスポートされました: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "{{date}}まで有効",
   "MigrateAgree": "{{organizationName}}ウォレットへの請求の切り替えについて理解し、同意します",
-  "MigrateAutoRenews": "その後は{{price}}/月がウォレットから自動更新されます — プランの料金がカードに請求されることはなくなります。",
   "MigrateBannerSubtitle": "確認すると次のことが行われます",
   "MigrateBannerTitle": "料金の請求がStripeからウォレットに移行されます。",
   "MigrateCurrentTariff": "現在の料金プラン",

@@ -1342,7 +1342,6 @@
   "MessageExported": "Nachricht in Datei exportiert: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "Aktiv bis {{date}}",
   "MigrateAgree": "Ich verstehe und stimme zu, meine Abrechnung auf die Wallet von {{organizationName}} umzustellen",
-  "MigrateAutoRenews": "Anschließend erfolgt eine automatische Verlängerung von {{price}}/mo über Ihre Wallet — Ihre Karte wird für den Plan nicht mehr belastet.",
   "MigrateBannerSubtitle": "Das passiert, wenn Sie bestätigen",
   "MigrateBannerTitle": "Die Tarifgebühren werden von Stripe auf Ihre Wallet umgestellt.",
   "MigrateCurrentTariff": "Aktueller Tarif",

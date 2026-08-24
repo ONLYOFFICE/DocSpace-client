@@ -1342,7 +1342,6 @@
   "MessageExported": "Mesaj dosyaya aktarıldı: <1>{{fileName}}</1>",
   "MigrateActiveUntil": "{{date}} tarihine kadar aktif",
   "MigrateAgree": "Faturalandırmamı {{organizationName}} cüzdanına geçirmeyi anlıyor ve kabul ediyorum",
-  "MigrateAutoRenews": "Ardından {{price}}/ay cüzdanınızdan otomatik olarak yenilenir — kartınızdan artık plan için ücret alınmaz.",
   "MigrateBannerSubtitle": "Onayladığınızda neler olacağı aşağıda açıklanmıştır",
   "MigrateBannerTitle": "Tarife ücretleri Stripe'tan cüzdanınıza taşınıyor.",
   "MigrateCurrentTariff": "Mevcut tarife",

@@ -58,12 +58,7 @@ export type Option = {
 export type TWeekdaysLabel = Pick<Option, "key" | "label">;
 
 export type TViewAs =
-  | "tile"
-  | "table"
-  | "row"
-  | "settings"
-  | "profile"
-  | "tileDynamicHeight";
+  "tile" | "table" | "row" | "settings" | "profile" | "tileDynamicHeight";
 
 export type ProviderType = {
   provider_id: unknown;
@@ -218,6 +213,7 @@ export type TShareLinkAccessRightOption = {
   access: ShareAccessRights;
   description?: string;
   title?: string;
+  disabled?: boolean;
 };
 
 export type TShareToUserAccessRightOption = {

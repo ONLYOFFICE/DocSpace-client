@@ -146,21 +146,21 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   }, [item]);
 
   const accessOptions = useMemo(() => {
-    if (!item.availableShareRights) return [];
-
     if (isFolderOrRoom(item))
       return getRoomLinkAccessOptions(
         t,
+        accessLink,
         item.availableShareRights,
         isPrimaryLink,
       );
 
     return getLinkAccessRightOptions(
       t,
+      accessLink,
       item.availableShareRights,
       isPrimaryLink,
     );
-  }, [t, item, isPrimaryLink]);
+  }, [t, item, accessLink, isPrimaryLink]);
 
   const linkAccessOptions = useMemo(() => {
     const options = getAccessTypeOptions(t, false);
@@ -201,8 +201,8 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     }
 
     return (
-      accessOptions.find((option) => option.access === accessLink) ??
-      accessOptions[accessOptions.length - 1] ??
+      accessOptions.selectedOption ??
+      accessOptions.options[accessOptions.options.length - 1] ??
       {}
     );
   });
@@ -533,10 +533,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={`${styles.editLinkBodyContent} edit-link_body`}>
-            {accessOptions.length > 1 ? (
+            {accessOptions.options.length > 1 ? (
               <RoleLinkBlock
                 t={t}
-                accessOptions={accessOptions}
+                accessOptions={accessOptions.options}
                 selectedOption={selectedAccessOption}
                 currentDeviceType={currentDeviceType}
                 onSelect={handleSelectAccessOption}

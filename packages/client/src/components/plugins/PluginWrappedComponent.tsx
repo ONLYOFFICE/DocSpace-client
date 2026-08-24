@@ -63,14 +63,36 @@ const PluginWrappedComponent = ({
   currentUser,
   pluginStore,
 }: Props) => {
+  const fileId = currentFile?.id;
+  const fileTitle = currentFile?.title;
+  const fileExst = currentFile?.fileExst;
+  const isFolder = currentFile?.isFolder;
+  const isRoom = currentFile?.isRoom;
+  const roomType = currentFile?.roomType;
+
+  const stableCurrentFile = useMemo<TCurrentFile | null>(
+    () =>
+      fileId === undefined
+        ? null
+        : {
+            id: fileId,
+            title: fileTitle ?? "",
+            fileExst,
+            isFolder,
+            isRoom,
+            roomType,
+          },
+    [fileId, fileTitle, fileExst, isFolder, isRoom, roomType],
+  );
+
   const runtime: PluginRuntime = useMemo(
     () =>
       pluginStore!.buildReactPluginRuntime(
         pluginName,
-        currentFile,
+        stableCurrentFile,
         currentUser ?? null,
       ),
-    [pluginName, currentFile, currentUser, pluginStore],
+    [pluginName, stableCurrentFile, currentUser, pluginStore],
   );
 
   // withPluginRuntime wraps the component with LocalRuntimeContext.Provider
@@ -94,4 +116,3 @@ export default inject(({ userStore, pluginStore }: TStore) => ({
   currentUser: userStore.user,
   pluginStore,
 }))(observer(PluginWrappedComponent));
-

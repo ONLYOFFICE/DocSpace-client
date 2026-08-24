@@ -173,6 +173,9 @@ describe("plugin api client", () => {
       ["//example.com/collect", "a protocol-relative URL"],
       ["/http://example.com/collect", "a protocol behind a slash"],
       ["/files/../../secret", "a traversal"],
+      ["/files/%2e%2e/%2e%2e/secret", "a percent-encoded traversal"],
+      ["/%2f%2fexample.com/collect", "an encoded protocol-relative URL"],
+      ["/files/%zz", "a malformed escape"],
       ["files/@my", "a path without a leading slash"],
       ["", "an empty path"],
     ])("refuses %s (%s) before sending anything", async (path) => {

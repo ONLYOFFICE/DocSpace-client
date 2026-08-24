@@ -47,15 +47,24 @@ import type {
 } from "@onlyoffice/docspace-plugin-sdk/react";
 
 // `api` is the portal: an absolute URL (axios honours it over the base URL) or a
-// traversal is refused. Only the route is judged, never the query string.
+// traversal is refused. Only the route is judged, never the query string, and it
+// is judged decoded — `%2e%2e` is the same traversal the portal will resolve.
 const isPortalPath = (path: string) => {
   const [route] = path.split("?");
 
+  let decoded: string;
+
+  try {
+    decoded = decodeURIComponent(route);
+  } catch {
+    return false;
+  }
+
   return (
     route.startsWith("/") &&
-    !route.startsWith("//") &&
-    !route.includes("..") &&
-    !/^\/[a-z][a-z\d+.-]*:/i.test(route)
+    !decoded.startsWith("//") &&
+    !decoded.includes("..") &&
+    !/^\/[a-z][a-z\d+.-]*:/i.test(decoded)
   );
 };
 

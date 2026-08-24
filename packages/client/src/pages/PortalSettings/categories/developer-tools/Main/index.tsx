@@ -47,6 +47,7 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { globalColors } from "@docspace/ui-kit/providers";
+import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
 
 import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -56,7 +57,10 @@ import Card from "./card";
 import styles from "./main.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-const Main = (props: { apiBasicLink: string }) => {
+const Main = (props: {
+  apiBasicLink: string;
+  canOpenDocsConnect: boolean;
+}) => {
   const { t, ready } = useTranslation([
     "Common",
     "Settings",
@@ -66,7 +70,7 @@ const Main = (props: { apiBasicLink: string }) => {
     "OAuth",
     "DocsConnect",
   ]);
-  const { apiBasicLink } = props;
+  const { apiBasicLink, canOpenDocsConnect } = props;
 
   const docsName = `${getBrandName("OrganizationName")} ${getBrandName("ProductEditorsName")}`;
 
@@ -101,17 +105,19 @@ const Main = (props: { apiBasicLink: string }) => {
           </Text>
         </div>
         <div className={styles.grid}>
-          <Card
-            className={styles.featured}
-            icon={<DocsConnectSvg />}
-            title={t("DocsConnect:DocsConnect")}
-            description={t("DocsConnect:CardDescription", {
-              productName: docsName,
-            })}
-            url="/developer-tools/docs-connect"
-            color={globalColors.docsConnectAccent}
-            linkTitle={t("DocsConnect:GetStarted")}
-          />
+          {canOpenDocsConnect ? (
+            <Card
+              className={styles.featured}
+              icon={<DocsConnectSvg />}
+              title={t("DocsConnect:DocsConnect")}
+              description={t("DocsConnect:CardDescription", {
+                productName: docsName,
+              })}
+              url="/developer-tools/docs-connect"
+              color={globalColors.docsConnectAccent}
+              linkTitle={t("DocsConnect:GetStarted")}
+            />
+          ) : null}
           <Card
             icon={<DevToolsSvg />}
             title={t("Settings:RestAPI")}
@@ -182,11 +188,13 @@ const Main = (props: { apiBasicLink: string }) => {
   );
 };
 
-export default inject(({ settingsStore }: TStore) => {
+export default inject(({ settingsStore, userStore }: TStore) => {
   const { apiBasicLink } = settingsStore;
 
   return {
     apiBasicLink,
+    // Docs Connect is admin/owner-only - see `hasDocsConnectAccess`.
+    canOpenDocsConnect: hasDocsConnectAccess(userStore?.user),
   };
 })(observer(Main));
 

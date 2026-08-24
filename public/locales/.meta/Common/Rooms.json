@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-08-20T12:26:01.697Z",
+  "updated_at": "2026-08-21T15:49:57.158Z",
   "comment": {
     "text": "This is a label for a section or category within the file selector, representing a collection of collaborative workspaces.",
     "is_auto": true,
@@ -28,12 +28,6 @@
       "line_number": 353,
       "context": "}\n emptyScreenHeader={emptyScreenHeader ?? t(\"EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"EmptyRoomsDescriptionText\", {\n sectionName: isForms ? t(\"Forms\") : t(\"Rooms\"),\n })\n }\n searchEmptyScreenImage={\n isBase ? (\n <EmptyScreenFilterRoomsLight />",
       "module": "/libs/ui-kit"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/AppPromoDialog/configs.tsx",
-      "line_number": 140,
-      "context": "tourLabel: t(\"Common:WelcomeStartTour\"),\n githubLabel: t(\"Common:ViewOnGithub\"),\n githubUrl: \"https://github.com/ONLYOFFICE/DocSpace\",\n },\n \"ai-rooms\": {\n title: t(\"Common:Rooms\"),\n subtitle: t(\"Common:RoomsPromoSubtitle\"),\n description: t(\"Common:RoomsPromoDescription\"),\n features: [\n {\n Icon: CollaborationRoomIcon,",
-      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
@@ -79,7 +73,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 176,
+      "line_number": 212,
       "context": "t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isAgentsSectionScope(filterFolderType)) return t(\"Common:AIAgents\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };\n \n export const getFolderDescription = (",
       "module": "/packages/client"
     },
@@ -114,9 +108,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 282,
-      "context": "href: isGuest ? \"/shared-with-me/filter\" : \"/rooms/personal/filter\",\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:Rooms\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n installed: true,\n href: \"/rooms/shared/filter\",\n },\n {",
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 152,
+      "context": "onAction: () => navigate(filesHref),\n },\n {\n id: \"ai-rooms\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:Rooms\"),\n description: t(\"Common:DashboardRoomsDescription\"),\n installed: true,\n href: \"/rooms/shared/filter\",\n ...createOrOpen(\n canCreateRooms,",
       "module": "/packages/client"
     },
     {

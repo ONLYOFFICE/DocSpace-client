@@ -39,6 +39,11 @@ export { DOCS_CONNECT_ROUTE } from "@docspace/ui-kit/billing/constants";
 
 export type TDocsConnectTab = "statistics" | "settings" | "preview";
 
+// Connectors we do not show as tiles but that exist in the public catalog the
+// "View all" link points to. Only a handful of connectors get their own tile,
+// so this count cannot be derived from the rendered list.
+export const MORE_CONNECTORS_COUNT = 20;
+
 export const DOCS_CONNECT_PREVIEW = {
   editorType: "word",
   fileType: "docx",

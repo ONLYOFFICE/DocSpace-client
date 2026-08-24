@@ -40,10 +40,16 @@ import {
 
 const RELOAD_KEY = "retry-lazy-refreshed";
 
-export default function componentLoader(lazyComponent: () => Promise<unknown>) {
-  return new Promise((resolve) => {
+// Generic so callers keep the module's type: React.lazy needs a
+// Promise<{ default: ComponentType }>, not Promise<unknown>.
+export default function componentLoader<T>(
+  lazyComponent: () => Promise<T>,
+): Promise<T> {
+  // Never rejects: a chunk error either reloads the page or navigates to
+  // /error/520, so the returned promise simply stays pending in that case.
+  return new Promise<T>((resolve) => {
     lazyComponent()
-      .then((component: unknown) => {
+      .then((component) => {
         resolve(component);
       })
       .catch((error: unknown) => {

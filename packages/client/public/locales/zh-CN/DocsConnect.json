@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>已连接到 {{organizationName}} {{editorsName}}。</1>您的 {{organizationName}} {{editorsName}} 现在使用 {{service}} 提供的编辑器。",
   "ConnectToDocs": "连接到 {{organizationName}} {{editorsName}}",
   "CopySecretKey": "复制密钥",
-  "CreateTenant": "创建租户",
   "DaysCount": "{{count}} 天",
   "DaysLeft": "剩余天数",
   "DemoCode": "演示代码",

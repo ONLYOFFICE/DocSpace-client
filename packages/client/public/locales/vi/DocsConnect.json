@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Đã kết nối với {{organizationName}} {{editorsName}}.</1> {{organizationName}} {{editorsName}} của bạn hiện đang sử dụng các trình chỉnh sửa do {{service}} cung cấp.",
   "ConnectToDocs": "Kết nối với {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Sao chép khóa bí mật",
-  "CreateTenant": "Tạo tenant",
   "DaysCount": "{{count}} ngày",
   "DaysLeft": "Số ngày còn lại",
   "DemoCode": "Mã demo",

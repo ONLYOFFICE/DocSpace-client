@@ -79,6 +79,7 @@ import { WhiteLabelLogoType } from "@docspace/ui-kit/enums";
 import articleStyles from "@docspace/ui-kit/components/article/Article.module.scss";
 import { DeviceType } from "@docspace/shared/enums";
 import type { TUser } from "@docspace/shared/api/people/types";
+import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
 import type { ArticleProfileProps } from "@docspace/ui-kit/components/article";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
@@ -197,15 +198,12 @@ export const AppsSidebarView = ({
     });
   }, [fullLogo, burgerLogo]);
 
-  const isAdmin = user?.isAdmin ?? false;
-  const isOwner = user?.isOwner ?? false;
-  // Developer Tools banner mirrors the route guard in Route.private.tsx: hidden
-  // for guests, and for non-admins when access is limited. On the secondary
-  // sidebars (accounts/dev-tools/settings) it is hidden via `hideFooter` unless
-  // the section opts in with `withDevTools` (portal-settings, billing).
-  const showDevTools =
-    !user?.isVisitor &&
-    (isAdmin || isOwner || !limitedAccessDevToolsForUsers);
+  // Developer Tools banner follows the same rule as the route guard in
+  // Route.private.tsx (`hasDevToolsAccess`): hidden for guests, and for
+  // non-admins when access is limited. On the secondary sidebars
+  // (accounts/dev-tools/settings) it is hidden via `hideFooter` unless the
+  // section opts in with `withDevTools` (portal-settings, billing).
+  const showDevTools = hasDevToolsAccess(user, limitedAccessDevToolsForUsers);
   const showDevToolsBar = showDevTools && (!hideFooter || !!withDevTools);
   // While the nav skeleton is up, the footer (plugin slots + banner) stays
   // hidden so it doesn't appear ahead of the navigation it sits under.

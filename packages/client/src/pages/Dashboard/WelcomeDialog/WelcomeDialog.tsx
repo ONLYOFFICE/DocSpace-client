@@ -57,12 +57,10 @@ export type WelcomeDialogProps = {
 /**
  * The first thing a user sees on the dashboard.
  *
- * A single centered column — mascot, greeting, one short paragraph, two buttons —
- * rather than the two-column feature grid of `AppPromoDialog`. That one has a job
- * this doesn't: it introduces one app in enough detail to decide whether to open
- * it. Here the page behind the modal is the thing being introduced, and the tour
- * is what explains it, so anything more than a greeting competes with the tour it
- * is trying to start.
+ * A single centered column — mascot, greeting, one short paragraph, two buttons.
+ * Deliberately thin on content: the page behind the modal is the thing being
+ * introduced and the tour is what explains it, so anything more than a greeting
+ * competes with the tour it is trying to start.
  *
  * Whether it is shown at all is `DashboardTourStore.isWelcomeSeen`; this
  * component is layout and copy, and both of its actions dismiss.

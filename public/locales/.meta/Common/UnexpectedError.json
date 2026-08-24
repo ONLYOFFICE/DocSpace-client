@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2026-08-20T12:26:01.685Z",
+  "updated_at": "2026-08-21T15:04:37.028Z",
   "comment": {
     "text": "This is an error message that appears as a toast notification when an unexpected issue occurs, for example, when trying to update a tariff plan or link a payment card.",
     "is_auto": true,
@@ -49,13 +49,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
-      "line_number": 167,
+      "line_number": 168,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: { service: walletService, enabled },\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(enumId);\n return false;\n }\n \n if (enabled && enumId === AI_SEARCH_ENUM)",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-search/AiSearchPage.tsx",
-      "line_number": 167,
+      "line_number": 168,
       "context": "const result = await paymentApi.changeTenantWalletServiceState({\n changeWalletServiceStateRequestDto: { service: walletService, enabled },\n });\n \n if (!result) {\n toastr.error(t(\"UnexpectedError\"));\n changeServiceState(enumId);\n return false;\n }\n \n if (enabled && enumId === AI_SEARCH_ENUM)",
       "module": "/libs/ui-kit"
     },
@@ -187,13 +187,13 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
-      "line_number": 534,
+      "line_number": 539,
       "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (this.pendingServiceName === serviceName)\n this.loadedServiceName = serviceName;\n }\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/store/ServicesStore.ts",
-      "line_number": 534,
+      "line_number": 539,
       "context": "this.setIsInitServiceData(true);\n } catch (error) {\n if (error instanceof Error && error.name === \"CanceledError\") return;\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n } finally {\n if (this.pendingServiceName === serviceName)\n this.loadedServiceName = serviceName;\n }\n };",
       "module": "/libs/ui-kit"
     },
@@ -229,7 +229,7 @@
     },
     {
       "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 882,
+      "line_number": 912,
       "context": "// with the status only in the message (`HTTP <status>`), not as a\n // property, so the message is checked alongside the axios-style shape.\n const status = error?.response?.status ?? error?.status;\n const isForbidden =\n status === 403 || /\\bHTTP\\s+403\\b/.test(error?.message ?? \"\");\n if (!isForbidden) toastr.error(t(\"Common:UnexpectedError\"));\n },\n }),\n [t],\n );",
       "module": "/packages/client"
     },
@@ -241,13 +241,13 @@
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 317,
+      "line_number": 321,
       "context": "try {\n await getPaymentInfo();\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n \n return;\n }\n \n this.setIsUpdatingBasicSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 317,
+      "line_number": 321,
       "context": "try {\n await getPaymentInfo();\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n \n return;\n }\n \n this.setIsUpdatingBasicSettings(false);",
       "module": "/packages/client"
     },
@@ -349,13 +349,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1496,
+      "line_number": 1517,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.tsx",
-      "line_number": 1496,
+      "line_number": 1517,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n /**",
       "module": "/packages/shared"
     }

@@ -37,17 +37,20 @@ import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
 import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 import { toastr } from "@docspace/ui-kit/components/toast";
+import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
@@ -93,6 +96,55 @@ interface SettingsProps {
 }
 
 const onlyDigits = (value: string) => value.replace(/\D/g, "");
+
+const DEFAULT_MAX_FILE_SIZE_LIMIT = 209715200;
+
+const FILE_SIZE_LIMIT_FIELD = "Server.FileSizeLimit";
+
+const getValidationErrors = (error: unknown) => {
+  if (!axios.isAxiosError(error)) return undefined;
+
+  const errors = error.response?.data?.response?.errors;
+
+  return errors && typeof errors === "object"
+    ? (errors as Record<string, string[] | string>)
+    : undefined;
+};
+
+const getFieldErrorText = (
+  errors: Record<string, string[] | string> | undefined,
+  field: string,
+) => {
+  const value = errors?.[field];
+  const text = Array.isArray(value) ? value.join(" ") : value;
+
+  return typeof text === "string" && text !== "" ? text : undefined;
+};
+
+const getValidationErrorText = (
+  errors: Record<string, string[] | string> | undefined,
+) => {
+  if (!errors) return undefined;
+
+  const text = Object.keys(errors)
+    .map((field) => getFieldErrorText(errors, field))
+    .filter(Boolean)
+    .join(" ");
+
+  return text === "" ? undefined : text;
+};
+
+const getFileSizeLimitFromError = (
+  errors: Record<string, string[] | string> | undefined,
+) => {
+  const text = getFieldErrorText(errors, FILE_SIZE_LIMIT_FIELD);
+
+  if (!text) return undefined;
+
+  const max = /\d+\s+and\s+(\d+)/.exec(text)?.[1];
+
+  return max ? Number(max) : undefined;
+};
 
 // `-webkit-text-security` is non-standard and missing in browsers older than
 // Firefox 114, where it would silently render the secret key in clear text.
@@ -141,6 +193,9 @@ const Settings = ({
       : "",
   );
   const [maxDownloadBytes, setMaxDownloadBytes] = useState(savedMaxDownload);
+  const [maxFileSizeLimit, setMaxFileSizeLimit] = useState(
+    DEFAULT_MAX_FILE_SIZE_LIMIT,
+  );
   const [isSavingRules, setIsSavingRules] = useState(false);
 
   const [applyDialogVisible, setApplyDialogVisible] = useState(false);
@@ -200,7 +255,18 @@ const Settings = ({
     fileSizeLimit: Number(maxDownload) || 0,
   });
 
+  const fileSizeLimitError = (limit: number) =>
+    t("DocsConnect:FileSizeLimitExceeded", {
+      limit,
+      size: getConvertedSize(t, limit),
+    });
+
   const onSaveGeneral = async () => {
+    if (Number(maxDownloadBytes) > maxFileSizeLimit) {
+      toastr.error(fileSizeLimitError(maxFileSizeLimit));
+      return;
+    }
+
     setIsSavingGeneral(true);
     try {
       await updateConfig?.({
@@ -212,7 +278,16 @@ const Settings = ({
       setSavedMaxDownload(maxDownloadBytes);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
-      toastr.error(e as Error);
+      const errors = getValidationErrors(e);
+      const serverLimit = getFileSizeLimitFromError(errors);
+
+      if (serverLimit !== undefined) {
+        setMaxFileSizeLimit(serverLimit);
+        toastr.error(fileSizeLimitError(serverLimit));
+      } else {
+        const validationText = getValidationErrorText(errors);
+        toastr.error(validationText ?? (e as Error));
+      }
     } finally {
       setIsSavingGeneral(false);
     }
@@ -489,7 +564,17 @@ const Settings = ({
       </div>
 
       <div className={styles.settingsGroup}>
-        <Text fontWeight={600}>{t("DocsConnect:FileSizeLimits")}</Text>
+        <div className={styles.groupTitle}>
+          <Text fontWeight={600}>{t("DocsConnect:FileSizeLimits")}</Text>
+          <HelpButton
+            size={12}
+            tooltipContent={t("DocsConnect:FileSizeLimitsTooltip", {
+              limit: maxFileSizeLimit,
+              size: getConvertedSize(t, maxFileSizeLimit),
+            })}
+            tooltipMaxWidth="320px"
+          />
+        </div>
         <Text fontSize="13px" className={styles.settingsHint}>
           {t("DocsConnect:FileSizeLimitsDescription")}
         </Text>

@@ -102,6 +102,12 @@
   }
 }
 
+@include mixins.tablet {
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-tablet-width, 243px);
+  }
+}
+
 @include mixins.tablet-and-below {
   .sectionVarsHost :global(.chat-panel) {
     inset-inline-start: auto;

@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>ເຊື່ອມຕໍ່ກັບ {{organizationName}} {{editorsName}} ແລ້ວ.</1> {{organizationName}} {{editorsName}} ຂອງທ່ານ ກຳລັງໃຊ້ຕົວແກ້ໄຂທີ່ {{service}} ສະໜອງໃຫ້.",
   "ConnectToDocs": "ເຊື່ອມຕໍ່ກັບ {{organizationName}} {{editorsName}}",
   "CopySecretKey": "ຄັດລອກລະຫັດລັບ",
-  "CreateTenant": "ສ້າງຜູ້ເຊົ່າ",
   "DaysCount": "{{count}} ມື້",
   "DaysLeft": "ມື້ທີ່ເຫຼືອ",
   "DemoCode": "ໂຄ້ດຕົວຢ່າງ",

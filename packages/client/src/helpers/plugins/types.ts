@@ -178,13 +178,13 @@ export interface IArticleButtonItemClient extends IArticleButtonItem {
 }
 
 export interface IArticleNavigationItemClient
-  extends Omit<IArticleNavigationItem, "sectionComponent"> {
+  extends Omit<IArticleNavigationItem, "component"> {
   pluginName: string;
   /**
    * React section, optional on the client side: plugins built against the
    * pre-React SDK describe their section with the IBox fields below.
    */
-  sectionComponent?: IArticleNavigationItem["sectionComponent"];
+  component?: IArticleNavigationItem["component"];
   /**
    * IBox-based section and its loader. The React SDK no longer declares them,
    * so they are typed on the client side while both plugin generations are
@@ -284,6 +284,7 @@ export interface TMessageActionsParams {
   updateMainButtonItems?: PluginStore["updateMainButtonItems"];
   updateProfileMenuItems?: PluginStore["updateProfileMenuItems"];
   updateEventListenerItems?: PluginStore["updateEventListenerItems"];
+  updateArticleButtonItems?: PluginStore["updateArticleButtonItems"];
   updateArticleNavigationItems?: PluginStore["updateArticleNavigationItems"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];

@@ -33,36 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type { TUser } from "@docspace/shared/api/people/types";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFile, TFolder } from "@docspace/shared/api/files/types";
-import type {
-  TCurrentUser,
-  TCurrentFile,
-} from "@onlyoffice/docspace-plugin-sdk/react";
+// The kit reaches a plugin from here, not from its bundle: a second copy reads
+// no portal context and falls back to light LTR. Re-exported whole, so all of it
+// is de-facto plugin API — narrow this module if that coupling has to be cut.
 
-export function buildCurrentUser(user: TUser): TCurrentUser {
-  return {
-    id: user.id,
-    displayName: user.displayName,
-    email: user.email,
-    isOwner: !!user.isOwner,
-    isAdmin: !!user.isAdmin,
-    isRoomAdmin: !!user.isRoomAdmin,
-  };
-}
-
-export function buildCurrentFile(
-  selection: TRoom | TFile | TFolder,
-): TCurrentFile {
-  const isFolder = "isFolder" in selection && !!selection.isFolder;
-  const isRoom = "roomType" in selection && !!selection.roomType;
-  return {
-    id: selection.id,
-    title: selection.title,
-    fileExst: "fileExst" in selection ? selection.fileExst : undefined,
-    isFolder,
-    isRoom,
-    roomType: isRoom ? String((selection as TRoom).roomType) : undefined,
-  };
-}
+export * from "@docspace/ui-kit";

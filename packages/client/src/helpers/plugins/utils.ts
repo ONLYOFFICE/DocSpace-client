@@ -76,6 +76,7 @@ export const messageActions = ({
   updateMainButtonItems,
   updateProfileMenuItems,
   updateEventListenerItems,
+  updateArticleButtonItems,
   updateArticleNavigationItems,
   updateFileItems,
   updateCreateDialogProps,
@@ -248,6 +249,10 @@ export const messageActions = ({
         break;
       case PluginActions.updateEventListenerItems:
         updateEventListenerItems?.(pluginName);
+
+        break;
+      case PluginActions.updateArticleButtonItems:
+        updateArticleButtonItems?.(pluginName);
 
         break;
       case PluginActions.updateArticleNavigationItems:

@@ -104,8 +104,9 @@ import type {
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
-import { buildCurrentUser } from "../helpers/plugins/buildPluginContext";
-import { rewritePluginImports } from "../helpers/plugins/reactPluginShim";
+import { createPluginApi } from "../helpers/plugins/react/api";
+import { toCurrentUser } from "../helpers/plugins/react/utils";
+import { rewritePluginImports } from "../helpers/plugins/react/shim";
 import {
   PluginFileType,
   PluginScopes,
@@ -127,10 +128,9 @@ const origin =
 const proxy = window.ClientConfig?.proxy?.url || proxyURL;
 const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
-const pluginAxios = axios.create({
-  baseURL: `${origin}${proxy}${prefix}`,
-  withCredentials: true,
-});
+// One client for every plugin: it holds no per-plugin state, and a plugin that
+// lists `api` in a dependency array must not see a new object on every render.
+const pluginApi = createPluginApi();
 
 type TDispatchMessage = Pick<
   TMessageActionsParams,
@@ -284,6 +284,7 @@ class PluginStore {
       updateMainButtonItems: this.updateMainButtonItems,
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
+      updateArticleButtonItems: this.updateArticleButtonItems,
       updateArticleNavigationItems: this.updateArticleNavigationItems,
       updateFileItems: this.updateFileItems,
       updateCreateDialogProps: updateCreateDialogProps,
@@ -1069,6 +1070,19 @@ class PluginStore {
     return `${plugin.iconUrl}/assets/${icon}?hash=${plugin.version}`;
   };
 
+  /** Drops this plugin's items that the finished `update*Items` pass did not produce. */
+  private removeMissingItems = <T extends { pluginName: string }>(
+    items: Map<string, T>,
+    pluginName: string,
+    actualKeys: Set<string>,
+  ) => {
+    Array.from(items).forEach(([key, value]) => {
+      if (value.pluginName === pluginName && !actualKeys.has(key)) {
+        items.delete(key);
+      }
+    });
+  };
+
   updateContextMenuItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
@@ -1135,12 +1149,17 @@ class PluginStore {
       return processedItem;
     };
 
+    const actualKeys = new Set<string>();
+
     // Process all top-level items
     Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
       const contextMenuItem = processContextMenuItem(value);
       this.contextMenuItems.set(key, contextMenuItem);
+      actualKeys.add(key);
       currentDepth = 1;
     });
+
+    this.removeMissingItems(this.contextMenuItems, plugin.name, actualKeys);
   };
 
   deactivateContextMenuItems = (plugin: TPlugin) => {
@@ -1169,6 +1188,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]: [string, IInfoPanelItem]) => {
       const correctUserType = value.usersTypes
         ? value.usersTypes.includes(userRole)
@@ -1196,7 +1217,10 @@ class PluginStore {
         subMenu: { ...value.subMenu, onClick },
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.infoPanelItems, plugin.name, actualKeys);
   };
 
   deactivateInfoPanelItems = (plugin: TPlugin) => {
@@ -1224,6 +1248,8 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
+
+    const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
@@ -1289,7 +1315,10 @@ class PluginStore {
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
         items: newItems.length > 0 ? newItems : undefined,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.mainButtonItems, plugin.name, actualKeys);
   };
 
   deactivateMainButtonItems = (plugin: TPlugin) => {
@@ -1318,6 +1347,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
@@ -1343,7 +1374,10 @@ class PluginStore {
         pluginName: plugin.name,
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.profileMenuItems, plugin.name, actualKeys);
   };
 
   deactivateProfileMenuItems = (plugin: TPlugin) => {
@@ -1372,6 +1406,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersTypes
         ? value.usersTypes.includes(userRole)
@@ -1395,7 +1431,10 @@ class PluginStore {
         eventHandler,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.eventListenerItems, plugin.name, actualKeys);
   };
 
   deactivateEventListenerItems = (plugin: TPlugin) => {
@@ -1421,6 +1460,8 @@ class PluginStore {
     if (!items) return;
 
     const userRole = this.getUserRole();
+
+    const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
@@ -1472,7 +1513,10 @@ class PluginStore {
         fileIconTile,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.fileItems, plugin.name, actualKeys);
   };
 
   deactivateFileItems = (plugin: TPlugin) => {
@@ -1508,6 +1552,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     for (const [key, value] of Array.from(items)) {
       const correctUserType = value.usersTypes
         ? value.usersTypes.includes(userRole)
@@ -1523,7 +1569,10 @@ class PluginStore {
         ...value,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     }
+
+    this.removeMissingItems(this.articleButtonItems, plugin.name, actualKeys);
   };
 
   updateArticleNavigationItems = async (name: string) => {
@@ -1561,11 +1610,11 @@ class PluginStore {
       });
     }
 
-    Array.from(this.articleNavigationItems).forEach(([key, value]) => {
-      if (value.pluginName === plugin.name && !actualItems.has(key)) {
-        this.articleNavigationItems.delete(key);
-      }
-    });
+    this.removeMissingItems(
+      this.articleNavigationItems,
+      plugin.name,
+      new Set(actualItems.keys()),
+    );
 
     actualItems.forEach((value, key) => {
       this.articleNavigationItems.set(key, value);
@@ -1729,132 +1778,158 @@ class PluginStore {
     pluginName: string,
     currentFile: TCurrentFile | null,
     user: TUser | null,
-  ): PluginRuntime => ({
-    currentFile,
-    currentUser: user ? buildCurrentUser(user) : null,
-    actions: {
-      showToast: (props) =>
-        this.dispatchMessage({
-          message: { actions: [Actions.showToast], toastProps: [props] },
-          pluginName,
-        }),
-      showModal: (props) =>
-        this.dispatchMessage({
-          message: {
-            actions: [Actions.showModal],
-            modalDialogProps: props,
-          },
-          pluginName,
-          currentFile,
-        }),
-      closeModal: () =>
-        this.dispatchMessage({
-          message: { actions: [Actions.closeModal] },
-          pluginName,
-        }),
-      showSelector: (props: TSelector) =>
-        this.dispatchMessage({
-          message: { actions: [Actions.showSelector], selectorProps: props },
-          pluginName,
-        }),
-      closeSelector: () =>
-        this.dispatchMessage({
-          message: { actions: [Actions.closeSelector] },
-          pluginName,
-        }),
-      navigate: (path: string) =>
-        this.dispatchMessage({
-          message: { actions: [Actions.navigate], navigatePath: path },
-          pluginName,
-        }),
-      openInfoPanel: () =>
-        this.dispatchMessage({
-          message: { actions: [Actions.openInfoPanel] },
-          pluginName,
-        }),
-      showMediaViewer: (props: IMediaViewer) =>
-        this.dispatchMessage({
-          message: {
-            actions: [Actions.showMediaViewer],
-            mediaViewerProps: props,
-          },
-          pluginName,
-        }),
-      closeMediaViewer: () =>
-        this.dispatchMessage({
-          message: { actions: [Actions.closeMediaViewer] },
-          pluginName,
-        }),
-      updateMediaViewer: (props: IMediaViewer) =>
-        this.dispatchMessage({
-          message: {
-            actions: [Actions.updateMediaViewer],
-            mediaViewerProps: props,
-          },
-          pluginName,
-        }),
-      addFloatingOperationsButton: (props: IFloatingOperationsButton) =>
-        this.dispatchMessage({
-          message: {
-            actions: [Actions.addFloatingOperationsButton],
-            floatingOperationsButtonProps: props,
-          },
-          pluginName,
-        }),
-      removeFloatingOperationsButton: (id: string) =>
-        this.dispatchMessage({
-          message: {
-            actions: [Actions.removeFloatingOperationsButton],
-            floatingOperationsButtonPropsId: id,
-          },
-          pluginName,
-        }),
-      updateFloatingOperationsButton: (props: IFloatingOperationsButton) =>
-        this.dispatchMessage({
-          message: {
-            actions: [Actions.updateFloatingOperationsButton],
-            floatingOperationsButtonProps: props,
-          },
-          pluginName,
-        }),
-      updateArticleNavigationItems: () =>
-        this.dispatchMessage({
-          message: { actions: [Actions.updateArticleNavigationItems] },
-          pluginName,
-        }),
-    },
-    api: {
-      get: (path, params) =>
-        pluginAxios.get(path, { params }).then((r) => r.data),
-      post: (path, body) => pluginAxios.post(path, body).then((r) => r.data),
-      put: (path, body) => pluginAxios.put(path, body).then((r) => r.data),
-      delete: (path) => pluginAxios.delete(path).then((r) => r.data),
-    },
-    settings: {
-      load: async () => {
-        const entry = this.plugins.find((p) => p.name === pluginName);
-        if (!entry?.settings) return null;
-        try {
-          return JSON.parse(entry.settings);
-        } catch {
-          return null;
-        }
+  ): PluginRuntime => {
+    // Bare redraw requests: the plugin has already mutated its own item, and the
+    // message only tells DocSpace to re-read the collection.
+    const redraw = (action: Actions) => () =>
+      this.dispatchMessage({ message: { actions: [action] }, pluginName });
+
+    return {
+      currentFile,
+      currentUser: user ? toCurrentUser(user) : null,
+      actions: {
+        showToast: (props) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.showToast], toastProps: [props] },
+            pluginName,
+          }),
+        showModal: (props) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showModal],
+              modalDialogProps: props,
+            },
+            pluginName,
+            currentFile,
+          }),
+        closeModal: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeModal] },
+            pluginName,
+          }),
+        showSelector: (props: TSelector) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.showSelector], selectorProps: props },
+            pluginName,
+          }),
+        updateSelector: (props: TSelector) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateSelector],
+              selectorProps: props,
+            },
+            pluginName,
+          }),
+        closeSelector: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeSelector] },
+            pluginName,
+          }),
+        navigate: (path: string) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.navigate], navigatePath: path },
+            pluginName,
+          }),
+        openInfoPanel: (tab) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.openInfoPanel], infoPanelTab: tab },
+            pluginName,
+          }),
+        showCreateDialog: (props) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showCreateDialogModal],
+              createDialogProps: props,
+            },
+            pluginName,
+          }),
+        showMediaViewer: (props: IMediaViewer) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showMediaViewer],
+              mediaViewerProps: props,
+            },
+            pluginName,
+          }),
+        closeMediaViewer: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeMediaViewer] },
+            pluginName,
+          }),
+        updateMediaViewer: (props: IMediaViewer) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateMediaViewer],
+              mediaViewerProps: props,
+            },
+            pluginName,
+          }),
+        addFloatingOperationsButton: (props: IFloatingOperationsButton) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.addFloatingOperationsButton],
+              floatingOperationsButtonProps: props,
+            },
+            pluginName,
+          }),
+        removeFloatingOperationsButton: (id: string) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.removeFloatingOperationsButton],
+              floatingOperationsButtonPropsId: id,
+            },
+            pluginName,
+          }),
+        updateFloatingOperationsButton: (props: IFloatingOperationsButton) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateFloatingOperationsButton],
+              floatingOperationsButtonProps: props,
+            },
+            pluginName,
+          }),
+        updateContextMenuItems: redraw(Actions.updateContextMenuItems),
+        updateInfoPanelItems: redraw(Actions.updateInfoPanelItems),
+        updateMainButtonItems: redraw(Actions.updateMainButtonItems),
+        updateProfileMenuItems: redraw(Actions.updateProfileMenuItems),
+        updateFileItems: redraw(Actions.updateFileItems),
+        updateEventListenerItems: redraw(Actions.updateEventListenerItems),
+        updateArticleButtonItems: redraw(Actions.updateArticleButtonItems),
+        updateArticleNavigationItems: redraw(
+          Actions.updateArticleNavigationItems,
+        ),
       },
-      save: async (data: Record<string, unknown>) => {
-        const entry = this.plugins.find((p) => p.name === pluginName);
-        if (!entry) return;
-        const settingsStr = JSON.stringify(data);
-        await api.plugins.updatePlugin(pluginName, entry.enabled, settingsStr);
-        runInAction(() => {
-          entry.settings = settingsStr;
-        });
-        entry.setAdminPluginSettingsValue?.(settingsStr);
+      api: pluginApi,
+      settings: {
+        load: async () => {
+          const entry = this.plugins.find((p) => p.name === pluginName);
+          if (!entry?.settings) return null;
+          try {
+            return JSON.parse(entry.settings);
+          } catch {
+            return null;
+          }
+        },
+        save: async (data: Record<string, unknown>) => {
+          const entry = this.plugins.find((p) => p.name === pluginName);
+          if (!entry) return;
+          const settingsStr = JSON.stringify(data);
+          await api.plugins.updatePlugin(
+            pluginName,
+            entry.enabled,
+            settingsStr,
+          );
+          runInAction(() => {
+            entry.settings = settingsStr;
+          });
+          entry.setAdminPluginSettingsValue?.(settingsStr);
+        },
+        setSaveButton: (props: ButtonGroup) => {
+          this.setReactSettingsSaveButtonState(props);
+        },
       },
-      setSaveButton: (props: ButtonGroup) => {
-        this.setReactSettingsSaveButtonState(props);
-      },
-    },
-  });
+    };
+  };
 
   initModulePlugin = async (
     plugin: TAPIPlugin,

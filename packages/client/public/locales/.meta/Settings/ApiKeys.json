@@ -3,7 +3,7 @@
   "content": "API keys",
   "content_en_sha1_hash": "94fcf3c2dc0d96560fa470737eb39fb09d17ef08",
   "created_at": "2025-05-19T21:30:50.537Z",
-  "updated_at": "2026-08-14T14:58:32.756Z",
+  "updated_at": "2026-08-21T15:49:57.223Z",
   "comment": {
     "text": "This is a section title within the portal settings, referring to a feature for managing API keys.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 159,
+      "line_number": 178,
       "context": "path: \"/developer-tools/oauth\",\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"api-keys\",\n title: t(\"Settings:ApiKeys\"),\n description: t(\"Settings:ApiKeysCardDescription\", {\n organizationName,\n productName,\n }),\n path: \"/developer-tools/api-keys\",",
       "module": "/packages/client"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 169,
+      "line_number": 175,
       "context": "linkTitle={t(\"Settings:RegisterApp\")}\n ctaUrl=\"/developer-tools/oauth/create\"\n />\n <Card\n icon={<KeySvg />}\n title={t(\"Settings:ApiKeys\")}\n description={t(\"Settings:ApiKeysCardDescription\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url=\"/developer-tools/api-keys\"",
       "module": "/packages/client"
     }

@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>{{organizationName}} {{editorsName}} වෙත සම්බන්ධ විය.</1> ඔබේ {{organizationName}} {{editorsName}} දැන් {{service}} සපයන සංස්කාරක භාවිත කරයි.",
   "ConnectToDocs": "{{organizationName}} {{editorsName}} වෙත සබඳින්න",
   "CopySecretKey": "රහස් යතුර පිටපත් කරන්න",
-  "CreateTenant": "ටෙනන්ට් සාදන්න",
   "DaysCount": "දින {{count}}",
   "DaysLeft": "ඉතිරි දින",
   "DemoCode": "නිරූපණ කේතය",

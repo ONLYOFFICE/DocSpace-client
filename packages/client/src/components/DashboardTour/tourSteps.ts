@@ -207,7 +207,7 @@ export function getTourSteps(
     navItemStep(
       OVERVIEW_ITEM_SELECTOR,
       t("DashboardTour:DashboardOverviewTitle"),
-      t("DashboardTour:DashboardOverview", { overview: t("Common:Overview") }),
+      t("DashboardTour:DashboardOverview", { overview: t("Common:Home") }),
       callbacks,
       LOG_LABEL,
     ),

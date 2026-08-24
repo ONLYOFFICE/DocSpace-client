@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Lidhur me {{organizationName}} {{editorsName}}.</1> {{organizationName}} {{editorsName}} tuaj tani përdor redaktuesit e ofruar nga {{service}}.",
   "ConnectToDocs": "Lidhu me {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Kopjoni çelësin sekret",
-  "CreateTenant": "Krijoni tenant",
   "DaysCount": "{{count}} ditë",
   "DaysLeft": "Ditë të mbetura",
   "DemoCode": "Kodi demonstrues",

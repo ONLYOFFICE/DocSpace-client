@@ -157,6 +157,7 @@ editing locale files. For translation work use the `translate-locales`,
 |------|---------------------|
 | `.claude/rules/client-architecture.md` | `packages/client/src/**`, `packages/shared/**` |
 | `.claude/rules/source-checks.md` | `packages/**`, `libs/ui-kit/**`, `public/images/**` |
+| `.claude/rules/generated-artifacts.md` | `public/locales/.constants/**`, `**/biome-plugins/**`, `**/package.json` |
 | `.claude/rules/unit-tests.md` | `**/*.test.*`, `**/__tests__/**` (unit), vitest configs |
 | `.claude/rules/i18n.md` | `public/locales/**`, `common/tests/**` |
 | `.claude/rules/bulk-locale-edits.md` | `public/locales/**`, `packages/*/public/locales/**`, `common/scripts/**` |

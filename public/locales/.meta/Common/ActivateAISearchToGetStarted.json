@@ -1,0 +1,29 @@
+{
+  "key_path": "ActivateAISearchToGetStarted",
+  "content": "Activate AI Search to get started",
+  "content_en_sha1_hash": "4edde7e3b93ad25ff78d7f1c4b72257ff0a054bb",
+  "created_at": "2026-08-21T15:03:48.551Z",
+  "updated_at": "2026-08-21T15:14:09.695Z",
+  "comment": {
+    "text": "Banner title in the AI settings section that prompts users to enable the AI Search feature.",
+    "is_auto": true,
+    "updated_at": "2026-08-21T15:14:09.695Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 73,
+      "context": "const OPENROUTER_PRICING_URL = \"https://openrouter.ai/models\";\n \n const getBannerTexts = (t, isWebSearchTab) =>\n isWebSearchTab\n ? {\n activateTitle: t(\"Common:ActivateAISearchToGetStarted\"),\n activateDescription: t(\"Common:ActivateAISearchDescription\"),\n activateLabel: t(\"Common:ActivateAISearch\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

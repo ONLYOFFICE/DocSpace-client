@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Verbonden met {{organizationName}} {{editorsName}}.</1> Uw {{organizationName}} {{editorsName}} gebruikt nu de editors die door {{service}} worden geleverd.",
   "ConnectToDocs": "Verbinden met {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Secret key kopiëren",
-  "CreateTenant": "Tenant aanmaken",
   "DaysCount": "{{count}} dagen",
   "DaysLeft": "Resterende dagen",
   "DemoCode": "Democode",

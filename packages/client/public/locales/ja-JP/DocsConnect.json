@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>{{organizationName}} {{editorsName}}に接続しました。</1>お使いの{{organizationName}} {{editorsName}}は、{{service}}が提供するエディタを使用しています。",
   "ConnectToDocs": "{{organizationName}} {{editorsName}}に接続",
   "CopySecretKey": "シークレットキーをコピー",
-  "CreateTenant": "テナントを作成",
   "DaysCount": "{{count}}日",
   "DaysLeft": "残り日数",
   "DemoCode": "デモコード",

@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>{{organizationName}} {{editorsName}}에 연결되었습니다.</1> 이제 {{organizationName}} {{editorsName}}에서 {{service}}가 제공하는 편집기를 사용합니다.",
   "ConnectToDocs": "{{organizationName}} {{editorsName}}에 연결",
   "CopySecretKey": "비밀 키 복사",
-  "CreateTenant": "테넌트 생성",
   "DaysCount": "{{count}}일",
   "DaysLeft": "남은 일수",
   "DemoCode": "데모 코드",

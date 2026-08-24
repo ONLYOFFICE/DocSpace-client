@@ -83,6 +83,11 @@ import { makeCreateUrl, NEW_FILE_NAMES } from "../utils";
 export const useCreateActions = (
   myFolderId: number | null,
   isGuest: boolean,
+  // Host-computed AI chat availability (Shell → AiAgentProviders context): false
+  // when the portal has AI services switched off in settings, among the other
+  // reasons the chat isn't offered. Passed in rather than read here so the tile
+  // and the panel the dashboard hosts gate on one and the same value.
+  isAiChatAvailable: boolean,
 ): QuickActionItem[] => {
   const { t } = useTranslation(["Common"]);
 
@@ -139,10 +144,12 @@ export const useCreateActions = (
           window.open(makeCreateUrl(NEW_FILE_NAMES.pdf, myFolderId), "_blank"),
         ...disabledProps,
       },
-      // Guests can never hold a chat-capable role (AiAgentProviders sets
-      // `canUseAi` to false for them), so the tile is hidden rather than
-      // disabled — the guest tooltip only covers create/upload restrictions.
-      ...(isGuest
+      // Hidden rather than disabled when the chat isn't on offer: guests can
+      // never hold a chat-capable role (AiAgentProviders sets `canUseAi` to
+      // false for them) and the guest tooltip only covers create/upload
+      // restrictions, while a portal with AI services off has no chat to open
+      // at all.
+      ...(isGuest || !isAiChatAvailable
         ? []
         : [
             {
@@ -153,7 +160,7 @@ export const useCreateActions = (
             },
           ]),
     ],
-    [t, myFolderId, disabledProps, isGuest, openChat],
+    [t, myFolderId, disabledProps, isGuest, isAiChatAvailable, openChat],
   );
 };
 

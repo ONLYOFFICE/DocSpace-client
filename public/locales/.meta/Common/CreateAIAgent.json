@@ -3,7 +3,7 @@
   "content": "Create {{aiAgent}}",
   "content_en_sha1_hash": "74733d2016c5a4d27915866f0ff5ea73be78cd87",
   "created_at": "2026-06-01T21:20:13.618Z",
-  "updated_at": "2026-06-01T21:43:46.556Z",
+  "updated_at": "2026-08-21T08:01:33.798Z",
   "comment": {
     "text": "Button label or hotkey panel text used to initiate the creation of an AI agent. The {{aiAgent}} variable represents the specific agent's name or type.",
     "is_auto": true,
@@ -21,6 +21,12 @@
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
       "line_number": 90,
       "context": "</Row>\n \n <Row className={styles.hotkeysRow}>\n <>\n <Text {...textStyles}>\n {t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") })}\n </Text>\n <Text {...keyTextStyles}>{`Shift + a`}</Text>\n </>\n </Row>\n </>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
+      "line_number": 190,
+      "context": "installed: true,\n href: \"/ai-agents/filter\",\n ...createOrOpen(\n canCreateAgents,\n \"/ai-agents/filter\",\n t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") }),\n dispatchCreateAgent,\n ),\n },\n ];",
       "module": "/packages/client"
     }
   ],

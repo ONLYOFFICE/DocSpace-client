@@ -176,7 +176,10 @@ describe("roomFileAccess wrap → unwrap → revoke roundtrip", () => {
     ).rejects.toBeInstanceOf(AuthenticationError);
   });
 
-  it("Empty roomMemberKeys → AuthenticationError (sender unknown)", async () => {
+  it("Empty roomMemberKeys on a fresh device → AuthenticationError (sender unknown)", async () => {
+    // Cleared TOFU = fresh device; a pinned sender key would legitimately
+    // satisfy the unwrap via the TOFU fallback (bug 82872).
+    resetTofuStores();
     await expect(
       unwrapDekForCurrentUser({
         fileKeys,
@@ -191,7 +194,9 @@ describe("roomFileAccess wrap → unwrap → revoke roundtrip", () => {
   it("Sender's public key substituted in roomMemberKeys → AuthenticationError", async () => {
     // Server returns Mallory's pubkey under Alice's userId. The sender
     // claim inside the wrapped blob points at Alice; HPKE-Auth verifies
-    // the sender's key matches what we expect, so this must fail.
+    // the sender's key matches what we expect, so this must fail. TOFU is
+    // cleared so a pinned genuine key cannot satisfy the fallback instead.
+    resetTofuStores();
     const tamperedRoomKeys: RoomMemberPublicKey[] = [
       { userId: ALICE_ID, publicKey: pubB64(mallory) },
       { userId: BOB_ID, publicKey: pubB64(bob) },

@@ -34,7 +34,6 @@
   "ConnectedBanner": "<1>Povezano z {{organizationName}} {{editorsName}}.</1> Vaš {{organizationName}} {{editorsName}} zdaj uporablja urejevalnike, ki jih zagotavlja {{service}}.",
   "ConnectToDocs": "Poveži z {{organizationName}} {{editorsName}}",
   "CopySecretKey": "Kopiraj skrivni ključ",
-  "CreateTenant": "Ustvari tenant",
   "DaysCount": "{{count}} dni",
   "DaysLeft": "Preostalih dni",
   "DemoCode": "Demo koda",

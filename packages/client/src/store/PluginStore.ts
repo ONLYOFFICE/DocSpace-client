@@ -842,7 +842,6 @@ class PluginStore {
 
     runInAction(() => {
       this.plugins[idx].enabled = false;
-      this.plugins[idx].settings = "";
       this.plugins.splice(idx, 1, this.plugins[idx]);
     });
 

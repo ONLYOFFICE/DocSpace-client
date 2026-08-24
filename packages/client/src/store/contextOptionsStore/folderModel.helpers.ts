@@ -49,11 +49,9 @@ import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
-import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.template.react.svg?url";
 import { isMobile, isTablet } from "react-device-detect";
-import type {
-  ContextMenuModel,
-} from "@docspace/ui-kit/components/context-menu";
+import type { ContextMenuModel } from "@docspace/ui-kit/components/context-menu";
 import type { TTranslation } from "@docspace/shared/types";
 import type { TOformFile } from "@docspace/shared/api/oforms/types";
 import { RoomsType, FolderType, FilterType } from "@docspace/shared/enums";
@@ -66,12 +64,11 @@ import type { TContextItem, TContextOption } from "./helpers";
 import type ContextOptionsStore from "../ContextOptionsStore";
 
 export const getFormGalleryContextOptionsImpl = (
-self: ContextOptionsStore,
+  self: ContextOptionsStore,
   item: TOformFile | { attributes: { name_form: string } } | null,
   t: TTranslation,
   navigate?: unknown,
-
-): ContextMenuModel[]=> {
+): ContextMenuModel[] => {
   return [
     {
       key: "create",
@@ -96,11 +93,10 @@ self: ContextOptionsStore,
 };
 
 export const getRoomsRootContextOptionsImpl = (
-self: ContextOptionsStore,
+  self: ContextOptionsStore,
   item: TContextItem,
   t: TTranslation,
-
-): { pinOptions: TContextOption[]; muteOptions: TContextOption[] }=> {
+): { pinOptions: TContextOption[]; muteOptions: TContextOption[] } => {
   const { id, rootFolderId } = self.selectedFolderStore;
   const isRootRoom = item.isRoom && rootFolderId === id;
 
@@ -155,7 +151,7 @@ self: ContextOptionsStore,
 };
 
 export const getContextOptionsPlusFormRoomImpl = (
-self: ContextOptionsStore,
+  self: ContextOptionsStore,
   t: TTranslation,
   {
     formActions,
@@ -166,8 +162,7 @@ self: ContextOptionsStore,
     templateGallery: TContextOption[];
     createNewFolder: TContextOption;
   },
-
-)=> {
+) => {
   const uploadReadyPDFFrom: TContextOption = {
     id: "personal_upload-ready-Pdf-from",
     className: "main-button_drop-down_sub",
@@ -181,8 +176,7 @@ self: ContextOptionsStore,
         icon: ActionsUploadReactSvgUrl,
         label: t("Common:FromPortal"),
         key: "personal_upload-from-docspace",
-        onClick: () =>
-          self.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
+        onClick: () => self.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
       },
       {
         id: "personal_upload-from-device",
@@ -208,8 +202,10 @@ self: ContextOptionsStore,
 };
 
 export const getFolderModelImpl = (
-self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
-)=> {
+  self: ContextOptionsStore,
+  t: TTranslation,
+  isSectionMenu?: boolean,
+) => {
   const { isLoading } = self.clientLoadingStore;
   const { security, roomType, parentRoomType, isFolder, isAIRoom } =
     self.selectedFolderStore;
@@ -224,8 +220,7 @@ self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
     window?.DocSpace?.location.pathname.includes("/settings");
 
   const currentCanCreate =
-    isLoading &&
-    hasOwnProperty(window?.DocSpace?.location?.state, "canCreate")
+    isLoading && hasOwnProperty(window?.DocSpace?.location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 
@@ -386,7 +381,12 @@ self: ContextOptionsStore,t: TTranslation, isSectionMenu?: boolean
 
   const privateFolderActions = [
     ...(canCreateEncrypted
-      ? [createNewDoc, createNewSpreadsheet, createNewPresentation, createNewPdfForm]
+      ? [
+          createNewDoc,
+          createNewSpreadsheet,
+          createNewPresentation,
+          createNewPdfForm,
+        ]
       : []),
     createNewFolder,
     { key: "separator", isSeparator: true },

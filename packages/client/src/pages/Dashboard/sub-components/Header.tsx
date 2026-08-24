@@ -137,7 +137,7 @@ const Header = ({
             <Link
               className={styles.planLink}
               color="accent"
-              type={LinkType.action}
+              type={LinkType.page}
               onClick={openPayments}
               isHovered
             >

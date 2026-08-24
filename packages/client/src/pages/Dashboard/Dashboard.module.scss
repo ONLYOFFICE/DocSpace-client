@@ -333,21 +333,6 @@
 }
 
 .sectionSubtitle {
-  font-size: 13px;
-  line-height: 20px;
-
-  :global(.light) & {
-    color: $gray-text;
-  }
-
-  :global(.dark) & {
-    color: $gray-dark-text;
-  }
-}
-
-// Larger than `.sectionSubtitle`: this one sits under the page's opening
-// heading rather than inside a card, so it reads at body size.
-.createSubtitle {
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
@@ -375,7 +360,12 @@
   line-height: 22px;
 }
 
+// The create tiles fill the whole content width here instead of stopping at the
+// ui-kit tile cap (184px) — the dashboard has a fixed 1180px content column, so
+// capped tiles left a gap at the end of the row. Height is unchanged.
 .quickActions {
+  --quick-actions-tile-max-width: none;
+
   justify-content: flex-start;
 }
 

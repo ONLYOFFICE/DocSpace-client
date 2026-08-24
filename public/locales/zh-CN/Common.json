@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "激活 AI 功能以开始使用？",
   "ActivateAISearch": "激活 AI 搜索",
   "ActivateAISearchDescription": "启用 AI 搜索即可在 AI 聊天中使用网络搜索和网页抓取。",
-  "ActivateAISearchToGetStarted": "激活 AI 搜索以开始使用",
+  "ActivateAISearchToGetStarted": "激活 AI 搜索以开始使用？",
   "ActivateLicense": "激活许可证",
   "ActivateLicenseActivated": "许可证已激活",
   "ActivatePaidTariffExpiration": "您的订阅于{{date}}到期。",

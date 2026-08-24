@@ -20,7 +20,7 @@
   "ActivateAIFeaturesToGetStarted": "Да се активират ли ИИ функциите, за да започнете?",
   "ActivateAISearch": "Активиране на ИИ търсенето",
   "ActivateAISearchDescription": "Активирайте ИИ търсенето, за да използвате уеб търсене и уеб обхождане в ИИ чатовете.",
-  "ActivateAISearchToGetStarted": "Активирайте ИИ търсенето, за да започнете",
+  "ActivateAISearchToGetStarted": "Да се активира ли ИИ търсенето, за да започнете?",
   "ActivateLicense": "Активирайте лиценза",
   "ActivateLicenseActivated": "Лицензът е активиран",
   "ActivatePaidTariffExpiration": "Вашият абонамент изтича на {{date}}.",

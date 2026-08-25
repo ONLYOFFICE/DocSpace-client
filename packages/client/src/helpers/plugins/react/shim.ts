@@ -151,6 +151,8 @@ const PLUGIN_UI_KIT_SHIM_URL = URL.createObjectURL(
   ),
 );
 
+const PLUGIN_SDK_ROOT = "@onlyoffice/docspace-plugin-sdk";
+
 const SPECIFIER_MAP: Record<string, string> = {
   react: REACT_SHIM_URL,
   "react-dom": REACT_DOM_SHIM_URL,
@@ -217,18 +219,32 @@ export function rewritePluginImports(code: string): string {
   );
 
   if (unresolved.size > 0) {
-    const missing = Array.from(unresolved)
-      .map((s) => `"${s}"`)
-      .join(", ");
-    const provided = Object.keys(SPECIFIER_MAP)
-      .map((s) => `"${s}"`)
-      .join(", ");
+    const quote = (specifiers: string[]) =>
+      specifiers.map((s) => `"${s}"`).join(", ");
 
-    throw new Error(
-      `The bundle imports ${missing}, which DocSpace does not provide. ` +
-        `Drop them from "external" in the plugin build config so they are ` +
-        `bundled into plugin.js. DocSpace provides: ${provided}.`,
+    const missing = Array.from(unresolved).filter(
+      (s) => s !== PLUGIN_SDK_ROOT,
     );
+
+    // The root is the one bare specifier that is a mistake without being
+    // unknown: its own subpath is on offer, so the generic wording reads as a
+    // contradiction.
+    const sdkRootNote = unresolved.has(PLUGIN_SDK_ROOT)
+      ? `The bundle imports "${PLUGIN_SDK_ROOT}". DocSpace shims only its ` +
+        `"${PLUGIN_SDK_ROOT}/react" entry point — the root carries no module ` +
+        `state, so a plugin runs against its own copy. Drop it from "external" ` +
+        `in the plugin build config so it is bundled into plugin.js.`
+      : "";
+
+    const missingNote =
+      missing.length > 0
+        ? `The bundle imports ${quote(missing)}, which DocSpace does not ` +
+          `provide. Drop them from "external" in the plugin build config so ` +
+          `they are bundled into plugin.js. DocSpace provides: ` +
+          `${quote(Object.keys(SPECIFIER_MAP))}.`
+        : "";
+
+    throw new Error([sdkRootNote, missingNote].filter(Boolean).join(" "));
   }
 
   return rewritten;

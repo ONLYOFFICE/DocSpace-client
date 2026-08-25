@@ -157,6 +157,43 @@ describe("rewritePluginImports", () => {
     expect(rewritten).toContain(`'not unlike "zod", but hand-written'`);
   });
 
+  // The root is not "unavailable" the way lodash is: its own /react subpath is
+  // on offer, so the generic wording would contradict the list that follows it.
+  it("tells the SDK root apart from a package it does not know", () => {
+    let thrown = "";
+
+    try {
+      rewritePluginImports(`import { Actions } from "@onlyoffice/docspace-plugin-sdk";`);
+    } catch (cause) {
+      thrown = cause instanceof Error ? cause.message : "";
+    }
+
+    expect(thrown).toContain('shims only its');
+    expect(thrown).not.toContain("does not provide");
+  });
+
+  it("reports the SDK root and an unknown package each in its own words", () => {
+    let thrown = "";
+
+    try {
+      rewritePluginImports(
+        [
+          `import { Actions } from "@onlyoffice/docspace-plugin-sdk";`,
+          `import { debounce } from "lodash-es";`,
+        ].join("\n"),
+      );
+    } catch (cause) {
+      thrown = cause instanceof Error ? cause.message : "";
+    }
+
+    expect(thrown).toContain('shims only its');
+    expect(thrown).toContain('"lodash-es", which DocSpace does not provide');
+    // The root must not be repeated as an unprovided package.
+    expect(thrown).not.toContain(
+      '"@onlyoffice/docspace-plugin-sdk", which DocSpace does not provide',
+    );
+  });
+
   it.each([
     [`import"react";`, "a bare import"],
     [`import x from"react";`, "a default import"],

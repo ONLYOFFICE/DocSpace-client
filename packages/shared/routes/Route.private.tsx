@@ -150,8 +150,16 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname === "/portal-settings/delete-data/deactivation";
 
     const isBonusPage = location.pathname === "/portal-settings/bonus";
-    const isServicesPage =
-      location.pathname === "/portal-settings/payments/services";
+
+    // SaaS billing lives under its own /billing article (the Stripe callback
+    // included); standalone has the license page under portal-payments and
+    // nothing else - no wallet, no addons, no payment method.
+    const isBillingUrl =
+      location.pathname === "/billing" ||
+      location.pathname.startsWith("/billing/");
+    const isSaasOnlyPaymentsUrl =
+      location.pathname.startsWith("/portal-settings/payments") &&
+      location.pathname !== "/portal-settings/payments/portal-payments";
 
     const isPortalRenameUrl =
       location.pathname ===
@@ -222,10 +230,30 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
           isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
-        (isEnterprise && isBonusPage) ||
-        (standalone && isServicesPage))
+        (isEnterprise && isBonusPage))
     ) {
       return <Navigate replace to="/" />;
+    }
+
+    if (isLoaded && standalone && (isBillingUrl || isSaasOnlyPaymentsUrl)) {
+      // The license page is the standalone counterpart of SaaS billing, but it
+      // exists in EE/DE only and only for admins - everyone else goes home.
+      const canOpenLicensePage =
+        !isCommunity && (user?.isOwner || user?.isAdmin);
+
+      return (
+        <Navigate
+          replace
+          to={
+            canOpenLicensePage
+              ? combineUrl(
+                  window.ClientConfig?.proxy?.url,
+                  "/portal-settings/payments/portal-payments",
+                )
+              : "/"
+          }
+        />
+      );
     }
 
     if (

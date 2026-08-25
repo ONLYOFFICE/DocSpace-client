@@ -3,7 +3,7 @@
   "content": "Configure the integration. Go to Nextcloud Settings → Administration → {{organizationName}} to enable document editing.",
   "content_en_sha1_hash": "4f7d1a32d9693d201fbe5fa6026c16783f891318",
   "created_at": "2026-08-20T20:04:48.190Z",
-  "updated_at": "2026-08-21T15:49:57.228Z",
+  "updated_at": "2026-08-24T22:30:00.621Z",
   "comment": {
     "text": "Instructional text within the integration configuration steps providing navigation instructions to enable document editing; includes the `{{organizationName}}` variable representing the organization's name.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "file_path": "/packages/client/src/components/IntegrationsCard/integrations-catalog.tsx",
       "line_number": 117,
       "context": "serviceName: getBrandName(\"Nextcloud\"),\n }),\n },\n {\n id: \"configure\",\n text: t(\"Common:IntegrationConfigureNextcloudStep\", {\n organizationName: getBrandName(\"OrganizationName\"),\n }),\n },\n ],\n githubUrl: \"https://github.com/ONLYOFFICE\",",
       "module": "/packages/client"

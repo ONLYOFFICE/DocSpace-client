@@ -173,8 +173,12 @@ export default inject(({ settingsStore, authStore, userStore }: TStore) => {
   return {
     showText,
     identityServerEnabled,
-    // Docs Connect is admin/owner-only - see `hasDocsConnectAccess`.
-    canOpenDocsConnect: hasDocsConnectAccess(userStore?.user),
+    // Docs Connect is SaaS-only and admin/owner-only - see
+    // `hasDocsConnectAccess`.
+    canOpenDocsConnect: hasDocsConnectAccess(
+      userStore?.user,
+      settingsStore?.standalone,
+    ),
     toggleArticleOpen,
     currentDeviceType,
   };

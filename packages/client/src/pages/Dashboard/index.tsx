@@ -77,6 +77,7 @@ import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
 import { DeviceType } from "@docspace/shared/enums";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
@@ -88,6 +89,7 @@ import { useSdkFrame } from "SRC_DIR/components/SdkFrameHost/useSdkFrame";
 import type { AppId } from "SRC_DIR/helpers/apps-catalog";
 import { setDashboardVisited } from "SRC_DIR/helpers/dashboardVisited";
 import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
+import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
 import {
   useChatNoAccess,
   mapChatNoAccessStores,
@@ -98,7 +100,6 @@ import { WelcomeDialog } from "./WelcomeDialog";
 import { DashboardTourHost } from "./DashboardTourHost";
 import { ModuleCard } from "./sub-components/ModuleCard";
 import { ProfileCard } from "./sub-components/ProfileCard";
-import { IntegrationsCard } from "./sub-components/IntegrationsCard";
 import { DevToolsCard } from "./sub-components/DevToolsCard";
 import { Header } from "./sub-components/Header";
 import { DashboardLoader } from "./sub-components/DashboardLoader";
@@ -125,8 +126,10 @@ type DashboardProps = ChatNoAccessStoreProps & {
   requestDashboardTour: () => void;
   /** Admins / owners / room admins — the set allowed to create rooms. */
   canCreateRooms: boolean;
-  /** Portal admins and the owner — the only ones who can reach Docs Connect. */
+  /** Portal admins and the owner, which the apps subtitle wording follows. */
   isAdminOrOwner: boolean;
+  /** Whether Docs Connect can be offered at all — SaaS, admin or owner. */
+  canOpenDocsConnect: boolean;
   /** Whether the portal's AI is set up, which agent creation also needs. */
   aiReady: boolean;
   /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
@@ -152,6 +155,7 @@ const Dashboard = (props: DashboardProps) => {
     requestDashboardTour,
     canCreateRooms,
     isAdminOrOwner,
+    canOpenDocsConnect,
     aiReady,
     isFreeTariff,
     isWarningRoomsDialog,
@@ -357,7 +361,7 @@ const Dashboard = (props: DashboardProps) => {
                   {t("Common:NewFilesDefaultPlace", {
                     sectionName: t("Common:Files"),
                   })}
-                  {isAdminOrOwner ? (
+                  {canOpenDocsConnect ? (
                     <>
                       {" - "}
                       <Trans
@@ -436,7 +440,7 @@ const Dashboard = (props: DashboardProps) => {
               </section>
             ) : null}
 
-            <IntegrationsCard />
+            <IntegrationsCard dataTourId="dashboard-integrations" />
             <DevToolsCard />
           </div>
         </Scrollbar>
@@ -521,11 +525,17 @@ const DashboardConnected = inject((stores: TStore) => {
     requestDashboardTour: dashboardTourStore.requestTour,
     // Same set the Home quick actions and the agents header button gate on.
     canCreateRooms: authStore.isAdmin || authStore.isRoomAdmin,
-    // Room admins are excluded here: Docs Connect sits under the portal's
-    // developer tools, which only admins and the owner can open. Same flags
-    // the Header and ProfileCard gate on.
+    // Room admins are excluded here: the apps subtitle names the portal's plan,
+    // which only admins and the owner see. Same flags the Header and
+    // ProfileCard gate on.
     isAdminOrOwner:
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
+    // Stricter still: Docs Connect is a SaaS-only service, so a standalone
+    // portal is not offered the link at all — see `hasDocsConnectAccess`.
+    canOpenDocsConnect: hasDocsConnectAccess(
+      userStore.user,
+      settingsStore.standalone,
+    ),
     aiReady: settingsStore.aiConfig?.aiReady ?? false,
     // Undefined until the tariff loads; the plan is free by default, matching
     // the header's own fallback.

@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-08-21T15:49:57.156Z",
+  "updated_at": "2026-08-24T22:30:00.606Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -13,25 +13,25 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useFilesHelper.ts",
-      "line_number": 398,
+      "line_number": 401,
       "context": "// server path, so it is missing from pathParts. Re-insert it after\n // the root crumb so returning to it keeps searchArea=Forms.\n if (formsSectionRef.current && !isThirdParty) {\n const insertIndex = breadCrumbs.findIndex((bc) => +bc.id === 0) + 1;\n breadCrumbs.splice(insertIndex, 0, {\n label: t(\"Forms\"),\n id: FORMS_SECTION_ID,\n isRoom: true,\n rootFolderType: FORMS_ROOT_FOLDER_TYPE as FolderType,\n });\n }",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
-      "line_number": 206,
+      "line_number": 209,
       "context": "withFormsTreeFolder &&\n !isUserOnly &&\n folder.rootFolderType === FolderType.VirtualRooms\n ) {\n newItems.push({\n label: t(\"Forms\"),\n id: FORMS_SECTION_ID,\n parentId: folder.parentId!,\n rootFolderType: FORMS_ROOT_FOLDER_TYPE as FolderType,\n filesCount: folder.filesCount!,\n foldersCount: folder.foldersCount!,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 301,
+      "line_number": 306,
       "context": "? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel:\n headerProps.headerLabel || (isForms ? t(\"Forms\") : t(\"RoomList\")),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 301,
+      "line_number": 306,
       "context": "? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel:\n headerProps.headerLabel || (isForms ? t(\"Forms\") : t(\"RoomList\")),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/libs/ui-kit"
     },

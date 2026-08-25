@@ -56,13 +56,20 @@ export const hasDevToolsAccess = (
 /**
  * Who may reach Docs Connect inside Developer Tools.
  *
- * Stricter than `hasDevToolsAccess`: connecting an editors instance is a
+ * Stricter than `hasDevToolsAccess` on two counts. The service is sold and
+ * hosted by us, so it exists in SaaS only - a standalone portal has no Docs
+ * Connect at all, whoever is asking. And connecting an editors instance is a
  * portal-wide operation, so only portal admins and the owner get the page -
  * room admins and users are kept out even when the rest of the section is open
- * to them. Enforced by the route guard in `routes/Route.private.tsx`; the
- * sidebar item and the Overview card must ask this too, so we never offer a
- * link that answers with 403. Same flags the dashboard cards gate on.
+ * to them.
+ *
+ * Enforced by the route guard in `routes/Route.private.tsx`; everything that
+ * merely advertises the service - the sidebar item, the dashboard cards, the
+ * "or connect Docs" link, the integration dialogs - must ask this too, so we
+ * never offer a link that answers with 403 and never ask the server about an
+ * instance that cannot exist.
  */
 export const hasDocsConnectAccess = (
   user: { isAdmin?: boolean; isOwner?: boolean } | null | undefined,
-) => !!user && (!!user.isAdmin || !!user.isOwner);
+  standalone?: boolean,
+) => !standalone && !!user && (!!user.isAdmin || !!user.isOwner);

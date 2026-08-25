@@ -193,8 +193,12 @@ export default inject(({ settingsStore, userStore }: TStore) => {
 
   return {
     apiBasicLink,
-    // Docs Connect is admin/owner-only - see `hasDocsConnectAccess`.
-    canOpenDocsConnect: hasDocsConnectAccess(userStore?.user),
+    // Docs Connect is SaaS-only and admin/owner-only - see
+    // `hasDocsConnectAccess`.
+    canOpenDocsConnect: hasDocsConnectAccess(
+      userStore?.user,
+      settingsStore?.standalone,
+    ),
   };
 })(observer(Main));
 

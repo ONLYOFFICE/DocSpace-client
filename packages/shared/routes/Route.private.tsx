@@ -357,9 +357,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       if (!hasDevToolsAccess(user, limitedAccessDevToolsForUsers))
         return <Navigate replace to="/error/403" />;
 
-      // Docs Connect is admin/owner-only even when the rest of the section is
-      // open, so a room admin or user who guesses the URL is bounced too.
-      if (isDocsConnectPage && !hasDocsConnectAccess(user))
+      // Docs Connect is SaaS-only and admin/owner-only even when the rest of
+      // the section is open, so a standalone portal, a room admin or a user who
+      // guesses the URL is bounced too.
+      if (isDocsConnectPage && !hasDocsConnectAccess(user, standalone))
         return <Navigate replace to="/error/403" />;
     }
 

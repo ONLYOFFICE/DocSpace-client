@@ -45,6 +45,11 @@ import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import { armTour, tourTooltip, walkTour } from "./helpers/tour";
 
+// The Overview's integrations card is a Docs Connect surface, so it renders in
+// SaaS only and its tour step is dropped on a standalone portal - which
+// `TypeSettings.Authenticated` mocks. The full walkthrough these tests describe
+// needs the SaaS variant.
+
 // packages/client/src/store/DashboardTourStore.ts
 const TOUR_KEY = "dashboard_tour_pending";
 // The dashboard renders its own content — no list to fetch and no `folder`
@@ -157,7 +162,7 @@ const goToStep = async (page: Page, title: string, maxSteps = 8) => {
 test.describe("Dashboard tour", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
-      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
     );
   });
@@ -270,7 +275,7 @@ test.describe("Dashboard tour", () => {
 test.describe("Dashboard welcome", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
-      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       selfByTypeHandler(TEST_PORT, "admin"),
     );

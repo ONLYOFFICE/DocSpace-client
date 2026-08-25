@@ -47,11 +47,12 @@ import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
+import CheckIcon from "@docspace/ui-kit/assets/check.react.svg";
 import GithubLightIcon from "PUBLIC_DIR/images/thirdparties/github.light.react.svg";
 import GithubDarkIcon from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg";
 
 import type { IntegrationPlatform } from "./integrations-catalog";
-import styles from "../Dashboard.module.scss";
+import styles from "./IntegrationsCard.module.scss";
 
 // A disabled <button> fires no mouse events, so the tooltip anchors on the
 // wrapper around it rather than on the button itself.
@@ -60,17 +61,26 @@ const CREATE_INSTANCE_ANCHOR = "integration-create-instance-anchor";
 type IntegrationDialogProps = {
   platform: IntegrationPlatform | null;
   onClose: () => void;
-  onCreateInstance: () => void;
+  onInstanceAction: () => void;
   // Docs Connect sits under the portal's developer tools, so only admins and
   // the owner can act on this button — everyone else sees it disabled.
-  isCreateInstanceDisabled?: boolean;
+  isInstanceActionDisabled?: boolean;
+  /**
+   * Whether the portal already has a Docs Connect instance: step 1 is then
+   * done, and the button manages the instance instead of creating one.
+   */
+  hasInstance?: boolean;
+  /** Drops the button entirely — the Docs Connect page passes this. */
+  hideInstanceAction?: boolean;
 };
 
 export const IntegrationDialog = ({
   platform,
   onClose,
-  onCreateInstance,
-  isCreateInstanceDisabled = false,
+  onInstanceAction,
+  isInstanceActionDisabled = false,
+  hasInstance = false,
+  hideInstanceAction = false,
 }: IntegrationDialogProps) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
@@ -79,6 +89,10 @@ export const IntegrationDialog = ({
 
   const { name, subtitle, steps, url, githubUrl, docsApiUrl } = platform;
   const GithubIcon = isBase ? GithubLightIcon : GithubDarkIcon;
+
+  // The instance step is the only one this dialog can see the state of, so it
+  // is the only one that ever renders as done.
+  const isStepDone = (stepId: string) => hasInstance && stepId === "instance";
 
   // "Your own platform": nothing to provision and no connector repo, so the
   // footer collapses to a single secondary button to the API reference.
@@ -96,20 +110,26 @@ export const IntegrationDialog = ({
     ) : (
       <div className={styles.integrationDialogFooter}>
         <div className={styles.integrationDialogFooterButtons}>
-          <span
-            id={CREATE_INSTANCE_ANCHOR}
-            className={styles.integrationDialogCreateAnchor}
-          >
-            <Button
-              primary
-              size={ButtonSize.normal}
-              label={t("Common:CreateInstance")}
-              onClick={onCreateInstance}
-              isDisabled={isCreateInstanceDisabled}
-              testId={`integration-create-instance-${platform.id}`}
-            />
-          </span>
-          {isCreateInstanceDisabled ? (
+          {hideInstanceAction ? null : (
+            <span
+              id={CREATE_INSTANCE_ANCHOR}
+              className={styles.integrationDialogCreateAnchor}
+            >
+              <Button
+                primary
+                size={ButtonSize.normal}
+                label={
+                  hasInstance
+                    ? t("Common:ManageInstance")
+                    : t("Common:CreateInstance")
+                }
+                onClick={onInstanceAction}
+                isDisabled={isInstanceActionDisabled}
+                testId={`integration-create-instance-${platform.id}`}
+              />
+            </span>
+          )}
+          {isInstanceActionDisabled && !hideInstanceAction ? (
             <Tooltip
               id={`${CREATE_INSTANCE_ANCHOR}-tooltip`}
               anchorSelect={`#${CREATE_INSTANCE_ANCHOR}`}
@@ -170,16 +190,33 @@ export const IntegrationDialog = ({
           </Text>
 
           <ol className={styles.integrationDialogSteps}>
-            {steps.map((step, index) => (
-              <li key={step.id} className={styles.integrationDialogStep}>
-                <Text as="span" className={styles.integrationDialogStepLabel}>
-                  {t("Common:StepNumber", { number: index + 1 })}
-                </Text>
-                <Text as="span" className={styles.integrationDialogStepText}>
-                  {step.text}
-                </Text>
-              </li>
-            ))}
+            {steps.map((step, index) => {
+              const done = isStepDone(step.id);
+
+              return (
+                <li
+                  key={step.id}
+                  className={styles.integrationDialogStep}
+                  data-testid="integration-step"
+                  data-done={done ? "true" : undefined}
+                >
+                  <Text as="span" className={styles.integrationDialogStepLabel}>
+                    {t("Common:StepNumber", { number: index + 1 })}
+                  </Text>
+                  <Text as="span" className={styles.integrationDialogStepText}>
+                    {step.text}
+                    {done ? (
+                      <span
+                        className={styles.integrationDialogStepDone}
+                        aria-hidden="true"
+                      >
+                        <CheckIcon />
+                      </span>
+                    ) : null}
+                  </Text>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </ModalDialog.Body>

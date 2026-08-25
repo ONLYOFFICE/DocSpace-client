@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-08-21T16:27:00.790Z",
+  "updated_at": "2026-08-24T22:30:00.619Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to a help page or settings page for more information about the current feature or setting.",
     "is_auto": true,
@@ -18,45 +18,45 @@
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 140,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 140,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 140,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 140,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 140,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 140,
-      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationDialog.tsx",
-      "line_number": 149,
+      "file_path": "/packages/client/src/components/IntegrationsCard/IntegrationDialog.tsx",
+      "line_number": 169,
       "context": "target={LinkTarget.blank}\n isHovered\n fontSize=\"13px\"\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 140,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 140,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 140,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 140,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 140,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 140,
+      "context": "description: t(\"Settings:RestAPIDescription\", {\n organizationName,\n productName,\n }),\n url: apiBasicLink,\n linkTitle: t(\"Common:LearnMore\"),\n },\n {\n id: \"embed-sdk\",\n title: t(\"Settings:EmbedSDK\"),\n description: t(\"Settings:EmbedSDKDescription\"),",
       "module": "/packages/client"
     },
     {

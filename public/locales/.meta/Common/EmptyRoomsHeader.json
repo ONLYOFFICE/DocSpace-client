@@ -3,7 +3,7 @@
   "content": "No rooms here yet",
   "content_en_sha1_hash": "3d183435304940e2b16ab0ff7611329c1d3160bd",
   "created_at": "2025-05-19T21:30:44.877Z",
-  "updated_at": "2026-08-21T15:04:37.055Z",
+  "updated_at": "2026-08-24T22:30:00.613Z",
   "comment": {
     "text": "This is the header text displayed when no rooms are found in the room selector. It indicates that the list of rooms is currently empty.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 241,
+      "line_number": 246,
       "context": "if (isEmptyFilesRootScreen) return t(\"SelectorEmptyScreenHeader\");\n \n if (isEmptyAgentsRootScreen) return t(\"EmptyRoomsHeaderAgent\");\n \n return t(\"EmptyRoomsHeader\");\n }, [isKnowledgeFolder, isEmptyFilesRootScreen, isEmptyAgentsRootScreen, t]);\n \n const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : isEmptyAgentsRootScreen",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 349,
+      "line_number": 354,
       "context": "onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={\n isBase ? <EmptyScreenRoomsLight /> : <EmptyScreenRoomsDark />\n }\n emptyScreenHeader={emptyScreenHeader ?? t(\"EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"EmptyRoomsDescriptionText\", {\n sectionName: isForms ? t(\"Forms\") : t(\"Rooms\"),\n })",
       "module": "/libs/ui-kit"
     },

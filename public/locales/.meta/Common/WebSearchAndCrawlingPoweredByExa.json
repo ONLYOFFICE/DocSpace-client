@@ -1,0 +1,29 @@
+{
+  "key_path": "WebSearchAndCrawlingPoweredByExa",
+  "content": "Web search and web crawling powered by Exa",
+  "content_en_sha1_hash": "e1ec1012c37b019abf08d784c89845ca69c25fcd",
+  "created_at": "2026-08-24T22:29:52.225Z",
+  "updated_at": "2026-08-24T22:30:39.335Z",
+  "comment": {
+    "text": "A descriptive text label in the AI features banner that appears next to the web search icon to indicate the technology provider.",
+    "is_auto": true,
+    "updated_at": "2026-08-24T22:30:39.335Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
+      "line_number": 249,
+      "context": "<>\n {isWebSearchTab ? (\n <div className={styles.featureRow}>\n <WebSearchIcon className={styles.payIcon} />\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"Common:WebSearchAndCrawlingPoweredByExa\")}\n </Text>\n </div>\n ) : (\n <div className={styles.featureRow}>\n <AIIcon className={styles.payIcon} />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

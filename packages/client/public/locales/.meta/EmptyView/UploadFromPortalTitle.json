@@ -3,7 +3,7 @@
   "content": "Upload from the workspace",
   "content_en_sha1_hash": "9525f02b8bd38d884636ff779478f57de2cb3151",
   "created_at": "2026-08-12T11:00:48.517Z",
-  "updated_at": "2026-08-20T12:26:01.689Z",
+  "updated_at": "2026-08-24T22:30:00.603Z",
   "comment": {
     "text": "Dropdown option label or button text in an empty state view that initiates file uploading; includes a `productName` variable representing the brand name.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 360,
+      "line_number": 355,
       "context": "return [\n {\n id: \"actions_upload-files-product\",\n className: \"main-button_drop-down\",\n icon: MoveReactSvgUrl,\n label: t(\"EmptyView:UploadFromPortalTitle\"),\n onClick: self.onShowAiKnowledgeSelectFileDialog,\n key: \"upload-files-product\",\n },\n {\n id: \"actions_upload-files\",",
       "module": "/packages/client"
     },

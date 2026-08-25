@@ -79,6 +79,7 @@
     flex: 1 1 auto !important;
     max-width: 100% !important;
     border-inline-start: none;
+    z-index: 204;
 
     @include mixins.not-mobile {
       width: calc(100% - var(--ai-sidebar-width, 0px)) !important;

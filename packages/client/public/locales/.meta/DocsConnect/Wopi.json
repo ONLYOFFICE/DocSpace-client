@@ -3,7 +3,7 @@
   "content": "WOPI",
   "content_en_sha1_hash": "28fdf8ce33ed80417548a43e170074e85183eed7",
   "created_at": "2026-07-27T13:07:48.535Z",
-  "updated_at": "2026-08-10T12:23:10.516Z",
+  "updated_at": "2026-08-24T22:30:00.690Z",
   "comment": {
     "text": "A label for a configuration section in the DocsConnect settings under Developer Tools, representing the WOPI protocol.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 422,
+      "line_number": 497,
       "context": "</div>\n </FieldContainer>\n </div>\n \n <div className={styles.toggleGroup}>\n <Text fontWeight={600}>{t(\"DocsConnect:Wopi\")}</Text>\n <div className={styles.toggleCard}>\n <div className={styles.toggleControl}>\n <ToggleButton\n label={t(\"DocsConnect:EnableWopi\")}\n fontWeight={600}",
       "module": "/packages/client"
     }

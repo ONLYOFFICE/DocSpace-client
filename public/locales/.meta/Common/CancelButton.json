@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-08-21T15:04:37.068Z",
+  "updated_at": "2026-08-24T22:30:00.618Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -145,13 +145,13 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 229,
+      "line_number": 234,
       "context": "},\n };\n \n const cancelButtonSelectorProps: TSelectorCancelButton = {\n withCancelButton: true,\n cancelButtonLabel: t(\"CancelButton\"),\n onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 195,
+      "line_number": 200,
       "context": "};\n \n const cancelButtonProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n cancelButtonId,\n onCancel,\n }\n : {};",
       "module": "/libs/ui-kit"
     },
@@ -163,13 +163,13 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 579,
+      "line_number": 586,
       "context": ": ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n onCancel,\n }\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 309,
+      "line_number": 314,
       "context": ": {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton: true,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n onCancel,\n }\n : {};\n \n const searchSelectorProps: TSelectorSearch = withSearch",
       "module": "/libs/ui-kit"
     },
@@ -751,7 +751,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 521,
+      "line_number": 606,
       "context": "onCancelClick={onCancelGeneral}\n saveButtonDisabled={!isGeneralValid}\n showReminder={hasChangesGeneral}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n isSaving={isSavingGeneral}\n displaySettings\n />\n \n <Text fontSize=\"16px\" fontWeight={700}>",
       "module": "/packages/client"
     },

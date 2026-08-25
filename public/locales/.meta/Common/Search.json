@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-08-20T12:26:01.720Z",
+  "updated_at": "2026-08-24T22:30:00.627Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -13,32 +13,32 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 235,
-      "context": "onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
+      "line_number": 240,
+      "context": "onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFullLoadActive && !searchValue && !afterSearch.current,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 177,
-      "context": "const searchProps: TSelectorSearch = withSearch\n ? {\n withSearch,\n searchLoader: <SearchLoader />,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n isSearchLoading: showBreadCrumbsLoader,\n onSearch: onSearch!,\n onClearSearch: onClearSearch!,\n }",
+      "line_number": 182,
+      "context": "const searchProps: TSelectorSearch = withSearch\n ? {\n withSearch,\n searchLoader: <SearchLoader />,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n isSearchLoading: showSearchLoader,\n onSearch: onSearch!,\n onClearSearch: onClearSearch!,\n }",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
-      "line_number": 187,
+      "line_number": 200,
       "context": "onCloseClick: headerProps?.onCloseClick ?? onClose ?? (() => {}),\n headerLabel: headerProps?.headerLabel || t(\"Groups\"),\n }}\n alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}\n withSearch\n searchPlaceholder={t(\"Search\")}\n onSearch={onSearch}\n searchValue={searchValue}\n onClearSearch={onClearSearch}\n isSearchLoading={false}\n disableSubmitButton={!selectedItem}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 586,
+      "line_number": 593,
       "context": "}\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch,\n onClearSearch,\n searchLoader: <SearchLoader />,\n isSearchLoading:",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 317,
-      "context": ": {};\n \n const searchSelectorProps: TSelectorSearch = withSearch\n ? {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
+      "line_number": 322,
+      "context": ": {};\n \n const searchSelectorProps: TSelectorSearch = withSearch\n ? {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFullLoadActive && !searchValue && !afterSearch.current,",
       "module": "/libs/ui-kit"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Configure the integration. Go to Confluence Administration → Manage add-ons → {{organizationName}} Connector → Configure to connect {{organizationName}} Document Server and enable document editing.",
   "content_en_sha1_hash": "0e1ee612f49d732ca1f3d679c8eea88d486ae1a9",
   "created_at": "2026-08-20T20:04:48.253Z",
-  "updated_at": "2026-08-21T15:49:57.229Z",
+  "updated_at": "2026-08-24T22:30:00.621Z",
   "comment": {
     "text": "Instructional text providing step-by-step configuration instructions for the Confluence integration. The variable {{organizationName}} represents the user's organization name.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "file_path": "/packages/client/src/components/IntegrationsCard/integrations-catalog.tsx",
       "line_number": 168,
       "context": "organizationName: getBrandName(\"OrganizationName\"),\n }),\n },\n {\n id: \"configure\",\n text: t(\"Common:IntegrationConfigureConfluenceStep\", {\n organizationName: getBrandName(\"OrganizationName\"),\n }),\n },\n ],\n githubUrl: \"https://github.com/ONLYOFFICE\",",
       "module": "/packages/client"

@@ -3,7 +3,7 @@
   "content": "Create or <1>upload a file</1>",
   "content_en_sha1_hash": "8d812430ac72e6c9055c68d0a4f2c8ddb757965c",
   "created_at": "2026-06-01T21:20:38.523Z",
-  "updated_at": "2026-08-21T15:49:57.213Z",
+  "updated_at": "2026-08-24T22:30:00.664Z",
   "comment": {
     "text": "Section heading in the Dashboard prompting the user to start a new document or upload an existing one, where the `<1>` tag denotes a clickable link.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/index.tsx",
-      "line_number": 338,
+      "line_number": 342,
       "context": "<div className={styles.sectionHeading}>\n <Text fontSize=\"18px\" fontWeight={700} lineHeight=\"24px\">\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"CreateNewOrUpload\"\n components={{\n 1: (\n <Link\n id={UPLOAD_LINK_ID}\n type={LinkType.action}",
       "module": "/packages/client"
     }

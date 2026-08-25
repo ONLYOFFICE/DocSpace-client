@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2026-07-27T13:07:48.497Z",
-  "updated_at": "2026-08-21T15:49:57.263Z",
+  "updated_at": "2026-08-24T22:30:00.695Z",
   "comment": {
     "text": "Label in a statistics details row indicating the server package type.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 534,
+      "line_number": 506,
       "context": ">\n {t(\"DocsConnect:Build\")}\n </Text>\n <div className={styles.detailRows}>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"DocsConnect:BuildType\")}</Text>\n <Text fontWeight={600}>{tenantInfo.server.packageType}</Text>\n </div>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"Common:Version\")}</Text>\n <Text fontWeight={600}>{tenantInfo.server.version}</Text>",
       "module": "/packages/client"
     }

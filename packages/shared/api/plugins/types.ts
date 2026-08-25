@@ -55,4 +55,6 @@ export type TAPIPlugin = {
   url: string;
   cssUrl?: string;
   settings: string;
+  /** "module" — load as ES module without iframe; absent/other — legacy iframe */
+  runtime?: "module";
 };

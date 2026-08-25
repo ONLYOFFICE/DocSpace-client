@@ -62,7 +62,7 @@ const Footer = ({
               isSaveButton: true,
               primary: true,
               size: "normal",
-              label: t("Common:SaveButton"),
+              label: saveButtonProps?.props?.label ?? t("Common:SaveButton"),
               settingsModalRequestRunning: modalRequestRunning,
               setSettingsModalRequestRunning: setModalRequestRunning,
               onCloseAction,

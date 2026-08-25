@@ -38,13 +38,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import type { IArticleButtonItemClient } from "SRC_DIR/helpers/plugins/types";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 
 interface ArticlePluginItemProps {
   item: IArticleButtonItemClient;
 }
 
 const ArticlePluginItem: React.FC<ArticlePluginItemProps> = ({ item }) => {
-  const { body: boxProps, onLoad, pluginName } = item;
+  const { body: boxProps, onLoad, pluginName, component } = item;
 
   const [bodyProps, setBodyProps] = useState(boxProps || {});
 
@@ -60,25 +61,32 @@ const ArticlePluginItem: React.FC<ArticlePluginItemProps> = ({ item }) => {
   }, [onLoad]);
 
   useEffect(() => {
-    onLoadAction();
-  }, [onLoadAction]);
+    // `onLoad` only ever produced a replacement IBox tree; a React `component`
+    // keeps its own loading state.
+    if (component) return;
 
+    onLoadAction();
+  }, [component, onLoadAction]);
+
+  // No wrapper of its own: `ArticlePluginItems` already sizes every item.
+  if (component) {
+    return (
+      <PluginWrappedComponent pluginName={pluginName} component={component} />
+    );
+  }
 
   return (
-    <div
-    >
-      <WrappedComponent
-        pluginName={pluginName}
-        component={{
-          component: PluginComponents.box,
-          props: bodyProps,
-        }}
-        saveButton={undefined}
-        setSaveButtonProps={undefined}
-        setModalRequestRunning={undefined}
-        modalRequestRunning={undefined}
-      />
-    </div>
+    <WrappedComponent
+      pluginName={pluginName}
+      component={{
+        component: PluginComponents.box,
+        props: bodyProps,
+      }}
+      saveButton={undefined}
+      setSaveButtonProps={undefined}
+      setModalRequestRunning={undefined}
+      modalRequestRunning={undefined}
+    />
   );
 };
 

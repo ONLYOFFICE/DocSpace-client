@@ -86,7 +86,7 @@ const PaymentsPage = ({
   delayDaysCount: string;
   feedbackAndSupportUrl: string;
 }) => {
-  const { t } = useTranslation("Common");
+  const { t, i18n } = useTranslation("Common");
   const router = useRouter();
   const isLoading = useEndAnimation();
 
@@ -144,9 +144,9 @@ const PaymentsPage = ({
   useEffect(() => {
     const timezone = typeof window !== "undefined" ? window.timezone : "UTC";
     setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, timezone));
-    setPaymentDate(getPaymentDate(dueDate, timezone));
+    setPaymentDate(getPaymentDate(dueDate, timezone, i18n.language));
     setTrialDaysLeft(getDaysLeft(dueDate));
-  }, [dueDate]);
+  }, [dueDate, i18n.language]);
 
   return (
     <div className={styles.wrapper}>
@@ -172,7 +172,8 @@ const PaymentsPage = ({
           isNotPaidPeriod={isNotPaidPeriod}
           gracePeriodEndDate={formatDateLocalized(
             parseToDateTime(gracePeriodEndDate)?.setZone(window.timezone),
-            "DATE_MED",
+            "DATE_FULL",
+            { locale: i18n.language },
           )}
           delayDaysCount={delayDaysCount}
           feedbackAndSupportUrl={feedbackAndSupportUrl}

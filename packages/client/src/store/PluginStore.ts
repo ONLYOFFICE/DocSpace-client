@@ -227,7 +227,10 @@ class PluginStore {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
 
-    makeAutoObservable(this, { reactPluginModalState: observable.ref });
+    makeAutoObservable(this, {
+      reactPluginModalState: observable.ref,
+      reactSettingsSaveButtonState: observable.ref,
+    });
 
     // Subscribe to plugin state changes via WebSocket
     this.wsChangeWebPlugin();

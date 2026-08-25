@@ -242,8 +242,7 @@ export const TariffTitleContainer = ({
         isTrial ||
         !isLicenseDateExpired ? (
           <div className={styles.title}>
-            {getDescription()}
-
+            {getDescription()}{" "}
             {!isLicenseDateExpired ? (
               <Text
                 fontSize="13px"

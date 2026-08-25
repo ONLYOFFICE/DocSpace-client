@@ -39,4 +39,6 @@ import type PluginStore from "SRC_DIR/store/PluginStore";
 export type PluginDialogProps = IModalDialogClient & {
   isVisible: boolean;
   dispatchMessage: PluginStore["dispatchMessage"];
+  reactPluginModalState: PluginStore["reactPluginModalState"];
+  closeReactPluginModal: PluginStore["closeReactPluginModal"];
 };

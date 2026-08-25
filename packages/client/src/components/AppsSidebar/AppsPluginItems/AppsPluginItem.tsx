@@ -64,13 +64,14 @@ import { useCallback, useEffect, useState } from "react";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import type { IArticleButtonItemClient } from "SRC_DIR/helpers/plugins/types";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 
 interface AppsPluginItemProps {
   item: IArticleButtonItemClient;
 }
 
 const AppsPluginItem = ({ item }: AppsPluginItemProps) => {
-  const { body: boxProps, onLoad, pluginName } = item;
+  const { body: boxProps, onLoad, pluginName, component } = item;
 
   const [bodyProps, setBodyProps] = useState(boxProps || {});
 
@@ -83,8 +84,18 @@ const AppsPluginItem = ({ item }: AppsPluginItemProps) => {
   }, [onLoad]);
 
   useEffect(() => {
+    // `onLoad` only ever produced a replacement IBox tree; a React `component`
+    // keeps its own loading state.
+    if (component) return;
+
     onLoadAction();
-  }, [onLoadAction]);
+  }, [component, onLoadAction]);
+
+  if (component) {
+    return (
+      <PluginWrappedComponent pluginName={pluginName} component={component} />
+    );
+  }
 
   return (
     <WrappedComponent

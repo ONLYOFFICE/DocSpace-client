@@ -45,6 +45,10 @@ export const clearLocalStorage = () => {
 
 export const returnToPortal = () => {
   setTimeout(() => {
-    window.location.replace("/");
+    // A restore terminates every session, so the portal root would only
+    // bounce through a 401 to /login?authError=true with an error toast.
+    // The login proxy returns the visitor to the portal if a session is
+    // somehow still alive.
+    window.location.replace("/login");
   }, 5000);
 };

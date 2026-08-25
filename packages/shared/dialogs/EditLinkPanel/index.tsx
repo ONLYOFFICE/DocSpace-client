@@ -200,10 +200,15 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       };
     }
 
+    // Last resort for an access with no option at all: keep the link's own
+    // access so saving the panel does not change it.
     return (
-      accessOptions.selectedOption ??
-      accessOptions.options[accessOptions.options.length - 1] ??
-      {}
+      accessOptions.selectedOption ?? {
+        key: "current-access",
+        label: "",
+        icon: "",
+        access: accessLink,
+      }
     );
   });
 

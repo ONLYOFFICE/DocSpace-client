@@ -50,6 +50,7 @@ import { useEventListener } from "@docspace/ui-kit/hooks/useEventListener";
 import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
 
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { toCurrentFile } from "SRC_DIR/helpers/plugins/react/utils";
 
 import ItemTitle from "../../sub-components/ItemTitle";
 import commonStyles from "../../helpers/Common.module.scss";
@@ -393,6 +394,7 @@ const FilesView = ({
           key={infoPanelItem?.key}
           selection={selection}
           infoPanelItem={infoPanelItem}
+          currentFile={toCurrentFile(selection)}
         />
       );
 

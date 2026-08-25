@@ -76,12 +76,15 @@ export const messageActions = ({
   updateMainButtonItems,
   updateProfileMenuItems,
   updateEventListenerItems,
+  updateArticleButtonItems,
   updateArticleNavigationItems,
   updateFileItems,
   updateCreateDialogProps,
   updatePlugin,
   setPluginMediaViewerVisible,
   setPluginMediaViewerProps,
+  setReactPluginModalState,
+  reactPluginCurrentFile,
 }: TMessageActionsParams): void => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
@@ -208,14 +211,24 @@ export const messageActions = ({
 
       case PluginActions.showModal:
         if (message.modalDialogProps) {
-          setPluginDialogVisible?.(true);
-          setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
+          if (message.modalDialogProps.dialogBodyComponent) {
+            setReactPluginModalState?.({
+              pluginName,
+              component: message.modalDialogProps.dialogBodyComponent,
+              options: message.modalDialogProps,
+              currentFile: reactPluginCurrentFile ?? null,
+            });
+          } else {
+            setPluginDialogVisible?.(true);
+            setPluginDialogProps?.({ ...message.modalDialogProps, pluginName });
+          }
         }
         break;
 
       case PluginActions.closeModal:
         setPluginDialogVisible?.(false);
         setPluginDialogProps?.(null);
+        setReactPluginModalState?.(null);
         break;
 
       case PluginActions.updateContextMenuItems:
@@ -236,6 +249,10 @@ export const messageActions = ({
         break;
       case PluginActions.updateEventListenerItems:
         updateEventListenerItems?.(pluginName);
+
+        break;
+      case PluginActions.updateArticleButtonItems:
+        updateArticleButtonItems?.(pluginName);
 
         break;
       case PluginActions.updateArticleNavigationItems:
@@ -278,6 +295,8 @@ export const messageActions = ({
 
       case PluginActions.openInfoPanel:
         setPluginDialogVisible?.(false);
+        setPluginDialogProps?.(null);
+        setReactPluginModalState?.(null);
         setSettingsPluginDialogVisible?.(false);
         setPluginSelectorVisible?.(false);
         showInfoPanel();

@@ -33,42 +33,38 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TTranslation } from "@docspace/shared/types";
-import { Dispatch, SetStateAction } from "react";
-import {
-  ISettings,
-  TButtonGroup,
-  TPlugin,
-} from "SRC_DIR/helpers/plugins/types";
-import type PluginStore from "SRC_DIR/store/PluginStore";
+// Narrows DocSpace entities down to the fields the plugin runtime exposes.
 
-export type HeaderProps = {
-  t: TTranslation;
-  name: string;
-};
+import type { TUser } from "@docspace/shared/api/people/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type {
+  TCurrentUser,
+  TCurrentFile,
+} from "@onlyoffice/docspace-plugin-sdk/react";
 
-export type FooterProps = {
-  t: TTranslation;
-  pluginName: string;
-  saveButtonProps?: TButtonGroup;
-  modalRequestRunning: boolean;
-  setModalRequestRunning: Dispatch<SetStateAction<boolean>>;
-  onCloseAction: () => void;
-};
+export function toCurrentUser(user: TUser): TCurrentUser {
+  return {
+    id: user.id,
+    displayName: user.displayName,
+    email: user.email,
+    isOwner: !!user.isOwner,
+    isAdmin: !!user.isAdmin,
+    isRoomAdmin: !!user.isRoomAdmin,
+  };
+}
 
-export type InfoProps = {
-  t: TTranslation;
-  plugin: TPlugin;
-  withDelete: boolean;
-  withSeparator: boolean;
-};
-
-export type SettingsPluginDialogProps = {
-  plugin: TPlugin;
-  withDelete: boolean;
-  pluginSettings?: ISettings | null;
-  settingsPluginDialogVisible: boolean;
-  reactSettingsSaveButtonState: PluginStore["reactSettingsSaveButtonState"];
-  onClose: () => void;
-  onDelete: () => void;
-};
+export function toCurrentFile(
+  selection: TRoom | TFile | TFolder,
+): TCurrentFile {
+  const isFolder = "isFolder" in selection && !!selection.isFolder;
+  const isRoom = "roomType" in selection && !!selection.roomType;
+  return {
+    id: selection.id,
+    title: selection.title,
+    fileExst: "fileExst" in selection ? selection.fileExst : undefined,
+    isFolder,
+    isRoom,
+    roomType: isRoom ? String((selection as TRoom).roomType) : undefined,
+  };
+}

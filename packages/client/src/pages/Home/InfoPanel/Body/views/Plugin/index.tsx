@@ -39,15 +39,24 @@ import { observer } from "mobx-react";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { IInfoPanelItemClient } from "SRC_DIR/helpers/plugins/types";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 import { TSelection } from "@docspace/shared/utils/copy";
+import type { TCurrentFile } from "@onlyoffice/docspace-plugin-sdk/react";
 
 type Props = {
   infoPanelItem?: IInfoPanelItemClient;
   selection?: TSelection;
+  currentFile?: TCurrentFile | null;
 };
 
-const Plugin = ({ infoPanelItem, selection }: Props) => {
-  const { body: boxProps, subMenu, onLoad, pluginName } = infoPanelItem || {};
+const Plugin = ({ infoPanelItem, selection, currentFile }: Props) => {
+  const {
+    body: boxProps,
+    subMenu,
+    onLoad,
+    pluginName,
+    component,
+  } = infoPanelItem || {};
 
   const [bodyProps, setBodyProps] = useState(boxProps || {});
 
@@ -78,10 +87,18 @@ const Plugin = ({ infoPanelItem, selection }: Props) => {
     <div
       data-testid={`info_panel_plugin_${pluginName.toLowerCase().replace(/\s+/g, "_")}`}
     >
-      <WrappedComponent
-        pluginName={pluginName}
-        component={{ component: PluginComponents.box, props: bodyProps }}
-      />
+      {component ? (
+        <PluginWrappedComponent
+          pluginName={pluginName}
+          component={component}
+          currentFile={currentFile}
+        />
+      ) : (
+        <WrappedComponent
+          pluginName={pluginName}
+          component={{ component: PluginComponents.box, props: bodyProps }}
+        />
+      )}
     </div>
   );
 };

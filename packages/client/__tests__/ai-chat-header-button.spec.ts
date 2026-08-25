@@ -85,6 +85,9 @@ const slot = (page: Page) => page.getByTestId("ai-chat-slot");
 const button = (page: Page) => page.getByTestId("ai-chat-button");
 const label = (page: Page) => button(page).getByText("AI Chat", { exact: true });
 const header = (page: Page) => page.locator(".header-container");
+/** Set by Home once the chat panel takes the whole main area over. */
+const fullscreenLayout = (page: Page) =>
+  page.locator('[data-layout-mode="ai-fullscreen"]');
 
 /** Width the slot asks the header row for, i.e. the full labelled width. */
 const requestedWidth = (page: Page) =>
@@ -313,7 +316,10 @@ test.describe("AI chat header button", () => {
     await shootHeader(page, "mobile-expanded.png");
   });
 
-  test("opens the chat panel", async ({ page, baseUrl }) => {
+  test("opens the chat panel docked, and the header button closes it", async ({
+    page,
+    baseUrl,
+  }) => {
     await page.setViewportSize(DESKTOP);
     await page.goto(`${baseUrl}${ROOMS_URL}`);
 
@@ -322,9 +328,33 @@ test.describe("AI chat header button", () => {
     await button(page).click();
     await expect(slot(page)).toHaveAttribute("data-open", "true");
 
-    // The chat opens fullscreen, which collapses the section (and with it this
-    // header) to zero width - so the button is deliberately not reachable for
-    // a second click here; the panel's own control closes it.
-    await expect(page.locator('[data-layout-mode="ai-fullscreen"]')).toBeAttached();
+    // On desktop the panel docks next to the section, so the header keeps its
+    // width and the button stays reachable. Fullscreen is now only what the
+    // user asks for through the panel's own toggle - the store no longer
+    // forces it on for the settings page or the not-configured empty view.
+    await expect(fullscreenLayout(page)).toHaveCount(0);
+
+    await button(page).click();
+    await expect(slot(page)).toHaveAttribute("data-open", "false");
+  });
+
+  test("the panel's own toggle takes the section over fullscreen", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.setViewportSize(DESKTOP);
+    await page.goto(`${baseUrl}${ROOMS_URL}`);
+
+    await button(page).click();
+    await expect(slot(page)).toHaveAttribute("data-open", "true");
+
+    await page.getByTestId("ai-chat-panel-fullscreen").click();
+    await expect(fullscreenLayout(page)).toBeAttached();
+
+    // Fullscreen collapses the section - and with it this header - to zero
+    // width, so the panel's own control is the only way back.
+    await page.getByTestId("ai-chat-panel-close").click();
+    await expect(slot(page)).toHaveAttribute("data-open", "false");
+    await expect(fullscreenLayout(page)).toHaveCount(0);
   });
 });

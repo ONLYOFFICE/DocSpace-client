@@ -45,6 +45,7 @@ import { Portal } from "@docspace/ui-kit/components/portal";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 
 import styles from "./PluginDialog.module.scss";
 import type { PluginDialogProps } from "./PluginDialog.types";
@@ -70,6 +71,9 @@ const PluginDialog = ({
 
   pluginName,
 
+  reactPluginModalState,
+  closeReactPluginModal,
+
   dispatchMessage,
   ...rest
 }: PluginDialogProps) => {
@@ -81,23 +85,39 @@ const PluginDialog = ({
 
   const [modalRequestRunning, setModalRequestRunning] = React.useState(false);
 
+  const activePluginName = reactPluginModalState?.pluginName ?? pluginName;
+
+  const activeEventListeners = reactPluginModalState
+    ? reactPluginModalState.options?.eventListeners
+    : eventListeners;
+
   const onCloseAction = async () => {
     if (modalRequestRunning) return;
-    const message = await onClose();
+    const message = await onClose?.();
 
     dispatchMessage({ message, pluginName });
   };
 
-  React.useEffect(() => {
-    if (!eventListeners) return;
+  const onReactCloseAction = async () => {
+    if (modalRequestRunning) return;
 
-    const handlers = eventListeners.map((e) => {
+    const message = await reactPluginModalState?.options?.onClose?.();
+
+    closeReactPluginModal();
+
+    dispatchMessage({ message, pluginName: activePluginName });
+  };
+
+  React.useEffect(() => {
+    if (!activeEventListeners) return;
+
+    const handlers = activeEventListeners.map((e) => {
       const onAction = async (event: Event) => {
         setModalRequestRunning(true);
         const message = await e.onAction(event);
         setModalRequestRunning(false);
 
-        dispatchMessage({ message, pluginName });
+        dispatchMessage({ message, pluginName: activePluginName });
       };
 
       window.addEventListener(e.name, onAction);
@@ -106,11 +126,11 @@ const PluginDialog = ({
     });
 
     return () => {
-      eventListeners.forEach((e, index) => {
+      activeEventListeners.forEach((e, index) => {
         window.removeEventListener(e.name, handlers[index]);
       });
     };
-  }, [eventListeners, pluginName, dispatchMessage]);
+  }, [activeEventListeners, activePluginName, dispatchMessage]);
 
   const onLoadAction = React.useCallback(async () => {
     if (onLoad) {
@@ -127,44 +147,77 @@ const PluginDialog = ({
 
   const rootElement = document.getElementById("root");
 
-  const dialog = fullScreen ? (
-    <div className={styles.fullScreen}>
-      <WrappedComponent
-        pluginName={pluginName}
-        component={
-          {
-            component: PluginComponents.box,
-            props: dialogBodyProps,
-          } satisfies BoxGroup
-        }
-        setModalRequestRunning={setModalRequestRunning}
-        modalRequestRunning={modalRequestRunning}
+  if (reactPluginModalState) {
+    const {
+      pluginName: rpName,
+      component,
+      options,
+      currentFile,
+    } = reactPluginModalState;
+    const reactDisplayType =
+      options?.displayType === "aside"
+        ? ModalDialogType.aside
+        : ModalDialogType.modal;
+
+    const reactBody = (
+      <PluginWrappedComponent
+        pluginName={rpName}
+        component={component}
+        currentFile={currentFile}
       />
-    </div>
+    );
+
+    const reactDialog = options?.fullScreen ? (
+      <div className={styles.fullScreen}>{reactBody}</div>
+    ) : (
+      <ModalDialog
+        visible
+        onClose={onReactCloseAction}
+        displayType={reactDisplayType}
+        autoMaxWidth={options?.autoMaxWidth}
+        autoMaxHeight={options?.autoMaxHeight}
+        withoutPadding={options?.withoutBodyPadding}
+        withoutHeaderMargin={options?.withoutHeaderMargin}
+        withFooterBorder={options?.withFooterBorder}
+      >
+        {options?.dialogHeader ? (
+          <ModalDialog.Header>{options.dialogHeader}</ModalDialog.Header>
+        ) : null}
+        <ModalDialog.Body>{reactBody}</ModalDialog.Body>
+      </ModalDialog>
+    );
+
+    return <Portal element={reactDialog} appendTo={rootElement} visible />;
+  }
+
+  const body = dialogBodyProps ? (
+    <WrappedComponent
+      pluginName={pluginName}
+      component={
+        {
+          component: PluginComponents.box,
+          props: dialogBodyProps,
+        } satisfies BoxGroup
+      }
+      setModalRequestRunning={setModalRequestRunning}
+      modalRequestRunning={modalRequestRunning}
+    />
+  ) : null;
+
+  const dialog = fullScreen ? (
+    <div className={styles.fullScreen}>{body}</div>
   ) : (
     <ModalDialog
       visible={isVisible}
       onClose={onCloseAction}
       withoutPadding={withoutBodyPadding}
       withoutHeaderMargin={withoutHeaderMargin}
-      displayType={DISPLAY_TYPE_MAP[displayType]}
+      displayType={displayType ? DISPLAY_TYPE_MAP[displayType] : undefined}
       dataTestId="plugin_modal"
       {...rest}
     >
       <ModalDialog.Header>{dialogHeaderProps}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <WrappedComponent
-          pluginName={pluginName}
-          component={
-            {
-              component: PluginComponents.box,
-              props: dialogBodyProps,
-            } satisfies BoxGroup
-          }
-          setModalRequestRunning={setModalRequestRunning}
-          modalRequestRunning={modalRequestRunning}
-        />
-      </ModalDialog.Body>
+      <ModalDialog.Body>{body}</ModalDialog.Body>
       {dialogFooterProps ? (
         <ModalDialog.Footer>
           <WrappedComponent
@@ -187,10 +240,17 @@ const PluginDialog = ({
 };
 
 export default inject(({ pluginStore }: TStore) => {
-  const { pluginDialogProps, dispatchMessage } = pluginStore;
+  const {
+    pluginDialogProps,
+    dispatchMessage,
+    reactPluginModalState,
+    closeReactPluginModal,
+  } = pluginStore;
 
   return {
     ...pluginDialogProps,
     dispatchMessage,
+    reactPluginModalState,
+    closeReactPluginModal,
   };
 })(observer(PluginDialog));

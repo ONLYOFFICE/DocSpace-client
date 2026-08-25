@@ -152,6 +152,7 @@ const Panels = (props) => {
     settingsPluginDialogVisible,
     pluginDialogVisible,
     pluginSelectorVisible,
+    reactPluginModalState,
     leaveRoomDialogVisible,
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
@@ -278,7 +279,7 @@ const Panels = (props) => {
         key="delete-plugin-dialog"
       />
     ),
-    pluginDialogVisible && (
+    (pluginDialogVisible || !!reactPluginModalState) && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
     pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
@@ -578,6 +579,7 @@ export default inject(
       deletePluginDialogVisible,
       pluginDialogVisible,
       pluginSelectorVisible,
+      reactPluginModalState,
     } = pluginStore;
 
     const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
@@ -643,6 +645,7 @@ export default inject(
       settingsPluginDialogVisible,
       pluginDialogVisible,
       pluginSelectorVisible,
+      reactPluginModalState,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,

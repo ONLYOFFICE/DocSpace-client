@@ -191,11 +191,15 @@ export const mockArticleNavigationPlugin: TAPIPlugin = {
   version: "1.0.0",
   minDocSpaceVersion: "3.5.0",
   description:
-    "Sample plugin demonstrating article navigation items for DocSpace",
+    "Sample plugin adding two sidebar entries with React section pages",
   pluginName: "ArticleNavigationSample",
   scopes: "ArticleNavigation",
   image: "docspace-icon.svg",
   url: "/plugins/article-navigation/plugin.js",
+  // The sample is an ES module bundle, so it has to be imported rather than
+  // dropped into a <script> tag: without this the plugin dies on load with
+  // "Cannot use import statement outside a module".
+  runtime: "module",
   settings: "",
 };
 

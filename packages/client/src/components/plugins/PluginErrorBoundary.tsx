@@ -33,42 +33,24 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TTranslation } from "@docspace/shared/types";
-import { Dispatch, SetStateAction } from "react";
-import {
-  ISettings,
-  TButtonGroup,
-  TPlugin,
-} from "SRC_DIR/helpers/plugins/types";
-import type PluginStore from "SRC_DIR/store/PluginStore";
+import React from "react";
 
-export type HeaderProps = {
-  t: TTranslation;
-  name: string;
-};
+type Props = { pluginName: string; children: React.ReactNode };
+type State = { error: Error | null };
 
-export type FooterProps = {
-  t: TTranslation;
-  pluginName: string;
-  saveButtonProps?: TButtonGroup;
-  modalRequestRunning: boolean;
-  setModalRequestRunning: Dispatch<SetStateAction<boolean>>;
-  onCloseAction: () => void;
-};
+export class PluginErrorBoundary extends React.Component<Props, State> {
+  state: State = { error: null };
 
-export type InfoProps = {
-  t: TTranslation;
-  plugin: TPlugin;
-  withDelete: boolean;
-  withSeparator: boolean;
-};
+  static getDerivedStateFromError(error: Error): State {
+    return { error };
+  }
 
-export type SettingsPluginDialogProps = {
-  plugin: TPlugin;
-  withDelete: boolean;
-  pluginSettings?: ISettings | null;
-  settingsPluginDialogVisible: boolean;
-  reactSettingsSaveButtonState: PluginStore["reactSettingsSaveButtonState"];
-  onClose: () => void;
-  onDelete: () => void;
-};
+  componentDidCatch(error: Error) {
+    console.error(`[Plugin: ${this.props.pluginName}]`, error);
+  }
+
+  render() {
+    if (this.state.error) return null;
+    return this.props.children;
+  }
+}

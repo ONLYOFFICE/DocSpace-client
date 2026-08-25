@@ -59,40 +59,44 @@ const MY_DOCS_URL = `/rooms/personal/filter?folder=${MY_DOCS_FOLDER_ID}`;
 // only Editing, FillForms and None to external links — Read is not among them.
 // A plain "read only" link on that file is therefore exactly the state Bug 82049
 // is about: the access stored on the link is missing from the available rights.
-//
-// The file table renders the name without the extension.
 const PDF_TITLE = "ONLYOFFICE Resume Sample";
 
 async function openSharePanel(page: Page) {
   const table = page.getByTestId("table-body");
   await expect(table).toBeVisible();
 
-  // When the info panel is closed the toggle has id "info-panel-toggle--open"
-  const panelClosed = await page
-    .locator('[id="info-panel-toggle--open"]')
-    .isVisible({ timeout: 2000 })
-    .catch(() => false);
-  if (panelClosed) {
-    await page.locator('[id="info-panel-toggle--open"]').click({ force: true });
-    await page
-      .locator('[id="info-panel-toggle--close"]')
-      .waitFor({ timeout: 5000 })
-      .catch(() => {});
-  }
-
-  // Same workaround as external-sharing-share-panel.spec.ts: an unrelated
-  // toast on this page keeps the container on top and swallows clicks.
-  await page.evaluate(() => {
-    const el = document.getElementById("toast-container");
-    if (el) el.style.display = "none";
+  // Toasts unrelated to sharing pop up on this page, and the container stays on
+  // top and swallows clicks. Hide it for the whole test, not just once, so a
+  // toast arriving later cannot block an interaction.
+  await page.addStyleTag({
+    content: "#toast-container { display: none !important; }",
   });
 
-  // Match by title rather than by row index, which depends on sort order
-  await table
+  // The info panel must be open before a row is selected: opened afterwards it
+  // does not pick up the selection and never renders the share tab.
+  //
+  // Its toggle keeps the id "info-panel-toggle--open" in both states, so the
+  // toggle cannot tell us whether the panel is open - clicking it blindly
+  // closes an already open panel. The panel header is the actual state signal.
+
+  await page.locator("#info-panel-toggle--open").first().click({ force: true });
+  const panelHeader = page.getByTestId("info_panel_aside_header");
+  await expect(panelHeader).toBeVisible();
+
+  // Match by title rather than by row index, which depends on sort order.
+  // The file table renders the name without the extension.
+  const file = table
     .locator('[data-testid^="table-row-"]')
     .filter({ hasText: PDF_TITLE })
-    .first()
-    .click();
+    .first();
+
+  const icon = file.getByTestId("room-icon");
+
+  await icon.click();
+
+  const checkBox = file.getByRole("checkbox");
+
+  await checkBox.check();
 
   const shareTab = page.getByTestId("info_share_tab");
   await expect(shareTab).toBeVisible();

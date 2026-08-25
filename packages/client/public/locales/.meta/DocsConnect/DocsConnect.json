@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-21T15:49:57.216Z",
+  "updated_at": "2026-08-24T22:30:00.620Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -24,15 +24,15 @@
       "module": "/libs/ui-kit"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
-      "line_number": 119,
-      "context": "const docsConnect: DevTool[] = canOpenDocsConnect\n ? [\n {\n id: \"docs-connect\",\n title: t(\"DocsConnect:DocsConnect\"),\n description: t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n }),\n path: \"/developer-tools/docs-connect\",\n featured: true,",
+      "file_path": "/packages/client/src/components/IntegrationsCard/integrations-catalog.tsx",
+      "line_number": 92,
+      "context": "allConnectorsUrl,\n docsApiUrl,\n } = urls;\n \n const createInstanceStep = t(\"Common:IntegrationCreateStep\", {\n serviceName: t(\"DocsConnect:DocsConnect\"),\n devPack: t(\"DocsConnect:DevPack\"),\n });\n \n return React.useMemo(\n () => [",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
-      "line_number": 92,
-      "context": "allConnectorsUrl,\n docsApiUrl,\n } = urls;\n \n const createInstanceStep = t(\"Common:IntegrationCreateStep\", {\n serviceName: t(\"DocsConnect:DocsConnect\"),\n devPack: t(\"DocsConnect:DevPack\"),\n });\n \n return React.useMemo(\n () => [",
+      "file_path": "/packages/client/src/pages/Dashboard/sub-components/DevToolsCard.tsx",
+      "line_number": 119,
+      "context": "const docsConnect: DevTool[] = canOpenDocsConnect\n ? [\n {\n id: \"docs-connect\",\n title: t(\"DocsConnect:DocsConnect\"),\n description: t(\"DocsConnect:CardDescription\", {\n productName: docsName,\n }),\n path: \"/developer-tools/docs-connect\",\n featured: true,",
       "module": "/packages/client"
     },
     {
@@ -103,19 +103,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 280,
+      "line_number": 355,
       "context": "ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Settings.tsx",
-      "line_number": 280,
+      "line_number": 355,
       "context": "ns=\"DocsConnect\"\n i18nKey=\"ConnectedBanner\"\n values={{\n organizationName: getBrandName(\"OrganizationName\"),\n editorsName: getBrandName(\"ProductEditorsName\"),\n service: t(\"DocsConnect:DocsConnect\"),\n }}\n components={{ 1: <Text as=\"span\" fontWeight={600} /> }}\n />\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 341,
+      "line_number": 313,
       "context": "title={scheduledChangeTitle}\n body={\n isCancellation\n ? t(\"Common:PlanCancellationBillingPeriodNote\", {\n date: scheduledChangeDate,\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: scheduledChangeDate,\n })\n }",
       "module": "/packages/client"
     },

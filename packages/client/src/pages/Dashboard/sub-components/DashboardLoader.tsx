@@ -67,7 +67,10 @@ import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import { DeviceType } from "@docspace/shared/enums";
 import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
 
+import integrationStyles from "SRC_DIR/components/IntegrationsCard/IntegrationsCard.module.scss";
+
 import { PROFILE_CARD_HIDDEN_KEY } from "./ProfileCard";
+
 import styles from "../Dashboard.module.scss";
 
 // Each loader below mirrors the geometry of its real counterpart so the Overview
@@ -160,7 +163,7 @@ const ModulesSectionLoader = ({
   </section>
 );
 
-// Shell for an open CollapsibleCard ({@link ./IntegrationsCard},
+// Shell for an open CollapsibleCard ({@link SRC_DIR/components/IntegrationsCard},
 // {@link ./DevToolsCard}): the filled card box with a title + description header
 // and a body slot for the tile grid (both cards default to open).
 const CollapsibleCardLoader = ({ children }: { children: ReactNode }) => (
@@ -173,11 +176,12 @@ const CollapsibleCardLoader = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
-// Mirrors the integrations grid ({@link ./IntegrationsCard}): 8 centered tiles
-// (7 platforms + the "+20 more" tile), each a name + connect-link line.
+// Mirrors the integrations grid ({@link SRC_DIR/components/IntegrationsCard}):
+// 8 centered tiles (7 platforms + the "+20 more" tile), each a name + a
+// connect-link line. The grid itself is the real card's, so both stay in step.
 const IntegrationsCardLoader = () => (
   <CollapsibleCardLoader>
-    <div className={styles.integrationsGrid}>
+    <div className={integrationStyles.integrationsGrid}>
       {Array.from({ length: 8 }, (_, index) => (
         <div key={index} className={styles.loaderIntegrationTile}>
           <RectangleSkeleton width="90px" height="16px" borderRadius="3px" />

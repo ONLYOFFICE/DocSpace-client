@@ -3,7 +3,7 @@
   "content": "Released",
   "content_en_sha1_hash": "35d9bc51591e20cba61b95e7bbe1f27d185b3c80",
   "created_at": "2026-07-27T13:07:48.498Z",
-  "updated_at": "2026-08-21T15:49:57.263Z",
+  "updated_at": "2026-08-24T22:30:00.695Z",
   "comment": {
     "text": "Label in a statistics detail row indicating the release date of the DocsConnect build.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 542,
+      "line_number": 514,
       "context": "<div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"Common:Version\")}</Text>\n <Text fontWeight={600}>{tenantInfo.server.version}</Text>\n </div>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"DocsConnect:Released\")}</Text>\n <Text fontWeight={600}>\n {formatDocsConnectDate(tenantInfo.license.buildDate)}\n </Text>\n </div>\n </div>",
       "module": "/packages/client"
     }

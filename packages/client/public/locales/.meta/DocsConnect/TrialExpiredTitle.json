@@ -3,7 +3,7 @@
   "content": "The trial license has expired",
   "content_en_sha1_hash": "80128128968b18b88da7b838e3849dba17c3b3d1",
   "created_at": "2026-07-27T13:07:48.481Z",
-  "updated_at": "2026-08-21T15:49:57.261Z",
+  "updated_at": "2026-08-24T22:30:00.693Z",
   "comment": {
     "text": "Heading in an expiration banner and the statistics panel, appearing when the DocsConnect trial period ends.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 299,
+      "line_number": 271,
       "context": "<Text\n fontSize=\"13px\"\n fontWeight={600}\n className={styles.trialExpiredTitle}\n >\n {t(\"DocsConnect:TrialExpiredTitle\")}\n </Text>\n <Text fontSize=\"12px\" className={styles.muted}>\n {t(\"DocsConnect:TrialExpiredDescription\")}\n </Text>\n </>",
       "module": "/packages/client"
     }

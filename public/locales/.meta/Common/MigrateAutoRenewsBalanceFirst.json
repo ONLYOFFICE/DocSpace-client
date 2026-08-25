@@ -1,0 +1,29 @@
+{
+  "key_path": "MigrateAutoRenewsBalanceFirst",
+  "content": "Then {{price}}/mo auto-renews using your Wallet balance first. If the balance is insufficient, the remaining amount will be charged to your default payment method.",
+  "content_en_sha1_hash": "177c9626553c50ea3c8881f7ae4d4e62a7932088",
+  "created_at": "2026-08-24T22:29:34.950Z",
+  "updated_at": "2026-08-24T22:32:06.285Z",
+  "comment": {
+    "text": "Informational text within the MigrateToWalletDialog explaining the auto-renewal process. It includes a {{price}} variable representing the monthly subscription cost.",
+    "is_auto": true,
+    "updated_at": "2026-08-24T22:32:06.285Z",
+    "model": "gemma4:26b"
+  },
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/MigrateToWalletDialog.tsx",
+      "line_number": 359,
+      "context": "t(\"MigrateActiveUntil\", { date: initialPaymentDate }),\n <Text\n fontSize=\"13px\"\n color=\"var(--payment-benefits-icons-color)\"\n >\n {t(\"MigrateAutoRenewsBalanceFirst\", {\n price: formatFuturePaymentCurrency(newSubscriptionAmount),\n })}\n </Text>,\n )}\n </ol>",
+      "module": "/libs/ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

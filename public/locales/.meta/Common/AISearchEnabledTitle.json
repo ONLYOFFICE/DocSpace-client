@@ -3,7 +3,7 @@
   "content": "AI Search enabled",
   "content_en_sha1_hash": "40f38e9f56bf19af2a1fb4a7abdf1033a5fc5ff4",
   "created_at": "2026-08-21T15:03:50.865Z",
-  "updated_at": "2026-08-21T15:15:27.484Z",
+  "updated_at": "2026-08-24T22:30:00.679Z",
   "comment": {
     "text": "Banner title indicating that the AI Search feature is currently active in the Portal Settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/sub-components/AIFeaturesBanner.js",
-      "line_number": 76,
+      "line_number": 130,
       "context": "isWebSearchTab\n ? {\n activateTitle: t(\"Common:ActivateAISearchToGetStarted\"),\n activateDescription: t(\"Common:ActivateAISearchDescription\"),\n activateLabel: t(\"Common:ActivateAISearch\"),\n enabledTitle: t(\"Common:AISearchEnabledTitle\"),\n enabledDescription: t(\"Common:AISearchEnabledDescription\"),\n }\n : {\n activateTitle: t(\"Common:ActivateAIFeaturesToGetStarted\"),\n activateDescription: t(\"Common:GetAccessToAIModels\"),",
       "module": "/packages/client"
     }

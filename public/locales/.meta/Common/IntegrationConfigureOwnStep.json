@@ -3,7 +3,7 @@
   "content": "Configure the Document Server URL, file URL, callback URL, and a JWT-signed config to enable secure editing and co-authoring.",
   "content_en_sha1_hash": "0c66d4ca01dd1a4ac8fc4693e849bbb0de0b66bd",
   "created_at": "2026-08-20T20:04:48.343Z",
-  "updated_at": "2026-08-21T15:49:57.231Z",
+  "updated_at": "2026-08-24T22:30:00.623Z",
   "comment": {
     "text": "A descriptive text for a step in the integration setup process, explaining the required parameters for enabling secure editing and co-authoring.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/integrations-catalog.tsx",
+      "file_path": "/packages/client/src/components/IntegrationsCard/integrations-catalog.tsx",
       "line_number": 271,
       "context": "text: t(\"Common:IntegrationInstallOwnStep\", {\n organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n }),\n },\n { id: \"connect\", text: t(\"Common:IntegrationConfigureOwnStep\") },\n ],\n // No connector to create and no repo to browse for a self-built\n // integration: the footer is just the API reference.\n docsApiUrl,\n },",
       "module": "/packages/client"

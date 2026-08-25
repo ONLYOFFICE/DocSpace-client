@@ -39,7 +39,7 @@ export interface QuotaFormProps {
   isError: boolean;
   isButtonsEnable?: boolean;
   onSetQuotaBytesSize: (bytes: string) => void;
-  initialSize: number;
+  initialSize?: number;
   initialPower?: number;
   isDisabled?: boolean;
   onSave?: (data: unknown) => void;

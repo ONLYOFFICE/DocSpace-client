@@ -37,20 +37,22 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import QuotaPerItemComponent from "./QuotaPerItem";
+import { NO_QUOTA } from "@docspace/shared/constants";
 
 const QuotaPerRoomComponent = (props) => {
   const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } = props;
   const { t } = useTranslation("Settings");
 
-  const initialSizeProp = isDefaultRoomsQuotaSet
-    ? { initialSize: defaultRoomsQuota }
-    : {};
+  const initialSizeProp =
+    isDefaultRoomsQuotaSet && defaultRoomsQuota >= 0
+      ? { initialSize: defaultRoomsQuota }
+      : {};
 
   return (
     <QuotaPerItemComponent
       formLabel={t("QuotaPerRoom")}
       toggleLabel={t("DefineQuotaPerRoom")}
-      disableQuota={() => setRoomQuota(-1, t)}
+      disableQuota={() => setRoomQuota(NO_QUOTA, t)}
       saveQuota={(size) => setRoomQuota(size, t)}
       {...initialSizeProp}
       isQuotaSet={isDefaultRoomsQuotaSet}

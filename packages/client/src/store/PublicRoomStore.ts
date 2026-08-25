@@ -44,7 +44,12 @@ import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/common"
 import { LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-import { FolderType, ValidationStatus } from "@docspace/shared/enums";
+import {
+  FolderType,
+  LinkSharingEntityType,
+  RoomsType,
+  ValidationStatus,
+} from "@docspace/shared/enums";
 import {
   CategoryType,
   TOAST_FOLDER_PUBLIC_KEY,
@@ -52,7 +57,6 @@ import {
 
 import type { TFileLink } from "@docspace/shared/api/files/types";
 import type { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
-import type { RoomsType } from "@docspace/shared/enums";
 
 import {
   PersistenceKeys,
@@ -275,6 +279,33 @@ class PublicRoomStore {
     );
   };
 
+  /**
+   * Resolves the section a shared room belongs to.
+   *
+   * Form rooms live in the VirtualRooms tree, so the server reports
+   * `rootFolderType = Rooms` for them and the validate-share response carries
+   * no room type at all. Sending every room to `CategoryType.Shared` opens it
+   * under `/rooms/shared`, and both the sidebar and the Back button next to
+   * the room title resolve the active section from the pathname -- a form room
+   * would highlight Rooms and return the user to Rooms. The room type is only
+   * known from the room itself, so read it before choosing the section.
+   */
+  getRoomCategoryType = async (roomId: string) => {
+    try {
+      const room = await api.files.getFolderInfo(roomId, true);
+
+      const isFormRoom =
+        room?.roomType === RoomsType.FormRoom ||
+        room?.parentRoomType === FolderType.FormRoom;
+
+      return isFormRoom ? CategoryType.Forms : CategoryType.Shared;
+    } catch (error) {
+      console.error(error);
+
+      return CategoryType.Shared;
+    }
+  };
+
   // validatePublicRoomKey calls `gotoFolder(res, key)` with a
   // second argument the original .js function never declared or used — the
   // unused optional param keeps that call site type-correct without changing
@@ -283,7 +314,11 @@ class PublicRoomStore {
     const categoryType = await match(res)
       .when(
         (res) => res.isRoom || res.isRoomMember,
-        async () => CategoryType.Shared,
+        // A file link carries a file id, which no room lookup accepts.
+        async (data) =>
+          data.type === LinkSharingEntityType.File
+            ? CategoryType.Shared
+            : this.getRoomCategoryType(data.id),
       )
       .otherwise(async () => {
         try {

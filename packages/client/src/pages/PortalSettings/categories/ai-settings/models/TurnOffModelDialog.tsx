@@ -43,6 +43,7 @@ import {
   ModalDialogType,
 } from "@docspace/ui-kit/components/modal-dialog";
 import { Text } from "@docspace/ui-kit/components/text";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 
 import styles from "./TurnOffModelDialog.module.scss";
 
@@ -130,16 +131,35 @@ export const useTurnOffModelConfirmation = (
   const [pendingModel, setPendingModel] = React.useState<TModel | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const { useProfilesStore } = useStores();
+  const reloadProfiles = useProfilesStore((s) => s.reloadProfiles);
+
+  // The chat library's profiles store is hydrated once per session, so a
+  // restriction change here would otherwise stay invisible to every profile
+  // picker (e.g. the New Agent dialog) until its next remount (Bug 83359).
+  // Refresh it as soon as the restriction PUT has settled; the picker list
+  // is cosmetic at this point, so a failed reload is not surfaced.
+  const applyToggle = React.useCallback(
+    async (modelId: string, enabled: boolean) => {
+      try {
+        await setAvailability?.(modelId, enabled);
+      } finally {
+        void reloadProfiles().catch(() => undefined);
+      }
+    },
+    [setAvailability, reloadProfiles],
+  );
+
   const requestToggle = React.useCallback(
     (model: TModel, enabled: boolean) => {
       if (enabled || isConfirmationHidden()) {
-        void setAvailability?.(model.id, enabled);
+        void applyToggle(model.id, enabled);
         return;
       }
 
       setPendingModel(model);
     },
-    [setAvailability],
+    [applyToggle],
   );
 
   const onClose = React.useCallback(() => {
@@ -155,14 +175,14 @@ export const useTurnOffModelConfirmation = (
       setIsLoading(true);
 
       try {
-        await setAvailability?.(pendingModel.id, false);
+        await applyToggle(pendingModel.id, false);
         if (dontShowAgain) hideConfirmation();
       } finally {
         setIsLoading(false);
         setPendingModel(null);
       }
     },
-    [pendingModel, setAvailability],
+    [pendingModel, applyToggle],
   );
 
   const turnOffModelDialog = pendingModel ? (

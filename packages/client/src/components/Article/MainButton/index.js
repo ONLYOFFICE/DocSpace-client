@@ -56,7 +56,7 @@ import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import classNames from "classnames";
 
 import { MainButton } from "@docspace/ui-kit/components/main-button";
@@ -84,6 +84,8 @@ import ActivateAIDialog from "../../dialogs/ActivateAIDialog";
 import ClientSimpleTopUpDialog from "../../EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 
 import styles from "./main-button.module.scss";
+
+const AI_SETTINGS_URL = "/portal-settings/ai-settings";
 
 const ArticleMainButtonContent = (props) => {
   const {
@@ -156,6 +158,7 @@ const ArticleMainButtonContent = (props) => {
     aiConfig,
     isGracePeriod,
 
+    standalone,
     isAIReady,
     isCardLinkedToPortal,
     enableAIService,
@@ -167,6 +170,7 @@ const ArticleMainButtonContent = (props) => {
   } = props;
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isAccountsPage = location.pathname.includes("/accounts");
   const isSettingsPage = location.pathname.includes("settings");
@@ -249,6 +253,8 @@ const ArticleMainButtonContent = (props) => {
   const showActivateAIDialog =
     isAIAgentsFolder && !isAIReady && !isEmptyFilesList;
 
+  const canOpenAISettings = standalone && (isAdmin || isOwner);
+
   const refreshCurrentFolder = React.useCallback(async () => {
     if (!currentFolderId) return;
     const updated = await getFolderInfo(currentFolderId);
@@ -286,12 +292,25 @@ const ArticleMainButtonContent = (props) => {
 
   const onMainButtonAgentClick = React.useCallback(() => {
     if (showActivateAIDialog) {
+      // Standalone connects its own AI provider in the settings: there is no
+      // service to switch on and no wallet to top up.
+      if (standalone) {
+        if (canOpenAISettings) navigate(AI_SETTINGS_URL);
+        return;
+      }
+
       setAiFeaturesDialogVisible(true);
       return;
     }
 
     onCreateAgent();
-  }, [showActivateAIDialog, onCreateAgent]);
+  }, [
+    showActivateAIDialog,
+    standalone,
+    canOpenAISettings,
+    navigate,
+    onCreateAgent,
+  ]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -758,7 +777,10 @@ const ArticleMainButtonContent = (props) => {
   } else if ((isChatTab || isResultTab) && isAIRoom) {
     isDisabled = true;
   } else if (showActivateAIDialog) {
-    isDisabled = isFrame && disableActionButton;
+    // Nothing behind the button on a standalone portal unless the viewer can
+    // reach the AI settings themselves.
+    isDisabled =
+      (isFrame && disableActionButton) || (standalone && !canOpenAISettings);
   } else {
     isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
@@ -1045,6 +1067,7 @@ export default inject(
 
       isGracePeriod,
 
+      standalone: settingsStore.standalone,
       isAIReady: paymentStore.isAIReady,
       isCardLinkedToPortal: paymentStore.isCardLinkedToPortal,
       enableAIService: paymentStore.enableAIService,

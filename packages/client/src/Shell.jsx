@@ -872,7 +872,9 @@ const Shell = ({ page = "home", ...rest }) => {
   // (localized text + Retry).
   const formatChatError = useCallback(
     (payload) => {
-      if (payload?.code !== "insufficient_funds") return null;
+      // Standalone pays its AI provider directly: no wallet, nothing to top up,
+      // so the library default (localized text + Retry) stands.
+      if (payload?.code !== "insufficient_funds" || standalone) return null;
 
       return {
         title: t("Common:WalletBalanceTooLow"),
@@ -887,7 +889,7 @@ const Shell = ({ page = "home", ...rest }) => {
           : null,
       };
     },
-    [t, isPayer, navigate],
+    [t, isPayer, navigate, standalone],
   );
 
   // AI chat host callbacks. Web Search settings save on an explicit button

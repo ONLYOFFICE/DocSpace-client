@@ -42,6 +42,7 @@ import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?u
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
+import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 
 import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
@@ -214,6 +215,32 @@ export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   ];
 };
 
+/**
+ * Describes an access a link may carry but that is never offered as a role in
+ * the selector - either because it is set elsewhere (Deny access lives in the
+ * link context menu) or because it has no role of its own. Used only to build
+ * the disabled fallback option, so it never turns into a selectable role.
+ */
+const getUnavailableAccessOption = (
+  t: TTranslation,
+  access: ShareAccessRights,
+): TShareLinkAccessRightOption => {
+  if (access === ShareAccessRights.DenyAccess)
+    return {
+      access,
+      key: "deny-access",
+      label: t("Common:DenyAccess"),
+      icon: AccessNoneReactSvgUrl,
+    };
+
+  return {
+    access,
+    key: "current-access",
+    label: t("Common:Custom"),
+    icon: AccessNoneReactSvgUrl,
+  };
+};
+
 export const getLinkAccessRightOption = (
   t: TTranslation,
   getOptions: (
@@ -238,15 +265,17 @@ export const getLinkAccessRightOption = (
     // The link carries an access that is not among the available rights any
     // more. Keep it in the list as a disabled option so the selector shows the
     // real access instead of rendering empty, and so saving the link does not
-    // silently replace the access with an unrelated one.
-    const selected = accessOptions[ShareAccessRightsToShareRights[access]];
+    // silently replace the access with an unrelated one. An access with no role
+    // of its own (Deny access, and anything a link is not expected to carry)
+    // gets a fallback description instead - it still has to be listed, or the
+    // selector is hidden and the user never learns why the link cannot be
+    // saved.
+    const selected =
+      accessOptions[ShareAccessRightsToShareRights[access]] ??
+      getUnavailableAccessOption(t, access);
 
-    if (selected) {
-      const fallbackOption = { ...selected, disabled: true };
-
-      selectedOption = fallbackOption;
-      options.push(fallbackOption);
-    }
+    selectedOption = { ...selected, disabled: true };
+    options.push(selectedOption);
   }
 
   return { options, selectedOption };

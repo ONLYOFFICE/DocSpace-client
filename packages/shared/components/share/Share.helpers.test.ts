@@ -99,15 +99,35 @@ describe("getLinkAccessRightOptions", () => {
     expect(selectedOption?.disabled).toBe(true);
   });
 
-  it("leaves no selected option for an access links cannot carry", () => {
+  it("lists a denied access as a disabled option instead of a role", () => {
+    const { options, selectedOption } = getLinkAccessRightOptions(
+      t,
+      ShareAccessRights.DenyAccess,
+      { ExternalLink: [ShareRights.Read, ShareRights.Restrict] },
+    );
+
+    // Restrict is never offered as a role, it only describes the current access.
+    expect(options.map((option) => option.key)).toEqual([
+      "viewing",
+      "deny-access",
+    ]);
+    expect(selectedOption.label).toBe("Common:DenyAccess");
+    expect(selectedOption.disabled).toBe(true);
+  });
+
+  it("describes an access links cannot carry instead of dropping it", () => {
     const { options, selectedOption } = getLinkAccessRightOptions(
       t,
       ShareAccessRights.RoomManager,
       { ExternalLink: [ShareRights.Read] },
     );
 
-    expect(options.map((option) => option.key)).toEqual(["viewing"]);
-    expect(selectedOption).toBeUndefined();
+    expect(options.map((option) => option.key)).toEqual([
+      "viewing",
+      "current-access",
+    ]);
+    expect(selectedOption.access).toBe(ShareAccessRights.RoomManager);
+    expect(selectedOption.disabled).toBe(true);
   });
 });
 

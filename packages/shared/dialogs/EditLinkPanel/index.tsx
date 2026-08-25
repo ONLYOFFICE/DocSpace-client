@@ -47,7 +47,6 @@ import React, {
 import { Portal } from "@docspace/ui-kit/components/portal";
 
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
-import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -199,19 +198,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       };
     }
 
-    // Last resort for an access with no option at all: keep the link's own
-    // access so saving the panel does not change it. It is disabled for the
-    // same reason a revoked access is - the server validates the access against
-    // the available rights and would reject it.
-    return (
-      accessOptions.selectedOption ?? {
-        key: "current-access",
-        label: t("Common:Custom"),
-        icon: AccessNoneReactSvgUrl,
-        access: accessLink,
-        disabled: true,
-      }
-    );
+    // Always the link's own access: getLinkAccessRightOptions appends it as a
+    // disabled option when it is not available any more, so the panel never
+    // replaces the access with an unrelated one behind the user's back.
+    return accessOptions.selectedOption;
   });
 
   const [isLoading, setIsLoading] = useState(false);

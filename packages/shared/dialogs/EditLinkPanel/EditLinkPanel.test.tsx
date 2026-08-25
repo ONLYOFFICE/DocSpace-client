@@ -224,6 +224,22 @@ describe("<EditLinkPanel />", () => {
     expect(ShareLinkService.editLink).not.toHaveBeenCalled();
   });
 
+  it("explains the blocked save for an access that has no role of its own", async () => {
+    renderPanel(
+      { ExternalLink: [ShareRights.Editing] },
+      ShareAccessRights.DenyAccess,
+    );
+
+    expect(await screen.findByTestId("stub_role_selected")).toHaveTextContent(
+      "deny-access",
+    );
+    expect(screen.getByTestId("stub_role_warning")).toBeInTheDocument();
+
+    await userEvent.click(screen.getByTestId("stub_rename_link"));
+
+    await waitFor(() => expect(getSaveButton()).toBeDisabled());
+  });
+
   it("allows saving once an available role is selected", async () => {
     renderPanel(
       { ExternalLink: [ShareRights.Editing] },

@@ -98,7 +98,7 @@ const freezeTime = async (context: BrowserContext, frozenNowMs: number) => {
 
 const usePaidPreset = (mockRequest: WorkerFixture) => {
   mockRequest.use(
-    settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+    settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
     colorThemeHandler(TEST_PORT),
     ...docsConnectHandlers(TEST_PORT, "paid"),
   );
@@ -316,7 +316,7 @@ test.describe("Docs Connect preview tab", () => {
 
     await expect(
       page.getByText(
-        "Failed to load the editor preview. Check the tenant address and secret key.",
+        "Failed to load the editor preview. Check the instance address and secret key.",
       ),
     ).toBeVisible({ timeout: FIRST_RENDER_TIMEOUT });
 

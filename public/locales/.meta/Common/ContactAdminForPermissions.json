@@ -3,7 +3,7 @@
   "content": "Contact the Full admin to get the required permissions.",
   "content_en_sha1_hash": "835050e002fd0ffedd136f8d8a7d67f406c7b604",
   "created_at": "2026-08-21T00:00:00.000Z",
-  "updated_at": "2026-08-21T16:27:00.794Z",
+  "updated_at": "2026-08-24T22:30:00.619Z",
   "comment": {
     "text": "Second line of the tooltip on the disabled \"Create instance\" button in the Overview integration dialog: tells a user without Docs Connect rights who to ask. Pairs with the bold `YouDontHaveEnoughPermission` line above it.",
     "is_auto": false,
@@ -12,8 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Dashboard/sub-components/IntegrationDialog.tsx",
-      "line_number": 123,
+      "file_path": "/packages/client/src/components/IntegrationsCard/IntegrationDialog.tsx",
+      "line_number": 143,
       "context": "<div className={styles.restrictionTooltip}>\n <Text fontWeight={700} fontSize=\"12px\">\n {t(\"Common:YouDontHaveEnoughPermission\")}\n </Text>\n <Text fontSize=\"12px\">\n {t(\"Common:ContactAdminForPermissions\")}\n </Text>\n </div>\n )}\n />\n ) : null}",
       "module": "/packages/client"
     }

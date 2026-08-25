@@ -172,9 +172,13 @@ const DeveloperToolsSidebar = ({
   );
 };
 
-export default inject(({ authStore, userStore }: TStore) => ({
+export default inject(({ authStore, userStore, settingsStore }: TStore) => ({
   identityServerEnabled:
     authStore?.capabilities?.identityServerEnabled ?? false,
-  // Docs Connect is admin/owner-only - see `hasDocsConnectAccess`.
-  canOpenDocsConnect: hasDocsConnectAccess(userStore?.user),
+  // Docs Connect is SaaS-only and admin/owner-only - see
+  // `hasDocsConnectAccess`.
+  canOpenDocsConnect: hasDocsConnectAccess(
+    userStore?.user,
+    settingsStore?.standalone,
+  ),
 }))(observer(DeveloperToolsSidebar));

@@ -280,6 +280,19 @@ const getDocsConnectTenant = async (
     signal,
   })) as TDocsConnectTenant | null;
 
+/**
+ * Whether this portal has a Docs Connect instance at all — the cheapest such
+ * check there is (one request, no wallet, config or statistics), for callers
+ * that only need to know if one exists rather than its whole state.
+ */
+export const hasDocsConnectTenant = async (): Promise<boolean> => {
+  try {
+    return (await getDocsConnectTenant()) != null;
+  } catch {
+    return false;
+  }
+};
+
 const getDocsConnectTenantConfig = async (
   signal?: AbortSignal,
 ): Promise<TDocsConnectConfig | null> =>

@@ -43,13 +43,11 @@ import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { ProgressBar } from "@docspace/ui-kit/components/progress-bar";
-import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import StorageWarning from "@docspace/ui-kit/billing/services/panels/additional-storage/StorageWarning";
 import { getDocsConnectScheduleFlags } from "@docspace/ui-kit/billing/utils/docs-connect";
 import { formatDateLocalized } from "@docspace/ui-kit/utils/date";
 
-import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg";
 import AlertIcon from "@docspace/ui-kit/assets/plugin.incompatible.react.svg";
 
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
@@ -59,20 +57,18 @@ import type { TTranslation } from "@docspace/shared/types";
 
 import { useReportPageLeft } from "SRC_DIR/Hooks/useReportPageLeft";
 import { ReportType } from "SRC_DIR/store/DocumentBuilderReportStore";
+import { IntegrationsCard } from "SRC_DIR/components/IntegrationsCard";
 
 import {
   formatDocsConnectDate,
   getDocsConnectPricePerUser,
   getDocsConnectTrialState,
 } from "../utils";
-import { MORE_CONNECTORS_COUNT } from "../constants";
 
 import InfoField from "./sub-components/InfoField";
 import UsageBlock from "./sub-components/UsageBlock";
 
 import styles from "./TenantPanel.module.scss";
-
-type Connector = { key: string; label: string; url?: string };
 
 interface StatisticsProps {
   info?: TDocsConnectInfo;
@@ -82,13 +78,6 @@ interface StatisticsProps {
   copyToClipboard?: (value: string, t: TTranslation) => void;
   downloadReport?: () => void;
   isReportGenerating?: boolean;
-  nextcloudUrl?: string;
-  owncloudUrl?: string;
-  confluenceUrl?: string;
-  alfrescoUrl?: string;
-  moodleUrl?: string;
-  odooUrl?: string;
-  allConnectorsUrl?: string;
 }
 
 const Statistics = ({
@@ -99,13 +88,6 @@ const Statistics = ({
   copyToClipboard,
   downloadReport,
   isReportGenerating,
-  nextcloudUrl,
-  owncloudUrl,
-  confluenceUrl,
-  alfrescoUrl,
-  moodleUrl,
-  odooUrl,
-  allConnectorsUrl,
 }: StatisticsProps) => {
   const { t, i18n } = useTranslation(["DocsConnect", "Common"]);
   const [isCancelChangeLoading, setIsCancelChangeLoading] = useState(false);
@@ -125,16 +107,6 @@ const Statistics = ({
     percent: trialPercent,
   } = getDocsConnectTrialState(info);
   const trialLow = !expired && totalDays > 0 && daysLeft / totalDays < 0.5;
-
-  const connectors: Connector[] = [
-    { key: "nextcloud", label: "Nextcloud", url: nextcloudUrl },
-    { key: "owncloud", label: "ownCloud", url: owncloudUrl },
-    { key: "confluence", label: "Confluence", url: confluenceUrl },
-    { key: "alfresco", label: "Alfresco", url: alfrescoUrl },
-    { key: "moodle", label: "Moodle", url: moodleUrl },
-    { key: "seafile", label: "Seafile", url: allConnectorsUrl },
-    { key: "odoo", label: "Odoo", url: odooUrl },
-  ];
 
   const currency = wallet?.currency ?? "USD";
   const { devPackEnabled } = info;
@@ -597,50 +569,12 @@ const Statistics = ({
         ) : null}
       </div>
 
-      <CollapsibleCard
-        title={t("DocsConnect:IntegrationOptions")}
-        description={t("DocsConnect:IntegrationOptionsSubtitle")}
-        defaultOpen
-      >
-        <div className={styles.integrationsGrid}>
-          {connectors.map((connector) => (
-            <a
-              key={connector.key}
-              className={styles.integrationTile}
-              href={connector.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Text as="p" className={styles.integrationName}>
-                {connector.label}
-              </Text>
-              <span className={styles.integrationLink}>
-                {t("Common:Connect")}
-                <ArrowSvg aria-hidden className={styles.integrationArrow} />
-              </span>
-            </a>
-          ))}
-          <a
-            className={`${styles.integrationTile} ${styles.integrationTileMore}`}
-            href={allConnectorsUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Text as="p" className={styles.integrationName}>
-              {t("Common:PlusMore", { count: MORE_CONNECTORS_COUNT })}
-            </Text>
-            <span className={styles.integrationLink}>
-              {t("Common:ViewAll")}
-              <ArrowSvg aria-hidden className={styles.integrationArrow} />
-            </span>
-          </a>
-        </div>
-      </CollapsibleCard>
+      <IntegrationsCard hideInstanceAction />
     </div>
   );
 };
 
-export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
+export default inject(({ docsConnectStore }: TStore) => ({
   info: docsConnectStore.info,
   openBuyPlan: docsConnectStore.openBuyPlan,
   openRemoveSubscriptionDialog: docsConnectStore.openRemoveSubscriptionDialog,
@@ -648,11 +582,4 @@ export default inject(({ docsConnectStore, settingsStore }: TStore) => ({
   copyToClipboard: docsConnectStore.copyToClipboard,
   downloadReport: docsConnectStore.downloadReport,
   isReportGenerating: docsConnectStore.isReportGenerating,
-  nextcloudUrl: settingsStore.nextcloudUrl,
-  owncloudUrl: settingsStore.owncloudUrl,
-  confluenceUrl: settingsStore.confluenceUrl,
-  alfrescoUrl: settingsStore.alfrescoUrl,
-  moodleUrl: settingsStore.moodleUrl,
-  odooUrl: settingsStore.odooUrl,
-  allConnectorsUrl: settingsStore.allConnectorsUrl,
 }))(observer(Statistics));

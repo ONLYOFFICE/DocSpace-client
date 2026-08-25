@@ -67,6 +67,7 @@ import { useNavigate } from "react-router";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
+import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 import PluginIcon from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg";
@@ -78,7 +79,7 @@ import {
   useIntegrationPlatforms,
   type IntegrationPlatform,
 } from "./integrations-catalog";
-import styles from "../Dashboard.module.scss";
+import styles from "./IntegrationsCard.module.scss";
 
 const DOCS_CONNECT_PATH = "/developer-tools/docs-connect";
 
@@ -167,6 +168,17 @@ const PlatformTile = ({
 };
 
 interface IntegrationsCardProps {
+  /** Wrapper class, for pages that need their own spacing around the card. */
+  className?: string;
+  /** Anchors the Overview tour step; left out where no tour points at it. */
+  dataTourId?: string;
+  /**
+   * Drops the instance button from the dialogs — set by the Docs Connect page,
+   * where that button would only point back at the page you are already on.
+   */
+  hideInstanceAction?: boolean;
+  /** Standalone portals have no Docs Connect; the card is not rendered there. */
+  isStandalone?: boolean;
   isAdminOrOwner?: boolean;
   nextcloudUrl?: string;
   owncloudUrl?: string;
@@ -175,10 +187,22 @@ interface IntegrationsCardProps {
   moodleUrl?: string;
   allConnectorsUrl?: string;
   docsApiUrl?: string;
+  /** `null` while unknown — see `DocsConnectStore.hasInstance`. */
+  hasInstance?: boolean | null;
+  checkInstance?: () => Promise<boolean>;
 }
 
 const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
-  const { allConnectorsUrl, isAdminOrOwner = false } = props;
+  const {
+    className,
+    dataTourId,
+    hideInstanceAction = false,
+    isStandalone = false,
+    allConnectorsUrl,
+    isAdminOrOwner = false,
+    hasInstance,
+    checkInstance,
+  } = props;
   const { t } = useTranslation(["Common", "DocsConnect"]);
   const navigate = useNavigate();
 
@@ -189,17 +213,34 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
 
   const closeDialog = React.useCallback(() => setOpenPlatform(null), []);
 
+  // Every dialog opens with "create an instance" as step 1, so the card has to
+  // know whether that step is already behind the reader. Asked once, and never
+  // for anyone below a portal admin: room admins, users and guests cannot reach
+  // Docs Connect, so the request would be answered with 403 and the step reads
+  // the same either way.
+  React.useEffect(() => {
+    if (!isAdminOrOwner || hasInstance != null) return;
+    checkInstance?.();
+  }, [isAdminOrOwner, hasInstance, checkInstance]);
+
   // Docs Connect lives under the portal's developer tools, which only admins
   // and the owner can open — everyone else would land on /error/403. Same gate
   // the "or connect Docs" subtitle link uses.
-  const onCreateInstance = React.useCallback(() => {
+  const onInstanceAction = React.useCallback(() => {
     if (!isAdminOrOwner) return;
     setOpenPlatform(null);
     navigate(DOCS_CONNECT_PATH);
   }, [navigate, isAdminOrOwner]);
 
+  // Every one of these dialogs starts by creating a Docs Connect instance, and
+  // the service is sold and hosted by us — a standalone portal has nothing to
+  // connect to, so the card is left out entirely rather than advertising
+  // something that cannot be had. Below the hooks, so this component keeps
+  // calling the same ones on every render.
+  if (isStandalone) return null;
+
   return (
-    <div data-tour-id="dashboard-integrations">
+    <div className={className} data-tour-id={dataTourId}>
       <CollapsibleCard
         title={t("Common:AlreadyUsingAnotherPlatform")}
         description={
@@ -241,20 +282,26 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
       <IntegrationDialog
         platform={openPlatform}
         onClose={closeDialog}
-        onCreateInstance={onCreateInstance}
-        isCreateInstanceDisabled={!isAdminOrOwner}
+        onInstanceAction={onInstanceAction}
+        isInstanceActionDisabled={!isAdminOrOwner}
+        hasInstance={hasInstance ?? false}
+        hideInstanceAction={hideInstanceAction}
       />
     </div>
   );
 };
 
 export const IntegrationsCard = inject<TStore>(
-  ({ settingsStore, userStore }) => ({
-    // Room admins are excluded: only admins and the owner may open the
-    // developer tools section Docs Connect lives in. Same flags the page
-    // subtitle link, the Header and ProfileCard gate on.
-    isAdminOrOwner:
-      (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
+  ({ settingsStore, userStore, docsConnectStore }) => ({
+    // Portal admins and the owner only — room admins, users and guests would
+    // answer 403 on the Docs Connect page. The same rule the route guard and
+    // the sidebar item ask, so nothing here offers a link that cannot open or
+    // asks the server about an instance the reader may not see.
+    isAdminOrOwner: hasDocsConnectAccess(
+      userStore.user,
+      settingsStore.standalone,
+    ),
+    isStandalone: settingsStore.standalone,
     nextcloudUrl: settingsStore.nextcloudUrl,
     owncloudUrl: settingsStore.owncloudUrl,
     confluenceUrl: settingsStore.confluenceUrl,
@@ -264,6 +311,10 @@ export const IntegrationsCard = inject<TStore>(
     // Same API-reference target the Docs Connect promo page opens from its
     // "Read API documentation" action.
     docsApiUrl: settingsStore.docsConnectUrl,
+    // Null until answered; the dialogs treat that as "not created yet" and the
+    // card asks on mount.
+    hasInstance: docsConnectStore.hasInstance,
+    checkInstance: docsConnectStore.checkInstance,
   }),
 )(observer(IntegrationsCardComponent));
 

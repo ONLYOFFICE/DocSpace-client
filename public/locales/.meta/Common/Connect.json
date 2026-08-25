@@ -3,7 +3,7 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2026-08-21T15:49:57.179Z",
+  "updated_at": "2026-08-24T22:30:00.634Z",
   "comment": {
     "text": "This is a button label that initiates a connection to an external service or account, such as a third-party storage provider or an AI agent.",
     "is_auto": true,
@@ -33,12 +33,6 @@
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/FormInfo/CollectionCard.tsx",
       "line_number": 124,
       "context": "if (!canEditRoom) return null;\n \n return (\n <ActionButton\n label={t(\"Common:Connect\")}\n icon={<ExternalLinkSvg />}\n onClick={onConnect}\n />\n );\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 618,
-      "context": ">\n <Text as=\"p\" className={styles.integrationName}>\n {connector.label}\n </Text>\n <span className={styles.integrationLink}>\n {t(\"Common:Connect\")}\n <ArrowSvg aria-hidden className={styles.integrationArrow} />\n </span>\n </a>\n ))}\n <a",
       "module": "/packages/client"
     },
     {

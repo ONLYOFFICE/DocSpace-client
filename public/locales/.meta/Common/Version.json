@@ -3,7 +3,7 @@
   "content": "Version",
   "content_en_sha1_hash": "2da600bf9404843107a9531694f654e5662959e0",
   "created_at": "2025-05-19T21:30:49.494Z",
-  "updated_at": "2026-08-21T15:49:57.192Z",
+  "updated_at": "2026-08-24T22:30:00.648Z",
   "comment": {
     "text": "This is a label indicating the version number of a plugin or a JavaScript SDK. It appears as a short label next to the version number.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 538,
+      "line_number": 510,
       "context": "<div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"DocsConnect:BuildType\")}</Text>\n <Text fontWeight={600}>{tenantInfo.server.packageType}</Text>\n </div>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"Common:Version\")}</Text>\n <Text fontWeight={600}>{tenantInfo.server.version}</Text>\n </div>\n <div className={styles.detailRow}>\n <Text className={styles.muted}>{t(\"DocsConnect:Released\")}</Text>\n <Text fontWeight={600}>",
       "module": "/packages/client"
     },

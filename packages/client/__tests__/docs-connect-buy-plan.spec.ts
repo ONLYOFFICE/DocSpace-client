@@ -104,7 +104,7 @@ const usePreset = (
   options?: DocsConnectHandlersOptions,
 ) => {
   mockRequest.use(
-    settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+    settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
     colorThemeHandler(TEST_PORT),
     ...docsConnectHandlers(TEST_PORT, preset, options),
   );

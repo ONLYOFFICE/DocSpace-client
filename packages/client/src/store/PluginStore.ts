@@ -1975,8 +1975,6 @@ class PluginStore {
         ...plugin,
         nameLocaleMap: plugin.nameLocale,
         descriptionLocaleMap: plugin.descriptionLocale,
-        nameLocale: plugin.nameLocale || plugin.name,
-        descriptionLocale: plugin.descriptionLocale || plugin.description,
         scopes,
         iconUrl: getPluginUrl(plugin.url, ""),
         compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),

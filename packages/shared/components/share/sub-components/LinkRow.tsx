@@ -119,7 +119,6 @@ const LinkRow = ({
     const {
       accessOptions,
       selectedAccessOption,
-
       roomAccessOptions,
       roomSelectedOptions,
     } = getLinkAccessRight(

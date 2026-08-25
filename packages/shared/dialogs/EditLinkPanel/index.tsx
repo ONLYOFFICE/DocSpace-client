@@ -47,6 +47,7 @@ import React, {
 import { Portal } from "@docspace/ui-kit/components/portal";
 
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
+import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { toastr } from "@docspace/ui-kit/components/toast";
@@ -130,18 +131,16 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   const isDenyDownload = link?.sharedTo?.denyDownload ?? false;
   const isPrimaryLink = link?.sharedTo?.primary ?? false;
 
-  const { isPublic, isFormRoom, isCustomRoom } = useMemo(() => {
+  const { isPublic, isFormRoom } = useMemo(() => {
     if (!isRoom(item))
       return {
         isPublic: false,
         isFormRoom: false,
-        isCustomRoom: false,
       };
 
     return {
       isPublic: item.roomType === RoomsType.PublicRoom,
       isFormRoom: item.roomType === RoomsType.FormRoom,
-      isCustomRoom: item.roomType === RoomsType.CustomRoom,
     };
   }, [item]);
 
@@ -201,13 +200,16 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     }
 
     // Last resort for an access with no option at all: keep the link's own
-    // access so saving the panel does not change it.
+    // access so saving the panel does not change it. It is disabled for the
+    // same reason a revoked access is - the server validates the access against
+    // the available rights and would reject it.
     return (
       accessOptions.selectedOption ?? {
         key: "current-access",
-        label: "",
-        icon: "",
+        label: t("Common:Custom"),
+        icon: AccessNoneReactSvgUrl,
         access: accessLink,
+        disabled: true,
       }
     );
   });
@@ -361,16 +363,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
       return response;
     },
-    [
-      t,
-      item,
-      searchParams,
-      isCustomRoom,
-      updateLink,
-      setLinkParams,
-      setExternalLink,
-      setSearchParams,
-    ],
+    [t, item, updateLink, setLinkParams, setExternalLink],
   );
 
   const handleApiError = (err: TError) => {
@@ -488,8 +481,18 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const isValidLinkTitle = !!deferredLinkTitle.trim();
 
+  // The link carries a role that is not among the available rights any more, so
+  // the server would reject any save - even a password-only one. Require the
+  // user to pick a role that is still available instead of failing the request.
+  const isRevokedAccess =
+    "disabled" in selectedAccessOption && !!selectedAccessOption.disabled;
+
   const isDisabledSaveButton =
-    !hasChanges || isLoading || isExpired || !isValidLinkTitle;
+    !hasChanges ||
+    isLoading ||
+    isExpired ||
+    !isValidLinkTitle ||
+    isRevokedAccess;
 
   const canChangeLifetime = link?.canEditExpirationDate;
 
@@ -545,6 +548,11 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
                 selectedOption={selectedAccessOption}
                 currentDeviceType={currentDeviceType}
                 onSelect={handleSelectAccessOption}
+                warningText={
+                  isRevokedAccess
+                    ? t("Common:RoleForLinkNotAvailable")
+                    : undefined
+                }
               />
             ) : null}
             <LinkBlock

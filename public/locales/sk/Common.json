@@ -1801,6 +1801,7 @@
   "RoleContentCreatorDescription": "Tvorcovia obsahu môžu vytvárať a upravovať súbory v miestnosti, ale nemôžu spravovať používateľov ani nastavenia.",
   "RoleEditorDescription": "Operácie s existujúcimi súbormi: prezeranie, úprava, vypĺňanie formulárov, kontrola, komentovanie.",
   "RoleForLink": "Rola pre odkaz",
+  "RoleForLinkNotAvailable": "Táto rola už nie je pre túto položku dostupná. Vyberte inú rolu, aby ste odkaz uložili.",
   "RoleFormFiller": "Plnený formulára",
   "RoleFormFillerDescription": "Operácie s existujúcimi súbormi: prezeranie, vypĺňanie formulárov, kontrola, komentovanie.",
   "RoleFormFillerFormRoomDescription": "Používatelia, ktorí vyplňujú formuláre môžu vypĺňať formuláre a prezerať len svoje dokončené/začaté formuláre v priečinkoch Vyplnené a V procese.",

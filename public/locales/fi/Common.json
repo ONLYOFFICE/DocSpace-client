@@ -1801,6 +1801,7 @@
   "RoleContentCreatorDescription": "Sisällöntuottajat voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi hallita käyttäjiä tai asetuksia.",
   "RoleEditorDescription": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, muokkaaminen, lomakkeen täyttäminen, tarkistaminen, kommentointi.",
   "RoleForLink": "Linkin rooli",
+  "RoleForLinkNotAvailable": "Tämä rooli ei ole enää käytettävissä tälle kohteelle. Valitse toinen rooli tallentaaksesi linkin.",
   "RoleFormFiller": "Lomakkeen täyttäjä",
   "RoleFormFillerDescription": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, lomakkeen täyttäminen, tarkistaminen, kommentointi.",
   "RoleFormFillerFormRoomDescription": "Lomakkeen täyttäjät voivat täyttää lomakkeita ja katsella vain heidän valmiita/aloitettuja lomakkeita Valmiit- ja Keskeneräiset-kansioissa.",

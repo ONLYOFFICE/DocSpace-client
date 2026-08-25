@@ -64,15 +64,15 @@ describe("getLinkAccessRightOptions", () => {
     expect(selectedOption?.disabled).toBe(true);
   });
 
-  it("resolves an access that is never offered for links", () => {
-    const { selectedOption } = getLinkAccessRightOptions(
+  it("leaves no selected option for an access links cannot carry", () => {
+    const { options, selectedOption } = getLinkAccessRightOptions(
       t,
-      ShareAccessRights.DenyAccess,
+      ShareAccessRights.RoomManager,
       { ExternalLink: [ShareRights.Read] },
     );
 
-    expect(selectedOption?.key).toBe("deny-access");
-    expect(selectedOption?.disabled).toBe(true);
+    expect(options.map((option) => option.key)).toEqual(["viewing"]);
+    expect(selectedOption).toBeUndefined();
   });
 });
 

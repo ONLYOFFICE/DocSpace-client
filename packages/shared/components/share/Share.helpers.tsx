@@ -45,8 +45,8 @@ import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
-import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
-import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+// import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
+// import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import { globalColors } from "@docspace/ui-kit/providers/theme";
 import {
@@ -197,40 +197,6 @@ export const getRoomLinkAccessOptionsMap = (
   };
 };
 
-/**
- * Access rights a link can still carry, but which are never offered as a
- * choice for links, so they are missing from the option maps above. They are
- * only needed to render the current access of such a link as a disabled
- * option instead of leaving the selector empty.
- *
- * Room member roles (RoomManager, ContentCreator) and Varies are deliberately
- * absent: a link cannot hold them, and there is no label for them anywhere.
- */
-export const getRevokedLinkAccessOptionsMap = (
-  t: TTranslation,
-): Partial<Record<ShareRights, TShareLinkAccessRightOption>> => {
-  return {
-    [ShareRights.ReadWrite]: {
-      access: ShareAccessRights.FullAccess,
-      key: "full-access",
-      label: t("Common:FullAccess"),
-      icon: AccessEditReactSvgUrl,
-    },
-    [ShareRights.Restrict]: {
-      access: ShareAccessRights.DenyAccess,
-      key: "deny-access",
-      label: t("Common:DenyAccess"),
-      icon: EyeOffReactSvgUrl,
-    },
-    [ShareRights.None]: {
-      access: ShareAccessRights.None,
-      key: "remove",
-      label: t("Common:Remove"),
-      icon: RemoveReactSvgUrl,
-    },
-  };
-};
-
 export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   return [
     {
@@ -273,9 +239,7 @@ export const getLinkAccessRightOption = (
     // more. Keep it in the list as a disabled option so the selector shows the
     // real access instead of rendering empty, and so saving the link does not
     // silently replace the access with an unrelated one.
-    const right = ShareAccessRightsToShareRights[access];
-    const selected =
-      accessOptions[right] ?? getRevokedLinkAccessOptionsMap(t)[right];
+    const selected = accessOptions[ShareAccessRightsToShareRights[access]];
 
     if (selected) {
       const fallbackOption = { ...selected, disabled: true };

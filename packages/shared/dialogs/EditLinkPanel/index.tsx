@@ -348,22 +348,18 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const executeApiCall = useCallback(
     async (updatedLink: TFileLink) => {
-      try {
-        const response = await ShareLinkService.editLink(item, updatedLink);
+      const response = await ShareLinkService.editLink(item, updatedLink);
 
-        setLinkParams({ link: response, item });
+      setLinkParams({ link: response, item });
 
-        if (isRoom(item)) {
-          setExternalLink?.(response);
-          copyShareLink(item, response, t);
-        } else {
-          updateLink?.(response);
-        }
-
-        return response;
-      } catch (err) {
-        console.error(err);
+      if (isRoom(item)) {
+        setExternalLink?.(response);
+        copyShareLink(item, response, t);
+      } else {
+        updateLink?.(response);
       }
+
+      return response;
     },
     [
       t,
@@ -395,11 +391,15 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       const updatedLink = buildUpdatedLink();
 
       await executeApiCall(updatedLink);
+
+      onClose();
     } catch (err) {
+      // Keep the panel open on failure: the edited values survive and the user
+      // can react to the error, for example pick a role that is still
+      // available when the current one has been revoked.
       handleApiError(err as TError);
     } finally {
       setIsLoading(false);
-      onClose();
     }
   }, [validateInputs, buildUpdatedLink, executeApiCall, onClose]);
 

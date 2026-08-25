@@ -153,12 +153,14 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     // SaaS billing lives under its own /billing article (the Stripe callback
     // included); standalone has the license page under portal-payments and
-    // nothing else - no wallet, no addons, no payment method.
-    const isBillingUrl =
+    // nothing else - no wallet, no addons, no payment method. Community has
+    // neither, so the whole section is closed there.
+    const isPaymentsSection =
       location.pathname === "/billing" ||
-      location.pathname.startsWith("/billing/");
+      location.pathname.startsWith("/billing/") ||
+      location.pathname.startsWith("/portal-settings/payments");
     const isSaasOnlyPaymentsUrl =
-      location.pathname.startsWith("/portal-settings/payments") &&
+      isPaymentsSection &&
       location.pathname !== "/portal-settings/payments/portal-payments";
 
     const isPortalRenameUrl =
@@ -229,17 +231,16 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
         ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
           isPortalDeletionUrl) ||
-        (isCommunity && isPaymentsUrl) ||
+        (isCommunity && isPaymentsSection) ||
         (isEnterprise && isBonusPage))
     ) {
       return <Navigate replace to="/" />;
     }
 
-    if (isLoaded && standalone && (isBillingUrl || isSaasOnlyPaymentsUrl)) {
-      // The license page is the standalone counterpart of SaaS billing, but it
-      // exists in EE/DE only and only for admins - everyone else goes home.
-      const canOpenLicensePage =
-        !isCommunity && (user?.isOwner || user?.isAdmin);
+    if (isLoaded && standalone && isSaasOnlyPaymentsUrl) {
+      // Community is already home by now; the license page left here is the
+      // standalone counterpart of SaaS billing, and it is admin-only.
+      const canOpenLicensePage = user?.isOwner || user?.isAdmin;
 
       return (
         <Navigate

@@ -114,6 +114,7 @@ const InvitePanel = ({
   isOwner,
   isAdmin,
   standalone,
+  isCommunity,
   hideSelector,
   isUserTariffLimit,
 
@@ -406,7 +407,7 @@ const InvitePanel = ({
       <>
         {error}
         &nbsp;
-        {!isRoomAdmin ? paymentLink : null}
+        {!isRoomAdmin && !isCommunity ? paymentLink : null}
       </>
     );
   };
@@ -1173,6 +1174,7 @@ export default inject(
     infoPanelStore,
     authStore,
     currentQuotaStore,
+    currentTariffStatusStore,
     userStore,
     peopleStore,
     uploadDataStore,
@@ -1221,6 +1223,7 @@ export default inject(
       setIsNewUserByCurrentUser,
       isOwner,
       standalone,
+      isCommunity: currentTariffStatusStore.isCommunity,
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isAdmin,

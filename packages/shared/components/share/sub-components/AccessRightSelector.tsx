@@ -102,6 +102,7 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
         type="onlyIcon"
         noSelect={false}
         directionY="both"
+        showDisabledItems
         usePortalBackdrop
         manualWidth="300px"
         isAside={isMobileViewLink}

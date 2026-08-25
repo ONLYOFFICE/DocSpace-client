@@ -65,6 +65,7 @@ import {
   USERS_IN_ROOM,
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
+  NO_QUOTA,
 } from "../constants";
 import { Nullable, TTranslation } from "../types";
 import { UserStore } from "./UserStore";
@@ -438,6 +439,10 @@ class CurrentQuotasStore {
   }
 
   get defaultRoomsQuota() {
+    console.log(
+      "his.currentPortalQuota?.roomsQuota",
+      this.currentPortalQuota?.roomsQuota,
+    );
     return this.currentPortalQuota?.roomsQuota?.defaultQuota;
   }
 
@@ -508,7 +513,7 @@ class CurrentQuotasStore {
   };
 
   setUserQuota = async (quota: string | number, t: (key: string) => string) => {
-    const isEnable = +quota !== -1;
+    const isEnable = +quota !== NO_QUOTA;
 
     try {
       await setDefaultUserQuota(isEnable, +quota);
@@ -523,7 +528,7 @@ class CurrentQuotasStore {
   };
 
   setRoomQuota = async (quota: string | number, t: (key: string) => string) => {
-    const isEnable = +quota !== -1;
+    const isEnable = +quota !== NO_QUOTA;
 
     try {
       await setDefaultRoomQuota(isEnable, +quota);
@@ -538,7 +543,7 @@ class CurrentQuotasStore {
   };
 
   setAIAgentQuota = async (quota: string | number, t: TTranslation) => {
-    const isEnable = +quota !== -1;
+    const isEnable = +quota !== NO_QUOTA;
 
     try {
       await setDefaultAIAgentQuota(isEnable, +quota);
@@ -554,3 +559,4 @@ class CurrentQuotasStore {
 }
 
 export { CurrentQuotasStore };
+

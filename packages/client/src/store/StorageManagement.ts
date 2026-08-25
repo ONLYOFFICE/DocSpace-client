@@ -274,7 +274,9 @@ class StorageManagement {
     const roomFilterData = RoomsFilter.getDefault();
     roomFilterData.pageCount = FILTER_COUNT;
 
-    const requests: Promise<unknown>[] = [fetchPortalQuota()];
+    // refresh=true: the endpoint is cached and would echo the pre-save
+    // quota (defaultQuota -2) right after a mutation.
+    const requests: Promise<unknown>[] = [fetchPortalQuota(true)];
 
     type === "user"
       ? requests.push(getUserList(userFilterData))

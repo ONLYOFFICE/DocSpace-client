@@ -67,6 +67,7 @@ import dynamic from "next/dynamic";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { getAIAgent } from "@docspace/shared/api/ai";
 import { FolderType } from "@docspace/shared/enums";
 
 import {
@@ -145,14 +146,23 @@ const AiAgentDetailPage = ({
     aiRoomStore.setKnowledgeId(null);
     aiRoomStore.setResultId(null);
     aiRoomStore.setTitle("");
+    aiRoomStore.setSecurity(null);
+    aiRoomStore.setAgent(null);
     loadingStore.setIsSectionBodyLoading(true);
 
     const controller = new AbortController();
+
+    void getAIAgent(roomId)
+      .then((agent) => {
+        if (!controller.signal.aborted) aiRoomStore.setAgent(agent);
+      })
+      .catch(() => {});
 
     void api.files
       .getFolder(roomId, FilesFilter.getDefault(), controller.signal)
       .then((data) => {
         aiRoomStore.setTitle(data.current?.title ?? "");
+        aiRoomStore.setSecurity(data.current?.security ?? null);
         const knowledge = data.folders.find(
           (f) => f.type === FolderType.Knowledge,
         );

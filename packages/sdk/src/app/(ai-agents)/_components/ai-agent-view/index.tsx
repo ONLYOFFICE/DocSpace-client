@@ -61,8 +61,10 @@
 
 "use client";
 
+import React from "react";
 import { observer } from "mobx-react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 import NoAgentItem from "../no-agent-item";
 import NoAccessAgent from "../no-access-agent";
@@ -75,6 +77,7 @@ import {
   useKnowledgeFilesStore,
   useResultFilesStore,
 } from "../../_store";
+import { useAgentsCommonData } from "../../_store/AgentsCommonDataContext";
 
 import styles from "./AIAgentView.module.scss";
 
@@ -92,6 +95,8 @@ const AiAgentView = () => {
   const loadingStore = useAgentLoadingStore();
   const aiConfigStore = useAgentsAIConfigStore();
   const userStore = useAgentsUserStore();
+  const { portalSettings } = useAgentsCommonData();
+  const router = useRouter();
 
   const {
     currentTab,
@@ -101,10 +106,26 @@ const AiAgentView = () => {
     isErrorAIAgentNotAvailable,
   } = aiRoomStore;
 
-  // SDK analogue of `accessRightsStore.canUseChat`: chat requires a
-  // configured AI provider and a non-visitor user.
-  const canUseChat =
-    aiConfigStore.aiReady && !!userStore.user && !userStore.user.isVisitor;
+  const { user } = userStore;
+
+  const canUseChat = !!user && !user.isVisitor;
+  const aiReady = aiConfigStore.aiReady;
+  const isPortalAdmin = Boolean(user?.isAdmin || user?.isOwner);
+  const isStandalone = Boolean(portalSettings?.standalone);
+
+  const goToAISettings = React.useCallback(
+    () => router.push("/ai-agents/settings"),
+    [router],
+  );
+
+  const noAccessProps = React.useMemo(
+    () => ({
+      standalone: isStandalone,
+      isPortalAdmin,
+      goToAISettings,
+    }),
+    [isStandalone, isPortalAdmin, goToAISettings],
+  );
 
   // No room selected — show a no-agent placeholder (ported from client
   // NoAgentItem.tsx in InfoPanel).
@@ -138,7 +159,7 @@ const AiAgentView = () => {
     <>
       {shouldRenderChat ? (
         <div className={styles.aiAgentChat}>
-          <NewChat />
+          <NewChat isAgents aiReady={aiReady} noAccessProps={noAccessProps} />
         </div>
       ) : null}
 

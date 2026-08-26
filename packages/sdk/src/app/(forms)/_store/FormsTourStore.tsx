@@ -95,10 +95,6 @@ class FormsTourStore {
     return this.isRunning;
   }
 
-  get forceShowAiChat() {
-    return this.isRunning;
-  }
-
   hydrateForUser = async (userKey: string): Promise<void> => {
     if (!userKey) return;
     this._userKey = userKey;

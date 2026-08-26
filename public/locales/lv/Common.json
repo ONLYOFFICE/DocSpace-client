@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Iesniegt galerijā",
   "SubmitToGalleryBlockBody": "Iesniedziet savas veidnes, lai tās kopīgotu ar {{organizationName}} kopienu.",
   "SubmitToTemplateGallery": "Iesniegt uz šablonu galeriju",
+  "Subscribe": "Abonēt",
   "SubscriptionAutoCancellation": "Abonements automātiski tiks atcelts {{finalDate}} datumā.",
   "SubscriptionAutoRenewed": "Abonements automātiski tiks pagarināts {{finalDate}} ar atjauninātām cenām un specifikācijām.",
   "SubscriptionAutoRenewedOn": "Abonements tiks automātiski atjaunots {{finalDate}}",

@@ -3,7 +3,7 @@
   "content": "Docs Connect",
   "content_en_sha1_hash": "4d2b8a26357b7cefe048f4d8c24390a28a5a9d38",
   "created_at": "2026-07-27T13:07:48.460Z",
-  "updated_at": "2026-08-26T14:08:32.959Z",
+  "updated_at": "2026-08-26T16:06:02.250Z",
   "comment": {
     "text": "Page title and dashboard card title representing the name of the DocsConnect service.",
     "is_auto": true,
@@ -115,7 +115,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 313,
+      "line_number": 310,
       "context": "title={scheduledChangeTitle}\n body={\n isCancellation\n ? t(\"Common:PlanCancellationBillingPeriodNote\", {\n date: scheduledChangeDate,\n service: t(\"DocsConnect:DocsConnect\"),\n })\n : t(\"Common:ScheduledChangeBillingPeriodNote\", {\n date: scheduledChangeDate,\n })\n }",
       "module": "/packages/client"
     },

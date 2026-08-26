@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Prześlij do galerii",
   "SubmitToGalleryBlockBody": "Prześlij swoje szablony, aby udostępnić je społeczności {{organizationName}}.",
   "SubmitToTemplateGallery": "Prześlij do Galerii Szablonów",
+  "Subscribe": "Subskrybuj",
   "SubscriptionAutoCancellation": "Subskrypcja zostanie automatycznie anulowana w dniu {{finalDate}}.",
   "SubscriptionAutoRenewed": "Subskrypcja zostanie automatycznie odnowiona w dniu {{finalDate}} z zaktualizowanymi cenami i specyfikacjami.",
   "SubscriptionAutoRenewedOn": "Subskrypcja zostanie automatycznie odnowiona w dniu {{finalDate}}",

@@ -3,7 +3,7 @@
   "content": "User activity in the last month",
   "content_en_sha1_hash": "0a27cc58c4080f179c781a24899876077606425b",
   "created_at": "2026-07-27T13:07:48.499Z",
-  "updated_at": "2026-08-24T22:30:00.695Z",
+  "updated_at": "2026-08-26T16:06:02.319Z",
   "comment": {
     "text": "Section heading in the statistics panel that titles a block of data regarding recent user engagement.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/TenantPanel/Statistics.tsx",
-      "line_number": 530,
+      "line_number": 527,
       "context": "level={HeadingLevel.h2}\n className={styles.sectionTitle}\n fontSize=\"18px\"\n fontWeight={700}\n >\n {t(\"DocsConnect:ActivityForPeriod\")}\n </Heading>\n <Text fontSize=\"13px\" className={styles.muted}>\n {t(\"DocsConnect:UserActivitySubtitle\")}\n </Text>\n </div>",
       "module": "/packages/client"
     }

@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Dorëzojeni në Galeri",
   "SubmitToGalleryBlockBody": "Paraqisni shabllonet tuaja për t'i ndarë me komunitetin {{organizationName}}.",
   "SubmitToTemplateGallery": "Dërgo në Galerinë e Shablloneve",
+  "Subscribe": "Abonohu",
   "SubscriptionAutoCancellation": "Abonimi do të anulohet automatikisht më {{finalDate}}",
   "SubscriptionAutoRenewed": "Abonimi do të rinovohet automatikisht më {{finalDate}} me çmimet dhe specifikimet e përditësuara.",
   "SubscriptionAutoRenewedOn": "Nëshkrimi do të rinovohet automatikisht më {{finalDate}}",

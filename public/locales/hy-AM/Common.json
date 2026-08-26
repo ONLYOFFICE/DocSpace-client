@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Ներկայացնել պատկերասրահին",
   "SubmitToGalleryBlockBody": "Ներկայացրեք ձեր ձևանմուշները՝ դրանք կիսելու {{organizationName}} համայնքի հետ:",
   "SubmitToTemplateGallery": "Ներկայացնել Ձևանմուշների գալերեայում",
+  "Subscribe": "Բաժանորդագրվել",
   "SubscriptionAutoCancellation": "Բաժանորդագրությունն ավտոմատ կերպով կչեղարկվի {{finalDate}}",
   "SubscriptionAutoRenewed": "Բաժանորդագրությունն ավտոմատ կերպով կերկարաձգվի {{finalDate}}՝ թարմացված գներով և տեխնիկական բնութագրերով։",
   "SubscriptionAutoRenewedOn": "Բաժանորդագրությունը ինքնաբերաբար վերանորոգվելու է {{finalDate}}-ին",

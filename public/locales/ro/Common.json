@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Trimite la Galerie",
   "SubmitToGalleryBlockBody": "Trimiteți șabloanele dvs. pentru a le împărtăși cu comunitatea {{organizationName}}.",
   "SubmitToTemplateGallery": "Trimite în Galeria de Șabloane",
+  "Subscribe": "Abonați-vă",
   "SubscriptionAutoCancellation": "Abonamentul va fi anulat automat la data de {{finalDate}}",
   "SubscriptionAutoRenewed": "Abonamentul va fi reînnoit automat pe {{finalDate}} cu preţuri şi specificaţii actualizate.",
   "SubscriptionAutoRenewedOn": "Abonamentul va fi reînnoit automat la {{finalDate}}",

@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "ສົ່ງໄປທີ່ແກລເລີຣີ",
   "SubmitToGalleryBlockBody": "ສົ່ງແບບຢ່າງຂອງທ່ານເພື່ອແບ່ງປັນກັບຊຸມຊົນ {{organizationName}}.",
   "SubmitToTemplateGallery": "ຍື່ນເຂົ້າຫໍແກລເລີແມ່ແບບ",
+  "Subscribe": "ສະໝັກໃຊ້",
   "SubscriptionAutoCancellation": "ການສັກສະໝັກຈະຖືກຍົກເລີກໂດຍອັດຕະໂນມັດໃນວັນທີ {{finalDate}}",
   "SubscriptionAutoRenewed": "ການສັກສະໝັກຈະຕໍ່ອາຍຸໂດຍອັດຕະໂນມັດໃນວັນທີ {{finalDate}} ດ້ວຍລາຄາ ແລະ ລະບຸຕົວຊັດນັດທີ່ປັບປຸງແລ້ວ.",
   "SubscriptionAutoRenewedOn": "ການສະໝັກຈະຕໍ່ອາຍຸອັດຕະໂນມັດໃນວັນທີ {{finalDate}}",

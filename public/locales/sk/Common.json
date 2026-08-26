@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Odoslať do galérie",
   "SubmitToGalleryBlockBody": "Pošlite svoje šablóny, aby ste ich mohli zdieľať s komunitou {{organizationName}}.",
   "SubmitToTemplateGallery": "Odoslať do galérie šablón",
+  "Subscribe": "Prihlásiť sa na odber",
   "SubscriptionAutoCancellation": "Predplatné bude automaticky zrušené dňa {{finalDate}}.",
   "SubscriptionAutoRenewed": "Predplatné bude automaticky obnovené {{finalDate}} s aktualizovanými cenami a špecifikáciami.",
   "SubscriptionAutoRenewedOn": "Predplatné sa automaticky obnoví dňa {{finalDate}}",

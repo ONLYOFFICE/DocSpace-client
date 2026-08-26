@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Gửi đến Bộ Sưu Tập",
   "SubmitToGalleryBlockBody": "Gửi mẫu của bạn để chia sẻ với cộng đồng {{organizationName}}.",
   "SubmitToTemplateGallery": "Gửi đến Thư viện Mẫu",
+  "Subscribe": "Đăng ký",
   "SubscriptionAutoCancellation": "Đăng ký sẽ tự động bị hủy vào {{finalDate}}",
   "SubscriptionAutoRenewed": "Đăng ký sẽ được gia hạn tự động vào {{finalDate}} với mức giá và thông số kỹ thuật đã được cập nhật.",
   "SubscriptionAutoRenewedOn": "Gói đăng ký sẽ tự động gia hạn vào ngày {{finalDate}}",

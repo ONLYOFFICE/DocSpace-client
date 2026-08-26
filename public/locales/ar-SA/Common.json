@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "تسليم إلى المعرض",
   "SubmitToGalleryBlockBody": "أرسل قوالبك لمشاركتها مع مجتمع {{organizationName}}.",
   "SubmitToTemplateGallery": "إرسال إلى معرض القوالب",
+  "Subscribe": "اشترك",
   "SubscriptionAutoCancellation": "سيتم إلغاء الاشتراك تلقائيًا في تاريخ {{finalDate}}",
   "SubscriptionAutoRenewed": "سيتم تجديد الاشتراك تلقائيًا في {{finalDate}} مع الأسعار والمواصفات المحدثة.",
   "SubscriptionAutoRenewedOn": "سيتم تجديد الاشتراك تلقائيًا في {{finalDate}}",

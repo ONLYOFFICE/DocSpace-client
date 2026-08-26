@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Qalereyaya göndərin",
   "SubmitToGalleryBlockBody": "{{organizationName}} icması ilə paylaşmaq üçün şablonlarınızı təqdim edin.",
   "SubmitToTemplateGallery": "Şablon Qalereyasına Göndər",
+  "Subscribe": "Abunə olun",
   "SubscriptionAutoCancellation": "Abunə {{finalDate}} tarixində avtomatik olaraq ləğv ediləcəkdir.",
   "SubscriptionAutoRenewed": "Abunə avtomatik olaraq {{finalDate}} tarixində yenilənmiş qiymət və spesifikasiyalar ilə davam edəcəkdir.",
   "SubscriptionAutoRenewedOn": "Abunəlik {{finalDate}} tarixində avtomatik olaraq yenilənəcək",

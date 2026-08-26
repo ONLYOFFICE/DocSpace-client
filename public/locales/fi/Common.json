@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Lähetä Galleriaan",
   "SubmitToGalleryBlockBody": "Lähetä pohjat jakaaksesi ne {{organizationName}}-yhteisön kanssa.",
   "SubmitToTemplateGallery": "Lähetä malligalleriaan",
+  "Subscribe": "Tilaa",
   "SubscriptionAutoCancellation": "Tilaus peruutetaan automaattisesti {{finalDate}}.",
   "SubscriptionAutoRenewed": "Tilaus uusitaan automaattisesti {{finalDate}} päivänä päivitettyjen hintojen ja tietojen mukaisesti.",
   "SubscriptionAutoRenewedOn": "Tilaus uusiutuu automaattisesti {{finalDate}}",

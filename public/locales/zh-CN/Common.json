@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "提交至图库",
   "SubmitToGalleryBlockBody": "提交模板，与 {{organizationName}} 社区共享。",
   "SubmitToTemplateGallery": "提交到模板库",
+  "Subscribe": "订阅",
   "SubscriptionAutoCancellation": "订阅将于{{finalDate}}自动取消",
   "SubscriptionAutoRenewed": "订阅将于{{finalDate}}自动续订，价格及配置将更新。",
   "SubscriptionAutoRenewedOn": "订阅将在{{finalDate}}自动续订",

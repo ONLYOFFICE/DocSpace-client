@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Enviar a la Galería",
   "SubmitToGalleryBlockBody": "Envíe sus plantillas para compartirlas con la comunidad de {{organizationName}}.",
   "SubmitToTemplateGallery": "Enviar a la Galería de Plantillas",
+  "Subscribe": "Suscribirse",
   "SubscriptionAutoCancellation": "La suscripción se cancelará automáticamente el {{finalDate}}",
   "SubscriptionAutoRenewed": "La suscripción se renovará automáticamente el {{finalDate}} con precios y especificaciones actualizados.",
   "SubscriptionAutoRenewedOn": "La suscripción se renovará automáticamente el {{finalDate}}",

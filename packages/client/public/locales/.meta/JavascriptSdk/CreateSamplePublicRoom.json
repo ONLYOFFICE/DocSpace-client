@@ -1,14 +1,14 @@
 {
   "key_path": "CreateSamplePublicRoom",
-  "content": "Create sample Public room embed",
-  "content_en_sha1_hash": "1b93783d2de58b201928a571c81e9ce53f4ce3b9",
-  "created_at": "2025-05-19T21:30:54.403Z",
-  "updated_at": "2026-05-15T14:00:06.804Z",
+  "content": "Try a Public room embed",
+  "content_en_sha1_hash": "271c419679bc5d9e98e5b98a8d6702a3c30baee1",
+  "created_at": "2026-08-26T16:05:57.719Z",
+  "updated_at": "2026-08-26T16:09:06.809Z",
   "comment": {
-    "text": "This is a button label that creates a sample public room embed.",
+    "text": "Header for a preset block in the Developer Tools section, introducing an example of a Public room embed.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:16:05.992Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-08-26T16:09:06.809Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -164,6 +164,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

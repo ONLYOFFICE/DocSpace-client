@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Oddaj v galerijo",
   "SubmitToGalleryBlockBody": "Predložite svoje predloge, da jih delite s skupnostjo {{organizationName}}.",
   "SubmitToTemplateGallery": "Pošilji v galerijo predložkov",
+  "Subscribe": "Naroči se",
   "SubscriptionAutoCancellation": "Naročnina bo samodejno preklicana dne {{finalDate}}.",
   "SubscriptionAutoRenewed": "Naročnina se bo samodejno obnovila {{finalDate}} z posodobljenimi cenami in specifikacijami.",
   "SubscriptionAutoRenewedOn": "Naročnina se bo avtomatsko obnovila na {{finalDate}}",

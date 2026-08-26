@@ -2080,6 +2080,7 @@
   "SubmitToGallery": "Odeslat do galerie",
   "SubmitToGalleryBlockBody": "Pošlete své šablony a podělte se o ně s komunitou {{organizationName}}.",
   "SubmitToTemplateGallery": "Odeslat do galerie šablon",
+  "Subscribe": "Přihlásit k odběru",
   "SubscriptionAutoCancellation": "Předplatné bude automaticky zrušeno {{finalDate}}.",
   "SubscriptionAutoRenewed": "Předplatné bude automaticky obnoveno {{finalDate}} s aktualizovanými cenami a specifikacemi.",
   "SubscriptionAutoRenewedOn": "A předplatné bude automaticky obnoveno dne {{finalDate}}",

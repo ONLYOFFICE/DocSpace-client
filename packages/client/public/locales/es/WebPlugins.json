@@ -14,5 +14,7 @@
   "PluginLoadedSuccessfully": "Plugin cargado correctamente",
   "PluginSamples": "Ejemplos de plugins",
   "PluginSDK": "SDK de plugins",
+  "PluginSDKDescription": "Utilice el SDK de plugins para añadir nuevas funciones, conectar servicios de terceros o mejorar la experiencia existente. Consulte los plugins de ejemplo a continuación, con el código fuente disponible en GitHub. Vaya a la página <1>Plugins</1> para activarlos en su espacio de trabajo.",
+  "PluginSDKInstruction": "<1>Lea las instrucciones</1> para crear sus propios plugins.",
   "UploadDescription": "Puede añadir plugins para ampliar la funcionalidad del espacio de trabajo con características adicionales. Haga clic en Cargar plugin o coloque un archivo en formato ZIP."
 }

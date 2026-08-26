@@ -1801,6 +1801,7 @@
   "RoleContentCreatorDescription": "Tvůrci obsahu mohou v místnosti vytvářet a upravovat soubory, ale nemohou spravovat uživatele ani přistupovat k nastavení.",
   "RoleEditorDescription": "Operace s existujícími soubory: prohlížení, editace, vyplňování formulářů, revize, komentování.",
   "RoleForLink": "Role pro odkaz",
+  "RoleForLinkNotAvailable": "Tato role již není pro tuto položku dostupná. Vyberte jinou roli, abyste mohli odkaz uložit.",
   "RoleFormFiller": "Plnidatel formulářů",
   "RoleFormFillerDescription": "Operace s existujícími soubory: prohlížení, vyplňování formulářů, revize, komentování.",
   "RoleFormFillerFormRoomDescription": "Vyplňovatelé formulářů mohou vyplňovat formuláře a zobrazovat pouze své dokončené/zahájené formuláře ve složkách Dokončeno a V procesu.",

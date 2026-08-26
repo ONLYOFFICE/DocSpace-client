@@ -42,6 +42,7 @@ import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?u
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
+import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 
 import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
@@ -92,35 +93,28 @@ import {
   TTitleShare,
 } from "./Share.types";
 
-export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
-  return [
-    {
-      internal: false,
-      key: "anyone",
-      label: t("Common:AnyoneWithLink"),
-      icon: withIcon ? UniverseIcon : undefined,
-    },
-    {
-      internal: true,
-      key: "users",
-      label: t("Common:SpaceUsersOnly"),
-      icon: withIcon ? PeopleIcon : undefined,
-    },
-  ];
+export const ShareAccessRightsToShareRights: Record<
+  ShareAccessRights,
+  ShareRights
+> = {
+  [ShareAccessRights.None]: ShareRights.None,
+  [ShareAccessRights.FullAccess]: ShareRights.ReadWrite,
+  [ShareAccessRights.ReadOnly]: ShareRights.Read,
+  [ShareAccessRights.DenyAccess]: ShareRights.Restrict,
+  [ShareAccessRights.Varies]: ShareRights.Varies,
+  [ShareAccessRights.Review]: ShareRights.Review,
+  [ShareAccessRights.Comment]: ShareRights.Comment,
+  [ShareAccessRights.FormFilling]: ShareRights.FillForms,
+  [ShareAccessRights.CustomFilter]: ShareRights.CustomFilter,
+  [ShareAccessRights.RoomManager]: ShareRights.RoomManager,
+  [ShareAccessRights.Editing]: ShareRights.Editing,
+  [ShareAccessRights.Collaborator]: ShareRights.ContentCreator,
 };
 
-export const getLinkAccessRightOptions = (
+export const getLinkAccessRightOptionsMap = (
   t: TTranslation,
-  available?: TAvailableShareRights,
-  isPrimary = false,
-) => {
-  const linkAccess =
-    (isPrimary ? available?.PrimaryExternalLink : available?.ExternalLink) ||
-    [];
-
-  const accessOptions: Partial<
-    Record<ShareRights, TShareLinkAccessRightOption>
-  > = {
+): Partial<Record<ShareRights, TShareLinkAccessRightOption>> => {
+  return {
     [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       key: "editing",
@@ -159,24 +153,12 @@ export const getLinkAccessRightOptions = (
       icon: FillFormsReactSvgUrl,
     },
   };
-
-  return linkAccess
-    .map((access) => accessOptions[access])
-    .filter((item): item is TShareLinkAccessRightOption => Boolean(item));
 };
 
-export const getRoomLinkAccessOptions = (
+export const getRoomLinkAccessOptionsMap = (
   t: TTranslation,
-  available?: TAvailableShareRights,
-  isPrimary = false,
-) => {
-  const roomAccess =
-    (isPrimary ? available?.PrimaryExternalLink : available?.ExternalLink) ||
-    [];
-
-  const accessOptions: Partial<
-    Record<ShareRights, TShareLinkAccessRightOption>
-  > = {
+): Partial<Record<ShareRights, TShareLinkAccessRightOption>> => {
+  return {
     [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       description: t("Common:RoleEditorDescription"),
@@ -214,10 +196,135 @@ export const getRoomLinkAccessOptions = (
       title: t("Common:FillingOnly"),
     },
   };
+};
 
-  return roomAccess
-    .map((access) => accessOptions[access])
+export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
+  return [
+    {
+      internal: false,
+      key: "anyone",
+      label: t("Common:AnyoneWithLink"),
+      icon: withIcon ? UniverseIcon : undefined,
+    },
+    {
+      internal: true,
+      key: "users",
+      label: t("Common:SpaceUsersOnly"),
+      icon: withIcon ? PeopleIcon : undefined,
+    },
+  ];
+};
+
+/**
+ * Describes an access a link may carry but that is never offered as a role in
+ * the selector - either because it is set elsewhere (Deny access lives in the
+ * link context menu) or because it has no role of its own. Used only to build
+ * the disabled fallback option, so it never turns into a selectable role.
+ */
+const getUnavailableAccessOption = (
+  t: TTranslation,
+  access: ShareAccessRights,
+): TShareLinkAccessRightOption => {
+  if (access === ShareAccessRights.DenyAccess)
+    return {
+      access,
+      key: "deny-access",
+      label: t("Common:DenyAccess"),
+      icon: AccessNoneReactSvgUrl,
+    };
+
+  return {
+    access,
+    key: "current-access",
+    label: t("Common:Custom"),
+    icon: AccessNoneReactSvgUrl,
+  };
+};
+
+export const getLinkAccessRightOption = (
+  t: TTranslation,
+  getOptions: (
+    t: TTranslation,
+  ) => Partial<Record<ShareRights, TShareLinkAccessRightOption>>,
+  access: ShareAccessRights,
+  available?: TAvailableShareRights,
+  isPrimary = false,
+) => {
+  const externalLink =
+    (isPrimary ? available?.PrimaryExternalLink : available?.ExternalLink) ||
+    [];
+  const accessOptions = getOptions(t);
+
+  const options = externalLink
+    .map((option) => accessOptions[option])
     .filter((item): item is TShareLinkAccessRightOption => Boolean(item));
+
+  let selectedOption = options.find((option) => option.access === access);
+
+  if (!selectedOption) {
+    // The link carries an access that is not among the available rights any
+    // more. Keep it in the list as a disabled option so the selector shows the
+    // real access instead of rendering empty, and so saving the link does not
+    // silently replace the access with an unrelated one. An access with no role
+    // of its own (Deny access, and anything a link is not expected to carry)
+    // gets a fallback description instead - it still has to be listed, or the
+    // selector is hidden and the user never learns why the link cannot be
+    // saved.
+    const selected =
+      accessOptions[ShareAccessRightsToShareRights[access]] ??
+      getUnavailableAccessOption(t, access);
+
+    selectedOption = { ...selected, disabled: true };
+    options.push(selectedOption);
+  }
+
+  return { options, selectedOption };
+};
+
+export const getLinkAccessRightOptions = (
+  t: TTranslation,
+  access: ShareAccessRights,
+  available?: TAvailableShareRights,
+  isPrimary = false,
+) =>
+  getLinkAccessRightOption(
+    t,
+    getLinkAccessRightOptionsMap,
+    access,
+    available,
+    isPrimary,
+  );
+export const getRoomLinkAccessOptions = (
+  t: TTranslation,
+  access: ShareAccessRights,
+  available?: TAvailableShareRights,
+  isPrimary = false,
+) =>
+  getLinkAccessRightOption(
+    t,
+    getRoomLinkAccessOptionsMap,
+    access,
+    available,
+    isPrimary,
+  );
+
+export const getLinkAccessRight = (
+  t: TTranslation,
+  access: ShareAccessRights,
+  available?: TAvailableShareRights,
+  isPrimary = false,
+) => {
+  const { options: accessOptions, selectedOption: selectedAccessOption } =
+    getLinkAccessRightOptions(t, access, available, isPrimary);
+  const { options: roomAccessOptions, selectedOption: roomSelectedOptions } =
+    getRoomLinkAccessOptions(t, access, available, isPrimary);
+
+  return {
+    accessOptions,
+    selectedAccessOption,
+    roomAccessOptions,
+    roomSelectedOptions,
+  };
 };
 
 export const getExpiredOptions = (

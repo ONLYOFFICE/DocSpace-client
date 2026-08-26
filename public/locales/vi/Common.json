@@ -1801,6 +1801,7 @@
   "RoleContentCreatorDescription": "Người tạo nội dung có thể tạo và chỉnh sửa các tập tin trong phòng, nhưng không thể quản lý người dùng hoặc truy cập cài đặt.",
   "RoleEditorDescription": "Hoạt động với các tập tin hiện có: xem, chỉnh sửa, điền biểu mẫu, xem lại, nhận xét.",
   "RoleForLink": "Vai trò của liên kết",
+  "RoleForLinkNotAvailable": "Vai trò này không còn khả dụng cho mục này. Chọn vai trò khác để lưu liên kết.",
   "RoleFormFiller": "Người điền biểu mẫu",
   "RoleFormFillerDescription": "Hoạt động với các tập tin hiện có: xem, điền biểu mẫu, xem lại, nhận xét.",
   "RoleFormFillerFormRoomDescription": "Người điền biểu mẫu có thể điền vào các biểu mẫu và chỉ xem các biểu mẫu đã hoàn thành/bắt đầu của họ trong các thư mục Hoàn thành và Đang xử lý.",

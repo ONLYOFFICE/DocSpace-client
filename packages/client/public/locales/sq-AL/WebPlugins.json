@@ -14,7 +14,5 @@
   "PluginLoadedSuccessfully": "Shtojca u ngarkua me sukses",
   "PluginSamples": "Mostrat e shtojcave",
   "PluginSDK": "Shtojca SDK",
-  "PluginSDKDescription": "Duke përdorur Plugin SDK, mund të zgjeroni funksionalitetin e hapësirës suaj të punës, të lidhni shërbimet e palëve të treta ose të përmirësoni përvojën ekzistuese të përdoruesit. Këtu mund të gjeni mostrat e shtojcave me burim kodi të disponueshëm në GitHub.",
-  "PluginSDKInstruction": "Klikoni butonin për udhëzime të hollësishme se si të krijoni shtojcat tuaja.",
   "UploadDescription": "Mund të shtoni shtojca për të zgjeruar funksionalitetin e hapësirës së punës me veçori shtesë. Klikoni Ngarkoni shtojcën ose hidhni skedarin në arkivin ZIP."
 }

@@ -1068,7 +1068,6 @@
   "GuestCantCreateOrUploadTitle": "Les invités ne peuvent pas créer ni télécharger de fichiers.",
   "GuestInvitation": "<1>{{displayName}}</1> souhaite partager avec vous le contact de l'invité.",
   "Guests": "Invités",
-  "Guide": "Guide",
   "HasFullAccess": "Il a un accès complet à la salle",
   "Header": "En-tête",
   "HeaderDescription": "Vous pouvez désactiver l'en-tête dans la version mobile pour limiter l'accès aux sections de espace de travail (identique à la désactivation du menu de gauche dans la version de bureau).",

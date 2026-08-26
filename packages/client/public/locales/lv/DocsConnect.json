@@ -132,7 +132,6 @@
   "TotalMonthly": "Kopā mēnesī",
   "TrialAvailable": "Pieejams bezmaksas viena mēneša izmēģinājums. Kredītkarte nav nepieciešama.",
   "TrialBannerDescription": "Jūsu izmēģinājuma periods beigsies pēc {{count}} dienām — abonējiet, lai saglabātu nepārtrauktu piekļuvi.",
-  "TrialBannerDescriptionSecond": "Ja samaksāsiet šodien, jūsu dati tiks saglabāti, un pirmā maksa tiks iekasēta pēc izmēģinājuma perioda beigām.",
   "TrialBannerTitle": "Jūs izmantojat {{organizationName}} Docs Connect bezmaksas izmēģinājumu",
   "TrialDaysRemaining": "~ {{count}} atlikušās dienas",
   "TrialDaysRemainingExpired": "{{count}} atlikušās dienas",

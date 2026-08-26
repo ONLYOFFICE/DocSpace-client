@@ -132,7 +132,6 @@
   "TotalMonthly": "Totali mujor",
   "TrialAvailable": "Është e disponueshme një provë falas një-mujore. Nuk kërkohet kartë krediti.",
   "TrialBannerDescription": "Periudha juaj e provës skadon brenda {{count}} ditësh — abonohuni për të ruajtur aksesin pa ndërprerje.",
-  "TrialBannerDescriptionSecond": "Nëse paguani sot, të dhënat tuaja ruhen, dhe ngarkesa e parë ndodh pasi të skadojë periudha e provës.",
   "TrialBannerTitle": "Po përdorni një provë falas të {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} ditë të mbetura",
   "TrialDaysRemainingExpired": "{{count}} ditë të mbetura",

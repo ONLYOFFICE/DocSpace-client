@@ -132,7 +132,6 @@
   "TotalMonthly": "Aylık toplam",
   "TrialAvailable": "Ücretsiz bir aylık deneme sunulmaktadır. Kredi kartı gerekmez.",
   "TrialBannerDescription": "Deneme süreniz {{count}} gün içinde sona eriyor — kesintisiz erişimi sürdürmek için abone olun.",
-  "TrialBannerDescriptionSecond": "Bugün ödeme yaparsanız verileriniz saklanır ve ilk ücretlendirme deneme süresi sona erdikten sonra gerçekleşir.",
   "TrialBannerTitle": "{{organizationName}} Docs Connect ücretsiz denemesini kullanıyorsunuz",
   "TrialDaysRemaining": "~ {{count}} gün kaldı",
   "TrialDaysRemainingExpired": "{{count}} gün kaldı",

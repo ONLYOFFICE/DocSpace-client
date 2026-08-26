@@ -132,7 +132,6 @@
   "TotalMonthly": "Итого в месяц",
   "TrialAvailable": "Доступен бесплатный пробный период на один месяц. Банковская карта не требуется.",
   "TrialBannerDescription": "Ваш пробный период истекает через {{count}} дн. — оформите подписку, чтобы сохранить бесперебойный доступ.",
-  "TrialBannerDescriptionSecond": "Если вы оплатите сегодня, ваши данные сохранятся, а первое списание произойдет после окончания пробного периода.",
   "TrialBannerTitle": "Вы используете бесплатный пробный период {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ Осталось {{count}} дн.",
   "TrialDaysRemainingExpired": "Осталось {{count}} дн.",

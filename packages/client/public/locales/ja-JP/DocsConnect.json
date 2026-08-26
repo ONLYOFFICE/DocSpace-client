@@ -132,7 +132,6 @@
   "TotalMonthly": "月額合計",
   "TrialAvailable": "1か月間の無料試用が利用可能です。クレジットカードは不要です。",
   "TrialBannerDescription": "試用期間はあと{{count}}日で終了します。継続してご利用いただくにはサブスクリプションにご登録ください。",
-  "TrialBannerDescriptionSecond": "本日お支払いいただくと、データは保存され、初回請求は試用期間終了後に発生します。",
   "TrialBannerTitle": "現在、{{organizationName}} Docs Connect の無料試用をご利用中です",
   "TrialDaysRemaining": "残り約{{count}}日",
   "TrialDaysRemainingExpired": "残り{{count}}日",

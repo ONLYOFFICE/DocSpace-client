@@ -132,7 +132,6 @@
   "TotalMonthly": "Monatlich gesamt",
   "TrialAvailable": "Ein kostenloser einmonatiger Testzeitraum steht zur Verfügung. Keine Kreditkarte erforderlich.",
   "TrialBannerDescription": "Ihr Testzeitraum läuft in {{count}} Tagen ab – schließen Sie ein Abonnement ab, um den unterbrechungsfreien Zugriff zu behalten.",
-  "TrialBannerDescriptionSecond": "Wenn Sie heute bezahlen, werden Ihre Daten gespeichert, und die erste Abbuchung erfolgt erst nach Ablauf des Testzeitraums.",
   "TrialBannerTitle": "Sie nutzen die kostenlose Testversion von {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} Tage verbleibend",
   "TrialDaysRemainingExpired": "{{count}} Tage verbleibend",

@@ -132,7 +132,6 @@
   "TotalMonthly": "Celkem měsíčně",
   "TrialAvailable": "Je k dispozici jednoměsíční zkušební verze zdarma. Není vyžadována platební karta.",
   "TrialBannerDescription": "Vaše zkušební období vyprší za {{count}} dní — předplaťte si službu, abyste zachovali nepřerušený přístup.",
-  "TrialBannerDescriptionSecond": "Pokud zaplatíte ještě dnes, vaše data zůstanou zachována a k prvnímu poplatku dojde až po vypršení zkušebního období.",
   "TrialBannerTitle": "Používáte zkušební verzi zdarma služby {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ zbývá {{count}} dní",
   "TrialDaysRemainingExpired": "Zbývá {{count}} dní",

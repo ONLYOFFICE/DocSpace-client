@@ -42,6 +42,11 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import Section from "@docspace/ui-kit/components/section";
+import {
+  useAiChatPanel,
+  useOpenAiChat,
+} from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import { useIsAiChatAvailable } from "@docspace/ui-kit/ai-agent/providers/availability";
 import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { QuickActions } from "@docspace/ui-kit/components/quick-actions";
 import type { QuickActionItem } from "@docspace/ui-kit/components/quick-actions";
@@ -50,6 +55,7 @@ import {
   GeneratePdfAiIcon,
   CreateFromTextIcon,
   CreateFromTemplateIcon,
+  AIChatIcon,
 } from "@docspace/ui-kit/components/quick-actions/icons";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
@@ -99,6 +105,7 @@ import useTourSandbox from "../_hooks/useTourSandbox";
 import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
 import FormsEditor from "../_components/forms-editor";
 import FormsHeader from "../_components/forms-header";
+import FormsAiChatProviders from "../_components/ai-chat-providers";
 import FormsFilter from "../_components/forms-filter";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
@@ -140,9 +147,12 @@ type FormsShellProps = {
   children: React.ReactNode;
 };
 
-const FormsShell = ({ commonData, children }: FormsShellProps) => {
+const FormsShellContent = ({ commonData, children }: FormsShellProps) => {
   const { sdkConfig } = useSDKConfig();
   const isReady = useInitCommonStores(commonData);
+  const ai = useAiChatPanel(true);
+  const openAiChat = useOpenAiChat();
+  const isAiChatAvailable = useIsAiChatAvailable();
 
   const formsNavigationStore = useFormsNavigationStore();
   const {
@@ -546,8 +556,18 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         label: t("Common:UseTemplate"),
         onClick: () => router.push(libraryUrl({})),
       },
+      ...(isAiChatAvailable
+        ? [
+            {
+              id: "quick-ai-chat",
+              icon: <AIChatIcon />,
+              label: t("Common:AIChat"),
+              onClick: openAiChat,
+            },
+          ]
+        : []),
     ],
-    [t, onCreateBlankForm, router],
+    [t, onCreateBlankForm, router, isAiChatAvailable, openAiChat],
   );
 
   const formsDataValue = React.useMemo(
@@ -616,9 +636,15 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     return <DualRingSpinner />;
   }
 
+  const layoutMode =
+    ai?.isChatPanelVisible && ai?.isChatPanelFullscreen
+      ? "ai-fullscreen"
+      : undefined;
+
   return (
     <div
       className={styles.root}
+      data-layout-mode={layoutMode}
       style={
         {
           "--min-section-width": `${MIN_SECTION_WIDTH}px`,
@@ -629,6 +655,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         <Section
           withBodyScroll={!isEditing}
           withoutFooter={isEditing}
+          isChatPanelAvailable={!!ai}
+          isChatPanelVisible={ai?.isChatPanelVisible}
+          setIsChatPanelVisible={(visible: boolean) => {
+            if (!visible) ai?.closeChatPanel();
+          }}
           settingsStudio={false}
           viewAs={isSettings ? "settings" : "tile"}
           isEmptyPage={
@@ -664,6 +695,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
               </div>
             </FormsDataProvider>
           </Section.SectionBody>
+          <Section.ChatPanel>{ai?.chatPanelContent}</Section.ChatPanel>
         </Section>
         {progressStore.icon !== null && (
           <div className={styles.floatingButtonContainer}>
@@ -704,5 +736,19 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   );
 };
 
-export default observer(FormsShell);
+const FormsShellWithAi = observer(FormsShellContent);
+
+const FormsShell = ({ commonData, children }: FormsShellProps) => (
+  <div className={styles.aiRoot}>
+    <FormsAiChatProviders
+      roomId={commonData.roomId}
+      user={commonData.user}
+      isStandalone={Boolean(commonData.standalone)}
+    >
+      <FormsShellWithAi commonData={commonData}>{children}</FormsShellWithAi>
+    </FormsAiChatProviders>
+  </div>
+);
+
+export default FormsShell;
 

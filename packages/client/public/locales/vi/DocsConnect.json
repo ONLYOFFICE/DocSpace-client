@@ -132,7 +132,6 @@
   "TotalMonthly": "Tổng chi phí hàng tháng",
   "TrialAvailable": "Có bản dùng thử miễn phí một tháng. Không cần thẻ tín dụng.",
   "TrialBannerDescription": "Thời gian dùng thử của bạn sẽ hết hạn sau {{count}} ngày—hãy đăng ký để duy trì quyền truy cập liên tục.",
-  "TrialBannerDescriptionSecond": "Nếu bạn thanh toán hôm nay, dữ liệu của bạn sẽ được lưu lại, và khoản phí đầu tiên sẽ được tính sau khi thời gian dùng thử kết thúc.",
   "TrialBannerTitle": "Bạn đang sử dụng bản dùng thử miễn phí của {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ Còn {{count}} ngày",
   "TrialDaysRemainingExpired": "Còn {{count}} ngày",

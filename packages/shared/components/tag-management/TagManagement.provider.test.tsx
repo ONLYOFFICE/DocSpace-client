@@ -34,15 +34,53 @@
  */
 
 import React from "react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import type { TagType } from "@docspace/ui-kit/components/tag";
 import {
   TagManagementProvider,
   useTagManagement,
 } from "./TagManagement.provider";
+import { TAGS_QUERY_KEY } from "./TagManagement.constants";
+import type { AccessTagManagement } from "./TagManagement.types";
+
+vi.mock("../../api/rooms", () => ({
+  getTags: vi.fn(() => Promise.resolve([])),
+  addTagsToRoom: vi.fn(() => Promise.resolve()),
+  removeTagsFromRoom: vi.fn(() => Promise.resolve()),
+  updateTagName: vi.fn(() => Promise.resolve()),
+  removeTagRequest: vi.fn(() => Promise.resolve()),
+}));
+
+// The tags query is the source of truth for which tags exist, so a test seeds
+// the cache rather than handing the provider a list.
+const renderProvider = ({
+  roomTags = [],
+  fetchedTags = [],
+  access = {},
+}: {
+  roomTags?: Array<TagType | string>;
+  fetchedTags?: string[];
+  access?: AccessTagManagement;
+} = {}) => {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  });
+
+  queryClient.setQueryData(TAGS_QUERY_KEY, fetchedTags);
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <TagManagementProvider roomId="room-1" roomTags={roomTags} access={access}>
+        <TestComponent />
+      </TagManagementProvider>
+    </QueryClientProvider>,
+  );
+};
 
 const TestComponent = () => {
   const {
@@ -90,15 +128,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["tag1", "tag2"];
     const fetchedTags = ["tag3", "tag4"];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     expect(screen.getByTestId("tags-count")).toHaveTextContent("4");
     expect(screen.getByTestId("filtered-count")).toHaveTextContent("4");
@@ -111,15 +141,7 @@ describe("TagManagementProvider", () => {
     ];
     const fetchedTags = ["tag3"];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     expect(screen.getByTestId("tags-count")).toHaveTextContent("2");
     const list = screen.getByTestId("filtered-list");
@@ -131,15 +153,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["test", "testing"];
     const fetchedTags: string[] = [];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     const input = screen.getByTestId("search-input");
     await user.type(input, "test");
@@ -152,15 +166,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["test", "testing", "production"];
     const fetchedTags: string[] = [];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     const input = screen.getByTestId("search-input");
     await user.type(input, "test");
@@ -180,15 +186,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["test"];
     const fetchedTags: string[] = [];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     const input = screen.getByTestId("search-input");
     await user.type(input, "test");
@@ -205,15 +203,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["test", "testing"];
     const fetchedTags: string[] = [];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{ canCreate: true }}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: { canCreate: true } });
 
     const input = screen.getByTestId("search-input");
     await user.type(input, "newTag");
@@ -228,15 +218,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["test", "testing"];
     const fetchedTags: string[] = [];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{ canCreate: true }}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: { canCreate: true } });
 
     const input = screen.getByTestId("search-input");
     await user.type(input, "test");
@@ -250,26 +232,14 @@ describe("TagManagementProvider", () => {
     const roomTags = ["tag1", "tag2", "tag3"];
     const fetchedTags: string[] = [];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     expect(screen.getByTestId("filtered-count")).toHaveTextContent("3");
     expect(screen.getByTestId("show-create")).toHaveTextContent("false");
   });
 
   it("handles empty room tags and fetched tags", () => {
-    render(
-      <TagManagementProvider roomTags={[]} fetchedTags={[]} access={{}}>
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: [], fetchedTags: [], access: {} });
 
     expect(screen.getByTestId("tags-count")).toHaveTextContent("0");
     expect(screen.getByTestId("filtered-count")).toHaveTextContent("0");
@@ -280,15 +250,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["test", "test 2", "testing"];
     const fetchedTags: string[] = [];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     const input = screen.getByTestId("search-input");
     await user.type(input, "test");
@@ -305,15 +267,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["test"];
     const fetchedTags: string[] = [];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     const input = screen.getByTestId("search-input");
     await user.type(input, "t");
@@ -329,15 +283,7 @@ describe("TagManagementProvider", () => {
     const roomTags = ["tag1", "tag2"];
     const fetchedTags = ["tag2", "tag3"];
 
-    render(
-      <TagManagementProvider
-        roomTags={roomTags}
-        fetchedTags={fetchedTags}
-        access={{}}
-      >
-        <TestComponent />
-      </TagManagementProvider>,
-    );
+    renderProvider({ roomTags: roomTags, fetchedTags: fetchedTags, access: {} });
 
     expect(screen.getByTestId("tags-count")).toHaveTextContent("3");
     const list = screen.getByTestId("filtered-list");

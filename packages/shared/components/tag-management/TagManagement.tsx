@@ -46,7 +46,6 @@ import { useCloseOnAnchorCovered } from "@docspace/ui-kit/hooks/useCloseOnAnchor
 import { useIsTable } from "../../hooks/useIsTable";
 
 import { TagManagementPopup } from "./TagManagement.popup";
-import { EDIT_CANCELLED, DELETE_CANCELLED } from "./TagManagement.constants";
 
 import type { TagManagementProps } from "./TagManagement.types";
 import { EditTagModal, DeleteTagModal } from "./modals";
@@ -115,36 +114,45 @@ export const TagManagement: FC<TagManagementProps> = ({
   useUnmount(onClose);
 
   const confirmEditTag = useCallback(
-    async (oldLabel: string, newLabel: string) => {
+    async function* editTagFlow(oldLabel: string, newLabel: string) {
       const confirmed = await requestConfirmation();
 
-      if (!confirmed) {
-        return Promise.reject(EDIT_CANCELLED);
-      }
+      // Hand the answer to the caller before anything is sent, so it can tell
+      // a declined dialog from a failed request.
+      yield confirmed;
+
+      if (!confirmed) return;
 
       try {
         await updateTagName.mutateAsync({
           oldLabel,
           newLabel,
         });
+        // Only the global tag list is updated optimistically. Without reloading
+        // the room, its own tags keep the old label and unionTagsData shows it
+        // again next to the new one the next time the list is opened.
+        onTagsChanged?.();
       } catch (error) {
         console.error("Failed to update tag name:", error);
         throw error;
       }
     },
-    [requestConfirmation, updateTagName],
+    [requestConfirmation, updateTagName, onTagsChanged],
   );
 
   const confirmDeleteTag = useCallback(
-    async (tag: string) => {
+    async function* deleteTagFlow(tag: string) {
       const confirmed = await requestDeleteConfirmation(tag);
 
-      if (!confirmed) {
-        return Promise.reject(DELETE_CANCELLED);
-      }
+      yield confirmed;
+
+      if (!confirmed) return;
 
       try {
         await removeTag.mutateAsync(tag);
+        // Same reason as in confirmEditTag: the room still carries the tag that
+        // no longer exists until it is reloaded.
+        onTagsChanged?.();
         toastr.success(
           <Trans
             t={t}
@@ -163,7 +171,7 @@ export const TagManagement: FC<TagManagementProps> = ({
         throw error;
       }
     },
-    [requestDeleteConfirmation, removeTag, t],
+    [requestDeleteConfirmation, removeTag, onTagsChanged, t],
   );
 
   const isTableView = useIsTable();

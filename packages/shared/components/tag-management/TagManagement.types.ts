@@ -36,6 +36,18 @@
 import type { TagClickEvent, TagType } from "@docspace/ui-kit/components/tag";
 import type { EDIT_TAG_FORM_NAME } from "./TagManagement.constants";
 
+/**
+ * A tag action that runs in two observable steps.
+ *
+ * The first `next()` resolves once the user has answered the confirmation
+ * dialog and yields that answer, so the caller knows whether a request is
+ * about to be sent. The second `next()` performs it and settles when it is
+ * done - it rejects if the request failed. A declined confirmation is a
+ * `false` value, not an error.
+ */
+
+export type TagActionFlow = AsyncGenerator<boolean, void, void>;
+
 export type AccessTagManagement = {
   canRemove?: boolean;
   canCreate?: boolean;
@@ -49,8 +61,8 @@ export interface TagManagementPopupProps {
   onClose: VoidFunction;
   anchor: React.RefObject<HTMLElement | null>;
 
-  onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
-  onDeleteTag?: (label: string) => Promise<void>;
+  onEditTag?: (oldLabel: string, newLabel: string) => TagActionFlow;
+  onDeleteTag?: (label: string) => TagActionFlow;
   onTagsChanged?: VoidFunction;
 
   roomName: string;
@@ -64,13 +76,15 @@ export type TTag = {
 
 export interface TagManagementProviderProps {
   children: React.ReactNode;
-  fetchedTags: string[];
   roomTags: Array<TagType | string>;
+  roomId: string | number;
   access: AccessTagManagement;
 }
 export interface ITagManagementStateContext {
+  /** Derived from the tags query, the room and the running mutations. */
   tags: TTag[];
-  setTags: React.Dispatch<React.SetStateAction<TTag[]>>;
+  /** Labels with an operation still in flight, for the per-row loaders. */
+  pendingLabels: ReadonlySet<string>;
   searchValue: string;
   deferredSearchValue: string;
   filteredTags: TTag[];
@@ -81,7 +95,7 @@ export interface ITagManagementStateContext {
   access: AccessTagManagement;
 }
 
-export type TagManagementContextValue = ITagManagementStateContext
+export type TagManagementContextValue = ITagManagementStateContext;
 
 export interface UpdateTagNameParams {
   oldLabel: string;
@@ -91,8 +105,8 @@ export interface UpdateTagNameParams {
 export interface TagManagementContentProps {
   roomId: string | number;
 
-  onDeleteTag?: (label: string) => Promise<void>;
-  onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
+  onDeleteTag?: (label: string) => TagActionFlow;
+  onEditTag?: (oldLabel: string, newLabel: string) => TagActionFlow;
   onTagsChanged?: VoidFunction;
 }
 
@@ -117,3 +131,4 @@ export interface TagManagementProps {
 export interface FormValues {
   [EDIT_TAG_FORM_NAME]: string;
 }
+

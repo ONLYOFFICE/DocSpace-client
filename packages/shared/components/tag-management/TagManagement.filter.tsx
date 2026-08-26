@@ -73,8 +73,6 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     showCreateTag,
     setSearchValue,
     clearSearch,
-    tags,
-    setTags,
     filteredTags,
     access: { canSearch },
   } = useTagManagement();
@@ -103,30 +101,23 @@ export const TagManagementFilter: React.FC<TagManagementFilterProps> = ({
     const trimmedValue = searchValue.trim();
     if (trimmedValue.length === 0 || !showCreateTag) return;
 
-    const newTag: TTag = { label: trimmedValue, checked: true };
-    const updatedTags = [newTag, ...tags];
     clearSearch();
     setInputValue("");
 
-    createTag.mutate(trimmedValue, {
-      onSuccess: () => {
-        setTags(updatedTags);
-        onTagsChanged?.();
-      },
-      onError: (error) => {
-        console.error("Failed to create tag:", error);
-        toastr.error(error);
-      },
-    });
-  }, [
-    searchValue,
-    tags,
-    clearSearch,
-    createTag,
-    setTags,
-    showCreateTag,
-    onTagsChanged,
-  ]);
+    try {
+      // mutateAsync, not mutate: the hook holds a single observer, and every
+      // mutate() replaces its callbacks and detaches the mutation still in
+      // flight (MutationObserver.mutate), so creating a second tag before the
+      // first one lands swallows the first onSuccess. The returned promise
+      // belongs to its own mutation and is not affected.
+      await createTag.mutateAsync(trimmedValue);
+
+      onTagsChanged?.();
+    } catch (error) {
+      console.error("Failed to create tag:", error);
+      toastr.error(error instanceof Error ? error : new Error(String(error)));
+    }
+  }, [searchValue, clearSearch, createTag, showCreateTag, onTagsChanged]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {

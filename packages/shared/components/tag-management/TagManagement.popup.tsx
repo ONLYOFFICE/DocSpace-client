@@ -95,7 +95,9 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   // handles `position: fixed` against the visual viewport itself.
   useKeyboardAwareSheet(sheetRef, isMobile && isReliableAndroidViewport());
 
-  const { data: fetchedTags, status } = useTagsQuery();
+  // The list reads the tags from the query itself; the popup only needs to
+  // know whether the first load is done.
+  const { status } = useTagsQuery();
 
   useLayoutEffect(() => {
     if (isMobile) return;
@@ -153,8 +155,8 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
         .with("pending", () => <TagManagementLoader />)
         .with("success", () => (
           <TagManagementProvider
-            fetchedTags={fetchedTags ?? []}
             roomTags={roomTags}
+            roomId={roomId}
             access={access}
           >
             <TagManagementFilter

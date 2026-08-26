@@ -37,8 +37,39 @@ export const ROW_HEIGHT = 30;
 export const MARGIN_BOTTOM = 10;
 export const MAX_BODY_HEIGHT = 220;
 export const ICON_SIZE = 16;
+export const LOADER_SIZE = 16;
 
 export const TAGS_QUERY_KEY = ["tags"];
+
+// Stable keys so the pending state of these mutations can be read from the
+// mutation cache by any mounted tag list, not only by the component that
+// started them. Renaming and deleting a tag change it everywhere, so the
+// progress has to outlive the popup that triggered it.
+export const TAG_RENAME_MUTATION_KEY = ["tags", "rename"];
+export const TAG_REMOVE_MUTATION_KEY = ["tags", "remove"];
+
+// Binding a tag only changes one room, so its key carries the room and the
+// progress stays inside that room's lists.
+export const getTagBindMutationKey = (roomId: string | number) => [
+  "tags",
+  "bind",
+  roomId,
+];
+
+// How long a settled rename or delete is kept in the mutation cache. That
+// record is the only thing linking the name the room still reports to the one
+// the tags query already has, so it has to outlive the host's stale copy - the
+// default five minutes turned out to be shorter than that, and the tag showed
+// up twice once the record expired. Bounded on purpose: after this the list
+// falls back to whatever the two sources say.
+export const TAG_MUTATION_RECORD_GC_TIME = 30 * 60 * 1000;
+
+// Creating a tag also binds it to the room it was created from.
+export const getTagCreateMutationKey = (roomId: string | number) => [
+  "tags",
+  "create",
+  roomId,
+];
 
 export const EVENT_OPTIONS: AddEventListenerOptions = {
   capture: true,
@@ -49,7 +80,4 @@ export const EDIT_TAG_MODAL_ID = "edit-tag-modal";
 
 export const DELETE_TAG_DONT_SHOW_AGAIN_KEY = "delete-tag-dont-show-again";
 export const DELETE_TAG_MODAL_ID = "delete-tag-modal";
-
-export const EDIT_CANCELLED = Symbol("EDIT_CANCELLED");
-export const DELETE_CANCELLED = Symbol("DELETE_CANCELLED");
 export const EDIT_TAG_FORM_NAME = "edit-tag-form";

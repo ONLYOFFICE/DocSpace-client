@@ -196,6 +196,24 @@
     margin: 0;
   }
 
+  // Keeps the spinner in the checkbox slot so swapping them does not move the
+  // rest of the row.
+  .checkboxLoader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+  }
+
+  &.rowPending {
+    .tag,
+    .editIcon,
+    .deleteIcon {
+      opacity: 0.6;
+    }
+  }
+
   .editIcon,
   .deleteIcon {
     flex-shrink: 0;

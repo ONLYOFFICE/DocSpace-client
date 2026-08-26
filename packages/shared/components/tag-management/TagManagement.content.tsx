@@ -45,6 +45,7 @@ import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url
 import { Tag } from "@docspace/ui-kit/components/tag";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import {
@@ -62,15 +63,15 @@ import styles from "./TagManagement.module.scss";
 import {
   ROW_HEIGHT,
   ICON_SIZE,
+  LOADER_SIZE,
   MAX_BODY_HEIGHT,
   MARGIN_BOTTOM,
-  EDIT_CANCELLED,
-  DELETE_CANCELLED,
   EDIT_TAG_FORM_NAME,
 } from "./TagManagement.constants";
 import type {
   FormValues,
   TagManagementContentProps,
+  TTag,
 } from "./TagManagement.types";
 
 export const TagManagementContent: React.FC<TagManagementContentProps> = ({
@@ -89,8 +90,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   const isMobile = useIsMobile();
   const {
     filteredTags,
-    tags,
-    setTags,
+    pendingLabels,
     access: { canEdit, canRemove, canBindTag },
   } = useTagManagement();
 
@@ -99,31 +99,21 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   const [editingLabel, setEditingLabel] = useState<string | null>(null);
 
   const toggleChecked = useCallback(
-    (label: string) => {
-      const originalTags = [...tags];
-      const updatedTags = [...tags];
-      const tagIndex = updatedTags.findIndex((tag) => tag.label === label);
+    async (tag: TTag) => {
+      try {
+        // The list picks the new value up from the mutation itself and drops
+        // it again if this rejects, so there is nothing to apply or roll back
+        // here. mutateAsync, not mutate: a second toggle detaches the mutation
+        // still in flight and its per-call callbacks never run.
+        await updateTag.mutateAsync({ ...tag, checked: !tag.checked });
 
-      if (tagIndex === -1) return;
-
-      updatedTags[tagIndex] = {
-        ...updatedTags[tagIndex],
-        checked: !updatedTags[tagIndex].checked,
-      };
-
-      updateTag.mutate(updatedTags[tagIndex], {
-        onSuccess: () => {
-          setTags(updatedTags);
-          onTagsChanged?.();
-        },
-        onError: (error) => {
-          toastr.error(error);
-          console.error("Failed to update room tags:", error);
-          setTags(originalTags);
-        },
-      });
+        onTagsChanged?.();
+      } catch (error) {
+        console.error("Failed to update room tags:", error);
+        toastr.error(error instanceof Error ? error : new Error(String(error)));
+      }
     },
-    [tags, updateTag, onTagsChanged],
+    [updateTag, onTagsChanged],
   );
 
   const handleEdit = useCallback(
@@ -133,7 +123,7 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
 
       setValue(EDIT_TAG_FORM_NAME, label);
     },
-    [tags, setValue],
+    [setValue],
   );
 
   const cancelEdit = useCallback(() => {
@@ -157,22 +147,25 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
         return;
       }
 
-      try {
-        await onEditTag?.(oldLabel, newLabel);
-        setTags((prev) =>
-          prev.map((tag) =>
-            tag.label === oldLabel ? { ...tag, label: newLabel } : tag,
-          ),
-        );
-        cancelEdit();
-      } catch (error) {
-        if (error === EDIT_CANCELLED) return;
+      const flow = onEditTag?.(oldLabel, newLabel);
 
-        toastr.error(error as Error);
+      if (flow) {
+        // Step one of the flow only settles the confirmation dialog, before
+        // anything is sent - so a declined rename is a value, not an error.
+        const { value: confirmed } = await flow.next();
+
+        if (!confirmed) return;
+      }
+
+      try {
+        cancelEdit();
+        await flow?.next();
+      } catch (error) {
         console.error("Failed to update tag name:", error);
+        toastr.error(error instanceof Error ? error : new Error(String(error)));
       }
     },
-    [editingLabel, tags, cancelEdit, onEditTag],
+    [editingLabel, cancelEdit, onEditTag],
   );
 
   const deleteTag = useCallback(
@@ -182,19 +175,22 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     ) => {
       stopPropagation(event);
 
+      const flow = onDeleteTag?.(tag);
+
+      if (flow) {
+        const { value: confirmed } = await flow.next();
+
+        if (!confirmed) return;
+      }
+
       try {
-        await onDeleteTag?.(tag);
-
-        const updatedTags = tags.filter((t) => t.label !== tag);
-        setTags(updatedTags);
+        await flow?.next();
       } catch (error) {
-        if (error === DELETE_CANCELLED) return;
-
-        toastr.error(error as Error);
         console.error("Failed to remove room tag:", error);
+        toastr.error(error instanceof Error ? error : new Error(String(error)));
       }
     },
-    [tags, onDeleteTag],
+    [onDeleteTag],
   );
 
   const editTagHandleKey = useCallback(
@@ -229,17 +225,19 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
       <Scrollbar fixedSize className={styles.scrollbar}>
         {filteredTags.map((tag) => {
           const isEditing = editingLabel === tag.label;
-          const isRowClickable = canBindTag && !isEditing;
+          // A tag being renamed, deleted or bound cannot take another operation
+          // until the running one is done.
+          const isPending = pendingLabels.has(tag.label);
+          const isRowClickable = canBindTag && !isEditing && !isPending;
 
           return (
             <div
               key={tag.label}
               className={classNames(styles.row, {
                 [styles.rowClickable]: isRowClickable,
+                [styles.rowPending]: isPending,
               })}
-              onClick={
-                isRowClickable ? () => toggleChecked(tag.label) : undefined
-              }
+              onClick={isRowClickable ? () => toggleChecked(tag) : undefined}
               data-testid={`tag_row_${tag.label}`}
             >
               {/* The checkbox toggles through its own onChange, so its click
@@ -248,13 +246,26 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                 onClick={stopPropagation}
                 className={styles.checkboxWrapper}
               >
-                <Checkbox
-                  isChecked={tag.checked}
-                  isDisabled={!canBindTag}
-                  className={styles.checkbox}
-                  onChange={() => toggleChecked(tag.label)}
-                  dataTestId={`tag_checkbox_${tag.label}`}
-                />
+                {isPending ? (
+                  <span
+                    className={styles.checkboxLoader}
+                    data-testid={`tag_loader_${tag.label}`}
+                  >
+                    <Loader
+                      primary
+                      size={`${LOADER_SIZE}px`}
+                      type={LoaderTypes.oval}
+                    />
+                  </span>
+                ) : (
+                  <Checkbox
+                    isChecked={tag.checked}
+                    isDisabled={!canBindTag}
+                    className={styles.checkbox}
+                    onChange={() => toggleChecked(tag)}
+                    dataTestId={`tag_checkbox_${tag.label}`}
+                  />
+                )}
               </span>
               {isEditing ? (
                 <>
@@ -313,6 +324,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       className={styles.editIcon}
                       iconName={AccessEditReactSvgUrl}
                       onClick={(event) => {
+                        stopPropagation(event);
+                        if (isPending) return;
                         handleEdit(event, tag.label);
                       }}
                       dataTestId={`edit_tag_button_${tag.label}`}
@@ -324,6 +337,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       iconName={TrashReactSvgUrl}
                       className={styles.deleteIcon}
                       onClick={(event) => {
+                        stopPropagation(event);
+                        if (isPending) return;
                         deleteTag(event, tag.label);
                       }}
                       dataTestId={`delete_tag_button_${tag.label}`}
@@ -338,3 +353,4 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     </div>
   );
 };
+

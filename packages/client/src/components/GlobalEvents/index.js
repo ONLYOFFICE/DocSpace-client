@@ -43,7 +43,6 @@ import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
 import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 
 
 import CreateEvent from "./CreateEvent";
@@ -59,6 +58,7 @@ import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
+import { useHasAiProfiles } from "../../Hooks/useHasAiProfiles";
 import { AI_SETTINGS_URL } from "../../helpers/constants";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { isAIAgents } from "../../helpers/plugins/utils";
@@ -137,8 +137,10 @@ const GlobalEvents = ({
 
   const [activateAIProps, setActivateAIProps] = useState({ visible: false });
 
-  const { useProfilesStore } = useStores();
-  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  // Not `profiles.length` off the store: that flaps to false while a rebuilt
+  // chat bundle hydrates, and on standalone a false negative here navigates
+  // the user off the page. The hook holds the last hydrated value instead.
+  const hasAiProfiles = useHasAiProfiles();
 
   const onCreate = useCallback((e) => {
     const { payload } = e;

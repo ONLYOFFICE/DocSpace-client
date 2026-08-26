@@ -80,6 +80,14 @@ export type UseModuleItemsProps = {
   /** `canCreateRooms` plus AI being ready, which agent creation also needs. */
   canCreateAgents: boolean;
   /**
+   * The portal-wide AI switch (Settings -> Integration -> AI services).
+   *
+   * Stricter than `canCreateAgents`, and it removes the card instead of
+   * degrading it: a portal with AI switched off has no agents to open either,
+   * so an app card leading into that section would only offer a dead end.
+   */
+  aiServicesEnabled: boolean;
+  /**
    * Rooms quota is exhausted or the portal is in its grace period. Room and
    * form-set creation then opens the quota warning instead of the create
    * dialog, matching every other create entry point.
@@ -100,6 +108,7 @@ export const useModuleItems = ({
   isGuest,
   canCreateRooms,
   canCreateAgents,
+  aiServicesEnabled,
   isWarningRoomsDialog,
   setQuotaWarningDialogVisible,
 }: UseModuleItemsProps): ModuleItem[] => {
@@ -177,20 +186,27 @@ export const useModuleItems = ({
           withQuotaCheck(() => dispatchCreateRoom(RoomsType.FormRoom)),
         ),
       },
-      {
-        id: "ai-agents",
-        icon: <AiAgentsIcon />,
-        title: t("Common:AIAgents"),
-        description: t("Common:DashboardAIChatAgentsDescription"),
-        installed: true,
-        href: "/ai-agents/filter",
-        ...createOrOpen(
-          canCreateAgents,
-          "/ai-agents/filter",
-          t("Common:CreateAIAgent", { aiAgent: t("Common:AIAgent") }),
-          dispatchCreateAgent,
-        ),
-      },
+      // Dropped outright on a portal with AI switched off - see
+      // `aiServicesEnabled`. The sidebar drops its AI Agents item under the
+      // same rule, so the app is absent from both places at once.
+      ...(aiServicesEnabled
+        ? [
+            {
+              id: "ai-agents",
+              icon: <AiAgentsIcon />,
+              title: t("Common:AIAgents"),
+              description: t("Common:DashboardAIChatAgentsDescription"),
+              installed: true,
+              href: "/ai-agents/filter",
+              ...createOrOpen(
+                canCreateAgents,
+                "/ai-agents/filter",
+                t("Common:CreateAIAgent", { aiAgent: t("Common:AIAgent") }),
+                dispatchCreateAgent,
+              ),
+            },
+          ]
+        : []),
     ];
 
     return items.filter((mod) => mod.installed);
@@ -200,6 +216,7 @@ export const useModuleItems = ({
     isGuest,
     canCreateRooms,
     canCreateAgents,
+    aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
   ]);

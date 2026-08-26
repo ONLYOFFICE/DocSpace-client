@@ -1801,6 +1801,7 @@
   "RoleContentCreatorDescription": "Satura veidotāji var izveidot un rediģēt failus telpā, bet nevar pārvaldīt lietotājus vai piekļūt iestatījumiem.",
   "RoleEditorDescription": "Darbības ar esošajiem failiem: skatīšana, rediģēšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",
   "RoleForLink": "Loma saitei",
+  "RoleForLinkNotAvailable": "Šī loma šim vienumam vairs nav pieejama. Izvēlieties citu lomu, lai saglabātu saiti.",
   "RoleFormFiller": "Veidlapas aizpildītājs",
   "RoleFormFillerDescription": "Darbības ar esošajiem failiem: skatīšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",
   "RoleFormFillerFormRoomDescription": "Veidlapu aizpildītāji var aizpildīt veidlapas un skatīt tikai aizpildītās/sāktās veidlapas mapēs Complete (Pabeigts) un In Process (Notiekošs).",

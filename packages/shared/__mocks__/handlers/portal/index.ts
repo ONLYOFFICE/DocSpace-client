@@ -39,7 +39,7 @@ import { deletePortalHandler } from "./delete";
 import { restoreProgressHandler } from "./restoreProgress";
 import { tariffHandler, TARIFF_DUE_DATE_EXPIRED } from "./tariff";
 import { getPortalHandler, getPortalApiHandler } from "./getPortal";
-import { quotaHandler } from "./quota";
+import { freeQuotaHandler, quotaHandler } from "./quota";
 import { backupProgressHandler } from "./backupprogress";
 import { backupScheduleHandler } from "./backupshedule";
 import { licenseQuotaHandler } from "./licensequota";
@@ -58,6 +58,7 @@ export {
   getPortalHandler,
   getPortalApiHandler,
   quotaHandler,
+  freeQuotaHandler,
   backupProgressHandler,
   backupScheduleHandler,
   licenseQuotaHandler,

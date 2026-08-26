@@ -67,7 +67,10 @@ import { useNavigate } from "react-router";
 import { CollapsibleCard } from "@docspace/ui-kit/components/collapsible-card";
 import { Text } from "@docspace/ui-kit/components/text";
 import { getBrandName } from "@docspace/shared/constants/brands";
-import { hasDocsConnectAccess } from "@docspace/shared/utils/devToolsAccess";
+import {
+  hasDevToolsAccess,
+  hasDocsConnectAccess,
+} from "@docspace/shared/utils/devToolsAccess";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow2.react.svg";
 import PluginIcon from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg";
@@ -179,6 +182,14 @@ interface IntegrationsCardProps {
   hideInstanceAction?: boolean;
   /** Standalone portals have no Docs Connect; the card is not rendered there. */
   isStandalone?: boolean;
+  /**
+   * Whether the reader may reach Developer Tools at all, which is where Docs
+   * Connect lives — guests never may, and neither do room admins and users on a
+   * portal that limits the section to admins. The card advertises that section,
+   * so it asks the same question the section's own card does rather than
+   * offering an integration its reader cannot start.
+   */
+  showIntegrations?: boolean;
   isAdminOrOwner?: boolean;
   nextcloudUrl?: string;
   owncloudUrl?: string;
@@ -198,6 +209,7 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
     dataTourId,
     hideInstanceAction = false,
     isStandalone = false,
+    showIntegrations = true,
     allConnectorsUrl,
     isAdminOrOwner = false,
     hasInstance,
@@ -235,9 +247,10 @@ const IntegrationsCardComponent = (props: IntegrationsCardProps) => {
   // Every one of these dialogs starts by creating a Docs Connect instance, and
   // the service is sold and hosted by us — a standalone portal has nothing to
   // connect to, so the card is left out entirely rather than advertising
-  // something that cannot be had. Below the hooks, so this component keeps
+  // something that cannot be had. Same for a reader who cannot open Developer
+  // Tools, where Docs Connect lives. Below the hooks, so this component keeps
   // calling the same ones on every render.
-  if (isStandalone) return null;
+  if (isStandalone || !showIntegrations) return null;
 
   return (
     <div className={className} data-tour-id={dataTourId}>
@@ -302,6 +315,13 @@ export const IntegrationsCard = inject<TStore>(
       settingsStore.standalone,
     ),
     isStandalone: settingsStore.standalone,
+    // The same gate the dashboard's Developer Tools card uses, so the two cards
+    // agree on who is offered the section: guests never, and room admins and
+    // users only while the portal does not limit it to admins.
+    showIntegrations: hasDevToolsAccess(
+      userStore.user,
+      settingsStore.limitedAccessDevToolsForUsers,
+    ),
     nextcloudUrl: settingsStore.nextcloudUrl,
     owncloudUrl: settingsStore.owncloudUrl,
     confluenceUrl: settingsStore.confluenceUrl,

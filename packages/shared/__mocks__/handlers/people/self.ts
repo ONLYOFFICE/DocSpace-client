@@ -360,6 +360,23 @@ export const regularUserResolver = (): Response => {
   return new Response(JSON.stringify(regularUserSuccess));
 };
 
+/**
+ * The stand-in user each `UserType` signs in as, exposed so a spec can reach
+ * the id it will be running under.
+ *
+ * The id matters because several per-user flags live in localStorage under a
+ * key built from it (the dashboard welcome, for one). Seeding such a key by
+ * hand needs the real id - a guessed one writes a flag nobody reads, which
+ * surfaces as a modal that will not go away rather than as a missing key.
+ */
+export const usersByType = {
+  owner: successSelf,
+  admin: adminOnlyUser,
+  roomAdmin: roomAdminUser,
+  visitor: visitorUser,
+  regular: regularUser,
+} satisfies Record<UserType, typeof successSelf>;
+
 export const userByTypeResolver = (userType: UserType): Response => {
   switch (userType) {
     case "owner":

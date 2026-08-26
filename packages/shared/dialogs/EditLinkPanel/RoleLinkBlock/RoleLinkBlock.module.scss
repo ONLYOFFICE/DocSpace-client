@@ -45,6 +45,14 @@
     margin-top: 4px;
   }
 
+  .roleLinkBlockWarning {
+    color: $light-status-warning;
+
+    :global(.dark) & {
+      color: $dark-status-warning;
+    }
+  }
+
   :global(.combo-button_selected-icon-container) {
     svg path {
       fill: $black;

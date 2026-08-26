@@ -202,6 +202,14 @@ export type TSettings = {
   defaultFolderType?: string;
   tagManagerId?: string;
   limitedAccessSpace: boolean;
+  /**
+   * The "Developer Tools section" switch (Settings -> Security -> Workspace
+   * access), where "Disabled" means the section is limited to the owner and
+   * full admins. Read straight into the store field of the same name, which
+   * `hasDevToolsAccess` asks; optional because the API fills it in only for an
+   * authenticated request, like `aiEnabled` below.
+   */
+  limitedAccessDevToolsForUsers?: boolean;
   enabledJoin?: boolean;
   recaptchaPublicKey?: string;
   recaptchaType?: RecaptchaType;

@@ -79,9 +79,9 @@ const OVERVIEW_ITEM_SELECTOR = sidebarSelector("dashboard");
 
 export type TourStepFlags = {
   /**
-   * Whether the profile card is on the page. It is shown to admins and owners
-   * only, and they can dismiss it for good — so it is absent far more often
-   * than most tour anchors, and the step goes with it.
+   * Whether the profile card is on the page. Everyone is shown it, but anyone
+   * can dismiss it for good — so it is absent far more often than most tour
+   * anchors, and the step goes with it.
    */
   hasProfileCard: boolean;
   /**

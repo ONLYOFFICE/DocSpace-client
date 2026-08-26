@@ -99,6 +99,10 @@ type ClientArticleSidebarProps = FolderIds & {
   canUseTemplates?: boolean;
   isTemplatesFolderRoot?: boolean;
   isNavLoading?: boolean;
+  // The portal-wide AI switch (Settings -> Integration -> AI services). With it
+  // off there is no AI in the portal at all, so the AI Agents app is dropped
+  // from the catalog rather than left pointing at a section that cannot work.
+  aiServicesEnabled?: boolean;
   onFolderNavigate: () => void;
 };
 
@@ -109,6 +113,7 @@ const ClientArticleSidebar = ({
   canUseTemplates,
   isTemplatesFolderRoot,
   isNavLoading,
+  aiServicesEnabled = true,
   onFolderNavigate,
   ...folderIds
 }: ClientArticleSidebarProps) => {
@@ -470,7 +475,9 @@ const ClientArticleSidebar = ({
     // portal-wide aliases (@recent/@favorites/@trash) — the same targets as
     // the My Documents sections — mirroring the SDK agents sections. Unique
     // sidebar ids keep them distinct from the My Documents entries.
-    if (aiAgentsFolder) {
+    // The folder is served whether or not the portal has AI switched on, so
+    // the switch is asked here as well: with AI off the app is not on offer.
+    if (aiAgentsFolder && aiServicesEnabled) {
       const agentChildren: NavSubItem[] = [];
       if (recentFolder)
         agentChildren.push(
@@ -547,6 +554,7 @@ const ClientArticleSidebar = ({
     treeFolders,
     isVisitor,
     canUseTemplates,
+    aiServicesEnabled,
     recentFolderId,
     favoritesFolderId,
     recycleBinFolderId,
@@ -570,6 +578,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     treeFoldersStore,
     filesStore,
     clientLoadingStore,
+    settingsStore,
   }) => ({
     userId: userStore.user?.id,
     treeFolders: treeFoldersStore.treeFolders,
@@ -585,6 +594,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
     // Matches Home's canCreateRooms — room admins and admins can use templates.
     canUseTemplates: authStore.isAdmin || authStore.isRoomAdmin,
     isTemplatesFolderRoot: treeFoldersStore.isTemplatesFolderRoot,
+    aiServicesEnabled: settingsStore.aiServicesEnabled,
     // Same signal the old article used to show <ArticleFolderLoader />.
     isNavLoading: clientLoadingStore.showArticleLoader,
     onFolderNavigate: () => {

@@ -52,6 +52,7 @@ const RoleLinkBlock = ({
 	selectedOption,
 	accessOptions = [],
 	currentDeviceType,
+	warningText,
 }: RoleLinkBlockProps) => {
 	const isMobileView = isMobile() || currentDeviceType === DeviceType.mobile;
 
@@ -85,6 +86,15 @@ const RoleLinkBlock = ({
 				comboIcon={ArrowIcon}
 				dataTestId="edit_link_panel_role_access_select"
 			/>
+			{warningText ? (
+				<Text
+					fontSize="12px"
+					className={styles.roleLinkBlockWarning}
+					dataTestId="edit_link_panel_role_warning"
+				>
+					{warningText}
+				</Text>
+			) : null}
 		</div>
 	);
 };

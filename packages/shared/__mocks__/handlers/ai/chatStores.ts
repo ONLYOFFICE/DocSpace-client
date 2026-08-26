@@ -153,6 +153,31 @@ export const aiChatThreadsListHandler = (port: string) =>
     HttpResponse.json([]),
   );
 
+/** `GET /api/2.0/ai/threads/get-by-id` — resolve one thread for `?threadId=` resume. */
+export const aiChatThreadGetByIdHandler = (
+  port: string,
+  thread: { threadId: string; title?: string } | null = null,
+) =>
+  http.get(
+    `${BASE_URL}:${port}/${API_PREFIX}/ai/threads/get-by-id`,
+    ({ request }) => {
+      const threadId = new URL(request.url).searchParams.get("threadId");
+      if (!thread || thread.threadId !== threadId) {
+        return HttpResponse.json({ error: "thread not found" }, { status: 404 });
+      }
+      return HttpResponse.json(thread);
+    },
+  );
+
+/** `GET /api/2.0/ai/threads/read-messages` — messages of a resumed thread. */
+export const aiChatReadMessagesHandler = (
+  port: string,
+  messages: unknown[] = [],
+) =>
+  http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/threads/read-messages`, () =>
+    HttpResponse.json(messages),
+  );
+
 /** `GET /api/2.0/ai/prompts/list` — no saved prompts. */
 export const aiChatPromptsListHandler = (port: string) =>
   http.get(`${BASE_URL}:${port}/${API_PREFIX}/ai/prompts/list`, () =>

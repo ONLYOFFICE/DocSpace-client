@@ -33,38 +33,50 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import { TTranslation } from "@docspace/shared/types";
+"use client";
 
-import {
-  ICover,
-  ILogo,
-  IUpdateRoomGroup,
-  ICreateRoomGroup,
-} from "./EditRoomGroupsDialog.types";
+import { getUser } from "@docspace/shared/api/people";
+import { getSettings } from "@docspace/shared/api/settings";
 
-export interface CoverDialogProps {
-  getCovers: () => void;
-  covers: ICover[] | null;
-  currentColorScheme: TColorScheme;
-  arrIdsRooms: (string | number)[] | null;
-  setIsOpenGroupIcon: (visible: boolean) => void;
-  onCloseEditRoomGroupsDialog: () => void;
-  setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
-  getAllRoomGroups: () => Promise<void>;
-  editingGroupId: string | null;
-  setEditingGroupId: (id: string | null) => void;
-  updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
-  updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
-  currentGroupIcon: ILogo | string | null;
-  currentGroupName: string | null;
-  isOpenedFromContextMenu?: boolean;
+import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
+
+import ChatPage from "./page.client";
+
+type ChatOAuthData = {
+  canUseAi: boolean;
+  isPortalAdmin: boolean;
+  isStandalone: boolean;
+};
+
+async function loadChatData(): Promise<ChatOAuthData | null> {
+  const [user, portalSettings] = await Promise.all([
+    getUser().catch(() => undefined),
+    getSettings().catch(() => undefined),
+  ]);
+
+  return {
+    canUseAi: !!user && !user.isVisitor,
+    isPortalAdmin: !!user && (!!user.isAdmin || !!user.isOwner),
+    isStandalone:
+      !!portalSettings &&
+      typeof portalSettings === "object" &&
+      !!portalSettings.standalone,
+  };
 }
 
-export interface SelectIconProps {
-  t: TTranslation;
-  setIcon: (icon: ICover | string | null) => void;
-  covers: ICover[] | null;
-  $currentColorScheme: TColorScheme;
-  coverId: string;
+type ChatOAuthPageProps = {
+  agentId: string;
+  entityId: string;
+  fileId: string;
+  threadId: string;
+};
+
+export default function ChatOAuthPage(props: ChatOAuthPageProps) {
+  const { data, error } = useOAuthSSRData(loadChatData);
+
+  if (error) throw error;
+  if (!data) return <OAuthPageLoader />;
+
+  return <ChatPage {...props} {...data} />;
 }

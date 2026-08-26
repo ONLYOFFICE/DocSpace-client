@@ -33,25 +33,50 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export const PAGE_COUNT = 100;
+"use client";
 
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
-export const PATHNAME_HEADER = "x-pathname";
+import { getUser } from "@docspace/shared/api/people";
+import { getSettings } from "@docspace/shared/api/settings";
 
-export const OAUTH_FRAME_HEADER = "x-sdk-oauth-frame";
+import { useOAuthSSRData } from "@/hooks/useOAuthSSRData";
+import OAuthPageLoader from "@/components/OAuthPageLoader";
 
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
+import ChatPage from "./page.client";
 
-export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const LIBRARY_ID_HEADER = "x-sdk-config-library-id";
-export const AGENT_ID_HEADER = "x-sdk-config-agent-id";
+type ChatOAuthData = {
+  canUseAi: boolean;
+  isPortalAdmin: boolean;
+  isStandalone: boolean;
+};
 
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
+async function loadChatData(): Promise<ChatOAuthData | null> {
+  const [user, portalSettings] = await Promise.all([
+    getUser().catch(() => undefined),
+    getSettings().catch(() => undefined),
+  ]);
 
-export const MAX_VISIBLE_EXTENSIONS = 5;
+  return {
+    canUseAi: !!user && !user.isVisitor,
+    isPortalAdmin: !!user && (!!user.isAdmin || !!user.isOwner),
+    isStandalone:
+      !!portalSettings &&
+      typeof portalSettings === "object" &&
+      !!portalSettings.standalone,
+  };
+}
+
+type ChatOAuthPageProps = {
+  agentId: string;
+  entityId: string;
+  fileId: string;
+  threadId: string;
+};
+
+export default function ChatOAuthPage(props: ChatOAuthPageProps) {
+  const { data, error } = useOAuthSSRData(loadChatData);
+
+  if (error) throw error;
+  if (!data) return <OAuthPageLoader />;
+
+  return <ChatPage {...props} {...data} />;
+}

@@ -39,6 +39,7 @@ import type { NextRequest } from "next/server";
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
 
 import {
+  AGENT_ID_HEADER,
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
   LOCALE_HEADER,
@@ -107,6 +108,17 @@ export async function proxy(request: NextRequest) {
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
     return NextResponse.next({ request: { headers: requestHeaders } });
+  }
+
+  if (request.nextUrl.pathname === "/chat") {
+    requestHeaders.set(AGENT_ID_HEADER, searchParams.get("agentId") ?? "");
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   if (request.nextUrl.pathname.includes("personal-files")) {
@@ -271,6 +283,7 @@ export const config = {
     "/forms/:path*",
     "/personal-files",
     "/personal-files/:path*",
+    "/chat",
     "/ai-agents",
     "/ai-agents/:path*",
     "/rooms",

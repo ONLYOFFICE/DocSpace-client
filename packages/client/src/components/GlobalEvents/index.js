@@ -36,13 +36,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
 import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
 import { PDF_FORM_DIALOG_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 
 
 import CreateEvent from "./CreateEvent";
@@ -58,6 +58,8 @@ import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
+import { useHasAiProfiles } from "../../Hooks/useHasAiProfiles";
+import { AI_SETTINGS_URL } from "../../helpers/constants";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { isAIAgents } from "../../helpers/plugins/utils";
 
@@ -79,7 +81,10 @@ const GlobalEvents = ({
   userId,
   getIsAIReady,
   standalone,
+  canOpenAISettings,
 }) => {
+  const navigate = useNavigate();
+
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
     id: null,
@@ -132,8 +137,10 @@ const GlobalEvents = ({
 
   const [activateAIProps, setActivateAIProps] = useState({ visible: false });
 
-  const { useProfilesStore } = useStores();
-  const hasAiProfiles = useProfilesStore((s) => s.profiles.length > 0);
+  // Not `profiles.length` off the store: that flaps to false while a rebuilt
+  // chat bundle hydrates, and on standalone a false negative here navigates
+  // the user off the page. The hook holds the last hydrated value instead.
+  const hasAiProfiles = useHasAiProfiles();
 
   const onCreate = useCallback((e) => {
     const { payload } = e;
@@ -243,6 +250,16 @@ const GlobalEvents = ({
       const isAIReady = standalone ? hasAiProfiles : getIsAIReady();
 
       if (!isAIReady) {
+        // Standalone connects its own AI provider in the settings: there is no
+        // service to switch on and no wallet to top up, so the activation
+        // dialog would offer an action that does not exist there. Whoever
+        // cannot open the settings still gets it - that branch only tells them
+        // to contact the admin.
+        if (standalone && canOpenAISettings) {
+          navigate(AI_SETTINGS_URL);
+          return;
+        }
+
         setActivateAIProps({
           visible: true,
           parentId: e.detail?.parentId,
@@ -268,7 +285,14 @@ const GlobalEvents = ({
         },
       });
     },
-    [standalone, getIsAIReady, hasAiProfiles, setCreateAgentDialogProps],
+    [
+      standalone,
+      canOpenAISettings,
+      navigate,
+      getIsAIReady,
+      hasAiProfiles,
+      setCreateAgentDialogProps,
+    ],
   );
 
   const onEditAgent = useCallback((e) => {
@@ -623,6 +647,9 @@ export default inject(
       userId: userStore?.user?.id,
       getIsAIReady: () => paymentStore.isAIReady,
       standalone: settingsStore.standalone,
+      canOpenAISettings: Boolean(
+        userStore?.user?.isAdmin || userStore?.user?.isOwner,
+      ),
     };
   },
 )(observer(GlobalEvents));

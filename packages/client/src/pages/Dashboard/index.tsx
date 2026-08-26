@@ -137,6 +137,8 @@ type DashboardProps = ChatNoAccessStoreProps & {
   aiServicesEnabled: boolean;
   /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
   isFreeTariff: boolean;
+  /** Startup and Business are SaaS tariffs; standalone gets the neutral copy. */
+  standalone: boolean;
   /** Rooms quota exhausted or portal in its grace period. */
   isWarningRoomsDialog: boolean;
   setQuotaWarningDialogVisible: (visible: boolean) => void;
@@ -162,6 +164,7 @@ const Dashboard = (props: DashboardProps) => {
     aiReady,
     aiServicesEnabled,
     isFreeTariff,
+    standalone,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
   } = props;
@@ -414,7 +417,7 @@ const Dashboard = (props: DashboardProps) => {
                     {t("Common:DiscoverApps")}
                   </Text>
                   <Text className={styles.sectionSubtitle}>
-                    {isAdminOrOwner
+                    {isAdminOrOwner && !standalone
                       ? t("Common:DiscoverAppsDescription", {
                           planName: isFreeTariff
                             ? t("Common:StartupPlan")
@@ -551,6 +554,7 @@ const DashboardConnected = inject((stores: TStore) => {
     // Undefined until the tariff loads; the plan is free by default, matching
     // the header's own fallback.
     isFreeTariff: currentQuotaStore.isFreeTariff ?? true,
+    standalone: settingsStore.standalone,
     isWarningRoomsDialog: currentQuotaStore.isWarningRoomsDialog,
     setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
   };

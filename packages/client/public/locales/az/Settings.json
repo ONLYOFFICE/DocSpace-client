@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Tərtibatçı alətləri bölməsi",
   "DeveloperToolsAccessDescription": "Bu parametr Tərtibatçı Alətləri bölməsini qonaqlar istisna olmaqla bütün istifadəçilər üçün görünən etməyə imkan verir. Bu bölməyə girişi məhdudlaşdırmaq, onu yalnız sahib və super administratorlar üçün əlçatan etmək istəyirsinizsə, Söndür seçin və <strong>Yadda saxla</strong> düyməsini basın.",
   "DeveloperToolsAccessMobileDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir.",
+  "DeveloperToolsDescription": "{{organizationName}} {{editorsName}} və {{productName}} məhsullarını tərtibatçı alətləri ilə inteqrasiya edin, genişləndirin və avtomatlaşdırın — Docs Connect və Embed SDK-dan Webhook-lara və OAuth tətbiqlərinə qədər. Başlamaq üçün aşağıdan bir alət seçin.",
   "DisableAiServices": "{{aiServices}} işlətməni dayandırmaq",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} bütün istifadəçilər üçün gizlədiləcək (interaksiya tarixi qorunub saxlanılacaq).",
   "DisableAiServicesConfirm": "{{aiServices}} vasitəsini istənilən vaxt yenidən aktiv edə bilərsiniz. Davam etmək istədiyinizə əminsiniz?",

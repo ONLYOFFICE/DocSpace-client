@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "{{price}} za používateľa <1>(vrátane Dev Pack)</1>",
   "PricePerUserMonthDevPackNote": "{{price}} za používateľa / mesiac",
   "PricePerUserShort": "{{price}} za používateľa",
+  "PromoDescription": "Pridajte do svojho ekosystému plne funkčný nástroj na úpravu dokumentov. Vytvorte inštanciu a pripojte editory dokumentov, tabuliek, prezentácií a PDF nezávislé od úložiska — pomocou <1>viac ako 50 pripravených konektorov</1> pre platformy, ktoré už používate, alebo sa pripojte k vlastnej platforme cez API. Jednu inštanciu môžete pripojiť k viacerým platformám.",
+  "PromoDevPackNote": "Získaním Dev Pack odomknete <1>Automation API</1> a <2>možnosti brandingu</2>.",
   "RealtimeCollaborationDescription": "Spoločne upravujte dokumenty s komentármi, zmienkami, revíziou, históriou verzií a vstavaným chatom.",
   "RealtimeCollaborationTitle": "Spolupráca v reálnom čase",
   "Rebranding": "Možnosti rebrandingu",

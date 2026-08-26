@@ -3,7 +3,7 @@
   "content": "Embed SDK",
   "content_en_sha1_hash": "a9ccf1a96c44b79062482e5c0b3db74a1df2a6dd",
   "created_at": "2026-04-03T21:51:36.584Z",
-  "updated_at": "2026-08-21T15:49:57.220Z",
+  "updated_at": "2026-08-26T14:08:33.047Z",
   "comment": {
     "text": "This is a title for a section in the Developer Tools settings, referring to the Embed SDK. It also appears as a card title in the same section.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 135,
-      "context": "linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\")}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />",
+      "line_number": 136,
+      "context": "linkTitle={t(\"Common:ReadApiDocumentation\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\")}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />",
       "module": "/packages/client"
     }
   ],

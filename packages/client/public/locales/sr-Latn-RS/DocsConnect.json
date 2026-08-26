@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "{{price}} po korisniku <1>(uklj. Dev Pack)</1>",
   "PricePerUserMonthDevPackNote": "{{price}} po korisniku / mesečno",
   "PricePerUserShort": "{{price}} po korisniku",
+  "PromoDescription": "Dodajte svom ekosistemu potpuno opremljen mehanizam za uređivanje dokumenata. Napravite instancu da biste povezali uređivače nezavisne od skladišta za dokumente, tabele, prezentacije i PDF-ove — uz <1>više od 50 gotovih konektora</1> za platforme koje već koristite, ili se povežite sa sopstvenom platformom preko API-ja. Jednu instancu možete povezati sa više platformi.",
+  "PromoDevPackNote": "Nabavkom Dev Pack paketa otključavate <1>API za automatizaciju</1> i <2>opcije brendiranja</2>.",
   "RealtimeCollaborationDescription": "Zajednički uređujte uz komentare, pominjanja, recenzije, istoriju verzija i ugrađeno ćaskanje.",
   "RealtimeCollaborationTitle": "Saradnja u realnom vremenu",
   "Rebranding": "Opcije rebrendiranja",

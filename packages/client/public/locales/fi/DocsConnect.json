@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "{{price}} / käyttäjä <1>(sis. Dev Pack)</1>",
   "PricePerUserMonthDevPackNote": "{{price}} / käyttäjä / kk",
   "PricePerUserShort": "{{price}} / käyttäjä",
+  "PromoDescription": "Lisää ekosysteemiisi täysiverinen asiakirjojen muokkausmoottori. Luo ilmentymä ja liitä tallennusratkaisusta riippumattomat editorit asiakirjoille, laskentataulukoille, esityksille ja PDF-tiedostoille — käytä <1>yli 50 valmista liitintä</1> jo käytössäsi oleville alustoille tai yhdistä oma alustasi API:n kautta. Voit liittää yhden ilmentymän useaan alustaan.",
+  "PromoDevPackNote": "Dev Pack -paketti avaa käyttöön <1>Automaatio-API</1> ja <2>brändäysvaihtoehdot</2>.",
   "RealtimeCollaborationDescription": "Muokatkaa yhdessä kommenttien, mainintojen, tarkistuksen, versiohistorian ja sisäänrakennetun keskustelun avulla.",
   "RealtimeCollaborationTitle": "Reaaliaikainen yhteistyö",
   "Rebranding": "Brändäysvaihtoehdot",

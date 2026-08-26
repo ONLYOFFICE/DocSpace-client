@@ -62,6 +62,7 @@ import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
 import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
+import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 
 import {
   getDescription,
@@ -348,7 +349,7 @@ export const useOptions = (
   }, []);
 
   const onGoToAIProviderSettings = useCallback(() => {
-    return navigate("/portal-settings/ai-settings/ai-models");
+    return navigate(AI_SETTINGS_URL);
   }, []);
 
   const {

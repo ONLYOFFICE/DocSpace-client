@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Abschnitt Entwicklertools",
   "DeveloperToolsAccessDescription": "Mit dieser Einstellung können Sie den Abschnitt Entwicklungstools für alle Benutzer außer Gäste sichtbar machen. Wenn Sie den Zugriff auf diesen Abschnitt einschränken möchten, sodass nur der Besitzer und Super-Administratoren darauf zugreifen können, wählen Sie Deaktivieren und klicken Sie auf die Schaltfläche <strong>Speichern</strong>.",
   "DeveloperToolsAccessMobileDescription": "Mit dieser Einstellung können Sie den Bereich Entwicklertools für alle Benutzer außer Gästen sichtbar machen.",
+  "DeveloperToolsDescription": "Integrieren, erweitern und automatisieren Sie {{organizationName}} {{editorsName}} und {{productName}} mit Entwicklungstools – von Docs Connect und dem Einbettungs-SDK bis zu Webhooks und OAuth-Apps. Wählen Sie unten ein Tool aus, um zu beginnen.",
   "DisableAiServices": "Deaktivieren {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} wird für alle Benutzer ausgeblendet (der Interaktionsverlauf bleibt erhalten).",
   "DisableAiServicesConfirm": "Sie können {{aiServices}} jederzeit wieder aktivieren. Sind Sie sicher, dass Sie fortfahren möchten?",

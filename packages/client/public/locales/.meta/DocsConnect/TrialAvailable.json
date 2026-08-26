@@ -3,7 +3,7 @@
   "content": "A free one-month trial is available. No credit card required.",
   "content_en_sha1_hash": "2bd442c08eea49bc7b93b72150e25d4e4c1d0b8f",
   "created_at": "2026-07-27T13:07:48.473Z",
-  "updated_at": "2026-08-13T14:37:21.735Z",
+  "updated_at": "2026-08-26T14:08:33.099Z",
   "comment": {
     "text": "An informative text note displayed on the DocsConnect promo page regarding the availability of a free trial.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 142,
-      "context": "}}\n />\n </Text>\n \n <Text as=\"p\" className={styles.trialNote}>\n {t(\"DocsConnect:TrialAvailable\")}\n </Text>\n </>\n )}\n \n <div className={styles.actions}>",
+      "line_number": 166,
+      "context": "{t(\"Common:ReadApiDocumentation\")}\n </Link>\n </div>\n \n <Text as=\"p\" className={styles.trialNote}>\n {t(\"DocsConnect:TrialAvailable\")}\n </Text>\n </>\n )}\n \n <div className={styles.actions}>",
       "module": "/packages/client"
     }
   ],

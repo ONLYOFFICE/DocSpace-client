@@ -388,6 +388,7 @@
   "ChangesToTag": "Spremembe te oznake bodo vplivale na vse sobe, kjer se jo uporablja.",
   "ChangeTheRoomOwner": "Spremeni lastnika sobe",
   "ChangeUserPermissions": "Spremenite uporabniška dovoljenja za povabljene osebe ali <1>nadgradite svoj tarifni načrt</1>.",
+  "ChangeUserPermissionsOnly": "Spremenite uporabniška dovoljenja za povabljene osebe.",
   "ChargeAmount": "Z vašega shranjenega načina plačila bo zaračunano <1>{{price}}</1>.",
   "ChatAttachmentLimitReached": "Datoteke preskočene — dosežena je omejitev prilog: {{count}}",
   "ChatHistory": "Zgodovina klepeta",

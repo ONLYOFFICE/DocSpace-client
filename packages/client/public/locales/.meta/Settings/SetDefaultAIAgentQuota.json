@@ -3,7 +3,7 @@
   "content": "Set the default storage quota for {{aiAgents}} in this workspace. It can be adjusted later in the settings or customized individually when creating each AI agent.",
   "content_en_sha1_hash": "6d9ecc23afd68d88f12b9480ec010d2b1b1527c5",
   "created_at": "2026-08-12T11:00:46.390Z",
-  "updated_at": "2026-08-14T14:58:32.837Z",
+  "updated_at": "2026-08-26T14:08:33.130Z",
   "comment": {
     "text": "Subtitle or description for a storage quota setting, explaining the default limit for {{aiAgents}} (plural noun).",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 74,
+      "line_number": 78,
       "context": "saveQuota={saveQuota}\n {...initialSizeProp}\n isQuotaSet={isDefaultAIAgentsQuotaSet}\n tabIndex={3}\n dataTestId=\"quota_ai_agent\"\n toggleDescription={t(\"SetDefaultAIAgentQuota\", {\n aiAgents: t(\"Common:AIAgents\"),\n aiAgent: t(\"Common:AIAgent\"),\n })}\n />\n );",
       "module": "/packages/client"
     }

@@ -388,6 +388,7 @@
   "ChangesToTag": "Toute modification de ce tag affectera tous les espaces où il est utilisé.",
   "ChangeTheRoomOwner": "Changer le propriétaire de la salle",
   "ChangeUserPermissions": "Modifiez les droits d'accès des personnes invitées ou <1>modifiez votre plan tarifaire</1>.",
+  "ChangeUserPermissionsOnly": "Modifiez les droits d'accès des personnes invitées.",
   "ChargeAmount": "Un montant de <1>{{price}}</1> sera débité de la méthode de paiement que vous avez enregistrée.",
   "ChatAttachmentLimitReached": "Fichiers ignorés — limite de pièces jointes atteinte : {{count}}",
   "ChatHistory": "Historique des chats",

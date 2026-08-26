@@ -388,6 +388,7 @@
   "ChangesToTag": "Wijzigingen aan deze tag zullen alle ruimtes beïnvloeden waar deze wordt gebruikt.",
   "ChangeTheRoomOwner": "De Eigenaar Van De Kamer Wijzigen",
   "ChangeUserPermissions": "Wijzig de gebruikersrechten voor de uitgenodigde personen of <1>upgrade uw tariefplan</1>.",
+  "ChangeUserPermissionsOnly": "Wijzig de gebruikersrechten voor de uitgenodigde personen.",
   "ChargeAmount": "Een bedrag van <1>{{price}}</1> wordt belast op uw opgeslagen betaalmethode.",
   "ChatAttachmentLimitReached": "Bestanden overgeslagen — bijlagelimiet bereikt: {{count}}",
   "ChatHistory": "Chatgeschiedenis",

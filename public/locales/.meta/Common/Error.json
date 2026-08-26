@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2026-08-21T15:04:37.249Z",
+  "updated_at": "2026-08-26T14:08:33.110Z",
   "comment": {
     "text": "This is a general error message displayed in toast notifications or as part of a larger error message when an unexpected issue occurs.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 186,
+      "line_number": 182,
       "context": "}),\n );\n this.filesStore.resetSelections();\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(this.t(\"Common:Error\"));\n }\n };\n \n private removeFromGroupHandle = async () => {\n const roomIds = this.filesStore.selection.map((room) => room.id!);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesHeaderOptionStore.ts",
-      "line_number": 186,
+      "line_number": 182,
       "context": "}),\n );\n this.filesStore.resetSelections();\n } catch (error) {\n console.error(\"Error adding rooms to group:\", error);\n toastr.error(this.t(\"Common:Error\"));\n }\n };\n \n private removeFromGroupHandle = async () => {\n const roomIds = this.filesStore.selection.map((room) => room.id!);",
       "module": "/packages/client"
     },

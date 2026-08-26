@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "ເຄື່ອງມືຂອງນັກພັດທະນາ",
   "DeveloperToolsAccessDescription": "ການຕັ້ງຄ່ານີ້ອະນຸຍາດໃຫ້ທ່ານເຮັດໃຫ້ພາກສ່ວນເຄື່ອງມືພັດທະນາເບິ່ງເຫັນໄດ້ສຳລັບຜູ້ໃຊ້ທັງໝົດ ຍົກເວັ້ນແຂກ. ຫາກທ່ານຕ້ອງການຈຳກັດການເຂົ້າເຖິງພາກສ່ວນນີ້ ໃຫ້ເຂົ້າເຖິງໄດ້ພຽງເຈົ້າຂອງ ແລະ ຜູ້ດູແລລະບົບສູງສຸດເທົ່ານັ້ນ, ເລືອກ ປິດການໃຊ້ງານ ແລະ ຄລິກປຸ່ມ <strong>ບັນທຶກ</strong>.",
   "DeveloperToolsAccessMobileDescription": "ການຕັ້ງຄ່ານີ້ຊ່ວຍໃຫ້ທ່ານສາມາດເຮັດໃຫ້ສ່ວນເຄື່ອງມືນັກພັດທະນາ (Developer Tools) ເຫັນໄດ້ສຳລັບຜູ້ໃຊ້ທັງໝົດ ຍົກເວັ້ນແຂກ.",
+  "DeveloperToolsDescription": "ເຊື່ອມໂຍງ, ຂະຫຍາຍ ແລະ ອັດຕະໂນມັດ {{organizationName}} {{editorsName}} ແລະ {{productName}} ດ້ວຍເຄື່ອງມືພັດທະນາ — ຈາກ Docs Connect ແລະ SDK ການຝັງ ໄປຮອດ Webhooks ແລະ ແອັບ OAuth. ເລືອກເຄື່ອງມືຢູ່ດ້ານລຸ່ມເພື່ອເລີ່ມຕົ້ນ.",
   "DisableAiServices": "ປິດການໃຊ້ງານ {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} ຈະຖືກປິດສຳລັບຜູ້ໃຊ້ທຸກຄົນ (ປະຫວັດການໂຕ້ຕອບຍັງຄົງຖືກເກັບຮັກສາໄວ້).",
   "DisableAiServicesConfirm": "ທ່ານສາມາດເປີດໃຊ້ງານ {{aiServices}} ອີກເທື່ອໃດກໍໄດ້. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່ບໍ?",

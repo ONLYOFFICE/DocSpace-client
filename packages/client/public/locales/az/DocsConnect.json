@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "İstifadəçi başına {{price}} <1>(Dev Pack daxil)</1>",
   "PricePerUserMonthDevPackNote": "istifadəçi başına {{price}}/ay",
   "PricePerUserShort": "İstifadəçi başına {{price}}",
+  "PromoDescription": "Ekosisteminizə tam funksionallı sənəd redaktə mühərriki əlavə edin. Sənədlər, cədvəllər, təqdimatlar və PDF-lər üçün yaddaşdan asılı olmayan redaktorları qoşmaq üçün nüsxə yaradın — artıq istifadə etdiyiniz platformalar üçün <1>50-dən çox hazır konnektor</1> istifadə edin və ya API vasitəsilə öz platformanıza qoşulun. Bir nüsxəni bir çox platformaya qoşa bilərsiniz.",
+  "PromoDevPackNote": "Dev Pack əldə etməklə <1>Avtomatlaşdırma API</1> və <2>brendinq seçimləri</2> açılır.",
   "RealtimeCollaborationDescription": "Şərhlər, qeydlər, baxış, versiya tarixçəsi və daxili söhbətlə birgə redaktə edin.",
   "RealtimeCollaborationTitle": "Real vaxtda əməkdaşlıq",
   "Rebranding": "Rebrendinq seçimləri",

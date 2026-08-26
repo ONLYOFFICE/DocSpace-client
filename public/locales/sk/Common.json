@@ -388,6 +388,7 @@
   "ChangesToTag": "Zmeny tohto značky ovplyvnia všetky miestnosti, kde je použitá.",
   "ChangeTheRoomOwner": "Zmeniť vlastníka miestnosti",
   "ChangeUserPermissions": "Zmeňte oprávnenia používateľov pre pozvané osoby alebo <1>rozšírte svoj tarifný plán</1>.",
+  "ChangeUserPermissionsOnly": "Zmeňte oprávnenia používateľov pre pozvané osoby.",
   "ChargeAmount": "Bude účtovaná suma <1>{{price}}</1> z vašej uloženej platobnej metódy.",
   "ChatAttachmentLimitReached": "Súbory boli preskočené — dosiahnutý limit príloh: {{count}}",
   "ChatHistory": "História chatovania",

@@ -388,6 +388,7 @@
   "ChangesToTag": "이 태그의 변경 사항은 사용되는 모든 공간에 영향을 미칩니다.",
   "ChangeTheRoomOwner": "방 소유자 변경하기",
   "ChangeUserPermissions": "초대된 사람에 대한 사용자 권한을 변경하거나 <1>요금제를 업그레이드</1>하세요.",
+  "ChangeUserPermissionsOnly": "초대된 사람에 대한 사용자 권한을 변경하세요.",
   "ChargeAmount": "저장된 결제 수단에 <1>{{price}}</1>가 청구됩니다.",
   "ChatAttachmentLimitReached": "파일을 건너뛰었습니다 — 첨부 파일 한도에 도달했습니다: {{count}}",
   "ChatHistory": "채팅 기록",

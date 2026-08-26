@@ -3,7 +3,7 @@
   "content": "Create Form space",
   "content_en_sha1_hash": "b679d4de30f3c393f4e118ba46859749b669de76",
   "created_at": "2026-06-25T19:30:28.607Z",
-  "updated_at": "2026-08-21T15:49:57.212Z",
+  "updated_at": "2026-08-26T14:08:33.045Z",
   "comment": {
     "text": "Button label in the Forms section header used to initiate the creation of a new collection of forms.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 176,
-      "context": "// A form set is a form-filling room, so it goes through the same\n // create-room dialog, opened on the FormRoom type.\n ...createOrOpen(\n canCreateRooms,\n \"/forms/filter\",\n t(\"Common:CreateFormSet\"),\n withQuotaCheck(() => dispatchCreateRoom(RoomsType.FormRoom)),\n ),\n },\n {\n id: \"ai-agents\",",
+      "line_number": 185,
+      "context": "// A form set is a form-filling room, so it goes through the same\n // create-room dialog, opened on the FormRoom type.\n ...createOrOpen(\n canCreateRooms,\n \"/forms/filter\",\n t(\"Common:CreateFormSet\"),\n withQuotaCheck(() => dispatchCreateRoom(RoomsType.FormRoom)),\n ),\n },\n // Dropped outright on a portal with AI switched off - see\n // `aiServicesEnabled`. The sidebar drops its AI Agents item under the",
       "module": "/packages/client"
     },
     {

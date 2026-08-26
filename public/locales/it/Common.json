@@ -388,6 +388,7 @@
   "ChangesToTag": "Le modifiche a questo tag influenzeranno tutte le stanze in cui viene utilizzato.",
   "ChangeTheRoomOwner": "Cambia il proprietario della stanza",
   "ChangeUserPermissions": "Cambia i permessi delle persone invitate o <1>fai l’upgrade del tuo piano tariffario</1>.",
+  "ChangeUserPermissionsOnly": "Cambia i permessi delle persone invitate.",
   "ChargeAmount": "Un importo di <1>{{price}}</1> sarà addebitato sul metodo di pagamento salvato.",
   "ChatAttachmentLimitReached": "File ignorati — limite di allegati raggiunto: {{count}}",
   "ChatHistory": "Cronologia chat",

@@ -388,6 +388,7 @@
   "ChangesToTag": "Änderungen an diesem Tag wirken sich auf alle Räume aus, in denen er verwendet wird.",
   "ChangeTheRoomOwner": "Raumbesitzer ändern",
   "ChangeUserPermissions": "Ändern Sie die Benutzerberechtigungen für die eingeladenen Personen oder <1>aktualisieren Sie Ihren Tarifplan</1>.",
+  "ChangeUserPermissionsOnly": "Ändern Sie die Benutzerberechtigungen für die eingeladenen Personen.",
   "ChargeAmount": "Ein Betrag von <1>{{price}}</1> wird Ihrer gespeicherten Zahlungsmethode belastet.",
   "ChatAttachmentLimitReached": "Dateien übersprungen — Anhangslimit erreicht: {{count}}",
   "ChatHistory": "Chatverlauf",

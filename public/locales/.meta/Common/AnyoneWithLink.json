@@ -3,7 +3,7 @@
   "content": "Anyone with the link",
   "content_en_sha1_hash": "8a78b4998feeb4f409891d0eb1716fe3eb7a2c9a",
   "created_at": "2025-05-19T21:30:43.022Z",
-  "updated_at": "2026-08-14T14:58:32.828Z",
+  "updated_at": "2026-08-26T14:08:33.125Z",
   "comment": {
     "text": "This is a label for an option in a sharing dialog, indicating that a shared item can be accessed by anyone who has the link.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 100,
+      "line_number": 206,
       "context": "export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {\n return [\n {\n internal: false,\n key: \"anyone\",\n label: t(\"Common:AnyoneWithLink\"),\n icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 100,
+      "line_number": 206,
       "context": "export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {\n return [\n {\n internal: false,\n key: \"anyone\",\n label: t(\"Common:AnyoneWithLink\"),\n icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",",
       "module": "/packages/shared"
     }

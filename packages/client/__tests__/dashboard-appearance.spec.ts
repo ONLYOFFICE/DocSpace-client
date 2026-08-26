@@ -473,8 +473,11 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     );
 
     // The plan line is the admin/owner-only part of the header, and it names
-    // the plan the portal is actually on.
-    if (role.isAdminOrOwner) {
+    // the plan the portal is actually on. Startup and Business are SaaS
+    // tariffs, so a standalone portal - which is paid for with a license and
+    // has no payments page to send anyone to - has no plan line at all,
+    // whoever is signed in.
+    if (role.isAdminOrOwner && !edition.standalone) {
       await expect(planLine(page)).toBeVisible();
       await expect(planLine(page)).toContainText(
         billing.isPaid ? "Business" : "Startup",

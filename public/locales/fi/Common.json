@@ -388,6 +388,7 @@
   "ChangesToTag": "Muutokset tässä tunnisteessa vaikuttavat kaikkiin huoneisiin, joissa sitä käytetään.",
   "ChangeTheRoomOwner": "Vaihda Huoneen Omistaja",
   "ChangeUserPermissions": "Vaihda käyttäjäoikeudet kutsutuille ihmisille tai <1>päivitä tilauksesi</1>.",
+  "ChangeUserPermissionsOnly": "Vaihda käyttäjäoikeudet kutsutuille ihmisille.",
   "ChargeAmount": "Summa <1>{{price}}</1> veloitetaan tallennetusta maksutavastasi.",
   "ChatAttachmentLimitReached": "Tiedostoja ohitettiin — liitetiedostojen raja saavutettu: {{count}}",
   "ChatHistory": "Chat-historia",

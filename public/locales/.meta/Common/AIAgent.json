@@ -3,7 +3,7 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2026-08-24T22:30:00.610Z",
+  "updated_at": "2026-08-26T14:08:32.936Z",
   "comment": {
     "text": "This string refers to an AI agent, likely a feature or service within the application. It appears as a label in various contexts, including a selector and an empty screen description.",
     "is_auto": true,
@@ -61,8 +61,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 190,
-      "context": "installed: true,\n href: \"/ai-agents/filter\",\n ...createOrOpen(\n canCreateAgents,\n \"/ai-agents/filter\",\n t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") }),\n dispatchCreateAgent,\n ),\n },\n ];",
+      "line_number": 204,
+      "context": "installed: true,\n href: \"/ai-agents/filter\",\n ...createOrOpen(\n canCreateAgents,\n \"/ai-agents/filter\",\n t(\"Common:CreateAIAgent\", { aiAgent: t(\"Common:AIAgent\") }),\n dispatchCreateAgent,\n ),\n },\n ]\n : []),",
       "module": "/packages/client"
     },
     {
@@ -91,19 +91,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 63,
+      "line_number": 67,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 63,
+      "line_number": 67,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 63,
+      "line_number": 67,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
@@ -181,14 +181,14 @@
     },
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 546,
-      "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
+      "line_number": 551,
+      "context": "const isEnable = +quota !== NO_QUOTA;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 546,
-      "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
+      "line_number": 551,
+      "context": "const isEnable = +quota !== NO_QUOTA;\n \n try {\n await setDefaultAIAgentQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"AIAgentQuotaEnabled\", { aiAgent: t(\"Common:AIAgent\") })\n : t(\"AIAgentQuotaDisabled\", { aiAgent: t(\"Common:AIAgent\") });\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     },
     {

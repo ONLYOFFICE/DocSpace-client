@@ -388,6 +388,7 @@
   "ChangesToTag": "Schimbările efectuate la acest tag vor afecta toate camerele în care este utilizat.",
   "ChangeTheRoomOwner": "Schimbați proprietarul sălii",
   "ChangeUserPermissions": "Schimbaţi permisiuni de acces acordate invitaților sau <1>selectaţi un alt plan tarifar</1>.",
+  "ChangeUserPermissionsOnly": "Schimbaţi permisiuni de acces acordate invitaților.",
   "ChargeAmount": "Suma de <1>{{price}}</1> va fi facturată conform metodei de plată pe care ați indicat-o.",
   "ChatAttachmentLimitReached": "Fișiere omise — limita de atașamente a fost atinsă: {{count}}",
   "ChatHistory": "Istoric chat",

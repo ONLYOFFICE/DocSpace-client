@@ -3,7 +3,7 @@
   "content": "workspace users only",
   "content_en_sha1_hash": "e5c524b006a5e9c08b1a543ab14a02b1d0d47095",
   "created_at": "2026-08-13T22:44:22.840Z",
-  "updated_at": "2026-08-14T15:01:00.676Z",
+  "updated_at": "2026-08-26T14:08:33.175Z",
   "comment": {
     "text": "A label for a menu option in the sharing settings that indicates access is restricted to members of the current workspace.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 106,
+      "line_number": 212,
       "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\"),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 106,
+      "line_number": 212,
       "context": "icon: withIcon ? UniverseIcon : undefined,\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\"),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];\n };",
       "module": "/packages/shared"
     }

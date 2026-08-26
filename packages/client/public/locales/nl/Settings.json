@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Sectie Ontwikkelaarstools",
   "DeveloperToolsAccessDescription": "Met deze instelling kunt u de sectie Developer Tools zichtbaar maken voor alle gebruikers behalve gasten. Als u de toegang tot deze sectie wilt beperken, zodat deze alleen toegankelijk is voor de eigenaar en superbeheerders, selecteert u Uitschakelen en klikt u op de knop <strong>Opslaan</strong>.",
   "DeveloperToolsAccessMobileDescription": "Met deze instelling kunt u het gedeelte Ontwikkelaarshulpmiddelen zichtbaar maken voor alle gebruikers, behalve gasten.",
+  "DeveloperToolsDescription": "Integreer, breid uit en automatiseer {{organizationName}} {{editorsName}} en {{productName}} met developer tools — van Docs Connect en de Embed SDK tot webhooks en OAuth-apps. Kies hieronder een tool om te beginnen.",
   "DisableAiServices": "Schakel {{aiServices}} uit",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} zal voor alle gebruikers verborgen zijn (de interactiegeschiedenis blijft behouden).",
   "DisableAiServicesConfirm": "U kunt {{aiServices}} op elk moment opnieuw inschakelen. Weet u zeker dat u wilt doorgaan?",

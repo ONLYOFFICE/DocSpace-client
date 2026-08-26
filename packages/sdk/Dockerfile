@@ -57,4 +57,5 @@ RUN pnpm --filter @docspace/sdk run build:translations
 WORKDIR /app/packages/sdk
 
 # Run test:build
-RUN pnpm --filter @docspace/sdk run test:build
+RUN NODE_OPTIONS="--max-old-space-size=8192" \
+    pnpm --filter @docspace/sdk run test:build

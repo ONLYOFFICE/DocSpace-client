@@ -1802,6 +1802,7 @@
   "RoleContentCreatorDescription": "I creatori di contenuti possono creare e modificare i file nella stanza, ma non possono gestire gli utenti o accedere alle impostazioni.",
   "RoleEditorDescription": "Operazioni con file esistenti: visualizzazione, modifica, compilazione moduli, revisione, commenti.",
   "RoleForLink": "Ruolo per il link",
+  "RoleForLinkNotAvailable": "Questo ruolo non è più disponibile per questo elemento. Seleziona un altro ruolo per salvare il link.",
   "RoleFormFiller": "Compilatore di moduli",
   "RoleFormFillerDescription": "Operazioni con file esistenti: visualizzazione, compilazione moduli, revisione, commenti.",
   "RoleFormFillerFormRoomDescription": "Chi compila i moduli può compilare i moduli e visualizzare solo i moduli completati/iniziati nelle cartelle Completato e In corso.",

@@ -55,6 +55,7 @@ import AgentsFilter from "../agents-filter";
 import AliasFilesFilter from "../alias-files-filter";
 import AiRoomTabs from "../ai-room-tabs";
 import SettingsTabs from "../settings-tabs";
+import { useAgentContextOptions } from "../agents-list/useAgentContextOptions";
 import {
   useAgentDialogsStore,
   useAgentsAIConfigStore,
@@ -104,12 +105,18 @@ const HeaderArea = observer(({ route }: { route: Route }) => {
   const listStore = useAgentsListStore();
   const trashStore = useTrashFilesStore();
   const aiRoomStore = useAiRoomStore();
+  const getAgentContextOptions = useAgentContextOptions();
 
   if (route === "agent") {
     const goToList = () => router.push("/ai-agents");
+    const { agent } = aiRoomStore;
+    const getContextOptions = agent
+      ? () => getAgentContextOptions(agent, "header")
+      : undefined;
     return (
       <AgentsHeader
         title={aiRoomStore.title}
+        getContextOptions={getContextOptions}
         navigationItems={[
           {
             id: "ai-agents",

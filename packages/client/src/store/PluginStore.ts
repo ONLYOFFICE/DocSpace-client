@@ -33,9 +33,23 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, observable, runInAction } from "mobx";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
+
+import type React from "react";
+import type {
+  PluginRuntime,
+  TCurrentFile,
+} from "@onlyoffice/docspace-plugin-sdk/react";
+import { Actions } from "@onlyoffice/docspace-plugin-sdk";
+import type {
+  ButtonGroup,
+  IModalDialog,
+  TSelector,
+  IMediaViewer,
+  IFloatingOperationsButton,
+} from "@onlyoffice/docspace-plugin-sdk";
 
 import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -90,6 +104,8 @@ import type {
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import { createPluginApi } from "../helpers/plugins/react/api";
+import { toCurrentUser } from "../helpers/plugins/react/utils";
 import {
   PluginFileType,
   PluginScopes,
@@ -100,6 +116,7 @@ import {
 
 import type SelectedFolderStore from "./SelectedFolderStore";
 import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
+import { TUser } from "@docspace/shared/api/people/types";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -110,6 +127,10 @@ const origin =
 const proxy = window.ClientConfig?.proxy?.url || proxyURL;
 const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
+// One client for every plugin: it holds no per-plugin state, and a plugin that
+// lists `api` in a dependency array must not see a new object on every render.
+const pluginApi = createPluginApi();
+
 type TDispatchMessage = Pick<
   TMessageActionsParams,
   | "pluginName"
@@ -118,6 +139,7 @@ type TDispatchMessage = Pick<
   | "updatePropsContext"
 > & {
   message: IMessage | void;
+  currentFile?: TCurrentFile | null;
 };
 
 class PluginStore {
@@ -182,6 +204,18 @@ class PluginStore {
 
   pluginMediaViewerProps: null | IMediaViewerClient = null;
 
+  reactSettingsSaveButtonState: null | {
+    pluginName: string;
+    button: ButtonGroup;
+  } = null;
+
+  reactPluginModalState: null | {
+    pluginName: string;
+    component: React.ComponentType<object>;
+    options?: Omit<Partial<IModalDialog>, "dialogBodyComponent">;
+    currentFile: TCurrentFile | null;
+  } = null;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
@@ -193,7 +227,10 @@ class PluginStore {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
 
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      reactPluginModalState: observable.ref,
+      reactSettingsSaveButtonState: observable.ref,
+    });
 
     // Subscribe to plugin state changes via WebSocket
     this.wsChangeWebPlugin();
@@ -234,6 +271,7 @@ class PluginStore {
     setElementProps,
     updateCreateDialogProps,
     updatePropsContext,
+    currentFile,
   }: TDispatchMessage) => {
     if (!message) return;
 
@@ -251,6 +289,7 @@ class PluginStore {
       updateMainButtonItems: this.updateMainButtonItems,
       updateProfileMenuItems: this.updateProfileMenuItems,
       updateEventListenerItems: this.updateEventListenerItems,
+      updateArticleButtonItems: this.updateArticleButtonItems,
       updateArticleNavigationItems: this.updateArticleNavigationItems,
       updateFileItems: this.updateFileItems,
       updateCreateDialogProps: updateCreateDialogProps,
@@ -262,7 +301,22 @@ class PluginStore {
       updatePluginFloatingOperations: this.updatePluginFloatingOperations,
       setPluginMediaViewerVisible: this.setPluginMediaViewerVisible,
       setPluginMediaViewerProps: this.setPluginMediaViewerProps,
+      setReactPluginModalState: this.setReactPluginModalState,
+      reactPluginCurrentFile: currentFile,
     });
+  };
+
+  setReactPluginModalState = (
+    value: PluginStore["reactPluginModalState"],
+  ): void => {
+    this.reactPluginModalState = value;
+  };
+
+  setReactSettingsSaveButtonState = (
+    pluginName: string,
+    button: ButtonGroup | null,
+  ): void => {
+    this.reactSettingsSaveButtonState = button ? { pluginName, button } : null;
   };
 
   setNeedPageReload = (value: boolean) => {
@@ -275,6 +329,7 @@ class PluginStore {
 
   setCurrentSettingsDialogPlugin = (value: null | { pluginName: string }) => {
     this.currentSettingsDialogPlugin = value;
+    this.reactSettingsSaveButtonState = null;
   };
 
   setSettingsPluginDialogVisible = (value: boolean) => {
@@ -451,7 +506,11 @@ class PluginStore {
 
       this.setIsEmptyList(plugins.length === 0);
       await Promise.allSettled(
-        plugins.map((plugin) => this.initPlugin(plugin, undefined, fromList)),
+        plugins.map((plugin) =>
+          plugin.runtime === "module"
+            ? this.initModulePlugin(plugin)
+            : this.initPlugin(plugin, undefined, fromList),
+        ),
       );
     } catch (e) {
       if (axios.isCancel(e)) {
@@ -502,7 +561,11 @@ class PluginStore {
 
       this.setNeedPageReload(true);
 
-      this.initPlugin(plugin);
+      if (plugin.runtime === "module") {
+        this.initModulePlugin(plugin);
+      } else {
+        this.initPlugin(plugin);
+      }
 
       return {
         isPluginCompatible,
@@ -654,7 +717,7 @@ class PluginStore {
 
       if (idx === -1) {
         runInAction(() => {
-          this.plugins = [{ ...plugin }, ...this.plugins];
+          this.plugins = [plugin, ...this.plugins];
         });
 
         this.setIsEmptyList(false);
@@ -761,23 +824,31 @@ class PluginStore {
   };
 
   activatePlugin = async (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
+    const idx = this.plugins.findIndex((p) => p.name === name);
 
-    if (!plugin) return;
+    if (idx === -1) return;
 
-    plugin.enabled = true;
+    runInAction(() => {
+      this.plugins[idx].enabled = true;
+      this.plugins.splice(idx, 1, this.plugins[idx]);
+    });
 
     this.setNeedPageReload(true);
 
-    this.installPlugin(plugin, false);
+    this.installPlugin(this.plugins[idx], false);
   };
 
   deactivatePlugin = async (name: string) => {
-    const plugin = this.plugins.find((p) => p.name === name);
+    const idx = this.plugins.findIndex((p) => p.name === name);
 
-    if (!plugin) return;
+    if (idx === -1) return;
 
-    plugin.enabled = false;
+    runInAction(() => {
+      this.plugins[idx].enabled = false;
+      this.plugins.splice(idx, 1, this.plugins[idx]);
+    });
+
+    const plugin = this.plugins[idx];
 
     this.uninstallPluginCss(plugin);
 
@@ -841,7 +912,7 @@ class PluginStore {
   };
 
   getValidContextMenuItemKeys = (
-    item: IContextMenuItem,
+    item: IContextMenuItemClient,
     ctx: IContextMenuItemValidation,
   ) => {
     const keys: string[] = [];
@@ -1007,6 +1078,19 @@ class PluginStore {
     return `${plugin.iconUrl}/assets/${icon}?hash=${plugin.version}`;
   };
 
+  /** Drops this plugin's items that the finished `update*Items` pass did not produce. */
+  private removeMissingItems = <T extends { pluginName: string }>(
+    items: Map<string, T>,
+    pluginName: string,
+    actualKeys: Set<string>,
+  ) => {
+    Array.from(items).forEach(([key, value]) => {
+      if (value.pluginName === pluginName && !actualKeys.has(key)) {
+        items.delete(key);
+      }
+    });
+  };
+
   updateContextMenuItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
@@ -1073,12 +1157,17 @@ class PluginStore {
       return processedItem;
     };
 
+    const actualKeys = new Set<string>();
+
     // Process all top-level items
     Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
       const contextMenuItem = processContextMenuItem(value);
       this.contextMenuItems.set(key, contextMenuItem);
+      actualKeys.add(key);
       currentDepth = 1;
     });
+
+    this.removeMissingItems(this.contextMenuItems, plugin.name, actualKeys);
   };
 
   deactivateContextMenuItems = (plugin: TPlugin) => {
@@ -1107,6 +1196,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]: [string, IInfoPanelItem]) => {
       const correctUserType = value.usersTypes
         ? value.usersTypes.includes(userRole)
@@ -1134,7 +1225,10 @@ class PluginStore {
         subMenu: { ...value.subMenu, onClick },
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.infoPanelItems, plugin.name, actualKeys);
   };
 
   deactivateInfoPanelItems = (plugin: TPlugin) => {
@@ -1162,6 +1256,8 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
+
+    const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
@@ -1227,7 +1323,10 @@ class PluginStore {
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
         items: newItems.length > 0 ? newItems : undefined,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.mainButtonItems, plugin.name, actualKeys);
   };
 
   deactivateMainButtonItems = (plugin: TPlugin) => {
@@ -1256,6 +1355,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
@@ -1281,7 +1382,10 @@ class PluginStore {
         pluginName: plugin.name,
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.profileMenuItems, plugin.name, actualKeys);
   };
 
   deactivateProfileMenuItems = (plugin: TPlugin) => {
@@ -1310,6 +1414,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersTypes
         ? value.usersTypes.includes(userRole)
@@ -1333,7 +1439,10 @@ class PluginStore {
         eventHandler,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.eventListenerItems, plugin.name, actualKeys);
   };
 
   deactivateEventListenerItems = (plugin: TPlugin) => {
@@ -1359,6 +1468,8 @@ class PluginStore {
     if (!items) return;
 
     const userRole = this.getUserRole();
+
+    const actualKeys = new Set<string>();
 
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
@@ -1410,7 +1521,10 @@ class PluginStore {
         fileIconTile,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     });
+
+    this.removeMissingItems(this.fileItems, plugin.name, actualKeys);
   };
 
   deactivateFileItems = (plugin: TPlugin) => {
@@ -1446,6 +1560,8 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
+    const actualKeys = new Set<string>();
+
     for (const [key, value] of Array.from(items)) {
       const correctUserType = value.usersTypes
         ? value.usersTypes.includes(userRole)
@@ -1461,7 +1577,10 @@ class PluginStore {
         ...value,
         pluginName: plugin.name,
       });
+      actualKeys.add(key);
     }
+
+    this.removeMissingItems(this.articleButtonItems, plugin.name, actualKeys);
   };
 
   updateArticleNavigationItems = async (name: string) => {
@@ -1499,11 +1618,11 @@ class PluginStore {
       });
     }
 
-    Array.from(this.articleNavigationItems).forEach(([key, value]) => {
-      if (value.pluginName === plugin.name && !actualItems.has(key)) {
-        this.articleNavigationItems.delete(key);
-      }
-    });
+    this.removeMissingItems(
+      this.articleNavigationItems,
+      plugin.name,
+      new Set(actualItems.keys()),
+    );
 
     actualItems.forEach((value, key) => {
       this.articleNavigationItems.set(key, value);
@@ -1658,6 +1777,227 @@ class PluginStore {
 
     return null;
   }
+
+  closeReactPluginModal = (): void => {
+    this.reactPluginModalState = null;
+  };
+
+  buildReactPluginRuntime = (
+    pluginName: string,
+    currentFile: TCurrentFile | null,
+    user: TUser | null,
+  ): PluginRuntime => {
+    // Bare redraw requests: the plugin has already mutated its own item, and the
+    // message only tells DocSpace to re-read the collection.
+    const redraw = (action: Actions) => () =>
+      this.dispatchMessage({ message: { actions: [action] }, pluginName });
+
+    return {
+      currentFile,
+      currentUser: user ? toCurrentUser(user) : null,
+      actions: {
+        showToast: (props) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.showToast], toastProps: [props] },
+            pluginName,
+          }),
+        showModal: (props) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showModal],
+              modalDialogProps: props,
+            },
+            pluginName,
+            currentFile,
+          }),
+        closeModal: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeModal] },
+            pluginName,
+          }),
+        showSelector: (props: TSelector) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.showSelector], selectorProps: props },
+            pluginName,
+          }),
+        updateSelector: (props: TSelector) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateSelector],
+              selectorProps: props,
+            },
+            pluginName,
+          }),
+        closeSelector: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeSelector] },
+            pluginName,
+          }),
+        navigate: (path: string) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.navigate], navigatePath: path },
+            pluginName,
+          }),
+        openInfoPanel: (tab) =>
+          this.dispatchMessage({
+            message: { actions: [Actions.openInfoPanel], infoPanelTab: tab },
+            pluginName,
+          }),
+        showCreateDialog: (props) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showCreateDialogModal],
+              createDialogProps: props,
+            },
+            pluginName,
+          }),
+        showMediaViewer: (props: IMediaViewer) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.showMediaViewer],
+              mediaViewerProps: props,
+            },
+            pluginName,
+          }),
+        closeMediaViewer: () =>
+          this.dispatchMessage({
+            message: { actions: [Actions.closeMediaViewer] },
+            pluginName,
+          }),
+        updateMediaViewer: (props: IMediaViewer) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateMediaViewer],
+              mediaViewerProps: props,
+            },
+            pluginName,
+          }),
+        addFloatingOperationsButton: (props: IFloatingOperationsButton) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.addFloatingOperationsButton],
+              floatingOperationsButtonProps: props,
+            },
+            pluginName,
+          }),
+        removeFloatingOperationsButton: (id: string) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.removeFloatingOperationsButton],
+              floatingOperationsButtonPropsId: id,
+            },
+            pluginName,
+          }),
+        updateFloatingOperationsButton: (props: IFloatingOperationsButton) =>
+          this.dispatchMessage({
+            message: {
+              actions: [Actions.updateFloatingOperationsButton],
+              floatingOperationsButtonProps: props,
+            },
+            pluginName,
+          }),
+        updateContextMenuItems: redraw(Actions.updateContextMenuItems),
+        updateInfoPanelItems: redraw(Actions.updateInfoPanelItems),
+        updateMainButtonItems: redraw(Actions.updateMainButtonItems),
+        updateProfileMenuItems: redraw(Actions.updateProfileMenuItems),
+        updateFileItems: redraw(Actions.updateFileItems),
+        updateEventListenerItems: redraw(Actions.updateEventListenerItems),
+        updateArticleButtonItems: redraw(Actions.updateArticleButtonItems),
+        updateArticleNavigationItems: redraw(
+          Actions.updateArticleNavigationItems,
+        ),
+      },
+      api: pluginApi,
+      settings: {
+        load: async () => {
+          const entry = this.plugins.find((p) => p.name === pluginName);
+          if (!entry?.settings) return null;
+          try {
+            return JSON.parse(entry.settings);
+          } catch {
+            return null;
+          }
+        },
+        save: async (data: Record<string, unknown>) => {
+          const entry = this.plugins.find((p) => p.name === pluginName);
+          if (!entry) return;
+          const settingsStr = JSON.stringify(data);
+          await api.plugins.updatePlugin(
+            pluginName,
+            entry.enabled,
+            settingsStr,
+          );
+          runInAction(() => {
+            entry.settings = settingsStr;
+          });
+          entry.setAdminPluginSettingsValue?.(settingsStr);
+        },
+        setSaveButton: (props: ButtonGroup) => {
+          this.setReactSettingsSaveButtonState(pluginName, props);
+        },
+      },
+    };
+  };
+
+  initModulePlugin = async (
+    plugin: TAPIPlugin,
+    callback?: (plugin: TPlugin) => void,
+  ): Promise<void> => {
+    try {
+      const res = await fetch(plugin.url);
+      if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${plugin.url}`);
+
+      const rawCode = await res.text();
+
+      const { rewritePluginImports } = await import(
+        "../helpers/plugins/react/shim"
+      );
+
+      const code = rewritePluginImports(rawCode);
+      const blob = new Blob([code], { type: "application/javascript" });
+      const blobUrl = URL.createObjectURL(blob);
+
+      let mod: { default?: Partial<TPlugin> };
+      try {
+        mod = await import(/* @vite-ignore */ blobUrl);
+        URL.revokeObjectURL(blobUrl);
+      } catch (e) {
+        URL.revokeObjectURL(blobUrl);
+        throw e;
+      }
+
+      const exported = mod?.default;
+      if (!exported) throw new Error("Module plugin has no default export");
+
+      const scopes =
+        typeof plugin.scopes === "string"
+          ? (plugin.scopes.split(",") as PluginScopes[])
+          : plugin.scopes;
+
+      const newPlugin = Object.assign(exported as TPlugin, {
+        ...plugin,
+        nameLocaleMap: plugin.nameLocale,
+        descriptionLocaleMap: plugin.descriptionLocale,
+        scopes,
+        iconUrl: getPluginUrl(plugin.url, ""),
+        compatible: this.checkPluginCompatibility(plugin.minDocSpaceVersion),
+      });
+
+      this.initLocalePlugin(newPlugin);
+      this.installPlugin(newPlugin);
+
+      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
+        newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+      }
+
+      callback?.(newPlugin);
+    } catch (e) {
+      console.error(
+        `[Plugin: ${plugin.name}] Failed to load module plugin:`,
+        e,
+      );
+    }
+  };
 
   get articleNavigationItemsList() {
     const items = Array.from(this.articleNavigationItems, ([key, value]) => {

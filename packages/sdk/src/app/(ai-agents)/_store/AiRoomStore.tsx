@@ -65,6 +65,8 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 import type { Nullable } from "@docspace/shared/types";
+import type { TFolderSecurity } from "@docspace/shared/api/files/types";
+import type { TAgent } from "@docspace/shared/api/ai/types";
 import type { TChatPlaylistImage } from "@docspace/ui-kit/types/ai";
 
 export type AiRoomTab = "chat" | "knowledge" | "result";
@@ -85,6 +87,10 @@ class AiRoomStore {
   isErrorAIAgentNotAvailable = false;
 
   aiPlaylistImages: TChatPlaylistImage[] = [];
+
+  security: Nullable<TFolderSecurity> = null;
+
+  agent: Nullable<TAgent> = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -118,6 +124,18 @@ class AiRoomStore {
   setResultId = (resultId: Nullable<number>) => {
     this.resultId = resultId;
   };
+
+  setSecurity = (security: Nullable<TFolderSecurity>) => {
+    this.security = security;
+  };
+
+  setAgent = (agent: Nullable<TAgent>) => {
+    this.agent = agent;
+  };
+
+  get canEditAgentRoom(): boolean {
+    return Boolean(this.security?.EditRoom);
+  }
 
   setIsErrorAIAgentNotAvailable = (value: boolean) => {
     this.isErrorAIAgentNotAvailable = value;

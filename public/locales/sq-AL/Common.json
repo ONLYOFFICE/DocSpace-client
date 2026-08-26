@@ -1802,6 +1802,7 @@
   "RoleContentCreatorDescription": "Krijuesit e përmbajtjes mund të krijojnë dhe modifikojnë skedarë në dhomë, por nuk mund të menaxhojnë përdoruesit ose të kenë qasje te cilësimet.",
   "RoleEditorDescription": "Operacionet me skedarët ekzistues: shikimi, redaktimi, plotësimi i formularit, rishikimi, komentimi.",
   "RoleForLink": "Roli për lidhje",
+  "RoleForLinkNotAvailable": "Ky rol nuk është më i disponueshëm për këtë element. Zgjidhni një rol tjetër për të ruajtur lidhjen.",
   "RoleFormFiller": "Plotësues i formës",
   "RoleFormFillerDescription": "Operacionet me skedarët ekzistues: shikimi, plotësimi i formularit, rishikimi, komentimi.",
   "RoleFormFillerFormRoomDescription": "Plotësuesit e formularëve mund të plotësojnë formularët dhe të shikojnë vetëm formularët e tyre të plotësuar/filluar brenda dosjeve Përfundoni dhe Në proces.",

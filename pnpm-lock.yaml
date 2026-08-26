@@ -620,7 +620,7 @@ importers:
         version: 2.4.16
       '@onlyoffice/docspace-plugin-sdk':
         specifier: file:onlyoffice-docspace-plugin-sdk-3.0.0.tgz
-        version: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz(@types/node@24.10.7)
+        version: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz(@types/node@24.10.7)(react@19.2.8)
       '@playwright/test':
         specifier: 1.58.1
         version: 1.58.1
@@ -3502,12 +3502,17 @@ packages:
     version: 3.7.0
 
   '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz':
-    resolution: {integrity: sha512-TymVye0li9DLiNPTfQHItrT4omSs8gAaP7xSF/cLl9p6hcjcLN0ywxwd7QadbFaPpcE6/6WssYvBrw8813EyCA==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
+    resolution: {integrity: sha512-3vOmbiFTWJtCyi4Da+j3MKf+dZDPnCjgTx747XW42VYefPWcDGKC3qflOAOoyB+ZmVw8ajfjeOa6xh0YdkmE3Q==, tarball: file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz}
     version: 3.0.0
     hasBin: true
+    peerDependencies:
+      react: 19.2.8
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
-    resolution: {integrity: sha512-F/9MLDkDy6fKz0yr67dgtxXqloPJhJLqi1mB442PJhjNW5q9LT7TA5bYWaHJNo0ulFtBkoMEWseKCufKEZXuvw==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
+    resolution: {integrity: sha512-dpo/BWsJqdJofieaA0yTV2Hq0u4yJUscPl+F0UDIrtdVoaYbrcz4BGfvUT0Z6TZ1xI7BmX4YtFc6vtf23jKQQw==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
     version: 2.2.0
     engines: {node: '>=18'}
 
@@ -12300,10 +12305,12 @@ snapshots:
       - debug
       - supports-color
 
-  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz(@types/node@24.10.7)':
+  '@onlyoffice/docspace-plugin-sdk@file:packages/client/onlyoffice-docspace-plugin-sdk-3.0.0.tgz(@types/node@24.10.7)(react@19.2.8)':
     dependencies:
       inquirer: 9.3.8(@types/node@24.10.7)
       jszip: 3.10.1
+    optionalDependencies:
+      react: 19.2.8
     transitivePeerDependencies:
       - '@types/node'
 

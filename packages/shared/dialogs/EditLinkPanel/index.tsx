@@ -130,37 +130,35 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   const isDenyDownload = link?.sharedTo?.denyDownload ?? false;
   const isPrimaryLink = link?.sharedTo?.primary ?? false;
 
-  const { isPublic, isFormRoom, isCustomRoom } = useMemo(() => {
+  const { isPublic, isFormRoom } = useMemo(() => {
     if (!isRoom(item))
       return {
         isPublic: false,
         isFormRoom: false,
-        isCustomRoom: false,
       };
 
     return {
       isPublic: item.roomType === RoomsType.PublicRoom,
       isFormRoom: item.roomType === RoomsType.FormRoom,
-      isCustomRoom: item.roomType === RoomsType.CustomRoom,
     };
   }, [item]);
 
   const accessOptions = useMemo(() => {
-    if (!item.availableShareRights) return [];
-
     if (isFolderOrRoom(item))
       return getRoomLinkAccessOptions(
         t,
+        accessLink,
         item.availableShareRights,
         isPrimaryLink,
       );
 
     return getLinkAccessRightOptions(
       t,
+      accessLink,
       item.availableShareRights,
       isPrimaryLink,
     );
-  }, [t, item, isPrimaryLink]);
+  }, [t, item, accessLink, isPrimaryLink]);
 
   const linkAccessOptions = useMemo(() => {
     const options = getAccessTypeOptions(t, false);
@@ -200,11 +198,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       };
     }
 
-    return (
-      accessOptions.find((option) => option.access === accessLink) ??
-      accessOptions[accessOptions.length - 1] ??
-      {}
-    );
+    // Always the link's own access: getLinkAccessRightOptions appends it as a
+    // disabled option when it is not available any more, so the panel never
+    // replaces the access with an unrelated one behind the user's back.
+    return accessOptions.selectedOption;
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -343,33 +340,20 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const executeApiCall = useCallback(
     async (updatedLink: TFileLink) => {
-      try {
-        const response = await ShareLinkService.editLink(item, updatedLink);
+      const response = await ShareLinkService.editLink(item, updatedLink);
 
-        setLinkParams({ link: response, item });
+      setLinkParams({ link: response, item });
 
-        if (isRoom(item)) {
-          setExternalLink?.(response);
-          copyShareLink(item, response, t);
-        } else {
-          updateLink?.(response);
-        }
-
-        return response;
-      } catch (err) {
-        console.error(err);
+      if (isRoom(item)) {
+        setExternalLink?.(response);
+        copyShareLink(item, response, t);
+      } else {
+        updateLink?.(response);
       }
+
+      return response;
     },
-    [
-      t,
-      item,
-      searchParams,
-      isCustomRoom,
-      updateLink,
-      setLinkParams,
-      setExternalLink,
-      setSearchParams,
-    ],
+    [t, item, updateLink, setLinkParams, setExternalLink],
   );
 
   const handleApiError = (err: TError) => {
@@ -390,11 +374,15 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       const updatedLink = buildUpdatedLink();
 
       await executeApiCall(updatedLink);
+
+      onClose();
     } catch (err) {
+      // Keep the panel open on failure: the edited values survive and the user
+      // can react to the error, for example pick a role that is still
+      // available when the current one has been revoked.
       handleApiError(err as TError);
     } finally {
       setIsLoading(false);
-      onClose();
     }
   }, [validateInputs, buildUpdatedLink, executeApiCall, onClose]);
 
@@ -483,8 +471,18 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const isValidLinkTitle = !!deferredLinkTitle.trim();
 
+  // The link carries a role that is not among the available rights any more, so
+  // the server would reject any save - even a password-only one. Require the
+  // user to pick a role that is still available instead of failing the request.
+  const isRevokedAccess =
+    "disabled" in selectedAccessOption && !!selectedAccessOption.disabled;
+
   const isDisabledSaveButton =
-    !hasChanges || isLoading || isExpired || !isValidLinkTitle;
+    !hasChanges ||
+    isLoading ||
+    isExpired ||
+    !isValidLinkTitle ||
+    isRevokedAccess;
 
   const canChangeLifetime = link?.canEditExpirationDate;
 
@@ -533,13 +531,21 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={`${styles.editLinkBodyContent} edit-link_body`}>
-            {accessOptions.length > 1 ? (
+            {/* A revoked access is worth showing even when it is the only
+                option left: the block carries the warning that explains why
+                the save button stays disabled. */}
+            {accessOptions.options.length > 1 || isRevokedAccess ? (
               <RoleLinkBlock
                 t={t}
-                accessOptions={accessOptions}
+                accessOptions={accessOptions.options}
                 selectedOption={selectedAccessOption}
                 currentDeviceType={currentDeviceType}
                 onSelect={handleSelectAccessOption}
+                warningText={
+                  isRevokedAccess
+                    ? t("Common:RoleForLinkNotAvailable")
+                    : undefined
+                }
               />
             ) : null}
             <LinkBlock

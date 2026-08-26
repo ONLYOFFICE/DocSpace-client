@@ -1802,6 +1802,7 @@
   "RoleContentCreatorDescription": "Kreatori sadržaja mogu kreirati i uređivati fajlove u prostoriji, ali ne mogu upravljati korisnicima niti pristupiti podešavanjima.",
   "RoleEditorDescription": "Operacije sa postojećim datotekama: pregledanje, uređivanje, popunjavanje obrazaca, recenziranje, komentarisanje.",
   "RoleForLink": "Uloga za link",
+  "RoleForLinkNotAvailable": "Ova uloga više nije dostupna za ovu stavku. Izaberite drugu ulogu da biste sačuvali link.",
   "RoleFormFiller": "Popunjivač obrazaca",
   "RoleFormFillerDescription": "Operacije sa postojećim datotekama: pregledanje, popunjavanje obrazaca, recenziranje, komentarisanje.",
   "RoleFormFillerFormRoomDescription": "Popunjači formulara mogu popuniti formulare i pregledati samo svoje završene/započete formulare unutar foldera Završeno i U Procesu.",

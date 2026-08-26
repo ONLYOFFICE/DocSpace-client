@@ -48,6 +48,7 @@ import {
   getPowerFromBytes,
   getSizeFromBytes,
 } from "../../utils/common";
+import { NO_QUOTA } from "../../constants";
 import { TextInput, InputType } from "@docspace/ui-kit/components/text-input";
 import {
   ComboBox,
@@ -67,18 +68,16 @@ const isDefaultValue = (
   initSize: number,
   power: number,
   value: number,
-  initialSize: number,
+  initialSize?: number,
 ) => {
-  if (!initialSize && initialSize !== 0) return false;
+  if (initialSize === NO_QUOTA) return false;
 
-  if (initialSize === -1) return false;
-
-  if (initPower === power && initSize === value) return true;
-
-  return false;
+  return initPower === power && initSize === value;
 };
 
-const getInitialSize = (initialSize: number, initPower: number) => {
+const getInitialSize = (initialSize: number | undefined, initPower: number) => {
+  if (initialSize === undefined) return "";
+
   if (initialSize > 0)
     return getSizeFromBytes(initialSize, initPower).toString();
 
@@ -87,8 +86,9 @@ const getInitialSize = (initialSize: number, initPower: number) => {
   return initialSize.toString();
 };
 
-const getInitialPower = (initialSize: number) => {
-  if (initialSize > 0) return getPowerFromBytes(initialSize, 4);
+const getInitialPower = (initialSize?: number) => {
+  if (initialSize !== undefined && initialSize > 0)
+    return getPowerFromBytes(initialSize, 4);
 
   return 2;
 };
@@ -112,7 +112,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
       isDisabled,
       maxInputWidth,
       onSetQuotaBytesSize,
-      initialSize = 0,
+      initialSize,
       isError,
       isButtonsEnable = false,
       onSave,
@@ -132,7 +132,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
     const [power, setPower] = useState(initPower);
     const [size, setSize] = useState(initSize);
     const [hasError, setHasError] = useState(false);
-    const [isChecked, setIsChecked] = useState(initialSize === -1);
+    const [isChecked, setIsChecked] = useState(initialSize === NO_QUOTA);
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -159,6 +159,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
 
         if (onSetQuotaBytesSize) onSetQuotaBytesSize(transmittedSize);
         setSize(value);
+        setHasError(value.trim() !== "" && Number(value) === 0);
       }
     };
 
@@ -176,13 +177,17 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
 
       setIsChecked(changeCheckbox);
 
-      const sizeValue = changeCheckbox ? -1 : getConvertedSize(size, power);
+      const sizeValue = changeCheckbox
+        ? NO_QUOTA
+        : getConvertedSize(size, power);
 
       if (onSetQuotaBytesSize) onSetQuotaBytesSize(sizeValue.toString());
     };
 
+    const isZeroSize = size.trim() !== "" && Number(size) === 0;
+
     const isSizeError = () => {
-      if (size.trim() === "") {
+      if (size.trim() === "" || isZeroSize) {
         setHasError(true);
         return true;
       }
@@ -261,7 +266,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
             isDisabled={isDisable}
             onKeyDown={onKeyDownInput}
             hasError={isError || hasError}
-            pattern="^(?!^0(?:\.\d{0,2})?$)\d+(?:\.\d{0,2})?$"
+            pattern="^\d+(?:\.\d{0,2})?$"
             scale
             withBorder
             tabIndex={tabIndex}
@@ -306,7 +311,7 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
             cancelButtonLabel={t("Common:CancelButton")}
             reminderText={t("Common:YouHaveUnsavedChanges")}
             displaySettings
-            saveButtonDisabled={isDefaultQuota}
+            saveButtonDisabled={isDefaultQuota || isZeroSize}
             disableRestoreToDefault={isDefaultQuota}
             showReminder={!isDefaultQuota}
             saveButtonDataTestId={

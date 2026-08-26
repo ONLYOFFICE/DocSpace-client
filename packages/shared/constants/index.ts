@@ -271,4 +271,8 @@ export const FUNCTION_EMPTY = (): void => {};
 
 export const TEMPLATE_GALLERY_FORMATS = [".docx", ".xlsx", ".pptx", ".pdf"];
 
+// Entity quota sentinels, mirroring TenantEntityQuotaSettings on the backend.
+export const NO_QUOTA = -1;
+export const UNSET_QUOTA = -2;
+
 export * from "@docspace/ui-kit/constants";

@@ -43,6 +43,7 @@ import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 // Import types from SDK
 import type {
+  IBox,
   IContextMenuItem,
   IEventListenerItem,
   IFileItem,
@@ -76,6 +77,8 @@ import type {
   IPostMessagePlugin,
   IMediaViewer,
 } from "@onlyoffice/docspace-plugin-sdk";
+
+import type { TCurrentFile } from "@onlyoffice/docspace-plugin-sdk/react";
 
 import type PluginStore from "SRC_DIR/store/PluginStore";
 
@@ -174,8 +177,21 @@ export interface IArticleButtonItemClient extends IArticleButtonItem {
   pluginName: string;
 }
 
-export interface IArticleNavigationItemClient extends IArticleNavigationItem {
+export interface IArticleNavigationItemClient
+  extends Omit<IArticleNavigationItem, "component"> {
   pluginName: string;
+  /**
+   * React section, optional on the client side: plugins built against the
+   * pre-React SDK describe their section with the IBox fields below.
+   */
+  component?: IArticleNavigationItem["component"];
+  /**
+   * IBox-based section and its loader. The React SDK no longer declares them,
+   * so they are typed on the client side while both plugin generations are
+   * supported.
+   */
+  section?: IBox;
+  onLoad?: () => Promise<{ section: IBox }>;
 }
 
 export interface IMediaViewerClient extends IMediaViewer {
@@ -268,9 +284,12 @@ export interface TMessageActionsParams {
   updateMainButtonItems?: PluginStore["updateMainButtonItems"];
   updateProfileMenuItems?: PluginStore["updateProfileMenuItems"];
   updateEventListenerItems?: PluginStore["updateEventListenerItems"];
+  updateArticleButtonItems?: PluginStore["updateArticleButtonItems"];
   updateArticleNavigationItems?: PluginStore["updateArticleNavigationItems"];
   updateFileItems?: PluginStore["updateFileItems"];
   updatePlugin?: PluginStore["updatePlugin"];
   setPluginMediaViewerVisible?: PluginStore["setPluginMediaViewerVisible"];
   setPluginMediaViewerProps?: PluginStore["setPluginMediaViewerProps"];
+  setReactPluginModalState?: PluginStore["setReactPluginModalState"];
+  reactPluginCurrentFile?: TCurrentFile | null;
 }

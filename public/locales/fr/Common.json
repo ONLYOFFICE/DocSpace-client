@@ -1802,6 +1802,7 @@
   "RoleContentCreatorDescription": "Les créateurs de contenu peuvent créer et modifier des fichiers dans la salle, mais ne peuvent pas gérer les utilisateurs ou accéder aux paramètres.",
   "RoleEditorDescription": "Opérations sur les fichiers existants : affichage, édition, remplissage de formulaires, révision, commentaires.",
   "RoleForLink": "Rôle pour le lien",
+  "RoleForLinkNotAvailable": "Ce rôle n'est plus disponible pour cet élément. Sélectionnez un autre rôle pour enregistrer le lien.",
   "RoleFormFiller": "Remplisseur de formulaires",
   "RoleFormFillerDescription": "Opérations sur les fichiers existants : affichage, remplissage de formulaires, révision, commentaires.",
   "RoleFormFillerFormRoomDescription": "Les remplisseurs de formulaires peuvent remplir des formulaires et ne visualiser que leurs formulaires terminés ou entamés dans les dossiers Complet et En cours.",

@@ -1802,6 +1802,7 @@
   "RoleContentCreatorDescription": "Content creators can create and edit files in the room, but can't manage users, or access settings.",
   "RoleEditorDescription": "Operations with existing files: viewing, editing, form filling, reviewing, commenting.",
   "RoleForLink": "Role for link",
+  "RoleForLinkNotAvailable": "This role is no longer available for this item. Select another role to save the link.",
   "RoleFormFiller": "Form filler",
   "RoleFormFillerDescription": "Operations with existing files: viewing, form filling, reviewing, commenting.",
   "RoleFormFillerFormRoomDescription": "Form fillers can fill out forms and view only their completed/started forms within the Complete and In Process folders.",

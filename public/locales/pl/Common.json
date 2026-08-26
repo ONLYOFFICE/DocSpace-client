@@ -1802,6 +1802,7 @@
   "RoleContentCreatorDescription": "Twórcy treści mogą tworzyć oraz edytować pliki w pokoju, ale nie mogą zarządzać użytkownikami i nie mają dostępu do ustawień.",
   "RoleEditorDescription": "Operacje na istniejących plikach: przeglądanie, edytowanie, wypełnianie formularzy, recenzowanie, komentowanie.",
   "RoleForLink": "Rola dla linku",
+  "RoleForLinkNotAvailable": "Ta rola nie jest już dostępna dla tego elementu. Wybierz inną rolę, aby zapisać link.",
   "RoleFormFiller": "Wypełniający formularze",
   "RoleFormFillerDescription": "Operacje na istniejących plikach: przeglądanie, wypełnianie formularzy, recenzowanie, komentowanie.",
   "RoleFormFillerFormRoomDescription": "Osoby wypełniające formularze mogą wypełniać formularze i wyświetlać tylko wypełnione/rozpoczęte formularze w katalogach Gotowe oraz W toku.",

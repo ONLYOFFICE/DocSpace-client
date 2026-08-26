@@ -43,6 +43,7 @@ import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { getPluginSectionByPath } from "SRC_DIR/helpers/plugins/navigation";
 import type { IArticleNavigationItemClient } from "SRC_DIR/helpers/plugins/types";
+import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 
 import PluginStore from "SRC_DIR/store/PluginStore";
 import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
@@ -68,7 +69,9 @@ const PluginSectionContent = ({
     setSectionProps(null);
 
     try {
-      if (!item?.onLoad) return;
+      // A React `component` fetches its own data, so `onLoad` is skipped — but
+      // the animation still has to end, hence the `finally` below.
+      if (item?.component || !item?.onLoad) return;
 
       const res = await item.onLoad();
 
@@ -92,13 +95,23 @@ const PluginSectionContent = ({
     setSelectedFolder(null);
   }, [setSelectedFolder]);
 
+  if (item.component) {
+    return (
+      <PluginWrappedComponent
+        pluginName={pluginName}
+        component={item.component}
+      />
+    );
+  }
+
+  const props = sectionProps ?? item.section;
+
+  if (!props) return null;
+
   return (
     <WrappedComponent
       pluginName={pluginName}
-      component={{
-        component: PluginComponents.box,
-        props: sectionProps ?? item.section,
-      }}
+      component={{ component: PluginComponents.box, props }}
     />
   );
 };

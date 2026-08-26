@@ -35,10 +35,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
+import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
 import { Button } from "@docspace/ui-kit/components/button";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import GithubLight from "PUBLIC_DIR/images/thirdparties/github.light.react.svg";
@@ -47,21 +49,21 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import styles from "./PluginSDK.module.scss";
 
+const PLUGINS_SETTINGS_ROUTE = "/portal-settings/integration/plugins";
+
 const PluginSDK = ({
   systemPluginList,
-  currentDeviceType,
   isLoading,
   isEmptyList,
   theme,
   apiPluginSDKLink,
 }) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (ready) setDocumentTitle(t("WebPlugins:PluginSDK"));
   }, [ready]);
-
-  const isMobile = currentDeviceType === "mobile";
 
   const icon = theme.isBase ? <GithubLight /> : <GithubDark />;
 
@@ -134,7 +136,22 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight="20px"
       >
-        {t("PluginSDKDescription")}
+        <Trans
+          ns="WebPlugins"
+          t={t}
+          i18nKey="PluginSDKDescription"
+          components={{
+            1: (
+              <Link
+                type={LinkType.page}
+                color="accent"
+                isHovered
+                onClick={() => navigate(PLUGINS_SETTINGS_ROUTE)}
+                dataTestId="plugins_page_link"
+              />
+            ),
+          }}
+        />
       </Text>
       <Text
         className={styles.description}
@@ -142,17 +159,25 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight="20px"
       >
-        {t("PluginSDKInstruction")}
+        <Trans
+          ns="WebPlugins"
+          t={t}
+          i18nKey="PluginSDKInstruction"
+          components={{
+            1: (
+              <Link
+                type={LinkType.page}
+                target={LinkTarget.blank}
+                href={apiPluginSDKLink}
+                tag="a"
+                color="accent"
+                isHovered
+                dataTestId="read_instructions_link"
+              />
+            ),
+          }}
+        />
       </Text>
-      <Button
-        className={styles.readInstructionsButton}
-        label={t("Common:ReadInstructions")}
-        primary
-        scale={isMobile}
-        size={isMobile ? "normal" : "small"}
-        onClick={() => window.open(apiPluginSDKLink, "_blank")}
-        testId="read_instructions_button"
-      />
       {!isEmptyList && list.length > 0 ? (
         <>
           <Text fontSize="16px" fontWeight={700} lineHeight="22px">
@@ -166,11 +191,10 @@ const PluginSDK = ({
 };
 
 export default inject(({ pluginStore, settingsStore }) => {
-  const { currentDeviceType, theme, apiPluginSDKLink } = settingsStore;
+  const { theme, apiPluginSDKLink } = settingsStore;
   const { systemPluginList, isLoading, isEmptyList } = pluginStore;
 
   return {
-    currentDeviceType,
     systemPluginList,
     theme,
     isLoading,

@@ -132,7 +132,6 @@
   "TotalMonthly": "Total mensuel",
   "TrialAvailable": "Un essai gratuit d'un mois est disponible. Aucune carte bancaire requise.",
   "TrialBannerDescription": "Votre période d'essai expire dans {{count}} jours — abonnez-vous pour conserver un accès ininterrompu.",
-  "TrialBannerDescriptionSecond": "Si vous payez aujourd'hui, vos données sont conservées, et le premier prélèvement a lieu à l'expiration de la période d'essai.",
   "TrialBannerTitle": "Vous utilisez un essai gratuit de {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} jours restants",
   "TrialDaysRemainingExpired": "{{count}} jours restants",

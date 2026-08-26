@@ -132,7 +132,6 @@
   "TotalMonthly": "Yhteensä kuukaudessa",
   "TrialAvailable": "Ilmainen kuukauden kokeilujakso on saatavilla. Luottokorttia ei vaadita.",
   "TrialBannerDescription": "Kokeilujaksosi päättyy {{count}} päivän kuluttua — tilaa palvelu jatkaaksesi käyttöä keskeytyksettä.",
-  "TrialBannerDescriptionSecond": "Jos maksat tänään, tietosi säilyvät ja ensimmäinen veloitus tapahtuu vasta kokeilujakson päätyttyä.",
   "TrialBannerTitle": "Käytät {{organizationName}} Docs Connect -palvelun ilmaista kokeilujaksoa",
   "TrialDaysRemaining": "~ {{count}} päivää jäljellä",
   "TrialDaysRemainingExpired": "{{count}} päivää jäljellä",

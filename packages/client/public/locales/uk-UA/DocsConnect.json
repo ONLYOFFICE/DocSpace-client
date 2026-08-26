@@ -132,7 +132,6 @@
   "TotalMonthly": "Разом на місяць",
   "TrialAvailable": "Доступна безкоштовна одномісячна пробна версія. Банківська картка не потрібна.",
   "TrialBannerDescription": "Ваш пробний період закінчується через {{count}} дн. — оформіть підписку, щоб зберегти безперервний доступ.",
-  "TrialBannerDescriptionSecond": "Якщо ви оплатите сьогодні, ваші дані буде збережено, а перше списання відбудеться після закінчення пробного періоду.",
   "TrialBannerTitle": "Ви використовуєте безкоштовну пробну версію {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} дн. залишилось",
   "TrialDaysRemainingExpired": "{{count}} дн. залишилось",

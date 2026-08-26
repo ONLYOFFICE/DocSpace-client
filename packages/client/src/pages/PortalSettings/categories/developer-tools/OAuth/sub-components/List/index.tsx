@@ -108,7 +108,7 @@ const List = ({
           color="accent"
           dataTestId="oauth_guide_link"
         >
-          {t("OAuth:OAuth")} {t("Common:Guide")}
+          {t("OAuth:ReadOAuthGuide")}
         </Link>
       ) : null}
 

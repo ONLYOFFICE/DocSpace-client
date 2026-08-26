@@ -39,6 +39,7 @@
   flex-direction: column;
 
   :global(.description) {
+    max-width: 700px;
     margin: 0 0 8px;
     line-height: 20px;
     color: var(--settings-common-description-color);

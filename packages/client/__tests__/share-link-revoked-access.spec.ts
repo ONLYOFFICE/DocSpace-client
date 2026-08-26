@@ -50,6 +50,9 @@ import {
   fileSharedUsersHandler,
 } from "@docspace/shared/__mocks__/handlers";
 import { createLinksRouteHandler } from "@docspace/shared/__mocks__/handlers/share/link";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+
+const SCREENSHOT_DIR = "share-link-revoked-access";
 
 // My Documents folder id from mock data
 const MY_DOCS_FOLDER_ID = 12764;
@@ -158,6 +161,21 @@ test.describe("Share link whose access is no longer available (Bug 82049)", () =
     await expect(roleSelect).toBeVisible();
     await expect(roleSelect).toContainText("Read only");
 
+    // Saving would be rejected by the server while the revoked role is
+    // selected, so the panel blocks it and says why.
+    await expect(
+      page.getByTestId("edit_link_panel_role_warning"),
+    ).toBeVisible();
+    await expect(
+      page.getByTestId("edit_link_panel_save_button"),
+    ).toBeDisabled();
+
+    await expectScreenshot(page, [
+      "desktop",
+      SCREENSHOT_DIR,
+      "edit-link-panel-revoked-role.png",
+    ]);
+
     await roleSelect.click();
 
     // The access the link still carries is listed, but cannot be picked again.
@@ -169,6 +187,41 @@ test.describe("Share link whose access is no longer available (Bug 82049)", () =
     const availableAccess = page.getByTestId("access_right_option_editing");
     await expect(availableAccess).toBeVisible();
     await expect(availableAccess).not.toHaveAttribute("aria-disabled", "true");
+
+    await expectScreenshot(page, [
+      "desktop",
+      SCREENSHOT_DIR,
+      "edit-link-panel-role-options.png",
+    ]);
+  });
+
+  test("Picking an available role unblocks saving", async ({
+    page,
+    baseUrl,
+  }) => {
+    await page.goto(`${baseUrl}${MY_DOCS_URL}`);
+
+    const sharePanel = await openSharePanel(page);
+    await expect(sharePanel.getByTestId("shared-links")).toBeVisible();
+
+    await sharePanel.getByTestId("context-menu-button").first().click();
+    await page.getByTestId("edit-link-key_item").click();
+
+    await expect(page.getByTestId("edit_link_panel_modal")).toBeAttached();
+
+    await page.getByTestId("edit_link_panel_role_access_select").click();
+    await page.getByTestId("access_right_option_editing").click();
+
+    await expect(
+      page.getByTestId("edit_link_panel_role_warning"),
+    ).toBeHidden();
+    await expect(page.getByTestId("edit_link_panel_save_button")).toBeEnabled();
+
+    await expectScreenshot(page, [
+      "desktop",
+      SCREENSHOT_DIR,
+      "edit-link-panel-available-role.png",
+    ]);
   });
 
   test("Share tab combobox keeps the current access selected and disabled", async ({
@@ -198,6 +251,12 @@ test.describe("Share link whose access is no longer available (Bug 82049)", () =
       accessCombobox.locator('svg[data-src*="eye.react.svg"]'),
     ).toBeVisible();
 
+    await expectScreenshot(page, [
+      "desktop",
+      SCREENSHOT_DIR,
+      "share-tab-link-row.png",
+    ]);
+
     await accessCombobox.click();
 
     // The access the link still carries is listed, but cannot be picked again.
@@ -209,6 +268,12 @@ test.describe("Share link whose access is no longer available (Bug 82049)", () =
     const availableInRow = page.getByTestId("drop_down_item_editing");
     await expect(availableInRow).toBeVisible();
     await expect(availableInRow).not.toHaveAttribute("aria-disabled", "true");
+
+    await expectScreenshot(page, [
+      "desktop",
+      SCREENSHOT_DIR,
+      "share-tab-access-options.png",
+    ]);
   });
 });
 

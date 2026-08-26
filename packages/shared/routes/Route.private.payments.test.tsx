@@ -56,10 +56,7 @@ const LocationProbe = () => {
   return <span data-testid="pathname">{location.pathname}</span>;
 };
 
-const renderAt = (
-  pathname: string,
-  props: Partial<PrivateRouteProps> & { user: unknown },
-) => {
+const renderAt = (pathname: string, props: Record<string, unknown>) => {
   const allProps = {
     isLoaded: true,
     isAuthenticated: true,

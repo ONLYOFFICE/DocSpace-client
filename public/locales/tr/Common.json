@@ -812,6 +812,7 @@
   "EnabledApps": "Etkin uygulamalar",
   "EnableNotifications": "Bildirimleri etkinleştir",
   "EnableThirdPartyIntegration": "Lütfen sahibinden veya süper yöneticinden çalışma alanı ayarlarının Entegrasyon bölümünde ilgili hizmeti etkinleştirmesini isteyin.",
+  "EnableWebSearchInBilling": "Web aramasını Fatura bölümünde etkinleştirin",
   "EncryptedChangeOwnerKeyMismatch": "Sahiplik {{user}} kullanıcısına aktarılamıyor: şifreleme anahtarı değişmiş ve güvenilir bulunamadı. Anahtarı yeniden doğrulayıp tekrar deneyin.",
   "EncryptedChangeOwnerNoKeys": "Sahiplik {{user}} kullanıcısına aktarılamıyor: henüz şifreleme anahtarları kurulmamış. Profillerinde anahtar oluşturmalarını isteyin, ardından tekrar deneyin.",
   "EncryptedCopyFailed": "Şifrelenmiş dosyalar kopyalanamadı: {{names}}",

@@ -812,6 +812,7 @@
   "EnabledApps": "Ingeschakelde apps",
   "EnableNotifications": "Meldingen inschakelen",
   "EnableThirdPartyIntegration": "Vraag de eigenaar of superbeheerder om de bijbehorende dienst in de sectie Integratie van de werkruimte-instellingen in te schakelen.",
+  "EnableWebSearchInBilling": "Schakel webzoekactie in bij Facturering",
   "EncryptedChangeOwnerKeyMismatch": "Kan eigendom niet overdragen aan {{user}}: hun versleutelingssleutel is gewijzigd en werd niet vertrouwd. Verifieer de sleutel opnieuw en probeer het nogmaals.",
   "EncryptedChangeOwnerNoKeys": "Kan eigendom niet overdragen aan {{user}}: zij hebben nog geen versleutelingssleutels ingesteld. Vraag hen sleutels te genereren in hun profiel en probeer het dan opnieuw.",
   "EncryptedCopyFailed": "Kopiëren van versleutelde bestanden mislukt: {{names}}",

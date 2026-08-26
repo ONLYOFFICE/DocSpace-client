@@ -812,6 +812,7 @@
   "EnabledApps": "Omogočene aplikacije",
   "EnableNotifications": "Omogoči obvestila",
   "EnableThirdPartyIntegration": "Prosite lastnika ali superskrbnika, da vklopi ustrezno storitev v razdelku Integracija v nastavitvah delovnega prostora.",
+  "EnableWebSearchInBilling": "Omogočite iskanje v spletu v razdelku Obračunovanje",
   "EncryptedChangeOwnerKeyMismatch": "Lastništva ni mogoče prenesti na {{user}}: njihov šifrirni ključ se je spremenil in ni bil zaupan. Znova preverite ključ in poskusite znova.",
   "EncryptedChangeOwnerNoKeys": "Lastništva ni mogoče prenesti na {{user}}: šifrirnih ključev še niso nastavili. Prosim jih, da ustvarijo ključe v svojem profilu, in poskusite znova.",
   "EncryptedCopyFailed": "Kopiranje šifriranih datotek ni uspelo: {{names}}",

@@ -41,6 +41,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
 import { useStores } from "@docspace/ui-kit/ai-agent/providers";
 import { RecomendedModel } from "@docspace/ui-kit/ai-agent/recomended-model";
+import { isChatCapableProfile } from "@docspace/shared/api/ai/enums";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
@@ -73,28 +74,49 @@ const ProfileSettings = ({
 
   const selectedProfileId = agentParams.profileId;
 
+  // Agents chat with their model, so image-only gateway profiles (Nano
+  // Banana & co) are not offered — every send through them dies with an
+  // upstream model_not_found (Bug 82663). Same filter the chat lib applies
+  // in its own model pickers. A profile already saved on the agent is kept
+  // as the selection even when filtered out, so opening the edit dialog
+  // never reassigns the model silently.
+  const chatProfiles = React.useMemo(
+    () => profiles.filter(isChatCapableProfile),
+    [profiles],
+  );
+
   // Preselect the chat (or default, or first) profile once profiles arrive.
   // Only write to agentParams when the value actually changes — an
   // unconditional set produces a fresh state object every run and can
   // ping-pong with other agentParams effects into an infinite update loop.
   React.useEffect(() => {
-    if (!profiles.length) return;
+    if (!chatProfiles.length) return;
     if (selectedProfileId && profiles.some((p) => p.id === selectedProfileId))
       return;
 
-    const preferred = chatProfile ?? defaultProfile ?? profiles[0];
+    const preferred =
+      [chatProfile, defaultProfile].find(
+        (p) => p && isChatCapableProfile(p),
+      ) ?? chatProfiles[0];
     if (preferred && preferred.id !== selectedProfileId)
       setAgentParams({ profileId: preferred.id });
-  }, [profiles, chatProfile, defaultProfile, selectedProfileId, setAgentParams]);
+  }, [
+    profiles,
+    chatProfiles,
+    chatProfile,
+    defaultProfile,
+    selectedProfileId,
+    setAgentParams,
+  ]);
 
   const options = React.useMemo<TOption[]>(
     () =>
-      profiles.map((profile) => ({
+      chatProfiles.map((profile) => ({
         key: profile.id,
         value: profile.id,
         label: profile.name,
       })),
-    [profiles],
+    [chatProfiles],
   );
 
   const selectedProfile = profiles.find((p) => p.id === selectedProfileId);
@@ -109,9 +131,9 @@ const ProfileSettings = ({
           }
         : {
             key: "empty-selected-option",
-            label: profiles.length ? "" : t("Common:NoModelsFound"),
+            label: chatProfiles.length ? "" : t("Common:NoModelsFound"),
           },
-    [selectedProfile, profiles.length, t],
+    [selectedProfile, chatProfiles.length, t],
   );
 
   const onSelectProfile = React.useCallback(
@@ -178,7 +200,7 @@ const ProfileSettings = ({
           isDefaultMode
           className="ai-combobox"
           displaySelectedOption
-          isDisabled={!profiles.length}
+          isDisabled={!chatProfiles.length}
           dataTestId="create_agent_profile_combobox"
         />
       </div>

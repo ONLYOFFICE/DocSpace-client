@@ -812,6 +812,7 @@
   "EnabledApps": "Aplicații activate",
   "EnableNotifications": "Activare notificări",
   "EnableThirdPartyIntegration": "Rugați proprietarul sau superadministratorul să activeze serviciul corespunzător în secțiunea Integrare din setările spațiului de lucru.",
+  "EnableWebSearchInBilling": "Activați căutarea web în Facturare",
   "EncryptedChangeOwnerKeyMismatch": "Nu se poate transfera proprietatea către {{user}}: cheia lor de criptare s-a schimbat și nu a fost de încredere. Re-verificați cheia și încercați din nou.",
   "EncryptedChangeOwnerNoKeys": "Nu se poate transfera proprietatea către {{user}}: aceștia nu au configurat încă chei de criptare. Rugați-i să genereze chei în profilul lor, apoi încercați din nou.",
   "EncryptedCopyFailed": "Copierea fișierelor criptate a eșuat: {{names}}",

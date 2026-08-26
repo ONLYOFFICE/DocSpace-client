@@ -812,6 +812,7 @@
   "EnabledApps": "Aplicativos habilitados",
   "EnableNotifications": "Ativar notificações",
   "EnableThirdPartyIntegration": "Peça ao proprietário ou ao superadministrador para ativar o serviço correspondente na seção Integração das configurações do do espaço de trabalho.",
+  "EnableWebSearchInBilling": "Ative a busca na Web em Cobrança",
   "EncryptedChangeOwnerKeyMismatch": "Não é possível transferir a propriedade para {{user}}: a chave de criptografia deles mudou e não foi confiada. Verifique novamente a chave e tente de novo.",
   "EncryptedChangeOwnerNoKeys": "Não é possível transferir a propriedade para {{user}}: eles ainda não configuraram chaves de criptografia. Peça a eles para gerar chaves no perfil e tente novamente.",
   "EncryptedCopyFailed": "Falha ao copiar arquivos criptografados: {{names}}",

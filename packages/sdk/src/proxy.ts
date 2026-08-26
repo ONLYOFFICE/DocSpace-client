@@ -131,10 +131,21 @@ export async function proxy(request: NextRequest) {
     });
   }
 
-  if (
-    request.nextUrl.pathname.includes("ai-agents") ||
-    request.nextUrl.pathname.includes("rooms")
-  ) {
+  if (request.nextUrl.pathname.startsWith("/ai-agents")) {
+    const segment = request.nextUrl.pathname.split("/")[2] ?? "";
+    const agentId = /^\d+$/.test(segment) ? segment : "";
+
+    requestHeaders.set(AGENT_ID_HEADER, agentId);
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
+  if (request.nextUrl.pathname.includes("rooms")) {
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
     return NextResponse.next({

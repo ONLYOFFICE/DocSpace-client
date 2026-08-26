@@ -43,6 +43,32 @@ export { ProviderType, ServerType };
 // at a call site would not fail typechecking.
 export const SYSTEM_AI_PROFILE_PROVIDER_TYPE = "onlyoffice";
 
+// Bit flags of the chat-lib profile `capabilities` field. Must match
+// `CapabilitiesUI` in @onlyoffice/ai-chat and the C# `Capabilities` enum in
+// ASC.AI.Integration — the field travels end-to-end as a plain number.
+export const ProfileCapabilities = {
+  Chat: 0x01,
+  Image: 0x02,
+  Embeddings: 0x04,
+  Audio: 0x08,
+  Vision: 0x80,
+  Tools: 0x100,
+} as const;
+
+// Whether a chat-lib profile can drive a chat round. Mirrors the chat lib's
+// own model pickers: a profile with no `capabilities` set is allowed (older
+// providers never report them), an explicit mask must carry the Chat bit —
+// image-only gateway models (e.g. Nano Banana) otherwise fail every send
+// with an upstream `model_not_found` (Bug 82663).
+export function isChatCapableProfile(profile: {
+  capabilities?: number;
+}): boolean {
+  return (
+    !profile.capabilities ||
+    (profile.capabilities & ProfileCapabilities.Chat) !== 0
+  );
+}
+
 export enum ToolsPermission {
   Allow,
   AlwaysAllow,

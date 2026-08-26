@@ -813,6 +813,7 @@
   "EnabledApps": "Enabled apps",
   "EnableNotifications": "Enable notifications",
   "EnableThirdPartyIntegration": "Please ask the owner or Full admin to enable the corresponding service in the Integration section of the workspace Settings.",
+  "EnableWebSearchInBilling": "Enable web search in Billing",
   "EncryptedChangeOwnerKeyMismatch": "Cannot transfer ownership to {{user}}: their encryption key has changed and was not trusted. Re-verify the key and try again.",
   "EncryptedChangeOwnerNoKeys": "Cannot transfer ownership to {{user}}: they have not set up encryption keys yet. Ask them to generate keys in their profile, then try again.",
   "EncryptedCopyFailed": "Failed to copy encrypted files: {{names}}",

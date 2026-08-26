@@ -38,7 +38,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { runInAction } from "mobx";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { setAuthToken } from "@docspace/shared/api/client";
@@ -53,7 +53,7 @@ import SocketHelper, {
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
-import type { TAIConfig } from "@docspace/shared/api/ai/types";
+import type { TAIConfig, TAgent } from "@docspace/shared/api/ai/types";
 import type { TViewAs } from "@docspace/shared/types";
 
 import { Layout as DocspaceFilesLayout } from "@/app/(docspace)/_components/layout";
@@ -115,11 +115,17 @@ type Props = {
 };
 
 const AgentLifecycleDialogs = observer(() => {
+  const router = useRouter();
   const dialogsStore = useAgentDialogsStore();
   const listStore = useAgentsListStore();
   const userStore = useAgentsUserStore();
+  const aiRoomStore = useAiRoomStore();
 
   const { deleteAgentDialogState, leaveAgentDialogState } = dialogsStore;
+
+  const leaveRoomIfCurrent = (agentId: TAgent["id"]) => {
+    if (aiRoomStore.roomId === Number(agentId)) router.push("/ai-agents");
+  };
 
   return (
     <>
@@ -132,9 +138,12 @@ const AgentLifecycleDialogs = observer(() => {
             const agent = deleteAgentDialogState.agent;
             if (!agent) return;
             dialogsStore.setDeleteAgentDialogVisible(false);
-            void listStore.deleteAgent(agent.id).catch((e) => {
-              toastr.error(e instanceof Error ? e.message : String(e));
-            });
+            void listStore
+              .deleteAgent(agent.id)
+              .then(() => leaveRoomIfCurrent(agent.id))
+              .catch((e) => {
+                toastr.error(e instanceof Error ? e.message : String(e));
+              });
           }}
         />
       ) : null}
@@ -150,9 +159,12 @@ const AgentLifecycleDialogs = observer(() => {
             if (!agent || !currentUserId) return;
             dialogsStore.setLeaveAgentDialogVisible(false);
             if (leaveAgentDialogState.isOwner) return;
-            void listStore.leaveAgent(agent.id, currentUserId).catch((e) => {
-              toastr.error(e instanceof Error ? e.message : String(e));
-            });
+            void listStore
+              .leaveAgent(agent.id, currentUserId)
+              .then(() => leaveRoomIfCurrent(agent.id))
+              .catch((e) => {
+                toastr.error(e instanceof Error ? e.message : String(e));
+              });
           }}
         />
       ) : null}

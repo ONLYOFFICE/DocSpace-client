@@ -69,6 +69,7 @@ import { hasDevToolsAccess } from "@docspace/shared/utils/devToolsAccess";
 
 import integrationStyles from "SRC_DIR/components/IntegrationsCard/IntegrationsCard.module.scss";
 
+import { modulesGridStyle } from "../utils";
 import { PROFILE_CARD_HIDDEN_KEY } from "./ProfileCard";
 
 import styles from "../Dashboard.module.scss";
@@ -140,7 +141,7 @@ const ModulesSectionLoader = ({
 }) => (
   <section className={styles.section}>
     <RectangleSkeleton width="120px" height="24px" borderRadius="3px" />
-    <div className={styles.modulesGrid}>
+    <div className={styles.modulesGrid} style={modulesGridStyle(count)}>
       {Array.from({ length: count }, (_, index) => (
         <div key={index} className={styles.loaderModuleCard}>
           <div className={styles.loaderModuleHeader}>
@@ -218,10 +219,15 @@ const DevToolsCardLoader = () => (
 );
 
 type DashboardLoaderProps = {
-  // Admins/owners see the plan subline and profile card; everyone else doesn't.
+  // Admins/owners see the plan subline; everyone else doesn't. The profile card
+  // itself is everyone's ({@link ./ProfileCard}).
   isAdminOrOwner?: boolean;
-  // Guests don't get the personal Files module in the Applications grid.
-  isGuest?: boolean;
+  // With AI services off the AI Agents card is dropped from the grid
+  // ({@link ../hooks/useModuleItems}), leaving three apps instead of four.
+  aiServicesEnabled?: boolean;
+  // Docs Connect is SaaS-only, and the card that advertises it follows the
+  // Developer Tools card ({@link SRC_DIR/components/IntegrationsCard}).
+  standalone?: boolean;
   // The tours target desktop-only chrome, so the header and per-card tour
   // buttons aren't rendered on mobile ({@link ../index}) — skip their
   // placeholders there too.
@@ -233,19 +239,22 @@ type DashboardLoaderProps = {
 
 const DashboardLoaderComponent = ({
   isAdminOrOwner = false,
-  isGuest = false,
+  aiServicesEnabled = true,
+  standalone = false,
   currentDeviceType,
   showDevTools = false,
 }: DashboardLoaderProps) => {
-  // The profile card is admin/owner-only and can be dismissed (persisted in
-  // localStorage) — gate its skeleton on the same conditions as the real card
-  // so we don't flash a placeholder for a card that won't render.
-  const isProfileCardHidden =
-    typeof window !== "undefined" &&
-    localStorage.getItem(PROFILE_CARD_HIDDEN_KEY) === "true";
-  const showProfileCard = isAdminOrOwner && !isProfileCardHidden;
+  // The profile card is everyone's but can be dismissed (persisted in
+  // localStorage) — gate its skeleton on the same condition as the real card so
+  // we don't flash a placeholder for a card that won't render.
+  const showProfileCard =
+    typeof window === "undefined" ||
+    localStorage.getItem(PROFILE_CARD_HIDDEN_KEY) !== "true";
 
-  const moduleCount = isGuest ? 3 : 4;
+  // Four apps today; three once AI services are off and the AI Agents card goes
+  // with them. Not derived from the grid's column cap - that the two numbers
+  // agree today is a coincidence, not a rule.
+  const moduleCount = aiServicesEnabled ? 4 : 3;
 
   const showTourButton = currentDeviceType !== DeviceType.mobile;
 
@@ -262,7 +271,7 @@ const DashboardLoaderComponent = ({
           count={moduleCount}
           showTourButton={showTourButton}
         />
-        <IntegrationsCardLoader />
+        {!standalone && showDevTools ? <IntegrationsCardLoader /> : null}
         {showDevTools ? <DevToolsCardLoader /> : null}
       </div>
     </div>
@@ -273,7 +282,8 @@ export const DashboardLoader = inject<TStore>(
   ({ userStore, settingsStore }) => ({
     isAdminOrOwner:
       (userStore.user?.isAdmin ?? false) || (userStore.user?.isOwner ?? false),
-    isGuest: userStore.user?.isVisitor ?? false,
+    aiServicesEnabled: settingsStore.aiServicesEnabled,
+    standalone: settingsStore.standalone,
     currentDeviceType: settingsStore.currentDeviceType,
     showDevTools: hasDevToolsAccess(
       userStore.user,

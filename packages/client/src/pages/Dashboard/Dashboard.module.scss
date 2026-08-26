@@ -377,15 +377,35 @@
 // inner padding.
 .modulesGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  // A column per card rather than a fixed four, so a row that has fewer cards
+  // than that stretches them to fill it instead of leaving an empty column -
+  // the quick actions above lay themselves out the same way. The count comes
+  // from `modulesGridStyle` (../utils) and is capped there; the narrower widths
+  // below override it with their own.
+  grid-template-columns: repeat(var(--modules-columns, 4), minmax(0, 1fr));
   gap: 16px;
 
   @container dashboard-content (max-width: 900px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    // An odd number of cards leaves the last one alone on its row; it takes the
+    // whole width rather than half of it, which is what the quick actions' own
+    // partial last row does. `:last-child:nth-child(odd)` is exactly "alone on
+    // the last row" for a two-column grid - the wider layout above needs no
+    // counterpart, since it gives every card a column of its own.
+    > :last-child:nth-child(odd) {
+      grid-column: span 2;
+    }
   }
 
   @container dashboard-content (max-width: 460px) {
     grid-template-columns: 1fr;
+
+    // One column: nothing to span, and spanning two would conjure an implicit
+    // second one.
+    > :last-child:nth-child(odd) {
+      grid-column: auto;
+    }
   }
 }
 

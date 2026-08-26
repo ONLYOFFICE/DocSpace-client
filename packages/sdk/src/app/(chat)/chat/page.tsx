@@ -33,25 +33,60 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export const PAGE_COUNT = 100;
+import { headers } from "next/headers";
 
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
-export const PATHNAME_HEADER = "x-pathname";
+import { AGENT_ID_HEADER, OAUTH_FRAME_HEADER } from "@/utils/constants";
+import { getSelf } from "@/api/people";
+import { getSettings } from "@/api/settings";
+import { logger } from "../../../../logger.mjs";
 
-export const OAUTH_FRAME_HEADER = "x-sdk-oauth-frame";
+import ChatPage from "./page.client";
+import ChatOAuthPage from "./page.oauth.client";
 
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
+export const dynamic = "force-dynamic";
 
-export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const LIBRARY_ID_HEADER = "x-sdk-config-library-id";
-export const AGENT_ID_HEADER = "x-sdk-config-agent-id";
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  logger.info("Chat page");
 
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
+  const hdrs = await headers();
+  const params = await searchParams;
 
-export const MAX_VISIBLE_EXTENSIONS = 5;
+  const agentId = hdrs.get(AGENT_ID_HEADER) || params.agentId || "";
+  const entityId = params.entityId || "";
+  const fileId = params.fileId || "";
+  const threadId = params.threadId || "";
+
+  if (hdrs.get(OAUTH_FRAME_HEADER)) {
+    return (
+      <ChatOAuthPage
+        agentId={agentId}
+        entityId={entityId}
+        fileId={fileId}
+        threadId={threadId}
+      />
+    );
+  }
+
+  const [user, portalSettings] = await Promise.all([getSelf(), getSettings()]);
+
+  const canUseAi = !!user && !user.isVisitor;
+  const isPortalAdmin = !!user && (!!user.isAdmin || !!user.isOwner);
+  const isStandalone =
+    typeof portalSettings === "object" && !!portalSettings?.standalone;
+
+  return (
+    <ChatPage
+      agentId={agentId}
+      entityId={entityId}
+      fileId={fileId}
+      threadId={threadId}
+      canUseAi={canUseAi}
+      isPortalAdmin={isPortalAdmin}
+      isStandalone={isStandalone}
+    />
+  );
+}

@@ -33,25 +33,32 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-export const PAGE_COUNT = 100;
+.chatRoot {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
-export const PATHNAME_HEADER = "x-pathname";
+  > :global(.theme-portal-base),
+  > :global(.theme-portal-dark) {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-height: 0;
+  }
+}
 
-export const OAUTH_FRAME_HEADER = "x-sdk-oauth-frame";
+.chat {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+}
 
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
-
-export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const LIBRARY_ID_HEADER = "x-sdk-config-library-id";
-export const AGENT_ID_HEADER = "x-sdk-config-agent-id";
-
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
-
-export const MAX_VISIBLE_EXTENSIONS = 5;
+.chatBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+}

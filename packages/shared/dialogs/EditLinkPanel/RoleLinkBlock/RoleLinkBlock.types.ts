@@ -43,6 +43,7 @@ export type AccessOption = {
   key: string;
   label: string;
   icon: string;
+  disabled?: boolean;
 };
 
 export interface RoleLinkBlockProps {
@@ -50,6 +51,8 @@ export interface RoleLinkBlockProps {
   accessOptions: AccessOption[];
   selectedOption: AccessOption;
   currentDeviceType: DeviceType;
+  /** Explains why the currently selected role blocks saving the link. */
+  warningText?: string;
 
   onSelect?: (option: TOption) => void;
 }

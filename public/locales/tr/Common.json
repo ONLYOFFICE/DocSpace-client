@@ -1801,6 +1801,7 @@
   "RoleContentCreatorDescription": "İçerik oluşturucular odada dosya oluşturabilir ve düzenleyebilir fakat kullanıcıları yönetemez veya ayarlara erişemez.",
   "RoleEditorDescription": "Mevcut dosyalarla işlemler: görüntüleme, düzenleme, form doldurma, gözden geçirme, yorum yapma.",
   "RoleForLink": "Bağlantı için rol",
+  "RoleForLinkNotAvailable": "Bu rol artık bu öğe için kullanılamıyor. Bağlantıyı kaydetmek için başka bir rol seçin.",
   "RoleFormFiller": "Form doldurucu",
   "RoleFormFillerDescription": "Mevcut dosyalarla işlemler: görüntüleme, form doldurma, gözden geçirme, yorum yapma.",
   "RoleFormFillerFormRoomDescription": "Form doldurucular formları doldurabilir ve Tamamlandı ve İşleniyor klasörlerinde yalnızca tamamlanmış/başlatılmış formlarını görüntüleyebilirler.",

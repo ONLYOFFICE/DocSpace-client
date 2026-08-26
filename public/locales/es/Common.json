@@ -1801,6 +1801,7 @@
   "RoleContentCreatorDescription": "Los creadores de contenido pueden crear y editar archivos en la sala, pero no pueden gestionar usuarios ni acceder a la configuración.",
   "RoleEditorDescription": "Operaciones con archivos existentes: visualización, edición, relleno de formularios, revisión, comentarios.",
   "RoleForLink": "Rol para el enlace",
+  "RoleForLinkNotAvailable": "Este rol ya no está disponible para este elemento. Seleccione otro rol para guardar el enlace.",
   "RoleFormFiller": "Rellenador de formularios",
   "RoleFormFillerDescription": "Operaciones con archivos existentes: visualización, relleno de formularios, revisión, comentarios.",
   "RoleFormFillerFormRoomDescription": "Los rellenadores de formularios pueden rellenar formularios y ver solo sus formularios rellenados/iniciados dentro de las carpetas Completado y En curso.",

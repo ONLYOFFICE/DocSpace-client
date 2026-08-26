@@ -108,6 +108,7 @@ import { useUploadToMyDocuments } from "./hooks/useUploadToMyDocuments";
 import { useCreateActions } from "./hooks/useCreateActions";
 import { useModuleItems } from "./hooks/useModuleItems";
 import { useMyFolderId } from "./hooks/useMyFolderId";
+import { modulesGridStyle } from "./utils";
 import styles from "./Dashboard.module.scss";
 
 type DashboardProps = ChatNoAccessStoreProps & {
@@ -132,6 +133,8 @@ type DashboardProps = ChatNoAccessStoreProps & {
   canOpenDocsConnect: boolean;
   /** Whether the portal's AI is set up, which agent creation also needs. */
   aiReady: boolean;
+  /** The portal-wide AI switch: with it off the AI Agents card is dropped. */
+  aiServicesEnabled: boolean;
   /** Names the plan in the apps subtitle: Startup when free, Business when paid. */
   isFreeTariff: boolean;
   /** Startup and Business are SaaS tariffs; standalone gets the neutral copy. */
@@ -159,6 +162,7 @@ const Dashboard = (props: DashboardProps) => {
     isAdminOrOwner,
     canOpenDocsConnect,
     aiReady,
+    aiServicesEnabled,
     isFreeTariff,
     standalone,
     isWarningRoomsDialog,
@@ -205,6 +209,7 @@ const Dashboard = (props: DashboardProps) => {
     isGuest,
     canCreateRooms,
     canCreateAgents: (aiReady || hasAiProfiles) && canCreateRooms,
+    aiServicesEnabled,
     isWarningRoomsDialog,
     setQuotaWarningDialogVisible,
   });
@@ -421,7 +426,10 @@ const Dashboard = (props: DashboardProps) => {
                       : t("Common:DiscoverAppsWorkspaceDescription")}
                   </Text>
                 </div>
-                <div className={styles.modulesGrid}>
+                <div
+                  className={styles.modulesGrid}
+                  style={modulesGridStyle(moduleItems.length)}
+                >
                   {moduleItems.map((mod) => (
                     <ModuleCard
                       key={mod.id}
@@ -540,6 +548,9 @@ const DashboardConnected = inject((stores: TStore) => {
       settingsStore.standalone,
     ),
     aiReady: settingsStore.aiConfig?.aiReady ?? false,
+    // The portal's own AI switch, which is a stronger statement than `aiReady`:
+    // AI that is off is not "not set up yet", it is not on offer at all.
+    aiServicesEnabled: settingsStore.aiServicesEnabled,
     // Undefined until the tariff loads; the plan is free by default, matching
     // the header's own fallback.
     isFreeTariff: currentQuotaStore.isFreeTariff ?? true,

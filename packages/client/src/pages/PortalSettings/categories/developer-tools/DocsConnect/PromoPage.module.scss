@@ -55,6 +55,13 @@
   color: var(--dev-tools-text);
 }
 
+.devPackNote {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
 .canceledText {
   display: flex;
   flex-direction: column;
@@ -89,10 +96,4 @@
   --link-text-decoration: underline;
   --link-hover-text-decoration: underline dashed;
   --link-hover-page-text-decoration: underline dashed;
-}
-
-.tooltipBox {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }

@@ -100,6 +100,7 @@ const Main = (props: {
           <Text fontSize="13px" fontWeight={400} lineHeight="20px">
             {t("Settings:DeveloperToolsDescription", {
               organizationName: getBrandName("OrganizationName"),
+              editorsName: getBrandName("ProductEditorsName"),
               productName: getBrandName("ProductName"),
             })}
           </Text>
@@ -127,7 +128,7 @@ const Main = (props: {
             })}
             url={apiBasicLink}
             color={globalColors.lightBlueMain}
-            linkTitle={t("Common:LearnMore")}
+            linkTitle={t("Common:ReadApiDocumentation")}
             isBlank
           />
           <Card

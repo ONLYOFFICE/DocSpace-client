@@ -3512,7 +3512,7 @@ packages:
         optional: true
 
   '@onlyoffice/docspace-sdk-js@file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz':
-    resolution: {integrity: sha512-F/9MLDkDy6fKz0yr67dgtxXqloPJhJLqi1mB442PJhjNW5q9LT7TA5bYWaHJNo0ulFtBkoMEWseKCufKEZXuvw==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
+    resolution: {integrity: sha512-dpo/BWsJqdJofieaA0yTV2Hq0u4yJUscPl+F0UDIrtdVoaYbrcz4BGfvUT0Z6TZ1xI7BmX4YtFc6vtf23jKQQw==, tarball: file:packages/client/onlyoffice-docspace-sdk-js-2.2.0.tgz}
     version: 2.2.0
     engines: {node: '>=18'}
 

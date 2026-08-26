@@ -153,7 +153,7 @@ export default class FilesHeaderOptionStore {
   private onClickCreateRoom = () => this.filesActionsStore.onClickCreateRoom();
 
   private createGroupHandle = () => {
-    const roomIds = this.filesStore.selection.map((room) => room.id as number);
+    const roomIds = this.filesStore.selection.map((room) => room.id);
     this.filesStore.resetSelections();
     this.dialogsStore.setEditRoomGroupsDialogVisible(true, roomIds);
   };

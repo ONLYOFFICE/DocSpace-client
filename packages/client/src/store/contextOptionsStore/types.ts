@@ -57,6 +57,9 @@ export type TFilesStore = {
   allFilesIsEditing: boolean;
   canConvertSelected: boolean;
   roomsFilter: { groupId?: string | null } | null;
+  // `searchArea` may be the raw query string when the filter was parsed
+  // from the URL (FilesFilter.getFilter does not coerce it).
+  filter: { searchArea?: number | string | null } | null;
   addActiveItems: (
     files?: (number | string)[] | null,
     folders?: (number | string)[] | null,

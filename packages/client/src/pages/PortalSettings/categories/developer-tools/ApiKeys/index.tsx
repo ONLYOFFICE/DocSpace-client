@@ -176,11 +176,6 @@ const ApiKeys = (props: ApiKeysProps) => {
           {t("Settings:ApiKeysShareDescription")}
         </Text>
 
-        <Text
-          className={classNames(styles.apiKeysText, styles.apiKeysUsageText)}
-        >
-          {t("Settings:ApiKeyViewUsage")}
-        </Text>
         {apiKeysUrl ? (
           <Link
             isHovered

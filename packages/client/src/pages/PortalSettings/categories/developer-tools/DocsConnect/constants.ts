@@ -44,6 +44,14 @@ export type TDocsConnectTab = "statistics" | "settings" | "preview";
 // so this count cannot be derived from the rendered list.
 export const MORE_CONNECTORS_COUNT = 20;
 
+export const DOCS_CONNECT_LINKS = {
+  connectors: "https://www.onlyoffice.com/marketplace",
+  automationApi: "https://www.onlyoffice.com/automation-api",
+  branding: "https://www.onlyoffice.com/white-label",
+  apiDocs:
+    "https://api.onlyoffice.com/docs/docs-api/get-started/basic-concepts/",
+} as const;
+
 export const DOCS_CONNECT_PREVIEW = {
   editorType: "word",
   fileType: "docx",

@@ -71,6 +71,7 @@ export type CommonData = {
   initialTotal?: number;
   initialFolders?: TFolder[];
   initialSection?: FormsSection;
+  standalone?: boolean;
 };
 
 export default function useInitCommonStores(commonData: CommonData): boolean {

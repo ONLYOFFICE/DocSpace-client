@@ -134,7 +134,6 @@
   "TotalMonthly": "Totale mensile",
   "TrialAvailable": "È disponibile una prova gratuita di un mese. Non è richiesta la carta di credito.",
   "TrialBannerDescription": "Il tuo periodo di prova scade tra {{count}} giorni — sottoscrivi un abbonamento per mantenere l'accesso ininterrotto.",
-  "TrialBannerDescriptionSecond": "Se paghi oggi, i tuoi dati vengono salvati e il primo addebito avviene dopo la scadenza del periodo di prova.",
   "TrialBannerTitle": "Stai utilizzando una prova gratuita di {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} giorni rimanenti",
   "TrialDaysRemainingExpired": "{{count}} giorni rimanenti",

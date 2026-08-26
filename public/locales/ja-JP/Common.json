@@ -1069,7 +1069,6 @@
   "GuestCantCreateOrUploadTitle": "ゲストはファイルを作成またはアップロードできません。",
   "GuestInvitation": "<1>{{displayName}}</1>さんがゲストの連絡先をあなたと共有したいと思っています。",
   "Guests": "ゲスト",
-  "Guide": "ガイド",
   "HasFullAccess": "ルームへのフルアクセスを持っています",
   "Header": "ヘッダー",
   "HeaderDescription": "モバイル版でヘッダーを無効にして、ワークスペースセクションへのアクセスを制限することができます。デスクトップ版で左メニューを無効にするのと同じです。",

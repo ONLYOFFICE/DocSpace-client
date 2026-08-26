@@ -134,7 +134,6 @@
   "TotalMonthly": "Totaal per maand",
   "TrialAvailable": "Er is een gratis proefperiode van één maand beschikbaar. Geen creditcard vereist.",
   "TrialBannerDescription": "Uw proefperiode verloopt over {{count}} dagen — neem een abonnement om ononderbroken toegang te behouden.",
-  "TrialBannerDescriptionSecond": "Als u vandaag betaalt, worden uw gegevens bewaard en vindt de eerste afschrijving plaats nadat de proefperiode is verlopen.",
   "TrialBannerTitle": "U gebruikt een gratis proefperiode van {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} dagen resterend",
   "TrialDaysRemainingExpired": "{{count}} dagen resterend",

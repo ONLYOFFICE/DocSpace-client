@@ -1069,7 +1069,6 @@
   "GuestCantCreateOrUploadTitle": "访客无法创建或上传文件。",
   "GuestInvitation": "<1>{{displayName}}</1>想要与您分享该访客的联系信息。",
   "Guests": "访客",
-  "Guide": "指南",
   "HasFullAccess": "有完整的房间访问权限",
   "Header": "页眉",
   "HeaderDescription": "您可以在移动版本中禁用标题以限制对工作区部分的访问（就像在桌面版本中禁用左侧菜单一样）。",

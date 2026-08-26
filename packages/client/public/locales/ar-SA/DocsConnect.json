@@ -134,7 +134,6 @@
   "TotalMonthly": "الإجمالي الشهري",
   "TrialAvailable": "تتوفر تجربة مجانية لمدة شهر واحد. لا حاجة إلى بطاقة ائتمان.",
   "TrialBannerDescription": "تنتهي فترتك التجريبية خلال {{count}} أيام — اشترك للحفاظ على وصول غير منقطع.",
-  "TrialBannerDescriptionSecond": "إذا دفعت اليوم، سيتم حفظ بياناتك، وستتم أول عملية خصم بعد انتهاء الفترة التجريبية.",
   "TrialBannerTitle": "أنت تستخدم تجربة مجانية من {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} يوم متبقٍ",
   "TrialDaysRemainingExpired": "{{count}} يوم متبقٍ",

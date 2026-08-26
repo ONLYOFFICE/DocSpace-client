@@ -134,7 +134,6 @@
   "TotalMonthly": "월 합계",
   "TrialAvailable": "1개월 무료 체험을 이용할 수 있습니다. 신용카드가 필요하지 않습니다.",
   "TrialBannerDescription": "무료 체험 기간이 {{count}}일 후 만료됩니다 — 계속 이용하려면 구독하세요.",
-  "TrialBannerDescriptionSecond": "오늘 결제하시면 데이터가 저장되며, 첫 청구는 무료 체험 기간이 끝난 후에 이루어집니다.",
   "TrialBannerTitle": "{{organizationName}} Docs Connect의 무료 체험판을 사용 중입니다",
   "TrialDaysRemaining": "약 {{count}}일 남음",
   "TrialDaysRemainingExpired": "{{count}}일 남음",

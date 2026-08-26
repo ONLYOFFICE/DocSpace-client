@@ -1069,7 +1069,6 @@
   "GuestCantCreateOrUploadTitle": "Konuklar dosya oluşturamaz veya yükleyemez.",
   "GuestInvitation": "<1>{{displayName}}</1> sizinle konuğun iletişim bilgilerini paylaşmak istiyor.",
   "Guests": "Konuklar",
-  "Guide": "Kılavuz",
   "HasFullAccess": "Odaya tam erişimi var",
   "Header": "Üst Bilgi",
   "HeaderDescription": "çalışma alanı bölümlerine erişimi sınırlamak için mobil sürümde başlığı devre dışı bırakabilirsiniz (masaüstü sürümünde sol menüyü devre dışı bırakmak gibi).",

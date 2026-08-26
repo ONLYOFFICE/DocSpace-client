@@ -134,7 +134,6 @@
   "TotalMonthly": "Ընդհանուր ամսական",
   "TrialAvailable": "Հասանելի է մեկ ամսվա անվճար փորձնաշրջան: Բանկային քարտ պահանջվում չէ:",
   "TrialBannerDescription": "Ձեր փորձնաշրջանն ավարտվում է {{count}} օրից: Բաժանորդագրվեք՝ անընդհատ հասանելիությունը պահպանելու համար:",
-  "TrialBannerDescriptionSecond": "Եթե վճարեք այսօր, ձեր տվյալները կպահպանվեն, և առաջին գանձումը տեղի կունենա փորձնաշրջանի ավարտից հետո:",
   "TrialBannerTitle": "Դուք օգտագործում եք {{organizationName}} Docs Connect-ի անվճար փորձնաշրջանը",
   "TrialDaysRemaining": "~ {{count}} օր մնացել է",
   "TrialDaysRemainingExpired": "{{count}} օր մնացել է",

@@ -213,6 +213,10 @@ export default async function FormsServerLayout({
         initialTotal,
         initialFolders,
         initialSection,
+        standalone:
+          !!portalSettings &&
+          typeof portalSettings !== "string" &&
+          Boolean(portalSettings.standalone),
       }}
     >
       {children}

@@ -134,7 +134,6 @@
   "TotalMonthly": "Σύνολο μηνιαίως",
   "TrialAvailable": "Διατίθεται δωρεάν δοκιμή ενός μήνα. Δεν απαιτείται πιστωτική κάρτα.",
   "TrialBannerDescription": "Η δοκιμαστική περίοδός σας λήγει σε {{count}} ημέρες — εγγραφείτε σε συνδρομή για να διατηρήσετε αδιάλειπτη πρόσβαση.",
-  "TrialBannerDescriptionSecond": "Αν πληρώσετε σήμερα, τα δεδομένα σας διατηρούνται και η πρώτη χρέωση πραγματοποιείται μετά τη λήξη της δοκιμαστικής περιόδου.",
   "TrialBannerTitle": "Χρησιμοποιείτε τη δωρεάν δοκιμή του {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} ημέρες απομένουν",
   "TrialDaysRemainingExpired": "{{count}} ημέρες απομένουν",

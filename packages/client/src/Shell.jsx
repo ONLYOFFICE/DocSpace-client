@@ -997,6 +997,7 @@ const ShellWrapper = inject(
     treeFoldersStore,
     aiRoomStore,
     paymentStore,
+    accessRightsStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -1134,10 +1135,20 @@ const ShellWrapper = inject(
       // its subfolders) the room id wins, elsewhere the currently selected
       // folder id is used. Only when nothing is selected yet does the chat
       // stay unscoped (entityId === undefined).
+      // Exception: an AI agent room opened without the UseChat right (a
+      // foreign agent viewed by an admin in view-only mode) must not scope
+      // the chat stores to that room — every scoped hydration / rescope
+      // request (threads, model assignment, tool servers, preferences) is
+      // rejected with 403 for such a viewer and lands in the console as an
+      // unhandled error (Bug 83230). Stay on the global scope instead: the
+      // chat pane itself is already replaced by the view-only stub
+      // (AIAgentView gates on the same accessRightsStore.canUseChat).
       agentEntityId:
-        selectedFolderStore.rootRoomId || selectedFolderStore.id
-          ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
-          : undefined,
+        selectedFolderStore.isAIRoom && !accessRightsStore.canUseChat
+          ? undefined
+          : selectedFolderStore.rootRoomId || selectedFolderStore.id
+            ? String(selectedFolderStore.rootRoomId || selectedFolderStore.id)
+            : undefined,
       // Inside AI agent rooms the model is fixed by the agent's assigned
       // profile. It is shown in the composer as a read-only label, or — for
       // users who may edit the room — an interactive picker to change it.

@@ -134,7 +134,6 @@
   "TotalMonthly": "ລວມລາຍເດືອນ",
   "TrialAvailable": "ມີໄລຍະທົດລອງໃຊ້ຟຣີໜຶ່ງເດືອນ. ບໍ່ຈຳເປັນຕ້ອງໃຊ້ບັດເຄຣດິດ.",
   "TrialBannerDescription": "ໄລຍະທົດລອງໃຊ້ຂອງທ່ານຈະໝົດອາຍຸໃນ {{count}} ມື້ — ສະໝັກໃຊ້ເພື່ອຮັກສາການເຂົ້າເຖິງແບບບໍ່ຢຸດຊະງັກ.",
-  "TrialBannerDescriptionSecond": "ຖ້າທ່ານຈ່າຍເງິນມື້ນີ້, ຂໍ້ມູນຂອງທ່ານຈະຖືກບັນທຶກໄວ້, ແລະ ການເກັບເງິນຄັ້ງທຳອິດຈະເກີດຂຶ້ນຫຼັງຈາກໄລຍະທົດລອງໃຊ້ໝົດອາຍຸ.",
   "TrialBannerTitle": "ທ່ານກຳລັງໃຊ້ໄລຍະທົດລອງໃຊ້ຟຣີຂອງ {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ ເຫຼືອ {{count}} ມື້",
   "TrialDaysRemainingExpired": "ເຫຼືອ {{count}} ມື້",

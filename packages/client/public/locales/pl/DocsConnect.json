@@ -132,7 +132,6 @@
   "TotalMonthly": "Razem miesięcznie",
   "TrialAvailable": "Dostępny jest bezpłatny miesięczny okres próbny. Karta kredytowa nie jest wymagana.",
   "TrialBannerDescription": "Twój okres próbny wygasa za {{count}} dni — wykup subskrypcję, aby zachować nieprzerwany dostęp.",
-  "TrialBannerDescriptionSecond": "Jeśli zapłacisz dzisiaj, Twoje dane zostaną zachowane, a pierwsza opłata zostanie naliczona po zakończeniu okresu próbnego.",
   "TrialBannerTitle": "Korzystasz z bezpłatnego okresu próbnego {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ Pozostało {{count}} dni",
   "TrialDaysRemainingExpired": "Pozostało {{count}} dni",

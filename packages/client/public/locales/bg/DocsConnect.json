@@ -132,7 +132,6 @@
   "TotalMonthly": "Общо месечно",
   "TrialAvailable": "Наличен е безплатен едномесечен пробен период. Не се изисква кредитна карта.",
   "TrialBannerDescription": "Пробният ви период изтича след {{count}} дни — абонирайте се, за да запазите непрекъснат достъп.",
-  "TrialBannerDescriptionSecond": "Ако платите днес, данните ви ще бъдат запазени, а първото таксуване ще се извърши след изтичане на пробния период.",
   "TrialBannerTitle": "Използвате безплатен пробен период на {{organizationName}} Docs Connect",
   "TrialDaysRemaining": "~ {{count}} дни остават",
   "TrialDaysRemainingExpired": "{{count}} дни остават",

@@ -33,20 +33,42 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-.styledContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+"use client";
 
-  :global(.description) {
-    max-width: 700px;
-    margin: 0 0 8px;
-    line-height: 20px;
-    color: var(--settings-common-description-color);
-  }
+import { useCallback } from "react";
 
-  :global(.add-button) {
-    width: fit-content;
-    margin-bottom: 12px;
-  }
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { useStores } from "@docspace/ui-kit/ai-agent/providers";
+import { useOpenAiChat } from "@docspace/ui-kit/ai-agent/ai-chat-panel";
+import {
+  attachFilesToChat,
+  getOnlyofficeFileType,
+} from "@docspace/ui-kit/ai-agent/providers/files";
+import { FileType } from "@docspace/shared/enums";
+import type { TFile } from "@docspace/shared/api/files/types";
+
+export default function useAskAI() {
+  const { useAttachmentsStore } = useStores();
+  const openChat = useOpenAiChat();
+
+  return useCallback(
+    (file: TFile) => {
+      openChat();
+
+      const input = {
+        path: String(file.id),
+        title: file.title,
+        type: getOnlyofficeFileType(file.fileExst || file.title),
+        content: "",
+      };
+
+      const imageIndices =
+        file.fileType === FileType.Image ? new Set([0]) : new Set<number>();
+
+      attachFilesToChat(useAttachmentsStore, [input], imageIndices).catch((e) =>
+        toastr.error(e as string),
+      );
+    },
+    [openChat, useAttachmentsStore],
+  );
 }

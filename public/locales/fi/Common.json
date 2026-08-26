@@ -1068,7 +1068,6 @@
   "GuestCantCreateOrUploadTitle": "Vieraat eivät voi luoda tai ladata tiedostoja.",
   "GuestInvitation": "<1>{{displayName}}</1> haluaa jakaa sinulle vieraan yhteystiedot.",
   "Guests": "Vieraat",
-  "Guide": "Opas",
   "HasFullAccess": "Hänellä on rajoittamaton pääsy huoneeseen",
   "Header": "Ylätunniste",
   "HeaderDescription": "Voit poistaa ylätunnisteen käytöstä mobiiliversiossa rajoittaaksesi pääsyä työtilan osioihin (samoin kuin vasemman valikon poistaminen työpöytäversiossa).",

@@ -132,7 +132,6 @@
   "TotalMonthly": "每月总计",
   "TrialAvailable": "提供为期一个月的免费试用，无需信用卡。",
   "TrialBannerDescription": "您的试用期将在 {{count}} 天后到期——请订阅以保持不间断访问。",
-  "TrialBannerDescriptionSecond": "如果您今天付款，您的数据将被保留，首次扣费将在试用期结束后进行。",
   "TrialBannerTitle": "您正在使用 {{organizationName}} Docs Connect 的免费试用版",
   "TrialDaysRemaining": "约剩余 {{count}} 天",
   "TrialDaysRemainingExpired": "剩余 {{count}} 天",

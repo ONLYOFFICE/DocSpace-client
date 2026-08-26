@@ -65,3 +65,53 @@ describe("proxy — /chat", () => {
     expect(requestHeader(response!, "x-sdk-config-locale")).toBe("fr");
   });
 });
+
+describe("proxy — /ai-agents", () => {
+  test("matcher includes the agents routes", () => {
+    expect(config.matcher).toContain("/ai-agents");
+    expect(config.matcher).toContain("/ai-agents/:path*");
+  });
+
+  test("forwards the agent room id from the path and the query as filter", async () => {
+    const response = await proxy(makeRequest("/ai-agents/42?tab=knowledge"));
+
+    expect(requestHeader(response!, AGENT_ID_HEADER)).toBe("42");
+
+    const filter = new URLSearchParams(
+      requestHeader(response!, FILTER_HEADER) ?? "",
+    );
+    expect(filter.get("tab")).toBe("knowledge");
+  });
+
+  test.each(["/ai-agents", "/ai-agents/recent", "/ai-agents/settings/servers"])(
+    "sets an empty agent id header on the section route %s",
+    async (path) => {
+      const response = await proxy(makeRequest(path));
+
+      expect(requestHeader(response!, AGENT_ID_HEADER)).toBe("");
+      expect(requestHeader(response!, FILTER_HEADER)).toBe("");
+    },
+  );
+
+  test("ignores an agentId query param — the path is the source of truth", async () => {
+    const response = await proxy(makeRequest("/ai-agents?agentId=42"));
+
+    expect(requestHeader(response!, AGENT_ID_HEADER)).toBe("");
+  });
+
+  test("does not set the agent id header on the rooms route", async () => {
+    const response = await proxy(makeRequest("/rooms/42"));
+
+    expect(requestHeader(response!, AGENT_ID_HEADER)).toBeNull();
+    expect(requestHeader(response!, FILTER_HEADER)).toBe("");
+  });
+
+  test("keeps the shared theme/locale headers on the agents route", async () => {
+    const response = await proxy(
+      makeRequest("/ai-agents/42?theme=dark&locale=fr"),
+    );
+
+    expect(requestHeader(response!, "x-sdk-config-theme")).toBe("Dark");
+    expect(requestHeader(response!, "x-sdk-config-locale")).toBe("fr");
+  });
+});

@@ -36,6 +36,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
 
 import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
@@ -58,6 +59,7 @@ import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
+import { AI_SETTINGS_URL } from "../../helpers/constants";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { isAIAgents } from "../../helpers/plugins/utils";
 
@@ -79,7 +81,10 @@ const GlobalEvents = ({
   userId,
   getIsAIReady,
   standalone,
+  canOpenAISettings,
 }) => {
+  const navigate = useNavigate();
+
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
     id: null,
@@ -243,6 +248,16 @@ const GlobalEvents = ({
       const isAIReady = standalone ? hasAiProfiles : getIsAIReady();
 
       if (!isAIReady) {
+        // Standalone connects its own AI provider in the settings: there is no
+        // service to switch on and no wallet to top up, so the activation
+        // dialog would offer an action that does not exist there. Whoever
+        // cannot open the settings still gets it - that branch only tells them
+        // to contact the admin.
+        if (standalone && canOpenAISettings) {
+          navigate(AI_SETTINGS_URL);
+          return;
+        }
+
         setActivateAIProps({
           visible: true,
           parentId: e.detail?.parentId,
@@ -268,7 +283,14 @@ const GlobalEvents = ({
         },
       });
     },
-    [standalone, getIsAIReady, hasAiProfiles, setCreateAgentDialogProps],
+    [
+      standalone,
+      canOpenAISettings,
+      navigate,
+      getIsAIReady,
+      hasAiProfiles,
+      setCreateAgentDialogProps,
+    ],
   );
 
   const onEditAgent = useCallback((e) => {
@@ -623,6 +645,9 @@ export default inject(
       userId: userStore?.user?.id,
       getIsAIReady: () => paymentStore.isAIReady,
       standalone: settingsStore.standalone,
+      canOpenAISettings: Boolean(
+        userStore?.user?.isAdmin || userStore?.user?.isOwner,
+      ),
     };
   },
 )(observer(GlobalEvents));

@@ -242,15 +242,18 @@ export const TariffTitleContainer = ({
         isTrial ||
         !isLicenseDateExpired ? (
           <div className={styles.title}>
-            {getDescription()}{" "}
+            {getDescription()}
             {!isLicenseDateExpired ? (
-              <Text
-                fontSize="13px"
-                as="span"
-                dataTestId="license_expires_date_text"
-              >
-                {expiresDate()}
-              </Text>
+              <>
+                {" "}
+                <Text
+                  fontSize="13px"
+                  as="span"
+                  dataTestId="license_expires_date_text"
+                >
+                  {expiresDate()}
+                </Text>
+              </>
             ) : null}
           </div>
         ) : null}

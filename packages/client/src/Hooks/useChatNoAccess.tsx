@@ -39,10 +39,9 @@ import { useHasAiProfiles } from "SRC_DIR/Hooks/useHasAiProfiles";
 
 import ClientSimpleTopUpDialog from "SRC_DIR/components/EmptyContainer/sub-components/EmptyViewContainer/ClientSimpleTopUpDialog";
 import { useAIActivation } from "SRC_DIR/Hooks/useAIActivation";
+import { AI_SETTINGS_URL } from "SRC_DIR/helpers/constants";
 import type PaymentStore from "SRC_DIR/store/PaymentStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-
-const AI_SETTINGS_URL = "/portal-settings/ai-settings";
 
 export type ChatNoAccessStoreProps = {
   standalone?: SettingsStore["standalone"];

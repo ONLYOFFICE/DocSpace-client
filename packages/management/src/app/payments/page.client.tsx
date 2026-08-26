@@ -141,12 +141,13 @@ const PaymentsPage = ({
     }
   };
 
+  const timezone = typeof window !== "undefined" ? window.timezone : "UTC";
+
   useEffect(() => {
-    const timezone = typeof window !== "undefined" ? window.timezone : "UTC";
     setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, timezone));
     setPaymentDate(getPaymentDate(dueDate, timezone, i18n.language));
     setTrialDaysLeft(getDaysLeft(dueDate));
-  }, [dueDate, i18n.language]);
+  }, [dueDate, timezone, i18n.language]);
 
   return (
     <div className={styles.wrapper}>
@@ -171,7 +172,7 @@ const PaymentsPage = ({
           isGracePeriod={isGracePeriod}
           isNotPaidPeriod={isNotPaidPeriod}
           gracePeriodEndDate={formatDateLocalized(
-            parseToDateTime(gracePeriodEndDate)?.setZone(window.timezone),
+            parseToDateTime(gracePeriodEndDate)?.setZone(timezone),
             "DATE_FULL",
             { locale: i18n.language },
           )}

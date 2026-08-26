@@ -403,11 +403,26 @@ const InvitePanel = ({
       />
     );
 
+    // Community has no tariff to upgrade, but lowering the invited roles is
+    // still a way out - keep that half of the sentence.
+    const getHint = () => {
+      if (isRoomAdmin) return null;
+      if (isCommunity) return t("Common:ChangeUserPermissionsOnly");
+
+      return paymentLink;
+    };
+
+    const hint = getHint();
+
     return (
       <>
         {error}
-        &nbsp;
-        {!isRoomAdmin && !isCommunity ? paymentLink : null}
+        {hint ? (
+          <>
+            &nbsp;
+            {hint}
+          </>
+        ) : null}
       </>
     );
   };

@@ -43,6 +43,7 @@ export interface RoomsContentProps {
   maxCountRoomsByQuota: number;
   usedRoomsCount: number;
   isPaymentPageAvailable: boolean;
+  isCommunity?: boolean;
   isArchiveFolderRoot: boolean;
 }
 
@@ -51,16 +52,22 @@ const RoomsContent = ({
   maxCountRoomsByQuota,
   usedRoomsCount,
   isPaymentPageAvailable,
+  isCommunity,
   isArchiveFolderRoot,
 }: RoomsContentProps) => {
   const { t } = useTranslation(["Payments", "Common", "MainBar"]);
 
-  const chooseNewPlan = (
-    <Text>
-      {isPaymentPageAvailable
-        ? t("ChooseNewPlan")
-        : t("MainBar:ContactToUpgradeTariff")}
-    </Text>
+  // Community has no plan to switch to and nobody to ask for one, so the
+  // dialog stops at the limit itself.
+  const chooseNewPlan = isCommunity ? null : (
+    <>
+      <br />
+      <Text>
+        {isPaymentPageAvailable
+          ? t("ChooseNewPlan")
+          : t("MainBar:ContactToUpgradeTariff")}
+      </Text>
+    </>
   );
 
   if (isRoomsTariffLimit)
@@ -77,7 +84,6 @@ const RoomsContent = ({
             ? t("NotPossibleRoomRestoring")
             : t("NewRoomWillExceedLimit")}
         </Text>
-        <br />
         {chooseNewPlan}
       </>
     );
@@ -92,14 +98,18 @@ const RoomsContent = ({
           maxValue: maxCountRoomsByQuota,
         })}
       </Text>
-      <br />
       {chooseNewPlan}
     </>
   );
 };
 
 export default inject(
-  ({ currentQuotaStore, authStore, treeFoldersStore }: TStore) => {
+  ({
+    currentQuotaStore,
+    authStore,
+    treeFoldersStore,
+    currentTariffStatusStore,
+  }: TStore) => {
     const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
       currentQuotaStore;
 
@@ -112,6 +122,7 @@ export default inject(
       maxCountRoomsByQuota,
       usedRoomsCount,
       isPaymentPageAvailable,
+      isCommunity: currentTariffStatusStore.isCommunity,
       isArchiveFolderRoot,
     };
   },

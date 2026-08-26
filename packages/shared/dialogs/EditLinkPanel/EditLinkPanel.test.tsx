@@ -240,6 +240,25 @@ describe("<EditLinkPanel />", () => {
     await waitFor(() => expect(getSaveButton()).toBeDisabled());
   });
 
+  it("still explains the blocked save when no role is available at all", async () => {
+    // A link blocked by the admin comes back with no available rights, so the
+    // revoked access is the only option there is - the block has to render
+    // anyway, or the disabled save button has no visible reason.
+    renderPanel({ ExternalLink: [] }, ShareAccessRights.ReadOnly);
+
+    expect(await screen.findByTestId("stub_role_link_block")).toBeInTheDocument();
+    expect(screen.getByTestId("stub_role_warning")).toHaveTextContent(
+      "Common:RoleForLinkNotAvailable",
+    );
+    expect(screen.getByTestId("stub_role_selected")).toHaveTextContent(
+      "viewing",
+    );
+
+    await userEvent.click(screen.getByTestId("stub_rename_link"));
+
+    await waitFor(() => expect(getSaveButton()).toBeDisabled());
+  });
+
   it("allows saving once an available role is selected", async () => {
     renderPanel(
       { ExternalLink: [ShareRights.Editing] },

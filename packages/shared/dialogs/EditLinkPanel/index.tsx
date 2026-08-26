@@ -531,7 +531,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         </ModalDialog.Header>
         <ModalDialog.Body>
           <div className={`${styles.editLinkBodyContent} edit-link_body`}>
-            {accessOptions.options.length > 1 ? (
+            {/* A revoked access is worth showing even when it is the only
+                option left: the block carries the warning that explains why
+                the save button stays disabled. */}
+            {accessOptions.options.length > 1 || isRevokedAccess ? (
               <RoleLinkBlock
                 t={t}
                 accessOptions={accessOptions.options}

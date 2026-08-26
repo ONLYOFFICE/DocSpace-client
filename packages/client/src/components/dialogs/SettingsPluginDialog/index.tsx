@@ -155,7 +155,7 @@ const SettingsPluginDialog = ({
             t={t}
             plugin={plugin}
             withDelete={withDelete}
-            withSeparator={!!customSettingsProps?.children}
+            withSeparator={!!component || !!customSettingsProps?.children}
           />
           {withDelete ? (
             <Button

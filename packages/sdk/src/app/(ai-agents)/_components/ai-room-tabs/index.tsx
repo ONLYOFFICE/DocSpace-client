@@ -114,7 +114,7 @@ const AiRoomTabs = () => {
     // SectionBody, which visually nudges the surrounding navigation.
     // We just sync the URL bar for deep-link / refresh purposes — the
     // frame bridge re-emits `onNavigate` on the MobX `currentTab` change.
-    const nextUrl = `/ai-agents/${roomId}?${params.toString()}`;
+    const nextUrl = `${window.location.pathname}?${params.toString()}`;
     window.history.replaceState(null, "", nextUrl);
 
     // Tabs with `withAnimation` starts the indicator bar via

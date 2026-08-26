@@ -33,38 +33,60 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import { TTranslation } from "@docspace/shared/types";
+import { headers } from "next/headers";
 
-import {
-  ICover,
-  ILogo,
-  IUpdateRoomGroup,
-  ICreateRoomGroup,
-} from "./EditRoomGroupsDialog.types";
+import { AGENT_ID_HEADER, OAUTH_FRAME_HEADER } from "@/utils/constants";
+import { getSelf } from "@/api/people";
+import { getSettings } from "@/api/settings";
+import { logger } from "../../../../logger.mjs";
 
-export interface CoverDialogProps {
-  getCovers: () => void;
-  covers: ICover[] | null;
-  currentColorScheme: TColorScheme;
-  arrIdsRooms: (string | number)[] | null;
-  setIsOpenGroupIcon: (visible: boolean) => void;
-  onCloseEditRoomGroupsDialog: () => void;
-  setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
-  getAllRoomGroups: () => Promise<void>;
-  editingGroupId: string | null;
-  setEditingGroupId: (id: string | null) => void;
-  updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
-  updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
-  currentGroupIcon: ILogo | string | null;
-  currentGroupName: string | null;
-  isOpenedFromContextMenu?: boolean;
-}
+import ChatPage from "./page.client";
+import ChatOAuthPage from "./page.oauth.client";
 
-export interface SelectIconProps {
-  t: TTranslation;
-  setIcon: (icon: ICover | string | null) => void;
-  covers: ICover[] | null;
-  $currentColorScheme: TColorScheme;
-  coverId: string;
+export const dynamic = "force-dynamic";
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  logger.info("Chat page");
+
+  const hdrs = await headers();
+  const params = await searchParams;
+
+  const agentId = hdrs.get(AGENT_ID_HEADER) || params.agentId || "";
+  const entityId = params.entityId || "";
+  const fileId = params.fileId || "";
+  const threadId = params.threadId || "";
+
+  if (hdrs.get(OAUTH_FRAME_HEADER)) {
+    return (
+      <ChatOAuthPage
+        agentId={agentId}
+        entityId={entityId}
+        fileId={fileId}
+        threadId={threadId}
+      />
+    );
+  }
+
+  const [user, portalSettings] = await Promise.all([getSelf(), getSettings()]);
+
+  const canUseAi = !!user && !user.isVisitor;
+  const isPortalAdmin = !!user && (!!user.isAdmin || !!user.isOwner);
+  const isStandalone =
+    typeof portalSettings === "object" && !!portalSettings?.standalone;
+
+  return (
+    <ChatPage
+      agentId={agentId}
+      entityId={entityId}
+      fileId={fileId}
+      threadId={threadId}
+      canUseAi={canUseAi}
+      isPortalAdmin={isPortalAdmin}
+      isStandalone={isStandalone}
+    />
+  );
 }

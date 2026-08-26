@@ -33,38 +33,22 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import { TTranslation } from "@docspace/shared/types";
+"use client";
 
-import {
-  ICover,
-  ILogo,
-  IUpdateRoomGroup,
-  ICreateRoomGroup,
-} from "./EditRoomGroupsDialog.types";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
-export interface CoverDialogProps {
-  getCovers: () => void;
-  covers: ICover[] | null;
-  currentColorScheme: TColorScheme;
-  arrIdsRooms: (string | number)[] | null;
-  setIsOpenGroupIcon: (visible: boolean) => void;
-  onCloseEditRoomGroupsDialog: () => void;
-  setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
-  getAllRoomGroups: () => Promise<void>;
-  editingGroupId: string | null;
-  setEditingGroupId: (id: string | null) => void;
-  updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
-  updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
-  currentGroupIcon: ILogo | string | null;
-  currentGroupName: string | null;
-  isOpenedFromContextMenu?: boolean;
-}
-
-export interface SelectIconProps {
-  t: TTranslation;
-  setIcon: (icon: ICover | string | null) => void;
-  covers: ICover[] | null;
-  $currentColorScheme: TColorScheme;
-  coverId: string;
+export default function Loading() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <Loader type={LoaderTypes.dualRing} size="40px" />
+    </div>
+  );
 }

@@ -70,10 +70,6 @@ import type DialogsStore from "./DialogsStore";
 
 type DialogsStoreWithRoomGroups = DialogsStore & {
   roomGroups?: TRoomGroup[];
-  setEditRoomGroupsDialogVisible: (
-    visible: boolean,
-    roomIds?: number[] | null,
-  ) => void;
 };
 
 export default class FilesHeaderOptionStore {
@@ -153,7 +149,7 @@ export default class FilesHeaderOptionStore {
   private onClickCreateRoom = () => this.filesActionsStore.onClickCreateRoom();
 
   private createGroupHandle = () => {
-    const roomIds = this.filesStore.selection.map((room) => room.id as number);
+    const roomIds = this.filesStore.selection.map((room) => room.id!);
     this.filesStore.resetSelections();
     this.dialogsStore.setEditRoomGroupsDialogVisible(true, roomIds);
   };

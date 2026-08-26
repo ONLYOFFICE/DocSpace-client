@@ -33,38 +33,55 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import { TTranslation } from "@docspace/shared/types";
+"use client";
 
-import {
-  ICover,
-  ILogo,
-  IUpdateRoomGroup,
-  ICreateRoomGroup,
-} from "./EditRoomGroupsDialog.types";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-export interface CoverDialogProps {
-  getCovers: () => void;
-  covers: ICover[] | null;
-  currentColorScheme: TColorScheme;
-  arrIdsRooms: (string | number)[] | null;
-  setIsOpenGroupIcon: (visible: boolean) => void;
-  onCloseEditRoomGroupsDialog: () => void;
-  setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
-  getAllRoomGroups: () => Promise<void>;
-  editingGroupId: string | null;
-  setEditingGroupId: (id: string | null) => void;
-  updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
-  updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
-  currentGroupIcon: ILogo | string | null;
-  currentGroupName: string | null;
-  isOpenedFromContextMenu?: boolean;
-}
+const containerStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  height: "100%",
+  gap: "16px",
+  fontFamily: "'Open Sans', sans-serif",
+  color: "var(--text-color)",
+};
 
-export interface SelectIconProps {
-  t: TTranslation;
-  setIcon: (icon: ICover | string | null) => void;
-  covers: ICover[] | null;
-  $currentColorScheme: TColorScheme;
-  coverId: string;
+const buttonStyle: React.CSSProperties = {
+  padding: "8px 24px",
+  border: "1px solid var(--checkbox-border-color)",
+  borderRadius: "6px",
+  backgroundColor: "var(--button-background-base)",
+  cursor: "pointer",
+  fontSize: "14px",
+  lineHeight: "20px",
+  color: "var(--text-color)",
+};
+
+export default function ChatError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  const { t } = useTranslation("Common");
+
+  useEffect(() => {
+    console.error("Chat error boundary caught:", error);
+  }, [error]);
+
+  return (
+    <div style={containerStyle}>
+      <p style={{ margin: 0, fontSize: "14px" }}>
+        {t("Common:SomethingWentWrong")}
+      </p>
+      <button type="button" style={buttonStyle} onClick={reset}>
+        {t("Common:TryAgain")}
+      </button>
+    </div>
+  );
 }

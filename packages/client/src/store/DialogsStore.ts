@@ -493,7 +493,7 @@ class DialogsStore {
 
   editRoomGroupsDialogVisible = false;
 
-  createGroupFromRoomIds: Nullable<number[]> = null;
+  createGroupFromRoomIds: Nullable<(string | number)[]> = null;
 
   openInCreateMode = false;
 
@@ -1330,7 +1330,7 @@ class DialogsStore {
 
   setEditRoomGroupsDialogVisible = (
     visible: boolean,
-    roomIds: Nullable<number[]> = null,
+    roomIds: Nullable<(string | number)[]> = null,
     openInCreateMode = false,
   ) => {
     this.editRoomGroupsDialogVisible = visible;

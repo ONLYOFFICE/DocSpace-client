@@ -33,38 +33,32 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
-import { TTranslation } from "@docspace/shared/types";
+.chatRoot {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 
-import {
-  ICover,
-  ILogo,
-  IUpdateRoomGroup,
-  ICreateRoomGroup,
-} from "./EditRoomGroupsDialog.types";
-
-export interface CoverDialogProps {
-  getCovers: () => void;
-  covers: ICover[] | null;
-  currentColorScheme: TColorScheme;
-  arrIdsRooms: (string | number)[] | null;
-  setIsOpenGroupIcon: (visible: boolean) => void;
-  onCloseEditRoomGroupsDialog: () => void;
-  setCreateGroupRooms: (newGroup: ICreateRoomGroup) => Promise<void>;
-  getAllRoomGroups: () => Promise<void>;
-  editingGroupId: string | null;
-  setEditingGroupId: (id: string | null) => void;
-  updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
-  updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
-  currentGroupIcon: ILogo | string | null;
-  currentGroupName: string | null;
-  isOpenedFromContextMenu?: boolean;
+  > :global(.theme-portal-base),
+  > :global(.theme-portal-dark) {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-height: 0;
+  }
 }
 
-export interface SelectIconProps {
-  t: TTranslation;
-  setIcon: (icon: ICover | string | null) => void;
-  covers: ICover[] | null;
-  $currentColorScheme: TColorScheme;
-  coverId: string;
+.chat {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.chatBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
 }

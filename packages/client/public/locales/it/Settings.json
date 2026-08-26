@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Sezione strumenti per sviluppatori",
   "DeveloperToolsAccessDescription": "Questa impostazione consente di rendere la sezione Strumenti di sviluppo visibile a tutti gli utenti tranne gli ospiti. Se vuoi limitare l'accesso a questa sezione, rendendola accessibile solo al proprietario e ai superamministratori, seleziona Disabilita e fai clic sul pulsante <strong>Salva</strong>.",
   "DeveloperToolsAccessMobileDescription": "Questa impostazione consente di rendere la sezione Strumenti per sviluppatori visibile a tutti gli utenti, tranne che agli ospiti.",
+  "DeveloperToolsDescription": "Integra, estendi e automatizza {{organizationName}} {{editorsName}} e {{productName}} con gli strumenti di sviluppo: da Docs Connect e SDK di incorporamento fino ai webhook e alle app OAuth. Scegli uno strumento qui sotto per iniziare.",
   "DisableAiServices": "Disabilita {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} sarà nascosto per tutti gli utenti (la cronologia delle interazioni rimarrà salvata).",
   "DisableAiServicesConfirm": "Potete riabilitare {{aiServices}} in qualsiasi momento. Desidera davvero continuare?",

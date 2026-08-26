@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-08-24T22:30:00.618Z",
+  "updated_at": "2026-08-26T14:08:32.956Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/PriceDetailsDialog.tsx",
-      "line_number": 247,
+      "line_number": 249,
       "context": "onClick={onConfirm}\n testId=\"price_details_pay_button\"\n />\n <Button\n key=\"cancel\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n testId=\"price_details_cancel_button\"\n />",
       "module": "/libs/ui-kit"
     },
@@ -229,7 +229,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 239,
+      "line_number": 241,
       "context": "isDisabled={userIDs.length === 0}\n testId=\"change_user_status_dialog_submit\"\n />\n <Button\n id=\"change-user-status-modal_cancel\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onCloseAction}\n isDisabled={isRequestRunning}\n testId=\"change_user_status_dialog_cancel\"",
       "module": "/packages/client"
     },
@@ -379,7 +379,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 428,
+      "line_number": 426,
       "context": "isLoading={isSaving}\n isDisabled={isSaving}\n testId=\"save_grouping_changes_button\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onCancelGroupingChange}\n testId=\"cancel_grouping_changes_button\"\n scale\n />",
       "module": "/packages/client"
     },
@@ -415,7 +415,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 199,
+      "line_number": 200,
       "context": "scale\n />\n \n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n onClick={onClose}\n scale\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -559,7 +559,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1159,
+      "line_number": 1175,
       "context": "<Button\n className=\"cancel-button\"\n scale\n size=\"normal\"\n onClick={onClose}\n label={t(\"Common:CancelButton\")}\n isDisabled={isLoading}\n testId=\"invite_panel_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
@@ -649,7 +649,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/models/TurnOffModelDialog.tsx",
-      "line_number": 111,
+      "line_number": 112,
       "context": "isLoading={isLoading}\n testId=\"turn-off-ai-model-button\"\n />\n <Button\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n testId=\"turn-off-ai-model-cancel-button\"\n />",
       "module": "/packages/client"
     },
@@ -1273,8 +1273,8 @@
     },
     {
       "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 306,
-      "context": "<SaveCancelButtons\n isSaving={isLoading}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDefaultQuota}\n disableRestoreToDefault={isDefaultQuota}\n showReminder={!isDefaultQuota}",
+      "line_number": 311,
+      "context": "<SaveCancelButtons\n isSaving={isLoading}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDefaultQuota || isZeroSize}\n disableRestoreToDefault={isDefaultQuota}\n showReminder={!isDefaultQuota}",
       "module": "/packages/shared"
     },
     {
@@ -1339,7 +1339,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 614,
+      "line_number": 620,
       "context": "<Button\n scale\n onClick={onClose}\n isDisabled={isLoading}\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n testId=\"edit_link_panel_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>\n </>",
       "module": "/packages/shared"
     },

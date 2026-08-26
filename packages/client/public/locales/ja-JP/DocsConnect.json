@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "ユーザーあたり{{price}} <1>（Dev Pack込み）</1>",
   "PricePerUserMonthDevPackNote": "ユーザーあたり{{price}}／月",
   "PricePerUserShort": "ユーザーあたり{{price}}",
+  "PromoDescription": "フル機能のドキュメント編集エンジンを自社のエコシステムに追加しましょう。インスタンスを作成すると、ストレージに依存しないドキュメント、スプレッドシート、プレゼンテーション、PDFのエディタを接続できます。すでにお使いのプラットフォーム向けの<1>50種類以上の既製コネクタ</1>を利用するか、APIで独自のプラットフォームに接続できます。1つのインスタンスを複数のプラットフォームに接続することも可能です。",
+  "PromoDevPackNote": "Dev Packを取得すると、<1>Automation API</1>と<2>ブランディングオプション</2>が利用可能になります。",
   "RealtimeCollaborationDescription": "コメント、メンション、レビュー、バージョン履歴、内蔵チャットを使って共同編集できます。",
   "RealtimeCollaborationTitle": "リアルタイム共同編集",
   "Rebranding": "リブランディングオプション",

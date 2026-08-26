@@ -388,6 +388,7 @@
   "ChangesToTag": "Izdarītās izmaiņas šajā tagā ietekmēs visas istabas, kurās tas tiek izmantots.",
   "ChangeTheRoomOwner": "Mainiet telpas īpašnieku",
   "ChangeUserPermissions": "Mainiet lietotāju atļaujas uzaicinātajām personām vai <1>jauniniet savu tarifu plānu</1>.",
+  "ChangeUserPermissionsOnly": "Mainiet lietotāju atļaujas uzaicinātajām personām.",
   "ChargeAmount": "Par saglabāto maksājuma veidu tiks noņemta summa <1>{{price}}</1>.",
   "ChatAttachmentLimitReached": "Faili izlaisti — sasniegts pielikumu ierobežojums: {{count}}",
   "ChatHistory": "Čata vēsture",

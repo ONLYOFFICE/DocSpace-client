@@ -388,6 +388,7 @@
   "ChangesToTag": "Việc thay đổi thẻ này sẽ ảnh hưởng đến tất cả các phòng nơi nó được sử dụng.",
   "ChangeTheRoomOwner": "Thay đổi Chủ sở hữu Phòng",
   "ChangeUserPermissions": "Thay đổi quyền của những người được mời hoặc <1>nâng cấp gói dịch vụ của bạn</1>.",
+  "ChangeUserPermissionsOnly": "Thay đổi quyền của những người được mời.",
   "ChargeAmount": "Một số tiền là <1>{{price}}</1> sẽ được tính vào phương thức thanh toán đã lưu của bạn.",
   "ChatAttachmentLimitReached": "Đã bỏ qua tệp — đã đạt giới hạn tệp đính kèm: {{count}}",
   "ChatHistory": "Lịch trò chuyện",

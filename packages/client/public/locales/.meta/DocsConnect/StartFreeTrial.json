@@ -3,7 +3,7 @@
   "content": "Start 30-day free trial",
   "content_en_sha1_hash": "c2622b498e2fdf12d1d1462f492f27f2e6ce7a01",
   "created_at": "2026-07-27T13:07:48.471Z",
-  "updated_at": "2026-08-13T14:37:21.760Z",
+  "updated_at": "2026-08-26T14:08:33.099Z",
   "comment": {
     "text": "Button label in the DocsConnect getting started modal that initiates a 30-day free trial.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 199,
+      "context": "</>\n ) : (\n <Button\n primary\n size={ButtonSize.small}\n label={t(\"DocsConnect:StartFreeTrial\")}\n onClick={onCreateTenant}\n isLoading={submitting}\n isDisabled={submitting || !canManage}\n testId=\"docs_connect_create_tenant_button\"\n />",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/DocsConnectGetStartedModal.tsx",
       "line_number": 187,

@@ -3,7 +3,7 @@
   "content": "Read API documentation",
   "content_en_sha1_hash": "b842f50b5f4f6f2348bdfabb90666ac3026a24c5",
   "created_at": "2026-07-27T13:07:48.474Z",
-  "updated_at": "2026-08-13T14:37:21.735Z",
+  "updated_at": "2026-08-26T14:08:33.099Z",
   "comment": {
     "text": "Link label in the developer tools section that navigates the user to the API documentation.",
     "is_auto": true,
@@ -19,8 +19,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
-      "line_number": 177,
-      "context": "color=\"accent\"\n fontSize=\"13px\"\n fontWeight={600}\n onClick={onReadApiDocs}\n >\n {t(\"Common:ReadApiDocumentation\")}\n </Link>\n </div>\n \n {canceled ? null : (\n <Tooltip",
+      "line_number": 161,
+      "context": "target={LinkTarget.blank}\n color=\"accent\"\n fontSize=\"13px\"\n fontWeight={600}\n >\n {t(\"Common:ReadApiDocumentation\")}\n </Link>\n </div>\n \n <Text as=\"p\" className={styles.trialNote}>\n {t(\"DocsConnect:TrialAvailable\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DocsConnect/PromoPage.tsx",
+      "line_number": 161,
+      "context": "target={LinkTarget.blank}\n color=\"accent\"\n fontSize=\"13px\"\n fontWeight={600}\n >\n {t(\"Common:ReadApiDocumentation\")}\n </Link>\n </div>\n \n <Text as=\"p\" className={styles.trialNote}>\n {t(\"DocsConnect:TrialAvailable\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
+      "line_number": 131,
+      "context": "organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:ReadApiDocumentation\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}",
       "module": "/packages/client"
     }
   ],

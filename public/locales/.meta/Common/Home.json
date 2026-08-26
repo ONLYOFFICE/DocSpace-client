@@ -3,7 +3,7 @@
   "content": "Home",
   "content_en_sha1_hash": "70f8bb9a8a5393ef080507a89e4b98d139000d65",
   "created_at": "2026-08-20T15:38:18.642Z",
-  "updated_at": "2026-08-21T08:01:33.694Z",
+  "updated_at": "2026-08-26T14:08:32.923Z",
   "comment": {
     "text": "Label for the sidebar navigation item that opens the dashboard landing page, also used as that page document title.",
     "is_auto": false,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 259,
+      "line_number": 264,
       "context": "};\n };\n \n const overview: NavMenuItem = {\n id: \"dashboard\",\n label: t(\"Common:Home\"),\n icon: CatalogOverviewReactSvgUrl,\n ...nav(\"/dashboard\"),\n };\n \n const roomsFolder = find(FolderType.Rooms);",
       "module": "/packages/client"
     },

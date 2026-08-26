@@ -388,6 +388,7 @@
   "ChangesToTag": "Bu etikete yapılan değişiklikler, kullanıldığı tüm odaları etkileyecektir.",
   "ChangeTheRoomOwner": "Oda Sahibini Değiştir",
   "ChangeUserPermissions": "Davet edilen kişilerin kullanıcı izinlerini değiştirin veya <1>tarife planınızı yükseltin</1>.",
+  "ChangeUserPermissionsOnly": "Davet edilen kişilerin kullanıcı izinlerini değiştirin.",
   "ChargeAmount": "<1>{{price}}</1> tutarı kaydedilmiş ödeme yönteminize yüklenecektir.",
   "ChatAttachmentLimitReached": "Dosyalar atlandı — ek dosya sınırına ulaşıldı: {{count}}",
   "ChatHistory": "Sohbet geçmişi",

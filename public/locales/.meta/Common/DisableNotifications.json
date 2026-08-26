@@ -3,7 +3,7 @@
   "content": "Disable notifications",
   "content_en_sha1_hash": "db3ec8bfad4224952386dfedb382aacc48341c19",
   "created_at": "2025-05-19T21:30:55.463Z",
-  "updated_at": "2026-08-24T22:30:00.725Z",
+  "updated_at": "2026-08-26T14:08:33.153Z",
   "comment": {
     "text": "This is a button label that allows users to stop receiving notifications for a specific room or conversation.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
-      "line_number": 212,
+      "line_number": 228,
       "context": "key: isMuted ? \"unmute-room\" : \"mute-room\",\n label: isMuted\n ? t(\"Common:EnableNotifications\", {\n defaultValue: \"Enable notifications\",\n })\n : t(\"Common:DisableNotifications\", {\n defaultValue: \"Disable notifications\",\n }),\n icon: isMuted ? UnmuteReactSvgUrl : MuteReactSvgUrl,\n onClick: () => listStore.toggleMuteAgent(agent, t),\n });",
       "module": "/packages/sdk"
     },

@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2026-08-17T17:23:21.683Z",
+  "updated_at": "2026-08-26T14:08:32.975Z",
   "comment": {
     "text": "This is the label for an \"OK\" button, typically used to confirm an action or close a dialog box.",
     "is_auto": true,
@@ -61,8 +61,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 189,
-      "context": "<Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable\n ? t(\"Common:UpgradePlan\")\n : t(\"Common:OKButton\")\n }\n size=\"normal\"\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
+      "line_number": 191,
+      "context": ")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={canUpgrade ? t(\"Common:UpgradePlan\") : t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={canUpgrade ? onUpgradePlan : onClose}\n scale\n />",
       "module": "/packages/client"
     },
     {

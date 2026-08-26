@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "{{price}} pro Benutzer <1>(inkl. Dev Pack)</1>",
   "PricePerUserMonthDevPackNote": "{{price}} pro Benutzer / Monat",
   "PricePerUserShort": "{{price}} pro Benutzer",
+  "PromoDescription": "Fügen Sie Ihrem Ökosystem eine voll ausgestattete Dokumentbearbeitungs-Engine hinzu. Erstellen Sie eine Instanz, um speicherunabhängige Editoren für Dokumente, Tabellenkalkulationen, Präsentationen und PDFs anzubinden – mit <1>über 50 fertigen Konnektoren</1> für die Plattformen, die Sie bereits nutzen, oder verbinden Sie Ihre eigene Plattform über die API. Sie können eine Instanz mit mehreren Plattformen verbinden.",
+  "PromoDevPackNote": "Mit dem Dev Pack schalten Sie die <1>Automation API</1> und <2>Branding-Optionen</2> frei.",
   "RealtimeCollaborationDescription": "Gemeinsam bearbeiten mit Kommentaren, Erwähnungen, Überprüfung, Versionsverlauf und integriertem Chat.",
   "RealtimeCollaborationTitle": "Zusammenarbeit in Echtzeit",
   "Rebranding": "Rebranding-Optionen",

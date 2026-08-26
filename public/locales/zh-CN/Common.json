@@ -388,6 +388,7 @@
   "ChangesToTag": "更改此标签将影响所有使用它的房间。",
   "ChangeTheRoomOwner": "更改房间所有者",
   "ChangeUserPermissions": "修改受邀人员的用户权限或<1>升级您的套餐方案</1>。",
+  "ChangeUserPermissionsOnly": "修改受邀人员的用户权限。",
   "ChargeAmount": "将从您保存的支付方式中扣除<1>{{price}}</1>的金额。",
   "ChatAttachmentLimitReached": "已跳过文件 — 已达到附件数量上限：{{count}}",
   "ChatHistory": "历史对话",

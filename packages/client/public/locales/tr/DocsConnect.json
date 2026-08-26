@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "Kullanıcı başına {{price}} <1>(Dev Pack dahil)</1>",
   "PricePerUserMonthDevPackNote": "Kullanıcı başına {{price}}/ay",
   "PricePerUserShort": "Kullanıcı başına {{price}}",
+  "PromoDescription": "Ekosisteminize tam donanımlı bir belge düzenleme motoru ekleyin. Depolamadan bağımsız belge, e-tablo, sunum ve PDF düzenleyicilerini bağlamak için bir örnek oluşturun — hâlihazırda kullandığınız platformlar için <1>50'den fazla hazır bağlayıcı</1> kullanın ya da API üzerinden kendi platformunuza bağlanın. Tek bir örneği birden fazla platforma bağlayabilirsiniz.",
+  "PromoDevPackNote": "Dev Pack edindiğinizde <1>Automation API</1> ve <2>markalama seçenekleri</2> kullanıma açılır.",
   "RealtimeCollaborationDescription": "Yorumlar, bahsetmeler, inceleme, sürüm geçmişi ve yerleşik sohbet ile birlikte düzenleyin.",
   "RealtimeCollaborationTitle": "Gerçek zamanlı işbirliği",
   "Rebranding": "Marka özelleştirme seçenekleri",

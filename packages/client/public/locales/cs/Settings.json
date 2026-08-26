@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Sekce nástrojů pro vývojáře",
   "DeveloperToolsAccessDescription": "Toto nastavení umožňuje zobrazit sekci Nástroje pro vývojáře všem uživatelům kromě hostů. Pokud chcete přístup do této sekce omezit tak, aby byla dostupná pouze vlastníkovi a supersprávcům, vyberte Vypnout a klikněte na tlačítko <strong>Uložit</strong>.",
   "DeveloperToolsAccessMobileDescription": "Toto nastavení umožňuje zviditelnit sekci Nástroje pro vývojáře všem uživatelům kromě hostů.",
+  "DeveloperToolsDescription": "Integrujte, rozšiřujte a automatizujte {{organizationName}} {{editorsName}} a {{productName}} pomocí nástrojů pro vývojáře — od Docs Connect a Embed SDK po webové háčky a aplikace OAuth. Začněte výběrem nástroje níže.",
   "DisableAiServices": "Zakázat {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} bude skryto pro všechny uživatele (interakční historie zůstane zachována).",
   "DisableAiServicesConfirm": "Je možné znovu aktivovat {{aiServices}} kdykoli. Jste si jisti, že chcete pokračovat?",

@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-08-24T22:30:00.615Z",
+  "updated_at": "2026-08-26T14:08:32.951Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -67,7 +67,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 418,
+      "line_number": 416,
       "context": "</ModalDialog.Body>\n \n {hasGroupingChanged ? (\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSaveGroupingChange}\n scale\n isLoading={isSaving}",
       "module": "/packages/client"
     },
@@ -80,7 +80,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Footer.tsx",
       "line_number": 65,
-      "context": "...saveButtonProps?.props,\n scale: true,\n isSaveButton: true,\n primary: true,\n size: \"normal\",\n label: t(\"Common:SaveButton\"),\n settingsModalRequestRunning: modalRequestRunning,\n setSettingsModalRequestRunning: setModalRequestRunning,\n onCloseAction,\n testId: \"settings_plugin_save_button\",\n } as IButton,",
+      "context": "...saveButtonProps?.props,\n scale: true,\n isSaveButton: true,\n primary: true,\n size: \"normal\",\n label: saveButtonProps?.props?.label ?? t(\"Common:SaveButton\"),\n settingsModalRequestRunning: modalRequestRunning,\n setSettingsModalRequestRunning: setModalRequestRunning,\n onCloseAction,\n testId: \"settings_plugin_save_button\",\n } as IButton,",
       "module": "/packages/client"
     },
     {
@@ -379,8 +379,8 @@
     },
     {
       "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 305,
-      "context": "{isButtonsEnable ? (\n <SaveCancelButtons\n isSaving={isLoading}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDefaultQuota}\n disableRestoreToDefault={isDefaultQuota}",
+      "line_number": 310,
+      "context": "{isButtonsEnable ? (\n <SaveCancelButtons\n isSaving={isLoading}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDefaultQuota || isZeroSize}\n disableRestoreToDefault={isDefaultQuota}",
       "module": "/packages/shared"
     },
     {
@@ -403,7 +403,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 605,
+      "line_number": 611,
       "context": "<Button\n scale\n primary\n onClick={onSave}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabledSaveButton}\n testId=\"edit_link_panel_save_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
     },

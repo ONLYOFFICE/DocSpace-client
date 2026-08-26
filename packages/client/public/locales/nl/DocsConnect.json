@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "{{price}} per gebruiker <1>(incl. Dev Pack)</1>",
   "PricePerUserMonthDevPackNote": "{{price}} per gebruiker / maand",
   "PricePerUserShort": "{{price}} per gebruiker",
+  "PromoDescription": "Voeg een volledig uitgeruste engine voor documentbewerking toe aan uw ecosysteem. Maak een instantie aan om opslagonafhankelijke editors voor documenten, spreadsheets, presentaties en PDF's te verbinden — met <1>50+ kant-en-klare connectors</1> voor de platforms die u al gebruikt, of verbind uw eigen platform via de API. U kunt één instantie met meerdere platforms verbinden.",
+  "PromoDevPackNote": "Met het Dev Pack ontgrendelt u de <1>Automation API</1> en <2>brandingopties</2>.",
   "RealtimeCollaborationDescription": "Samen bewerken met opmerkingen, vermeldingen, controle, versiegeschiedenis en een ingebouwde chat.",
   "RealtimeCollaborationTitle": "Realtime samenwerking",
   "Rebranding": "Rebrandingopties",

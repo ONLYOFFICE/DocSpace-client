@@ -388,6 +388,7 @@
   "ChangesToTag": "このタグの変更は、使用されているすべてのルームに影響します。",
   "ChangeTheRoomOwner": "ルーム所有者の変更",
   "ChangeUserPermissions": "招待した人へのユーザー権限を変更するか、<1>料金プランをアップグレード</1>します。",
+  "ChangeUserPermissionsOnly": "招待した人へのユーザー権限を変更します。",
   "ChargeAmount": "<1>{{price}}</1> が、登録されているお支払い方法に請求されます。",
   "ChatAttachmentLimitReached": "ファイルをスキップしました — 添付ファイルの上限に達しました: {{count}}",
   "ChatHistory": "チャット履歴",

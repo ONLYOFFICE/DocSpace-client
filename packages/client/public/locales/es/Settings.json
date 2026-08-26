@@ -109,6 +109,7 @@
   "DeveloperToolsAccess": "Sección de Herramientas de desarrollo",
   "DeveloperToolsAccessDescription": "Esta configuración le permite hacer visible la sección Herramientas de desarrollo para todos los usuarios excepto los invitados. Si desea restringir el acceso a esta sección, de modo que solo puedan acceder el propietario y los superadministradores, seleccione Deshabilitar y haga clic en el botón <strong>Guardar</strong>.",
   "DeveloperToolsAccessMobileDescription": "Esta configuración le permite hacer que la sección Herramientas de desarrollo sea visible para todos los usuarios excepto los invitados.",
+  "DeveloperToolsDescription": "Integre, amplíe y automatice {{organizationName}} {{editorsName}} y {{productName}} con las herramientas de desarrollo: desde Docs Connect y el SDK de incrustación hasta los webhooks y las aplicaciones OAuth. Elija una herramienta a continuación para comenzar.",
   "DisableAiServices": "Deshabilitar {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} será oculto para todos los usuarios (el historial de interacción permanecerá preservado).",
   "DisableAiServicesConfirm": "Puede reactivar {{aiServices}} en cualquier momento. ¿Está seguro de que desea continuar?",

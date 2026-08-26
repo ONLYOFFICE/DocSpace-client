@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "{{price}} par lietotāju <1>(ar Dev Pack)</1>",
   "PricePerUserMonthDevPackNote": "{{price}} par lietotāju / mēnesī",
   "PricePerUserShort": "{{price}} par lietotāju",
+  "PromoDescription": "Pievienojiet savai ekosistēmai pilnvērtīgu dokumentu rediģēšanas dzini. Izveidojiet instanci, lai pieslēgtu no krātuves neatkarīgus dokumentu, izklājlapu, prezentāciju un PDF redaktorus — izmantojot <1>vairāk nekā 50 gatavus savienotājus</1> platformām, kuras jau lietojat, vai pieslēdzieties savai platformai, izmantojot API. Vienu instanci varat pieslēgt vairākām platformām.",
+  "PromoDevPackNote": "Iegādājoties Dev Pack, tiek atvērts <1>Automatizācijas API</1> un <2>zīmola pielāgošanas iespējas</2>.",
   "RealtimeCollaborationDescription": "Kopīgi rediģējiet ar komentāriem, pieminēšanu, recenzēšanu, versiju vēsturi un iebūvētu tērzēšanu.",
   "RealtimeCollaborationTitle": "Sadarbība reālajā laikā",
   "Rebranding": "Pārzīmošanas iespējas",

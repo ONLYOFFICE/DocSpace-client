@@ -3,7 +3,7 @@
   "content": "From the workspace",
   "content_en_sha1_hash": "4be58e169384241b6495f9ee71223cd9fbcab790",
   "created_at": "2026-08-12T11:00:23.455Z",
-  "updated_at": "2026-08-24T22:30:00.601Z",
+  "updated_at": "2026-08-26T14:08:32.923Z",
   "comment": {
     "text": "Button label or dropdown menu item used to initiate an upload from the DocSpace workspace.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-navigation/index.tsx",
-      "line_number": 228,
+      "line_number": 235,
       "context": "const uploadMenuModel = React.useMemo<ContextMenuModel[]>(\n () => [\n {\n id: \"knowledge-upload-from-docspace\",\n key: \"knowledge-upload-from-docspace\",\n label: t(\"Common:FromPortal\"),\n icon: ActionsUploadReactSvgUrl,\n onClick: onUploadFromDocSpace,\n },\n {\n id: \"knowledge-upload-from-device\",",
       "module": "/packages/sdk"
     }

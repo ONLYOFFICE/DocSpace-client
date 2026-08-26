@@ -92,6 +92,8 @@
   "PricePerUserDevPackShortRich": "{{price}} për përdorues <1>(përfshirë Dev Pack)</1>",
   "PricePerUserMonthDevPackNote": "{{price}} për përdorues / muaj",
   "PricePerUserShort": "{{price}} për përdorues",
+  "PromoDescription": "Shtoni në ekosistemin tuaj një motor të plotë për redaktimin e dokumenteve. Krijoni një instancë për të lidhur redaktues të pavarur nga ruajtja për dokumente, fletëllogaritëse, prezantime dhe PDF — duke përdorur <1>50+ konektorë të gatshëm</1> për platformat që përdorni tashmë, ose lidhuni me platformën tuaj përmes API. Mund të lidhni një instancë me shumë platforma.",
+  "PromoDevPackNote": "Marrja e Dev Pack zhbllokon <1>API e Automatizimit</1> dhe <2>opsionet e brendimit</2>.",
   "RealtimeCollaborationDescription": "Bashkë-redaktoni me komente, përmendje, rishikim, histori versionesh dhe një bisedë të integruar.",
   "RealtimeCollaborationTitle": "Bashkëpunim në kohë reale",
   "Rebranding": "Opsione ribrendimi",

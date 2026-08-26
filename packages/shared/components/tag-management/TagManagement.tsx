@@ -201,7 +201,6 @@ export const TagManagement: FC<TagManagementProps> = ({
           onClose={onClose}
           anchor={anchorRef}
           roomName={roomName}
-          onSelectTag={onSelectTag}
           onEditTag={confirmEditTag}
           onDeleteTag={confirmDeleteTag}
           onTagsChanged={onTagsChanged}

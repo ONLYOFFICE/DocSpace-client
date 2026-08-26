@@ -47,7 +47,6 @@ export interface TagManagementPopupProps {
   tags: Array<TagType | string>;
   roomId: string | number;
   onClose: VoidFunction;
-  onSelectTag: (tag: TagClickEvent) => void;
   anchor: React.RefObject<HTMLElement | null>;
 
   onEditTag?: (oldLabel: string, newLabel: string) => Promise<void>;
@@ -90,7 +89,6 @@ export interface UpdateTagNameParams {
 }
 
 export interface TagManagementContentProps {
-  onSelectTag: (tag: TagClickEvent) => void;
   roomId: string | number;
 
   onDeleteTag?: (label: string) => Promise<void>;

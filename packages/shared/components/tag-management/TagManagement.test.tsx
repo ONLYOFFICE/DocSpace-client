@@ -64,7 +64,6 @@ const defaultProps: TagManagementPopupProps = {
   tags: ["tag1", "tag2"],
   roomId: "123",
   onClose: vi.fn(),
-  onSelectTag: vi.fn(),
   anchor: { current: document.createElement("div") },
   access: { canCreate: false, canSearch: true },
   roomName: "Test Room",

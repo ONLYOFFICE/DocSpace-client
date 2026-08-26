@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import classNames from "classnames";
 import { useForm, Controller } from "react-hook-form";
 import React, { useCallback, useMemo, useState } from "react";
 
@@ -56,6 +57,7 @@ import { useIsMobile } from "@docspace/ui-kit/hooks/use-is-mobile";
 
 import { useTagManagement } from "./TagManagement.provider";
 import { useUpdateTag } from "./hooks/useTagsQuery";
+import { stopPropagation } from "./TagManagement.utils";
 import styles from "./TagManagement.module.scss";
 import {
   ROW_HEIGHT,
@@ -72,7 +74,6 @@ import type {
 } from "./TagManagement.types";
 
 export const TagManagementContent: React.FC<TagManagementContentProps> = ({
-  onSelectTag,
   roomId,
   onDeleteTag,
   onEditTag,
@@ -126,7 +127,8 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   );
 
   const handleEdit = useCallback(
-    (label: string) => {
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>, label: string) => {
+      stopPropagation(event);
       setEditingLabel(label);
 
       setValue(EDIT_TAG_FORM_NAME, label);
@@ -174,7 +176,12 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
   );
 
   const deleteTag = useCallback(
-    async (tag: string) => {
+    async (
+      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+      tag: string,
+    ) => {
+      stopPropagation(event);
+
       try {
         await onDeleteTag?.(tag);
 
@@ -221,16 +228,35 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
     <div className={styles.wrapperList} style={style}>
       <Scrollbar fixedSize className={styles.scrollbar}>
         {filteredTags.map((tag) => {
+          const isEditing = editingLabel === tag.label;
+          const isRowClickable = canBindTag && !isEditing;
+
           return (
-            <div key={tag.label} className={styles.row}>
-              <Checkbox
-                isChecked={tag.checked}
-                isDisabled={!canBindTag}
-                className={styles.checkbox}
-                onChange={() => toggleChecked(tag.label)}
-                dataTestId={`tag_checkbox_${tag.label}`}
-              />
-              {editingLabel === tag.label ? (
+            <div
+              key={tag.label}
+              className={classNames(styles.row, {
+                [styles.rowClickable]: isRowClickable,
+              })}
+              onClick={
+                isRowClickable ? () => toggleChecked(tag.label) : undefined
+              }
+              data-testid={`tag_row_${tag.label}`}
+            >
+              {/* The checkbox toggles through its own onChange, so its click
+                  must not reach the row handler and toggle a second time. */}
+              <span
+                onClick={stopPropagation}
+                className={styles.checkboxWrapper}
+              >
+                <Checkbox
+                  isChecked={tag.checked}
+                  isDisabled={!canBindTag}
+                  className={styles.checkbox}
+                  onChange={() => toggleChecked(tag.label)}
+                  dataTestId={`tag_checkbox_${tag.label}`}
+                />
+              </span>
+              {isEditing ? (
                 <>
                   <Controller
                     name={EDIT_TAG_FORM_NAME}
@@ -278,7 +304,6 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                   <Tag
                     label={tag.label}
                     tag={tag.label}
-                    onClick={onSelectTag}
                     className={styles.tag}
                     dataTestId={`tag_item_${tag.label}`}
                   />
@@ -287,7 +312,9 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       size={ICON_SIZE}
                       className={styles.editIcon}
                       iconName={AccessEditReactSvgUrl}
-                      onClick={() => handleEdit(tag.label)}
+                      onClick={(event) => {
+                        handleEdit(event, tag.label);
+                      }}
                       dataTestId={`edit_tag_button_${tag.label}`}
                     />
                   ) : null}
@@ -296,7 +323,9 @@ export const TagManagementContent: React.FC<TagManagementContentProps> = ({
                       size={ICON_SIZE}
                       iconName={TrashReactSvgUrl}
                       className={styles.deleteIcon}
-                      onClick={() => deleteTag(tag.label)}
+                      onClick={(event) => {
+                        deleteTag(event, tag.label);
+                      }}
                       dataTestId={`delete_tag_button_${tag.label}`}
                     />
                   )}

@@ -1,0 +1,164 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import React from "react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import { TagManagementProvider } from "./TagManagement.provider";
+import { TagManagementContent } from "./TagManagement.content";
+import type { AccessTagManagement } from "./TagManagement.types";
+
+const { addTagsToRoom, removeTagsFromRoom } = vi.hoisted(() => ({
+  addTagsToRoom: vi.fn(() => Promise.resolve()),
+  removeTagsFromRoom: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock("../../api/rooms", () => ({
+  addTagsToRoom,
+  removeTagsFromRoom,
+  getTags: vi.fn(() => Promise.resolve([])),
+  updateTagName: vi.fn(() => Promise.resolve()),
+  removeTagRequest: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock("@docspace/ui-kit/hooks/use-is-mobile", () => ({
+  useIsMobile: vi.fn(() => false),
+}));
+
+vi.mock("@docspace/ui-kit/components/scrollbar", () => ({
+  Scrollbar: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+}));
+
+const ROOM_ID = "room-1";
+
+const fullAccess: AccessTagManagement = {
+  canBindTag: true,
+  canCreate: true,
+  canSearch: true,
+  canEdit: true,
+  canRemove: true,
+};
+
+const renderContent = (access: AccessTagManagement = fullAccess) => {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  });
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <TagManagementProvider
+        roomTags={["boundTag"]}
+        fetchedTags={["boundTag", "freeTag"]}
+        access={access}
+      >
+        <TagManagementContent roomId={ROOM_ID} />
+      </TagManagementProvider>
+    </QueryClientProvider>,
+  );
+};
+
+describe("<TagManagementContent />", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("binds the tag to the room when the row is clicked", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+
+    await waitFor(() => {
+      expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["freeTag"]);
+    });
+    expect(removeTagsFromRoom).not.toHaveBeenCalled();
+  });
+
+  it("unbinds the tag from the room when a bound row is clicked", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("tag_row_boundTag"));
+
+    await waitFor(() => {
+      expect(removeTagsFromRoom).toHaveBeenCalledWith(ROOM_ID, ["boundTag"]);
+    });
+    expect(addTagsToRoom).not.toHaveBeenCalled();
+  });
+
+  it("toggles the tag when its label is clicked instead of filtering the list", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("tag_item_freeTag"));
+
+    await waitFor(() => {
+      expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["freeTag"]);
+    });
+    expect(addTagsToRoom).toHaveBeenCalledTimes(1);
+  });
+
+  it("toggles the tag exactly once when the checkbox is clicked", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("tag_checkbox_freeTag"));
+
+    await waitFor(() => {
+      expect(addTagsToRoom).toHaveBeenCalledTimes(1);
+    });
+    expect(addTagsToRoom).toHaveBeenCalledWith(ROOM_ID, ["freeTag"]);
+  });
+
+  it("does not toggle the tag when the edit button is clicked", async () => {
+    renderContent();
+
+    await userEvent.click(screen.getByTestId("edit_tag_button_freeTag"));
+
+    expect(await screen.findByTestId("edit_tag_input")).toBeInTheDocument();
+    expect(addTagsToRoom).not.toHaveBeenCalled();
+    expect(removeTagsFromRoom).not.toHaveBeenCalled();
+  });
+
+  it("does not toggle the tag when binding is not allowed", async () => {
+    renderContent({ ...fullAccess, canBindTag: false });
+
+    await userEvent.click(screen.getByTestId("tag_row_freeTag"));
+
+    expect(addTagsToRoom).not.toHaveBeenCalled();
+    expect(removeTagsFromRoom).not.toHaveBeenCalled();
+  });
+});

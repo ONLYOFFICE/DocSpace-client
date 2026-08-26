@@ -186,6 +186,12 @@
     flex-shrink: 0;
   }
 
+  .checkboxWrapper {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
   .checkbox svg {
     margin: 0;
   }
@@ -199,7 +205,7 @@
   }
 
   @media (hover: hover) {
-    & {
+    &.rowClickable {
       cursor: pointer;
     }
 

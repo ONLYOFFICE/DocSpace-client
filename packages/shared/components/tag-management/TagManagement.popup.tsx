@@ -73,7 +73,6 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
   roomId,
   onClose,
   anchor,
-  onSelectTag,
   tags: roomTags,
   access,
   onDeleteTag,
@@ -167,7 +166,6 @@ export const TagManagementPopup: React.FC<TagManagementPopupProps> = ({
               roomId={roomId}
               onEditTag={onEditTag}
               onDeleteTag={onDeleteTag}
-              onSelectTag={onSelectTag}
               onTagsChanged={onTagsChanged}
             />
           </TagManagementProvider>

@@ -1009,3 +1009,18 @@ export const aiAgentsHandler = (
 		});
 	});
 };
+
+export const aiAgentGetByIdHandler = (
+	port: string,
+	agent: Record<string, unknown> | null = successListWithCreate.response
+		.folders[0],
+) =>
+	http.get(
+		`${BASE_URL}:${port}/${API_PREFIX}/${PATH_AI_AGENTS}/:id`,
+		({ params }) => {
+			if (!agent) return new Response(null, { status: 404 });
+			return new Response(
+				JSON.stringify({ response: { ...agent, id: Number(params.id) } }),
+			);
+		},
+	);

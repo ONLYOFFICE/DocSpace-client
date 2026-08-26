@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { aiAgentsHandler } from "./agents";
+import { aiAgentGetByIdHandler, aiAgentsHandler } from "./agents";
 import { aiConfigHandler } from "./config";
 import { aiModelsHandler } from "./models";
 import { aiChatDeleteHandler } from "./chat";
@@ -61,6 +61,7 @@ import {
 } from "./chatStores";
 
 export {
+  aiAgentGetByIdHandler,
   aiAgentsHandler,
   aiConfigHandler,
   aiModelsHandler,

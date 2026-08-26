@@ -103,6 +103,19 @@ const buildAgentLink = (agent: TAgent) =>
  * "More options" entries (Download / Agent info / Change owner) are nested
  * via `ContextMenuType.items` — ui-kit supports recursive submenus.
  */
+const LIST_ONLY_KEYS = new Set([
+  "select",
+  "open",
+  "separator0",
+  "pin-room",
+  "unpin-room",
+  "mute-room",
+  "unmute-room",
+  "separator1",
+]);
+
+export type AgentContextOptionsVariant = "list" | "header";
+
 export const useAgentContextOptions = () => {
   const router = useRouter();
   const { t } = useTranslation(["Common"]);
@@ -112,7 +125,10 @@ export const useAgentContextOptions = () => {
   const infoPanelStore = useAgentInfoPanelStore();
 
   return React.useCallback(
-    (agent: TAgent): ContextMenuModel[] => {
+    (
+      agent: TAgent,
+      variant: AgentContextOptionsVariant = "list",
+    ): ContextMenuModel[] => {
       const sec = agent.security;
       const currentUserId = userStore.user?.id;
 
@@ -304,7 +320,9 @@ export const useAgentContextOptions = () => {
         });
       }
 
-      return items;
+      return variant === "header"
+        ? items.filter((item) => !LIST_ONLY_KEYS.has(String(item.key)))
+        : items;
     },
     [t, dialogsStore, listStore, userStore, infoPanelStore, router],
   );

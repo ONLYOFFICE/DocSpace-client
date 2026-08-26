@@ -41,6 +41,8 @@ import { portalCulturesHandler } from "./portalCultures";
 import { portalPasswordSettingsHandler } from "./portalPasswordSettings";
 import { portalTimeZoneHandler } from "./portalTimeZones";
 import { settingsHandler, TypeSettings } from "./settings";
+
+export type { SettingsOverrides } from "./settings";
 import { completeHandler } from "./complete";
 import { licenseHandler } from "./license";
 import { tfaAppHandler } from "./tfaApp";

@@ -131,5 +131,5 @@ export interface LimitTimeBlockProps {
 
 export type AccessOptionType = ReturnType<
   typeof getLinkAccessRightOptions
->[number];
+>["options"][number];
 export type ShareOptionType = ReturnType<typeof getAccessTypeOptions>[number];

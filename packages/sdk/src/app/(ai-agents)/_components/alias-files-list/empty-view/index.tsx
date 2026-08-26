@@ -45,8 +45,13 @@ import { getBrandName } from "@docspace/shared/constants/brands";
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
 import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
+import CreateChatIcon from "PUBLIC_DIR/images/emptyview/create.chat.svg";
 
-import { useAgentsAIConfigStore } from "../../../_store";
+import {
+  useAgentsAIConfigStore,
+  useAgentsUserStore,
+  useAiRoomStore,
+} from "../../../_store";
 import useKnowledgeUpload from "../../../_hooks/useKnowledgeUpload";
 import KnowledgeDisabledContainer from "./KnowledgeDisabledContainer";
 
@@ -74,9 +79,24 @@ const EmptyView = ({
     current.parentId === current.rootFolderId;
   const { isBase: isBaseTheme } = useTheme();
   const aiConfigStore = useAgentsAIConfigStore();
+  const aiRoomStore = useAiRoomStore();
+  const { user } = useAgentsUserStore();
   // Resolve upload handlers up-front (Rules of Hooks: no hook calls
   // after the conditional early-return for KnowledgeDisabledContainer).
   const { onUploadFromDocSpace, onUploadFromDevice } = useKnowledgeUpload();
+
+  const canUseChat = !!user && !user.isVisitor;
+  const onOpenChat = () => {
+    aiRoomStore.setCurrentTab("chat");
+    const params = new URLSearchParams(window.location.search);
+    params.set("tab", "chat");
+    params.delete("fileId");
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}?${params.toString()}`,
+    );
+  };
 
   const rootFolderType = current.rootFolderType;
 
@@ -171,11 +191,30 @@ const EmptyView = ({
     },
   ];
 
+  const showOpenChatOption =
+    !isFiltered && current.type === FolderType.ResultStorage;
+
+  const openChatOptions: EmptyViewOptionsType = [
+    {
+      key: "result-empty-open-chat",
+      title: t("Common:CreateChat", { defaultValue: "Create chat" }),
+      description: t("Common:CreateChatDescription", {
+        aiChat: t("Common:AIChat", { defaultValue: "AI Chat" }),
+        defaultValue: "Go to the {{aiChat}} tab to get started.",
+      }),
+      icon: <CreateChatIcon />,
+      onClick: onOpenChat,
+      disabled: !canUseChat,
+    },
+  ];
+
   const options = isFiltered
     ? filterOptions
     : showUploadOptions
       ? uploadOptions
-      : [];
+      : showOpenChatOption
+        ? openChatOptions
+        : [];
 
   return (
     <EmptyViewComponent

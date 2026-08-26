@@ -63,7 +63,7 @@ export interface IRoomGroup {
 export interface ICreateRoomGroup {
   name: string;
   icon: string | null;
-  rooms: string[] | null;
+  rooms: (string | number)[] | null;
 }
 
 export interface IUpdateRoomGroup {
@@ -78,7 +78,7 @@ export interface EditRoomGroupsDialogProps {
   covers: ICover[] | null;
   setEditRoomGroupsDialogVisible: (
     visible: boolean,
-    roomIds?: number[] | null,
+    roomIds?: (string | number)[] | null,
     openInCreateMode?: boolean,
   ) => void;
   roomGroups: IRoomGroup[];
@@ -88,7 +88,7 @@ export interface EditRoomGroupsDialogProps {
   updateGroupIcon: (groupId: string, icon: string) => Promise<void>;
   updateRoomGroup: (groupId: string, data: IUpdateRoomGroup) => Promise<void>;
   deleteRoomGroup: (groupId: string) => Promise<void>;
-  createGroupFromRoomIds?: number[] | null;
+  createGroupFromRoomIds?: (string | number)[] | null;
   currentFilterGroupId?: string | number | null;
   /** When true, opens the dialog with room list panel visible for creating a new group */
   openInCreateMode?: boolean;

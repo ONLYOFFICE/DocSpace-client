@@ -176,30 +176,30 @@ test.describe("Dashboard tour", () => {
 
     await startTour(page, baseUrl);
 
-    // The profile card is admin-only, so this is the one audience whose run has
-    // all four steps.
     await expect(page.locator(PROFILE_CARD)).toBeVisible();
 
     await walkTour(page, ["desktop", "dashboard-tour", "admin"]);
   });
 
-  test("user sees the walkthrough without the profile step", async ({
+  test("user sees the same walkthrough, profile step included", async ({
     page,
     mockRequest,
     baseUrl,
   }) => {
-    // The card links into portal settings, which a paid user cannot reach — so
-    // it is not rendered for them and the step that describes it is dropped.
+    // The card carries the reader's own details, so it is rendered for every
+    // audience and the step that describes it is part of every run — what
+    // differs between audiences is what the page behind the tour offers, not
+    // which steps it has.
     mockRequest.use(selfByTypeHandler(TEST_PORT, "regular"));
 
     await startTour(page, baseUrl);
 
-    await expect(page.locator(PROFILE_CARD)).toHaveCount(0);
+    await expect(page.locator(PROFILE_CARD)).toBeVisible();
 
     await walkTour(page, ["desktop", "dashboard-tour", "user"]);
   });
 
-  test("guest sees the walkthrough without the profile step", async ({
+  test("guest sees the same walkthrough, profile step included", async ({
     page,
     mockRequest,
     baseUrl,
@@ -208,7 +208,7 @@ test.describe("Dashboard tour", () => {
 
     await startTour(page, baseUrl);
 
-    await expect(page.locator(PROFILE_CARD)).toHaveCount(0);
+    await expect(page.locator(PROFILE_CARD)).toBeVisible();
 
     await walkTour(page, ["desktop", "dashboard-tour", "guest"]);
   });
@@ -220,7 +220,7 @@ test.describe("Dashboard tour", () => {
   }) => {
     // The regression this guards: the card is dismissed into component state of
     // its own, which no store answers for — so the step list is read off the DOM
-    // (DashboardTour `readFlags`). An admin who has closed the card must not be
+    // (DashboardTour `readFlags`). Somebody who has closed the card must not be
     // walked through a region that is not on their page.
     mockRequest.use(selfByTypeHandler(TEST_PORT, "admin"));
 

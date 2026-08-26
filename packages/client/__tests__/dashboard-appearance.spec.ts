@@ -182,6 +182,69 @@ const ROLES: Role[] = [
   },
 ];
 
+/**
+ * What the portal is paid for, which is a different question per edition.
+ *
+ * SaaS is on Startup until it is paid for and on Business after. A standalone
+ * portal instead runs in one of three editions, told apart by its tariff:
+ * Community is the licence-free open-source build, Enterprise is licensed, and
+ * Developer is Enterprise plus the developer flag.
+ */
+type Plan = {
+  key: string;
+  title: string;
+  /** True once the portal is paid for — the plan reads Business, not Startup. */
+  isPaid: boolean;
+  /** The /portal/tariff answer, which carries the edition flags. */
+  tariff: () => ReturnType<typeof tariffHandler>;
+  /** `quota.free` is the flag `currentQuotaStore.isFreeTariff` reads. */
+  quota: () => ReturnType<typeof quotaHandler>;
+};
+
+const SAAS_PLANS: Plan[] = [
+  {
+    key: "paid",
+    title: "paid",
+    isPaid: true,
+    tariff: () => tariffHandler(TEST_PORT),
+    quota: () => quotaHandler(TEST_PORT),
+  },
+  {
+    key: "free",
+    title: "unpaid",
+    isPaid: false,
+    tariff: () => tariffHandler(TEST_PORT),
+    quota: () => freeQuotaHandler(TEST_PORT),
+  },
+];
+
+const STANDALONE_PLANS: Plan[] = [
+  {
+    // No licence: the open-source build, which sits on the free plan.
+    key: "community",
+    title: "Community",
+    isPaid: false,
+    tariff: () => tariffHandler(TEST_PORT, true),
+    quota: () => freeQuotaHandler(TEST_PORT),
+  },
+  {
+    key: "enterprise",
+    title: "Enterprise",
+    isPaid: true,
+    tariff: () => tariffHandler(TEST_PORT, false, false, true),
+    quota: () => quotaHandler(TEST_PORT),
+  },
+  {
+    // Enterprise plus the developer flag (`isDeveloper` is `isEnterprise &&
+    // developer`), which is what the payments page words itself from.
+    key: "developer",
+    title: "Developer",
+    isPaid: true,
+    tariff: () => tariffHandler(TEST_PORT, false, false, true, true),
+    quota: () => quotaHandler(TEST_PORT),
+  },
+];
+
 type Edition = {
   key: string;
   title: string;
@@ -193,6 +256,8 @@ type Edition = {
    * to the edition and to each other.
    */
   settings: TypeSettings;
+  /** The plans this edition can be on — see `Plan`. */
+  plans: Plan[];
 };
 
 const EDITIONS: Edition[] = [
@@ -201,44 +266,14 @@ const EDITIONS: Edition[] = [
     title: "SaaS",
     standalone: false,
     settings: TypeSettings.AuthenticatedNoStandalone,
+    plans: SAAS_PLANS,
   },
   {
     key: "standalone",
     title: "standalone",
     standalone: true,
     settings: TypeSettings.Authenticated,
-  },
-];
-
-type Billing = {
-  key: string;
-  title: string;
-  /** True once the portal is paid for — the plan reads Business, not Startup. */
-  isPaid: boolean;
-  /**
-   * The tariff differs per edition: a standalone portal is paid for with a
-   * license (`enterprise`) and runs as open source without one, while a SaaS
-   * portal is on the same tariff either way and is told apart by its quota.
-   */
-  tariff: (standalone: boolean) => ReturnType<typeof tariffHandler>;
-  /** `quota.free` is the flag `currentQuotaStore.isFreeTariff` reads. */
-  quota: () => ReturnType<typeof quotaHandler>;
-};
-
-const BILLINGS: Billing[] = [
-  {
-    key: "paid",
-    title: "paid",
-    isPaid: true,
-    tariff: (standalone) => tariffHandler(TEST_PORT, false, false, standalone),
-    quota: () => quotaHandler(TEST_PORT),
-  },
-  {
-    key: "free",
-    title: "unpaid",
-    isPaid: false,
-    tariff: (standalone) => tariffHandler(TEST_PORT, standalone),
-    quota: () => freeQuotaHandler(TEST_PORT),
+    plans: STANDALONE_PLANS,
   },
 ];
 
@@ -417,7 +452,7 @@ const expectFilledRows = async (page: Page, columns: number) => {
 type DashboardCase = {
   role: Role;
   edition: Edition;
-  billing: Billing;
+  plan: Plan;
   ai: AiState;
   /**
    * Developer Tools limited to the owner and full admins (Settings -> Security
@@ -427,6 +462,14 @@ type DashboardCase = {
   devToolsLimited: boolean;
   /** The width the page is rendered at. */
   viewport: Viewport;
+  /**
+   * Whether this case pins a reference screenshot on top of its assertions.
+   *
+   * Off where the case is known to render exactly like one that is already
+   * pinned - a second baseline of the same frame costs a file and a
+   * regeneration on every unrelated change, and signals nothing.
+   */
+  withScreenshot: boolean;
   /**
    * File name of this case's reference screenshot. It is filed under the
    * viewport's own folder, so the same name at two widths does not collide.
@@ -439,8 +482,16 @@ type DashboardCase = {
  * pins both the elements that case is about and the whole page.
  */
 const dashboardCase = (name: string, testCase: DashboardCase) => {
-  const { role, edition, billing, ai, devToolsLimited, viewport, screenshot } =
-    testCase;
+  const {
+    role,
+    edition,
+    plan,
+    ai,
+    devToolsLimited,
+    viewport,
+    withScreenshot,
+    screenshot,
+  } = testCase;
 
   // Who may open Developer Tools, which is the rule the section's own card and
   // the integrations card that advertises Docs Connect both follow: guests
@@ -457,8 +508,8 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
       }),
       selfByTypeHandler(TEST_PORT, role.userType),
       selfActivationStatusHandler(TEST_PORT, null, false, true),
-      billing.tariff(edition.standalone),
-      billing.quota(),
+      plan.tariff(),
+      plan.quota(),
       aiConfigHandler(TEST_PORT, !ai.enabled),
     );
 
@@ -480,7 +531,7 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     if (role.isAdminOrOwner && !edition.standalone) {
       await expect(planLine(page)).toBeVisible();
       await expect(planLine(page)).toContainText(
-        billing.isPaid ? "Business" : "Startup",
+        plan.isPaid ? "Business" : "Startup",
       );
     } else {
       await expect(planLine(page)).toHaveCount(0);
@@ -526,6 +577,8 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     await expect(page.locator(APP_CARDS)).toHaveCount(ai.enabled ? 4 : 3);
     await expectFilledRows(page, viewport.columns);
 
+    if (!withScreenshot) return;
+
     const shotPath = ["desktop", "dashboard", viewport.key];
 
     await expectScreenshot(page, [...shotPath, screenshot]);
@@ -558,10 +611,11 @@ for (const viewport of NARROW_VIEWPORTS) {
         dashboardCase(`${role.key}, ${ai.title}`, {
           role,
           edition: EDITIONS[0],
-          billing: BILLINGS[0],
+          plan: SAAS_PLANS[0],
           ai,
           devToolsLimited: false,
           viewport,
+          withScreenshot: true,
           screenshot: `ai-${ai.key}-${role.key}.png`,
         });
       }
@@ -571,18 +625,26 @@ for (const viewport of NARROW_VIEWPORTS) {
 
 for (const edition of EDITIONS) {
   test.describe(`Dashboard on a ${edition.title} portal`, () => {
-    for (const billing of BILLINGS) {
-      test.describe(billing.title, () => {
+    for (const plan of edition.plans) {
+      test.describe(plan.title, () => {
         for (const ai of AI_STATES) {
           for (const role of ROLES) {
             dashboardCase(`${role.key}, ${ai.title}`, {
               role,
               edition,
-              billing,
+              plan,
               ai,
               devToolsLimited: false,
               viewport: DESKTOP,
-              screenshot: `${edition.key}-${billing.key}-ai-${ai.key}-${role.key}.png`,
+              // Developer is Enterprise plus a flag this page never reads, so
+              // its frames are the Enterprise ones pixel for pixel. One of them
+              // is kept as a canary - the day the page starts telling the two
+              // apart, it fails and the rest of the audience gets its own
+              // baselines then. The assertions above run for every case either
+              // way.
+              withScreenshot:
+                plan.key !== "developer" || (ai.enabled && role === ROLES[0]),
+              screenshot: `${edition.key}-${plan.key}-ai-${ai.key}-${role.key}.png`,
             });
           }
         }
@@ -606,10 +668,11 @@ for (const edition of EDITIONS) {
       dashboardCase(role.key, {
         role,
         edition,
-        billing: BILLINGS[0],
+        plan: edition.plans[0],
         ai: AI_STATES[0],
         devToolsLimited: true,
         viewport: DESKTOP,
+        withScreenshot: true,
         screenshot: `${edition.key}-devtools-limited-${role.key}.png`,
       });
     }

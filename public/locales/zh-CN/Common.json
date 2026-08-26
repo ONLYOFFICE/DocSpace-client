@@ -812,6 +812,7 @@
   "EnabledApps": "已启用的应用",
   "EnableNotifications": "启用消息通知",
   "EnableThirdPartyIntegration": "请联系所有者或超级管理员在 工作区 设置的“集成”部分中启用相应服务。",
+  "EnableWebSearchInBilling": "在账单部分中启用网络搜索",
   "EncryptedChangeOwnerKeyMismatch": "无法将所有权转让给 {{user}}：其加密密钥已更改且未被信任。请重新验证密钥后再试。",
   "EncryptedChangeOwnerNoKeys": "无法将所有权转让给 {{user}}：对方尚未设置加密密钥。请让其在个人资料中生成密钥后再试。",
   "EncryptedCopyFailed": "复制加密文件失败：{{names}}",

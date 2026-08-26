@@ -812,6 +812,7 @@
   "EnabledApps": "App abilitate",
   "EnableNotifications": "Abilita le notifiche",
   "EnableThirdPartyIntegration": "Chiedi al proprietario o al superamministratore di abilitare il servizio corrispondente nella sezione Integrazione delle impostazioni dello spazio di lavoro.",
+  "EnableWebSearchInBilling": "Attiva la ricerca web in Fatturazione",
   "EncryptedChangeOwnerKeyMismatch": "Impossibile trasferire la proprietà a {{user}}: la sua chiave di cifratura è cambiata e non è stata ritenuta affidabile. Verificare nuovamente la chiave e riprovare.",
   "EncryptedChangeOwnerNoKeys": "Impossibile trasferire la proprietà a {{user}}: non ha ancora configurato le chiavi di cifratura. Chiedere di generare le chiavi nel proprio profilo, quindi riprovare.",
   "EncryptedCopyFailed": "Impossibile copiare i file cifrati: {{names}}",

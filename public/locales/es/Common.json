@@ -812,6 +812,7 @@
   "EnabledApps": "Aplicaciones habilitadas",
   "EnableNotifications": "Habilitar notificaciones",
   "EnableThirdPartyIntegration": "Pida al propietario o al superadministrador que habilite el servicio correspondiente en la sección Integración de la configuración del espacio de trabajo.",
+  "EnableWebSearchInBilling": "Active la búsqueda web en Facturación",
   "EncryptedChangeOwnerKeyMismatch": "No se puede transferir la propiedad a {{user}}: su clave de cifrado ha cambiado y no ha sido verificada como confiable. Verifique la clave nuevamente e inténtelo de nuevo.",
   "EncryptedChangeOwnerNoKeys": "No se puede transferir la propiedad a {{user}}: aún no ha configurado claves de cifrado. Pídale que genere claves en su perfil e inténtelo de nuevo.",
   "EncryptedCopyFailed": "Error al copiar los archivos cifrados: {{names}}",

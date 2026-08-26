@@ -812,6 +812,7 @@
   "EnabledApps": "Käytössä olevat sovellukset",
   "EnableNotifications": "Salli ilmoitukset",
   "EnableThirdPartyIntegration": "Pyydä omistajaa tai pääjärjestelmänvalvojaa ottamaan vastaava palvelu käyttöön työtilan asetusten Integraatio-osiossa.",
+  "EnableWebSearchInBilling": "Ota hakukonehaku käyttöön Laskutus-osiossa",
   "EncryptedChangeOwnerKeyMismatch": "Omistajuutta ei voi siirtää käyttäjälle {{user}}: heidän salausavaimensa on muuttunut eikä sitä ole hyväksytty luotettavaksi. Vahvista avain uudelleen ja yritä uudelleen.",
   "EncryptedChangeOwnerNoKeys": "Omistajuutta ei voi siirtää käyttäjälle {{user}}: he eivät ole vielä ottaneet salausavaimia käyttöön. Pyydä heitä luomaan avaimet profiilissaan ja yritä sitten uudelleen.",
   "EncryptedCopyFailed": "Salattujen tiedostojen kopiointi epäonnistui: {{names}}",

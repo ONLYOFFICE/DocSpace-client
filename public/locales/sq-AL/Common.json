@@ -812,6 +812,7 @@
   "EnabledApps": "Aplikacionet e aktivizuara",
   "EnableNotifications": "Aktivizoni njoftimet",
   "EnableThirdPartyIntegration": "Ju lutemi kërkojini pronarit ose superadministratorit të aktivizojë shërbimin përkatës në seksionin Integrimi të cilësimeve të hapësirës së punës.",
+  "EnableWebSearchInBilling": "Aktivizoni kërkimin në internet te Faturimi",
   "EncryptedChangeOwnerKeyMismatch": "Nuk mund të transferohet pronësia te {{user}}: çelësi i tyre i enkriptimit ka ndryshuar dhe nuk u besua. Ri-verifikoni çelësin dhe provoni përsëri.",
   "EncryptedChangeOwnerNoKeys": "Nuk mund të transferohet pronësia te {{user}}: ata nuk kanë konfiguruar ende çelësa enkriptimi. Kërkojuni të gjenerojnë çelësa në profilin e tyre, pastaj provoni përsëri.",
   "EncryptedCopyFailed": "Dështoi kopjimi i skedarëve të enkriptuar: {{names}}",

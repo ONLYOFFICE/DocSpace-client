@@ -812,6 +812,7 @@
   "EnabledApps": "Aktivierte Apps",
   "EnableNotifications": "Benachrichtigungen einschalten",
   "EnableThirdPartyIntegration": "Bitten Sie den Besitzer oder Super-Administrator, den entsprechenden Dienst im Abschnitt Integration der Arbeitsbereichseinstellungen zu aktivieren.",
+  "EnableWebSearchInBilling": "Websuche in der Abrechnung aktivieren",
   "EncryptedChangeOwnerKeyMismatch": "Eigentumsübertragung an {{user}} nicht möglich: Ihr Verschlüsselungsschlüssel hat sich geändert und wurde nicht als vertrauenswürdig eingestuft. Überprüfen Sie den Schlüssel erneut und versuchen Sie es noch einmal.",
   "EncryptedChangeOwnerNoKeys": "Eigentumsübertragung an {{user}} nicht möglich: Der Benutzer hat noch keine Verschlüsselungsschlüssel eingerichtet. Bitten Sie ihn, Schlüssel in seinem Profil zu generieren, und versuchen Sie es dann erneut.",
   "EncryptedCopyFailed": "Fehler beim Kopieren verschlüsselter Dateien: {{names}}",

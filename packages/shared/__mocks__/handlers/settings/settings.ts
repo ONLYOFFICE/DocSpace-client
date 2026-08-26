@@ -90,6 +90,7 @@ export const settingsWizzard = {
     },
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
+    limitedAccessDevToolsForUsers: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
     isAmi: false,
@@ -246,6 +247,7 @@ export const settingsNoAuth = {
     },
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
+    limitedAccessDevToolsForUsers: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
     externalResources: {
@@ -537,6 +539,7 @@ export const settingsNoAuthNoStandalone = {
 
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
+    limitedAccessDevToolsForUsers: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
     externalResources: {
